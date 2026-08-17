@@ -26,7 +26,8 @@ and copy the contents from:
 FIRST SCAN
 ----------
 The commit to main triggers the first scan immediately.
-The workflow then runs again every 12 hours.
+Because radar.json is reset to pending in this package, that first scan backfills A/B from 2026-04-01 to the present and gives Strand C a 7-day first-run lookback.
+The workflow then runs again every 12 hours. Later C scans use a 48-hour overlap.
 It can also be run manually from Actions -> R&I Radar Scan -> Run workflow.
 
 NO API KEY

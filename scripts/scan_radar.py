@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-"""R&I × Geopolitics + Foresight Methodology radar scanner (EU-first).
+"""R&I × Geopolitics + Foresight Methodology radar scanner (EU-first, balanced).
 
 Key properties
 --------------
 * No API keys or paid services are required.
-* Discovery is broad; admission is narrow.
-* Strand A requires FOUR gates: substantive R&I policy, substantive geopolitics/
-  economic security, an explicit bridge between the two, and clear EU relevance.
-* Strand B requires foresight to be methodology-first, not merely a scenario/trend output.
+* Discovery is broad; admission is selective but not brittle.
+* Strand A requires substantive R&I policy + geopolitics/economic security + EU relevance.
+  A same-sentence bridge is strong evidence, but a document-level bridge can also qualify.
+* Strand B requires methodology to be substantive, while allowing high-quality transferable
+  public-sector R&I/S&T methods even when the case study is not explicitly EU-focused.
 * Strand C is not a general news feed: every item must be factual current-window
   reporting and must anchor to an accepted A/B publication or recurring A/B theme.
 * Calls, facility pages, project pages, press releases, news/blog pages, events,
   jobs and other non-analytical material are rejected for A/B.
 
-The scanner intentionally prefers false negatives to false positives. It does not pad.
+The scanner aims for a balanced precision/recall trade-off. It does not pad.
 """
 from __future__ import annotations
 
@@ -45,7 +46,9 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
 DATE_FLOOR = dt.date.fromisoformat(CONFIG["date_floor"])
-NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 13))
+NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 48))
+FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", 168))
+DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
 MAX_NEW_AB = int(CONFIG.get("max_new_ab_per_scan", 15))
 MAX_C = int(CONFIG.get("max_c_per_scan", 5))
 MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 60))
@@ -309,15 +312,27 @@ def china_geo_signal(text: str) -> bool:
 
 
 def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[str, Any]:
-    """Return strict strand evidence. This function is intentionally testable."""
+    """Return balanced strand evidence.
+
+    Discovery keywords never admit an item on their own.  Strand A still requires
+    substantive R&I-policy evidence, substantive geopolitical/economic-security
+    evidence and EU relevance.  Unlike the previous strict version, the R&I↔geo
+    bridge may be established at document level when the title/abstract and the
+    evidence families make the relationship clear.
+
+    Strand B remains methodology-first, but a high-quality non-EU method paper can
+    be classed as derived EU relevance when it is clearly transferable to public-
+    sector R&I / S&T / strategic-policy foresight.
+    """
     ta = clean_text(f"{title}. {abstract}")
     full = clean_text(f"{ta}. {body[:60000]}")
     sentences = split_sentences(full)
 
     ri_ta = distinct_matches(ta, RI_STRONG)
     ri_full = distinct_matches(full, RI_STRONG)
-    ri_generic = distinct_matches(ta, RI_GENERIC)
-    policy_ctx = distinct_matches(ta, POLICY_CONTEXT)
+    ri_generic_ta = distinct_matches(ta, RI_GENERIC)
+    policy_ta = distinct_matches(ta, POLICY_CONTEXT)
+    policy_full = distinct_matches(full, POLICY_CONTEXT)
 
     geo_ta = distinct_matches(ta, GEO_STRONG)
     geo_full = distinct_matches(full, GEO_STRONG)
@@ -326,72 +341,133 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
     if china_geo_signal(full) and "China + security/strategic context" not in geo_full:
         geo_full.append("China + security/strategic context")
 
-    ri_substantive = bool(ri_ta) or len(set(ri_full)) >= 2 or (len(set(ri_generic)) >= 2 and len(set(policy_ctx)) >= 2)
+    # One strong R&I-policy phrase in title/abstract is enough.  In body-only cases,
+    # require either two strong phrases or a strong phrase plus broader policy context.
+    ri_substantive = bool(ri_ta) or len(set(ri_full)) >= 2 or (
+        bool(ri_full) and len(set(policy_full)) >= 2
+    ) or (len(set(ri_generic_ta)) >= 2 and len(set(policy_ta)) >= 2)
     geo_substantive = bool(geo_ta) or len(set(geo_full)) >= 2
 
+    # Strongest bridge: R&I and geopolitical evidence in the same sentence.
     bridge_sentence = ""
-    for s in sentences:
-        ri_here = distinct_matches(s, RI_STRONG)
+    for snt in sentences:
+        ri_here = distinct_matches(snt, RI_STRONG)
         if not ri_here:
-            generic_here = distinct_matches(s, RI_GENERIC)
-            policy_here = distinct_matches(s, POLICY_CONTEXT)
+            generic_here = distinct_matches(snt, RI_GENERIC)
+            policy_here = distinct_matches(snt, POLICY_CONTEXT)
             ri_here = ["generic R&I + policy context"] if generic_here and policy_here else []
-        geo_here = distinct_matches(s, GEO_STRONG)
-        if not geo_here and china_geo_signal(s):
+        geo_here = distinct_matches(snt, GEO_STRONG)
+        if not geo_here and china_geo_signal(snt):
             geo_here = ["China + security/strategic context"]
         if ri_here and geo_here:
-            bridge_sentence = s[:420]
+            bridge_sentence = snt[:420]
             break
-    # Title + abstract may be compact enough that separate sentences still form the explicit bridge.
-    if not bridge_sentence and ri_ta and geo_ta:
-        bridge_sentence = ta[:420]
 
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
 
+    # Balanced document-level bridge.  This is deliberately unavailable to weak
+    # Tier-3 material unless the title/abstract itself establishes both sides.
+    evidence_total = len(set(ri_ta or ri_full)) + len(set(geo_ta or geo_full))
+    ta_bridge = bool(ri_ta and geo_ta)
+    mixed_bridge = bool(
+        source_tier <= 2
+        and eu_rel
+        and evidence_total >= 3
+        and (ri_ta or geo_ta)
+        and ri_substantive
+        and geo_substantive
+    )
+    inherent_bridge = contains_any(full, [
+        "research security", "knowledge security", "science diplomacy",
+        "technology sovereignty", "technological sovereignty",
+        "economic security", "strategic autonomy", "open strategic autonomy",
+        "export control", "dual-use", "dual use", "de-risk", "derisk",
+    ]) and ri_substantive and geo_substantive
+    bridge_supported = bool(bridge_sentence or ta_bridge or mixed_bridge or inherent_bridge)
+    bridge_mode = "sentence" if bridge_sentence else "title/abstract" if ta_bridge else "document-level" if (mixed_bridge or inherent_bridge) else ""
+
+    # Foresight methodology evidence.
     foresight_ta = distinct_matches(ta, FORESIGHT_CORE)
     foresight_full = distinct_matches(full, FORESIGHT_CORE)
     method_ta = distinct_matches(ta, METHOD_CORE)
     method_full = distinct_matches(full, METHOD_CORE)
     method_bridge = ""
     method_bridge_index = 999
-    for idx, s in enumerate(sentences):
-        low_s = normalized(s)
+    for idx, snt in enumerate(sentences):
+        low_s = normalized(snt)
         negated = any(x in low_s for x in [
             "does not discuss", "does not address", "does not evaluate", "does not explain",
             "not discuss", "not address", "without discussing", "without methodological",
             "no methodological", "lacks methodological", "lack methodological",
         ])
-        if not negated and distinct_matches(s, FORESIGHT_CORE) and distinct_matches(s, METHOD_CORE):
-            method_bridge = s[:420]
+        if not negated and distinct_matches(snt, FORESIGHT_CORE) and distinct_matches(snt, METHOD_CORE):
+            method_bridge = snt[:420]
             method_bridge_index = idx
             break
-    explicit_method_title = contains_any(title, ["methodology", "methods", "method", "evaluation", "design", "framework"]) and contains_any(title, FORESIGHT_CORE)
-    foresight_substantive = bool(foresight_ta) or len(set(foresight_full)) >= 2
-    # Methodology must be central: visible in title/abstract, or appear very early in an institutional text.
-    method_in_ta = bool(method_ta) and bool(foresight_ta) and bool(method_bridge)
-    early_method_body = method_bridge_index < 12 and len(set(method_full)) >= 3
-    method_substantive = explicit_method_title or method_in_ta or early_method_body
-    b_context = ri_substantive or geo_substantive or contains_any(ta, ["science", "technology", "innovation", "research", "s&t", "r&i"])
-    trend_only = contains_any(title, TREND_ONLY_HINTS) and not (explicit_method_title or method_bridge)
 
-    a_pass = bool(ri_substantive and geo_substantive and bridge_sentence and eu_rel)
-    b_pass = bool(foresight_substantive and method_substantive and b_context and eu_rel and not trend_only)
+    explicit_method_title = (
+        contains_any(title, ["methodology", "methods", "method", "evaluation", "design", "framework", "approach"])
+        and contains_any(title, FORESIGHT_CORE)
+    )
+    foresight_substantive = bool(foresight_ta) or len(set(foresight_full)) >= 2
+
+    # The strict version required foresight+method evidence in one sentence.  Here
+    # substantial title/abstract coverage across adjacent sentences is sufficient.
+    ta_method_negated = any(x in normalized(ta) for x in [
+        "does not discuss", "does not address", "does not evaluate", "does not explain",
+        "without methodological", "no methodological", "lacks methodological", "lack methodological",
+    ])
+    method_in_ta = bool(foresight_ta and method_ta and not ta_method_negated)
+    early_method_body = method_bridge_index < 18 and len(set(method_full)) >= 2
+    method_substantive = bool(explicit_method_title or method_in_ta or early_method_body)
+
+    # B must still be useful to R&I/S&T/strategic-policy practice.  Generic academic
+    # "research" is not enough, which keeps unrelated futures papers out.
+    b_context_terms = [
+        "research and innovation", "research policy", "innovation policy", "science policy",
+        "technology policy", "science and technology", "research security",
+        "technology governance", "innovation governance", "public policy", "public sector",
+        "government", "regulation", "strategic policy", "economic security",
+        "critical technology", "critical technologies", "emerging technology",
+        "artificial intelligence", "semiconductor", "quantum", "biotechnology",
+    ]
+    b_context = bool(ri_substantive or geo_substantive or contains_any(ta, b_context_terms) or contains_any(full[:12000], b_context_terms))
+
+    trend_only = contains_any(title, TREND_ONLY_HINTS) and not (explicit_method_title or method_in_ta or method_bridge)
+
+    # Direct/explicit EU relevance remains the normal B path.  For genuinely
+    # methodology-first high-quality work, derived relevance may be assigned on
+    # transferability grounds when the context is public-sector R&I/S&T policy.
+    b_eu_rel = eu_rel
+    b_transferable = False
+    if not b_eu_rel and source_tier <= 2 and foresight_substantive and method_substantive and b_context:
+        if explicit_method_title or (len(set(method_ta)) >= 2 and bool(foresight_ta)):
+            b_eu_rel = "derived"
+            b_transferable = True
+
+    a_pass = bool(ri_substantive and geo_substantive and eu_rel and bridge_supported)
+    b_pass = bool(foresight_substantive and method_substantive and b_context and b_eu_rel and not trend_only)
+
+    # A must never borrow B's transferability-only EU label.
+    overall_eu = eu_rel or (b_eu_rel if b_pass else None)
 
     return {
         "a_pass": a_pass,
         "b_pass": b_pass,
-        "eu_relevance": eu_rel,
-        "eu_evidence": eu_hits,
+        "eu_relevance": overall_eu,
+        "eu_evidence": eu_hits or (["transferable to EU public-sector R&I/S&T foresight"] if b_transferable else []),
         "ri_evidence": (ri_ta or ri_full)[:5],
         "geo_evidence": (geo_ta or geo_full)[:5],
         "bridge_sentence": bridge_sentence,
+        "bridge_supported": bridge_supported,
+        "bridge_mode": bridge_mode,
         "foresight_evidence": (foresight_ta or foresight_full)[:5],
         "method_evidence": (method_ta or method_full)[:6],
         "method_bridge": method_bridge,
+        "b_transferable": b_transferable,
         "trend_only": trend_only,
         "source_tier": source_tier,
     }
-
 
 def themes_for(text: str) -> list[str]:
     low = f" {normalized(text)} "
@@ -830,10 +906,14 @@ def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] |
         if pwords > word_count:
             body, word_count = ptxt, pwords
 
-    # ~2,000-word rule, with a narrow exception for substantive Tier-1 policy briefs.
+    # Substantive-length rule.  Long analytical work is preferred, but concise
+    # Tier-1 policy papers can qualify when the topic gates themselves are strong.
     low_title = normalized(title)
-    if word_count < 1800:
-        brief_exception = tier == 1 and word_count >= 1200 and any(x in low_title for x in ["policy brief", "briefing", "working paper", "discussion paper"])
+    if word_count < 1500:
+        brief_exception = tier == 1 and word_count >= 900 and any(x in low_title for x in [
+            "policy brief", "briefing", "working paper", "discussion paper", "policy paper",
+            "report", "study", "analysis", "strategic", "security", "foresight"
+        ])
         if not brief_exception:
             return None
 
@@ -963,9 +1043,9 @@ def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str) -
 def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     eu = (evidence.get("eu_relevance") or "unknown").capitalize()
     if strand == "A":
-        return f"{eu} EU relevance; admitted only after R&I-policy, geopolitics/economic-security and explicit bridge gates all passed."
+        return f"{eu} EU relevance; admitted after substantive R&I-policy and geopolitics/economic-security gates passed with a supported document-level connection."
     if strand == "B":
-        return f"{eu} EU relevance; admitted because foresight methodology itself is substantive, not merely a trend/scenario output."
+        return f"{eu} EU relevance; admitted because foresight methodology is substantive and relevant to R&I/S&T or strategic-policy practice, not merely a trend/scenario output."
     return f"{eu} EU relevance; independently passes both Strand A and Strand B admission gates."
 
 
@@ -1115,19 +1195,25 @@ def factual_news(title: str, desc: str) -> bool:
     return any(x in full for x in NEWS_EVENT_TERMS)
 
 
-def news_queries(domain: str) -> list[str]:
+def news_queries(domain: str, lookback_hours: int) -> list[str]:
+    days = 7 if lookback_hours > 72 else 2
+    when = f"when:{days}d"
     return [
-        f'site:{domain} ("research security" OR "science policy" OR "research cooperation" OR "Horizon Europe" OR "science diplomacy" OR "economic security") when:1d',
-        f'site:{domain} ("export controls" OR "dual use" OR "technology sovereignty" OR "critical technology" OR semiconductor OR quantum OR biotech OR "artificial intelligence") Europe when:1d',
+        f'site:{domain} ("research security" OR "foreign interference" OR "science policy" OR "research cooperation" OR "Horizon Europe" OR "science diplomacy") Europe {when}',
+        f'site:{domain} ("economic security" OR "technology sovereignty" OR "strategic autonomy" OR "de-risking" OR "de-risk") (research OR innovation OR technology) Europe {when}',
+        f'site:{domain} ("export controls" OR "dual use" OR "technology transfer" OR semiconductor OR quantum OR biotech OR "artificial intelligence") (EU OR Europe) {when}',
+        f'site:{domain} (China OR US-China OR transatlantic) (research OR science OR technology OR innovation) (EU OR Europe) {when}',
+        f'site:{domain} ("third country" OR association OR talent OR researchers OR universities) ("Horizon Europe" OR EU OR European) {when}',
     ]
 
 
-def collect_news(now: dt.datetime, warnings: list[str]) -> list[dict[str, Any]]:
-    start = now - dt.timedelta(hours=NEWS_LOOKBACK_HOURS)
+def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None) -> list[dict[str, Any]]:
+    lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
+    start = now - dt.timedelta(hours=lookback_hours)
     out = []
     for src in CONFIG["news_sources"]:
         name, domain = src["name"], src["domain"]
-        for q in news_queries(domain):
+        for q in news_queries(domain, lookback_hours):
             url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
             try:
                 r = SESSION.get(url, timeout=16)
@@ -1138,7 +1224,7 @@ def collect_news(now: dt.datetime, warnings: list[str]) -> list[dict[str, Any]]:
             except Exception as e:
                 warnings.append(f"Google News {domain}: {type(e).__name__}")
                 continue
-            for e in feed.entries[:30]:
+            for e in feed.entries[:45]:
                 when = parse_feed_time(e)
                 if not when or when < start or when > now + dt.timedelta(minutes=30):
                     continue
@@ -1166,13 +1252,13 @@ def collect_news(now: dt.datetime, warnings: list[str]) -> list[dict[str, Any]]:
             seen.add(key); unique.append(x)
     return unique
 
-
 def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if not ab_corpus:
         return []
     internals = [internalize_previous(x) for x in ab_corpus]
     theme_counts = Counter(t for x in internals for t in x.get("_themes", []))
     recurring = {t for t, c in theme_counts.items() if c >= 2}
+    supported_specific = {t for t, c in theme_counts.items() if c >= 1 and t in SPECIFIC_ANCHOR_THEMES}
     anchored = []
     for n in news:
         nthemes = set(n.get("_themes", []))
@@ -1200,16 +1286,19 @@ def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> 
             if best is None or score > best[0]:
                 best = (score, a, sorted(shared))
         anchor = ""; score = 0.0; shared_themes = []
-        if best and best[0] >= 3.1:
+        if best and best[0] >= 2.45:
             score, a, shared_themes = best
             anchor = f"{a['title']} (Strand {a['strand']})"
         else:
             common = sorted(nthemes & recurring)
-            if common and (common[0] in SPECIFIC_ANCHOR_THEMES or len(common) >= 2):
-                shared_themes = common
-                score = 2.6 + 0.6 * len(common)
-                supporting = [x["title"] for x in internals if common[0] in x.get("_themes", [])][:2]
-                anchor = f"Recurring A/B theme: {common[0]}" + (f" — supported by {'; '.join(supporting)}" if supporting else "")
+            specific = sorted(nthemes & supported_specific)
+            chosen = common or specific
+            if chosen and (chosen[0] in SPECIFIC_ANCHOR_THEMES or len(chosen) >= 2):
+                shared_themes = chosen
+                score = 2.35 + 0.55 * len(chosen)
+                supporting = [x["title"] for x in internals if chosen[0] in x.get("_themes", [])][:2]
+                label = "Recurring A/B theme" if chosen[0] in recurring else "A/B theme"
+                anchor = f"{label}: {chosen[0]}" + (f" — supported by {'; '.join(supporting)}" if supporting else "")
         if not anchor:
             continue
         low = normalized(n["headline"] + " " + n.get("_desc", ""))
@@ -1240,7 +1329,7 @@ def scan_from_date(previous: dict[str, Any]) -> dt.date:
     try:
         last = dateparser.parse(previous["last_updated"]).date()
         # Seven-day overlap catches late indexing and corrected metadata.
-        return max(DATE_FLOOR, last - dt.timedelta(days=7))
+        return max(DATE_FLOOR, last - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS))
     except Exception:
         return DATE_FLOOR
 
@@ -1270,7 +1359,12 @@ def main() -> int:
     for x in strand_a + strand_b:
         all_ab_map[identity(internalize_previous(x))] = x
     ab_corpus = list(all_ab_map.values())
-    news = collect_news(now, warnings)
+    # First run gets a seven-day weak-signal backfill so C is not structurally empty
+    # before the A/B anchor corpus has had time to accumulate.  Later scans use a
+    # 48-hour overlap and dedupe by headline/source.
+    first_run = not bool(previous.get("first_scan_complete"))
+    news_lookback = FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS
+    news = collect_news(now, warnings, news_lookback)
     strand_c = anchor_news(news, ab_corpus)
 
     new_a_count = sum(1 for x in new_selected if x.get("strand") in {"A", "both"})
@@ -1288,7 +1382,7 @@ def main() -> int:
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
             "ab_discovery_from_this_run": from_date.isoformat(),
-            "c_window_start": (now - dt.timedelta(hours=NEWS_LOOKBACK_HOURS)).isoformat(timespec="minutes").replace("+00:00", "Z"),
+            "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
             "c_window_end": now_iso,
         },
         "scan_results": {
@@ -1309,6 +1403,7 @@ def main() -> int:
             "institutional_admitted_before_dedupe": len(inst),
             "unique_ab_candidates_before_scan_limit": len(deduped),
             "news_candidates_current_window": len(news),
+            "news_lookback_hours": news_lookback,
             "source_warnings": len(warnings),
             "runtime_seconds": round(time.time() - started, 1),
         },

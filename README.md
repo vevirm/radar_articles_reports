@@ -65,3 +65,12 @@ A visible backup copy is also included at:
 `WORKFLOW_BACKUP/radar-scan.yml`
 
 This backup is included because some Windows upload workflows can make the dot-prefixed `.github` directory easy to miss.
+
+
+## Balanced v3 changes
+- Broader A/B discovery queries and larger candidate pools.
+- Strand A accepts a supported document-level R&I/geopolitics bridge; same-sentence wording is no longer mandatory.
+- Strand B admits strong transferable public-sector R&I/S&T foresight methodology as derived EU relevance.
+- First C scan looks back 7 days; later scans use a 48-hour overlap.
+- C anchor threshold is moderately relaxed but an explicit A/B anchor remains mandatory.
+- Hard exclusions for calls, facilities, project pages, ordinary news and marketing remain.

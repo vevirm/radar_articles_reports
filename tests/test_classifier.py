@@ -54,6 +54,35 @@ class ClassifierTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 1)
         self.assertFalse(ev["b_pass"])
 
+    def test_accepts_document_level_a_bridge(self):
+        title = "European innovation policy in an age of economic security"
+        abstract = (
+            "The report analyses European Union research and innovation policy for critical technologies. "
+            "A separate section examines strategic dependencies, de-risking and export controls in the US-China technology rivalry. "
+            "It assesses consequences for EU funding and international research cooperation."
+        )
+        ev = gate_scope(title, abstract, "", 1)
+        self.assertTrue(ev["a_pass"])
+
+    def test_accepts_transferable_methodology_b(self):
+        title = "Evaluating horizon-scanning methods for public technology policy"
+        abstract = (
+            "This peer-reviewed study compares horizon scanning methods, evaluation criteria and bias controls for government technology policy. "
+            "It proposes a framework for integrating weak signals with strategic intelligence and risk assessment."
+        )
+        ev = gate_scope(title, abstract, "", 2)
+        self.assertTrue(ev["b_pass"])
+        self.assertEqual(ev["eu_relevance"], "derived")
+
+    def test_rejects_unrelated_futures_methodology(self):
+        title = "Integral foresight methodology for post-growth lifestyles"
+        abstract = (
+            "The article develops an integral foresight method combining literature review, scenarios and participatory workshops. "
+            "It explores household lifestyles and personal wellbeing under post-growth futures."
+        )
+        ev = gate_scope(title, abstract, "", 2)
+        self.assertFalse(ev["b_pass"])
+
 
 if __name__ == "__main__":
     unittest.main()
