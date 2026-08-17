@@ -1,41 +1,34 @@
 # R&I × Geopolitics Radar
 
-This repository is a public GitHub Pages radar that scans automatically and writes its results directly to `radar.json`, which the page displays.
+EU-first radar for **R&I under geopolitical change**, **foresight methodology**, and an **anchored weak-signal news layer**.
 
-## What happens after upload
+## Automatic operation
 
-1. Upload **all files and folders in this package** to the root of `vevirm/radar_articles_reports` and commit them to `main`.
-2. The new `R&I Radar Scan` GitHub Action is triggered by that upload. Normally the first scan starts immediately and the public page is populated after the scan and Pages rebuild finish (often within several minutes; source response times can make it longer).
-3. After that, the workflow runs every 12 hours at minute 17 UTC.
-4. Every scan rewrites `radar.json`, commits it, and explicitly requests a GitHub Pages rebuild, so the newest results become visible on the public site.
+The workflow at `.github/workflows/radar-scan.yml` runs:
 
-The public URL is expected to be:
+- immediately when this package is committed to `main`;
+- every 12 hours thereafter;
+- manually whenever **Actions → R&I Radar Scan → Run workflow** is pressed.
 
-`https://vevirm.github.io/radar_articles_reports/`
+The scanner rewrites `radar.json`, commits the fresh results, and explicitly requests a GitHub Pages rebuild so the updated radar becomes visible on the site.
 
-GitHub Pages should remain configured as **Deploy from a branch → main → /(root)**, which is how this repository was already configured.
+Public URL: `https://vevirm.github.io/radar_articles_reports/`
 
-## If the first scan does not start
+Keep Pages configured as **Deploy from a branch → main → /(root)**.
 
-Open **Actions → R&I Radar Scan → Run workflow**. This manual button is also useful whenever you want an extra scan between the 12-hour scheduled runs.
+## Password gate
 
-## Scanner design
+The landing page is protected by a lightweight client-side password gate. The clear-text password is not written into `index.html`; the browser checks its SHA-256 digest. This is intended only to deter casual visitors, not to make a public GitHub Pages repository cryptographically private.
 
-The scanner is intentionally conservative and does not pad results.
+## Scanner
 
-- **Strand A/B scholarly discovery:** Crossref plus a small optional OpenAlex layer.
-- **Strand A/B institutional discovery:** whitelisted institutional sitemaps, verified publication metadata, and PDF/page text where accessible.
-- **Strand C discovery:** current-window Google News RSS searches restricted to the specified trusted media domains.
-- **Strand C anchoring:** an item is discarded unless it shares a substantive theme with a caught A/B publication or a recurring A/B theme.
-- **Date rule:** institutional items require a publication date found in page metadata; sitemap modification dates are used only for discovery, not as publication dates.
-- **Shortfall rule:** fewer than 3 A or B items, or 0 C items, is shown explicitly rather than padded.
+The scanner uses no mandatory API key. It combines:
 
-The exact editorial criteria are in `radar_criteria.md`.
+- Crossref for whitelisted journals;
+- optional OpenAlex discovery (works without a key at reduced volume; `OPENALEX_API_KEY` can be added later);
+- institutional sitemaps and page/PDF metadata for whitelisted policy/research institutions;
+- current-window Google News RSS queries restricted to the Strand C media whitelist.
 
-## No API key is required
+The selection code is conservative, applies the April 1, 2026 publication-date floor to A/B, enforces the EU angle, does not pad shortfalls, and requires Strand C items to anchor to caught A/B publications or recurring A/B themes.
 
-The package works without secrets. Crossref, institutional websites, and the news feed layer are enough to run the scanner. The script also supports an optional `OPENALEX_API_KEY` environment variable for additional scholarly discovery, but it is not required.
-
-## Important limitation
-
-A fully automated open-web scanner cannot guarantee human-level interpretation of every borderline article. The code uses strict whitelists, verified dates, topic co-occurrence, EU relevance checks, methodology checks, hard exclusions, word-count checks where full text is accessible, and explicit A/B anchoring for news. It is tuned to prefer missing a borderline item over admitting a clearly irrelevant one.
+Editorial criteria are preserved in `radar_criteria.md`.

@@ -1,16 +1,41 @@
-UPLOAD THIS PACKAGE
+UPLOAD THE ENTIRE PACKAGE
 
 1. Extract the ZIP on your computer.
 2. Open the extracted folder.
-3. In GitHub, open vevirm/radar_articles_reports.
-4. Click Add file -> Upload files.
-5. Drag EVERYTHING INSIDE the extracted folder into the GitHub upload area, including the .github folder.
-6. Commit directly to main.
-7. Wait a few minutes.
-8. Open: https://vevirm.github.io/radar_articles_reports/
+3. In GitHub, open: vevirm/radar_articles_reports
+4. Click: Add file -> Upload files.
+5. Drag EVERYTHING INSIDE the extracted folder into GitHub.
 
-The upload itself should trigger the first scan. If it does not, go to:
-Actions -> R&I Radar Scan -> Run workflow.
+VERY IMPORTANT:
+The upload MUST include this folder:
+  .github/workflows/
+and inside it:
+  radar-scan.yml
 
-Do not change GitHub Pages away from:
+If .github is missing after upload, the scanner cannot run.
+
+6. Replace existing files when needed.
+7. Commit directly to main.
+
+WHAT HAPPENS NEXT
+- That commit immediately triggers the first workflow run: "R&I Radar Scan".
+- The scanner collects and filters the radar candidates and writes the results to radar.json.
+- The same workflow then requests a GitHub Pages rebuild, so the fresh results appear on the site.
+- After that, GitHub runs the scan automatically every 12 hours.
+- You can also run a scan at any time from Actions -> R&I Radar Scan -> Run workflow.
+
+PUBLIC SITE
+https://vevirm.github.io/radar_articles_reports/
+
+PASSWORD
+TutuRadar2026?
+(the final question mark is part of the password)
+
+KEEP GITHUB PAGES SET TO
 Deploy from a branch -> main -> /(root)
+
+NOTE ON TIMING
+"Immediate" means the workflow is triggered by the upload commit rather than waiting for the 12-hour schedule. GitHub may queue a workflow briefly, and the open-web scan plus Pages rebuild can take several minutes.
+
+PRIVACY NOTE
+The password is a lightweight client-side gate for discouraging casual visitors. It is not server-side authentication. The repository and static files remain public.
