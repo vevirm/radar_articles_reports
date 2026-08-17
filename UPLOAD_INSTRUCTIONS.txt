@@ -1,50 +1,48 @@
-R&I RADAR — UPLOAD INSTRUCTIONS
-===============================
+UPLOAD / REPLACE THE REPOSITORY
+================================
 
-BEFORE YOU UPLOAD
------------------
-Add one GitHub Actions repository secret:
-
-Name: OPENAI_API_KEY
-Value: your OpenAI API key
-
-GitHub path:
-Settings -> Secrets and variables -> Actions -> New repository secret
-
-Do NOT put the API key into any repository file.
-
-UPLOAD
-------
 1. Extract this ZIP.
-2. Open GitHub repository: vevirm/radar_articles_reports
+2. Open your GitHub repository: vevirm/radar_articles_reports
 3. Add file -> Upload files.
-4. Upload EVERYTHING inside the extracted folder, preserving folders, and replace existing files.
+4. Upload EVERYTHING inside the extracted folder to the repository root, replacing existing files.
 5. Commit directly to main.
+
+CRITICAL CHECK
+--------------
+After the commit, open the Actions tab.
+You must see a workflow named:
+
+    R&I Radar Scan
+
+If you do NOT see it, the hidden .github folder did not upload.
+In that case create this file in GitHub:
+
+    .github/workflows/radar-scan.yml
+
+and copy the contents from:
+
+    WORKFLOW_BACKUP/radar-scan.yml
 
 FIRST SCAN
 ----------
-That commit triggers "R&I Radar Scan" immediately.
-Go to Actions and you should see it start.
-The scanner performs separate web-research passes for A, B and C, writes radar.json,
-and then requests a fresh GitHub Pages build.
+The commit to main triggers the first scan immediately.
+The workflow then runs again every 12 hours.
+It can also be run manually from Actions -> R&I Radar Scan -> Run workflow.
 
-12-HOUR SCANS
--------------
-After the first run, the workflow runs at 00:17 and 12:17 UTC every day.
-You can also run it manually from Actions -> R&I Radar Scan -> Run workflow.
+NO API KEY
+----------
+This version does not use OpenAI and requires no OPENAI_API_KEY secret.
+If you previously created an OPENAI_API_KEY secret for this repository, it is not used by this version.
 
-IMPORTANT .github CHECK
------------------------
-Because the workflow lives in .github/workflows, verify after upload that Actions shows
-"R&I Radar Scan" and that .github/workflows/radar-scan.yml was updated.
-If a file uploader omits the .github folder, use the visible backup file:
-WORKFLOW_BACKUP/radar-scan.yml
-and paste it into .github/workflows/radar-scan.yml with GitHub's workflow editor.
+PAGES
+-----
+Keep GitHub Pages set to:
+    Deploy from a branch -> main -> /(root)
 
-GITHUB PAGES
-------------
-Keep Pages set to:
-Deploy from a branch -> main -> /(root)
-
-Public URL:
+PUBLIC SITE
+-----------
 https://vevirm.github.io/radar_articles_reports/
+
+PASSWORD
+--------
+TutuRadar2026?

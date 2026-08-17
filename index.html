@@ -3,75 +3,107 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-  <title>Radar</title>
-  <meta name="description" content="Restricted R&I × Geopolitics research radar.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>R&I × Geopolitics Radar</title>
   <style>
-    :root{--bg:#f5f5f0;--paper:#fff;--text:#171717;--muted:#66665f;--line:#d9d9d2;--accent:#9f1d20;--soft:#ecece6;--good:#1f6f43;--warn:#8b5b00;--bad:#a12820;--max:1180px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
-    .wrap{width:min(calc(100% - 32px),var(--max));margin:auto}
-    #gate{min-height:100vh;display:grid;place-items:center;padding:24px}.gate-card{width:min(100%,390px);background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 8px 30px rgba(0,0,0,.04)}
-    .gate-kicker{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}.gate-card h1{font-size:32px;letter-spacing:-.035em;margin:0 0 7px}.gate-card p{font-size:14px;color:var(--muted);margin:0 0 20px}.gate-card label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.gate-row{display:flex;gap:8px}.gate-card input{min-width:0;flex:1;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--text);font:inherit;padding:11px 12px;outline:none}.gate-card input:focus{border-color:#99998f}.gate-card button,.logout{border:0;border-radius:9px;background:var(--text);color:#fff;font:inherit;font-weight:650;padding:11px 15px;cursor:pointer}.gate-error{height:20px;margin-top:9px;font-size:12px;color:var(--accent)}
-    #radar{display:none}header{padding:44px 0 26px;border-bottom:1px solid var(--line)}.topline{display:flex;justify-content:space-between;gap:18px;align-items:start}.logout{font-size:12px;padding:7px 10px;background:transparent;color:var(--muted);border:1px solid var(--line);white-space:nowrap}.logout:hover{color:var(--text)}
-    .kicker{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}.radar-title{margin:8px 0 10px;font-size:clamp(38px,6vw,70px);line-height:1;letter-spacing:-.045em}.intro{max-width:880px;color:var(--muted);font-size:17px;margin:0}
-    .status{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.pill{border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--paper);font-size:12px;color:var(--muted)}.pill.good{color:var(--good)}.pill.warn{color:var(--warn)}.pill.bad{color:var(--bad)}
-    .scan-detail{margin-top:10px;color:var(--muted);font-size:12px}.scan-detail strong{color:var(--text);font-weight:650}
-    nav{display:flex;gap:8px;flex-wrap:wrap;padding:20px 0 0}nav a{color:var(--text);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px;background:var(--paper)}
-    main{padding:4px 0 70px}section{margin-top:36px}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;padding-bottom:12px;border-bottom:2px solid var(--text)}h2{margin:0;font-size:23px;letter-spacing:-.025em}.strand-note{margin:5px 0 0;color:var(--muted);font-size:14px;max-width:820px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
-    .alert{margin-top:14px;padding:12px 14px;background:var(--soft);border-left:3px solid var(--accent);font-size:13px}.item{display:grid;grid-template-columns:165px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}.meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.item h3{font-size:21px;line-height:1.28;margin:0 0 6px;letter-spacing:-.02em}.item h3 a{color:inherit;text-decoration:none}.item h3 a:hover{text-decoration:underline;text-underline-offset:3px}.authors,.source{font-size:13px;color:var(--muted);margin-bottom:6px}.summary{margin:8px 0}.relevance{margin:10px 0 0;font-size:14px;font-weight:650}.anchor{margin:9px 0 0;font-size:13px;color:var(--muted)}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.tag{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;background:var(--paper)}.empty{padding:26px 0;color:var(--muted)}
-    .method{margin-top:34px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:13px}.method a{color:inherit}footer{border-top:1px solid var(--line);padding:22px 0 36px;color:var(--muted);font-size:12px}
-    @media(max-width:700px){.item{grid-template-columns:1fr;gap:8px}.section-head{align-items:start;flex-direction:column}.count{white-space:normal}header{padding-top:32px}.gate-row{flex-direction:column}.topline{align-items:center}}
+    :root{--bg:#f4f3ee;--panel:#fff;--text:#151515;--muted:#66645e;--line:#d9d7cf;--accent:#ae2027;--soft:#eceae3;--ok:#236b45;--warn:#9a6200;--max:1210px}
+    *{box-sizing:border-box}html{color-scheme:light}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    a{color:inherit}.wrap{width:min(calc(100% - 34px),var(--max));margin:auto}
+    #gate{min-height:100vh;display:grid;place-items:center;padding:28px}.gate-card{width:min(100%,410px);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 14px 50px rgba(0,0,0,.05)}
+    .gate-mark{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-bottom:28px}.gate-card h1{font-size:28px;margin:0 0 8px;letter-spacing:-.03em}.gate-card p{color:var(--muted);margin:0 0 20px}.gate-row{display:flex;gap:8px}.gate-row input{min-width:0;flex:1;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;background:#fff}.gate-row button,.lock{border:0;border-radius:10px;padding:11px 15px;background:var(--text);color:#fff;font:inherit;cursor:pointer}.gate-error{color:var(--accent);font-size:13px;min-height:20px;margin-top:10px}
+    #app{display:none}header{border-bottom:1px solid var(--line);padding:44px 0 26px}.topline{display:flex;justify-content:space-between;gap:18px;align-items:start}.kicker{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+    h1{font-size:clamp(39px,6vw,70px);line-height:1;margin:8px 0 12px;letter-spacing:-.05em}.intro{max-width:840px;font-size:17px;color:var(--muted);margin:0}.lock{background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px 10px;font-size:12px;white-space:nowrap}
+    .status{display:flex;gap:9px;flex-wrap:wrap;margin-top:21px}.pill,.tag{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:12px;color:var(--muted)}.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}
+    nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}nav a{text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px}
+    main{padding:18px 0 70px}.strand{margin-top:38px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;border-bottom:2px solid var(--text);padding-bottom:12px}.section-head h2{font-size:24px;letter-spacing:-.03em;margin:0}.section-head p{margin:6px 0 0;color:var(--muted);max-width:880px;font-size:14px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
+    .scan-note{display:none;margin-top:14px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--soft);font-size:13px}.item{display:grid;grid-template-columns:150px 1fr;gap:25px;padding:25px 0;border-bottom:1px solid var(--line)}.meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.item h3{font-size:21px;line-height:1.28;letter-spacing:-.02em;margin:0 0 7px}.item h3 a{text-decoration:none}.item h3 a:hover{text-decoration:underline;text-underline-offset:3px}.byline,.source{font-size:13px;color:var(--muted);margin:2px 0}.summary{margin:10px 0 0;max-width:950px}.relevance{font-weight:650;font-size:14px;margin-top:10px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}.tag{padding:3px 8px;font-size:11px}.tag.new{color:var(--accent);border-color:#d8a6a9}.empty{padding:26px 0;color:var(--muted)}.anchor{font-size:14px;margin-top:8px}.signal-note{margin-top:9px}.signal-type{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:var(--accent)}
+    .method{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:13px}.method strong{color:var(--text)}footer{border-top:1px solid var(--line);padding:22px 0 35px;color:var(--muted);font-size:12px}
+    @media(max-width:720px){.topline{flex-direction:column}.item{grid-template-columns:1fr;gap:7px}.section-head{align-items:start;flex-direction:column}.count{white-space:normal}.gate-row{flex-direction:column}}
   </style>
 </head>
 <body>
-<div id="gate" aria-live="polite">
-  <form class="gate-card" id="gate-form" autocomplete="off">
-    <div class="gate-kicker">Restricted view</div>
-    <h1>Radar</h1>
-    <p>Enter the password to open the radar.</p>
-    <label for="password">Password</label>
-    <div class="gate-row"><input id="password" type="password" autocomplete="current-password" autofocus><button type="submit">Enter</button></div>
-    <div class="gate-error" id="gate-error"></div>
-  </form>
-</div>
+  <section id="gate" aria-label="Password gate">
+    <div class="gate-card">
+      <div class="gate-mark"></div>
+      <h1>R&I × Geopolitics Radar</h1>
+      <p>Enter the password to view the radar.</p>
+      <form id="gateForm" class="gate-row">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
+        <button type="submit">Enter</button>
+      </form>
+      <div id="gateError" class="gate-error"></div>
+    </div>
+  </section>
 
-<div id="radar">
-<header><div class="wrap">
-  <div class="topline"><div><div class="kicker">EU-first research intelligence</div><h1 class="radar-title">R&I × Geopolitics Radar</h1></div><button class="logout" id="logout" type="button">Lock radar</button></div>
-  <p class="intro">Research and innovation under geopolitical change, foresight methodology for uncertain S&T environments, and a weak-signal news layer admitted only when it can be anchored to caught literature.</p>
-  <div class="status">
-    <span class="pill">Automatic scan: 12-hour cadence</span>
-    <span class="pill">A/B date floor: 1 Apr 2026</span>
-    <span class="pill" id="health">Scanner: waiting for first run</span>
-    <span class="pill" id="updated">Last scan: pending</span>
+  <div id="app">
+    <header>
+      <div class="wrap">
+        <div class="topline">
+          <div>
+            <div class="kicker">EU-first research intelligence</div>
+            <h1>R&I × Geopolitics Radar</h1>
+            <p class="intro">Research and innovation under geopolitical change; methodology-first foresight for uncertain S&T contexts; and a current weak-signal news layer that is admitted only when it can be anchored to the accepted literature.</p>
+          </div>
+          <button id="lock" class="lock">Lock radar</button>
+        </div>
+        <div class="status">
+          <span class="pill">Automatic scan: every 12 hours</span>
+          <span class="pill">A/B date floor: 1 Apr 2026</span>
+          <span id="scanState" class="pill warn">Scanner: first run pending</span>
+          <span id="lastScan" class="pill">Last scan: pending</span>
+        </div>
+        <nav><a href="#strand-a">Strand A</a><a href="#strand-b">Strand B</a><a href="#strand-c">Strand C</a></nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section id="strand-a" class="strand">
+        <div class="section-head"><div><h2>Strand A — R&I under geopolitical change</h2><p>Admission requires substantive R&I policy + substantive geopolitics/economic security + an explicit bridge between them + clear EU relevance. Calls, facility pages, project pages and ordinary news are rejected.</p></div><div id="countA" class="count">0 items</div></div>
+        <div id="noteA" class="scan-note"></div><div id="itemsA"></div>
+      </section>
+
+      <section id="strand-b" class="strand">
+        <div class="section-head"><div><h2>Strand B — Foresight methodology</h2><p>Methodology-first only: how foresight, horizon scanning, scenario work, anticipatory governance or strategic intelligence is designed, evaluated, institutionalised or integrated into R&I policy under uncertainty.</p></div><div id="countB" class="count">0 items</div></div>
+        <div id="noteB" class="scan-note"></div><div id="itemsB"></div>
+      </section>
+
+      <section id="strand-c" class="strand">
+        <div class="section-head"><div><h2>Strand C — Weak signals</h2><p>Current-window factual news only. Every signal must explicitly anchor to an accepted A/B publication or a recurring A/B theme. No anchor, no inclusion.</p></div><div id="countC" class="count">0 signals</div></div>
+        <div id="noteC" class="scan-note"></div><div id="itemsC"></div>
+      </section>
+
+      <div class="method"><strong>Selection rule:</strong> discovery is broad; admission is narrow. The scanner verifies publication date and source/type, applies hard exclusions, then applies the strand gates. It does not fill quotas with weaker material.</div>
+    </main>
+    <footer><div class="wrap">R&I × Geopolitics + Foresight Methodology Radar</div></footer>
   </div>
-  <div class="scan-detail" id="scan-detail"></div>
-  <nav><a href="#strand-a">Strand A</a><a href="#strand-b">Strand B</a><a href="#strand-c">Strand C</a></nav>
-</div></header>
-<main class="wrap">
-  <section id="strand-a"><div class="section-head"><div><h2>Strand A — R&I under geopolitical change</h2><p class="strand-note">A qualifying item must substantively contain both R&I policy and geopolitics, plus a clear EU/member-state angle or direct implications for EU strategy.</p></div><div class="count" id="count-a">—</div></div><div id="alert-a"></div><div id="items-a"><div class="empty">Waiting for the first scan.</div></div></section>
-  <section id="strand-b"><div class="section-head"><div><h2>Strand B — Foresight methodology</h2><p class="strand-note">Methodology-first work: how foresight, horizon scanning, scenario methods, anticipatory governance, evaluation or strategic intelligence should be designed or used in geopolitically uncertain R&I contexts.</p></div><div class="count" id="count-b">—</div></div><div id="alert-b"></div><div id="items-b"><div class="empty">Waiting for the first scan.</div></div></section>
-  <section id="strand-c"><div class="section-head"><div><h2>Strand C — Weak signals</h2><p class="strand-note">Current-window factual reporting only. Every signal must explicitly connect to a caught A/B publication or recurring theme; no anchor means no inclusion.</p></div><div class="count" id="count-c">—</div></div><div id="alert-c"></div><div id="items-c"><div class="empty">Waiting for the first scan.</div></div></section>
-  <div class="method">Selection follows the repository's <a href="radar_criteria.md" target="_blank" rel="noopener">full radar criteria</a>. Discovery is broad; acceptance is semantic and evidence-based. The scanner is instructed to prefer false negatives over false positives and never pad a strand.</div>
-</main>
-<footer><div class="wrap">R&I × Geopolitics + Foresight Methodology Radar</div></footer>
-</div>
 
 <script>
-const PASSWORD_SHA256="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
-let feedLoaded=false;
-async function sha256(text){const bytes=new TextEncoder().encode(text);const digest=await crypto.subtle.digest("SHA-256",bytes);return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("")}
-async function unlock(password){if(await sha256(password)!==PASSWORD_SHA256)return false;sessionStorage.setItem("radar-unlocked","1");document.getElementById("gate").style.display="none";document.getElementById("radar").style.display="block";document.title="R&I × Geopolitics Radar";if(!feedLoaded)loadFeed();return true}
-function lockRadar(){sessionStorage.removeItem("radar-unlocked");document.getElementById("radar").style.display="none";document.getElementById("gate").style.display="grid";document.getElementById("password").value="";document.getElementById("gate-error").textContent="";document.title="Radar";document.getElementById("password").focus()}
-document.getElementById("gate-form").addEventListener("submit",async e=>{e.preventDefault();const field=document.getElementById("password");if(!await unlock(field.value)){document.getElementById("gate-error").textContent="Incorrect password.";field.select()}});document.getElementById("logout").addEventListener("click",lockRadar);
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
-function abItem(x){const tags=[x.type,x.strand,x.eu_relevance,x.source_tier?`Tier ${x.source_tier}`:null,...(x.themes||[]).slice(0,3)].filter(Boolean).map(t=>`<span class="tag">${esc(t)}</span>`).join("");return `<article class="item"><div class="meta">${esc(x.date||"")}<br>${esc(x.eu_relevance||"")}</div><div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.title||"Untitled")}</a></h3><div class="authors">${esc(x.authors||"")}</div><div class="source">${esc(x.source||"")}</div><div class="summary">${esc(x.summary||"")}</div><div class="relevance">${esc(x.relevance_note||"")}</div><div class="tags">${tags}</div></div></article>`}
-function cItem(x){return `<article class="item"><div class="meta">${esc(x.date||"")}<br>${esc(x.signal_type||"")}</div><div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.headline||"Untitled")}</a></h3><div class="source">${esc(x.source||"")}</div><div class="anchor"><strong>Anchor:</strong> ${esc(x.anchor||"")}</div><div class="relevance">${esc(x.signal_note||"")}</div></div></article>`}
-function empty(id,text){document.getElementById(id).innerHTML=`<div class="empty">${esc(text)}</div>`}function alertBox(id,text){document.getElementById(id).innerHTML=text?`<div class="alert">${esc(text)}</div>`:""}
-function loadFeed(){feedLoaded=true;fetch(`radar.json?ts=${Date.now()}`,{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("feed unavailable");return r.json()}).then(data=>{const A=data.strand_a||[],B=data.strand_b||[],C=data.strand_c||[];const h=document.getElementById("health");const health=data.scan_health||"unknown";h.textContent=`Scanner: ${health}`;h.classList.remove("good","warn","bad");h.classList.add(health==="ok"?"good":health.startsWith("error")?"bad":"warn");document.getElementById("updated").textContent=`Last scan: ${data.last_updated||"pending"}`;
-const s=data.scan_stats||{};document.getElementById("scan-detail").innerHTML=data.last_updated?`Web-research validation: Strand A <strong>${esc(s.a_validated??0)}</strong>, Strand B <strong>${esc(s.b_validated??0)}</strong>, weak signals <strong>${esc(s.c_validated??0)}</strong>. Model: <strong>${esc(s.model||"OpenAI")}</strong>.`:"";
-document.getElementById("count-a").textContent=`${A.length} item${A.length===1?"":"s"}`;document.getElementById("count-b").textContent=`${B.length} item${B.length===1?"":"s"}`;document.getElementById("count-c").textContent=`${C.length} signal${C.length===1?"":"s"}`;document.getElementById("items-a").innerHTML=A.map(abItem).join("");document.getElementById("items-b").innerHTML=B.map(abItem).join("");document.getElementById("items-c").innerHTML=C.map(cItem).join("");if(!A.length)empty("items-a","No qualifying Strand A items in this scan.");if(!B.length)empty("items-b","No qualifying Strand B items in this scan.");if(!C.length)empty("items-c","No qualifying anchored weak signals in this scan.");alertBox("alert-a",A.length<3?`Only ${A.length} qualifying Strand A item(s) found. The radar does not pad results.`:"");alertBox("alert-b",B.length<3?`Only ${B.length} qualifying Strand B item(s) found. The radar does not pad results.`:"");alertBox("alert-c",C.length===0?"0 qualifying Strand C signals found. The radar does not pad results.":"");}).catch(()=>{document.getElementById("health").textContent="Scanner: first run pending"})}
-if(sessionStorage.getItem("radar-unlocked")==="1"){document.getElementById("gate").style.display="none";document.getElementById("radar").style.display="block";document.title="R&I × Geopolitics Radar";loadFeed()}
+const PASSWORD_HASH = "3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
+async function sha256(text){const data=new TextEncoder().encode(text);const hash=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("")}
+function unlock(){sessionStorage.setItem("radarUnlocked","1");document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";loadRadar()}
+if(sessionStorage.getItem("radarUnlocked")==="1") unlock();
+document.getElementById("gateForm").addEventListener("submit",async e=>{e.preventDefault();const input=document.getElementById("password");if(await sha256(input.value)===PASSWORD_HASH){unlock()}else{document.getElementById("gateError").textContent="Incorrect password.";input.select()}});
+document.getElementById("lock").addEventListener("click",()=>{sessionStorage.removeItem("radarUnlocked");location.reload()});
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c])}
+function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
+function abItem(x){const tags=[x.type,x.strand,x.eu_relevance,x.source_tier].filter(Boolean).map(t=>`<span class="tag">${esc(t)}</span>`).join("");const fresh=x.new_this_scan?'<span class="tag new">NEW THIS SCAN</span>':'';return `<article class="item"><div class="meta">${esc(x.date||"")}</div><div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.title||"Untitled")}</a></h3><div class="byline">${esc(x.authors||"")}</div><div class="source">${esc(x.source||"")}</div><div class="summary">${esc(x.summary||"")}</div><div class="relevance">${esc(x.relevance_note||"")}</div><div class="tags">${fresh}${tags}</div></div></article>`}
+function cItem(x){return `<article class="item"><div class="meta">${esc(x.date||"")}<br><span class="signal-type">${esc(x.signal_type||"")}</span></div><div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.headline||"Untitled")}</a></h3><div class="source">${esc(x.source||"")}</div><div class="anchor"><strong>Anchor:</strong> ${esc(x.anchor||"")}</div><div class="signal-note">${esc(x.signal_note||"")}</div></div></article>`}
+function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
+async function loadRadar(){
+  try{
+    const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();
+    if(d.first_scan_complete){document.getElementById("scanState").textContent="Scanner: active";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn")}else{document.getElementById("scanState").textContent="Scanner: first run pending"}
+    document.getElementById("lastScan").textContent="Last scan: "+(d.last_updated||"pending");
+    const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];
+    document.getElementById("countA").textContent=`${A.length} item${A.length===1?"":"s"} in corpus`;
+    document.getElementById("countB").textContent=`${B.length} item${B.length===1?"":"s"} in corpus`;
+    document.getElementById("countC").textContent=`${C.length} signal${C.length===1?"":"s"}`;
+    document.getElementById("itemsA").innerHTML=A.length?A.map(abItem).join(""):empty(d.first_scan_complete?"No accepted Strand A publications in the current corpus.":"First scan has not completed yet.");
+    document.getElementById("itemsB").innerHTML=B.length?B.map(abItem).join(""):empty(d.first_scan_complete?"No accepted Strand B publications in the current corpus.":"First scan has not completed yet.");
+    document.getElementById("itemsC").innerHTML=C.length?C.map(cItem).join(""):empty(d.first_scan_complete?"No qualifying anchored weak signals in this scan.":"First scan has not completed yet.");
+    const sr=d.scan_results||{};showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");
+  }catch(e){document.getElementById("scanState").textContent="Scanner data unavailable";document.getElementById("scanState").className="pill warn";document.getElementById("itemsA").innerHTML=empty("radar.json could not be loaded yet.");document.getElementById("itemsB").innerHTML=empty("radar.json could not be loaded yet.");document.getElementById("itemsC").innerHTML=empty("radar.json could not be loaded yet.")}
+}
 </script>
 </body>
 </html>

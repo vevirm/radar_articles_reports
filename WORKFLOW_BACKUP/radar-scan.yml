@@ -1,18 +1,18 @@
 name: R&I Radar Scan
 
 on:
-  # FIRST SCAN: uploading/committing the repository to main starts it immediately.
+  # FIRST SCAN: the upload/commit that adds this repository starts a scan immediately.
   push:
     branches:
       - main
     paths-ignore:
       - radar.json
 
-  # THEN: twice daily, exactly 12 hours apart.
+  # THEN: every 12 hours. :23 avoids the busiest top-of-hour scheduling period.
   schedule:
-    - cron: '17 0,12 * * *'
+    - cron: '23 */12 * * *'
 
-  # Also gives Actions -> Run workflow for an on-demand scan.
+  # Also allows Actions -> R&I Radar Scan -> Run workflow.
   workflow_dispatch:
 
 permissions:
@@ -20,13 +20,13 @@ permissions:
   pages: write
 
 concurrency:
-  group: ri-radar-scan
+  group: ri-geopolitics-radar-scan
   cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 35
 
     steps:
       - name: Check out repository
@@ -40,40 +40,33 @@ jobs:
           python-version: '3.12'
           cache: pip
 
-      - name: Install scanner dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run semantic web-search radar scan
-        id: scanner
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          RADAR_MODEL: gpt-5.6
-        shell: bash
-        run: |
-          set +e
-          python scripts/scan_radar.py
-          code=$?
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
+      - name: Run admission-gate tests
+        run: python -m unittest discover -s tests -v
 
-      # Commit even an error state so the site does not remain misleadingly "pending".
-      - name: Commit fresh radar.json
+      - name: Scan radar sources
+        run: python scripts/scan_radar.py
+
+      - name: Commit fresh radar data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add radar.json
+
           if git diff --cached --quiet; then
             echo "No radar data change to commit."
           else
-            git commit -m "Update semantic R&I radar"
+            git commit -m "Update R&I geopolitics radar"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
 
-      # A commit made by GITHUB_TOKEN does not trigger another workflow, so explicitly
-      # request a Pages build after radar.json is updated.
+      # Commits made with GITHUB_TOKEN do not themselves trigger a branch-source
+      # GitHub Pages build, so request a Pages build explicitly after the scan.
       - name: Publish fresh radar on GitHub Pages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -83,9 +76,3 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "X-GitHub-Api-Version: 2026-03-10" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds"
-
-      - name: Mark workflow failed if scanner reported an error
-        if: steps.scanner.outputs.exit_code != '0'
-        run: |
-          echo "The scanner wrote the error into radar.json; see the earlier scan log."
-          exit 1
