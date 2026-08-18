@@ -26,7 +26,10 @@ and copy the contents from:
 FIRST SCAN
 ----------
 The commit to main triggers the first scan immediately.
-Because radar.json is reset to pending in this package, that first scan backfills A/B from 2026-04-01 to the present and gives Strand C a 7-day first-run lookback.
+This recovery package already seeds the three accepted Strand B publications from the last healthy corpus (2026-08-18 01:52 UTC). The first scan backfills A/B from 2026-04-01, merges those restored B items, and gives Strand C a 7-day first-run lookback.
+
+The scanner also protects future upgrades: if radar.json is ever replaced by an empty/pending template, it searches recent Git history and recovers the strongest populated cumulative A/B corpus before scanning.
+
 The workflow then runs again every 12 hours. Later C scans use a 48-hour overlap.
 It can also be run manually from Actions -> R&I Radar Scan -> Run workflow.
 

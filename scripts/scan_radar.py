@@ -24,6 +24,7 @@ import gzip
 import io
 import json
 import re
+import subprocess
 import sys
 import time
 import xml.etree.ElementTree as ET
@@ -1129,11 +1130,74 @@ def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen
     return out
 
 
-def load_previous() -> dict[str, Any]:
+def _valid_saved_radar(data: Any) -> bool:
+    """True for a completed/populated radar worth preserving across package uploads."""
+    if not isinstance(data, dict):
+        return False
+    a = data.get("strand_a") if isinstance(data.get("strand_a"), list) else []
+    b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
+    return bool(data.get("first_scan_complete") or data.get("last_updated") or a or b)
+
+
+def _recover_radar_from_git(max_commits: int = 80) -> dict[str, Any]:
+    """Find the strongest recent saved radar in Git history.
+
+    This protects the cumulative A/B corpus when an upgrade ZIP contains a
+    reset/pending radar.json.  We inspect recent ancestors and prefer the
+    candidate with the largest saved A+B corpus, breaking ties by recency.
+    GitHub Actions checks out full history (fetch-depth: 0), so this works in
+    the normal scanner workflow and also tolerates several upload commits in a
+    row before a scan runs.
+    """
     try:
-        return json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        revs = subprocess.run(
+            ["git", "rev-list", f"--max-count={max_commits}", "HEAD"],
+            cwd=ROOT, capture_output=True, text=True, timeout=12, check=True,
+        ).stdout.splitlines()
     except Exception:
         return {}
+
+    best: tuple[int, int, dict[str, Any]] | None = None
+    for recency_index, rev in enumerate(revs):
+        try:
+            raw = subprocess.run(
+                ["git", "show", f"{rev}:radar.json"],
+                cwd=ROOT, capture_output=True, text=True, timeout=8, check=True,
+            ).stdout
+            data = json.loads(raw)
+        except Exception:
+            continue
+        if not _valid_saved_radar(data):
+            continue
+        a = data.get("strand_a") if isinstance(data.get("strand_a"), list) else []
+        b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
+        score = len(a) + len(b)
+        candidate = (score, -recency_index, data)
+        if best is None or candidate[:2] > best[:2]:
+            best = candidate
+    return best[2] if best else {}
+
+
+def load_previous() -> dict[str, Any]:
+    try:
+        current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        current = {}
+
+    # Normal scans use the current radar exactly as written.  Recovery is only
+    # invoked for a reset/pending template (or a missing/corrupt file).
+    if _valid_saved_radar(current):
+        return current
+
+    recovered = _recover_radar_from_git()
+    if recovered:
+        print(
+            "Recovered prior cumulative radar corpus from Git history "
+            f"(A={len(recovered.get('strand_a', []))}, "
+            f"B={len(recovered.get('strand_b', []))})."
+        )
+        return recovered
+    return current if isinstance(current, dict) else {}
 
 
 def internalize_previous(item: dict[str, Any]) -> dict[str, Any]:

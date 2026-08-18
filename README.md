@@ -74,3 +74,6 @@ This backup is included because some Windows upload workflows can make the dot-p
 - First C scan looks back 7 days; later scans use a 48-hour overlap.
 - C anchor threshold is moderately relaxed but an explicit A/B anchor remains mandatory.
 - Hard exclusions for calls, facilities, project pages, ordinary news and marketing remain.
+
+## Recovery safeguard
+This recovery build seeds the three accepted Strand B publications that were present in the last healthy corpus on 2026-08-18 at 01:52 UTC. It also detects an empty/pending `radar.json` during future package upgrades and searches recent Git history for the strongest populated cumulative A/B corpus before scanning, preventing an upgrade template from silently wiping accepted literature.
