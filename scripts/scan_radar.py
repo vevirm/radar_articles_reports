@@ -24,6 +24,7 @@ import gzip
 import io
 import json
 import re
+import subprocess
 import sys
 import time
 import xml.etree.ElementTree as ET
@@ -41,6 +42,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "radar_config.json"
 OUT_PATH = ROOT / "radar.json"
+FINDINGS_PATH = ROOT / "findings.json"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
@@ -1040,6 +1042,110 @@ def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str) -
     return " ".join(out)
 
 
+def _finish_sentence(text: str, max_chars: int = 560) -> str:
+    """Clean a source sentence for the one-sentence findings view.
+
+    The findings layer is deliberately extractive: it selects a substantive sentence
+    already captured during admission rather than generating a new claim with an LLM.
+    """
+    s = clean_text(text).strip(' "“”')
+    if not s:
+        return ""
+    if len(s) > max_chars:
+        cut = max(s.rfind(";", 0, max_chars), s.rfind(",", 0, max_chars))
+        if cut < int(max_chars * 0.62):
+            cut = max_chars
+        s = s[:cut].rstrip(" ,;:-") + "…"
+    if not s.endswith((".", "!", "?", "…")):
+        s += "."
+    return s
+
+
+def make_finding(text: str, evidence: dict[str, Any], strand: str, title: str) -> str:
+    """Select one substantive source sentence for the findings page.
+
+    Strand A privileges the R&I↔geopolitics bridge. Strand B privileges sentences
+    that combine foresight with method/design/evaluation. If an item passes both,
+    the strongest sentence across both evidence families is selected.
+    """
+    sentences = split_sentences(text)
+    preferred = []
+    for key in ("bridge_sentence", "method_bridge"):
+        value = clean_text(evidence.get(key))
+        if value:
+            preferred.append(value)
+
+    candidates = []
+    seen = set()
+    for s in preferred + sentences[:80]:
+        cleaned = clean_text(s)
+        key = normalized(cleaned)
+        if not cleaned or key in seen:
+            continue
+        seen.add(key)
+        candidates.append(cleaned)
+
+    title_norm = norm_title(title)
+    scored = []
+    for idx, sentence in enumerate(candidates):
+        low = normalized(sentence)
+        if "automated admission gate" in low or "eu relevance is classified" in low:
+            continue
+        score = 0.0
+        if sentence in preferred:
+            score += 10.0
+        if strand in {"A", "both"}:
+            score += 3.2 * len(distinct_matches(sentence, RI_STRONG))
+            score += 3.5 * len(distinct_matches(sentence, GEO_STRONG))
+            if has_eu_word(sentence) or contains_any(sentence, EU_DIRECT + EU_GENERIC):
+                score += 1.4
+            if contains_any(sentence, ["find", "shows", "argues", "suggests", "affects", "reshap", "increase", "decrease", "risk", "security", "cooperation", "competition"]):
+                score += 0.9
+        if strand in {"B", "both"}:
+            score += 3.3 * len(distinct_matches(sentence, FORESIGHT_CORE))
+            score += 2.6 * len(distinct_matches(sentence, METHOD_CORE))
+            if contains_any(sentence, ["public policy", "technology policy", "research policy", "innovation policy", "government", "uncertainty"]):
+                score += 1.0
+        # Avoid selecting a bare title or an entirely generic framing sentence.
+        if norm_title(sentence) == title_norm:
+            score -= 8.0
+        if low.startswith(("the publication examines", "this publication examines")):
+            score -= 4.0
+        if 80 <= len(sentence) <= 430:
+            score += 0.8
+        score -= idx * 0.015
+        scored.append((score, -idx, sentence))
+
+    if scored:
+        best = max(scored)[2]
+        return _finish_sentence(best)
+
+    # Defensive fallback for legacy or unusually sparse metadata.
+    for s in sentences:
+        if norm_title(s) != title_norm:
+            return _finish_sentence(s)
+    return _finish_sentence(f"The source focuses on {title}")
+
+
+def backfill_finding(item: dict[str, Any]) -> str:
+    """Create a finding for corpus items stored before the findings feature existed."""
+    existing = clean_text(item.get("finding"))
+    if existing:
+        return _finish_sentence(existing)
+    summary = clean_text(item.get("summary"))
+    for s in split_sentences(summary, max_chars=12000):
+        low = normalized(s)
+        if "automated admission gate" in low or "eu relevance is classified" in low:
+            continue
+        if not low.startswith("the publication examines"):
+            return _finish_sentence(s)
+    for s in split_sentences(summary, max_chars=12000):
+        if "automated admission gate" not in normalized(s):
+            return _finish_sentence(s)
+    title = clean_text(item.get("title")) or "the accepted source"
+    return _finish_sentence(f"The source focuses on {title}")
+
+
 def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     eu = (evidence.get("eu_relevance") or "unknown").capitalize()
     if strand == "A":
@@ -1063,6 +1169,7 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "strand": strand,
         "eu_relevance": evidence.get("eu_relevance"),
         "summary": make_summary(text, evidence, strand, title),
+        "finding": make_finding(text, evidence, strand, title),
         "relevance_note": relevance_note(evidence, strand),
         "source_tier": tier_label,
         "_source_rank": source_rank,
@@ -1130,15 +1237,54 @@ def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen
 
 
 def load_previous() -> dict[str, Any]:
+    """Load the current corpus, with a Git-history migration fallback.
+
+    Upgrade packages may carry a pending/empty radar.json template. When installed
+    over an already-running repository, recover the parent commit's radar.json so
+    the accumulated corpus is not logically reset by the upgrade commit.
+    """
+    current: dict[str, Any] = {}
     try:
-        return json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
     except Exception:
-        return {}
+        current = {}
+
+    has_corpus = bool(
+        current.get("last_updated")
+        or current.get("first_scan_complete")
+        or current.get("strand_a")
+        or current.get("strand_b")
+    )
+    if has_corpus:
+        return current
+
+    try:
+        proc = subprocess.run(
+            ["git", "show", "HEAD^:radar.json"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=6,
+            check=True,
+        )
+        previous = json.loads(proc.stdout)
+        if isinstance(previous, dict) and (
+            previous.get("last_updated")
+            or previous.get("first_scan_complete")
+            or previous.get("strand_a")
+            or previous.get("strand_b")
+        ):
+            print("Recovered previous radar corpus from Git history for upgrade continuity.")
+            return previous
+    except Exception:
+        pass
+    return current
 
 
 def internalize_previous(item: dict[str, Any]) -> dict[str, Any]:
     x = dict(item)
-    x["_themes"] = themes_for(f"{x.get('title','')} {x.get('summary','')}")
+    x["finding"] = backfill_finding(x)
+    x["_themes"] = themes_for(f"{x.get('title','')} {x.get('summary','')} {x.get('finding','')}")
     x["_source_rank"] = 1.0 if "Tier 1" in x.get("source_tier", "") else 2.4 if "comparable" in x.get("source_tier", "") else 2.0 if "Tier 2" in x.get("source_tier", "") else 3.0
     x["_confidence"] = 0
     x["_doi"] = normalized(x.get("link", ""))
@@ -1323,6 +1469,112 @@ def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> 
     return anchored[:MAX_C]
 
 
+def finding_record(item: dict[str, Any]) -> dict[str, Any]:
+    finding = backfill_finding(item)
+    themes = themes_for(f"{item.get('title','')} {item.get('summary','')} {finding}")
+    return {
+        "title": item.get("title", ""),
+        "date": item.get("date", ""),
+        "source": item.get("source", ""),
+        "authors": item.get("authors", ""),
+        "link": item.get("link", ""),
+        "type": item.get("type", ""),
+        "strand": item.get("strand", ""),
+        "eu_relevance": item.get("eu_relevance"),
+        "source_tier": item.get("source_tier", ""),
+        "finding": finding,
+        "themes": themes,
+        "new_this_scan": bool(item.get("new_this_scan")),
+        "first_seen": item.get("first_seen"),
+    }
+
+
+def _record_identity(item: dict[str, Any]) -> str:
+    return norm_title(item.get("title", "")) + "|" + normalized(item.get("link", ""))
+
+
+def recurring_theme_digest(records: list[dict[str, Any]], limit: int = 6) -> list[dict[str, Any]]:
+    """Summarise corpus recurrence without inventing cross-paper claims.
+
+    Each theme card reports an observable count and pairs it with one representative
+    extractive finding. This keeps the synthesis automatic and auditable.
+    """
+    buckets: dict[str, list[dict[str, Any]]] = {}
+    for rec in records:
+        for theme in rec.get("themes", []):
+            buckets.setdefault(theme, []).append(rec)
+
+    digest = []
+    for theme, members in buckets.items():
+        members = sorted(
+            members,
+            key=lambda x: (bool(x.get("new_this_scan")), x.get("date", ""), x.get("source_tier", "")),
+            reverse=True,
+        )
+        representative = members[0]
+        digest.append({
+            "theme": theme,
+            "count": len(members),
+            "representative_finding": representative.get("finding", ""),
+            "representative_title": representative.get("title", ""),
+            "representative_source": representative.get("source", ""),
+            "representative_link": representative.get("link", ""),
+            "newest_date": max((m.get("date", "") for m in members), default=""),
+            "new_this_scan": sum(1 for m in members if m.get("new_this_scan")),
+        })
+    digest.sort(key=lambda x: (x["count"], x["new_this_scan"], x["newest_date"]), reverse=True)
+    return digest[:limit]
+
+
+def build_findings_data(strand_a: list[dict[str, Any]], strand_b: list[dict[str, Any]],
+                        strand_c: list[dict[str, Any]], now_iso: str,
+                        scan_health: str, first_scan_complete: bool) -> dict[str, Any]:
+    records_a = [finding_record(x) for x in strand_a]
+    records_b = [finding_record(x) for x in strand_b]
+
+    unique: dict[str, dict[str, Any]] = {}
+    for rec in records_a + records_b:
+        key = _record_identity(rec)
+        if key not in unique:
+            unique[key] = rec
+        else:
+            # Preserve the richer "both" classification when the same source is in A and B.
+            if rec.get("strand") == "both":
+                unique[key] = rec
+    all_records = list(unique.values())
+
+    signals = []
+    for item in strand_c:
+        note_sentences = split_sentences(item.get("signal_note", ""), max_chars=5000)
+        finding = _finish_sentence(note_sentences[0] if note_sentences else item.get("headline", ""))
+        signals.append({
+            "headline": item.get("headline", ""),
+            "date": item.get("date", ""),
+            "source": item.get("source", ""),
+            "link": item.get("link", ""),
+            "finding": finding,
+            "signal_type": item.get("signal_type", ""),
+            "anchor": item.get("anchor", ""),
+        })
+
+    return {
+        "last_updated": now_iso,
+        "first_scan_complete": bool(first_scan_complete),
+        "scan_health": scan_health,
+        "method": "Automatic extractive synthesis from the same accepted radar corpus; no external AI/API is used. Source-level findings are selected from the strongest admission-evidence sentences, while recurring-theme cards report corpus counts plus a representative finding.",
+        "counts": {
+            "unique_ab_publications": len(all_records),
+            "strand_a_findings": len(records_a),
+            "strand_b_findings": len(records_b),
+            "current_weak_signals": len(signals),
+        },
+        "emerging_picture": recurring_theme_digest(all_records),
+        "strand_a": records_a,
+        "strand_b": records_b,
+        "weak_signals": signals,
+    }
+
+
 def scan_from_date(previous: dict[str, Any]) -> dt.date:
     if not previous.get("last_updated"):
         return DATE_FLOOR
@@ -1409,6 +1661,8 @@ def main() -> int:
         },
     }
     OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    findings = build_findings_data(strand_a, strand_b, strand_c, now_iso, health, True)
+    FINDINGS_PATH.write_text(json.dumps(findings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(data["stats"], indent=2))
     if warnings:
         print("Source warnings (first 25):", file=sys.stderr)

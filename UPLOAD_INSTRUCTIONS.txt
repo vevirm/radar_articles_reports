@@ -26,8 +26,9 @@ and copy the contents from:
 FIRST SCAN
 ----------
 The commit to main triggers the first scan immediately.
-Because radar.json is reset to pending in this package, that first scan backfills A/B from 2026-04-01 to the present and gives Strand C a 7-day first-run lookback.
-The workflow then runs again every 12 hours. Later C scans use a 48-hour overlap.
+Because radar.json and findings.json are reset to pending in this package, that first scan backfills A/B from 2026-04-01 to the present, builds the one-sentence evidence briefing from the accepted corpus, and gives Strand C a 7-day first-run lookback.
+The workflow then runs again every 12 hours. Every run updates both radar.json and findings.json together. Later C scans use a 48-hour overlap.
+If you are upgrading an existing live repository, the scanner detects the pending package template and recovers the previous committed radar.json from Git history before continuing, so the accumulated A/B corpus is retained and its findings are backfilled automatically.
 It can also be run manually from Actions -> R&I Radar Scan -> Run workflow.
 
 NO API KEY
@@ -42,7 +43,11 @@ Keep GitHub Pages set to:
 
 PUBLIC SITE
 -----------
+Detailed radar:
 https://vevirm.github.io/radar_articles_reports/
+
+Evidence briefing:
+https://vevirm.github.io/radar_articles_reports/findings.html
 
 PASSWORD
 --------

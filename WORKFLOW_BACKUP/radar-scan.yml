@@ -7,6 +7,7 @@ on:
       - main
     paths-ignore:
       - radar.json
+      - findings.json
 
   # THEN: every 12 hours. :23 avoids the busiest top-of-hour scheduling period.
   schedule:
@@ -51,16 +52,16 @@ jobs:
       - name: Scan radar sources
         run: python scripts/scan_radar.py
 
-      - name: Commit fresh radar data
+      - name: Commit fresh radar and findings data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add radar.json
+          git add radar.json findings.json
 
           if git diff --cached --quiet; then
-            echo "No radar data change to commit."
+            echo "No radar/findings data change to commit."
           else
-            git commit -m "Update R&I geopolitics radar"
+            git commit -m "Update R&I geopolitics radar and evidence briefing"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
