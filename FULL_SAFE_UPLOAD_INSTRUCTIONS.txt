@@ -47,15 +47,16 @@ Uploading/updating this package triggers the issue analyzer immediately on the
 radar material that ALREADY exists.
 
 NORMAL RHYTHM:
-After every successful "R&I Radar Scan", the issue workflow waits 30 minutes and
-then analyzes the newly updated radar material.
+Immediately after every successful "R&I Radar Scan", the issue workflow analyzes
+the newly updated radar material.
 
 MANUAL:
 Actions -> R&I Radar Briefing -> Run workflow runs the issue analysis immediately.
 
 ISSUE PAGE OUTPUT
 -----------------
-The /briefing/ page leads with short, simple issue bullets:
+The main radar now has a visible “Insights — what it means” link to /briefing/.
+The /briefing/ page leads with short, simple implication bullets:
 - approximately one sentence per issue
 - focused specifically on the R&I × EU × geopolitics intersection
 - source evidence remains expandable underneath

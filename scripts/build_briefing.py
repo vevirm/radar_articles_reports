@@ -275,7 +275,7 @@ def render_page(b: dict[str, Any]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>R&I × EU × Geopolitics — Issues</title>
+<title>EU R&I × Geopolitics — What the radar means</title>
 <style>
 :root{{--bg:#08111f;--panel:#101d2f;--text:#edf4ff;--muted:#a9bad0;--line:#28415f;--accent:#7fc7ff;--gold:#f2cc72}}
 *{{box-sizing:border-box}}
@@ -305,9 +305,9 @@ footer{{margin-top:30px;color:var(--muted);font-size:.82rem}}
 </head>
 <body><div class="wrap">
 <header>
-<div class="kicker">Automated issue scan</div>
-<h1>R&I × EU × Geopolitics</h1>
-<p class="lede">Simple issues isolated from the material already admitted by the radar. The first run uses the existing corpus; later runs follow successful radar scans.</p>
+<div class="kicker">Radar insights</div>
+<h1>What the radar means for EU R&I security</h1>
+<p class="lede">Short, plain-language implications drawn from the papers, reports and current signals already admitted by the radar — focused on the intersection of EU research & innovation, geopolitics, economic security and resilience.</p>
 <a class="back" href="../">← Main radar</a>
 </header>
 
@@ -319,13 +319,13 @@ footer{{margin-top:30px;color:var(--muted);font-size:.82rem}}
 </div>
 
 <section class="issuebox">
-<h2>Issues identified</h2>
+<h2>Key implications</h2>
 <ul class="issues">{''.join(bullets_html)}</ul>
 </section>
 
 <section>
-<h2>Evidence</h2>
-<p class="lede">Optional source trace; the issue list above is the main output.</p>
+<h2>Evidence behind the bullets</h2>
+<p class="lede">Open a theme only when you want to see which radar items support it. The simple bullets above are the main output.</p>
 {''.join(details_html)}
 </section>
 

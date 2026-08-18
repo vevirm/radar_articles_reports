@@ -14,7 +14,7 @@
     #app{display:none}header{border-bottom:1px solid var(--line);padding:44px 0 26px}.topline{display:flex;justify-content:space-between;gap:18px;align-items:start}.kicker{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
     h1{font-size:clamp(39px,6vw,70px);line-height:1;margin:8px 0 12px;letter-spacing:-.05em}.intro{max-width:840px;font-size:17px;color:var(--muted);margin:0}.lock{background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px 10px;font-size:12px;white-space:nowrap}
     .status{display:flex;gap:9px;flex-wrap:wrap;margin-top:21px}.pill,.tag{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:12px;color:var(--muted)}.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}
-    nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}nav a{text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px}
+    nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}nav a{text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px}nav a.insights{background:var(--text);color:#fff;border-color:var(--text);font-weight:700}
     main{padding:18px 0 70px}.strand{margin-top:38px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;border-bottom:2px solid var(--text);padding-bottom:12px}.section-head h2{font-size:24px;letter-spacing:-.03em;margin:0}.section-head p{margin:6px 0 0;color:var(--muted);max-width:880px;font-size:14px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
     .scan-note{display:none;margin-top:14px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--soft);font-size:13px}.item{display:grid;grid-template-columns:150px 1fr;gap:25px;padding:25px 0;border-bottom:1px solid var(--line)}.meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.item h3{font-size:21px;line-height:1.28;letter-spacing:-.02em;margin:0 0 7px}.item h3 a{text-decoration:none}.item h3 a:hover{text-decoration:underline;text-underline-offset:3px}.byline,.source{font-size:13px;color:var(--muted);margin:2px 0}.summary{margin:10px 0 0;max-width:950px}.relevance{font-weight:650;font-size:14px;margin-top:10px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}.tag{padding:3px 8px;font-size:11px}.tag.new{color:var(--accent);border-color:#d8a6a9}.empty{padding:26px 0;color:var(--muted)}.anchor{font-size:14px;margin-top:8px}.signal-note{margin-top:9px}.signal-type{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:var(--accent)}
     .method{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:13px}.method strong{color:var(--text)}footer{border-top:1px solid var(--line);padding:22px 0 35px;color:var(--muted);font-size:12px}
@@ -52,7 +52,7 @@
           <span id="scanState" class="pill warn">Scanner: first run pending</span>
           <span id="lastScan" class="pill">Last scan: pending</span>
         </div>
-        <nav><a href="#strand-a">Strand A</a><a href="#strand-b">Strand B</a><a href="#strand-c">Strand C</a></nav>
+        <nav><a class="insights" href="briefing/">Insights — what it means</a><a href="#strand-a">Strand A</a><a href="#strand-b">Strand B</a><a href="#strand-c">Strand C</a></nav>
       </div>
     </header>
 

@@ -24,7 +24,7 @@ TIMING
    radar material.
 
 3. MANUAL
-   The briefing workflow can also be run manually with no 30-minute wait.
+   The briefing workflow can also be run manually at any time.
 
 OUTPUT
 ------
