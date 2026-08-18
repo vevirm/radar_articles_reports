@@ -1,0 +1,93 @@
+R&I × GEOPOLITICS RADAR — FULL SAFE REPERTOIRE
+=================================================
+
+THIS IS THE COMPLETE SAFE UPDATE PACKAGE FOR AN EXISTING REPOSITORY.
+
+WHAT REMAINS IN PLACE
+---------------------
+Your existing live radar.json is intentionally NOT included in this ZIP.
+
+That is a safety feature, not a missing file.
+
+When you upload this package over the existing GitHub repository:
+- the accumulated Strand A results remain
+- the accumulated Strand B results remain
+- the current Strand C signals remain until the normal scanner refreshes them
+- the scanner continues merging into the existing corpus
+- the normal scheduled scans remain active
+
+DO NOT DELETE radar.json FROM THE REPOSITORY BEFORE UPLOADING THIS PACKAGE.
+
+WHAT THIS PACKAGE CONTAINS
+--------------------------
+Main radar:
+- index.html
+- scripts/scan_radar.py
+- radar_config.json
+- radar_criteria.md
+- requirements.txt
+- robots.txt
+- .nojekyll
+- .gitignore
+
+Radar workflow and recovery protection:
+- .github/workflows/radar-scan.yml
+- WORKFLOW_BACKUP/radar-scan.yml
+- recovery-aware scanner logic
+- classifier/recovery tests
+
+Issue subpage:
+- .github/workflows/radar-briefing.yml
+- scripts/build_briefing.py
+
+ISSUE PAGE TIMING
+-----------------
+FIRST:
+Uploading/updating this package triggers the issue analyzer immediately on the
+radar material that ALREADY exists.
+
+NORMAL RHYTHM:
+After every successful "R&I Radar Scan", the issue workflow waits 30 minutes and
+then analyzes the newly updated radar material.
+
+MANUAL:
+Actions -> R&I Radar Briefing -> Run workflow runs the issue analysis immediately.
+
+ISSUE PAGE OUTPUT
+-----------------
+The /briefing/ page leads with short, simple issue bullets:
+- approximately one sentence per issue
+- focused specifically on the R&I × EU × geopolitics intersection
+- source evidence remains expandable underneath
+
+SAFETY BOUNDARIES
+-----------------
+The briefing workflow:
+- only reads radar.json
+- stops if the radar corpus is missing, malformed, or unexpectedly empty
+- verifies radar.json's checksum before and after building
+- stages and commits ONLY briefing/index.html and briefing/briefing.json
+
+The scanner:
+- keeps the existing corpus as the master record
+- includes Git-history corpus recovery protection
+
+UPLOAD
+------
+Upload the CONTENTS of this ZIP into the repository root, preserving:
+- .github/workflows/
+- scripts/
+- tests/
+- WORKFLOW_BACKUP/
+
+Do not delete the existing radar.json.
+
+EXPECTED SEQUENCE
+-----------------
+1. Upload/commit the full package.
+2. Existing R&I Radar Scan may run immediately because scanner/site files changed.
+3. The issue scan also analyzes the currently existing corpus immediately.
+4. The normal radar scan updates radar.json.
+5. About 30 minutes after a successful radar scan, the issue page analyzes the
+   fresh material again.
+6. Future radar scans and briefing updates continue automatically.
