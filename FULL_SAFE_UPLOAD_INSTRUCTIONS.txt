@@ -55,11 +55,14 @@ Actions -> R&I Radar Briefing -> Run workflow runs the issue analysis immediatel
 
 ISSUE PAGE OUTPUT
 -----------------
-The main radar now has a visible “Insights — what it means” link to /briefing/.
-The /briefing/ page leads with short, simple implication bullets:
-- approximately one sentence per issue
-- focused specifically on the R&I × EU × geopolitics intersection
-- source evidence remains expandable underneath
+The main radar now gives Radar insights a prominent analytical briefing panel and link to /briefing/.
+The /briefing/ page keeps the big picture visible while adding detail:
+- ranked evidence concentrations
+- concrete admitted developments
+- why each issue matters
+- R&I decision implications and decision questions
+- what to watch next
+- source-level evidence, freshness and Strand C anchors
 
 SAFETY BOUNDARIES
 -----------------
@@ -89,6 +92,6 @@ EXPECTED SEQUENCE
 2. Existing R&I Radar Scan may run immediately because scanner/site files changed.
 3. The issue scan also analyzes the currently existing corpus immediately.
 4. The normal radar scan updates radar.json.
-5. About 30 minutes after a successful radar scan, the issue page analyzes the
+5. Immediately after a successful radar scan, the issue workflow analyzes the
    fresh material again.
 6. Future radar scans and briefing updates continue automatically.

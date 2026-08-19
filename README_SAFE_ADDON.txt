@@ -20,7 +20,7 @@ TIMING
    that already exists.
 
 2. NORMAL RHYTHM
-   After every successful "R&I Radar Scan", wait 30 minutes and analyze the newest
+   Immediately after every successful "R&I Radar Scan", analyze the newest
    radar material.
 
 3. MANUAL
@@ -28,12 +28,15 @@ TIMING
 
 OUTPUT
 ------
-The main visible output is a simple list of issues:
-- one short bullet per issue
-- about one sentence per issue
-- focused on the R&I × EU × geopolitics intersection
+The main visible output is a detailed but readable analytical briefing:
+- big-picture issue concentration at the top
+- concrete admitted developments surfaced early
+- why each issue matters for R&I
+- decision implications and decision questions
+- what to watch next
+- source-level evidence and Strand C anchors
 
-Evidence is available below in expandable sections.
+The issue labels organise the evidence; they no longer replace the detail.
 
 SAFETY
 ------

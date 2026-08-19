@@ -3,60 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EU R&I × Geopolitics — What the radar means</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Radar insights — EU R&I × Geopolitics</title>
 <style>
-:root{--bg:#08111f;--panel:#101d2f;--text:#edf4ff;--muted:#a9bad0;--line:#28415f;--accent:#7fc7ff;--gold:#f2cc72}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:960px;margin:auto;padding:36px 22px 70px}
-header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:26px}.kicker{color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.15em 0}.lede,.meta{color:var(--muted)}.back{display:inline-block;margin-top:8px}
-.issuebox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}.issuebox h2{margin-top:0}.issues{margin:0;padding-left:24px}
-.issues li{margin:14px 0;font-size:1.08rem}.status{margin:16px 0;color:var(--muted);font-size:.85rem}footer{margin-top:30px;color:var(--muted);font-size:.82rem}
+:root{--bg:#07101d;--panel:#0e1a2a;--panel2:#132338;--text:#edf4ff;--muted:#aab9cb;--line:#29405c;--accent:#86ccff;--gold:#f2cc72;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.58 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{width:min(calc(100% - 36px),var(--max));margin:auto}
+header{padding:42px 0 30px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0b1930 0%,var(--bg) 100%)}.kicker,.eyebrow{color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}h1{font-size:clamp(2.35rem,6vw,4.8rem);line-height:.98;letter-spacing:-.055em;margin:.16em 0 .22em;max-width:950px}.lede{font-size:1.12rem;color:var(--muted);max-width:880px;margin:0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.button{border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-weight:750}.button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+main{padding:28px 0 72px}.status,.meta{color:var(--muted);font-size:.8rem}.status{margin-bottom:18px}.overview,.theme{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px}.overview{margin-bottom:26px}.overview h2,.theme h2{margin:.15em 0 .35em}.overview p{font-size:1.12rem;color:#dce8f7}.priority{margin:30px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:16px}.card h3{font-size:1rem;line-height:1.3;margin:0 0 5px}.card p{font-size:.9rem;color:#c7d5e5;margin:10px 0 0}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 7px;font-size:.67rem;color:var(--muted);margin:0 4px 7px 0}.theme{margin-top:18px}.current{border-left:3px solid var(--gold);padding-left:12px;color:#dce8f7}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.block{background:#0a1524;border:1px solid var(--line);border-radius:15px;padding:16px}.block h3{font-size:.95rem;color:var(--gold);margin:0 0 7px}.block p,.block ul{margin:0}.block ul{padding-left:20px}.block li{margin:7px 0}.section-title{margin:18px 0 9px;color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}.empty{color:var(--muted)}footer{border-top:1px solid var(--line);padding:20px 0 34px;color:var(--muted);font-size:.78rem}@media(max-width:800px){.grid,.two{grid-template-columns:1fr}}
 </style>
 </head>
-<body><div class="wrap">
-<header>
-<div class="kicker">Radar insights</div>
-<h1>What the radar means for EU R&I security</h1>
-<p class="lede">Short, plain-language implications drawn from the papers, reports and current signals admitted by the radar — focused on EU research & innovation, geopolitics, economic security and resilience.</p>
-<a class="back" href="../">← Main radar</a>
-</header>
-<div id="status" class="status">Loading current radar insights…</div>
-<section class="issuebox"><h2>Key implications</h2><ul id="issues" class="issues"></ul></section>
-<footer>This page is automatically refreshed from the radar material. A successful briefing workflow replaces this bootstrap view with the full evidence-linked briefing.</footer>
-</div>
+<body>
+<header><div class="wrap">
+  <div class="kicker">Radar insights · evidence-linked analytical briefing</div>
+  <h1>What is changing, why it matters, and what to watch</h1>
+  <p class="lede">A detailed but readable synthesis of the material already admitted by the radar. Concrete developments stay visible alongside the bigger R&I × geopolitics picture.</p>
+  <div class="actions"><a class="button primary" href="../">← Main radar</a><a class="button" href="#priority">Specific developments ↓</a></div>
+</div></header>
+<main class="wrap">
+  <div id="status" class="status">Loading the latest evidence-linked insights…</div>
+  <section class="overview"><div class="eyebrow">Big picture</div><h2>Where the radar is concentrating now</h2><p id="bigPicture">Loading…</p></section>
+  <section class="priority" id="priority"><div class="eyebrow">Concrete evidence first</div><h2>Priority developments</h2><div id="priorityGrid" class="grid"></div></section>
+  <div id="themes"></div>
+</main>
+<footer><div class="wrap">This page only synthesises material already admitted by the radar. It does not change scanner admission decisions or the radar corpus.</div></footer>
 <script>
-const THEMES=[
-["Research security, economic security & dual use",["research security","knowledge security","foreign interference","economic security","dual use","dual-use","export control","security screening","trusted research","foreign influence","sanction"],"European research cooperation is facing tighter security, dual-use and knowledge-protection requirements."],
-["Technology sovereignty & strategic dependencies",["technological sovereignty","technology sovereignty","strategic autonomy","open strategic autonomy","strategic dependency","strategic dependencies","supply chain","vendor","industrial competitiveness"],"EU R&I is increasingly being used to reduce strategic technology and supply-chain dependencies while preserving international openness."],
-["Critical technologies, AI, chips & industrial capacity",["semiconductor","chips","artificial intelligence"," ai ","quantum","biotech","critical technology","critical technologies","emerging technology","digital infrastructure"],"AI, chips, quantum, biotech and strategic infrastructure are becoming central to EU competitiveness and geopolitical autonomy."],
-["EU–China / Asia cooperation and de-risking",["china","chinese","eu-china","asia","de-risk","derisk","indo-pacific","japan","south korea","taiwan"],"EU research and technology cooperation with Asia is increasingly shaped by de-risking, diversification and competition with China."],
-["Horizon Europe, funding, talent & participation",["horizon europe","fp10","european research area","erc","research funding","innovation funding","talent mobility","associated country","third country","third-country"],"EU research funding, programme access and talent policy are becoming more closely linked to strategic and geopolitical priorities."],
-["Science diplomacy & international R&I partnerships",["science diplomacy","research cooperation","scientific cooperation","research collaboration","international research","co-funding","partnership","international cooperation","association agreement"],"International R&I partnerships are increasingly being used as instruments of EU diplomacy, resilience and strategic influence."],
-["Resilience, energy, health & strategic infrastructure",["resilience","preparedness","energy","nuclear","health","infrastructure","connectivity","critical infrastructure","security of supply"],"R&I policy is increasingly expected to strengthen European resilience in energy, health, connectivity and other strategic systems."],
-["Foresight, anticipatory governance & policy preparedness",["foresight","horizon scanning","scenario","anticipatory governance","strategic intelligence","weak signal","backcasting","delphi"],"Strategic foresight is becoming more important for turning geopolitical change into concrete R&I priorities and preparedness."]
-];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function render(rows,msg){document.getElementById("issues").innerHTML=rows.map(x=>`<li><strong>${esc(x[0])}</strong> — ${esc(x[1])}</li>`).join("")||"<li>No sufficiently supported cross-cutting implication is visible yet.</li>";document.getElementById("status").textContent=msg}
-(async()=>{
-  try{
-    const br=await fetch("briefing.json?ts="+Date.now(),{cache:"no-store"});
-    if(br.ok){
-      const b=await br.json();
-      const rows=(b.issues||[]).slice(0,6).map(x=>[x.name,x.bullet||x.summary]);
-      if(rows.length){render(rows,"Using the latest generated evidence-linked briefing.");return}
-    }
-  }catch(e){}
-  try{
-    const rr=await fetch("../radar.json?ts="+Date.now(),{cache:"no-store"});
-    if(!rr.ok) throw new Error();
-    const d=await rr.json(), items=[...(d.strand_a||[]),...(d.strand_b||[]),...(d.strand_c||[])];
-    const corpus=items.map(x=>[x.title,x.headline,x.summary,x.relevance_note,x.signal_note,x.anchor,x.source].filter(Boolean).join(" ").toLowerCase());
-    const scored=THEMES.map(t=>[t[0],t[2],corpus.reduce((n,s)=>n+t[1].filter(k=>s.includes(k)).length,0)]).filter(x=>x[2]>0).sort((a,b)=>b[2]-a[2]).slice(0,6);
-    render(scored.map(x=>[x[0],x[1]]),"Live fallback: derived directly from the current radar while the full briefing build is pending.");
-  }catch(e){
-    render([],"Radar data is not available yet. The page itself is installed correctly; insights will populate after the first successful scan.");
-  }
-})();
+const THEMES=[
+ {name:"Research security, economic security & dual use",terms:["research security","knowledge security","foreign interference","economic security","dual use","dual-use","export control","security screening","trusted research"],why:"Research openness is increasingly being balanced against security, dual-use and knowledge-protection concerns.",question:"Where can safeguards target real technology and partnership risks without turning into blanket disengagement?"},
+ {name:"Technology sovereignty & strategic dependencies",terms:["technology sovereignty","technological sovereignty","strategic autonomy","strategic dependency","strategic dependencies","supply chain","industrial competitiveness"],why:"R&I choices increasingly affect control over critical capabilities, suppliers and infrastructure.",question:"Which dependencies need European capability, diversification, trusted partners or explicit risk management?"},
+ {name:"Critical technologies, AI, chips & industrial capacity",terms:["semiconductor","chips","artificial intelligence"," ai ","quantum","biotech","critical technology","critical technologies","digital infrastructure"],why:"Scientific leadership matters less strategically when Europe lacks the compute, manufacturing, infrastructure or scale-up capacity needed to deploy it.",question:"Are R&I instruments building scalable capability or mainly isolated projects and pilots?"},
+ {name:"EU–China / Asia cooperation and de-risking",terms:["china","chinese","eu-china","de-risk","derisk","indo-pacific","japan","south korea","taiwan"],why:"European R&I is being reshaped by the effort to keep useful international links while reducing concentrated strategic exposure.",question:"Which relationships should be deepened, diversified, screened or redesigned?"},
+ {name:"Horizon Europe, funding, talent & participation",terms:["horizon europe","fp10","research funding","innovation funding","talent mobility","associated country","third country","third-country"],why:"Programme access, funding and talent rules increasingly have geopolitical and economic-security effects as well as scientific ones.",question:"How should EU programmes balance excellence, openness, resilience and geopolitical conditionality?"},
+ {name:"Foresight, anticipatory governance & preparedness",terms:["foresight","horizon scanning","scenario","anticipatory governance","strategic intelligence","weak signal","backcasting","delphi"],why:"Foresight becomes useful when weak signals and scenarios change priorities, budgets, regulation or contingency choices.",question:"Are foresight outputs changing decisions, or remaining separate from implementation?"}
+];
+function titleOf(x){return x.title||x.headline||"Untitled item"}
+function noteOf(x){return x.signal_note||x.summary||x.relevance_note||"No short source summary is available in the radar record."}
+function card(e){const href=e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.title)}</a>`:esc(e.title);return `<article class="card"><span class="tag">Strand ${esc(e.strand||"")}</span>${e.fresh?'<span class="tag">fresh</span>':''}${e.signal_type?`<span class="tag">${esc(e.signal_type)}</span>`:""}<h3>${href}</h3><div class="meta">${esc(e.source||"")}</div><p>${esc(e.note||"")}</p>${e.anchor?`<p class="meta"><strong>Anchor:</strong> ${esc(e.anchor)}</p>`:""}</article>`}
+function renderBrief(b,msg){document.getElementById("status").textContent=msg;document.getElementById("bigPicture").textContent=b.big_picture||"No strong cross-cutting concentration is available yet.";document.getElementById("priorityGrid").innerHTML=(b.priority_developments||[]).map(card).join("")||'<div class="empty">No concrete priority development is available yet.</div>';document.getElementById("themes").innerHTML=(b.issues||[]).map((x,i)=>`<section class="theme"><div class="eyebrow">Issue ${i+1}</div><h2>${esc(x.name)}</h2><p class="current">${esc(x.current_read||"")}</p><div class="two"><div class="block"><h3>Why it matters</h3><p>${esc(x.summary||"")}</p></div><div class="block"><h3>Decision question</h3><p>${esc(x.question||"")}</p></div></div><div class="section-title">Specific developments in the admitted radar</div><div class="grid">${(x.evidence||[]).slice(0,4).map(card).join("")}</div>${x.implications?.length?`<div class="two"><div class="block"><h3>Implications for R&I decisions</h3><ul>${x.implications.map(v=>`<li>${esc(v)}</li>`).join("")}</ul></div><div class="block"><h3>What to watch next</h3><ul>${(x.watch||[]).map(v=>`<li>${esc(v)}</li>`).join("")}</ul></div></div>`:""}</section>`).join("")||'<section class="theme"><p class="empty">No sufficiently supported issue is visible yet.</p></section>'}
+function fallbackFromRadar(d){const items=[...(d.strand_a||[]).map(x=>({...x,_strand:"A",_fresh:!!x.new_this_scan})),...(d.strand_b||[]).map(x=>({...x,_strand:"B",_fresh:!!x.new_this_scan})),...(d.strand_c||[]).map(x=>({...x,_strand:"C",_fresh:true}))];const scored=THEMES.map(t=>{const ev=items.map(x=>{const txt=[x.title,x.headline,x.summary,x.relevance_note,x.signal_note,x.anchor,x.source].filter(Boolean).join(" ").toLowerCase();const hits=t.terms.filter(k=>txt.includes(k));return hits.length?{x,hits}:null}).filter(Boolean);return {...t,ev,score:ev.reduce((n,e)=>n+e.hits.length+(e.x._fresh?2:0),0)}}).filter(x=>x.ev.length).sort((a,b)=>b.score-a.score).slice(0,6);const names=scored.slice(0,3).map(x=>x.name);const big=names.length?`The strongest evidence concentrations in the current radar are ${names.join(", ")}. The cards below show the concrete admitted items behind those concentrations so the theme labels do not replace the detail.`:"The current radar does not yet contain enough matching evidence for a cross-cutting synthesis.";const issues=scored.map(t=>({name:t.name,current_read:`This fallback view links ${t.ev.length} admitted item${t.ev.length===1?"":"s"} to this issue. The full generated briefing adds richer implications and watchpoints after the briefing workflow completes.`,summary:t.why,question:t.question,evidence:t.ev.slice(0,5).map(({x})=>({title:titleOf(x),source:[x.source,String(x.date||"").slice(0,10)].filter(Boolean).join(" · "),link:x.link,strand:x._strand,fresh:x._fresh,signal_type:x.signal_type,anchor:x.anchor,note:noteOf(x)}))}));const priority=[];const seen=new Set();for(const t of issues){for(const e of t.evidence){if(e.fresh&&!seen.has(e.title)){priority.push(e);seen.add(e.title)}if(priority.length>=5)break}if(priority.length>=5)break}return {big_picture:big,priority_developments:priority,issues}}
+(async()=>{try{const r=await fetch("briefing.json?ts="+Date.now(),{cache:"no-store"});if(r.ok){const b=await r.json();if((b.issues||[]).length){renderBrief(b,"Using the latest generated evidence-linked briefing.");return}}}catch(e){}try{const r=await fetch("../radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();renderBrief(fallbackFromRadar(d),"Live fallback: detailed evidence is being derived directly from the current radar while the briefing build is pending.")}catch(e){renderBrief({big_picture:"Radar data is not available yet. The page is installed correctly and will populate after the next successful scan.",priority_developments:[],issues:[]},"Radar data is not available yet.")}})();
 </script>
 </body></html>
