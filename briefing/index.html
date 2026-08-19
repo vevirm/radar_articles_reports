@@ -1,42 +1,60 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow,noarchive">
-<title>Radar insights — topic digest</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="radar-insights-build" content="simple-topic-bullets-v7">
+<title>Radar insights</title>
 <style>
-:root{--bg:#f5f4ef;--panel:#fff;--text:#171716;--muted:#66645e;--line:#d9d6cd;--accent:#6d1f27;--fresh:#0d6b47;--max:1080px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.52 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}a{color:inherit}.wrap{width:min(calc(100% - 34px),var(--max));margin:auto}header{padding:38px 0 26px;border-bottom:1px solid var(--line);background:var(--panel)}.kicker,.eyebrow{font-size:.72rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(2.25rem,6vw,4.7rem);line-height:.96;letter-spacing:-.055em;margin:.15em 0 .22em}.lede{font-size:1.08rem;color:var(--muted);max-width:820px;margin:0}.top-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}.button{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:.84rem;font-weight:750;background:var(--bg)}main{padding:22px 0 68px}.stats{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}.stat{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 9px;font-size:.75rem;color:var(--muted)}.topic-nav{display:flex;gap:8px;flex-wrap:wrap;padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:16px;position:sticky;top:8px;z-index:3;box-shadow:0 6px 22px rgba(0,0,0,.04)}.topic-nav a{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:.79rem;background:var(--bg)}.topic-nav a span{color:var(--accent);font-weight:800;margin-left:4px}.topic{scroll-margin-top:90px;margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}.topic-head{display:flex;align-items:end;justify-content:space-between;gap:18px;padding:22px 24px 15px;border-bottom:1px solid var(--line)}.topic h2{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.035em;line-height:1.05;margin:.16em 0 0}.topic-count{font-size:.77rem;color:var(--muted);white-space:nowrap}.insight-list{list-style:none;padding:0;margin:0}.insight-item{padding:19px 24px 20px;border-top:1px solid var(--line)}.insight-item:first-child{border-top:0}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}.chip{border:1px solid var(--line);border-radius:999px;padding:2px 7px;font-size:.64rem;color:var(--muted);font-weight:700}.chip.fresh{color:var(--fresh);border-color:#9ecab8;background:#eef8f3}.insight-item h3{font-size:1.04rem;line-height:1.28;margin:0 0 4px}.insight-item h3 a{text-decoration-thickness:1px;text-underline-offset:3px}.meta{font-size:.76rem;color:var(--muted)}.insight-item p{margin:8px 0 0;max-width:900px}.relevance,.anchor{margin-top:7px;font-size:.82rem;color:var(--muted)}.related-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:9px;font-size:.72rem;color:var(--muted)}.related{border:1px solid var(--line);border-radius:999px;padding:2px 7px;background:var(--bg)}.empty{color:var(--muted);padding:18px 0}.method{font-size:.8rem;color:var(--muted);padding:18px 2px 0}footer{border-top:1px solid var(--line);padding:20px 0 32px;color:var(--muted);font-size:.78rem}@media(max-width:680px){.topic-nav{position:static}.topic-head{align-items:start;flex-direction:column}.insight-item,.topic-head{padding-left:18px;padding-right:18px}}
+:root{--bg:#f7f6f2;--ink:#171716;--muted:#68645e;--line:#d8d5ce;--accent:#741b25;--max:940px}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;color:var(--ink);background:var(--bg);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit}
+.wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}
+header{padding:38px 0 24px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:clamp(2.25rem,7vw,4rem);line-height:.98;letter-spacing:-.05em}
+.lede{margin:10px 0 0;color:var(--muted);max-width:700px}
+.back{display:inline-block;margin-top:14px;color:var(--accent);font-size:.9rem;font-weight:750;text-decoration:none}
+main{padding:8px 0 58px}
+.topic{padding:27px 0 24px;border-bottom:1px solid var(--line)}
+.topic:last-child{border-bottom:0}
+h2{margin:0 0 11px;font-size:1.45rem;line-height:1.15;letter-spacing:-.03em}
+ul{margin:0;padding-left:1.25em}
+li{margin:.56em 0;padding-left:.12em;max-width:900px}
+.state{padding:34px 0;color:var(--muted)}
+@media(max-width:640px){body{font-size:16px}.wrap{width:min(calc(100% - 28px),var(--max))}header{padding-top:28px}.topic{padding:22px 0 19px}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><div class="kicker">Radar insights · topical view of the main radar</div><h1>The radar, sorted by subject</h1><p class="lede">No second summary and no extra narrative layer. These are the same admitted radar items, reorganised into practical subject headings so you can quickly scan what the radar says about raw materials, research, AI, energy, security, trade, space and other areas.</p><div class="top-actions"><a class="button" href="../">← Main radar</a></div></div></header>
-<main class="wrap"><div class="stats" id="stats"><span class="stat">Loading current radar…</span></div><nav class="topic-nav" id="topicNav" aria-label="Insight topics"></nav><div id="topics"><div class="empty">Loading topic digest…</div></div><div class="method"><strong>How this page works:</strong> each radar item is assigned to one primary subject heading using transparent keyword matching. It appears only once to avoid repetition. Secondary subject matches are shown as small “Also touches” tags. The wording in each bullet comes from the item already admitted to the main radar.</div></main>
-<footer><div class="wrap" id="footerLine">The topic digest only reads radar data and does not modify the scanner corpus.</div></footer>
+<header>
+  <div class="wrap">
+    <h1>Radar insights</h1>
+    <p class="lede">What the radar is saying, grouped by topic. One signal, one clear point.</p>
+    <a class="back" href="../">← Main radar</a>
+  </div>
+</header>
+<main class="wrap" id="insights"><p class="state">Loading insights…</p></main>
+<script src="insights.js?v=7"></script>
 <script>
-const TOPICS=[
- {key:"raw-materials",name:"Raw materials & supply chains",terms:[["critical raw material",8],["raw material",7],["rare earth",8],["mineral",5],["lithium",7],["cobalt",7],["nickel",6],["graphite",7],["copper",5],["gallium",8],["germanium",8],["tungsten",7],["magnesium",6],["battery material",7],["mining",6],["refining",5]]},
- {key:"research",name:"Research & science",terms:[["horizon europe",8],["framework programme",7],["framework program",7],["erc",7],["european research area",7],["research funding",6],["research infrastructure",6],["research security",7],["knowledge security",7],["science diplomacy",7],["scientific cooperation",6],["research cooperation",6],["research collaboration",6],["academic",4],["academia",5],["university",5],["universities",5],["scientific",3],["researcher",4]]},
- {key:"ai",name:"AI & compute",terms:[["artificial intelligence",9],[" ai ",8],["machine learning",7],["foundation model",8],["large language model",8],["llm",8],["gpu",7],["compute capacity",7],["computing capacity",7],["supercomputer",6],["supercomputing",6],["ai factory",9],["data centre",4],["data center",4]]},
- {key:"chips-quantum",name:"Chips, quantum & critical tech",terms:[["semiconductor",9],["microelectronics",8],["chip",7],["quantum",9],["photonics",8],["critical technology",6],["advanced technology",4]]},
- {key:"energy",name:"Energy & climate tech",terms:[["energy security",8],["energy",4],["nuclear",7],["smr",8],["small modular reactor",8],["hydrogen",7],["renewable",5],["electricity grid",7],["power grid",7],["grid",4],["battery",5],["clean tech",6],["cleantech",6],["climate technology",6],["carbon capture",6],["fusion",7]]},
- {key:"security-defence",name:"Security, defence & dual use",terms:[["defence",8],["defense",8],["dual-use",8],["dual use",8],["military",8],["nato",7],["security screening",6],["export control",6],["foreign interference",7],["knowledge leakage",7],["cybersecurity",6],["cyber security",6],["economic coercion",5]]},
- {key:"trade-industry",name:"Trade, industry & economic security",terms:[["economic security",7],["industrial policy",7],["industrial competitiveness",7],["competitiveness",5],["manufacturing",5],["supply chain",4],["trade",4],["tariff",6],["investment screening",7],["foreign direct investment",6],["fdi",5],["sanction",5],["strategic autonomy",6],["strategic dependency",6],["de-risking",6],["derisking",6],["de-risk",6]]},
- {key:"digital-cyber",name:"Digital infrastructure & cyber",terms:[["digital infrastructure",8],["cloud",5],["telecom",6],["telecommunications",6],["5g",6],["6g",7],["submarine cable",7],["subsea cable",7],["data governance",6],["data space",6],["digital sovereignty",7],["platform",3],["cyber",5],["network security",6]]},
- {key:"space",name:"Space",terms:[["space",7],["satellite",8],["launch vehicle",8],["launcher",7],["esa",7],["copernicus",8],["galileo",8],["earth observation",7],["orbital",7]]},
- {key:"health-biotech",name:"Health & biotech",terms:[["biotech",8],["biotechnology",8],["life science",6],["health security",7],["health",4],["pharma",6],["pharmaceutical",6],["vaccine",7],["biomedical",7],["genomic",7],["bioeconomy",6]]},
- {key:"talent",name:"Talent, skills & mobility",terms:[["talent",7],["skills",6],["researcher mobility",8],["scientist mobility",8],["brain drain",8],["brain gain",8],["visa",6],["education",4],["doctoral",5],["phd",5],["migration",4],["workforce",5],["training",4]]},
- {key:"international",name:"International partnerships & geopolitics",terms:[["global gateway",8],["indo-pacific",7],["international cooperation",6],["international partnership",7],["association agreement",7],["associated country",6],["china",3],["chinese",3],["united states",3],[" u.s. ",3],[" us ",2],["japan",3],["south korea",3],["korea",2],["india",3],["taiwan",3],["ukraine",3],["russia",3],["africa",3],["latin america",3]]},
- {key:"foresight",name:"Foresight & methods",terms:[["foresight",9],["horizon scanning",9],["scenario planning",8],["scenario",6],["weak signal",8],["delphi",8],["backcasting",8],["anticipatory governance",8],["strategic intelligence",6],["futures literacy",8]]}
-];
-const OTHER={key:"other",name:"Other strategic R&I"};
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c])}
-function norm(s){return " "+String(s??"").toLowerCase().replace(/[–—]/g,"-").replace(/[^a-z0-9+.#/-]+/g," ").replace(/\s+/g," ").trim()+" "}
-function textOf(x){return [x.title,x.headline,x.summary,x.relevance_note,x.signal_note,x.anchor,x.source,x.type].filter(Boolean).join(" ")}
-function scoresFor(x){const text=norm(textOf(x));return TOPICS.map(t=>[t.terms.reduce((n,[term,w])=>n+(text.includes(norm(term))?w:0),0),t]).filter(([s])=>s>0).sort((a,b)=>b[0]-a[0])}
-function itemPublic(x,strand,fresh,related){let note=x.signal_note||x.summary||x.relevance_note||"No short summary is available in the radar record.";let rel=x.relevance_note&&x.relevance_note!==x.summary?x.relevance_note:"";return {title:x.title||x.headline||"Untitled item",source:x.source||"",date:String(x.date||"").slice(0,10),link:x.link||"",strand,fresh,type:x.type||"",signal_type:x.signal_type||"",note,relevance:rel,anchor:x.anchor||"",related_topics:related}}
-function fromRadar(d){const rows=[...(d.strand_a||[]).map(x=>[x,"A",!!x.new_this_scan]),...(d.strand_b||[]).map(x=>[x,"B",!!x.new_this_scan]),...(d.strand_c||[]).map(x=>[x,"C",true])];const buckets=Object.fromEntries([...TOPICS,OTHER].map(t=>[t.key,[]]));for(const [x,strand,fresh] of rows){const ss=scoresFor(x);let primary=OTHER,related=[];if(ss.length){primary=ss[0][1];const threshold=Math.max(4,Math.floor(ss[0][0]/2));related=ss.slice(1,4).filter(([s])=>s>=threshold).map(([,t])=>t.name)}buckets[primary.key].push(itemPublic(x,strand,fresh,related))}const topics=[...TOPICS,OTHER].map(t=>({key:t.key,name:t.name,items:buckets[t.key].sort((a,b)=>(Number(b.fresh)-Number(a.fresh))||String(b.date).localeCompare(String(a.date))),count:buckets[t.key].length})).filter(t=>t.count);return {radar_last_updated:d.last_updated,scan_health:d.scan_health,counts:{items:rows.length,fresh_ab:rows.filter(([,s,f])=>s!=="C"&&f).length,current_c:rows.filter(([,s])=>s==="C").length,cumulative_ab:rows.filter(([,s])=>s!=="C").length},topics}}
-function card(x){const href=x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.title)}</a>`:esc(x.title);const chips=[`<span class="chip">Strand ${esc(x.strand)}</span>`,x.fresh?'<span class="chip fresh">NEW / CURRENT</span>':"",x.signal_type?`<span class="chip">${esc(x.signal_type)}</span>`:"",x.type?`<span class="chip">${esc(x.type)}</span>`:""].join("");const meta=[x.source,x.date].filter(Boolean).map(esc).join(" · ");const rel=x.relevance?`<div class="relevance"><strong>Radar relevance:</strong> ${esc(x.relevance)}</div>`:"";const anchor=x.anchor?`<div class="anchor"><strong>Anchor:</strong> ${esc(x.anchor)}</div>`:"";const related=x.related_topics?.length?`<div class="related-row"><span>Also touches:</span>${x.related_topics.map(v=>`<span class="related">${esc(v)}</span>`).join("")}</div>`:"";return `<li class="insight-item"><div class="chips">${chips}</div><h3>${href}</h3><div class="meta">${meta}</div><p>${esc(x.note)}</p>${rel}${anchor}${related}</li>`}
-function render(b,mode){const c=b.counts||{};document.getElementById("stats").innerHTML=`<span class="stat">${c.items||0} radar items</span><span class="stat">${c.fresh_ab||0} fresh A/B</span><span class="stat">${c.current_c||0} current C signals</span><span class="stat">scan health: ${esc(b.scan_health||"unknown")}</span>`;document.getElementById("topicNav").innerHTML=(b.topics||[]).map(t=>`<a href="#${esc(t.key)}">${esc(t.name)} <span>${t.count}</span></a>`).join("");document.getElementById("topics").innerHTML=(b.topics||[]).map(t=>`<section class="topic" id="${esc(t.key)}"><div class="topic-head"><div><div class="eyebrow">Topic</div><h2>${esc(t.name)}</h2></div><div class="topic-count">${t.count} item${t.count===1?"":"s"}</div></div><ul class="insight-list">${t.items.map(card).join("")}</ul></section>`).join("")||'<div class="empty">No radar items are available yet.</div>';document.getElementById("footerLine").textContent=`Radar updated: ${b.radar_last_updated||"not available"}. ${mode}`}
-(async()=>{try{const r=await fetch("briefing.json?ts="+Date.now(),{cache:"no-store"});if(r.ok){const b=await r.json();if(Array.isArray(b.topics)){render(b,"Using the generated topic digest.");return}}}catch(e){}try{const r=await fetch("../radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();render(fromRadar(await r.json()),"Live topic grouping directly from the main radar while the digest workflow updates.")}catch(e){document.getElementById("stats").innerHTML='<span class="stat">Radar data unavailable</span>';document.getElementById("topics").innerHTML='<div class="empty">The page is installed, but radar.json could not be loaded yet.</div>'}})();
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(groups){
+  const root=document.getElementById('insights');
+  if(!groups.length){root.innerHTML='<p class="state">No radar items are available yet.</p>';return}
+  root.innerHTML=groups.map(g=>`<section class="topic"><h2>${esc(g.name)}</h2><ul>${g.items.map(x=>`<li>${esc(x.point)}</li>`).join('')}</ul></section>`).join('');
+}
+(async()=>{
+  try{
+    const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('radar.json unavailable');
+    render(RadarInsights.buildInsights(await r.json()));
+  }catch(e){
+    document.getElementById('insights').innerHTML='<p class="state">Radar data is not available yet.</p>';
+  }
+})();
 </script>
-</body></html>
+</body>
+</html>

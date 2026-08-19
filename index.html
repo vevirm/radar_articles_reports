@@ -14,12 +14,11 @@
     #app{display:none}header{border-bottom:1px solid var(--line);padding:44px 0 26px}.topline{display:flex;justify-content:space-between;gap:18px;align-items:start}.kicker{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
     h1{font-size:clamp(39px,6vw,70px);line-height:1;margin:8px 0 12px;letter-spacing:-.05em}.intro{max-width:840px;font-size:17px;color:var(--muted);margin:0}.lock{background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px 10px;font-size:12px;white-space:nowrap}
     .status{display:flex;gap:9px;flex-wrap:wrap;margin-top:21px}.pill,.tag{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:12px;color:var(--muted)}.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}
-    nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}nav a{text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px}nav a.insights{background:var(--text);color:#fff;border-color:var(--text);font-weight:800;padding:9px 15px}
-    .insights-spotlight{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;margin-top:24px;padding:24px 25px;border-radius:18px;background:var(--text);color:#fff;box-shadow:0 13px 38px rgba(0,0,0,.10)}.insights-spotlight .spot-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#e3b9bb}.insights-spotlight h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.035em;line-height:1.05;margin:5px 0 8px}.insights-spotlight p{margin:0;color:#d8d8d4;max-width:820px}.insights-live{margin-top:10px!important;font-size:12px;color:#aaa9a5!important}.insights-cta{display:inline-flex;align-items:center;justify-content:center;text-decoration:none!important;background:#fff;color:var(--text);border-radius:999px;padding:11px 15px;font-size:13px;font-weight:800;white-space:nowrap}
+    nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}nav a{text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:13px}nav a.insights{background:var(--text);color:#fff;border-color:var(--text);font-weight:700}
     main{padding:18px 0 70px}.strand{margin-top:38px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;border-bottom:2px solid var(--text);padding-bottom:12px}.section-head h2{font-size:24px;letter-spacing:-.03em;margin:0}.section-head p{margin:6px 0 0;color:var(--muted);max-width:880px;font-size:14px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
     .scan-note{display:none;margin-top:14px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--soft);font-size:13px}.item{display:grid;grid-template-columns:150px 1fr;gap:25px;padding:25px 0;border-bottom:1px solid var(--line)}.meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.item h3{font-size:21px;line-height:1.28;letter-spacing:-.02em;margin:0 0 7px}.item h3 a{text-decoration:none}.item h3 a:hover{text-decoration:underline;text-underline-offset:3px}.byline,.source{font-size:13px;color:var(--muted);margin:2px 0}.summary{margin:10px 0 0;max-width:950px}.relevance{font-weight:650;font-size:14px;margin-top:10px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}.tag{padding:3px 8px;font-size:11px}.tag.new{color:var(--accent);border-color:#d8a6a9}.empty{padding:26px 0;color:var(--muted)}.anchor{font-size:14px;margin-top:8px}.signal-note{margin-top:9px}.signal-type{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:var(--accent)}
     .method{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:13px}.method strong{color:var(--text)}footer{border-top:1px solid var(--line);padding:22px 0 35px;color:var(--muted);font-size:12px}
-    @media(max-width:720px){.topline{flex-direction:column}.insights-spotlight{grid-template-columns:1fr}.insights-cta{justify-self:start}.item{grid-template-columns:1fr;gap:7px}.section-head{align-items:start;flex-direction:column}.count{white-space:normal}.gate-row{flex-direction:column}}
+    @media(max-width:720px){.topline{flex-direction:column}.item{grid-template-columns:1fr;gap:7px}.section-head{align-items:start;flex-direction:column}.count{white-space:normal}.gate-row{flex-direction:column}}
   </style>
 </head>
 <body>
@@ -53,11 +52,7 @@
           <span id="scanState" class="pill warn">Scanner: first run pending</span>
           <span id="lastScan" class="pill">Last scan: pending</span>
         </div>
-        <nav><a class="insights" href="briefing/">Radar insights — topics</a><a href="#strand-a">Strand A</a><a href="#strand-b">Strand B</a><a href="#strand-c">Strand C</a></nav>
-        <section class="insights-spotlight" aria-label="Radar insights briefing">
-          <div><div class="spot-kicker">Topic digest</div><h2>Radar insights: the radar sorted by subject</h2><p>Scan the same admitted radar material under practical headings such as raw materials, research, AI, energy, security, trade, space and more — with each item listed once and linked back to its source.</p><p id="insightsSummary" class="insights-live">The latest admitted radar material feeds this briefing automatically.</p></div>
-          <a class="insights-cta" href="briefing/">Open Radar insights →</a>
-        </section>
+        <nav><a class="insights" href="briefing/?v=7">Radar insights</a><a href="#strand-a">Strand A</a><a href="#strand-b">Strand B</a><a href="#strand-c">Strand C</a></nav>
       </div>
     </header>
 
@@ -103,7 +98,6 @@ async function loadRadar(){
     document.getElementById("countA").textContent=`${A.length} item${A.length===1?"":"s"} in corpus`;
     document.getElementById("countB").textContent=`${B.length} item${B.length===1?"":"s"} in corpus`;
     document.getElementById("countC").textContent=`${C.length} signal${C.length===1?"":"s"}`;
-    const freshAB=[...A,...B].filter(x=>x.new_this_scan).length;const insightSummary=document.getElementById("insightsSummary");if(insightSummary)insightSummary.textContent=`Latest briefing input: ${freshAB} fresh A/B item${freshAB===1?"":"s"}, ${C.length} current weak signal${C.length===1?"":"s"}, and ${A.length+B.length} cumulative A/B item${A.length+B.length===1?"":"s"}.`;
     document.getElementById("itemsA").innerHTML=A.length?A.map(abItem).join(""):empty(d.first_scan_complete?"No accepted Strand A publications in the current corpus.":"First scan has not completed yet.");
     document.getElementById("itemsB").innerHTML=B.length?B.map(abItem).join(""):empty(d.first_scan_complete?"No accepted Strand B publications in the current corpus.":"First scan has not completed yet.");
     document.getElementById("itemsC").innerHTML=C.length?C.map(cItem).join(""):empty(d.first_scan_complete?"No qualifying anchored weak signals in this scan.":"First scan has not completed yet.");

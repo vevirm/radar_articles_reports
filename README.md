@@ -38,13 +38,6 @@ Factual current-window news from the whitelist only. Every item must anchor to a
 
 The full human-readable standard is in `radar_criteria.md`.
 
-
-## Radar insights
-
-The visible **Radar insights** entry point opens a topical digest of the SAME material already shown by the radar. Instead of adding a second narrative analysis, it assigns every admitted item to one primary subject heading (for example Raw materials, Research, AI, Energy, Security, Trade, Space, Health, Talent or Foresight). Each item is listed once, with source/date/link and Strand information preserved; strong secondary matches appear only as small “Also touches” tags.
-
-The topic-digest builder does not fetch or admit new material and does not modify `radar.json`; scanner/classifier logic remains separate. A live fallback page can also derive concrete evidence directly from the current radar while a generated topic-digest build is pending.
-
 ## Password gate
 
 The page uses the simple casual-visitor password gate requested for this radar. Password: `TutuRadar2026?`

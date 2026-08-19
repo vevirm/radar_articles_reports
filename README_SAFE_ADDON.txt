@@ -1,40 +1,52 @@
-RADAR INSIGHTS — SAFE TOPIC-DIGEST ADD-ON
-==========================================
+RADAR INSIGHTS — SIMPLE TOPIC BULLETS V7
+========================================
 
-Purpose
--------
-Radar insights is a subject view of the material already admitted to radar.json.
-It is not a second scanner and it does not create a separate narrative analysis.
+The main radar and its scanner remain the source of truth.
 
-The page groups the existing radar items under practical headings such as:
-- Raw materials & supply chains
-- Research & science
-- AI & compute
-- Chips, quantum & critical tech
-- Energy & climate tech
-- Security, defence & dual use
-- Trade, industry & economic security
-- Digital infrastructure & cyber
-- Space
-- Health & biotech
-- Talent, skills & mobility
-- International partnerships & geopolitics
-- Foresight & methods
+INSIGHTS PAGE
+-------------
+Path: /briefing/
 
-Each radar item is assigned to ONE primary heading to avoid repetition. If it also
-strongly touches another subject, that appears only as a small secondary tag.
+The page reads the existing ../radar.json directly in the browser.
+There is no briefing.json and no separate briefing workflow.
 
-The bullet wording, source, date, link, Strand and any Strand C anchor come from
-the existing radar record. The topic builder does not fetch new evidence and does
-not modify radar.json.
+For every admitted radar item the page:
+1. deduplicates items that appear in more than one strand,
+2. assigns the item to one primary topic,
+3. extracts one concise substantive point,
+4. shows that point as one bullet under the topic heading.
 
-Timing
+VISIBLE OUTPUT
+--------------
+Only:
+- topic heading
+- bullet
+- bullet
+
+There are no source labels, dates, Strand badges, evidence panels, topic counts,
+"also touches" tags, relevance notes, or methodology boxes on the Insights page.
+
+TOPICS
 ------
-The workflow runs on installation/update and again after every successful radar
-scan, so the topic digest follows the live corpus automatically.
+Raw materials
+Research
+AI
+Semiconductors & quantum
+Energy
+Security & defence
+Trade & industry
+Digital & cyber
+Space
+Health & biotech
+Talent & skills
+International partnerships
+Foresight
+Other strategic R&I
 
-Safety
+SAFETY
 ------
-The workflow checks that radar.json is populated, records its checksum, builds
-only briefing/index.html and briefing/briefing.json, verifies the checksum again,
-and stages only files under briefing/.
+radar.json is intentionally NOT included in this package.
+Do not delete the existing live radar.json when uploading the repository.
+
+The original scanner, scanner configuration, and radar-scan workflow are kept
+unchanged. Insights only reads their output.

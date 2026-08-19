@@ -1,106 +1,47 @@
-R&I × GEOPOLITICS RADAR — FULL SAFE REPERTOIRE
-=================================================
+R&I × GEOPOLITICS RADAR — FULL SAFE REPOSITORY V7
+==================================================
 
-THIS IS THE COMPLETE SAFE UPDATE PACKAGE FOR AN EXISTING REPOSITORY.
+THIS ZIP IS FOR UPLOADING OVER THE EXISTING GITHUB REPOSITORY.
 
-WHAT REMAINS IN PLACE
----------------------
-Your existing live radar.json is intentionally NOT included in this ZIP.
+IMPORTANT
+---------
+The live radar.json is intentionally NOT included.
+Do not delete radar.json from the GitHub repository before uploading this ZIP.
+That preserves the accumulated radar corpus.
 
-That is a safety feature, not a missing file.
+MAIN RADAR
+----------
+The main radar, scanner logic, radar configuration, and normal radar-scan
+workflow are preserved from the original safe package.
 
-When you upload this package over the existing GitHub repository:
-- the accumulated Strand A results remain
-- the accumulated Strand B results remain
-- the current Strand C signals remain until the normal scanner refreshes them
-- the scanner continues merging into the existing corpus
-- the normal scheduled scans remain active
+RADAR INSIGHTS
+--------------
+The existing /briefing/ address is now the simple Insights page.
+It reads ../radar.json directly. Nothing generates or overwrites it.
 
-DO NOT DELETE radar.json FROM THE REPOSITORY BEFORE UPLOADING THIS PACKAGE.
+The page does exactly this:
+- classify each radar item into one primary topic,
+- deduplicate the same item across strands,
+- extract one clear point from the radar text,
+- show one bullet for that point under the topic heading.
 
-WHAT THIS PACKAGE CONTAINS
---------------------------
-Main radar:
-- index.html
-- scripts/scan_radar.py
-- radar_config.json
-- radar_criteria.md
-- requirements.txt
-- robots.txt
-- .nojekyll
-- .gitignore
+It does NOT show sources, dates, Strand labels, evidence, counts, cards,
+relevance notes, tags, or long abstracts.
 
-Radar workflow and recovery protection:
-- .github/workflows/radar-scan.yml
-- WORKFLOW_BACKUP/radar-scan.yml
-- recovery-aware scanner logic
-- classifier/recovery tests
-
-Radar insights topic page:
+There is intentionally NO:
 - .github/workflows/radar-briefing.yml
 - scripts/build_briefing.py
-
-RADAR INSIGHTS TIMING
------------------
-FIRST:
-Uploading/updating this package triggers the topic-digest builder immediately on the
-radar material that ALREADY exists.
-
-NORMAL RHYTHM:
-Immediately after every successful "R&I Radar Scan", the Radar insights workflow groups
-the newly updated radar material.
-
-MANUAL:
-Actions -> R&I Radar Briefing -> Run workflow runs the topic-digest update immediately.
-
-RADAR INSIGHTS OUTPUT
------------------
-The main radar gives Radar insights a prominent topic-digest panel and link to /briefing/.
-The /briefing/ page reorganises the SAME admitted radar material under subject headings such as:
-- Raw materials & supply chains
-- Research & science
-- AI & compute
-- Chips, quantum & critical tech
-- Energy & climate tech
-- Security, defence & dual use
-- Trade, industry & economic security
-- Digital infrastructure & cyber
-- Space
-- Health & biotech
-- Talent, skills & mobility
-- International partnerships & geopolitics
-- Foresight & methods
-
-Each radar item appears under one primary heading only. Secondary matches are shown as small tags, not duplicated bullets. Source/date/link/Strand and Strand C anchors remain visible.
-
-SAFETY BOUNDARIES
------------------
-The briefing workflow:
-- only reads radar.json
-- stops if the radar corpus is missing, malformed, or unexpectedly empty
-- verifies radar.json's checksum before and after building
-- stages and commits ONLY briefing/index.html and briefing/briefing.json
-
-The scanner:
-- keeps the existing corpus as the master record
-- includes Git-history corpus recovery protection
+- briefing/briefing.json
 
 UPLOAD
 ------
-Upload the CONTENTS of this ZIP into the repository root, preserving:
-- .github/workflows/
-- scripts/
-- tests/
-- WORKFLOW_BACKUP/
+Upload the CONTENTS of this ZIP into the repository root, preserving folders
+such as .github/, briefing/, scripts/, tests/, and WORKFLOW_BACKUP/.
 
 Do not delete the existing radar.json.
 
-EXPECTED SEQUENCE
------------------
-1. Upload/commit the full package.
-2. Existing R&I Radar Scan may run immediately because scanner/site files changed.
-3. The Radar insights workflow groups the currently existing corpus immediately.
-4. The normal radar scan updates radar.json.
-5. Immediately after a successful radar scan, the Radar insights workflow groups the
-   refreshed corpus again.
-6. Future radar scans and briefing updates continue automatically.
+After GitHub Pages deploys, open:
+  /radar_articles_reports/briefing/?v=7
+
+The page contains the internal build marker "simple-topic-bullets-v7" so this
+version can be distinguished from older cached briefing pages.
