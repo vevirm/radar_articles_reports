@@ -16,7 +16,7 @@ class InsightsPageTests(unittest.TestCase):
 
     def test_main_radar_points_to_same_briefing_path_with_cache_bust(self):
         page=(ROOT/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="briefing/?v=7">Radar insights</a>',page)
+        self.assertIn('href="briefing/?v=8">Radar insights</a>',page)
 
     def test_old_generator_and_workflow_removed(self):
         self.assertFalse((ROOT/'scripts'/'build_briefing.py').exists())
@@ -38,6 +38,28 @@ if(!group('AI')) process.exit(4);
 for(const x of g.flatMap(x=>x.items)) if(!x.point || x.point.split(/\s+/).length>36) process.exit(5);
 const research=group('Research').items[0].point;
 if(!/introduce a new grant scheme/i.test(research)) process.exit(6);
+'''
+        subprocess.run(['node','-e',script],cwd=ROOT,check=True)
+
+    def test_document_debris_is_rejected(self):
+        script=r'''
+const I=require('./briefing/insights.js');
+const junk=[
+  '114 ANNEX 3: METHODOLOGY (EXTENDED) ........................................................................',
+  'ANNEX 2: TECHNICAL ANNEX',
+  'Table of contents',
+  'Page 114 of 230',
+  '118 APPENDIX A: METHODS __________________________'
+];
+for(const s of junk) if(!I.isDocumentDebris(s)) process.exit(2);
+const data={strand_a:[
+ {title:'Energy security review',summary:'114 ANNEX 3: METHODOLOGY (EXTENDED) ........................................................................',link:'junk'},
+ {title:'Nuclear supply diversification',summary:'European utilities plan to diversify nuclear fuel supply to reduce dependence on Russian suppliers.',link:'good'}
+],strand_b:[],strand_c:[]};
+const groups=I.buildInsights(data);
+const points=groups.flatMap(g=>g.items.map(x=>x.point));
+if(points.some(p=>/ANNEX|METHODOLOGY|\.{4,}/i.test(p))) process.exit(3);
+if(!points.some(p=>/diversify nuclear fuel supply/i.test(p))) process.exit(4);
 '''
         subprocess.run(['node','-e',script],cwd=ROOT,check=True)
 
