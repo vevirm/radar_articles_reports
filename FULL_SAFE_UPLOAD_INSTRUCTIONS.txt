@@ -36,33 +36,42 @@ Radar workflow and recovery protection:
 - recovery-aware scanner logic
 - classifier/recovery tests
 
-Issue subpage:
+Radar insights topic page:
 - .github/workflows/radar-briefing.yml
 - scripts/build_briefing.py
 
-ISSUE PAGE TIMING
+RADAR INSIGHTS TIMING
 -----------------
 FIRST:
-Uploading/updating this package triggers the issue analyzer immediately on the
+Uploading/updating this package triggers the topic-digest builder immediately on the
 radar material that ALREADY exists.
 
 NORMAL RHYTHM:
-Immediately after every successful "R&I Radar Scan", the issue workflow analyzes
+Immediately after every successful "R&I Radar Scan", the Radar insights workflow groups
 the newly updated radar material.
 
 MANUAL:
-Actions -> R&I Radar Briefing -> Run workflow runs the issue analysis immediately.
+Actions -> R&I Radar Briefing -> Run workflow runs the topic-digest update immediately.
 
-ISSUE PAGE OUTPUT
+RADAR INSIGHTS OUTPUT
 -----------------
-The main radar now gives Radar insights a prominent analytical briefing panel and link to /briefing/.
-The /briefing/ page keeps the big picture visible while adding detail:
-- ranked evidence concentrations
-- concrete admitted developments
-- why each issue matters
-- R&I decision implications and decision questions
-- what to watch next
-- source-level evidence, freshness and Strand C anchors
+The main radar gives Radar insights a prominent topic-digest panel and link to /briefing/.
+The /briefing/ page reorganises the SAME admitted radar material under subject headings such as:
+- Raw materials & supply chains
+- Research & science
+- AI & compute
+- Chips, quantum & critical tech
+- Energy & climate tech
+- Security, defence & dual use
+- Trade, industry & economic security
+- Digital infrastructure & cyber
+- Space
+- Health & biotech
+- Talent, skills & mobility
+- International partnerships & geopolitics
+- Foresight & methods
+
+Each radar item appears under one primary heading only. Secondary matches are shown as small tags, not duplicated bullets. Source/date/link/Strand and Strand C anchors remain visible.
 
 SAFETY BOUNDARIES
 -----------------
@@ -90,8 +99,8 @@ EXPECTED SEQUENCE
 -----------------
 1. Upload/commit the full package.
 2. Existing R&I Radar Scan may run immediately because scanner/site files changed.
-3. The issue scan also analyzes the currently existing corpus immediately.
+3. The Radar insights workflow groups the currently existing corpus immediately.
 4. The normal radar scan updates radar.json.
-5. Immediately after a successful radar scan, the issue workflow analyzes the
-   fresh material again.
+5. Immediately after a successful radar scan, the Radar insights workflow groups the
+   refreshed corpus again.
 6. Future radar scans and briefing updates continue automatically.

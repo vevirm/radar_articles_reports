@@ -1,58 +1,40 @@
-R&I RADAR BRIEFING — SAFE + IMMEDIATE
-=======================================
+RADAR INSIGHTS — SAFE TOPIC-DIGEST ADD-ON
+==========================================
 
-EXISTING RADAR
---------------
-Unchanged:
-- existing radar results stay in place
-- the existing R&I Radar Scan remains the scanner
-- the existing regular scan schedule stays unchanged
-- existing A/B/C logic stays unchanged
+Purpose
+-------
+Radar insights is a subject view of the material already admitted to radar.json.
+It is not a second scanner and it does not create a separate narrative analysis.
 
-ADDED SUBPAGE
--------------
-/briefing/
+The page groups the existing radar items under practical headings such as:
+- Raw materials & supply chains
+- Research & science
+- AI & compute
+- Chips, quantum & critical tech
+- Energy & climate tech
+- Security, defence & dual use
+- Trade, industry & economic security
+- Digital infrastructure & cyber
+- Space
+- Health & biotech
+- Talent, skills & mobility
+- International partnerships & geopolitics
+- Foresight & methods
 
-TIMING
+Each radar item is assigned to ONE primary heading to avoid repetition. If it also
+strongly touches another subject, that appears only as a small secondary tag.
+
+The bullet wording, source, date, link, Strand and any Strand C anchor come from
+the existing radar record. The topic builder does not fetch new evidence and does
+not modify radar.json.
+
+Timing
 ------
-1. FIRST RUN
-   Immediately when this add-on is uploaded/updated, analyze the radar material
-   that already exists.
+The workflow runs on installation/update and again after every successful radar
+scan, so the topic digest follows the live corpus automatically.
 
-2. NORMAL RHYTHM
-   Immediately after every successful "R&I Radar Scan", analyze the newest
-   radar material.
-
-3. MANUAL
-   The briefing workflow can also be run manually at any time.
-
-OUTPUT
+Safety
 ------
-The main visible output is a detailed but readable analytical briefing:
-- big-picture issue concentration at the top
-- concrete admitted developments surfaced early
-- why each issue matters for R&I
-- decision implications and decision questions
-- what to watch next
-- source-level evidence and Strand C anchors
-
-The issue labels organise the evidence; they no longer replace the detail.
-
-SAFETY
-------
-This package does NOT contain or replace:
-- radar.json
-- the main index.html
-- scripts/scan_radar.py
-- .github/workflows/radar-scan.yml
-- radar_config.json
-- radar_criteria.md
-
-The briefing reads radar.json, verifies that it did not change it, and commits
-ONLY briefing/index.html and briefing/briefing.json.
-
-FILES
------
-.github/workflows/radar-briefing.yml
-scripts/build_briefing.py
-README_SAFE_ADDON.txt
+The workflow checks that radar.json is populated, records its checksum, builds
+only briefing/index.html and briefing/briefing.json, verifies the checksum again,
+and stages only files under briefing/.
