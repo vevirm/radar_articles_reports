@@ -1,47 +1,22 @@
-R&I × GEOPOLITICS RADAR — FULL SAFE REPOSITORY V7
-==================================================
+FULL SAFE UPLOAD — INSIGHTS SIGNAL POINTS V9
 
-THIS ZIP IS FOR UPLOADING OVER THE EXISTING GITHUB REPOSITORY.
+This package preserves the existing live radar corpus by intentionally omitting radar.json.
+Upload/replace the repository files over the existing repository; do not delete the live radar.json.
 
-IMPORTANT
----------
-The live radar.json is intentionally NOT included.
-Do not delete radar.json from the GitHub repository before uploading this ZIP.
-That preserves the accumulated radar corpus.
+WHAT CHANGED
+- /briefing/ remains the Radar Insights page.
+- It reads ../radar.json directly.
+- It groups admitted radar items by topic.
+- Each visible bullet is a concise substantive signal derived from the radar item.
+- PDF/OCR debris, document headings, publisher suffixes and meta prose are filtered.
+- If no clear signal can be extracted, the item is omitted instead of showing filler.
+- No separate briefing.json or briefing workflow exists.
 
-MAIN RADAR
-----------
-The main radar, scanner logic, radar configuration, and normal radar-scan
-workflow are preserved from the original safe package.
-
-RADAR INSIGHTS
---------------
-The existing /briefing/ address is now the simple Insights page.
-It reads ../radar.json directly. Nothing generates or overwrites it.
-
-The page does exactly this:
-- classify each radar item into one primary topic,
-- deduplicate the same item across strands,
-- extract one clear point from the radar text,
-- show one bullet for that point under the topic heading.
-
-It does NOT show sources, dates, Strand labels, evidence, counts, cards,
-relevance notes, tags, or long abstracts.
-
-There is intentionally NO:
-- .github/workflows/radar-briefing.yml
-- scripts/build_briefing.py
-- briefing/briefing.json
-
-UPLOAD
-------
-Upload the CONTENTS of this ZIP into the repository root, preserving folders
-such as .github/, briefing/, scripts/, tests/, and WORKFLOW_BACKUP/.
-
-Do not delete the existing radar.json.
+WHAT DID NOT CHANGE
+- scripts/scan_radar.py
+- radar_config.json
+- .github/workflows/radar-scan.yml
+- the main radar presentation, apart from the Insights link cache-bust version
 
 After GitHub Pages deploys, open:
-  /radar_articles_reports/briefing/?v=7
-
-The page contains the internal build marker "simple-topic-bullets-v7" so this
-version can be distinguished from older cached briefing pages.
+  /radar_articles_reports/briefing/?v=9

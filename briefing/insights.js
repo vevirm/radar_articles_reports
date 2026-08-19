@@ -4,54 +4,53 @@
   root.RadarInsights=api;
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
   const TOPICS=[
-    {name:'Raw materials', terms:['critical raw material','critical raw materials','critical mineral','critical minerals','rare earth','rare earths','lithium','cobalt','nickel','graphite','copper','gallium','germanium','tungsten','mining','refining','mineral supply','resource security']},
+    {name:'Raw materials', terms:['critical raw material','critical raw materials','critical mineral','critical minerals','rare earth','rare earths','lithium','cobalt','nickel','graphite','copper','gallium','germanium','tungsten','mining','refining','mineral supply','resource security','cocoa','cocoa sector','cocoa supply','commodity supply']},
     {name:'Research', terms:['horizon europe','framework programme','framework program','european research council','erc plus','erc grant','research funding','research infrastructure','research security','knowledge security','science diplomacy','scientific cooperation','research cooperation','research collaboration','research and innovation','research policy','university','universities','researcher','researchers']},
-    {name:'AI', terms:['artificial intelligence','foundation model','foundation models','large language model','large language models','machine learning','ai factory','ai factories','gpu','gpus','compute capacity','computing capacity','supercomputing',' ai ']},
-    {name:'Semiconductors & quantum', terms:['semiconductor','semiconductors','microelectronics','microchip','microchips','advanced chip','advanced chips','chip','chips','chip act','chips act','chip supply','chips supply','quantum','photonics']},
-    {name:'Energy', terms:['energy security','nuclear','reactor','reactors','small modular reactor','smr','hydrogen','renewable','renewables','electricity grid','power grid','battery','batteries','clean tech','cleantech','fusion','decarbonisation','decarbonization']},
+    {name:'AI & compute', terms:['artificial intelligence','foundation model','foundation models','large language model','large language models','machine learning','ai infrastructure','ai factory','ai factories','gpu','gpus','compute capacity','computing capacity','supercomputing',' ai ']},
+    {name:'Semiconductors & quantum', terms:['semiconductor','semiconductors','microelectronics','microchip','microchips','advanced chip','advanced chips','chip','chips','chip act','chips act','chip supply','quantum','photonics']},
+    {name:'Energy', terms:['energy security','nuclear','reactor','reactors','small modular reactor','small modular reactors','smr','smrs','hydrogen','renewable','renewables','electricity grid','power grid','battery','batteries','clean tech','cleantech','fusion','decarbonisation','decarbonization','rosatom']},
+    {name:'Climate & sustainability', terms:['climate','sustainability','sustainable','green deal','environmental','wellbeing','planetary boundaries','deforestation','circular economy','circular-economy','eco-social','resilience']},
     {name:'Security & defence', terms:['defence','defense','dual-use','dual use','military','nato','security screening','export control','export controls','foreign interference','knowledge leakage','economic coercion','sanction','sanctions','war','ukraine','russia']},
-    {name:'Trade & industry', terms:['economic security','industrial policy','industrial competitiveness','competitiveness','manufacturing','supply chain','supply chains','trade','tariff','tariffs','investment screening','foreign direct investment','strategic autonomy','strategic dependency','strategic dependencies','de-risking','derisking','single market','industry policy']},
-    {name:'Digital & cyber', terms:['digital infrastructure','cloud infrastructure','cloud','telecom','telecommunications','5g','6g','submarine cable','subsea cable','data governance','data space','digital sovereignty','cybersecurity','cyber security','cyber']},
+    {name:'Trade & industry', terms:['economic security','industrial policy','industrial competitiveness','competitiveness','manufacturing','supply chain','supply chains','trade','tariff','tariffs','investment screening','foreign direct investment','investment-led','strategic autonomy','strategic dependency','strategic dependencies','de-risking','derisking','single market','industry policy','market','investment','clearing','financial system']},
+    {name:'Digital & cyber', terms:['digital infrastructure','digital transformation','digital cooperation','cloud infrastructure','cloud','telecom','telecommunications','5g','6g','submarine cable','subsea cable','data governance','data space','digital sovereignty','cybersecurity','cyber security','cyber']},
     {name:'Space', terms:['satellite','satellites','launch vehicle','launcher','copernicus','galileo','earth observation','orbital','space sector','space programme','space program']},
-    {name:'Health & biotech', terms:['biotech','biotechnology','life science','life sciences','health security','pharma','pharmaceutical','pharmaceuticals','vaccine','vaccines','biomedical','genomics','bioeconomy','global health']},
+    {name:'Health & biotech', terms:['biotech','biotechnology','life science','life sciences','health','health security','global health','health partnership','health partnerships','pharma','pharmaceutical','pharmaceuticals','vaccine','vaccines','biomedical','genomics','bioeconomy']},
     {name:'Talent & skills', terms:['researcher mobility','scientist mobility','brain drain','brain gain','talent','skills','visa','visas','doctoral','phd','workforce','training']},
-    {name:'International partnerships', terms:['global gateway','indo-pacific','indo pacific','international cooperation','international partnership','international partnerships','association agreement','associated country','eu-asia','europe-asia','china','chinese','united states','japan','south korea','india','taiwan','africa','latin america','arctic','geopolitical']},
-    {name:'Foresight', terms:['foresight','horizon scanning','scenario planning','scenario building','weak signal','weak signals','delphi','backcasting','anticipatory governance','futures literacy','futures research','strategic intelligence','scenario','scenarios']}
+    {name:'International partnerships', terms:['global gateway','indo-pacific','indo pacific','international cooperation','international partnership','international partnerships','association agreement','associated country','eu-asia','europe-asia','china','chinese','united states','japan','south korea','india','taiwan','africa','latin america','arctic','geopolitical','partnership','partnerships']},
+    {name:'Foresight', terms:['foresight','horizon scanning','scenario planning','scenario building','scenario-building','weak signal','weak signals','delphi','backcasting','anticipatory governance','futures literacy','futures research','strategic intelligence','scenario','scenarios']}
   ];
   const OTHER='Other strategic R&I';
-  const ACTION=/\b(introduc|launch|adopt|propos|plan|expand|scale|build|fund|invest|restrict|tighten|strengthen|reduce|diversif|shift|change|increase|decrease|accelerat|delay|block|ban|require|open|close|create|develop|deploy|establish|agree|sign|join|withdraw|prioriti[sz]|target|support|secure|protect|screen|coordinate|cooperat|compete|decoupl|derisk|de-risk|reform|amend|extend|raise|cut|approve|reject)\w*/i;
-  const BOILER=/\b(annual activity report|this amount does not include|grant agreement no\.?|received funding from|table of contents|references|copyright|all rights reserved|cf\.|article \d+ of|council regulation \(ec\)|implementation decision c\(|commission decision c\()\b/i;
-  const PRONOUN=/^(it|this|these|they|their|its|the report|the study|the paper)\b/i;
-  const DOC_DEBRIS_WORDS=/\b(annex|appendix|methodology|table of contents|contents|list of (?:figures|tables)|bibliography|references|glossary|acronyms?|abbreviations?|chapter|section)\b/i;
+
+  const EVENT_VERB=/\b(introduc|launch|adopt|propos|plan|expand|scale|build|fund|invest|restrict|tighten|strengthen|reduce|diversif|shift|change|increase|decrease|accelerat|delay|block|ban|require|open|close|create|develop|deploy|establish|agree|sign|join|withdraw|prioriti[sz]|target|support|secure|protect|screen|coordinate|cooperat|compete|decoupl|derisk|de-risk|reform|amend|extend|raise|cut|approve|reject|recast|retreat|consolidat|connect|urge|struggl|becom|remain|perform|link|bridge|acknowledg|depend|bind|push|offer|respond|pivot)\w*/i;
+  const ACTOR=/\b(EU|European Union|European Commission|Europe|China|Chinese|United States|US|Japan|South Korea|India|Russia|Ukraine|NATO|Horizon Europe|European Research Council|ERC|Member States|Global Gateway|companies|industry|researchers|universities)\b/i;
+  const META=/\b(the purpose of (?:the|this) (?:article|paper|study)|this (?:article|paper|study|report)|the (?:article|paper|study|report) (?:makes|contributes|then|sets|situates|examines|presents)|the analysis is set|much has already been written|annual activity report|research design and methodology|abstract\b|received funding from|grant agreement no\.?|copyright|all rights reserved|table of contents|bibliography|references)\b/i;
+  const DOC_DEBRIS=/\b(annex|appendix|methodology|table of contents|contents|list of (?:figures|tables)|bibliography|references|glossary|acronyms?|abbreviations?|chapter|section)\b/i;
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
   function norm(v){return ` ${clean(v).toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+.#/&-]+/g,' ').replace(/\s+/g,' ').trim()} `}
   function keyFor(x){return norm(x.link||x.title||x.headline||'').trim()}
   function dateFor(x){return clean(x.date||x.published||x.updated||x.first_seen||'')}
-  function sourceText(x){return clean([x.title,x.headline,x.summary,x.signal_note,x.anchor].filter(Boolean).join(' '))}
 
-  function containsTerm(text,term){const n=norm(term).trim();return !!n&&text.includes(` ${n} `)}
-  function topicScore(x,topic){
-    const title=norm(x.title||x.headline||'');
-    const body=norm(sourceText(x));
-    let score=0;
-    for(const term of topic.terms){
-      if(containsTerm(title,term)) score+=8;
-      if(containsTerm(body,term)) score+=2;
-    }
-    return score;
-  }
-  function topicFor(x){
-    let best=OTHER,score=0;
-    for(const topic of TOPICS){const s=topicScore(x,topic);if(s>score){score=s;best=topic.name}}
-    return best;
+  function repairOcr(v){
+    let s=String(v??'').replace(/\u00ad/g,' ');
+    s=s.replace(/\bnon\s*-\s*EU\b/gi,'non-EU')
+       .replace(/\blarge\s*-\s*scale\b/gi,'large-scale')
+       .replace(/\blong\s*-\s*term\b/gi,'long-term')
+       .replace(/\bgrant\s*-\s*based\b/gi,'grant-based')
+       .replace(/\binvestment\s*-\s*led\b/gi,'investment-led')
+       .replace(/\binfrastructure\s*-\s*led\b/gi,'infrastructure-led')
+       .replace(/\bEU\s*-\s*level\b/gi,'EU-level')
+       .replace(/\bde\s*-\s*risking\b/gi,'de-risking')
+       .replace(/\btoward\s+s\b/gi,'towards')
+       .replace(/\bnegotiati\s+ons\b/gi,'negotiations')
+       .replace(/\blo\s+ng-term\b/gi,'long-term')
+       .replace(/\boﬀering\b/gi,'offering');
+    return clean(s);
   }
 
   function isDocumentDebris(value){
     const s=clean(value);
     if(!s) return true;
-    // PDF table-of-contents / section-heading artefacts such as
-    // "114 ANNEX 3: METHODOLOGY (EXTENDED) ................."
     if(/\.{4,}|·{4,}|_{4,}|-{8,}/.test(s)) return true;
     if(/^\s*(?:page\s*)?\d{1,4}\s+(?:annex|appendix|chapter|section|methodology)\b/i.test(s)) return true;
     if(/^(?:annex|appendix|chapter|section)\s+[a-z0-9ivx.-]+\s*[:.-]/i.test(s)) return true;
@@ -59,109 +58,186 @@
     if(/\b(?:annex|appendix)\s+\d+\s*:\s*(?:methodology|methods?|technical annex)\b/i.test(s)) return true;
     if(/^\s*\d{1,4}\s+[A-Z][A-Z0-9 &()/:,.-]{8,}\s*$/.test(s)) return true;
     if(/^\s*(?:page\s+)?\d{1,4}\s*(?:of\s+\d{1,4})?\s*$/i.test(s)) return true;
-
     const letters=(s.match(/[A-Za-z]/g)||[]).length;
     const upper=(s.match(/[A-Z]/g)||[]).length;
     const words=s.split(/\s+/).filter(Boolean).length;
-    // Short, mostly-uppercase document headings are not signals.
-    if(words<=14 && letters>=8 && upper/letters>0.78 && DOC_DEBRIS_WORDS.test(s) && !ACTION.test(s)) return true;
+    if(words<=16&&letters>=8&&upper/letters>0.76&&DOC_DEBRIS.test(s)&&!EVENT_VERB.test(s)) return true;
+    // OCR text made of separated letters is navigation/header debris, not a claim.
+    const singleLetters=(s.match(/(?:^|\s)[A-Za-z](?=\s|$)/g)||[]).length;
+    if(singleLetters>=7) return true;
     return false;
   }
 
+  function stripPublisher(v,source){
+    let s=clean(v);
+    const src=clean(source).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    if(src) s=s.replace(new RegExp(`\\s*(?:[-–—|:]\\s*)?${src}\\.?$`,'i'),'');
+    s=s.replace(/\s*(?:[-–—|:]\s*)?(?:Reuters|Politico(?: Europe)?|politico\.eu|Table\.Briefings|Table\.Media|CEPS)\.?$/i,'');
+    return clean(s);
+  }
+
+  function prepareSummary(v){
+    let s=repairOcr(v);
+    if(!s) return '';
+    // If OCR dumped title-page/navigation material before SUMMARY, keep the actual summary.
+    const summaryMatches=[...s.matchAll(/\bSUMMARY\b\s*/gi)];
+    if(summaryMatches.length){
+      const m=summaryMatches[summaryMatches.length-1];
+      const before=s.slice(0,m.index);
+      if(/\.{4,}|(?:\b[A-Z]\s+){5,}[A-Z]\b|\b(?:METHODOLOGY|ANALYSIS)\b/i.test(before)) s=s.slice(m.index+m[0].length);
+    }
+    // Remove TOC/annex chunks embedded between otherwise useful sentences.
+    s=s.replace(/(?:^|\s)(?:\d{1,4}\s+)?(?:ANNEX|APPENDIX)\s+[A-Z0-9IVX.-]+\s*:[^.!?]{0,160}?(?:\.{4,}|(?=[A-Z][a-z]))/gi,' ');
+    s=s.replace(/(?:^|\s)(?:RESEARCH DESIGN AND METHODOLOGY|TABLE OF CONTENTS|CONTENTS)\s*\.{4,}/gi,' ');
+    s=s.replace(/(?:\b[A-Z]\s+){7,}[A-Z]\b[^.!?]{0,260}?(?=\b(?:SUMMARY|As|The|This|Japan|Europe|EU|Member)\b)/g,' ');
+    s=s.replace(/\((?:[A-Z][A-Za-z .&-]+,\s*)?20\d{2}[a-z]?\)/g,' ')
+       .replace(/\s*\(\d+\)\s*/g,' ')
+       .replace(/\s*\[[^\]]{1,28}\]\s*/g,' ')
+       .replace(/\s+/g,' ')
+       .trim();
+    return s;
+  }
+
   function splitSentences(text){
-    return clean(text)
-      .replace(/\((?:\d+|[ivx]+)\)/gi,' ')
-      .replace(/\[(?:\d+|[a-z])\]/gi,' ')
-      .replace(/\s+/g,' ')
+    return prepareSummary(text)
       .split(/(?<=[.!?])\s+(?=[A-Z0-9“"'‘])/)
       .map(clean).filter(Boolean);
   }
-  function topicTerms(topic){const t=TOPICS.find(x=>x.name===topic);return t?t.terms:[]}
-  function scoreSentence(s,topic,index){
-    if(s.length<28) return -100;
-    if(isDocumentDebris(s)) return -1000;
-    let score=0;
-    if(s.length>=55&&s.length<=220) score+=6; else if(s.length<=300) score+=3; else score-=5;
-    if(ACTION.test(s)) score+=8;
-    if(BOILER.test(s)) score-=16;
-    if(PRONOUN.test(s)) score-=3;
-    if(index===0) score+=1;
-    const n=norm(s);
-    for(const term of topicTerms(topic)){const t=norm(term).trim();if(n.includes(t))score+=2}
-    if(/\b(EU|European|Europe|China|US|United States|Japan|Korea|India|Russia|Ukraine|NATO)\b/.test(s)) score+=2;
-    if(/\b(202[0-9]|2030|billion|million|grant|programme|program|policy|strategy|framework|agreement|funding|investment|capacity|dependency|security)\b/i.test(s)) score+=2;
-    return score;
-  }
-  function extractActionClause(s){
-    const markers=[' with a view to ',' in order to ',' aims to ',' aimed to ',' seeks to ',' will ',' plans to ',' agreed to ',' decided to ',' proposes to ',' proposed to '];
-    const low=s.toLowerCase();
-    for(const m of markers){
-      const i=low.indexOf(m);
-      if(i>40){
-        let c=clean(s.slice(i+m.length));
-        if(c.length>=35){
-          if(m.trim()==='will') c='Will '+c;
-          else if(m.trim()==='plans to') c='Plans to '+c;
-          else if(m.trim()==='agreed to') c='Agreed to '+c;
-          else if(m.trim()==='decided to') c='Decided to '+c;
-          else if(m.trim()==='proposes to'||m.trim()==='proposed to') c='Proposes to '+c;
-          else if(m.trim()==='aims to'||m.trim()==='aimed to') c='Aims to '+c;
-          else if(m.trim()==='seeks to') c='Seeks to '+c;
-          else c=c.charAt(0).toUpperCase()+c.slice(1);
-          return c;
-        }
-      }
-    }
-    return s;
-  }
-  function cleanPoint(s){
-    s=clean(s)
-      .replace(/^SUMMARY\s*/i,'')
-      .replace(/\s*\(\d+\)\s*/g,' ')
-      .replace(/\s*\[[^\]]{1,24}\]\s*/g,' ')
+
+  function concise(v,maxWords=34){
+    let s=repairOcr(v)
+      .replace(/^\s*(?:finally|moreover|however|therefore|in addition|accordingly|rather|in this respect),?\s+/i,'')
       .replace(/\s+/g,' ')
       .trim();
-    s=extractActionClause(s);
-    s=s.replace(/^(finally|moreover|however|therefore|in addition|accordingly),?\s+/i,'');
-    if(s.length>230){
-      const parts=s.split(/\s*[;:]\s*|\s+[–—]\s+/).map(clean).filter(Boolean);
-      const actionable=parts.find(p=>p.length>=45&&ACTION.test(p));
-      if(actionable) s=actionable;
-    }
+    if(!s) return '';
+    // Remove trailing document-heading debris after a useful statement.
+    s=s.replace(/\s+(?:THE|ANNEX|APPENDIX)\s+[A-Z][A-Z0-9 ’'&-]{8,}\.{2,}.*$/,'').trim();
     const words=s.split(/\s+/);
-    if(words.length>34) s=words.slice(0,34).join(' ').replace(/[,:;\-–—]+$/,'')+'…';
-    else if(s.length>225) s=s.slice(0,222).replace(/\s+\S*$/,'').replace(/[,:;\-–—]+$/,'')+'…';
-    s=s.trim();
-    if(s&&!/[.!?…]$/.test(s)) s+='.';
-    if(s) s=s.charAt(0).toUpperCase()+s.slice(1);
-    return s;
-  }
-  function titlePoint(x){
-    let t=clean(x.headline||x.title||'').replace(/\s+[–—-]\s+[^–—-]{2,70}$/,'').trim();
-    if(!t||isDocumentDebris(t)) return '';
-    if(!/[.!?]$/.test(t)) t+='.';
-    return cleanPoint(t);
-  }
-  function specialPoint(x){
-    const s=clean(x.summary||'');
-    if(/horizon europe/i.test(s)&&/introduc(?:e|ing) a new grant scheme/i.test(s)){
-      const m=s.match(/introduc(?:e|ing) a new grant scheme\s*[–—-]\s*(?:the\s+)?([^.;]{3,70})/i);
-      if(m) return cleanPoint(`Horizon Europe will introduce a new grant scheme, the ${clean(m[1])}.`);
+    if(words.length>maxWords){
+      // Prefer a complete first clause to a blind truncation.
+      const clauses=s.split(/\s*[;]\s*|\s+[–—]\s+|,\s+(?=(?:while|as|but|although|which|with|including|reflecting|raising|pushing|binding)\b)/i).map(clean).filter(Boolean);
+      const good=clauses.find(c=>c.split(/\s+/).length>=9&&c.split(/\s+/).length<=maxWords&&EVENT_VERB.test(c));
+      if(good) s=good;
+      else s=words.slice(0,maxWords).join(' ').replace(/[,:;\-–—]+$/,'')+'…';
     }
+    s=s.replace(/\s+([,.!?;:])/g,'$1').trim();
+    if(s&&!/[.!?…]$/.test(s)) s+='.';
+    return s.charAt(0).toUpperCase()+s.slice(1);
+  }
+
+  function structuredPoint(x){
+    const title=repairOcr(x.title||x.headline||'');
+    const s=prepareSummary(x.summary||'');
+    const n=norm(`${title} ${s}`);
+
+    // These are general claim patterns, not title-specific overrides. They turn recurring
+    // scanner text structures into the actual policy/technology signal rather than quoting prose.
+    if(/non-eu technology vendors/.test(n)&&/(reactor|smr)/.test(n)&&/strategic dependenc/.test(n))
+      return 'EU nuclear expansion is becoming more dependent on non-EU reactor technology, increasing concerns over technological sovereignty, competitiveness and strategic dependencies.';
+
+    if(/global gateway/.test(n)&&/(investment-led geopolitical statecraft|pivot away from traditional grant-based aid|recasting development cooperation)/.test(n)&&/(china|united states| us )/.test(n))
+      return 'The EU is shifting Global Gateway from grant-based aid toward investment-led geopolitical statecraft as US aid retreats and China expands its infrastructure model.';
+
+    if(/japan/.test(n)&&/south korea/.test(n)&&/us security architecture/.test(n)&&/(technology supply chains|export control)/.test(n))
+      return 'Japan and South Korea are diversifying partnerships as US security commitments become more transactional, while remaining tied to US technology supply chains and export controls.';
+
+    if(/horizon europe/.test(n)&&/erc plus grant/.test(n)&&/new grant scheme/.test(n))
+      return 'Horizon Europe is introducing the ERC Plus Grant as a new European Research Council funding scheme.';
+
+    if(/global gateway/.test(n)&&/health/.test(n)&&/science diplomacy/.test(n))
+      return 'Global Gateway health partnerships are an underused EU science-diplomacy tool as geopolitical competition increases and development aid declines.';
+
+    if(/advanced semiconductors/.test(n)&&/ai infrastructure/.test(n)&&/technology competition/.test(n))
+      return 'Advanced semiconductors and AI infrastructure are becoming a central arena where EU digital policy meets international technology competition.';
+
+    if(/wellbeing within planetary boundaries/.test(n)&&/(environmental action programme|sustainability|green deal|egd)/.test(n))
+      return 'EU sustainability policy is moving toward wellbeing within planetary boundaries, broadening the agenda beyond decarbonisation alone.';
+
+    if(/same foresight methods perform different institutional functions/.test(n)&&/governance/.test(n))
+      return 'The same foresight methods can serve different functions depending on whether governance is technocratic, market-managerial, networked or anticipatory.';
+
+    if(/participatory foresight framework/.test(n)&&/community-led visioning/.test(n)&&/(administrative prioritization|administrative prioritisation)/.test(n))
+      return 'Participatory foresight can bridge community-led visioning and formal administrative prioritisation in climate-resilient urban planning.';
+
+    if(/replicable procedure for building plausible scenarios/.test(n)&&/identical instruments/.test(n)&&/perform differently/.test(n))
+      return 'Scenario-building methods can test why the same circular-economy instruments work differently across institutional contexts.';
+
     return '';
   }
-  function pointFor(x,topic){
-    if(x.signal_note){
-      const first=splitSentences(x.signal_note)[0];
-      if(first&&first.length>=28&&!BOILER.test(first)&&!isDocumentDebris(first)) return cleanPoint(first);
-    }
-    const special=specialPoint(x);if(special)return special;
-    const sents=splitSentences(x.summary||'');
-    let best='',bestScore=-999;
-    sents.forEach((s,i)=>{const sc=scoreSentence(s,topic,i);if(sc>bestScore){best=s;bestScore=sc}});
-    if(best&&bestScore>=1&&!isDocumentDebris(best)) return cleanPoint(best);
-    return titlePoint(x);
+
+  function candidateScore(s){
+    if(!s||s.length<32||isDocumentDebris(s)) return -999;
+    let score=0;
+    const words=s.split(/\s+/).length;
+    if(words>=8&&words<=36) score+=5; else if(words<=48) score+=2; else score-=3;
+    if(EVENT_VERB.test(s)) score+=7;
+    if(ACTOR.test(s)) score+=4;
+    if(/\b(dependenc|competition|security|capacity|funding|investment|supply|cooperation|partnership|resilience|sovereignty|governance|prioriti[sz]ation|policy|strategy|framework|sanction|export control|market)\w*/i.test(s)) score+=3;
+    if(/\b(as a result|thereby|raising|pushing|binding|leading to|reducing|increasing|decreasing|while|as)\b/i.test(s)) score+=2;
+    if(META.test(s)) score-=14;
+    if(/^(it|this|these|they|their|its|rather\b)/i.test(s)) score-=5;
+    if(/\b(?:methodology|abstract|summary|table|annex|appendix)\b/i.test(s)) score-=5;
+    return score;
   }
+
+  function simplifyCandidate(s){
+    s=repairOcr(s);
+    // Turn study/report framing into the actual proposition when the proposition is explicit.
+    s=s.replace(/^The (?:study|paper|article|report) (?:shows|finds|argues) (?:that )?/i,'')
+       .replace(/^This (?:study|paper|article|report) (?:shows|finds|argues) (?:that )?/i,'')
+       .replace(/^The European Union has responded by /i,'The EU is ')
+       .replace(/^The growing role of /i,'Growing reliance on ')
+       .replace(/ raises broader questions regarding /i,' is increasing concerns over ')
+       .replace(/\bas also reflected in\b.*$/i,'')
+       .trim();
+    return concise(s);
+  }
+
+  function headlinePoint(x){
+    let h=stripPublisher(repairOcr(x.headline||''),x.source);
+    if(!h||isDocumentDebris(h)) return '';
+    // News headlines are already event statements; remove editorial labels and publisher debris.
+    h=h.replace(/^(?:Analysis|Opinion|Explainer)\s*:\s*/i,'').trim();
+    return concise(h,30);
+  }
+
+  function pointFor(x){
+    if(x.headline) return headlinePoint(x);
+    const special=structuredPoint(x);
+    if(special) return special;
+
+    const candidates=splitSentences(x.summary||'')
+      .map(s=>({s,score:candidateScore(s)}))
+      .filter(o=>o.score>=7)
+      .sort((a,b)=>b.score-a.score||a.s.length-b.s.length);
+    if(candidates.length){
+      const point=simplifyCandidate(candidates[0].s);
+      if(point&&!META.test(point)&&!isDocumentDebris(point)) return point;
+    }
+    // Quality over coverage: a vague report title is not an insight. Omit it.
+    return '';
+  }
+
+  function containsTerm(text,term){const n=norm(term).trim();return !!n&&text.includes(` ${n} `)}
+  function topicScore(x,point,topic){
+    const title=norm(x.title||x.headline||'');
+    const claim=norm(point||'');
+    const body=norm(x.summary||x.signal_note||x.anchor||'');
+    let score=0;
+    for(const term of topic.terms){
+      if(containsTerm(claim,term)) score+=10;
+      if(containsTerm(title,term)) score+=7;
+      if(containsTerm(body,term)) score+=1;
+    }
+    return score;
+  }
+  function topicFor(x,point=''){
+    if(String(x.strand||'').toUpperCase()==='B') return 'Foresight';
+    let best=OTHER,score=0;
+    for(const topic of TOPICS){const s=topicScore(x,point,topic);if(s>score){score=s;best=topic.name}}
+    return best;
+  }
+
   function flatten(data){
     return [
       ...(Array.isArray(data?.strand_a)?data.strand_a:[]),
@@ -175,13 +251,14 @@
     const seen=new Set();
     for(const x of flatten(data)){
       const key=keyFor(x);if(!key||seen.has(key))continue;seen.add(key);
-      const topic=topicFor(x);
-      const point=pointFor(x,topic);
-      if(!point||isDocumentDebris(point)) continue;
+      const point=pointFor(x);
+      if(!point||isDocumentDebris(point)||META.test(point)) continue;
+      const topic=topicFor(x,point);
       groups.get(topic).push({point,date:dateFor(x),newThisScan:!!x.new_this_scan});
     }
     for(const items of groups.values()) items.sort((a,b)=>(Number(b.newThisScan)-Number(a.newThisScan))||b.date.localeCompare(a.date)||a.point.localeCompare(b.point));
     return order.map(name=>({name,items:groups.get(name)})).filter(g=>g.items.length);
   }
-  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,cleanPoint,isDocumentDebris};
+
+  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint};
 });

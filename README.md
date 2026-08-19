@@ -1,3 +1,11 @@
+# R&I × Geopolitics Radar
+
+## Radar Insights (V9)
+
+The main radar and scanner remain the source of truth. `/briefing/` reads `radar.json` directly and presents only topical headings with concise signal bullets. The Insights transformer synthesises one clear point from each admitted radar item instead of copying report prose. It filters PDF/OCR debris, metadata, methodology headings and generic article-purpose language; items that cannot yield a clear point are omitted.
+
+There is no separate briefing dataset or briefing-generation workflow.
+
 # R&I × Geopolitics + Foresight Methodology Radar
 
 EU-first, automatically updated GitHub Pages radar.
