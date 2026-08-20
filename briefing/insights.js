@@ -268,7 +268,9 @@
         anchor:clean(x.anchor||''),
         anchorBasis:clean(x.anchor_basis||''),
         why:signalWhy(x),
-        title:clean(x.title||x.headline||'')
+        title:clean(x.title||x.headline||''),
+        itemType:clean(x.type||''),
+        euRelevance:clean(x.eu_relevance||'')
       });
     }
     for(const items of groups.values()) items.sort((a,b)=>(Number(b.newThisScan)-Number(a.newThisScan))||b.date.localeCompare(a.date)||a.point.localeCompare(b.point));

@@ -64,15 +64,15 @@ class ClassifierTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 1)
         self.assertTrue(ev["a_pass"])
 
-    def test_accepts_transferable_methodology_b(self):
+    def test_rejects_transferability_only_methodology_b(self):
         title = "Evaluating horizon-scanning methods for public technology policy"
         abstract = (
             "This peer-reviewed study compares horizon scanning methods, evaluation criteria and bias controls for government technology policy. "
             "It proposes a framework for integrating weak signals with strategic intelligence and risk assessment."
         )
-        ev = gate_scope(title, abstract, "", 2)
-        self.assertTrue(ev["b_pass"])
-        self.assertEqual(ev["eu_relevance"], "derived")
+        ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["b_pass"])
+        self.assertIsNone(ev["eu_relevance"])
 
     def test_rejects_unrelated_futures_methodology(self):
         title = "Integral foresight methodology for post-growth lifestyles"
@@ -135,15 +135,53 @@ class V12BalancedRelevanceTests(unittest.TestCase):
 
     def test_accepts_tier1_foresight_methodology_deeper_in_report(self):
         title = "Futures for European research funding"
-        abstract = "This European report examines strategic foresight for research organisations and innovation funding."
+        abstract = "This European report examines strategic foresight for research organisations and innovation funding under geopolitical and economic-security uncertainty."
         body = (
             ("Executive summary. " * 40)
-            + "The report applies strategic foresight to research funding and technology policy. "
+            + "The report applies strategic foresight to European research funding and technology policy under strategic competition. "
             + "The methodology combines horizon scanning with participatory scenario construction. "
             + "The process uses weak signals, stakeholder workshops and evaluation criteria to test robustness."
         )
-        ev = gate_scope(title, abstract, body, 1)
+        ev = gate_scope(title, abstract, body, 1, source_kind="institutional")
         self.assertTrue(ev["b_pass"])
+
+
+class V17SubstanceQualityTests(unittest.TestCase):
+    def test_rejects_zero_waste_teacher_scenarios_method_paper(self):
+        title = "PATHWAYS TO ZERO WASTE: PROSPECTIVE SCIENCE TEACHERS’ SOLUTIONS THROUGH EVERYDAY LIFE SCENARIOS"
+        abstract = (
+            "The study uses prospective scenarios with science teachers to explore household waste reduction and environmental education. "
+            "Participants develop everyday-life solutions and reflect on sustainability learning."
+        )
+        ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["b_pass"])
+
+    def test_rejects_eu_politics_report_without_ri_substance(self):
+        title = "2026 Rule of law report - Communication and country chapters"
+        abstract = "The European Commission reviews democracy, justice systems, media pluralism and anti-corruption policy across EU Member States."
+        body = "The report discusses institutional resilience and public trust in the European Union."
+        ev = gate_scope(title, abstract, body, 1, source_kind="institutional")
+        self.assertFalse(ev["a_pass"])
+
+    def test_accepts_scholarly_a_when_abstract_has_full_triangle(self):
+        title = "Research security in Europe under strategic competition"
+        abstract = (
+            "This peer-reviewed article examines European research and innovation systems under US-China strategic competition. "
+            "It analyses knowledge security, foreign interference and international scientific collaboration, with implications for Horizon Europe."
+        )
+        ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertTrue(ev["a_pass"])
+
+    def test_b_requires_eu_ri_geo_substance_as_well_as_method(self):
+        title = "Horizon scanning for EU research security under geopolitical uncertainty"
+        abstract = (
+            "The article evaluates horizon-scanning methodology for European Union research and innovation policy. "
+            "It compares weak-signal detection and scenario methods for research security, export controls and strategic competition."
+        )
+        ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertTrue(ev["b_pass"])
+
 
 if __name__ == "__main__":
     unittest.main()

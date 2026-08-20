@@ -1,11 +1,13 @@
-R&I × Geopolitics Radar — V16 COMPLETE REPOSITORY
+V17 COMPLETE REPOSITORY
 
-This ZIP is a complete repository upload and DOES include radar.json.
-Upload/extract every file and folder to the repository root, including .github.
+This folder is the entire GitHub repository upload, including:
+- radar.json
+- .github/workflows/radar-scan.yml
+- scripts/
+- tests/
+- briefing/
+- website files
+- configuration and documentation
 
-The bundled scanner contains a safety guard for whole-repository uploads: if the
-existing Git history contains a newer/larger radar.json than the bundled snapshot,
-the next scan automatically restores and merges that larger corpus before adding
-new material. A/B/C remain cumulative.
-
-No API keys, custom secrets, or manual credentials are required.
+Upload/extract EVERYTHING to the repository root and commit to main.
+No API keys or custom secrets are required.

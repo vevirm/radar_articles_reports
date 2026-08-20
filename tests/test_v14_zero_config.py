@@ -67,7 +67,7 @@ class V14ZeroConfigTests(unittest.TestCase):
             radar.CONFIG["queries_a"] = ["a one"]
             radar.CONFIG["queries_b"] = ["b one"]
             with mock.patch.object(radar.SESSION, "get", side_effect=fake_get), \
-                 mock.patch.dict(radar.CONFIG, {"crossref_public_min_interval_seconds": 0}, clear=False):
+                 mock.patch.dict(radar.CONFIG, {"crossref_public_min_interval_seconds": 0, "crossref_priority_journals": [], "crossref_priority_journal_queries": []}, clear=False):
                 out = radar.collect_crossref(dt.date.today() - dt.timedelta(days=30), warnings)
         finally:
             radar.CONFIG["queries_a"] = original_a

@@ -1,6 +1,3 @@
-NO MANUAL PRESERVATION STEP IS REQUIRED IN THIS COMPLETE PACKAGE.
+NO MANUAL PRESERVATION STEP IS REQUIRED IN V17.
 
-radar.json is included. On an upgrade over the existing repository, the scanner
-checks recent Git history and automatically restores/merges a larger prior corpus
-if the bundled radar.json is older. This makes upload-all replacement safe while
-keeping A, B and C cumulative.
+The complete repository ZIP includes radar.json. It is marked as an upload seed so the first scan can recover/merge a larger cumulative radar from Git history before revalidation and scanning.

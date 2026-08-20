@@ -1,10 +1,7 @@
-COMPLETE REPOSITORY UPLOAD
+1. Extract the ZIP.
+2. Upload all files and folders to the root of the GitHub repository, including .github.
+3. Commit to main.
+4. The push triggers the V17 scan automatically.
+5. The first V17 run performs a new four-month A/B backfill and one-time quality migration.
 
-1. Extract this ZIP.
-2. Upload ALL files/folders to the root of vevirm/radar_articles_reports.
-3. Include the hidden .github folder.
-4. Replace existing files and commit to main.
-5. The push triggers the scanner; subsequent scans run every 12 hours.
-
-radar.json IS INCLUDED in this package. The scanner also protects against an older
-bundled snapshot overwriting a larger corpus already present in Git history.
+This is a complete repository package and includes radar.json.

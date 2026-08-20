@@ -1,37 +1,76 @@
-# R&I × Geopolitics Radar — V16.1 weak-signal repair
+# R&I × Geopolitics Radar — V17 evidence-quality + scholarly expansion
 
-V16 keeps the working V15 A/B scanner and fixes the two remaining problems: Strand C was starved of runtime during long backfills, and the Insights page did not explain signals in a fast intelligence format.
+V17 keeps the working cumulative scanner and fixes three content problems together:
 
-## What V16 changes
+1. the Insights page was dominated by weak signals;
+2. Strand A was too dependent on EU/institutional material and was not finding enough research publications;
+3. Strand B admitted methodology papers whose subject matter was not actually EU + R&I + geopolitics.
 
-- **Weak-signal discovery starts at the beginning of every scan**, in parallel with OpenAlex/Crossref. It is no longer the last network stage.
-- **One-time 30-day Strand C recovery scan** on the V16 upgrade, then a **7-day rolling weak-signal window every 12 hours**. Deduplication means the overlap does not create duplicates.
-- **30 curated news/official sources** plus 18 cross-source Google News discovery queries cover major European and international publishers and EU institutional players.
-- A factual signal can connect to a specific A/B publication, a recurring A/B theme, **or a curated strategic watch theme**. This prevents a thin A/B corpus from suppressing otherwise strong R&I/geopolitical signals.
-- The Strand C gate is still selective: it requires an event/change, a relevant strategic R&I theme, and either European scope or a strong external R&I + geopolitical bridge.
-- Each new signal stores explicit fields for **WHAT changed**, **WHY it matters for EU R&I**, watch theme, signal kind, relationship type and evidence connection.
-- The `/briefing/` page is now signal-first: weak signals are shown first with `WHAT CHANGED`, `WHY IT MATTERS FOR EU R&I`, `WATCH THEME`, source and evidence connection. Research/reports are a separate view.
-- Existing A/B/C records remain cumulative and deduplicated.
-- No API keys or custom GitHub secrets are required.
+## V17 scope
+
+### Strand A — substantive evidence
+A publication/report must substantively connect:
+
+- **EU / Europe / an EU Member State**, and
+- **R&I or a closely related strategic technology/science capability**, and
+- **geopolitics, geoeconomics, economic security, strategic competition, dependencies, controls, de-risking, sovereignty or similar context**.
+
+R&I-adjacent scope includes research systems, innovation policy, universities, science diplomacy, research security, critical technologies, semiconductors, AI/compute, quantum, biotech, nuclear/energy technology, digital infrastructure, technology ecosystems and related capability questions — but only when the geopolitical/economic-security connection is substantive.
+
+Generic EU politics, elections, rule-of-law material, enlargement analysis, generic sustainability, general sector news and incidental technology mentions do not qualify.
+
+### Strand B — methodology on the substance
+Strand B is no longer a general foresight-methods library. A methods paper/report must contain substantive foresight methodology **and** the same EU + R&I + geopolitics/economic-security triangle.
+
+Therefore papers such as **“PATHWAYS TO ZERO WASTE: PROSPECTIVE SCIENCE TEACHERS’ SOLUTIONS THROUGH EVERYDAY LIFE SCENARIOS”** are rejected. So are generic climate-scenario, household-futures or urban-participation methodology papers unless their actual subject is European R&I/strategic technology in geopolitical context.
+
+## More research publications
+
+V17 gives scholarly literature its own protected discovery path:
+
+- 115 Strand-A scholarly queries;
+- 30 substance-specific Strand-B queries;
+- OpenAlex public anonymous discovery;
+- Crossref public anonymous discovery;
+- a dedicated Crossref sweep across 36 priority journals × 6 focused EU/R&I/geopolitics queries before the broad query universe;
+- broad peer-reviewed-journal eligibility remains, but the admission gate is stricter and based on title/abstract substance.
+
+The direct institutional crawler still monitors 57 major EU, European and international policy/research players. Institutional reports complement scholarly research instead of replacing it.
 
 ## Runtime
 
-The GitHub Action timeout is 45 minutes and the scanner's internal network budget is 30 minutes. This gives long A/B backfills room to complete while the weak-signal crawl is protected by running at the start of the scan.
+The GitHub Actions job timeout is **70 minutes**. The scanner has a **55-minute internal scan budget** (3,300 seconds), leaving time to write and commit `radar.json` safely.
+
+The first V17 run forces a new **four-month A/B backfill** under the new scholarly/source profile. Later scans continue every **12 hours** with the overlap logic already used by the radar.
+
+Weak-signal scanning remains protected at the start of the run and remains cumulative.
+
+## One-time quality migration
+
+V17 revalidates the accumulated A/B corpus once under the corrected substance gate. Valid earlier material stays cumulative, but old false positives are removed. Strand C history is not pruned by this migration.
+
+## Insights page
+
+`/briefing/` now defaults to **All intelligence**, not Weak signals. It shows:
+
+1. **Research publications**;
+2. **EU & institutional reports**;
+3. **Weak signals**.
+
+Each category has its own filter, while search and “New only” work across the full evidence base.
 
 ## Complete repository upload
 
-This V16.1 package is a **complete repository** and includes `radar.json` as well as the active `.github/workflows/radar-scan.yml`. Upload all files and folders, including `.github`, to the repository root and commit to `main`.
+This package is the **whole repository**, including `radar.json` and the active `.github/workflows/radar-scan.yml`.
 
-For upgrades over an existing repository, the bundled `radar.json` is marked as a one-run upload seed. On the first scan, the scanner checks recent Git history and automatically restores/merges a larger prior A+B+C corpus before adding new material. The seed marker is removed from the next generated `radar.json`, so normal scans do not walk Git history repeatedly.
+Upload/extract everything to the repository root. No separate file preservation step is required. The bundled `radar.json` is marked as a repository seed; on the first scan, Git history recovery merges back a larger existing cumulative corpus if one exists before V17 revalidates and rescans it.
+
+No API keys, custom secrets or email configuration are required.
 
 ## Tests
+
+Run:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
-
-V16 includes 50 regression tests.
-
-## Complete-repository package
-
-The V16.1 complete package includes `radar.json`; there is no separate file to preserve manually. When upgrading an existing repository, the scanner compares the bundled/current corpus with recent Git history and automatically restores/merges a larger prior A+B+C snapshot before scanning. This prevents a full upload from erasing a newer accumulated corpus.

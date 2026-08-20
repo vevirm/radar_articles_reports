@@ -75,14 +75,15 @@ class V15ScanRepairTests(unittest.TestCase):
             self.assertEqual(data["scan_health"], "degraded")
             self.assertFalse(p.with_suffix(".json.tmp").exists())
 
-    def test_packaged_scanner_budget_fits_active_45_minute_workflow(self):
-        self.assertLessEqual(int(sr.CONFIG["scan_budget_seconds"]), 1800)
+    def test_packaged_scanner_budget_fits_active_70_minute_workflow(self):
+        self.assertLessEqual(int(sr.CONFIG["scan_budget_seconds"]), 3300)
+        self.assertGreaterEqual(int(sr.CONFIG["scan_budget_seconds"]), 3000)
 
     def test_active_workflow_is_zero_config_and_nonfatal_pages(self):
         workflow = (sr.ROOT / ".github" / "workflows" / "radar-scan.yml").read_text(encoding="utf-8")
         self.assertNotIn("OPENALEX_API_KEY", workflow)
         self.assertNotIn("CROSSREF_MAILTO", workflow)
-        self.assertIn("timeout-minutes: 45", workflow)
+        self.assertIn("timeout-minutes: 70", workflow)
         self.assertIn("continue-on-error: true", workflow)
 
 

@@ -16,7 +16,7 @@ Key properties
 * Calls, facility pages, project pages, press releases, news/blog pages, events,
   jobs and other non-analytical material are rejected for A/B.
 
-The scanner aims for a balanced precision/recall trade-off. It does not pad.
+The scanner aims for high-recall discovery with substantive admission: EU scope + R&I/related-system substance + geopolitics/economic security. It does not pad.
 """
 from __future__ import annotations
 
@@ -51,7 +51,8 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
-SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v15-scan-repair"))
+SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
+QUALITY_PROFILE_VERSION = str(CONFIG.get("quality_profile_version", "v17-eu-ri-geo-substance"))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
@@ -121,6 +122,15 @@ RI_STRONG = [
     "technology transfer", "knowledge transfer", "research infrastructure", "research infrastructures",
     "scientific infrastructure", "university research", "academic research", "higher education",
     "research-intensive", "research organisation", "research organization", "research-performing",
+    # Strategic technology/industrial capability is part of the R&I-adjacent scope when
+    # it is linked to geopolitics/economic security. This keeps relevant nuclear, digital,
+    # semiconductor, AI, quantum, biotech and infrastructure analysis without admitting
+    # generic politics or generic sector news.
+    "critical technology", "critical technologies", "strategic technology", "strategic technologies",
+    "technology vendors", "technology infrastructure", "digital transformation", "digital technology",
+    "semiconductor", "semiconductors", "artificial intelligence", "ai infrastructure",
+    "quantum technology", "biotechnology", "nuclear technology", "reactor technology",
+    "space technology", "clean technology", "industrial technology", "technology ecosystem",
 ]
 RI_GENERIC = ["research", "science", "innovation", "technology", "university", "academic"]
 POLICY_CONTEXT = [
@@ -442,7 +452,7 @@ def china_geo_signal(text: str) -> bool:
     return any(x in low for x in CHINA_GEO_CONTEXT)
 
 
-def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[str, Any]:
+def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = "general") -> dict[str, Any]:
     """Return balanced strand evidence.
 
     Discovery keywords never admit an item on their own.  Strand A still requires
@@ -472,17 +482,23 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
     if china_geo_signal(full) and "China + security/strategic context" not in geo_full:
         geo_full.append("China + security/strategic context")
 
-    # V12 keeps a real R&I floor but no longer requires every relevant paper to be
-    # explicitly framed as 'policy/governance'. One strong R&I-system signal in the
-    # body plus policy/strategy context is enough for trusted Tier 1/2 material.
+    # V17: relevance must be substantive, not incidental.  Bare occurrences of words
+    # such as technology, research or policy in a long political document cannot create
+    # Strand A by themselves.  Scholarly items are judged on title+abstract, while
+    # institutional reports may establish one side deeper in the document if the other
+    # side is explicit and a supported bridge exists.
     ri_substantive = bool(ri_ta) or len(set(ri_full)) >= 2 or (
         source_tier <= 2 and bool(ri_full) and bool(policy_full)
     ) or (len(set(ri_generic_ta)) >= 2 and len(set(policy_ta)) >= 2)
-    # A single clear geopolitical/geoeconomic concept in a trusted analytical source
-    # is substantive enough; Tier 3 keeps the stricter two-signal body requirement.
     geo_substantive = bool(geo_ta) or len(set(geo_full)) >= 2 or (
         source_tier <= 2 and bool(geo_full)
     )
+    if source_kind == "scholarly":
+        # Crossref/OpenAlex records often expose only title+abstract.  Requiring both
+        # substantive families there sharply improves precision and prevents unrelated
+        # education/environmental futures papers from slipping in through generic terms.
+        ri_substantive = bool(ri_ta)
+        geo_substantive = bool(geo_ta)
 
     # Strongest bridge: R&I and geopolitical evidence in the same sentence.
     bridge_sentence = ""
@@ -513,6 +529,19 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
         and ri_substantive
         and geo_substantive
     )
+    if source_kind == "scholarly":
+        mixed_bridge = bool(eu_rel and ri_ta and geo_ta)
+    elif source_kind == "institutional":
+        # For reports, do not let generic body text rescue a political document.  One
+        # substantive side must be visible in the title/description and the other side
+        # must either be explicit there too or strongly repeated in the report body.
+        mixed_bridge = bool(
+            eu_rel and ri_substantive and geo_substantive and (
+                (ri_ta and geo_ta) or
+                (ri_ta and len(set(geo_full)) >= 1) or
+                (geo_ta and len(set(ri_full)) >= 2)
+            )
+        )
     inherent_bridge = contains_any(full, [
         "research security", "knowledge security", "science diplomacy",
         "technology sovereignty", "technological sovereignty",
@@ -577,21 +606,20 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
 
     trend_only = contains_any(title, TREND_ONLY_HINTS) and not (explicit_method_title or method_in_ta or method_bridge)
 
-    # Direct/explicit EU relevance remains the normal B path.  For genuinely
-    # methodology-first high-quality work, derived relevance may be assigned on
-    # transferability grounds when the context is public-sector R&I/S&T policy.
+    # V17: Strand B is methodology *on the substance*, not a generic methods library.
+    # It therefore requires the same EU + R&I + geopolitical/economic-security triangle
+    # as Strand A, plus substantive foresight methodology.  Transferability alone is no
+    # longer enough.
     b_eu_rel = eu_rel
     b_transferable = False
-    if not b_eu_rel and source_tier <= 2 and foresight_substantive and method_substantive and b_context:
-        if explicit_method_title or method_in_ta or (source_tier == 1 and tier1_deep_method):
-            b_eu_rel = "derived"
-            b_transferable = True
 
     a_pass = bool(ri_substantive and geo_substantive and eu_rel and bridge_supported)
-    b_pass = bool(foresight_substantive and method_substantive and b_context and b_eu_rel and not trend_only)
+    b_pass = bool(
+        foresight_substantive and method_substantive and not trend_only
+        and ri_substantive and geo_substantive and eu_rel and bridge_supported
+    )
 
-    # A must never borrow B's transferability-only EU label.
-    overall_eu = eu_rel or (b_eu_rel if b_pass else None)
+    overall_eu = eu_rel
 
     return {
         "a_pass": a_pass,
@@ -733,7 +761,7 @@ def candidate_from_openalex(work: dict[str, Any]) -> dict[str, Any] | None:
     quality_ok, tier, source_rank, source, tier_label = quality_from_openalex(work)
     if not quality_ok:
         return None
-    ev = gate_scope(title, abstract, "", tier)
+    ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
     if not (ev["a_pass"] or ev["b_pass"]):
         return None
     if tier == 3 and ev["eu_relevance"] is None:
@@ -895,7 +923,7 @@ def candidate_from_crossref(item: dict[str, Any]) -> dict[str, Any] | None:
     ok, tier, source_rank, source, tier_label, item_type = quality_from_crossref(item)
     if not ok:
         return None
-    ev = gate_scope(title, abstract, "", tier)
+    ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
     if not (ev["a_pass"] or ev["b_pass"]):
         return None
     if tier == 3 and ev["eu_relevance"] is None:
@@ -915,10 +943,18 @@ def candidate_from_crossref(item: dict[str, Any]) -> dict[str, Any] | None:
 
 
 def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, Any]]:
-    """Zero-config Crossref discovery using only the anonymous public pool."""
+    """Zero-config Crossref discovery using only the anonymous public pool.
+
+    V17 gives scholarly literature a dedicated priority sweep. Before the broad
+    query universe, it searches a curated set of journals with compact queries
+    focused on the EU + R&I + geopolitics triangle. This increases recall of
+    peer-reviewed work without loosening the admission gate.
+    """
     queries = list(dict.fromkeys(CONFIG["queries_a"] + CONFIG["queries_b"]))
     rows = int(CONFIG.get("crossref_rows_per_query", 50))
-    workers = 1
+    priority_rows = int(CONFIG.get("crossref_priority_journal_rows", 35))
+    priority_journals = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
+    priority_queries = list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
     min_interval = float(CONFIG.get("crossref_public_min_interval_seconds", 0.80))
     timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
     retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
@@ -933,17 +969,19 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
-    def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
+    def fetch_query(q: str, journal: str = "") -> tuple[list[dict[str, Any]], str | None]:
         if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
         params = {
             "query.bibliographic": q,
             "filter": f"from-pub-date:{from_date.isoformat()}",
-            "rows": rows,
+            "rows": priority_rows if journal else rows,
             "sort": "published",
             "order": "desc",
             "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract",
         }
+        if journal:
+            params["query.container-title"] = journal
         for attempt in range(retries + 1):
             wait_for_slot()
             try:
@@ -973,21 +1011,44 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
         return [], "request failed"
 
     out: list[dict[str, Any]] = []
-    budget_hits = 0
-    with cf.ThreadPoolExecutor(max_workers=workers) as ex:
-        futs = [ex.submit(fetch_query, q) for q in queries]
-        for fut in cf.as_completed(futs):
-            try:
-                items, err = fut.result()
+    budget_hit = False
+
+    if priority_journals and priority_queries:
+        log_progress(
+            f"Crossref priority journal sweep: {len(priority_journals)} journals × "
+            f"{len(priority_queries)} focused queries"
+        )
+        for journal in priority_journals:
+            for q in priority_queries:
+                if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+                    budget_hit = True
+                    break
+                items, err = fetch_query(q, journal)
                 out.extend(items)
                 if err == "budget":
-                    budget_hits += 1
-                elif err:
-                    warnings.append(f"Crossref {err}")
-            except Exception as e:
-                warnings.append(f"Crossref worker: {type(e).__name__}")
-    if budget_hits:
-        warnings.append(f"Crossref scan budget reached; {budget_hits} queued query/queries skipped")
+                    budget_hit = True
+                    break
+                if err:
+                    warnings.append(f"Crossref priority {journal}: {err}")
+            if budget_hit:
+                break
+
+    if not budget_hit:
+        log_progress(f"Crossref broad scholarly sweep: {len(queries)} queries")
+        for q in queries:
+            if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+                budget_hit = True
+                break
+            items, err = fetch_query(q)
+            out.extend(items)
+            if err == "budget":
+                budget_hit = True
+                break
+            if err:
+                warnings.append(f"Crossref {err}")
+
+    if budget_hit:
+        warnings.append("Crossref scan budget reached; remaining queued scholarly queries skipped")
     return out
 
 def decompress_xml(content: bytes) -> bytes:
@@ -1208,7 +1269,7 @@ def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] |
         if not brief_exception:
             return None
 
-    ev = gate_scope(title, desc, body, tier)
+    ev = gate_scope(title, desc, body, tier, source_kind="institutional")
     if not (ev["a_pass"] or ev["b_pass"]):
         return None
     if tier == 3 and ev["eu_relevance"] is None:
@@ -1681,6 +1742,50 @@ def internalize_previous(item: dict[str, Any]) -> dict[str, Any]:
     x["_doi"] = normalized(x.get("link", ""))
     x["_preprint"] = x.get("type") == "preprint"
     return x
+
+
+def _saved_source_kind(item: dict[str, Any]) -> str:
+    typ = normalized(item.get("type", ""))
+    if any(x in typ for x in ["peer-reviewed", "journal", "preprint", "article"]):
+        return "scholarly"
+    return "institutional"
+
+
+def _saved_tier(item: dict[str, Any]) -> int:
+    tier = normalized(item.get("source_tier", ""))
+    if "tier 1" in tier:
+        return 1
+    if "tier 2" in tier or "comparable" in tier:
+        return 2
+    return 3
+
+
+def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
+    """One-time V17 quality migration for the cumulative A/B corpus.
+
+    The radar remains cumulative for valid material, but items admitted by older, looser
+    rules are removed when their stored title+summary no longer establishes the required
+    EU + R&I + geopolitical substance.  Strand C is untouched.
+    """
+    out = dict(previous) if isinstance(previous, dict) else {}
+    removed = {"strand_a": 0, "strand_b": 0}
+    for strand_key, pass_key in (("strand_a", "a_pass"), ("strand_b", "b_pass")):
+        kept = []
+        for item in out.get(strand_key, []) if isinstance(out.get(strand_key), list) else []:
+            if not isinstance(item, dict):
+                continue
+            title = clean_text(item.get("title", ""))
+            summary = clean_text(item.get("summary", ""))
+            if not title:
+                removed[strand_key] += 1
+                continue
+            ev = gate_scope(title, summary, "", _saved_tier(item), source_kind=_saved_source_kind(item))
+            if ev.get(pass_key):
+                kept.append(item)
+            else:
+                removed[strand_key] += 1
+        out[strand_key] = kept
+    return out, removed
 
 
 def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], strand_name: str, now_iso: str) -> list[dict[str, Any]]:
@@ -2156,6 +2261,15 @@ def main() -> int:
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
     previous = load_previous()
+    quality_migration = previous.get("quality_profile_version") != QUALITY_PROFILE_VERSION
+    quality_removed = {"strand_a": 0, "strand_b": 0}
+    if quality_migration:
+        previous, quality_removed = revalidate_saved_ab(previous)
+        log_progress(
+            "V17 quality migration: removed "
+            f"{quality_removed['strand_a']} old A and {quality_removed['strand_b']} old B item(s) "
+            "that no longer meet the EU + R&I + geopolitics substance gate"
+        )
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
     from_date, bootstrap_ab = scan_from_date(previous, now.date())
     log_progress(f"Scan start: A/B from {from_date.isoformat()} (four-month backfill={bootstrap_ab}); hard budget {budget_seconds//60} min")
@@ -2253,6 +2367,8 @@ def main() -> int:
         "first_scan_complete": True,
         "corpus_start_date": DATE_FLOOR.isoformat(),
         "source_expansion_version": expansion_marker,
+        "quality_profile_version": QUALITY_PROFILE_VERSION,
+        "quality_migration_this_run": quality_migration,
         "backfill_complete": backfill_complete,
         "signal_discovery_version": signal_marker,
         "signal_backfill_complete": signal_backfill_complete,
@@ -2291,6 +2407,8 @@ def main() -> int:
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
             "institution_sources_configured": len(CONFIG.get("institution_sources", [])),
             "major_scholarly_publishers_tracked": len(CONFIG.get("major_scholarly_publishers", [])),
+            "priority_journals_tracked": len(CONFIG.get("crossref_priority_journals", [])),
+            "priority_journal_queries": len(CONFIG.get("crossref_priority_journal_queries", [])),
             "source_expansion_backfill": bootstrap_ab,
             "backfill_complete": backfill_complete,
             "unique_ab_candidates_before_scan_limit": len(deduped),
@@ -2301,6 +2419,8 @@ def main() -> int:
             "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
             "signal_recovery_backfill": signal_backfill,
             "signal_backfill_complete": signal_backfill_complete,
+            "quality_removed_old_a": quality_removed.get("strand_a", 0),
+            "quality_removed_old_b": quality_removed.get("strand_b", 0),
             "source_warnings": len(warnings),
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,
