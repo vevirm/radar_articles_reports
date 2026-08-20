@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#101827">
+  <title>R&I × Geopolitics Radar</title>
+  <style>
+    :root{
+      --ink:#172033;--muted:#677184;--line:#dde3ea;--bg:#f3f6f9;--card:#fff;--navy:#101827;
+      --accent:#a32835;--accent-soft:#f7e9eb;--blue:#235d91;--blue-soft:#e9f1f8;--green:#24704b;
+      --shadow:0 18px 48px rgba(17,32,55,.08);--shadow-sm:0 7px 22px rgba(17,32,55,.06);--max:1240px;
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    a{color:inherit}.wrap{width:min(calc(100% - 34px),var(--max));margin:auto}
+    #gate{min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 15% 10%,#263957 0,#101827 45%,#0b111d 100%)}
+    .gate-card{width:min(100%,430px);background:rgba(255,255,255,.98);border-radius:24px;padding:32px;box-shadow:0 28px 80px rgba(0,0,0,.28)}
+    .gate-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#b73340,#7d1723);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);margin-bottom:24px}
+    .gate-card h1{font-size:29px;line-height:1.08;margin:0 0 8px;letter-spacing:-.04em}.gate-card p{color:var(--muted);margin:0 0 20px}.gate-row{display:flex;gap:9px}.gate-row input{min-width:0;flex:1;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit;background:#fff;outline:none}.gate-row input:focus{border-color:#8694a7;box-shadow:0 0 0 3px rgba(35,93,145,.11)}
+    button{font:inherit}.gate-row button,.lock,.action{border:0;border-radius:11px;padding:11px 15px;background:var(--navy);color:#fff;cursor:pointer;font-weight:700}.gate-error{color:var(--accent);font-size:13px;min-height:20px;margin-top:10px}
+    #app{display:none}.hero{background:linear-gradient(135deg,#101827 0%,#172b47 60%,#203b5c 100%);color:#fff;padding:42px 0 31px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-100px;top:-240px;box-shadow:0 0 0 90px rgba(255,255,255,.018),0 0 0 180px rgba(255,255,255,.012)}
+    .topline{position:relative;z-index:1;display:flex;justify-content:space-between;gap:28px;align-items:flex-start}.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#bac7d8;font-weight:700}
+    h1{font-size:clamp(40px,6vw,72px);line-height:.98;margin:10px 0 14px;letter-spacing:-.055em}.intro{max-width:850px;font-size:17px;color:#d0d9e5;margin:0}.lock{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-size:12px;padding:8px 11px;white-space:nowrap}
+    .hero-actions{position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.hero-actions a{text-decoration:none}.action.primary{display:inline-block;background:#fff;color:var(--navy);padding:10px 14px}.action.secondary{display:inline-block;background:transparent;border:1px solid rgba(255,255,255,.22);padding:9px 13px;color:#fff}
+    .statusbar{position:relative;z-index:2;margin-top:-1px;background:#fff;border-bottom:1px solid var(--line)}.status-inner{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 0}.pill{border-radius:999px;padding:5px 9px;font-size:12px;color:var(--muted);background:#f6f8fa;border:1px solid #e4e8ee}.pill.ok{color:var(--green);background:#edf7f1}.pill.warn{color:#8a5a00;background:#fff8e6}
+    .dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:23px 0 20px}.stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow-sm)}.stat .label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}.stat .value{font-size:32px;line-height:1;margin-top:8px;letter-spacing:-.04em;font-weight:800}.stat .sub{font-size:12px;color:var(--muted);margin-top:7px}
+    .toolbar{position:sticky;top:0;z-index:8;background:rgba(243,246,249,.91);backdrop-filter:blur(12px);padding:9px 0 11px;border-bottom:1px solid rgba(221,227,234,.8)}.tools{display:flex;gap:10px;align-items:center}.search{flex:1;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;outline:none}.search:focus{border-color:#8291a5;box-shadow:0 0 0 3px rgba(35,93,145,.10)}
+    .filter{border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:9px 11px;cursor:pointer;font-weight:700;font-size:13px}.filter.active{background:var(--navy);border-color:var(--navy);color:#fff}
+    main{padding:3px 0 70px}.strand{padding-top:36px}.section-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;margin-bottom:14px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:var(--accent)}.section-head h2{font-size:27px;letter-spacing:-.035em;line-height:1.12;margin:4px 0 5px}.section-head p{margin:0;color:var(--muted);max-width:840px;font-size:14px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
+    .scan-note{display:none;margin:8px 0 14px;padding:11px 13px;border-radius:12px;background:#fff9ea;border:1px solid #eedeb1;color:#735318;font-size:13px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.item{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;min-height:210px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.item:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#cfd7e1}.item-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.meta{font-size:12px;color:var(--muted)}.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.tag{border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:#f5f7fa;color:#667085;border:1px solid #e4e8ee}.tag.new{color:var(--accent);background:var(--accent-soft);border-color:#edcbd0}.tag.signal{color:var(--blue);background:var(--blue-soft);border-color:#cdddec}
+    .item h3{font-size:19px;line-height:1.27;letter-spacing:-.025em;margin:12px 0 7px}.item h3 a{text-decoration:none}.item h3 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.source{font-size:12px;color:var(--muted);margin-bottom:12px}.point{font-size:14px;line-height:1.55;margin:0;color:#2d3748}.point strong{color:var(--ink)}.relevance{font-size:13px;color:#485468;margin-top:10px}.card-foot{margin-top:auto;padding-top:13px;display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #eef1f5;font-size:11px;color:var(--muted)}
+    details{margin-top:10px;font-size:12px;color:var(--muted)}summary{cursor:pointer;font-weight:700;color:#556174}details p{margin:7px 0 0}.empty{background:#fff;border:1px dashed #cfd7e1;border-radius:15px;padding:24px;color:var(--muted)}.more{display:block;margin:15px auto 0;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:9px 14px;cursor:pointer;font-weight:750}.more[hidden]{display:none}
+    .method{margin-top:46px;background:#eaf0f6;border:1px solid #d6e0ea;border-radius:16px;padding:16px 18px;color:#526173;font-size:13px}.method strong{color:var(--ink)}footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:12px}
+    @media(max-width:920px){.dashboard{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}
+    @media(max-width:650px){.wrap{width:min(calc(100% - 24px),var(--max))}.topline{flex-direction:column}.hero{padding-top:31px}.dashboard{grid-template-columns:1fr 1fr}.stat{padding:14px}.stat .value{font-size:27px}.tools{flex-wrap:wrap}.search{flex-basis:100%}.section-head{grid-template-columns:1fr;gap:5px}.count{white-space:normal}.item{padding:15px}.gate-row{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <section id="gate" aria-label="Password gate">
+    <div class="gate-card">
+      <div class="gate-mark" aria-hidden="true"></div>
+      <h1>R&I × Geopolitics Radar</h1>
+      <p>Research intelligence that accumulates with every automated scan.</p>
+      <form id="gateForm" class="gate-row">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
+        <button type="submit">Enter</button>
+      </form>
+      <div id="gateError" class="gate-error"></div>
+    </div>
+  </section>
+
+  <div id="app">
+    <header class="hero">
+      <div class="wrap">
+        <div class="topline">
+          <div>
+            <div class="kicker">EU-first research intelligence</div>
+            <h1>R&I × Geopolitics Radar</h1>
+            <p class="intro">A cumulative evidence base for geopolitical change in research and innovation, foresight methodology, and anchored weak signals. New scans add to the record instead of replacing it.</p>
+          </div>
+          <button id="lock" class="lock">Lock radar</button>
+        </div>
+        <div class="hero-actions">
+          <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
+          <a class="action secondary" href="#strand-c">Latest weak signals</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="statusbar"><div class="wrap status-inner">
+      <span class="pill">Automatic scan · every 12 hours</span>
+      <span class="pill">Cumulative corpus · no deletion on quiet scans</span>
+      <span id="scanState" class="pill warn">Scanner · pending</span>
+      <span id="lastScan" class="pill">Last scan · pending</span>
+    </div></div>
+
+    <div class="wrap">
+      <section class="dashboard" aria-label="Radar totals">
+        <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">accepted publications</div></div>
+        <div class="stat"><div class="label">Foresight methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
+        <div class="stat"><div class="label">Weak signals</div><div id="statC" class="value">—</div><div class="sub">accumulated signals</div></div>
+        <div class="stat"><div class="label">New this scan</div><div id="statNew" class="value">—</div><div class="sub">across all strands</div></div>
+      </section>
+    </div>
+
+    <div class="toolbar"><div class="wrap tools">
+      <input id="search" class="search" type="search" placeholder="Search titles, sources, signals, topics…" aria-label="Search radar">
+      <button id="onlyNew" class="filter" type="button">New this scan</button>
+      <button id="clearFilter" class="filter" type="button">Clear</button>
+    </div></div>
+
+    <main class="wrap">
+      <section id="strand-a" class="strand">
+        <div class="section-head"><div><div class="eyebrow">Strand A</div><h2>R&I under geopolitical change</h2><p>Substantive R&I policy + geopolitics/economic security + explicit EU relevance.</p></div><div id="countA" class="count">0 items</div></div>
+        <div id="noteA" class="scan-note"></div><div id="itemsA" class="cards"></div><button id="moreA" class="more" type="button" hidden>Show more</button>
+      </section>
+
+      <section id="strand-b" class="strand">
+        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Foresight methodology</h2><p>Methodology-first evidence on foresight, horizon scanning, scenarios, anticipatory governance and strategic intelligence.</p></div><div id="countB" class="count">0 items</div></div>
+        <div id="noteB" class="scan-note"></div><div id="itemsB" class="cards"></div><button id="moreB" class="more" type="button" hidden>Show more</button>
+      </section>
+
+      <section id="strand-c" class="strand">
+        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals</h2><p>Each scan checks a rolling news window for factual R&I/geopolitical developments. Signals can connect to a specific A/B publication or a curated strategic watch theme, and every admitted signal remains in the cumulative record.</p></div><div id="countC" class="count">0 signals</div></div>
+        <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
+      </section>
+
+      <div class="method"><strong>How accumulation works:</strong> the scanner still searches recent windows, but admitted A, B and C items are merged with the existing <code>radar.json</code> corpus and deduplicated. A quiet scan can therefore add zero new items without making yesterday’s evidence disappear.</div>
+    </main>
+    <footer><div class="wrap">R&I × Geopolitics + Foresight Methodology Radar</div></footer>
+  </div>
+
+<script src="briefing/insights.js?v=16"></script>
+<script>
+const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
+const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
+async function sha256(text){const data=new TextEncoder().encode(text);const hash=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("")}
+function unlock(){sessionStorage.setItem("radarUnlocked","1");document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";loadRadar()}
+if(sessionStorage.getItem("radarUnlocked")==="1") unlock();
+document.getElementById("gateForm").addEventListener("submit",async e=>{e.preventDefault();const input=document.getElementById("password");if(await sha256(input.value)===PASSWORD_HASH){unlock()}else{document.getElementById("gateError").textContent="Incorrect password.";input.select()}});
+document.getElementById("lock").addEventListener("click",()=>{sessionStorage.removeItem("radarUnlocked");location.reload()});
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+function fmtDate(v){if(!v)return "";const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(d)}
+function cleanText(v){return String(v??"").replace(/\s+/g," ").replace(/\.{5,}/g," ").trim()}
+function short(v,n=220){const s=cleanText(v);return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s}
+function pointFor(x){try{const p=globalThis.RadarInsights?.pointFor?.(x);if(p)return p}catch(e){}return short(x.relevance_note||x.signal_note||x.summary||"",220)}
+function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
+function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance].join(" ")).toLowerCase()}
+function filtered(items){const q=state.query.trim().toLowerCase();return items.filter(x=>(!state.onlyNew||x.new_this_scan)&&(!q||searchable(x).includes(q)))}
+function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
+function abItem(x){
+  const p=pointFor(x); const details=short(x.relevance_note||"",320); const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}${tag(x.eu_relevance)}</div></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.title||"Untitled")}</a></h3><div class="source">${esc([x.source,x.authors].filter(Boolean).join(" · "))}</div><p class="point"><strong>Signal:</strong> ${esc(p||"Accepted into the radar corpus.")}</p>${details&&details!==p?`<details><summary>Why it matters</summary><p>${esc(details)}</p></details>`:""}<div class="card-foot"><span>${esc(x.type||x.source_tier||"")}</span><span>${esc(seen)}</span></div></article>`
+}
+function cItem(x){const what=globalThis.RadarInsights?.signalWhat?.(x)||pointFor(x)||short(x.headline,180);const why=globalThis.RadarInsights?.signalWhy?.(x)||short(x.signal_note,220);const theme=globalThis.RadarInsights?.signalTheme?.(x)||"Strategic R&I";const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}${tag(x.signal_kind||x.signal_type||"signal")}</div></div><div class="source"><strong>WHAT CHANGED</strong></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(what)}</a></h3><div class="source">${esc(x.source||"")}</div><p class="point"><strong>WHY IT MATTERS:</strong> ${esc(why)}</p><details><summary>Radar connection</summary><p><strong>${esc(theme)}</strong>${x.anchor?`<br>${esc(x.anchor)}`:""}</p></details><div class="card-foot"><span>Weak signal</span><span>${esc(seen)}</span></div></article>`}
+function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
+function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}
+function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}
+function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:12};render()});document.getElementById("onlyNew").addEventListener("click",e=>{state.onlyNew=!state.onlyNew;e.currentTarget.classList.toggle("active",state.onlyNew);state.limits={A:12,B:12,C:12};render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.onlyNew=false;document.getElementById("search").value="";document.getElementById("onlyNew").classList.remove("active");state.limits={A:12,B:12,C:12};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
+wire();
+async function loadRadar(){
+  try{
+    const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();state.data=d;
+    const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
+    document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
+    document.getElementById("scanState").textContent=d.first_scan_complete?`Scanner · ${d.scan_health==="ok"?"active":"degraded"}`:"Scanner · pending";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent="Last scan · "+(d.last_updated?fmtDate(d.last_updated):"pending");
+    showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");render();
+  }catch(e){document.getElementById("scanState").textContent="Scanner · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
+}
+</script>
+</body>
+</html>
