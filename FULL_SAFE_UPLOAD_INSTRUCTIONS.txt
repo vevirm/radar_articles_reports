@@ -1,9 +1,8 @@
-V11 UPLOAD
+V12 UPLOAD
 
-1. Keep your existing populated radar.json in the GitHub repository.
-2. Upload/replace the files from this package over the current repository.
-3. Commit to main.
-4. The push starts the V11 scan immediately.
-5. Because the old radar does not have the V11 source-expansion marker, that first V11 scan searches the previous four calendar months for A/B reports and research papers, then merges them into the cumulative corpus.
-6. After that, the workflow runs every 12 hours with a 14-day A/B overlap and scans the full configured source universe each time.
-7. Do not add an empty radar.json from a package; this package intentionally does not contain one.
+1. Keep the existing live radar.json in the GitHub repository. Do not delete or replace it.
+2. Upload/replace the other files from this package at the repository root.
+3. Commit the changes to main.
+4. The push starts the V12 scan immediately.
+5. Because the live radar does not yet have the V12 admission-profile marker, the first V12 run rescans the previous four calendar months for A/B papers and reports using the moderately broadened criteria, then merges qualifying items into the cumulative corpus.
+6. After that, the existing GitHub Action runs every 12 hours with a 14-day overlap.

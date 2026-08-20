@@ -5,7 +5,7 @@ Key properties
 --------------
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
-* Strand A requires substantive R&I policy + geopolitics/economic security + EU relevance.
+* Strand A requires substantive R&I/related-system content + geopolitics/economic security + EU relevance.
   A same-sentence bridge is strong evidence, but a document-level bridge can also qualify.
 * Strand B requires methodology to be substantive, while allowing high-quality transferable
   public-sector R&I/S&T methods even when the case study is not explicitly EU-focused.
@@ -49,7 +49,7 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
-SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v11-major-source-backfill"))
+SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v12-balanced-relevance-backfill"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -84,6 +84,14 @@ RI_STRONG = [
     "international research cooperation", "international scientific cooperation",
     "research governance", "innovation governance", "research excellence",
     "innovation ecosystem", "research infrastructure policy", "knowledge security",
+    # V12: include the wider R&I system, not only texts that use explicit policy language.
+    "research and development", "r&d", "science and technology", "science & technology",
+    "scientific capacity", "research capacity", "innovation capacity", "innovation performance",
+    "technological capacity", "technological capabilities", "technology capabilities",
+    "technology development", "industrial research", "industrial innovation", "deep tech",
+    "technology transfer", "knowledge transfer", "research infrastructure", "research infrastructures",
+    "scientific infrastructure", "university research", "academic research", "higher education",
+    "research-intensive", "research organisation", "research organization", "research-performing",
 ]
 RI_GENERIC = ["research", "science", "innovation", "technology", "university", "academic"]
 POLICY_CONTEXT = [
@@ -103,6 +111,13 @@ GEO_STRONG = [
     "strategic dependencies", "weaponization", "weaponisation", "sanctions", "decoupling",
     "science diplomacy", "security screening", "knowledge security", "economic coercion",
     "strategic rivalry", "technology rivalry", "scientific rivalry",
+    # V12: geoeconomic channels that shape R&I capacity and technology ecosystems.
+    "supply chain security", "supply-chain security", "supply chain resilience",
+    "strategic supply chain", "foreign investment screening", "investment screening",
+    "outbound investment", "foreign subsidies", "trade restrictions", "trade controls",
+    "technology controls", "techno-nationalism", "technonationalism", "great power competition",
+    "great-power competition", "friendshoring", "friend-shoring", "reshoring",
+    "critical raw materials", "critical minerals", "strategic trade",
 ]
 CHINA_CONTEXT = ["china", "chinese"]
 CHINA_GEO_CONTEXT = [
@@ -117,6 +132,14 @@ EU_DIRECT = [
     "eu technology", "eu policy", "eu strategy", "eu framework", "eu regulation",
 ]
 EU_GENERIC = ["europe", "european", "europe's", "european countries"]
+MEMBER_STATE_SCOPE = [
+    "austria", "austrian", "belgium", "belgian", "bulgaria", "bulgarian", "croatia", "croatian",
+    "cyprus", "cypriot", "czechia", "czech republic", "czech", "denmark", "danish", "estonia", "estonian",
+    "finland", "finnish", "france", "french", "germany", "german", "greece", "greek", "hungary", "hungarian",
+    "ireland", "irish", "italy", "italian", "latvia", "latvian", "lithuania", "lithuanian",
+    "luxembourg", "malta", "maltese", "netherlands", "dutch", "poland", "polish", "portugal", "portuguese",
+    "romania", "romanian", "slovakia", "slovak", "slovenia", "slovenian", "spain", "spanish", "sweden", "swedish",
+]
 IMPLICATION_WORDS = [
     "implication", "consequence", "for europe", "for the eu", "europe should", "eu should",
     "europe needs", "eu needs", "europe must", "eu must", "european strategy",
@@ -179,6 +202,8 @@ THEMES = {
     "transatlantic / US–China S&T competition": ["us-china", "u.s.-china", "us–china", "transatlantic", "strategic competition", "technology competition"],
     "critical and emerging technologies": ["critical technology", "critical technologies", "emerging technology", "semiconductor", "chips", "quantum", "biotech", "artificial intelligence", " ai "],
     "economic security and R&I": ["economic security", "research funding", "innovation funding", "talent mobility", "strategic dependency", "strategic dependencies"],
+    "R&I competitiveness / technological capabilities": ["innovation capacity", "innovation competitiveness", "technological capabilities", "scientific capacity", "research and development", "r&d", "deep tech", "industrial innovation"],
+    "supply chains / strategic dependencies": ["supply chain security", "supply chain resilience", "strategic dependency", "strategic dependencies", "critical raw materials", "critical minerals", "friendshoring", "reshoring"],
     "Horizon Europe / FP10 international participation": ["horizon europe", "fp10", "association agreement", "third country", "third-country", "associated country"],
     "science diplomacy": ["science diplomacy", "scientific diplomacy"],
     "foresight / horizon scanning methodology": ["foresight methodology", "foresight method", "strategic foresight", "horizon scanning", "weak signal"],
@@ -264,30 +289,75 @@ def contains_any(text: str, phrases: Iterable[str]) -> bool:
     return bool(distinct_matches(text, phrases))
 
 
+def bounded_matches(text: str, phrases: Iterable[str]) -> list[str]:
+    """Match scope terms as whole words/phrases, avoiding e.g. German in germanium."""
+    low = normalized(text)
+    found = []
+    for phrase in phrases:
+        p = normalized(phrase)
+        if not p:
+            continue
+        if re.search(r"(?<![a-z0-9])" + re.escape(p) + r"(?![a-z0-9])", low) and phrase not in found:
+            found.append(phrase)
+    return found
+
+
 def has_eu_word(text: str) -> bool:
     return bool(re.search(r"\beu\b", normalized(text)))
 
 
 def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[str]]:
+    """Classify EU/European relevance without requiring literal 'EU' wording everywhere.
+
+    V12 treats Europe and EU member states as first-order scope when they are part of
+    the title/abstract. This is intentionally broader than V11, which missed relevant
+    work phrased as 'European innovation', 'German research', etc. The substantive
+    R&I + geopolitical gates still have to pass, so a bare Europe mention cannot admit
+    an item by itself.
+    """
     ta = f"{title}. {abstract}"
     direct = distinct_matches(ta, EU_DIRECT)
+    generic = distinct_matches(ta, EU_GENERIC)
+    member = bounded_matches(ta, MEMBER_STATE_SCOPE)
     if has_eu_word(ta):
         direct.append("EU")
-    if direct:
-        return "direct", list(dict.fromkeys(direct))[:4]
+    if direct or generic or member:
+        evidence = direct + generic + member
+        return "direct", list(dict.fromkeys(evidence))[:4]
 
     full = f"{ta}. {body[:50000]}"
     direct_body = distinct_matches(full, EU_DIRECT)
-    if has_eu_word(full):
-        direct_body.append("EU")
-    # Require multiple body-level direct signals if the title/abstract did not establish EU scope.
-    if len(set(direct_body)) >= 2:
-        return "direct", list(dict.fromkeys(direct_body))[:4]
+    generic_body = distinct_matches(full, EU_GENERIC)
+    member_body = bounded_matches(full, MEMBER_STATE_SCOPE)
+    strong_body_scope = distinct_matches(full, [
+        "european commission", "european parliament", "horizon europe", "fp10",
+        "european research area", "european economic security", "eu research",
+        "eu innovation", "eu science", "eu technology",
+    ])
+    eu_count = len(re.findall(r"\beu\b", normalized(full)))
+    # Body-only scope remains stricter than title/abstract scope: one passing 'EU'
+    # mention is not enough. A specific R&I/EU institution/programme can be enough,
+    # otherwise require repeated or multiple European scope signals.
+    combined_body = direct_body + generic_body + member_body
+    if strong_body_scope or eu_count >= 2 or len(set(combined_body)) >= 2:
+        evidence = strong_body_scope + combined_body
+        return "direct", list(dict.fromkeys(evidence))[:4]
 
-    # Derived EU relevance must be an explicit implication sentence, not a passing Europe mention.
+    # Derived EU relevance still requires an explicit implication/comparator sentence;
+    # generic words such as 'policy' or 'strategy' alone do not establish relevance.
+    derived_cues = [
+        "implication for", "implications for", "consequence for", "consequences for",
+        "for europe", "for the eu", "for european policymakers", "for eu policymakers",
+        "europe should", "eu should", "europe needs", "eu needs", "europe must", "eu must",
+        "lessons for europe", "lessons for the eu", "relevant for europe", "relevant for the eu",
+        "affects europe", "affects the eu", "matters for europe", "matters for the eu",
+        "what this means for europe", "what this means for the eu",
+        "policy options for europe", "policy options for the eu", "strategy for europe",
+        "strategy for the eu", "recommendations for europe", "recommendations for the eu",
+    ]
     for s in split_sentences(full):
-        if contains_any(s, EU_GENERIC) or has_eu_word(s):
-            if contains_any(s, IMPLICATION_WORDS) or contains_any(s, ["strategy", "policy", "implications", "consequences", "should", "needs to", "must", "for europe", "for the eu"]):
+        if contains_any(s, EU_GENERIC) or bool(bounded_matches(s, MEMBER_STATE_SCOPE)) or has_eu_word(s):
+            if contains_any(s, derived_cues):
                 return "derived", [s[:260]]
     return None, []
 
@@ -323,7 +393,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
     """Return balanced strand evidence.
 
     Discovery keywords never admit an item on their own.  Strand A still requires
-    substantive R&I-policy evidence, substantive geopolitical/economic-security
+    substantive R&I/related-system evidence, substantive geopolitical/economic-security
     evidence and EU relevance.  Unlike the previous strict version, the R&I↔geo
     bridge may be established at document level when the title/abstract and the
     evidence families make the relationship clear.
@@ -349,12 +419,17 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
     if china_geo_signal(full) and "China + security/strategic context" not in geo_full:
         geo_full.append("China + security/strategic context")
 
-    # One strong R&I-policy phrase in title/abstract is enough.  In body-only cases,
-    # require either two strong phrases or a strong phrase plus broader policy context.
+    # V12 keeps a real R&I floor but no longer requires every relevant paper to be
+    # explicitly framed as 'policy/governance'. One strong R&I-system signal in the
+    # body plus policy/strategy context is enough for trusted Tier 1/2 material.
     ri_substantive = bool(ri_ta) or len(set(ri_full)) >= 2 or (
-        bool(ri_full) and len(set(policy_full)) >= 2
+        source_tier <= 2 and bool(ri_full) and bool(policy_full)
     ) or (len(set(ri_generic_ta)) >= 2 and len(set(policy_ta)) >= 2)
-    geo_substantive = bool(geo_ta) or len(set(geo_full)) >= 2
+    # A single clear geopolitical/geoeconomic concept in a trusted analytical source
+    # is substantive enough; Tier 3 keeps the stricter two-signal body requirement.
+    geo_substantive = bool(geo_ta) or len(set(geo_full)) >= 2 or (
+        source_tier <= 2 and bool(geo_full)
+    )
 
     # Strongest bridge: R&I and geopolitical evidence in the same sentence.
     bridge_sentence = ""
@@ -380,7 +455,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
     mixed_bridge = bool(
         source_tier <= 2
         and eu_rel
-        and evidence_total >= 3
+        and evidence_total >= 2
         and (ri_ta or geo_ta)
         and ri_substantive
         and geo_substantive
@@ -426,18 +501,24 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
         "without methodological", "no methodological", "lacks methodological", "lack methodological",
     ])
     method_in_ta = bool(foresight_ta and method_ta and not ta_method_negated)
-    early_method_body = method_bridge_index < 18 and len(set(method_full)) >= 2
-    method_substantive = bool(explicit_method_title or method_in_ta or early_method_body)
+    early_method_body = method_bridge_index < 32 and len(set(method_full)) >= 2
+    # Tier-1 reports often put their methodology after an executive summary. Let a
+    # genuine foresight+method bridge deeper in the report qualify, while keeping the
+    # scholarly abstract-only path unchanged.
+    tier1_deep_method = bool(source_tier == 1 and method_bridge and len(set(method_full)) >= 2)
+    method_substantive = bool(explicit_method_title or method_in_ta or early_method_body or tier1_deep_method)
 
     # B must still be useful to R&I/S&T/strategic-policy practice.  Generic academic
     # "research" is not enough, which keeps unrelated futures papers out.
     b_context_terms = [
         "research and innovation", "research policy", "innovation policy", "science policy",
-        "technology policy", "science and technology", "research security",
-        "technology governance", "innovation governance", "public policy", "public sector",
-        "government", "regulation", "strategic policy", "economic security",
-        "critical technology", "critical technologies", "emerging technology",
-        "artificial intelligence", "semiconductor", "quantum", "biotechnology",
+        "technology policy", "science and technology", "research and development", "r&d",
+        "research security", "technology governance", "innovation governance", "public policy",
+        "public sector", "government", "regulation", "strategic policy", "economic security",
+        "research funding", "innovation system", "research system", "higher education",
+        "university research", "research organisation", "research organization", "technology assessment",
+        "industrial innovation", "deep tech", "critical technology", "critical technologies",
+        "emerging technology", "artificial intelligence", "semiconductor", "quantum", "biotechnology",
     ]
     b_context = bool(ri_substantive or geo_substantive or contains_any(ta, b_context_terms) or contains_any(full[:12000], b_context_terms))
 
@@ -449,7 +530,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int) -> dict[s
     b_eu_rel = eu_rel
     b_transferable = False
     if not b_eu_rel and source_tier <= 2 and foresight_substantive and method_substantive and b_context:
-        if explicit_method_title or (len(set(method_ta)) >= 2 and bool(foresight_ta)):
+        if explicit_method_title or method_in_ta or (source_tier == 1 and tier1_deep_method):
             b_eu_rel = "derived"
             b_transferable = True
 
@@ -943,12 +1024,15 @@ def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] |
     # Substantive-length rule.  Long analytical work is preferred, but concise
     # Tier-1 policy papers can qualify when the topic gates themselves are strong.
     low_title = normalized(title)
-    min_words = int(CONFIG.get("institution_min_words", 1200))
-    tier1_brief_min = int(CONFIG.get("institution_tier1_brief_min_words", 650))
-    if word_count < min_words:
+    min_words = int(CONFIG.get("institution_min_words", 900))
+    tier1_brief_min = int(CONFIG.get("institution_tier1_brief_min_words", 500))
+    tier3_min = int(CONFIG.get("institution_tier3_min_words", 1200))
+    effective_min = tier3_min if tier >= 3 else min_words
+    if word_count < effective_min:
         brief_exception = tier == 1 and word_count >= tier1_brief_min and any(x in low_title for x in [
             "policy brief", "briefing", "working paper", "discussion paper", "policy paper",
-            "report", "study", "analysis", "strategic", "security", "foresight"
+            "report", "study", "analysis", "strategic", "security", "foresight", "research",
+            "innovation", "technology", "science", "assessment"
         ])
         if not brief_exception:
             return None
@@ -1083,7 +1167,7 @@ def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str) -
 def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     eu = (evidence.get("eu_relevance") or "unknown").capitalize()
     if strand == "A":
-        return f"{eu} EU relevance; admitted after substantive R&I-policy and geopolitics/economic-security gates passed with a supported document-level connection."
+        return f"{eu} EU relevance; admitted after substantive R&I/related-system and geopolitics/economic-security gates passed with a supported document-level connection."
     if strand == "B":
         return f"{eu} EU relevance; admitted because foresight methodology is substantive and relevant to R&I/S&T or strategic-policy practice, not merely a trend/scenario output."
     return f"{eu} EU relevance; independently passes both Strand A and Strand B admission gates."
@@ -1405,7 +1489,7 @@ def factual_news(title: str, desc: str) -> bool:
     full = normalized(f"{title} {desc}")
     if any(x in full for x in NEWS_EXCLUDE):
         return False
-    if not (has_eu_word(full) or contains_any(full, EU_DIRECT + EU_GENERIC)):
+    if not (has_eu_word(full) or contains_any(full, EU_DIRECT + EU_GENERIC) or bounded_matches(full, MEMBER_STATE_SCOPE)):
         return False
     return any(x in full for x in NEWS_EVENT_TERMS)
 
@@ -1625,6 +1709,7 @@ def main() -> int:
         "first_scan_complete": True,
         "corpus_start_date": DATE_FLOOR.isoformat(),
         "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v12")),
         "scan_health": health,
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),

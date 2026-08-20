@@ -4,7 +4,7 @@ try:
     import feedparser  # noqa: F401
 except ModuleNotFoundError:
     sys.modules["feedparser"] = types.ModuleType("feedparser")
-from scripts.scan_radar import gate_scope, document_exclusion_reason
+from scripts.scan_radar import gate_scope, document_exclusion_reason, eu_evidence
 
 
 class ClassifierTests(unittest.TestCase):
@@ -83,6 +83,67 @@ class ClassifierTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 2)
         self.assertFalse(ev["b_pass"])
 
+
+class V12BalancedRelevanceTests(unittest.TestCase):
+    def test_accepts_european_ri_capabilities_without_policy_wording(self):
+        title = "Europe innovation capacity in a fragmented technology order"
+        abstract = (
+            "Europe's innovation capacity is being reshaped by US-China technology competition. "
+            "The paper analyses R&D intensity, deep-tech scale-up, semiconductor capabilities and "
+            "supply-chain security across European economies."
+        )
+        ev = gate_scope(title, abstract, "", 2)
+        self.assertTrue(ev["a_pass"])
+        self.assertEqual(ev["eu_relevance"], "direct")
+
+    def test_accepts_member_state_ri_geopolitics_as_direct_eu_scope(self):
+        title = "Germany research and innovation under strategic competition"
+        abstract = (
+            "Germany's research and innovation system faces pressure from strategic competition with China "
+            "and new technology controls. The study examines university research, R&D cooperation and "
+            "technological capabilities."
+        )
+        ev = gate_scope(title, abstract, "", 2)
+        self.assertTrue(ev["a_pass"])
+        self.assertEqual(ev["eu_relevance"], "direct")
+
+    def test_still_rejects_generic_european_geopolitics_without_ri(self):
+        title = "Europe in a new era of strategic competition"
+        abstract = "The report examines sanctions, military alliances and national security competition between major powers."
+        ev = gate_scope(title, abstract, "", 1)
+        self.assertFalse(ev["a_pass"])
+
+    def test_still_rejects_generic_european_innovation_without_geopolitics(self):
+        title = "European startup competitiveness"
+        abstract = "The report examines venture capital, startup growth and productivity across European firms."
+        ev = gate_scope(title, abstract, "", 1)
+        self.assertFalse(ev["a_pass"])
+
+
+    def test_member_state_scope_uses_whole_words(self):
+        rel, evidence = eu_evidence("Germanium materials for quantum devices", "A technical materials study.", "")
+        self.assertIsNone(rel)
+        self.assertEqual(evidence, [])
+
+    def test_one_passing_eu_body_mention_is_not_enough(self):
+        rel, _ = eu_evidence(
+            "Global technology competition",
+            "A comparison of US and Chinese technology systems.",
+            "The paper focuses on the United States and China. EU policy is mentioned once in a footnote-style comparison.",
+        )
+        self.assertIsNone(rel)
+
+    def test_accepts_tier1_foresight_methodology_deeper_in_report(self):
+        title = "Futures for European research funding"
+        abstract = "This European report examines strategic foresight for research organisations and innovation funding."
+        body = (
+            ("Executive summary. " * 40)
+            + "The report applies strategic foresight to research funding and technology policy. "
+            + "The methodology combines horizon scanning with participatory scenario construction. "
+            + "The process uses weak signals, stakeholder workshops and evaluation criteria to test robustness."
+        )
+        ev = gate_scope(title, abstract, body, 1)
+        self.assertTrue(ev["b_pass"])
 
 if __name__ == "__main__":
     unittest.main()

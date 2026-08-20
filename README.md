@@ -1,64 +1,57 @@
-# R&I × Geopolitics Radar — V11
+# R&I × Geopolitics Radar — V12
 
-EU-first, cumulative R&I/geopolitics and foresight-methodology radar for GitHub Pages.
+A cumulative GitHub Pages radar for research papers, analytical reports, foresight methodology and anchored weak signals relevant to European research and innovation in a geopolitical context.
 
-## V11: deeper A/B report and paper coverage
+## V12: balanced relevance
 
-V11 changes the discovery layer rather than weakening the admission criteria.
+V11 improved source coverage but the admission gates were still too narrow. V12 deliberately loosens them **moderately**, not indiscriminately.
 
-- **First V11 scan: four calendar months of Strand A/B backfill.** On a new installation, and once when upgrading from an older radar build, the scanner searches from `today - 4 months` through the current date. On 20 August 2026 that means a discovery window beginning 20 April 2026.
-- **Then every 12 hours.** The GitHub Action keeps a 14-day A/B discovery overlap to catch late indexing and corrected metadata, while the accepted corpus remains cumulative.
-- **OpenAlex + Crossref are now broad scholarly discovery layers.** Relevant journal articles are no longer rejected just because the journal was missing from a small hard-coded list. Exact core journals still rank higher, but the A/B substantive gates remain the admission control.
-- **Much larger direct-report source universe.** The institutional crawler now covers more EU bodies, European research/innovation organisations, think tanks, foresight organisations, and major non-EU policy/research players.
-- **Institutional recall is improved.** Recent pages from a whitelisted institution are eligible even when the CMS URL has an opaque slug. Report/publication-looking URLs are prioritised, but a URL keyword is no longer mandatory.
-- **More pages are inspected during the four-month bootstrap** and the workflow timeout is extended to 60 minutes for that one heavier pass.
-- **Everything still accumulates.** Accepted A, B and anchored C items are deduplicated and retained. A quiet scan cannot erase earlier material.
+The scanner now accepts analytical work about the wider EU R&I system when the geopolitical connection is substantive even if the publication does not repeatedly use formal phrases such as `research policy` or `innovation governance`. This includes R&D/scientific capacity, universities and higher education where they affect research, research infrastructures, talent, technology development and transfer, deep tech, innovation ecosystems, technological capabilities, and critical/emerging technologies.
 
-## Source coverage model
+The geopolitical/economic-security side is also broader: supply-chain security/resilience, investment screening, critical raw materials, techno-nationalism, strategic dependencies, technology controls and great-power competition can establish the geopolitical context when they materially interact with R&I.
 
-### Scholarly publishers and journals
+Important safeguards remain: an A item still needs (1) real R&I/related-system substance, (2) real geopolitical/economic-security substance, and (3) EU/European/member-state relevance. Generic geopolitics, generic innovation/business, pure technical papers and ordinary web/news/event/call/project pages remain excluded.
 
-OpenAlex and Crossref search across the scholarly literature rather than crawling a finite publisher list. This covers material from major publisher families such as Springer Nature, Elsevier, Wiley, Taylor & Francis, SAGE, Oxford University Press, Cambridge University Press, IEEE, ACM, Emerald, MDPI, Frontiers, PLOS and comparable journals. Core R&I/foresight journals retain priority ranking.
+## EU relevance changes
 
-### Direct institutional/report publishers
+V12 treats `Europe`, `European`, and EU member states in a title/abstract as direct European scope. V11 was too literal about explicit `EU` wording and could miss papers framed as, for example, European innovation, German research security or French technology strategy.
 
-The configured direct-source set includes EU institutions and agencies; OECD and European research-policy organisations; Bruegel, CEPS, MERICS, SWP, IFRI, EUISS, Clingendael, Chatham House, ECFR, CER, EPC, ECIPE, DGAP, CIDOB, Jacques Delors Institute, Bertelsmann Stiftung, Fraunhofer ISI, Rathenau, CWTS, Nesta, Demos Helsinki and the Copenhagen Institute for Futures Studies; plus major non-EU players such as RAND, CSIS, Brookings, Carnegie, CSET, ASPI, NBER, CFR, Atlantic Council, ITIF, Belfer, CNAS, National Academies Press, UNESCO and the World Bank.
+Non-European work still needs explicit lessons/implications for Europe to enter Strand A. High-quality foresight methodology can be marked derived when clearly transferable to EU public-sector R&I/S&T practice.
 
-The exact current list is in `radar_config.json`, so it can be extended without changing the UI.
+## Strand B changes
 
-## What qualifies
+B remains methodology-first. It now better handles substantial institutional reports where the methodology section comes after a long executive summary. Trend reports and scenario outputs without methodological reflection are still rejected.
 
-### Strand A — R&I under geopolitical/economic-security change
+## Discovery schedule
 
-A publication must have substantive R&I/science/technology policy content, substantive geopolitical/economic-security content, a supported connection between them, and direct or explicit derived EU relevance. Eligible material includes peer-reviewed papers, working papers, institutional reports, policy studies and substantive briefs.
+- **First V12 run:** one-time four-calendar-month A/B re-backfill under the new criteria. On 20 August 2026 the window starts on 20 April 2026.
+- **Later runs:** every 12 hours with a 14-day overlap for A/B discovery.
+- **Corpus:** A, B and C remain cumulative and deduplicated. Accepted historical items are not removed by later scan windows.
 
-### Strand B — foresight methodology
+The V12 marker is intentionally different from V11, so upgrading triggers the four-month rescan and gives previously rejected papers/reports another chance to qualify.
 
-B is methodology-first: strategic foresight, horizon scanning, scenarios, weak-signal detection, anticipatory governance, Delphi, backcasting, morphological analysis, participatory methods, strategic intelligence, robustness/evaluation and related methods. Direct EU practice is prioritised; strong transferable public-sector R&I/S&T methodology can enter as derived EU relevance.
+## Sources
 
-### Strand C — anchored weak signals
+OpenAlex and Crossref are searched broadly across peer-reviewed literature, while institutional discovery covers the curated EU/European and major international publishers/players in `radar_config.json`. Discovery queries have also been expanded toward European R&D, technological capabilities, deep tech, innovation competitiveness, research infrastructures, universities, supply-chain security and strategic technology ecosystems.
 
-C uses trusted current-news sources and requires an explicit connection to accepted A/B literature or a recurring A/B theme. Discovery uses a current window, but once a signal is admitted it stays in the cumulative corpus.
+## Institutional quality floor
 
-## Scan schedule
+- normal trusted analytical institutional material: roughly 900+ words;
+- concise Tier-1 analytical briefs: roughly 500+ words when the title/type and substantive gates are strong;
+- Tier-3 institutional material: 1,200+ words.
 
-The active workflow is `.github/workflows/radar-scan.yml`.
+Hard document-type exclusions remain in place.
 
-- commit/upload to `main` → scan immediately;
-- first V11 run → four-month A/B source-expansion backfill;
-- after that → every 12 hours;
-- later A/B scans use a 14-day overlap;
-- first-ever C run uses 7 days, later C scans use 48 hours;
-- accepted material is never removed merely because it falls outside a later discovery window.
+## Safe upgrade
 
-## Important upload rule
+Do **not** overwrite a populated live `radar.json` with an empty template. This package intentionally does not include `radar.json`.
 
-Do **not** overwrite a populated live `radar.json` with an empty template. This package intentionally does not include `radar.json`. Upload these files over the repository, retain the existing live radar data, and commit to `main`. V11 will then run its one-time four-month source-expansion backfill and merge the results into the existing cumulative corpus.
+Upload the package files over the repository, retain the existing live `radar.json`, and commit to `main`. The GitHub Action will run the V12 four-month re-backfill, merge newly qualifying items into the cumulative corpus, and then continue on its 12-hour schedule.
 
-## GitHub Pages
+## Local tests
 
-Expected site: `https://vevirm.github.io/radar_articles_reports/`
+Run:
 
-Pages settings should remain **Deploy from a branch → main → /(root)**.
-
-The main radar and `/briefing/` both read the same cumulative `radar.json`.
+```bash
+python -m unittest discover -s tests -v
+```

@@ -14,11 +14,11 @@ class InsightsPageTests(unittest.TestCase):
         self.assertIn("fetch('../radar.json?ts='+Date.now()", page)
         self.assertIn('Search insights and sources', page)
         self.assertIn('All history', page)
-        self.assertIn('cumulative-insights-v11', page)
+        self.assertIn('cumulative-insights-v12', page)
 
-    def test_main_radar_points_to_v11_briefing(self):
+    def test_main_radar_points_to_v12_briefing(self):
         page=(ROOT/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="briefing/?v=11">Open Radar Insights</a>',page)
+        self.assertIn('href="briefing/?v=12">Open Radar Insights</a>',page)
         self.assertIn('Cumulative corpus', page)
 
     def test_old_generator_and_workflow_removed(self):

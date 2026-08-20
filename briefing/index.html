@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta name="radar-insights-build" content="cumulative-insights-v11">
+<meta name="radar-insights-build" content="cumulative-insights-v12">
 <meta name="theme-color" content="#101827">
 <title>Radar Insights</title>
 <style>
@@ -22,7 +22,7 @@ main{padding:25px 0 65px}.topic{margin:0 0 18px}.topic-head{display:flex;justify
 <section class="summary"><div class="wrap summary-grid"><div class="stat"><div class="label">Insights</div><div id="totalInsights" class="value">—</div><div class="sub">clear signal points</div></div><div class="stat"><div class="label">Topics</div><div id="totalTopics" class="value">—</div><div class="sub">active topic clusters</div></div><div class="stat"><div class="label">Weak signals</div><div id="totalSignals" class="value">—</div><div class="sub">historical Strand C</div></div><div class="stat"><div class="label">New this scan</div><div id="totalNew" class="value">—</div><div class="sub">newly admitted points</div></div></div></section>
 <div class="controls"><div class="wrap control-row"><input id="search" class="search" type="search" placeholder="Search insights and sources…" aria-label="Search insights"><button id="newOnly" class="chip" type="button">New this scan</button><button id="all" class="chip active" type="button">All history</button></div></div>
 <main class="wrap" id="insights"><p class="state">Loading cumulative insights…</p></main>
-<script src="insights.js?v=11"></script>
+<script src="insights.js?v=12"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ui={groups:[],query:'',newOnly:false};
