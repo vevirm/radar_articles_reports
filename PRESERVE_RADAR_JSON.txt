@@ -1,3 +1,5 @@
-NO MANUAL PRESERVATION STEP IS REQUIRED IN V17.
+NO MANUAL radar.json PRESERVATION STEP IS REQUIRED IN V17.2.
 
-The complete repository ZIP includes radar.json. It is marked as an upload seed so the first scan can recover/merge a larger cumulative radar from Git history before revalidation and scanning.
+The complete repository ZIP includes radar.json with a one-run repository_bundle_seed marker. On the first scan after upload, the scanner checks recent Git history and merges a larger pre-upload A/B/C corpus back when one exists.
+
+After that first scan, the marker is removed and radar.json remains the cumulative corpus plus the persistent source-cursor checkpoint.

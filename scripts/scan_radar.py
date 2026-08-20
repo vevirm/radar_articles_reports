@@ -55,6 +55,7 @@ SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-schol
 QUALITY_PROFILE_VERSION = str(CONFIG.get("quality_profile_version", "v17-eu-ri-geo-substance"))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
+INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -67,6 +68,11 @@ MAX_C = int(CONFIG.get("max_c_per_scan", 0))
 MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 0))
 REQUEST_TIMEOUT = int(CONFIG.get("request_timeout_seconds", 12))
 SCAN_DEADLINE_MONO: float | None = None
+SCAN_STAGE_DEADLINES: dict[str, float] = {}
+KNOWN_AB_IDENTITIES: set[str] = set()
+KNOWN_AB_LINKS: set[str] = set()
+KNOWN_SIGNAL_IDENTITIES: set[str] = set()
+INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
@@ -98,6 +104,125 @@ def budget_remaining() -> float:
 
 def deadline_reached(reserve_seconds: int = 0) -> bool:
     return budget_remaining() <= reserve_seconds
+
+
+def stage_deadline_reached(stage_deadline: float | None, reserve_seconds: int = 0) -> bool:
+    """Respect both the overall scan budget and a source-family time slice."""
+    if deadline_reached(reserve_seconds):
+        return True
+    return stage_deadline is not None and time.monotonic() >= stage_deadline
+
+
+def stable_item_identity(title: str = "", doi_or_link: str = "") -> str:
+    """Cheap DOI/title identity usable before expensive classification or page parsing."""
+    raw = normalized(doi_or_link)
+    m = re.search(r"10\.\d{4,9}/[^\s?#]+", raw)
+    if m:
+        return "doi:" + m.group(0).rstrip(".,)")
+    return "title:" + norm_title(title)
+
+
+def normalized_link(value: Any) -> str:
+    return normalized(clean_text(value)).rstrip("/")
+
+
+def institution_fingerprint(url: str, lastmod: dt.date | None) -> str:
+    """Stable page fingerprint; a changed sitemap lastmod permits a revisit."""
+    return f"{normalized_link(url)}|{lastmod.isoformat() if lastmod else ''}"
+
+
+def rotating_batch(items: list[Any], cursor: int, limit: int) -> tuple[list[Any], int, bool]:
+    """Return a bounded circular slice and the next cursor.
+
+    The cursor is persisted in radar.json, so scheduled scans continue through the
+    query/source universe instead of restarting at the first item every 12 hours.
+    """
+    seq = list(items)
+    if not seq:
+        return [], 0, True
+    n = len(seq) if limit <= 0 else min(len(seq), max(1, int(limit)))
+    start = int(cursor or 0) % len(seq)
+    # Never wrap inside one run. The final batch in a cycle is simply shorter,
+    # which avoids re-requesting the first queries before the checkpoint is saved.
+    end = min(len(seq), start + n)
+    batch = seq[start:end]
+    wrapped = end >= len(seq)
+    return batch, (0 if wrapped else end), wrapped
+
+
+def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
+    """Load or initialise persistent incremental-discovery cursors."""
+    old = previous.get("scan_state") if isinstance(previous, dict) else None
+    source_done = previous.get("source_expansion_version") == SOURCE_EXPANSION_VERSION if isinstance(previous, dict) else False
+    state_matches = (
+        isinstance(old, dict)
+        and old.get("version") == INCREMENTAL_STATE_VERSION
+        and old.get("source_expansion_version") == SOURCE_EXPANSION_VERSION
+    )
+    if state_matches:
+        state = dict(old)
+    else:
+        state = {
+            "version": INCREMENTAL_STATE_VERSION,
+            "source_expansion_version": SOURCE_EXPANSION_VERSION,
+            "openalex_cursor": 0,
+            "crossref_broad_cursor": 0,
+            "crossref_priority_cursor": 0,
+            "institution_cursor": 0,
+            "backfill": {
+                "openalex": bool(source_done),
+                "crossref_broad": bool(source_done),
+                "crossref_priority": bool(source_done),
+                "institutions": bool(source_done),
+            },
+            "completed_cycles": {
+                "openalex": 0, "crossref_broad": 0, "crossref_priority": 0, "institutions": 0
+            },
+            "cycle_failed": {
+                "openalex": False, "crossref_broad": False, "crossref_priority": False, "institutions": False
+            },
+            "institution_seen_fingerprints": {},
+        }
+    state.setdefault("backfill", {})
+    state.setdefault("completed_cycles", {})
+    state.setdefault("cycle_failed", {})
+    if not isinstance(state.get("institution_seen_fingerprints"), dict):
+        state["institution_seen_fingerprints"] = {}
+    for key in ("openalex", "crossref_broad", "crossref_priority", "institutions"):
+        state["backfill"].setdefault(key, False)
+        state["completed_cycles"].setdefault(key, 0)
+        state["cycle_failed"].setdefault(key, False)
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "institution_cursor"):
+        state[key] = int(state.get(key, 0) or 0)
+    state["version"] = INCREMENTAL_STATE_VERSION
+    state["source_expansion_version"] = SOURCE_EXPANSION_VERSION
+    return state
+
+
+def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[str], set[str]]:
+    ab_ids: set[str] = set()
+    ab_links: set[str] = set()
+    sig_ids: set[str] = set()
+    for strand in ("strand_a", "strand_b"):
+        for item in previous.get(strand, []) if isinstance(previous.get(strand), list) else []:
+            if not isinstance(item, dict):
+                continue
+            key = stable_item_identity(item.get("title", ""), item.get("link", ""))
+            if key != "title:":
+                ab_ids.add(key)
+            link = normalized_link(item.get("link", ""))
+            if link:
+                ab_links.add(link)
+    for item in previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []:
+        if not isinstance(item, dict):
+            continue
+        title = item.get("headline", "")
+        source = item.get("source", "")
+        link = normalized_link(item.get("link", ""))
+        key = f"signal:{normalized(source)}:{norm_title(title)}" if title and source else f"signal-link:{link}"
+        if key not in {"signal::", "signal-link:"}:
+            sig_ids.add(key)
+    return ab_ids, ab_links, sig_ids
 
 
 # ---------------------------------------------------------------------------
@@ -783,7 +908,7 @@ def candidate_from_openalex(work: dict[str, Any]) -> dict[str, Any] | None:
     )
 
 
-def collect_openalex(from_date: dt.date, warnings: list[str]) -> list[dict[str, Any]]:
+def collect_openalex(from_date: dt.date, warnings: list[str], queries_override: list[str] | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
     """Zero-config OpenAlex discovery.
 
     Uses the public endpoint anonymously, as earlier radar versions did.  There is
@@ -791,7 +916,7 @@ def collect_openalex(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
     if anonymous access is unavailable the stage stops quickly while Crossref and
     direct institutional scanning continue.
     """
-    queries = list(dict.fromkeys(CONFIG["queries_a"] + CONFIG["queries_b"]))
+    queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     per_page = int(CONFIG.get("openalex_per_query", 60))
     workers = max(1, min(int(CONFIG.get("openalex_public_workers", 2)), 3))
     timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
@@ -812,7 +937,7 @@ def collect_openalex(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
     def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
         if stop_public.is_set():
             return [], "public endpoint unavailable"
-        if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
         params = {
             "search": q,
@@ -830,6 +955,11 @@ def collect_openalex(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
                     works = r.json().get("results", [])
                     out = []
                     for work in works:
+                        if bool(CONFIG.get("skip_known_items_before_classification", True)):
+                            title0 = clean_text(work.get("title") or work.get("display_name"))
+                            doi0 = clean_text(work.get("doi"))
+                            if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+                                continue
                         item = candidate_from_openalex(work)
                         if item:
                             out.append(item)
@@ -942,7 +1072,7 @@ def candidate_from_crossref(item: dict[str, Any]) -> dict[str, Any] | None:
     )
 
 
-def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, Any]]:
+def collect_crossref(from_date: dt.date, warnings: list[str], queries_override: list[str] | None = None, priority_tasks_override: list[tuple[str, str]] | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
     """Zero-config Crossref discovery using only the anonymous public pool.
 
     V17 gives scholarly literature a dedicated priority sweep. Before the broad
@@ -950,11 +1080,12 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
     focused on the EU + R&I + geopolitics triangle. This increases recall of
     peer-reviewed work without loosening the admission gate.
     """
-    queries = list(dict.fromkeys(CONFIG["queries_a"] + CONFIG["queries_b"]))
+    queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     rows = int(CONFIG.get("crossref_rows_per_query", 50))
     priority_rows = int(CONFIG.get("crossref_priority_journal_rows", 35))
     priority_journals = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
     priority_queries = list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
+    priority_tasks = priority_tasks_override if priority_tasks_override is not None else [(j, q) for j in priority_journals for q in priority_queries]
     min_interval = float(CONFIG.get("crossref_public_min_interval_seconds", 0.80))
     timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
     retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
@@ -970,7 +1101,7 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
             last_request[0] = time.monotonic()
 
     def fetch_query(q: str, journal: str = "") -> tuple[list[dict[str, Any]], str | None]:
-        if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
         params = {
             "query.bibliographic": q,
@@ -990,6 +1121,12 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
                     works = r.json().get("message", {}).get("items", [])
                     out = []
                     for item in works:
+                        if bool(CONFIG.get("skip_known_items_before_classification", True)):
+                            titles0 = item.get("title") or []
+                            title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
+                            doi0 = clean_text(item.get("DOI"))
+                            if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+                                continue
                         c = candidate_from_crossref(item)
                         if c:
                             out.append(c)
@@ -1013,30 +1150,24 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
     out: list[dict[str, Any]] = []
     budget_hit = False
 
-    if priority_journals and priority_queries:
-        log_progress(
-            f"Crossref priority journal sweep: {len(priority_journals)} journals × "
-            f"{len(priority_queries)} focused queries"
-        )
-        for journal in priority_journals:
-            for q in priority_queries:
-                if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
-                    budget_hit = True
-                    break
-                items, err = fetch_query(q, journal)
-                out.extend(items)
-                if err == "budget":
-                    budget_hit = True
-                    break
-                if err:
-                    warnings.append(f"Crossref priority {journal}: {err}")
-            if budget_hit:
+    if priority_tasks:
+        log_progress(f"Crossref priority journal sweep: {len(priority_tasks)} rotating task(s) this run")
+        for journal, q in priority_tasks:
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+                budget_hit = True
                 break
+            items, err = fetch_query(q, journal)
+            out.extend(items)
+            if err == "budget":
+                budget_hit = True
+                break
+            if err:
+                warnings.append(f"Crossref priority {journal}: {err}")
 
     if not budget_hit:
         log_progress(f"Crossref broad scholarly sweep: {len(queries)} queries")
         for q in queries:
-            if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
                 budget_hit = True
                 break
             items, err = fetch_query(q)
@@ -1192,10 +1323,16 @@ def pdf_text(url: str) -> tuple[str, int]:
         return "", 0
 
 
-def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] | None:
+def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "") -> dict[str, Any] | None:
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        return None
+    if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(url) in KNOWN_AB_LINKS:
+        return None
     r = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
     if not r or "html" not in r.headers.get("content-type", "text/html"):
         return None
+    if fingerprint:
+        INSTITUTION_SEEN_FINGERPRINTS[fingerprint] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
     soup = BeautifulSoup(r.text, "html.parser")
     title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else "")
     page_type = meta_content(soup, ["og:type", "article:section", "type"])
@@ -1291,11 +1428,15 @@ def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] |
     )
 
 
-def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False) -> tuple[list[tuple[str, str, int]], str | None]:
+def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None) -> tuple[list[tuple[str, str, int, str]], str | None]:
     domain = src["domain"]
     entries = []
     max_entries = int(CONFIG.get("sitemap_max_entries", 800))
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        return [], f"Institution discovery budget reached before {domain}"
     for sm in discover_sitemaps(domain):
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
         entries.extend(sitemap_entries(sm))
         if len(entries) >= max_entries:
             break
@@ -1306,22 +1447,30 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     limit = int(CONFIG.get(limit_key, CONFIG.get("institution_pages_per_domain", 24)))
     ranked = sorted(entries, key=lambda x: (institution_url_score(x[0], x[1], from_date), x[1] or dt.date.min), reverse=True)
     for u, last in ranked:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
         if u in seen or institution_url_score(u, last, from_date) < 0:
             continue
+        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(u) in KNOWN_AB_LINKS:
+            continue
+        fp = institution_fingerprint(u, last)
+        if fp in INSTITUTION_SEEN_FINGERPRINTS:
+            continue
         seen.add(u)
-        jobs.append((u, src["name"], int(src["tier"])))
+        jobs.append((u, src["name"], int(src["tier"]), fp))
         if len(jobs) >= limit:
             break
     return jobs, None
 
 
-def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False) -> list[dict[str, Any]]:
+def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
     jobs = []
+    sources = sources_override if sources_override is not None else CONFIG["institution_sources"]
     discovery_workers = int(CONFIG.get("institution_discovery_workers", 12))
     page_workers = int(CONFIG.get("institution_page_workers", 24))
-    log_progress(f"Institutional discovery: {len(CONFIG['institution_sources'])} configured sources")
+    log_progress(f"Institutional discovery: {len(sources)} rotating source(s) this run")
     with cf.ThreadPoolExecutor(max_workers=max(1, discovery_workers)) as ex:
-        futs = [ex.submit(_discover_domain, src, from_date, bootstrap) for src in CONFIG["institution_sources"]]
+        futs = [ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline) for src in sources]
         for fut in cf.as_completed(futs):
             try:
                 found, warn = fut.result()
@@ -1337,7 +1486,7 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     jobs = jobs[:max_jobs]
     log_progress(f"Institutional parsing: {len(jobs)} candidate page(s) queued")
     with cf.ThreadPoolExecutor(max_workers=max(1, page_workers)) as ex:
-        futs = [ex.submit(parse_institution_page, u, s, t) for u, s, t in jobs]
+        futs = [ex.submit(parse_institution_page, u, s, t, stage_deadline, fp) for u, s, t, fp in jobs]
         for fut in cf.as_completed(futs):
             try:
                 item = fut.result()
@@ -1345,6 +1494,8 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
                     out.append(item)
             except Exception as e:
                 warnings.append(f"Institution page: {type(e).__name__}")
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        warnings.append("Institutional report stage budget reached; remaining pages/sources will continue from the persisted cursor on later runs")
     return out
 
 def evidence_summary(evidence: dict[str, Any], strand: str) -> str:
@@ -1674,6 +1825,16 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
         saved["new_this_scan"] = False
         merged_c[key] = saved
     out["strand_c"] = sorted(merged_c.values(), key=lambda x: str(x.get("date", "")), reverse=True)
+
+    # If this is a repeated V17.2 whole-repository upload, keep the newer live
+    # incremental checkpoint as well as its corpus. A bundle seed must not reset
+    # already-advanced source cursors back to zero. Future state versions do not
+    # cross this boundary because their version marker will differ.
+    rec_state = rec.get("scan_state") if isinstance(rec, dict) else None
+    if isinstance(rec_state, dict) and rec_state.get("version") == INCREMENTAL_STATE_VERSION:
+        out["scan_state"] = dict(rec_state)
+        out["incremental_state_version"] = INCREMENTAL_STATE_VERSION
+
     return out
 
 
@@ -1989,7 +2150,7 @@ def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
     return False, name
 
 
-def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None) -> list[dict[str, Any]]:
+def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
     lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
     start = now - dt.timedelta(hours=lookback_hours)
     workers = int(CONFIG.get("news_workers", 10))
@@ -2004,7 +2165,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
 
     def fetch_job(job: tuple[str, str, str, bool]) -> tuple[list[dict[str, Any]], str | None]:
         name, domain, q, is_global = job
-        if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
         url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
         try:
@@ -2035,6 +2196,9 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 if suffix and title.lower().endswith(" - " + suffix.lower()):
                     title = title[:-(len(suffix) + 3)].strip()
             if not title or not factual_news(title, desc):
+                continue
+            signal_key = f"signal:{normalized(source_name)}:{norm_title(title)}"
+            if signal_key in KNOWN_SIGNAL_IDENTITIES:
                 continue
             text = f"{title}. {desc}"
             items.append({
@@ -2252,15 +2416,16 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, SCAN_DEADLINE_MONO
+    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS
     started = time.time()
     log_progress.started = time.monotonic()
-    budget_seconds = int(CONFIG.get("scan_budget_seconds", 2400))
+    budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
     SCAN_DEADLINE_MONO = time.monotonic() + budget_seconds
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
     previous = load_previous()
+
     quality_migration = previous.get("quality_profile_version") != QUALITY_PROFILE_VERSION
     quality_removed = {"strand_a": 0, "strand_b": 0}
     if quality_migration:
@@ -2270,44 +2435,143 @@ def main() -> int:
             f"{quality_removed['strand_a']} old A and {quality_removed['strand_b']} old B item(s) "
             "that no longer meet the EU + R&I + geopolitics substance gate"
         )
+
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
-    from_date, bootstrap_ab = scan_from_date(previous, now.date())
-    log_progress(f"Scan start: A/B from {from_date.isoformat()} (four-month backfill={bootstrap_ab}); hard budget {budget_seconds//60} min")
+    KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES = known_sets_from_previous(previous)
+    state = initial_scan_state(previous)
+    INSTITUTION_SEEN_FINGERPRINTS = dict(state.get("institution_seen_fingerprints", {}))
+
+    try:
+        last = dateparser.parse(previous.get("last_updated", "")).date()
+        incremental_from = max(DATE_FLOOR, last - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS))
+    except Exception:
+        incremental_from = bootstrap_floor(now.date())
+    backfill_from = bootstrap_floor(now.date())
+
+    all_queries = list(dict.fromkeys(CONFIG.get("queries_a", []) + CONFIG.get("queries_b", [])))
+    oa_batch, state["openalex_cursor"], oa_wrapped = rotating_batch(
+        all_queries, state.get("openalex_cursor", 0), int(CONFIG.get("openalex_queries_per_scan", 40))
+    )
+    cr_batch, state["crossref_broad_cursor"], cr_broad_wrapped = rotating_batch(
+        all_queries, state.get("crossref_broad_cursor", 0), int(CONFIG.get("crossref_broad_queries_per_scan", 35))
+    )
+    priority_tasks_all = [
+        (journal, query)
+        for journal in list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
+        for query in list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
+    ]
+    cr_priority_batch, state["crossref_priority_cursor"], cr_priority_wrapped = rotating_batch(
+        priority_tasks_all,
+        state.get("crossref_priority_cursor", 0),
+        int(CONFIG.get("crossref_priority_tasks_per_scan", 45)),
+    )
+    institution_sources_all = list(CONFIG.get("institution_sources", []))
+    inst_batch, state["institution_cursor"], inst_wrapped = rotating_batch(
+        institution_sources_all,
+        state.get("institution_cursor", 0),
+        int(CONFIG.get("institution_sources_per_scan", 18)),
+    )
+
+    oa_backfill = not bool(state["backfill"].get("openalex"))
+    cr_backfill = not (
+        bool(state["backfill"].get("crossref_broad"))
+        and bool(state["backfill"].get("crossref_priority"))
+    )
+    inst_backfill = not bool(state["backfill"].get("institutions"))
+    bootstrap_ab = oa_backfill or cr_backfill or inst_backfill
+    oa_from = backfill_from if oa_backfill else incremental_from
+    cr_from = backfill_from if cr_backfill else incremental_from
+    inst_from = backfill_from if inst_backfill else incremental_from
+
+    log_progress(
+        "Scan start: persistent incremental mode; "
+        f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
+        f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) from {cr_from.isoformat()}, "
+        f"institutions {len(inst_batch)}/{len(institution_sources_all)} source(s) from {inst_from.isoformat()}; "
+        f"hard budget {budget_seconds//60} min"
+    )
+    log_progress(
+        f"Known corpus loaded before discovery: {len(KNOWN_AB_IDENTITIES)} A/B identities, "
+        f"{len(KNOWN_AB_LINKS)} known A/B links, {len(KNOWN_SIGNAL_IDENTITIES)} weak-signal identities"
+    )
 
     def safe_stage(name: str, fn, *args, **kwargs):
         try:
             log_progress(f"Starting {name}")
             result = fn(*args, **kwargs)
-            log_progress(f"Finished {name}: {len(result)} admitted candidate(s)")
+            log_progress(f"Finished {name}: {len(result)} admitted NEW candidate(s)")
             return result
         except Exception as e:
             warnings.append(f"{name} fatal stage error: {type(e).__name__}: {str(e)[:180]}")
-            log_progress(f"{name} failed safely; preserving existing corpus")
+            log_progress(f"{name} failed safely; preserving existing corpus and persisted cursor")
             return []
 
-    # V16: start weak-signal discovery at the beginning of the run, in parallel with
-    # scholarly discovery. In V15 it ran last and could receive zero network time after
-    # a four-month A/B backfill exhausted the scan budget.
+    # Weak signals, OpenAlex and Crossref start together. Each family has its own
+    # time slice, so no one family can consume the complete scan runtime.
     signal_backfill = needs_signal_backfill(previous)
     first_run = not bool(previous.get("first_scan_complete"))
     news_lookback = SIGNAL_BACKFILL_HOURS if signal_backfill else (FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS)
     log_progress(f"Weak-signal window: {news_lookback}h (recovery backfill={signal_backfill})")
     news_warnings: list[str] = []
+    phase_started = time.monotonic()
+    news_deadline = phase_started + int(CONFIG.get("news_stage_seconds", 240))
+    oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
+    cr_deadline = phase_started + int(CONFIG.get("crossref_stage_seconds", 450))
 
     with cf.ThreadPoolExecutor(max_workers=3) as ex:
-        fut_news = ex.submit(safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback)
-        fut_oa = ex.submit(safe_stage, "OpenAlex", collect_openalex, from_date, warnings)
-        fut_cr = ex.submit(safe_stage, "Crossref", collect_crossref, from_date, warnings)
+        fut_news = ex.submit(
+            safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline
+        )
+        fut_oa = ex.submit(
+            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline
+        )
+        fut_cr = ex.submit(
+            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline
+        )
         news = fut_news.result()
         oa = fut_oa.result()
         cr = fut_cr.result()
     warnings.extend(news_warnings)
-    signal_backfill_ok = not any(
-        "weak-signal news fatal stage error" in normalized(w) or "news scan budget reached" in normalized(w)
-        for w in warnings
+
+    # Reports get a separate source rotation and time slice after the parallel phase.
+    inst_deadline = time.monotonic() + int(CONFIG.get("institution_stage_seconds", 480))
+    inst = safe_stage(
+        "institutional reports",
+        collect_institutions,
+        inst_from,
+        warnings,
+        bootstrap=inst_backfill,
+        sources_override=inst_batch,
+        stage_deadline=inst_deadline,
     )
 
-    inst = safe_stage("institutional reports", collect_institutions, from_date, warnings, bootstrap=bootstrap_ab)
+    def stage_failed(label: str, deadline: float | None = None) -> bool:
+        nlabel = normalized(label)
+        relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
+        warning_failure = any(
+            ("fatal stage error" in w) or ("budget reached" in w) or ("public endpoint unavailable" in w)
+            for w in relevant
+        )
+        local_deadline_hit = deadline is not None and time.monotonic() >= deadline
+        return warning_failure or local_deadline_hit
+
+    oa_failed = stage_failed("openalex", oa_deadline)
+    cr_failed = stage_failed("crossref", cr_deadline)
+    inst_failed = stage_failed("institution", inst_deadline)
+
+    def finish_cycle(key: str, wrapped: bool, failed: bool) -> None:
+        state["cycle_failed"][key] = bool(state["cycle_failed"].get(key)) or bool(failed)
+        if wrapped:
+            state["completed_cycles"][key] = int(state["completed_cycles"].get(key, 0)) + 1
+            if not state["cycle_failed"][key]:
+                state["backfill"][key] = True
+            state["cycle_failed"][key] = False
+
+    finish_cycle("openalex", oa_wrapped, oa_failed)
+    finish_cycle("crossref_broad", cr_broad_wrapped, cr_failed)
+    finish_cycle("crossref_priority", cr_priority_wrapped, cr_failed)
+    finish_cycle("institutions", inst_wrapped, inst_failed)
+
     oa = [x for x in oa if isinstance(x, dict)]
     cr = [x for x in cr if isinstance(x, dict)]
     inst = [x for x in inst if isinstance(x, dict)]
@@ -2338,22 +2602,24 @@ def main() -> int:
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
 
-    budget_hit = deadline_reached(0) or any("budget reached" in normalized(w) for w in warnings)
+    signal_backfill_ok = not (
+        stage_failed("weak-signal", news_deadline)
+        or any("news scan budget reached" in normalized(w) for w in warnings)
+    )
+    overall_budget_hit = deadline_reached(0)
+    partial_budget_hit = any("budget reached" in normalized(w) for w in warnings)
     total_ab_live = len(oa) + len(cr) + len(inst)
-    transport_failure_count = sum(1 for w in warnings if any(x in normalized(w) for x in ["connection", "timeout", "httperror", "name resolution", "http 429", "http 5"]))
+    transport_failure_count = sum(
+        1 for w in warnings
+        if any(x in normalized(w) for x in ["connection", "timeout", "httperror", "name resolution", "http 429", "http 5"])
+    )
     fatal_stage_error = any("fatal stage error" in normalized(w) for w in warnings)
-    health = "degraded" if budget_hit or fatal_stage_error or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
-    if budget_hit:
-        warnings.append("Overall scan runtime budget reached; queued work was skipped safely and will be retried on the next run")
+    health = "degraded" if overall_budget_hit or fatal_stage_error or partial_budget_hit or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
+    if overall_budget_hit:
+        warnings.append("Overall scan runtime budget reached; queued work was skipped safely and persisted cursors prevent restarting from query 1")
 
-    # Never mark a new four-month backfill as complete when the run was degraded.
-    # Otherwise a temporary network outage could permanently suppress the backfill.
-    if bootstrap_ab and health == "degraded":
-        expansion_marker = previous.get("source_expansion_version", "")
-        backfill_complete = False
-    else:
-        expansion_marker = SOURCE_EXPANSION_VERSION
-        backfill_complete = True
+    backfill_complete = all(bool(state["backfill"].get(k)) for k in ("openalex", "crossref_broad", "crossref_priority", "institutions"))
+    expansion_marker = SOURCE_EXPANSION_VERSION if backfill_complete else previous.get("source_expansion_version", "")
 
     if signal_backfill and not signal_backfill_ok:
         signal_marker = previous.get("signal_discovery_version", "")
@@ -2361,6 +2627,19 @@ def main() -> int:
     else:
         signal_marker = SIGNAL_DISCOVERY_VERSION
         signal_backfill_complete = True
+
+    cache_max = int(CONFIG.get("institution_seen_cache_max", 5000))
+    if cache_max > 0 and len(INSTITUTION_SEEN_FINGERPRINTS) > cache_max:
+        newest = sorted(INSTITUTION_SEEN_FINGERPRINTS.items(), key=lambda kv: kv[1], reverse=True)[:cache_max]
+        INSTITUTION_SEEN_FINGERPRINTS = dict(newest)
+    state["institution_seen_fingerprints"] = dict(INSTITUTION_SEEN_FINGERPRINTS)
+    state["last_run"] = now_iso
+    state["last_batches"] = {
+        "openalex_queries": len(oa_batch),
+        "crossref_broad_queries": len(cr_batch),
+        "crossref_priority_tasks": len(cr_priority_batch),
+        "institution_sources": len(inst_batch),
+    }
 
     data = {
         "last_updated": now_iso,
@@ -2372,12 +2651,17 @@ def main() -> int:
         "backfill_complete": backfill_complete,
         "signal_discovery_version": signal_marker,
         "signal_backfill_complete": signal_backfill_complete,
+        "incremental_state_version": INCREMENTAL_STATE_VERSION,
+        "scan_state": state,
         "zero_config_scan": True,
         "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v15_scan_repair")),
         "scan_health": health,
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
-            "ab_discovery_from_this_run": from_date.isoformat(),
+            "ab_discovery_from_this_run": min(oa_from, cr_from, inst_from).isoformat(),
+            "openalex_from": oa_from.isoformat(),
+            "crossref_from": cr_from.isoformat(),
+            "institutions_from": inst_from.isoformat(),
             "ab_four_month_backfill_this_run": bootstrap_ab,
             "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
             "c_window_end": now_iso,
@@ -2405,6 +2689,14 @@ def main() -> int:
             "institutional_admitted_before_dedupe": len(inst),
             "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
+            "openalex_queries_this_run": len(oa_batch),
+            "crossref_broad_queries_this_run": len(cr_batch),
+            "crossref_priority_tasks_this_run": len(cr_priority_batch),
+            "institution_sources_this_run": len(inst_batch),
+            "known_ab_identities_loaded": len(KNOWN_AB_IDENTITIES),
+            "known_ab_links_loaded": len(KNOWN_AB_LINKS),
+            "known_signal_identities_loaded": len(KNOWN_SIGNAL_IDENTITIES),
+            "institution_page_fingerprints_cached": len(INSTITUTION_SEEN_FINGERPRINTS),
             "institution_sources_configured": len(CONFIG.get("institution_sources", [])),
             "major_scholarly_publishers_tracked": len(CONFIG.get("major_scholarly_publishers", [])),
             "priority_journals_tracked": len(CONFIG.get("crossref_priority_journals", [])),
@@ -2424,14 +2716,18 @@ def main() -> int:
             "source_warnings": len(warnings),
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,
-            "budget_reached": budget_hit,
+            "budget_reached": overall_budget_hit,
+            "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
         },
     }
     tmp_out = OUT_PATH.with_suffix(".json.tmp")
     tmp_out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp_out.replace(OUT_PATH)
-    log_progress(f"radar.json written: A={len(strand_a)} B={len(strand_b)} C={len(strand_c)} health={health}")
+    log_progress(
+        f"radar.json written: A={len(strand_a)} B={len(strand_b)} C={len(strand_c)} health={health}; "
+        f"next cursors OA={state['openalex_cursor']} CR={state['crossref_broad_cursor']}/{state['crossref_priority_cursor']} INST={state['institution_cursor']}"
+    )
     print(json.dumps(data["stats"], indent=2), flush=True)
     if warnings:
         print("Source warnings (first 40):", file=sys.stderr, flush=True)

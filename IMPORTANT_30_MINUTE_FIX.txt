@@ -1,12 +1,20 @@
-IMPORTANT — THIS IS NOT THE OLD 55-MINUTE BUILD
+V17.2 — 30-MINUTE + REPEAT-WORK FIX
 
-The previous design could ask the scanner to work for 55 minutes while the GitHub job was being killed at 30 minutes. That meant the process could die before radar.json was saved.
+This is not the old 55-minute design and not the V17.1 "do the whole backfill in one run" design.
 
-This repository uses the opposite approach: it is designed to COMPLETE inside 30 minutes.
+The GitHub job remains 30 minutes and the scanner remains capped at 20 minutes, but V17.2 additionally stores persistent source-family cursors in radar.json.
 
-Required values:
-.github/workflows/radar-scan.yml -> timeout-minutes: 30
-radar_config.json -> scan_budget_seconds: 1200
-radar_config.json -> network_reserve_seconds: 180
+It therefore does not spend every scheduled run restarting the same large report/journal search universe.
 
-Version: 17.1
+Key values:
+- .github/workflows/radar-scan.yml: timeout-minutes: 30
+- radar_config.json: scan_budget_seconds: 1200
+- radar_config.json: network_reserve_seconds: 150
+- OpenAlex: 40 rotating queries/run
+- Crossref broad: 35 rotating queries/run
+- Crossref priority: 45 rotating tasks/run
+- institutions: 18 rotating sources/run
+
+The upload commit to main starts the first scan immediately. Normal schedule: every 12 hours.
+
+Version: 17.2

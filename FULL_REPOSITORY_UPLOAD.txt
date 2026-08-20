@@ -1,14 +1,13 @@
-V17.1 COMPLETE REPOSITORY — 30-MINUTE-SAFE EDITION
+V17.2 COMPLETE REPOSITORY — PERSISTENT INCREMENTAL EDITION
 
-This ZIP is the WHOLE repository.
+This ZIP is the WHOLE repository, including:
+- the active GitHub Actions workflow;
+- scanner and configuration;
+- cumulative radar.json seed/recovery logic;
+- main radar site;
+- Insights page;
+- tests.
 
-Why this edition is different:
-- The active GitHub Actions job is 30 minutes.
-- The Python scanner stops discovery after 20 minutes.
-- Network work starts winding down with 3 minutes still reserved inside the scanner.
-- radar.json is written before the job can reach the 30-minute GitHub limit.
-- The workflow then commits and pushes radar.json.
-- Large institutional crawling is bounded so the first four-month backfill can actually finish.
-- Duplicate/backup workflow YAML files were removed from the package.
+Upload ALL files/folders to the repository root, including .github.
 
-Upload ALL files and folders from this package to the repository root, including the .github folder.
+The upload commit to main immediately triggers the first scan. Bot-only radar.json commits do not retrigger the workflow.

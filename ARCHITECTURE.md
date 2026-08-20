@@ -1,47 +1,46 @@
-# Scanner architecture — V17
+# Scanner architecture — V17.2
 
 ## 1. Cumulative state
 
-`radar.json` is the authoritative cumulative dataset. A/B/C are deduplicated and retained across scans. V17 performs one versioned A/B quality migration to remove historical false positives admitted by older criteria; this is not a rolling deletion policy.
+`radar.json` is both the cumulative public dataset and the persistent scan checkpoint. A/B/C items are retained and deduplicated. `scan_state` stores independent source-family cursors so the next run continues instead of restarting.
 
-## 2. Strand A discovery
+## 2. Discovery scheduling
 
-Three discovery channels run without user credentials:
+Weak signals, OpenAlex and Crossref begin in parallel. Institutional crawling starts as a separate bounded phase after that parallel phase.
 
-- **OpenAlex** public anonymous scholarly search;
-- **Crossref** public anonymous scholarly search;
-- **direct institutional crawling** across configured EU, research-policy and geopolitical institutions.
+The large scholarly/report universes are rotated across runs:
 
-Crossref now starts with a protected priority-journal sweep, then runs the broad query universe. This prevents long institutional crawling from producing a corpus dominated by reports simply because scholarly discovery was too shallow.
+- OpenAlex: 40 queries/run out of 145.
+- Crossref broad: 35 queries/run out of 145.
+- Crossref priority: 45 journal/query tasks/run out of 216.
+- Institutions: 18 sources/run out of 57.
 
-## 3. Strand A admission
+A batch never wraps inside one run; the final batch of each cycle is shorter. The next cursor is saved in `radar.json`.
 
-A must establish substantive:
+## 3. Early known-item rejection
 
-- EU/European scope;
-- R&I / science / innovation / strategic-technology capability;
-- geopolitics / geoeconomics / economic security / strategic competition.
+The existing corpus is loaded before discovery. DOI/title identities, institutional links, and signal identities are used to discard known material as early as possible. Successful institutional page fetches also create persisted URL+lastmod fingerprints, so unchanged accepted **or rejected** report pages are not downloaded again on later source cycles. Final corpus merge/deduplication remains in place.
 
-For scholarly records, the title+abstract must establish the substantive R&I and geopolitical sides. For institutional reports, one side may be deeper in the body, but the document must contain a supported bridge and cannot be rescued by incidental terms in a generic political report.
+## 4. Backfill and incremental windows
 
-## 4. Strand B admission
+A new V17.2 installation performs the four-month A/B backfill progressively. Each source family remains in backfill mode until it completes a clean cursor cycle. Failed/budget-hit cycles are remembered and do not falsely complete the backfill.
 
-B requires substantive foresight/horizon-scanning/scenario methodology **plus the same EU + R&I + geopolitical triangle**. Generic transferable methods are no longer sufficient.
+After that source family completes backfill, its rotating batch uses the normal 14-day discovery overlap.
 
-## 5. Strand C
+## 5. Evidence logic
 
-Weak-signal discovery starts at the beginning of the scan in parallel with scholarly discovery. Signals remain cumulative and retain the WHAT / WHY / watch-theme structure introduced in V16.
+Strand A requires substantive EU/European scope + R&I/science/strategic technology + geopolitical/economic-security substance. Strand B requires substantive foresight methodology on the same substantive triangle. Strand C remains curated weak signals, anchored to A/B evidence where possible or to approved strategic watch themes.
 
 ## 6. Runtime
 
-- GitHub job timeout: 30 minutes
-- scanner internal budget: 20 minutes
-- network reserve inside scanner: 3 minutes
-- scheduled cadence: every 12 hours
-- A/B V17 upgrade backfill: four months
-- later A/B overlap: 14 days
-- C rolling window: seven days after the recovery backfill
+- GitHub job: 30 minutes.
+- Scanner hard budget: 20 minutes.
+- Network reserve: 150 seconds.
+- News: 240-second local slice.
+- OpenAlex: 360-second local slice.
+- Crossref: 450-second local slice.
+- Institutions: 480-second local slice after the parallel phase.
 
-## 7. Insights UI
+## 7. Automation
 
-The Insights page is evidence-balanced by default. Research publications and institutional reports are distinct sections, with weak signals as a third section rather than the sole default view.
+A push to `main` starts a scan immediately. Scheduled scans run every 12 hours. Pushes that modify only `radar.json` are ignored so the scanner's own commit does not trigger itself again.

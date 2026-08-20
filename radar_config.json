@@ -695,7 +695,7 @@
   "institution_tier3_min_words": 1200,
   "admission_profile": "v17_eu_ri_geopolitics_substance",
   "scan_budget_seconds": 1200,
-  "network_reserve_seconds": 180,
+  "network_reserve_seconds": 150,
   "request_timeout_seconds": 12,
   "scholarly_api_timeout_seconds": 12,
   "scholarly_api_workers": 8,
@@ -782,5 +782,17 @@
     "European science policy strategic competition",
     "European innovation geopolitical competition"
   ],
-  "crossref_priority_journal_rows": 35
+  "crossref_priority_journal_rows": 35,
+  "incremental_state_version": "v17.2-persistent-source-cursors",
+  "openalex_queries_per_scan": 40,
+  "crossref_broad_queries_per_scan": 35,
+  "crossref_priority_tasks_per_scan": 45,
+  "institution_sources_per_scan": 18,
+  "news_stage_seconds": 240,
+  "openalex_stage_seconds": 360,
+  "crossref_stage_seconds": 450,
+  "institution_stage_seconds": 480,
+  "skip_known_items_before_classification": true,
+  "skip_known_institution_urls_before_fetch": true,
+  "institution_seen_cache_max": 5000
 }

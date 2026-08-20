@@ -1,71 +1,81 @@
-# R&I × Geopolitics Radar — V17 evidence-quality + scholarly expansion
+# R&I × Geopolitics Radar — V17.2 incremental scanner
 
-V17 keeps the working cumulative scanner and fixes three content problems together:
+V17.2 keeps the V17 evidence logic and Insights page, but changes **how discovery work is scheduled** so a 30-minute GitHub Actions job cannot repeatedly spend its whole runtime on the same reports or the same first scholarly queries.
 
-1. the Insights page was dominated by weak signals;
-2. Strand A was too dependent on EU/institutional material and was not finding enough research publications;
-3. Strand B admitted methodology papers whose subject matter was not actually EU + R&I + geopolitics.
+## What is unchanged
 
-## V17 scope
+The evidence/admission logic remains V17:
 
-### Strand A — substantive evidence
-A publication/report must substantively connect:
+- **Strand A:** substantive EU/Europe + R&I/science/strategic-technology + geopolitics/geoeconomics/economic-security connection.
+- **Strand B:** substantive foresight/horizon-scanning/scenario methodology on that same EU + R&I + geopolitical substance.
+- **Strand C:** curated factual weak signals linked to the evidence base or an approved strategic watch theme.
+- The site is **cumulative**. Previously accepted A/B/C items remain visible. New scans append genuinely new identities; they do not replace the corpus.
+- `/briefing/` remains the balanced **Insights** view with Research publications, EU & institutional reports, and Weak signals.
 
-- **EU / Europe / an EU Member State**, and
-- **R&I or a closely related strategic technology/science capability**, and
-- **geopolitics, geoeconomics, economic security, strategic competition, dependencies, controls, de-risking, sovereignty or similar context**.
+## The V17.2 fix: persistent source cursors
 
-R&I-adjacent scope includes research systems, innovation policy, universities, science diplomacy, research security, critical technologies, semiconductors, AI/compute, quantum, biotech, nuclear/energy technology, digital infrastructure, technology ecosystems and related capability questions — but only when the geopolitical/economic-security connection is substantive.
+`radar.json` now stores `scan_state` with independent cursors for:
 
-Generic EU politics, elections, rule-of-law material, enlargement analysis, generic sustainability, general sector news and incidental technology mentions do not qualify.
+- OpenAlex scholarly queries;
+- Crossref broad scholarly queries;
+- Crossref priority-journal/query tasks;
+- institutional report sources.
 
-### Strand B — methodology on the substance
-Strand B is no longer a general foresight-methods library. A methods paper/report must contain substantive foresight methodology **and** the same EU + R&I + geopolitics/economic-security triangle.
+Every scheduled scan resumes from those saved cursors. It does **not** start again at query/source 1.
 
-Therefore papers such as **“PATHWAYS TO ZERO WASTE: PROSPECTIVE SCIENCE TEACHERS’ SOLUTIONS THROUGH EVERYDAY LIFE SCENARIOS”** are rejected. So are generic climate-scenario, household-futures or urban-participation methodology papers unless their actual subject is European R&I/strategic technology in geopolitical context.
+Per run, the scanner currently processes at most:
 
-## More research publications
+- **40 / 145** OpenAlex scholarly queries;
+- **35 / 145** Crossref broad queries;
+- **45 / 216** Crossref priority-journal tasks;
+- **18 / 57** institutional sources.
 
-V17 gives scholarly literature its own protected discovery path:
+The last batch in a cycle is shorter rather than wrapping back to the beginning, so the same early queries are not repeated before the checkpoint is saved. A complete discovery cycle takes at most about **5 scheduled runs**. With the 12-hour schedule, the whole configured scholarly/report universe is revisited across roughly 2.5 days, while weak-signal discovery remains fresh every 12 hours.
 
-- 115 Strand-A scholarly queries;
-- 30 substance-specific Strand-B queries;
-- OpenAlex public anonymous discovery;
-- Crossref public anonymous discovery;
-- a dedicated Crossref sweep across 36 priority journals × 6 focused EU/R&I/geopolitics queries before the broad query universe;
-- broad peer-reviewed-journal eligibility remains, but the admission gate is stricter and based on title/abstract substance.
+## Known-item skipping
 
-The direct institutional crawler still monitors 57 major EU, European and international policy/research players. Institutional reports complement scholarly research instead of replacing it.
+Before network discovery starts, the existing cumulative corpus is loaded into identity sets.
 
-## Runtime
+- OpenAlex/Crossref records whose DOI or normalized title is already known are skipped **before expensive classification**.
+- Institutional sitemap URLs already present in the corpus are skipped **before page/PDF fetching when the saved URL matches**.
+- Successfully fetched institutional page fingerprints are also persisted (including pages that were later rejected); unchanged pages are not downloaded again on the next source cycle. A changed sitemap `lastmod` creates a new fingerprint and allows a revisit.
+- Previously admitted weak-signal headline/source identities are skipped before signal classification.
+- Final merge/deduplication still runs as a second safety layer.
 
-This repository is deliberately **30-minute safe**. The GitHub Actions job timeout is **30 minutes**, while the scanner has a **20-minute internal scan budget** (1,200 seconds). Network work winds down before that budget expires, leaving time to write `radar.json` and for GitHub Actions to commit and push it. The scanner no longer depends on raising GitHub's timeout above 30 minutes.
+APIs can still return a known record in a search response; public APIs do not provide a practical “exclude these thousands of DOIs” filter. The important change is that V17.2 no longer runs the entire query/source universe on every 12-hour scan, and known records are discarded as early as possible.
 
-The first V17.1 run forces a new **four-month A/B backfill** under the scholarly/source profile. Institutional crawling is bounded to a smaller high-priority page set so the run can complete and save results inside the 30-minute job. Later scans continue every **12 hours** with the overlap logic already used by the radar.
+## Progressive four-month backfill
 
-Weak-signal scanning remains protected at the start of the run and remains cumulative.
+A repository upgrade still gets the intended **four-month A/B backfill**, but V17.2 completes it progressively rather than trying to do everything in one job.
 
-## One-time quality migration
+Each source family stays in four-month backfill mode until its persisted cursor has completed a clean full cycle. If a source family hits its local budget or fails, the cycle is marked incomplete and a later cycle retries it instead of falsely declaring the backfill finished.
 
-V17 revalidates the accumulated A/B corpus once under the corrected substance gate. Valid earlier material stays cumulative, but old false positives are removed. Strand C history is not pruned by this migration.
+After backfill, each rotating source batch uses the normal **14-day overlap** so delayed indexing can still be discovered.
 
-## Insights page
+## Runtime protection
 
-`/briefing/` now defaults to **All intelligence**, not Weak signals. It shows:
+- GitHub Actions job timeout: **30 minutes**.
+- Scanner hard budget: **20 minutes**.
+- Network/commit reserve: **150 seconds**.
+- Weak-signal time slice: **240 seconds**.
+- OpenAlex time slice: **360 seconds**.
+- Crossref time slice: **450 seconds**.
+- Institutional-report time slice: **480 seconds**, started after the parallel news/scholarly phase.
 
-1. **Research publications**;
-2. **EU & institutional reports**;
-3. **Weak signals**.
+Because the first three families run in parallel and reports have a separate bounded phase, one family cannot monopolise the whole scanner runtime. `radar.json` is written before the GitHub job timeout and then committed.
 
-Each category has its own filter, while search and “New only” work across the full evidence base.
+## Automatic operation
 
-## Complete repository upload
+The active workflow is `.github/workflows/radar-scan.yml`.
 
-This package is the **whole repository**, including `radar.json` and the active `.github/workflows/radar-scan.yml`. It intentionally contains only the active workflow copy, so there is no backup YAML that can be uploaded by mistake.
+- A **push to `main` immediately starts a scan**. Therefore uploading/committing this repository starts the first V17.2 scan automatically.
+- It then runs automatically every **12 hours** at `23 */12 * * *` UTC.
+- `workflow_dispatch` remains available for a manual run.
+- Bot commits that change only `radar.json` are ignored by the push trigger, preventing an infinite scan loop.
 
-Upload/extract everything to the repository root. No separate file preservation step is required. The bundled `radar.json` is marked as a repository seed; on the first scan, Git history recovery merges back a larger existing cumulative corpus if one exists before V17 revalidates and rescans it.
+## Safe full-repository upload
 
-No API keys, custom secrets or email configuration are required.
+This package includes a `repository_bundle_seed` marker in `radar.json`. On the first scan after upload, the scanner checks recent Git history. If the repository had a larger cumulative `radar.json` immediately before the upload, it merges that larger A/B/C corpus back before scanning. The one-run seed marker is then removed.
 
 ## Tests
 
@@ -74,3 +84,5 @@ Run:
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+The package includes the earlier V12–V17 tests plus V17.2 tests for persistent cursors, non-wrapping batches, per-run caps, known-item loading, separate source-family time slices, and immediate-push/12-hour workflow triggers.
