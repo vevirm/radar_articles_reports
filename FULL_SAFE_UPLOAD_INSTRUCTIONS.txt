@@ -1,22 +1,9 @@
-FULL SAFE UPLOAD — INSIGHTS SIGNAL POINTS V9
+V11 UPLOAD
 
-This package preserves the existing live radar corpus by intentionally omitting radar.json.
-Upload/replace the repository files over the existing repository; do not delete the live radar.json.
-
-WHAT CHANGED
-- /briefing/ remains the Radar Insights page.
-- It reads ../radar.json directly.
-- It groups admitted radar items by topic.
-- Each visible bullet is a concise substantive signal derived from the radar item.
-- PDF/OCR debris, document headings, publisher suffixes and meta prose are filtered.
-- If no clear signal can be extracted, the item is omitted instead of showing filler.
-- No separate briefing.json or briefing workflow exists.
-
-WHAT DID NOT CHANGE
-- scripts/scan_radar.py
-- radar_config.json
-- .github/workflows/radar-scan.yml
-- the main radar presentation, apart from the Insights link cache-bust version
-
-After GitHub Pages deploys, open:
-  /radar_articles_reports/briefing/?v=9
+1. Keep your existing populated radar.json in the GitHub repository.
+2. Upload/replace the files from this package over the current repository.
+3. Commit to main.
+4. The push starts the V11 scan immediately.
+5. Because the old radar does not have the V11 source-expansion marker, that first V11 scan searches the previous four calendar months for A/B reports and research papers, then merges them into the cumulative corpus.
+6. After that, the workflow runs every 12 hours with a 14-day A/B overlap and scans the full configured source universe each time.
+7. Do not add an empty radar.json from a package; this package intentionally does not contain one.

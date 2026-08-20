@@ -8,19 +8,18 @@ class InsightsPageTests(unittest.TestCase):
     def run_node(self, script: str):
         subprocess.run(['node','-e',script],cwd=ROOT,check=True)
 
-    def test_page_is_topics_and_bullets_only(self):
+    def test_page_is_cumulative_and_searchable(self):
         page=(ROOT/'briefing'/'index.html').read_text(encoding='utf-8')
-        self.assertIn('One signal, one clear point.', page)
+        self.assertIn('Cumulative intelligence layer', page)
         self.assertIn("fetch('../radar.json?ts='+Date.now()", page)
-        self.assertIn('<h2>${esc(g.name)}</h2><ul>', page)
-        self.assertIn('<li>${esc(x.point)}</li>', page)
-        self.assertIn('simple-signal-points-v9', page)
-        for clutter in ('Radar relevance:', 'Strand A', 'Strand B', 'Strand C', 'source_tier', 'Also touches', 'item count', 'TOPIC'):
-            self.assertNotIn(clutter,page)
+        self.assertIn('Search insights and sources', page)
+        self.assertIn('All history', page)
+        self.assertIn('cumulative-insights-v11', page)
 
-    def test_main_radar_points_to_v9_briefing(self):
+    def test_main_radar_points_to_v11_briefing(self):
         page=(ROOT/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="briefing/?v=9">Radar insights</a>',page)
+        self.assertIn('href="briefing/?v=11">Open Radar Insights</a>',page)
+        self.assertIn('Cumulative corpus', page)
 
     def test_old_generator_and_workflow_removed(self):
         self.assertFalse((ROOT/'scripts'/'build_briefing.py').exists())

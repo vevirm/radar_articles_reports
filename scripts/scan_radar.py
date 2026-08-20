@@ -9,8 +9,9 @@ Key properties
   A same-sentence bridge is strong evidence, but a document-level bridge can also qualify.
 * Strand B requires methodology to be substantive, while allowing high-quality transferable
   public-sector R&I/S&T methods even when the case study is not explicitly EU-focused.
-* Strand C is not a general news feed: every item must be factual current-window
-  reporting and must anchor to an accepted A/B publication or recurring A/B theme.
+* Strand C is not a general news feed: every newly discovered item must be factual current-window
+  reporting and must anchor to an accepted A/B publication or recurring A/B theme. Once admitted,
+  the signal is retained in the cumulative historical corpus.
 * Calls, facility pages, project pages, press releases, news/blog pages, events,
   jobs and other non-analytical material are rejected for A/B.
 
@@ -37,6 +38,7 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dateparser
+from dateutil.relativedelta import relativedelta
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,15 +48,20 @@ OUT_PATH = ROOT / "radar.json"
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
-DATE_FLOOR = dt.date.fromisoformat(CONFIG["date_floor"])
+BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
+SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v11-major-source-backfill"))
+FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
+# Provisional floor for import-time helpers/tests. main() replaces this with the preserved
+# corpus floor before discovery starts.
+DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 48))
 FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", 168))
 DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
-MAX_NEW_AB = int(CONFIG.get("max_new_ab_per_scan", 15))
-MAX_C = int(CONFIG.get("max_c_per_scan", 5))
-MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 60))
+MAX_NEW_AB = int(CONFIG.get("max_new_ab_per_scan", 0))
+MAX_C = int(CONFIG.get("max_c_per_scan", 0))
+MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 0))
 REQUEST_TIMEOUT = 16
-UA = "RI-Geopolitics-Radar/2.0 (+https://vevirm.github.io/radar_articles_reports/)"
+UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
 SESSION.headers.update({
@@ -564,12 +571,17 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
             source, source_tier = hit
             return True, source_tier, float(source_tier), source, f"Tier {source_tier}"
 
+    # Broad scholarly discovery: OpenAlex already classifies the venue as a journal.
+    # The substantive Strand A/B gates remain the admission control, so relevant papers
+    # are not lost merely because their journal was missing from a short hand-maintained list.
+    if CONFIG.get("accept_broad_peer_reviewed_journals", True) and source_type == "journal" and typ in {"article", "review"}:
+        return True, 2, 2.8, source_name or "Scholarly journal", "Tier 2 broad journal"
+
     # Preprints are allowed only from arXiv and are ranked as Tier 3.
     if typ in {"preprint", "posted-content", "working-paper", "working paper"}:
         if any(url_domain(u).endswith("arxiv.org") for u in openalex_locations(work)):
             return True, 3, 3.2, "arXiv", "Tier 3 preprint"
 
-    # Do not infer peer review from an arbitrary journal record: the automated radar is conservative.
     return False, 9, 9.0, source_name or "Unknown source", ""
 
 
@@ -658,6 +670,8 @@ def quality_from_crossref(item: dict[str, Any]) -> tuple[bool, int, float, str, 
     tier, rank, tier_label = source_rank_for_journal(journal)
     if tier and typ in {"journal-article", "article", "review", "proceedings-article"}:
         return True, tier, rank, journal, tier_label, "peer-reviewed article"
+    if CONFIG.get("accept_broad_peer_reviewed_journals", True) and journal and typ in {"journal-article", "article", "review"}:
+        return True, 2, 2.9, journal, "Tier 2 broad journal", "peer-reviewed article"
     publisher = clean_text(item.get("publisher"))
     if typ in {"report", "report-component", "book", "book-chapter", "posted-content"}:
         for p in CONFIG.get("crossref_institution_publishers", []):
@@ -751,7 +765,9 @@ def discover_sitemaps(domain: str) -> list[str]:
     return list(dict.fromkeys(u for u in urls if u))[:8]
 
 
-def sitemap_entries(url: str, depth: int = 0, child_budget: int = 5) -> list[tuple[str, dt.date | None]]:
+def sitemap_entries(url: str, depth: int = 0, child_budget: int | None = None) -> list[tuple[str, dt.date | None]]:
+    if child_budget is None:
+        child_budget = int(CONFIG.get("sitemap_child_budget", 8))
     if depth > 2 or child_budget <= 0:
         return []
     r = get(url, timeout=18)
@@ -779,9 +795,9 @@ def sitemap_entries(url: str, depth: int = 0, child_budget: int = 5) -> list[tup
         out = []
         for _, _, child in children[:child_budget]:
             out.extend(sitemap_entries(child, depth + 1, max(1, child_budget - 1)))
-            if len(out) >= 350:
+            if len(out) >= int(CONFIG.get("sitemap_max_entries", 800)):
                 break
-        return out[:350]
+        return out[:int(CONFIG.get("sitemap_max_entries", 800))]
     if kind == "urlset":
         out = []
         for node in list(root):
@@ -795,19 +811,36 @@ def sitemap_entries(url: str, depth: int = 0, child_budget: int = 5) -> list[tup
     return []
 
 
-def institution_url_candidate(url: str, lastmod: dt.date | None, from_date: dt.date) -> bool:
+def institution_url_score(url: str, lastmod: dt.date | None, from_date: dt.date) -> int:
+    """Prioritise analytical/publication pages without requiring a keyword in the URL.
+
+    Many institutional CMSs use opaque slugs.  V10 filtered those out before reading the
+    page, which was a major recall bottleneck.  Recent pages from whitelisted institutions
+    now remain eligible; publication-like paths simply rank first.
+    """
     low = normalized(url)
     if any(x in low for x in URL_HARD_EXCLUDE):
-        return False
-    if lastmod and lastmod < from_date - dt.timedelta(days=10):
-        return False
+        return -100
+    if lastmod and lastmod < from_date - dt.timedelta(days=14):
+        return -100
+    score = 0
+    if lastmod and lastmod >= from_date:
+        score += 5
     hints = [
-        "publication", "report", "paper", "policy-brief", "policy_brief", "study", "analysis",
-        "research", "foresight", "horizon", "scenario", "security", "geopolit", "economic-security",
-        "strategic-autonomy", "sovereignty", "science-diplomacy", "technology", "innovation",
-        "working-paper", "discussion-paper", "insight", "commentary-paper", "2026",
+        "publication", "publications", "report", "reports", "paper", "policy-brief", "policy_brief",
+        "study", "studies", "analysis", "research", "foresight", "horizon", "scenario", "security",
+        "geopolit", "economic-security", "strategic-autonomy", "sovereignty", "science-diplomacy",
+        "technology", "innovation", "working-paper", "discussion-paper", "insight", "briefing",
+        "research-paper", "policy-paper", "download",
     ]
-    return any(h in low for h in hints)
+    score += min(12, 3 * sum(1 for h in hints if h in low))
+    if re.search(r"/20\d{2}/", low):
+        score += 1
+    return score
+
+
+def institution_url_candidate(url: str, lastmod: dt.date | None, from_date: dt.date) -> bool:
+    return institution_url_score(url, lastmod, from_date) >= 0
 
 
 def meta_content(soup: BeautifulSoup, keys: Iterable[str]) -> str:
@@ -910,8 +943,10 @@ def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] |
     # Substantive-length rule.  Long analytical work is preferred, but concise
     # Tier-1 policy papers can qualify when the topic gates themselves are strong.
     low_title = normalized(title)
-    if word_count < 1500:
-        brief_exception = tier == 1 and word_count >= 900 and any(x in low_title for x in [
+    min_words = int(CONFIG.get("institution_min_words", 1200))
+    tier1_brief_min = int(CONFIG.get("institution_tier1_brief_min_words", 650))
+    if word_count < min_words:
+        brief_exception = tier == 1 and word_count >= tier1_brief_min and any(x in low_title for x in [
             "policy brief", "briefing", "working paper", "discussion paper", "policy paper",
             "report", "study", "analysis", "strategic", "security", "foresight"
         ])
@@ -940,19 +975,22 @@ def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] |
     )
 
 
-def _discover_domain(src: dict[str, Any], from_date: dt.date) -> tuple[list[tuple[str, str, int]], str | None]:
+def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False) -> tuple[list[tuple[str, str, int]], str | None]:
     domain = src["domain"]
     entries = []
+    max_entries = int(CONFIG.get("sitemap_max_entries", 800))
     for sm in discover_sitemaps(domain):
         entries.extend(sitemap_entries(sm))
-        if len(entries) >= 180:
+        if len(entries) >= max_entries:
             break
     if not entries:
         return [], f"No usable sitemap: {domain}"
     seen = set(); jobs = []
-    limit = int(CONFIG.get("institution_pages_per_domain", 14))
-    for u, last in sorted(entries, key=lambda x: x[1] or dt.date.min, reverse=True):
-        if u in seen or not institution_url_candidate(u, last, from_date):
+    limit_key = "institution_pages_per_domain_bootstrap" if bootstrap else "institution_pages_per_domain"
+    limit = int(CONFIG.get(limit_key, CONFIG.get("institution_pages_per_domain", 24)))
+    ranked = sorted(entries, key=lambda x: (institution_url_score(x[0], x[1], from_date), x[1] or dt.date.min), reverse=True)
+    for u, last in ranked:
+        if u in seen or institution_url_score(u, last, from_date) < 0:
             continue
         seen.add(u)
         jobs.append((u, src["name"], int(src["tier"])))
@@ -961,10 +999,10 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date) -> tuple[list[tupl
     return jobs, None
 
 
-def collect_institutions(from_date: dt.date, warnings: list[str]) -> list[dict[str, Any]]:
+def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False) -> list[dict[str, Any]]:
     jobs = []
-    with cf.ThreadPoolExecutor(max_workers=8) as ex:
-        futs = [ex.submit(_discover_domain, src, from_date) for src in CONFIG["institution_sources"]]
+    with cf.ThreadPoolExecutor(max_workers=10) as ex:
+        futs = [ex.submit(_discover_domain, src, from_date, bootstrap) for src in CONFIG["institution_sources"]]
         for fut in cf.as_completed(futs):
             try:
                 found, warn = fut.result()
@@ -974,8 +1012,9 @@ def collect_institutions(from_date: dt.date, warnings: list[str]) -> list[dict[s
             except Exception as e:
                 warnings.append(f"Institution sitemap: {type(e).__name__}")
     out = []
-    with cf.ThreadPoolExecutor(max_workers=14) as ex:
-        futs = [ex.submit(parse_institution_page, u, s, t) for u, s, t in jobs[:300]]
+    max_jobs = int(CONFIG.get("institution_max_pages_bootstrap", 2200 if bootstrap else 1200))
+    with cf.ThreadPoolExecutor(max_workers=18) as ex:
+        futs = [ex.submit(parse_institution_page, u, s, t) for u, s, t in jobs[:max_jobs]]
         for fut in cf.as_completed(futs):
             try:
                 item = fut.result()
@@ -1136,7 +1175,8 @@ def _valid_saved_radar(data: Any) -> bool:
         return False
     a = data.get("strand_a") if isinstance(data.get("strand_a"), list) else []
     b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
-    return bool(data.get("first_scan_complete") or data.get("last_updated") or a or b)
+    c = data.get("strand_c") if isinstance(data.get("strand_c"), list) else []
+    return bool(data.get("first_scan_complete") or data.get("last_updated") or a or b or c)
 
 
 def _recover_radar_from_git(max_commits: int = 80) -> dict[str, Any]:
@@ -1144,7 +1184,7 @@ def _recover_radar_from_git(max_commits: int = 80) -> dict[str, Any]:
 
     This protects the cumulative A/B corpus when an upgrade ZIP contains a
     reset/pending radar.json.  We inspect recent ancestors and prefer the
-    candidate with the largest saved A+B corpus, breaking ties by recency.
+    candidate with the largest saved A+B+C corpus, breaking ties by recency.
     GitHub Actions checks out full history (fetch-depth: 0), so this works in
     the normal scanner workflow and also tolerates several upload commits in a
     row before a scan runs.
@@ -1171,11 +1211,73 @@ def _recover_radar_from_git(max_commits: int = 80) -> dict[str, Any]:
             continue
         a = data.get("strand_a") if isinstance(data.get("strand_a"), list) else []
         b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
-        score = len(a) + len(b)
+        c = data.get("strand_c") if isinstance(data.get("strand_c"), list) else []
+        score = len(a) + len(b) + len(c)
         candidate = (score, -recency_index, data)
         if best is None or candidate[:2] > best[:2]:
             best = candidate
     return best[2] if best else {}
+
+
+def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -> dict[str, Any]:
+    """Union the live corpus with earlier radar.json versions in Git history.
+
+    Earlier V9 scans replaced Strand C on every run, so simply preserving the current
+    file would not restore signals that disappeared yesterday.  This history union
+    repairs that earlier loss and keeps the corpus monotonic afterwards.
+    Current copies win when an item is rediscovered; missing historical items are added.
+    """
+    if not _valid_saved_radar(current):
+        return current
+    try:
+        revs = subprocess.run(
+            ["git", "rev-list", f"--max-count={max_commits}", "HEAD", "--", "radar.json"],
+            cwd=ROOT, capture_output=True, text=True, timeout=12, check=True,
+        ).stdout.splitlines()
+    except Exception:
+        return current
+
+    out = dict(current)
+    maps: dict[str, dict[str, dict[str, Any]]] = {"strand_a": {}, "strand_b": {}, "strand_c": {}}
+    for strand in ("strand_a", "strand_b"):
+        for item in current.get(strand, []) if isinstance(current.get(strand), list) else []:
+            maps[strand][identity(internalize_previous(item))] = dict(item)
+    for item in current.get("strand_c", []) if isinstance(current.get("strand_c"), list) else []:
+        maps["strand_c"][signal_identity(item)] = dict(item)
+
+    for rev in revs:
+        try:
+            raw = subprocess.run(
+                ["git", "show", f"{rev}:radar.json"],
+                cwd=ROOT, capture_output=True, text=True, timeout=8, check=True,
+            ).stdout
+            data = json.loads(raw)
+        except Exception:
+            continue
+        if not _valid_saved_radar(data):
+            continue
+        for strand in ("strand_a", "strand_b", "strand_c"):
+            items = data.get(strand) if isinstance(data.get(strand), list) else []
+            for item in items:
+                key = signal_identity(item) if strand == "strand_c" else identity(internalize_previous(item))
+                if not key or key in {"title:", "signal::", "signal-link:"}:
+                    continue
+                existing = maps[strand].get(key)
+                if existing is None:
+                    restored = dict(item)
+                    restored["new_this_scan"] = False
+                    maps[strand][key] = restored
+                else:
+                    # Preserve the earliest known first_seen timestamp when available.
+                    old_seen = str(item.get("first_seen") or "")
+                    cur_seen = str(existing.get("first_seen") or "")
+                    if old_seen and (not cur_seen or old_seen < cur_seen):
+                        existing["first_seen"] = old_seen
+
+    out["strand_a"] = list(maps["strand_a"].values())
+    out["strand_b"] = list(maps["strand_b"].values())
+    out["strand_c"] = sorted(maps["strand_c"].values(), key=lambda x: str(x.get("date", "")), reverse=True)
+    return out
 
 
 def load_previous() -> dict[str, Any]:
@@ -1184,17 +1286,22 @@ def load_previous() -> dict[str, Any]:
     except Exception:
         current = {}
 
-    # Normal scans use the current radar exactly as written.  Recovery is only
-    # invoked for a reset/pending template (or a missing/corrupt file).
     if _valid_saved_radar(current):
-        return current
+        augmented = _augment_with_git_history(current)
+        before = tuple(len(current.get(k, [])) if isinstance(current.get(k), list) else 0 for k in ("strand_a", "strand_b", "strand_c"))
+        after = tuple(len(augmented.get(k, [])) if isinstance(augmented.get(k), list) else 0 for k in ("strand_a", "strand_b", "strand_c"))
+        if after != before:
+            print(f"Restored historical cumulative items from Git history: A {before[0]}→{after[0]}, B {before[1]}→{after[1]}, C {before[2]}→{after[2]}.")
+        return augmented
 
     recovered = _recover_radar_from_git()
     if recovered:
+        recovered = _augment_with_git_history(recovered)
         print(
             "Recovered prior cumulative radar corpus from Git history "
             f"(A={len(recovered.get('strand_a', []))}, "
-            f"B={len(recovered.get('strand_b', []))})."
+            f"B={len(recovered.get('strand_b', []))}, "
+            f"C={len(recovered.get('strand_c', []))})."
         )
         return recovered
     return current if isinstance(current, dict) else {}
@@ -1211,27 +1318,71 @@ def internalize_previous(item: dict[str, Any]) -> dict[str, Any]:
 
 
 def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], strand_name: str, now_iso: str) -> list[dict[str, Any]]:
+    """Merge admitted A/B items without deleting earlier accepted material.
+
+    A rediscovered item is refreshed but is not labelled NEW again.  MAX_CORPUS is
+    an optional safety cap; 0 means unlimited, which is the default for this build.
+    """
     merged: dict[str, dict[str, Any]] = {}
     for old in previous:
         internal = internalize_previous(old)
         internal["new_this_scan"] = False
         merged[identity(internal)] = internal
-    new_ids = set()
+    new_ids: set[str] = set()
     for item in new_items:
         if item.get("strand") not in {strand_name, "both"}:
             continue
         key = identity(item)
-        new_ids.add(key)
+        if key == "title:":
+            continue
         existing = merged.get(key)
+        if existing is None:
+            new_ids.add(key)
         first_seen = existing.get("first_seen") if existing else now_iso
-        merged[key] = {**item, "first_seen": first_seen, "new_this_scan": True}
+        merged[key] = {**item, "first_seen": first_seen, "new_this_scan": key in new_ids}
     vals = list(merged.values())
     vals.sort(key=lambda x: (not bool(x.get("new_this_scan")),) + rank_candidate(x))
-    out = []
-    for x in vals[:MAX_CORPUS]:
-        p = public_item(x, new_this_scan=identity(x) in new_ids, first_seen=x.get("first_seen"))
-        out.append(p)
-    return out
+    if MAX_CORPUS > 0:
+        vals = vals[:MAX_CORPUS]
+    return [public_item(x, new_this_scan=identity(x) in new_ids, first_seen=x.get("first_seen")) for x in vals]
+
+
+def signal_identity(item: dict[str, Any]) -> str:
+    """Stable identity for Strand C news signals."""
+    headline = norm_title(item.get("headline", ""))
+    source = normalized(item.get("source", ""))
+    if headline:
+        return f"signal:{source}:{headline}"
+    link = normalized(item.get("link", ""))
+    return f"signal-link:{link}"
+
+
+def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], now_iso: str) -> list[dict[str, Any]]:
+    """Keep every previously admitted weak signal and append newly admitted ones."""
+    merged: dict[str, dict[str, Any]] = {}
+    for old in previous:
+        x = dict(old)
+        x["new_this_scan"] = False
+        merged[signal_identity(x)] = x
+
+    new_ids: set[str] = set()
+    for item in new_items:
+        key = signal_identity(item)
+        if key in {"signal::", "signal-link:"}:
+            continue
+        existing = merged.get(key)
+        if existing is None:
+            new_ids.add(key)
+        first_seen = existing.get("first_seen") if existing else now_iso
+        merged[key] = {**item, "first_seen": first_seen, "new_this_scan": key in new_ids}
+
+    vals = list(merged.values())
+    # New items first, then newest publication date first. Stable sorts keep date order within each group.
+    vals.sort(key=lambda x: str(x.get("date", "")), reverse=True)
+    vals.sort(key=lambda x: not bool(x.get("new_this_scan")))
+    if MAX_CORPUS > 0:
+        vals = vals[:MAX_CORPUS]
+    return [public_item(x, new_this_scan=signal_identity(x) in new_ids, first_seen=x.get("first_seen")) for x in vals]
 
 
 def parse_feed_time(entry: Any) -> dt.datetime | None:
@@ -1384,34 +1535,61 @@ def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> 
     anchored.sort(key=lambda x: (x.get("_anchor_score", 0), x.get("date", "")), reverse=True)
     for x in anchored:
         x.pop("_anchor_score", None)
-    return anchored[:MAX_C]
+    return anchored[:MAX_C] if MAX_C > 0 else anchored
 
 
-def scan_from_date(previous: dict[str, Any]) -> dt.date:
-    if not previous.get("last_updated"):
-        return DATE_FLOOR
+def bootstrap_floor(today: dt.date) -> dt.date:
+    return today - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
+
+
+def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
+    """Keep the earliest established corpus date while bootstrapping new installs for four months."""
+    candidates = [bootstrap_floor(today)]
+    saved = parse_date(previous.get("corpus_start_date"))
+    if saved:
+        candidates.append(saved)
+    for strand in ("strand_a", "strand_b"):
+        for item in previous.get(strand, []) if isinstance(previous.get(strand), list) else []:
+            d = parse_date(item.get("date"))
+            if d:
+                candidates.append(d)
+    return min(candidates)
+
+
+def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
+    if not FORCE_SOURCE_EXPANSION_BACKFILL:
+        return not bool(previous.get("last_updated"))
+    return previous.get("source_expansion_version") != SOURCE_EXPANSION_VERSION
+
+
+def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, bool]:
+    bootstrap = needs_source_expansion_backfill(previous)
+    if bootstrap or not previous.get("last_updated"):
+        # A/B source expansion always gets one full four-calendar-month pass.
+        return bootstrap_floor(today), True
     try:
         last = dateparser.parse(previous["last_updated"]).date()
-        # Seven-day overlap catches late indexing and corrected metadata.
-        return max(DATE_FLOOR, last - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS))
+        return max(DATE_FLOOR, last - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS)), False
     except Exception:
-        return DATE_FLOOR
+        return bootstrap_floor(today), True
 
 
 def main() -> int:
+    global DATE_FLOOR
     started = time.time()
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
     previous = load_previous()
-    from_date = scan_from_date(previous)
+    DATE_FLOOR = preserved_corpus_floor(previous, now.date())
+    from_date, bootstrap_ab = scan_from_date(previous, now.date())
 
     oa = collect_openalex(from_date, warnings)
     cr = collect_crossref(from_date, warnings)
-    inst = collect_institutions(from_date, warnings)
+    inst = collect_institutions(from_date, warnings, bootstrap=bootstrap_ab)
     deduped = dedupe_candidates(oa + cr + inst)
     deduped.sort(key=rank_candidate)
-    new_selected = deduped[:MAX_NEW_AB]
+    new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped
 
     prev_a = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []
@@ -1429,23 +1607,29 @@ def main() -> int:
     first_run = not bool(previous.get("first_scan_complete"))
     news_lookback = FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS
     news = collect_news(now, warnings, news_lookback)
-    strand_c = anchor_news(news, ab_corpus)
+    current_c = anchor_news(news, ab_corpus)
+    prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
+    strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
 
-    new_a_count = sum(1 for x in new_selected if x.get("strand") in {"A", "both"})
-    new_b_count = sum(1 for x in new_selected if x.get("strand") in {"B", "both"})
-    health = "ok"
-    if not (oa or cr or inst):
-        health = "degraded"
-    elif len(warnings) >= 20 and len(new_selected) < 2:
-        health = "degraded"
+    previous_a_ids = {identity(internalize_previous(x)) for x in prev_a}
+    previous_b_ids = {identity(internalize_previous(x)) for x in prev_b}
+    new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
+    new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
+    new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
+    # A large direct-source universe naturally contains some sites with unusable sitemaps.
+    # Do not mark a quiet but successful scan as degraded merely because it admitted no new item.
+    health = "degraded" if (not (oa or cr or inst) and len(warnings) >= 10) else "ok"
 
     data = {
         "last_updated": now_iso,
         "first_scan_complete": True,
+        "corpus_start_date": DATE_FLOOR.isoformat(),
+        "source_expansion_version": SOURCE_EXPANSION_VERSION,
         "scan_health": health,
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
             "ab_discovery_from_this_run": from_date.isoformat(),
+            "ab_four_month_backfill_this_run": bootstrap_ab,
             "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
             "c_window_end": now_iso,
         },
@@ -1453,10 +1637,12 @@ def main() -> int:
             "new_a": new_a_count,
             "new_b": new_b_count,
             "new_ab_unique": len(new_selected),
-            "c_signals": len(strand_c),
-            "note_a": f"This scan found {new_a_count} qualifying Strand A item(s). The radar does not pad results." if new_a_count < 3 else "",
-            "note_b": f"This scan found {new_b_count} qualifying Strand B item(s). The radar does not pad results." if new_b_count < 3 else "",
-            "note_c": "This scan found 0 qualifying anchored Strand C signals. The radar does not pad results." if not strand_c else "",
+            "new_c": new_c_count,
+            "c_signals": new_c_count,
+            "c_signals_total": len(strand_c),
+            "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
+            "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new anchored weak signal(s). Earlier signals remain available." if new_c_count < 3 else "",
         },
         "strand_a": strand_a,
         "strand_b": strand_b,
@@ -1465,6 +1651,11 @@ def main() -> int:
             "openalex_admitted_before_dedupe": len(oa),
             "crossref_admitted_before_dedupe": len(cr),
             "institutional_admitted_before_dedupe": len(inst),
+            "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
+            "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
+            "institution_sources_configured": len(CONFIG.get("institution_sources", [])),
+            "major_scholarly_publishers_tracked": len(CONFIG.get("major_scholarly_publishers", [])),
+            "source_expansion_backfill": bootstrap_ab,
             "unique_ab_candidates_before_scan_limit": len(deduped),
             "news_candidates_current_window": len(news),
             "news_lookback_hours": news_lookback,

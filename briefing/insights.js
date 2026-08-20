@@ -254,7 +254,17 @@
       const point=pointFor(x);
       if(!point||isDocumentDebris(point)||META.test(point)) continue;
       const topic=topicFor(x,point);
-      groups.get(topic).push({point,date:dateFor(x),newThisScan:!!x.new_this_scan});
+      groups.get(topic).push({
+        point,
+        date:dateFor(x),
+        newThisScan:!!x.new_this_scan,
+        firstSeen:clean(x.first_seen||''),
+        source:clean(x.source||''),
+        link:clean(x.link||''),
+        strand:clean(x.strand||(x.headline?'C':'')),
+        signalType:clean(x.signal_type||''),
+        title:clean(x.title||x.headline||'')
+      });
     }
     for(const items of groups.values()) items.sort((a,b)=>(Number(b.newThisScan)-Number(a.newThisScan))||b.date.localeCompare(a.date)||a.point.localeCompare(b.point));
     return order.map(name=>({name,items:groups.get(name)})).filter(g=>g.items.length);

@@ -1,12 +1,11 @@
 {
-  "date_floor": "2026-04-01",
   "news_lookback_hours": 48,
-  "max_new_ab_per_scan": 15,
-  "max_c_per_scan": 5,
-  "max_corpus_per_strand": 60,
-  "openalex_per_query": 70,
-  "crossref_rows_per_query": 50,
-  "institution_pages_per_domain": 20,
+  "max_new_ab_per_scan": 0,
+  "max_c_per_scan": 0,
+  "max_corpus_per_strand": 0,
+  "openalex_per_query": 100,
+  "crossref_rows_per_query": 80,
+  "institution_pages_per_domain": 34,
   "queries_a": [
     "European research security",
     "EU research security foreign interference",
@@ -38,7 +37,32 @@
     "Horizon Europe third country association geopolitics",
     "FP10 international cooperation Europe",
     "research talent Europe strategic competition",
-    "scientific talent mobility Europe economic security"
+    "scientific talent mobility Europe economic security",
+    "knowledge security European research policy",
+    "trusted research Europe policy geopolitics",
+    "foreign interference universities Europe research security",
+    "academic research security Europe China",
+    "international science cooperation strategic competition Europe",
+    "science technology innovation policy economic security Europe",
+    "European innovation security critical technologies",
+    "European research strategic dependencies technology",
+    "EU critical technology research security",
+    "EU semiconductor research geopolitics policy",
+    "EU quantum research economic security policy",
+    "EU biotechnology research economic security policy",
+    "EU artificial intelligence research strategic autonomy",
+    "European science diplomacy China United States",
+    "research sanctions international collaboration Europe",
+    "research collaboration sanctions Europe science policy",
+    "foreign investment screening research technology Europe",
+    "outbound investment technology research Europe policy",
+    "European university China research cooperation security",
+    "European research talent security mobility China",
+    "open science geopolitics Europe research security",
+    "research infrastructures geopolitics Europe policy",
+    "European Research Area economic security",
+    "Horizon Europe research security international cooperation",
+    "framework programme international cooperation economic security Europe"
   ],
   "queries_b": [
     "foresight methodology Europe policy",
@@ -62,7 +86,31 @@
     "weak signals horizon scanning methodology policy",
     "foresight methods critical emerging technologies",
     "JRC foresight methodology",
-    "ESPAS foresight methods"
+    "ESPAS foresight methods",
+    "weak signal detection methodology government foresight",
+    "weak signals methodology science technology policy",
+    "Delphi method strategic foresight public policy technology",
+    "Delphi foresight research innovation policy",
+    "morphological analysis foresight technology policy",
+    "backcasting methodology innovation policy",
+    "participatory foresight methodology public policy",
+    "participatory scenario methodology technology policy",
+    "scenario construction methods strategic foresight government",
+    "scenario robustness uncertainty public policy foresight",
+    "foresight quality criteria evaluation government",
+    "foresight evaluation framework public administration",
+    "foresight institutional capacity government methodology",
+    "institutionalising strategic foresight public administration",
+    "institutionalizing strategic foresight government",
+    "anticipatory governance methods emerging technology",
+    "strategic intelligence methodology science technology policy",
+    "horizon scanning weak signals strategic intelligence",
+    "futures literacy methodology public policy technology",
+    "foresight toolkits research innovation policy",
+    "foresight methods innovation systems",
+    "technology assessment foresight methodology Europe",
+    "real time Delphi foresight policy",
+    "cross impact analysis foresight methodology"
   ],
   "tier2_journals": [
     "Research Policy",
@@ -86,7 +134,34 @@
     "European Journal of Futures Research",
     "Policy Sciences",
     "Policy Studies",
-    "Journal of Responsible Innovation"
+    "Journal of Responsible Innovation",
+    "Journal of Technology Transfer",
+    "The Journal of Technology Transfer",
+    "Technological Analysis and Strategic Management",
+    "Scientometrics",
+    "Industry and Innovation",
+    "Economics of Innovation and New Technology",
+    "Research-Technology Management",
+    "European Journal of International Relations",
+    "International Affairs",
+    "Journal of Common Market Studies",
+    "Journal of European Integration",
+    "West European Politics",
+    "European Foreign Affairs Review",
+    "Contemporary Security Policy",
+    "International Studies Quarterly",
+    "Review of International Political Economy",
+    "Globalizations",
+    "Policy and Society",
+    "Public Management Review",
+    "Government Information Quarterly",
+    "Technology Analysis & Strategic Management",
+    "World Futures Review",
+    "Journal of Futures Studies",
+    "Futures & Foresight Science",
+    "Journal of Forecasting",
+    "Long Range Planning",
+    "Technological Forecasting & Social Change"
   ],
   "institution_sources": [
     {
@@ -218,6 +293,161 @@
       "name": "NBER",
       "domain": "nber.org",
       "tier": 3
+    },
+    {
+      "name": "European Council / Council of the EU",
+      "domain": "consilium.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European External Action Service",
+      "domain": "eeas.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Research Council",
+      "domain": "erc.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Innovation Council",
+      "domain": "eic.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Institute of Innovation and Technology",
+      "domain": "eit.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European University Association",
+      "domain": "eua.eu",
+      "tier": 1
+    },
+    {
+      "name": "Science Europe",
+      "domain": "scienceeurope.org",
+      "tier": 1
+    },
+    {
+      "name": "ALLEA",
+      "domain": "allea.org",
+      "tier": 1
+    },
+    {
+      "name": "LERU",
+      "domain": "leru.org",
+      "tier": 1
+    },
+    {
+      "name": "EARTO",
+      "domain": "earto.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Council on Foreign Relations",
+      "domain": "ecfr.eu",
+      "tier": 1
+    },
+    {
+      "name": "Centre for European Reform",
+      "domain": "cer.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Policy Centre",
+      "domain": "epc.eu",
+      "tier": 1
+    },
+    {
+      "name": "ECIPE",
+      "domain": "ecipe.org",
+      "tier": 1
+    },
+    {
+      "name": "DGAP",
+      "domain": "dgap.org",
+      "tier": 1
+    },
+    {
+      "name": "CIDOB",
+      "domain": "cidob.org",
+      "tier": 1
+    },
+    {
+      "name": "Jacques Delors Institute",
+      "domain": "institutdelors.eu",
+      "tier": 1
+    },
+    {
+      "name": "Bertelsmann Stiftung",
+      "domain": "bertelsmann-stiftung.de",
+      "tier": 1
+    },
+    {
+      "name": "Demos Helsinki",
+      "domain": "demoshelsinki.fi",
+      "tier": 1
+    },
+    {
+      "name": "Copenhagen Institute for Futures Studies",
+      "domain": "cifs.dk",
+      "tier": 1
+    },
+    {
+      "name": "OECD Observatory of Public Sector Innovation",
+      "domain": "oecd-opsi.org",
+      "tier": 1
+    },
+    {
+      "name": "UNESCO",
+      "domain": "unesco.org",
+      "tier": 3
+    },
+    {
+      "name": "World Bank",
+      "domain": "worldbank.org",
+      "tier": 3
+    },
+    {
+      "name": "NATO",
+      "domain": "nato.int",
+      "tier": 3
+    },
+    {
+      "name": "Council on Foreign Relations",
+      "domain": "cfr.org",
+      "tier": 3
+    },
+    {
+      "name": "Atlantic Council",
+      "domain": "atlanticcouncil.org",
+      "tier": 3
+    },
+    {
+      "name": "Information Technology and Innovation Foundation",
+      "domain": "itif.org",
+      "tier": 3
+    },
+    {
+      "name": "Belfer Center",
+      "domain": "belfercenter.org",
+      "tier": 3
+    },
+    {
+      "name": "Center for a New American Security",
+      "domain": "cnas.org",
+      "tier": 3
+    },
+    {
+      "name": "National Academies Press",
+      "domain": "nap.nationalacademies.org",
+      "tier": 3
+    },
+    {
+      "name": "Hoover Institution",
+      "domain": "hoover.org",
+      "tier": 3
     }
   ],
   "crossref_institution_publishers": [
@@ -229,7 +459,37 @@
     "RAND Corporation",
     "Center for Strategic and International Studies",
     "Brookings Institution",
-    "Carnegie Endowment for International Peace"
+    "Carnegie Endowment for International Peace",
+    "European Parliament",
+    "European Parliamentary Research Service",
+    "European Council",
+    "Council of the European Union",
+    "European External Action Service",
+    "European University Institute",
+    "Science Europe",
+    "European University Association",
+    "Bruegel",
+    "Centre for European Policy Studies",
+    "Mercator Institute for China Studies",
+    "German Institute for International and Security Affairs",
+    "French Institute of International Relations",
+    "European Union Institute for Security Studies",
+    "Clingendael Institute",
+    "Chatham House",
+    "European Council on Foreign Relations",
+    "Centre for European Reform",
+    "European Policy Centre",
+    "Fraunhofer Institute for Systems and Innovation Research",
+    "Rathenau Instituut",
+    "Nesta",
+    "UNESCO",
+    "World Bank",
+    "Atlantic Council",
+    "Council on Foreign Relations",
+    "Information Technology and Innovation Foundation",
+    "National Academies Press",
+    "Belfer Center",
+    "Center for a New American Security"
   ],
   "news_sources": [
     {
@@ -290,5 +550,32 @@
     }
   ],
   "first_news_lookback_hours": 168,
-  "discovery_overlap_days": 14
+  "discovery_overlap_days": 14,
+  "bootstrap_lookback_months": 4,
+  "source_expansion_version": "v11-major-source-backfill",
+  "force_backfill_on_source_expansion": true,
+  "institution_pages_per_domain_bootstrap": 70,
+  "sitemap_child_budget": 12,
+  "sitemap_max_entries": 1200,
+  "institution_min_words": 1200,
+  "institution_tier1_brief_min_words": 650,
+  "accept_broad_peer_reviewed_journals": true,
+  "major_scholarly_publishers": [
+    "Springer Nature",
+    "Elsevier",
+    "Wiley",
+    "Taylor & Francis",
+    "SAGE",
+    "Oxford University Press",
+    "Cambridge University Press",
+    "IEEE",
+    "ACM",
+    "Emerald",
+    "MDPI",
+    "Frontiers",
+    "PLOS",
+    "Royal Society",
+    "AAAS",
+    "National Academies Press"
+  ]
 }

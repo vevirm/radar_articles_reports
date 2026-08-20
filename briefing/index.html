@@ -4,57 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<meta name="radar-insights-build" content="simple-signal-points-v9">
-<title>Radar insights</title>
+<meta name="radar-insights-build" content="cumulative-insights-v11">
+<meta name="theme-color" content="#101827">
+<title>Radar Insights</title>
 <style>
-:root{--bg:#f7f6f2;--ink:#171716;--muted:#68645e;--line:#d8d5ce;--accent:#741b25;--max:940px}
-*{box-sizing:border-box}
-html{background:var(--bg)}
-body{margin:0;color:var(--ink);background:var(--bg);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-a{color:inherit}
-.wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}
-header{padding:38px 0 24px;border-bottom:1px solid var(--line)}
-h1{margin:0;font-size:clamp(2.25rem,7vw,4rem);line-height:.98;letter-spacing:-.05em}
-.lede{margin:10px 0 0;color:var(--muted);max-width:700px}
-.back{display:inline-block;margin-top:14px;color:var(--accent);font-size:.9rem;font-weight:750;text-decoration:none}
-main{padding:8px 0 58px}
-.topic{padding:27px 0 24px;border-bottom:1px solid var(--line)}
-.topic:last-child{border-bottom:0}
-h2{margin:0 0 11px;font-size:1.45rem;line-height:1.15;letter-spacing:-.03em}
-ul{margin:0;padding-left:1.25em}
-li{margin:.56em 0;padding-left:.12em;max-width:900px}
-.state{padding:34px 0;color:var(--muted)}
-@media(max-width:640px){body{font-size:16px}.wrap{width:min(calc(100% - 28px),var(--max))}header{padding-top:28px}.topic{padding:22px 0 19px}}
+:root{--navy:#101827;--ink:#172033;--muted:#687487;--bg:#f3f6f9;--card:#fff;--line:#dde4ec;--accent:#a32835;--accent-soft:#f7e9eb;--blue:#235d91;--shadow:0 10px 30px rgba(20,39,67,.07);--max:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(calc(100% - 32px),var(--max));margin:auto}
+header{background:linear-gradient(135deg,#101827,#1b3352 68%,#294765);color:#fff;padding:42px 0 34px}.top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#bbc8d8;font-weight:800}h1{font-size:clamp(40px,7vw,74px);line-height:.98;letter-spacing:-.055em;margin:8px 0 13px}.lede{color:#d0dae6;max-width:760px;margin:0;font-size:17px}.back{display:inline-block;text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 11px;font-weight:750;font-size:12px;white-space:nowrap;background:rgba(255,255,255,.06)}
+.summary{margin-top:-18px;position:relative;z-index:2}.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.stat .label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}.stat .value{font-size:30px;line-height:1;margin-top:7px;font-weight:850;letter-spacing:-.04em}.stat .sub{font-size:11px;color:var(--muted);margin-top:6px}
+.controls{position:sticky;top:0;z-index:8;background:rgba(243,246,249,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(221,228,236,.9);padding:11px 0}.control-row{display:flex;gap:9px;align-items:center}.search{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font:inherit;outline:none}.search:focus{border-color:#8594a7;box-shadow:0 0 0 3px rgba(35,93,145,.1)}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;cursor:pointer;font-weight:750;color:#4e5d70;font-size:12px}.chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+main{padding:25px 0 65px}.topic{margin:0 0 18px}.topic-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin:0 0 9px}.topic h2{font-size:22px;line-height:1.2;letter-spacing:-.03em;margin:0}.topic-count{font-size:12px;color:var(--muted)}.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.insight{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:142px}.insight.new{border-color:#e4bec4;box-shadow:0 10px 30px rgba(163,40,53,.075)}.meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:11px;color:var(--muted)}.badges{display:flex;gap:5px;flex-wrap:wrap}.badge{font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:850;border:1px solid #e2e7ed;background:#f6f8fa;border-radius:999px;padding:2px 6px}.badge.new{color:var(--accent);background:var(--accent-soft);border-color:#ebc8cd}.point{font-size:15px;margin:0;line-height:1.5}.foot{margin-top:auto;padding-top:11px;display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;border-top:1px solid #f0f2f5}.foot a{text-decoration:none;font-weight:750;color:#41566e}.foot a:hover{text-decoration:underline}.state{background:#fff;border:1px dashed #cdd6e0;border-radius:15px;padding:24px;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:850px){.summary-grid{grid-template-columns:repeat(2,1fr)}.items{grid-template-columns:1fr}}@media(max-width:620px){.wrap{width:min(calc(100% - 24px),var(--max))}.top{flex-direction:column}.control-row{flex-wrap:wrap}.search{flex-basis:100%}.summary-grid{grid-template-columns:1fr 1fr}.stat{padding:14px}.stat .value{font-size:26px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <h1>Radar insights</h1>
-    <p class="lede">What the radar is saying, grouped by topic. One signal, one clear point.</p>
-    <a class="back" href="../">← Main radar</a>
-  </div>
-</header>
-<main class="wrap" id="insights"><p class="state">Loading insights…</p></main>
-<script src="insights.js?v=9"></script>
+<header><div class="wrap top"><div><div class="kicker">Cumulative intelligence layer</div><h1>Radar Insights</h1><p class="lede">A cleaner view of what the radar is saying. Every admitted publication and weak signal stays in the evidence base, while newly added items are highlighted.</p></div><a class="back" href="../">← Main radar</a></div></header>
+<section class="summary"><div class="wrap summary-grid"><div class="stat"><div class="label">Insights</div><div id="totalInsights" class="value">—</div><div class="sub">clear signal points</div></div><div class="stat"><div class="label">Topics</div><div id="totalTopics" class="value">—</div><div class="sub">active topic clusters</div></div><div class="stat"><div class="label">Weak signals</div><div id="totalSignals" class="value">—</div><div class="sub">historical Strand C</div></div><div class="stat"><div class="label">New this scan</div><div id="totalNew" class="value">—</div><div class="sub">newly admitted points</div></div></div></section>
+<div class="controls"><div class="wrap control-row"><input id="search" class="search" type="search" placeholder="Search insights and sources…" aria-label="Search insights"><button id="newOnly" class="chip" type="button">New this scan</button><button id="all" class="chip active" type="button">All history</button></div></div>
+<main class="wrap" id="insights"><p class="state">Loading cumulative insights…</p></main>
+<script src="insights.js?v=11"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function render(groups){
-  const root=document.getElementById('insights');
-  if(!groups.length){root.innerHTML='<p class="state">No radar items are available yet.</p>';return}
-  root.innerHTML=groups.map(g=>`<section class="topic"><h2>${esc(g.name)}</h2><ul>${g.items.map(x=>`<li>${esc(x.point)}</li>`).join('')}</ul></section>`).join('');
-}
-(async()=>{
-  try{
-    const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});
-    if(!r.ok) throw new Error('radar.json unavailable');
-    render(RadarInsights.buildInsights(await r.json()));
-  }catch(e){
-    document.getElementById('insights').innerHTML='<p class="state">Radar data is not available yet.</p>';
-  }
-})();
+const ui={groups:[],query:'',newOnly:false};
+function fmtDate(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
+function filterItem(x){const q=ui.query.trim().toLowerCase();if(ui.newOnly&&!x.newThisScan)return false;if(!q)return true;return [x.point,x.source,x.title,x.strand,x.signalType].join(' ').toLowerCase().includes(q)}
+function render(){const root=document.getElementById('insights');const groups=ui.groups.map(g=>({...g,items:g.items.filter(filterItem)})).filter(g=>g.items.length);if(!groups.length){root.innerHTML='<p class="state">No insights match the current filter.</p>';return}root.innerHTML=groups.map(g=>`<section class="topic"><div class="topic-head"><h2>${esc(g.name)}</h2><div class="topic-count">${g.items.length} point${g.items.length===1?'':'s'}</div></div><div class="items">${g.items.map(x=>`<article class="insight ${x.newThisScan?'new':''}"><div class="meta"><div class="badges">${x.newThisScan?'<span class="badge new">New</span>':''}${x.strand?`<span class="badge">Strand ${esc(x.strand)}</span>`:''}${x.signalType?`<span class="badge">${esc(x.signalType)}</span>`:''}</div><span>${esc(fmtDate(x.date))}</span></div><p class="point">${esc(x.point)}</p><div class="foot"><span>${esc(x.source||'')}</span>${x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">Open source ↗</a>`:'<span></span>'}</div></article>`).join('')}</div></section>`).join('')}
+function setMode(newOnly){ui.newOnly=newOnly;document.getElementById('newOnly').classList.toggle('active',newOnly);document.getElementById('all').classList.toggle('active',!newOnly);render()}
+document.getElementById('search').addEventListener('input',e=>{ui.query=e.target.value;render()});document.getElementById('newOnly').addEventListener('click',()=>setMode(true));document.getElementById('all').addEventListener('click',()=>setMode(false));
+(async()=>{try{const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error();const data=await r.json();ui.groups=RadarInsights.buildInsights(data);const flat=ui.groups.flatMap(g=>g.items);document.getElementById('totalInsights').textContent=flat.length;document.getElementById('totalTopics').textContent=ui.groups.length;document.getElementById('totalSignals').textContent=(data.strand_c||[]).length;document.getElementById('totalNew').textContent=flat.filter(x=>x.newThisScan).length;render()}catch(e){document.getElementById('insights').innerHTML='<p class="state">Radar data is not available yet.</p>'}})();
 </script>
 </body>
 </html>

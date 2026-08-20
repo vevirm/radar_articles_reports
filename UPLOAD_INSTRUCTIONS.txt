@@ -1,5 +1,9 @@
-UPLOAD INSIGHTS V9
+V11 UPLOAD
 
-Upload the contents of this package over the existing GitHub repository. Keep the existing radar.json in the repository; this safe package intentionally does not include it. Make sure hidden .github files are uploaded too.
-
-Then open /briefing/?v=9. The page reads the same radar.json as the main radar and turns admitted items into topical one-point bullets.
+1. Keep your existing populated radar.json in the GitHub repository.
+2. Upload/replace the files from this package over the current repository.
+3. Commit to main.
+4. The push starts the V11 scan immediately.
+5. Because the old radar does not have the V11 source-expansion marker, that first V11 scan searches the previous four calendar months for A/B reports and research papers, then merges them into the cumulative corpus.
+6. After that, the workflow runs every 12 hours with a 14-day A/B overlap and scans the full configured source universe each time.
+7. Do not add an empty radar.json from a package; this package intentionally does not contain one.

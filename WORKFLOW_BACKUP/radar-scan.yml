@@ -1,14 +1,14 @@
 name: R&I Radar Scan
 
 on:
-  # FIRST SCAN: the upload/commit that adds this repository starts a scan immediately.
+  # FIRST/UPGRADE SCAN: the upload/commit starts a four-month A/B source backfill immediately.
   push:
     branches:
       - main
     paths-ignore:
       - radar.json
 
-  # THEN: every 12 hours. :23 avoids the busiest top-of-hour scheduling period.
+  # THEN: every 12 hours, scanning the full configured source universe with an overlap window. :23 avoids the busiest top-of-hour scheduling period.
   schedule:
     - cron: '23 */12 * * *'
 
@@ -26,7 +26,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 60
 
     steps:
       - name: Check out repository
