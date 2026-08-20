@@ -1,10 +1,11 @@
-V14 ZERO-CONFIG RESILIENT SCAN UPGRADE
+FULL REPOSITORY — V15 SCAN REPAIR
 
-1. KEEP the existing live radar.json. Do not delete or replace it.
-2. Upload/replace the other files from this package at the repository root.
-3. Commit to main. The push starts a fresh four-month A/B backfill.
-4. No API keys, repository secrets or other credentials are required.
-5. The full A/B query universe is attempted through anonymous public scholarly discovery plus direct scanning of all configured institutional publishers/players.
-6. If one public source is unavailable, the scanner continues with the others and preserves the accumulated corpus.
-7. A degraded four-month backfill is retried automatically rather than marked complete.
-8. After the backfill, the workflow runs every 12 hours with a 14-day overlap and preserves all accumulated A/B/C items.
+1. Extract the ZIP locally.
+2. Replace the repository contents with ALL extracted files and folders.
+3. IMPORTANT: include the hidden .github folder. It contains the active workflow.
+4. Commit everything to main.
+5. Open GitHub Actions -> R&I Radar Scan -> Run workflow if you want to trigger it immediately.
+
+The package contains the cumulative radar.json snapshot, scanner code, site, Insights page, configuration, tests and workflow.
+No API key, custom secret or email configuration is required.
+The scanner performs the four-month A/B backfill and then runs every 12 hours. A, B and C remain cumulative.

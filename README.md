@@ -1,22 +1,21 @@
-# R&I × Geopolitics Radar — V14 zero-config resilient scanner
+# R&I × Geopolitics Radar — V15 scan repair
 
-A cumulative GitHub Pages radar for research papers, analytical reports, foresight methodology and anchored weak signals relevant to European research and innovation in a geopolitical context.
+V15 is a targeted runtime repair for the GitHub Actions scan. It keeps the balanced relevance criteria, four-month A/B backfill, 12-hour schedule, cumulative A/B/C corpus and zero-config operation.
 
-## What V14 changes
+## What V15 fixes
 
-V14 removes the setup dependency introduced in V13. There are **no API keys, no repository secrets and no manual credentials**. Commit the files and the scanner runs.
+- The live `radar.json` is now the authoritative cumulative corpus during normal runs. The scanner no longer walks and unions many historical `radar.json` revisions before every scan.
+- Malformed/null legacy rows are skipped safely instead of being able to terminate the process before source collection starts.
+- Existing A/B/C items are preserved even when all network sources are temporarily unavailable.
+- Collector output is structure-validated before deduplication and merge.
+- `radar.json` is written atomically.
+- The internal network budget is 20 minutes, so the scanner fits inside the currently deployed 30-minute Action.
+- No API keys or custom repository secrets are required.
+- The active workflow copy has no OpenAlex secret reference; Pages refresh is non-fatal.
 
-The scanner keeps the balanced V12/V13 relevance criteria and the resilient failure handling, but restores full zero-config scholarly discovery:
+## Critical deployment note
 
-- the full configured Strand A + Strand B query universe is attempted on every relevant scan;
-- public scholarly metadata sources are queried anonymously and conservatively;
-- Crossref public discovery is rate-limited and retried without requiring a contact secret;
-- OpenAlex public discovery is attempted anonymously across the full query universe; if that public endpoint is temporarily unavailable, the scan continues with Crossref and direct publisher/institution scanning rather than failing;
-- all configured institutional publishers/players are still scanned directly through their public sites/sitemaps/PDFs;
-- source failures cannot wipe or replace the cumulative corpus;
-- a degraded four-month backfill is not marked complete, so it is retried on the next scheduled run;
-- GitHub Actions logs show live stage progress;
-- the optional GitHub Pages refresh failure remains non-fatal.
+This full-repository distribution already includes the active workflow at `.github/workflows/radar-scan.yml` and a visible backup at `RADAR_SCAN_WORKFLOW_COPY.yml`. When replacing the repository, make sure the hidden `.github` folder is included.
 
 ## Admission profile
 
@@ -28,16 +27,14 @@ Safeguards remain against generic geopolitics, generic innovation/business, pure
 
 ## Discovery schedule
 
-- **First V14 run:** four-calendar-month A/B backfill under the balanced criteria.
+- **First V15 run:** four-calendar-month A/B backfill under the balanced criteria.
 - **Later runs:** every 12 hours with a 14-day A/B overlap.
 - **Corpus:** A, B and C remain cumulative and deduplicated.
 - **Zero configuration:** no keys/secrets need to be created in GitHub.
 
-## Safe upgrade
+## Full-repository upload
 
-Do **not** overwrite a populated live `radar.json`. This package intentionally does not include one.
-
-Upload/replace the other files, keep the live `radar.json`, and commit to `main`. The push starts the V14 four-month backfill immediately. Later scans run every 12 hours.
+This ZIP includes the current cumulative `radar.json` snapshot together with the complete V15 code, site, tests and active GitHub Actions workflow. Extract the ZIP and replace the repository contents with all files and folders, including `.github`. Commit to `main`; the push starts the V15 four-month backfill. Later scans run every 12 hours.
 
 ## Local tests
 

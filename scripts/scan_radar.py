@@ -50,7 +50,7 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
-SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v14-balanced-relevance-zero-config"))
+SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v15-scan-repair"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -1361,6 +1361,8 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
 
 
 def identity(item: dict[str, Any]) -> str:
+    if not isinstance(item, dict):
+        return "title:"
     doi = normalized(item.get("_doi") or item.get("link", ""))
     m = re.search(r"10\.\d{4,9}/[^\s?#]+", doi)
     if m:
@@ -1371,6 +1373,8 @@ def identity(item: dict[str, Any]) -> str:
 def dedupe_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     by_key: dict[str, dict[str, Any]] = {}
     for item in items:
+        if not isinstance(item, dict):
+            continue
         key = identity(item)
         if key == "title:":
             continue
@@ -1390,12 +1394,16 @@ def dedupe_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def rank_candidate(item: dict[str, Any]):
+    if not isinstance(item, dict):
+        return (9, 9.0, 0, 0)
     eu = 0 if item.get("eu_relevance") == "direct" else 1
     d = parse_date(item.get("date")) or dt.date.min
     return (eu, float(item.get("_source_rank", 9.0)), -d.toordinal(), -int(item.get("_confidence", 0)))
 
 
 def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen: str | None = None) -> dict[str, Any]:
+    if not isinstance(item, dict):
+        return {}
     out = {k: v for k, v in item.items() if not k.startswith("_")}
     out["new_this_scan"] = bool(new_this_scan)
     if first_seen:
@@ -1514,37 +1522,67 @@ def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -
     return out
 
 
+def _sanitize_saved_radar(data: Any) -> tuple[dict[str, Any], dict[str, int]]:
+    """Return a safe cumulative radar and counts of malformed rows removed.
+
+    A scanner run must never die because an older radar.json (or an older Git
+    revision) contains a null/string/list entry where a publication object is
+    expected.  V15 sanitises only structure; it does not delete valid content.
+    """
+    out = dict(data) if isinstance(data, dict) else {}
+    removed: dict[str, int] = {}
+    for strand in ("strand_a", "strand_b", "strand_c"):
+        raw = out.get(strand) if isinstance(out.get(strand), list) else []
+        clean = [dict(item) for item in raw if isinstance(item, dict)]
+        removed[strand] = len(raw) - len(clean)
+        out[strand] = clean
+    return out, removed
+
+
 def load_previous() -> dict[str, Any]:
+    """Load the live cumulative corpus without walking Git history on every run.
+
+    The valid live radar.json is authoritative.  This deliberately removes the
+    fragile V10-V14 history-union path from normal scans.  Git history is used
+    only as an emergency recovery path when radar.json itself is missing/invalid.
+    """
     try:
         current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
     except Exception:
         current = {}
 
     if _valid_saved_radar(current):
-        augmented = _augment_with_git_history(current)
-        before = tuple(len(current.get(k, [])) if isinstance(current.get(k), list) else 0 for k in ("strand_a", "strand_b", "strand_c"))
-        after = tuple(len(augmented.get(k, [])) if isinstance(augmented.get(k), list) else 0 for k in ("strand_a", "strand_b", "strand_c"))
-        if after != before:
-            print(f"Restored historical cumulative items from Git history: A {before[0]}→{after[0]}, B {before[1]}→{after[1]}, C {before[2]}→{after[2]}.")
-        return augmented
+        clean, removed = _sanitize_saved_radar(current)
+        bad = sum(removed.values())
+        if bad:
+            print(f"Ignored {bad} malformed historical radar row(s) safely: {removed}.", flush=True)
+        return clean
 
-    recovered = _recover_radar_from_git()
+    recovered = _recover_radar_from_git(max_commits=40)
     if recovered:
-        recovered = _augment_with_git_history(recovered)
+        clean, removed = _sanitize_saved_radar(recovered)
         print(
             "Recovered prior cumulative radar corpus from Git history "
-            f"(A={len(recovered.get('strand_a', []))}, "
-            f"B={len(recovered.get('strand_b', []))}, "
-            f"C={len(recovered.get('strand_c', []))})."
+            f"(A={len(clean.get('strand_a', []))}, "
+            f"B={len(clean.get('strand_b', []))}, "
+            f"C={len(clean.get('strand_c', []))}).",
+            flush=True,
         )
-        return recovered
-    return current if isinstance(current, dict) else {}
+        if sum(removed.values()):
+            print(f"Ignored malformed recovered rows safely: {removed}.", flush=True)
+        return clean
+
+    clean, _ = _sanitize_saved_radar(current)
+    return clean
 
 
 def internalize_previous(item: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(item, dict):
+        return {}
     x = dict(item)
     x["_themes"] = themes_for(f"{x.get('title','')} {x.get('summary','')}")
-    x["_source_rank"] = 1.0 if "Tier 1" in x.get("source_tier", "") else 2.4 if "comparable" in x.get("source_tier", "") else 2.0 if "Tier 2" in x.get("source_tier", "") else 3.0
+    tier = str(x.get("source_tier") or "")
+    x["_source_rank"] = 1.0 if "Tier 1" in tier else 2.4 if "comparable" in tier else 2.0 if "Tier 2" in tier else 3.0
     x["_confidence"] = 0
     x["_doi"] = normalized(x.get("link", ""))
     x["_preprint"] = x.get("type") == "preprint"
@@ -1559,11 +1597,18 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     """
     merged: dict[str, dict[str, Any]] = {}
     for old in previous:
+        if not isinstance(old, dict):
+            continue
         internal = internalize_previous(old)
+        key = identity(internal)
+        if key == "title:":
+            continue
         internal["new_this_scan"] = False
-        merged[identity(internal)] = internal
+        merged[key] = internal
     new_ids: set[str] = set()
     for item in new_items:
+        if not isinstance(item, dict):
+            continue
         if item.get("strand") not in {strand_name, "both"}:
             continue
         key = identity(item)
@@ -1583,6 +1628,8 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
 
 def signal_identity(item: dict[str, Any]) -> str:
     """Stable identity for Strand C news signals."""
+    if not isinstance(item, dict):
+        return "signal-link:"
     headline = norm_title(item.get("headline", ""))
     source = normalized(item.get("source", ""))
     if headline:
@@ -1595,12 +1642,19 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     """Keep every previously admitted weak signal and append newly admitted ones."""
     merged: dict[str, dict[str, Any]] = {}
     for old in previous:
+        if not isinstance(old, dict):
+            continue
         x = dict(old)
+        key = signal_identity(x)
+        if key in {"signal::", "signal-link:"}:
+            continue
         x["new_this_scan"] = False
-        merged[signal_identity(x)] = x
+        merged[key] = x
 
     new_ids: set[str] = set()
     for item in new_items:
+        if not isinstance(item, dict):
+            continue
         key = signal_identity(item)
         if key in {"signal::", "signal-link:"}:
             continue
@@ -1728,7 +1782,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
 def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if not ab_corpus:
         return []
-    internals = [internalize_previous(x) for x in ab_corpus]
+    internals = [internalize_previous(x) for x in ab_corpus if isinstance(x, dict)]
+    internals = [x for x in internals if identity(x) != "title:"]
     theme_counts = Counter(t for x in internals for t in x.get("_themes", []))
     recurring = {t for t, c in theme_counts.items() if c >= 2}
     supported_specific = {t for t, c in theme_counts.items() if c >= 1 and t in SPECIFIC_ANCHOR_THEMES}
@@ -1808,6 +1863,8 @@ def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
         candidates.append(saved)
     for strand in ("strand_a", "strand_b"):
         for item in previous.get(strand, []) if isinstance(previous.get(strand), list) else []:
+            if not isinstance(item, dict):
+                continue
             d = parse_date(item.get("date"))
             if d:
                 candidates.append(d)
@@ -1868,6 +1925,9 @@ def main() -> int:
         cr = fut_cr.result()
 
     inst = safe_stage("institutional reports", collect_institutions, from_date, warnings, bootstrap=bootstrap_ab)
+    oa = [x for x in oa if isinstance(x, dict)]
+    cr = [x for x in cr if isinstance(x, dict)]
+    inst = [x for x in inst if isinstance(x, dict)]
     deduped = dedupe_candidates(oa + cr + inst)
     deduped.sort(key=rank_candidate)
     new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped
@@ -1879,7 +1939,11 @@ def main() -> int:
 
     all_ab_map = {}
     for x in strand_a + strand_b:
-        all_ab_map[identity(internalize_previous(x))] = x
+        if not isinstance(x, dict):
+            continue
+        key = identity(internalize_previous(x))
+        if key != "title:":
+            all_ab_map[key] = x
     ab_corpus = list(all_ab_map.values())
     first_run = not bool(previous.get("first_scan_complete"))
     news_lookback = FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS
@@ -1888,8 +1952,8 @@ def main() -> int:
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
 
-    previous_a_ids = {identity(internalize_previous(x)) for x in prev_a}
-    previous_b_ids = {identity(internalize_previous(x)) for x in prev_b}
+    previous_a_ids = {identity(internalize_previous(x)) for x in prev_a if isinstance(x, dict)}
+    previous_b_ids = {identity(internalize_previous(x)) for x in prev_b if isinstance(x, dict)}
     new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
@@ -1918,7 +1982,7 @@ def main() -> int:
         "source_expansion_version": expansion_marker,
         "backfill_complete": backfill_complete,
         "zero_config_scan": True,
-        "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v14_zero_config")),
+        "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v15_scan_repair")),
         "scan_health": health,
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
@@ -1963,7 +2027,9 @@ def main() -> int:
             "runtime_seconds": round(time.time() - started, 1),
         },
     }
-    OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp_out = OUT_PATH.with_suffix(".json.tmp")
+    tmp_out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp_out.replace(OUT_PATH)
     log_progress(f"radar.json written: A={len(strand_a)} B={len(strand_b)} C={len(strand_c)} health={health}")
     print(json.dumps(data["stats"], indent=2), flush=True)
     if warnings:
