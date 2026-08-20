@@ -39,7 +39,7 @@ The direct institutional crawler still monitors 57 major EU, European and intern
 
 ## Runtime
 
-The GitHub Actions job timeout is **90 minutes**. The scanner has a **55-minute internal scan budget** (3,300 seconds), leaving time to write and commit `radar.json` safely.
+The GitHub Actions job timeout is **70 minutes**. The scanner has a **55-minute internal scan budget** (3,300 seconds), leaving time to write and commit `radar.json` safely.
 
 The first V17 run forces a new **four-month A/B backfill** under the new scholarly/source profile. Later scans continue every **12 hours** with the overlap logic already used by the radar.
 

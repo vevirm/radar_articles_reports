@@ -12,7 +12,7 @@ class V17EvidenceQualityTests(unittest.TestCase):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
         self.assertEqual(cfg['scan_budget_seconds'], 3300)
         workflow = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
-        self.assertIn('timeout-minutes: 90', workflow)
+        self.assertIn('timeout-minutes: 70', workflow)
 
     def test_scholarly_discovery_has_dedicated_priority_sweep(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
