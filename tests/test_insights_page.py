@@ -10,15 +10,17 @@ class InsightsPageTests(unittest.TestCase):
 
     def test_page_is_cumulative_and_searchable(self):
         page=(ROOT/'briefing'/'index.html').read_text(encoding='utf-8')
-        self.assertIn('Cumulative intelligence layer', page)
+        self.assertIn('Signal-first intelligence view', page)
         self.assertIn("fetch('../radar.json?ts='+Date.now()", page)
-        self.assertIn('Search insights and sources', page)
-        self.assertIn('All history', page)
-        self.assertIn('cumulative-insights-v12', page)
+        self.assertIn('Search signals, themes, evidence and sources', page)
+        self.assertIn('Research &amp; reports', page)
+        self.assertIn('signal-first-v16', page)
+        self.assertIn('What changed', page)
+        self.assertIn('Why it matters for EU R&amp;I', page)
 
-    def test_main_radar_points_to_v12_briefing(self):
+    def test_main_radar_points_to_v16_briefing(self):
         page=(ROOT/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="briefing/?v=13">Open Radar Insights</a>',page)
+        self.assertIn('href="briefing/?v=16">Open Radar Insights</a>',page)
         self.assertIn('Cumulative corpus', page)
 
     def test_old_generator_and_workflow_removed(self):

@@ -9,9 +9,10 @@ Key properties
   A same-sentence bridge is strong evidence, but a document-level bridge can also qualify.
 * Strand B requires methodology to be substantive, while allowing high-quality transferable
   public-sector R&I/S&T methods even when the case study is not explicitly EU-focused.
-* Strand C is not a general news feed: every newly discovered item must be factual current-window
-  reporting and must anchor to an accepted A/B publication or recurring A/B theme. Once admitted,
-  the signal is retained in the cumulative historical corpus.
+* Strand C is not a general news feed: every admitted item must be a factual current development
+  with a strong R&I/geopolitical bridge. It is linked to an A/B publication where possible, but can
+  also enter through a curated strategic watch theme so a thin A/B corpus cannot suppress signals.
+  Once admitted, the signal is retained in the cumulative historical corpus.
 * Calls, facility pages, project pages, press releases, news/blog pages, events,
   jobs and other non-analytical material are rejected for A/B.
 
@@ -51,12 +52,14 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v15-scan-repair"))
+SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
+SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
 DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
-NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 48))
-FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", 168))
+NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 168))
+FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", SIGNAL_BACKFILL_HOURS))
 DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
 MAX_NEW_AB = int(CONFIG.get("max_new_ab_per_scan", 0))
 MAX_C = int(CONFIG.get("max_c_per_scan", 0))
@@ -211,12 +214,36 @@ NEWS_EXCLUDE = [
     "interview", "comment:", "comment -",
 ]
 NEWS_EVENT_TERMS = [
-    "adopt", "approve", "launch", "announce", "suspend", "ban", "restrict", "fund",
-    "invest", "sign", "agree", "deal", "delay", "stall", "cancel", "open", "close",
-    "create", "set to", "rules", "regulation", "law", "policy", "programme", "program",
-    "dataset", "data show", "survey", "report finds", "rises", "falls", "increase",
-    "decrease", "cuts", "expands", "joins", "withdraw", "sanction", "screening",
-    "investigation", "probe", "blocks", "blocked", "review", "framework", "agreement",
+    "adopt", "approve", "launch", "announce", "suspend", "ban", "restrict", "curb", "tighten",
+    "fund", "funding", "invest", "investment", "award", "back", "sign", "agree", "deal",
+    "partner", "partnership", "collaborat", "memorandum", "mou", "delay", "stall", "cancel",
+    "scrap", "reverse", "withdraw", "open", "close", "create", "build", "expand", "scale",
+    "plan", "propose", "seek", "target", "urge", "warn", "move", "set to", "rules",
+    "regulation", "law", "policy", "programme", "program", "strategy", "framework",
+    "dataset", "data show", "survey", "report finds", "finds", "shows", "rises", "falls",
+    "increase", "decrease", "cuts", "joins", "sanction", "screening", "investigation", "probe",
+    "blocks", "blocked", "agreement", "association", "factory", "plant", "facility", "lab",
+    "centre", "center", "supercomputer", "data centre", "data center", "ai factory", "chips act",
+    "export control", "licens", "visa", "researcher", "talent", "standard", "patent", "acquisition",
+]
+
+WATCH_SIGNAL_THEMES = {
+    "research security / foreign interference",
+    "technology sovereignty / strategic autonomy",
+    "EU–China S&T cooperation / de-risking",
+    "export controls / dual use",
+    "fragmentation of global science",
+    "transatlantic / US–China S&T competition",
+    "critical and emerging technologies",
+    "economic security and R&I",
+    "R&I competitiveness / technological capabilities",
+    "supply chains / strategic dependencies",
+    "Horizon Europe / FP10 international participation",
+    "science diplomacy",
+}
+GEO_ACTORS = [
+    "china", "chinese", "united states", "u.s.", " us ", "russia", "russian", "japan",
+    "south korea", "korea", "taiwan", "india", "nato", "g7", "g20", "united kingdom", "uk",
 ]
 
 THEMES = {
@@ -1539,12 +1566,64 @@ def _sanitize_saved_radar(data: Any) -> tuple[dict[str, Any], dict[str, int]]:
     return out, removed
 
 
-def load_previous() -> dict[str, Any]:
-    """Load the live cumulative corpus without walking Git history on every run.
+def _saved_corpus_size(data: Any) -> int:
+    if not isinstance(data, dict):
+        return 0
+    return sum(
+        len(data.get(k, [])) if isinstance(data.get(k), list) else 0
+        for k in ("strand_a", "strand_b", "strand_c")
+    )
 
-    The valid live radar.json is authoritative.  This deliberately removes the
-    fragile V10-V14 history-union path from normal scans.  Git history is used
-    only as an emergency recovery path when radar.json itself is missing/invalid.
+
+def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -> dict[str, Any]:
+    """Union two saved snapshots, keeping current metadata but never losing corpus rows.
+
+    This is intentionally limited to the strongest recovered snapshot rather than
+    walking/unioning every historical radar on every scan.  It makes a complete
+    repository ZIP safe to upload over an existing repository even when the ZIP's
+    bundled radar.json is older than the live one: the immediately preceding,
+    larger Git snapshot is recovered automatically on the next scan.
+    """
+    cur, _ = _sanitize_saved_radar(current)
+    rec, _ = _sanitize_saved_radar(recovered)
+    out = dict(cur)
+
+    for strand in ("strand_a", "strand_b"):
+        merged: dict[str, dict[str, Any]] = {}
+        # Recovered first, current second so current copy wins on rediscovery.
+        for item in rec.get(strand, []) + cur.get(strand, []):
+            if not isinstance(item, dict):
+                continue
+            key = identity(internalize_previous(item))
+            if not key or key == "title:":
+                continue
+            saved = dict(item)
+            saved["new_this_scan"] = False
+            merged[key] = saved
+        out[strand] = list(merged.values())
+
+    merged_c: dict[str, dict[str, Any]] = {}
+    for item in rec.get("strand_c", []) + cur.get("strand_c", []):
+        if not isinstance(item, dict):
+            continue
+        key = signal_identity(item)
+        if not key or key in {"signal::", "signal-link:"}:
+            continue
+        saved = dict(item)
+        saved["new_this_scan"] = False
+        merged_c[key] = saved
+    out["strand_c"] = sorted(merged_c.values(), key=lambda x: str(x.get("date", "")), reverse=True)
+    return out
+
+
+def load_previous() -> dict[str, Any]:
+    """Load the cumulative corpus and protect it from an older full-repository upload.
+
+    Normal scans trust the live radar.json.  We also inspect recent Git history for
+    one strongest snapshot.  Only when that snapshot contains a larger corpus than
+    the bundled/current file do we merge it back.  This keeps normal scans fast while
+    allowing a true *whole repository* ZIP (including radar.json) to be uploaded
+    without erasing a newer A/B/C corpus already present in the repository history.
     """
     try:
         current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
@@ -1556,6 +1635,21 @@ def load_previous() -> dict[str, Any]:
         bad = sum(removed.values())
         if bad:
             print(f"Ignored {bad} malformed historical radar row(s) safely: {removed}.", flush=True)
+
+        # A complete repository ZIP carries an explicit one-run seed marker.
+        # Only that upgrade case checks Git history; ordinary valid live radars
+        # retain the V15 fast path and never walk history on every scan.
+        if bool(current.get("repository_bundle_seed")):
+            recovered = _recover_radar_from_git(max_commits=40)
+            if recovered and _saved_corpus_size(recovered) > _saved_corpus_size(clean):
+                before = _saved_corpus_size(clean)
+                clean = _merge_saved_snapshots(clean, recovered)
+                print(
+                    "Recovered a larger pre-upload radar corpus from Git history "
+                    f"({before} -> {_saved_corpus_size(clean)} saved A+B+C rows).",
+                    flush=True,
+                )
+        clean.pop("repository_bundle_seed", None)
         return clean
 
     recovered = _recover_radar_from_git(max_commits=40)
@@ -1689,25 +1783,105 @@ def parse_feed_time(entry: Any) -> dt.datetime | None:
     return None
 
 
+def eu_news_scope(text: str) -> bool:
+    full = normalized(text)
+    return bool(has_eu_word(full) or contains_any(full, EU_DIRECT + EU_GENERIC) or bounded_matches(full, MEMBER_STATE_SCOPE))
+
+
+def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> bool:
+    """Balanced Strand-C gate.
+
+    EU/member-state developments can qualify with a clear R&I + strategic theme bridge.
+    Non-EU developments need both R&I and geopolitical/economic-security evidence plus a
+    salient actor. This lets the radar catch external moves that can affect Europe without
+    turning Strand C into a general technology-news feed.
+    """
+    full = normalized(text)
+    found = set(themes or themes_for(full)) & WATCH_SIGNAL_THEMES
+    if not found:
+        return False
+    ri = contains_any(full, RI_STRONG + RI_GENERIC) or bool(found & {
+        "research security / foreign interference",
+        "critical and emerging technologies",
+        "economic security and R&I",
+        "R&I competitiveness / technological capabilities",
+        "Horizon Europe / FP10 international participation",
+        "science diplomacy",
+    })
+    geo = contains_any(full, GEO_STRONG) or bool(found & {
+        "research security / foreign interference",
+        "technology sovereignty / strategic autonomy",
+        "EU–China S&T cooperation / de-risking",
+        "export controls / dual use",
+        "fragmentation of global science",
+        "transatlantic / US–China S&T competition",
+        "supply chains / strategic dependencies",
+    })
+    if eu_news_scope(full):
+        # For an EU/member-state event, strategic capacity building in critical technologies
+        # is sufficient even when a headline does not use the word "geopolitics".
+        strategic_capacity = any(x in full for x in [
+            "critical technology", "semiconductor", "chips", "quantum", "biotech",
+            "artificial intelligence", " ai ", "supercomputer", "ai factory", "cloud",
+            "critical raw materials", "research security", "horizon europe", "economic security",
+            "strategic autonomy", "sovereignty", "dependency", "supply chain",
+        ])
+        return ri and (geo or strategic_capacity)
+    actors = distinct_matches(full, GEO_ACTORS)
+    return ri and geo and bool(actors)
+
+
 def factual_news(title: str, desc: str) -> bool:
     full = normalized(f"{title} {desc}")
     if any(x in full for x in NEWS_EXCLUDE):
         return False
-    if not (has_eu_word(full) or contains_any(full, EU_DIRECT + EU_GENERIC) or bounded_matches(full, MEMBER_STATE_SCOPE)):
+    if not any(x in full for x in NEWS_EVENT_TERMS):
         return False
-    return any(x in full for x in NEWS_EVENT_TERMS)
+    themes = themes_for(full)
+    return strong_watch_signal_text(full, themes)
 
 
 def news_queries(domain: str, lookback_hours: int) -> list[str]:
-    days = 7 if lookback_hours > 72 else 2
+    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
     when = f"when:{days}d"
     return [
-        f'site:{domain} ("research security" OR "foreign interference" OR "science policy" OR "research cooperation" OR "Horizon Europe" OR "science diplomacy") Europe {when}',
-        f'site:{domain} ("economic security" OR "technology sovereignty" OR "strategic autonomy" OR "de-risking" OR "de-risk") (research OR innovation OR technology) Europe {when}',
-        f'site:{domain} ("export controls" OR "dual use" OR "technology transfer" OR semiconductor OR quantum OR biotech OR "artificial intelligence") (EU OR Europe) {when}',
-        f'site:{domain} (China OR US-China OR transatlantic) (research OR science OR technology OR innovation) (EU OR Europe) {when}',
-        f'site:{domain} ("third country" OR association OR talent OR researchers OR universities) ("Horizon Europe" OR EU OR European) {when}',
+        f'site:{domain} (research OR science OR innovation OR university OR researchers OR "Horizon Europe") (security OR cooperation OR funding OR talent OR China) (EU OR Europe OR European) {when}',
+        f'site:{domain} ("economic security" OR "strategic autonomy" OR sovereignty OR "export controls" OR "dual use" OR "supply chain" OR "critical raw materials") (technology OR research OR innovation) {when}',
+        f'site:{domain} (semiconductor OR chips OR quantum OR biotech OR "artificial intelligence" OR "AI factory" OR supercomputer OR cloud OR "deep tech") (invest OR fund OR restrict OR partnership OR strategy OR security) (EU OR Europe OR European) {when}',
     ]
+
+
+def global_news_queries(lookback_hours: int) -> list[str]:
+    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
+    when = f"when:{days}d"
+    return [f"{q} {when}" for q in CONFIG.get("news_global_queries", []) if clean_text(q)]
+
+
+def feed_source(entry: Any, fallback_name: str = "", fallback_domain: str = "") -> tuple[str, str]:
+    if fallback_name:
+        return fallback_name, fallback_domain
+    src = getattr(entry, "source", None)
+    title = clean_text(getattr(src, "title", "") if src is not None else "")
+    href = clean_text(getattr(src, "href", "") if src is not None else "")
+    domain = urlparse(href).netloc.lower().removeprefix("www.") if href else ""
+    return title, domain
+
+
+def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
+    nd = (domain or "").lower().removeprefix("www.")
+    nn = norm_title(name)
+    sources = CONFIG.get("news_sources", [])
+    # Prefer the publisher URL. This avoids ambiguous title matches such as
+    # "Science" versus "Science|Business".
+    for src in sources:
+        sd = str(src.get("domain", "")).lower().removeprefix("www.")
+        if sd and (nd == sd or nd.endswith("." + sd)):
+            return True, str(src.get("name", name))
+    for src in sources:
+        sn = norm_title(str(src.get("name", "")))
+        if nn and sn and nn == sn:
+            return True, str(src.get("name", name))
+    return False, name
 
 
 def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None) -> list[dict[str, Any]]:
@@ -1715,44 +1889,57 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
     start = now - dt.timedelta(hours=lookback_hours)
     workers = int(CONFIG.get("news_workers", 10))
     timeout = int(CONFIG.get("news_timeout_seconds", 10))
-    jobs = []
+    per_feed = int(CONFIG.get("news_items_per_feed", 60))
+    jobs: list[tuple[str, str, str, bool]] = []
     for src in CONFIG["news_sources"]:
         for q in news_queries(src["domain"], lookback_hours):
-            jobs.append((src["name"], src["domain"], q))
+            jobs.append((src["name"], src["domain"], q, False))
+    for q in global_news_queries(lookback_hours):
+        jobs.append(("", "", q, True))
 
-    def fetch_job(job: tuple[str, str, str]) -> tuple[list[dict[str, Any]], str | None]:
-        name, domain, q = job
+    def fetch_job(job: tuple[str, str, str, bool]) -> tuple[list[dict[str, Any]], str | None]:
+        name, domain, q, is_global = job
         if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
         url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
         try:
             r = SESSION.get(url, timeout=timeout)
             if r.status_code != 200:
-                return [], f"Google News {domain}: HTTP {r.status_code}"
+                label = domain or "global"
+                return [], f"Google News {label}: HTTP {r.status_code}"
             feed = feedparser.parse(r.content)
         except Exception as e:
-            return [], f"Google News {domain}: {type(e).__name__}"
+            label = domain or "global"
+            return [], f"Google News {label}: {type(e).__name__}"
         items = []
-        for e in feed.entries[:45]:
+        for e in feed.entries[:per_feed]:
             when = parse_feed_time(e)
             if not when or when < start or when > now + dt.timedelta(minutes=30):
                 continue
+            source_name, source_domain = feed_source(e, name, domain)
+            if is_global:
+                ok, canonical = allowed_global_news_source(source_name, source_domain)
+                if not ok:
+                    continue
+                source_name = canonical
+            if not source_name:
+                continue
             title = clean_text(getattr(e, "title", ""))
             desc = clean_text(getattr(e, "summary", "") or getattr(e, "description", ""))
-            for suffix in [name, name.replace("|", " ")]:
-                if title.lower().endswith(" - " + suffix.lower()):
+            for suffix in [source_name, source_name.replace("|", " ")]:
+                if suffix and title.lower().endswith(" - " + suffix.lower()):
                     title = title[:-(len(suffix) + 3)].strip()
             if not title or not factual_news(title, desc):
                 continue
             text = f"{title}. {desc}"
             items.append({
                 "headline": title,
-                "source": name,
+                "source": source_name,
                 "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
                 "link": clean_text(getattr(e, "link", "")),
                 "_desc": desc,
                 "_themes": themes_for(text),
-                "_entities": distinct_matches(text, ENTITY_TERMS),
+                "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
             })
         return items, None
 
@@ -1774,14 +1961,57 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
         warnings.append(f"News scan budget reached; {budget_hits} queued query/queries skipped")
     seen = set(); unique = []
     for x in sorted(out, key=lambda z: z["date"], reverse=True):
-        key = (norm_title(x["headline"]), x["source"])
+        key = (norm_title(x["headline"]), norm_title(x["source"]))
         if key not in seen:
             seen.add(key); unique.append(x)
     return unique
 
+
+def signal_relation(text: str) -> str:
+    low = normalized(text)
+    if any(w in low for w in ["stall", "delay", "cancel", "scrap", "reverse", "withdraw", "fail", "collapse", "reject", "block", "cut"]):
+        return "contradicts"
+    if any(w in low for w in ["accelerat", "expand", "surge", "increase", "boost", "fast-track", "scale up", "intensif", "invest", "fund"]):
+        return "accelerates"
+    if any(w in low for w in ["dataset", "data show", "survey", "finds", "evidence", "shows", "rise", "fall", "measur"]):
+        return "confirms"
+    return "instantiates"
+
+
+def signal_kind(text: str) -> str:
+    low = normalized(text)
+    if any(w in low for w in ["ban", "restrict", "sanction", "export control", "screening", "probe", "investigation", "security rule", "licens"]):
+        return "restriction / security"
+    if any(w in low for w in ["invest", "fund", "factory", "plant", "facility", "supercomputer", "ai factory", "capacity", "build"]):
+        return "investment / capacity"
+    if any(w in low for w in ["partner", "cooperat", "collaborat", "agreement", "association", "memorandum", "mou", "join"]):
+        return "cooperation / alignment"
+    if any(w in low for w in ["researcher", "talent", "visa", "university", "academic", "mobility"]):
+        return "research / talent"
+    if any(w in low for w in ["supply chain", "critical raw material", "critical mineral", "acquisition", "market", "deal"]):
+        return "market / supply chain"
+    return "policy / strategy"
+
+
+def signal_why(theme: str, kind: str) -> str:
+    explanations = {
+        "research security / foreign interference": "This could change how European research organisations manage international collaboration, access, openness and security.",
+        "technology sovereignty / strategic autonomy": "This affects Europe's ability to build, access and control strategic technology capacity rather than depend on external suppliers.",
+        "EU–China S&T cooperation / de-risking": "This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
+        "export controls / dual use": "This can alter access to technologies, equipment, knowledge and collaboration channels that matter for European R&I.",
+        "fragmentation of global science": "This is evidence that international science is becoming more segmented, raising collaboration and access risks for Europe.",
+        "transatlantic / US–China S&T competition": "This may reshape Europe's room for manoeuvre between US technology-security rules and Chinese capabilities, markets and partnerships.",
+        "critical and emerging technologies": "This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
+        "economic security and R&I": "This links research and innovation capacity more directly to economic-security policy, funding and strategic dependencies.",
+        "R&I competitiveness / technological capabilities": "This may change Europe's relative research and innovation capacity in technologies that increasingly shape geopolitical power.",
+        "supply chains / strategic dependencies": "This could alter Europe's exposure to strategic inputs, infrastructure or technology supply chains.",
+        "Horizon Europe / FP10 international participation": "This could change participation, funding or international cooperation in EU research programmes.",
+        "science diplomacy": "This may create, narrow or redirect channels for scientific cooperation in a more geopolitical environment.",
+    }
+    return explanations.get(theme, f"This is a current {kind} development with a plausible effect on Europe's research, innovation or strategic technology position.")
+
+
 def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    if not ab_corpus:
-        return []
     internals = [internalize_previous(x) for x in ab_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != "title:"]
     theme_counts = Counter(t for x in internals for t in x.get("_themes", []))
@@ -1789,7 +2019,7 @@ def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> 
     supported_specific = {t for t, c in theme_counts.items() if c >= 1 and t in SPECIFIC_ANCHOR_THEMES}
     anchored = []
     for n in news:
-        nthemes = set(n.get("_themes", []))
+        nthemes = set(n.get("_themes", [])) & WATCH_SIGNAL_THEMES
         if not nthemes:
             continue
         ntok = tokens(n["headline"] + " " + n.get("_desc", ""))
@@ -1802,21 +2032,21 @@ def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> 
                 continue
             atok = tokens(a.get("title", "") + " " + a.get("summary", ""))
             jacc = len(ntok & atok) / max(1, len(ntok | atok))
-            aentities = set(distinct_matches(a.get("title", "") + " " + a.get("summary", ""), ENTITY_TERMS))
+            aentities = set(distinct_matches(a.get("title", "") + " " + a.get("summary", ""), ENTITY_TERMS + GEO_ACTORS))
             entity_overlap = len(nentities & aentities)
-            # A single broad "critical technologies" theme is too weak without another overlap.
             broad_only = shared == {"critical and emerging technologies"}
-            if broad_only and entity_overlap == 0 and jacc < 0.055:
+            if broad_only and entity_overlap == 0 and jacc < 0.045:
                 continue
             score = 3.0 * len(shared) + 1.4 * entity_overlap + 8.0 * jacc
             if any(t in SPECIFIC_ANCHOR_THEMES for t in shared):
                 score += 1.0
             if best is None or score > best[0]:
                 best = (score, a, sorted(shared))
-        anchor = ""; score = 0.0; shared_themes = []
-        if best and best[0] >= 2.45:
+        anchor = ""; score = 0.0; shared_themes: list[str] = []; anchor_basis = ""
+        if best and best[0] >= 2.35:
             score, a, shared_themes = best
             anchor = f"{a['title']} (Strand {a['strand']})"
+            anchor_basis = "publication"
         else:
             common = sorted(nthemes & recurring)
             specific = sorted(nthemes & supported_specific)
@@ -1827,23 +2057,43 @@ def anchor_news(news: list[dict[str, Any]], ab_corpus: list[dict[str, Any]]) -> 
                 supporting = [x["title"] for x in internals if chosen[0] in x.get("_themes", [])][:2]
                 label = "Recurring A/B theme" if chosen[0] in recurring else "A/B theme"
                 anchor = f"{label}: {chosen[0]}" + (f" — supported by {'; '.join(supporting)}" if supporting else "")
+                anchor_basis = "evidence-theme"
+        # V16: A thin A/B corpus must not suppress genuine weak signals. A strong event can
+        # enter through a curated strategic watch theme; the UI clearly labels this basis.
+        if not anchor and strong_watch_signal_text(n["headline"] + " " + n.get("_desc", ""), nthemes):
+            priority = [
+                "research security / foreign interference", "export controls / dual use",
+                "EU–China S&T cooperation / de-risking", "Horizon Europe / FP10 international participation",
+                "technology sovereignty / strategic autonomy", "supply chains / strategic dependencies",
+                "economic security and R&I", "transatlantic / US–China S&T competition",
+                "R&I competitiveness / technological capabilities", "critical and emerging technologies",
+                "fragmentation of global science", "science diplomacy",
+            ]
+            theme = next((t for t in priority if t in nthemes), sorted(nthemes)[0])
+            shared_themes = [theme]
+            anchor = f"Strategic watch theme: {theme}"
+            anchor_basis = "watch-theme"
+            score = 2.15
         if not anchor:
             continue
-        low = normalized(n["headline"] + " " + n.get("_desc", ""))
-        if any(w in low for w in ["stall", "delay", "cancel", "reverse", "withdraw", "fail", "collapse", "reject", "block"]):
-            sig = "contradicts"
-        elif any(w in low for w in ["accelerat", "expand", "surge", "increase", "boost", "fast-track", "scale up", "intensif"]):
-            sig = "accelerates"
-        elif any(w in low for w in ["dataset", "data show", "survey", "finds", "evidence", "shows", "rise", "fall", "measur"]):
-            sig = "confirms"
-        else:
-            sig = "instantiates"
-        desc_sents = split_sentences(n.get("_desc", ""), max_chars=4000)
-        what = desc_sents[0] if desc_sents else n["headline"]
-        theme = shared_themes[0] if shared_themes else "the anchored claim"
-        why = f"This {sig} the anchor by providing a current empirical development in {theme}."
+        text = n["headline"] + " " + n.get("_desc", "")
+        sig = signal_relation(text)
+        kind = signal_kind(text)
+        theme = shared_themes[0] if shared_themes else sorted(nthemes)[0]
+        what = clean_text(n["headline"])
+        why = signal_why(theme, kind)
         item = {k: v for k, v in n.items() if not k.startswith("_")}
-        item.update({"anchor": anchor, "signal_type": sig, "signal_note": what.rstrip(". ") + ". " + why, "_anchor_score": score})
+        item.update({
+            "anchor": anchor,
+            "anchor_basis": anchor_basis,
+            "watch_theme": theme,
+            "signal_type": sig,
+            "signal_kind": kind,
+            "what": what,
+            "why_it_matters": why,
+            "signal_note": what.rstrip(". ") + ". " + why,
+            "_anchor_score": score,
+        })
         anchored.append(item)
     anchored.sort(key=lambda x: (x.get("_anchor_score", 0), x.get("date", "")), reverse=True)
     for x in anchored:
@@ -1877,6 +2127,11 @@ def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
     if previous.get("source_expansion_version") != SOURCE_EXPANSION_VERSION:
         return True
     return False
+
+
+def needs_signal_backfill(previous: dict[str, Any]) -> bool:
+    """Run one wider weak-signal recovery window whenever Strand-C discovery changes."""
+    return previous.get("signal_discovery_version") != SIGNAL_DISCOVERY_VERSION
 
 
 def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, bool]:
@@ -1916,13 +2171,27 @@ def main() -> int:
             log_progress(f"{name} failed safely; preserving existing corpus")
             return []
 
-    # Run the two scholarly APIs concurrently. V12 did 288 API searches serially,
-    # which could exhaust the GitHub Actions 60-minute job before it reached reports/news.
-    with cf.ThreadPoolExecutor(max_workers=2) as ex:
+    # V16: start weak-signal discovery at the beginning of the run, in parallel with
+    # scholarly discovery. In V15 it ran last and could receive zero network time after
+    # a four-month A/B backfill exhausted the scan budget.
+    signal_backfill = needs_signal_backfill(previous)
+    first_run = not bool(previous.get("first_scan_complete"))
+    news_lookback = SIGNAL_BACKFILL_HOURS if signal_backfill else (FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS)
+    log_progress(f"Weak-signal window: {news_lookback}h (recovery backfill={signal_backfill})")
+    news_warnings: list[str] = []
+
+    with cf.ThreadPoolExecutor(max_workers=3) as ex:
+        fut_news = ex.submit(safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback)
         fut_oa = ex.submit(safe_stage, "OpenAlex", collect_openalex, from_date, warnings)
         fut_cr = ex.submit(safe_stage, "Crossref", collect_crossref, from_date, warnings)
+        news = fut_news.result()
         oa = fut_oa.result()
         cr = fut_cr.result()
+    warnings.extend(news_warnings)
+    signal_backfill_ok = not any(
+        "weak-signal news fatal stage error" in normalized(w) or "news scan budget reached" in normalized(w)
+        for w in warnings
+    )
 
     inst = safe_stage("institutional reports", collect_institutions, from_date, warnings, bootstrap=bootstrap_ab)
     oa = [x for x in oa if isinstance(x, dict)]
@@ -1945,9 +2214,6 @@ def main() -> int:
         if key != "title:":
             all_ab_map[key] = x
     ab_corpus = list(all_ab_map.values())
-    first_run = not bool(previous.get("first_scan_complete"))
-    news_lookback = FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS
-    news = safe_stage("weak-signal news", collect_news, now, warnings, news_lookback)
     current_c = anchor_news(news, ab_corpus)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
@@ -1975,12 +2241,21 @@ def main() -> int:
         expansion_marker = SOURCE_EXPANSION_VERSION
         backfill_complete = True
 
+    if signal_backfill and not signal_backfill_ok:
+        signal_marker = previous.get("signal_discovery_version", "")
+        signal_backfill_complete = False
+    else:
+        signal_marker = SIGNAL_DISCOVERY_VERSION
+        signal_backfill_complete = True
+
     data = {
         "last_updated": now_iso,
         "first_scan_complete": True,
         "corpus_start_date": DATE_FLOOR.isoformat(),
         "source_expansion_version": expansion_marker,
         "backfill_complete": backfill_complete,
+        "signal_discovery_version": signal_marker,
+        "signal_backfill_complete": signal_backfill_complete,
         "zero_config_scan": True,
         "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v15_scan_repair")),
         "scan_health": health,
@@ -1990,6 +2265,7 @@ def main() -> int:
             "ab_four_month_backfill_this_run": bootstrap_ab,
             "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
             "c_window_end": now_iso,
+            "c_recovery_backfill_this_run": signal_backfill,
         },
         "scan_results": {
             "new_a": new_a_count,
@@ -2000,7 +2276,7 @@ def main() -> int:
             "c_signals_total": len(strand_c),
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new anchored weak signal(s). Earlier signals remain available." if new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day rolling window and keeps all earlier signals." if new_c_count < 3 else "",
         },
         "strand_a": strand_a,
         "strand_b": strand_b,
@@ -2019,7 +2295,12 @@ def main() -> int:
             "backfill_complete": backfill_complete,
             "unique_ab_candidates_before_scan_limit": len(deduped),
             "news_candidates_current_window": len(news),
+            "news_admitted_current_window": len(current_c),
             "news_lookback_hours": news_lookback,
+            "news_sources_configured": len(CONFIG.get("news_sources", [])),
+            "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
+            "signal_recovery_backfill": signal_backfill,
+            "signal_backfill_complete": signal_backfill_complete,
             "source_warnings": len(warnings),
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,

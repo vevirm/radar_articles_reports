@@ -1,43 +1,37 @@
-# R&I × Geopolitics Radar — V15 scan repair
+# R&I × Geopolitics Radar — V16.1 weak-signal repair
 
-V15 is a targeted runtime repair for the GitHub Actions scan. It keeps the balanced relevance criteria, four-month A/B backfill, 12-hour schedule, cumulative A/B/C corpus and zero-config operation.
+V16 keeps the working V15 A/B scanner and fixes the two remaining problems: Strand C was starved of runtime during long backfills, and the Insights page did not explain signals in a fast intelligence format.
 
-## What V15 fixes
+## What V16 changes
 
-- The live `radar.json` is now the authoritative cumulative corpus during normal runs. The scanner no longer walks and unions many historical `radar.json` revisions before every scan.
-- Malformed/null legacy rows are skipped safely instead of being able to terminate the process before source collection starts.
-- Existing A/B/C items are preserved even when all network sources are temporarily unavailable.
-- Collector output is structure-validated before deduplication and merge.
-- `radar.json` is written atomically.
-- The internal network budget is 20 minutes, so the scanner fits inside the currently deployed 30-minute Action.
-- No API keys or custom repository secrets are required.
-- The active workflow copy has no OpenAlex secret reference; Pages refresh is non-fatal.
+- **Weak-signal discovery starts at the beginning of every scan**, in parallel with OpenAlex/Crossref. It is no longer the last network stage.
+- **One-time 30-day Strand C recovery scan** on the V16 upgrade, then a **7-day rolling weak-signal window every 12 hours**. Deduplication means the overlap does not create duplicates.
+- **30 curated news/official sources** plus 18 cross-source Google News discovery queries cover major European and international publishers and EU institutional players.
+- A factual signal can connect to a specific A/B publication, a recurring A/B theme, **or a curated strategic watch theme**. This prevents a thin A/B corpus from suppressing otherwise strong R&I/geopolitical signals.
+- The Strand C gate is still selective: it requires an event/change, a relevant strategic R&I theme, and either European scope or a strong external R&I + geopolitical bridge.
+- Each new signal stores explicit fields for **WHAT changed**, **WHY it matters for EU R&I**, watch theme, signal kind, relationship type and evidence connection.
+- The `/briefing/` page is now signal-first: weak signals are shown first with `WHAT CHANGED`, `WHY IT MATTERS FOR EU R&I`, `WATCH THEME`, source and evidence connection. Research/reports are a separate view.
+- Existing A/B/C records remain cumulative and deduplicated.
+- No API keys or custom GitHub secrets are required.
 
-## Critical deployment note
+## Runtime
 
-This full-repository distribution already includes the active workflow at `.github/workflows/radar-scan.yml` and a visible backup at `RADAR_SCAN_WORKFLOW_COPY.yml`. When replacing the repository, make sure the hidden `.github` folder is included.
+The GitHub Action timeout is 45 minutes and the scanner's internal network budget is 30 minutes. This gives long A/B backfills room to complete while the weak-signal crawl is protected by running at the start of the scan.
 
-## Admission profile
+## Complete repository upload
 
-The balanced-relevance policy is retained. Strand A accepts serious research/reports on EU/European R&I and related systems — R&D and scientific capacity, universities, research infrastructures, talent, innovation ecosystems, deep tech, technology development/transfer, technological capabilities and related areas — when there is a substantive geopolitical or geoeconomic connection.
+This V16.1 package is a **complete repository** and includes `radar.json` as well as the active `.github/workflows/radar-scan.yml`. Upload all files and folders, including `.github`, to the repository root and commit to `main`.
 
-Relevant geopolitical channels include research security, strategic dependencies, supply-chain security/resilience, investment screening, technology/export controls, critical raw materials, techno-nationalism, sanctions/de-risking, strategic autonomy, science diplomacy and great-power technology competition.
+For upgrades over an existing repository, the bundled `radar.json` is marked as a one-run upload seed. On the first scan, the scanner checks recent Git history and automatically restores/merges a larger prior A+B+C corpus before adding new material. The seed marker is removed from the next generated `radar.json`, so normal scans do not walk Git history repeatedly.
 
-Safeguards remain against generic geopolitics, generic innovation/business, pure technical papers, calls, project pages, events, press releases and other non-analytical material.
-
-## Discovery schedule
-
-- **First V15 run:** four-calendar-month A/B backfill under the balanced criteria.
-- **Later runs:** every 12 hours with a 14-day A/B overlap.
-- **Corpus:** A, B and C remain cumulative and deduplicated.
-- **Zero configuration:** no keys/secrets need to be created in GitHub.
-
-## Full-repository upload
-
-This ZIP includes the current cumulative `radar.json` snapshot together with the complete V15 code, site, tests and active GitHub Actions workflow. Extract the ZIP and replace the repository contents with all files and folders, including `.github`. Commit to `main`; the push starts the V15 four-month backfill. Later scans run every 12 hours.
-
-## Local tests
+## Tests
 
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+V16 includes 50 regression tests.
+
+## Complete-repository package
+
+The V16.1 complete package includes `radar.json`; there is no separate file to preserve manually. When upgrading an existing repository, the scanner compares the bundled/current corpus with recent Git history and automatically restores/merges a larger prior A+B+C snapshot before scanning. This prevents a full upload from erasing a newer accumulated corpus.

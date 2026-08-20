@@ -1,11 +1,11 @@
-FULL REPOSITORY — V15 SCAN REPAIR
+R&I × Geopolitics Radar — V16 COMPLETE REPOSITORY
 
-1. Extract the ZIP locally.
-2. Replace the repository contents with ALL extracted files and folders.
-3. IMPORTANT: include the hidden .github folder. It contains the active workflow.
-4. Commit everything to main.
-5. Open GitHub Actions -> R&I Radar Scan -> Run workflow if you want to trigger it immediately.
+This ZIP is a complete repository upload and DOES include radar.json.
+Upload/extract every file and folder to the repository root, including .github.
 
-The package contains the cumulative radar.json snapshot, scanner code, site, Insights page, configuration, tests and workflow.
-No API key, custom secret or email configuration is required.
-The scanner performs the four-month A/B backfill and then runs every 12 hours. A, B and C remain cumulative.
+The bundled scanner contains a safety guard for whole-repository uploads: if the
+existing Git history contains a newer/larger radar.json than the bundled snapshot,
+the next scan automatically restores and merges that larger corpus before adding
+new material. A/B/C remain cumulative.
+
+No API keys, custom secrets, or manual credentials are required.

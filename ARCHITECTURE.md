@@ -1,27 +1,29 @@
-# Scanner architecture
+# Scanner architecture — V16
 
-## Why semantic web research
+The radar is a zero-configuration Python scanner run by GitHub Actions every 12 hours.
 
-The radar criteria require judgments such as whether R&I policy and geopolitics are both central, whether foresight work is actually methodology-first, whether EU relevance is explicit, and whether a news item is a real empirical signal relative to caught literature. Keyword scores cannot enforce those distinctions reliably.
+## A/B discovery
 
-The scanner therefore uses three focused OpenAI Responses API calls with the built-in `web_search` tool.
+OpenAlex and Crossref provide broad scholarly discovery, while a direct institutional crawler checks configured policy/research organisations. Candidate documents are deduplicated and passed through the balanced Strand A/B gates in `scripts/scan_radar.py`.
 
-## Strand A pass
+The initial/source-expansion A/B run can look back four calendar months. Later runs use a 14-day overlap. Accepted A/B items are merged into the existing cumulative `radar.json` and never disappear merely because they fall outside a later scan window.
 
-Searches from 2026-04-01 through the scan date. The model must inspect actual source pages, verify publication dates, search the requested source tiers, and provide explicit evidence for R&I policy, geopolitics, EU relevance, publication date, and substantive length/type. Pages such as calls, facilities, events and funding opportunities are explicitly excluded.
+## C weak-signal discovery
 
-## Strand B pass
+V16 starts weak-signal discovery **in parallel with OpenAlex and Crossref at the beginning of the run**. This prevents long A/B backfills from consuming the entire runtime budget before Strand C begins.
 
-Runs independently so methodology work is not crowded out by the larger Strand A literature. The model must provide concrete methodology evidence: design, evaluation, limits, bias, institutional design, scenario method, horizon scanning, anticipatory governance or integration with strategic intelligence/risk assessment. Pure trend/scenario outputs are rejected.
+Discovery uses Google News RSS as a public transport layer across a curated set of major publishers/official sources plus cross-source topic queries. No user API key is required.
 
-## Mechanical validation
+A candidate weak signal must be a factual event/change and pass a balanced R&I/geopolitics gate. It can connect to:
 
-The Python layer then checks date floor, URL validity, source tier/domain rules, evidence presence, Tier-3 direct EU relevance, summary format, duplicates, and ranking. Preprint/published-version preference is handled during deduplication.
+1. a specific accepted A/B publication;
+2. a recurring A/B theme; or
+3. a curated strategic watch theme.
 
-## Strand C pass
+The third route is intentionally available so sparse A/B evidence cannot suppress strong current signals. It still requires the full Strand-C relevance gate.
 
-Only after A/B are available, the scanner supplies caught publications and recurring themes as explicit anchor IDs. Web search is restricted to the news whitelist and the current scan window. Every signal must select a valid anchor and state a concrete confirm/contradict/accelerate/instantiate relationship.
+V16 performs a one-time 30-day C recovery scan, then uses a seven-day rolling window every 12 hours. Accepted C items are cumulative and deduplicated.
 
-## Output
+## Output and UI
 
-A/B are capped at 15 per strand and sorted direct EU relevance first, then source tier, then date descending. C is capped at 5 and sorted by anchor-connection strength. Shortfalls are displayed rather than padded.
+`radar.json` is the authoritative cumulative state. The scanner writes it atomically. `/briefing/` reads that file directly and presents weak signals in a `WHAT CHANGED` / `WHY IT MATTERS FOR EU R&I` format, with research evidence available as a separate view.

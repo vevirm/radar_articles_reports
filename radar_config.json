@@ -1,5 +1,5 @@
 {
-  "news_lookback_hours": 48,
+  "news_lookback_hours": 168,
   "max_new_ab_per_scan": 0,
   "max_c_per_scan": 0,
   "max_corpus_per_strand": 0,
@@ -543,8 +543,36 @@
       "domain": "researchprofessionalnews.com"
     },
     {
-      "name": "Table.Media",
-      "domain": "table.media"
+      "name": "Reuters",
+      "domain": "reuters.com"
+    },
+    {
+      "name": "Financial Times",
+      "domain": "ft.com"
+    },
+    {
+      "name": "Bloomberg",
+      "domain": "bloomberg.com"
+    },
+    {
+      "name": "Politico Europe",
+      "domain": "politico.eu"
+    },
+    {
+      "name": "Euractiv",
+      "domain": "euractiv.com"
+    },
+    {
+      "name": "EUobserver",
+      "domain": "euobserver.com"
+    },
+    {
+      "name": "Euronews",
+      "domain": "euronews.com"
+    },
+    {
+      "name": "The Economist",
+      "domain": "economist.com"
     },
     {
       "name": "Nature",
@@ -559,20 +587,28 @@
       "domain": "timeshighereducation.com"
     },
     {
-      "name": "Financial Times",
-      "domain": "ft.com"
+      "name": "Sifted",
+      "domain": "sifted.eu"
     },
     {
-      "name": "Politico Europe",
-      "domain": "politico.eu"
+      "name": "TechCrunch",
+      "domain": "techcrunch.com"
     },
     {
-      "name": "The Economist",
-      "domain": "economist.com"
+      "name": "IEEE Spectrum",
+      "domain": "spectrum.ieee.org"
     },
     {
-      "name": "Reuters",
-      "domain": "reuters.com"
+      "name": "The Register",
+      "domain": "theregister.com"
+    },
+    {
+      "name": "Nikkei Asia",
+      "domain": "asia.nikkei.com"
+    },
+    {
+      "name": "South China Morning Post",
+      "domain": "scmp.com"
     },
     {
       "name": "Handelsblatt",
@@ -589,12 +625,40 @@
     {
       "name": "El País",
       "domain": "elpais.com"
+    },
+    {
+      "name": "European Commission",
+      "domain": "commission.europa.eu"
+    },
+    {
+      "name": "EU Research & Innovation",
+      "domain": "research-and-innovation.ec.europa.eu"
+    },
+    {
+      "name": "EU Digital Strategy",
+      "domain": "digital-strategy.ec.europa.eu"
+    },
+    {
+      "name": "Council of the EU",
+      "domain": "consilium.europa.eu"
+    },
+    {
+      "name": "European Parliament",
+      "domain": "europarl.europa.eu"
+    },
+    {
+      "name": "Joint Research Centre",
+      "domain": "joint-research-centre.ec.europa.eu"
+    },
+    {
+      "name": "OECD",
+      "domain": "oecd.org"
     }
   ],
-  "first_news_lookback_hours": 168,
+  "first_news_lookback_hours": 720,
   "discovery_overlap_days": 14,
   "bootstrap_lookback_months": 4,
-  "source_expansion_version": "v15-scan-repair-zero-config",
+  "source_expansion_version": "v15-scan-repair",
   "force_backfill_on_source_expansion": true,
   "institution_pages_per_domain_bootstrap": 40,
   "sitemap_child_budget": 12,
@@ -621,9 +685,9 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "balanced_relevance_v15_scan_repair",
-  "scan_budget_seconds": 1200,
-  "network_reserve_seconds": 120,
+  "admission_profile": "balanced_relevance_v16",
+  "scan_budget_seconds": 1800,
+  "network_reserve_seconds": 150,
   "request_timeout_seconds": 12,
   "scholarly_api_timeout_seconds": 12,
   "scholarly_api_workers": 8,
@@ -634,10 +698,33 @@
   "institution_page_workers": 24,
   "institution_max_pages": 700,
   "institution_max_pages_bootstrap": 1200,
-  "news_workers": 10,
+  "news_workers": 6,
   "news_timeout_seconds": 10,
   "openalex_public_workers": 2,
   "openalex_public_min_interval_seconds": 0.3,
   "crossref_public_min_interval_seconds": 0.8,
-  "scholarly_public_retries": 2
+  "scholarly_public_retries": 2,
+  "signal_backfill_hours": 720,
+  "signal_discovery_version": "v16-weak-signals",
+  "news_items_per_feed": 60,
+  "news_global_queries": [
+    "Europe research security foreign interference universities",
+    "EU research innovation economic security technology",
+    "Europe technology sovereignty strategic autonomy innovation",
+    "EU China research technology cooperation de-risking",
+    "Europe export controls dual use research technology",
+    "Europe semiconductor chips investment research security",
+    "Europe artificial intelligence compute AI factory economic security",
+    "Europe quantum investment research technology security",
+    "Europe biotech biotechnology economic security research",
+    "Europe critical raw materials technology research innovation",
+    "Horizon Europe association third country research cooperation",
+    "Europe science diplomacy research cooperation geopolitics",
+    "Europe research talent visa researchers China security",
+    "US China technology controls Europe research innovation",
+    "European universities China research security cooperation",
+    "Europe deep tech investment strategic competition",
+    "Europe cloud data centre supercomputer strategic autonomy",
+    "Europe technology standards geopolitics innovation"
+  ]
 }

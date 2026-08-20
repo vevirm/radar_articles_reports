@@ -1,56 +1,47 @@
-# Radar Criteria: EU R&I × Geopolitics + Foresight Methodology — V14
+# Radar admission criteria — balanced V16
 
-## Date/discovery policy
+## Strand A — EU R&I in geopolitical context
 
-- **First V14 scan:** rescan the previous four calendar months through the present. This runs once when upgrading because V14 retains the balanced relevance profile while forcing a zero-config resilient four-month backfill; papers rejected by older criteria need another chance to enter the cumulative corpus.
-- **Later scans:** run every 12 hours and search from the previous scan with a 14-day overlap to catch late indexing and corrected metadata.
-- **A/B/C corpora are cumulative:** accepted material is retained and deduplicated. Later discovery windows never prune older accepted items.
+Admit serious research papers and analytical reports when they contain a substantive connection between European/EU research and innovation or closely related capability fields and geopolitics, geoeconomics or economic security.
 
-## Relevance philosophy: broader, but still bounded
+R&I scope includes research policy, R&D and scientific capacity, universities/research organisations, research infrastructures, international research cooperation, talent, innovation systems/ecosystems, deep tech, technology development and transfer, industrial innovation, critical technologies and technological capabilities.
 
-The radar should capture research papers and analytical reports that are materially relevant to the EU's research and innovation system **and closely related fields in a geopolitical or geoeconomic context**. V14 retains the balanced-recall profile instead of requiring every useful item to use formal R&I-policy vocabulary.
+Geopolitical/economic-security scope includes research security, foreign interference, strategic dependencies, supply-chain security, investment screening, export/technology controls, critical raw materials, sanctions, de-risking, strategic autonomy/technology sovereignty, science diplomacy, great-power competition and technology rivalry.
 
-A publication can qualify when it deals substantively with one or more of the following: research and innovation systems; R&D and scientific capacity; universities and higher education where they affect research; research infrastructures; talent and scientific collaboration; innovation ecosystems and deep tech; technology development/transfer; critical and emerging technologies; technological capabilities and innovation competitiveness; or governance/funding/security of these activities.
-
-The geopolitical side can include geopolitics and strategic competition directly, but also economic-security channels that materially affect R&I: strategic dependencies, sanctions, de-risking, export/technology controls, investment screening, supply-chain security/resilience, critical raw materials, techno-nationalism, great-power competition, and technology sovereignty.
+EU relevance can be explicit at EU level or substantive at European/member-state level. A passing mention of Europe/EU is not enough.
 
 **Still excluded:** generic geopolitics with no meaningful R&I/technology-system content; generic innovation/business pieces with no geopolitical/economic-security dimension; pure engineering/technical research with no strategic/system relevance; ordinary institutional news, press releases, events, calls, project/facility pages, jobs, marketing, blogs/opinion, and thin pages.
 
-## EU relevance
+## Strand B — foresight methodology
 
-**Direct:** the EU, Europe, EU institutions/programmes, European R&I systems, or an EU member state is a meaningful object of analysis. The balanced profile does not require literal `EU` wording when the title/abstract clearly concerns Europe or a member state.
+B remains methodology-first. Admit publications that substantially explain, compare, evaluate or reflect on foresight practice relevant to public policy, R&I or S&T governance: horizon scanning, weak-signal detection, scenario construction, Delphi, backcasting, morphological/cross-impact analysis, participatory foresight, technology assessment, anticipatory governance, strategic intelligence, robustness/uncertainty, evaluation, institutionalisation and capability-building.
 
-**Derived:** a non-EU publication explicitly draws lessons, implications or comparisons relevant to Europe/EU strategy. Strand B can also be derived when a high-quality foresight method is clearly transferable to EU public-sector R&I/S&T practice.
+Pure trend lists/outlooks or papers that merely use the word “foresight” are excluded.
 
-A passing Europe mention in the body is not enough by itself.
+## Strand C — weak signals
 
-## Strand A — R&I and related systems under geopolitical change
+Strand C is a selective current-development layer, not a general news feed.
 
-Three substantive floors remain mandatory:
+A signal must pass all of the following:
 
-1. meaningful R&I or closely related science/technology/innovation-system content;
-2. meaningful geopolitical, strategic-competition or economic-security content;
-3. direct/derived EU relevance.
+1. **Factual change/event:** a policy move, restriction, investment, funding decision, partnership, institutional change, capacity build-up, research/talent move, supply-chain shift, new evidence/data or comparable development.
+2. **Strategic R&I theme:** research security, technology sovereignty, EU–China S&T/de-risking, export controls/dual use, fragmentation of science, US–China/transatlantic technology competition, critical/emerging technologies, economic security and R&I, technological capabilities, supply chains/dependencies, Horizon Europe/FP10 participation or science diplomacy.
+3. **European relevance:** either the development is EU/European/member-state scoped, or it is an external development with both a strong R&I/technology connection and a strong geopolitical/economic-security connection that plausibly affects Europe.
+4. **Source quality:** factual reporting or official material from the curated major-source watch list; opinion/commentary/explainers are excluded.
 
-The R&I ↔ geopolitical connection can be shown in one sentence, in the title/abstract, or across the document when both sides are clearly part of the same analysis. Trusted Tier-1/2 analytical sources may qualify with one clear geopolitical concept in the body rather than needing several synonymous keywords.
+### Connection rule
 
-Eligible material includes peer-reviewed articles, reviews, working papers, institutional reports, research papers, policy studies and substantive analytical briefs.
+A signal should connect to the evidence base in the strongest available way:
 
-## Strand B — foresight / anticipatory methodology
+- a specific accepted Strand A/B publication;
+- a recurring accepted A/B theme; or
+- a curated **strategic watch theme** when no one-to-one paper anchor exists.
 
-B remains methodology-first, but The balanced profile recognises that institutional reports often place methods after a long executive summary. A publication can qualify when it substantially explains, compares, evaluates or reflects on foresight practice, including horizon scanning, weak-signal detection, scenario construction, Delphi, backcasting, morphological/cross-impact analysis, participatory foresight, technology assessment, anticipatory governance, strategic intelligence, robustness/uncertainty, evaluation, institutionalisation and capability-building.
+The third route is deliberately allowed in V16 so a thin or temporarily incomplete A/B corpus cannot suppress strong weak signals. It does **not** bypass the relevance gates above.
 
-The application context should be relevant to R&I, science/technology, research organisations, higher education, technology governance, public-sector innovation or strategic policy. A trend report, outlook or scenario output alone still does not qualify without meaningful methodological content.
+### Accumulation and scan windows
 
-## Strand C — weak signals anchored to A/B
-
-A new signal requires trusted factual reporting, a genuinely new development, European relevance, and a clear anchor to an accepted A/B publication or recurring accepted theme. Relationship labels remain `confirms`, `contradicts`, `accelerates`, or `instantiates`.
-
-No anchor = no inclusion. Once admitted, signals remain in the cumulative corpus.
-
-## Source and quality policy
-
-- OpenAlex and Crossref search broadly across peer-reviewed literature, not only a small journal whitelist.
-- Curated institutional sources cover EU bodies, European R&I organisations, major think tanks/foresight organisations, OECD/comparable bodies and selected major non-EU research-policy institutions.
-- Standard trusted institutional analytical pages normally need about **900+ words**; concise Tier-1 analytical briefs can qualify from about **500 words** when publication type and substantive gates are strong. Tier-3 institutional material retains a stricter **1,200-word** floor.
-- There is no numerical post-admission cap by default. The radar should not pad counts with weakly related material.
+- V16 upgrade: one **30-day weak-signal recovery scan**.
+- Normal operation: **7-day rolling Strand C window every 12 hours**.
+- All admitted signals are permanently retained and deduplicated.
+- There is no numerical post-admission cap by default.

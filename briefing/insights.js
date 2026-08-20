@@ -72,7 +72,7 @@
     let s=clean(v);
     const src=clean(source).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
     if(src) s=s.replace(new RegExp(`\\s*(?:[-–—|:]\\s*)?${src}\\.?$`,'i'),'');
-    s=s.replace(/\s*(?:[-–—|:]\s*)?(?:Reuters|Politico(?: Europe)?|politico\.eu|Table\.Briefings|Table\.Media|CEPS)\.?$/i,'');
+    s=s.replace(/\s*(?:[-–—|:]\s*)?(?:Reuters|Politico(?: Europe)?|politico\.eu|Table\.Briefings|Table\.Media|CEPS|Euractiv|Bloomberg|Financial Times|Nature|Science|Sifted|EUobserver)\.?$/i,'');
     return clean(s);
   }
 
@@ -263,6 +263,11 @@
         link:clean(x.link||''),
         strand:clean(x.strand||(x.headline?'C':'')),
         signalType:clean(x.signal_type||''),
+        signalKind:clean(x.signal_kind||''),
+        watchTheme:clean(x.watch_theme||''),
+        anchor:clean(x.anchor||''),
+        anchorBasis:clean(x.anchor_basis||''),
+        why:signalWhy(x),
         title:clean(x.title||x.headline||'')
       });
     }
@@ -270,5 +275,86 @@
     return order.map(name=>({name,items:groups.get(name)})).filter(g=>g.items.length);
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint};
+  function signalTheme(x){
+    let t=clean(x.watch_theme||'');
+    if(t) return t;
+    const note=clean(x.signal_note||'');
+    const m=note.match(/development in ([^.]+)\.?$/i);
+    if(m) return clean(m[1]);
+    const a=clean(x.anchor||'');
+    const am=a.match(/(?:Strategic watch theme|A\/B theme|Recurring A\/B theme):\s*([^—;]+)/i);
+    if(am) return clean(am[1]);
+    return '';
+  }
+
+  function themeWhy(theme){
+    const n=norm(theme);
+    if(/research security|foreign interference|knowledge security/.test(n)) return 'This could change how European research organisations manage international collaboration, openness, access and security.';
+    if(/technology sovereignty|strategic autonomy/.test(n)) return "This affects Europe's ability to build, access and control strategic technology capacity rather than depend on external suppliers.";
+    if(/china|de-risk/.test(n)) return 'This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.';
+    if(/export control|dual use/.test(n)) return 'This can alter access to technologies, equipment, knowledge and collaboration channels that matter for European R&I.';
+    if(/fragmentation/.test(n)) return 'This is evidence that international science is becoming more segmented, raising collaboration and access risks for Europe.';
+    if(/transatlantic|us-china|competition/.test(n)) return "This may reshape Europe's room for manoeuvre between US technology-security rules and Chinese capabilities, markets and partnerships.";
+    if(/critical and emerging|semiconductor|quantum|biotech|artificial intelligence/.test(n)) return 'This may affect European access, investment or capability-building in a technology that is becoming strategically important.';
+    if(/economic security/.test(n)) return 'This links research and innovation capacity more directly to economic-security policy, funding and strategic dependencies.';
+    if(/competitiveness|capabilit/.test(n)) return "This may change Europe's relative research and innovation capacity in technologies that increasingly shape geopolitical power.";
+    if(/supply chain|dependenc|raw material|mineral/.test(n)) return "This could alter Europe's exposure to strategic inputs, infrastructure or technology supply chains.";
+    if(/horizon europe|fp10/.test(n)) return 'This could change participation, funding or international cooperation in EU research programmes.';
+    if(/science diplomacy/.test(n)) return 'This may create, narrow or redirect channels for scientific cooperation in a more geopolitical environment.';
+    return '';
+  }
+
+  function signalWhat(x){
+    const v=clean(x.what||'')||headlinePoint(x)||clean(x.headline||'');
+    return concise(v,32);
+  }
+
+  function signalWhy(x){
+    const direct=clean(x.why_it_matters||'');
+    if(direct) return concise(direct,46);
+    const theme=signalTheme(x);
+    const themed=themeWhy(theme);
+    if(themed) return themed;
+    const note=clean(x.signal_note||'');
+    if(note){
+      const what=clean(x.headline||'');
+      let remainder=note;
+      if(what&&remainder.toLowerCase().startsWith(what.toLowerCase())) remainder=clean(remainder.slice(what.length).replace(/^\.?\s*/,''));
+      remainder=remainder.replace(/^This (?:instantiates|accelerates|confirms|contradicts) the anchor by providing a current empirical development in /i,'This is a current development in ');
+      if(remainder&&remainder.length>28) return concise(remainder,46);
+    }
+    return "This is a current development with a plausible effect on Europe's research, innovation or strategic technology position.";
+  }
+
+  function buildSignals(data){
+    const seen=new Set();
+    const out=[];
+    for(const x of (Array.isArray(data?.strand_c)?data.strand_c:[])){
+      const key=keyFor(x); if(!key||seen.has(key)) continue; seen.add(key);
+      const what=signalWhat(x); if(!what||isDocumentDebris(what)) continue;
+      out.push({
+        what,
+        why:signalWhy(x),
+        theme:signalTheme(x)||topicFor(x,what),
+        date:dateFor(x),
+        newThisScan:!!x.new_this_scan,
+        firstSeen:clean(x.first_seen||''),
+        source:clean(x.source||''),
+        link:clean(x.link||''),
+        signalType:clean(x.signal_type||'instantiates'),
+        signalKind:clean(x.signal_kind||'weak signal'),
+        anchor:clean(x.anchor||''),
+        anchorBasis:clean(x.anchor_basis||''),
+        title:clean(x.headline||'')
+      });
+    }
+    out.sort((a,b)=>(Number(b.newThisScan)-Number(a.newThisScan))||b.date.localeCompare(a.date)||a.what.localeCompare(b.what));
+    return out;
+  }
+
+  function buildResearchInsights(data){
+    return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:Array.isArray(data?.strand_b)?data.strand_b:[],strand_c:[]});
+  }
+
+  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint};
 });

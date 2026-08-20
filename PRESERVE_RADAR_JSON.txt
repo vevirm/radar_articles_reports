@@ -1,0 +1,6 @@
+NO MANUAL PRESERVATION STEP IS REQUIRED IN THIS COMPLETE PACKAGE.
+
+radar.json is included. On an upgrade over the existing repository, the scanner
+checks recent Git history and automatically restores/merges a larger prior corpus
+if the bundled radar.json is older. This makes upload-all replacement safe while
+keeping A, B and C cumulative.

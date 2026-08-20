@@ -63,7 +63,7 @@
           <button id="lock" class="lock">Lock radar</button>
         </div>
         <div class="hero-actions">
-          <a class="action primary" href="briefing/?v=13">Open Radar Insights</a>
+          <a class="action primary" href="briefing/?v=16">Open Radar Insights</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -103,7 +103,7 @@
       </section>
 
       <section id="strand-c" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals</h2><p>Each scan checks a current news window, anchors qualifying developments to the A/B evidence base, and permanently adds newly admitted signals to this historical record.</p></div><div id="countC" class="count">0 signals</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals</h2><p>Each scan checks a rolling news window for factual R&I/geopolitical developments. Signals can connect to a specific A/B publication or a curated strategic watch theme, and every admitted signal remains in the cumulative record.</p></div><div id="countC" class="count">0 signals</div></div>
         <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
@@ -112,7 +112,7 @@
     <footer><div class="wrap">R&I × Geopolitics + Foresight Methodology Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=13"></script>
+<script src="briefing/insights.js?v=16"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -134,7 +134,7 @@ function abItem(x){
   const p=pointFor(x); const details=short(x.relevance_note||"",320); const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
   return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}${tag(x.eu_relevance)}</div></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.title||"Untitled")}</a></h3><div class="source">${esc([x.source,x.authors].filter(Boolean).join(" · "))}</div><p class="point"><strong>Signal:</strong> ${esc(p||"Accepted into the radar corpus.")}</p>${details&&details!==p?`<details><summary>Why it matters</summary><p>${esc(details)}</p></details>`:""}<div class="card-foot"><span>${esc(x.type||x.source_tier||"")}</span><span>${esc(seen)}</span></div></article>`
 }
-function cItem(x){const p=pointFor(x)||short(x.signal_note,220);const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.signal_type||"signal","signal")}</div></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.headline||"Untitled")}</a></h3><div class="source">${esc(x.source||"")}</div><p class="point">${esc(p)}</p>${x.anchor?`<details><summary>Evidence anchor</summary><p>${esc(x.anchor)}</p></details>`:""}<div class="card-foot"><span>Weak signal</span><span>${esc(seen)}</span></div></article>`}
+function cItem(x){const what=globalThis.RadarInsights?.signalWhat?.(x)||pointFor(x)||short(x.headline,180);const why=globalThis.RadarInsights?.signalWhy?.(x)||short(x.signal_note,220);const theme=globalThis.RadarInsights?.signalTheme?.(x)||"Strategic R&I";const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}${tag(x.signal_kind||x.signal_type||"signal")}</div></div><div class="source"><strong>WHAT CHANGED</strong></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(what)}</a></h3><div class="source">${esc(x.source||"")}</div><p class="point"><strong>WHY IT MATTERS:</strong> ${esc(why)}</p><details><summary>Radar connection</summary><p><strong>${esc(theme)}</strong>${x.anchor?`<br>${esc(x.anchor)}`:""}</p></details><div class="card-foot"><span>Weak signal</span><span>${esc(seen)}</span></div></article>`}
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}

@@ -1,11 +1,10 @@
-FULL REPOSITORY — V15 SCAN REPAIR
+COMPLETE REPOSITORY UPLOAD
 
-1. Extract the ZIP locally.
-2. Replace the repository contents with ALL extracted files and folders.
-3. IMPORTANT: include the hidden .github folder. It contains the active workflow.
-4. Commit everything to main.
-5. Open GitHub Actions -> R&I Radar Scan -> Run workflow if you want to trigger it immediately.
+1. Extract this ZIP.
+2. Upload ALL files/folders to the root of vevirm/radar_articles_reports.
+3. Include the hidden .github folder.
+4. Replace existing files and commit to main.
+5. The push triggers the scanner; subsequent scans run every 12 hours.
 
-The package contains the cumulative radar.json snapshot, scanner code, site, Insights page, configuration, tests and workflow.
-No API key, custom secret or email configuration is required.
-The scanner performs the four-month A/B backfill and then runs every 12 hours. A, B and C remain cumulative.
+radar.json IS INCLUDED in this package. The scanner also protects against an older
+bundled snapshot overwriting a larger corpus already present in Git history.
