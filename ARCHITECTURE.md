@@ -34,8 +34,9 @@ Weak-signal discovery starts at the beginning of the scan in parallel with schol
 
 ## 6. Runtime
 
-- GitHub job timeout: 70 minutes
-- scanner internal budget: 55 minutes
+- GitHub job timeout: 30 minutes
+- scanner internal budget: 20 minutes
+- network reserve inside scanner: 3 minutes
 - scheduled cadence: every 12 hours
 - A/B V17 upgrade backfill: four months
 - later A/B overlap: 14 days

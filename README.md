@@ -39,9 +39,9 @@ The direct institutional crawler still monitors 57 major EU, European and intern
 
 ## Runtime
 
-The GitHub Actions job timeout is **70 minutes**. The scanner has a **55-minute internal scan budget** (3,300 seconds), leaving time to write and commit `radar.json` safely.
+This repository is deliberately **30-minute safe**. The GitHub Actions job timeout is **30 minutes**, while the scanner has a **20-minute internal scan budget** (1,200 seconds). Network work winds down before that budget expires, leaving time to write `radar.json` and for GitHub Actions to commit and push it. The scanner no longer depends on raising GitHub's timeout above 30 minutes.
 
-The first V17 run forces a new **four-month A/B backfill** under the new scholarly/source profile. Later scans continue every **12 hours** with the overlap logic already used by the radar.
+The first V17.1 run forces a new **four-month A/B backfill** under the scholarly/source profile. Institutional crawling is bounded to a smaller high-priority page set so the run can complete and save results inside the 30-minute job. Later scans continue every **12 hours** with the overlap logic already used by the radar.
 
 Weak-signal scanning remains protected at the start of the run and remains cumulative.
 
@@ -61,7 +61,7 @@ Each category has its own filter, while search and “New only” work across th
 
 ## Complete repository upload
 
-This package is the **whole repository**, including `radar.json` and the active `.github/workflows/radar-scan.yml`.
+This package is the **whole repository**, including `radar.json` and the active `.github/workflows/radar-scan.yml`. It intentionally contains only the active workflow copy, so there is no backup YAML that can be uploaded by mistake.
 
 Upload/extract everything to the repository root. No separate file preservation step is required. The bundled `radar.json` is marked as a repository seed; on the first scan, Git history recovery merges back a larger existing cumulative corpus if one exists before V17 revalidates and rescans it.
 

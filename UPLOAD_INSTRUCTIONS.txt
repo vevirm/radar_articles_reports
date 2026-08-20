@@ -1,7 +1,14 @@
-1. Extract the ZIP.
-2. Upload all files and folders to the root of the GitHub repository, including .github.
-3. Commit to main.
-4. The push triggers the V17 scan automatically.
-5. The first V17 run performs a new four-month A/B backfill and one-time quality migration.
+COMPLETE REPOSITORY UPLOAD
 
-This is a complete repository package and includes radar.json.
+1. Extract this ZIP on your computer.
+2. Replace the contents of the GitHub repository with the extracted contents.
+3. Make sure the hidden/dot folder .github is included.
+4. Commit the files to main.
+5. Open Actions -> R&I Radar Scan -> Run workflow.
+
+What you should see:
+- The workflow file contains: timeout-minutes: 30
+- radar_config.json contains: scan_budget_seconds: 1200
+- The scan should stop discovery itself, write radar.json, and continue to "Commit fresh results" before GitHub's 30-minute limit.
+
+You do NOT need to preserve radar.json separately. The scanner also contains Git-history recovery for an older larger cumulative radar when available.

@@ -8,11 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class V17EvidenceQualityTests(unittest.TestCase):
-    def test_scan_budget_is_close_to_an_hour_and_job_has_commit_margin(self):
+    def test_scan_budget_finishes_inside_30_minute_job_with_commit_margin(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
-        self.assertEqual(cfg['scan_budget_seconds'], 3300)
+        self.assertEqual(cfg['scan_budget_seconds'], 1200)
+        self.assertGreaterEqual(cfg.get('network_reserve_seconds', 0), 120)
         workflow = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
-        self.assertIn('timeout-minutes: 70', workflow)
+        self.assertIn('timeout-minutes: 30', workflow)
 
     def test_scholarly_discovery_has_dedicated_priority_sweep(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))

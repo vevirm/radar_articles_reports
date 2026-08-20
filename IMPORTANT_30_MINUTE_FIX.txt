@@ -1,0 +1,12 @@
+IMPORTANT — THIS IS NOT THE OLD 55-MINUTE BUILD
+
+The previous design could ask the scanner to work for 55 minutes while the GitHub job was being killed at 30 minutes. That meant the process could die before radar.json was saved.
+
+This repository uses the opposite approach: it is designed to COMPLETE inside 30 minutes.
+
+Required values:
+.github/workflows/radar-scan.yml -> timeout-minutes: 30
+radar_config.json -> scan_budget_seconds: 1200
+radar_config.json -> network_reserve_seconds: 180
+
+Version: 17.1
