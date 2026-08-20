@@ -1,8 +1,10 @@
-V12 UPLOAD
+V14 ZERO-CONFIG RESILIENT SCAN UPGRADE
 
-1. Keep the existing live radar.json in the GitHub repository. Do not delete or replace it.
+1. KEEP the existing live radar.json. Do not delete or replace it.
 2. Upload/replace the other files from this package at the repository root.
-3. Commit the changes to main.
-4. The push starts the V12 scan immediately.
-5. Because the live radar does not yet have the V12 admission-profile marker, the first V12 run rescans the previous four calendar months for A/B papers and reports using the moderately broadened criteria, then merges qualifying items into the cumulative corpus.
-6. After that, the existing GitHub Action runs every 12 hours with a 14-day overlap.
+3. Commit to main. The push starts a fresh four-month A/B backfill.
+4. No API keys, repository secrets or other credentials are required.
+5. The full A/B query universe is attempted through anonymous public scholarly discovery plus direct scanning of all configured institutional publishers/players.
+6. If one public source is unavailable, the scanner continues with the others and preserves the accumulated corpus.
+7. A degraded four-month backfill is retried automatically rather than marked complete.
+8. After the backfill, the workflow runs every 12 hours with a 14-day overlap and preserves all accumulated A/B/C items.

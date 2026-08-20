@@ -25,6 +25,7 @@ import gzip
 import io
 import json
 import re
+import threading
 import subprocess
 import sys
 import time
@@ -49,7 +50,7 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
-SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v12-balanced-relevance-backfill"))
+SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v14-balanced-relevance-zero-config"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -60,7 +61,8 @@ DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
 MAX_NEW_AB = int(CONFIG.get("max_new_ab_per_scan", 0))
 MAX_C = int(CONFIG.get("max_c_per_scan", 0))
 MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 0))
-REQUEST_TIMEOUT = 16
+REQUEST_TIMEOUT = int(CONFIG.get("request_timeout_seconds", 12))
+SCAN_DEADLINE_MONO: float | None = None
 UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
@@ -69,6 +71,30 @@ SESSION.headers.update({
     "Accept-Language": "en-GB,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 })
+
+
+def log_progress(message: str) -> None:
+    """Flush progress to Actions logs so a long scan never looks hung."""
+    elapsed = 0.0
+    try:
+        elapsed = time.monotonic() - log_progress.started
+    except Exception:
+        pass
+    print(f"[radar +{elapsed:6.1f}s] {message}", flush=True)
+
+
+log_progress.started = time.monotonic()
+
+
+def budget_remaining() -> float:
+    if SCAN_DEADLINE_MONO is None:
+        return float("inf")
+    return SCAN_DEADLINE_MONO - time.monotonic()
+
+
+def deadline_reached(reserve_seconds: int = 0) -> bool:
+    return budget_remaining() <= reserve_seconds
+
 
 # ---------------------------------------------------------------------------
 # Admission vocabulary. These are evidence families, not a keyword score.
@@ -568,7 +594,10 @@ def themes_for(text: str) -> list[str]:
 
 
 def get(url: str, timeout: int = REQUEST_TIMEOUT) -> requests.Response | None:
+    if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        return None
     try:
+        timeout = min(int(timeout), int(CONFIG.get("request_timeout_seconds", 12)))
         r = SESSION.get(url, timeout=timeout, allow_redirects=True)
         if r.status_code == 200:
             return r
@@ -700,31 +729,97 @@ def candidate_from_openalex(work: dict[str, Any]) -> dict[str, Any] | None:
 
 
 def collect_openalex(from_date: dt.date, warnings: list[str]) -> list[dict[str, Any]]:
-    out = []
+    """Zero-config OpenAlex discovery.
+
+    Uses the public endpoint anonymously, as earlier radar versions did.  There is
+    deliberately no API-key/secret branch.  Requests are paced and retried, and
+    if anonymous access is unavailable the stage stops quickly while Crossref and
+    direct institutional scanning continue.
+    """
     queries = list(dict.fromkeys(CONFIG["queries_a"] + CONFIG["queries_b"]))
-    per_page = int(CONFIG.get("openalex_per_query", 45))
-    for q in queries:
+    per_page = int(CONFIG.get("openalex_per_query", 60))
+    workers = max(1, min(int(CONFIG.get("openalex_public_workers", 2)), 3))
+    timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
+    min_interval = float(CONFIG.get("openalex_public_min_interval_seconds", 0.30))
+    retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
+    rate_lock = threading.Lock()
+    last_request = [0.0]
+    stop_public = threading.Event()
+
+    def wait_slot() -> None:
+        with rate_lock:
+            now = time.monotonic()
+            wait = min_interval - (now - last_request[0])
+            if wait > 0:
+                time.sleep(wait)
+            last_request[0] = time.monotonic()
+
+    def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
+        if stop_public.is_set():
+            return [], "public endpoint unavailable"
+        if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+            return [], "budget"
         params = {
             "search": q,
             "filter": f"from_publication_date:{from_date.isoformat()}",
             "sort": "publication_date:desc",
             "per-page": str(per_page),
         }
-        try:
-            r = SESSION.get("https://api.openalex.org/works", params=params, timeout=22)
-            if r.status_code != 200:
-                warnings.append(f"OpenAlex HTTP {r.status_code}")
-                continue
-            works = r.json().get("results", [])
-        except Exception as e:
-            warnings.append(f"OpenAlex: {type(e).__name__}")
-            continue
-        for work in works:
-            item = candidate_from_openalex(work)
-            if item:
-                out.append(item)
-    return out
+        for attempt in range(retries + 1):
+            if stop_public.is_set():
+                return [], "public endpoint unavailable"
+            wait_slot()
+            try:
+                r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+                if r.status_code == 200:
+                    works = r.json().get("results", [])
+                    out = []
+                    for work in works:
+                        item = candidate_from_openalex(work)
+                        if item:
+                            out.append(item)
+                    return out, None
+                if r.status_code in {401, 403, 409}:
+                    stop_public.set()
+                    return [], f"HTTP {r.status_code}; continuing with other zero-config sources"
+                if r.status_code in {429, 500, 502, 503, 504} and attempt < retries:
+                    retry_after = clean_text(r.headers.get("Retry-After"))
+                    try:
+                        delay = min(8.0, max(1.0, float(retry_after))) if retry_after else min(8.0, 1.5 * (attempt + 1))
+                    except Exception:
+                        delay = min(8.0, 1.5 * (attempt + 1))
+                    time.sleep(delay)
+                    continue
+                return [], f"HTTP {r.status_code}"
+            except Exception as e:
+                if attempt < retries:
+                    time.sleep(min(6.0, 1.5 * (attempt + 1)))
+                    continue
+                return [], type(e).__name__
+        return [], "request failed"
 
+    out: list[dict[str, Any]] = []
+    budget_hits = 0
+    endpoint_unavailable_reported = False
+    with cf.ThreadPoolExecutor(max_workers=workers) as ex:
+        futs = [ex.submit(fetch_query, q) for q in queries]
+        for fut in cf.as_completed(futs):
+            try:
+                items, err = fut.result()
+                out.extend(items)
+                if err == "budget":
+                    budget_hits += 1
+                elif err and "public endpoint unavailable" in err:
+                    if not endpoint_unavailable_reported:
+                        warnings.append("OpenAlex public endpoint unavailable; continuing with Crossref and direct publisher/institution scanning")
+                        endpoint_unavailable_reported = True
+                elif err:
+                    warnings.append(f"OpenAlex {err}")
+            except Exception as e:
+                warnings.append(f"OpenAlex worker: {type(e).__name__}")
+    if budget_hits:
+        warnings.append(f"OpenAlex scan budget reached; {budget_hits} queued query/queries skipped")
+    return out
 
 def crossref_date(item: dict[str, Any]) -> dt.date | None:
     for key in ("published-online", "published-print", "published", "issued"):
@@ -793,10 +888,27 @@ def candidate_from_crossref(item: dict[str, Any]) -> dict[str, Any] | None:
 
 
 def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, Any]]:
-    out = []
+    """Zero-config Crossref discovery using only the anonymous public pool."""
     queries = list(dict.fromkeys(CONFIG["queries_a"] + CONFIG["queries_b"]))
-    rows = int(CONFIG.get("crossref_rows_per_query", 35))
-    for q in queries:
+    rows = int(CONFIG.get("crossref_rows_per_query", 50))
+    workers = 1
+    min_interval = float(CONFIG.get("crossref_public_min_interval_seconds", 0.80))
+    timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
+    retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
+    rate_lock = threading.Lock()
+    last_request = [0.0]
+
+    def wait_for_slot() -> None:
+        with rate_lock:
+            now = time.monotonic()
+            wait = min_interval - (now - last_request[0])
+            if wait > 0:
+                time.sleep(wait)
+            last_request[0] = time.monotonic()
+
+    def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
+        if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+            return [], "budget"
         params = {
             "query.bibliographic": q,
             "filter": f"from-pub-date:{from_date.isoformat()}",
@@ -805,21 +917,51 @@ def collect_crossref(from_date: dt.date, warnings: list[str]) -> list[dict[str, 
             "order": "desc",
             "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract",
         }
-        try:
-            r = SESSION.get("https://api.crossref.org/works", params=params, timeout=22)
-            if r.status_code != 200:
-                warnings.append(f"Crossref HTTP {r.status_code}")
-                continue
-            works = r.json().get("message", {}).get("items", [])
-        except Exception as e:
-            warnings.append(f"Crossref: {type(e).__name__}")
-            continue
-        for item in works:
-            c = candidate_from_crossref(item)
-            if c:
-                out.append(c)
-    return out
+        for attempt in range(retries + 1):
+            wait_for_slot()
+            try:
+                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                if r.status_code == 200:
+                    works = r.json().get("message", {}).get("items", [])
+                    out = []
+                    for item in works:
+                        c = candidate_from_crossref(item)
+                        if c:
+                            out.append(c)
+                    return out, None
+                if r.status_code in {429, 500, 502, 503, 504} and attempt < retries:
+                    retry_after = clean_text(r.headers.get("Retry-After"))
+                    try:
+                        delay = min(8.0, max(1.0, float(retry_after))) if retry_after else min(8.0, 1.5 * (attempt + 1))
+                    except Exception:
+                        delay = min(8.0, 1.5 * (attempt + 1))
+                    time.sleep(delay)
+                    continue
+                return [], f"HTTP {r.status_code}"
+            except Exception as e:
+                if attempt < retries:
+                    time.sleep(min(6.0, 1.5 * (attempt + 1)))
+                    continue
+                return [], type(e).__name__
+        return [], "request failed"
 
+    out: list[dict[str, Any]] = []
+    budget_hits = 0
+    with cf.ThreadPoolExecutor(max_workers=workers) as ex:
+        futs = [ex.submit(fetch_query, q) for q in queries]
+        for fut in cf.as_completed(futs):
+            try:
+                items, err = fut.result()
+                out.extend(items)
+                if err == "budget":
+                    budget_hits += 1
+                elif err:
+                    warnings.append(f"Crossref {err}")
+            except Exception as e:
+                warnings.append(f"Crossref worker: {type(e).__name__}")
+    if budget_hits:
+        warnings.append(f"Crossref scan budget reached; {budget_hits} queued query/queries skipped")
+    return out
 
 def decompress_xml(content: bytes) -> bytes:
     if content[:2] == b"\x1f\x8b":
@@ -837,7 +979,7 @@ def localname(tag: str) -> str:
 def discover_sitemaps(domain: str) -> list[str]:
     base = f"https://{domain}"
     urls = []
-    r = get(base + "/robots.txt", timeout=12)
+    r = get(base + "/robots.txt", timeout=int(CONFIG.get("sitemap_timeout_seconds", 10)))
     if r:
         for line in r.text.splitlines():
             if line.lower().startswith("sitemap:"):
@@ -851,7 +993,7 @@ def sitemap_entries(url: str, depth: int = 0, child_budget: int | None = None) -
         child_budget = int(CONFIG.get("sitemap_child_budget", 8))
     if depth > 2 or child_budget <= 0:
         return []
-    r = get(url, timeout=18)
+    r = get(url, timeout=int(CONFIG.get("sitemap_timeout_seconds", 10)))
     if not r or len(r.content) > 15_000_000:
         return []
     try:
@@ -943,8 +1085,10 @@ def jsonld_objects(obj: Any):
 
 
 def pdf_text(url: str) -> tuple[str, int]:
+    if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        return "", 0
     try:
-        r = SESSION.get(url, timeout=24)
+        r = SESSION.get(url, timeout=int(CONFIG.get("pdf_timeout_seconds", 14)))
         if r.status_code != 200 or len(r.content) > 22_000_000:
             return "", 0
         reader = PdfReader(io.BytesIO(r.content))
@@ -961,7 +1105,7 @@ def pdf_text(url: str) -> tuple[str, int]:
 
 
 def parse_institution_page(url: str, source: str, tier: int) -> dict[str, Any] | None:
-    r = get(url, timeout=20)
+    r = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
     if not r or "html" not in r.headers.get("content-type", "text/html"):
         return None
     soup = BeautifulSoup(r.text, "html.parser")
@@ -1085,7 +1229,10 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
 
 def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False) -> list[dict[str, Any]]:
     jobs = []
-    with cf.ThreadPoolExecutor(max_workers=10) as ex:
+    discovery_workers = int(CONFIG.get("institution_discovery_workers", 12))
+    page_workers = int(CONFIG.get("institution_page_workers", 24))
+    log_progress(f"Institutional discovery: {len(CONFIG['institution_sources'])} configured sources")
+    with cf.ThreadPoolExecutor(max_workers=max(1, discovery_workers)) as ex:
         futs = [ex.submit(_discover_domain, src, from_date, bootstrap) for src in CONFIG["institution_sources"]]
         for fut in cf.as_completed(futs):
             try:
@@ -1096,9 +1243,13 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
             except Exception as e:
                 warnings.append(f"Institution sitemap: {type(e).__name__}")
     out = []
-    max_jobs = int(CONFIG.get("institution_max_pages_bootstrap", 2200 if bootstrap else 1200))
-    with cf.ThreadPoolExecutor(max_workers=18) as ex:
-        futs = [ex.submit(parse_institution_page, u, s, t) for u, s, t in jobs[:max_jobs]]
+    default_max = 1200 if bootstrap else 700
+    max_key = "institution_max_pages_bootstrap" if bootstrap else "institution_max_pages"
+    max_jobs = int(CONFIG.get(max_key, default_max))
+    jobs = jobs[:max_jobs]
+    log_progress(f"Institutional parsing: {len(jobs)} candidate page(s) queued")
+    with cf.ThreadPoolExecutor(max_workers=max(1, page_workers)) as ex:
+        futs = [ex.submit(parse_institution_page, u, s, t) for u, s, t in jobs]
         for fut in cf.as_completed(futs):
             try:
                 item = fut.result()
@@ -1107,7 +1258,6 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
             except Exception as e:
                 warnings.append(f"Institution page: {type(e).__name__}")
     return out
-
 
 def evidence_summary(evidence: dict[str, Any], strand: str) -> str:
     parts = []
@@ -1509,41 +1659,65 @@ def news_queries(domain: str, lookback_hours: int) -> list[str]:
 def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None) -> list[dict[str, Any]]:
     lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
     start = now - dt.timedelta(hours=lookback_hours)
-    out = []
+    workers = int(CONFIG.get("news_workers", 10))
+    timeout = int(CONFIG.get("news_timeout_seconds", 10))
+    jobs = []
     for src in CONFIG["news_sources"]:
-        name, domain = src["name"], src["domain"]
-        for q in news_queries(domain, lookback_hours):
-            url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
-            try:
-                r = SESSION.get(url, timeout=16)
-                if r.status_code != 200:
-                    warnings.append(f"Google News {domain}: HTTP {r.status_code}")
-                    continue
-                feed = feedparser.parse(r.content)
-            except Exception as e:
-                warnings.append(f"Google News {domain}: {type(e).__name__}")
+        for q in news_queries(src["domain"], lookback_hours):
+            jobs.append((src["name"], src["domain"], q))
+
+    def fetch_job(job: tuple[str, str, str]) -> tuple[list[dict[str, Any]], str | None]:
+        name, domain, q = job
+        if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+            return [], "budget"
+        url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
+        try:
+            r = SESSION.get(url, timeout=timeout)
+            if r.status_code != 200:
+                return [], f"Google News {domain}: HTTP {r.status_code}"
+            feed = feedparser.parse(r.content)
+        except Exception as e:
+            return [], f"Google News {domain}: {type(e).__name__}"
+        items = []
+        for e in feed.entries[:45]:
+            when = parse_feed_time(e)
+            if not when or when < start or when > now + dt.timedelta(minutes=30):
                 continue
-            for e in feed.entries[:45]:
-                when = parse_feed_time(e)
-                if not when or when < start or when > now + dt.timedelta(minutes=30):
-                    continue
-                title = clean_text(getattr(e, "title", ""))
-                desc = clean_text(getattr(e, "summary", "") or getattr(e, "description", ""))
-                for suffix in [name, name.replace("|", " ")]:
-                    if title.lower().endswith(" - " + suffix.lower()):
-                        title = title[:-(len(suffix) + 3)].strip()
-                if not title or not factual_news(title, desc):
-                    continue
-                text = f"{title}. {desc}"
-                out.append({
-                    "headline": title,
-                    "source": name,
-                    "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
-                    "link": clean_text(getattr(e, "link", "")),
-                    "_desc": desc,
-                    "_themes": themes_for(text),
-                    "_entities": distinct_matches(text, ENTITY_TERMS),
-                })
+            title = clean_text(getattr(e, "title", ""))
+            desc = clean_text(getattr(e, "summary", "") or getattr(e, "description", ""))
+            for suffix in [name, name.replace("|", " ")]:
+                if title.lower().endswith(" - " + suffix.lower()):
+                    title = title[:-(len(suffix) + 3)].strip()
+            if not title or not factual_news(title, desc):
+                continue
+            text = f"{title}. {desc}"
+            items.append({
+                "headline": title,
+                "source": name,
+                "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
+                "link": clean_text(getattr(e, "link", "")),
+                "_desc": desc,
+                "_themes": themes_for(text),
+                "_entities": distinct_matches(text, ENTITY_TERMS),
+            })
+        return items, None
+
+    out: list[dict[str, Any]] = []
+    budget_hits = 0
+    with cf.ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
+        futs = [ex.submit(fetch_job, j) for j in jobs]
+        for fut in cf.as_completed(futs):
+            try:
+                items, err = fut.result()
+                out.extend(items)
+                if err == "budget":
+                    budget_hits += 1
+                elif err:
+                    warnings.append(err)
+            except Exception as e:
+                warnings.append(f"Google News worker: {type(e).__name__}")
+    if budget_hits:
+        warnings.append(f"News scan budget reached; {budget_hits} queued query/queries skipped")
     seen = set(); unique = []
     for x in sorted(out, key=lambda z: z["date"], reverse=True):
         key = (norm_title(x["headline"]), x["source"])
@@ -1643,7 +1817,9 @@ def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
 def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
     if not FORCE_SOURCE_EXPANSION_BACKFILL:
         return not bool(previous.get("last_updated"))
-    return previous.get("source_expansion_version") != SOURCE_EXPANSION_VERSION
+    if previous.get("source_expansion_version") != SOURCE_EXPANSION_VERSION:
+        return True
+    return False
 
 
 def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, bool]:
@@ -1659,18 +1835,39 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR
+    global DATE_FLOOR, SCAN_DEADLINE_MONO
     started = time.time()
+    log_progress.started = time.monotonic()
+    budget_seconds = int(CONFIG.get("scan_budget_seconds", 2400))
+    SCAN_DEADLINE_MONO = time.monotonic() + budget_seconds
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
     previous = load_previous()
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
     from_date, bootstrap_ab = scan_from_date(previous, now.date())
+    log_progress(f"Scan start: A/B from {from_date.isoformat()} (four-month backfill={bootstrap_ab}); hard budget {budget_seconds//60} min")
 
-    oa = collect_openalex(from_date, warnings)
-    cr = collect_crossref(from_date, warnings)
-    inst = collect_institutions(from_date, warnings, bootstrap=bootstrap_ab)
+    def safe_stage(name: str, fn, *args, **kwargs):
+        try:
+            log_progress(f"Starting {name}")
+            result = fn(*args, **kwargs)
+            log_progress(f"Finished {name}: {len(result)} admitted candidate(s)")
+            return result
+        except Exception as e:
+            warnings.append(f"{name} fatal stage error: {type(e).__name__}: {str(e)[:180]}")
+            log_progress(f"{name} failed safely; preserving existing corpus")
+            return []
+
+    # Run the two scholarly APIs concurrently. V12 did 288 API searches serially,
+    # which could exhaust the GitHub Actions 60-minute job before it reached reports/news.
+    with cf.ThreadPoolExecutor(max_workers=2) as ex:
+        fut_oa = ex.submit(safe_stage, "OpenAlex", collect_openalex, from_date, warnings)
+        fut_cr = ex.submit(safe_stage, "Crossref", collect_crossref, from_date, warnings)
+        oa = fut_oa.result()
+        cr = fut_cr.result()
+
+    inst = safe_stage("institutional reports", collect_institutions, from_date, warnings, bootstrap=bootstrap_ab)
     deduped = dedupe_candidates(oa + cr + inst)
     deduped.sort(key=rank_candidate)
     new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped
@@ -1680,17 +1877,13 @@ def main() -> int:
     strand_a = merge_corpus(prev_a, new_selected, "A", now_iso)
     strand_b = merge_corpus(prev_b, new_selected, "B", now_iso)
 
-    # C anchors to the accepted cumulative A/B literature, not merely this scan's candidates.
     all_ab_map = {}
     for x in strand_a + strand_b:
         all_ab_map[identity(internalize_previous(x))] = x
     ab_corpus = list(all_ab_map.values())
-    # First run gets a seven-day weak-signal backfill so C is not structurally empty
-    # before the A/B anchor corpus has had time to accumulate.  Later scans use a
-    # 48-hour overlap and dedupe by headline/source.
     first_run = not bool(previous.get("first_scan_complete"))
     news_lookback = FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS
-    news = collect_news(now, warnings, news_lookback)
+    news = safe_stage("weak-signal news", collect_news, now, warnings, news_lookback)
     current_c = anchor_news(news, ab_corpus)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
@@ -1700,16 +1893,32 @@ def main() -> int:
     new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
-    # A large direct-source universe naturally contains some sites with unusable sitemaps.
-    # Do not mark a quiet but successful scan as degraded merely because it admitted no new item.
-    health = "degraded" if (not (oa or cr or inst) and len(warnings) >= 10) else "ok"
+
+    budget_hit = deadline_reached(0) or any("budget reached" in normalized(w) for w in warnings)
+    total_ab_live = len(oa) + len(cr) + len(inst)
+    transport_failure_count = sum(1 for w in warnings if any(x in normalized(w) for x in ["connection", "timeout", "httperror", "name resolution", "http 429", "http 5"]))
+    fatal_stage_error = any("fatal stage error" in normalized(w) for w in warnings)
+    health = "degraded" if budget_hit or fatal_stage_error or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
+    if budget_hit:
+        warnings.append("Overall scan runtime budget reached; queued work was skipped safely and will be retried on the next run")
+
+    # Never mark a new four-month backfill as complete when the run was degraded.
+    # Otherwise a temporary network outage could permanently suppress the backfill.
+    if bootstrap_ab and health == "degraded":
+        expansion_marker = previous.get("source_expansion_version", "")
+        backfill_complete = False
+    else:
+        expansion_marker = SOURCE_EXPANSION_VERSION
+        backfill_complete = True
 
     data = {
         "last_updated": now_iso,
         "first_scan_complete": True,
         "corpus_start_date": DATE_FLOOR.isoformat(),
-        "source_expansion_version": SOURCE_EXPANSION_VERSION,
-        "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v12")),
+        "source_expansion_version": expansion_marker,
+        "backfill_complete": backfill_complete,
+        "zero_config_scan": True,
+        "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v14_zero_config")),
         "scan_health": health,
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
@@ -1734,26 +1943,33 @@ def main() -> int:
         "strand_c": strand_c,
         "stats": {
             "openalex_admitted_before_dedupe": len(oa),
+            "openalex_public_anonymous": True,
             "crossref_admitted_before_dedupe": len(cr),
+            "crossref_public_anonymous": True,
             "institutional_admitted_before_dedupe": len(inst),
             "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
             "institution_sources_configured": len(CONFIG.get("institution_sources", [])),
             "major_scholarly_publishers_tracked": len(CONFIG.get("major_scholarly_publishers", [])),
             "source_expansion_backfill": bootstrap_ab,
+            "backfill_complete": backfill_complete,
             "unique_ab_candidates_before_scan_limit": len(deduped),
             "news_candidates_current_window": len(news),
             "news_lookback_hours": news_lookback,
             "source_warnings": len(warnings),
+            "transport_failure_warnings": transport_failure_count,
+            "scan_budget_seconds": budget_seconds,
+            "budget_reached": budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
         },
     }
     OUT_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(data["stats"], indent=2))
+    log_progress(f"radar.json written: A={len(strand_a)} B={len(strand_b)} C={len(strand_c)} health={health}")
+    print(json.dumps(data["stats"], indent=2), flush=True)
     if warnings:
-        print("Source warnings (first 25):", file=sys.stderr)
-        for w in warnings[:25]:
-            print(" -", w, file=sys.stderr)
+        print("Source warnings (first 40):", file=sys.stderr, flush=True)
+        for w in warnings[:40]:
+            print(" -", w, file=sys.stderr, flush=True)
     return 0
 
 

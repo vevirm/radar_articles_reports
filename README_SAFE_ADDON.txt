@@ -1,5 +1,1 @@
-V12 SAFE UPGRADE NOTE
-
-This ZIP omits radar.json on purpose. Keep the live repository's radar.json when uploading the package.
-
-The first V12 scan performs a new one-time four-calendar-month A/B backfill because the relevance criteria are moderately broader than V11. It merges newly qualifying research papers and reports into the existing cumulative A+B+C corpus, then continues every 12 hours with a 14-day discovery overlap.
+V14 safe upgrade: keep the existing populated radar.json. The package intentionally omits radar.json. No API keys or repository secrets are required. Commit the remaining files and the zero-config four-month backfill starts automatically.

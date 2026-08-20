@@ -18,7 +18,7 @@ class InsightsPageTests(unittest.TestCase):
 
     def test_main_radar_points_to_v12_briefing(self):
         page=(ROOT/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="briefing/?v=12">Open Radar Insights</a>',page)
+        self.assertIn('href="briefing/?v=13">Open Radar Insights</a>',page)
         self.assertIn('Cumulative corpus', page)
 
     def test_old_generator_and_workflow_removed(self):
