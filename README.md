@@ -29,6 +29,9 @@ The classifier is intentionally stricter than the broad radar. A development can
 
 The full analytical definition and cell taxonomy are documented in `frontier_criteria.md`.
 
+The `/frontier/` presentation is deliberately layered for fast reading: **one-look conclusion first**, then three concise "what matters" cards, expandable signal detail, the full matrix, and methodology last. Matrix cells show two items initially and any remaining items expand in place with a working **Show more** control.
+
+
 ## The V17.2 fix: persistent source cursors
 
 `radar.json` now stores `scan_state` with independent cursors for:
