@@ -1,4 +1,4 @@
-# Scanner architecture — V17.2
+# Radar architecture — V17.3
 
 ## 1. Cumulative state
 
@@ -44,3 +44,13 @@ Strand A requires substantive EU/European scope + R&I/science/strategic technolo
 ## 7. Automation
 
 A push to `main` starts a scan immediately. Scheduled scans run every 12 hours. Pushes that modify only `radar.json` are ignored so the scanner's own commit does not trigger itself again.
+## 8. Analytical pages
+
+The public dataset has one source of truth: `radar.json`. The three site views only read it.
+
+- `/` — cumulative Radar: accepted A/B evidence and Strand C signals.
+- `/briefing/` — balanced Radar Insights: research, policy/report evidence and weak signals.
+- `/frontier/` — Insight Summary / Sovereignty-Frontier Signals: a strict decision-attention lens.
+
+The Sovereignty-Frontier layer is implemented in `frontier/frontier.js`. It does not modify scanner state or write classification fields back to `radar.json`. This separation protects historical material while allowing the prioritisation logic to evolve independently.
+

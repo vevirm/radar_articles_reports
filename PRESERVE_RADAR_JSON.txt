@@ -1,5 +1,7 @@
-NO MANUAL radar.json PRESERVATION STEP IS REQUIRED IN V17.2.
+NO MANUAL radar.json PRESERVATION STEP IS REQUIRED IN V17.3.
 
-The complete repository ZIP includes radar.json with a one-run repository_bundle_seed marker. On the first scan after upload, the scanner checks recent Git history and merges a larger pre-upload A/B/C corpus back when one exists.
+The complete repository ZIP includes radar.json with the same one-run repository_bundle_seed mechanism used by V17.2. On the first scan after upload, the scanner checks recent Git history and merges a larger pre-upload A/B/C corpus back when one exists.
 
-After that first scan, the marker is removed and radar.json remains the cumulative corpus plus the persistent source-cursor checkpoint.
+The new Sovereignty-Frontier page only reads radar.json. It does not delete, rewrite, reclassify or persist its own ranking into the corpus.
+
+After the first scan, the seed marker is removed and radar.json remains the cumulative corpus plus the persistent source-cursor checkpoint.

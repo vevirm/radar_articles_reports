@@ -1,4 +1,4 @@
-V17.2 COMPLETE REPOSITORY — SIMPLE UPLOAD
+V17.3 COMPLETE REPOSITORY — SIMPLE UPLOAD
 
 1. Extract the ZIP.
 2. Upload/replace ALL files and folders in the GitHub repository root.
@@ -10,14 +10,17 @@ You do not need to press "Run workflow" unless GitHub Actions does not start aft
 
 Afterwards the workflow runs automatically every 12 hours.
 
-What is different in V17.2:
-- it remembers independent cursors for OpenAlex, Crossref and institutions;
-- it does not restart from the first scholarly/report query every run;
-- it scans only a bounded rotating batch from each large source family;
-- known DOI/title/link identities are discarded early;
-- all previously accepted site items remain cumulative;
-- the four-month backfill is completed progressively across several safe runs;
-- weak signals still run every 12 hours;
-- the Insights page is included and reads the same cumulative radar.json.
+What V17.3 adds:
+- a new /frontier/ Insight Summary page for Sovereignty-Frontier Signals;
+- the 4 × 4 independence–competitiveness matrix;
+- strict "pay attention" triage above the broad cumulative radar;
+- no external AI API and no new database.
+
+What remains protected:
+- the V17.2 persistent OpenAlex/Crossref/institution cursors;
+- the cumulative A/B/C corpus;
+- whole-repository recovery from Git history;
+- the 30-minute GitHub job and 20-minute scanner budget;
+- the existing main Radar and Radar Insights pages.
 
 Do not delete radar.json before upload. The bundled file has a one-run seed marker that can recover a larger pre-upload corpus from Git history on the first scan.

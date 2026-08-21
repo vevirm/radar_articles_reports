@@ -1,6 +1,6 @@
-# R&I × Geopolitics Radar — V17.2 incremental scanner
+# R&I × Geopolitics Radar — V17.3 Sovereignty-Frontier summary
 
-V17.2 keeps the V17 evidence logic and Insights page, but changes **how discovery work is scheduled** so a 30-minute GitHub Actions job cannot repeatedly spend its whole runtime on the same reports or the same first scholarly queries.
+V17.3 keeps the proven V17.2 cumulative/incremental scanner unchanged and adds a third analytical page: **Insight Summary / Sovereignty-Frontier Signals**. The new page reads the same cumulative `radar.json`; it never writes to, prunes, or reclassifies the underlying corpus.
 
 ## What is unchanged
 
@@ -11,6 +11,23 @@ The evidence/admission logic remains V17:
 - **Strand C:** curated factual weak signals linked to the evidence base or an approved strategic watch theme.
 - The site is **cumulative**. Previously accepted A/B/C items remain visible. New scans append genuinely new identities; they do not replace the corpus.
 - `/briefing/` remains the balanced **Insights** view with Research publications, EU & institutional reports, and Weak signals.
+
+
+## New in V17.3: Sovereignty-Frontier Insight Summary
+
+`/frontier/` is a decision-attention layer above the Radar and Radar Insights pages. It asks three questions of an observed change:
+
+1. Could the EU sustain the activity without reliance on a non-EU actor?
+2. If it did so, would it remain competitive against the best available alternative?
+3. What could cause either condition to fail?
+
+Qualifying developments are placed into a 4 × 4 matrix. Rows identify where the signal bites — **Knowledge & people**, **Infrastructure & inputs**, **Conversion**, or **Rules & institutions**. Columns identify the effect on the independence–competitiveness frontier — **A Opening**, **B Costly autonomy**, **C Productive dependence**, or **D Double loss**.
+
+The page then ranks the strongest-looking candidates using four transparent triage criteria: system reach, reversibility, an attention-gap proxy, and an identifiable EU/member-state action lever. It uses deterministic JavaScript and requires no external AI API. Strand C is the primary pool; A/B evidence can also surface when it contains an explicit observed change or decision.
+
+The classifier is intentionally stricter than the broad radar. A development can remain safely in the cumulative Radar without being promoted to the Sovereignty-Frontier summary.
+
+The full analytical definition and cell taxonomy are documented in `frontier_criteria.md`.
 
 ## The V17.2 fix: persistent source cursors
 

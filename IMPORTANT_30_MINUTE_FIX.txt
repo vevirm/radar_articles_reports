@@ -1,12 +1,10 @@
-V17.2 — 30-MINUTE + REPEAT-WORK FIX
+V17.3 — V17.2 INCREMENTAL SCANNER RETAINED
 
-This is not the old 55-minute design and not the V17.1 "do the whole backfill in one run" design.
+V17.3 adds the Sovereignty-Frontier Insight Summary but deliberately does NOT replace the scanner that is already working.
 
-The GitHub job remains 30 minutes and the scanner remains capped at 20 minutes, but V17.2 additionally stores persistent source-family cursors in radar.json.
+The GitHub job remains 30 minutes and the scanner remains capped at 20 minutes. Persistent source-family cursors remain stored in radar.json, so scheduled runs continue instead of restarting the same large source universe.
 
-It therefore does not spend every scheduled run restarting the same large report/journal search universe.
-
-Key values:
+Key values remain:
 - .github/workflows/radar-scan.yml: timeout-minutes: 30
 - radar_config.json: scan_budget_seconds: 1200
 - radar_config.json: network_reserve_seconds: 150
@@ -17,4 +15,4 @@ Key values:
 
 The upload commit to main starts the first scan immediately. Normal schedule: every 12 hours.
 
-Version: 17.2
+Version: 17.3
