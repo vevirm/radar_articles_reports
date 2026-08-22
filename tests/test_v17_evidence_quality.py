@@ -1,5 +1,6 @@
 import json
 import unittest
+from unittest import mock
 from pathlib import Path
 
 import scripts.scan_radar as sr
@@ -59,6 +60,78 @@ class V17EvidenceQualityTests(unittest.TestCase):
         self.assertEqual(len(cleaned['strand_a']), 1)
         self.assertEqual(cleaned['strand_a'][0]['title'], 'Nuclear technology dependencies and European strategic autonomy')
         self.assertEqual(len(cleaned['strand_c']), 1)
+
+
+    def test_inherited_corpus_audit_runs_once_independent_of_quality_profile(self):
+        self.assertTrue(sr.needs_inherited_corpus_audit({}))
+        self.assertTrue(sr.needs_inherited_corpus_audit({'quality_profile_version': sr.QUALITY_PROFILE_VERSION}))
+        self.assertFalse(sr.needs_inherited_corpus_audit({'inherited_corpus_audit_complete': True}))
+
+    def test_first_run_audit_refreshes_thin_saved_evidence_before_deleting(self):
+        previous = {
+            'strand_a': [
+                {
+                    'title': 'European research autonomy through international partnerships',
+                    'summary': 'A short legacy summary that does not contain enough gate evidence.',
+                    'link': 'https://example.test/relevant',
+                    'type': 'institutional report', 'source_tier': 'Tier 1'
+                },
+                {
+                    'title': 'Local bicycle parking regulation',
+                    'summary': 'Municipal rules for bicycle parking and administrative fines.',
+                    'link': 'https://example.test/irrelevant',
+                    'type': 'institutional report', 'source_tier': 'Tier 1'
+                },
+            ],
+            'strand_b': [],
+            'strand_c': [{'headline': 'Keep historical signal', 'source': 'Reuters'}],
+        }
+
+        def refresh(item):
+            if 'research autonomy' in item['title'].lower():
+                return (
+                    item['title'],
+                    'European research institutions depend on non-EU technology and scientific talent. '
+                    'The EU examines international research partnerships, researcher mobility, strategic autonomy '
+                    'and economic security in science and innovation.',
+                    ''
+                )
+            return (item['title'], 'Municipal bicycle parking enforcement and administrative fines.', '')
+
+        with mock.patch.object(sr, '_audit_refresh_document', side_effect=refresh):
+            cleaned, stats = sr.audit_inherited_ab(previous, [])
+
+        self.assertEqual(len(cleaned['strand_a']), 1)
+        self.assertIn('research autonomy', cleaned['strand_a'][0]['title'].lower())
+        self.assertEqual(stats['refreshed_pass'], 1)
+        self.assertEqual(stats['strand_a_removed'], 1)
+        self.assertEqual(len(cleaned['strand_c']), 1)
+
+    def test_matcher_preserves_ampersands_and_requires_token_boundaries(self):
+        self.assertEqual(sr.clean_text('R&D'), 'R&D')
+        self.assertEqual(sr.distinct_matches('regarding electric bicycles', ['r&d']), [])
+        self.assertEqual(sr.distinct_matches('international security cooperation', ['national security']), [])
+
+    def test_e_bike_regulation_false_positive_is_rejected(self):
+        title = 'Regulatory Reconstruction and Law Enforcement Effectiveness Regarding Electric Bicycle Use by Minors'
+        abstract = ('This article proposes regulatory reconstruction through technical standardization, strengthening '
+                    'administrative sanctions, and vicarious criminal liability for negligent parents. Using a legal '
+                    'research method, it compares micro-mobility regulations with standards in the European Union, '
+                    'Queensland, and Mongolia.')
+        evidence = sr.gate_scope(title, abstract, '', 2, 'scholarly')
+        self.assertFalse(evidence['a_pass'])
+        self.assertFalse(evidence['ri_evidence'])
+        self.assertFalse(evidence['geo_evidence'])
+
+    def test_research_brain_drain_is_valid_ri_geoeconomic_evidence(self):
+        title = 'Choose Europe: Research Careers, Brain Drain and Policy Lessons from the CESAER Survey'
+        abstract = ('Europe faces a persistent research brain drain, undermining its ability to compete globally in '
+                    'science and technology. The study examines research careers and researcher mobility across '
+                    'European universities.')
+        evidence = sr.gate_scope(title, abstract, '', 2, 'scholarly')
+        self.assertTrue(evidence['a_pass'])
+        self.assertIn('research-talent flow / brain drain', evidence['ri_evidence'])
+        self.assertIn('research-talent allocation / brain drain', evidence['geo_evidence'])
 
 
 if __name__ == '__main__':

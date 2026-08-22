@@ -23,6 +23,7 @@ from __future__ import annotations
 import concurrent.futures as cf
 import datetime as dt
 import gzip
+import html
 import io
 import json
 import re
@@ -54,6 +55,9 @@ with CONFIG_PATH.open("r", encoding="utf-8") as f:
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
 QUALITY_PROFILE_VERSION = str(CONFIG.get("quality_profile_version", "v17-eu-ri-geo-substance"))
+INHERITED_CORPUS_AUDIT_ENABLED = bool(CONFIG.get("inherited_corpus_audit_enabled", True))
+INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh_failures", True))
+INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
@@ -277,7 +281,12 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
     counts, qualifying, error = frontier_matrix_coverage(previous)
     start = int(state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
     cyclic_rank = {FRONTIER_CELL_ORDER[(start + i) % len(FRONTIER_CELL_ORDER)]: i for i in range(len(FRONTIER_CELL_ORDER))}
-    ordered = sorted(FRONTIER_CELL_ORDER, key=lambda key: (counts.get(key, 0), cyclic_rank[key]))
+    priority_cells = list(CONFIG.get("frontier_gap_priority_cells", []))
+    priority_rank = {key: i for i, key in enumerate(priority_cells)}
+    ordered = sorted(
+        FRONTIER_CELL_ORDER,
+        key=lambda key: (counts.get(key, 0), priority_rank.get(key, len(priority_cells)), cyclic_rank[key]),
+    )
     limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_queries_per_scan", 6) or 0)))
     targets = ordered[:limit]
     if targets:
@@ -285,12 +294,20 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         state["frontier_gap_cursor"] = (last_index + 1) % len(FRONTIER_CELL_ORDER)
     profiles = CONFIG.get("frontier_gap_search_queries", {})
     queries = [clean_text(profiles.get(key, "")) for key in targets if isinstance(profiles, dict) and clean_text(profiles.get(key, ""))]
+    scholarly_profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
+    scholarly_limit = max(0, int(CONFIG.get("frontier_gap_scholarly_queries_per_scan", 4) or 0))
+    scholarly_queries = [
+        clean_text(scholarly_profiles.get(key, ""))
+        for key in targets
+        if isinstance(scholarly_profiles, dict) and clean_text(scholarly_profiles.get(key, ""))
+    ][:scholarly_limit]
     return {
         "counts": counts,
         "qualifying": qualifying,
         "empty_cells": sum(1 for key in FRONTIER_CELL_ORDER if counts.get(key, 0) == 0),
         "targets": targets,
         "queries": queries,
+        "scholarly_queries": scholarly_queries,
         "classifier_error": error,
     }
 
@@ -373,6 +390,35 @@ MEMBER_STATE_SCOPE = [
     "ireland", "irish", "italy", "italian", "latvia", "latvian", "lithuania", "lithuanian",
     "luxembourg", "malta", "maltese", "netherlands", "dutch", "poland", "polish", "portugal", "portuguese",
     "romania", "romanian", "slovakia", "slovak", "slovenia", "slovenian", "spain", "spanish", "sweden", "swedish",
+]
+
+# Research-talent allocation is itself part of the R&I/geoeconomic system.  It is
+# handled explicitly rather than by treating generic words such as ``migration`` or
+# ``talent`` as geopolitical evidence.  This captures brain drain/gain into, out of
+# and within Europe while excluding ordinary labour migration and student mobility.
+RESEARCH_TALENT_ACTORS = [
+    "researcher", "researchers", "scientist", "scientists", "academic", "academics",
+    "research workforce", "scientific workforce", "research talent", "scientific talent",
+    "academic careers", "research careers", "postdoctoral researcher", "postdoctoral researchers",
+    "postdoc", "postdocs", "doctoral researcher", "doctoral researchers", "research institution",
+    "research institutions", "university researchers", "university research staff",
+]
+RESEARCH_TALENT_FLOW_EXPLICIT = [
+    "research brain drain", "academic brain drain", "scientific brain drain", "brain drain",
+    "research brain gain", "academic brain gain", "scientific brain gain", "brain gain",
+    "researcher mobility", "researchers mobility", "scientist mobility", "scientific mobility",
+    "academic mobility", "research talent mobility", "scientific talent mobility",
+    "researcher migration", "scientist migration", "academic migration",
+    "research talent outflow", "scientific talent outflow", "researcher outflow",
+    "research talent inflow", "scientific talent inflow", "researcher inflow",
+]
+RESEARCH_TALENT_FLOW_ACTIONS = [
+    "attract research talent", "attract researchers", "attract scientists", "retain research talent",
+    "retain researchers", "retain scientists", "researcher retention", "scientist retention",
+    "recruit researchers", "recruit scientists", "return mobility", "returning researchers",
+    "researchers leave", "researchers leaving", "scientists leave", "scientists leaving",
+    "researchers relocate", "scientists relocate", "move abroad", "moving abroad",
+    "work abroad", "emigrate", "emigration", "immigrate", "immigration",
 ]
 IMPLICATION_WORDS = [
     "implication", "consequence", "for europe", "for the eu", "europe should", "eu should",
@@ -483,7 +529,15 @@ ENTITY_TERMS = [
 def clean_text(value: Any) -> str:
     if value is None:
         return ""
-    text = BeautifulSoup(str(value), "html.parser").get_text(" ", strip=True)
+    raw = str(value)
+    # BeautifulSoup treats some bare ampersand sequences as entities (for example
+    # ``R&D`` can collapse to ``RD``), which then creates dangerous substring
+    # matches.  Only invoke the HTML parser when the value actually looks like
+    # markup; otherwise preserve punctuation and decode normal HTML entities.
+    if re.search(r"<[A-Za-z!/][^>]*>", raw):
+        text = BeautifulSoup(raw, "html.parser").get_text(" ", strip=True)
+    else:
+        text = html.unescape(raw)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -526,16 +580,26 @@ def split_sentences(text: str, max_chars: int = 60000) -> list[str]:
 
 
 def distinct_matches(text: str, phrases: Iterable[str]) -> list[str]:
-    low = f" {normalized(text)} "
+    """Return phrase hits while protecting short/ambiguous terms from substring noise.
+
+    The radar vocabulary intentionally relies on some lexical-family matching
+    (``technology``/``technologies``, ``research``/``researchers``).  Keep that
+    high-recall behaviour for substantive phrases, but require token boundaries for
+    short abbreviations and known nested phrases.  This prevents ``R&D`` from
+    collapsing into an ``rd`` hit inside *regarding* and prevents ``national
+    security`` from matching *international security*.
+    """
+    low = normalized(text)
     found = []
+    boundary_only = {"national security"}
     for phrase in phrases:
         p = normalized(phrase)
         if not p:
             continue
-        if p == "eu":
-            ok = bool(re.search(r"\beu\b", low))
-        elif p.endswith("it") and p in {"geopolit"}:
+        if p in {"geopolit"}:
             ok = p in low
+        elif len(p) <= 4 or "&" in p or p in boundary_only:
+            ok = bool(re.search(r"(?<![a-z0-9])" + re.escape(p) + r"(?![a-z0-9])", low))
         else:
             ok = p in low
         if ok and phrase not in found:
@@ -647,6 +711,46 @@ def china_geo_signal(text: str) -> bool:
     return any(x in low for x in CHINA_GEO_CONTEXT)
 
 
+def research_talent_flow_signal(text: str) -> bool:
+    """Detect R&I talent flows with enough specificity to count as geoeconomic evidence."""
+    low = normalized(text)
+    explicit = distinct_matches(low, RESEARCH_TALENT_FLOW_EXPLICIT)
+    actors = distinct_matches(low, RESEARCH_TALENT_ACTORS)
+    actions = distinct_matches(low, RESEARCH_TALENT_FLOW_ACTIONS)
+    if explicit:
+        # Generic ``brain drain`` only qualifies when the document is clearly about
+        # the research/academic workforce rather than health, sport or labour generally.
+        generic_brain = any(x in explicit for x in ("brain drain", "brain gain"))
+        specific_brain = any("research" in x or "academic" in x or "scientific" in x for x in explicit)
+        if generic_brain and not specific_brain and not actors:
+            return False
+        return True
+    if not (actors and actions):
+        return False
+    # Attraction/retention language needs a cross-border or European allocation cue.
+    return bool(
+        contains_any(low, ["cross-border", "international", "abroad", "foreign", "overseas", "europe", "european union"])
+        or has_eu_word(low)
+        or bounded_matches(low, MEMBER_STATE_SCOPE)
+    )
+
+
+def geopolitical_matches(text: str) -> list[str]:
+    """Return geopolitical/economic-security hits with ambiguous legal terms filtered."""
+    matches = distinct_matches(text, GEO_STRONG)
+    low = normalized(text)
+    if "sanctions" in matches:
+        local_legal = bool(re.search(r"\b(administrative|disciplinary|criminal|civil|traffic|parental|regulatory) sanctions\b", low))
+        strategic_sanctions = bool(re.search(
+            r"\b(economic|trade|financial|international|technology|sectoral|secondary) sanctions\b|"
+            r"\bsanctions (?:against|on|regime|policy|package)\b|\brestrictive measures\b",
+            low,
+        ))
+        if local_legal and not strategic_sanctions:
+            matches = [m for m in matches if m != "sanctions"]
+    return matches
+
+
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = "general") -> dict[str, Any]:
     """Return balanced strand evidence.
 
@@ -666,12 +770,22 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
 
     ri_ta = distinct_matches(ta, RI_STRONG)
     ri_full = distinct_matches(full, RI_STRONG)
+    talent_ta = research_talent_flow_signal(ta)
+    talent_full = research_talent_flow_signal(full)
+    if talent_ta and "research-talent flow / brain drain" not in ri_ta:
+        ri_ta.append("research-talent flow / brain drain")
+    if talent_full and "research-talent flow / brain drain" not in ri_full:
+        ri_full.append("research-talent flow / brain drain")
     ri_generic_ta = distinct_matches(ta, RI_GENERIC)
     policy_ta = distinct_matches(ta, POLICY_CONTEXT)
     policy_full = distinct_matches(full, POLICY_CONTEXT)
 
-    geo_ta = distinct_matches(ta, GEO_STRONG)
-    geo_full = distinct_matches(full, GEO_STRONG)
+    geo_ta = geopolitical_matches(ta)
+    geo_full = geopolitical_matches(full)
+    if talent_ta and "research-talent allocation / brain drain" not in geo_ta:
+        geo_ta.append("research-talent allocation / brain drain")
+    if talent_full and "research-talent allocation / brain drain" not in geo_full:
+        geo_full.append("research-talent allocation / brain drain")
     if china_geo_signal(ta) and "China + security/strategic context" not in geo_ta:
         geo_ta.append("China + security/strategic context")
     if china_geo_signal(full) and "China + security/strategic context" not in geo_full:
@@ -703,7 +817,9 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
             generic_here = distinct_matches(snt, RI_GENERIC)
             policy_here = distinct_matches(snt, POLICY_CONTEXT)
             ri_here = ["generic R&I + policy context"] if generic_here and policy_here else []
-        geo_here = distinct_matches(snt, GEO_STRONG)
+        geo_here = geopolitical_matches(snt)
+        if research_talent_flow_signal(snt) and "research-talent allocation / brain drain" not in geo_here:
+            geo_here.append("research-talent allocation / brain drain")
         if not geo_here and china_geo_signal(snt):
             geo_here = ["China + security/strategic context"]
         if ri_here and geo_here:
@@ -1626,9 +1742,13 @@ def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str) -
 def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     eu = (evidence.get("eu_relevance") or "unknown").capitalize()
     if strand == "A":
-        return f"{eu} EU relevance; admitted after substantive R&I/related-system and geopolitics/economic-security gates passed with a supported document-level connection."
+        ri = ", ".join(evidence.get("ri_evidence", [])[:2]) or "substantive R&I evidence"
+        geo = ", ".join(evidence.get("geo_evidence", [])[:2]) or "substantive strategic evidence"
+        bridge = evidence.get("bridge_mode") or "supported"
+        return f"{eu} EU relevance; R&I evidence: {ri}; strategic evidence: {geo}; bridge: {bridge}."
     if strand == "B":
-        return f"{eu} EU relevance; admitted because foresight methodology is substantive and relevant to R&I/S&T or strategic-policy practice, not merely a trend/scenario output."
+        method = ", ".join(evidence.get("method_evidence", [])[:2]) or "substantive foresight method"
+        return f"{eu} EU relevance; foresight methodology is substantive ({method}) and independently passes the R&I/geopolitics gate."
     return f"{eu} EU relevance; independently passes both Strand A and Strand B admission gates."
 
 
@@ -1991,12 +2111,29 @@ def _saved_tier(item: dict[str, Any]) -> int:
     return 3
 
 
-def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
-    """One-time V17 quality migration for the cumulative A/B corpus.
+def _saved_item_passes(item: dict[str, Any], pass_key: str, *, title: str | None = None,
+                       abstract: str | None = None, body: str = "") -> tuple[bool, dict[str, Any]]:
+    """Apply the current admission rules to a saved A/B record.
 
-    The radar remains cumulative for valid material, but items admitted by older, looser
-    rules are removed when their stored title+summary no longer establishes the required
-    EU + R&I + geopolitical substance.  Strand C is untouched.
+    This is intentionally the same substantive gate used for newly discovered material.
+    The first-run inherited-corpus audit can supplement thin saved summaries with freshly
+    retrieved document text, but later scans never re-audit the accumulated corpus.
+    """
+    t = clean_text(item.get("title", "")) if title is None else clean_text(title)
+    a = clean_text(item.get("summary", "")) if abstract is None else clean_text(abstract)
+    link = clean_text(item.get("link", ""))
+    if not t or document_exclusion_reason(t, a, link):
+        return False, {}
+    ev = gate_scope(t, a, clean_text(body), _saved_tier(item), source_kind=_saved_source_kind(item))
+    return bool(ev.get(pass_key)), ev
+
+
+def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
+    """Offline form of the one-time inherited A/B audit.
+
+    It uses only the evidence already saved in radar.json.  ``audit_inherited_ab`` wraps
+    this logic for the real first scanner run and may refresh failed records from their
+    DOI/URL before deciding to remove them. Strand C is intentionally untouched.
     """
     out = dict(previous) if isinstance(previous, dict) else {}
     removed = {"strand_a": 0, "strand_b": 0}
@@ -2005,18 +2142,148 @@ def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[
         for item in out.get(strand_key, []) if isinstance(out.get(strand_key), list) else []:
             if not isinstance(item, dict):
                 continue
-            title = clean_text(item.get("title", ""))
-            summary = clean_text(item.get("summary", ""))
-            if not title:
-                removed[strand_key] += 1
-                continue
-            ev = gate_scope(title, summary, "", _saved_tier(item), source_kind=_saved_source_kind(item))
-            if ev.get(pass_key):
+            passed, _ = _saved_item_passes(item, pass_key)
+            if passed:
                 kept.append(item)
             else:
                 removed[strand_key] += 1
         out[strand_key] = kept
     return out, removed
+
+
+def _audit_refresh_document(item: dict[str, Any]) -> tuple[str, str, str] | None:
+    """Best-effort evidence refresh for one inherited record.
+
+    Returns ``(title, abstract/description, body)``. This is used only during the first
+    inherited-corpus audit; it is never part of the normal recurring scan path.
+    """
+    link = clean_text(item.get("link", ""))
+    if not link or deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        return None
+    timeout = int(CONFIG.get("inherited_corpus_audit_timeout_seconds", 8))
+
+    # Scholarly DOI records often expose a better abstract through Crossref than through
+    # the publisher landing page, so try that first.
+    m = re.search(r"10\.\d{4,9}/[^\s?#]+", normalized(link))
+    if m:
+        doi = m.group(0).rstrip(".,)")
+        r = get(f"https://api.crossref.org/works/{quote_plus(doi)}", timeout=timeout)
+        if r:
+            try:
+                msg = (r.json() or {}).get("message") or {}
+                title = clean_text((msg.get("title") or [item.get("title", "")])[0])
+                abstract = clean_text(msg.get("abstract"))
+                if title and abstract:
+                    return title, abstract, ""
+            except Exception:
+                pass
+
+    # Then read the linked page/PDF itself. The audit only needs enough document-level
+    # text to run the admission gate; it does not rebuild the whole record.
+    if link.lower().split("?", 1)[0].endswith(".pdf"):
+        body, words = pdf_text(link)
+        if words:
+            return clean_text(item.get("title", "")), "", body
+        return None
+
+    r = get(link, timeout=timeout)
+    if not r:
+        return None
+    ctype = normalized(r.headers.get("content-type", ""))
+    if "pdf" in ctype:
+        body, words = pdf_text(r.url or link)
+        if words:
+            return clean_text(item.get("title", "")), "", body
+        return None
+    if "html" not in ctype and "xml" not in ctype:
+        return None
+    try:
+        soup = BeautifulSoup(r.text, "html.parser")
+        title = (meta_content(soup, ["og:title", "twitter:title", "headline"]) or
+                 clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else "") or
+                 clean_text(item.get("title", "")))
+        desc = meta_content(soup, ["description", "og:description", "twitter:description"])
+        for bad in soup(["script", "style", "nav", "header", "footer", "aside", "form", "noscript"]):
+            bad.decompose()
+        container = soup.find("article") or soup.find("main") or soup.body
+        body = clean_text(container.get_text(" ", strip=True) if container else "")
+        return title, desc, body
+    except Exception:
+        return None
+
+
+def audit_inherited_ab(previous: dict[str, Any], warnings: list[str] | None = None) -> tuple[dict[str, Any], dict[str, int]]:
+    """Audit the inherited A/B corpus exactly once, before the first V17.5 scan.
+
+    Saved evidence that already passes is retained immediately. A saved record that fails
+    gets one best-effort document/abstract refresh so thin historical summaries do not
+    create needless false negatives. If refresh is unavailable, fail-closed behavior is
+    configurable; the default is strict because this migration exists to remove inherited
+    false positives. Strand C is preserved as historical weak-signal evidence.
+    """
+    out = dict(previous) if isinstance(previous, dict) else {}
+    stats = {
+        "strand_a_removed": 0, "strand_b_removed": 0,
+        "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
+    }
+    jobs: list[tuple[str, str, dict[str, Any]]] = []
+    keepers: dict[str, list[dict[str, Any]]] = {"strand_a": [], "strand_b": []}
+
+    for strand_key, pass_key in (("strand_a", "a_pass"), ("strand_b", "b_pass")):
+        for item in out.get(strand_key, []) if isinstance(out.get(strand_key), list) else []:
+            if not isinstance(item, dict):
+                continue
+            passed, _ = _saved_item_passes(item, pass_key)
+            if passed:
+                keepers[strand_key].append(item)
+                stats["stored_pass"] += 1
+            else:
+                jobs.append((strand_key, pass_key, item))
+
+    refresh_results: dict[int, tuple[str, str, str] | None] = {}
+    if INHERITED_CORPUS_AUDIT_REFRESH and jobs:
+        workers = max(1, int(CONFIG.get("inherited_corpus_audit_workers", 8)))
+        with cf.ThreadPoolExecutor(max_workers=workers) as ex:
+            futs = {ex.submit(_audit_refresh_document, item): i for i, (_, _, item) in enumerate(jobs)}
+            for fut in cf.as_completed(futs):
+                i = futs[fut]
+                try:
+                    refresh_results[i] = fut.result()
+                except Exception:
+                    refresh_results[i] = None
+
+    for i, (strand_key, pass_key, item) in enumerate(jobs):
+        refreshed = refresh_results.get(i)
+        if refreshed:
+            title, abstract, body = refreshed
+            passed, ev = _saved_item_passes(item, pass_key, title=title, abstract=abstract, body=body)
+            if passed:
+                saved = dict(item)
+                # Keep the original display summary, but refresh the explanation so the
+                # retained legacy item records why it survives the new gate.
+                strand = "A" if strand_key == "strand_a" else "B"
+                saved["eu_relevance"] = ev.get("eu_relevance") or saved.get("eu_relevance")
+                saved["relevance_note"] = relevance_note(ev, strand)
+                keepers[strand_key].append(saved)
+                stats["refreshed_pass"] += 1
+                continue
+        else:
+            stats["refresh_unavailable"] += 1
+            if not INHERITED_CORPUS_AUDIT_FAIL_CLOSED:
+                keepers[strand_key].append(item)
+                continue
+
+        key = "strand_a_removed" if strand_key == "strand_a" else "strand_b_removed"
+        stats[key] += 1
+
+    out["strand_a"] = keepers["strand_a"]
+    out["strand_b"] = keepers["strand_b"]
+    if warnings is not None and stats["refresh_unavailable"]:
+        warnings.append(
+            f"Inherited-corpus audit could not refresh {stats['refresh_unavailable']} failed saved record(s); "
+            + ("strict audit removed them" if INHERITED_CORPUS_AUDIT_FAIL_CLOSED else "they were conservatively retained")
+        )
+    return out, stats
 
 
 def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], strand_name: str, now_iso: str) -> list[dict[str, Any]]:
@@ -2472,6 +2739,11 @@ def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
     return False
 
 
+def needs_inherited_corpus_audit(previous: dict[str, Any]) -> bool:
+    """True only until the legacy A/B corpus has completed its one-time migration."""
+    return INHERITED_CORPUS_AUDIT_ENABLED and not bool(previous.get("inherited_corpus_audit_complete"))
+
+
 def needs_signal_backfill(previous: dict[str, Any]) -> bool:
     """Run one wider weak-signal recovery window whenever Strand-C discovery changes."""
     return previous.get("signal_discovery_version") != SIGNAL_DISCOVERY_VERSION
@@ -2500,14 +2772,25 @@ def main() -> int:
     warnings: list[str] = []
     previous = load_previous()
 
-    quality_migration = previous.get("quality_profile_version") != QUALITY_PROFILE_VERSION
-    quality_removed = {"strand_a": 0, "strand_b": 0}
-    if quality_migration:
-        previous, quality_removed = revalidate_saved_ab(previous)
+    # The inherited corpus is audited once, on the first run of this scanner over a
+    # legacy radar.json. Future scans never revalidate already-retained A/B material,
+    # even if quality-profile wording changes; only newly discovered candidates face
+    # the current admission gate.
+    inherited_audit = needs_inherited_corpus_audit(previous)
+    inherited_audit_stats = {
+        "strand_a_removed": 0, "strand_b_removed": 0,
+        "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
+    }
+    if inherited_audit:
+        log_progress("First-run inherited-corpus audit: checking saved A/B material before discovery")
+        previous, inherited_audit_stats = audit_inherited_ab(previous, warnings)
+        previous["inherited_corpus_audit_complete"] = True
         log_progress(
-            "V17 quality migration: removed "
-            f"{quality_removed['strand_a']} old A and {quality_removed['strand_b']} old B item(s) "
-            "that no longer meet the EU + R&I + geopolitics substance gate"
+            "Inherited-corpus audit complete: kept "
+            f"{inherited_audit_stats['stored_pass']} on saved evidence + "
+            f"{inherited_audit_stats['refreshed_pass']} after document refresh; removed "
+            f"{inherited_audit_stats['strand_a_removed']} A and "
+            f"{inherited_audit_stats['strand_b_removed']} B item(s)"
         )
 
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
@@ -2531,12 +2814,19 @@ def main() -> int:
     backfill_from = bootstrap_floor(now.date())
 
     all_queries = list(dict.fromkeys(CONFIG.get("queries_a", []) + CONFIG.get("queries_b", [])))
-    oa_batch, state["openalex_cursor"], oa_wrapped = rotating_batch(
-        all_queries, state.get("openalex_cursor", 0), int(CONFIG.get("openalex_queries_per_scan", 40))
+    gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
+    oa_cap = int(CONFIG.get("openalex_queries_per_scan", 40))
+    cr_cap = int(CONFIG.get("crossref_broad_queries_per_scan", 35))
+    oa_base_cap = max(1, oa_cap - min(len(gap_scholarly), max(0, oa_cap - 1)))
+    cr_base_cap = max(1, cr_cap - min(len(gap_scholarly), max(0, cr_cap - 1)))
+    oa_base, state["openalex_cursor"], oa_wrapped = rotating_batch(
+        all_queries, state.get("openalex_cursor", 0), oa_base_cap
     )
-    cr_batch, state["crossref_broad_cursor"], cr_broad_wrapped = rotating_batch(
-        all_queries, state.get("crossref_broad_cursor", 0), int(CONFIG.get("crossref_broad_queries_per_scan", 35))
+    cr_base, state["crossref_broad_cursor"], cr_broad_wrapped = rotating_batch(
+        all_queries, state.get("crossref_broad_cursor", 0), cr_base_cap
     )
+    oa_batch = list(dict.fromkeys(gap_scholarly + oa_base))[:oa_cap]
+    cr_batch = list(dict.fromkeys(gap_scholarly + cr_base))[:cr_cap]
     priority_tasks_all = [
         (journal, query)
         for journal in list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
@@ -2722,6 +3012,7 @@ def main() -> int:
         "crossref_priority_tasks": len(cr_priority_batch),
         "institution_sources": len(inst_batch),
         "frontier_gap_queries": len(frontier_focus["queries"]),
+        "frontier_gap_scholarly_queries": len(frontier_focus.get("scholarly_queries", [])),
     }
     state["frontier_coverage_before_scan"] = {
         "qualifying": frontier_focus["qualifying"],
@@ -2736,7 +3027,10 @@ def main() -> int:
         "corpus_start_date": DATE_FLOOR.isoformat(),
         "source_expansion_version": expansion_marker,
         "quality_profile_version": QUALITY_PROFILE_VERSION,
-        "quality_migration_this_run": quality_migration,
+        "quality_migration_this_run": False,
+        "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
+        "inherited_corpus_audit_this_run": inherited_audit,
+        "inherited_corpus_audit_stats": inherited_audit_stats if inherited_audit else {},
         "backfill_complete": backfill_complete,
         "signal_discovery_version": signal_marker,
         "signal_backfill_complete": signal_backfill_complete,
@@ -2801,14 +3095,19 @@ def main() -> int:
             "news_sources_configured": len(CONFIG.get("news_sources", [])),
             "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
             "frontier_gap_queries_this_run": len(frontier_focus["queries"]),
+            "frontier_gap_scholarly_queries_this_run": len(frontier_focus.get("scholarly_queries", [])),
             "frontier_gap_targets_this_run": len(frontier_focus["targets"]),
             "frontier_qualifying_before_scan": frontier_focus["qualifying"],
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
             "frontier_coverage_classifier_ok": not bool(frontier_focus["classifier_error"]),
             "signal_recovery_backfill": signal_backfill,
             "signal_backfill_complete": signal_backfill_complete,
-            "quality_removed_old_a": quality_removed.get("strand_a", 0),
-            "quality_removed_old_b": quality_removed.get("strand_b", 0),
+            "quality_removed_old_a": inherited_audit_stats.get("strand_a_removed", 0) if inherited_audit else 0,
+            "quality_removed_old_b": inherited_audit_stats.get("strand_b_removed", 0) if inherited_audit else 0,
+            "inherited_corpus_audit_this_run": inherited_audit,
+            "inherited_corpus_audit_stored_pass": inherited_audit_stats.get("stored_pass", 0) if inherited_audit else 0,
+            "inherited_corpus_audit_refreshed_pass": inherited_audit_stats.get("refreshed_pass", 0) if inherited_audit else 0,
+            "inherited_corpus_audit_refresh_unavailable": inherited_audit_stats.get("refresh_unavailable", 0) if inherited_audit else 0,
             "source_warnings": len(warnings),
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,

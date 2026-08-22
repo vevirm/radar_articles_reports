@@ -1,8 +1,15 @@
-# Radar architecture — V17.4
+# Radar architecture — V17.5.1
 
 ## 1. Cumulative state
 
 `radar.json` is both the cumulative public dataset and the persistent scan checkpoint. A/B/C items are retained and deduplicated. `scan_state` stores independent source-family cursors so the next run continues instead of restarting.
+
+
+## 1A. One-time inherited-corpus migration
+
+A legacy `radar.json` without `inherited_corpus_audit_complete` is audited **once before discovery**. Saved Strand A/B evidence is checked against the current admission gate. A failing saved snippet gets one best-effort DOI/page/PDF refresh before the final keep/remove decision; Strand C is left untouched. The completed run writes `inherited_corpus_audit_complete: true`.
+
+Normal later scans never revalidate the retained historical A/B corpus. Quality-profile changes therefore do not trigger recurring mass cleanup. The strict gate applies to every newly discovered candidate, while existing retained material stays cumulative.
 
 ## 2. Discovery scheduling
 
@@ -10,14 +17,14 @@ Before discovery, the scanner asks the exact Sovereignty-Frontier classifier for
 
 The large scholarly/report universes are rotated across runs:
 
-- OpenAlex: 40 queries/run out of 145.
-- Crossref broad: 35 queries/run out of 145.
-- Crossref priority: 45 journal/query tasks/run out of 216.
+- OpenAlex: 40 queries/run out of 155, with up to four slots reserved for the currently sparse Frontier cells.
+- Crossref broad: 35 queries/run out of 155, with up to four slots reserved for the currently sparse Frontier cells.
+- Crossref priority: 45 journal/query tasks/run out of 380.
 - Institutions: 18 sources/run out of 57.
 
 A batch never wraps inside one run; the final batch of each cycle is shorter. The next cursor is saved in `radar.json`.
 
-Weak-signal discovery also receives six extra global-news searches aimed at the emptiest/sparsest Frontier cells. Tied cells rotate via `frontier_gap_cursor`. This changes search priority, not admission thresholds.
+Weak-signal discovery receives six extra global-news searches aimed at the emptiest/sparsest Frontier cells. The same gap plan now also contributes up to four targeted scholarly queries to OpenAlex and Crossref. `knowledge-D` (Brain drain) and `knowledge-C` receive persistent priority when equally sparse; remaining ties rotate via `frontier_gap_cursor`. This changes search priority, not admission thresholds.
 
 ## 3. Early known-item rejection
 

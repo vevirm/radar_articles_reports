@@ -1,19 +1,27 @@
-V17.4 COMPLETE REPOSITORY — GAP-PRIORITY + OPPORTUNITIES/RISKS EDITION
+V17.5.1 COMPLETE REPOSITORY — ONE-TIME CORPUS AUDIT + PRECISION/TALENT BALANCE
 
 This ZIP is the WHOLE repository, including:
 - the active GitHub Actions workflow;
-- the cumulative/incremental scanner and persistent source cursors;
-- the LIVE cumulative radar.json supplied for this build: 152 Strand A + 9 Strand B + 96 Strand C = 257 records;
-- main Radar site;
-- Radar Insights page;
-- Sovereignty-Frontier Insight Summary and 4x4 matrix;
-- new cumulative Greatest Opportunities & Risks page;
-- exact matrix-coverage bridge used by the scanner to target sparse cells;
+- the cumulative/incremental scanner and persistent source rotations;
+- the ORIGINAL live radar.json supplied for this build: 156 Strand A + 10 Strand B + 100 Strand C = 266 records;
+- the one-time inherited-corpus audit;
+- main Radar site, Radar Insights, Sovereignty-Frontier and Greatest Opportunities & Risks pages;
+- gap-priority discovery for weak signals and scholarly search;
 - tests.
 
-Upload ALL files/folders to the SAME repository root, including .github.
-Keep radar.json from this ZIP: it is the live accumulated corpus, not the old 8-item seed.
+FIRST RUN ONLY
+1. Load the supplied 266-record radar.json.
+2. Audit inherited Strand A/B with the new gate.
+3. For saved records that fail on their shortened summary, try one DOI/page/PDF refresh before removal.
+4. Preserve Strand C.
+5. Recompute all 16 Frontier cells on the cleaned corpus.
+6. Run the normal rotating scan, prioritising the emptiest/sparsest cells.
+7. Save inherited_corpus_audit_complete=true.
 
-The upload commit to main immediately triggers the first scan. Bot-only radar.json commits do not retrigger the workflow.
+EVERY LATER RUN
+- skips the historical audit entirely;
+- keeps the retained corpus cumulative;
+- applies the strict gate only to newly discovered material;
+- continues the persistent source rotations and sparse-cell prioritisation.
 
-The scanner also retains the older Git-history recovery safeguard for future seed-based repository upgrades.
+Upload ALL files/folders to the SAME repository root, including .github. The upload commit to main starts the first audit+scan automatically.

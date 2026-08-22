@@ -1,18 +1,16 @@
-V17.4 — V17.2 INCREMENTAL SOURCE ROTATION RETAINED
+V17.5.1 — INCREMENTAL SOURCE ROTATION + ONE-TIME MIGRATION
 
-V17.4 retains the working V17.2 incremental source rotation and adds only a bounded six-query weak-signal priority layer for sparse Frontier cells.
+The GitHub job remains 30 minutes and the scanner hard budget remains 20 minutes.
 
-The GitHub job remains 30 minutes and the scanner remains capped at 20 minutes. Persistent source-family cursors remain stored in radar.json, so scheduled runs continue instead of restarting the same large source universe.
+The first V17.5.1 run uses part of that budget to audit the inherited A/B corpus before discovery. Failed saved snippets receive a bounded best-effort DOI/page/PDF refresh using 8 workers and 8-second page/API timeouts. This audit runs once only and writes inherited_corpus_audit_complete=true.
 
-Key values remain:
-- .github/workflows/radar-scan.yml: timeout-minutes: 30
-- radar_config.json: scan_budget_seconds: 1200
-- radar_config.json: network_reserve_seconds: 150
+Normal later runs have no audit overhead and retain the existing rotation caps:
 - OpenAlex: 40 rotating queries/run
 - Crossref broad: 35 rotating queries/run
 - Crossref priority: 45 rotating tasks/run
 - institutions: 18 rotating sources/run
+- sparse Frontier scholarly queries: up to 4/run
+- sparse Frontier weak-signal queries: 6/run
 
-The upload commit to main starts the first scan immediately. Normal schedule: every 12 hours.
-
-Version: 17.4
+Normal schedule: every 12 hours.
+Version: 17.5.1

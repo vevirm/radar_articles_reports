@@ -1,30 +1,27 @@
-V17.4 COMPLETE REPOSITORY — SIMPLE UPLOAD
+V17.5.1 COMPLETE REPOSITORY — SIMPLE UPLOAD
 
 1. Extract the ZIP.
 2. Upload/replace ALL files and folders in the SAME GitHub repository root.
 3. Make sure the hidden .github folder is included.
-4. Keep radar.json from this ZIP. It contains the live 257-record accumulated corpus.
+4. Keep radar.json from this ZIP: it is the original supplied 266-record corpus (156 A + 10 B + 100 C).
 5. Commit the upload directly to main.
 
-THAT COMMIT STARTS THE FIRST SCAN AUTOMATICALLY.
-You do not need to press "Run workflow" unless GitHub Actions does not start after the commit.
+THAT COMMIT STARTS THE FIRST RUN AUTOMATICALLY.
 
-CONTENT PRESERVATION
-The bundled radar.json is the live file supplied for this build: 152 Strand A + 9 Strand B + 96 Strand C. It is not the earlier 8-item repository seed. Existing persistent source cursors are retained. The scanner also keeps the Git-history recovery safeguard for future seed-based upgrades.
+FIRST RUN
+- audits inherited A/B once;
+- refreshes failed thin records from DOI/page/PDF where possible;
+- removes records that still fail the new admission gate;
+- preserves Strand C;
+- recomputes sparse Frontier cells;
+- runs the rotating discovery scan;
+- saves inherited_corpus_audit_complete=true.
 
-V17.4 ADDS
-- matrix-gap-aware discovery: six extra global-news searches per run target the exact empty/sparsest Sovereignty-Frontier cells;
-- tied sparse cells rotate using a persistent cursor;
-- the strict Frontier classifier is unchanged, so the scan searches harder but never pads cells;
-- /priorities/ provides a very simple cumulative "Greatest Opportunities" and "Greatest Risks" page;
-- the opportunity/risk page reads radar.json only and never deletes or separately persists content;
-- the first upgraded scan receives the 30-day weak-signal recovery window because the signal discovery profile changed to V17.4 gap priority.
+LATER RUNS
+- never re-audit the retained historical corpus;
+- screen only new discoveries with the corrected gate;
+- continue persistent OpenAlex/Crossref/institution cursors;
+- keep prioritising the emptiest Frontier cells, including brain drain/talent-flow gaps;
+- run automatically every 12 hours.
 
-UNCHANGED
-- 30-minute GitHub Actions job;
-- 20-minute scanner hard budget;
-- OpenAlex/Crossref/institution rotating cursors and caps;
-- cumulative A/B/C merging;
-- Git-history recovery protection.
-
-Afterwards the workflow runs automatically every 12 hours.
+The 30-minute GitHub Actions limit and 20-minute scanner budget are unchanged.

@@ -1,35 +1,41 @@
-# R&I × Geopolitics Radar — V17.4 gap-priority + opportunities/risks
+# R&I × Geopolitics Radar — V17.5.1 precision + talent-balance
 
-V17.4 keeps the cumulative/incremental V17.2 source rotations and the strict V17.3 Sovereignty-Frontier classifier, but now uses the matrix itself to improve discovery coverage. It also adds a fourth analytical view: **Greatest Opportunities & Risks**.
+V17.5.1 keeps the cumulative/incremental source rotations and the strict Sovereignty-Frontier model, while fixing a matcher bug that could create spurious R&I/geopolitics evidence and rebalancing discovery toward under-covered research-talent flows.
+
+## What changed in V17.5.1
+
+### Admission precision
+
+- Plain text is no longer passed through an HTML parser unnecessarily, so abbreviations such as `R&D` remain `R&D` instead of collapsing to `RD`.
+- Short/ambiguous admission terms use token boundaries. This prevents `R&D` from matching the letters `rd` inside words such as *regarding*, and prevents `national security` from matching *international security*.
+- Generic legal/administrative sanctions no longer count as geopolitical sanctions without strategic context.
+- Strand-A relevance notes now expose the actual R&I evidence, strategic evidence and bridge mode instead of a generic “all gates passed” sentence.
+- The first scanner run performs a **one-time inherited-corpus audit** before discovery. Saved A/B records that pass the new gate are retained immediately; failures get one best-effort DOI/page refresh before removal. The audit then writes `inherited_corpus_audit_complete: true` and is never repeated on normal later scans. All newly discovered material always uses the strict corrected gate.
+
+
+### One-time inherited corpus audit
+
+The bundled `radar.json` is the existing corpus supplied for migration. On the **first** V17.5.1 run only, the scanner audits inherited Strand A/B records before any discovery. If the saved title/summary passes the current gate, the item is retained. If it fails, the scanner tries to refresh the DOI/landing page/PDF and re-runs the same gate on fuller evidence. Records still failing are removed. Strand C is preserved.
+
+Once complete, the scanner writes `inherited_corpus_audit_complete: true`. Subsequent scheduled runs skip this migration entirely: they keep the retained corpus, continue the persistent OpenAlex/Crossref/institution rotations, recalculate sparse Frontier cells, and screen only newly discovered material.
+
+### Research talent / brain drain
+
+Research-talent allocation is now an explicit R&I + geoeconomic evidence family. The gate recognises research/academic brain drain and gain, researcher/scientist mobility, research-talent inflow/outflow, attraction, retention and return mobility when the document is clearly about the research workforce. Generic labour migration or student mobility still does not qualify by itself.
+
+Discovery now includes dedicated scholarly queries such as European research brain drain/brain gain, academic research careers, researcher mobility, talent attraction/retention and intra-European mobility. Sparse Frontier cells also feed up to four targeted queries directly into **OpenAlex and Crossref** each scan, rather than only adding news queries. `knowledge-D` (Brain drain) and `knowledge-C` receive persistent priority when equally sparse.
+
+### Greatest Opportunities & Risks
+
+The `/priorities/` page no longer dumps every cumulative qualifying Frontier signal. It shows **six risks and six opportunities by default**, with at most two items from the same Frontier row before filling remaining slots. This keeps the page decision-oriented while preserving the full cumulative evidence in `radar.json` and the Frontier matrix.
 
 ## What remains unchanged
 
-- The Radar is cumulative: previously accepted A/B/C items remain unless an explicit quality migration rejects an old item under the established V17 substance gate.
-- OpenAlex, Crossref and institutional sources keep their persistent rotating cursors and existing per-run caps.
-- The Sovereignty-Frontier admission gate remains strict. Empty cells are never padded with weak matches.
-- `radar.json` remains the single source of truth. The Frontier and Opportunities/Risks pages are read-only.
-- This delivery embeds the live cumulative `radar.json` you supplied (257 A/B/C records) directly. The older `repository_bundle_seed` + Git-history recovery mechanism remains available in the scanner as a fallback for future seed-based upgrades, but this live file does not need that marker.
-
-## New in V17.4: matrix-gap-aware discovery
-
-Before each scan, `scripts/frontier_coverage.js` runs the exact same `frontier/frontier.js` classifier used by the browser and counts occupancy across all 16 Sovereignty-Frontier cells. The scanner then adds **six** extra curated global-news queries for the currently emptiest/sparsest cells.
-
-Cells with the same occupancy rotate using a persistent `frontier_gap_cursor`, so one stubborn gap does not monopolise every run. This is discovery prioritisation only: newly found items still have to pass the existing weak-signal admission logic and the existing Frontier classifier.
-
-The selected cells and pre-scan coverage counts are saved in scan metadata for auditability. The discovery profile version is bumped, so the first V17.4 scan receives the existing 30-day weak-signal recovery window before returning to the normal seven-day rolling window.
-
-## New in V17.4: Greatest Opportunities & Risks
-
-`/priorities/` reads the full cumulative `radar.json` and the same Frontier classifier. It presents two deliberately simple bullet lists:
-
-- **Greatest opportunities:** A / Opening signals, where autonomy and competitiveness improve together.
-- **Greatest risks:** D / Double loss first, then C / Productive dependence and B / Costly autonomy.
-
-The lists are cumulative rather than latest-only. Older qualifying items remain available and can be expanded with **Show all cumulative**. Ranking emphasises structural triage rather than dropping items because they are no longer new.
-
-## Sovereignty-Frontier Insight Summary
-
-`/frontier/` remains the 4 × 4 independence–competitiveness matrix. Rows identify where the signal bites — **Knowledge & people**, **Infrastructure & inputs**, **Conversion**, or **Rules & institutions**. Columns identify the effect — **A Opening**, **B Costly autonomy**, **C Productive dependence**, or **D Double loss**.
+- After the one-time inherited-corpus audit, the Radar is cumulative: retained historical items are not re-audited on later runs, while every new candidate must pass the current gate.
+- `radar.json` is still the single source of truth.
+- Frontier cells are never padded with fabricated or weak matches.
+- OpenAlex, Crossref and institutional sources retain persistent cursors and bounded scan budgets.
+- Weak signals remain cumulative after admission.
 
 ## The V17.2 fix: persistent source cursors
 
@@ -44,9 +50,9 @@ Every scheduled scan resumes from those saved cursors. It does **not** start aga
 
 Per run, the scanner currently processes at most:
 
-- **40 / 145** OpenAlex scholarly queries;
-- **35 / 145** Crossref broad queries;
-- **45 / 216** Crossref priority-journal tasks;
+- **40 / 155** OpenAlex scholarly queries;
+- **35 / 155** Crossref broad queries;
+- **45 / 380** Crossref priority-journal tasks;
 - **18 / 57** institutional sources.
 
 The last batch in a cycle is shorter rather than wrapping back to the beginning, so the same early queries are not repeated before the checkpoint is saved. A complete discovery cycle takes at most about **5 scheduled runs**. With the 12-hour schedule, the whole configured scholarly/report universe is revisited across roughly 2.5 days, while weak-signal discovery remains fresh every 12 hours.
@@ -87,14 +93,14 @@ Because the first three families run in parallel and reports have a separate bou
 
 The active workflow is `.github/workflows/radar-scan.yml`.
 
-- A **push to `main` immediately starts a scan**. Therefore uploading/committing this repository starts the first V17.2 scan automatically.
+- A **push to `main` immediately starts a scan**. Therefore uploading/committing this repository starts the first V17.5.1 audit+scan automatically.
 - It then runs automatically every **12 hours** at `23 */12 * * *` UTC.
 - `workflow_dispatch` remains available for a manual run.
 - Bot commits that change only `radar.json` are ignored by the push trigger, preventing an infinite scan loop.
 
 ## Safe full-repository upload
 
-This package contains the live cumulative `radar.json` supplied for this build: **152 Strand A + 9 Strand B + 96 Strand C = 257 records**. The packaged file is copied byte-for-byte from that upload, so the repository starts with the accumulated corpus already present.
+This package contains the original live cumulative `radar.json` supplied for this build: **156 Strand A + 10 Strand B + 100 Strand C = 266 records**. It intentionally starts un-audited. The first V17.5.1 run audits inherited A/B, refreshes thin failures where possible, removes records that still fail, preserves Strand C, then runs discovery and writes `inherited_corpus_audit_complete: true`.
 
 The scanner still contains the `repository_bundle_seed` + Git-history recovery code for future upgrade bundles that use a small seed, but no seed marker is required in this delivery.
 
