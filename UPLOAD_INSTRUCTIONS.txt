@@ -1,27 +1,24 @@
-V17.5.1 COMPLETE REPOSITORY — SIMPLE UPLOAD
+V17.5.3 COMPLETE REPOSITORY — SIMPLE UPLOAD
 
 1. Extract the ZIP.
 2. Upload/replace ALL files and folders in the SAME GitHub repository root.
-3. Make sure the hidden .github folder is included.
-4. Keep radar.json from this ZIP: it is the original supplied 266-record corpus (156 A + 10 B + 100 C).
-5. Commit the upload directly to main.
+3. Include the hidden .github folder.
+4. Keep radar.json from this ZIP. It is your current supplied corpus: 72 A + 5 B + 101 C.
+5. Commit directly to main.
 
-THAT COMMIT STARTS THE FIRST RUN AUTOMATICALLY.
+THAT COMMIT STARTS THE CORRECTIVE RUN AUTOMATICALLY.
 
-FIRST RUN
-- audits inherited A/B once;
-- refreshes failed thin records from DOI/page/PDF where possible;
-- removes records that still fail the new admission gate;
-- preserves Strand C;
-- recomputes sparse Frontier cells;
-- runs the rotating discovery scan;
-- saves inherited_corpus_audit_complete=true.
+FIRST V17.5.3 RUN
+- does not repeat the inherited migration;
+- audits current A/B once under the corrected precision gate;
+- refreshes thin A/B failures before final removal;
+- audits current C once under the corrected EU-first weak-signal gate;
+- recomputes sparse Frontier cells after cleanup;
+- runs rotating + gap-priority discovery and a wider strict weak-signal recovery;
+- saves both corrective-complete markers.
 
 LATER RUNS
-- never re-audit the retained historical corpus;
-- screen only new discoveries with the corrected gate;
-- continue persistent OpenAlex/Crossref/institution cursors;
-- keep prioritising the emptiest Frontier cells, including brain drain/talent-flow gaps;
-- run automatically every 12 hours.
-
-The 30-minute GitHub Actions limit and 20-minute scanner budget are unchanged.
+- no historical re-audit;
+- strict screening of new discoveries only;
+- persistent rotations continue;
+- empty/sparse cells remain prioritized.

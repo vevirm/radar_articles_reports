@@ -508,6 +508,21 @@
       "name": "Hoover Institution",
       "domain": "hoover.org",
       "tier": 3
+    },
+    {
+      "name": "EURAXESS",
+      "domain": "euraxess.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "CESAER",
+      "domain": "cesaer.org",
+      "tier": 1
+    },
+    {
+      "name": "European Citizen Action Service",
+      "domain": "ecas.org",
+      "tier": 2
     }
   ],
   "crossref_institution_publishers": [
@@ -676,7 +691,7 @@
   "first_news_lookback_hours": 720,
   "discovery_overlap_days": 14,
   "bootstrap_lookback_months": 4,
-  "source_expansion_version": "v17.5-talent-balance",
+  "source_expansion_version": "v17.5.2-gap-report-recall",
   "force_backfill_on_source_expansion": true,
   "institution_pages_per_domain_bootstrap": 12,
   "sitemap_child_budget": 6,
@@ -723,7 +738,7 @@
   "crossref_public_min_interval_seconds": 0.8,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.5-balanced-frontier-gaps",
+  "signal_discovery_version": "v17.5.3-eu-first-weak-signals",
   "news_items_per_feed": 60,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -748,7 +763,7 @@
     "Europe research talent attraction retention brain gain",
     "European researcher mobility academic careers"
   ],
-  "quality_profile_version": "v17-eu-ri-geo-substance",
+  "quality_profile_version": "v17.5.2-precision-talent",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -819,7 +834,7 @@
     "knowledge-A": "(EU OR Europe OR European) (researchers OR scientists OR academics OR \"research talent\") (attract OR retain OR recruitment OR return OR \"brain gain\" OR mobility) (capacity OR competitiveness OR autonomy OR excellence)",
     "knowledge-B": "(EU OR Europe OR European) (\"research security\" OR screening OR restrictions OR de-risking) (researchers OR universities OR collaboration OR mobility) (delay OR cost OR burden OR fragmentation OR \"talent loss\")",
     "knowledge-C": "(EU OR Europe OR European) (researchers OR scientists OR academics OR \"research collaboration\") (US OR China OR American OR Chinese OR \"non-EU\" OR foreign) (mobility OR recruitment OR access OR partnership) (performance OR excellence OR capability)",
-    "knowledge-D": "(EU OR Europe OR European) (researchers OR scientists OR academics OR \"research talent\") (\"brain drain\" OR outflow OR leaving OR emigration OR retention OR shortage) (competitiveness OR capacity OR dependence OR decline)",
+    "knowledge-D": "(\"brain drain\" OR \"researcher outflow\" OR \"research talent\" OR \"researcher mobility\") (EU OR Europe OR European) (research OR science OR academic)",
     "infrastructure-A": "(EU OR Europe OR European) (build OR expand OR invest OR onshore) (compute OR cloud OR semiconductor OR chips OR reactor OR \"research infrastructure\" OR \"critical raw materials\") (autonomy OR sovereignty OR \"reduce dependence\" OR competitiveness)",
     "infrastructure-B": "(EU OR Europe OR European) (localise OR localize OR onshore OR sovereignty OR autonomy OR de-risking) (chips OR compute OR cloud OR reactor OR infrastructure OR supply chain) (cost OR delay OR expensive OR shortage OR slower)",
     "infrastructure-C": "(EU OR Europe OR European) (relies OR depends OR reliance OR access) (US cloud OR American cloud OR Nvidia OR Taiwan OR TSMC OR Chinese OR \"non-EU\" OR foreign) (compute OR chips OR reactors OR infrastructure) (scale OR performance OR capacity)",
@@ -840,12 +855,30 @@
     "conversion-D",
     "infrastructure-D"
   ],
-  "frontier_gap_scholarly_queries_per_scan": 4,
+  "frontier_gap_scholarly_queries_per_scan": 10,
   "frontier_gap_scholarly_queries": {
-    "knowledge-A": "Europe research talent attraction retention brain gain",
-    "knowledge-B": "Europe research security restrictions researcher mobility collaboration costs",
-    "knowledge-C": "Europe researcher mobility foreign expertise scientific collaboration dependence",
-    "knowledge-D": "Europe research brain drain academic talent outflow researcher losses",
+    "knowledge-A": [
+      "Europe research talent attraction retention brain gain",
+      "EU attract researchers scientists research talent"
+    ],
+    "knowledge-B": [
+      "Europe research security restrictions researcher mobility collaboration costs",
+      "EU research security talent mobility collaboration burden"
+    ],
+    "knowledge-C": [
+      "Europe researcher mobility foreign expertise scientific collaboration dependence",
+      "European research mobility international collaboration foreign talent"
+    ],
+    "knowledge-D": [
+      "Europe research brain drain researchers academic mobility",
+      "European Union research brain drain researcher mobility",
+      "Europe research talent outflow researcher retention",
+      "European Research Area brain drain researchers",
+      "Europe research brain drain academic researchers",
+      "European researcher outflow talent retention brain circulation",
+      "Choose Europe research careers brain drain",
+      "European Research Area researcher mobility brain circulation"
+    ],
     "infrastructure-A": "Europe research infrastructure strategic autonomy capacity investment",
     "infrastructure-B": "Europe technology sovereignty infrastructure costs delays competitiveness",
     "infrastructure-C": "Europe dependence foreign compute chips research infrastructure performance",
@@ -863,5 +896,70 @@
   "inherited_corpus_audit_refresh_failures": true,
   "inherited_corpus_audit_fail_closed": true,
   "inherited_corpus_audit_workers": 8,
-  "inherited_corpus_audit_timeout_seconds": 8
+  "inherited_corpus_audit_timeout_seconds": 8,
+  "frontier_gap_historical_lookback_months": 0,
+  "frontier_gap_scholarly_queries_per_target": 3,
+  "frontier_gap_institution_extra_sources_per_scan": 4,
+  "frontier_gap_institution_url_terms": {
+    "knowledge-D": [
+      "brain-drain",
+      "brain-gain",
+      "researcher-mobility",
+      "research-talent",
+      "research-careers",
+      "talent-retention",
+      "retaining-research",
+      "brain-circulation"
+    ],
+    "knowledge-C": [
+      "researcher-mobility",
+      "international-research",
+      "foreign-talent",
+      "research-collaboration"
+    ],
+    "knowledge-A": [
+      "research-talent",
+      "attract-researchers",
+      "talent-attraction",
+      "brain-gain"
+    ],
+    "knowledge-B": [
+      "research-security",
+      "mobility",
+      "collaboration",
+      "academic-freedom"
+    ]
+  },
+  "frontier_gap_institution_sources": {
+    "knowledge-D": [
+      "europarl.europa.eu",
+      "op.europa.eu",
+      "research-and-innovation.ec.europa.eu",
+      "euraxess.ec.europa.eu",
+      "cesaer.org",
+      "ecas.org",
+      "eua.eu",
+      "scienceeurope.org"
+    ],
+    "knowledge-C": [
+      "research-and-innovation.ec.europa.eu",
+      "op.europa.eu",
+      "euraxess.ec.europa.eu",
+      "eua.eu",
+      "scienceeurope.org"
+    ],
+    "knowledge-A": [
+      "research-and-innovation.ec.europa.eu",
+      "euraxess.ec.europa.eu",
+      "cesaer.org",
+      "eua.eu"
+    ],
+    "knowledge-B": [
+      "research-and-innovation.ec.europa.eu",
+      "europarl.europa.eu",
+      "scienceeurope.org",
+      "eua.eu",
+      "allea.org"
+    ]
+  }
 }

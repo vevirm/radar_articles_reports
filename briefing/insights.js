@@ -130,6 +130,21 @@
     const s=prepareSummary(x.summary||'');
     const n=norm(`${title} ${s}`);
 
+    // Explicit research-talent loss is itself the substantive Frontier finding.  Prefer
+    // the sentence that states the loss/brain-drain condition over a nearby generic
+    // investment or policy sentence; otherwise a report can be admitted correctly but
+    // appear in Knowledge/A while Knowledge/D stays falsely empty.
+    if(/brain drain|researcher outflow|research talent outflow|scientific talent outflow|talent loss/.test(n)
+       && /research|researcher|scientist|academic|science/.test(n)
+       && /europe|european union|\beu\b|member state/.test(n)){
+      const talentSentence=splitSentences(s).find(sent=>{
+        const q=norm(`${title} ${sent}`);
+        return /brain drain|researcher outflow|research talent outflow|scientific talent outflow|talent loss/.test(q)
+          && /research|researcher|scientist|academic|science/.test(q);
+      });
+      if(talentSentence) return concise(talentSentence,42);
+    }
+
     // These are general claim patterns, not title-specific overrides. They turn recurring
     // scanner text structures into the actual policy/technology signal rather than quoting prose.
     if(/non-eu technology vendors/.test(n)&&/(reactor|smr)/.test(n)&&/strategic dependenc/.test(n))

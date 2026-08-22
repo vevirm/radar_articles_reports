@@ -78,6 +78,7 @@ KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
+ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
 UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
@@ -295,12 +296,31 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
     profiles = CONFIG.get("frontier_gap_search_queries", {})
     queries = [clean_text(profiles.get(key, "")) for key in targets if isinstance(profiles, dict) and clean_text(profiles.get(key, ""))]
     scholarly_profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
-    scholarly_limit = max(0, int(CONFIG.get("frontier_gap_scholarly_queries_per_scan", 4) or 0))
-    scholarly_queries = [
-        clean_text(scholarly_profiles.get(key, ""))
-        for key in targets
-        if isinstance(scholarly_profiles, dict) and clean_text(scholarly_profiles.get(key, ""))
-    ][:scholarly_limit]
+    scholarly_limit = max(0, int(CONFIG.get("frontier_gap_scholarly_queries_per_scan", 8) or 0))
+    per_target = max(1, int(CONFIG.get("frontier_gap_scholarly_queries_per_target", 2) or 1))
+
+    # A cell can have several compact scholarly queries.  Allocate them round-robin
+    # across the selected cells so one sparse cell does not consume the complete gap
+    # budget, while still allowing the highest-priority empty cells (notably
+    # Knowledge/D brain drain) more than one retrieval formulation per scan.
+    query_lists: dict[str, list[str]] = {}
+    if isinstance(scholarly_profiles, dict):
+        for key in targets:
+            raw = scholarly_profiles.get(key, "")
+            vals = raw if isinstance(raw, list) else [raw]
+            cleaned = [clean_text(v) for v in vals if clean_text(v)]
+            if cleaned:
+                query_lists[key] = list(dict.fromkeys(cleaned))[:per_target]
+    scholarly_queries: list[str] = []
+    for round_i in range(per_target):
+        for key in targets:
+            vals = query_lists.get(key, [])
+            if round_i < len(vals):
+                scholarly_queries.append(vals[round_i])
+                if len(scholarly_queries) >= scholarly_limit:
+                    break
+        if len(scholarly_queries) >= scholarly_limit:
+            break
     return {
         "counts": counts,
         "qualifying": qualifying,
@@ -463,6 +483,9 @@ NEWS_EXCLUDE = [
     "opinion", "commentary", "editorial", "analysis:", "analysis -", "column", "viewpoint",
     "podcast", "book review", "letter to the editor", "letters to the editor", "explainer",
     "interview", "comment:", "comment -",
+    # V17.5.3: weak signals are developments, not individual career listings.
+    "job with", "job opening", "job vacancy", "vacancy", "career opportunity",
+    "doctoral researcher in", "phd position", "postdoctoral position", "postdoc position",
 ]
 NEWS_EVENT_TERMS = [
     "adopt", "approve", "launch", "announce", "suspend", "ban", "restrict", "curb", "tighten",
@@ -954,7 +977,23 @@ def themes_for(text: str) -> list[str]:
     low = f" {normalized(text)} "
     result = []
     for name, terms in THEMES.items():
-        if any(normalized(t) in low for t in terms):
+        if name == "EU–China S&T cooperation / de-risking":
+            # Plain "China" is not an EU–China R&I theme by itself. Require both an
+            # EU/European scope and R&I/S&T substance, or explicit cooperation/de-risking
+            # language. This prevents unrelated China stories from being anchored to the
+            # EU–China watch theme.
+            china = contains_any(low, ["china", "chinese"])
+            eu = contains_any(low, EU_DIRECT + EU_GENERIC + MEMBER_STATE_SCOPE)
+            ri = contains_any(low, RI_STRONG + RI_GENERIC)
+            explicit = contains_any(low, [
+                "eu-china", "eu china", "europe-china", "europe china",
+                "de-risk", "derisk", "science cooperation", "research cooperation",
+                "science and technology cooperation",
+            ])
+            if explicit or (china and eu and ri):
+                result.append(name)
+            continue
+        if distinct_matches(low, terms):
             result.append(name)
     return result
 
@@ -1061,11 +1100,12 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
     return False, 9, 9.0, source_name or "Unknown source", ""
 
 
-def candidate_from_openalex(work: dict[str, Any]) -> dict[str, Any] | None:
+def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None) -> dict[str, Any] | None:
     title = clean_text(work.get("display_name"))
     abstract = openalex_abstract(work.get("abstract_inverted_index"))
     date = parse_date(work.get("publication_date"))
-    if not title or not date or date < DATE_FLOOR:
+    effective_floor = date_floor or DATE_FLOOR
+    if not title or not date or date < effective_floor:
         return None
     if document_exclusion_reason(title, abstract):
         return None
@@ -1094,7 +1134,13 @@ def candidate_from_openalex(work: dict[str, Any]) -> dict[str, Any] | None:
     )
 
 
-def collect_openalex(from_date: dt.date, warnings: list[str], queries_override: list[str] | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
+def collect_openalex(
+    from_date: dt.date,
+    warnings: list[str],
+    queries_override: list[str] | None = None,
+    stage_deadline: float | None = None,
+    query_dates_override: dict[str, dt.date] | None = None,
+) -> list[dict[str, Any]]:
     """Zero-config OpenAlex discovery.
 
     Uses the public endpoint anonymously, as earlier radar versions did.  There is
@@ -1125,9 +1171,10 @@ def collect_openalex(from_date: dt.date, warnings: list[str], queries_override: 
             return [], "public endpoint unavailable"
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
+        query_from = (query_dates_override or {}).get(q, from_date)
         params = {
             "search": q,
-            "filter": f"from_publication_date:{from_date.isoformat()}",
+            "filter": f"from_publication_date:{query_from.isoformat()}",
             "sort": "publication_date:desc",
             "per-page": str(per_page),
         }
@@ -1146,7 +1193,7 @@ def collect_openalex(from_date: dt.date, warnings: list[str], queries_override: 
                             doi0 = clean_text(work.get("doi"))
                             if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
                                 continue
-                        item = candidate_from_openalex(work)
+                        item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from))
                         if item:
                             out.append(item)
                     return out, None
@@ -1228,11 +1275,12 @@ def quality_from_crossref(item: dict[str, Any]) -> tuple[bool, int, float, str, 
     return False, 9, 9.0, journal or publisher or "Unknown source", "", typ or "publication"
 
 
-def candidate_from_crossref(item: dict[str, Any]) -> dict[str, Any] | None:
+def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None) -> dict[str, Any] | None:
     title = clean_text((item.get("title") or [""])[0])
     abstract = clean_text(item.get("abstract"))
     date = crossref_date(item)
-    if not title or not date or date < DATE_FLOOR:
+    effective_floor = date_floor or DATE_FLOOR
+    if not title or not date or date < effective_floor:
         return None
     if document_exclusion_reason(title, abstract):
         return None
@@ -1258,7 +1306,14 @@ def candidate_from_crossref(item: dict[str, Any]) -> dict[str, Any] | None:
     )
 
 
-def collect_crossref(from_date: dt.date, warnings: list[str], queries_override: list[str] | None = None, priority_tasks_override: list[tuple[str, str]] | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
+def collect_crossref(
+    from_date: dt.date,
+    warnings: list[str],
+    queries_override: list[str] | None = None,
+    priority_tasks_override: list[tuple[str, str]] | None = None,
+    stage_deadline: float | None = None,
+    query_dates_override: dict[str, dt.date] | None = None,
+) -> list[dict[str, Any]]:
     """Zero-config Crossref discovery using only the anonymous public pool.
 
     V17 gives scholarly literature a dedicated priority sweep. Before the broad
@@ -1289,9 +1344,10 @@ def collect_crossref(from_date: dt.date, warnings: list[str], queries_override: 
     def fetch_query(q: str, journal: str = "") -> tuple[list[dict[str, Any]], str | None]:
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
+        query_from = (query_dates_override or {}).get(q, from_date) if not journal else from_date
         params = {
             "query.bibliographic": q,
-            "filter": f"from-pub-date:{from_date.isoformat()}",
+            "filter": f"from-pub-date:{query_from.isoformat()}",
             "rows": priority_rows if journal else rows,
             "sort": "published",
             "order": "desc",
@@ -1313,7 +1369,7 @@ def collect_crossref(from_date: dt.date, warnings: list[str], queries_override: 
                             doi0 = clean_text(item.get("DOI"))
                             if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
                                 continue
-                        c = candidate_from_crossref(item)
+                        c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
                         if c:
                             out.append(c)
                     return out, None
@@ -1462,6 +1518,11 @@ def institution_url_score(url: str, lastmod: dt.date | None, from_date: dt.date)
         "research-paper", "policy-paper", "download",
     ]
     score += min(12, 3 * sum(1 for h in hints if h in low))
+    # Sparse Frontier cells also steer institutional discovery.  This is ranking,
+    # not admission: a talent/brain-drain URL is fetched earlier but still has to
+    # pass the same substantive A/B gate as every other page.
+    gap_hits = sum(1 for term in ACTIVE_FRONTIER_GAP_URL_TERMS if normalized(term) in low)
+    score += min(18, 6 * gap_hits)
     if re.search(r"/20\d{2}/", low):
         score += 1
     return score
@@ -2219,7 +2280,7 @@ def audit_inherited_ab(previous: dict[str, Any], warnings: list[str] | None = No
     gets one best-effort document/abstract refresh so thin historical summaries do not
     create needless false negatives. If refresh is unavailable, fail-closed behavior is
     configurable; the default is strict because this migration exists to remove inherited
-    false positives. Strand C is preserved as historical weak-signal evidence.
+    false positives. Strand C is handled separately by its own one-time weak-signal cleanup.
     """
     out = dict(previous) if isinstance(previous, dict) else {}
     stats = {
@@ -2370,6 +2431,35 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     return [public_item(x, new_this_scan=signal_identity(x) in new_ids, first_seen=x.get("first_seen")) for x in vals]
 
 
+def _saved_signal_passes(item: dict[str, Any]) -> bool:
+    """Apply the current weak-signal gate to a saved Strand-C record.
+
+    Saved C records do not retain the original feed description, so the corrective audit
+    deliberately uses the factual headline only. That is fail-closed: historical headlines
+    that cannot themselves establish an EU-relevant R&I/geopolitics development are removed.
+    """
+    if not isinstance(item, dict):
+        return False
+    headline = clean_text(item.get("headline", ""))
+    if not headline:
+        return False
+    return factual_news(headline, "")
+
+
+def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
+    """One-time corrective cleanup for the accumulated weak-signal corpus."""
+    out = dict(previous) if isinstance(previous, dict) else {}
+    kept: list[dict[str, Any]] = []
+    removed = 0
+    for item in out.get("strand_c", []) if isinstance(out.get("strand_c"), list) else []:
+        if _saved_signal_passes(item):
+            kept.append(item)
+        else:
+            removed += 1
+    out["strand_c"] = kept
+    return out, {"strand_c_removed": removed, "strand_c_kept": len(kept)}
+
+
 def parse_feed_time(entry: Any) -> dt.datetime | None:
     st = getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed", None)
     if st:
@@ -2394,44 +2484,62 @@ def eu_news_scope(text: str) -> bool:
 def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> bool:
     """Balanced Strand-C gate.
 
-    EU/member-state developments can qualify with a clear R&I + strategic theme bridge.
-    Non-EU developments need both R&I and geopolitical/economic-security evidence plus a
-    salient actor. This lets the radar catch external moves that can affect Europe without
-    turning Strand C into a general technology-news feed.
+    Signals must establish EU/European/member-state relevance in the factual text itself.
+    Research/international-cooperation signals then need a strategic bridge; critical-tech
+    signals need a capability/policy move plus strategic context (with a narrow exception for
+    EU capacity infrastructure such as quantum/semiconductor/AI-compute build-out). This keeps
+    Strand C from becoming a general technology or geopolitics news feed.
     """
     full = normalized(text)
     found = set(themes or themes_for(full)) & WATCH_SIGNAL_THEMES
-    if not found:
+    if not found or not eu_news_scope(full):
+        # V17.5.3: Strand C is EU-first. A broad global technology story does not become
+        # a European weak signal merely because an A/B item shares a theme.
         return False
-    ri = contains_any(full, RI_STRONG + RI_GENERIC) or bool(found & {
-        "research security / foreign interference",
-        "critical and emerging technologies",
-        "economic security and R&I",
-        "R&I competitiveness / technological capabilities",
-        "Horizon Europe / FP10 international participation",
-        "science diplomacy",
-    })
-    geo = contains_any(full, GEO_STRONG) or bool(found & {
-        "research security / foreign interference",
-        "technology sovereignty / strategic autonomy",
+
+    core_ri = contains_any(full, [
+        "research and innovation", "research & innovation", "research", "science",
+        "scientific", "innovation", "r&d", "researcher", "researchers",
+        "research talent", "horizon europe", "fp10", "european research area",
+        "research security", "science diplomacy", "research cooperation",
+        "scientific cooperation", "research funding", "research programme",
+        "research program", "university research", "academic research",
+    ])
+    geo = contains_any(full, GEO_STRONG)
+    actors = bool(distinct_matches(full, GEO_ACTORS))
+    strategic_frame = geo or actors or contains_any(full, [
+        "sovereignty", "sovereign", "strategic autonomy", "competitiveness",
+        "catch up", "dependency", "dependencies", "market fragmentation",
+        "supply chain", "economic security", "de-risk", "derisk", "defence", "defense",
+    ])
+    # International research cooperation/mobility is itself a valid geopolitical channel.
+    if core_ri and (strategic_frame or bool(found & {
         "EU–China S&T cooperation / de-risking",
-        "export controls / dual use",
-        "fragmentation of global science",
-        "transatlantic / US–China S&T competition",
-        "supply chains / strategic dependencies",
-    })
-    if eu_news_scope(full):
-        # For an EU/member-state event, strategic capacity building in critical technologies
-        # is sufficient even when a headline does not use the word "geopolitics".
-        strategic_capacity = any(x in full for x in [
-            "critical technology", "semiconductor", "chips", "quantum", "biotech",
-            "artificial intelligence", " ai ", "supercomputer", "ai factory", "cloud",
-            "critical raw materials", "research security", "horizon europe", "economic security",
-            "strategic autonomy", "sovereignty", "dependency", "supply chain",
-        ])
-        return ri and (geo or strategic_capacity)
-    actors = distinct_matches(full, GEO_ACTORS)
-    return ri and geo and bool(actors)
+        "Horizon Europe / FP10 international participation",
+        "research security / foreign interference",
+        "science diplomacy",
+    })):
+        return True
+
+    critical_tech = contains_any(full, [
+        "artificial intelligence", " ai ", "semiconductor", "semiconductors", "chips",
+        "quantum", "biotech", "biotechnology", "supercomputer", "cloud",
+        "critical technology", "critical technologies",
+    ])
+    narrow_capacity_tech = contains_any(full, [
+        "semiconductor", "semiconductors", "chips", "quantum", "supercomputer",
+        "ai factory", "ai factories", "gigafactory", "gigafactories",
+        "data centre", "data center", "critical raw materials", "critical minerals",
+    ])
+    capacity_or_policy_move = contains_any(full, [
+        "launch", "invest", "fund", "funding", "factory", "facility", "build", "open",
+        "expand", "scale", "strategy", "regulation", "rules", "code", "standard",
+        "partner", "partnership", "association", "join", "market fragmentation",
+        "control layer", "infrastructure",
+    ])
+    if narrow_capacity_tech and capacity_or_policy_move:
+        return True
+    return critical_tech and strategic_frame and capacity_or_policy_move
 
 
 def factual_news(title: str, desc: str) -> bool:
@@ -2744,6 +2852,21 @@ def needs_inherited_corpus_audit(previous: dict[str, Any]) -> bool:
     return INHERITED_CORPUS_AUDIT_ENABLED and not bool(previous.get("inherited_corpus_audit_complete"))
 
 
+def needs_precision_corpus_cleanup(previous: dict[str, Any]) -> bool:
+    """One corrective cleanup for corpora already scanned with the V17.5.1 false-positive gate.
+
+    This marker is intentionally independent of quality-profile/version strings. Once the
+    current A/B corpus has been checked under the corrected admission rules, later scanner
+    updates do not repeatedly re-audit historical material.
+    """
+    return not bool(previous.get("precision_corpus_cleanup_complete"))
+
+
+def needs_precision_signal_cleanup(previous: dict[str, Any]) -> bool:
+    """Run one corrective weak-signal cleanup, then never revisit historical C."""
+    return not bool(previous.get("precision_signal_cleanup_complete"))
+
+
 def needs_signal_backfill(previous: dict[str, Any]) -> bool:
     """Run one wider weak-signal recovery window whenever Strand-C discovery changes."""
     return previous.get("signal_discovery_version") != SIGNAL_DISCOVERY_VERSION
@@ -2762,7 +2885,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS
+    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, ACTIVE_FRONTIER_GAP_URL_TERMS
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -2772,25 +2895,40 @@ def main() -> int:
     warnings: list[str] = []
     previous = load_previous()
 
-    # The inherited corpus is audited once, on the first run of this scanner over a
-    # legacy radar.json. Future scans never revalidate already-retained A/B material,
-    # even if quality-profile wording changes; only newly discovered candidates face
-    # the current admission gate.
+    # Two one-time migrations are supported:
+    # 1) legacy/inherited corpus audit for installations that have never run V17.5+, and
+    # 2) a corrective precision cleanup for repositories that already ran V17.5.1 while
+    #    its false-positive gate was still too permissive.
+    # After either marker is written, historical A/B is never re-audited on normal runs.
     inherited_audit = needs_inherited_corpus_audit(previous)
+    precision_cleanup = (not inherited_audit) and needs_precision_corpus_cleanup(previous)
     inherited_audit_stats = {
         "strand_a_removed": 0, "strand_b_removed": 0,
         "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
     }
-    if inherited_audit:
-        log_progress("First-run inherited-corpus audit: checking saved A/B material before discovery")
+    if inherited_audit or precision_cleanup:
+        label = "First-run inherited-corpus audit" if inherited_audit else "One-time corrective precision cleanup"
+        log_progress(f"{label}: checking current saved A/B material before discovery")
         previous, inherited_audit_stats = audit_inherited_ab(previous, warnings)
         previous["inherited_corpus_audit_complete"] = True
+        previous["precision_corpus_cleanup_complete"] = True
         log_progress(
-            "Inherited-corpus audit complete: kept "
+            f"{label} complete: kept "
             f"{inherited_audit_stats['stored_pass']} on saved evidence + "
             f"{inherited_audit_stats['refreshed_pass']} after document refresh; removed "
             f"{inherited_audit_stats['strand_a_removed']} A and "
             f"{inherited_audit_stats['strand_b_removed']} B item(s)"
+        )
+
+    signal_cleanup = needs_precision_signal_cleanup(previous)
+    signal_cleanup_stats = {"strand_c_removed": 0, "strand_c_kept": len(previous.get("strand_c", []))}
+    if signal_cleanup:
+        log_progress("One-time corrective weak-signal cleanup: checking current Strand C before discovery")
+        previous, signal_cleanup_stats = revalidate_saved_c(previous)
+        previous["precision_signal_cleanup_complete"] = True
+        log_progress(
+            f"Weak-signal cleanup complete: kept {signal_cleanup_stats['strand_c_kept']} C; "
+            f"removed {signal_cleanup_stats['strand_c_removed']} C item(s)"
         )
 
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
@@ -2798,6 +2936,13 @@ def main() -> int:
     state = initial_scan_state(previous)
     INSTITUTION_SEEN_FINGERPRINTS = dict(state.get("institution_seen_fingerprints", {}))
     frontier_focus = frontier_gap_plan(previous, state)
+    url_term_profiles = CONFIG.get("frontier_gap_institution_url_terms", {})
+    ACTIVE_FRONTIER_GAP_URL_TERMS = list(dict.fromkeys(
+        clean_text(term)
+        for target in frontier_focus.get("targets", [])
+        for term in ((url_term_profiles.get(target, []) if isinstance(url_term_profiles, dict) else []) or [])
+        if clean_text(term)
+    ))
     if frontier_focus["classifier_error"]:
         log_progress(f"Frontier coverage classifier unavailable; using rotating fallback: {frontier_focus['classifier_error']}")
     log_progress(
@@ -2815,6 +2960,12 @@ def main() -> int:
 
     all_queries = list(dict.fromkeys(CONFIG.get("queries_a", []) + CONFIG.get("queries_b", [])))
     gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
+    gap_lookback_months = max(0, int(CONFIG.get("frontier_gap_historical_lookback_months", 0) or 0))
+    # Gap priority must first exhaust the scanner's own live corpus window.  A sparse
+    # cell is not evidence that recent literature is absent.  Historical rescue is
+    # optional and disabled by default; when enabled it only broadens the scholarly
+    # query window, never the institutional/new-signal date floor.
+    gap_from = DATE_FLOOR if gap_lookback_months <= 0 else min(DATE_FLOOR, now.date() - relativedelta(months=gap_lookback_months))
     oa_cap = int(CONFIG.get("openalex_queries_per_scan", 40))
     cr_cap = int(CONFIG.get("crossref_broad_queries_per_scan", 35))
     oa_base_cap = max(1, oa_cap - min(len(gap_scholarly), max(0, oa_cap - 1)))
@@ -2827,6 +2978,7 @@ def main() -> int:
     )
     oa_batch = list(dict.fromkeys(gap_scholarly + oa_base))[:oa_cap]
     cr_batch = list(dict.fromkeys(gap_scholarly + cr_base))[:cr_cap]
+    gap_query_dates = {q: gap_from for q in gap_scholarly}
     priority_tasks_all = [
         (journal, query)
         for journal in list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
@@ -2838,11 +2990,32 @@ def main() -> int:
         int(CONFIG.get("crossref_priority_tasks_per_scan", 45)),
     )
     institution_sources_all = list(CONFIG.get("institution_sources", []))
-    inst_batch, state["institution_cursor"], inst_wrapped = rotating_batch(
+    inst_rotating, state["institution_cursor"], inst_wrapped = rotating_batch(
         institution_sources_all,
         state.get("institution_cursor", 0),
         int(CONFIG.get("institution_sources_per_scan", 18)),
     )
+    # Keep the persistent source rotation intact, but add a small number of source
+    # specialists for currently sparse cells.  Thus an empty Brain-drain cell does
+    # not have to wait several rotations before Europarl/EU Publications/research-
+    # career organisations happen to be visited.
+    gap_source_profiles = CONFIG.get("frontier_gap_institution_sources", {})
+    priority_domains: list[str] = []
+    if isinstance(gap_source_profiles, dict):
+        for target in frontier_focus.get("targets", []):
+            vals = gap_source_profiles.get(target, [])
+            vals = vals if isinstance(vals, list) else [vals]
+            priority_domains.extend(clean_text(v).lower().removeprefix("www.") for v in vals if clean_text(v))
+    priority_domains = list(dict.fromkeys(priority_domains))
+    extra_cap = max(0, int(CONFIG.get("frontier_gap_institution_extra_sources_per_scan", 4) or 0))
+    gap_sources = []
+    for src in institution_sources_all:
+        domain = clean_text(src.get("domain", "")).lower().removeprefix("www.") if isinstance(src, dict) else ""
+        if domain in priority_domains and src not in inst_rotating:
+            gap_sources.append(src)
+            if len(gap_sources) >= extra_cap:
+                break
+    inst_batch = inst_rotating + gap_sources
 
     oa_backfill = not bool(state["backfill"].get("openalex"))
     cr_backfill = not (
@@ -2859,9 +3032,14 @@ def main() -> int:
         "Scan start: persistent incremental mode; "
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) from {cr_from.isoformat()}, "
-        f"institutions {len(inst_batch)}/{len(institution_sources_all)} source(s) from {inst_from.isoformat()}; "
+        f"institutions {len(inst_batch)} source(s) ({len(inst_rotating)} rotating + {len(gap_sources)} gap-specialist) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
+    if gap_scholarly:
+        log_progress(
+            f"Frontier gap-rescue: {len(gap_scholarly)} scholarly query/queries search from "
+            f"{gap_from.isoformat()} for the selected sparse cells; normal rotation remains incremental"
+        )
     log_progress(
         f"Known corpus loaded before discovery: {len(KNOWN_AB_IDENTITIES)} A/B identities, "
         f"{len(KNOWN_AB_LINKS)} known A/B links, {len(KNOWN_SIGNAL_IDENTITIES)} weak-signal identities"
@@ -2895,10 +3073,10 @@ def main() -> int:
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
         fut_oa = ex.submit(
-            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline
+            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, gap_query_dates
         )
         fut_cr = ex.submit(
-            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline
+            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, gap_query_dates
         )
         news = fut_news.result()
         oa = fut_oa.result()
@@ -2955,6 +3133,12 @@ def main() -> int:
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []
     strand_a = merge_corpus(prev_a, new_selected, "A", now_iso)
     strand_b = merge_corpus(prev_b, new_selected, "B", now_iso)
+    output_corpus_floor = DATE_FLOOR
+    for item in strand_a + strand_b:
+        if isinstance(item, dict):
+            item_date = parse_date(item.get("date"))
+            if item_date:
+                output_corpus_floor = min(output_corpus_floor, item_date)
 
     all_ab_map = {}
     for x in strand_a + strand_b:
@@ -3024,13 +3208,18 @@ def main() -> int:
     data = {
         "last_updated": now_iso,
         "first_scan_complete": True,
-        "corpus_start_date": DATE_FLOOR.isoformat(),
+        "corpus_start_date": output_corpus_floor.isoformat(),
         "source_expansion_version": expansion_marker,
         "quality_profile_version": QUALITY_PROFILE_VERSION,
         "quality_migration_this_run": False,
         "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
         "inherited_corpus_audit_this_run": inherited_audit,
-        "inherited_corpus_audit_stats": inherited_audit_stats if inherited_audit else {},
+        "inherited_corpus_audit_stats": inherited_audit_stats if (inherited_audit or precision_cleanup) else {},
+        "precision_corpus_cleanup_complete": bool(previous.get("precision_corpus_cleanup_complete")) or inherited_audit or precision_cleanup,
+        "precision_corpus_cleanup_this_run": precision_cleanup,
+        "precision_signal_cleanup_complete": bool(previous.get("precision_signal_cleanup_complete")) or signal_cleanup,
+        "precision_signal_cleanup_this_run": signal_cleanup,
+        "precision_signal_cleanup_stats": signal_cleanup_stats if signal_cleanup else {},
         "backfill_complete": backfill_complete,
         "signal_discovery_version": signal_marker,
         "signal_backfill_complete": signal_backfill_complete,
@@ -3042,6 +3231,8 @@ def main() -> int:
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
             "ab_discovery_from_this_run": min(oa_from, cr_from, inst_from).isoformat(),
+            "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",
+            "frontier_gap_historical_lookback_months": gap_lookback_months if gap_scholarly else 0,
             "openalex_from": oa_from.isoformat(),
             "crossref_from": cr_from.isoformat(),
             "institutions_from": inst_from.isoformat(),
@@ -3096,18 +3287,23 @@ def main() -> int:
             "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
             "frontier_gap_queries_this_run": len(frontier_focus["queries"]),
             "frontier_gap_scholarly_queries_this_run": len(frontier_focus.get("scholarly_queries", [])),
+            "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",
             "frontier_gap_targets_this_run": len(frontier_focus["targets"]),
             "frontier_qualifying_before_scan": frontier_focus["qualifying"],
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
             "frontier_coverage_classifier_ok": not bool(frontier_focus["classifier_error"]),
             "signal_recovery_backfill": signal_backfill,
             "signal_backfill_complete": signal_backfill_complete,
-            "quality_removed_old_a": inherited_audit_stats.get("strand_a_removed", 0) if inherited_audit else 0,
-            "quality_removed_old_b": inherited_audit_stats.get("strand_b_removed", 0) if inherited_audit else 0,
+            "quality_removed_old_a": inherited_audit_stats.get("strand_a_removed", 0) if (inherited_audit or precision_cleanup) else 0,
+            "quality_removed_old_b": inherited_audit_stats.get("strand_b_removed", 0) if (inherited_audit or precision_cleanup) else 0,
             "inherited_corpus_audit_this_run": inherited_audit,
-            "inherited_corpus_audit_stored_pass": inherited_audit_stats.get("stored_pass", 0) if inherited_audit else 0,
-            "inherited_corpus_audit_refreshed_pass": inherited_audit_stats.get("refreshed_pass", 0) if inherited_audit else 0,
-            "inherited_corpus_audit_refresh_unavailable": inherited_audit_stats.get("refresh_unavailable", 0) if inherited_audit else 0,
+            "precision_corpus_cleanup_this_run": precision_cleanup,
+            "precision_signal_cleanup_this_run": signal_cleanup,
+            "quality_removed_old_c": signal_cleanup_stats.get("strand_c_removed", 0) if signal_cleanup else 0,
+            "precision_signal_cleanup_kept": signal_cleanup_stats.get("strand_c_kept", 0) if signal_cleanup else 0,
+            "inherited_corpus_audit_stored_pass": inherited_audit_stats.get("stored_pass", 0) if (inherited_audit or precision_cleanup) else 0,
+            "inherited_corpus_audit_refreshed_pass": inherited_audit_stats.get("refreshed_pass", 0) if (inherited_audit or precision_cleanup) else 0,
+            "inherited_corpus_audit_refresh_unavailable": inherited_audit_stats.get("refresh_unavailable", 0) if (inherited_audit or precision_cleanup) else 0,
             "source_warnings": len(warnings),
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,

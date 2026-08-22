@@ -1,4 +1,4 @@
-# Radar architecture — V17.5.1
+# Radar architecture — V17.5.2
 
 ## 1. Cumulative state
 
@@ -24,7 +24,7 @@ The large scholarly/report universes are rotated across runs:
 
 A batch never wraps inside one run; the final batch of each cycle is shorter. The next cursor is saved in `radar.json`.
 
-Weak-signal discovery receives six extra global-news searches aimed at the emptiest/sparsest Frontier cells. The same gap plan now also contributes up to four targeted scholarly queries to OpenAlex and Crossref. `knowledge-D` (Brain drain) and `knowledge-C` receive persistent priority when equally sparse; remaining ties rotate via `frontier_gap_cursor`. This changes search priority, not admission thresholds.
+Weak-signal discovery receives six extra global-news searches aimed at the emptiest/sparsest Frontier cells. The same gap plan contributes targeted scholarly queries to OpenAlex and Crossref and adds a small number of gap-specialist institutional sources **on top of** the normal persistent institution rotation. `knowledge-D` (Brain drain) and `knowledge-C` receive persistent priority when equally sparse; remaining ties rotate via `frontier_gap_cursor`. Gap scholarly retrieval stays inside the preserved live corpus window by default. Gap-specific URL terms only affect fetch ranking; admission thresholds remain unchanged.
 
 ## 3. Early known-item rejection
 

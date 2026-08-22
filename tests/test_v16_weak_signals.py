@@ -22,22 +22,26 @@ class V16WeakSignalTests(unittest.TestCase):
         for domain in ['reuters.com', 'ft.com', 'politico.eu', 'nature.com', 'sciencebusiness.net', 'commission.europa.eu']:
             self.assertIn(domain, domains)
 
-    def test_strong_external_technology_control_can_be_signal_without_eu_in_headline(self):
+    def test_external_technology_control_needs_explicit_european_relevance(self):
         title = 'US tightens export controls on advanced AI chips to China'
         desc = 'The new technology controls restrict semiconductor research equipment and deepen US-China strategic competition.'
-        self.assertTrue(sr.factual_news(title, desc))
+        self.assertFalse(sr.factual_news(title, desc))
+        self.assertTrue(sr.factual_news(
+            'US tightens export controls on advanced AI chips to China, raising concerns for Europe',
+            'European semiconductor researchers and firms face new equipment-access constraints.'
+        ))
 
     def test_generic_technology_launch_is_not_signal(self):
         self.assertFalse(sr.factual_news('Company launches a new smartphone', 'The device has a brighter display and a faster camera.'))
 
-    def test_watch_theme_can_admit_signal_without_existing_ab_anchor(self):
+    def test_watch_theme_can_admit_explicitly_european_signal_without_existing_ab_anchor(self):
         item = {
-            'headline': 'US tightens export controls on advanced AI chips to China',
+            'headline': 'US chip controls raise equipment-access risks for European researchers',
             'source': 'Reuters',
             'date': '2026-08-20T08:00Z',
             'link': 'https://example.org/signal',
-            '_desc': 'The technology controls restrict semiconductor research equipment and deepen US-China strategic competition.',
-            '_themes': sr.themes_for('US-China strategic competition export controls semiconductor technology research'),
+            '_desc': 'The controls restrict semiconductor research equipment and deepen US-China strategic competition affecting Europe.',
+            '_themes': sr.themes_for('European semiconductor research US-China strategic competition export controls'),
             '_entities': ['united states', 'china', 'semiconductor', 'export control'],
         }
         got = sr.anchor_news([item], [])

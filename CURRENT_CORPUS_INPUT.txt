@@ -1,0 +1,21 @@
+V17.5.3 CURRENT CORPUS INPUT
+
+This package embeds the exact user-supplied radar.json from 22 August 2026.
+SHA-256: df33bffd6eda8130bcefb70c8f22147ef75862e8b53851547b25b4486eb61a08
+Counts before corrective cleanup:
+- Strand A: 72
+- Strand B: 5
+- Strand C: 101
+- Total: 178
+
+State markers in the supplied file:
+- inherited_corpus_audit_complete = true
+- precision_corpus_cleanup_complete = absent
+- precision_signal_cleanup_complete = absent
+
+Therefore the next V17.5.3 run performs exactly one corrective A/B precision audit and one corrective EU-first Strand-C weak-signal audit, recomputes Frontier coverage from the cleaned A/B corpus, runs gap-priority + normal rotating discovery, and writes both corrective-complete markers.
+
+Offline pre-check of the supplied file under the corrected rules:
+- A: 38/72 pass on stored evidence; 34 need document refresh before final decision.
+- B: 3/5 pass on stored evidence; 2 need document refresh before final decision.
+- C: 19/101 pass the corrected headline-level weak-signal gate; 82 fail and are removed before the wider strict recovery scan.

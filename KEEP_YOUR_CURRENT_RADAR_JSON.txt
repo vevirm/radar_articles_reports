@@ -1,0 +1,19 @@
+V17.5.3 FULL REPOSITORY — YOUR CURRENT radar.json IS INCLUDED
+
+The radar.json in this package is the exact current file supplied on 22 August 2026:
+- Strand A: 72
+- Strand B: 5
+- Strand C: 101
+- Total: 178
+
+It already has inherited_corpus_audit_complete=true, so the old inherited migration is NOT repeated.
+
+On the FIRST V17.5.3 run:
+- current A/B gets one corrective precision audit;
+- thin A/B failures get one best-effort DOI/page/PDF refresh before the final keep/remove decision;
+- current C gets one separate EU-first weak-signal audit;
+- Frontier coverage is recomputed from cleaned A/B;
+- the scanner then runs normal rotation + sparse-cell discovery;
+- it writes precision_corpus_cleanup_complete=true and precision_signal_cleanup_complete=true.
+
+Every later run skips historical cleanup and screens only new discoveries under the corrected gates.

@@ -1,22 +1,25 @@
-V17.5.1 PRESERVATION — START FROM THE USER-SUPPLIED LIVE CORPUS
+V17.5.3 — START FROM THE CURRENT USER-SUPPLIED LIVE CORPUS
 
-The radar.json in this ZIP is the original live file supplied for this build:
-- Strand A: 156 records
-- Strand B: 10 records
-- Strand C: 100 records
-- Total: 266 accumulated records
+The radar.json in this ZIP is the exact current file supplied after the latest scan:
+- Strand A: 72 records
+- Strand B: 5 records
+- Strand C: 101 records
+- Total: 178 records
 
-Do not replace it with an old seed.
+Do not replace it with an older seed.
 
-On the FIRST V17.5.1 run only, the scanner audits inherited Strand A/B before discovery. Records that already pass the new gate are retained. A record that fails on its shortened saved summary gets one best-effort DOI/page/PDF refresh before the final keep/remove decision. Strand C is preserved. The completed run writes inherited_corpus_audit_complete=true.
+FIRST V17.5.3 RUN
+1. Load this current 178-record radar.json.
+2. Do NOT repeat the old inherited-corpus migration (already complete).
+3. Run the one-time corrective A/B precision audit.
+4. Keep saved A/B that pass; refresh failing saved records from DOI/page/PDF before the final decision.
+5. Run the one-time EU-first Strand-C weak-signal audit.
+6. Recompute all 16 Frontier cells from cleaned A/B.
+7. Run normal OpenAlex/Crossref/institution rotations plus sparse-cell gap discovery and strict weak-signal recovery.
+8. Save both precision_corpus_cleanup_complete=true and precision_signal_cleanup_complete=true.
 
-After that first run, retained historical A/B material is not re-audited again. Every NEW candidate must pass the corrected boundary-aware R&I + geopolitics/economic-security gate.
-
-The scanner then recomputes the exact 4x4 Frontier coverage on the cleaned corpus, prioritises the emptiest/sparsest cells (including knowledge-D brain drain/talent outflow), and continues the normal persistent OpenAlex/Crossref/institution rotations.
-
-UPLOAD SAFELY
-1. Extract the complete ZIP.
-2. Upload/replace ALL files and folders at the root of the SAME GitHub repository, including .github.
-3. Keep radar.json from this ZIP.
-4. Commit directly to main.
-5. The first run performs audit + scan. Later scheduled runs scan only.
+LATER RUNS
+- no historical re-audit in any strand;
+- strict corrected gates for new discoveries only;
+- persistent rotations continue;
+- sparse/empty Frontier cells continue to receive priority.

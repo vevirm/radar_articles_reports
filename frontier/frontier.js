@@ -290,13 +290,20 @@
     const strategicDomain=hitCount(primary,INDIRECT_DOMAIN_TERMS)>0||/\bai\b/.test(primaryNorm);
     const strategicActor=/\b(china|chinese|united states|us|american|russia|russian|taiwan|india|japan|south korea|korea|uk|britain|canada)\b/.test(primaryNorm);
     const strategicIndirect=strategicDomain&&strategicActor;
-    const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal';
+    // A documented structural talent loss is already a moving Frontier condition; it
+    // need not contain a news-style event verb such as 'launched' or 'adopted'.
+    const structuralTalentLoss=/brain drain|researcher outflow|research talent outflow|scientific talent outflow|talent loss/.test(primaryNorm);
+    const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal' || structuralTalentLoss;
+    // For A/B evidence, an EU-scoped title/report can provide the geographic scope to
+    // a finding sentence that says 'researchers' rather than repeating 'EU/Europe'.
+    // Weak signals still require the observed headline itself to carry EU/strategic scope.
+    const evidenceScopedEU=x._origin==='Evidence signal' && euLink>=3 && /\beu\b|european union|european commission|europe\b|member states/.test(norm(`${clean(evidence?.title||'')} ${clean(x.anchor||'')}`));
 
     // Gate: a generic watch-theme or anchor is not enough. The observed change
     // itself must bite in the R&I chain and visibly move at least one frontier
     // question. Third-country developments are eligible only when the headline
     // itself is a strategic-tech/R&I comparator, rather than merely geopolitical.
-    if(materiality<2.4 || qCount===0 || !primaryMoves || euLink<1.4 || (!directEU&&!strategicIndirect) || !dynamic) return null;
+    if(materiality<2.4 || qCount===0 || !primaryMoves || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
 
     const direction=directionScores(x,evidence,row,questions),column=columnFor(direction);
     const reach=reachScore(rows),irreversibility=irreversibilityScore(x,row,column),attention=attentionGapScore(x),actionability=actionabilityScore(x,row,evidence);

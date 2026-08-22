@@ -1,27 +1,19 @@
-V17.5.1 COMPLETE REPOSITORY — ONE-TIME CORPUS AUDIT + PRECISION/TALENT BALANCE
+V17.5.3 COMPLETE REPOSITORY — CURRENT CORPUS + ONE-TIME CORRECTIVE CLEANUP
 
-This ZIP is the WHOLE repository, including:
-- the active GitHub Actions workflow;
-- the cumulative/incremental scanner and persistent source rotations;
-- the ORIGINAL live radar.json supplied for this build: 156 Strand A + 10 Strand B + 100 Strand C = 266 records;
-- the one-time inherited-corpus audit;
-- main Radar site, Radar Insights, Sovereignty-Frontier and Greatest Opportunities & Risks pages;
-- gap-priority discovery for weak signals and scholarly search;
-- tests.
+This ZIP contains the whole repository, including the active workflow, scanner, pages, tests, and the exact current user-supplied radar.json: 72 A + 5 B + 101 C = 178 records.
 
-FIRST RUN ONLY
-1. Load the supplied 266-record radar.json.
-2. Audit inherited Strand A/B with the new gate.
-3. For saved records that fail on their shortened summary, try one DOI/page/PDF refresh before removal.
-4. Preserve Strand C.
-5. Recompute all 16 Frontier cells on the cleaned corpus.
-6. Run the normal rotating scan, prioritising the emptiest/sparsest cells.
-7. Save inherited_corpus_audit_complete=true.
+FIRST RUN
+1. Load the supplied current radar.json.
+2. Run one corrective A/B precision audit (the earlier inherited audit is already complete).
+3. Retain saved A/B that pass; refresh thin failures from DOI/page/PDF before deciding.
+4. Run one corrective EU-first weak-signal audit of current Strand C.
+5. Recompute Frontier coverage on cleaned A/B.
+6. Run normal persistent rotations plus sparse-cell scholarly/institutional discovery and strict weak-signal recovery.
+7. Save both corrective-complete markers.
 
 EVERY LATER RUN
-- skips the historical audit entirely;
-- keeps the retained corpus cumulative;
-- applies the strict gate only to newly discovered material;
-- continues the persistent source rotations and sparse-cell prioritisation.
+- skips all historical cleanup;
+- screens new A/B and C candidates with the corrected gates;
+- keeps persistent source rotations and gap priority.
 
-Upload ALL files/folders to the SAME repository root, including .github. The upload commit to main starts the first audit+scan automatically.
+Upload ALL files/folders to the same repository root, including .github. A commit to main starts the corrective cleanup + scan automatically.
