@@ -26,6 +26,7 @@ import gzip
 import html
 import io
 import json
+import os
 import re
 import threading
 import subprocess
@@ -1197,7 +1198,7 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
     abstract = openalex_abstract(work.get("abstract_inverted_index"))
     date = parse_date(work.get("publication_date"))
     effective_floor = date_floor or DATE_FLOOR
-    if not title or not date or date < effective_floor:
+    if not title or not date or date < effective_floor or date > dt.date.today():
         return None
     if document_exclusion_reason(title, abstract):
         return None
@@ -1234,11 +1235,12 @@ def collect_openalex(
     query_dates_override: dict[str, dt.date] | None = None,
     depth_state: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Zero-config OpenAlex discovery with a latest lane plus rotating depth lane.
+    """Keyless OpenAlex discovery with depth rotation.
 
-    Every selected query always checks page 1 for newly published work. It then
-    checks one persisted deeper page (2..N), so recurring queries stop rereading
-    only the same newest results.
+    Every selected query checks page 1 for newly published work and one persisted
+    deeper page. No API key, email tag, GitHub secret, or other credential is used.
+    A 429 stops this source family quickly for the run instead of spending the
+    stage budget on repeated retries; Crossref and the other sources then continue.
     """
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     per_page = int(CONFIG.get("openalex_per_query", 60))
@@ -1276,29 +1278,32 @@ def collect_openalex(
 
     def fetch_page(q: str, query_from: dt.date, page: int) -> tuple[list[dict[str, Any]], str | None, int]:
         if stop_public.is_set():
-            return [], "public endpoint unavailable", 0
+            return [], "endpoint stopped for this run", 0
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget", 0
         params = {
             "search": q,
-            "filter": f"from_publication_date:{query_from.isoformat()}",
+            "filter": f"from_publication_date:{query_from.isoformat()},to_publication_date:{dt.date.today().isoformat()}",
             "sort": "publication_date:desc",
             "per_page": str(per_page),
             "page": str(page),
         }
         for attempt in range(retries + 1):
             if stop_public.is_set():
-                return [], "public endpoint unavailable", 0
+                return [], "endpoint stopped for this run", 0
             wait_slot()
             try:
                 r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("results", [])
                     return convert_works(works, query_from), None, len(works)
+                if r.status_code == 429:
+                    stop_public.set()
+                    return [], "HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run", 0
                 if r.status_code in {401, 403, 409}:
                     stop_public.set()
-                    return [], f"HTTP {r.status_code}; continuing with other zero-config sources", 0
-                if r.status_code in {429, 500, 502, 503, 504} and attempt < retries:
+                    return [], f"HTTP {r.status_code} from keyless OpenAlex; source stopped for this run", 0
+                if r.status_code in {500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
                     try:
                         delay = min(8.0, max(1.0, float(retry_after))) if retry_after else min(8.0, 1.5 * (attempt + 1))
@@ -1331,14 +1336,12 @@ def collect_openalex(
         if deep_err:
             return latest, deep_err
         with depth_lock:
-            # If the requested deep page was exhausted, restart at page 2 next time;
-            # otherwise continue one page deeper, wrapping at the configured cap.
             depth_state[q] = 2 if deep_count < per_page or page >= depth_max else page + 1
-        return latest + deep, None
+        return dedupe_candidates(latest + deep), None
 
     out: list[dict[str, Any]] = []
     budget_hits = 0
-    endpoint_unavailable_reported = False
+    endpoint_stop_reported = False
     with cf.ThreadPoolExecutor(max_workers=workers) as ex:
         futs = [ex.submit(fetch_query, q) for q in queries]
         for fut in cf.as_completed(futs):
@@ -1347,18 +1350,17 @@ def collect_openalex(
                 out.extend(items)
                 if err == "budget":
                     budget_hits += 1
-                elif err and "public endpoint unavailable" in err:
-                    if not endpoint_unavailable_reported:
-                        warnings.append("OpenAlex public endpoint unavailable; continuing with Crossref and direct publisher/institution scanning")
-                        endpoint_unavailable_reported = True
+                elif err and ("source stopped" in err or "endpoint stopped" in err):
+                    if not endpoint_stop_reported:
+                        warnings.append(f"OpenAlex {err}; continuing with Crossref and direct publisher/institution scanning")
+                        endpoint_stop_reported = True
                 elif err:
                     warnings.append(f"OpenAlex {err}")
             except Exception as e:
                 warnings.append(f"OpenAlex worker: {type(e).__name__}")
     if budget_hits:
         warnings.append(f"OpenAlex scan budget reached; {budget_hits} queued query/queries skipped")
-    return out
-
+    return dedupe_candidates(out)
 
 def crossref_date(item: dict[str, Any]) -> dt.date | None:
     for key in ("published-online", "published-print", "published", "issued"):
@@ -1401,7 +1403,7 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
     abstract = clean_text(item.get("abstract"))
     date = crossref_date(item)
     effective_floor = date_floor or DATE_FLOOR
-    if not title or not date or date < effective_floor:
+    if not title or not date or date < effective_floor or date > dt.date.today():
         return None
     if document_exclusion_reason(title, abstract):
         return None
@@ -1437,7 +1439,13 @@ def collect_crossref(
     broad_depth_state: dict[str, Any] | None = None,
     priority_depth_state: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Zero-config Crossref discovery with newest-result and rotating-depth lanes."""
+    """Crossref discovery using bounded relevance + recency + rotating depth lanes.
+
+    Publication dates are bounded on both sides, so malformed future-dated records
+    cannot monopolise a newest-first page. For every query we ask Crossref first for
+    its relevance-ranked results, then for the newest bounded results, and finally
+    rotate one deeper relevance page when the result set is full.
+    """
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     rows = int(CONFIG.get("crossref_rows_per_query", 50))
     priority_rows = int(CONFIG.get("crossref_priority_journal_rows", 35))
@@ -1476,20 +1484,24 @@ def collect_crossref(
                 out.append(c)
         return out
 
-    def fetch_page(q: str, journal: str, offset: int) -> tuple[list[dict[str, Any]], str | None, int]:
+    def fetch_page(q: str, journal: str, offset: int, lane: str) -> tuple[list[dict[str, Any]], str | None, int]:
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget", 0
         query_from = (query_dates_override or {}).get(q, from_date) if not journal else from_date
         page_rows = priority_rows if journal else rows
         params = {
             "query.bibliographic": q,
-            "filter": f"from-pub-date:{query_from.isoformat()}",
+            "filter": f"from-pub-date:{query_from.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
             "rows": page_rows,
             "offset": max(0, int(offset)),
-            "sort": "published",
-            "order": "desc",
-            "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract",
+            "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
         }
+        # Crossref query results are relevance ranked by default. Keep that as the
+        # primary discovery lane. A separate bounded chronological lane catches
+        # genuinely new records without letting future-dated metadata take over.
+        if lane == "newest":
+            params["sort"] = "published"
+            params["order"] = "desc"
         if journal:
             params["query.container-title"] = journal
         for attempt in range(retries + 1):
@@ -1499,7 +1511,9 @@ def collect_crossref(
                 if r.status_code == 200:
                     works = r.json().get("message", {}).get("items", [])
                     return convert_items(works, query_from), None, len(works)
-                if r.status_code in {429, 500, 502, 503, 504} and attempt < retries:
+                if r.status_code == 429:
+                    return [], "HTTP 429 rate limited", 0
+                if r.status_code in {500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
                     try:
                         delay = min(8.0, max(1.0, float(retry_after))) if retry_after else min(8.0, 1.5 * (attempt + 1))
@@ -1520,19 +1534,28 @@ def collect_crossref(
         state_map = priority_depth_state if journal else broad_depth_state
         max_pages = priority_depth_max if journal else depth_max
         key = f"{journal} || {q}" if journal else q
-        latest, err, latest_count = fetch_page(q, journal, 0)
+
+        relevant, err, relevant_count = fetch_page(q, journal, 0, "relevance")
         if err:
-            return latest, err
-        if max_pages <= 1 or latest_count < page_rows:
-            return latest, None
+            return relevant, err
+        newest, newest_err, _ = fetch_page(q, journal, 0, "newest")
+        if newest_err == "budget":
+            return dedupe_candidates(relevant), newest_err
+        if newest_err:
+            return dedupe_candidates(relevant), newest_err
+
+        combined = relevant + newest
+        if max_pages <= 1 or relevant_count < page_rows:
+            return dedupe_candidates(combined), None
+
         page = max(2, int(state_map.get(key, 2) or 2))
         if page > max_pages:
             page = 2
-        deep, deep_err, deep_count = fetch_page(q, journal, (page - 1) * page_rows)
+        deep, deep_err, deep_count = fetch_page(q, journal, (page - 1) * page_rows, "relevance")
         if deep_err:
-            return latest, deep_err
+            return dedupe_candidates(combined), deep_err
         state_map[key] = 2 if deep_count < page_rows or page >= max_pages else page + 1
-        return latest + deep, None
+        return dedupe_candidates(combined + deep), None
 
     out: list[dict[str, Any]] = []
     budget_hit = False
@@ -1567,8 +1590,7 @@ def collect_crossref(
 
     if budget_hit:
         warnings.append("Crossref scan budget reached; remaining queued scholarly queries skipped")
-    return out
-
+    return dedupe_candidates(out)
 
 def decompress_xml(content: bytes) -> bytes:
     if content[:2] == b"\x1f\x8b":
@@ -3442,6 +3464,7 @@ def main() -> int:
         "stats": {
             "openalex_admitted_before_dedupe": len(oa),
             "openalex_public_anonymous": True,
+            "openalex_api_key_configured": False,
             "crossref_admitted_before_dedupe": len(cr),
             "crossref_public_anonymous": True,
             "institutional_admitted_before_dedupe": len(inst),
@@ -3497,6 +3520,11 @@ def main() -> int:
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
+        },
+        "scan_diagnostics": {
+            "source_warning_count": len(warnings),
+            "source_warnings": list(dict.fromkeys(warnings))[:100],
+            "transport_failure_warning_count": transport_failure_count,
         },
     }
     tmp_out = OUT_PATH.with_suffix(".json.tmp")

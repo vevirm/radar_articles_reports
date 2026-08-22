@@ -101,7 +101,7 @@ class V1756RotationDepthTests(unittest.TestCase):
              mock.patch.object(sr.time, 'sleep', return_value=None):
             sr.collect_crossref(dt.date(2026, 4, 21), [], ['test query'], [], broad_depth_state=depth)
         rows = int(sr.CONFIG.get('crossref_rows_per_query', 50))
-        self.assertEqual(calls[:2], [0, rows])
+        self.assertEqual(calls[:3], [0, 0, rows])
         self.assertEqual(depth['test query'], 3)
 
     def test_quality_and_incremental_versions_are_not_bumped(self):

@@ -1,15 +1,11 @@
-R&I × Geopolitics Radar V17.5.6
+V17.5.8 KEYLESS DISCOVERY HARDENING
 
-Rotation/depth repair built on the user's current GitHub radar.json state.
-
-What changed:
-- preserves all existing A/B/C corpus records and existing v17.2 source cursors;
-- does NOT bump incremental_state_version or source_expansion_version, so current cursor/backfill state is not reset;
-- Frontier scholarly query variants now have persistent per-cell cursors;
-- Frontier specialist institutional sources now have persistent per-cell cursors;
-- OpenAlex always checks the newest page and also rotates through deeper result pages;
-- Crossref broad and priority-journal searches always check newest results and rotate through deeper offsets;
-- gap query banks are broader and, especially for Knowledge cells, explicitly bridge research talent/capacity to strategic autonomy, economic security, dependency and global competition;
-- the substantive A/B admission criteria and Frontier classifier are unchanged.
-
-The bundled radar.json is the user's uploaded current GitHub state and is intentionally not reinitialized.
+- Preserves the supplied radar.json without migration/reset.
+- Removes all OpenAlex API-key/GitHub-secret integration.
+- OpenAlex is explicitly keyless and fails fast on 429/allowance exhaustion.
+- Retains date-bounded OpenAlex newest + persisted depth rotation.
+- Crossref uses relevance discovery plus newest/deeper lanes, with from/until publication dates and future-date rejection.
+- Retains persisted Frontier query/source rotation.
+- Persists source warning details in radar.json on new scans.
+- Current live state refreshed from radar (6).json after successful scans: 93 A / 5 B / 19 C; no previously accepted items removed.
+- Preservation regression tests now enforce minimum historical baselines rather than a frozen exact corpus count, so successful future discovery does not fail tests.

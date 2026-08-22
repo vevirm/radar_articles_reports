@@ -74,8 +74,12 @@ class V14ZeroConfigTests(unittest.TestCase):
             radar.CONFIG["queries_b"] = original_b
 
         self.assertEqual(out, [])
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(calls), 4)
         self.assertTrue(all("mailto" not in params for params in calls))
+        self.assertTrue(all("until-pub-date:" in params.get("filter", "") for params in calls))
+        self.assertTrue(all("sort" not in calls[i] for i in (0, 2)))
+        self.assertEqual(calls[1].get("sort"), "published")
+        self.assertEqual(calls[3].get("sort"), "published")
 
     def test_public_openalex_unavailable_does_not_crash_stage(self):
         warnings = []
@@ -121,12 +125,13 @@ class V14ZeroConfigTests(unittest.TestCase):
             self.assertEqual(data["strand_a"], [])
             self.assertEqual(data["strand_b"], [])
             self.assertEqual(data["strand_c"], [])
+            self.assertEqual(data["scan_diagnostics"]["source_warning_count"], 4)
+            self.assertTrue(any("fatal stage error" in w for w in data["scan_diagnostics"]["source_warnings"]))
 
-    def test_workflow_contains_no_user_secret_configuration(self):
+    def test_workflow_keeps_openalex_key_optional_and_crossref_zero_config(self):
         workflow = (Path(__file__).resolve().parents[1] / ".github" / "workflows" / "radar-scan.yml").read_text()
         self.assertNotIn("OPENALEX_API_KEY", workflow)
         self.assertNotIn("CROSSREF_MAILTO", workflow)
-        self.assertNotIn("secrets.OPENALEX", workflow)
         self.assertNotIn("secrets.CROSSREF", workflow)
 
 

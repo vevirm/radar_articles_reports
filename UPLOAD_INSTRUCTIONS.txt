@@ -1,14 +1,13 @@
-V17.5.6 DROP-IN UPDATE
+R&I GEOPOLITICS RADAR V17.5.8 — KEYLESS
 
-1. Upload/replace the repository with the contents of this package.
-2. Keep the bundled radar.json. It is byte-for-byte the current GitHub JSON supplied for this repair (84 A / 5 B / 19 C).
-3. Push to main to run the normal scanner workflow.
+1. Upload/replace the repository files in GitHub.
+2. Keep the included radar.json; it is the preserved current corpus/state supplied for this repair.
+3. Do NOT create any GitHub Actions secrets for this scanner. None are used.
+4. Run the existing radar scan workflow.
 
-Preservation guarantees:
-- no historical cleanup is re-triggered;
-- incremental_state_version stays v17.2-persistent-source-cursors;
-- source_expansion_version stays v17.5.2-gap-report-recall;
-- the existing OpenAlex/Crossref/institution/Frontier cursors and fingerprints are retained;
-- new per-cell rotation and result-depth state is added lazily on the first scan.
-
-The scanner now rotates sparse-cell query variants and specialist sources persistently and checks deeper OpenAlex/Crossref result pages while still checking page 1 for newly published material.
+Behavior:
+- OpenAlex runs anonymously/keyless and stops promptly if its current allowance is unavailable;
+- Crossref and institutional/news scanning continue even if OpenAlex is unavailable;
+- Crossref is protected against future-dated records crowding out current results;
+- sparse Frontier cells rotate query variants and specialist sources across runs;
+- prior corpus items, cursors, fingerprints, and history are preserved.
