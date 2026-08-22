@@ -1,4 +1,4 @@
-# Architecture — V17.5.5
+# Architecture — V17.5.6
 
 The radar has three logically separate stages:
 
@@ -28,3 +28,14 @@ The target count is configured in `radar_config.json` (`frontier_gap_target_coun
 ## State continuity
 
 The V17.5.5 change does not expand the base source universe, so the existing source-expansion compatibility marker is retained. Current OpenAlex/Crossref/institution cursors and the Frontier gap cursor continue from the user's latest `radar.json`.
+
+
+## V17.5.6 discovery-depth state
+
+`scan_state` is extended without changing its v17.2 version marker. Three additive state families are initialized with `setdefault`, so an existing live checkpoint is not reset:
+
+- `frontier_gap_query_cursors`: per-cell formulation position;
+- `frontier_gap_source_cursors`: per-cell specialist-source position;
+- `result_depth`: per-query/page state for OpenAlex, Crossref broad, and Crossref priority tasks.
+
+Each scholarly query keeps a newest-results lane and a rotating depth lane. This preserves freshness while preventing recurring queries from repeatedly inspecting only the same top results.

@@ -1,20 +1,15 @@
-R&I × Geopolitics Radar V17.5.5
+R&I × Geopolitics Radar V17.5.6
 
-Built from the user's latest radar (4).json current state.
-The bundled radar.json is byte-for-byte identical to that uploaded file.
+Rotation/depth repair built on the user's current GitHub radar.json state.
 
-Key behavior:
-- current corpus and persistent source cursors are preserved;
-- all 16 Sovereignty Frontier cells use row-mechanism + directional semantic evidence;
-- evidence summaries may establish structural dependencies/bottlenecks without literal cell-label wording;
-- Opportunities/Risks are variable length with a hard cap of 15 per side;
-- sparse cells receive extra discovery budget proportional to their deficit to target depth 3;
-- ties rotate through frontier_gap_cursor;
-- normal OpenAlex/Crossref/institution/news rotation continues underneath the scarcity overlay;
-- no single cell is hard-coded as a permanent priority.
+What changed:
+- preserves all existing A/B/C corpus records and existing v17.2 source cursors;
+- does NOT bump incremental_state_version or source_expansion_version, so current cursor/backfill state is not reset;
+- Frontier scholarly query variants now have persistent per-cell cursors;
+- Frontier specialist institutional sources now have persistent per-cell cursors;
+- OpenAlex always checks the newest page and also rotates through deeper result pages;
+- Crossref broad and priority-journal searches always check newest results and rotate through deeper offsets;
+- gap query banks are broader and, especially for Knowledge cells, explicitly bridge research talent/capacity to strategic autonomy, economic security, dependency and global competition;
+- the substantive A/B admission criteria and Frontier classifier are unchanged.
 
-Current bundled-corpus Frontier check:
-- 18 qualifying matrix signals from 72 A / 5 B / 19 C;
-- 4 Productive-dependence (C) signals and 3 Double-loss (D) signals;
-- unrelated economic-coercion material does not fill Brain drain;
-- Opportunities/Risks show all qualifying ranked items up to 15 per side.
+The bundled radar.json is the user's uploaded current GitHub state and is intentionally not reinitialized.

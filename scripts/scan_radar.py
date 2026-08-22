@@ -156,6 +156,21 @@ def rotating_batch(items: list[Any], cursor: int, limit: int) -> tuple[list[Any]
     return batch, (0 if wrapped else end), wrapped
 
 
+def rotating_variants(items: list[Any], cursor: int, count: int = 1) -> tuple[list[Any], int]:
+    """Take a circular per-topic slice and persist where that topic should resume.
+
+    Unlike ``rotating_batch`` this helper may wrap inside a run because it is used
+    for small variant/source lists belonging to one Frontier cell.
+    """
+    seq = list(dict.fromkeys(items))
+    if not seq or count <= 0:
+        return [], 0
+    start = int(cursor or 0) % len(seq)
+    take = min(len(seq), max(1, int(count)))
+    out = [seq[(start + i) % len(seq)] for i in range(take)]
+    return out, (start + take) % len(seq)
+
+
 def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     """Load or initialise persistent incremental-discovery cursors."""
     old = previous.get("scan_state") if isinstance(previous, dict) else None
@@ -176,6 +191,9 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "crossref_priority_cursor": 0,
             "institution_cursor": 0,
             "frontier_gap_cursor": 0,
+            "frontier_gap_query_cursors": {},
+            "frontier_gap_source_cursors": {},
+            "result_depth": {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}},
             "backfill": {
                 "openalex": bool(source_done),
                 "crossref_broad": bool(source_done),
@@ -195,6 +213,15 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     state.setdefault("cycle_failed", {})
     if not isinstance(state.get("institution_seen_fingerprints"), dict):
         state["institution_seen_fingerprints"] = {}
+    if not isinstance(state.get("frontier_gap_query_cursors"), dict):
+        state["frontier_gap_query_cursors"] = {}
+    if not isinstance(state.get("frontier_gap_source_cursors"), dict):
+        state["frontier_gap_source_cursors"] = {}
+    if not isinstance(state.get("result_depth"), dict):
+        state["result_depth"] = {}
+    for family in ("openalex", "crossref_broad", "crossref_priority"):
+        if not isinstance(state["result_depth"].get(family), dict):
+            state["result_depth"][family] = {}
     for key in ("openalex", "crossref_broad", "crossref_priority", "institutions"):
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
@@ -273,11 +300,9 @@ def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], 
 def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
     """Allocate extra discovery budget to under-covered Frontier cells.
 
-    Normal source/query rotation is never replaced.  This plan adds a scarcity-weighted
-    overlay: a cell at zero receives more extra slots than a cell at one, a cell at one
-    receives more than a cell at two, and cells at/above the configured coverage target
-    receive no extra budget.  Ties rotate through a persisted cursor so every part of the
-    4x4 matrix gets attention over time.
+    Cell scarcity still determines *how much* attention a cell receives, but the
+    concrete search formulations are now independently persistent per cell. This
+    prevents a permanently sparse cell from restarting at variant 1 on every scan.
     """
     counts, qualifying, error = frontier_matrix_coverage(previous)
     start = int(state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
@@ -294,9 +319,6 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
     target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
     targets = ordered[:target_limit]
 
-    # Weighted round-robin: empties appear target_count times, count=1 appears
-    # target_count-1 times, etc.  This drives query/source allocation without
-    # hard-coding a preferred thematic cell.
     weighted_targets: list[str] = []
     for level in range(target_count, 0, -1):
         for key in targets:
@@ -306,58 +328,84 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         last_index = FRONTIER_CELL_ORDER.index(targets[-1])
         state["frontier_gap_cursor"] = (last_index + 1) % len(FRONTIER_CELL_ORDER)
 
+    query_cursors = state.setdefault("frontier_gap_query_cursors", {})
+    if not isinstance(query_cursors, dict):
+        query_cursors = {}
+        state["frontier_gap_query_cursors"] = query_cursors
+
+    # News gap queries: one formulation per selected cell per run, but resume from
+    # that cell's own saved variant next time.
     profiles = CONFIG.get("frontier_gap_search_queries", {})
     news_limit = max(0, int(CONFIG.get("frontier_gap_queries_per_scan", 8) or 0))
     queries: list[str] = []
+    news_used: dict[str, str] = {}
     for key in targets:
         raw = profiles.get(key, "") if isinstance(profiles, dict) else ""
         vals = raw if isinstance(raw, list) else [raw]
-        for val in vals:
-            q = clean_text(val)
-            if q and q not in queries:
-                queries.append(q)
-                break
+        vals = list(dict.fromkeys(clean_text(v) for v in vals if clean_text(v)))
+        if not vals:
+            continue
+        cursor_key = f"news:{key}"
+        chosen, next_cursor = rotating_variants(vals, query_cursors.get(cursor_key, 0), 1)
+        query_cursors[cursor_key] = next_cursor
+        if chosen and chosen[0] not in queries:
+            queries.append(chosen[0])
+            news_used[key] = chosen[0]
         if len(queries) >= news_limit:
             break
 
+    # Scholarly gap queries: scarcity controls the number of slots, while each cell
+    # advances through a larger formulation bank across scans.
     scholarly_profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
     scholarly_limit = max(0, int(CONFIG.get("frontier_gap_scholarly_queries_per_scan", 12) or 0))
-    per_target = max(1, int(CONFIG.get("frontier_gap_scholarly_queries_per_target", 3) or 1))
+    max_variants = max(1, int(CONFIG.get("frontier_gap_scholarly_queries_per_target", 5) or 1))
     query_lists: dict[str, list[str]] = {}
     if isinstance(scholarly_profiles, dict):
         for key in FRONTIER_CELL_ORDER:
             raw = scholarly_profiles.get(key, "")
             vals = raw if isinstance(raw, list) else [raw]
-            cleaned = [clean_text(v) for v in vals if clean_text(v)]
+            cleaned = list(dict.fromkeys(clean_text(v) for v in vals if clean_text(v)))
             if cleaned:
-                query_lists[key] = list(dict.fromkeys(cleaned))[:per_target]
+                query_lists[key] = cleaned[:max_variants]
 
     scholarly_queries: list[str] = []
-    per_cell_used: dict[str, int] = {}
-    # Consume weighted slots first. A zero-count cell can therefore use several
-    # distinct formulations before a merely low cell receives its last extra slot.
+    scholarly_cells: dict[str, list[str]] = {}
+    local_cursor = {key: int(query_cursors.get(f"scholarly:{key}", 0) or 0) for key in FRONTIER_CELL_ORDER}
     for key in weighted_targets:
-        vals = query_lists.get(key, [])
-        idx = per_cell_used.get(key, 0)
-        if idx < len(vals):
-            q = vals[idx]
-            per_cell_used[key] = idx + 1
-            if q not in scholarly_queries:
-                scholarly_queries.append(q)
         if len(scholarly_queries) >= scholarly_limit:
             break
-    # If some weighted cells had fewer configured variants, fill remaining budget
-    # round-robin from other sparse cells rather than wasting the slot.
-    if len(scholarly_queries) < scholarly_limit:
-        for round_i in range(per_target):
-            for key in ordered:
-                vals = query_lists.get(key, [])
-                if round_i < len(vals) and vals[round_i] not in scholarly_queries:
-                    scholarly_queries.append(vals[round_i])
-                    if len(scholarly_queries) >= scholarly_limit:
-                        break
+        vals = query_lists.get(key, [])
+        if not vals:
+            continue
+        chosen, next_cursor = rotating_variants(vals, local_cursor.get(key, 0), 1)
+        local_cursor[key] = next_cursor
+        if chosen and chosen[0] not in scholarly_queries:
+            scholarly_queries.append(chosen[0])
+            scholarly_cells.setdefault(key, []).append(chosen[0])
+
+    # Fill unused slots by cycling sparse cells. This keeps available scan budget
+    # productive even when weighted passes collided on duplicate formulations.
+    fill_rounds = 0
+    while len(scholarly_queries) < scholarly_limit and ordered and fill_rounds < max_variants:
+        before = len(scholarly_queries)
+        for key in ordered:
+            vals = query_lists.get(key, [])
+            if not vals:
+                continue
+            chosen, next_cursor = rotating_variants(vals, local_cursor.get(key, 0), 1)
+            local_cursor[key] = next_cursor
+            if chosen and chosen[0] not in scholarly_queries:
+                scholarly_queries.append(chosen[0])
+                scholarly_cells.setdefault(key, []).append(chosen[0])
             if len(scholarly_queries) >= scholarly_limit:
                 break
+        fill_rounds += 1
+        if len(scholarly_queries) == before:
+            break
+
+    for key in FRONTIER_CELL_ORDER:
+        if key in query_lists:
+            query_cursors[f"scholarly:{key}"] = local_cursor.get(key, 0)
 
     return {
         "counts": counts,
@@ -369,7 +417,9 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         "targets": targets,
         "weighted_targets": weighted_targets,
         "queries": queries,
+        "news_query_cells": news_used,
         "scholarly_queries": scholarly_queries,
+        "scholarly_query_cells": scholarly_cells,
         "classifier_error": error,
     }
 
@@ -1182,23 +1232,26 @@ def collect_openalex(
     queries_override: list[str] | None = None,
     stage_deadline: float | None = None,
     query_dates_override: dict[str, dt.date] | None = None,
+    depth_state: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Zero-config OpenAlex discovery.
+    """Zero-config OpenAlex discovery with a latest lane plus rotating depth lane.
 
-    Uses the public endpoint anonymously, as earlier radar versions did.  There is
-    deliberately no API-key/secret branch.  Requests are paced and retried, and
-    if anonymous access is unavailable the stage stops quickly while Crossref and
-    direct institutional scanning continue.
+    Every selected query always checks page 1 for newly published work. It then
+    checks one persisted deeper page (2..N), so recurring queries stop rereading
+    only the same newest results.
     """
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     per_page = int(CONFIG.get("openalex_per_query", 60))
+    depth_max = max(1, int(CONFIG.get("openalex_depth_pages_max", 6) or 1))
     workers = max(1, min(int(CONFIG.get("openalex_public_workers", 2)), 3))
     timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
     min_interval = float(CONFIG.get("openalex_public_min_interval_seconds", 0.30))
     retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
     rate_lock = threading.Lock()
+    depth_lock = threading.Lock()
     last_request = [0.0]
     stop_public = threading.Event()
+    depth_state = depth_state if isinstance(depth_state, dict) else {}
 
     def wait_slot() -> None:
         with rate_lock:
@@ -1208,40 +1261,43 @@ def collect_openalex(
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
-    def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
+    def convert_works(works: list[dict[str, Any]], query_from: dt.date) -> list[dict[str, Any]]:
+        out: list[dict[str, Any]] = []
+        for work in works:
+            if bool(CONFIG.get("skip_known_items_before_classification", True)):
+                title0 = clean_text(work.get("title") or work.get("display_name"))
+                doi0 = clean_text(work.get("doi"))
+                if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+                    continue
+            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from))
+            if item:
+                out.append(item)
+        return out
+
+    def fetch_page(q: str, query_from: dt.date, page: int) -> tuple[list[dict[str, Any]], str | None, int]:
         if stop_public.is_set():
-            return [], "public endpoint unavailable"
+            return [], "public endpoint unavailable", 0
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
-            return [], "budget"
-        query_from = (query_dates_override or {}).get(q, from_date)
+            return [], "budget", 0
         params = {
             "search": q,
             "filter": f"from_publication_date:{query_from.isoformat()}",
             "sort": "publication_date:desc",
-            "per-page": str(per_page),
+            "per_page": str(per_page),
+            "page": str(page),
         }
         for attempt in range(retries + 1):
             if stop_public.is_set():
-                return [], "public endpoint unavailable"
+                return [], "public endpoint unavailable", 0
             wait_slot()
             try:
                 r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("results", [])
-                    out = []
-                    for work in works:
-                        if bool(CONFIG.get("skip_known_items_before_classification", True)):
-                            title0 = clean_text(work.get("title") or work.get("display_name"))
-                            doi0 = clean_text(work.get("doi"))
-                            if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
-                                continue
-                        item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from))
-                        if item:
-                            out.append(item)
-                    return out, None
+                    return convert_works(works, query_from), None, len(works)
                 if r.status_code in {401, 403, 409}:
                     stop_public.set()
-                    return [], f"HTTP {r.status_code}; continuing with other zero-config sources"
+                    return [], f"HTTP {r.status_code}; continuing with other zero-config sources", 0
                 if r.status_code in {429, 500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
                     try:
@@ -1250,13 +1306,35 @@ def collect_openalex(
                         delay = min(8.0, 1.5 * (attempt + 1))
                     time.sleep(delay)
                     continue
-                return [], f"HTTP {r.status_code}"
+                return [], f"HTTP {r.status_code}", 0
             except Exception as e:
                 if attempt < retries:
                     time.sleep(min(6.0, 1.5 * (attempt + 1)))
                     continue
-                return [], type(e).__name__
-        return [], "request failed"
+                return [], type(e).__name__, 0
+        return [], "request failed", 0
+
+    def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
+        query_from = (query_dates_override or {}).get(q, from_date)
+        latest, err, latest_count = fetch_page(q, query_from, 1)
+        if err:
+            return latest, err
+        if depth_max <= 1 or latest_count < per_page:
+            return latest, None
+        with depth_lock:
+            page = max(2, int(depth_state.get(q, 2) or 2))
+            if page > depth_max:
+                page = 2
+        deep, deep_err, deep_count = fetch_page(q, query_from, page)
+        if deep_err == "budget":
+            return latest, deep_err
+        if deep_err:
+            return latest, deep_err
+        with depth_lock:
+            # If the requested deep page was exhausted, restart at page 2 next time;
+            # otherwise continue one page deeper, wrapping at the configured cap.
+            depth_state[q] = 2 if deep_count < per_page or page >= depth_max else page + 1
+        return latest + deep, None
 
     out: list[dict[str, Any]] = []
     budget_hits = 0
@@ -1280,6 +1358,7 @@ def collect_openalex(
     if budget_hits:
         warnings.append(f"OpenAlex scan budget reached; {budget_hits} queued query/queries skipped")
     return out
+
 
 def crossref_date(item: dict[str, Any]) -> dt.date | None:
     for key in ("published-online", "published-print", "published", "issued"):
@@ -1355,17 +1434,15 @@ def collect_crossref(
     priority_tasks_override: list[tuple[str, str]] | None = None,
     stage_deadline: float | None = None,
     query_dates_override: dict[str, dt.date] | None = None,
+    broad_depth_state: dict[str, Any] | None = None,
+    priority_depth_state: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Zero-config Crossref discovery using only the anonymous public pool.
-
-    V17 gives scholarly literature a dedicated priority sweep. Before the broad
-    query universe, it searches a curated set of journals with compact queries
-    focused on the EU + R&I + geopolitics triangle. This increases recall of
-    peer-reviewed work without loosening the admission gate.
-    """
+    """Zero-config Crossref discovery with newest-result and rotating-depth lanes."""
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     rows = int(CONFIG.get("crossref_rows_per_query", 50))
     priority_rows = int(CONFIG.get("crossref_priority_journal_rows", 35))
+    depth_max = max(1, int(CONFIG.get("crossref_depth_pages_max", 6) or 1))
+    priority_depth_max = max(1, int(CONFIG.get("crossref_priority_depth_pages_max", 4) or 1))
     priority_journals = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
     priority_queries = list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
     priority_tasks = priority_tasks_override if priority_tasks_override is not None else [(j, q) for j in priority_journals for q in priority_queries]
@@ -1374,6 +1451,8 @@ def collect_crossref(
     retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
     rate_lock = threading.Lock()
     last_request = [0.0]
+    broad_depth_state = broad_depth_state if isinstance(broad_depth_state, dict) else {}
+    priority_depth_state = priority_depth_state if isinstance(priority_depth_state, dict) else {}
 
     def wait_for_slot() -> None:
         with rate_lock:
@@ -1383,14 +1462,30 @@ def collect_crossref(
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
-    def fetch_query(q: str, journal: str = "") -> tuple[list[dict[str, Any]], str | None]:
+    def convert_items(works: list[dict[str, Any]], query_from: dt.date) -> list[dict[str, Any]]:
+        out: list[dict[str, Any]] = []
+        for item in works:
+            if bool(CONFIG.get("skip_known_items_before_classification", True)):
+                titles0 = item.get("title") or []
+                title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
+                doi0 = clean_text(item.get("DOI"))
+                if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+                    continue
+            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
+            if c:
+                out.append(c)
+        return out
+
+    def fetch_page(q: str, journal: str, offset: int) -> tuple[list[dict[str, Any]], str | None, int]:
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
-            return [], "budget"
+            return [], "budget", 0
         query_from = (query_dates_override or {}).get(q, from_date) if not journal else from_date
+        page_rows = priority_rows if journal else rows
         params = {
             "query.bibliographic": q,
             "filter": f"from-pub-date:{query_from.isoformat()}",
-            "rows": priority_rows if journal else rows,
+            "rows": page_rows,
+            "offset": max(0, int(offset)),
             "sort": "published",
             "order": "desc",
             "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract",
@@ -1403,18 +1498,7 @@ def collect_crossref(
                 r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("message", {}).get("items", [])
-                    out = []
-                    for item in works:
-                        if bool(CONFIG.get("skip_known_items_before_classification", True)):
-                            titles0 = item.get("title") or []
-                            title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
-                            doi0 = clean_text(item.get("DOI"))
-                            if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
-                                continue
-                        c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
-                        if c:
-                            out.append(c)
-                    return out, None
+                    return convert_items(works, query_from), None, len(works)
                 if r.status_code in {429, 500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
                     try:
@@ -1423,13 +1507,32 @@ def collect_crossref(
                         delay = min(8.0, 1.5 * (attempt + 1))
                     time.sleep(delay)
                     continue
-                return [], f"HTTP {r.status_code}"
+                return [], f"HTTP {r.status_code}", 0
             except Exception as e:
                 if attempt < retries:
                     time.sleep(min(6.0, 1.5 * (attempt + 1)))
                     continue
-                return [], type(e).__name__
-        return [], "request failed"
+                return [], type(e).__name__, 0
+        return [], "request failed", 0
+
+    def fetch_query(q: str, journal: str = "") -> tuple[list[dict[str, Any]], str | None]:
+        page_rows = priority_rows if journal else rows
+        state_map = priority_depth_state if journal else broad_depth_state
+        max_pages = priority_depth_max if journal else depth_max
+        key = f"{journal} || {q}" if journal else q
+        latest, err, latest_count = fetch_page(q, journal, 0)
+        if err:
+            return latest, err
+        if max_pages <= 1 or latest_count < page_rows:
+            return latest, None
+        page = max(2, int(state_map.get(key, 2) or 2))
+        if page > max_pages:
+            page = 2
+        deep, deep_err, deep_count = fetch_page(q, journal, (page - 1) * page_rows)
+        if deep_err:
+            return latest, deep_err
+        state_map[key] = 2 if deep_count < page_rows or page >= max_pages else page + 1
+        return latest + deep, None
 
     out: list[dict[str, Any]] = []
     budget_hit = False
@@ -1465,6 +1568,7 @@ def collect_crossref(
     if budget_hit:
         warnings.append("Crossref scan budget reached; remaining queued scholarly queries skipped")
     return out
+
 
 def decompress_xml(content: bytes) -> bytes:
     if content[:2] == b"\x1f\x8b":
@@ -3058,23 +3162,34 @@ def main() -> int:
 
     gap_sources: list[dict[str, Any]] = []
     used_domains: set[str] = set()
-    per_target_source_index: dict[str, int] = {}
+    source_cursors = state.setdefault("frontier_gap_source_cursors", {})
+    if not isinstance(source_cursors, dict):
+        source_cursors = {}
+        state["frontier_gap_source_cursors"] = source_cursors
+    local_source_cursor = {k: int(source_cursors.get(k, 0) or 0) for k in target_domain_lists}
     for target in frontier_focus.get("weighted_targets", frontier_focus.get("targets", [])):
         domains = target_domain_lists.get(target, [])
         if not domains:
             continue
-        idx = per_target_source_index.get(target, 0)
-        while idx < len(domains):
-            domain = domains[idx]
-            idx += 1
+        # Try every configured specialist source at most once for this slot. The
+        # saved cursor advances even when a source overlaps the base rotation.
+        attempts = 0
+        while attempts < len(domains):
+            chosen, next_cursor = rotating_variants(domains, local_source_cursor.get(target, 0), 1)
+            local_source_cursor[target] = next_cursor
+            attempts += 1
+            if not chosen:
+                break
+            domain = chosen[0]
             src = source_by_domain.get(domain)
             if src and domain not in used_domains and src not in inst_rotating:
                 gap_sources.append(src)
                 used_domains.add(domain)
                 break
-        per_target_source_index[target] = idx
         if len(gap_sources) >= extra_cap:
             break
+    for target, cursor in local_source_cursor.items():
+        source_cursors[target] = cursor
     inst_batch = inst_rotating + gap_sources
 
     oa_backfill = not bool(state["backfill"].get("openalex"))
@@ -3133,10 +3248,12 @@ def main() -> int:
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
         fut_oa = ex.submit(
-            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, gap_query_dates
+            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, gap_query_dates,
+            state["result_depth"]["openalex"]
         )
         fut_cr = ex.submit(
-            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, gap_query_dates
+            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, gap_query_dates,
+            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"]
         )
         news = fut_news.result()
         oa = fut_oa.result()
@@ -3354,6 +3471,11 @@ def main() -> int:
             "frontier_gap_scholarly_queries_this_run": len(frontier_focus.get("scholarly_queries", [])),
             "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",
             "frontier_gap_targets_this_run": len(frontier_focus["targets"]),
+            "frontier_gap_query_cursor_cells": len(state.get("frontier_gap_query_cursors", {})),
+            "frontier_gap_source_cursor_cells": len(state.get("frontier_gap_source_cursors", {})),
+            "openalex_depth_queries_tracked": len(state.get("result_depth", {}).get("openalex", {})),
+            "crossref_broad_depth_queries_tracked": len(state.get("result_depth", {}).get("crossref_broad", {})),
+            "crossref_priority_depth_tasks_tracked": len(state.get("result_depth", {}).get("crossref_priority", {})),
             "frontier_qualifying_before_scan": frontier_focus["qualifying"],
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
             "frontier_coverage_classifier_ok": not bool(frontier_focus["classifier_error"]),

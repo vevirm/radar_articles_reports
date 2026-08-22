@@ -85,7 +85,7 @@ for(const re of [/nuclear expansion.*non-EU reactor technology/i,/attracts resea
         radar = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         scanner = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
         self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 90)
-        self.assertEqual((len(radar.get('strand_a', [])), len(radar.get('strand_b', [])), len(radar.get('strand_c', []))), (72, 5, 19))
+        self.assertEqual((len(radar.get('strand_a', [])), len(radar.get('strand_b', [])), len(radar.get('strand_c', []))), (84, 5, 19))
         self.assertIn('Recovered a larger pre-upload radar corpus from Git history', scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)
 

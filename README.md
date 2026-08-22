@@ -1,4 +1,17 @@
-# R&I × Geopolitics Radar — V17.5.5 semantic cells + scarcity-balanced scanning
+# R&I × Geopolitics Radar — V17.5.6 persistent rotation + result-depth repair
+
+V17.5.6 is a non-destructive scanner repair on top of the V17.5.5 classifier. It keeps the current corpus and existing v17.2 source cursors, but fixes the discovery loop so sparse Frontier cells do not restart from the same query/source choices on every run. OpenAlex and Crossref now check the newest results **and** one persisted deeper page/offset for each recurring query.
+
+The substantive A/B/C admission criteria and the 16-cell Frontier classifier are unchanged from V17.5.5.
+
+## What V17.5.6 fixes
+
+- persistent per-cell scholarly gap-query cursors;
+- persistent per-cell specialist institutional-source cursors;
+- latest + rotating-depth OpenAlex paging;
+- latest + rotating-depth Crossref broad and priority-journal paging;
+- larger gap-query banks, especially for Knowledge cells, with explicit R&I + strategic/economic-security bridges;
+- no reset of `incremental_state_version`, `source_expansion_version`, existing corpus rows, fingerprints, or completed backfill state.
 
 V17.5.5 keeps the strict A/B/C admission logic and the persistent source rotations from the current repository, but fixes the remaining imbalance between **corpus relevance** and **Frontier-cell assignment**.
 
@@ -8,10 +21,10 @@ A paper/report may be relevant enough to stay in the radar without being evidenc
 
 The bundled `radar.json` is the user's latest post-scan file from 22 August 2026:
 
-- Strand A: **72**
+- Strand A: **84**
 - Strand B: **5**
 - Strand C: **19**
-- Total: **96**
+- Total: **108**
 
 Its earlier corrective A/B and C cleanup markers are already complete. V17.5.5 **does not run another historical cleanup**. It preserves this current corpus and applies the improved logic to Frontier classification and future discovery.
 
@@ -89,7 +102,7 @@ The current view therefore contains **4 dependence-column signals (C)** and **3 
 
 The Opportunities & Risks page no longer forces six items per side. It shows all qualifying high-ranked items available **up to a hard cap of 15 per list**. Risks and opportunities may therefore have different lengths, and the page does not print a fixed-number promise.
 
-## First run after installing V17.5.5
+## First run after installing V17.5.6
 
 The next scan does **not** re-audit the historical corpus. It performs:
 
@@ -104,7 +117,7 @@ The next scan does **not** re-audit the historical corpus. It performs:
 
 ## Validation
 
-V17.5.5 includes regression tests for:
+V17.5.6 includes regression tests for:
 
 - the economic-coercion/`ERC` false Brain Drain assignment;
 - real researcher outflow mapping to `Knowledge-D / Brain drain`;
@@ -117,4 +130,4 @@ Current local validation: **92/92 unittest tests** and **96/96 pytest tests** pa
 
 ## Deployment
 
-Upload the repository contents over the current repository, keeping `radar.json` from this package (it is the exact current file supplied for this build). A push to `main` runs the normal scanner workflow. No additional one-time cleanup marker is required for V17.5.5.
+Upload the repository contents over the current repository, keeping `radar.json` from this package (it is the exact current file supplied for this build). A push to `main` runs the normal scanner workflow. No additional one-time cleanup marker is required for V17.5.6.
