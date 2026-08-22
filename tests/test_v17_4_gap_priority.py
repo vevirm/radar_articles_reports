@@ -84,11 +84,11 @@ const rows=['knowledge','infrastructure','conversion','rules'];
 const fake=[];
 for(let i=0;i<20;i++) fake.push({headline:`Europe loses AI capability ${i} as foreign suppliers restrict access and firms fall behind`,source:'Reuters',date:'2026-08-21',watch_theme:'technology sovereignty'});
 const v=P.buildPriorityView({strand_a:[],strand_b:[],strand_c:fake},{now:'2026-08-22T16:00:00Z'});
-if(v.risks.length>6||v.opportunities.length>6) process.exit(2);
+if(v.risks.length>15||v.opportunities.length>15) process.exit(2);
 ''';
         self.run_node(script)
         page = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('Top six, diversified across the R&I system.', page)
+        self.assertIn('Strongest qualifying signals, diversified across the R&I system.', page)
 
     def test_navigation_and_preservation_guard_remain(self):
         main = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -100,7 +100,7 @@ if(v.risks.length>6||v.opportunities.length>6) process.exit(2);
         self.assertIn("../priorities/", briefing)
         self.assertIn("../priorities/", frontier)
         self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ("strand_a", "strand_b", "strand_c")), 90)
-        self.assertEqual((len(radar.get("strand_a", [])), len(radar.get("strand_b", [])), len(radar.get("strand_c", []))), (69, 5, 19))
+        self.assertEqual((len(radar.get("strand_a", [])), len(radar.get("strand_b", [])), len(radar.get("strand_c", []))), (72, 5, 19))
         self.assertFalse(radar.get("repository_bundle_seed"))
         self.assertIn("Recovered a larger pre-upload radar corpus from Git history", scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)

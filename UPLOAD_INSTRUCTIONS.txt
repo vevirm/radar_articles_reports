@@ -1,7 +1,9 @@
-V17.5.4 DROP-IN UPDATE
+V17.5.5 DROP-IN UPDATE
 
 1. Upload/replace the repository with the contents of this package.
-2. Keep the bundled radar.json: it is the exact current radar (3).json supplied for this build (69 A / 5 B / 19 C).
+2. Keep the bundled radar.json: it is the exact current radar (4).json supplied for this build (72 A / 5 B / 19 C).
 3. Push to main to run the normal scanner workflow.
 
-V17.5.4 does NOT repeat the historical cleanup. It preserves the current OpenAlex/Crossref/institution cursors, recomputes the 16 Frontier cells with cell-specific semantic evidence, and adds scarcity-weighted discovery on top of normal rotation.
+V17.5.5 does NOT repeat the historical cleanup. It preserves the current OpenAlex/Crossref/institution cursors, recomputes the 16 Frontier cells with balanced row-mechanism + directional semantic evidence, and adds scarcity-weighted discovery on top of normal rotation.
+
+The Opportunities & Risks page shows variable-length ranked lists capped at 15 per side; no fixed six-item target remains.

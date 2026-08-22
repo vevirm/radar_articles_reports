@@ -1,36 +1,36 @@
-# R&I × Geopolitics Radar — V17.5.4 semantic cells + scarcity-balanced scanning
+# R&I × Geopolitics Radar — V17.5.5 semantic cells + scarcity-balanced scanning
 
-V17.5.4 keeps the strict A/B/C admission logic and the persistent source rotations from the current repository, but fixes the remaining imbalance between **corpus relevance** and **Frontier-cell assignment**.
+V17.5.5 keeps the strict A/B/C admission logic and the persistent source rotations from the current repository, but fixes the remaining imbalance between **corpus relevance** and **Frontier-cell assignment**.
 
-A paper/report may be relevant enough to stay in the radar without being evidence for a specific Sovereignty-Frontier cell. V17.5.4 therefore separates those decisions.
+A paper/report may be relevant enough to stay in the radar without being evidence for a specific Sovereignty-Frontier cell. V17.5.5 therefore separates those decisions.
 
 ## Current corpus carried forward
 
 The bundled `radar.json` is the user's latest post-scan file from 22 August 2026:
 
-- Strand A: **69**
+- Strand A: **72**
 - Strand B: **5**
 - Strand C: **19**
-- Total: **93**
+- Total: **96**
 
-Its earlier corrective A/B and C cleanup markers are already complete. V17.5.4 **does not run another historical cleanup**. It preserves this current corpus and applies the improved logic to Frontier classification and future discovery.
+Its earlier corrective A/B and C cleanup markers are already complete. V17.5.5 **does not run another historical cleanup**. It preserves this current corpus and applies the improved logic to Frontier classification and future discovery.
 
 The current OpenAlex, Crossref and institutional cursors are also preserved. The scanner does not restart source rotation just because the Frontier balancing logic changed.
 
-## What V17.5.4 fixes
+## What V17.5.5 fixes
 
-### 1. Cell assignment now requires cell-specific evidence
+### 1. Cell assignment uses balanced semantic evidence
 
-The Frontier is no longer a loose keyword bucket. Before a signal can occupy a cell, the observed headline/finding must express that cell's actual mechanism.
+The Frontier is neither a loose keyword bucket nor a literal cell-label matcher. Placement now uses two stages: **row mechanism** plus **directional evidence** (independence and competitiveness). For evidence-derived signals, a substantive title/summary can establish the mechanism and relationship even when the extracted display sentence does not repeat every keyword.
 
 Examples:
 
-- `Knowledge-D / Brain drain` requires direct evidence of researcher/scientist/talent outflow, people leaving, failed retention, etc.
-- `Infrastructure-D / Cut supply` requires actual access loss, supply disruption, shortage, chokepoint or no-substitute evidence.
-- `Conversion-D / Hollowing out` requires firm exit, relocation, closure, loss of production/capability, scale-up failure, etc.
-- `Rules-D / Gridlock` requires decision failure, blocked access, conflicting rules, export-control blockage, etc.
+- strategic dependence on non-EU reactor technology can populate an infrastructure dependence cell even without the phrase “rented frontier”;
+- critical external dependencies in technologies/resources/supply chains can count as infrastructure exposure or double loss when the document also establishes the performance downside;
+- EU capacity-building, secure-supply and investment measures can populate opening cells when they plausibly improve both autonomy and competitiveness;
+- `Knowledge-D / Brain drain` remains deliberately specific and still requires actual European/EU-member researcher or talent outflow.
 
-The same principle applies to all 16 cells.
+Short tokens remain boundary-aware, so semantic broadening does not revive acronym-substring errors.
 
 This fixes the reported false assignment of **“Mitigate, deter, escalate: Europe’s options against US economic coercion”** to Brain Drain. The report may remain relevant to the broader radar, but it does not count as a Brain Drain signal.
 
@@ -72,22 +72,24 @@ Every one of the 16 cells has its own discovery profiles. Empty cells get more d
 
 ### 5. Normal rotation continues from the user's current state
 
-V17.5.4 deliberately keeps the source-expansion state compatible with the user's current scanner. On the next run it continues from the existing cursors rather than restarting at query/source zero.
+V17.5.5 deliberately keeps the source-expansion state compatible with the user's current scanner. On the next run it continues from the existing cursors rather than restarting at query/source zero.
 
 ## What the corrected classifier sees right now
 
-Using the bundled current `radar.json`, the stricter Frontier classifier currently finds **7 qualifying Frontier signals**:
+Using the bundled current `radar.json`, the balanced classifier finds **18 qualifying Frontier signals**, up from 7 under V17.5.4:
 
 - Knowledge: A 0 / B 0 / C 0 / D 0
-- Infrastructure: A 2 / B 0 / C 1 / D 0
-- Conversion: A 3 / B 0 / C 1 / D 0
-- Rules: A 0 / B 0 / C 0 / D 0
+- Infrastructure: A 2 / B 2 / C 2 / D 1
+- Conversion: A 5 / B 1 / C 2 / D 1
+- Rules: A 1 / B 0 / C 0 / D 1
 
-This is intentionally more conservative than the previous display. A cell stays empty until evidence genuinely fits it.
+The current view therefore contains **4 dependence-column signals (C)** and **3 double-loss signals (D)** rather than leaving obvious dependency material outside the matrix. Empty/low cells still receive scarcity-weighted discovery on subsequent scans.
 
-With the existing gap cursor preserved, the next scan will prioritise a rotating subset of the highest-deficit cells, then subsequent scans continue rotating through the remaining sparse cells. Once cells begin filling, the extra budget automatically shifts toward whichever cells remain emptiest or thinnest.
+### Opportunities & risks list length
 
-## First run after installing V17.5.4
+The Opportunities & Risks page no longer forces six items per side. It shows all qualifying high-ranked items available **up to a hard cap of 15 per list**. Risks and opportunities may therefore have different lengths, and the page does not print a fixed-number promise.
+
+## First run after installing V17.5.5
 
 The next scan does **not** re-audit the historical corpus. It performs:
 
@@ -102,7 +104,7 @@ The next scan does **not** re-audit the historical corpus. It performs:
 
 ## Validation
 
-V17.5.4 includes regression tests for:
+V17.5.5 includes regression tests for:
 
 - the economic-coercion/`ERC` false Brain Drain assignment;
 - real researcher outflow mapping to `Knowledge-D / Brain drain`;
@@ -111,8 +113,8 @@ V17.5.4 includes regression tests for:
 - all 16 cells having discovery profiles;
 - cumulative corpus preservation and cursor continuation.
 
-Current local validation: **93 tests pass** plus Python and JavaScript syntax checks.
+Current local validation: **92/92 unittest tests** and **96/96 pytest tests** pass, plus Python and JavaScript syntax checks.
 
 ## Deployment
 
-Upload the repository contents over the current repository, keeping `radar.json` from this package (it is the exact current file supplied for this build). A push to `main` runs the normal scanner workflow. No additional one-time cleanup marker is required for V17.5.4.
+Upload the repository contents over the current repository, keeping `radar.json` from this package (it is the exact current file supplied for this build). A push to `main` runs the normal scanner workflow. No additional one-time cleanup marker is required for V17.5.5.

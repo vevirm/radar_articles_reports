@@ -1,4 +1,4 @@
-# Architecture — V17.5.4
+# Architecture — V17.5.5
 
 The radar has three logically separate stages:
 
@@ -10,7 +10,7 @@ The radar has three logically separate stages:
 
 `frontier/frontier.js` is the canonical classifier. `scripts/frontier_coverage.js` invokes that exact module from the scanner, so browser display and scan prioritisation share the same occupancy logic.
 
-Short acronyms are boundary-aware. Row scoring alone cannot fill a cell: after row/direction scoring, `cellEvidencePass()` requires direct observed evidence for the selected row/column mechanism.
+Short acronyms are boundary-aware. Row scoring alone cannot fill a cell: after row/direction scoring, `cellEvidencePass()` requires a supported row mechanism plus evidence for the selected independence/competitiveness direction. Evidence-derived signals may use the underlying title/summary; weak signals must carry the mechanism themselves.
 
 ## Scarcity plan
 
@@ -27,4 +27,4 @@ The target count is configured in `radar_config.json` (`frontier_gap_target_coun
 
 ## State continuity
 
-The V17.5.4 change does not expand the base source universe, so the existing source-expansion compatibility marker is retained. Current OpenAlex/Crossref/institution cursors and the Frontier gap cursor continue from the user's latest `radar.json`.
+The V17.5.5 change does not expand the base source universe, so the existing source-expansion compatibility marker is retained. Current OpenAlex/Crossref/institution cursors and the Frontier gap cursor continue from the user's latest `radar.json`.

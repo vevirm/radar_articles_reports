@@ -26,7 +26,7 @@
 
   const ROW_TERMS={
     knowledge:['research','science','scientific','university','universities','academic','academia','researcher','researchers','scientist','scientists','talent','skills','training','doctoral','phd','publication','research collaboration','scientific collaboration','research cooperation','scientific cooperation','horizon europe','framework programme','erc','knowledge','visa','mobility','brain drain','brain gain','open science','research security'],
-    infrastructure:['compute','computing','supercomputer','artificial intelligence','ai model','ai models','ai video model','ai system','ai systems','foundation model','foundation models','data center','data centre','cloud','semiconductor','chip','chips','microelectronics','quantum','reactor','nuclear','grid','electricity','energy','battery','batteries','lithium','critical mineral','critical minerals','critical raw material','critical raw materials','rare earth','materials','instrument','instruments','facility','facilities','infrastructure','telecom','5g','6g','satellite','cable','supply chain','supply chains','input','inputs'],
+    infrastructure:['compute','computing','supercomputer','artificial intelligence','ai model','ai models','ai video model','ai system','ai systems','foundation model','foundation models','data center','data centre','cloud','semiconductor','chip','chips','microelectronics','quantum','reactor','nuclear','grid','electricity','energy','battery','batteries','lithium','critical mineral','critical minerals','critical raw material','critical raw materials','rare earth','materials','instrument','instruments','facility','facilities','infrastructure','telecom','5g','6g','satellite','cable','supply chain','supply chains','strategic resource','strategic resources','critical technology','critical technologies','technology value chain','technology value chains','input','inputs'],
     conversion:['firm','firms','company','robot','robots','robotics','companies','startup','start-up','scale-up','manufacturer','manufacturing','industrial','industry','product','products','commercial','commercialisation','commercialization','market','capital','venture','investment','investor','procurement','patent','patents','defence','defense','military','dual-use','dual use','capability','capabilities','production','factory','factories'],
     rules:['export control','export controls','sanction','sanctions','regulation','regulatory','standard','standards','rule','rules','governance','institution','institutions','funding programme','funding program','programme','program','screening','research security','restriction','restrictions','ban','bans','law','laws','framework','decision','permit','permits','subsidy','subsidies','state aid']
   };
@@ -39,9 +39,9 @@
   const GEOPOLITICAL_ACTORS=['china','chinese','united states',' us ','american','russia','russian','taiwan','india','japan','south korea','korea','uk','britain','canada'];
 
   const AUTONOMY_UP=['reduce strategic depend','reduce depend','reducing depend','diversif','sovereign control','digital sovereignty','strategic autonomy','self-suff','domestic capacity','european capacity','home-grown','homegrown','reshor','local production','own technology','own capability','control over','alternative supplier','alternative suppliers','open-weight','open source','eu-led','european infrastructure'];
-  const AUTONOMY_DOWN=['more dependent','dependence on','dependent on','reliance on','rely on','non-eu technology','non-eu vendor','foreign supplier','foreign suppliers','external supplier','externally controlled','on others terms',"others' terms",'loss of access','access lost','brain drain','people and ideas leave','imported technology','foreign technology','chinese companies','restricted access','partner changes','vendor lock','lock-in','cut supply','hollowing out','chinese firms','us firms','american firms'];
+  const AUTONOMY_DOWN=['more dependent','dependence on','dependent on','strategic dependency','strategic dependencies','external dependency','external dependencies','critical dependency','critical dependencies','reliance on','rely on','non-eu technology','non-eu vendor','foreign supplier','foreign suppliers','external supplier','externally controlled','on others terms',"others' terms",'loss of access','access lost','brain drain','people and ideas leave','imported technology','foreign technology','chinese companies','restricted access','partner changes','vendor lock','lock-in','cut supply','hollowing out','chinese firms','us firms','american firms'];
   const PERFORMANCE_UP=['expand capabilities','expands capabilities','build capacity','capacity-building','capability-building','investment','invests','investing','supercomputer','frontier','leading','leader','outpace','overtook','scale','scaling','competitive','competitiveness','productivity','talent inflow','brain gain','open-weight','advanced technology','advanced technologies','fast','growth','innovation capacity','sets pace'];
-  const PERFORMANCE_DOWN=['less competitive','lag behind','lagging','left behind','miss the','fragmentation','fragmented','subscale','costly','expensive','higher cost','cost increase','security cuts','cuts collaboration','brain drain','hollowing','no capability','no substitute','shortage','delay','slower','declining','loss of capacity','losing capacity','unable to','cannot decide','performance price','operational reasons','slow scientific','slow research','raise cost','raises cost','raising cost','struggl','cannot decide','fail to adopt','failed to adopt'];
+  const PERFORMANCE_DOWN=['less competitive','lag behind','lagging','left behind','miss the','fragmentation','fragmented','subscale','costly','expensive','higher cost','cost increase','security cuts','cuts collaboration','brain drain','hollowing','no capability','no substitute','shortage','bottleneck','chokepoint','vulnerability','vulnerabilities','exposure','delay','slower','declining','loss of capacity','losing capacity','unable to','cannot decide','performance price','operational reasons','slow scientific','slow research','raise cost','raises cost','raising cost','struggl','cannot decide','fail to adopt','failed to adopt'];
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
   function norm(v){return clean(v).toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+.#/&'-]+/g,' ').replace(/\s+/g,' ').trim()}
@@ -221,7 +221,7 @@
     const support=norm(`${clean(x.anchor||'')} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
     const directHits=hitCount(direct,ROW_TERMS[row.id]);
     const supportHits=hitCount(support,ROW_TERMS[row.id]);
-    return directHits*2.4+Math.min(2,supportHits)*.6;
+    return directHits*2.4+Math.min(3,supportHits)*(x._origin==='Evidence signal'?1.2:.6);
   }
 
   function questionFlags(q){return {sustain:q.sustain>=2,compete:q.compete>=2,failure:q.failure>=2}}
@@ -274,44 +274,73 @@
   }
 
   function cellEvidencePass(x,evidence,row,column){
-    // A Frontier cell is a substantive claim, not a keyword bucket.  The observed
-    // sentence/headline must itself express the mechanism named by the cell.
-    // Supporting abstracts can supply EU context, but cannot manufacture the cell.
+    // The matrix is not a literal-label matcher.  A signal qualifies when the
+    // document establishes (1) the row mechanism and (2) the two directional
+    // dimensions represented by the column.  Supporting abstracts may supply
+    // those relationships for evidence-derived signals; weak signals must carry
+    // the mechanism in their own headline/statement.
     const d=norm(`${candidateWhat(x)} ${signalTheme(x)} ${clean(x.signal_note||x._evidencePoint||'')}`);
     const support=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
     const t=`${d} ${support}`;
-    const ext=/\b(china|chinese|united states|us|american|foreign|non-eu|taiwan|japan|south korea|korea|uk|britain|canada)\b/;
-    const knowledge=/\b(researcher|researchers|scientist|scientists|academic|academics|faculty|doctoral|phd|research talent|scientific talent|research workforce|science workforce|research collaboration|scientific collaboration|knowledge flow|knowledge flows|skills)\b/;
-    const infra=/\b(compute|computing|supercomputer|cloud|data center|data centre|semiconductor|semiconductors|chip|chips|microelectronics|quantum|reactor|nuclear|grid|electricity|energy|battery|batteries|lithium|critical mineral|critical minerals|critical raw material|critical raw materials|rare earth|materials|instrument|instruments|facility|facilities|infrastructure|telecom|5g|6g|satellite|cable|supply chain|supply chains)\b/;
-    const conversion=/\b(firm|firms|company|companies|startup|start-up|scale-up|scaleup|manufacturer|manufacturing|industrial|industry|product|products|commercialisation|commercialization|market|capital|venture|investment|investor|procurement|patent|patents|production|factory|factories|defence|defense|dual-use|dual use)\b/;
-    const rules=/\b(export control|export controls|regulation|regulatory|standard|standards|rule|rules|governance|funding programme|funding program|framework programme|framework program|screening|research security|restriction|restrictions|ban|bans|law|laws|decision|permit|permits|subsidy|subsidies|state aid|sanction|sanctions)\b/;
+    const evidenceSignal=x._origin==='Evidence signal';
+    const ext=/\b(china|chinese|united states|us|american|foreign|non-eu|third-country|third country|taiwan|japan|south korea|korea|uk|britain|canada)\b/;
+    const eu=/\b(eu|europe|european|member states|austria|belgium|bulgaria|croatia|cyprus|czech|denmark|estonia|finland|france|germany|greece|hungary|ireland|italy|latvia|lithuania|luxembourg|malta|netherlands|poland|portugal|romania|slovakia|slovenia|spain|sweden)\b/;
+
+    const rowPatterns={
+      knowledge:/\b(researcher|researchers|scientist|scientists|academic|academics|faculty|doctoral|phd|research talent|scientific talent|research workforce|science workforce|research collaboration|scientific collaboration|research cooperation|scientific cooperation|knowledge flow|knowledge flows|skills|research careers?|research mobility|researcher mobility|science diplomacy|open science|research security|higher education)\b/,
+      infrastructure:/\b(compute|computing|supercomputer|cloud|data center|data centre|semiconductor|semiconductors|chip|chips|microelectronics|quantum|reactor|reactors|nuclear|grid|electricity|energy|battery|batteries|lithium|critical mineral|critical minerals|critical raw material|critical raw materials|rare earth|materials|instrument|instruments|facility|facilities|infrastructure|telecom|telecommunications|5g|6g|satellite|cable|supply chain|supply chains|input|inputs|technology vendor|technology vendors|value chain|value chains)\b/,
+      conversion:/\b(firm|firms|company|companies|startup|start-up|scale-up|scaleup|manufacturer|manufacturing|industrial|industry|product|products|commercialisation|commercialization|market|capital|venture|investment|investor|procurement|patent|patents|production|factory|factories|defence|defense|dual-use|dual use|industrial capacity|production capacity|competitiveness fund)\b/,
+      rules:/\b(export control|export controls|regulation|regulatory|standard|standards|rule|rules|governance|funding programme|funding program|framework programme|framework program|screening|research security|restriction|restrictions|ban|bans|law|laws|decision|permit|permits|subsidy|subsidies|state aid|sanction|sanctions|licensing|licence|license|policy framework|institutional)\b/
+    };
+    const rowRe=rowPatterns[row.id];
+    const rowDirect=rowRe.test(d),rowSupport=rowRe.test(support);
+    if(!rowDirect && !(evidenceSignal&&rowSupport)) return false;
+
+    // Directional cues are intentionally semantic and broad.  They capture
+    // dependencies, bottlenecks, capability-building, costs and gains without
+    // requiring the exact words used in the cell nickname.
+    const autonomyUp=/strategic autonomy|technological sovereignty|digital sovereignty|sovereign|independence|reduce.{0,45}(?:depend|reliance)|reduc(?:ing|tion).{0,45}strategic depend|diversif|de-risk|derisk|self-suff|domestic capacity|european capacity|eu-led|european infrastructure|local production|onshor|reshor|secure supply|supply security|material security|resilien|alternative supplier|own (?:technology|capability|infrastructure)|control over|strengthen.{0,35}(?:eu|european).{0,35}(?:capacity|capabilit)|eu.{0,30}(?:fund|programme|program|instrument|strategy).{0,45}(?:build|strengthen|support|boost|develop|scale)/.test(t);
+    const autonomyDown=/strategic depend|critical external depend|external depend|dependence on|dependent on|dependencies|reliance on|rely on|non-eu (?:technology|vendor|supplier|provider)|foreign (?:supplier|vendor|technology|platform|capital|market|infrastructure|expertise|talent)|external (?:supplier|vendor)|import dependence|imported technology|vendor lock|lock-in|loss of access|restricted access|on others(?:'|’) terms|ceding.{0,40}(?:value|profits|leverage|technology)|foreign-controlled/.test(t);
+    const performanceUp=/competit|performance|frontier|leading|leader|advanced|scale|scaling|growth|productivity|innovation|investment|market access|access to|capacity|capabilit|excellence|quality|benefit|strengthen|expand|build|deploy|commerciali|sets? pace|industrial leadership|value creation|resilien/.test(t);
+    const performanceDown=/less competitive|lag|behind|shortage|bottleneck|chokepoint|vulnerab|exposure|risk|costly|expensive|higher cost|delay|slow|fragment|subscale|declin|loss|losing|hollow|gap|cannot|unable|no substitute|disrupt|cut off|cutoff|blocked|constraint|barrier|threat|weakness|shortcoming|ceding|two-speed|two speed/.test(t);
 
     if(row.id==='knowledge'){
-      if(!knowledge.test(d)) return false;
-      if(column.id==='A') return /brain gain|talent inflow|attract(?:ing|ion)?|retain(?:ing|ed)?|recruit(?:ing|ment)?|return(?:ing)? researchers?|researchers? return|scientists? return|inflow|arrival|mobility into|relocat(?:e|ing|ion).{0,35}(?:eu|europe)/.test(d);
-      if(column.id==='B') return /research security|screening|restrict|barrier|closed lab|cut.{0,35}collabor|suspend.{0,35}collabor|exclude|visa restriction|security review/.test(d) && /cost|delay|burden|slower|fragment|reduce|cut|loss|declin|restrict|barrier|closed|suspend|exclude/.test(d);
-      if(column.id==='C') return ext.test(d) && /depend|reliance|rely|access|collabor|mobility|recruit|expertise|foreign talent|international talent/.test(d) && /excellence|performance|capabilit|competitive|frontier|benefit|strength|access|quality/.test(d);
-      return /brain drain|researcher outflow|researchers? (?:leave|leaving|left)|scientists? (?:leave|leaving|left)|academic(?:s)? (?:leave|leaving|left)|talent outflow|talent loss|loss of (?:research|scientific) talent|unable to retain|failure to retain|retention crisis|depart(?:ure|ing)|relocat(?:e|ing|ion).{0,35}(?:abroad|outside europe|united states|us)|moving abroad/.test(d);
+      if(column.id==='D'){
+        // Keep the specific cell specific: the loss must concern Europe/an EU member,
+        // not merely appear somewhere in a Europe-related document.
+        const strongLoss=/brain drain|researcher outflow|researchers? (?:leave|leaving|left)|scientists? (?:leave|leaving|left)|academics? (?:leave|leaving|left)|talent outflow|loss of (?:research|scientific) talent|unable to retain|failure to retain|retention crisis|moving abroad/.test(d);
+        if(strongLoss && eu.test(`${d} ${norm(evidence?.title||'')}`)) return true;
+        // Generic "talent loss" is too ambiguous on its own; require the EU/member-state
+        // subject to be close to the loss statement.
+        const euPhrase='(?:eu|europe|european|member states|austria|belgium|bulgaria|croatia|cyprus|czech|denmark|estonia|finland|france|germany|greece|hungary|ireland|italy|latvia|lithuania|luxembourg|malta|netherlands|poland|portugal|romania|slovakia|slovenia|spain|sweden)';
+        return new RegExp(`(?:${euPhrase}).{0,55}talent loss|talent loss.{0,55}(?:${euPhrase})`).test(d);
+      }
+      if(column.id==='A') return performanceUp && (autonomyUp || /brain gain|talent inflow|attract|retain|recruit|return|research collaboration|scientific collaboration|research cooperation|science diplomacy|knowledge flow/.test(t)) && eu.test(t);
+      if(column.id==='B') return performanceDown && /research security|screening|visa|restrict|barrier|exclude|suspend|closed lab|collabor|mobility|openness/.test(t) && (autonomyUp||/security|sovereign|protect/.test(t));
+      return performanceUp && (autonomyDown || (ext.test(t)&&/collabor|cooperat|mobility|recruit|expertise|foreign talent|international talent|science diplomacy|knowledge flow|access/.test(t)));
     }
+
     if(row.id==='infrastructure'){
-      if(!infra.test(d)) return false;
-      if(column.id==='A') return /build|expand|invest|onshor|domestic|european capacity|eu-led|control over|alternative supplier|diversif|self-suff|sovereign/.test(d) && /capacity|capabilit|competitive|scale|leading|investment|access|resilien/.test(d);
-      if(column.id==='B') return /sovereign|autonomy|locali|onshor|domestic|european|de-risk|derisk/.test(d) && /cost|delay|lag|slow|shortage|expensive|subscale|fragment|burden/.test(d);
-      if(column.id==='C') return ext.test(d) && /depend|reliance|rely|access|vendor|supplier|import|foreign technology|non-eu/.test(d) && /scale|performance|capacity|frontier|advanced|fast|competitive|capabilit/.test(d);
-      return /cut off|cutoff|loss of access|access lost|shortage|ban|block|disrupt|chokepoint|bottleneck|no substitute|unable to access|outage|supply cut|restricted access/.test(d) && /depend|reliance|access|capacity|capabilit|competitive|shortage|substitute/.test(d);
+      if(column.id==='A') return autonomyUp && performanceUp;
+      if(column.id==='B') return autonomyUp && performanceDown;
+      if(column.id==='C') return (autonomyDown || (ext.test(t)&&/supplier|vendor|technology|compute|cloud|material|input|supply chain|reactor|semiconductor|chip|infrastructure/.test(t))) && performanceUp;
+      return (autonomyDown||/access|supply|dependency/.test(t)) && performanceDown;
     }
+
     if(row.id==='conversion'){
-      if(!conversion.test(d)) return false;
-      if(column.id==='A') return /scale|lead|champion|expand|invest|procurement|commerciali|manufactur|production|factory|market share/.test(d) && /eu|europe|european|domestic|home-grown|homegrown|autonomy|sovereign/.test(d);
-      if(column.id==='B') return /sovereign|autonomy|protect|locali|onshor|domestic|de-risk|derisk|regulat/.test(d) && /cost|subscale|delay|fragment|burden|slower|niche|expensive/.test(d);
-      if(column.id==='C') return ext.test(d) && /foreign capital|foreign market|us market|american market|foreign platform|depend|reliance|rely|access|scale abroad/.test(d) && /scale|growth|performance|competitive|commerciali|market access/.test(d);
-      return /firm exit|firms exit|exit europe|move abroad|moving abroad|relocat.{0,30}abroad|acquired by|foreign acquisition|closure|shut down|hollow|declin.{0,30}(?:firm|production|manufactur|capabilit)|lost production|loss of production|los(?:e|es|ing) (?:[^.]{0,35})?production capacity|loss of (?:[^.]{0,35})?production capacity|funding gap|scale-up gap|scaleup gap|fail.{0,20}scale|firms? fall behind/.test(d);
+      if(column.id==='A') return (autonomyUp||/\b(eu|european|europe)\b.{0,45}(?:invest|scale|manufactur|procurement|industrial|production)/.test(t)) && performanceUp;
+      if(column.id==='B') return (autonomyUp||/protect|locali|onshor|domestic|de-risk|derisk/.test(t)) && performanceDown;
+      if(column.id==='C') return (autonomyDown||ext.test(t)) && performanceUp && /foreign capital|foreign market|market access|foreign platform|scale abroad|investment|supplier|partner|global market|china exposure/.test(t);
+      return performanceDown && /firm exit|firms exit|exit europe|move abroad|moving abroad|relocat|foreign acquisition|closure|shut down|hollow|lost production|loss of production|production capacity|funding gap|scale-up gap|scaleup gap|fail.{0,20}scale|firms? fall behind|industrial decline|ceding profits|ceding value|displaced competition|two-speed|two speed/.test(t);
     }
-    if(!rules.test(d)) return false;
-    if(column.id==='A') return /adopted|sets? (?:a )?standard|standard adopted|global standard|funding programme|funding program|framework programme|framework program|procurement|state aid|subsid|rule-set|rule set/.test(d) && /lead|advantage|autonomy|scale|competitive|market|innovation|research|technology/.test(d);
-    if(column.id==='B') return /research security|screening|restrict|export control|regulat|de-risk|derisk|sovereign|autonomy|ban/.test(d) && /cost|delay|burden|fragment|slower|collaboration|mobility|access/.test(d);
-    if(column.id==='C') return /foreign standards|foreign rules|us rules|american rules|platform rules|export licen[cs]e|non-eu rules|non-eu standards/.test(d) && /follow|adopt|depend|reliance|rely|access/.test(d) && /performance|scale|competitive|access|innovation|research|technology/.test(d);
-    return /gridlock|cannot decide|unable to decide|decision delay|blocked by|foreign rules|foreign standards|export controls|sanctions|exclusion/.test(d) && /blocked|loses? access|loss of access|declin|fall behind|delay|cannot|unable|depend|competitive|innovation|research|technology/.test(d);
+
+    // Rules/institutions are broader than a single named regulation: EU-created
+    // frameworks can be openings; foreign regimes can create productive dependence;
+    // fragmentation/delay can create double loss.
+    if(column.id==='A') return performanceUp && (autonomyUp || /\b(eu|european)\b.{0,35}(?:framework|programme|program|regulation|standard|strategy|fund|governance|procurement|instrument)/.test(t));
+    if(column.id==='B') return performanceDown && (autonomyUp||/research security|screening|de-risk|derisk|sovereign|protect/.test(t)) && /restrict|export control|regulat|ban|sanction|screening|security|licen|compliance|burden/.test(t);
+    if(column.id==='C') return performanceUp && (autonomyDown||/foreign standards|foreign rules|us rules|american rules|platform rules|export licen[cs]e|non-eu rules|non-eu standards|us export-control|us export control/.test(t));
+    return performanceDown && /gridlock|cannot decide|unable to decide|decision delay|blocked by|institutional constraint|fragmented governance|foreign rules|foreign standards|export controls|sanctions|exclusion|regulatory fragmentation|regulatory delay|delayed/.test(t);
   }
 
   function whyQualifies(flags,column,row){
@@ -343,10 +372,20 @@
     const strategicActor=/\b(china|chinese|united states|us|american|russia|russian|taiwan|india|japan|south korea|korea|uk|britain|canada)\b/.test(primaryNorm);
     const strategicIndirect=strategicDomain&&strategicActor;
     const structuralTalentLoss=/brain drain|researcher outflow|research talent outflow|scientific talent outflow|talent loss/.test(primaryNorm);
-    const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal' || structuralTalentLoss;
-    const evidenceScopedEU=x._origin==='Evidence signal' && euLink>=3 && /\beu\b|european union|european commission|europe\b|member states/.test(norm(`${clean(evidence?.title||'')} ${clean(x.anchor||'')}`));
+    const supportNorm=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
+    const evidenceScopedEU=x._origin==='Evidence signal' && euLink>=3 && /\beu\b|european union|european commission|europe\b|member states/.test(norm(`${sourceFor(x)} ${clean(evidence?.source||'')} ${clean(evidence?.title||'')} ${clean(x.anchor||'')} ${supportNorm}`));
+    // Analytical reports often describe structural dependencies/capability shifts rather than
+    // discrete "events".  Treat a supported document-level movement as dynamic enough for
+    // Frontier classification; weak signals still have to move in their own headline.
+    const structuralEvidence=x._origin==='Evidence signal' && qCount>=1 && (
+      hitCount(`${primary} ${supportNorm}`,INDEPENDENCE_TERMS)>=1 ||
+      hitCount(`${primary} ${supportNorm}`,COMPETITIVENESS_TERMS)>=2 ||
+      hitCount(`${primary} ${supportNorm}`,FAILURE_TERMS)>=1
+    );
+    const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal' || structuralTalentLoss || structuralEvidence;
+    const movementSupported=primaryMoves || (x._origin==='Evidence signal'&&qCount>=1);
 
-    if(qCount===0 || !primaryMoves || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
+    if(qCount===0 || !movementSupported || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
 
     // Try rows in evidence-score order and keep the first row/column whose observed
     // statement actually satisfies that cell's semantic contract.  This prevents

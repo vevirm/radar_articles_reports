@@ -40,6 +40,6 @@ Transferability alone is not enough. A generic methodology paper does not qualif
 
 Current factual developments must have a clear R&I/geopolitical bridge relevant to Europe. Signals may connect to a specific A/B item, a recurring A/B theme or a curated strategic watch theme. Accepted signals are cumulative.
 
-## V17.5.4 Frontier note
+## V17.5.5 Frontier note
 
-Corpus admission and Frontier-cell occupancy are separate decisions. A/B/C admission remains governed by the substantive evidence gates above. The Frontier now additionally requires cell-specific direct evidence and boundary-aware short-token matching; a relevant corpus item may therefore remain in the radar while occupying no Frontier cell.
+Corpus admission and Frontier-cell occupancy are separate decisions. A/B/C admission remains governed by the substantive evidence gates above. The Frontier uses boundary-aware matching plus a supported row mechanism and directional evidence. Evidence-derived signals may use the underlying title/summary to establish structural dependencies, bottlenecks, capability shifts or institutional effects; a relevant corpus item may still remain in the radar while occupying no Frontier cell.

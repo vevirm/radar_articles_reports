@@ -23,7 +23,7 @@
 
   function buildPriorityView(data,opts={}){
     const frontier=Frontier.buildFrontier(data,opts);
-    const limit=Number.isFinite(opts.limit)?Math.max(1,Math.floor(opts.limit)):6;
+    const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(15,Math.floor(opts.limit))):15;
     const allOpportunities=frontier.signals
       .filter(x=>x.column.id==='A')
       .sort((a,b)=>structuralScore(b)-structuralScore(a)||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
