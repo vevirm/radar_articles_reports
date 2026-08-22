@@ -1,11 +1,11 @@
-V17.5.8 KEYLESS DISCOVERY HARDENING
+V17.5.9 R&I FORESIGHT METHOD TRANSFER
 
-- Preserves the supplied radar.json without migration/reset.
-- Removes all OpenAlex API-key/GitHub-secret integration.
-- OpenAlex is explicitly keyless and fails fast on 429/allowance exhaustion.
-- Retains date-bounded OpenAlex newest + persisted depth rotation.
-- Crossref uses relevance discovery plus newest/deeper lanes, with from/until publication dates and future-date rejection.
-- Retains persisted Frontier query/source rotation.
-- Persists source warning details in radar.json on new scans.
-- Current live state refreshed from radar (6).json after successful scans: 93 A / 5 B / 19 C; no previously accepted items removed.
-- Preservation regression tests now enforce minimum historical baselines rather than a frozen exact corpus count, so successful future discovery does not fail tests.
+- Preserves the supplied live radar.json without migration/reset.
+- Strand B now has an R&I-method transfer route: substantive R&I foresight methodology can qualify even without explicit EU/geopolitics wording.
+- A paper such as “A new Delphi methodology for R&I foresight” is intentionally admissible as Strand B.
+- Generic lifestyle, consumer, corporate or unrelated futures methodology remains excluded.
+- Adds method-first scholarly discovery queries for Delphi, horizon scanning, weak signals, scenario methods, anticipatory governance, backcasting, morphological analysis and foresight evaluation in R&I contexts.
+- A dedicated persisted Strand-B method lane injects six rotating method-first queries into both OpenAlex and Crossref every scan, so these papers are not delayed by the main A/B query cursor.
+- Strand A and Strand C geopolitical/economic-security gates are unchanged.
+- Retains V17.5.8 keyless OpenAlex behavior, Crossref date/relevance hardening, depth rotation, persistent Frontier rotation and stored diagnostics.
+- Live corpus/state retained: 93 A / 5 B / 19 C at packaging time.

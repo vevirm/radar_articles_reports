@@ -22,15 +22,12 @@ Research/academic **brain drain, brain gain, researcher mobility, scientific-tal
 
 ## Strand B — foresight methodology on the substance
 
-B requires:
+B requires substantive foresight/scenario/horizon-scanning/weak-signal methodology and then qualifies through either of two routes:
 
-- substantive foresight/scenario/horizon-scanning/weak-signal methodology;
-- substantive EU/European scope;
-- substantive R&I or strategic-technology capability;
-- substantive geopolitical/economic-security context;
-- a supported relationship between those components.
+1. **EU/geopolitics route** — substantive EU/European scope + substantive R&I/strategic-technology capability + substantive geopolitical/economic-security context + a supported relationship between those components; or
+2. **R&I-method transfer route** — the paper/report is substantively and explicitly about foresight methodology for research, innovation, science/technology policy or the R&I system itself. Such methodology is treated as directly transferable to EU R&I practice even when the source does not itself mention the EU or geopolitics.
 
-Transferability alone is not enough. A generic methodology paper does not qualify simply because its methods could theoretically be used by EU policymakers.
+The transfer route is intentionally R&I-specific. Generic futures methods, corporate forecasting, consumer/lifestyle scenarios or unrelated sector foresight do not qualify merely because the method could theoretically be reused in Europe. A paper such as **“A new Delphi methodology for R&I foresight”** should qualify as Strand B.
 
 ### Explicit negative example
 

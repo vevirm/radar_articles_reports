@@ -64,7 +64,7 @@ class ClassifierTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 1)
         self.assertTrue(ev["a_pass"])
 
-    def test_rejects_transferability_only_methodology_b(self):
+    def test_rejects_transferability_when_not_explicitly_ri_focused(self):
         title = "Evaluating horizon-scanning methods for public technology policy"
         abstract = (
             "This peer-reviewed study compares horizon scanning methods, evaluation criteria and bias controls for government technology policy. "

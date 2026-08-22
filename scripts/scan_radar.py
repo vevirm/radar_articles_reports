@@ -190,6 +190,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "openalex_cursor": 0,
             "crossref_broad_cursor": 0,
             "crossref_priority_cursor": 0,
+            "strand_b_method_cursor": 0,
             "institution_cursor": 0,
             "frontier_gap_cursor": 0,
             "frontier_gap_query_cursors": {},
@@ -227,7 +228,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "institution_cursor", "frontier_gap_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["version"] = INCREMENTAL_STATE_VERSION
     state["source_expansion_version"] = SOURCE_EXPANSION_VERSION
@@ -1017,42 +1018,61 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     tier1_deep_method = bool(source_tier == 1 and method_bridge and len(set(method_full)) >= 2)
     method_substantive = bool(explicit_method_title or method_in_ta or early_method_body or tier1_deep_method)
 
-    # B must still be useful to R&I/S&T/strategic-policy practice.  Generic academic
-    # "research" is not enough, which keeps unrelated futures papers out.
-    b_context_terms = [
-        "research and innovation", "research policy", "innovation policy", "science policy",
-        "technology policy", "science and technology", "research and development", "r&d",
-        "research security", "technology governance", "innovation governance", "public policy",
-        "public sector", "government", "regulation", "strategic policy", "economic security",
-        "research funding", "innovation system", "research system", "higher education",
-        "university research", "research organisation", "research organization", "technology assessment",
-        "industrial innovation", "deep tech", "critical technology", "critical technologies",
-        "emerging technology", "artificial intelligence", "semiconductor", "quantum", "biotechnology",
+    # Strand B has two legitimate routes.  The first is the EU/geopolitics route
+    # shared with Strand A.  The second is a method-transfer route for genuinely
+    # R&I-focused foresight methodology that is directly usable in EU R&I practice,
+    # even when the paper itself is not written around geopolitics or the EU.
+    #
+    # Keep this context deliberately narrower than generic "public policy" or generic
+    # "technology": a methodology paper must be about the R&I / science / innovation
+    # system itself (or an explicitly R&I-adjacent foresight practice), not merely a
+    # futures method that could theoretically be repurposed.
+    b_ri_method_terms = [
+        "research and innovation", "r&i", "r&i foresight", "research foresight",
+        "innovation foresight", "science foresight", "technology foresight",
+        "research policy", "innovation policy", "science policy", "science and technology policy",
+        "research and development", "r&d", "research funding", "research system",
+        "innovation system", "research governance", "innovation governance",
+        "science and technology", "technology assessment", "research evaluation",
+        "research infrastructure", "research infrastructures", "research capacity",
+        "innovation capacity", "higher education", "university research",
+        "research organisation", "research organization", "research security",
+        "science diplomacy", "industrial innovation", "deep tech", "critical technology",
+        "critical technologies", "emerging technology",
     ]
-    b_context = bool(ri_substantive or geo_substantive or contains_any(ta, b_context_terms) or contains_any(full[:12000], b_context_terms))
+    b_ri_method_context_ta = distinct_matches(ta, b_ri_method_terms)
+    b_ri_method_context_full = distinct_matches(full[:12000], b_ri_method_terms)
 
     trend_only = contains_any(title, TREND_ONLY_HINTS) and not (explicit_method_title or method_in_ta or method_bridge)
 
-    # V17: Strand B is methodology *on the substance*, not a generic methods library.
-    # It therefore requires the same EU + R&I + geopolitical/economic-security triangle
-    # as Strand A, plus substantive foresight methodology.  Transferability alone is no
-    # longer enough.
-    b_eu_rel = eu_rel
-    b_transferable = False
+    # Scholarly transferability must be visible in title/abstract.  Institutional
+    # methodology reports may establish the R&I context in the early body.  This lets
+    # e.g. "A new Delphi methodology for R&I foresight" qualify, while a Delphi paper
+    # on household lifestyles, consumer marketing or generic corporate strategy does not.
+    if source_kind == "scholarly":
+        b_transferable = bool(b_ri_method_context_ta)
+    else:
+        b_transferable = bool(b_ri_method_context_ta or b_ri_method_context_full)
+
+    b_eu_rel = eu_rel or ("derived" if b_transferable else None)
 
     a_pass = bool(ri_substantive and geo_substantive and eu_rel and bridge_supported)
-    b_pass = bool(
+    b_geo_route = bool(
         foresight_substantive and method_substantive and not trend_only
         and ri_substantive and geo_substantive and eu_rel and bridge_supported
     )
+    b_transfer_route = bool(
+        foresight_substantive and method_substantive and not trend_only and b_transferable
+    )
+    b_pass = bool(b_geo_route or b_transfer_route)
 
-    overall_eu = eu_rel
+    overall_eu = eu_rel or ("derived" if b_pass and b_transferable else None)
 
     return {
         "a_pass": a_pass,
         "b_pass": b_pass,
         "eu_relevance": overall_eu,
-        "eu_evidence": eu_hits or (["transferable to EU public-sector R&I/S&T foresight"] if b_transferable else []),
+        "eu_evidence": eu_hits or (["R&I foresight methodology transferable to EU R&I practice"] if b_transferable else []),
         "ri_evidence": (ri_ta or ri_full)[:5],
         "geo_evidence": (geo_ta or geo_full)[:5],
         "bridge_sentence": bridge_sentence,
@@ -3136,16 +3156,29 @@ def main() -> int:
     gap_from = DATE_FLOOR if gap_lookback_months <= 0 else min(DATE_FLOOR, now.date() - relativedelta(months=gap_lookback_months))
     oa_cap = int(CONFIG.get("openalex_queries_per_scan", 40))
     cr_cap = int(CONFIG.get("crossref_broad_queries_per_scan", 35))
-    oa_base_cap = max(1, oa_cap - min(len(gap_scholarly), max(0, oa_cap - 1)))
-    cr_base_cap = max(1, cr_cap - min(len(gap_scholarly), max(0, cr_cap - 1)))
+
+    # Keep a small, persisted methodology-first lane active every scan. This is
+    # separate from the large A+B cursor, so transferable R&I foresight methods are
+    # not delayed for several runs simply because the broad cursor is currently in
+    # the Strand-A portion of the query bank.
+    b_method_bank = list(dict.fromkeys(CONFIG.get("queries_b_method", [])))
+    b_method_focus, state["strand_b_method_cursor"], b_method_wrapped = rotating_batch(
+        b_method_bank,
+        state.get("strand_b_method_cursor", 0),
+        int(CONFIG.get("queries_b_method_per_scan", 6)),
+    )
+
+    reserved = len(gap_scholarly) + len(b_method_focus)
+    oa_base_cap = max(1, oa_cap - min(reserved, max(0, oa_cap - 1)))
+    cr_base_cap = max(1, cr_cap - min(reserved, max(0, cr_cap - 1)))
     oa_base, state["openalex_cursor"], oa_wrapped = rotating_batch(
         all_queries, state.get("openalex_cursor", 0), oa_base_cap
     )
     cr_base, state["crossref_broad_cursor"], cr_broad_wrapped = rotating_batch(
         all_queries, state.get("crossref_broad_cursor", 0), cr_base_cap
     )
-    oa_batch = list(dict.fromkeys(gap_scholarly + oa_base))[:oa_cap]
-    cr_batch = list(dict.fromkeys(gap_scholarly + cr_base))[:cr_cap]
+    oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + oa_base))[:oa_cap]
+    cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + cr_base))[:cr_cap]
     gap_query_dates = {q: gap_from for q in gap_scholarly}
     priority_tasks_all = [
         (journal, query)
@@ -3236,6 +3269,10 @@ def main() -> int:
         log_progress(
             f"Frontier gap-rescue: {len(gap_scholarly)} scholarly query/queries search from "
             f"{gap_from.isoformat()} for the selected sparse cells; normal rotation remains incremental"
+        )
+    if b_method_focus:
+        log_progress(
+            f"Strand-B method lane: {len(b_method_focus)} rotating R&I foresight-method query/queries this scan"
         )
     log_progress(
         f"Known corpus loaded before discovery: {len(KNOWN_AB_IDENTITIES)} A/B identities, "
