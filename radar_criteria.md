@@ -39,3 +39,7 @@ Transferability alone is not enough. A generic methodology paper does not qualif
 ## Strand C — weak signals
 
 Current factual developments must have a clear R&I/geopolitical bridge relevant to Europe. Signals may connect to a specific A/B item, a recurring A/B theme or a curated strategic watch theme. Accepted signals are cumulative.
+
+## V17.5.4 Frontier note
+
+Corpus admission and Frontier-cell occupancy are separate decisions. A/B/C admission remains governed by the substantive evidence gates above. The Frontier now additionally requires cell-specific direct evidence and boundary-aware short-token matching; a relevant corpus item may therefore remain in the radar while occupying no Frontier cell.

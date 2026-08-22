@@ -763,7 +763,7 @@
     "Europe research talent attraction retention brain gain",
     "European researcher mobility academic careers"
   ],
-  "quality_profile_version": "v17.5.2-precision-talent",
+  "quality_profile_version": "v17.5.4-semantic-cells",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -829,7 +829,7 @@
   "skip_known_items_before_classification": true,
   "skip_known_institution_urls_before_fetch": true,
   "institution_seen_cache_max": 5000,
-  "frontier_gap_queries_per_scan": 6,
+  "frontier_gap_queries_per_scan": 8,
   "frontier_gap_search_queries": {
     "knowledge-A": "(EU OR Europe OR European) (researchers OR scientists OR academics OR \"research talent\") (attract OR retain OR recruitment OR return OR \"brain gain\" OR mobility) (capacity OR competitiveness OR autonomy OR excellence)",
     "knowledge-B": "(EU OR Europe OR European) (\"research security\" OR screening OR restrictions OR de-risking) (researchers OR universities OR collaboration OR mobility) (delay OR cost OR burden OR fragmentation OR \"talent loss\")",
@@ -848,49 +848,89 @@
     "rules-C": "(EU OR Europe OR European) (relies OR depends OR follows OR access) (US rules OR American rules OR foreign standards OR platform rules OR export licence OR export license) (research OR technology OR innovation) (performance OR access OR scale)",
     "rules-D": "(EU OR Europe OR European) (\"export controls\" OR sanctions OR foreign rules OR standards OR exclusion OR fragmentation) (research OR technology OR innovation) (blocked OR loses OR decline OR dependence OR \"fall behind\")"
   },
-  "frontier_gap_priority_cells": [
-    "knowledge-D",
-    "knowledge-C",
-    "rules-D",
-    "conversion-D",
-    "infrastructure-D"
-  ],
-  "frontier_gap_scholarly_queries_per_scan": 10,
+  "frontier_gap_priority_cells": [],
+  "frontier_gap_scholarly_queries_per_scan": 14,
   "frontier_gap_scholarly_queries": {
     "knowledge-A": [
-      "Europe research talent attraction retention brain gain",
-      "EU attract researchers scientists research talent"
+      "Europe researcher attraction retention brain gain",
+      "EU research talent recruitment return mobility",
+      "European Research Area attract retain scientists"
     ],
     "knowledge-B": [
-      "Europe research security restrictions researcher mobility collaboration costs",
-      "EU research security talent mobility collaboration burden"
+      "Europe research security restrictions collaboration mobility costs",
+      "EU researcher screening academic collaboration barriers",
+      "European research security talent mobility burden"
     ],
     "knowledge-C": [
-      "Europe researcher mobility foreign expertise scientific collaboration dependence",
-      "European research mobility international collaboration foreign talent"
+      "Europe foreign research talent dependence scientific excellence",
+      "EU international researcher mobility foreign expertise dependence",
+      "European research collaboration non-EU expertise performance"
     ],
     "knowledge-D": [
-      "Europe research brain drain researchers academic mobility",
-      "European Union research brain drain researcher mobility",
-      "Europe research talent outflow researcher retention",
-      "European Research Area brain drain researchers",
-      "Europe research brain drain academic researchers",
-      "European researcher outflow talent retention brain circulation",
-      "Choose Europe research careers brain drain",
-      "European Research Area researcher mobility brain circulation"
+      "Europe research brain drain researcher outflow",
+      "EU research talent loss scientists leaving Europe",
+      "European Research Area researcher outflow retention crisis"
     ],
-    "infrastructure-A": "Europe research infrastructure strategic autonomy capacity investment",
-    "infrastructure-B": "Europe technology sovereignty infrastructure costs delays competitiveness",
-    "infrastructure-C": "Europe dependence foreign compute chips research infrastructure performance",
-    "infrastructure-D": "Europe technology infrastructure shortage access loss dependence competitiveness",
-    "conversion-A": "Europe deep tech scale up strategic autonomy competitiveness",
-    "conversion-B": "Europe technology autonomy regulation scale up costs fragmentation",
-    "conversion-C": "Europe startup foreign capital dependence scale competitiveness",
-    "conversion-D": "Europe deep tech firm exit scale up gap capability loss",
-    "rules-A": "EU technology standards innovation advantage autonomy",
-    "rules-B": "EU research security regulation collaboration cost delay",
-    "rules-C": "EU foreign technology rules dependence access performance",
-    "rules-D": "EU export controls technology fragmentation blocked access competitiveness"
+    "infrastructure-A": [
+      "Europe strategic research infrastructure domestic capacity investment",
+      "EU compute semiconductor infrastructure sovereignty investment",
+      "European critical technology infrastructure build autonomy"
+    ],
+    "infrastructure-B": [
+      "Europe technology infrastructure sovereignty cost delay",
+      "EU domestic compute chips autonomy higher costs",
+      "European infrastructure localisation competitiveness delay"
+    ],
+    "infrastructure-C": [
+      "Europe dependence foreign compute chips cloud capacity",
+      "EU non-EU technology infrastructure reliance performance",
+      "European research infrastructure foreign vendor dependence scale"
+    ],
+    "infrastructure-D": [
+      "Europe critical technology infrastructure access loss shortage",
+      "EU chips compute supply disruption dependence no substitute",
+      "European infrastructure chokepoint restricted access competitiveness"
+    ],
+    "conversion-A": [
+      "Europe deep tech scale-up manufacturing strategic autonomy",
+      "EU innovation commercialisation procurement home champions",
+      "European technology firms scale manufacturing competitiveness"
+    ],
+    "conversion-B": [
+      "Europe technology autonomy protected market scale-up costs",
+      "EU localisation innovation firms fragmentation burden",
+      "European sovereign industrial policy subscale technology firms"
+    ],
+    "conversion-C": [
+      "Europe startups foreign capital market dependence scale",
+      "EU technology firms US market dependence growth",
+      "European scale-ups foreign platforms capital performance"
+    ],
+    "conversion-D": [
+      "Europe deep tech firm exit hollowing out capability loss",
+      "EU scale-up gap firms moving abroad technology",
+      "European manufacturing closure innovation capability decline"
+    ],
+    "rules-A": [
+      "EU technology standards adopted global innovation advantage",
+      "European research innovation rules funding competitive advantage",
+      "EU standards procurement technology rule setter"
+    ],
+    "rules-B": [
+      "EU research security regulation collaboration cost delay",
+      "European technology screening export controls innovation burden",
+      "EU autonomy regulation fragmentation research innovation"
+    ],
+    "rules-C": [
+      "EU dependence foreign technology rules standards access",
+      "Europe follows US technology rules export licences performance",
+      "European innovation foreign standards rule taker dependence"
+    ],
+    "rules-D": [
+      "EU technology policy gridlock innovation competitiveness",
+      "Europe foreign export controls blocked technology access",
+      "EU research technology decision delay fall behind"
+    ]
   },
   "inherited_corpus_audit_enabled": true,
   "inherited_corpus_audit_refresh_failures": true,
@@ -899,67 +939,255 @@
   "inherited_corpus_audit_timeout_seconds": 8,
   "frontier_gap_historical_lookback_months": 0,
   "frontier_gap_scholarly_queries_per_target": 3,
-  "frontier_gap_institution_extra_sources_per_scan": 4,
+  "frontier_gap_institution_extra_sources_per_scan": 6,
   "frontier_gap_institution_url_terms": {
-    "knowledge-D": [
-      "brain-drain",
-      "brain-gain",
-      "researcher-mobility",
-      "research-talent",
-      "research-careers",
-      "talent-retention",
-      "retaining-research",
-      "brain-circulation"
-    ],
-    "knowledge-C": [
-      "researcher-mobility",
-      "international-research",
-      "foreign-talent",
-      "research-collaboration"
-    ],
     "knowledge-A": [
       "research-talent",
       "attract-researchers",
       "talent-attraction",
-      "brain-gain"
+      "brain-gain",
+      "research-careers"
     ],
     "knowledge-B": [
       "research-security",
-      "mobility",
-      "collaboration",
-      "academic-freedom"
+      "academic-freedom",
+      "research-collaboration",
+      "researcher-mobility",
+      "screening"
+    ],
+    "knowledge-C": [
+      "international-research",
+      "researcher-mobility",
+      "foreign-talent",
+      "research-collaboration",
+      "scientific-cooperation"
+    ],
+    "knowledge-D": [
+      "brain-drain",
+      "researcher-outflow",
+      "researcher-mobility",
+      "research-talent",
+      "talent-retention",
+      "brain-circulation",
+      "research-careers"
+    ],
+    "infrastructure-A": [
+      "research-infrastructure",
+      "technology-infrastructure",
+      "compute",
+      "semiconductor",
+      "critical-raw-materials",
+      "strategic-autonomy"
+    ],
+    "infrastructure-B": [
+      "technology-sovereignty",
+      "localisation",
+      "localization",
+      "infrastructure-cost",
+      "semiconductor",
+      "compute"
+    ],
+    "infrastructure-C": [
+      "technology-dependence",
+      "cloud",
+      "semiconductor",
+      "foreign-vendor",
+      "supply-chain",
+      "compute"
+    ],
+    "infrastructure-D": [
+      "supply-disruption",
+      "shortage",
+      "export-control",
+      "chokepoint",
+      "critical-raw-materials",
+      "restricted-access"
+    ],
+    "conversion-A": [
+      "scale-up",
+      "scaleup",
+      "commercialisation",
+      "commercialization",
+      "manufacturing",
+      "innovation-procurement",
+      "deep-tech"
+    ],
+    "conversion-B": [
+      "industrial-policy",
+      "localisation",
+      "localization",
+      "scale-up",
+      "fragmentation",
+      "technology-autonomy"
+    ],
+    "conversion-C": [
+      "foreign-capital",
+      "venture-capital",
+      "scale-up",
+      "market-access",
+      "platform",
+      "startup"
+    ],
+    "conversion-D": [
+      "scale-up-gap",
+      "firm-exit",
+      "hollowing-out",
+      "manufacturing-decline",
+      "funding-gap",
+      "relocation"
+    ],
+    "rules-A": [
+      "standards",
+      "standardisation",
+      "standardization",
+      "innovation-policy",
+      "funding-programme",
+      "procurement"
+    ],
+    "rules-B": [
+      "research-security",
+      "export-control",
+      "screening",
+      "regulation",
+      "regulatory-burden",
+      "de-risking"
+    ],
+    "rules-C": [
+      "foreign-standards",
+      "export-licence",
+      "export-license",
+      "platform-rules",
+      "technology-rules"
+    ],
+    "rules-D": [
+      "gridlock",
+      "decision-delay",
+      "export-control",
+      "blocked-access",
+      "fragmentation",
+      "technology-restrictions"
     ]
   },
   "frontier_gap_institution_sources": {
+    "knowledge-A": [
+      "research-and-innovation.ec.europa.eu",
+      "euraxess.ec.europa.eu",
+      "cesaer.org",
+      "eua.eu",
+      "scienceeurope.org"
+    ],
+    "knowledge-B": [
+      "research-and-innovation.ec.europa.eu",
+      "europarl.europa.eu",
+      "allea.org",
+      "eua.eu",
+      "scienceeurope.org"
+    ],
+    "knowledge-C": [
+      "research-and-innovation.ec.europa.eu",
+      "euraxess.ec.europa.eu",
+      "eua.eu",
+      "scienceeurope.org",
+      "cesaer.org"
+    ],
     "knowledge-D": [
       "europarl.europa.eu",
       "op.europa.eu",
       "research-and-innovation.ec.europa.eu",
       "euraxess.ec.europa.eu",
       "cesaer.org",
-      "ecas.org",
       "eua.eu",
       "scienceeurope.org"
     ],
-    "knowledge-C": [
+    "infrastructure-A": [
+      "joint-research-centre.ec.europa.eu",
       "research-and-innovation.ec.europa.eu",
-      "op.europa.eu",
-      "euraxess.ec.europa.eu",
-      "eua.eu",
-      "scienceeurope.org"
+      "commission.europa.eu",
+      "earto.eu",
+      "bruegel.org"
     ],
-    "knowledge-A": [
-      "research-and-innovation.ec.europa.eu",
-      "euraxess.ec.europa.eu",
-      "cesaer.org",
-      "eua.eu"
+    "infrastructure-B": [
+      "joint-research-centre.ec.europa.eu",
+      "commission.europa.eu",
+      "bruegel.org",
+      "ceps.eu",
+      "ecipe.org"
     ],
-    "knowledge-B": [
+    "infrastructure-C": [
+      "bruegel.org",
+      "ceps.eu",
+      "merics.org",
+      "ecfr.eu",
+      "ecipe.org",
+      "joint-research-centre.ec.europa.eu"
+    ],
+    "infrastructure-D": [
+      "commission.europa.eu",
+      "bruegel.org",
+      "merics.org",
+      "ecfr.eu",
+      "iss.europa.eu",
+      "ceps.eu"
+    ],
+    "conversion-A": [
+      "eic.ec.europa.eu",
+      "eit.europa.eu",
+      "earto.eu",
+      "commission.europa.eu",
+      "bruegel.org",
+      "ceps.eu"
+    ],
+    "conversion-B": [
+      "bruegel.org",
+      "ceps.eu",
+      "ecipe.org",
+      "commission.europa.eu",
+      "earto.eu"
+    ],
+    "conversion-C": [
+      "bruegel.org",
+      "ecipe.org",
+      "ceps.eu",
+      "ecfr.eu",
+      "merics.org"
+    ],
+    "conversion-D": [
+      "bruegel.org",
+      "ecipe.org",
+      "ceps.eu",
+      "eic.ec.europa.eu",
+      "ecfr.eu"
+    ],
+    "rules-A": [
+      "commission.europa.eu",
       "research-and-innovation.ec.europa.eu",
       "europarl.europa.eu",
-      "scienceeurope.org",
-      "eua.eu",
-      "allea.org"
+      "earto.eu",
+      "ecipe.org"
+    ],
+    "rules-B": [
+      "commission.europa.eu",
+      "research-and-innovation.ec.europa.eu",
+      "europarl.europa.eu",
+      "allea.org",
+      "eua.eu"
+    ],
+    "rules-C": [
+      "ecipe.org",
+      "bruegel.org",
+      "ceps.eu",
+      "ecfr.eu",
+      "merics.org"
+    ],
+    "rules-D": [
+      "commission.europa.eu",
+      "europarl.europa.eu",
+      "ecipe.org",
+      "bruegel.org",
+      "ecfr.eu",
+      "iss.europa.eu"
     ]
-  }
+  },
+  "frontier_gap_target_count": 3,
+  "frontier_gap_targets_per_scan": 10
 }

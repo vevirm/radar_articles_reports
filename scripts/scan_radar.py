@@ -271,61 +271,103 @@ def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], 
 
 
 def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
-    """Select the sparsest Frontier cells for extra weak-signal discovery.
+    """Allocate extra discovery budget to under-covered Frontier cells.
 
-    Counts come from the exact Sovereignty-Frontier classifier. Empty cells are
-    therefore first, followed by under-represented cells. A persisted cursor rotates
-    ties so the same six zero-count cells are not searched forever while other gaps
-    receive no attention. This changes discovery priority only; admission gates stay
-    untouched and no corpus item is invented or reclassified.
+    Normal source/query rotation is never replaced.  This plan adds a scarcity-weighted
+    overlay: a cell at zero receives more extra slots than a cell at one, a cell at one
+    receives more than a cell at two, and cells at/above the configured coverage target
+    receive no extra budget.  Ties rotate through a persisted cursor so every part of the
+    4x4 matrix gets attention over time.
     """
     counts, qualifying, error = frontier_matrix_coverage(previous)
     start = int(state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
-    cyclic_rank = {FRONTIER_CELL_ORDER[(start + i) % len(FRONTIER_CELL_ORDER)]: i for i in range(len(FRONTIER_CELL_ORDER))}
-    priority_cells = list(CONFIG.get("frontier_gap_priority_cells", []))
-    priority_rank = {key: i for i, key in enumerate(priority_cells)}
-    ordered = sorted(
-        FRONTIER_CELL_ORDER,
-        key=lambda key: (counts.get(key, 0), priority_rank.get(key, len(priority_cells)), cyclic_rank[key]),
-    )
-    limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_queries_per_scan", 6) or 0)))
-    targets = ordered[:limit]
+    cyclic = FRONTIER_CELL_ORDER[start:] + FRONTIER_CELL_ORDER[:start]
+    cyclic_rank = {key: i for i, key in enumerate(cyclic)}
+    target_count = max(1, int(CONFIG.get("frontier_gap_target_count", 3) or 3))
+    deficits = {key: max(0, target_count - counts.get(key, 0)) for key in FRONTIER_CELL_ORDER}
+    scarcity_scores = {
+        key: round(deficits[key] / target_count + (0.35 if counts.get(key, 0) == 0 else 0.0), 3)
+        for key in FRONTIER_CELL_ORDER
+    }
+    sparse = [key for key in FRONTIER_CELL_ORDER if deficits[key] > 0]
+    ordered = sorted(sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
+    target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
+    targets = ordered[:target_limit]
+
+    # Weighted round-robin: empties appear target_count times, count=1 appears
+    # target_count-1 times, etc.  This drives query/source allocation without
+    # hard-coding a preferred thematic cell.
+    weighted_targets: list[str] = []
+    for level in range(target_count, 0, -1):
+        for key in targets:
+            if deficits[key] >= level:
+                weighted_targets.append(key)
     if targets:
         last_index = FRONTIER_CELL_ORDER.index(targets[-1])
         state["frontier_gap_cursor"] = (last_index + 1) % len(FRONTIER_CELL_ORDER)
-    profiles = CONFIG.get("frontier_gap_search_queries", {})
-    queries = [clean_text(profiles.get(key, "")) for key in targets if isinstance(profiles, dict) and clean_text(profiles.get(key, ""))]
-    scholarly_profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
-    scholarly_limit = max(0, int(CONFIG.get("frontier_gap_scholarly_queries_per_scan", 8) or 0))
-    per_target = max(1, int(CONFIG.get("frontier_gap_scholarly_queries_per_target", 2) or 1))
 
-    # A cell can have several compact scholarly queries.  Allocate them round-robin
-    # across the selected cells so one sparse cell does not consume the complete gap
-    # budget, while still allowing the highest-priority empty cells (notably
-    # Knowledge/D brain drain) more than one retrieval formulation per scan.
+    profiles = CONFIG.get("frontier_gap_search_queries", {})
+    news_limit = max(0, int(CONFIG.get("frontier_gap_queries_per_scan", 8) or 0))
+    queries: list[str] = []
+    for key in targets:
+        raw = profiles.get(key, "") if isinstance(profiles, dict) else ""
+        vals = raw if isinstance(raw, list) else [raw]
+        for val in vals:
+            q = clean_text(val)
+            if q and q not in queries:
+                queries.append(q)
+                break
+        if len(queries) >= news_limit:
+            break
+
+    scholarly_profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
+    scholarly_limit = max(0, int(CONFIG.get("frontier_gap_scholarly_queries_per_scan", 12) or 0))
+    per_target = max(1, int(CONFIG.get("frontier_gap_scholarly_queries_per_target", 3) or 1))
     query_lists: dict[str, list[str]] = {}
     if isinstance(scholarly_profiles, dict):
-        for key in targets:
+        for key in FRONTIER_CELL_ORDER:
             raw = scholarly_profiles.get(key, "")
             vals = raw if isinstance(raw, list) else [raw]
             cleaned = [clean_text(v) for v in vals if clean_text(v)]
             if cleaned:
                 query_lists[key] = list(dict.fromkeys(cleaned))[:per_target]
+
     scholarly_queries: list[str] = []
-    for round_i in range(per_target):
-        for key in targets:
-            vals = query_lists.get(key, [])
-            if round_i < len(vals):
-                scholarly_queries.append(vals[round_i])
-                if len(scholarly_queries) >= scholarly_limit:
-                    break
+    per_cell_used: dict[str, int] = {}
+    # Consume weighted slots first. A zero-count cell can therefore use several
+    # distinct formulations before a merely low cell receives its last extra slot.
+    for key in weighted_targets:
+        vals = query_lists.get(key, [])
+        idx = per_cell_used.get(key, 0)
+        if idx < len(vals):
+            q = vals[idx]
+            per_cell_used[key] = idx + 1
+            if q not in scholarly_queries:
+                scholarly_queries.append(q)
         if len(scholarly_queries) >= scholarly_limit:
             break
+    # If some weighted cells had fewer configured variants, fill remaining budget
+    # round-robin from other sparse cells rather than wasting the slot.
+    if len(scholarly_queries) < scholarly_limit:
+        for round_i in range(per_target):
+            for key in ordered:
+                vals = query_lists.get(key, [])
+                if round_i < len(vals) and vals[round_i] not in scholarly_queries:
+                    scholarly_queries.append(vals[round_i])
+                    if len(scholarly_queries) >= scholarly_limit:
+                        break
+            if len(scholarly_queries) >= scholarly_limit:
+                break
+
     return {
         "counts": counts,
         "qualifying": qualifying,
         "empty_cells": sum(1 for key in FRONTIER_CELL_ORDER if counts.get(key, 0) == 0),
+        "target_count": target_count,
+        "deficits": deficits,
+        "scarcity_scores": scarcity_scores,
         "targets": targets,
+        "weighted_targets": weighted_targets,
         "queries": queries,
         "scholarly_queries": scholarly_queries,
         "classifier_error": error,
@@ -2939,7 +2981,7 @@ def main() -> int:
     url_term_profiles = CONFIG.get("frontier_gap_institution_url_terms", {})
     ACTIVE_FRONTIER_GAP_URL_TERMS = list(dict.fromkeys(
         clean_text(term)
-        for target in frontier_focus.get("targets", [])
+        for target in frontier_focus.get("weighted_targets", frontier_focus.get("targets", []))
         for term in ((url_term_profiles.get(target, []) if isinstance(url_term_profiles, dict) else []) or [])
         if clean_text(term)
     ))
@@ -2947,8 +2989,8 @@ def main() -> int:
         log_progress(f"Frontier coverage classifier unavailable; using rotating fallback: {frontier_focus['classifier_error']}")
     log_progress(
         f"Frontier coverage before scan: {frontier_focus['qualifying']} qualifying, "
-        f"{frontier_focus['empty_cells']}/16 empty; prioritising "
-        + (", ".join(frontier_focus["targets"]) if frontier_focus["targets"] else "no extra gap queries")
+        f"{frontier_focus['empty_cells']}/16 empty; scarcity-priority "
+        + (", ".join(f"{k}({frontier_focus.get('deficits', {}).get(k, 0)})" for k in frontier_focus["targets"]) if frontier_focus["targets"] else "no extra gap queries")
     )
 
     try:
@@ -2995,26 +3037,44 @@ def main() -> int:
         state.get("institution_cursor", 0),
         int(CONFIG.get("institution_sources_per_scan", 18)),
     )
-    # Keep the persistent source rotation intact, but add a small number of source
-    # specialists for currently sparse cells.  Thus an empty Brain-drain cell does
-    # not have to wait several rotations before Europarl/EU Publications/research-
-    # career organisations happen to be visited.
+    # Keep the persistent source rotation intact, then add specialist sources in
+    # scarcity-weighted round-robin order across the selected cells. Source-list
+    # ordering therefore cannot accidentally privilege one thematic cell forever.
     gap_source_profiles = CONFIG.get("frontier_gap_institution_sources", {})
-    priority_domains: list[str] = []
+    source_by_domain = {
+        clean_text(src.get("domain", "")).lower().removeprefix("www."): src
+        for src in institution_sources_all
+        if isinstance(src, dict) and clean_text(src.get("domain", ""))
+    }
+    extra_cap = max(0, int(CONFIG.get("frontier_gap_institution_extra_sources_per_scan", 6) or 0))
+    target_domain_lists: dict[str, list[str]] = {}
     if isinstance(gap_source_profiles, dict):
-        for target in frontier_focus.get("targets", []):
+        for target in dict.fromkeys(frontier_focus.get("weighted_targets", frontier_focus.get("targets", []))):
             vals = gap_source_profiles.get(target, [])
             vals = vals if isinstance(vals, list) else [vals]
-            priority_domains.extend(clean_text(v).lower().removeprefix("www.") for v in vals if clean_text(v))
-    priority_domains = list(dict.fromkeys(priority_domains))
-    extra_cap = max(0, int(CONFIG.get("frontier_gap_institution_extra_sources_per_scan", 4) or 0))
-    gap_sources = []
-    for src in institution_sources_all:
-        domain = clean_text(src.get("domain", "")).lower().removeprefix("www.") if isinstance(src, dict) else ""
-        if domain in priority_domains and src not in inst_rotating:
-            gap_sources.append(src)
-            if len(gap_sources) >= extra_cap:
+            target_domain_lists[target] = list(dict.fromkeys(
+                clean_text(v).lower().removeprefix("www.") for v in vals if clean_text(v)
+            ))
+
+    gap_sources: list[dict[str, Any]] = []
+    used_domains: set[str] = set()
+    per_target_source_index: dict[str, int] = {}
+    for target in frontier_focus.get("weighted_targets", frontier_focus.get("targets", [])):
+        domains = target_domain_lists.get(target, [])
+        if not domains:
+            continue
+        idx = per_target_source_index.get(target, 0)
+        while idx < len(domains):
+            domain = domains[idx]
+            idx += 1
+            src = source_by_domain.get(domain)
+            if src and domain not in used_domains and src not in inst_rotating:
+                gap_sources.append(src)
+                used_domains.add(domain)
                 break
+        per_target_source_index[target] = idx
+        if len(gap_sources) >= extra_cap:
+            break
     inst_batch = inst_rotating + gap_sources
 
     oa_backfill = not bool(state["backfill"].get("openalex"))
@@ -3202,6 +3262,9 @@ def main() -> int:
         "qualifying": frontier_focus["qualifying"],
         "empty_cells": frontier_focus["empty_cells"],
         "counts": frontier_focus["counts"],
+        "target_count": frontier_focus.get("target_count", 3),
+        "deficits": frontier_focus.get("deficits", {}),
+        "scarcity_scores": frontier_focus.get("scarcity_scores", {}),
         "targets": frontier_focus["targets"],
     }
 
@@ -3252,6 +3315,8 @@ def main() -> int:
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
             "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day rolling window and keeps all earlier signals." if new_c_count < 3 else "",
             "frontier_gap_targets": frontier_focus["targets"],
+            "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
+            "frontier_gap_target_count": frontier_focus.get("target_count", 3),
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
         },
         "strand_a": strand_a,

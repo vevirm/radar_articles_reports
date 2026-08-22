@@ -26,7 +26,7 @@ class SovereigntyFrontierTests(unittest.TestCase):
     def test_main_and_insights_link_to_summary(self):
         main = (ROOT / 'index.html').read_text(encoding='utf-8')
         briefing = (ROOT / 'briefing' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('frontier/?v=17.5.2">Open Insight Summary', main)
+        self.assertIn('frontier/?v=17.5.4">Open Insight Summary', main)
         self.assertIn('../frontier/">Insight Summary →', briefing)
 
     def test_four_frontier_columns_are_classified(self):
@@ -71,12 +71,12 @@ const F=require('./frontier/frontier.js');
 const data={strand_a:[
  {strand:'A',title:'Back to the future? What it will take to deliver nuclear energy in the EU – CEPS',source:'CEPS',date:'2026-07-17',link:'nuclear',type:'institutional report',summary:'The growing role of non-EU technology vendors for large-scale reactors and SMRs on the EU market raises questions about technological sovereignty, industrial competitiveness and strategic dependencies.'}
 ],strand_b:[],strand_c:[
- {headline:'Brazil launches AI supercomputer push, splits projects between Chinese, US firms.',source:'Reuters',date:'2026-08-21',watch_theme:'EU–China S&T cooperation / de-risking',why_it_matters:'This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.'},
- {headline:'Overcome market fragmentation or miss the AI train, Lagarde warns the EU.',source:'Euronews',date:'2026-08-20',watch_theme:'R&I competitiveness / technological capabilities',why_it_matters:"This may change Europe's relative research and innovation capacity in technologies that increasingly shape geopolitical power."}
+ {headline:'EU attracts research scientists back to Europe, strengthening frontier research capacity and reducing dependence on foreign talent.',source:'Reuters',date:'2026-08-21',watch_theme:'research talent mobility',why_it_matters:'This changes Europe research capacity and strategic autonomy.'},
+ {headline:'Europe loses semiconductor production capacity as foreign suppliers restrict access and EU firms fall behind.',source:'Euronews',date:'2026-08-20',watch_theme:'semiconductors',why_it_matters:"This changes Europe's industrial innovation capacity and technology dependence."}
 ]};
 const v=F.buildFrontier(data,{now:'2026-08-21T18:00:00Z'});
 const joined=v.signals.map(x=>x.title).join('\n');
-for(const re of [/nuclear expansion.*non-EU reactor technology/i,/Brazil launches AI supercomputer/i,/market fragmentation.*AI train/i]) if(!re.test(joined)){console.error(joined);process.exit(2)}
+for(const re of [/nuclear expansion.*non-EU reactor technology/i,/attracts research scientists back to Europe/i,/loses semiconductor production capacity/i]) if(!re.test(joined)){console.error(joined);process.exit(2)}
 '''
         self.run_node(script)
 
@@ -84,8 +84,8 @@ for(const re of [/nuclear expansion.*non-EU reactor technology/i,/Brazil launche
         import json
         radar = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         scanner = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
-        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 170)
-        self.assertEqual((len(radar.get('strand_a', [])), len(radar.get('strand_b', [])), len(radar.get('strand_c', []))), (72, 5, 101))
+        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 90)
+        self.assertEqual((len(radar.get('strand_a', [])), len(radar.get('strand_b', [])), len(radar.get('strand_c', []))), (69, 5, 19))
         self.assertIn('Recovered a larger pre-upload radar corpus from Git history', scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)
 

@@ -1,24 +1,7 @@
-V17.5.3 COMPLETE REPOSITORY — SIMPLE UPLOAD
+V17.5.4 DROP-IN UPDATE
 
-1. Extract the ZIP.
-2. Upload/replace ALL files and folders in the SAME GitHub repository root.
-3. Include the hidden .github folder.
-4. Keep radar.json from this ZIP. It is your current supplied corpus: 72 A + 5 B + 101 C.
-5. Commit directly to main.
+1. Upload/replace the repository with the contents of this package.
+2. Keep the bundled radar.json: it is the exact current radar (3).json supplied for this build (69 A / 5 B / 19 C).
+3. Push to main to run the normal scanner workflow.
 
-THAT COMMIT STARTS THE CORRECTIVE RUN AUTOMATICALLY.
-
-FIRST V17.5.3 RUN
-- does not repeat the inherited migration;
-- audits current A/B once under the corrected precision gate;
-- refreshes thin A/B failures before final removal;
-- audits current C once under the corrected EU-first weak-signal gate;
-- recomputes sparse Frontier cells after cleanup;
-- runs rotating + gap-priority discovery and a wider strict weak-signal recovery;
-- saves both corrective-complete markers.
-
-LATER RUNS
-- no historical re-audit;
-- strict screening of new discoveries only;
-- persistent rotations continue;
-- empty/sparse cells remain prioritized.
+V17.5.4 does NOT repeat the historical cleanup. It preserves the current OpenAlex/Crossref/institution cursors, recomputes the 16 Frontier cells with cell-specific semantic evidence, and adds scarcity-weighted discovery on top of normal rotation.

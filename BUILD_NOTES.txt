@@ -1,0 +1,12 @@
+R&I × Geopolitics Radar V17.5.4
+
+Built from the user's latest radar (3).json current state.
+The bundled radar.json is byte-for-byte identical to that uploaded file.
+
+Key behavior:
+- current corpus and persistent source cursors are preserved;
+- all 16 Sovereignty Frontier cells use cell-specific semantic evidence;
+- sparse cells receive extra discovery budget proportional to their deficit to target depth 3;
+- ties rotate through frontier_gap_cursor;
+- normal OpenAlex/Crossref/institution/news rotation continues underneath the scarcity overlay;
+- no single cell is hard-coded as a permanent priority.
