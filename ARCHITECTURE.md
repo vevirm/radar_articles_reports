@@ -1,4 +1,4 @@
-# Radar architecture — V17.3
+# Radar architecture — V17.4
 
 ## 1. Cumulative state
 
@@ -6,7 +6,7 @@
 
 ## 2. Discovery scheduling
 
-Weak signals, OpenAlex and Crossref begin in parallel. Institutional crawling starts as a separate bounded phase after that parallel phase.
+Before discovery, the scanner asks the exact Sovereignty-Frontier classifier for current 4×4 cell occupancy. Weak signals, OpenAlex and Crossref then begin in parallel. Institutional crawling starts as a separate bounded phase after that parallel phase.
 
 The large scholarly/report universes are rotated across runs:
 
@@ -16,6 +16,8 @@ The large scholarly/report universes are rotated across runs:
 - Institutions: 18 sources/run out of 57.
 
 A batch never wraps inside one run; the final batch of each cycle is shorter. The next cursor is saved in `radar.json`.
+
+Weak-signal discovery also receives six extra global-news searches aimed at the emptiest/sparsest Frontier cells. Tied cells rotate via `frontier_gap_cursor`. This changes search priority, not admission thresholds.
 
 ## 3. Early known-item rejection
 
@@ -46,11 +48,12 @@ Strand A requires substantive EU/European scope + R&I/science/strategic technolo
 A push to `main` starts a scan immediately. Scheduled scans run every 12 hours. Pushes that modify only `radar.json` are ignored so the scanner's own commit does not trigger itself again.
 ## 8. Analytical pages
 
-The public dataset has one source of truth: `radar.json`. The three site views only read it.
+The public dataset has one source of truth: `radar.json`. The four site views only read it.
 
 - `/` — cumulative Radar: accepted A/B evidence and Strand C signals.
 - `/briefing/` — balanced Radar Insights: research, policy/report evidence and weak signals.
 - `/frontier/` — Insight Summary / Sovereignty-Frontier Signals: a strict decision-attention lens.
+- `/priorities/` — Greatest Opportunities & Risks: cumulative, simple ranked bullets derived from the same Frontier signals.
 
-The Sovereignty-Frontier layer is implemented in `frontier/frontier.js`. It does not modify scanner state or write classification fields back to `radar.json`. This separation protects historical material while allowing the prioritisation logic to evolve independently.
+The Sovereignty-Frontier layer is implemented in `frontier/frontier.js`. Browser pages do not write classification fields back to `radar.json`. The scanner reuses that exact classifier through `scripts/frontier_coverage.js` only to choose which cells deserve extra discovery searches; accepted corpus items are still written only by the normal scanner merge logic.
 

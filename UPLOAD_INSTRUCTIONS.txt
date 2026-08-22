@@ -1,26 +1,30 @@
-V17.3 COMPLETE REPOSITORY — SIMPLE UPLOAD
+V17.4 COMPLETE REPOSITORY — SIMPLE UPLOAD
 
 1. Extract the ZIP.
-2. Upload/replace ALL files and folders in the GitHub repository root.
+2. Upload/replace ALL files and folders in the SAME GitHub repository root.
 3. Make sure the hidden .github folder is included.
-4. Commit the upload directly to main.
+4. Keep radar.json from this ZIP. It contains the live 257-record accumulated corpus.
+5. Commit the upload directly to main.
 
 THAT COMMIT STARTS THE FIRST SCAN AUTOMATICALLY.
 You do not need to press "Run workflow" unless GitHub Actions does not start after the commit.
 
+CONTENT PRESERVATION
+The bundled radar.json is the live file supplied for this build: 152 Strand A + 9 Strand B + 96 Strand C. It is not the earlier 8-item repository seed. Existing persistent source cursors are retained. The scanner also keeps the Git-history recovery safeguard for future seed-based upgrades.
+
+V17.4 ADDS
+- matrix-gap-aware discovery: six extra global-news searches per run target the exact empty/sparsest Sovereignty-Frontier cells;
+- tied sparse cells rotate using a persistent cursor;
+- the strict Frontier classifier is unchanged, so the scan searches harder but never pads cells;
+- /priorities/ provides a very simple cumulative "Greatest Opportunities" and "Greatest Risks" page;
+- the opportunity/risk page reads radar.json only and never deletes or separately persists content;
+- the first upgraded scan receives the 30-day weak-signal recovery window because the signal discovery profile changed to V17.4 gap priority.
+
+UNCHANGED
+- 30-minute GitHub Actions job;
+- 20-minute scanner hard budget;
+- OpenAlex/Crossref/institution rotating cursors and caps;
+- cumulative A/B/C merging;
+- Git-history recovery protection.
+
 Afterwards the workflow runs automatically every 12 hours.
-
-What V17.3 adds:
-- a new /frontier/ Insight Summary page for Sovereignty-Frontier Signals;
-- the 4 × 4 independence–competitiveness matrix;
-- strict "pay attention" triage above the broad cumulative radar;
-- no external AI API and no new database.
-
-What remains protected:
-- the V17.2 persistent OpenAlex/Crossref/institution cursors;
-- the cumulative A/B/C corpus;
-- whole-repository recovery from Git history;
-- the 30-minute GitHub job and 20-minute scanner budget;
-- the existing main Radar and Radar Insights pages.
-
-Do not delete radar.json before upload. The bundled file has a one-run seed marker that can recover a larger pre-upload corpus from Git history on the first scan.

@@ -1,6 +1,6 @@
-V17.3 — V17.2 INCREMENTAL SCANNER RETAINED
+V17.4 — V17.2 INCREMENTAL SOURCE ROTATION RETAINED
 
-V17.3 adds the Sovereignty-Frontier Insight Summary but deliberately does NOT replace the scanner that is already working.
+V17.4 retains the working V17.2 incremental source rotation and adds only a bounded six-query weak-signal priority layer for sparse Frontier cells.
 
 The GitHub job remains 30 minutes and the scanner remains capped at 20 minutes. Persistent source-family cursors remain stored in radar.json, so scheduled runs continue instead of restarting the same large source universe.
 
@@ -15,4 +15,4 @@ Key values remain:
 
 The upload commit to main starts the first scan immediately. Normal schedule: every 12 hours.
 
-Version: 17.3
+Version: 17.4

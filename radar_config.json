@@ -713,7 +713,7 @@
   "crossref_public_min_interval_seconds": 0.8,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v16-weak-signals",
+  "signal_discovery_version": "v17.4-frontier-gap-priority",
   "news_items_per_feed": 60,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -794,5 +794,24 @@
   "institution_stage_seconds": 480,
   "skip_known_items_before_classification": true,
   "skip_known_institution_urls_before_fetch": true,
-  "institution_seen_cache_max": 5000
+  "institution_seen_cache_max": 5000,
+  "frontier_gap_queries_per_scan": 6,
+  "frontier_gap_search_queries": {
+    "knowledge-A": "(EU OR Europe OR European) (researchers OR scientists OR talent OR universities) (attract OR retain OR recruitment OR return OR mobility) (AI OR quantum OR semiconductor OR biotech OR \"strategic technology\") (capacity OR competitiveness OR autonomy)",
+    "knowledge-B": "(EU OR Europe OR European) (\"research security\" OR screening OR restrictions OR de-risking) (researchers OR universities OR collaboration OR mobility) (delay OR cost OR burden OR fragmentation OR \"talent loss\")",
+    "knowledge-C": "(EU OR Europe OR European) (researchers OR universities OR \"research collaboration\" OR expertise) (US OR China OR American OR Chinese OR \"non-EU\" OR foreign) (access OR partnership OR mobility) (frontier OR leading OR performance OR capability)",
+    "knowledge-D": "(EU OR Europe OR European) (\"brain drain\" OR \"talent shortage\" OR \"researcher losses\" OR \"lab closure\" OR \"university cuts\") (AI OR quantum OR biotech OR semiconductor OR science) (decline OR shortage OR dependence OR \"fall behind\")",
+    "infrastructure-A": "(EU OR Europe OR European) (build OR expand OR invest OR onshore) (compute OR cloud OR semiconductor OR chips OR reactor OR \"research infrastructure\" OR \"critical raw materials\") (autonomy OR sovereignty OR \"reduce dependence\" OR competitiveness)",
+    "infrastructure-B": "(EU OR Europe OR European) (localise OR localize OR onshore OR sovereignty OR autonomy OR de-risking) (chips OR compute OR cloud OR reactor OR infrastructure OR supply chain) (cost OR delay OR expensive OR shortage OR slower)",
+    "infrastructure-C": "(EU OR Europe OR European) (relies OR depends OR reliance OR access) (US cloud OR American cloud OR Nvidia OR Taiwan OR TSMC OR Chinese OR \"non-EU\" OR foreign) (compute OR chips OR reactors OR infrastructure) (scale OR performance OR capacity)",
+    "infrastructure-D": "(EU OR Europe OR European) (shortage OR \"access cut\" OR ban OR \"export controls\" OR closure OR outage OR disruption) (chips OR compute OR cloud OR reactors OR infrastructure OR \"critical raw materials\") (dependence OR decline OR \"fall behind\" OR competitiveness)",
+    "conversion-A": "(EU OR Europe OR European) (scale-up OR scaleup OR commercialisation OR commercialization OR industrialisation OR industrialization OR procurement OR manufacturing) (AI OR quantum OR biotech OR semiconductor OR \"deep tech\") (lead OR competitiveness OR capacity OR autonomy)",
+    "conversion-B": "(EU OR Europe OR European) (sovereignty OR autonomy OR de-risking OR localisation OR localization OR regulation) (startup OR scale-up OR innovation OR manufacturing OR commercialization) (cost OR delay OR burden OR slower OR fragmentation)",
+    "conversion-C": "(EU OR Europe OR European) (startup OR scale-up OR technology firm OR innovation) (relies OR depends OR foreign capital OR US market OR American cloud OR foreign platform) (scale OR growth OR commercialization OR performance)",
+    "conversion-D": "(EU OR Europe OR European) (startup OR scale-up OR technology firm OR manufacturing) (moves OR exits OR acquired OR closure OR decline OR \"scale-up gap\" OR \"funding gap\") (US OR China OR foreign OR abroad) (competitiveness OR capacity)",
+    "rules-A": "(EU OR Europe OR European) (standard OR regulation OR procurement OR funding OR state aid OR programme OR program) (innovation OR research OR technology) (lead OR advantage OR market OR scale OR autonomy)",
+    "rules-B": "(EU OR Europe OR European) (\"research security\" OR \"export controls\" OR screening OR regulation OR de-risking OR sovereignty) (research OR innovation OR technology OR collaboration) (cost OR delay OR burden OR fragmentation OR slower)",
+    "rules-C": "(EU OR Europe OR European) (relies OR depends OR follows OR access) (US rules OR American rules OR foreign standards OR platform rules OR export licence OR export license) (research OR technology OR innovation) (performance OR access OR scale)",
+    "rules-D": "(EU OR Europe OR European) (\"export controls\" OR sanctions OR foreign rules OR standards OR exclusion OR fragmentation) (research OR technology OR innovation) (blocked OR loses OR decline OR dependence OR \"fall behind\")"
+  }
 }

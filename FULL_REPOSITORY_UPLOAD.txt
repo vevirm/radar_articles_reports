@@ -1,14 +1,19 @@
-V17.3 COMPLETE REPOSITORY — SOVEREIGNTY-FRONTIER EDITION
+V17.4 COMPLETE REPOSITORY — GAP-PRIORITY + OPPORTUNITIES/RISKS EDITION
 
 This ZIP is the WHOLE repository, including:
 - the active GitHub Actions workflow;
-- the unchanged V17.2 incremental scanner and configuration;
-- cumulative radar.json seed/recovery logic;
+- the cumulative/incremental scanner and persistent source cursors;
+- the LIVE cumulative radar.json supplied for this build: 152 Strand A + 9 Strand B + 96 Strand C = 257 records;
 - main Radar site;
 - Radar Insights page;
-- simplified Insight Summary / Sovereignty-Frontier page with a one-look read first, expandable signal detail, and working matrix Show more controls;
+- Sovereignty-Frontier Insight Summary and 4x4 matrix;
+- new cumulative Greatest Opportunities & Risks page;
+- exact matrix-coverage bridge used by the scanner to target sparse cells;
 - tests.
 
-Upload ALL files/folders to the repository root, including .github.
+Upload ALL files/folders to the SAME repository root, including .github.
+Keep radar.json from this ZIP: it is the live accumulated corpus, not the old 8-item seed.
 
 The upload commit to main immediately triggers the first scan. Bot-only radar.json commits do not retrigger the workflow.
+
+The scanner also retains the older Git-history recovery safeguard for future seed-based repository upgrades.

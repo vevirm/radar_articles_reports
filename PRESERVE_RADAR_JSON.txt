@@ -1,7 +1,33 @@
-NO MANUAL radar.json PRESERVATION STEP IS REQUIRED IN V17.3.
+V17.4 PRESERVATION — KEEP THE EXISTING CUMULATIVE CONTENT
 
-The complete repository ZIP includes radar.json with the same one-run repository_bundle_seed mechanism used by V17.2. On the first scan after upload, the scanner checks recent Git history and merges a larger pre-upload A/B/C corpus back when one exists.
+THIS PACKAGE ALREADY CONTAINS THE LIVE ACCUMULATED RADAR.
 
-The new Sovereignty-Frontier page only reads radar.json. It does not delete, rewrite, reclassify or persist its own ranking into the corpus.
+The radar.json in this ZIP is the file supplied for this build and contains:
+- Strand A: 152 records
+- Strand B: 9 records
+- Strand C: 96 records
+- Total: 257 accumulated records
 
-After the first scan, the seed marker is removed and radar.json remains the cumulative corpus plus the persistent source-cursor checkpoint.
+It was copied byte-for-byte into the repository build. Do not replace it with the earlier 8-item seed.
+
+What V17.4 does NOT do:
+- it does not reset, prune or replace the cumulative A/B/C corpus;
+- it does not loosen the Sovereignty-Frontier classifier to fill empty cells;
+- the new Opportunities & Risks page is read-only;
+- the Frontier matrix remains read-only.
+
+What V17.4 adds:
+- before each scan, the exact Frontier classifier counts all 16 matrix cells;
+- six extra weak-signal searches target the currently emptiest/sparsest cells;
+- tied sparse cells rotate with a persistent frontier_gap_cursor;
+- every discovered item still has to pass the existing admission logic;
+- /priorities/ shows cumulative Greatest Opportunities and Greatest Risks bullets.
+
+UPLOAD SAFELY
+1. Extract the complete ZIP.
+2. Upload/replace ALL files and folders at the root of the SAME GitHub repository, including .github.
+3. Keep radar.json from this ZIP in the upload. It is the 257-record live corpus.
+4. Commit directly to main.
+5. Let the automatically triggered first scan run.
+
+The scanner still includes the repository_bundle_seed + Git-history recovery safeguard used by earlier versions. That fallback remains available for future seed-based upgrades, but the present radar.json does not require a seed marker because the live corpus is already embedded.

@@ -46,6 +46,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "radar_config.json"
 OUT_PATH = ROOT / "radar.json"
+FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
@@ -169,6 +170,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "crossref_broad_cursor": 0,
             "crossref_priority_cursor": 0,
             "institution_cursor": 0,
+            "frontier_gap_cursor": 0,
             "backfill": {
                 "openalex": bool(source_done),
                 "crossref_broad": bool(source_done),
@@ -192,7 +194,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "institution_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "institution_cursor", "frontier_gap_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["version"] = INCREMENTAL_STATE_VERSION
     state["source_expansion_version"] = SOURCE_EXPANSION_VERSION
@@ -223,6 +225,74 @@ def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[st
         if key not in {"signal::", "signal-link:"}:
             sig_ids.add(key)
     return ab_ids, ab_links, sig_ids
+
+
+FRONTIER_CELL_ORDER = [
+    f"{row}-{column}"
+    for row in ("knowledge", "infrastructure", "conversion", "rules")
+    for column in ("A", "B", "C", "D")
+]
+
+
+def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], int, str]:
+    """Use the exact browser classifier to count current 4x4 matrix occupancy.
+
+    The repository already requires Node for the Frontier self-tests. Calling the
+    same module here avoids maintaining a second Python approximation that could
+    disagree with the page. Failure is non-fatal: discovery falls back to an even
+    rotation and the cumulative corpus is still preserved.
+    """
+    empty = {key: 0 for key in FRONTIER_CELL_ORDER}
+    try:
+        proc = subprocess.run(
+            ["node", str(FRONTIER_COVERAGE_SCRIPT)],
+            cwd=ROOT,
+            input=json.dumps(previous, ensure_ascii=False),
+            capture_output=True,
+            text=True,
+            timeout=20,
+            check=True,
+        )
+        payload = json.loads(proc.stdout or "{}")
+        raw_counts = payload.get("counts") if isinstance(payload, dict) else {}
+        counts = {
+            key: max(0, int(raw_counts.get(key, 0) or 0)) if isinstance(raw_counts, dict) else 0
+            for key in FRONTIER_CELL_ORDER
+        }
+        qualifying = max(0, int(payload.get("qualifying", sum(counts.values())) or 0)) if isinstance(payload, dict) else sum(counts.values())
+        return counts, qualifying, ""
+    except Exception as exc:
+        return empty, 0, f"{type(exc).__name__}: {str(exc)[:160]}"
+
+
+def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
+    """Select the sparsest Frontier cells for extra weak-signal discovery.
+
+    Counts come from the exact Sovereignty-Frontier classifier. Empty cells are
+    therefore first, followed by under-represented cells. A persisted cursor rotates
+    ties so the same six zero-count cells are not searched forever while other gaps
+    receive no attention. This changes discovery priority only; admission gates stay
+    untouched and no corpus item is invented or reclassified.
+    """
+    counts, qualifying, error = frontier_matrix_coverage(previous)
+    start = int(state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
+    cyclic_rank = {FRONTIER_CELL_ORDER[(start + i) % len(FRONTIER_CELL_ORDER)]: i for i in range(len(FRONTIER_CELL_ORDER))}
+    ordered = sorted(FRONTIER_CELL_ORDER, key=lambda key: (counts.get(key, 0), cyclic_rank[key]))
+    limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_queries_per_scan", 6) or 0)))
+    targets = ordered[:limit]
+    if targets:
+        last_index = FRONTIER_CELL_ORDER.index(targets[-1])
+        state["frontier_gap_cursor"] = (last_index + 1) % len(FRONTIER_CELL_ORDER)
+    profiles = CONFIG.get("frontier_gap_search_queries", {})
+    queries = [clean_text(profiles.get(key, "")) for key in targets if isinstance(profiles, dict) and clean_text(profiles.get(key, ""))]
+    return {
+        "counts": counts,
+        "qualifying": qualifying,
+        "empty_cells": sum(1 for key in FRONTIER_CELL_ORDER if counts.get(key, 0) == 0),
+        "targets": targets,
+        "queries": queries,
+        "classifier_error": error,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -2150,7 +2220,7 @@ def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
     return False, name
 
 
-def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
+def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None, coverage_queries: list[str] | None = None) -> list[dict[str, Any]]:
     lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
     start = now - dt.timedelta(hours=lookback_hours)
     workers = int(CONFIG.get("news_workers", 10))
@@ -2162,6 +2232,10 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             jobs.append((src["name"], src["domain"], q, False))
     for q in global_news_queries(lookback_hours):
         jobs.append(("", "", q, True))
+    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
+    for q in coverage_queries or []:
+        if clean_text(q):
+            jobs.append(("", "", f"{clean_text(q)} when:{days}d", True))
 
     def fetch_job(job: tuple[str, str, str, bool]) -> tuple[list[dict[str, Any]], str | None]:
         name, domain, q, is_global = job
@@ -2440,6 +2514,14 @@ def main() -> int:
     KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES = known_sets_from_previous(previous)
     state = initial_scan_state(previous)
     INSTITUTION_SEEN_FINGERPRINTS = dict(state.get("institution_seen_fingerprints", {}))
+    frontier_focus = frontier_gap_plan(previous, state)
+    if frontier_focus["classifier_error"]:
+        log_progress(f"Frontier coverage classifier unavailable; using rotating fallback: {frontier_focus['classifier_error']}")
+    log_progress(
+        f"Frontier coverage before scan: {frontier_focus['qualifying']} qualifying, "
+        f"{frontier_focus['empty_cells']}/16 empty; prioritising "
+        + (", ".join(frontier_focus["targets"]) if frontier_focus["targets"] else "no extra gap queries")
+    )
 
     try:
         last = dateparser.parse(previous.get("last_updated", "")).date()
@@ -2520,7 +2602,7 @@ def main() -> int:
 
     with cf.ThreadPoolExecutor(max_workers=3) as ex:
         fut_news = ex.submit(
-            safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline
+            safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
         fut_oa = ex.submit(
             safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline
@@ -2639,6 +2721,13 @@ def main() -> int:
         "crossref_broad_queries": len(cr_batch),
         "crossref_priority_tasks": len(cr_priority_batch),
         "institution_sources": len(inst_batch),
+        "frontier_gap_queries": len(frontier_focus["queries"]),
+    }
+    state["frontier_coverage_before_scan"] = {
+        "qualifying": frontier_focus["qualifying"],
+        "empty_cells": frontier_focus["empty_cells"],
+        "counts": frontier_focus["counts"],
+        "targets": frontier_focus["targets"],
     }
 
     data = {
@@ -2677,6 +2766,8 @@ def main() -> int:
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
             "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day rolling window and keeps all earlier signals." if new_c_count < 3 else "",
+            "frontier_gap_targets": frontier_focus["targets"],
+            "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
         },
         "strand_a": strand_a,
         "strand_b": strand_b,
@@ -2709,6 +2800,11 @@ def main() -> int:
             "news_lookback_hours": news_lookback,
             "news_sources_configured": len(CONFIG.get("news_sources", [])),
             "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
+            "frontier_gap_queries_this_run": len(frontier_focus["queries"]),
+            "frontier_gap_targets_this_run": len(frontier_focus["targets"]),
+            "frontier_qualifying_before_scan": frontier_focus["qualifying"],
+            "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
+            "frontier_coverage_classifier_ok": not bool(frontier_focus["classifier_error"]),
             "signal_recovery_backfill": signal_backfill,
             "signal_backfill_complete": signal_backfill_complete,
             "quality_removed_old_a": quality_removed.get("strand_a", 0),

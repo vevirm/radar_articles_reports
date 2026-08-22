@@ -1,36 +1,35 @@
-# R&I × Geopolitics Radar — V17.3 Sovereignty-Frontier summary
+# R&I × Geopolitics Radar — V17.4 gap-priority + opportunities/risks
 
-V17.3 keeps the proven V17.2 cumulative/incremental scanner unchanged and adds a third analytical page: **Insight Summary / Sovereignty-Frontier Signals**. The new page reads the same cumulative `radar.json`; it never writes to, prunes, or reclassifies the underlying corpus.
+V17.4 keeps the cumulative/incremental V17.2 source rotations and the strict V17.3 Sovereignty-Frontier classifier, but now uses the matrix itself to improve discovery coverage. It also adds a fourth analytical view: **Greatest Opportunities & Risks**.
 
-## What is unchanged
+## What remains unchanged
 
-The evidence/admission logic remains V17:
+- The Radar is cumulative: previously accepted A/B/C items remain unless an explicit quality migration rejects an old item under the established V17 substance gate.
+- OpenAlex, Crossref and institutional sources keep their persistent rotating cursors and existing per-run caps.
+- The Sovereignty-Frontier admission gate remains strict. Empty cells are never padded with weak matches.
+- `radar.json` remains the single source of truth. The Frontier and Opportunities/Risks pages are read-only.
+- This delivery embeds the live cumulative `radar.json` you supplied (257 A/B/C records) directly. The older `repository_bundle_seed` + Git-history recovery mechanism remains available in the scanner as a fallback for future seed-based upgrades, but this live file does not need that marker.
 
-- **Strand A:** substantive EU/Europe + R&I/science/strategic-technology + geopolitics/geoeconomics/economic-security connection.
-- **Strand B:** substantive foresight/horizon-scanning/scenario methodology on that same EU + R&I + geopolitical substance.
-- **Strand C:** curated factual weak signals linked to the evidence base or an approved strategic watch theme.
-- The site is **cumulative**. Previously accepted A/B/C items remain visible. New scans append genuinely new identities; they do not replace the corpus.
-- `/briefing/` remains the balanced **Insights** view with Research publications, EU & institutional reports, and Weak signals.
+## New in V17.4: matrix-gap-aware discovery
 
+Before each scan, `scripts/frontier_coverage.js` runs the exact same `frontier/frontier.js` classifier used by the browser and counts occupancy across all 16 Sovereignty-Frontier cells. The scanner then adds **six** extra curated global-news queries for the currently emptiest/sparsest cells.
 
-## New in V17.3: Sovereignty-Frontier Insight Summary
+Cells with the same occupancy rotate using a persistent `frontier_gap_cursor`, so one stubborn gap does not monopolise every run. This is discovery prioritisation only: newly found items still have to pass the existing weak-signal admission logic and the existing Frontier classifier.
 
-`/frontier/` is a decision-attention layer above the Radar and Radar Insights pages. It asks three questions of an observed change:
+The selected cells and pre-scan coverage counts are saved in scan metadata for auditability. The discovery profile version is bumped, so the first V17.4 scan receives the existing 30-day weak-signal recovery window before returning to the normal seven-day rolling window.
 
-1. Could the EU sustain the activity without reliance on a non-EU actor?
-2. If it did so, would it remain competitive against the best available alternative?
-3. What could cause either condition to fail?
+## New in V17.4: Greatest Opportunities & Risks
 
-Qualifying developments are placed into a 4 × 4 matrix. Rows identify where the signal bites — **Knowledge & people**, **Infrastructure & inputs**, **Conversion**, or **Rules & institutions**. Columns identify the effect on the independence–competitiveness frontier — **A Opening**, **B Costly autonomy**, **C Productive dependence**, or **D Double loss**.
+`/priorities/` reads the full cumulative `radar.json` and the same Frontier classifier. It presents two deliberately simple bullet lists:
 
-The page then ranks the strongest-looking candidates using four transparent triage criteria: system reach, reversibility, an attention-gap proxy, and an identifiable EU/member-state action lever. It uses deterministic JavaScript and requires no external AI API. Strand C is the primary pool; A/B evidence can also surface when it contains an explicit observed change or decision.
+- **Greatest opportunities:** A / Opening signals, where autonomy and competitiveness improve together.
+- **Greatest risks:** D / Double loss first, then C / Productive dependence and B / Costly autonomy.
 
-The classifier is intentionally stricter than the broad radar. A development can remain safely in the cumulative Radar without being promoted to the Sovereignty-Frontier summary.
+The lists are cumulative rather than latest-only. Older qualifying items remain available and can be expanded with **Show all cumulative**. Ranking emphasises structural triage rather than dropping items because they are no longer new.
 
-The full analytical definition and cell taxonomy are documented in `frontier_criteria.md`.
+## Sovereignty-Frontier Insight Summary
 
-The `/frontier/` presentation is deliberately layered for fast reading: **one-look conclusion first**, then three concise "what matters" cards, expandable signal detail, the full matrix, and methodology last. Matrix cells show two items initially and any remaining items expand in place with a working **Show more** control.
-
+`/frontier/` remains the 4 × 4 independence–competitiveness matrix. Rows identify where the signal bites — **Knowledge & people**, **Infrastructure & inputs**, **Conversion**, or **Rules & institutions**. Columns identify the effect — **A Opening**, **B Costly autonomy**, **C Productive dependence**, or **D Double loss**.
 
 ## The V17.2 fix: persistent source cursors
 
@@ -95,7 +94,9 @@ The active workflow is `.github/workflows/radar-scan.yml`.
 
 ## Safe full-repository upload
 
-This package includes a `repository_bundle_seed` marker in `radar.json`. On the first scan after upload, the scanner checks recent Git history. If the repository had a larger cumulative `radar.json` immediately before the upload, it merges that larger A/B/C corpus back before scanning. The one-run seed marker is then removed.
+This package contains the live cumulative `radar.json` supplied for this build: **152 Strand A + 9 Strand B + 96 Strand C = 257 records**. The packaged file is copied byte-for-byte from that upload, so the repository starts with the accumulated corpus already present.
+
+The scanner still contains the `repository_bundle_seed` + Git-history recovery code for future upgrade bundles that use a small seed, but no seed marker is required in this delivery.
 
 ## Tests
 

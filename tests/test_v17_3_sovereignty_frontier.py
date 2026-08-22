@@ -26,7 +26,7 @@ class SovereigntyFrontierTests(unittest.TestCase):
     def test_main_and_insights_link_to_summary(self):
         main = (ROOT / 'index.html').read_text(encoding='utf-8')
         briefing = (ROOT / 'briefing' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('frontier/?v=17.3">Open Insight Summary', main)
+        self.assertIn('frontier/?v=17.4">Open Insight Summary', main)
         self.assertIn('../frontier/">Insight Summary →', briefing)
 
     def test_four_frontier_columns_are_classified(self):
@@ -80,10 +80,11 @@ for(const re of [/nuclear expansion.*non-EU reactor technology/i,/Brazil launche
 '''
         self.run_node(script)
 
-    def test_bundle_seed_and_scanner_are_unchanged_by_frontier_layer(self):
-        radar = (ROOT / 'radar.json').read_text(encoding='utf-8')
+    def test_live_corpus_and_recovery_guard_survive_frontier_layer(self):
+        import json
+        radar = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         scanner = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
-        self.assertIn('repository_bundle_seed', radar)
+        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 250)
         self.assertIn('Recovered a larger pre-upload radar corpus from Git history', scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)
 
