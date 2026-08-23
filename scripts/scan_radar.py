@@ -331,6 +331,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "crossref_explore_cursor": 0,
             "frontier_gap_query_cursors": {},
             "frontier_gap_source_cursors": {},
+            "frontier_recovery_query_cursors": {},
             "frontier_recovery_depth": {"openalex": {}, "crossref": {}},
             "result_depth": {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}},
             "backfill": {
@@ -356,6 +357,17 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["frontier_gap_query_cursors"] = {}
     if not isinstance(state.get("frontier_gap_source_cursors"), dict):
         state["frontier_gap_source_cursors"] = {}
+    if not isinstance(state.get("frontier_recovery_query_cursors"), dict):
+        state["frontier_recovery_query_cursors"] = {}
+    # Migration from V17.7.4: do not restart stubborn cells at formulation 1.
+    # The ordinary per-cell scholarly cursor is the best persisted indication of
+    # which query variants have already been cycled in earlier runs.
+    legacy_gap_cursors = state.get("frontier_gap_query_cursors", {})
+    if isinstance(legacy_gap_cursors, dict):
+        for cell in FRONTIER_CELL_ORDER:
+            state["frontier_recovery_query_cursors"].setdefault(
+                cell, int(legacy_gap_cursors.get(f"scholarly:{cell}", 0) or 0)
+            )
     if not isinstance(state.get("frontier_recovery_depth"), dict):
         state["frontier_recovery_depth"] = {"openalex": {}, "crossref": {}}
     for family in ("openalex", "crossref"):
@@ -383,6 +395,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             state[key] = 0
         state["result_depth"] = {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}}
         state["frontier_recovery_depth"] = {"openalex": {}, "crossref": {}}
+        state["frontier_recovery_query_cursors"] = {}
         state["institution_seen_fingerprints"] = {}
         state["backfill"] = {"openalex": False, "crossref_broad": False, "crossref_priority": False, "institutions": False}
         state["completed_cycles"] = {"openalex": 0, "crossref_broad": 0, "crossref_priority": 0, "institutions": 0}
@@ -639,6 +652,92 @@ def frontier_gap_depth_bank(frontier_focus: dict[str, Any], include_nonempty: bo
             if i < len(vals) and vals[i] not in bank:
                 bank.append(vals[i])
     return bank
+
+
+def frontier_targets_for_query(query: str) -> list[str]:
+    """Return Frontier cell(s) explicitly associated with a configured scholarly query."""
+    q = clean_text(query)
+    if not q:
+        return []
+    profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
+    out: list[str] = []
+    if isinstance(profiles, dict):
+        for cell in FRONTIER_CELL_ORDER:
+            raw = profiles.get(cell, [])
+            vals = raw if isinstance(raw, list) else [raw]
+            if any(clean_text(v) == q for v in vals if clean_text(v)):
+                out.append(cell)
+    return out
+
+
+def frontier_gap_recovery_plan(frontier_focus: dict[str, Any], state: dict[str, Any], limit: int) -> dict[str, Any]:
+    """Round-robin stubborn-cell formulations with a persistent cursor per cell.
+
+    V17.7.4 always sliced the first N entries of the interleaved recovery bank.  With
+    more formulations than the recovery cap, later variants were therefore never
+    requested, no matter how many scheduled runs elapsed.  This planner starts each
+    empty cell at its own saved formulation cursor and advances only after a request
+    actually reached OpenAlex or Crossref.
+    """
+    cells = list(frontier_focus.get("empty_targets") or frontier_focus.get("targets") or [])
+    profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
+    cursors = state.setdefault("frontier_recovery_query_cursors", {})
+    if not isinstance(cursors, dict):
+        cursors = {}
+        state["frontier_recovery_query_cursors"] = cursors
+    per_cell: dict[str, list[str]] = {}
+    starts: dict[str, int] = {}
+    planned_by_cell: dict[str, list[str]] = {}
+    for cell in cells:
+        raw = profiles.get(cell, []) if isinstance(profiles, dict) else []
+        vals = raw if isinstance(raw, list) else [raw]
+        vals = list(dict.fromkeys(clean_text(v) for v in vals if clean_text(v)))
+        if not vals:
+            continue
+        per_cell[cell] = vals
+        starts[cell] = int(cursors.get(cell, 0) or 0) % len(vals)
+        planned_by_cell[cell] = []
+
+    cap = max(0, int(limit or 0))
+    bank: list[str] = []
+    round_no = 0
+    while len(bank) < cap and per_cell:
+        before = len(bank)
+        for cell in cells:
+            vals = per_cell.get(cell)
+            if not vals or len(planned_by_cell[cell]) >= len(vals):
+                continue
+            idx = (starts[cell] + len(planned_by_cell[cell])) % len(vals)
+            q = vals[idx]
+            planned_by_cell[cell].append(q)
+            if q not in bank:
+                bank.append(q)
+            if len(bank) >= cap:
+                break
+        round_no += 1
+        if len(bank) == before or round_no > max((len(v) for v in per_cell.values()), default=0):
+            break
+    return {"queries": bank, "planned_by_cell": planned_by_cell, "starts": starts, "per_cell": per_cell}
+
+
+def commit_frontier_recovery_plan(state: dict[str, Any], plan: dict[str, Any], executed: set[str]) -> dict[str, int]:
+    """Advance each stubborn-cell formulation cursor across actually executed requests only."""
+    cursors = state.setdefault("frontier_recovery_query_cursors", {})
+    advanced: dict[str, int] = {}
+    for cell, planned in (plan.get("planned_by_cell") or {}).items():
+        vals = (plan.get("per_cell") or {}).get(cell, [])
+        if not vals:
+            continue
+        cursor = int((plan.get("starts") or {}).get(cell, cursors.get(cell, 0)) or 0) % len(vals)
+        consumed = 0
+        for q in planned:
+            if q not in executed:
+                break
+            cursor = (cursor + 1) % len(vals)
+            consumed += 1
+        cursors[cell] = cursor
+        advanced[cell] = consumed
+    return advanced
 
 
 def provisional_frontier_document(previous: dict[str, Any], candidates: Iterable[dict[str, Any]],
@@ -1843,7 +1942,7 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_reject_no_strategic_context")
 
 
-def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None) -> dict[str, Any] | None:
+def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None) -> dict[str, Any] | None:
     title = clean_text(work.get("display_name"))
     abstract = openalex_abstract(work.get("abstract_inverted_index"))
     date = parse_date(work.get("publication_date"))
@@ -1874,7 +1973,7 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
         title=title, authors=openalex_authors(work), source=source, date=date, link=link,
         item_type="preprint" if is_preprint else "peer-reviewed article",
         strand=strand, evidence=ev, source_rank=source_rank, tier_label=tier_label,
-        text=full, doi=doi, preprint=is_preprint,
+        text=full, doi=doi, preprint=is_preprint, frontier_targets=frontier_targets,
     )
 
 
@@ -1923,7 +2022,7 @@ def collect_openalex(
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
-    def convert_works(works: list[dict[str, Any]], query_from: dt.date) -> list[dict[str, Any]]:
+    def convert_works(works: list[dict[str, Any]], query_from: dt.date, q: str) -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
         for work in works:
             if bool(CONFIG.get("skip_known_items_before_classification", True)):
@@ -1931,7 +2030,7 @@ def collect_openalex(
                 doi0 = clean_text(work.get("doi"))
                 if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
                     continue
-            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from))
+            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
             if item:
                 out.append(item)
         return out
@@ -1957,7 +2056,7 @@ def collect_openalex(
                 r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("results", [])
-                    return convert_works(works, query_from), None, len(works)
+                    return convert_works(works, query_from, q), None, len(works)
                 if r.status_code == 429:
                     stop_public.set()
                     return [], "HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run", 0
@@ -2117,7 +2216,7 @@ def doi_landing_abstract(doi_raw: str, timeout: int = 8) -> str:
     return ""
 
 
-def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None) -> dict[str, Any] | None:
+def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None) -> dict[str, Any] | None:
     title = clean_text((item.get("title") or [""])[0])
     abstract = clean_text(item.get("abstract"))
     date = crossref_date(item)
@@ -2145,7 +2244,7 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
         title=title, authors=crossref_authors(item), source=source, date=date, link=link,
         item_type="preprint" if preprint else item_type, strand=strand, evidence=ev,
         source_rank=source_rank, tier_label=tier_label, text=f"{title}. {abstract}",
-        doi=doi, preprint=preprint,
+        doi=doi, preprint=preprint, frontier_targets=frontier_targets,
     )
 
 
@@ -2221,7 +2320,7 @@ def collect_crossref(
                 doi0 = clean_text(item.get("DOI"))
                 if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
                     continue
-            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
+            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
             if c:
                 out.append(c)
                 continue
@@ -2245,7 +2344,7 @@ def collect_crossref(
                     if recovered:
                         item = dict(item)
                         item["abstract"] = recovered
-                        c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
+                        c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
                         if c:
                             c["metadata_note"] = "Abstract recovered from DOI publisher metadata before admission."
                             out.append(c)
@@ -2818,7 +2917,47 @@ def evidence_summary(evidence: dict[str, Any], strand: str) -> str:
     return "; ".join(parts)
 
 
-def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str) -> str:
+def frontier_target_sentence_score(sentence: str, targets: Iterable[str] | None) -> int:
+    """Score a source sentence only when it states the mechanism of a targeted empty cell.
+
+    This never adds claims.  It only prevents an abstract sentence that caused a gap query
+    to match from being discarded by the generic three-sentence summary selector.
+    """
+    t = normalized(sentence)
+    if not t:
+        return 0
+    target_set = set(targets or [])
+    eu = bool(re.search(r"\b(eu|europe|european|member states|germany|france|italy|spain|netherlands|sweden|finland|denmark|poland|ireland|austria|belgium)\b", t))
+    ext = bool(re.search(r"\b(foreign|non eu|third country|china|chinese|united states|american|international)\b", t))
+    knowledge = bool(re.search(r"\b(researcher|researchers|scientist|scientists|research talent|scientific talent|research workforce|research collaboration|scientific collaboration|expertise)\b", t))
+    infra = bool(re.search(r"\b(compute|cloud|semiconductor|chip|chips|infrastructure|supply chain|critical raw material|critical mineral|reactor|quantum|data cent(?:er|re))\b", t))
+    conversion = bool(re.search(r"\b(firm|firms|company|companies|startup|scale up|scaleup|manufactur|production|factory|industrial)\b", t))
+    rules = bool(re.search(r"\b(rule|rules|standard|standards|regulation|export control|licen[cs]|platform rules|governance)\b", t))
+    autonomy_up = bool(re.search(r"strategic autonomy|sovereign|domestic capacity|european capacity|onshor|reshor|local production|reduce.{0,35}(depend|reliance)|diversif|de risk", t))
+    autonomy_down = bool(re.search(r"dependence on|dependent on|reliance on|foreign (supplier|vendor|technology|expertise|talent|infrastructure)|non eu (technology|vendor|supplier)|loss of access|restricted access|lock in", t))
+    perf_up = bool(re.search(r"competit|excellence|leading|leader|advanced|capacity|capabilit|performance|benefit|strengthen|innovation|access to", t))
+    perf_down = bool(re.search(r"lag|behind|costly|expensive|higher cost|shortage|bottleneck|delay|slow|declin|loss|hollow|gap|no substitute|disrupt|cut off|constraint", t))
+    loss_people = bool(re.search(r"brain drain|researcher outflow|researchers? (leave|leaving|left)|scientists? (leave|leaving|left)|talent outflow|loss of (research|scientific) talent|unable to retain|moving abroad", t))
+    firm_loss = bool(re.search(r"firm exit|firms exit|exit europe|move abroad|moving abroad|relocat|foreign acquisition|closure|shut down|hollow|lost production|loss of production|scale up gap|scaleup gap|funding gap|industrial decline", t))
+    foreign_rules = bool(re.search(r"foreign standards|foreign rules|us rules|american rules|platform rules|non eu rules|non eu standards|us export control|export licen[cs]", t))
+
+    scores=[]
+    if "knowledge-C" in target_set and knowledge and ext and (autonomy_down or re.search(r"foreign (expertise|talent)|international researchers", t)) and perf_up:
+        scores.append(10 + int(eu))
+    if "knowledge-D" in target_set and knowledge and loss_people and eu:
+        scores.append(12)
+    if "infrastructure-B" in target_set and infra and autonomy_up and perf_down:
+        scores.append(11 + int(eu))
+    if "infrastructure-D" in target_set and infra and (autonomy_down or re.search(r"loss of access|restricted access|supply disruption|shortage|cut off", t)) and perf_down:
+        scores.append(11 + int(eu))
+    if "conversion-D" in target_set and conversion and firm_loss and (perf_down or re.search(r"loss|declin|gap|hollow", t)):
+        scores.append(11 + int(eu))
+    if "rules-C" in target_set and rules and foreign_rules and (autonomy_down or ext) and perf_up:
+        scores.append(11 + int(eu))
+    return max(scores, default=0)
+
+
+def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str, frontier_targets: Iterable[str] | None = None) -> str:
     sents = split_sentences(text)
     selected = []
     # Prefer sentences that carry explicit gate evidence.
@@ -2826,6 +2965,16 @@ def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str) -
         s = clean_text(evidence.get(key))
         if s and s not in selected:
             selected.append(s)
+    # Preserve the strongest source sentence for the empty Frontier cell that caused
+    # this record to be fetched. V17.7.4 often admitted the paper but then summarized
+    # away the exact dependency/loss/cost mechanism, making the Frontier classifier
+    # unable to use evidence the scanner had genuinely found.
+    targeted = sorted(
+        ((frontier_target_sentence_score(sent, frontier_targets), -i, sent) for i, sent in enumerate(sents[:80])),
+        reverse=True,
+    )
+    if targeted and targeted[0][0] > 0 and targeted[0][2] not in selected:
+        selected.append(targeted[0][2])
     # Then prefer EU-scope and method/geo/R&I evidence sentences.
     evidence_terms = (
         evidence.get("ri_evidence", []) + evidence.get("geo_evidence", []) +
@@ -2875,7 +3024,8 @@ def relevance_note(evidence: dict[str, Any], strand: str) -> str:
 
 def build_item(*, title: str, authors: str, source: str, date: dt.date, link: str,
                item_type: str, strand: str, evidence: dict[str, Any], source_rank: float,
-               tier_label: str, text: str, doi: str, preprint: bool) -> dict[str, Any]:
+               tier_label: str, text: str, doi: str, preprint: bool,
+               frontier_targets: Iterable[str] | None = None) -> dict[str, Any]:
     themes = themes_for(text)
     return {
         "title": title,
@@ -2886,13 +3036,14 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "type": item_type,
         "strand": strand,
         "eu_relevance": evidence.get("eu_relevance"),
-        "summary": make_summary(text, evidence, strand, title),
+        "summary": make_summary(text, evidence, strand, title, frontier_targets),
         "relevance_note": relevance_note(evidence, strand),
         "source_tier": tier_label,
         "_source_rank": source_rank,
         "_themes": themes,
         "_doi": normalized(doi).replace("https://doi.org/", ""),
         "_preprint": preprint,
+        "_frontier_targets": list(dict.fromkeys(frontier_targets or [])),
         "_confidence": (
             len(evidence.get("ri_evidence", [])) + len(evidence.get("geo_evidence", [])) +
             len(evidence.get("foresight_evidence", [])) + len(evidence.get("method_evidence", [])) +
@@ -4756,9 +4907,14 @@ def main() -> int:
         deepening["gap_queries_executed"] += len(executed_this_wave)
         # Advance only across query positions that actually reached a source.
         if executed_this_wave:
-            # Depth page state is the real persistence; this cursor only spreads the
-            # first wave across formulations on the next run.
-            deep_cursor = (deep_cursor + len(batch)) % max(1, len(gap_depth_bank))
+            # Do not skip queued formulations that never reached either endpoint.
+            # Advance only across the contiguous executed prefix of this wave.
+            consumed = 0
+            for q in batch:
+                if q not in executed_this_wave:
+                    break
+                consumed += 1
+            deep_cursor = (deep_cursor + consumed) % max(1, len(gap_depth_bank))
         if not executed_this_wave:
             break
         # Recompute the matrix against candidates admitted so far. Once a zero cell
@@ -4819,9 +4975,9 @@ def main() -> int:
         recovery_focus = dict(active_frontier_focus)
         recovery_focus["empty_targets"] = remaining_empty
         recovery_focus["targets"] = remaining_empty
-        recovery_bank = frontier_gap_depth_bank(recovery_focus)
         recovery_max_queries = max(1, int(CONFIG.get("frontier_stubborn_recovery_max_queries", 30) or 30))
-        recovery_bank = recovery_bank[:recovery_max_queries]
+        recovery_plan = frontier_gap_recovery_plan(recovery_focus, state, recovery_max_queries)
+        recovery_bank = recovery_plan["queries"]
         if recovery_bank:
             recovery_deadline = time.monotonic() + min(
                 max(25, int(CONFIG.get("frontier_stubborn_recovery_seconds", 240) or 240)),
@@ -4863,6 +5019,8 @@ def main() -> int:
                     deepening["stubborn_recovery_candidates"] += len(extra)
             recovery_executed = set(recovery_exec.get("openalex_queries", set())) | set(recovery_exec.get("crossref_broad_queries", set()))
             deepening["stubborn_recovery_queries_executed"] = len(recovery_executed)
+            deepening["stubborn_recovery_query_cells"] = {k: list(v) for k, v in recovery_plan.get("planned_by_cell", {}).items()}
+            deepening["stubborn_recovery_cursor_advanced"] = commit_frontier_recovery_plan(state, recovery_plan, recovery_executed)
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(recovery_exec.get("crossref_abstracts_enrichment_attempted", 0))
             post_probe = provisional_frontier_document(previous, oa + cr + inst, frontier_recovery_candidates)
             post_counts, _, post_error = frontier_matrix_coverage(post_probe)
@@ -4906,6 +5064,15 @@ def main() -> int:
     current_c = anchor_news(news, strand_a)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
+
+    # Recompute against exactly what will be published. A cell can change after the
+    # final A/C merge even when the in-run provisional matrix looked stable.
+    published_probe = {"strand_a": strand_a, "strand_b": strand_b, "strand_c": strand_c, "frontier_evidence": frontier_evidence}
+    published_counts, published_qualifying, published_matrix_error = frontier_matrix_coverage(published_probe)
+    if not published_matrix_error:
+        deepening["empty_cells_published"] = sum(1 for k in FRONTIER_CELL_ORDER if published_counts.get(k, 0) == 0)
+        deepening["published_empty_cells"] = [k for k in FRONTIER_CELL_ORDER if published_counts.get(k, 0) == 0]
+        deepening["published_qualifying"] = published_qualifying
 
     previous_a_ids = {identity(internalize_previous(x)) for x in prev_a if isinstance(x, dict)}
     previous_b_ids = {identity(internalize_previous(x)) for x in prev_b if isinstance(x, dict)}

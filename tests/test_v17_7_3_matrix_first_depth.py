@@ -66,7 +66,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
 
     def test_new_allocation_profile_does_not_reset_ab_recall_profile(self):
         self.assertEqual(sr.CONFIG['recall_profile_version'], 'v17.7.2-source-first-contextual-recall')
-        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.7.4-dynamic-stubborn-cell-recovery')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.7.5-rotating-cell-fill')
         self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.4-direct-institutional-signals')
 
 

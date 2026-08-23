@@ -1,4 +1,4 @@
-# Architecture — V17.7.4 A/B/C semantic separation and matrix-first allocation
+# Architecture — V17.7.5 A/B/C semantic separation and matrix-first allocation
 
 The radar has four stages: discovery, admission, cumulative storage, and interpretation.
 

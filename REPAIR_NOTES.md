@@ -1,3 +1,11 @@
+# V17.7.5 — rotating cell fill repair
+
+V17.7.4 could spend many rounds on the same stubborn cells without ever reaching later query formulations. The historical recovery bank was rebuilt from the beginning on every run and then truncated to the fixed query cap. V17.7.5 gives each empty cell its own persistent recovery-query cursor and advances it only for requests that actually execute.
+
+A second failure mode was evidence loss between discovery and Frontier classification: a scholarly abstract could contain the exact cell mechanism, pass Strand A admission, and then have that mechanism omitted by the generic three-sentence summary. Gap-query provenance is now carried internally and the strongest source sentence that actually states the targeted mechanism is preserved in the summary. No synthetic cell claim is added.
+
+The matrix-depth cursor also advances only across the contiguous executed prefix of a wave, so a deadline can no longer skip unexecuted formulations. Finally, the scanner records matrix occupancy against the exact published A/C/evidence corpus after merging, making any newly empty cell visible rather than leaving diagnostics on a provisional snapshot.
+
 # V17.7.4 — dynamic stubborn-cell recovery
 
 The supplied `radar (15).json` shows that V17.7.3 fixed the runtime-allocation problem: the scanner used about 19 minutes, executed 21 matrix-depth waves / 288 gap queries, added 15 Strand A items, 1 Strand B item and 5 Strand C signals. Yet five Frontier cells remain empty: Knowledge-C, Knowledge-D, Infrastructure-D, Conversion-D and Rules-C.
@@ -42,4 +50,4 @@ The C discovery version changes to `v17.7.4-direct-institutional-signals`, so th
 
 ## 6. State preservation
 
-The bundled `radar.json` is byte-for-byte identical to the supplied `radar (15).json`: 81 Strand A, 20 Strand B and 10 Strand C. The V17.7.2 A/B recall profile is unchanged, so this patch does not trigger a general A/B corpus reset.
+Historical V17.7.4 note: that package preserved the supplied `radar (15).json`. V17.7.5 instead bundles the supplied `radar (16).json` (90 Strand A, 22 Strand B, 11 Strand C) so the repaired scanner starts from the user’s latest state. The V17.7.2 A/B recall profile remains unchanged.

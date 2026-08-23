@@ -1,8 +1,8 @@
-# R&I Geopolitics Radar V17.7.4
+# R&I Geopolitics Radar V17.7.5
 
-V17.7.4 is a targeted repair for the remaining empty cells in the 4×4 Frontier matrix after V17.7.3 successfully increased scan depth.
+V17.7.5 fixes the rotation/fill failure that left six Frontier cells empty after repeated recovery rounds: Borrowed brains, Brain drain, Expensive mirror, Cut supply, Hollowing out and Rule-taker.
 
-The main changes are dynamic in-run matrix reallocation, a bounded historical **matrix-only** evidence recovery layer, dedicated research-talent / brain-drain sources and queries, and direct institutional weak-signal discovery.
+The repair adds per-cell persistent recovery-query rotation, execution-aware cursor advancement, target-relevant source-sentence preservation, and final published-matrix diagnostics. Historical matrix-only recovery remains bounded and does not manufacture evidence.
 
 The main A/B radar remains a recent corpus. Historical recovery does not backfill ordinary Strand A; it populates a separate `frontier_evidence` store that exists only to support structural Frontier coverage.
 
