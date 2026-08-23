@@ -436,7 +436,7 @@ RI_STRONG = [
     "science diplomacy", "research collaboration", "scientific collaboration",
     "science and technology cooperation", "scientific cooperation", "research funding",
     "research programme", "research program", "horizon europe", "fp10",
-    "european research area", "research system", "innovation system", "talent mobility",
+    "european research area", "research system", "innovation system",
     "international research cooperation", "international scientific cooperation",
     "research governance", "innovation governance", "research excellence",
     "innovation ecosystem", "research infrastructure policy", "knowledge security",
@@ -446,7 +446,7 @@ RI_STRONG = [
     "technological capacity", "technological capabilities", "technology capabilities",
     "technology development", "industrial research", "industrial innovation", "deep tech",
     "technology transfer", "knowledge transfer", "research infrastructure", "research infrastructures",
-    "scientific infrastructure", "university research", "academic research", "higher education",
+    "scientific infrastructure", "university research", "academic research",
     "research-intensive", "research organisation", "research organization", "research-performing",
     # Strategic technology/industrial capability is part of the R&I-adjacent scope when
     # it is linked to geopolitics/economic security. This keeps relevant nuclear, digital,
@@ -486,8 +486,10 @@ GEO_STRONG = [
 ]
 CHINA_CONTEXT = ["china", "chinese"]
 CHINA_GEO_CONTEXT = [
-    "de-risk", "security", "strategic", "geopolit", "export control", "dual use",
-    "dual-use", "competition", "dependency", "coercion", "foreign interference",
+    "de-risk", "derisk", "geopolit", "economic security", "national security",
+    "strategic competition", "strategic dependency", "strategic dependencies",
+    "technology competition", "export control", "dual use", "dual-use",
+    "coercion", "foreign interference", "sanctions", "decoupling",
 ]
 EU_DIRECT = [
     "european union", "european commission", "european parliament", "member state",
@@ -511,7 +513,7 @@ MEMBER_STATE_SCOPE = [
 # ``talent`` as geopolitical evidence.  This captures brain drain/gain into, out of
 # and within Europe while excluding ordinary labour migration and student mobility.
 RESEARCH_TALENT_ACTORS = [
-    "researcher", "researchers", "scientist", "scientists", "academic", "academics",
+    "researcher", "researchers", "scientist", "scientists", "academics", "academic staff", "faculty", "professor", "professors",
     "research workforce", "scientific workforce", "research talent", "scientific talent",
     "academic careers", "research careers", "postdoctoral researcher", "postdoctoral researchers",
     "postdoc", "postdocs", "doctoral researcher", "doctoral researchers", "research institution",
@@ -521,8 +523,8 @@ RESEARCH_TALENT_FLOW_EXPLICIT = [
     "research brain drain", "academic brain drain", "scientific brain drain", "brain drain",
     "research brain gain", "academic brain gain", "scientific brain gain", "brain gain",
     "researcher mobility", "researchers mobility", "scientist mobility", "scientific mobility",
-    "academic mobility", "research talent mobility", "scientific talent mobility",
-    "researcher migration", "scientist migration", "academic migration",
+    "research talent mobility", "scientific talent mobility",
+    "researcher migration", "scientist migration",
     "research talent outflow", "scientific talent outflow", "researcher outflow",
     "research talent inflow", "scientific talent inflow", "researcher inflow",
 ]
@@ -547,6 +549,17 @@ FORESIGHT_CORE = [
     "anticipatory intelligence", "futures methodology", "futures method", "futures methods",
     "foresight evaluation", "weak signal", "weak signals", "strategic intelligence",
 ]
+# Strand-B method transfer is intentionally stricter than generic foresight detection.
+# Bare words such as ``scenario`` (test scenario, stage scenario, simulation scenario)
+# are too ambiguous to establish a transferable foresight method on their own.
+FORESIGHT_TRANSFER_CORE = [
+    "foresight", "strategic foresight", "foresight methodology", "foresight method", "foresight methods",
+    "foresight practice", "foresight process", "horizon scanning", "weak signal", "weak signals",
+    "delphi", "backcasting", "morphological analysis", "scenario planning", "scenario building",
+    "scenario construction", "futures methodology", "futures method", "futures methods",
+    "futures research", "futures literacy", "anticipatory governance", "foresight evaluation",
+]
+
 METHOD_CORE = [
     "methodology", "methods", "method", "design", "evaluation", "evaluate", "framework",
     "process", "practice", "institutional design", "institutionalisation", "institutionalization",
@@ -555,6 +568,14 @@ METHOD_CORE = [
     "stress testing", "stress-test", "robustness", "wild card", "wild cards",
     "scenario construction", "scenario development", "scenario building", "sensemaking",
     "sense-making", "integration", "assessment", "governance", "toolkit", "protocol",
+]
+# For Strand B the method must be the contribution, not merely a tool used in a case study.
+METHOD_CONTRIBUTION_CORE = [
+    "methodology", "methodological", "method", "methods", "toolkit", "protocol",
+    "evaluation of", "evaluating", "validation", "validating", "benchmark", "benchmarking",
+    "comparison of methods", "compare methods", "method design", "method development",
+    "foresight framework", "foresight approach", "horizon scanning framework",
+    "scenario methodology", "scenario method", "scenario methods",
 ]
 TREND_ONLY_HINTS = ["megatrends", "trend report", "trends report", "outlook", "future of "]
 
@@ -746,43 +767,67 @@ def has_eu_word(text: str) -> bool:
 
 
 def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[str]]:
-    """Classify EU/European relevance without requiring literal 'EU' wording everywhere.
+    """Classify EU relevance as *scope*, not as a passing geographic mention.
 
-    V12 treats Europe and EU member states as first-order scope when they are part of
-    the title/abstract. This is intentionally broader than V11, which missed relevant
-    work phrased as 'European innovation', 'German research', etc. The substantive
-    R&I + geopolitical gates still have to pass, so a bare Europe mention cannot admit
-    an item by itself.
+    Precision repair (V17.5.10): older builds treated any Europe/member-state name in
+    title+abstract as direct EU relevance.  In comparative/global papers this allowed
+    a single German/French/European study, affiliation or comparator to make an
+    Indonesia/China/US-centred paper look EU-scoped.  Direct scope now requires one of:
+
+    * EU/Europe/member-state scope in the title;
+    * an explicit EU institution/programme/policy marker in the abstract; or
+    * a Europe/member-state abstract sentence that itself carries both R&I and
+      geopolitical/economic-security substance.
+
+    Body-only evidence remains stricter still.  Derived relevance still requires an
+    explicit implication-for-Europe sentence.
     """
+    title = clean_text(title)
+    abstract = clean_text(abstract)
     ta = f"{title}. {abstract}"
-    direct = distinct_matches(ta, EU_DIRECT)
-    generic = distinct_matches(ta, EU_GENERIC)
-    member = bounded_matches(ta, MEMBER_STATE_SCOPE)
-    if has_eu_word(ta):
-        direct.append("EU")
-    if direct or generic or member:
-        evidence = direct + generic + member
-        return "direct", list(dict.fromkeys(evidence))[:4]
+
+    title_direct = distinct_matches(title, EU_DIRECT)
+    title_generic = distinct_matches(title, EU_GENERIC)
+    title_member = bounded_matches(title, MEMBER_STATE_SCOPE)
+    if has_eu_word(title):
+        title_direct.append("EU")
+    if title_direct or title_generic or title_member:
+        return "direct", list(dict.fromkeys(title_direct + title_generic + title_member))[:4]
+
+    # Explicit EU institutional/programme/policy language in the abstract is strong
+    # scope evidence.  A bare "EU" token is accepted only when the sentence is also
+    # substantively about R&I, avoiding incidental footnote/comparator mentions.
+    for sent in split_sentences(abstract):
+        sent_direct = distinct_matches(sent, EU_DIRECT)
+        sent_generic = distinct_matches(sent, EU_GENERIC)
+        sent_member = bounded_matches(sent, MEMBER_STATE_SCOPE)
+        bare_eu = has_eu_word(sent)
+        ri_here = bool(distinct_matches(sent, RI_STRONG + RI_GENERIC))
+        geo_here = bool(distinct_matches(sent, GEO_STRONG)) or china_geo_signal(sent) or research_talent_flow_signal(sent)
+        if sent_direct:
+            return "direct", list(dict.fromkeys(sent_direct))[:4]
+        if bare_eu and ri_here:
+            return "direct", ["EU"]
+        # Generic Europe/member-state names are not enough on their own in an
+        # abstract; the same sentence must establish the R&I-geopolitical scope.
+        if (sent_generic or sent_member) and ri_here and geo_here:
+            return "direct", list(dict.fromkeys(sent_generic + sent_member))[:4]
 
     full = f"{ta}. {body[:50000]}"
     direct_body = distinct_matches(full, EU_DIRECT)
-    generic_body = distinct_matches(full, EU_GENERIC)
-    member_body = bounded_matches(full, MEMBER_STATE_SCOPE)
     strong_body_scope = distinct_matches(full, [
         "european commission", "european parliament", "horizon europe", "fp10",
         "european research area", "european economic security", "eu research",
         "eu innovation", "eu science", "eu technology",
     ])
     eu_count = len(re.findall(r"\beu\b", normalized(full)))
-    # Body-only scope remains stricter than title/abstract scope: one passing 'EU'
-    # mention is not enough. A specific R&I/EU institution/programme can be enough,
-    # otherwise require repeated or multiple European scope signals.
-    combined_body = direct_body + generic_body + member_body
-    if strong_body_scope or eu_count >= 2 or len(set(combined_body)) >= 2:
-        evidence = strong_body_scope + combined_body
+    # Body-only scope must be explicit/repeated.  Merely mentioning two European
+    # countries somewhere in a long document is no longer treated as EU scope.
+    if strong_body_scope or eu_count >= 2:
+        evidence = strong_body_scope + direct_body
         return "direct", list(dict.fromkeys(evidence))[:4]
 
-    # Derived EU relevance still requires an explicit implication/comparator sentence;
+    # Derived EU relevance requires an explicit implication/comparator sentence;
     # generic words such as 'policy' or 'strategy' alone do not establish relevance.
     derived_cues = [
         "implication for", "implications for", "consequence for", "consequences for",
@@ -794,10 +839,10 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         "policy options for europe", "policy options for the eu", "strategy for europe",
         "strategy for the eu", "recommendations for europe", "recommendations for the eu",
     ]
-    for s in split_sentences(full):
-        if contains_any(s, EU_GENERIC) or bool(bounded_matches(s, MEMBER_STATE_SCOPE)) or has_eu_word(s):
-            if contains_any(s, derived_cues):
-                return "derived", [s[:260]]
+    for sent in split_sentences(full):
+        if contains_any(sent, EU_GENERIC) or bool(bounded_matches(sent, MEMBER_STATE_SCOPE)) or has_eu_word(sent):
+            if contains_any(sent, derived_cues):
+                return "derived", [sent[:260]]
     return None, []
 
 
@@ -822,29 +867,61 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
 
 
 def china_geo_signal(text: str) -> bool:
-    low = normalized(text)
-    if not any(x in low for x in CHINA_CONTEXT):
-        return False
-    return any(x in low for x in CHINA_GEO_CONTEXT)
+    """Recognise a China-specific geopolitical bridge without document-wide co-occurrence.
+
+    Earlier builds treated any ``China`` mention plus any generic ``strategic`` or
+    ``competition`` wording anywhere in the title/abstract as geopolitical evidence.
+    That admitted systematic reviews where China was merely one study location and
+    phrases such as ``strategic use of local languages`` occurred elsewhere.  Require
+    bounded China wording and a genuinely strategic cue in the same sentence instead.
+    """
+    sentences = split_sentences(text) or [clean_text(text)]
+    for snt in sentences:
+        if not bounded_matches(snt, CHINA_CONTEXT):
+            continue
+        if contains_any(snt, CHINA_GEO_CONTEXT):
+            return True
+    return False
 
 
 def research_talent_flow_signal(text: str) -> bool:
-    """Detect R&I talent flows with enough specificity to count as geoeconomic evidence."""
+    """Detect cross-border *research-workforce* allocation, not generic student mobility.
+
+    Knowledge & people is about researchers/scientists and the research system.  Earlier
+    builds treated phrases such as ``academic mobility`` in Erasmus/student papers as
+    geopolitical research-talent evidence.  Require an explicit research-workforce cue
+    whenever the wording could describe students or education generally.
+    """
     low = normalized(text)
     explicit = distinct_matches(low, RESEARCH_TALENT_FLOW_EXPLICIT)
     actors = distinct_matches(low, RESEARCH_TALENT_ACTORS)
     actions = distinct_matches(low, RESEARCH_TALENT_FLOW_ACTIONS)
+    research_workforce = bool(actors or contains_any(low, [
+        "research career", "research careers", "research workforce", "scientific workforce",
+        "research talent", "scientific talent", "postdoc", "postdoctoral", "doctoral researcher",
+        "research staff", "academic staff", "faculty", "professor", "professors",
+    ]))
+    student_focused = contains_any(low, [
+        "student mobility", "students mobility", "international students", "student migration",
+        "erasmus student", "undergraduate", "master students", "masters students", "student experience",
+    ])
+    if student_focused and not research_workforce:
+        return False
     if explicit:
-        # Generic ``brain drain`` only qualifies when the document is clearly about
-        # the research/academic workforce rather than health, sport or labour generally.
+        # Generic brain drain/gain needs a research-workforce actor.  Researcher/scientist
+        # mobility/outflow/inflow is already specific enough by construction.
         generic_brain = any(x in explicit for x in ("brain drain", "brain gain"))
-        specific_brain = any("research" in x or "academic" in x or "scientific" in x for x in explicit)
-        if generic_brain and not specific_brain and not actors:
+        specific_research_flow = any(
+            x.startswith("researcher") or x.startswith("scientist") or
+            x.startswith("research talent") or x.startswith("scientific talent") or
+            x.startswith("research brain") or x.startswith("scientific brain")
+            for x in explicit
+        )
+        if generic_brain and not specific_research_flow and not research_workforce:
             return False
         return True
-    if not (actors and actions):
+    if not (research_workforce and actions):
         return False
-    # Attraction/retention language needs a cross-border or European allocation cue.
     return bool(
         contains_any(low, ["cross-border", "international", "abroad", "foreign", "overseas", "europe", "european union"])
         or has_eu_word(low)
@@ -1018,55 +1095,88 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     tier1_deep_method = bool(source_tier == 1 and method_bridge and len(set(method_full)) >= 2)
     method_substantive = bool(explicit_method_title or method_in_ta or early_method_body or tier1_deep_method)
 
-    # Strand B has two legitimate routes.  The first is the EU/geopolitics route
-    # shared with Strand A.  The second is a method-transfer route for genuinely
-    # R&I-focused foresight methodology that is directly usable in EU R&I practice,
-    # even when the paper itself is not written around geopolitics or the EU.
-    #
-    # Keep this context deliberately narrower than generic "public policy" or generic
-    # "technology": a methodology paper must be about the R&I / science / innovation
-    # system itself (or an explicitly R&I-adjacent foresight practice), not merely a
-    # futures method that could theoretically be repurposed.
+    # Strand B is a methodology lane, not a topical evidence lane.  Every B item must
+    # make a foresight/scanning/anticipation method itself the substantive contribution
+    # and must be transferable to R&I policy/practice.  A topical A paper does not become
+    # B merely because it uses scenarios, a framework or an assessment model.
     b_ri_method_terms = [
-        "research and innovation", "r&i", "r&i foresight", "research foresight",
-        "innovation foresight", "science foresight", "technology foresight",
-        "research policy", "innovation policy", "science policy", "science and technology policy",
-        "research and development", "r&d", "research funding", "research system",
-        "innovation system", "research governance", "innovation governance",
-        "science and technology", "technology assessment", "research evaluation",
+        "research and innovation", "research & innovation", "r&i", "r&i foresight",
+        "research policy", "innovation policy", "science policy",
+        "science and technology policy", "research funding",
+        "research system", "innovation system", "research governance", "innovation governance",
         "research infrastructure", "research infrastructures", "research capacity",
-        "innovation capacity", "higher education", "university research",
-        "research organisation", "research organization", "research security",
-        "science diplomacy", "industrial innovation", "deep tech", "critical technology",
-        "critical technologies", "emerging technology",
+        "innovation capacity", "research security", "knowledge security", "science diplomacy",
+        "industrial innovation", "deep tech", "critical technology", "critical technologies",
+        "emerging technology policy", "technology assessment", "science and technology",
     ]
     b_ri_method_context_ta = distinct_matches(ta, b_ri_method_terms)
     b_ri_method_context_full = distinct_matches(full[:12000], b_ri_method_terms)
+    b_transfer_foresight_ta = distinct_matches(ta, FORESIGHT_TRANSFER_CORE)
+    b_transfer_foresight_full = distinct_matches(full[:12000], FORESIGHT_TRANSFER_CORE)
 
-    trend_only = contains_any(title, TREND_ONLY_HINTS) and not (explicit_method_title or method_in_ta or method_bridge)
+    transfer_method_bridge = ""
+    transfer_method_bridge_index = 999
+    for idx, snt in enumerate(sentences):
+        low_s = normalized(snt)
+        if any(x in low_s for x in [
+            "does not discuss", "does not address", "does not evaluate", "does not explain",
+            "without methodological", "no methodological", "lacks methodological", "lack methodological",
+        ]):
+            continue
+        strong_foresight = bool(distinct_matches(snt, FORESIGHT_TRANSFER_CORE))
+        method_contribution = bool(distinct_matches(snt, METHOD_CONTRIBUTION_CORE)) or bool(re.search(
+            r"\b(?:develop|propos|introduc|present|design|validat|evaluat|compar|benchmark|refin|adapt|extend|test)\w*"
+            r".{0,80}\b(?:method|methodology|framework|approach|toolkit|protocol|horizon scanning|delphi|scenario planning|foresight)\b",
+            low_s,
+        ))
+        if strong_foresight and method_contribution:
+            transfer_method_bridge = snt[:420]
+            transfer_method_bridge_index = idx
+            break
 
-    # Scholarly transferability must be visible in title/abstract.  Institutional
-    # methodology reports may establish the R&I context in the early body.  This lets
-    # e.g. "A new Delphi methodology for R&I foresight" qualify, while a Delphi paper
-    # on household lifestyles, consumer marketing or generic corporate strategy does not.
+    transfer_method_title = bool(
+        distinct_matches(title, FORESIGHT_TRANSFER_CORE)
+        and (
+            distinct_matches(title, METHOD_CONTRIBUTION_CORE)
+            or contains_any(title, [
+                "delphi", "horizon scanning", "backcasting", "morphological analysis",
+                "scenario planning", "scenario construction", "foresight methodology",
+                "foresight methods", "futures methodology", "futures methods",
+            ])
+        )
+    )
+    transfer_method_ta = bool(
+        transfer_method_title
+        or (transfer_method_bridge and transfer_method_bridge_index < max(1, len(split_sentences(ta))))
+    )
+    transfer_method_body = bool(
+        source_kind != "scholarly"
+        and transfer_method_bridge
+        and (transfer_method_bridge_index < 32 or source_tier == 1)
+    )
+    methodology_first = bool(transfer_method_ta or transfer_method_body)
+
+    # Pure trend/outlook products stay out unless they explicitly develop/evaluate a method.
+    trend_only = contains_any(title, TREND_ONLY_HINTS) and not methodology_first
+
+    # Scholarly B must show both method-first contribution and R&I transfer context in the
+    # title/abstract. Tier-1/2 institutional methodology reports may establish the R&I
+    # transfer context in the early body. This intentionally rejects teaching, patient,
+    # policing, logistics, nutrition-app and generic management papers.
     if source_kind == "scholarly":
-        b_transferable = bool(b_ri_method_context_ta)
+        b_transferable = bool(methodology_first and b_transfer_foresight_ta and b_ri_method_context_ta)
     else:
-        b_transferable = bool(b_ri_method_context_ta or b_ri_method_context_full)
-
-    b_eu_rel = eu_rel or ("derived" if b_transferable else None)
+        b_transferable = bool(
+            methodology_first
+            and (b_transfer_foresight_ta or b_transfer_foresight_full)
+            and (b_ri_method_context_ta or b_ri_method_context_full)
+        )
 
     a_pass = bool(ri_substantive and geo_substantive and eu_rel and bridge_supported)
-    b_geo_route = bool(
-        foresight_substantive and method_substantive and not trend_only
-        and ri_substantive and geo_substantive and eu_rel and bridge_supported
-    )
-    b_transfer_route = bool(
-        foresight_substantive and method_substantive and not trend_only and b_transferable
-    )
-    b_pass = bool(b_geo_route or b_transfer_route)
+    b_transfer_route = bool(methodology_first and not trend_only and b_transferable)
+    b_pass = b_transfer_route
 
-    overall_eu = eu_rel or ("derived" if b_pass and b_transferable else None)
+    overall_eu = eu_rel or ("derived" if b_pass else None)
 
     return {
         "a_pass": a_pass,
@@ -1080,8 +1190,10 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         "bridge_mode": bridge_mode,
         "foresight_evidence": (foresight_ta or foresight_full)[:5],
         "method_evidence": (method_ta or method_full)[:6],
-        "method_bridge": method_bridge,
+        "method_bridge": transfer_method_bridge or method_bridge,
         "b_transferable": b_transferable,
+        "b_methodology_first": methodology_first,
+        "b_route": "transfer" if b_transfer_route else "",
         "trend_only": trend_only,
         "source_tier": source_tier,
     }
@@ -1994,10 +2106,11 @@ def relevance_note(evidence: dict[str, Any], strand: str) -> str:
         ri = ", ".join(evidence.get("ri_evidence", [])[:2]) or "substantive R&I evidence"
         geo = ", ".join(evidence.get("geo_evidence", [])[:2]) or "substantive strategic evidence"
         bridge = evidence.get("bridge_mode") or "supported"
-        return f"{eu} EU relevance; R&I evidence: {ri}; strategic evidence: {geo}; bridge: {bridge}."
+        eu_scope = ", ".join(evidence.get("eu_evidence", [])[:2]) or "scope established"
+        return f"{eu} EU relevance ({eu_scope}); R&I evidence: {ri}; strategic evidence: {geo}; bridge: {bridge}."
     if strand == "B":
         method = ", ".join(evidence.get("method_evidence", [])[:2]) or "substantive foresight method"
-        return f"{eu} EU relevance; foresight methodology is substantive ({method}) and independently passes the R&I/geopolitics gate."
+        return f"{eu} EU relevance; methodology-first R&I foresight contribution ({method}); qualifies via the transferable-method route."
     return f"{eu} EU relevance; independently passes both Strand A and Strand B admission gates."
 
 
@@ -2033,6 +2146,8 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
             "foresight": evidence.get("foresight_evidence", []),
             "method": evidence.get("method_evidence", []),
             "method_bridge": evidence.get("method_bridge", ""),
+            "methodology_first": bool(evidence.get("b_methodology_first")),
+            "b_route": evidence.get("b_route", ""),
             "eu": evidence.get("eu_evidence", []),
         },
     }
@@ -2400,6 +2515,60 @@ def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[
     return out, removed
 
 
+def cleanup_quality_profile_regressions(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
+    """Target only records created by the two regressions corrected in V17.5.10.
+
+    Do not re-audit the entire cumulative corpus from concise saved summaries: older
+    legitimate records can have thinner summaries than the original abstract/body. The
+    targeted migration removes (a) derived-EU Strand-B records that no longer satisfy the
+    tightened R&I foresight-transfer route and (b) Strand-A records admitted solely through
+    the old broad ``China + strategic`` shortcut when saved evidence lacks visible EU scope and fails the corrected A gate.
+    """
+    out = dict(previous) if isinstance(previous, dict) else {}
+    removed = {"strand_a": 0, "strand_b": 0, "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0}
+
+    kept_a = []
+    for item in out.get("strand_a", []) if isinstance(out.get("strand_a"), list) else []:
+        if not isinstance(item, dict):
+            continue
+        note = normalized(item.get("relevance_note", ""))
+        text = clean_text(f"{item.get('title','')} {item.get('summary','')}")
+        old_china_bridge = "china + security/strategic context" in note
+        visible_eu_scope = bool(
+            has_eu_word(text)
+            or contains_any(text, EU_DIRECT + EU_GENERIC)
+            or bounded_matches(text, MEMBER_STATE_SCOPE)
+        )
+        # V17.5.5-era false positives often combined an incidental China mention with a
+        # generic strategic word and separately inferred EU scope from a passing European
+        # comparator.  If the saved evidence cannot visibly establish any EU/member-state
+        # scope, re-run only this known regression class under the repaired gate.
+        if old_china_bridge and not visible_eu_scope:
+            passed, _ = _saved_item_passes(item, "a_pass")
+            if not passed:
+                removed["strand_a"] += 1
+                continue
+        kept_a.append(item)
+        removed["stored_pass"] += 1
+
+    kept_b = []
+    for item in out.get("strand_b", []) if isinstance(out.get("strand_b"), list) else []:
+        if not isinstance(item, dict):
+            continue
+        derived_transfer = normalized(item.get("eu_relevance", "")) == "derived"
+        if derived_transfer:
+            passed, _ = _saved_item_passes(item, "b_pass")
+            if not passed:
+                removed["strand_b"] += 1
+                continue
+        kept_b.append(item)
+        removed["stored_pass"] += 1
+
+    out["strand_a"] = kept_a
+    out["strand_b"] = kept_b
+    return out, removed
+
+
 def _audit_refresh_document(item: dict[str, Any]) -> tuple[str, str, str] | None:
     """Best-effort evidence refresh for one inherited record.
 
@@ -2462,7 +2631,7 @@ def _audit_refresh_document(item: dict[str, Any]) -> tuple[str, str, str] | None
 
 
 def audit_inherited_ab(previous: dict[str, Any], warnings: list[str] | None = None) -> tuple[dict[str, Any], dict[str, int]]:
-    """Audit the inherited A/B corpus exactly once, before the first V17.5 scan.
+    """Audit saved A/B at an explicit quality-migration boundary.
 
     Saved evidence that already passes is retained immediately. A saved record that fails
     gets one best-effort document/abstract refresh so thin historical summaries do not
@@ -3041,13 +3210,13 @@ def needs_inherited_corpus_audit(previous: dict[str, Any]) -> bool:
 
 
 def needs_precision_corpus_cleanup(previous: dict[str, Any]) -> bool:
-    """One corrective cleanup for corpora already scanned with the V17.5.1 false-positive gate.
+    """Re-audit A/B once whenever the substantive quality profile changes.
 
-    This marker is intentionally independent of quality-profile/version strings. Once the
-    current A/B corpus has been checked under the corrected admission rules, later scanner
-    updates do not repeatedly re-audit historical material.
+    A boolean-only marker could not repair a corpus after a later admission regression:
+    repositories that had already completed an older cleanup would preserve newly polluted
+    historical A/B forever.  The output quality-profile version is now the migration marker.
     """
-    return not bool(previous.get("precision_corpus_cleanup_complete"))
+    return previous.get("quality_profile_version") != QUALITY_PROFILE_VERSION
 
 
 def needs_precision_signal_cleanup(previous: dict[str, Any]) -> bool:
@@ -3083,11 +3252,9 @@ def main() -> int:
     warnings: list[str] = []
     previous = load_previous()
 
-    # Two one-time migrations are supported:
-    # 1) legacy/inherited corpus audit for installations that have never run V17.5+, and
-    # 2) a corrective precision cleanup for repositories that already ran V17.5.1 while
-    #    its false-positive gate was still too permissive.
-    # After either marker is written, historical A/B is never re-audited on normal runs.
+    # A/B is audited only at migration boundaries: first inherited run, or when the
+    # substantive quality-profile version changes. Normal recurring scans preserve the
+    # cumulative corpus and never spend time re-auditing accepted history.
     inherited_audit = needs_inherited_corpus_audit(previous)
     precision_cleanup = (not inherited_audit) and needs_precision_corpus_cleanup(previous)
     inherited_audit_stats = {
@@ -3095,8 +3262,11 @@ def main() -> int:
         "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
     }
     if inherited_audit or precision_cleanup:
-        label = "First-run inherited-corpus audit" if inherited_audit else "One-time corrective precision cleanup"
+        label = "First-run inherited-corpus audit" if inherited_audit else "Quality-profile regression cleanup"
         log_progress(f"{label}: checking current saved A/B material before discovery")
+        # A changed admission profile can invalidate historical rows just as surely as
+        # an inherited legacy corpus. Re-run the same fail-closed audit and refresh only
+        # on profile migration; ordinary scans never re-audit accepted history.
         previous, inherited_audit_stats = audit_inherited_ab(previous, warnings)
         previous["inherited_corpus_audit_complete"] = True
         previous["precision_corpus_cleanup_complete"] = True

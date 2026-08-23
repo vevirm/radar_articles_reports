@@ -37,6 +37,7 @@
   const EVENT_TERMS=['launch','launched','adopt','adopted','order','ordered','restrict','restricted','curb','curbs','ban','banned','suspend','suspended','withdraw','retreat','invest','investment','build','building','expand','expansion','shift','shifting','becoming','increase','increasing','decrease','decline','declining','cut','cuts','open','opened','close','closed','facilitat','approve','approved','reject','rejected','propos','sign','signed','join','joined','leave','left','losing','overtook','outpace','outpaced','fragment','lag','behind','depend','reliance','consolidat','scale','scaling','deploy','deployed','designat','mandat','require','warn','warning','fail','failed'];
   const INDIRECT_DOMAIN_TERMS=['artificial intelligence','ai model','ai models','supercomputer','compute','data center','data centre','cloud','semiconductor','chip','quantum','nuclear','reactor','solar','battery','critical mineral','critical raw material','robot','robotics','defence technology','defense technology','dual-use','dual use','patent','technology','research collaboration','scientific collaboration','research cooperation','scientific cooperation'];
   const GEOPOLITICAL_ACTORS=['china','chinese','united states',' us ','american','russia','russian','taiwan','india','japan','south korea','korea','uk','britain','canada'];
+  const EU_SCOPE_RE=/\b(eu|europe|european|european union|european commission|member states|austria|austrian|belgium|belgian|bulgaria|bulgarian|croatia|croatian|cyprus|cypriot|czechia|czech|denmark|danish|estonia|estonian|finland|finnish|france|french|germany|german|greece|greek|hungary|hungarian|ireland|irish|italy|italian|latvia|latvian|lithuania|lithuanian|luxembourg|malta|maltese|netherlands|dutch|poland|polish|portugal|portuguese|romania|romanian|slovakia|slovak|slovenia|slovenian|spain|spanish|sweden|swedish)\b/;
 
   const AUTONOMY_UP=['reduce strategic depend','reduce depend','reducing depend','diversif','sovereign control','digital sovereignty','strategic autonomy','self-suff','domestic capacity','european capacity','home-grown','homegrown','reshor','local production','own technology','own capability','control over','alternative supplier','alternative suppliers','open-weight','open source','eu-led','european infrastructure'];
   const AUTONOMY_DOWN=['more dependent','dependence on','dependent on','strategic dependency','strategic dependencies','external dependency','external dependencies','critical dependency','critical dependencies','reliance on','rely on','non-eu technology','non-eu vendor','foreign supplier','foreign suppliers','external supplier','externally controlled','on others terms',"others' terms",'loss of access','access lost','brain drain','people and ideas leave','imported technology','foreign technology','chinese companies','restricted access','partner changes','vendor lock','lock-in','cut supply','hollowing out','chinese firms','us firms','american firms'];
@@ -103,7 +104,8 @@
     for(const group of RadarInsights.buildResearchInsights(data)){
       for(const x of group.items){
         const text=`${x.point} ${x.title} ${x.watchTheme||''} ${x.why||''}`;
-        const dynamic=hitCount(text,EVENT_TERMS)>0 || hitCount(text,INDEPENDENCE_TERMS)>=2 || hitCount(text,COMPETITIVENESS_TERMS)>=2;
+        const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(text);
+        const dynamic=hitCount(text,EVENT_TERMS)>0 || hitCount(text,INDEPENDENCE_TERMS)>=2 || hitCount(text,COMPETITIVENESS_TERMS)>=2 || strategicKnowledge;
         if(!dynamic) continue;
         out.push({
           headline:x.point||x.title,
@@ -182,8 +184,24 @@
     if(questions.failure>=2 && autonomyUp<1 && autonomyDown<1) autonomyDown+=1.2;
     if(questions.failure>=2 && performanceUp<1 && performanceDown<1) performanceDown+=1.1;
     if(row.id==='rules' && /(export control|sanction|restriction|ban|research security|screening)/.test(direct) && autonomyUp<1) autonomyUp+=1.1;
+    // Knowledge-B is explicitly the research-security/openness trade-off: safeguards can
+    // increase control over sensitive research while imposing collaboration/mobility costs.
+    // Without this directional rule, generic failure words (restrict/delay/risk) push the
+    // same evidence into D before the semantic B-cell test gets a chance to evaluate it.
+    if(row.id==='knowledge' && /research security|knowledge security|security screening|research screening/.test(direct)){
+      if(/protect|safeguard|sensitive|security|screening|interference|espionage|restrict/.test(direct)) autonomyUp+=2.2;
+      if(/restrict|barrier|delay|slow|exclude|suspend|cut|collabor|mobility|openness/.test(direct)) performanceDown+=2.2;
+    }
     if(row.id==='knowledge' && /brain drain|researcher outflow|talent outflow|talent loss|researchers? (?:leave|leaving|left)|scientists? (?:leave|leaving|left)|unable to retain|failure to retain|retention crisis/.test(direct)){autonomyDown+=4;performanceDown+=4}
     if(row.id==='knowledge' && /brain gain|talent inflow|attract(?:ing|ion)?.{0,30}(?:researcher|scientist|talent)|retain(?:ing|ed)?.{0,30}(?:researcher|scientist|talent)|(?:researcher|scientist).{0,25}return/.test(direct)){autonomyUp+=3;performanceUp+=3}
+    if(row.id==='knowledge'){
+      const kt=norm(`${direct} ${support}`);
+      const externalKnowledge=/(?:foreign|non-eu|third-country|third country|china|chinese|united states|american).{0,55}(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation)|(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation).{0,55}(?:foreign|non-eu|third-country|third country|china|chinese|united states|american)/.test(kt);
+      const knowledgeGain=/benefit|strengthen|boost|improve|excellence|leading|competitive|competitiveness|capacity|capability|access to|fill(?:s|ing)? gap|critical expertise/.test(kt);
+      if(externalKnowledge && knowledgeGain){autonomyDown+=3;performanceUp+=2.8}
+      const euTalentBuild=EU_SCOPE_RE.test(kt) && /brain gain|talent inflow|attract(?:ing|ion)?|retain(?:ing|ed)?|recruit|returning researchers|researchers return/.test(kt);
+      if(euTalentBuild && /researcher|scientist|research talent|scientific talent|research workforce/.test(kt)){autonomyUp+=2.6;performanceUp+=2.6}
+    }
 
     let autonomy=autonomyUp-autonomyDown;
     let performance=performanceUp-performanceDown;
@@ -211,8 +229,12 @@
     const direct=norm(`${candidateWhat(x)} ${signalTheme(x)} ${clean(x.signal_note||'')} ${signalWhy(x)}`);
     const support=norm(`${clean(x.anchor||'')} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
     let s=0;
-    if(/\beu\b|european union|european commission|europe\b|member states/.test(direct)) s+=3;
-    if(/\beu\b|european union|european commission|europe\b|member states/.test(support)) s+=1.5;
+    if(EU_SCOPE_RE.test(direct)) s+=3;
+    if(EU_SCOPE_RE.test(support)) s+=1.5;
+    // Scanner-level EU relevance may come from abstract/body evidence that is not
+    // repeated in the concise summary. Preserve that vetted scope downstream.
+    if(clean(evidence?.eu_relevance||'').toLowerCase()==='direct') s=Math.max(s,3);
+    else if(clean(evidence?.eu_relevance||'').toLowerCase()==='derived') s=Math.max(s,1.5);
     return s;
   }
 
@@ -284,7 +306,8 @@
     const t=`${d} ${support}`;
     const evidenceSignal=x._origin==='Evidence signal';
     const ext=/\b(china|chinese|united states|us|american|foreign|non-eu|third-country|third country|taiwan|japan|south korea|korea|uk|britain|canada)\b/;
-    const eu=/\b(eu|europe|european|member states|austria|belgium|bulgaria|croatia|cyprus|czech|denmark|estonia|finland|france|germany|greece|hungary|ireland|italy|latvia|lithuania|luxembourg|malta|netherlands|poland|portugal|romania|slovakia|slovenia|spain|sweden)\b/;
+    const eu=EU_SCOPE_RE;
+    const euScoped=eu.test(t) || (evidenceSignal && clean(evidence?.eu_relevance||'').toLowerCase()==='direct');
 
     const rowPatterns={
       knowledge:/\b(researcher|researchers|scientist|scientists|academic|academics|faculty|doctoral|phd|research talent|scientific talent|research workforce|science workforce|research collaboration|scientific collaboration|research cooperation|scientific cooperation|knowledge flow|knowledge flows|skills|research careers?|research mobility|researcher mobility|science diplomacy|open science|research security|higher education)\b/,
@@ -315,7 +338,7 @@
         const euPhrase='(?:eu|europe|european|member states|austria|belgium|bulgaria|croatia|cyprus|czech|denmark|estonia|finland|france|germany|greece|hungary|ireland|italy|latvia|lithuania|luxembourg|malta|netherlands|poland|portugal|romania|slovakia|slovenia|spain|sweden)';
         return new RegExp(`(?:${euPhrase}).{0,55}talent loss|talent loss.{0,55}(?:${euPhrase})`).test(d);
       }
-      if(column.id==='A') return performanceUp && (autonomyUp || /brain gain|talent inflow|attract|retain|recruit|return|research collaboration|scientific collaboration|research cooperation|science diplomacy|knowledge flow/.test(t)) && eu.test(t);
+      if(column.id==='A') return performanceUp && (autonomyUp || /brain gain|talent inflow|attract|retain|recruit|return|research collaboration|scientific collaboration|research cooperation|science diplomacy|knowledge flow/.test(t)) && euScoped;
       if(column.id==='B') return performanceDown && /research security|screening|visa|restrict|barrier|exclude|suspend|closed lab|collabor|mobility|openness/.test(t) && (autonomyUp||/security|sovereign|protect/.test(t));
       return performanceUp && (autonomyDown || (ext.test(t)&&/collabor|cooperat|mobility|recruit|expertise|foreign talent|international talent|science diplomacy|knowledge flow|access/.test(t)));
     }
@@ -367,13 +390,16 @@
     };
     const primaryMoves=Object.values(primaryQuestions).some(v=>v>0);
     const primaryNorm=norm(primary);
-    const directEU=/\beu\b|european union|european commission|europe\b|member states/.test(primaryNorm);
+    const directEU=EU_SCOPE_RE.test(primaryNorm);
     const strategicDomain=hitCount(primary,INDIRECT_DOMAIN_TERMS)>0||/\bai\b/.test(primaryNorm);
     const strategicActor=/\b(china|chinese|united states|us|american|russia|russian|taiwan|india|japan|south korea|korea|uk|britain|canada)\b/.test(primaryNorm);
     const strategicIndirect=strategicDomain&&strategicActor;
     const structuralTalentLoss=/brain drain|researcher outflow|research talent outflow|scientific talent outflow|talent loss/.test(primaryNorm);
     const supportNorm=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
-    const evidenceScopedEU=x._origin==='Evidence signal' && euLink>=3 && /\beu\b|european union|european commission|europe\b|member states/.test(norm(`${sourceFor(x)} ${clean(evidence?.source||'')} ${clean(evidence?.title||'')} ${clean(x.anchor||'')} ${supportNorm}`));
+    const evidenceScopedEU=x._origin==='Evidence signal' && euLink>=3 && (
+      clean(evidence?.eu_relevance||'').toLowerCase()==='direct' ||
+      EU_SCOPE_RE.test(norm(`${sourceFor(x)} ${clean(evidence?.source||'')} ${clean(evidence?.title||'')} ${clean(x.anchor||'')} ${supportNorm}`))
+    );
     // Analytical reports often describe structural dependencies/capability shifts rather than
     // discrete "events".  Treat a supported document-level movement as dynamic enough for
     // Frontier classification; weak signals still have to move in their own headline.
@@ -382,10 +408,11 @@
       hitCount(`${primary} ${supportNorm}`,COMPETITIVENESS_TERMS)>=2 ||
       hitCount(`${primary} ${supportNorm}`,FAILURE_TERMS)>=1
     );
-    const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal' || structuralTalentLoss || structuralEvidence;
-    const movementSupported=primaryMoves || (x._origin==='Evidence signal'&&qCount>=1);
+    const knowledgeStructuralEvidence=x._origin==='Evidence signal' && /research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/.test(norm(`${primary} ${supportNorm}`));
+    const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal' || structuralTalentLoss || structuralEvidence || knowledgeStructuralEvidence;
+    const movementSupported=primaryMoves || (x._origin==='Evidence signal'&&(qCount>=1||knowledgeStructuralEvidence));
 
-    if(qCount===0 || !movementSupported || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
+    if((qCount===0&&!knowledgeStructuralEvidence) || !movementSupported || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
 
     // Try rows in evidence-score order and keep the first row/column whose observed
     // statement actually satisfies that cell's semantic contract.  This prevents

@@ -1,16 +1,37 @@
-# Architecture — V17.5.6
+# Architecture — V17.5.11
 
-The radar has three logically separate stages:
+The radar has four logically separate stages:
 
-1. **Corpus admission** — decides whether A/B/C material belongs in the radar at all.
-2. **Frontier classification** — decides whether an admitted/current signal is strong enough to occupy one of the 16 Sovereignty-Frontier cells.
-3. **Scarcity-balanced discovery** — measures the 16 cell counts and gives additional discovery budget to under-covered cells without replacing normal source rotation.
+1. **Rotating discovery** — queries/sources/pages are sampled with persistent independent cursors.
+2. **Corpus admission** — decides whether A/B/C material belongs in the radar.
+3. **Frontier classification** — decides whether admitted/current evidence supports one of the 16 Sovereignty-Frontier cells.
+4. **Scarcity-balanced discovery** — measures the 16 cell counts and gives additional discovery budget to under-covered cells without replacing normal rotation.
+
+## Persistent rotation contract
+
+`scripts/scan_radar.py` stores rotation state in `radar.json::scan_state`. The V17.5.11 quality repair does **not** reset this state. Independent cursor families include:
+
+- `openalex_cursor`;
+- `crossref_broad_cursor`;
+- `crossref_priority_cursor`;
+- `strand_b_method_cursor` for the dedicated methodology-first lane;
+- `institution_cursor`;
+- `frontier_gap_cursor`;
+- `frontier_gap_query_cursors` per cell;
+- `frontier_gap_source_cursors` per cell;
+- `result_depth` per scholarly query/task so fresh-result and deeper-page lanes both rotate.
+
+The source-expansion compatibility marker remains unchanged, so a quality-profile migration cleans/reclassifies evidence without restarting source traversal.
+
+## Strand B lane
+
+The dedicated B lane rotates method-first queries (Delphi, horizon scanning, weak signals, scenario-method construction, backcasting, morphological analysis, foresight evaluation, etc.). Discovery terms are only candidate generators; final admission still requires the methodology-first B gate. This prevents query terms such as `scenario`, `framework`, `assessment` or `R&D` from becoming admission shortcuts.
 
 ## Frontier semantic contract
 
 `frontier/frontier.js` is the canonical classifier. `scripts/frontier_coverage.js` invokes that exact module from the scanner, so browser display and scan prioritisation share the same occupancy logic.
 
-Short acronyms are boundary-aware. Row scoring alone cannot fill a cell: after row/direction scoring, `cellEvidencePass()` requires a supported row mechanism plus evidence for the selected independence/competitiveness direction. Evidence-derived signals may use the underlying title/summary; weak signals must carry the mechanism themselves.
+Short acronyms are boundary-aware. Row scoring alone cannot fill a cell: after row/direction scoring, `cellEvidencePass()` requires a supported row mechanism plus evidence for the selected independence/competitiveness direction. The Knowledge row includes explicit A/B/C/D semantics for talent attraction/retention, security-cost tradeoffs, productive reliance on foreign expertise and research-talent loss.
 
 ## Scarcity plan
 
@@ -19,23 +40,13 @@ Short acronyms are boundary-aware. Row scoring alone cannot fill a cell: after r
 - loads exact 4×4 counts;
 - computes `deficit = max(0, target_count - count)` for every cell;
 - sorts by deficit, rotating ties with `frontier_gap_cursor`;
-- creates `weighted_targets`, where a deficit-3 cell gets three extra allocation turns, deficit-2 gets two, deficit-1 gets one;
+- creates weighted targets so larger deficits receive more allocation turns;
+- rotates per-cell query formulations and specialist sources with their own saved cursors;
 - allocates bounded news, OpenAlex/Crossref and institutional overlay capacity;
-- leaves the ordinary OpenAlex/Crossref/institution rotations intact.
+- leaves the ordinary OpenAlex/Crossref/priority/institution and B-method rotations intact.
 
 The target count is configured in `radar_config.json` (`frontier_gap_target_count`, currently 3). No cell is permanently listed as a priority.
 
-## State continuity
+## Quality-profile migration
 
-The V17.5.5 change does not expand the base source universe, so the existing source-expansion compatibility marker is retained. Current OpenAlex/Crossref/institution cursors and the Frontier gap cursor continue from the user's latest `radar.json`.
-
-
-## V17.5.6 discovery-depth state
-
-`scan_state` is extended without changing its v17.2 version marker. Three additive state families are initialized with `setdefault`, so an existing live checkpoint is not reset:
-
-- `frontier_gap_query_cursors`: per-cell formulation position;
-- `frontier_gap_source_cursors`: per-cell specialist-source position;
-- `result_depth`: per-query/page state for OpenAlex, Crossref broad, and Crossref priority tasks.
-
-Each scholarly query keeps a newest-results lane and a rotating depth lane. This preserves freshness while preventing recurring queries from repeatedly inspecting only the same top results.
+A change in `quality_profile_version` triggers a one-time inherited A/B audit under the current gate. Thin saved evidence is refreshed where possible; records that cannot pass the repaired gate fail closed. This migration is a corpus-quality operation only: persistent scan cursors continue from the supplied state.

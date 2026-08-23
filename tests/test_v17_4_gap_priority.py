@@ -101,7 +101,7 @@ if(v.risks.length>15||v.opportunities.length>15) process.exit(2);
         self.assertIn("../priorities/", frontier)
         self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ("strand_a", "strand_b", "strand_c")), 90)
         self.assertGreaterEqual(len(radar.get("strand_a", [])), 84)
-        self.assertGreaterEqual(len(radar.get("strand_b", [])), 5)
+        # Do not require a minimum B quota: V17.5.11 deliberately removes saved B rows that fail the methodology-first gate.
         self.assertGreaterEqual(len(radar.get("strand_c", [])), 19)
         self.assertFalse(radar.get("repository_bundle_seed"))
         self.assertIn("Recovered a larger pre-upload radar corpus from Git history", scanner)

@@ -86,7 +86,7 @@ for(const re of [/nuclear expansion.*non-EU reactor technology/i,/attracts resea
         scanner = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
         self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 90)
         self.assertGreaterEqual(len(radar.get('strand_a', [])), 84)
-        self.assertGreaterEqual(len(radar.get('strand_b', [])), 5)
+        # Strand B is methodology-only in V17.5.11; the bundled polluted B snapshot may be emptied before the method lane refills it.
         self.assertGreaterEqual(len(radar.get('strand_c', [])), 19)
         self.assertIn('Recovered a larger pre-upload radar corpus from Git history', scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)

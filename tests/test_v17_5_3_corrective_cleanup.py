@@ -19,6 +19,7 @@ def test_corrective_cleanup_never_repeats_after_markers():
         "inherited_corpus_audit_complete": True,
         "precision_corpus_cleanup_complete": True,
         "precision_signal_cleanup_complete": True,
+        "quality_profile_version": scan.QUALITY_PROFILE_VERSION,
     }
     assert scan.needs_inherited_corpus_audit(current) is False
     assert scan.needs_precision_corpus_cleanup(current) is False
