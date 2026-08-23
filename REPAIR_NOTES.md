@@ -17,3 +17,11 @@
 - Ellipses are not used to force a message under the limit.
 - If no source sentence fits, the UI constructs a short semantic message from the item’s R&I/geopolitical content.
 - Bibliographic titles remain below the message and are not used as the main headline.
+
+## V17.6.4 — true topic/depth rotation
+
+The previous depth rotation was technically persistent but practically too shallow after backfill: ordinary OpenAlex/Crossref searches used the short incremental overlap window, so page 2/3/4 still meant deeper results from the same recent fortnight.
+
+V17.6.4 adds a separate full-corpus exploration lane. It rotates a diversified A + strict-B-method query bank with independent OpenAlex/Crossref exploration cursors, searches those queries from the retained corpus floor, and tracks historical pages under separate `explore::` depth keys. The ordinary recent lane remains active in parallel.
+
+If the first discovery slice yields no admissible A/B candidates and enough scan time remains, a small quiet-scan rescue immediately advances to the next historical slice. The main page now displays a scan rotation note so a zero-addition run still shows what topics were explored.

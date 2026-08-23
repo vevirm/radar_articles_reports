@@ -41,3 +41,8 @@ python -m unittest discover -s tests -v
 
 - Main messages also repair PDF/OCR letter-spacing artefacts (for example `E u r o p e` → `Europe`) before display.
 - Letter-spaced text is never accepted as a 120-character core message.
+
+
+## V17.6.4 rotation behavior
+
+Each scan now has two scholarly lanes: a recent-publication lane and a persisted full-corpus exploration lane. The exploration lane rotates across diversified topics and separate historical depth pages. A quiet first slice can trigger a small second-slice rescue when runtime remains. The main radar displays the topics explored in the last run.

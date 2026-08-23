@@ -85,6 +85,7 @@
         <div class="stat"><div class="label">Weak signals</div><div id="statC" class="value">—</div><div class="sub">accumulated signals</div></div>
         <div class="stat"><div class="label">New this scan</div><div id="statNew" class="value">—</div><div class="sub">across all strands</div></div>
       </section>
+      <div id="rotationNote" class="scan-note"></div>
     </div>
 
     <div class="toolbar"><div class="wrap tools">
@@ -109,12 +110,12 @@
         <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <div class="method"><strong>How accumulation works:</strong> the scanner still searches recent windows, but admitted A, B and C items are merged with the existing <code>radar.json</code> corpus and deduplicated. A quiet scan can therefore add zero new items without making yesterday’s evidence disappear.</div>
+      <div class="method"><strong>How accumulation works:</strong> every run combines a recent-publication lane with a persisted historical exploration lane. The historical lane rotates across different R&amp;I/geopolitics topics and continues to deeper result pages over time. Admitted A, B and C items are merged with the existing <code>radar.json</code> corpus and deduplicated.</div>
     </main>
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.6.3"></script>
+<script src="briefing/insights.js?v=17.6.4"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -234,7 +235,7 @@ async function loadRadar(){
     const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
     document.getElementById("scanState").textContent=d.first_scan_complete?`Scanner · ${d.scan_health==="ok"?"active":"degraded"}`:"Scanner · pending";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent="Last scan · "+(d.last_updated?fmtDate(d.last_updated):"pending");
-    showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");render();
+    showNote("rotationNote",sr.rotation_note||"");showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");render();
   }catch(e){document.getElementById("scanState").textContent="Scanner · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>

@@ -64,6 +64,7 @@ SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
+ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -174,6 +175,91 @@ def rotating_variants(items: list[Any], cursor: int, count: int = 1) -> tuple[li
     return out, (start + take) % len(seq)
 
 
+def query_theme(query: str) -> str:
+    """Coarse topic label used only to diversify and explain scan rotation."""
+    q = normalized(query)
+    if any(x in q for x in ("brain drain", "talent", "researcher mobility", "research careers", "scientific talent", "academic")):
+        return "talent and mobility"
+    if any(x in q for x in ("research security", "foreign interference", "knowledge security", "trusted research")):
+        return "research security"
+    if any(x in q for x in ("china", "united states", " us ", "sanctions", "science diplomacy", "international cooperation", "collaboration")):
+        return "international cooperation"
+    if any(x in q for x in ("semiconductor", "quantum", "biotechnology", "artificial intelligence", " ai ", "critical technolog", "raw materials", "digital sovereignty")):
+        return "critical technologies"
+    if any(x in q for x in ("horizon europe", "fp10", "framework programme", "european research area")):
+        return "EU research programmes"
+    if any(x in q for x in ("infrastructure", "supply chain", "industrial", "dependencies", "technology transfer", "innovation ecosystem")):
+        return "capacity and dependencies"
+    if any(x in q for x in ("foresight", "horizon scanning", "weak signal", "scenario", "backcasting", "roadmapping", "cross impact")):
+        return "foresight methods"
+    return "R&I geopolitics"
+
+
+def diversified_query_bank(queries: list[str]) -> list[str]:
+    """Interleave topical families so one scan does not spend its whole budget on one cluster."""
+    groups: dict[str, list[str]] = {}
+    order: list[str] = []
+    for q in list(dict.fromkeys(clean_text(x) for x in queries if clean_text(x))):
+        theme = query_theme(q)
+        if theme not in groups:
+            groups[theme] = []
+            order.append(theme)
+        groups[theme].append(q)
+    out: list[str] = []
+    pos = 0
+    while True:
+        added = False
+        for theme in order:
+            vals = groups[theme]
+            if pos < len(vals):
+                out.append(vals[pos])
+                added = True
+        if not added:
+            break
+        pos += 1
+    return out
+
+
+def scholarly_exploration_plan(
+    state: dict[str, Any],
+    queries: list[str],
+    oa_limit: int | None = None,
+    cr_limit: int | None = None,
+) -> dict[str, Any]:
+    """Persist a full-corpus exploration lane independent of the fresh-window cursors.
+
+    Normal incremental discovery intentionally looks back only a short overlap window.
+    Without this lane, rotating query strings can still revisit only the same recent
+    fortnight.  The exploration lane instead rotates across *topics* while searching
+    from DATE_FLOOR; when a query returns a full page, its separate ``explore::``
+    depth cursor advances the next time that query comes around.
+    """
+    bank = diversified_query_bank(queries)
+    if not bank:
+        return {"openalex": [], "crossref": [], "themes": []}
+    if "openalex_explore_cursor" not in state:
+        state["openalex_explore_cursor"] = int(state.get("openalex_cursor", 0) or 0) % len(bank)
+    if "crossref_explore_cursor" not in state:
+        base = int(state.get("crossref_broad_cursor", 0) or 0)
+        state["crossref_explore_cursor"] = (base + max(1, len(bank) // 2)) % len(bank)
+    oa_n = int(oa_limit if oa_limit is not None else CONFIG.get("openalex_exploration_queries_per_scan", 10))
+    cr_n = int(cr_limit if cr_limit is not None else CONFIG.get("crossref_exploration_queries_per_scan", 8))
+    if oa_n > 0:
+        oa, state["openalex_explore_cursor"], _ = rotating_batch(
+            bank, state.get("openalex_explore_cursor", 0), oa_n
+        )
+    else:
+        oa = []
+    if cr_n > 0:
+        cr, state["crossref_explore_cursor"], _ = rotating_batch(
+            bank, state.get("crossref_explore_cursor", 0), cr_n
+        )
+    else:
+        cr = []
+    themes = list(dict.fromkeys(query_theme(q) for q in oa + cr))
+    return {"openalex": oa, "crossref": cr, "themes": themes}
+
+
 def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     """Load or initialise persistent incremental-discovery cursors."""
     old = previous.get("scan_state") if isinstance(previous, dict) else None
@@ -195,6 +281,8 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "strand_b_method_cursor": 0,
             "institution_cursor": 0,
             "frontier_gap_cursor": 0,
+            "openalex_explore_cursor": 0,
+            "crossref_explore_cursor": 0,
             "frontier_gap_query_cursors": {},
             "frontier_gap_source_cursors": {},
             "result_depth": {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}},
@@ -1490,6 +1578,7 @@ def collect_openalex(
     stage_deadline: float | None = None,
     query_dates_override: dict[str, dt.date] | None = None,
     depth_state: dict[str, Any] | None = None,
+    depth_lane_overrides: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """Keyless OpenAlex discovery with depth rotation.
 
@@ -1577,13 +1666,15 @@ def collect_openalex(
 
     def fetch_query(q: str) -> tuple[list[dict[str, Any]], str | None]:
         query_from = (query_dates_override or {}).get(q, from_date)
+        lane = clean_text((depth_lane_overrides or {}).get(q, ""))
+        depth_key = f"{lane}::{q}" if lane else q
         latest, err, latest_count = fetch_page(q, query_from, 1)
         if err:
             return latest, err
         if depth_max <= 1 or latest_count < per_page:
             return latest, None
         with depth_lock:
-            page = max(2, int(depth_state.get(q, 2) or 2))
+            page = max(2, int(depth_state.get(depth_key, 2) or 2))
             if page > depth_max:
                 page = 2
         deep, deep_err, deep_count = fetch_page(q, query_from, page)
@@ -1592,7 +1683,7 @@ def collect_openalex(
         if deep_err:
             return latest, deep_err
         with depth_lock:
-            depth_state[q] = 2 if deep_count < per_page or page >= depth_max else page + 1
+            depth_state[depth_key] = 2 if deep_count < per_page or page >= depth_max else page + 1
         return dedupe_candidates(latest + deep), None
 
     out: list[dict[str, Any]] = []
@@ -1694,6 +1785,7 @@ def collect_crossref(
     query_dates_override: dict[str, dt.date] | None = None,
     broad_depth_state: dict[str, Any] | None = None,
     priority_depth_state: dict[str, Any] | None = None,
+    depth_lane_overrides: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """Crossref discovery using bounded relevance + recency + rotating depth lanes.
 
@@ -1789,7 +1881,9 @@ def collect_crossref(
         page_rows = priority_rows if journal else rows
         state_map = priority_depth_state if journal else broad_depth_state
         max_pages = priority_depth_max if journal else depth_max
-        key = f"{journal} || {q}" if journal else q
+        lane = clean_text((depth_lane_overrides or {}).get(q, "")) if not journal else ""
+        broad_key = f"{lane}::{q}" if lane else q
+        key = f"{journal} || {q}" if journal else broad_key
 
         relevant, err, relevant_count = fetch_page(q, journal, 0, "relevance")
         if err:
@@ -3515,7 +3609,10 @@ def main() -> int:
         incremental_from = bootstrap_floor(now.date())
     backfill_from = bootstrap_floor(now.date())
 
-    all_queries = list(dict.fromkeys(CONFIG.get("queries_a", []) + CONFIG.get("queries_b", [])))
+    # The broad lane is Strand A discovery. Strand B has its own strict method-
+    # development lane below; mixing generic "method" queries into the broad bank
+    # wastes rotation budget on papers that merely use a method.
+    all_queries = list(dict.fromkeys(CONFIG.get("queries_a", [])))
     gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
     gap_lookback_months = max(0, int(CONFIG.get("frontier_gap_historical_lookback_months", 0) or 0))
     # Gap priority must first exhaust the scanner's own live corpus window.  A sparse
@@ -3537,18 +3634,36 @@ def main() -> int:
         int(CONFIG.get("queries_b_method_per_scan", 6)),
     )
 
-    reserved = len(gap_scholarly) + len(b_method_focus)
-    oa_base_cap = max(1, oa_cap - min(reserved, max(0, oa_cap - 1)))
-    cr_base_cap = max(1, cr_cap - min(reserved, max(0, cr_cap - 1)))
+    # A separate persisted exploration lane searches the whole retained corpus
+    # window, not just the short incremental overlap. This is the practical
+    # rotation guarantee: every run moves to a different topic slice, and when a
+    # topic comes around again its ``explore::`` depth page continues forward.
+    exploration = scholarly_exploration_plan(state, all_queries + b_method_bank)
+    oa_explore = exploration["openalex"]
+    cr_explore = exploration["crossref"]
+
+    oa_reserved = len(gap_scholarly) + len(b_method_focus) + len(oa_explore)
+    cr_reserved = len(gap_scholarly) + len(b_method_focus) + len(cr_explore)
+    oa_base_cap = max(1, oa_cap - min(oa_reserved, max(0, oa_cap - 1)))
+    cr_base_cap = max(1, cr_cap - min(cr_reserved, max(0, cr_cap - 1)))
     oa_base, state["openalex_cursor"], oa_wrapped = rotating_batch(
         all_queries, state.get("openalex_cursor", 0), oa_base_cap
     )
     cr_base, state["crossref_broad_cursor"], cr_broad_wrapped = rotating_batch(
         all_queries, state.get("crossref_broad_cursor", 0), cr_base_cap
     )
-    oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + oa_base))[:oa_cap]
-    cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + cr_base))[:cr_cap]
-    gap_query_dates = {q: gap_from for q in gap_scholarly}
+    oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + oa_explore + oa_base))[:oa_cap]
+    cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + cr_explore + cr_base))[:cr_cap]
+    oa_query_dates = {q: gap_from for q in gap_scholarly}
+    cr_query_dates = {q: gap_from for q in gap_scholarly}
+    oa_depth_lanes = {q: "gap" for q in gap_scholarly}
+    cr_depth_lanes = {q: "gap" for q in gap_scholarly}
+    for q in oa_explore:
+        oa_query_dates[q] = DATE_FLOOR
+        oa_depth_lanes[q] = "explore"
+    for q in cr_explore:
+        cr_query_dates[q] = DATE_FLOOR
+        cr_depth_lanes[q] = "explore"
     priority_tasks_all = [
         (journal, query)
         for journal in list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
@@ -3643,6 +3758,12 @@ def main() -> int:
         log_progress(
             f"Strand-B method lane: {len(b_method_focus)} rotating R&I foresight-method query/queries this scan"
         )
+    if oa_explore or cr_explore:
+        log_progress(
+            "Historical exploration lane: "
+            f"OpenAlex {len(oa_explore)} + Crossref {len(cr_explore)} query/queries from {DATE_FLOOR.isoformat()}; "
+            "themes=" + ", ".join(exploration.get("themes", []))
+        )
     log_progress(
         f"Known corpus loaded before discovery: {len(KNOWN_AB_IDENTITIES)} A/B identities, "
         f"{len(KNOWN_AB_LINKS)} known A/B links, {len(KNOWN_SIGNAL_IDENTITIES)} weak-signal identities"
@@ -3676,12 +3797,12 @@ def main() -> int:
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
         fut_oa = ex.submit(
-            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, gap_query_dates,
-            state["result_depth"]["openalex"]
+            safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, oa_query_dates,
+            state["result_depth"]["openalex"], oa_depth_lanes
         )
         fut_cr = ex.submit(
-            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, gap_query_dates,
-            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"]
+            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, cr_query_dates,
+            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"], cr_depth_lanes
         )
         news = fut_news.result()
         oa = fut_oa.result()
@@ -3732,6 +3853,82 @@ def main() -> int:
     inst = [x for x in inst if isinstance(x, dict)]
     deduped = dedupe_candidates(oa + cr + inst)
     deduped.sort(key=rank_candidate)
+
+    # If the first rotated slice was valid but unproductive, do not end the run
+    # immediately. Advance the exploration cursors once more and try a small next
+    # slice from the full corpus window. This cannot guarantee an admissible paper
+    # exists, but it guarantees a quiet scan has genuinely explored more than one
+    # topic/depth slice before reporting zero additions.
+    quiet_rescue = {"attempted": False, "openalex_queries": [], "crossref_queries": [], "themes": []}
+    rescue_enabled = bool(CONFIG.get("quiet_scan_rescue_enabled", True))
+    rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 260) or 260)
+    if rescue_enabled and not deduped and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed):
+        rescue_n = max(1, int(CONFIG.get("quiet_scan_rescue_queries_per_source", 4) or 4))
+        rescue_plan = scholarly_exploration_plan(
+            state,
+            all_queries + b_method_bank,
+            oa_limit=rescue_n if not oa_failed else 0,
+            cr_limit=rescue_n if not cr_failed else 0,
+        )
+        rescue_oa_queries = list(rescue_plan.get("openalex", []))
+        rescue_cr_queries = list(rescue_plan.get("crossref", []))
+        quiet_rescue = {
+            "attempted": bool(rescue_oa_queries or rescue_cr_queries),
+            "openalex_queries": rescue_oa_queries,
+            "crossref_queries": rescue_cr_queries,
+            "themes": list(rescue_plan.get("themes", [])),
+        }
+        if quiet_rescue["attempted"]:
+            log_progress(
+                "Quiet-scan rescue: first rotated slice admitted nothing; trying next historical slice: "
+                + ", ".join(quiet_rescue["themes"])
+            )
+            rescue_deadline = time.monotonic() + min(180, max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 150)))))
+            with cf.ThreadPoolExecutor(max_workers=2) as ex:
+                futs: list[tuple[str, Any]] = []
+                if rescue_oa_queries:
+                    futs.append((
+                        "oa",
+                        ex.submit(
+                            safe_stage,
+                            "OpenAlex quiet rescue",
+                            collect_openalex,
+                            DATE_FLOOR,
+                            warnings,
+                            rescue_oa_queries,
+                            rescue_deadline,
+                            {q: DATE_FLOOR for q in rescue_oa_queries},
+                            state["result_depth"]["openalex"],
+                            {q: "explore" for q in rescue_oa_queries},
+                        ),
+                    ))
+                if rescue_cr_queries:
+                    futs.append((
+                        "cr",
+                        ex.submit(
+                            safe_stage,
+                            "Crossref quiet rescue",
+                            collect_crossref,
+                            DATE_FLOOR,
+                            warnings,
+                            rescue_cr_queries,
+                            [],
+                            rescue_deadline,
+                            {q: DATE_FLOOR for q in rescue_cr_queries},
+                            state["result_depth"]["crossref_broad"],
+                            state["result_depth"]["crossref_priority"],
+                            {q: "explore" for q in rescue_cr_queries},
+                        ),
+                    ))
+                for family, fut in futs:
+                    extra = [x for x in fut.result() if isinstance(x, dict)]
+                    if family == "oa":
+                        oa.extend(extra)
+                    else:
+                        cr.extend(extra)
+            deduped = dedupe_candidates(oa + cr + inst)
+            deduped.sort(key=rank_candidate)
+
     new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped
 
     prev_a = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
@@ -3789,7 +3986,9 @@ def main() -> int:
     state["last_run"] = now_iso
     state["last_batches"] = {
         "openalex_queries": len(oa_batch),
+        "openalex_exploration_queries": len(oa_explore),
         "crossref_broad_queries": len(cr_batch),
+        "crossref_exploration_queries": len(cr_explore),
         "crossref_priority_tasks": len(cr_priority_batch),
         "institution_sources": len(inst_batch),
         "frontier_gap_queries": len(frontier_focus["queries"]),
@@ -3825,6 +4024,7 @@ def main() -> int:
         "signal_quality_profile_version": SIGNAL_QUALITY_PROFILE_VERSION,
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
+        "rotation_profile_version": ROTATION_PROFILE_VERSION,
         "scan_state": state,
         "zero_config_scan": True,
         "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v15_scan_repair")),
@@ -3836,6 +4036,7 @@ def main() -> int:
             "frontier_gap_historical_lookback_months": gap_lookback_months if gap_scholarly else 0,
             "openalex_from": oa_from.isoformat(),
             "crossref_from": cr_from.isoformat(),
+            "historical_exploration_from": DATE_FLOOR.isoformat(),
             "institutions_from": inst_from.isoformat(),
             "ab_four_month_backfill_this_run": bootstrap_ab,
             "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
@@ -3856,6 +4057,22 @@ def main() -> int:
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
+            "rotation_note": (
+                "Fresh-window scanning plus full-corpus exploration were both active. "
+                "Historical exploration rotated through: " + ", ".join(exploration.get("themes", [])) + "."
+                + (
+                    " The first slice admitted nothing, so a second historical slice was also tried: "
+                    + ", ".join(quiet_rescue.get("themes", [])) + "."
+                    if quiet_rescue.get("attempted") else ""
+                )
+            ) if exploration.get("themes") else "Fresh-window scanning was active; no historical exploration query was configured.",
+            "historical_exploration": {
+                "from": DATE_FLOOR.isoformat(),
+                "openalex_queries": oa_explore,
+                "crossref_queries": cr_explore,
+                "themes": exploration.get("themes", []),
+            },
+            "quiet_scan_rescue": quiet_rescue,
         },
         "strand_a": strand_a,
         "strand_b": strand_b,
@@ -3870,7 +4087,11 @@ def main() -> int:
             "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
             "openalex_queries_this_run": len(oa_batch),
+            "openalex_exploration_queries_this_run": len(oa_explore),
             "crossref_broad_queries_this_run": len(cr_batch),
+            "crossref_exploration_queries_this_run": len(cr_explore),
+            "quiet_scan_rescue_attempted": bool(quiet_rescue.get("attempted")),
+            "quiet_scan_rescue_queries": len(quiet_rescue.get("openalex_queries", [])) + len(quiet_rescue.get("crossref_queries", [])),
             "crossref_priority_tasks_this_run": len(cr_priority_batch),
             "institution_sources_this_run": len(inst_batch),
             "known_ab_identities_loaded": len(KNOWN_AB_IDENTITIES),
@@ -3897,6 +4118,8 @@ def main() -> int:
             "frontier_gap_source_cursor_cells": len(state.get("frontier_gap_source_cursors", {})),
             "openalex_depth_queries_tracked": len(state.get("result_depth", {}).get("openalex", {})),
             "crossref_broad_depth_queries_tracked": len(state.get("result_depth", {}).get("crossref_broad", {})),
+            "openalex_exploration_depth_queries_tracked": sum(1 for k in state.get("result_depth", {}).get("openalex", {}) if str(k).startswith("explore::")),
+            "crossref_exploration_depth_queries_tracked": sum(1 for k in state.get("result_depth", {}).get("crossref_broad", {}) if str(k).startswith("explore::")),
             "crossref_priority_depth_tasks_tracked": len(state.get("result_depth", {}).get("crossref_priority", {})),
             "frontier_qualifying_before_scan": frontier_focus["qualifying"],
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
