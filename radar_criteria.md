@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.6.0
+# Radar admission criteria — V17.6.1
 
 ## A — Papers relevant to EU R&I in geopolitical context
 
@@ -12,9 +12,11 @@ Reject incidental word overlap, grant acknowledgements, generic technology/secur
 
 ## B — Methods suitable to understand the future of A
 
-B is a **methods library**, not topical evidence.
+B is a **method-development library**, not a collection of studies that merely use methodology.
 
-The method itself must be a substantive contribution: developed, compared, designed, evaluated, validated, benchmarked or otherwise methodologically advanced. Candidate families include horizon scanning, weak-signal detection, Delphi, scenario construction/planning methodology, backcasting, morphological and cross-impact analysis, roadmapping, foresight evaluation, technology intelligence, bibliometric/scientometric forecasting, patent landscaping, system dynamics, agent-based modelling and expert elicitation.
+A B item must make the method itself a research contribution. It should explicitly say, in substance, **we develop / propose / introduce / design / adapt / extend / refine a method, framework, protocol or toolkit** for futures/foresight work. “We used a Delphi study”, “we applied scenario planning”, “we compared existing methods”, or “we validated an existing method” is insufficient on its own. Delphi, system dynamics, agent-based modelling and other generic techniques qualify only when the contribution is explicitly future-oriented. A domain-specific method outside A must also show that it is reusable/generalizable beyond its original case.
+
+Comparison, evaluation, validation and benchmarking can support the methodological contribution, but they cannot create B eligibility on their own. Candidate families include horizon scanning, weak-signal detection, future-oriented Delphi, scenario construction/planning methodology, backcasting, morphological and cross-impact analysis, roadmapping, foresight evaluation, technology intelligence, bibliometric/scientometric forecasting, patent landscaping, future-oriented system dynamics/agent-based modelling and expert elicitation.
 
 The method must be suitable for interrogating strategic/public-policy/science/technology/innovation/geopolitical futures, or be presented as a genuinely general futures method. A paper does **not** qualify merely because it uses Delphi, scenarios, a framework, evaluation, modelling or forecasting in an unrelated application.
 

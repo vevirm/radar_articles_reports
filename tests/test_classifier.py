@@ -173,14 +173,14 @@ class V17SubstanceQualityTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
         self.assertTrue(ev["a_pass"])
 
-    def test_b_requires_eu_ri_geo_substance_as_well_as_method(self):
+    def test_b_rejects_eu_ri_geo_method_comparison_without_method_development(self):
         title = "Horizon scanning for EU research security under geopolitical uncertainty"
         abstract = (
             "The article evaluates horizon-scanning methodology for European Union research and innovation policy. "
             "It compares weak-signal detection and scenario methods for research security, export controls and strategic competition."
         )
         ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
-        self.assertTrue(ev["b_pass"])
+        self.assertFalse(ev["b_pass"])
 
 
 if __name__ == "__main__":

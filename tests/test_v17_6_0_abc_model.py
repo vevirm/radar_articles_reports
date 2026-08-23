@@ -92,6 +92,31 @@ class ABCModelTests(unittest.TestCase):
         )
         self.assertTrue(ev['b_pass'])
 
+
+    def test_B_rejects_methodological_application_even_when_future_oriented(self):
+        ev = scanner.gate_scope(
+            'Using a Delphi methodology to identify future university workforce challenges',
+            'We conducted a modified Delphi study to identify future workforce challenges and rank expert priorities. The existing Delphi technique was applied in three rounds.',
+            '', 2, source_kind='scholarly'
+        )
+        self.assertFalse(ev['b_pass'])
+
+    def test_B_accepts_new_reusable_method_even_if_original_case_is_not_RI(self):
+        ev = scanner.gate_scope(
+            'A novel horizon-scanning protocol for strategic uncertainty',
+            'We develop a new horizon-scanning protocol that combines weak-signal coding with cross-impact analysis. The protocol is designed as a reusable framework across policy domains and can be adapted to emerging technology and innovation questions.',
+            '', 2, source_kind='scholarly'
+        )
+        self.assertTrue(ev['b_pass'])
+
+    def test_B_rejects_validation_only_of_existing_method(self):
+        ev = scanner.gate_scope(
+            'Validation of a Delphi method for technology forecasting',
+            'This study validates an existing Delphi protocol for technology forecasting against a historical expert panel. It does not develop, adapt or extend the method.',
+            '', 2, source_kind='scholarly'
+        )
+        self.assertFalse(ev['b_pass'])
+
     def test_B_rejects_case_that_only_uses_scenario_method(self):
         ev = scanner.gate_scope(
             'Lithium pathways under geopolitical fragmentation',

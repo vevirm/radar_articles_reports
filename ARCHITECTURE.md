@@ -1,4 +1,4 @@
-# Architecture — V17.6.0 A/B/C semantic separation
+# Architecture — V17.6.1 A/B/C semantic separation
 
 The radar has four stages: discovery, admission, cumulative storage, and interpretation.
 
@@ -16,7 +16,7 @@ Boilerplate such as Horizon Europe funding acknowledgements is stripped before a
 
 ## B — methods
 
-B is not another evidence strand. It is a methods library for understanding the future of A. A source qualifies only when the method itself is developed, compared, evaluated, validated, benchmarked or designed and is suitable for strategic/public-policy/science/technology futures or is a genuinely general futures method.
+B is not another evidence strand. It is a **method-development library** for understanding the future of A. A source qualifies only when it explicitly contributes a new, adapted, extended, refined or designed futures method/framework/protocol/toolkit. Merely applying, comparing, evaluating, benchmarking or validating an existing method does not qualify. Generic techniques such as Delphi, system dynamics or agent-based modelling also require an explicit futures/foresight purpose.
 
 A domain study that merely applies Delphi, scenarios, system dynamics or another technique does not qualify. Explicitly unrelated applications such as clinical, teaching, lifestyle or tourism studies fail unless the methodological contribution has an independently relevant strategic/science/technology context.
 

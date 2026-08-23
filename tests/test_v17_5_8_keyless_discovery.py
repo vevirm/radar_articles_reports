@@ -100,7 +100,7 @@ class V1758KeylessDiscoveryTests(unittest.TestCase):
         cfg = json.loads((ROOT / 'radar_config.json').read_text())
         self.assertEqual(cfg['incremental_state_version'], 'v17.2-persistent-source-cursors')
         self.assertEqual(cfg['source_expansion_version'], 'v17.5.2-gap-report-recall')
-        self.assertEqual(cfg['quality_profile_version'], 'v17.6.0-ABC-semantic-separation')
+        self.assertEqual(cfg['quality_profile_version'], 'v17.6.1-B-method-development')
 
 
 if __name__ == '__main__':

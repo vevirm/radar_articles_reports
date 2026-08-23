@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar — V17.6.0 A/B/C redesign
+# R&I Geopolitics Radar — V17.6.1 A/B/C + strict B method-development
 
 This repository scans a cumulative evidence base using three deliberately different layers:
 
@@ -8,7 +8,7 @@ This repository scans a cumulative evidence base using three deliberately differ
 
 ## Key separation
 
-A is the substantive evidence layer. B is a methods library. C is the changing-current-context layer. The Sovereignty Frontier is therefore built from **A + C**, not B. Methods never fill geopolitical matrix cells.
+A is the substantive evidence layer. B is a **method-development library**. C is the changing-current-context layer. The Sovereignty Frontier is therefore built from **A + C**, not B. Methods never fill geopolitical matrix cells.
 
 ## Scanning and rotation
 
@@ -22,7 +22,7 @@ Funding acknowledgements do not create A relevance. Bare technology or generic e
 
 ## Running
 
-Upload the repository to GitHub and run the existing **Radar Scan** workflow. No secrets are required for the keyless scholarly discovery path. The bundled `radar.json` preserves the supplied live rotation cursors while cleaning the stored A/B/C corpus under the V17.6.0 model.
+Upload the repository to GitHub and run the existing **Radar Scan** workflow. No secrets are required for the keyless scholarly discovery path. The bundled `radar.json` preserves the supplied live rotation cursors while cleaning the stored A/B/C corpus under the V17.6.1 model.
 
 Run tests locally with:
 

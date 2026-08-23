@@ -1,4 +1,4 @@
-# Sovereignty-Frontier criteria — V17.6.0
+# Sovereignty-Frontier criteria — V17.6.1
 
 The 4×4 Frontier is not a keyword taxonomy. Each occupied cell must have a supported R&I-system mechanism plus evidence for the cell's independence/competitiveness direction. Evidence-derived signals may use the underlying admitted title/summary and scanner-vetted EU scope; weak signals must carry the mechanism in the signal itself.
 

@@ -22,14 +22,14 @@ class RIForesightMethodTransferTests(unittest.TestCase):
         self.assertTrue(ev["b_transferable"])
         self.assertFalse(ev["a_pass"])
 
-    def test_accepts_horizon_scanning_method_for_innovation_policy(self):
+    def test_rejects_comparison_of_existing_horizon_scanning_methods_without_new_method(self):
         ev = gate_scope(
             "Evaluating horizon-scanning methods for innovation policy",
             "The study compares horizon scanning protocols, weak-signal coding, bias controls and evaluation criteria for innovation policy and research funding.",
             "", 2, source_kind="scholarly"
         )
-        self.assertTrue(ev["b_pass"])
-        self.assertTrue(ev["b_transferable"])
+        self.assertFalse(ev["b_pass"])
+        self.assertFalse(ev["b_transferable"])
 
     def test_still_rejects_generic_lifestyle_delphi(self):
         ev = gate_scope(
