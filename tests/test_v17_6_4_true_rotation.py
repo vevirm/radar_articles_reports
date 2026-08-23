@@ -116,7 +116,7 @@ class V1764TrueRotationTests(unittest.TestCase):
     def test_rotation_config_reserves_real_historical_exploration_budget(self):
         self.assertGreaterEqual(int(sr.CONFIG['openalex_exploration_queries_per_scan']), 8)
         self.assertGreaterEqual(int(sr.CONFIG['crossref_exploration_queries_per_scan']), 6)
-        self.assertEqual(sr.CONFIG['rotation_profile_version'], 'v17.6.5-rotation-rescue-fix')
+        self.assertEqual(sr.CONFIG['rotation_profile_version'], 'v17.7.1-executed-work-rotation')
 
     def test_quiet_rescue_takes_the_next_slice_not_the_same_slice(self):
         state = sr.initial_scan_state({})

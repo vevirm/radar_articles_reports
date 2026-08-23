@@ -1,16 +1,16 @@
-# R&I Geopolitics Radar — V17.6.5
+# R&I Geopolitics Radar — V17.7.1
 
 This repository uses three deliberately separate layers:
 
 - **A — EU R&I in geopolitical context.** Substantive evidence about European research or innovation where geopolitics, geoeconomics, economic security, strategic competition or international research relations materially affect the R&I system.
-- **B — Futures methods for understanding A.** Publications that **develop, propose, adapt, extend or refine a futures/foresight method as such**. Merely using Delphi, modelling, forecasting, an early-warning system, scenarios or another method does not qualify.
-- **C — Weak signals that may change how we see A.** Early, uncertain or surprising current developments linked back to A.
+- **B — Futures methods for understanding A.** Publications that **develop, propose, adapt, extend or refine a futures/foresight method**, plus newly developed forward-looking methods for detecting, mapping or forecasting change in research, science, innovation or technology. Merely using a method does not qualify.
+- **C — Weak signals that may change how we see A.** Early/uncertain developments **and new evidence or indicators** that can confirm, contradict or complicate the Strand-A picture, always linked back to A.
 
-## B is intentionally narrow
+## B is selective, but no longer literal-label narrow
 
-A paper belongs in B only when the methodological contribution itself is the point of the publication. Domain-specific predictive systems and assessment tools are excluded unless the publication actually develops a futures/foresight method. For example, an earthquake early-warning model is not a foresight method; an explicit adaptation of horizon-scanning methodology can be.
+A paper belongs in B only when the methodological contribution itself is the point of the publication. The original explicit foresight route remains. V17.7 also admits a second route for newly developed methods that are visibly forward-looking and designed to detect, map or forecast change in R&I/science/technology systems (for example emerging-technology detection, research-front detection, bibliometric/scientometric forecasting, patent analytics, technology mapping or trajectory methods).
 
-Auxiliary techniques such as Delphi, system dynamics or agent-based modelling can qualify only when the publication develops them **as part of an explicit foresight/futures method**.
+Generic method use, descriptive bibliometrics, ordinary Delphi applications and domain prediction/early-warning systems still fail. Auxiliary techniques such as Delphi, system dynamics or agent-based modelling still need explicit futures framing.
 
 ## Display
 
@@ -53,3 +53,15 @@ Each scan now has two scholarly lanes: a recent-publication lane and a persisted
 - Fixes false scholarly-stage failure detection after institutional scanning.
 - A quiet run now performs its next historical-slice rescue when at least one scholarly source actually completed and sufficient runtime remains.
 - Persistent source, topic, and depth cursors are preserved; the supplied current `radar.json` is carried forward unchanged as the starting state.
+
+
+## V17.7.1 executed-rotation + wider-recall repair
+
+V17.7.1 additionally makes rotation execution-aware: queued queries skipped by source time slices no longer consume cursor positions, stage-budget endings are not treated as source failures, quiet scholarly rescue runs before the institutional stage, and a bounded DOI metadata fallback can recover missing Crossref abstracts. Historical exploration is modestly wider, while the live corpus horizon is intentionally unchanged.
+
+- Strand C no longer requires every candidate to contain an early-stage word such as `pilot`, `draft`, `proposal` or `delay`. Curated-source reports, studies, surveys and data can qualify when they contain a real finding/indicator, remain tightly R&I/geopolitics relevant, and anchor to Strand A.
+- A tightly guarded derived-Europe route allows global/comparative empirical evidence to update A; ordinary foreign technology launches still fail.
+- Strand B gains the R&I-futures analytic-method route described above. The method must be newly developed/adapted/etc.; descriptive or merely applied methods still fail.
+- The method query lane is wider (8 rotating queries per scan), evidence/reframing news queries were added, and the news worker pool was increased.
+- The supplied current `radar.json` is bundled exactly as the starting state. A/B and C quality-profile versions are deliberately unchanged, so this recall expansion does **not** trigger a cleanup audit. The changed signal-discovery version triggers one 30-day C recovery pass, then returns to the normal seven-day window.
+- `scan_results` now records prefilter C candidates, anchored C candidates and B-method queries used, making future “too strict / too noisy” tuning easier to diagnose.

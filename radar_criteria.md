@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.6.2
+# Radar admission criteria — V17.7.1 scanner behavior (V17.6.2 quality profile)
 
 ## A — EU R&I in geopolitical context
 
@@ -6,15 +6,11 @@ Admit when the publication is substantively about European research/innovation a
 
 Incidental EU mentions, funding acknowledgements, bare technology topics and generic geopolitics are not enough.
 
-## B — futures method as such
+## B — futures methods and transferable forward-looking R&I methods
 
 B is a small method-development library, not a collection of papers that happen to use methods.
 
-A B publication must:
-
-1. explicitly concern a futures/foresight method (for example horizon scanning, weak-signal detection, scenario construction, backcasting or another genuine futures method); and
-2. explicitly **develop, propose, adapt, extend or refine** that method; and
-3. plausibly be reusable for understanding future change around A.
+A B publication must explicitly **develop, propose, adapt, extend or refine** a reusable method for understanding future change around A. This includes classic futures/foresight methods and genuinely forward-looking methods for detecting, mapping or forecasting change in research, science, innovation or technology. Ordinary application, descriptive analysis and domain prediction remain insufficient.
 
 A paper does **not** enter B because it:
 

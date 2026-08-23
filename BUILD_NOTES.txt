@@ -1,19 +1,14 @@
-V17.6.5 ROTATION RESCUE FIX
+V17.7.1 EXECUTED ROTATION + WIDER RECALL
 
-- Fixed a control-flow bug in stage failure detection: expired OpenAlex/Crossref deadlines were being treated as failures after the institutional stage, even when those scholarly stages completed normally.
-- This false state could block quiet-scan historical rescue, producing 0 additions even though the scanner had rotated and still had runtime available.
-- Failure detection is now based on explicit source warnings emitted by the collectors.
-- The supplied live radar.json is included so all current corpus and cursor/depth state continues without reset.
+Build goal: make nominal rotation correspond to work that was actually searched, while preserving V17.7.0's wider weak-signal and R&I-futures-method recall.
 
-V17.6.1 B METHOD-DEVELOPMENT PRECISION
-
-- A is the substantive evidence layer: EU R&I in geopolitical/economic-security context.
-- B is a method-development library for understanding the future of A. A source must explicitly develop/propose/introduce/design/adapt/extend/refine a futures method, framework, protocol or toolkit.
-- Applying, comparing, evaluating, benchmarking or validating an existing method is not enough by itself.
-- Generic techniques such as Delphi, system dynamics, ABM and expert elicitation require an explicit futures purpose.
-- Domain-specific methods outside A require genuine generality or explicit transferability beyond the case.
-- B discovery queries target new/novel/developed/adapted method contributions.
-- C contains A-anchored weak signals that may change how A is interpreted.
-- B is excluded from Sovereignty-Frontier evidence and matrix occupancy.
-- Persistent source/query/page rotation cursors are preserved across the quality-profile bump.
-- Full repository regression suite passes under the stricter semantics.
+Key fixes:
+- cursors commit only executed work
+- stage budget != source failure
+- quiet scholarly rescue runs before institutional stage
+- bounded DOI metadata recovery for missing Crossref abstracts
+- historical exploration widened modestly
+- B method lane widened modestly
+- current corpus horizon preserved (no 12–24 month gap expansion)
+- supplied radar.json preserved unchanged
+- 174 tests pass

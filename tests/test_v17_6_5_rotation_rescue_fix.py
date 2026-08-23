@@ -16,7 +16,7 @@ class V1765RotationRescueFixTests(unittest.TestCase):
 
     def test_crossref_budget_warning_is_crossref_failure_only(self):
         warnings = ["Crossref scan budget reached; remaining queued scholarly queries skipped"]
-        self.assertTrue(sr.source_stage_failed(warnings, "crossref"))
+        self.assertFalse(sr.source_stage_failed(warnings, "crossref"))
         self.assertFalse(sr.source_stage_failed(warnings, "openalex"))
 
     def test_fatal_openalex_warning_is_failure(self):

@@ -8,10 +8,12 @@ Key properties
 * Strand A requires substantive R&I/related-system content + geopolitics/economic security + EU relevance.
   A same-sentence bridge is strong evidence, but a document-level bridge can also qualify.
 * Strand B is a method-development library: a publication must contribute a new, adapted,
-  extended, refined or otherwise explicitly developed futures/foresight method that is reusable
-  for understanding the future of Strand A. Merely using or evaluating an existing method is not enough.
+  extended, refined or otherwise explicitly developed futures/foresight method, or a genuinely
+  forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
+  Merely using or evaluating an existing method is not enough.
 * Strand C is not a general news feed: every admitted item must be a factual current development
-  with a strong R&I/geopolitical bridge. It must be anchored to substantive Strand-A evidence;
+  or new evidence/indicator capable of reframing Strand A, with a strong R&I/geopolitical bridge.
+  It must be anchored to substantive Strand-A evidence;
   Strand-B methods never serve as weak-signal anchors.
   Once admitted, the signal is retained in the cumulative historical corpus.
 * Calls, facility pages, project pages, press releases, news/blog pages, events,
@@ -131,8 +133,11 @@ def source_stage_failed(warnings: list[str], label: str) -> bool:
     """
     nlabel = normalized(label)
     relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
+    # A normal per-stage time slice ending is not a source failure. It means the
+    # remaining planned work must stay pending for a later scan; treating it as a
+    # failure incorrectly poisons cycle/backfill state and disables rescue logic.
     return any(
-        ("fatal stage error" in w) or ("budget reached" in w) or ("public endpoint unavailable" in w)
+        ("fatal stage error" in w) or ("public endpoint unavailable" in w)
         for w in relevant
     )
 
@@ -173,6 +178,28 @@ def rotating_batch(items: list[Any], cursor: int, limit: int) -> tuple[list[Any]
     wrapped = end >= len(seq)
     return batch, (0 if wrapped else end), wrapped
 
+
+
+
+def committed_rotation_cursor(items: list[Any], original_cursor: int, planned: list[Any], executed: set[Any]) -> tuple[int, bool, int]:
+    """Advance a persisted rotation only across the contiguous planned work actually executed.
+
+    Planning a batch must not consume work. If a stage budget or endpoint stop prevents a
+    queued query/task from making a request, that item remains the next rotation position.
+    This intentionally prefers harmless repeat work over silently skipping a query for a cycle.
+    """
+    seq = list(items)
+    if not seq:
+        return 0, True, 0
+    start = int(original_cursor or 0) % len(seq)
+    consumed = 0
+    for item in planned:
+        if item not in executed:
+            break
+        consumed += 1
+    end = min(len(seq), start + consumed)
+    wrapped = bool(consumed and end >= len(seq))
+    return (0 if wrapped else end), wrapped, consumed
 
 def rotating_variants(items: list[Any], cursor: int, count: int = 1) -> tuple[list[Any], int]:
     """Take a circular per-topic slice and persist where that topic should resume.
@@ -718,6 +745,8 @@ NEWS_EVENT_TERMS = [
     "blocks", "blocked", "agreement", "association", "factory", "plant", "facility", "lab",
     "centre", "center", "supercomputer", "data centre", "data center", "ai factory", "chips act",
     "export control", "licens", "visa", "researcher", "talent", "standard", "patent", "acquisition",
+    "study", "research finds", "evidence", "reveals", "suggests", "indicates", "benchmark",
+    "ranking", "gap", "outflow", "inflow", "overtake", "leads", "lags", "concentration",
 ]
 
 WATCH_SIGNAL_THEMES = {
@@ -733,6 +762,7 @@ WATCH_SIGNAL_THEMES = {
     "supply chains / strategic dependencies",
     "Horizon Europe / FP10 international participation",
     "science diplomacy",
+    "research talent / mobility / brain drain",
 }
 GEO_ACTORS = [
     "china", "chinese", "united states", "u.s.", " us ", "russia", "russian", "japan",
@@ -752,6 +782,7 @@ THEMES = {
     "supply chains / strategic dependencies": ["supply chain security", "supply chain resilience", "strategic dependency", "strategic dependencies", "critical raw materials", "critical minerals", "friendshoring", "reshoring"],
     "Horizon Europe / FP10 international participation": ["horizon europe", "fp10", "association agreement", "third country", "third-country", "associated country"],
     "science diplomacy": ["science diplomacy", "scientific diplomacy"],
+    "research talent / mobility / brain drain": ["research talent", "scientific talent", "researcher mobility", "researcher outflow", "researcher inflow", "scientists leaving", "brain drain", "brain gain", "talent retention", "talent attraction", "research careers"],
     "foresight / horizon scanning methodology": ["foresight methodology", "foresight method", "strategic foresight", "horizon scanning", "weak signal"],
     "scenario methods under uncertainty": ["scenario method", "scenario methodology", "scenario planning", "scenario design", "scenario construction", "uncertainty"],
     "anticipatory governance / strategic intelligence": ["anticipatory governance", "strategic intelligence", "anticipatory intelligence", "risk assessment"],
@@ -759,7 +790,7 @@ THEMES = {
 SPECIFIC_ANCHOR_THEMES = {
     "research security / foreign interference", "export controls / dual use",
     "Horizon Europe / FP10 international participation", "science diplomacy",
-    "EU–China S&T cooperation / de-risking",
+    "EU–China S&T cooperation / de-risking", "research talent / mobility / brain drain",
 }
 ENTITY_TERMS = [
     "china", "united states", "u.s.", "horizon europe", "fp10", "quantum", "semiconductor",
@@ -1157,6 +1188,37 @@ B_AUXILIARY_METHODS = [
     'technology intelligence', 'strategic intelligence', 'early warning',
 ]
 
+# V17.7 expansion route: methods developed to detect, map or forecast change in research,
+# science, innovation and technology can be useful for studying R&I futures even when the paper
+# does not label itself as generic "foresight". They still need an explicit method-development
+# claim plus a forward-looking R&I/technology context, so ordinary bibliometrics, patent counts,
+# Delphi applications and domain prediction systems remain outside B.
+B_RI_FUTURES_METHODS = [
+    'bibliometric forecasting', 'scientometric forecasting', 'patent landscaping', 'patent analytics',
+    'technology intelligence', 'strategic intelligence', 'technology forecasting',
+    'emerging technology detection', 'technology emergence detection', 'research front detection',
+    'science mapping', 'technology mapping', 'innovation mapping', 'research landscape mapping',
+    'technology trajectory analysis', 'technological trajectory analysis', 'topic evolution analysis',
+    'technology convergence detection', 'science technology intelligence', 'science and technology intelligence',
+    'robust decision making', 'adaptive pathways', 'research portfolio analysis', 'innovation portfolio analysis',
+    'multi-criteria portfolio', 'multi criteria portfolio', 'innovation portfolio method', 'research portfolio method',
+]
+B_RI_FUTURES_FRAMING = [
+    'forecast', 'forecasting', 'future', 'futures', 'forward-looking', 'forward looking', 'anticipatory',
+    'emerging technology', 'emerging technologies', 'emerging research', 'emerging topic', 'emerging topics',
+    'research front', 'research fronts', 'early detection', 'detect emergence', 'technology emergence',
+    'technology trajectory', 'technological trajectory', 'innovation trajectory', 'topic evolution',
+    'technology evolution', 'technological evolution', 'technology convergence', 'convergence',
+    'long-term', 'long term', 'strategic intelligence', 'technology intelligence',
+    'strategic uncertainty', 'deep uncertainty', 'robust decision', 'adaptive pathways', 'portfolio',
+]
+B_RI_METHOD_CONTEXT = [
+    'research', 'science', 'scientific', 'innovation', 'technology', 'technological', 'r&d',
+    'patent', 'patents', 'publication', 'publications', 'bibliometric', 'scientometric',
+    'research policy', 'science policy', 'innovation policy', 'technology policy', 'industrial policy',
+    'research system', 'innovation system', 'science system', 'technology ecosystem',
+]
+
 # Auxiliary techniques become B candidates only when the same title/abstract explicitly frames
 # them as part of foresight/futures work. "Early warning" in medicine, engineering, finance,
 # astronomy, infrastructure monitoring, etc. is deliberately outside Strand B.
@@ -1297,48 +1359,56 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     return focus, ri, geo, bridge
 
 
-def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str], str, list[str]]:
-    """Return whether a publication develops a reusable futures/foresight method.
+def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str], str, list[str], str]:
+    """Return whether a publication develops a reusable method for studying futures of Strand A.
 
-    Strand B is deliberately much narrower than "a paper that uses methods". Admission needs:
-      1. the title/abstract to be about a futures/foresight method as such;
-      2. an explicit claim that the paper develops, proposes, adapts, extends or refines that method;
-      3. enough methodological framing to make reuse plausible for understanding the future of A.
+    Two admission routes are allowed:
+      1. a futures/foresight method as such (the V17.6 precision route); or
+      2. a newly developed forward-looking method for detecting, mapping or forecasting change
+         in research, science, innovation or technology (V17.7 R&I-futures transfer route).
 
-    Stand-alone Delphi studies, predictive models, engineering/clinical/financial early-warning
-    systems, assessment frameworks, forecasting applications and reviews of existing methods fail.
-    "Early warning" only counts when it is explicitly part of strategic foresight / horizon scanning /
-    weak-signal or emerging-issue methodology.
+    Both routes require a genuine method-development claim in title/abstract. Ordinary method
+    use, reviews, domain early-warning systems, descriptive bibliometrics/patent studies and
+    generic assessment frameworks still fail.
     """
     title = clean_text(title)
     abstract = clean_text(abstract)
-    # Method papers should advertise the method contribution in the bibliographic evidence unit.
-    # Deep body text must not rescue an otherwise topical/application paper.
     ta = clean_text(f'{title}. {abstract}')
     if not ta:
-        return False, [], '', []
+        return False, [], '', [], ''
 
-    all_families = _method_matches(ta, B_METHOD_FAMILIES)
+    all_families = _method_matches(ta, B_METHOD_FAMILIES + B_RI_FUTURES_METHODS)
     core_families = _method_matches(ta, B_CORE_FUTURES_METHODS)
     auxiliary = _method_matches(ta, B_AUXILIARY_METHODS)
-    framing = distinct_matches(ta, B_EXPLICIT_FUTURES_FRAMING)
+    ri_families = _method_matches(ta, B_RI_FUTURES_METHODS)
+    futures_framing = distinct_matches(ta, B_EXPLICIT_FUTURES_FRAMING)
+    ri_future_framing = distinct_matches(ta, B_RI_FUTURES_FRAMING)
+    ri_context = distinct_matches(ta, B_RI_METHOD_CONTEXT)
     if not all_families:
-        return False, [], '', []
+        return False, [], '', [], ''
 
-    # Auxiliary techniques are not foresight methods by themselves. They need explicit futures
-    # framing AND a genuine core futures method in the title/abstract. This is what excludes
-    # earthquake/bridge/finance/medical "early warning", ordinary Delphi assessments, grammar
-    # "morphological analysis", and generic system-dynamics applications.
-    candidate_families = core_families or (auxiliary if framing else [])
+    classic_candidate = core_families or (auxiliary if futures_framing else [])
+    ri_transfer_candidate = bool(ri_families and ri_future_framing and ri_context)
+    candidate_families = core_families or (auxiliary if futures_framing else []) or (ri_families if ri_transfer_candidate else [])
     if not candidate_families:
-        return False, all_families[:5], '', []
+        return False, all_families[:5], '', [], ''
+
+    def sentence_is_candidate(sent: str) -> bool:
+        sent_core = _method_matches(sent, B_CORE_FUTURES_METHODS)
+        sent_aux = _method_matches(sent, B_AUXILIARY_METHODS)
+        sent_ri = _method_matches(sent, B_RI_FUTURES_METHODS)
+        sent_futures = distinct_matches(sent, B_EXPLICIT_FUTURES_FRAMING)
+        sent_ri_future = distinct_matches(sent, B_RI_FUTURES_FRAMING)
+        sent_ri_context = distinct_matches(sent, B_RI_METHOD_CONTEXT)
+        return bool(
+            sent_core
+            or (sent_aux and sent_futures)
+            or (sent_ri and sent_ri_future and sent_ri_context)
+        )
 
     creation_bridge = ''
     for sent in split_sentences(ta):
-        sent_core = _method_matches(sent, B_CORE_FUTURES_METHODS)
-        sent_aux = _method_matches(sent, B_AUXILIARY_METHODS)
-        sent_framing = distinct_matches(sent, B_EXPLICIT_FUTURES_FRAMING)
-        if not sent_core and not (sent_aux and sent_framing):
+        if not sentence_is_candidate(sent):
             continue
         low = re.sub(r'[-–—/]+', ' ', normalized(sent))
         low = re.sub(r'^design\s+methodology\s+approach\s+', '', low)
@@ -1348,46 +1418,57 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
             _method_matches(sent, B_METHOD_CREATION_CUES)
             or B_CREATION_VERBS.search(low)
             or B_CREATION_PASSIVE.search(low)
-            or re.search(r'\b(?:new|novel|adapted|extended|refined|reusable|transferable)\b.{0,90}\b(?:foresight|horizon scanning|weak signal|scenario|backcasting|cross-impact|roadmap|futures)\b', low)
+            or re.search(
+                r'\b(?:new|novel|adapted|extended|refined|reusable|transferable)\b.{0,110}'
+                r'\b(?:foresight|horizon scanning|weak signal|scenario|backcasting|cross impact|roadmap|futures|'
+                r'bibliometric|scientometric|patent|technology intelligence|technology forecasting|science mapping|'
+                r'technology mapping|research front|emerging technology|trajectory|convergence|robust decision|adaptive pathways|portfolio)\b',
+                low,
+            )
         )
         if creation_language:
             creation_bridge = sent[:420]
             break
 
     title_norm = re.sub(r'[-–—/]+', ' ', normalized(title))
-    title_core = _method_matches(title, B_CORE_FUTURES_METHODS)
-    title_aux = _method_matches(title, B_AUXILIARY_METHODS)
-    title_framing = distinct_matches(title, B_EXPLICIT_FUTURES_FRAMING)
-    title_candidate = title_core or (title_aux if title_framing else [])
+    title_candidate = sentence_is_candidate(title)
     title_creation = bool(
         title_candidate and (
             _method_matches(title, B_METHOD_CREATION_CUES)
-            or re.search(r'\b(?:new|novel|developed|development|developing|design|adapted|adapting|adaptation|extended|extension|refined|refinement|proposed|proposing)\b.{0,100}\b(?:foresight|horizon scanning|weak signal|scenario planning|scenario construction|backcasting|cross-impact|roadmapping|delphi|system dynamics|agent based|method|methodology|framework|protocol|toolkit|approach)\b', title_norm)
+            or re.search(
+                r'\b(?:new|novel|developed|development|developing|design|adapted|adapting|adaptation|extended|extension|'
+                r'refined|refinement|proposed|proposing)\b.{0,110}\b(?:foresight|horizon scanning|weak signal|scenario planning|'
+                r'scenario construction|backcasting|cross impact|roadmapping|delphi|system dynamics|agent based|method|methodology|'
+                r'framework|protocol|toolkit|approach|bibliometric|scientometric|patent|technology intelligence|technology forecasting|'
+                r'science mapping|technology mapping|research front|emerging technology|trajectory|convergence|robust decision|adaptive pathways|portfolio)\b',
+                title_norm,
+            )
         )
     )
 
     if not (creation_bridge or title_creation):
-        return False, candidate_families[:5], '', []
+        return False, candidate_families[:5], '', [], ''
 
-    # Reject review/synthesis/application language when it is the apparent contribution and there
-    # is no direct creation bridge. This catches "global review of horizon scanning exercises" and
-    # conceptual pieces that discuss a toolkit without actually developing one.
     review_like = bool(re.search(r'\b(?:review|synthesis|overview|perspective|commentary|lessons from|using|application of|applications of)\b', title_norm))
     if review_like and not creation_bridge:
-        return False, candidate_families[:5], '', []
+        return False, candidate_families[:5], '', [], ''
 
-    suitability = distinct_matches(ta, B_SUITABILITY_CONTEXT)
+    # The R&I-futures route must remain about a reusable analytical method, not a domain-specific
+    # prediction system that happens to mention technology. Requiring R&I/science/technology-system
+    # context in the bibliographic evidence unit is the key guardrail.
+    route = 'future-of-A-method' if classic_candidate else 'ri-futures-analytic-method'
+    if route == 'ri-futures-analytic-method' and not ri_transfer_candidate:
+        return False, candidate_families[:5], '', [], ''
+
+    suitability = distinct_matches(ta, B_SUITABILITY_CONTEXT + B_RI_METHOD_CONTEXT)
     transferability = distinct_matches(ta, B_TRANSFERABILITY_CUES)
-    # A true futures-method development is potentially reusable for A even when demonstrated in a
-    # different domain. Explicit transferability/R&I/policy language simply strengthens the note.
-    return True, candidate_families[:5], creation_bridge, (suitability + transferability)[:6]
-
+    return True, candidate_families[:5], creation_bridge, (suitability + transferability)[:6], route
 
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general') -> dict[str, Any]:
     """Classify the three-layer radar model.
 
     A = substantive papers about EU R&I in a geopolitical/economic-security context.
-    B = newly developed/adapted/extended/refined futures methods reusable for understanding the future of A.
+    B = developed/adapted/extended/refined futures methods, plus forward-looking R&I/technology-analysis methods, reusable for understanding the future of A.
     C is handled separately in the current-development scanner and never admitted here.
     """
     title = clean_text(title)
@@ -1399,7 +1480,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     # A is precision-first: the paper must actually be Europe/EU/member-state scoped.
     a_pass = bool(a_focus and eu_rel == 'direct')
 
-    b_pass, b_families, b_bridge, b_suitability = _b_method_evidence(
+    b_pass, b_families, b_bridge, b_suitability, b_route = _b_method_evidence(
         title, abstract, body, source_kind, source_tier
     )
 
@@ -1419,7 +1500,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         'b_transferable': b_pass,
         'b_methodology_first': b_pass,
         'b_suitability_evidence': b_suitability,
-        'b_route': 'future-of-A-method' if b_pass else '',
+        'b_route': (b_route or 'future-of-A-method') if b_pass else '',
         'trend_only': bool(contains_any(title, TREND_ONLY_HINTS) and not b_pass),
         'source_tier': source_tier,
     }
@@ -1593,6 +1674,7 @@ def collect_openalex(
     query_dates_override: dict[str, dt.date] | None = None,
     depth_state: dict[str, Any] | None = None,
     depth_lane_overrides: dict[str, str] | None = None,
+    execution_stats: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Keyless OpenAlex discovery with depth rotation.
 
@@ -1613,6 +1695,12 @@ def collect_openalex(
     last_request = [0.0]
     stop_public = threading.Event()
     depth_state = depth_state if isinstance(depth_state, dict) else {}
+    executed_queries: set[str] = set()
+    execution_lock = threading.Lock()
+
+    def mark_executed(q: str) -> None:
+        with execution_lock:
+            executed_queries.add(q)
 
     def wait_slot() -> None:
         with rate_lock:
@@ -1640,6 +1728,7 @@ def collect_openalex(
             return [], "endpoint stopped for this run", 0
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget", 0
+        mark_executed(q)
         params = {
             "search": q,
             "filter": f"from_publication_date:{query_from.isoformat()},to_publication_date:{dt.date.today().isoformat()}",
@@ -1721,6 +1810,8 @@ def collect_openalex(
                 warnings.append(f"OpenAlex worker: {type(e).__name__}")
     if budget_hits:
         warnings.append(f"OpenAlex scan budget reached; {budget_hits} queued query/queries skipped")
+    if isinstance(execution_stats, dict):
+        execution_stats.setdefault("openalex_queries", set()).update(executed_queries)
     return dedupe_candidates(out)
 
 def crossref_date(item: dict[str, Any]) -> dt.date | None:
@@ -1757,6 +1848,46 @@ def quality_from_crossref(item: dict[str, Any]) -> tuple[bool, int, float, str, 
                 tier_guess = 3 if any(x in normalized(p) for x in ["rand", "brookings", "carnegie", "strategic and international"]) else 1
                 return True, tier_guess, float(tier_guess), publisher or journal, f"Tier {tier_guess}", "institutional report"
     return False, 9, 9.0, journal or publisher or "Unknown source", "", typ or "publication"
+
+
+def doi_landing_abstract(doi_raw: str, timeout: int = 8) -> str:
+    """Best-effort abstract/description recovery from a DOI landing page.
+
+    Crossref search records often omit abstracts even when the publisher landing page
+    exposes one in citation/DC/OG metadata. This is deliberately bounded and only used
+    for a small number of otherwise promising records before admission gating.
+    """
+    doi_raw = clean_text(doi_raw).removeprefix("https://doi.org/").removeprefix("http://doi.org/").removeprefix("doi:")
+    if not doi_raw or deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        return ""
+    try:
+        r = SESSION.get(
+            f"https://doi.org/{doi_raw}",
+            timeout=timeout,
+            headers={"Accept": "text/html,application/xhtml+xml"},
+            allow_redirects=True,
+        )
+        if r.status_code != 200 or "html" not in normalized(r.headers.get("content-type", "text/html")):
+            return ""
+        soup = BeautifulSoup(r.text, "html.parser")
+        text = meta_content(soup, [
+            "citation_abstract", "dc.description", "DC.Description", "description",
+            "og:description", "twitter:description", "abstract",
+        ])
+        if len(text.split()) >= 20:
+            return text[:12000]
+        for script in soup.find_all("script", attrs={"type": re.compile("ld\\+json", re.I)}):
+            try:
+                data = json.loads(script.string or script.get_text())
+            except Exception:
+                continue
+            for obj in jsonld_objects(data):
+                desc = clean_text(obj.get("abstract") or obj.get("description")) if isinstance(obj, dict) else ""
+                if len(desc.split()) >= 20:
+                    return desc[:12000]
+    except Exception:
+        return ""
+    return ""
 
 
 def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None) -> dict[str, Any] | None:
@@ -1800,6 +1931,7 @@ def collect_crossref(
     broad_depth_state: dict[str, Any] | None = None,
     priority_depth_state: dict[str, Any] | None = None,
     depth_lane_overrides: dict[str, str] | None = None,
+    execution_stats: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Crossref discovery using bounded relevance + recency + rotating depth lanes.
 
@@ -1823,6 +1955,20 @@ def collect_crossref(
     last_request = [0.0]
     broad_depth_state = broad_depth_state if isinstance(broad_depth_state, dict) else {}
     priority_depth_state = priority_depth_state if isinstance(priority_depth_state, dict) else {}
+    executed_broad_queries: set[str] = set()
+    executed_priority_tasks: set[tuple[str, str]] = set()
+    execution_lock = threading.Lock()
+    enrichment_limit = max(0, int(CONFIG.get("crossref_missing_abstract_enrichment_per_scan", 18) or 0))
+    enrichment_timeout = max(3, int(CONFIG.get("crossref_missing_abstract_enrichment_timeout_seconds", 8) or 8))
+    enrichment_total = [0]
+    enrichment_by_task: Counter = Counter()
+
+    def mark_executed(q: str, journal: str) -> None:
+        with execution_lock:
+            if journal:
+                executed_priority_tasks.add((journal, q))
+            else:
+                executed_broad_queries.add(q)
 
     def wait_for_slot() -> None:
         with rate_lock:
@@ -1832,9 +1978,11 @@ def collect_crossref(
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
-    def convert_items(works: list[dict[str, Any]], query_from: dt.date) -> list[dict[str, Any]]:
+    def convert_items(works: list[dict[str, Any]], query_from: dt.date, q: str = "", journal: str = "") -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
-        for item in works:
+        task_key = f"{journal} || {q}" if journal else q
+        for raw_item in works:
+            item = raw_item
             if bool(CONFIG.get("skip_known_items_before_classification", True)):
                 titles0 = item.get("title") or []
                 title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
@@ -1844,11 +1992,37 @@ def collect_crossref(
             c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
             if c:
                 out.append(c)
+                continue
+
+            # Missing abstracts are a metadata problem, not substantive negative evidence.
+            # Recover only a tiny number of relevance-ranked records per task so this cannot
+            # turn into an uncontrolled publisher crawl or consume the Crossref stage budget.
+            abstract0 = clean_text(item.get("abstract"))
+            doi0 = clean_text(item.get("DOI"))
+            title0 = clean_text((item.get("title") or [""])[0])
+            if (
+                not abstract0 and doi0 and title0 and enrichment_total[0] < enrichment_limit
+                and enrichment_by_task[task_key] < 2
+                and not document_exclusion_reason(title0, "")
+            ):
+                ok0, _, _, _, _, _ = quality_from_crossref(item)
+                if ok0:
+                    enrichment_total[0] += 1
+                    enrichment_by_task[task_key] += 1
+                    recovered = doi_landing_abstract(doi0, enrichment_timeout)
+                    if recovered:
+                        item = dict(item)
+                        item["abstract"] = recovered
+                        c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from))
+                        if c:
+                            c["metadata_note"] = "Abstract recovered from DOI publisher metadata before admission."
+                            out.append(c)
         return out
 
     def fetch_page(q: str, journal: str, offset: int, lane: str) -> tuple[list[dict[str, Any]], str | None, int]:
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget", 0
+        mark_executed(q, journal)
         query_from = (query_dates_override or {}).get(q, from_date) if not journal else from_date
         page_rows = priority_rows if journal else rows
         params = {
@@ -1872,7 +2046,7 @@ def collect_crossref(
                 r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("message", {}).get("items", [])
-                    return convert_items(works, query_from), None, len(works)
+                    return convert_items(works, query_from, q, journal), None, len(works)
                 if r.status_code == 429:
                     return [], "HTTP 429 rate limited", 0
                 if r.status_code in {500, 502, 503, 504} and attempt < retries:
@@ -1954,6 +2128,10 @@ def collect_crossref(
 
     if budget_hit:
         warnings.append("Crossref scan budget reached; remaining queued scholarly queries skipped")
+    if isinstance(execution_stats, dict):
+        execution_stats.setdefault("crossref_broad_queries", set()).update(executed_broad_queries)
+        execution_stats.setdefault("crossref_priority_tasks", set()).update(executed_priority_tasks)
+        execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(enrichment_total[0])
     return dedupe_candidates(out)
 
 def decompress_xml(content: bytes) -> bytes:
@@ -2242,14 +2420,20 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     return jobs, None
 
 
-def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None) -> list[dict[str, Any]]:
+def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     jobs = []
     sources = sources_override if sources_override is not None else CONFIG["institution_sources"]
     discovery_workers = int(CONFIG.get("institution_discovery_workers", 12))
     page_workers = int(CONFIG.get("institution_page_workers", 24))
     log_progress(f"Institutional discovery: {len(sources)} rotating source(s) this run")
+    submitted_sources = []
     with cf.ThreadPoolExecutor(max_workers=max(1, discovery_workers)) as ex:
-        futs = [ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline) for src in sources]
+        futs = []
+        for src in sources:
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+                break
+            submitted_sources.append(clean_text(src.get("domain", "")).lower().removeprefix("www."))
+            futs.append(ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline))
         for fut in cf.as_completed(futs):
             try:
                 found, warn = fut.result()
@@ -2275,6 +2459,8 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
                 warnings.append(f"Institution page: {type(e).__name__}")
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         warnings.append("Institutional report stage budget reached; remaining pages/sources will continue from the persisted cursor on later runs")
+    if isinstance(execution_stats, dict):
+        execution_stats.setdefault("institution_sources", set()).update(x for x in submitted_sources if x)
     return out
 
 def evidence_summary(evidence: dict[str, Any], strand: str) -> str:
@@ -3122,19 +3308,15 @@ def eu_news_scope(text: str) -> bool:
 
 
 def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> bool:
-    """Balanced Strand-C gate.
+    """Balanced Strand-C topical gate with an A-anchored derived-Europe evidence route.
 
-    Signals must establish EU/European/member-state relevance in the factual text itself.
-    Research/international-cooperation signals then need a strategic bridge; critical-tech
-    signals need a capability/policy move plus strategic context (with a narrow exception for
-    EU capacity infrastructure such as quantum/semiconductor/AI-compute build-out). This keeps
-    Strand C from becoming a general technology or geopolitics news feed.
+    Ordinary event signals remain EU/European/member-state first. New empirical evidence may be
+    global/comparative when it is explicitly about R&I/science/technology and strategic competition,
+    because the later A-anchor step is what establishes why it changes the European interpretation.
     """
     full = normalized(text)
     found = set(themes or themes_for(full)) & WATCH_SIGNAL_THEMES
-    if not found or not eu_news_scope(full):
-        # V17.5.3: Strand C is EU-first. A broad global technology story does not become
-        # a European weak signal merely because an A/B item shares a theme.
+    if not found:
         return False
 
     core_ri = contains_any(full, [
@@ -3152,12 +3334,27 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
         "catch up", "dependency", "dependencies", "market fragmentation",
         "supply chain", "economic security", "de-risk", "derisk", "defence", "defense",
     ])
+
+    eu_scope = eu_news_scope(full)
+    if not eu_scope:
+        # Derived-Europe is only for empirical/reframing evidence, never for a generic foreign
+        # technology launch. Specific A anchoring later in the pipeline is still mandatory.
+        derived_themes = {
+            "fragmentation of global science", "transatlantic / US–China S&T competition",
+            "export controls / dual use", "critical and emerging technologies",
+            "R&I competitiveness / technological capabilities", "supply chains / strategic dependencies",
+            "economic security and R&I",
+        }
+        if not (reframing_signal_text(full) and core_ri and strategic_frame and (found & derived_themes)):
+            return False
+
     # International research cooperation/mobility is itself a valid geopolitical channel.
     if core_ri and (strategic_frame or bool(found & {
         "EU–China S&T cooperation / de-risking",
         "Horizon Europe / FP10 international participation",
         "research security / foreign interference",
         "science diplomacy",
+        "research talent / mobility / brain drain",
     })):
         return True
 
@@ -3177,10 +3374,43 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
         "partner", "partnership", "association", "join", "market fragmentation",
         "control layer", "infrastructure",
     ])
-    if narrow_capacity_tech and capacity_or_policy_move:
+    if eu_scope and narrow_capacity_tech and capacity_or_policy_move:
         return True
-    return critical_tech and strategic_frame and capacity_or_policy_move
+    return bool(eu_scope and critical_tech and strategic_frame and capacity_or_policy_move)
 
+
+
+REFRAMING_SIGNAL_EVIDENCE = [
+    'new data', 'latest data', 'new evidence', 'dataset', 'survey', 'study', 'research finds',
+    'report finds', 'report shows', 'analysis finds', 'evidence', 'patent data', 'patent filings',
+    'publication data', 'citation data', 'bibliometric', 'scientometric', 'scoreboard', 'benchmark',
+    'ranking', 'index', 'figures show', 'data show', 'data shows',
+]
+REFRAMING_SIGNAL_FINDINGS = [
+    'finds', 'found', 'shows', 'showed', 'reveals', 'revealed', 'suggests', 'suggested',
+    'indicates', 'indicated', 'points to', 'documents', 'records', 'reports', 'estimates',
+]
+REFRAMING_SIGNAL_SHIFTS = [
+    'gap', 'lead', 'leads', 'lag', 'lags', 'catch up', 'overtake', 'outpace', 'surge', 'rise', 'rises',
+    'fall', 'falls', 'decline', 'drop', 'shift', 'diverge', 'concentration', 'dependency', 'dependence',
+    'bottleneck', 'shortage', 'outflow', 'inflow', 'brain drain', 'brain gain', 'fragmentation',
+    'slows', 'slowdown', 'accelerates', 'trajectory', 'share of', 'accounts for',
+]
+
+
+def reframing_signal_text(text: str) -> bool:
+    """Detect new evidence that can strengthen, weaken or complicate the Strand-A picture.
+
+    This is intentionally narrower than accepting any report or study. Evidence language must be
+    paired with a finding/measurement or a directional shift. EU relevance and A anchoring are
+    enforced separately, so this widens interpretive recall without turning C into a news feed.
+    """
+    full = normalized(text)
+    evidence = contains_any(full, REFRAMING_SIGNAL_EVIDENCE)
+    finding = contains_any(full, REFRAMING_SIGNAL_FINDINGS)
+    shift = contains_any(full, REFRAMING_SIGNAL_SHIFTS)
+    explicit_new = contains_any(full, ['new data', 'latest data', 'new evidence', 'new survey', 'new study'])
+    return bool((evidence and (finding or shift)) or (explicit_new and shift))
 
 
 WEAK_SIGNAL_MARKERS = [
@@ -3200,23 +3430,29 @@ MATURE_SIGNAL_MARKERS = [
 
 
 def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
-    """A C item must be an early/uncertain change indicator, not merely current news."""
+    """A C item may be an early change indicator or new evidence that reframes Strand A."""
     full = normalized(f'{title} {desc}')
-    weak = contains_any(full, WEAK_SIGNAL_MARKERS)
-    if not weak:
+    early = contains_any(full, WEAK_SIGNAL_MARKERS)
+    reframing = reframing_signal_text(full)
+    if not (early or reframing):
         return False
-    # Mature implementation is not a weak signal unless the same item contains a
-    # counter-signal such as delay, opt-out, exception or limited/targeted scope.
+    # Mature implementation is normally not a weak signal. New evidence/indicators are a separate
+    # interpretive route, and counter-signals such as delays/opt-outs remain valid early signals.
     mature = contains_any(full, MATURE_SIGNAL_MARKERS)
     counter = contains_any(full, ['delay','delayed','postpone','pause','exception','waiver','limited to','targeted','opts out','declines to','does not include',"doesn't include"])
-    if mature and not counter:
+    if mature and not counter and not reframing:
         return False
     return True
 
-
 def factual_news(title: str, desc: str) -> bool:
     full = normalized(f'{title} {desc}')
-    if any(x in full for x in NEWS_EXCLUDE):
+    # Keep opinion/commentary exclusions, but do not discard a labelled news-analysis item
+    # when it contains genuine new evidence/indicators. This is a common packaging label at
+    # high-quality outlets and was unnecessarily hiding useful Strand-A reframing evidence.
+    analysis_labels = {'analysis:', 'analysis -'}
+    if any(x in full for x in NEWS_EXCLUDE if x not in analysis_labels):
+        return False
+    if any(x in full for x in analysis_labels) and not reframing_signal_text(full):
         return False
     # Opinion/advocacy headlines are not factual weak signals unless they report an
     # identifiable actor taking an action.
@@ -3236,6 +3472,7 @@ def news_queries(domain: str, lookback_hours: int) -> list[str]:
         f'site:{domain} (research OR science OR innovation OR university OR researchers OR "Horizon Europe") (security OR cooperation OR funding OR talent OR China) (EU OR Europe OR European) {when}',
         f'site:{domain} ("economic security" OR "strategic autonomy" OR sovereignty OR "export controls" OR "dual use" OR "supply chain" OR "critical raw materials") (technology OR research OR innovation) {when}',
         f'site:{domain} (semiconductor OR chips OR quantum OR biotech OR "artificial intelligence" OR "AI factory" OR supercomputer OR cloud OR "deep tech") (invest OR fund OR restrict OR partnership OR strategy OR security) (EU OR Europe OR European) {when}',
+        f'site:{domain} (study OR report OR survey OR data OR evidence OR patents OR publications) (finds OR shows OR reveals OR suggests OR gap OR rise OR fall OR shift OR outflow OR inflow) (research OR science OR innovation OR technology OR researchers) (EU OR Europe OR European) {when}',
     ]
 
 
@@ -3366,15 +3603,19 @@ def signal_relation(text: str) -> str:
     low = normalized(text)
     if any(w in low for w in ["stall", "delay", "cancel", "scrap", "reverse", "withdraw", "fail", "collapse", "reject", "block", "cut"]):
         return "contradicts"
+    if reframing_signal_text(low) and contains_any(low, ["gap", "lag", "diverge", "shift", "concentration", "dependency", "dependence", "bottleneck", "shortage", "outflow", "brain drain", "fragmentation", "slowdown"]):
+        return "reframes"
     if any(w in low for w in ["accelerat", "expand", "surge", "increase", "boost", "fast-track", "scale up", "intensif", "invest", "fund"]):
         return "accelerates"
-    if any(w in low for w in ["dataset", "data show", "survey", "finds", "evidence", "shows", "rise", "fall", "measur"]):
+    if reframing_signal_text(low) or any(w in low for w in ["dataset", "data show", "survey", "finds", "evidence", "shows", "rise", "fall", "measur"]):
         return "confirms"
     return "instantiates"
 
 
 def signal_kind(text: str) -> str:
     low = normalized(text)
+    if reframing_signal_text(low):
+        return "evidence / indicator"
     if any(w in low for w in ["ban", "restrict", "sanction", "export control", "screening", "probe", "investigation", "security rule", "licens"]):
         return "restriction / security"
     if any(w in low for w in ["invest", "fund", "factory", "plant", "facility", "supercomputer", "ai factory", "capacity", "build"]):
@@ -3402,8 +3643,12 @@ def signal_why(theme: str, kind: str) -> str:
         "supply chains / strategic dependencies": "This could alter Europe's exposure to strategic inputs, infrastructure or technology supply chains.",
         "Horizon Europe / FP10 international participation": "This could change participation, funding or international cooperation in EU research programmes.",
         "science diplomacy": "This may create, narrow or redirect channels for scientific cooperation in a more geopolitical environment.",
+        "research talent / mobility / brain drain": "This can change Europe's ability to attract, retain and circulate researchers, with direct effects on research capacity and competitiveness.",
     }
-    return explanations.get(theme, f"This is a current {kind} development with a plausible effect on Europe's research, innovation or strategic technology position.")
+    base = explanations.get(theme, f"This is a current {kind} development with a plausible effect on Europe's research, innovation or strategic technology position.")
+    if kind == 'evidence / indicator':
+        return "This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. " + base
+    return base
 
 
 def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -3642,9 +3887,10 @@ def main() -> int:
     # not delayed for several runs simply because the broad cursor is currently in
     # the Strand-A portion of the query bank.
     b_method_bank = list(dict.fromkeys(CONFIG.get("queries_b_method", [])))
-    b_method_focus, state["strand_b_method_cursor"], b_method_wrapped = rotating_batch(
+    b_method_cursor_before = int(state.get("strand_b_method_cursor", 0) or 0)
+    b_method_focus, _b_method_planned_next, _b_method_planned_wrapped = rotating_batch(
         b_method_bank,
-        state.get("strand_b_method_cursor", 0),
+        b_method_cursor_before,
         int(CONFIG.get("queries_b_method_per_scan", 6)),
     )
 
@@ -3652,19 +3898,28 @@ def main() -> int:
     # window, not just the short incremental overlap. This is the practical
     # rotation guarantee: every run moves to a different topic slice, and when a
     # topic comes around again its ``explore::`` depth page continues forward.
+    explore_bank = diversified_query_bank(all_queries + b_method_bank)
+    oa_explore_cursor_before = int(state.get("openalex_explore_cursor", state.get("openalex_cursor", 0)) or 0)
+    cr_explore_cursor_before = int(state.get("crossref_explore_cursor", state.get("crossref_broad_cursor", 0)) or 0)
     exploration = scholarly_exploration_plan(state, all_queries + b_method_bank)
     oa_explore = exploration["openalex"]
     cr_explore = exploration["crossref"]
+    # Planning is not progress. Restore the persisted positions until the collectors
+    # report which queries actually made a network request.
+    state["openalex_explore_cursor"] = oa_explore_cursor_before
+    state["crossref_explore_cursor"] = cr_explore_cursor_before
 
     oa_reserved = len(gap_scholarly) + len(b_method_focus) + len(oa_explore)
     cr_reserved = len(gap_scholarly) + len(b_method_focus) + len(cr_explore)
     oa_base_cap = max(1, oa_cap - min(oa_reserved, max(0, oa_cap - 1)))
     cr_base_cap = max(1, cr_cap - min(cr_reserved, max(0, cr_cap - 1)))
-    oa_base, state["openalex_cursor"], oa_wrapped = rotating_batch(
-        all_queries, state.get("openalex_cursor", 0), oa_base_cap
+    oa_cursor_before = int(state.get("openalex_cursor", 0) or 0)
+    cr_broad_cursor_before = int(state.get("crossref_broad_cursor", 0) or 0)
+    oa_base, _oa_planned_next, _oa_planned_wrapped = rotating_batch(
+        all_queries, oa_cursor_before, oa_base_cap
     )
-    cr_base, state["crossref_broad_cursor"], cr_broad_wrapped = rotating_batch(
-        all_queries, state.get("crossref_broad_cursor", 0), cr_base_cap
+    cr_base, _cr_planned_next, _cr_planned_wrapped = rotating_batch(
+        all_queries, cr_broad_cursor_before, cr_base_cap
     )
     oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + oa_explore + oa_base))[:oa_cap]
     cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + cr_explore + cr_base))[:cr_cap]
@@ -3683,15 +3938,17 @@ def main() -> int:
         for journal in list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
         for query in list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
     ]
-    cr_priority_batch, state["crossref_priority_cursor"], cr_priority_wrapped = rotating_batch(
+    cr_priority_cursor_before = int(state.get("crossref_priority_cursor", 0) or 0)
+    cr_priority_batch, _cr_priority_planned_next, _cr_priority_planned_wrapped = rotating_batch(
         priority_tasks_all,
-        state.get("crossref_priority_cursor", 0),
+        cr_priority_cursor_before,
         int(CONFIG.get("crossref_priority_tasks_per_scan", 45)),
     )
     institution_sources_all = list(CONFIG.get("institution_sources", []))
-    inst_rotating, state["institution_cursor"], inst_wrapped = rotating_batch(
+    institution_cursor_before = int(state.get("institution_cursor", 0) or 0)
+    inst_rotating, _inst_planned_next, _inst_planned_wrapped = rotating_batch(
         institution_sources_all,
-        state.get("institution_cursor", 0),
+        institution_cursor_before,
         int(CONFIG.get("institution_sources_per_scan", 18)),
     )
     # Keep the persistent source rotation intact, then add specialist sources in
@@ -3801,6 +4058,7 @@ def main() -> int:
     news_lookback = SIGNAL_BACKFILL_HOURS if signal_backfill else (FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS)
     log_progress(f"Weak-signal window: {news_lookback}h (recovery backfill={signal_backfill})")
     news_warnings: list[str] = []
+    execution_stats: dict[str, Any] = {}
     phase_started = time.monotonic()
     news_deadline = phase_started + int(CONFIG.get("news_stage_seconds", 240))
     oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
@@ -3812,65 +4070,59 @@ def main() -> int:
         )
         fut_oa = ex.submit(
             safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, oa_query_dates,
-            state["result_depth"]["openalex"], oa_depth_lanes
+            state["result_depth"]["openalex"], oa_depth_lanes, execution_stats
         )
         fut_cr = ex.submit(
             safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, cr_query_dates,
-            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"], cr_depth_lanes
+            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"], cr_depth_lanes, execution_stats
         )
         news = fut_news.result()
         oa = fut_oa.result()
         cr = fut_cr.result()
     warnings.extend(news_warnings)
 
-    # Reports get a separate source rotation and time slice after the parallel phase.
-    inst_deadline = time.monotonic() + int(CONFIG.get("institution_stage_seconds", 480))
-    inst = safe_stage(
-        "institutional reports",
-        collect_institutions,
-        inst_from,
-        warnings,
-        bootstrap=inst_backfill,
-        sources_override=inst_batch,
-        stage_deadline=inst_deadline,
-    )
-
-    # Detect actual source failures from collector warnings. Do not use the old
-    # per-source deadlines here: by this point institutional scanning has run and
-    # the earlier scholarly deadlines are expected to be in the past.
-    oa_failed = source_stage_failed(warnings, "openalex")
-    cr_failed = source_stage_failed(warnings, "crossref")
-    inst_failed = source_stage_failed(warnings, "institution")
-
-    def finish_cycle(key: str, wrapped: bool, failed: bool) -> None:
-        state["cycle_failed"][key] = bool(state["cycle_failed"].get(key)) or bool(failed)
-        if wrapped:
-            state["completed_cycles"][key] = int(state["completed_cycles"].get(key, 0)) + 1
-            if not state["cycle_failed"][key]:
-                state["backfill"][key] = True
-            state["cycle_failed"][key] = False
-
-    finish_cycle("openalex", oa_wrapped, oa_failed)
-    finish_cycle("crossref_broad", cr_broad_wrapped, cr_failed)
-    finish_cycle("crossref_priority", cr_priority_wrapped, cr_failed)
-    finish_cycle("institutions", inst_wrapped, inst_failed)
-
     oa = [x for x in oa if isinstance(x, dict)]
     cr = [x for x in cr if isinstance(x, dict)]
-    inst = [x for x in inst if isinstance(x, dict)]
-    deduped = dedupe_candidates(oa + cr + inst)
-    deduped.sort(key=rank_candidate)
+    oa_failed = source_stage_failed(warnings, "openalex")
+    cr_failed = source_stage_failed(warnings, "crossref")
 
-    # If the first rotated slice was valid but unproductive, do not end the run
-    # immediately. Advance the exploration cursors once more and try a small next
-    # slice from the full corpus window. This cannot guarantee an admissible paper
-    # exists, but it guarantees a quiet scan has genuinely explored more than one
-    # topic/depth slice before reporting zero additions.
+    # Commit rotation only for work that actually made a request. A stage deadline,
+    # endpoint stop or queued-but-never-started task therefore remains pending instead
+    # of disappearing for a whole rotation cycle.
+    executed_oa = set(execution_stats.get("openalex_queries", set()))
+    executed_cr = set(execution_stats.get("crossref_broad_queries", set()))
+    executed_priority = set(execution_stats.get("crossref_priority_tasks", set()))
+    state["openalex_cursor"], oa_wrapped, oa_base_executed = committed_rotation_cursor(
+        all_queries, oa_cursor_before, oa_base, executed_oa
+    )
+    state["crossref_broad_cursor"], cr_broad_wrapped, cr_base_executed = committed_rotation_cursor(
+        all_queries, cr_broad_cursor_before, cr_base, executed_cr
+    )
+    state["crossref_priority_cursor"], cr_priority_wrapped, cr_priority_executed = committed_rotation_cursor(
+        priority_tasks_all, cr_priority_cursor_before, cr_priority_batch, executed_priority
+    )
+    method_executed = executed_oa | executed_cr
+    state["strand_b_method_cursor"], b_method_wrapped, b_method_executed = committed_rotation_cursor(
+        b_method_bank, b_method_cursor_before, b_method_focus, method_executed
+    )
+    state["openalex_explore_cursor"], _oa_explore_wrapped, oa_explore_executed = committed_rotation_cursor(
+        explore_bank, oa_explore_cursor_before, oa_explore, executed_oa
+    )
+    state["crossref_explore_cursor"], _cr_explore_wrapped, cr_explore_executed = committed_rotation_cursor(
+        explore_bank, cr_explore_cursor_before, cr_explore, executed_cr
+    )
+
+    # Quiet-scan rescue now runs BEFORE the slower institutional stage. This guarantees
+    # that a zero-admission scholarly slice gets a second historical topic/depth slice
+    # while meaningful budget still remains, rather than hoping 260s survive afterwards.
     quiet_rescue = {"attempted": False, "openalex_queries": [], "crossref_queries": [], "themes": []}
     rescue_enabled = bool(CONFIG.get("quiet_scan_rescue_enabled", True))
-    rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 260) or 260)
-    if rescue_enabled and not deduped and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed):
+    rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 180) or 180)
+    scholarly_deduped = dedupe_candidates(oa + cr)
+    if rescue_enabled and not scholarly_deduped and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed):
         rescue_n = max(1, int(CONFIG.get("quiet_scan_rescue_queries_per_source", 4) or 4))
+        rescue_oa_cursor_before = int(state.get("openalex_explore_cursor", 0) or 0)
+        rescue_cr_cursor_before = int(state.get("crossref_explore_cursor", 0) or 0)
         rescue_plan = scholarly_exploration_plan(
             state,
             all_queries + b_method_bank,
@@ -3879,6 +4131,9 @@ def main() -> int:
         )
         rescue_oa_queries = list(rescue_plan.get("openalex", []))
         rescue_cr_queries = list(rescue_plan.get("crossref", []))
+        # Again, planning is not progress.
+        state["openalex_explore_cursor"] = rescue_oa_cursor_before
+        state["crossref_explore_cursor"] = rescue_cr_cursor_before
         quiet_rescue = {
             "attempted": bool(rescue_oa_queries or rescue_cr_queries),
             "openalex_queries": rescue_oa_queries,
@@ -3887,10 +4142,14 @@ def main() -> int:
         }
         if quiet_rescue["attempted"]:
             log_progress(
-                "Quiet-scan rescue: first rotated slice admitted nothing; trying next historical slice: "
+                "Quiet-scan rescue before institutional stage: first scholarly slice admitted nothing; trying next historical slice: "
                 + ", ".join(quiet_rescue["themes"])
             )
-            rescue_deadline = time.monotonic() + min(180, max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 150)))))
+            rescue_execution: dict[str, Any] = {}
+            rescue_deadline = time.monotonic() + min(
+                180,
+                max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 150))))
+            )
             with cf.ThreadPoolExecutor(max_workers=2) as ex:
                 futs: list[tuple[str, Any]] = []
                 if rescue_oa_queries:
@@ -3907,6 +4166,7 @@ def main() -> int:
                             {q: DATE_FLOOR for q in rescue_oa_queries},
                             state["result_depth"]["openalex"],
                             {q: "explore" for q in rescue_oa_queries},
+                            rescue_execution,
                         ),
                     ))
                 if rescue_cr_queries:
@@ -3925,6 +4185,7 @@ def main() -> int:
                             state["result_depth"]["crossref_broad"],
                             state["result_depth"]["crossref_priority"],
                             {q: "explore" for q in rescue_cr_queries},
+                            rescue_execution,
                         ),
                     ))
                 for family, fut in futs:
@@ -3933,8 +4194,57 @@ def main() -> int:
                         oa.extend(extra)
                     else:
                         cr.extend(extra)
-            deduped = dedupe_candidates(oa + cr + inst)
-            deduped.sort(key=rank_candidate)
+            rescue_oa_executed = set(rescue_execution.get("openalex_queries", set()))
+            rescue_cr_executed = set(rescue_execution.get("crossref_broad_queries", set()))
+            state["openalex_explore_cursor"], _, rescue_oa_count = committed_rotation_cursor(
+                explore_bank, rescue_oa_cursor_before, rescue_oa_queries, rescue_oa_executed
+            )
+            state["crossref_explore_cursor"], _, rescue_cr_count = committed_rotation_cursor(
+                explore_bank, rescue_cr_cursor_before, rescue_cr_queries, rescue_cr_executed
+            )
+            execution_stats.setdefault("openalex_queries", set()).update(rescue_oa_executed)
+            execution_stats.setdefault("crossref_broad_queries", set()).update(rescue_cr_executed)
+            execution_stats["quiet_rescue_openalex_executed"] = rescue_oa_count
+            execution_stats["quiet_rescue_crossref_executed"] = rescue_cr_count
+            execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(rescue_execution.get("crossref_abstracts_enrichment_attempted", 0))
+
+    # Reports retain a substantial independent slice, but no longer block the quiet
+    # scholarly rescue from firing. High-quality institutional sources remain a core lane.
+    inst_deadline = time.monotonic() + int(CONFIG.get("institution_stage_seconds", 480))
+    inst = safe_stage(
+        "institutional reports",
+        collect_institutions,
+        inst_from,
+        warnings,
+        bootstrap=inst_backfill,
+        sources_override=inst_batch,
+        stage_deadline=inst_deadline,
+        execution_stats=execution_stats,
+    )
+    inst = [x for x in inst if isinstance(x, dict)]
+    inst_failed = source_stage_failed(warnings, "institution")
+    institution_domains_all = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in institution_sources_all]
+    inst_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in inst_rotating]
+    executed_inst = set(execution_stats.get("institution_sources", set()))
+    state["institution_cursor"], inst_wrapped, inst_base_executed = committed_rotation_cursor(
+        institution_domains_all, institution_cursor_before, inst_planned_domains, executed_inst
+    )
+
+    def finish_cycle(key: str, wrapped: bool, failed: bool) -> None:
+        state["cycle_failed"][key] = bool(state["cycle_failed"].get(key)) or bool(failed)
+        if wrapped:
+            state["completed_cycles"][key] = int(state["completed_cycles"].get(key, 0)) + 1
+            if not state["cycle_failed"][key]:
+                state["backfill"][key] = True
+            state["cycle_failed"][key] = False
+
+    finish_cycle("openalex", oa_wrapped, oa_failed)
+    finish_cycle("crossref_broad", cr_broad_wrapped, cr_failed)
+    finish_cycle("crossref_priority", cr_priority_wrapped, cr_failed)
+    finish_cycle("institutions", inst_wrapped, inst_failed)
+
+    deduped = dedupe_candidates(oa + cr + inst)
+    deduped.sort(key=rank_candidate)
 
     new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped
 
@@ -4057,6 +4367,9 @@ def main() -> int:
             "new_c": new_c_count,
             "c_signals": new_c_count,
             "c_signals_total": len(strand_c),
+            "c_prefilter_candidates": len(news),
+            "c_anchored_candidates": len(current_c),
+            "b_method_queries_this_scan": len(b_method_focus),
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
             "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day rolling window and keeps all earlier signals." if new_c_count < 3 else "",
@@ -4094,13 +4407,23 @@ def main() -> int:
             "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
             "openalex_queries_this_run": len(oa_batch),
+            "openalex_queries_executed": len(set(execution_stats.get("openalex_queries", set()))),
+            "openalex_base_queries_executed": oa_base_executed,
             "openalex_exploration_queries_this_run": len(oa_explore),
+            "openalex_exploration_queries_executed": oa_explore_executed + int(execution_stats.get("quiet_rescue_openalex_executed", 0)),
             "crossref_broad_queries_this_run": len(cr_batch),
+            "crossref_broad_queries_executed": len(set(execution_stats.get("crossref_broad_queries", set()))),
+            "crossref_base_queries_executed": cr_base_executed,
             "crossref_exploration_queries_this_run": len(cr_explore),
+            "crossref_exploration_queries_executed": cr_explore_executed + int(execution_stats.get("quiet_rescue_crossref_executed", 0)),
             "quiet_scan_rescue_attempted": bool(quiet_rescue.get("attempted")),
             "quiet_scan_rescue_queries": len(quiet_rescue.get("openalex_queries", [])) + len(quiet_rescue.get("crossref_queries", [])),
             "crossref_priority_tasks_this_run": len(cr_priority_batch),
+            "crossref_priority_tasks_executed": cr_priority_executed,
+            "crossref_missing_abstract_enrichment_attempted": int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)),
+            "b_method_queries_executed": b_method_executed,
             "institution_sources_this_run": len(inst_batch),
+            "institution_rotating_sources_executed": inst_base_executed,
             "known_ab_identities_loaded": len(KNOWN_AB_IDENTITIES),
             "known_ab_links_loaded": len(KNOWN_AB_LINKS),
             "known_signal_identities_loaded": len(KNOWN_SIGNAL_IDENTITIES),
