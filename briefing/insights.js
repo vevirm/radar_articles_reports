@@ -299,7 +299,7 @@
     const m=note.match(/development in ([^.]+)\.?$/i);
     if(m) return clean(m[1]);
     const a=clean(x.anchor||'');
-    const am=a.match(/(?:Strategic watch theme|A\/B theme|Recurring A\/B theme):\s*([^—;]+)/i);
+    const am=a.match(/(?:Strand A theme|Recurring Strand A theme):\s*([^—;]+)/i);
     if(am) return clean(am[1]);
     return '';
   }
@@ -370,7 +370,7 @@
   }
 
   function buildResearchInsights(data){
-    return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:Array.isArray(data?.strand_b)?data.strand_b:[],strand_c:[]});
+    return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
   return {TOPICS,OTHER,topicFor,pointFor,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint};

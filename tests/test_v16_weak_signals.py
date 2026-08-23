@@ -27,29 +27,24 @@ class V16WeakSignalTests(unittest.TestCase):
         desc = 'The new technology controls restrict semiconductor research equipment and deepen US-China strategic competition.'
         self.assertFalse(sr.factual_news(title, desc))
         self.assertTrue(sr.factual_news(
-            'US tightens export controls on advanced AI chips to China, raising concerns for Europe',
-            'European semiconductor researchers and firms face new equipment-access constraints.'
+            'US pilots tighter export controls on advanced AI chips to China, raising concerns for Europe',
+            'A targeted trial would expose European semiconductor researchers and firms to new equipment-access constraints.'
         ))
 
     def test_generic_technology_launch_is_not_signal(self):
         self.assertFalse(sr.factual_news('Company launches a new smartphone', 'The device has a brighter display and a faster camera.'))
 
-    def test_watch_theme_can_admit_explicitly_european_signal_without_existing_ab_anchor(self):
+    def test_weak_signal_requires_existing_strand_a_anchor(self):
         item = {
-            'headline': 'US chip controls raise equipment-access risks for European researchers',
+            'headline': 'US pilots chip controls that may raise equipment-access risks for European researchers',
             'source': 'Reuters',
             'date': '2026-08-20T08:00Z',
             'link': 'https://example.org/signal',
-            '_desc': 'The controls restrict semiconductor research equipment and deepen US-China strategic competition affecting Europe.',
+            '_desc': 'A targeted trial would restrict semiconductor research equipment amid US-China strategic competition affecting Europe.',
             '_themes': sr.themes_for('European semiconductor research US-China strategic competition export controls'),
             '_entities': ['united states', 'china', 'semiconductor', 'export control'],
         }
-        got = sr.anchor_news([item], [])
-        self.assertEqual(len(got), 1)
-        self.assertEqual(got[0]['anchor_basis'], 'watch-theme')
-        self.assertTrue(got[0]['what'])
-        self.assertTrue(got[0]['why_it_matters'])
-        self.assertTrue(got[0]['watch_theme'])
+        self.assertEqual(sr.anchor_news([item], []), [])
 
     def test_signal_ui_exposes_what_and_why_fields(self):
         page = (ROOT / 'briefing' / 'index.html').read_text(encoding='utf-8')

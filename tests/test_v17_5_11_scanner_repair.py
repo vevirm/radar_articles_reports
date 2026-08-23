@@ -46,7 +46,7 @@ class V17511ScannerRepairTests(unittest.TestCase):
         )
         self.assertTrue(ev['b_pass'])
         self.assertTrue(ev['b_methodology_first'])
-        self.assertEqual(ev['b_route'], 'transfer')
+        self.assertEqual(ev['b_route'], 'future-of-A-method')
         self.assertFalse(ev['a_pass'])
 
     def test_student_erasmus_mobility_is_not_research_talent_geopolitics(self):

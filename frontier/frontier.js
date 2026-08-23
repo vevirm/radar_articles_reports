@@ -70,7 +70,7 @@
   function anchorTitle(anchor){return clean(anchor).replace(/\s*\(Strand\s+[ABCboth]+\)\s*$/i,'').trim()}
   function buildEvidenceIndex(data){
     const map=new Map();
-    for(const x of [...(Array.isArray(data?.strand_a)?data.strand_a:[]),...(Array.isArray(data?.strand_b)?data.strand_b:[])]){
+    for(const x of (Array.isArray(data?.strand_a)?data.strand_a:[])){
       const title=clean(x.title||''); if(!title) continue;
       map.set(norm(title),x);
     }
@@ -101,7 +101,7 @@
   function evidenceCandidates(data){
     if(!RadarInsights||!RadarInsights.buildResearchInsights) return [];
     const out=[];
-    for(const group of RadarInsights.buildResearchInsights(data)){
+    for(const group of RadarInsights.buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]})){
       for(const x of group.items){
         const text=`${x.point} ${x.title} ${x.watchTheme||''} ${x.why||''}`;
         const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(text);
@@ -480,7 +480,7 @@
     const [topRow,topRowCount]=concentration(signals,x=>x.row.name);
     const [topColumn,topColumnCount]=concentration(signals,x=>`${x.column.id}. ${x.column.name}`);
     const weakTotal=Array.isArray(data?.strand_c)?data.strand_c.length:0;
-    const evidenceTotal=(Array.isArray(data?.strand_a)?data.strand_a.length:0)+(Array.isArray(data?.strand_b)?data.strand_b.length:0);
+    const evidenceTotal=(Array.isArray(data?.strand_a)?data.strand_a.length:0);
     return {
       signals,cells,top,
       stats:{weakTotal,evidenceTotal,candidatePool:raw.length,qualifying:signals.length,strong:signals.filter(x=>x.strongCandidate).length,alarm:signals.filter(x=>x.column.id==='D').length,opening:signals.filter(x=>x.column.id==='A').length},

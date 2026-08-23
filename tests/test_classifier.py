@@ -64,15 +64,15 @@ class ClassifierTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 1)
         self.assertTrue(ev["a_pass"])
 
-    def test_rejects_transferability_when_not_explicitly_ri_focused(self):
+    def test_accepts_future_method_for_public_technology_policy(self):
         title = "Evaluating horizon-scanning methods for public technology policy"
         abstract = (
             "This peer-reviewed study compares horizon scanning methods, evaluation criteria and bias controls for government technology policy. "
             "It proposes a framework for integrating weak signals with strategic intelligence and risk assessment."
         )
         ev = gate_scope(title, abstract, "", 2, source_kind="scholarly")
-        self.assertFalse(ev["b_pass"])
-        self.assertIsNone(ev["eu_relevance"])
+        self.assertTrue(ev["b_pass"])
+        self.assertEqual(ev["b_route"], "future-of-A-method")
 
     def test_rejects_unrelated_futures_methodology(self):
         title = "Integral foresight methodology for post-growth lifestyles"

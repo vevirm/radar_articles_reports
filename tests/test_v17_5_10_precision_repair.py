@@ -67,7 +67,7 @@ class V17510PrecisionRepairTests(unittest.TestCase):
         ev = scanner.gate_scope(title, abstract, "", 2, source_kind="scholarly")
         self.assertTrue(ev["b_pass"])
         self.assertTrue(ev["b_transferable"])
-        self.assertEqual(ev["b_route"], "transfer")
+        self.assertEqual(ev["b_route"], "future-of-A-method")
 
     def test_targeted_cleanup_removes_transfer_pollution_and_zambia_false_positive(self):
         data = {

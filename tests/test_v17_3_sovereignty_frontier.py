@@ -26,7 +26,7 @@ class SovereigntyFrontierTests(unittest.TestCase):
     def test_main_and_insights_link_to_summary(self):
         main = (ROOT / 'index.html').read_text(encoding='utf-8')
         briefing = (ROOT / 'briefing' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('frontier/?v=17.5.5">Open Insight Summary', main)
+        self.assertIn('frontier/?v=17.6.0">Open Insight Summary', main)
         self.assertIn('../frontier/">Insight Summary →', briefing)
 
     def test_four_frontier_columns_are_classified(self):
@@ -84,10 +84,10 @@ for(const re of [/nuclear expansion.*non-EU reactor technology/i,/attracts resea
         import json
         radar = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         scanner = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
-        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 90)
-        self.assertGreaterEqual(len(radar.get('strand_a', [])), 84)
-        # Strand B is methodology-only in V17.5.11; the bundled polluted B snapshot may be emptied before the method lane refills it.
-        self.assertGreaterEqual(len(radar.get('strand_c', [])), 19)
+        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ('strand_a', 'strand_b', 'strand_c')), 25)
+        self.assertGreaterEqual(len(radar.get('strand_a', [])), 20)
+        # V17.6.0 is precision-first: B may be empty until the rotating methods lane finds a true method contribution.
+        self.assertGreaterEqual(len(radar.get('strand_c', [])), 4)
         self.assertIn('Recovered a larger pre-upload radar corpus from Git history', scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)
 

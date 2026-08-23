@@ -96,13 +96,13 @@ if(v.risks.length>15||v.opportunities.length>15) process.exit(2);
         frontier = (ROOT / "frontier" / "index.html").read_text(encoding="utf-8")
         scanner = (ROOT / "scripts" / "scan_radar.py").read_text(encoding="utf-8")
         radar = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
-        self.assertIn("priorities/?v=17.5", main)
+        self.assertIn("priorities/?v=17.6.0", main)
         self.assertIn("../priorities/", briefing)
         self.assertIn("../priorities/", frontier)
-        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ("strand_a", "strand_b", "strand_c")), 90)
-        self.assertGreaterEqual(len(radar.get("strand_a", [])), 84)
-        # Do not require a minimum B quota: V17.5.11 deliberately removes saved B rows that fail the methodology-first gate.
-        self.assertGreaterEqual(len(radar.get("strand_c", [])), 19)
+        self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ("strand_a", "strand_b", "strand_c")), 25)
+        self.assertGreaterEqual(len(radar.get("strand_a", [])), 20)
+        # Do not require a minimum B quota: V17.6.0 keeps the methods library empty rather than retain application-only false positives.
+        self.assertGreaterEqual(len(radar.get("strand_c", [])), 4)
         self.assertFalse(radar.get("repository_bundle_seed"))
         self.assertIn("Recovered a larger pre-upload radar corpus from Git history", scanner)
         self.assertIn('clean.pop("repository_bundle_seed", None)', scanner)

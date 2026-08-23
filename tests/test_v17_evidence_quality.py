@@ -41,7 +41,7 @@ class V17EvidenceQualityTests(unittest.TestCase):
                 },
                 {
                     'title': 'Nuclear technology dependencies and European strategic autonomy',
-                    'summary': 'The EU relies on non-EU reactor technology vendors, raising strategic dependencies, economic-security and technology sovereignty concerns.',
+                    'summary': 'The EU nuclear research and innovation system relies on non-EU reactor technology vendors and R&D partnerships, raising strategic dependencies, economic-security and technology-sovereignty concerns for European technological capability.',
                     'type': 'institutional report', 'source_tier': 'Tier 1'
                 },
             ],

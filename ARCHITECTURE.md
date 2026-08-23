@@ -1,52 +1,33 @@
-# Architecture — V17.5.11
+# Architecture — V17.6.0 A/B/C semantic separation
 
-The radar has four logically separate stages:
+The radar has four stages: discovery, admission, cumulative storage, and interpretation.
 
-1. **Rotating discovery** — queries/sources/pages are sampled with persistent independent cursors.
-2. **Corpus admission** — decides whether A/B/C material belongs in the radar.
-3. **Frontier classification** — decides whether admitted/current evidence supports one of the 16 Sovereignty-Frontier cells.
-4. **Scarcity-balanced discovery** — measures the 16 cell counts and gives additional discovery budget to under-covered cells without replacing normal rotation.
+## Discovery and persistent rotation
 
-## Persistent rotation contract
+`scripts/scan_radar.py` stores rotation state in `radar.json::scan_state`. Independent cursors cover OpenAlex, Crossref broad queries, priority-journal tasks, institutional sources, a dedicated B-method query bank, frontier-gap queries, frontier specialist sources and deeper result pages. These cursors survive quality-profile changes.
 
-`scripts/scan_radar.py` stores rotation state in `radar.json::scan_state`. The V17.5.11 quality repair does **not** reset this state. Independent cursor families include:
+Gap scanning can allocate extra effort to sparse Frontier cells, but it cannot relax the A gate. The dedicated B lane rotates method-focused searches independently so method discovery does not depend on the topical A cursor.
 
-- `openalex_cursor`;
-- `crossref_broad_cursor`;
-- `crossref_priority_cursor`;
-- `strand_b_method_cursor` for the dedicated methodology-first lane;
-- `institution_cursor`;
-- `frontier_gap_cursor`;
-- `frontier_gap_query_cursors` per cell;
-- `frontier_gap_source_cursors` per cell;
-- `result_depth` per scholarly query/task so fresh-result and deeper-page lanes both rotate.
+## A — evidence
 
-The source-expansion compatibility marker remains unchanged, so a quality-profile migration cleans/reclassifies evidence without restarting source traversal.
+A is precision-first. Admission requires direct EU/European/Member-State scope plus substantive R&I content and a real geopolitical/economic-security connection. R&I includes research policy/security/collaboration/funding, science diplomacy, R&D and innovation systems/capability, infrastructures, talent flows, and strategic technologies when research/innovation/capability-building is actually part of the document.
 
-## Strand B lane
+Boilerplate such as Horizon Europe funding acknowledgements is stripped before admission. Deep-body mentions cannot rescue an unrelated institutional page.
 
-The dedicated B lane rotates method-first queries (Delphi, horizon scanning, weak signals, scenario-method construction, backcasting, morphological analysis, foresight evaluation, etc.). Discovery terms are only candidate generators; final admission still requires the methodology-first B gate. This prevents query terms such as `scenario`, `framework`, `assessment` or `R&D` from becoming admission shortcuts.
+## B — methods
 
-## Frontier semantic contract
+B is not another evidence strand. It is a methods library for understanding the future of A. A source qualifies only when the method itself is developed, compared, evaluated, validated, benchmarked or designed and is suitable for strategic/public-policy/science/technology futures or is a genuinely general futures method.
 
-`frontier/frontier.js` is the canonical classifier. `scripts/frontier_coverage.js` invokes that exact module from the scanner, so browser display and scan prioritisation share the same occupancy logic.
+A domain study that merely applies Delphi, scenarios, system dynamics or another technique does not qualify. Explicitly unrelated applications such as clinical, teaching, lifestyle or tourism studies fail unless the methodological contribution has an independently relevant strategic/science/technology context.
 
-Short acronyms are boundary-aware. Row scoring alone cannot fill a cell: after row/direction scoring, `cellEvidencePass()` requires a supported row mechanism plus evidence for the selected independence/competitiveness direction. The Knowledge row includes explicit A/B/C/D semantics for talent attraction/retention, security-cost tradeoffs, productive reliance on foreign expertise and research-talent loss.
+## C — weak signals
 
-## Scarcity plan
+C contains early/uncertain developments, not a generic news feed. Signals must have weak-signal character such as pilots, trials, proposals, delays, targeted/limited arrangements, new entrants or early partnerships. Mature final implementation is excluded unless it contains a genuine counter-signal.
 
-`scripts/scan_radar.py::frontier_gap_plan()`:
+Every C item is anchored to A. B and generic watch themes are not valid anchors. Event-level headline normalisation collapses syndicated or paraphrased coverage of the same signal.
 
-- loads exact 4×4 counts;
-- computes `deficit = max(0, target_count - count)` for every cell;
-- sorts by deficit, rotating ties with `frontier_gap_cursor`;
-- creates weighted targets so larger deficits receive more allocation turns;
-- rotates per-cell query formulations and specialist sources with their own saved cursors;
-- allocates bounded news, OpenAlex/Crossref and institutional overlay capacity;
-- leaves the ordinary OpenAlex/Crossref/priority/institution and B-method rotations intact.
+## Frontier
 
-The target count is configured in `radar_config.json` (`frontier_gap_target_count`, currently 3). No cell is permanently listed as a priority.
+`frontier/frontier.js` uses Strand A as its substantive evidence corpus and Strand C as current contextual change. Strand B is deliberately excluded from evidence indexing and matrix occupancy.
 
-## Quality-profile migration
-
-A change in `quality_profile_version` triggers a one-time inherited A/B audit under the current gate. Thin saved evidence is refreshed where possible; records that cannot pass the repaired gate fail closed. This migration is a corpus-quality operation only: persistent scan cursors continue from the supplied state.
+The Frontier retains semantic row/cell logic, including explicit Knowledge & people mechanisms and recognition of individual EU Member States. Sparse cells guide discovery rotation; they do not manufacture evidence.

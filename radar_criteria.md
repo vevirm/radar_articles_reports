@@ -1,53 +1,36 @@
-# Radar admission criteria — V17.5.11
+# Radar admission criteria — V17.6.0
 
-## Strand A — EU R&I × geopolitics evidence
+## A — Papers relevant to EU R&I in geopolitical context
 
-Admit only when all three substantive components are present:
+Admit when all three are substantively present:
 
-1. **EU/European scope** — EU institutions/programmes, Europe, or an EU Member State in a meaningful role.
-2. **R&I / related capability** — research and innovation, science/technology policy, research systems, universities when they concern research, research security, science diplomacy, innovation ecosystems, R&D, critical/strategic technologies, semiconductors, AI/compute, quantum, biotech, nuclear/energy technology, digital infrastructure, technology transfer, research talent, researcher/scientist mobility, research infrastructure or comparable capability questions.
-3. **Geopolitical/economic-security context** — strategic competition, de-risking, dependencies, sovereignty/autonomy, export/technology controls, foreign interference, geopolitical/economic sanctions, supply-chain security, economic coercion, investment screening, US–China rivalry, geoeconomics or comparable strategic context. Administrative, criminal or disciplinary sanctions do not count by themselves.
+1. **European scope:** EU, Europe, an EU Member State, EU programme/system, or a clearly European research/innovation setting.
+2. **R&I substance:** research, science, innovation, R&D, research security/collaboration/funding/infrastructure/talent, science diplomacy, innovation systems/capability, or strategic technology with an explicit research/innovation/capability-building mechanism.
+3. **Geopolitical connection:** geopolitical/geoeconomic competition, economic security, strategic autonomy/dependency, de-risking, export controls, foreign interference, research security, international fragmentation/cooperation, technology sovereignty or another supported cross-border strategic mechanism.
 
-A single incidental word from each family is not enough. Short abbreviations and ambiguous phrases are boundary-matched to avoid inside-word collisions. Scholarly items must establish the substantive R&I and geopolitical sides in title/abstract. Institutional reports may use body evidence only when a supported document-level bridge exists.
+Reject incidental word overlap, grant acknowledgements, generic technology/security papers where Europe is merely one example, generic higher education, administration, annual-report debris and unrelated pages contaminated by linked text.
 
-Research **brain drain, brain gain, researcher/scientist mobility, scientific-talent inflow/outflow, attraction, retention and return mobility** are an explicit R&I + geoeconomic evidence family when the text is clearly about the research workforce. Generic labour migration, student/Erasmus mobility, teaching practice or unrelated skills shortages do not qualify by themselves.
+## B — Methods suitable to understand the future of A
 
-### Reject from A
+B is a **methods library**, not topical evidence.
 
-- generic EU politics/elections/party analysis;
-- generic teaching, higher-education pedagogy or student-mobility papers;
-- rule-of-law or enlargement reports with no substantive R&I/technology-capability content;
-- generic sustainability or sector analysis with no geopolitical R&I bridge;
-- press releases, calls, project/facility pages, jobs/events and other non-analytical pages;
-- technical/engineering papers with no policy/geopolitical European connection.
+The method itself must be a substantive contribution: developed, compared, designed, evaluated, validated, benchmarked or otherwise methodologically advanced. Candidate families include horizon scanning, weak-signal detection, Delphi, scenario construction/planning methodology, backcasting, morphological and cross-impact analysis, roadmapping, foresight evaluation, technology intelligence, bibliometric/scientometric forecasting, patent landscaping, system dynamics, agent-based modelling and expert elicitation.
 
-## Strand B — transferable R&I foresight methodology
+The method must be suitable for interrogating strategic/public-policy/science/technology/innovation/geopolitical futures, or be presented as a genuinely general futures method. A paper does **not** qualify merely because it uses Delphi, scenarios, a framework, evaluation, modelling or forecasting in an unrelated application.
 
-**B is methodology-first. There is one admission route, not a topical/geopolitics route.**
+EU wording is not required for B. B also does not need to be about R&I itself: its role is to provide methods capable of helping us understand the future of A.
 
-A B item must satisfy all of the following:
+## C — Weak signals that may affect how we see A
 
-1. **Strong foresight/anticipation method anchor** — for example Delphi, horizon scanning, weak-signal detection/aggregation, scenario construction/planning methodology, backcasting, morphological analysis, anticipatory/foresight methodology or evaluation of such methods. Bare words such as `scenario`, `framework`, `assessment`, `evaluation`, `model` or `methods` do not establish B.
-2. **The method is the substantive contribution** — the document develops, designs, compares, validates, evaluates or otherwise advances the method itself. Merely applying a foresight/scenario method to a topical case does not qualify.
-3. **Explicit R&I transfer context** — the methodology is for research, innovation, science/technology policy, research/innovation systems, research governance/funding/infrastructure/capacity, research security, science diplomacy, critical/emerging technology policy or a comparably explicit R&I setting.
+C is for early, uncertain or surprising current developments. A signal must:
 
-EU/geopolitical wording is **not required in the source** if the methodology itself is genuinely transferable to European R&I practice. Conversely, a paper about an EU/geopolitical topic does **not** enter B just because it uses a scenario, model, framework or foresight exercise.
+- be factual enough to identify an event/change;
+- have weak-signal character (pilot, trial, proposal, delay, limited/targeted arrangement, first mover, new entrant, early partnership, exception, etc.);
+- matter to an existing Strand-A issue/theme; and
+- be anchored to Strand A, not Strand B or a free-floating watch theme.
 
-### Positive example
+Mature implementation and routine headline news are not weak signals by default. Near-identical syndicated coverage is collapsed to one event.
 
-**“A new Delphi methodology for R&I foresight”** → admit to B when the paper develops/evaluates the Delphi method for R&I/innovation-policy foresight.
+## Relationship to the Frontier
 
-### Negative examples
-
-- a logistics-course teaching model using scenarios/evaluation → reject;
-- a cancer mobile-app “technology foresight analysis” applying a method to product functions → reject;
-- an EU strategic-autonomy paper that uses scenario modelling but contributes no foresight methodology → A may qualify, B does not;
-- generic lifestyle/corporate/consumer futures methods with no explicit R&I transfer context → reject.
-
-## Strand C — weak signals
-
-Current factual developments must have a clear R&I/geopolitical bridge relevant to Europe. Signals may connect to a specific A/B item, a recurring A/B theme or a curated strategic watch theme. Accepted signals are cumulative.
-
-## Frontier hand-off
-
-Corpus admission and Frontier-cell occupancy are separate decisions. A/B/C admission is governed by the gates above. Frontier classification uses the admitted evidence, including scanner-vetted EU scope, to identify a supported row mechanism and A/B/C/D direction. Relevant corpus material can remain unassigned if directional evidence is genuinely absent; it must not disappear merely because a Member State name or a structural Knowledge mechanism uses different wording.
+A/B/C admission and Frontier cell classification are distinct. **Only A is substantive paper/report evidence for the matrix.** C can update interpretation of that evidence. B provides analytical methods and never fills a matrix cell.

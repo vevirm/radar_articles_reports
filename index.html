@@ -58,14 +58,14 @@
           <div>
             <div class="kicker">EU-first research intelligence</div>
             <h1>R&I × Geopolitics Radar</h1>
-            <p class="intro">A cumulative evidence base for geopolitical change in research and innovation, foresight methodology, and anchored weak signals. New scans add to the record instead of replacing it.</p>
+            <p class="intro">A cumulative radar with three distinct layers: evidence on EU research & innovation in geopolitical context, methods for understanding its future, and early weak signals that may change how that evidence should be read. New scans add to the record instead of replacing it.</p>
           </div>
           <button id="lock" class="lock">Lock radar</button>
         </div>
         <div class="hero-actions">
           <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.5.5">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.5.5">Opportunities &amp; Risks</a>
+          <a class="action secondary" href="frontier/?v=17.6.0">Open Insight Summary</a>
+          <a class="action secondary" href="priorities/?v=17.6.0">Opportunities &amp; Risks</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -80,8 +80,8 @@
 
     <div class="wrap">
       <section class="dashboard" aria-label="Radar totals">
-        <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">accepted publications</div></div>
-        <div class="stat"><div class="label">Foresight methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
+        <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">method contributions</div></div>
+        <div class="stat"><div class="label">Future methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
         <div class="stat"><div class="label">Weak signals</div><div id="statC" class="value">—</div><div class="sub">accumulated signals</div></div>
         <div class="stat"><div class="label">New this scan</div><div id="statNew" class="value">—</div><div class="sub">across all strands</div></div>
       </section>
@@ -95,26 +95,26 @@
 
     <main class="wrap">
       <section id="strand-a" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand A</div><h2>R&I under geopolitical change</h2><p>Substantive R&I policy + geopolitics/economic security + explicit EU relevance.</p></div><div id="countA" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand A</div><h2>EU R&amp;I in geopolitical context</h2><p>Papers and analytical reports where European research or innovation is substantively connected to geopolitics, geoeconomics, economic security, strategic competition or international research relations.</p></div><div id="countA" class="count">0 items</div></div>
         <div id="noteA" class="scan-note"></div><div id="itemsA" class="cards"></div><button id="moreA" class="more" type="button" hidden>Show more</button>
       </section>
 
       <section id="strand-b" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Foresight methodology</h2><p>Methodology-first evidence on foresight, horizon scanning, scenarios, anticipatory governance and strategic intelligence.</p></div><div id="countB" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Methods for understanding the future of A</h2><p>Methodological contributions that help scan, anticipate, model, test or interpret future developments relevant to Strand A. A study does not enter B merely because it uses Delphi, scenarios or another method.</p></div><div id="countB" class="count">0 items</div></div>
         <div id="noteB" class="scan-note"></div><div id="itemsB" class="cards"></div><button id="moreB" class="more" type="button" hidden>Show more</button>
       </section>
 
       <section id="strand-c" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals</h2><p>Each scan checks a rolling news window for factual R&I/geopolitical developments. Signals can connect to a specific A/B publication or a curated strategic watch theme, and every admitted signal remains in the cumulative record.</p></div><div id="countC" class="count">0 signals</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals that may change how we see A</h2><p>Early, uncertain or surprising current developments that connect back to Strand-A evidence. Mature headline news, duplicate coverage and signals justified only by a method or generic watch theme are excluded.</p></div><div id="countC" class="count">0 signals</div></div>
         <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
       <div class="method"><strong>How accumulation works:</strong> the scanner still searches recent windows, but admitted A, B and C items are merged with the existing <code>radar.json</code> corpus and deduplicated. A quiet scan can therefore add zero new items without making yesterday’s evidence disappear.</div>
     </main>
-    <footer><div class="wrap">R&I × Geopolitics + Foresight Methodology Radar</div></footer>
+    <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.5.5"></script>
+<script src="briefing/insights.js?v=17.6.0"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};

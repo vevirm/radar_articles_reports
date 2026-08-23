@@ -1,9 +1,15 @@
-# V17.5.11 repair notes
+# V17.6.0 redesign notes
 
-This package is based on the supplied live radar state. It preserves the scan-state cursors and removes the 10 remaining saved Strand-B records because all 10 fail the V17.5.11 methodology-first gate on their stored evidence. The dedicated B-method discovery lane will refill Strand B with methodology papers that actually satisfy the new contract.
+This version replaces the previous “A plus methodology B” interpretation with the explicit three-layer model requested for the radar:
 
-The bundled `radar.json` intentionally retains the previous `quality_profile_version` marker. On the first live V17.5.11 scan, the scanner therefore performs a one-time full inherited A/B quality migration under the repaired gates, using best-effort evidence refresh for thin saved records. This quality migration does not reset source/query/page rotation cursors.
+- A = EU R&I in geopolitical context;
+- B = methods suitable to understand the future of A;
+- C = weak signals that may change how A is understood.
 
-After that migration, normal runs are incremental: the historical accepted corpus is preserved, new discovery rotates through its saved cursor families, and Frontier sparsity only adds bounded extra search budget.
+The observed false-positive B item, *Challenges and barriers to musculoskeletal injury research in sub-Saharan Africa*, is now rejected: conducting a Delphi study is an application, not a futures-method contribution for this radar.
 
-Regression coverage includes the observed teaching/method-transfer false positives, topical papers that merely use scenarios, explicit R&I Delphi methodology, student-vs-researcher mobility, all four Knowledge & people cells, Member-State EU scope, cursor preservation and independent Strand-B method rotation.
+C is now A-only. It cannot be anchored to B and cannot be admitted solely through a generic strategic watch theme. Mature news is filtered and repeated coverage is deduplicated at event level.
+
+The Frontier excludes B from evidence indexing. Existing persistent scan/query/source/page cursors are preserved.
+
+Regression coverage includes the supplied bad B example, A precision failures, valid research-security/FP10/talent-flow A cases, methodology contribution vs method application, A-only C anchoring, weak-vs-mature events, event deduplication, Frontier exclusion of B and cursor preservation.
