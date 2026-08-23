@@ -57,7 +57,7 @@ console.log(JSON.stringify({risks:v.risks.length,opps:v.opportunities.length,all
         page = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
         self.assertNotIn('Top six', page)
         self.assertNotIn('Top 15', page)
-        self.assertIn('Strongest qualifying signals', page)
+        self.assertIn('strongest signals in plain language', page.lower())
 
 
 if __name__ == '__main__':

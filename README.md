@@ -1,30 +1,39 @@
-# R&I Geopolitics Radar — V17.6.1 A/B/C + strict B method-development
+# R&I Geopolitics Radar — V17.6.2
 
-This repository scans a cumulative evidence base using three deliberately different layers:
+This repository uses three deliberately separate layers:
 
-- **A — EU R&I in geopolitical context.** Papers and analytical reports in which European research/innovation and geopolitical, geoeconomic or economic-security dynamics are substantively connected.
-- **B — Methods for understanding the future of A.** Methodological contributions for horizon scanning, foresight, weak-signal detection, scenario construction, Delphi, roadmapping, anticipatory analysis and related approaches. The method must be a contribution, not merely something used in an unrelated study.
-- **C — Weak signals that may change how we see A.** Early, uncertain or surprising current developments. Every C item must connect back to Strand-A evidence; B methods and free-floating watch themes cannot justify C admission.
+- **A — EU R&I in geopolitical context.** Substantive evidence about European research or innovation where geopolitics, geoeconomics, economic security, strategic competition or international research relations materially affect the R&I system.
+- **B — Futures methods for understanding A.** Publications that **develop, propose, adapt, extend or refine a futures/foresight method as such**. Merely using Delphi, modelling, forecasting, an early-warning system, scenarios or another method does not qualify.
+- **C — Weak signals that may change how we see A.** Early, uncertain or surprising current developments linked back to A.
 
-## Key separation
+## B is intentionally narrow
 
-A is the substantive evidence layer. B is a **method-development library**. C is the changing-current-context layer. The Sovereignty Frontier is therefore built from **A + C**, not B. Methods never fill geopolitical matrix cells.
+A paper belongs in B only when the methodological contribution itself is the point of the publication. Domain-specific predictive systems and assessment tools are excluded unless the publication actually develops a futures/foresight method. For example, an earthquake early-warning model is not a foresight method; an explicit adaptation of horizon-scanning methodology can be.
 
-## Scanning and rotation
+Auxiliary techniques such as Delphi, system dynamics or agent-based modelling can qualify only when the publication develops them **as part of an explicit foresight/futures method**.
 
-The scanner preserves independent persistent cursors for OpenAlex, Crossref broad search, priority journals, institutions, the dedicated B-method lane, frontier gap queries, specialist gap sources and result-depth pages. A quality-profile change does not reset these source/query/page rotations.
+## Display
 
-Sparse Frontier cells can receive extra discovery effort, but they do not redefine admission: a paper must still pass A, and a method must still pass B.
+The main radar is message-first:
 
-## Precision rules
+1. a core message of at most 120 characters;
+2. **From:** source and date;
+3. **Why it matters:** in short, simple language;
+4. bibliographic/source details.
 
-Funding acknowledgements do not create A relevance. Bare technology or generic education/administration does not create R&I relevance. B rejects application studies that merely say “we conducted a Delphi study” or “we use scenarios.” C rejects mature headline news and collapses near-duplicate coverage of the same event.
+Paper titles are therefore not used as the main card headline.
+
+The **Risks & opportunities** page has a Go back control and states risks/opportunities in plain language. Detailed evidence remains underneath each statement.
+
+## Rotation
+
+The scanner keeps independent persistent cursors for OpenAlex, Crossref broad search, priority journals, institutions, the dedicated B-method lane, Frontier gap queries, specialist gap sources and result-depth pages. A quality-profile migration does not reset these rotations.
 
 ## Running
 
-Upload the repository to GitHub and run the existing **Radar Scan** workflow. No secrets are required for the keyless scholarly discovery path. The bundled `radar.json` preserves the supplied live rotation cursors while cleaning the stored A/B/C corpus under the V17.6.1 model.
+Run the existing **Radar Scan** GitHub Actions workflow. The keyless scholarly path requires no secrets.
 
-Run tests locally with:
+Local tests:
 
 ```bash
 python -m unittest discover -s tests -v

@@ -21,6 +21,23 @@
     return out;
   }
 
+
+  function clean(v){return String(v||'').replace(/\s+/g,' ').trim()}
+  function maxChars(v,n=118){const s=clean(v);if(s.length<=n)return s;let c=s.slice(0,n-1).replace(/\s+\S*$/,'').trim();if(c.length<60)c=s.slice(0,n-1).trim();return c+'…'}
+  function simplePriorityText(x){
+    const row=x?.row?.id||'other',col=x?.column?.id||'B';
+    const topic={knowledge:'research talent and knowledge',infrastructure:'research infrastructure and key inputs',conversion:'Europe’s ability to turn research into products and capabilities',rules:'EU rules and standards',other:'European research and innovation'}[row]||'European research and innovation';
+    if(col==='A') return row==='conversion'?'Europe could build more strategic technology and capability at home.':`Europe could strengthen ${topic}.`;
+    if(col==='B') return `Europe could gain protection, but ${topic} could become slower or less competitive.`;
+    if(col==='C') return `Europe could benefit, but become more dependent on non-EU partners for ${topic}.`;
+    return `Europe could become more dependent and less competitive in ${topic}.`;
+  }
+  function simpleEvidenceText(x){
+    let t=clean(x?.title||'').replace(/\s+[–—-]\s+(?:Company Announcement\s+-\s+)?(?:FT\.com|Reuters|Bloomberg).*$/i,'');
+    t=t.replace(/\s+–\s+Company Announcement.*$/i,'');
+    return maxChars(t,118);
+  }
+
   function buildPriorityView(data,opts={}){
     const frontier=Frontier.buildFrontier(data,opts);
     const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(15,Math.floor(opts.limit))):15;
@@ -50,5 +67,5 @@
     };
   }
 
-  return {buildPriorityView,structuralScore,diversifiedTop};
+  return {buildPriorityView,structuralScore,diversifiedTop,simplePriorityText,simpleEvidenceText};
 });

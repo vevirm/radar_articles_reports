@@ -1022,35 +1022,51 @@ A_FOCUS_EXCLUDE_TITLE = [
 ]
 
 B_METHOD_FAMILIES = [
+    # Core futures/foresight methods. These are the methods Strand B is actually about.
     'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods',
     'horizon scanning', 'weak signal detection', 'weak signals detection', 'weak signal analysis',
-    'delphi', 'real-time delphi', 'policy delphi', 'scenario planning', 'scenario construction',
-    'scenario building', 'scenario development', 'scenario methodology', 'backcasting',
-    'morphological analysis', 'cross-impact analysis', 'cross impact analysis',
+    'scenario planning', 'scenario construction', 'scenario building', 'scenario development',
+    'scenario methodology', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
     'technology roadmapping', 'technology roadmap', 'roadmapping', 'wild cards', 'wild card',
-    'futures wheel', 'causal layered analysis', 'futures literacy', 'anticipatory governance',
-    'anticipatory intelligence', 'strategic intelligence', 'foresight evaluation',
-    'bibliometric forecasting', 'scientometric forecasting', 'patent landscaping', 'patent analytics',
-    'technology intelligence', 'early warning', 'emerging issue detection', 'trend extrapolation',
+    'futures wheel', 'causal layered analysis', 'emerging issue detection',
+    # Auxiliary techniques can support a futures method, but never qualify by themselves.
+    'delphi', 'real-time delphi', 'policy delphi', 'morphological analysis',
     'system dynamics', 'agent-based modelling', 'agent-based modeling', 'expert elicitation',
+    'bibliometric forecasting', 'scientometric forecasting', 'patent landscaping', 'patent analytics',
+    'technology intelligence', 'strategic intelligence', 'early warning',
+]
+
+# A publication must visibly develop/adapt/extend/refine a *futures method as such*.
+# Domain prediction systems, assessment frameworks and ordinary Delphi applications are not B,
+# even when they are technically novel or described as an "early-warning method".
+B_CORE_FUTURES_METHODS = [
+    'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods',
+    'horizon scanning', 'weak signal detection', 'weak signals detection', 'weak signal analysis',
+    'scenario planning', 'scenario construction', 'scenario building', 'scenario development',
+    'scenario methodology', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
+    'technology roadmapping', 'technology roadmap', 'roadmapping', 'wild cards', 'wild card',
+    'futures wheel', 'causal layered analysis', 'emerging issue detection',
+]
+
+B_AUXILIARY_METHODS = [
+    'delphi', 'real-time delphi', 'policy delphi', 'morphological analysis',
+    'system dynamics', 'agent-based modelling', 'agent-based modeling', 'expert elicitation',
+    'bibliometric forecasting', 'scientometric forecasting', 'patent landscaping', 'patent analytics',
+    'technology intelligence', 'strategic intelligence', 'early warning',
+]
+
+# Auxiliary techniques become B candidates only when the same title/abstract explicitly frames
+# them as part of foresight/futures work. "Early warning" in medicine, engineering, finance,
+# astronomy, infrastructure monitoring, etc. is deliberately outside Strand B.
+B_EXPLICIT_FUTURES_FRAMING = [
+    'strategic foresight', 'foresight', 'futures studies', 'futures research', 'future studies',
+    'horizon scanning', 'weak signal', 'weak signals', 'scenario planning', 'scenario construction',
+    'scenario building', 'backcasting', 'anticipatory', 'alternative futures', 'possible futures',
+    'future scenarios', 'long-term futures', 'long term futures', 'strategic uncertainty',
+    'emerging issues', 'emerging issue',
 ]
 
 B_METHOD_CONTRIBUTION_CUES = [
-    # Supporting evidence that the paper is about the method itself. These cues are
-    # NOT sufficient for B admission without an explicit creation/adaptation claim.
-    'methodology', 'methodological', 'method development', 'method design', 'method evaluation',
-    'evaluation of the method', 'evaluation of methods', 'compare methods', 'comparison of methods',
-    'comparative evaluation', 'validation', 'validating', 'benchmark', 'benchmarking',
-    'toolkit', 'protocol', 'framework for horizon scanning', 'framework for strategic foresight',
-    'approach to horizon scanning', 'approach to strategic foresight', 'design principles',
-]
-
-# B is deliberately narrower than "methodology-first". The publication must claim
-# an original/reusable methodological contribution: develop/propose/introduce/design/
-# adapt/extend/refine/create a method, framework, protocol, toolkit or approach.
-# Merely applying, comparing, evaluating, benchmarking or validating existing methods
-# is not enough by itself.
-B_METHOD_CREATION_CUES = [
     'new method', 'new methodology', 'new framework', 'new protocol', 'new toolkit',
     'novel method', 'novel methodology', 'novel framework', 'novel protocol', 'novel toolkit',
     'method development', 'methodological development', 'method design', 'methodological design',
@@ -1059,65 +1075,37 @@ B_METHOD_CREATION_CUES = [
     'generalizable method', 'generalisable method',
 ]
 
+B_METHOD_CREATION_CUES = B_METHOD_CONTRIBUTION_CUES
+
+# Creation must point to a method/framework/protocol/toolkit/approach AND the sentence must also
+# contain a real futures/foresight family. This prevents "we develop an earthquake early-warning
+# framework" or "we develop a Delphi assessment framework" from being treated as futures methods.
 B_CREATION_VERBS = re.compile(
-    r'\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*'
-    r'.{0,140}\b(?:method|methodology|approach|framework|toolkit|protocol|delphi|horizon scanning|scenario planning|scenario construction|backcasting|morphological|cross-impact|roadmapping|foresight)\b',
+    r'\b(?:develop(?:s|ed|ing)?|propos(?:e|es|ed|ing)|introduc(?:e|es|ed|ing)|design(?:s|ed|ing)?|'
+    r'adapt(?:s|ed|ing)?|extend(?:s|ed|ing)?|refin(?:e|es|ed|ing)|creat(?:e|es|ed|ing)|'
+    r'construct(?:s|ed|ing)?|formulat(?:e|es|ed|ing)|operationali[sz](?:e|es|ed|ing))\b'
+    r'.{0,140}\b(?:method|methodology|approach|framework|toolkit|protocol)\b',
     re.I,
 )
-B_CREATION_VERBS_REVERSED = re.compile(
-    r'\b(?:method|methodology|approach|framework|toolkit|protocol|delphi|horizon scanning|scenario planning|scenario construction|backcasting|morphological|cross-impact|roadmapping|foresight)\b'
-    r'.{0,140}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*',
+B_CREATION_PASSIVE = re.compile(
+    r'\b(?:method|methodology|approach|framework|toolkit|protocol)\b.{0,45}\b(?:is|was|were|has been|have been)\s+'
+    r'(?:developed|proposed|introduced|designed|adapted|extended|refined|created|constructed|formulated|operationalised|operationalized)\b',
     re.I,
 )
 
-# Some techniques (Delphi, system dynamics, ABM, expert elicitation) are not
-# inherently foresight. They only belong in B when the paper explicitly uses them
-# to investigate futures, anticipation, emerging change or strategic uncertainty.
-B_INTRINSIC_FUTURES_METHODS = [
-    'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods',
-    'horizon scanning', 'weak signal detection', 'weak signals detection', 'weak signal analysis',
-    'scenario planning', 'scenario construction', 'scenario building', 'scenario development',
-    'scenario methodology', 'backcasting', 'morphological analysis', 'cross-impact analysis',
-    'cross impact analysis', 'technology roadmapping', 'technology roadmap', 'roadmapping',
-    'wild cards', 'wild card', 'futures wheel', 'causal layered analysis', 'futures literacy',
-    'anticipatory governance', 'anticipatory intelligence', 'foresight evaluation',
-    'bibliometric forecasting', 'scientometric forecasting', 'technology intelligence',
-    'early warning', 'emerging issue detection', 'trend extrapolation',
-]
-B_CONDITIONAL_FUTURES_METHODS = [
-    'delphi', 'real-time delphi', 'policy delphi', 'system dynamics',
-    'agent-based modelling', 'agent-based modeling', 'expert elicitation',
-    'patent landscaping', 'patent analytics', 'strategic intelligence',
-]
-B_FUTURES_PURPOSE = [
-    'future', 'futures', 'foresight', 'anticipat', 'horizon scan', 'weak signal',
-    'emerging issue', 'emerging technology', 'scenario', 'trend', 'early warning',
-    'long-term', 'long term', 'prospective', 'forecast', 'uncertainty', 'strategic options',
-    'possible futures', 'alternative futures', 'future-oriented', 'future oriented',
-]
 B_TRANSFERABILITY_CUES = [
     'transferable', 'reusable', 'generalizable', 'generalisable', 'adaptable', 'replicable',
     'across policy domains', 'across domains', 'across sectors', 'other policy contexts',
     'other contexts', 'general framework', 'generic framework', 'modular framework',
 ]
 
-
 B_SUITABILITY_CONTEXT = [
-    # Domains in which the method can directly interrogate the future of Strand A.
     'research', 'science', 'innovation', 'technology', 'r&d', 'public policy', 'policy',
     'governance', 'geopolit', 'geoeconomic', 'economic security', 'strategic competition',
     'international relations', 'security policy', 'industrial policy', 'technology policy',
     'science policy', 'innovation policy', 'research policy', 'critical technology',
     'emerging technology', 'complex systems', 'systemic risk', 'uncertainty', 'strategy',
 ]
-
-B_OFFTOPIC_APPLICATIONS = [
-    'lifestyle', 'lifestyles', 'wellbeing', 'well-being', 'consumer preference', 'household preference',
-    'clinical', 'patient', 'patients', 'injury', 'musculoskeletal', 'nursing', 'medical treatment',
-    'teaching', 'teacher', 'teachers', 'classroom', 'course design', 'pedagogy', 'student learning',
-    'tourism', 'hospitality', 'diet', 'nutrition', 'sports performance',
-]
-
 
 def _method_matches(text: str, terms: list[str]) -> list[str]:
     # Metadata frequently alternates between "horizon scanning" and "horizon-scanning".
@@ -1208,83 +1196,89 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
 
 
 def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str], str, list[str]]:
-    """Return whether a publication contributes a reusable futures method for understanding A.
+    """Return whether a publication develops a reusable futures/foresight method.
 
-    Strand B is a *method-development library*. A paper does not qualify merely because it
-    has a methodology section or uses Delphi, scenarios, modelling, MCDA, etc. Admission
-    requires all of the following:
-      1. a genuine futures/foresight method or explicit futures purpose;
-      2. an original methodological contribution (new/developed/proposed/adapted/extended/
-         refined/designed method, framework, protocol, toolkit or approach);
-      3. plausible reuse for analysing the future of EU R&I/geopolitics (explicit R&I/policy/
-         technology context, a generic futures-method contribution, or stated transferability).
+    Strand B is deliberately much narrower than "a paper that uses methods". Admission needs:
+      1. the title/abstract to be about a futures/foresight method as such;
+      2. an explicit claim that the paper develops, proposes, adapts, extends or refines that method;
+      3. enough methodological framing to make reuse plausible for understanding the future of A.
+
+    Stand-alone Delphi studies, predictive models, engineering/clinical/financial early-warning
+    systems, assessment frameworks, forecasting applications and reviews of existing methods fail.
+    "Early warning" only counts when it is explicitly part of strategic foresight / horizon scanning /
+    weak-signal or emerging-issue methodology.
     """
     title = clean_text(title)
     abstract = clean_text(abstract)
-    body = clean_text(body)
+    # Method papers should advertise the method contribution in the bibliographic evidence unit.
+    # Deep body text must not rescue an otherwise topical/application paper.
     ta = clean_text(f'{title}. {abstract}')
-    lead = ta if source_kind == 'scholarly' else clean_text(f'{ta}. {body[:8000]}')
-
-    families = _method_matches(lead, B_METHOD_FAMILIES)
-    if not families:
+    if not ta:
         return False, [], '', []
 
-    intrinsic = _method_matches(lead, B_INTRINSIC_FUTURES_METHODS)
-    conditional = _method_matches(lead, B_CONDITIONAL_FUTURES_METHODS)
-    futures_purpose = distinct_matches(lead, B_FUTURES_PURPOSE)
-    # Delphi/ABM/system dynamics/etc. are generic techniques. Without an explicit
-    # futures purpose they are not Strand B, even when the paper calls them a methodology.
-    if not intrinsic and not (conditional and futures_purpose):
-        return False, families[:5], '', []
+    all_families = _method_matches(ta, B_METHOD_FAMILIES)
+    core_families = _method_matches(ta, B_CORE_FUTURES_METHODS)
+    auxiliary = _method_matches(ta, B_AUXILIARY_METHODS)
+    framing = distinct_matches(ta, B_EXPLICIT_FUTURES_FRAMING)
+    if not all_families:
+        return False, [], '', []
 
-    contribution = _method_matches(lead, B_METHOD_CONTRIBUTION_CUES)
-    creation_cues = _method_matches(lead, B_METHOD_CREATION_CUES)
+    # Auxiliary techniques are not foresight methods by themselves. They need explicit futures
+    # framing AND a genuine core futures method in the title/abstract. This is what excludes
+    # earthquake/bridge/finance/medical "early warning", ordinary Delphi assessments, grammar
+    # "morphological analysis", and generic system-dynamics applications.
+    candidate_families = core_families or (auxiliary if framing else [])
+    if not candidate_families:
+        return False, all_families[:5], '', []
+
     creation_bridge = ''
-    for sent in split_sentences(lead):
-        fam = _method_matches(sent, B_METHOD_FAMILIES)
-        if not fam:
+    for sent in split_sentences(ta):
+        sent_core = _method_matches(sent, B_CORE_FUTURES_METHODS)
+        sent_aux = _method_matches(sent, B_AUXILIARY_METHODS)
+        sent_framing = distinct_matches(sent, B_EXPLICIT_FUTURES_FRAMING)
+        if not sent_core and not (sent_aux and sent_framing):
             continue
         low = re.sub(r'[-–—/]+', ' ', normalized(sent))
-        # Negated claims such as "does not develop/evaluate a foresight method" must never
-        # be turned into positive method-contribution evidence by keyword matching.
-        if re.search(r'\b(?:does not|do not|did not|not|without)\b.{0,120}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz|methodolog|method|framework|protocol|toolkit)\w*', low):
+        low = re.sub(r'^design\s+methodology\s+approach\s+', '', low)
+        if re.search(r'\b(?:does not|do not|did not|not|without)\b.{0,120}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*', low):
             continue
-        if (_method_matches(sent, B_METHOD_CREATION_CUES)
-                or B_CREATION_VERBS.search(low)
-                or B_CREATION_VERBS_REVERSED.search(low)):
+        creation_language = bool(
+            _method_matches(sent, B_METHOD_CREATION_CUES)
+            or B_CREATION_VERBS.search(low)
+            or B_CREATION_PASSIVE.search(low)
+            or re.search(r'\b(?:new|novel|adapted|extended|refined|reusable|transferable)\b.{0,90}\b(?:foresight|horizon scanning|weak signal|scenario|backcasting|cross-impact|roadmap|futures)\b', low)
+        )
+        if creation_language:
             creation_bridge = sent[:420]
             break
 
     title_norm = re.sub(r'[-–—/]+', ' ', normalized(title))
-    title_families = _method_matches(title, B_METHOD_FAMILIES)
+    title_core = _method_matches(title, B_CORE_FUTURES_METHODS)
+    title_aux = _method_matches(title, B_AUXILIARY_METHODS)
+    title_framing = distinct_matches(title, B_EXPLICIT_FUTURES_FRAMING)
+    title_candidate = title_core or (title_aux if title_framing else [])
     title_creation = bool(
-        title_families and (
+        title_candidate and (
             _method_matches(title, B_METHOD_CREATION_CUES)
-            or re.search(r'\b(?:new|novel|developed|development|design|adapted|adaptation|extended|extension|refined|refinement)\b.{0,90}\b(?:method|methodology|framework|protocol|toolkit|approach|delphi|foresight|horizon scanning)\b', title_norm)
+            or re.search(r'\b(?:new|novel|developed|development|developing|design|adapted|adapting|adaptation|extended|extension|refined|refinement|proposed|proposing)\b.{0,100}\b(?:foresight|horizon scanning|weak signal|scenario planning|scenario construction|backcasting|cross-impact|roadmapping|delphi|system dynamics|agent based|method|methodology|framework|protocol|toolkit|approach)\b', title_norm)
         )
     )
-    method_creation = bool(creation_bridge or title_creation)
-    if not method_creation:
-        # Comparison/evaluation/validation of existing methods may be useful scholarship,
-        # but under the B definition it is not a method contribution.
-        return False, families[:5], '', (creation_cues or contribution)[:5]
 
-    suitability = distinct_matches(lead, B_SUITABILITY_CONTEXT)
-    transferability = distinct_matches(lead, B_TRANSFERABILITY_CUES)
-    off_topic = distinct_matches(lead, B_OFFTOPIC_APPLICATIONS)
+    if not (creation_bridge or title_creation):
+        return False, candidate_families[:5], '', []
 
-    # Generic futures-method papers are reusable by default. Domain-specific method papers
-    # outside A need an explicit statement that the method generalises/transfers beyond the case.
-    generic_title = bool(
-        title_families
-        and not distinct_matches(title, B_OFFTOPIC_APPLICATIONS)
-        and (intrinsic or futures_purpose)
-    )
-    suitable = bool(suitability or generic_title or transferability)
-    if off_topic and not suitability and not transferability:
-        suitable = False
+    # Reject review/synthesis/application language when it is the apparent contribution and there
+    # is no direct creation bridge. This catches "global review of horizon scanning exercises" and
+    # conceptual pieces that discuss a toolkit without actually developing one.
+    review_like = bool(re.search(r'\b(?:review|synthesis|overview|perspective|commentary|lessons from|using|application of|applications of)\b', title_norm))
+    if review_like and not creation_bridge:
+        return False, candidate_families[:5], '', []
 
-    return bool(method_creation and suitable), families[:5], creation_bridge, (suitability + transferability)[:6]
+    suitability = distinct_matches(ta, B_SUITABILITY_CONTEXT)
+    transferability = distinct_matches(ta, B_TRANSFERABILITY_CUES)
+    # A true futures-method development is potentially reusable for A even when demonstrated in a
+    # different domain. Explicit transferability/R&I/policy language simply strengthens the note.
+    return True, candidate_families[:5], creation_bridge, (suitability + transferability)[:6]
 
 
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general') -> dict[str, Any]:

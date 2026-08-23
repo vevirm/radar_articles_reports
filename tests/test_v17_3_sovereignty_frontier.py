@@ -26,7 +26,7 @@ class SovereigntyFrontierTests(unittest.TestCase):
     def test_main_and_insights_link_to_summary(self):
         main = (ROOT / 'index.html').read_text(encoding='utf-8')
         briefing = (ROOT / 'briefing' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('frontier/?v=17.6.0">Open Insight Summary', main)
+        self.assertIn('frontier/?v=17.6.2">Open Insight Summary', main)
         self.assertIn('../frontier/">Insight Summary →', briefing)
 
     def test_four_frontier_columns_are_classified(self):

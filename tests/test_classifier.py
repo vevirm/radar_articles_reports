@@ -35,7 +35,7 @@ class ClassifierTests(unittest.TestCase):
         ev = gate_scope(title, abstract, "", 1)
         self.assertFalse(ev["a_pass"])
 
-    def test_accepts_methodology_first_strand_b(self):
+    def test_rejects_method_discussion_without_method_development(self):
         title = "Designing strategic foresight methods for EU research and innovation policy under geopolitical uncertainty"
         abstract = (
             "The paper evaluates horizon scanning and scenario methods used in European Union research and innovation policy. "
@@ -43,7 +43,7 @@ class ClassifierTests(unittest.TestCase):
             "anticipatory governance under geopolitical and economic-security uncertainty."
         )
         ev = gate_scope(title, abstract, "", 2)
-        self.assertTrue(ev["b_pass"])
+        self.assertFalse(ev["b_pass"])
 
     def test_rejects_pure_trend_output_for_b(self):
         title = "Megatrends 2035: The future of European technology"
@@ -74,14 +74,14 @@ class ClassifierTests(unittest.TestCase):
         self.assertTrue(ev["b_pass"])
         self.assertEqual(ev["b_route"], "future-of-A-method")
 
-    def test_rejects_unrelated_futures_methodology(self):
+    def test_accepts_true_foresight_method_development_even_outside_ri(self):
         title = "Integral foresight methodology for post-growth lifestyles"
         abstract = (
             "The article develops an integral foresight method combining literature review, scenarios and participatory workshops. "
             "It explores household lifestyles and personal wellbeing under post-growth futures."
         )
         ev = gate_scope(title, abstract, "", 2)
-        self.assertFalse(ev["b_pass"])
+        self.assertTrue(ev["b_pass"])
 
 
 class V12BalancedRelevanceTests(unittest.TestCase):
@@ -133,7 +133,7 @@ class V12BalancedRelevanceTests(unittest.TestCase):
         )
         self.assertIsNone(rel)
 
-    def test_accepts_tier1_foresight_methodology_deeper_in_report(self):
+    def test_rejects_tier1_report_that_only_uses_foresight_methods(self):
         title = "Futures for European research funding"
         abstract = "This European report examines strategic foresight for research organisations and innovation funding under geopolitical and economic-security uncertainty."
         body = (
@@ -143,7 +143,7 @@ class V12BalancedRelevanceTests(unittest.TestCase):
             + "The process uses weak signals, stakeholder workshops and evaluation criteria to test robustness."
         )
         ev = gate_scope(title, abstract, body, 1, source_kind="institutional")
-        self.assertTrue(ev["b_pass"])
+        self.assertFalse(ev["b_pass"])
 
 
 class V17SubstanceQualityTests(unittest.TestCase):

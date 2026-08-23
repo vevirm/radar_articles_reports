@@ -30,7 +30,7 @@
     .filter{border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:9px 11px;cursor:pointer;font-weight:700;font-size:13px}.filter.active{background:var(--navy);border-color:var(--navy);color:#fff}
     main{padding:3px 0 70px}.strand{padding-top:36px}.section-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;margin-bottom:14px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:var(--accent)}.section-head h2{font-size:27px;letter-spacing:-.035em;line-height:1.12;margin:4px 0 5px}.section-head p{margin:0;color:var(--muted);max-width:840px;font-size:14px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
     .scan-note{display:none;margin:8px 0 14px;padding:11px 13px;border-radius:12px;background:#fff9ea;border:1px solid #eedeb1;color:#735318;font-size:13px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.item{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;min-height:210px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.item:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#cfd7e1}.item-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.meta{font-size:12px;color:var(--muted)}.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.tag{border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:#f5f7fa;color:#667085;border:1px solid #e4e8ee}.tag.new{color:var(--accent);background:var(--accent-soft);border-color:#edcbd0}.tag.signal{color:var(--blue);background:var(--blue-soft);border-color:#cdddec}
-    .item h3{font-size:19px;line-height:1.27;letter-spacing:-.025em;margin:12px 0 7px}.item h3 a{text-decoration:none}.item h3 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.source{font-size:12px;color:var(--muted);margin-bottom:12px}.point{font-size:14px;line-height:1.55;margin:0;color:#2d3748}.point strong{color:var(--ink)}.relevance{font-size:13px;color:#485468;margin-top:10px}.card-foot{margin-top:auto;padding-top:13px;display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #eef1f5;font-size:11px;color:var(--muted)}
+    .item h3{font-size:19px;line-height:1.27;letter-spacing:-.025em;margin:12px 0 7px}.item h3 a{text-decoration:none}.item h3 a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.source{font-size:12px;color:var(--muted);margin-bottom:12px}.point{font-size:14px;line-height:1.55;margin:0;color:#2d3748}.point strong{color:var(--ink)}.relevance{font-size:13px;color:#485468;margin-top:10px}.origin{font-size:12px;color:var(--muted);margin:1px 0 7px}.whyline{font-size:13px;line-height:1.5;color:#455267;margin:0 0 12px}.whyline strong{color:var(--ink)}.biblio{margin-top:auto;padding-top:12px;border-top:1px solid #eef1f5;font-size:11px;line-height:1.45;color:var(--muted)}.biblio-label{font-size:9px;text-transform:uppercase;letter-spacing:.09em;font-weight:900;color:#7a8493;margin-bottom:4px}.biblio-title{font-size:12px;color:#3d4d62;font-weight:750;text-decoration:none}.biblio-title:hover{text-decoration:underline}.biblio-row{margin-top:3px}.card-foot{margin-top:8px;padding-top:9px;display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #f0f3f6;font-size:11px;color:var(--muted)}
     details{margin-top:10px;font-size:12px;color:var(--muted)}summary{cursor:pointer;font-weight:700;color:#556174}details p{margin:7px 0 0}.empty{background:#fff;border:1px dashed #cfd7e1;border-radius:15px;padding:24px;color:var(--muted)}.more{display:block;margin:15px auto 0;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:9px 14px;cursor:pointer;font-weight:750}.more[hidden]{display:none}
     .method{margin-top:46px;background:#eaf0f6;border:1px solid #d6e0ea;border-radius:16px;padding:16px 18px;color:#526173;font-size:13px}.method strong{color:var(--ink)}footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:12px}
     @media(max-width:920px){.dashboard{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}
@@ -64,8 +64,8 @@
         </div>
         <div class="hero-actions">
           <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.6.0">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.6.0">Opportunities &amp; Risks</a>
+          <a class="action secondary" href="frontier/?v=17.6.2">Open Insight Summary</a>
+          <a class="action secondary" href="priorities/?v=17.6.2">Opportunities &amp; Risks</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -80,7 +80,7 @@
 
     <div class="wrap">
       <section class="dashboard" aria-label="Radar totals">
-        <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">method contributions</div></div>
+        <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
         <div class="stat"><div class="label">Future methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
         <div class="stat"><div class="label">Weak signals</div><div id="statC" class="value">—</div><div class="sub">accumulated signals</div></div>
         <div class="stat"><div class="label">New this scan</div><div id="statNew" class="value">—</div><div class="sub">across all strands</div></div>
@@ -100,7 +100,7 @@
       </section>
 
       <section id="strand-b" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Methods for understanding the future of A</h2><p>New, adapted, extended or refined futures methods that could be reused to understand Strand A. A study does not enter B merely because it uses, compares, evaluates or validates Delphi, scenarios or another existing method.</p></div><div id="countB" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Methods for understanding the future of A</h2><p>Papers that actually develop, adapt, extend or refine a futures/foresight method that could be reused to understand A. Using Delphi, modelling, forecasting or an early-warning system is not enough.</p></div><div id="countB" class="count">0 items</div></div>
         <div id="noteB" class="scan-note"></div><div id="itemsB" class="cards"></div><button id="moreB" class="more" type="button" hidden>Show more</button>
       </section>
 
@@ -114,7 +114,7 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.6.0"></script>
+<script src="briefing/insights.js?v=17.6.2"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -127,16 +127,48 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 function fmtDate(v){if(!v)return "";const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(d)}
 function cleanText(v){return String(v??"").replace(/\s+/g," ").replace(/\.{5,}/g," ").trim()}
 function short(v,n=220){const s=cleanText(v);return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s}
-function pointFor(x){try{const p=globalThis.RadarInsights?.pointFor?.(x);if(p)return p}catch(e){}return short(x.relevance_note||x.signal_note||x.summary||"",220)}
+function max120(v){const s=cleanText(v).replace(/^Abstract\s*/i,'');if(s.length<=120)return s;let cut=s.slice(0,119).replace(/\s+\S*$/,'').trim();if(cut.length<72)cut=s.slice(0,119).trim();return cut.replace(/[,:;\-–—]+$/,'')+'…'}
+function norm(v){return cleanText(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+function stripPaperTitle(summary,title){let s=cleanText(summary);const t=cleanText(title);if(t&&s.toLowerCase().startsWith(t.toLowerCase()))s=s.slice(t.length).replace(/^[\s.:;–—-]+/,'');return s.replace(/^Abstract\s*/i,'')}
+function sentences(v){return cleanText(v).split(/(?<=[.!?])\s+(?=[A-Z0-9])/).map(x=>x.trim()).filter(Boolean)}
+function coreMessage(x){
+  if(x.core_message)return max120(x.core_message);
+  if(x.headline){let w=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.headline;w=cleanText(w).replace(/\s+[–—-]\s+Company Announcement.*$/i,'').replace(/\s+-\s+(?:FT\.com|Reuters|Bloomberg).*$/i,'');return max120(w)}
+  const title=x.title||'',ss=sentences(stripPaperTitle(x.summary||'',title));
+  const b=String(x.strand||'').toUpperCase()==='B';
+  const ranked=ss.map((q,i)=>{let score=0;const n=norm(q);if(b){if(/\b(develop|propose|introduce|adapt|extend|refine|design|create|construct)\w*/i.test(q))score+=10;if(/foresight|horizon scan|weak signal|scenario planning|backcasting|cross.?impact|roadmap/i.test(q))score+=7;if(/\b(use|apply|employ|review|compare|evaluate)\w*/i.test(q))score-=5}else{if(/\b(find|show|argue|conclude|demonstrate|identify|reveal|indicate|suggest)\w*/i.test(q))score+=9;if(/\b(risk|depend|competition|security|sovereignty|collaboration|capacity|restrict|strengthen|weaken|shift|change|limit|enable|pressure|fragment)\w*/i.test(q))score+=6;if(/europe|european union|\beu\b|research|innovation|science|technology/i.test(q))score+=3;if(/^(this|the) (study|paper|article|report)|\b(aim|objective|methods?|methodology)\b|framework is applied|remains insufficiently explored|substantial body of research/i.test(q))score-=8}if(n===norm(title))score-=30;score-=i*.12;return {q,score}}).sort((a,b)=>b.score-a.score);
+  if(ranked[0]&&ranked[0].score>0)return max120(ranked[0].q.replace(/^(The|This) (study|paper|article|report) (finds|shows|argues|concludes|demonstrates|identifies) that /i,''));
+  let p='';try{p=globalThis.RadarInsights?.pointFor?.(x)||''}catch(e){}if(p&&norm(p)!==norm(title)&&!norm(p).startsWith(norm(title)))return max120(p);
+  return max120(ss[0]||'No concise message available.');
+}
+function simpleWhy(x){
+  if(x.headline){const w=globalThis.RadarInsights?.signalWhy?.(x)||x.why_it_matters||x.signal_note||'';return short(w,170)}
+  const text=norm(`${x.title||''} ${x.summary||''} ${x.relevance_note||''}`);const b=String(x.strand||'').toUpperCase()==='B';
+  if(b)return 'It offers a futures method that could be reused to explore change around EU R&I.';
+  if(/research security|knowledge security|science diplomacy|scientific collaboration|research collaboration/.test(text))return 'It can change who Europe works with, what knowledge moves across borders, and how research is protected.';
+  if(/brain drain|researcher|research talent|scientific talent|research workforce/.test(text))return 'It can change Europe’s ability to attract, keep and use research talent.';
+  if(/horizon europe|fp10|research funding|framework programme/.test(text))return 'It can shape how Europe funds research and works with international partners.';
+  if(/semiconductor|artificial intelligence|\bai\b|quantum|biotech|technology|advanced material|digital/.test(text))return 'It can change Europe’s access to key technologies and its ability to innovate.';
+  if(/dependen|supply chain|strategic autonomy|sovereignty/.test(text))return 'It can change how dependent Europe is on outside suppliers, knowledge or capabilities.';
+  return 'It shows how geopolitics can change European research and innovation.';
+}
+function whereFrom(x){return [x.source,fmtDate(x.date)].filter(Boolean).join(' · ')}
 function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
-function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance].join(" ")).toLowerCase()}
+function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance,x.core_message].join(" ")).toLowerCase()}
 function filtered(items){const q=state.query.trim().toLowerCase();return items.filter(x=>(!state.onlyNew||x.new_this_scan)&&(!q||searchable(x).includes(q)))}
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
-function abItem(x){
-  const p=pointFor(x); const details=short(x.relevance_note||"",320); const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}${tag(x.eu_relevance)}</div></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(x.title||"Untitled")}</a></h3><div class="source">${esc([x.source,x.authors].filter(Boolean).join(" · "))}</div><p class="point"><strong>Signal:</strong> ${esc(p||"Accepted into the radar corpus.")}</p>${details&&details!==p?`<details><summary>Why it matters</summary><p>${esc(details)}</p></details>`:""}<div class="card-foot"><span>${esc(x.type||x.source_tier||"")}</span><span>${esc(seen)}</span></div></article>`
+function biblio(x,label='Bibliography'){
+  const title=x.title||x.headline||'Untitled';const who=x.authors||'';const meta=[x.source,fmtDate(x.date),x.type].filter(Boolean).join(' · ');
+  return `<div class="biblio"><div class="biblio-label">${esc(label)}</div><a class="biblio-title" href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(title)}</a>${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</div>`;
 }
-function cItem(x){const what=globalThis.RadarInsights?.signalWhat?.(x)||pointFor(x)||short(x.headline,180);const why=globalThis.RadarInsights?.signalWhy?.(x)||short(x.signal_note,220);const theme=globalThis.RadarInsights?.signalTheme?.(x)||"Strategic R&I";const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}${tag(x.signal_kind||x.signal_type||"signal")}</div></div><div class="source"><strong>WHAT CHANGED</strong></div><h3><a href="${esc(x.link||"#")}" target="_blank" rel="noopener">${esc(what)}</a></h3><div class="source">${esc(x.source||"")}</div><p class="point"><strong>WHY IT MATTERS:</strong> ${esc(why)}</p><details><summary>Radar connection</summary><p><strong>${esc(theme)}</strong>${x.anchor?`<br>${esc(x.anchor)}`:""}</p></details><div class="card-foot"><span>Weak signal</span><span>${esc(seen)}</span></div></article>`}
+function abItem(x){
+  const msg=coreMessage(x),seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(msg)}</a></h3><div class="origin"><strong>From:</strong> ${esc(whereFrom(x)||'Source not listed')}</div><p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p>${biblio(x)}<div class="card-foot"><span>${esc(x.source_tier||x.eu_relevance||'')}</span><span>${esc(seen)}</span></div></article>`
+}
+function cItem(x){
+  const msg=coreMessage(x),seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(msg)}</a></h3><div class="origin"><strong>From:</strong> ${esc(whereFrom(x)||'Source not listed')}</div><p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p>${biblio(x,'Source details')}<div class="card-foot"><span>${esc(x.signal_kind||x.signal_type||'Weak signal')}</span><span>${esc(seen)}</span></div></article>`
+}
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}
