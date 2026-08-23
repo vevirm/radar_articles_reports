@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar — V17.6.2
+# R&I Geopolitics Radar — V17.6.3
 
 This repository uses three deliberately separate layers:
 
@@ -38,3 +38,6 @@ Local tests:
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+- Main messages also repair PDF/OCR letter-spacing artefacts (for example `E u r o p e` → `Europe`) before display.
+- Letter-spaced text is never accepted as a 120-character core message.

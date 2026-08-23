@@ -1,11 +1,33 @@
-# Architecture — V17.6.2
+# Architecture — V17.6.1 A/B/C semantic separation
 
-The system has three independent content layers.
+The radar has four stages: discovery, admission, cumulative storage, and interpretation.
 
-**A** is the substantive evidence corpus for EU R&I in geopolitical context. **B** is a futures-method development library and does not populate the geopolitical matrix. **C** is a weak-signal overlay anchored to A.
+## Discovery and persistent rotation
 
-Discovery and admission are separate. Broad source/query rotation continues through persistent cursors; admission remains precision-first. The B discovery lane searches for explicit development/adaptation of foresight methods rather than generic applications of Delphi, prediction or early-warning techniques.
+`scripts/scan_radar.py` stores rotation state in `radar.json::scan_state`. Independent cursors cover OpenAlex, Crossref broad queries, priority-journal tasks, institutional sources, a dedicated B-method query bank, frontier-gap queries, frontier specialist sources and deeper result pages. These cursors survive quality-profile changes.
 
-The display layer is also separate from bibliographic metadata. Main radar cards derive a concise core message (maximum 120 characters) from the saved summary, show source and plain-language significance, then render bibliographic details. Risks & Opportunities translates matrix direction into short plain-language statements while retaining the evidence link.
+Gap scanning can allocate extra effort to sparse Frontier cells, but it cannot relax the A gate. The dedicated B lane rotates method-focused searches independently so method discovery does not depend on the topical A cursor.
 
-Quality-profile migrations may revalidate saved A/B material, but they do not reset incremental source/query/page rotation state.
+## A — evidence
+
+A is precision-first. Admission requires direct EU/European/Member-State scope plus substantive R&I content and a real geopolitical/economic-security connection. R&I includes research policy/security/collaboration/funding, science diplomacy, R&D and innovation systems/capability, infrastructures, talent flows, and strategic technologies when research/innovation/capability-building is actually part of the document.
+
+Boilerplate such as Horizon Europe funding acknowledgements is stripped before admission. Deep-body mentions cannot rescue an unrelated institutional page.
+
+## B — methods
+
+B is not another evidence strand. It is a **method-development library** for understanding the future of A. A source qualifies only when it explicitly contributes a new, adapted, extended, refined or designed futures method/framework/protocol/toolkit. Merely applying, comparing, evaluating, benchmarking or validating an existing method does not qualify. Generic techniques such as Delphi, system dynamics or agent-based modelling also require an explicit futures/foresight purpose.
+
+A domain study that merely applies Delphi, scenarios, system dynamics or another technique does not qualify. Explicitly unrelated applications such as clinical, teaching, lifestyle or tourism studies fail unless the methodological contribution has an independently relevant strategic/science/technology context.
+
+## C — weak signals
+
+C contains early/uncertain developments, not a generic news feed. Signals must have weak-signal character such as pilots, trials, proposals, delays, targeted/limited arrangements, new entrants or early partnerships. Mature final implementation is excluded unless it contains a genuine counter-signal.
+
+Every C item is anchored to A. B and generic watch themes are not valid anchors. Event-level headline normalisation collapses syndicated or paraphrased coverage of the same signal.
+
+## Frontier
+
+`frontier/frontier.js` uses Strand A as its substantive evidence corpus and Strand C as current contextual change. Strand B is deliberately excluded from evidence indexing and matrix occupancy.
+
+The Frontier retains semantic row/cell logic, including explicit Knowledge & people mechanisms and recognition of individual EU Member States. Sparse cells guide discovery rotation; they do not manufacture evidence.

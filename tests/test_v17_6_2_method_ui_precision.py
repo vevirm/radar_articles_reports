@@ -56,7 +56,12 @@ class MethodAsSuchPrecisionTests(unittest.TestCase):
 class UIClarityTests(unittest.TestCase):
     def test_main_radar_is_message_first_and_bibliography_after(self):
         page = (ROOT / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('function max120', page)
+        self.assertIn('function complete120', page)
+        self.assertIn('function repairLetterSpacing', page)
+        self.assertIn('function hasLetterSpacing', page)
+        self.assertIn("m=>m.replace(/\\s+/g,'')", page)
+        self.assertIn('function semanticMessage', page)
+        self.assertNotIn("return cut.replace(/[,:;\\-–—]+$/,'')+'…'", page)
         self.assertIn('function coreMessage', page)
         self.assertIn('<strong>From:</strong>', page)
         self.assertIn('<strong>Why it matters:</strong>', page)

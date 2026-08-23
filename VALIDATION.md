@@ -1,4 +1,6 @@
-# Validation — V17.6.2
+# Validation — V17.6.3
+
+- Core-message acceptance repairs/rejects letter-spaced PDF/OCR text; spaced-letter artefacts cannot render as the 120-character message.
 
 Validated against the supplied `radar (9).json`.
 

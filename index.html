@@ -64,8 +64,8 @@
         </div>
         <div class="hero-actions">
           <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.6.2">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.6.2">Opportunities &amp; Risks</a>
+          <a class="action secondary" href="frontier/?v=17.6.3">Open Insight Summary</a>
+          <a class="action secondary" href="priorities/?v=17.6.3">Opportunities &amp; Risks</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -114,7 +114,7 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.6.2"></script>
+<script src="briefing/insights.js?v=17.6.3"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -126,20 +126,74 @@ document.getElementById("lock").addEventListener("click",()=>{sessionStorage.rem
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 function fmtDate(v){if(!v)return "";const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(d)}
 function cleanText(v){return String(v??"").replace(/\s+/g," ").replace(/\.{5,}/g," ").trim()}
+function repairLetterSpacing(v){
+  let s=cleanText(v);
+  // Repair PDF/OCR extraction such as "E u r o p e", "C E P S", "A I" and "R & I".
+  s=s.replace(/\b(?:[A-Za-z]\s+){2,}[A-Za-z]\b/g,m=>m.replace(/\s+/g,''));
+  s=s.replace(/\b([A-Z])\s*&\s*([A-Z])\b/g,'$1&$2');
+  s=s.replace(/\b([A-Z])\s+([A-Z])\b/g,'$1$2');
+  return cleanText(s);
+}
+function hasLetterSpacing(v){
+  const s=cleanText(v);
+  return /\b(?:[A-Za-z]\s+){2,}[A-Za-z]\b/.test(s)||/\b[A-Z]\s+&\s+[A-Z]\b/.test(s);
+}
 function short(v,n=220){const s=cleanText(v);return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s}
-function max120(v){const s=cleanText(v).replace(/^Abstract\s*/i,'');if(s.length<=120)return s;let cut=s.slice(0,119).replace(/\s+\S*$/,'').trim();if(cut.length<72)cut=s.slice(0,119).trim();return cut.replace(/[,:;\-–—]+$/,'')+'…'}
+function complete120(v){
+  let s=repairLetterSpacing(v).replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
+  s=s.replace(/^(The|This) (study|paper|article|report) (finds|shows|argues|concludes|demonstrates|identifies|suggests) that\s+/i,'');
+  if(!s||s.length>120||s.includes('…')||s.includes('...')||hasLetterSpacing(s))return '';
+  return s.replace(/\s*[.…]{2,}\s*$/,'').trim();
+}
+function semanticMessage(x){
+  const text=norm([x.title,x.summary,x.relevance_note,x.what,x.headline].join(' '));
+  const b=String(x.strand||'').toUpperCase()==='B';
+  if(b){
+    if(/horizon scan/.test(text))return 'Horizon scanning is adapted into a reusable method for identifying emerging strategic risks.';
+    if(/weak signal/.test(text))return 'A reusable method is developed to detect weak signals before they become established trends.';
+    if(/scenario/.test(text))return 'A reusable scenario method is developed to explore how uncertain strategic futures could unfold.';
+    if(/backcasting/.test(text))return 'A reusable backcasting method is developed to connect long-term futures with choices made today.';
+    return 'A reusable futures method is developed to study emerging change under strategic uncertainty.';
+  }
+  if(x.headline){
+    if(/eu.?china.*research|research cooperation.*china|china.*research cooperation/.test(text))return 'EU–China research cooperation is narrowing to selected areas as Europe reduces strategic exposure.';
+    if(/quantum.*regulat.*delay|regulat.*quantum.*delay/.test(text))return 'EU quantum rules are delayed, extending uncertainty for a strategically important technology.';
+    if(/self.?driv|autonomous vehicle/.test(text))return 'Chinese self-driving firms are expanding in Europe, increasing cross-border technology ties.';
+    if(/defen[cs]e.*drone|drone.*defen[cs]e/.test(text))return 'A Japanese–German defence-drone partnership is creating a new cross-border technology link.';
+    if(/sovereign ai|ai control layer/.test(text))return 'A new sovereign-AI control layer is being adopted by European firms.';
+  }
+  if(/eu.?china|china.*\beu\b|europe.*china/.test(text)&&/research|science|innovation|technology/.test(text))return 'EU–China research and technology ties are being reshaped by de-risking and strategic competition.';
+  if(/research security|knowledge security|foreign interference/.test(text))return 'Research security is tightening as Europe balances open science with geopolitical and interference risks.';
+  if(/science diplomacy|scientific collaboration|research collaboration/.test(text))return 'Geopolitical rivalry is changing Europe’s scientific collaboration and the role of science diplomacy.';
+  if(/brain drain|researcher mobility|research talent|scientific talent|research workforce/.test(text))return 'Researcher mobility is becoming a strategic issue for Europe’s scientific capacity and competitiveness.';
+  if(/horizon europe|fp10|framework programme/.test(text))return 'Geopolitical tensions are reshaping who Europe funds and partners with in its research programmes.';
+  if(/semiconductor|chip/.test(text))return 'Semiconductor dependencies are becoming a strategic constraint on Europe’s technology choices.';
+  if(/quantum/.test(text))return 'Quantum capability is becoming part of Europe’s competition for technological security and autonomy.';
+  if(/artificial intelligence|\bai\b/.test(text)&&/depend|investment|sovereign|security/.test(text))return 'AI investment and dependence are becoming strategic issues for Europe’s technological autonomy.';
+  if(/advanced material|critical mineral|raw material|battery/.test(text))return 'Access to strategic materials is shaping Europe’s technology resilience and industrial autonomy.';
+  if(/dual.?use|military|defen[cs]e/.test(text)&&/innovation|technology|research/.test(text))return 'Security competition is pulling more European research and technology toward dual-use priorities.';
+  if(/digital sovereignty|digital strategy|cyber/.test(text))return 'Digital and cyber policy is becoming a tool of Europe’s geopolitical and technological positioning.';
+  if(/industrial policy|innovation ecosystem|competitiveness/.test(text))return 'Geopolitical competition is pushing Europe to link innovation policy more closely to resilience.';
+  return 'Geopolitical pressures are reshaping Europe’s research, technology and innovation choices.';
+}
 function norm(v){return cleanText(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
 function stripPaperTitle(summary,title){let s=cleanText(summary);const t=cleanText(title);if(t&&s.toLowerCase().startsWith(t.toLowerCase()))s=s.slice(t.length).replace(/^[\s.:;–—-]+/,'');return s.replace(/^Abstract\s*/i,'')}
 function sentences(v){return cleanText(v).split(/(?<=[.!?])\s+(?=[A-Z0-9])/).map(x=>x.trim()).filter(Boolean)}
 function coreMessage(x){
-  if(x.core_message)return max120(x.core_message);
-  if(x.headline){let w=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.headline;w=cleanText(w).replace(/\s+[–—-]\s+Company Announcement.*$/i,'').replace(/\s+-\s+(?:FT\.com|Reuters|Bloomberg).*$/i,'');return max120(w)}
+  const stored=complete120(x.core_message||'');
+  if(stored)return stored;
+  if(x.headline){
+    let w=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.headline;
+    w=cleanText(w).replace(/\s+[–—-]\s+Company Announcement.*$/i,'').replace(/\s+-\s+(?:FT\.com|Reuters|Bloomberg|Euractiv\.com).*$/i,'');
+    const direct=complete120(w);if(direct)return direct;
+    return semanticMessage(x);
+  }
   const title=x.title||'',ss=sentences(stripPaperTitle(x.summary||'',title));
   const b=String(x.strand||'').toUpperCase()==='B';
-  const ranked=ss.map((q,i)=>{let score=0;const n=norm(q);if(b){if(/\b(develop|propose|introduce|adapt|extend|refine|design|create|construct)\w*/i.test(q))score+=10;if(/foresight|horizon scan|weak signal|scenario planning|backcasting|cross.?impact|roadmap/i.test(q))score+=7;if(/\b(use|apply|employ|review|compare|evaluate)\w*/i.test(q))score-=5}else{if(/\b(find|show|argue|conclude|demonstrate|identify|reveal|indicate|suggest)\w*/i.test(q))score+=9;if(/\b(risk|depend|competition|security|sovereignty|collaboration|capacity|restrict|strengthen|weaken|shift|change|limit|enable|pressure|fragment)\w*/i.test(q))score+=6;if(/europe|european union|\beu\b|research|innovation|science|technology/i.test(q))score+=3;if(/^(this|the) (study|paper|article|report)|\b(aim|objective|methods?|methodology)\b|framework is applied|remains insufficiently explored|substantial body of research/i.test(q))score-=8}if(n===norm(title))score-=30;score-=i*.12;return {q,score}}).sort((a,b)=>b.score-a.score);
-  if(ranked[0]&&ranked[0].score>0)return max120(ranked[0].q.replace(/^(The|This) (study|paper|article|report) (finds|shows|argues|concludes|demonstrates|identifies) that /i,''));
-  let p='';try{p=globalThis.RadarInsights?.pointFor?.(x)||''}catch(e){}if(p&&norm(p)!==norm(title)&&!norm(p).startsWith(norm(title)))return max120(p);
-  return max120(ss[0]||'No concise message available.');
+  const ranked=ss.map((q,i)=>{let score=0;const n=norm(q);if(b){if(/\b(develop|propose|introduce|adapt|extend|refine|design|create|construct)\w*/i.test(q))score+=10;if(/foresight|horizon scan|weak signal|scenario planning|backcasting|cross.?impact|roadmap/i.test(q))score+=7;if(/\b(use|apply|employ|review|compare|evaluate)\w*/i.test(q))score-=5}else{if(/\b(find|show|argue|conclude|demonstrate|identify|reveal|indicate|suggest)\w*/i.test(q))score+=9;if(/\b(risk|depend|competition|security|sovereignty|collaboration|capacity|restrict|strengthen|weaken|shift|change|limit|enable|pressure|fragment)\w*/i.test(q))score+=6;if(/europe|european union|\beu\b|research|innovation|science|technology/i.test(q))score+=3;if(/^(this|the) (study|paper|article|report)|\b(aim|objective|methods?|methodology)\b|framework is applied|remains insufficiently explored|substantial body of research/i.test(q))score-=8}if(n===norm(title))score-=30;score-=i*.12;return {q,score,msg:complete120(q)}}).filter(r=>r.msg&&!(norm(title).startsWith(norm(r.msg))||norm(r.msg).startsWith(norm(title)))).sort((a,b)=>b.score-a.score);
+  if(ranked[0]&&ranked[0].score>0)return ranked[0].msg;
+  let p='';try{p=globalThis.RadarInsights?.pointFor?.(x)||''}catch(e){}const pm=complete120(p);if(pm&&norm(pm)!==norm(title)&&!norm(pm).startsWith(norm(title)))return pm;
+  return semanticMessage(x);
 }
 function simpleWhy(x){
   if(x.headline){const w=globalThis.RadarInsights?.signalWhy?.(x)||x.why_it_matters||x.signal_note||'';return short(w,170)}
