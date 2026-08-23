@@ -1,29 +1,48 @@
-# V17.7.2 — source-first contextual recall
+# V17.7.3 — matrix-first depth + interpretive weak signals
 
-The supplied 2026-08-23T17:42Z state makes the latest zero-result scan diagnosable rather than ambiguous. It was not a healthy “nothing relevant exists” run: `scan_health` was degraded; OpenAlex executed only 4 of 32 planned queries and 0 base queries before a 429 stop; Crossref also produced repeated 429 warnings; and the whole run used only 254.7 of the 1200-second budget. At the same time, the preceding run had admitted an obviously irrelevant basketball-teaching paper into Strand B because “scenario construction” was interpreted as a futures method.
+The supplied 2026-08-23T18:22Z state showed that V17.7.2 substantially improved overall recall (8 new A and 2 new B), but not where the radar most needed evidence. Seven of the sixteen Frontier cells were still empty, only 14 scholarly gap queries were allocated in the run, Strand C added 0 items, and the scanner finished after 415.7 seconds despite a 1200-second scanner budget.
 
-V17.7.2 therefore fixes recall and precision together.
+V17.7.3 changes allocation rather than lowering the A/B quality gate.
 
-## 1. Source-first priority-journal sweep
+## 1. Empty Frontier cells now dominate gap discovery
 
-Eight rotating priority journals are scanned by recent contents each run, independently of keyword query wording. This gives the radar a direct route to high-quality journal output and makes rotation correspond more closely to the breadth of the configured source universe. The lane is execution-aware and bounded to 60 Crossref records per journal.
+When any 4×4 Frontier cell has zero evidence, zero-count cells receive the first gap-search slots. The initial scholarly gap lane expands from 14 to 28 queries. With the supplied state, that gives each of the seven empty cells four distinct scholarly formulations before near-empty cells receive a scholarly gap slot.
 
-## 2. Contextual Strand-A route
+The current zero cells are: Knowledge-C, Knowledge-D, Infrastructure-C, Infrastructure-D, Conversion-D, Rules-A and Rules-C.
 
-The original explicit EU R&I + geopolitics/economic-security route remains. A second bounded route admits direct European R&I evidence when the bibliographic evidence unit contains both an external-position mechanism (comparison/dependence/access/competition/flows) and a strategic R&I outcome (capacity, competitiveness, talent, scale, capability, infrastructure, etc.). Generic EU innovation-performance papers still fail.
+News gap coverage expands from 8 to 14 formulations, giving zero cells repeated current-evidence searches. Gap-specialist institutional sources expand from 6 to 10 extra sources per scan.
 
-## 3. Better diagnostics
+## 2. Spare runtime becomes real depth, not an early exit
 
-`stats.admission_diagnostics` records how many OpenAlex, Crossref and institutional records reached the substantive gate and whether they failed for no direct EU scope, no R&I evidence or no strategic context. A future zero scan can therefore be separated into retrieval failure versus classifier rejection.
+The overall scanner budget stays 1200 seconds. After the normal concurrent scholarly/news phase and institutional phase, a matrix-first deepening phase uses remaining runtime.
 
-## 4. Rate-limit resilience
+The deepening phase:
 
-The observed run was request-limited rather than time-limited. V17.7.2 slows anonymous traffic instead of spending the budget in a burst: OpenAlex uses one worker with a 1.0-second minimum request interval, Crossref a 1.2-second minimum interval. Crossref 429s receive bounded cooldown retries, while OpenAlex retains its established fail-fast-on-429 behavior after the slower pacing.
+- searches zero-count cells first;
+- fetches deeper OpenAlex/Crossref result pages directly, without re-fetching page 1 merely to advance depth;
+- uses up to 32 bounded waves of 14 queries;
+- tracks depth independently through the existing persistent result-depth state;
+- moves to the next-thinnest cells only after the zero-cell depth bank is exhausted;
+- stops with a 60-second scanner-finalisation reserve.
 
-## 5. Strand-B false-positive guard
+OpenAlex and Crossref normal gap depth ceilings increase from 6 to 10 pages. Source-specific 429/fatal failures disable only the affected deepening family rather than causing repeated hammering.
 
-“Scenario construction”, “scenario building” and “scenario development” are ambiguous outside futures studies. If they are the only futures-family match, the item must also contain an independent future/foresight/anticipatory/long-term/strategic-scenario cue. This blocks teaching/simulation scenario papers while preserving genuine future-scenario methods.
+## 3. Strand C now matches the intended interpretation role
 
-## 6. State preservation
+C remains A-anchored and curated-source-only, but a candidate no longer has to look linguistically “early” (pilot/draft/trial/delay) or explicitly say “new study shows”. A consequential current change can now enter the C prefilter when it combines:
 
-The bundled `radar.json` is byte-for-byte identical to the supplied `radar (13).json` (51 A / 12 B / 5 C). No existing accepted item is removed. The recall-profile reset affects only search progress/fingerprints so the widened routes get a real chance to inspect the four-month corpus.
+- a real change/action (launch, approval, restriction, investment, partnership, closure, scale-up, export control, regulation, etc.);
+- R&I/science/technology substance; and
+- strategic stakes such as capacity, competitiveness, dependence, access, collaboration, talent, sovereignty or security.
+
+The later Strand-A anchor is still mandatory. A generic consumer technology launch still fails. A US/China action without an EU mention can be considered by the prefilter only when it is materially R&I/strategic; without a matching A anchor it is discarded.
+
+The signal-discovery version changes to `v17.7.3-matrix-first-interpretive-signals`, so the next run gets one 30-day C recovery scan and then returns to the seven-day rolling window.
+
+## 4. Weak signals receive protected spare-time searches
+
+During matrix depth waves, a bounded weak-signal follow-up runs independently of A/B allocation (maximum four follow-up passes). It uses empty-cell queries plus direct searches for talent flows, technology dependence, research cooperation, critical-technology capability and new empirical competitiveness evidence.
+
+## 5. State preservation
+
+The bundled `radar.json` is byte-for-byte identical to the supplied `radar (14).json`: 66 Strand A, 19 Strand B and 5 Strand C. The V17.7.2 A/B recall profile is deliberately unchanged, so this patch does not reset the accepted corpus or reopen A/B solely because allocation changed. Only the C discovery version changes to trigger the intended one-time weak-signal recovery window.

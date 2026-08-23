@@ -715,7 +715,7 @@
   "institution_tier3_min_words": 1200,
   "admission_profile": "v17_7_2_A_direct_eu_explicit_or_external_position_B_method_contribution_C_A_weak_signals",
   "scan_budget_seconds": 1200,
-  "network_reserve_seconds": 150,
+  "network_reserve_seconds": 60,
   "request_timeout_seconds": 12,
   "scholarly_api_timeout_seconds": 12,
   "scholarly_api_workers": 8,
@@ -733,7 +733,7 @@
   "crossref_public_min_interval_seconds": 1.2,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.7.0-wider-reframing-recall",
+  "signal_discovery_version": "v17.7.3-matrix-first-interpretive-signals",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -826,18 +826,18 @@
   ],
   "crossref_priority_journal_rows": 35,
   "incremental_state_version": "v17.2-persistent-source-cursors",
-  "openalex_queries_per_scan": 40,
-  "crossref_broad_queries_per_scan": 35,
+  "openalex_queries_per_scan": 52,
+  "crossref_broad_queries_per_scan": 52,
   "crossref_priority_tasks_per_scan": 32,
   "institution_sources_per_scan": 18,
-  "news_stage_seconds": 300,
-  "openalex_stage_seconds": 390,
-  "crossref_stage_seconds": 540,
-  "institution_stage_seconds": 390,
+  "news_stage_seconds": 360,
+  "openalex_stage_seconds": 480,
+  "crossref_stage_seconds": 600,
+  "institution_stage_seconds": 420,
   "skip_known_items_before_classification": true,
   "skip_known_institution_urls_before_fetch": true,
   "institution_seen_cache_max": 5000,
-  "frontier_gap_queries_per_scan": 8,
+  "frontier_gap_queries_per_scan": 14,
   "frontier_gap_search_queries": {
     "knowledge-A": [
       "(EU OR Europe OR European) (researchers OR scientists OR \"research talent\") (attract OR retain OR recruit OR \"brain gain\") (\"strategic autonomy\" OR competitiveness OR \"research capacity\")",
@@ -873,7 +873,7 @@
     "rules-D": "(EU OR Europe OR European) (\"export controls\" OR sanctions OR foreign rules OR standards OR exclusion OR fragmentation) (research OR technology OR innovation) (blocked OR loses OR decline OR dependence OR \"fall behind\")"
   },
   "frontier_gap_priority_cells": [],
-  "frontier_gap_scholarly_queries_per_scan": 14,
+  "frontier_gap_scholarly_queries_per_scan": 28,
   "frontier_gap_scholarly_queries": {
     "knowledge-A": [
       "Europe research talent strategic autonomy competitiveness attraction",
@@ -1011,7 +1011,7 @@
   "inherited_corpus_audit_timeout_seconds": 8,
   "frontier_gap_historical_lookback_months": 0,
   "frontier_gap_scholarly_queries_per_target": 6,
-  "frontier_gap_institution_extra_sources_per_scan": 6,
+  "frontier_gap_institution_extra_sources_per_scan": 10,
   "frontier_gap_institution_url_terms": {
     "knowledge-A": [
       "research-talent",
@@ -1261,9 +1261,9 @@
     ]
   },
   "frontier_gap_target_count": 3,
-  "frontier_gap_targets_per_scan": 10,
-  "openalex_depth_pages_max": 6,
-  "crossref_depth_pages_max": 6,
+  "frontier_gap_targets_per_scan": 16,
+  "openalex_depth_pages_max": 10,
+  "crossref_depth_pages_max": 10,
   "crossref_priority_depth_pages_max": 4,
   "queries_b_method": [
     "developing strategic foresight methodology public policy",
@@ -1316,5 +1316,14 @@
   "crossref_source_first_journals_per_scan": 8,
   "crossref_source_first_rows": 60,
   "public_429_cooldown_seconds": 8,
-  "public_429_max_cooldown_seconds": 30
+  "public_429_max_cooldown_seconds": 30,
+  "allocation_profile_version": "v17.7.3-matrix-first-depth-budget",
+  "frontier_gap_empty_cell_weight": 4,
+  "frontier_gap_empty_news_weight": 2,
+  "frontier_gap_deepening_queries_per_wave": 14,
+  "frontier_gap_deepening_max_waves": 32,
+  "scan_finalize_reserve_seconds": 60,
+  "weak_signal_followup_every_n_waves": 2,
+  "weak_signal_followup_queries_per_wave": 12,
+  "weak_signal_followup_max_passes": 4
 }

@@ -110,20 +110,20 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 class ExpansionOnlyStateTests(unittest.TestCase):
     def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(data.get('strand_a', [])), 51)
-        self.assertEqual(len(data.get('strand_b', [])), 12)
+        self.assertEqual(len(data.get('strand_a', [])), 66)
+        self.assertEqual(len(data.get('strand_b', [])), 19)
         self.assertEqual(len(data.get('strand_c', [])), 5)
-        self.assertEqual(data.get('last_updated'), '2026-08-23T17:42Z')
-        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 56)
-        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 360)
+        self.assertEqual(data.get('last_updated'), '2026-08-23T18:22Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 1)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 64)
 
     def test_recall_expansion_triggers_signal_backfill_not_quality_cleanup(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         self.assertEqual(cfg['quality_profile_version'], data['quality_profile_version'])
         self.assertEqual(cfg['signal_quality_profile_version'], data['signal_quality_profile_version'])
-        self.assertEqual(cfg['signal_discovery_version'], data['signal_discovery_version'])
-        self.assertFalse(sr.needs_signal_backfill(data))
+        self.assertNotEqual(cfg['signal_discovery_version'], data['signal_discovery_version'])
+        self.assertTrue(sr.needs_signal_backfill(data))
         self.assertFalse(sr.needs_precision_corpus_cleanup(data))
         self.assertFalse(sr.needs_precision_signal_cleanup(data))
 

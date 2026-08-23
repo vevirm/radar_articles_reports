@@ -1,14 +1,18 @@
-V17.7.1 EXECUTED ROTATION + WIDER RECALL
+V17.7.3 MATRIX-FIRST DEPTH + INTERPRETIVE SIGNALS
 
-Build goal: make nominal rotation correspond to work that was actually searched, while preserving V17.7.0's wider weak-signal and R&I-futures-method recall.
+Build goal: spend the available scanner runtime on the parts of the radar that are still structurally weak, especially zero-count 4x4 Frontier cells and Strand-C interpretive updates.
 
-Key fixes:
-- cursors commit only executed work
-- stage budget != source failure
-- quiet scholarly rescue runs before institutional stage
-- bounded DOI metadata recovery for missing Crossref abstracts
-- historical exploration widened modestly
-- B method lane widened modestly
-- current corpus horizon preserved (no 12–24 month gap expansion)
-- supplied radar.json preserved unchanged
-- 174 tests pass
+Key changes:
+- 7 current zero-count Frontier cells get first claim on gap discovery
+- scholarly gap lane 14 -> 28; current state gives 4 formulations per zero cell
+- gap-news lane 8 -> 14; gap-specialist institutional sources 6 -> 10
+- post-stage matrix depth waves fetch deeper result pages directly
+- up to 32 depth waves, with zero cells exhausted before near-empty fallback
+- OpenAlex/Crossref gap depth ceiling 10 pages
+- scanner retains 1200-second hard budget and 60-second finalisation reserve
+- protected bounded weak-signal follow-up during depth phase
+- C accepts consequential current R&I changes when they strongly anchor to A, not only pilots/drafts/delays
+- one-time 30-day C recovery triggered by signal discovery version change
+- V17.7.2 A/B recall profile unchanged; no A/B reset
+- supplied radar.json preserved byte-for-byte (66 A / 19 B / 5 C)
+- 180 tests pass

@@ -362,7 +362,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor"):
         state[key] = int(state.get(key, 0) or 0)
 
     # Admission recall expansions must re-search previously rejected material. Earlier builds
@@ -474,11 +474,28 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
     target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
     targets = ordered[:target_limit]
 
+    # Empty cells are qualitatively different from merely thin cells. Give them the
+    # first claim on gap-discovery slots instead of treating a 0-count cell as only
+    # one increment scarcer than a 1-count cell. With empty cells present, repeated
+    # passes through them happen before near-empty cells receive spare slots.
+    empty_targets = [key for key in targets if counts.get(key, 0) == 0]
+    nonempty_targets = [key for key in targets if counts.get(key, 0) > 0]
+    empty_weight = max(1, int(CONFIG.get("frontier_gap_empty_cell_weight", 4) or 4))
     weighted_targets: list[str] = []
-    for level in range(target_count, 0, -1):
-        for key in targets:
-            if deficits[key] >= level:
-                weighted_targets.append(key)
+    if empty_targets:
+        for _ in range(empty_weight):
+            weighted_targets.extend(empty_targets)
+        # Keep a small tail for near-empty cells only after every zero cell has
+        # received several opportunities. This prevents the matrix from freezing.
+        for level in range(target_count - 1, 0, -1):
+            for key in nonempty_targets:
+                if deficits[key] >= level:
+                    weighted_targets.append(key)
+    else:
+        for level in range(target_count, 0, -1):
+            for key in targets:
+                if deficits[key] >= level:
+                    weighted_targets.append(key)
     if targets:
         last_index = FRONTIER_CELL_ORDER.index(targets[-1])
         state["frontier_gap_cursor"] = (last_index + 1) % len(FRONTIER_CELL_ORDER)
@@ -493,8 +510,16 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
     profiles = CONFIG.get("frontier_gap_search_queries", {})
     news_limit = max(0, int(CONFIG.get("frontier_gap_queries_per_scan", 8) or 0))
     queries: list[str] = []
-    news_used: dict[str, str] = {}
-    for key in targets:
+    news_used: dict[str, list[str]] = {}
+    news_weight = max(1, int(CONFIG.get("frontier_gap_empty_news_weight", 2) or 2))
+    news_targets: list[str] = []
+    if empty_targets:
+        for _ in range(news_weight):
+            news_targets.extend(empty_targets)
+        news_targets.extend(nonempty_targets)
+    else:
+        news_targets.extend(targets)
+    for key in news_targets:
         raw = profiles.get(key, "") if isinstance(profiles, dict) else ""
         vals = raw if isinstance(raw, list) else [raw]
         vals = list(dict.fromkeys(clean_text(v) for v in vals if clean_text(v)))
@@ -505,7 +530,7 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         query_cursors[cursor_key] = next_cursor
         if chosen and chosen[0] not in queries:
             queries.append(chosen[0])
-            news_used[key] = chosen[0]
+            news_used.setdefault(key, []).append(chosen[0])
         if len(queries) >= news_limit:
             break
 
@@ -570,6 +595,7 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         "deficits": deficits,
         "scarcity_scores": scarcity_scores,
         "targets": targets,
+        "empty_targets": empty_targets,
         "weighted_targets": weighted_targets,
         "queries": queries,
         "news_query_cells": news_used,
@@ -577,6 +603,33 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         "scholarly_query_cells": scholarly_cells,
         "classifier_error": error,
     }
+
+
+def frontier_gap_depth_bank(frontier_focus: dict[str, Any], include_nonempty: bool = False) -> list[str]:
+    """Return a matrix-first bank for spare-time depth passes.
+
+    When any Frontier cell is empty, only zero-count cells enter this bank. Once
+    every cell has evidence, the same mechanism naturally falls back to the
+    thinnest non-empty cells. Variants are interleaved by cell so depth time is
+    not monopolised by one topic.
+    """
+    profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
+    cells = list(frontier_focus.get("targets") or []) if include_nonempty else list(frontier_focus.get("empty_targets") or frontier_focus.get("targets") or [])
+    per_cell: dict[str, list[str]] = {}
+    for key in cells:
+        raw = profiles.get(key, []) if isinstance(profiles, dict) else []
+        vals = raw if isinstance(raw, list) else [raw]
+        vals = list(dict.fromkeys(clean_text(v) for v in vals if clean_text(v)))
+        if vals:
+            per_cell[key] = vals
+    bank: list[str] = []
+    max_len = max((len(v) for v in per_cell.values()), default=0)
+    for i in range(max_len):
+        for key in cells:
+            vals = per_cell.get(key, [])
+            if i < len(vals) and vals[i] not in bank:
+                bank.append(vals[i])
+    return bank
 
 
 # ---------------------------------------------------------------------------
@@ -1789,6 +1842,7 @@ def collect_openalex(
     depth_state: dict[str, Any] | None = None,
     depth_lane_overrides: dict[str, str] | None = None,
     execution_stats: dict[str, Any] | None = None,
+    depth_only: bool = False,
 ) -> list[dict[str, Any]]:
     """Keyless OpenAlex discovery with depth rotation.
 
@@ -1885,6 +1939,20 @@ def collect_openalex(
         query_from = (query_dates_override or {}).get(q, from_date)
         lane = clean_text((depth_lane_overrides or {}).get(q, ""))
         depth_key = f"{lane}::{q}" if lane else q
+        if depth_only:
+            with depth_lock:
+                page = max(2, int(depth_state.get(depth_key, 2) or 2))
+                if page > depth_max:
+                    page = 2
+            deep, deep_err, deep_count = fetch_page(q, query_from, page)
+            if deep_err:
+                return deep, deep_err
+            exhausted = deep_count < per_page or page >= depth_max
+            with depth_lock:
+                depth_state[depth_key] = 2 if exhausted else page + 1
+            if exhausted and isinstance(execution_stats, dict):
+                execution_stats.setdefault("openalex_depth_exhausted", set()).add(q)
+            return dedupe_candidates(deep), None
         latest, err, latest_count = fetch_page(q, query_from, 1)
         if err:
             return latest, err
@@ -2048,6 +2116,7 @@ def collect_crossref(
     priority_depth_state: dict[str, Any] | None = None,
     depth_lane_overrides: dict[str, str] | None = None,
     execution_stats: dict[str, Any] | None = None,
+    depth_only: bool = False,
 ) -> list[dict[str, Any]]:
     """Crossref discovery using bounded relevance + recency + rotating depth lanes.
 
@@ -2200,6 +2269,19 @@ def collect_crossref(
         lane = clean_text((depth_lane_overrides or {}).get(q, "")) if not journal else ""
         broad_key = f"{lane}::{q}" if lane else q
         key = f"{journal} || {q}" if journal else broad_key
+
+        if depth_only and not journal:
+            page = max(2, int(state_map.get(key, 2) or 2))
+            if page > max_pages:
+                page = 2
+            deep, deep_err, deep_count = fetch_page(q, journal, (page - 1) * page_rows, "relevance")
+            if deep_err:
+                return deep, deep_err
+            exhausted = deep_count < page_rows or page >= max_pages
+            state_map[key] = 2 if exhausted else page + 1
+            if exhausted and isinstance(execution_stats, dict):
+                execution_stats.setdefault("crossref_depth_exhausted", set()).add(q)
+            return dedupe_candidates(deep), None
 
         relevant, err, relevant_count = fetch_page(q, journal, 0, "relevance")
         if err:
@@ -3533,7 +3615,7 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
             "R&I competitiveness / technological capabilities", "supply chains / strategic dependencies",
             "economic security and R&I",
         }
-        if not (reframing_signal_text(full) and core_ri and strategic_frame and (found & derived_themes)):
+        if not ((reframing_signal_text(full) or material_update_signal_text(full)) and (core_ri or contains_any(full, MATERIAL_SIGNAL_RI)) and strategic_frame and (found & derived_themes)):
             return False
 
     # International research cooperation/mobility is itself a valid geopolitical channel.
@@ -3601,6 +3683,40 @@ def reframing_signal_text(text: str) -> bool:
     return bool((evidence and (finding or shift)) or (explicit_new and shift))
 
 
+MATERIAL_SIGNAL_CHANGE = [
+    'announce', 'launch', 'approve', 'adopt', 'propose', 'restrict', 'tighten', 'ban',
+    'suspend', 'delay', 'cancel', 'withdraw', 'sign', 'agree', 'partner', 'fund', 'invest',
+    'open', 'close', 'build', 'expand', 'scale', 'cut', 'increase', 'decrease', 'join',
+    'screening', 'export control', 'standard', 'regulation', 'strategy', 'programme', 'program',
+    'acquisition', 'relocat', 'outflow', 'inflow', 'shortage', 'bottleneck', 'dependency',
+]
+MATERIAL_SIGNAL_RI = [
+    'research', 'science', 'scientific', 'innovation', 'r&d', 'researcher', 'researchers',
+    'university', 'horizon europe', 'fp10', 'technology', 'semiconductor', 'chips', 'quantum',
+    'biotech', 'artificial intelligence', ' ai ', 'compute', 'cloud', 'data centre', 'data center',
+    'critical raw materials', 'critical minerals', 'deep tech', 'patent', 'standards',
+]
+MATERIAL_SIGNAL_STAKES = [
+    'strategic', 'security', 'sovereignty', 'autonomy', 'competitiveness', 'capacity', 'capability',
+    'dependence', 'dependency', 'supply chain', 'collaboration', 'cooperation', 'talent', 'mobility',
+    'funding', 'investment', 'access', 'export', 'foreign', 'china', 'united states', 'u.s.', ' us ',
+]
+
+def material_update_signal_text(text: str) -> bool:
+    """Current factual changes that can update an A claim even if they are not 'early'.
+
+    Strand C is interpretive evidence, not only pilots and drafts. The later A-anchor
+    gate remains mandatory, so this route can admit consequential policy/capability
+    moves without turning C into a general technology-news feed.
+    """
+    full = normalized(text)
+    return bool(
+        contains_any(full, MATERIAL_SIGNAL_CHANGE)
+        and contains_any(full, MATERIAL_SIGNAL_RI)
+        and contains_any(full, MATERIAL_SIGNAL_STAKES)
+    )
+
+
 WEAK_SIGNAL_MARKERS = [
     'pilot', 'trial', 'prototype', 'first to', 'first european', 'first eu', 'first national',
     'early-stage', 'early stage', 'emerging', 'experiment', 'testbed', 'limited to', 'targeted areas',
@@ -3622,13 +3738,14 @@ def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
     full = normalized(f'{title} {desc}')
     early = contains_any(full, WEAK_SIGNAL_MARKERS)
     reframing = reframing_signal_text(full)
-    if not (early or reframing):
+    material = material_update_signal_text(full)
+    if not (early or reframing or material):
         return False
     # Mature implementation is normally not a weak signal. New evidence/indicators are a separate
     # interpretive route, and counter-signals such as delays/opt-outs remain valid early signals.
     mature = contains_any(full, MATURE_SIGNAL_MARKERS)
     counter = contains_any(full, ['delay','delayed','postpone','pause','exception','waiver','limited to','targeted','opts out','declines to','does not include',"doesn't include"])
-    if mature and not counter and not reframing:
+    if mature and not counter and not reframing and not material:
         return False
     return True
 
@@ -3697,18 +3814,19 @@ def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
     return False, name
 
 
-def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None, coverage_queries: list[str] | None = None) -> list[dict[str, Any]]:
+def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None, coverage_queries: list[str] | None = None, include_base_queries: bool = True) -> list[dict[str, Any]]:
     lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
     start = now - dt.timedelta(hours=lookback_hours)
     workers = int(CONFIG.get("news_workers", 10))
     timeout = int(CONFIG.get("news_timeout_seconds", 10))
     per_feed = int(CONFIG.get("news_items_per_feed", 60))
     jobs: list[tuple[str, str, str, bool]] = []
-    for src in CONFIG["news_sources"]:
-        for q in news_queries(src["domain"], lookback_hours):
-            jobs.append((src["name"], src["domain"], q, False))
-    for q in global_news_queries(lookback_hours):
-        jobs.append(("", "", q, True))
+    if include_base_queries:
+        for src in CONFIG["news_sources"]:
+            for q in news_queries(src["domain"], lookback_hours):
+                jobs.append((src["name"], src["domain"], q, False))
+        for q in global_news_queries(lookback_hours):
+            jobs.append(("", "", q, True))
     days = max(2, min(30, (int(lookback_hours) + 23) // 24))
     for q in coverage_queries or []:
         if clean_text(q):
@@ -4430,6 +4548,116 @@ def main() -> int:
         institution_domains_all, institution_cursor_before, inst_planned_domains, executed_inst
     )
 
+    # Spend otherwise-idle scan time on the actual gaps. Earlier versions finished
+    # in 5-10 minutes even with a 20-minute scanner budget. This phase repeatedly
+    # advances deeper result pages for zero-count Frontier cells and gives Strand C
+    # a protected anchor-focused follow-up pass. It stops before the hard deadline so
+    # radar.json can still be assembled and committed safely.
+    deepening = {
+        "attempted": False, "waves": 0, "gap_queries_executed": 0,
+        "openalex_candidates": 0, "crossref_candidates": 0,
+        "weak_signal_followup_candidates": 0,
+    }
+    gap_depth_bank = frontier_gap_depth_bank(frontier_focus)
+    gap_depth_fallback_bank = frontier_gap_depth_bank(frontier_focus, include_nonempty=True)
+    using_fallback_depth = not bool(frontier_focus.get("empty_targets"))
+    deep_cursor = int(state.get("frontier_gap_depth_cursor", 0) or 0)
+    deep_batch_size = max(1, int(CONFIG.get("frontier_gap_deepening_queries_per_wave", 14) or 14))
+    deep_max_waves = max(0, int(CONFIG.get("frontier_gap_deepening_max_waves", 16) or 16))
+    deep_stop_remaining = max(30, int(CONFIG.get("scan_finalize_reserve_seconds", 60) or 60))
+    deep_news_every = max(1, int(CONFIG.get("weak_signal_followup_every_n_waves", 2) or 2))
+    deep_news_limit = max(0, int(CONFIG.get("weak_signal_followup_queries_per_wave", 10) or 10))
+    deep_news_max_passes = max(0, int(CONFIG.get("weak_signal_followup_max_passes", 4) or 4))
+    deep_news_passes = 0
+    deep_oa_disabled = oa_failed
+    deep_cr_disabled = cr_failed
+    exhausted_oa: set[str] = set()
+    exhausted_cr: set[str] = set()
+    while (
+        gap_depth_bank and deepening["waves"] < deep_max_waves
+        and budget_remaining() > deep_stop_remaining
+        and not (deep_oa_disabled and deep_cr_disabled)
+    ):
+        available = [q for q in gap_depth_bank if not (q in exhausted_oa and q in exhausted_cr)]
+        if not available and not using_fallback_depth:
+            # Zero cells have been searched through the configured depth. Only now
+            # spend remaining time on the next-thinnest cells.
+            gap_depth_bank = gap_depth_fallback_bank
+            using_fallback_depth = True
+            deep_cursor = 0
+            available = [q for q in gap_depth_bank if not (q in exhausted_oa and q in exhausted_cr)]
+        if not available:
+            break
+        batch, planned_next, _ = rotating_batch(available, deep_cursor % len(available), min(deep_batch_size, len(available)))
+        deepening["attempted"] = True
+        deepening["waves"] += 1
+        wave_no = deepening["waves"]
+        wave_budget = min(150, max(25, int(budget_remaining() - deep_stop_remaining)))
+        wave_deadline = time.monotonic() + wave_budget
+        wave_exec: dict[str, Any] = {}
+        log_progress(
+            f"Matrix-first depth wave {wave_no}: {len(batch)} query/queries; "
+            f"priority cells=" + ", ".join(frontier_focus.get("empty_targets") or frontier_focus.get("targets", []))
+        )
+        with cf.ThreadPoolExecutor(max_workers=3) as ex:
+            futs: list[tuple[str, Any]] = []
+            if not deep_oa_disabled:
+                futs.append(("oa", ex.submit(
+                    safe_stage, "OpenAlex matrix depth", collect_openalex, gap_from, warnings, batch, wave_deadline,
+                    {q: gap_from for q in batch}, state["result_depth"]["openalex"], {q: "gap" for q in batch}, wave_exec, True
+                )))
+            if not deep_cr_disabled:
+                futs.append(("cr", ex.submit(
+                    safe_stage, "Crossref matrix depth", collect_crossref, gap_from, warnings, batch, [], [], wave_deadline,
+                    {q: gap_from for q in batch}, state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
+                    {q: "gap" for q in batch}, wave_exec, True
+                )))
+            # Protected C lane: do not make weak signals wait for whatever time A/B leaves.
+            if deep_news_limit and deep_news_passes < deep_news_max_passes and wave_no % deep_news_every == 1:
+                signal_queries = list(dict.fromkeys((frontier_focus.get("queries") or []) + [
+                    "EU Europe research innovation strategic shift new evidence",
+                    "Europe research talent mobility brain drain new data",
+                    "EU technology dependence foreign suppliers new restriction investment",
+                    "European research cooperation China US new policy data",
+                    "EU critical technology capability gap investment launch restriction",
+                    "Europe science innovation competitiveness new report data",
+                ]))[:deep_news_limit]
+                deep_news_passes += 1
+                futs.append(("news", ex.submit(
+                    safe_stage, "weak-signal follow-up", collect_news, now, news_warnings, news_lookback, wave_deadline, signal_queries, False
+                )))
+            executed_this_wave: set[str] = set()
+            for family, fut in futs:
+                extra = [x for x in fut.result() if isinstance(x, dict)]
+                if family == "oa":
+                    oa.extend(extra); deepening["openalex_candidates"] += len(extra)
+                    executed_this_wave.update(wave_exec.get("openalex_queries", set()))
+                elif family == "cr":
+                    cr.extend(extra); deepening["crossref_candidates"] += len(extra)
+                    executed_this_wave.update(wave_exec.get("crossref_broad_queries", set()))
+                else:
+                    news.extend(extra); deepening["weak_signal_followup_candidates"] += len(extra)
+        exhausted_oa.update(wave_exec.get("openalex_depth_exhausted", set()))
+        exhausted_cr.update(wave_exec.get("crossref_depth_exhausted", set()))
+        execution_stats.setdefault("openalex_queries", set()).update(wave_exec.get("openalex_queries", set()))
+        execution_stats.setdefault("crossref_broad_queries", set()).update(wave_exec.get("crossref_broad_queries", set()))
+        execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(wave_exec.get("crossref_abstracts_enrichment_attempted", 0))
+        deepening["gap_queries_executed"] += len(executed_this_wave)
+        # Advance only across query positions that actually reached a source.
+        if executed_this_wave:
+            # Depth page state is the real persistence; this cursor only spreads the
+            # first wave across formulations on the next run.
+            deep_cursor = (deep_cursor + len(batch)) % max(1, len(gap_depth_bank))
+        if not executed_this_wave:
+            break
+        # Stop a family after a hard source failure; the other family can keep using depth time.
+        if source_stage_failed(warnings, "openalex") or any("openalex http 429" in normalized(w) for w in warnings):
+            deep_oa_disabled = True
+        if source_stage_failed(warnings, "crossref") or any("crossref http 429" in normalized(w) or "crossref" in normalized(w) and "rate limited after cooldown" in normalized(w) for w in warnings):
+            deep_cr_disabled = True
+    state["frontier_gap_depth_cursor"] = deep_cursor
+    warnings.extend(x for x in news_warnings if x not in warnings)
+
     def finish_cycle(key: str, wrapped: bool, failed: bool) -> None:
         state["cycle_failed"][key] = bool(state["cycle_failed"].get(key)) or bool(failed)
         if wrapped:
@@ -4543,6 +4771,7 @@ def main() -> int:
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
+        "allocation_profile_version": str(CONFIG.get("allocation_profile_version", "")),
         "scan_state": state,
         "zero_config_scan": True,
         "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v15_scan_repair")),
@@ -4594,6 +4823,7 @@ def main() -> int:
                 "themes": exploration.get("themes", []),
             },
             "quiet_scan_rescue": quiet_rescue,
+            "matrix_first_deepening": deepening,
         },
         "strand_a": strand_a,
         "strand_b": strand_b,
@@ -4657,6 +4887,10 @@ def main() -> int:
             "crossref_priority_depth_tasks_tracked": len(state.get("result_depth", {}).get("crossref_priority", {})),
             "frontier_qualifying_before_scan": frontier_focus["qualifying"],
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
+            "frontier_empty_cells_targeted": len(frontier_focus.get("empty_targets", [])),
+            "frontier_gap_depth_waves": int(deepening.get("waves", 0)),
+            "frontier_gap_depth_queries_executed": int(deepening.get("gap_queries_executed", 0)),
+            "weak_signal_followup_candidates": int(deepening.get("weak_signal_followup_candidates", 0)),
             "frontier_coverage_classifier_ok": not bool(frontier_focus["classifier_error"]),
             "signal_recovery_backfill": signal_backfill,
             "signal_backfill_complete": signal_backfill_complete,

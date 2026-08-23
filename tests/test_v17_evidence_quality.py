@@ -12,7 +12,7 @@ class V17EvidenceQualityTests(unittest.TestCase):
     def test_scan_budget_finishes_inside_30_minute_job_with_commit_margin(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
         self.assertEqual(cfg['scan_budget_seconds'], 1200)
-        self.assertGreaterEqual(cfg.get('network_reserve_seconds', 0), 120)
+        self.assertGreaterEqual(cfg.get('network_reserve_seconds', 0), 60)
         workflow = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
         self.assertIn('timeout-minutes: 30', workflow)
 

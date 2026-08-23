@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar — V17.7.2
+# R&I Geopolitics Radar — V17.7.3
 
 This repository uses three deliberately separate layers:
 
@@ -77,3 +77,12 @@ V17.7.2 separates accepted-corpus persistence from rejection/search persistence.
 V17.7.2 responds to the observed degraded zero-result run. It adds a bounded source-first recent-contents sweep across rotating priority journals, a contextual Strand-A route for direct European R&I external-position evidence that does not need literal geopolitical vocabulary, and explicit admission diagnostics. Anonymous API pacing is more conservative (OpenAlex one worker / 1.0 s minimum interval; Crossref 1.2 s minimum interval), while Crossref uses bounded cooldown retries on 429 responses. Ambiguous “scenario construction/building/development” language now needs an independent futures/strategic cue, preventing classroom or simulation “scenario” papers from entering Strand B.
 
 The bundled `radar.json` is the user-supplied 2026-08-23T17:42Z state byte-for-byte. No accepted A/B/C item is deleted by this patch.
+
+
+## V17.7.3 matrix-first depth
+
+V17.7.3 makes the 4×4 Frontier matrix an allocation priority rather than a small side lane. If any cell is empty, the first 28 scholarly gap-search slots go to zero-count cells (four formulations per zero cell in the supplied state), news gap coverage expands to 14 searches, and up to 10 specialist institutional sources can be added. After the normal scan phases, remaining runtime is spent on direct deeper result pages for the zero-cell query bank; only after that bank is exhausted does spare time move to near-empty cells. The scanner keeps the 1200-second hard budget and a 60-second finalisation reserve.
+
+Strand C is also aligned more closely with its interpretive purpose: pilots/drafts/delays and new empirical findings remain valid, but consequential current R&I policy/capability/talent/infrastructure/investment/restriction changes can also qualify when they strongly anchor to Strand A. A bounded protected C follow-up runs during spare-time depth work. The changed signal-discovery version triggers one 30-day weak-signal recovery scan.
+
+The bundled `radar.json` is the supplied 2026-08-23T18:22Z state unchanged (66 A / 19 B / 5 C).

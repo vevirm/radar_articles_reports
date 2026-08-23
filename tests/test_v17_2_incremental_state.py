@@ -103,7 +103,7 @@ class V172IncrementalStateTests(unittest.TestCase):
         self.assertLess(cfg['openalex_stage_seconds'], cfg['scan_budget_seconds'])
         self.assertLess(cfg['crossref_stage_seconds'], cfg['scan_budget_seconds'])
         self.assertLess(cfg['institution_stage_seconds'], cfg['scan_budget_seconds'])
-        self.assertGreaterEqual(cfg['network_reserve_seconds'], 120)
+        self.assertGreaterEqual(cfg['network_reserve_seconds'], 60)
 
 
 if __name__ == '__main__':

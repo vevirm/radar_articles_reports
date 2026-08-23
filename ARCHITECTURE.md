@@ -1,4 +1,4 @@
-# Architecture — V17.6.1 A/B/C semantic separation
+# Architecture — V17.7.3 A/B/C semantic separation and matrix-first allocation
 
 The radar has four stages: discovery, admission, cumulative storage, and interpretation.
 
@@ -6,7 +6,7 @@ The radar has four stages: discovery, admission, cumulative storage, and interpr
 
 `scripts/scan_radar.py` stores rotation state in `radar.json::scan_state`. Independent cursors cover OpenAlex, Crossref broad queries, priority-journal tasks, institutional sources, a dedicated B-method query bank, frontier-gap queries, frontier specialist sources and deeper result pages. These cursors survive quality-profile changes.
 
-Gap scanning can allocate extra effort to sparse Frontier cells, but it cannot relax the A gate. The dedicated B lane rotates method-focused searches independently so method discovery does not depend on the topical A cursor.
+Gap scanning allocates first claim on spare discovery capacity to the sparsest Frontier cells without relaxing the A gate. Zero-count cells are searched repeatedly before near-empty cells. After the normal source stages, a matrix-first depth phase advances deeper scholarly result pages until the scan approaches its hard runtime budget. The dedicated B lane still rotates independently so method discovery does not depend on the topical A cursor.
 
 ## A — evidence
 
@@ -22,9 +22,9 @@ A domain study that merely applies Delphi, scenarios, system dynamics or another
 
 ## C — weak signals
 
-C contains early/uncertain developments, not a generic news feed. Signals must have weak-signal character such as pilots, trials, proposals, delays, targeted/limited arrangements, new entrants or early partnerships. Mature final implementation is excluded unless it contains a genuine counter-signal.
+C is an interpretive update layer, not a generic news feed. It accepts three bounded forms of current evidence: early/uncertain developments; new empirical findings/indicators; and consequential R&I changes such as investments, restrictions, standards, collaboration/talent moves or infrastructure/capability shifts. The third route does not require pilot/draft wording, but it must contain R&I substance plus strategic stakes.
 
-Every C item is anchored to A. B and generic watch themes are not valid anchors. Event-level headline normalisation collapses syndicated or paraphrased coverage of the same signal.
+Every C item is anchored to A. B and generic watch themes are not valid anchors. External US/China/global developments can reach the prefilter when materially relevant, but are discarded unless a specific or recurring Strand-A anchor explains the European significance. Event-level headline normalisation collapses syndicated or paraphrased coverage of the same signal.
 
 ## Frontier
 

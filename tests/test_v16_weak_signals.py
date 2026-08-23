@@ -25,7 +25,13 @@ class V16WeakSignalTests(unittest.TestCase):
     def test_external_technology_control_needs_explicit_european_relevance(self):
         title = 'US tightens export controls on advanced AI chips to China'
         desc = 'The new technology controls restrict semiconductor research equipment and deepen US-China strategic competition.'
-        self.assertFalse(sr.factual_news(title, desc))
+        self.assertTrue(sr.factual_news(title, desc))
+        news = [{
+            'headline': title, 'source': 'Reuters', 'date': '2026-08-20T08:00Z', 'link': 'https://example.org/us-controls',
+            '_desc': desc, '_themes': sr.themes_for(f'{title} {desc}'),
+            '_entities': sr.distinct_matches(f'{title} {desc}', sr.ENTITY_TERMS + sr.GEO_ACTORS),
+        }]
+        self.assertEqual(sr.anchor_news(news, []), [])
         self.assertTrue(sr.factual_news(
             'US pilots tighter export controls on advanced AI chips to China, raising concerns for Europe',
             'A targeted trial would expose European semiconductor researchers and firms to new equipment-access constraints.'

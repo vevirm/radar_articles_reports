@@ -69,7 +69,7 @@ console.log(JSON.stringify(scores));
         self.assertEqual(plan["deficits"]["conversion-B"], 1)
         self.assertEqual(plan["deficits"]["knowledge-A"], 0)
         weighted = plan["weighted_targets"]
-        self.assertEqual(weighted.count("knowledge-D"), 3)
+        self.assertEqual(weighted.count("knowledge-D"), 4)
         self.assertEqual(weighted.count("rules-C"), 2)
         self.assertEqual(weighted.count("conversion-B"), 1)
         self.assertEqual(weighted.count("knowledge-A"), 0)

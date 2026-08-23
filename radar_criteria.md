@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.7.1 scanner behavior (V17.6.2 quality profile)
+# Radar admission criteria — V17.7.3 scanner behavior (V17.6.2 A/B quality profile)
 
 ## A — EU R&I in geopolitical context
 
@@ -25,4 +25,4 @@ Delphi, system dynamics, agent-based modelling and similar auxiliary techniques 
 
 ## C — weak signals that may change how we see A
 
-C contains early, uncertain or surprising current developments that connect back to A. C cannot be justified by B alone. Mature routine news and duplicate coverage are excluded.
+C contains current evidence that can change how Strand A should be interpreted. This includes early/uncertain developments (pilots, proposals, delays, targeted arrangements), new empirical findings/indicators, and consequential current R&I changes in policy, capacity, talent, infrastructure, investment, standards, access, collaboration or restrictions. C cannot be justified by B alone: every item must anchor to an existing A publication or recurring A theme. Generic technology/business news, routine implementation with no strategic R&I consequence, and duplicate coverage are excluded.
