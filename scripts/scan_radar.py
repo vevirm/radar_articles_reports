@@ -123,6 +123,20 @@ def stage_deadline_reached(stage_deadline: float | None, reserve_seconds: int = 
     return stage_deadline is not None and time.monotonic() >= stage_deadline
 
 
+def source_stage_failed(warnings: list[str], label: str) -> bool:
+    """True only when a source stage actually reported a failure.
+
+    This is deliberately warning-based. The check is made after later stages have
+    run, when earlier stage deadlines are naturally already in the past.
+    """
+    nlabel = normalized(label)
+    relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
+    return any(
+        ("fatal stage error" in w) or ("budget reached" in w) or ("public endpoint unavailable" in w)
+        for w in relevant
+    )
+
+
 def stable_item_identity(title: str = "", doi_or_link: str = "") -> str:
     """Cheap DOI/title identity usable before expensive classification or page parsing."""
     raw = normalized(doi_or_link)
@@ -3821,19 +3835,12 @@ def main() -> int:
         stage_deadline=inst_deadline,
     )
 
-    def stage_failed(label: str, deadline: float | None = None) -> bool:
-        nlabel = normalized(label)
-        relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
-        warning_failure = any(
-            ("fatal stage error" in w) or ("budget reached" in w) or ("public endpoint unavailable" in w)
-            for w in relevant
-        )
-        local_deadline_hit = deadline is not None and time.monotonic() >= deadline
-        return warning_failure or local_deadline_hit
-
-    oa_failed = stage_failed("openalex", oa_deadline)
-    cr_failed = stage_failed("crossref", cr_deadline)
-    inst_failed = stage_failed("institution", inst_deadline)
+    # Detect actual source failures from collector warnings. Do not use the old
+    # per-source deadlines here: by this point institutional scanning has run and
+    # the earlier scholarly deadlines are expected to be in the past.
+    oa_failed = source_stage_failed(warnings, "openalex")
+    cr_failed = source_stage_failed(warnings, "crossref")
+    inst_failed = source_stage_failed(warnings, "institution")
 
     def finish_cycle(key: str, wrapped: bool, failed: bool) -> None:
         state["cycle_failed"][key] = bool(state["cycle_failed"].get(key)) or bool(failed)
@@ -3953,7 +3960,7 @@ def main() -> int:
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
 
     signal_backfill_ok = not (
-        stage_failed("weak-signal", news_deadline)
+        source_stage_failed(warnings, "weak-signal")
         or any("news scan budget reached" in normalized(w) for w in warnings)
     )
     overall_budget_hit = deadline_reached(0)

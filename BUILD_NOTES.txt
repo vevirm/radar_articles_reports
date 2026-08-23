@@ -1,3 +1,10 @@
+V17.6.5 ROTATION RESCUE FIX
+
+- Fixed a control-flow bug in stage failure detection: expired OpenAlex/Crossref deadlines were being treated as failures after the institutional stage, even when those scholarly stages completed normally.
+- This false state could block quiet-scan historical rescue, producing 0 additions even though the scanner had rotated and still had runtime available.
+- Failure detection is now based on explicit source warnings emitted by the collectors.
+- The supplied live radar.json is included so all current corpus and cursor/depth state continues without reset.
+
 V17.6.1 B METHOD-DEVELOPMENT PRECISION
 
 - A is the substantive evidence layer: EU R&I in geopolitical/economic-security context.

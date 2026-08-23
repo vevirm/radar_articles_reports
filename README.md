@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar — V17.6.3
+# R&I Geopolitics Radar — V17.6.5
 
 This repository uses three deliberately separate layers:
 
@@ -46,3 +46,10 @@ python -m unittest discover -s tests -v
 ## V17.6.4 rotation behavior
 
 Each scan now has two scholarly lanes: a recent-publication lane and a persisted full-corpus exploration lane. The exploration lane rotates across diversified topics and separate historical depth pages. A quiet first slice can trigger a small second-slice rescue when runtime remains. The main radar displays the topics explored in the last run.
+
+
+## V17.6.5 rotation-rescue fix
+
+- Fixes false scholarly-stage failure detection after institutional scanning.
+- A quiet run now performs its next historical-slice rescue when at least one scholarly source actually completed and sufficient runtime remains.
+- Persistent source, topic, and depth cursors are preserved; the supplied current `radar.json` is carried forward unchanged as the starting state.
