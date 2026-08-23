@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.7.3 scanner behavior (V17.6.2 A/B quality profile)
+# Radar admission criteria — V17.7.4 scanner behavior (V17.6.2 A/B quality profile)
 
 ## A — EU R&I in geopolitical context
 

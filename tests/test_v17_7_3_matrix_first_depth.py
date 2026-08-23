@@ -23,7 +23,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
         self.assertTrue(focus['empty_targets'])
         self.assertEqual(len(focus['scholarly_queries']), 28)
         used_cells = set(focus['scholarly_query_cells'])
-        self.assertLessEqual(used_cells, set(focus['empty_targets']))
+        self.assertTrue(set(focus['empty_targets']).issubset(used_cells))
         self.assertTrue(all(len(focus['scholarly_query_cells'].get(c, [])) >= 4 for c in focus['empty_targets']))
 
     def test_gap_depth_bank_is_zero_cell_only_until_matrix_has_no_zeros(self):
@@ -66,8 +66,8 @@ class MatrixFirstDepthTests(unittest.TestCase):
 
     def test_new_allocation_profile_does_not_reset_ab_recall_profile(self):
         self.assertEqual(sr.CONFIG['recall_profile_version'], 'v17.7.2-source-first-contextual-recall')
-        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.7.3-matrix-first-depth-budget')
-        self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.3-matrix-first-interpretive-signals')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.7.4-dynamic-stubborn-cell-recovery')
+        self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.4-direct-institutional-signals')
 
 
 if __name__ == '__main__':

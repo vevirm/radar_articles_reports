@@ -70,7 +70,8 @@
   function anchorTitle(anchor){return clean(anchor).replace(/\s*\(Strand\s+[ABCboth]+\)\s*$/i,'').trim()}
   function buildEvidenceIndex(data){
     const map=new Map();
-    for(const x of (Array.isArray(data?.strand_a)?data.strand_a:[])){
+    const evidence=[...(Array.isArray(data?.strand_a)?data.strand_a:[]),...(Array.isArray(data?.frontier_evidence)?data.frontier_evidence:[])];
+    for(const x of evidence){
       const title=clean(x.title||''); if(!title) continue;
       map.set(norm(title),x);
     }
@@ -101,7 +102,8 @@
   function evidenceCandidates(data){
     if(!RadarInsights||!RadarInsights.buildResearchInsights) return [];
     const out=[];
-    for(const group of RadarInsights.buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]})){
+    const evidence=[...(Array.isArray(data?.strand_a)?data.strand_a:[]),...(Array.isArray(data?.frontier_evidence)?data.frontier_evidence:[])];
+    for(const group of RadarInsights.buildInsights({strand_a:evidence,strand_b:[],strand_c:[]})){
       for(const x of group.items){
         const text=`${x.point} ${x.title} ${x.watchTheme||''} ${x.why||''}`;
         const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(text);

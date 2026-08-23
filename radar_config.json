@@ -518,6 +518,16 @@
       "name": "European Citizen Action Service",
       "domain": "ecas.org",
       "tier": 2
+    },
+    {
+      "name": "Interface Europe",
+      "domain": "interface-eu.org",
+      "tier": 2
+    },
+    {
+      "name": "Marie Skłodowska-Curie Actions",
+      "domain": "marie-sklodowska-curie-actions.ec.europa.eu",
+      "tier": 1
     }
   ],
   "crossref_institution_publishers": [
@@ -681,6 +691,18 @@
     {
       "name": "OECD",
       "domain": "oecd.org"
+    },
+    {
+      "name": "Marie Skłodowska-Curie Actions",
+      "domain": "marie-sklodowska-curie-actions.ec.europa.eu"
+    },
+    {
+      "name": "CESAER",
+      "domain": "cesaer.org"
+    },
+    {
+      "name": "Interface Europe",
+      "domain": "interface-eu.org"
     }
   ],
   "first_news_lookback_hours": 720,
@@ -733,7 +755,7 @@
   "crossref_public_min_interval_seconds": 1.2,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.7.3-matrix-first-interpretive-signals",
+  "signal_discovery_version": "v17.7.4-direct-institutional-signals",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -766,7 +788,12 @@
     "European R&D investment data shows strategic dependency technology",
     "Europe semiconductor quantum AI biotech research data shows capability",
     "Europe science technology report finds China United States competition",
-    "EU innovation research evidence shows economic security dependency"
+    "EU innovation research evidence shows economic security dependency",
+    "Europe research careers brain drain researchers new evidence",
+    "European research talent retention outflow new data",
+    "EU Choose Europe research careers brain drain implementation",
+    "Europe scientists leaving research capacity new survey",
+    "European research workforce international talent flows data"
   ],
   "quality_profile_version": "v17.6.2-B-futures-method-as-such",
   "crossref_priority_journals": [
@@ -897,15 +924,26 @@
       "European research collaboration non-EU expertise strategic dependency",
       "Europe foreign scientific talent reliance innovation performance",
       "EU research workforce international dependence competitiveness",
-      "European Research Area foreign expertise dependence capacity"
+      "European Research Area foreign expertise dependence capacity",
+      "Europe AI talent foreign trained researchers international workforce dependence",
+      "European research workforce international talent dependence data",
+      "EU scientific workforce foreign researchers expertise reliance",
+      "Europe research excellence international researchers dependence evidence"
     ],
     "knowledge-D": [
+      "Choose Europe research careers brain drain CESAER survey",
       "EU brain drain research talent strategic autonomy competitiveness",
       "Europe scientists leaving US China research capacity",
       "European Research Area researcher outflow innovation decline",
       "EU research talent loss scientific workforce competitiveness",
       "Europe researcher emigration strategic capacity innovation",
-      "European scientists relocate abroad research security capacity"
+      "European scientists relocate abroad research security capacity",
+      "Europe research careers brain drain survey universities researchers",
+      "European scientists leaving research careers United States survey",
+      "Europe researcher outflow retention precarious careers science",
+      "European research workforce talent loss emigration data",
+      "Europe brain drain academic researchers temporary contracts competitiveness",
+      "EU researchers leave abroad scientific capacity brain drain evidence"
     ],
     "infrastructure-A": [
       "Europe strategic research infrastructure domestic capacity investment",
@@ -937,7 +975,9 @@
       "European infrastructure chokepoint restricted access competitiveness",
       "EU semiconductor export controls infrastructure shortage",
       "Europe critical research infrastructure supply disruption capacity loss",
-      "European compute access restrictions innovation decline"
+      "European compute access restrictions innovation decline",
+      "Europe critical technology access cut off no substitute research infrastructure",
+      "EU compute chip access shortage foreign supplier research capacity loss"
     ],
     "conversion-A": [
       "Europe deep tech scale-up manufacturing strategic autonomy",
@@ -969,7 +1009,9 @@
       "European manufacturing closure innovation capability decline",
       "EU technology company relocation strategic capacity loss",
       "Europe scale-up acquisition foreign hollowing out innovation",
-      "European deep tech funding gap firms leave abroad"
+      "European deep tech funding gap firms leave abroad",
+      "Europe deep tech companies leave scale abroad capability loss evidence",
+      "EU startup scaleup relocation abroad innovation capacity hollowing out"
     ],
     "rules-A": [
       "EU technology standards adopted global innovation advantage",
@@ -993,7 +1035,9 @@
       "European innovation foreign standards rule taker dependence",
       "EU research technology foreign regulation strategic dependency",
       "Europe US export controls technology access innovation",
-      "European firms non-EU platform rules dependence"
+      "European firms non-EU platform rules dependence",
+      "Europe follows US technology export rules dependence innovation access",
+      "EU firms dependent on foreign standards technology rules competitiveness"
     ],
     "rules-D": [
       "EU technology policy gridlock innovation competitiveness",
@@ -1018,7 +1062,10 @@
       "attract-researchers",
       "talent-attraction",
       "brain-gain",
-      "research-careers"
+      "research-careers",
+      "choose-europe",
+      "brain-drain",
+      "talent-retention"
     ],
     "knowledge-B": [
       "research-security",
@@ -1032,7 +1079,12 @@
       "researcher-mobility",
       "foreign-talent",
       "research-collaboration",
-      "scientific-cooperation"
+      "scientific-cooperation",
+      "choose-europe",
+      "research-careers",
+      "research-talent",
+      "brain-drain",
+      "talent-retention"
     ],
     "knowledge-D": [
       "brain-drain",
@@ -1041,7 +1093,8 @@
       "research-talent",
       "talent-retention",
       "brain-circulation",
-      "research-careers"
+      "research-careers",
+      "choose-europe"
     ],
     "infrastructure-A": [
       "research-infrastructure",
@@ -1142,6 +1195,8 @@
   },
   "frontier_gap_institution_sources": {
     "knowledge-A": [
+      "marie-sklodowska-curie-actions.ec.europa.eu",
+      "interface-eu.org",
       "research-and-innovation.ec.europa.eu",
       "euraxess.ec.europa.eu",
       "cesaer.org",
@@ -1156,6 +1211,8 @@
       "scienceeurope.org"
     ],
     "knowledge-C": [
+      "marie-sklodowska-curie-actions.ec.europa.eu",
+      "interface-eu.org",
       "research-and-innovation.ec.europa.eu",
       "euraxess.ec.europa.eu",
       "eua.eu",
@@ -1163,6 +1220,8 @@
       "cesaer.org"
     ],
     "knowledge-D": [
+      "marie-sklodowska-curie-actions.ec.europa.eu",
+      "interface-eu.org",
       "europarl.europa.eu",
       "op.europa.eu",
       "research-and-innovation.ec.europa.eu",
@@ -1317,13 +1376,18 @@
   "crossref_source_first_rows": 60,
   "public_429_cooldown_seconds": 8,
   "public_429_max_cooldown_seconds": 30,
-  "allocation_profile_version": "v17.7.3-matrix-first-depth-budget",
+  "allocation_profile_version": "v17.7.4-dynamic-stubborn-cell-recovery",
   "frontier_gap_empty_cell_weight": 4,
   "frontier_gap_empty_news_weight": 2,
   "frontier_gap_deepening_queries_per_wave": 14,
   "frontier_gap_deepening_max_waves": 32,
   "scan_finalize_reserve_seconds": 60,
   "weak_signal_followup_every_n_waves": 2,
-  "weak_signal_followup_queries_per_wave": 12,
-  "weak_signal_followup_max_passes": 4
+  "weak_signal_followup_queries_per_wave": 14,
+  "weak_signal_followup_max_passes": 8,
+  "frontier_gap_recompute_every_n_waves": 1,
+  "frontier_stubborn_recovery_enabled": true,
+  "frontier_stubborn_recovery_lookback_months": 12,
+  "frontier_stubborn_recovery_seconds": 240,
+  "frontier_stubborn_recovery_max_queries": 30
 }

@@ -1,48 +1,45 @@
-# V17.7.3 — matrix-first depth + interpretive weak signals
+# V17.7.4 — dynamic stubborn-cell recovery
 
-The supplied 2026-08-23T18:22Z state showed that V17.7.2 substantially improved overall recall (8 new A and 2 new B), but not where the radar most needed evidence. Seven of the sixteen Frontier cells were still empty, only 14 scholarly gap queries were allocated in the run, Strand C added 0 items, and the scanner finished after 415.7 seconds despite a 1200-second scanner budget.
+The supplied `radar (15).json` shows that V17.7.3 fixed the runtime-allocation problem: the scanner used about 19 minutes, executed 21 matrix-depth waves / 288 gap queries, added 15 Strand A items, 1 Strand B item and 5 Strand C signals. Yet five Frontier cells remain empty: Knowledge-C, Knowledge-D, Infrastructure-D, Conversion-D and Rules-C.
 
-V17.7.3 changes allocation rather than lowering the A/B quality gate.
+That means the remaining bottleneck is no longer raw depth. V17.7.4 changes *allocation, evidence horizon and source strategy* for stubborn cells without weakening the ordinary A/B corpus rules.
 
-## 1. Empty Frontier cells now dominate gap discovery
+## 1. Matrix depth now reallocates during the scan
 
-When any 4×4 Frontier cell has zero evidence, zero-count cells receive the first gap-search slots. The initial scholarly gap lane expands from 14 to 28 queries. With the supplied state, that gives each of the seven empty cells four distinct scholarly formulations before near-empty cells receive a scholarly gap slot.
+V17.7.3 froze the empty-cell list at scan start. If a cell filled in wave 3, later waves could still spend queries on it.
 
-The current zero cells are: Knowledge-C, Knowledge-D, Infrastructure-C, Infrastructure-D, Conversion-D, Rules-A and Rules-C.
+V17.7.4 recomputes the 4×4 Frontier matrix after every depth wave. A cell that fills drops out immediately. The next wave is rebuilt around whatever cells are still empty. Diagnostics record the reallocations and the empty-cell count after current-window depth.
 
-News gap coverage expands from 8 to 14 formulations, giving zero cells repeated current-evidence searches. Gap-specialist institutional sources expand from 6 to 10 extra sources per scan.
+## 2. Stubborn cells get a separate historical evidence lane
 
-## 2. Spare runtime becomes real depth, not an early exit
+If current-window depth still leaves cells empty, up to four minutes are reserved for a matrix-only recovery search over the previous 12 months.
 
-The overall scanner budget stays 1200 seconds. After the normal concurrent scholarly/news phase and institutional phase, a matrix-first deepening phase uses remaining runtime.
+This does **not** change the main A/B corpus date floor. Older recovered items are stored in a separate `frontier_evidence` array and are used only by the Frontier 4×4 evidence classifier/page. They never become normal Strand A items simply because a cell is sparse.
 
-The deepening phase:
+This is especially important for structural questions such as research-talent outflow, foreign expertise dependence, infrastructure chokepoints, scale-up hollowing-out and rule-taking. Strong evidence can fall just outside the rolling corpus floor while remaining highly relevant to the structural matrix.
 
-- searches zero-count cells first;
-- fetches deeper OpenAlex/Crossref result pages directly, without re-fetching page 1 merely to advance depth;
-- uses up to 32 bounded waves of 14 queries;
-- tracks depth independently through the existing persistent result-depth state;
-- moves to the next-thinnest cells only after the zero-cell depth bank is exhausted;
-- stops with a 60-second scanner-finalisation reserve.
+## 3. Knowledge-D / brain drain gets explicit recovery coverage
 
-OpenAlex and Crossref normal gap depth ceilings increase from 6 to 10 pages. Source-specific 429/fatal failures disable only the affected deepening family rather than causing repeated hammering.
+Knowledge-D now includes additional formulations around:
 
-## 3. Strand C now matches the intended interpretation role
+- Choose Europe / research careers / brain drain;
+- researcher outflow and emigration;
+- precarious research careers and retention;
+- scientific-workforce loss and competitiveness;
+- talent dependence and foreign-trained researchers.
 
-C remains A-anchored and curated-source-only, but a candidate no longer has to look linguistically “early” (pilot/draft/trial/delay) or explicitly say “new study shows”. A consequential current change can now enter the C prefilter when it combines:
+The source plan explicitly includes CESAER, Interface Europe and the European Commission's Marie Skłodowska-Curie Actions / Choose Europe material. Interface and CESAER are also available to the current weak-signal news lane.
 
-- a real change/action (launch, approval, restriction, investment, partnership, closure, scale-up, export control, regulation, etc.);
-- R&I/science/technology substance; and
-- strategic stakes such as capacity, competitiveness, dependence, access, collaboration, talent, sovereignty or security.
+## 4. Other stubborn cells get similarly specific formulations
 
-The later Strand-A anchor is still mandatory. A generic consumer technology launch still fails. A US/China action without an EU mention can be considered by the prefilter only when it is materially R&I/strategic; without a matching A anchor it is discarded.
+Infrastructure-D adds access-cutoff / no-substitute / compute-chip shortage formulations. Conversion-D adds scale-up relocation, acquisition and hollowing-out formulations. Rules-C adds foreign-rule / US export-rule / standards dependence formulations. Knowledge-C adds international-talent and expertise-dependence formulations.
 
-The signal-discovery version changes to `v17.7.3-matrix-first-interpretive-signals`, so the next run gets one 30-day C recovery scan and then returns to the seven-day rolling window.
+## 5. Direct institutional weak signals
 
-## 4. Weak signals receive protected spare-time searches
+Recent substantive pages from curated institutions can now enter the same Strand-C candidate pipeline even when Google News does not index them. They still need the normal C topical gate, factual-change/evidence gate and Strand-A anchor. This is intended for things such as new research-talent measures, implementation changes, restrictions, funding commitments or capacity decisions—not generic institutional webpages.
 
-During matrix depth waves, a bounded weak-signal follow-up runs independently of A/B allocation (maximum four follow-up passes). It uses empty-cell queries plus direct searches for talent flows, technology dependence, research cooperation, critical-technology capability and new empirical competitiveness evidence.
+The C discovery version changes to `v17.7.4-direct-institutional-signals`, so the first V17.7.4 run receives one 30-day recovery window and then returns to the normal rolling window.
 
-## 5. State preservation
+## 6. State preservation
 
-The bundled `radar.json` is byte-for-byte identical to the supplied `radar (14).json`: 66 Strand A, 19 Strand B and 5 Strand C. The V17.7.2 A/B recall profile is deliberately unchanged, so this patch does not reset the accepted corpus or reopen A/B solely because allocation changed. Only the C discovery version changes to trigger the intended one-time weak-signal recovery window.
+The bundled `radar.json` is byte-for-byte identical to the supplied `radar (15).json`: 81 Strand A, 20 Strand B and 10 Strand C. The V17.7.2 A/B recall profile is unchanged, so this patch does not trigger a general A/B corpus reset.

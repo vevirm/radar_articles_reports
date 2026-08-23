@@ -110,12 +110,12 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 class ExpansionOnlyStateTests(unittest.TestCase):
     def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(data.get('strand_a', [])), 66)
-        self.assertEqual(len(data.get('strand_b', [])), 19)
-        self.assertEqual(len(data.get('strand_c', [])), 5)
-        self.assertEqual(data.get('last_updated'), '2026-08-23T18:22Z')
-        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 1)
-        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 64)
+        self.assertEqual(len(data.get('strand_a', [])), 81)
+        self.assertEqual(len(data.get('strand_b', [])), 20)
+        self.assertEqual(len(data.get('strand_c', [])), 10)
+        self.assertEqual(data.get('last_updated'), '2026-08-23T18:51Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 5)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 96)
 
     def test_recall_expansion_triggers_signal_backfill_not_quality_cleanup(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
