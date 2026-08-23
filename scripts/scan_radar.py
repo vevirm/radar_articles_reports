@@ -5,12 +5,11 @@ Key properties
 --------------
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
-* Strand A requires substantive R&I/related-system content + geopolitics/economic security + EU relevance.
-  A same-sentence bridge is strong evidence, but a document-level bridge can also qualify.
+* Strand A requires direct EU scope plus substantive R&I evidence and either explicit geopolitical/economic-security evidence or a bounded external-position mechanism (dependence/competition/capability/talent etc.).
 * Strand B is a method-development library: a publication must contribute a new, adapted,
   extended, refined or otherwise explicitly developed futures/foresight method, or a genuinely
   forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
-  Merely using or evaluating an existing method is not enough.
+  Explicit development language is preferred; method-first papers with validation/transfer evidence can also qualify. Mere application is not enough.
 * Strand C is not a general news feed: every admitted item must be a factual current development
   or new evidence/indicator capable of reframing Strand A, with a strong R&I/geopolitical bridge.
   It must be anchored to substantive Strand-A evidence;
@@ -67,6 +66,7 @@ SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
+RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -85,6 +85,8 @@ KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
+ADMISSION_DIAGNOSTICS: Counter = Counter()
+ADMISSION_DIAGNOSTICS_LOCK = threading.Lock()
 UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
@@ -319,6 +321,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "openalex_cursor": 0,
             "crossref_broad_cursor": 0,
             "crossref_priority_cursor": 0,
+            "crossref_source_cursor": 0,
             "strand_b_method_cursor": 0,
             "institution_cursor": 0,
             "frontier_gap_cursor": 0,
@@ -359,10 +362,29 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor"):
         state[key] = int(state.get(key, 0) or 0)
+
+    # Admission recall expansions must re-search previously rejected material. Earlier builds
+    # cached rejected institutional URLs and preserved query/depth cursors across gate changes,
+    # so a wider classifier could never reconsider much of the corpus it was intended to rescue.
+    recall_changed = bool(previous.get("last_updated")) and previous.get("recall_profile_version") != RECALL_PROFILE_VERSION
+    if recall_changed:
+        for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor",
+                    "strand_b_method_cursor", "institution_cursor", "openalex_explore_cursor", "crossref_explore_cursor"):
+            state[key] = 0
+        state["result_depth"] = {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}}
+        state["institution_seen_fingerprints"] = {}
+        state["backfill"] = {"openalex": False, "crossref_broad": False, "crossref_priority": False, "institutions": False}
+        state["completed_cycles"] = {"openalex": 0, "crossref_broad": 0, "crossref_priority": 0, "institutions": 0}
+        state["cycle_failed"] = {"openalex": False, "crossref_broad": False, "crossref_priority": False, "institutions": False}
+        state["recall_reset_this_run"] = True
+    else:
+        state["recall_reset_this_run"] = False
+
     state["version"] = INCREMENTAL_STATE_VERSION
     state["source_expansion_version"] = SOURCE_EXPANSION_VERSION
+    state["recall_profile_version"] = RECALL_PROFILE_VERSION
     return state
 
 
@@ -614,6 +636,31 @@ GEO_STRONG = [
     "technology controls", "techno-nationalism", "technonationalism", "great power competition",
     "great-power competition", "friendshoring", "friend-shoring", "reshoring",
     "critical raw materials", "critical minerals", "strategic trade",
+]
+
+
+# V17.7.2 bounded contextual route for Strand A. Many high-quality R&I papers describe the
+# geopolitical mechanism empirically (external dependence, comparative capability, talent or
+# market position) without using words such as "geopolitics" or "economic security". The route
+# requires both an external/cross-border mechanism and a strategic R&I-system outcome, so a
+# generic EU innovation or education paper still does not qualify.
+A_EXTERNAL_RELATION = [
+    "china", "chinese", "united states", "u.s.", "us-china", "american", "russia", "russian",
+    "foreign", "non-eu", "non eu", "third country", "third countries", "international competition",
+    "global competition", "cross-border", "cross border", "international collaboration",
+    "international cooperation", "global supply chain", "global value chain", "foreign capital",
+    "foreign investment", "external supplier", "external suppliers", "overseas", "abroad",
+]
+A_STRATEGIC_RI_OUTCOME = [
+    "competitiveness", "competitive position", "research capacity", "scientific capacity",
+    "innovation capacity", "technological capabilities", "technology capabilities", "capability gap",
+    "capacity gap", "performance gap", "innovation gap", "funding gap", "investment gap",
+    "scale-up gap", "scale up gap", "leadership", "technology lead", "research lead", "lagging",
+    "falling behind", "catch up", "catch-up", "dependence", "dependency", "reliance", "resilience",
+    "access", "bottleneck", "shortage", "research talent", "brain drain", "brain gain",
+    "researcher outflow", "researcher inflow", "talent attraction", "talent retention",
+    "commercialisation", "commercialization", "industrialisation", "industrialization",
+    "scale-up", "scale up", "technology transfer", "knowledge transfer", "research infrastructure",
 ]
 CHINA_CONTEXT = ["china", "chinese"]
 CHINA_GEO_CONTEXT = [
@@ -1326,7 +1373,7 @@ def _bridge_sentence_for_a(text: str) -> str:
     return ''
 
 
-def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple[bool, list[str], list[str], str]:
+def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple[bool, list[str], list[str], str, str, list[str]]:
     title = clean_text(title)
     abstract = _strip_relevance_boilerplate(abstract)
     body = _strip_relevance_boilerplate(body)
@@ -1334,29 +1381,40 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     lead = clean_text(f'{ta}. {body[:6000]}')
     title_low = normalized(title)
     if any(x in title_low for x in A_FOCUS_EXCLUDE_TITLE):
-        return False, [], [], ''
+        return False, [], [], '', '', []
 
-    # For scholarly records the title/abstract is the evidence unit. Institutional work
-    # may use the executive lead, but a deep body mention cannot rescue an unrelated page.
     evidence_text = ta if source_kind == 'scholarly' else lead
     ri = _ri_hits(evidence_text)
     geo = _geo_hits(evidence_text)
     bridge = _bridge_sentence_for_a(evidence_text)
-
-    # At least one side must be visible in the title/abstract for institutional reports,
-    # and both sides must be visible there for scholarly papers.
     ri_ta = _ri_hits(ta)
     geo_ta = _geo_hits(ta)
-    if source_kind == 'scholarly':
-        focus = bool(ri_ta and geo_ta and (bridge or (ri_ta and geo_ta)))
-    else:
-        focus = bool(ri and geo and (bridge or (ri_ta and geo_ta)) and (ri_ta or geo_ta))
 
-    # Generic defence/cyber/AI papers are not A merely because EU appears as one case.
-    # Require an R&I-system phrase or a tech+R&I mechanism, not bare technology.
-    if focus and not ri:
-        focus = False
-    return focus, ri, geo, bridge
+    # Primary route: explicit R&I + geopolitical/economic-security evidence.
+    if source_kind == 'scholarly':
+        explicit_focus = bool(ri_ta and geo_ta)
+    else:
+        # Curated institutional analytical work may establish one side in title/description and
+        # the other in the executive lead. Requiring a same-sentence bridge discarded reports
+        # whose abstracts use neutral policy language before discussing the strategic mechanism.
+        explicit_focus = bool(ri and geo and (ri_ta or geo_ta))
+
+    # Secondary route: direct empirical mechanism of Europe's external R&I position. This route
+    # deliberately does not accept generic competitiveness/capacity alone.
+    context_text = ta if source_kind == 'scholarly' else lead
+    external = distinct_matches(context_text, A_EXTERNAL_RELATION)
+    outcomes = distinct_matches(context_text, A_STRATEGIC_RI_OUTCOME)
+    contextual_focus = bool(ri_ta and external and outcomes) if source_kind == 'scholarly' else bool(ri and external and outcomes and ri_ta)
+    # The contextual route is an expansion route, so page-type noise is fail-closed here.
+    # This does not affect explicit A evidence or Strand B method papers whose abstracts may
+    # legitimately mention workshops, calls, facilities or other methodological context.
+    if contextual_focus and document_exclusion_reason(title, context_text):
+        contextual_focus = False
+
+    focus = bool(explicit_focus or contextual_focus)
+    route = 'explicit-geopolitics' if explicit_focus else ('external-position-evidence' if contextual_focus else '')
+    context_evidence = list(dict.fromkeys(external + outcomes))[:6] if contextual_focus else []
+    return focus, ri, geo, bridge, route, context_evidence
 
 
 def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str], str, list[str], str]:
@@ -1392,6 +1450,20 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     candidate_families = core_families or (auxiliary if futures_framing else []) or (ri_families if ri_transfer_candidate else [])
     if not candidate_families:
         return False, all_families[:5], '', [], ''
+
+    # "Scenario construction/building/development" is linguistically ambiguous: it can mean
+    # constructing a simulated teaching/engineering scene rather than a future scenario. When
+    # these are the only futures-family hits, require an independent temporal/strategic futures
+    # cue. This keeps genuine scenario methodology while blocking false positives such as
+    # smart-classroom scenario construction.
+    ambiguous_scenario_only = bool(candidate_families) and all(
+        f in {'scenario construction', 'scenario building', 'scenario development'} for f in candidate_families
+    )
+    if ambiguous_scenario_only and not re.search(
+        r'\b(?:future|futures|foresight|anticipat\w*|long[- ]term|alternative futures|possible futures|strategic scenario\w*|scenario planning)\b',
+        normalized(ta),
+    ):
+        return False, candidate_families[:5], '', [], ''
 
     def sentence_is_candidate(sent: str) -> bool:
         sent_core = _method_matches(sent, B_CORE_FUTURES_METHODS)
@@ -1446,11 +1518,29 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         )
     )
 
-    if not (creation_bridge or title_creation):
+    # Method papers do not always use the performative verbs "we develop/propose". A method-first
+    # title plus validation/comparison/transfer evidence is sufficient when the paper is clearly
+    # about the reusable analytical method rather than merely applying one in a case study.
+    method_first_title = bool(
+        title_candidate
+        and re.search(r'\b(?:method|methodology|framework|toolkit|protocol|approach)\b', title_norm)
+        and not re.search(r'\b(?:using|application of|applications of|case study|case studies)\b', title_norm)
+    )
+    contribution_evidence = bool(re.search(
+        r'\b(?:validat|benchmark|compar(?:e|es|ed|ing|ison)|evaluat|robust|accuracy|performance|transferab|reusab|generaliz|generalis|procedure|workflow)\w*',
+        normalized(abstract),
+    ))
+    explicit_non_creation = bool(re.search(
+        r'\b(?:does not|do not|did not|without)\b.{0,140}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*',
+        normalized(abstract),
+    )) or contains_any(normalized(abstract), ['existing method', 'existing methodology', 'existing framework', 'existing protocol'])
+    method_contribution = bool(method_first_title and contribution_evidence and not explicit_non_creation)
+
+    if not (creation_bridge or title_creation or method_contribution):
         return False, candidate_families[:5], '', [], ''
 
     review_like = bool(re.search(r'\b(?:review|synthesis|overview|perspective|commentary|lessons from|using|application of|applications of)\b', title_norm))
-    if review_like and not creation_bridge:
+    if review_like and not (creation_bridge or method_contribution):
         return False, candidate_families[:5], '', [], ''
 
     # The R&I-futures route must remain about a reusable analytical method, not a domain-specific
@@ -1462,7 +1552,8 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
 
     suitability = distinct_matches(ta, B_SUITABILITY_CONTEXT + B_RI_METHOD_CONTEXT)
     transferability = distinct_matches(ta, B_TRANSFERABILITY_CUES)
-    return True, candidate_families[:5], creation_bridge, (suitability + transferability)[:6], route
+    method_bridge = creation_bridge or (abstract[:420] if method_contribution else '')
+    return True, candidate_families[:5], method_bridge, (suitability + transferability)[:6], route
 
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general') -> dict[str, Any]:
     """Classify the three-layer radar model.
@@ -1475,7 +1566,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     abstract = clean_text(abstract)
     body = clean_text(body)
 
-    a_focus, ri_hits, geo_hits, a_bridge = _a_focus_ok(title, abstract, body, source_kind)
+    a_focus, ri_hits, geo_hits, a_bridge, a_route, a_context = _a_focus_ok(title, abstract, body, source_kind)
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
     # A is precision-first: the paper must actually be Europe/EU/member-state scoped.
     a_pass = bool(a_focus and eu_rel == 'direct')
@@ -1492,6 +1583,8 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         'ri_evidence': ri_hits[:5],
         'geo_evidence': geo_hits[:5],
         'bridge_sentence': a_bridge,
+        'a_route': a_route if a_pass else '',
+        'a_context_evidence': a_context if a_pass else [],
         'bridge_supported': bool(a_bridge or (ri_hits and geo_hits)),
         'bridge_mode': 'sentence' if a_bridge else ('title/abstract' if a_pass else ''),
         'foresight_evidence': b_families[:5],
@@ -1632,6 +1725,26 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
     return False, 9, 9.0, source_name or "Unknown source", ""
 
 
+def _diag_inc(key: str, amount: int = 1) -> None:
+    with ADMISSION_DIAGNOSTICS_LOCK:
+        ADMISSION_DIAGNOSTICS[key] += amount
+
+
+def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
+    _diag_inc(f"{prefix}_evaluated")
+    if ev.get("a_pass") or ev.get("b_pass"):
+        _diag_inc(f"{prefix}_admitted_gate")
+        if ev.get("a_route"):
+            _diag_inc(f"{prefix}_a_route_{ev.get('a_route')}")
+        return
+    if ev.get("eu_relevance") != "direct":
+        _diag_inc(f"{prefix}_reject_no_direct_eu")
+    elif not ev.get("ri_evidence"):
+        _diag_inc(f"{prefix}_reject_no_ri")
+    else:
+        _diag_inc(f"{prefix}_reject_no_strategic_context")
+
+
 def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None) -> dict[str, Any] | None:
     title = clean_text(work.get("display_name"))
     abstract = openalex_abstract(work.get("abstract_inverted_index"))
@@ -1645,6 +1758,7 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
     if not quality_ok:
         return None
     ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
+    _record_ab_gate_diagnostic("openalex", ev)
     if not (ev["a_pass"] or ev["b_pass"]):
         return None
     if tier == 3 and ev["eu_relevance"] is None:
@@ -1903,6 +2017,7 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
     if not ok:
         return None
     ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
+    _record_ab_gate_diagnostic("crossref", ev)
     if not (ev["a_pass"] or ev["b_pass"]):
         return None
     if tier == 3 and ev["eu_relevance"] is None:
@@ -1926,6 +2041,7 @@ def collect_crossref(
     warnings: list[str],
     queries_override: list[str] | None = None,
     priority_tasks_override: list[tuple[str, str]] | None = None,
+    source_sweep_journals_override: list[str] | None = None,
     stage_deadline: float | None = None,
     query_dates_override: dict[str, dt.date] | None = None,
     broad_depth_state: dict[str, Any] | None = None,
@@ -1948,6 +2064,7 @@ def collect_crossref(
     priority_journals = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
     priority_queries = list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
     priority_tasks = priority_tasks_override if priority_tasks_override is not None else [(j, q) for j in priority_journals for q in priority_queries]
+    source_sweep_journals = list(dict.fromkeys(source_sweep_journals_override or []))
     min_interval = float(CONFIG.get("crossref_public_min_interval_seconds", 0.80))
     timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
     retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
@@ -1957,6 +2074,7 @@ def collect_crossref(
     priority_depth_state = priority_depth_state if isinstance(priority_depth_state, dict) else {}
     executed_broad_queries: set[str] = set()
     executed_priority_tasks: set[tuple[str, str]] = set()
+    executed_source_journals: set[str] = set()
     execution_lock = threading.Lock()
     enrichment_limit = max(0, int(CONFIG.get("crossref_missing_abstract_enrichment_per_scan", 18) or 0))
     enrichment_timeout = max(3, int(CONFIG.get("crossref_missing_abstract_enrichment_timeout_seconds", 8) or 8))
@@ -2048,7 +2166,17 @@ def collect_crossref(
                     works = r.json().get("message", {}).get("items", [])
                     return convert_items(works, query_from, q, journal), None, len(works)
                 if r.status_code == 429:
-                    return [], "HTTP 429 rate limited", 0
+                    if attempt < retries:
+                        retry_after = clean_text(r.headers.get("Retry-After"))
+                        try:
+                            base = float(CONFIG.get("public_429_cooldown_seconds", 8) or 8)
+                            cap = float(CONFIG.get("public_429_max_cooldown_seconds", 30) or 30)
+                            delay = min(cap, max(base * (attempt + 1), float(retry_after))) if retry_after else min(cap, base * (attempt + 1))
+                        except Exception:
+                            delay = min(30.0, 8.0 * (attempt + 1))
+                        time.sleep(delay)
+                        continue
+                    return [], "HTTP 429 rate limited after cooldown retries", 0
                 if r.status_code in {500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
                     try:
@@ -2095,10 +2223,68 @@ def collect_crossref(
         state_map[key] = 2 if deep_count < page_rows or page >= max_pages else page + 1
         return dedupe_candidates(combined + deep), None
 
+    def fetch_source_journal(journal: str) -> tuple[list[dict[str, Any]], str | None]:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            return [], "budget"
+        with execution_lock:
+            executed_source_journals.add(journal)
+        params = {
+            "query.container-title": journal,
+            "filter": f"from-pub-date:{DATE_FLOOR.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
+            "rows": int(CONFIG.get("crossref_source_first_rows", 60)),
+            "sort": "published", "order": "desc",
+            "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
+        }
+        for attempt in range(retries + 1):
+            wait_for_slot()
+            try:
+                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                if r.status_code == 200:
+                    works = r.json().get("message", {}).get("items", [])
+                    # query.container-title is fuzzy; retain only the requested venue or a close punctuation variant.
+                    target = re.sub(r'[^a-z0-9]+', '', normalized(journal))
+                    exact = []
+                    for w in works:
+                        actual = clean_text((w.get("container-title") or [""])[0])
+                        canon = re.sub(r'[^a-z0-9]+', '', normalized(actual))
+                        if actual and (canon == target or canon.replace('and','') == target.replace('and','')):
+                            exact.append(w)
+                    return convert_items(exact, DATE_FLOOR, "source-first recent contents", journal), None
+                if r.status_code == 429:
+                    if attempt < retries:
+                        retry_after = clean_text(r.headers.get("Retry-After"))
+                        try:
+                            base = float(CONFIG.get("public_429_cooldown_seconds", 8) or 8)
+                            cap = float(CONFIG.get("public_429_max_cooldown_seconds", 30) or 30)
+                            delay = min(cap, max(base * (attempt + 1), float(retry_after))) if retry_after else min(cap, base * (attempt + 1))
+                        except Exception:
+                            delay = min(30.0, 8.0 * (attempt + 1))
+                        time.sleep(delay)
+                        continue
+                    return [], "HTTP 429 rate limited after cooldown retries"
+                if r.status_code in {500, 502, 503, 504} and attempt < retries:
+                    time.sleep(min(8.0, 1.5 * (attempt + 1))); continue
+                return [], f"HTTP {r.status_code}"
+            except Exception as e:
+                if attempt < retries:
+                    time.sleep(min(6.0, 1.5 * (attempt + 1))); continue
+                return [], type(e).__name__
+        return [], "request failed"
+
     out: list[dict[str, Any]] = []
     budget_hit = False
 
-    if priority_tasks:
+    if source_sweep_journals:
+        log_progress(f"Crossref source-first journal sweep: {len(source_sweep_journals)} rotating journal(s) this run")
+        for journal in source_sweep_journals:
+            items, err = fetch_source_journal(journal)
+            out.extend(items)
+            if err == "budget":
+                budget_hit = True; break
+            if err:
+                warnings.append(f"Crossref source-first {journal}: {err}")
+
+    if priority_tasks and not budget_hit:
         log_progress(f"Crossref priority journal sweep: {len(priority_tasks)} rotating task(s) this run")
         for journal, q in priority_tasks:
             if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
@@ -2131,6 +2317,7 @@ def collect_crossref(
     if isinstance(execution_stats, dict):
         execution_stats.setdefault("crossref_broad_queries", set()).update(executed_broad_queries)
         execution_stats.setdefault("crossref_priority_tasks", set()).update(executed_priority_tasks)
+        execution_stats.setdefault("crossref_source_journals", set()).update(executed_source_journals)
         execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(enrichment_total[0])
     return dedupe_candidates(out)
 
@@ -2364,6 +2551,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             return None
 
     ev = gate_scope(title, desc, body, tier, source_kind="institutional")
+    _record_ab_gate_diagnostic("institution", ev)
     if not (ev["a_pass"] or ev["b_pass"]):
         return None
     if tier == 3 and ev["eu_relevance"] is None:
@@ -3794,7 +3982,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, ACTIVE_FRONTIER_GAP_URL_TERMS
+    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -3802,6 +3990,8 @@ def main() -> int:
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
+    with ADMISSION_DIAGNOSTICS_LOCK:
+        ADMISSION_DIAGNOSTICS.clear()
     previous = load_previous()
 
     # A/B is audited only at migration boundaries: first inherited run, or when the
@@ -3944,6 +4134,11 @@ def main() -> int:
         cr_priority_cursor_before,
         int(CONFIG.get("crossref_priority_tasks_per_scan", 45)),
     )
+    source_journals_all = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
+    cr_source_cursor_before = int(state.get("crossref_source_cursor", 0) or 0)
+    cr_source_batch, _cr_source_planned_next, _cr_source_planned_wrapped = rotating_batch(
+        source_journals_all, cr_source_cursor_before, int(CONFIG.get("crossref_source_first_journals_per_scan", 8))
+    )
     institution_sources_all = list(CONFIG.get("institution_sources", []))
     institution_cursor_before = int(state.get("institution_cursor", 0) or 0)
     inst_rotating, _inst_planned_next, _inst_planned_wrapped = rotating_batch(
@@ -4016,7 +4211,7 @@ def main() -> int:
     log_progress(
         "Scan start: persistent incremental mode; "
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
-        f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) from {cr_from.isoformat()}, "
+        f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) from {cr_from.isoformat()}, "
         f"institutions {len(inst_batch)} source(s) ({len(inst_rotating)} rotating + {len(gap_sources)} gap-specialist) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
@@ -4073,7 +4268,7 @@ def main() -> int:
             state["result_depth"]["openalex"], oa_depth_lanes, execution_stats
         )
         fut_cr = ex.submit(
-            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_deadline, cr_query_dates,
+            safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_source_batch, cr_deadline, cr_query_dates,
             state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"], cr_depth_lanes, execution_stats
         )
         news = fut_news.result()
@@ -4100,6 +4295,10 @@ def main() -> int:
     )
     state["crossref_priority_cursor"], cr_priority_wrapped, cr_priority_executed = committed_rotation_cursor(
         priority_tasks_all, cr_priority_cursor_before, cr_priority_batch, executed_priority
+    )
+    executed_source_journals = set(execution_stats.get("crossref_source_journals", set()))
+    state["crossref_source_cursor"], cr_source_wrapped, cr_source_executed = committed_rotation_cursor(
+        source_journals_all, cr_source_cursor_before, cr_source_batch, executed_source_journals
     )
     method_executed = executed_oa | executed_cr
     state["strand_b_method_cursor"], b_method_wrapped, b_method_executed = committed_rotation_cursor(
@@ -4179,6 +4378,7 @@ def main() -> int:
                             DATE_FLOOR,
                             warnings,
                             rescue_cr_queries,
+                            [],
                             [],
                             rescue_deadline,
                             {q: DATE_FLOOR for q in rescue_cr_queries},
@@ -4342,6 +4542,7 @@ def main() -> int:
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
+        "recall_profile_version": RECALL_PROFILE_VERSION,
         "scan_state": state,
         "zero_config_scan": True,
         "admission_profile": str(CONFIG.get("admission_profile", "balanced_relevance_v15_scan_repair")),
@@ -4420,6 +4621,9 @@ def main() -> int:
             "quiet_scan_rescue_queries": len(quiet_rescue.get("openalex_queries", [])) + len(quiet_rescue.get("crossref_queries", [])),
             "crossref_priority_tasks_this_run": len(cr_priority_batch),
             "crossref_priority_tasks_executed": cr_priority_executed,
+            "crossref_source_journals_this_run": len(cr_source_batch),
+            "crossref_source_journals_executed": cr_source_executed,
+            "recall_backfill_this_run": bool(state.get("recall_reset_this_run")),
             "crossref_missing_abstract_enrichment_attempted": int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)),
             "b_method_queries_executed": b_method_executed,
             "institution_sources_this_run": len(inst_batch),
@@ -4472,6 +4676,7 @@ def main() -> int:
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
+            "admission_diagnostics": dict(sorted(ADMISSION_DIAGNOSTICS.items())),
         },
         "scan_diagnostics": {
             "source_warning_count": len(warnings),
@@ -4484,7 +4689,7 @@ def main() -> int:
     tmp_out.replace(OUT_PATH)
     log_progress(
         f"radar.json written: A={len(strand_a)} B={len(strand_b)} C={len(strand_c)} health={health}; "
-        f"next cursors OA={state['openalex_cursor']} CR={state['crossref_broad_cursor']}/{state['crossref_priority_cursor']} INST={state['institution_cursor']}"
+        f"next cursors OA={state['openalex_cursor']} CR={state['crossref_broad_cursor']}/{state['crossref_priority_cursor']}/SRC{state['crossref_source_cursor']} INST={state['institution_cursor']}"
     )
     print(json.dumps(data["stats"], indent=2), flush=True)
     if warnings:

@@ -1,61 +1,29 @@
-# V17.7.1 — executed rotation + wider recall, without corpus loss
+# V17.7.2 — source-first contextual recall
 
-This patch builds on V17.7.0's wider weak-signal and R&I-futures-method recall. It addresses the remaining structural reasons a broad search universe could still produce artificially quiet scans.
+The supplied 2026-08-23T17:42Z state makes the latest zero-result scan diagnosable rather than ambiguous. It was not a healthy “nothing relevant exists” run: `scan_health` was degraded; OpenAlex executed only 4 of 32 planned queries and 0 base queries before a 429 stop; Crossref also produced repeated 429 warnings; and the whole run used only 254.7 of the 1200-second budget. At the same time, the preceding run had admitted an obviously irrelevant basketball-teaching paper into Strand B because “scenario construction” was interpreted as a futures method.
 
-## What was actually wrong
+V17.7.2 therefore fixes recall and precision together.
 
-The supplied state shows a very wide configured universe: 125 Strand-A scholarly queries, 41 priority journals, 60 institutional sources, 30 weak-signal news sources and a persistent historical exploration lane. Repeatedly tiny yields therefore cannot be explained by topic scarcity alone.
+## 1. Source-first priority-journal sweep
 
-The important execution defects were:
+Eight rotating priority journals are scanned by recent contents each run, independently of keyword query wording. This gives the radar a direct route to high-quality journal output and makes rotation correspond more closely to the breadth of the configured source universe. The lane is execution-aware and bounded to 60 Crossref records per journal.
 
-1. rotation cursors were advanced when a batch was planned, before the scanner knew which queued queries actually made a request;
-2. a normal per-stage `budget reached` warning was treated as a source failure, poisoning cycle state and potentially suppressing rescue;
-3. quiet-scan scholarly rescue ran only after the institutional stage, so it could miss its minimum remaining-time threshold;
-4. Crossref records without abstracts were judged mostly from their titles even when a DOI publisher page exposed usable abstract metadata;
-5. the full-corpus exploration and B-method lanes were still somewhat thin relative to the size of the query bank.
+## 2. Contextual Strand-A route
 
-## V17.7.1 changes
+The original explicit EU R&I + geopolitics/economic-security route remains. A second bounded route admits direct European R&I evidence when the bibliographic evidence unit contains both an external-position mechanism (comparison/dependence/access/competition/flows) and a strategic R&I outcome (capacity, competitiveness, talent, scale, capability, infrastructure, etc.). Generic EU innovation-performance papers still fail.
 
-### Execution-aware rotation
+## 3. Better diagnostics
 
-OpenAlex, Crossref broad, Crossref priority and institutional source cursors now advance only across contiguous planned work that actually started a network request. Queued work skipped by a stage deadline remains pending for the next scan. The scanner prefers harmless repetition over silent query loss.
+`stats.admission_diagnostics` records how many OpenAlex, Crossref and institutional records reached the substantive gate and whether they failed for no direct EU scope, no R&I evidence or no strategic context. A future zero scan can therefore be separated into retrieval failure versus classifier rejection.
 
-The output now records planned-versus-executed counts, including:
+## 4. Rate-limit resilience
 
-- `openalex_queries_executed`
-- `openalex_base_queries_executed`
-- `crossref_broad_queries_executed`
-- `crossref_base_queries_executed`
-- `crossref_priority_tasks_executed`
-- `institution_rotating_sources_executed`
-- exploration executed counts
-- B-method executed count
+The observed run was request-limited rather than time-limited. V17.7.2 slows anonymous traffic instead of spending the budget in a burst: OpenAlex uses one worker with a 1.0-second minimum request interval, Crossref a 1.2-second minimum interval. Crossref 429s receive bounded cooldown retries, while OpenAlex retains its established fail-fast-on-429 behavior after the slower pacing.
 
-### Stage-budget semantics
+## 5. Strand-B false-positive guard
 
-A normal stage time slice ending is no longer classified as an OpenAlex/Crossref/institution source failure. Fatal stage errors and unavailable public endpoints still are failures.
+“Scenario construction”, “scenario building” and “scenario development” are ambiguous outside futures studies. If they are the only futures-family match, the item must also contain an independent future/foresight/anticipatory/long-term/strategic-scenario cue. This blocks teaching/simulation scenario papers while preserving genuine future-scenario methods.
 
-### Rescue moved earlier
+## 6. State preservation
 
-If OpenAlex + Crossref admit no new scholarly candidate, the quiet-scan rescue now runs immediately after the parallel scholarly/news phase and before institutional scanning. This preserves a meaningful opportunity to search a second historical topic/depth slice.
-
-### Missing Crossref abstracts
-
-For a bounded number of otherwise eligible Crossref records with no abstract, the scanner now follows the DOI and attempts to recover publisher abstract/description metadata before the A/B admission gate. It is capped at 18 attempts per scan and two per Crossref search task, so this cannot become an uncontrolled crawl.
-
-### Slightly wider exploration
-
-- OpenAlex historical exploration: 10 -> 12 queries/scan
-- Crossref historical exploration: 8 -> 10 queries/scan
-- dedicated Strand-B method lane: 8 -> 10 queries/scan
-- Crossref stage slice: 450 -> 540 seconds
-- institutional slice: 480 -> 390 seconds
-- quiet-rescue remaining-time threshold: 260 -> 180 seconds
-
-The total hard scan budget remains 1200 seconds and the GitHub job remains capped at 30 minutes.
-
-## What was deliberately NOT changed
-
-`frontier_gap_historical_lookback_months` remains `0`. Extending it to 12–24 months would alter the radar's retained temporal scope and could add older Strand-A literature simply to fill matrix cells. The present problem should first be solved by making the already-wide current corpus search execute correctly and classify useful evidence with sufficient recall.
-
-The A/B/C quality-profile versions are unchanged, so no corpus cleanup migration is triggered. The supplied `radar.json` remains the starting state and is not rebuilt or pruned.
+The bundled `radar.json` is byte-for-byte identical to the supplied `radar (13).json` (51 A / 12 B / 5 C). No existing accepted item is removed. The recall-profile reset affects only search progress/fingerprints so the widened routes get a real chance to inspect the four-month corpus.

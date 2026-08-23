@@ -16,9 +16,9 @@ Boilerplate such as Horizon Europe funding acknowledgements is stripped before a
 
 ## B — methods
 
-B is not another evidence strand. It is a **method-development library** for understanding the future of A. A source qualifies only when it explicitly contributes a new, adapted, extended, refined or designed futures method/framework/protocol/toolkit. Merely applying, comparing, evaluating, benchmarking or validating an existing method does not qualify. Generic techniques such as Delphi, system dynamics or agent-based modelling also require an explicit futures/foresight purpose.
+B is not another evidence strand. It is a **method-development library** for understanding the future of A. A source qualifies when the reusable futures/R&I-futures method is itself the contribution: either it explicitly develops/adapts/extends/refines/designs the method, or a method-first paper provides validation/benchmark/transfer evidence showing that the analytical workflow is the contribution. Mere application of an existing method does not qualify. Generic techniques such as Delphi, system dynamics or agent-based modelling also require an explicit futures/foresight purpose.
 
-A domain study that merely applies Delphi, scenarios, system dynamics or another technique does not qualify. Explicitly unrelated applications such as clinical, teaching, lifestyle or tourism studies fail unless the methodological contribution has an independently relevant strategic/science/technology context.
+A domain study that merely applies Delphi, scenarios, system dynamics or another technique does not qualify. Ambiguous “scenario construction/building/development” language also needs an independent future/foresight/anticipatory/strategic cue, preventing teaching or simulation scenes from being mistaken for futures methods.
 
 ## C — weak signals
 
