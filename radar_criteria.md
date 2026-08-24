@@ -1,10 +1,10 @@
-# Radar admission criteria — V17.8.2 surgical precision profile
+# Radar admission criteria — V17.8.3 English-only surgical precision profile
 
 V17.8.2 retains the V17.8.1 separation of **hard exclusion** from **priority ranking**. The corpus remains broad enough to preserve useful evidence, while the visible order emphasises major EU research and innovation issues shaped by geopolitical competition.
 
 ## Hard exclusions
 
-Reject malformed/non-document records, clearly non-English new evidence, obvious sports/consumer contamination, and material that lacks the existing substantive A/B gate. A journal is not rejected merely because it is outside the curated priority list.
+Reject malformed/non-document records, any record that is not positively established as English, obvious sports/consumer contamination, and material that lacks the existing substantive A/B gate. Title and body are checked separately, and saved records are rechecked before publication. A journal is not rejected merely because it is outside the curated priority list.
 
 ## A — EU R&I in geopolitical context
 

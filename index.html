@@ -64,8 +64,8 @@
         </div>
         <div class="hero-actions">
           <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.8.2">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.8.2">Opportunities &amp; Risks</a>
+          <a class="action secondary" href="frontier/?v=17.8.3">Open Insight Summary</a>
+          <a class="action secondary" href="priorities/?v=17.8.3">Opportunities &amp; Risks</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -115,7 +115,7 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.6.4"></script>
+<script src="briefing/insights.js?v=17.8.3"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -146,6 +146,15 @@ function complete120(v){
   if(!s||s.length>120||s.includes('…')||s.includes('...')||hasLetterSpacing(s))return '';
   return s.replace(/\s*[.…]{2,}\s*$/,'').trim();
 }
+function claim80(v){
+  let s=repairLetterSpacing(v).replace(/^This says that\s+/i,'').replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
+  s=s.replace(/^(?:(?:The|This) (?:study|paper|article|report|analysis|results?) (?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests)|It (?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests)) (?:that\s+)?/i,'');
+  if(!s||hasLetterSpacing(s))return '';
+  s=s.replace(/[.!?]+$/,'').trim();if(s.length<=80)return s;
+  let c=s.slice(0,80).replace(/\s+\S*$/,'').replace(/[,:;\-–—]+$/,'').trim();if(c.length<42)c=s.slice(0,79).trim();
+  return (c.replace(/[.!?]+$/,'')+'…').slice(0,80);
+}
+function claimText(x){const c=claim80(coreMessage(x));return c?`This says that ${c}`:'This says that the source did not expose a concise English claim'}
 function readablePaperTitle(v){
   let t=cleanText(v).replace(/<\/?b>/gi,'').replace(/\s+[–—-]\s+(?:European Council on Foreign Relations|CEPS|Euractiv\.com|FT\.com)$/i,'').trim();
   if(!t)return '';
@@ -193,21 +202,12 @@ function norm(v){return cleanText(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').tr
 function stripPaperTitle(summary,title){let s=cleanText(summary);const t=cleanText(title);if(t&&s.toLowerCase().startsWith(t.toLowerCase()))s=s.slice(t.length).replace(/^[\s.:;–—-]+/,'');return s.replace(/^Abstract\s*/i,'')}
 function sentences(v){return cleanText(v).split(/(?<=[.!?])\s+(?=[A-Z0-9])/).map(x=>x.trim()).filter(Boolean)}
 function coreMessage(x){
-  const stored=complete120(x.core_message||'');
-  if(stored)return stored;
-  if(x.headline){
-    let w=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.headline;
-    w=cleanText(w).replace(/\s+[–—-]\s+Company Announcement.*$/i,'').replace(/\s+-\s+(?:FT\.com|Reuters|Bloomberg|Euractiv\.com).*$/i,'');
-    const direct=complete120(w);if(direct)return direct;
-    return semanticMessage(x);
-  }
-  const title=x.title||'',ss=sentences(stripPaperTitle(x.summary||'',title));
-  const b=String(x.strand||'').toUpperCase()==='B';
-  const ranked=ss.map((q,i)=>{let score=0;const n=norm(q);if(b){if(/\b(develop|propose|introduce|adapt|extend|refine|design|create|construct)\w*/i.test(q))score+=10;if(/foresight|horizon scan|weak signal|scenario planning|backcasting|cross.?impact|roadmap/i.test(q))score+=7;if(/\b(use|apply|employ|review|compare|evaluate)\w*/i.test(q))score-=5}else{if(/\b(find|show|argue|conclude|demonstrate|identify|reveal|indicate|suggest)\w*/i.test(q))score+=9;if(/\b(risk|depend|competition|security|sovereignty|collaboration|capacity|restrict|strengthen|weaken|shift|change|limit|enable|pressure|fragment)\w*/i.test(q))score+=6;if(/europe|european union|\beu\b|research|innovation|science|technology/i.test(q))score+=3;if(/^(this|the) (study|paper|article|report)|\b(aim|objective|methods?|methodology)\b|framework is applied|remains insufficiently explored|substantial body of research/i.test(q))score-=8}if(n===norm(title))score-=30;score-=i*.12;return {q,score,msg:complete120(q)}}).filter(r=>r.msg&&!(norm(title).startsWith(norm(r.msg))||norm(r.msg).startsWith(norm(title)))).sort((a,b)=>b.score-a.score);
+  const stored=claim80(x.core_message||'');if(stored)return stored;
+  if(x.headline){let w=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.headline;w=cleanText(w).replace(/\s+[–—-]\s+Company Announcement.*$/i,'').replace(/\s+-\s+(?:FT\.com|Reuters|Bloomberg|Euractiv\.com).*$/i,'');return claim80(w)}
+  const title=x.title||'',ss=sentences(stripPaperTitle(x.summary||'',title));const b=String(x.strand||'').toUpperCase()==='B';
+  const ranked=ss.map((q,i)=>{let score=0;const n=norm(q);if(/^(?:this|the) (?:study|paper|article|report) examines|\b(?:aim|objective|methodology)\b|its eu relevance is classified|consult the linked publication/i.test(q))score-=12;if(b){if(/\b(develop|propose|introduce|adapt|extend|refine|design|create|construct)\w*/i.test(q))score+=10;if(/foresight|horizon scan|weak signal|scenario planning|backcasting|cross.?impact|roadmap/i.test(q))score+=7}else{if(/\b(find|show|argue|conclude|demonstrate|identify|reveal|indicate|suggest|highlight)\w*/i.test(q))score+=9;if(/\b(risk|depend|competition|security|sovereignty|collaboration|capacity|restrict|strengthen|weaken|shift|change|limit|enable|pressure|fragment|unbalanced|concentrat)\w*/i.test(q))score+=6;if(/europe|european union|\beu\b|research|innovation|science|technology/i.test(q))score+=3}if(n===norm(title))score-=30;score-=i*.12;return {q,score,msg:claim80(q)}}).filter(r=>r.msg&&!(norm(title).startsWith(norm(r.msg))||norm(r.msg).startsWith(norm(title)))).sort((a,b)=>b.score-a.score);
   if(ranked[0]&&ranked[0].score>0)return ranked[0].msg;
-  let p='';try{p=globalThis.RadarInsights?.pointFor?.(x)||''}catch(e){}const pm=complete120(p);if(pm&&norm(pm)!==norm(title)&&!norm(pm).startsWith(norm(title)))return pm;
-  const specific=paperSpecificMessage(x);if(specific)return specific;
-  return semanticMessage(x);
+  return claim80(readablePaperTitle(title));
 }
 function simpleWhy(x){
   if(x.headline){const w=globalThis.RadarInsights?.signalWhy?.(x)||x.why_it_matters||x.signal_note||'';return short(w,170)}
@@ -230,12 +230,12 @@ function biblio(x,label='Bibliography'){
   return `<div class="biblio"><div class="biblio-label">${esc(label)}</div><a class="biblio-title" href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(title)}</a>${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</div>`;
 }
 function abItem(x){
-  const msg=coreMessage(x),seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(msg)}</a></h3><div class="origin"><strong>From:</strong> ${esc(whereFrom(x)||'Source not listed')}</div><p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p>${biblio(x)}<div class="card-foot"><span>${esc(x.source_tier||x.eu_relevance||'')}</span><span>${esc(seen)}</span></div></article>`
+  const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(claimText(x))}</a></h3>${biblio(x)}<p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p><div class="card-foot"><span>${esc(x.source_tier||x.eu_relevance||'')}</span><span>${esc(seen)}</span></div></article>`
 }
 function cItem(x){
-  const msg=coreMessage(x),seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(msg)}</a></h3><div class="origin"><strong>From:</strong> ${esc(whereFrom(x)||'Source not listed')}</div><p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p>${biblio(x,'Source details')}<div class="card-foot"><span>${esc(x.signal_kind||x.signal_type||'Weak signal')}</span><span>${esc(seen)}</span></div></article>`
+  const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(claimText(x))}</a></h3>${biblio(x,'Source details')}<p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p><div class="card-foot"><span>${esc(x.signal_kind||x.signal_type||'Weak signal')}</span><span>${esc(seen)}</span></div></article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}

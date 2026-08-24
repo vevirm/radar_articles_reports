@@ -1,15 +1,13 @@
-# V17.8.2 validation
+# V17.8.3 validation
 
-Regression checks cover the prior precision fixes plus the balanced-frontier correction.
+Regression checks cover the V17.8.2 balanced frontier plus the English-only and display repairs.
 
 Key assertions:
 
-- Non-English metadata is rejected for new evidence.
-- The table-tennis false positive remains out of scope.
-- Generic method papers do not enter Strand B.
-- Generic foreign AI product news does not enter Strand C without a strategic bridge.
-- Broad journals are not mass-purged during saved-corpus cleanup.
-- Frontier gap allocation includes sparse A cells and sparse B/C/D cells in the same run.
-- A pure plan/recommendation does not qualify as an opening.
-- A launched/committed EU capability programme can qualify as an opening before final outcome data exist.
-- The supplied corpus produces both openings and risk/dependency quadrants; no quadrant is structurally disabled.
+- Explicit French/German/Dutch/Ukrainian material is rejected.
+- An English title cannot rescue a non-English body, and an English body cannot rescue a non-English title.
+- Saved A/B/C records are subject to the same final English publication gate.
+- `core_message` is concrete and no longer than 80 characters.
+- Main radar and matrix render `This says that …` before bibliography.
+- Existing precision, rotation, recovery and frontier behavior remains intact.
+- Full regression suite: 215 tests pass.

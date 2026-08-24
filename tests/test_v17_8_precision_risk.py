@@ -21,6 +21,39 @@ def test_non_english_metadata_is_rejected():
     assert sr.english_record_ok('European research security and innovation policy', 'en')
 
 
+
+def test_english_only_is_fail_closed_for_title_and_body():
+    assert not sr.english_record_ok(
+        'Demain un cloud souverain européen. Une stratégie pour la souveraineté numérique.',
+        '', title='Demain un cloud souverain européen'
+    )
+    assert not sr.english_record_ok(
+        'Naar een menswaardige digitale technologie. Het onderzoek bespreekt beleid en innovatie.',
+        '', title='Naar een menswaardige digitale technologie'
+    )
+    assert not sr.english_record_ok(
+        'РОЗВИТОК ЦИФРОВОЇ ЕКОНОМІКИ ЄС У ГЛОБАЛЬНОМУ КОНТЕКСТІ. English abstract text about EU innovation policy.',
+        'en', title='РОЗВИТОК ЦИФРОВОЇ ЕКОНОМІКИ ЄС У ГЛОБАЛЬНОМУ КОНТЕКСТІ'
+    )
+    assert not sr.english_record_ok(
+        'Quantum Europe Strategy. L’article présente la logique de la stratégie et discute le rôle attendu du futur Quantum Act.',
+        'en', title='Quantum Europe Strategy: Quantum Europe in a changing world'
+    )
+    assert sr.english_record_ok(
+        'Semiconductor supply chains are becoming a strategic dependency for Europe and its industrial policy.',
+        '', title='Semiconductor Supply Chains: Strategic Dependencies'
+    )
+
+
+def test_core_message_is_specific_and_at_most_80_characters():
+    msg = sr.concise_core_message(
+        'The European semiconductor ecosystem is uneven. The results show a diversified but unbalanced European semiconductor ecosystem, with production concentrated in a few countries.',
+        'The European semiconductor ecosystem'
+    )
+    assert len(msg) <= 80
+    assert 'unbalanced' in msg.lower() or 'concentrat' in msg.lower()
+    assert msg.lower() != 'eu is left behind'
+
 def test_table_tennis_industry_paper_is_out_of_scope():
     ev = sr.gate_scope(
         'Why China Dominates the Global Table Tennis Equipment Industry: Competitive Challenges for European Manufacturers',

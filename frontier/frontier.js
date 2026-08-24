@@ -473,6 +473,10 @@
     return {
       id:norm(linkFor(x)||candidateWhat(x)),
       title:candidateWhat(x),
+      coreMessage:clean(x.core_message || (x._origin==='Evidence signal' ? (evidence?.core_message||x._evidencePoint||candidateWhat(x)) : candidateWhat(x))),
+      bibliographicTitle:clean(x._origin==='Evidence signal' ? (evidence?.title||x.title||candidateWhat(x)) : (x.headline||x.title||candidateWhat(x))),
+      authors:clean(x._origin==='Evidence signal' ? (evidence?.authors||'') : (x.authors||'')),
+      itemType:clean(x._origin==='Evidence signal' ? (evidence?.type||x.type||'') : (x.type||x.signal_kind||x.signal_type||'')),
       source:sourceFor(x),
       date:dateFor(x),
       link:linkFor(x),

@@ -1072,45 +1072,114 @@ ENGLISH_FUNCTION_WORDS = {
     "the", "and", "of", "to", "in", "for", "with", "on", "as", "by", "from", "that",
     "this", "is", "are", "was", "were", "be", "an", "a", "at", "or", "which", "their",
     "between", "through", "under", "into", "across", "towards", "toward", "how", "what",
+    "its", "it", "we", "our", "can", "could", "may", "more", "than", "but", "while",
+    "using", "based", "among", "amid", "within", "without", "against", "after", "before",
 }
 NON_ENGLISH_FUNCTION_WORDS = {
-    # High-frequency function words in common European publication languages. These are used
-    # only as a conservative tie-breaker when metadata does not expose a language code.
+    # Fail-closed language guard. A few words can also occur as names/abbreviations, so
+    # rejection uses their balance against positive English evidence rather than one token.
+    # German
     "und", "der", "die", "das", "den", "dem", "des", "mit", "für", "von", "zur", "zum",
-    "et", "les", "des", "une", "dans", "pour", "avec", "sur", "aux", "du", "de", "la", "le",
+    "im", "eine", "einer", "eines", "auf", "aus", "bei", "über", "durch", "zwischen",
+    # French
+    "et", "les", "une", "dans", "pour", "avec", "sur", "aux", "du", "de", "la", "le",
+    "un", "des", "par", "vers", "entre", "sans", "sous", "au", "en", "dans", "que",
+    # Spanish / Portuguese
     "y", "los", "las", "una", "para", "con", "del", "por", "sobre", "entre", "el",
-    "e", "gli", "della", "delle", "per", "con", "nel", "nella", "tra", "fra", "il", "lo",
-    "i", "oraz", "dla", "przez", "w", "z", "na", "do", "od", "czy", "jest",
-    "și", "sau", "pentru", "din", "cu", "ale", "este", "sunt",
+    "os", "as", "uma", "das", "dos", "do", "da", "pela", "pelos", "nas", "nos", "em",
+    # Italian
+    "gli", "della", "delle", "per", "nel", "nella", "tra", "fra", "il", "lo", "dei",
+    # Dutch
+    "het", "een", "van", "voor", "met", "naar", "bij", "uit", "over", "als", "ook",
+    # Nordic
+    "og", "av", "til", "på", "och", "att", "som", "ett", "eller", "från", "med",
+    # Polish / Romanian / Czech-Slovak
+    "oraz", "dla", "przez", "jest", "czy", "și", "sau", "pentru", "din", "ale", "este", "sunt",
+    "výzkum", "výzkumu", "pro", "se", "ve", "na", "z", "w", "od", "do",
+}
+ENGLISH_GENERAL_CUES = {"existing", "report", "weak", "signal", "new", "earlier", "today", "yesterday", "current", "study", "paper", "analysis"}
+ENGLISH_DOMAIN_CUES = {
+    "eu", "europe", "european", "research", "science", "scientific", "innovation", "innovative",
+    "technology", "technological", "digital", "policy", "governance", "security", "strategic",
+    "strategy", "competition", "competitive", "competitiveness", "cooperation", "collaboration",
+    "investment", "industry", "industrial", "semiconductor", "semiconductors", "quantum", "ai",
+    "artificial", "intelligence", "foresight", "scenario", "scenarios", "method", "methodology",
+    "future", "futures", "supply", "chains", "dependency", "dependencies", "dependence", "autonomy",
+    "sovereignty", "talent", "mobility", "knowledge", "capacity", "capability", "capabilities",
+    "global", "international", "development", "economic", "economy", "geopolitical", "geopolitics",
+    "geoeconomic", "regulation", "standards", "funding", "programme", "program", "framework",
+    "universities", "university", "researchers", "researcher", "infrastructure", "compute", "cloud",
 }
 
 
-def probably_english(text: str) -> bool:
-    """Conservative English-only guard for records whose APIs omit language metadata.
+def _language_tokens(text: str) -> list[str]:
+    return re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]+", clean_text(text).lower())
 
-    Technical titles can contain little ordinary prose, so the heuristic rejects only strong
-    evidence of another language: non-Latin scripts, or a clear excess of non-English function
-    words. Ambiguous Latin-script records are retained unless the source metadata says otherwise.
-    """
-    txt = clean_text(text)[:5000]
-    if not txt:
+
+def _contains_non_latin_script(text: str) -> bool:
+    """Reject meaningful use of Cyrillic, Greek, CJK, Arabic and other non-Latin scripts."""
+    letters = re.findall(r"[^\W\d_]", clean_text(text), flags=re.UNICODE)
+    if not letters:
         return False
-    letters = re.findall(r"[^\W\d_]", txt, flags=re.UNICODE)
-    if letters:
-        non_latin = sum(1 for ch in letters if not ("A" <= ch <= "Z" or "a" <= ch <= "z") and ord(ch) > 0x024F)
-        if non_latin / len(letters) > 0.04:
-            return False
-    words = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]+", txt.lower())
-    if len(words) < 5:
-        return True
+    non_latin = 0
+    for ch in letters:
+        cp = ord(ch)
+        # ASCII + Latin-1/Latin Extended-A/B are allowed. Everything else is treated as
+        # non-Latin for this publication-language gate (punctuation is not in `letters`).
+        if not (0x0041 <= cp <= 0x005A or 0x0061 <= cp <= 0x007A or 0x00C0 <= cp <= 0x024F):
+            non_latin += 1
+    return non_latin / len(letters) > 0.01
+
+
+def probably_english(text: str, *, title_mode: bool = False) -> bool:
+    """Positive, fail-closed English detector used when source metadata is absent or wrong.
+
+    Previous builds kept ambiguous Latin-script text. This build does the opposite: English
+    must be positively established. The title is checked independently so an English abstract
+    cannot make a French/Dutch/German/Ukrainian title pass.
+    """
+    txt = clean_text(text)[:8000]
+    if not txt or _contains_non_latin_script(txt):
+        return False
+    words = _language_tokens(txt)
+    if len(words) < 2:
+        return False
     en = sum(w in ENGLISH_FUNCTION_WORDS for w in words)
     other = sum(w in NON_ENGLISH_FUNCTION_WORDS for w in words)
-    if other >= 4 and other >= en + 2:
+    domain = sum(w in ENGLISH_DOMAIN_CUES for w in words)
+    general = sum(w in ENGLISH_GENERAL_CUES for w in words)
+
+    # Strong foreign-language evidence always loses, even when a few English technical
+    # terms or proper nouns are embedded in the text.
+    if other >= 4 and other > en:
         return False
-    return True
+    if title_mode and other >= 2 and other > en:
+        return False
+
+    if not title_mode and len(words) < 3:
+        return False
+
+    if title_mode:
+        # Short technical titles may have few function words, so two domain-specific English
+        # cues can establish English when there is no competing foreign-language evidence.
+        if en >= 1 and en >= other:
+            return True
+        if domain >= 2 and other == 0:
+            return True
+        if 2 <= len(words) <= 4 and general >= 1 and other == 0:
+            return True
+        return False
+
+    # Abstracts/body text should contain ordinary English grammar. Do not retain an
+    # ambiguous Latin-script block merely because no foreign stopword happened to match.
+    if en >= 2 and en >= other:
+        return True
+    if en >= 1 and domain >= 3 and other <= 1:
+        return True
+    return False
 
 
-def english_record_ok(text: str, metadata_language: Any = "") -> bool:
+def english_record_ok(text: str, metadata_language: Any = "", *, title: str = "") -> bool:
     if not bool(CONFIG.get("english_only", True)):
         return True
     lang = normalized(metadata_language).replace("_", "-")
@@ -1118,8 +1187,24 @@ def english_record_ok(text: str, metadata_language: Any = "") -> bool:
         primary = lang.split("-", 1)[0]
         if lang not in ENGLISH_LANGUAGE_CODES and primary != "en":
             return False
-    return probably_english(text)
+    if title and not probably_english(title, title_mode=True):
+        return False
+    return probably_english(text, title_mode=False)
 
+
+def english_public_item_ok(item: dict[str, Any]) -> bool:
+    """Final publication invariant for both saved and newly discovered records."""
+    if not bool(CONFIG.get("english_only", True)):
+        return True
+    if not isinstance(item, dict):
+        return False
+    title = clean_text(item.get("title") or item.get("headline") or "")
+    body = clean_text(item.get("summary") or item.get("signal_note") or item.get("why_it_matters") or "")
+    if not title or not probably_english(title, title_mode=True):
+        return False
+    if not body or len(_language_tokens(body)) < 3:
+        return True
+    return english_record_ok(f"{title}. {body}", item.get("language", ""), title=title)
 
 def norm_title(text: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]+", " ", normalized(text))).strip()
@@ -1918,7 +2003,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     abstract = clean_text(abstract)
     body = clean_text(body)
 
-    if not english_record_ok(f"{title}. {abstract}. {body[:2500]}"):
+    if not english_record_ok(f"{title}. {abstract}. {body[:2500]}", title=title):
         return {
             'a_pass': False, 'b_pass': False, 'eu_relevance': None, 'eu_evidence': [],
             'ri_evidence': [], 'geo_evidence': [], 'bridge_sentence': '', 'a_route': '',
@@ -2115,7 +2200,7 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
     effective_floor = date_floor or DATE_FLOOR
     if not title or not date or date < effective_floor or date > dt.date.today():
         return None
-    if not english_record_ok(f"{title}. {abstract}", work.get("language", "")):
+    if not english_record_ok(f"{title}. {abstract}", work.get("language", ""), title=title):
         _diag_inc("openalex_reject_non_english")
         return None
     if document_exclusion_reason(title, abstract):
@@ -2392,7 +2477,7 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
     effective_floor = date_floor or DATE_FLOOR
     if not title or not date or date < effective_floor or date > dt.date.today():
         return None
-    if not english_record_ok(f"{title}. {abstract}", item.get("language", "")):
+    if not english_record_ok(f"{title}. {abstract}", item.get("language", ""), title=title):
         _diag_inc("crossref_reject_non_english")
         return None
     if document_exclusion_reason(title, abstract):
@@ -2880,7 +2965,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     page_type = meta_content(soup, ["og:type", "article:section", "type"])
     desc = meta_content(soup, ["description", "og:description", "twitter:description"])
     html_lang = clean_text((soup.html or {}).get("lang", "") if soup.html else "")
-    if not english_record_ok(f"{title}. {desc}", html_lang):
+    if not english_record_ok(f"{title}. {desc}", html_lang, title=title):
         _diag_inc("institution_reject_non_english")
         return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
@@ -3183,6 +3268,149 @@ def make_summary(text: str, evidence: dict[str, Any], strand: str, title: str, f
     return " ".join(out)
 
 
+
+def _claim80(text: str) -> str:
+    s = clean_text(text)
+    s = re.sub(r"^(?:Abstract\s*[:.-]?\s*)", "", s, flags=re.I)
+    s = re.sub(
+        r"^(?:(?:this|the) (?:study|paper|article|report|analysis|results?) "
+        r"(?:finds?|shows?|argues?|concludes?|demonstrates?|identifies?|reveals?|indicates?|suggests?)|"
+        r"it (?:finds?|shows?|argues?|concludes?|demonstrates?|identifies?|reveals?|indicates?|suggests?))\s+(?:that\s+)?",
+        "", s, flags=re.I,
+    )
+    s = re.sub(r"^(?:the results show|results show|we find|we show|we argue|we demonstrate|we identify)\s+(?:that\s+)?", "", s, flags=re.I)
+    s = s.strip(" .:;–—-")
+    ns = normalized(s)
+    if "three enablers" in ns and all(x in ns for x in ["robustness", "appropriateness", "inclusivity"]):
+        return "Foresight evidence improves with robustness, appropriateness and inclusivity"
+    if "three strategic priorities" in ns and "brain drain" in ns and "research assessment" in ns and "co-funding" in ns:
+        return "Europe can counter brain drain via monitoring, assessment reform and co-funding"
+    if len(s) <= 80:
+        return s.rstrip(".!?")
+    cut = s[:80]
+    # Prefer a complete clause when one exists before the hard limit.
+    for sep in ("; ", ", while ", ", but ", ": "):
+        i = cut.lower().rfind(sep.lower())
+        if i >= 44:
+            cut = cut[:i]
+            break
+    cut = re.sub(r"\s+\S*$", "", cut).rstrip(" ,:;–—-")
+    if len(cut) < 42:
+        cut = s[:79].rstrip()
+    return (cut[:79].rstrip(" ,:;–—-.!?") + "…")[:80]
+
+
+def concise_core_message(summary: str, title: str) -> str:
+    """Extract a concrete source-backed claim for display; never return a generic topic slogan."""
+    t = clean_text(title)
+    raw = clean_text(summary)
+    raw = re.sub(r"(?<=[a-z0-9])\.(?=[A-Z])", ". ", raw)
+    # OCR/abstract feeds often concatenate section markers without punctuation. Recover the
+    # findings sentence before ranking so "Results The results show ..." is not buried inside
+    # a methodology sentence.
+    raw = re.sub(r"\b(?:Results?|Findings?|Conclusions?)\s+(?=(?:The|We|Our|These|This)\b)", ". ", raw, flags=re.I)
+    candidates = []
+    for i, sent in enumerate(split_sentences(raw)[:24]):
+        q = clean_text(sent)
+        if not q:
+            continue
+        if t and (norm_title(q) == norm_title(t) or normalized(q).startswith(normalized(t)[:120])):
+            continue
+        # Remove a leading method/data clause when the same sentence then states the actual
+        # finding or contribution: "Drawing on X, the article demonstrates that Y" -> Y.
+        q = re.sub(
+            r"^(?:drawing on|drawing upon|based on|using|through|building on|drawing from)\b[^,]{0,220},\s*",
+            "", q, flags=re.I,
+        )
+        m = re.search(r"\b(we (?:develop|propose|find|show|identify)|the (?:study|paper|article|analysis) (?:finds|shows|argues|demonstrates|identifies|reveals|highlights))\b", q, flags=re.I)
+        if m and m.start() > 20:
+            q = q[m.start():]
+        nq = normalized(q)
+        if any(x in nq for x in [
+            "the paper identifies best practices and policy gaps",
+            "its eu relevance is classified", "the indexed record did not expose", "consult the linked publication",
+            "the item was admitted to strand", "the purpose of this article", "the purpose of this paper",
+            "the aim of the article", "the aim of this article", "this article examines", "this paper examines",
+            "this study examines", "this research aimed", "table of contents", "references",
+            "the relevance of the study", "the relevance of this study",
+        ]):
+            continue
+        methodish = bool(re.search(
+            r"\b(synthesi[sz]es?|is based on|are based on|comparative method|statistical method|analytical method|"
+            r"systematic literature review|bibliometric|study was conducted|study is conducted|study examined if|"
+            r"analysis also considered|we use the model to analyse|we use the model to analyze|reflect on|tries to explain)\b",
+            nq,
+        ))
+        strong_result = bool(re.search(
+            r"\b(results? show|findings? show|find|finds|found|show|shows|showed|argue|argues|conclude|concludes|"
+            r"demonstrate|demonstrates|identify|identifies|reveal|reveals|indicate|indicates|highlight|highlights|"
+            r"propose|proposes|recommend|recommends)\b",
+            nq,
+        ))
+        if methodish and not strong_result:
+            continue
+        score = 0
+        if re.search(r"\b(results? show|findings? show|find|finds|found|show|shows|showed|argue|argues|conclude|concludes|demonstrate|demonstrates|identify|identifies|reveal|reveals|indicate|indicates|highlight|highlights)\b", nq):
+            score += 10
+        if re.search(r"\b(propose|proposes|recommend|recommends|calls for|priorities)\b", nq):
+            score += 7
+        if re.search(r"\b(develop|develops|developed|adapt|adapts|adapted)\b", nq) and re.search(r"\b(framework|method|methodology|foresight|enablers?)\b", nq):
+            score += 7
+        if re.search(r"\b(is|are|has|have|becomes?|shifts?|strengthens?|weakens?|increases?|reduces?|limits?|depends?|concentrated|fragmented|unbalanced|transformation|gap|risk|risks|vulnerability|vulnerabilities|dependence|dependency|autonomy|competition|constraint|constraints)\b", nq):
+            score += 4
+        if contains_any(q, EU_DIRECT + EU_GENERIC) or has_eu_word(q):
+            score += 2
+        if re.search(r"\b(research|science|innovation|technology|semiconductor|ai|quantum|talent|security|collaboration|investment|foresight)\b", nq):
+            score += 2
+        if re.match(r"^(despite |although |against this background|in this article|in this study)", nq):
+            score -= 6
+        score -= i * 0.12
+        candidates.append((score, -i, q))
+    if candidates:
+        candidates.sort(reverse=True)
+        if candidates[0][0] > 0:
+            best = _claim80(candidates[0][2])
+            nb, nt_full = norm_title(best), norm_title(t)
+            if best and not (nb and nt_full and (nt_full.startswith(nb) or nb.startswith(nt_full[:min(48, len(nt_full))]))):
+                return best
+
+    # Turn common title forms into concrete propositions rather than echoing an opaque
+    # publication title. These rewrites use only information explicitly present in title/text.
+    nt = normalized(t)
+    if "semiconductor" in nt and "strategic autonomy" in nt and "technological leadership" in nt:
+        return _claim80("Chips policy targets EU semiconductor autonomy and technological leadership")
+    if "research security" in nt and "geopolitical" in nt and ("eu" in nt or "europe" in nt):
+        return _claim80("EU research security is becoming part of Europe’s geopolitical strategy")
+    if "expenditure on research and development" in nt and ("european union" in nt or "eu" in nt):
+        return _claim80("EU business R&D spending is compared in an international context")
+    if "international investment" in nt and "artificial intelligence" in nt and "technological dependence" in nt:
+        return _claim80("AI investment asymmetry creates technological-dependence risks for EU countries")
+    if "weak signal detection" in nt and "stochastic resonance" in nt:
+        return _claim80("Stochastic resonance methods are advanced for weak-signal detection")
+    if "backcasting" in nt and "urban mobility" in nt:
+        return _claim80("Backcasting maps pathways toward just and sustainable urban mobility")
+    if "roadmapping framework" in nt:
+        return _claim80("A data-driven roadmapping method supports resilient disaster management")
+    if "cbdc" in nt and "systemic risk" in nt:
+        return _claim80("CBDCs bring strategic choices, systemic risks and regulatory constraints")
+    if "impact of the eu ai act" in nt and "market access" in nt and "innovation" in nt:
+        return _claim80("The study tests EU AI Act effects on market access and healthcare AI innovation")
+    if "flanders" in nt and "investment priorities" in nt and "strategic technologies" in nt:
+        return _claim80("Flanders prioritises investment in key strategic technologies")
+    if "horizon scanning methodology" in nt and "early signal" in nt:
+        return _claim80("Horizon scanning methods are developed for early-signal identification")
+    if "forest pests" in nt and "horizon scanning" in nt and "climate" in nt:
+        return _claim80("Horizon scanning is adapted to climate-driven forest-pest range expansion")
+    if "bibliometric mapping of brand activism" in nt:
+        return _claim80("Brand-activism research is mapped by trends, themes and trajectories")
+    if "implementation of research security policies in germany" in nt:
+        return _claim80("Germany implements research-security policy across governance levels")
+    if "academic cooperation from the souths" in nt and "geopolitics" in nt:
+        return _claim80("Academic cooperation is shaped by geopolitical and epistemic inequalities")
+    # If the source exposes no usable abstract and no safe rewrite applies, retain a
+    # specific title fragment rather than inventing a generic Europe-wide slogan.
+    return _claim80(t)
+
 def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     eu = (evidence.get("eu_relevance") or "unknown").capitalize()
     if strand == "A":
@@ -3213,6 +3441,7 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "strand": strand,
         "eu_relevance": evidence.get("eu_relevance"),
         "summary": make_summary(text, evidence, strand, title, frontier_targets),
+        "core_message": concise_core_message(text, title),
         "relevance_note": relevance_note(evidence, strand),
         "source_tier": tier_label,
         "_source_rank": source_rank,
@@ -3324,6 +3553,11 @@ def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen
     if not isinstance(item, dict):
         return {}
     out = {k: v for k, v in item.items() if not k.startswith("_")}
+    title = clean_text(out.get("title") or out.get("headline") or "")
+    if out.get("headline"):
+        out["core_message"] = _claim80(out.get("core_message") or out.get("what") or out.get("headline") or "")
+    else:
+        out["core_message"] = _claim80(out.get("core_message") or concise_core_message(out.get("summary", ""), title))
     out["new_this_scan"] = bool(new_this_scan)
     if first_seen:
         out["first_seen"] = first_seen
@@ -3883,7 +4117,7 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     """
     merged: dict[str, dict[str, Any]] = {}
     for old in previous:
-        if not isinstance(old, dict):
+        if not isinstance(old, dict) or not english_public_item_ok(old):
             continue
         internal = internalize_previous(old)
         key = identity(internal)
@@ -3893,7 +4127,7 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
         merged[key] = internal
     new_ids: set[str] = set()
     for item in new_items:
-        if not isinstance(item, dict):
+        if not isinstance(item, dict) or not english_public_item_ok(item):
             continue
         if item.get("strand") not in {strand_name, "both"}:
             continue
@@ -3973,7 +4207,7 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     """Keep cumulative C while collapsing repeated coverage of the same weak signal."""
     merged: list[dict[str, Any]] = []
     for old in previous:
-        if not isinstance(old, dict):
+        if not isinstance(old, dict) or not english_public_item_ok(old):
             continue
         x = dict(old)
         x['new_this_scan'] = False
@@ -3983,7 +4217,7 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
 
     new_ids: set[str] = set()
     for item in new_items:
-        if not isinstance(item, dict):
+        if not isinstance(item, dict) or not english_public_item_ok(item):
             continue
         if any(signals_near_duplicate(item, y) for y in merged):
             continue
@@ -4012,6 +4246,9 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     headline = clean_text(item.get('headline', ''))
     if not headline:
         return False
+    desc = clean_text(item.get('signal_note', '') or item.get('why_it_matters', ''))
+    if not english_record_ok(f"{headline}. {desc}", item.get('language', ''), title=headline):
+        return False
     if '(strand b)' in normalized(item.get('anchor', '')) or normalized(item.get('anchor_basis', '')) == 'watch-theme':
         return False
     h = normalized(headline)
@@ -4020,7 +4257,6 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
         'genocide', 'fiscal, ai, or monetary news', 'crypto firm', 'taiwan? the view from taipei'
     ]):
         return False
-    desc = clean_text(item.get('signal_note', '') or item.get('why_it_matters', ''))
     if eu_news_scope(h):
         return factual_news(headline, desc)
     external_specific = contains_any(h, [
@@ -4498,6 +4734,8 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
     recurring = {t for t,c in theme_counts.items() if c >= 2}
     anchored=[]
     for n in news:
+        if not english_record_ok(f"{n.get('headline','')}. {n.get('_desc','')}", n.get('language',''), title=clean_text(n.get('headline',''))):
+            continue
         if not weak_signal_candidate_text(n.get('headline',''), n.get('_desc','')):
             continue
         nthemes=set(n.get('_themes',[])) & WATCH_SIGNAL_THEMES

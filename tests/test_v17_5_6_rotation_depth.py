@@ -108,7 +108,7 @@ class V1756RotationDepthTests(unittest.TestCase):
         cfg = json.loads((ROOT / 'radar_config.json').read_text())
         self.assertEqual(cfg['incremental_state_version'], 'v17.2-persistent-source-cursors')
         self.assertEqual(cfg['source_expansion_version'], 'v17.5.2-gap-report-recall')
-        self.assertEqual(cfg['quality_profile_version'], 'v17.8.1-major-eu-ri-priority-surgical')
+        self.assertEqual(cfg['quality_profile_version'], 'v17.8.3-english-only-informative-claims')
 
 
 if __name__ == '__main__':

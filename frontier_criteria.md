@@ -1,4 +1,4 @@
-# Sovereignty-Frontier criteria — V17.8.2 balanced matrix
+# Sovereignty-Frontier criteria — V17.8.3 balanced matrix
 
 The 4×4 Sovereignty Frontier is **balanced by evidence opportunity, not by quota**. Each quadrant is searched and classified on the same scarcity basis. The matrix is allowed to be pessimistic or optimistic when the evidence warrants it, but the scanner must not structurally suppress one direction.
 
