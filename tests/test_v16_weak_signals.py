@@ -22,7 +22,7 @@ class V16WeakSignalTests(unittest.TestCase):
         for domain in ['reuters.com', 'ft.com', 'politico.eu', 'nature.com', 'sciencebusiness.net', 'commission.europa.eu']:
             self.assertIn(domain, domains)
 
-    def test_external_technology_control_needs_explicit_european_relevance(self):
+    def test_external_technology_control_can_prefilter_but_still_needs_eu_anchor(self):
         title = 'US tightens export controls on advanced AI chips to China'
         desc = 'The new technology controls restrict semiconductor research equipment and deepen US-China strategic competition.'
         self.assertTrue(sr.factual_news(title, desc))

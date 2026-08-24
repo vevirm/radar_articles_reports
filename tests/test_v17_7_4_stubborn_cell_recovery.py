@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class StubbornCellRecoveryTests(unittest.TestCase):
-    def test_current_state_has_six_specific_empty_cells(self):
+    def test_current_state_does_not_force_opening_cells(self):
         proc = subprocess.run(
             ['node', str(ROOT / 'scripts' / 'frontier_coverage.js')],
             input=(ROOT / 'radar.json').read_text(encoding='utf-8'),
@@ -25,7 +25,8 @@ class StubbornCellRecoveryTests(unittest.TestCase):
         )
         payload = json.loads(proc.stdout)
         empty = {k for k, v in payload['counts'].items() if v == 0}
-        self.assertEqual(empty, {'knowledge-C','knowledge-D','infrastructure-B','infrastructure-D','conversion-D','rules-C'})
+        self.assertTrue({'knowledge-A','infrastructure-A','conversion-A','rules-A'}.issubset(empty))
+        self.assertGreater(payload['counts'].get('conversion-C', 0), 0)
 
     def test_matrix_depth_recomputes_and_reallocates_during_scan(self):
         scanner = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
@@ -77,7 +78,7 @@ console.log(JSON.stringify({d:v.cells.knowledge.D.length,t:v.cells.knowledge.D.m
 
     def test_versions_bumped_without_ab_recall_reset(self):
         self.assertEqual(sr.CONFIG['recall_profile_version'], 'v17.7.2-source-first-contextual-recall')
-        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.7.5-rotating-cell-fill')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.8.1-risk-weighted-frontier')
         self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.4-direct-institutional-signals')
 
 

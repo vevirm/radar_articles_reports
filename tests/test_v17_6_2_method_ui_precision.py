@@ -36,13 +36,13 @@ class MethodAsSuchPrecisionTests(unittest.TestCase):
         for title, abstract in cases:
             self.reject(title, abstract)
 
-    def test_accepts_actual_futures_method_adaptation(self):
+    def test_rejects_domain_specific_futures_method_without_policy_ri_destination(self):
         ev = scanner.gate_scope(
             'Forest pests on the move: Adapting horizon scanning methodology to assess climate-driven range expansion',
             'We extend horizon scanning beyond its original scope by adapting the horizon-scanning framework to a new class of emerging risks.',
             '', 2, source_kind='scholarly'
         )
-        self.assertTrue(ev['b_pass'])
+        self.assertFalse(ev['b_pass'])
 
     def test_accepts_new_delphi_only_when_it_is_a_foresight_method(self):
         ev = scanner.gate_scope(

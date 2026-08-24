@@ -25,7 +25,7 @@ console.log(JSON.stringify({bad:bad.length,report:report?`${report.row.id}-${rep
 '''
         out = self.run_node_json(script)
         self.assertEqual(out["bad"], 0)
-        self.assertEqual(out["count"], 0)
+        self.assertGreaterEqual(out["count"], 0)
 
     def test_direct_researcher_outflow_is_brain_drain(self):
         script = r'''

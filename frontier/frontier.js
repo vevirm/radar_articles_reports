@@ -207,23 +207,29 @@
 
     let autonomy=autonomyUp-autonomyDown;
     let performance=performanceUp-performanceDown;
+    // V17.8: ambiguity is not an opening. The old fallback silently turned weak/neutral
+    // evidence into +/+ and inflated the optimistic column. Keep a direction neutral unless
+    // the record actually supports it; failure evidence may still resolve ambiguity downward.
     if(Math.abs(autonomy)<.55){
       if(performance>0.55 && /(foreign|non-eu|china|chinese|united states|american|partner|vendor|supplier|access)/.test(direct)) autonomy=-1;
       else if(performance<-.55 && questions.failure>=2) autonomy=-1;
-      else if(/\beu\b|european|sovereign|autonomy|diversif|domestic/.test(direct)) autonomy=1;
-      else autonomy=questions.failure>=2?-1:1;
+      else autonomy=questions.failure>=2?-1:0;
     }
     if(Math.abs(performance)<.55){
-      if(autonomy<0) performance=questions.failure>=2?-1:1;
-      else performance=/(cost|lag|slow|cut|restrict|security|ban|fragment)/.test(direct)?-1:1;
+      if(autonomy<0 && questions.failure>=2) performance=-1;
+      else if(/(cost|lag|slow|cut|restrict|security|ban|fragment|shortage|gap|declin)/.test(direct)) performance=-1;
+      else performance=0;
     }
     return {autonomy,performance,autonomyUp,autonomyDown,performanceUp,performanceDown};
   }
 
   function columnFor(direction){
-    if(direction.autonomy>=0&&direction.performance>=0) return COLUMNS[0];
-    if(direction.autonomy>=0&&direction.performance<0) return COLUMNS[1];
-    if(direction.autonomy<0&&direction.performance>=0) return COLUMNS[2];
+    // A matrix cell needs evidence on both axes. Neutral/underspecified records remain in the
+    // broader radar instead of being forced into a sovereignty-frontier quadrant.
+    if(Math.abs(direction.autonomy)<.55||Math.abs(direction.performance)<.55) return null;
+    if(direction.autonomy>0&&direction.performance>0) return COLUMNS[0];
+    if(direction.autonomy>0&&direction.performance<0) return COLUMNS[1];
+    if(direction.autonomy<0&&direction.performance>0) return COLUMNS[2];
     return COLUMNS[3];
   }
 
@@ -329,6 +335,15 @@
     const performanceUp=/competit|performance|frontier|leading|leader|advanced|scale|scaling|growth|productivity|innovation|investment|market access|access to|capacity|capabilit|excellence|quality|benefit|strengthen|expand|build|deploy|commerciali|sets? pace|industrial leadership|value creation|resilien/.test(t);
     const performanceDown=/less competitive|lag|behind|shortage|bottleneck|chokepoint|vulnerab|exposure|risk|costly|expensive|higher cost|delay|slow|fragment|subscale|declin|loss|losing|hollow|gap|cannot|unable|no substitute|disrupt|cut off|cutoff|blocked|constraint|barrier|threat|weakness|shortcoming|ceding|two-speed|two speed/.test(t);
 
+    // Openings are deliberately evidence-hungry. Funding calls, strategies, ambitions and
+    // recommendations are not +/+ outcomes. Require an observed gain in capability/access/
+    // adoption and reject records that simultaneously carry a material loss/dependence cue.
+    const openingRealized=/\b(?:operational|operates?|deployed|deploys?|deployment|opened|opens?|completed|completes?|secured|secures?|attracted|attracts?|retained|retains?|returned|returns?|recruited|recruits?|expanded capacity|expands?\s+(?:european\s+|eu\s+)?(?:research\s+|compute\s+|production\s+|industrial\s+|manufacturing\s+)?capacity|increased capacity|increases?\s+(?:european\s+|eu\s+)?(?:research\s+|compute\s+|production\s+|industrial\s+|manufacturing\s+)?capacity|capacity increased|production increased|production increases?|market share (?:rose|increased|rises?)|overtook|outpaced|became a leader|is a leader|sets? the pace|adopted by|internationally adopted|global adoption|reduced dependence|reduces? dependence|reduced reliance|reduces? reliance|cut dependence|cuts? dependence|cut reliance|cuts? reliance|diversified suppliers|diversifies? suppliers|new european supplier|new eu supplier|built and operating|now produces|now provides)\b/.test(d);
+    const openingAspirational=/\b(?:aims? to|plans? to|proposal|proposed|call for|funding call|strategy to|roadmap|could|would|should|needs? to|must|requires? investment|potential to|prospects? for|recommend(?:s|ed|ation)|intends? to|seeks? to|pledged|commitment)\b/.test(d);
+    const dependenceReduction=/\b(?:reduc(?:e|es|ed|ing)|cut(?:s|ting)?|lower(?:s|ed|ing)?).{0,35}(?:dependence|dependency|reliance)\b/.test(d);
+    const openingDependenceHarm=autonomyDown&&!dependenceReduction;
+    const cleanOpening=openingRealized&&!openingAspirational&&!openingDependenceHarm&&!performanceDown;
+
     if(row.id==='knowledge'){
       if(column.id==='D'){
         // Keep the specific cell specific: the loss must concern Europe/an EU member,
@@ -340,20 +355,20 @@
         const euPhrase='(?:eu|europe|european|member states|austria|belgium|bulgaria|croatia|cyprus|czech|denmark|estonia|finland|france|germany|greece|hungary|ireland|italy|latvia|lithuania|luxembourg|malta|netherlands|poland|portugal|romania|slovakia|slovenia|spain|sweden)';
         return new RegExp(`(?:${euPhrase}).{0,55}talent loss|talent loss.{0,55}(?:${euPhrase})`).test(d);
       }
-      if(column.id==='A') return performanceUp && (autonomyUp || /brain gain|talent inflow|attract|retain|recruit|return|research collaboration|scientific collaboration|research cooperation|science diplomacy|knowledge flow/.test(t)) && euScoped;
+      if(column.id==='A') return cleanOpening && performanceUp && (autonomyUp || /brain gain|talent inflow|attract|retain|recruit|return/.test(d)) && euScoped;
       if(column.id==='B') return performanceDown && /research security|screening|visa|restrict|barrier|exclude|suspend|closed lab|collabor|mobility|openness/.test(t) && (autonomyUp||/security|sovereign|protect/.test(t));
       return performanceUp && (autonomyDown || (ext.test(t)&&/collabor|cooperat|mobility|recruit|expertise|foreign talent|international talent|science diplomacy|knowledge flow|access/.test(t)));
     }
 
     if(row.id==='infrastructure'){
-      if(column.id==='A') return autonomyUp && performanceUp;
+      if(column.id==='A') return cleanOpening && autonomyUp && performanceUp;
       if(column.id==='B') return autonomyUp && performanceDown;
       if(column.id==='C') return (autonomyDown || (ext.test(t)&&/supplier|vendor|technology|compute|cloud|material|input|supply chain|reactor|semiconductor|chip|infrastructure/.test(t))) && performanceUp;
       return (autonomyDown||/access|supply|dependency/.test(t)) && performanceDown;
     }
 
     if(row.id==='conversion'){
-      if(column.id==='A') return (autonomyUp||/\b(eu|european|europe)\b.{0,45}(?:invest|scale|manufactur|procurement|industrial|production)/.test(t)) && performanceUp;
+      if(column.id==='A') return cleanOpening && autonomyUp && performanceUp;
       if(column.id==='B') return (autonomyUp||/protect|locali|onshor|domestic|de-risk|derisk/.test(t)) && performanceDown;
       if(column.id==='C') return (autonomyDown||ext.test(t)) && performanceUp && /foreign capital|foreign market|market access|foreign platform|scale abroad|investment|supplier|partner|global market|china exposure/.test(t);
       return performanceDown && /firm exit|firms exit|exit europe|move abroad|moving abroad|relocat|foreign acquisition|closure|shut down|hollow|lost production|loss of production|production capacity|funding gap|scale-up gap|scaleup gap|fail.{0,20}scale|firms? fall behind|industrial decline|ceding profits|ceding value|displaced competition|two-speed|two speed/.test(t);
@@ -362,7 +377,7 @@
     // Rules/institutions are broader than a single named regulation: EU-created
     // frameworks can be openings; foreign regimes can create productive dependence;
     // fragmentation/delay can create double loss.
-    if(column.id==='A') return performanceUp && (autonomyUp || /\b(eu|european)\b.{0,35}(?:framework|programme|program|regulation|standard|strategy|fund|governance|procurement|instrument)/.test(t));
+    if(column.id==='A') return cleanOpening && autonomyUp && performanceUp && /adopted by|internationally adopted|global adoption|reduced depend|reduced reliance|faster decision|shorter approval|mutual recognition|market access/.test(t);
     if(column.id==='B') return performanceDown && (autonomyUp||/research security|screening|de-risk|derisk|sovereign|protect/.test(t)) && /restrict|export control|regulat|ban|sanction|screening|security|licen|compliance|burden/.test(t);
     if(column.id==='C') return performanceUp && (autonomyDown||/foreign standards|foreign rules|us rules|american rules|platform rules|export licen[cs]e|non-eu rules|non-eu standards|us export-control|us export control/.test(t));
     return performanceDown && /gridlock|cannot decide|unable to decide|decision delay|blocked by|institutional constraint|fragmented governance|foreign rules|foreign standards|export controls|sanctions|exclusion|regulatory fragmentation|regulatory delay|delayed/.test(t);
@@ -428,7 +443,7 @@
       if(m<2.4) continue;
       const dir=directionScores(x,evidence,r,questions);
       const col=columnFor(dir);
-      if(!cellEvidencePass(x,evidence,r,col)) continue;
+      if(!col||!cellEvidencePass(x,evidence,r,col)) continue;
       row=r; rowPick=opt; materiality=m; direction=dir; column=col; break;
     }
     if(!row||!column) return null;
@@ -437,7 +452,7 @@
     const triage=reach+irreversibility+attention+actionability;
     const multi=qCount>=2?1.5:0;
     const crossDirection=(flags.sustain&&flags.compete&&Math.sign(direction.autonomy)!==Math.sign(direction.performance))?1:0;
-    const columnWeight=column.id==='D'?2:column.id==='A'?1.25:1;
+    const columnWeight=column.id==='D'?2.4:column.id==='C'?1.6:column.id==='B'?1.4:.35;
     const recency=recencyScore(x,now)+(x.new_this_scan?1:0);
     const overall=triage+multi+crossDirection+columnWeight+recency;
     const cell=CELL_NAMES[row.id][column.id];

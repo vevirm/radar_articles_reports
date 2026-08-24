@@ -1,28 +1,25 @@
-# Radar admission criteria — V17.7.5 scanner behavior (V17.6.2 A/B quality profile)
+# Radar admission criteria — V17.8.1 surgical precision profile
+
+V17.8.1 separates **hard exclusion** from **priority ranking**. The corpus remains broad enough to preserve useful evidence, while the visible order emphasises major EU research and innovation issues shaped by geopolitical competition.
+
+## Hard exclusions
+
+Reject malformed/non-document records, clearly non-English new evidence, obvious sports/consumer contamination, and material that lacks the existing substantive A/B gate. A journal is not rejected merely because it is outside the curated priority list.
 
 ## A — EU R&I in geopolitical context
 
-Admit when the publication is substantively about European research/innovation and either (a) an explicit geopolitical, geoeconomic, economic-security or strategic-competition dynamic materially changes that R&I issue, or (b) direct EU R&I evidence establishes both an external/cross-border mechanism and a strategic R&I-system outcome such as dependence, comparative capability, competitiveness, talent, access, scale or infrastructure.
+A still requires substantive European R&I relevance and a real geopolitical, geoeconomic, economic-security, strategic-competition or external-dependence mechanism. Direct system-level evidence includes research policy/security/collaboration/funding, science diplomacy, talent, infrastructures, strategic technologies, industrial capability and technology dependence.
 
-Incidental EU mentions, funding acknowledgements, bare technology topics and generic geopolitics are not enough.
+After admission, papers receive a priority score. Titles explicitly combining EU/European scope with R&I systems, strategic technologies and geopolitical/economic-security mechanisms rank highest. Peripheral but still legitimate evidence remains searchable lower in the corpus.
 
-## B — futures methods and transferable forward-looking R&I methods
+## B — futures methods
 
-B is a small method-development library, not a collection of papers that happen to use methods.
+B remains a small method-development library. New papers must develop/adapt/extend/refine a reusable futures or forward-looking R&I method and show a policy/R&I/technology-system destination. Merely applying scenarios, Delphi, system dynamics or another technique to an unrelated domain does not qualify.
 
-A B publication normally **develops, proposes, adapts, extends or refines** a reusable method for understanding future change around A. A method-first publication can also qualify when validation, benchmarking, comparison, robustness or transfer evidence shows that the reusable analytical method itself is the contribution. This includes classic futures/foresight methods and genuinely forward-looking methods for detecting, mapping or forecasting change in research, science, innovation or technology. Ordinary application, descriptive analysis and domain prediction remain insufficient.
+Historical B material is not mass-deleted on profile upgrades from shortened summaries; only clear false positives are removed.
 
-A paper does **not** enter B because it:
+## C — weak signals
 
-- runs a Delphi study;
-- builds an engineering, medical, financial or infrastructure early-warning system;
-- applies system dynamics or agent-based modelling;
-- compares or reviews existing foresight methods;
-- only validates an existing method while explicitly stating that it does not develop/adapt/extend it;
-- uses scenarios in a topical study.
+C is an actionable update layer, not a general news archive. Direct European signals are preferred. Narrow external shocks may enter only when they concern strategically material R&I mechanisms such as export controls, compute/chips, quantum, critical inputs, research security/cooperation or talent, and every displayed C item must still anchor to Strand A.
 
-Delphi, system dynamics, agent-based modelling and similar auxiliary techniques qualify only when they are explicitly developed as part of a futures/foresight methodology.
-
-## C — weak signals that may change how we see A
-
-C contains current evidence that can change how Strand A should be interpreted. This includes early/uncertain developments (pilots, proposals, delays, targeted arrangements), new empirical findings/indicators, and consequential current R&I changes in policy, capacity, talent, infrastructure, investment, standards, access, collaboration or restrictions. C cannot be justified by B alone: every item must anchor to an existing A publication or recurring A theme. Generic technology/business news, routine implementation with no strategic R&I consequence, and duplicate coverage are excluded.
+Generated `why_it_matters` boilerplate cannot manufacture European relevance.

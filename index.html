@@ -64,8 +64,8 @@
         </div>
         <div class="hero-actions">
           <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.6.3">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.6.3">Opportunities &amp; Risks</a>
+          <a class="action secondary" href="frontier/?v=17.8.1">Open Insight Summary</a>
+          <a class="action secondary" href="priorities/?v=17.8.1">Opportunities &amp; Risks</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -146,6 +146,18 @@ function complete120(v){
   if(!s||s.length>120||s.includes('…')||s.includes('...')||hasLetterSpacing(s))return '';
   return s.replace(/\s*[.…]{2,}\s*$/,'').trim();
 }
+function readablePaperTitle(v){
+  let t=cleanText(v).replace(/<\/?b>/gi,'').replace(/\s+[–—-]\s+(?:European Council on Foreign Relations|CEPS|Euractiv\.com|FT\.com)$/i,'').trim();
+  if(!t)return '';
+  const letters=(t.match(/[A-Za-z]/g)||[]),upper=(t.match(/[A-Z]/g)||[]);
+  if(letters.length>20&&upper.length/letters.length>.78)t=t.toLowerCase().replace(/(^|[.!?]\s+)([a-z])/g,(m,a,b)=>a+b.toUpperCase()).replace(/\b(eu|us|ai|r&d|fp10|nato)\b/gi,m=>m.toUpperCase());
+  return short(t,138);
+}
+function paperSpecificMessage(x){
+  const t=readablePaperTitle(x.title||'');
+  if(!t)return '';
+  return t;
+}
 function semanticMessage(x){
   const text=norm([x.title,x.summary,x.relevance_note,x.what,x.headline].join(' '));
   const b=String(x.strand||'').toUpperCase()==='B';
@@ -175,7 +187,7 @@ function semanticMessage(x){
   if(/dual.?use|military|defen[cs]e/.test(text)&&/innovation|technology|research/.test(text))return 'Security competition is pulling more European research and technology toward dual-use priorities.';
   if(/digital sovereignty|digital strategy|cyber/.test(text))return 'Digital and cyber policy is becoming a tool of Europe’s geopolitical and technological positioning.';
   if(/industrial policy|innovation ecosystem|competitiveness/.test(text))return 'Geopolitical competition is pushing Europe to link innovation policy more closely to resilience.';
-  return 'Geopolitical pressures are reshaping Europe’s research, technology and innovation choices.';
+  return paperSpecificMessage(x)||'A geopolitical development is changing a specific part of Europe’s research and innovation system.';
 }
 function norm(v){return cleanText(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
 function stripPaperTitle(summary,title){let s=cleanText(summary);const t=cleanText(title);if(t&&s.toLowerCase().startsWith(t.toLowerCase()))s=s.slice(t.length).replace(/^[\s.:;–—-]+/,'');return s.replace(/^Abstract\s*/i,'')}
@@ -194,6 +206,7 @@ function coreMessage(x){
   const ranked=ss.map((q,i)=>{let score=0;const n=norm(q);if(b){if(/\b(develop|propose|introduce|adapt|extend|refine|design|create|construct)\w*/i.test(q))score+=10;if(/foresight|horizon scan|weak signal|scenario planning|backcasting|cross.?impact|roadmap/i.test(q))score+=7;if(/\b(use|apply|employ|review|compare|evaluate)\w*/i.test(q))score-=5}else{if(/\b(find|show|argue|conclude|demonstrate|identify|reveal|indicate|suggest)\w*/i.test(q))score+=9;if(/\b(risk|depend|competition|security|sovereignty|collaboration|capacity|restrict|strengthen|weaken|shift|change|limit|enable|pressure|fragment)\w*/i.test(q))score+=6;if(/europe|european union|\beu\b|research|innovation|science|technology/i.test(q))score+=3;if(/^(this|the) (study|paper|article|report)|\b(aim|objective|methods?|methodology)\b|framework is applied|remains insufficiently explored|substantial body of research/i.test(q))score-=8}if(n===norm(title))score-=30;score-=i*.12;return {q,score,msg:complete120(q)}}).filter(r=>r.msg&&!(norm(title).startsWith(norm(r.msg))||norm(r.msg).startsWith(norm(title)))).sort((a,b)=>b.score-a.score);
   if(ranked[0]&&ranked[0].score>0)return ranked[0].msg;
   let p='';try{p=globalThis.RadarInsights?.pointFor?.(x)||''}catch(e){}const pm=complete120(p);if(pm&&norm(pm)!==norm(title)&&!norm(pm).startsWith(norm(title)))return pm;
+  const specific=paperSpecificMessage(x);if(specific)return specific;
   return semanticMessage(x);
 }
 function simpleWhy(x){

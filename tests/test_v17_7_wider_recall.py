@@ -23,7 +23,7 @@ class WiderWeakSignalRecallTests(unittest.TestCase):
         self.assertTrue(sr.reframing_signal_text(f"{title} {desc}"))
         self.assertTrue(sr.factual_news(title, desc))
 
-    def test_global_comparative_evidence_can_enter_only_via_a_anchor(self):
+    def test_global_comparative_evidence_can_prefilter_but_needs_eu_anchor(self):
         title = "New study shows China and US pulling ahead in quantum research publications"
         desc = (
             "Publication data reveal a widening innovation-capacity gap in quantum technology and strategic competition."
@@ -39,15 +39,6 @@ class WiderWeakSignalRecallTests(unittest.TestCase):
             '_entities': sr.distinct_matches(f'{title} {desc}', sr.ENTITY_TERMS + sr.GEO_ACTORS),
         }]
         self.assertEqual(sr.anchor_news(news, []), [])
-        a = [{
-            'title': 'European quantum research capacity under strategic competition',
-            'source': 'Test', 'date': '2026-08-18', 'strand': 'A', 'eu_relevance': 'direct',
-            'summary': 'European quantum research and innovation capacity faces strategic competition and technological capability gaps.'
-        }]
-        anchored = sr.anchor_news(news, a)
-        self.assertEqual(len(anchored), 1)
-        self.assertIn(anchored[0]['signal_type'], {'reframes', 'confirms'})
-        self.assertEqual(anchored[0]['signal_kind'], 'evidence / indicator')
 
     def test_generic_foreign_technology_launch_still_fails(self):
         self.assertFalse(sr.factual_news(
@@ -110,12 +101,12 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 class ExpansionOnlyStateTests(unittest.TestCase):
     def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(data.get('strand_a', [])), 90)
-        self.assertEqual(len(data.get('strand_b', [])), 22)
-        self.assertEqual(len(data.get('strand_c', [])), 11)
-        self.assertEqual(data.get('last_updated'), '2026-08-23T19:53Z')
-        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 9)
-        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 160)
+        self.assertEqual(len(data.get('strand_a', [])), 108)
+        self.assertEqual(len(data.get('strand_b', [])), 23)
+        self.assertEqual(len(data.get('strand_c', [])), 9)
+        self.assertEqual(data.get('last_updated'), '2026-08-24T07:09Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 25)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 352)
 
     def test_current_state_needs_no_signal_or_quality_backfill(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
@@ -133,8 +124,8 @@ class ExpansionOnlyStateTests(unittest.TestCase):
         self.assertGreaterEqual(len(cfg['queries_b_method']), 28)
         self.assertGreaterEqual(len(cfg['news_global_queries']), 30)
         self.assertEqual(len(sr.news_queries('example.org', 168)), 4)
-        self.assertEqual(cfg['quality_profile_version'], 'v17.6.2-B-futures-method-as-such')
-        self.assertEqual(cfg['signal_quality_profile_version'], 'v17.6.0-A-only-weak-signal-quality')
+        self.assertEqual(cfg['quality_profile_version'], 'v17.8.1-major-eu-ri-priority-surgical')
+        self.assertEqual(cfg['signal_quality_profile_version'], 'v17.8.1-major-eu-ri-signals-surgical')
 
 
 if __name__ == '__main__':

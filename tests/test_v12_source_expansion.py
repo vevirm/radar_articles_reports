@@ -33,7 +33,7 @@ class V12SourceExpansionTests(unittest.TestCase):
         self.assertFalse(bootstrap)
         self.assertEqual(from_date, dt.date(2026, 8, 6))
 
-    def test_broad_journal_article_is_eligible_for_quality_gate(self):
+    def test_unrecognised_broad_journal_is_retained_for_relevance_ranking(self):
         work = {
             "type": "article",
             "primary_location": {"source": {"display_name": "A Relevant Specialist Journal", "type": "journal"}},
@@ -41,8 +41,6 @@ class V12SourceExpansionTests(unittest.TestCase):
         }
         ok, tier, rank, source, label = s.quality_from_openalex(work)
         self.assertTrue(ok)
-        self.assertEqual(tier, 2)
-        self.assertIn("broad", label.lower())
 
 
 if __name__ == "__main__":

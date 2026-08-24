@@ -74,14 +74,14 @@ class ClassifierTests(unittest.TestCase):
         self.assertTrue(ev["b_pass"])
         self.assertEqual(ev["b_route"], "future-of-A-method")
 
-    def test_accepts_true_foresight_method_development_even_outside_ri(self):
+    def test_rejects_foresight_method_development_outside_policy_ri_scope(self):
         title = "Integral foresight methodology for post-growth lifestyles"
         abstract = (
             "The article develops an integral foresight method combining literature review, scenarios and participatory workshops. "
             "It explores household lifestyles and personal wellbeing under post-growth futures."
         )
         ev = gate_scope(title, abstract, "", 2)
-        self.assertTrue(ev["b_pass"])
+        self.assertFalse(ev["b_pass"])
 
 
 class V12BalancedRelevanceTests(unittest.TestCase):

@@ -57,6 +57,6 @@ class RotationCellFillTests(unittest.TestCase):
             self.assertGreaterEqual(len(sr.CONFIG['frontier_gap_scholarly_queries'][cell]),6,cell)
 
     def test_allocation_version_bumped(self):
-        self.assertEqual(sr.CONFIG['allocation_profile_version'],'v17.7.5-rotating-cell-fill')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'],'v17.8.1-risk-weighted-frontier')
 
 if __name__=='__main__': unittest.main()

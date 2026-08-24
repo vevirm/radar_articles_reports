@@ -84,13 +84,13 @@ class ABCModelTests(unittest.TestCase):
         self.assertTrue(ev['b_pass'])
         self.assertEqual(ev['b_route'], 'future-of-A-method')
 
-    def test_B_accepts_general_methodological_foresight_paper(self):
+    def test_B_rejects_general_method_without_policy_ri_destination(self):
         ev = scanner.gate_scope(
             'Comparing horizon-scanning methods for strategic foresight',
             'We develop and benchmark a methodology for horizon scanning, comparing weak-signal detection protocols and validation procedures under deep uncertainty.',
             '', 2, source_kind='scholarly'
         )
-        self.assertTrue(ev['b_pass'])
+        self.assertFalse(ev['b_pass'])
 
 
     def test_B_rejects_methodological_application_even_when_future_oriented(self):

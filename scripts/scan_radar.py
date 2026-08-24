@@ -492,7 +492,15 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         for key in FRONTIER_CELL_ORDER
     }
     sparse = [key for key in FRONTIER_CELL_ORDER if deficits[key] > 0]
-    ordered = sorted(sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
+    # V17.8 risk-first allocation: an empty +/+ opening is not a gap that the scanner should
+    # actively try to fill while constrained-autonomy, dependency or double-loss cells remain
+    # under-covered. Demonstrated openings should emerge from normal discovery, not from a
+    # matrix-balancing search incentive.
+    risk_sparse = [key for key in sparse if not key.endswith('-A')]
+    opening_sparse = [key for key in sparse if key.endswith('-A')]
+    ordered_risk = sorted(risk_sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
+    ordered_openings = sorted(opening_sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
+    ordered = ordered_risk if ordered_risk else ordered_openings
     target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
     targets = ordered[:target_limit]
 
@@ -972,7 +980,7 @@ URL_HARD_EXCLUDE = [
 NEWS_EXCLUDE = [
     "opinion", "commentary", "editorial", "analysis:", "analysis -", "column", "viewpoint",
     "podcast", "book review", "letter to the editor", "letters to the editor", "explainer",
-    "interview", "comment:", "comment -",
+    "interview", "comment:", "comment -", "company announcement",
     # V17.5.3: weak signals are developments, not individual career listings.
     "job with", "job opening", "job vacancy", "vacancy", "career opportunity",
     "doctoral researcher in", "phd position", "postdoctoral position", "postdoc position",
@@ -1061,6 +1069,60 @@ def clean_text(value: Any) -> str:
 def normalized(text: str) -> str:
     text = clean_text(text).lower().replace("–", "-").replace("—", "-")
     return re.sub(r"\s+", " ", text)
+
+
+ENGLISH_LANGUAGE_CODES = {"en", "eng", "english", "en-us", "en-gb", "en_us", "en_gb"}
+ENGLISH_FUNCTION_WORDS = {
+    "the", "and", "of", "to", "in", "for", "with", "on", "as", "by", "from", "that",
+    "this", "is", "are", "was", "were", "be", "an", "a", "at", "or", "which", "their",
+    "between", "through", "under", "into", "across", "towards", "toward", "how", "what",
+}
+NON_ENGLISH_FUNCTION_WORDS = {
+    # High-frequency function words in common European publication languages. These are used
+    # only as a conservative tie-breaker when metadata does not expose a language code.
+    "und", "der", "die", "das", "den", "dem", "des", "mit", "für", "von", "zur", "zum",
+    "et", "les", "des", "une", "dans", "pour", "avec", "sur", "aux", "du", "de", "la", "le",
+    "y", "los", "las", "una", "para", "con", "del", "por", "sobre", "entre", "el",
+    "e", "gli", "della", "delle", "per", "con", "nel", "nella", "tra", "fra", "il", "lo",
+    "i", "oraz", "dla", "przez", "w", "z", "na", "do", "od", "czy", "jest",
+    "și", "sau", "pentru", "din", "cu", "ale", "este", "sunt",
+}
+
+
+def probably_english(text: str) -> bool:
+    """Conservative English-only guard for records whose APIs omit language metadata.
+
+    Technical titles can contain little ordinary prose, so the heuristic rejects only strong
+    evidence of another language: non-Latin scripts, or a clear excess of non-English function
+    words. Ambiguous Latin-script records are retained unless the source metadata says otherwise.
+    """
+    txt = clean_text(text)[:5000]
+    if not txt:
+        return False
+    letters = re.findall(r"[^\W\d_]", txt, flags=re.UNICODE)
+    if letters:
+        non_latin = sum(1 for ch in letters if not ("A" <= ch <= "Z" or "a" <= ch <= "z") and ord(ch) > 0x024F)
+        if non_latin / len(letters) > 0.04:
+            return False
+    words = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]+", txt.lower())
+    if len(words) < 5:
+        return True
+    en = sum(w in ENGLISH_FUNCTION_WORDS for w in words)
+    other = sum(w in NON_ENGLISH_FUNCTION_WORDS for w in words)
+    if other >= 4 and other >= en + 2:
+        return False
+    return True
+
+
+def english_record_ok(text: str, metadata_language: Any = "") -> bool:
+    if not bool(CONFIG.get("english_only", True)):
+        return True
+    lang = normalized(metadata_language).replace("_", "-")
+    if lang:
+        primary = lang.split("-", 1)[0]
+        if lang not in ENGLISH_LANGUAGE_CODES and primary != "en":
+            return False
+    return probably_english(text)
 
 
 def norm_title(text: str) -> str:
@@ -1398,6 +1460,58 @@ A_FOCUS_EXCLUDE_TITLE = [
     'annual report on', 'guidelines on accessible communications',
 ]
 
+# V17.8: Strand A is a radar for major EU R&I under geopolitical competition, not a
+# catch-all for any European sector where R&D or competitiveness appears.  The major-focus
+# gate keeps system-level R&I issues and strategically consequential technology/capability
+# domains while excluding incidental consumer, education, health-service and sports topics.
+A_MAJOR_RI_SYSTEM = [
+    'research and innovation', 'research & innovation', 'r&i', 'research policy', 'innovation policy',
+    'science policy', 'research security', 'knowledge security', 'science diplomacy',
+    'horizon europe', 'fp10', 'framework programme', 'european research area',
+    'research system', 'innovation system', 'research governance', 'innovation governance',
+    'research infrastructure', 'research infrastructures', 'scientific infrastructure',
+    'research funding', 'research programme', 'research program', 'international research cooperation',
+    'scientific collaboration', 'research collaboration', 'research talent', 'scientific talent',
+    'research workforce', 'scientific workforce', 'brain drain', 'brain gain', 'technology transfer',
+    'industrial innovation', 'deep tech', 'technological sovereignty', 'technology sovereignty',
+    'strategic autonomy', 'economic security', 'strategic dependency', 'strategic dependencies',
+]
+A_MAJOR_TECH_DOMAINS = [
+    'semiconductor', 'semiconductors', 'microelectronics', 'artificial intelligence', ' ai ',
+    'quantum', 'biotechnology', 'biotech', 'advanced materials', 'critical raw materials',
+    'critical minerals', 'space technology', 'satellite', 'nuclear technology', 'reactor',
+    'clean technology', 'clean tech', 'battery', 'batteries', 'digital infrastructure',
+    'compute infrastructure', 'supercomputer', 'cloud infrastructure', 'cybersecurity',
+    'dual-use', 'dual use', 'defence technology', 'defense technology', 'robotics',
+]
+A_OFFTOPIC_CONSUMER_OR_LOCAL = [
+    'table tennis', 'basketball', 'football', 'soccer', 'tennis equipment', 'sports equipment',
+    'sport equipment', 'hospital bed', 'hotel', 'hospitality branding', 'tourism', 'restaurant',
+    'school teaching', 'smart teaching', 'classroom', 'agricultural marketing', 'marketing logistics',
+]
+
+
+def _major_a_focus(text: str, explicit_geo: bool) -> bool:
+    """Require system-level or strategically consequential EU R&I centrality.
+
+    Explicit geopolitical papers receive a little more latitude, but a low-stakes consumer/local
+    sector still needs a recognised strategic technology or R&I-system mechanism to qualify.
+    """
+    low = normalized(text)
+    system = bool(distinct_matches(low, A_MAJOR_RI_SYSTEM))
+    strategic_tech = bool(distinct_matches(low, A_MAJOR_TECH_DOMAINS))
+    off_topic = bool(distinct_matches(low, A_OFFTOPIC_CONSUMER_OR_LOCAL))
+    if off_topic and not (system or strategic_tech):
+        return False
+    if system or strategic_tech:
+        return True
+    # Allow a genuinely geopolitical industrial-capability paper only when the text explicitly
+    # concerns EU/European technology/innovation capability, not generic sector competitiveness.
+    return bool(explicit_geo and re.search(
+        r'\b(?:eu|europe|european)\b.{0,100}\b(?:technology|technological|innovation|research|r&d|industrial capability|production capacity)\b',
+        low, re.I
+    ))
+
 B_METHOD_FAMILIES = [
     # Core futures/foresight methods. These are the methods Strand B is actually about.
     'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods',
@@ -1515,6 +1629,24 @@ B_SUITABILITY_CONTEXT = [
     'emerging technology', 'complex systems', 'systemic risk', 'uncertainty', 'strategy',
 ]
 
+B_STRATEGIC_RI_RELEVANCE = [
+    # A B-paper needs a policy/R&I/technology-system destination, not merely the word
+    # 'foresight' or 'uncertainty' describing its own method.
+    'research and innovation', 'research & innovation', 'r&i', 'research policy', 'innovation policy',
+    'science policy', 'technology policy', 'science and technology policy', 'public policy',
+    'policymaking', 'policy making', 'public decision-making', 'public decision making', 'strategic decision-making',
+    'anticipatory governance', 'policy domains', 'emerging technology', 'emerging technologies',
+    'critical technology', 'critical technologies', 'technology intelligence', 'strategic intelligence',
+    'research front', 'research fronts', 'innovation trajectories', 'technology trajectories',
+    'technology fields', 'industrial policy', 'geopolit', 'geoeconomic', 'economic security',
+    'strategic competition', 'research portfolio', 'r&i portfolio',
+]
+B_OFFTOPIC_APPLICATION_DOMAINS = [
+    'table tennis', 'basketball', 'football', 'soccer', 'sports equipment', 'sport equipment',
+    'hospitality branding', 'hotel branding', 'tourism marketing', 'school teaching', 'smart teaching',
+    'forest pest', 'forest pests', 'hospital bed', 'gold mining', 'patient education',
+]
+
 def _method_matches(text: str, terms: list[str]) -> list[str]:
     # Metadata frequently alternates between "horizon scanning" and "horizon-scanning".
     # Normalise separators before bounded matching so punctuation does not decide B admission.
@@ -1609,6 +1741,19 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
         contextual_focus = False
 
     focus = bool(explicit_focus or contextual_focus)
+    # V17.8.1: major-EU-R&I is a ranking objective, not a blanket corpus gate.
+    # Hard rejection is reserved for obvious contamination (sports/consumer/local topics)
+    # that only happen to mention R&D/competition. Broad but genuinely relevant papers stay
+    # available and are ranked below system-level/geostrategic work.
+    if focus and bool(CONFIG.get('major_eu_ri_focus', True)):
+        low = normalized(context_text)
+        off_topic = bool(distinct_matches(low, A_OFFTOPIC_CONSUMER_OR_LOCAL))
+        strategic_tech = bool(distinct_matches(low, A_MAJOR_TECH_DOMAINS))
+        system = bool(distinct_matches(low, A_MAJOR_RI_SYSTEM))
+        if off_topic and not (strategic_tech or system):
+            focus = False
+            explicit_focus = False
+            contextual_focus = False
     route = 'explicit-geopolitics' if explicit_focus else ('external-position-evidence' if contextual_focus else '')
     context_evidence = list(dict.fromkeys(external + outcomes))[:6] if contextual_focus else []
     return focus, ri, geo, bridge, route, context_evidence
@@ -1647,6 +1792,20 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     candidate_families = core_families or (auxiliary if futures_framing else []) or (ri_families if ri_transfer_candidate else [])
     if not candidate_families:
         return False, all_families[:5], '', [], ''
+
+    strategic_ri_context = distinct_matches(ta, B_STRATEGIC_RI_RELEVANCE)
+    off_topic_application = distinct_matches(ta, B_OFFTOPIC_APPLICATION_DOMAINS)
+    # Live Strand-B discovery remains precision-first: the method must have a policy/R&I/
+    # technology-system destination. V17.8.1 only changes *historical migration*: older saved
+    # B records are not mass-deleted from shortened summaries.
+    if not strategic_ri_context:
+        return False, candidate_families[:5], '', [], ''
+    if off_topic_application and not distinct_matches(ta, [
+        'research and innovation', 'innovation policy', 'research policy', 'science policy',
+        'technology policy', 'public policy', 'policy domains', 'emerging technology',
+        'critical technology', 'economic security', 'geopolit', 'strategic competition'
+    ]):
+        return False, candidate_families[:5], '', [], ''
 
     # "Scenario construction/building/development" is linguistically ambiguous: it can mean
     # constructing a simulated teaching/engineering scene rather than a future scenario. When
@@ -1762,6 +1921,17 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     title = clean_text(title)
     abstract = clean_text(abstract)
     body = clean_text(body)
+
+    if not english_record_ok(f"{title}. {abstract}. {body[:2500]}"):
+        return {
+            'a_pass': False, 'b_pass': False, 'eu_relevance': None, 'eu_evidence': [],
+            'ri_evidence': [], 'geo_evidence': [], 'bridge_sentence': '', 'a_route': '',
+            'a_context_evidence': [], 'bridge_supported': False, 'bridge_mode': '',
+            'foresight_evidence': [], 'method_evidence': [], 'method_bridge': '',
+            'b_transferable': False, 'b_methodology_first': False, 'b_suitability_evidence': [],
+            'b_route': '', 'trend_only': False, 'source_tier': source_tier,
+            'language_rejected': True,
+        }
 
     a_focus, ri_hits, geo_hits, a_bridge, a_route, a_context = _a_focus_ok(title, abstract, body, source_kind)
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
@@ -1948,6 +2118,9 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
     date = parse_date(work.get("publication_date"))
     effective_floor = date_floor or DATE_FLOOR
     if not title or not date or date < effective_floor or date > dt.date.today():
+        return None
+    if not english_record_ok(f"{title}. {abstract}", work.get("language", "")):
+        _diag_inc("openalex_reject_non_english")
         return None
     if document_exclusion_reason(title, abstract):
         return None
@@ -2222,6 +2395,9 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
     date = crossref_date(item)
     effective_floor = date_floor or DATE_FLOOR
     if not title or not date or date < effective_floor or date > dt.date.today():
+        return None
+    if not english_record_ok(f"{title}. {abstract}", item.get("language", "")):
+        _diag_inc("crossref_reject_non_english")
         return None
     if document_exclusion_reason(title, abstract):
         return None
@@ -2707,6 +2883,10 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else "")
     page_type = meta_content(soup, ["og:type", "article:section", "type"])
     desc = meta_content(soup, ["description", "og:description", "twitter:description"])
+    html_lang = clean_text((soup.html or {}).get("lang", "") if soup.html else "")
+    if not english_record_ok(f"{title}. {desc}", html_lang):
+        _diag_inc("institution_reject_non_english")
+        return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
     if not title or exclusion:
         return None
@@ -3096,12 +3276,52 @@ def dedupe_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
+    """Priority, not admission: surface major EU R&I/geopolitical competition first.
+
+    Saved summaries can contain noisy references/comparators, so the title carries most of
+    the score. Summary/relevance text only adds small support when the title already shows
+    a European or strategic R&I connection.
+    """
+    if not isinstance(item, dict):
+        return -99
+    title = normalized(str(item.get("title", "")))
+    support = normalized(" ".join(str(item.get(k, "")) for k in ("summary", "relevance_note")))
+    eu_t = bool(has_eu_word(title) or contains_any(title, EU_DIRECT + EU_GENERIC) or bounded_matches(title, MEMBER_STATE_SCOPE))
+    system_t = bool(distinct_matches(title, A_MAJOR_RI_SYSTEM))
+    tech_t = bool(distinct_matches(title, A_MAJOR_TECH_DOMAINS))
+    geo_t = bool(distinct_matches(title, GEO_STRONG + GEO_ACTORS)) or contains_any(title, [
+        "economic security", "strategic autonomy", "technology sovereignty", "technological sovereignty",
+        "de-risk", "derisk", "export control", "investment screening", "geoeconomic", "techno-national",
+        "geopolit", "strategic competition", "dependency", "dependence"
+    ])
+    score = (4 if eu_t else 0) + (5 if system_t else 0) + (4 if tech_t else 0) + (5 if geo_t else 0)
+    if eu_t and (system_t or tech_t) and geo_t:
+        score += 6
+    # Limited supporting evidence: never let a noisy abstract/reference list manufacture
+    # a high-priority paper whose title is unrelated to Europe or strategic R&I.
+    if eu_t or geo_t or system_t:
+        if distinct_matches(support, A_MAJOR_RI_SYSTEM): score += 2
+        if distinct_matches(support, A_MAJOR_TECH_DOMAINS): score += 1
+        if distinct_matches(support, GEO_STRONG): score += 2
+    if normalized(item.get("strand", "")) == "b":
+        if distinct_matches(title + " " + support, B_STRATEGIC_RI_RELEVANCE): score += 4
+        if _method_matches(title, B_METHOD_FAMILIES): score += 4
+    if distinct_matches(title, A_OFFTOPIC_CONSUMER_OR_LOCAL): score -= 10
+    if distinct_matches(title, B_OFFTOPIC_APPLICATION_DOMAINS): score -= 5
+    tier = normalized(item.get("source_tier", ""))
+    if "tier 1" in tier: score += 3
+    elif "comparable" in tier: score += 1
+    return score
+
+
 def rank_candidate(item: dict[str, Any]):
     if not isinstance(item, dict):
-        return (9, 9.0, 0, 0)
+        return (99, 9, 9.0, 0, 0)
+    priority = major_eu_ri_priority_score(item)
     eu = 0 if item.get("eu_relevance") == "direct" else 1
     d = parse_date(item.get("date")) or dt.date.min
-    return (eu, float(item.get("_source_rank", 9.0)), -d.toordinal(), -int(item.get("_confidence", 0)))
+    return (-priority, eu, float(item.get("_source_rank", 9.0)), -d.toordinal(), -int(item.get("_confidence", 0)))
 
 
 def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen: str | None = None) -> dict[str, Any]:
@@ -3396,6 +3616,8 @@ def _saved_item_passes(item: dict[str, Any], pass_key: str, *, title: str | None
     t = clean_text(item.get("title", "")) if title is None else clean_text(title)
     a = clean_text(item.get("summary", "")) if abstract is None else clean_text(abstract)
     link = clean_text(item.get("link", ""))
+    # V17.8.1: source tier is a confidence/ranking input, never a blanket deletion rule.
+    # A broad journal can contain directly relevant EU R&I/geopolitical evidence.
     if not t or document_exclusion_reason(t, a, link):
         return False, {}
     ev = gate_scope(t, a, clean_text(body), _saved_tier(item), source_kind=_saved_source_kind(item))
@@ -3423,6 +3645,49 @@ def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[
                 removed[strand_key] += 1
         out[strand_key] = kept
     return out, removed
+
+
+def surgical_precision_cleanup(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
+    """Remove only high-confidence contamination from saved A/B.
+
+    Unlike the V17.8.0 migration, this never re-runs every historical row against a
+    shortened saved summary and never rejects a record because its journal is broad.
+    """
+    out = dict(previous) if isinstance(previous, dict) else {}
+    stats = {"strand_a_removed": 0, "strand_b_removed": 0, "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0}
+    for strand_key in ("strand_a", "strand_b"):
+        kept = []
+        for item in out.get(strand_key, []) if isinstance(out.get(strand_key), list) else []:
+            if not isinstance(item, dict):
+                continue
+            title = clean_text(item.get("title", ""))
+            summary = clean_text(item.get("summary", ""))
+            text = normalized(f"{title} {summary}")
+            hard_noise = False
+            if not title or document_exclusion_reason(title, summary, clean_text(item.get("link", ""))):
+                hard_noise = True
+            elif not english_record_ok(title):
+                hard_noise = True
+            elif strand_key == "strand_a":
+                off = bool(distinct_matches(text, A_OFFTOPIC_CONSUMER_OR_LOCAL))
+                system = bool(distinct_matches(text, A_MAJOR_RI_SYSTEM))
+                tech = bool(distinct_matches(text, A_MAJOR_TECH_DOMAINS))
+                hard_noise = off and not (system or tech)
+            else:
+                hard_noise = bool(distinct_matches(text, [
+                    'basketball smart teaching', 'hospitality branding',
+                    'scenario-based financial planning in gold mining',
+                    'educational administrative framework in nigeria'
+                ]))
+            if hard_noise:
+                stats[strand_key + "_removed"] += 1
+            else:
+                saved = dict(item)
+                saved["new_this_scan"] = False
+                kept.append(saved)
+                stats["stored_pass"] += 1
+        out[strand_key] = kept
+    return out, stats
 
 
 def cleanup_quality_profile_regressions(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
@@ -3739,15 +4004,36 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     return [public_item(x, new_this_scan=signal_identity(x) in new_ids, first_seen=x.get('first_seen')) for x in merged]
 
 def _saved_signal_passes(item: dict[str, Any]) -> bool:
-    """Current C gate for saved records; B/watch-theme anchors are invalid in the ABC model."""
+    """Surgical saved-C precision gate.
+
+    Direct European signals remain eligible. Non-European developments may remain only when
+    they concern a narrow strategic R&I mechanism that can materially change Europe's
+    relative capability/access and still anchor to Strand A. Generated Europe boilerplate
+    is never enough on its own.
+    """
     if not isinstance(item, dict):
         return False
-    headline=clean_text(item.get('headline',''))
+    headline = clean_text(item.get('headline', ''))
     if not headline:
         return False
-    if '(strand b)' in normalized(item.get('anchor','')) or normalized(item.get('anchor_basis','')) == 'watch-theme':
+    if '(strand b)' in normalized(item.get('anchor', '')) or normalized(item.get('anchor_basis', '')) == 'watch-theme':
         return False
-    desc=clean_text(item.get('signal_note','') or item.get('why_it_matters',''))
+    h = normalized(headline)
+    if contains_any(h, [
+        'table tennis', 'school ai councils', 'student agency', 'drug prices', 'rural america',
+        'genocide', 'fiscal, ai, or monetary news', 'crypto firm', 'taiwan? the view from taipei'
+    ]):
+        return False
+    desc = clean_text(item.get('signal_note', '') or item.get('why_it_matters', ''))
+    if eu_news_scope(h):
+        return factual_news(headline, desc)
+    external_specific = contains_any(h, [
+        'export control', 'semiconductor', 'advanced chip', 'compute', 'quantum',
+        'research cooperation', 'research collaboration', 'research security', 'research talent',
+        'scientific collaboration', 'critical raw material', 'critical mineral', 'ai investment gap'
+    ])
+    if not external_specific:
+        return False
     return factual_news(headline, desc)
 
 
@@ -3828,15 +4114,28 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
 
     eu_scope = eu_news_scope(full)
     if not eu_scope:
-        # Derived-Europe is only for empirical/reframing evidence, never for a generic foreign
-        # technology launch. Specific A anchoring later in the pipeline is still mandatory.
+        # V17.8.1: external developments are allowed only through a narrow materiality
+        # route. This keeps export-control/compute/quantum/research-system shocks that can
+        # change Europe's relative position, while blocking generic foreign AI, health,
+        # education, politics and consumer-sector stories. A specific A anchor is still
+        # mandatory later in the pipeline.
         derived_themes = {
             "fragmentation of global science", "transatlantic / US–China S&T competition",
             "export controls / dual use", "critical and emerging technologies",
             "R&I competitiveness / technological capabilities", "supply chains / strategic dependencies",
             "economic security and R&I",
         }
-        if not ((reframing_signal_text(full) or material_update_signal_text(full)) and (core_ri or contains_any(full, MATERIAL_SIGNAL_RI)) and strategic_frame and (found & derived_themes)):
+        narrow_external = contains_any(full, [
+            'export control', 'semiconductor', 'advanced chip', 'compute infrastructure', 'compute access',
+            'quantum', 'research cooperation', 'research collaboration', 'research security',
+            'research talent', 'scientific collaboration', 'critical raw material', 'critical mineral',
+            'ai investment gap', 'frontier ai compute'
+        ])
+        hard_noise = contains_any(full, [
+            'table tennis', 'school ai councils', 'student agency', 'drug prices', 'rural america',
+            'genocide', 'crypto firm', 'monetary news', 'hospitality', 'sports equipment'
+        ])
+        if hard_noise or not (narrow_external and (reframing_signal_text(full) or material_update_signal_text(full)) and strategic_frame and (found & derived_themes)):
             return False
 
     # International research cooperation/mobility is itself a valid geopolitical channel.
@@ -4358,20 +4657,17 @@ def main() -> int:
         "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
     }
     if inherited_audit or precision_cleanup:
-        label = "First-run inherited-corpus audit" if inherited_audit else "Quality-profile regression cleanup"
+        label = "First-run inherited-corpus audit" if inherited_audit else "Surgical quality-profile cleanup"
         log_progress(f"{label}: checking current saved A/B material before discovery")
-        # A changed admission profile can invalidate historical rows just as surely as
-        # an inherited legacy corpus. Re-run the same fail-closed audit and refresh only
-        # on profile migration; ordinary scans never re-audit accepted history.
-        previous, inherited_audit_stats = audit_inherited_ab(previous, warnings)
+        if inherited_audit:
+            previous, inherited_audit_stats = audit_inherited_ab(previous, warnings)
+        else:
+            previous, inherited_audit_stats = surgical_precision_cleanup(previous)
         previous["inherited_corpus_audit_complete"] = True
         previous["precision_corpus_cleanup_complete"] = True
         log_progress(
-            f"{label} complete: kept "
-            f"{inherited_audit_stats['stored_pass']} on saved evidence + "
-            f"{inherited_audit_stats['refreshed_pass']} after document refresh; removed "
-            f"{inherited_audit_stats['strand_a_removed']} A and "
-            f"{inherited_audit_stats['strand_b_removed']} B item(s)"
+            f"{label} complete: retained {inherited_audit_stats['stored_pass']} saved A/B item(s); removed only "
+            f"{inherited_audit_stats['strand_a_removed']} A and {inherited_audit_stats['strand_b_removed']} B hard-failure item(s)"
         )
 
     signal_cleanup = needs_precision_signal_cleanup(previous)

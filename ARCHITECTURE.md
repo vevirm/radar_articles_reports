@@ -1,33 +1,31 @@
-# Architecture — V17.7.5 A/B/C semantic separation and matrix-first allocation
+# Architecture — V17.8.1 broad evidence, ranked precision, risk-first matrix
 
-The radar has four stages: discovery, admission, cumulative storage, and interpretation.
+V17.8.1 uses four distinct layers: discovery, admission, cumulative storage, and interpretation/ranking.
 
-## Discovery and persistent rotation
+## Discovery
 
-`scripts/scan_radar.py` stores rotation state in `radar.json::scan_state`. Independent cursors cover OpenAlex, Crossref broad queries, priority-journal tasks, institutional sources, a dedicated B-method query bank, frontier-gap queries, frontier specialist sources and deeper result pages. These cursors survive quality-profile changes.
+Persistent OpenAlex, Crossref, priority-journal, institutional, B-method and Frontier-gap cursors remain unchanged. English-language checks run at API/page ingestion. Broad peer-reviewed journals are discoverable again.
 
-Gap scanning allocates first claim on spare discovery capacity to the sparsest Frontier cells without relaxing the A gate. Zero-count cells are searched repeatedly before near-empty cells. After the normal source stages, a matrix-first depth phase advances deeper scholarly result pages until the scan approaches its hard runtime budget. The dedicated B lane still rotates independently so method discovery does not depend on the topical A cursor.
+## Admission vs priority
 
-## A — evidence
+Admission answers: “is this substantively valid evidence for the strand?” Priority answers: “how central is it to major EU R&I under geopolitical competition?” These are intentionally separate.
 
-A is precision-first. Admission requires direct EU/European/Member-State scope plus substantive R&I content and a real geopolitical/economic-security connection. R&I includes research policy/security/collaboration/funding, science diplomacy, R&D and innovation systems/capability, infrastructures, talent flows, and strategic technologies when research/innovation/capability-building is actually part of the document.
+Strand A still requires substantive EU R&I plus geopolitical/external-position evidence and hard-rejects obvious sports/consumer contamination. `major_eu_ri_priority_score()` then promotes system-level R&I, research security, strategic technologies, economic security, talent, infrastructure, dependencies and EU strategic competition.
 
-Boilerplate such as Horizon Europe funding acknowledgements is stripped before admission. Deep-body mentions cannot rescue an unrelated institutional page.
+Source tier contributes to confidence/ordering but is not a hard gate.
 
-## B — methods
+## Historical migration
 
-B is not another evidence strand. It is a **method-development library** for understanding the future of A. A source qualifies when the reusable futures/R&I-futures method is itself the contribution: either it explicitly develops/adapts/extends/refines/designs the method, or a method-first paper provides validation/benchmark/transfer evidence showing that the analytical workflow is the contribution. Mere application of an existing method does not qualify. Generic techniques such as Delphi, system dynamics or agent-based modelling also require an explicit futures/foresight purpose.
+Profile upgrades use `surgical_precision_cleanup()` for an already accepted corpus. This avoids the V17.8.0 failure where concise saved summaries were treated as if they were full abstracts and large parts of the corpus were deleted. Only high-confidence hard failures are removed during migration.
 
-A domain study that merely applies Delphi, scenarios, system dynamics or another technique does not qualify. Ambiguous “scenario construction/building/development” language also needs an independent future/foresight/anticipatory/strategic cue, preventing teaching or simulation scenes from being mistaken for futures methods.
+## Strand B
 
-## C — weak signals
+Live B remains method-development-first and requires a policy/R&I/technology-system destination. Historical B is preserved unless it is an obvious false positive.
 
-C is an interpretive update layer, not a generic news feed. It accepts three bounded forms of current evidence: early/uncertain developments; new empirical findings/indicators; and consequential R&I changes such as investments, restrictions, standards, collaboration/talent moves or infrastructure/capability shifts. The third route does not require pilot/draft wording, but it must contain R&I substance plus strategic stakes.
+## Strand C
 
-Every C item is anchored to A. B and generic watch themes are not valid anchors. External US/China/global developments can reach the prefilter when materially relevant, but are discarded unless a specific or recurring Strand-A anchor explains the European significance. Event-level headline normalisation collapses syndicated or paraphrased coverage of the same signal.
+C is still selective. Direct European developments pass the normal topical/event gate. External developments have a narrow materiality route for strategic mechanisms such as export controls, chips/compute, quantum, critical inputs and research-system shocks; final display still requires an A anchor.
 
 ## Frontier
 
-`frontier/frontier.js` uses Strand A as its substantive evidence corpus and Strand C as current contextual change. Strand B is deliberately excluded from evidence indexing and matrix occupancy.
-
-The Frontier retains semantic row/cell logic, including explicit Knowledge & people mechanisms and recognition of individual EU Member States. Sparse cells guide discovery rotation; they do not manufacture evidence.
+The Frontier remains risk-first. Ambiguity is neutral, not positive. Column A requires realised gains on both axes. B/C/D risk cells receive greater ranking weight and gap-search priority. Strand B is excluded from evidence classification.
