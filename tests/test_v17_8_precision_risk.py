@@ -50,15 +50,16 @@ def test_specific_external_strategic_shock_can_prefilter_but_generic_ai_cannot()
     )
 
 
-def test_gap_allocation_does_not_hunt_openings_while_risk_cells_are_sparse():
+def test_gap_allocation_is_balanced_across_opening_and_risk_cells():
     data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
     state = sr.initial_scan_state(data)
     focus = sr.frontier_gap_plan(data, state)
     assert focus['targets']
-    assert all(not cell.endswith('-A') for cell in focus['targets'])
+    assert any(cell.endswith('-A') for cell in focus['targets'])
+    assert any(not cell.endswith('-A') for cell in focus['targets'])
 
 
-def test_frontier_requires_realised_gain_for_opening():
+def test_frontier_accepts_concrete_committed_opening_but_not_aspiration():
     script = r'''
 const I=require('./briefing/insights.js'); global.RadarInsights=I;
 const F=require('./frontier/frontier.js');
@@ -68,13 +69,15 @@ function countA(title){
  return v.signals.filter(x=>x.column.id==='A').length;
 }
 console.log(JSON.stringify({
- plan:countA('EU plans to attract and retain international researchers through a new funding call to strengthen European research capacity.'),
+ plan:countA('EU plans to invest in a new research programme that could strengthen European research capacity.'),
+ committed:countA('EU launches and funds a new research programme to expand European research capacity and strengthen competitiveness.'),
  realised:countA('EU attracts and retains international researchers, strengthening European research capacity and reducing reliance on external expertise.')
 }));
 '''
     out = subprocess.run(['node', '-e', script], cwd=ROOT, text=True, capture_output=True, check=True)
     result = json.loads(out.stdout)
     assert result['plan'] == 0
+    assert result['committed'] >= 1
     assert result['realised'] >= 1
 
 
@@ -104,3 +107,19 @@ def test_surgical_saved_cleanup_does_not_mass_purge_broad_journals():
     assert len(cleaned['strand_a']) == 1
     assert 'EU–China research cooperation' in cleaned['strand_a'][0]['title']
     assert stats['strand_a_removed'] == 1
+
+
+def test_current_corpus_has_openings_and_non_openings():
+    script = r'''
+const fs=require('fs');
+const I=require('./briefing/insights.js'); global.RadarInsights=I;
+const F=require('./frontier/frontier.js');
+const data=JSON.parse(fs.readFileSync('radar.json','utf8'));
+const v=F.buildFrontier(data,{now:'2026-08-24T10:29:00Z'});
+const c={}; for(const col of F.COLUMNS)c[col.id]=v.signals.filter(x=>x.column.id===col.id).length;
+console.log(JSON.stringify(c));
+'''
+    out = subprocess.run(['node', '-e', script], cwd=ROOT, text=True, capture_output=True, check=True)
+    counts = json.loads(out.stdout)
+    assert counts['A'] >= 1
+    assert counts['B'] + counts['C'] + counts['D'] >= 1

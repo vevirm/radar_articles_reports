@@ -25,7 +25,8 @@ class MatrixFirstDepthTests(unittest.TestCase):
         used_cells = set(focus['scholarly_query_cells'])
         self.assertTrue(set(focus['empty_targets']).issubset(used_cells))
         self.assertTrue(all(len(focus['scholarly_query_cells'].get(c, [])) >= 2 for c in focus['empty_targets']))
-        self.assertFalse(any(c.endswith('-A') for c in focus['targets']))
+        self.assertTrue(any(c.endswith('-A') for c in focus['targets']))
+        self.assertTrue(any(not c.endswith('-A') for c in focus['targets']))
 
     def test_gap_depth_bank_is_zero_cell_only_until_matrix_has_no_zeros(self):
         prev = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
@@ -67,7 +68,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
 
     def test_new_allocation_profile_does_not_reset_ab_recall_profile(self):
         self.assertEqual(sr.CONFIG['recall_profile_version'], 'v17.7.2-source-first-contextual-recall')
-        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.8.1-risk-weighted-frontier')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.8.2-balanced-frontier')
         self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.4-direct-institutional-signals')
 
 

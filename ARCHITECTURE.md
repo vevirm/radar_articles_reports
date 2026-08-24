@@ -1,31 +1,19 @@
-# Architecture — V17.8.1 broad evidence, ranked precision, risk-first matrix
+# Architecture — V17.8.2 broad evidence, ranked precision, balanced frontier
 
-V17.8.1 uses four distinct layers: discovery, admission, cumulative storage, and interpretation/ranking.
+V17.8.2 retains four layers: discovery, admission, cumulative storage, and interpretation/ranking.
 
-## Discovery
+## 1. Discovery
+Discovery remains broad enough to find relevant EU R&I developments under geopolitical competition. Frontier gap discovery is now symmetric across A/B/C/D: cell scarcity and rotating cursors determine effort.
 
-Persistent OpenAlex, Crossref, priority-journal, institutional, B-method and Frontier-gap cursors remain unchanged. English-language checks run at API/page ingestion. Broad peer-reviewed journals are discoverable again.
+## 2. Admission
+A remains broad-but-relevant and English-first for new records. Hard exclusions remove obvious contamination, malformed/non-English records and material with no credible EU R&I/geopolitical mechanism. Broad-journal status alone never deletes a paper. Strand B requires transferable forward-looking method development. Strand C requires a specific material development and a concrete European R&I bridge.
 
-## Admission vs priority
+## 3. Cumulative storage
+Profile upgrades do not re-audit the historical corpus from shortened stored summaries. Surgical cleanup is reserved for hard failures.
 
-Admission answers: “is this substantively valid evidence for the strand?” Priority answers: “how central is it to major EU R&I under geopolitical competition?” These are intentionally separate.
+## 4. Interpretation / Sovereignty Frontier
+The Frontier asks two independent questions: does the development improve or weaken European autonomy, and does it improve or weaken R&I/industrial competitiveness?
 
-Strand A still requires substantive EU R&I plus geopolitical/external-position evidence and hard-rejects obvious sports/consumer contamination. `major_eu_ri_priority_score()` then promotes system-level R&I, research security, strategic technologies, economic security, talent, infrastructure, dependencies and EU strategic competition.
+Column A is an **Opening**, not a “demonstrated outcome only” bucket. It accepts either observed gains or concrete committed implementation that directly builds European capability/autonomy and competitive performance. Pure aspiration is excluded. B/C/D use the same evidence discipline. Quadrants receive no automatic ranking bonus.
 
-Source tier contributes to confidence/ordering but is not a hard gate.
-
-## Historical migration
-
-Profile upgrades use `surgical_precision_cleanup()` for an already accepted corpus. This avoids the V17.8.0 failure where concise saved summaries were treated as if they were full abstracts and large parts of the corpus were deleted. Only high-confidence hard failures are removed during migration.
-
-## Strand B
-
-Live B remains method-development-first and requires a policy/R&I/technology-system destination. Historical B is preserved unless it is an obvious false positive.
-
-## Strand C
-
-C is still selective. Direct European developments pass the normal topical/event gate. External developments have a narrow materiality route for strategic mechanisms such as export controls, chips/compute, quantum, critical inputs and research-system shocks; final display still requires an A anchor.
-
-## Frontier
-
-The Frontier remains risk-first. Ambiguity is neutral, not positive. Column A requires realised gains on both axes. B/C/D risk cells receive greater ranking weight and gap-search priority. Strand B is excluded from evidence classification.
+The matrix is balanced procedurally, not numerically: evidence may still produce more dependencies/losses than openings. Strand B is excluded from Frontier evidence classification.

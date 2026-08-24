@@ -20,7 +20,7 @@
   "incremental_state_version": "v17.2-persistent-source-cursors",
   "rotation_profile_version": "v17.7.1-executed-work-rotation",
   "recall_profile_version": "v17.7.2-source-first-contextual-recall",
-  "allocation_profile_version": "v17.8.1-risk-weighted-frontier",
+  "allocation_profile_version": "v17.8.2-balanced-frontier",
   "scan_state": {
     "version": "v17.2-persistent-source-cursors",
     "source_expansion_version": "v17.5.2-gap-report-recall",
@@ -5498,5 +5498,11 @@
       "Crossref scan budget reached; remaining queued scholarly queries skipped"
     ],
     "transport_failure_warning_count": 3
+  },
+  "v17_8_2_frontier_balance": {
+    "source_state": "radar (18).json",
+    "corpus_preserved": true,
+    "allocation": "balanced scarcity across A/B/C/D",
+    "opening_gate": "realised gain or concrete committed implementation; pure aspiration excluded"
   }
 }

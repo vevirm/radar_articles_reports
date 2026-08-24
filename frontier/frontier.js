@@ -330,19 +330,33 @@
     // Directional cues are intentionally semantic and broad.  They capture
     // dependencies, bottlenecks, capability-building, costs and gains without
     // requiring the exact words used in the cell nickname.
-    const autonomyUp=/strategic autonomy|technological sovereignty|digital sovereignty|sovereign|independence|reduce.{0,45}(?:depend|reliance)|reduc(?:ing|tion).{0,45}strategic depend|diversif|de-risk|derisk|self-suff|domestic capacity|european capacity|eu-led|european infrastructure|local production|onshor|reshor|secure supply|supply security|material security|resilien|alternative supplier|own (?:technology|capability|infrastructure)|control over|strengthen.{0,35}(?:eu|european).{0,35}(?:capacity|capabilit)|eu.{0,30}(?:fund|programme|program|instrument|strategy).{0,45}(?:build|strengthen|support|boost|develop|scale)/.test(t);
+    const autonomyUp=/strategic autonomy|technological autonomy|technology autonomy|tech autonomy|technological sovereignty|digital sovereignty|sovereign|independence|reduce.{0,45}(?:depend|reliance)|reduc(?:ing|tion).{0,45}strategic depend|diversif|de-risk|derisk|self-suff|domestic capacity|european capacity|eu-led|european infrastructure|local production|onshor|reshor|secure supply|supply security|material security|resilien|alternative supplier|own (?:technology|capability|infrastructure)|control over|strengthen.{0,35}(?:eu|european).{0,35}(?:capacity|capabilit)|eu.{0,30}(?:fund|programme|program|instrument|strategy).{0,45}(?:build|strengthen|support|boost|develop|scale)/.test(t);
     const autonomyDown=/strategic depend|critical external depend|external depend|dependence on|dependent on|dependencies|reliance on|rely on|non-eu (?:technology|vendor|supplier|provider)|foreign (?:supplier|vendor|technology|platform|capital|market|infrastructure|expertise|talent)|external (?:supplier|vendor)|import dependence|imported technology|vendor lock|lock-in|loss of access|restricted access|on others(?:'|’) terms|ceding.{0,40}(?:value|profits|leverage|technology)|foreign-controlled/.test(t);
     const performanceUp=/competit|performance|frontier|leading|leader|advanced|scale|scaling|growth|productivity|innovation|investment|market access|access to|capacity|capabilit|excellence|quality|benefit|strengthen|expand|build|deploy|commerciali|sets? pace|industrial leadership|value creation|resilien/.test(t);
     const performanceDown=/less competitive|lag|behind|shortage|bottleneck|chokepoint|vulnerab|exposure|risk|costly|expensive|higher cost|delay|slow|fragment|subscale|declin|loss|losing|hollow|gap|cannot|unable|no substitute|disrupt|cut off|cutoff|blocked|constraint|barrier|threat|weakness|shortcoming|ceding|two-speed|two speed/.test(t);
 
-    // Openings are deliberately evidence-hungry. Funding calls, strategies, ambitions and
-    // recommendations are not +/+ outcomes. Require an observed gain in capability/access/
-    // adoption and reject records that simultaneously carry a material loss/dependence cue.
-    const openingRealized=/\b(?:operational|operates?|deployed|deploys?|deployment|opened|opens?|completed|completes?|secured|secures?|attracted|attracts?|retained|retains?|returned|returns?|recruited|recruits?|expanded capacity|expands?\s+(?:european\s+|eu\s+)?(?:research\s+|compute\s+|production\s+|industrial\s+|manufacturing\s+)?capacity|increased capacity|increases?\s+(?:european\s+|eu\s+)?(?:research\s+|compute\s+|production\s+|industrial\s+|manufacturing\s+)?capacity|capacity increased|production increased|production increases?|market share (?:rose|increased|rises?)|overtook|outpaced|became a leader|is a leader|sets? the pace|adopted by|internationally adopted|global adoption|reduced dependence|reduces? dependence|reduced reliance|reduces? reliance|cut dependence|cuts? dependence|cut reliance|cuts? reliance|diversified suppliers|diversifies? suppliers|new european supplier|new eu supplier|built and operating|now produces|now provides)\b/.test(d);
-    const openingAspirational=/\b(?:aims? to|plans? to|proposal|proposed|call for|funding call|strategy to|roadmap|could|would|should|needs? to|must|requires? investment|potential to|prospects? for|recommend(?:s|ed|ation)|intends? to|seeks? to|pledged|commitment)\b/.test(d);
+    // V17.8.2 balanced opening gate. Column A is not a quota and it is not a reward for
+    // optimistic language. It can be supported by either a realised gain OR a concrete,
+    // committed implementation step (launched programme/call with resources, awarded funding,
+    // approved project, signed partnership, adopted rule/standard, facility build/deployment).
+    // Pure aspirations and recommendations still do not qualify.
+    const openingDomain=/\b(?:research|science|scientific|researcher|scientist|talent|innovation|technology|technological|ai|compute|computing|cloud|semiconductor|chip|quantum|biotech|biotechnology|infrastructure|capacity|factory|gigafactor|manufacturing|production|industrial|standard|regulation|framework|procurement|market|commerciali|funding|programme|program|project|facility)\b/.test(d);
+    const openingRealizedAction=/\b(?:operational|operates?|deployed|deploys?|deployment|opened|opens?|completed|completes?|secured|secures?|attracted|attracts?|retained|retains?|recruited|recruits?|expanded capacity|expands?\s+(?:european\s+|eu\s+)?(?:research\s+|compute\s+|production\s+|industrial\s+|manufacturing\s+)?capacity|increased capacity|increases?\s+(?:european\s+|eu\s+)?(?:research\s+|compute\s+|production\s+|industrial\s+|manufacturing\s+)?capacity|capacity increased|production increased|production increases?|market share (?:rose|increased|rises?)|overtook|outpaced|became a leader|is a leader|sets? the pace|adopted by|internationally adopted|global adoption|reduced dependence|reduces? dependence|reduced reliance|reduces? reliance|cut dependence|cuts? dependence|cut reliance|cuts? reliance|diversified suppliers|diversifies? suppliers|new european supplier|new eu supplier|built and operating|now produces|now provides)\b/.test(d)
+      || /\b(?:researchers?|scientists?|research talent|scientific talent).{0,25}(?:returned|returns?|returning)\b|\b(?:returned|returning).{0,25}(?:researchers?|scientists?|research talent|scientific talent)\b/.test(d);
+    const openingRealized=openingRealizedAction&&openingDomain;
+    const openingCommitted=/\b(?:launch(?:es|ed|ing)?|co-fund(?:s|ed|ing)?|jointly fund(?:s|ed|ing)?|fund(?:s|ed|ing)?|award(?:s|ed|ing)?|approve(?:s|d|ing)?|select(?:s|ed|ing)?|establish(?:es|ed|ing)?|create(?:s|d|ing)?|sign(?:s|ed|ing)?|adopt(?:s|ed|ing)?|enact(?:s|ed|ing)?|enter(?:s|ed|ing)? into force|begin(?:s|ning)? construction|under construction|commence(?:s|d|ment)?|procure(?:s|d|ment)?|invest(?:s|ed|ing)?|commits?\s+(?:€|\$|£|[0-9])|backs?\s+(?:€|\$|£|[0-9]))\b/.test(d)
+      && openingDomain;
+    const openingAspirational=/\b(?:aims? to|plans? to|proposal|proposed|roadmap|strategy to|could|would|should|needs? to|must|potential to|prospects? for|recommend(?:s|ed|ation)|intends? to|seeks? to|calls? for)\b/.test(d);
     const dependenceReduction=/\b(?:reduc(?:e|es|ed|ing)|cut(?:s|ting)?|lower(?:s|ed|ing)?).{0,35}(?:dependence|dependency|reliance)\b/.test(d);
-    const openingDependenceHarm=autonomyDown&&!dependenceReduction;
-    const cleanOpening=openingRealized&&!openingAspirational&&!openingDependenceHarm&&!performanceDown;
+    const directAutonomyDown=/strategic depend|critical external depend|external depend|dependence on|dependent on|dependencies|reliance on|rely on|non-eu (?:technology|vendor|supplier|provider)|foreign (?:supplier|vendor|technology|platform|capital|market|infrastructure|expertise|talent)|external (?:supplier|vendor)|import dependence|imported technology|vendor lock|lock-in|loss of access|restricted access|on others(?:'|’) terms|foreign-controlled/.test(d);
+    const directPerformanceDown=/less competitive|\btrails?\b|\blag(?:s|ging)?\b|behind|shortage|bottleneck|chokepoint|vulnerab|exposure|risk|costly|expensive|higher cost|delay|slow|fragment|subscale|declin|loss|losing|hollow|\bgap\b|cannot|unable|no substitute|disrupt|cut off|cutoff|blocked|constraint|barrier|threat|weakness|shortcoming|ceding|two-speed|two speed/.test(d);
+    const externalPartnership=ext.test(d)&&/\b(?:partner|partnership|supplier|vendor|foreign capital|joint venture|licen[cs]e from|technology from)\b/.test(d);
+    const euCapabilityBuild=eu.test(d)
+      && /\b(?:launch|co-fund|fund|award|approve|select|establish|create|build|expand|deploy|open|procure|invest|adopt|enact)\w*\b/.test(d)
+      && /\b(?:research|science|innovation|technology|ai|compute|computing|cloud|semiconductor|chip|quantum|biotech|infrastructure|capacity|factory|gigafactor|manufacturing|production|industrial|standard|regulation|framework|procurement|facility)\b/.test(d);
+    const openingDependenceHarm=(directAutonomyDown||externalPartnership)&&!dependenceReduction;
+    const cleanOpening=(openingRealized||openingCommitted)&&!openingAspirational&&!openingDependenceHarm&&!directPerformanceDown;
+
 
     if(row.id==='knowledge'){
       if(column.id==='D'){
@@ -355,20 +369,20 @@
         const euPhrase='(?:eu|europe|european|member states|austria|belgium|bulgaria|croatia|cyprus|czech|denmark|estonia|finland|france|germany|greece|hungary|ireland|italy|latvia|lithuania|luxembourg|malta|netherlands|poland|portugal|romania|slovakia|slovenia|spain|sweden)';
         return new RegExp(`(?:${euPhrase}).{0,55}talent loss|talent loss.{0,55}(?:${euPhrase})`).test(d);
       }
-      if(column.id==='A') return cleanOpening && performanceUp && (autonomyUp || /brain gain|talent inflow|attract|retain|recruit|return/.test(d)) && euScoped;
+      if(column.id==='A') return cleanOpening && performanceUp && (autonomyUp || euCapabilityBuild || /brain gain|talent inflow|attract|retain|recruit|return/.test(d)) && euScoped;
       if(column.id==='B') return performanceDown && /research security|screening|visa|restrict|barrier|exclude|suspend|closed lab|collabor|mobility|openness/.test(t) && (autonomyUp||/security|sovereign|protect/.test(t));
       return performanceUp && (autonomyDown || (ext.test(t)&&/collabor|cooperat|mobility|recruit|expertise|foreign talent|international talent|science diplomacy|knowledge flow|access/.test(t)));
     }
 
     if(row.id==='infrastructure'){
-      if(column.id==='A') return cleanOpening && autonomyUp && performanceUp;
+      if(column.id==='A') return cleanOpening && (autonomyUp||euCapabilityBuild) && performanceUp;
       if(column.id==='B') return autonomyUp && performanceDown;
       if(column.id==='C') return (autonomyDown || (ext.test(t)&&/supplier|vendor|technology|compute|cloud|material|input|supply chain|reactor|semiconductor|chip|infrastructure/.test(t))) && performanceUp;
       return (autonomyDown||/access|supply|dependency/.test(t)) && performanceDown;
     }
 
     if(row.id==='conversion'){
-      if(column.id==='A') return cleanOpening && autonomyUp && performanceUp;
+      if(column.id==='A') return cleanOpening && (autonomyUp||euCapabilityBuild) && performanceUp;
       if(column.id==='B') return (autonomyUp||/protect|locali|onshor|domestic|de-risk|derisk/.test(t)) && performanceDown;
       if(column.id==='C') return (autonomyDown||ext.test(t)) && performanceUp && /foreign capital|foreign market|market access|foreign platform|scale abroad|investment|supplier|partner|global market|china exposure/.test(t);
       return performanceDown && /firm exit|firms exit|exit europe|move abroad|moving abroad|relocat|foreign acquisition|closure|shut down|hollow|lost production|loss of production|production capacity|funding gap|scale-up gap|scaleup gap|fail.{0,20}scale|firms? fall behind|industrial decline|ceding profits|ceding value|displaced competition|two-speed|two speed/.test(t);
@@ -377,7 +391,7 @@
     // Rules/institutions are broader than a single named regulation: EU-created
     // frameworks can be openings; foreign regimes can create productive dependence;
     // fragmentation/delay can create double loss.
-    if(column.id==='A') return cleanOpening && autonomyUp && performanceUp && /adopted by|internationally adopted|global adoption|reduced depend|reduced reliance|faster decision|shorter approval|mutual recognition|market access/.test(t);
+    if(column.id==='A') return cleanOpening && (autonomyUp||euCapabilityBuild) && performanceUp && /adopted by|internationally adopted|global adoption|reduced depend|reduced reliance|faster decision|shorter approval|mutual recognition|market access|launch|fund|award|approve|adopt|enact|procurement/.test(d);
     if(column.id==='B') return performanceDown && (autonomyUp||/research security|screening|de-risk|derisk|sovereign|protect/.test(t)) && /restrict|export control|regulat|ban|sanction|screening|security|licen|compliance|burden/.test(t);
     if(column.id==='C') return performanceUp && (autonomyDown||/foreign standards|foreign rules|us rules|american rules|platform rules|export licen[cs]e|non-eu rules|non-eu standards|us export-control|us export control/.test(t));
     return performanceDown && /gridlock|cannot decide|unable to decide|decision delay|blocked by|institutional constraint|fragmented governance|foreign rules|foreign standards|export controls|sanctions|exclusion|regulatory fragmentation|regulatory delay|delayed/.test(t);
@@ -452,7 +466,7 @@
     const triage=reach+irreversibility+attention+actionability;
     const multi=qCount>=2?1.5:0;
     const crossDirection=(flags.sustain&&flags.compete&&Math.sign(direction.autonomy)!==Math.sign(direction.performance))?1:0;
-    const columnWeight=column.id==='D'?2.4:column.id==='C'?1.6:column.id==='B'?1.4:.35;
+    const columnWeight=1; // balanced matrix: no quadrant gets an automatic ranking bonus
     const recency=recencyScore(x,now)+(x.new_this_scan?1:0);
     const overall=triage+multi+crossDirection+columnWeight+recency;
     const cell=CELL_NAMES[row.id][column.id];

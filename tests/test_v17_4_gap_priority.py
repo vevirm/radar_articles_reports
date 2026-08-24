@@ -96,7 +96,7 @@ if(v.risks.length>15||v.opportunities.length>15) process.exit(2);
         frontier = (ROOT / "frontier" / "index.html").read_text(encoding="utf-8")
         scanner = (ROOT / "scripts" / "scan_radar.py").read_text(encoding="utf-8")
         radar = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
-        self.assertIn("priorities/?v=17.8.1", main)
+        self.assertIn("priorities/?v=17.8.2", main)
         self.assertIn("../priorities/", briefing)
         self.assertIn("../priorities/", frontier)
         self.assertGreaterEqual(sum(len(radar.get(k, [])) for k in ("strand_a", "strand_b", "strand_c")), 18)

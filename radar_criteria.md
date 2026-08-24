@@ -1,6 +1,6 @@
-# Radar admission criteria — V17.8.1 surgical precision profile
+# Radar admission criteria — V17.8.2 surgical precision profile
 
-V17.8.1 separates **hard exclusion** from **priority ranking**. The corpus remains broad enough to preserve useful evidence, while the visible order emphasises major EU research and innovation issues shaped by geopolitical competition.
+V17.8.2 retains the V17.8.1 separation of **hard exclusion** from **priority ranking**. The corpus remains broad enough to preserve useful evidence, while the visible order emphasises major EU research and innovation issues shaped by geopolitical competition.
 
 ## Hard exclusions
 

@@ -492,15 +492,11 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         for key in FRONTIER_CELL_ORDER
     }
     sparse = [key for key in FRONTIER_CELL_ORDER if deficits[key] > 0]
-    # V17.8 risk-first allocation: an empty +/+ opening is not a gap that the scanner should
-    # actively try to fill while constrained-autonomy, dependency or double-loss cells remain
-    # under-covered. Demonstrated openings should emerge from normal discovery, not from a
-    # matrix-balancing search incentive.
-    risk_sparse = [key for key in sparse if not key.endswith('-A')]
-    opening_sparse = [key for key in sparse if key.endswith('-A')]
-    ordered_risk = sorted(risk_sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
-    ordered_openings = sorted(opening_sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
-    ordered = ordered_risk if ordered_risk else ordered_openings
+    # V17.8.2 balanced allocation: scarcity, not quadrant direction, determines search effort.
+    # Openings, trade-offs, productive dependencies and double-loss cells all receive the
+    # same opportunity to be discovered. This does not impose equal counts; it removes the
+    # structural bias that previously postponed A-cell searches until B/C/D were filled.
+    ordered = sorted(sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
     target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
     targets = ordered[:target_limit]
 
