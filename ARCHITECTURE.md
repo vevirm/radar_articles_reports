@@ -1,24 +1,26 @@
-# Architecture — V17.10.2 manual candidate recovery
+# Architecture — V17.11.0 exact-link reviewed manual evidence
 
-The radar now has two discovery entrances feeding one substantive evidence gate.
+The radar has two discovery entrances feeding the same substantive standard.
 
-1. **Automated discovery** in `scripts/scan_radar.py` uses the existing scholarly/institutional source rotation and source-aware `gate_scope`.
-2. **Manual candidate ingestion** in `scripts/manual_ingest.py` parses DOCX/PDF/CSV/JSON/YAML/TXT/Markdown, normalizes bibliography/URLs, deduplicates against state, retrieves the cited primary source where possible, then invokes the same `gate_scope`.
+1. **Automated discovery** (`scripts/scan_radar.py`) uses scholarly/institutional source rotation and source-aware gating.
+2. **Manual candidate ingestion** (`scripts/manual_ingest.py`) parses common office/data formats, normalizes bibliography/URLs, deduplicates against state, and targets the **exact URL supplied by the curator**.
 
-The manual document itself is never treated as source evidence. User-confirmed link reachability is stored separately from evidence verification, so a working URL cannot by itself admit a record. Records are tagged as verified primary, secondary reference, uncertain/metadata-only, forthcoming/unpublished, context-only, or existing-corpus. Only a verified primary source that passes the normal A/B substantive gate can be newly admitted.
+Manual ingestion does not use a search engine. When direct runtime retrieval is unavailable, a reviewed-evidence cache may stand in for fetched text only when its review is explicitly bound to the same canonical supplied URL and records source verification/evidence mode. A primary URL may be resolved for records explicitly flagged as secondary/generic/wrong-reference, but the supplied URL remains provenance.
 
-## Recall repair
+## Evidence and admission
 
-Missed current candidates produce diagnostics. Exact non-homepage URLs are placed in a bounded recovery queue (`manual_recovery_urls_per_scan`, default 10). A later real scanner run retries those URLs before broad institutional discovery, but all recovered text still passes the normal substantive gate. This narrows recall repair to known high-value candidates instead of broadening low-precision domains or weakening thresholds.
+The curator document is a candidate/recovery source, not primary evidence. The manual lane can nevertheless admit a record once underlying reviewed source evidence satisfies the core requirement: genuine EU/European R&I in geopolitical context. Metadata-only material defers rather than being called irrelevant. Forthcoming, context-only and unresolved secondary records remain separate.
 
-## Provenance
-
-Public records use `discovery_provenance` = `automated`, `manual`, or `both`, plus a provenance array and manual ingest IDs. Matching an existing automated record changes provenance only; it does not duplicate the item.
-
-## State integrity
-
-`manual_ingest` is an additive state namespace containing batches, diagnostics and the recovery queue. Manual ingest deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history. A real scanner run preserves the namespace and records recovery attempts at that scan's real timestamp.
+The reviewed-source route records scanner diagnostics as well as the reviewed decision, so a lexical miss can be distinguished from a substantive failure instead of silently weakening the scanner gate.
 
 ## Matrix
 
-Core evidence classification continues to use source-backed evidence. `quadrant_claimed` (the outcome a source advocates/claims) remains distinct from `quadrant_implied` (the outcome implied by its evidence); implied evidence controls placement when supplied.
+Curator cells are stored only as `curator_primary_cell` / `curator_cells`. Reviewed source evidence stores `matrix_dimension`, `quadrant_claimed`, `quadrant_implied`, and `matrix_evidence_basis`. The frontend locks the matrix row to reviewed `matrix_dimension`; it does not re-infer that row from topic words. Evidence-implied quadrant controls placement when present, while claimed/advocated direction remains visible separately.
+
+## Recall repair
+
+Missed current candidates can feed bounded exact-URL recovery queues. A later real scanner run retries those URLs before broader institutional discovery, but every recovered source still must pass the substantive gate. This raises recall around known high-value misses without broadly lowering precision.
+
+## Provenance and state integrity
+
+Public records use `discovery_provenance` = `automated`, `manual`, or `both`, preserve manual IDs, supplied URLs and any resolved primary URLs. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.

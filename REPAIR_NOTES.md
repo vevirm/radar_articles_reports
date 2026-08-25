@@ -1,9 +1,18 @@
-# V17.10.2 — curated candidate recovery
+# V17.11.0 — exact-link reviewed manual evidence repair
 
-V17.10.2 adds a separate manual candidate lane without changing the definition of admissible radar evidence. The manual list can recover discovery misses, but it cannot establish substantive relevance by itself.
+V17.11.0 fixes the failure mode where a matrix-oriented manual list was parsed correctly but left inert because packaging had used `--no-fetch` and the runtime HTTP client could not retrieve source text.
 
-The ingest parser normalizes bibliography and URLs from common office/data formats, compares them with admitted items and the saved scanner seen-URL ledger, and retrieves the underlying source where possible. Verified primary text is evaluated by the existing source-aware gate. Metadata-only records defer; secondary references and forthcoming records remain outside the matrix.
+The corrected path is: **exact supplied URL → underlying/reviewed source evidence → substantive gate → matrix classification**. There is no broad web-search step in manual ingestion.
 
-Recall repair is intentionally narrow: missed candidates contribute exact URLs to a bounded recovery queue and targeted high-quality source/query expansion. The scanner still requires genuine EU/European R&I in geopolitical context.
+Key repairs:
 
-The Frontier matrix now surfaces provenance and keeps advocated `quadrant_claimed` separate from evidence-derived `quadrant_implied`; the latter controls placement when explicitly available.
+- reviewed evidence must be bound to the exact curator-supplied URL;
+- resolved primary records are allowed only for explicit bibliographic/primary-source resolution cases and preserve the starting URL;
+- reviewed substantive evidence can establish aboutness when the scanner's lexical heuristic misses an implicit geopolitical mechanism, while retaining the scanner result for diagnostics;
+- curator matrix cells remain hypotheses, never admission or classification gates;
+- reviewed `matrix_dimension` controls the frontend row instead of topic-word re-inference;
+- `quadrant_claimed` remains separate from `quadrant_implied`;
+- title-only deduplication is tightened to prevent distinct but similarly named sovereignty papers from merging;
+- reviewed weak signals can use substantive matrix evidence without mandatory directional keyword matches.
+
+Applied to the matrix-oriented supplement, the repair newly admits **17 substantive sources and 2 weak signals**, all of which appear in the Frontier. No live-scan timestamp or cursor was changed.

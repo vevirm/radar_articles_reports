@@ -274,3 +274,337 @@ def test_user_validated_links_are_recorded_but_do_not_bypass_evidence_or_date_ve
     assert rec['manual_verification_required'] is True
     assert rec['decision'] == 'defer_insufficient_or_unverified'
     assert out['manual_ingest']['recovery_queue'][0]['manual_link_status'] == 'user_validated_reachable'
+
+
+def test_review_pack_can_supply_verified_primary_evidence_without_runtime_fetch(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'K1',
+        'title': 'Europe as a science power under geopolitical competition',
+        'url': 'https://example.org/k1',
+        'date': '2026-06-23',
+        'note': 'Cells: K-A (primary); K-D.'
+    }])
+    rows = mi.parse_manual_file(p)
+    review = {
+        'K1': {
+            'review_source_url': 'https://example.org/k1',
+            'source_verified': True,
+            'core_gate_verified': True,
+            'primary_source': True,
+            'published': '2026-06-23',
+            'text_mode': 'abstract_only',
+            'evidence_text': (
+                'European Union research policy is responding to geopolitical competition with the United States and China. '
+                'The source examines whether Europe can attract scientists and strengthen research and innovation capacity while '
+                'funding and commercialization constraints limit its competitiveness.'
+            ),
+            'display_claim': 'Europe can attract research talent, but funding and innovation capacity constrain the scale of the gain.',
+            'matrix_evidence_verified': True,
+            'matrix_dimension': 'knowledge',
+            'quadrant_implied': 'A',
+            'quadrant_claimed': 'A',
+            'matrix_basis': 'The underlying source links geopolitical disruption to European research-talent attraction and capacity.',
+        }
+    }
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 1
+    assert len(out['strand_a']) == 1
+    item = out['strand_a'][0]
+    assert item['discovery_provenance'] == 'manual'
+    assert item['matrix_dimension'] == 'knowledge'
+    assert item['quadrant_implied'] == 'A'
+    assert item['quadrant_claimed'] == 'A'
+    assert item['matrix_classification_source'] == 'reviewed_underlying_source'
+    assert item['core_message'].startswith('Europe can attract research talent')
+    assert not out['manual_ingest']['recovery_queue']
+
+
+def test_review_pack_does_not_bypass_strict_core_gate(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'K2',
+        'title': 'European funder changes application rules after researcher feedback',
+        'url': 'https://example.org/k2',
+        'date': '2026-06-01',
+        'note': 'Cells: K-A.'
+    }])
+    rows = mi.parse_manual_file(p)
+    review = {
+        'K2': {
+            'source_verified': True,
+            'primary_source': True,
+            'published': '2026-06-01',
+            'text_mode': 'abstract_only',
+            'evidence_text': (
+                'The European Research Council changed its resubmission rules after researchers objected to the proposed restrictions. '
+                'The change concerns application eligibility, peer review workload and researcher feedback within the grant programme. '
+                'The article focuses on application eligibility, peer review workload, grant rules and researcher feedback within the programme.'
+            ),
+            'matrix_evidence_verified': False,
+        }
+    }
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 0
+    assert not out['strand_a'] and not out['strand_b']
+    rec = next(r for r in out['manual_ingest']['records'] if r['manual_id'] == 'K2')
+    assert rec['decision'] == 'defer_insufficient_or_unverified'
+    assert rec['source_review_status'] == ''
+
+
+def test_reviewed_primary_resolution_can_replace_secondary_url_and_date(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'C6',
+        'title': 'European Tech Champions Initiative 2.0 — launch',
+        'url': 'https://secondary.example/c6',
+        'date': '2026',
+        'note': 'Secondary source; substitute the primary source once located.'
+    }])
+    rows = mi.parse_manual_file(p)
+    assert rows[0]['manual_secondary_hint'] is True
+    review = {
+        'C6': {
+            'review_source_url': 'https://secondary.example/c6',
+            'source_verified': True,
+            'primary_source': True,
+            'core_gate_verified': True,
+            'review_status': 'reviewed_pass_core_gate',
+            'resolved_primary': True,
+            'resolved_url': 'https://primary.example/c6',
+            'title': 'Europe launches 80 billion euro investment alliance to scale up tech leaders',
+            'published': '2026-07-10',
+            'source': 'European Investment Bank',
+            'text_mode': 'abstract_only',
+            'evidence_text': (
+                'The European Investment Bank and all European Union member states launched a larger investment platform for highly innovative technology scale-ups. '
+                'It addresses Europe’s scale-up financing gap so ideas, technologies and innovative firms born in Europe can stay and thrive in Europe, while reinforcing the European innovation ecosystem, strategic autonomy, innovation capacity, productivity and global competitiveness.'
+            ),
+            'display_claim': 'A pan-European scale-up fund is intended to keep technology champions and their value creation in Europe.',
+            'matrix_evidence_verified': True,
+            'matrix_dimension': 'conversion',
+            'quadrant_implied': 'A',
+        }
+    }
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 1
+    item = out['strand_a'][0]
+    assert item['link'] == 'https://primary.example/c6'
+    assert item['date'] == '2026-07-10'
+    assert item['source'] == 'European Investment Bank'
+    assert item['manual_supplied_url'] == 'https://secondary.example/c6'
+    assert item['review_resolved_url'] == 'https://primary.example/c6'
+    assert out['manual_ingest']['recovery_queue'] == []
+    rec = next(r for r in out['manual_ingest']['records'] if r['manual_id'] == 'C6')
+    assert rec['review_url_bound_to_supplied_link'] is True
+
+
+def test_review_pack_new_hash_reprocesses_same_manual_file_without_refresh(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{'id': 'M1', 'title': 'European research security', 'url': 'https://example.org/m1', 'date': '2026-07-01'}])
+    rows = mi.parse_manual_file(p)
+    out1, _ = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False)
+    review = {'M1': {'source_verified': True, 'primary_source': True, 'published': '2026-07-01', 'evidence_text': 'European Union research security policy responds to geopolitical competition and protects research and innovation collaboration from strategic technology risks and foreign interference.', 'text_mode': 'abstract_only'}}
+    out2, summary = mi.apply_manual_ingest(out1, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['idempotent_reuse'] is False
+    assert summary['reviewed_items'] == 1
+
+
+def test_reviewed_outside_window_correction_remains_context(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{'id': 'I4', 'title': 'Allied semiconductor export-control authorities', 'url': 'https://example.org/i4', 'date': '2026-05-26'}])
+    rows = mi.parse_manual_file(p)
+    review = {'I4': {'review_source_url': 'https://example.org/i4', 'source_verified': True, 'primary_source': True, 'published': '2025-03-14', 'record_status': 'context_outside_primary_window', 'evidence_text': 'The analysis compares allied legal authority for semiconductor export controls and geopolitical technology restrictions.', 'text_mode': 'abstract_only'}}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['context_only'] == 1
+    assert not out['strand_a'] and not out['strand_b']
+    rec = next(r for r in out['manual_ingest']['records'] if r['manual_id'] == 'I4')
+    assert rec['decision'] == 'retain_context_only'
+    assert rec['reviewed_bibliographic_corrections']['date']['reviewed'] == '2025-03-14'
+
+
+def test_reviewed_weak_signal_can_carry_explicit_matrix_evidence(tmp_path):
+    st = base_state()
+    # Anchor source must already exist because weak signals do not stand alone.
+    st['strand_a'] = [{
+        'title': 'EU-China research de-risking and dual-use export controls', 'link': 'https://example.org/a',
+        'date': '2026-06-01', 'strand': 'A', 'eu_relevance': 'direct',
+        'summary': 'European Union research and innovation policy addresses China-related technology dependencies, dual-use export controls and research de-risking under geopolitical competition.',
+        'core_message': 'European R&I remains exposed to strategic input dependencies.'
+    }]
+    p = write_json_list(tmp_path, [{
+        'id': 'W1', 'title': 'China restricts dual-use exports to EU entities', 'url': 'https://example.org/w1',
+        'date': '2026-07-24', 'manual_candidate_kind': 'weak_signal', 'note': 'Cells: I-D (primary).'
+    }])
+    rows = mi.parse_manual_file(p)
+    rows[0]['manual_candidate_kind'] = 'weak_signal'
+    review = {'W1': {
+        'review_source_url': 'https://example.org/w1',
+        'source_verified': True, 'corroborated_current_event': True, 'published': '2026-07-24',
+        'text_mode': 'abstract_only',
+        'evidence_text': 'China imposed immediate dual-use export restrictions on named European Union entities in retaliation for EU sanctions. The affected entities include technology and research organisations, making the geopolitical measure a direct constraint on European research and innovation access to strategic dual-use inputs and cross-border technology supply.',
+        'display_claim': 'China imposed immediate dual-use export restrictions on named EU entities in retaliation for EU sanctions.',
+        'matrix_evidence_verified': True, 'matrix_dimension': 'infrastructure', 'quadrant_implied': 'D'
+    }}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_signals_admitted'] == 1
+    signal = out['strand_c'][-1]
+    assert signal['matrix_dimension'] == 'infrastructure'
+    assert signal['quadrant_implied'] == 'D'
+
+
+def test_review_pack_must_be_bound_to_exact_supplied_url(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'K1', 'title': 'European research capacity under geopolitical competition',
+        'url': 'https://example.org/supplied', 'date': '2026-06-23'
+    }])
+    rows = mi.parse_manual_file(p)
+    review = {'K1': {
+        'review_source_url': 'https://example.org/different',
+        'source_verified': True, 'primary_source': True, 'core_gate_verified': True,
+        'review_status': 'reviewed_pass_core_gate', 'published': '2026-06-23',
+        'text_mode': 'abstract_only',
+        'evidence_text': 'The European Union research and innovation system is responding to geopolitical competition and strategic technology dependencies with new capacity measures.'
+    }}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 0
+    rec = [x for x in out['manual_ingest']['records'] if x['manual_id'] == 'K1'][0]
+    assert rec['review_url_bound_to_supplied_link'] is False
+    assert rec['decision'] == 'defer_insufficient_or_unverified'
+
+
+def test_reviewed_substantive_gate_is_not_blocked_by_keyword_heuristic(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'C1', 'title': 'Exploring the investor landscape for venture capital',
+        'url': 'https://example.org/ecb-vc', 'date': '2026-05-07'
+    }])
+    rows = mi.parse_manual_file(p)
+    # Deliberately phrase the reviewed evidence without the scanner's strongest geopolitical
+    # keywords. The separate reviewed adjudication establishes the substantive mechanism.
+    review = {'C1': {
+        'review_source_url': 'https://example.org/ecb-vc',
+        'source_verified': True, 'primary_source': True, 'core_gate_verified': True,
+        'review_status': 'reviewed_pass_core_gate', 'published': '2026-05-07',
+        'text_mode': 'abstract_only',
+        'evidence_text': ('The European Central Bank examines how limited European institutional-investor participation '
+                          'constrains venture-capital fund scale and the ability of innovative firms to finance later-stage '
+                          'growth. It links stronger European financing capacity to retaining value and reducing reliance on '
+                          'outside capital in the innovation ecosystem.'),
+        'display_claim': 'Weak institutional-investor participation constrains Europe’s scale-up financing capacity.',
+        'matrix_evidence_verified': True, 'matrix_dimension': 'conversion',
+        'quadrant_implied': 'C', 'quadrant_claimed': 'A',
+        'matrix_basis': 'Current financing depends on outside capital; the advocated remedy is stronger home financing.'
+    }}
+    raw_ev = sr.gate_scope(rows[0]['title'], review['C1']['evidence_text'], '', 2, source_kind='institutional')
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 1
+    item = out['strand_a'][0]
+    assert item['matrix_dimension'] == 'conversion'
+    assert item['quadrant_implied'] == 'C'
+    assert item['quadrant_claimed'] == 'A'
+    assert item['link'] == 'https://example.org/ecb-vc'
+    assert item['relevance_note']
+    # The reviewed route is allowed even when lexical heuristics are narrower.
+    assert item['source_review_status'] == 'reviewed_pass_core_gate'
+
+
+def test_review_resolution_uses_primary_public_link_and_preserves_supplied_provenance(tmp_path):
+    st = base_state()
+    supplied = 'https://example.org/secondary-reference'
+    p = write_json_list(tmp_path, [{
+        'id': 'R2', 'title': 'European research security guidance', 'url': supplied,
+        'date': '2026-07-09', 'note': 'secondary source; substitute primary source'
+    }])
+    rows = mi.parse_manual_file(p)
+    review = {'R2': {
+        'review_source_url': supplied, 'source_verified': True, 'primary_source': True,
+        'resolved_primary': True, 'resolved_url': 'https://official.example.eu/primary',
+        'core_gate_verified': True, 'review_status': 'reviewed_pass_core_gate',
+        'published': '2026-07-09', 'text_mode': 'abstract_only',
+        'evidence_text': ('The European Union and member-state research-security system applies screening and risk '
+                          'management to international scientific collaboration in response to foreign interference and '
+                          'technology-transfer concerns.'),
+        'matrix_evidence_verified': True, 'matrix_dimension': 'rules', 'quadrant_implied': 'B',
+        'matrix_basis': 'Stricter screening increases control while imposing collaboration costs.'
+    }}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 1
+    item = out['strand_a'][0]
+    assert item['link'] == 'https://official.example.eu/primary'
+    assert item['manual_supplied_url'] == supplied
+    assert item['review_resolved_url'] == 'https://official.example.eu/primary'
+
+
+def test_title_only_dedup_does_not_merge_distinct_tech_sovereignty_papers(tmp_path):
+    st = base_state()
+    rows_data = [
+        {'id': 'R3', 'title': 'Does Europe Really Have a Plan for Tech Sovereignty?', 'url': 'https://example.org/r3', 'date': '2026-06-29'},
+        {'id': 'R6', 'title': 'European Tech Sovereignty', 'url': 'https://example.org/r6', 'date': '2026-05-06'},
+    ]
+    p = write_json_list(tmp_path, rows_data)
+    rows = mi.parse_manual_file(p)
+    common = {
+        'source_verified': True, 'primary_source': True, 'core_gate_verified': True,
+        'review_status': 'reviewed_pass_core_gate', 'text_mode': 'abstract_only',
+        'evidence_text': ('European Union technology and innovation policy addresses geopolitical dependence on foreign '
+                          'technology suppliers and proposes measures to increase strategic autonomy and domestic capacity.'),
+        'matrix_evidence_verified': True, 'matrix_dimension': 'rules', 'quadrant_implied': 'B',
+        'matrix_basis': 'The source concerns protected European technological capacity.'
+    }
+    review = {
+        'R3': {**common, 'review_source_url': 'https://example.org/r3', 'published': '2026-06-29'},
+        'R6': {**common, 'review_source_url': 'https://example.org/r6', 'published': '2026-05-06'},
+    }
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 2
+    assert len(out['strand_a']) == 2
+    assert {x['manual_ingest_ids'][0] for x in out['strand_a']} == {'R3', 'R6'}
+
+
+def test_reviewed_matrix_dimension_controls_row_but_curator_hint_does_not():
+    script = r'''
+global.RadarInsights=require('./briefing/insights.js');
+const F=require('./frontier/frontier.js');
+const d={strand_a:[{
+  title:'EU science diplomacy framework', source:'Council', date:'2026-05-29', link:'https://example.org/r1',
+  strand:'A', eu_relevance:'direct',
+  summary:'The EU uses science cooperation as a foreign-policy instrument while balancing openness and research security.',
+  core_message:'The EU adopted a common science-diplomacy framework that uses scientific cooperation as a foreign-policy tool.',
+  matrix_dimension:'rules', quadrant_implied:'A', matrix_quadrant:'A',
+  matrix_classification_source:'reviewed_underlying_source',
+  matrix_evidence_basis:'The source establishes a common EU framework for the rules of international scientific engagement.',
+  curator_primary_cell:'K-C'
+}],strand_b:[],strand_c:[],frontier_evidence:[]};
+const v=F.buildFrontier(d,{now:'2026-08-25T12:27:00+03:00'});
+const x=v.signals[0];
+console.log(JSON.stringify({row:x&&x.row.id,column:x&&x.column.id}));
+'''
+    out = subprocess.run(['node', '-e', script], cwd=ROOT, text=True, capture_output=True, check=True)
+    assert json.loads(out.stdout) == {'row': 'rules', 'column': 'A'}
+
+
+def test_reviewed_weak_signal_matrix_dimension_and_quadrant_are_honoured():
+    script = r'''
+global.RadarInsights=require('./briefing/insights.js');
+const F=require('./frontier/frontier.js');
+const d={strand_a:[{
+  title:'EU China research security and strategic inputs', source:'Anchor', date:'2026-06-01', link:'https://example.org/a',
+  strand:'A',eu_relevance:'direct',summary:'European Union research and innovation is exposed to China-related strategic input dependencies and export controls.',
+  core_message:'European R&I is exposed to strategic input dependencies.'
+}],strand_b:[],strand_c:[{
+  headline:'China restricts dual-use exports to EU entities',title:'China restricts dual-use exports to EU entities',
+  source:'News',date:'2026-07-24',link:'https://example.org/w1',anchor:'EU China research security and strategic inputs',watch_theme:'EU-China R&I de-risking',
+  what:'China imposed immediate dual-use export restrictions on named EU technology and research organisations.',
+  why_it_matters:'This directly constrains European access to strategic inputs.',
+  matrix_dimension:'infrastructure',quadrant_implied:'D',matrix_quadrant:'D',
+  matrix_classification_source:'reviewed_underlying_source',
+  matrix_evidence_basis:'An external actor directly cuts strategic inputs to European entities.'
+}],frontier_evidence:[]};
+const v=F.buildFrontier(d,{now:'2026-08-25T12:27:00+03:00'});
+const x=v.signals.find(s=>(s.bibliographicTitle||'').includes('restricts'));
+console.log(JSON.stringify({row:x&&x.row.id,column:x&&x.column.id}));
+'''
+    out = subprocess.run(['node', '-e', script], cwd=ROOT, text=True, capture_output=True, check=True)
+    assert json.loads(out.stdout) == {'row': 'infrastructure', 'column': 'D'}

@@ -1,4 +1,4 @@
-# V17.10.2 changelog
+# V17.10.2 changelog (historical)
 
 - Added manual candidate ingestion for DOCX, PDF, CSV, JSON, YAML/YML, TXT and Markdown.
 - Added conservative DOI/URL/title deduplication, source retrieval, evidence-status handling and same-gate admission.

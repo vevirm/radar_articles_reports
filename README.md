@@ -1,47 +1,47 @@
-# R&I Geopolitics Radar V17.10.2
+# R&I Geopolitics Radar V17.11.0
 
-V17.10.2 adds curated manual-candidate recovery without turning a hand-built list into an admission bypass. It preserves the V17.9 source-aware aboutness and evidence-led matrix rules and uses the supplied `radar (21).json` as the authoritative state.
+V17.11.0 repairs the manual-evidence lane so a curated, matrix-oriented list can contribute **reviewed source evidence** without becoming an admission bypass. The supplied DOCX URL is the primary retrieval target; broad web/search-engine discovery is not part of manual ingestion.
 
 ## Manual candidate ingest
-
-Use:
 
 ```bash
 python scripts/manual_ingest.py path/to/candidates.docx --state radar.json
 ```
 
-Accepted inputs: DOCX, PDF, CSV, JSON, YAML/YML, TXT and Markdown. `--no-fetch` performs comparison/registration only. `--refresh` reprocesses a previously ingested file hash. `--links-validated` records supplied URLs as user-tested/reachable without treating reachability as substantive evidence or bibliographic verification.
+Accepted inputs: DOCX, PDF, CSV, JSON, YAML/YML, TXT and Markdown. `--links-validated` records curator-tested reachability without treating reachability as substantive verification. `--no-fetch` is safe for comparison/registration; reviewed evidence can also be supplied with `--review-evidence PATH.json` when it is cryptographically/reproducibly tied to the exact supplied record URLs.
 
-The ingest path extracts bibliographic fields and URLs, matches DOI/URL/title conservatively against the existing corpus, attempts the underlying primary source, and applies the same substantive `gate_scope` used by automated discovery. A manual citation alone is never evidence. Metadata-only candidates are deferred; secondary references, forthcoming/unpublished records and context-only records stay outside the matrix.
+The lane extracts bibliography and URLs, deduplicates conservatively, retrieves the exact supplied source where possible, and evaluates the same substantive requirement as automated discovery: **genuine EU/European R&I in geopolitical context**. Metadata-only material defers. Secondary, uncertain, forthcoming and context-only records remain distinguishable.
+
+A reviewed evidence cache is not a free-form manual override: each review must be URL-bound to the curator-supplied URL, source-verified, and explicit about its evidence mode/status. Primary-source resolution is permitted only when the supplied record itself needs it, while preserving the original supplied URL in provenance.
+
+## Matrix-oriented manual lists
+
+Curator cell mappings are stored as hypotheses, not answers. A reviewed source can be admitted when its underlying evidence passes the substantive gate; matrix placement then comes from reviewed source evidence (`matrix_dimension`, `quadrant_claimed`, `quadrant_implied`). The frontend honors that reviewed row/column instead of re-inferring the row from topic keywords.
+
+For the supplied `EU_RI_Additions_May-Aug_2026.docx`, V17.11.0 admits **17 substantive sources and 2 weak signals**; all **19 appear in the Sovereignty Frontier matrix**. The detailed decisions are in `MANUAL_INGEST_REPORT.md`.
 
 ## Recall diagnostics and provenance
 
-Manual candidates are compared with both the admitted corpus and the scanner's saved seen-URL ledger. High-value misses can enter a bounded exact-URL recovery queue which the normal scanner retries before broad institutional discovery; it does not lower the EU/European R&I + geopolitical pass-1 standard.
+Manual candidates are compared against the admitted corpus and saved seen-URL ledger. Missed high-value exact URLs may enter bounded recovery queues; future automated scans can retry them without weakening pass-1 precision. Public records expose `automated`, `manual`, or `both` provenance.
 
-Items expose discovery provenance as `automated`, `manual`, or `both`. Existing matches are deduplicated and marked `both`. The UI shows that provenance on radar and matrix cards.
+## Source-aware aboutness and claims
 
-See `MANUAL_INGEST_REPORT.md` for both supplied May–August 2026 list comparisons, including the Sovereignty Frontier supplement and its weak-signal candidates.
-
-## Source-aware aboutness and matrix semantics
-
-- Full text may use strict recurrence/section-spread aboutness evidence.
-- Abstract-only records are judged on substantive EU/European R&I + geopolitical content without requiring nonexistent sections.
-- Metadata-only records defer and trigger retrieval rather than being called irrelevant.
-- Bare `EU` is not treated as European Union unless context establishes it.
+- Full text may use strict recurrence/section-spread checks.
+- Abstract-only sources are judged substantively without nonexistent-section requirements.
+- Metadata-only records defer and trigger retrieval.
+- Bare `EU` is not assumed to mean European Union without context.
 - Display claims state what the source finds, argues, reports or projects without boilerplate prefixes.
-- Matrix classification uses substantive source evidence; directional vocabulary supports but does not gate classification.
-- `quadrant_claimed` and `quadrant_implied` are preserved separately. Evidence-implied placement is not overwritten by an advocated/claimed outcome.
+- Directional keywords support matrix classification but are not mandatory gates.
+- `quadrant_claimed` and `quadrant_implied` stay distinct; evidence-implied placement controls when available.
 
 ## State integrity
 
-Manual ingestion is not a live scan. It does not change `last_updated`, scan cursors, completed cycles or scan-result bookkeeping. The bundled authoritative timestamp remains `2026-08-25T07:34Z` from the supplied state.
+Manual ingestion is not a live scan. The bundled `last_updated` remains **2026-08-25T07:34Z**, with scan cursors/history preserved.
 
-## Run and validate
-
-Serve `index.html` with any local static server. The scanner is `scripts/scan_radar.py`; runtime JSON config is `radar_config.json`; the design/config specification is `eu_ri_radar_config_v2.yaml`.
-
-Run the complete suite with:
+## Validate
 
 ```bash
-python -m pytest -q
+PYTHONPATH=. python -m pytest -q
 ```
+
+Current complete suite: **245 passed**.

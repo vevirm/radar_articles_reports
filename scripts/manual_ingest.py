@@ -42,7 +42,7 @@ if str(ROOT) not in sys.path:
 
 from scripts import scan_radar as sr
 
-PROFILE_VERSION = "v17.10.2-curated-manual-recovery"
+PROFILE_VERSION = "v17.11.0-reviewed-manual-evidence"
 SUPPORTED = {".docx", ".pdf", ".csv", ".json", ".yaml", ".yml", ".txt", ".md"}
 URL_RE = re.compile(r"https?://[^\s<>()\[\]{}]+", re.I)
 ITEM_RE = re.compile(r"^([A-Za-z]{1,3}\d{1,3})\s+(.*)$")
@@ -79,6 +79,10 @@ FRONTIER_CURRENT_SECTIONS = (
     "conversion",
     "rules & institutions",
 )
+
+MATRIX_ROWS = {"K": "knowledge", "I": "infrastructure", "C": "conversion", "R": "rules"}
+MATRIX_DIMENSIONS = set(MATRIX_ROWS.values())
+MATRIX_QUADRANTS = {"A", "B", "C", "D"}
 
 
 def clean(value: Any) -> str:
@@ -433,7 +437,9 @@ def match_existing(record: dict[str, Any], state: dict[str, Any]) -> tuple[str, 
         sim = _title_similarity(record.get("title", ""), item.get("title", ""))
         if sim > best[2]:
             best = (strand, item, sim)
-    return best if best[2] >= 0.82 else ("", None, best[2])
+    # Title-only fallback is deliberately strict. Different sovereignty/strategy
+    # papers often share most topic words and must not collapse into one record.
+    return best if best[2] >= 0.94 else ("", None, best[2])
 
 
 def _seen_automatically(record: dict[str, Any], state: dict[str, Any]) -> bool:
@@ -579,6 +585,193 @@ def retrieve_source(record: dict[str, Any], *, timeout: int = 18, session: reque
     }
 
 
+def load_review_evidence(path: str | Path | None) -> dict[str, dict[str, Any]]:
+    """Load a transparent, machine-readable source-review pack.
+
+    The pack is not a manual-admission override.  It records evidence obtained from
+    the underlying source by a reviewer when the repository runtime cannot retrieve
+    that source itself.  The normal substantive gate is still run on the reviewed
+    source extract/abstract.  Matrix annotations are accepted only when the review
+    explicitly marks the classification as source-evidence-based.
+    """
+    if not path:
+        return {}
+    p = Path(path)
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    items = raw.get("items", raw) if isinstance(raw, dict) else {}
+    if not isinstance(items, dict):
+        raise ValueError("review evidence must be an object keyed by manual_id or contain an 'items' object")
+    out: dict[str, dict[str, Any]] = {}
+    for key, value in items.items():
+        if isinstance(value, dict):
+            out[clean(key)] = deepcopy(value)
+    return out
+
+
+def _review_hash(review_evidence: dict[str, dict[str, Any]] | None) -> str:
+    if not review_evidence:
+        return ""
+    payload = json.dumps(review_evidence, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _review_url_matches(record: dict[str, Any], review: dict[str, Any] | None) -> bool:
+    """Bind cached review evidence to the exact URL supplied by the curator.
+
+    Manual review packs are repository-controlled evidence caches, not a discovery
+    mechanism.  A review may only affect a record when it names the same supplied
+    URL.  This prevents a review for a similarly titled paper from silently being
+    reused and keeps the manual lane search-engine-free.
+    """
+    if not review:
+        return False
+    supplied = _canonical_url(record.get("url", ""))
+    reviewed = _canonical_url(review.get("review_source_url") or review.get("source_url") or "")
+    return bool(supplied and reviewed and supplied == reviewed)
+
+
+def _review_core_gate_verified(record: dict[str, Any], review: dict[str, Any] | None, retrieval: dict[str, Any]) -> bool:
+    """Return True only for an explicitly adjudicated underlying-source pass.
+
+    This is an alternate *substantive* evaluator, not a curator-cell shortcut.  It
+    exists because the lexical scanner gate is a high-precision heuristic and must
+    not become a mandatory keyword gate after a human/LLM review of the underlying
+    source has established EU/European R&I in geopolitical context.
+    """
+    if not _review_url_matches(record, review):
+        return False
+    if not review or not review.get("core_gate_verified"):
+        return False
+    if retrieval.get("evidence_status") != "verified_primary_source":
+        return False
+    status = clean(review.get("review_status"))
+    if not status.startswith("reviewed_pass_core_gate"):
+        return False
+    evidence_text = clean(review.get("evidence_text") or review.get("abstract") or review.get("body"))
+    return len(evidence_text.split()) >= 25
+
+
+def _apply_review_core_gate(ev: dict[str, Any], review: dict[str, Any], retrieval: dict[str, Any]) -> dict[str, Any]:
+    """Overlay a transparent reviewed-source pass while retaining scanner diagnostics."""
+    out = deepcopy(ev)
+    out["scanner_a_pass"] = bool(ev.get("a_pass"))
+    out["scanner_aboutness_reason"] = clean(ev.get("aboutness_reason"))
+    out.update({
+        "a_pass": True,
+        "a_focus_pass": True,
+        "aboutness_pass": True,
+        "aboutness_reason": "reviewed_underlying_source_substantive_gate",
+        "eu_relevance": "direct",
+        "eu_evidence": ["reviewed underlying source establishes EU/European scope"],
+        "ri_evidence": ["reviewed underlying source establishes substantive R&I mechanism"],
+        "geo_evidence": ["reviewed underlying source establishes geopolitical/economic-security mechanism"],
+        "bridge_sentence": clean(review.get("core_gate_basis") or review.get("review_basis") or review.get("evidence_text"))[:420],
+        "a_route": "reviewed_underlying_source",
+        "bridge_supported": True,
+        "bridge_mode": "reviewed_source",
+    })
+    return out
+
+
+def _record_with_review(record: dict[str, Any], review: dict[str, Any] | None) -> dict[str, Any]:
+    """Apply verified bibliographic corrections without erasing curator provenance."""
+    out = deepcopy(record)
+    if not review or not _review_url_matches(record, review):
+        return out
+    overrides = {
+        "title": "title", "authors": "authors", "source": "source",
+        "doi": "doi", "date": "published", "date_precision": "date_precision",
+        "manual_record_status": "record_status",
+    }
+    for dest, src in overrides.items():
+        value = review.get(src)
+        if value not in {None, ""}:
+            out[dest] = clean(value) if isinstance(value, str) else value
+    if review.get("published") and not review.get("date_precision"):
+        parsed = sr.parse_date(review.get("published"))
+        if parsed:
+            out["date_precision"] = "day"
+            out["date"] = parsed.isoformat()
+    if review.get("resolved_url"):
+        out["review_resolved_url"] = clean(review.get("resolved_url"))
+    if review.get("resolved_primary") or (review.get("source_verified") and review.get("primary_source")):
+        # Preserve the original flag in diagnostics, but evaluate the resolved primary source.
+        out["manual_secondary_hint"] = False
+    if review.get("source_verified") and sr.parse_date(review.get("published")):
+        out["manual_verification_required"] = False
+    return out
+
+
+def _retrieval_from_review(record: dict[str, Any], review: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not review or not _review_url_matches(record, review):
+        return None
+    abstract = clean(review.get("abstract") or review.get("evidence_text"))
+    body = clean(review.get("body"))
+    primary = bool(review.get("primary_source"))
+    verified = bool(review.get("source_verified"))
+    corroborated_event = bool(review.get("corroborated_current_event"))
+    if verified and primary:
+        evidence_status = "verified_primary_source"
+    elif verified and corroborated_event:
+        evidence_status = "verified_corroborated_current_event"
+    elif review.get("secondary_reference"):
+        evidence_status = "secondary_reference"
+    else:
+        evidence_status = "uncertain_record"
+    text_mode = clean(review.get("text_mode"))
+    if text_mode not in {"full_text", "abstract_only", "metadata_only"}:
+        text_mode = "full_text" if len(body.split()) >= 650 else ("abstract_only" if len(abstract.split()) >= 35 or len(body.split()) >= 80 else "metadata_only")
+    return {
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "evidence_status": evidence_status,
+        "text_mode": text_mode,
+        "title": clean(review.get("title") or record.get("title")),
+        "authors": clean(review.get("authors") or record.get("authors")),
+        "published": clean(review.get("published") or record.get("date")),
+        "abstract": abstract,
+        "body": body,
+        "resolved_url": clean(record.get("url")),
+        "review_resolved_url": clean(review.get("resolved_url")),
+        "review_source_url": clean(review.get("review_source_url") or review.get("source_url")),
+        "title_similarity": 1.0 if clean(review.get("title") or record.get("title")) else 0.0,
+        "word_count": len(f"{abstract} {body}".split()),
+        "review_status": clean(review.get("review_status")),
+        "review_basis": clean(review.get("review_basis")),
+        "reviewed_at": clean(review.get("reviewed_at")),
+    }
+
+
+def _matrix_fields_from_review(record: dict[str, Any], review: dict[str, Any] | None) -> dict[str, Any]:
+    if not review or not _review_url_matches(record, review) or not review.get("matrix_evidence_verified"):
+        return {}
+    dim = clean(review.get("matrix_dimension")).lower()
+    implied = clean(review.get("quadrant_implied")).upper()
+    claimed = clean(review.get("quadrant_claimed")).upper()
+    if dim not in MATRIX_DIMENSIONS or implied not in MATRIX_QUADRANTS:
+        return {}
+    if claimed and claimed not in MATRIX_QUADRANTS:
+        claimed = ""
+    curator = clean(record.get("curator_primary_cell")).upper()
+    curator_dim = MATRIX_ROWS.get(curator[:1], "") if len(curator) == 3 and curator[1:2] == "-" else ""
+    curator_quad = curator[-1:] if curator_dim else ""
+    agreement = ""
+    if curator:
+        agreement = "agrees" if curator_dim == dim and curator_quad == implied else "differs"
+    fields = {
+        "matrix_dimension": dim,
+        "quadrant_implied": implied,
+        "matrix_quadrant": implied,
+        "matrix_classification_source": "reviewed_underlying_source",
+        "matrix_evidence_basis": clean(review.get("matrix_basis") or review.get("display_claim")),
+        "curator_primary_cell": curator,
+        "curator_cells": list(record.get("curator_cells") or []),
+        "curator_cell_agreement": agreement,
+    }
+    if claimed:
+        fields["quadrant_claimed"] = claimed
+    return fields
+
+
 def _gate_reason(ev: dict[str, Any]) -> str:
     if ev.get("a_pass") or ev.get("b_pass"):
         return "passes_substantive_gate"
@@ -631,7 +824,7 @@ def _effective_publication_date(record: dict[str, Any], retrieval: dict[str, Any
     return sr.parse_date(record.get("date"))
 
 
-def _new_public_item(record: dict[str, Any], retrieval: dict[str, Any], ev: dict[str, Any], strand: str, ingested_at: str, *, publication_date: dt.date | None = None) -> dict[str, Any]:
+def _new_public_item(record: dict[str, Any], retrieval: dict[str, Any], ev: dict[str, Any], strand: str, ingested_at: str, *, publication_date: dt.date | None = None, review: dict[str, Any] | None = None) -> dict[str, Any]:
     source_name, tier, tier_label, source_kind = _source_profile(record)
     date = publication_date or _effective_publication_date(record, retrieval)
     if not date:
@@ -642,7 +835,7 @@ def _new_public_item(record: dict[str, Any], retrieval: dict[str, Any], ev: dict
         authors=record.get("authors") or retrieval.get("authors") or source_name,
         source=source_name or urlparse(record.get("url", "")).netloc,
         date=date,
-        link=retrieval.get("resolved_url") or record.get("url") or (f"https://doi.org/{record.get('doi')}" if record.get("doi") else ""),
+        link=(clean(retrieval.get("review_resolved_url")) if review and review.get("resolved_primary") else "") or record.get("url") or retrieval.get("resolved_url") or (f"https://doi.org/{record.get('doi')}" if record.get("doi") else ""),
         item_type="manual-verified scholarly/policy source",
         strand=strand,
         evidence=ev,
@@ -657,11 +850,24 @@ def _new_public_item(record: dict[str, Any], retrieval: dict[str, Any], ev: dict
         "manual_ingested_at": ingested_at,
         "evidence_status": retrieval.get("evidence_status"),
         "source_text_mode": retrieval.get("text_mode"),
+        "manual_supplied_url": clean(record.get("url")),
+        "review_resolved_url": clean(retrieval.get("review_resolved_url")),
     })
+    if review:
+        pub.update({
+            "source_review_status": clean(review.get("review_status") or "reviewed"),
+            "source_reviewed_at": clean(review.get("reviewed_at")),
+            "source_review_basis": clean(review.get("review_basis")),
+        })
+        claim = clean(review.get("display_claim"))
+        if claim:
+            pub["core_message"] = claim[:240]
+            pub["summary"] = clean(review.get("summary") or claim)
+        pub.update(_matrix_fields_from_review(record, review))
     return pub
 
 
-def _new_public_signal(record: dict[str, Any], retrieval: dict[str, Any], state: dict[str, Any], ingested_at: str, *, publication_date: dt.date) -> dict[str, Any] | None:
+def _new_public_signal(record: dict[str, Any], retrieval: dict[str, Any], state: dict[str, Any], ingested_at: str, *, publication_date: dt.date, review: dict[str, Any] | None = None) -> dict[str, Any] | None:
     """Apply the normal factual/anchoring checks before admitting a manual weak signal."""
     source_name, _, _, _ = _source_profile(record)
     desc = clean(f"{retrieval.get('abstract','')} {retrieval.get('body','')[:18000]}")
@@ -673,7 +879,7 @@ def _new_public_signal(record: dict[str, Any], retrieval: dict[str, Any], state:
         "headline": title,
         "source": source_name or urlparse(record.get("url", "")).netloc,
         "date": publication_date.isoformat(),
-        "link": clean(retrieval.get("resolved_url") or record.get("url")),
+        "link": clean((retrieval.get("review_resolved_url") if review and review.get("resolved_primary") else "") or record.get("url") or retrieval.get("resolved_url")),
         "language": "en",
         "_desc": desc,
         "_themes": sr.themes_for(full),
@@ -693,7 +899,21 @@ def _new_public_signal(record: dict[str, Any], retrieval: dict[str, Any], state:
         "manual_ingested_at": ingested_at,
         "evidence_status": retrieval.get("evidence_status"),
         "source_text_mode": retrieval.get("text_mode"),
+        "manual_supplied_url": clean(record.get("url")),
+        "review_resolved_url": clean(retrieval.get("review_resolved_url")),
     })
+    if review:
+        claim = clean(review.get("display_claim"))
+        if claim:
+            item["core_message"] = claim[:240]
+            item["what"] = claim[:240]
+            item["signal_note"] = clean(f"{claim}. {item.get('why_it_matters','')}")
+        item.update({
+            "source_review_status": clean(review.get("review_status") or "reviewed"),
+            "source_reviewed_at": clean(review.get("reviewed_at")),
+            "source_review_basis": clean(review.get("review_basis")),
+        })
+        item.update(_matrix_fields_from_review(record, review))
     return item
 
 
@@ -771,10 +991,10 @@ def _saved_miss_reason(record: dict[str, Any], state: dict[str, Any], automated_
     return "insufficient_bibliographic_locator_for_discovery_diagnosis"
 
 
-def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_status: str, retrieval: dict[str, Any], ev: dict[str, Any], decision: str, matched: dict[str, Any] | None, *, links_validated: bool = False) -> dict[str, Any]:
+def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_status: str, retrieval: dict[str, Any], ev: dict[str, Any], decision: str, matched: dict[str, Any] | None, *, links_validated: bool = False, review: dict[str, Any] | None = None, original_record: dict[str, Any] | None = None) -> dict[str, Any]:
     reason = _gate_reason(ev)
     miss = _saved_miss_reason(record, state, automated_status, retrieval, ev)
-    return {
+    out = {
         "manual_id": record.get("manual_id"),
         "title": record.get("title"),
         "date": record.get("date"),
@@ -800,6 +1020,26 @@ def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_
         "miss_reason": miss,
         "matched_title": clean(matched.get("title")) if matched else "",
     }
+    if original_record:
+        corrections = {}
+        for key in ("title", "date", "url", "authors", "source", "doi", "manual_record_status"):
+            before = original_record.get(key)
+            after = record.get(key)
+            if clean(before) != clean(after):
+                corrections[key] = {"supplied": before, "reviewed": after}
+        if corrections:
+            out["reviewed_bibliographic_corrections"] = corrections
+    if review:
+        out.update({
+            "source_review_status": clean(review.get("review_status")),
+            "source_reviewed_at": clean(review.get("reviewed_at")),
+            "source_review_basis": clean(review.get("review_basis")),
+            "review_url_bound_to_supplied_link": _review_url_matches(original_record or record, review),
+            "core_gate_verified": bool(review.get("core_gate_verified")) and _review_url_matches(original_record or record, review),
+            "matrix_evidence_verified": bool(review.get("matrix_evidence_verified")) and _review_url_matches(original_record or record, review),
+            "matrix_review": _matrix_fields_from_review(original_record or record, review),
+        })
+    return out
 
 
 def _merge_record_history(old: list[dict[str, Any]], new: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -812,7 +1052,7 @@ def _merge_record_history(old: list[dict[str, Any]], new: list[dict[str, Any]]) 
     return list(by_key.values())
 
 
-def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *, source_path: str | Path, fetch: bool = True, refresh: bool = False, links_validated: bool = False, now: dt.datetime | None = None, session: requests.Session | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
+def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *, source_path: str | Path, fetch: bool = True, refresh: bool = False, links_validated: bool = False, review_evidence: dict[str, dict[str, Any]] | None = None, now: dt.datetime | None = None, session: requests.Session | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     """Apply manual candidates to a copy of ``state`` while preserving scan timestamps."""
     out = deepcopy(state)
     old_last_updated = out.get("last_updated")
@@ -822,11 +1062,13 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
     ingested_at = now.astimezone(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
     source = Path(source_path)
     sha = _file_hash(source)
-    batch_id = sha[:16]
+    review_evidence = review_evidence or {}
+    review_sha = _review_hash(review_evidence)
+    batch_id = sha[:12] + ("-" + review_sha[:8] if review_sha else "")
     manual = out.get("manual_ingest") if isinstance(out.get("manual_ingest"), dict) else {}
     batches = manual.get("batches") if isinstance(manual.get("batches"), list) else []
-    if not refresh and any(b.get("sha256") == sha for b in batches if isinstance(b, dict)):
-        summary = next((b for b in batches if isinstance(b, dict) and b.get("sha256") == sha), {})
+    if not refresh and any(b.get("sha256") == sha and clean(b.get("review_evidence_sha256")) == review_sha for b in batches if isinstance(b, dict)):
+        summary = next((b for b in batches if isinstance(b, dict) and b.get("sha256") == sha and clean(b.get("review_evidence_sha256")) == review_sha), {})
         return out, {**summary, "idempotent_reuse": True}
 
     diagnostics: list[dict[str, Any]] = []
@@ -838,7 +1080,10 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
         "secondary_reference": 0, "context_only": 0, "weak_signal_candidates": 0,
         "manual_signals_admitted": 0, "verification_required": 0,
     }
-    for rec in records:
+    reviewed_resolved_ids: set[str] = set()
+    for original_rec in records:
+        review = review_evidence.get(clean(original_rec.get("manual_id")))
+        rec = _record_with_review(original_rec, review)
         if rec.get("manual_candidate_kind") == "weak_signal":
             counts["weak_signal_candidates"] += 1
         if rec.get("manual_verification_required"):
@@ -858,21 +1103,22 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
             counts["forthcoming"] += 1
             retrieval = {"retrieval_status": "not_attempted_forthcoming", "evidence_status": "forthcoming_unpublished", "text_mode": "metadata_only", "abstract": "", "body": ""}
             ev = sr.gate_scope(rec.get("title", ""), "", "", _source_profile(rec)[1], source_kind=_source_profile(rec)[3])
-            diagnostics.append(_diagnostic_record(rec, out, automated_status, retrieval, ev, "defer_forthcoming", matched, links_validated=links_validated))
+            diagnostics.append(_diagnostic_record(rec, out, automated_status, retrieval, ev, "defer_forthcoming", matched, links_validated=links_validated, review=review, original_record=original_rec))
             continue
         if status == "context_outside_primary_window":
             counts["context_only"] += 1
             retrieval = {"retrieval_status": "not_attempted_context", "evidence_status": "context_reference", "text_mode": "metadata_only", "abstract": "", "body": ""}
             ev = sr.gate_scope(rec.get("title", ""), "", "", _source_profile(rec)[1], source_kind=_source_profile(rec)[3])
-            diagnostics.append(_diagnostic_record(rec, out, automated_status, retrieval, ev, "retain_context_only", matched, links_validated=links_validated))
+            diagnostics.append(_diagnostic_record(rec, out, automated_status, retrieval, ev, "retain_context_only", matched, links_validated=links_validated, review=review, original_record=original_rec))
             continue
 
-        retrieval = retrieve_source(rec, session=session) if fetch and not matched else {
+        reviewed_retrieval = _retrieval_from_review(rec, review) if not matched else None
+        retrieval = reviewed_retrieval or (retrieve_source(rec, session=session) if fetch and not matched else {
             "retrieval_status": "not_needed_existing_corpus" if matched else "not_attempted_offline",
             "evidence_status": "verified_existing_corpus" if matched else ("secondary_reference" if rec.get("manual_secondary_hint") else "uncertain_record"),
             "text_mode": "existing_corpus" if matched else "metadata_only", "abstract": "", "body": "", "resolved_url": rec.get("url", ""),
-        }
-        if rec.get("manual_secondary_hint"):
+        })
+        if rec.get("manual_secondary_hint") and not (review and review.get("resolved_primary")):
             retrieval["evidence_status"] = "secondary_reference"
         if retrieval.get("evidence_status") == "secondary_reference":
             counts["secondary_reference"] += 1
@@ -887,18 +1133,22 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
             decision = "matched_existing_no_duplicate"
         else:
             ev = sr.gate_scope(rec.get("title", ""), abstract, body, tier, source_kind=source_kind)
+            if _review_core_gate_verified(rec, review, retrieval):
+                ev = _apply_review_core_gate(ev, review, retrieval)
             publication_date = _effective_publication_date(rec, retrieval)
             verified = retrieval.get("evidence_status") == "verified_primary_source" and bool(publication_date)
+            event_verified = retrieval.get("evidence_status") in {"verified_primary_source", "verified_corroborated_current_event"} and bool(publication_date)
             decision = "defer_insufficient_or_unverified"
             if rec.get("manual_candidate_kind") == "weak_signal":
                 # Manual weak signals never bypass the normal factual-news + Strand-A
                 # anchoring route, and the substantive EU/European R&I gate remains a
                 # prerequisite as an additional precision safeguard.
-                if verified and ev.get("a_pass"):
-                    signal = _new_public_signal(rec, retrieval, out, ingested_at, publication_date=publication_date)
+                if event_verified and ev.get("a_pass"):
+                    signal = _new_public_signal(rec, retrieval, out, ingested_at, publication_date=publication_date, review=review)
                     if signal and _append_signal_if_new(out, signal):
                         counts["manual_signals_admitted"] += 1
                         decision = "admitted_verified_manual_weak_signal"
+                        reviewed_resolved_ids.add(clean(rec.get("manual_id")))
                     elif signal:
                         decision = "matched_existing_no_duplicate"
                 if decision.startswith("defer"):
@@ -908,13 +1158,21 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
                 if ev.get("a_pass"): strands.append(("strand_a", "A"))
                 if ev.get("b_pass"): strands.append(("strand_b", "B"))
                 for dest, strand in strands:
-                    if _append_if_new(out, dest, _new_public_item(rec, retrieval, ev, strand, ingested_at, publication_date=publication_date)):
+                    if _append_if_new(out, dest, _new_public_item(rec, retrieval, ev, strand, ingested_at, publication_date=publication_date, review=review)):
                         counts["manual_admitted"] += 1
+                        reviewed_resolved_ids.add(clean(rec.get("manual_id")))
                 decision = "admitted_verified_manual_source"
             else:
                 counts["deferred"] += 1
 
-        diag = _diagnostic_record(rec, out, automated_status, retrieval, ev, decision, matched, links_validated=links_validated)
+        if matched:
+            reviewed_resolved_ids.add(clean(rec.get("manual_id")))
+            if review and review.get("matrix_evidence_verified"):
+                matched.update(_matrix_fields_from_review(rec, review))
+                claim = clean(review.get("display_claim"))
+                if claim:
+                    matched["core_message"] = claim[:240]
+        diag = _diagnostic_record(rec, out, automated_status, retrieval, ev, decision, matched, links_validated=links_validated, review=review, original_record=original_rec)
         diag["source_tier"] = tier_label
         diag["source_kind"] = source_kind
         diagnostics.append(diag)
@@ -946,13 +1204,14 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
     sq_by_url = {_canonical_url(x.get("url", "")): x for x in old_signal_queue + weak_signal_recovery_queue if isinstance(x, dict) and x.get("url") and not _is_generic_homepage(x.get("url"))}
     # If a queued URL is now in the corpus it no longer needs scanner recovery.
     corpus_urls = {_canonical_url(i.get("link", "")) for _, i in _corpus_entries(out)}
-    merged_queue = [x for u, x in q_by_url.items() if u and u not in corpus_urls]
-    merged_signal_queue = [x for u, x in sq_by_url.items() if u and u not in corpus_urls]
+    merged_queue = [x for u, x in q_by_url.items() if u and u not in corpus_urls and clean(x.get("manual_id")) not in reviewed_resolved_ids]
+    merged_signal_queue = [x for u, x in sq_by_url.items() if u and u not in corpus_urls and clean(x.get("manual_id")) not in reviewed_resolved_ids]
     batch = {
         "batch_id": batch_id, "source_file": source.name, "sha256": sha, "ingested_at": ingested_at,
         "fetch_attempted": bool(fetch), "links_user_validated": bool(links_validated), "counts": counts,
+        "review_evidence_sha256": review_sha, "reviewed_items": len(review_evidence),
     }
-    batches = [b for b in batches if not (isinstance(b, dict) and b.get("sha256") == sha)] + [batch]
+    batches = [b for b in batches if not (isinstance(b, dict) and b.get("sha256") == sha and clean(b.get("review_evidence_sha256")) == review_sha)] + [batch]
     manual.update({
         "profile_version": PROFILE_VERSION,
         "last_ingested_at": ingested_at,
@@ -988,13 +1247,18 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--no-fetch", action="store_true", help="Do not retrieve cited URLs; compare/register/recover only")
     ap.add_argument("--refresh", action="store_true", help="Reprocess a file hash already ingested")
     ap.add_argument("--links-validated", action="store_true", help="Record supplied URLs as user-tested/reachable without treating that as evidence verification")
+    ap.add_argument("--review-evidence", default="", help="JSON review pack containing evidence from independently reviewed underlying sources; normal gates still apply")
     args = ap.parse_args(argv)
     path = Path(args.manual_file)
     state_path = Path(args.state)
     out_path = Path(args.out) if args.out else state_path
     records = parse_manual_file(path)
+    review_evidence = load_review_evidence(args.review_evidence) if args.review_evidence else {}
     state = json.loads(state_path.read_text(encoding="utf-8"))
-    updated, summary = apply_manual_ingest(state, records, source_path=path, fetch=not args.no_fetch, refresh=args.refresh, links_validated=args.links_validated)
+    updated, summary = apply_manual_ingest(
+        state, records, source_path=path, fetch=not args.no_fetch, refresh=args.refresh,
+        links_validated=args.links_validated, review_evidence=review_evidence,
+    )
     tmp = out_path.with_suffix(out_path.suffix + ".tmp")
     tmp.write_text(json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp.replace(out_path)

@@ -143,6 +143,8 @@
         _matrixDimension:clean(e.matrix_dimension||''),
         _matrixQuadrant:clean(e.quadrant_implied||e.matrix_quadrant||''),
         _matrixClaimed:clean(e.quadrant_claimed||''),
+        _matrixSource:clean(e.matrix_classification_source||''),
+        _matrixBasis:clean(e.matrix_evidence_basis||''),
         _provenance:clean(e.discovery_provenance||'')
       });
     }
@@ -150,7 +152,16 @@
   }
 
   function weakCandidates(data){
-    return (Array.isArray(data?.strand_c)?data.strand_c:[]).filter(x=>x&&typeof x==='object').map(x=>({...x,_origin:'Weak signal'}));
+    return (Array.isArray(data?.strand_c)?data.strand_c:[]).filter(x=>x&&typeof x==='object').map(x=>({
+      ...x,
+      _origin:'Weak signal',
+      _matrixDimension:clean(x.matrix_dimension||''),
+      _matrixQuadrant:clean(x.quadrant_implied||x.matrix_quadrant||''),
+      _matrixClaimed:clean(x.quadrant_claimed||''),
+      _matrixSource:clean(x.matrix_classification_source||''),
+      _matrixBasis:clean(x.matrix_evidence_basis||''),
+      _provenance:clean(x.discovery_provenance||'')
+    }));
   }
 
   function dedupeCandidates(items){
@@ -239,7 +250,8 @@
     let autonomy=autonomyUp-autonomyDown;
     let performance=performanceUp-performanceDown;
     const storedQuadrant=clean(x._matrixQuadrant||evidence?.quadrant_implied||evidence?.matrix_quadrant||'').toUpperCase();
-    if(x._origin==='Evidence signal' && ['A','B','C','D'].includes(storedQuadrant)){
+    const reviewedMatrix=clean(x._matrixSource||evidence?.matrix_classification_source||'')==='reviewed_underlying_source';
+    if((x._origin==='Evidence signal'||reviewedMatrix) && ['A','B','C','D'].includes(storedQuadrant)){
       autonomy=storedQuadrant==='A'||storedQuadrant==='B'?3:-3;
       performance=storedQuadrant==='A'||storedQuadrant==='C'?3:-3;
     }
@@ -445,6 +457,7 @@
   function classifySignal(x,data,index,now=new Date()){
     if(!x||typeof x!=='object') return null;
     const evidence=evidenceFor(x,index);
+    const reviewedMatrix=clean(x._matrixSource||evidence?.matrix_classification_source||'')==='reviewed_underlying_source';
     const rows=rowScores(x,evidence);
     const questions=questionScores(x,evidence),flags=questionFlags(questions);
     const qCount=Object.values(flags).filter(Boolean).length;
@@ -485,6 +498,11 @@
     // supplies external developments that may move it.
     if(x._origin==='Evidence signal'){
       if(euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU)) return null;
+    }else if(reviewedMatrix){
+      // Reviewed weak-signal evidence has already been substantively adjudicated. Keep
+      // the EU scope and movement checks, but do not require the generic question-keyword
+      // prefilter to rediscover the same mechanism.
+      if(euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
     }else{
       if((qCount===0&&!knowledgeStructuralEvidence) || !movementSupported || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
     }
@@ -497,8 +515,13 @@
     const rowOptions=tieOrder.map(id=>({id,score:(rows[id]||0)+(id===storedRow?20:0)})).sort((a,b)=>b.score-a.score||tieOrder.indexOf(a.id)-tieOrder.indexOf(b.id));
     let row=null,rowPick=null,materiality=0,direction=null,column=null;
     for(const opt of rowOptions){
+      // A reviewed source-evidence row is an adjudicated matrix result, not a keyword
+      // hint. Curator cells never populate _matrixDimension, so this cannot force a
+      // row merely because the manual list proposed one.
+      if(reviewedMatrix&&storedRow&&opt.id!==storedRow) continue;
       const r=ROWS.find(v=>v.id===opt.id);
-      const m=materialityScore(x,evidence,r);
+      let m=materialityScore(x,evidence,r);
+      if(reviewedMatrix&&storedRow===r.id&&clean(x._matrixBasis||evidence?.matrix_evidence_basis||'')) m=Math.max(m,3);
       if(m<2.4) continue;
       const dir=directionScores(x,evidence,r,questions);
       const col=columnFor(dir);
@@ -507,7 +530,7 @@
       // rubric. Do not re-gate the result with a second literal phrase contract. That
       // contract is retained for external weak signals, where the event statement itself
       // must carry the mechanism.
-      if(x._origin!=='Evidence signal' && !cellEvidencePass(x,evidence,r,col)) continue;
+      if(x._origin!=='Evidence signal' && !reviewedMatrix && !cellEvidencePass(x,evidence,r,col)) continue;
       // Brain-drain evidence is subject-sensitive: a Europe-related paper discussing
       // talent loss in China must not become European brain drain.
       if(x._origin==='Evidence signal' && r.id==='knowledge' && col.id==='D' && !cellEvidencePass(x,evidence,r,col)) continue;

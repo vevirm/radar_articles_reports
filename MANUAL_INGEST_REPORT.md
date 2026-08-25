@@ -1,150 +1,81 @@
-# Manual ingest comparison and recall report
+# Manual ingest and recall report — V17.11.0
 
-Authoritative radar scan timestamp preserved: `2026-08-25T07:34Z`. Manual ingestion does **not** represent a live scan.
+## State integrity
 
-## Inputs processed
+- Authoritative starting state: supplied `radar (21).json`.
+- Preserved live-scan timestamp: **2026-08-25T07:34Z**.
+- No live scan is claimed by either manual-ingest batch.
+- Current corpus after reviewed manual admission: **138 Strand A**, **23 Strand B**, **12 weak signals**.
 
-- `EU_RI_Additions_May-Aug_2026.docx` — **31** parsed records; file hash `d847131bfe7e5256…`; manual ingest at `2026-08-25T08:46Z`; fetch attempted: **false**; links user-validated: **true**.
-- `EU_RI_Key_Papers_May-Aug_2026-2.docx` — **53** parsed records; file hash `d0d2f582491cd37d…`; manual ingest at `2026-08-25T08:47Z`; fetch attempted: **false**; links user-validated: **false**.
+## Two supplied manual files
 
-The manual files are curated candidate/recovery inputs only. Their notes and suggested matrix cells are not treated as source evidence. Only underlying-source evidence can create a new admitted radar/matrix item.
+### 1. `EU_RI_Key_Papers_May-Aug_2026-2.docx`
 
-## Original curated list
+Parsed **53 records**: 38 current candidates, 6 forthcoming/unpublished, and 9 context-only records. Its packaging-time batch remains a candidate/recovery comparison: 1 existing corpus match, 1 exact URL seen by the scanner but not admitted, and 36 current candidates absent from the saved corpus/seen-URL ledger. V17.11.0 does **not** retroactively promote those records without reviewed underlying-source evidence.
 
-- Parsed **53** records: **38** current candidates, **6** forthcoming/unpublished, **9** context-only.
-- Automated comparison across all records: **1** found in admitted corpus; **1** exact URL seen but not admitted; **51** not found in the saved corpus/seen ledger.
-- Results: **1** existing matches; **37** deferred pending evidence; **9** context-only; **6** forthcoming; **0** newly admitted substantive items; **0** newly admitted weak signals.
+### 2. `EU_RI_Additions_May-Aug_2026.docx`
 
-### Saved-state recall diagnoses
+Parsed **31 records**: 24 substantive records and 7 weak signals. The V17.11.0 repair re-reviewed this matrix-oriented supplement using evidence bound to the **exact URL supplied in the DOCX**. No search-engine discovery is part of the manual lane. A different resolved primary URL is allowed only when the supplied record itself explicitly needs primary/bibliographic resolution; the original supplied URL remains in provenance.
 
-- **24** — Source/URL was not observed in the saved direct-discovery ledger
-- **9** — Context-only/outside-window item; not a current recall target
-- **7** — Saved scan reported no usable sitemap for this source
-- **6** — Forthcoming/unpublished item; not a current recall target
-- **3** — Domain was traversed, but this exact candidate URL was not observed
-- **1** — Not missed
-- **1** — Exact URL was seen; saved state has no item-level rejection trace
-- **1** — DOI/scholarly record was not observed in the saved index scan
-- **1** — Secondary reference; primary source still required for evidence admission
+Latest reviewed batch (`d847131bfe7e-f9ba6538`):
 
-### Per-item comparison
+- **17 substantive sources newly admitted**.
+- **2 weak signals admitted**.
+- **5 deferred** after review.
+- **7 retained as context/outside-window**.
+- **19 reviewed supplement records now appear in the Sovereignty Frontier matrix** (17 substantive + 2 weak signals).
+- All curator cell assignments remain hypotheses (`curator_primary_cell` / `curator_cells`); reviewed source evidence supplies `matrix_dimension`, `quadrant_claimed`, and `quadrant_implied`.
+- `quadrant_claimed` and `quadrant_implied` remain separate. Where they differ, the evidence-implied quadrant controls placement.
 
-| ID | Candidate | Status / kind | Automated comparison | Recall diagnosis | Manual-ingest result | Link status | Curator cell hints |
-|---|---|---|---|---|---|---|---|
-| A1 | Joint statement: Research community calls on EU leaders to preserve MSCA's core research mission and bottom-up nature in Horizon Europe 2028-2034 | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| A2 | Choose Europe: Research Careers, Brain Drain and Policy Lessons from the CESAER 2024 Survey | candidate; substantive | Found in admitted corpus | Not missed | Matched existing item; provenance updated without duplicate | supplied / unchecked | — |
-| A3 | The US 'golden age' science strategy: what Europeans need to know | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| A4 | Widening Participation position paper (FP10) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| A5 | Horizon Europe 2028-2034 Specific Programme – Council partial general approach: provisions on ERC, MSCA and research careers | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| A6 | European Innovation Scoreboard 2026 – Human resources and attractive research systems dimensions | candidate; substantive | Scanner saw exact URL; not admitted | Exact URL was seen; saved state has no item-level rejection trace | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| B1 | Call for tender: AI Gigafactories – joint procurement of compute time from up to seven AI Gigafactories (deadline 12 November 2026) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| B2 | AI Gigafactories – policy overview and timeline (InvestAI facility, EIB MoU, EuroHPC mandate, 2026 call, 2027 construction) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Domain was traversed, but this exact candidate URL was not observed | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| B3 | Proposal for a Regulation – Chips Act 2.0 (revision of Regulation (EU) 2023/1781) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| B4 | Strategic Roadmap for Digitalisation and AI in Energy | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| B5 | EU AI Infrastructure and Compute Capacity Report 2026 (Version 1.4) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| B6 | Europe Unveils US$35 Billion AI Gigafactory Plan | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C1 | Proposal for a Regulation establishing a framework of measures for strengthening Europe's cloud and AI ecosystem (Cloud and AI Development Act, CADA), COM(2026) 502 final, 2026/0138(COD) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C2 | European Technological Sovereignty Package – overview and accompanying communication | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C3 | EU Open Source Strategy | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C4 | GenAI in EU public administrations: opportunity meets organisational challenges | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C5 | Artificial Intelligence for Biology: Capabilities, Readiness, and Policy Implications | candidate; substantive | Not found in saved corpus/seen-URL ledger | Domain was traversed, but this exact candidate URL was not observed | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C6 | Advancing AI adoption in EU public administrations: Future directions and opportunities under the Apply AI Strategy (JRC143539) and companion Science for Policy brief on the evolution of EU AI policy | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C7 | The EU Cloud and AI Development Act in Depth | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C8 | How the European Commission aims to promote the EU quantum sector through the Cloud and AI Development Act | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C9 | The EU's Tech Sovereignty Package and the future of European digital power | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C10 | EU Proposes Tech Sovereignty Package with Major Implications for Digital Markets | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C11 | Europe on the way to technological sovereignty? The EU's Tech Sovereignty Package | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| C12 | Europe advances digital sovereignty as EU Commission unveils measures to strengthen technological independence | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D1 | European Innovation Scoreboard 2026 – Main report | candidate; substantive | Not found in saved corpus/seen-URL ledger | Domain was traversed, but this exact candidate URL was not observed | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D2 | European Innovation Scoreboard 2026 – Executive summary | candidate; substantive | Not found in saved corpus/seen-URL ledger | DOI/scholarly record was not observed in the saved index scan | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D3 | Partial general approach on the Regulation establishing Horizon Europe 2028-2034 (FP10) – Council negotiating mandate | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D4 | Partial general approach on the Council Decision establishing the Specific Programme implementing Horizon Europe 2028-2034 | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D5 | Partial negotiating position on the Regulation establishing the European Competitiveness Fund (ECF) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D6 | EUA's analysis of the Council of the EU's partial general approach on FP10 | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D7 | EU member states set out Horizon Europe negotiating position: what are the main takeaways for universities? | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D8 | Concluding Statement from 'FP10: A Robust R&I Framework Programme in Light of the Competitiveness Agenda' | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D9 | Horizon Europe 2028-34 (FP10): analysis of Council positions on European Partnerships and the ECF | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D10 | IMD World Competitiveness Ranking 2026 | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D11 | European Innovation Scoreboard 2026: analysis – EU innovation keeps improving, gaps persist | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D12 | European Innovation Scoreboard 2026 – summary for the higher-education sector | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D13 | Future EU defence R&D instruments should better link innovation with testing, production and procurement | candidate; substantive | Not found in saved corpus/seen-URL ledger | Secondary reference; primary source still required for evidence admission | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| D14 | Joint Statement on Horizon Europe and FP10 | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | supplied / unchecked | — |
-| F1 | European Research Area (ERA) Act | forthcoming_unpublished; substantive | Not found in saved corpus/seen-URL ledger | Forthcoming/unpublished item; not a current recall target | Deferred as forthcoming/unpublished | not supplied | — |
-| F2 | European Innovation Act | forthcoming_unpublished; substantive | Not found in saved corpus/seen-URL ledger | Forthcoming/unpublished item; not a current recall target | Deferred as forthcoming/unpublished | not supplied | — |
-| F3 | Quantum Act | forthcoming_unpublished; substantive | Not found in saved corpus/seen-URL ledger | Forthcoming/unpublished item; not a current recall target | Deferred as forthcoming/unpublished | not supplied | — |
-| F4 | ESFRI Roadmap 2026 (research infrastructures) | forthcoming_unpublished; substantive | Not found in saved corpus/seen-URL ledger | Forthcoming/unpublished item; not a current recall target | Deferred as forthcoming/unpublished | not supplied | — |
-| F5 | European Parliament position on Horizon Europe 2028-2034 | forthcoming_unpublished; substantive | Not found in saved corpus/seen-URL ledger | Forthcoming/unpublished item; not a current recall target | Deferred as forthcoming/unpublished | not supplied | — |
-| F6 | AI Gigafactory selection | forthcoming_unpublished; substantive | Not found in saved corpus/seen-URL ledger | Forthcoming/unpublished item; not a current recall target | Deferred as forthcoming/unpublished | not supplied | — |
-| X1 | Proposal for a Regulation on the 28th regime corporate legal framework "EU Inc.", COM(2026) 321 | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X2 | Resolution on the upcoming European Research Area (ERA) Act, TA-10-2026-0068 | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X3 | Ehler, C. (Rapporteur), Draft report on the Regulation establishing Horizon Europe 2028-2034, ITRE | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X4 | Council Regulation (EU) 2026/150 amending the EuroHPC JU Regulation to include AI Gigafactories and quantum | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X5 | Opinion 01/2026 on the European Competitiveness Fund and Opinion 02/2026 on Horizon Europe 2028-2034 | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X6 | 2026 Annual Single Market and Competitiveness Report | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X7 | Frizberg, D. | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X8 | Marcelin, T., Cloud and AI development act, EPRS Briefing | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
-| X9 | "Commission postpones European Innovation Act" | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | not supplied | — |
+## Supplement decisions and matrix placement
 
-## Sovereignty Frontier additions
+| ID | Source | Decision | Automated comparison | Matrix placement | Claimed | Implied |
+|---|---|---|---|---|---:|---:|
+| K1 | Europe as science superpower: what it will take to rival the US and China | ADMITTED substantive | not_found | K-A — Talent windfall | A | A |
+| K2 | Prestigious European science funder scraps stricter rules after researcher backlash | Deferred | not_found | — | — | — |
+| K3 | European funder must increase capacity to meet the ambition of scientists | Deferred | not_found | — | — | — |
+| K4 | Scientists fight back against far-right plans to restrict academic freedom in Germany | Deferred | not_found | — | — | — |
+| K5 | Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research | Context only | found_in_corpus | — | — | — |
+| K6 | Challenges and recommendations for research security: Learning from research ethics and integrity | Context only | not_found | — | — | — |
+| K7 | Fragmented Europe: Dealing with China as a technology and innovation power | ADMITTED substantive | scanner_seen_url_not_admitted | K-B — Closed lab | B | B |
+| I1 | Europe needs a strategy to close the artificial intelligence compute gap | ADMITTED substantive | not_found | I-B — Expensive mirror | A | B |
+| I2 | Revamping Europe’s chips strategy: indispensability, not self-sufficiency | ADMITTED substantive | not_found | I-A — Home chokepoint | A | A |
+| I4 | Understanding U.S. Allies’ Current Legal Authority to Implement AI and Semiconductor Export Controls | Context only | not_found | — | — | — |
+| I5 | AI export controls are not the best bargaining chip | Context only | not_found | — | — | — |
+| C1 | Europe’s venture capital gap and the financing of high-growth firms | ADMITTED substantive | not_found | C-C — Foreign exit | C | C |
+| C2 | Exploring the investor landscape for venture capital | ADMITTED substantive | not_found | C-C — Foreign exit | A | C |
+| C3 | The European Innovation Council opens to defence and dual-use technologies — amended EIC Work Programme 2026 | ADMITTED substantive | not_found | C-A — Home champion | A | A |
+| C4 | Dual-use and Defence Research in Europe | ADMITTED substantive | not_found | C-B — Protected niche | A | B |
+| C5 | The growth of dual-use by design research in Europe: Export control risks and challenges | ADMITTED substantive | not_found | C-B — Protected niche | B | B |
+| R1 | Council Recommendation on a European Union framework for science diplomacy | ADMITTED substantive | not_found | R-A — Rule-setter | A | A |
+| R3 | Does Europe Really Have a Plan for Tech Sovereignty? Tech Policy Press (AI hype and European policymaking series) | ADMITTED substantive | not_found | R-C — Rule-taker | C | C |
+| R4 | To achieve tech sovereignty, Europe must not mimic its rivals | ADMITTED substantive | not_found | R-B — Fortress rules | B | B |
+| R5 | Simplifying European Union Policy: Tech Sovereignty Package — virtual discussion summary | ADMITTED substantive | not_found | R-B — Fortress rules | — | B |
+| W1 | China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations | ADMITTED weak signal | not_found | I-D — Cut supply | — | D |
+| W2 | China widens rare-earth and critical-mineral export controls — 10 US firms in June, 14 EU entities in July; IEA warning that full enforcement could place substantial downstream production at risk worldwide | Deferred | not_found | — | — | — |
+| W3 | US Department of Commerce shifts NVIDIA H200 review for China from presumption of denial to case-by-case approval subject to a 25% tariff; AI Diffusion Rule rescinded; higher-tier exports approved | Context only | found_in_corpus | — | A | B |
+| W4 | Tencent expands cloud computing presence in Europe with new data centres in Germany; Chinese firms reported to be training AI models in Southeast Asia and Europe to work around export controls | Context only | not_found | — | — | — |
+| W7 | Mistral raises €830 million in debt for data-centre build-out in France and Sweden; Mistral Compute built in partnership with NVIDIA; flagship models trained on Microsoft Azure infrastructure; Palo Alto office opened to access engineers and Silicon Valley venture capital | Context only | not_found | — | — | — |
+| C6 | Europe launches €80 billion investment alliance to scale up tech leaders | ADMITTED substantive | not_found | C-A — Home champion | A | A |
+| C7 | Programme for agile and rapid defence innovation: Council and Parliament reach political agreement | ADMITTED substantive | not_found | C-A — Home champion | A | A |
+| R2 | National Knowledge Security Guidelines 2026 | ADMITTED substantive | not_found | R-B — Fortress rules | B | B |
+| R6 | European Tech Sovereignty | ADMITTED substantive | not_found | R-B — Fortress rules | B | B |
+| W5 | ERC Advanced Grants: Nearly €840 million to support Europe’s leading researchers | ADMITTED weak signal | not_found | K-A — Talent windfall | — | A |
+| W6 | New ERC Work Programme sets out 2027 funding opportunities | Deferred | not_found | — | — | A |
 
-- Parsed **31** records: **27** current candidates, **0** forthcoming/unpublished, **4** context-only.
-- Candidate kinds across the supplement: **24** substantive records and **7** weak signals.
-- **31** supplied URLs are recorded as user-tested/reachable. Reachability does not substitute for source-text or bibliographic verification.
-- Automated comparison across all records: **1** found in admitted corpus; **1** exact URL seen but not admitted; **29** not found in the saved corpus/seen ledger.
-- Results: **0** existing matches; **27** deferred pending evidence; **4** context-only; **0** forthcoming; **0** newly admitted substantive items; **0** newly admitted weak signals.
+## Exact-link evidence policy
 
-### Saved-state recall diagnoses
+The manual lane follows this order:
 
-- **12** — Source/URL was not observed in the saved direct-discovery ledger
-- **6** — Saved scan reported no usable sitemap for this source
-- **3** — Domain was traversed, but this exact candidate URL was not observed
-- **3** — Context-only/outside-window item; not a current recall target
-- **3** — Secondary reference; primary source still required for evidence admission
-- **2** — DOI/scholarly record was not observed in the saved index scan
-- **1** — Not missed
-- **1** — Exact URL was seen; saved state has no item-level rejection trace
+1. Parse the bibliographic record and the exact supplied URL.
+2. Deduplicate against admitted corpus and saved scanner history.
+3. Retrieve the exact supplied URL when runtime networking is available, or use a reviewed evidence cache only when that review is explicitly bound to the same canonical supplied URL.
+4. Resolve to a primary record only for an explicitly secondary/generic/wrong-reference case; preserve the original supplied URL alongside the resolved URL.
+5. Apply the same substantive standard: genuine EU/European R&I in geopolitical context. Metadata-only records defer rather than fail relevance.
+6. Use curator cells as candidate hypotheses, then classify from reviewed source evidence. Curator cells never force admission or placement.
 
-### Per-item comparison
+## Recall diagnostic
 
-| ID | Candidate | Status / kind | Automated comparison | Recall diagnosis | Manual-ingest result | Link status | Curator cell hints |
-|---|---|---|---|---|---|---|---|
-| K1 | Europe as science superpower: what it will take to rival the US and China | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | K-A, K-D, R-D |
-| K2 | Prestigious European science funder scraps stricter rules after researcher backlash | candidate; substantive | Not found in saved corpus/seen-URL ledger | DOI/scholarly record was not observed in the saved index scan | Deferred pending underlying-source evidence/gating | user-validated | K-A, R-D |
-| K3 | European funder must increase capacity to meet the ambition of scientists | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | K-A, K-D |
-| K4 | Scientists fight back against far-right plans to restrict academic freedom in Germany | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | K-D, R-B |
-| K5 | Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research | context_outside_primary_window; substantive | Found in admitted corpus | Not missed | Retained as context only; excluded from current matrix | user-validated | K-B, R-B |
-| K6 | Challenges and recommendations for research security: Learning from research ethics and integrity | candidate; substantive | Not found in saved corpus/seen-URL ledger | DOI/scholarly record was not observed in the saved index scan | Deferred pending underlying-source evidence/gating | user-validated | K-B, R-A, R-C |
-| K7 | Fragmented Europe: Dealing with China as a technology and innovation power | candidate; substantive | Scanner saw exact URL; not admitted | Exact URL was seen; saved state has no item-level rejection trace | Deferred pending underlying-source evidence/gating | user-validated | K-B, K-C, R-D, I-D, C-D |
-| I1 | Europe needs a strategy to close the artificial intelligence compute gap | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | user-validated | I-B, I-C, I-A, C-B |
-| I2 | Revamping Europe’s chips strategy: indispensability, not self-sufficiency | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | user-validated | I-A, I-B, C-B |
-| I4 | Understanding U.S. Allies’ Current Legal Authority to Implement AI and Semiconductor Export Controls | candidate; substantive | Not found in saved corpus/seen-URL ledger | Domain was traversed, but this exact candidate URL was not observed | Deferred pending underlying-source evidence/gating | user-validated | R-C, I-C, I-D |
-| I5 | AI export controls are not the best bargaining chip | context_outside_primary_window; substantive | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | user-validated | I-C, R-C |
-| C1 | Europe’s venture capital gap and the financing of high-growth firms | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | C-C, C-D |
-| C2 | Exploring the investor landscape for venture capital | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | C-C, C-B |
-| C3 | The European Innovation Council opens to defence and dual-use technologies — amended EIC Work Programme 2026 | candidate; substantive | Not found in saved corpus/seen-URL ledger | Domain was traversed, but this exact candidate URL was not observed | Deferred pending underlying-source evidence/gating | user-validated | C-A, C-B, R-B |
-| C4 | Dual-use and Defence Research in Europe | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | C-A, C-B, R-B |
-| C5 | The growth of dual-use by design research in Europe: Export control risks and challenges | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | C-B, R-B, I-D |
-| C6 | European Tech Champions Initiative 2.0 — launch | candidate; substantive | Not found in saved corpus/seen-URL ledger | Secondary reference; primary source still required for evidence admission | Deferred pending underlying-source evidence/gating | user-validated | C-A, C-C |
-| C7 | Provisional political agreement on the Programme for Agile and Rapid Defence Innovation (AGILE), €115 million, and on the defence simplification package (procurement, permitting, cross-border cooperation) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | C-A, R-B |
-| R1 | Council Recommendation on a European Union framework for science diplomacy | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | user-validated | R-A, K-C |
-| R2 | Nationale Leidraad Kennisveiligheid — fully revised National Knowledge Security Guideline (first complete rewrite since April 2022) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Secondary reference; primary source still required for evidence admission | Deferred pending underlying-source evidence/gating | user-validated | R-B, K-B |
-| R3 | Does Europe Really Have a Plan for Tech Sovereignty? Tech Policy Press (AI hype and European policymaking series) | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | R-C, I-B, C-B |
-| R4 | To achieve tech sovereignty, Europe must not mimic its rivals | candidate; substantive | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | user-validated | R-B, C-B |
-| R5 | Simplifying European Union Policy: Tech Sovereignty Package — virtual discussion summary | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | R-B, I-B, C-B |
-| R6 | European Tech Sovereignty Policy Paper | candidate; substantive | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | R-B, I-A, C-B |
-| W1 | China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations | candidate; weak_signal | Not found in saved corpus/seen-URL ledger | Source/URL was not observed in the saved direct-discovery ledger | Deferred pending underlying-source evidence/gating | user-validated | I-D, R-B, C-D |
-| W2 | China widens rare-earth and critical-mineral export controls — 10 US firms in June, 14 EU entities in July; IEA warning that full enforcement could place substantial downstream production at risk worldwide | candidate; weak_signal | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | user-validated | I-D, I-A |
-| W3 | US Department of Commerce shifts NVIDIA H200 review for China from presumption of denial to case-by-case approval subject to a 25% tariff; AI Diffusion Rule rescinded; higher-tier exports approved | candidate; weak_signal | Not found in saved corpus/seen-URL ledger | Saved scan reported no usable sitemap for this source | Deferred pending underlying-source evidence/gating | user-validated | I-C, R-C, I-B |
-| W4 | Tencent expands cloud computing presence in Europe with new data centres in Germany; Chinese firms reported to be training AI models in Southeast Asia and Europe to work around export controls | context_outside_primary_window; weak_signal | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | user-validated | I-C, R-D |
-| W5 | Advanced Grants 2025 results: €838 million to 319 researchers | candidate; weak_signal | Not found in saved corpus/seen-URL ledger | Domain was traversed, but this exact candidate URL was not observed | Deferred pending underlying-source evidence/gating | user-validated | K-A, K-D |
-| W6 | ERC Plus continued into a second year, with relocation provisions; €7 million lump sum, 30 grants, no field quotas | candidate; weak_signal | Not found in saved corpus/seen-URL ledger | Secondary reference; primary source still required for evidence admission | Deferred pending underlying-source evidence/gating | user-validated | K-A, R-A |
-| W7 | Mistral raises €830 million in debt for data-centre build-out in France and Sweden; Mistral Compute built in partnership with NVIDIA; flagship models trained on Microsoft Azure infrastructure; Palo Alto office opened to access engineers and Silicon Valley venture capital | context_outside_primary_window; weak_signal | Not found in saved corpus/seen-URL ledger | Context-only/outside-window item; not a current recall target | Retained as context only; excluded from current matrix | user-validated | C-C, I-C, C-A |
+The reviewed supplement confirms both discovery and gating gaps. In particular, K7 (`Fragmented Europe`) had been seen by the scanner but was not admitted; the reviewed underlying source now passes the substantive gate and enters K-B. Most other newly admitted supplement records were not found in the saved ledger, so they remain useful exact-URL recall targets for future automated discovery improvements.
 
-## Recovery queues and safety semantics
-
-- Substantive exact-URL recovery queue: **48** distinct non-homepage URLs.
-- Weak-signal exact-URL recovery queue: **4** URLs.
-- Queue membership improves discovery recall only. A later real scan must retrieve source text and pass the normal substantive EU/European R&I + geopolitical gate; weak signals additionally pass normal factual/anchoring checks.
-- Metadata-only records defer rather than being called irrelevant. Secondary references, forthcoming/unpublished items, and context-only items cannot enter the matrix merely because they were curated.
-- Curator-proposed Sovereignty Frontier cells are stored as `manual_hint_not_source_evidence`; source evidence determines `quadrant_implied`, while `quadrant_claimed` remains separate.
-- Manual ingest preserves `last_updated`, scan cursors, completed cycles, and scan-result history. The `manual_ingest` namespace has its own ingest timestamps and hashes.
+The recovery queues remain bounded and do not lower pass-1 precision. A future live scanner run may retry queued exact URLs, but only that real scanner run may update live scan timestamps/cursors.
