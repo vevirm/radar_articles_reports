@@ -1,52 +1,47 @@
-# R&I Geopolitics Radar V17.9.0
+# R&I Geopolitics Radar V17.10.2
 
-V17.9.0 repairs three linked problems in the radar: literal claim boilerplate, source-blind admission rules, and an under-populated Sovereignty Frontier matrix.
+V17.10.2 adds curated manual-candidate recovery without turning a hand-built list into an admission bypass. It preserves the V17.9 source-aware aboutness and evidence-led matrix rules and uses the supplied `radar (21).json` as the authoritative state.
 
-## What changed
+## Manual candidate ingest
 
-### Informative claims, not “This says that”
-
-Prominent radar and matrix lines now show the source-backed claim itself. `core_message` remains concise, but the UI no longer mechanically prefixes it with “This says that” or “It says”. Publication details remain available as bibliography/source metadata.
-
-### Source-aware aboutness
-
-The substantive pass-1 standard remains strict: a record must connect Europe/EU, an R&I dimension, and geopolitical context. The aboutness test now adapts to the text actually available:
-
-- **Full text:** recurrence and spread across the document are valid evidence that the issue is central.
-- **Abstract only:** the EU/R&I/geopolitical connection is judged inside the abstract; nonexistent document sections are not required.
-- **Metadata only:** the record is **deferred / insufficient text**, not falsely labelled irrelevant. For DOI-bearing OpenAlex and Crossref records, the scanner makes a tightly bounded publisher-landing-page abstract recovery attempt before dropping the candidate.
-
-The bare acronym `EU` is also contextual. If a paper explicitly defines `EU` as something else (for example “environmental uncertainty”), that token cannot establish European Union relevance.
-
-### Honest rejection diagnostics
-
-Admission diagnostics now preserve the actual failure cause—such as insufficient text, no direct EU relevance, no R&I content, no geopolitical context, or insufficient aboutness—instead of collapsing failed pass-1 candidates into “no direct EU”.
-
-### Evidence-led 4×4 matrix
-
-Core reports/papers are classified from the source-backed evidence carried in the radar record, not only from the shortened display point. Direction words are supporting evidence, not a second hard gate. Weak signals remain event/mechanism-gated.
-
-On the bundled 2026-08-25 state, the repaired classifier identifies 69 qualifying matrix evidence items and populates all 16 cells. Counts are not artificially balanced; cells range from sparse to dense according to the evidence.
-
-## Bundled state
-
-This package uses the user's newer supplied `radar (20).json` state (`last_updated: 2026-08-25T01:54Z`) rather than the older state inside the previous ZIP. Two confirmed scope false positives were removed during the repair:
-
-1. an Indonesia-centred defence-policy paper where EU strategic autonomy was only a comparator; and
-2. a China construction paper where `EU` meant “environmental uncertainty”, not European Union.
-
-The preserved data timestamp is the time of the supplied scan. V17.9.0 is a code/classifier/state-cleanup release, not a claim that a new live web scan was run during packaging.
-
-## Run
-
-Open `index.html` through a local/static web server as before. The scan implementation is in `scripts/scan_radar.py`; configuration is in `radar_config.json`, with the supplied design specification retained as `eu_ri_radar_config_v2.yaml`.
-
-## Validation
-
-Run:
+Use:
 
 ```bash
-pytest -q
+python scripts/manual_ingest.py path/to/candidates.docx --state radar.json
 ```
 
-The package includes regression tests for source-aware aboutness, contextual EU acronym handling, rejection diagnostics, informative claim rendering, and matrix coverage.
+Accepted inputs: DOCX, PDF, CSV, JSON, YAML/YML, TXT and Markdown. `--no-fetch` performs comparison/registration only. `--refresh` reprocesses a previously ingested file hash. `--links-validated` records supplied URLs as user-tested/reachable without treating reachability as substantive evidence or bibliographic verification.
+
+The ingest path extracts bibliographic fields and URLs, matches DOI/URL/title conservatively against the existing corpus, attempts the underlying primary source, and applies the same substantive `gate_scope` used by automated discovery. A manual citation alone is never evidence. Metadata-only candidates are deferred; secondary references, forthcoming/unpublished records and context-only records stay outside the matrix.
+
+## Recall diagnostics and provenance
+
+Manual candidates are compared with both the admitted corpus and the scanner's saved seen-URL ledger. High-value misses can enter a bounded exact-URL recovery queue which the normal scanner retries before broad institutional discovery; it does not lower the EU/European R&I + geopolitical pass-1 standard.
+
+Items expose discovery provenance as `automated`, `manual`, or `both`. Existing matches are deduplicated and marked `both`. The UI shows that provenance on radar and matrix cards.
+
+See `MANUAL_INGEST_REPORT.md` for both supplied May–August 2026 list comparisons, including the Sovereignty Frontier supplement and its weak-signal candidates.
+
+## Source-aware aboutness and matrix semantics
+
+- Full text may use strict recurrence/section-spread aboutness evidence.
+- Abstract-only records are judged on substantive EU/European R&I + geopolitical content without requiring nonexistent sections.
+- Metadata-only records defer and trigger retrieval rather than being called irrelevant.
+- Bare `EU` is not treated as European Union unless context establishes it.
+- Display claims state what the source finds, argues, reports or projects without boilerplate prefixes.
+- Matrix classification uses substantive source evidence; directional vocabulary supports but does not gate classification.
+- `quadrant_claimed` and `quadrant_implied` are preserved separately. Evidence-implied placement is not overwritten by an advocated/claimed outcome.
+
+## State integrity
+
+Manual ingestion is not a live scan. It does not change `last_updated`, scan cursors, completed cycles or scan-result bookkeeping. The bundled authoritative timestamp remains `2026-08-25T07:34Z` from the supplied state.
+
+## Run and validate
+
+Serve `index.html` with any local static server. The scanner is `scripts/scan_radar.py`; runtime JSON config is `radar_config.json`; the design/config specification is `eu_ri_radar_config_v2.yaml`.
+
+Run the complete suite with:
+
+```bash
+python -m pytest -q
+```

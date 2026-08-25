@@ -1,19 +1,32 @@
-V17.9.0 SOURCE-AWARE ABOUTNESS / EVIDENCE-LED MATRIX
+V17.10.2 MANUAL CANDIDATE RECOVERY
 
-Basis:
-- Previous V17.8.3 package
-- User-supplied newer state: radar (20).json, last_updated 2026-08-25T01:54Z
-- User-supplied eu_ri_radar_config_v2.yaml design specification
+Authoritative input state
+- Supplied radar (21).json
+- Preserved last_updated: 2026-08-25T07:34Z
+- No live scan performed during packaging
 
-Repairs:
-- Removed literal "This says that" / "It says" claim wrapper.
-- Added full-text / abstract-only / metadata-only aboutness behavior.
-- Metadata-only records defer instead of being rejected for lack of evidence.
-- DOI-bearing OpenAlex and Crossref records get bounded abstract-recovery attempts before final rejection.
-- Added contextual handling for ambiguous bare "EU".
-- Preserved true admission rejection reasons in scan diagnostics.
-- Matrix now classifies vetted core records from source-backed evidence; direction markers support rather than gate.
-- Removed two confirmed scope false positives from bundled state.
-- Updated static cache-bust/version identifiers to 17.9.0.
+Manual inputs
+- EU_RI_Key_Papers_May-Aug_2026-2.docx
+  - 53 parsed records: 38 current, 6 forthcoming/unpublished, 9 context-only
+  - Current comparison: 1 found in corpus, 1 scanner-seen URL not admitted, 36 current candidates absent from saved corpus/seen ledger
+- EU_RI_Additions_May-Aug_2026.docx
+  - 31 parsed records: 27 current candidates, 4 context-only; 24 substantive + 7 weak-signal records overall
+  - Across all 31: 1 context item found in corpus, 1 scanner-seen URL not admitted, 29 not found in saved ledger
+  - All 31 supplied URLs recorded as user-validated/reachable
+- Packaging ingest used --no-fetch; link reachability is trusted for the supplement but no curator note was treated as substantive evidence
+- 48 substantive exact URLs and 4 weak-signal URLs are queued for bounded scanner recovery
 
-This build does not claim a new live scan. It preserves the supplied state's data timestamp.
+Implementation
+- Added scripts/manual_ingest.py and multi-format candidate parsing, including numbered Sovereignty Frontier supplements
+- Added evidence-safe source retrieval, deduplication, provenance, defer/status semantics, and user-validated link metadata
+- Fixed structured CSV/JSON/YAML date-precision preservation for verified manual admissions
+- Added bounded exact-URL recovery to scripts/scan_radar.py
+- Added targeted high-quality discovery sources/queries without lowering pass-1 precision
+- Preserved source-aware aboutness and contextual EU acronym behavior
+- Kept quadrant_claimed separate from quadrant_implied in matrix classification/display
+- Added provenance display to main radar and Frontier UI
+- Updated requirements for python-docx and PyYAML
+
+Validation
+- python -m pytest -q
+- 233 passed

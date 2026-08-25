@@ -1,16 +1,18 @@
-R&I GEOPOLITICS RADAR V17.9.0 — SOURCE-AWARE ABOUTNESS / EVIDENCE-LED MATRIX
+R&I GEOPOLITICS RADAR V17.10.2 — MANUAL CANDIDATE RECOVERY
 
-1. Upload/replace the repository files in GitHub.
-2. Keep the included radar.json; it is the repaired current corpus/state based on the supplied 2026-08-25 radar state.
-3. Do NOT create GitHub Actions secrets for this scanner. None are required.
-4. Run the existing radar scan workflow.
+NORMAL RADAR BUILD
+1. Serve the repository root as a static site and open index.html.
+2. Run scripts/scan_radar.py for a real live scan only when network access is available.
 
-Behavior:
-- pass-1 keeps the strict EU/Europe + R&I + geopolitical standard;
-- full text uses recurrence/spread aboutness, abstracts are judged within the abstract, and metadata-only records defer for bounded text recovery;
-- bare EU does not establish European Union scope when the source defines it as another abbreviation;
-- OpenAlex runs anonymously/keyless and Crossref/institutional scanning continue if OpenAlex is rate-limited;
-- DOI-bearing OpenAlex/Crossref records with missing abstracts can receive bounded publisher-page abstract recovery;
-- scan diagnostics preserve actual rejection/defer causes;
-- the Frontier classifies vetted core evidence from source-backed summaries rather than only compressed display points;
-- prior corpus items, cursors, fingerprints and history are preserved except for the two documented scope false positives removed in this repair.
+MANUAL CANDIDATE LIST
+  python scripts/manual_ingest.py PATH_TO_LIST --state radar.json
+
+Supported: DOCX, PDF, CSV, JSON, YAML/YML, TXT, Markdown.
+Use --no-fetch for comparison/registration only; use --refresh to reprocess the same file hash.
+Use --links-validated when supplied URLs were tested by the curator; this records reachability only and does not bypass source-evidence checks.
+
+IMPORTANT
+- Manual list entries are candidates, never automatic evidence or automatic matrix entries.
+- Metadata-only records defer pending retrieval.
+- Secondary references and forthcoming/unpublished records stay outside the matrix.
+- Manual ingest preserves last_updated and all live-scan cursors/history.

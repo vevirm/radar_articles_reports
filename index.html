@@ -115,7 +115,7 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.9.0"></script>
+<script src="briefing/insights.js?v=17.10.2"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -221,6 +221,7 @@ function simpleWhy(x){
   return 'It shows how geopolitics can change European research and innovation.';
 }
 function whereFrom(x){return [x.source,fmtDate(x.date)].filter(Boolean).join(' · ')}
+function provenanceLabel(x){const p=String(x.discovery_provenance||'').toLowerCase();if(p==='both')return 'Automated + manual';if(p==='manual')return 'Manual candidate';if(p==='automated')return 'Automated discovery';const a=Array.isArray(x.provenance)?x.provenance.join(' ').toLowerCase():'';if(a.includes('manual')&&a.includes('automated'))return 'Automated + manual';if(a.includes('manual'))return 'Manual candidate';return 'Automated discovery'}
 function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
 function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance,x.core_message].join(" ")).toLowerCase()}
 function filtered(items){const q=state.query.trim().toLowerCase();return items.filter(x=>(!state.onlyNew||x.new_this_scan)&&(!q||searchable(x).includes(q)))}
@@ -231,11 +232,11 @@ function biblio(x,label='Bibliography'){
 }
 function abItem(x){
   const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(claimText(x))}</a></h3>${biblio(x)}<p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p><div class="card-foot"><span>${esc(x.source_tier||x.eu_relevance||'')}</span><span>${esc(seen)}</span></div></article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(claimText(x))}</a></h3>${biblio(x)}<p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p><div class="card-foot"><span>${esc([x.source_tier||x.eu_relevance||'',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
 }
 function cItem(x){
   const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"";
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(claimText(x))}</a></h3>${biblio(x,'Source details')}<p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p><div class="card-foot"><span>${esc(x.signal_kind||x.signal_type||'Weak signal')}</span><span>${esc(seen)}</span></div></article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}</div></div><h3><a href="${esc(x.link||'#')}" target="_blank" rel="noopener">${esc(claimText(x))}</a></h3>${biblio(x,'Source details')}<p class="whyline"><strong>Why it matters:</strong> ${esc(simpleWhy(x))}</p><div class="card-foot"><span>${esc([x.signal_kind||x.signal_type||'Weak signal',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}

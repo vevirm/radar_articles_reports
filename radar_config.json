@@ -131,7 +131,13 @@
     "intra-European researcher mobility research capacity",
     "European research careers talent mobility competitiveness",
     "Choose Europe research careers brain drain",
-    "research talent migration European Research Area"
+    "research talent migration European Research Area",
+    "EU FP10 research security strategic autonomy",
+    "Horizon Europe 2028 2034 geopolitical competitiveness research security",
+    "EU AI gigafactories technological sovereignty research innovation",
+    "European AI compute infrastructure strategic dependence competitiveness",
+    "European research careers brain drain strategic competition",
+    "European technological sovereignty cloud AI research innovation"
   ],
   "queries_b": [
     "strategic foresight methodology public policy",
@@ -528,6 +534,61 @@
       "name": "Marie Skłodowska-Curie Actions",
       "domain": "marie-sklodowska-curie-actions.ec.europa.eu",
       "tier": 1
+    },
+    {
+      "name": "ERA Portal Austria",
+      "domain": "era.gv.at",
+      "tier": 1
+    },
+    {
+      "name": "EuroHPC Joint Undertaking",
+      "domain": "eurohpc-ju.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Commission — Digital Strategy",
+      "domain": "digital-strategy.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "ERA-LEARN",
+      "domain": "era-learn.eu",
+      "tier": 2
+    },
+    {
+      "name": "EUR-Lex",
+      "domain": "eur-lex.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "EU Data / DOI resolver",
+      "domain": "data.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "JRC Publications Repository",
+      "domain": "publications.jrc.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Commission AI Watch",
+      "domain": "ai-watch.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Central Bank",
+      "domain": "ecb.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "Stockholm International Peace Research Institute",
+      "domain": "sipri.org",
+      "tier": 2
+    },
+    {
+      "name": "ETH Zurich Center for Security Studies",
+      "domain": "css.ethz.ch",
+      "tier": 2
     }
   ],
   "crossref_institution_publishers": [
@@ -849,7 +910,9 @@
     "European research brain drain brain gain",
     "European researcher mobility research careers",
     "EU research talent attraction retention",
-    "academic brain drain Europe research competitiveness"
+    "academic brain drain Europe research competitiveness",
+    "EU FP10 research security competitiveness",
+    "European AI compute strategic dependence innovation"
   ],
   "crossref_priority_journal_rows": 35,
   "incremental_state_version": "v17.2-persistent-source-cursors",
@@ -1414,5 +1477,8 @@
   "eu_anchor_context_rule": "Bare EU is not a European Union anchor when the document explicitly defines EU as another abbreviation (for example environmental uncertainty).",
   "matrix_evidence_rule": "For vetted Strand A evidence, classify row and independence/competitiveness directions from the source-backed title/summary/relevance evidence; direction keywords support the rubric but are not a second gate. Weak signals remain event/mechanism gated.",
   "openalex_missing_abstract_enrichment_per_scan": 12,
-  "openalex_missing_abstract_enrichment_timeout_seconds": 8
+  "openalex_missing_abstract_enrichment_timeout_seconds": 8,
+  "manual_ingest_profile_version": "v17.10.2-curated-manual-recovery",
+  "manual_recovery_urls_per_scan": 10,
+  "manual_recovery_stage_seconds": 120
 }

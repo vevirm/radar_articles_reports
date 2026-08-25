@@ -33,3 +33,7 @@ English remains a hard publication invariant. Core messages must be source-backe
 ## Matrix hand-off
 
 Pass-1 records that clear admission are handed to the matrix with their source-backed summary/relevance evidence. Direction vocabulary may support independence/competitiveness interpretation, but it is not an additional admission gate.
+
+## V17.10 manual candidate lane
+
+A curated manual list is a candidate/recovery source, not evidence. A newly supplied item may enter the radar only after its underlying primary source is retrieved/verified and passes this same admission profile. Metadata-only records defer. Secondary references, forthcoming/unpublished items and context-only references remain outside the matrix. Provenance records whether discovery was automated, manual, or both.

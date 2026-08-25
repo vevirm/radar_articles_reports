@@ -33,3 +33,7 @@ Direction must apply to Europe/EU, not merely to another actor mentioned in the 
 ## Coverage
 
 There are no quotas and no requirement that cells have equal counts. Empty or sparse cells should mean an evidence gap after classification, not a failure to read available source evidence. In the bundled repaired state, all 16 cells are populated from 69 qualifying evidence items with unequal cell counts.
+
+## V17.10 provenance and claimed/implied direction
+
+Manual provenance does not affect matrix eligibility. `quadrant_claimed` records an advocated/claimed outcome while `quadrant_implied` records the direction implied by the substantive evidence; keep both fields and use the implied evidence for placement when explicitly supplied.

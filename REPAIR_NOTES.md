@@ -1,21 +1,9 @@
-# V17.9.0 — source-aware aboutness + evidence-led matrix
+# V17.10.2 — curated candidate recovery
 
-## 1. Claim rendering
+V17.10.2 adds a separate manual candidate lane without changing the definition of admissible radar evidence. The manual list can recover discovery misses, but it cannot establish substantive relevance by itself.
 
-The earlier UI hard-coded `This says that` before every concise point and tests enforced that behavior. V17.9.0 removes the wrapper. The prominent line is now the actual source-backed claim; bibliography/source metadata carries attribution.
+The ingest parser normalizes bibliography and URLs from common office/data formats, compares them with admitted items and the saved scanner seen-URL ledger, and retrieves the underlying source where possible. Verified primary text is evaluated by the existing source-aware gate. Metadata-only records defer; secondary references and forthcoming records remain outside the matrix.
 
-## 2. Scan starvation and misleading diagnostics
+Recall repair is intentionally narrow: missed candidates contribute exact URLs to a bounded recovery queue and targeted high-quality source/query expansion. The scanner still requires genuine EU/European R&I in geopolitical context.
 
-The old pass-1 path applied admission logic without distinguishing full documents from abstract/metadata records and could classify an unavailable-text case as a failed scope case. It also discarded the evaluated EU relevance on a failed A gate, causing rejection diagnostics to over-report `no direct EU`.
-
-V17.9.0 adds source-length-aware aboutness modes and explicit failure reasons. Metadata-only records defer; abstracts are evaluated within the available abstract; full text can use recurrence/spread checks.
-
-## 3. Ambiguous `EU`
-
-Bare `EU` is no longer accepted blindly. Explicit non-European definitions such as `environmental uncertainty (EU)` block the acronym from establishing European Union relevance.
-
-## 4. Matrix sparsity
-
-The previous Frontier classifier relied too heavily on a compressed display point and then reapplied movement/materiality/direction keyword gates. V17.9.0 carries the source-backed evidence into row and direction classification. For vetted core evidence, source evidence determines the matrix rubric; weak signals retain the stricter event/mechanism test.
-
-The supplied latest state moves from a sparse matrix to 16/16 populated cells with 69 qualifying items, without imposing quotas or equal cell counts.
+The Frontier matrix now surfaces provenance and keeps advocated `quadrant_claimed` separate from evidence-derived `quadrant_implied`; the latter controls placement when explicitly available.

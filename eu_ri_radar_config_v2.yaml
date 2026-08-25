@@ -577,6 +577,7 @@ sources:
       - oecd.org
       - erc.europa.eu
       - eic.ec.europa.eu
+      - ecb.europa.eu
       - esfri.eu
       - eurohpc-ju.europa.eu
       - eua.eu
@@ -602,6 +603,8 @@ sources:
       - clingendael.org
       - chathamhouse.org
       - csis.org
+      - sipri.org
+      - css.ethz.ch
       - cnas.org
       - rand.org
       - cset.georgetown.edu
@@ -919,3 +922,24 @@ calibration_notes:
   - Read the rejected list weekly: items killed by single_mention_kill should look obviously wrong; if they don't, lower min_hits to 2 for reports only.
   - Watch the claimed≠implied gap; recurring gaps around one dimension usually mean the discourse is lagging the evidence — that is a weak signal in its own right.
   - Re-run pass 3 monthly, pass 1 daily, pass 2 daily but per-phenomenon queries regenerate weekly.
+
+# V17.10 curated candidate / recall-recovery lane
+manual_candidate_ingest:
+  profile_version: v17.10.2-curated-manual-recovery
+  principle: "Manual lists are candidates/recovery hints, never verified evidence by themselves."
+  accepted_formats: [docx, pdf, csv, json, yaml, yml, txt, md]
+  preserve_scan_timestamp: true
+  deduplicate_against_corpus: true
+  retrieve_underlying_source: true
+  metadata_only_action: defer_and_retry
+  secondary_reference_action: retain_as_reference_not_matrix
+  forthcoming_action: retain_as_unpublished_not_matrix
+  same_substantive_gate_as_scanner: true
+  curator_cell_mappings_are_evidence: false
+  weak_signal_candidates_use_normal_factual_and_anchor_checks: true
+  provenance_values: [automated_discovery, manual_candidate_ingestion, both]
+  recall_recovery:
+    exact_url_queue: true
+    max_urls_per_live_scan: 10
+    lower_pass1_thresholds: false
+    prioritize_high_quality_primary_domains: true

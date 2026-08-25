@@ -1,17 +1,24 @@
-# Architecture — V17.9.0 source-aware aboutness and evidence-led matrix
+# Architecture — V17.10.2 manual candidate recovery
 
-The radar has four layers: discovery, admission, cumulative storage, and interpretation/ranking.
+The radar now has two discovery entrances feeding one substantive evidence gate.
 
-## 1. Discovery
-Discovery remains broad across OpenAlex, Crossref, institutional/report sources and external-news sources. Sparse Frontier cells can still steer rotating/deepening queries. Missing text is treated as a retrieval problem rather than negative topical evidence; DOI-bearing scholarly records can receive bounded abstract recovery.
+1. **Automated discovery** in `scripts/scan_radar.py` uses the existing scholarly/institutional source rotation and source-aware `gate_scope`.
+2. **Manual candidate ingestion** in `scripts/manual_ingest.py` parses DOCX/PDF/CSV/JSON/YAML/TXT/Markdown, normalizes bibliography/URLs, deduplicates against state, retrieves the cited primary source where possible, then invokes the same `gate_scope`.
 
-## 2. Admission
-Pass-1 remains strict on substance: Europe/EU scope, an R&I dimension, and geopolitical context must be connected. Aboutness adapts to source text availability. Full documents can use recurrence and spread; abstracts are judged inside the available abstract; metadata-only records defer. Bare `EU` is contextual and cannot establish European Union scope if explicitly defined as another abbreviation.
+The manual document itself is never treated as source evidence. User-confirmed link reachability is stored separately from evidence verification, so a working URL cannot by itself admit a record. Records are tagged as verified primary, secondary reference, uncertain/metadata-only, forthcoming/unpublished, context-only, or existing-corpus. Only a verified primary source that passes the normal A/B substantive gate can be newly admitted.
 
-## 3. Cumulative storage
-The supplied corpus/state, cursors, fingerprints and history are preserved. This implementation change uses separate aboutness/matrix/display profile identifiers and does not bump the existing quality profile solely to force a destructive re-audit. Confirmed hard scope false positives can still be removed surgically.
+## Recall repair
 
-## 4. Interpretation / Sovereignty Frontier
-The Frontier asks two independent questions: does the evidence improve or weaken European autonomy, and does it improve or weaken R&I/industrial competitiveness? For vetted core evidence, classification can use the full source-backed record carried in `radar.json`, including summary/relevance evidence; direction-marker vocabulary supports interpretation but is not a second gate. Weak signals remain stricter and must carry an external event/mechanism.
+Missed current candidates produce diagnostics. Exact non-homepage URLs are placed in a bounded recovery queue (`manual_recovery_urls_per_scan`, default 10). A later real scanner run retries those URLs before broad institutional discovery, but all recovered text still passes the normal substantive gate. This narrows recall repair to known high-value candidates instead of broadening low-precision domains or weakening thresholds.
 
-There are no numeric cell quotas. Sparse cells are acceptable when evidence is genuinely sparse. On the bundled repaired state, 69 qualifying evidence items populate all 16 cells with unequal counts.
+## Provenance
+
+Public records use `discovery_provenance` = `automated`, `manual`, or `both`, plus a provenance array and manual ingest IDs. Matching an existing automated record changes provenance only; it does not duplicate the item.
+
+## State integrity
+
+`manual_ingest` is an additive state namespace containing batches, diagnostics and the recovery queue. Manual ingest deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history. A real scanner run preserves the namespace and records recovery attempts at that scan's real timestamp.
+
+## Matrix
+
+Core evidence classification continues to use source-backed evidence. `quadrant_claimed` (the outcome a source advocates/claims) remains distinct from `quadrant_implied` (the outcome implied by its evidence); implied evidence controls placement when supplied.

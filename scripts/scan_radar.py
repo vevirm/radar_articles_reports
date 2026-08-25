@@ -36,11 +36,46 @@ import sys
 import time
 import xml.etree.ElementTree as ET
 from collections import Counter
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import quote_plus, urljoin, urlparse
 
-import feedparser
+try:
+    import feedparser
+except ModuleNotFoundError:  # lightweight offline/test fallback; normal installs use feedparser
+    import email.utils
+    import types
+    class _FeedEntry(types.SimpleNamespace):
+        pass
+    class _FeedParserCompat:
+        @staticmethod
+        def parse(content):
+            try:
+                root = ET.fromstring(content)
+            except Exception:
+                return types.SimpleNamespace(entries=[])
+            entries = []
+            for node in root.iter():
+                if localname(node.tag) not in {"item", "entry"}:
+                    continue
+                vals = {}
+                src = None
+                for ch in list(node):
+                    key = localname(ch.tag)
+                    txt = clean_text(" ".join(ch.itertext()))
+                    if key in {"title", "link", "summary", "description", "published", "updated", "pubDate"}:
+                        if key == "pubDate": key = "published"
+                        if key == "link" and not txt:
+                            txt = clean_text(ch.attrib.get("href"))
+                        vals[key] = txt
+                    elif key == "source":
+                        src = types.SimpleNamespace(title=txt, href=clean_text(ch.attrib.get("url") or ch.attrib.get("href")))
+                if src is not None:
+                    vals["source"] = src
+                entries.append(_FeedEntry(**vals))
+            return types.SimpleNamespace(entries=entries)
+    feedparser = _FeedParserCompat()
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dateparser
@@ -3354,6 +3389,88 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
         execution_stats.setdefault("institution_sources", set()).update(x for x in submitted_sources if x)
     return out
 
+
+def manual_recovery_jobs(previous: dict[str, Any], limit: int | None = None) -> list[dict[str, Any]]:
+    """Return a bounded exact-URL recovery queue created by manual candidate ingestion.
+
+    The queue affects discovery only. Every recovered document must still pass the normal
+    source-aware A/B substantive gate before it can enter the corpus.
+    """
+    manual = previous.get("manual_ingest") if isinstance(previous.get("manual_ingest"), dict) else {}
+    queue = manual.get("recovery_queue") if isinstance(manual.get("recovery_queue"), list) else []
+    cap = int(CONFIG.get("manual_recovery_urls_per_scan", 10) if limit is None else limit)
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for entry in queue:
+        if not isinstance(entry, dict):
+            continue
+        if clean_text(entry.get("manual_candidate_kind") or "substantive") != "substantive":
+            continue
+        url = clean_text(entry.get("url"))
+        title = clean_text(entry.get("title"))
+        if not url or not title:
+            continue
+        nurl = normalized_link(url)
+        if nurl in KNOWN_AB_LINKS or nurl in seen:
+            continue
+        seen.add(nurl)
+        out.append(entry)
+        if cap > 0 and len(out) >= cap:
+            break
+    return out
+
+
+def collect_manual_recovery(previous: dict[str, Any], warnings: list[str], stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """Retry exact URLs supplied through manual ingest using the scanner's normal gate."""
+    jobs = manual_recovery_jobs(previous)
+    if not jobs:
+        return []
+    out: list[dict[str, Any]] = []
+    attempted = 0
+    for entry in jobs:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            warnings.append("Manual recovery scan budget reached; remaining exact URLs stay queued")
+            break
+        url = clean_text(entry.get("url"))
+        title = clean_text(entry.get("title"))
+        source = clean_text(entry.get("source")) or url_domain(url)
+        tier = int(entry.get("tier", 2) or 2)
+        attempted += 1
+        item = None
+        if url.lower().split("?", 1)[0].endswith(".pdf"):
+            body, words = pdf_text(url)
+            date = None
+            # Manual ingest may store the first day of a year/month solely as a
+            # sortable representation. Never turn a bare-year or explicitly
+            # unverified bibliography date into evidence of an in-window PDF.
+            if not entry.get("manual_verification_required") and clean_text(entry.get("date_precision")) in {"day", "month", ""}:
+                date = parse_date(entry.get("date"))
+            if body and words >= 120 and date and date >= DATE_FLOOR:
+                ev = gate_scope(title, "", body, tier, source_kind=clean_text(entry.get("source_kind")) or "institutional")
+                _record_ab_gate_diagnostic("manual_recovery", ev)
+                if ev.get("a_pass") or ev.get("b_pass"):
+                    strand = "both" if ev.get("a_pass") and ev.get("b_pass") else "A" if ev.get("a_pass") else "B"
+                    item = build_item(
+                        title=title, authors=source, source=source, date=date, link=url,
+                        item_type="manual-recovered source", strand=strand, evidence=ev,
+                        source_rank=float(tier), tier_label=f"Tier {tier}",
+                        text=f"{title}. {body[:45000]}", doi=clean_text(entry.get("doi")), preprint=False,
+                    )
+        else:
+            item = parse_institution_page(url, source, tier, stage_deadline=stage_deadline)
+        if item:
+            item["provenance"] = ["automated_discovery", "manual_candidate_ingestion"]
+            item["discovery_provenance"] = "both"
+            mid = clean_text(entry.get("manual_id"))
+            if mid:
+                item["manual_ingest_ids"] = [mid]
+            item["manual_recovery"] = True
+            out.append(item)
+    if isinstance(execution_stats, dict):
+        execution_stats["manual_recovery_urls_attempted"] = int(execution_stats.get("manual_recovery_urls_attempted", 0)) + attempted
+        execution_stats["manual_recovery_admitted"] = int(execution_stats.get("manual_recovery_admitted", 0)) + len(out)
+    return dedupe_candidates(out)
+
 def evidence_summary(evidence: dict[str, Any], strand: str) -> str:
     parts = []
     if strand in {"A", "both"}:
@@ -5487,6 +5604,15 @@ def main() -> int:
             execution_stats["quiet_rescue_crossref_executed"] = rescue_cr_count
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(rescue_execution.get("crossref_abstracts_enrichment_attempted", 0))
 
+    # Exact URLs supplied through the curated manual lane are retried first. This is a
+    # precision-preserving recall repair: only the supplied URL is fetched, and admission
+    # still uses the normal source-aware A/B gate.
+    manual_recovery_deadline = time.monotonic() + int(CONFIG.get("manual_recovery_stage_seconds", 120))
+    manual_recovered = safe_stage(
+        "manual exact-url recovery",
+        collect_manual_recovery, previous, warnings, manual_recovery_deadline, execution_stats
+    )
+
     # Reports retain a substantial independent slice, but no longer block the quiet
     # scholarly rescue from firing. High-quality institutional sources remain a core lane.
     inst_deadline = time.monotonic() + int(CONFIG.get("institution_stage_seconds", 480))
@@ -5500,7 +5626,7 @@ def main() -> int:
         stage_deadline=inst_deadline,
         execution_stats=execution_stats,
     )
-    inst = [x for x in inst if isinstance(x, dict)]
+    inst = dedupe_candidates([x for x in (manual_recovered + inst) if isinstance(x, dict)])
     if INSTITUTION_SIGNAL_CANDIDATES:
         # Direct institutional pages are frequently invisible to Google News. Merge
         # recent factual candidates into the same C pipeline; anchoring/dedupe later
@@ -5843,6 +5969,7 @@ def main() -> int:
         "crossref_exploration_queries": len(cr_explore),
         "crossref_priority_tasks": len(cr_priority_batch),
         "institution_sources": len(inst_batch),
+        "manual_recovery_urls": len(manual_recovery_jobs(previous)),
         "frontier_gap_queries": len(frontier_focus["queries"]),
         "frontier_gap_scholarly_queries": len(frontier_focus.get("scholarly_queries", [])),
     }
@@ -5856,6 +5983,24 @@ def main() -> int:
         "targets": frontier_focus["targets"],
     }
 
+    manual_ingest_state = deepcopy(previous.get("manual_ingest")) if isinstance(previous.get("manual_ingest"), dict) else {}
+    if manual_ingest_state:
+        queue = manual_ingest_state.get("recovery_queue") if isinstance(manual_ingest_state.get("recovery_queue"), list) else []
+        live_items = [x for x in (strand_a + strand_b + frontier_evidence) if isinstance(x, dict)]
+        live_links = {normalized_link(x.get("link", "")) for x in live_items if clean_text(x.get("link"))}
+        live_titles = {norm_title(x.get("title", "")) for x in live_items if clean_text(x.get("title"))}
+        manual_ingest_state["recovery_queue"] = [
+            q for q in queue if isinstance(q, dict)
+            and normalized_link(q.get("url", "")) not in live_links
+            and norm_title(q.get("title", "")) not in live_titles
+        ]
+        manual_ingest_state["last_scan_recovery"] = {
+            "scan_at": now_iso,
+            "urls_attempted": int(execution_stats.get("manual_recovery_urls_attempted", 0)),
+            "admitted": int(execution_stats.get("manual_recovery_admitted", 0)),
+            "remaining_queue": len(manual_ingest_state.get("recovery_queue", [])),
+        }
+
     data = {
         "last_updated": now_iso,
         "first_scan_complete": True,
@@ -5865,6 +6010,8 @@ def main() -> int:
         "aboutness_profile_version": str(CONFIG.get("aboutness_profile_version", "")),
         "matrix_profile_version": str(CONFIG.get("matrix_profile_version", "")),
         "display_claim_profile_version": str(CONFIG.get("display_claim_profile_version", "")),
+        "manual_ingest_profile_version": str(CONFIG.get("manual_ingest_profile_version", previous.get("manual_ingest_profile_version", ""))),
+        "manual_ingest": manual_ingest_state,
         "quality_migration_this_run": False,
         "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
         "inherited_corpus_audit_this_run": inherited_audit,
@@ -5946,6 +6093,9 @@ def main() -> int:
             "crossref_admitted_before_dedupe": len(cr),
             "crossref_public_anonymous": True,
             "institutional_admitted_before_dedupe": len(inst),
+            "manual_recovery_urls_attempted": int(execution_stats.get("manual_recovery_urls_attempted", 0)),
+            "manual_recovery_admitted": int(execution_stats.get("manual_recovery_admitted", 0)),
+            "manual_recovery_queue_remaining": len(manual_ingest_state.get("recovery_queue", [])) if manual_ingest_state else 0,
             "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
             "openalex_queries_this_run": len(oa_batch),

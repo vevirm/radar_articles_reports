@@ -141,7 +141,9 @@
         _evidencePoint:claim,
         _evidenceSummary:clean(e.summary||''),
         _matrixDimension:clean(e.matrix_dimension||''),
-        _matrixQuadrant:clean(e.quadrant_implied||e.matrix_quadrant||'')
+        _matrixQuadrant:clean(e.quadrant_implied||e.matrix_quadrant||''),
+        _matrixClaimed:clean(e.quadrant_claimed||''),
+        _provenance:clean(e.discovery_provenance||'')
       });
     }
     return out;
@@ -544,7 +546,10 @@
       originalWhy:signalWhy(x),
       materiality,euLink,overall,
       strongCandidate:qCount>=2,
-      confidence:clamp(Math.round((Math.min(6,materiality)/6*.35 + Math.min(6,euLink)/6*.2 + Math.min(3,qCount)/3*.25 + Math.min(8,Math.abs(direction.autonomy)+Math.abs(direction.performance))/8*.2)*100),35,96)
+      confidence:clamp(Math.round((Math.min(6,materiality)/6*.35 + Math.min(6,euLink)/6*.2 + Math.min(3,qCount)/3*.25 + Math.min(8,Math.abs(direction.autonomy)+Math.abs(direction.performance))/8*.2)*100),35,96),
+      discoveryProvenance:clean(x._provenance||evidence?.discovery_provenance||''),
+      quadrantClaimed:clean(x._matrixClaimed||evidence?.quadrant_claimed||''),
+      quadrantImplied:clean(x._matrixQuadrant||evidence?.quadrant_implied||column.id||'')
     };
   }
 
