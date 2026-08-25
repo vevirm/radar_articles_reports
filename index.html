@@ -64,8 +64,8 @@
         </div>
         <div class="hero-actions">
           <a class="action primary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.8.3">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.8.3">Opportunities &amp; Risks</a>
+          <a class="action secondary" href="frontier/?v=17.9.0">Open Insight Summary</a>
+          <a class="action secondary" href="priorities/?v=17.9.0">Opportunities &amp; Risks</a>
           <a class="action secondary" href="#strand-c">Latest weak signals</a>
         </div>
       </div>
@@ -115,7 +115,7 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.8.3"></script>
+<script src="briefing/insights.js?v=17.9.0"></script>
 <script>
 const PASSWORD_HASH="3d98615d075c6e0c72a639988f81e63b29d0aedce3380f9c30eecbb97d376b79";
 const state={data:null,query:"",onlyNew:false,limits:{A:12,B:12,C:12}};
@@ -147,14 +147,14 @@ function complete120(v){
   return s.replace(/\s*[.…]{2,}\s*$/,'').trim();
 }
 function claim80(v){
-  let s=repairLetterSpacing(v).replace(/^This says that\s+/i,'').replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
+  let s=repairLetterSpacing(v).replace(/^(?:This|It) says that\s+/i,'').replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
   s=s.replace(/^(?:(?:The|This) (?:study|paper|article|report|analysis|results?) (?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests)|It (?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests)) (?:that\s+)?/i,'');
   if(!s||hasLetterSpacing(s))return '';
   s=s.replace(/[.!?]+$/,'').trim();if(s.length<=80)return s;
   let c=s.slice(0,80).replace(/\s+\S*$/,'').replace(/[,:;\-–—]+$/,'').trim();if(c.length<42)c=s.slice(0,79).trim();
   return (c.replace(/[.!?]+$/,'')+'…').slice(0,80);
 }
-function claimText(x){const c=claim80(coreMessage(x));return c?`This says that ${c}`:'This says that the source did not expose a concise English claim'}
+function claimText(x){const c=claim80(coreMessage(x));return c||'Concise source claim unavailable'}
 function readablePaperTitle(v){
   let t=cleanText(v).replace(/<\/?b>/gi,'').replace(/\s+[–—-]\s+(?:European Council on Foreign Relations|CEPS|Euractiv\.com|FT\.com)$/i,'').trim();
   if(!t)return '';

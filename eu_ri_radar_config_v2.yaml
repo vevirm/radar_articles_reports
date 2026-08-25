@@ -1,0 +1,921 @@
+# =============================================================================
+# EU R&I RADAR v2 — geopolitical context, 4x4 matrix, external weak signals
+# Generated 2026-08-25
+#
+# FOCUS
+#   Crucial issues for EU/European research & innovation viewed in geopolitical
+#   context, mapped onto the matrix below; foresight methods applicable to
+#   those issues; weak signals = events OUTSIDE the R&I literature that could
+#   move the phenomena the literature describes.
+#
+# MATRIX
+#   Outcomes (quadrants)              Dimensions (rows)
+#   A Opening               ind↑ comp↑   1 Knowledge & people
+#   B Costly autonomy       ind↑ comp↓   2 Infrastructure & inputs
+#   C Productive dependence ind↓ comp↑   3 Conversion
+#   D Double loss           ind↓ comp↓   4 Rules & institutions
+#
+# PIPELINE
+#   pass_1  reports/papers  -> gate -> aboutness -> rubric(+matrix) -> PHENOMENA store
+#   pass_2  external news   -> per phenomenon -> gate -> rubric(effect on phenomenon)
+#   pass_3  methods papers  -> per phenomenon -> gate -> rubric(method contribution)
+# =============================================================================
+
+meta:
+  name: eu-ri-radar
+  version: 2.0
+  language: en
+  recent_window_days: 120
+  reference_date: today
+
+# -----------------------------------------------------------------------------
+# 0. ABOUTNESS RULES — apply to every pass. These, not exclusions, stop
+#    one-mention documents.
+# -----------------------------------------------------------------------------
+aboutness:
+  governing_rule: >
+    Reject incidental mentions, not short documents. A candidate passes aboutness
+    when EU/Europe, an R&I dimension, and a geopolitical mechanism are substantively
+    connected in the text actually available. Repetition, density and section spread
+    are evidence of aboutness only when enough full text and structure exist for those
+    tests to be meaningful.
+
+  text_modes:
+    full_text:
+      when: body_text_available AND body_words >= 500
+      single_mention_kill:
+        enabled: true
+        min_hits_per_required_block: 3
+        min_distinct_sections_per_required_block: 2
+        ignore_sections: [acknowledgements, references, bibliography, funding statement, foreword, disclaimer, author bios, footer]
+      density:
+        hits_per_1000_words_min: 2.0
+        spread_min_sections: 3
+      cooccurrence:
+        required_blocks: [eu_anchor, dimension, geopolitics]
+        window_words: 300
+
+    abstract_only:
+      when: abstract_available AND NOT full_text_available
+      rule: >
+        Do not require section spread. Require EU/Europe scope plus substantive R&I
+        and geopolitical/external-position evidence in the title, abstract or keywords.
+        Repetition is supporting evidence, not an absolute gate for a concise abstract.
+      cooccurrence:
+        required_blocks: [eu_anchor, dimension, geopolitics_or_external_position]
+        window_words: 200
+      eu_anchor_validation:
+        reject_bare_ambiguous_EU: true
+        rule: >
+          A bare EU token is not sufficient when the document explicitly defines EU
+          as another abbreviation, such as environmental uncertainty.
+
+    metadata_only:
+      when: NOT abstract_available AND NOT full_text_available
+      action: defer
+      rule: >
+        Insufficient text is not evidence of irrelevance. Attempt to retrieve an
+        abstract, executive summary, landing-page description or full text. Do not
+        report this outcome as no direct EU or as an off-topic rejection.
+
+  position:
+    papers_reports: require gating evidence in [title, abstract, keywords, executive_summary]
+    news: require gating evidence in [title, lede]
+  semantic:
+    embedding_model: "BAAI/bge-base-en-v1.5"
+    mean_similarity_min: 0.56
+    max_chunk_similarity_min: 0.68
+    negative_margin: 0.05
+  rubric_keep: [yes, partial]
+
+# -----------------------------------------------------------------------------
+# 1. TERM BLOCKS
+# -----------------------------------------------------------------------------
+terms:
+
+  eu_anchor:
+    policy:
+      - FP10
+      - "Horizon Europe"
+      - "Horizon Europe 2028-2034"
+      - "framework programme"
+      - "European Competitiveness Fund"
+      - ECF
+      - "MFF 2028-2034"
+      - "ERA Act"
+      - "European Research Area"
+      - "fifth freedom"
+      - "European Innovation Act"
+      - "Competitiveness Compass"
+      - "Draghi report"
+      - "Letta report"
+      - "Heitor report"
+      - "Choose Europe for Science"
+      - "Clean Industrial Deal"
+      - "AI Continent Action Plan"
+      - "Cloud and AI Development Act"
+      - "European Biotech Act"
+      - "Chips Act"
+      - "AI Act"
+      - "European Economic Security Strategy"
+      - "Strategic Technologies for Europe Platform"
+      - STEP
+      - "European Defence Fund"
+      - "Readiness 2030"
+      - "Horizon Europe Pathway Actions"
+    institutions:
+      - "European Commission"
+      - "European Parliament"
+      - "Council of the EU"
+      - "European Research Council"
+      - ERC
+      - "European Innovation Council"
+      - EIC
+      - MSCA
+      - EIT
+      - ESFRI
+      - EuroHPC
+      - EOSC
+      - JRC
+      - "DG RTD"
+      - "Science Europe"
+      - EUA
+      - LERU
+      - CESAER
+      - EARTO
+      - BusinessEurope
+      - "European Investment Bank"
+      - EIB
+    geography:
+      - EU
+      - "European Union"
+      - Europe
+      - European
+      - "member states"
+      - "associated countries"
+      - Switzerland
+      - "United Kingdom"
+      - Norway
+
+  # MANDATORY co-occurrence block in pass 1 — expresses "in geopolitical context"
+  geopolitics:
+    concepts:
+      - "strategic autonomy"
+      - "open strategic autonomy"
+      - "technological sovereignty"
+      - "technology sovereignty"
+      - "digital sovereignty"
+      - "economic security"
+      - "research security"
+      - "knowledge security"
+      - de-risking
+      - decoupling
+      - dependenc*
+      - "critical dependencies"
+      - "single points of failure"
+      - chokepoint*
+      - "supply chain"
+      - "supply-chain"
+      - resilience
+      - "trusted partner*"
+      - "like-minded"
+      - "foreign interference"
+      - "dual-use"
+      - "export control*"
+      - sanction*
+      - tariff*
+      - "trade war"
+      - weaponis*
+      - "geopolitical"
+      - geoeconomic*
+      - "great power"
+      - "techno-nationalism"
+      - "industrial policy"
+      - "national security"
+      - "critical raw materials"
+      - "critical minerals"
+      - "foreign direct investment screening"
+      - "outbound investment"
+    actors:
+      - China
+      - Chinese
+      - "United States"
+      - US
+      - Washington
+      - Beijing
+      - Russia
+      - Taiwan
+      - Japan
+      - Korea
+      - India
+      - "Gulf states"
+      - "Global South"
+      - NATO
+      - G7
+      - OECD
+      - WTO
+      - NSF
+      - NIH
+      - DARPA
+      - "Department of Energy"
+      - "Chinese Academy of Sciences"
+      - hyperscaler*
+      - Nvidia
+      - TSMC
+      - ASML
+      - Microsoft
+      - Google
+      - Amazon
+      - OpenAI
+      - Mistral
+      - DeepSeek
+
+  dimensions:
+    d1_knowledge_people:
+      label: "Knowledge & people"
+      scope: "Science, publication, collaboration, talent flows and training"
+      terms:
+        - "research careers"
+        - "researcher mobility"
+        - "talent flow*"
+        - "brain drain"
+        - "brain gain"
+        - "talent attraction"
+        - "scientists relocating"
+        - "returning scientists"
+        - "international collaboration"
+        - "co-authorship"
+        - "scientific collaboration with China"
+        - "research cooperation"
+        - "doctoral training"
+        - postdoc*
+        - "PhD pipeline"
+        - "STEM graduates"
+        - "skills shortage"
+        - "AI skills"
+        - "academic freedom"
+        - "scientific freedom"
+        - "open science"
+        - "open access"
+        - "scientific publishing"
+        - "publication output"
+        - "citation share"
+        - "research excellence"
+        - "visa"
+        - "Blue Card"
+        - "diaspora"
+    d2_infrastructure_inputs:
+      label: "Infrastructure & inputs"
+      scope: "Compute, data, instruments, materials, energy and facilities"
+      terms:
+        - "research infrastructure*"
+        - "technology infrastructure*"
+        - ESFRI
+        - ERIC
+        - supercomput*
+        - exascale
+        - "AI factor*"
+        - "AI gigafactor*"
+        - "compute capacity"
+        - "compute access"
+        - "GPU*"
+        - "AI chips"
+        - "advanced semiconductor*"
+        - "sovereign cloud"
+        - "cloud dependence"
+        - "data space*"
+        - "research data"
+        - "data access"
+        - "scientific instrument*"
+        - "measurement equipment"
+        - "critical raw materials"
+        - "rare earth*"
+        - helium
+        - lithography
+        - "energy cost*"
+        - "electricity price*"
+        - "data centre*"
+        - "data center*"
+        - "grid capacity"
+        - "quantum infrastructure"
+        - "space infrastructure"
+        - "Copernicus"
+        - "IRIS2"
+        - "EOSC"
+        - "Destination Earth"
+        - facilities
+    d3_conversion:
+      label: "Conversion"
+      scope: "Firms, products, capital, procurement, defence, dual-use and capability-building"
+      terms:
+        - "deep tech"
+        - "start-up*"
+        - "scale-up*"
+        - "spin-off*"
+        - "knowledge valorisation"
+        - "technology transfer"
+        - "commercialis*"
+        - "industrial deployment"
+        - "manufacturing capacity"
+        - "venture capital"
+        - "growth capital"
+        - "pension funds"
+        - "Savings and Investments Union"
+        - "European Investment Bank"
+        - "innovation procurement"
+        - "public procurement"
+        - "Buy European"
+        - "European preference"
+        - "defence industrial"
+        - "defence innovation"
+        - "dual-use"
+        - "capability-building"
+        - "capability gap*"
+        - "IPCEI"
+        - "Important Projects of Common European Interest"
+        - "STEP"
+        - "EIC Fund"
+        - "unicorn*"
+        - "acquisition by"
+        - "foreign acquisition"
+        - "relocation to the US"
+        - "listing in the US"
+        - "reshoring"
+        - "friendshoring"
+        - "onshoring"
+    d4_rules_institutions:
+      label: "Rules & institutions"
+      scope: "Export controls, research security, standards, funding programmes and decision speed"
+      terms:
+        - "export control*"
+        - "dual-use regulation"
+        - "research security"
+        - "knowledge security"
+        - "foreign interference"
+        - "FDI screening"
+        - "outbound investment screening"
+        - "standard-setting"
+        - standardis*
+        - "technical standards"
+        - "regulatory sandbox"
+        - "AI Act implementation"
+        - "code of practice"
+        - "funding programme*"
+        - "framework programme"
+        - "trilogue"
+        - "decision speed"
+        - "time-to-grant"
+        - "time to grant"
+        - "simplification"
+        - "governance"
+        - "association agreement"
+        - "third-country participation"
+        - "Article 22"          # HE exclusion clause
+        - "security-sensitive"
+        - "ethics and security scrutiny"
+        - "budget"
+        - "MFF"
+        - "conditionality"
+        - "rule of law conditionality"
+
+  # Direction markers — used by the rubric as evidence, NOT as gates.
+  matrix_markers:
+    independence_up:
+      - "reduce dependence"
+      - "reduce reliance"
+      - "domestic capacity"
+      - "European capacity"
+      - "sovereign"
+      - "onshore"
+      - "reshor*"
+      - "diversif*"
+      - "self-sufficien*"
+      - "European alternative"
+      - "European champion*"
+      - "made in Europe"
+    independence_down:
+      - "reliance on"
+      - "dependent on"
+      - "no European alternative"
+      - "locked in"
+      - "lock-in"
+      - "imported"
+      - "foreign-owned"
+      - "outsourced"
+      - "acquired by"
+      - "US cloud"
+      - "Chinese supplier*"
+    competitiveness_up:
+      - "faster"
+      - "cheaper"
+      - "market share"
+      - "productivity"
+      - "scale"
+      - "world-leading"
+      - "attract*"
+      - "growth"
+      - "first-mover"
+      - "lower cost"
+    competitiveness_down:
+      - "higher cost*"
+      - "slower"
+      - "delay*"
+      - "burden"
+      - "fragment*"
+      - "duplicat*"
+      - "falling behind"
+      - "gap with"
+      - "losing ground"
+      - "exodus"
+      - "subscale"
+      - "inefficien*"
+
+  # External-driver domains for pass 2 — things OUTSIDE R&I that move R&I phenomena
+  external_drivers:
+    energy: ["electricity price", "gas price", "grid connection", "power shortage", "energy crisis", "nuclear restart", "data centre moratorium"]
+    trade_industry: ["tariff", "trade deal", "export ban", "import restriction", "chip export", "GPU export", "lithography ban", "rare earth export", "supply disruption", "factory closure", "plant cancelled", "investment pulled", "hyperscaler capex", "cloud region", "sovereign cloud contract"]
+    us_policy: ["NSF budget", "NIH budget", "federal research cuts", "US science funding", "visa suspension", "H-1B", "student visa", "immigration crackdown", "university funding freeze", "CHIPS Act", "executive order", "Inflation Reduction Act", "AI diffusion rule", "export control update"]
+    china_policy: ["China talent programme", "Thousand Talents", "China research funding", "Chinese universities", "China export control", "gallium", "germanium", "graphite", "Made in China", "Chinese AI model", "Chinese open-weight", "China visa"]
+    security: ["espionage", "cyberattack on university", "research theft", "IP theft", "sabotage", "sanctioned entity", "entity list", "military end-use", "arms embargo", "conflict", "war"]
+    capital_markets: ["IPO", "acquisition", "takeover", "venture funding round", "fund closure", "interest rate", "bond yields", "sovereign wealth fund", "private credit", "pension reform"]
+    politics_law: ["election", "coalition", "government collapse", "court ruling", "ECJ", "constitutional court", "referendum", "rule of law", "budget vote", "veto", "strike", "protest"]
+    tech_industry: ["model release", "open-weight", "pricing change", "API shutdown", "terms of service", "licence change", "data licensing", "compute shortage", "chip shortage", "new fab", "fab delay", "layoffs", "reorganisation"]
+    demography_migration: ["migration policy", "asylum", "labour shortage", "ageing", "student numbers", "international students"]
+
+  methods:
+    foresight_core:
+      - foresight
+      - "strategic foresight"
+      - "horizon scanning"
+      - "weak signal*"
+      - "wild card*"
+      - Delphi
+      - "real-time Delphi"
+      - "scenario planning"
+      - "scenario analysis"
+      - "exploratory scenarios"
+      - backcasting
+      - roadmapping
+      - "cross-impact analysis"
+      - "morphological analysis"
+      - "causal layered analysis"
+      - "three horizons"
+      - "anticipatory governance"
+      - "participatory foresight"
+      - "technology foresight"
+      - "geopolitical scenario*"
+      - "war-gaming"
+      - wargam*
+      - "red-teaming"
+      - "stress test*"
+    computational:
+      - "technology forecasting"
+      - "emerging topic detection"
+      - "emerging research fronts"
+      - "burst detection"
+      - "bibliometric forecasting"
+      - scientometric*
+      - "science of science"
+      - "patent analytics"
+      - "topic model*"
+      - "citation prediction"
+      - "link prediction"
+      - "knowledge graph forecasting"
+      - "tech mining"
+      - "LLM-based horizon scanning"
+      - "AI-assisted foresight"
+      - "automated weak signal detection"
+      - "novelty detection"
+      - "trend extrapolation"
+      - "S-curve"
+      - "expert elicitation"
+      - "structured expert judgement"
+      - "prediction market*"
+      - superforecast*
+      - "Bayesian forecasting"
+      - "network analysis of collaboration"
+      - "co-authorship network*"
+      - "trade network analysis"
+      - "supply chain network*"
+      - "dependency mapping"
+      - "criticality assessment"
+    systems_simulation:
+      - "system dynamics"
+      - "agent-based model*"
+      - microsimulation
+      - "computable general equilibrium"
+      - "input-output model*"
+      - "innovation systems model*"
+      - "R&D policy model*"
+      - "synthetic control"
+      - "difference-in-differences"
+      - "gravity model"
+      - "game-theoretic"
+    domain_specific:
+      - "talent flow model*"
+      - "migration of scientists model*"
+      - "compute demand forecast*"
+      - "AI capability forecast*"
+      - "scaling laws"
+      - "compute trends"
+      - "technology readiness level"
+      - "budget scenario*"
+      - "portfolio analysis"
+      - "skills anticipation"
+      - "critical raw materials foresight"
+      - "supply risk index"
+      - "economic security index"
+      - "dependency index"
+      - "technology sovereignty index"
+      - "Herfindahl"
+
+  exclusions:
+    noise:
+      - "project kick-off"
+      - "kick-off meeting"
+      - "consortium meeting"
+      - "call for proposals"
+      - "call is open"
+      - webinar
+      - "register now"
+      - "save the date"
+      - newsletter
+      - "job vacancy"
+      - "we are hiring"
+      - "info day"
+      - "deadline extended"
+    off_domain:
+      - "clinical trial"
+      - "randomised controlled"
+      - "benchmark results"
+      - "state-of-the-art accuracy"
+      - "ablation study"
+      - "this Horizon Europe project"
+      - "funded by the European Union" # if this is the ONLY EU anchor
+    matrix_noise:
+      - '"competitiveness" AND NOT ANY($geopolitics.*)'   # competitiveness without geopolitics = out of scope
+
+# -----------------------------------------------------------------------------
+# 2. SOURCES
+# -----------------------------------------------------------------------------
+sources:
+  papers:
+    - { name: openalex, endpoint: https://api.openalex.org/works, params: { language: en } }
+    - { name: crossref, endpoint: https://api.crossref.org/works }
+    - { name: arxiv, endpoint: https://export.arxiv.org/api/query, categories: [cs.CY, cs.DL, cs.AI, econ.GN, physics.soc-ph] }
+    - { name: semantic_scholar, endpoint: https://api.semanticscholar.org/graph/v1/paper/search }
+    - { name: ssrn }
+    - { name: repec }
+  reports_institutional:
+    domains:
+      - publications.jrc.ec.europa.eu
+      - op.europa.eu
+      - research-and-innovation.ec.europa.eu
+      - european-research-area.ec.europa.eu
+      - europarl.europa.eu
+      - consilium.europa.eu
+      - oecd.org
+      - erc.europa.eu
+      - eic.ec.europa.eu
+      - esfri.eu
+      - eurohpc-ju.europa.eu
+      - eua.eu
+      - scienceeurope.org
+      - era-learn.eu
+      - era.gv.at
+      - leru.org
+      - cesaer.org
+      - earto.eu
+      - businesseurope.eu
+      - eera-set.eu
+      - bruegel.org
+      - cepr.org
+      - ceps.eu
+      - epc.eu
+      - ecfr.eu
+      - espas.eu
+      - iss.europa.eu
+      - swp-berlin.org
+      - merics.org
+      - ifri.org
+      - iai.it
+      - clingendael.org
+      - chathamhouse.org
+      - csis.org
+      - cnas.org
+      - rand.org
+      - cset.georgetown.edu
+      - ifw-kiel.de
+      - ecipe.org
+  news_ri:            # R&I-specialist press (pass 1 supplement, pass 2 coverage check)
+    domains:
+      - sciencebusiness.net
+      - researchprofessionalnews.com
+      - nature.com
+      - science.org
+      - timeshighereducation.com
+      - universityworldnews.com
+  news_general:       # pass 2 — external drivers
+    domains:
+      - reuters.com
+      - ft.com
+      - economist.com
+      - bloomberg.com
+      - politico.eu
+      - politico.com
+      - euractiv.com
+      - euobserver.com
+      - theguardian.com
+      - nytimes.com
+      - wsj.com
+      - handelsblatt.com
+      - lemonde.fr
+      - spiegel.de
+      - nikkei.com
+      - scmp.com
+      - semianalysis.com
+      - theinformation.com
+      - techcrunch.com
+      - sifted.eu
+      - montelnews.com
+      - energymonitor.ai
+  methods_venues:
+    journals:
+      - "Technological Forecasting and Social Change"
+      - Futures
+      - "Research Policy"
+      - "Science and Public Policy"
+      - Scientometrics
+      - "Quantitative Science Studies"
+      - Foresight
+      - "Journal of Futures Studies"
+      - "Research Evaluation"
+      - "Futures & Foresight Science"
+      - "Review of International Political Economy"
+      - "Journal of Economic Geography"
+      - "Resources Policy"
+
+source_tiers:
+  1: [publications.jrc.ec.europa.eu, op.europa.eu, europarl.europa.eu, consilium.europa.eu, oecd.org, nature.com, science.org, ft.com, reuters.com, bloomberg.com]
+  2: [sciencebusiness.net, researchprofessionalnews.com, politico.eu, euractiv.com, economist.com, bruegel.org, cepr.org, ceps.eu, merics.org, cset.georgetown.edu, swp-berlin.org, iss.europa.eu]
+  3: [remaining whitelisted]
+
+# -----------------------------------------------------------------------------
+# 3. TOPIC PROFILES (embedding filter) — one per dimension + geopolitics + negative
+# -----------------------------------------------------------------------------
+topic_profiles:
+  d1_knowledge_people:
+    description: >
+      Documents whose main subject is how geopolitics shapes European science
+      and its people: international scientific collaboration under research-
+      security pressure, talent flows between Europe, the US and China,
+      attraction of displaced scientists, visa and mobility regimes, academic
+      freedom, and open science versus knowledge security. The document should
+      treat Europe's position relative to other powers as central.
+  d2_infrastructure_inputs:
+    description: >
+      Documents whose main subject is European dependence on, or capacity in,
+      research inputs: compute and AI chips, cloud, data, scientific
+      instruments, critical raw materials, energy for research facilities,
+      and shared infrastructures such as EuroHPC, ESFRI and EOSC — analysed in
+      terms of sovereignty, chokepoints, suppliers, costs and alternatives.
+  d3_conversion:
+    description: >
+      Documents whose main subject is Europe's ability to turn research into
+      firms, products and capabilities under geopolitical competition: deep-
+      tech scale-ups and their financing, foreign acquisition and relocation,
+      procurement and European preference, defence and dual-use innovation,
+      industrial capability-building and champions.
+  d4_rules_institutions:
+    description: >
+      Documents whose main subject is the rules and institutions governing
+      European R&I in a geopolitical setting: export controls and dual-use
+      regulation, research security frameworks, standard-setting contests,
+      framework programme design (FP10/ECF/ERA Act), third-country
+      association, and the speed and quality of EU decision-making.
+  geopolitical_frame:
+    description: >
+      Any analysis in which Europe's strategic autonomy, dependence,
+      competitiveness relative to the US and China, economic security, or
+      exposure to coercion is a central concern — regardless of the specific
+      R&I topic.
+  negative_profile:
+    description: >
+      Reject: single-project press releases, events and calls; generic ML
+      benchmark papers; clinical or engineering papers with EU funding only in
+      acknowledgements; competitiveness or innovation content with no
+      geopolitical framing; national domestic politics unrelated to R&I;
+      vendor marketing.
+
+# -----------------------------------------------------------------------------
+# 4. PASSES
+# -----------------------------------------------------------------------------
+passes:
+
+  # ---------------------------------------------------------------------------
+  pass_1_core_reports_papers:
+    purpose: English reports and papers on crucial EU R&I issues in geopolitical context; extract phenomena
+    date_rule: { field: published_or_updated, window_days: $meta.recent_window_days }
+    sources: [$sources.papers, $sources.reports_institutional, $sources.news_ri]
+    keyword_gate:
+      logic: >
+        (ANY($eu_anchor.policy) OR ANY($eu_anchor.institutions) OR ANY($eu_anchor.geography))
+        AND ANY($dimensions.*)
+        AND ANY($geopolitics.*)            # <- mandatory: "in geopolitical context"
+        AND NOT TITLE_HAS($exclusions.noise)
+      max_or_terms_per_block: 10
+    aboutness:
+      inherit: $aboutness
+      required_blocks: [eu_anchor, dimension, geopolitics]
+      apply_by_text_mode:
+        full_text: $aboutness.text_modes.full_text
+        abstract_only: $aboutness.text_modes.abstract_only
+        metadata_only: $aboutness.text_modes.metadata_only
+      note: >
+        The full-text repetition/section-spread test must not be imposed on an
+        abstract-only record. Metadata-only records are deferred for text recovery,
+        not rejected as irrelevant.
+    semantic:
+      profiles: [d1_knowledge_people, d2_infrastructure_inputs, d3_conversion, d4_rules_institutions]
+      additionally_require: { profile: geopolitical_frame, mean_similarity_min: 0.50 }
+      negative: negative_profile
+    llm_rubric:
+      input: title + abstract/executive summary + up to 1500 words of body
+      output_schema:
+        primary_focus: [yes, partial, mention_only, no]
+        dimension: [d1, d2, d3, d4, multiple]
+        geopolitical_centrality: [central, present, absent]
+        independence_direction: [up, down, mixed, unclear]
+        competitiveness_direction: [up, down, mixed, unclear]
+        quadrant_claimed: [A, B, C, D, none]        # what the document argues for / predicts
+        quadrant_implied: [A, B, C, D, none]        # what its own evidence describes
+        crucial_issue: string                       # one line, the issue at stake
+        evidence_sentence: string
+        confidence: float
+      instruction: |
+        Classify for a radar on EU R&I in geopolitical context.
+        primary_focus = "yes" only if removing the R&I-geopolitics issue would make the document pointless.
+        geopolitical_centrality = "central" if Europe's position relative to other powers / its dependence or autonomy is a main concern; "present" if discussed but secondary; "absent" otherwise.
+        Score independence and competitiveness directions separately from the document's own evidence, then map:
+          up/up = A (Opening); up/down = B (Costly autonomy); down/up = C (Productive dependence); down/down = D (Double loss).
+        quadrant_claimed = the quadrant the document advocates or forecasts. quadrant_implied = the quadrant its evidence actually describes. They may differ.
+      keep: { primary_focus: [yes, partial], geopolitical_centrality: [central, present] }
+    phenomena_extraction:
+      # Runs on kept documents; output feeds passes 2 and 3
+      instruction: |
+        Extract 1–4 PHENOMENA from this document. A phenomenon is a concrete, forward-looking
+        claim about EU R&I that could be affected by events outside the R&I system. For each:
+          phenomenon: one sentence, specific (actor, mechanism, direction).
+          dimension: d1|d2|d3|d4
+          quadrant: A|B|C|D
+          depends_on: the external condition it rests on (e.g. "US visa policy stays restrictive", "GPU export rules unchanged", "energy prices fall").
+          assumption: the unstated assumption most likely to be wrong.
+          horizon: months|1-3y|3-10y
+          indicator: one measurable thing that would show it moving.
+        Do not extract generic statements ("Europe should invest more").
+      store: phenomena
+      dedupe: fuzzy_match_threshold 0.85 across documents; merge and count supporting_docs
+    output:
+      bucket: core
+      rank_by: [rubric_confidence, geopolitical_centrality, source_tier, recency]
+
+  # ---------------------------------------------------------------------------
+  pass_2_external_weak_signals:
+    purpose: Events outside R&I that could move a stored phenomenon
+    date_rule: { field: published, window_days: $meta.recent_window_days }
+    sources: [$sources.news_general, $sources.reports_institutional]
+    driven_by: phenomena                      # runs per phenomenon with supporting_docs >= 1
+    query_generation:
+      per_phenomenon:
+        - use phenomenon.depends_on and phenomenon.indicator as seed phrases
+        - LLM generates 3–6 concrete search strings describing EVENTS (not topics) that would change depends_on
+        - always add ANY($external_drivers.<relevant domains>) chosen by the LLM
+      example:
+        phenomenon: "European AI labs' compute access depends on continued Nvidia GPU exports and hyperscaler capex in EU regions"
+        queries: ["Nvidia export licence Europe", "hyperscaler cancels EU data centre", "GPU allocation shortage Europe", "US AI diffusion rule revision", "Irish grid connection moratorium"]
+    keyword_gate:
+      logic: >
+        ANY(generated_queries) AND (ANY($external_drivers.*))
+        AND NOT TITLE_HAS($exclusions.noise)
+      note: "EU anchor NOT required — the point is events outside the EU R&I discourse. But geography or actor of the event must be resolvable."
+    aboutness:
+      inherit: $aboutness
+      news_overrides: { min_hits: 2, min_distinct_sections: 2, hits_per_1000_words_min: 1.5, spread_min_sections: 2, min_words: 150 }
+      gating_blocks_for_single_mention_kill: [generated_queries]
+    semantic:
+      compare_to: phenomenon_text            # embed the phenomenon sentence itself, not a topic profile
+      thresholds: { mean_similarity_min: 0.40, max_chunk_similarity_min: 0.55 }   # deliberately loose; rubric decides
+    weak_signal_scoring:
+      components:
+        effect_on_phenomenon: { weight: 0.40, source: rubric.effect_magnitude }
+        ri_coverage_gap:      { weight: 0.35, method: "1 - share_of($sources.news_ri) mentioning event within 14d" }
+        source_rarity:        { weight: 0.15, method: "1 - share_of($sources.news_general) covering within 7d" }
+        novelty:              { weight: 0.10, source: rubric.novelty }
+      keep_min: 0.50
+    llm_rubric:
+      input: article title + lede + up to 800 words; plus the phenomenon text and its depends_on/assumption
+      output_schema:
+        affects_phenomenon: [yes, plausibly, no]
+        mechanism: string                     # how the event reaches the phenomenon
+        effect_direction_independence: [up, down, none]
+        effect_direction_competitiveness: [up, down, none]
+        pushes_toward_quadrant: [A, B, C, D, none]
+        effect_magnitude: [high, medium, low]
+        breaks_assumption: [yes, no]          # does it contradict phenomenon.assumption
+        already_in_ri_discourse: [yes, no, unknown]
+        novelty: [new_fact, new_actor, new_framing, escalation, none]
+        time_to_impact: [weeks, months, years]
+        evidence_sentence: string
+        confidence: float
+      instruction: |
+        You are given an external event and an EU R&I phenomenon with the condition it depends on.
+        Decide whether the event changes that condition. Be strict: "yes" requires a stated causal
+        mechanism, not thematic similarity. Then score its effect on Europe's independence and
+        competitiveness in this phenomenon and map to a quadrant.
+        A weak signal is an event with real effect that the R&I discourse has not yet absorbed.
+      keep: { affects_phenomenon: [yes, plausibly] }
+    output:
+      bucket: weak_signals
+      link_to: phenomenon_id
+      rank_by: [weak_signal_score, effect_magnitude, time_to_impact, recency]
+      alert_if: { breaks_assumption: yes, effect_magnitude: high }
+
+  # ---------------------------------------------------------------------------
+  pass_3_foresight_methods:
+    purpose: Papers that developed methods able to study the future of stored phenomena
+    date_rule: { window_days: null, rank_recency_weight: 0.3 }
+    sources: [$sources.papers, $sources.methods_venues]
+    driven_by: phenomena
+    trigger: { for_each_phenomenon_with_supporting_docs_min: 2 }
+    query_generation:
+      per_phenomenon:
+        - method block(s) chosen by dimension:
+            d1: [foresight_core, computational(co-authorship, science of science, talent flow), domain_specific(talent flow, migration)]
+            d2: [computational(supply chain network, dependency mapping, criticality), domain_specific(compute demand, CRM foresight, supply risk), systems_simulation]
+            d3: [systems_simulation(gravity, game-theoretic, CGE), computational(patent analytics, S-curve), domain_specific(portfolio, TRL)]
+            d4: [foresight_core(scenario, wargaming, stress test), systems_simulation(agent-based), domain_specific(economic security index)]
+        - phenomenon nouns (actor, input, mechanism) as issue terms
+    keyword_gate:
+      logic: >
+        ANY(selected $methods.*) AND ANY(phenomenon_terms)
+        AND NOT TITLE_HAS($exclusions.off_domain)
+      note: "No EU anchor required; global/US methods are welcome."
+    aboutness:
+      inherit: $aboutness
+      gating_blocks_for_single_mention_kill: [methods]
+      position: require method term in [title, abstract, keywords]
+      cooccurrence_required: [method, phenomenon_term]
+      extra_rule: "reject if method terms occur ONLY in sections titled Related Work / Literature Review / Background / Discussion"
+    semantic:
+      profiles:
+        methods_profile: { built_from: $methods.*, mean_similarity_min: 0.60, max_chunk_similarity_min: 0.70 }
+        phenomenon_text: { mean_similarity_min: 0.42 }
+    llm_rubric:
+      input: title + abstract + methods section (up to 1500 words); plus phenomenon text
+      output_schema:
+        method_is_contribution: [yes, applied, cited_only]
+        method_name: string
+        method_family: [foresight_core, computational, systems_simulation, domain_specific]
+        studies_future_of: string             # what the method forecasts/anticipates
+        applicable_to_phenomenon: [directly, with_adaptation, no]
+        data_requirements: string
+        data_available_for_eu: [yes, partly, no, unknown]
+        can_represent_geopolitical_shock: [yes, no]   # can the method take an external event as input?
+        evidence_sentence: string
+        confidence: float
+      instruction: |
+        Judge whether this paper's METHOD (not its topic) is a contribution and whether it could
+        be re-run to study the future of the given phenomenon. "cited_only" if the method appears
+        only in related work or discussion. Prefer methods that can take a geopolitical shock
+        (policy change, export ban, price spike, actor exit) as an explicit input.
+      keep: { method_is_contribution: [yes, applied], applicable_to_phenomenon: [directly, with_adaptation] }
+    output:
+      bucket: methods
+      link_to: phenomenon_id
+      rank_by: [applicable_to_phenomenon, can_represent_geopolitical_shock, data_available_for_eu, citation_count_normalised, recency]
+
+# -----------------------------------------------------------------------------
+# 5. MATRIX VIEW / STORAGE / CALIBRATION
+# -----------------------------------------------------------------------------
+matrix_view:
+  rows: [d1, d2, d3, d4]
+  columns: [A, B, C, D]
+  cell_contents:
+    - count of core docs with quadrant_implied = column
+    - count with quadrant_claimed = column (show claimed≠implied separately — that gap is itself a finding)
+    - phenomena in the cell, with their supporting_docs
+    - weak signals pushing INTO or OUT OF the cell (arrows: pushes_toward_quadrant)
+    - methods linked to the cell's phenomena
+  heat: "weak_signal_score summed per cell, 30-day rolling"
+
+storage:
+  keep_rejected_with_scores_days: 14
+  dedupe: { by: [doi, normalised_title, canonical_url], fuzzy_title_threshold: 0.92 }
+  phenomena_store_fields: [id, phenomenon, dimension, quadrant, depends_on, assumption, horizon, indicator, supporting_docs, first_seen, last_seen, weak_signals_linked, methods_linked]
+
+calibration_notes:
+  - The geopolitics co-occurrence gate is the biggest precision lever; if the core bucket is thin, first widen $geopolitics.concepts, NOT the semantic thresholds.
+  - If pass 2 returns mostly "plausibly", raise keep_min or require breaks_assumption for the alert feed only.
+  - Read the rejected list weekly: items killed by single_mention_kill should look obviously wrong; if they don't, lower min_hits to 2 for reports only.
+  - Watch the claimed≠implied gap; recurring gaps around one dimension usually mean the discourse is lagging the evidence — that is a weak signal in its own right.
+  - Re-run pass 3 monthly, pass 1 daily, pass 2 daily but per-phenomenon queries regenerate weekly.

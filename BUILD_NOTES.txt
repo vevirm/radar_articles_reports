@@ -1,8 +1,19 @@
-V17.8.3 ENGLISH-ONLY / INFORMATIVE CLAIMS
+V17.9.0 SOURCE-AWARE ABOUTNESS / EVIDENCE-LED MATRIX
 
-- Keeps V17.8.2 balanced frontier allocation and opening/risk classification.
-- English-only is fail-closed on title + body and rechecked at final publication.
-- Existing saved corpus is filtered too; ambiguous Latin-script text is no longer retained by default.
-- Main radar and matrix use source-backed core messages capped at 80 characters.
-- Original title/authors/source/date/type are shown as bibliography beneath the claim.
-- Bundled radar state is the supplied radar (19), cleaned under the new language rule.
+Basis:
+- Previous V17.8.3 package
+- User-supplied newer state: radar (20).json, last_updated 2026-08-25T01:54Z
+- User-supplied eu_ri_radar_config_v2.yaml design specification
+
+Repairs:
+- Removed literal "This says that" / "It says" claim wrapper.
+- Added full-text / abstract-only / metadata-only aboutness behavior.
+- Metadata-only records defer instead of being rejected for lack of evidence.
+- DOI-bearing OpenAlex and Crossref records get bounded abstract-recovery attempts before final rejection.
+- Added contextual handling for ambiguous bare "EU".
+- Preserved true admission rejection reasons in scan diagnostics.
+- Matrix now classifies vetted core records from source-backed evidence; direction markers support rather than gate.
+- Removed two confirmed scope false positives from bundled state.
+- Updated static cache-bust/version identifiers to 17.9.0.
+
+This build does not claim a new live scan. It preserves the supplied state's data timestamp.

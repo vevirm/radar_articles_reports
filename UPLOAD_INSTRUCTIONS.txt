@@ -1,15 +1,16 @@
-R&I GEOPOLITICS RADAR V17.7.3 — MATRIX-FIRST DEPTH
+R&I GEOPOLITICS RADAR V17.9.0 — SOURCE-AWARE ABOUTNESS / EVIDENCE-LED MATRIX
 
 1. Upload/replace the repository files in GitHub.
-2. Keep the included radar.json; it is the preserved current corpus/state supplied for this repair.
-3. Do NOT create any GitHub Actions secrets for this scanner. None are used.
+2. Keep the included radar.json; it is the repaired current corpus/state based on the supplied 2026-08-25 radar state.
+3. Do NOT create GitHub Actions secrets for this scanner. None are required.
 4. Run the existing radar scan workflow.
 
 Behavior:
-- OpenAlex runs anonymously/keyless and stops promptly if its current allowance is unavailable;
-- Crossref and institutional/news scanning continue even if OpenAlex is unavailable;
-- Crossref is protected against future-dated records crowding out current results;
-- sparse Frontier cells rotate query variants and specialist sources across runs;
-- prior corpus items, cursors, fingerprints, and history are preserved.
-
-V17.7.3 note: the scanner may now use most of its 20-minute internal budget for matrix-first depth before the 30-minute GitHub Actions job proceeds to commit/publish.
+- pass-1 keeps the strict EU/Europe + R&I + geopolitical standard;
+- full text uses recurrence/spread aboutness, abstracts are judged within the abstract, and metadata-only records defer for bounded text recovery;
+- bare EU does not establish European Union scope when the source defines it as another abbreviation;
+- OpenAlex runs anonymously/keyless and Crossref/institutional scanning continue if OpenAlex is rate-limited;
+- DOI-bearing OpenAlex/Crossref records with missing abstracts can receive bounded publisher-page abstract recovery;
+- scan diagnostics preserve actual rejection/defer causes;
+- the Frontier classifies vetted core evidence from source-backed summaries rather than only compressed display points;
+- prior corpus items, cursors, fingerprints and history are preserved except for the two documented scope false positives removed in this repair.

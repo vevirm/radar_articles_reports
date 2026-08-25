@@ -1288,6 +1288,130 @@ def has_eu_word(text: str) -> bool:
     return bool(re.search(r"\beu\b", normalized(text)))
 
 
+def _eu_defined_as_non_union(text: str) -> bool:
+    """Return True when the document explicitly defines EU as another abbreviation.
+
+    Scholarly abstracts frequently use ``EU`` for concepts such as *environmental
+    uncertainty*.  Treating every bare EU token as European Union scope creates very
+    damaging false positives.  An explicit local definition wins unless the expanded
+    phrase itself is European Union.
+    """
+    raw = clean_text(text)
+    for m in re.finditer(r"\b([A-Za-z][A-Za-z\- ]{2,90})\s*\(\s*EU\s*\)", raw):
+        phrase = clean_text(m.group(1))
+        # Keep only the tail of the noun phrase; long captures may include a sentence lead.
+        words = phrase.split()
+        tail = " ".join(words[-8:])
+        low = normalized(tail)
+        if "european union" not in low and not low.endswith("european union"):
+            return True
+    return False
+
+
+def union_eu_word(text: str, document_text: str = "") -> bool:
+    """Bare ``EU`` is a Union anchor only when it has not been redefined locally."""
+    if not has_eu_word(text):
+        return False
+    return not _eu_defined_as_non_union(document_text or text)
+
+
+def _aboutness_text_mode(abstract: str, body: str) -> str:
+    """Choose an aboutness test that matches the amount of source text available."""
+    aw = len(clean_text(abstract).split())
+    bw = len(clean_text(body).split())
+    modes = CONFIG.get("aboutness_text_modes", {}) if isinstance(CONFIG.get("aboutness_text_modes", {}), dict) else {}
+    full_min = int((modes.get("full_text") or {}).get("min_body_words", 500))
+    abstract_min = int((modes.get("abstract_only") or {}).get("min_abstract_words", 20))
+    if bw >= full_min:
+        return "full_text"
+    if aw >= abstract_min or bw >= 80:
+        return "abstract_only"
+    return "metadata_only"
+
+
+def _sentence_block_stats(text: str, hit_fn) -> tuple[int, list[str]]:
+    sentences = split_sentences(text)
+    hit_sentences = 0
+    terms: list[str] = []
+    for sent in sentences:
+        hits = hit_fn(sent)
+        if hits:
+            hit_sentences += 1
+            for h in hits:
+                if h not in terms:
+                    terms.append(h)
+    return hit_sentences, terms
+
+
+def aboutness_for_a(
+    title: str, abstract: str, body: str, *, a_focus: bool, eu_rel: str | None, bridge: str,
+    contextual_evidence: bool = False
+) -> dict[str, Any]:
+    """Apply source-length-aware aboutness for Strand A.
+
+    Governing rule: reject incidental mentions, not short documents.  Full documents
+    must show repeated/spread R&I and geopolitical evidence.  Abstract-only records
+    are judged within the abstract and are never required to contain non-existent
+    sections.  Metadata-only records are deferred rather than labelled irrelevant.
+    """
+    mode = _aboutness_text_mode(abstract, body)
+    ta = clean_text(f"{title}. {abstract}")
+    full = clean_text(f"{ta}. {body}")
+    result = {
+        "text_mode": mode, "pass": False, "reason": "",
+        "ri_sentences": 0, "geo_sentences": 0, "ri_terms": [], "geo_terms": [],
+    }
+    if mode == "metadata_only":
+        result["reason"] = "insufficient_text"
+        return result
+    if eu_rel != "direct":
+        result["reason"] = "no_direct_eu"
+        return result
+    if not a_focus:
+        # Keep the substantive failure reason visible to diagnostics.
+        ri = _ri_hits(ta if mode == "abstract_only" else full)
+        geo = _geo_hits(ta if mode == "abstract_only" else full)
+        result["ri_terms"], result["geo_terms"] = ri[:8], geo[:8]
+        result["reason"] = "no_ri" if not ri else ("no_geopolitics" if not geo else "no_substantive_bridge")
+        return result
+
+    if mode == "abstract_only":
+        ri = _ri_hits(ta)
+        geo = _geo_hits(ta)
+        result["ri_terms"], result["geo_terms"] = ri[:8], geo[:8]
+        # The bridge/focus classifier is the substantive test. Repetition is supporting
+        # evidence here, not a hard count that punishes a concise abstract.
+        # A bounded external-position mechanism (e.g. Europe vs US/China capacity gap)
+        # is itself geopolitical context even when the abstract does not use the word
+        # "geopolitics" or another GEO_STRONG label.
+        result["pass"] = bool(ri and (geo or contextual_evidence) and (bridge or a_focus))
+        result["reason"] = "about" if result["pass"] else "no_substantive_bridge"
+        return result
+
+    # Full text: require the issue to recur across the document. Sentence spread is used
+    # because many HTML/PDF extraction paths do not preserve reliable section headings.
+    ri_sents, ri_terms = _sentence_block_stats(full, _ri_hits)
+    geo_sents, geo_terms = _sentence_block_stats(full, _geo_hits)
+    result.update({
+        "ri_sentences": ri_sents, "geo_sentences": geo_sents,
+        "ri_terms": ri_terms[:8], "geo_terms": geo_terms[:8],
+    })
+    modes = CONFIG.get("aboutness_text_modes", {}) if isinstance(CONFIG.get("aboutness_text_modes", {}), dict) else {}
+    full_cfg = modes.get("full_text") or {}
+    min_ri_sents = int(full_cfg.get("min_ri_hit_sentences", 2))
+    min_geo_sents = int(full_cfg.get("min_geopolitics_hit_sentences", 2))
+    repeated_ri = ri_sents >= min_ri_sents and (len(ri_terms) >= 2 or ri_sents >= max(3, min_ri_sents))
+    repeated_geo = geo_sents >= min_geo_sents and (len(geo_terms) >= 2 or geo_sents >= max(3, min_geo_sents))
+    result["pass"] = bool(repeated_ri and repeated_geo)
+    if not repeated_ri:
+        result["reason"] = "incidental_ri"
+    elif not repeated_geo:
+        result["reason"] = "incidental_geopolitics"
+    else:
+        result["reason"] = "about"
+    return result
+
+
 def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[str]]:
     """Classify EU relevance as *scope*, not as a passing geographic mention.
 
@@ -1311,7 +1435,7 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     title_direct = distinct_matches(title, EU_DIRECT)
     title_generic = distinct_matches(title, EU_GENERIC)
     title_member = bounded_matches(title, MEMBER_STATE_SCOPE)
-    if has_eu_word(title):
+    if union_eu_word(title, ta):
         title_direct.append("EU")
     if title_direct or title_generic or title_member:
         return "direct", list(dict.fromkeys(title_direct + title_generic + title_member))[:4]
@@ -1323,12 +1447,19 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         sent_direct = distinct_matches(sent, EU_DIRECT)
         sent_generic = distinct_matches(sent, EU_GENERIC)
         sent_member = bounded_matches(sent, MEMBER_STATE_SCOPE)
-        bare_eu = has_eu_word(sent)
+        bare_eu = union_eu_word(sent, ta)
         ri_here = bool(distinct_matches(sent, RI_STRONG + RI_GENERIC))
         geo_here = bool(distinct_matches(sent, GEO_STRONG)) or china_geo_signal(sent) or research_talent_flow_signal(sent)
-        if sent_direct:
+        # An abstract mentioning the European Union as one comparator/case is not
+        # automatically EU-scoped.  Specific EU institutions/programmes can establish
+        # scope directly; generic "European Union"/bare EU needs substantive R&I +
+        # geopolitical content in the same sentence.
+        institutional_direct = [h for h in sent_direct if normalized(h) not in {"european union"}]
+        if institutional_direct:
+            return "direct", list(dict.fromkeys(institutional_direct))[:4]
+        if sent_direct and ri_here and geo_here:
             return "direct", list(dict.fromkeys(sent_direct))[:4]
-        if bare_eu and ri_here:
+        if bare_eu and ri_here and geo_here:
             return "direct", ["EU"]
         # Generic Europe/member-state names are not enough on their own in an
         # abstract; the same sentence must establish the R&I-geopolitical scope.
@@ -1342,7 +1473,7 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         "european research area", "european economic security", "eu research",
         "eu innovation", "eu science", "eu technology",
     ])
-    eu_count = len(re.findall(r"\beu\b", normalized(full)))
+    eu_count = 0 if _eu_defined_as_non_union(full) else len(re.findall(r"\beu\b", normalized(full)))
     # Body-only scope must be explicit/repeated.  Merely mentioning two European
     # countries somewhere in a long document is no longer treated as EU scope.
     if strong_body_scope or eu_count >= 2:
@@ -1362,7 +1493,7 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         "strategy for the eu", "recommendations for europe", "recommendations for the eu",
     ]
     for sent in split_sentences(full):
-        if contains_any(sent, EU_GENERIC) or bool(bounded_matches(sent, MEMBER_STATE_SCOPE)) or has_eu_word(sent):
+        if contains_any(sent, EU_GENERIC) or bool(bounded_matches(sent, MEMBER_STATE_SCOPE)) or union_eu_word(sent, full):
             if contains_any(sent, derived_cues):
                 return "derived", [sent[:260]]
     return None, []
@@ -2005,7 +2136,9 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
 
     if not english_record_ok(f"{title}. {abstract}. {body[:2500]}", title=title):
         return {
-            'a_pass': False, 'b_pass': False, 'eu_relevance': None, 'eu_evidence': [],
+            'a_pass': False, 'b_pass': False, 'a_focus_pass': False,
+            'aboutness_pass': False, 'aboutness_reason': 'language', 'text_mode': '',
+            'aboutness_evidence': {}, 'eu_relevance': None, 'eu_evidence': [],
             'ri_evidence': [], 'geo_evidence': [], 'bridge_sentence': '', 'a_route': '',
             'a_context_evidence': [], 'bridge_supported': False, 'bridge_mode': '',
             'foresight_evidence': [], 'method_evidence': [], 'method_bridge': '',
@@ -2016,8 +2149,12 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
 
     a_focus, ri_hits, geo_hits, a_bridge, a_route, a_context = _a_focus_ok(title, abstract, body, source_kind)
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
-    # A is precision-first: the paper must actually be Europe/EU/member-state scoped.
-    a_pass = bool(a_focus and eu_rel == 'direct')
+    aboutness = aboutness_for_a(
+        title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
+        contextual_evidence=bool(a_context)
+    )
+    # A is precision-first, but the aboutness test is conditional on available text.
+    a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass'))
 
     b_pass, b_families, b_bridge, b_suitability, b_route = _b_method_evidence(
         title, abstract, body, source_kind, source_tier
@@ -2026,8 +2163,20 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     return {
         'a_pass': a_pass,
         'b_pass': b_pass,
-        'eu_relevance': eu_rel if a_pass else ('derived' if b_pass else None),
-        'eu_evidence': eu_hits if a_pass else (['method suitable for analysing future EU R&I/geopolitics'] if b_pass else []),
+        'a_focus_pass': bool(a_focus),
+        'aboutness_pass': bool(aboutness.get('pass')),
+        'aboutness_reason': aboutness.get('reason', ''),
+        'text_mode': aboutness.get('text_mode', ''),
+        'aboutness_evidence': {
+            'ri_sentences': aboutness.get('ri_sentences', 0),
+            'geo_sentences': aboutness.get('geo_sentences', 0),
+            'ri_terms': aboutness.get('ri_terms', [])[:6],
+            'geo_terms': aboutness.get('geo_terms', [])[:6],
+        },
+        # Preserve the evaluated EU scope even when another A gate fails. Diagnostics must
+        # not rewrite a strategic/aboutness failure as "no direct EU".
+        'eu_relevance': eu_rel if eu_rel else ('derived' if b_pass else None),
+        'eu_evidence': eu_hits if eu_rel == 'direct' else (['method suitable for analysing future EU R&I/geopolitics'] if b_pass else []),
         'ri_evidence': ri_hits[:5],
         'geo_evidence': geo_hits[:5],
         'bridge_sentence': a_bridge,
@@ -2179,18 +2328,26 @@ def _diag_inc(key: str, amount: int = 1) -> None:
 
 
 def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
+    """Record the actual admission failure instead of collapsing it to EU scope."""
     _diag_inc(f"{prefix}_evaluated")
     if ev.get("a_pass") or ev.get("b_pass"):
         _diag_inc(f"{prefix}_admitted_gate")
         if ev.get("a_route"):
             _diag_inc(f"{prefix}_a_route_{ev.get('a_route')}")
         return
-    if ev.get("eu_relevance") != "direct":
+    reason = clean_text(ev.get("aboutness_reason"))
+    if reason == "insufficient_text":
+        _diag_inc(f"{prefix}_defer_insufficient_text")
+    elif ev.get("eu_relevance") != "direct":
         _diag_inc(f"{prefix}_reject_no_direct_eu")
-    elif not ev.get("ri_evidence"):
+    elif reason in {"no_ri", "incidental_ri"} or not ev.get("ri_evidence"):
         _diag_inc(f"{prefix}_reject_no_ri")
-    else:
+    elif reason in {"no_geopolitics", "incidental_geopolitics", "no_substantive_bridge"}:
         _diag_inc(f"{prefix}_reject_no_strategic_context")
+    elif not ev.get("a_focus_pass"):
+        _diag_inc(f"{prefix}_reject_no_strategic_context")
+    else:
+        _diag_inc(f"{prefix}_reject_aboutness")
 
 
 def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None) -> dict[str, Any] | None:
@@ -2263,6 +2420,10 @@ def collect_openalex(
     depth_state = depth_state if isinstance(depth_state, dict) else {}
     executed_queries: set[str] = set()
     execution_lock = threading.Lock()
+    enrichment_limit = max(0, int(CONFIG.get("openalex_missing_abstract_enrichment_per_scan", 12) or 0))
+    enrichment_timeout = max(3, int(CONFIG.get("openalex_missing_abstract_enrichment_timeout_seconds", 8) or 8))
+    enrichment_total = [0]
+    enrichment_by_query: Counter = Counter()
 
     def mark_executed(q: str) -> None:
         with execution_lock:
@@ -2278,7 +2439,8 @@ def collect_openalex(
 
     def convert_works(works: list[dict[str, Any]], query_from: dt.date, q: str) -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
-        for work in works:
+        for raw_work in works:
+            work = raw_work
             if bool(CONFIG.get("skip_known_items_before_classification", True)):
                 title0 = clean_text(work.get("title") or work.get("display_name"))
                 doi0 = clean_text(work.get("doi"))
@@ -2287,6 +2449,35 @@ def collect_openalex(
             item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
             if item:
                 out.append(item)
+                continue
+
+            # OpenAlex also has records with title/DOI but no abstract. Treat those as
+            # insufficient text, not a substantive rejection, and make a tightly bounded
+            # DOI landing-page recovery attempt before dropping the candidate.
+            title0 = clean_text(work.get("title") or work.get("display_name"))
+            doi0 = clean_text(work.get("doi"))
+            abstract0 = openalex_abstract(work.get("abstract_inverted_index"))
+            if (
+                not abstract0 and doi0 and title0 and enrichment_total[0] < enrichment_limit
+                and enrichment_by_query[q] < 2 and not document_exclusion_reason(title0, "")
+            ):
+                enrichment_total[0] += 1
+                enrichment_by_query[q] += 1
+                if execution_stats is not None:
+                    execution_stats["openalex_abstracts_enrichment_attempted"] = int(execution_stats.get("openalex_abstracts_enrichment_attempted", 0)) + 1
+                recovered = doi_landing_abstract(doi0, enrichment_timeout)
+                if recovered:
+                    work = dict(work)
+                    # candidate_from_openalex expects OpenAlex's inverted-index shape.
+                    tokens = clean_text(recovered).split()
+                    inv: dict[str, list[int]] = {}
+                    for pos, token in enumerate(tokens):
+                        inv.setdefault(token, []).append(pos)
+                    work["abstract_inverted_index"] = inv
+                    item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+                    if item:
+                        item["metadata_note"] = "Abstract recovered from DOI publisher metadata before admission."
+                        out.append(item)
         return out
 
     def fetch_page(q: str, query_from: dt.date, page: int) -> tuple[list[dict[str, Any]], str | None, int]:
@@ -4092,7 +4283,10 @@ def audit_inherited_ab(previous: dict[str, Any], warnings: list[str] | None = No
                 continue
         else:
             stats["refresh_unavailable"] += 1
-            if not INHERITED_CORPUS_AUDIT_FAIL_CLOSED:
+            # "Insufficient text" is a defer state, not a substantive rejection. Never
+            # destroy a live saved record solely because the network could not refresh it.
+            _, deferred_ev = _saved_item_passes(item, pass_key)
+            if deferred_ev.get("aboutness_reason") == "insufficient_text" or not INHERITED_CORPUS_AUDIT_FAIL_CLOSED:
                 keepers[strand_key].append(item)
                 continue
 
@@ -4104,7 +4298,7 @@ def audit_inherited_ab(previous: dict[str, Any], warnings: list[str] | None = No
     if warnings is not None and stats["refresh_unavailable"]:
         warnings.append(
             f"Inherited-corpus audit could not refresh {stats['refresh_unavailable']} failed saved record(s); "
-            + ("strict audit removed them" if INHERITED_CORPUS_AUDIT_FAIL_CLOSED else "they were conservatively retained")
+            + "deferred records were retained; substantive hard failures may still be removed"
         )
     return out, stats
 
@@ -5668,6 +5862,9 @@ def main() -> int:
         "corpus_start_date": output_corpus_floor.isoformat(),
         "source_expansion_version": expansion_marker,
         "quality_profile_version": QUALITY_PROFILE_VERSION,
+        "aboutness_profile_version": str(CONFIG.get("aboutness_profile_version", "")),
+        "matrix_profile_version": str(CONFIG.get("matrix_profile_version", "")),
+        "display_claim_profile_version": str(CONFIG.get("display_claim_profile_version", "")),
         "quality_migration_this_run": False,
         "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
         "inherited_corpus_audit_this_run": inherited_audit,
@@ -5756,6 +5953,7 @@ def main() -> int:
             "openalex_base_queries_executed": oa_base_executed,
             "openalex_exploration_queries_this_run": len(oa_explore),
             "openalex_exploration_queries_executed": oa_explore_executed + int(execution_stats.get("quiet_rescue_openalex_executed", 0)),
+            "openalex_missing_abstract_enrichment_attempted": int(execution_stats.get("openalex_abstracts_enrichment_attempted", 0)),
             "crossref_broad_queries_this_run": len(cr_batch),
             "crossref_broad_queries_executed": len(set(execution_stats.get("crossref_broad_queries", set()))),
             "crossref_base_queries_executed": cr_base_executed,

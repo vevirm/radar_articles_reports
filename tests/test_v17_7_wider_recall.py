@@ -101,13 +101,13 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 class ExpansionOnlyStateTests(unittest.TestCase):
     def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(data.get('strand_a', [])), 115)
+        self.assertEqual(len(data.get('strand_a', [])), 119)
         self.assertEqual(len(data.get('strand_b', [])), 23)
         self.assertEqual(len(data.get('strand_c', [])), 10)
-        self.assertEqual(len(data.get('frontier_evidence', [])), 28)
-        self.assertEqual(data.get('last_updated'), '2026-08-24T11:46Z')
-        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 37)
-        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 64)
+        self.assertEqual(len(data.get('frontier_evidence', [])), 32)
+        self.assertEqual(data.get('last_updated'), '2026-08-25T01:54Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 57)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 256)
 
     def test_current_state_needs_no_signal_or_quality_backfill(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
@@ -125,8 +125,8 @@ class ExpansionOnlyStateTests(unittest.TestCase):
         self.assertGreaterEqual(len(cfg['queries_b_method']), 28)
         self.assertGreaterEqual(len(cfg['news_global_queries']), 30)
         self.assertEqual(len(sr.news_queries('example.org', 168)), 4)
-        self.assertEqual(cfg['quality_profile_version'], 'v17.8.3-english-only-informative-claims')
-        self.assertEqual(cfg['signal_quality_profile_version'], 'v17.8.3-english-only-informative-claims')
+        self.assertEqual(cfg['quality_profile_version'], 'v17.9.0-source-aware-aboutness-matrix-rubric')
+        self.assertEqual(cfg['signal_quality_profile_version'], 'v17.9.0-source-aware-aboutness-matrix-rubric')
 
 
 if __name__ == '__main__':

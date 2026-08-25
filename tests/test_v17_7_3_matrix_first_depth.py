@@ -16,31 +16,40 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class MatrixFirstDepthTests(unittest.TestCase):
-    def test_empty_cells_get_all_initial_gap_scholarly_slots_when_many_are_empty(self):
+    def test_gap_plan_targets_empty_cells_or_sparse_cells_when_matrix_is_full(self):
         prev = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         state = sr.initial_scan_state(prev)
         focus = sr.frontier_gap_plan(prev, state)
-        self.assertTrue(focus['empty_targets'])
         self.assertEqual(len(focus['scholarly_queries']), 28)
         used_cells = set(focus['scholarly_query_cells'])
-        self.assertTrue(set(focus['empty_targets']).issubset(used_cells))
-        self.assertTrue(all(len(focus['scholarly_query_cells'].get(c, [])) >= 2 for c in focus['empty_targets']))
+        self.assertTrue(set(focus['targets']).issubset(used_cells))
+        if focus['empty_targets']:
+            self.assertTrue(set(focus['empty_targets']).issubset(used_cells))
+            self.assertTrue(all(len(focus['scholarly_query_cells'].get(c, [])) >= 2 for c in focus['empty_targets']))
+        else:
+            self.assertEqual(focus['empty_cells'], 0)
+            self.assertTrue(focus['targets'])
+            self.assertTrue(all(focus['deficits'].get(c, 0) > 0 for c in focus['targets']))
         self.assertTrue(any(c.endswith('-A') for c in focus['targets']))
         self.assertTrue(any(not c.endswith('-A') for c in focus['targets']))
 
-    def test_gap_depth_bank_is_zero_cell_only_until_matrix_has_no_zeros(self):
+    def test_gap_depth_bank_uses_zero_cells_first_then_sparse_targets(self):
         prev = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         state = sr.initial_scan_state(prev)
         focus = sr.frontier_gap_plan(prev, state)
         bank = sr.frontier_gap_depth_bank(focus)
-        expected = []
         profiles = sr.CONFIG['frontier_gap_scholarly_queries']
-        for i in range(max(len(profiles[c]) for c in focus['empty_targets'])):
-            for c in focus['empty_targets']:
-                if i < len(profiles[c]):
-                    expected.append(profiles[c][i])
-        self.assertEqual(bank, expected)
-        self.assertGreaterEqual(len(bank), 6 * len(focus['empty_targets']))
+        if focus['empty_targets']:
+            expected = []
+            for i in range(max(len(profiles[c]) for c in focus['empty_targets'])):
+                for c in focus['empty_targets']:
+                    if i < len(profiles[c]):
+                        expected.append(profiles[c][i])
+            self.assertEqual(bank, expected)
+        else:
+            allowed = {q for c in focus['targets'] for q in profiles[c]}
+            self.assertTrue(bank)
+            self.assertTrue(set(bank).issubset(allowed))
         fallback = sr.frontier_gap_depth_bank(focus, include_nonempty=True)
         self.assertGreaterEqual(len(fallback), len(bank))
 

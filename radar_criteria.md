@@ -1,25 +1,35 @@
-# Radar admission criteria — V17.8.3 English-only surgical precision profile
+# Radar admission criteria — V17.9.0 source-aware aboutness profile
 
-V17.8.2 retains the V17.8.1 separation of **hard exclusion** from **priority ranking**. The corpus remains broad enough to preserve useful evidence, while the visible order emphasises major EU research and innovation issues shaped by geopolitical competition.
+## Governing rule
 
-## Hard exclusions
+**Reject incidental mentions, not short documents.** A pass-1 candidate must substantively connect Europe/EU, an R&I dimension, and geopolitical context. Repetition and section spread are evidence of aboutness only when enough document structure is actually available.
 
-Reject malformed/non-document records, any record that is not positively established as English, obvious sports/consumer contamination, and material that lacks the existing substantive A/B gate. Title and body are checked separately, and saved records are rechecked before publication. A journal is not rejected merely because it is outside the curated priority list.
+## Pass 1: core reports and papers
 
-## A — EU R&I in geopolitical context
+A retained item must satisfy all three substantive blocks:
 
-A still requires substantive European R&I relevance and a real geopolitical, geoeconomic, economic-security, strategic-competition or external-dependence mechanism. Direct system-level evidence includes research policy/security/collaboration/funding, science diplomacy, talent, infrastructures, strategic technologies, industrial capability and technology dependence.
+1. **European scope:** direct EU/European R&I relevance, not merely EU funding boilerplate or a foreign case that mentions Europe as a comparator.
+2. **R&I dimension:** knowledge & people; infrastructure & inputs; conversion; or rules & institutions.
+3. **Geopolitical context:** autonomy/dependence, economic or research security, strategic competition, external chokepoints, export controls, supply dependencies, or another mechanism connecting R&I to geopolitical position.
 
-After admission, papers receive a priority score. Titles explicitly combining EU/European scope with R&I systems, strategic technologies and geopolitical/economic-security mechanisms rank highest. Peripheral but still legitimate evidence remains searchable lower in the corpus.
+### Text modes
 
-## B — futures methods
+- **Full text:** use recurrence, distinct-section spread and co-occurrence to reject incidental mentions.
+- **Abstract only:** do not require nonexistent sections. Require a coherent EU + R&I + geopolitical connection in the title/abstract/keywords, with semantic/contextual evidence taking precedence over raw count alone.
+- **Metadata only:** return `insufficient_text` and defer. Attempt richer retrieval later; do not equate missing text with irrelevance.
 
-B remains a small method-development library. New papers must develop/adapt/extend/refine a reusable futures or forward-looking R&I method and show a policy/R&I/technology-system destination. Merely applying scenarios, Delphi, system dynamics or another technique to an unrelated domain does not qualify.
+### EU acronym rule
 
-Historical B material is not mass-deleted on profile upgrades from shortened summaries; only clear false positives are removed.
+A bare `EU` token is not sufficient when context is ambiguous. If the source defines `EU` as another term, it cannot establish European Union relevance. Prefer unambiguous anchors such as European Union, European Commission, Horizon Europe, European Research Area, or clearly European R&I context.
 
-## C — weak signals
+### Diagnostics
 
-C is an actionable update layer, not a general news archive. Direct European signals are preferred. Narrow external shocks may enter only when they concern strategically material R&I mechanisms such as export controls, compute/chips, quantum, critical inputs, research security/cooperation or talent, and every displayed C item must still anchor to Strand A.
+Record the actual dominant reason for rejection/defer: `insufficient_text`, `no_direct_eu`, `no_ri`, `no_geopolitics`, or `no_substantive_bridge/aboutness`. Do not collapse these into one scope label.
 
-Generated `why_it_matters` boilerplate cannot manufacture European relevance.
+## Publication quality
+
+English remains a hard publication invariant. Core messages must be source-backed and informative. The displayed line states the claim itself; it does not prepend a generic attribution phrase.
+
+## Matrix hand-off
+
+Pass-1 records that clear admission are handed to the matrix with their source-backed summary/relevance evidence. Direction vocabulary may support independence/competitiveness interpretation, but it is not an additional admission gate.

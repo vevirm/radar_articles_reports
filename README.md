@@ -1,31 +1,52 @@
-# R&I Geopolitics Radar V17.8.3
+# R&I Geopolitics Radar V17.9.0
 
-V17.8.3 keeps the V17.8.2 balanced Sovereignty Frontier and makes **English-only** a hard publication invariant. It also replaces title-like radar/matrix slogans with a concise source-backed core claim: **“This says that …”**, with the claim body capped at 80 characters and the original publication details shown as bibliography.
+V17.9.0 repairs three linked problems in the radar: literal claim boilerplate, source-blind admission rules, and an under-populated Sovereignty Frontier matrix.
 
-## What stays from V17.8.1
+## What changed
 
-- Broad-but-relevant Strand A corpus is preserved; source tier is a ranking/confidence input, not a deletion rule.
-- Obvious non-R&I contamination such as sports-industry false positives remains excluded.
-- Strand B remains a small transferable foresight/method-development library.
-- Strand C remains stricter than A because weak signals must be specific, material and anchorable to EU R&I.
-- Paper-card wording remains paper-specific rather than generic.
+### Informative claims, not “This says that”
 
-## What stays from V17.8.2
+Prominent radar and matrix lines now show the source-backed claim itself. `core_message` remains concise, but the UI no longer mechanically prefixes it with “This says that” or “It says”. Publication details remain available as bibliography/source metadata.
 
-- **Balanced 4×4 discovery:** sparse A/B/C/D cells receive search effort by scarcity, with no anti-opening priority rule.
-- **Credible openings:** Column A accepts realised gains **or concrete committed implementation** (launched funded programmes, awarded/committed investment, approved projects, facility builds/deployments, procurement, adopted standards/rules).
-- **No optimism-by-rhetoric:** proposals, recommendations, roadmaps and “could/should/must” language still do not qualify on their own.
-- **No automatic risk bonus:** frontier ranking no longer gives a quadrant an automatic score solely because it is B/C/D.
-- **No forced equal counts:** a balanced matrix means equal evidentiary opportunity, not an artificial 4/4/4/4 outcome.
+### Source-aware aboutness
 
-The package uses the latest supplied radar state as its bundled `radar.json`.
+The substantive pass-1 standard remains strict: a record must connect Europe/EU, an R&I dimension, and geopolitical context. The aboutness test now adapts to the text actually available:
 
-## V17.8.3 language and display repair
+- **Full text:** recurrence and spread across the document are valid evidence that the issue is central.
+- **Abstract only:** the EU/R&I/geopolitical connection is judged inside the abstract; nonexistent document sections are not required.
+- **Metadata only:** the record is **deferred / insufficient text**, not falsely labelled irrelevant. For DOI-bearing OpenAlex and Crossref records, the scanner makes a tightly bounded publisher-landing-page abstract recovery attempt before dropping the candidate.
 
-- **English only, fail closed:** explicit non-English metadata rejects; missing/ambiguous metadata must positively establish English.
-- **Title and body checked separately:** an English abstract cannot rescue a non-English title, and an English title cannot rescue a non-English abstract/body.
-- **Saved corpus rechecked:** inherited A/B/C/frontier evidence is filtered again before publication.
-- **Informative claim first:** each item carries a concrete `core_message` of at most 80 characters; generic Europe-wide slogans are not used as fallbacks.
-- **Bibliography second:** publication title, authors, source, date and type remain visible underneath the claim.
+The bare acronym `EU` is also contextual. If a paper explicitly defines `EU` as something else (for example “environmental uncertainty”), that token cannot establish European Union relevance.
 
-The bundled state is the supplied `radar (19).json`, repaired under these rules.
+### Honest rejection diagnostics
+
+Admission diagnostics now preserve the actual failure cause—such as insufficient text, no direct EU relevance, no R&I content, no geopolitical context, or insufficient aboutness—instead of collapsing failed pass-1 candidates into “no direct EU”.
+
+### Evidence-led 4×4 matrix
+
+Core reports/papers are classified from the source-backed evidence carried in the radar record, not only from the shortened display point. Direction words are supporting evidence, not a second hard gate. Weak signals remain event/mechanism-gated.
+
+On the bundled 2026-08-25 state, the repaired classifier identifies 69 qualifying matrix evidence items and populates all 16 cells. Counts are not artificially balanced; cells range from sparse to dense according to the evidence.
+
+## Bundled state
+
+This package uses the user's newer supplied `radar (20).json` state (`last_updated: 2026-08-25T01:54Z`) rather than the older state inside the previous ZIP. Two confirmed scope false positives were removed during the repair:
+
+1. an Indonesia-centred defence-policy paper where EU strategic autonomy was only a comparator; and
+2. a China construction paper where `EU` meant “environmental uncertainty”, not European Union.
+
+The preserved data timestamp is the time of the supplied scan. V17.9.0 is a code/classifier/state-cleanup release, not a claim that a new live web scan was run during packaging.
+
+## Run
+
+Open `index.html` through a local/static web server as before. The scan implementation is in `scripts/scan_radar.py`; configuration is in `radar_config.json`, with the supplied design specification retained as `eu_ri_radar_config_v2.yaml`.
+
+## Validation
+
+Run:
+
+```bash
+pytest -q
+```
+
+The package includes regression tests for source-aware aboutness, contextual EU acronym handling, rejection diagnostics, informative claim rendering, and matrix coverage.

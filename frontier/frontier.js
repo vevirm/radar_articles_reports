@@ -32,7 +32,7 @@
   };
 
   const INDEPENDENCE_TERMS=['sovereign','sovereignty','autonomy','autonomous','strategic autonomy','dependence','dependency','dependencies','reliance','rely','non-eu','foreign supplier','external supplier','externally controlled','access','control','diversif','de-risk','derisk','self-suff','domestic capacity','european capacity','local capacity','own technology','own capability','supply security','vendor','partner','partnership','open-weight','open source','chinese firms','chinese companies','us firms','american firms','imported technology','technology vendor','lock-in','lock in'];
-  const COMPETITIVENESS_TERMS=['competit','performance','frontier','leading','leader','best available','capacity','capability','capabilities','scale','scaling','productivity','innovation','investment','invest','patent','market share','advanced','high-tech','high tech','talent','compute','supercomputer','lag','behind','fragmentation','subscale','cost','costly','expensive','shortage','declin','slow','delay','miss the','hollowing','brain drain'];
+  const COMPETITIVENESS_TERMS=['competit','performance','frontier','leading','leader','leadership','technological leadership','technology leadership','best available','capacity','capability','capabilities','scale','scaling','productivity','innovation','investment','invest','patent','market share','advanced','high-tech','high tech','talent','compute','supercomputer','lag','behind','fragmentation','subscale','cost','costly','expensive','shortage','declin','slow','delay','miss the','hollowing','brain drain'];
   const FAILURE_TERMS=['fail','failure','risk','vulnerab','exposure','weaponis','weaponiz','restrict','restriction','ban','block','cut off','cutoff','loss of access','suspend','withdraw','sanction','shortage','chokepoint','bottleneck','dependency','reliance','brain drain','hollowing','gridlock','delay','cannot','unable','no substitute','security cut','fragmentation','coercion','retreat','curb','curbs','struggl','fail to adopt','failed to adopt','decoupl'];
   const EVENT_TERMS=['launch','launched','adopt','adopted','order','ordered','restrict','restricted','curb','curbs','ban','banned','suspend','suspended','withdraw','retreat','invest','investment','build','building','expand','expansion','shift','shifting','becoming','increase','increasing','decrease','decline','declining','cut','cuts','open','opened','close','closed','facilitat','approve','approved','reject','rejected','propos','sign','signed','join','joined','leave','left','losing','overtook','outpace','outpaced','fragment','lag','behind','depend','reliance','consolidat','scale','scaling','deploy','deployed','designat','mandat','require','warn','warning','fail','failed'];
   const INDIRECT_DOMAIN_TERMS=['artificial intelligence','ai model','ai models','supercomputer','compute','data center','data centre','cloud','semiconductor','chip','quantum','nuclear','reactor','solar','battery','critical mineral','critical raw material','robot','robotics','defence technology','defense technology','dual-use','dual use','patent','technology','research collaboration','scientific collaboration','research cooperation','scientific cooperation'];
@@ -41,7 +41,7 @@
 
   const AUTONOMY_UP=['reduce strategic depend','reduce depend','reducing depend','diversif','sovereign control','digital sovereignty','strategic autonomy','self-suff','domestic capacity','european capacity','home-grown','homegrown','reshor','local production','own technology','own capability','control over','alternative supplier','alternative suppliers','open-weight','open source','eu-led','european infrastructure'];
   const AUTONOMY_DOWN=['more dependent','dependence on','dependent on','strategic dependency','strategic dependencies','external dependency','external dependencies','critical dependency','critical dependencies','reliance on','rely on','non-eu technology','non-eu vendor','foreign supplier','foreign suppliers','external supplier','externally controlled','on others terms',"others' terms",'loss of access','access lost','brain drain','people and ideas leave','imported technology','foreign technology','chinese companies','restricted access','partner changes','vendor lock','lock-in','cut supply','hollowing out','chinese firms','us firms','american firms'];
-  const PERFORMANCE_UP=['expand capabilities','expands capabilities','build capacity','capacity-building','capability-building','investment','invests','investing','supercomputer','frontier','leading','leader','outpace','overtook','scale','scaling','competitive','competitiveness','productivity','talent inflow','brain gain','open-weight','advanced technology','advanced technologies','fast','growth','innovation capacity','sets pace'];
+  const PERFORMANCE_UP=['expand capabilities','expands capabilities','build capacity','capacity-building','capability-building','investment','invests','investing','supercomputer','frontier','leading','leader','leadership','technological leadership','technology leadership','outpace','overtook','scale','scaling','competitive','competitiveness','productivity','talent inflow','brain gain','open-weight','advanced technology','advanced technologies','fast','growth','innovation capacity','sets pace'];
   const PERFORMANCE_DOWN=['less competitive','lag behind','lagging','left behind','miss the','fragmentation','fragmented','subscale','costly','expensive','higher cost','cost increase','security cuts','cuts collaboration','brain drain','hollowing','no capability','no substitute','shortage','bottleneck','chokepoint','vulnerability','vulnerabilities','exposure','delay','slower','declining','loss of capacity','losing capacity','unable to','cannot decide','performance price','operational reasons','slow scientific','slow research','raise cost','raises cost','raising cost','struggl','cannot decide','fail to adopt','failed to adopt'];
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
@@ -103,29 +103,46 @@
     if(!RadarInsights||!RadarInsights.buildResearchInsights) return [];
     const out=[];
     const evidence=[...(Array.isArray(data?.strand_a)?data.strand_a:[]),...(Array.isArray(data?.frontier_evidence)?data.frontier_evidence:[])];
+    // Insight points are useful display compression, but matrix classification must not lose
+    // the report/abstract that supports them. Build a lookup, then classify from the full
+    // source-backed evidence record while still displaying a concise claim.
+    const insightMap=new Map();
     for(const group of RadarInsights.buildInsights({strand_a:evidence,strand_b:[],strand_c:[]})){
-      for(const x of group.items){
-        const text=`${x.point} ${x.title} ${x.watchTheme||''} ${x.why||''}`;
-        const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(text);
-        const dynamic=hitCount(text,EVENT_TERMS)>0 || hitCount(text,INDEPENDENCE_TERMS)>=2 || hitCount(text,COMPETITIVENESS_TERMS)>=2 || strategicKnowledge;
-        if(!dynamic) continue;
-        out.push({
-          headline:x.point||x.title,
-          title:x.title,
-          source:x.source,
-          date:x.date,
-          link:x.link,
-          strand:x.strand,
-          type:x.itemType,
-          watch_theme:x.watchTheme||group.name,
-          anchor:x.title,
-          why_it_matters:x.why||'',
-          signal_note:x.point,
-          new_this_scan:!!x.newThisScan,
-          _origin:'Evidence signal',
-          _evidencePoint:x.point
-        });
+      for(const i of group.items){
+        const key=norm(i.link||i.title||'');
+        if(key) insightMap.set(key,{...i,_group:group.name});
       }
+    }
+    for(const e of evidence){
+      if(!e||typeof e!=='object') continue;
+      const key=norm(e.link||e.title||'');
+      const i=insightMap.get(key)||{};
+      const claim=clean(e.core_message||i.point||e.title||'');
+      const theme=clean(i.watchTheme||e.watch_theme||i._group||'');
+      const fullText=clean(`${claim} ${e.title||''} ${e.summary||''} ${e.relevance_note||''} ${theme}`);
+      const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(fullText);
+      const dynamic=hitCount(fullText,EVENT_TERMS)>0 || hitCount(fullText,INDEPENDENCE_TERMS)>=1 || hitCount(fullText,COMPETITIVENESS_TERMS)>=1 || strategicKnowledge;
+      if(!dynamic) continue;
+      out.push({
+        headline:claim||clean(e.title||''),
+        title:clean(e.title||''),
+        source:clean(e.source||i.source||''),
+        date:clean(e.date||i.date||''),
+        link:clean(e.link||i.link||''),
+        strand:clean(e.strand||i.strand||'A'),
+        type:clean(e.type||i.itemType||''),
+        watch_theme:theme,
+        anchor:clean(e.title||''),
+        why_it_matters:clean(i.why||e.relevance_note||''),
+        signal_note:claim,
+        core_message:claim,
+        new_this_scan:!!e.new_this_scan,
+        _origin:'Evidence signal',
+        _evidencePoint:claim,
+        _evidenceSummary:clean(e.summary||''),
+        _matrixDimension:clean(e.matrix_dimension||''),
+        _matrixQuadrant:clean(e.quadrant_implied||e.matrix_quadrant||'')
+      });
     }
     return out;
   }
@@ -148,7 +165,7 @@
     const scores={};
     for(const row of ROWS){
       scores[row.id]=weightedHits([
-        {text:title,weight:4},{text:theme,weight:3},{text:note,weight:1.2},{text:anchor,weight:.8},{text:support,weight:.45}
+        {text:title,weight:4},{text:theme,weight:3},{text:note,weight:1.2},{text:anchor,weight:.8},{text:support,weight:x._origin==='Evidence signal'?1.15:.45}
       ],ROW_TERMS[row.id]);
     }
     return scores;
@@ -162,7 +179,7 @@
   function questionScores(x,evidence){
     const title=candidateWhat(x),theme=signalTheme(x),note=clean(x.signal_note||x._evidencePoint||''),why=signalWhy(x),anchor=clean(x.anchor||'');
     const support=clean([evidence?.title,evidence?.summary,evidence?.relevance_note].filter(Boolean).join(' '));
-    const parts=[{text:title,weight:3},{text:theme,weight:2},{text:note,weight:1},{text:why,weight:.55},{text:anchor,weight:.7},{text:support,weight:.55}];
+    const parts=[{text:title,weight:3},{text:theme,weight:2},{text:note,weight:1},{text:why,weight:.55},{text:anchor,weight:.7},{text:support,weight:x._origin==='Evidence signal'?1.2:.55}];
     return {
       sustain:weightedHits(parts,INDEPENDENCE_TERMS),
       compete:weightedHits(parts,COMPETITIVENESS_TERMS),
@@ -173,10 +190,10 @@
   function directionScores(x,evidence,row,questions){
     const title=candidateWhat(x),theme=signalTheme(x),note=clean(x.signal_note||x._evidencePoint||''),why=signalWhy(x),anchor=clean(x.anchor||'');
     const support=clean([evidence?.title,evidence?.summary].filter(Boolean).join(' '));
-    const parts=[{text:title,weight:3},{text:theme,weight:1.8},{text:note,weight:1.2},{text:why,weight:.45},{text:anchor,weight:.55},{text:support,weight:.65}];
+    const parts=[{text:title,weight:3},{text:theme,weight:1.8},{text:note,weight:1.2},{text:why,weight:.45},{text:anchor,weight:.55},{text:support,weight:x._origin==='Evidence signal'?1.25:.65}];
     let autonomyUp=weightedHits(parts,AUTONOMY_UP), autonomyDown=weightedHits(parts,AUTONOMY_DOWN);
     let performanceUp=weightedHits(parts,PERFORMANCE_UP), performanceDown=weightedHits(parts,PERFORMANCE_DOWN);
-    const direct=norm(`${title} ${theme} ${note}`);
+    const direct=norm(`${title} ${theme} ${note} ${x._origin==='Evidence signal'?support:''}`);
 
     if(/struggl(?:e|es|ing)? to adopt|fail(?:ed|s|ing)? to adopt|cannot decide/.test(direct)){autonomyDown+=2.4;performanceDown+=2.4}
     if(/(?:reduc|cut|lower)[a-z]*.{0,45}(?:depend|reliance)/.test(direct)) autonomyUp+=3;
@@ -196,6 +213,18 @@
     }
     if(row.id==='knowledge' && /brain drain|researcher outflow|talent outflow|talent loss|researchers? (?:leave|leaving|left)|scientists? (?:leave|leaving|left)|unable to retain|failure to retain|retention crisis/.test(direct)){autonomyDown+=4;performanceDown+=4}
     if(row.id==='knowledge' && /brain gain|talent inflow|attract(?:ing|ion)?.{0,30}(?:researcher|scientist|talent)|retain(?:ing|ed)?.{0,30}(?:researcher|scientist|talent)|(?:researcher|scientist).{0,25}return/.test(direct)){autonomyUp+=3;performanceUp+=3}
+    if(x._origin==='Evidence signal'){
+      // Read directional claims from the EU/Europe subject, not from a foreign actor that
+      // happens to be described as competitive or leading in the same abstract.
+      const et=norm(`${title} ${support}`);
+      const euLoss=/(?:eu|europe|european).{0,120}(?:risk(?:s|ed|ing)?|lag(?:s|ging)?|fall(?:s|ing)? behind|los(?:e|es|ing)|ced(?:e|es|ing)|hollow|shortage|bottleneck|depend(?:s|ent|ence|ency)|reliance|vulnerab|gap)|(?:risk(?:s|ed|ing)?|lag(?:s|ging)?|fall(?:s|ing)? behind|los(?:e|es|ing)|ced(?:e|es|ing)|hollow|shortage|bottleneck|depend(?:s|ent|ence|ency)|reliance|vulnerab|gap).{0,120}(?:eu|europe|european)/.test(et);
+      const euCeding=/europe.{0,140}(?:ceding|cede|risks repeating|repeating the mistakes|losing|falling behind)|(?:ceding|cede).{0,100}(?:european|europe)/.test(et);
+      if(euLoss){performanceDown+=2.8;autonomyDown+=1.4}
+      if(euCeding){performanceDown+=3.5;autonomyDown+=2.2}
+      const foreignLead=/(?:china|chinese|united states|american|us).{0,100}(?:globally competitive|dominant|lead(?:s|ing|er)|outpac|frontier)|(?:globally competitive|dominant|lead(?:s|ing|er)|outpac|frontier).{0,100}(?:china|chinese|united states|american|us)/.test(et);
+      if(foreignLead&&euLoss) performanceUp=Math.max(0,performanceUp-2.5);
+    }
+
     if(row.id==='knowledge'){
       const kt=norm(`${direct} ${support}`);
       const externalKnowledge=/(?:foreign|non-eu|third-country|third country|china|chinese|united states|american).{0,55}(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation)|(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation).{0,55}(?:foreign|non-eu|third-country|third country|china|chinese|united states|american)/.test(kt);
@@ -207,6 +236,11 @@
 
     let autonomy=autonomyUp-autonomyDown;
     let performance=performanceUp-performanceDown;
+    const storedQuadrant=clean(x._matrixQuadrant||evidence?.quadrant_implied||evidence?.matrix_quadrant||'').toUpperCase();
+    if(x._origin==='Evidence signal' && ['A','B','C','D'].includes(storedQuadrant)){
+      autonomy=storedQuadrant==='A'||storedQuadrant==='B'?3:-3;
+      performance=storedQuadrant==='A'||storedQuadrant==='C'?3:-3;
+    }
     // V17.8: ambiguity is not an opening. The old fallback silently turned weak/neutral
     // evidence into +/+ and inflated the optimistic column. Keep a direction neutral unless
     // the record actually supports it; failure evidence may still resolve ambiguity downward.
@@ -443,13 +477,22 @@
     const dynamic=hitCount(`${primary} ${clean(x.signal_note||x._evidencePoint||'')}`,EVENT_TERMS)>0 || x._origin==='Weak signal' || structuralTalentLoss || structuralEvidence || knowledgeStructuralEvidence;
     const movementSupported=primaryMoves || (x._origin==='Evidence signal'&&(qCount>=1||knowledgeStructuralEvidence));
 
-    if((qCount===0&&!knowledgeStructuralEvidence) || !movementSupported || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
+    // Core reports/papers populate the structural 4×4 matrix even when they describe a
+    // condition rather than a discrete event. Weak signals remain event/movement-gated.
+    // This mirrors the radar design: pass 1 establishes the phenomenon/quadrant; pass 2
+    // supplies external developments that may move it.
+    if(x._origin==='Evidence signal'){
+      if(euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU)) return null;
+    }else{
+      if((qCount===0&&!knowledgeStructuralEvidence) || !movementSupported || euLink<1.4 || (!directEU&&!strategicIndirect&&!evidenceScopedEU) || !dynamic) return null;
+    }
 
     // Try rows in evidence-score order and keep the first row/column whose observed
     // statement actually satisfies that cell's semantic contract.  This prevents
     // a stray acronym or generic word such as "research" from filling a sparse cell.
     const tieOrder=['knowledge','infrastructure','conversion','rules'];
-    const rowOptions=tieOrder.map(id=>({id,score:rows[id]||0})).sort((a,b)=>b.score-a.score||tieOrder.indexOf(a.id)-tieOrder.indexOf(b.id));
+    const storedRow={d1:'knowledge',d2:'infrastructure',d3:'conversion',d4:'rules',knowledge:'knowledge',infrastructure:'infrastructure',conversion:'conversion',rules:'rules'}[clean(x._matrixDimension||evidence?.matrix_dimension||'').toLowerCase()]||'';
+    const rowOptions=tieOrder.map(id=>({id,score:(rows[id]||0)+(id===storedRow?20:0)})).sort((a,b)=>b.score-a.score||tieOrder.indexOf(a.id)-tieOrder.indexOf(b.id));
     let row=null,rowPick=null,materiality=0,direction=null,column=null;
     for(const opt of rowOptions){
       const r=ROWS.find(v=>v.id===opt.id);
@@ -457,7 +500,15 @@
       if(m<2.4) continue;
       const dir=directionScores(x,evidence,r,questions);
       const col=columnFor(dir);
-      if(!col||!cellEvidencePass(x,evidence,r,col)) continue;
+      if(!col) continue;
+      // For vetted pass-1 evidence, row materiality + two-axis direction is the matrix
+      // rubric. Do not re-gate the result with a second literal phrase contract. That
+      // contract is retained for external weak signals, where the event statement itself
+      // must carry the mechanism.
+      if(x._origin!=='Evidence signal' && !cellEvidencePass(x,evidence,r,col)) continue;
+      // Brain-drain evidence is subject-sensitive: a Europe-related paper discussing
+      // talent loss in China must not become European brain drain.
+      if(x._origin==='Evidence signal' && r.id==='knowledge' && col.id==='D' && !cellEvidencePass(x,evidence,r,col)) continue;
       row=r; rowPick=opt; materiality=m; direction=dir; column=col; break;
     }
     if(!row||!column) return null;
