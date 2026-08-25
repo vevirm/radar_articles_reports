@@ -1,6 +1,6 @@
-# R&I Geopolitics Radar V17.11.0
+# R&I Geopolitics Radar V17.11.1
 
-V17.11.0 repairs the manual-evidence lane so a curated, matrix-oriented list can contribute **reviewed source evidence** without becoming an admission bypass. The supplied DOCX URL is the primary retrieval target; broad web/search-engine discovery is not part of manual ingestion.
+V17.11.1 extends the exact-link manual-evidence lane with Additions III review and fixes two diagnostic/parser edge cases without turning manual curation into an admission bypass. The supplied DOCX URL is the primary retrieval target; broad web/search-engine discovery is not part of manual ingestion.
 
 ## Manual candidate ingest
 
@@ -18,11 +18,11 @@ A reviewed evidence cache is not a free-form manual override: each review must b
 
 Curator cell mappings are stored as hypotheses, not answers. A reviewed source can be admitted when its underlying evidence passes the substantive gate; matrix placement then comes from reviewed source evidence (`matrix_dimension`, `quadrant_claimed`, `quadrant_implied`). The frontend honors that reviewed row/column instead of re-inferring the row from topic keywords.
 
-For the supplied `EU_RI_Additions_May-Aug_2026.docx`, V17.11.0 admits **17 substantive sources and 2 weak signals**; all **19 appear in the Sovereignty Frontier matrix**. The detailed decisions are in `MANUAL_INGEST_REPORT.md`.
+The prior reviewed supplement remains intact (17 substantive sources + 2 weak signals). For `EU_RI_Additions_III_May-Aug_2026.docx`, V17.11.1 admits **3 substantive sources and 2 weak signals**; all **5 enter the Sovereignty Frontier matrix** after independent evidence review. The detailed decisions are in `MANUAL_INGEST_REPORT.md`.
 
 ## Recall diagnostics and provenance
 
-Manual candidates are compared against the admitted corpus and saved seen-URL ledger. Missed high-value exact URLs may enter bounded recovery queues; future automated scans can retry them without weakening pass-1 precision. Public records expose `automated`, `manual`, or `both` provenance.
+Manual candidates are compared against the admitted corpus and saved seen-URL ledger. Missed high-value exact URLs may enter bounded recovery queues; future automated scans can retry them without weakening pass-1 precision. Public records expose `automated`, `manual`, or `both` provenance. Manual diagnostics preserve both the curator-supplied URL and any directly resolved primary/full-text URL, including the direct-link chain used during review.
 
 ## Source-aware aboutness and claims
 
@@ -36,7 +36,7 @@ Manual candidates are compared against the admitted corpus and saved seen-URL le
 
 ## State integrity
 
-Manual ingestion is not a live scan. The bundled `last_updated` remains **2026-08-25T07:34Z**, with scan cursors/history preserved.
+Manual ingestion is not a live scan. The bundled `last_updated` remains the authoritative supplied value **2026-08-25T10:58Z**, with scan cursors/history preserved. Manual review/ingest timestamps are stored separately.
 
 ## Validate
 
@@ -44,4 +44,4 @@ Manual ingestion is not a live scan. The bundled `last_updated` remains **2026-0
 PYTHONPATH=. python -m pytest -q
 ```
 
-Current complete suite: **245 passed**.
+Current complete suite: **251 passed**.

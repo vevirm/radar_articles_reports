@@ -7,10 +7,10 @@
   "aboutness_profile_version": "v17.9.0-source-length-aware",
   "matrix_profile_version": "v17.9.0-source-evidence-rubric",
   "display_claim_profile_version": "v17.9.0-informative-claims-no-boilerplate",
-  "manual_ingest_profile_version": "v17.11.0-reviewed-manual-evidence",
+  "manual_ingest_profile_version": "v17.11.1-reviewed-manual-evidence",
   "manual_ingest": {
-    "profile_version": "v17.11.0-reviewed-manual-evidence",
-    "last_ingested_at": "2026-08-25T09:39Z",
+    "profile_version": "v17.11.1-reviewed-manual-evidence",
+    "last_ingested_at": "2026-08-25T13:00Z",
     "batches": [
       {
         "batch_id": "d847131bfe7e5256",
@@ -79,6 +79,32 @@
         },
         "review_evidence_sha256": "f9ba65385342e49368f38ab6835be61af839c9bb41476681d12b207de57c1a47",
         "reviewed_items": 31
+      },
+      {
+        "batch_id": "f5c63cecbaa4-0a1b4eba",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "sha256": "f5c63cecbaa41166ed42c8e64be3d9a51d958681d75ce4d72fd012a8c73ab1f3",
+        "ingested_at": "2026-08-25T13:00Z",
+        "fetch_attempted": false,
+        "links_user_validated": false,
+        "counts": {
+          "candidates": 12,
+          "found_in_corpus": 0,
+          "scanner_seen_url_not_admitted": 0,
+          "not_found": 12,
+          "duplicate_in_batch": 1,
+          "manual_admitted": 3,
+          "deferred": 4,
+          "rejected_core_gate": 1,
+          "forthcoming": 0,
+          "secondary_reference": 4,
+          "context_only": 1,
+          "weak_signal_candidates": 5,
+          "manual_signals_admitted": 2,
+          "verification_required": 3
+        },
+        "review_evidence_sha256": "0a1b4ebae21469d7b69580349d1fac4cd7c2d1486eb3000d8e9a59f914f8b5f9",
+        "reviewed_items": 12
       }
     ],
     "records": [
@@ -3858,6 +3884,782 @@
         "source_kind": "institutional",
         "source_file": "EU_RI_Additions_May-Aug_2026.docx",
         "batch_id": "d847131bfe7e-f9ba6538"
+      },
+      {
+        "manual_id": "I12",
+        "title": "If CERN can come up with the requisite billions, the Future Circular Collider is a go",
+        "date": "2026-06-18",
+        "url": "https://physicstoday.aip.org/news/if-cern-can-come-up-with-the-requisite-billions-the-future-circular-collider-is-a-go",
+        "section": "2. Infrastructure & inputs",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": true,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "I-A",
+          "R-A",
+          "K-C"
+        ],
+        "curator_primary_cell": "I-A",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "secondary_reference",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "partial_text",
+        "resolved_url": "https://physicstoday.aip.org/news/if-cern-can-come-up-with-the-requisite-billions-the-future-circular-collider-is-a-go",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": false,
+          "b_pass": false,
+          "eu_relevance": null,
+          "aboutness_reason": "no_direct_eu",
+          "reason": "no_direct_eu"
+        },
+        "decision": "defer_insufficient_or_unverified",
+        "miss_reason": "secondary_reference_requires_primary_verification",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Adoption of the European Strategy for Particle Physics 2026 update: FCC-ee named the preferred next flagship collider (c",
+            "reviewed": "If CERN can come up with the requisite billions, the Future Circular Collider is a go"
+          },
+          "authors": {
+            "supplied": "CERN Council",
+            "reviewed": "Toni Feder"
+          },
+          "source": {
+            "supplied": "USD 17–18 billion; Council decision expected 2028; operations from 2047)",
+            "reviewed": "Physics Today"
+          }
+        },
+        "source_review_status": "reviewed_defer_primary_resolution_not_directly_verified",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Physics Today article was retrieved and directly links to CERN’s 2026 strategy site. Physics Today reports that the CERN Council adopted the update in May and selected FCC-ee as the next flagship, but the curator explicitly requires the CERN Council resolution itself; the directly linked CERN strategy resources did not expose a verifiable Council resolution in this environment.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [
+          "https://europeanstrategyupdate.web.cern.ch/"
+        ],
+        "source_tier": "Tier 1",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "I13",
+        "title": "Security of Supply and Interdependency: A New Approach to Strategic Autonomy and Indispensability",
+        "date": "2026-06-03",
+        "url": "https://www.europefocus.eu/eu-defence-series-europes-tech-challenge/",
+        "section": "2. Infrastructure & inputs",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": true,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "I-A",
+          "C-B",
+          "I-C"
+        ],
+        "curator_primary_cell": "C-B",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "secondary_reference",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "partial_text",
+        "resolved_url": "https://www.europefocus.eu/eu-defence-series-europes-tech-challenge/",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": false,
+          "b_pass": false,
+          "eu_relevance": null,
+          "aboutness_reason": "no_direct_eu",
+          "reason": "no_direct_eu"
+        },
+        "decision": "defer_insufficient_or_unverified",
+        "miss_reason": "secondary_reference_requires_primary_verification",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "authors": {
+            "supplied": "Bellais, R.; Fiott, D.",
+            "reviewed": "Renaud Bellais; Daniel Fiott"
+          },
+          "source": {
+            "supplied": "IRIS (Institut de relations internationales et stratégiques), Paris.",
+            "reviewed": "IRIS (cited by Europe Focus)"
+          }
+        },
+        "source_review_status": "reviewed_defer_secondary_reference_primary_not_directly_reachable",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Europe Focus page was retrieved and cites the Bellais–Fiott IRIS paper in a footnote, but it does not provide a direct link to the IRIS paper. The curator explicitly says the record is cited secondhand and asks to locate the IRIS paper, so the exact-link-only manual path defers rather than searching for it.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [],
+        "source_tier": "Tier 2 comparable",
+        "source_kind": "scholarly",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "C11",
+        "title": "European Biotech Act — Commission Staff Working Document C(2026) 3375 final (impact assessment)",
+        "date": "2026-05-26",
+        "url": "https://health.ec.europa.eu/document/download/48009973-efbb-4101-ae8f-e81a34764e39_en?filename=biotechnology_C2026-3375-1_en.pdf",
+        "section": "3. Conversion",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "C-C",
+          "C-A",
+          "K-C"
+        ],
+        "curator_primary_cell": "C-A",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "full_text",
+        "resolved_url": "https://health.ec.europa.eu/document/download/48009973-efbb-4101-ae8f-e81a34764e39_en?filename=biotechnology_C2026-3375-1_en.pdf",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": true,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "reviewed_underlying_source_substantive_gate",
+          "reason": "passes_substantive_gate"
+        },
+        "decision": "admitted_verified_manual_source",
+        "miss_reason": "discovery_recall_gap",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Commission Staff Working Document C(2026) 3375 final (Parts 1–2): impact assessment accompanying the European Biotech Act proposals (COM(2025) 1022, COM(2025) 1031 of 16 December 2025)",
+            "reviewed": "European Biotech Act — Commission Staff Working Document C(2026) 3375 final (impact assessment)"
+          },
+          "source": {
+            "supplied": "Biotech Act II (industrial, agri-food, marine) expected autumn 2026.",
+            "reviewed": "European Commission"
+          }
+        },
+        "source_review_status": "reviewed_pass_core_gate_primary_full_text",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Commission PDF was reviewed directly. It makes the R&I-geopolitical bridge explicit: the EU has a world-class biotechnology research base but trails competitors in translating research into development, deployment and manufacturing at scale; biotechnology is also treated as an economic-security technology with strategic-autonomy, technology-leakage and biosecurity implications.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": true,
+        "matrix_evidence_verified": true,
+        "matrix_review": {
+          "matrix_dimension": "conversion",
+          "quadrant_implied": "C",
+          "matrix_quadrant": "C",
+          "matrix_classification_source": "reviewed_underlying_source",
+          "matrix_evidence_basis": "The empirical/problem-definition evidence is a conversion gap from strong EU research to weaker deployment, scale and financing versus competitors (C), while the proposed EIB-linked investment and strategic-project instruments are intended to create a home-scaling outcome (A).",
+          "curator_primary_cell": "C-A",
+          "curator_cells": [
+            "C-C",
+            "C-A",
+            "K-C"
+          ],
+          "curator_cell_agreement": "differs",
+          "quadrant_claimed": "A"
+        },
+        "direct_links_followed": [],
+        "source_tier": "Tier 1",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "C12",
+        "title": "Innovation without borders",
+        "date": "2026-07-11",
+        "url": "https://cepr.org/voxeu/columns/innovation-without-borders",
+        "section": "3. Conversion",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "C-D",
+          "C-A"
+        ],
+        "curator_primary_cell": "C-D",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "full_text",
+        "resolved_url": "https://cepr.org/voxeu/columns/innovation-without-borders",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": false,
+          "b_pass": false,
+          "eu_relevance": null,
+          "aboutness_reason": "reviewed_underlying_source_failed_substantive_gate",
+          "reason": "reviewed_underlying_source_failed_substantive_gate"
+        },
+        "decision": "rejected_core_gate",
+        "miss_reason": "recovered_source_failed_substantive_gate:reviewed_underlying_source_failed_substantive_gate",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "authors": {
+            "supplied": "Baumann, U.; Cullen, Z.; Faia, E.; Ferrando, A.; Perez-Truglia, R.; Rariga, J.",
+            "reviewed": "Ursel Baumann; Zöe Cullen; Ester Faia; Annalisa Ferrando; Ricardo Perez-Truglia; Judit Rariga"
+          },
+          "source": {
+            "supplied": "VoxEU/CEPR (ECB-based experiment on 3,316 euro-area firms plus firm survey).",
+            "reviewed": "VoxEU/CEPR"
+          }
+        },
+        "source_review_status": "reviewed_fail_core_gate",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied CEPR/VoxEU source was reviewed directly. It is substantive European innovation research, but its mechanism is intra-European AI diffusion and competition among euro-area firms. It does not substantively analyse an external geopolitical, economic-security or strategic-dependence mechanism, so Europe/innovation/foreign-firm language is not enough for pass 1.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [],
+        "source_tier": "Tier 2",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "C13",
+        "title": "Europe’s ungoverned space: Military AI and the autonomy that cannot be bought",
+        "date": "2026-06-22",
+        "url": "https://cepr.org/voxeu/columns/europes-ungoverned-space-military-ai-and-autonomy-cannot-be-bought",
+        "section": "3. Conversion",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "C-D",
+          "R-C",
+          "I-C"
+        ],
+        "curator_primary_cell": "R-C",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "full_text",
+        "resolved_url": "https://cepr.org/voxeu/columns/europes-ungoverned-space-military-ai-and-autonomy-cannot-be-bought",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": true,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "reviewed_underlying_source_substantive_gate",
+          "reason": "passes_substantive_gate"
+        },
+        "decision": "admitted_verified_manual_source",
+        "miss_reason": "discovery_recall_gap",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "authors": {
+            "supplied": "Perugini, M.",
+            "reviewed": "Marco Perugini"
+          },
+          "source": {
+            "supplied": "VoxEU/CEPR, Europe 2050 initiative.",
+            "reviewed": "VoxEU/CEPR"
+          }
+        },
+        "source_review_status": "reviewed_pass_core_gate_primary_full_text",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied CEPR/VoxEU column was reviewed directly. It explicitly links Europe’s defence AI capability gap to dependence on US-controlled frontier models and cloud infrastructure, unilateral US administrative authority, European industrial capacity and joint financing.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": true,
+        "matrix_evidence_verified": true,
+        "matrix_review": {
+          "matrix_dimension": "infrastructure",
+          "quadrant_implied": "C",
+          "matrix_quadrant": "C",
+          "matrix_classification_source": "reviewed_underlying_source",
+          "matrix_evidence_basis": "The observed 2026 condition is rented frontier infrastructure: Europe accesses critical AI/cloud capability on terms ultimately controlled in the United States (I-C). The advocated long-run destination is European peer-level sovereign capability (A).",
+          "curator_primary_cell": "R-C",
+          "curator_cells": [
+            "C-D",
+            "R-C",
+            "I-C"
+          ],
+          "curator_cell_agreement": "differs",
+          "quadrant_claimed": "A"
+        },
+        "direct_links_followed": [],
+        "source_tier": "Tier 2",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "R14",
+        "title": "Europe's regulatory double bind",
+        "date": "2026-08-14",
+        "url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+        "section": "4. Rules & institutions",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "R-C",
+          "R-D",
+          "R-A"
+        ],
+        "curator_primary_cell": "R-D",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "full_text",
+        "resolved_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": true,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "reviewed_underlying_source_substantive_gate",
+          "reason": "passes_substantive_gate"
+        },
+        "decision": "admitted_verified_manual_source",
+        "miss_reason": "discovery_recall_gap",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Europe’s regulatory double bind",
+            "reviewed": "Europe's regulatory double bind"
+          },
+          "authors": {
+            "supplied": "Perugini, M.",
+            "reviewed": "Marco Perugini"
+          },
+          "source": {
+            "supplied": "VoxEU/CEPR, Europe 2050 initiative.",
+            "reviewed": "VoxEU/CEPR"
+          }
+        },
+        "source_review_status": "reviewed_pass_core_gate_primary_full_text",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied CEPR/VoxEU column was reviewed directly. It links delayed AI Act implementation, missing standards/assessment capacity, dependence on foreign testing methodologies and US trade retaliation against EU digital enforcement to Europe’s ability to exercise regulatory sovereignty over frontier technology.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": true,
+        "matrix_evidence_verified": true,
+        "matrix_review": {
+          "matrix_dimension": "rules",
+          "quadrant_implied": "D",
+          "matrix_quadrant": "D",
+          "matrix_classification_source": "reviewed_underlying_source",
+          "matrix_evidence_basis": "The immediate mechanism is implementation delay and institutional inability to operationalise adopted rules (R-D), while the source’s explicit sovereignty claim is that operative authority migrates to external methodologies and actors (R-C).",
+          "curator_primary_cell": "R-D",
+          "curator_cells": [
+            "R-C",
+            "R-D",
+            "R-A"
+          ],
+          "curator_cell_agreement": "agrees",
+          "quadrant_claimed": "C"
+        },
+        "direct_links_followed": [],
+        "source_tier": "Tier 2",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "R15",
+        "title": "Standardisation in the European Product Act: major challenges ahead",
+        "date": "2026-05-01",
+        "url": "https://data.consilium.europa.eu/doc/document/ST-8298-2026-INIT/en/pdf",
+        "section": "4. Rules & institutions",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "substantive",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "R-A",
+          "R-D",
+          "R-C"
+        ],
+        "curator_primary_cell": "R-D",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "uncertain_record",
+        "retrieval_status": "retrieval_environment_limitation",
+        "text_mode": "metadata_only",
+        "resolved_url": "https://data.consilium.europa.eu/doc/document/ST-8298-2026-INIT/en/pdf",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": false,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "insufficient_text",
+          "reason": "insufficient_text"
+        },
+        "decision": "defer_insufficient_or_unverified",
+        "miss_reason": "underlying_source_retrieval_failed_or_insufficient",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "source": {
+            "supplied": "Discussion paper, ST 8298/26, COMPET.1 (LIMITE, published on the Council register).",
+            "reviewed": "Council of the European Union"
+          }
+        },
+        "source_review_status": "reviewed_defer_retrieval_environment_limitation",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Council-register PDF URL could not be retrieved in the execution environment. No alternative-version or title search was run. The record is therefore deferred for retrieval rather than treated as substantively irrelevant.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [],
+        "source_tier": "Tier 1",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "W15",
+        "title": "German prosecutors allege China-linked collection targeting university aerospace, computer-science and AI researchers",
+        "date": "2026-05-20",
+        "url": "https://www.euronews.com/my-europe/2026/05/20/police-in-germany-arrest-married-couple-on-suspicion-of-spying-for-china",
+        "section": "5.1 Against the Knowledge row",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "weak_signal",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "K-B",
+          "R-B"
+        ],
+        "curator_primary_cell": "K-B",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "secondary_reference",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "partial_text",
+        "resolved_url": "https://www.euronews.com/my-europe/2026/05/20/police-in-germany-arrest-married-couple-on-suspicion-of-spying-for-china",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": false,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "no_geopolitics",
+          "reason": "no_geopolitics"
+        },
+        "decision": "defer_insufficient_or_unverified",
+        "miss_reason": "secondary_reference_requires_primary_verification",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Arrest in Munich of a married couple, German citizens, on suspicion of working for a Chinese intelligence service: alleged systematic contact with professors of aerospace engineering, computer science and AI at German universities, posing as interpreters or carmaker employees; some academics lured to China for paid lectures that were in fact delivered to state-owned arms manufacturers",
+            "reviewed": "German prosecutors allege China-linked collection targeting university aerospace, computer-science and AI researchers"
+          },
+          "authors": {
+            "supplied": "German Federal Prosecutor",
+            "reviewed": "Kirsten Ripper; Gavin Blackburn"
+          },
+          "source": {
+            "supplied": "Witness measures at ten locations across six Länder",
+            "reviewed": "Euronews"
+          }
+        },
+        "source_review_status": "reviewed_defer_primary_prosecutor_release_not_directly_reachable",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Euronews page was retrieved and reports detailed allegations attributed to the German federal prosecution service, including contacts with researchers in aerospace engineering, computer science and AI. The curator explicitly marks the Federal Prosecutor release as verification outstanding; no direct primary link is exposed on the supplied page, so the exact-link path defers.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [],
+        "source_tier": "Tier 2 comparable",
+        "source_kind": "scholarly",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "W16",
+        "title": "AI researcher with a prior European Space Agency placement arrested at NATO’s SHAPE on suspicion of espionage",
+        "date": "2026-07-25",
+        "url": "https://www.ftm.eu/articles/intern-spy-nato-china-canada-revealed",
+        "section": "5.1 Against the Knowledge row",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "weak_signal",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "K-B",
+          "R-B"
+        ],
+        "curator_primary_cell": "K-B",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "partial_text",
+        "resolved_url": "https://www.ftm.eu/articles/intern-spy-nato-china-canada-revealed",
+        "review_resolved_url": "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf",
+        "gate": {
+          "a_pass": true,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "reviewed_underlying_source_substantive_gate",
+          "reason": "passes_substantive_gate"
+        },
+        "decision": "admitted_verified_manual_weak_signal",
+        "miss_reason": "discovery_recall_gap",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Arrest of an intern at NATO’s SHAPE headquarters (Mons) on suspicion of espionage for China; identified by Follow the Money, Le Soir, Knack and La Lettre as a Canadian AI researcher of Chinese origin with prior placements at several international organisations",
+            "reviewed": "AI researcher with a prior European Space Agency placement arrested at NATO’s SHAPE on suspicion of espionage"
+          },
+          "date": {
+            "supplied": "2026-07-28",
+            "reviewed": "2026-07-25"
+          },
+          "authors": {
+            "supplied": "Belgian federal prosecutor",
+            "reviewed": "Jesse Pinster; Follow the Money partners"
+          },
+          "source": {
+            "supplied": "Reported 27–28 July 2026.",
+            "reviewed": "Follow the Money / Belgian Federal Prosecutor"
+          }
+        },
+        "source_review_status": "reviewed_pass_core_gate_direct_primary_corroboration",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Follow the Money article directly links to the Belgian Federal Prosecutor release. The official release verifies the arrest of a Canadian national of Chinese origin who was interning at SHAPE on suspicion of espionage for a third country; the supplied article independently reports that the suspect is an AI researcher who previously worked at ESA’s research centre and other international organisations.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": true,
+        "matrix_evidence_verified": true,
+        "matrix_review": {
+          "matrix_dimension": "knowledge",
+          "quadrant_implied": "B",
+          "matrix_quadrant": "B",
+          "matrix_classification_source": "reviewed_underlying_source",
+          "matrix_evidence_basis": "The event is evidence of the security pressure behind restrictions and screening around European research/talent access, matching the Knowledge-row closed-lab mechanism (K-B).",
+          "curator_primary_cell": "K-B",
+          "curator_cells": [
+            "K-B",
+            "R-B"
+          ],
+          "curator_cell_agreement": "agrees",
+          "quadrant_claimed": "B"
+        },
+        "direct_links_followed": [
+          "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf"
+        ],
+        "source_tier": "Tier 2 comparable",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "W17",
+        "title": "Helsing and Quantum Systems raise $1.8bn and $1.2bn mega-rounds to scale European defence AI and autonomous systems",
+        "date": "2026-07-13",
+        "url": "https://www.defensenews.com/global/europe/2026/07/13/helsing-raises-18-billion-in-europes-biggest-defense-startup-round/",
+        "section": "5.2 Against the Conversion row",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "weak_signal",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "C-A",
+          "C-C"
+        ],
+        "curator_primary_cell": "C-C",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "partial_text",
+        "resolved_url": "https://www.defensenews.com/global/europe/2026/07/13/helsing-raises-18-billion-in-europes-biggest-defense-startup-round/",
+        "review_resolved_url": "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
+        "gate": {
+          "a_pass": true,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "reviewed_underlying_source_substantive_gate",
+          "reason": "passes_substantive_gate"
+        },
+        "decision": "admitted_verified_manual_weak_signal",
+        "miss_reason": "discovery_recall_gap",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Helsing (13 July 2026): USD 1.8 billion Series E at USD 18 billion post-money, the largest European defence-tech round on record; led by Dragoneer and Lightspeed with Goldman Sachs Alternatives, JPMorgan, CPP Investments; company states it remains predominantly European-owned",
+            "reviewed": "Helsing and Quantum Systems raise $1.8bn and $1.2bn mega-rounds to scale European defence AI and autonomous systems"
+          },
+          "authors": {
+            "supplied": "",
+            "reviewed": "Rudy Ruitenberg; Helsing; Quantum Systems"
+          },
+          "source": {
+            "supplied": "Quantum Systems (2 July 2026): USD 1.2 billion Series D at c",
+            "reviewed": "Defense News / Helsing / Quantum Systems"
+          }
+        },
+        "source_review_status": "reviewed_pass_core_gate_direct_primary_corroboration",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Defense News page directly links to primary company releases from Helsing and Quantum Systems. Those releases verify $1.8bn and $1.2bn financing rounds, European defence-AI/autonomy scale-up and, for Helsing, continued predominantly European ownership. The manual record’s separate Stark claim is not needed for admission and is not used as reviewed evidence here.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": true,
+        "matrix_evidence_verified": true,
+        "matrix_review": {
+          "matrix_dimension": "conversion",
+          "quadrant_implied": "A",
+          "matrix_quadrant": "A",
+          "matrix_classification_source": "reviewed_underlying_source",
+          "matrix_evidence_basis": "The observed firms remain European and are using mega-rounds to scale production and capability, which fits Home champion (C-A); the curator’s C-C concern about foreign capital remains preserved as a competing interpretation but is not an observed foreign exit.",
+          "curator_primary_cell": "C-C",
+          "curator_cells": [
+            "C-A",
+            "C-C"
+          ],
+          "curator_cell_agreement": "differs",
+          "quadrant_claimed": "A"
+        },
+        "direct_links_followed": [
+          "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
+          "https://quantum-systems.com/news/quantum-systems-raises-1-2bn-series-d-to-accelerate-growth-and-scale-software-defined-autonomous-systems-across-air-land-and-sea/"
+        ],
+        "source_tier": "Tier 2 comparable",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "W18",
+        "title": "EU digital enforcement and US Section 301 retaliation sequence",
+        "date": "2026-07-24",
+        "url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+        "section": "5.3 Against the Rules row",
+        "manual_record_status": "candidate",
+        "manual_candidate_kind": "weak_signal",
+        "manual_verification_required": true,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "R-A",
+          "R-C",
+          "R-D"
+        ],
+        "curator_primary_cell": "R-C",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "secondary_reference",
+        "retrieval_status": "not_needed_existing_corpus",
+        "text_mode": "existing_corpus",
+        "resolved_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": true,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "existing_corpus",
+          "reason": "passes_substantive_gate"
+        },
+        "decision": "matched_manual_batch_no_duplicate",
+        "miss_reason": "secondary_reference_requires_primary_verification",
+        "matched_title": "Europe's regulatory double bind",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Court of Justice (2 July 2026): upholds the EUR 4.1 billion Android fine",
+            "reviewed": "EU digital enforcement and US Section 301 retaliation sequence"
+          },
+          "date": {
+            "supplied": "2026-07-23",
+            "reviewed": "2026-07-24"
+          },
+          "source": {
+            "supplied": "US President (24 July 2026): announces a Section 301 investigation into EU enforcement against US technology companies; USTR statement of 23 July on risk to transatlantic trade sta",
+            "reviewed": "VoxEU/CEPR (secondary synthesis)"
+          }
+        },
+        "source_review_status": "reviewed_defer_primary_references_not_directly_linked",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied URL is the R14 CEPR/VoxEU synthesis, as the curator notes. It names Commission, Reuters and USTR references for the July enforcement/retaliation sequence but does not expose direct links for the key 23–24 July primary/current-event references. Under the exact-link-only rule the weak signal is deferred rather than reconstructed through search.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [],
+        "source_tier": "Tier 2",
+        "source_kind": "institutional",
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
+      },
+      {
+        "manual_id": "W19",
+        "title": "Hungary election removes a major EU veto player; institutional consequences remain context for the radar window",
+        "date": "2026-04-13",
+        "url": "https://www.atlanticcouncil.org/dispatches/hungary-just-voted-out-viktor-orban-heres-what-to-expect-in-europe-and-beyond/",
+        "section": "5.3 Against the Rules row",
+        "manual_record_status": "context_outside_primary_window",
+        "manual_candidate_kind": "weak_signal",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "curator_cells": [
+          "R-D",
+          "R-A"
+        ],
+        "curator_primary_cell": "R-D",
+        "curator_cell_mapping_status": "manual_hint_not_source_evidence",
+        "automated_status": "not_found",
+        "evidence_status": "verified_primary_source",
+        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "text_mode": "full_text",
+        "resolved_url": "https://www.atlanticcouncil.org/dispatches/hungary-just-voted-out-viktor-orban-heres-what-to-expect-in-europe-and-beyond/",
+        "review_resolved_url": "",
+        "gate": {
+          "a_pass": false,
+          "b_pass": false,
+          "eu_relevance": "direct",
+          "aboutness_reason": "no_ri",
+          "reason": "no_ri"
+        },
+        "decision": "retain_context_only",
+        "miss_reason": "context_only_not_scanner_recall_target",
+        "matched_title": "",
+        "reviewed_bibliographic_corrections": {
+          "title": {
+            "supplied": "Hungary: Tisza (Magyar) wins a two-thirds majority on 12 April 2026; Magyar elected Prime Minister 9 May 2026",
+            "reviewed": "Hungary election removes a major EU veto player; institutional consequences remain context for the radar window"
+          },
+          "date": {
+            "supplied": "2026-04-12",
+            "reviewed": "2026-04-13"
+          },
+          "authors": {
+            "supplied": "",
+            "reviewed": "Atlantic Council experts"
+          },
+          "source": {
+            "supplied": "Commission President von der Leyen (14 April) calls for qualified-majority voting in foreign policy to avoid systematic blockages; Council diplomats report little appetite for proc",
+            "reviewed": "Atlantic Council"
+          },
+          "manual_record_status": {
+            "supplied": "candidate",
+            "reviewed": "context_outside_primary_window"
+          }
+        },
+        "source_review_status": "reviewed_context_outside_primary_window",
+        "source_reviewed_at": "2026-08-25T12:35Z",
+        "source_review_basis": "The supplied Atlantic Council article is dated 13 April 2026, before the radar corpus start. It discusses the election result and expected effects on Hungarian veto behaviour, but the separately claimed 9 May government formation is not established by the supplied page. The item is therefore retained as context rather than admitted as an in-window weak signal.",
+        "review_url_bound_to_supplied_link": true,
+        "core_gate_verified": false,
+        "matrix_evidence_verified": false,
+        "matrix_review": {},
+        "direct_links_followed": [],
+        "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
       }
     ],
     "recovery_queue": [
@@ -4017,21 +4819,6 @@
         "url": "https://www.jonesday.com/en/insights/2026/06/eu-proposes-tech-sovereignty-package-with-major-implications-for-digital-markets",
         "date": "2026-06-09",
         "source": "Jones Day Insights.",
-        "tier": 3,
-        "source_kind": "institutional",
-        "date_precision": "day",
-        "manual_verification_required": false,
-        "manual_link_status": "supplied_unchecked",
-        "manual_candidate_kind": "substantive",
-        "reason": "source_not_observed_in_saved_direct_discovery_ledger",
-        "batch_id": "d0d2f582491cd37d"
-      },
-      {
-        "manual_id": "C11",
-        "title": "Europe on the way to technological sovereignty? The EU's Tech Sovereignty Package",
-        "url": "https://www.noerr.com/en/insights/europe-on-the-way-to-technological-sovereignty-the-eus-tech-sovereignty-package",
-        "date": "2026-06-11",
-        "source": "Noerr Insights.",
         "tier": 3,
         "source_kind": "institutional",
         "date_precision": "day",
@@ -4265,15 +5052,30 @@
         "manual_candidate_kind": "substantive",
         "reason": "not_observed_during_bounded_direct_source_rotation",
         "batch_id": "d847131bfe7e5256"
+      },
+      {
+        "manual_id": "R15",
+        "title": "Standardisation in the European Product Act: major challenges ahead",
+        "url": "https://data.consilium.europa.eu/doc/document/ST-8298-2026-INIT/en/pdf",
+        "date": "2026-05-01",
+        "source": "Council of the European Union",
+        "tier": 1,
+        "source_kind": "institutional",
+        "date_precision": "day",
+        "manual_verification_required": false,
+        "manual_link_status": "supplied_unchecked",
+        "manual_candidate_kind": "substantive",
+        "reason": "underlying_source_retrieval_failed_or_insufficient",
+        "batch_id": "f5c63cecbaa4-0a1b4eba"
       }
     ],
     "recall_diagnostics": {
-      "latest_batch_id": "d847131bfe7e-f9ba6538",
-      "high_quality_discovery_misses": 18,
-      "seen_but_not_admitted": 1,
+      "latest_batch_id": "f5c63cecbaa4-0a1b4eba",
+      "high_quality_discovery_misses": 5,
+      "seen_but_not_admitted": 0,
       "direct_source_sitemap_unavailable": 0,
       "bounded_rotation_not_observed": 0,
-      "source_not_observed": 1,
+      "source_not_observed": 0,
       "retrieval_insufficient": 1,
       "exact_url_recovery_queue": 27,
       "weak_signal_recovery_queue": 2
@@ -10303,6 +11105,139 @@
       "first_seen": "2026-08-23T21:32Z",
       "new_this_scan": false,
       "core_message": "engagement with the principles of the Barcelona Declaration provides a…"
+    },
+    {
+      "title": "European Biotech Act — Commission Staff Working Document C(2026) 3375 final (impact assessment)",
+      "authors": "European Commission",
+      "source": "European Commission",
+      "date": "2026-05-26",
+      "link": "https://health.ec.europa.eu/document/download/48009973-efbb-4101-ae8f-e81a34764e39_en?filename=biotechnology_C2026-3375-1_en.pdf",
+      "type": "manual-verified scholarly/policy source",
+      "strand": "A",
+      "eu_relevance": "direct",
+      "summary": "The EU’s world-class biotech science is not translating into development, market deployment and manufacturing at competitor scale; the Biotech Act pairs economic-security safeguards with investment and regulatory measures to close that conversion gap.",
+      "core_message": "The EU’s world-class biotech science is not translating into development, market deployment and manufacturing at competitor scale; the Biotech Act pairs economic-security safeguards with investment and regulatory measures to close that conv",
+      "relevance_note": "Direct EU relevance (reviewed underlying source establishes EU/European scope); R&I evidence: reviewed underlying source establishes substantive R&I mechanism; strategic evidence: reviewed underlying source establishes geopolitical/economic-security mechanism; bridge: reviewed_source.",
+      "source_tier": "Tier 1",
+      "new_this_scan": false,
+      "first_seen": "2026-08-25T13:00Z",
+      "provenance": [
+        "manual_candidate_ingestion"
+      ],
+      "discovery_provenance": "manual",
+      "manual_ingest_ids": [
+        "C11"
+      ],
+      "manual_ingested_at": "2026-08-25T13:00Z",
+      "evidence_status": "verified_primary_source",
+      "source_text_mode": "full_text",
+      "manual_supplied_url": "https://health.ec.europa.eu/document/download/48009973-efbb-4101-ae8f-e81a34764e39_en?filename=biotechnology_C2026-3375-1_en.pdf",
+      "review_resolved_url": "",
+      "source_review_status": "reviewed_pass_core_gate_primary_full_text",
+      "source_reviewed_at": "2026-08-25T12:35Z",
+      "source_review_basis": "The supplied Commission PDF was reviewed directly. It makes the R&I-geopolitical bridge explicit: the EU has a world-class biotechnology research base but trails competitors in translating research into development, deployment and manufacturing at scale; biotechnology is also treated as an economic-security technology with strategic-autonomy, technology-leakage and biosecurity implications.",
+      "matrix_dimension": "conversion",
+      "quadrant_implied": "C",
+      "matrix_quadrant": "C",
+      "matrix_classification_source": "reviewed_underlying_source",
+      "matrix_evidence_basis": "The empirical/problem-definition evidence is a conversion gap from strong EU research to weaker deployment, scale and financing versus competitors (C), while the proposed EIB-linked investment and strategic-project instruments are intended to create a home-scaling outcome (A).",
+      "curator_primary_cell": "C-A",
+      "curator_cells": [
+        "C-C",
+        "C-A",
+        "K-C"
+      ],
+      "curator_cell_agreement": "differs",
+      "quadrant_claimed": "A"
+    },
+    {
+      "title": "Europe’s ungoverned space: Military AI and the autonomy that cannot be bought",
+      "authors": "Marco Perugini",
+      "source": "VoxEU/CEPR",
+      "date": "2026-06-22",
+      "link": "https://cepr.org/voxeu/columns/europes-ungoverned-space-military-ai-and-autonomy-cannot-be-bought",
+      "type": "manual-verified scholarly/policy source",
+      "strand": "A",
+      "eu_relevance": "direct",
+      "summary": "European defence and intelligence users remain dependent on US-controlled AI and cloud infrastructure that can be withdrawn by unilateral US decision; the source estimates a 10–15 year capability gap before Europe can negotiate as a peer.",
+      "core_message": "European defence and intelligence users remain dependent on US-controlled AI and cloud infrastructure that can be withdrawn by unilateral US decision; the source estimates a 10–15 year capability gap before Europe can negotiate as a peer.",
+      "relevance_note": "Direct EU relevance (reviewed underlying source establishes EU/European scope); R&I evidence: reviewed underlying source establishes substantive R&I mechanism; strategic evidence: reviewed underlying source establishes geopolitical/economic-security mechanism; bridge: reviewed_source.",
+      "source_tier": "Tier 2",
+      "new_this_scan": false,
+      "first_seen": "2026-08-25T13:00Z",
+      "provenance": [
+        "manual_candidate_ingestion"
+      ],
+      "discovery_provenance": "manual",
+      "manual_ingest_ids": [
+        "C13"
+      ],
+      "manual_ingested_at": "2026-08-25T13:00Z",
+      "evidence_status": "verified_primary_source",
+      "source_text_mode": "full_text",
+      "manual_supplied_url": "https://cepr.org/voxeu/columns/europes-ungoverned-space-military-ai-and-autonomy-cannot-be-bought",
+      "review_resolved_url": "",
+      "source_review_status": "reviewed_pass_core_gate_primary_full_text",
+      "source_reviewed_at": "2026-08-25T12:35Z",
+      "source_review_basis": "The supplied CEPR/VoxEU column was reviewed directly. It explicitly links Europe’s defence AI capability gap to dependence on US-controlled frontier models and cloud infrastructure, unilateral US administrative authority, European industrial capacity and joint financing.",
+      "matrix_dimension": "infrastructure",
+      "quadrant_implied": "C",
+      "matrix_quadrant": "C",
+      "matrix_classification_source": "reviewed_underlying_source",
+      "matrix_evidence_basis": "The observed 2026 condition is rented frontier infrastructure: Europe accesses critical AI/cloud capability on terms ultimately controlled in the United States (I-C). The advocated long-run destination is European peer-level sovereign capability (A).",
+      "curator_primary_cell": "R-C",
+      "curator_cells": [
+        "C-D",
+        "R-C",
+        "I-C"
+      ],
+      "curator_cell_agreement": "differs",
+      "quadrant_claimed": "A"
+    },
+    {
+      "title": "Europe's regulatory double bind",
+      "authors": "Marco Perugini",
+      "source": "VoxEU/CEPR",
+      "date": "2026-08-14",
+      "link": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+      "type": "manual-verified scholarly/policy source",
+      "strand": "A",
+      "eu_relevance": "direct",
+      "summary": "Europe faces a regulatory double bind: delayed AI implementation and missing assessment capacity push operative rule-making outward, while enforcement against US technology firms can trigger trade retaliation.",
+      "core_message": "Europe faces a regulatory double bind: delayed AI implementation and missing assessment capacity push operative rule-making outward, while enforcement against US technology firms can trigger trade retaliation.",
+      "relevance_note": "Direct EU relevance (reviewed underlying source establishes EU/European scope); R&I evidence: reviewed underlying source establishes substantive R&I mechanism; strategic evidence: reviewed underlying source establishes geopolitical/economic-security mechanism; bridge: reviewed_source.",
+      "source_tier": "Tier 2",
+      "new_this_scan": false,
+      "first_seen": "2026-08-25T13:00Z",
+      "provenance": [
+        "manual_candidate_ingestion"
+      ],
+      "discovery_provenance": "manual",
+      "manual_ingest_ids": [
+        "R14",
+        "W18"
+      ],
+      "manual_ingested_at": "2026-08-25T13:00Z",
+      "evidence_status": "verified_primary_source",
+      "source_text_mode": "full_text",
+      "manual_supplied_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+      "review_resolved_url": "",
+      "source_review_status": "reviewed_pass_core_gate_primary_full_text",
+      "source_reviewed_at": "2026-08-25T12:35Z",
+      "source_review_basis": "The supplied CEPR/VoxEU column was reviewed directly. It links delayed AI Act implementation, missing standards/assessment capacity, dependence on foreign testing methodologies and US trade retaliation against EU digital enforcement to Europe’s ability to exercise regulatory sovereignty over frontier technology.",
+      "matrix_dimension": "rules",
+      "quadrant_implied": "D",
+      "matrix_quadrant": "D",
+      "matrix_classification_source": "reviewed_underlying_source",
+      "matrix_evidence_basis": "The immediate mechanism is implementation delay and institutional inability to operationalise adopted rules (R-D), while the source’s explicit sovereignty claim is that operative authority migrates to external methodologies and actors (R-C).",
+      "curator_primary_cell": "R-D",
+      "curator_cells": [
+        "R-C",
+        "R-D",
+        "R-A"
+      ],
+      "curator_cell_agreement": "agrees",
+      "quadrant_claimed": "C"
     }
   ],
   "strand_b": [
@@ -10935,6 +11870,96 @@
         "K-D"
       ],
       "curator_cell_agreement": "agrees"
+    },
+    {
+      "headline": "AI researcher with a prior European Space Agency placement arrested at NATO’s SHAPE on suspicion of espionage",
+      "source": "Follow the Money / Belgian Federal Prosecutor",
+      "date": "2026-07-25",
+      "link": "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf",
+      "language": "en",
+      "anchor": "The new frontier of research competition: perspectives on national AI4S strategies (Strand A)",
+      "anchor_basis": "publication",
+      "watch_theme": "EU–China S&T cooperation / de-risking",
+      "signal_type": "contradicts",
+      "signal_kind": "restriction / security",
+      "what": "A suspected-espionage case at NATO’s SHAPE involved an AI researcher with prior European Space Agency (ESA) research-centre experience, highlighting temporary research and technical access as a security-screening channel beyond nationality ",
+      "why_it_matters": "This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
+      "signal_note": "A suspected-espionage case at NATO’s SHAPE involved an AI researcher with prior European Space Agency (ESA) research-centre experience, highlighting temporary research and technical access as a security-screening channel beyond nationality alone.. This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
+      "first_seen": "2026-08-25T13:00Z",
+      "new_this_scan": false,
+      "core_message": "A suspected-espionage case at NATO’s SHAPE involved an AI researcher with prior European Space Agency (ESA) research-centre experience, highlighting temporary research and technical access as a security-screening channel beyond nationality ",
+      "provenance": [
+        "manual_candidate_ingestion"
+      ],
+      "discovery_provenance": "manual",
+      "manual_ingest_ids": [
+        "W16"
+      ],
+      "manual_ingested_at": "2026-08-25T13:00Z",
+      "evidence_status": "verified_primary_source",
+      "source_text_mode": "partial_text",
+      "manual_supplied_url": "https://www.ftm.eu/articles/intern-spy-nato-china-canada-revealed",
+      "review_resolved_url": "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf",
+      "source_review_status": "reviewed_pass_core_gate_direct_primary_corroboration",
+      "source_reviewed_at": "2026-08-25T12:35Z",
+      "source_review_basis": "The supplied Follow the Money article directly links to the Belgian Federal Prosecutor release. The official release verifies the arrest of a Canadian national of Chinese origin who was interning at SHAPE on suspicion of espionage for a third country; the supplied article independently reports that the suspect is an AI researcher who previously worked at ESA’s research centre and other international organisations.",
+      "matrix_dimension": "knowledge",
+      "quadrant_implied": "B",
+      "matrix_quadrant": "B",
+      "matrix_classification_source": "reviewed_underlying_source",
+      "matrix_evidence_basis": "The event is evidence of the security pressure behind restrictions and screening around European research/talent access, matching the Knowledge-row closed-lab mechanism (K-B).",
+      "curator_primary_cell": "K-B",
+      "curator_cells": [
+        "K-B",
+        "R-B"
+      ],
+      "curator_cell_agreement": "agrees",
+      "quadrant_claimed": "B"
+    },
+    {
+      "headline": "Helsing and Quantum Systems raise $1.8bn and $1.2bn mega-rounds to scale European defence AI and autonomous systems",
+      "source": "Defense News / Helsing / Quantum Systems",
+      "date": "2026-07-13",
+      "link": "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
+      "language": "en",
+      "anchor": "Europe's regulatory double bind (Strand A)",
+      "anchor_basis": "publication",
+      "watch_theme": "critical and emerging technologies",
+      "signal_type": "accelerates",
+      "signal_kind": "investment / capacity",
+      "what": "Helsing and Quantum Systems raised $1.8bn and $1.2bn to scale European defence AI/autonomy, showing that late-stage capital can reach European firms in this sector even when a substantial share of the capital is global.",
+      "why_it_matters": "This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
+      "signal_note": "Helsing and Quantum Systems raised $1.8bn and $1.2bn to scale European defence AI/autonomy, showing that late-stage capital can reach European firms in this sector even when a substantial share of the capital is global.. This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
+      "first_seen": "2026-08-25T13:00Z",
+      "new_this_scan": false,
+      "core_message": "Helsing and Quantum Systems raised $1.8bn and $1.2bn to scale European defence AI/autonomy, showing that late-stage capital can reach European firms in this sector even when a substantial share of the capital is global.",
+      "provenance": [
+        "manual_candidate_ingestion"
+      ],
+      "discovery_provenance": "manual",
+      "manual_ingest_ids": [
+        "W17"
+      ],
+      "manual_ingested_at": "2026-08-25T13:00Z",
+      "evidence_status": "verified_primary_source",
+      "source_text_mode": "partial_text",
+      "manual_supplied_url": "https://www.defensenews.com/global/europe/2026/07/13/helsing-raises-18-billion-in-europes-biggest-defense-startup-round/",
+      "review_resolved_url": "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
+      "source_review_status": "reviewed_pass_core_gate_direct_primary_corroboration",
+      "source_reviewed_at": "2026-08-25T12:35Z",
+      "source_review_basis": "The supplied Defense News page directly links to primary company releases from Helsing and Quantum Systems. Those releases verify $1.8bn and $1.2bn financing rounds, European defence-AI/autonomy scale-up and, for Helsing, continued predominantly European ownership. The manual record’s separate Stark claim is not needed for admission and is not used as reviewed evidence here.",
+      "matrix_dimension": "conversion",
+      "quadrant_implied": "A",
+      "matrix_quadrant": "A",
+      "matrix_classification_source": "reviewed_underlying_source",
+      "matrix_evidence_basis": "The observed firms remain European and are using mega-rounds to scale production and capability, which fits Home champion (C-A); the curator’s C-C concern about foreign capital remains preserved as a competing interpretation but is not an observed foreign exit.",
+      "curator_primary_cell": "C-C",
+      "curator_cells": [
+        "C-A",
+        "C-C"
+      ],
+      "curator_cell_agreement": "differs",
+      "quadrant_claimed": "A"
     }
   ],
   "frontier_evidence": [

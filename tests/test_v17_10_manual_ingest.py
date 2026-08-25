@@ -130,6 +130,71 @@ def test_verified_abstract_runs_same_gate_and_can_be_admitted(tmp_path):
     assert not item['new_this_scan']
 
 
+def test_direct_retrieval_labels_short_article_body_as_partial_text(tmp_path):
+    st = base_state()
+    title = 'European semiconductor research and strategic technology security'
+    body = ' '.join(['European Union semiconductor research and innovation capacity faces geopolitical technology-security dependencies and strategic competition.'] * 10)
+    url = 'https://example.org/partial'
+    p = write_json_list(tmp_path, [{'id': 'M1', 'title': title, 'url': url, 'date': '2026-06-01'}])
+    rows = mi.parse_manual_file(p)
+    result = mi.retrieve_source(rows[0], session=FakeSession(FakeResponse(url, f'<html><head><title>{title}</title></head><body><article>{body}</article></body></html>')))
+    assert result['text_mode'] == 'partial_text'
+
+
+def test_explicit_reviewed_core_gate_failure_overrides_lexical_false_positive(tmp_path):
+    st = base_state()
+    title = 'European AI innovation under geopolitical competition'
+    url = 'https://example.org/reviewed-fail'
+    p = write_json_list(tmp_path, [{'id': 'M1', 'title': title, 'url': url, 'date': '2026-07-01'}])
+    rows = mi.parse_manual_file(p)
+    review = {'M1': {
+        'review_source_url': url,
+        'source_verified': True,
+        'primary_source': True,
+        'published': '2026-07-01',
+        'review_status': 'reviewed_fail_core_gate',
+        'core_gate_verified': False,
+        'text_mode': 'abstract_only',
+        'evidence_text': (
+            'The European Union study examines artificial intelligence adoption and innovation in firms. '
+            'It repeatedly uses the vocabulary of geopolitical competition and economic security, but source review '
+            'establishes that those phrases are framing only and no substantive strategic mechanism is analysed.'
+        ),
+        'review_basis': 'Underlying source review found the geopolitical language incidental rather than substantive.',
+    }}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['manual_admitted'] == 0
+    assert summary['counts']['rejected_core_gate'] == 1
+    rec = out['manual_ingest']['records'][0]
+    assert rec['gate']['aboutness_reason'] == 'reviewed_underlying_source_failed_substantive_gate'
+    assert rec['decision'] == 'rejected_core_gate'
+    assert out['manual_ingest']['recovery_queue'] == []
+
+
+def test_same_batch_manual_duplicate_does_not_become_false_automated_hit(tmp_path):
+    st = base_state()
+    url = 'https://example.org/same-source'
+    p = write_json_list(tmp_path, [
+        {'id': 'R1', 'title': 'European AI rules and strategic autonomy', 'url': url, 'date': '2026-07-01'},
+        {'id': 'W1', 'title': 'Retaliation signal linked to the same source', 'url': url, 'date': '2026-07-02', 'kind': 'weak_signal'},
+    ])
+    rows = mi.parse_manual_file(p)
+    review = {'R1': {
+        'review_source_url': url, 'source_verified': True, 'primary_source': True,
+        'published': '2026-07-01', 'review_status': 'reviewed_pass_core_gate',
+        'core_gate_verified': True, 'text_mode': 'abstract_only',
+        'evidence_text': ('European Union AI regulation is analysed as a geopolitical technology-policy instrument that ' 
+                          'affects strategic autonomy, external dependence and innovation capacity.'),
+    }}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['counts']['found_in_corpus'] == 0
+    assert summary['counts']['not_found'] == 2
+    assert summary['counts']['duplicate_in_batch'] == 1
+    recs = {r['manual_id']: r for r in out['manual_ingest']['records']}
+    assert recs['W1']['automated_status'] == 'not_found'
+    assert recs['W1']['decision'] == 'matched_manual_batch_no_duplicate'
+
+
 def test_secondary_and_forthcoming_never_auto_admit(tmp_path):
     st = base_state()
     rows_data = [
@@ -253,6 +318,34 @@ def test_frontier_numbered_docx_parser_preserves_candidates_weak_signals_and_cur
     assert rows[1]['curator_primary_cell'] == 'I-B'
     assert rows[1]['curator_cell_mapping_status'] == 'manual_hint_not_source_evidence'
     assert rows[2]['manual_candidate_kind'] == 'weak_signal'
+
+
+def test_frontier_parser_uses_later_explicit_primary_cell_and_does_not_leak_subsection_headings(tmp_path):
+    p = tmp_path / 'frontier_additions_iii.docx'
+    doc = Document()
+    doc.add_paragraph('2. Infrastructure & inputs')
+    doc.add_paragraph('I13 Bellais, R.; Fiott, D. (3 June 2026). Security of Supply and Interdependency: A New Approach to Strategic Autonomy and Indispensability. IRIS.')
+    doc.add_paragraph('https://example.org/i13')
+    doc.add_paragraph('Type 3. Cells: I-A, C-B (primary); I-C. Flagged: cited secondhand; locate the IRIS paper.')
+    doc.add_paragraph('5. Weak signals')
+    doc.add_paragraph('5.1 Against the Knowledge row')
+    doc.add_paragraph('W16 Example News (25 July 2026). Research-security case involving an AI researcher. Example News.')
+    doc.add_paragraph('https://example.org/w16')
+    doc.add_paragraph('Type 5. Cells: K-B; R-B. Disturbs a knowledge-row assumption.')
+    doc.add_paragraph('5.2 Against the Conversion row')
+    doc.add_paragraph('W17 Example News (13 July 2026). European defence-tech financing signal. Example News.')
+    doc.add_paragraph('https://example.org/w17')
+    doc.add_paragraph('Type 5. Cells: C-A, C-C (primary). Disturbs the late-stage-gap diagnosis.')
+    doc.save(p)
+
+    rows = mi.parse_manual_file(p)
+    assert [r['manual_id'] for r in rows] == ['I13', 'W16', 'W17']
+    assert rows[0]['curator_primary_cell'] == 'C-B'
+    assert rows[0]['manual_secondary_hint'] is True
+    assert rows[0]['manual_verification_required'] is True
+    assert rows[1]['manual_candidate_kind'] == 'weak_signal'
+    assert '5.2 Against the Conversion row' not in rows[1]['curator_note']
+    assert rows[2]['curator_primary_cell'] == 'C-C'
 
 
 def test_user_validated_links_are_recorded_but_do_not_bypass_evidence_or_date_verification(tmp_path):
@@ -398,6 +491,32 @@ def test_reviewed_primary_resolution_can_replace_secondary_url_and_date(tmp_path
     rec = next(r for r in out['manual_ingest']['records'] if r['manual_id'] == 'C6')
     assert rec['review_url_bound_to_supplied_link'] is True
 
+
+
+def test_diagnostic_record_preserves_resolved_primary_and_direct_link_chain(tmp_path):
+    st = base_state()
+    supplied = 'https://example.org/secondary-start'
+    primary = 'https://official.example.eu/primary.pdf'
+    pth = write_json_list(tmp_path, [{
+        'id': 'M1', 'title': 'European research security and strategic technology',
+        'url': supplied, 'date': '2026-07-01',
+    }])
+    rows = mi.parse_manual_file(pth)
+    review = {'M1': {
+        'review_source_url': supplied, 'source_verified': True, 'primary_source': True,
+        'resolved_primary': True, 'resolved_url': primary,
+        'direct_links_followed': [primary], 'published': '2026-07-01',
+        'review_status': 'reviewed_pass_core_gate', 'core_gate_verified': True,
+        'text_mode': 'abstract_only',
+        'evidence_text': ('European Union research security policy links strategic technology collaboration, '
+                          'innovation capacity and geopolitical dependence on external partners.'),
+    }}
+    out, _ = mi.apply_manual_ingest(st, rows, source_path=pth, fetch=False, review_evidence=review)
+    rec = out['manual_ingest']['records'][0]
+    assert rec['url'] == supplied
+    assert rec['resolved_url'] == supplied
+    assert rec['review_resolved_url'] == primary
+    assert rec['direct_links_followed'] == [primary]
 
 def test_review_pack_new_hash_reprocesses_same_manual_file_without_refresh(tmp_path):
     st = base_state()

@@ -42,15 +42,17 @@ if str(ROOT) not in sys.path:
 
 from scripts import scan_radar as sr
 
-PROFILE_VERSION = "v17.11.0-reviewed-manual-evidence"
+PROFILE_VERSION = "v17.11.1-reviewed-manual-evidence"
 SUPPORTED = {".docx", ".pdf", ".csv", ".json", ".yaml", ".yml", ".txt", ".md"}
 URL_RE = re.compile(r"https?://[^\s<>()\[\]{}]+", re.I)
 ITEM_RE = re.compile(r"^([A-Za-z]{1,3}\d{1,3})\s+(.*)$")
 CURRENT_SECTION_RE = re.compile(r"^[A-Z]\.\s+")
 NUMBERED_SECTION_RE = re.compile(r"^\d+\.\s+")
+NUMBERED_SUBSECTION_RE = re.compile(r"^\d+\.\d+\s+")
 SECONDARY_HINTS = (
     "as reported by", "secondary source", "cited via secondary", "exact title to be confirmed",
-    "reported).", "reported by science|business",
+    "reported).", "reported by science|business", "cited secondhand", "reporting source",
+    "collates the primary references",
 )
 VERIFICATION_HINTS = (
     "publication date within the window not yet confirmed",
@@ -65,6 +67,9 @@ VERIFICATION_HINTS = (
     "link is to the starting grants page",
     "confirm against the published erc work programme",
     "exact title to be confirmed",
+    "cite the cern council resolution directly",
+    "locate the iris paper",
+    "cite reuters and the commission release directly",
 )
 OUTSIDE_WINDOW_HINTS = (
     "outside the strict window",
@@ -229,7 +234,13 @@ def _record_from_parts(*, rid: str, citation: str, url: str = "", note: str = ""
         if cell not in cells:
             cells.append(cell)
     primary_cell = ""
-    m = re.search(r"Cells?:\s*([KICR]-[ABCD])(?:\s*\(primary\))?", f"{citation} {note}", re.I)
+    cell_text = f"{citation} {note}"
+    # Curators may list several cells and mark a later one as primary, e.g.
+    # "Cells: I-A, C-B (primary); I-C".  Prefer that explicit marker and only
+    # fall back to the first listed cell when no marker is supplied.
+    m = re.search(r"\b([KICR]-[ABCD])\s*\(primary\)", cell_text, re.I)
+    if not m:
+        m = re.search(r"Cells?:\s*([KICR]-[ABCD])", cell_text, re.I)
     if m:
         primary_cell = m.group(1).upper()
     return {
@@ -274,6 +285,14 @@ def _parse_paragraph_records(paragraphs: Iterable[str], source_file: str) -> lis
             continue
         if CURRENT_SECTION_RE.match(p):
             flush(); section = p; mode = "current"; continue
+        if NUMBERED_SUBSECTION_RE.match(p):
+            flush(); section = p
+            low = _norm(p)
+            if p.startswith("5.") or "weak signal" in low:
+                mode = "weak_signal"
+            elif any(x in low for x in FRONTIER_CURRENT_SECTIONS):
+                mode = "current"
+            continue
         if NUMBERED_SECTION_RE.match(p):
             flush(); section = p
             low = _norm(p)
@@ -566,6 +585,8 @@ def retrieve_source(record: dict[str, Any], *, timeout: int = 18, session: reque
         evidence_status = "uncertain_record"
     if words >= 650:
         text_mode = "full_text"
+    elif words >= 80:
+        text_mode = "partial_text"
     elif len(abstract.split()) >= 35:
         text_mode = "abstract_only"
     else:
@@ -673,6 +694,31 @@ def _apply_review_core_gate(ev: dict[str, Any], review: dict[str, Any], retrieva
     return out
 
 
+def _review_core_gate_failed(record: dict[str, Any], review: dict[str, Any] | None) -> bool:
+    """Recognise an explicit source-based A-gate rejection bound to the supplied URL."""
+    if not _review_url_matches(record, review) or not review:
+        return False
+    return review.get("core_gate_verified") is False and clean(review.get("review_status")).startswith("reviewed_fail_core_gate")
+
+
+def _apply_review_core_gate_fail(ev: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]:
+    """Prevent a lexical false positive from overriding reviewed underlying-source evidence."""
+    out = deepcopy(ev)
+    out["scanner_a_pass"] = bool(ev.get("a_pass"))
+    out["scanner_aboutness_reason"] = clean(ev.get("aboutness_reason"))
+    out.update({
+        "a_pass": False,
+        "a_focus_pass": False,
+        "aboutness_pass": False,
+        "aboutness_reason": "reviewed_underlying_source_failed_substantive_gate",
+        "a_route": "",
+        "bridge_supported": False,
+        "bridge_mode": "",
+        "reviewed_gate_basis": clean(review.get("review_basis") or review.get("evidence_text"))[:420],
+    })
+    return out
+
+
 def _record_with_review(record: dict[str, Any], review: dict[str, Any] | None) -> dict[str, Any]:
     """Apply verified bibliographic corrections without erasing curator provenance."""
     out = deepcopy(record)
@@ -719,10 +765,10 @@ def _retrieval_from_review(record: dict[str, Any], review: dict[str, Any] | None
     else:
         evidence_status = "uncertain_record"
     text_mode = clean(review.get("text_mode"))
-    if text_mode not in {"full_text", "abstract_only", "metadata_only"}:
-        text_mode = "full_text" if len(body.split()) >= 650 else ("abstract_only" if len(abstract.split()) >= 35 or len(body.split()) >= 80 else "metadata_only")
+    if text_mode not in {"full_text", "partial_text", "abstract_only", "metadata_only"}:
+        text_mode = "full_text" if len(body.split()) >= 650 else ("partial_text" if len(body.split()) >= 80 else ("abstract_only" if len(abstract.split()) >= 35 else "metadata_only"))
     return {
-        "retrieval_status": "reviewed_exact_supplied_url_cache",
+        "retrieval_status": clean(review.get("retrieval_status")) or "reviewed_exact_supplied_url_cache",
         "evidence_status": evidence_status,
         "text_mode": text_mode,
         "title": clean(review.get("title") or record.get("title")),
@@ -1011,6 +1057,11 @@ def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_
         "evidence_status": retrieval.get("evidence_status"),
         "retrieval_status": retrieval.get("retrieval_status"),
         "text_mode": retrieval.get("text_mode"),
+        # Keep both the curator-supplied URL and any primary/full-text URL reached
+        # through the permitted exact-link chain.  The supplied URL stays in ``url``;
+        # a resolved primary is additional provenance, never a silent replacement.
+        "resolved_url": clean(retrieval.get("resolved_url")),
+        "review_resolved_url": clean(retrieval.get("review_resolved_url")),
         "gate": {
             "a_pass": bool(ev.get("a_pass")), "b_pass": bool(ev.get("b_pass")),
             "eu_relevance": ev.get("eu_relevance"), "aboutness_reason": ev.get("aboutness_reason"),
@@ -1038,6 +1089,7 @@ def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_
             "core_gate_verified": bool(review.get("core_gate_verified")) and _review_url_matches(original_record or record, review),
             "matrix_evidence_verified": bool(review.get("matrix_evidence_verified")) and _review_url_matches(original_record or record, review),
             "matrix_review": _matrix_fields_from_review(original_record or record, review),
+            "direct_links_followed": list(review.get("direct_links_followed") or []),
         })
     return out
 
@@ -1071,14 +1123,19 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
         summary = next((b for b in batches if isinstance(b, dict) and b.get("sha256") == sha and clean(b.get("review_evidence_sha256")) == review_sha), {})
         return out, {**summary, "idempotent_reuse": True}
 
+    # Freeze the pre-ingest state for discovery diagnostics.  ``out`` is mutated as
+    # records are admitted, so comparing later records against ``out`` would falsely
+    # report same-batch manual duplicates as if automation had already discovered them.
+    comparison_state = deepcopy(out)
     diagnostics: list[dict[str, Any]] = []
     recovery_queue: list[dict[str, Any]] = []
     weak_signal_recovery_queue: list[dict[str, Any]] = []
     counts = {
         "candidates": len(records), "found_in_corpus": 0, "scanner_seen_url_not_admitted": 0,
-        "not_found": 0, "manual_admitted": 0, "deferred": 0, "forthcoming": 0,
-        "secondary_reference": 0, "context_only": 0, "weak_signal_candidates": 0,
-        "manual_signals_admitted": 0, "verification_required": 0,
+        "not_found": 0, "duplicate_in_batch": 0, "manual_admitted": 0, "deferred": 0,
+        "rejected_core_gate": 0, "forthcoming": 0, "secondary_reference": 0,
+        "context_only": 0, "weak_signal_candidates": 0, "manual_signals_admitted": 0,
+        "verification_required": 0,
     }
     reviewed_resolved_ids: set[str] = set()
     for original_rec in records:
@@ -1088,27 +1145,37 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
             counts["weak_signal_candidates"] += 1
         if rec.get("manual_verification_required"):
             counts["verification_required"] += 1
+        prior_strand_key, prior_matched, _prior_score = match_existing(rec, comparison_state)
         strand_key, matched, score = match_existing(rec, out)
-        seen = _seen_automatically(rec, out)
-        if matched:
+        seen = _seen_automatically(rec, comparison_state)
+        if prior_matched:
             automated_status = "found_in_corpus"; counts["found_in_corpus"] += 1
-            _provenance_value(matched, rec.get("manual_id", ""))
         elif seen:
             automated_status = "scanner_seen_url_not_admitted"; counts["scanner_seen_url_not_admitted"] += 1
         else:
             automated_status = "not_found"; counts["not_found"] += 1
+        if matched:
+            _provenance_value(matched, rec.get("manual_id", ""))
+            if not prior_matched:
+                counts["duplicate_in_batch"] += 1
 
         status = rec.get("manual_record_status")
         if status == "forthcoming_unpublished":
             counts["forthcoming"] += 1
-            retrieval = {"retrieval_status": "not_attempted_forthcoming", "evidence_status": "forthcoming_unpublished", "text_mode": "metadata_only", "abstract": "", "body": ""}
-            ev = sr.gate_scope(rec.get("title", ""), "", "", _source_profile(rec)[1], source_kind=_source_profile(rec)[3])
+            # A review pack may verify the bibliographic/source page, but the record remains
+            # forthcoming and cannot become published evidence merely because text exists.
+            reviewed = _retrieval_from_review(rec, review) if review else None
+            retrieval = reviewed or {"retrieval_status": "not_attempted_forthcoming", "evidence_status": "forthcoming_unpublished", "text_mode": "metadata_only", "abstract": "", "body": ""}
+            retrieval["evidence_status"] = "forthcoming_unpublished"
+            ev = sr.gate_scope(rec.get("title", ""), clean(retrieval.get("abstract")), clean(retrieval.get("body")), _source_profile(rec)[1], source_kind=_source_profile(rec)[3])
             diagnostics.append(_diagnostic_record(rec, out, automated_status, retrieval, ev, "defer_forthcoming", matched, links_validated=links_validated, review=review, original_record=original_rec))
             continue
         if status == "context_outside_primary_window":
             counts["context_only"] += 1
-            retrieval = {"retrieval_status": "not_attempted_context", "evidence_status": "context_reference", "text_mode": "metadata_only", "abstract": "", "body": ""}
-            ev = sr.gate_scope(rec.get("title", ""), "", "", _source_profile(rec)[1], source_kind=_source_profile(rec)[3])
+            # Preserve reviewed text/provenance for context items while keeping them outside
+            # the primary radar corpus and matrix.
+            retrieval = (_retrieval_from_review(rec, review) if review else None) or {"retrieval_status": "not_attempted_context", "evidence_status": "context_reference", "text_mode": "metadata_only", "abstract": "", "body": ""}
+            ev = sr.gate_scope(rec.get("title", ""), clean(retrieval.get("abstract")), clean(retrieval.get("body")), _source_profile(rec)[1], source_kind=_source_profile(rec)[3])
             diagnostics.append(_diagnostic_record(rec, out, automated_status, retrieval, ev, "retain_context_only", matched, links_validated=links_validated, review=review, original_record=original_rec))
             continue
 
@@ -1130,11 +1197,13 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
         # manual citation text is new evidence.  Reuse its admitted status only for comparison.
         if matched:
             ev = {"a_pass": strand_key in {"strand_a", "frontier_evidence"}, "b_pass": strand_key == "strand_b", "eu_relevance": matched.get("eu_relevance"), "aboutness_reason": "existing_corpus", "text_mode": "existing_corpus", "ri_evidence": [], "geo_evidence": []}
-            decision = "matched_existing_no_duplicate"
+            decision = "matched_existing_no_duplicate" if prior_matched else "matched_manual_batch_no_duplicate"
         else:
             ev = sr.gate_scope(rec.get("title", ""), abstract, body, tier, source_kind=source_kind)
             if _review_core_gate_verified(rec, review, retrieval):
                 ev = _apply_review_core_gate(ev, review, retrieval)
+            elif _review_core_gate_failed(rec, review):
+                ev = _apply_review_core_gate_fail(ev, review)
             publication_date = _effective_publication_date(rec, retrieval)
             verified = retrieval.get("evidence_status") == "verified_primary_source" and bool(publication_date)
             event_verified = retrieval.get("evidence_status") in {"verified_primary_source", "verified_corroborated_current_event"} and bool(publication_date)
@@ -1162,6 +1231,11 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
                         counts["manual_admitted"] += 1
                         reviewed_resolved_ids.add(clean(rec.get("manual_id")))
                 decision = "admitted_verified_manual_source"
+            elif _review_core_gate_failed(rec, review) and verified:
+                # A verified underlying source that fails the substantive EU-R&I/geopolitics
+                # gate is a real rejection, not a retrieval defer and not a recovery item.
+                counts["rejected_core_gate"] += 1
+                decision = "rejected_core_gate"
             else:
                 counts["deferred"] += 1
 
@@ -1179,7 +1253,8 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
         # Exact-URL recovery is deliberately narrow. It improves recall without lowering
         # the substantive gate or adding whole low-precision domains.
         if (
-            not matched and rec.get("url") and not _is_generic_homepage(rec.get("url")) and rec.get("manual_record_status") == "candidate"
+            not matched and decision.startswith("defer") and rec.get("url")
+            and not _is_generic_homepage(rec.get("url")) and rec.get("manual_record_status") == "candidate"
             and retrieval.get("evidence_status") not in {"secondary_reference", "forthcoming_unpublished"}
         ):
             queued = {

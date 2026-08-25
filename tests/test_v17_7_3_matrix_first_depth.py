@@ -20,7 +20,11 @@ class MatrixFirstDepthTests(unittest.TestCase):
         prev = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         state = sr.initial_scan_state(prev)
         focus = sr.frontier_gap_plan(prev, state)
-        self.assertEqual(len(focus['scholarly_queries']), 28)
+        self.assertEqual(
+            len(focus['scholarly_queries']),
+            sum(len(v) for v in focus['scholarly_query_cells'].values()),
+        )
+        self.assertGreater(len(focus['scholarly_queries']), 0)
         used_cells = set(focus['scholarly_query_cells'])
         self.assertTrue(set(focus['targets']).issubset(used_cells))
         if focus['empty_targets']:

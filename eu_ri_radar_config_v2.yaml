@@ -571,6 +571,7 @@ sources:
       - publications.jrc.ec.europa.eu
       - op.europa.eu
       - research-and-innovation.ec.europa.eu
+      - health.ec.europa.eu
       - european-research-area.ec.europa.eu
       - europarl.europa.eu
       - consilium.europa.eu
@@ -640,6 +641,7 @@ sources:
       - theinformation.com
       - techcrunch.com
       - sifted.eu
+      - defensenews.com
       - montelnews.com
       - energymonitor.ai
   methods_venues:
@@ -659,7 +661,7 @@ sources:
       - "Resources Policy"
 
 source_tiers:
-  1: [publications.jrc.ec.europa.eu, op.europa.eu, europarl.europa.eu, consilium.europa.eu, oecd.org, nature.com, science.org, ft.com, reuters.com, bloomberg.com]
+  1: [publications.jrc.ec.europa.eu, op.europa.eu, europarl.europa.eu, consilium.europa.eu, health.ec.europa.eu, oecd.org, nature.com, science.org, ft.com, reuters.com, bloomberg.com]
   2: [sciencebusiness.net, researchprofessionalnews.com, politico.eu, euractiv.com, economist.com, bruegel.org, cepr.org, ceps.eu, merics.org, cset.georgetown.edu, swp-berlin.org, iss.europa.eu]
   3: [remaining whitelisted]
 
@@ -925,7 +927,7 @@ calibration_notes:
 
 # V17.10 curated candidate / recall-recovery lane
 manual_candidate_ingest:
-  profile_version: v17.11.0-reviewed-manual-evidence
+  profile_version: v17.11.1-reviewed-manual-evidence
   principle: "Manual lists are candidates/recovery hints, never verified evidence by themselves."
   accepted_formats: [docx, pdf, csv, json, yaml, yml, txt, md]
   preserve_scan_timestamp: true

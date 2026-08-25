@@ -101,17 +101,22 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 class ExpansionOnlyStateTests(unittest.TestCase):
     def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(data.get('strand_a', [])), 138)
+        self.assertEqual(len(data.get('strand_a', [])), 141)
         self.assertEqual(len(data.get('strand_b', [])), 23)
-        self.assertEqual(len(data.get('strand_c', [])), 12)
+        self.assertEqual(len(data.get('strand_c', [])), 14)
         self.assertEqual(len(data.get('frontier_evidence', [])), 32)
-        self.assertEqual(data.get('last_updated'), '2026-08-25T07:34Z')
-        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 59)
-        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 288)
-        self.assertEqual(data.get('manual_ingest_profile_version'), 'v17.11.0-reviewed-manual-evidence')
+        # Manual review must not advance scanner timestamps/cursors. These values come
+        # from the supplied 25 August state and remain unchanged by Additions III.
+        self.assertEqual(data.get('last_updated'), '2026-08-25T10:58Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 61)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 320)
+        self.assertEqual(data.get('manual_ingest_profile_version'), 'v17.11.1-reviewed-manual-evidence')
         latest = data.get('manual_ingest', {}).get('batches', [])[-1]
-        self.assertEqual(latest.get('counts', {}).get('manual_admitted'), 17)
+        self.assertEqual(latest.get('source_file'), 'EU_RI_Additions_III_May-Aug_2026.docx')
+        self.assertEqual(latest.get('counts', {}).get('manual_admitted'), 3)
         self.assertEqual(latest.get('counts', {}).get('manual_signals_admitted'), 2)
+        self.assertEqual(latest.get('counts', {}).get('rejected_core_gate'), 1)
+        self.assertEqual(latest.get('counts', {}).get('duplicate_in_batch'), 1)
 
     def test_current_state_needs_no_signal_or_quality_backfill(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
@@ -122,6 +127,17 @@ class ExpansionOnlyStateTests(unittest.TestCase):
         self.assertFalse(sr.needs_signal_backfill(data))
         self.assertFalse(sr.needs_precision_corpus_cleanup(data))
         self.assertFalse(sr.needs_precision_signal_cleanup(data))
+
+    def test_additions_iii_recall_sources_are_targeted_and_bounded(self):
+        cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
+        institutional = {x['domain'] for x in cfg['institution_sources']}
+        news = {x['domain'] for x in cfg['news_sources']}
+        # Additions III exposed two high-value institutional coverage gaps and one
+        # specialist defence-tech news gap. Add only those bounded sources rather
+        # than lowering the substantive admission gate.
+        self.assertIn('health.ec.europa.eu', institutional)
+        self.assertIn('cepr.org', institutional)
+        self.assertIn('defensenews.com', news)
 
     def test_scan_banks_are_wider_but_bounded(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))

@@ -1,81 +1,76 @@
-# Manual ingest and recall report — V17.11.0
+# Manual ingest and recall report — V17.11.1
 
 ## State integrity
 
-- Authoritative starting state: supplied `radar (21).json`.
-- Preserved live-scan timestamp: **2026-08-25T07:34Z**.
-- No live scan is claimed by either manual-ingest batch.
-- Current corpus after reviewed manual admission: **138 Strand A**, **23 Strand B**, **12 weak signals**.
+- Authoritative starting state: supplied `radar (22).json`.
+- Preserved live-scan timestamp: **2026-08-25T10:58Z**.
+- No live scan was run or claimed during this manual review.
+- Final corpus: **141 Strand A**, **23 Strand B**, **14 weak signals**.
+- Frontier matrix: existing evidence retained, with **5 new Additions III entries**.
 
-## Two supplied manual files
+## Existing manual-ingest history retained
 
-### 1. `EU_RI_Key_Papers_May-Aug_2026-2.docx`
+The newer supplied state already contained three earlier manual batches: the 53-record key-papers list, an initial 31-record Additions batch, and the reviewed 31-record Additions batch that admitted 17 substantive sources and 2 weak signals. Those batches and their timestamps were preserved rather than replayed or rewritten.
 
-Parsed **53 records**: 38 current candidates, 6 forthcoming/unpublished, and 9 context-only records. Its packaging-time batch remains a candidate/recovery comparison: 1 existing corpus match, 1 exact URL seen by the scanner but not admitted, and 36 current candidates absent from the saved corpus/seen-URL ledger. V17.11.0 does **not** retroactively promote those records without reviewed underlying-source evidence.
+## Additions III batch
 
-### 2. `EU_RI_Additions_May-Aug_2026.docx`
+Input: `EU_RI_Additions_III_May-Aug_2026.docx` (12 records). The DOCX is explicitly matrix-oriented and supplies candidate cell mappings. The manual lane used the curator-supplied URLs as the retrieval manifest. Only ordinary redirects and direct links exposed by those pages were followed; no broad web search, title search, or alternative-version discovery was used.
 
-Parsed **31 records**: 24 substantive records and 7 weak signals. The V17.11.0 repair re-reviewed this matrix-oriented supplement using evidence bound to the **exact URL supplied in the DOCX**. No search-engine discovery is part of the manual lane. A different resolved primary URL is allowed only when the supplied record itself explicitly needs primary/bibliographic resolution; the original supplied URL remains in provenance.
+Batch result:
 
-Latest reviewed batch (`d847131bfe7e-f9ba6538`):
+- **12** records parsed.
+- **0** prior admitted-corpus matches in the authoritative pre-ingest state.
+- **0** scanner-seen URLs that were not admitted.
+- **12** automated discovery misses in the saved state.
+- **1** same-batch duplicate (`W18` reuses the `R14` supplied URL after `R14` is admitted); it is not counted as an automated hit.
+- **3** new substantive radar admissions.
+- **2** new weak-signal admissions.
+- **5** new Frontier matrix entries.
+- **4** deferred records.
+- **1** verified source-based core-gate rejection.
+- **1** context/outside-window record.
+- **0** forthcoming/unpublished records.
 
-- **17 substantive sources newly admitted**.
-- **2 weak signals admitted**.
-- **5 deferred** after review.
-- **7 retained as context/outside-window**.
-- **19 reviewed supplement records now appear in the Sovereignty Frontier matrix** (17 substantive + 2 weak signals).
-- All curator cell assignments remain hypotheses (`curator_primary_cell` / `curator_cells`); reviewed source evidence supplies `matrix_dimension`, `quadrant_claimed`, and `quadrant_implied`.
-- `quadrant_claimed` and `quadrant_implied` remain separate. Where they differ, the evidence-implied quadrant controls placement.
+### Item-level decisions
 
-## Supplement decisions and matrix placement
+| ID | Decision | Automated comparison | Evidence status | Curator primary cell | Independent matrix result |
+|---|---|---|---|---|---|
+| I12 | Deferred: primary resolution still required | not found | secondary reference | I-A | — |
+| I13 | Deferred: cited secondhand; IRIS primary not directly reachable | not found | secondary reference | C-B | — |
+| C11 | **Admitted substantive** | not found | verified primary full text | C-A | **C-C**, claimed A / implied C |
+| C12 | **Rejected core gate**: intra-European innovation diffusion, not a substantive external geopolitical/economic-security mechanism | not found | verified primary full text | C-D | — |
+| C13 | **Admitted substantive** | not found | verified primary full text | R-C | **I-C**, claimed A / implied C |
+| R14 | **Admitted substantive** | not found | verified primary full text | R-D | **R-D**, claimed C / implied D |
+| R15 | Deferred: supplied Council PDF could not be retrieved in the environment | not found | metadata only / retrieval limitation | R-D | — |
+| W15 | Deferred: Federal Prosecutor primary release not directly exposed by supplied page | not found | secondary reference | K-B | — |
+| W16 | **Admitted weak signal** after direct Belgian Federal Prosecutor corroboration from supplied page | not found | verified primary + supplied-page corroboration | K-B | **K-B** |
+| W17 | **Admitted weak signal** after direct Helsing/Quantum Systems primary links from supplied page | not found | verified primary + supplied-page corroboration | C-C | **C-A** |
+| W18 | Same-batch duplicate of admitted R14 source; no duplicate public item | not found | secondary synthesis | R-C | inherits no forced curator placement |
+| W19 | Context only: supplied article predates the primary window | not found | reviewed source | R-D | — |
 
-| ID | Source | Decision | Automated comparison | Matrix placement | Claimed | Implied |
-|---|---|---|---|---|---:|---:|
-| K1 | Europe as science superpower: what it will take to rival the US and China | ADMITTED substantive | not_found | K-A — Talent windfall | A | A |
-| K2 | Prestigious European science funder scraps stricter rules after researcher backlash | Deferred | not_found | — | — | — |
-| K3 | European funder must increase capacity to meet the ambition of scientists | Deferred | not_found | — | — | — |
-| K4 | Scientists fight back against far-right plans to restrict academic freedom in Germany | Deferred | not_found | — | — | — |
-| K5 | Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research | Context only | found_in_corpus | — | — | — |
-| K6 | Challenges and recommendations for research security: Learning from research ethics and integrity | Context only | not_found | — | — | — |
-| K7 | Fragmented Europe: Dealing with China as a technology and innovation power | ADMITTED substantive | scanner_seen_url_not_admitted | K-B — Closed lab | B | B |
-| I1 | Europe needs a strategy to close the artificial intelligence compute gap | ADMITTED substantive | not_found | I-B — Expensive mirror | A | B |
-| I2 | Revamping Europe’s chips strategy: indispensability, not self-sufficiency | ADMITTED substantive | not_found | I-A — Home chokepoint | A | A |
-| I4 | Understanding U.S. Allies’ Current Legal Authority to Implement AI and Semiconductor Export Controls | Context only | not_found | — | — | — |
-| I5 | AI export controls are not the best bargaining chip | Context only | not_found | — | — | — |
-| C1 | Europe’s venture capital gap and the financing of high-growth firms | ADMITTED substantive | not_found | C-C — Foreign exit | C | C |
-| C2 | Exploring the investor landscape for venture capital | ADMITTED substantive | not_found | C-C — Foreign exit | A | C |
-| C3 | The European Innovation Council opens to defence and dual-use technologies — amended EIC Work Programme 2026 | ADMITTED substantive | not_found | C-A — Home champion | A | A |
-| C4 | Dual-use and Defence Research in Europe | ADMITTED substantive | not_found | C-B — Protected niche | A | B |
-| C5 | The growth of dual-use by design research in Europe: Export control risks and challenges | ADMITTED substantive | not_found | C-B — Protected niche | B | B |
-| R1 | Council Recommendation on a European Union framework for science diplomacy | ADMITTED substantive | not_found | R-A — Rule-setter | A | A |
-| R3 | Does Europe Really Have a Plan for Tech Sovereignty? Tech Policy Press (AI hype and European policymaking series) | ADMITTED substantive | not_found | R-C — Rule-taker | C | C |
-| R4 | To achieve tech sovereignty, Europe must not mimic its rivals | ADMITTED substantive | not_found | R-B — Fortress rules | B | B |
-| R5 | Simplifying European Union Policy: Tech Sovereignty Package — virtual discussion summary | ADMITTED substantive | not_found | R-B — Fortress rules | — | B |
-| W1 | China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations | ADMITTED weak signal | not_found | I-D — Cut supply | — | D |
-| W2 | China widens rare-earth and critical-mineral export controls — 10 US firms in June, 14 EU entities in July; IEA warning that full enforcement could place substantial downstream production at risk worldwide | Deferred | not_found | — | — | — |
-| W3 | US Department of Commerce shifts NVIDIA H200 review for China from presumption of denial to case-by-case approval subject to a 25% tariff; AI Diffusion Rule rescinded; higher-tier exports approved | Context only | found_in_corpus | — | A | B |
-| W4 | Tencent expands cloud computing presence in Europe with new data centres in Germany; Chinese firms reported to be training AI models in Southeast Asia and Europe to work around export controls | Context only | not_found | — | — | — |
-| W7 | Mistral raises €830 million in debt for data-centre build-out in France and Sweden; Mistral Compute built in partnership with NVIDIA; flagship models trained on Microsoft Azure infrastructure; Palo Alto office opened to access engineers and Silicon Valley venture capital | Context only | not_found | — | — | — |
-| C6 | Europe launches €80 billion investment alliance to scale up tech leaders | ADMITTED substantive | not_found | C-A — Home champion | A | A |
-| C7 | Programme for agile and rapid defence innovation: Council and Parliament reach political agreement | ADMITTED substantive | not_found | C-A — Home champion | A | A |
-| R2 | National Knowledge Security Guidelines 2026 | ADMITTED substantive | not_found | R-B — Fortress rules | B | B |
-| R6 | European Tech Sovereignty | ADMITTED substantive | not_found | R-B — Fortress rules | B | B |
-| W5 | ERC Advanced Grants: Nearly €840 million to support Europe’s leading researchers | ADMITTED weak signal | not_found | K-A — Talent windfall | — | A |
-| W6 | New ERC Work Programme sets out 2027 funding opportunities | Deferred | not_found | — | — | A |
+## New admissions
 
-## Exact-link evidence policy
+Substantive radar items:
 
-The manual lane follows this order:
+1. **C11 — European Biotech Act — Commission Staff Working Document C(2026) 3375 final (impact assessment).** The Commission finds a gap between the EU's world-class biotech science and development/market/manufacturing scale, with economic-security, strategic-autonomy and investment implications. Matrix: **Conversion / Productive dependence (C-C)**; claimed destination A, implied observed condition C.
+2. **C13 — Europe’s ungoverned space: Military AI and the autonomy that cannot be bought.** The source argues European defence/intelligence users depend on US-controlled AI/cloud infrastructure and estimates a 10–15 year capability gap. Matrix: **Infrastructure / Productive dependence (I-C)**; claimed A, implied C.
+3. **R14 — Europe's regulatory double bind.** The source links delayed implementation/assessment capacity and external testing methodologies to regulatory dependence, while enforcement can trigger trade retaliation. Matrix: **Rules / Double loss (R-D)**; claimed C, implied D.
 
-1. Parse the bibliographic record and the exact supplied URL.
-2. Deduplicate against admitted corpus and saved scanner history.
-3. Retrieve the exact supplied URL when runtime networking is available, or use a reviewed evidence cache only when that review is explicitly bound to the same canonical supplied URL.
-4. Resolve to a primary record only for an explicitly secondary/generic/wrong-reference case; preserve the original supplied URL alongside the resolved URL.
-5. Apply the same substantive standard: genuine EU/European R&I in geopolitical context. Metadata-only records defer rather than fail relevance.
-6. Use curator cells as candidate hypotheses, then classify from reviewed source evidence. Curator cells never force admission or placement.
+Weak signals:
+
+1. **W16 — SHAPE espionage investigation involving an AI researcher with prior European Space Agency research-centre experience.** Matrix: **Knowledge / Costly autonomy (K-B)**.
+2. **W17 — Helsing and Quantum Systems mega-rounds.** Direct company releases verify $1.8bn and $1.2bn rounds used to scale European defence AI/autonomy. Matrix: **Conversion / Opening (C-A)**.
+
+## Curator cell review
+
+The curator's proposed cells were retained as hypotheses and independently checked against source evidence.
+
+- **Survived unchanged:** `R14` **R-D**; `W16` **K-B**.
+- **Changed after evidence review:** `C11` **C-A → C-C** (advocated destination A, observed/implied conversion condition C); `C13` **R-C → I-C** (the dominant mechanism is infrastructure dependence); `W17` **C-C → C-A** (observed firms remain European and scale in Europe; foreign capital is retained as a competing interpretation, not the observed outcome).
+- **No matrix admission:** I12, I13, C12, R15, W15, W18, W19. Their curator mappings remain stored but do not force placement.
 
 ## Recall diagnostic
 
-The reviewed supplement confirms both discovery and gating gaps. In particular, K7 (`Fragmented Europe`) had been seen by the scanner but was not admitted; the reviewed underlying source now passes the substantive gate and enters K-B. Most other newly admitted supplement records were not found in the saved ledger, so they remain useful exact-URL recall targets for future automated discovery improvements.
+Five high-quality records were true discovery misses and became new admissions: **C11, C13, R14, W16, W17**. `C12` was also a discovery miss, but direct source review showed that it fails the core pass-1 requirement; this is a **gating outcome after manual recovery**, not a reason to weaken automated precision. `R15` remains a retrieval/environment limitation. I12, I13, W15 and W18 require primary verification from the supplied-link chain and remain deferred/secondary rather than being treated as irrelevant. W19 is context, not a scanner recall target.
 
-The recovery queues remain bounded and do not lower pass-1 precision. A future live scanner run may retry queued exact URLs, but only that real scanner run may update live scan timestamps/cursors.
+The exact-URL recovery queues remain bounded. Reviewed core-gate rejections are not queued, and no live scan cursors/timestamps were advanced.

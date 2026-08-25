@@ -1,4 +1,4 @@
-# Architecture — V17.11.0 exact-link reviewed manual evidence
+# Architecture — V17.11.1 exact-link reviewed manual evidence
 
 The radar has two discovery entrances feeding the same substantive standard.
 
@@ -23,4 +23,4 @@ Missed current candidates can feed bounded exact-URL recovery queues. A later re
 
 ## Provenance and state integrity
 
-Public records use `discovery_provenance` = `automated`, `manual`, or `both`, preserve manual IDs, supplied URLs and any resolved primary URLs. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.
+Public records use `discovery_provenance` = `automated`, `manual`, or `both`. Manual diagnostics preserve manual IDs, supplied URLs, directly resolved primary/full-text URLs, and the direct-link chain used during review. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.

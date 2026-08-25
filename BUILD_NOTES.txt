@@ -1,21 +1,34 @@
-V17.11.0 EXACT-LINK REVIEWED MANUAL EVIDENCE
+V17.11.1 EXACT-LINK REVIEWED MANUAL EVIDENCE
 
 Authoritative state
-- Supplied radar (21).json
-- Preserved last_updated: 2026-08-25T07:34Z
-- No live scan performed during repair/packaging
+- Supplied radar (22).json
+- Preserved last_updated: 2026-08-25T10:58Z
+- No live scan performed during manual review/ingest/packaging
 
-Manual inputs
-- EU_RI_Key_Papers_May-Aug_2026-2.docx: 53 parsed records; retained as candidate/recovery comparison unless underlying evidence is reviewed.
-- EU_RI_Additions_May-Aug_2026.docx: 31 parsed records; V17.11.0 reviewed batch admits 17 substantive sources + 2 weak signals, defers 5, retains 7 as context.
-- Exact supplied URLs are the default retrieval/review keys; no search-engine discovery is part of the manual lane.
+New manual input
+- EU_RI_Additions_III_May-Aug_2026.docx: 12 parsed records.
+- Exact supplied URLs were the retrieval manifest; only redirects/direct links from those pages were followed.
+- No search-engine discovery or general title search was used in the manual lane.
 
-State after reviewed supplement
-- Strand A: 138
+Additions III decisions
+- Prior automated corpus matches: 0
+- Scanner-seen URL not admitted: 0
+- Automated discovery misses: 12
+- Same-batch duplicate: 1 (W18 duplicates the R14 supplied URL after R14 admission)
+- Newly admitted substantive sources: 3
+- Newly admitted weak signals: 2
+- Deferred: 4
+- Verified substantive core-gate rejection: 1
+- Context/outside-window: 1
+- Forthcoming/unpublished: 0
+- New matrix entries: 5
+
+State after Additions III
+- Strand A: 141
 - Strand B: 23
-- Weak signals: 12
-- Matrix entries from reviewed supplement: 19
+- Weak signals: 14
+- Sovereignty Frontier: existing evidence retained; 5 new Additions III entries
 
 Validation
-- PYTHONPATH=. python -m pytest -q
-- 245 passed
+- PYTHONPATH=. pytest -q
+- 251 passed in 18.95s
