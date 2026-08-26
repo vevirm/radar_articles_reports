@@ -20,9 +20,9 @@ main{padding:26px 0 64px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16
   <section class="panel"><h2>Greatest risks</h2><p class="hint">Things that could make Europe more dependent, slower or less competitive.</p><div id="risks" class="items"><p class="empty">Loading…</p></div></section>
   <section class="panel"><h2>Greatest opportunities</h2><p class="hint">Things that could make Europe more capable, independent or competitive.</p><div id="opportunities" class="items"><p class="empty">Loading…</p></div></section>
 </div></main>
-<script src="../briefing/insights.js?v=17.12.1"></script>
-<script src="../frontier/frontier.js?v=17.12.1"></script>
-<script src="priorities.js?v=17.12.1"></script>
+<script src="../briefing/insights.js?v=17.12.2"></script>
+<script src="../frontier/frontier.js?v=17.12.2"></script>
+<script src="priorities.js?v=17.12.2"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function item(x,kind,i){const plain=RadarPriorities.simplePriorityText(x);const interpretation=RadarPriorities.priorityInterpretation(x);const source=[x.authors,x.source,x.date?String(x.date).slice(0,10):'',x.itemType].filter(Boolean).join(' · ');const id=`priority-${kind}-${i}`;const evidence=(x.abstract||'').trim();return `<article class="priority ${kind}"><button class="plain" type="button" data-priority="${id}" aria-expanded="false">${esc(plain)}</button><div class="source">${esc(source)}</div><div class="interpret">${esc(interpretation)}</div><div id="${id}" class="evidence" hidden>${evidence?`<div>${esc(evidence)}</div>`:''}${x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">Open source ↗</a>`:''}</div></article>`}

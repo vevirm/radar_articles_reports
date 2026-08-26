@@ -1,6 +1,6 @@
-# R&I Geopolitics Radar V17.12.1
+# R&I Geopolitics Radar V17.12.2
 
-V17.12.1 is a presentation-first repair built on the supplied 26 August 2026 radar state. The bundled state is rendered immediately on first upload; repository pushes do not start a live scan. The live scanner is manual-only in this package so the pages can be checked before spending ~20 minutes on discovery. It also preserves the V17.12 reader-first presentation behavior: It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
+V17.12.2 keeps the presentation-first V17.12.1 build and adds bounded round-aware manual ingestion plus an exact-link reviewed recovery batch for rounds IV–VI. The bundled state is rendered immediately on first upload; repository pushes do not start a live scan. The live scanner is manual-only in this package so the pages can be checked before spending ~20 minutes on discovery. It also preserves the V17.12 reader-first presentation behavior: It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
 
 ## First upload: presentation first, scan later
 
@@ -35,7 +35,7 @@ A reviewed evidence cache is not a free-form manual override: each review must b
 
 Curator cell mappings are stored as hypotheses, not answers. A reviewed source can be admitted when its underlying evidence passes the substantive gate; matrix placement then comes from reviewed source evidence (`matrix_dimension`, `quadrant_claimed`, `quadrant_implied`). The frontend honors that reviewed row/column instead of re-inferring the row from topic keywords.
 
-The prior reviewed supplement remains intact (17 substantive sources + 2 weak signals). For `EU_RI_Additions_III_May-Aug_2026.docx`, V17.11.1 admits **3 substantive sources and 2 weak signals**; all **5 enter the Sovereignty Frontier matrix** after independent evidence review. The detailed decisions are in `MANUAL_INGEST_REPORT.md`.
+Earlier reviewed supplements remain intact. V17.12.2 additionally ingests the declared **58-item rounds IV–VI block** from `EU_RI_Found_Items_Rounds_IV-VI.docx`: **10** new substantive items enter the radar and **7** receive independently reviewed matrix placements. The detailed batch decisions are in `MANUAL_INGEST_REPORT_ROUNDS_IV_VI.md`; earlier supplement decisions remain in `MANUAL_INGEST_REPORT.md`.
 
 ## Recall diagnostics and provenance
 
@@ -53,7 +53,7 @@ Manual candidates are compared against the admitted corpus and saved seen-URL le
 
 ## State integrity
 
-Manual ingestion is not a live scan. The bundled `radar.json` is the user-supplied 26 August 2026 state (`last_updated`: **2026-08-26T02:00Z**). This presentation build does not run a new scan or alter scanner bookkeeping beyond replacing the bundled state with that supplied file.
+Manual ingestion is not a live scan. V17.12.2 starts from the user-supplied 26 August 2026 state and preserves its scanner timestamp (`last_updated`: **2026-08-26T08:57Z**) and scan cursors. The rounds IV–VI review is recorded separately under `manual_ingest.last_ingested_at` / batch history; no live scanner run was claimed or performed.
 
 ## Validate
 
@@ -61,4 +61,4 @@ Manual ingestion is not a live scan. The bundled `radar.json` is the user-suppli
 PYTHONPATH=. python -m pytest -q
 ```
 
-See `VALIDATION_V17_12_1.md` for the presentation-first repair validation. `VALIDATION_V17_12.md` remains the underlying V17.12 reader-build record.
+See `VALIDATION_V17_12_2.md` for the current manual-ingest/state validation. `VALIDATION_V17_12_1.md` and `VALIDATION_V17_12.md` remain the historical presentation/readability records.

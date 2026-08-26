@@ -42,10 +42,12 @@ if str(ROOT) not in sys.path:
 
 from scripts import scan_radar as sr
 
-PROFILE_VERSION = "v17.11.1-reviewed-manual-evidence"
+PROFILE_VERSION = "v17.12.2-bounded-manual-review"
 SUPPORTED = {".docx", ".pdf", ".csv", ".json", ".yaml", ".yml", ".txt", ".md"}
 URL_RE = re.compile(r"https?://[^\s<>()\[\]{}]+", re.I)
 ITEM_RE = re.compile(r"^([A-Za-z]{1,3}\d{1,3})\s+(.*)$")
+MANUAL_BLOCK_HEADING_RE = re.compile(r"^EU R&I in Geopolitical Context\s+[—–-]\s+Items found", re.I)
+TYPE_RE = re.compile(r"\bType\s+(\d+)\s*[—–-]\s*([^.;]+)", re.I)
 CURRENT_SECTION_RE = re.compile(r"^[A-Z]\.\s+")
 NUMBERED_SECTION_RE = re.compile(r"^\d+\.\s+")
 NUMBERED_SUBSECTION_RE = re.compile(r"^\d+\.\d+\s+")
@@ -70,6 +72,7 @@ VERIFICATION_HINTS = (
     "cite the cern council resolution directly",
     "locate the iris paper",
     "cite reuters and the commission release directly",
+    "window: check date",
 )
 OUTSIDE_WINDOW_HINTS = (
     "outside the strict window",
@@ -243,6 +246,15 @@ def _record_from_parts(*, rid: str, citation: str, url: str = "", note: str = ""
         m = re.search(r"Cells?:\s*([KICR]-[ABCD])", cell_text, re.I)
     if m:
         primary_cell = m.group(1).upper()
+    type_match = TYPE_RE.search(f"{citation} {note}")
+    curator_source_type = clean(type_match.group(2)) if type_match else ""
+    verification_caveats = []
+    if "window: check date" in full_note:
+        verification_caveats.append("window_date_check")
+    if secondary:
+        verification_caveats.append("secondary_or_incomplete_source_hint")
+    if verification_required and not verification_caveats:
+        verification_caveats.append("curator_verification_required")
     return {
         "manual_id": rid,
         "title": title,
@@ -259,6 +271,8 @@ def _record_from_parts(*, rid: str, citation: str, url: str = "", note: str = ""
         "manual_candidate_kind": "weak_signal" if mode == "weak_signal" else "substantive",
         "manual_secondary_hint": secondary,
         "manual_verification_required": verification_required,
+        "verification_caveats": verification_caveats,
+        "curator_source_type": curator_source_type,
         "curator_cells": cells,
         "curator_primary_cell": primary_cell,
         "curator_cell_mapping_status": "manual_hint_not_source_evidence" if cells else "",
@@ -272,6 +286,7 @@ def _parse_paragraph_records(paragraphs: Iterable[str], source_file: str) -> lis
     section = ""
     mode = "current"
     seq = {"forthcoming": 0, "context": 0, "generic": 0}
+    manual_block_seen = False
 
     def flush() -> None:
         nonlocal current
@@ -282,6 +297,15 @@ def _parse_paragraph_records(paragraphs: Iterable[str], source_file: str) -> lis
     for raw in paragraphs:
         p = clean(raw)
         if not p:
+            continue
+        if MANUAL_BLOCK_HEADING_RE.match(p):
+            if manual_block_seen:
+                # A curated DOCX may contain later rounds appended after the declared
+                # batch. One ingestion call represents one batch, so stop at the next
+                # top-level "Items found" heading instead of silently mixing rounds.
+                flush()
+                break
+            manual_block_seen = True
             continue
         if CURRENT_SECTION_RE.match(p):
             flush(); section = p; mode = "current"; continue
@@ -1037,6 +1061,45 @@ def _saved_miss_reason(record: dict[str, Any], state: dict[str, Any], automated_
     return "insufficient_bibliographic_locator_for_discovery_diagnosis"
 
 
+
+def _recall_failure_category(record: dict[str, Any], state: dict[str, Any], automated_status: str) -> str:
+    """Classify the likely discovery-stage failure using only persisted scanner evidence.
+
+    This deliberately does not infer pass-1 or quality rejection reasons that the saved
+    state did not retain. It is a recall diagnostic, not a substantive admission gate.
+    """
+    if automated_status == "found_in_corpus":
+        return "not_missed"
+    if automated_status == "scanner_seen_url_not_admitted":
+        return "seen_but_rejection_stage_unknown_from_saved_state"
+    raw = clean(record.get("url"))
+    host = urlparse(raw if "://" in raw else "https://" + raw).netloc.lower().removeprefix("www.") if raw else ""
+    if record.get("doi"):
+        return "scholarly_index_item_not_observed"
+    added_domains = {clean(x).lower().removeprefix("www.") for x in sr.CONFIG.get("manual_recall_added_domains", [])}
+    if host and any(host == d or host.endswith("." + d) for d in added_domains):
+        return "source_not_covered_prior_to_targeted_manual_recall_expansion"
+    configured = sr.institution_source_for_domain(host) if host else None
+    if configured:
+        warnings = state.get("scan_diagnostics", {}).get("source_warnings", []) if isinstance(state.get("scan_diagnostics"), dict) else []
+        for warning in warnings if isinstance(warnings, list) else []:
+            m = re.search(r"No usable sitemap:\s*([^\s]+)", clean(warning), re.I)
+            if m:
+                d = m.group(1).lower().removeprefix("www.")
+                if host == d or host.endswith("." + d) or d.endswith("." + host):
+                    return "sitemap_or_feed_failure"
+        seen = state.get("scan_state", {}).get("institution_seen_fingerprints", {}) if isinstance(state.get("scan_state"), dict) else {}
+        if isinstance(seen, dict):
+            for fingerprint in seen:
+                seen_url = clean(fingerprint).split("|", 1)[0]
+                seen_host = urlparse(seen_url).netloc.lower().removeprefix("www.") if seen_url else ""
+                if seen_host and (host == seen_host or host.endswith("." + seen_host) or seen_host.endswith("." + host)):
+                    return "covered_source_exact_item_not_observed_in_rotation"
+        return "covered_source_but_saved_state_cannot_localise_item_miss"
+    if host:
+        return "source_not_covered_by_direct_discovery"
+    return "unknown_insufficient_locator"
+
 def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_status: str, retrieval: dict[str, Any], ev: dict[str, Any], decision: str, matched: dict[str, Any] | None, *, links_validated: bool = False, review: dict[str, Any] | None = None, original_record: dict[str, Any] | None = None) -> dict[str, Any]:
     reason = _gate_reason(ev)
     miss = _saved_miss_reason(record, state, automated_status, retrieval, ev)
@@ -1069,6 +1132,7 @@ def _diagnostic_record(record: dict[str, Any], state: dict[str, Any], automated_
         },
         "decision": decision,
         "miss_reason": miss,
+        "recall_failure_category": _recall_failure_category(record, state, automated_status),
         "matched_title": clean(matched.get("title")) if matched else "",
     }
     if original_record:
@@ -1138,6 +1202,8 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
         "verification_required": 0,
     }
     reviewed_resolved_ids: set[str] = set()
+    admitted_item_ids: set[str] = set()
+    matrix_item_ids: set[str] = set()
     for original_rec in records:
         review = review_evidence.get(clean(original_rec.get("manual_id")))
         rec = _record_with_review(original_rec, review)
@@ -1229,6 +1295,9 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
                 for dest, strand in strands:
                     if _append_if_new(out, dest, _new_public_item(rec, retrieval, ev, strand, ingested_at, publication_date=publication_date, review=review)):
                         counts["manual_admitted"] += 1
+                        admitted_item_ids.add(clean(rec.get("manual_id")))
+                        if review and review.get("matrix_evidence_verified") and _matrix_fields_from_review(rec, review):
+                            matrix_item_ids.add(clean(rec.get("manual_id")))
                         reviewed_resolved_ids.add(clean(rec.get("manual_id")))
                 decision = "admitted_verified_manual_source"
             elif _review_core_gate_failed(rec, review) and verified:
@@ -1242,7 +1311,10 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
         if matched:
             reviewed_resolved_ids.add(clean(rec.get("manual_id")))
             if review and review.get("matrix_evidence_verified"):
-                matched.update(_matrix_fields_from_review(rec, review))
+                matrix_fields = _matrix_fields_from_review(rec, review)
+                matched.update(matrix_fields)
+                if matrix_fields:
+                    matrix_item_ids.add(clean(rec.get("manual_id")))
                 claim = clean(review.get("display_claim"))
                 if claim:
                     matched["core_message"] = claim[:240]
@@ -1281,9 +1353,18 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
     corpus_urls = {_canonical_url(i.get("link", "")) for _, i in _corpus_entries(out)}
     merged_queue = [x for u, x in q_by_url.items() if u and u not in corpus_urls and clean(x.get("manual_id")) not in reviewed_resolved_ids]
     merged_signal_queue = [x for u, x in sq_by_url.items() if u and u not in corpus_urls and clean(x.get("manual_id")) not in reviewed_resolved_ids]
+    counts.update({
+        "automated_discovery_misses": counts["not_found"],
+        "automated_seen_not_admitted": counts["scanner_seen_url_not_admitted"],
+        "duplicates_or_already_admitted": counts["found_in_corpus"] + counts["duplicate_in_batch"],
+        "newly_admitted_substantive_items": len(admitted_item_ids),
+        "newly_admitted_matrix_items": len(matrix_item_ids & admitted_item_ids),
+        "reviewed_matrix_items": len(matrix_item_ids),
+    })
     batch = {
         "batch_id": batch_id, "source_file": source.name, "sha256": sha, "ingested_at": ingested_at,
-        "fetch_attempted": bool(fetch), "links_user_validated": bool(links_validated), "counts": counts,
+        "fetch_attempted": bool(fetch or review_evidence), "runtime_fetch_enabled": bool(fetch),
+        "review_evidence_items": len(review_evidence), "links_user_validated": bool(links_validated), "counts": counts,
         "review_evidence_sha256": review_sha, "reviewed_items": len(review_evidence),
     }
     batches = [b for b in batches if not (isinstance(b, dict) and b.get("sha256") == sha and clean(b.get("review_evidence_sha256")) == review_sha)] + [batch]
@@ -1304,6 +1385,9 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
             "retrieval_insufficient": sum(1 for d in diagnostics if d.get("miss_reason") == "underlying_source_retrieval_failed_or_insufficient"),
             "exact_url_recovery_queue": len(merged_queue),
             "weak_signal_recovery_queue": len(merged_signal_queue),
+            "failure_categories": dict(sorted(__import__("collections").Counter(
+                clean(d.get("recall_failure_category")) for d in diagnostics if clean(d.get("recall_failure_category"))
+            ).items())),
         },
     })
     out["manual_ingest"] = manual

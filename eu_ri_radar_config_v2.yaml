@@ -601,11 +601,14 @@ sources:
       - merics.org
       - ifri.org
       - iai.it
+      - institutmontaigne.org
       - clingendael.org
       - chathamhouse.org
+      - gmfus.org
       - csis.org
       - sipri.org
       - css.ethz.ch
+      - hcss.nl
       - cnas.org
       - rand.org
       - cset.georgetown.edu
@@ -613,6 +616,7 @@ sources:
       - ecipe.org
   news_ri:            # R&I-specialist press (pass 1 supplement, pass 2 coverage check)
     domains:
+      - eenewseurope.com
       - sciencebusiness.net
       - researchprofessionalnews.com
       - nature.com
@@ -927,7 +931,7 @@ calibration_notes:
 
 # V17.10 curated candidate / recall-recovery lane
 manual_candidate_ingest:
-  profile_version: v17.11.1-reviewed-manual-evidence
+  profile_version: v17.12.2-bounded-manual-review
   principle: "Manual lists are candidates/recovery hints, never verified evidence by themselves."
   accepted_formats: [docx, pdf, csv, json, yaml, yml, txt, md]
   preserve_scan_timestamp: true

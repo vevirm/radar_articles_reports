@@ -1,28 +1,21 @@
-V17.12.1 presentation-first repository repair
+V17.12.2 bounded manual-ingest update
 Date: 2026-08-26
 
 No live scan was run.
 
+Full Python regression suite:
+  python -m pytest -q
+  255 passed
+
 Presentation smoke check:
   node scripts/presentation_smoke.js
   PASS
-  - radar.json parsed: 141 A / 23 B / 16 C
-  - Radar Insights built 14 research groups and 15 displayable weak signals
-  - Insight Summary built 101 qualifying frontier signals
-  - Opportunities & Risks built 15 opportunity candidates / 15 risk candidates
+  - radar.json parsed: 152 A / 23 B / 17 C
+  - Radar Insights built successfully
+  - Insight Summary and Opportunities & Risks built successfully
   - all reader JavaScript and inline scripts compiled
-  - frontier claimText() is self-contained (no undefined clean() call)
+  - no network discovery or scanner was run
 
-Browser-DOM render harness using the bundled state:
-  PASS
-  - Insight Summary: 28 openings / 26 trade-offs / 27 dependencies / 20 double-loss alarms
-  - 3 takeaway cards, 7 top-signal rows, 16 matrix cells
-  - Opportunities & Risks: 8 rendered risks / 8 rendered opportunities
-  - Radar Insights: 106 papers / 26 reports / 15 displayable weak signals / 2 new
-  - no page or console errors in those three reader pages
-
-Focused Python regression suite:
-  PYTHONPATH=. pytest -q tests/test_insights_page.py tests/test_v17_3_sovereignty_frontier.py tests/test_v17_9_source_aware_matrix.py
-  19 passed
-
-The existing V17.12 full-suite note remains applicable: a later source-state test has a legacy gap-plan assertion against the supplied newer matrix state. The presentation-first repair does not alter radar.json to satisfy stale state expectations.
+Manual rounds IV–VI batch:
+  58 parsed / 4 existing / 1 seen-not-admitted / 53 not found
+  10 new substantive / 7 new matrix / 40 deferred / 4 reviewed core-gate rejects

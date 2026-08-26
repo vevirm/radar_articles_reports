@@ -727,3 +727,69 @@ console.log(JSON.stringify({row:x&&x.row.id,column:x&&x.column.id}));
 '''
     out = subprocess.run(['node', '-e', script], cwd=ROOT, text=True, capture_output=True, check=True)
     assert json.loads(out.stdout) == {'row': 'infrastructure', 'column': 'D'}
+
+
+def test_curated_multi_round_docx_stops_at_next_top_level_items_found_block(tmp_path):
+    p = tmp_path / 'rounds.docx'
+    doc = Document()
+    doc.add_paragraph('EU R&I in Geopolitical Context — Items found, rounds IV–VI')
+    doc.add_paragraph('2 items from rounds IV–VI. Compiled 25 August 2026.')
+    doc.add_paragraph('Knowledge & people')
+    doc.add_paragraph('K1 Example (1 May 2026). First European R&I geopolitical paper. Journal.')
+    doc.add_paragraph('https://example.org/k1')
+    doc.add_paragraph('Type 3 – Peer-reviewed / science-for-policy. Cells: K-B (primary).')
+    doc.add_paragraph('K2 Example (2 May 2026). Second European R&I geopolitical paper. Journal.')
+    doc.add_paragraph('https://example.org/k2')
+    doc.add_paragraph('Type 4 – Stakeholder / expert analysis. Cells: K-C (primary). [window: check date]')
+    doc.add_paragraph('EU R&I in Geopolitical Context — Items found, round VII')
+    doc.add_paragraph('K3 Example (3 May 2026). Later-round item that must not join this batch. Journal.')
+    doc.add_paragraph('https://example.org/k3')
+    doc.save(p)
+    rows = mi.parse_manual_file(p)
+    assert [r['manual_id'] for r in rows] == ['K1', 'K2']
+    assert rows[0]['curator_source_type'] == 'Peer-reviewed / science-for-policy'
+    assert rows[1]['manual_verification_required'] is True
+    assert 'window_date_check' in rows[1]['verification_caveats']
+
+
+def test_batch_summary_reports_unique_substantive_and_matrix_admissions(tmp_path):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'K1', 'title': 'European research capacity under geopolitical competition',
+        'url': 'https://example.org/k1', 'date': '2026-06-01', 'note': 'Cells: K-C (primary).'
+    }])
+    rows = mi.parse_manual_file(p)
+    review = {'K1': {
+        'review_source_url': 'https://example.org/k1', 'source_verified': True, 'primary_source': True,
+        'core_gate_verified': True, 'review_status': 'reviewed_pass_core_gate', 'published': '2026-06-01',
+        'text_mode': 'abstract_only',
+        'evidence_text': ('European research and innovation capacity is shaped by geopolitical competition and strategic '
+                          'dependence on international scientific networks, with direct consequences for knowledge security '
+                          'and technological competitiveness across the European Union.'),
+        'matrix_evidence_verified': True, 'matrix_dimension': 'knowledge', 'quadrant_implied': 'C',
+        'matrix_basis': 'The reviewed evidence describes productive dependence on international knowledge networks.'
+    }}
+    out, summary = mi.apply_manual_ingest(st, rows, source_path=p, fetch=False, review_evidence=review)
+    assert summary['fetch_attempted'] is True
+    assert summary['runtime_fetch_enabled'] is False
+    assert summary['counts']['newly_admitted_substantive_items'] == 1
+    assert summary['counts']['newly_admitted_matrix_items'] == 1
+    assert summary['counts']['automated_discovery_misses'] == 1
+    assert out['last_updated'] == st['last_updated']
+
+
+def test_recall_failure_category_distinguishes_new_targeted_source_from_unknown(tmp_path, monkeypatch):
+    st = base_state()
+    p = write_json_list(tmp_path, [{
+        'id': 'K1', 'title': 'European strategic research source',
+        'url': 'https://newsource.example/report', 'date': '2026-06-01'
+    }])
+    rows = mi.parse_manual_file(p)
+    old = list(sr.CONFIG.get('manual_recall_added_domains', []))
+    try:
+        sr.CONFIG['manual_recall_added_domains'] = ['newsource.example']
+        assert mi._recall_failure_category(rows[0], st, 'not_found') == 'source_not_covered_prior_to_targeted_manual_recall_expansion'
+        sr.CONFIG['manual_recall_added_domains'] = []
+        assert mi._recall_failure_category(rows[0], st, 'not_found') == 'source_not_covered_by_direct_discovery'
+    finally:
+        sr.CONFIG['manual_recall_added_domains'] = old

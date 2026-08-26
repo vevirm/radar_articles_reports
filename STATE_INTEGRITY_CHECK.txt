@@ -1,11 +1,15 @@
-V17.12.1 presentation-first supplied-state check
-radar source: user-supplied radar (23).json
-sha256: 721f97b4d476bd3744663dc4e22be0b582fc272a23fd6c74032bf97bcc0c36c0
-last_updated: 2026-08-26T02:00Z
-first_scan_complete: True
-corpus_start_date: 2026-04-21
-strand_a: 141
-strand_b: 23
-strand_c: 16
-presentation repair ran no live scan
-overall: PASS (bundled radar.json is byte-for-byte identical to the supplied state)
+V17.12.2 supplied-state + manual-ingest integrity check
+Date: 2026-08-26
+
+radar.json sha256: c543f554478ed77670b7439e9c89581ba45f20430da50a164c29288e586426f3
+scanner last_updated: 2026-08-26T08:57Z
+manual_ingest last_ingested_at: 2026-08-26T09:42Z
+strand counts: A=152 B=23 C=17
+frontier_evidence: 32
+scan cursors preserved from supplied base:
+  openalex_cursor=30
+  crossref_broad_cursor=97
+  crossref_priority_cursor=448
+  institution_cursor=36
+
+No live scan was run; only manual-ingest state was updated.

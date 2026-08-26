@@ -83,10 +83,12 @@ def test_specific_external_strategic_shock_can_prefilter_but_generic_ai_cannot()
     )
 
 
-def test_gap_allocation_is_balanced_across_opening_and_risk_cells():
-    data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-    state = sr.initial_scan_state(data)
-    focus = sr.frontier_gap_plan(data, state)
+def test_gap_allocation_is_balanced_across_opening_and_risk_cells(monkeypatch):
+    # Balance is a property of equal scarcity, not a requirement to search A cells
+    # after they have already reached the configured target depth.
+    counts = {cell: 2 for cell in sr.FRONTIER_CELL_ORDER}
+    monkeypatch.setattr(sr, 'frontier_matrix_coverage', lambda previous: (counts, [], ''))
+    focus = sr.frontier_gap_plan({}, sr.initial_scan_state({}))
     assert focus['targets']
     assert any(cell.endswith('-A') for cell in focus['targets'])
     assert any(not cell.endswith('-A') for cell in focus['targets'])

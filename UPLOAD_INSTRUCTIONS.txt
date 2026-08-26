@@ -1,14 +1,12 @@
-V17.12.1 PRESENTATION-FIRST UPLOAD
+V17.12.2 PRESENTATION-FIRST UPLOAD
 
-1. Upload/replace the repository files on main.
-2. Do NOT run R&I Radar Scan yet. This package does not trigger it on push or on a schedule.
-3. Wait only for GitHub Pages to refresh, then inspect:
-   - /                      main radar
-   - /frontier/             Insight Summary
-   - /priorities/           Opportunities & Risks
-   - /briefing/             Radar Insights
-4. A push may run the short "Presentation smoke check" GitHub Action. It reads only the bundled repository files and never runs discovery.
-5. When the presentation is accepted, start a live scan manually:
-   Actions -> R&I Radar Scan -> Run workflow
+1. Upload the CONTENTS of this repository to the repository root on GitHub.
+2. Let GitHub Pages publish the bundled radar.json first.
+3. Check the main page plus /read/, /briefing/, /frontier/ and /priorities/.
+4. The expensive R&I Radar Scan remains workflow_dispatch-only; do not start it unless a fresh automated scan is desired.
 
-The bundled radar.json is already populated. The first upload is therefore a presentation/deployment check, not a discovery run.
+The bundled radar state has already received the bounded manual rounds IV–VI review. This manual ingest did NOT advance the scanner timestamp or cursors.
+
+Current scanner last_updated: 2026-08-26T08:57Z
+Current corpus: 152 A / 23 B / 17 C
+Manual batch: EU_RI_Found_Items_Rounds_IV-VI.docx, 58 records, 10 new substantive admissions, 7 new matrix admissions.

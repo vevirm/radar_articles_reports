@@ -1,6 +1,7 @@
 import json
 import sys, types
 import unittest
+from unittest import mock
 from pathlib import Path
 
 try:
@@ -34,6 +35,15 @@ class MatrixFirstDepthTests(unittest.TestCase):
             self.assertEqual(focus['empty_cells'], 0)
             self.assertTrue(focus['targets'])
             self.assertTrue(all(focus['deficits'].get(c, 0) > 0 for c in focus['targets']))
+        # Current-state targets may legitimately omit A cells when all A cells already
+        # meet the configured depth target. Direction is not itself a priority gate.
+        sparse = [c for c in sr.FRONTIER_CELL_ORDER if focus['deficits'].get(c, 0) > 0]
+        self.assertTrue(set(focus['targets']).issubset(set(sparse)))
+
+    def test_equal_scarcity_does_not_bias_against_opening_cells(self):
+        counts = {c: 2 for c in sr.FRONTIER_CELL_ORDER}
+        with mock.patch.object(sr, 'frontier_matrix_coverage', return_value=(counts, [], '')):
+            focus = sr.frontier_gap_plan({}, sr.initial_scan_state({}))
         self.assertTrue(any(c.endswith('-A') for c in focus['targets']))
         self.assertTrue(any(not c.endswith('-A') for c in focus['targets']))
 

@@ -88,14 +88,12 @@ class V172IncrementalStateTests(unittest.TestCase):
         self.assertEqual(merged['scan_state']['openalex_cursor'], 80)
         self.assertEqual(len(merged['strand_a']), 1)
 
-    def test_upload_commit_triggers_immediate_scan_and_schedule_remains_12_hourly(self):
+    def test_presentation_first_build_keeps_live_scan_manual_only(self):
         workflow = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
-        self.assertIn('push:', workflow)
-        self.assertIn('branches: [main]', workflow)
-        self.assertIn("cron: '23 */12 * * *'", workflow)
         self.assertIn('workflow_dispatch:', workflow)
-        self.assertIn('paths-ignore:', workflow)
-        self.assertIn('- radar.json', workflow)
+        self.assertNotIn('push:', workflow)
+        self.assertNotIn('schedule:', workflow)
+        self.assertIn('Presentation-first exception', workflow)
 
     def test_source_families_have_separate_time_slices(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))

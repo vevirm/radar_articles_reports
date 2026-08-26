@@ -1,21 +1,19 @@
-R&I Geopolitics Radar V17.12.1 — presentation-first repair
+R&I Geopolitics Radar V17.12.2 — bounded manual-ingest update
+Date: 2026-08-26
 
-Purpose of this package:
-- make the first repository upload render the already-bundled radar state immediately;
-- do not spend ~20 minutes scanning just to find a frontend problem;
-- start the real scanner manually only after the Pages presentation has been inspected.
+Base state: user-supplied radar (24).json, scanner last_updated 2026-08-26T08:57Z.
+No live scanner run was performed.
 
-Changes:
-- fixed the Insight Summary page-level undefined clean() runtime failure;
-- split radar.json load failures from presentation/render failures;
-- changed .github/workflows/radar-scan.yml to workflow_dispatch only;
-- added a short push-time presentation smoke check with no network discovery;
-- preserved the supplied radar.json byte-for-byte.
+Changes in this build:
+- bounded DOCX parsing stops at the next top-level "Items found" batch heading;
+- rounds IV–VI declared block parses as exactly 58 records, excluding appended rounds VII–X;
+- curator source type and verification caveats are preserved structurally;
+- [window: check date] is treated as a verification requirement;
+- reviewed exact-link evidence remains bound to the supplied URL and cannot use broad search discovery;
+- batch summaries now expose unique substantive and matrix admissions plus automated-miss aliases;
+- recall diagnostics distinguish covered-source rotation, sitemap/feed failure, scholarly-index miss, saved-state unknown stage, and source-coverage gaps;
+- bounded direct-source coverage added for hcss.nl, iai.it, institutmontaigne.org, gmfus.org, and specialist news coverage for eenewseurope.com;
+- supplied latest radar state was ingested with the reviewed rounds IV–VI batch.
 
-No live scan was run while producing this package.
-
-Presentation refinement:
-- added read/ subpage based on the supplied “Read This If Nothing Else” concept;
-- simplified it into three disclosure depths: claim -> reasoning -> evidence;
-- made “Read this first” the first action on the main page;
-- no scanner or radar state changes.
+Final state: 152 Strand A / 23 Strand B / 17 Strand C.
+Rounds IV–VI batch: 58 parsed; 4 existing; 1 seen-not-admitted; 53 not found; 10 new substantive; 7 new matrix; 40 deferred; 4 reviewed core-gate rejects; 3 secondary/incomplete; 0 weak signals.

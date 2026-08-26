@@ -599,6 +599,26 @@
       "name": "ETH Zurich Center for Security Studies",
       "domain": "css.ethz.ch",
       "tier": 2
+    },
+    {
+      "name": "The Hague Centre for Strategic Studies",
+      "domain": "hcss.nl",
+      "tier": 2
+    },
+    {
+      "name": "Istituto Affari Internazionali",
+      "domain": "iai.it",
+      "tier": 2
+    },
+    {
+      "name": "Institut Montaigne",
+      "domain": "institutmontaigne.org",
+      "tier": 2
+    },
+    {
+      "name": "German Marshall Fund of the United States",
+      "domain": "gmfus.org",
+      "tier": 2
     }
   ],
   "crossref_institution_publishers": [
@@ -778,6 +798,10 @@
     {
       "name": "Interface Europe",
       "domain": "interface-eu.org"
+    },
+    {
+      "name": "eeNews Europe",
+      "domain": "eenewseurope.com"
     }
   ],
   "first_news_lookback_hours": 720,
@@ -1492,7 +1516,14 @@
   "matrix_evidence_rule": "For vetted Strand A evidence, classify row and independence/competitiveness directions from the source-backed title/summary/relevance evidence; direction keywords support the rubric but are not a second gate. Weak signals remain event/mechanism gated.",
   "openalex_missing_abstract_enrichment_per_scan": 12,
   "openalex_missing_abstract_enrichment_timeout_seconds": 8,
-  "manual_ingest_profile_version": "v17.11.1-reviewed-manual-evidence",
+  "manual_ingest_profile_version": "v17.12.2-bounded-manual-review",
   "manual_recovery_urls_per_scan": 10,
-  "manual_recovery_stage_seconds": 120
+  "manual_recovery_stage_seconds": 120,
+  "manual_recall_added_domains": [
+    "hcss.nl",
+    "iai.it",
+    "institutmontaigne.org",
+    "gmfus.org",
+    "eenewseurope.com"
+  ]
 }
