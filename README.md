@@ -45,3 +45,7 @@ PYTHONPATH=. python -m pytest -q
 ```
 
 See `VALIDATION_V17_12.md` for the presentation-build validation against the newer supplied state.
+
+## Current scan mode: paused
+
+This repository is intentionally packaged in **no-auto-scan hold mode**. Committing or uploading files does not invoke the scanner: `.github/workflows/radar-scan.yml` contains only `workflow_dispatch` and has no `push` or `schedule` trigger. The current `radar.json` therefore remains unchanged until a scan is deliberately started later.
