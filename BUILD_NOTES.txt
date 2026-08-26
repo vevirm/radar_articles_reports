@@ -1,34 +1,21 @@
-V17.11.1 EXACT-LINK REVIEWED MANUAL EVIDENCE
+R&I Geopolitics Radar V17.12.1 — presentation-first repair
 
-Authoritative state
-- Supplied radar (22).json
-- Preserved last_updated: 2026-08-25T10:58Z
-- No live scan performed during manual review/ingest/packaging
+Purpose of this package:
+- make the first repository upload render the already-bundled radar state immediately;
+- do not spend ~20 minutes scanning just to find a frontend problem;
+- start the real scanner manually only after the Pages presentation has been inspected.
 
-New manual input
-- EU_RI_Additions_III_May-Aug_2026.docx: 12 parsed records.
-- Exact supplied URLs were the retrieval manifest; only redirects/direct links from those pages were followed.
-- No search-engine discovery or general title search was used in the manual lane.
+Changes:
+- fixed the Insight Summary page-level undefined clean() runtime failure;
+- split radar.json load failures from presentation/render failures;
+- changed .github/workflows/radar-scan.yml to workflow_dispatch only;
+- added a short push-time presentation smoke check with no network discovery;
+- preserved the supplied radar.json byte-for-byte.
 
-Additions III decisions
-- Prior automated corpus matches: 0
-- Scanner-seen URL not admitted: 0
-- Automated discovery misses: 12
-- Same-batch duplicate: 1 (W18 duplicates the R14 supplied URL after R14 admission)
-- Newly admitted substantive sources: 3
-- Newly admitted weak signals: 2
-- Deferred: 4
-- Verified substantive core-gate rejection: 1
-- Context/outside-window: 1
-- Forthcoming/unpublished: 0
-- New matrix entries: 5
+No live scan was run while producing this package.
 
-State after Additions III
-- Strand A: 141
-- Strand B: 23
-- Weak signals: 14
-- Sovereignty Frontier: existing evidence retained; 5 new Additions III entries
-
-Validation
-- PYTHONPATH=. pytest -q
-- 251 passed in 18.95s
+Presentation refinement:
+- added read/ subpage based on the supplied “Read This If Nothing Else” concept;
+- simplified it into three disclosure depths: claim -> reasoning -> evidence;
+- made “Read this first” the first action on the main page;
+- no scanner or radar state changes.

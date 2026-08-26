@@ -1,20 +1,14 @@
-R&I GEOPOLITICS RADAR V17.11.1 — EXACT-LINK REVIEWED MANUAL EVIDENCE
+V17.12.1 PRESENTATION-FIRST UPLOAD
 
-NORMAL RADAR BUILD
-1. Serve the repository root and open index.html.
-2. Run scripts/scan_radar.py only for a real live scan.
+1. Upload/replace the repository files on main.
+2. Do NOT run R&I Radar Scan yet. This package does not trigger it on push or on a schedule.
+3. Wait only for GitHub Pages to refresh, then inspect:
+   - /                      main radar
+   - /frontier/             Insight Summary
+   - /priorities/           Opportunities & Risks
+   - /briefing/             Radar Insights
+4. A push may run the short "Presentation smoke check" GitHub Action. It reads only the bundled repository files and never runs discovery.
+5. When the presentation is accepted, start a live scan manually:
+   Actions -> R&I Radar Scan -> Run workflow
 
-MANUAL CANDIDATE LIST
-  python scripts/manual_ingest.py PATH_TO_LIST --state radar.json
-
-Supported: DOCX, PDF, CSV, JSON, YAML/YML, TXT, Markdown.
-Use --links-validated when curator-supplied URLs have been tested.
-Use --review-evidence REVIEW.json only for reviewed evidence bound to the exact supplied record URLs.
-Use --no-fetch for comparison/registration or when the reviewed cache supplies the underlying source evidence.
-
-IMPORTANT
-- Manual entries are not automatic admissions.
-- Manual ingestion does not use search-engine discovery; it targets supplied URLs.
-- Curator matrix cells are hypotheses, not forced placements.
-- Metadata-only records defer.
-- Manual ingest preserves live-scan timestamps/cursors/history.
+The bundled radar.json is already populated. The first upload is therefore a presentation/deployment check, not a discovery run.

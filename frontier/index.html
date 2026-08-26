@@ -21,7 +21,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 30px;color:var(--muted);f
 </style>
 </head>
 <body>
-<header><div class="wrap top"><div class="brand"><div class="kicker">Sovereignty-frontier signals</div><h1 class="title">Insight Summary</h1><p class="lede">One-look decision read first. Evidence, matrix and method below. The underlying Radar remains cumulative and untouched.</p></div><nav class="nav"><a href="../">Main radar</a><a href="../briefing/">Radar Insights</a><a href="../priorities/">Opportunities &amp; Risks</a><a class="primary" href="#matrix">Frontier matrix</a></nav></div></header>
+<header><div class="wrap top"><div class="brand"><div class="kicker">Sovereignty-frontier signals</div><h1 class="title">Insight Summary</h1><p class="lede">One-look decision read first. Evidence, matrix and method below. The underlying Radar remains cumulative and untouched.</p></div><nav class="nav"><a href="../">Main radar</a><a href="../read/">Read this first</a><a href="../briefing/">Radar Insights</a><a href="../priorities/">Opportunities &amp; Risks</a><a class="primary" href="#matrix">Frontier matrix</a></nav></div></header>
 <main class="wrap">
   <section class="one-look" aria-labelledby="oneLookTitle">
     <div class="one-look-main"><div class="eyebrow">One-look read</div><h2 id="oneLookTitle">Reading the cumulative radar…</h2><p id="oneLookText" class="one-look-copy">The page is separating openings, trade-offs, dependencies and double-loss alarms.</p></div>
@@ -54,8 +54,7 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function fmtDate(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
 function plural(n,one,many){return n===1?one:many}
 function claim80(v){let s=String(v??'').replace(/^(?:This|It) says that\s+/i,'').replace(/\s+/g,' ').trim();if(s.length<=80)return s.replace(/[.!?]+$/,'');let c=s.slice(0,80).replace(/\s+\S*$/,'').replace(/[,:;\-–—]+$/,'').trim();if(c.length<42)c=s.slice(0,80).trim();return c.replace(/[.!?]+$/,'')+'…'}
-const clean=v=>String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim();
-function claimText(x){const raw=clean(x?.coreMessage||x?.title||'').replace(/[.!?]+$/,'');const c=raw;return c||'Concise source claim unavailable'}
+function claimText(x){const raw=String(x?.coreMessage||x?.title||'').replace(/\s+/g,' ').trim().replace(/[.!?]+$/,'');const c=raw;return c||'Concise source claim unavailable'}
 function biblioText(x){const title=x?.bibliographicTitle||'';const showTitle=!title||globalThis.RadarInsights?.likelyEnglish?.(title)!==false;return [showTitle?title:'',x?.authors,x?.source,fmtDate(x?.date),x?.itemType].filter(Boolean).join(' · ')}
 function provenanceText(x){const p=String(x?.discoveryProvenance||'').toLowerCase();return p==='both'?'Automated + manual':p==='manual'?'Manual candidate':p==='automated'?'Automated discovery':''}
 function countsByColumn(view){return Object.fromEntries(view.columns.map(c=>[c.id,view.signals.filter(x=>x.column.id===c.id).length]))}
@@ -75,7 +74,35 @@ function render(view){const glance=oneLook(view),c=glance.c;document.getElementB
   for(const [id,val] of Object.entries({weakTotal:view.stats.weakTotal,evidenceTotal:view.stats.evidenceTotal,qualifying:view.stats.qualifying,strong:view.stats.strong}))document.getElementById(id).textContent=val;
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-expand]');if(!b)return;const target=document.getElementById(b.dataset.expand);if(!target)return;const opening=target.hidden;target.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Show less':`Show ${b.dataset.count} more`});
-(async()=>{try{const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('radar unavailable');const data=await r.json();render(SovereigntyFrontier.buildFrontier(data))}catch(e){document.getElementById('takeaways').innerHTML='<p class="empty">Radar data is not available yet.</p>';document.getElementById('topSignals').innerHTML='<p class="empty">Radar data is not available yet.</p>';document.getElementById('oneLookTitle').textContent='Radar data unavailable';document.getElementById('oneLookText').textContent='This page could not load radar.json.';document.getElementById('priorityTitle').textContent='No data loaded';document.getElementById('priorityWhy').textContent='Check that radar.json is present at the repository root.'}})();
+async function loadFrontier(){
+  let data;
+  try{
+    const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error(`radar.json HTTP ${r.status}`);
+    data=await r.json();
+  }catch(e){
+    console.error('Radar data load failed',e);
+    document.getElementById('takeaways').innerHTML='<p class="empty">Radar data is not available yet.</p>';
+    document.getElementById('topSignals').innerHTML='<p class="empty">Radar data is not available yet.</p>';
+    document.getElementById('oneLookTitle').textContent='Radar data unavailable';
+    document.getElementById('oneLookText').textContent='This page could not load radar.json.';
+    document.getElementById('priorityTitle').textContent='No data loaded';
+    document.getElementById('priorityWhy').textContent='Check that radar.json is present at the repository root.';
+    return;
+  }
+  try{
+    render(SovereigntyFrontier.buildFrontier(data));
+  }catch(e){
+    console.error('Insight Summary render failed',e);
+    document.getElementById('takeaways').innerHTML='<p class="empty">The radar data loaded, but the Insight Summary could not be rendered.</p>';
+    document.getElementById('topSignals').innerHTML='<p class="empty">The radar data loaded, but the Insight Summary could not be rendered.</p>';
+    document.getElementById('oneLookTitle').textContent='Insight Summary render error';
+    document.getElementById('oneLookText').textContent='radar.json loaded successfully; a page rendering error occurred.';
+    document.getElementById('priorityTitle').textContent='Presentation error';
+    document.getElementById('priorityWhy').textContent='Open the browser console for the exact JavaScript error.';
+  }
+}
+loadFrontier();
 </script>
 </body>
 </html>

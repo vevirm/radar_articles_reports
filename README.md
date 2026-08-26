@@ -1,8 +1,23 @@
 # R&I Geopolitics Radar V17.12.1
 
-> **V17.12.1 status:** supplied radar state inserted and verified on all pages. **Scanning is paused** via the root file `SCAN_PAUSED` — delete it and push to resume. See `CHANGELOG_V17_12_1.md`.
+V17.12.1 is a presentation-first repair built on the supplied 26 August 2026 radar state. The bundled state is rendered immediately on first upload; repository pushes do not start a live scan. The live scanner is manual-only in this package so the pages can be checked before spending ~20 minutes on discovery. It also preserves the V17.12 reader-first presentation behavior: It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
 
-V17.12.0 is a reader-first presentation update built on the supplied 26 August 2026 radar state. It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
+## First upload: presentation first, scan later
+
+This package intentionally treats the first GitHub upload as a presentation check, not a discovery run. `radar.json` is already bundled and is the data source for all pages. A push runs only the fast **Presentation smoke check** workflow. The expensive **R&I Radar Scan** workflow runs only when manually started from GitHub Actions.
+
+Recommended order:
+
+1. Upload the repository and let GitHub Pages publish the bundled state.
+2. Open the main page, Insight Summary, Opportunities & Risks, and Radar Insights.
+3. Confirm the presentation is correct.
+4. Only then run **Actions → R&I Radar Scan → Run workflow** when a fresh scan is actually wanted.
+
+No live scan was run while making this repair.
+
+## Read-this-first subpage
+
+`read/` is a deliberately simpler progressive-disclosure view of the same bundled corpus. It shows the main conclusion first, then three structural points. Reasoning opens on demand, and source evidence sits one level deeper. Four live shifts and three slower conditions remain collapsed until requested. The page is editorial synthesis; `radar.json` and the detailed reader pages remain the traceable record.
 
 ## Manual candidate ingest
 
@@ -46,4 +61,4 @@ Manual ingestion is not a live scan. The bundled `radar.json` is the user-suppli
 PYTHONPATH=. python -m pytest -q
 ```
 
-See `VALIDATION_V17_12.md` for the presentation-build validation against the newer supplied state.
+See `VALIDATION_V17_12_1.md` for the presentation-first repair validation. `VALIDATION_V17_12.md` remains the underlying V17.12 reader-build record.
