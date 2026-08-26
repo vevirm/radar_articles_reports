@@ -74,7 +74,9 @@ class UIClarityTests(unittest.TestCase):
     def test_risks_opportunities_has_back_button_and_plain_language(self):
         page = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
         js = (ROOT / 'priorities' / 'priorities.js').read_text(encoding='utf-8')
-        self.assertIn('← Go back', page)
+        self.assertIn('aria-label="Primary site sections"', page)
+        self.assertIn('Main radar', page)
+        self.assertIn('Matrix', page)
         self.assertIn('plain language', page)
         self.assertIn('simplePriorityText', js)
         self.assertIn('more dependent and less competitive', js)

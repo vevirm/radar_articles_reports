@@ -1,0 +1,22 @@
+V17.12.3 test results
+======================
+
+Full Python regression suite
+- Command: python -m unittest discover -s tests
+- Result: PASS
+- Tests: 198/198
+
+Presentation smoke check
+- Command: node scripts/presentation_smoke.js
+- Result: PASS
+- radar.json: 152 Strand A / 23 Strand B / 17 Strand C
+- Evidence browser: 14 research groups / 16 weak signals
+- Matrix: 108 qualifying signals
+- Risks & opportunities: 15 openings / 15 risks shown by the builder cap
+- Inline JavaScript syntax: PASS for all five HTML pages
+
+State integrity
+- radar.json SHA-256 unchanged from V17.12.2:
+  c543f554478ed77670b7439e9c89581ba45f20430da50a164c29288e586426f3
+- No scanner run performed.
+- No corpus mutation performed.

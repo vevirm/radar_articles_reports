@@ -12,22 +12,22 @@ class SovereigntyFrontierTests(unittest.TestCase):
     def test_page_reads_cumulative_radar_without_writing_it(self):
         page = (ROOT / 'frontier' / 'index.html').read_text(encoding='utf-8')
         js = (ROOT / 'frontier' / 'frontier.js').read_text(encoding='utf-8')
-        self.assertIn('Insight Summary', page)
-        self.assertIn('Sovereignty-Frontier Signals', page)
+        self.assertIn('<h1 class="title">Matrix</h1>', page)
+        self.assertIn('Sovereignty-Frontier classification', page)
         self.assertIn("fetch('../radar.json?ts='+Date.now()", page)
         self.assertIn('Every qualifying signal is placed in exactly one cell', page)
-        self.assertIn('One-look read', page)
+        self.assertIn('Read at least this · matrix', page)
         self.assertIn('Show ${hidden.length} more', page)
         self.assertIn('data-expand', page)
         self.assertNotIn('fetch(', js)
         self.assertNotIn('writeFile', js)
         self.assertNotIn('localStorage', js)
 
-    def test_main_and_insights_link_to_summary(self):
+    def test_main_and_secondary_browser_link_to_matrix(self):
         main = (ROOT / 'index.html').read_text(encoding='utf-8')
         briefing = (ROOT / 'briefing' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('frontier/?v=17.9.0">Open Insight Summary', main)
-        self.assertIn('../frontier/">Insight Summary →', briefing)
+        self.assertIn('frontier/?v=17.12.3">Matrix', main)
+        self.assertIn('../frontier/">Matrix</a>', briefing)
 
     def test_four_frontier_columns_are_classified(self):
         script = r'''

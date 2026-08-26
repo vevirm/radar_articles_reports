@@ -23,7 +23,10 @@
     .hero:after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-100px;top:-240px;box-shadow:0 0 0 90px rgba(255,255,255,.018),0 0 0 180px rgba(255,255,255,.012)}
     .topline{position:relative;z-index:1;display:flex;justify-content:space-between;gap:28px;align-items:flex-start}.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#bac7d8;font-weight:700}
     h1{font-size:clamp(40px,6vw,72px);line-height:.98;margin:10px 0 14px;letter-spacing:-.055em}.intro{max-width:850px;font-size:17px;color:#d0d9e5;margin:0}.lock{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-size:12px;padding:8px 11px;white-space:nowrap}
-    .hero-actions{position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.hero-actions a{text-decoration:none}.action.primary{display:inline-block;background:#fff;color:var(--navy);padding:10px 14px}.action.secondary{display:inline-block;background:transparent;border:1px solid rgba(255,255,255,.22);padding:9px 13px;color:#fff}
+    .hero-actions{position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.hero-actions a{text-decoration:none}.action.primary{display:inline-block;background:#fff;color:var(--navy);padding:10px 14px}.action.secondary{display:inline-block;background:transparent;border:1px solid rgba(255,255,255,.22);padding:9px 13px;color:#fff}.action.current{box-shadow:inset 0 0 0 2px rgba(255,255,255,.46)}
+    .utility-links{position:relative;z-index:1;margin-top:11px;color:#bfcadb;font-size:12px}.utility-links a{color:#dce5ef;text-decoration:none;font-weight:750}.utility-links a:hover{text-decoration:underline}.utility-links span{opacity:.55;margin:0 7px}
+    .minimum-read{margin:22px 0 12px;background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:17px;padding:20px 22px;box-shadow:var(--shadow-sm);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}.minimum-read .label{font-size:10px;text-transform:uppercase;letter-spacing:.11em;font-weight:900;color:var(--accent)}.minimum-read h2{font-size:24px;line-height:1.15;letter-spacing:-.03em;margin:5px 0 6px}.minimum-read p{margin:0;color:var(--muted);font-size:14px}.minimum-read a{display:inline-block;text-decoration:none;background:var(--navy);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:850;white-space:nowrap}
+    .site-guide{margin:12px 0 20px}.site-guide-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:9px}.site-guide-head h2{font-size:18px;margin:0;letter-spacing:-.025em}.site-guide-head p{font-size:12px;color:var(--muted);margin:0}.component-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.component{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;box-shadow:var(--shadow-sm)}.component.active{border-top:4px solid var(--blue)}.component .n{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:900}.component h3{font-size:15px;margin:5px 0 4px}.component h3 a{text-decoration:none}.component p{font-size:11.5px;color:var(--muted);margin:0;line-height:1.45}.secondary-view{font-size:11.5px;color:var(--muted);margin-top:8px}.secondary-view a{font-weight:800;color:#315675;text-decoration:none}.secondary-view a:hover{text-decoration:underline}
     .statusbar{position:relative;z-index:2;margin-top:-1px;background:#fff;border-bottom:1px solid var(--line)}.status-inner{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 0}.pill{border-radius:999px;padding:5px 9px;font-size:12px;color:var(--muted);background:#f6f8fa;border:1px solid #e4e8ee}.pill.ok{color:var(--green);background:#edf7f1}.pill.warn{color:#8a5a00;background:#fff8e6}
     .dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:23px 0 20px}.stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow-sm)}.stat .label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}.stat .value{font-size:32px;line-height:1;margin-top:8px;letter-spacing:-.04em;font-weight:800}.stat .sub{font-size:12px;color:var(--muted);margin-top:7px}
     .toolbar{position:sticky;top:0;z-index:8;background:rgba(243,246,249,.91);backdrop-filter:blur(12px);padding:9px 0 11px;border-bottom:1px solid rgba(221,227,234,.8)}.tools{display:flex;gap:10px;align-items:center}.search{flex:1;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;outline:none}.search:focus{border-color:#8291a5;box-shadow:0 0 0 3px rgba(35,93,145,.10)}
@@ -33,8 +36,8 @@
     .claim-button{display:block;width:100%;border:0;background:none;padding:0;margin:10px 0 6px;text-align:left;color:var(--ink);font:inherit;font-size:18px;line-height:1.28;font-weight:800;letter-spacing:-.02em;cursor:pointer}.claim-button:hover{text-decoration:underline;text-underline-offset:3px}.claim-button:after{content:'  +';font-size:12px;color:#8a95a5}.claim-button[aria-expanded='true']:after{content:'  −'}.source{font-size:12px;color:var(--muted);margin-bottom:12px}.point{font-size:14px;line-height:1.55;margin:0;color:#2d3748}.point strong{color:var(--ink)}.relevance{font-size:13px;color:#485468;margin-top:10px}.origin{font-size:12px;color:var(--muted);margin:1px 0 7px}.whyline{font-size:13px;line-height:1.5;color:#455267;margin:0 0 12px}.whyline strong{color:var(--ink)}.biblio{margin-top:2px;padding-top:0;border-top:0;font-size:11px;line-height:1.4;color:var(--muted)}.biblio-label{font-size:9px;text-transform:uppercase;letter-spacing:.09em;font-weight:900;color:#7a8493;margin-bottom:4px}.biblio-title{font-size:12px;color:#3d4d62;font-weight:750;text-decoration:none}.biblio-title:hover{text-decoration:underline}.biblio-row{margin-top:3px}.abstract-panel{margin:10px 0 4px;padding:11px 12px;border-radius:11px;background:#f7f9fb;border:1px solid #e7ebf0;color:#3f4b5d;font-size:12px;line-height:1.55}.abstract-panel p{margin:0}.abstract-panel a{display:inline-block;margin-top:8px;font-weight:800;text-decoration:none}.abstract-panel a:hover{text-decoration:underline}.card-foot{margin-top:8px;padding-top:9px;display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #f0f3f6;font-size:11px;color:var(--muted)}
     details{margin-top:10px;font-size:12px;color:var(--muted)}summary{cursor:pointer;font-weight:700;color:#556174}details p{margin:7px 0 0}.empty{background:#fff;border:1px dashed #cfd7e1;border-radius:15px;padding:24px;color:var(--muted)}.more{display:block;margin:15px auto 0;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:9px 14px;cursor:pointer;font-weight:750}.more[hidden]{display:none}
     .method{margin-top:46px;background:#eaf0f6;border:1px solid #d6e0ea;border-radius:16px;padding:16px 18px;color:#526173;font-size:13px}.method strong{color:var(--ink)}footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:12px}
-    @media(max-width:920px){.dashboard{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}
-    @media(max-width:650px){.wrap{width:min(calc(100% - 24px),var(--max))}.topline{flex-direction:column}.hero{padding-top:31px}.dashboard{grid-template-columns:1fr 1fr}.stat{padding:14px}.stat .value{font-size:27px}.tools{flex-wrap:wrap}.search{flex-basis:100%}.section-head{grid-template-columns:1fr;gap:5px}.count{white-space:normal}.item{padding:15px}.gate-row{flex-direction:column}}
+    @media(max-width:920px){.dashboard{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.component-grid{grid-template-columns:1fr 1fr}.minimum-read{grid-template-columns:1fr}}
+    @media(max-width:650px){.wrap{width:min(calc(100% - 24px),var(--max))}.topline{flex-direction:column}.hero{padding-top:31px}.dashboard{grid-template-columns:1fr 1fr}.component-grid{grid-template-columns:1fr}.site-guide-head{align-items:flex-start;flex-direction:column}.minimum-read{padding:17px}.stat{padding:14px}.stat .value{font-size:27px}.tools{flex-wrap:wrap}.search{flex-basis:100%}.section-head{grid-template-columns:1fr;gap:5px}.count{white-space:normal}.item{padding:15px}.gate-row{flex-direction:column}}
   </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
     <div class="gate-card">
       <div class="gate-mark" aria-hidden="true"></div>
       <h1>R&I × Geopolitics Radar</h1>
-      <p>Research intelligence that accumulates with every automated scan.</p>
+      <p>Research intelligence that accumulates across scanner runs and reviewed manual ingestion.</p>
       <form id="gateForm" class="gate-row">
         <input id="password" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
         <button type="submit">Enter</button>
@@ -62,24 +65,38 @@
           </div>
           <button id="lock" class="lock">Lock radar</button>
         </div>
-        <div class="hero-actions">
-          <a class="action primary" href="read/?v=17.12.2">Read this first</a>
-          <a class="action secondary" href="briefing/?v=17">Open Radar Insights</a>
-          <a class="action secondary" href="frontier/?v=17.9.0">Open Insight Summary</a>
-          <a class="action secondary" href="priorities/?v=17.9.0">Opportunities &amp; Risks</a>
-          <a class="action secondary" href="#strand-c">Latest weak signals</a>
-        </div>
+        <nav class="hero-actions" aria-label="Primary site sections">
+          <a class="action primary" href="read/?v=17.12.3">Read at least this</a>
+          <a class="action secondary current" href="#radar" aria-current="page">Main radar</a>
+          <a class="action secondary" href="frontier/?v=17.12.3">Matrix</a>
+          <a class="action secondary" href="priorities/?v=17.12.3">Risks &amp; opportunities</a>
+        </nav>
+        <div class="utility-links"><a href="#strand-c">Jump to latest weak signals</a><span>·</span><a href="briefing/?v=17.12.3">Secondary evidence browser</a></div>
       </div>
     </header>
 
     <div class="statusbar"><div class="wrap status-inner">
-      <span class="pill">Automatic scan · every 12 hours</span>
+      <span class="pill">Scanner · manual run only</span>
       <span class="pill">Cumulative corpus · no deletion on quiet scans</span>
-      <span id="scanState" class="pill warn">Scanner · pending</span>
+      <span id="scanState" class="pill warn">Last run health · pending</span>
       <span id="lastScan" class="pill">Last scan · pending</span>
     </div></div>
 
-    <div class="wrap">
+    <div class="wrap" id="radar">
+      <section class="minimum-read" aria-label="Minimum useful read">
+        <div><div class="label">Read at least this</div><h2>Europe’s R&amp;I problem is increasingly a control problem, not only an invention problem.</h2><p>Frontier compute, conversion of research into scaled firms, and fragmented research-security machinery are the three structural bottlenecks to keep in view.</p></div>
+        <a href="read/?v=17.12.3">Open the 1-minute read →</a>
+      </section>
+      <section class="site-guide" aria-label="Four components of the site">
+        <div class="site-guide-head"><h2>The site has four components</h2><p>Start shallow; open evidence only when you need it.</p></div>
+        <div class="component-grid">
+          <article class="component"><div class="n">01 · synthesis</div><h3><a href="read/?v=17.12.3">Read at least this</a></h3><p>Shortest useful interpretation, with live context layered onto the editorial read.</p></article>
+          <article class="component active"><div class="n">02 · record</div><h3><a href="#strand-a">Main radar</a></h3><p>The complete cumulative evidence corpus: geopolitics, futures methods and weak signals.</p></article>
+          <article class="component"><div class="n">03 · classification</div><h3><a href="frontier/?v=17.12.3">Matrix</a></h3><p>Qualifying evidence placed across the 4×4 autonomy × competitiveness framework.</p></article>
+          <article class="component"><div class="n">04 · decision view</div><h3><a href="priorities/?v=17.12.3">Risks &amp; opportunities</a></h3><p>The strongest matrix-qualified risks and openings, ranked in plain language.</p></article>
+        </div>
+        <div class="secondary-view">Need a different way to browse the evidence? <a href="briefing/?v=17.12.3">Open the secondary evidence browser</a>. It is a view of the Main Radar, not a fifth component.</div>
+      </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
         <div class="stat"><div class="label">Future methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
@@ -252,9 +269,9 @@ async function loadRadar(){
     const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();state.data=d;
     const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
-    document.getElementById("scanState").textContent=d.first_scan_complete?`Scanner · ${d.scan_health==="ok"?"active":"degraded"}`:"Scanner · pending";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent="Last scan · "+(d.last_updated?fmtDate(d.last_updated):"pending");
+    document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${d.scan_health==="ok"?"healthy":"degraded"}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent="Last scan · "+(d.last_updated?fmtDate(d.last_updated):"pending");
     showNote("rotationNote",sr.rotation_note||"");showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");render();
-  }catch(e){document.getElementById("scanState").textContent="Scanner · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
+  }catch(e){document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>
 </body>

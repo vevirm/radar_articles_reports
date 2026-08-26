@@ -24,3 +24,15 @@ Missed current candidates can feed bounded exact-URL recovery queues. A later re
 ## Provenance and state integrity
 
 Public records use `discovery_provenance` = `automated`, `manual`, or `both`. Manual diagnostics preserve manual IDs, supplied URLs, directly resolved primary/full-text URLs, and the direct-link chain used during review. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.
+
+## Primary site components (V17.12.3)
+
+The public presentation has four primary components only:
+
+1. **Read at least this** (`/read/`) — shortest useful editorial synthesis plus a live layer derived from the current radar state.
+2. **Main radar** (`/`) — complete cumulative evidence corpus across Strands A/B/C.
+3. **Matrix** (`/frontier/`) — 4×4 autonomy × competitiveness classification of qualifying evidence.
+4. **Risks & opportunities** (`/priorities/`) — ranked decision view derived from matrix-qualified evidence.
+
+`/briefing/` is retained as a secondary evidence browser over the Main Radar and is deliberately not part of the four-component top-level navigation. The progressive-disclosure principle (“read at least this” → reasoning → evidence) is reused across all four primary components.
+

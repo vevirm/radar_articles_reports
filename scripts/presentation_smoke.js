@@ -38,14 +38,14 @@ try {
   const frontier = SovereigntyFrontier.buildFrontier(radar);
   const priorities = RadarPriorities.buildPriorityView(radar);
 
-  if (!Array.isArray(insights) || !insights.length) fail('Radar Insights produced no research groups');
-  else ok(`Radar Insights builds ${insights.length} research groups`);
+  if (!Array.isArray(insights) || !insights.length) fail('Evidence browser produced no research groups');
+  else ok(`Evidence browser builds ${insights.length} research groups`);
   if (!Array.isArray(weak)) fail('Weak signals builder did not return an array');
-  else ok(`Radar Insights builds ${weak.length} weak signals`);
-  if (!frontier || !Array.isArray(frontier.signals) || !frontier.signals.length) fail('Insight Summary produced no qualifying frontier signals');
-  else ok(`Insight Summary builds ${frontier.signals.length} qualifying signals`);
-  if (!priorities || !Array.isArray(priorities.risks) || !Array.isArray(priorities.opportunities)) fail('Opportunities & Risks builder failed');
-  else ok(`Opportunities & Risks builds ${priorities.opportunities.length} opportunities / ${priorities.risks.length} risks`);
+  else ok(`Evidence browser builds ${weak.length} weak signals`);
+  if (!frontier || !Array.isArray(frontier.signals) || !frontier.signals.length) fail('Matrix produced no qualifying frontier signals');
+  else ok(`Matrix builds ${frontier.signals.length} qualifying signals`);
+  if (!priorities || !Array.isArray(priorities.risks) || !Array.isArray(priorities.opportunities)) fail('Risks & opportunities builder failed');
+  else ok(`Risks & opportunities builds ${priorities.opportunities.length} opportunities / ${priorities.risks.length} risks`);
 } catch (e) {
   fail(`reader-layer runtime build: ${e.stack || e.message}`);
 }
