@@ -99,17 +99,17 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 
 
 class ExpansionOnlyStateTests(unittest.TestCase):
-    def test_bundled_radar_is_valid_current_state(self):
+    def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        # The live state is expected to evolve after future scans, so validate
-        # integrity/floors rather than freezing a one-day item count or cursor.
-        self.assertGreaterEqual(len(data.get('strand_a', [])), 100)
-        self.assertGreaterEqual(len(data.get('strand_b', [])), 20)
-        self.assertGreaterEqual(len(data.get('strand_c', [])), 10)
-        self.assertGreaterEqual(len(data.get('frontier_evidence', [])), 30)
-        self.assertRegex(data.get('last_updated', ''), r'^20\d{2}-\d{2}-\d{2}T')
-        self.assertGreaterEqual(int(data['scan_state'].get('crossref_broad_cursor', 0)), 0)
-        self.assertGreaterEqual(int(data['scan_state'].get('crossref_priority_cursor', 0)), 0)
+        self.assertEqual(len(data.get('strand_a', [])), 141)
+        self.assertEqual(len(data.get('strand_b', [])), 23)
+        self.assertEqual(len(data.get('strand_c', [])), 14)
+        self.assertEqual(len(data.get('frontier_evidence', [])), 32)
+        # Manual review must not advance scanner timestamps/cursors. These values come
+        # from the supplied 25 August state and remain unchanged by Additions III.
+        self.assertEqual(data.get('last_updated'), '2026-08-25T10:58Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 61)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 320)
         self.assertEqual(data.get('manual_ingest_profile_version'), 'v17.11.1-reviewed-manual-evidence')
         latest = data.get('manual_ingest', {}).get('batches', [])[-1]
         self.assertEqual(latest.get('source_file'), 'EU_RI_Additions_III_May-Aug_2026.docx')

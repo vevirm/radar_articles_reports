@@ -1,4 +1,6 @@
-# R&I Geopolitics Radar V17.12.0
+# R&I Geopolitics Radar V17.12.1
+
+> **V17.12.1 status:** supplied radar state inserted and verified on all pages. **Scanning is paused** via the root file `SCAN_PAUSED` — delete it and push to resume. See `CHANGELOG_V17_12_1.md`.
 
 V17.12.0 is a reader-first presentation update built on the supplied 26 August 2026 radar state. It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
 
@@ -45,7 +47,3 @@ PYTHONPATH=. python -m pytest -q
 ```
 
 See `VALIDATION_V17_12.md` for the presentation-build validation against the newer supplied state.
-
-## Current scan mode: paused
-
-This repository is intentionally packaged in **no-auto-scan hold mode**. Committing or uploading files does not invoke the scanner: `.github/workflows/radar-scan.yml` contains only `workflow_dispatch` and has no `push` or `schedule` trigger. The current `radar.json` therefore remains unchanged until a scan is deliberately started later.

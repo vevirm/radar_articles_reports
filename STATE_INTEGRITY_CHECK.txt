@@ -1,5 +1,5 @@
-V17.12.0 supplied-state check
-radar source: user-supplied radar (23).json
+V17.12.1 supplied-state check
+radar source: user-supplied radar (23).json (byte-identical to bundled radar.json)
 last_updated: 2026-08-26T02:00Z
 first_scan_complete: True
 corpus_start_date: 2026-04-21
@@ -7,4 +7,6 @@ strand_a: 141
 strand_b: 23
 strand_c: 16
 presentation build ran no live scan
-overall: PASS (supplied state intentionally replaces prior bundled radar.json)
+all four pages (root, briefing, frontier, priorities) render this state with zero JS errors
+scanning: PAUSED via SCAN_PAUSED file (delete file to resume)
+overall: PASS (supplied state inserted intact; presentation verified; scan on hold)

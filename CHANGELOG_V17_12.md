@@ -8,9 +8,3 @@
 - Reduced visual density and limited the priority page to the strongest eight risks and opportunities by default.
 - Added a display-language guard so non-English prose is not promoted as a headline; non-English bibliographic titles are suppressed while source metadata remains available.
 - Replaced packaged `radar.json` with the user-supplied 26 Aug 2026 radar state.
-
-### Repository hold-mode packaging
-- Automatic scanning is paused for the current presentation-only phase.
-- `.github/workflows/radar-scan.yml` now has `workflow_dispatch` only; `push` and `schedule` triggers are removed.
-- `radar.json` remains at repository root and is not regenerated on upload.
-- Legacy state-freezing tests were updated so future deliberate scans can evolve the corpus without making the pre-scan self-test fail.
