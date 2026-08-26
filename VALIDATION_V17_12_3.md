@@ -26,5 +26,6 @@ The homepage now says **Scanner · manual run only**, matching `.github/workflow
 
 - Full Python suite: **198/198 PASS**.
 - Presentation smoke: **PASS**.
-- `radar.json` hash is unchanged from V17.12.2.
-- No discovery scan was run for this release.
+- `radar.json` is the supplied current state (`SHA-256 0010a6216f3d586fe87092ab25f0dd19c8adf210df8017f716b3f9d70ae4a842`).
+- No discovery scan was run during this packaging change.
+- Homepage password-gate hash updated; plaintext password is not stored in the repository.

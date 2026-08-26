@@ -1,15 +1,17 @@
-V17.12.2 supplied-state + manual-ingest integrity check
+V17.12.3 supplied-current-state + password-update integrity check
 Date: 2026-08-26
 
-radar.json sha256: c543f554478ed77670b7439e9c89581ba45f20430da50a164c29288e586426f3
-scanner last_updated: 2026-08-26T08:57Z
+radar.json sha256: 0010a6216f3d586fe87092ab25f0dd19c8adf210df8017f716b3f9d70ae4a842
+scanner last_updated: 2026-08-26T11:01Z
 manual_ingest last_ingested_at: 2026-08-26T09:42Z
-strand counts: A=152 B=23 C=17
+strand counts: A=153 B=23 C=17
 frontier_evidence: 32
-scan cursors preserved from supplied base:
-  openalex_cursor=30
-  crossref_broad_cursor=97
-  crossref_priority_cursor=448
-  institution_cursor=36
+scan cursors preserved from supplied current state:
+  openalex_cursor=46
+  crossref_broad_cursor=0
+  crossref_priority_cursor=0
+  institution_cursor=72
 
-No live scan was run; only manual-ingest state was updated.
+The supplied current radar JSON was preserved byte-for-byte as radar.json.
+No live discovery scan was run during this packaging change.
+The homepage password gate SHA-256 value was updated; the plaintext password is not stored in the repository.

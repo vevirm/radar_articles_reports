@@ -101,15 +101,14 @@ class RIFuturesMethodRecallTests(unittest.TestCase):
 class ExpansionOnlyStateTests(unittest.TestCase):
     def test_bundled_radar_is_supplied_current_state(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(data.get('strand_a', [])), 152)
+        self.assertEqual(len(data.get('strand_a', [])), 153)
         self.assertEqual(len(data.get('strand_b', [])), 23)
         self.assertEqual(len(data.get('strand_c', [])), 17)
         self.assertEqual(len(data.get('frontier_evidence', [])), 32)
-        # Manual review must not advance scanner timestamps/cursors. These values come
-        # from the supplied 25 August state and remain unchanged by Additions III.
-        self.assertEqual(data.get('last_updated'), '2026-08-26T08:57Z')
-        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 97)
-        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 448)
+        # These values track the supplied current scanner state bundled with this package.
+        self.assertEqual(data.get('last_updated'), '2026-08-26T11:01Z')
+        self.assertEqual(data['scan_state']['crossref_broad_cursor'], 0)
+        self.assertEqual(data['scan_state']['crossref_priority_cursor'], 0)
         self.assertEqual(data.get('manual_ingest_profile_version'), 'v17.12.2-bounded-manual-review')
         latest = data.get('manual_ingest', {}).get('batches', [])[-1]
         self.assertEqual(latest.get('source_file'), 'EU_RI_Found_Items_Rounds_IV-VI.docx')
