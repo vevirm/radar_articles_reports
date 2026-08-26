@@ -1,6 +1,6 @@
-# R&I Geopolitics Radar V17.11.1
+# R&I Geopolitics Radar V17.12.0
 
-V17.11.1 extends the exact-link manual-evidence lane with Additions III review and fixes two diagnostic/parser edge cases without turning manual curation into an admission bypass. The supplied DOCX URL is the primary retrieval target; broad web/search-engine discovery is not part of manual ingestion.
+V17.12.0 is a reader-first presentation update built on the supplied 26 August 2026 radar state. It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
 
 ## Manual candidate ingest
 
@@ -36,7 +36,7 @@ Manual candidates are compared against the admitted corpus and saved seen-URL le
 
 ## State integrity
 
-Manual ingestion is not a live scan. The bundled `last_updated` remains the authoritative supplied value **2026-08-25T10:58Z**, with scan cursors/history preserved. Manual review/ingest timestamps are stored separately.
+Manual ingestion is not a live scan. The bundled `radar.json` is the user-supplied 26 August 2026 state (`last_updated`: **2026-08-26T02:00Z**). This presentation build does not run a new scan or alter scanner bookkeeping beyond replacing the bundled state with that supplied file.
 
 ## Validate
 
@@ -44,4 +44,4 @@ Manual ingestion is not a live scan. The bundled `last_updated` remains the auth
 PYTHONPATH=. python -m pytest -q
 ```
 
-Current complete suite: **251 passed**.
+See `VALIDATION_V17_12.md` for the presentation-build validation against the newer supplied state.

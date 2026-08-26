@@ -117,7 +117,7 @@
       if(!e||typeof e!=='object') continue;
       const key=norm(e.link||e.title||'');
       const i=insightMap.get(key)||{};
-      const claim=clean(e.core_message||i.point||e.title||'');
+      const claim=clean(i.point||RadarInsights?.completeCoreMessage?.(e.core_message||'')||e.title||'');
       const theme=clean(i.watchTheme||e.watch_theme||i._group||'');
       const fullText=clean(`${claim} ${e.title||''} ${e.summary||''} ${e.relevance_note||''} ${theme}`);
       const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(fullText);
@@ -549,7 +549,7 @@
     return {
       id:norm(linkFor(x)||candidateWhat(x)),
       title:candidateWhat(x),
-      coreMessage:clean(x.core_message || (x._origin==='Evidence signal' ? (evidence?.core_message||x._evidencePoint||candidateWhat(x)) : candidateWhat(x))),
+      coreMessage:clean(x._origin==='Evidence signal' ? (x.core_message||evidence?.core_message||x._evidencePoint||candidateWhat(x)) : candidateWhat(x)),
       bibliographicTitle:clean(x._origin==='Evidence signal' ? (evidence?.title||x.title||candidateWhat(x)) : (x.headline||x.title||candidateWhat(x))),
       authors:clean(x._origin==='Evidence signal' ? (evidence?.authors||'') : (x.authors||'')),
       itemType:clean(x._origin==='Evidence signal' ? (evidence?.type||x.type||'') : (x.type||x.signal_kind||x.signal_type||'')),
@@ -561,6 +561,7 @@
       theme:signalTheme(x),
       anchor:clean(x.anchor||''),
       evidenceTitle:clean(evidence?.title||''),
+      abstract:clean(evidence?.summary||x._evidenceSummary||x.summary||''),
       row,rowScore:rowPick.score,column,cellName:cell[0],cellSubtitle:cell[1],
       questions,questionFlags:flags,questionCount:qCount,
       direction,triage:{reach,irreversibility,attentionGap:attention,actionability,total:triage},

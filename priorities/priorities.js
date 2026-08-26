@@ -25,12 +25,17 @@
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim()}
   function maxChars(v,n=118){const s=clean(v);if(s.length<=n)return s;let c=s.slice(0,n-1).replace(/\s+\S*$/,'').trim();if(c.length<60)c=s.slice(0,n-1).trim();return c+'…'}
   function simplePriorityText(x){
+    const raw=clean(x?.coreMessage||x?.title||'').replace(/\s+/g,' ').replace(/[.!?]+$/,'');
+    if(raw&&!/…|\.\.\./.test(raw)) return maxChars(raw,220);
+    return maxChars(clean(x?.title||''),220);
+  }
+  function priorityInterpretation(x){
     const row=x?.row?.id||'other',col=x?.column?.id||'B';
-    const topic={knowledge:'research talent and knowledge',infrastructure:'research infrastructure and key inputs',conversion:'Europe’s ability to turn research into products and capabilities',rules:'EU rules and standards',other:'European research and innovation'}[row]||'European research and innovation';
-    if(col==='A') return row==='conversion'?'Europe could build more strategic technology and capability at home.':`Europe could strengthen ${topic}.`;
-    if(col==='B') return `Europe could gain protection, but ${topic} could become slower or less competitive.`;
-    if(col==='C') return `Europe could benefit, but become more dependent on non-EU partners for ${topic}.`;
-    return `Europe could become more dependent and less competitive in ${topic}.`;
+    const topic={knowledge:'research talent and knowledge',infrastructure:'infrastructure and strategic inputs',conversion:'turning research into products and capabilities',rules:'rules and standards',other:'research and innovation'}[row]||'research and innovation';
+    if(col==='A') return `Opportunity: stronger European ${topic} with no obvious competitiveness penalty.`;
+    if(col==='B') return `Risk: more autonomy could come at a cost to speed, scale or competitiveness in ${topic}.`;
+    if(col==='C') return `Risk: Europe gains capability but remains dependent on external access for ${topic}.`;
+    return `Risk: Europe becomes more dependent and less competitive in ${topic}.`;
   }
   function simpleEvidenceText(x){
     let t=clean(x?.title||'').replace(/\s+[–—-]\s+(?:Company Announcement\s+-\s+)?(?:FT\.com|Reuters|Bloomberg).*$/i,'');
@@ -67,5 +72,5 @@
     };
   }
 
-  return {buildPriorityView,structuralScore,diversifiedTop,simplePriorityText,simpleEvidenceText};
+  return {buildPriorityView,structuralScore,diversifiedTop,simplePriorityText,simpleEvidenceText,priorityInterpretation};
 });

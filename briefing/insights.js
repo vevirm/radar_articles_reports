@@ -28,6 +28,24 @@
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
   function norm(v){return ` ${clean(v).toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+.#/&-]+/g,' ').replace(/\s+/g,' ').trim()} `}
+  function likelyEnglish(v){
+    const s=clean(v); if(!s) return false;
+    // Display guard, not corpus classification: allow technical names/acronyms but reject
+    // obvious non-English prose before it reaches cards.
+    if(/[А-Яа-яІіЇїЄєҐґЁё一-龯ぁ-んァ-ン가-힣]/.test(s)) return false;
+    const n=` ${s.toLowerCase().replace(/[^a-zà-ž]+/g,' ').replace(/\s+/g,' ').trim()} `;
+    const english=(n.match(/\b(the|a|an|and|or|of|to|in|for|on|with|as|is|are|was|were|be|by|from|that|this|its|eu|europe|european)\b/g)||[]).length;
+    const foreign=(n.match(/\b(und|der|die|das|des|den|ein|eine|et|les|des|une|un|dans|pour|avec|sur|del|della|delle|gli|che|con|per|los|las|una|para|con|sobre|y|de|la|el|van|het|een|voor|met|și|sau|din|pentru|cu|w|oraz|dla|jest|na)\b/g)||[]).length;
+    const words=s.split(/\s+/).filter(Boolean).length;
+    if(words<5) return true;
+    return english>=2 || foreign<=1;
+  }
+  function completeCoreMessage(v){
+    const s=repairOcr(v).replace(/\s+/g,' ').trim();
+    if(!s || /…|\.\.\./.test(s) || isDocumentDebris(s) || !likelyEnglish(s)) return '';
+    if(s.split(/\s+/).length<5) return '';
+    return concise(s,30);
+  }
   function keyFor(x){return norm(x.link||x.title||x.headline||'').trim()}
   function dateFor(x){return clean(x.date||x.published||x.updated||x.first_seen||'')}
 
@@ -114,11 +132,13 @@
     s=s.replace(/\s+(?:THE|ANNEX|APPENDIX)\s+[A-Z][A-Z0-9 ’'&-]{8,}\.{2,}.*$/,'').trim();
     const words=s.split(/\s+/);
     if(words.length>maxWords){
-      // Prefer a complete first clause to a blind truncation.
-      const clauses=s.split(/\s*[;]\s*|\s+[–—]\s+|,\s+(?=(?:while|as|but|although|which|with|including|reflecting|raising|pushing|binding)\b)/i).map(clean).filter(Boolean);
+      // Never publish a chopped sentence. Prefer a complete proposition-sized clause;
+      // if none exists, reject this candidate and let pointFor try another sentence.
+      const clauses=s.split(/\s*[;]\s*|\s+[–—]\s+|,\s+(?=(?:while|as|but|although|which|with|including|reflecting|raising|pushing|binding|and)\b)/i).map(clean).filter(Boolean);
       const good=clauses.find(c=>c.split(/\s+/).length>=9&&c.split(/\s+/).length<=maxWords&&EVENT_VERB.test(c));
-      if(good) s=good;
-      else s=words.slice(0,maxWords).join(' ').replace(/[,:;\-–—]+$/,'')+'…';
+      const complete=good||clauses.find(c=>c.split(/\s+/).length>=9&&c.split(/\s+/).length<=maxWords&&!META.test(c));
+      if(complete) s=complete;
+      else return '';
     }
     s=s.replace(/\s+([,.!?;:])/g,'$1').trim();
     if(s&&!/[.!?…]$/.test(s)) s+='.';
@@ -128,7 +148,7 @@
   function structuredPoint(x){
     const title=repairOcr(x.title||x.headline||'');
     const s=prepareSummary(x.summary||'');
-    const n=norm(`${title} ${s}`);
+    const n=norm(`${title} ${s} ${x.core_message||''}`);
 
     // Explicit research-talent loss is itself the substantive Frontier finding.  Prefer
     // the sentence that states the loss/brain-drain condition over a nearby generic
@@ -177,6 +197,23 @@
     if(/replicable procedure for building plausible scenarios/.test(n)&&/identical instruments/.test(n)&&/perform differently/.test(n))
       return 'Scenario-building methods can test why the same circular-economy instruments work differently across institutional contexts.';
 
+    // Reader-first rewrites for recurring evidence structures where the abstract's academic
+    // phrasing obscures the actual signal.
+    if(/bulgaria/.test(n)&&/critical raw material|crma/.test(n)&&/first strategic selection|strategic selection/.test(n))
+      return "The EU's first CRMA list includes no Bulgarian projects — outdated data, slow permits and low trust keep it out.";
+
+    if(/green protectionism|green trade agenda|trade defence instruments/.test(n)&&/(cbam|deforestation regulation|foreign subsidies|anti-dumping)/.test(n))
+      return 'The EU says its new trade rules protect the climate. Trading partners say they protect EU industry.';
+
+    if(/digital identity/.test(n)&&/artificial intelligence act|ai act/.test(n)&&/convergence/.test(n))
+      return 'EU AI rules are converging with digital-identity governance, expanding responsibilities for platforms and regulators.';
+
+    if(/geoeconomic exposure/.test(n)&&/export depend/.test(n)&&/industrial policy/.test(n))
+      return "Europe's industrial-policy risk is not only import dependence — export dependence on US and Chinese markets also constrains EU choices.";
+
+    if(/waste material trading|waste trade/.test(n)&&/r&d intensity/.test(n)&&/ai innovation/.test(n))
+      return 'EU waste-trade evidence links stronger R&D intensity to better circular-economy performance; AI investment does not yet show the same effect.';
+
     return '';
   }
 
@@ -217,19 +254,21 @@
   }
 
   function pointFor(x){
-    if(x.headline) return headlinePoint(x);
+    if(x.headline){const h=headlinePoint(x); return likelyEnglish(h)?h:'';}
     const special=structuredPoint(x);
     if(special) return special;
+    const stored=completeCoreMessage(x.core_message||'');
+    if(stored) return stored;
 
     const candidates=splitSentences(x.summary||'')
       .map(s=>({s,score:candidateScore(s)}))
       .filter(o=>o.score>=7)
       .sort((a,b)=>b.score-a.score||a.s.length-b.s.length);
-    if(candidates.length){
-      const point=simplifyCandidate(candidates[0].s);
-      if(point&&!META.test(point)&&!isDocumentDebris(point)) return point;
+    for(const candidate of candidates){
+      const point=simplifyCandidate(candidate.s);
+      if(point&&!META.test(point)&&!isDocumentDebris(point)&&likelyEnglish(point)&&!/…|\.\.\./.test(point)) return point;
     }
-    // Quality over coverage: a vague report title is not an insight. Omit it.
+    // Quality over coverage: do not fall back to a foreign-language or vague title.
     return '';
   }
 
@@ -267,7 +306,7 @@
     for(const x of flatten(data)){
       const key=keyFor(x);if(!key||seen.has(key))continue;seen.add(key);
       const point=pointFor(x);
-      if(!point||isDocumentDebris(point)||META.test(point)) continue;
+      if(!point||isDocumentDebris(point)||META.test(point)||!likelyEnglish(point)) continue;
       const topic=topicFor(x,point);
       groups.get(topic).push({
         point,
@@ -284,6 +323,8 @@
         anchorBasis:clean(x.anchor_basis||''),
         why:signalWhy(x),
         title:clean(x.title||x.headline||''),
+        authors:clean(x.authors||''),
+        summary:prepareSummary(x.summary||''),
         itemType:clean(x.type||''),
         euRelevance:clean(x.eu_relevance||'')
       });
@@ -348,7 +389,7 @@
     const out=[];
     for(const x of (Array.isArray(data?.strand_c)?data.strand_c:[])){
       const key=keyFor(x); if(!key||seen.has(key)) continue; seen.add(key);
-      const what=signalWhat(x); if(!what||isDocumentDebris(what)) continue;
+      const what=signalWhat(x); if(!what||isDocumentDebris(what)||!likelyEnglish(what)) continue;
       out.push({
         what,
         why:signalWhy(x),
@@ -373,5 +414,5 @@
     return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint};
+  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
 });

@@ -1,4 +1,7 @@
-V17.11.1 complete test suite
-Command: PYTHONPATH=. pytest -q
-Result: 251 passed in 18.95s
-Date: 2026-08-25
+V17.12.0 reader-first presentation build
+Command: PYTHONPATH=. python -m pytest -q tests
+Result: 248 passed, 3 legacy-state assertion failures
+Focused UI/priority/source-aware tests: 14 passed
+JS syntax checks: PASS
+See VALIDATION_V17_12.md for details.
+Date: 2026-08-26
