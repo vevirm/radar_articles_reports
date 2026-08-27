@@ -153,12 +153,15 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
+C_ADMISSION_PROFILE_VERSION = "v17.12.9-strict-anchored-C-forward-only"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
-RULE_FIX_PROFILE_VERSION = str(CONFIG.get("rule_fix_profile_version", "v17.12.7-lane-separated-recall-fallback-discovery"))
-RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.7-new-institution-source-catchup"
+RULE_FIX_PROFILE_VERSION = "v17.12.9-A-recall-strict-C-matrix-safe"
+RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
+A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
+A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
 RULE_FIX_SOURCE_RECOVERY_MAX_PAGES = 330
@@ -523,6 +526,8 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["cycle_failed"].setdefault(key, False)
     for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor"):
         state[key] = int(state.get(key, 0) or 0)
+    state["a_recall_recovery_cursor"] = int(state.get("a_recall_recovery_cursor", 0) or 0)
+    state.setdefault("a_recall_recovery_version", "")
 
     # Admission recall expansions must re-search previously rejected material. Earlier builds
     # cached rejected institutional URLs and preserved query/depth cursors across gate changes,
@@ -1126,6 +1131,41 @@ NEWS_EXCLUDE = [
     "job with", "job opening", "job vacancy", "vacancy", "career opportunity",
     "doctoral researcher in", "phd position", "postdoctoral position", "postdoc position",
 ]
+C_ROUTINE_EXCLUDE = [
+    "honorary doctorate", "honorary degree", "elected fellow", "fellow of the",
+    "medal", "prize", "award ceremony", "receives award", "wins award", "wins prize",
+    "distinguished lecture", "guest lecture", "public lecture", "seminar", "webinar",
+    "workshop", "conference programme", "conference program", "conference agenda",
+    "postdoctoral position", "postdoc position", "phd position", "doctoral position",
+    "doctoral researcher", "job vacancy", "vacancy", "career opportunity", "recruiting",
+    "educational project", "student project", "summer school", "training course",
+]
+C_GENERIC_INDEX_TITLES = {
+    "news", "news and events", "events", "latest news", "all news", "news archive",
+    "publications", "research news", "press releases", "media",
+}
+
+def routine_signal_noise(title: str, desc: str = "") -> bool:
+    """Reject routine institutional activity before Strand-C anchoring.
+
+    C is external evidence that changes the interpretation of an existing A phenomenon;
+    it is not an awards/jobs/events/project-news bucket.
+    """
+    ht = normalized(title)
+    full = normalized(f"{title} {desc}")
+    if ht.strip(" -:|/") in C_GENERIC_INDEX_TITLES:
+        return True
+    if contains_any(full, C_ROUTINE_EXCLUDE):
+        return True
+    # Award/honour headlines are routine prestige news even when the biography mentions
+    # research capacity, Europe or competitiveness.
+    if re.search(r"\b(?:award|awarded|medal|prize|honou?r(?:ed|ary)?|fellowship)\b", ht):
+        return True
+    # Event listings are not signals; a separate substantive report about an event can still pass.
+    if re.search(r"\b(?:lecture|webinar|seminar|workshop|conference|symposium)\b", ht) and not re.search(r"\b(?:report|study|assessment|analysis|findings|evidence)\b", ht):
+        return True
+    return False
+
 NEWS_EVENT_TERMS = [
     "adopt", "approve", "launch", "announce", "suspend", "ban", "restrict", "curb", "tighten",
     "fund", "funding", "invest", "investment", "award", "back", "sign", "agree", "deal",
@@ -1556,14 +1596,13 @@ def aboutness_for_a(
         return result
 
     if mode == "abstract_only":
-        ri = _ri_hits(ta)
-        geo = _geo_hits(ta)
+        # Short institutional papers often have no separate abstract: the available body
+        # *is* the concise evidence unit. Earlier builds labelled body>=80 words as
+        # abstract_only but then ignored that body here, silently rejecting good briefs.
+        concise = ta if len(clean_text(abstract).split()) >= 8 else clean_text(f"{ta}. {body[:8000]}")
+        ri = _ri_hits(concise)
+        geo = _geo_hits(concise)
         result["ri_terms"], result["geo_terms"] = ri[:8], geo[:8]
-        # The bridge/focus classifier is the substantive test. Repetition is supporting
-        # evidence here, not a hard count that punishes a concise abstract.
-        # A bounded external-position mechanism (e.g. Europe vs US/China capacity gap)
-        # is itself geopolitical context even when the abstract does not use the word
-        # "geopolitics" or another GEO_STRONG label.
         result["pass"] = bool(ri and (geo or contextual_evidence) and (bridge or a_focus))
         result["reason"] = "about" if result["pass"] else "no_substantive_bridge"
         return result
@@ -1582,10 +1621,20 @@ def aboutness_for_a(
     min_geo_sents = int(full_cfg.get("min_geopolitics_hit_sentences", 2))
     repeated_ri = ri_sents >= min_ri_sents and (len(ri_terms) >= 2 or ri_sents >= max(3, min_ri_sents))
     repeated_geo = geo_sents >= min_geo_sents and (len(geo_terms) >= 2 or geo_sents >= max(3, min_geo_sents))
-    result["pass"] = bool(repeated_ri and repeated_geo)
+    # A source may express geopolitics as an external-position mechanism (dependence,
+    # comparative capability, talent loss, foreign access) rather than repeat a GEO_STRONG
+    # label. Require a source sentence that actually combines R&I + external actor/relation
+    # + strategic outcome; this is evidence, not a keyword waiver.
+    contextual_sentences = 0
+    if contextual_evidence:
+        for sent in split_sentences(full):
+            if _ri_hits(sent) and distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME):
+                contextual_sentences += 1
+    geo_supported = repeated_geo or contextual_sentences >= 1
+    result["pass"] = bool(repeated_ri and geo_supported)
     if not repeated_ri:
         result["reason"] = "incidental_ri"
-    elif not repeated_geo:
+    elif not geo_supported:
         result["reason"] = "incidental_geopolitics"
     else:
         result["reason"] = "about"
@@ -1659,6 +1708,18 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     if strong_body_scope or eu_count >= 2:
         evidence = strong_body_scope + direct_body
         return "direct", list(dict.fromkeys(evidence))[:4]
+
+    # Europe is part of the governing scope, not just EU institutions. For full-text
+    # institutional/research documents, a sentence that explicitly connects Europe or
+    # a member state to R&I and a strategic/geopolitical mechanism is direct scope.
+    for sent in split_sentences(body[:50000]):
+        european_here = distinct_matches(sent, EU_GENERIC) + bounded_matches(sent, MEMBER_STATE_SCOPE)
+        if european_here and _ri_hits(sent):
+            contextual_here = bool(_geo_hits(sent)) or bool(
+                distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME)
+            )
+            if contextual_here:
+                return "direct", list(dict.fromkeys(european_here))[:4]
 
     # Derived EU relevance requires an explicit implication/comparator sentence;
     # generic words such as 'policy' or 'strategy' alone do not establish relevance.
@@ -2118,14 +2179,14 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
         # Curated institutional analytical work may establish one side in title/description and
         # the other in the executive lead. Requiring a same-sentence bridge discarded reports
         # whose abstracts use neutral policy language before discussing the strategic mechanism.
-        explicit_focus = bool(ri and geo and (ri_ta or geo_ta))
+        explicit_focus = bool(ri and geo)
 
     # Secondary route: direct empirical mechanism of Europe's external R&I position. This route
     # deliberately does not accept generic competitiveness/capacity alone.
     context_text = ta if source_kind == 'scholarly' else lead
     external = distinct_matches(context_text, A_EXTERNAL_RELATION)
     outcomes = distinct_matches(context_text, A_STRATEGIC_RI_OUTCOME)
-    contextual_focus = bool(ri_ta and external and outcomes) if source_kind == 'scholarly' else bool(ri and external and outcomes and ri_ta)
+    contextual_focus = bool(ri_ta and external and outcomes) if source_kind == 'scholarly' else bool(ri and external and outcomes)
     # The contextual route is an expansion route, so page-type noise is fail-closed here.
     # This does not affect explicit A evidence or Strand B method papers whose abstracts may
     # legitimately mention workshops, calls, facilities or other methodological context.
@@ -3344,7 +3405,11 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     page_type = meta_content(soup, ["og:type", "article:section", "type"])
     desc = meta_content(soup, ["description", "og:description", "twitter:description"])
     html_lang = clean_text((soup.html or {}).get("lang", "") if soup.html else "")
-    if not english_record_ok(f"{title}. {desc}", html_lang, title=title):
+    # Early language rejection is allowed only with positive foreign-language evidence.
+    # Short English institutional titles are often ambiguous until the body/PDF is read.
+    lang_norm = normalized(html_lang).replace("_", "-")
+    explicit_foreign_lang = bool(lang_norm and lang_norm not in ENGLISH_LANGUAGE_CODES and not lang_norm.startswith("en-"))
+    if explicit_foreign_lang or _strong_non_english_evidence(f"{title}. {desc}", title_mode=False):
         _diag_inc("institution_reject_non_english")
         return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
@@ -3426,6 +3491,14 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         ptxt, pwords = pdf_text(pdf_url)
         if pwords > word_count:
             body, word_count = ptxt, pwords
+            # A report/paper linked from a /news/ wrapper must be judged as the underlying
+            # document. Recalculate exclusions against the PDF rather than letting the
+            # wrapper URL permanently block Strand A. Content-level exclusions still apply.
+            exclusion = document_exclusion_reason(title, body[:1600], pdf_url, "")
+
+    if not english_record_ok(f"{title}. {desc}. {body[:5000]}", html_lang, title=title):
+        _diag_inc("institution_reject_non_english")
+        return None
 
     # Short official pages are often poor Strand-A reports but excellent Strand-C
     # developments (for example a new research-talent measure, implementation decision,
@@ -3460,22 +3533,14 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         _diag_inc("institution_reject_document_exclusion")
         return None
 
-    # Substantive-length rule.  Long analytical work is preferred, but concise
-    # Tier-1 policy papers can qualify when the topic gates themselves are strong.
+    # Retrieval sufficiency, not an admission-length rule. The written radar criterion is
+    # "reject incidental mentions, not short documents"; source-aware aboutness below is
+    # responsible for deciding substance. Only near-empty wrappers are stopped here.
     low_title = normalized(title)
-    min_words = int(CONFIG.get("institution_min_words", 900))
-    tier1_brief_min = int(CONFIG.get("institution_tier1_brief_min_words", 500))
-    tier3_min = int(CONFIG.get("institution_tier3_min_words", 1200))
-    effective_min = tier3_min if tier >= 3 else min_words
-    if word_count < effective_min:
-        brief_exception = tier == 1 and word_count >= tier1_brief_min and any(x in low_title for x in [
-            "policy brief", "briefing", "working paper", "discussion paper", "policy paper",
-            "report", "study", "analysis", "strategic", "security", "foresight", "research",
-            "innovation", "technology", "science", "assessment"
-        ])
-        if not brief_exception:
-            _diag_inc("institution_reject_too_short")
-            return None
+    retrieval_floor = 100 if tier <= 2 else 180
+    if word_count < retrieval_floor:
+        _diag_inc("institution_reject_too_short")
+        return None
 
     ev = gate_scope(title, desc, body, tier, source_kind="institutional")
     _record_ab_gate_diagnostic("institution", ev)
@@ -3500,7 +3565,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     )
 
 
-def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None) -> tuple[list[tuple[str, str, int, str]], str | None]:
+def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None, reconsider_seen: bool = False) -> tuple[list[tuple[str, str, int, str]], str | None]:
     domain = src["domain"]
     entries = []
     max_entries = int(CONFIG.get("sitemap_max_entries", 800))
@@ -3513,11 +3578,12 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if len(entries) >= max_entries:
             break
     if not entries:
-        rule_fix_domains = {clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in RULE_FIX_INSTITUTION_SOURCES}
-        if clean_text(domain).lower().removeprefix("www.") in rule_fix_domains:
-            fallback = _rule_fix_fallback_domain_jobs(src, from_date, stage_deadline)
-            if fallback:
-                return fallback, f"No usable sitemap: {domain}; using bounded institutional HTML fallback ({len(fallback)} page(s))"
+        # Trusted institutional sources without usable sitemaps still deserve bounded
+        # source-local discovery. This follows only same-domain links from a few hubs;
+        # it is not a global crawler or search-engine dependency.
+        fallback = _rule_fix_fallback_domain_jobs(src, from_date, stage_deadline, reconsider_seen)
+        if fallback:
+            return fallback, f"No usable sitemap: {domain}; using bounded institutional HTML fallback ({len(fallback)} page(s))"
         return [], f"No usable sitemap: {domain}"
     seen = set(); jobs = []
     limit_key = "institution_pages_per_domain_bootstrap" if bootstrap else "institution_pages_per_domain"
@@ -3531,7 +3597,7 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(u) in KNOWN_AB_LINKS:
             continue
         fp = institution_fingerprint(u, last)
-        if fp in INSTITUTION_SEEN_FINGERPRINTS:
+        if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
             continue
         seen.add(u)
         jobs.append((u, src["name"], int(src["tier"]), fp))
@@ -3540,7 +3606,7 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     return jobs, None
 
 
-def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None, reconsider_seen: bool = False) -> list[dict[str, Any]]:
     jobs = []
     sources = sources_override if sources_override is not None else CONFIG["institution_sources"]
     discovery_workers = int(CONFIG.get("institution_discovery_workers", 12))
@@ -3553,7 +3619,7 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
             if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
                 break
             submitted_sources.append(clean_text(src.get("domain", "")).lower().removeprefix("www."))
-            futs.append(ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline))
+            futs.append(ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline, reconsider_seen))
         for fut in cf.as_completed(futs):
             try:
                 found, warn = fut.result()
@@ -3588,6 +3654,7 @@ def _rule_fix_fallback_domain_jobs(
     src: dict[str, Any],
     from_date: dt.date,
     stage_deadline: float | None = None,
+    reconsider_seen: bool = False,
 ) -> list[tuple[str, str, int, str]]:
     """Bounded same-domain HTML fallback for sources without a usable sitemap.
 
@@ -3654,7 +3721,7 @@ def _rule_fix_fallback_domain_jobs(
         # repair version even if an earlier buggy pass fingerprinted them before
         # the relevant C/A-B logic was fixed. Ordinary hub-discovered pages still
         # respect the persisted seen cache.
-        if fp in INSTITUTION_SEEN_FINGERPRINTS and nu not in seed_norms:
+        if fp in INSTITUTION_SEEN_FINGERPRINTS and nu not in seed_norms and not reconsider_seen:
             continue
         out.append((u, source_name, tier, fp))
         if len(out) >= max(8, int(RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN)):
@@ -5277,6 +5344,8 @@ MATURE_SIGNAL_MARKERS = [
 
 def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
     """A C item may be an early change indicator or new evidence that reframes Strand A."""
+    if routine_signal_noise(title, desc):
+        return False
     full = normalized(f'{title} {desc}')
     early = contains_any(full, WEAK_SIGNAL_MARKERS)
     reframing = reframing_signal_text(full)
@@ -5292,6 +5361,8 @@ def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
     return True
 
 def factual_news(title: str, desc: str) -> bool:
+    if routine_signal_noise(title, desc):
+        return False
     full = normalized(f'{title} {desc}')
     # Keep opinion/commentary exclusions, but do not discard a labelled news-analysis item
     # when it contains genuine new evidence/indicators. This is a common packaging label at
@@ -5503,7 +5574,8 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
     """Anchor C only to substantive Strand-A evidence.
 
     B is a methods library and must never serve as the substantive claim that a weak
-    signal updates. A signal can anchor to one A publication or to a recurring A theme.
+    signal updates. A signal must anchor to a concrete A publication; broad recurring
+    themes alone are not sufficient.
     """
     internals = [internalize_previous(x) for x in a_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != 'title:']
@@ -5530,27 +5602,24 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             jacc=len(ntok & atok)/max(1,len(ntok | atok))
             aentities=set(distinct_matches(a.get('title','')+' '+a.get('summary',''), ENTITY_TERMS+GEO_ACTORS))
             entity_overlap=len(nentities & aentities)
-            broad_only=shared=={'critical and emerging technologies'}
-            if broad_only and entity_overlap==0 and jacc<0.055:
+            broad_themes={
+                'critical and emerging technologies',
+                'R&I competitiveness / technological capabilities',
+                'economic security and R&I',
+            }
+            broad_only=bool(shared) and shared.issubset(broad_themes)
+            # A generic AI/innovation theme is not enough. Broad-theme signals need a
+            # concrete shared entity/mechanism and textual overlap with the A source.
+            if broad_only and (entity_overlap==0 or jacc<0.025):
                 continue
             score=3.0*len(shared)+1.5*entity_overlap+8.0*jacc
             if any(t in SPECIFIC_ANCHOR_THEMES for t in shared): score+=1.0
             if best is None or score>best[0]: best=(score,a,sorted(shared))
         anchor=''; score=0.0; shared_themes=[]; anchor_basis=''
-        if best and best[0] >= 2.45:
+        if best and best[0] >= 4.0:
             score,a,shared_themes=best
             anchor=f"{a['title']} (Strand A)"
             anchor_basis='publication'
-        else:
-            common=sorted(nthemes & recurring)
-            if common:
-                theme=common[0]
-                supporting=[x['title'] for x in internals if theme in x.get('_themes',[])][:2]
-                if supporting:
-                    shared_themes=[theme]
-                    score=2.45+0.4*min(2,len(supporting))
-                    anchor=f"Recurring Strand-A theme: {theme} — supported by {'; '.join(supporting)}"
-                    anchor_basis='A-theme'
         if not anchor:
             continue
         text=n.get('headline','')+' '+n.get('_desc','')
@@ -5934,19 +6003,14 @@ def main() -> int:
         and int(prior_rule_fix_state.get("rule_fix_source_recovery_sources_attempted", 0) or 0) >= expected_rule_fix_sources
         and int(prior_rule_fix_state.get("rule_fix_source_recovery_sources_with_jobs", 0) or 0) >= expected_rule_fix_sources
     )
-    rule_fix_source_recovery_needed = not rule_fix_source_recovery_complete
+    # V17.12.9 supersedes the special 11-source catch-up with the rotating four-month
+    # institutional A-recovery lane below. That lane covers the *entire* trusted source
+    # list, has its own cursor, and cannot widen Strand C. Keep old markers for audit
+    # history, but do not spend another 6-minute stage on the obsolete special lane.
+    rule_fix_source_recovery_complete = False
+    rule_fix_source_recovery_needed = False
     rule_fix_source_recovery_attempted = False
     rule_fix_recovered: list[dict[str, Any]] = []
-
-    # Remove only stale markers created by the buggy activation logic.  No corpus,
-    # query bank, backfill flag, seen-cache, or normal cursor is touched.
-    if rule_fix_source_recovery_needed:
-        state.pop("rule_fix_source_recovery_verified_complete", None)
-        state.pop("rule_fix_source_recovery_completed_at", None)
-        state.pop("rule_fix_source_recovery_sources_attempted", None)
-        state.pop("rule_fix_source_recovery_sources_with_jobs", None)
-        if state.get("rule_fix_source_recovery_version") == RULE_FIX_SOURCE_RECOVERY_VERSION:
-            state.pop("rule_fix_source_recovery_version", None)
     phase_started = time.monotonic()
     news_deadline = phase_started + int(CONFIG.get("news_stage_seconds", 240))
     oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
@@ -6012,9 +6076,8 @@ def main() -> int:
     if rule_fix_source_recovery_needed and budget_remaining() > 210:
         rule_fix_source_recovery_attempted = True
         old_signal_window_start = SIGNAL_WINDOW_START_DATE
-        # Permit historically missed institutional developments from these new sources
-        # to enter the existing C anchoring pipeline during this one recovery pass.
-        SIGNAL_WINDOW_START_DATE = DATE_FLOOR
+        # Historical source recovery is for missed A/B publications. Strand C remains
+        # on its current-news window; otherwise old awards/jobs/events become fake signals.
         recovery_deadline = min(
             time.monotonic() + int(RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS),
             (SCAN_DEADLINE_MONO or (time.monotonic() + int(RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS)))
@@ -6172,6 +6235,41 @@ def main() -> int:
         execution_stats=execution_stats,
     )
     inst = dedupe_candidates([x for x in (manual_recovered + rule_fix_recovered + inst) if isinstance(x, dict)])
+
+    # V17.12.9: four-month A recall repair for institutional sources previously seen under
+    # stricter/buggy admission rules. It uses its own cursor and ignores only the rejected-page
+    # fingerprint cache; normal institution_cursor/backfill state is untouched. The lane rotates
+    # across all configured institutions and completes over several scans.
+    a_recall_complete = state.get("a_recall_recovery_version") == A_RECALL_RECOVERY_VERSION
+    if (not a_recall_complete) and budget_remaining() > 210:
+        recovery_cursor = int(state.get("a_recall_recovery_cursor", 0) or 0)
+        recovery_sources, recovery_next, recovery_wrapped = rotating_batch(
+            institution_sources_all, recovery_cursor, A_RECALL_RECOVERY_SOURCES_PER_SCAN
+        )
+        if recovery_sources:
+            log_progress(
+                f"Four-month institutional A-recall recovery: {len(recovery_sources)} source(s) from {DATE_FLOOR.isoformat()} "
+                f"(normal institution cursor remains {state.get('institution_cursor', 0)})"
+            )
+            a_recovery_deadline = time.monotonic() + min(240, max(45, int(budget_remaining() - 150)))
+            a_recovery_execution: dict[str, Any] = {}
+            recovered_a = safe_stage(
+                "institutional A-recall recovery", collect_institutions, DATE_FLOOR, warnings,
+                False, recovery_sources, a_recovery_deadline, a_recovery_execution, True
+            )
+            inst = dedupe_candidates(inst + [x for x in recovered_a if isinstance(x, dict)])
+            all_recovery_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in institution_sources_all]
+            planned_recovery_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in recovery_sources]
+            executed_recovery_domains = set(a_recovery_execution.get("institution_sources", set()))
+            state["a_recall_recovery_cursor"], recovery_wrapped, recovery_executed = committed_rotation_cursor(
+                all_recovery_domains, recovery_cursor, planned_recovery_domains, executed_recovery_domains
+            )
+            execution_stats["a_recall_recovery_sources_executed"] = int(execution_stats.get("a_recall_recovery_sources_executed", 0)) + recovery_executed
+            execution_stats["a_recall_recovery_admitted_ab"] = int(execution_stats.get("a_recall_recovery_admitted_ab", 0)) + len(recovered_a)
+            if recovery_wrapped:
+                state["a_recall_recovery_version"] = A_RECALL_RECOVERY_VERSION
+                log_progress("Four-month institutional A-recall recovery completed one full source rotation")
+
     if INSTITUTION_SIGNAL_CANDIDATES:
         # Direct institutional pages are frequently invisible to Google News. Merge
         # recent factual candidates into the same C pipeline; anchoring/dedupe later
@@ -6586,6 +6684,7 @@ def main() -> int:
         "backfill_complete": backfill_complete,
         "signal_discovery_version": signal_marker,
         "signal_quality_profile_version": SIGNAL_QUALITY_PROFILE_VERSION,
+        "c_admission_profile_version": C_ADMISSION_PROFILE_VERSION,
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
