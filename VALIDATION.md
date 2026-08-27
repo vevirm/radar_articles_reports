@@ -1,18 +1,9 @@
-# V17.11.1 validation
+# Current validation — V17.12.4
 
-Validated against the supplied repository, authoritative `radar (22).json`, and `EU_RI_Additions_III_May-Aug_2026.docx` using an exact-link reviewed-evidence pack.
+The user-supplied standalone `radar (26).json` was used as the authoritative cumulative state because it was newer than the V17.12.3 ZIP copy. The manual batch reviewed 63 bibliography entries, added 23 verified substantive Strand-A records, assigned 12 source-evidence-backed matrix placements, matched 7 existing records without duplication, kept 24 core-gate rejects and 8 context/reference/outside-window records outside the public radar, and left one record-level item deferred. One additional component of a compound citation also remains deferred.
 
-- Manual parser covers DOCX/PDF/CSV/JSON/YAML/YML/TXT/Markdown.
-- Exact supplied URL remains the manual retrieval key; no search-engine discovery is used in the manual path.
-- Direct redirects and direct links exposed by a supplied page may resolve an underlying primary source while preserving the curator-supplied URL; diagnostics retain the resolved URL and direct-link chain.
-- Parser regression coverage includes later-listed `(primary)` cells and numbered weak-signal subsections.
-- Pre-ingest comparison is frozen so same-batch manual duplicates cannot become false automated hits.
-- Verified source-based pass-1 failures are recorded as `rejected_core_gate` and are not left in exact-URL recovery queues.
-- Full-text, partial-text, abstract-only, metadata-only, secondary, forthcoming and context records remain distinct.
-- Curator cells remain hypotheses; reviewed source evidence supplies `matrix_dimension`, `quadrant_claimed`, and `quadrant_implied`.
-- Manual ingestion preserves live-scan bookkeeping. `last_updated` remains **2026-08-25T10:58Z**.
-- Final state: **141 Strand A**, **23 Strand B**, **14 weak signals**.
-- Additions III contributes **5 new Frontier matrix signals**.
-- Complete automated suite: **251 passed** (`PYTHONPATH=. pytest -q`).
+The scanner `last_updated` timestamp remains `2026-08-26T19:37Z`; no scan cursor was advanced. The manual-ingest ledger records the separate batch timestamp and all 63 decisions.
 
-No live scan occurred during this build. Manual review/ingest timestamps are stored separately from scanner timestamps/cursors.
+A canonical URL + normalized-title integrity pass found two duplicate-source records already present in the newer standalone baseline. They were consolidated while preserving alternate-title/version metadata. Final public evidence arrays contain **0 duplicate normalized titles** and **0 duplicate canonical source URLs**.
+
+Focused regression tests passed: **49 tests + 4 subtests** covering manual ingest, source-aware matrix logic, site architecture and insights rendering. Presentation smoke passed with `176 A / 24 B / 17 C`, **129 qualifying matrix signals**, and valid checked JavaScript syntax.

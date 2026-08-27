@@ -25,7 +25,7 @@ Missed current candidates can feed bounded exact-URL recovery queues. A later re
 
 Public records use `discovery_provenance` = `automated`, `manual`, or `both`. Manual diagnostics preserve manual IDs, supplied URLs, directly resolved primary/full-text URLs, and the direct-link chain used during review. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.
 
-## Primary site components (V17.12.3)
+## Primary site components (V17.12.4)
 
 The public presentation has four primary components only:
 

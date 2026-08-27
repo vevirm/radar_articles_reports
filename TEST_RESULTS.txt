@@ -1,21 +1,24 @@
-V17.12.2 bounded manual-ingest update
-Date: 2026-08-26
+CURRENT PACKAGE TEST RESULTS — V17.12.4
 
-No live scan was run.
+Focused regression suite:
+49 passed, 4 subtests passed.
+Covered manual ingest, source-aware matrix, site architecture and insights rendering.
 
-Full Python regression suite:
-  python -m pytest -q
-  255 passed
+Presentation smoke: PASS
+- radar.json parses (176 A / 24 B / 17 C)
+- Evidence browser builds 14 research groups
+- Matrix builds 129 qualifying signals
+- Risks & opportunities builds 15 opportunities / 15 risks
+- Checked JavaScript syntax passed
 
-Presentation smoke check:
-  node scripts/presentation_smoke.js
-  PASS
-  - radar.json parsed: 152 A / 23 B / 17 C
-  - Radar Insights built successfully
-  - Insight Summary and Opportunities & Risks built successfully
-  - all reader JavaScript and inline scripts compiled
-  - no network discovery or scanner was run
+Data integrity: PASS
+- 63 manual decisions embedded in radar.json manual_ingest.records
+- 23 new substantive admissions
+- 12 new matrix placements
+- 7 existing matches, no duplicate insertion
+- 2 pre-existing duplicate-source records consolidated
+- 0 duplicate normalized titles
+- 0 duplicate canonical source URLs
+- scanner last_updated preserved at 2026-08-26T19:37Z
 
-Manual rounds IV–VI batch:
-  58 parsed / 4 existing / 1 seen-not-admitted / 53 not found
-  10 new substantive / 7 new matrix / 40 deferred / 4 reviewed core-gate rejects
+A monolithic full pytest run was attempted and exceeded the execution ceiling before completion; no failures were printed before cutoff. The focused suites above cover the modified paths.

@@ -63,7 +63,7 @@ PYTHONPATH=. python -m pytest -q
 
 See `VALIDATION_V17_12_2.md` for the current manual-ingest/state validation. `VALIDATION_V17_12_1.md` and `VALIDATION_V17_12.md` remain the historical presentation/readability records.
 
-## V17.12.3 site structure
+## V17.12.4 site structure
 
 Primary navigation is intentionally limited to **Read at least this**, **Main radar**, **Matrix**, and **Risks & opportunities**. `briefing/` remains available only as a secondary evidence browser. The scanner workflow is manual (`workflow_dispatch`) in this presentation-first build.
 

@@ -1,17 +1,25 @@
-V17.12.3 supplied-current-state + password-update integrity check
-Date: 2026-08-26
+STATE INTEGRITY CHECK — V17.12.4 manual batch
 
-radar.json sha256: 0010a6216f3d586fe87092ab25f0dd19c8adf210df8017f716b3f9d70ae4a842
-scanner last_updated: 2026-08-26T11:01Z
-manual_ingest last_ingested_at: 2026-08-26T09:42Z
-strand counts: A=153 B=23 C=17
-frontier_evidence: 32
-scan cursors preserved from supplied current state:
-  openalex_cursor=46
-  crossref_broad_cursor=0
-  crossref_priority_cursor=0
-  institution_cursor=72
+Authoritative starting state: user-supplied radar (26).json
+Reason: it was newer than the radar.json bundled in the V17.12.3 ZIP.
 
-The supplied current radar JSON was preserved byte-for-byte as radar.json.
-No live discovery scan was run during this packaging change.
-The homepage password gate SHA-256 value was updated; the plaintext password is not stored in the repository.
+Preserved scanner state:
+- last_updated: 2026-08-26T19:37Z
+- scan cursors: unchanged by manual ingestion
+- standalone-only records present before this batch: preserved
+
+Manual batch:
+- source: EU_RI_Found_Items_List.docx
+- batch: 697d3b227e28-d9d09026
+- reviewed bibliography entries: 63
+- new Strand-A items: 23
+- new matrix placements: 12
+- existing matches: 7
+- record-level defer: 1
+- core-gate rejects: 24
+- context/reference/outside-window: 8
+
+Duplicate invariant after cleanup:
+- duplicate normalized titles across public evidence arrays: 0
+- duplicate canonical source URLs across public evidence arrays: 0
+- two duplicate-source records already present in the standalone baseline were merged with alternate/version metadata preserved.
