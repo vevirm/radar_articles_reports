@@ -157,7 +157,11 @@ SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
-RULE_FIX_PROFILE_VERSION = str(CONFIG.get("rule_fix_profile_version", "v17.12.5-lane-separated-recall"))
+RULE_FIX_PROFILE_VERSION = str(CONFIG.get("rule_fix_profile_version", "v17.12.6-lane-separated-recall-targeted-catchup"))
+RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.6-new-institution-source-catchup"
+RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
+RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
+RULE_FIX_SOURCE_RECOVERY_MAX_PAGES = 330
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -3500,6 +3504,181 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     return out
 
 
+def _rule_fix_recovery_domain_jobs(
+    src: dict[str, Any],
+    from_date: dt.date,
+    stage_deadline: float | None = None,
+) -> tuple[list[tuple[str, str, int, str]], str | None]:
+    """Discover a temporally balanced historical sample for a newly added source.
+
+    Normal institutional rotation is intentionally incremental and must stay that way.
+    This helper is only for the one-time V17.12.6 source catch-up.  It samples across
+    months instead of taking only the newest sitemap URLs, so a newly introduced source
+    can actually be checked back to the preserved corpus floor without resetting any
+    normal cursor or global backfill flag.
+    """
+    domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    if not domain:
+        return [], None
+    entries: list[tuple[str, dt.date | None]] = []
+    max_entries = int(CONFIG.get("sitemap_max_entries", 800))
+    for sm in discover_sitemaps(domain):
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            return [], f"Rule-fix source catch-up budget reached before finishing sitemap discovery: {domain}"
+        entries.extend(sitemap_entries(sm))
+        if len(entries) >= max_entries:
+            break
+    if not entries:
+        return [], f"Rule-fix source catch-up: no usable sitemap for {domain}"
+
+    candidates: list[tuple[int, dt.date, str, str]] = []
+    seen: set[str] = set()
+    for u, last in entries:
+        if u in seen:
+            continue
+        seen.add(u)
+        score = institution_url_score(u, last, from_date)
+        if score < 0:
+            continue
+        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(u) in KNOWN_AB_LINKS:
+            continue
+        fp = institution_fingerprint(u, last)
+        if fp in INSTITUTION_SEEN_FINGERPRINTS:
+            continue
+        # Missing sitemap dates remain eligible.  Dated URLs are sampled across months
+        # below; using date.min for undated URLs keeps them from crowding out dated ones.
+        candidates.append((score, last or dt.date.min, u, fp))
+
+    if not candidates:
+        return [], None
+
+    per_domain = max(8, int(RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN))
+    monthly: dict[tuple[int, int] | tuple[int, int], list[tuple[int, dt.date, str, str]]] = {}
+    undated: list[tuple[int, dt.date, str, str]] = []
+    for row in candidates:
+        _score, last, _u, _fp = row
+        if last == dt.date.min:
+            undated.append(row)
+        else:
+            monthly.setdefault((last.year, last.month), []).append(row)
+
+    selected: list[tuple[int, dt.date, str, str]] = []
+    selected_urls: set[str] = set()
+    # Round-robin across every observed month before taking extra pages.  This guarantees
+    # that the oldest in-scope month is not crowded out by newer months when the per-domain
+    # cap is reached (the exact failure mode the first repair exposed).
+    month_rows = {
+        ym: sorted(rows, key=lambda r: (r[0], r[1]), reverse=True)
+        for ym, rows in monthly.items()
+    }
+    ordered_months = sorted(month_rows, reverse=True)
+    depth = 0
+    while len(selected) < per_domain and ordered_months:
+        added_this_round = False
+        for ym in ordered_months:
+            rows = month_rows[ym]
+            if depth >= len(rows):
+                continue
+            row = rows[depth]
+            if row[2] not in selected_urls:
+                selected.append(row); selected_urls.add(row[2])
+                added_this_round = True
+            if len(selected) >= per_domain:
+                break
+        if not added_this_round:
+            break
+        depth += 1
+
+    # Fill remaining capacity with the strongest URLs overall, then a few undated URLs.
+    for row in sorted(candidates, key=lambda r: (r[0], r[1]), reverse=True):
+        if row[2] in selected_urls:
+            continue
+        selected.append(row); selected_urls.add(row[2])
+        if len(selected) >= per_domain:
+            break
+    if len(selected) < per_domain:
+        for row in sorted(undated, key=lambda r: r[0], reverse=True):
+            if row[2] in selected_urls:
+                continue
+            selected.append(row); selected_urls.add(row[2])
+            if len(selected) >= per_domain:
+                break
+
+    jobs = [(u, clean_text(src.get("name")) or domain, int(src.get("tier", 2) or 2), fp) for _s, _d, u, fp in selected[:per_domain]]
+    return jobs, None
+
+
+def collect_rule_fix_source_recovery(
+    from_date: dt.date,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """One-time, bounded catch-up for only the sources introduced by V17.12.5.
+
+    This deliberately does *not* touch ``institution_cursor`` or any ordinary backfill
+    marker.  The caller persists a separate completion marker only after every new
+    source was attempted and this stage finished before its deadline.
+    """
+    sources = [dict(x) for x in RULE_FIX_INSTITUTION_SOURCES]
+    discovery_workers = min(8, max(1, int(CONFIG.get("institution_discovery_workers", 12))))
+    page_workers = min(18, max(1, int(CONFIG.get("institution_page_workers", 24))))
+    submitted: list[str] = []
+    jobs: list[tuple[str, str, int, str]] = []
+    budget_hit = False
+    log_progress(
+        f"Targeted new-source catch-up: {len(sources)} source(s) from preserved corpus floor {from_date.isoformat()}"
+    )
+    with cf.ThreadPoolExecutor(max_workers=discovery_workers) as ex:
+        futs = []
+        for src in sources:
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+                budget_hit = True
+                break
+            domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+            if domain:
+                submitted.append(domain)
+            futs.append(ex.submit(_rule_fix_recovery_domain_jobs, src, from_date, stage_deadline))
+        for fut in cf.as_completed(futs):
+            try:
+                found, warn = fut.result()
+                jobs.extend(found)
+                if warn:
+                    warnings.append(warn)
+            except Exception as e:
+                warnings.append(f"Rule-fix source catch-up sitemap: {type(e).__name__}")
+
+    # Keep this pass bounded even if a large institutional sitemap is unusually noisy.
+    jobs = jobs[:max(1, int(RULE_FIX_SOURCE_RECOVERY_MAX_PAGES))]
+    log_progress(f"Targeted new-source catch-up: parsing {len(jobs)} historical candidate page(s)")
+    out: list[dict[str, Any]] = []
+    with cf.ThreadPoolExecutor(max_workers=page_workers) as ex:
+        futs = []
+        for u, s, t, fp in jobs:
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+                budget_hit = True
+                break
+            futs.append(ex.submit(parse_institution_page, u, s, t, stage_deadline, fp))
+        for fut in cf.as_completed(futs):
+            try:
+                item = fut.result()
+                if item:
+                    out.append(item)
+            except Exception as e:
+                warnings.append(f"Rule-fix source catch-up page: {type(e).__name__}")
+
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        budget_hit = True
+    if isinstance(execution_stats, dict):
+        execution_stats.setdefault("rule_fix_recovery_sources", set()).update(x for x in submitted if x)
+        execution_stats["rule_fix_recovery_budget_hit"] = bool(budget_hit)
+        execution_stats["rule_fix_recovery_jobs"] = len(jobs)
+        execution_stats["rule_fix_recovery_admitted_ab"] = len(out)
+    if budget_hit:
+        warnings.append("Targeted new-source catch-up budget reached; completion marker left pending for the next scan")
+    return dedupe_candidates(out)
+
+
 def manual_recovery_jobs(previous: dict[str, Any], limit: int | None = None) -> list[dict[str, Any]]:
     """Return a bounded exact-URL recovery queue created by manual candidate ingestion.
 
@@ -5560,6 +5739,35 @@ def main() -> int:
     log_progress(f"Weak-signal window: {news_lookback}h (recovery backfill={signal_backfill})")
     news_warnings: list[str] = []
     execution_stats: dict[str, Any] = {}
+    # V17.12.6 activation repair: a version string alone is NOT proof that the
+    # targeted catch-up actually ran.  The first V17.12.6 build could persist the
+    # version/completed_at marker when the lane had been skipped.  Require a separate
+    # verified-complete flag plus evidence that every configured recovery domain was
+    # attempted.  These fields live only in scan_state and do not reset or move any
+    # normal scanner cursor/backfill state.
+    expected_rule_fix_sources = len({
+        clean_text(x.get("domain", "")).lower().removeprefix("www.")
+        for x in RULE_FIX_INSTITUTION_SOURCES
+        if clean_text(x.get("domain", ""))
+    })
+    prior_rule_fix_state = previous.get("scan_state") if isinstance(previous.get("scan_state"), dict) else {}
+    rule_fix_source_recovery_complete = bool(
+        prior_rule_fix_state.get("rule_fix_source_recovery_verified_complete")
+        and prior_rule_fix_state.get("rule_fix_source_recovery_version") == RULE_FIX_SOURCE_RECOVERY_VERSION
+        and int(prior_rule_fix_state.get("rule_fix_source_recovery_sources_attempted", 0) or 0) >= expected_rule_fix_sources
+    )
+    rule_fix_source_recovery_needed = not rule_fix_source_recovery_complete
+    rule_fix_source_recovery_attempted = False
+    rule_fix_recovered: list[dict[str, Any]] = []
+
+    # Remove only stale markers created by the buggy activation logic.  No corpus,
+    # query bank, backfill flag, seen-cache, or normal cursor is touched.
+    if rule_fix_source_recovery_needed:
+        state.pop("rule_fix_source_recovery_verified_complete", None)
+        state.pop("rule_fix_source_recovery_completed_at", None)
+        state.pop("rule_fix_source_recovery_sources_attempted", None)
+        if state.get("rule_fix_source_recovery_version") == RULE_FIX_SOURCE_RECOVERY_VERSION:
+            state.pop("rule_fix_source_recovery_version", None)
     phase_started = time.monotonic()
     news_deadline = phase_started + int(CONFIG.get("news_stage_seconds", 240))
     oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
@@ -5617,6 +5825,51 @@ def main() -> int:
         explore_bank, cr_explore_cursor_before, cr_explore, executed_cr
     )
 
+    # Before ordinary institutional rotation, give only the newly introduced V17.12.5
+    # sources a one-time catch-up from the preserved corpus floor.  The first rule-fix
+    # run correctly preserved all cursors, but that also meant these sources inherited
+    # the 14-day incremental window and could not recover older May-July material.
+    # This separate lane fixes that without resetting or moving any normal cursor.
+    if rule_fix_source_recovery_needed and budget_remaining() > 210:
+        rule_fix_source_recovery_attempted = True
+        old_signal_window_start = SIGNAL_WINDOW_START_DATE
+        # Permit historically missed institutional developments from these new sources
+        # to enter the existing C anchoring pipeline during this one recovery pass.
+        SIGNAL_WINDOW_START_DATE = DATE_FLOOR
+        recovery_deadline = min(
+            time.monotonic() + int(RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS),
+            (SCAN_DEADLINE_MONO or (time.monotonic() + int(RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS)))
+            - int(CONFIG.get("network_reserve_seconds", 90)) - 90,
+        )
+        recovery_execution: dict[str, Any] = {}
+        if recovery_deadline > time.monotonic() + 30:
+            rule_fix_recovered = safe_stage(
+                "targeted new-source historical catch-up",
+                collect_rule_fix_source_recovery,
+                DATE_FLOOR,
+                warnings,
+                recovery_deadline,
+                recovery_execution,
+            )
+        SIGNAL_WINDOW_START_DATE = old_signal_window_start
+        expected_recovery_domains = {clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in RULE_FIX_INSTITUTION_SOURCES}
+        attempted_recovery_domains = set(recovery_execution.get("rule_fix_recovery_sources", set()))
+        recovery_budget_hit = bool(recovery_execution.get("rule_fix_recovery_budget_hit"))
+        rule_fix_source_recovery_complete = bool(
+            expected_recovery_domains
+            and expected_recovery_domains.issubset(attempted_recovery_domains)
+            and not recovery_budget_hit
+        )
+        execution_stats["rule_fix_source_recovery_attempted"] = True
+        execution_stats["rule_fix_source_recovery_complete"] = rule_fix_source_recovery_complete
+        execution_stats["rule_fix_source_recovery_sources_attempted"] = len(attempted_recovery_domains)
+        execution_stats["rule_fix_source_recovery_jobs"] = int(recovery_execution.get("rule_fix_recovery_jobs", 0))
+        execution_stats["rule_fix_source_recovery_admitted_ab"] = len(rule_fix_recovered)
+        if rule_fix_source_recovery_complete:
+            log_progress("Targeted new-source catch-up completed; normal institutional cursor remained untouched")
+        else:
+            log_progress("Targeted new-source catch-up remains pending; no normal cursor was reset or advanced by this lane")
+
     # Quiet-scan rescue now runs BEFORE the slower institutional stage. This guarantees
     # that a zero-admission scholarly slice gets a second historical topic/depth slice
     # while meaningful budget still remains, rather than hoping 260s survive afterwards.
@@ -5624,7 +5877,7 @@ def main() -> int:
     rescue_enabled = bool(CONFIG.get("quiet_scan_rescue_enabled", True))
     rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 180) or 180)
     scholarly_deduped = dedupe_candidates(oa + cr)
-    if rescue_enabled and not scholarly_deduped and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed):
+    if rescue_enabled and not rule_fix_source_recovery_attempted and not scholarly_deduped and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed):
         rescue_n = max(1, int(CONFIG.get("quiet_scan_rescue_queries_per_source", 4) or 4))
         rescue_oa_cursor_before = int(state.get("openalex_explore_cursor", 0) or 0)
         rescue_cr_cursor_before = int(state.get("crossref_explore_cursor", 0) or 0)
@@ -5736,7 +5989,7 @@ def main() -> int:
         stage_deadline=inst_deadline,
         execution_stats=execution_stats,
     )
-    inst = dedupe_candidates([x for x in (manual_recovered + inst) if isinstance(x, dict)])
+    inst = dedupe_candidates([x for x in (manual_recovered + rule_fix_recovered + inst) if isinstance(x, dict)])
     if INSTITUTION_SIGNAL_CANDIDATES:
         # Direct institutional pages are frequently invisible to Google News. Merge
         # recent factual candidates into the same C pipeline; anchoring/dedupe later
@@ -6071,6 +6324,17 @@ def main() -> int:
         newest = sorted(INSTITUTION_SEEN_FINGERPRINTS.items(), key=lambda kv: kv[1], reverse=True)[:cache_max]
         INSTITUTION_SEEN_FINGERPRINTS = dict(newest)
     state["institution_seen_fingerprints"] = dict(INSTITUTION_SEEN_FINGERPRINTS)
+    if rule_fix_source_recovery_complete:
+        # Persist completion only after the recovery lane itself proved that every
+        # configured source was attempted without hitting its stage budget.
+        state["rule_fix_source_recovery_version"] = RULE_FIX_SOURCE_RECOVERY_VERSION
+        state["rule_fix_source_recovery_verified_complete"] = True
+        state["rule_fix_source_recovery_sources_attempted"] = max(
+            expected_rule_fix_sources,
+            int(execution_stats.get("rule_fix_source_recovery_sources_attempted", 0) or 0),
+            int(state.get("rule_fix_source_recovery_sources_attempted", 0) or 0),
+        )
+        state["rule_fix_source_recovery_completed_at"] = state.get("rule_fix_source_recovery_completed_at") or now_iso
     state["last_run"] = now_iso
     state["last_batches"] = {
         "openalex_queries": len(oa_batch),
@@ -6079,6 +6343,7 @@ def main() -> int:
         "crossref_exploration_queries": len(cr_explore),
         "crossref_priority_tasks": len(cr_priority_batch),
         "institution_sources": len(inst_batch),
+        "rule_fix_new_source_recovery_sources": len(RULE_FIX_INSTITUTION_SOURCES) if rule_fix_source_recovery_needed else 0,
         "manual_recovery_urls": len(manual_recovery_jobs(previous)),
         "frontier_gap_queries": len(frontier_focus["queries"]),
         "frontier_gap_scholarly_queries": len(frontier_focus.get("scholarly_queries", [])),
@@ -6139,6 +6404,11 @@ def main() -> int:
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
         "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
+        "rule_fix_source_recovery_version": (
+            RULE_FIX_SOURCE_RECOVERY_VERSION
+            if rule_fix_source_recovery_complete
+            else ""
+        ),
         "allocation_profile_version": str(CONFIG.get("allocation_profile_version", "")),
         "scan_state": state,
         "zero_config_scan": True,
@@ -6153,6 +6423,8 @@ def main() -> int:
             "crossref_from": cr_from.isoformat(),
             "historical_exploration_from": DATE_FLOOR.isoformat(),
             "institutions_from": inst_from.isoformat(),
+            "rule_fix_new_source_recovery_from": DATE_FLOOR.isoformat() if rule_fix_source_recovery_attempted else "",
+            "rule_fix_new_source_recovery_this_run": rule_fix_source_recovery_attempted,
             "ab_four_month_backfill_this_run": bootstrap_ab,
             "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
             "c_window_end": now_iso,
@@ -6231,6 +6503,11 @@ def main() -> int:
             "b_method_queries_executed": b_method_executed,
             "institution_sources_this_run": len(inst_batch),
             "institution_rotating_sources_executed": inst_base_executed,
+            "rule_fix_new_source_recovery_attempted": rule_fix_source_recovery_attempted,
+            "rule_fix_new_source_recovery_complete": rule_fix_source_recovery_complete,
+            "rule_fix_new_source_recovery_sources_attempted": int(execution_stats.get("rule_fix_source_recovery_sources_attempted", 0)),
+            "rule_fix_new_source_recovery_jobs": int(execution_stats.get("rule_fix_source_recovery_jobs", 0)),
+            "rule_fix_new_source_recovery_admitted_ab": int(execution_stats.get("rule_fix_source_recovery_admitted_ab", 0)),
             "known_ab_identities_loaded": len(KNOWN_AB_IDENTITIES),
             "known_ab_links_loaded": len(KNOWN_AB_LINKS),
             "known_signal_identities_loaded": len(KNOWN_SIGNAL_IDENTITIES),
