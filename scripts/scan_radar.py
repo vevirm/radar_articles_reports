@@ -4141,6 +4141,128 @@ def _claim80(text: str) -> str:
     return (cut[:79].rstrip(" ,:;–—-.!?") + "…")[:80]
 
 
+def _plain_claim_limit(text: str, max_chars: int = 240) -> str:
+    """Keep reader-facing claims compact without chopping a sentence mid-thought."""
+    s = clean_text(text).strip()
+    if not s:
+        return ""
+    if len(s) <= max_chars:
+        return s
+    for sent in split_sentences(s):
+        q = clean_text(sent)
+        if 24 <= len(q) <= max_chars:
+            return q
+    # A short complete clause is preferable to an arbitrary hard cut.
+    for sep in ("; ", " — ", " – "):
+        left = clean_text(s.split(sep, 1)[0])
+        if 36 <= len(left) <= max_chars:
+            return left.rstrip(" ,:;–—") + ("." if left[-1:] not in ".!?" else "")
+    return _claim80(s)
+
+
+def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
+    """Return the reader-facing claim while leaving source/bibliographic text unchanged.
+
+    This is the write-boundary counterpart of ``briefing/insights.js``. New automated
+    discoveries and manual additions pass through it before ``core_message`` is stored.
+    The transformation is deliberately source-bound: it simplifies wording and removes
+    academic/list scaffolding, but it does not invent facts not present in the record.
+    """
+    t = clean_text(title)
+    raw = clean_text(summary)
+    prior = clean_text(existing)
+    context = normalized(f"{t} {raw} {prior}")
+
+    # Recurring dense constructions that need a semantic, not merely cosmetic, rewrite.
+    if (
+        "ireland" in context
+        and "pressure to diversify" in context
+        and "current us administration" in context
+        and "geopolitical instability" in context
+    ):
+        return (
+            "Ireland's approach to China is also shaped by pressure to spread its bets, "
+            "because the current US administration is unpredictable and the wider world is unstable."
+        )
+
+    if (
+        "semiconductor export controls" in context
+        and "economic interests toward china" in context
+        and "security relations with the united states" in context
+    ):
+        return (
+            "The EU also restricts chip exports to protect its technology, while trying to keep "
+            "its trade with China and its security ties with the US intact."
+        )
+
+    if (
+        "copernican academy" in context
+        and "collegium intermarium" in context
+        and "intermarium" in context
+        and ("neo-nationalist" in context or "neo nationalist" in context)
+    ):
+        return "The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia."
+
+    if (
+        ("diffusion of dual-use technologies" in context or "diffusion of dual use technologies" in context)
+        and ("cross-border knowledge transfer" in context or "cross border knowledge transfer" in context)
+        and "dependencies in strategically important supply chains" in context
+    ):
+        return "The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies."
+
+    # If a previous concise claim exists, preserve its proposition and simplify its wording.
+    # The browser layer rejects chopped/ellipsised claims and re-extracts from source detail,
+    # so the write boundary must not replace an established claim with a different sentence.
+    s = prior or concise_core_message(raw, t)
+    s = clean_text(s)
+    if not s:
+        return ""
+
+    # General plain-language cleanup. Keep this conservative: the goal is shorter verbs,
+    # named institutions/actors where already explicit, and less bureaucratic scaffolding.
+    s = re.sub(r"^(?:First|Second|Third|Fourth|Finally),?\s+", "", s, flags=re.I)
+    s = re.sub(
+        r"^(?:Focusing on|Drawing on|Drawing upon|Based on|Using)\b[^,]{0,220},\s*"
+        r"(?=(?:the|this) (?:study|paper|article|report)\b)",
+        "", s, flags=re.I,
+    )
+    s = re.sub(
+        r"^(?:the|this) (study|paper|article|report) demonstrates how\s+",
+        r"The \1 shows how ", s, flags=re.I,
+    )
+    s = re.sub(
+        r"^(?:the|this) (study|paper|article|report) demonstrates that\s+",
+        r"The \1 shows that ", s, flags=re.I,
+    )
+    s = re.sub(r"^In the European Union\s*\(EU\)\s+Member States\b", "EU member states", s)
+    s = re.sub(r"\bThe European Union\s*\(EU\)", "The EU", s)
+    s = re.sub(r"\bthe European Union\s*\(EU\)", "the EU", s)
+    s = re.sub(r"\bEuropean Union\s*\(EU\)", "EU", s)
+    s = re.sub(r"\bThe European Union\b", "The EU", s)
+    s = re.sub(r"\bthe European Union\b", "the EU", s)
+    s = re.sub(r"\bUnited States\s*\(US\)", "US", s)
+    s = re.sub(r"\bUnited States\b", "US", s)
+    replacements = [
+        (r"\bdemonstrates\b", "shows"),
+        (r"\binstrumentali[sz]ed to advance\b", "used to support"),
+        (r"\binstrumentali[sz]ed\b", "used"),
+        (r"\bsemiconductor export controls\b", "chip export controls"),
+        (r"\bsecurity relations\b", "security ties"),
+        (r"\beconomic interests\b", "trade interests"),
+        (r"\bgeopolitical instability\b", "global instability"),
+        (r"\bstrategically important supply chains\b", "critical supply chains"),
+        (r"\bthe emergence of dependencies in\b", "dependence on"),
+        (r"\bthe diffusion of dual-use technologies\b", "dual-use tech spreading"),
+        (r"\bcross-border knowledge transfer\b", "knowledge moving abroad"),
+        (r"\bin order to\b", "to"),
+        (r"\bwith a view to\b", "to"),
+    ]
+    for pat, repl in replacements:
+        s = re.sub(pat, repl, s, flags=re.I)
+    s = clean_text(s).strip(" ;:–—")
+    return _plain_claim_limit(s)
+
+
 def concise_core_message(summary: str, title: str) -> str:
     """Extract a concrete source-backed claim for display; never return a generic topic slogan."""
     t = clean_text(title)
@@ -4272,6 +4394,8 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
                tier_label: str, text: str, doi: str, preprint: bool,
                frontier_targets: Iterable[str] | None = None) -> dict[str, Any]:
     themes = themes_for(text)
+    summary = make_summary(text, evidence, strand, title, frontier_targets)
+    extracted_claim = concise_core_message(text, title)
     return {
         "title": title,
         "authors": authors,
@@ -4281,8 +4405,8 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "type": item_type,
         "strand": strand,
         "eu_relevance": evidence.get("eu_relevance"),
-        "summary": make_summary(text, evidence, strand, title, frontier_targets),
-        "core_message": concise_core_message(text, title),
+        "summary": summary,
+        "core_message": plain_language_claim(text or summary, title, extracted_claim),
         "relevance_note": relevance_note(evidence, strand),
         "source_tier": tier_label,
         "_source_rank": source_rank,
@@ -4396,13 +4520,48 @@ def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen
     out = {k: v for k, v in item.items() if not k.startswith("_")}
     title = clean_text(out.get("title") or out.get("headline") or "")
     if out.get("headline"):
-        out["core_message"] = _claim80(out.get("core_message") or out.get("what") or out.get("headline") or "")
+        detail = clean_text(out.get("summary") or out.get("signal_note") or out.get("why_it_matters") or "")
+        prior = clean_text(out.get("core_message") or out.get("what") or out.get("headline") or "")
+        out["core_message"] = plain_language_claim(detail, title, prior)
     else:
-        out["core_message"] = _claim80(out.get("core_message") or concise_core_message(out.get("summary", ""), title))
+        prior = clean_text(out.get("core_message") or concise_core_message(out.get("summary", ""), title))
+        out["core_message"] = plain_language_claim(out.get("summary", ""), title, prior)
     out["new_this_scan"] = bool(new_this_scan)
     if first_seen:
         out["first_seen"] = first_seen
     return out
+
+
+def normalize_reader_claims(data: dict[str, Any]) -> dict[str, Any]:
+    """Apply the plain-language write boundary to every published corpus collection.
+
+    Bibliographic/source fields are intentionally never changed here.  This catches records
+    arriving through the normal scanner, manual ingestion, recovery/frontier lanes, or a
+    future insertion path that appends directly to one of the published corpus arrays.
+    """
+    if not isinstance(data, dict):
+        return data
+    for key in ("strand_a", "strand_b", "strand_c", "frontier_evidence"):
+        items = data.get(key)
+        if not isinstance(items, list):
+            continue
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            title = clean_text(item.get("title") or item.get("headline") or "")
+            detail = clean_text(
+                item.get("summary") or item.get("signal_note") or item.get("why_it_matters") or ""
+            )
+            prior = clean_text(item.get("core_message") or item.get("what") or "")
+            claim = plain_language_claim(detail, title, prior)
+            if claim:
+                item["core_message"] = claim
+                if key == "strand_c" and item.get("what") is not None:
+                    item["what"] = claim
+    data["display_claim_profile_version"] = str(
+        CONFIG.get("display_claim_profile_version", "v17.12.5-reader-first-global-write-boundary")
+    )
+    return data
 
 
 def _valid_saved_radar(data: Any) -> bool:
@@ -5684,7 +5843,8 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
         relation=signal_relation(text)
         kind=signal_kind(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
-        what=clean_text(n.get('headline',''))
+        source_headline=clean_text(n.get('headline',''))
+        what=plain_language_claim(n.get('_desc',''), source_headline, source_headline)
         why=signal_why(theme,kind)
         item={k:v for k,v in n.items() if not k.startswith('_')}
         item.update({
@@ -5694,6 +5854,7 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             'signal_type':relation,
             'signal_kind':kind,
             'what':what,
+            'core_message':what,
             'why_it_matters':why,
             'signal_note':what.rstrip('. ')+'. '+why,
             '_anchor_score':score,
@@ -6928,6 +7089,7 @@ def main() -> int:
             "transport_failure_warning_count": transport_failure_count,
         },
     }
+    normalize_reader_claims(data)
     tmp_out = OUT_PATH.with_suffix(".json.tmp")
     tmp_out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp_out.replace(OUT_PATH)

@@ -1,6 +1,6 @@
-# R&I Geopolitics Radar V17.12.2
+# R&I Geopolitics Radar V17.12.5
 
-V17.12.2 keeps the presentation-first V17.12.1 build and adds bounded round-aware manual ingestion plus an exact-link reviewed recovery batch for rounds IV–VI. The bundled state is rendered immediately on first upload; repository pushes do not start a live scan. The live scanner is manual-only in this package so the pages can be checked before spending ~20 minutes on discovery. It also preserves the V17.12 reader-first presentation behavior: It keeps the evidence/matrix logic intact while changing what the user sees first: a complete plain-English proposition, then bibliography, with the abstract/evidence revealed on click. It also suppresses non-English display prose rather than promoting it as a headline.
+V17.12.5 keeps the presentation-first and reviewed-ingestion behavior of V17.12.2–V17.12.4, and makes reader-first language a shared rule across the published radar. Prominent claims are simplified before they are stored and again at display time; the Main radar, Matrix and downstream decision views therefore reuse the same plain-language proposition. Original titles, abstracts/summaries, authors, sources, dates, links and other evidence detail remain unchanged underneath. A final write-boundary normalizer also applies the rule to new scanner, manual-ingest, recovery and frontier records before `radar.json` is published.
 
 ## First upload: presentation first, scan later
 
@@ -63,7 +63,9 @@ PYTHONPATH=. python -m pytest -q
 
 See `VALIDATION_V17_12_2.md` for the current manual-ingest/state validation. `VALIDATION_V17_12_1.md` and `VALIDATION_V17_12.md` remain the historical presentation/readability records.
 
-## V17.12.4 site structure
+## V17.12.5 site structure
 
 Primary navigation is intentionally limited to **Read at least this**, **Main radar**, **Matrix**, and **Risks & opportunities**. `briefing/` remains available only as a secondary evidence browser. The scanner workflow is manual (`workflow_dispatch`) in this presentation-first build.
+
+Reader-facing claims now use a shared plain-language layer across the Main radar, Matrix, Risks & opportunities, and secondary evidence views. New scanner and manual-ingest records pass through the same write-boundary normalizer. Original publication titles, abstracts/summaries, authors, sources, dates, links, and other bibliographic detail are preserved separately and shown underneath or behind progressive disclosure.
 

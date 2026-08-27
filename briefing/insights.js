@@ -235,14 +235,65 @@
   function simplifyCandidate(s){
     s=repairOcr(s);
     // Turn study/report framing into the actual proposition when the proposition is explicit.
-    s=s.replace(/^The (?:study|paper|article|report) (?:shows|finds|argues) (?:that )?/i,'')
-       .replace(/^This (?:study|paper|article|report) (?:shows|finds|argues) (?:that )?/i,'')
+    s=s.replace(/^(?:First|Second|Third|Fourth|Finally),?\s+/i,'')
+       .replace(/^The (?:study|paper|article|report) (?:shows|finds|argues|demonstrates|identifies|reveals|indicates) (?:that )?/i,'')
+       .replace(/^This (?:study|paper|article|report) (?:shows|finds|argues|demonstrates|identifies|reveals|indicates) (?:that )?/i,'')
        .replace(/^The European Union has responded by /i,'The EU is ')
        .replace(/^The growing role of /i,'Growing reliance on ')
        .replace(/ raises broader questions regarding /i,' is increasing concerns over ')
+       .replace(/\bThe European Union\s*\(EU\)/g,'The EU')
+       .replace(/\bthe European Union\s*\(EU\)/g,'the EU')
+       .replace(/\bEuropean Union\s*\(EU\)/g,'EU')
+       .replace(/\bThe European Union\b/g,'The EU')
+       .replace(/\bthe European Union\b/g,'the EU')
+       .replace(/\bUnited States\s*\(US\)/g,'US')
+       .replace(/\bUnited States\b/g,'US')
+       .replace(/\bin order to\b/gi,'to')
+       .replace(/\bwith a view to\b/gi,'to')
        .replace(/\bas also reflected in\b.*$/i,'')
        .trim();
     return concise(s);
+  }
+
+  function plainLanguagePoint(x,value){
+    let s=repairOcr(value);
+    if(!s) return '';
+    const context=norm(`${x?.title||x?.headline||''} ${x?.summary||''} ${x?.core_message||''} ${s}`);
+
+    // Reader-first rewrites for recurring dense source language. The original title,
+    // abstract, authors, source and date remain unchanged in the detail layer.
+    if(/ireland/.test(context)&&/pressure to diversify/.test(context)&&/current us administration/.test(context)&&/geopolitical instability/.test(context))
+      return "Ireland's approach to China is also shaped by pressure to spread its bets, because the current US administration is unpredictable and the wider world is unstable.";
+
+    if(/semiconductor export controls/.test(context)&&/economic interests toward china/.test(context)&&/security relations with the united states/.test(context))
+      return 'The EU also restricts chip exports to protect its technology, while trying to keep its trade with China and its security ties with the US intact.';
+
+    if(/copernican academy/.test(context)&&/collegium intermarium/.test(context)&&/intermarium/.test(context)&&/neo-nationalist/.test(context))
+      return 'The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia.';
+
+    if(/diffusion of dual-use technologies/.test(context)&&/cross-border knowledge transfer/.test(context)&&/dependencies in strategically important supply chains/.test(context))
+      return 'The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies.';
+
+    // General cleanup: remove list/academic scaffolding and prefer short verbs.
+    s=s.replace(/^(?:First|Second|Third|Fourth|Finally),?\s*/i,'')
+       .replace(/^(?:Focusing on|Drawing on|Drawing upon|Based on|Using)\b[^,]{0,220},\s*(?=(?:the|this) (?:study|paper|article|report)\b)/i,'')
+       .replace(/^(?:the|this) (study|paper|article|report) demonstrates how\s+/i,'The $1 shows how ')
+       .replace(/^(?:the|this) (study|paper|article|report) demonstrates that\s+/i,'The $1 shows that ')
+       .replace(/\bdemonstrates\b/gi,'shows')
+       .replace(/\binstrumentali[sz]ed to advance\b/gi,'used to support')
+       .replace(/\binstrumentali[sz]ed\b/gi,'used')
+       .replace(/\bsemiconductor export controls\b/gi,'chip export controls')
+       .replace(/\bsecurity relations\b/gi,'security ties')
+       .replace(/\beconomic interests\b/gi,'trade interests')
+       .replace(/\bgeopolitical instability\b/gi,'global instability')
+       .replace(/\bstrategically important supply chains\b/gi,'critical supply chains')
+       .replace(/\bthe emergence of dependencies in\b/gi,'dependence on')
+       .replace(/\bthe diffusion of dual-use technologies\b/gi,'dual-use tech spreading')
+       .replace(/\bcross-border knowledge transfer\b/gi,'knowledge moving abroad')
+       .replace(/\bwith a view to\b/gi,'to')
+       .replace(/\s+/g,' ')
+       .trim();
+    return concise(s,34)||concise(value,34)||'';
   }
 
   function headlinePoint(x){
@@ -254,18 +305,25 @@
   }
 
   function pointFor(x){
-    if(x.headline){const h=headlinePoint(x); return likelyEnglish(h)?h:'';}
+    if(x.headline){
+      const stored=completeCoreMessage(x.core_message||'');
+      if(stored&&norm(stored).trim()!==norm(x.headline||'').trim()){
+        const p=plainLanguagePoint(x,stored);
+        if(p&&likelyEnglish(p)) return p;
+      }
+      const h=headlinePoint(x); return likelyEnglish(h)?plainLanguagePoint(x,h):'';
+    }
     const special=structuredPoint(x);
-    if(special) return special;
+    if(special) return plainLanguagePoint(x,special);
     const stored=completeCoreMessage(x.core_message||'');
-    if(stored) return stored;
+    if(stored){const point=plainLanguagePoint(x,stored);if(point)return point;}
 
     const candidates=splitSentences(x.summary||'')
       .map(s=>({s,score:candidateScore(s)}))
       .filter(o=>o.score>=7)
       .sort((a,b)=>b.score-a.score||a.s.length-b.s.length);
     for(const candidate of candidates){
-      const point=simplifyCandidate(candidate.s);
+      const point=plainLanguagePoint(x,simplifyCandidate(candidate.s));
       if(point&&!META.test(point)&&!isDocumentDebris(point)&&likelyEnglish(point)&&!/…|\.\.\./.test(point)) return point;
     }
     // Quality over coverage: do not fall back to a foreign-language or vague title.
@@ -414,5 +472,5 @@
     return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
+  return {TOPICS,OTHER,topicFor,pointFor,plainLanguagePoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
 });

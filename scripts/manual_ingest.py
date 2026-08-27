@@ -931,8 +931,9 @@ def _new_public_item(record: dict[str, Any], retrieval: dict[str, Any], ev: dict
         })
         claim = clean(review.get("display_claim"))
         if claim:
-            pub["core_message"] = claim[:240]
-            pub["summary"] = clean(review.get("summary") or claim)
+            reviewed_summary = clean(review.get("summary") or pub.get("summary") or claim)
+            pub["core_message"] = sr.plain_language_claim(reviewed_summary, pub.get("title", ""), claim)
+            pub["summary"] = reviewed_summary
         pub.update(_matrix_fields_from_review(record, review))
     return pub
 
@@ -962,7 +963,7 @@ def _new_public_signal(record: dict[str, Any], retrieval: dict[str, Any], state:
     item.update({
         "first_seen": ingested_at,
         "new_this_scan": False,
-        "core_message": clean(item.get("what") or title),
+        "core_message": sr.plain_language_claim(desc, title, clean(item.get("what") or title)),
         "provenance": ["manual_candidate_ingestion"],
         "discovery_provenance": "manual",
         "manual_ingest_ids": [record.get("manual_id")],
@@ -975,9 +976,10 @@ def _new_public_signal(record: dict[str, Any], retrieval: dict[str, Any], state:
     if review:
         claim = clean(review.get("display_claim"))
         if claim:
-            item["core_message"] = claim[:240]
-            item["what"] = claim[:240]
-            item["signal_note"] = clean(f"{claim}. {item.get('why_it_matters','')}")
+            simple_claim = sr.plain_language_claim(desc, title, claim)
+            item["core_message"] = simple_claim
+            item["what"] = simple_claim
+            item["signal_note"] = clean(f"{simple_claim.rstrip('. ')}. {item.get('why_it_matters','')}")
         item.update({
             "source_review_status": clean(review.get("review_status") or "reviewed"),
             "source_reviewed_at": clean(review.get("reviewed_at")),
@@ -1317,7 +1319,9 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
                     matrix_item_ids.add(clean(rec.get("manual_id")))
                 claim = clean(review.get("display_claim"))
                 if claim:
-                    matched["core_message"] = claim[:240]
+                    matched["core_message"] = sr.plain_language_claim(
+                        matched.get("summary", ""), matched.get("title") or matched.get("headline") or "", claim
+                    )
         diag = _diagnostic_record(rec, out, automated_status, retrieval, ev, decision, matched, links_validated=links_validated, review=review, original_record=original_rec)
         diag["source_tier"] = tier_label
         diag["source_kind"] = source_kind
@@ -1394,6 +1398,7 @@ def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *,
     out["manual_ingest_profile_version"] = PROFILE_VERSION
     # Manual ingestion is not a live scan.  Preserve all scan timestamps/scan_result bookkeeping.
     out["last_updated"] = old_last_updated
+    sr.normalize_reader_claims(out)
     summary = {**batch, "recovery_queue": len(merged_queue), "weak_signal_recovery_queue": len(merged_signal_queue), "idempotent_reuse": False}
     return out, summary
 

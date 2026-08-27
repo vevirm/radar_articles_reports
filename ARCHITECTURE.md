@@ -25,7 +25,7 @@ Missed current candidates can feed bounded exact-URL recovery queues. A later re
 
 Public records use `discovery_provenance` = `automated`, `manual`, or `both`. Manual diagnostics preserve manual IDs, supplied URLs, directly resolved primary/full-text URLs, and the direct-link chain used during review. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.
 
-## Primary site components (V17.12.4)
+## Primary site components (V17.12.5)
 
 The public presentation has four primary components only:
 
@@ -35,4 +35,10 @@ The public presentation has four primary components only:
 4. **Risks & opportunities** (`/priorities/`) — ranked decision view derived from matrix-qualified evidence.
 
 `/briefing/` is retained as a secondary evidence browser over the Main Radar and is deliberately not part of the four-component top-level navigation. The progressive-disclosure principle (“read at least this” → reasoning → evidence) is reused across all four primary components.
+
+## Reader-facing claim layer
+
+The public interface distinguishes **reader-facing claims** from **source detail**. `core_message` / the shared `RadarInsights.pointFor()` layer carries the concise plain-language proposition used in prominent cards and matrix cells. Publication title, abstract/summary, authors, source, date, type and link remain source/bibliographic fields and are not paraphrased in place.
+
+`scripts/scan_radar.py::normalize_reader_claims()` is the final write boundary for every published corpus lane (`strand_a`, `strand_b`, `strand_c`, `frontier_evidence`). `scripts/manual_ingest.py` calls the same boundary before it writes state. The browser applies the same rule again as a defensive display fallback, so future insertion paths cannot bypass the reader-first wording merely by omitting a precomputed claim.
 

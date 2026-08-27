@@ -249,6 +249,8 @@ def topic_scores(item: dict[str, Any]) -> list[tuple[int, dict[str, Any]]]:
 def public_item(item: dict[str, Any], related_topics: list[str]) -> dict[str, Any]:
     return {
         "title": label(item),
+        "claim": clean(item.get("core_message") or item.get("what") or label(item)),
+        "authors": clean(item.get("authors")),
         "source": source_label(item),
         "date": clean(item.get("date"))[:10],
         "link": clean(item.get("link")),
@@ -317,6 +319,7 @@ def item_html(item: dict[str, Any]) -> str:
     href = esc(item.get("link"))
     title = esc(item.get("title"))
     title_html = f'<a href="{href}" target="_blank" rel="noopener">{title}</a>' if href else title
+    claim = esc(item.get("claim") or item.get("title"))
     chips = [f'<span class="chip">Strand {esc(item.get("strand"))}</span>']
     if item.get("fresh"):
         chips.append('<span class="chip fresh">NEW / CURRENT</span>')
@@ -330,12 +333,13 @@ def item_html(item: dict[str, Any]) -> str:
     rel_html = f'<div class="relevance"><strong>Radar relevance:</strong> {rel}</div>' if rel else ""
     anchor = esc(item.get("anchor"))
     anchor_html = f'<div class="anchor"><strong>Anchor:</strong> {anchor}</div>' if anchor else ""
-    source_bits = [esc(item.get("source")), esc(item.get("date"))]
+    source_bits = [esc(item.get("authors")), esc(item.get("source")), esc(item.get("date"))]
     source_line = " · ".join(x for x in source_bits if x)
     return f"""
 <li class="insight-item">
   <div class="chips">{''.join(chips)}</div>
-  <h3>{title_html}</h3>
+  <h3>{claim}</h3>
+  <div class="biblio-title">{title_html}</div>
   <div class="meta">{source_line}</div>
   <p>{esc(item.get('note'))}</p>
   {rel_html}{anchor_html}{related_html}
@@ -375,7 +379,7 @@ def render_page(briefing: dict[str, Any]) -> str:
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth}}body{{margin:0;background:var(--bg);color:var(--text);font:16px/1.52 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}}a{{color:inherit}}.wrap{{width:min(calc(100% - 34px),var(--max));margin:auto}}
 header{{padding:38px 0 26px;border-bottom:1px solid var(--line);background:var(--panel)}}.kicker,.eyebrow{{font-size:.72rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}}h1{{font-size:clamp(2.25rem,6vw,4.7rem);line-height:.96;letter-spacing:-.055em;margin:.15em 0 .22em}}.lede{{font-size:1.08rem;color:var(--muted);max-width:820px;margin:0}}.top-actions{{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}}.button{{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:.84rem;font-weight:750;background:var(--bg)}}
 main{{padding:22px 0 68px}}.stats{{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}}.stat{{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 9px;font-size:.75rem;color:var(--muted)}}.topic-nav{{display:flex;gap:8px;flex-wrap:wrap;padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:16px;position:sticky;top:8px;z-index:3;box-shadow:0 6px 22px rgba(0,0,0,.04)}}.topic-nav a{{text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:.79rem;background:var(--bg)}}.topic-nav a span{{color:var(--accent);font-weight:800;margin-left:4px}}
-.topic{{scroll-margin-top:90px;margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}}.topic-head{{display:flex;align-items:end;justify-content:space-between;gap:18px;padding:22px 24px 15px;border-bottom:1px solid var(--line)}}.topic h2{{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.035em;line-height:1.05;margin:.16em 0 0}}.topic-count{{font-size:.77rem;color:var(--muted);white-space:nowrap}}.insight-list{{list-style:none;padding:0;margin:0}}.insight-item{{padding:19px 24px 20px;border-top:1px solid var(--line)}}.insight-item:first-child{{border-top:0}}.chips{{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}}.chip{{border:1px solid var(--line);border-radius:999px;padding:2px 7px;font-size:.64rem;color:var(--muted);font-weight:700}}.chip.fresh{{color:var(--fresh);border-color:#9ecab8;background:#eef8f3}}.insight-item h3{{font-size:1.04rem;line-height:1.28;margin:0 0 4px}}.insight-item h3 a{{text-decoration-thickness:1px;text-underline-offset:3px}}.meta{{font-size:.76rem;color:var(--muted)}}.insight-item p{{margin:8px 0 0;max-width:900px}}.relevance,.anchor{{margin-top:7px;font-size:.82rem;color:var(--muted)}}.related-row{{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:9px;font-size:.72rem;color:var(--muted)}}.related{{border:1px solid var(--line);border-radius:999px;padding:2px 7px;background:var(--bg)}}.empty{{color:var(--muted)}}.method{{font-size:.8rem;color:var(--muted);padding:18px 2px 0}}footer{{border-top:1px solid var(--line);padding:20px 0 32px;color:var(--muted);font-size:.78rem}}
+.topic{{scroll-margin-top:90px;margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden}}.topic-head{{display:flex;align-items:end;justify-content:space-between;gap:18px;padding:22px 24px 15px;border-bottom:1px solid var(--line)}}.topic h2{{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.035em;line-height:1.05;margin:.16em 0 0}}.topic-count{{font-size:.77rem;color:var(--muted);white-space:nowrap}}.insight-list{{list-style:none;padding:0;margin:0}}.insight-item{{padding:19px 24px 20px;border-top:1px solid var(--line)}}.insight-item:first-child{{border-top:0}}.chips{{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}}.chip{{border:1px solid var(--line);border-radius:999px;padding:2px 7px;font-size:.64rem;color:var(--muted);font-weight:700}}.chip.fresh{{color:var(--fresh);border-color:#9ecab8;background:#eef8f3}}.insight-item h3{{font-size:1.04rem;line-height:1.28;margin:0 0 5px}}.biblio-title{{font-size:.83rem;line-height:1.35;color:var(--muted);margin-top:2px}}.biblio-title a{{text-decoration-thickness:1px;text-underline-offset:3px}}.meta{{font-size:.76rem;color:var(--muted);margin-top:2px}}.insight-item p{{margin:8px 0 0;max-width:900px}}.relevance,.anchor{{margin-top:7px;font-size:.82rem;color:var(--muted)}}.related-row{{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:9px;font-size:.72rem;color:var(--muted)}}.related{{border:1px solid var(--line);border-radius:999px;padding:2px 7px;background:var(--bg)}}.empty{{color:var(--muted)}}.method{{font-size:.8rem;color:var(--muted);padding:18px 2px 0}}footer{{border-top:1px solid var(--line);padding:20px 0 32px;color:var(--muted);font-size:.78rem}}
 @media(max-width:680px){{.topic-nav{{position:static}}.topic-head{{align-items:start;flex-direction:column}}.insight-item,.topic-head{{padding-left:18px;padding-right:18px}}}}
 </style>
 </head>
