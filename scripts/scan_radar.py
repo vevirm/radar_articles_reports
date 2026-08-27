@@ -157,11 +157,55 @@ SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
-RULE_FIX_PROFILE_VERSION = str(CONFIG.get("rule_fix_profile_version", "v17.12.6-lane-separated-recall-targeted-catchup"))
-RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.6-new-institution-source-catchup"
+RULE_FIX_PROFILE_VERSION = str(CONFIG.get("rule_fix_profile_version", "v17.12.7-lane-separated-recall-fallback-discovery"))
+RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.7-new-institution-source-catchup"
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
 RULE_FIX_SOURCE_RECOVERY_MAX_PAGES = 330
+RULE_FIX_RECOVERY_SEED_URLS = {
+    "is.mpg.de": [
+        "https://is.mpg.de/en/news/bernhard-scholkopf-elected-for-un-ai-scientific-panel",
+        "https://imprs.is.mpg.de/news/imprs-is-faculty-and-scholars-join-founding-team-of-new-european-physical-ai-lab",
+    ],
+    "ellis.institute": [
+        "https://ellis.institute/news/bernhard-scholkopf-elected-fellow-of-the-royal-society",
+    ],
+    "ellis.eu": [
+        "https://intue.ellis.eu/news/scientific-director-bernhard-scholkopf-joins-un-global-ai-panel",
+        "https://intue.ellis.eu/news/ellis-institute-pis-contribute-to-the-international-ai-safety-report-2026",
+    ],
+    "ellisinstitute.fi": [
+        "https://www.ellisinstitute.fi/bernhard-scholkopf-receives-honorary-doctorate",
+        "https://www.ellisinstitute.fi/ellis-distinguished-lecture-bernhard-scholkopf",
+    ],
+    "aalto.fi": [
+        "https://www.aalto.fi/en/news/seven-new-honorary-doctors-in-technology-at-aalto-university-in-2026",
+    ],
+    "ethz.ch": [
+        "https://inf.ethz.ch/news-and-events/spotlights/infk-news-channel/2026/02/professors-menna-el-assady-and-bernhard-schoelkopf-recommended-for-un-ai-scientific-panel.html",
+    ],
+    "un.org": [
+        "https://www.un.org/independent-international-scientific-panel-ai/en/preliminary-report",
+        "https://www.un.org/independent-international-scientific-panel-ai/en/panel-members",
+    ],
+    "internationalaisafetyreport.org": [
+        "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026",
+    ],
+    "kesai.eu": [
+        "https://kesai.eu/blog/2026-05-20-kesai-launch/",
+        "https://kesai.eu/team/",
+    ],
+    "itu.int": [
+        "https://aiforgood.itu.int/event/ai-and-democracy-threats-safeguards-and-the-path-forward/",
+    ],
+    "tech-europe.org": [
+        "https://www.tech-europe.org/session/panel-building-europes-ai-powered-innovation-economy",
+    ],
+}
+RULE_FIX_FALLBACK_HUB_PATHS = [
+    "", "/news", "/news/", "/publications", "/publications/", "/research", "/research/",
+    "/reports", "/reports/", "/blog", "/blog/", "/articles", "/articles/", "/insights", "/insights/",
+]
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -3287,9 +3331,11 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         return None
     if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(url) in KNOWN_AB_LINKS:
+        _diag_inc("institution_reject_known_before_fetch")
         return None
     r = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
     if not r or "html" not in r.headers.get("content-type", "text/html"):
+        _diag_inc("institution_reject_fetch_or_nonhtml")
         return None
     if fingerprint:
         INSTITUTION_SEEN_FINGERPRINTS[fingerprint] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
@@ -3303,6 +3349,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
     if not title:
+        _diag_inc("institution_reject_no_title")
         return None
 
     published = None
@@ -3329,7 +3376,33 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                         authors.append(clean_text(au))
     if not published:
         published = parse_date(meta_content(soup, ["article:published_time", "datePublished", "date", "DC.date", "parsely-pub-date", "pubdate", "publication_date"]))
-    if not published or published < DATE_FLOOR:
+    if not published:
+        # Common institutional CMS fallback: semantic <time> elements.
+        for tm in soup.find_all("time")[:8]:
+            raw_time = clean_text(tm.get("datetime") or tm.get_text(" ", strip=True))
+            published = parse_date(raw_time)
+            if published:
+                break
+    if not published:
+        # URL dates are reliable enough when all three components are explicit.
+        m_url_date = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|3[01])(?:/|$)", urlparse(r.url).path)
+        if m_url_date:
+            try:
+                published = dt.date(int(m_url_date.group(1)), int(m_url_date.group(2)), int(m_url_date.group(3)))
+            except ValueError:
+                published = None
+    if not published:
+        # Fail-closed body fallback: only parse an explicitly labelled published/date
+        # phrase near the top of the page, never an arbitrary year mentioned in prose.
+        top_text = clean_text((soup.find("article") or soup.find("main") or soup.body or soup).get_text(" ", strip=True))[:1800]
+        m_labelled = re.search(r"\b(?:published|publication date|date)\s*[:\-]?\s*((?:[0-3]?\d[.\-/ ](?:0?\d|[A-Za-z]{3,9})[.\-/ ]20\d{2})|(?:[A-Za-z]{3,9}\s+[0-3]?\d,?\s+20\d{2})|(?:20\d{2}-\d{1,2}-\d{1,2}))", top_text, re.I)
+        if m_labelled:
+            published = parse_date(m_labelled.group(1))
+    if not published:
+        _diag_inc("institution_reject_no_date")
+        return None
+    if published < DATE_FLOOR:
+        _diag_inc("institution_reject_before_floor")
         return None
 
     canonical = ""
@@ -3384,6 +3457,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     # because it contains analytical vocabulary, but it may describe a material current
     # R&I/geopolitical development that belongs in the anchored C lane.
     if exclusion:
+        _diag_inc("institution_reject_document_exclusion")
         return None
 
     # Substantive-length rule.  Long analytical work is preferred, but concise
@@ -3400,6 +3474,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             "innovation", "technology", "science", "assessment"
         ])
         if not brief_exception:
+            _diag_inc("institution_reject_too_short")
             return None
 
     ev = gate_scope(title, desc, body, tier, source_kind="institutional")
@@ -3438,6 +3513,11 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if len(entries) >= max_entries:
             break
     if not entries:
+        rule_fix_domains = {clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in RULE_FIX_INSTITUTION_SOURCES}
+        if clean_text(domain).lower().removeprefix("www.") in rule_fix_domains:
+            fallback = _rule_fix_fallback_domain_jobs(src, from_date, stage_deadline)
+            if fallback:
+                return fallback, f"No usable sitemap: {domain}; using bounded institutional HTML fallback ({len(fallback)} page(s))"
         return [], f"No usable sitemap: {domain}"
     seen = set(); jobs = []
     limit_key = "institution_pages_per_domain_bootstrap" if bootstrap else "institution_pages_per_domain"
@@ -3504,6 +3584,84 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     return out
 
 
+def _rule_fix_fallback_domain_jobs(
+    src: dict[str, Any],
+    from_date: dt.date,
+    stage_deadline: float | None = None,
+) -> list[tuple[str, str, int, str]]:
+    """Bounded same-domain HTML fallback for sources without a usable sitemap.
+
+    This is deliberately source-local: no search engine, no global crawl.  It starts from
+    a small set of institutional hubs plus verified recovery seeds, follows one same-domain
+    link layer, and lets the normal page parser/admission rules decide what survives.
+    """
+    domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    if not domain:
+        return []
+    source_name = clean_text(src.get("name")) or domain
+    tier = int(src.get("tier", 2) or 2)
+    seed_urls = list(RULE_FIX_RECOVERY_SEED_URLS.get(domain, []))
+    base = f"https://{domain}"
+    hubs = [base + path for path in RULE_FIX_FALLBACK_HUB_PATHS]
+    queue = list(dict.fromkeys(seed_urls + hubs))
+    seen_pages: set[str] = set()
+    discovered: list[str] = list(seed_urls)
+    max_hub_fetches = 8
+    fetched_hubs = 0
+
+    for hub in queue:
+        if fetched_hubs >= max_hub_fetches or stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        nh = normalized_link(hub)
+        if nh in seen_pages:
+            continue
+        seen_pages.add(nh)
+        r = get(hub, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
+        fetched_hubs += 1
+        if not r or "html" not in r.headers.get("content-type", "text/html"):
+            continue
+        soup = BeautifulSoup(r.text, "html.parser")
+        for a in soup.find_all("a", href=True):
+            u = urljoin(r.url, a.get("href", ""))
+            pu = urlparse(u)
+            host = (pu.hostname or "").lower().removeprefix("www.")
+            if not host or not (host == domain or host.endswith("." + domain)):
+                continue
+            if pu.scheme not in {"http", "https"}:
+                continue
+            low = normalized(u)
+            if institution_url_score(u, None, from_date) < -2:
+                continue
+            if not (re.search(r"/20(?:25|26)/", low) or any(k in low for k in [
+                "/news", "/publication", "/report", "/research", "/blog", "/article",
+                "/insight", "/policy", "/session", "/event", "ai-safety", "scientific-panel",
+            ])):
+                continue
+            discovered.append(u)
+
+    out: list[tuple[str, str, int, str]] = []
+    seen: set[str] = set()
+    seed_norms = {normalized_link(u) for u in seed_urls}
+    for u in discovered:
+        nu = normalized_link(u)
+        if not nu or nu in seen:
+            continue
+        seen.add(nu)
+        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and nu in KNOWN_AB_LINKS:
+            continue
+        fp = institution_fingerprint(u, None)
+        # Direct recovery seeds are intentionally re-evaluated once under this new
+        # repair version even if an earlier buggy pass fingerprinted them before
+        # the relevant C/A-B logic was fixed. Ordinary hub-discovered pages still
+        # respect the persisted seen cache.
+        if fp in INSTITUTION_SEEN_FINGERPRINTS and nu not in seed_norms:
+            continue
+        out.append((u, source_name, tier, fp))
+        if len(out) >= max(8, int(RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN)):
+            break
+    return out
+
+
 def _rule_fix_recovery_domain_jobs(
     src: dict[str, Any],
     from_date: dt.date,
@@ -3529,7 +3687,10 @@ def _rule_fix_recovery_domain_jobs(
         if len(entries) >= max_entries:
             break
     if not entries:
-        return [], f"Rule-fix source catch-up: no usable sitemap for {domain}"
+        fallback = _rule_fix_fallback_domain_jobs(src, from_date, stage_deadline)
+        if fallback:
+            return fallback, f"Rule-fix source catch-up: no usable sitemap for {domain}; used bounded HTML/seed fallback ({len(fallback)} page(s))"
+        return [], f"Rule-fix source catch-up: no usable sitemap or fallback pages for {domain}"
 
     candidates: list[tuple[int, dt.date, str, str]] = []
     seen: set[str] = set()
@@ -3605,7 +3766,18 @@ def _rule_fix_recovery_domain_jobs(
                 break
 
     jobs = [(u, clean_text(src.get("name")) or domain, int(src.get("tier", 2) or 2), fp) for _s, _d, u, fp in selected[:per_domain]]
-    return jobs, None
+    # Verified source-local seeds guard against sitemap omissions and CMS archive gaps.
+    seeded = _rule_fix_fallback_domain_jobs(src, from_date, stage_deadline)
+    merged: list[tuple[str, str, int, str]] = []
+    seen_jobs: set[str] = set()
+    for row in seeded + jobs:
+        nu = normalized_link(row[0])
+        if not nu or nu in seen_jobs:
+            continue
+        seen_jobs.add(nu); merged.append(row)
+        if len(merged) >= per_domain:
+            break
+    return merged, None
 
 
 def collect_rule_fix_source_recovery(
@@ -3629,8 +3801,9 @@ def collect_rule_fix_source_recovery(
     log_progress(
         f"Targeted new-source catch-up: {len(sources)} source(s) from preserved corpus floor {from_date.isoformat()}"
     )
+    sources_with_jobs: set[str] = set()
     with cf.ThreadPoolExecutor(max_workers=discovery_workers) as ex:
-        futs = []
+        futs: dict[Any, str] = {}
         for src in sources:
             if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
                 budget_hit = True
@@ -3638,11 +3811,14 @@ def collect_rule_fix_source_recovery(
             domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
             if domain:
                 submitted.append(domain)
-            futs.append(ex.submit(_rule_fix_recovery_domain_jobs, src, from_date, stage_deadline))
+            futs[ex.submit(_rule_fix_recovery_domain_jobs, src, from_date, stage_deadline)] = domain
         for fut in cf.as_completed(futs):
+            domain = futs.get(fut, "")
             try:
                 found, warn = fut.result()
                 jobs.extend(found)
+                if found and domain:
+                    sources_with_jobs.add(domain)
                 if warn:
                     warnings.append(warn)
             except Exception as e:
@@ -3671,6 +3847,7 @@ def collect_rule_fix_source_recovery(
         budget_hit = True
     if isinstance(execution_stats, dict):
         execution_stats.setdefault("rule_fix_recovery_sources", set()).update(x for x in submitted if x)
+        execution_stats.setdefault("rule_fix_recovery_sources_with_jobs", set()).update(sources_with_jobs)
         execution_stats["rule_fix_recovery_budget_hit"] = bool(budget_hit)
         execution_stats["rule_fix_recovery_jobs"] = len(jobs)
         execution_stats["rule_fix_recovery_admitted_ab"] = len(out)
@@ -5755,6 +5932,7 @@ def main() -> int:
         prior_rule_fix_state.get("rule_fix_source_recovery_verified_complete")
         and prior_rule_fix_state.get("rule_fix_source_recovery_version") == RULE_FIX_SOURCE_RECOVERY_VERSION
         and int(prior_rule_fix_state.get("rule_fix_source_recovery_sources_attempted", 0) or 0) >= expected_rule_fix_sources
+        and int(prior_rule_fix_state.get("rule_fix_source_recovery_sources_with_jobs", 0) or 0) >= expected_rule_fix_sources
     )
     rule_fix_source_recovery_needed = not rule_fix_source_recovery_complete
     rule_fix_source_recovery_attempted = False
@@ -5766,6 +5944,7 @@ def main() -> int:
         state.pop("rule_fix_source_recovery_verified_complete", None)
         state.pop("rule_fix_source_recovery_completed_at", None)
         state.pop("rule_fix_source_recovery_sources_attempted", None)
+        state.pop("rule_fix_source_recovery_sources_with_jobs", None)
         if state.get("rule_fix_source_recovery_version") == RULE_FIX_SOURCE_RECOVERY_VERSION:
             state.pop("rule_fix_source_recovery_version", None)
     phase_started = time.monotonic()
@@ -5854,15 +6033,18 @@ def main() -> int:
         SIGNAL_WINDOW_START_DATE = old_signal_window_start
         expected_recovery_domains = {clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in RULE_FIX_INSTITUTION_SOURCES}
         attempted_recovery_domains = set(recovery_execution.get("rule_fix_recovery_sources", set()))
+        recovery_domains_with_jobs = set(recovery_execution.get("rule_fix_recovery_sources_with_jobs", set()))
         recovery_budget_hit = bool(recovery_execution.get("rule_fix_recovery_budget_hit"))
         rule_fix_source_recovery_complete = bool(
             expected_recovery_domains
             and expected_recovery_domains.issubset(attempted_recovery_domains)
+            and expected_recovery_domains.issubset(recovery_domains_with_jobs)
             and not recovery_budget_hit
         )
         execution_stats["rule_fix_source_recovery_attempted"] = True
         execution_stats["rule_fix_source_recovery_complete"] = rule_fix_source_recovery_complete
         execution_stats["rule_fix_source_recovery_sources_attempted"] = len(attempted_recovery_domains)
+        execution_stats["rule_fix_source_recovery_sources_with_jobs"] = len(recovery_domains_with_jobs)
         execution_stats["rule_fix_source_recovery_jobs"] = int(recovery_execution.get("rule_fix_recovery_jobs", 0))
         execution_stats["rule_fix_source_recovery_admitted_ab"] = len(rule_fix_recovered)
         if rule_fix_source_recovery_complete:
@@ -6333,6 +6515,11 @@ def main() -> int:
             expected_rule_fix_sources,
             int(execution_stats.get("rule_fix_source_recovery_sources_attempted", 0) or 0),
             int(state.get("rule_fix_source_recovery_sources_attempted", 0) or 0),
+        )
+        state["rule_fix_source_recovery_sources_with_jobs"] = max(
+            expected_rule_fix_sources,
+            int(execution_stats.get("rule_fix_source_recovery_sources_with_jobs", 0) or 0),
+            int(state.get("rule_fix_source_recovery_sources_with_jobs", 0) or 0),
         )
         state["rule_fix_source_recovery_completed_at"] = state.get("rule_fix_source_recovery_completed_at") or now_iso
     state["last_run"] = now_iso
