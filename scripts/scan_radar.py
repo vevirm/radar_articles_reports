@@ -90,6 +90,61 @@ FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
+# V17.12.5 non-destructive recall repair.  Keep these additions in code rather than
+# requiring a config migration: replacing this scanner file cannot reset persistent
+# cursors or overwrite radar.json/config state.
+RULE_FIX_INSTITUTION_SOURCES = [
+    {"name": "Max Planck Institute for Intelligent Systems", "domain": "is.mpg.de", "tier": 1},
+    {"name": "ELLIS Institute", "domain": "ellis.institute", "tier": 1},
+    {"name": "ELLIS Network", "domain": "ellis.eu", "tier": 1},
+    {"name": "ELLIS Institute Finland", "domain": "ellisinstitute.fi", "tier": 1},
+    {"name": "Aalto University", "domain": "aalto.fi", "tier": 2},
+    {"name": "ETH Zürich", "domain": "ethz.ch", "tier": 2},
+    {"name": "United Nations", "domain": "un.org", "tier": 2},
+    {"name": "International AI Safety Report", "domain": "internationalaisafetyreport.org", "tier": 2},
+    {"name": "KE:SAI", "domain": "kesai.eu", "tier": 2},
+    {"name": "International Telecommunication Union", "domain": "itu.int", "tier": 2},
+    {"name": "Tech Europe", "domain": "tech-europe.org", "tier": 3},
+]
+RULE_FIX_FRONTIER_SOURCE_ADDITIONS = {
+    "infrastructure-A": ["ellis.institute", "ellis.eu", "ellisinstitute.fi", "is.mpg.de", "kesai.eu", "aalto.fi", "ethz.ch"],
+    "infrastructure-B": ["internationalaisafetyreport.org", "un.org", "itu.int", "ellis.institute", "is.mpg.de"],
+    "infrastructure-C": ["kesai.eu", "ellis.institute", "ellisinstitute.fi", "is.mpg.de", "aalto.fi", "ethz.ch"],
+    "infrastructure-D": ["kesai.eu", "ellis.institute", "internationalaisafetyreport.org", "un.org", "itu.int"],
+    "conversion-A": ["ellis.institute", "is.mpg.de", "kesai.eu", "aalto.fi", "ethz.ch"],
+    "conversion-C": ["kesai.eu", "ellis.institute", "ellisinstitute.fi"],
+    "rules-B": ["internationalaisafetyreport.org", "un.org", "itu.int"],
+    "rules-C": ["un.org", "itu.int", "internationalaisafetyreport.org", "ellis.institute"],
+    "rules-D": ["un.org", "itu.int", "internationalaisafetyreport.org"],
+    "knowledge-A": ["ellis.institute", "is.mpg.de", "ellisinstitute.fi", "aalto.fi", "ethz.ch"],
+    "knowledge-C": ["ellis.institute", "is.mpg.de", "ellisinstitute.fi", "aalto.fi"],
+}
+
+def _apply_rule_fix_source_extensions() -> None:
+    sources = CONFIG.setdefault("institution_sources", [])
+    existing = {
+        clean_text(s.get("domain", "")).lower().removeprefix("www.")
+        for s in sources if isinstance(s, dict)
+    } if "clean_text" in globals() else {
+        str(s.get("domain", "")).strip().lower().removeprefix("www.")
+        for s in sources if isinstance(s, dict)
+    }
+    for src in RULE_FIX_INSTITUTION_SOURCES:
+        if src["domain"] not in existing:
+            sources.append(dict(src))
+            existing.add(src["domain"])
+    profiles = CONFIG.setdefault("frontier_gap_institution_sources", {})
+    for cell, domains in RULE_FIX_FRONTIER_SOURCE_ADDITIONS.items():
+        current = profiles.setdefault(cell, [])
+        if not isinstance(current, list):
+            current = [current] if current else []
+            profiles[cell] = current
+        for domain in domains:
+            if domain not in current:
+                current.append(domain)
+
+_apply_rule_fix_source_extensions()
+
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
 QUALITY_PROFILE_VERSION = str(CONFIG.get("quality_profile_version", "v17-eu-ri-geo-substance"))
@@ -102,6 +157,7 @@ SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
+RULE_FIX_PROFILE_VERSION = str(CONFIG.get("rule_fix_profile_version", "v17.12.5-lane-separated-recall"))
 FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expansion", True))
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
@@ -1008,6 +1064,12 @@ URL_HARD_EXCLUDE = [
     "/press-release", "/press_releases", "/podcast", "/webinar", "/training/",
     "/funding-opportunities/", "/calls/", "/call-for", "/projects/",
 ]
+# These paths remain hard exclusions for A/B, but are valid discovery surfaces for
+# Strand C because launches, institutional changes and capability investments are often
+# published as news/event/project pages.  Jobs, calls, training and podcasts stay blocked.
+C_DISCOVERY_URL_HINTS = [
+    "/news/", "/events/", "/event/", "/press-release", "/press_releases", "/projects/",
+]
 NEWS_EXCLUDE = [
     "opinion", "commentary", "editorial", "analysis:", "analysis -", "column", "viewpoint",
     "podcast", "book review", "letter to the editor", "letters to the editor", "explainer",
@@ -1166,15 +1228,39 @@ def _contains_non_latin_script(text: str) -> bool:
     return non_latin / len(letters) > 0.01
 
 
-def probably_english(text: str, *, title_mode: bool = False) -> bool:
-    """Positive, fail-closed English detector used when source metadata is absent or wrong.
+def _strong_non_english_evidence(text: str, *, title_mode: bool = False) -> bool:
+    """Return True only for affirmative evidence that a Latin-script string is non-English.
 
-    Previous builds kept ambiguous Latin-script text. This build does the opposite: English
-    must be positively established. The title is checked independently so an English abstract
-    cannot make a French/Dutch/German/Ukrainian title pass.
+    Short institutional titles, proper names and acronyms are often linguistically ambiguous.
+    Ambiguity must not be treated as proof of a foreign language.  We still fail closed for
+    non-Latin script and for clear foreign-language function-word dominance.
     """
     txt = clean_text(text)[:8000]
-    if not txt or _contains_non_latin_script(txt):
+    if not txt:
+        return False
+    if _contains_non_latin_script(txt):
+        return True
+    words = _language_tokens(txt)
+    if not words:
+        return False
+    en = sum(w in ENGLISH_FUNCTION_WORDS for w in words)
+    other = sum(w in NON_ENGLISH_FUNCTION_WORDS for w in words)
+    if title_mode:
+        # One clear foreign function word in a 4+ word title with no English grammar is
+        # meaningful (e.g. French/Dutch titles), while a two-word proper name stays neutral.
+        return bool((other >= 2 and other > en) or (len(words) >= 4 and other >= 1 and en == 0))
+    return bool(other >= 4 and other > en)
+
+
+def probably_english(text: str, *, title_mode: bool = False) -> bool:
+    """Positive English detector, with an ambiguity-safe mode for short titles.
+
+    Long text still needs positive English evidence.  A short Latin-script title with no
+    foreign-language evidence is allowed to remain *undetermined* rather than being rejected;
+    the body or explicit source-language metadata then decides the record.
+    """
+    txt = clean_text(text)[:8000]
+    if not txt or _strong_non_english_evidence(txt, title_mode=title_mode):
         return False
     words = _language_tokens(txt)
     if len(words) < 2:
@@ -1184,32 +1270,26 @@ def probably_english(text: str, *, title_mode: bool = False) -> bool:
     domain = sum(w in ENGLISH_DOMAIN_CUES for w in words)
     general = sum(w in ENGLISH_GENERAL_CUES for w in words)
 
-    # Strong foreign-language evidence always loses, even when a few English technical
-    # terms or proper nouns are embedded in the text.
-    if other >= 4 and other > en:
-        return False
-    if title_mode and other >= 2 and other > en:
-        return False
-
-    if not title_mode and len(words) < 3:
-        return False
-
     if title_mode:
-        # Short technical titles may have few function words, so two domain-specific English
-        # cues can establish English when there is no competing foreign-language evidence.
         if en >= 1 and en >= other:
             return True
-        if domain >= 2 and other == 0:
+        if domain >= 1 and other == 0:
             return True
-        if 2 <= len(words) <= 4 and general >= 1 and other == 0:
+        if general >= 1 and other == 0:
             return True
+        # Ambiguous short proper-name/acronym headings are not positive English evidence,
+        # but callers can accept them when the body is demonstrably English.
         return False
 
-    # Abstracts/body text should contain ordinary English grammar. Do not retain an
-    # ambiguous Latin-script block merely because no foreign stopword happened to match.
+    if len(words) < 3:
+        return False
     if en >= 2 and en >= other:
         return True
-    if en >= 1 and domain >= 3 and other <= 1:
+    if en >= 1 and domain >= 2 and other <= 1:
+        return True
+    # Institutional prose can be terse and noun-heavy.  A substantial all-Latin block
+    # with several domain/general English cues and no foreign grammar is good evidence.
+    if len(words) >= 8 and other == 0 and (domain + general) >= 3:
         return True
     return False
 
@@ -1218,14 +1298,32 @@ def english_record_ok(text: str, metadata_language: Any = "", *, title: str = ""
     if not bool(CONFIG.get("english_only", True)):
         return True
     lang = normalized(metadata_language).replace("_", "-")
+    explicit_english = False
     if lang:
         primary = lang.split("-", 1)[0]
         if lang not in ENGLISH_LANGUAGE_CODES and primary != "en":
             return False
-    if title and not probably_english(title, title_mode=True):
-        return False
-    return probably_english(text, title_mode=False)
+        explicit_english = True
 
+    # Strong contrary evidence always wins, even if metadata claims English.
+    if title and _strong_non_english_evidence(title, title_mode=True):
+        return False
+    if _strong_non_english_evidence(text, title_mode=False):
+        return False
+
+    body_ok = probably_english(text, title_mode=False)
+    if body_ok:
+        return True
+    if explicit_english:
+        # Explicit English metadata may rescue short/metadata-only records, but never
+        # text with strong foreign-language evidence (rejected above).
+        return True
+    # If the record is effectively title-only, accept an English-looking title.  Otherwise
+    # do not let an ambiguous short title override a non-English/undetermined body.
+    words = _language_tokens(text)
+    if title and len(words) <= max(8, len(_language_tokens(title)) + 2):
+        return probably_english(title, title_mode=True)
+    return False
 
 def english_public_item_ok(item: dict[str, Any]) -> bool:
     """Final publication invariant for both saved and newly discovered records."""
@@ -1235,11 +1333,10 @@ def english_public_item_ok(item: dict[str, Any]) -> bool:
         return False
     title = clean_text(item.get("title") or item.get("headline") or "")
     body = clean_text(item.get("summary") or item.get("signal_note") or item.get("why_it_matters") or "")
-    if not title or not probably_english(title, title_mode=True):
+    if not title:
         return False
-    if not body or len(_language_tokens(body)) < 3:
-        return True
-    return english_record_ok(f"{title}. {body}", item.get("language", ""), title=title)
+    combined = f"{title}. {body}" if body else title
+    return english_record_ok(combined, item.get("language", ""), title=title)
 
 def norm_title(text: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]+", " ", normalized(text))).strip()
@@ -3109,11 +3206,17 @@ def institution_url_score(url: str, lastmod: dt.date | None, from_date: dt.date)
     now remain eligible; publication-like paths simply rank first.
     """
     low = normalized(url)
-    if any(x in low for x in URL_HARD_EXCLUDE):
+    hard_url_hits = [x for x in URL_HARD_EXCLUDE if x in low]
+    c_discovery_surface = bool(hard_url_hits) and all(
+        any(hit == allowed for allowed in C_DISCOVERY_URL_HINTS) for hit in hard_url_hits
+    )
+    if hard_url_hits and not c_discovery_surface:
         return -100
     if lastmod and lastmod < from_date - dt.timedelta(days=14):
         return -100
-    score = 0
+    # News/event/project paths receive a small ranking penalty, not a rejection.  Their
+    # A/B exclusion is enforced after fetch; only qualifying C developments can survive.
+    score = -2 if c_discovery_surface else 0
     if lastmod and lastmod >= from_date:
         score += 5
     hints = [
@@ -3195,7 +3298,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         _diag_inc("institution_reject_non_english")
         return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
-    if not title or exclusion:
+    if not title:
         return None
 
     published = None
@@ -3271,6 +3374,13 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                     "_entities": distinct_matches(signal_text, ENTITY_TERMS + GEO_ACTORS),
                     "_institutional_signal": True,
                 })
+
+    # A/B document-type exclusions are intentionally applied *after* the C discovery
+    # opportunity above.  A news/event/project/facility page must never enter A/B merely
+    # because it contains analytical vocabulary, but it may describe a material current
+    # R&I/geopolitical development that belongs in the anchored C lane.
+    if exclusion:
+        return None
 
     # Substantive-length rule.  Long analytical work is preferred, but concise
     # Tier-1 policy papers can qualify when the topic gates themselves are strong.
@@ -4204,7 +4314,7 @@ def surgical_precision_cleanup(previous: dict[str, Any]) -> tuple[dict[str, Any]
             hard_noise = False
             if not title or document_exclusion_reason(title, summary, clean_text(item.get("link", ""))):
                 hard_noise = True
-            elif not english_record_ok(title):
+            elif not english_record_ok(title, item.get("language", ""), title=title):
                 hard_noise = True
             elif strand_key == "strand_a":
                 off = bool(distinct_matches(text, A_OFFTOPIC_CONSUMER_OR_LOCAL))
@@ -6028,6 +6138,7 @@ def main() -> int:
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
+        "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
         "allocation_profile_version": str(CONFIG.get("allocation_profile_version", "")),
         "scan_state": state,
         "zero_config_scan": True,
