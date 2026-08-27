@@ -31,6 +31,7 @@ import json
 import os
 import re
 import threading
+import unicodedata
 import subprocess
 import sys
 import time
@@ -86,6 +87,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "radar_config.json"
 OUT_PATH = ROOT / "radar.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
+PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
@@ -157,6 +159,7 @@ C_ADMISSION_PROFILE_VERSION = "v17.12.9-strict-anchored-C-forward-only"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
+PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
@@ -471,6 +474,9 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "frontier_gap_cursor": 0,
             "openalex_explore_cursor": 0,
             "crossref_explore_cursor": 0,
+            "priority_people_cursor": 0,
+            "priority_people_completed_cycles": 0,
+            "priority_people_openalex_author_ids": {},
             "frontier_gap_query_cursors": {},
             "frontier_gap_source_cursors": {},
             "frontier_recovery_query_cursors": {},
@@ -495,6 +501,10 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     state.setdefault("cycle_failed", {})
     if not isinstance(state.get("institution_seen_fingerprints"), dict):
         state["institution_seen_fingerprints"] = {}
+    state.setdefault("priority_people_cursor", 0)
+    state.setdefault("priority_people_completed_cycles", 0)
+    if not isinstance(state.get("priority_people_openalex_author_ids"), dict):
+        state["priority_people_openalex_author_ids"] = {}
     if not isinstance(state.get("frontier_gap_query_cursors"), dict):
         state["frontier_gap_query_cursors"] = {}
     if not isinstance(state.get("frontier_gap_source_cursors"), dict):
@@ -1250,6 +1260,105 @@ def clean_text(value: Any) -> str:
 def normalized(text: str) -> str:
     text = clean_text(text).lower().replace("–", "-").replace("—", "-")
     return re.sub(r"\s+", " ", text)
+
+
+def folded_person_name(value: str) -> str:
+    """Accent-insensitive person-name key used only for author identity matching."""
+    folded = "".join(
+        c for c in unicodedata.normalize("NFKD", clean_text(value))
+        if not unicodedata.combining(c)
+    ).lower()
+    return re.sub(r"[^a-z0-9]+", " ", folded).strip()
+
+
+def load_priority_people(path: Path | None = None) -> list[dict[str, Any]]:
+    """Load the curated recurring watch list fail-soft.
+
+    The list changes discovery attention only; it never bypasses A/B admission. Keeping it
+    in a standalone JSON file makes additions auditable without inflating the main query bank.
+    """
+    target = path or (ROOT / clean_text(CONFIG.get("priority_people_file", "priority_people.json")))
+    try:
+        data = json.loads(target.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    raw = data.get("people") if isinstance(data, dict) else data
+    if not isinstance(raw, list):
+        return []
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        name = clean_text(item.get("name"))
+        key = folded_person_name(name)
+        if not name or not key or key in seen:
+            continue
+        seen.add(key)
+        rec = dict(item)
+        rec["name"] = name
+        rec["category"] = clean_text(rec.get("category")) or "Other"
+        rec["affiliation_hint"] = clean_text(rec.get("affiliation_hint"))
+        topics = rec.get("topic_hints") if isinstance(rec.get("topic_hints"), list) else []
+        rec["topic_hints"] = [clean_text(x) for x in topics if clean_text(x)]
+        out.append(rec)
+    return out
+
+
+def diversified_priority_people(people: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Round-robin categories so each run spans several technical/policy domains."""
+    groups: dict[str, list[dict[str, Any]]] = {}
+    order: list[str] = []
+    for person in people:
+        category = clean_text(person.get("category")) or "Other"
+        if category not in groups:
+            groups[category] = []
+            order.append(category)
+        groups[category].append(person)
+    out: list[dict[str, Any]] = []
+    pos = 0
+    while True:
+        added = False
+        for category in order:
+            vals = groups[category]
+            if pos < len(vals):
+                out.append(vals[pos])
+                added = True
+        if not added:
+            break
+        pos += 1
+    return out
+
+
+def priority_people_rotation_plan(
+    state: dict[str, Any],
+    people: list[dict[str, Any]] | None = None,
+    limit: int | None = None,
+) -> dict[str, Any]:
+    """Plan, but do not commit, the next additive named-person slice."""
+    bank = diversified_priority_people(people if people is not None else load_priority_people())
+    if not bank or not bool(CONFIG.get("priority_people_enabled", True)):
+        return {"bank": [], "people": [], "cursor": 0, "wrapped": True, "categories": []}
+    cursor = int(state.get("priority_people_cursor", 0) or 0)
+    n = int(limit if limit is not None else CONFIG.get("priority_people_per_scan", 14))
+    batch, next_cursor, wrapped = rotating_batch(bank, cursor, n)
+    return {
+        "bank": bank,
+        "people": batch,
+        "cursor": next_cursor,
+        "wrapped": wrapped,
+        "categories": list(dict.fromkeys(clean_text(x.get("category")) for x in batch if clean_text(x.get("category")))),
+    }
+
+
+def priority_person_context_query(person: dict[str, Any]) -> str:
+    """Build a substantive fallback query from affiliation + expertise, not just a name."""
+    affiliation = clean_text(person.get("affiliation_hint"))
+    topics = person.get("topic_hints") if isinstance(person.get("topic_hints"), list) else []
+    topic_text = " ".join(clean_text(x) for x in topics[:2] if clean_text(x))
+    category = clean_text(person.get("category"))
+    parts = [affiliation, topic_text, category, "Europe research innovation"]
+    return clean_text(" ".join(x for x in parts if x))
 
 
 ENGLISH_LANGUAGE_CODES = {"en", "eng", "english", "en-us", "en-gb", "en_us", "en_gb"}
@@ -3236,6 +3345,225 @@ def collect_crossref(
         execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(enrichment_total[0])
     return dedupe_candidates(out)
 
+
+def _priority_affiliation_score(author_record: dict[str, Any], affiliation_hint: str) -> int:
+    """Light disambiguation score for exact-name OpenAlex author candidates."""
+    if not affiliation_hint:
+        return 0
+    hay = folded_person_name(json.dumps(author_record, ensure_ascii=False))
+    stop = {"univ", "university", "institute", "institut", "center", "centre", "the", "and", "for"}
+    tokens = [t for t in folded_person_name(affiliation_hint).split() if len(t) >= 4 and t not in stop]
+    return sum(3 for t in dict.fromkeys(tokens) if t in hay)
+
+
+def _resolve_priority_openalex_author(
+    person: dict[str, Any],
+    cache: dict[str, str],
+    warnings: list[str],
+    timeout: int,
+) -> tuple[str, bool]:
+    """Resolve an exact person name to an OpenAlex author ID, using affiliation hints to break ties."""
+    name = clean_text(person.get("name"))
+    key = folded_person_name(name)
+    cached = clean_text(cache.get(key))
+    if cached:
+        return cached, False
+    try:
+        r = SESSION.get("https://api.openalex.org/authors", params={"search": name, "per-page": 10}, timeout=timeout)
+    except Exception as e:
+        warnings.append(f"Priority people OpenAlex author resolution {name}: {type(e).__name__}")
+        return "", True
+    if r.status_code != 200:
+        warnings.append(f"Priority people OpenAlex author resolution {name}: HTTP {r.status_code}")
+        return "", True
+    wanted = folded_person_name(name)
+    ranked: list[tuple[int, int, str]] = []
+    for author in r.json().get("results", []):
+        if folded_person_name(clean_text(author.get("display_name"))) != wanted:
+            continue
+        score = 100 + _priority_affiliation_score(author, clean_text(person.get("affiliation_hint")))
+        works_count = int(author.get("works_count", 0) or 0)
+        author_id = clean_text(author.get("id")).rsplit("/", 1)[-1].upper()
+        if author_id:
+            ranked.append((score, works_count, author_id))
+    if not ranked:
+        return "", True
+    ranked.sort(reverse=True)
+    cache[key] = ranked[0][2]
+    return ranked[0][2], True
+
+
+def _tag_priority_candidate(item: dict[str, Any], person: dict[str, Any], origin: str) -> dict[str, Any]:
+    """Keep researcher-attention provenance private to the scan process.
+
+    Once admitted, a watched researcher's work must be indistinguishable from any other
+    scholarly discovery in the public corpus.  Only the private origin marker is needed
+    long enough to route the candidate back into the ordinary OpenAlex/Crossref pools.
+    """
+    tagged = dict(item)
+    tagged["_priority_origin"] = origin
+    tagged["_priority_person"] = clean_text(person.get("name"))
+    return tagged
+
+
+def collect_priority_people(
+    people: list[dict[str, Any]],
+    from_date: dt.date,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    state: dict[str, Any] | None = None,
+    execution_stats: dict[str, Any] | None = None,
+    openalex_allowed: bool = True,
+    crossref_allowed: bool = True,
+) -> list[dict[str, Any]]:
+    """Give selected researchers extra discovery attention inside normal scholarly scanning.
+
+    It never relaxes admission or creates a separate public content stream: OpenAlex/Crossref
+    records still go through the same ``candidate_from_*`` functions as ordinary scholarly
+    discovery. If both exact-author sources yield no record for a person, the caller receives
+    one affiliation/topic context query for the normal scholarly collectors.
+    """
+    if not people or not bool(CONFIG.get("priority_people_enabled", True)):
+        return []
+    state = state if isinstance(state, dict) else {}
+    cache = state.setdefault("priority_people_openalex_author_ids", {})
+    if not isinstance(cache, dict):
+        cache = {}
+        state["priority_people_openalex_author_ids"] = cache
+    timeout = max(4, int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+    rows = max(5, min(100, int(CONFIG.get("priority_people_rows_per_person", 40) or 40)))
+    recover_remaining = max(0, int(CONFIG.get("priority_people_abstract_recovery_per_scan", 8) or 0))
+    oa_enabled = bool(CONFIG.get("priority_people_openalex_enabled", True)) and bool(openalex_allowed)
+    cr_enabled = bool(CONFIG.get("priority_people_crossref_enabled", True)) and bool(crossref_allowed)
+    executed: set[str] = set()
+    resolved: set[str] = set()
+    context_queries: list[str] = []
+    context_map: dict[str, str] = {}
+    out: list[dict[str, Any]] = []
+    raw_exact_hits = 0
+
+    def near_deadline() -> bool:
+        return bool(stage_deadline is not None and time.monotonic() >= stage_deadline - 10)
+
+    for person in people:
+        if near_deadline():
+            warnings.append("Priority people stage budget reached; remaining people stay at the persisted cursor")
+            break
+        name = clean_text(person.get("name"))
+        if not name:
+            continue
+        person_attempted = False
+        person_raw_hits = 0
+
+        if oa_enabled and not near_deadline():
+            author_id, resolution_requested = _resolve_priority_openalex_author(person, cache, warnings, timeout)
+            person_attempted = person_attempted or resolution_requested or bool(author_id)
+            if author_id:
+                resolved.add(name)
+                filters = [f"authorships.author.id:{author_id}", f"author.id:{author_id}"]
+                works: list[dict[str, Any]] = []
+                for idx, author_filter in enumerate(filters):
+                    params = {
+                        "filter": f"{author_filter},from_publication_date:{from_date.isoformat()},to_publication_date:{dt.date.today().isoformat()}",
+                        "sort": "publication_date:desc",
+                        "per-page": rows,
+                        "page": 1,
+                    }
+                    try:
+                        r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+                    except Exception as e:
+                        warnings.append(f"Priority people OpenAlex works {name}: {type(e).__name__}")
+                        break
+                    person_attempted = True
+                    if r.status_code == 400 and idx == 0:
+                        continue
+                    if r.status_code != 200:
+                        warnings.append(f"Priority people OpenAlex works {name}: HTTP {r.status_code}")
+                        break
+                    works = r.json().get("results", [])
+                    break
+                person_raw_hits += len(works)
+                raw_exact_hits += len(works)
+                for work in works:
+                    item = candidate_from_openalex(work, date_floor=from_date)
+                    if item is None and recover_remaining > 0:
+                        doi = clean_text(work.get("doi"))
+                        abstract = openalex_abstract(work.get("abstract_inverted_index"))
+                        if doi and not abstract:
+                            recovered = doi_landing_abstract(doi, timeout=min(timeout, 8))
+                            if recovered:
+                                recover_remaining -= 1
+                                patched = dict(work)
+                                inv: dict[str, list[int]] = {}
+                                for pos, token in enumerate(clean_text(recovered).split()):
+                                    inv.setdefault(token, []).append(pos)
+                                patched["abstract_inverted_index"] = inv
+                                item = candidate_from_openalex(patched, date_floor=from_date)
+                    if item:
+                        out.append(_tag_priority_candidate(item, person, "openalex"))
+
+        if cr_enabled and not near_deadline():
+            params = {
+                "query.author": name,
+                "filter": f"from-pub-date:{from_date.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
+                "rows": rows,
+                "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
+            }
+            try:
+                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                person_attempted = True
+                if r.status_code == 200:
+                    items = (r.json().get("message") or {}).get("items", [])
+                    wanted = folded_person_name(name)
+                    exact_items = []
+                    for raw in items:
+                        author_names = [
+                            clean_text(" ".join(x for x in [a.get("given"), a.get("family")] if clean_text(x)))
+                            for a in (raw.get("author") or [])
+                        ]
+                        if wanted in {folded_person_name(x) for x in author_names if x}:
+                            exact_items.append(raw)
+                    person_raw_hits += len(exact_items)
+                    raw_exact_hits += len(exact_items)
+                    for raw in exact_items:
+                        item = candidate_from_crossref(raw, date_floor=from_date)
+                        if item is None and recover_remaining > 0:
+                            doi = clean_text(raw.get("DOI"))
+                            if doi and not clean_text(raw.get("abstract")):
+                                recovered = doi_landing_abstract(doi, timeout=min(timeout, 8))
+                                if recovered:
+                                    recover_remaining -= 1
+                                    patched = dict(raw)
+                                    patched["abstract"] = recovered
+                                    item = candidate_from_crossref(patched, date_floor=from_date)
+                        if item:
+                            out.append(_tag_priority_candidate(item, person, "crossref"))
+                else:
+                    warnings.append(f"Priority people Crossref {name}: HTTP {r.status_code}")
+            except Exception as e:
+                warnings.append(f"Priority people Crossref {name}: {type(e).__name__}")
+
+        if person_attempted:
+            executed.add(name)
+        if person_attempted and person_raw_hits == 0:
+            q = priority_person_context_query(person)
+            if q and q not in context_queries:
+                context_queries.append(q)
+                context_map[q] = name
+
+    if isinstance(execution_stats, dict):
+        execution_stats.setdefault("priority_people_executed", set()).update(executed)
+        execution_stats.setdefault("priority_people_openalex_resolved", set()).update(resolved)
+        execution_stats["priority_people_raw_exact_hits"] = int(execution_stats.get("priority_people_raw_exact_hits", 0)) + raw_exact_hits
+        execution_stats["priority_people_admitted"] = int(execution_stats.get("priority_people_admitted", 0)) + len(out)
+        execution_stats["priority_people_context_queries"] = context_queries
+        execution_stats["priority_people_context_map"] = context_map
+        execution_stats["priority_people_abstract_recoveries_used"] = max(
+            0, int(CONFIG.get("priority_people_abstract_recovery_per_scan", 8) or 0) - recover_remaining
+        )
+    return dedupe_candidates(out)
+
+
 def decompress_xml(content: bytes) -> bytes:
     if content[:2] == b"\x1f\x8b":
         try:
@@ -4517,7 +4845,10 @@ def rank_candidate(item: dict[str, Any]):
 def public_item(item: dict[str, Any], *, new_this_scan: bool = False, first_seen: str | None = None) -> dict[str, Any]:
     if not isinstance(item, dict):
         return {}
-    out = {k: v for k, v in item.items() if not k.startswith("_")}
+    out = {
+        k: v for k, v in item.items()
+        if not k.startswith("_") and not k.startswith("priority_watch") and k != "priority_context_fallback"
+    }
     title = clean_text(out.get("title") or out.get("headline") or "")
     if out.get("headline"):
         detail = clean_text(out.get("summary") or out.get("signal_note") or out.get("why_it_matters") or "")
@@ -6054,6 +6385,17 @@ def main() -> int:
     state["openalex_explore_cursor"] = oa_explore_cursor_before
     state["crossref_explore_cursor"] = cr_explore_cursor_before
 
+    # Curated people are embedded discovery attention inside the scholarly rotation.
+    # They do not create a separate corpus, page, section, or admission path. Category
+    # round-robin keeps one run from spending all named-person budget on one field.
+    priority_people_all = load_priority_people()
+    priority_people_plan = priority_people_rotation_plan(state, priority_people_all)
+    priority_people_bank = list(priority_people_plan.get("bank", []))
+    priority_people_batch = list(priority_people_plan.get("people", []))
+    priority_people_cursor_before = int(state.get("priority_people_cursor", 0) or 0)
+    priority_people_names_all = [clean_text(x.get("name")) for x in priority_people_bank]
+    priority_people_names_planned = [clean_text(x.get("name")) for x in priority_people_batch]
+
     oa_reserved = len(gap_scholarly) + len(b_method_focus) + len(oa_explore)
     cr_reserved = len(gap_scholarly) + len(b_method_focus) + len(cr_explore)
     oa_base_cap = max(1, oa_cap - min(oa_reserved, max(0, oa_cap - 1)))
@@ -6185,6 +6527,11 @@ def main() -> int:
             f"OpenAlex {len(oa_explore)} + Crossref {len(cr_explore)} query/queries from {DATE_FLOOR.isoformat()}; "
             "themes=" + ", ".join(exploration.get("themes", []))
         )
+    if priority_people_batch:
+        log_progress(
+            f"Embedded researcher attention: {len(priority_people_batch)}/{len(priority_people_bank)} people checked inside scholarly discovery; "
+            "categories=" + ", ".join(priority_people_plan.get("categories", []))
+        )
     log_progress(
         f"Known corpus loaded before discovery: {len(KNOWN_AB_IDENTITIES)} A/B identities, "
         f"{len(KNOWN_AB_LINKS)} known A/B links, {len(KNOWN_SIGNAL_IDENTITIES)} weak-signal identities"
@@ -6292,6 +6639,105 @@ def main() -> int:
     state["crossref_explore_cursor"], _cr_explore_wrapped, cr_explore_executed = committed_rotation_cursor(
         explore_bank, cr_explore_cursor_before, cr_explore, executed_cr
     )
+
+    # Embedded recurring researcher attention. It has private persisted state for fair
+    # cycling, but every admitted work immediately rejoins the ordinary scholarly pools.
+    priority_people_executed_count = 0
+    priority_context_queries: list[str] = []
+    priority_context_oa_count = 0
+    priority_context_cr_count = 0
+    if priority_people_batch and budget_remaining() > 90 and not (oa_failed and cr_failed):
+        pp_deadline = time.monotonic() + min(
+            int(CONFIG.get("priority_people_stage_seconds", 210) or 210),
+            max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
+        )
+        if pp_deadline > time.monotonic() + 20:
+            priority_candidates = safe_stage(
+                "embedded researcher exact-author check",
+                collect_priority_people,
+                priority_people_batch,
+                DATE_FLOOR,
+                warnings,
+                pp_deadline,
+                state,
+                execution_stats,
+                not oa_failed,
+                not cr_failed,
+            )
+            for item in priority_candidates:
+                if not isinstance(item, dict):
+                    continue
+                if item.get("_priority_origin") == "crossref":
+                    cr.append(item)
+                else:
+                    oa.append(item)
+
+        executed_people = set(execution_stats.get("priority_people_executed", set()))
+        state["priority_people_cursor"], pp_wrapped, priority_people_executed_count = committed_rotation_cursor(
+            priority_people_names_all,
+            priority_people_cursor_before,
+            priority_people_names_planned,
+            executed_people,
+        )
+        if pp_wrapped and priority_people_executed_count:
+            state["priority_people_completed_cycles"] = int(state.get("priority_people_completed_cycles", 0) or 0) + 1
+
+        # Only people for whom both exact-author sources produced no record get a
+        # bounded context fallback. These queries deliberately use affiliation and
+        # expertise rather than merely repeating the person's name, so the lane can
+        # find substantive adjacent work by other researchers too.
+        priority_context_queries = list(dict.fromkeys(execution_stats.get("priority_people_context_queries", [])))[:
+            max(0, int(CONFIG.get("priority_people_context_fallback_per_scan", 4) or 0))
+        ]
+        if priority_context_queries and budget_remaining() > 75:
+            context_seconds = min(
+                int(CONFIG.get("priority_people_context_stage_seconds", 90) or 90),
+                max(25, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+            )
+            context_deadline = time.monotonic() + context_seconds
+            context_exec: dict[str, Any] = {}
+            context_dates = {q: DATE_FLOOR for q in priority_context_queries}
+            context_lanes = {q: "people-context" for q in priority_context_queries}
+            context_oa: list[dict[str, Any]] = []
+            context_cr: list[dict[str, Any]] = []
+            with cf.ThreadPoolExecutor(max_workers=2) as ex:
+                futs: list[tuple[str, Any]] = []
+                if not oa_failed:
+                    futs.append((
+                        "oa",
+                        ex.submit(
+                            safe_stage,
+                            "OpenAlex researcher-context fallback",
+                            collect_openalex,
+                            DATE_FLOOR, warnings, priority_context_queries, context_deadline,
+                            context_dates, state["result_depth"]["openalex"], context_lanes, context_exec,
+                        ),
+                    ))
+                if not cr_failed:
+                    futs.append((
+                        "cr",
+                        ex.submit(
+                            safe_stage,
+                            "Crossref researcher-context fallback",
+                            collect_crossref,
+                            DATE_FLOOR, warnings, priority_context_queries, [], [], context_deadline,
+                            context_dates, state["result_depth"]["crossref_broad"],
+                            state["result_depth"]["crossref_priority"], context_lanes, context_exec,
+                        ),
+                    ))
+                for family, fut in futs:
+                    rows = [x for x in fut.result() if isinstance(x, dict)]
+                    if family == "oa":
+                        context_oa.extend(rows)
+                    else:
+                        context_cr.extend(rows)
+            oa.extend(context_oa)
+            cr.extend(context_cr)
+            priority_context_oa_count = len(context_oa)
+            priority_context_cr_count = len(context_cr)
+            execution_stats["priority_people_context_openalex_queries_executed"] = len(set(context_exec.get("openalex_queries", set())))
+            execution_stats["priority_people_context_crossref_queries_executed"] = len(set(context_exec.get("crossref_broad_queries", set())))
+            execution_stats["priority_people_context_admitted"] = len(context_oa) + len(context_cr)
 
     # Before ordinary institutional rotation, give only the newly introduced V17.12.5
     # sources a one-time catch-up from the preserved corpus floor.  The first rule-fix
@@ -6857,6 +7303,8 @@ def main() -> int:
         "crossref_broad_queries": len(cr_batch),
         "crossref_exploration_queries": len(cr_explore),
         "crossref_priority_tasks": len(cr_priority_batch),
+        "priority_people": len(priority_people_batch),
+        "priority_people_context_queries": len(priority_context_queries),
         "institution_sources": len(inst_batch),
         "rule_fix_new_source_recovery_sources": len(RULE_FIX_INSTITUTION_SOURCES) if rule_fix_source_recovery_needed else 0,
         "manual_recovery_urls": len(manual_recovery_jobs(previous)),

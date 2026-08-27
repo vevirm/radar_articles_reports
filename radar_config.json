@@ -1525,5 +1525,18 @@
     "institutmontaigne.org",
     "gmfus.org",
     "eenewseurope.com"
-  ]
+  ],
+  "priority_people_profile_version": "v17.12.7-embedded-researcher-attention",
+  "priority_people_file": "priority_people.json",
+  "priority_people_enabled": true,
+  "priority_people_per_scan": 16,
+  "priority_people_stage_seconds": 210,
+  "priority_people_rows_per_person": 40,
+  "priority_people_context_fallback_per_scan": 4,
+  "priority_people_context_stage_seconds": 90,
+  "priority_people_abstract_recovery_per_scan": 8,
+  "priority_people_openalex_enabled": true,
+  "priority_people_crossref_enabled": true,
+  "priority_people_rule": "Curated researchers receive extra discovery attention inside the ordinary scholarly rotation. Their works are not labelled, separated, or displayed differently, and admission criteria are unchanged.",
+  "priority_people_fallback_rule": "If exact-author discovery yields nothing, use affiliation + topic hints for a bounded contextual scholarly query. Results from this fallback are processed exactly like all other scholarly discoveries and may belong to any researcher."
 }

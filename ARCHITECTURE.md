@@ -42,3 +42,11 @@ The public interface distinguishes **reader-facing claims** from **source detail
 
 `scripts/scan_radar.py::normalize_reader_claims()` is the final write boundary for every published corpus lane (`strand_a`, `strand_b`, `strand_c`, `frontier_evidence`). `scripts/manual_ingest.py` calls the same boundary before it writes state. The browser applies the same rule again as a defensive display fallback, so future insertion paths cannot bypass the reader-first wording merely by omitting a precomputed claim.
 
+
+## Embedded researcher attention in scholarly discovery (V17.12.7)
+
+The scanner has an embedded scholarly-attention mechanism backed by `priority_people.json`. It is backend discovery input, not a public content type. `priority_people_rotation_plan()` round-robins categories and `scan_state.priority_people_cursor` records only contiguous researchers for whom an API request was actually attempted, while the normal query cursors remain independent.
+
+For each selected researcher, `collect_priority_people()` first resolves an exact OpenAlex author identity (using the supplied affiliation as a tie-breaker), requests works by author ID, and also queries Crossref's author field. Both paths immediately rejoin the ordinary OpenAlex/Crossref candidate pools and call the unchanged `candidate_from_openalex()` / `candidate_from_crossref()` admission functions. Missing abstracts receive only a small bounded DOI-metadata recovery budget. If both exact-author sources yield no record, the scanner emits at most a few affiliation/topic context queries into the ordinary scholarly collectors. Context results can belong to anyone and still have to pass the normal EU R&I × geopolitics gate.
+
+Researcher attention keeps only the private state required for fair cycling and author-ID caching (`priority_people_cursor`, `priority_people_completed_cycles`, `priority_people_openalex_author_ids`). No watch-list labels or dedicated researcher diagnostics are published on admitted records. It does not alter OpenAlex broad, Crossref broad/priority/source-first, institution, Strand-B method, Frontier-gap, historical-exploration, or weak-signal cursors.

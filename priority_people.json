@@ -1,0 +1,1344 @@
+{
+  "profile_version": "v17.12.6-priority-people-recurring-rotation",
+  "purpose": "Additive recurring exact-author attention inside the existing radar rotation. These people are priority anchors, not a whitelist; normal topic, source, institution, frontier-gap, and weak-signal discovery remains active.",
+  "admission_rule": "Priority status affects discovery attention only. A work enters the radar only if it passes the normal Strand A/B evidence and aboutness gates.",
+  "fallback_rule": "If exact author resolution is weak or yields no metadata hit, use the supplied affiliation and topic hints for a bounded contextual discovery query. Context hits still pass the normal admission gate and may surface relevant work by other people.",
+  "people": [
+    {
+      "order": 1,
+      "name": "Bernhard Schölkopf",
+      "category": "AI & machine learning",
+      "affiliation_hint": "MPI Intelligent Systems, Tübingen",
+      "topic_hints": [
+        "causal inference",
+        "kernel methods"
+      ]
+    },
+    {
+      "order": 2,
+      "name": "Max Welling",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Univ. Amsterdam",
+      "topic_hints": [
+        "Bayesian & geometric deep learning",
+        "AI for science"
+      ]
+    },
+    {
+      "order": 3,
+      "name": "Sepp Hochreiter",
+      "category": "AI & machine learning",
+      "affiliation_hint": "JKU Linz",
+      "topic_hints": [
+        "LSTM",
+        "deep learning theory"
+      ]
+    },
+    {
+      "order": 4,
+      "name": "Cordelia Schmid",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Inria Grenoble",
+      "topic_hints": [
+        "computer vision",
+        "video understanding"
+      ]
+    },
+    {
+      "order": 5,
+      "name": "Francis Bach",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Inria/ENS Paris",
+      "topic_hints": [
+        "optimization",
+        "learning theory"
+      ]
+    },
+    {
+      "order": 6,
+      "name": "Nicolò Cesa-Bianchi",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Univ. Milan",
+      "topic_hints": [
+        "online learning",
+        "bandits"
+      ]
+    },
+    {
+      "order": 7,
+      "name": "Luc De Raedt",
+      "category": "AI & machine learning",
+      "affiliation_hint": "KU Leuven",
+      "topic_hints": [
+        "neuro-symbolic AI",
+        "probabilistic logic learning"
+      ]
+    },
+    {
+      "order": 8,
+      "name": "Kristian Kersting",
+      "category": "AI & machine learning",
+      "affiliation_hint": "TU Darmstadt / hessian.AI",
+      "topic_hints": [
+        "probabilistic ML",
+        "foundation models"
+      ]
+    },
+    {
+      "order": 9,
+      "name": "Holger Hoos",
+      "category": "AI & machine learning",
+      "affiliation_hint": "RWTH Aachen / CLAIRE",
+      "topic_hints": [
+        "automated ML",
+        "European AI strategy"
+      ]
+    },
+    {
+      "order": 10,
+      "name": "Frank Hutter",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Freiburg / ELLIS Tübingen",
+      "topic_hints": [
+        "AutoML",
+        "neural architecture search"
+      ]
+    },
+    {
+      "order": 11,
+      "name": "Klaus-Robert Müller",
+      "category": "AI & machine learning",
+      "affiliation_hint": "TU Berlin / BIFOLD",
+      "topic_hints": [
+        "explainable AI",
+        "ML for chemistry & physics"
+      ]
+    },
+    {
+      "order": 12,
+      "name": "Wojciech Samek",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Fraunhofer HHI",
+      "topic_hints": [
+        "explainable AI",
+        "model compression"
+      ]
+    },
+    {
+      "order": 13,
+      "name": "Ulrike von Luxburg",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Univ. Tübingen",
+      "topic_hints": [
+        "ML theory",
+        "interpretability"
+      ]
+    },
+    {
+      "order": 14,
+      "name": "Zeynep Akata",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Helmholtz Munich / TUM",
+      "topic_hints": [
+        "explainable AI",
+        "vision-language models"
+      ]
+    },
+    {
+      "order": 15,
+      "name": "Bernt Schiele",
+      "category": "AI & machine learning",
+      "affiliation_hint": "MPI Informatics Saarbrücken",
+      "topic_hints": [
+        "computer vision"
+      ]
+    },
+    {
+      "order": 16,
+      "name": "Thomas Brox",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Univ. Freiburg",
+      "topic_hints": [
+        "computer vision",
+        "motion analysis"
+      ]
+    },
+    {
+      "order": 17,
+      "name": "Iryna Gurevych",
+      "category": "AI & machine learning",
+      "affiliation_hint": "TU Darmstadt",
+      "topic_hints": [
+        "NLP",
+        "argument mining",
+        "misinformation"
+      ]
+    },
+    {
+      "order": 18,
+      "name": "Hinrich Schütze",
+      "category": "AI & machine learning",
+      "affiliation_hint": "LMU Munich",
+      "topic_hints": [
+        "computational linguistics",
+        "multilingual LLMs"
+      ]
+    },
+    {
+      "order": 19,
+      "name": "Barbara Plank",
+      "category": "AI & machine learning",
+      "affiliation_hint": "LMU Munich",
+      "topic_hints": [
+        "NLP robustness",
+        "low-resource languages"
+      ]
+    },
+    {
+      "order": 20,
+      "name": "Anders Søgaard",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Univ. Copenhagen",
+      "topic_hints": [
+        "NLP",
+        "LLM evaluation"
+      ]
+    },
+    {
+      "order": 21,
+      "name": "Ivan Titov",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Amsterdam / Edinburgh",
+      "topic_hints": [
+        "NLP",
+        "interpretability"
+      ]
+    },
+    {
+      "order": 22,
+      "name": "Virginia Dignum",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Umeå Univ.",
+      "topic_hints": [
+        "responsible AI",
+        "AI governance"
+      ]
+    },
+    {
+      "order": 23,
+      "name": "Nuria Oliver",
+      "category": "AI & machine learning",
+      "affiliation_hint": "ELLIS Alicante",
+      "topic_hints": [
+        "data science for social good"
+      ]
+    },
+    {
+      "order": 24,
+      "name": "Carles Sierra",
+      "category": "AI & machine learning",
+      "affiliation_hint": "IIIA-CSIC Barcelona",
+      "topic_hints": [
+        "multi-agent systems"
+      ]
+    },
+    {
+      "order": 25,
+      "name": "Ana Paiva",
+      "category": "AI & machine learning",
+      "affiliation_hint": "INESC-ID / IST Lisbon",
+      "topic_hints": [
+        "social robotics",
+        "affective computing"
+      ]
+    },
+    {
+      "order": 26,
+      "name": "Samuel Kaski",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Aalto / FCAI",
+      "topic_hints": [
+        "probabilistic ML",
+        "human-in-the-loop"
+      ]
+    },
+    {
+      "order": 27,
+      "name": "Marta R. Costa-jussà",
+      "category": "AI & machine learning",
+      "affiliation_hint": "Meta AI Paris",
+      "topic_hints": [
+        "multilingual MT",
+        "bias in LMs"
+      ]
+    },
+    {
+      "order": 28,
+      "name": "Jan Peters",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "TU Darmstadt",
+      "topic_hints": [
+        "robot learning",
+        "RL for manipulation"
+      ]
+    },
+    {
+      "order": 29,
+      "name": "Danica Kragic",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "KTH",
+      "topic_hints": [
+        "robot vision",
+        "dexterous manipulation"
+      ]
+    },
+    {
+      "order": 30,
+      "name": "Sami Haddadin",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "TUM / MIRMI",
+      "topic_hints": [
+        "human-robot interaction",
+        "safe robotics"
+      ]
+    },
+    {
+      "order": 31,
+      "name": "Alin Albu-Schäffer",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "DLR",
+      "topic_hints": [
+        "lightweight",
+        "torque-controlled robotics"
+      ]
+    },
+    {
+      "order": 32,
+      "name": "Bruno Siciliano",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "Naples Federico II",
+      "topic_hints": [
+        "robot control",
+        "aerial robotics"
+      ]
+    },
+    {
+      "order": 33,
+      "name": "Antonio Bicchi",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "IIT / Pisa",
+      "topic_hints": [
+        "soft robotics",
+        "haptics"
+      ]
+    },
+    {
+      "order": 34,
+      "name": "Barbara Mazzolai",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "IIT",
+      "topic_hints": [
+        "bioinspired soft robotics"
+      ]
+    },
+    {
+      "order": 35,
+      "name": "Tamim Asfour",
+      "category": "Robotics & manufacturing",
+      "affiliation_hint": "KIT",
+      "topic_hints": [
+        "humanoids",
+        "learning from demonstration"
+      ]
+    },
+    {
+      "order": 36,
+      "name": "Juan Ignacio Cirac",
+      "category": "Quantum technologies",
+      "affiliation_hint": "MPQ Garching",
+      "topic_hints": [
+        "quantum computing theory",
+        "tensor networks"
+      ]
+    },
+    {
+      "order": 37,
+      "name": "Peter Zoller",
+      "category": "Quantum technologies",
+      "affiliation_hint": "Innsbruck / IQOQI",
+      "topic_hints": [
+        "quantum simulation",
+        "quantum optics"
+      ]
+    },
+    {
+      "order": 38,
+      "name": "Rainer Blatt",
+      "category": "Quantum technologies",
+      "affiliation_hint": "Innsbruck / IQOQI",
+      "topic_hints": [
+        "trapped-ion quantum computing"
+      ]
+    },
+    {
+      "order": 39,
+      "name": "Immanuel Bloch",
+      "category": "Quantum technologies",
+      "affiliation_hint": "MPQ / LMU",
+      "topic_hints": [
+        "ultracold atoms",
+        "quantum simulation"
+      ]
+    },
+    {
+      "order": 40,
+      "name": "Tommaso Calarco",
+      "category": "Quantum technologies",
+      "affiliation_hint": "FZ Jülich",
+      "topic_hints": [
+        "quantum optimal control",
+        "Quantum Flagship"
+      ]
+    },
+    {
+      "order": 41,
+      "name": "Lieven Vandersypen",
+      "category": "Quantum technologies",
+      "affiliation_hint": "QuTech / TU Delft",
+      "topic_hints": [
+        "semiconductor spin qubits"
+      ]
+    },
+    {
+      "order": 42,
+      "name": "Ronald Hanson",
+      "category": "Quantum technologies",
+      "affiliation_hint": "QuTech / TU Delft",
+      "topic_hints": [
+        "quantum networks",
+        "NV centres"
+      ]
+    },
+    {
+      "order": 43,
+      "name": "Stephanie Wehner",
+      "category": "Quantum technologies",
+      "affiliation_hint": "QuTech / TU Delft",
+      "topic_hints": [
+        "quantum internet protocols"
+      ]
+    },
+    {
+      "order": 44,
+      "name": "Barbara Terhal",
+      "category": "Quantum technologies",
+      "affiliation_hint": "QuTech / TU Delft",
+      "topic_hints": [
+        "quantum error correction"
+      ]
+    },
+    {
+      "order": 45,
+      "name": "Antonio Acín",
+      "category": "Quantum technologies",
+      "affiliation_hint": "ICFO Barcelona",
+      "topic_hints": [
+        "quantum information theory",
+        "DI crypto"
+      ]
+    },
+    {
+      "order": 46,
+      "name": "Maciej Lewenstein",
+      "category": "Quantum technologies",
+      "affiliation_hint": "ICFO Barcelona",
+      "topic_hints": [
+        "quantum simulation",
+        "many-body physics"
+      ]
+    },
+    {
+      "order": 47,
+      "name": "Christine Silberhorn",
+      "category": "Quantum technologies",
+      "affiliation_hint": "Paderborn",
+      "topic_hints": [
+        "integrated quantum photonics"
+      ]
+    },
+    {
+      "order": 48,
+      "name": "Jörg Wrachtrup",
+      "category": "Quantum technologies",
+      "affiliation_hint": "Stuttgart",
+      "topic_hints": [
+        "quantum sensing",
+        "NV diamond"
+      ]
+    },
+    {
+      "order": 49,
+      "name": "Frank Wilhelm-Mauch",
+      "category": "Quantum technologies",
+      "affiliation_hint": "FZ Jülich",
+      "topic_hints": [
+        "superconducting qubits",
+        "quantum control"
+      ]
+    },
+    {
+      "order": 50,
+      "name": "Kristiaan De Greve",
+      "category": "Semiconductors & microelectronics",
+      "affiliation_hint": "imec / KU Leuven",
+      "topic_hints": [
+        "semiconductor qubits",
+        "scalable quantum HW"
+      ]
+    },
+    {
+      "order": 51,
+      "name": "Max Lemme",
+      "category": "Semiconductors & microelectronics",
+      "affiliation_hint": "RWTH Aachen / AMO",
+      "topic_hints": [
+        "2D-material electronics",
+        "neuromorphic hardware"
+      ]
+    },
+    {
+      "order": 52,
+      "name": "Luc Van den hove",
+      "category": "Semiconductors & microelectronics",
+      "affiliation_hint": "imec",
+      "topic_hints": [
+        "advanced nanoelectronics",
+        "scaling roadmap"
+      ]
+    },
+    {
+      "order": 53,
+      "name": "Mateo Valero",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "Barcelona Supercomputing Center",
+      "topic_hints": [
+        "supercomputer architecture",
+        "RISC-V"
+      ]
+    },
+    {
+      "order": 54,
+      "name": "Thomas Lippert",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "Jülich Supercomputing Centre",
+      "topic_hints": [
+        "exascale HPC (JUPITER)"
+      ]
+    },
+    {
+      "order": 55,
+      "name": "Dieter Kranzlmüller",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "LRZ / LMU Munich",
+      "topic_hints": [
+        "HPC infrastructure"
+      ]
+    },
+    {
+      "order": 56,
+      "name": "Gerhard Fettweis",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "TU Dresden",
+      "topic_hints": [
+        "5G/6G systems",
+        "wireless hardware"
+      ]
+    },
+    {
+      "order": 57,
+      "name": "Frank Fitzek",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "TU Dresden",
+      "topic_hints": [
+        "tactile internet",
+        "network coding"
+      ]
+    },
+    {
+      "order": 58,
+      "name": "Petar Popovski",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "Aalborg",
+      "topic_hints": [
+        "URLLC",
+        "IoT connectivity"
+      ]
+    },
+    {
+      "order": 59,
+      "name": "Marco Di Renzo",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "CNRS / Paris-Saclay",
+      "topic_hints": [
+        "reconfigurable intelligent surfaces"
+      ]
+    },
+    {
+      "order": 60,
+      "name": "Emil Björnson",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "KTH",
+      "topic_hints": [
+        "massive MIMO",
+        "energy-efficient networks"
+      ]
+    },
+    {
+      "order": 61,
+      "name": "Erik G. Larsson",
+      "category": "HPC & digital infrastructure",
+      "affiliation_hint": "Linköping",
+      "topic_hints": [
+        "MIMO",
+        "signal processing for comms"
+      ]
+    },
+    {
+      "order": 62,
+      "name": "Bart Preneel",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "KU Leuven COSIC",
+      "topic_hints": [
+        "cryptography",
+        "security policy"
+      ]
+    },
+    {
+      "order": 63,
+      "name": "Ingrid Verbauwhede",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "KU Leuven COSIC",
+      "topic_hints": [
+        "hardware security",
+        "secure embedded systems"
+      ]
+    },
+    {
+      "order": 64,
+      "name": "Vincent Rijmen",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "KU Leuven COSIC",
+      "topic_hints": [
+        "block ciphers",
+        "AES"
+      ]
+    },
+    {
+      "order": 65,
+      "name": "Tanja Lange",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "TU Eindhoven",
+      "topic_hints": [
+        "post-quantum cryptography"
+      ]
+    },
+    {
+      "order": 66,
+      "name": "Christof Paar",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "MPI Security & Privacy Bochum",
+      "topic_hints": [
+        "hardware security",
+        "trojans"
+      ]
+    },
+    {
+      "order": 67,
+      "name": "Thorsten Holz",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "CISPA",
+      "topic_hints": [
+        "systems security",
+        "fuzzing"
+      ]
+    },
+    {
+      "order": 68,
+      "name": "Michael Backes",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "CISPA",
+      "topic_hints": [
+        "privacy",
+        "ML security"
+      ]
+    },
+    {
+      "order": 69,
+      "name": "Herbert Bos",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "VU Amsterdam",
+      "topic_hints": [
+        "systems security",
+        "microarchitectural attacks"
+      ]
+    },
+    {
+      "order": 70,
+      "name": "Cristiano Giuffrida",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "VU Amsterdam",
+      "topic_hints": [
+        "side-channel & speculative attacks"
+      ]
+    },
+    {
+      "order": 71,
+      "name": "Claudia Diaz",
+      "category": "Cybersecurity & privacy",
+      "affiliation_hint": "KU Leuven",
+      "topic_hints": [
+        "anonymous communication",
+        "PETs"
+      ]
+    },
+    {
+      "order": 72,
+      "name": "Ambrogio Fasoli",
+      "category": "Energy — fusion",
+      "affiliation_hint": "EUROfusion / EPFL (CH)",
+      "topic_hints": [
+        "magnetic confinement",
+        "EU fusion roadmap"
+      ]
+    },
+    {
+      "order": 73,
+      "name": "Sibylle Günter",
+      "category": "Energy — fusion",
+      "affiliation_hint": "IPP Garching",
+      "topic_hints": [
+        "plasma theory",
+        "tokamak stability"
+      ]
+    },
+    {
+      "order": 74,
+      "name": "Hartmut Zohm",
+      "category": "Energy — fusion",
+      "affiliation_hint": "IPP Garching",
+      "topic_hints": [
+        "ASDEX Upgrade",
+        "disruption control"
+      ]
+    },
+    {
+      "order": 75,
+      "name": "Thomas Klinger",
+      "category": "Energy — fusion",
+      "affiliation_hint": "IPP Greifswald",
+      "topic_hints": [
+        "stellarators",
+        "Wendelstein 7-X"
+      ]
+    },
+    {
+      "order": 76,
+      "name": "Michael Grätzel",
+      "category": "Energy — solar",
+      "affiliation_hint": "EPFL (CH)",
+      "topic_hints": [
+        "dye-sensitized & perovskite PV"
+      ]
+    },
+    {
+      "order": 77,
+      "name": "Christophe Ballif",
+      "category": "Energy — solar",
+      "affiliation_hint": "EPFL / CSEM (CH)",
+      "topic_hints": [
+        "silicon and tandem PV"
+      ]
+    },
+    {
+      "order": 78,
+      "name": "Uwe Rau",
+      "category": "Energy — solar",
+      "affiliation_hint": "FZ Jülich",
+      "topic_hints": [
+        "PV device physics",
+        "thin-film & tandem"
+      ]
+    },
+    {
+      "order": 79,
+      "name": "Andreas Bett",
+      "category": "Energy — solar",
+      "affiliation_hint": "Fraunhofer ISE",
+      "topic_hints": [
+        "multi-junction PV",
+        "solar systems"
+      ]
+    },
+    {
+      "order": 80,
+      "name": "Bruno Ehrler",
+      "category": "Energy — solar",
+      "affiliation_hint": "AMOLF Amsterdam",
+      "topic_hints": [
+        "perovskite optoelectronics"
+      ]
+    },
+    {
+      "order": 81,
+      "name": "Kristina Edström",
+      "category": "Energy — batteries",
+      "affiliation_hint": "Uppsala / BATTERY 2030+",
+      "topic_hints": [
+        "Li-ion interfaces",
+        "EU battery roadmap"
+      ]
+    },
+    {
+      "order": 82,
+      "name": "Jürgen Janek",
+      "category": "Energy — batteries",
+      "affiliation_hint": "Univ. Giessen",
+      "topic_hints": [
+        "solid-state batteries"
+      ]
+    },
+    {
+      "order": 83,
+      "name": "Stefano Passerini",
+      "category": "Energy — batteries",
+      "affiliation_hint": "Helmholtz Ulm / Sapienza",
+      "topic_hints": [
+        "electrolytes",
+        "sodium-ion"
+      ]
+    },
+    {
+      "order": 84,
+      "name": "Maximilian Fichtner",
+      "category": "Energy — batteries",
+      "affiliation_hint": "Helmholtz Ulm / KIT",
+      "topic_hints": [
+        "post-lithium chemistries"
+      ]
+    },
+    {
+      "order": 85,
+      "name": "Robert Dominko",
+      "category": "Energy — batteries",
+      "affiliation_hint": "Nat. Inst. Chemistry Ljubljana",
+      "topic_hints": [
+        "Li-S",
+        "battery diagnostics"
+      ]
+    },
+    {
+      "order": 86,
+      "name": "Jean-Marie Tarascon",
+      "category": "Energy — batteries",
+      "affiliation_hint": "Collège de France / RS2E",
+      "topic_hints": [
+        "battery materials",
+        "sodium-ion"
+      ]
+    },
+    {
+      "order": 87,
+      "name": "Teófilo Rojo",
+      "category": "Energy — batteries",
+      "affiliation_hint": "CIC energiGUNE",
+      "topic_hints": [
+        "sodium-ion materials"
+      ]
+    },
+    {
+      "order": 88,
+      "name": "Robert Schlögl",
+      "category": "Energy — hydrogen & catalysis",
+      "affiliation_hint": "MPI CEC / FHI Berlin",
+      "topic_hints": [
+        "heterogeneous catalysis",
+        "green hydrogen"
+      ]
+    },
+    {
+      "order": 89,
+      "name": "Marc Koper",
+      "category": "Energy — hydrogen & catalysis",
+      "affiliation_hint": "Leiden",
+      "topic_hints": [
+        "electrocatalysis",
+        "water & CO₂ electrolysis"
+      ]
+    },
+    {
+      "order": 90,
+      "name": "Peter Strasser",
+      "category": "Energy — hydrogen & catalysis",
+      "affiliation_hint": "TU Berlin",
+      "topic_hints": [
+        "electrocatalysts for fuel cells and electrolysers"
+      ]
+    },
+    {
+      "order": 91,
+      "name": "Ib Chorkendorff",
+      "category": "Energy — hydrogen & catalysis",
+      "affiliation_hint": "DTU",
+      "topic_hints": [
+        "catalysis for CO₂ reduction",
+        "green fuels"
+      ]
+    },
+    {
+      "order": 92,
+      "name": "Jens Nørskov",
+      "category": "Energy — hydrogen & catalysis",
+      "affiliation_hint": "DTU",
+      "topic_hints": [
+        "computational catalysis",
+        "catalyst design"
+      ]
+    },
+    {
+      "order": 93,
+      "name": "Bert Weckhuysen",
+      "category": "Energy — hydrogen & catalysis",
+      "affiliation_hint": "Utrecht",
+      "topic_hints": [
+        "operando spectroscopy",
+        "catalysis for plastics"
+      ]
+    },
+    {
+      "order": 94,
+      "name": "Antonello Monti",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "RWTH Aachen",
+      "topic_hints": [
+        "digital energy systems",
+        "real-time grid simulation"
+      ]
+    },
+    {
+      "order": 95,
+      "name": "Nikos Hatziargyriou",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "NTUA Athens",
+      "topic_hints": [
+        "microgrids",
+        "distribution systems"
+      ]
+    },
+    {
+      "order": 96,
+      "name": "Frede Blaabjerg",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "Aalborg",
+      "topic_hints": [
+        "power electronics",
+        "renewables integration"
+      ]
+    },
+    {
+      "order": 97,
+      "name": "Simon Watson",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "TU Delft",
+      "topic_hints": [
+        "wind resource assessment",
+        "offshore wind"
+      ]
+    },
+    {
+      "order": 98,
+      "name": "Katherine Dykes",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "DTU Wind",
+      "topic_hints": [
+        "wind farm systems engineering"
+      ]
+    },
+    {
+      "order": 99,
+      "name": "Jens Nørkær Sørensen",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "DTU Wind",
+      "topic_hints": [
+        "turbine aerodynamics",
+        "wake modelling"
+      ]
+    },
+    {
+      "order": 100,
+      "name": "Detlef van Vuuren",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "PBL / Utrecht",
+      "topic_hints": [
+        "integrated assessment models",
+        "decarbonisation scenarios"
+      ]
+    },
+    {
+      "order": 101,
+      "name": "Ottmar Edenhofer",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "PIK / MCC Berlin",
+      "topic_hints": [
+        "climate economics",
+        "carbon pricing"
+      ]
+    },
+    {
+      "order": 102,
+      "name": "Massimo Tavoni",
+      "category": "Energy — grids, wind & systems",
+      "affiliation_hint": "Politecnico di Milano / RFF-CMCC",
+      "topic_hints": [
+        "energy transition modelling"
+      ]
+    },
+    {
+      "order": 103,
+      "name": "Eleni Chatzi",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "ETH Zurich (CH)",
+      "topic_hints": [
+        "structural health monitoring",
+        "infrastructure digital twins"
+      ]
+    },
+    {
+      "order": 104,
+      "name": "Bozidar Stojadinovic",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "ETH Zurich (CH)",
+      "topic_hints": [
+        "earthquake engineering",
+        "resilient structures"
+      ]
+    },
+    {
+      "order": 105,
+      "name": "Michael Havbro Faber",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "Aalborg",
+      "topic_hints": [
+        "risk & reliability of infrastructure systems"
+      ]
+    },
+    {
+      "order": 106,
+      "name": "Serge Hoogendoorn",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "TU Delft",
+      "topic_hints": [
+        "traffic flow theory",
+        "urban mobility"
+      ]
+    },
+    {
+      "order": 107,
+      "name": "Bart van Arem",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "TU Delft",
+      "topic_hints": [
+        "automated and connected transport"
+      ]
+    },
+    {
+      "order": 108,
+      "name": "Constantinos Antoniou",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "TUM",
+      "topic_hints": [
+        "transport modelling and simulation"
+      ]
+    },
+    {
+      "order": 109,
+      "name": "Günter Blöschl",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "TU Wien",
+      "topic_hints": [
+        "hydrology",
+        "flood risk"
+      ]
+    },
+    {
+      "order": 110,
+      "name": "Marc Bierkens",
+      "category": "Infrastructure — civil, transport, water",
+      "affiliation_hint": "Utrecht",
+      "topic_hints": [
+        "global hydrological modelling",
+        "groundwater"
+      ]
+    },
+    {
+      "order": 111,
+      "name": "Nicola Marzari",
+      "category": "Advanced materials",
+      "affiliation_hint": "EPFL / PSI (CH)",
+      "topic_hints": [
+        "computational materials discovery",
+        "MARVEL"
+      ]
+    },
+    {
+      "order": 112,
+      "name": "Claudia Felser",
+      "category": "Advanced materials",
+      "affiliation_hint": "MPI CPfS Dresden",
+      "topic_hints": [
+        "topological materials",
+        "spintronics"
+      ]
+    },
+    {
+      "order": 113,
+      "name": "Ben Feringa",
+      "category": "Advanced materials",
+      "affiliation_hint": "Groningen",
+      "topic_hints": [
+        "molecular machines",
+        "photoswitchable materials"
+      ]
+    },
+    {
+      "order": 114,
+      "name": "Vincenzo Palermo",
+      "category": "Advanced materials",
+      "affiliation_hint": "CNR Bologna / Graphene Flagship",
+      "topic_hints": [
+        "graphene & 2D materials"
+      ]
+    },
+    {
+      "order": 115,
+      "name": "Bjørn Stevens",
+      "category": "Climate & Earth observation",
+      "affiliation_hint": "MPI Meteorology Hamburg",
+      "topic_hints": [
+        "km-scale Earth system models"
+      ]
+    },
+    {
+      "order": 116,
+      "name": "Sonia Seneviratne",
+      "category": "Climate & Earth observation",
+      "affiliation_hint": "ETH Zurich (CH)",
+      "topic_hints": [
+        "climate extremes",
+        "land-climate feedbacks"
+      ]
+    },
+    {
+      "order": 117,
+      "name": "Valérie Masson-Delmotte",
+      "category": "Climate & Earth observation",
+      "affiliation_hint": "LSCE / CEA",
+      "topic_hints": [
+        "paleoclimate",
+        "IPCC WG1"
+      ]
+    },
+    {
+      "order": 118,
+      "name": "Johan Rockström",
+      "category": "Climate & Earth observation",
+      "affiliation_hint": "PIK Potsdam",
+      "topic_hints": [
+        "planetary boundaries",
+        "Earth resilience"
+      ]
+    },
+    {
+      "order": 119,
+      "name": "Peter Bauer",
+      "category": "Climate & Earth observation",
+      "affiliation_hint": "Destination Earth / ex-ECMWF",
+      "topic_hints": [
+        "digital twins of the Earth"
+      ]
+    },
+    {
+      "order": 120,
+      "name": "Wim Thiery",
+      "category": "Climate & Earth observation",
+      "affiliation_hint": "VUB Brussels",
+      "topic_hints": [
+        "climate impacts",
+        "generational exposure"
+      ]
+    },
+    {
+      "order": 121,
+      "name": "Emmanuelle Charpentier",
+      "category": "Biotech & health",
+      "affiliation_hint": "MPI Science of Pathogens",
+      "topic_hints": [
+        "CRISPR-Cas9"
+      ]
+    },
+    {
+      "order": 122,
+      "name": "Virginijus Šikšnys",
+      "category": "Biotech & health",
+      "affiliation_hint": "Vilnius",
+      "topic_hints": [
+        "CRISPR-Cas mechanisms",
+        "editing tools"
+      ]
+    },
+    {
+      "order": 123,
+      "name": "Uğur Şahin",
+      "category": "Biotech & health",
+      "affiliation_hint": "BioNTech / Mainz",
+      "topic_hints": [
+        "mRNA vaccines",
+        "cancer immunotherapy"
+      ]
+    },
+    {
+      "order": 124,
+      "name": "Özlem Türeci",
+      "category": "Biotech & health",
+      "affiliation_hint": "BioNTech / TRON Mainz",
+      "topic_hints": [
+        "individualised immunotherapy"
+      ]
+    },
+    {
+      "order": 125,
+      "name": "Ewan Birney",
+      "category": "Biotech & health",
+      "affiliation_hint": "EMBL-EBI (UK)",
+      "topic_hints": [
+        "bioinformatics",
+        "genomic data infrastructure"
+      ]
+    },
+    {
+      "order": 126,
+      "name": "Edith Heard",
+      "category": "Biotech & health",
+      "affiliation_hint": "EMBL Heidelberg",
+      "topic_hints": [
+        "epigenetics"
+      ]
+    },
+    {
+      "order": 127,
+      "name": "Nikolaus Rajewsky",
+      "category": "Biotech & health",
+      "affiliation_hint": "MDC Berlin",
+      "topic_hints": [
+        "single-cell genomics",
+        "LifeTime initiative"
+      ]
+    },
+    {
+      "order": 128,
+      "name": "Fabian Theis",
+      "category": "Biotech & health",
+      "affiliation_hint": "Helmholtz Munich / TUM",
+      "topic_hints": [
+        "computational single-cell biology"
+      ]
+    },
+    {
+      "order": 129,
+      "name": "Hans Clevers",
+      "category": "Biotech & health",
+      "affiliation_hint": "Hubrecht / Roche",
+      "topic_hints": [
+        "organoids",
+        "stem cell biology"
+      ]
+    },
+    {
+      "order": 130,
+      "name": "Christine Mummery",
+      "category": "Biotech & health",
+      "affiliation_hint": "LUMC Leiden",
+      "topic_hints": [
+        "cardiac models",
+        "organ-on-chip"
+      ]
+    },
+    {
+      "order": 131,
+      "name": "Alena Buyx",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "TUM",
+      "topic_hints": [
+        "biomedical ethics",
+        "ethics of AI and health data"
+      ]
+    },
+    {
+      "order": 132,
+      "name": "Barbara Prainsack",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "Univ. Vienna",
+      "topic_hints": [
+        "health data governance"
+      ]
+    },
+    {
+      "order": 133,
+      "name": "Reinhilde Veugelers",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "KU Leuven / Bruegel",
+      "topic_hints": [
+        "innovation economics",
+        "EU competitiveness"
+      ]
+    },
+    {
+      "order": 134,
+      "name": "Dietmar Harhoff",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "MPI Innovation & Competition Munich",
+      "topic_hints": [
+        "patents",
+        "technology transfer"
+      ]
+    },
+    {
+      "order": 135,
+      "name": "Jakob Edler",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "Fraunhofer ISI",
+      "topic_hints": [
+        "innovation policy",
+        "mission-oriented policy"
+      ]
+    },
+    {
+      "order": 136,
+      "name": "Dominique Foray",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "EPFL (CH)",
+      "topic_hints": [
+        "smart specialisation",
+        "regional innovation"
+      ]
+    },
+    {
+      "order": 137,
+      "name": "Luc Soete",
+      "category": "Research ethics, innovation policy & economics",
+      "affiliation_hint": "UNU-MERIT / Maastricht",
+      "topic_hints": [
+        "economics of technological change"
+      ]
+    }
+  ]
+}
