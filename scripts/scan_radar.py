@@ -158,7 +158,7 @@ SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
-RULE_FIX_PROFILE_VERSION = "v17.12.9-A-recall-strict-C-matrix-safe"
+RULE_FIX_PROFILE_VERSION = "v17.12.10-A-recall-strict-C-retirements"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
@@ -4961,7 +4961,7 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     """
     merged: dict[str, dict[str, Any]] = {}
     for old in previous:
-        if not isinstance(old, dict) or not english_public_item_ok(old):
+        if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
         internal = internalize_previous(old)
         key = identity(internal)
@@ -4971,7 +4971,7 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
         merged[key] = internal
     new_ids: set[str] = set()
     for item in new_items:
-        if not isinstance(item, dict) or not english_public_item_ok(item):
+        if not isinstance(item, dict) or signal_is_retired(item) or not english_public_item_ok(item):
             continue
         if item.get("strand") not in {strand_name, "both"}:
             continue
@@ -5046,6 +5046,64 @@ def signal_identity(item: dict[str, Any]) -> str:
     link = normalized(item.get('link', ''))
     return f'signal-link:{link}'
 
+
+
+# V17.12.10: curator-directed weak-signal retirements.
+# These tombstones are intentionally separate from automated quality migration.
+MANUALLY_RETIRED_SIGNAL_HEADLINES = [
+    "Prizes and related events",
+    "Galaxy evolution and neutral hydrogen - ITU",
+    "News | ELLIS Institute Finland",
+    "News and events | Aalto University",
+    "Prestigious Faraday Medal acknowledges circular economy trailblazer Mari Lundström | Aalto University",
+    "Why data centers are a top issue in the 2026 midterms | Brookings",
+    "Canada-Japan Funding Fuels Xanadu and Mitsubishi Chemical Partnership on Quantum Semiconductor Research",
+    "Cosmology from the Moon in a radio-quiet environment - ITU",
+    "Biological AI models: new paradigms to leverage the languages of life",
+    "GÉANT and CERNET strengthen Europe-China academic collaboration with tenfold increase in interconnection capacity",
+    "US widens AI-driven investment gap with Europe",
+    "FirstFT: Europe trails as AI drives US investment",
+    "Postdoc and doctoral student positions at ELLIS Institute Finland | ELLIS Institute Finland",
+    "Flash report - General Working Group of the Health Security Committee Meeting (12 August 2026)",
+    "China’s self-driving push gears up in Europe as Momenta, Pony.ai expand",
+    "Japan's Rakuten to partner with German AI defense drone startup",
+    "EU's first quantum tech regulation delayed by six months - euractiv.com",
+    "EU-China research cooperation limited to ‘targeted areas’",
+    "Funding Radar: G7 and Nordics jointly fund quantum research",
+    "International educational project at Aalto University funded by the TFK Programme | Aalto University",
+    "EU to co-fund seven AI Gigafactories in race for tech autonomy",
+    "EU launches AI Gigafactories call to boost Europe's computing capacity and unlock more than €30 billion in investment - Shaping Europe’s digital future"
+]
+
+def _retired_signal_headlines(data: dict[str, Any] | None = None) -> set[str]:
+    retired = {clean_text(x) for x in MANUALLY_RETIRED_SIGNAL_HEADLINES if clean_text(x)}
+    if isinstance(data, dict):
+        stored = data.get("retired_signal_headlines")
+        if isinstance(stored, list):
+            for x in stored:
+                if clean_text(x):
+                    retired.add(clean_text(x))
+    return retired
+
+def signal_is_retired(item: dict[str, Any], data: dict[str, Any] | None = None) -> bool:
+    if not isinstance(item, dict):
+        return False
+    return clean_text(item.get("headline", "")) in _retired_signal_headlines(data)
+
+def apply_retired_signal_filter(data: dict[str, Any]) -> tuple[dict[str, Any], int]:
+    if not isinstance(data, dict):
+        return {}, 0
+    out = dict(data)
+    retired = _retired_signal_headlines(out)
+    raw = out.get("strand_c") if isinstance(out.get("strand_c"), list) else []
+    kept = [
+        dict(item) for item in raw
+        if isinstance(item, dict) and clean_text(item.get("headline", "")) not in retired
+    ]
+    removed = len(raw) - len(kept)
+    out["strand_c"] = kept
+    out["retired_signal_headlines"] = sorted(retired)
+    return out, removed
 
 def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], now_iso: str) -> list[dict[str, Any]]:
     """Keep cumulative C while collapsing repeated coverage of the same weak signal."""
@@ -5726,6 +5784,12 @@ def main() -> int:
     with ADMISSION_DIAGNOSTICS_LOCK:
         ADMISSION_DIAGNOSTICS.clear()
     previous = load_previous()
+    previous, retired_c_removed = apply_retired_signal_filter(previous)
+    if retired_c_removed:
+        log_progress(
+            f"Applied curator weak-signal retirements: removed {retired_c_removed} retired Strand-C item(s); "
+            "A/B corpus and scan cursors untouched"
+        )
 
     # A/B is audited only at migration boundaries: first inherited run, or when the
     # substantive quality-profile version changes. Normal recurring scans preserve the
@@ -6685,6 +6749,7 @@ def main() -> int:
         "signal_discovery_version": signal_marker,
         "signal_quality_profile_version": SIGNAL_QUALITY_PROFILE_VERSION,
         "c_admission_profile_version": C_ADMISSION_PROFILE_VERSION,
+        "retired_signal_headlines": sorted(_retired_signal_headlines(previous)),
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
