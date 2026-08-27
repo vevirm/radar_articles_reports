@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import io
 import hashlib
 import html
 import json
@@ -29,11 +30,12 @@ import unicodedata
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import parse_qs, quote_plus, unquote, urlparse
+from urllib.parse import parse_qs, quote_plus, unquote, urlparse, urljoin
 
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dateparser
+from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -41,7 +43,7 @@ if str(ROOT) not in sys.path:
 
 from scripts import scan_radar as radar  # noqa: E402
 
-PROFILE_VERSION = "v1-isolated-person-backfill"
+PROFILE_VERSION = "v2-deep-isolated-person-backfill"
 DEFAULT_TIMEOUT = 15
 UA = "RI-Geopolitics-Radar-Person-Backfill/1.0"
 SESSION = requests.Session()
@@ -64,10 +66,36 @@ INVOLVEMENT_PATTERNS: list[tuple[str, tuple[str, ...]]] = [
 
 WEB_DISCOVERY_QUERY_TEMPLATES = [
     '"{person}" AI Europe',
-    '"{person}" panel OR keynote OR lecture OR advisory OR appointed',
-    '"{person}" AI governance OR policy OR competitiveness OR research',
+    '"{person}" panel keynote lecture advisory appointed',
+    '"{person}" AI governance policy competitiveness research',
+    '"{person}" report assessment strategy statement initiative institute',
+    '"{person}" Europe AI sovereignty infrastructure talent innovation',
+    '"{person}" founder co-founder launch laboratory lab institute',
+    '"{person}" democracy human rights safety governance',
+    '"{person}" UN United Nations scientific panel report',
+    '"{person}" ELLIS Max Planck ETH Aalto',
     '"{ascii_person}" AI Europe',
 ]
+
+GOOGLE_NEWS_QUERY_TEMPLATES = [
+    '"{person}"',
+    '"{person}" AI',
+    '"{person}" Europe',
+    '"{person}" governance',
+    '"{person}" research',
+    '"{person}" panel',
+]
+
+OUTPUT_TERMS = (
+    "report", "assessment", "statement", "brief", "strategy", "framework", "recommendation",
+    "publication", "dialogue", "roadmap", "initiative", "launch", "laboratory", "lab", "institute",
+)
+
+RELEVANT_LINK_TERMS = (
+    "scholkopf", "schoelkopf", "ai", "artificial-intelligence", "research", "science", "govern",
+    "policy", "panel", "report", "safety", "democracy", "ellis", "innovation", "europe", "institute",
+    "laboratory", "lab", "kyutai", "lecture", "keynote", "advis", "statement", "strategy",
+)
 
 
 def sha256_file(path: Path) -> str:
@@ -492,96 +520,184 @@ def ddg_search(query: str, timeout: int, warnings: list[str]) -> list[str]:
         return []
 
 
-def google_news_records(person: str, variants: list[str], start: dt.date, end: dt.date,
-                        timeout: int, warnings: list[str], max_records: int) -> list[dict[str, Any]]:
-    query = f'"{person}" after:{start.isoformat()} before:{(end + dt.timedelta(days=1)).isoformat()}'
-    url = "https://news.google.com/rss/search?q=" + quote_plus(query) + "&hl=en-GB&gl=GB&ceid=GB:en"
+def bing_search(query: str, timeout: int, warnings: list[str], max_results: int = 40) -> list[str]:
+    """Fail-soft Bing RSS discovery; useful when DDG HTML challenges automation."""
     try:
-        r = SESSION.get(url, timeout=timeout)
+        r = SESSION.get("https://www.bing.com/search", params={"q": query, "format": "rss"}, timeout=timeout)
         if r.status_code != 200:
-            warnings.append(f"Google News person query HTTP {r.status_code}")
+            warnings.append(f"Bing RSS HTTP {r.status_code}")
             return []
         feed = radar.feedparser.parse(r.content)
+        urls: list[str] = []
+        for e in feed.entries[:max_results]:
+            u = clean(getattr(e, "link", ""))
+            if u.startswith("http") and u not in urls:
+                urls.append(u)
+        return urls
     except Exception as e:
-        warnings.append(f"Google News person query {type(e).__name__}")
+        warnings.append(f"Bing RSS {type(e).__name__}")
         return []
-    out = []
-    for e in feed.entries[:max_records]:
-        when = radar.parse_feed_time(e)
-        if not when or not in_window(when.date(), start, end):
+
+
+def likely_relevant_link(url: str, anchor: str = "") -> bool:
+    hay = ascii_fold((url or "") + " " + (anchor or "")).lower()
+    return any(term in hay for term in RELEVANT_LINK_TERMS)
+
+
+def same_path_family(url_a: str, url_b: str) -> bool:
+    a, b = urlparse(url_a), urlparse(url_b)
+    if a.netloc.lower() != b.netloc.lower():
+        return False
+    aa = [x for x in a.path.split("/") if x]
+    bb = [x for x in b.path.split("/") if x]
+    return bool(aa and bb and aa[: min(2, len(aa))] == bb[: min(2, len(bb))])
+
+
+def google_news_records(person: str, variants: list[str], start: dt.date, end: dt.date,
+                        timeout: int, warnings: list[str], max_records: int) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    per_query = max(15, min(60, max_records // max(1, len(GOOGLE_NEWS_QUERY_TEMPLATES))))
+    for tmpl in GOOGLE_NEWS_QUERY_TEMPLATES:
+        query = tmpl.format(person=person) + f' after:{start.isoformat()} before:{(end + dt.timedelta(days=1)).isoformat()}'
+        url = "https://news.google.com/rss/search?q=" + quote_plus(query) + "&hl=en-GB&gl=GB&ceid=GB:en"
+        try:
+            r = SESSION.get(url, timeout=timeout)
+            if r.status_code != 200:
+                warnings.append(f"Google News person query HTTP {r.status_code}")
+                continue
+            feed = radar.feedparser.parse(r.content)
+        except Exception as e:
+            warnings.append(f"Google News person query {type(e).__name__}")
             continue
-        title = clean(getattr(e, "title", ""))
-        desc = clean(getattr(e, "summary", "") or getattr(e, "description", ""))
-        text = f"{title}. {desc}"
-        if not exact_person_in_text(text, variants):
-            continue
-        source_name, source_domain = radar.feed_source(e, "", "")
-        kinds = involvement_types(text, variants)
-        out.append({
-            "record_kind": "web",
-            "discovery_lanes": ["google_news_exact_name"],
-            "title": title,
-            "date": when.date().isoformat(),
-            "url": clean(getattr(e, "link", "")),
-            "source": source_name or source_domain or "Google News source",
-            "source_tier": 2,
-            "authors": [],
-            "abstract": desc,
-            "body": "",
-            "person_involvement": {"confirmed": True, "types": kinds, "evidence": nearby_excerpt(text, variants)},
-        })
+        for e in feed.entries[:per_query]:
+            when = radar.parse_feed_time(e)
+            if not when or not in_window(when.date(), start, end):
+                continue
+            title = clean(getattr(e, "title", ""))
+            desc = clean(getattr(e, "summary", "") or getattr(e, "description", ""))
+            text = f"{title}. {desc}"
+            if not exact_person_in_text(text, variants):
+                continue
+            source_name, source_domain = radar.feed_source(e, "", "")
+            link = clean(getattr(e, "link", ""))
+            key = link or (title + "|" + when.date().isoformat())
+            if key in seen:
+                continue
+            seen.add(key)
+            kinds = involvement_types(text, variants)
+            out.append({
+                "record_kind": "web",
+                "discovery_lanes": ["google_news_exact_name"],
+                "title": title,
+                "date": when.date().isoformat(),
+                "url": link,
+                "source": source_name or source_domain or "Google News source",
+                "source_tier": 2,
+                "authors": [],
+                "abstract": desc,
+                "body": "",
+                "person_involvement": {"confirmed": True, "types": kinds, "evidence": nearby_excerpt(text, variants)},
+            })
+            if len(out) >= max_records:
+                return out
     return out
 
-
-def fetch_verified_web_record(url: str, variants: list[str], start: dt.date, end: dt.date,
-                              timeout: int, warnings: list[str], lane: str) -> dict[str, Any] | None:
+def fetch_page_material(url: str, timeout: int, warnings: list[str]) -> dict[str, Any] | None:
     try:
         r = SESSION.get(url, timeout=timeout, allow_redirects=True)
         if r.status_code != 200:
             warnings.append(f"Web fetch HTTP {r.status_code}: {url[:140]}")
             return None
-        ctype = clean(r.headers.get("Content-Type")).lower()
-        if "html" not in ctype and not r.text.lstrip().startswith("<"):
-            return None
-        soup = BeautifulSoup(r.text, "html.parser")
     except Exception as e:
         warnings.append(f"Web fetch {type(e).__name__}: {url[:140]}")
         return None
-    title = clean((soup.find("meta", attrs={"property": "og:title"}) or {}).get("content") if soup.find("meta", attrs={"property": "og:title"}) else "")
-    if not title:
-        title = clean(soup.title.get_text(" ", strip=True) if soup.title else "")
-    body = page_text(soup)
-    if not exact_person_in_text(body, variants):
+    ctype = clean(r.headers.get("Content-Type")).lower()
+    final_url = clean(r.url)
+    if "pdf" in ctype or final_url.lower().endswith(".pdf") or r.content[:4] == b"%PDF":
+        try:
+            reader = PdfReader(io.BytesIO(r.content))
+            parts = []
+            for page in reader.pages[:80]:
+                try:
+                    parts.append(page.extract_text() or "")
+                except Exception:
+                    continue
+            body = clean(" ".join(parts))[:120000]
+            title = clean((reader.metadata or {}).get("/Title")) if reader.metadata else ""
+            return {"url": final_url, "title": title or final_url.rsplit("/", 1)[-1], "body": body, "date": None, "links": []}
+        except Exception as e:
+            warnings.append(f"PDF parse {type(e).__name__}: {url[:140]}")
+            return None
+    try:
+        text = r.text
+        if "html" not in ctype and not text.lstrip().startswith("<"):
+            return None
+        soup = BeautifulSoup(text, "html.parser")
+        title = clean((soup.find("meta", attrs={"property": "og:title"}) or {}).get("content") if soup.find("meta", attrs={"property": "og:title"}) else "")
+        if not title:
+            title = clean(soup.title.get_text(" ", strip=True) if soup.title else "")
+        d = extract_page_date(soup, final_url)
+        links: list[tuple[str, str]] = []
+        for a in soup.find_all("a", href=True):
+            href = urljoin(final_url, clean(a.get("href")))
+            anchor = clean(a.get_text(" ", strip=True))
+            if href.startswith("http") and likely_relevant_link(href, anchor):
+                links.append((href, anchor))
+        body = page_text(soup, limit=120000)
+        return {"url": final_url, "title": title or final_url, "body": body, "date": d, "links": links[:120]}
+    except Exception as e:
+        warnings.append(f"HTML parse {type(e).__name__}: {url[:140]}")
         return None
-    d = extract_page_date(soup, r.url)
-    # Keep undated pages only as verification-required context; dated pages outside the
-    # requested window are dropped.
+
+
+def record_from_material(material: dict[str, Any], variants: list[str], start: dt.date, end: dt.date,
+                         lane: str, indirect_evidence: str = "") -> dict[str, Any] | None:
+    body = clean(material.get("body"))
+    title = clean(material.get("title"))
+    d = material.get("date") if isinstance(material.get("date"), dt.date) else parse_date(material.get("date"))
     if d and not in_window(d, start, end):
         return None
-    kinds = involvement_types(body, variants)
-    if kinds == ["named_in_source"]:
-        # A mere mention is not enough for a person-involvement backfill.
+    direct = exact_person_in_text(body, variants) or exact_person_in_text(title, variants)
+    if direct:
+        kinds = involvement_types(f"{title}. {body}", variants)
+        if kinds == ["named_in_source"]:
+            return None
+        evidence = nearby_excerpt(f"{title}. {body}", variants)
+    elif indirect_evidence and any(term in (title + " " + body[:4000]).lower() for term in OUTPUT_TERMS):
+        kinds = ["project_or_working_group"]
+        evidence = indirect_evidence
+    else:
         return None
-    domain = radar.url_domain(r.url)
+    url = clean(material.get("url"))
     return {
         "record_kind": "web",
         "discovery_lanes": [lane],
-        "title": title or r.url,
+        "title": title or url,
         "date": d.isoformat() if d else "",
-        "url": r.url,
-        "source": domain,
-        "source_tier": source_tier_for_url(r.url),
+        "url": url,
+        "source": radar.url_domain(url),
+        "source_tier": source_tier_for_url(url),
         "authors": [],
         "abstract": "",
-        "body": body[:16000],
+        "body": body[:60000],
         "person_involvement": {
             "confirmed": True,
             "types": kinds,
-            "evidence": nearby_excerpt(body, variants),
+            "evidence": evidence,
             "date_verification_required": d is None,
+            "indirect_role_evidence": bool(not direct and indirect_evidence),
         },
     }
 
+
+def fetch_verified_web_record(url: str, variants: list[str], start: dt.date, end: dt.date,
+                              timeout: int, warnings: list[str], lane: str,
+                              indirect_evidence: str = "") -> dict[str, Any] | None:
+    material = fetch_page_material(url, timeout, warnings)
+    if not material:
+        return None
+    return record_from_material(material, variants, start, end, lane, indirect_evidence=indirect_evidence)
 
 def load_seed_urls(seed_files: list[Path], direct_urls: list[str], warnings: list[str]) -> list[str]:
     urls = list(direct_urls)
@@ -604,26 +720,106 @@ def load_seed_urls(seed_files: list[Path], direct_urls: list[str], warnings: lis
 
 def discover_web(person: str, variants: list[str], start: dt.date, end: dt.date, warnings: list[str],
                  timeout: int, seed_urls: list[str], max_pages: int) -> list[dict[str, Any]]:
+    # Deep mode is still bounded and fail-soft. It broadens discovery, verifies exact involvement,
+    # and allows a narrow same-program role propagation for seeded outputs (e.g. a panel report).
     out = google_news_records(person, variants, start, end, timeout, warnings, max_pages)
     ascii_person = ascii_fold(person)
-    urls = list(seed_urls)
+    urls: list[str] = []
+    role_contexts: list[tuple[str, str]] = []
+    seed_materials: dict[str, dict[str, Any]] = {}
+    expanded_links: list[str] = []
+
+    # 1) Verify all curator seed URLs first. These establish high-confidence role context.
+    for u in seed_urls:
+        material = fetch_page_material(u, timeout, warnings)
+        if not material:
+            continue
+        seed_materials[u] = material
+        rec = record_from_material(material, variants, start, end, "seed_exact_or_role")
+        if rec:
+            out.append(rec)
+            ev = clean((rec.get("person_involvement") or {}).get("evidence"))
+            role_contexts.append((clean(material.get("url")) or u, ev))
+        for href, anchor in material.get("links") or []:
+            if likely_relevant_link(href, anchor):
+                expanded_links.append(href)
+
+    # 2) Revisit unconfirmed seed outputs using only a same-program/site-family role relation.
+    # This is deliberately narrow: the output must be explicitly seeded and look like a report,
+    # strategy, initiative, etc.; person membership is evidenced by another verified seed page.
+    for original, material in seed_materials.items():
+        if exact_person_in_text(clean(material.get("body")), variants) or exact_person_in_text(clean(material.get("title")), variants):
+            continue
+        indirect = ""
+        for role_url, ev in role_contexts:
+            if same_path_family(clean(material.get("url")) or original, role_url):
+                indirect = f"Role-linked seeded output. Verified role source: {role_url}. Evidence: {ev[:360]}"
+                break
+        if indirect:
+            rec = record_from_material(material, variants, start, end, "seed_role_linked_output", indirect_evidence=indirect)
+            if rec:
+                out.append(rec)
+
+    # 3) Broad exact-name web discovery through two independent public search surfaces.
     for tmpl in WEB_DISCOVERY_QUERY_TEMPLATES:
-        query = tmpl.format(person=person, ascii_person=ascii_person) + f" {start.year}..{end.year}"
+        query = tmpl.format(person=person, ascii_person=ascii_person) + f" {start.year} {end.year}"
         urls.extend(ddg_search(query, timeout, warnings))
-    # Avoid social/profile/search pages and duplicate URLs before page fetching.
+        urls.extend(bing_search(query, timeout, warnings, max_results=40))
+
+    # 4) Search each seed institution/domain directly via site-scoped queries.
+    seed_domains = list(dict.fromkeys(radar.url_domain(u) for u in seed_urls if radar.url_domain(u)))
+    domain_templates = [
+        'site:{domain} "{person}"',
+        'site:{domain} "{person}" AI research governance report',
+        'site:{domain} "{person}" Europe institute panel',
+    ]
+    for domain in seed_domains[:24]:
+        for tmpl in domain_templates:
+            q = tmpl.format(domain=domain, person=person)
+            urls.extend(bing_search(q, timeout, warnings, max_results=30))
+            # One DDG site query per domain keeps the request count bounded.
+        urls.extend(ddg_search(f'site:{domain} "{person}"', timeout, warnings))
+
+    # 5) Follow relevant links from verified seed pages. This catches output pages whose URL/title
+    # does not contain the person's name but which are adjacent to a confirmed role page.
+    urls.extend(expanded_links)
+    urls = list(seed_urls) + urls
+
     blocked = ("linkedin.com", "facebook.com", "instagram.com", "x.com", "twitter.com")
-    unique = []
+    unique: list[str] = []
     for u in urls:
+        if not u.startswith("http"):
+            continue
         if any(d in radar.url_domain(u) for d in blocked):
             continue
         if u not in unique:
             unique.append(u)
-    for u in unique[:max_pages]:
-        rec = fetch_verified_web_record(u, variants, start, end, timeout, warnings, "seed_or_web_exact_name")
+
+    processed = 0
+    for u in unique:
+        if processed >= max_pages:
+            break
+        if u in seed_materials:
+            continue
+        processed += 1
+        material = fetch_page_material(u, timeout, warnings)
+        if not material:
+            continue
+        rec = record_from_material(material, variants, start, end, "deep_web_exact_name")
         if rec:
             out.append(rec)
+            continue
+        # Narrow role propagation only inside the same site/program family as a verified role page.
+        indirect = ""
+        for role_url, ev in role_contexts:
+            if same_path_family(clean(material.get("url")) or u, role_url):
+                indirect = f"Role-linked output discovered within verified program/site family. Role source: {role_url}. Evidence: {ev[:360]}"
+                break
+        if indirect:
+            linked = record_from_material(material, variants, start, end, "deep_role_linked_output", indirect_evidence=indirect)
+            if linked:
+                out.append(linked)
     return out
-
 
 def merge_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     buckets: dict[str, dict[str, Any]] = {}
@@ -685,7 +881,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--seed-file", action="append", default=[], help="JSON list/object of seed URLs; may be repeated.")
     p.add_argument("--seed-url", action="append", default=[], help="Explicit seed URL; may be repeated.")
     p.add_argument("--max-scholarly", type=int, default=200)
-    p.add_argument("--max-web-pages", type=int, default=60)
+    p.add_argument("--max-web-pages", type=int, default=240)
     p.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
     p.add_argument("--output", default="")
     return p
