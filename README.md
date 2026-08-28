@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar V17.13.6
+# R&I Geopolitics Radar V17.13.11
 
 V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
@@ -23,7 +23,7 @@ This is not a looser relevance gate. The non-literal route needs at least **two 
 7. Strategic technology races
 8. Funding & programmes
 
-Each issue opens as a connected branch map: main issue → branches → individual subissues. The first map is open by default, and readers can open all maps at once. Current radar findings sit below each map.
+Each issue is shown immediately as a connected branch map: main issue → branches → individual subissues. All eight maps render on arrival; there is no collapse/open control hiding them. Current radar findings sit below each map.
 
 ### 2. Simpler Matrix
 
@@ -192,3 +192,22 @@ The page also isolates the publications worth opening first. This is an **attent
 ## V17.13.9 — source-bound “why it matters”
 
 The reader no longer fills “why it matters” with reusable topic sentences. Each displayed consequence is taken from the individual record’s source summary, reviewed evidence, Matrix evidence or source-bound core message and kept within the 120-character reader limit. If no separate source-grounded consequence can be stated safely, the line is omitted instead of replaced with a generic implication. Radar data, Matrix placement, admission and rotation are unchanged.
+
+## V17.13.10 — less repetition, usable spreadsheet exports, open maps
+
+The Quick Matrix now describes the individual publication rather than repeating quadrant wording such as “raises EU control and capacity”. Exact duplicate publication-version points are grouped in the quick reader, while the full Matrix retains all 62 qualifying source records. Uneven cells remain visible and feed the permanent Matrix-balancing search rotation; this release does not manufacture balance by dropping or moving evidence.
+
+`Read at least this` now arrives with all eight issue maps open. The Stuff page downloads live Matrix/literature/priority slices as Excel-friendly tab-separated files, and the packaged XLSX mirrors the same source-specific Matrix wording. `Why this cell` is shown only where a saved source-backed Matrix rationale exists; otherwise it stays blank instead of using generic prose.
+
+This is a presentation/export repair only: no fresh scan, no Radar-data change, no Matrix admission/classifier change and no rotation-rule change.
+
+
+## V17.13.11 — publication-specific reader cleanup
+
+- `Read at least this` now renders all eight charts immediately rather than using collapsible issue panels.
+- Matrix candidate input is deduplicated at publication level, including landing-page/PDF variants, before classification.
+- Both Matrix views use source-specific publication points; the full Matrix also explains why each publication matters in that cell.
+- `Why it matters` now has non-blank mechanism text and avoids echoing the displayed claim. Matrix signals use paper-specific mechanisms instead of generic cell language.
+- `Risks & Opportunities` is capped and diversified by topic so one repeated subject cannot dominate either list; detail views add the publication and a concrete mechanism.
+- `Stuff` now leads with a real `.xlsx` publication workbook and an on-page publication preview. The workbook contains deduplicated publications, what each says, why it matters, Matrix placement and source URLs. TSV remains available only where it is explicitly labelled TSV.
+- Rotation logic itself is unchanged: recurring multifactor search rotation and sparse-Matrix targeting continue to advance only on executed work.

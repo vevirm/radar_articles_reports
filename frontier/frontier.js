@@ -169,12 +169,37 @@
     }));
   }
 
+  function canonicalPublicationTitle(v){
+    let t=clean(v).replace(/^(?:executive summary|event report|policy brief|research brief|briefing|report)\s*:\s*/i,'');
+    t=t.replace(/\s+[–—-]\s+(?:company announcement\s+-\s+)?(?:ft\.com|reuters|bloomberg|euractiv\.com)$/i,'');
+    return norm(t);
+  }
+
+  function candidateQuality(x){
+    const basis=clean(x?._matrixBasis||x?.matrix_evidence_basis||'');
+    const summary=clean(x?._evidenceSummary||x?.summary||x?.signal_note||'');
+    const core=clean(x?.core_message||x?._evidencePoint||'');
+    return (basis?500:0)+Math.min(250,summary.length)+Math.min(120,core.length)+(clean(x?.link)?25:0);
+  }
+
   function dedupeCandidates(items){
-    const seen=new Set(),out=[];
+    // Collapse alternate landing-page/PDF versions and repeated DOI versions before
+    // classification.  The best-evidenced record wins, so duplicate publications do
+    // not occupy multiple Matrix slots or reappear in priorities.
+    const groups=[],byKey=new Map();
     for(const x of items){
-      const k=norm(linkFor(x)||candidateWhat(x)); if(!k||seen.has(k)) continue; seen.add(k);out.push(x);
+      const linkKey=norm(linkFor(x));
+      const titleKey=canonicalPublicationTitle(x?.title||x?.headline||candidateWhat(x));
+      const keys=[];
+      if(linkKey) keys.push(`u:${linkKey}`);
+      if(titleKey && titleKey.length>=28) keys.push(`t:${titleKey}`);
+      let idx=-1;
+      for(const k of keys){if(byKey.has(k)){idx=byKey.get(k);break}}
+      if(idx<0){idx=groups.length;groups.push(x)}
+      else if(candidateQuality(x)>candidateQuality(groups[idx])) groups[idx]=x;
+      for(const k of keys) byKey.set(k,idx);
     }
-    return out;
+    return groups.filter(Boolean);
   }
 
   function rowScores(x,evidence){
@@ -594,50 +619,163 @@
   }
 
   function shortBullet(x){
-    const raw=norm(`${clean(x?.title||'')} ${clean(x?.coreMessage||'')} ${clean(x?.abstract||'')} ${clean(x?.theme||'')}`);
-    const topicRules=[
-      [/research secur|foreign interference|academic freedom/,'Research security'],
-      [/brain drain|brain gain|researcher mobility|research talent|researcher|scientist|career/,'Research talent'],
-      [/science diplomacy|research partnership|research cooperation|scientific cooperation|international research/,'Research links'],
-      [/horizon europe|framework programme|erc|msca|research funding/,'EU research funds'],
-      [/semiconductor|\bchip\b|\bchips\b/,'Semiconductors'],
-      [/compute|supercomputer|ai factor|data cent|cloud/,'Compute & cloud'],
-      [/critical raw|critical mineral|battery|lithium|rare earth|materials/,'Critical inputs'],
-      [/satellite|space capab|space infrastructure/,'Space access'],
-      [/energy|electricity|grid|decarbon/,'Energy systems'],
-      [/venture|scale-up|scaleup|equity finance|late-stage capital/,'Scale-up finance'],
-      [/defence|defense|dual-use|dual use|military/,'Dual-use R&I'],
-      [/foreign investment|investment screening|chinese ev|battery investment/,'Foreign investment'],
-      [/industrial|manufactur|production|factory/,'Industrial scale'],
-      [/cyber|software vulnerab/,'Cyber rules'],
-      [/cbdc|digital currenc|e-hryvnia/,'Digital currency'],
-      [/standard/,'Standards'],
-      [/tech sovereignty|technology sovereignty|technological sovereignty|strategic autonomy/,'Tech sovereignty'],
-      [/ai act|regulat|governance|liability|local-content|local content/,'Technology rules'],
-      [/biobank/,'Biobank rules'],
-      [/quantum/,'Quantum tech'],
-      [/biotech|bioeconomy|biology/,'Biotech'],
-      [/artificial intelligence|\bai\b/,'AI capability'],
-      [/innovation|\br&d\b|research and development/,'Innovation']
+    // Keep Quick Matrix bullets tied to the individual publication. The column
+    // heading already states the control/competitiveness direction, so repeating
+    // that template in every bullet hides what each source actually says.
+    const rawTitle=clean(x?.bibliographicTitle||x?.title||x?.coreMessage||'');
+    const rawCore=clean(x?.coreMessage||'');
+    const n=norm(`${rawTitle} ${rawCore}`);
+    const fixed=[
+      [/erc advanced grants|€840 million/, 'ERC adds €840m for leading researchers.'],
+      [/allea general assembly 2026/, 'ALLEA links open science to research security.'],
+      [/science superpower.*rival the us and china/, 'Europe could attract US research talent.'],
+      [/arrested at nato.*espionage|suspicion of espionage/, 'NATO espionage case exposes research-security risk.'],
+      [/science knows no borders/, 'ALLEA warns against research-collaboration curbs.'],
+      [/scandinavian approaches to research security/, 'Scandinavian research-security models differ on openness.'],
+      [/fragmented europe.*china as a technology/, 'Europe remains fragmented on China tech policy.'],
+      [/research security by roundtable/, 'Germany uses ethics committees for research security.'],
+      [/fifth freedom in europe/, 'Researchers flag barriers to EU mobility.'],
+      [/chinese use of foreign interference tactics/, 'Chinese interference targets Dutch knowledge flows.'],
+      [/revamping europe.?s chips strategy/, 'EU chips strategy should target indispensability.'],
+      [/made in china powered by europe/, 'EU technology gives Europe leverage over China.'],
+      [/close the artificial intelligence compute gap/, 'Europe still depends on US frontier compute.'],
+      [/sovereign by necessity.*frontier ai export controls/, 'AI export controls can deepen Europe’s compute dependence.'],
+      [/evolving radio astronomy.*africa/, 'African radio astronomy reshapes EU infrastructure access.'],
+      [/new growth model.*strategic capitalism/, 'EU growth remains exposed to external tech dependence.'],
+      [/ungoverned space.*military ai/, 'Europe cannot buy military-AI autonomy from outside.'],
+      [/strengthening u\.s\. global leadership.*electric vehicle/, 'US EV strategy intensifies competition with Europe.'],
+      [/european autonomy in orbit/, 'Europe still relies on outside space capability.'],
+      [/europe tackles tech sovereignty/, 'EU tech-sovereignty policy targets critical dependence.'],
+      [/china places 14 eu entities/, 'China cuts dual-use access for 14 EU entities.'],
+      [/geopolitical risk mitigation in information governance/, 'AI supply-chain governance exposes EU dependency risks.'],
+      [/battery cell production machinery/, 'Europe lacks battery-production machinery sovereignty.'],
+      [/beyond the european chips act/, 'EU chips remain dependent on China, Taiwan and the US.'],
+      [/technological dependencies of the european union/, 'EU tech dependence has risen, especially in digital tech.'],
+      [/semiconductor geopolitical risk survey/, 'EU chip supply remains exposed to geopolitical shocks.'],
+      [/beijing.?s critical raw material weapon/, 'China can weaponise raw-material access against Europe.'],
+      [/venture capital gap/, 'Europe’s VC gap increases outside-investor reliance.'],
+      [/helsing and quantum systems raise/, 'European defence-tech firms raise $3bn to scale.'],
+      [/80 billion investment alliance/, 'Europe launches €80bn tech scale-up alliance.'],
+      [/geo-industrial deal/, 'EU geo-industrial policy links scale with resilience.'],
+      [/driving defence.*automotive/, 'Europe can reuse automotive capacity for defence scale.'],
+      [/agile and rapid defence innovation/, 'EU agrees an agile defence-innovation programme.'],
+      [/european innovation council opens to defence/, 'EIC opens funding to defence and dual-use tech.'],
+      [/reconfigurability.*digitisation/, 'EU manufacturing resilience depends on reconfigurable digital systems.'],
+      [/strategic procurement in global europe/, 'EU procurement preferences can raise deployment costs.'],
+      [/dual-use by design research/, 'Dual-use research creates new export-control risks.'],
+      [/industrial accelerator act and how to fix/, 'Industrial Accelerator Act may raise EU costs.'],
+      [/dual-use and defence research in europe/, 'EU defence R&D can build capability but add controls.'],
+      [/structural limitations.*eu.?s ai model/, 'EU AI competitiveness is constrained by capital and compute gaps.'],
+      [/selective conditionality.*foreign investment/, 'EU ties foreign investment to strategic conditions.'],
+      [/investor landscape for venture capital/, 'EU scale-ups lack deep institutional capital.'],
+      [/investment screening and technology transfers/, 'EU investment screening limits sensitive tech transfer.'],
+      [/circular economy.*industrial sovereignty/, 'Circular economy can reduce EU industrial dependencies.'],
+      [/china.?s dual circulation strategy/, 'China’s dual circulation pressures EU EV industry.'],
+      [/portugal.?s productivity gap/, 'Europe’s productivity gap tracks weak R&D and equity.'],
+      [/reshaping europe.?s industrial future/, 'CEE industry faces new geopolitical scale pressures.'],
+      [/das auto and the second china shock/, 'China’s EV shift exposed weak EU industrial coordination.'],
+      [/council recommendation.*science diplomacy/, 'EU Council sets a framework for science diplomacy.'],
+      [/tech sovereignty package.*discussion summary/, 'EU sovereignty rules trade autonomy for extra friction.'],
+      [/integrating cbdcs.*global financial architecture/, 'CBDCs shift state control over monetary infrastructure.'],
+      [/tech sovereignty.*mimic its rivals/, 'Tech sovereignty can raise costs if Europe copies rivals.'],
+      [/national knowledge security guidelines 2026/, 'Dutch 2026 guidance tightens research safeguards.'],
+      [/digital instruments of monetary.*cybersecurity/, 'E-hryvnia design stresses transparency and cyber resilience.'],
+      [/from openness to deterrence/, 'EU economic-security policy is moving from openness to deterrence.'],
+      [/^european tech sovereignty\b/, 'EU tech-sovereignty policy combines protection and capacity-building.'],
+      [/mitigate deter escalate/, 'US coercion exposes Europe’s dependence on digital firms.'],
+      [/does europe really have a plan for tech sovereignty/, 'EU tech sovereignty still relies on US platforms.'],
+      [/intellectual property governance.*artificial intelligence/, 'AI rule fragmentation weakens EU control over digital power.'],
+      [/chips act 2\.0/, 'Chips Act 2.0 tests Europe’s second semiconductor push.'],
+      [/industrial accelerator act count/, 'Industrial Accelerator Act risks weak implementation.']
     ];
-    let topic='EU R&I';
-    for(const [re,label] of topicRules){if(re.test(raw)){topic=label;break}}
-    const col=x?.column?.id||'B';
-    const text={
-      A:`${topic} raises EU control and capacity.`,
-      B:`${topic} raises EU control and costs.`,
-      C:`${topic} gains capacity, loses control.`,
-      D:`${topic} cuts EU control and capacity.`
-    }[col]||`${topic} changes Europe’s R&I position.`;
-    if(text.length<=50) return text;
-    const row=clean(x?.row?.short||x?.row?.name||'EU R&I');
-    const fallback={
-      A:`${row}: control and capacity rise.`,
-      B:`${row}: control and costs rise.`,
-      C:`${row}: capacity rises, control falls.`,
-      D:`${row}: control and capacity fall.`
-    }[col]||'EU R&I position changes.';
-    return fallback.length<=50?fallback:'EU R&I position changes.';
+    for(const [re,label] of fixed){if(re.test(n))return label}
+
+    const abbreviate=v=>clean(v)
+      .replace(/^Executive Summary:\s*/i,'')
+      .replace(/^Event Report:\s*/i,'')
+      .replace(/\bthe European Union\b/gi,'the EU')
+      .replace(/\bEuropean Union\b/gi,'EU')
+      .replace(/\bUnited States\b/gi,'US')
+      .replace(/\bartificial intelligence\b/gi,'AI')
+      .replace(/\bresearch and innovation\b/gi,'R&I')
+      .replace(/\btechnological\b/gi,'tech')
+      .replace(/\s+/g,' ')
+      .trim();
+    const finish=v=>{
+      let q=abbreviate(v).replace(/[;:,]+$/,'').trim();
+      if(!q)return '';
+      if(!/[.!?]$/.test(q))q+='.';
+      return q;
+    };
+    let title=abbreviate(rawTitle);
+    if(title.length<=72)return finish(title);
+    const parts=title.split(/\s+[–—]\s+|:\s+/).map(clean).filter(Boolean);
+    if(parts.length>1){
+      const first=parts[0],pair=`${parts[0]}: ${parts[1]}`;
+      if(pair.length<=72)return finish(pair);
+      if(first.length>=24&&first.length<=72)return finish(first);
+    }
+    const core=RadarInsights&&RadarInsights.readerPoint?RadarInsights.readerPoint(rawCore,72):'';
+    if(core)return core;
+    const comma=title.split(/,\s+/)[0];
+    if(comma.length>=24&&comma.length<=72)return finish(comma);
+    const words=title.split(/\s+/);let out='';
+    for(const w of words){const next=out?`${out} ${w}`:w;if(next.length>68)break;out=next}
+    out=out.replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim();
+    return finish(out||title.slice(0,68));
+  }
+
+  function whyBullet(x){
+    const b=shortBullet(x);
+    const t=norm(`${b} ${x?.bibliographicTitle||''}`);
+    if(/ai export controls|frontier compute/.test(t)) return 'This matters because restrictions on frontier compute can directly limit which models European teams can train, audit and deploy.';
+    if(/ai supply-chain governance/.test(t)) return 'This matters because control over model, chip, cloud and data-chain bottlenecks determines where Europe remains dependent.';
+    if(/ai rule fragmentation|digital power/.test(t)) return 'This matters because fragmented AI rules reduce Europe’s ability to turn regulation into coherent market and technology leverage.';
+    if(/ai competitiveness.*capital and compute/.test(t)) return 'This matters because simultaneous shortages of growth capital and compute make it harder for European AI firms to reach frontier scale.';
+    if(/military-ai autonomy/.test(t)) return 'This matters because buying foreign military AI can deliver short-term capability without transferring the models, compute or know-how needed for autonomy.';
+    if(/us coercion.*digital firms/.test(t)) return 'This matters because dependence on US digital providers creates channels through which external political pressure can affect EU policy choices.';
+    if(/tech dependence has risen|growth remains exposed to external tech dependence/.test(t)) return 'This matters because rising external technology dependence narrows Europe’s options when suppliers, standards or geopolitical conditions change.';
+    if(/tech sovereignty still relies on us platforms/.test(t)) return 'This matters because platform dependence leaves core digital services and data flows subject to non-European infrastructure and corporate decisions.';
+    if(/defence-tech firms raise/.test(t)) return 'This matters because very large European defence-tech rounds show whether strategic firms can reach scale without relocating or relying on non-European capital.';
+    if(/manufacturing resilience.*reconfigurable/.test(t)) return 'This matters because reconfigurable digital production can let European manufacturers absorb disruptions without rebuilding entire production systems.';
+    if(/procurement preferences/.test(t)) return 'This matters because procurement preferences can create a home market for European technology, but may also raise deployment costs or slow access to the best available tools.';
+    if(/industrial accelerator act risks weak implementation/.test(t)) return 'This matters because an industrial policy that is ambitious on paper but weak in execution will not create the scale or investment certainty European innovators need.';
+    if(/dual circulation.*ev/.test(t)) return 'This matters because China’s domestic-demand and technology strategy changes cost, scale and market pressure on Europe’s EV producers and suppliers.';
+    if(/cee industry.*geopolitical scale/.test(t)) return 'This matters because Central and Eastern European production networks are highly exposed to shifts in trade, investment and supply-chain geography.';
+    if(/us ev strategy/.test(t)) return 'This matters because faster US scaling of EV supply chains raises the capital, technology and policy benchmark European industry must match.';
+    if(/china.?s ev shift.*coordination/.test(t)) return 'This matters because fragmented national responses make it harder for Europe to answer a fast-moving Chinese industrial challenge at continental scale.';
+    if(/productivity gap.*r&d and equity/.test(t)) return 'This matters because weak R&D intensity and shallow equity finance jointly reduce the rate at which European ideas become high-productivity firms.';
+    if(/geo-industrial policy.*scale with resilience/.test(t)) return 'This matters because Europe needs industrial scale and supply resilience at the same time; optimising only one leaves the other as a strategic weakness.';
+    if(/industrial accelerator act may raise eu costs/.test(t)) return 'This matters because stronger European preference rules can support domestic suppliers while increasing input or deployment costs for firms and researchers.';
+    if(/espionage case/.test(t)) return 'This matters because access gained through research or institutional placements can become a route to sensitive knowledge and facilities.';
+    if(/chinese interference.*knowledge flows/.test(t)) return 'This matters because foreign-interference tactics can distort partnerships and create channels for sensitive knowledge to leave European institutions.';
+    if(/allea links open science/.test(t)) return 'This matters because safeguards that are too broad can damage openness, while safeguards that are too weak leave sensitive collaborations exposed.';
+    if(/dutch 2026 guidance/.test(t)) return 'This matters because national knowledge-security guidance changes the due-diligence and collaboration burden placed on universities and research organisations.';
+    if(/ethics committees/.test(t)) return 'This matters because ethics-style review committees are one practical way to screen security-sensitive research without imposing blanket restrictions.';
+    if(/vc gap.*outside-investor/.test(t)) return 'This matters because a domestic VC gap can move ownership, governance and eventual exits of European technology firms toward outside investors.';
+    if(/scale-ups lack deep institutional capital/.test(t)) return 'This matters because without deep European late-stage capital, promising firms may need foreign funding or listings just when strategic value is highest.';
+    if(/€80bn.*scale-up alliance|investment alliance.*scale up/.test(t)) return 'This matters because pooling large pools of European capital can close the late-stage financing gap that pushes successful firms to scale elsewhere.';
+    if(/radio astronomy|astronomy/.test(t)) return 'This matters because European researchers can depend on access to overseas facilities, spectrum and scientific networks.';
+    if(/erc adds|erc advanced grant/.test(t)) return 'This matters because large frontier grants determine whether Europe can retain leading researchers and sustain ambitious long-horizon projects.';
+    if(/research talent|researcher mobility|barriers to eu mobility|attract us research talent/.test(t)) return 'This matters because researcher mobility changes the skills and scientific capacity available to European labs and universities.';
+    if(/research-security|research security|espionage|foreign interference|knowledge flows|open science|research safeguards|ethics committees|security-relevant research/.test(t)) return 'This matters because research-security choices set the boundary between open collaboration and protection of sensitive knowledge.';
+    if(/science diplomacy|collaboration curbs|research-collaboration/.test(t)) return 'This matters because partnership rules determine which research networks, facilities and expertise remain accessible to European teams.';
+    if(/chip|semiconductor/.test(t)) return 'This matters because chip access and production determine whether European R&I can use critical hardware without external restrictions.';
+    if(/frontier compute|compute dependence|capital and compute|ai export|ai supply-chain|ai rule|digital power|military-ai|defence ai|us platforms|digital firms|digital tech|tech dependence/.test(t)) return 'This matters because control of compute, platforms and AI infrastructure determines whether Europe can build and govern frontier digital capability on its own terms.';
+    if(/vc gap|scale-up|scale up|institutional capital|€80bn|investment alliance/.test(t)) return 'This matters because growth capital determines whether European technology firms can scale while keeping headquarters, IP, talent and high-value jobs in Europe.';
+    if(/battery|raw-material|raw material/.test(t)) return 'This matters because access to strategic materials and production equipment sets the resilience and scale ceiling for European advanced manufacturing.';
+    if(/circular economy/.test(t)) return 'This matters because reuse and substitution can reduce Europe’s exposure to imported materials and industrial inputs.';
+    if(/dual-use|defence|military|space capability/.test(t)) return 'This matters because dual-use and defence policy can build strategic capability while adding security, export-control and openness constraints.';
+    if(/manufactur|industrial|industry|electric vehicle| ev |procurement|productivity|geo-industrial|automotive capacity/.test(` ${t} `)) return 'This matters because industrial policy determines whether European research is converted into domestic production, deployment and scale.';
+    if(/tech sovereignty|sovereignty rules|autonomy|strategic dependence|critical dependence/.test(t)) return 'This matters because sovereignty choices trade off external access, domestic control and the cost of replacing foreign capability.';
+    if(/investment screening|foreign investment|economic-security|economic security|openness to deterrence|strategic conditions/.test(t)) return 'This matters because screening and economic-security tools can protect strategic capability while narrowing access to capital, partners or markets.';
+    if(/china.*technology|china tech|leverage over china|fragmented.*china|dual circulation|china.?s ev/.test(t)) return 'This matters because EU–China technology ties can combine market opportunity with asymmetric dependence and pressure to de-risk.';
+    if(/cbdc|e-hryvnia|monetary infrastructure/.test(t)) return 'This matters because technical standards, cyber resilience and governance determine who controls critical digital payment infrastructure.';
+    const fallback=RadarInsights?.whyFor?.({title:x?.bibliographicTitle||x?.title||'',core_message:b,matrix_evidence_basis:x?.matrixEvidenceBasis||''})||'';
+    if(fallback && norm(fallback)!==norm(b)) return fallback;
+    const row=x?.row?.id||'other';
+    const rowWhy={knowledge:'It changes Europe’s access to people, knowledge and research networks.',infrastructure:'It changes Europe’s control over critical research infrastructure and technical inputs.',conversion:'It changes whether European research can be commercialised and scaled in Europe.',rules:'It changes whether Europe can shape the rules governing strategic research and technology.'}[row]||'It changes Europe’s control, capability or external dependence in research and innovation.';
+    return rowWhy;
   }
 
   function concentration(items,keyFn){
@@ -668,5 +806,5 @@
     };
   }
 
-  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet};
+  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet,whyBullet};
 });

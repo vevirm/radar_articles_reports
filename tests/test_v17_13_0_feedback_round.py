@@ -111,24 +111,65 @@ class V17130FeedbackRoundTests(unittest.TestCase):
         quick = (ROOT / 'frontier' / 'quick' / 'index.html').read_text(encoding='utf-8')
         frontier = (ROOT / 'frontier' / 'frontier.js').read_text(encoding='utf-8')
         priorities = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('Eight issues. Open the branches.', read_page)
+        self.assertIn('Eight issues. All branches open.', read_page)
         self.assertEqual(read_page.count("{title:'"), 8)
         self.assertIn('issue-chart', read_page)
         self.assertIn('chart-main', read_page)
         self.assertIn('chart-branch', read_page)
         self.assertIn('sub-node', read_page)
-        self.assertIn('Open all maps', read_page)
-        self.assertIn('all qualifying Matrix findings, without bibliography or method detail', quick)
+        self.assertIn('All eight charts are visible immediately.', read_page)
+        self.assertIn('<section class="issue">', read_page)
+        self.assertNotIn('Close all maps', read_page)
+        self.assertNotIn('<details class="issue"', read_page)
+        self.assertIn('distinct source-bound points', quick)
+        self.assertIn('rotation priority', quick)
         self.assertNotIn('xs.slice(0,2)', quick)
-        self.assertIn('xs.map', quick)
+        self.assertIn('groups.map', quick)
         self.assertIn('shortBullet', quick)
         self.assertIn('shortBullet', priorities)
+        self.assertIn('whyBullet', priorities)
         self.assertNotIn('atleast-grid', priorities)
         self.assertNotIn('priorityInterpretation', priorities)
         for label in ('People & knowledge', 'Tools & infrastructure', 'Firms & scale', 'Rules & coordination'):
             self.assertIn(label, frontier)
         for label in ('Stronger on both', 'More control, more cost', 'Faster, but dependent', 'Weaker on both'):
             self.assertIn(label, frontier)
+
+
+    def test_reader_views_are_publication_specific_and_deduplicated(self):
+        stuff = (ROOT / 'stuff' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('Publications and what they say', stuff)
+        self.assertIn('Download publications workbook (.xlsx)', stuff)
+        self.assertIn('<strong>What it says:</strong>', stuff)
+        self.assertIn('<strong>Why it matters:</strong>', stuff)
+        self.assertNotIn('downloadMatrix', stuff)
+
+        js = r"""
+const fs=require('fs');
+const I=require('./briefing/insights.js'); global.RadarInsights=I;
+const F=require('./frontier/frontier.js');
+const P=require('./priorities/priorities.js');
+const d=JSON.parse(fs.readFileSync('radar.json','utf8'));
+const v=F.buildFrontier(d,{now:new Date(d.last_updated)});
+let duplicateBullets=0, blankWhy=0, sameWhy=0;
+for(const [cell,xs] of Object.entries(Object.fromEntries(Object.entries(v.cells).flatMap(([r,cols])=>Object.entries(cols).map(([c,ys])=>[r+'-'+c,ys]))))){
+  const seen=new Set();
+  for(const x of xs){const b=F.shortBullet(x); if(seen.has(b)) duplicateBullets++; seen.add(b); const w=F.whyBullet(x); if(!w) blankWhy++; if(w.toLowerCase()===b.toLowerCase()) sameWhy++;}
+}
+const pr=P.buildPriorityView(d,{limit:10,now:new Date(d.last_updated)});
+const maxTopic=(xs)=>Math.max(0,...Object.values(xs.reduce((m,x)=>{const k=P.topicKey(x);m[k]=(m[k]||0)+1;return m},{})));
+console.log(JSON.stringify({signals:v.signals.length,duplicateBullets,blankWhy,sameWhy,riskN:pr.risks.length,oppN:pr.opportunities.length,riskMaxTopic:maxTopic(pr.risks),oppMaxTopic:maxTopic(pr.opportunities)}));
+"""
+        out = subprocess.check_output(['node','-e',js], cwd=ROOT, text=True)
+        got = json.loads(out.strip())
+        self.assertGreater(got['signals'], 0)
+        self.assertEqual(got['duplicateBullets'], 0)
+        self.assertEqual(got['blankWhy'], 0)
+        self.assertEqual(got['sameWhy'], 0)
+        self.assertLessEqual(got['riskN'], 10)
+        self.assertLessEqual(got['oppN'], 10)
+        self.assertLessEqual(got['riskMaxTopic'], 2)
+        self.assertLessEqual(got['oppMaxTopic'], 2)
 
     def test_current_radar_is_within_four_month_window_and_c_is_small(self):
         data = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))

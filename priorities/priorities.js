@@ -9,15 +9,38 @@
     return (x.triage?.total||0)*10 + (x.questionCount||0)*4 + (x.confidence||0)/10 + Math.min(8,x.materiality||0);
   }
 
-  function diversifiedTop(items,limit,maxPerRow=2){
+  function topicKey(x){
+    const t=clean(`${x?.bibliographicTitle||''} ${x?.coreMessage||''} ${x?.abstract||''}`).toLowerCase();
+    const groups=[
+      ['research security',/research security|knowledge security|foreign interference|espionage/],
+      ['talent',/research talent|researcher|scientist|brain drain|mobility|doctoral|postdoctoral/],
+      ['chips',/semiconductor|chip|microelectronics/],
+      ['compute-ai',/compute|cloud|frontier ai|ai factory|foundation model|military ai/],
+      ['materials',/critical raw|critical mineral|rare earth|battery|materials/],
+      ['scale-finance',/venture capital|scale-up|scaleup|startup|investment|capital|listing|headquarter/],
+      ['defence-dual-use',/dual-use|dual use|defen[cs]e|military/],
+      ['rules-security',/regulat|standard|rule|export control|screening|sovereignty|autonomy/],
+      ['partnerships',/china|united states| us |india|international|partnership|science diplomacy/],
+      ['industry',/industrial|manufactur|procurement|productivity|automotive|electric vehicle/],
+    ];
+    for(const [k,re] of groups) if(re.test(` ${t} `)) return k;
+    return x?.row?.id||'other';
+  }
+
+  function diversifiedTop(items,limit,maxPerRow=2,maxPerTopic=2){
     if(limit<=0) return [];
-    const out=[],deferred=[],perRow=new Map();
+    const out=[],deferred=[],perRow=new Map(),perTopic=new Map();
     for(const x of items){
-      const row=x?.row?.id||'other',n=perRow.get(row)||0;
-      if(n<maxPerRow&&out.length<limit){out.push(x);perRow.set(row,n+1)}
+      const row=x?.row?.id||'other',topic=topicKey(x),rn=perRow.get(row)||0,tn=perTopic.get(topic)||0;
+      if(rn<maxPerRow&&tn<maxPerTopic&&out.length<limit){out.push(x);perRow.set(row,rn+1);perTopic.set(topic,tn+1)}
       else deferred.push(x);
     }
-    for(const x of deferred){if(out.length>=limit)break;out.push(x)}
+    for(const x of deferred){
+      if(out.length>=limit)break;
+      const topic=topicKey(x),tn=perTopic.get(topic)||0;
+      if(tn>=maxPerTopic)continue;
+      out.push(x);perTopic.set(topic,tn+1);
+    }
     return out;
   }
 
@@ -49,7 +72,7 @@
 
   function buildPriorityView(data,opts={}){
     const frontier=Frontier.buildFrontier(data,opts);
-    const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(15,Math.floor(opts.limit))):15;
+    const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(12,Math.floor(opts.limit))):10;
     const allOpportunities=frontier.signals
       .filter(x=>x.column.id==='A')
       .sort((a,b)=>structuralScore(b)-structuralScore(a)||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
@@ -76,5 +99,5 @@
     };
   }
 
-  return {buildPriorityView,structuralScore,diversifiedTop,simplePriorityText,simpleEvidenceText,priorityInterpretation};
+  return {buildPriorityView,structuralScore,diversifiedTop,simplePriorityText,simpleEvidenceText,priorityInterpretation,topicKey};
 });

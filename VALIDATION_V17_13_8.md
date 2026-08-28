@@ -28,3 +28,17 @@ Runtime reader-copy check on the current 240 A/B/C records:
 - Maximum displayed consequence length: 120 characters.
 
 Focused regression tests: 20 passed (`test_v17_13_1_subject_language_easy_view.py` + `test_v17_13_0_feedback_round.py`). Presentation smoke passed. The repository-wide pytest collection still hits the existing `tests/test_findings.py` import of `make_finding`, which is not exported by the packaged scanner; that unrelated legacy collection issue was not changed in this reader-copy patch.
+
+## V17.13.10 repetition / spreadsheet / open-map checks
+
+- `node scripts/presentation_smoke.js`: PASS; 202 A / 25 B / 13 C and 62 qualifying Matrix signals.
+- Focused reader tests: 35 passed.
+- Quick Matrix / Read / Stuff inline JavaScript syntax: PASS.
+- Matrix source counts remain the underlying evidence distribution: People & knowledge 3/6/1/1; Tools & infrastructure 2/1/7/7; Firms & scale 6/5/8/2; Rules & coordination 1/7/2/3.
+- Quick Matrix short points: 62 source records, 61 distinct source-specific bullets; the one exact duplicate publication-version point is grouped in Quick view only.
+- Maximum Quick Matrix point length in the current snapshot: 70 characters.
+- Stuff live spreadsheet output uses TSV rather than comma CSV for Excel locale robustness.
+- Packaged XLSX was rebuilt and inspected as a 16-column Matrix table rather than a single comma-delimited cell.
+- `Read at least this` renders each issue `<details>` open by default.
+- No network discovery or scanner run was performed for this release.
+- Stuff priority list uses source-specific / Matrix-specific points rather than repeating `Primary / official EU source · informs …` on every card.
