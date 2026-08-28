@@ -70,15 +70,15 @@ def test_reader_claims_remove_biographical_fluff():
 
 def test_read_page_is_issue_tree_with_five_to_ten_main_issues():
     text=(ROOT/'read/index.html').read_text()
-    assert 'Eight issues. Then open the branches.' in text
-    assert 'Subissues:' in text
+    assert 'Eight issues. Open the branches.' in text
+    assert 'sub-node' in text
     titles=re.findall(r"title:'([^']+)'",text)
     assert 5 <= len(titles) <= 10
 
 def test_quick_matrix_exists_and_full_matrix_uses_simple_terms():
     quick=(ROOT/'frontier/quick/index.html').read_text()
     js=(ROOT/'frontier/frontier.js').read_text()
-    assert 'No bibliography' in quick
+    assert 'without bibliography or method detail' in quick.lower()
     for phrase in ['Stronger on both','More control, more cost','Faster, but dependent','Weaker on both','Firms & scale','Rules & coordination']:
         assert phrase in js
     assert 'Every admitted radar finding reaches the matrix classifier' in js

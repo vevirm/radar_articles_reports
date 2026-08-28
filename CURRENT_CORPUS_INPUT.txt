@@ -1,4 +1,4 @@
-V17.13.2 CURRENT CORPUS INPUT
+V17.13.3 CURRENT CORPUS INPUT
 
 Source supplied by user:
 - file: radar (34).json
@@ -7,7 +7,7 @@ Source supplied by user:
 - SHA-256: 79b33874e56634d2b5c77fddc44301bb462acc58ed3ced04777d04dfba1ac3e4
 - counts: A=190, B=25, C=13, frontier_evidence=32
 
-V17.13 packaging transformation (not a live discovery scan):
+V17.13.3 packaging transformation (not a live discovery scan):
 - enforce the hard four-calendar-month floor for 2026-08-28 -> 2026-04-28;
 - prune public A/B/C/frontier_evidence rows older than that floor;
 - re-normalise reader-facing claims with the V17.13 simple-language write boundary;

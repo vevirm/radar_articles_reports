@@ -1,4 +1,4 @@
-# Matrix criteria — V17.13.2
+# Matrix criteria — V17.13.3
 
 ## Reader-facing structure
 
@@ -54,3 +54,8 @@ Weak signals are stricter than core evidence for Matrix use. They need an extern
 ## Coverage
 
 There are no cell quotas. Sparse cells are useful evidence gaps. In the bundled V17.13 state, the classifier obtains **112 qualifying placements from current four-month Strand-A evidence**, with unequal cell counts; two People & knowledge downside/dependence cells are currently empty, which is treated as an evidence gap rather than filled artificially.
+
+
+## Coverage and scanner rotation
+
+Coverage is diagnostic, not a quota. The scanner uses the current Matrix distribution to rotate extra discovery toward thin cells, using a bounded median cell count as the moving target. This reduces persistent blind spots while preserving evidence-based classification and unchanged admission rules. Rich cells can still grow through ordinary rotation; sparse cells simply receive more search attempts.

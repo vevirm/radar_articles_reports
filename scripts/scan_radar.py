@@ -159,6 +159,7 @@ C_ADMISSION_PROFILE_VERSION = "v17.13.1-minority-C-cap"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
+MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.3-matrix-coverage-aware-rotation"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.1-eu-core-external-shock-english-evidence"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
@@ -630,45 +631,63 @@ def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], 
         return empty, 0, f"{type(exc).__name__}: {str(exc)[:160]}"
 
 
-def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
-    """Allocate extra discovery budget to under-covered Frontier cells.
+def frontier_balance_snapshot(
+    counts: dict[str, int],
+    state: dict[str, Any] | None = None,
+    *,
+    advance_cursor: bool = False,
+) -> dict[str, Any]:
+    """Turn current Matrix occupancy into a coverage-aware rotation target.
 
-    Cell scarcity still determines *how much* attention a cell receives, but the
-    concrete search formulations are now independently persistent per cell. This
-    prevents a permanently sparse cell from restarting at variant 1 on every scan.
+    The old gap lane stopped caring once a cell reached a fixed count of three.
+    That allowed a 3-item cell and an 18-item cell to receive similar ordinary
+    rotation afterwards.  The new target rises with the Matrix median (bounded by
+    a cap), so materially thin cells keep receiving extra discovery attention.
+    It still does *not* force equal counts or relax admission standards.
     """
-    counts, qualifying, error = frontier_matrix_coverage(previous)
-    start = int(state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
+    floor = max(1, int(CONFIG.get("frontier_gap_target_count", 3) or 3))
+    cap = max(floor, int(CONFIG.get("frontier_gap_balance_target_cap", 10) or 10))
+    values = sorted(max(0, int(counts.get(key, 0) or 0)) for key in FRONTIER_CELL_ORDER)
+    if values:
+        mid = len(values) // 2
+        if len(values) % 2:
+            median_count = values[mid]
+        else:
+            median_count = (values[mid - 1] + values[mid] + 1) // 2
+    else:
+        median_count = 0
+    balance_enabled = bool(CONFIG.get("frontier_gap_balance_enabled", True))
+    target_count = floor if not balance_enabled else max(floor, min(cap, median_count))
+
+    cursor_state = state if isinstance(state, dict) else {}
+    start = int(cursor_state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
     cyclic = FRONTIER_CELL_ORDER[start:] + FRONTIER_CELL_ORDER[:start]
     cyclic_rank = {key: i for i, key in enumerate(cyclic)}
-    target_count = max(1, int(CONFIG.get("frontier_gap_target_count", 3) or 3))
     deficits = {key: max(0, target_count - counts.get(key, 0)) for key in FRONTIER_CELL_ORDER}
     scarcity_scores = {
-        key: round(deficits[key] / target_count + (0.35 if counts.get(key, 0) == 0 else 0.0), 3)
+        key: round(
+            deficits[key] / max(1, target_count)
+            + (0.45 if counts.get(key, 0) == 0 else 0.0)
+            + (0.15 if 0 < counts.get(key, 0) <= max(1, target_count // 3) else 0.0),
+            3,
+        )
         for key in FRONTIER_CELL_ORDER
     }
     sparse = [key for key in FRONTIER_CELL_ORDER if deficits[key] > 0]
-    # V17.8.2 balanced allocation: scarcity, not quadrant direction, determines search effort.
-    # Openings, trade-offs, productive dependencies and double-loss cells all receive the
-    # same opportunity to be discovered. This does not impose equal counts; it removes the
-    # structural bias that previously postponed A-cell searches until B/C/D were filled.
-    ordered = sorted(sparse, key=lambda key: (-deficits[key], cyclic_rank[key]))
+    ordered = sorted(
+        sparse,
+        key=lambda key: (-deficits[key], counts.get(key, 0), cyclic_rank[key]),
+    )
     target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
     targets = ordered[:target_limit]
-
-    # Empty cells are qualitatively different from merely thin cells. Give them the
-    # first claim on gap-discovery slots instead of treating a 0-count cell as only
-    # one increment scarcer than a 1-count cell. With empty cells present, repeated
-    # passes through them happen before near-empty cells receive spare slots.
     empty_targets = [key for key in targets if counts.get(key, 0) == 0]
     nonempty_targets = [key for key in targets if counts.get(key, 0) > 0]
+
     empty_weight = max(1, int(CONFIG.get("frontier_gap_empty_cell_weight", 4) or 4))
     weighted_targets: list[str] = []
     if empty_targets:
         for _ in range(empty_weight):
             weighted_targets.extend(empty_targets)
-        # Keep a small tail for near-empty cells only after every zero cell has
-        # received several opportunities. This prevents the matrix from freezing.
         for level in range(target_count - 1, 0, -1):
             for key in nonempty_targets:
                 if deficits[key] >= level:
@@ -678,9 +697,44 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
             for key in targets:
                 if deficits[key] >= level:
                     weighted_targets.append(key)
-    if targets:
+
+    if advance_cursor and targets and isinstance(state, dict):
         last_index = FRONTIER_CELL_ORDER.index(targets[-1])
         state["frontier_gap_cursor"] = (last_index + 1) % len(FRONTIER_CELL_ORDER)
+
+    return {
+        "median_count": median_count,
+        "target_count": target_count,
+        "deficits": deficits,
+        "scarcity_scores": scarcity_scores,
+        "targets": targets,
+        "empty_targets": empty_targets,
+        "weighted_targets": weighted_targets,
+        "undercovered_cells": len(sparse),
+        "max_count": max(values, default=0),
+        "min_count": min(values, default=0),
+    }
+
+
+def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[str, Any]:
+    """Allocate extra discovery budget to under-covered Frontier cells.
+
+    Coverage is evaluated relative to the current Matrix, not only against a fixed
+    minimum. Search variants remain independently persistent per cell.
+    """
+    counts, qualifying, error = frontier_matrix_coverage(previous)
+    balance = frontier_balance_snapshot(counts, state, advance_cursor=True)
+    target_count = balance["target_count"]
+    deficits = balance["deficits"]
+    scarcity_scores = balance["scarcity_scores"]
+    targets = balance["targets"]
+    empty_targets = balance["empty_targets"]
+    weighted_targets = balance["weighted_targets"]
+    ordered = sorted(
+        [key for key in FRONTIER_CELL_ORDER if deficits.get(key, 0) > 0],
+        key=lambda key: (-deficits[key], counts.get(key, 0), FRONTIER_CELL_ORDER.index(key)),
+    )
+    nonempty_targets = [key for key in targets if counts.get(key, 0) > 0]
 
     query_cursors = state.setdefault("frontier_gap_query_cursors", {})
     if not isinstance(query_cursors, dict):
@@ -774,6 +828,10 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         "qualifying": qualifying,
         "empty_cells": sum(1 for key in FRONTIER_CELL_ORDER if counts.get(key, 0) == 0),
         "target_count": target_count,
+        "median_count": balance.get("median_count", 0),
+        "undercovered_cells": balance.get("undercovered_cells", 0),
+        "max_count": balance.get("max_count", 0),
+        "min_count": balance.get("min_count", 0),
         "deficits": deficits,
         "scarcity_scores": scarcity_scores,
         "targets": targets,
@@ -6773,8 +6831,9 @@ def main() -> int:
         log_progress(f"Frontier coverage classifier unavailable; using rotating fallback: {frontier_focus['classifier_error']}")
     log_progress(
         f"Frontier coverage before scan: {frontier_focus['qualifying']} qualifying, "
-        f"{frontier_focus['empty_cells']}/16 empty; scarcity-priority "
-        + (", ".join(f"{k}({frontier_focus.get('deficits', {}).get(k, 0)})" for k in frontier_focus["targets"]) if frontier_focus["targets"] else "no extra gap queries")
+        f"{frontier_focus['empty_cells']}/16 empty; balance target {frontier_focus.get('target_count', 3)} "
+        f"(median {frontier_focus.get('median_count', 0)}); under-covered "
+        + (", ".join(f"{k}({frontier_focus.get('counts', {}).get(k, 0)})" for k in frontier_focus["targets"]) if frontier_focus["targets"] else "none")
     )
 
     try:
@@ -7547,32 +7606,40 @@ def main() -> int:
             probe = provisional_frontier_document(previous, oa + cr + inst, frontier_recovery_candidates)
             live_counts, live_qualifying, live_error = frontier_matrix_coverage(probe)
             if not live_error:
-                live_empty = [key for key in FRONTIER_CELL_ORDER if live_counts.get(key, 0) == 0]
-                deepening["empty_cells_after_current_depth"] = len(live_empty)
-                old_empty = list(active_frontier_focus.get("empty_targets") or [])
-                if live_empty != old_empty:
+                live_balance = frontier_balance_snapshot(live_counts, state, advance_cursor=False)
+                live_empty = list(live_balance.get("empty_targets") or [])
+                deepening["empty_cells_after_current_depth"] = sum(1 for key in FRONTIER_CELL_ORDER if live_counts.get(key, 0) == 0)
+                deepening["undercovered_cells_after_current_depth"] = int(live_balance.get("undercovered_cells", 0) or 0)
+                old_signature = (
+                    int(active_frontier_focus.get("target_count", 0) or 0),
+                    tuple(active_frontier_focus.get("targets") or []),
+                    tuple(active_frontier_focus.get("empty_targets") or []),
+                )
+                new_signature = (
+                    int(live_balance.get("target_count", 0) or 0),
+                    tuple(live_balance.get("targets") or []),
+                    tuple(live_balance.get("empty_targets") or []),
+                )
+                if new_signature != old_signature:
                     deepening["reallocations"].append({
                         "wave": wave_no,
-                        "from": old_empty,
-                        "to": live_empty,
+                        "from": list(active_frontier_focus.get("targets") or []),
+                        "to": list(live_balance.get("targets") or []),
+                        "target_count": int(live_balance.get("target_count", 0) or 0),
                     })
                     active_frontier_focus = dict(active_frontier_focus)
+                    active_frontier_focus.update(live_balance)
                     active_frontier_focus["counts"] = live_counts
                     active_frontier_focus["qualifying"] = live_qualifying
-                    active_frontier_focus["empty_targets"] = live_empty
-                    target_count = int(active_frontier_focus.get("target_count", 3) or 3)
-                    active_frontier_focus["targets"] = sorted(
-                        [k for k in FRONTIER_CELL_ORDER if live_counts.get(k, 0) < target_count],
-                        key=lambda k: (live_counts.get(k, 0), FRONTIER_CELL_ORDER.index(k)),
-                    )
                     gap_depth_bank = frontier_gap_depth_bank(active_frontier_focus)
-                    using_fallback_depth = not bool(live_empty)
+                    using_fallback_depth = not bool(live_balance.get("empty_targets"))
                     if using_fallback_depth:
                         gap_depth_bank = frontier_gap_depth_bank(active_frontier_focus, include_nonempty=True)
                     deep_cursor = 0
                     log_progress(
-                        "Matrix reallocated after wave " + str(wave_no) + ": remaining empty cells="
-                        + (", ".join(live_empty) if live_empty else "none")
+                        "Matrix balance reallocated after wave " + str(wave_no) + ": target="
+                        + str(live_balance.get("target_count", 0)) + "; priority="
+                        + (", ".join(live_balance.get("targets") or []) if live_balance.get("targets") else "none")
                     )
         # Stop a family after a hard source failure; the other family can keep using depth time.
         if source_stage_failed(warnings, "openalex") or any("openalex http 429" in normalized(w) for w in warnings):
@@ -7781,6 +7848,10 @@ def main() -> int:
         "empty_cells": frontier_focus["empty_cells"],
         "counts": frontier_focus["counts"],
         "target_count": frontier_focus.get("target_count", 3),
+        "median_count": frontier_focus.get("median_count", 0),
+        "undercovered_cells": frontier_focus.get("undercovered_cells", 0),
+        "max_count": frontier_focus.get("max_count", 0),
+        "min_count": frontier_focus.get("min_count", 0),
         "deficits": frontier_focus.get("deficits", {}),
         "scarcity_scores": frontier_focus.get("scarcity_scores", {}),
         "targets": frontier_focus["targets"],
@@ -7832,6 +7903,7 @@ def main() -> int:
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
+        "matrix_balance_rotation_profile_version": MATRIX_BALANCE_ROTATION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
         "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
         "rule_fix_source_recovery_version": (

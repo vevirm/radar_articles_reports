@@ -1,6 +1,6 @@
-# R&I Geopolitics Radar V17.13.2
+# R&I Geopolitics Radar V17.13.3
 
-V17.13.2 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
+V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
 This is not a looser relevance gate. The non-literal route needs at least **two independent strategic families**, including at least one relational/control family. A generic paper that merely says Europe should be more competitive still fails.
 
@@ -79,7 +79,7 @@ This makes discovery iterative in a bounded way: the radar can learn where the l
 
 ### Researcher names are fallback attention
 
-`priority_people.json` remains an auditable list of 137 researchers. Named-researcher discovery is not a separate corpus, badge or whitelist. In V17.13.2 it is mainly triggered when ordinary scholarly discovery is thin or Matrix coverage is very sparse. Exact-author works and any bounded context fallbacks still rejoin the normal OpenAlex/Crossref admission path.
+`priority_people.json` remains an auditable list of 137 researchers. Named-researcher discovery is not a separate corpus, badge or whitelist. In V17.13.3 it is mainly triggered when ordinary scholarly discovery is thin or Matrix coverage is very sparse. Exact-author works and any bounded context fallbacks still rejoin the normal OpenAlex/Crossref admission path.
 
 ### Strand C stays a minority
 
@@ -89,11 +89,11 @@ Weak signals no longer receive the protected follow-up query wave. After the A/B
 
 `BOOTSTRAP_LOOKBACK_MONTHS = 4` is the public-window rule. Saved rows, recovery rows and matrix-only historical rows cannot widen it. On the bundled 28 August 2026 state the publication floor is therefore **2026-04-28**.
 
-The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor. Its existing reader claims are retained; V17.13.2 changes the admission contract, evidence fields and disclosure UI rather than pretending to have re-scanned old records under the new external-shock route. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
+The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor. Its existing reader claims are retained; V17.13.3 keeps that admission contract, evidence fields and disclosure UI rather than pretending to have re-scanned old records under the new external-shock route. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
 
 ## Scanner rotation
 
-The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.2 keeps the finding-context lane inside those bounded rotations and adds a small set of US/China frontier-capability queries so a major external shock can actually be discovered before the exceptional admission test is applied. All query families obey the same date floor.
+The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.3 makes Matrix coverage an explicit input to rotation. The Matrix median becomes a bounded moving coverage target (minimum 3, maximum 10): cells below that level receive the reserved gap-search budget first, with zero cells weighted most heavily. Coverage is recomputed during matrix-depth waves, so attention moves as cells fill instead of stopping once an empty cell gets one item. This changes search effort only; admission standards remain unchanged and the scanner does not manufacture equal counts. The finding-context lane and bounded external-shock queries remain, and every query family obeys the same four-month date floor.
 
 The scheduler remains active on push, every 12 hours, and manual dispatch via `.github/workflows/radar-scan.yml`.
 
@@ -116,13 +116,13 @@ Reviewed evidence caches must be tied to the exact curator-supplied URL and reco
 - `scripts/scan_radar.py` — discovery/admission scanner
 - `radar_criteria.md` — admission rules
 - `frontier_criteria.md` — Matrix rules and public/internal terminology mapping
-- `CHANGELOG_V17_13_2.md` — this release's changes
-- `VALIDATION_V17_13_2.md` — validation record
+- `CHANGELOG_V17_13_3.md` — this release's changes
+- `VALIDATION_V17_13_3.md` — validation record
 - `CURRENT_CORPUS_INPUT.txt` — exact input/bundled-state record
 
 ## Validate
 
-Focused V17.13.2 + regression checks:
+Focused V17.13.3 + regression checks:
 
 ```bash
 PYTHONPATH=. python -m pytest -q \
@@ -133,10 +133,13 @@ PYTHONPATH=. python -m pytest -q \
   tests/test_v17_12_6_priority_people_rotation.py \
   tests/test_v17_12_7_integrated_researcher_attention.py \
   tests/test_v17_6_4_true_rotation.py \
-  tests/test_v17_9_source_aware_matrix.py
+  tests/test_v17_9_source_aware_matrix.py \
+  tests/test_v17_7_3_matrix_first_depth.py \
+  tests/test_v17_7_5_rotation_cell_fill.py \
+  tests/test_v17_5_5_balanced_matrix_priorities.py
 ```
 
-See `VALIDATION_V17_13_2.md` for the exact results packaged with this release.
+See `VALIDATION_V17_13_3.md` for the exact results packaged with this release.
 
 
 ## Reader views

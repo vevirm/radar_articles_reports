@@ -57,7 +57,7 @@ console.log(JSON.stringify({risks:v.risks.length,opps:v.opportunities.length,all
         page = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
         self.assertNotIn('Top six', page)
         self.assertNotIn('Top 15', page)
-        self.assertIn('strongest signals in plain language', page.lower())
+        self.assertIn('a short decision view built from the full matrix', page.lower())
 
 
 if __name__ == '__main__':

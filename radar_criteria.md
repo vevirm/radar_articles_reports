@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.13.2
+# Radar admission criteria — V17.13.3
 
 ## Strand A: substantive EU R&I in strategic context
 
@@ -77,3 +77,8 @@ All public A/B/C evidence uses a hard rolling **four-calendar-month** floor. Sav
 ## Matrix hand-off
 
 Every Strand-A record that clears admission is handed to the Matrix classifier with its source-backed evidence. Direction words are classification evidence, not an extra Strand-A gate.
+
+
+## Matrix-aware discovery rotation
+
+Matrix imbalance changes **where the scanner looks**, not what it admits. Each run measures current 4×4 Matrix coverage with the production classifier. Cells below the bounded median coverage receive extra OpenAlex/Crossref and specialist-source attention; empty cells receive the strongest weight. The priority list is recomputed during depth waves as new evidence appears. A sparse cell never justifies admitting a weak or off-topic item.

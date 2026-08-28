@@ -1,4 +1,4 @@
-# Architecture — V17.13.2 reader-first, high-recall / strict-admission radar
+# Architecture — V17.13.3 reader-first, high-recall / strict-admission radar
 
 The system separates **discovery**, **admission**, **presentation**, and **Matrix classification**. V17.13 deliberately widens discovery while keeping admission conservative.
 
@@ -79,6 +79,11 @@ Automated and manual provenance remain explicit. Manual ingestion is not a live 
 
 V17.13's bundled state keeps the uploaded scanner timestamp and records a four-month floor of 2026-04-28.
 
+
+
+## V17.13.3 Matrix-balance rotation
+
+Matrix coverage is now a search-allocation input. The scanner calculates the current 4×4 occupancy with the same classifier used by the Matrix page, takes the bounded median cell count as the moving depth target, and directs reserved gap queries toward cells below that target. Empty cells remain first priority, but thin non-empty cells continue receiving attention until they approach the current Matrix middle. Coverage is recomputed during depth waves so the target list can change within a scan. This affects discovery effort only; it never lowers admission criteria or forces equal cell counts.
 
 ## V17.13.2 subject, language and external-shock boundary
 

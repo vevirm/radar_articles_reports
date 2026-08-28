@@ -15,9 +15,9 @@
 <section class="panel"><h2>Risks</h2><p class="hint">Less control, more cost or weaker capability.</p><ol id="risks" class="list risk"><li class="empty">Loading…</li></ol></section>
 <section class="panel"><h2>Opportunities</h2><p class="hint">More European control and capability.</p><ol id="opportunities" class="list opportunity"><li class="empty">Loading…</li></ol></section>
 </div></main>
-<script src="../briefing/insights.js?v=17.13.2"></script>
-<script src="../frontier/frontier.js?v=17.13.2"></script>
-<script src="priorities.js?v=17.13.2"></script>
+<script src="../briefing/insights.js?v=17.13.3"></script>
+<script src="../frontier/frontier.js?v=17.13.3"></script>
+<script src="priorities.js?v=17.13.3"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function item(x,kind,i){const id=`detail-${kind}-${i}`;const text=SovereigntyFrontier.shortBullet(x);const source=[x.source,x.date?String(x.date).slice(0,10):''].filter(Boolean).join(' · ');return `<li><button type="button" data-detail="${id}" aria-expanded="false">${esc(text)}</button><div id="${id}" class="detail" hidden>${esc(source||'Source detail unavailable.')}${x.link?` · <a href="${esc(x.link)}" target="_blank" rel="noopener">source ↗</a>`:''}</div></li>`}
