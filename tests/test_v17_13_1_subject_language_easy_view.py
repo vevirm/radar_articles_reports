@@ -103,6 +103,7 @@ const vague=/^(?:(?:this|these|those|it|they|such)\b|the (?:study|paper|article|
 let bad=[];
 for(const k of ['strand_a','strand_b','strand_c']) for(const x of (d[k]||[])){
   const pts=[['point',I.pointFor(x)]];
+  const why=I.whyFor(x); if(why) pts.push(['whyFor',why]);
   if(k==='strand_c') pts.push(['what',I.signalWhat(x)],['why',I.signalWhy(x)]);
   for(const [label,p] of pts){
     if(!p || p.length>120 || /…|\.\.\./.test(p) || vague.test(p) || !/[.!?]$/.test(p)) bad.push([k,label,p]);
@@ -123,6 +124,37 @@ def test_vague_ai_act_sentence_is_rewritten_with_explicit_subject():
     assert point == 'The EU AI Act creates a risk-based governance framework for AI systems.'
     assert len(point) <= 120
 
+
+
+def test_why_it_matters_is_source_bound_not_generic_topic_filler():
+    import subprocess
+    script = r'''
+const fs=require('fs');
+const I=require('./briefing/insights.js');
+const d=JSON.parse(fs.readFileSync('radar.json','utf8'));
+const all=[...(d.strand_a||[]),...(d.strand_b||[]),...(d.strand_c||[])];
+const banned=[
+  'EU research funding and international partnerships may change.',
+  'European access to key technologies and innovation capacity may change.'
+];
+for(const x of all){const w=I.whyFor(x);if(banned.includes(w)){console.error(x.title||x.headline,w);process.exit(1)}}
+function find(part){return all.find(x=>String(x.title||x.headline||'').includes(part))}
+const checks=[
+  ['Supercomputers, artificial intelligence',/policy roadmap links supercomputing and AI capacity/i],
+  ['National Knowledge Security Guidelines 2026',/Netherlands tightened practical knowledge-security guidance/i],
+  ['EU: Shepherded by Brussels',/EU approach has shifted.*de-risking.*economic security/i]
+];
+for(const [part,re] of checks){const x=find(part);const w=x&&I.whyFor(x);if(!w||!re.test(w)){console.error(part,w);process.exit(1)}}
+'''
+    subprocess.run(['node', '-e', script], cwd=ROOT, check=True)
+
+
+def test_main_radar_omits_why_line_when_source_has_no_separate_consequence():
+    page = (ROOT / 'index.html').read_text(encoding='utf-8')
+    assert 'whyLine(x)' in page
+    assert "return globalThis.RadarInsights?.whyFor?.(x)||''" in page
+    assert 'EU research funding and international partnerships may change.' not in page
+    assert 'European access to key technologies and innovation capacity may change.' not in page
 
 def test_reader_point_and_package_budgets_are_configured():
     cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))

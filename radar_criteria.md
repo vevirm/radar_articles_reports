@@ -60,7 +60,7 @@ English remains a hard **evidence** invariant, not a whole-publication invariant
 
 Titles, authors, source, date, links, abstracts/summaries and review evidence remain available separately.
 
-Reader-facing findings and “why it matters” points must be **complete sentences of at most 120 characters**. They must begin with an explicit actor, system or topic. Vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” and “the developments” are not admissible display claims. Do not hard-cut a source sentence and do not use ellipses to meet the limit.
+Reader-facing findings and displayed “why it matters” points must be **complete sentences of at most 120 characters**. “Why it matters” must stay materially tied to the individual source text or reviewed evidence. Reusable topic fillers such as “EU research funding may change” or “European access to key technologies may change” are not admissible reader copy. If the record does not support a separate concise consequence, omit that line instead of inventing a generic implication. They must begin with an explicit actor, system or topic. Vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” and “the developments” are not admissible display claims. Do not hard-cut a source sentence and do not use ellipses to meet the limit.
 
 ## Strand B
 
@@ -98,3 +98,8 @@ Scanner rotation measures coverage from the corrected reader Matrix. Thin cells 
 Matrix balance is a **recurring rotation dimension on every scan**, not a one-off repair pass. The scanner recalculates the 4×4 coverage before discovery and again during depth waves. Sparse cells receive extra search slots, while broad topic rotation, source-quality attention, finding-context queries, priority-researcher attention and the R&I-method lane continue in parallel.
 
 This is deliberately a search-allocation rule. A thin cell never lowers the EU + R&I + geopolitical evidence gate, and a rich cell is never excluded from ordinary discovery.
+
+
+## Reader attention ranking is not admission
+
+The Stuff page may rank primary/official EU acts and reports, strong peer-reviewed research and other high-quality sources for reader attention. This ranking never changes the substantive admission gate and never excludes a useful lower-tier source. When an official primary EU document and secondary reporting about the same development are both present, the primary document should be surfaced first while the reporting remains provenance/context.

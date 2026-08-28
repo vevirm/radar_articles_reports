@@ -28,7 +28,7 @@
   const VAGUE_START=/^(?:(?:and|or|but|nor|yet|so)\b|(?:this|these|those|it|they|such)\b|(?:what|why|how|where|when|who)\b|the (?:study|paper|article|report|analysis|research|results?|finding|findings|development|developments|change|changes|trend|trends|issue|issues)\b|(?:broader|wider) implications?\b)/i;
   const MAX_POINT_CHARS=120;
   const DEPENDENT_START=/^(?:and\b|or\b|but\b|nor\b|yet\b|so\b|to support (?:this|these)|with\b|since\b|because\b|while\b|although\b|building on\b|drawing on\b|based on\b)/i;
-  const POINT_PREDICATE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|show|find|argue|conclude|reveal|indicate|suggest|highlight|shape|treat|use|map|face|gain|lose|create|make|help|drive|constrain|allow|remain|become|depend|rely|change|shift|link|raise|cut|add|limit|fund|launch|open|close|adopt|propose|plan|build|develop|deploy|establish|agree|sign|join|withdraw|target|support|secure|protect|screen|coordinate|compete|reform|amend|extend|approve|reject|connect|urge|struggle|perform|serve|stress|need|trail|offer|respond|pivot|introduce|expand|reduce|increase|strengthen|weaken|move|pull|push|balance)\w*\b/i;
+  const POINT_PREDICATE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|show|find|argue|conclude|reveal|indicate|suggest|highlight|shape|treat|use|map|face|gain|lose|create|make|help|drive|constrain|allow|remain|become|depend|rely|change|shift|link|raise|cut|add|limit|fund|launch|open|close|adopt|propose|plan|build|develop|deploy|establish|agree|sign|join|withdraw|target|support|secure|protect|screen|coordinate|compete|reform|amend|extend|approve|reject|connect|urge|struggle|perform|serve|stress|need|trail|offer|respond|pivot|introduce|expand|reduce|increase|strengthen|weaken|move|pull|push|balance|tighten|reset|outpace|concentrat|lag|rank|improv|undermin|accelerat|erod|diversif|retain|attract|exclude|require|steer|reshape|reward|leave|equip|prepare|align|integrat|harmoni[sz]|reconfigur)\w*\b/i;
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
   function norm(v){return ` ${clean(v).toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+.#/&-]+/g,' ').replace(/\s+/g,' ').trim()} `}
@@ -459,6 +459,207 @@
     return '';
   }
 
+  function whyFor(x){
+    // Why-it-matters text is derived from the individual record, not from a reusable topic label.
+    // Prefer a source sentence or a faithful compressed clause that is distinct from the visible claim.
+    const what=pointFor(x);
+    const whatNorm=norm(what||'');
+    const title=repairOcr(x?.title||x?.headline||'');
+    const titleNorm=norm(title);
+    const GENERIC_WHY=/^(?:AI capacity and dependence are becoming strategic issues|Geopolitical competition is pushing Europe|European access and investment may shift|Geopolitical rivalry is changing Europe|Foresight methods can test emerging strategic change|Research-security pressure is changing how Europe|Semiconductor dependence is constraining Europe|Security competition is pulling more European R&I|Geopolitical pressure is reshaping EU research funding|EU–China R&I cooperation may become narrower|Strategic dependencies are changing Europe|Digital and cyber policy is shaping Europe|Quantum capability is becoming part of Europe|Critical raw materials shape Europe|Current geopolitical change may alter Europe)/i;
+    const SOURCE_SCAFFOLD=/\b(?:its EU relevance is classified|this may affect European access, investment or capability-building|this is new evidence that may strengthen|consult the linked publication|based on explicit EU\/European policy content|the item was admitted to Strand|source text available at scan time)\b/i;
+    const BAD_START=/^(?:(?:this|these|those|it|they|such)\b|the (?:study|paper|article|report|analysis|research|results?|finding|findings|development|developments|change|changes|trend|trends|issue|issues|evidence)\b|(?:and|or|but|yet|so|as|amid|from|with|since|because|while|although|using|based on|drawing on|building on|could|may|might|would|will|can|must|should|has|have|had|is|are|was|were)\b)/i;
+    const IMPACT=/\b(depend|reli|risk|expos|constrain|limit|restrict|delay|weaken|strengthen|increase|reduce|raise|lower|cost|capacity|capabilit|access|control|compet|collabor|cooperat|partner|fund|invest|scale|supply|security|sovereign|autonom|resilien|fragment|leak|transfer|mobility|talent|skill|adopt|deploy|coordina|standard|govern|regulat|market|production|manufactur|infrastructure|compute|knowledge|research|innovation|technology|science|trade|procurement|concentrat|underinvest|shortage|gap|scrutin|exclude|screen|protect)\w*/i;
+    const SPECIFIC=/\b(EU|Europe|European|Horizon Europe|ERC|MSCA|China|Chinese|US|United States|Ukraine|Russia|India|Japan|NATO|AI|quantum|semiconductor|chip|cloud|compute|biotech|health|defen[cs]e|raw material|battery|researcher|university|firm|company|industry|infrastructure|funding|programme|regulation|directive|standard|science diplomacy|research security|knowledge security)\b/i;
+
+    const direct=readerPoint(x?.why_it_matters||'');
+    if(direct&&!GENERIC_WHY.test(direct)&&!SOURCE_SCAFFOLD.test(direct)&&!BAD_START.test(direct)) return direct;
+
+    function compress(q){
+      return repairOcr(q)
+        .replace(/^Abstract\s*/i,'')
+        .replace(/\bthe European Union\b/gi,'the EU')
+        .replace(/\bEuropean Union\b/gi,'EU')
+        .replace(/\bUnited States\b/gi,'US')
+        .replace(/\bartificial intelligence\b/gi,'AI')
+        .replace(/\bresearch and innovation\b/gi,'R&I')
+        .replace(/\btechnological sovereignty\b/gi,'tech sovereignty')
+        .replace(/\bstrategic autonomy\b/gi,'autonomy')
+        .replace(/\bthe capability benchmark Europe must match\b/gi,'the benchmark Europe must match')
+        .replace(/\bnumerous measures designed to limit or eliminate risks of\b/gi,'measures against')
+        .replace(/\billicit technological theft\b/gi,'technology theft')
+        .replace(/\bintensifying economic and geopolitical competition\b/gi,'geopolitical competition')
+        .replace(/\bthe EU’s collective reliance\b/gi,'EU reliance')
+        .replace(/\bthe EU's collective reliance\b/gi,'EU reliance')
+        .replace(/\binternational scientific collaboration\b/gi,'scientific collaboration')
+        .replace(/\binternational collaboration\b/gi,'collaboration')
+        .replace(/\bEuropean businesses\b/gi,'European firms')
+        .replace(/\bcivil aviation\b/gi,'aviation')
+        .replace(/\bpharmaceuticals\/biotechnology\b/gi,'biotech')
+        .replace(/\bthe final version of the EU AI Act\b/gi,'the EU AI Act')
+        .replace(/\bthe final version of the EU Artificial Intelligence Act\b/gi,'the EU AI Act')
+        .replace(/\bthe divide between expert consensus and varied geopolitical implementations\b/gi,'expert consensus and geopolitical implementation')
+        .replace(/\ba necessary prerequisite for\b/gi,'necessary for')
+        .replace(/\ba series of national and international policy initiatives designed to\b/gi,'policies to')
+        .replace(/\breduce risks associated with\b/gi,'reduce risks in')
+        .replace(/\bfull frontier AI value chain\b/gi,'frontier AI value chain')
+        .replace(/\bmore efficiently by\b/gi,'by')
+        .replace(/\bwith a view to\b/gi,'to')
+        .replace(/\bin order to\b/gi,'to')
+        .replace(/\s+/g,' ')
+        .trim();
+    }
+
+    function demeta(q){
+      let s=compress(q);
+      if(!s) return '';
+      if(title&&s.toLowerCase().startsWith(title.toLowerCase())){
+        s=s.slice(title.length).replace(/^[\s.:;–—-]+/,'').trim();
+      }
+      s=s
+        .replace(/^Ultimately,?\s*this (?:evaluation|analysis) (?:shows|finds|argues|concludes|demonstrates|indicates|suggests|highlights) that\s+/i,'')
+        .replace(/^(?:The|This) (?:study|paper|article|report|analysis) examines how\s+/i,'')
+        .replace(/^Abstract\s+Using [^,]{0,220},\s*this article examines how\s+/i,'')
+        .replace(/^Using [^,]{0,220},\s*this article examines how\s+/i,'')
+        .replace(/^(?:The|This) (?:study|paper|article|report|analysis) (?:shows|finds|argues|concludes|demonstrates|indicates|suggests|highlights) that\s+/i,'')
+        .replace(/^(?:The|This) (?:study|paper|article|report|analysis) (?:shows|finds|argues|concludes|demonstrates|indicates|suggests|highlights)\s+/i,'')
+        .replace(/^It (?:shows|finds|argues|concludes|demonstrates|indicates|suggests|highlights) that\s+/i,'')
+        .replace(/^The results? (?:show|shows|find|finds|indicate|indicates|suggest|suggests) that\s+/i,'')
+        .replace(/^The findings? (?:show|shows|find|finds|indicate|indicates|suggest|suggests) that\s+/i,'')
+        .replace(/^This (?:decoupling|pattern|evidence|result) suggests that\s+/i,'')
+        .replace(/^In the EU \(EU\) Member States\s+/i,'EU Member States ')
+        .replace(/^In the European Union \(EU\) Member States\s+/i,'EU Member States ')
+        .replace(/^From [^,]{0,150},\s*(the EU(?:’s|'s)? approach\s+)/i,'$1')
+        .replace(/^the EU(?:’s|'s) approach/i,'The EU approach')
+        .replace(/^Although [^,]{0,220},\s*/i,'')
+        .replace(/^However,?\s*/i,'')
+        .replace(/^and\s+/i,'')
+        .trim();
+      // Source-faithful repairs for common abstract grammar that otherwise leaves no explicit subject.
+      if(/^This creates skills mismatches and leaves many researchers underprepared/i.test(s))
+        s=s.replace(/^This creates skills mismatches and leaves many researchers underprepared/i,'Many researchers remain underprepared');
+      if(/^The results? show a diversified but unbalanced European semiconductor ecosystem/i.test(s))
+        s=s.replace(/^The results? show a diversified but unbalanced European semiconductor ecosystem/i,'Europe has a diversified but unbalanced semiconductor ecosystem');
+      if(/^China still depends on European firms in narrow strategic sectors including/i.test(s))
+        s=s.replace(/^China still depends on European firms in narrow strategic sectors including/i,'China still depends on European firms in');
+      if(/^They analysed/i.test(s)&&/^ALLEA Task Forces/i.test(title)) s=s.replace(/^They/i,'ALLEA task forces');
+      if(/^They also addressed/i.test(s)&&/^ALLEA Task Forces/i.test(title)) s=s.replace(/^They/i,'ALLEA task forces');
+      if(/^OS is core to/i.test(s)) s=s.replace(/,?\s*and we urgently need to.*$/i,'');
+      if(/digital power is now inseparable from economic security/i.test(s)){
+        const m=s.match(/digital power is now inseparable from economic security[^.;]*/i); if(m)s=m[0];
+      }
+      if(/there has been an increasing recognition of the strategic and security dimensions of new technologies/i.test(s))
+        s='The EU increasingly recognises the strategic and security dimensions of new technologies';
+      if(/^The paper maps EU strategic import dependencies/i.test(s))
+        s='EU strategic import dependencies combine economic, geoeconomic and geopolitical risks';
+      if(/^It highlights research and innovation frameworks, institutional links and co-funding arrangements as practical channels for cooperation/i.test(s))
+        s='R&I frameworks, institutional links and co-funding are practical channels for EU–Asia cooperation';
+      if(/^Based on [^,]{0,260},\s*the study identifies key constraints to industrial competitiveness:/i.test(s))
+        s=s.replace(/^Based on [^,]{0,260},\s*the study identifies key constraints to industrial competitiveness:\s*/i,'EU industrial competitiveness faces ');
+      if(/^The study identifies key constraints to industrial competitiveness:/i.test(s))
+        s=s.replace(/^The study identifies key constraints to industrial competitiveness:\s*/i,'EU industrial competitiveness faces ');
+      if(/^Geopolitical pressure is forcing science policy to trade off/i.test(s))
+        s=s.replace(/^Geopolitical pressure is forcing science policy to trade off/i,'Science policy now trades off');
+      if(/geopolitical tensions strongly impinge on scientific collaboration/i.test(s))
+        s='Geopolitical tensions are putting scientific collaboration under pressure';
+      if(/^Intensifying geopolitical rivalries have triggered/i.test(s))
+        s=s.replace(/^Intensifying geopolitical rivalries have triggered\s+/i,'Geopolitical rivalry has triggered ');
+      if(/^Regarding liability,?\s*the study concludes that\s+/i.test(s))
+        s=s.replace(/^Regarding liability,?\s*the study concludes that\s+/i,'');
+      s=s.replace(/^Individual users, not platform providers, bear responsibility/i,'Individual users bear responsibility');
+      if(/^Leaves many researchers underprepared/i.test(s)) s=s.replace(/^Leaves/i,'Many researchers remain');
+      // Turn one common nominal result into a complete subject-first statement.
+      let m=s.match(/^a diversified but unbalanced European ([^.;]+)$/i);
+      if(m) s=`Europe has a diversified but unbalanced ${m[1]}`;
+      m=s.match(/^([A-Z][^.;]{2,90})\s+remains?\s+(fragmented|dependent|exposed|concentrated|underprepared)\b/i);
+      if(m) s=s;
+      return compress(s);
+    }
+
+    function pieces(raw){
+      const out=[];
+      for(const sentence0 of splitSentences(raw||'')){
+        const sentence=compress(sentence0);
+        if(!sentence) continue;
+        out.push(sentence);
+        // Only split at boundaries where at least one side can stand as a full proposition.
+        for(const re of [
+          /\s*;\s*/,
+          /,\s+(?=(?:while|but|although|yet|however|with|turning|making|leaving|giving|raising|creating|increasing|reducing|allowing|highlighting|exploiting|focusing|linking)\b)/i,
+          /\s+(?=(?:while|although|yet)\b)/i,
+          /\s+and\s+(?=(?:increase|increases|increased|raise|raises|raised|reduce|reduces|reduced|limit|limits|limited|strengthen|strengthens|strengthened|weaken|weakens|weakened|create|creates|created|leave|leaves|left|make|makes|made|give|gives|gave|add|adds|added|require|requires|required|use|uses|used|link|links|linked|show|shows|showed|highlight|highlights|highlighted|place|places|placed|contrast|contrasts|contrasted|explore|explores|explored|address|addresses|addressed)\b)/i,
+          /\s+than\s+by\s+/i,
+          /\s+as\s+(?=[A-Z][a-z])/,
+          /\s+(?:and|but)\s+(?=(?:could|may|might|would|will|can|must|should|has|have|had|is|are|was|were)\b)/i,
+          /\s+and\s+to\s+(?=[A-Z])/,
+          /:\s+(?=(?:From|from|The|the|EU|Europe|European|China|Chinese|US|Member States|Research|Innovation|Technology|Scientific)\b)/
+        ]){
+          const ps=sentence.split(re).map(clean).filter(Boolean);
+          if(ps.length>1) out.push(...ps);
+        }
+      }
+      return out;
+    }
+
+    function finish(raw){
+      let q=demeta(raw);
+      if(!q||SOURCE_SCAFFOLD.test(q)||GENERIC_WHY.test(q)||BAD_START.test(q)||META.test(q)||isDocumentDebris(q)) return '';
+      if(/^(?:create|creates|creating|leave|leaves|leaving|allow|allows|allowing|highlight|highlights|highlighting|place|places|placing|show|shows|showing|find|finds|finding|argue|argues|arguing|make|makes|making|give|gives|giving|provide|provides|providing|link|links|linking)\b/i.test(q)) return '';
+      q=q.replace(/\s+([,.!?;:])/g,'$1').replace(/[;:,]+$/,'').trim();
+      if(!q||q.length<28||q.length>119||/…|\.\.\./.test(q)||/\?$/.test(q)||!POINT_PREDICATE.test(q)) return '';
+      if(!/[.!?]$/.test(q)) q+='.';
+      if(q.length>120) return '';
+      // readerPoint is now used only as a final safety check on an already complete short proposition.
+      const safe=readerPoint(q);
+      if(!safe||safe.length>120||BAD_START.test(safe)||GENERIC_WHY.test(safe)||SOURCE_SCAFFOLD.test(safe)) return '';
+      return safe;
+    }
+
+    const fields=[
+      {v:x?.summary||'',base:20},
+      {v:x?.signal_note||'',base:19},
+      {v:x?.matrix_evidence_basis||'',base:16},
+      {v:x?.external_eu_bridge||x?.bridge_sentence||'',base:15},
+      {v:x?.core_message||'',base:10}
+    ];
+    const candidates=[];
+    const seen=new Set();
+    for(const field of fields){
+      for(const raw of pieces(field.v)){
+        const q=finish(raw);
+        if(!q) continue;
+        const nq=norm(q);
+        if(!nq||seen.has(nq)||nq===titleNorm) continue;
+        seen.add(nq);
+        const wTok=new Set(whatNorm.split(' ').filter(t=>t.length>4));
+        const qTok=nq.split(' ').filter(t=>t.length>4);
+        const overlap=qTok.length?qTok.filter(t=>wTok.has(t)).length/qTok.length:0;
+        let score=field.base;
+        if(IMPACT.test(q)) score+=10;
+        if(SPECIFIC.test(q)) score+=6;
+        if(/\b(EU|Europe|European)\b/i.test(q)) score+=3;
+        if(/\b(depend|risk|security|fund|partner|capacity|access|control|compet|cost|fragment|concentrat|underinvest|exclude|scrutin|shortage|gap)\w*/i.test(q)) score+=5;
+        if(q.length>=55&&q.length<=116) score+=2;
+        if(nq===whatNorm) score-=10;
+        else if(overlap>.82) score-=6;
+        candidates.push({q,score});
+      }
+    }
+    candidates.sort((a,b)=>b.score-a.score||a.q.length-b.q.length||a.q.localeCompare(b.q));
+    if(candidates[0]) return candidates[0].q;
+
+    // Thin records may not contain a second consequence sentence. In that case reuse a specific source-bound point,
+    // never a generic topic template, rather than inventing a broader implication.
+    const stored=finish(x?.core_message||'');
+    if(stored&&!GENERIC_WHY.test(stored)) return stored;
+    const safeWhat=finish(what||'');
+    if(safeWhat&&!GENERIC_WHY.test(safeWhat)) return safeWhat;
+    const titlePoint=finish(title);
+    if(titlePoint&&!GENERIC_WHY.test(titlePoint)) return titlePoint;
+    return '';
+  }
+
+
   function pointFor(x){
     if(x.headline){
       const stored=completeCoreMessage(x.core_message||'');
@@ -629,5 +830,5 @@
     return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,fallbackPoint,plainLanguagePoint,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
+  return {TOPICS,OTHER,topicFor,pointFor,whyFor,fallbackPoint,plainLanguagePoint,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
 });

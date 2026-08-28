@@ -119,3 +119,8 @@ The browser Matrix and the scanner coverage bridge now use the same stricter sem
 ### Recurring multi-factor rotation (V17.13.7)
 
 Matrix coverage is recalculated on every scan and remains one permanent rotation input. It works alongside broad topic rotation, preferred journal/EU-source attention, finding-derived context, named-researcher attention and the methods lane. Matrix scarcity changes search allocation only; it does not change admission.
+
+
+## Stuff workbench
+
+`stuff/index.html` is a utility layer over the existing Radar/Matrix data. It does not create a new corpus or admission path. Exports are derived from `radar.json` and the same Matrix classifier; the packaged XLSX is a build snapshot.

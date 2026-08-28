@@ -577,6 +577,7 @@
       anchor:clean(x.anchor||''),
       evidenceTitle:clean(evidence?.title||''),
       abstract:clean(evidence?.summary||x._evidenceSummary||x.summary||''),
+      matrixEvidenceBasis:clean(evidence?.matrix_evidence_basis||x.matrix_evidence_basis||''),
       row,rowScore:rowPick.score,column,cellName:cell[0],cellSubtitle:cell[1],
       questions,questionFlags:flags,questionCount:qCount,
       direction,triage:{reach,irreversibility,attentionGap:attention,actionability,total:triage},

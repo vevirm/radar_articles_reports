@@ -47,7 +47,7 @@ Every admitted Strand-A finding is sent to the Matrix classifier. There is no ex
 
 ### 3. Easy radar keeps the full record reachable
 
-The main radar remains the easy/reader-first view: plain claim first, then a short “why it matters”. Nothing important from the evidence record is discarded from the interface. Each card has **All record details**, and the toolbar has **Show all details** to open the detailed fields across the visible cards at once. That disclosure includes the original title, authors, source, date, type, source tier, EU relevance, discovery route, tracked-since date, full available summary, relevance/admission note, available R&I/strategic evidence, Matrix placement/evidence where present, and the external-Europe bridge when the exceptional route is used.
+The main radar remains the easy/reader-first view: plain claim first, then a short “why it matters” **only when the individual record supports a separate concise consequence**. Generic topic fillers are not used. Nothing important from the evidence record is discarded from the interface. Each card has **All record details**, and the toolbar has **Show all details** to open the detailed fields across the visible cards at once. That disclosure includes the original title, authors, source, date, type, source tier, EU relevance, discovery route, tracked-since date, full available summary, relevance/admission note, available R&I/strategic evidence, Matrix placement/evidence where present, and the external-Europe bridge when the exceptional route is used.
 
 ### 4. Reader-first claims
 
@@ -57,7 +57,7 @@ The Risks & opportunities page is deliberately minimal: two ranked bullet lists,
 
 The same plain-language layer is used by the main radar, Matrix, Risks & opportunities and secondary briefing view.
 
-**Reader-point contract:** every finding and “why it matters” point is one complete sentence of **120 characters or fewer**. It must start with an explicit actor, system or topic — never vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” or “the developments”. The UI never truncates a sentence or adds an ellipsis to force the limit.
+**Reader-point contract:** every displayed finding and “why it matters” point is one complete sentence of **120 characters or fewer**. “Why it matters” must be derived from that record’s summary, reviewed evidence, Matrix evidence or source-bound core message; if no separate consequence can be stated safely, the line is omitted rather than replaced with a generic theme sentence. It must start with an explicit actor, system or topic — never vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” or “the developments”. The UI never truncates a sentence or adds an ellipsis to force the limit.
 
 ## How discovery changed
 
@@ -113,16 +113,19 @@ Reviewed evidence caches must be tied to the exact curator-supplied URL and reco
 - `frontier/quick/index.html` — simple Matrix
 - `frontier/index.html` — evidence-rich Matrix
 - `priorities/index.html` — risks & opportunities
+- `literature/index.html` — alphabetical literature used
+- `stuff/index.html` — exports + most important publications
+- `stuff/radar_exports.xlsx` — packaged Matrix/literature export workbook
 - `scripts/scan_radar.py` — discovery/admission scanner
 - `radar_criteria.md` — admission rules
 - `frontier_criteria.md` — Matrix rules and public/internal terminology mapping
-- `CHANGELOG_V17_13_3.md` — this release's changes
-- `VALIDATION_V17_13_3.md` — validation record
+- `CHANGELOG_V17_13_8.md` — this release's changes
+- `VALIDATION_V17_13_8.md` — validation record
 - `CURRENT_CORPUS_INPUT.txt` — exact input/bundled-state record
 
 ## Validate
 
-Focused V17.13.3 + regression checks:
+Focused reader / Matrix regression checks:
 
 ```bash
 PYTHONPATH=. python -m pytest -q \
@@ -139,7 +142,7 @@ PYTHONPATH=. python -m pytest -q \
   tests/test_v17_5_5_balanced_matrix_priorities.py
 ```
 
-See `VALIDATION_V17_13_3.md` for the exact results packaged with this release.
+See `VALIDATION_V17_13_8.md` for the V17.13.8 record and its appended V17.13.9 reader-copy validation.
 
 
 ## Reader views
@@ -178,3 +181,14 @@ The landing page now shows the reader journey before the page chooser: Orient �
 
 ### V17.13.7 rotation guarantee
 Matrix balance is now explicitly permanent: every future scan recalculates cell coverage and gives thin cells extra discovery attention as one factor among the scanner's other rotations. It does not become a quota and does not weaken admission.
+
+
+## V17.13.8 — Stuff / exports
+
+A separate **Stuff** workbench keeps utility functions out of the main reading flow. It can export the live Matrix as CSV for the whole Matrix, one row, one column or one exact cell; the packaged XLSX contains all of those slices as tabs. The same page exports Literature used as CSV, BibTeX and RIS.
+
+The page also isolates the publications worth opening first. This is an **attention ranking, not a gate**. Primary or official EU acts/reports rank above reporting about them when the primary document is present. Peer-reviewed research and strong strategic-policy sources follow, with evidence quality, materiality and freshness refining the order.
+
+## V17.13.9 — source-bound “why it matters”
+
+The reader no longer fills “why it matters” with reusable topic sentences. Each displayed consequence is taken from the individual record’s source summary, reviewed evidence, Matrix evidence or source-bound core message and kept within the 120-character reader limit. If no separate source-grounded consequence can be stated safely, the line is omitted instead of replaced with a generic implication. Radar data, Matrix placement, admission and rotation are unchanged.
