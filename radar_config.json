@@ -960,7 +960,8 @@
     "European Political Science",
     "Futures & Foresight Science",
     "Journal of Futures Studies",
-    "World Futures Review"
+    "World Futures Review",
+    "Government Information Quarterly"
   ],
   "crossref_priority_journal_queries": [
     "European research security geopolitics",
@@ -1497,7 +1498,7 @@
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
-  "crossref_source_first_journals_per_scan": 8,
+  "crossref_source_first_journals_per_scan": 10,
   "crossref_source_first_rows": 60,
   "public_429_cooldown_seconds": 8,
   "public_429_max_cooldown_seconds": 30,
@@ -1577,5 +1578,33 @@
   "package_file_budget": 100,
   "frontier_gap_balance_enabled": true,
   "frontier_gap_balance_target_cap": 10,
-  "matrix_balance_rotation_profile_version": "v17.13.3-matrix-coverage-aware-rotation"
+  "matrix_balance_rotation_profile_version": "v17.13.3-matrix-coverage-aware-rotation",
+  "source_attention_profile_version": "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening",
+  "preferred_q1_journals_sjr2024": [
+    "Research Policy",
+    "Technovation",
+    "Journal of European Public Policy",
+    "Review of International Political Economy",
+    "Government Information Quarterly",
+    "Scientometrics"
+  ],
+  "preferred_q1_journals_note": "Discovery preference only. Shortlist verified against SCImago SJR 2024 Q1 listings; quartiles can change. Never an admission requirement.",
+  "preferred_q1_journals_per_scan": 5,
+  "official_eu_priority_domains": [
+    "research-and-innovation.ec.europa.eu",
+    "joint-research-centre.ec.europa.eu",
+    "publications.jrc.ec.europa.eu",
+    "op.europa.eu",
+    "commission.europa.eu",
+    "digital-strategy.ec.europa.eu",
+    "europarl.europa.eu",
+    "consilium.europa.eu",
+    "eeas.europa.eu",
+    "eur-lex.europa.eu",
+    "data.europa.eu",
+    "ecb.europa.eu"
+  ],
+  "official_eu_priority_sources_per_scan": 8,
+  "source_attention_floor_broad_share": 0.4,
+  "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Keep at least 40% of source-first attention broad. Admission gates are unchanged."
 }

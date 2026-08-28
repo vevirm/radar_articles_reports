@@ -82,3 +82,9 @@ Every Strand-A record that clears admission is handed to the Matrix classifier w
 ## Matrix-aware discovery rotation
 
 Matrix imbalance changes **where the scanner looks**, not what it admits. Each run measures current 4×4 Matrix coverage with the production classifier. Cells below the bounded median coverage receive extra OpenAlex/Crossref and specialist-source attention; empty cells receive the strongest weight. The priority list is recomputed during depth waves as new evidence appears. A sparse cell never justifies admitting a weak or off-topic item.
+
+## Source attention (V17.13.4)
+
+Source quality changes **where the scanner looks first**, not what counts as relevant. Each scan reserves extra source-first attention for a verified SCImago Q1 journal shortlist and for official EU reports. At least 40% of source-first attention remains broad, and normal topic/gap rotation continues.
+
+Admission remains source-neutral on substance: the item must still establish EU/European consequence, R&I substance and a geopolitical/strategic mechanism. Prestige can strengthen confidence in evidence, but it cannot replace any of those three links. Unknown journal quartile is never a rejection reason.

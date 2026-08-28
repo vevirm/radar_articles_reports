@@ -145,3 +145,9 @@ See `VALIDATION_V17_13_3.md` for the exact results packaged with this release.
 ## Reader views
 
 The reader shell links Radar, Matrix short/full, Risks & opportunities, Read at least this, and an alphabetical Literature used page.
+
+## V17.13.4 — source attention without source gate inflation
+
+Discovery now gives more scan budget to two source families: high-quality journal articles and official EU reports. A small verified SCImago SJR 2024 Q1 shortlist receives recurring source-first journal slots, while Commission, JRC, Publications Office, Parliament, Council and related EU-primary domains receive recurring institutional slots.
+
+This is **attention, not admission**. The scanner keeps a broad source share of at least 40%, continues ordinary OpenAlex/Crossref and institutional rotation, and uses the same EU-R&I-geopolitical substantive gate for every source. A Q1 article does not get in because it is Q1; a lower-ranked or unranked source is not excluded if it contains strong evidence. This avoids the failure mode where prestige filters become so strict that recall collapses.

@@ -160,6 +160,7 @@ SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.3-matrix-coverage-aware-rotation"))
+SOURCE_ATTENTION_PROFILE_VERSION = str(CONFIG.get("source_attention_profile_version", "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.1-eu-core-external-shock-english-evidence"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
@@ -471,8 +472,10 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "crossref_broad_cursor": 0,
             "crossref_priority_cursor": 0,
             "crossref_source_cursor": 0,
+            "crossref_preferred_journal_cursor": 0,
             "strand_b_method_cursor": 0,
             "institution_cursor": 0,
+            "official_eu_source_cursor": 0,
             "frontier_gap_cursor": 0,
             "openalex_explore_cursor": 0,
             "crossref_explore_cursor": 0,
@@ -537,7 +540,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor", "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["a_recall_recovery_cursor"] = int(state.get("a_recall_recovery_cursor", 0) or 0)
     state.setdefault("a_recall_recovery_version", "")
@@ -547,8 +550,8 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     # so a wider classifier could never reconsider much of the corpus it was intended to rescue.
     recall_changed = bool(previous.get("last_updated")) and previous.get("recall_profile_version") != RECALL_PROFILE_VERSION
     if recall_changed:
-        for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor",
-                    "strand_b_method_cursor", "institution_cursor", "openalex_explore_cursor", "crossref_explore_cursor", "finding_context_cursor"):
+        for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor",
+                    "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "openalex_explore_cursor", "crossref_explore_cursor", "finding_context_cursor"):
             state[key] = 0
         state["result_depth"] = {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}}
         state["frontier_recovery_depth"] = {"openalex": {}, "crossref": {}}
@@ -6944,18 +6947,62 @@ def main() -> int:
         cr_priority_cursor_before,
         int(CONFIG.get("crossref_priority_tasks_per_scan", 45)),
     )
+    # V17.13.4 source attention: discovery gives extra slots to verified Q1 journals
+    # and EU primary sources, but the broad rotating lanes are preserved. Source prestige
+    # never bypasses or tightens the substantive admission gate.
     source_journals_all = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
+    preferred_q1 = [j for j in list(dict.fromkeys(CONFIG.get("preferred_q1_journals_sjr2024", []))) if j in source_journals_all]
+    nonpreferred_journals = [j for j in source_journals_all if j not in preferred_q1]
+    source_total = max(0, int(CONFIG.get("crossref_source_first_journals_per_scan", 10) or 0))
+    preferred_n = min(source_total, max(0, int(CONFIG.get("preferred_q1_journals_per_scan", 5) or 0)))
+    broad_floor = max(0.0, min(1.0, float(CONFIG.get("source_attention_floor_broad_share", 0.4) or 0.4)))
+    broad_n = max(int(round(source_total * broad_floor)), source_total - preferred_n)
+    broad_n = min(source_total, broad_n)
+    preferred_n = min(preferred_n, max(0, source_total - broad_n)) if source_total else 0
+    if preferred_q1 and source_total and preferred_n == 0:
+        preferred_n = 1
+        broad_n = max(0, source_total - 1)
+    cr_preferred_cursor_before = int(state.get("crossref_preferred_journal_cursor", 0) or 0)
+    cr_preferred_batch, _cr_pref_next, _cr_pref_wrapped = rotating_batch(
+        preferred_q1, cr_preferred_cursor_before, preferred_n
+    )
     cr_source_cursor_before = int(state.get("crossref_source_cursor", 0) or 0)
-    cr_source_batch, _cr_source_planned_next, _cr_source_planned_wrapped = rotating_batch(
-        source_journals_all, cr_source_cursor_before, int(CONFIG.get("crossref_source_first_journals_per_scan", 8))
+    cr_general_batch, _cr_source_planned_next, _cr_source_planned_wrapped = rotating_batch(
+        nonpreferred_journals or source_journals_all, cr_source_cursor_before, broad_n
     )
+    cr_source_batch = list(dict.fromkeys(cr_preferred_batch + cr_general_batch))
+
     institution_sources_all = list(CONFIG.get("institution_sources", []))
-    institution_cursor_before = int(state.get("institution_cursor", 0) or 0)
-    inst_rotating, _inst_planned_next, _inst_planned_wrapped = rotating_batch(
-        institution_sources_all,
-        institution_cursor_before,
-        int(CONFIG.get("institution_sources_per_scan", 18)),
+    official_domains = {clean_text(x).lower().removeprefix("www.") for x in CONFIG.get("official_eu_priority_domains", []) if clean_text(x)}
+    official_sources = [
+        src for src in institution_sources_all
+        if clean_text(src.get("domain", "")).lower().removeprefix("www.") in official_domains
+    ]
+    general_sources = [
+        src for src in institution_sources_all
+        if clean_text(src.get("domain", "")).lower().removeprefix("www.") not in official_domains
+    ]
+    inst_total = max(0, int(CONFIG.get("institution_sources_per_scan", 18) or 0))
+    official_n = min(inst_total, max(0, int(CONFIG.get("official_eu_priority_sources_per_scan", 8) or 0)))
+    general_n = max(int(round(inst_total * broad_floor)), inst_total - official_n)
+    general_n = min(inst_total, general_n)
+    official_n = min(official_n, max(0, inst_total - general_n)) if inst_total else 0
+    if official_sources and inst_total and official_n == 0:
+        official_n = 1
+        general_n = max(0, inst_total - 1)
+    official_eu_cursor_before = int(state.get("official_eu_source_cursor", 0) or 0)
+    official_rotating, _official_next, _official_wrapped = rotating_batch(
+        official_sources, official_eu_cursor_before, official_n
     )
+    institution_cursor_before = int(state.get("institution_cursor", 0) or 0)
+    general_rotating, _inst_planned_next, _inst_planned_wrapped = rotating_batch(
+        general_sources or institution_sources_all, institution_cursor_before, general_n
+    )
+    inst_rotating = list(dict.fromkeys([clean_text(x.get("domain", "")) for x in official_rotating + general_rotating]))
+    inst_rotating = [
+        next(src for src in official_rotating + general_rotating if clean_text(src.get("domain", "")) == domain)
+        for domain in inst_rotating
+    ]
     # Keep the persistent source rotation intact, then add specialist sources in
     # scarcity-weighted round-robin order across the selected cells. Source-list
     # ordering therefore cannot accidentally privilege one thematic cell forever.
@@ -7021,8 +7068,9 @@ def main() -> int:
     log_progress(
         "Scan start: persistent incremental mode; "
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
-        f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) from {cr_from.isoformat()}, "
-        f"institutions {len(inst_batch)} source(s) ({len(inst_rotating)} rotating + {len(gap_sources)} gap-specialist) from {inst_from.isoformat()}; "
+        f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
+        f"({len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad) from {cr_from.isoformat()}, "
+        f"institutions {len(inst_batch)} source(s) ({len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
     if gap_scholarly:
@@ -7139,8 +7187,12 @@ def main() -> int:
         priority_tasks_all, cr_priority_cursor_before, cr_priority_batch, executed_priority
     )
     executed_source_journals = set(execution_stats.get("crossref_source_journals", set()))
+    state["crossref_preferred_journal_cursor"], cr_preferred_wrapped, cr_preferred_executed = committed_rotation_cursor(
+        preferred_q1, cr_preferred_cursor_before, cr_preferred_batch, executed_source_journals
+    )
+    general_source_bank = nonpreferred_journals or source_journals_all
     state["crossref_source_cursor"], cr_source_wrapped, cr_source_executed = committed_rotation_cursor(
-        source_journals_all, cr_source_cursor_before, cr_source_batch, executed_source_journals
+        general_source_bank, cr_source_cursor_before, cr_general_batch, executed_source_journals
     )
     method_executed = executed_oa | executed_cr
     state["strand_b_method_cursor"], b_method_wrapped, b_method_executed = committed_rotation_cursor(
@@ -7466,10 +7518,16 @@ def main() -> int:
         news.extend(dict(x) for x in INSTITUTION_SIGNAL_CANDIDATES if isinstance(x, dict))
     inst_failed = source_stage_failed(warnings, "institution")
     institution_domains_all = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in institution_sources_all]
-    inst_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in inst_rotating]
+    official_domains_all = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in official_sources]
+    general_domains_all = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in (general_sources or institution_sources_all)]
+    official_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in official_rotating]
+    general_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in general_rotating]
     executed_inst = set(execution_stats.get("institution_sources", set()))
+    state["official_eu_source_cursor"], official_wrapped, official_executed = committed_rotation_cursor(
+        official_domains_all, official_eu_cursor_before, official_planned_domains, executed_inst
+    )
     state["institution_cursor"], inst_wrapped, inst_base_executed = committed_rotation_cursor(
-        institution_domains_all, institution_cursor_before, inst_planned_domains, executed_inst
+        general_domains_all, institution_cursor_before, general_planned_domains, executed_inst
     )
 
     # Spend otherwise-idle scan time on the actual gaps. Earlier versions finished
@@ -7904,6 +7962,7 @@ def main() -> int:
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
         "matrix_balance_rotation_profile_version": MATRIX_BALANCE_ROTATION_PROFILE_VERSION,
+        "source_attention_profile_version": SOURCE_ATTENTION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
         "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
         "rule_fix_source_recovery_version": (

@@ -100,3 +100,7 @@ Matrix coverage is now a search-allocation input. The scanner calculates the cur
 - Long source prose is reduced only at sentence/clause boundaries. Hard cuts and ellipses are forbidden.
 - The same shared `RadarInsights.readerPoint()` boundary is used by the main radar, Read page, Quick Matrix and full Matrix claim surfaces.
 - `plain_language_claim()` applies the same rule at scanner write time, so new `core_message` values are safe before they reach the frontend.
+
+## V17.13.4 source-attention lanes
+
+The source planner now has two bounded preference lanes inside the existing rotation: (1) SCImago-Q1-verified journal source sweeps and (2) official-EU institutional sweeps. Both have independent persisted cursors. The general journal and general institution rotations remain active and retain a configured minimum share, so source preferences cannot starve broad discovery. Admission/classification code is unchanged.
