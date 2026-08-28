@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar V17.13.11
+# R&I Geopolitics Radar V17.13.13
 
 V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
@@ -115,34 +115,22 @@ Reviewed evidence caches must be tied to the exact curator-supplied URL and reco
 - `priorities/index.html` — risks & opportunities
 - `literature/index.html` — alphabetical literature used
 - `stuff/index.html` — exports + most important publications
-- `stuff/radar_exports.xlsx` — packaged Matrix/literature export workbook
 - `scripts/scan_radar.py` — discovery/admission scanner
 - `radar_criteria.md` — admission rules
 - `frontier_criteria.md` — Matrix rules and public/internal terminology mapping
-- `CHANGELOG_V17_13_8.md` — this release's changes
-- `VALIDATION_V17_13_8.md` — validation record
+- `CHANGELOG_V17_13_12.md` — current release changes
+- `VALIDATION_V17_13_12.md` — current validation record
 - `CURRENT_CORPUS_INPUT.txt` — exact input/bundled-state record
 
 ## Validate
 
-Focused reader / Matrix regression checks:
+The repository-wide suite is the default validation command:
 
 ```bash
-PYTHONPATH=. python -m pytest -q \
-  tests/test_v17_13_1_subject_language_easy_view.py \
-  tests/test_v17_13_0_feedback_round.py \
-  tests/test_v17_13_reader_scanner.py \
-  tests/test_v17_12_5_plain_language.py \
-  tests/test_v17_12_6_priority_people_rotation.py \
-  tests/test_v17_12_7_integrated_researcher_attention.py \
-  tests/test_v17_6_4_true_rotation.py \
-  tests/test_v17_9_source_aware_matrix.py \
-  tests/test_v17_7_3_matrix_first_depth.py \
-  tests/test_v17_7_5_rotation_cell_fill.py \
-  tests/test_v17_5_5_balanced_matrix_priorities.py
+pytest -q
 ```
 
-See `VALIDATION_V17_13_8.md` for the V17.13.8 record and its appended V17.13.9 reader-copy validation.
+`pytest.ini` adds the repository root to the import path, so both `pytest -q` and `python -m pytest -q` work. The historical tests were migrated away from retired helper names, stale version literals, old manual-only workflow assumptions, and pre-source-specific Matrix expectations. See `VALIDATION_V17_13_12.md`.
 
 
 ## Reader views
@@ -211,3 +199,24 @@ This is a presentation/export repair only: no fresh scan, no Radar-data change, 
 - `Risks & Opportunities` is capped and diversified by topic so one repeated subject cannot dominate either list; detail views add the publication and a concrete mechanism.
 - `Stuff` now leads with a real `.xlsx` publication workbook and an on-page publication preview. The workbook contains deduplicated publications, what each says, why it matters, Matrix placement and source URLs. TSV remains available only where it is explicitly labelled TSV.
 - Rotation logic itself is unchanged: recurring multifactor search rotation and sparse-Matrix targeting continue to advance only on executed work.
+
+
+## V17.13.12 — historical test-suite migration
+
+- Replaced the obsolete `test_findings.py` imports of retired `make_finding`, `backfill_finding` and `build_findings_data` helpers with tests of the current publication-record pipeline.
+- Migrated older tests that hard-coded superseded UI text, version/profile names, manual-only scanning, old Matrix acceptance rules, and fixed corpus snapshots so they now test the current contracts rather than historical implementation details.
+- Kept stricter source-specific Matrix behavior explicit in tests: unsupported generic opening/loss claims are not treated as evidence merely because they contain the right keywords.
+- Updated reader tests to match the current design: all eight issue charts are rendered immediately, concise claims stay within the 120-character reader budget, and paper-specific “why it matters” explanations may be longer when needed to state the mechanism.
+- Added `pytest.ini` so the full suite imports `scripts` correctly when invoked as plain `pytest`.
+- No scanner, Matrix, reader, rotation, prioritisation, or corpus-data logic was changed in this test-maintenance release.
+
+
+## V17.13.13 — explicit “what it says” + simple bibliography workbook
+
+- Radar publication cards now show the actual publication title as the card heading, followed by **What it says for EU R&I geopolitics** and then **Why it matters**.
+- The new “what it says” line is a complete sentence, never hard-cut or ellipsised, and has a hard **150-character maximum**.
+- The Stuff page is no longer a Matrix/export workbench. Its main action is one button: **Download bibliography + summaries (.xlsx)**.
+- The workbook opens directly on a single `Bibliography` sheet. There is no cover/read-me sheet, Matrix codes, scores or setup page.
+- Workbook columns are limited to publication, authors, date, publisher/channel, type, what it says for EU R&I geopolitics, why the reader should care, and source link.
+- The deployment bundle contains one Excel download only: `stuff/bibliography_and_summaries.xlsx`.
+- BibTeX and RIS remain available for reference-manager use. Scanner admission, Matrix placement and rotation are unchanged.

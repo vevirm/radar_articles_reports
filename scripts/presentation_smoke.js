@@ -50,7 +50,7 @@ try {
   fail(`reader-layer runtime build: ${e.stack || e.message}`);
 }
 
-for (const rel of ['index.html','read/index.html','briefing/index.html','frontier/index.html','priorities/index.html']) {
+for (const rel of ['index.html','read/index.html','briefing/index.html','frontier/index.html','priorities/index.html','stuff/index.html']) {
   const html = read(rel);
   const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]);
   try {

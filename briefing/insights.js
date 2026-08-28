@@ -459,6 +459,44 @@
     return '';
   }
 
+
+  function whatForEuRiGeo(x){
+    // Reader-facing answer to: “What does this source say for EU R&I in geopolitics?”
+    // The display sentence is capped at 150 characters and is never hard-cut.
+    const current=readerPoint(pointFor(x),150);
+    const fallback=readerPoint(fallbackPoint(x),150);
+    const RI=/\b(research|innovation|science|scientific|technology|technological|university|universit|researcher|talent|skills?|r&d|r&i|compute|cloud|semiconductor|chip|quantum|biotech|infrastructure|funding|horizon|erc|industrial|digital|cyber)\w*/i;
+    const GEO=/\b(geopolit|strategic|security|depend|reli|autonom|sovereign|compet|export control|sanction|de-risk|derisk|supply chain|foreign|international|cross-border|collabor|cooperat|partner|access|control|restrict|screen|fragment|trade|china|chinese|united states|\bus\b|russia|ukraine|nato|india|japan)\w*/i;
+    const EU=/\b(EU|Europe|European|Horizon Europe|ERC|Member States)\b/i;
+    const META_WHAT=/^(?:Learning outcomes?\b|To address this\b|By 20\d{2}\b|The purpose of\b|This (?:study|paper|article|report)\b|The (?:study|paper|article|report)\b)/i;
+    const FINITE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|shows?|finds?|argues?|concludes?|reveals?|indicates?|suggests?|highlights?|affects?|changes?|shifts?|raises?|cuts?|limits?|restricts?|reduces?|increases?|strengthens?|weakens?|depends?|relies?|builds?|funds?|opens?|closes?|adopts?|introduces?|expands?|creates?|links?|leaves?|moves?|trails?|outpaces?|constrains?|enables?|protects?|reshapes?|redirects?|determines?|pressures?|faces?|gains?|loses?|needs?|remains?|becomes?|treats?|uses?|maps?|offers?|supports?|drives?|updates?)\b/i;
+    const ACTION_SENTENCE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|shows?|finds?|argues?|concludes?|reveals?|indicates?|suggests?|highlights?|affects?|changes?|shifts?|raises?|cuts?|restricts?|reduces?|increases?|strengthens?|weakens?|depends?|relies?|builds?|funds?|opens?|closes?|adopts?|introduces?|expands?|creates?|links?|leaves?|moves?|trails?|outpaces?|constrains?|enables?|protects?|reshapes?|redirects?|determines?|pressures?|faces?|gains?|loses?|needs?|remains?|becomes?|treats?|uses?|maps?|offers?|supports?|drives?|updates?)\b/i;
+    const titleLike=v=>!!v&&norm(v).trim()===norm(x?.title||x?.headline||'').trim()&&!ACTION_SENTENCE.test(v);
+    const fit=v=>!!v&&!META_WHAT.test(v)&&!titleLike(v)&&ACTION_SENTENCE.test(v)&&(EU.test(v)||RI.test(v))&&(GEO.test(v)||EU.test(v));
+    if(fit(current)) return current;
+    if(fit(fallback)) return fallback;
+
+    // Source-bound rescue: choose a complete relevant statement from the fields actually stored for this source.
+    const raw=[];
+    const add=v=>{const q=repairOcr(v||'');if(q)raw.push(q)};
+    add(x?.core_message); add(x?.what); add(x?.signal_note);
+    for(const q of splitSentences(x?.summary||'')) add(q);
+    const candidates=raw
+      .map(q=>({raw:q,p:readerPoint(simplifyCandidate(q),150)||readerPoint(q,150)}))
+      .filter(o=>fit(o.p)&&likelyEnglish(o.p)&&!isDocumentDebris(o.p))
+      .map(o=>({p:o.p,score:candidateScore(o.raw)+(EU.test(o.p)?4:0)+(RI.test(o.p)?4:0)+(GEO.test(o.p)?4:0)}))
+      .sort((a,b)=>b.score-a.score||b.p.length-a.p.length);
+    if(candidates[0]?.p) return candidates[0].p;
+
+    // Last resort: keep the source topic readable as a grammatical sentence instead of showing a chopped title fragment.
+    const topic=repairOcr(current||fallback||x?.title||x?.headline||'').replace(/[.!?]+$/,'').trim();
+    if(topic){
+      const described=readerPoint(`The source covers ${topic}.`,150);
+      if(described) return described;
+    }
+    return '';
+  }
+
   function whyFor(x){
     // Why-it-matters text is derived from the individual record, not from a reusable topic label.
     // Prefer a source sentence or a faithful compressed clause that is distinct from the visible claim.
@@ -723,6 +761,46 @@
   }
 
 
+  function whyYouShouldCare(x){
+    let direct=clean(whyFor(x)||'').replace(/;\s*in this paper,[\s\S]*$/i,'.');
+    const IMPACT=/\b(?:matter|affect|determin|shape|change|shift|depend|reli|risk|expos|constrain|limit|restrict|delay|weaken|strengthen|increase|reduce|raise|lower|cost|capacity|capabilit|access|control|compet|collabor|cooperat|partner|fund|invest|scale|supply|security|sovereign|autonom|resilien|fragment|leak|transfer|mobility|talent|skill|deploy|coordina|standard|govern|regulat|market|production|manufactur|infrastructure|compute|knowledge|research|innovation|technology|trade|procurement|shortage|gap|screen|protect)\w*/i;
+    if(direct&&IMPACT.test(direct)) return direct;
+
+    const n=norm(`${x?.title||x?.headline||''} ${x?.summary||''} ${x?.core_message||''} ${x?.watch_theme||''}`);
+    if(/venture capital|scale-up|scaleup|eic accelerator|step scaleup|startup|start-up|late-stage|listing/.test(n))
+      return 'Scale-up finance affects whether European deep-tech firms keep IP, talent, ownership and growth in Europe.';
+    if(/research security|knowledge security|foreign interference|espionage/.test(n))
+      return 'Research-security rules affect who European researchers can work with and what knowledge can cross borders.';
+    if(/brain drain|brain gain|researcher mobility|research talent|scientific talent|doctoral|postdoctoral/.test(n))
+      return 'Researcher mobility changes the skills and scientific capacity available to European labs and universities.';
+    if(/semiconductor|microchip|chips act| chip /.test(` ${n} `))
+      return 'Chip access and production determine whether European R&I can use critical hardware without external restrictions.';
+    if(/compute|supercomput|cloud|ai factory|frontier ai|foundation model|artificial intelligence| ai /.test(` ${n} `))
+      return 'AI and compute access affect whether European teams can build, train and govern frontier technology without foreign bottlenecks.';
+    if(/quantum/.test(n))
+      return 'Quantum capability affects whether Europe can retain strategic research, infrastructure and industrial know-how.';
+    if(/critical raw material|critical mineral|rare earth|battery|advanced material/.test(n))
+      return 'Strategic-material access affects whether European clean-tech and advanced manufacturing can scale reliably.';
+    if(/dual.?use|defen[cs]e|military/.test(n))
+      return 'Dual-use policy can build strategic capability while adding security, export-control and openness constraints.';
+    if(/horizon europe|fp10|framework programme|erc|msca|research funding|funding programme/.test(n))
+      return 'Funding and eligibility rules determine which European capabilities and international research partnerships can be sustained.';
+    if(/science diplomacy|research collaboration|scientific collaboration|international cooperation|partnership/.test(n))
+      return 'Partnership choices determine which research networks, facilities, expertise and markets remain accessible to Europe.';
+    if(/standard|regulat|directive|rule-setting|rule setting|export control|screening/.test(n))
+      return 'Rules and standards determine whether Europe shapes technology markets or adapts to regimes set elsewhere.';
+    if(/industrial policy|industrial|industry|manufactur|productivity|commerciali|innovation ecosystem|procurement/.test(n))
+      return 'Industrial-policy choices affect whether European research turns into domestic production, scale and strategic capability.';
+    if(/data space|interoperab|research infrastructure|federat|data reuse/.test(n))
+      return 'Infrastructure and data rules determine whether European researchers can access and reuse shared assets across borders.';
+    if(/cyber|digital sovereignty|digital identity|platform|telecom|5g|6g/.test(n))
+      return 'Digital and cyber choices affect Europe’s control over research data, infrastructure and critical technology services.';
+    if(/energy|climate|clean tech|cleantech|renewable|nuclear|hydrogen/.test(n))
+      return 'Energy and clean-tech capability affects the cost and resilience of Europe’s research and industrial transition.';
+    return direct||'The source matters because it changes European capability, access, cost, coordination or external dependence.';
+  }
+
+
   function pointFor(x){
     if(x.headline){
       const stored=completeCoreMessage(x.core_message||'');
@@ -893,5 +971,5 @@
     return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,whyFor,fallbackPoint,plainLanguagePoint,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
+  return {TOPICS,OTHER,topicFor,pointFor,whatForEuRiGeo,whyFor,whyYouShouldCare,fallbackPoint,plainLanguagePoint,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
 });
