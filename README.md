@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar V17.13.15
+# R&I Geopolitics Radar V17.13.20
 
 V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
@@ -234,3 +234,12 @@ This is a presentation/export repair only: no fresh scan, no Radar-data change, 
 - Official EU primary sources are deliberately ranked highest for this EU R&I geopolitics use case. The score is transparent and documented on the workbook's `Method` sheet.
 - The workbook is not an input to the scanner. Scanner admission, scoring, Matrix classification, source rotation and evidence logic are unchanged.
 - V17.13.17 workflow security hardening and the 6-hour scan schedule remain unchanged.
+
+
+## V17.13.20 — source merit becomes a shared evidence-weight layer
+
+The source-merit ranking is no longer confined to Stuff. The main Radar, Read at least this, Evidence browser, both Matrix views, Risks & opportunities, Literature used and Stuff now expose the same plain evidence-weight labels: **Highest**, **Very strong**, **Strong**, **Useful** and **Supporting**.
+
+The weighting is deliberately downstream of the scanner. It does not decide admission and it does not change a Matrix cell. It helps the reader judge how hard to lean on a finding. In the fast decision views it also helps stronger evidence outrank weaker evidence when the underlying Matrix severity/relevance is otherwise comparable. Read at least this still selects by issue fit first, then source merit; Literature used remains alphabetical but shows the weight beside each source.
+
+The six-hour schedule, security credential separation and V17.13.19 hard-stop limits remain unchanged.

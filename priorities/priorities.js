@@ -1,12 +1,13 @@
 (function(root,factory){
-  if(typeof module==='object'&&module.exports) module.exports=factory(require('../frontier/frontier.js'),require('../briefing/insights.js'));
-  else root.RadarPriorities=factory(root.SovereigntyFrontier,root.RadarInsights);
-})(typeof globalThis!=='undefined'?globalThis:this,function(Frontier,Insights){
+  if(typeof module==='object'&&module.exports) module.exports=factory(require('../frontier/frontier.js'),require('../briefing/insights.js'),require('../source_merit.js'));
+  else root.RadarPriorities=factory(root.SovereigntyFrontier,root.RadarInsights,root.RadarSourceMerit);
+})(typeof globalThis!=='undefined'?globalThis:this,function(Frontier,Insights,Merit){
   'use strict';
 
   function structuralScore(x){
     if(!x) return 0;
-    return (x.triage?.total||0)*10 + (x.questionCount||0)*4 + (x.confidence||0)/10 + Math.min(8,x.materiality||0);
+    const merit=x.sourceMerit?.score||(Merit?.scoreFor?Merit.scoreFor(x):0);
+    return (x.triage?.total||0)*10 + (x.questionCount||0)*4 + (x.confidence||0)/10 + Math.min(8,x.materiality||0) + merit/2;
   }
 
   function topicKey(x){

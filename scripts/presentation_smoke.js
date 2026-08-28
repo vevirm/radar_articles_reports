@@ -19,7 +19,7 @@ try {
   process.exit(1);
 }
 
-for (const rel of ['glossary/glossary.js','briefing/insights.js','frontier/frontier.js','priorities/priorities.js']) {
+for (const rel of ['source_merit.js','glossary/glossary.js','briefing/insights.js','frontier/frontier.js','priorities/priorities.js']) {
   try {
     new vm.Script(read(rel), {filename: rel});
     ok(`${rel} syntax`);
@@ -43,9 +43,14 @@ try {
 }
 
 try {
+  globalThis.RadarSourceMerit = require(path.join(root, 'source_merit.js'));
   globalThis.RadarInsights = require(path.join(root, 'briefing/insights.js'));
   globalThis.SovereigntyFrontier = require(path.join(root, 'frontier/frontier.js'));
   const RadarPriorities = require(path.join(root, 'priorities/priorities.js'));
+
+  const sampleMerit=RadarSourceMerit.forItem((radar.strand_a||[])[0]||{});
+  if(!sampleMerit||!Number.isFinite(sampleMerit.score)||!sampleMerit.label) fail('source merit helper did not score a radar item');
+  else ok(`source merit helper scores radar items (${sampleMerit.label} ${sampleMerit.score}/100)`);
 
   const insights = RadarInsights.buildResearchInsights(radar);
   const weak = RadarInsights.buildSignals(radar);
@@ -57,7 +62,8 @@ try {
   if (!Array.isArray(weak)) fail('Weak signals builder did not return an array');
   else ok(`Evidence browser builds ${weak.length} weak signals`);
   if (!frontier || !Array.isArray(frontier.signals) || !frontier.signals.length) fail('Matrix produced no qualifying frontier signals');
-  else ok(`Matrix builds ${frontier.signals.length} qualifying signals`);
+  else if(!frontier.signals.some(x=>x.sourceMerit&&Number.isFinite(x.sourceMerit.score))) fail('Matrix signals are missing source-merit weights');
+  else ok(`Matrix builds ${frontier.signals.length} qualifying signals with evidence weights`);
   if (!priorities || !Array.isArray(priorities.risks) || !Array.isArray(priorities.opportunities)) fail('Risks & opportunities builder failed');
   else ok(`Risks & opportunities builds ${priorities.opportunities.length} opportunities / ${priorities.risks.length} risks`);
 } catch (e) {
@@ -88,6 +94,13 @@ else if (!/fastReaderText/.test(prioritiesHtml)) fail('Risks & opportunities is 
 else ok('Risks & opportunities uses direct plain-language wording');
 if (RadarInsights.fastReaderText('Frontier compute, research security, dual-use and procurement.') !== 'Top-end computing power, protecting sensitive research, usable for civilian and military purposes and buying.') fail('fastReaderText recurring-term rewrite failed');
 else ok('fastReaderText rewrites recurring specialist terms');
+
+for(const rel of ['index.html','read/index.html','briefing/index.html','frontier/index.html','frontier/quick/index.html','priorities/index.html','literature/index.html','stuff/index.html']){
+  const html=read(rel);
+  if(!/source_merit\.js/.test(html)) fail(`${rel} is missing the shared source-merit layer`);
+  else if(!/Evidence:/.test(html)) fail(`${rel} does not surface evidence weight`);
+  else ok(`${rel} surfaces source merit`);
+}
 
 const frontierHtml = read('frontier/index.html');
 const claim = frontierHtml.match(/function\s+claimText\s*\([^)]*\)\s*\{[^}]*\}/);

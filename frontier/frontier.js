@@ -1,8 +1,9 @@
 (function(root,factory){
-  const api=factory(root.RadarInsights);
+  const merit=(typeof module==='object'&&module.exports)?require('../source_merit.js'):root.RadarSourceMerit;
+  const api=factory(root.RadarInsights,merit);
   if(typeof module==='object'&&module.exports) module.exports=api;
   root.SovereigntyFrontier=api;
-})(typeof globalThis!=='undefined'?globalThis:this,function(RadarInsights){
+})(typeof globalThis!=='undefined'?globalThis:this,function(RadarInsights,SourceMerit){
   'use strict';
 
   const ROWS=[
@@ -488,6 +489,7 @@
   function classifySignal(x,data,index,now=new Date()){
     if(!x||typeof x!=='object') return null;
     const evidence=evidenceFor(x,index);
+    const meritApi=SourceMerit||null;
     const reviewedMatrix=clean(x._matrixSource||evidence?.matrix_classification_source||'')==='reviewed_underlying_source';
     const rows=rowScores(x,evidence);
     const questions=questionScores(x,evidence),flags=questionFlags(questions);
@@ -586,6 +588,19 @@
     const recency=recencyScore(x,now)+(x.new_this_scan?1:0);
     const overall=triage+multi+crossDirection+columnWeight+recency;
     const cell=CELL_NAMES[row.id][column.id];
+    const meritInput={
+      title:clean(x._origin==='Evidence signal' ? (evidence?.title||x.title||candidateWhat(x)) : (x.headline||x.title||candidateWhat(x))),
+      authors:clean(x._origin==='Evidence signal' ? (evidence?.authors||'') : (x.authors||'')),
+      source:sourceFor(x),
+      date:dateFor(x),
+      link:linkFor(x),
+      itemType:clean(x._origin==='Evidence signal' ? (evidence?.type||x.type||'') : (x.type||x.signal_kind||x.signal_type||'')),
+      sourceTier:clean(x._origin==='Evidence signal' ? (evidence?.source_tier||x.source_tier||'') : (x.source_tier||'')),
+      euRelevance:clean(x._origin==='Evidence signal' ? (evidence?.eu_relevance||x.eu_relevance||'') : (x.eu_relevance||'')),
+      origin:x._origin||'Weak signal',
+      strand:clean(x.strand||'')
+    };
+    const sourceMerit=meritApi?.forItem?meritApi.forItem(meritInput):null;
     return {
       id:norm(linkFor(x)||candidateWhat(x)),
       title:candidateWhat(x),
@@ -612,6 +627,9 @@
       materiality,euLink,overall,
       strongCandidate:qCount>=2,
       confidence:clamp(Math.round((Math.min(6,materiality)/6*.35 + Math.min(6,euLink)/6*.2 + Math.min(3,qCount)/3*.25 + Math.min(8,Math.abs(direction.autonomy)+Math.abs(direction.performance))/8*.2)*100),35,96),
+      sourceTier:meritInput.sourceTier,
+      euRelevance:meritInput.euRelevance,
+      sourceMerit,
       discoveryProvenance:clean(x._provenance||evidence?.discovery_provenance||''),
       quadrantClaimed:clean(x._matrixClaimed||evidence?.quadrant_claimed||''),
       quadrantImplied:clean(x._matrixQuadrant||evidence?.quadrant_implied||column.id||'')
@@ -788,10 +806,10 @@
     const index=buildEvidenceIndex(data);
     const raw=dedupeCandidates([...weakCandidates(data),...evidenceCandidates(data)]);
     const signals=raw.map(x=>classifySignal(x,data,index,now)).filter(Boolean);
-    signals.sort((a,b)=>b.overall-a.overall||b.triage.total-a.triage.total||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
+    signals.sort((a,b)=>b.overall-a.overall||b.triage.total-a.triage.total||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0))||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
     const cells={};for(const r of ROWS){cells[r.id]={};for(const c of COLUMNS)cells[r.id][c.id]=[]}
     for(const s of signals)cells[s.row.id][s.column.id].push(s);
-    for(const r of ROWS)for(const c of COLUMNS)cells[r.id][c.id].sort((a,b)=>b.triage.total-a.triage.total||b.overall-a.overall);
+    for(const r of ROWS)for(const c of COLUMNS)cells[r.id][c.id].sort((a,b)=>b.triage.total-a.triage.total||b.overall-a.overall||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0)));
     const top=signals.slice(0,7);
     const [topRow,topRowCount]=concentration(signals,x=>x.row.name);
     const [topColumn,topColumnCount]=concentration(signals,x=>`${x.column.id}. ${x.column.name}`);
