@@ -56,7 +56,7 @@ The rule is: state the substantive point in ordinary language, omit biography/me
 
 ## 6. Primary site components
 
-- `read/` — eight stable issues, expandable branches/subissues, live evidence below them.
+- `read/` — live issue maps rebuilt from the current admitted material; issue count/order/branches can change after each successful scan.
 - `/` — main A/B/C radar.
 - `frontier/quick/` — simple 4×4 Matrix with claims and counts only.
 - `frontier/` — full Matrix with evidence/source detail.
@@ -110,7 +110,7 @@ The source planner now has two bounded preference lanes inside the existing rota
 
 Matrix coverage is now a distribution-aware discovery allocator. The catch-up target is the larger of the current upper-quartile cell count and 55% of the richest cell, capped at 12. Thin rows and columns add scarcity pressure. Every sparse target receives at least one scholarly query before repeats are assigned. Empty cells lead deepening, but other sparse cells stay interleaved so one stubborn empty cell cannot monopolise the run. Admission rules are unchanged.
 
-The reader palette is black, white and red. The landing page shows the eight recurring issues before the evidence feed and exposes the relation between paired views such as Radar main/evidence browser and Matrix short/full.
+The reader palette is black, white and red. The landing page shows the current leading issues derived from the live radar state before the evidence feed and exposes the relation between paired views such as Radar main/evidence browser and Matrix short/full.
 
 
 ### V17.13.6 Matrix coverage contract

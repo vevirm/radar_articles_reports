@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar V17.13.20
+# R&I Geopolitics Radar V17.13.21
 
 V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
@@ -10,22 +10,13 @@ This is not a looser relevance gate. The non-literal route needs at least **two 
 
 ## What readers see
 
-### 1. Read at least this = an issue tree
+### 1. Read at least this = a live issue tree
 
-`read/` now starts with **eight stable main issues**, not a long briefing:
+`read/` no longer carries a fixed public list of eight issues. On every page load it rebuilds the leading issue set from the current admitted Strand-A / Matrix evidence and current weak signals in `radar.json`.
 
-1. People & knowledge
-2. Compute & research infrastructure
-3. Chips, materials & supply chains
-4. Firms & scale
-5. Rules, standards & security
-6. International partnerships
-7. Strategic technology races
-8. Funding & programmes
+The reader layer uses a broader set of topic lenses only to group evidence coherently; the **visible issue count, selection, order, branches and subissues are data-driven**. A topic can rise, fall, disappear or appear as the underlying four-month corpus changes. The current issue maps are therefore a view of what the latest material is concentrated on, not a permanent taxonomy.
 
-Each issue is shown immediately as a connected branch map: main issue → branches → individual subissues. All eight maps render on arrival; there is no collapse/open control hiding them. Current radar findings sit below each map.
-
-The issue cards also reuse the Glossary in a compact form. Relevant specialist terms get a one-line **Plain English** explanation in the card, and dotted-underlined terms expose the same short definition on hover. The full Glossary remains available when the longer Radar-specific explanation is useful.
+Each visible issue is shown immediately as a connected branch map: current leading issue → strongest related branches → current source-backed findings. Source merit breaks ties after issue fit, but it does not change admission or Matrix placement. All labels and current findings pass through the plain-language reader boundary.
 
 ### 2. Simpler Matrix
 
@@ -237,6 +228,11 @@ This is a presentation/export repair only: no fresh scan, no Radar-data change, 
 
 
 ## V17.13.20 — source merit becomes a shared evidence-weight layer
+
+
+### V17.13.21 — live issue discovery
+
+`Read at least this` and the landing-page issue strip now rebuild their issue list from the current radar material. The fixed eight-issue public structure is removed. The scanner admission rules are unchanged; this is a downstream reader reorganisation only.
 
 The source-merit ranking is no longer confined to Stuff. The main Radar, Read at least this, Evidence browser, both Matrix views, Risks & opportunities, Literature used and Stuff now expose the same plain evidence-weight labels: **Highest**, **Very strong**, **Strong**, **Useful** and **Supporting**.
 

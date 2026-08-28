@@ -76,15 +76,8 @@
           </div>
           <button id="lock" class="lock">Lock radar</button>
         </div>
-        <div class="issue-splash" aria-label="Eight recurring issues">
-          <a href="read/"><span class="num">01</span><strong>People &amp; knowledge</strong></a>
-          <a href="read/"><span class="num">02</span><strong>Compute &amp; research infrastructure</strong></a>
-          <a href="read/"><span class="num">03</span><strong>Chips, materials &amp; supply chains</strong></a>
-          <a href="read/"><span class="num">04</span><strong>Firms &amp; scale</strong></a>
-          <a href="read/"><span class="num">05</span><strong>Rules, standards &amp; security</strong></a>
-          <a href="read/"><span class="num">06</span><strong>International partnerships</strong></a>
-          <a href="read/"><span class="num">07</span><strong>Strategic technology races</strong></a>
-          <a href="read/"><span class="num">08</span><strong>Funding &amp; programmes</strong></a>
+        <div class="issue-splash" id="currentIssues" aria-label="Leading issues in the current radar">
+          <a href="read/"><span class="num">…</span><strong>Loading current issues</strong></a>
         </div>
       </div>
     </header>
@@ -96,7 +89,7 @@
         <div class="journey" role="navigation" aria-label="Reader path through the radar">
           <a class="journey-step read" href="read/">
             <span class="step">1 · Orient</span>
-            <div><strong>Read at least this</strong><p>8 issue maps: main issue → branches → subissues.</p></div>
+            <div><strong>Read at least this</strong><p id="journeyReadText">Live issue maps rebuilt from the latest admitted material.</p></div>
           </a>
           <div class="journey-arrow" aria-hidden="true">→</div>
           <a class="journey-step radar" href="#radar">
@@ -126,7 +119,7 @@
     <section class="page-map" aria-label="Radar pages"><div class="wrap page-map-inner">
       <div class="page-map-title">Choose a view</div>
       <div class="page-map-grid">
-        <div class="page-map-card"><b>Read at least this</b><a href="read/">8 issue maps →</a></div>
+        <div class="page-map-card"><b>Read at least this</b><a id="pageReadLink" href="read/">Current issue maps →</a></div>
         <div class="page-map-card current"><b>Radar</b><span>Main</span><span class="arrow">↔</span><a href="briefing/">Evidence browser</a></div>
         <div class="page-map-card"><b>Matrix</b><a href="frontier/quick/">Short</a><span class="arrow">→</span><a href="frontier/">Full evidence</a></div>
         <div class="page-map-card"><b>Decisions</b><a href="priorities/">Risks &amp; opportunities →</a></div>
@@ -146,8 +139,8 @@
 
     <div class="wrap" id="radar">
       <section class="minimum-read" aria-label="Minimum useful read">
-        <div><div class="label">Read at least this</div><h2>Europe’s R&amp;I problem is increasingly a control problem, not only an invention problem.</h2><p>Frontier compute, conversion of research into scaled firms, and fragmented research-security machinery are the three structural bottlenecks to keep in view.</p></div>
-        <a href="read/?v=17.13.14">Open the 1-minute read →</a>
+        <div><div class="label">Read at least this</div><h2 id="minimumReadTitle">Reading the latest issue pattern…</h2><p id="minimumReadText">The summary is rebuilt from the current admitted material.</p></div>
+        <a href="read/?v=17.13.21">Open the 1-minute read →</a>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
@@ -187,8 +180,9 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="source_merit.js?v=17.13.20"></script>
-<script src="briefing/insights.js?v=17.13.20"></script>
+<script src="source_merit.js?v=17.13.21"></script>
+<script src="briefing/insights.js?v=17.13.21"></script>
+<script src="read/issues.js?v=17.13.21"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:12}};
@@ -327,6 +321,20 @@ function cItem(x,i){
   return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}${meritTag(x)}</div></div>${claimButton(x,id)}${biblio(x,'Source')}${abstractPanel(x,id)}${allDetails(x)}${whatLine(x)}${whyLine(x)}<div class="card-foot"><span>${esc([x.signal_kind||x.signal_type||'Weak signal',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
+function renderCurrentIssues(d){
+  const A=d.strand_a||[],C=d.strand_c||[],F=d.frontier_evidence||[];
+  const issues=globalThis.RadarIssues?.build?RadarIssues.build([...A,...F,...C],{minIssues:5,maxIssues:9}):[];
+  const splash=document.getElementById('currentIssues');
+  if(splash)splash.innerHTML=issues.length?issues.map((x,i)=>`<a href="read/"><span class="num">${String(i+1).padStart(2,'0')}</span><strong>${esc(globalThis.RadarInsights?.fastReaderText?.(x.title)||x.title)}</strong></a>`).join(''):'<a href="read/"><span class="num">—</span><strong>No stable issue pattern yet</strong></a>';
+  const summary=globalThis.RadarIssues?.summary?RadarIssues.summary(issues):null;
+  if(summary){
+    const t=document.getElementById('minimumReadTitle'),p=document.getElementById('minimumReadText');
+    if(t)t.textContent=globalThis.RadarInsights?.fastReaderText?.(summary.title)||summary.title;
+    if(p)p.textContent=globalThis.RadarInsights?.fastReaderText?.(summary.text)||summary.text;
+  }
+  const jr=document.getElementById('journeyReadText');if(jr)jr.textContent=issues.length?`${issues.length} live issue maps rebuilt from the latest admitted material.`:'Live issue maps rebuilt from the latest admitted material.';
+  const pr=document.getElementById('pageReadLink');if(pr)pr.textContent=issues.length?`${issues.length} current issue maps →`:'Current issue maps →';
+}
 function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
@@ -338,7 +346,7 @@ async function loadRadar(){
     const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
     document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${d.scan_health==="ok"?"healthy":"degraded"}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent="Last scan · "+(d.last_updated?fmtDate(d.last_updated):"pending");
-    showNote("rotationNote",sr.rotation_note||"");showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");render();
+    showNote("rotationNote",sr.rotation_note||"");showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
   }catch(e){document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>

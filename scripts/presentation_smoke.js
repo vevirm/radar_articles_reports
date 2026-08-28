@@ -19,7 +19,7 @@ try {
   process.exit(1);
 }
 
-for (const rel of ['source_merit.js','glossary/glossary.js','briefing/insights.js','frontier/frontier.js','priorities/priorities.js']) {
+for (const rel of ['source_merit.js','glossary/glossary.js','briefing/insights.js','read/issues.js','frontier/frontier.js','priorities/priorities.js']) {
   try {
     new vm.Script(read(rel), {filename: rel});
     ok(`${rel} syntax`);
@@ -47,6 +47,7 @@ try {
   globalThis.RadarInsights = require(path.join(root, 'briefing/insights.js'));
   globalThis.SovereigntyFrontier = require(path.join(root, 'frontier/frontier.js'));
   const RadarPriorities = require(path.join(root, 'priorities/priorities.js'));
+  vm.runInThisContext(read('read/issues.js'), {filename:'read/issues.js'});
 
   const sampleMerit=RadarSourceMerit.forItem((radar.strand_a||[])[0]||{});
   if(!sampleMerit||!Number.isFinite(sampleMerit.score)||!sampleMerit.label) fail('source merit helper did not score a radar item');
@@ -56,7 +57,10 @@ try {
   const weak = RadarInsights.buildSignals(radar);
   const frontier = SovereigntyFrontier.buildFrontier(radar);
   const priorities = RadarPriorities.buildPriorityView(radar);
+  const liveIssues = globalThis.RadarIssues?.build?.([...(radar.strand_a||[]),...(radar.frontier_evidence||[]),...(radar.strand_c||[])], {minIssues:5,maxIssues:9}) || [];
 
+  if (!Array.isArray(liveIssues) || liveIssues.length < 4) fail('Read at least this produced no usable live issue set');
+  else ok(`Read at least this builds ${liveIssues.length} live issue maps from current material`);
   if (!Array.isArray(insights) || !insights.length) fail('Evidence browser produced no research groups');
   else ok(`Evidence browser builds ${insights.length} research groups`);
   if (!Array.isArray(weak)) fail('Weak signals builder did not return an array');
@@ -82,7 +86,13 @@ for (const rel of ['index.html','read/index.html','briefing/index.html','frontie
 }
 
 const readHtml = read('read/index.html');
+const mainHtml = read('index.html');
 const quickHtml = read('frontier/quick/index.html');
+if (/const\s+ISSUE_MAP\s*=/.test(readHtml)) fail('Read at least this still contains a fixed ISSUE_MAP');
+else if (!/RadarIssues\.build/.test(readHtml)) fail('Read at least this is not using the live issue builder');
+else ok('Read at least this has no fixed public issue map');
+if (!/read\/issues\.js/.test(mainHtml) || !/renderCurrentIssues/.test(mainHtml)) fail('Landing page is not using live issue discovery');
+else ok('Landing page uses the same live issue discovery');
 const prioritiesHtml = read('priorities/index.html');
 if (/RadarGlossary|quick-terms/.test(readHtml)) fail('Read at least this still depends on contextual glossary help');
 else if (!/fastReaderText/.test(readHtml)) fail('Read at least this is missing the fast-reader plain-language boundary');

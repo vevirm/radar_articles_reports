@@ -14,71 +14,49 @@
 </style>
 </head>
 <body>
-<header><div class="wrap top"><div><div class="kicker">EU R&amp;I × geopolitics · read at least this</div><h1>Eight issues. All branches open.</h1><p class="lede">Every issue map is open on arrival: main issue → branches → subissues.</p></div><nav class="nav" aria-label="Primary site sections"><a class="primary" href="./" aria-current="page">Read at least this</a><a href="../">Radar</a><a href="../frontier/quick/">Matrix · short</a><a href="../frontier/">Matrix · full</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../literature/">Literature used</a><a href="../stuff/">Stuff</a><a href="../glossary/">Glossary</a></nav></div></header>
+<header><div class="wrap top"><div><div class="kicker">EU R&amp;I × geopolitics · read at least this</div><h1>What matters in the latest scan.</h1><p class="lede">The issue maps are rebuilt from the current admitted material: leading issue → related branches → current findings.</p></div><nav class="nav" aria-label="Primary site sections"><a class="primary" href="./" aria-current="page">Read at least this</a><a href="../">Radar</a><a href="../frontier/quick/">Matrix · short</a><a href="../frontier/">Matrix · full</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../literature/">Literature used</a><a href="../stuff/">Stuff</a><a href="../glossary/">Glossary</a></nav></div></header>
 <div class="statebar"><div class="wrap state" id="state"><span class="chip">Loading current radar…</span></div></div>
 <main class="wrap">
-<section class="intro"><div><h2>Start with the eight recurring issues.</h2><p>All eight charts are visible immediately. The evidence changes each scan; the issue structure stays stable. Wording is kept plain so the page can be scanned quickly.</p></div></section>
+<section class="intro"><div><h2 id="introTitle">Finding the strongest current issue patterns…</h2><p id="introText">The number, order and structure of these maps can change after each successful scan. Wording is kept plain so the page can be scanned quickly.</p></div></section>
 <div class="issue-list" id="issues"></div>
 <div class="next"><a href="../frontier/quick/">Matrix · short →</a><a href="../frontier/">Matrix · full →</a><a href="../">Radar →</a><a href="../literature/">Literature used →</a></div>
-<p class="note">The same four-month radar state feeds these maps and the Matrix. When several sources fit an issue equally well, stronger source merit is shown first.</p>
+<p class="note">These issue maps are derived from the same four-month radar state. They do not change admission or Matrix placement; they reorganise already-admitted material for a fast current read. Stronger source merit is shown first when findings are otherwise comparable.</p>
 </main>
 <footer><div class="wrap">R&amp;I × Geopolitics Radar · issue maps · <span id="footstate">current state</span></div></footer>
-<script src="../source_merit.js?v=17.13.20"></script>
-<script src="../briefing/insights.js?v=17.13.20"></script>
+<script src="../source_merit.js?v=17.13.21"></script>
+<script src="../briefing/insights.js?v=17.13.21"></script>
+<script src="issues.js?v=17.13.21"></script>
 <script>
-const ISSUE_MAP=[
- {title:'People & knowledge',line:'Who Europe can attract, keep, connect and protect.',terms:['talent','researcher','university','career','brain','mobility','knowledge security','open science','science diplomacy'],branches:[
-  ['Attracting and keeping researchers','attracting and keeping people · researchers moving between countries and sharing knowledge · stable careers'],
-  ['Protecting sensitive research','outside attempts to influence or steal · careful handling of sensitive partnerships · open research versus protection'],
-  ['International research links','research ties between countries · access through partners · international research networks'],
-  ['Research careers','PhD and early-career paths · grant conditions · stable careers'] ]},
- {title:'Computing power & research facilities',line:'The tools and facilities that make advanced research possible.',terms:['compute','cloud','infrastructure','supercomputer','gigafactor','data centre','data center','research infrastructure','energy'],branches:[
-  ['Available computing power','large AI computing centres and supercomputers · access to the most advanced AI models · energy and data centres'],
-  ['Shared research facilities','large facilities · shared data systems · access across countries'],
-  ['Dependence on outside systems','foreign platforms · hard-to-replace weak points · ability to keep working through disruption · alternatives'],
-  ['Data access & systems working together','shared data systems · access rules · linked systems run by different organisations · reuse across countries'] ]},
- {title:'Chips, materials & supply chains',line:'The physical inputs behind research and strategic technologies.',terms:['semiconductor','chip','material','supply chain','critical raw','hardware','component'],branches:[
-  ['Chips','design and chip making · research ability · openly shared hardware designs'],
-  ['Hard-to-replace inputs','materials · equipment · specialised parts'],
-  ['Keeping supplies flowing','reliance on one supplier · limits on exports · alternatives'] ]},
- {title:'Firms & growth',line:'Whether European research becomes lasting European strength.',terms:['venture capital','scale-up','startup','start-up','commercialisation','commercialization','firm','investment','procurement','industrial'],branches:[
-  ['From lab to company','turning research into products and businesses · new companies from research · public buying and first customers'],
-  ['Funding for growth','funding for growing companies · reliance on foreign money · stock-market listings and headquarters'],
-  ['Ability to produce','large-scale production · civilian and military markets · manufacturing depth'],
-  ['Keeping value in Europe','where inventions are owned · headquarters · stock-market listings · high-value jobs'] ]},
- {title:'Rules & security',line:'How fast Europe can decide, work together and shape common rules.',terms:['standard','regulation','governance','security','export control','research security','rule','liability','act'],branches:[
-  ['Setting common rules','shared rules for how things work · influence over rules · international rule-making'],
-  ['Protecting research and technology','limits on technology sales abroad · checks on foreign investment · safer partnerships'],
-  ['Decision speed','countries acting separately · delays putting rules into practice · EU countries working together'],
-  ['Power over the rules','who writes the common rules · whose methods become normal · who can enforce them'] ]},
- {title:'International partnerships',line:'Where cooperation creates access, influence or dependence.',terms:['china','united states','u.s.','us ','india','international cooperation','partnership','association','transatlantic','diplomacy'],branches:[
-  ['EU–US','research links · access to technology · one-sided reliance'],
-  ['EU–China','cooperation and reducing risky dependence · links · protecting sensitive research'],
-  ['Other partners','India and other partners · spreading reliance · access to EU programmes'],
-  ['Research networks','formal programmes · links between facilities · research and business links'] ]},
- {title:'Technology races',line:'Where research strength becomes economic or political power.',terms:['artificial intelligence',' ai ','quantum','biotech','biotechnology','critical technology','technology sovereignty','technological sovereignty'],branches:[
-  ['AI and AI for science','faster research · access to AI models and computing power · ability to compete'],
-  ['Quantum and chips','scientific leadership · ability to produce · common rules'],
-  ['Biotech and key technologies','research strength · security · turning research into production'],
-  ['Technologies behind essential systems','energy · communications · space · sensors'],
-  ['Shared weak points across technologies','computing power · researchers · common rules · funding'] ]},
- {title:'Funding & programmes',line:'How Europe chooses what to fund, and under what conditions.',terms:['horizon europe','fp10','funding','framework programme','erc','msca','eic','competitiveness fund','programme'],branches:[
-  ['Main EU research programmes','Horizon Europe and FP10 · programme design · international participation'],
-  ['Funding mix','basic research · funding for public goals · industry and growth funding'],
-  ['Participation across Europe','helping lower-participation countries take part · member-country access · where research strength is concentrated'],
-  ['Funding conditions','security conditions · who can take part · openly shared research · rules for civilian and military work'] ]}
-];
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function p(s){return esc((window.RadarInsights&&RadarInsights.fastReaderText(s))||s)}
-function hay(x){return ['title','summary','core_message','relevance_note','watch_theme','headline','what','why_it_matters'].map(k=>String(x?.[k]||'')).join(' ').toLowerCase()}
-function score(x,terms){const h=hay(x);let topic=0;for(const t of terms)if(h.includes(t))topic+=1;const d=Date.parse(x.date||0),merit=globalThis.RadarSourceMerit?.scoreFor?RadarSourceMerit.scoreFor(x):0;return {topic,merit,date:Number.isFinite(d)?d:0}}
-function bestFor(items,terms,n=2){return items.map(x=>({s:score(x,terms),x})).filter(z=>z.s.topic>0).sort((a,b)=>b.s.topic-a.s.topic||b.s.merit-a.s.merit||b.s.date-a.s.date).slice(0,n).map(z=>z.x)}
-function claim(x){return (window.RadarInsights&&RadarInsights.pointFor(x))||x.core_message||x.title||'Source finding unavailable.'}
+function claim(x){return (window.RadarInsights&&RadarInsights.pointFor(x))||x.core_message||x.why_it_matters||x.title||x.headline||x.what||'Source finding unavailable.'}
 function meritBadge(x){const m=globalThis.RadarSourceMerit?.forItem?RadarSourceMerit.forItem(x):null;return m?`<span class="merit-badge ${esc(m.tone)}">Evidence: ${esc(m.label)}</span>`:''}
-function subNodes(text){return String(text||'').split(' · ').filter(Boolean).map(s=>`<div class="sub-node">${p(s)}</div>`).join('')}
-function chartHtml(issue){return `<div class="issue-chart"><div class="chart-main">${p(issue.title)}</div><div class="chart-branches">${issue.branches.map(b=>`<div class="chart-branch"><div class="branch-node">${p(b[0])}</div><div class="sub-stack">${subNodes(b[1])}</div></div>`).join('')}</div></div>`}
-function issueHtml(issue,i,items){const best=bestFor(items,issue.terms,2);return `<section class="issue"><div class="issue-head"><div><div class="issue-number">Main issue ${String(i+1).padStart(2,'0')}</div><div class="issue-title">${p(issue.title)}</div><p class="issue-line">${p(issue.line)}</p></div><div class="branch-preview">${issue.branches.map(b=>`<span class="branch-pill">${p(b[0])}</span>`).join('')}</div></div><div class="chart-wrap">${chartHtml(issue)}${best.length?`<div class="issue-evidence"><div class="label">Current evidence</div><ul>${best.map(x=>`<li>${x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">${p(claim(x))} ↗</a>`:p(claim(x))}${meritBadge(x)}</li>`).join('')}</ul></div>`:''}</div></section>`}
-(async()=>{try{const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('radar unavailable');const d=await r.json();const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],F=d.frontier_evidence||[];const items=[...A,...F,...C];document.getElementById('issues').innerHTML=ISSUE_MAP.map((x,i)=>issueHtml(x,i,items)).join('');const upd=(d.last_updated||'').slice(0,10)||'unknown';document.getElementById('state').innerHTML=[`Four-month radar · ${esc(d.corpus_start_date||'')} → ${esc(upd)}`,`${A.length} main findings`,`${B.length} future-focused items`,`${C.length} early signals`].map(t=>`<span class="chip">${t}</span>`).join('');document.getElementById('footstate').textContent=`radar state ${upd}`;}catch(e){document.getElementById('issues').innerHTML=ISSUE_MAP.map((x,i)=>issueHtml(x,i,[])).join('');document.getElementById('state').innerHTML='<span class="chip">Issue maps available; live findings could not load.</span>';}})();
+function evidenceLink(x,extra=''){const body=p(claim(x));return `${x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">${body} ↗</a>`:body}${extra?` ${extra}`:''}`}
+function chartHtml(issue){
+  return `<div class="issue-chart"><div class="chart-main">${p(issue.title)}</div><div class="chart-branches">${issue.branches.map(b=>`<div class="chart-branch"><div class="branch-node">${p(b.title)}</div><div class="sub-stack">${b.evidence.map(x=>`<div class="sub-node">${evidenceLink(x)}</div>`).join('')}</div></div>`).join('')}</div></div>`;
+}
+function issueHtml(issue,i){
+  const evidence=issue.evidence||[];
+  return `<section class="issue"><div class="issue-head"><div><div class="issue-number">Current issue ${String(i+1).padStart(2,'0')} · ${issue.count} matching items</div><div class="issue-title">${p(issue.title)}</div><p class="issue-line">${p(issue.line)}</p></div><div class="branch-preview">${issue.branches.map(b=>`<span class="branch-pill">${p(b.title)}</span>`).join('')}</div></div><div class="chart-wrap">${chartHtml(issue)}${evidence.length?`<div class="issue-evidence"><div class="label">Strong current evidence</div><ul>${evidence.map(x=>`<li>${evidenceLink(x,meritBadge(x))}</li>`).join('')}</ul></div>`:''}</div></section>`;
+}
+(async()=>{
+  try{
+    const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('radar unavailable');
+    const d=await r.json(),A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],F=d.frontier_evidence||[];
+    const items=[...A,...F,...C];
+    const issues=globalThis.RadarIssues?.build?RadarIssues.build(items,{minIssues:5,maxIssues:9}):[];
+    document.getElementById('issues').innerHTML=issues.length?issues.map((x,i)=>issueHtml(x,i)).join(''):'<section class="issue"><div class="issue-head"><div><div class="issue-title">No stable issue pattern yet</div><p class="issue-line">Open the Radar evidence while the next scan builds the picture.</p></div></div></section>';
+    document.getElementById('introTitle').textContent=issues.length?`${issues.length} leading issues in the current material.`:'No stable issue pattern yet.';
+    document.getElementById('introText').textContent='This list is rebuilt from admitted evidence after every successful scan. Issues can appear, disappear, merge, split or move in the order.';
+    const upd=(d.last_updated||'').slice(0,10)||'unknown';
+    document.getElementById('state').innerHTML=[`Four-month radar · ${esc(d.corpus_start_date||'')} → ${esc(upd)}`,`${issues.length} current issue maps`,`${A.length} main findings`,`${B.length} future-focused items`,`${C.length} early signals`].map(t=>`<span class="chip">${t}</span>`).join('');
+    document.getElementById('footstate').textContent=`radar state ${upd} · ${issues.length} current issues`;
+  }catch(e){
+    document.getElementById('issues').innerHTML='<section class="issue"><div class="issue-head"><div><div class="issue-title">Current issue maps could not load</div><p class="issue-line">The page needs the current radar.json because the issue structure is no longer fixed.</p></div></div></section>';
+    document.getElementById('introTitle').textContent='Current issue maps need the live radar state.';
+    document.getElementById('state').innerHTML='<span class="chip">Live findings could not load; no fixed fallback issue list is used.</span>';
+  }
+})();
 </script>
 </body>
 </html>
