@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>EU R&amp;I · Risks &amp; Opportunities</title>
+<style>
+:root{--ink:#111111;--muted:#667085;--line:#dde3ea;--bg:#f7f8fa;--card:#fff;--navy:#0b0b0b;--red:#96333d;--accent2:#a10014}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}a{color:inherit}.wrap{width:min(calc(100% - 30px),980px);margin:auto}header{background:var(--navy);color:#fff;padding:25px 0}.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#b7c4d5;font-weight:800}h1{font-size:clamp(32px,6vw,50px);line-height:1;margin:6px 0 7px;letter-spacing:-.04em}.lede{color:#d0d9e5;max-width:560px;margin:0}.nav{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.nav a{text-decoration:none;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;white-space:nowrap}.nav a.primary{background:#fff;color:var(--navy);border-color:#fff}main{padding:24px 0 58px}.summary{font-size:11px;color:var(--muted);margin-bottom:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 18px}.panel h2{margin:0;font-size:23px;letter-spacing:-.03em}.hint{margin:3px 0 12px;color:var(--muted);font-size:12px}.relation{font-size:11px;color:#d0d9e5;margin-top:8px}.relation a{font-weight:800;text-decoration:none}.list{margin:0;padding-left:20px;display:grid;gap:7px}.list li{font-size:13px;line-height:1.32}.list button{border:0;background:none;padding:0;text-align:left;font:inherit;font-weight:780;color:var(--ink);cursor:pointer}.list button:hover{text-decoration:underline}.risk li::marker{color:var(--red)}.opportunity li::marker{color:var(--red)}.detail{margin:5px 0 2px;padding:8px 9px;background:#f7f9fb;border:1px solid #e9edf2;border-radius:8px;color:#4d596b;font-size:11px;line-height:1.35}.detail a{font-weight:800;text-decoration:none}.empty{color:var(--muted);font-size:12px}@media(max-width:760px){.top{flex-direction:column}.nav{justify-content:flex-start}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><div><div class="kicker">From the Matrix</div><h1>Risks &amp; opportunities</h1><p class="lede">A short decision view built from the full Matrix.</p><div class="relation">Matrix source: <a href="../frontier/quick/">Short view</a> ↔ <a href="../frontier/">Full evidence</a></div></div><nav class="nav" aria-label="Primary site sections"><a href="../read/">Read at least this</a><a href="../">Radar</a><a href="../frontier/quick/">Matrix · short</a><a href="../frontier/">Matrix · full</a><a class="primary" href="./" aria-current="page">Risks &amp; opportunities</a><a href="../literature/">Literature used</a><a href="../stuff/">Stuff</a></nav></div></header>
+<main class="wrap"><div id="summary" class="summary">Loading…</div><div class="grid">
+<section class="panel"><h2>Risks</h2><p class="hint">Less control, more cost or weaker capability.</p><ol id="risks" class="list risk"><li class="empty">Loading…</li></ol></section>
+<section class="panel"><h2>Opportunities</h2><p class="hint">More European control and capability.</p><ol id="opportunities" class="list opportunity"><li class="empty">Loading…</li></ol></section>
+</div></main>
+<script src="../briefing/insights.js?v=17.13.10"></script>
+<script src="../frontier/frontier.js?v=17.13.10"></script>
+<script src="priorities.js?v=17.13.10"></script>
+<script>
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function item(x,kind,i){const id=`detail-${kind}-${i}`;const text=SovereigntyFrontier.shortBullet(x);const source=[x.source,x.date?String(x.date).slice(0,10):''].filter(Boolean).join(' · ');return `<li><button type="button" data-detail="${id}" aria-expanded="false">${esc(text)}</button><div id="${id}" class="detail" hidden>${esc(source||'Source detail unavailable.')}${x.link?` · <a href="${esc(x.link)}" target="_blank" rel="noopener">source ↗</a>`:''}</div></li>`}
+function listHtml(items,kind){return items.length?items.slice(0,12).map((x,i)=>item(x,kind,i)).join(''):'<li class="empty">None clear the current gate.</li>'}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-detail]');if(!b)return;const p=document.getElementById(b.dataset.detail);if(!p)return;const open=p.hidden;p.hidden=!open;b.setAttribute('aria-expanded',String(open));});
+function render(view){document.getElementById('risks').innerHTML=listHtml(view.risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(view.opportunities,'opportunity');document.getElementById('summary').textContent=`${view.stats.cumulativeQualifying} Matrix findings · ${view.stats.risks} risks · ${view.stats.opportunities} opportunities`;}
+(async()=>{try{const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('radar unavailable');render(RadarPriorities.buildPriorityView(await r.json()))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('summary').textContent='Radar data could not be loaded.'}})();
+</script>
+</body>
+</html>

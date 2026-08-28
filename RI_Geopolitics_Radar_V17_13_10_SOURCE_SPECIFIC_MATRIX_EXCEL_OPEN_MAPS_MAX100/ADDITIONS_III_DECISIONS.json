@@ -1,0 +1,311 @@
+{
+  "batch": {
+    "batch_id": "f5c63cecbaa4-0a1b4eba",
+    "source_file": "EU_RI_Additions_III_May-Aug_2026.docx",
+    "sha256": "f5c63cecbaa41166ed42c8e64be3d9a51d958681d75ce4d72fd012a8c73ab1f3",
+    "ingested_at": "2026-08-25T13:00Z",
+    "fetch_attempted": false,
+    "links_user_validated": false,
+    "counts": {
+      "candidates": 12,
+      "found_in_corpus": 0,
+      "scanner_seen_url_not_admitted": 0,
+      "not_found": 12,
+      "duplicate_in_batch": 1,
+      "manual_admitted": 3,
+      "deferred": 4,
+      "rejected_core_gate": 1,
+      "forthcoming": 0,
+      "secondary_reference": 4,
+      "context_only": 1,
+      "weak_signal_candidates": 5,
+      "manual_signals_admitted": 2,
+      "verification_required": 3
+    },
+    "review_evidence_sha256": "0a1b4ebae21469d7b69580349d1fac4cd7c2d1486eb3000d8e9a59f914f8b5f9",
+    "reviewed_items": 12,
+    "recovery_queue": 27,
+    "weak_signal_recovery_queue": 2,
+    "idempotent_reuse": false
+  },
+  "records": [
+    {
+      "manual_id": "I12",
+      "title": "If CERN can come up with the requisite billions, the Future Circular Collider is a go",
+      "decision": "defer_insufficient_or_unverified",
+      "automated_status": "not_found",
+      "miss_reason": "secondary_reference_requires_primary_verification",
+      "evidence_status": "secondary_reference",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "partial_text",
+      "curator_primary_cell": "I-A",
+      "curator_cells": [
+        "I-A",
+        "R-A",
+        "K-C"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://physicstoday.aip.org/news/if-cern-can-come-up-with-the-requisite-billions-the-future-circular-collider-is-a-go",
+      "resolved_url": "https://physicstoday.aip.org/news/if-cern-can-come-up-with-the-requisite-billions-the-future-circular-collider-is-a-go",
+      "direct_links_followed": [
+        "https://europeanstrategyupdate.web.cern.ch/"
+      ]
+    },
+    {
+      "manual_id": "I13",
+      "title": "Security of Supply and Interdependency: A New Approach to Strategic Autonomy and Indispensability",
+      "decision": "defer_insufficient_or_unverified",
+      "automated_status": "not_found",
+      "miss_reason": "secondary_reference_requires_primary_verification",
+      "evidence_status": "secondary_reference",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "partial_text",
+      "curator_primary_cell": "C-B",
+      "curator_cells": [
+        "I-A",
+        "C-B",
+        "I-C"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://www.europefocus.eu/eu-defence-series-europes-tech-challenge/",
+      "resolved_url": "https://www.europefocus.eu/eu-defence-series-europes-tech-challenge/",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "C11",
+      "title": "European Biotech Act — Commission Staff Working Document C(2026) 3375 final (impact assessment)",
+      "decision": "admitted_verified_manual_source",
+      "automated_status": "not_found",
+      "miss_reason": "discovery_recall_gap",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "full_text",
+      "curator_primary_cell": "C-A",
+      "curator_cells": [
+        "C-C",
+        "C-A",
+        "K-C"
+      ],
+      "matrix_dimension": "conversion",
+      "quadrant_claimed": "A",
+      "quadrant_implied": "C",
+      "curator_cell_agreement": "differs",
+      "supplied_url": "https://health.ec.europa.eu/document/download/48009973-efbb-4101-ae8f-e81a34764e39_en?filename=biotechnology_C2026-3375-1_en.pdf",
+      "resolved_url": "https://health.ec.europa.eu/document/download/48009973-efbb-4101-ae8f-e81a34764e39_en?filename=biotechnology_C2026-3375-1_en.pdf",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "C12",
+      "title": "Innovation without borders",
+      "decision": "rejected_core_gate",
+      "automated_status": "not_found",
+      "miss_reason": "recovered_source_failed_substantive_gate:reviewed_underlying_source_failed_substantive_gate",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "full_text",
+      "curator_primary_cell": "C-D",
+      "curator_cells": [
+        "C-D",
+        "C-A"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://cepr.org/voxeu/columns/innovation-without-borders",
+      "resolved_url": "https://cepr.org/voxeu/columns/innovation-without-borders",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "C13",
+      "title": "Europe’s ungoverned space: Military AI and the autonomy that cannot be bought",
+      "decision": "admitted_verified_manual_source",
+      "automated_status": "not_found",
+      "miss_reason": "discovery_recall_gap",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "full_text",
+      "curator_primary_cell": "R-C",
+      "curator_cells": [
+        "C-D",
+        "R-C",
+        "I-C"
+      ],
+      "matrix_dimension": "infrastructure",
+      "quadrant_claimed": "A",
+      "quadrant_implied": "C",
+      "curator_cell_agreement": "differs",
+      "supplied_url": "https://cepr.org/voxeu/columns/europes-ungoverned-space-military-ai-and-autonomy-cannot-be-bought",
+      "resolved_url": "https://cepr.org/voxeu/columns/europes-ungoverned-space-military-ai-and-autonomy-cannot-be-bought",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "R14",
+      "title": "Europe's regulatory double bind",
+      "decision": "admitted_verified_manual_source",
+      "automated_status": "not_found",
+      "miss_reason": "discovery_recall_gap",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "full_text",
+      "curator_primary_cell": "R-D",
+      "curator_cells": [
+        "R-C",
+        "R-D",
+        "R-A"
+      ],
+      "matrix_dimension": "rules",
+      "quadrant_claimed": "C",
+      "quadrant_implied": "D",
+      "curator_cell_agreement": "agrees",
+      "supplied_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+      "resolved_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "R15",
+      "title": "Standardisation in the European Product Act: major challenges ahead",
+      "decision": "defer_insufficient_or_unverified",
+      "automated_status": "not_found",
+      "miss_reason": "underlying_source_retrieval_failed_or_insufficient",
+      "evidence_status": "uncertain_record",
+      "retrieval_status": "retrieval_environment_limitation",
+      "text_mode": "metadata_only",
+      "curator_primary_cell": "R-D",
+      "curator_cells": [
+        "R-A",
+        "R-D",
+        "R-C"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://data.consilium.europa.eu/doc/document/ST-8298-2026-INIT/en/pdf",
+      "resolved_url": "https://data.consilium.europa.eu/doc/document/ST-8298-2026-INIT/en/pdf",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "W15",
+      "title": "German prosecutors allege China-linked collection targeting university aerospace, computer-science and AI researchers",
+      "decision": "defer_insufficient_or_unverified",
+      "automated_status": "not_found",
+      "miss_reason": "secondary_reference_requires_primary_verification",
+      "evidence_status": "secondary_reference",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "partial_text",
+      "curator_primary_cell": "K-B",
+      "curator_cells": [
+        "K-B",
+        "R-B"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://www.euronews.com/my-europe/2026/05/20/police-in-germany-arrest-married-couple-on-suspicion-of-spying-for-china",
+      "resolved_url": "https://www.euronews.com/my-europe/2026/05/20/police-in-germany-arrest-married-couple-on-suspicion-of-spying-for-china",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "W16",
+      "title": "AI researcher with a prior European Space Agency placement arrested at NATO’s SHAPE on suspicion of espionage",
+      "decision": "admitted_verified_manual_weak_signal",
+      "automated_status": "not_found",
+      "miss_reason": "discovery_recall_gap",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "partial_text",
+      "curator_primary_cell": "K-B",
+      "curator_cells": [
+        "K-B",
+        "R-B"
+      ],
+      "matrix_dimension": "knowledge",
+      "quadrant_claimed": "B",
+      "quadrant_implied": "B",
+      "curator_cell_agreement": "agrees",
+      "supplied_url": "https://www.ftm.eu/articles/intern-spy-nato-china-canada-revealed",
+      "resolved_url": "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf",
+      "direct_links_followed": [
+        "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf"
+      ]
+    },
+    {
+      "manual_id": "W17",
+      "title": "Helsing and Quantum Systems raise $1.8bn and $1.2bn mega-rounds to scale European defence AI and autonomous systems",
+      "decision": "admitted_verified_manual_weak_signal",
+      "automated_status": "not_found",
+      "miss_reason": "discovery_recall_gap",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "partial_text",
+      "curator_primary_cell": "C-C",
+      "curator_cells": [
+        "C-A",
+        "C-C"
+      ],
+      "matrix_dimension": "conversion",
+      "quadrant_claimed": "A",
+      "quadrant_implied": "A",
+      "curator_cell_agreement": "differs",
+      "supplied_url": "https://www.defensenews.com/global/europe/2026/07/13/helsing-raises-18-billion-in-europes-biggest-defense-startup-round/",
+      "resolved_url": "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
+      "direct_links_followed": [
+        "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
+        "https://quantum-systems.com/news/quantum-systems-raises-1-2bn-series-d-to-accelerate-growth-and-scale-software-defined-autonomous-systems-across-air-land-and-sea/"
+      ]
+    },
+    {
+      "manual_id": "W18",
+      "title": "EU digital enforcement and US Section 301 retaliation sequence",
+      "decision": "matched_manual_batch_no_duplicate",
+      "automated_status": "not_found",
+      "miss_reason": "secondary_reference_requires_primary_verification",
+      "evidence_status": "secondary_reference",
+      "retrieval_status": "not_needed_existing_corpus",
+      "text_mode": "existing_corpus",
+      "curator_primary_cell": "R-C",
+      "curator_cells": [
+        "R-A",
+        "R-C",
+        "R-D"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+      "resolved_url": "https://cepr.org/voxeu/columns/europes-regulatory-double-bind",
+      "direct_links_followed": []
+    },
+    {
+      "manual_id": "W19",
+      "title": "Hungary election removes a major EU veto player; institutional consequences remain context for the radar window",
+      "decision": "retain_context_only",
+      "automated_status": "not_found",
+      "miss_reason": "context_only_not_scanner_recall_target",
+      "evidence_status": "verified_primary_source",
+      "retrieval_status": "reviewed_exact_supplied_url_cache",
+      "text_mode": "full_text",
+      "curator_primary_cell": "R-D",
+      "curator_cells": [
+        "R-D",
+        "R-A"
+      ],
+      "matrix_dimension": null,
+      "quadrant_claimed": null,
+      "quadrant_implied": null,
+      "curator_cell_agreement": null,
+      "supplied_url": "https://www.atlanticcouncil.org/dispatches/hungary-just-voted-out-viktor-orban-heres-what-to-expect-in-europe-and-beyond/",
+      "resolved_url": "https://www.atlanticcouncil.org/dispatches/hungary-just-voted-out-viktor-orban-heres-what-to-expect-in-europe-and-beyond/",
+      "direct_links_followed": []
+    }
+  ]
+}
