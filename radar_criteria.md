@@ -1,10 +1,10 @@
-# Radar admission criteria — V17.13.0
+# Radar admission criteria — V17.13.1
 
 ## Strand A: substantive EU R&I in strategic context
 
-A paper/report must pass **all three** substantive tests:
+The **subject of Strand A is EU/European research and innovation in geopolitical or strategic context**. EU relevance is therefore not a loose relevance filter. Normal admission must pass **all three** substantive tests:
 
-1. **Direct Europe/EU relevance.** The evidence is about the EU, European institutions, Member States in a European-policy/R&I context, the European Research Area, Horizon Europe/FP10, or another clearly European R&I system.
+1. **Europe/EU subject.** The evidence is about the EU, European institutions, Member States in a European-policy/R&I context, the European Research Area, Horizon Europe/FP10, or another clearly European R&I system.
 2. **R&I substance.** Research, science, innovation, technology capability, research infrastructure, scientific talent, knowledge transfer, R&D funding/governance, or a closely connected R&I-system mechanism is part of what the source is actually about.
 3. **Strategic context.** This can be explicit *or implied by triangulation*.
 
@@ -24,6 +24,17 @@ A source can pass without the word *geopolitics* when the evidence contains at l
 - research-talent competition, brain drain/gain, attraction or retention.
 
 A lone statement that Europe is “competitive”, “innovative”, “leading” or “lagging” is **not** enough.
+
+### Exceptional external-shock route
+
+A development outside Europe can still belong when it **materially changes the strategic position of European R&I**. This is deliberately narrow. All of the following are required:
+
+- a major step-change, breakthrough, cutoff or comparable shock in a strategically important R&I capability (for example AI, chips, quantum, biotechnology, frontier compute);
+- a major external actor such as the US, China or another relevant capability holder;
+- a current admitted EU-context finding in the **same domain**; and
+- a **specific one-sentence plain-language bridge** explaining what changes for Europe’s R&I capability, access, dependence or competitive position.
+
+The bridge is stored as an **editorial radar inference**, not attributed to the source. Generic foreign technology news, ordinary product launches and “this matters to Europe” boilerplate do not pass.
 
 ## Aboutness is source-aware
 
@@ -45,7 +56,7 @@ Keep the dominant failure/defer reason precise: `insufficient_text`, `no_direct_
 
 ## Publication quality and reader claims
 
-English remains a hard publication invariant. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
+English remains a hard **evidence** invariant, not a whole-publication invariant. A non-English publication may pass when a source-provided/indexed English abstract, executive summary or equivalent English description is substantive enough to establish the finding and admission bridge. Title-only English metadata is insufficient, and machine translation is not used as admission evidence. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
 
 Titles, authors, source, date, links, abstracts/summaries and review evidence remain available separately.
 
@@ -55,7 +66,7 @@ Strand B is for developed/adapted/extended/refined **reusable futures or forward
 
 ## Strand C
 
-Strand C contains externally observable weak signals/developments that can change how Strand-A evidence should be read. It is deliberately secondary. The public corpus applies a **15% maximum share** for C; this is not a quota to fill.
+Strand C contains externally observable weak signals/developments that can change how Strand-A evidence should be read. It is deliberately secondary. The public corpus applies a **15% maximum share** for C; this is not a quota to fill. Within the cap, a qualifying external strategic shock is prioritised over ordinary weak signals because the cap must not suppress a genuinely position-changing event.
 
 ## Time boundary
 

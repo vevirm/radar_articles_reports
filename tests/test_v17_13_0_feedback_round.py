@@ -125,7 +125,7 @@ class V17130FeedbackRoundTests(unittest.TestCase):
         self.assertEqual(data.get('corpus_start_date'), '2026-04-28')
         a, b, c = map(lambda k: len(data.get(k, [])), ('strand_a', 'strand_b', 'strand_c'))
         self.assertLessEqual(c / max(1, a + b + c), 0.15)
-        self.assertEqual(data.get('display_claim_profile_version'), 'v17.13.0-reader-first-simple-claims')
+        self.assertEqual(data.get('display_claim_profile_version'), 'v17.13.1-reader-first-full-detail')
         chips = [x for x in data.get('strand_a', []) if x.get('title') == 'No one builds alone: The geopolitics of AI chips']
         self.assertEqual(len(chips), 1)
         self.assertNotIn('Chip design engineer', chips[0].get('summary', ''))

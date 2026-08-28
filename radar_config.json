@@ -149,7 +149,13 @@
     "European research capability international partnerships strategic",
     "EU science technology standard setting international coordination",
     "European research security capability resilience technology",
-    "EU innovation capacity dependency critical technologies"
+    "EU innovation capacity dependency critical technologies",
+    "China artificial intelligence breakthrough research capability strategic competition",
+    "United States artificial intelligence breakthrough research capability strategic competition",
+    "China quantum breakthrough research capability strategic competition",
+    "United States quantum breakthrough research capability strategic competition",
+    "China semiconductor breakthrough research capability strategic competition",
+    "United States semiconductor breakthrough research capability strategic competition"
   ],
   "queries_b": [
     "strategic foresight methodology public policy",
@@ -846,7 +852,7 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "v17_8_1_A_broad_relevant_ranked_major_eu_ri_B_transferable_methods_C_specific_materiality",
+  "admission_profile": "v17.13.1-eu-ri-geopolitics-core-with-material-external-shock-exception",
   "scan_budget_seconds": 1200,
   "network_reserve_seconds": 60,
   "request_timeout_seconds": 12,
@@ -904,7 +910,13 @@
     "European research talent retention outflow new data",
     "EU Choose Europe research careers brain drain implementation",
     "Europe scientists leaving research capacity new survey",
-    "European research workforce international talent flows data"
+    "European research workforce international talent flows data",
+    "China AI breakthrough frontier capability research",
+    "United States AI breakthrough frontier capability research",
+    "China quantum breakthrough research capability",
+    "United States quantum breakthrough research capability",
+    "China semiconductor breakthrough chip capability",
+    "United States semiconductor breakthrough chip capability"
   ],
   "quality_profile_version": "v17.9.0-source-aware-aboutness-matrix-rubric",
   "crossref_priority_journals": [
@@ -1481,7 +1493,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.0-triangulated-implied-strategic-context",
+  "recall_profile_version": "v17.13.1-eu-core-external-shock-english-evidence",
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1506,8 +1518,8 @@
   "english_only": true,
   "major_eu_ri_focus": true,
   "aboutness_profile_version": "v17.9.0-source-length-aware",
-  "matrix_profile_version": "v17.13.0-simple-reader-matrix",
-  "display_claim_profile_version": "v17.13.0-reader-first-simple-claims",
+  "matrix_profile_version": "v17.13.1-simple-reader-matrix",
+  "display_claim_profile_version": "v17.13.1-reader-first-full-detail",
   "aboutness_text_modes": {
     "full_text": {
       "min_body_words": 500,
@@ -1538,7 +1550,7 @@
     "gmfus.org",
     "eenewseurope.com"
   ],
-  "priority_people_profile_version": "v17.13.0-fallback-researcher-attention",
+  "priority_people_profile_version": "v17.13.1-fallback-researcher-attention",
   "priority_people_file": "priority_people.json",
   "priority_people_enabled": true,
   "priority_people_per_scan": 16,
@@ -1554,5 +1566,9 @@
   "strand_c_max_share": 0.15,
   "priority_people_trigger_below_scholarly_candidates": 18,
   "finding_context_query_bank_size": 12,
-  "finding_context_queries_per_scan": 4
+  "finding_context_queries_per_scan": 4,
+  "foreign_language_english_evidence_min_words": 25,
+  "english_evidence_rule": "English is required for the evidence used to admit and write the finding, not necessarily for the whole publication. A non-English publication may qualify from a substantive source-provided/indexed English abstract, executive summary or equivalent English description; machine translation is not an admission basis.",
+  "eu_ri_geopolitics_core_rule": "The subject of Strand A is EU/European research and innovation in geopolitical or strategic context. Normal admission requires EU/European scope + substantive R&I + an explicit or triangulated strategic mechanism.",
+  "material_external_shock_rule": "Exceptional non-EU events or findings may enter only when they are a major step-change in a strategically important R&I capability, match a current EU-context anchor in the same domain, and the implication for Europe can be stated as one specific plain-language sentence. This route is an editorial inference and is labelled as such; generic foreign technology news does not qualify."
 }

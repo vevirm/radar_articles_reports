@@ -1,4 +1,4 @@
-# Matrix criteria — V17.13.0
+# Matrix criteria — V17.13.1
 
 ## Reader-facing structure
 
@@ -45,7 +45,7 @@ Direction markers such as dependence, sovereign capacity, scale, cost, delay or 
 
 ## Subject sensitivity
 
-The direction has to apply to Europe/EU. A source saying that another actor gains talent, capability or competitiveness does not automatically tell us Europe's direction unless the European consequence is established.
+The direction has to apply to Europe/EU. A source saying that another actor gains talent, capability or competitiveness does not automatically tell us Europe's direction. The exceptional external-shock route is classifiable only when the stored one-sentence Europe-impact bridge and its same-domain EU anchor establish that consequence.
 
 ## Weak signals
 

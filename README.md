@@ -1,8 +1,12 @@
-# R&I Geopolitics Radar V17.13.0
+# R&I Geopolitics Radar V17.13.1
 
-V17.13.0 changes both **how the radar finds material** and **how a reader sees it**. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
+V17.13.1 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
 This is not a looser relevance gate. The non-literal route needs at least **two independent strategic families**, including at least one relational/control family. A generic paper that merely says Europe should be more competitive still fails.
+
+**The subject is EU/European R&I in geopolitical context.** EU relevance is not just one filter among many. Normally, the source itself must establish the European R&I subject. The exception is a major external R&I shock — for example a step-change in US or Chinese AI, quantum or chip capability — when it matches a current same-domain EU context anchor and its consequence for Europe can be written as one specific plain-language sentence. That bridge is marked as a radar inference, not source wording.
+
+**English is required for the evidence, not necessarily the whole publication.** A non-English paper can qualify when the source/index exposes enough English abstract, executive-summary or equivalent text to verify the finding. A foreign-language title plus an English abstract can therefore pass; a title-only or tiny metadata stub cannot. The radar does not machine-translate an inaccessible foreign text and use that translation as evidence.
 
 ## What readers see
 
@@ -41,7 +45,11 @@ and four plain outcomes:
 
 Every admitted Strand-A finding is sent to the Matrix classifier. There is no extra hidden “dynamic” pre-filter before classification. The classifier can still leave a finding out when its evidence does not support a defensible row and direction.
 
-### 3. Reader-first claims
+### 3. Easy radar keeps the full record reachable
+
+The main radar remains the easy/reader-first view: plain claim first, then a short “why it matters”. Nothing important from the evidence record is discarded from the interface. Each card has **All record details**, and the toolbar has **Show all details** to open the detailed fields across the visible cards at once. That disclosure includes the original title, authors, source, date, type, source tier, EU relevance, discovery route, tracked-since date, full available summary, relevance/admission note, available R&I/strategic evidence, Matrix placement/evidence where present, and the external-Europe bridge when the exceptional route is used.
+
+### 4. Reader-first claims
 
 Reader-facing prose is shorter and concrete. Bibliographic and source detail is preserved separately instead of being stuffed into the finding itself. The write boundary includes explicit handling for the e-hryvnia, cyber-governance, AI-for-science, CEPS technology-mapping and EU–India/open-hardware examples. Biographical material such as a researcher's training or job title is not used as the finding unless it is itself relevant evidence.
 
@@ -51,13 +59,13 @@ The same plain-language layer is used by the main radar, Matrix, Risks & opportu
 
 ### Literal “geopolitics” is not required
 
-Strand A still requires all three things:
+The **normal Strand-A route** still requires all three things:
 
-- direct EU/European relevance;
-- substantive research, science, innovation, technology or related system evidence; and
+- EU/European R&I as the subject;
+- substantive research, science, innovation, technology or related-system evidence; and
 - strategic context.
 
-Strategic context can be explicit (geopolitics, economic security, strategic competition, etc.) or triangulated from multiple mechanisms. The triangulated route is intentionally fail-closed for one-cue cases.
+Strategic context can be explicit (geopolitics, economic security, strategic competition, etc.) or triangulated from multiple mechanisms. The triangulated route is intentionally fail-closed for one-cue cases. The separate external-shock exception does not weaken this normal gate.
 
 ### Existing findings help form later searches
 
@@ -67,21 +75,21 @@ This makes discovery iterative in a bounded way: the radar can learn where the l
 
 ### Researcher names are fallback attention
 
-`priority_people.json` remains an auditable list of 137 researchers. Named-researcher discovery is not a separate corpus, badge or whitelist. In V17.13 it is mainly triggered when ordinary scholarly discovery is thin or Matrix coverage is very sparse. Exact-author works and any bounded context fallbacks still rejoin the normal OpenAlex/Crossref admission path.
+`priority_people.json` remains an auditable list of 137 researchers. Named-researcher discovery is not a separate corpus, badge or whitelist. In V17.13.1 it is mainly triggered when ordinary scholarly discovery is thin or Matrix coverage is very sparse. Exact-author works and any bounded context fallbacks still rejoin the normal OpenAlex/Crossref admission path.
 
 ### Strand C stays a minority
 
-Weak signals no longer receive the protected follow-up query wave. After the A/B/C merge, Strand C is capped at **15% of all public findings**. This is a ceiling, not a quota: the scanner should not search merely to fill C.
+Weak signals no longer receive the protected follow-up query wave. After the A/B/C merge, Strand C is capped at **15% of all public findings**. This is a ceiling, not a quota: the scanner should not search merely to fill C. Within that cap, a qualifying major external strategic shock is ranked ahead of ordinary weak signals so the minority rule does not accidentally hide the kind of event that could abruptly reset Europe’s position.
 
 ## Four-month rule
 
 `BOOTSTRAP_LOOKBACK_MONTHS = 4` is the public-window rule. Saved rows, recovery rows and matrix-only historical rows cannot widen it. On the bundled 28 August 2026 state the publication floor is therefore **2026-04-28**.
 
-The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor and passed through the V17.13 reader-claim normalizer. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
+The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor. Its existing reader claims are retained; V17.13.1 changes the admission contract, evidence fields and disclosure UI rather than pretending to have re-scanned old records under the new external-shock route. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
 
 ## Scanner rotation
 
-The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13 adds the finding-context queries to those bounded rotations. All query families obey the same date floor.
+The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.1 keeps the finding-context lane inside those bounded rotations and adds a small set of US/China frontier-capability queries so a major external shock can actually be discovered before the exceptional admission test is applied. All query families obey the same date floor.
 
 The scheduler remains active on push, every 12 hours, and manual dispatch via `.github/workflows/radar-scan.yml`.
 
@@ -104,16 +112,17 @@ Reviewed evidence caches must be tied to the exact curator-supplied URL and reco
 - `scripts/scan_radar.py` — discovery/admission scanner
 - `radar_criteria.md` — admission rules
 - `frontier_criteria.md` — Matrix rules and public/internal terminology mapping
-- `CHANGELOG_V17_13_0.md` — this release's changes
-- `VALIDATION_V17_13_0.md` — validation record
+- `CHANGELOG_V17_13_1.md` — this release's changes
+- `VALIDATION_V17_13_1.md` — validation record
 - `CURRENT_CORPUS_INPUT.txt` — exact input/bundled-state record
 
 ## Validate
 
-Focused V17.13 + regression checks:
+Focused V17.13.1 + regression checks:
 
 ```bash
 PYTHONPATH=. python -m pytest -q \
+  tests/test_v17_13_1_subject_language_easy_view.py \
   tests/test_v17_13_0_feedback_round.py \
   tests/test_v17_13_reader_scanner.py \
   tests/test_v17_12_5_plain_language.py \
@@ -123,4 +132,4 @@ PYTHONPATH=. python -m pytest -q \
   tests/test_v17_9_source_aware_matrix.py
 ```
 
-See `VALIDATION_V17_13_0.md` for the exact results packaged with this release.
+See `VALIDATION_V17_13_1.md` for the exact results packaged with this release.

@@ -155,12 +155,12 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.13.0-minority-C-cap"
+C_ADMISSION_PROFILE_VERSION = "v17.13.1-minority-C-cap"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
-RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.0-triangulated-implied-strategic-context"))
+RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.1-eu-core-external-shock-english-evidence"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
@@ -234,6 +234,7 @@ SIGNAL_WINDOW_START_DATE: dt.date | None = None
 ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
 ADMISSION_DIAGNOSTICS: Counter = Counter()
 ADMISSION_DIAGNOSTICS_LOCK = threading.Lock()
+ACTIVE_EU_CONTEXT_ANCHORS: list[dict[str, Any]] = []
 UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
@@ -1553,31 +1554,71 @@ def probably_english(text: str, *, title_mode: bool = False) -> bool:
     return False
 
 
+def substantive_english_evidence_block(text: str, min_words: int = 25) -> bool:
+    """Detect a source-provided English abstract/summary inside otherwise non-English text.
+
+    We inspect sentence windows rather than translating anything. This allows bilingual pages
+    and foreign-language papers with an English abstract to qualify when that English block is
+    long enough to support the actual finding.
+    """
+    txt = clean_text(text)[:16000]
+    if not txt:
+        return False
+    sentences = split_sentences(txt, max_chars=16000)
+    if not sentences:
+        sentences = [txt]
+    for i in range(len(sentences)):
+        block = ''
+        for j in range(i, min(len(sentences), i + 4)):
+            block = clean_text(f"{block} {sentences[j]}")
+            words = _language_tokens(block)
+            if len(words) >= min_words and probably_english(block, title_mode=False):
+                return True
+            if len(words) > max(140, min_words * 5):
+                break
+    return False
+
 def english_record_ok(text: str, metadata_language: Any = "", *, title: str = "") -> bool:
+    """Require enough English evidence to verify the public claim.
+
+    The publication itself does not have to be written in English. A non-English paper may
+    qualify when the source/index exposes a substantive English abstract, executive summary
+    or equivalent English description. We do not translate foreign-language text for
+    admission. Foreign-language metadata therefore becomes a constraint on *evidence
+    sufficiency*, not an automatic rejection.
+    """
     if not bool(CONFIG.get("english_only", True)):
         return True
     lang = normalized(metadata_language).replace("_", "-")
     explicit_english = False
+    explicit_foreign = False
     if lang:
         primary = lang.split("-", 1)[0]
-        if lang not in ENGLISH_LANGUAGE_CODES and primary != "en":
-            return False
-        explicit_english = True
+        explicit_english = bool(lang in ENGLISH_LANGUAGE_CODES or primary == "en")
+        explicit_foreign = not explicit_english
 
-    # Strong contrary evidence always wins, even if metadata claims English.
+    # Positive English prose can rescue a foreign-language publication/title. This is the
+    # intended route for a paper with a source-provided English abstract or summary. Require
+    # enough words that an English title or tiny metadata stub cannot masquerade as evidence.
+    body_ok = probably_english(text, title_mode=False)
+    min_words = int(CONFIG.get("foreign_language_english_evidence_min_words", 25) or 25)
+    english_block = substantive_english_evidence_block(text, min_words=min_words)
+    if (body_ok or english_block) and (not explicit_foreign or english_block or len(_language_tokens(text)) >= min_words):
+        return True
+
+    # Without a substantive English evidence block, clear foreign-language evidence rejects.
+    if explicit_foreign:
+        return False
     if title and _strong_non_english_evidence(title, title_mode=True):
         return False
     if _strong_non_english_evidence(text, title_mode=False):
         return False
 
-    body_ok = probably_english(text, title_mode=False)
-    if body_ok:
-        return True
     if explicit_english:
-        # Explicit English metadata may rescue short/metadata-only records, but never
-        # text with strong foreign-language evidence (rejected above).
+        # Explicit English metadata may rescue short/metadata-only records, but never text
+        # with strong foreign-language evidence (rejected above).
         return True
-    # If the record is effectively title-only, accept an English-looking title.  Otherwise
+    # If the record is effectively title-only, accept an English-looking title. Otherwise
     # do not let an ambiguous short title override a non-English/undetermined body.
     words = _language_tokens(text)
     if title and len(words) <= max(8, len(_language_tokens(title)) + 2):
@@ -2333,6 +2374,79 @@ def _bridge_sentence_for_a(text: str) -> str:
     return ''
 
 
+EXTERNAL_SHOCK_CUES = [
+    'breakthrough', 'major breakthrough', 'first achieved', 'first demonstration', 'first demonstrated',
+    'achieved artificial general intelligence', 'artificial general intelligence achieved', 'agi achieved',
+    'step change', 'step-change', 'surpassed', 'world first', 'world-first', 'record performance',
+    'frontier capability', 'frontier model', 'deployed at scale', 'deployment at scale',
+    'export ban', 'export restriction', 'cut off access', 'supply cutoff', 'embargo',
+    'dominant supplier', 'monopoly', 'controls the supply', 'controls supply',
+]
+EXTERNAL_SHOCK_ACTORS = [
+    'china', 'chinese', 'united states', 'u.s.', 'american', 'russia', 'russian',
+    'japan', 'south korea', 'korea', 'taiwan', 'india', 'united kingdom', 'britain', 'uk',
+]
+EXTERNAL_SHOCK_DOMAIN_LABELS = {
+    'artificial intelligence': ['artificial intelligence', ' ai ', 'agi', 'foundation model', 'frontier model'],
+    'semiconductors': ['semiconductor', 'semiconductors', 'chips', 'microelectronics'],
+    'quantum': ['quantum'],
+    'biotechnology': ['biotechnology', 'biotech', 'synthetic biology'],
+    'advanced materials': ['advanced materials', 'critical materials'],
+    'space': ['space technology', 'satellite', 'launch vehicle'],
+    'compute': ['supercomputer', 'compute infrastructure', 'data centre', 'data center', 'cloud infrastructure'],
+    'robotics': ['robotics', 'robot', 'autonomous system'],
+}
+
+def _external_shock_domain(text: str) -> str:
+    low = f" {normalized(text)} "
+    for label, terms in EXTERNAL_SHOCK_DOMAIN_LABELS.items():
+        if distinct_matches(low, terms):
+            return label
+    return ''
+
+def _anchor_supports_external_domain(anchor: dict[str, Any], domain: str) -> bool:
+    if not isinstance(anchor, dict) or not domain:
+        return False
+    text = clean_text(' '.join(str(anchor.get(k, '')) for k in ('title','summary','core_message','relevance_note')))
+    return _external_shock_domain(text) == domain and bool(eu_evidence(anchor.get('title',''), anchor.get('summary',''), anchor.get('relevance_note',''))[0] == 'direct')
+
+def external_eu_bridge_sentence(text: str, anchors: list[dict[str, Any]] | None = None) -> tuple[bool, str, list[str]]:
+    """Exceptional route for a major external R&I shock that clearly changes Europe's position.
+
+    Ordinary non-EU work still fails. The event must be a step-change in a strategically important
+    R&I capability, involve a major external actor, and match a current admitted EU-context anchor
+    in the same technology. The bridge is an editorial inference, kept as one specific sentence.
+    """
+    low = f" {normalized(text)} "
+    domain = _external_shock_domain(low)
+    actor_hits = distinct_matches(low, EXTERNAL_SHOCK_ACTORS)
+    shock_hits = distinct_matches(low, EXTERNAL_SHOCK_CUES)
+    ri_mechanism = bool(distinct_matches(low, A_TECH_RI_MECHANISMS + [
+        'capability', 'capabilities', 'research capability', 'scientific capability',
+        'technical capability', 'model capability', 'compute', 'research', 'science', 'innovation',
+    ]))
+    if not (domain and actor_hits and shock_hits and ri_mechanism):
+        return False, '', []
+    context = anchors if anchors is not None else ACTIVE_EU_CONTEXT_ANCHORS
+    supporting = [a for a in (context or []) if _anchor_supports_external_domain(a, domain)]
+    if not supporting:
+        return False, '', []
+    actor = actor_hits[0]
+    actor_name = {'u.s.':'the United States','american':'the United States','chinese':'China','britain':'the United Kingdom','uk':'the United Kingdom'}.get(actor, actor.title())
+    domain_phrase = {
+        'artificial intelligence':'AI research and compute',
+        'semiconductors':'chip capability and access to frontier compute',
+        'quantum':'quantum research capability',
+        'biotechnology':'biotechnology research capability',
+        'advanced materials':'advanced-materials research and supply',
+        'space':'space-technology research capability',
+        'compute':'frontier research-compute capacity',
+        'robotics':'advanced-robotics research capability',
+    }.get(domain, domain)
+    bridge = f"A step-change in {actor_name}'s {domain_phrase} would reset the capability benchmark Europe must match and could change its technological dependence and geopolitical position."
+    evidence = [f'external actor: {actor_name}', f'external shock: {shock_hits[0]}', f'domain: {domain}', 'current EU-context anchor in same domain']
+    return True, bridge, evidence
+
 def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple[bool, list[str], list[str], str, str, list[str]]:
     title = clean_text(title)
     abstract = _strip_relevance_boilerplate(abstract)
@@ -2546,7 +2660,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     method_bridge = creation_bridge or (abstract[:420] if method_contribution else '')
     return True, candidate_families[:5], method_bridge, (suitability + transferability)[:6], route
 
-def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general') -> dict[str, Any]:
+def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general', eu_context_anchors: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Classify the three-layer radar model.
 
     A = substantive papers about EU R&I in a geopolitical/economic-security context.
@@ -2563,7 +2677,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
             'aboutness_pass': False, 'aboutness_reason': 'language', 'text_mode': '',
             'aboutness_evidence': {}, 'eu_relevance': None, 'eu_evidence': [],
             'ri_evidence': [], 'geo_evidence': [], 'bridge_sentence': '', 'a_route': '',
-            'a_context_evidence': [], 'bridge_supported': False, 'bridge_mode': '',
+            'a_context_evidence': [], 'external_eu_bridge': '', 'external_eu_bridge_is_inference': False, 'bridge_supported': False, 'bridge_mode': '',
             'foresight_evidence': [], 'method_evidence': [], 'method_bridge': '',
             'b_transferable': False, 'b_methodology_first': False, 'b_suitability_evidence': [],
             'b_route': '', 'trend_only': False, 'source_tier': source_tier,
@@ -2572,12 +2686,33 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
 
     a_focus, ri_hits, geo_hits, a_bridge, a_route, a_context = _a_focus_ok(title, abstract, body, source_kind)
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
+    external_ok = False
+    external_bridge = ''
+    external_evidence: list[str] = []
+    if eu_rel != 'direct':
+        external_ok, external_bridge, external_evidence = external_eu_bridge_sentence(
+            clean_text(f"{title}. {abstract}. {body[:6000]}"),
+            eu_context_anchors,
+        )
     aboutness = aboutness_for_a(
         title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
         contextual_evidence=bool(a_context)
     )
-    # A is precision-first, but the aboutness test is conditional on available text.
-    a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass'))
+    # Normal A admission remains EU-centred. The only non-EU exception is a material external
+    # R&I shock with a same-domain EU anchor and a one-sentence, specific Europe-position bridge.
+    a_pass = bool((a_focus and eu_rel == 'direct' and aboutness.get('pass')) or external_ok)
+    if external_ok:
+        a_route = 'external-strategic-shock'
+        a_context = external_evidence
+        a_bridge = external_bridge
+        eu_rel = 'material_external'
+        eu_hits = [external_bridge]
+        a_focus = True
+        if not ri_hits:
+            domain = _external_shock_domain(clean_text(f"{title}. {abstract}. {body[:6000]}"))
+            ri_hits = [f"{domain} capability shock"] if domain else ['strategic R&I capability shock']
+        geo_hits = list(dict.fromkeys(geo_hits + external_evidence))[:8]
+        aboutness = {**aboutness, 'pass': True, 'reason': 'external_strategic_shock_bridge'}
 
     b_pass, b_families, b_bridge, b_suitability, b_route = _b_method_evidence(
         title, abstract, body, source_kind, source_tier
@@ -2599,14 +2734,16 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         # Preserve the evaluated EU scope even when another A gate fails. Diagnostics must
         # not rewrite a strategic/aboutness failure as "no direct EU".
         'eu_relevance': eu_rel if eu_rel else ('derived' if b_pass else None),
-        'eu_evidence': eu_hits if eu_rel == 'direct' else (['method suitable for analysing future EU R&I/geopolitics'] if b_pass else []),
+        'eu_evidence': eu_hits if eu_rel in {'direct', 'material_external'} else (['method suitable for analysing future EU R&I/geopolitics'] if b_pass else []),
         'ri_evidence': ri_hits[:5],
         'geo_evidence': geo_hits[:5],
         'bridge_sentence': a_bridge,
         'a_route': a_route if a_pass else '',
         'a_context_evidence': a_context if a_pass else [],
+        'external_eu_bridge': external_bridge if external_ok else '',
+        'external_eu_bridge_is_inference': bool(external_ok),
         'bridge_supported': bool(a_bridge or (ri_hits and geo_hits)),
-        'bridge_mode': 'sentence' if a_bridge else ('title/abstract' if a_pass else ''),
+        'bridge_mode': 'external-context-sentence' if external_ok else ('sentence' if a_bridge else ('title/abstract' if a_pass else '')),
         'foresight_evidence': b_families[:5],
         'method_evidence': b_families[:5],
         'method_bridge': b_bridge,
@@ -3891,7 +4028,12 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     # Short English institutional titles are often ambiguous until the body/PDF is read.
     lang_norm = normalized(html_lang).replace("_", "-")
     explicit_foreign_lang = bool(lang_norm and lang_norm not in ENGLISH_LANGUAGE_CODES and not lang_norm.startswith("en-"))
-    if explicit_foreign_lang or _strong_non_english_evidence(f"{title}. {desc}", title_mode=False):
+    # Do not reject a foreign-language page before reading it: it may expose a substantive
+    # English abstract/executive summary lower in the page. Clear non-English metadata can still
+    # reject here when the available title/description is already substantial and contains no
+    # qualifying English evidence block.
+    early_text = f"{title}. {desc}"
+    if (not explicit_foreign_lang) and _strong_non_english_evidence(early_text, title_mode=False):
         _diag_inc("institution_reject_non_english")
         return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
@@ -4891,6 +5033,8 @@ def relevance_note(evidence: dict[str, Any], strand: str) -> str:
         geo = ", ".join(evidence.get("geo_evidence", [])[:2]) or "substantive strategic evidence"
         bridge = evidence.get("bridge_mode") or "supported"
         eu_scope = ", ".join(evidence.get("eu_evidence", [])[:2]) or "scope established"
+        if evidence.get('eu_relevance') == 'material_external':
+            return f"Major external R&I shock with a specific Europe-impact bridge ({eu_scope}); R&I evidence: {ri}; strategic context: {geo}; bridge is a radar inference."
         return f"{eu} EU relevance ({eu_scope}); R&I evidence: {ri}; strategic evidence: {geo}; bridge: {bridge}."
     if strand == "B":
         method = ", ".join(evidence.get("method_evidence", [])[:2]) or "substantive foresight method"
@@ -4919,6 +5063,14 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "core_message": plain_language_claim(text or summary, title, extracted_claim),
         "relevance_note": relevance_note(evidence, strand),
         "source_tier": tier_label,
+        "a_route": evidence.get("a_route", ""),
+        "bridge_sentence": evidence.get("bridge_sentence", ""),
+        "external_eu_bridge": evidence.get("external_eu_bridge", ""),
+        "external_eu_bridge_is_inference": bool(evidence.get("external_eu_bridge_is_inference")),
+        "eu_evidence": evidence.get("eu_evidence", []),
+        "ri_evidence": evidence.get("ri_evidence", []),
+        "geo_evidence": evidence.get("geo_evidence", []),
+        "text_mode": evidence.get("text_mode", ""),
         "_source_rank": source_rank,
         "_themes": themes,
         "_doi": normalized(doi).replace("https://doi.org/", ""),
@@ -5004,6 +5156,8 @@ def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
         if distinct_matches(support, A_MAJOR_RI_SYSTEM): score += 2
         if distinct_matches(support, A_MAJOR_TECH_DOMAINS): score += 1
         if distinct_matches(support, GEO_STRONG): score += 2
+    if normalized(item.get("a_route", "")) == "external-strategic-shock":
+        score += 12
     if normalized(item.get("strand", "")) == "b":
         if distinct_matches(title + " " + support, B_STRATEGIC_RI_RELEVANCE): score += 4
         if _method_matches(title, B_METHOD_FAMILIES): score += 4
@@ -5941,8 +6095,14 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
             'table tennis', 'school ai councils', 'student agency', 'drug prices', 'rural america',
             'genocide', 'crypto firm', 'monetary news', 'hospitality', 'sports equipment'
         ])
-        if hard_noise or not (narrow_external and (reframing_signal_text(full) or material_update_signal_text(full)) and strategic_frame and (found & derived_themes)):
+        external_shock, _, _ = external_eu_bridge_sentence(full)
+        if hard_noise or not (
+            external_shock
+            or (narrow_external and (reframing_signal_text(full) or material_update_signal_text(full)) and strategic_frame and (found & derived_themes))
+        ):
             return False
+        if external_shock:
+            return True
 
     # International research cooperation/mobility is itself a valid geopolitical channel.
     if core_ri and (strategic_frame or bool(found & {
@@ -6345,20 +6505,33 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             score=3.0*len(shared)+1.5*entity_overlap+8.0*jacc
             if any(t in SPECIFIC_ANCHOR_THEMES for t in shared): score+=1.0
             if best is None or score>best[0]: best=(score,a,sorted(shared))
-        anchor=''; score=0.0; shared_themes=[]; anchor_basis=''
+        anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''
         if best and best[0] >= 4.0:
             score,a,shared_themes=best
             anchor=f"{a['title']} (Strand A)"
             anchor_basis='publication'
+        text=n.get('headline','')+' '+n.get('_desc','')
+        # Major external capability shocks get a tightly bounded same-domain fallback. This is
+        # not a generic foreign-news route: the helper requires a current EU-context anchor and
+        # produces the one-sentence Europe-position implication demanded by the editorial rule.
+        if not anchor:
+            ext_ok, external_bridge, _ = external_eu_bridge_sentence(text, a_corpus)
+            if ext_ok:
+                domain = _external_shock_domain(text)
+                a = next((x for x in internals if _anchor_supports_external_domain(x, domain)), None)
+                if a:
+                    anchor=f"{a['title']} (Strand A)"
+                    anchor_basis='publication-external-shock-context'
+                    shared_themes=sorted(nthemes)[:1]
+                    score=4.25
         if not anchor:
             continue
-        text=n.get('headline','')+' '+n.get('_desc','')
         relation=signal_relation(text)
         kind=signal_kind(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
         what=plain_language_claim(n.get('_desc',''), source_headline, source_headline)
-        why=signal_why(theme,kind)
+        why=external_bridge or signal_why(theme,kind)
         item={k:v for k,v in n.items() if not k.startswith('_')}
         item.update({
             'anchor':anchor,
@@ -6370,6 +6543,8 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             'core_message':what,
             'why_it_matters':why,
             'signal_note':what.rstrip('. ')+'. '+why,
+            'external_eu_bridge': external_bridge,
+            'external_eu_bridge_is_inference': bool(external_bridge),
             '_anchor_score':score,
         })
         if any(signals_near_duplicate(item,x) for x in anchored):
@@ -6420,7 +6595,11 @@ def cap_strand_c_share(strand_a: list[dict[str, Any]], strand_b: list[dict[str, 
         max_c = 0
     else:
         max_c = int((max_share * base) / (1.0 - max_share))
-    ordered = sorted(strand_c, key=lambda x: (str(x.get("date", "")), str(x.get("first_seen", ""))), reverse=True)
+    def c_priority(x: dict[str, Any]) -> tuple[int, str, str]:
+        text = clean_text(f"{x.get('headline','')} {x.get('what','')} {x.get('signal_note','')}")
+        external, _, _ = external_eu_bridge_sentence(text)
+        return (1 if external else 0, str(x.get("date", "")), str(x.get("first_seen", "")))
+    ordered = sorted(strand_c, key=c_priority, reverse=True)
     kept = ordered[:max_c]
     return kept, max(0, len(strand_c) - len(kept))
 
@@ -6471,7 +6650,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS
+    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -6484,6 +6663,7 @@ def main() -> int:
     with ADMISSION_DIAGNOSTICS_LOCK:
         ADMISSION_DIAGNOSTICS.clear()
     previous = load_previous()
+    ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     previous, age_window_removed = prune_public_window(previous, DATE_FLOOR)
     if sum(age_window_removed.values()):

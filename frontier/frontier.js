@@ -119,7 +119,7 @@
       const i=insightMap.get(key)||{};
       const claim=clean(i.point||RadarInsights?.completeCoreMessage?.(e.core_message||'')||e.title||'');
       const theme=clean(i.watchTheme||e.watch_theme||i._group||'');
-      const fullText=clean(`${claim} ${e.title||''} ${e.summary||''} ${e.relevance_note||''} ${theme}`);
+      const fullText=clean(`${claim} ${e.title||''} ${e.summary||''} ${e.relevance_note||''} ${e.bridge_sentence||''} ${e.external_eu_bridge||''} ${theme}`);
       const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(fullText);
       const dynamic=hitCount(fullText,EVENT_TERMS)>0 || hitCount(fullText,INDEPENDENCE_TERMS)>=1 || hitCount(fullText,COMPETITIVENESS_TERMS)>=1 || strategicKnowledge;
       // Every admitted radar finding reaches the matrix classifier. The classifier can still reject it
@@ -285,20 +285,21 @@
 
   function euLinkScore(x,evidence){
     const direct=norm(`${candidateWhat(x)} ${signalTheme(x)} ${clean(x.signal_note||'')} ${signalWhy(x)}`);
-    const support=norm(`${clean(x.anchor||'')} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
+    const support=norm(`${clean(x.anchor||'')} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.relevance_note||'')} ${clean(evidence?.bridge_sentence||'')} ${clean(evidence?.external_eu_bridge||'')}`);
     let s=0;
     if(EU_SCOPE_RE.test(direct)) s+=3;
     if(EU_SCOPE_RE.test(support)) s+=1.5;
     // Scanner-level EU relevance may come from abstract/body evidence that is not
     // repeated in the concise summary. Preserve that vetted scope downstream.
     if(clean(evidence?.eu_relevance||'').toLowerCase()==='direct') s=Math.max(s,3);
+    else if(clean(evidence?.eu_relevance||'').toLowerCase()==='material_external' && clean(evidence?.external_eu_bridge||'')) s=Math.max(s,3);
     else if(clean(evidence?.eu_relevance||'').toLowerCase()==='derived') s=Math.max(s,1.5);
     return s;
   }
 
   function materialityScore(x,evidence,row){
     const direct=norm(`${candidateWhat(x)} ${signalTheme(x)} ${clean(x.signal_note||x._evidencePoint||'')}`);
-    const support=norm(`${clean(x.anchor||'')} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
+    const support=norm(`${clean(x.anchor||'')} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.relevance_note||'')} ${clean(evidence?.bridge_sentence||'')} ${clean(evidence?.external_eu_bridge||'')}`);
     const directHits=hitCount(direct,ROW_TERMS[row.id]);
     const supportHits=hitCount(support,ROW_TERMS[row.id]);
     return directHits*2.4+Math.min(3,supportHits)*(x._origin==='Evidence signal'?1.2:.6);
@@ -360,12 +361,12 @@
     // those relationships for evidence-derived signals; weak signals must carry
     // the mechanism in their own headline/statement.
     const d=norm(`${candidateWhat(x)} ${signalTheme(x)} ${clean(x.signal_note||x._evidencePoint||'')}`);
-    const support=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
+    const support=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.relevance_note||'')} ${clean(evidence?.bridge_sentence||'')} ${clean(evidence?.external_eu_bridge||'')}`);
     const t=`${d} ${support}`;
     const evidenceSignal=x._origin==='Evidence signal';
     const ext=/\b(china|chinese|united states|us|american|foreign|non-eu|third-country|third country|taiwan|japan|south korea|korea|uk|britain|canada)\b/;
     const eu=EU_SCOPE_RE;
-    const euScoped=eu.test(t) || (evidenceSignal && clean(evidence?.eu_relevance||'').toLowerCase()==='direct');
+    const euScoped=eu.test(t) || (evidenceSignal && ['direct','material_external'].includes(clean(evidence?.eu_relevance||'').toLowerCase()));
 
     const rowPatterns={
       knowledge:/\b(researcher|researchers|scientist|scientists|academic|academics|faculty|doctoral|phd|research talent|scientific talent|research workforce|science workforce|research collaboration|scientific collaboration|research cooperation|scientific cooperation|knowledge flow|knowledge flows|skills|research careers?|research mobility|researcher mobility|science diplomacy|open science|research security|higher education)\b/,
@@ -477,9 +478,11 @@
     const strategicActor=/\b(china|chinese|united states|us|american|russia|russian|taiwan|india|japan|south korea|korea|uk|britain|canada)\b/.test(primaryNorm);
     const strategicIndirect=strategicDomain&&strategicActor;
     const structuralTalentLoss=/brain drain|researcher outflow|research talent outflow|scientific talent outflow|talent loss/.test(primaryNorm);
-    const supportNorm=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')}`);
+    const supportNorm=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.relevance_note||'')} ${clean(evidence?.bridge_sentence||'')} ${clean(evidence?.external_eu_bridge||'')}`);
+    const evidenceScope=clean(evidence?.eu_relevance||'').toLowerCase();
     const evidenceScopedEU=x._origin==='Evidence signal' && euLink>=3 && (
-      clean(evidence?.eu_relevance||'').toLowerCase()==='direct' ||
+      evidenceScope==='direct' ||
+      (evidenceScope==='material_external' && !!clean(evidence?.external_eu_bridge||'')) ||
       EU_SCOPE_RE.test(norm(`${sourceFor(x)} ${clean(evidence?.source||'')} ${clean(evidence?.title||'')} ${clean(x.anchor||'')} ${supportNorm}`))
     );
     // Analytical reports often describe structural dependencies/capability shifts rather than

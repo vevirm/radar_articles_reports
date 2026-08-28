@@ -1173,6 +1173,9 @@ def _merge_record_history(old: list[dict[str, Any]], new: list[dict[str, Any]]) 
 def apply_manual_ingest(state: dict[str, Any], records: list[dict[str, Any]], *, source_path: str | Path, fetch: bool = True, refresh: bool = False, links_validated: bool = False, review_evidence: dict[str, dict[str, Any]] | None = None, now: dt.datetime | None = None, session: requests.Session | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     """Apply manual candidates to a copy of ``state`` while preserving scan timestamps."""
     out = deepcopy(state)
+    # Keep the same EU-context anchor set as the automatic scanner so the exceptional
+    # external-shock route behaves identically for reviewed manual candidates.
+    sr.ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in out.get("strand_a", []) if isinstance(x, dict)]
     old_last_updated = out.get("last_updated")
     now = now or dt.datetime.now(dt.timezone.utc)
     if now.tzinfo is None:
