@@ -1,39 +1,66 @@
-# Radar admission criteria — V17.9.0 source-aware aboutness profile
+# Radar admission criteria — V17.13.0
 
-## Governing rule
+## Strand A: substantive EU R&I in strategic context
 
-**Reject incidental mentions, not short documents.** A pass-1 candidate must substantively connect Europe/EU, an R&I dimension, and geopolitical context. Repetition and section spread are evidence of aboutness only when enough document structure is actually available.
+A paper/report must pass **all three** substantive tests:
 
-## Pass 1: core reports and papers
+1. **Direct Europe/EU relevance.** The evidence is about the EU, European institutions, Member States in a European-policy/R&I context, the European Research Area, Horizon Europe/FP10, or another clearly European R&I system.
+2. **R&I substance.** Research, science, innovation, technology capability, research infrastructure, scientific talent, knowledge transfer, R&D funding/governance, or a closely connected R&I-system mechanism is part of what the source is actually about.
+3. **Strategic context.** This can be explicit *or implied by triangulation*.
 
-A retained item must satisfy all three substantive blocks:
+### Explicit strategic route
 
-1. **European scope:** direct EU/European R&I relevance, not merely EU funding boilerplate or a foreign case that mentions Europe as a comparator.
-2. **R&I dimension:** knowledge & people; infrastructure & inputs; conversion; or rules & institutions.
-3. **Geopolitical context:** autonomy/dependence, economic or research security, strategic competition, external chokepoints, export controls, supply dependencies, or another mechanism connecting R&I to geopolitical position.
+Direct language such as geopolitics, geoeconomics, economic/research security, strategic competition, strategic autonomy, export controls or a comparable mechanism can establish the strategic side when it is substantively connected to the R&I evidence.
 
-### Text modes
+### Triangulated strategic route — literal “geopolitics” not required
 
-- **Full text:** use recurrence, distinct-section spread and co-occurrence to reject incidental mentions.
-- **Abstract only:** do not require nonexistent sections. Require a coherent EU + R&I + geopolitical connection in the title/abstract/keywords, with semantic/contextual evidence taking precedence over raw count alone.
-- **Metadata only:** return `insufficient_text` and defer. Attempt richer retrieval later; do not equate missing text with irrelevance.
+A source can pass without the word *geopolitics* when the evidence contains at least **two independent strategic families**, with at least one relational/control family. Current families include:
 
-### EU acronym rule
+- dependence, control, sovereignty, access, chokepoints or supply resilience;
+- capability gaps, global competition or technological/scientific leadership;
+- international research/science coordination or third-country relationships;
+- research security, foreign interference, critical infrastructure or dual-use/export-control concerns;
+- standards, rule-setting, governance power or external methodologies;
+- research-talent competition, brain drain/gain, attraction or retention.
 
-A bare `EU` token is not sufficient when context is ambiguous. If the source defines `EU` as another term, it cannot establish European Union relevance. Prefer unambiguous anchors such as European Union, European Commission, Horizon Europe, European Research Area, or clearly European R&I context.
+A lone statement that Europe is “competitive”, “innovative”, “leading” or “lagging” is **not** enough.
 
-### Diagnostics
+## Aboutness is source-aware
 
-Record the actual dominant reason for rejection/defer: `insufficient_text`, `no_direct_eu`, `no_ri`, `no_geopolitics`, or `no_substantive_bridge/aboutness`. Do not collapse these into one scope label.
+**Reject incidental mentions, not short documents.** Aboutness must be judged against the text the source actually exposes.
 
-## Publication quality
+- **Full/long text:** recurrence and section spread can help show that EU + R&I + strategic context is substantive rather than incidental.
+- **Abstract only:** do not require nonexistent sections. A coherent title/abstract/keyword connection can be sufficient.
+- **Metadata only:** return `insufficient_text` and defer. Missing evidence is not evidence of irrelevance.
 
-English remains a hard publication invariant. Core messages must be source-backed and informative. The displayed line states the claim itself; it does not prepend a generic attribution phrase.
+A direct same-sentence bridge is helpful but not mandatory for analytical institutional material when the mechanism is established across the title/lead. The triangulated route remains fail-closed for obvious page-type/off-topic noise.
+
+## EU acronym rule
+
+A bare `EU` token is not enough when ambiguous. Prefer unambiguous anchors such as European Union, European Commission, Horizon Europe, European Research Area, or clearly European R&I context. If a source defines `EU` as something else, it cannot establish European Union relevance.
+
+## Diagnostics
+
+Keep the dominant failure/defer reason precise: `insufficient_text`, `no_direct_eu`, `no_ri`, `no_geopolitics`, or `no_substantive_bridge/aboutness` where those legacy codes apply. `no_geopolitics` means **no qualifying strategic context**, not merely “the literal word geopolitics was absent.”
+
+## Publication quality and reader claims
+
+English remains a hard publication invariant. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
+
+Titles, authors, source, date, links, abstracts/summaries and review evidence remain available separately.
+
+## Strand B
+
+Strand B is for developed/adapted/extended/refined **reusable futures or forward-looking R&I/technology-analysis methods**. Ordinary method use, descriptive bibliometrics, generic reviews, trend reports and domain prediction systems do not qualify merely because they mention foresight or uncertainty.
+
+## Strand C
+
+Strand C contains externally observable weak signals/developments that can change how Strand-A evidence should be read. It is deliberately secondary. The public corpus applies a **15% maximum share** for C; this is not a quota to fill.
+
+## Time boundary
+
+All public A/B/C evidence uses a hard rolling **four-calendar-month** floor. Saved historical rows or Matrix recovery cannot widen it.
 
 ## Matrix hand-off
 
-Pass-1 records that clear admission are handed to the matrix with their source-backed summary/relevance evidence. Direction vocabulary may support independence/competitiveness interpretation, but it is not an additional admission gate.
-
-## V17.10 manual candidate lane
-
-A curated manual list is a candidate/recovery source, not evidence. A newly supplied item may enter the radar only after its underlying primary source is retrieved/verified and passes this same admission profile. Metadata-only records defer. Secondary references, forthcoming/unpublished items and context-only references remain outside the matrix. Provenance records whether discovery was automated, manual, or both.
+Every Strand-A record that clears admission is handed to the Matrix classifier with its source-backed evidence. Direction words are classification evidence, not an extra Strand-A gate.

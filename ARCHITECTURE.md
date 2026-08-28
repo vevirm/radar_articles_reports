@@ -1,52 +1,80 @@
-# Architecture — V17.11.1 exact-link reviewed manual evidence
+# Architecture — V17.13.0 reader-first, high-recall / strict-admission radar
 
-The radar has two discovery entrances feeding the same substantive standard.
+The system separates **discovery**, **admission**, **presentation**, and **Matrix classification**. V17.13 deliberately widens discovery while keeping admission conservative.
 
-1. **Automated discovery** (`scripts/scan_radar.py`) uses scholarly/institutional source rotation and source-aware gating.
-2. **Manual candidate ingestion** (`scripts/manual_ingest.py`) parses common office/data formats, normalizes bibliography/URLs, deduplicates against state, and targets the **exact URL supplied by the curator**.
+## 1. Discovery entrances
 
-Manual ingestion does not use a search engine. When direct runtime retrieval is unavailable, a reviewed-evidence cache may stand in for fetched text only when its review is explicitly bound to the same canonical supplied URL and records source verification/evidence mode. A primary URL may be resolved for records explicitly flagged as secondary/generic/wrong-reference, but the supplied URL remains provenance.
+### Automated discovery
 
-## Evidence and admission
+`scripts/scan_radar.py` rotates across OpenAlex, Crossref, direct institutional/journal sources, futures-method searches and Matrix-gap searches. V17.13 adds a small `finding-context` scholarly lane whose queries are derived from recurring themes already visible in Strand A.
 
-The curator document is a candidate/recovery source, not primary evidence. The manual lane can nevertheless admit a record once underlying reviewed source evidence satisfies the core requirement: genuine EU/European R&I in geopolitical context. Metadata-only material defers rather than being called irrelevant. Forthcoming, context-only and unresolved secondary records remain separate.
+The current findings are therefore allowed to influence **where the scanner looks**, but not **what it automatically accepts**.
 
-The reviewed-source route records scanner diagnostics as well as the reviewed decision, so a lexical miss can be distinguished from a substantive failure instead of silently weakening the scanner gate.
+### Researcher fallback attention
 
-## Matrix
+`priority_people.json` contains the named-researcher attention list. The scanner resolves authors where possible and sends their recent works through the same scholarly candidate builders as ordinary discovery. In V17.13 this lane is mainly used when normal scholarly yield is low or Matrix coverage is very sparse. A name is never an admission credential.
 
-Curator cells are stored only as `curator_primary_cell` / `curator_cells`. Reviewed source evidence stores `matrix_dimension`, `quadrant_claimed`, `quadrant_implied`, and `matrix_evidence_basis`. The frontend locks the matrix row to reviewed `matrix_dimension`; it does not re-infer that row from topic words. Evidence-implied quadrant controls placement when present, while claimed/advocated direction remains visible separately.
+### Manual candidate ingestion
 
-## Recall repair
+`scripts/manual_ingest.py` parses common office/data formats, normalizes bibliography/URLs, deduplicates against state and targets the exact URL supplied by the curator. The curator file is a candidate/recovery source, not primary evidence.
 
-Missed current candidates can feed bounded exact-URL recovery queues. A later real scanner run retries those URLs before broader institutional discovery, but every recovered source still must pass the substantive gate. This raises recall around known high-value misses without broadly lowering precision.
+When runtime retrieval is unavailable, a reviewed-evidence cache may stand in only when it is explicitly tied to the same canonical supplied URL and records source verification/evidence mode. The supplied URL remains provenance even when a primary URL is resolved.
 
-## Provenance and state integrity
+## 2. Strand-A admission
 
-Public records use `discovery_provenance` = `automated`, `manual`, or `both`. Manual diagnostics preserve manual IDs, supplied URLs, directly resolved primary/full-text URLs, and the direct-link chain used during review. Manual ingest has separate history under `manual_ingest` and deliberately preserves `last_updated`, scan cursors, completed cycles and scan-result history.
+A substantive finding needs:
 
-## Primary site components (V17.12.5)
+1. direct EU/European scope;
+2. genuine R&I/science/technology-system substance; and
+3. strategic context.
 
-The public presentation has four primary components only:
+There are two routes for item 3.
 
-1. **Read at least this** (`/read/`) — shortest useful editorial synthesis plus a live layer derived from the current radar state.
-2. **Main radar** (`/`) — complete cumulative evidence corpus across Strands A/B/C.
-3. **Matrix** (`/frontier/`) — 4×4 autonomy × competitiveness classification of qualifying evidence.
-4. **Risks & opportunities** (`/priorities/`) — ranked decision view derived from matrix-qualified evidence.
+**Explicit route:** the source directly discusses geopolitics, geoeconomics, economic/research security, strategic competition or equivalent context.
 
-`/briefing/` is retained as a secondary evidence browser over the Main Radar and is deliberately not part of the four-component top-level navigation. The progressive-disclosure principle (“read at least this” → reasoning → evidence) is reused across all four primary components.
+**Triangulated route:** literal geopolitical language is absent, but at least two independent strategic families are present and at least one is relational/control-oriented. Current families cover dependence/control, competition/capability, international coordination, security/resilience, rules/standards power and research-talent position.
 
-## Reader-facing claim layer
+This prevents a single vague cue such as “competitiveness” from becoming a permissive gate.
 
-The public interface distinguishes **reader-facing claims** from **source detail**. `core_message` / the shared `RadarInsights.pointFor()` layer carries the concise plain-language proposition used in prominent cards and matrix cells. Publication title, abstract/summary, authors, source, date, type and link remain source/bibliographic fields and are not paraphrased in place.
+Source-aware aboutness remains in force: full text can use recurrence/section spread; abstract-only material is judged on the evidence that actually exists; metadata-only material defers.
 
-`scripts/scan_radar.py::normalize_reader_claims()` is the final write boundary for every published corpus lane (`strand_a`, `strand_b`, `strand_c`, `frontier_evidence`). `scripts/manual_ingest.py` calls the same boundary before it writes state. The browser applies the same rule again as a defensive display fallback, so future insertion paths cannot bypass the reader-first wording merely by omitting a precomputed claim.
+## 3. Strand B and Strand C
 
+Strand B remains a method lane: a source has to develop/adapt/extend/refine a reusable futures or forward-looking R&I/technology-analysis method. Merely applying a method or describing a trend is not enough.
 
-## Embedded researcher attention in scholarly discovery (V17.12.7)
+Strand C remains the weak-signal lane. Its protected follow-up query wave is disabled in V17.13. After merge, C is capped at 15% of the public A+B+C corpus; that percentage is a maximum, never a target.
 
-The scanner has an embedded scholarly-attention mechanism backed by `priority_people.json`. It is backend discovery input, not a public content type. `priority_people_rotation_plan()` round-robins categories and `scan_state.priority_people_cursor` records only contiguous researchers for whom an API request was actually attempted, while the normal query cursors remain independent.
+## 4. Hard public time boundary
 
-For each selected researcher, `collect_priority_people()` first resolves an exact OpenAlex author identity (using the supplied affiliation as a tie-breaker), requests works by author ID, and also queries Crossref's author field. Both paths immediately rejoin the ordinary OpenAlex/Crossref candidate pools and call the unchanged `candidate_from_openalex()` / `candidate_from_crossref()` admission functions. Missing abstracts receive only a small bounded DOI-metadata recovery budget. If both exact-author sources yield no record, the scanner emits at most a few affiliation/topic context queries into the ordinary scholarly collectors. Context results can belong to anyone and still have to pass the normal EU R&I × geopolitics gate.
+The public evidence corpus is always the latest four calendar months. `preserved_corpus_floor()` now returns the rolling floor rather than preserving older saved state. The rule also applies to `frontier_evidence`, so historical Matrix-recovery rows cannot silently stretch the public window.
 
-Researcher attention keeps only the private state required for fair cycling and author-ID caching (`priority_people_cursor`, `priority_people_completed_cycles`, `priority_people_openalex_author_ids`). No watch-list labels or dedicated researcher diagnostics are published on admitted records. It does not alter OpenAlex broad, Crossref broad/priority/source-first, institution, Strand-B method, Frontier-gap, historical-exploration, or weak-signal cursors.
+## 5. Reader write boundary
+
+Raw bibliographic evidence and the reader-facing claim are separate fields. `plain_language_claim()` is the final scanner write boundary for newly written claims; frontend helpers provide the same treatment for older stored rows.
+
+The rule is: state the substantive point in ordinary language, omit biography/method boilerplate unless it changes the meaning, and keep titles/authors/source/date/link separately available.
+
+## 6. Primary site components
+
+- `read/` — eight stable issues, expandable branches/subissues, live evidence below them.
+- `/` — main A/B/C radar.
+- `frontier/quick/` — simple 4×4 Matrix with claims and counts only.
+- `frontier/` — full Matrix with evidence/source detail.
+- `priorities/` — decision-oriented risks and opportunities.
+- `briefing/` — secondary evidence browser, not a primary navigation destination.
+
+This is progressive disclosure: the first screen should answer “what are the main issues?”, the quick Matrix should answer “what direction is the evidence pointing?”, and detail should appear only when requested.
+
+## 7. Matrix hand-off
+
+All admitted Strand-A records are passed to the Matrix candidate classifier. V17.13 removes the previous hidden frontend `dynamic` pre-filter. Matrix admission is still evidence-led: a record is shown only when row and direction can be supported.
+
+The internal classifier keeps stable analytical concepts (knowledge, infrastructure, conversion, rules; independence/control and competitiveness axes) for continuity. The reader-facing UI translates them to simpler language; see `frontier_criteria.md`.
+
+Curator cell hints are stored as hypotheses (`curator_primary_cell`, `curator_cells`). Reviewed underlying-source fields (`matrix_dimension`, `quadrant_claimed`, `quadrant_implied`) override keyword re-inference when present. Claimed and evidence-implied direction remain distinct.
+
+## 8. State and provenance
+
+Automated and manual provenance remain explicit. Manual ingestion is not a live scan. Packaging may normalize display claims and enforce the date boundary without advancing scanner cursors or fabricating `last_updated`.
+
+V17.13's bundled state keeps the uploaded scanner timestamp and records a four-month floor of 2026-04-28.

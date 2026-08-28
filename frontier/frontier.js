@@ -6,22 +6,22 @@
   'use strict';
 
   const ROWS=[
-    {id:'knowledge',name:'Knowledge & people',short:'Knowledge & people',description:'Science, publication, collaboration, talent flows and training.'},
-    {id:'infrastructure',name:'Infrastructure & inputs',short:'Infrastructure & inputs',description:'Compute, data, instruments, materials, energy and facilities.'},
-    {id:'conversion',name:'Conversion',short:'Conversion',description:'Firms, products, capital, procurement, defence, dual-use and capability-building.'},
-    {id:'rules',name:'Rules & institutions',short:'Rules & institutions',description:'Export controls, research security, standards, funding programmes and decision speed.'}
+    {id:'knowledge',name:'People & knowledge',short:'People & knowledge',description:'Researchers, skills, collaboration and knowledge flows.'},
+    {id:'infrastructure',name:'Tools & infrastructure',short:'Tools & infrastructure',description:'Compute, data, chips, materials, energy and facilities.'},
+    {id:'conversion',name:'Firms & scale',short:'Firms & scale',description:'Turning research into firms, products, procurement and industrial capacity.'},
+    {id:'rules',name:'Rules & coordination',short:'Rules & coordination',description:'Standards, security rules, funding programmes and decision speed.'}
   ];
   const COLUMNS=[
-    {id:'A',name:'Opening',direction:'more independent · more competitive',tone:'opportunity'},
-    {id:'B',name:'Costly autonomy',direction:'more independent · less competitive',tone:'tradeoff'},
-    {id:'C',name:'Productive dependence',direction:'less independent · more competitive',tone:'exposure'},
-    {id:'D',name:'Double loss',direction:'less independent · less competitive',tone:'alarm'}
+    {id:'A',name:'Stronger on both',direction:'more control · more competitive',tone:'opportunity'},
+    {id:'B',name:'More control, more cost',direction:'more control · less competitive',tone:'tradeoff'},
+    {id:'C',name:'Faster, but dependent',direction:'less control · more competitive',tone:'exposure'},
+    {id:'D',name:'Weaker on both',direction:'less control · less competitive',tone:'alarm'}
   ];
   const CELL_NAMES={
-    knowledge:{A:['Talent windfall','inflow of people, ideas'],B:['Closed lab','security cuts collaboration'],C:['Borrowed brains','excellence via others'],D:['Brain drain','people and ideas leave']},
-    infrastructure:{A:['Home chokepoint','EU holds a lever'],B:['Expensive mirror','own it, lag behind'],C:['Rented frontier',"fast, on others' terms"],D:['Cut supply','access lost, no substitute']},
-    conversion:{A:['Home champion','EU firm sets pace'],B:['Protected niche','sovereign but subscale'],C:['Foreign exit','scale abroad, value too'],D:['Hollowing out','no firms, no capability']},
-    rules:{A:['Rule-setter','EU standard adopted'],B:['Fortress rules','autonomy, slower system'],C:['Rule-taker',"adopts others' regimes"],D:['Gridlock','cannot decide in time']}
+    knowledge:{A:['Attract and keep talent','people and knowledge strengthen Europe'],B:['Protection slows exchange','more control, less collaboration'],C:['Capability from outside','stronger work, but reliant on others'],D:['Talent and knowledge leave','Europe loses people and capability']},
+    infrastructure:{A:['European capacity','Europe owns an important tool or input'],B:['Own capacity, higher cost','more control, but performance or cost suffers'],C:['Access without control',"frontier access depends on others"],D:['Access lost','dependency becomes a capability loss']},
+    conversion:{A:['European firms scale','research becomes European industrial strength'],B:['Protected but small','more control, but firms remain subscale'],C:['Scale with outside dependence','growth relies on foreign capital, markets or platforms'],D:['Research does not scale here','firms, value or production move away']},
+    rules:{A:['Europe shapes the rules','European standards or decisions improve both position and performance'],B:['Protection adds friction','security or autonomy rules slow the system'],C:['Europe follows outside rules','performance depends on external regimes'],D:['Rules arrive too late','fragmentation or delay weakens both control and competitiveness']}
   };
 
   const ROW_TERMS={
@@ -122,7 +122,9 @@
       const fullText=clean(`${claim} ${e.title||''} ${e.summary||''} ${e.relevance_note||''} ${theme}`);
       const strategicKnowledge=/research security|knowledge security|science diplomacy|research collaboration|scientific collaboration|research cooperation|scientific cooperation|researcher mobility|research mobility|research talent|brain drain|brain gain|talent inflow|talent outflow/i.test(fullText);
       const dynamic=hitCount(fullText,EVENT_TERMS)>0 || hitCount(fullText,INDEPENDENCE_TERMS)>=1 || hitCount(fullText,COMPETITIVENESS_TERMS)>=1 || strategicKnowledge;
-      if(!dynamic) continue;
+      // Every admitted radar finding reaches the matrix classifier. The classifier can still reject it
+      // when the evidence does not support a row/direction; we no longer drop it in a hidden pre-filter.
+      void dynamic;
       out.push({
         headline:claim||clean(e.title||''),
         title:clean(e.title||''),
@@ -447,11 +449,11 @@
 
   function whyQualifies(flags,column,row){
     const parts=[];
-    if(flags.sustain) parts.push('changes whether the EU could sustain the activity without non-EU reliance');
-    if(flags.compete) parts.push('changes whether an independent EU position could remain competitive');
-    if(flags.failure) parts.push('reveals a condition that could make access, capability or performance fail');
-    let s=parts.length?parts.join('; '):'changes the EU independence–competitiveness position';
-    return `${s}. It maps to ${row.name} / ${column.name}.`;
+    if(flags.sustain) parts.push('changes how much control Europe has');
+    if(flags.compete) parts.push('changes how well Europe can compete');
+    if(flags.failure) parts.push('shows a concrete way access or capability can fail');
+    const s=parts.length?parts.join('; '):'changes Europe’s control and competitive position';
+    return `${s}. This belongs under ${row.name} / ${column.name}.`;
   }
 
   function classifySignal(x,data,index,now=new Date()){

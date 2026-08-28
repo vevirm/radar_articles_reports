@@ -1,39 +1,56 @@
-# Sovereignty-Frontier criteria — V17.9.0 evidence-led matrix
+# Matrix criteria — V17.13.0
 
-## Structure
+## Reader-facing structure
+
+The public Matrix deliberately uses simple language.
 
 Rows:
-1. Knowledge & people
-2. Infrastructure & inputs
-3. Conversion
-4. Rules & institutions
+1. **People & knowledge**
+2. **Tools & infrastructure**
+3. **Firms & scale**
+4. **Rules & coordination**
 
 Columns:
-- **A Opening:** independence ↑, competitiveness ↑
-- **B Costly autonomy:** independence ↑, competitiveness ↓
-- **C Productive dependence:** independence ↓, competitiveness ↑
-- **D Double loss:** independence ↓, competitiveness ↓
+- **Stronger on both** — more European control/capability and stronger competitiveness
+- **More control, more cost** — more control/capability but a competitiveness/cost trade-off
+- **Faster, but dependent** — stronger competitiveness/scale while dependence or external control remains
+- **Weaker on both** — loss of control/capability and weaker competitiveness
 
-## Core reports/papers
+Cell labels are written as direct phrases such as “Attract and keep talent”, “European capacity”, “Research does not scale here” and “Rules arrive too late”.
 
-For vetted pass-1 evidence, classify the row and the two directional axes from the source-backed evidence carried by the record—not solely from the shortened display claim.
+`frontier/quick/` shows only the picture: claims and counts. `frontier/` exposes the supporting source detail.
 
-Direction markers such as dependence, sovereign capacity, scale, cost, delay or leadership are **evidence**, not hard gates. A source can support a quadrant even when it does not use the exact marker vocabulary, provided the mechanism and direction are clear in the source evidence.
+## Internal continuity
 
-`quadrant_implied` means the quadrant described by the document's evidence. Where a source separately advocates or forecasts a different outcome, that belongs conceptually to `quadrant_claimed`; claimed and implied should not be silently merged.
+The classifier still uses the stable analytical mapping underneath the public wording:
 
-## Weak signals
+- `knowledge` → People & knowledge
+- `infrastructure` → Tools & infrastructure
+- `conversion` → Firms & scale
+- `rules` → Rules & coordination
 
-Weak signals remain stricter than core evidence. They must identify an external event/mechanism capable of moving a stored phenomenon and must have support for the direction of that movement. Do not fill cells with thematic similarity alone.
+and quadrants A/B/C/D still mean the four combinations of independence/control and competitiveness direction. The simpler labels are a presentation layer, not a change in analytical geometry.
+
+## Eligibility and flow from the radar
+
+Every admitted substantive Strand-A finding is offered to the Matrix classifier. There is no separate frontend `dynamic` gate. A record may still be excluded when its evidence does not support a defensible row and two-axis direction.
+
+For vetted evidence, classify from the source-backed summary/relevance/review evidence, not merely from the shortened display sentence.
+
+Direction markers such as dependence, sovereign capacity, scale, cost, delay or leadership are **evidence**, not mandatory keywords. A mechanism can establish direction without the exact vocabulary.
+
+## Claimed vs implied direction
+
+`quadrant_claimed` records an advocated, projected or stated destination when present. `quadrant_implied` records the condition/direction supported by the document's evidence. Do not silently merge them; explicit reviewed `quadrant_implied` controls placement when supplied.
 
 ## Subject sensitivity
 
-Direction must apply to Europe/EU, not merely to another actor mentioned in the same source. For example, foreign competitiveness or foreign talent loss must not automatically be scored as European competitiveness/talent movement.
+The direction has to apply to Europe/EU. A source saying that another actor gains talent, capability or competitiveness does not automatically tell us Europe's direction unless the European consequence is established.
+
+## Weak signals
+
+Weak signals are stricter than core evidence for Matrix use. They need an external event/mechanism capable of moving a stored phenomenon and evidence for the direction of that movement. Thematic similarity alone does not fill a cell.
 
 ## Coverage
 
-There are no quotas and no requirement that cells have equal counts. Empty or sparse cells should mean an evidence gap after classification, not a failure to read available source evidence. In the bundled repaired state, all 16 cells are populated from 69 qualifying evidence items with unequal cell counts.
-
-## V17.10 provenance and claimed/implied direction
-
-Manual provenance does not affect matrix eligibility. `quadrant_claimed` records an advocated/claimed outcome while `quadrant_implied` records the direction implied by the substantive evidence; keep both fields and use the implied evidence for placement when explicitly supplied.
+There are no cell quotas. Sparse cells are useful evidence gaps. In the bundled V17.13 state, the classifier obtains **112 qualifying placements from current four-month Strand-A evidence**, with unequal cell counts; two People & knowledge downside/dependence cells are currently empty, which is treated as an evidence gap rather than filled artificially.

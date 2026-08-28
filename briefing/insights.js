@@ -150,6 +150,23 @@
     const s=prepareSummary(x.summary||'');
     const n=norm(`${title} ${s} ${x.core_message||''}`);
 
+    // Reader-first rewrites requested for dense recurring evidence. These use only facts
+    // already present in the source record; bibliography and original summary remain untouched.
+    if(/e-hryvnia/.test(n)&&/bahamas/.test(n)&&/china/.test(n)&&/cyber resilience/.test(n))
+      return "The paper compares central-bank digital money in China, the EU and the Bahamas. Ukraine's e-hryvnia puts unusual weight on transparency and cyber resilience.";
+
+    if(/global cybersecurity governance/.test(n)&&/african union/.test(n)&&/(multistakeholder|gfce|igf)/.test(n))
+      return 'Regional blocs such as the EU and African Union can move toward shared cyber rules, while open forums that include governments, industry and civil society help countries build the capacity to apply them.';
+
+    if(/ai4s/.test(n)&&/china/.test(n)&&/japan/.test(n)&&/united kingdom/.test(n))
+      return 'The US, China, the EU, the UK and Japan now treat AI for science in much the same way: as a tool to break through hard problems, produce knowledge faster and stay competitive.';
+
+    if(/mapping of technology specialisation/.test(n)&&/venture capital/.test(n)&&/patent/.test(n))
+      return 'Patents, research papers and venture-capital deals from 2010 to 2025 show where the EU and its partners specialise: what they invent, what they research and where new companies take root.';
+
+    if(/no one builds alone/.test(n)&&/open hardware/.test(n)&&/india/.test(n)&&/ai chips?/.test(n))
+      return 'Open hardware could give Europe and India more control over AI-chip technology without either side having to build the whole stack alone.';
+
     // Explicit research-talent loss is itself the substantive Frontier finding.  Prefer
     // the sentence that states the loss/brain-drain condition over a nearby generic
     // investment or policy sentence; otherwise a report can be admitted correctly but
@@ -273,6 +290,21 @@
 
     if(/diffusion of dual-use technologies/.test(context)&&/cross-border knowledge transfer/.test(context)&&/dependencies in strategically important supply chains/.test(context))
       return 'The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies.';
+
+    if(/e-hryvnia/.test(context)&&/bahamas/.test(context)&&/china/.test(context)&&/cyber resili/.test(context))
+      return "The paper compares central-bank digital money in China, the EU and the Bahamas. Ukraine's e-hryvnia puts unusual weight on transparency and cyber resilience.";
+
+    if(/global cybersecurity governance/.test(context)&&/african union/.test(context)&&/(multistakeholder|gfce|igf)/.test(context))
+      return 'Regional blocs such as the EU and African Union can move toward shared cyber rules, while open forums that include governments, industry and civil society help countries build the capacity to apply them.';
+
+    if(/ai4s/.test(context)&&/china/.test(context)&&/japan/.test(context)&&/(united kingdom| uk )/.test(` ${context} `))
+      return 'The US, China, the EU, the UK and Japan now treat AI for science in much the same way: as a tool to break through hard problems, produce knowledge faster and stay competitive.';
+
+    if(/mapping of technology specialisation/.test(context)&&/venture capital/.test(context)&&/patent/.test(context))
+      return 'Patents, research papers and venture-capital deals from 2010 to 2025 show where the EU and its partners specialise: what they invent, what they research and where new companies take root.';
+
+    if(/no one builds alone/.test(context)&&/open hardware/.test(context)&&/india/.test(context)&&/ai chips?/.test(context))
+      return 'Open hardware could give Europe and India more control over AI-chip technology without either side having to build the whole stack alone.';
 
     // General cleanup: remove list/academic scaffolding and prefer short verbs.
     s=s.replace(/^(?:First|Second|Third|Fourth|Finally),?\s*/i,'')

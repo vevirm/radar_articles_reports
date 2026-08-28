@@ -5,7 +5,7 @@ Key properties
 --------------
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
-* Strand A requires direct EU scope plus substantive R&I evidence and either explicit geopolitical/economic-security evidence or a bounded external-position mechanism (dependence/competition/capability/talent etc.).
+* Strand A requires direct EU scope plus substantive R&I evidence and a strategic-context bridge. "Geopolitics" need not be named: technological sovereignty, dependence, competitiveness, capability, research security, talent competition, international coordination, critical infrastructure, standards and governance power can establish the strategic context when they triangulate.
 * Strand B is a method-development library: a publication must contribute a new, adapted,
   extended, refined or otherwise explicitly developed futures/foresight method, or a genuinely
   forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
@@ -18,7 +18,7 @@ Key properties
 * Calls, facility pages, project pages, press releases, news/blog pages, events,
   jobs and other non-analytical material are rejected for A/B.
 
-The scanner aims for high-recall discovery with substantive admission: EU scope + R&I/related-system substance + geopolitics/economic security. It does not pad.
+The scanner aims for high-recall discovery with substantive admission: EU scope + R&I/related-system substance + explicit or triangulated strategic context. It does not pad.
 """
 from __future__ import annotations
 
@@ -155,12 +155,12 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.12.9-strict-anchored-C-forward-only"
+C_ADMISSION_PROFILE_VERSION = "v17.13.0-minority-C-cap"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
-RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.7.2-source-first-contextual-recall"))
+RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.0-triangulated-implied-strategic-context"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
@@ -474,6 +474,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "frontier_gap_cursor": 0,
             "openalex_explore_cursor": 0,
             "crossref_explore_cursor": 0,
+            "finding_context_cursor": 0,
             "priority_people_cursor": 0,
             "priority_people_completed_cycles": 0,
             "priority_people_openalex_author_ids": {},
@@ -534,7 +535,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "strand_b_method_cursor", "institution_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["a_recall_recovery_cursor"] = int(state.get("a_recall_recovery_cursor", 0) or 0)
     state.setdefault("a_recall_recovery_version", "")
@@ -545,7 +546,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     recall_changed = bool(previous.get("last_updated")) and previous.get("recall_profile_version") != RECALL_PROFILE_VERSION
     if recall_changed:
         for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor",
-                    "strand_b_method_cursor", "institution_cursor", "openalex_explore_cursor", "crossref_explore_cursor"):
+                    "strand_b_method_cursor", "institution_cursor", "openalex_explore_cursor", "crossref_explore_cursor", "finding_context_cursor"):
             state[key] = 0
         state["result_depth"] = {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}}
         state["frontier_recovery_depth"] = {"openalex": {}, "crossref": {}}
@@ -1017,6 +1018,67 @@ A_STRATEGIC_RI_OUTCOME = [
     "commercialisation", "commercialization", "industrialisation", "industrialization",
     "scale-up", "scale up", "technology transfer", "knowledge transfer", "research infrastructure",
 ]
+
+# V17.13 reader/recall repair: strategic context can be implied rather than literally labelled
+# "geopolitics".  The implied route is deliberately triangulated: a generic paper about EU
+# competitiveness, AI or capacity does not pass by itself.  At least two independent families
+# must be present, and at least one must describe a relational/control mechanism.
+A_IMPLIED_STRATEGIC_FAMILIES = {
+    "dependence_control": [
+        "dependence", "dependency", "reliance", "strategic autonomy", "technological sovereignty",
+        "technology sovereignty", "control over", "access to", "bottleneck", "chokepoint",
+        "vendor lock-in", "lock-in", "external supplier", "foreign supplier", "non-eu supplier",
+        "supply security", "supply chain resilience", "resilience",
+    ],
+    "competition_capability": [
+        "competitiveness", "competitive position", "global competition", "international competition",
+        "leadership", "technology lead", "research lead", "falling behind", "catch up", "catch-up",
+        "capability gap", "capacity gap", "innovation gap", "funding gap", "investment gap",
+        "research capacity", "scientific capacity", "innovation capacity", "technological capabilities",
+        "technology capabilities", "scale-up gap", "scale up gap",
+    ],
+    "international_coordination": [
+        "international coordination", "international cooperation", "international collaboration",
+        "research cooperation", "research collaboration", "scientific cooperation",
+        "science diplomacy", "third country", "third countries", "non-eu", "foreign",
+        "cross-border", "cross border", "global partnership", "international partnership",
+    ],
+    "security_resilience": [
+        "research security", "knowledge security", "foreign interference", "security screening",
+        "critical infrastructure", "infrastructure security", "economic security", "national security",
+        "dual-use", "dual use", "export control", "supply chain security", "trusted research",
+    ],
+    "rules_power": [
+        "standard-setting", "standard setting", "standards", "rule-setting", "rule setting",
+        "regulatory power", "regulatory influence", "governance power", "agenda-setting",
+        "agenda setting", "rule-taker", "rule taker", "rule-setter", "rule setter",
+        "mutual recognition", "international governance", "technology governance",
+    ],
+    "talent_position": [
+        "brain drain", "brain gain", "researcher outflow", "researcher inflow",
+        "research talent", "scientific talent", "talent competition", "talent attraction",
+        "talent retention", "researcher mobility", "scientist mobility", "research careers",
+    ],
+}
+A_IMPLIED_RELATIONAL_FAMILIES = {
+    "dependence_control", "international_coordination", "security_resilience", "rules_power", "talent_position"
+}
+
+def implied_strategic_context(text: str) -> tuple[bool, list[str], list[str]]:
+    """Return a conservative, triangulated strategic-context decision.
+
+    This is the non-literal-geopolitics route requested by the editorial design.  It uses
+    multiple independent mechanisms rather than a single permissive keyword.
+    """
+    families: list[str] = []
+    evidence: list[str] = []
+    for family, terms in A_IMPLIED_STRATEGIC_FAMILIES.items():
+        hits = distinct_matches(text, terms)
+        if hits:
+            families.append(family)
+            evidence.extend(hits[:2])
+    passes = len(set(families)) >= 2 and bool(set(families) & A_IMPLIED_RELATIONAL_FAMILIES)
+    return passes, list(dict.fromkeys(families)), list(dict.fromkeys(evidence))[:8]
 CHINA_CONTEXT = ["china", "chinese"]
 CHINA_GEO_CONTEXT = [
     "de-risk", "derisk", "geopolit", "economic security", "national security",
@@ -1699,9 +1761,11 @@ def aboutness_for_a(
     if not a_focus:
         # Keep the substantive failure reason visible to diagnostics.
         ri = _ri_hits(ta if mode == "abstract_only" else full)
-        geo = _geo_hits(ta if mode == "abstract_only" else full)
-        result["ri_terms"], result["geo_terms"] = ri[:8], geo[:8]
-        result["reason"] = "no_ri" if not ri else ("no_geopolitics" if not geo else "no_substantive_bridge")
+        probe = ta if mode == "abstract_only" else full
+        geo = _geo_hits(probe)
+        implied_ok, _, implied_terms = implied_strategic_context(probe)
+        result["ri_terms"], result["geo_terms"] = ri[:8], (geo or implied_terms)[:8]
+        result["reason"] = "no_ri" if not ri else ("no_geopolitics" if not (geo or implied_ok) else "no_substantive_bridge")
         return result
 
     if mode == "abstract_only":
@@ -1737,7 +1801,10 @@ def aboutness_for_a(
     contextual_sentences = 0
     if contextual_evidence:
         for sent in split_sentences(full):
-            if _ri_hits(sent) and distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME):
+            implied_ok, _, _ = implied_strategic_context(sent)
+            if _ri_hits(sent) and (
+                implied_ok or (distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME))
+            ):
                 contextual_sentences += 1
     geo_supported = repeated_geo or contextual_sentences >= 1
     result["pass"] = bool(repeated_ri and geo_supported)
@@ -1787,7 +1854,8 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         sent_member = bounded_matches(sent, MEMBER_STATE_SCOPE)
         bare_eu = union_eu_word(sent, ta)
         ri_here = bool(distinct_matches(sent, RI_STRONG + RI_GENERIC))
-        geo_here = bool(distinct_matches(sent, GEO_STRONG)) or china_geo_signal(sent) or research_talent_flow_signal(sent)
+        implied_here, _, _ = implied_strategic_context(sent)
+        geo_here = bool(distinct_matches(sent, GEO_STRONG)) or china_geo_signal(sent) or research_talent_flow_signal(sent) or implied_here
         # An abstract mentioning the European Union as one comparator/case is not
         # automatically EU-scoped.  Specific EU institutions/programmes can establish
         # scope directly; generic "European Union"/bare EU needs substantive R&I +
@@ -1824,7 +1892,8 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     for sent in split_sentences(body[:50000]):
         european_here = distinct_matches(sent, EU_GENERIC) + bounded_matches(sent, MEMBER_STATE_SCOPE)
         if european_here and _ri_hits(sent):
-            contextual_here = bool(_geo_hits(sent)) or bool(
+            implied_here, _, _ = implied_strategic_context(sent)
+            contextual_here = bool(_geo_hits(sent)) or implied_here or bool(
                 distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME)
             )
             if contextual_here:
@@ -2295,7 +2364,11 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     context_text = ta if source_kind == 'scholarly' else lead
     external = distinct_matches(context_text, A_EXTERNAL_RELATION)
     outcomes = distinct_matches(context_text, A_STRATEGIC_RI_OUTCOME)
-    contextual_focus = bool(ri_ta and external and outcomes) if source_kind == 'scholarly' else bool(ri and external and outcomes)
+    implied_ok, implied_families, implied_terms = implied_strategic_context(context_text)
+    if source_kind == 'scholarly':
+        contextual_focus = bool(ri_ta and (implied_ok or (external and outcomes)))
+    else:
+        contextual_focus = bool(ri and (implied_ok or (external and outcomes)))
     # The contextual route is an expansion route, so page-type noise is fail-closed here.
     # This does not affect explicit A evidence or Strand B method papers whose abstracts may
     # legitimately mention workshops, calls, facilities or other methodological context.
@@ -2316,8 +2389,8 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
             focus = False
             explicit_focus = False
             contextual_focus = False
-    route = 'explicit-geopolitics' if explicit_focus else ('external-position-evidence' if contextual_focus else '')
-    context_evidence = list(dict.fromkeys(external + outcomes))[:6] if contextual_focus else []
+    route = 'explicit-geopolitics' if explicit_focus else ('triangulated-strategic-context' if contextual_focus else '')
+    context_evidence = list(dict.fromkeys(implied_families + implied_terms + external + outcomes))[:8] if contextual_focus else []
     return focus, ri, geo, bridge, route, context_evidence
 
 
@@ -2568,6 +2641,87 @@ def themes_for(text: str) -> list[str]:
         if distinct_matches(low, terms):
             result.append(name)
     return result
+
+
+FINDING_CONTEXT_QUERY_MAP = {
+    "research security / foreign interference": [
+        'Europe research security international collaboration universities',
+        'EU knowledge security research capability international coordination',
+    ],
+    "technology sovereignty / strategic autonomy": [
+        'Europe research technological sovereignty dependency capability',
+        'EU innovation strategic autonomy control technology access',
+    ],
+    "EU–China S&T cooperation / de-risking": [
+        'EU China research cooperation capability dependency',
+        'Europe China science technology de-risking research security',
+    ],
+    "export controls / dual use": [
+        'Europe research export controls dual use innovation capability',
+        'EU technology transfer controls research competitiveness',
+    ],
+    "fragmentation of global science": [
+        'Europe scientific collaboration fragmentation research capability',
+        'EU research international coordination global science fragmentation',
+    ],
+    "transatlantic / US–China S&T competition": [
+        'Europe research US China technology competition capability',
+        'EU transatlantic science technology dependence competitiveness',
+    ],
+    "critical and emerging technologies": [
+        'Europe critical technologies research capability dependency',
+        'EU AI quantum semiconductor biotech research competitiveness',
+    ],
+    "economic security and R&I": [
+        'Europe research innovation economic security dependency capability',
+        'EU R&D competitiveness strategic capability international coordination',
+    ],
+    "R&I competitiveness / technological capabilities": [
+        'Europe research innovation technological capabilities global competition',
+        'EU R&D capability gap competitiveness dependency',
+    ],
+    "supply chains / strategic dependencies": [
+        'Europe research technology supply chain dependency resilience',
+        'EU innovation critical inputs supply security capability',
+    ],
+    "Horizon Europe / FP10 international participation": [
+        'Horizon Europe international participation research security capability',
+        'FP10 international cooperation research competitiveness Europe',
+    ],
+    "science diplomacy": [
+        'EU science diplomacy research international coordination capability',
+    ],
+    "research talent / mobility / brain drain": [
+        'Europe research talent competition mobility retention',
+        'EU scientific talent brain drain research capability',
+    ],
+}
+
+def finding_context_query_bank(previous: dict[str, Any], limit: int = 12) -> list[str]:
+    """Turn recurring live findings into a small rotating discovery lane.
+
+    This affects discovery only. Every result still has to clear the ordinary
+    source, recency, EU-R&I and triangulated strategic-context gates.
+    """
+    counts: dict[str, int] = {}
+    for item in previous.get('strand_a', []) if isinstance(previous.get('strand_a'), list) else []:
+        if not isinstance(item, dict):
+            continue
+        blob = ' '.join(clean_text(item.get(k, '')) for k in ('title', 'summary', 'core_message', 'relevance_note'))
+        for theme in themes_for(blob):
+            counts[theme] = counts.get(theme, 0) + 1
+    ranked = [name for name, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
+    # Add unmapped live themes at the end through a conservative generic formulation.
+    queries: list[str] = []
+    for theme in ranked:
+        mapped = FINDING_CONTEXT_QUERY_MAP.get(theme, [])
+        if mapped:
+            queries.extend(mapped)
+        elif theme:
+            queries.append(f'Europe research innovation {theme} competitiveness dependency capability')
+        if len(queries) >= limit:
+            break
+    return list(dict.fromkeys(q for q in queries if clean_text(q)))[:limit]
 
 
 def get(url: str, timeout: int = REQUEST_TIMEOUT) -> requests.Response | None:
@@ -4538,6 +4692,34 @@ def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
     ):
         return "The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies."
 
+    if "e-hryvnia" in context and "bahamas" in context and "china" in context and ("cyber resilience" in context or "cyberresilience" in context):
+        return (
+            "The paper compares central-bank digital money in China, the EU and the Bahamas. Ukraine's e-hryvnia puts unusual weight on transparency and cyber resilience."
+        )
+
+    if "global cybersecurity governance" in context and "african union" in context and ("multistakeholder" in context or "gfce" in context or "igf" in context):
+        return (
+            "Regional blocs such as the EU and African Union can move toward shared cyber rules, while open forums that include governments, "
+            "industry and civil society help countries build the capacity to apply them."
+        )
+
+    if "ai4s" in context and all(x in context for x in ["china", "japan", "united kingdom"]):
+        return (
+            "The US, China, the EU, the UK and Japan now treat AI for science in much the same way: as a tool to break through hard problems, "
+            "produce knowledge faster and stay competitive."
+        )
+
+    if "mapping of technology specialisation" in context and "venture capital" in context and "patent" in context:
+        return (
+            "Patents, research papers and venture-capital deals from 2010 to 2025 show where the EU and its partners specialise: "
+            "what they invent, what they research and where new companies take root."
+        )
+
+    if "no one builds alone" in context and "open hardware" in context and "india" in context and ("ai chips" in context or "ai chip" in context):
+        return (
+            "Open hardware could give Europe and India more control over AI-chip technology without either side having to build the whole stack alone."
+        )
+
     # If a previous concise claim exists, preserve its proposition and simplify its wording.
     # The browser layer rejects chopped/ellipsised claims and re-extracts from source detail,
     # so the write boundary must not replace an established claim with a different sentence.
@@ -6202,19 +6384,45 @@ def bootstrap_floor(today: dt.date) -> dt.date:
 
 
 def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
-    """Keep the earliest established corpus date while bootstrapping new installs for four months."""
-    candidates = [bootstrap_floor(today)]
-    saved = parse_date(previous.get("corpus_start_date"))
-    if saved:
-        candidates.append(saved)
-    for strand in ("strand_a", "strand_b"):
-        for item in previous.get(strand, []) if isinstance(previous.get(strand), list) else []:
+    """Return the hard rolling public window floor.
+
+    The radar is intentionally about the last four calendar months.  Older saved rows, Git
+    recovery rows and historical matrix rows must not silently stretch that window.
+    """
+    return bootstrap_floor(today)
+
+def prune_public_window(data: dict[str, Any], floor: dt.date) -> tuple[dict[str, Any], dict[str, int]]:
+    """Remove public evidence older than the rolling four-month floor."""
+    out = dict(data) if isinstance(data, dict) else {}
+    removed: dict[str, int] = {}
+    for strand in ("strand_a", "strand_b", "strand_c", "frontier_evidence"):
+        raw = out.get(strand) if isinstance(out.get(strand), list) else []
+        kept = []
+        for item in raw:
             if not isinstance(item, dict):
                 continue
             d = parse_date(item.get("date"))
-            if d:
-                candidates.append(d)
-    return min(candidates)
+            if d and d < floor:
+                continue
+            kept.append(dict(item))
+        removed[strand] = max(0, len(raw) - len(kept))
+        out[strand] = kept
+    out["corpus_start_date"] = floor.isoformat()
+    return out, removed
+
+def cap_strand_c_share(strand_a: list[dict[str, Any]], strand_b: list[dict[str, Any]], strand_c: list[dict[str, Any]], max_share: float) -> tuple[list[dict[str, Any]], int]:
+    """Keep weak signals a minority view (default ceiling: 15% of all public findings)."""
+    max_share = max(0.0, min(float(max_share), 0.49))
+    if max_share <= 0 or not strand_c:
+        return [], len(strand_c)
+    base = len(strand_a) + len(strand_b)
+    if base <= 0:
+        max_c = 0
+    else:
+        max_c = int((max_share * base) / (1.0 - max_share))
+    ordered = sorted(strand_c, key=lambda x: (str(x.get("date", "")), str(x.get("first_seen", ""))), reverse=True)
+    kept = ordered[:max_c]
+    return kept, max(0, len(strand_c) - len(kept))
 
 
 def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
@@ -6276,6 +6484,13 @@ def main() -> int:
     with ADMISSION_DIAGNOSTICS_LOCK:
         ADMISSION_DIAGNOSTICS.clear()
     previous = load_previous()
+    DATE_FLOOR = bootstrap_floor(now.date())
+    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR)
+    if sum(age_window_removed.values()):
+        log_progress(
+            "Rolling four-month window: removed older public rows "
+            + ", ".join(f"{k}={v}" for k, v in age_window_removed.items() if v)
+        )
     previous, retired_c_removed = apply_retired_signal_filter(previous)
     if retired_c_removed:
         log_progress(
@@ -6354,7 +6569,7 @@ def main() -> int:
     # cell is not evidence that recent literature is absent.  Historical rescue is
     # optional and disabled by default; when enabled it only broadens the scholarly
     # query window, never the institutional/new-signal date floor.
-    gap_from = DATE_FLOOR if gap_lookback_months <= 0 else min(DATE_FLOOR, now.date() - relativedelta(months=gap_lookback_months))
+    gap_from = DATE_FLOOR  # Public radar and matrix never search outside the rolling four-month window.
     oa_cap = int(CONFIG.get("openalex_queries_per_scan", 40))
     cr_cap = int(CONFIG.get("crossref_broad_queries_per_scan", 35))
 
@@ -6396,8 +6611,17 @@ def main() -> int:
     priority_people_names_all = [clean_text(x.get("name")) for x in priority_people_bank]
     priority_people_names_planned = [clean_text(x.get("name")) for x in priority_people_batch]
 
-    oa_reserved = len(gap_scholarly) + len(b_method_focus) + len(oa_explore)
-    cr_reserved = len(gap_scholarly) + len(b_method_focus) + len(cr_explore)
+    finding_context_bank = finding_context_query_bank(
+        previous, max(1, int(CONFIG.get("finding_context_query_bank_size", 12) or 12))
+    )
+    finding_context_cursor_before = int(state.get("finding_context_cursor", 0) or 0)
+    finding_context_focus, _fc_next, _fc_wrapped = rotating_batch(
+        finding_context_bank, finding_context_cursor_before,
+        max(0, int(CONFIG.get("finding_context_queries_per_scan", 4) or 0)),
+    )
+
+    oa_reserved = len(gap_scholarly) + len(b_method_focus) + len(finding_context_focus) + len(oa_explore)
+    cr_reserved = len(gap_scholarly) + len(b_method_focus) + len(finding_context_focus) + len(cr_explore)
     oa_base_cap = max(1, oa_cap - min(oa_reserved, max(0, oa_cap - 1)))
     cr_base_cap = max(1, cr_cap - min(cr_reserved, max(0, cr_cap - 1)))
     oa_cursor_before = int(state.get("openalex_cursor", 0) or 0)
@@ -6408,12 +6632,17 @@ def main() -> int:
     cr_base, _cr_planned_next, _cr_planned_wrapped = rotating_batch(
         all_queries, cr_broad_cursor_before, cr_base_cap
     )
-    oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + oa_explore + oa_base))[:oa_cap]
-    cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + cr_explore + cr_base))[:cr_cap]
+    oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + finding_context_focus + oa_explore + oa_base))[:oa_cap]
+    cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + finding_context_focus + cr_explore + cr_base))[:cr_cap]
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
     cr_depth_lanes = {q: "gap" for q in gap_scholarly}
+    for q in finding_context_focus:
+        oa_query_dates[q] = DATE_FLOOR
+        cr_query_dates[q] = DATE_FLOOR
+        oa_depth_lanes[q] = "finding-context"
+        cr_depth_lanes[q] = "finding-context"
     for q in oa_explore:
         oa_query_dates[q] = DATE_FLOOR
         oa_depth_lanes[q] = "explore"
@@ -6633,6 +6862,9 @@ def main() -> int:
     state["strand_b_method_cursor"], b_method_wrapped, b_method_executed = committed_rotation_cursor(
         b_method_bank, b_method_cursor_before, b_method_focus, method_executed
     )
+    state["finding_context_cursor"], finding_context_wrapped, finding_context_executed = committed_rotation_cursor(
+        finding_context_bank, finding_context_cursor_before, finding_context_focus, method_executed
+    )
     state["openalex_explore_cursor"], _oa_explore_wrapped, oa_explore_executed = committed_rotation_cursor(
         explore_bank, oa_explore_cursor_before, oa_explore, executed_oa
     )
@@ -6646,7 +6878,9 @@ def main() -> int:
     priority_context_queries: list[str] = []
     priority_context_oa_count = 0
     priority_context_cr_count = 0
-    if priority_people_batch and budget_remaining() > 90 and not (oa_failed and cr_failed):
+    priority_people_trigger = max(0, int(CONFIG.get("priority_people_trigger_below_scholarly_candidates", 18) or 18))
+    priority_people_needed = (len(oa) + len(cr) < priority_people_trigger) or frontier_focus.get("empty_cells", 0) >= 8
+    if priority_people_batch and priority_people_needed and budget_remaining() > 90 and not (oa_failed and cr_failed):
         pp_deadline = time.monotonic() + min(
             int(CONFIG.get("priority_people_stage_seconds", 210) or 210),
             max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
@@ -7134,8 +7368,8 @@ def main() -> int:
         stubborn_enabled and remaining_empty and budget_remaining() > finalize_reserve + 25
         and not (deep_oa_disabled and deep_cr_disabled)
     ):
-        recovery_months = max(1, int(CONFIG.get("frontier_stubborn_recovery_lookback_months", 12) or 12))
-        recovery_from = min(DATE_FLOOR, now.date() - relativedelta(months=recovery_months))
+        recovery_months = max(1, int(CONFIG.get("frontier_stubborn_recovery_lookback_months", 4) or 4))
+        recovery_from = DATE_FLOOR
         recovery_focus = dict(active_frontier_focus)
         recovery_focus["empty_targets"] = remaining_empty
         recovery_focus["targets"] = remaining_empty
@@ -7150,6 +7384,7 @@ def main() -> int:
             recovery_exec: dict[str, Any] = {}
             deepening["stubborn_recovery_attempted"] = True
             deepening["stubborn_recovery_from"] = recovery_from.isoformat()
+            deepening["stubborn_recovery_window_note"] = "Same rolling four-month window as the public radar."
             deepening["stubborn_recovery_cells"] = remaining_empty
             log_progress(
                 "Stubborn-cell recovery: " + ", ".join(remaining_empty)
@@ -7218,12 +7453,11 @@ def main() -> int:
     strand_b = merge_corpus(prev_b, new_selected, "B", now_iso)
     prev_frontier_evidence = previous.get("frontier_evidence", []) if isinstance(previous.get("frontier_evidence"), list) else []
     frontier_evidence = merge_corpus(prev_frontier_evidence, frontier_recovery_candidates, "A", now_iso)
+    frontier_evidence = [
+        x for x in frontier_evidence
+        if isinstance(x, dict) and (parse_date(x.get("date")) is None or parse_date(x.get("date")) >= DATE_FLOOR)
+    ]
     output_corpus_floor = DATE_FLOOR
-    for item in strand_a + strand_b:
-        if isinstance(item, dict):
-            item_date = parse_date(item.get("date"))
-            if item_date:
-                output_corpus_floor = min(output_corpus_floor, item_date)
 
     current_c = anchor_news(news, strand_a)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
@@ -7233,6 +7467,11 @@ def main() -> int:
         item for item in strand_c
         if clean_text(item.get("headline", "")) not in retired_signal_titles
     ]
+    strand_c, c_share_removed = cap_strand_c_share(
+        strand_a, strand_b, strand_c, float(CONFIG.get("strand_c_max_share", 0.15) or 0.15)
+    )
+    if c_share_removed:
+        log_progress(f"Strand C share cap: removed {c_share_removed} older/lower-priority weak signal(s) to keep C at or below the configured minority share")
 
     # Recompute against exactly what will be published. A cell can change after the
     # final A/C merge even when the in-run provisional matrix looked stable.
@@ -7300,6 +7539,7 @@ def main() -> int:
     state["last_batches"] = {
         "openalex_queries": len(oa_batch),
         "openalex_exploration_queries": len(oa_explore),
+        "finding_context_queries": len(finding_context_focus),
         "crossref_broad_queries": len(cr_batch),
         "crossref_exploration_queries": len(cr_explore),
         "crossref_priority_tasks": len(cr_priority_batch),
@@ -7405,22 +7645,24 @@ def main() -> int:
             "c_prefilter_candidates": len(news),
             "c_anchored_candidates": len(current_c),
             "b_method_queries_this_scan": len(b_method_focus),
+            "finding_context_queries_this_scan": finding_context_focus,
+            "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day rolling window and keeps all earlier signals." if new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day discovery window and retains signals only while they remain inside the public four-month window." if new_c_count < 3 else "",
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
             "rotation_note": (
-                "Fresh-window scanning plus full-corpus exploration were both active. "
-                "Historical exploration rotated through: " + ", ".join(exploration.get("themes", [])) + "."
+                "Fresh-window scanning plus full-window exploration were both active. "
+                "Full-window exploration rotated through: " + ", ".join(exploration.get("themes", [])) + "."
                 + (
-                    " The first slice admitted nothing, so a second historical slice was also tried: "
+                    " The first slice admitted nothing, so a second full-window slice was also tried: "
                     + ", ".join(quiet_rescue.get("themes", [])) + "."
                     if quiet_rescue.get("attempted") else ""
                 )
-            ) if exploration.get("themes") else "Fresh-window scanning was active; no historical exploration query was configured.",
+            ) if exploration.get("themes") else "Fresh-window scanning was active; no full-window exploration query was configured.",
             "historical_exploration": {
                 "from": DATE_FLOOR.isoformat(),
                 "openalex_queries": oa_explore,
@@ -7450,6 +7692,8 @@ def main() -> int:
             "openalex_queries_executed": len(set(execution_stats.get("openalex_queries", set()))),
             "openalex_base_queries_executed": oa_base_executed,
             "openalex_exploration_queries_this_run": len(oa_explore),
+            "finding_context_queries_this_run": len(finding_context_focus),
+            "finding_context_queries_executed": finding_context_executed,
             "openalex_exploration_queries_executed": oa_explore_executed + int(execution_stats.get("quiet_rescue_openalex_executed", 0)),
             "openalex_missing_abstract_enrichment_attempted": int(execution_stats.get("openalex_abstracts_enrichment_attempted", 0)),
             "crossref_broad_queries_this_run": len(cr_batch),
