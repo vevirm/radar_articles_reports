@@ -1,16 +1,16 @@
-V17.13.16 CURRENT CORPUS INPUT — POST-SCAN REFRESH
+V17.13.18 CURRENT CORPUS INPUT — LATEST USER SCAN
 
 Authoritative user-supplied scan state:
-- file: radar (36).json
-- scanner last_updated: 2026-08-28T20:15Z
+- file: radar (37).json
+- scanner last_updated: 2026-08-28T20:50Z
 - corpus_start_date: 2026-04-28
-- SHA-256: 687fecf91f33253e6a654f712e39f57aafc55657066637a6d4bc74966c2acae6
-- counts: A=214, B=25, C=13, frontier_evidence=0
-- new_this_scan in Strand A: 12
+- SHA-256: c6d827d4f533d4efb8271b5d26f41ca570dc43f1271434625a438537f8111645
+- counts: A=224, B=25, C=14, frontier_evidence=0
 
 Packaging action:
-- radar (36).json is copied byte-for-byte to repository-root radar.json;
-- fast-reader wording is simplified only at display time in Read at least this, Matrix · short, and Risks & opportunities;
-- publication titles, links, evidence, classification, ranking and source detail are preserved;
-- the scheduled workflow is changed from every 12 hours to every 6 hours;
-- no additional discovery scan is claimed during packaging.
+- radar (37).json is copied byte-for-byte to repository-root radar.json;
+- V17.13.17 workflow security hardening and the 6-hour schedule are retained unchanged;
+- scanner admission, ranking, Matrix classification, source rotation and evidence logic are not changed;
+- Stuff's primary Excel download becomes stuff/source_merit_ranking.xlsx;
+- the workbook ranks deduplicated publications by source authority, EU R&I relevance, evidence strength and author transparency, with official EU sources deliberately highest;
+- the ranking workbook is a presentation/reference export only and is not read by the scanner.

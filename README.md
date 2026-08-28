@@ -97,7 +97,7 @@ The bundled `radar.json` is the user-supplied **post-scan `radar (35).json`** st
 
 The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.3 makes Matrix coverage an explicit input to rotation. The Matrix median becomes a bounded moving coverage target (minimum 3, maximum 10): cells below that level receive the reserved gap-search budget first, with zero cells weighted most heavily. Coverage is recomputed during matrix-depth waves, so attention moves as cells fill instead of stopping once an empty cell gets one item. This changes search effort only; admission standards remain unchanged and the scanner does not manufacture equal counts. The finding-context lane and bounded external-shock queries remain, and every query family obeys the same four-month date floor.
 
-The scheduler remains active on push, every 12 hours, and manual dispatch via `.github/workflows/radar-scan.yml`.
+The scheduler remains active on push, every 6 hours, and manual dispatch via `.github/workflows/radar-scan.yml`.
 
 ## Manual candidate ingest
 
@@ -226,3 +226,11 @@ This is a presentation/export repair only: no fresh scan, no Radar-data change, 
 ## V17.13.14 — plain-English glossary
 
 `glossary/` adds a searchable 50-term plain-English glossary for recurring jargon across the Radar. Each term has a short definition and a separate explanation of why it matters for EU R&I in geopolitical context. The Glossary is linked from the main Radar toolbar/page chooser and all principal reader pages. Scanner and rotation logic are unchanged.
+
+## V17.13.18 — source merit ranking in Stuff
+
+- Bundled `radar.json` is refreshed to the user-supplied scan state from 2026-08-28T20:50Z (A=224, B=25, C=14).
+- `Stuff` now leads with `source_merit_ranking.xlsx`, a ranked publication/report workbook showing journal or institution, author, source quality/reputation, plain-English relevance, evidence type and source links.
+- Official EU primary sources are deliberately ranked highest for this EU R&I geopolitics use case. The score is transparent and documented on the workbook's `Method` sheet.
+- The workbook is not an input to the scanner. Scanner admission, scoring, Matrix classification, source rotation and evidence logic are unchanged.
+- V17.13.17 workflow security hardening and the 6-hour scan schedule remain unchanged.
