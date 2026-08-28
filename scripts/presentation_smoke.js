@@ -19,13 +19,27 @@ try {
   process.exit(1);
 }
 
-for (const rel of ['briefing/insights.js','frontier/frontier.js','priorities/priorities.js']) {
+for (const rel of ['glossary/glossary.js','briefing/insights.js','frontier/frontier.js','priorities/priorities.js']) {
   try {
     new vm.Script(read(rel), {filename: rel});
     ok(`${rel} syntax`);
   } catch (e) {
     fail(`${rel} syntax: ${e.message}`);
   }
+}
+
+
+try {
+  const ctx = {globalThis:{}};
+  vm.createContext(ctx);
+  vm.runInContext(read('glossary/glossary.js'), ctx, {filename:'glossary/glossary.js'});
+  const G = ctx.globalThis.RadarGlossary;
+  if (!G || !Array.isArray(G.terms) || G.terms.length !== 50) fail('shared glossary did not expose 50 terms');
+  else if (!G.lookup('Dual-use')) fail('shared glossary is missing Dual-use');
+  else if (!/glossary-inline/.test(G.annotate('dual-use research security', 2))) fail('shared glossary annotation helper failed');
+  else ok('shared glossary exposes 50 terms and inline annotation');
+} catch (e) {
+  fail(`shared glossary runtime: ${e.stack || e.message}`);
 }
 
 try {
@@ -50,7 +64,7 @@ try {
   fail(`reader-layer runtime build: ${e.stack || e.message}`);
 }
 
-for (const rel of ['index.html','read/index.html','briefing/index.html','frontier/index.html','priorities/index.html','stuff/index.html']) {
+for (const rel of ['index.html','read/index.html','briefing/index.html','frontier/index.html','frontier/quick/index.html','priorities/index.html','literature/index.html','stuff/index.html','glossary/index.html']) {
   const html = read(rel);
   const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]);
   try {
@@ -60,6 +74,13 @@ for (const rel of ['index.html','read/index.html','briefing/index.html','frontie
     fail(`${rel} inline JavaScript syntax: ${e.message}`);
   }
 }
+
+const readHtml = read('read/index.html');
+const prioritiesHtml = read('priorities/index.html');
+if (!/quick-terms/.test(readHtml) || !/RadarGlossary/.test(readHtml)) fail('Read at least this is missing contextual glossary help');
+else ok('Read at least this includes contextual glossary help');
+if (!/quickGlossary/.test(prioritiesHtml) || !/RadarGlossary/.test(prioritiesHtml)) fail('Risks & opportunities is missing contextual glossary help');
+else ok('Risks & opportunities includes contextual glossary help');
 
 const frontierHtml = read('frontier/index.html');
 const claim = frontierHtml.match(/function\s+claimText\s*\([^)]*\)\s*\{[^}]*\}/);

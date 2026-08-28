@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar V17.13.13
+# R&I Geopolitics Radar V17.13.15
 
 V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
@@ -24,6 +24,8 @@ This is not a looser relevance gate. The non-literal route needs at least **two 
 8. Funding & programmes
 
 Each issue is shown immediately as a connected branch map: main issue → branches → individual subissues. All eight maps render on arrival; there is no collapse/open control hiding them. Current radar findings sit below each map.
+
+The issue cards also reuse the Glossary in a compact form. Relevant specialist terms get a one-line **Plain English** explanation in the card, and dotted-underlined terms expose the same short definition on hover. The full Glossary remains available when the longer Radar-specific explanation is useful.
 
 ### 2. Simpler Matrix
 
@@ -53,7 +55,7 @@ The main radar remains the easy/reader-first view: plain claim first, then a sho
 
 Reader-facing prose is shorter and concrete. Bibliographic and source detail is preserved separately instead of being stuffed into the finding itself. The write boundary includes explicit handling for the e-hryvnia, cyber-governance, AI-for-science, CEPS technology-mapping and EU–India/open-hardware examples. Biographical material such as a researcher's training or job title is not used as the finding unless it is itself relevant evidence.
 
-The Risks & opportunities page is deliberately minimal: two ranked bullet lists, with source detail available on click.
+The Risks & opportunities page is deliberately minimal: two ranked bullet lists, with source detail available on click. It now also shows a short **Plain English terms on this page** box derived from the visible items; dotted-underlined specialist terms expose their one-sentence glossary meaning on hover.
 
 The same plain-language layer is used by the main radar, Matrix, Risks & opportunities and secondary briefing view.
 
@@ -220,3 +222,7 @@ This is a presentation/export repair only: no fresh scan, no Radar-data change, 
 - Workbook columns are limited to publication, authors, date, publisher/channel, type, what it says for EU R&I geopolitics, why the reader should care, and source link.
 - The deployment bundle contains one Excel download only: `stuff/bibliography_and_summaries.xlsx`.
 - BibTeX and RIS remain available for reference-manager use. Scanner admission, Matrix placement and rotation are unchanged.
+
+## V17.13.14 — plain-English glossary
+
+`glossary/` adds a searchable 50-term plain-English glossary for recurring jargon across the Radar. Each term has a short definition and a separate explanation of why it matters for EU R&I in geopolitical context. The Glossary is linked from the main Radar toolbar/page chooser and all principal reader pages. Scanner and rotation logic are unchanged.
