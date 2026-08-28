@@ -8,7 +8,7 @@ This package is designed to make accidental or malicious modification harder wit
 2. Uses exact, fixed GitHub Action commits rather than movable version labels.
 3. Runs the scanner with its normal source/API access, but without a stored repository credential.
 4. Stops before any save if the scanner changed a file other than `radar.json`.
-5. Checks that `radar.json` is valid JSON and has not been catastrophically truncated or inflated.
+5. Checks that `radar.json` is valid JSON. Large but plausible changes only warn; hard stops are reserved for clearly abnormal output (75%+ collapse, more than 4x growth, or an established main strand disappearing completely).
 6. Only after those checks, temporarily adds the GitHub credential needed to commit/push `radar.json`.
 7. Removes that credential after the push step.
 8. Publishes GitHub Pages in a separate job with separate permission.
