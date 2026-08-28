@@ -59,3 +59,7 @@ There are no cell quotas. Sparse cells are useful evidence gaps. In the bundled 
 ## Coverage and scanner rotation
 
 Coverage is diagnostic, not a quota. The scanner uses the current Matrix distribution to rotate extra discovery toward thin cells, using a bounded median cell count as the moving target. This reduces persistent blind spots while preserving evidence-based classification and unchanged admission rules. Rich cells can still grow through ordinary rotation; sparse cells simply receive more search attempts.
+
+
+## V17.13.6 placement precision
+A non-reviewed evidence record must satisfy the semantic contract of the selected row and quadrant before it appears in the Matrix. Generic AI mentions do not establish the infrastructure row. Reviewed source-level Matrix adjudications are preserved as adjudicated evidence. This rule changes classification precision, not the radar admission gate.

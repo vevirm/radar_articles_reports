@@ -51,7 +51,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
         with mock.patch.object(sr, 'frontier_matrix_coverage', return_value=(counts, 111, '')):
             focus = sr.frontier_gap_plan({}, sr.initial_scan_state({}))
         self.assertEqual(focus['median_count'], 6)
-        self.assertEqual(focus['target_count'], 10)
+        self.assertEqual(focus['target_count'], 12)
         self.assertGreaterEqual(focus['upper_quartile'], 8)
         self.assertIn('knowledge-D', focus['targets'])
         self.assertIn('knowledge-C', focus['targets'])
@@ -66,7 +66,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
         snap = sr.frontier_balance_snapshot(counts, {}, advance_cursor=False)
         self.assertEqual(snap['target_count'], 12)
         self.assertEqual(snap['targets'], ['knowledge-D'])
-        self.assertEqual(sr.CONFIG['matrix_balance_rotation_profile_version'], 'v17.13.5-distribution-aware-catchup')
+        self.assertEqual(sr.CONFIG['matrix_balance_rotation_profile_version'], 'v17.13.6-semantic-matrix-catchup')
 
     def test_equal_scarcity_does_not_bias_against_opening_cells(self):
         counts = {c: 2 for c in sr.FRONTIER_CELL_ORDER}
@@ -114,7 +114,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
 
     def test_new_allocation_profile_does_not_reset_ab_recall_profile(self):
         self.assertEqual(sr.CONFIG['recall_profile_version'], 'v17.13.1-eu-core-external-shock-english-evidence')
-        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.13.5-distribution-aware-matrix-catchup')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.13.6-semantic-matrix-catchup')
         self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.4-direct-institutional-signals')
 
 

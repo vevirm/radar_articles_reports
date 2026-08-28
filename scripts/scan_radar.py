@@ -160,7 +160,7 @@ C_ADMISSION_PROFILE_VERSION = "v17.13.1-minority-C-cap"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
-MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.3-matrix-coverage-aware-rotation"))
+MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.7-recurring-multifactor-matrix-balance"))
 SOURCE_ATTENTION_PROFILE_VERSION = str(CONFIG.get("source_attention_profile_version", "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
 RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.1-eu-core-external-shock-english-evidence"))
@@ -8043,9 +8043,11 @@ def main() -> int:
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),
+            "matrix_balance_rotation_mode": str(CONFIG.get("matrix_balance_rotation_mode", "recurring_every_scan")),
+            "rotation_dimensions": list(CONFIG.get("rotation_dimensions", [])),
             "frontier_empty_cells_before_scan": frontier_focus["empty_cells"],
             "rotation_note": (
-                "Fresh-window scanning plus full-window exploration were both active. "
+                "Fresh-window scanning, recurring Matrix-balance targeting and full-window exploration were active together. "
                 "Full-window exploration rotated through: " + ", ".join(exploration.get("themes", [])) + "."
                 + (
                     " The first slice admitted nothing, so a second full-window slice was also tried: "

@@ -1,4 +1,4 @@
-# R&I Geopolitics Radar V17.13.3
+# R&I Geopolitics Radar V17.13.6
 
 V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
@@ -164,3 +164,17 @@ This is **attention, not admission**. The scanner keeps a broad source share of 
 
 ## Front-page reader map (2026-08-28)
 The landing page now shows the reader journey before the page chooser: Orient → Evidence → Position → Decisions → Sources. Each step says what the reader finds there and links to the corresponding page. The short-to-full relationship is stated explicitly, especially Matrix short → full evidence.
+
+
+## V17.13.6 — Matrix semantic balance correction
+
+- The Matrix now requires the cell's semantic contract for every non-reviewed source record, not only weak signals.
+- A reviewed source-level Matrix decision remains authoritative and is not discarded by a second generic keyword check.
+- Generic AI/regulation language no longer counts as infrastructure without a concrete compute, chip, data, materials, facility or supply mechanism.
+- This reduces classifier pile-ups without hiding evidence: the Quick Matrix still shows every finding accepted by the full Matrix.
+- Scanner rotation reads these corrected cell counts. Catch-up now aims at 75% of the richest cell (still capped) and gives sparse cells more scholarly/institutional search slots.
+- Matrix balancing changes discovery allocation only. The EU-R&I-geopolitics admission gate is unchanged.
+- The landing-page “What you find in the pages.” heading is enlarged.
+
+### V17.13.7 rotation guarantee
+Matrix balance is now explicitly permanent: every future scan recalculates cell coverage and gives thin cells extra discovery attention as one factor among the scanner's other rotations. It does not become a quota and does not weaken admission.

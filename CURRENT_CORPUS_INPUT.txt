@@ -1,4 +1,4 @@
-V17.13.5 CURRENT CORPUS INPUT — POST-SCAN REFRESH
+V17.13.6 CURRENT CORPUS INPUT — POST-SCAN REFRESH
 
 Authoritative user-supplied scan state:
 - file: radar (35).json
@@ -10,8 +10,8 @@ Authoritative user-supplied scan state:
 
 Packaging action:
 - radar (35).json is copied unchanged to repository-root radar.json;
-- V17.13.5 reader UI, scanner code, Matrix balancing, source weighting and admission rules are preserved;
+- V17.13.6 reader UI, semantic Matrix balancing, source weighting and admission rules are preserved;
 - Matrix views read current per-record matrix fields from radar.json;
 - no additional discovery scan is claimed during packaging.
 
-Reader pages therefore use the latest supplied post-scan state while retaining the V17.13.5 interface and scanner implementation.
+Reader pages therefore use the latest supplied post-scan state while retaining the V17.13.6 interface and scanner implementation.

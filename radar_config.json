@@ -990,7 +990,7 @@
   "skip_known_items_before_classification": true,
   "skip_known_institution_urls_before_fetch": true,
   "institution_seen_cache_max": 5000,
-  "frontier_gap_queries_per_scan": 14,
+  "frontier_gap_queries_per_scan": 16,
   "frontier_gap_search_queries": {
     "knowledge-A": [
       "(EU OR Europe OR European) (researchers OR scientists OR \"research talent\") (attract OR retain OR recruit OR \"brain gain\") (\"strategic autonomy\" OR competitiveness OR \"research capacity\")",
@@ -1026,7 +1026,7 @@
     "rules-D": "(EU OR Europe OR European) (\"export controls\" OR sanctions OR foreign rules OR standards OR exclusion OR fragmentation) (research OR technology OR innovation) (blocked OR loses OR decline OR dependence OR \"fall behind\")"
   },
   "frontier_gap_priority_cells": [],
-  "frontier_gap_scholarly_queries_per_scan": 28,
+  "frontier_gap_scholarly_queries_per_scan": 32,
   "frontier_gap_scholarly_queries": {
     "knowledge-A": [
       "Europe research talent strategic autonomy competitiveness attraction",
@@ -1181,7 +1181,7 @@
   "inherited_corpus_audit_timeout_seconds": 8,
   "frontier_gap_historical_lookback_months": 0,
   "frontier_gap_scholarly_queries_per_target": 6,
-  "frontier_gap_institution_extra_sources_per_scan": 10,
+  "frontier_gap_institution_extra_sources_per_scan": 12,
   "frontier_gap_institution_url_terms": {
     "knowledge-A": [
       "research-talent",
@@ -1502,7 +1502,7 @@
   "crossref_source_first_rows": 60,
   "public_429_cooldown_seconds": 8,
   "public_429_max_cooldown_seconds": 30,
-  "allocation_profile_version": "v17.13.5-distribution-aware-matrix-catchup",
+  "allocation_profile_version": "v17.13.7-recurring-multifactor-rotation",
   "frontier_gap_empty_cell_weight": 4,
   "frontier_gap_empty_news_weight": 2,
   "frontier_gap_deepening_queries_per_wave": 14,
@@ -1519,7 +1519,7 @@
   "english_only": true,
   "major_eu_ri_focus": true,
   "aboutness_profile_version": "v17.9.0-source-length-aware",
-  "matrix_profile_version": "v17.13.1-simple-reader-matrix",
+  "matrix_profile_version": "v17.13.6-semantic-cell-contract",
   "display_claim_profile_version": "v17.13.2-explicit-subject-120-char",
   "aboutness_text_modes": {
     "full_text": {
@@ -1578,7 +1578,7 @@
   "package_file_budget": 100,
   "frontier_gap_balance_enabled": true,
   "frontier_gap_balance_target_cap": 12,
-  "matrix_balance_rotation_profile_version": "v17.13.5-distribution-aware-catchup",
+  "matrix_balance_rotation_profile_version": "v17.13.7-recurring-multifactor-matrix-balance",
   "source_attention_profile_version": "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening",
   "preferred_q1_journals_sjr2024": [
     "Research Policy",
@@ -1607,7 +1607,18 @@
   "official_eu_priority_sources_per_scan": 8,
   "source_attention_floor_broad_share": 0.4,
   "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Keep at least 40% of source-first attention broad. Admission gates are unchanged.",
-  "frontier_gap_balance_rich_cell_ratio": 0.55,
-  "frontier_gap_balance_repeat_scale": 3.0,
-  "frontier_gap_balance_repeat_cap": 8
+  "frontier_gap_balance_rich_cell_ratio": 0.75,
+  "frontier_gap_balance_repeat_scale": 4.0,
+  "frontier_gap_balance_repeat_cap": 10,
+  "matrix_balance_policy": "Matrix coverage uses the same semantic cell contract as the reader Matrix. Sparse cells get extra discovery attention; admission standards are unchanged and no cell is filled to satisfy a quota.",
+  "matrix_balance_rotation_mode": "recurring_every_scan",
+  "matrix_balance_rotation_rule": "Matrix coverage is recalculated every scan and during depth waves. Sparse cells receive extra discovery slots as one recurring rotation dimension alongside broad topic rotation, source-quality attention, finding-context queries, researcher attention and the methods lane. It never changes admission standards.",
+  "rotation_dimensions": [
+    "broad_topic_rotation",
+    "matrix_coverage_balance",
+    "source_quality_attention",
+    "finding_context",
+    "priority_researchers",
+    "ri_foresight_methods"
+  ]
 }

@@ -31,6 +31,9 @@
     rules:['export control','export controls','sanction','sanctions','regulation','regulatory','standard','standards','rule','rules','governance','institution','institutions','funding programme','funding program','programme','program','screening','research security','restriction','restrictions','ban','bans','law','laws','framework','decision','permit','permits','subsidy','subsidies','state aid']
   };
 
+  const INFRA_CONCRETE_RE=/\b(compute|computing|supercomputer|data cent(?:er|re)|cloud|semiconductor|chip|microelectronics|quantum|reactor|nuclear|grid|electricity|energy|battery|lithium|critical mineral|critical raw material|rare earth|materials|facility|infrastructure|telecom|5g|6g|satellite|cable|supply chain|strategic resource|research infrastructure|ai factory|gigafactory)\b/i;
+  const RULES_CONCRETE_RE=/\b(regulation|regulatory|governance|law|act|directive|standard|standards|framework|liability|compliance|screening|export control|sanction|state aid|procurement rule|funding programme|funding program|decision process|permit|licen[cs]e)\b/i;
+
   const INDEPENDENCE_TERMS=['sovereign','sovereignty','autonomy','autonomous','strategic autonomy','dependence','dependency','dependencies','reliance','rely','non-eu','foreign supplier','external supplier','externally controlled','access','control','diversif','de-risk','derisk','self-suff','domestic capacity','european capacity','local capacity','own technology','own capability','supply security','vendor','partner','partnership','open-weight','open source','chinese firms','chinese companies','us firms','american firms','imported technology','technology vendor','lock-in','lock in'];
   const COMPETITIVENESS_TERMS=['competit','performance','frontier','leading','leader','leadership','technological leadership','technology leadership','best available','capacity','capability','capabilities','scale','scaling','productivity','innovation','investment','invest','patent','market share','advanced','high-tech','high tech','talent','compute','supercomputer','lag','behind','fragmentation','subscale','cost','costly','expensive','shortage','declin','slow','delay','miss the','hollowing','brain drain'];
   const FAILURE_TERMS=['fail','failure','risk','vulnerab','exposure','weaponis','weaponiz','restrict','restriction','ban','block','cut off','cutoff','loss of access','suspend','withdraw','sanction','shortage','chokepoint','bottleneck','dependency','reliance','brain drain','hollowing','gridlock','delay','cannot','unable','no substitute','security cut','fragmentation','coercion','retreat','curb','curbs','struggl','fail to adopt','failed to adopt','decoupl'];
@@ -525,6 +528,13 @@
       // row merely because the manual list proposed one.
       if(reviewedMatrix&&storedRow&&opt.id!==storedRow) continue;
       const r=ROWS.find(v=>v.id===opt.id);
+      const rowEvidenceText=clean(`${candidateWhat(x)} ${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(x._evidenceSummary||'')}`);
+      // Generic AI or technology language is not infrastructure by itself. A non-reviewed
+      // source needs a concrete compute/chip/data/material/facility/supply mechanism.
+      if(r.id==='infrastructure' && !reviewedMatrix && storedRow!=='infrastructure' && !INFRA_CONCRETE_RE.test(rowEvidenceText)) continue;
+      // Governance-heavy AI papers should not fall into infrastructure merely because
+      // they mention AI systems; the rules row gets the first defensible chance.
+      if(r.id==='infrastructure' && !reviewedMatrix && RULES_CONCRETE_RE.test(rowEvidenceText) && !INFRA_CONCRETE_RE.test(rowEvidenceText)) continue;
       let m=materialityScore(x,evidence,r);
       if(reviewedMatrix&&storedRow===r.id&&clean(x._matrixBasis||evidence?.matrix_evidence_basis||'')) m=Math.max(m,3);
       if(m<2.4) continue;
@@ -535,10 +545,10 @@
       // rubric. Do not re-gate the result with a second literal phrase contract. That
       // contract is retained for external weak signals, where the event statement itself
       // must carry the mechanism.
-      if(x._origin!=='Evidence signal' && !reviewedMatrix && !cellEvidencePass(x,evidence,r,col)) continue;
+      if(!reviewedMatrix && !cellEvidencePass(x,evidence,r,col)) continue;
       // Brain-drain evidence is subject-sensitive: a Europe-related paper discussing
       // talent loss in China must not become European brain drain.
-      if(x._origin==='Evidence signal' && r.id==='knowledge' && col.id==='D' && !cellEvidencePass(x,evidence,r,col)) continue;
+      if(x._origin==='Evidence signal' && !reviewedMatrix && r.id==='knowledge' && col.id==='D' && !cellEvidencePass(x,evidence,r,col)) continue;
       row=r; rowPick=opt; materiality=m; direction=dir; column=col; break;
     }
     if(!row||!column) return null;

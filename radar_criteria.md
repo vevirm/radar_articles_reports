@@ -88,3 +88,13 @@ Matrix imbalance changes **where the scanner looks**, not what it admits. Each r
 Source quality changes **where the scanner looks first**, not what counts as relevant. Each scan reserves extra source-first attention for a verified SCImago Q1 journal shortlist and for official EU reports. At least 40% of source-first attention remains broad, and normal topic/gap rotation continues.
 
 Admission remains source-neutral on substance: the item must still establish EU/European consequence, R&I substance and a geopolitical/strategic mechanism. Prestige can strengthen confidence in evidence, but it cannot replace any of those three links. Unknown journal quartile is never a rejection reason.
+
+
+## V17.13.6 Matrix-driven rotation
+Scanner rotation measures coverage from the corrected reader Matrix. Thin cells receive extra scholarly and institutional search attention, with a catch-up target based on 75% of the richest cell and a bounded cap. This is a search-allocation rule only; no source is admitted because a cell is sparse.
+
+## V17.13.7 Permanent Matrix-balance rotation
+
+Matrix balance is a **recurring rotation dimension on every scan**, not a one-off repair pass. The scanner recalculates the 4×4 coverage before discovery and again during depth waves. Sparse cells receive extra search slots, while broad topic rotation, source-quality attention, finding-context queries, priority-researcher attention and the R&I-method lane continue in parallel.
+
+This is deliberately a search-allocation rule. A thin cell never lowers the EU + R&I + geopolitical evidence gate, and a rich cell is never excluded from ordinary discovery.

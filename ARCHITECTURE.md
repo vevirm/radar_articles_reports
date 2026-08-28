@@ -111,3 +111,11 @@ The source planner now has two bounded preference lanes inside the existing rota
 Matrix coverage is now a distribution-aware discovery allocator. The catch-up target is the larger of the current upper-quartile cell count and 55% of the richest cell, capped at 12. Thin rows and columns add scarcity pressure. Every sparse target receives at least one scholarly query before repeats are assigned. Empty cells lead deepening, but other sparse cells stay interleaved so one stubborn empty cell cannot monopolise the run. Admission rules are unchanged.
 
 The reader palette is black, white and red. The landing page shows the eight recurring issues before the evidence feed and exposes the relation between paired views such as Radar main/evidence browser and Matrix short/full.
+
+
+### V17.13.6 Matrix coverage contract
+The browser Matrix and the scanner coverage bridge now use the same stricter semantic cell contract for non-reviewed evidence. This prevents generic AI, competitiveness or regulation vocabulary from inflating a cell whose actual mechanism is different. Reviewed source-level Matrix adjudications bypass the generic phrase re-check. Matrix scarcity is therefore measured on defensible placements, and the rotation then spends extra search effort on genuinely thin cells rather than on classifier artefacts.
+
+### Recurring multi-factor rotation (V17.13.7)
+
+Matrix coverage is recalculated on every scan and remains one permanent rotation input. It works alongside broad topic rotation, preferred journal/EU-source attention, finding-derived context, named-researcher attention and the methods lane. Matrix scarcity changes search allocation only; it does not change admission.
