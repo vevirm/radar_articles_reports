@@ -76,11 +76,18 @@ for (const rel of ['index.html','read/index.html','briefing/index.html','frontie
 }
 
 const readHtml = read('read/index.html');
+const quickHtml = read('frontier/quick/index.html');
 const prioritiesHtml = read('priorities/index.html');
-if (!/quick-terms/.test(readHtml) || !/RadarGlossary/.test(readHtml)) fail('Read at least this is missing contextual glossary help');
-else ok('Read at least this includes contextual glossary help');
-if (!/quickGlossary/.test(prioritiesHtml) || !/RadarGlossary/.test(prioritiesHtml)) fail('Risks & opportunities is missing contextual glossary help');
-else ok('Risks & opportunities includes contextual glossary help');
+if (/RadarGlossary|quick-terms/.test(readHtml)) fail('Read at least this still depends on contextual glossary help');
+else if (!/fastReaderText/.test(readHtml)) fail('Read at least this is missing the fast-reader plain-language boundary');
+else ok('Read at least this uses direct plain-language wording');
+if (!/fastReaderText/.test(quickHtml)) fail('Matrix short is missing the fast-reader plain-language boundary');
+else ok('Matrix short uses direct plain-language wording');
+if (/RadarGlossary|quickGlossary/.test(prioritiesHtml)) fail('Risks & opportunities still depends on contextual glossary help');
+else if (!/fastReaderText/.test(prioritiesHtml)) fail('Risks & opportunities is missing the fast-reader plain-language boundary');
+else ok('Risks & opportunities uses direct plain-language wording');
+if (RadarInsights.fastReaderText('Frontier compute, research security, dual-use and procurement.') !== 'Top-end computing power, protecting sensitive research, usable for civilian and military purposes and buying.') fail('fastReaderText recurring-term rewrite failed');
+else ok('fastReaderText rewrites recurring specialist terms');
 
 const frontierHtml = read('frontier/index.html');
 const claim = frontierHtml.match(/function\s+claimText\s*\([^)]*\)\s*\{[^}]*\}/);

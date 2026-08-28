@@ -1,17 +1,16 @@
-V17.13.6 CURRENT CORPUS INPUT — POST-SCAN REFRESH
+V17.13.16 CURRENT CORPUS INPUT — POST-SCAN REFRESH
 
 Authoritative user-supplied scan state:
-- file: radar (35).json
-- scanner last_updated: 2026-08-28T13:43Z
+- file: radar (36).json
+- scanner last_updated: 2026-08-28T20:15Z
 - corpus_start_date: 2026-04-28
-- SHA-256: 642a517ee5719b2f204bab8a92659bec9d3e37b13f7917e297d1a7c6647f217c
-- counts: A=202, B=25, C=13, frontier_evidence=0
-- new_this_scan in Strand A: 19
+- SHA-256: 687fecf91f33253e6a654f712e39f57aafc55657066637a6d4bc74966c2acae6
+- counts: A=214, B=25, C=13, frontier_evidence=0
+- new_this_scan in Strand A: 12
 
 Packaging action:
-- radar (35).json is copied unchanged to repository-root radar.json;
-- V17.13.6 reader UI, semantic Matrix balancing, source weighting and admission rules are preserved;
-- Matrix views read current per-record matrix fields from radar.json;
+- radar (36).json is copied byte-for-byte to repository-root radar.json;
+- fast-reader wording is simplified only at display time in Read at least this, Matrix · short, and Risks & opportunities;
+- publication titles, links, evidence, classification, ranking and source detail are preserved;
+- the scheduled workflow is changed from every 12 hours to every 6 hours;
 - no additional discovery scan is claimed during packaging.
-
-Reader pages therefore use the latest supplied post-scan state while retaining the V17.13.6 interface and scanner implementation.
