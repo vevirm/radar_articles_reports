@@ -104,3 +104,10 @@ Matrix coverage is now a search-allocation input. The scanner calculates the cur
 ## V17.13.4 source-attention lanes
 
 The source planner now has two bounded preference lanes inside the existing rotation: (1) SCImago-Q1-verified journal source sweeps and (2) official-EU institutional sweeps. Both have independent persisted cursors. The general journal and general institution rotations remain active and retain a configured minimum share, so source preferences cannot starve broad discovery. Admission/classification code is unchanged.
+
+
+### V17.13.5 Matrix balance rotation
+
+Matrix coverage is now a distribution-aware discovery allocator. The catch-up target is the larger of the current upper-quartile cell count and 55% of the richest cell, capped at 12. Thin rows and columns add scarcity pressure. Every sparse target receives at least one scholarly query before repeats are assigned. Empty cells lead deepening, but other sparse cells stay interleaved so one stubborn empty cell cannot monopolise the run. Admission rules are unchanged.
+
+The reader palette is black, white and red. The landing page shows the eight recurring issues before the evidence feed and exposes the relation between paired views such as Radar main/evidence browser and Matrix short/full.

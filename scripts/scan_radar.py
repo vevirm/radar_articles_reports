@@ -28,6 +28,7 @@ import gzip
 import html
 import io
 import json
+import math
 import os
 import re
 import threading
@@ -640,13 +641,12 @@ def frontier_balance_snapshot(
     *,
     advance_cursor: bool = False,
 ) -> dict[str, Any]:
-    """Turn current Matrix occupancy into a coverage-aware rotation target.
+    """Turn current Matrix occupancy into a distribution-aware rotation target.
 
-    The old gap lane stopped caring once a cell reached a fixed count of three.
-    That allowed a 3-item cell and an 18-item cell to receive similar ordinary
-    rotation afterwards.  The new target rises with the Matrix median (bounded by
-    a cap), so materially thin cells keep receiving extra discovery attention.
-    It still does *not* force equal counts or relax admission standards.
+    Matrix balance is a discovery-allocation rule, never an admission shortcut.
+    The catch-up target follows both the upper quartile and a bounded share of
+    the richest cell. Row and column scarcity then break ties so a thin row or
+    direction is not hidden by a few very rich cells elsewhere.
     """
     floor = max(1, int(CONFIG.get("frontier_gap_target_count", 3) or 3))
     cap = max(floor, int(CONFIG.get("frontier_gap_balance_target_cap", 10) or 10))
@@ -657,49 +657,62 @@ def frontier_balance_snapshot(
             median_count = values[mid]
         else:
             median_count = (values[mid - 1] + values[mid] + 1) // 2
+        q75_index = max(0, min(len(values) - 1, math.ceil(0.75 * len(values)) - 1))
+        upper_quartile = values[q75_index]
     else:
         median_count = 0
+        upper_quartile = 0
+    max_count = max(values, default=0)
+    catchup_ratio = max(0.0, min(1.0, float(CONFIG.get("frontier_gap_balance_rich_cell_ratio", 0.55) or 0.55)))
+    rich_cell_floor = int(math.ceil(max_count * catchup_ratio)) if max_count else 0
     balance_enabled = bool(CONFIG.get("frontier_gap_balance_enabled", True))
-    target_count = floor if not balance_enabled else max(floor, min(cap, median_count))
+    target_count = floor if not balance_enabled else max(
+        floor, min(cap, max(upper_quartile, rich_cell_floor))
+    )
+
+    row_totals = {row: sum(counts.get(f"{row}-{col}", 0) for col in ("A", "B", "C", "D")) for row in ("knowledge", "infrastructure", "conversion", "rules")}
+    col_totals = {col: sum(counts.get(f"{row}-{col}", 0) for row in ("knowledge", "infrastructure", "conversion", "rules")) for col in ("A", "B", "C", "D")}
+    row_values = sorted(row_totals.values())
+    col_values = sorted(col_totals.values())
+    row_target = (row_values[1] + row_values[2] + 1) // 2 if len(row_values) == 4 else (max(row_values, default=0))
+    col_target = (col_values[1] + col_values[2] + 1) // 2 if len(col_values) == 4 else (max(col_values, default=0))
 
     cursor_state = state if isinstance(state, dict) else {}
     start = int(cursor_state.get("frontier_gap_cursor", 0) or 0) % len(FRONTIER_CELL_ORDER)
     cyclic = FRONTIER_CELL_ORDER[start:] + FRONTIER_CELL_ORDER[:start]
     cyclic_rank = {key: i for i, key in enumerate(cyclic)}
     deficits = {key: max(0, target_count - counts.get(key, 0)) for key in FRONTIER_CELL_ORDER}
-    scarcity_scores = {
-        key: round(
+    scarcity_scores: dict[str, float] = {}
+    for key in FRONTIER_CELL_ORDER:
+        row, col = key.rsplit('-', 1)
+        row_pressure = max(0.0, (row_target - row_totals.get(row, 0)) / max(1, row_target))
+        col_pressure = max(0.0, (col_target - col_totals.get(col, 0)) / max(1, col_target))
+        scarcity_scores[key] = round(
             deficits[key] / max(1, target_count)
-            + (0.45 if counts.get(key, 0) == 0 else 0.0)
-            + (0.15 if 0 < counts.get(key, 0) <= max(1, target_count // 3) else 0.0),
+            + (0.55 if counts.get(key, 0) == 0 else 0.0)
+            + (0.20 if 0 < counts.get(key, 0) <= max(1, target_count // 3) else 0.0)
+            + 0.35 * row_pressure
+            + 0.35 * col_pressure,
             3,
         )
-        for key in FRONTIER_CELL_ORDER
-    }
+
     sparse = [key for key in FRONTIER_CELL_ORDER if deficits[key] > 0]
     ordered = sorted(
         sparse,
-        key=lambda key: (-deficits[key], counts.get(key, 0), cyclic_rank[key]),
+        key=lambda key: (-scarcity_scores[key], -deficits[key], counts.get(key, 0), cyclic_rank[key]),
     )
     target_limit = max(0, min(len(ordered), int(CONFIG.get("frontier_gap_targets_per_scan", 8) or 0)))
     targets = ordered[:target_limit]
     empty_targets = [key for key in targets if counts.get(key, 0) == 0]
-    nonempty_targets = [key for key in targets if counts.get(key, 0) > 0]
 
-    empty_weight = max(1, int(CONFIG.get("frontier_gap_empty_cell_weight", 4) or 4))
+    # Repeat scarce targets in proportion to their balance pressure. This affects
+    # query allocation only. The evidence gate stays identical for every cell.
     weighted_targets: list[str] = []
-    if empty_targets:
-        for _ in range(empty_weight):
-            weighted_targets.extend(empty_targets)
-        for level in range(target_count - 1, 0, -1):
-            for key in nonempty_targets:
-                if deficits[key] >= level:
-                    weighted_targets.append(key)
-    else:
-        for level in range(target_count, 0, -1):
-            for key in targets:
-                if deficits[key] >= level:
-                    weighted_targets.append(key)
+    repeat_scale = max(1.0, float(CONFIG.get("frontier_gap_balance_repeat_scale", 3.0) or 3.0))
+    repeat_cap = max(1, int(CONFIG.get("frontier_gap_balance_repeat_cap", 8) or 8))
+    for key in targets:
+        repeats = max(1, min(repeat_cap, int(math.ceil(scarcity_scores[key] * repeat_scale))))
+        weighted_targets.extend([key] * repeats)
 
     if advance_cursor and targets and isinstance(state, dict):
         last_index = FRONTIER_CELL_ORDER.index(targets[-1])
@@ -707,14 +720,19 @@ def frontier_balance_snapshot(
 
     return {
         "median_count": median_count,
+        "upper_quartile": upper_quartile,
         "target_count": target_count,
+        "row_totals": row_totals,
+        "column_totals": col_totals,
+        "row_target": row_target,
+        "column_target": col_target,
         "deficits": deficits,
         "scarcity_scores": scarcity_scores,
         "targets": targets,
         "empty_targets": empty_targets,
         "weighted_targets": weighted_targets,
         "undercovered_cells": len(sparse),
-        "max_count": max(values, default=0),
+        "max_count": max_count,
         "min_count": min(values, default=0),
     }
 
@@ -790,7 +808,10 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
     scholarly_queries: list[str] = []
     scholarly_cells: dict[str, list[str]] = {}
     local_cursor = {key: int(query_cursors.get(f"scholarly:{key}", 0) or 0) for key in FRONTIER_CELL_ORDER}
-    for key in weighted_targets:
+    # Give every sparse target one scholarly slot before scarcity repeats.
+    # This prevents a few extreme deficits from hiding the rest of the thin Matrix.
+    scholarly_target_sequence = list(targets) + list(weighted_targets)
+    for key in scholarly_target_sequence:
         if len(scholarly_queries) >= scholarly_limit:
             break
         vals = query_lists.get(key, [])
@@ -832,6 +853,9 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
         "empty_cells": sum(1 for key in FRONTIER_CELL_ORDER if counts.get(key, 0) == 0),
         "target_count": target_count,
         "median_count": balance.get("median_count", 0),
+        "upper_quartile": balance.get("upper_quartile", 0),
+        "row_totals": balance.get("row_totals", {}),
+        "column_totals": balance.get("column_totals", {}),
         "undercovered_cells": balance.get("undercovered_cells", 0),
         "max_count": balance.get("max_count", 0),
         "min_count": balance.get("min_count", 0),
@@ -849,15 +873,22 @@ def frontier_gap_plan(previous: dict[str, Any], state: dict[str, Any]) -> dict[s
 
 
 def frontier_gap_depth_bank(frontier_focus: dict[str, Any], include_nonempty: bool = False) -> list[str]:
-    """Return a matrix-first bank for spare-time depth passes.
+    """Return a balance-first bank for spare-time depth passes.
 
-    When any Frontier cell is empty, only zero-count cells enter this bank. Once
-    every cell has evidence, the same mechanism naturally falls back to the
-    thinnest non-empty cells. Variants are interleaved by cell so depth time is
-    not monopolised by one topic.
+    Empty cells lead, but they no longer monopolise depth. All currently sparse
+    cells remain in the interleaved bank, ordered by balance pressure. This is
+    essential when an empty cell is intrinsically hard to populate.
     """
     profiles = CONFIG.get("frontier_gap_scholarly_queries", {})
-    cells = list(frontier_focus.get("targets") or []) if include_nonempty else list(frontier_focus.get("empty_targets") or frontier_focus.get("targets") or [])
+    targets = list(frontier_focus.get("targets") or [])
+    empties = list(frontier_focus.get("empty_targets") or [])
+    scores = frontier_focus.get("scarcity_scores") or {}
+    if include_nonempty:
+        cells = targets
+    else:
+        nonempty = [c for c in targets if c not in empties]
+        nonempty.sort(key=lambda c: (-float(scores.get(c, 0) or 0), targets.index(c)))
+        cells = empties + nonempty
     per_cell: dict[str, list[str]] = {}
     for key in cells:
         raw = profiles.get(key, []) if isinstance(profiles, dict) else []
@@ -6835,7 +6866,7 @@ def main() -> int:
     log_progress(
         f"Frontier coverage before scan: {frontier_focus['qualifying']} qualifying, "
         f"{frontier_focus['empty_cells']}/16 empty; balance target {frontier_focus.get('target_count', 3)} "
-        f"(median {frontier_focus.get('median_count', 0)}); under-covered "
+        f"(median {frontier_focus.get('median_count', 0)}, upper quartile {frontier_focus.get('upper_quartile', 0)}); under-covered "
         + (", ".join(f"{k}({frontier_focus.get('counts', {}).get(k, 0)})" for k in frontier_focus["targets"]) if frontier_focus["targets"] else "none")
     )
 
@@ -7907,6 +7938,9 @@ def main() -> int:
         "counts": frontier_focus["counts"],
         "target_count": frontier_focus.get("target_count", 3),
         "median_count": frontier_focus.get("median_count", 0),
+        "upper_quartile": frontier_focus.get("upper_quartile", 0),
+        "row_totals": frontier_focus.get("row_totals", {}),
+        "column_totals": frontier_focus.get("column_totals", {}),
         "undercovered_cells": frontier_focus.get("undercovered_cells", 0),
         "max_count": frontier_focus.get("max_count", 0),
         "min_count": frontier_focus.get("min_count", 0),

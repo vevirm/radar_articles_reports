@@ -22,3 +22,12 @@
 Result: **26 passed, 2 failed**. Both failures are old assertions for superseded V17.7.2 route/version strings; neither concerns V17.13.4 source weighting.
 
 No fresh external radar scan was run for this release.
+
+
+## V17.13.5 follow-up validation
+
+- Focused Matrix/reader tests: 19 passed.
+- Presentation smoke: passed; Matrix builds 111 qualifying signals.
+- Current Matrix catch-up target: 10 (median 6; upper quartile 8; richest cell 18).
+- 12 of 16 cells are currently below the catch-up target and receive targeted discovery attention.
+- No network discovery scan was run for this packaging change.

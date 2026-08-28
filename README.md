@@ -151,3 +151,13 @@ The reader shell links Radar, Matrix short/full, Risks & opportunities, Read at 
 Discovery now gives more scan budget to two source families: high-quality journal articles and official EU reports. A small verified SCImago SJR 2024 Q1 shortlist receives recurring source-first journal slots, while Commission, JRC, Publications Office, Parliament, Council and related EU-primary domains receive recurring institutional slots.
 
 This is **attention, not admission**. The scanner keeps a broad source share of at least 40%, continues ordinary OpenAlex/Crossref and institutional rotation, and uses the same EU-R&I-geopolitical substantive gate for every source. A Q1 article does not get in because it is Q1; a lower-ranked or unranked source is not excluded if it contains strong evidence. This avoids the failure mode where prestige filters become so strict that recall collapses.
+
+
+## V17.13.5 — stronger Matrix catch-up + front page
+
+- Matrix rotation now catches up toward the upper quartile and 55% of the richest cell, capped at 12.
+- Thin rows and columns add discovery pressure; rich cells keep normal broad discovery but lose gap-search priority.
+- Empty cells lead depth searches but no longer monopolise them: other sparse cells are interleaved in every depth wave.
+- Admission standards are unchanged. Balance changes search allocation only.
+- Front page now opens with “R&I in EU: Geopolitical Context”, the eight recurring issues, and a clear map of all subpages.
+- Reader palette is black, white and red; green/blue semantic colouring is removed from the main reader views.

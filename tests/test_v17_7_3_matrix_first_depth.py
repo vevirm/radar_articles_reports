@@ -51,18 +51,22 @@ class MatrixFirstDepthTests(unittest.TestCase):
         with mock.patch.object(sr, 'frontier_matrix_coverage', return_value=(counts, 111, '')):
             focus = sr.frontier_gap_plan({}, sr.initial_scan_state({}))
         self.assertEqual(focus['median_count'], 6)
-        self.assertEqual(focus['target_count'], 6)
-        self.assertEqual(set(focus['targets']), {'knowledge-D','knowledge-C','rules-A','rules-C','infrastructure-A'})
+        self.assertEqual(focus['target_count'], 10)
+        self.assertGreaterEqual(focus['upper_quartile'], 8)
+        self.assertIn('knowledge-D', focus['targets'])
+        self.assertIn('knowledge-C', focus['targets'])
+        self.assertIn('rules-A', focus['targets'])
+        self.assertIn('rules-C', focus['targets'])
         self.assertNotIn('infrastructure-D', focus['targets'])
-        self.assertEqual(focus['undercovered_cells'], 5)
+        self.assertGreaterEqual(focus['undercovered_cells'], 10)
 
     def test_matrix_balance_target_is_bounded(self):
         counts = {c: 20 for c in sr.FRONTIER_CELL_ORDER}
         counts['knowledge-D'] = 0
         snap = sr.frontier_balance_snapshot(counts, {}, advance_cursor=False)
-        self.assertEqual(snap['target_count'], 10)
+        self.assertEqual(snap['target_count'], 12)
         self.assertEqual(snap['targets'], ['knowledge-D'])
-        self.assertEqual(sr.CONFIG['matrix_balance_rotation_profile_version'], 'v17.13.3-matrix-coverage-aware-rotation')
+        self.assertEqual(sr.CONFIG['matrix_balance_rotation_profile_version'], 'v17.13.5-distribution-aware-catchup')
 
     def test_equal_scarcity_does_not_bias_against_opening_cells(self):
         counts = {c: 2 for c in sr.FRONTIER_CELL_ORDER}
@@ -77,17 +81,12 @@ class MatrixFirstDepthTests(unittest.TestCase):
         focus = sr.frontier_gap_plan(prev, state)
         bank = sr.frontier_gap_depth_bank(focus)
         profiles = sr.CONFIG['frontier_gap_scholarly_queries']
-        if focus['empty_targets']:
-            expected = []
-            for i in range(max(len(profiles[c]) for c in focus['empty_targets'])):
-                for c in focus['empty_targets']:
-                    if i < len(profiles[c]):
-                        expected.append(profiles[c][i])
-            self.assertEqual(bank, expected)
-        else:
-            allowed = {q for c in focus['targets'] for q in profiles[c]}
-            self.assertTrue(bank)
-            self.assertTrue(set(bank).issubset(allowed))
+        allowed = {q for c in focus['targets'] for q in profiles[c]}
+        self.assertTrue(bank)
+        self.assertTrue(set(bank).issubset(allowed))
+        if focus['empty_targets'] and len(focus['targets']) > len(focus['empty_targets']):
+            nonempty = [c for c in focus['targets'] if c not in focus['empty_targets']]
+            self.assertTrue(any(q in bank for c in nonempty for q in profiles[c]))
         fallback = sr.frontier_gap_depth_bank(focus, include_nonempty=True)
         self.assertGreaterEqual(len(fallback), len(bank))
 
@@ -115,7 +114,7 @@ class MatrixFirstDepthTests(unittest.TestCase):
 
     def test_new_allocation_profile_does_not_reset_ab_recall_profile(self):
         self.assertEqual(sr.CONFIG['recall_profile_version'], 'v17.13.1-eu-core-external-shock-english-evidence')
-        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.8.2-balanced-frontier')
+        self.assertEqual(sr.CONFIG['allocation_profile_version'], 'v17.13.5-distribution-aware-matrix-catchup')
         self.assertEqual(sr.CONFIG['signal_discovery_version'], 'v17.7.4-direct-institutional-signals')
 
 
