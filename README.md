@@ -1,6 +1,6 @@
-# R&I Geopolitics Radar V17.13.1
+# R&I Geopolitics Radar V17.13.2
 
-V17.13.1 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
+V17.13.2 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
 This is not a looser relevance gate. The non-literal route needs at least **two independent strategic families**, including at least one relational/control family. A generic paper that merely says Europe should be more competitive still fails.
 
@@ -23,7 +23,7 @@ This is not a looser relevance gate. The non-literal route needs at least **two 
 7. Strategic technology races
 8. Funding & programmes
 
-Each issue opens into branches and subissues. Current radar findings are attached underneath, so the professional mental map can stay stable while evidence changes scan by scan.
+Each issue opens as a connected branch map: main issue → branches → individual subissues. The first map is open by default, and readers can open all maps at once. Current radar findings sit below each map.
 
 ### 2. Simpler Matrix
 
@@ -41,7 +41,7 @@ and four plain outcomes:
 - Faster, but dependent
 - Weaker on both
 
-`frontier/quick/` is the **“just see it”** version: claims and counts only. `frontier/` keeps the fuller evidence, source links and classification detail.
+`frontier/quick/` is the **“just see it”** version. It shows **every** qualifying Matrix finding in its cell as a subject-first bullet of 50 characters or fewer. `frontier/` keeps the full evidence and classification detail.
 
 Every admitted Strand-A finding is sent to the Matrix classifier. There is no extra hidden “dynamic” pre-filter before classification. The classifier can still leave a finding out when its evidence does not support a defensible row and direction.
 
@@ -53,7 +53,11 @@ The main radar remains the easy/reader-first view: plain claim first, then a sho
 
 Reader-facing prose is shorter and concrete. Bibliographic and source detail is preserved separately instead of being stuffed into the finding itself. The write boundary includes explicit handling for the e-hryvnia, cyber-governance, AI-for-science, CEPS technology-mapping and EU–India/open-hardware examples. Biographical material such as a researcher's training or job title is not used as the finding unless it is itself relevant evidence.
 
+The Risks & opportunities page is deliberately minimal: two ranked bullet lists, with source detail available on click.
+
 The same plain-language layer is used by the main radar, Matrix, Risks & opportunities and secondary briefing view.
+
+**Reader-point contract:** every finding and “why it matters” point is one complete sentence of **120 characters or fewer**. It must start with an explicit actor, system or topic — never vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” or “the developments”. The UI never truncates a sentence or adds an ellipsis to force the limit.
 
 ## How discovery changed
 
@@ -75,7 +79,7 @@ This makes discovery iterative in a bounded way: the radar can learn where the l
 
 ### Researcher names are fallback attention
 
-`priority_people.json` remains an auditable list of 137 researchers. Named-researcher discovery is not a separate corpus, badge or whitelist. In V17.13.1 it is mainly triggered when ordinary scholarly discovery is thin or Matrix coverage is very sparse. Exact-author works and any bounded context fallbacks still rejoin the normal OpenAlex/Crossref admission path.
+`priority_people.json` remains an auditable list of 137 researchers. Named-researcher discovery is not a separate corpus, badge or whitelist. In V17.13.2 it is mainly triggered when ordinary scholarly discovery is thin or Matrix coverage is very sparse. Exact-author works and any bounded context fallbacks still rejoin the normal OpenAlex/Crossref admission path.
 
 ### Strand C stays a minority
 
@@ -85,11 +89,11 @@ Weak signals no longer receive the protected follow-up query wave. After the A/B
 
 `BOOTSTRAP_LOOKBACK_MONTHS = 4` is the public-window rule. Saved rows, recovery rows and matrix-only historical rows cannot widen it. On the bundled 28 August 2026 state the publication floor is therefore **2026-04-28**.
 
-The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor. Its existing reader claims are retained; V17.13.1 changes the admission contract, evidence fields and disclosure UI rather than pretending to have re-scanned old records under the new external-shock route. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
+The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor. Its existing reader claims are retained; V17.13.2 changes the admission contract, evidence fields and disclosure UI rather than pretending to have re-scanned old records under the new external-shock route. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
 
 ## Scanner rotation
 
-The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.1 keeps the finding-context lane inside those bounded rotations and adds a small set of US/China frontier-capability queries so a major external shock can actually be discovered before the exceptional admission test is applied. All query families obey the same date floor.
+The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.2 keeps the finding-context lane inside those bounded rotations and adds a small set of US/China frontier-capability queries so a major external shock can actually be discovered before the exceptional admission test is applied. All query families obey the same date floor.
 
 The scheduler remains active on push, every 12 hours, and manual dispatch via `.github/workflows/radar-scan.yml`.
 
@@ -112,13 +116,13 @@ Reviewed evidence caches must be tied to the exact curator-supplied URL and reco
 - `scripts/scan_radar.py` — discovery/admission scanner
 - `radar_criteria.md` — admission rules
 - `frontier_criteria.md` — Matrix rules and public/internal terminology mapping
-- `CHANGELOG_V17_13_1.md` — this release's changes
-- `VALIDATION_V17_13_1.md` — validation record
+- `CHANGELOG_V17_13_2.md` — this release's changes
+- `VALIDATION_V17_13_2.md` — validation record
 - `CURRENT_CORPUS_INPUT.txt` — exact input/bundled-state record
 
 ## Validate
 
-Focused V17.13.1 + regression checks:
+Focused V17.13.2 + regression checks:
 
 ```bash
 PYTHONPATH=. python -m pytest -q \
@@ -132,4 +136,4 @@ PYTHONPATH=. python -m pytest -q \
   tests/test_v17_9_source_aware_matrix.py
 ```
 
-See `VALIDATION_V17_13_1.md` for the exact results packaged with this release.
+See `VALIDATION_V17_13_2.md` for the exact results packaged with this release.

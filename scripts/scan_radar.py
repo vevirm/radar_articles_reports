@@ -4765,23 +4765,68 @@ def _claim80(text: str) -> str:
     return (cut[:79].rstrip(" ,:;–—-.!?") + "…")[:80]
 
 
-def _plain_claim_limit(text: str, max_chars: int = 240) -> str:
-    """Keep reader-facing claims compact without chopping a sentence mid-thought."""
+def _plain_claim_limit(text: str, max_chars: int = 120) -> str:
+    """Return one complete, explicit reader point of at most ``max_chars`` characters."""
     s = clean_text(text).strip()
-    if not s:
+    if not s or "…" in s or "..." in s:
         return ""
-    if len(s) <= max_chars:
-        return s
-    for sent in split_sentences(s):
-        q = clean_text(sent)
-        if 24 <= len(q) <= max_chars:
-            return q
-    # A short complete clause is preferable to an arbitrary hard cut.
-    for sep in ("; ", " — ", " – "):
-        left = clean_text(s.split(sep, 1)[0])
-        if 36 <= len(left) <= max_chars:
-            return left.rstrip(" ,:;–—") + ("." if left[-1:] not in ".!?" else "")
-    return _claim80(s)
+
+    vague = re.compile(
+        r"^(?:(?:this|these|those|it|they|such)\b|the "
+        r"(?:study|paper|article|report|analysis|research|results?|findings?|developments?|changes?|trends?|issues?)\b)",
+        re.I,
+    )
+    dependent_start = re.compile(r"^(?:to support (?:this|these)|with\b|since\b|because\b|while\b|although\b|building on\b|drawing on\b|based on\b)", re.I)
+    predicate = re.compile(r"\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|show|find|argue|conclude|reveal|indicate|suggest|highlight|shape|treat|use|map|face|gain|lose|create|make|help|drive|constrain|allow|remain|become|depend|rely|change|shift|link|raise|cut|add|limit|fund|launch|open|close|adopt|propose|plan|build|develop|deploy|establish|agree|sign|join|withdraw|target|support|secure|protect|screen|coordinate|compete|reform|amend|extend|approve|reject|connect|urge|struggle|perform|serve|stress|need|trail|offer|respond|pivot|introduce|expand|reduce|increase|strengthen|weaken|move|pull|push|balance)\w*\b", re.I)
+
+    def shrink(q: str) -> str:
+        q = clean_text(q)
+        q = re.sub(r"^(?:Finally|Moreover|However|Therefore|In addition|Accordingly|Rather|On the other hand|In conclusion),?\s+", "", q, flags=re.I)
+        q = re.sub(r"\bthe European Union\b", "the EU", q, flags=re.I)
+        q = re.sub(r"\bEuropean Union\b", "EU", q, flags=re.I)
+        q = re.sub(r"\bUnited States\b", "US", q, flags=re.I)
+        q = re.sub(r"\bartificial intelligence\b", "AI", q, flags=re.I)
+        q = re.sub(r"\bresearch and innovation\b", "R&I", q, flags=re.I)
+        q = re.sub(r"\btechnological sovereignty\b", "tech sovereignty", q, flags=re.I)
+        q = re.sub(r"\bstrategic autonomy\b", "autonomy", q, flags=re.I)
+        q = re.sub(r"\bin order to\b", "to", q, flags=re.I)
+        q = re.sub(r"\bwith a view to\b", "to", q, flags=re.I)
+        q = re.sub(r"\bcomparatively\b|\bparticularly\b", "", q, flags=re.I)
+        return clean_text(q)
+
+    def finish(q: str) -> str:
+        q = shrink(q).strip(" ;:–—")
+        if not q or vague.match(q) or dependent_start.match(q) or len(q) > max_chars:
+            return ""
+        if not predicate.search(q):
+            return ""
+        if q[-1:] not in ".!?":
+            q += "."
+        return q if len(q) <= max_chars else ""
+
+    direct = finish(s)
+    if direct:
+        return direct
+
+    sentence_list = [clean_text(x) for x in split_sentences(s) if clean_text(x)]
+    for sent in sentence_list:
+        out = finish(sent)
+        if out:
+            return out
+
+    for candidate in [s, *sentence_list]:
+        parts = re.split(
+            r"\s*[;]\s*|\s+[–—]\s+|,\s+(?=(?:while|but|although|which|with|including|reflecting|raising|pushing|binding|and|as|increasing|reducing|broadening|expanding|creating|leaving|showing|giving|making|providing|allowing|helping|limiting|keeping|turning)\b)|\s+(?=without\b)|\s+(?=as\b)",
+            shrink(candidate),
+            flags=re.I,
+        )
+        for part in parts:
+            if len(clean_text(part).split()) < 6:
+                continue
+            out = finish(part)
+            if out:
+                return out
+    return ""
 
 
 def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
@@ -4798,26 +4843,23 @@ def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
     context = normalized(f"{t} {raw} {prior}")
 
     # Recurring dense constructions that need a semantic, not merely cosmetic, rewrite.
+    if ("artificial intelligence act" in context or "eu ai act" in context or "ai act" in context) and "regulatory" in context and "ethical" in context:
+        return "The EU AI Act creates a risk-based governance framework for AI systems."
+
     if (
         "ireland" in context
         and "pressure to diversify" in context
         and "current us administration" in context
         and "geopolitical instability" in context
     ):
-        return (
-            "Ireland's approach to China is also shaped by pressure to spread its bets, "
-            "because the current US administration is unpredictable and the wider world is unstable."
-        )
+        return "US–China tensions and US uncertainty are narrowing Ireland's room for science-tech cooperation with China."
 
     if (
         "semiconductor export controls" in context
         and "economic interests toward china" in context
         and "security relations with the united states" in context
     ):
-        return (
-            "The EU also restricts chip exports to protect its technology, while trying to keep "
-            "its trade with China and its security ties with the US intact."
-        )
+        return "EU chip controls protect technology while Europe balances China trade and US security ties."
 
     if (
         "copernican academy" in context
@@ -4825,42 +4867,29 @@ def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
         and "intermarium" in context
         and ("neo-nationalist" in context or "neo nationalist" in context)
     ):
-        return "The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia."
+        return "Polish research policy has been pulled into geopolitical and neo-nationalist projects."
 
     if (
         ("diffusion of dual-use technologies" in context or "diffusion of dual use technologies" in context)
         and ("cross-border knowledge transfer" in context or "cross border knowledge transfer" in context)
         and "dependencies in strategically important supply chains" in context
     ):
-        return "The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies."
+        return "EU research-security risks include dual-use spread, knowledge leakage and critical-supply dependence."
 
     if "e-hryvnia" in context and "bahamas" in context and "china" in context and ("cyber resilience" in context or "cyberresilience" in context):
-        return (
-            "The paper compares central-bank digital money in China, the EU and the Bahamas. Ukraine's e-hryvnia puts unusual weight on transparency and cyber resilience."
-        )
+        return "Ukraine's e-hryvnia puts unusual weight on transparency and cyber resilience."
 
     if "global cybersecurity governance" in context and "african union" in context and ("multistakeholder" in context or "gfce" in context or "igf" in context):
-        return (
-            "Regional blocs such as the EU and African Union can move toward shared cyber rules, while open forums that include governments, "
-            "industry and civil society help countries build the capacity to apply them."
-        )
+        return "Regional blocs such as the EU and African Union can move toward shared cyber rules."
 
     if "ai4s" in context and all(x in context for x in ["china", "japan", "united kingdom"]):
-        return (
-            "The US, China, the EU, the UK and Japan now treat AI for science in much the same way: as a tool to break through hard problems, "
-            "produce knowledge faster and stay competitive."
-        )
+        return "The US, China, EU, UK and Japan treat AI for science as a tool for faster research and competitiveness."
 
     if "mapping of technology specialisation" in context and "venture capital" in context and "patent" in context:
-        return (
-            "Patents, research papers and venture-capital deals from 2010 to 2025 show where the EU and its partners specialise: "
-            "what they invent, what they research and where new companies take root."
-        )
+        return "Patents, papers and venture capital show where the EU and global partners specialise."
 
     if "no one builds alone" in context and "open hardware" in context and "india" in context and ("ai chips" in context or "ai chip" in context):
-        return (
-            "Open hardware could give Europe and India more control over AI-chip technology without either side having to build the whole stack alone."
-        )
+        return "Open hardware could give Europe and India more control over AI-chip technology."
 
     # If a previous concise claim exists, preserve its proposition and simplify its wording.
     # The browser layer rejects chopped/ellipsised claims and re-extracts from source detail,
@@ -4879,13 +4908,11 @@ def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
         "", s, flags=re.I,
     )
     s = re.sub(
-        r"^(?:the|this) (study|paper|article|report) demonstrates how\s+",
-        r"The \1 shows how ", s, flags=re.I,
+        r"^(?:the|this) (?:study|paper|article|report|analysis|research|results?) "
+        r"(?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests) (?:that\s+)?",
+        "", s, flags=re.I,
     )
-    s = re.sub(
-        r"^(?:the|this) (study|paper|article|report) demonstrates that\s+",
-        r"The \1 shows that ", s, flags=re.I,
-    )
+    s = re.sub(r"^These findings (?:show|reveal|indicate|suggest|underscore) (?:that\s+)?", "", s, flags=re.I)
     s = re.sub(r"^In the European Union\s*\(EU\)\s+Member States\b", "EU member states", s)
     s = re.sub(r"\bThe European Union\s*\(EU\)", "The EU", s)
     s = re.sub(r"\bthe European Union\s*\(EU\)", "the EU", s)
@@ -4912,7 +4939,21 @@ def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
     for pat, repl in replacements:
         s = re.sub(pat, repl, s, flags=re.I)
     s = clean_text(s).strip(" ;:–—")
-    return _plain_claim_limit(s)
+    out = _plain_claim_limit(s)
+    if out:
+        return out
+    for sentence in split_sentences(raw):
+        q = clean_text(sentence)
+        q = re.sub(
+            r"^(?:the|this) (?:study|paper|article|report|analysis|research|results?) "
+            r"(?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests|highlights) (?:that\s+)?",
+            "", q, flags=re.I,
+        )
+        q = re.sub(r"^These findings (?:show|reveal|indicate|suggest|underscore) (?:that\s+)?", "", q, flags=re.I)
+        out = _plain_claim_limit(q)
+        if out:
+            return out
+    return ""
 
 
 def concise_core_message(summary: str, title: str) -> str:
@@ -5225,8 +5266,12 @@ def normalize_reader_claims(data: dict[str, Any]) -> dict[str, Any]:
                 item["core_message"] = claim
                 if key == "strand_c" and item.get("what") is not None:
                     item["what"] = claim
+            else:
+                item.pop("core_message", None)
+                if key == "strand_c" and item.get("what") is not None:
+                    item.pop("what", None)
     data["display_claim_profile_version"] = str(
-        CONFIG.get("display_claim_profile_version", "v17.12.5-reader-first-global-write-boundary")
+        CONFIG.get("display_claim_profile_version", "v17.13.2-explicit-subject-120-char")
     )
     return data
 

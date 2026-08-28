@@ -1,7 +1,7 @@
 (function(root,factory){
-  if(typeof module==='object'&&module.exports) module.exports=factory(require('../frontier/frontier.js'));
-  else root.RadarPriorities=factory(root.SovereigntyFrontier);
-})(typeof globalThis!=='undefined'?globalThis:this,function(Frontier){
+  if(typeof module==='object'&&module.exports) module.exports=factory(require('../frontier/frontier.js'),require('../briefing/insights.js'));
+  else root.RadarPriorities=factory(root.SovereigntyFrontier,root.RadarInsights);
+})(typeof globalThis!=='undefined'?globalThis:this,function(Frontier,Insights){
   'use strict';
 
   function structuralScore(x){
@@ -23,19 +23,23 @@
 
 
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim()}
-  function maxChars(v,n=118){const s=clean(v);if(s.length<=n)return s;let c=s.slice(0,n-1).replace(/\s+\S*$/,'').trim();if(c.length<60)c=s.slice(0,n-1).trim();return c+'…'}
+  function maxChars(v,n=120){
+    const s=clean(v);
+    if(s.length<=n) return s;
+    const sentences=s.match(/[^.!?]+[.!?]+/g)||[];
+    for(const sentence of sentences){const q=clean(sentence);if(q.length<=n)return q}
+    return '';
+  }
   function simplePriorityText(x){
-    const raw=clean(x?.coreMessage||x?.title||'').replace(/\s+/g,' ').replace(/[.!?]+$/,'');
-    if(raw&&!/…|\.\.\./.test(raw)) return maxChars(raw,220);
-    return maxChars(clean(x?.title||''),220);
+    return Insights?.readerPoint?.(x?.coreMessage||'')||Insights?.pointFor?.(x)||'The source does not provide a concise claim.';
   }
   function priorityInterpretation(x){
     const row=x?.row?.id||'other',col=x?.column?.id||'B';
     const topic={knowledge:'people and knowledge',infrastructure:'tools and infrastructure',conversion:'firms and scale',rules:'rules and coordination',other:'research and innovation'}[row]||'research and innovation';
-    if(col==='A') return `Opportunity: Europe gains control and strength in ${topic} with no obvious competitiveness penalty.`;
-    if(col==='B') return `Risk: more control could come at a cost to speed, scale or competitiveness in ${topic}.`;
-    if(col==='C') return `Risk: Europe gains capability but remains dependent on external access for ${topic}.`;
-    return `Risk: Europe loses both control and competitiveness in ${topic}.`;
+    if(col==='A') return `Europe gains control and strength in ${topic} with no obvious competitiveness penalty.`;
+    if(col==='B') return `Europe may gain control in ${topic} at a cost to speed, scale or competitiveness.`;
+    if(col==='C') return `Europe gains capability in ${topic} but remains dependent on external access.`;
+    return `Europe loses both control and competitiveness in ${topic}.`;
   }
   function simpleEvidenceText(x){
     let t=clean(x?.title||'').replace(/\s+[–—-]\s+(?:Company Announcement\s+-\s+)?(?:FT\.com|Reuters|Bloomberg).*$/i,'');

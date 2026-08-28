@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.13.1
+# Radar admission criteria — V17.13.2
 
 ## Strand A: substantive EU R&I in strategic context
 
@@ -59,6 +59,8 @@ Keep the dominant failure/defer reason precise: `insufficient_text`, `no_direct_
 English remains a hard **evidence** invariant, not a whole-publication invariant. A non-English publication may pass when a source-provided/indexed English abstract, executive summary or equivalent English description is substantive enough to establish the finding and admission bridge. Title-only English metadata is insufficient, and machine translation is not used as admission evidence. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
 
 Titles, authors, source, date, links, abstracts/summaries and review evidence remain available separately.
+
+Reader-facing findings and “why it matters” points must be **complete sentences of at most 120 characters**. They must begin with an explicit actor, system or topic. Vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” and “the developments” are not admissible display claims. Do not hard-cut a source sentence and do not use ellipses to meet the limit.
 
 ## Strand B
 

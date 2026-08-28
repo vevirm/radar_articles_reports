@@ -21,10 +21,10 @@ const items=[
  {strand:'A',title:'Foreign direct investment from EU countries as instruments for financing China',link:'fdi',summary:`These vulnerabilities include the diffusion of dual-use technologies, cross-border knowledge transfer, and the emergence of dependencies in strategically important supply chains that may weaken the EU's economic security and strategic autonomy.`}
 ];
 const want=[
- "Ireland's approach to China is also shaped by pressure to spread its bets, because the current US administration is unpredictable and the wider world is unstable.",
- 'The EU also restricts chip exports to protect its technology, while trying to keep its trade with China and its security ties with the US intact.',
- 'The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia.',
- 'The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies.'
+ "US–China tensions and US uncertainty are narrowing Ireland's room for science-tech cooperation with China.",
+ 'EU chip controls protect technology while Europe balances China trade and US security ties.',
+ 'Polish research policy has been pulled into geopolitical and neo-nationalist projects.',
+ 'EU research-security risks include dual-use spread, knowledge leakage and critical-supply dependence.'
 ];
 for(let i=0;i<items.length;i++){
   const got=I.pointFor(items[i]);
@@ -44,9 +44,9 @@ const items=[
 ];
 const candidates=S.evidenceCandidates({strand_a:items,frontier_evidence:[]});
 const want=[
- 'The EU also restricts chip exports to protect its technology, while trying to keep its trade with China and its security ties with the US intact.',
- 'The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia.',
- 'The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies.'
+ 'EU chip controls protect technology while Europe balances China trade and US security ties.',
+ 'Polish research policy has been pulled into geopolitical and neo-nationalist projects.',
+ 'EU research-security risks include dual-use spread, knowledge leakage and critical-supply dependence.'
 ];
 for(const claim of want){
   if(!candidates.some(x=>x.headline===claim)){console.error('matrix did not reuse simple claim',claim,candidates.map(x=>x.headline));process.exit(30)}
@@ -66,22 +66,22 @@ for(const claim of want){
             (
                 "It is also shaped by pressure to diversify amid uncertainty surrounding the current US administration, as well as by wider efforts to build resilience in response to geopolitical instability.",
                 "Ireland: Interlocking factors shape the approach to China in science-tech innovation",
-                "Ireland's approach to China is also shaped by pressure to spread its bets, because the current US administration is unpredictable and the wider world is unstable.",
+                "US–China tensions and US uncertainty are narrowing Ireland's room for science-tech cooperation with China.",
             ),
             (
                 "Second, it applies technology protection through semiconductor export controls while managing its economic interests toward China and its security relations with the United States.",
                 "EU chip-war strategy",
-                "The EU also restricts chip exports to protect its technology, while trying to keep its trade with China and its security ties with the US intact.",
+                "EU chip controls protect technology while Europe balances China trade and US security ties.",
             ),
             (
                 "Focusing on the creation of the Copernican Academy and the activities surrounding Collegium Intermarium, the study demonstrates how geopolitical narratives of the Intermarium were instrumentalized to advance neo-nationalist ambitions in global academic governance.",
                 "A Copernican revolution? Geopolitical tensions, Polish universities and the (dis)continuities of neo-nationalism",
-                "The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia.",
+                "Polish research policy has been pulled into geopolitical and neo-nationalist projects.",
             ),
             (
                 "These vulnerabilities include the diffusion of dual-use technologies, cross-border knowledge transfer, and the emergence of dependencies in strategically important supply chains that may weaken the EU's economic security and strategic autonomy.",
                 "Foreign direct investment from EU countries as instruments for financing China",
-                "The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies.",
+                "EU research-security risks include dual-use spread, knowledge leakage and critical-supply dependence.",
             ),
         ]
         for summary, title, want in cases:
@@ -109,7 +109,7 @@ for(const claim of want){
         self.assertEqual(item["summary"], summary)
         self.assertEqual(
             item["core_message"],
-            "The EU also restricts chip exports to protect its technology, while trying to keep its trade with China and its security ties with the US intact.",
+            "EU chip controls protect technology while Europe balances China trade and US security ties.",
         )
 
 

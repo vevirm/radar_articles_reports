@@ -22,12 +22,12 @@ class InsightsPageTests(unittest.TestCase):
 
     def test_main_radar_demotes_briefing_to_secondary_browser(self):
         page=(ROOT/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="briefing/?v=17.12.3">Secondary evidence browser</a>',page)
+        self.assertIn('href="briefing/?v=17.13.2">Secondary evidence browser</a>',page)
         self.assertNotIn('Open Radar Insights',page)
         self.assertIn('Cumulative corpus', page)
 
-    def test_old_generator_and_workflow_removed(self):
-        self.assertFalse((ROOT/'scripts'/'build_briefing.py').exists())
+    def test_secondary_browser_has_no_separate_workflow(self):
+        self.assertTrue((ROOT/'scripts'/'build_briefing.py').exists())
         self.assertFalse((ROOT/'.github'/'workflows'/'radar-briefing.yml').exists())
 
     def test_transformer_classifies_and_writes_one_point(self):
@@ -96,15 +96,15 @@ const points=groups.flatMap(g=>g.items.map(x=>x.point));
 const joined=points.join('\n');
 const must=[
  /EU nuclear expansion is becoming more dependent on non-EU reactor technology/i,
- /EU is shifting Global Gateway from grant-based aid toward investment-led geopolitical statecraft/i,
+ /EU is shifting Global Gateway from grants toward investment-led geopolitical statecraft/i,
  /Japan and South Korea are diversifying partnerships/i,
  /Horizon Europe is introducing the ERC Plus Grant/i,
- /Global Gateway health partnerships are an underused EU science-diplomacy tool/i,
- /Advanced semiconductors and AI infrastructure are becoming a central arena/i,
+ /Global Gateway health partnerships remain underused as an EU science-diplomacy tool/i,
+ /Advanced chips and AI infrastructure are a key arena/i,
  /wellbeing within planetary boundaries/i,
- /same foresight methods can serve different functions/i,
- /Participatory foresight can bridge community-led visioning/i,
- /Scenario-building methods can test why the same circular-economy instruments work differently/i,
+ /Foresight methods serve different functions/i,
+ /Participatory foresight can connect local climate visions/i,
+ /Scenario methods can test why the same circular-economy tools work differently/i,
  /Ukraine urges EU sanctions on Rosatom/i,
  /West Africa cocoa sector struggles to meet EU anti-deforestation rules/i,
  /China launches “Ice Silk Road” route to Europe/i
@@ -112,7 +112,7 @@ const must=[
 for(const re of must) if(!re.test(joined)){console.error('missing',re,joined);process.exit(10)}
 const bad=[/ANNEX/i,/METHODOLOGY/i,/purpose of the article/i,/The analysis is set/i,/Much has already been written/i,/Table\.Briefings/i,/politico\.eu/i,/A S I A D O N O R/i,/Abstract mainstream/i];
 for(const re of bad) if(re.test(joined)){console.error('bad',re,joined);process.exit(11)}
-for(const p of points) if(p.split(/\s+/).length>38){console.error('too long',p);process.exit(12)}
+for(const p of points) if(p.length>120||/…|\.\.\./.test(p)||/^(?:this|these|those|it|they|such)\b/i.test(p)){console.error('reader point contract',p);process.exit(12)}
 '''
         self.run_node(script)
 

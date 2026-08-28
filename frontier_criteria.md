@@ -1,4 +1,4 @@
-# Matrix criteria — V17.13.1
+# Matrix criteria — V17.13.2
 
 ## Reader-facing structure
 

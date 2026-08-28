@@ -89,5 +89,5 @@ def test_content_claim_is_not_prefixed_with_says_that():
     frontier = (ROOT / 'frontier' / 'index.html').read_text(encoding='utf-8')
     assert '`This says that ${c}`' not in main
     assert '`This says that ${c}`' not in frontier
-    assert "return c||'Concise source claim unavailable'" in main
-    assert "return c||'Concise source claim unavailable'" in frontier
+    assert "The source does not provide a concise claim." in main
+    assert "The source does not provide a concise claim." in frontier

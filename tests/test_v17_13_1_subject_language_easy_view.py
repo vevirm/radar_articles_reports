@@ -91,3 +91,40 @@ def test_config_states_subject_and_language_rules():
     assert 'non-English publication' in cfg['english_evidence_rule']
     assert cfg['foreign_language_english_evidence_min_words'] >= 20
     assert 'one specific plain-language sentence' in cfg['material_external_shock_rule']
+
+
+def test_reader_points_are_explicit_complete_and_at_most_120_chars():
+    import subprocess
+    script = r'''
+const fs=require('fs');
+const I=require('./briefing/insights.js');
+const d=JSON.parse(fs.readFileSync('radar.json','utf8'));
+const vague=/^(?:(?:this|these|those|it|they|such)\b|the (?:study|paper|article|report|analysis|research|results?|finding|findings|development|developments|change|changes|trend|trends|issue|issues)\b|to support (?:this|these)|with\b|since\b|because\b|while\b|although\b|building on\b|drawing on\b|based on\b)/i;
+let bad=[];
+for(const k of ['strand_a','strand_b','strand_c']) for(const x of (d[k]||[])){
+  const pts=[['point',I.pointFor(x)]];
+  if(k==='strand_c') pts.push(['what',I.signalWhat(x)],['why',I.signalWhy(x)]);
+  for(const [label,p] of pts){
+    if(!p || p.length>120 || /…|\.\.\./.test(p) || vague.test(p) || !/[.!?]$/.test(p)) bad.push([k,label,p]);
+  }
+}
+if(bad.length){console.error(JSON.stringify(bad.slice(0,20),null,2));process.exit(1)}
+'''
+    subprocess.run(['node', '-e', script], cwd=ROOT, check=True)
+
+
+def test_vague_ai_act_sentence_is_rewritten_with_explicit_subject():
+    source = (
+        'These developments also raise novel regulatory and ethical challenges, particularly in light of '
+        'the EU’s Artificial Intelligence Act (EU AI Act), which introduces a tiered risk-based framework '
+        'for the governance of AI systems'
+    )
+    point = sr.plain_language_claim('', source)
+    assert point == 'The EU AI Act creates a risk-based governance framework for AI systems.'
+    assert len(point) <= 120
+
+
+def test_reader_point_and_package_budgets_are_configured():
+    cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
+    assert cfg['reader_point_max_chars'] == 120
+    assert cfg['package_file_budget'] == 100

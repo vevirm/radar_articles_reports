@@ -1519,7 +1519,7 @@
   "major_eu_ri_focus": true,
   "aboutness_profile_version": "v17.9.0-source-length-aware",
   "matrix_profile_version": "v17.13.1-simple-reader-matrix",
-  "display_claim_profile_version": "v17.13.1-reader-first-full-detail",
+  "display_claim_profile_version": "v17.13.2-explicit-subject-120-char",
   "aboutness_text_modes": {
     "full_text": {
       "min_body_words": 500,
@@ -1570,5 +1570,9 @@
   "foreign_language_english_evidence_min_words": 25,
   "english_evidence_rule": "English is required for the evidence used to admit and write the finding, not necessarily for the whole publication. A non-English publication may qualify from a substantive source-provided/indexed English abstract, executive summary or equivalent English description; machine translation is not an admission basis.",
   "eu_ri_geopolitics_core_rule": "The subject of Strand A is EU/European research and innovation in geopolitical or strategic context. Normal admission requires EU/European scope + substantive R&I + an explicit or triangulated strategic mechanism.",
-  "material_external_shock_rule": "Exceptional non-EU events or findings may enter only when they are a major step-change in a strategically important R&I capability, match a current EU-context anchor in the same domain, and the implication for Europe can be stated as one specific plain-language sentence. This route is an editorial inference and is labelled as such; generic foreign technology news does not qualify."
+  "material_external_shock_rule": "Exceptional non-EU events or findings may enter only when they are a major step-change in a strategically important R&I capability, match a current EU-context anchor in the same domain, and the implication for Europe can be stated as one specific plain-language sentence. This route is an editorial inference and is labelled as such; generic foreign technology news does not qualify.",
+  "reader_point_max_chars": 120,
+  "reader_point_subject_rule": "Every reader-facing finding and why-it-matters point must start with an explicit actor, system or topic. Do not start with vague references such as this, these, those, it, they, such, the study, the paper, the findings or the developments.",
+  "reader_point_sentence_rule": "Reader-facing points must be complete sentences of at most 120 characters. Never hard-cut a sentence and never use ellipses to force the limit.",
+  "package_file_budget": 100
 }

@@ -1,4 +1,4 @@
-# Architecture — V17.13.1 reader-first, high-recall / strict-admission radar
+# Architecture — V17.13.2 reader-first, high-recall / strict-admission radar
 
 The system separates **discovery**, **admission**, **presentation**, and **Matrix classification**. V17.13 deliberately widens discovery while keeping admission conservative.
 
@@ -80,9 +80,18 @@ Automated and manual provenance remain explicit. Manual ingestion is not a live 
 V17.13's bundled state keeps the uploaded scanner timestamp and records a four-month floor of 2026-04-28.
 
 
-## V17.13.1 subject, language and external-shock boundary
+## V17.13.2 subject, language and external-shock boundary
 
 - Strand A's subject is EU/European R&I in geopolitical context, not general innovation with an EU relevance score.
 - Non-EU material has one exceptional route: a major R&I capability shock + a same-domain current EU anchor + a specific one-sentence Europe-position bridge, explicitly marked as radar inference.
 - English applies to the evidence used for admission and reader claims. Non-English publications can pass through a substantive source-provided/indexed English abstract or summary; no machine-translated text is treated as evidence.
 - The reader-first main radar keeps progressive disclosure: the easy card is short, while **All record details** and **Show all details** expose the underlying user-facing record fields.
+
+
+## V17.13.2 reader-point contract
+
+- Primary reader points are complete sentences of at most 120 characters.
+- Points must begin with an explicit actor, system or topic; vague anaphora such as “this”, “these”, “it”, “they”, “the study”, “the findings” and “the developments” are rejected.
+- Long source prose is reduced only at sentence/clause boundaries. Hard cuts and ellipses are forbidden.
+- The same shared `RadarInsights.readerPoint()` boundary is used by the main radar, Read page, Quick Matrix and full Matrix claim surfaces.
+- `plain_language_claim()` applies the same rule at scanner write time, so new `core_message` values are safe before they reach the frontend.

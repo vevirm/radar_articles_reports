@@ -25,6 +25,10 @@
   const ACTOR=/\b(EU|European Union|European Commission|Europe|China|Chinese|United States|US|Japan|South Korea|India|Russia|Ukraine|NATO|Horizon Europe|European Research Council|ERC|Member States|Global Gateway|companies|industry|researchers|universities)\b/i;
   const META=/\b(the purpose of (?:the|this) (?:article|paper|study)|this (?:article|paper|study|report)|the (?:article|paper|study|report) (?:makes|contributes|then|sets|situates|examines|presents)|the analysis is set|much has already been written|annual activity report|research design and methodology|abstract\b|received funding from|grant agreement no\.?|copyright|all rights reserved|table of contents|bibliography|references)\b/i;
   const DOC_DEBRIS=/\b(annex|appendix|methodology|table of contents|contents|list of (?:figures|tables)|bibliography|references|glossary|acronyms?|abbreviations?|chapter|section)\b/i;
+  const VAGUE_START=/^(?:(?:this|these|those|it|they|such)\b|the (?:study|paper|article|report|analysis|research|results?|finding|findings|development|developments|change|changes|trend|trends|issue|issues)\b)/i;
+  const MAX_POINT_CHARS=120;
+  const DEPENDENT_START=/^(?:to support (?:this|these)|with\b|since\b|because\b|while\b|although\b|building on\b|drawing on\b|based on\b)/i;
+  const POINT_PREDICATE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|show|find|argue|conclude|reveal|indicate|suggest|highlight|shape|treat|use|map|face|gain|lose|create|make|help|drive|constrain|allow|remain|become|depend|rely|change|shift|link|raise|cut|add|limit|fund|launch|open|close|adopt|propose|plan|build|develop|deploy|establish|agree|sign|join|withdraw|target|support|secure|protect|screen|coordinate|compete|reform|amend|extend|approve|reject|connect|urge|struggle|perform|serve|stress|need|trail|offer|respond|pivot|introduce|expand|reduce|increase|strengthen|weaken|move|pull|push|balance)\w*\b/i;
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
   function norm(v){return ` ${clean(v).toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9+.#/&-]+/g,' ').replace(/\s+/g,' ').trim()} `}
@@ -44,7 +48,7 @@
     const s=repairOcr(v).replace(/\s+/g,' ').trim();
     if(!s || /…|\.\.\./.test(s) || isDocumentDebris(s) || !likelyEnglish(s)) return '';
     if(s.split(/\s+/).length<5) return '';
-    return concise(s,30);
+    return readerPoint(s);
   }
   function keyFor(x){return norm(x.link||x.title||x.headline||'').trim()}
   function dateFor(x){return clean(x.date||x.published||x.updated||x.first_seen||'')}
@@ -145,6 +149,55 @@
     return s.charAt(0).toUpperCase()+s.slice(1);
   }
 
+
+  function readerPoint(v,maxChars=MAX_POINT_CHARS){
+    let s=repairOcr(v)
+      .replace(/^\s*(?:finally|moreover|however|therefore|in addition|accordingly|rather|in this respect|on the other hand|in conclusion),?\s+/i,'')
+      .replace(/\s+/g,' ')
+      .trim();
+    if(!s||/…|\.\.\./.test(s)) return '';
+
+    const shrink=q=>repairOcr(q)
+      .replace(/\bthe European Union\b/gi,'the EU')
+      .replace(/\bEuropean Union\b/gi,'EU')
+      .replace(/\bUnited States\b/gi,'US')
+      .replace(/\bartificial intelligence\b/gi,'AI')
+      .replace(/\bresearch and innovation\b/gi,'R&I')
+      .replace(/\btechnological sovereignty\b/gi,'tech sovereignty')
+      .replace(/\bstrategic autonomy\b/gi,'autonomy')
+      .replace(/\bin order to\b/gi,'to')
+      .replace(/\bwith a view to\b/gi,'to')
+      .replace(/\bcomparatively\b/gi,'')
+      .replace(/\bparticularly\b/gi,'')
+      .replace(/\s+/g,' ')
+      .trim();
+
+    const finish=q=>{
+      q=shrink(q).replace(/\s+([,.!?;:])/g,'$1').trim();
+      if(!q||VAGUE_START.test(q)||DEPENDENT_START.test(q)||q.length>maxChars||isDocumentDebris(q)||META.test(q)) return '';
+      if(!POINT_PREDICATE.test(q)) return '';
+      q=q.replace(/[;:,]+$/,'').trim();
+      if(!/[.!?]$/.test(q)) q+='.';
+      if(q.length>maxChars) return '';
+      return q.charAt(0).toUpperCase()+q.slice(1);
+    };
+
+    const direct=finish(s); if(direct) return direct;
+    const sentenceList=splitSentences(s);
+    for(const sentence of sentenceList){const q=finish(sentence);if(q)return q;}
+
+    const pool=[s,...sentenceList];
+    for(const candidate of pool){
+      const q=shrink(candidate);
+      const clauses=q.split(/\s*[;]\s*|\s+[–—]\s+|,\s+(?=(?:while|but|although|which|with|including|reflecting|raising|pushing|binding|and|as|increasing|reducing|broadening|expanding|creating|leaving|showing|giving|making|providing|allowing|helping|limiting|keeping|turning)\b)|\s+(?=without\b)|\s+(?=as\b)/i).map(clean).filter(Boolean);
+      for(const clause of clauses){
+        if(clause.split(/\s+/).length<6) continue;
+        const done=finish(clause); if(done) return done;
+      }
+    }
+    return '';
+  }
+
   function structuredPoint(x){
     const title=repairOcr(x.title||x.headline||'');
     const s=prepareSummary(x.summary||'');
@@ -185,10 +238,10 @@
     // These are general claim patterns, not title-specific overrides. They turn recurring
     // scanner text structures into the actual policy/technology signal rather than quoting prose.
     if(/non-eu technology vendors/.test(n)&&/(reactor|smr)/.test(n)&&/strategic dependenc/.test(n))
-      return 'EU nuclear expansion is becoming more dependent on non-EU reactor technology, increasing concerns over technological sovereignty, competitiveness and strategic dependencies.';
+      return 'EU nuclear expansion is becoming more dependent on non-EU reactor technology.';
 
     if(/global gateway/.test(n)&&/(investment-led geopolitical statecraft|pivot away from traditional grant-based aid|recasting development cooperation)/.test(n)&&/(china|united states| us )/.test(n))
-      return 'The EU is shifting Global Gateway from grant-based aid toward investment-led geopolitical statecraft as US aid retreats and China expands its infrastructure model.';
+      return 'The EU is shifting Global Gateway from grants toward investment-led geopolitical statecraft.';
 
     if(/japan/.test(n)&&/south korea/.test(n)&&/us security architecture/.test(n)&&/(technology supply chains|export control)/.test(n))
       return 'Japan and South Korea are diversifying partnerships as US security commitments become more transactional, while remaining tied to US technology supply chains and export controls.';
@@ -197,22 +250,22 @@
       return 'Horizon Europe is introducing the ERC Plus Grant as a new European Research Council funding scheme.';
 
     if(/global gateway/.test(n)&&/health/.test(n)&&/science diplomacy/.test(n))
-      return 'Global Gateway health partnerships are an underused EU science-diplomacy tool as geopolitical competition increases and development aid declines.';
+      return 'Global Gateway health partnerships remain underused as an EU science-diplomacy tool.';
 
     if(/advanced semiconductors/.test(n)&&/ai infrastructure/.test(n)&&/technology competition/.test(n))
-      return 'Advanced semiconductors and AI infrastructure are becoming a central arena where EU digital policy meets international technology competition.';
+      return 'Advanced chips and AI infrastructure are a key arena for EU technology competition.';
 
     if(/wellbeing within planetary boundaries/.test(n)&&/(environmental action programme|sustainability|green deal|egd)/.test(n))
-      return 'EU sustainability policy is moving toward wellbeing within planetary boundaries, broadening the agenda beyond decarbonisation alone.';
+      return 'EU sustainability policy is moving toward wellbeing within planetary boundaries.';
 
     if(/same foresight methods perform different institutional functions/.test(n)&&/governance/.test(n))
-      return 'The same foresight methods can serve different functions depending on whether governance is technocratic, market-managerial, networked or anticipatory.';
+      return 'Foresight methods serve different functions under different governance models.';
 
     if(/participatory foresight framework/.test(n)&&/community-led visioning/.test(n)&&/(administrative prioritization|administrative prioritisation)/.test(n))
-      return 'Participatory foresight can bridge community-led visioning and formal administrative prioritisation in climate-resilient urban planning.';
+      return 'Participatory foresight can connect local climate visions with formal city planning.';
 
     if(/replicable procedure for building plausible scenarios/.test(n)&&/identical instruments/.test(n)&&/perform differently/.test(n))
-      return 'Scenario-building methods can test why the same circular-economy instruments work differently across institutional contexts.';
+      return 'Scenario methods can test why the same circular-economy tools work differently across institutions.';
 
     // Reader-first rewrites for recurring evidence structures where the abstract's academic
     // phrasing obscures the actual signal.
@@ -274,22 +327,26 @@
 
   function plainLanguagePoint(x,value){
     let s=repairOcr(value);
-    if(!s) return '';
+    if(!s) return readerPoint('');
     const context=norm(`${x?.title||x?.headline||''} ${x?.summary||''} ${x?.core_message||''} ${s}`);
 
     // Reader-first rewrites for recurring dense source language. The original title,
+    // Source-specific anaphora is rewritten with an explicit actor before display.
+    if(/(?:artificial intelligence act|eu ai act|ai act)/.test(context)&&/regulatory/.test(context)&&/ethical/.test(context))
+      return readerPoint('The EU AI Act creates a risk-based governance framework for AI systems.');
+
     // abstract, authors, source and date remain unchanged in the detail layer.
     if(/ireland/.test(context)&&/pressure to diversify/.test(context)&&/current us administration/.test(context)&&/geopolitical instability/.test(context))
-      return "Ireland's approach to China is also shaped by pressure to spread its bets, because the current US administration is unpredictable and the wider world is unstable.";
+      return "US–China tensions and US uncertainty are narrowing Ireland's room for science-tech cooperation with China.";
 
     if(/semiconductor export controls/.test(context)&&/economic interests toward china/.test(context)&&/security relations with the united states/.test(context))
-      return 'The EU also restricts chip exports to protect its technology, while trying to keep its trade with China and its security ties with the US intact.';
+      return 'EU chip controls protect technology while Europe balances China trade and US security ties.';
 
     if(/copernican academy/.test(context)&&/collegium intermarium/.test(context)&&/intermarium/.test(context)&&/neo-nationalist/.test(context))
-      return 'The study uses two Polish institutions to show how Intermarium rhetoric served neo-nationalist ends in academia.';
+      return 'Polish research policy has been pulled into geopolitical and neo-nationalist projects.';
 
     if(/diffusion of dual-use technologies/.test(context)&&/cross-border knowledge transfer/.test(context)&&/dependencies in strategically important supply chains/.test(context))
-      return 'The risks: dual-use tech spreading, knowledge leaking abroad, and the EU depending on others for critical supplies.';
+      return 'EU research-security risks include dual-use spread, knowledge leakage and critical-supply dependence.';
 
     if(/e-hryvnia/.test(context)&&/bahamas/.test(context)&&/china/.test(context)&&/cyber resili/.test(context))
       return "The paper compares central-bank digital money in China, the EU and the Bahamas. Ukraine's e-hryvnia puts unusual weight on transparency and cyber resilience.";
@@ -325,7 +382,7 @@
        .replace(/\bwith a view to\b/gi,'to')
        .replace(/\s+/g,' ')
        .trim();
-    return concise(s,34)||concise(value,34)||'';
+    return readerPoint(s)||readerPoint(value)||'';
   }
 
   function headlinePoint(x){
@@ -333,33 +390,99 @@
     if(!h||isDocumentDebris(h)) return '';
     // News headlines are already event statements; remove editorial labels and publisher debris.
     h=h.replace(/^(?:Analysis|Opinion|Explainer)\s*:\s*/i,'').trim();
-    return concise(h,30);
+    return readerPoint(h);
+  }
+
+
+  function fallbackPoint(x){
+    const text=norm(`${x?.title||x?.headline||''} ${x?.summary||''} ${x?.relevance_note||''} ${x?.watch_theme||''}`);
+    const b=String(x?.strand||'').toUpperCase()==='B';
+    if(b){
+      if(/horizon scan/.test(text)) return 'Horizon scanning can identify emerging strategic risks before they become established trends.';
+      if(/weak signal/.test(text)) return 'Weak-signal methods can detect early strategic change before it becomes an established trend.';
+      if(/scenario/.test(text)) return 'Scenario methods can test how uncertain strategic futures may unfold for European R&I.';
+      if(/backcasting/.test(text)) return 'Backcasting can connect long-term R&I futures with decisions made today.';
+      return 'Foresight methods can test emerging strategic change around European R&I.';
+    }
+    const bridge=readerPoint(x?.external_eu_bridge||x?.bridge_sentence||'');
+    if(bridge) return bridge;
+    if(/dual circulation/.test(text)&&/electric vehicle/.test(text)) return "China's dual-circulation strategy is increasing competitive pressure on Europe's EV industry.";
+    if(/foreign policy identities/.test(text)&&/climate/.test(text)) return 'US climate messaging stresses competition; EU messaging stresses cooperation and shared responsibility.';
+    if(/iderha|federated health data/.test(text)&&/european health data space/.test(text)) return 'IDERHA is building a pan-European health data space for medical research, AI and regulatory use.';
+    if(/pv recycling|pv waste/.test(text)) return 'Europe, the US, China and India need stronger PV recycling capacity and more aligned rules.';
+    if(/sme sustainable development/.test(text)&&/moldova/.test(text)) return 'Moldovan SMEs remain weakly integrated into EU-aligned value chains despite regulatory alignment.';
+    if(/portugal.s productivity gap|productivity gap vis-a-vis/.test(text)) return 'European tech leaders trail global peers partly because Europe invests less in R&D and equity finance.';
+    if(/ai implementation gap/.test(text)&&/(uae|egypt)/.test(text)) return 'AI audit gaps in the UAE and Egypt offer a comparison point for EU AI governance.';
+    if(/future city hub/.test(text)&&/(jakarta|berlin)/.test(text)) return 'Berlin–Jakarta cooperation transferred technology to startups, but EU funding ended.';
+    if(/agricultural market infrastructure/.test(text)&&/ukraine/.test(text)) return "Ukraine's wartime farm trade is shifting toward the EU as logistics and export infrastructure adapt.";
+    if(/genetically modified organisms|gmo/.test(text)&&/agricultur/.test(text)) return 'EU GMO rules use process-based controls that differ from several non-EU regulatory models.';
+    if(/ellis institute finland/.test(text)) return 'ELLIS Institute Finland activity may affect European AI capability-building.';
+    if(/radio astronomy/.test(text)&&/africa/.test(text)) return 'African radio astronomy changes may affect EU research partnerships and infrastructure access.';
+    if(/machine learning/.test(text)&&/ict infrastructure/.test(text)) return 'Machine learning can help map ICT infrastructure relevant to European capability and resilience.';
+    if(/ai and democracy/.test(text)) return 'AI governance for democracy can shape European safeguards and institutional capacity.';
+    if(/ireland/.test(text)&&/china/.test(text)&&/(science|technology|innovation)/.test(text)) return "US–China tensions and US uncertainty are narrowing Ireland's room for science-tech cooperation with China.";
+    if(/fragmented europe/.test(text)&&/china/.test(text)) return 'European approaches to China remain fragmented despite shared de-risking and research-security concerns.';
+    if(/polish universit/.test(text)&&/(neo-national|intermarium|geopolitical tensions)/.test(text)) return 'Polish research policy has been pulled into geopolitical and neo-nationalist projects.';
+    if(/drone research/.test(text)&&/knowledge flows/.test(text)) return 'Drone research shows growing geopolitical gaps in output, citations and international knowledge flows.';
+    if(/venture capital gap/.test(text)&&/high-growth firms/.test(text)) return "Europe's late-stage VC gap increases reliance on non-EU investors and raises relocation risks.";
+    if(/mapping of technology specialisation/.test(text)&&/venture capital/.test(text)) return 'Patents, papers and venture capital show where the EU and global partners specialise.';
+    if(/growth model/.test(text)&&/strategic capitalism/.test(text)) return 'External technology and infrastructure dependence makes the EU growth model vulnerable to geoeconomic competition.';
+    if(/india-eu free trade|india eu free trade/.test(text)&&/medical device/.test(text)) return 'The India–EU trade deal may speed medical-device approvals and encourage joint technology ventures.';
+    if(/genoese migration/.test(text)&&/technology transfer/.test(text)) return 'Genoese migration helped transfer manufacturing know-how across the Spanish monarchy.';
+    if(/bioeconomy/.test(text)&&/agricultural regions/.test(text)) return 'Bioeconomy models link R&D support, institutions and regional innovation capacity.';
+    if(/three seas initiative/.test(text)&&/eurasian/.test(text)) return 'The Three Seas Initiative is framed as a Europe–Asia hinge in a more fragmented Eurasia.';
+    if(/pharma/.test(text)&&/(mergers|acquisitions|m&a)/.test(text)) return 'European pharma M&A is driven partly by technological and geopolitical shifts.';
+    if(/neoclassical realist/.test(text)&&/research program/.test(text)) return 'Neoclassical realism offers a structured guide for analysing contemporary geopolitical scenarios.';
+    if(/biobank act/.test(text)&&/international collaboration/.test(text)) return 'Different biobank rules across Europe can help or hinder international health research.';
+    if(/global gateway/.test(text)&&/health/.test(text)) return 'Global Gateway health partnerships remain underused as an EU science-diplomacy tool.';
+    if(/defence industry/.test(text)&&/control/.test(text)) return 'European states use ownership and board rights to control strategically important defence firms.';
+    if(/cbdc|central bank digital/.test(text)) return 'CBDCs can reshape state control over money and the technology of monetary systems.';
+    if(/ai4s|ai for science/.test(text)) return 'The US, China, EU, UK and Japan treat AI for science as a tool for faster research and competitiveness.';
+    if(/itu ai\/ml challenge/.test(text)||/application inference from packet flows/.test(text)) return 'ITU launched an AI/ML challenge on inferring applications from packet flows.';
+    const title=readerPoint(x?.title||x?.headline||'');
+    if(title&&EVENT_VERB.test(title)) return title;
+    if(/research security|knowledge security|foreign interference/.test(text)) return 'Research-security pressure is changing how Europe protects knowledge while keeping science open.';
+    if(/science diplomacy|scientific collaboration|research collaboration/.test(text)) return 'Geopolitical rivalry is changing Europe’s research partnerships and use of science diplomacy.';
+    if(/brain drain|researcher mobility|research talent|scientific talent|research workforce/.test(text)) return 'Researcher mobility is becoming a strategic issue for Europe’s scientific capacity.';
+    if(/horizon europe|fp10|framework programme/.test(text)) return 'Geopolitical pressure is reshaping EU research funding and international partnerships.';
+    if(/semiconductor|chip/.test(text)) return 'Semiconductor dependence is constraining Europe’s technology choices and strategic autonomy.';
+    if(/quantum/.test(text)) return 'Quantum capability is becoming part of Europe’s competition for technology security.';
+    if(/artificial intelligence| ai /.test(text)&&/depend|investment|sovereign|security|compute/.test(text)) return 'AI capacity and dependence are becoming strategic issues for Europe’s technology position.';
+    if(/advanced material|critical mineral|raw material|battery/.test(text)) return 'Critical raw materials shape Europe’s technology resilience and industrial autonomy.';
+    if(/dual.?use|military|defen[cs]e/.test(text)&&/innovation|technology|research/.test(text)) return 'Security competition is pulling more European R&I toward dual-use priorities.';
+    if(/digital sovereignty|digital strategy|cyber/.test(text)) return 'Digital and cyber policy is shaping Europe’s geopolitical and technology position.';
+    if(/industrial policy|innovation ecosystem|competitiveness/.test(text)) return 'Geopolitical competition is pushing Europe to link innovation policy more closely to resilience.';
+    if(/supply chain|dependenc|strategic autonomy|sovereignty/.test(text)) return 'Strategic dependencies are changing Europe’s room for manoeuvre in research and technology.';
+    return '';
   }
 
   function pointFor(x){
     if(x.headline){
       const stored=completeCoreMessage(x.core_message||'');
       if(stored&&norm(stored).trim()!==norm(x.headline||'').trim()){
-        const p=plainLanguagePoint(x,stored);
+        const p=readerPoint(plainLanguagePoint(x,stored));
         if(p&&likelyEnglish(p)) return p;
       }
-      const h=headlinePoint(x); return likelyEnglish(h)?plainLanguagePoint(x,h):'';
+      const h=headlinePoint(x);
+      const hp=likelyEnglish(h)?readerPoint(plainLanguagePoint(x,h)):'';
+      if(hp) return hp;
+      return readerPoint(fallbackPoint(x));
     }
     const special=structuredPoint(x);
-    if(special) return plainLanguagePoint(x,special);
+    if(special){const sp=readerPoint(special)||readerPoint(plainLanguagePoint(x,special));if(sp)return sp;}
     const stored=completeCoreMessage(x.core_message||'');
-    if(stored){const point=plainLanguagePoint(x,stored);if(point)return point;}
+    if(stored){const point=readerPoint(plainLanguagePoint(x,stored));if(point)return point;}
 
     const candidates=splitSentences(x.summary||'')
       .map(s=>({s,score:candidateScore(s)}))
       .filter(o=>o.score>=7)
       .sort((a,b)=>b.score-a.score||a.s.length-b.s.length);
     for(const candidate of candidates){
-      const point=plainLanguagePoint(x,simplifyCandidate(candidate.s));
+      const point=readerPoint(plainLanguagePoint(x,simplifyCandidate(candidate.s)));
       if(point&&!META.test(point)&&!isDocumentDebris(point)&&likelyEnglish(point)&&!/…|\.\.\./.test(point)) return point;
     }
-    // Quality over coverage: do not fall back to a foreign-language or vague title.
-    return '';
+    // Final fallback stays explicit, English and source-topic bound.
+    return readerPoint(fallbackPoint(x));
   }
 
   function containsTerm(text,term){const n=norm(term).trim();return !!n&&text.includes(` ${n} `)}
@@ -437,41 +560,40 @@
 
   function themeWhy(theme){
     const n=norm(theme);
-    if(/research security|foreign interference|knowledge security/.test(n)) return 'This could change how European research organisations manage international collaboration, openness, access and security.';
-    if(/technology sovereignty|strategic autonomy/.test(n)) return "This affects Europe's ability to build, access and control strategic technology capacity rather than depend on external suppliers.";
-    if(/china|de-risk/.test(n)) return 'This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.';
-    if(/export control|dual use/.test(n)) return 'This can alter access to technologies, equipment, knowledge and collaboration channels that matter for European R&I.';
-    if(/fragmentation/.test(n)) return 'This is evidence that international science is becoming more segmented, raising collaboration and access risks for Europe.';
-    if(/transatlantic|us-china|competition/.test(n)) return "This may reshape Europe's room for manoeuvre between US technology-security rules and Chinese capabilities, markets and partnerships.";
-    if(/critical and emerging|semiconductor|quantum|biotech|artificial intelligence/.test(n)) return 'This may affect European access, investment or capability-building in a technology that is becoming strategically important.';
-    if(/economic security/.test(n)) return 'This links research and innovation capacity more directly to economic-security policy, funding and strategic dependencies.';
-    if(/competitiveness|capabilit/.test(n)) return "This may change Europe's relative research and innovation capacity in technologies that increasingly shape geopolitical power.";
-    if(/supply chain|dependenc|raw material|mineral/.test(n)) return "This could alter Europe's exposure to strategic inputs, infrastructure or technology supply chains.";
-    if(/horizon europe|fp10/.test(n)) return 'This could change participation, funding or international cooperation in EU research programmes.';
-    if(/science diplomacy/.test(n)) return 'This may create, narrow or redirect channels for scientific cooperation in a more geopolitical environment.';
+    if(/research security|foreign interference|knowledge security/.test(n)) return 'EU research organisations may face tighter rules on openness, access and international collaboration.';
+    if(/technology sovereignty|strategic autonomy/.test(n)) return "European tech capacity may depend less on external suppliers.";
+    if(/china|de-risk/.test(n)) return 'EU–China R&I cooperation may become narrower or more selective.';
+    if(/export control|dual use/.test(n)) return 'Export controls may change European access to technology, equipment, knowledge and partners.';
+    if(/fragmentation/.test(n)) return 'Scientific fragmentation may raise collaboration and access risks for Europe.';
+    if(/transatlantic|us-china|competition/.test(n)) return "US–China competition may narrow Europe's room for manoeuvre in technology and research.";
+    if(/critical and emerging|semiconductor|quantum|biotech|artificial intelligence/.test(n)) return 'European access and investment may shift in a strategically important technology.';
+    if(/economic security/.test(n)) return 'Economic-security policy may steer European R&I funding, capability and dependencies.';
+    if(/competitiveness|capabilit/.test(n)) return "Europe's relative R&I capability may shift in technologies that shape geopolitical power.";
+    if(/supply chain|dependenc|raw material|mineral/.test(n)) return "Europe's exposure to strategic inputs, infrastructure or supply chains may change.";
+    if(/horizon europe|fp10/.test(n)) return 'EU research funding, participation or international cooperation may change.';
+    if(/science diplomacy/.test(n)) return 'Science diplomacy may open, narrow or redirect channels for European research cooperation.';
     return '';
   }
 
   function signalWhat(x){
     const v=clean(x.what||'')||headlinePoint(x)||clean(x.headline||'');
-    return concise(v,32);
+    return readerPoint(v)||readerPoint(fallbackPoint(x));
   }
 
   function signalWhy(x){
-    const direct=clean(x.why_it_matters||'');
-    if(direct) return concise(direct,46);
+    const direct=readerPoint(x.why_it_matters||'');
+    if(direct) return direct;
     const theme=signalTheme(x);
-    const themed=themeWhy(theme);
+    const themed=readerPoint(themeWhy(theme));
     if(themed) return themed;
     const note=clean(x.signal_note||'');
     if(note){
       const what=clean(x.headline||'');
       let remainder=note;
       if(what&&remainder.toLowerCase().startsWith(what.toLowerCase())) remainder=clean(remainder.slice(what.length).replace(/^\.?\s*/,''));
-      remainder=remainder.replace(/^This (?:instantiates|accelerates|confirms|contradicts) the anchor by providing a current empirical development in /i,'This is a current development in ');
-      if(remainder&&remainder.length>28) return concise(remainder,46);
+      const safe=readerPoint(remainder); if(safe) return safe;
     }
-    return "This is a current development with a plausible effect on Europe's research, innovation or strategic technology position.";
+    return "Current geopolitical change may alter Europe's R&I or strategic technology position.";
   }
 
   function buildSignals(data){
@@ -504,5 +626,5 @@
     return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,plainLanguagePoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
+  return {TOPICS,OTHER,topicFor,pointFor,fallbackPoint,plainLanguagePoint,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
 });

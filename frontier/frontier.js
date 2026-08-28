@@ -454,7 +454,7 @@
     if(flags.compete) parts.push('changes how well Europe can compete');
     if(flags.failure) parts.push('shows a concrete way access or capability can fail');
     const s=parts.length?parts.join('; '):'changes Europe’s control and competitive position';
-    return `${s}. This belongs under ${row.name} / ${column.name}.`;
+    return `${s}. Matrix cell: ${row.name} / ${column.name}.`;
   }
 
   function classifySignal(x,data,index,now=new Date()){
@@ -582,6 +582,53 @@
     };
   }
 
+  function shortBullet(x){
+    const raw=norm(`${clean(x?.title||'')} ${clean(x?.coreMessage||'')} ${clean(x?.abstract||'')} ${clean(x?.theme||'')}`);
+    const topicRules=[
+      [/research secur|foreign interference|academic freedom/,'Research security'],
+      [/brain drain|brain gain|researcher mobility|research talent|researcher|scientist|career/,'Research talent'],
+      [/science diplomacy|research partnership|research cooperation|scientific cooperation|international research/,'Research links'],
+      [/horizon europe|framework programme|erc|msca|research funding/,'EU research funds'],
+      [/semiconductor|\bchip\b|\bchips\b/,'Semiconductors'],
+      [/compute|supercomputer|ai factor|data cent|cloud/,'Compute & cloud'],
+      [/critical raw|critical mineral|battery|lithium|rare earth|materials/,'Critical inputs'],
+      [/satellite|space capab|space infrastructure/,'Space access'],
+      [/energy|electricity|grid|decarbon/,'Energy systems'],
+      [/venture|scale-up|scaleup|equity finance|late-stage capital/,'Scale-up finance'],
+      [/defence|defense|dual-use|dual use|military/,'Dual-use R&I'],
+      [/foreign investment|investment screening|chinese ev|battery investment/,'Foreign investment'],
+      [/industrial|manufactur|production|factory/,'Industrial scale'],
+      [/cyber|software vulnerab/,'Cyber rules'],
+      [/cbdc|digital currenc|e-hryvnia/,'Digital currency'],
+      [/standard/,'Standards'],
+      [/tech sovereignty|technology sovereignty|technological sovereignty|strategic autonomy/,'Tech sovereignty'],
+      [/ai act|regulat|governance|liability|local-content|local content/,'Technology rules'],
+      [/biobank/,'Biobank rules'],
+      [/quantum/,'Quantum tech'],
+      [/biotech|bioeconomy|biology/,'Biotech'],
+      [/artificial intelligence|\bai\b/,'AI capability'],
+      [/innovation|\br&d\b|research and development/,'Innovation']
+    ];
+    let topic='EU R&I';
+    for(const [re,label] of topicRules){if(re.test(raw)){topic=label;break}}
+    const col=x?.column?.id||'B';
+    const text={
+      A:`${topic} raises EU control and capacity.`,
+      B:`${topic} raises EU control and costs.`,
+      C:`${topic} gains capacity, loses control.`,
+      D:`${topic} cuts EU control and capacity.`
+    }[col]||`${topic} changes Europe’s R&I position.`;
+    if(text.length<=50) return text;
+    const row=clean(x?.row?.short||x?.row?.name||'EU R&I');
+    const fallback={
+      A:`${row}: control and capacity rise.`,
+      B:`${row}: control and costs rise.`,
+      C:`${row}: capacity rises, control falls.`,
+      D:`${row}: control and capacity fall.`
+    }[col]||'EU R&I position changes.';
+    return fallback.length<=50?fallback:'EU R&I position changes.';
+  }
+
   function concentration(items,keyFn){
     const m=new Map();for(const x of items){const k=keyFn(x);m.set(k,(m.get(k)||0)+1)}
     return [...m.entries()].sort((a,b)=>b[1]-a[1]||String(a[0]).localeCompare(String(b[0])))[0]||['None',0];
@@ -610,5 +657,5 @@
     };
   }
 
-  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores};
+  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet};
 });

@@ -86,19 +86,19 @@ class V17130FeedbackRoundTests(unittest.TestCase):
                 "Despite these obstacles, the study identifies the emergent roles of regional alliances such as the EU and African Union and multistakeholder forums such as IGF and GFCE as promising conduits for normative convergence and collaborative capacity-building.",
                 "Global Cybersecurity Governance: Challenges in Harmonizing International Cyber Laws",
                 'shared cyber rules',
-                'build the capacity',
+                'shared cyber rules',
             ),
             (
                 "Across the United States, China, the European Union, the United Kingdom, and Japan, AI4S is widely framed as a strategic instrument for overcoming structural development bottlenecks, accelerating knowledge production, and strengthening national competitiveness.",
                 "The new frontier of research competition: perspectives on national AI4S strategies",
                 'AI for science',
-                'stay competitive',
+                'competitiveness',
             ),
             (
                 "It combines large datasets on patents, scientific publications, and venture capital investment (2010–2025) to map technological specialisation, research capacity, and entrepreneurial activity across the EU and selected global partners.",
                 "Mapping of technology specialisation, complexity and relatedness of the EU and selected global partners – CEPS",
-                'Patents, research papers and venture-capital deals',
-                'new companies take root',
+                'Patents, papers and venture capital',
+                'global partners specialise',
             ),
         ]
         for summary, title, first, second in cases:
@@ -110,11 +110,21 @@ class V17130FeedbackRoundTests(unittest.TestCase):
         read_page = (ROOT / 'read' / 'index.html').read_text(encoding='utf-8')
         quick = (ROOT / 'frontier' / 'quick' / 'index.html').read_text(encoding='utf-8')
         frontier = (ROOT / 'frontier' / 'frontier.js').read_text(encoding='utf-8')
-        self.assertIn("Eight issues. Then open the branches.", read_page)
+        priorities = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('Eight main issues. Open the branches.', read_page)
         self.assertEqual(read_page.count("{title:'"), 8)
-        self.assertIn('Subissues:', read_page)
-        self.assertIn('No bibliography, classifier scores or methodological detail here.', quick)
-        self.assertNotIn('biblioText', quick)
+        self.assertIn('issue-chart', read_page)
+        self.assertIn('chart-main', read_page)
+        self.assertIn('chart-branch', read_page)
+        self.assertIn('sub-node', read_page)
+        self.assertIn('Open all maps', read_page)
+        self.assertIn('Every qualifying finding is shown as a short bullet.', quick)
+        self.assertNotIn('xs.slice(0,2)', quick)
+        self.assertIn('xs.map', quick)
+        self.assertIn('shortBullet', quick)
+        self.assertIn('shortBullet', priorities)
+        self.assertNotIn('atleast-grid', priorities)
+        self.assertNotIn('priorityInterpretation', priorities)
         for label in ('People & knowledge', 'Tools & infrastructure', 'Firms & scale', 'Rules & coordination'):
             self.assertIn(label, frontier)
         for label in ('Stronger on both', 'More control, more cost', 'Faster, but dependent', 'Weaker on both'):
@@ -125,7 +135,7 @@ class V17130FeedbackRoundTests(unittest.TestCase):
         self.assertEqual(data.get('corpus_start_date'), '2026-04-28')
         a, b, c = map(lambda k: len(data.get(k, [])), ('strand_a', 'strand_b', 'strand_c'))
         self.assertLessEqual(c / max(1, a + b + c), 0.15)
-        self.assertEqual(data.get('display_claim_profile_version'), 'v17.13.1-reader-first-full-detail')
+        self.assertEqual(data.get('display_claim_profile_version'), 'v17.13.2-explicit-subject-120-char')
         chips = [x for x in data.get('strand_a', []) if x.get('title') == 'No one builds alone: The geopolitics of AI chips']
         self.assertEqual(len(chips), 1)
         self.assertNotIn('Chip design engineer', chips[0].get('summary', ''))

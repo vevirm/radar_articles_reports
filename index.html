@@ -66,12 +66,12 @@
           <button id="lock" class="lock">Lock radar</button>
         </div>
         <nav class="hero-actions" aria-label="Primary site sections">
-          <a class="action primary" href="read/?v=17.13.1">Read at least this</a>
+          <a class="action primary" href="read/?v=17.13.2">Read at least this</a>
           <a class="action secondary current" href="#radar" aria-current="page">Main radar</a>
-          <a class="action secondary" href="frontier/quick/?v=17.13.1">Matrix</a>
-          <a class="action secondary" href="priorities/?v=17.13.1">Risks &amp; opportunities</a>
+          <a class="action secondary" href="frontier/quick/?v=17.13.2">Matrix</a>
+          <a class="action secondary" href="priorities/?v=17.13.2">Risks &amp; opportunities</a>
         </nav>
-        <div class="utility-links"><a href="#strand-c">Jump to latest weak signals</a><span>·</span><a href="briefing/?v=17.13.1">Secondary evidence browser</a></div>
+        <div class="utility-links"><a href="#strand-c">Jump to latest weak signals</a><span>·</span><a href="briefing/?v=17.13.2">Secondary evidence browser</a></div>
       </div>
     </header>
 
@@ -85,17 +85,17 @@
     <div class="wrap" id="radar">
       <section class="minimum-read" aria-label="Minimum useful read">
         <div><div class="label">Read at least this</div><h2>Europe’s R&amp;I problem is increasingly a control problem, not only an invention problem.</h2><p>Frontier compute, conversion of research into scaled firms, and fragmented research-security machinery are the three structural bottlenecks to keep in view.</p></div>
-        <a href="read/?v=17.13.1">Open the 1-minute read →</a>
+        <a href="read/?v=17.13.2">Open the 1-minute read →</a>
       </section>
       <section class="site-guide" aria-label="Four components of the site">
         <div class="site-guide-head"><h2>The site has four components</h2><p>Start shallow; open evidence only when you need it.</p></div>
         <div class="component-grid">
-          <article class="component"><div class="n">01 · synthesis</div><h3><a href="read/?v=17.13.1">Read at least this</a></h3><p>Shortest useful interpretation, with live context layered onto the editorial read.</p></article>
+          <article class="component"><div class="n">01 · synthesis</div><h3><a href="read/?v=17.13.2">Read at least this</a></h3><p>Shortest useful interpretation, with live context layered onto the editorial read.</p></article>
           <article class="component active"><div class="n">02 · record</div><h3><a href="#strand-a">Main radar</a></h3><p>The current four-month evidence corpus: substantive findings, futures methods and weak signals.</p></article>
-          <article class="component"><div class="n">03 · classification</div><h3><a href="frontier/quick/?v=17.13.1">Matrix</a></h3><p>A stripped-down 4×4 view of control × competitiveness. Open the full matrix only when you need evidence and method detail.</p></article>
-          <article class="component"><div class="n">04 · decision view</div><h3><a href="priorities/?v=17.13.1">Risks &amp; opportunities</a></h3><p>The strongest matrix-qualified risks and openings, ranked in plain language.</p></article>
+          <article class="component"><div class="n">03 · classification</div><h3><a href="frontier/quick/?v=17.13.2">Matrix</a></h3><p>A stripped-down 4×4 view of control × competitiveness. Open the full matrix only when you need evidence and method detail.</p></article>
+          <article class="component"><div class="n">04 · decision view</div><h3><a href="priorities/?v=17.13.2">Risks &amp; opportunities</a></h3><p>The strongest matrix-qualified risks and openings, ranked in plain language.</p></article>
         </div>
-        <div class="secondary-view">Need more detail? <a href="frontier/?v=17.13.1">Open the full matrix</a><span> · </span><a href="briefing/?v=17.13.1">Open the secondary evidence browser</a>. These are deeper views, not extra top-level components.</div>
+        <div class="secondary-view">Need more detail? <a href="frontier/?v=17.13.2">Open the full matrix</a><span> · </span><a href="briefing/?v=17.13.2">Open the secondary evidence browser</a>. These are deeper views, not extra top-level components.</div>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
@@ -134,7 +134,7 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.13.1"></script>
+<script src="briefing/insights.js?v=17.13.2"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:12}};
@@ -160,20 +160,19 @@ function hasLetterSpacing(v){
 }
 function short(v,n=220){const s=cleanText(v);return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s}
 function complete120(v){
-  let s=repairLetterSpacing(v).replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
-  s=s.replace(/^(The|This) (study|paper|article|report) (finds|shows|argues|concludes|demonstrates|identifies|suggests) that\s+/i,'');
-  if(!s||s.length>120||s.includes('…')||s.includes('...')||hasLetterSpacing(s))return '';
-  return s.replace(/\s*[.…]{2,}\s*$/,'').trim();
+  const s=repairLetterSpacing(v).replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
+  if(!s||hasLetterSpacing(s))return '';
+  return globalThis.RadarInsights?.readerPoint?.(s)||'';
 }
 function claim80(v){
-  let s=repairLetterSpacing(v).replace(/^(?:This|It) says that\s+/i,'').replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
-  s=s.replace(/^(?:(?:The|This) (?:study|paper|article|report|analysis|results?) (?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests)|It (?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests)) (?:that\s+)?/i,'');
+  const s=repairLetterSpacing(v).replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
   if(!s||hasLetterSpacing(s))return '';
-  s=s.replace(/[.!?]+$/,'').trim();if(s.length<=80)return s;
-  let c=s.slice(0,80).replace(/\s+\S*$/,'').replace(/[,:;\-–—]+$/,'').trim();if(c.length<42)c=s.slice(0,79).trim();
-  return (c.replace(/[.!?]+$/,'')+'…').slice(0,80);
+  return globalThis.RadarInsights?.readerPoint?.(s)||'';
 }
-function claimText(x){const raw=globalThis.RadarInsights?.pointFor?.(x)||coreMessage(x)||semanticMessage(x);const c=cleanText(raw).replace(/[.!?]+$/,'').trim();return c||'Concise source claim unavailable'}
+function claimText(x){
+  const safe=v=>globalThis.RadarInsights?.readerPoint?.(v)||'';
+  return safe(globalThis.RadarInsights?.pointFor?.(x))||safe(coreMessage(x))||safe(globalThis.RadarInsights?.fallbackPoint?.(x))||safe(semanticMessage(x))||'The source does not provide a concise claim.';
+}
 function readablePaperTitle(v){
   let t=cleanText(v).replace(/<\/?b>/gi,'').replace(/\s+[–—-]\s+(?:European Council on Foreign Relations|CEPS|Euractiv\.com|FT\.com)$/i,'').trim();
   if(!t)return '';
@@ -229,16 +228,18 @@ function coreMessage(x){
   return claim80(readablePaperTitle(title));
 }
 function simpleWhy(x){
-  if(x.headline){const w=globalThis.RadarInsights?.signalWhy?.(x)||x.why_it_matters||x.signal_note||'';return short(w,170)}
+  const safe=v=>globalThis.RadarInsights?.readerPoint?.(v)||'';
+  if(x.headline){const w=globalThis.RadarInsights?.signalWhy?.(x)||'';return safe(w)||"Current geopolitical change may alter Europe's R&I position."}
   const text=norm(`${x.title||''} ${x.summary||''} ${x.relevance_note||''}`);const b=String(x.strand||'').toUpperCase()==='B';
-  if(b)return 'It offers a futures method that could be reused to explore change around EU R&I.';
-  if(/research security|knowledge security|science diplomacy|scientific collaboration|research collaboration/.test(text))return 'It can change who Europe works with, what knowledge moves across borders, and how research is protected.';
-  if(/brain drain|researcher|research talent|scientific talent|research workforce/.test(text))return 'It can change Europe’s ability to attract, keep and use research talent.';
-  if(/horizon europe|fp10|research funding|framework programme/.test(text))return 'It can shape how Europe funds research and works with international partners.';
-  if(/semiconductor|artificial intelligence|\bai\b|quantum|biotech|technology|advanced material|digital/.test(text))return 'It can change Europe’s access to key technologies and its ability to innovate.';
-  if(/dependen|supply chain|strategic autonomy|sovereignty/.test(text))return 'It can change how dependent Europe is on outside suppliers, knowledge or capabilities.';
-  return 'It shows how geopolitics can change European research and innovation.';
+  if(b)return 'The method can be reused to explore strategic change around EU R&I.';
+  if(/research security|knowledge security|science diplomacy|scientific collaboration|research collaboration/.test(text))return 'EU research partnerships may change as Europe protects knowledge and manages openness.';
+  if(/brain drain|researcher|research talent|scientific talent|research workforce/.test(text))return 'European research capacity may change as talent moves across borders.';
+  if(/horizon europe|fp10|research funding|framework programme/.test(text))return 'EU research funding and international partnerships may change.';
+  if(/semiconductor|artificial intelligence|\bai\b|quantum|biotech|technology|advanced material|digital/.test(text))return 'European access to key technologies and innovation capacity may change.';
+  if(/dependen|supply chain|strategic autonomy|sovereignty/.test(text))return 'European dependence on outside suppliers, knowledge or capabilities may change.';
+  return 'Geopolitical pressure may reshape European research and innovation.';
 }
+
 function whereFrom(x){return [x.source,fmtDate(x.date)].filter(Boolean).join(' · ')}
 function provenanceLabel(x){const p=String(x.discovery_provenance||'').toLowerCase();if(p==='both')return 'Automated + manual';if(p==='manual')return 'Manual candidate';if(p==='automated')return 'Automated discovery';const a=Array.isArray(x.provenance)?x.provenance.join(' ').toLowerCase():'';if(a.includes('manual')&&a.includes('automated'))return 'Automated + manual';if(a.includes('manual'))return 'Manual candidate';return 'Automated discovery'}
 function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
