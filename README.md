@@ -137,3 +137,8 @@ PYTHONPATH=. python -m pytest -q \
 ```
 
 See `VALIDATION_V17_13_2.md` for the exact results packaged with this release.
+
+
+## Reader views
+
+The reader shell links Radar, Matrix short/full, Risks & opportunities, Read at least this, and an alphabetical Literature used page.

@@ -54,3 +54,9 @@ The source `last_updated` value remains the scanner timestamp rather than a pack
 
 The final ZIP is built from files only, without test caches, bytecode or directory entries.
 The package contains exactly 100 files.
+
+## Reader-shell patch validation
+- Presentation smoke: PASS.
+- 221 reader records checked: no empty claims, leading conjunctions/pronouns, question-only findings, generic “broader implications”, or >120-character points.
+- Literature list resolves 217 unique source records from the current radar state.
+- Archive regular-file count: 100.

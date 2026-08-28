@@ -38,13 +38,16 @@
     .method{margin-top:46px;background:#eaf0f6;border:1px solid #d6e0ea;border-radius:16px;padding:16px 18px;color:#526173;font-size:13px}.method strong{color:var(--ink)}footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:12px}
     @media(max-width:920px){.dashboard{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.component-grid{grid-template-columns:1fr 1fr}.minimum-read{grid-template-columns:1fr}}
     @media(max-width:650px){.wrap{width:min(calc(100% - 24px),var(--max))}.topline{flex-direction:column}.hero{padding-top:31px}.dashboard{grid-template-columns:1fr 1fr}.component-grid{grid-template-columns:1fr}.site-guide-head{align-items:flex-start;flex-direction:column}.minimum-read{padding:17px}.stat{padding:14px}.stat .value{font-size:27px}.tools{flex-wrap:wrap}.search{flex-basis:100%}.section-head{grid-template-columns:1fr;gap:5px}.count{white-space:normal}.item{padding:15px}.gate-row{flex-direction:column}}
-  </style>
+  
+    /* v17.13.2 clean reader shell */
+    body{background:#fbfcfd}.hero{background:#fff;color:var(--ink);padding:22px 0 17px;border-bottom:1px solid var(--line)}.hero:after{display:none}.hero .kicker{color:var(--muted)}.hero .intro{color:#4b5565;font-size:14px;max-width:760px}.hero h1{font-size:clamp(34px,5vw,54px);margin:6px 0 8px}.lock{background:#fff;color:var(--muted);border:1px solid var(--line)}.hero-actions{gap:7px;margin-top:15px}.action.primary,.action.secondary{background:#fff;color:var(--ink);border:1px solid var(--line);padding:7px 9px;border-radius:8px;font-size:11px}.action.current{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:none}.view-relation{margin-top:10px;font-size:11px;color:var(--muted)}.view-relation a{font-weight:800;text-decoration:none}.view-relation span{margin:0 5px}.minimum-read{border-left:1px solid var(--line);border-radius:11px;box-shadow:none;padding:15px 17px}.minimum-read h2{font-size:20px}.dashboard{gap:8px;margin:14px 0}.stat{border-radius:10px;box-shadow:none;padding:13px}.stat .value{font-size:27px}.item{border-radius:10px}.toolbar{background:rgba(251,252,253,.96)}
+</style>
 </head>
 <body>
   <section id="gate" aria-label="Password gate">
     <div class="gate-card">
       <div class="gate-mark" aria-hidden="true"></div>
-      <h1>R&I × Geopolitics Radar</h1>
+      <h1>Radar</h1>
       <p>Research intelligence that accumulates across scanner runs and reviewed manual ingestion.</p>
       <form id="gateForm" class="gate-row">
         <input id="password" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
@@ -59,19 +62,21 @@
       <div class="wrap">
         <div class="topline">
           <div>
-            <div class="kicker">EU-first research intelligence</div>
-            <h1>R&I × Geopolitics Radar</h1>
-            <p class="intro">A rolling four-month radar on EU research & innovation in geopolitical context, plus futures methods and a small weak-signal layer. Major external shocks can enter only when their consequence for Europe’s R&I position is specific and clear.</p>
+            <div class="kicker">EU R&amp;I in geopolitical context</div>
+            <h1>Radar</h1>
+            <p class="intro">Four months of evidence on how geopolitics changes Europe’s research, technology and innovation position.</p>
           </div>
           <button id="lock" class="lock">Lock radar</button>
         </div>
         <nav class="hero-actions" aria-label="Primary site sections">
-          <a class="action primary" href="read/?v=17.13.2">Read at least this</a>
-          <a class="action secondary current" href="#radar" aria-current="page">Main radar</a>
-          <a class="action secondary" href="frontier/quick/?v=17.13.2">Matrix</a>
-          <a class="action secondary" href="priorities/?v=17.13.2">Risks &amp; opportunities</a>
+          <a class="action secondary" href="read/">Read at least this</a>
+          <a class="action primary current" href="#radar" aria-current="page">Radar</a>
+          <a class="action secondary" href="frontier/quick/">Matrix · short</a>
+          <a class="action secondary" href="frontier/">Matrix · full</a>
+          <a class="action secondary" href="priorities/">Risks &amp; opportunities</a>
+          <a class="action secondary" href="literature/">Literature used</a>
         </nav>
-        <div class="utility-links"><a href="#strand-c">Jump to latest weak signals</a><span>·</span><a href="briefing/?v=17.13.2">Secondary evidence browser</a></div>
+        <div class="view-relation">Radar views: <strong>Main</strong> <span>↔</span> <a href="briefing/">Evidence browser</a></div>
       </div>
     </header>
 
@@ -86,16 +91,6 @@
       <section class="minimum-read" aria-label="Minimum useful read">
         <div><div class="label">Read at least this</div><h2>Europe’s R&amp;I problem is increasingly a control problem, not only an invention problem.</h2><p>Frontier compute, conversion of research into scaled firms, and fragmented research-security machinery are the three structural bottlenecks to keep in view.</p></div>
         <a href="read/?v=17.13.2">Open the 1-minute read →</a>
-      </section>
-      <section class="site-guide" aria-label="Four components of the site">
-        <div class="site-guide-head"><h2>The site has four components</h2><p>Start shallow; open evidence only when you need it.</p></div>
-        <div class="component-grid">
-          <article class="component"><div class="n">01 · synthesis</div><h3><a href="read/?v=17.13.2">Read at least this</a></h3><p>Shortest useful interpretation, with live context layered onto the editorial read.</p></article>
-          <article class="component active"><div class="n">02 · record</div><h3><a href="#strand-a">Main radar</a></h3><p>The current four-month evidence corpus: substantive findings, futures methods and weak signals.</p></article>
-          <article class="component"><div class="n">03 · classification</div><h3><a href="frontier/quick/?v=17.13.2">Matrix</a></h3><p>A stripped-down 4×4 view of control × competitiveness. Open the full matrix only when you need evidence and method detail.</p></article>
-          <article class="component"><div class="n">04 · decision view</div><h3><a href="priorities/?v=17.13.2">Risks &amp; opportunities</a></h3><p>The strongest matrix-qualified risks and openings, ranked in plain language.</p></article>
-        </div>
-        <div class="secondary-view">Need more detail? <a href="frontier/?v=17.13.2">Open the full matrix</a><span> · </span><a href="briefing/?v=17.13.2">Open the secondary evidence browser</a>. These are deeper views, not extra top-level components.</div>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>

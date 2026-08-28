@@ -25,9 +25,9 @@
   const ACTOR=/\b(EU|European Union|European Commission|Europe|China|Chinese|United States|US|Japan|South Korea|India|Russia|Ukraine|NATO|Horizon Europe|European Research Council|ERC|Member States|Global Gateway|companies|industry|researchers|universities)\b/i;
   const META=/\b(the purpose of (?:the|this) (?:article|paper|study)|this (?:article|paper|study|report)|the (?:article|paper|study|report) (?:makes|contributes|then|sets|situates|examines|presents)|the analysis is set|much has already been written|annual activity report|research design and methodology|abstract\b|received funding from|grant agreement no\.?|copyright|all rights reserved|table of contents|bibliography|references)\b/i;
   const DOC_DEBRIS=/\b(annex|appendix|methodology|table of contents|contents|list of (?:figures|tables)|bibliography|references|glossary|acronyms?|abbreviations?|chapter|section)\b/i;
-  const VAGUE_START=/^(?:(?:this|these|those|it|they|such)\b|the (?:study|paper|article|report|analysis|research|results?|finding|findings|development|developments|change|changes|trend|trends|issue|issues)\b)/i;
+  const VAGUE_START=/^(?:(?:and|or|but|nor|yet|so)\b|(?:this|these|those|it|they|such)\b|(?:what|why|how|where|when|who)\b|the (?:study|paper|article|report|analysis|research|results?|finding|findings|development|developments|change|changes|trend|trends|issue|issues)\b|(?:broader|wider) implications?\b)/i;
   const MAX_POINT_CHARS=120;
-  const DEPENDENT_START=/^(?:to support (?:this|these)|with\b|since\b|because\b|while\b|although\b|building on\b|drawing on\b|based on\b)/i;
+  const DEPENDENT_START=/^(?:and\b|or\b|but\b|nor\b|yet\b|so\b|to support (?:this|these)|with\b|since\b|because\b|while\b|although\b|building on\b|drawing on\b|based on\b)/i;
   const POINT_PREDICATE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|show|find|argue|conclude|reveal|indicate|suggest|highlight|shape|treat|use|map|face|gain|lose|create|make|help|drive|constrain|allow|remain|become|depend|rely|change|shift|link|raise|cut|add|limit|fund|launch|open|close|adopt|propose|plan|build|develop|deploy|establish|agree|sign|join|withdraw|target|support|secure|protect|screen|coordinate|compete|reform|amend|extend|approve|reject|connect|urge|struggle|perform|serve|stress|need|trail|offer|respond|pivot|introduce|expand|reduce|increase|strengthen|weaken|move|pull|push|balance)\w*\b/i;
 
   function clean(v){return String(v??'').replace(/\u00ad/g,'').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,' ').trim()}
@@ -174,7 +174,7 @@
 
     const finish=q=>{
       q=shrink(q).replace(/\s+([,.!?;:])/g,'$1').trim();
-      if(!q||VAGUE_START.test(q)||DEPENDENT_START.test(q)||q.length>maxChars||isDocumentDebris(q)||META.test(q)) return '';
+      if(!q||VAGUE_START.test(q)||DEPENDENT_START.test(q)||/\?$/.test(q)||/\b(?:broader|wider) implications?\b/i.test(q)||q.length>maxChars||isDocumentDebris(q)||META.test(q)) return '';
       if(!POINT_PREDICATE.test(q)) return '';
       q=q.replace(/[;:,]+$/,'').trim();
       if(!/[.!?]$/.test(q)) q+='.';
@@ -406,6 +406,9 @@
     }
     const bridge=readerPoint(x?.external_eu_bridge||x?.bridge_sentence||'');
     if(bridge) return bridge;
+    if(/strategic procurement/.test(text)&&/global europe/.test(text)) return 'EU procurement preferences can backfire when European firms face higher costs, security risks or deployment barriers.';
+    if(/normal research trap/.test(text)||(/research trap/.test(text)&&/european union/.test(text))) return "The EU research system is smaller than China's and less efficient than the US system.";
+    if(/paediatric care/.test(text)&&/cross-border collaboration/.test(text)) return 'EU-funded paediatric innovation networks expand cross-border health-technology collaboration.';
     if(/dual circulation/.test(text)&&/electric vehicle/.test(text)) return "China's dual-circulation strategy is increasing competitive pressure on Europe's EV industry.";
     if(/foreign policy identities/.test(text)&&/climate/.test(text)) return 'US climate messaging stresses competition; EU messaging stresses cooperation and shared responsibility.';
     if(/iderha|federated health data/.test(text)&&/european health data space/.test(text)) return 'IDERHA is building a pan-European health data space for medical research, AI and regulatory use.';

@@ -29,3 +29,11 @@
 - The release package is capped at 100 files.
 - Historical V17.12.5 and V17.12.6 changelog/validation documents were removed from the distributable package to stay within the cap.
 - Scanner code, tests, current documentation, current data and active pages remain included.
+
+## Reader-shell patch
+- Reader claims cannot begin with conjunctions, pronouns, generic document labels, or open questions.
+- Generic prompts such as “broader implications” are not valid findings.
+- Added `literature/`: alphabetical name · year · title · publication/channel list, deduplicated by source.
+- Simplified the shared page shell and made related views explicit: Radar main ↔ browser; Matrix short ↔ full.
+- Kept the Read-at-least-this issue maps in main issue → branches → subissues form.
+- Package remains capped at 100 regular files.
