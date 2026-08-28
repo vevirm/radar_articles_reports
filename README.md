@@ -89,7 +89,7 @@ Weak signals no longer receive the protected follow-up query wave. After the A/B
 
 `BOOTSTRAP_LOOKBACK_MONTHS = 4` is the public-window rule. Saved rows, recovery rows and matrix-only historical rows cannot widen it. On the bundled 28 August 2026 state the publication floor is therefore **2026-04-28**.
 
-The bundled `radar.json` was produced from the newer uploaded state, then pruned to that exact floor. Its existing reader claims are retained; V17.13.3 keeps that admission contract, evidence fields and disclosure UI rather than pretending to have re-scanned old records under the new external-shock route. **No fresh external discovery scan was run during packaging**, so the source state's `last_updated` timestamp is preserved.
+The bundled `radar.json` is the user-supplied **post-scan `radar (35).json`** state, timestamped **2026-08-28T13:43Z** and already using the exact **2026-04-28** public floor. V17.13.5 preserves its admitted records, evidence fields and scan cursors while retaining the current reader interface and scanner rules. **No additional discovery scan was run during packaging.**
 
 ## Scanner rotation
 
@@ -161,3 +161,6 @@ This is **attention, not admission**. The scanner keeps a broad source share of 
 - Admission standards are unchanged. Balance changes search allocation only.
 - Front page now opens with “R&I in EU: Geopolitical Context”, the eight recurring issues, and a clear map of all subpages.
 - Reader palette is black, white and red; green/blue semantic colouring is removed from the main reader views.
+
+## Front-page reader map (2026-08-28)
+The landing page now shows the reader journey before the page chooser: Orient → Evidence → Position → Decisions → Sources. Each step says what the reader finds there and links to the corresponding page. The short-to-full relationship is stated explicitly, especially Matrix short → full evidence.

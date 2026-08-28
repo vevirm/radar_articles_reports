@@ -1,23 +1,17 @@
-V17.13.3 CURRENT CORPUS INPUT
+V17.13.5 CURRENT CORPUS INPUT — POST-SCAN REFRESH
 
-Source supplied by user:
-- file: radar (34).json
-- scanner last_updated: 2026-08-28T06:44Z
-- supplied corpus_start_date: 2026-04-21
-- SHA-256: 79b33874e56634d2b5c77fddc44301bb462acc58ed3ced04777d04dfba1ac3e4
-- counts: A=190, B=25, C=13, frontier_evidence=32
-
-V17.13.3 packaging transformation (not a live discovery scan):
-- enforce the hard four-calendar-month floor for 2026-08-28 -> 2026-04-28;
-- prune public A/B/C/frontier_evidence rows older than that floor;
-- re-normalise reader-facing claims with the V17.13 simple-language write boundary;
-- preserve the supplied scanner last_updated timestamp and scan cursors.
-
-Bundled radar.json:
+Authoritative user-supplied scan state:
+- file: radar (35).json
+- scanner last_updated: 2026-08-28T13:43Z
 - corpus_start_date: 2026-04-28
-- last_updated: 2026-08-28T06:44Z
-- counts: A=183, B=25, C=13, frontier_evidence=0
-- Strand C share of A+B+C: 13/221 = 5.9%
-- SHA-256 at packaging checkpoint: a35eee58791a0a56164c99b57a1df4b009ae43c94da6b0bc60b4fa96d4df819c
+- SHA-256: 642a517ee5719b2f204bab8a92659bec9d3e37b13f7917e297d1a7c6647f217c
+- counts: A=202, B=25, C=13, frontier_evidence=0
+- new_this_scan in Strand A: 19
 
-The removal of old frontier_evidence is intentional: V17.13 no longer lets historical Matrix-recovery evidence widen the public time window. Current Strand-A evidence flows directly to the Matrix classifier.
+Packaging action:
+- radar (35).json is copied unchanged to repository-root radar.json;
+- V17.13.5 reader UI, scanner code, Matrix balancing, source weighting and admission rules are preserved;
+- Matrix views read current per-record matrix fields from radar.json;
+- no additional discovery scan is claimed during packaging.
+
+Reader pages therefore use the latest supplied post-scan state while retaining the V17.13.5 interface and scanner implementation.
