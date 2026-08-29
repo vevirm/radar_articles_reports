@@ -1,12 +1,26 @@
-# R&I Geopolitics Radar V17.13.21
+# V17.13.22 — scheduler catch-up + completion timestamps + preservation guard
 
-V17.13.3 keeps the V17.13 reader-first design but tightens the subject rule and adds a bounded external-shock exception. The public evidence window remains a hard rolling **four calendar months**. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
+## V17.13.25 — Matrix balance and cleaner priorities
+
+The People & knowledge / Capability from outside cell now explicitly searches for international research-talent inputs (researchers, visiting researchers, doctoral/PhD talent and research-linked international students/graduates with retention/workforce transitions). Generic student mobility remains excluded. The Risks & opportunities page uses ranked cards so evidence badges no longer interrupt titles.
+
+
+- Replaces the single fixed six-hour cron with hourly scheduled wake-ups plus a six-hour due gate based on the **last completed** scan. Manual and push runs still run immediately.
+- `last_updated` now records scan completion rather than scan start; `run_started_at`, `run_completed_at`, `scan_state.last_started_at`, and `scan_state.last_completed_at` make timing explicit.
+- Every scan records rolling-window age-outs separately. The reader shows them as expected date-window expiry.
+- GitHub safety validation now hard-stops a normal scan if any still-in-window Strand A/B item disappears. Four-month age-outs and explicit migration/precision-cleanup runs are exempt.
+- The landing status becomes **overdue** when the latest completion is more than seven hours old.
+- Bundled `radar.json` is the user-supplied post-scan state timestamped 2026-08-29T05:52Z; no fresh discovery scan was run while packaging this repair.
+
+# R&I Geopolitics Radar V17.13.22
+
+V17.13.24 keeps the reader-first design and tightens the subject/language boundary: inference-only external-shock admission is disabled and public A/B evidence is limited to English-language publications. The public evidence policy is a **four-calendar-month core**, with a narrow exception: A/B evidence in the existing **Highest** source-merit band may be discovered and retained until six calendar months. All other evidence retains the four-month rule. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
 
 This is not a looser relevance gate. The non-literal route needs at least **two independent strategic families**, including at least one relational/control family. A generic paper that merely says Europe should be more competitive still fails.
 
-**The subject is EU/European R&I in geopolitical context.** EU relevance is not just one filter among many. Normally, the source itself must establish the European R&I subject. The exception is a major external R&I shock — for example a step-change in US or Chinese AI, quantum or chip capability — when it matches a current same-domain EU context anchor and its consequence for Europe can be written as one specific plain-language sentence. That bridge is marked as a radar inference, not source wording.
+**The subject is EU/European R&I in geopolitical context.** EU relevance is not just one filter among many. The source itself must establish the European R&I subject or consequence. A US, Chinese or other external development does not qualify merely because the radar can imagine an implication for Europe; source-supported European relevance is required.
 
-**English is required for the evidence, not necessarily the whole publication.** A non-English paper can qualify when the source/index exposes enough English abstract, executive-summary or equivalent text to verify the finding. A foreign-language title plus an English abstract can therefore pass; a title-only or tiny metadata stub cannot. The radar does not machine-translate an inaccessible foreign text and use that translation as evidence.
+**The public A/B corpus is English-publication only.** A foreign-language publication is not rescued by an English abstract or index description. Titles must pass the English title gate; explicit foreign-language metadata or meaningful non-Latin source prose fails closed. The radar does not use machine translation as evidence.
 
 ## What readers see
 
@@ -40,7 +54,7 @@ Every admitted Strand-A finding is sent to the Matrix classifier. There is no ex
 
 ### 3. Easy radar keeps the full record reachable
 
-The main radar remains the easy/reader-first view: plain claim first, then a short “why it matters” **only when the individual record supports a separate concise consequence**. Generic topic fillers are not used. Nothing important from the evidence record is discarded from the interface. Each card has **All record details**, and the toolbar has **Show all details** to open the detailed fields across the visible cards at once. That disclosure includes the original title, authors, source, date, type, source tier, EU relevance, discovery route, tracked-since date, full available summary, relevance/admission note, available R&I/strategic evidence, Matrix placement/evidence where present, and the external-Europe bridge when the exceptional route is used.
+The main radar remains the easy/reader-first view: plain claim first, then a short “why it matters” **only when the individual record supports a separate concise consequence**. Generic topic fillers are not used. Nothing important from the evidence record is discarded from the interface. Each card has **All record details**, and the toolbar has **Show all details** to open the detailed fields across the visible cards at once. That disclosure includes the original title, authors, source, date, type, source tier, EU relevance, discovery route, tracked-since date, full available summary, relevance/admission note, available R&I/strategic evidence, Matrix placement/evidence where present, and the source-backed admission evidence. Legacy inference-only external bridges are removed from the public corpus.
 
 ### 4. Reader-first claims
 
@@ -62,7 +76,7 @@ The **normal Strand-A route** still requires all three things:
 - substantive research, science, innovation, technology or related-system evidence; and
 - strategic context.
 
-Strategic context can be explicit (geopolitics, economic security, strategic competition, etc.) or triangulated from multiple mechanisms. The triangulated route is intentionally fail-closed for one-cue cases. The separate external-shock exception does not weaken this normal gate.
+Strategic context can be explicit (geopolitics, economic security, strategic competition, etc.) or triangulated from multiple mechanisms. The triangulated route is intentionally fail-closed for one-cue cases. There is no inference-only external-shock exception: a non-EU development must contain its Europe/R&I strategic consequence in the source evidence itself.
 
 ### Existing findings help form later searches
 
@@ -76,7 +90,7 @@ This makes discovery iterative in a bounded way: the radar can learn where the l
 
 ### Strand C stays a minority
 
-Weak signals no longer receive the protected follow-up query wave. After the A/B/C merge, Strand C is capped at **15% of all public findings**. This is a ceiling, not a quota: the scanner should not search merely to fill C. Within that cap, a qualifying major external strategic shock is ranked ahead of ordinary weak signals so the minority rule does not accidentally hide the kind of event that could abruptly reset Europe’s position.
+Weak signals no longer receive the protected follow-up query wave. After the A/B/C merge, Strand C is capped at **15% of all public findings**. This is a ceiling, not a quota: the scanner should not search merely to fill C. Within that cap, signals still require source-supported relevance; a generated Europe-impact bridge cannot create eligibility.
 
 ## Four-month rule
 
@@ -86,9 +100,9 @@ The bundled `radar.json` is the user-supplied **post-scan `radar (35).json`** st
 
 ## Scanner rotation
 
-The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.3 makes Matrix coverage an explicit input to rotation. The Matrix median becomes a bounded moving coverage target (minimum 3, maximum 10): cells below that level receive the reserved gap-search budget first, with zero cells weighted most heavily. Coverage is recomputed during matrix-depth waves, so attention moves as cells fill instead of stopping once an empty cell gets one item. This changes search effort only; admission standards remain unchanged and the scanner does not manufacture equal counts. The finding-context lane and bounded external-shock queries remain, and every query family obeys the same four-month date floor.
+The existing OpenAlex, Crossref, journal/institutional, methods and matrix-gap rotations remain. V17.13.3 makes Matrix coverage an explicit input to rotation. The Matrix median becomes a bounded moving coverage target (minimum 3, maximum 10): cells below that level receive the reserved gap-search budget first, with zero cells weighted most heavily. Coverage is recomputed during matrix-depth waves, so attention moves as cells fill instead of stopping once an empty cell gets one item. This changes search effort only; admission standards remain unchanged and the scanner does not manufacture equal counts. The finding-context lane remains, and the main query families obey the four-month core floor. External-actor material is processed through the same direct source-evidence gate as everything else; no generated bridge can admit it. A separate bounded institutional lane checks months 4–6 only for sources capable of reaching the Highest merit band, and candidates must actually score Highest before admission.
 
-The scheduler remains active on push, every 6 hours, and manual dispatch via `.github/workflows/radar-scan.yml`.
+The scheduler remains active on push and manual dispatch via `.github/workflows/radar-scan.yml`. Scheduled wake-ups occur hourly; a due-gate runs the expensive scanner only after at least six hours have elapsed since the last completed scan. This catch-up design is deliberate because hosted GitHub Actions cron triggers can be delayed or occasionally missed.
 
 ## Manual candidate ingest
 
@@ -238,4 +252,18 @@ The source-merit ranking is no longer confined to Stuff. The main Radar, Read at
 
 The weighting is deliberately downstream of the scanner. It does not decide admission and it does not change a Matrix cell. It helps the reader judge how hard to lean on a finding. In the fast decision views it also helps stronger evidence outrank weaker evidence when the underlying Matrix severity/relevance is otherwise comparable. Read at least this still selects by issue fit first, then source merit; Literature used remains alphabetical but shows the weight beside each source.
 
-The six-hour schedule, security credential separation and V17.13.19 hard-stop limits remain unchanged.
+The six-hour due interval remains, with V17.13.22 hourly catch-up checks, security credential separation and strengthened in-window preservation hard stops.
+
+
+## V17.13.23 — four-month core with Highest evidence to six months
+
+The radar now uses a two-tier time policy. The preferred/current corpus is still the latest four calendar months. A/B records that score **Highest (93–100)** under the same source-merit model used in the reader may be discovered in the 4–6 month band and are retained until they reach six calendar months. This exception does not apply to Strand C or Matrix-only recovery. Normal discovery runs first; the extended lane is bounded and source-selective so older material cannot crowd out current scanning.
+
+
+## V17.13.24 — source-supported relevance + English-publication boundary
+
+- Disables inference-only `external-strategic-shock` admission for A and C. A non-EU development must itself state a substantive EU/European R&I strategic consequence.
+- Makes public A/B evidence English-publication only. Foreign-language titles/metadata and meaningful non-Latin source prose fail closed; an English abstract no longer rescues a foreign-language publication.
+- Adds a presentation fail-safe so a non-English title cannot render on the main page even if a malformed legacy row reaches `radar.json`.
+- Migrates the bundled corpus conservatively: removes 15 legacy inference-only external A records, 2 non-English A publications, and 25 audited high-confidence legacy direct-route contaminants; no discovery scan is run during packaging.
+- Keeps the V17.13.23 time policy unchanged: four-month core, Highest-merit A/B eligible to six months.

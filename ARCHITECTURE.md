@@ -46,7 +46,7 @@ Strand C remains the weak-signal lane. Its protected follow-up query wave is dis
 
 ## 4. Hard public time boundary
 
-The public evidence corpus is always the latest four calendar months. `preserved_corpus_floor()` now returns the rolling floor rather than preserving older saved state. The rule also applies to `frontier_evidence`, so historical Matrix-recovery rows cannot silently stretch the public window.
+The public evidence corpus has a four-calendar-month core. `preserved_corpus_floor()` returns that preferred floor. V17.13.23 adds a selective A/B extension to six calendar months: only records that score in the existing Highest source-merit band (>=93) may survive or be newly recovered in months 4–6. Strand C and `frontier_evidence` remain hard four-month windows, so historical Matrix recovery cannot stretch the Matrix-only evidence horizon.
 
 ## 5. Reader write boundary
 
@@ -85,11 +85,12 @@ V17.13's bundled state keeps the uploaded scanner timestamp and records a four-m
 
 Matrix coverage is now a search-allocation input. The scanner calculates the current 4×4 occupancy with the same classifier used by the Matrix page, takes the bounded median cell count as the moving depth target, and directs reserved gap queries toward cells below that target. Empty cells remain first priority, but thin non-empty cells continue receiving attention until they approach the current Matrix middle. Coverage is recomputed during depth waves so the target list can change within a scan. This affects discovery effort only; it never lowers admission criteria or forces equal cell counts.
 
-## V17.13.2 subject, language and external-shock boundary
+## V17.13.24 source-supported relevance and English boundary
 
-- Strand A's subject is EU/European R&I in geopolitical context, not general innovation with an EU relevance score.
-- Non-EU material has one exceptional route: a major R&I capability shock + a same-domain current EU anchor + a specific one-sentence Europe-position bridge, explicitly marked as radar inference.
-- English applies to the evidence used for admission and reader claims. Non-English publications can pass through a substantive source-provided/indexed English abstract or summary; no machine-translated text is treated as evidence.
+- Strand A's subject remains EU/European R&I in geopolitical context, not general innovation with an EU relevance score.
+- Inference-only external admission is disabled. A non-EU-centred source must itself establish a substantive Europe/EU R&I strategic consequence and then passes through the normal direct-evidence route.
+- Public A/B evidence is English-publication only. Foreign-language metadata/titles and meaningful non-Latin source prose fail closed; an English abstract does not rescue a foreign-language publication.
+- `english_record_ok()` is the candidate gate. `english_public_item_ok()` is a conservative publication/migration invariant, and the main page has a second display guard.
 - The reader-first main radar keeps progressive disclosure: the easy card is short, while **All record details** and **Show all details** expose the underlying user-facing record fields.
 
 
@@ -124,3 +125,8 @@ Matrix coverage is recalculated on every scan and remains one permanent rotation
 ## Stuff workbench
 
 `stuff/index.html` is a utility layer over the existing Radar/Matrix data. It does not create a new corpus or admission path. Exports are derived from `radar.json` and the same Matrix classifier; the packaged XLSX is a build snapshot.
+
+
+### V17.13.23 two-tier window
+
+`DATE_FLOOR` remains the four-month core floor and drives the normal scholarly, institutional, Matrix-gap and weak-signal paths. `EXTENDED_DATE_FLOOR` is six months and is used only by a bounded rotating institutional source lane whose sources are capable of reaching Highest source merit. Returned 4–6 month items are filtered again by the Python mirror of `source_merit.js`; only scores >=93 merge into A/B. Final merge enforcement also removes any non-Highest A/B row beyond four months and marks surviving extended rows with `extended_retention=true` and `retention_window_months=6`.

@@ -108,6 +108,8 @@ RULE_FIX_INSTITUTION_SOURCES = [
     {"name": "KE:SAI", "domain": "kesai.eu", "tier": 2},
     {"name": "International Telecommunication Union", "domain": "itu.int", "tier": 2},
     {"name": "Tech Europe", "domain": "tech-europe.org", "tier": 3},
+    {"name": "European Commission — Migration and Home Affairs", "domain": "home-affairs.ec.europa.eu", "tier": 1},
+    {"name": "European Education Area", "domain": "education.ec.europa.eu", "tier": 1},
 ]
 RULE_FIX_FRONTIER_SOURCE_ADDITIONS = {
     "infrastructure-A": ["ellis.institute", "ellis.eu", "ellisinstitute.fi", "is.mpg.de", "kesai.eu", "aalto.fi", "ethz.ch"],
@@ -120,7 +122,7 @@ RULE_FIX_FRONTIER_SOURCE_ADDITIONS = {
     "rules-C": ["un.org", "itu.int", "internationalaisafetyreport.org", "ellis.institute"],
     "rules-D": ["un.org", "itu.int", "internationalaisafetyreport.org"],
     "knowledge-A": ["ellis.institute", "is.mpg.de", "ellisinstitute.fi", "aalto.fi", "ethz.ch"],
-    "knowledge-C": ["ellis.institute", "is.mpg.de", "ellisinstitute.fi", "aalto.fi"],
+    "knowledge-C": ["home-affairs.ec.europa.eu", "education.ec.europa.eu", "euraxess.ec.europa.eu", "research-and-innovation.ec.europa.eu", "ellis.institute", "is.mpg.de", "ellisinstitute.fi", "aalto.fi"],
 }
 
 def _apply_rule_fix_source_extensions() -> None:
@@ -149,6 +151,9 @@ def _apply_rule_fix_source_extensions() -> None:
 _apply_rule_fix_source_extensions()
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
+EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
+EXTENDED_TOP_QUALITY_SOURCES_PER_SCAN = int(CONFIG.get("extended_top_quality_sources_per_scan", 6))
+EXTENDED_TOP_QUALITY_STAGE_SECONDS = int(CONFIG.get("extended_top_quality_stage_seconds", 150))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
 QUALITY_PROFILE_VERSION = str(CONFIG.get("quality_profile_version", "v17-eu-ri-geo-substance"))
 INHERITED_CORPUS_AUDIT_ENABLED = bool(CONFIG.get("inherited_corpus_audit_enabled", True))
@@ -160,13 +165,14 @@ C_ADMISSION_PROFILE_VERSION = "v17.13.1-minority-C-cap"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
-MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.7-recurring-multifactor-matrix-balance"))
+MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.25-external-talent-pipeline-balance"))
 SOURCE_ATTENTION_PROFILE_VERSION = str(CONFIG.get("source_attention_profile_version", "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
-RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.1-eu-core-external-shock-english-evidence"))
+RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.25-source-supported-english-talent-pipeline"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
+WINDOW_POLICY_VERSION = "v17.13.23-four-core-highest-six"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
@@ -219,6 +225,7 @@ FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expa
 # Provisional floor for import-time helpers/tests. main() replaces this with the preserved
 # corpus floor before discovery starts.
 DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
+EXTENDED_DATE_FLOOR = dt.date.today() - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
 NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 168))
 FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", SIGNAL_BACKFILL_HOURS))
 DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
@@ -1206,6 +1213,9 @@ RESEARCH_TALENT_ACTORS = [
     "academic careers", "research careers", "postdoctoral researcher", "postdoctoral researchers",
     "postdoc", "postdocs", "doctoral researcher", "doctoral researchers", "research institution",
     "research institutions", "university researchers", "university research staff",
+    "visiting researcher", "visiting researchers", "research visitor", "research visitors",
+    "scientific visitor", "scientific visitors", "doctoral candidate", "doctoral candidates",
+    "phd student", "phd students", "international doctoral candidate", "international doctoral candidates",
 ]
 RESEARCH_TALENT_FLOW_EXPLICIT = [
     "research brain drain", "academic brain drain", "scientific brain drain", "brain drain",
@@ -1215,6 +1225,8 @@ RESEARCH_TALENT_FLOW_EXPLICIT = [
     "researcher migration", "scientist migration",
     "research talent outflow", "scientific talent outflow", "researcher outflow",
     "research talent inflow", "scientific talent inflow", "researcher inflow",
+    "international researcher mobility", "visiting researcher mobility", "research visits",
+    "international doctoral mobility", "international doctoral candidates",
 ]
 RESEARCH_TALENT_FLOW_ACTIONS = [
     "attract research talent", "attract researchers", "attract scientists", "retain research talent",
@@ -1223,6 +1235,8 @@ RESEARCH_TALENT_FLOW_ACTIONS = [
     "researchers leave", "researchers leaving", "scientists leave", "scientists leaving",
     "researchers relocate", "scientists relocate", "move abroad", "moving abroad",
     "work abroad", "emigrate", "emigration", "immigrate", "immigration",
+    "stay after study", "stay after studies", "stay after research", "post-study stay",
+    "post study stay", "post-research stay", "post research stay", "stay to work",
 ]
 IMPLICATION_WORDS = [
     "implication", "consequence", "for europe", "for the eu", "europe should", "eu should",
@@ -1566,18 +1580,25 @@ def _language_tokens(text: str) -> list[str]:
 
 
 def _contains_non_latin_script(text: str) -> bool:
-    """Reject meaningful use of Cyrillic, Greek, CJK, Arabic and other non-Latin scripts."""
-    letters = re.findall(r"[^\W\d_]", clean_text(text), flags=re.UNICODE)
+    """Reject meaningful source prose in non-Latin scripts.
+
+    Latin typographic ligatures (for example the fi ligature in PDF extraction) are allowed.
+    The purpose is to block Cyrillic/Greek/CJK/Arabic/etc. publication text from the
+    English public radar, not to punish OCR typography.
+    """
+    txt = clean_text(text)
+    if not txt:
+        return False
+    # Explicit script blocks: Cyrillic, Greek, Hebrew, Arabic, Indic, Thai, CJK, Kana, Hangul.
+    script_re = re.compile(
+        r"[\u0370-\u052F\u0590-\u08FF\u0900-\u0D7F\u0E00-\u0E7F"
+        r"\u3040-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uAC00-\uD7AF]"
+    )
+    letters = re.findall(r"[^\W\d_]", txt, flags=re.UNICODE)
     if not letters:
         return False
-    non_latin = 0
-    for ch in letters:
-        cp = ord(ch)
-        # ASCII + Latin-1/Latin Extended-A/B are allowed. Everything else is treated as
-        # non-Latin for this publication-language gate (punctuation is not in `letters`).
-        if not (0x0041 <= cp <= 0x005A or 0x0061 <= cp <= 0x007A or 0x00C0 <= cp <= 0x024F):
-            non_latin += 1
-    return non_latin / len(letters) > 0.01
+    foreign = sum(1 for ch in letters if script_re.match(ch))
+    return foreign / len(letters) > 0.01
 
 
 def _strong_non_english_evidence(text: str, *, title_mode: bool = False) -> bool:
@@ -1671,54 +1692,58 @@ def substantive_english_evidence_block(text: str, min_words: int = 25) -> bool:
     return False
 
 def english_record_ok(text: str, metadata_language: Any = "", *, title: str = "") -> bool:
-    """Require enough English evidence to verify the public claim.
+    """Fail closed to English-language publications for the public radar.
 
-    The publication itself does not have to be written in English. A non-English paper may
-    qualify when the source/index exposes a substantive English abstract, executive summary
-    or equivalent English description. We do not translate foreign-language text for
-    admission. Foreign-language metadata therefore becomes a constraint on *evidence
-    sufficiency*, not an automatic rejection.
+    V17.13.24 removes the old "English abstract rescues a foreign publication" rule.
+    A/B evidence must be an English publication: explicit foreign language metadata rejects,
+    publication titles must positively look English, and meaningful non-Latin source prose rejects.
+    Unknown-language metadata may pass only when both title and available evidence are positively
+    English. No translation is used for admission.
     """
     if not bool(CONFIG.get("english_only", True)):
         return True
     lang = normalized(metadata_language).replace("_", "-")
-    explicit_english = False
-    explicit_foreign = False
-    if lang:
-        primary = lang.split("-", 1)[0]
-        explicit_english = bool(lang in ENGLISH_LANGUAGE_CODES or primary == "en")
-        explicit_foreign = not explicit_english
+    primary = lang.split("-", 1)[0] if lang else ""
+    explicit_english = bool(lang and (lang in ENGLISH_LANGUAGE_CODES or primary == "en"))
+    explicit_foreign = bool(lang and not explicit_english)
+    strict_publication = bool(CONFIG.get("english_publication_required", True))
 
-    # Positive English prose can rescue a foreign-language publication/title. This is the
-    # intended route for a paper with a source-provided English abstract or summary. Require
-    # enough words that an English title or tiny metadata stub cannot masquerade as evidence.
-    body_ok = probably_english(text, title_mode=False)
-    min_words = int(CONFIG.get("foreign_language_english_evidence_min_words", 25) or 25)
-    english_block = substantive_english_evidence_block(text, min_words=min_words)
-    if (body_ok or english_block) and (not explicit_foreign or english_block or len(_language_tokens(text)) >= min_words):
-        return True
-
-    # Without a substantive English evidence block, clear foreign-language evidence rejects.
-    if explicit_foreign:
+    title = clean_text(title)
+    txt = clean_text(text)
+    if not title:
         return False
-    if title and _strong_non_english_evidence(title, title_mode=True):
+    if _contains_non_latin_script(title) or _strong_non_english_evidence(title, title_mode=True):
         return False
-    if _strong_non_english_evidence(text, title_mode=False):
+    if strict_publication and explicit_foreign:
+        return False
+    # Publication titles must be positively English, not merely "not obviously foreign".
+    if strict_publication and not probably_english(title, title_mode=True):
+        return False
+    if _contains_non_latin_script(txt) or _strong_non_english_evidence(txt, title_mode=False):
         return False
 
+    words = _language_tokens(txt)
+    title_words = _language_tokens(title)
+    effectively_title_only = len(words) <= max(8, len(title_words) + 2)
+    if effectively_title_only:
+        return bool(explicit_english or probably_english(title, title_mode=True))
+
+    # For unknown language metadata require positive English evidence in the available source text.
+    body_ok = probably_english(txt, title_mode=False)
+    english_block = substantive_english_evidence_block(
+        txt, min_words=int(CONFIG.get("foreign_language_english_evidence_min_words", 25) or 25)
+    )
     if explicit_english:
-        # Explicit English metadata may rescue short/metadata-only records, but never text
-        # with strong foreign-language evidence (rejected above).
-        return True
-    # If the record is effectively title-only, accept an English-looking title. Otherwise
-    # do not let an ambiguous short title override a non-English/undetermined body.
-    words = _language_tokens(text)
-    if title and len(words) <= max(8, len(_language_tokens(title)) + 2):
-        return probably_english(title, title_mode=True)
-    return False
+        return bool(body_ok or english_block)
+    return bool(body_ok and english_block)
 
 def english_public_item_ok(item: dict[str, Any]) -> bool:
-    """Final publication invariant for both saved and newly discovered records."""
+    """Publication-time guard for already-admitted public records.
+
+    New candidates pass the stricter ``english_record_ok`` gate. For saved rows, avoid
+    reinterpreting a shortened summary as language evidence: reject explicit foreign metadata,
+    non-English/non-Latin titles, and meaningful non-Latin public prose.
+    """
     if not bool(CONFIG.get("english_only", True)):
         return True
     if not isinstance(item, dict):
@@ -1727,8 +1752,17 @@ def english_public_item_ok(item: dict[str, Any]) -> bool:
     body = clean_text(item.get("summary") or item.get("signal_note") or item.get("why_it_matters") or "")
     if not title:
         return False
-    combined = f"{title}. {body}" if body else title
-    return english_record_ok(combined, item.get("language", ""), title=title)
+    lang = normalized(item.get("language", "")).replace("_", "-")
+    primary = lang.split("-", 1)[0] if lang else ""
+    if lang and not (lang in ENGLISH_LANGUAGE_CODES or primary == "en"):
+        return False
+    if _contains_non_latin_script(title) or _strong_non_english_evidence(title, title_mode=True):
+        return False
+    if not probably_english(title, title_mode=True):
+        return False
+    if _contains_non_latin_script(body):
+        return False
+    return True
 
 def norm_title(text: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]+", " ", normalized(text))).strip()
@@ -2090,41 +2124,79 @@ def china_geo_signal(text: str) -> bool:
 
 
 def research_talent_flow_signal(text: str) -> bool:
-    """Detect cross-border *research-workforce* allocation, not generic student mobility.
+    """Detect cross-border research-workforce allocation and the research-talent pipeline.
 
-    Knowledge & people is about researchers/scientists and the research system.  Earlier
-    builds treated phrases such as ``academic mobility`` in Erasmus/student papers as
-    geopolitical research-talent evidence.  Require an explicit research-workforce cue
-    whenever the wording could describe students or education generally.
+    Generic student mobility remains out of scope. International/third-country students or
+    graduates count only when the same source explicitly connects them to doctoral/STEM or
+    research/innovation capacity AND to retention, post-study work, research careers or a
+    transition into the innovation/research workforce. Visiting researchers and research
+    visits are directly in scope because they are already research-workforce mobility.
     """
     low = normalized(text)
     explicit = distinct_matches(low, RESEARCH_TALENT_FLOW_EXPLICIT)
     actors = distinct_matches(low, RESEARCH_TALENT_ACTORS)
     actions = distinct_matches(low, RESEARCH_TALENT_FLOW_ACTIONS)
-    research_workforce = bool(actors or contains_any(low, [
+
+    pipeline_student = bool(re.search(
+        r"\b(?:international|foreign|non eu|non-eu|third country|third-country|extra eu|extra-eu)\b.{0,45}"
+        r"\b(?:doctoral candidates?|phd students?|doctoral students?|stem students?|international students?|graduates?)\b|"
+        r"\b(?:doctoral candidates?|phd students?|doctoral students?|stem students?|international students?|graduates?)\b.{0,45}"
+        r"\b(?:international|foreign|non eu|non-eu|third country|third-country|extra eu|extra-eu)\b",
+        low,
+    ))
+    pipeline_ri = bool(re.search(
+        r"\b(?:research|researcher|scientific|science|innovation|innovative|stem|doctoral|phd|r&d|innovation ecosystem|research workforce|scientific workforce)\b",
+        low,
+    ))
+    pipeline_transition = bool(re.search(
+        r"\b(?:retain|retention|stay|remain|post study|post-study|post research|post-research|job search|employment|career|workforce|labour market|labor market|recruit|attract)\w*\b",
+        low,
+    ))
+    research_pipeline = pipeline_student and pipeline_ri and pipeline_transition
+    visitor_pipeline = bool(re.search(
+        r"\b(?:international|foreign|non eu|non-eu|third country|third-country|extra eu|extra-eu)\b.{0,45}"
+        r"\b(?:visiting researchers?|research visitors?|scientific visitors?)\b|"
+        r"\b(?:visiting researchers?|research visitors?|scientific visitors?)\b.{0,45}"
+        r"\b(?:international|foreign|non eu|non-eu|third country|third-country|extra eu|extra-eu)\b",
+        low,
+    )) and bool(re.search(
+        r"\b(?:expertise|capacity|capability|competitiveness|collaboration|cooperation|mobility|access|talent|innovation|research system|scientific capacity|research capacity)\b",
+        low,
+    ))
+
+    research_workforce = bool(actors or research_pipeline or visitor_pipeline or contains_any(low, [
         "research career", "research careers", "research workforce", "scientific workforce",
         "research talent", "scientific talent", "postdoc", "postdoctoral", "doctoral researcher",
         "research staff", "academic staff", "faculty", "professor", "professors",
+        "visiting researcher", "visiting researchers", "research visitor", "research visitors",
+        "scientific visitor", "scientific visitors",
     ]))
     student_focused = contains_any(low, [
         "student mobility", "students mobility", "international students", "student migration",
         "erasmus student", "undergraduate", "master students", "masters students", "student experience",
     ])
-    if student_focused and not research_workforce:
+    if student_focused and not research_pipeline and not any(x in low for x in [
+        "doctoral researcher", "doctoral candidate", "phd student", "research workforce",
+        "research talent", "scientific talent", "research career", "innovation ecosystem",
+    ]):
         return False
     if explicit:
-        # Generic brain drain/gain needs a research-workforce actor.  Researcher/scientist
-        # mobility/outflow/inflow is already specific enough by construction.
         generic_brain = any(x in explicit for x in ("brain drain", "brain gain"))
         specific_research_flow = any(
             x.startswith("researcher") or x.startswith("scientist") or
             x.startswith("research talent") or x.startswith("scientific talent") or
-            x.startswith("research brain") or x.startswith("scientific brain")
+            x.startswith("research brain") or x.startswith("scientific brain") or
+            x.startswith("international researcher") or x.startswith("visiting researcher") or
+            x.startswith("research visits") or x.startswith("international doctoral")
             for x in explicit
         )
         if generic_brain and not specific_research_flow and not research_workforce:
             return False
         return True
+    if research_pipeline or visitor_pipeline:
+        return bool(has_eu_word(low) or bounded_matches(low, MEMBER_STATE_SCOPE) or contains_any(low, [
+            "europe", "european", "european union", "eu competitiveness", "european research area"
+        ]))
     if not (research_workforce and actions):
         return False
     return bool(
@@ -2199,6 +2271,8 @@ A_RI_CORE = [
     'research-intensive', 'research organisation', 'research organization',
     'research-performing', 'research workforce', 'scientific workforce',
     'research talent', 'scientific talent', 'research careers', 'scientific careers',
+    'doctoral candidates', 'doctoral training', 'international researchers', 'visiting researchers',
+    'research visits', 'international doctoral candidates', 'post-study research careers',
 ]
 
 A_TECH_DOMAINS = [
@@ -2503,41 +2577,14 @@ def _anchor_supports_external_domain(anchor: dict[str, Any], domain: str) -> boo
     return _external_shock_domain(text) == domain and bool(eu_evidence(anchor.get('title',''), anchor.get('summary',''), anchor.get('relevance_note',''))[0] == 'direct')
 
 def external_eu_bridge_sentence(text: str, anchors: list[dict[str, Any]] | None = None) -> tuple[bool, str, list[str]]:
-    """Exceptional route for a major external R&I shock that clearly changes Europe's position.
+    """Inference-only external admission is permanently disabled.
 
-    Ordinary non-EU work still fails. The event must be a step-change in a strategically important
-    R&I capability, involve a major external actor, and match a current admitted EU-context anchor
-    in the same technology. The bridge is an editorial inference, kept as one specific sentence.
+    External developments can still enter Strand A when the source itself establishes direct
+    EU/European R&I + geopolitical/economic-security relevance; those records pass through
+    ``eu_evidence`` and the ordinary source-supported A gate. This legacy helper remains only
+    so old call sites fail closed instead of manufacturing a Europe-impact sentence.
     """
-    low = f" {normalized(text)} "
-    domain = _external_shock_domain(low)
-    actor_hits = distinct_matches(low, EXTERNAL_SHOCK_ACTORS)
-    shock_hits = distinct_matches(low, EXTERNAL_SHOCK_CUES)
-    ri_mechanism = bool(distinct_matches(low, A_TECH_RI_MECHANISMS + [
-        'capability', 'capabilities', 'research capability', 'scientific capability',
-        'technical capability', 'model capability', 'compute', 'research', 'science', 'innovation',
-    ]))
-    if not (domain and actor_hits and shock_hits and ri_mechanism):
-        return False, '', []
-    context = anchors if anchors is not None else ACTIVE_EU_CONTEXT_ANCHORS
-    supporting = [a for a in (context or []) if _anchor_supports_external_domain(a, domain)]
-    if not supporting:
-        return False, '', []
-    actor = actor_hits[0]
-    actor_name = {'u.s.':'the United States','american':'the United States','chinese':'China','britain':'the United Kingdom','uk':'the United Kingdom'}.get(actor, actor.title())
-    domain_phrase = {
-        'artificial intelligence':'AI research and compute',
-        'semiconductors':'chip capability and access to frontier compute',
-        'quantum':'quantum research capability',
-        'biotechnology':'biotechnology research capability',
-        'advanced materials':'advanced-materials research and supply',
-        'space':'space-technology research capability',
-        'compute':'frontier research-compute capacity',
-        'robotics':'advanced-robotics research capability',
-    }.get(domain, domain)
-    bridge = f"A step-change in {actor_name}'s {domain_phrase} would reset the capability benchmark Europe must match and could change its technological dependence and geopolitical position."
-    evidence = [f'external actor: {actor_name}', f'external shock: {shock_hits[0]}', f'domain: {domain}', 'current EU-context anchor in same domain']
-    return True, bridge, evidence
+    return False, "", []
 
 def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple[bool, list[str], list[str], str, str, list[str]]:
     title = clean_text(title)
@@ -2790,9 +2837,9 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
         contextual_evidence=bool(a_context)
     )
-    # Normal A admission remains EU-centred. The only non-EU exception is a material external
-    # R&I shock with a same-domain EU anchor and a one-sentence, specific Europe-position bridge.
-    a_pass = bool((a_focus and eu_rel == 'direct' and aboutness.get('pass')) or external_ok)
+    # A admission is source-supported and EU-centred. Inference-only external admission is
+    # disabled; an external development must itself establish direct European relevance.
+    a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass'))
     if external_ok:
         a_route = 'external-strategic-shock'
         a_context = external_evidence
@@ -4099,7 +4146,7 @@ def pdf_text(url: str) -> tuple[str, int]:
         return "", 0
 
 
-def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "") -> dict[str, Any] | None:
+def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "", publication_floor: dt.date | None = None) -> dict[str, Any] | None:
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         return None
     if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(url) in KNOWN_AB_LINKS:
@@ -4182,7 +4229,8 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if not published:
         _diag_inc("institution_reject_no_date")
         return None
-    if published < DATE_FLOOR:
+    effective_publication_floor = publication_floor or DATE_FLOOR
+    if published < effective_publication_floor:
         _diag_inc("institution_reject_before_floor")
         return None
 
@@ -4322,7 +4370,7 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     return jobs, None
 
 
-def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None, reconsider_seen: bool = False) -> list[dict[str, Any]]:
+def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None, reconsider_seen: bool = False, publication_floor: dt.date | None = None) -> list[dict[str, Any]]:
     jobs = []
     sources = sources_override if sources_override is not None else CONFIG["institution_sources"]
     discovery_workers = int(CONFIG.get("institution_discovery_workers", 12))
@@ -4351,7 +4399,7 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     jobs = jobs[:max_jobs]
     log_progress(f"Institutional parsing: {len(jobs)} candidate page(s) queued")
     with cf.ThreadPoolExecutor(max_workers=max(1, page_workers)) as ex:
-        futs = [ex.submit(parse_institution_page, u, s, t, stage_deadline, fp) for u, s, t, fp in jobs]
+        futs = [ex.submit(parse_institution_page, u, s, t, stage_deadline, fp, publication_floor) for u, s, t, fp in jobs]
         for fut in cf.as_completed(futs):
             try:
                 item = fut.result()
@@ -4747,12 +4795,12 @@ def frontier_target_sentence_score(sentence: str, targets: Iterable[str] | None)
     target_set = set(targets or [])
     eu = bool(re.search(r"\b(eu|europe|european|member states|germany|france|italy|spain|netherlands|sweden|finland|denmark|poland|ireland|austria|belgium)\b", t))
     ext = bool(re.search(r"\b(foreign|non eu|third country|china|chinese|united states|american|international)\b", t))
-    knowledge = bool(re.search(r"\b(researcher|researchers|scientist|scientists|research talent|scientific talent|research workforce|research collaboration|scientific collaboration|expertise)\b", t))
+    knowledge = bool(re.search(r"\b(researcher|researchers|scientist|scientists|research talent|scientific talent|research workforce|research collaboration|scientific collaboration|expertise|doctoral candidate|doctoral candidates|phd student|phd students|international student|international students|stem student|stem students|international graduate|international graduates|visiting researcher|visiting researchers|research visit|research visits)\b", t))
     infra = bool(re.search(r"\b(compute|cloud|semiconductor|chip|chips|infrastructure|supply chain|critical raw material|critical mineral|reactor|quantum|data cent(?:er|re))\b", t))
     conversion = bool(re.search(r"\b(firm|firms|company|companies|startup|scale up|scaleup|manufactur|production|factory|industrial)\b", t))
     rules = bool(re.search(r"\b(rule|rules|standard|standards|regulation|export control|licen[cs]|platform rules|governance)\b", t))
     autonomy_up = bool(re.search(r"strategic autonomy|sovereign|domestic capacity|european capacity|onshor|reshor|local production|reduce.{0,35}(depend|reliance)|diversif|de risk", t))
-    autonomy_down = bool(re.search(r"dependence on|dependent on|reliance on|foreign (supplier|vendor|technology|expertise|talent|infrastructure)|non eu (technology|vendor|supplier)|loss of access|restricted access|lock in", t))
+    autonomy_down = bool(re.search(r"dependence on|dependent on|reliance on|foreign (supplier|vendor|technology|expertise|talent|infrastructure|researchers|students|graduates)|international (researchers|research talent|doctoral candidates|students|graduates)|third country (researchers|students|graduates)|non eu (technology|vendor|supplier|researchers|students|graduates)|loss of access|restricted access|lock in", t))
     perf_up = bool(re.search(r"competit|excellence|leading|leader|advanced|capacity|capabilit|performance|benefit|strengthen|innovation|access to", t))
     perf_down = bool(re.search(r"lag|behind|costly|expensive|higher cost|shortage|bottleneck|delay|slow|declin|loss|hollow|gap|no substitute|disrupt|cut off|constraint", t))
     loss_people = bool(re.search(r"brain drain|researcher outflow|researchers? (leave|leaving|left)|scientists? (leave|leaving|left)|talent outflow|loss of (research|scientific) talent|unable to retain|moving abroad", t))
@@ -4760,7 +4808,8 @@ def frontier_target_sentence_score(sentence: str, targets: Iterable[str] | None)
     foreign_rules = bool(re.search(r"foreign standards|foreign rules|us rules|american rules|platform rules|non eu rules|non eu standards|us export control|export licen[cs]", t))
 
     scores=[]
-    if "knowledge-C" in target_set and knowledge and ext and (autonomy_down or re.search(r"foreign (expertise|talent)|international researchers", t)) and perf_up:
+    talent_pipeline = bool(re.search(r"(?:international|foreign|third country|non eu).{0,55}(?:researchers|scientists|doctoral candidates|phd students|students|graduates|visiting researchers)|(?:researchers|scientists|doctoral candidates|phd students|students|graduates|visiting researchers).{0,55}(?:international|foreign|third country|non eu)", t)) and bool(re.search(r"retain|retention|stay|post study|post research|career|employment|innovation|research capacity|scientific capacity|competitiveness|capability", t))
+    if "knowledge-C" in target_set and knowledge and (ext or talent_pipeline) and (autonomy_down or talent_pipeline or re.search(r"foreign (expertise|talent)|international researchers", t)) and perf_up:
         scores.append(10 + int(eu))
     if "knowledge-D" in target_set and knowledge and loss_people and eu:
         scores.append(12)
@@ -5682,37 +5731,66 @@ def revalidate_saved_ab(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[
 
 
 def surgical_precision_cleanup(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
-    """Remove only high-confidence contamination from saved A/B.
+    """Remove only high-confidence legacy contamination at a quality-profile migration.
 
-    Unlike the V17.8.0 migration, this never re-runs every historical row against a
-    shortened saved summary and never rejects a record because its journal is broad.
+    V17.13.24 deliberately avoids re-running shortened saved summaries through the whole
+    admission gate. It removes only records that violate the new non-negotiable invariants:
+    inference-only external relevance, non-English/non-Latin publications, or a small set of
+    unmistakable off-topic legacy artefacts.
     """
     out = dict(previous) if isinstance(previous, dict) else {}
     stats = {"strand_a_removed": 0, "strand_b_removed": 0, "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0}
+    unmistakable_noise = [
+        'table tennis', 'basketball smart teaching', 'hospitality branding',
+        'scenario-based financial planning in gold mining', 'educational administrative framework in nigeria'
+    ]
+    legacy_high_confidence_contamination = {
+        normalized(x) for x in [
+            'INTELLECTUAL PROPERTY GOVERNANCE IN THE AGE OF ARTIFICIAL INTELLIGENCE: REGULATORY FRAGMENTATION AND THE TRANSFORMATION OF DIGITAL AUTHORI',
+            'Global Cybersecurity Governance: Challenges in Harmonizing International Cyber Laws',
+            'The AI Implementation Gap: Policy–Audit Misalignment in the UAE and Egypt',
+            'From Human Oversight to Cognitive Sovereignty: A Process-Based Governance Standard for AI-Assisted Legal Reasoning',
+            'The Strategic Role of Artificial Intelligence Technologies in Advancing the Digital Economy',
+            'DFAS-M&A: A Governance Doctrine for Ethical, Explainable, and Sovereign-Sensitive AI Governance in Mergers and Acquisitions',
+            'Digital instruments of monetary and prudential policy in ensuring the cybersecurity of the financial space',
+            'AI-Enabled Drug Discovery Platforms: Navigating the Confluence of Software, Medical Device, and Pharmaceutical Regulation in Sino-African Trade Relations',
+            'Military AI and Intellectual Property Rights: Global Norms, International Treaties, and Emerging Legal Challenges',
+            'Rethinking Patent Monopolies in the Age of Artificial Intelligence: Protection, Dysfunction, and the Case for Structural Reform',
+            'Health Governance Review Volume 31, Issue 3: Evidence synthesis for health governance',
+            'Sustaining the Future City Hub: Startup Ecosystem Governance in Jakarta–Berlin Sister City Paradiplomacy',
+            'Detecting FIMI: A methodological framework for testing OSINT tools in TTPs detection',
+            'AUKUS and the Nuclear-Free Norm in Southeast Asia: A Constructivist Analysis of ASEAN Responses (2023-2025)',
+            'INTELLECTUAL SERVICES IN UKRAINE’S EXPORT MODEL: DYNAMICS, STRUCTURAL SHIFTS, AND INTERNATIONAL POSITIONING',
+            'Governing Trust in Times of Disruption: Institutional Governance for Civic Resilience',
+            'Integrating CBDCs into the Global Financial Architecture: Strategic Perspectives, Systemic Risks and Regulatory Constraints',
+            'Reimagining paediatric care: technology, trust, and the global movement for child-centred innovation',
+            'Cultural sustainability and civic society',
+            'AGRICULTURAL MARKET INFRASTRUCTURE AND MARKETING AND LOGISTICS ACTIVITIES OF EXPORT-ORIENTED ENTERPRISES',
+            'PATENT TROLLING: THE NATURE OF THE PHENOMENON, MECHANISMS OF INFLUENCE ON THE INNOVATIVE DEVELOPMENT OF TECHNOLOGY COMPANIES, AND COUNTERMEASURES',
+            'Digital identity as payments infrastructure : Foundations, evolution, and research directions',
+            'Comparative assessment of strategic resilience of integration blocs amid global economic fragmentation',
+            'Legal Regulation of Genetically Modified Organisms in Agriculture: Risks and Opportunities for Food Security',
+            'Statisticians at the Forefront of Health Technology Assessment: Aligning Regulatory and HTA Evidence Through Transdisciplinary Collaboration',
+        ]
+    }
     for strand_key in ("strand_a", "strand_b"):
         kept = []
         for item in out.get(strand_key, []) if isinstance(out.get(strand_key), list) else []:
             if not isinstance(item, dict):
                 continue
             title = clean_text(item.get("title", ""))
-            summary = clean_text(item.get("summary", ""))
-            text = normalized(f"{title} {summary}")
+            text = normalized(f"{title} {clean_text(item.get('summary', ''))}")
             hard_noise = False
-            if not title or document_exclusion_reason(title, summary, clean_text(item.get("link", ""))):
+            if not title:
                 hard_noise = True
-            elif not english_record_ok(title, item.get("language", ""), title=title):
+            elif normalized(item.get("a_route", "")) == "external-strategic-shock" or bool(item.get("external_eu_bridge_is_inference")):
                 hard_noise = True
-            elif strand_key == "strand_a":
-                off = bool(distinct_matches(text, A_OFFTOPIC_CONSUMER_OR_LOCAL))
-                system = bool(distinct_matches(text, A_MAJOR_RI_SYSTEM))
-                tech = bool(distinct_matches(text, A_MAJOR_TECH_DOMAINS))
-                hard_noise = off and not (system or tech)
-            else:
-                hard_noise = bool(distinct_matches(text, [
-                    'basketball smart teaching', 'hospitality branding',
-                    'scenario-based financial planning in gold mining',
-                    'educational administrative framework in nigeria'
-                ]))
+            elif not english_public_item_ok(item):
+                hard_noise = True
+            elif normalized(title) in legacy_high_confidence_contamination:
+                hard_noise = True
+            elif any(x in text for x in unmistakable_noise):
+                hard_noise = True
             if hard_noise:
                 stats[strand_key + "_removed"] += 1
             else:
@@ -5722,7 +5800,6 @@ def surgical_precision_cleanup(previous: dict[str, Any]) -> tuple[dict[str, Any]
                 stats["stored_pass"] += 1
         out[strand_key] = kept
     return out, stats
-
 
 def cleanup_quality_profile_regressions(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
     """Target only records created by the two regressions corrected in V17.5.10.
@@ -6691,23 +6768,140 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
     for x in anchored:x.pop('_anchor_score',None)
     return anchored[:MAX_C] if MAX_C>0 else anchored
 
+
+# V17.13.23: two-tier evidence window. The normal radar remains a four-month core,
+# while only the existing UI's Highest source-merit band may survive/discover in months 4-6.
+_SOURCE_MERIT_EU_NAMES = [
+    "European Commission", "Council of the European Union", "European Central Bank",
+    "European Innovation Council", "European Research Council", "European Investment Bank",
+    "EuroHPC Joint Undertaking", "European Union Institute for Security Studies", "EUISS",
+    "EFSA Supporting Publications",
+]
+_SOURCE_MERIT_PUBLIC_HIGH = {
+    "OECD", "International Telecommunication Union",
+    "National Contact Point for Knowledge Security, Government of the Netherlands",
+    "Rathenau Instituut",
+}
+
+def _source_merit_domain(link: str) -> str:
+    try:
+        return (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
+    except Exception:
+        return ""
+
+def _source_merit_is_eu_official(source: str, link: str) -> bool:
+    src = clean_text(source).lower()
+    domain = _source_merit_domain(link)
+    if any(name.lower() in src for name in _SOURCE_MERIT_EU_NAMES):
+        return True
+    return domain.endswith(".europa.eu") or domain in {"ecb.europa.eu", "consilium.europa.eu", "data.consilium.europa.eu", "op.europa.eu"}
+
+def source_merit_score(item: dict[str, Any]) -> int:
+    """Python mirror of source_merit.js for the Highest-band retention decision."""
+    if not isinstance(item, dict):
+        return 0
+    source = clean_text(item.get("source") or item.get("journal") or item.get("institution"))
+    link = clean_text(item.get("link") or item.get("url"))
+    typ = clean_text(item.get("type") or item.get("itemType") or "").lower()
+    rel = clean_text(item.get("eu_relevance") or item.get("euRelevance") or "").lower()
+    authors = clean_text(item.get("authors"))
+    official = _source_merit_is_eu_official(source, link)
+    if official:
+        authority = 55
+    elif source in _SOURCE_MERIT_PUBLIC_HIGH:
+        authority = 48
+    else:
+        # No lower authority class can reach the UI's Highest threshold (93/100).
+        return 0
+    if rel == "direct":
+        relevance = 25
+    elif rel == "material_external":
+        relevance = 20
+    elif rel == "derived":
+        relevance = 18
+    elif official:
+        relevance = 25
+    else:
+        relevance = 16
+    if official:
+        evidence = 15
+    elif "peer-reviewed" in typ:
+        evidence = 15
+    elif "institutional report" in typ:
+        evidence = 14
+    elif "manual-verified" in typ:
+        evidence = 14
+    elif "research/policy paper" in typ:
+        evidence = 13
+    elif "preprint" in typ:
+        evidence = 8
+    else:
+        evidence = 10
+    if not authors:
+        author_points = 2
+    elif re.search(r"commission|council|institute|undertaking|bank|agency|organisation|organization|university|academies", authors, re.I):
+        author_points = 4
+    else:
+        author_points = 5
+    return max(0, min(100, authority + relevance + evidence + author_points))
+
+def highest_source_merit(item: dict[str, Any]) -> bool:
+    return source_merit_score(item) >= 93
+
+def source_can_reach_highest(src: dict[str, Any]) -> bool:
+    if not isinstance(src, dict):
+        return False
+    source = clean_text(src.get("name"))
+    domain = clean_text(src.get("domain")).lower().removeprefix("www.")
+    probe = f"https://{domain}/" if domain else ""
+    return _source_merit_is_eu_official(source, probe) or source in _SOURCE_MERIT_PUBLIC_HIGH
+
+def enforce_two_tier_ab_window(items: list[dict[str, Any]], preferred_floor: dt.date, extended_floor: dt.date) -> tuple[list[dict[str, Any]], int, int]:
+    """Keep all A/B in the core four months and only Highest-merit evidence in months 4-6."""
+    kept: list[dict[str, Any]] = []
+    removed = 0
+    extended_kept = 0
+    for raw in items if isinstance(items, list) else []:
+        if not isinstance(raw, dict):
+            continue
+        item = dict(raw)
+        d = parse_date(item.get("date"))
+        if not d or d >= preferred_floor:
+            item.pop("extended_retention", None)
+            item.pop("retention_window_months", None)
+            kept.append(item)
+            continue
+        if d >= extended_floor and highest_source_merit(item):
+            item["extended_retention"] = True
+            item["retention_window_months"] = EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS
+            extended_kept += 1
+            kept.append(item)
+            continue
+        removed += 1
+    return kept, removed, extended_kept
+
 def bootstrap_floor(today: dt.date) -> dt.date:
     return today - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 
 
 def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
-    """Return the hard rolling public window floor.
-
-    The radar is intentionally about the last four calendar months.  Older saved rows, Git
-    recovery rows and historical matrix rows must not silently stretch that window.
-    """
+    """Return the preferred/core four-month floor."""
     return bootstrap_floor(today)
 
-def prune_public_window(data: dict[str, Any], floor: dt.date) -> tuple[dict[str, Any], dict[str, int]]:
-    """Remove public evidence older than the rolling four-month floor."""
+def extended_top_quality_floor(today: dt.date) -> dt.date:
+    return today - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
+
+def prune_public_window(data: dict[str, Any], floor: dt.date, extended_floor: dt.date | None = None) -> tuple[dict[str, Any], dict[str, int]]:
+    """Apply the 4-month core + Highest-merit-to-6-month retention contract."""
     out = dict(data) if isinstance(data, dict) else {}
+    extended_floor = extended_floor or extended_top_quality_floor(dt.date.today())
     removed: dict[str, int] = {}
-    for strand in ("strand_a", "strand_b", "strand_c", "frontier_evidence"):
+    for strand in ("strand_a", "strand_b"):
+        raw = out.get(strand) if isinstance(out.get(strand), list) else []
+        kept, removed_count, _ = enforce_two_tier_ab_window(raw, floor, extended_floor)
+        removed[strand] = removed_count
+        out[strand] = kept
+    for strand in ("strand_c", "frontier_evidence"):
         raw = out.get(strand) if isinstance(out.get(strand), list) else []
         kept = []
         for item in raw:
@@ -6719,7 +6913,10 @@ def prune_public_window(data: dict[str, Any], floor: dt.date) -> tuple[dict[str,
             kept.append(dict(item))
         removed[strand] = max(0, len(raw) - len(kept))
         out[strand] = kept
+    # corpus_start_date stays the preferred/core floor for backward-compatible reader logic.
     out["corpus_start_date"] = floor.isoformat()
+    out["preferred_corpus_start_date"] = floor.isoformat()
+    out["extended_top_quality_start_date"] = extended_floor.isoformat()
     return out, removed
 
 def cap_strand_c_share(strand_a: list[dict[str, Any]], strand_b: list[dict[str, Any]], strand_c: list[dict[str, Any]], max_share: float) -> tuple[list[dict[str, Any]], int]:
@@ -6787,7 +6984,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -6802,10 +6999,11 @@ def main() -> int:
     previous = load_previous()
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
-    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR)
+    EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
+    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR)
     if sum(age_window_removed.values()):
         log_progress(
-            "Rolling four-month window: removed older public rows "
+            "Two-tier window: removed expired/non-Highest older public rows "
             + ", ".join(f"{k}={v}" for k, v in age_window_removed.items() if v)
         )
     previous, retired_c_removed = apply_retired_signal_filter(previous)
@@ -7084,6 +7282,11 @@ def main() -> int:
     for target, cursor in local_source_cursor.items():
         source_cursors[target] = cursor
     inst_batch = inst_rotating + gap_sources
+    extended_highest_sources_all = [src for src in institution_sources_all if source_can_reach_highest(src)]
+    extended_highest_cursor_before = int(state.get("extended_highest_source_cursor", 0) or 0)
+    extended_highest_batch, _extended_highest_next, _extended_highest_wrapped = rotating_batch(
+        extended_highest_sources_all, extended_highest_cursor_before, EXTENDED_TOP_QUALITY_SOURCES_PER_SCAN
+    )
 
     oa_backfill = not bool(state["backfill"].get("openalex"))
     cr_backfill = not (
@@ -7508,6 +7711,44 @@ def main() -> int:
     )
     inst = dedupe_candidates([x for x in (manual_recovered + rule_fix_recovered + inst) if isinstance(x, dict)])
 
+    # V17.13.23: bounded 4-6 month recovery only for sources capable of reaching the
+    # existing Highest source-merit band. The normal four-month institutional stage runs
+    # first, so freshness remains preferred. Older candidates are admitted only if their
+    # computed source merit actually reaches Highest (>=93).
+    extended_highest_candidates: list[dict[str, Any]] = []
+    extended_highest_executed = 0
+    if extended_highest_batch and budget_remaining() > max(120, EXTENDED_TOP_QUALITY_STAGE_SECONDS):
+        extended_deadline = time.monotonic() + min(
+            EXTENDED_TOP_QUALITY_STAGE_SECONDS,
+            max(45, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 150))))
+        )
+        extended_exec: dict[str, Any] = {}
+        log_progress(
+            f"Highest-merit 4-6 month recovery: {len(extended_highest_batch)} source(s) from {EXTENDED_DATE_FLOOR.isoformat()} "
+            f"(core preference remains {DATE_FLOOR.isoformat()})"
+        )
+        recovered_extended = safe_stage(
+            "Highest-merit extended recovery", collect_institutions, EXTENDED_DATE_FLOOR, warnings,
+            False, extended_highest_batch, extended_deadline, extended_exec, False, EXTENDED_DATE_FLOOR
+        )
+        for item in recovered_extended:
+            if not isinstance(item, dict):
+                continue
+            d = parse_date(item.get("date"))
+            if d and EXTENDED_DATE_FLOOR <= d < DATE_FLOOR and highest_source_merit(item):
+                item["extended_retention"] = True
+                item["retention_window_months"] = EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS
+                extended_highest_candidates.append(item)
+        all_extended_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in extended_highest_sources_all]
+        planned_extended_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in extended_highest_batch]
+        executed_extended_domains = set(extended_exec.get("institution_sources", set()))
+        state["extended_highest_source_cursor"], _, extended_highest_executed = committed_rotation_cursor(
+            all_extended_domains, extended_highest_cursor_before, planned_extended_domains, executed_extended_domains
+        )
+        execution_stats["extended_highest_sources_executed"] = extended_highest_executed
+        execution_stats["extended_highest_candidates_admitted"] = len(extended_highest_candidates)
+        inst = dedupe_candidates(inst + extended_highest_candidates)
+
     # V17.12.9: four-month A recall repair for institutional sources previously seen under
     # stricter/buggy admission rules. It uses its own cursor and ignores only the rejected-page
     # fingerprint cache; normal institution_cursor/backfill state is untouched. The lane rotates
@@ -7832,6 +8073,13 @@ def main() -> int:
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []
     strand_a = merge_corpus(prev_a, new_selected, "A", now_iso)
     strand_b = merge_corpus(prev_b, new_selected, "B", now_iso)
+    strand_a, expired_a_after_merge, extended_a_kept = enforce_two_tier_ab_window(strand_a, DATE_FLOOR, EXTENDED_DATE_FLOOR)
+    strand_b, expired_b_after_merge, extended_b_kept = enforce_two_tier_ab_window(strand_b, DATE_FLOOR, EXTENDED_DATE_FLOOR)
+    if expired_a_after_merge or expired_b_after_merge:
+        log_progress(
+            f"Two-tier retention after merge: removed A={expired_a_after_merge}, B={expired_b_after_merge}; "
+            f"retained Highest-merit 4-6 month evidence A={extended_a_kept}, B={extended_b_kept}"
+        )
     prev_frontier_evidence = previous.get("frontier_evidence", []) if isinstance(previous.get("frontier_evidence"), list) else []
     frontier_evidence = merge_corpus(prev_frontier_evidence, frontier_recovery_candidates, "A", now_iso)
     frontier_evidence = [
@@ -7916,7 +8164,7 @@ def main() -> int:
             int(state.get("rule_fix_source_recovery_sources_with_jobs", 0) or 0),
         )
         state["rule_fix_source_recovery_completed_at"] = state.get("rule_fix_source_recovery_completed_at") or now_iso
-    state["last_run"] = now_iso
+    state["last_started_at"] = now_iso
     state["last_batches"] = {
         "openalex_queries": len(oa_batch),
         "openalex_exploration_queries": len(oa_explore),
@@ -7967,10 +8215,20 @@ def main() -> int:
             "remaining_queue": len(manual_ingest_state.get("recovery_queue", [])),
         }
 
+    completed = dt.datetime.now(dt.timezone.utc)
+    completed_iso = completed.isoformat(timespec="minutes").replace("+00:00", "Z")
+    state["last_run"] = completed_iso
+    state["last_completed_at"] = completed_iso
+
     data = {
-        "last_updated": now_iso,
+        "last_updated": completed_iso,
+        "run_started_at": now_iso,
+        "run_completed_at": completed_iso,
         "first_scan_complete": True,
         "corpus_start_date": output_corpus_floor.isoformat(),
+        "preferred_corpus_start_date": DATE_FLOOR.isoformat(),
+        "extended_top_quality_start_date": EXTENDED_DATE_FLOOR.isoformat(),
+        "corpus_window_policy": f"{BOOTSTRAP_LOOKBACK_MONTHS}-month core; Highest source-merit evidence retained/discovered to {EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS} months",
         "source_expansion_version": expansion_marker,
         "quality_profile_version": QUALITY_PROFILE_VERSION,
         "aboutness_profile_version": str(CONFIG.get("aboutness_profile_version", "")),
@@ -7998,6 +8256,7 @@ def main() -> int:
         "matrix_balance_rotation_profile_version": MATRIX_BALANCE_ROTATION_PROFILE_VERSION,
         "source_attention_profile_version": SOURCE_ATTENTION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
+        "window_policy_version": WINDOW_POLICY_VERSION,
         "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
         "rule_fix_source_recovery_version": (
             RULE_FIX_SOURCE_RECOVERY_VERSION
@@ -8011,6 +8270,10 @@ def main() -> int:
         "scan_health": health,
         "scan_window": {
             "ab_date_floor": DATE_FLOOR.isoformat(),
+            "ab_preferred_floor": DATE_FLOOR.isoformat(),
+            "ab_extended_highest_floor": EXTENDED_DATE_FLOOR.isoformat(),
+            "extended_highest_sources_planned": len(extended_highest_batch),
+            "extended_highest_sources_executed": extended_highest_executed,
             "ab_discovery_from_this_run": min(oa_from, cr_from, inst_from).isoformat(),
             "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",
             "frontier_gap_historical_lookback_months": gap_lookback_months if gap_scholarly else 0,
@@ -8030,6 +8293,11 @@ def main() -> int:
             "new_b": new_b_count,
             "new_ab_unique": len(new_selected),
             "new_c": new_c_count,
+            "aged_out_this_scan": {k: int(v) for k, v in age_window_removed.items()},
+            "aged_out_total_this_scan": int(sum(age_window_removed.values())),
+            "extended_highest_retained_a": int(extended_a_kept),
+            "extended_highest_retained_b": int(extended_b_kept),
+            "extended_highest_new_candidates": int(len(extended_highest_candidates)),
             "c_signals": new_c_count,
             "c_signals_total": len(strand_c),
             "c_prefilter_candidates": len(news),
@@ -8039,7 +8307,7 @@ def main() -> int:
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new weak signal(s). The scanner uses a seven-day discovery window and retains signals only while they remain inside the public four-month window." if new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains on the normal four-month retention window." if new_c_count < 3 else "",
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),
@@ -8103,6 +8371,9 @@ def main() -> int:
             "crossref_missing_abstract_enrichment_attempted": int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)),
             "b_method_queries_executed": b_method_executed,
             "institution_sources_this_run": len(inst_batch),
+            "extended_highest_sources_planned": len(extended_highest_batch),
+            "extended_highest_sources_executed": extended_highest_executed,
+            "extended_highest_candidates_admitted": len(extended_highest_candidates),
             "institution_rotating_sources_executed": inst_base_executed,
             "rule_fix_new_source_recovery_attempted": rule_fix_source_recovery_attempted,
             "rule_fix_new_source_recovery_complete": rule_fix_source_recovery_complete,
@@ -8149,6 +8420,10 @@ def main() -> int:
             "frontier_coverage_classifier_ok": not bool(frontier_focus["classifier_error"]),
             "signal_recovery_backfill": signal_backfill,
             "signal_backfill_complete": signal_backfill_complete,
+            "age_window_removed_a": int(age_window_removed.get("strand_a", 0)),
+            "age_window_removed_b": int(age_window_removed.get("strand_b", 0)),
+            "age_window_removed_c": int(age_window_removed.get("strand_c", 0)),
+            "age_window_removed_frontier": int(age_window_removed.get("frontier_evidence", 0)),
             "quality_removed_old_a": inherited_audit_stats.get("strand_a_removed", 0) if (inherited_audit or precision_cleanup) else 0,
             "quality_removed_old_b": inherited_audit_stats.get("strand_b_removed", 0) if (inherited_audit or precision_cleanup) else 0,
             "inherited_corpus_audit_this_run": inherited_audit,

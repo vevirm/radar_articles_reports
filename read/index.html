@@ -20,12 +20,12 @@
 <section class="intro"><div><h2 id="introTitle">Finding the strongest current issue patterns…</h2><p id="introText">The number, order and structure of these maps can change after each successful scan. Wording is kept plain so the page can be scanned quickly.</p></div></section>
 <div class="issue-list" id="issues"></div>
 <div class="next"><a href="../frontier/quick/">Matrix · short →</a><a href="../frontier/">Matrix · full →</a><a href="../">Radar →</a><a href="../literature/">Literature used →</a></div>
-<p class="note">These issue maps are derived from the same four-month radar state. They do not change admission or Matrix placement; they reorganise already-admitted material for a fast current read. Stronger source merit is shown first when findings are otherwise comparable.</p>
+<p class="note">These issue maps are derived from the same four-month-core radar state, including only Highest-merit A/B evidence from months 4–6. They do not change admission or Matrix placement; they reorganise already-admitted material for a fast current read. Stronger source merit is shown first when findings are otherwise comparable.</p>
 </main>
 <footer><div class="wrap">R&amp;I × Geopolitics Radar · issue maps · <span id="footstate">current state</span></div></footer>
-<script src="../source_merit.js?v=17.13.21"></script>
-<script src="../briefing/insights.js?v=17.13.21"></script>
-<script src="issues.js?v=17.13.21"></script>
+<script src="../source_merit.js?v=17.13.25"></script>
+<script src="../briefing/insights.js?v=17.13.25"></script>
+<script src="issues.js?v=17.13.25"></script>
 <script>
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function p(s){return esc((window.RadarInsights&&RadarInsights.fastReaderText(s))||s)}
@@ -49,7 +49,7 @@ function issueHtml(issue,i){
     document.getElementById('introTitle').textContent=issues.length?`${issues.length} leading issues in the current material.`:'No stable issue pattern yet.';
     document.getElementById('introText').textContent='This list is rebuilt from admitted evidence after every successful scan. Issues can appear, disappear, merge, split or move in the order.';
     const upd=(d.last_updated||'').slice(0,10)||'unknown';
-    document.getElementById('state').innerHTML=[`Four-month radar · ${esc(d.corpus_start_date||'')} → ${esc(upd)}`,`${issues.length} current issue maps`,`${A.length} main findings`,`${B.length} future-focused items`,`${C.length} early signals`].map(t=>`<span class="chip">${t}</span>`).join('');
+    document.getElementById('state').innerHTML=[`4-month core + Highest to 6 months · ${esc(d.preferred_corpus_start_date||d.corpus_start_date||'')} → ${esc(upd)}`,`${issues.length} current issue maps`,`${A.length} main findings`,`${B.length} future-focused items`,`${C.length} early signals`].map(t=>`<span class="chip">${t}</span>`).join('');
     document.getElementById('footstate').textContent=`radar state ${upd} · ${issues.length} current issues`;
   }catch(e){
     document.getElementById('issues').innerHTML='<section class="issue"><div class="issue-head"><div><div class="issue-title">Current issue maps could not load</div><p class="issue-line">The page needs the current radar.json because the issue structure is no longer fixed.</p></div></div></section>';

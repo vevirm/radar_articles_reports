@@ -637,6 +637,16 @@
       "name": "German Marshall Fund of the United States",
       "domain": "gmfus.org",
       "tier": 2
+    },
+    {
+      "name": "European Commission — Migration and Home Affairs",
+      "domain": "home-affairs.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "European Education Area",
+      "domain": "education.ec.europa.eu",
+      "tier": 1
     }
   ],
   "crossref_institution_publishers": [
@@ -918,7 +928,7 @@
     "China semiconductor breakthrough chip capability",
     "United States semiconductor breakthrough chip capability"
   ],
-  "quality_profile_version": "v17.9.0-source-aware-aboutness-matrix-rubric",
+  "quality_profile_version": "v17.13.24-source-supported-relevance-english-publications",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -1003,9 +1013,12 @@
       "(\"European Research Area\" OR EU) (research security OR trusted research) (mobility OR collaboration OR talent) (innovation OR competitiveness)"
     ],
     "knowledge-C": [
-      "(EU OR Europe OR European) (researchers OR scientists OR \"research talent\") (dependence OR reliance OR foreign OR non-EU) (capacity OR excellence OR performance OR competitiveness)",
-      "(EU OR Europe OR European) (international researchers OR foreign researchers OR scientific collaboration) (US OR China OR non-EU) (dependence OR reliance OR access)",
-      "(\"European Research Area\" OR EU) (research talent OR scientific expertise) (strategic dependency OR knowledge security OR foreign dependence)"
+      "(EU OR Europe OR European) (\"international researchers\" OR \"foreign researchers\" OR \"third-country researchers\") (retain OR retention OR mobility OR access) (competitiveness OR \"research capacity\" OR innovation)",
+      "(EU OR Europe OR European) (\"international students\" OR \"third-country students\" OR \"international graduates\") (STEM OR doctoral OR research OR innovation) (retain OR \"post-study\" OR stay OR employment)",
+      "(EU OR Europe OR European) (\"doctoral candidates\" OR \"PhD students\") (international OR foreign OR non-EU) (research capacity OR innovation OR competitiveness OR retention)",
+      "(EU OR Europe OR European) (\"visiting researchers\" OR \"research visits\" OR \"scientific visitors\") (international OR foreign OR non-EU) (expertise OR capacity OR collaboration OR competitiveness)",
+      "(\"European Research Area\" OR EU) (\"international talent\" OR \"foreign expertise\") (researchers OR doctoral OR STEM graduates) (retention OR dependence OR competitiveness)",
+      "(EU OR Europe) (\"stay after\" OR \"post-study\" OR \"post-research\") (international students OR researchers OR graduates) (innovation OR research OR STEM)"
     ],
     "knowledge-D": [
       "(EU OR Europe OR European) (\"brain drain\" OR researcher outflow OR scientists leaving OR research talent loss) (US OR China OR abroad OR foreign) (capacity OR competitiveness OR autonomy)",
@@ -1045,16 +1058,22 @@
       "European Research Area research security fragmentation collaboration"
     ],
     "knowledge-C": [
-      "Europe dependence foreign research talent scientific capacity strategic",
-      "EU international researchers dependence knowledge security scientific leadership",
-      "European research collaboration non-EU expertise strategic dependency",
-      "Europe foreign scientific talent reliance innovation performance",
-      "EU research workforce international dependence competitiveness",
-      "European Research Area foreign expertise dependence capacity",
-      "Europe AI talent foreign trained researchers international workforce dependence",
-      "European research workforce international talent dependence data",
-      "EU scientific workforce foreign researchers expertise reliance",
-      "Europe research excellence international researchers dependence evidence"
+      "Europe international researchers retention research capacity competitiveness",
+      "EU third-country researchers scientific workforce innovation capacity",
+      "Europe foreign-born researchers scientific workforce dependence",
+      "EU international doctoral candidates research talent retention competitiveness",
+      "Europe international PhD graduates stay after graduation research innovation",
+      "EU international students STEM post-study retention innovation ecosystem",
+      "European universities international doctoral students research workforce retention",
+      "Europe visiting researchers foreign expertise scientific capacity access",
+      "EU research visits international expertise collaboration capability",
+      "European Research Area international talent research workforce dependence",
+      "Europe non-EU researchers scientific expertise reliance competitiveness",
+      "EU international graduates research careers innovation workforce retention",
+      "Europe third-country students researchers stay after study innovation",
+      "EU post-study international STEM graduates research innovation employment",
+      "Europe international scientific talent mobility access expertise capacity",
+      "EU foreign researchers visiting scientists research capacity competitiveness"
     ],
     "knowledge-D": [
       "Choose Europe research careers brain drain CESAER survey",
@@ -1180,7 +1199,7 @@
   "inherited_corpus_audit_workers": 8,
   "inherited_corpus_audit_timeout_seconds": 8,
   "frontier_gap_historical_lookback_months": 0,
-  "frontier_gap_scholarly_queries_per_target": 6,
+  "frontier_gap_scholarly_queries_per_target": 8,
   "frontier_gap_institution_extra_sources_per_scan": 12,
   "frontier_gap_institution_url_terms": {
     "knowledge-A": [
@@ -1204,13 +1223,20 @@
       "international-research",
       "researcher-mobility",
       "foreign-talent",
+      "international-talent",
+      "international-students",
+      "third-country",
+      "doctoral",
+      "phd",
+      "post-study",
+      "post-research",
+      "research-visits",
+      "visiting-researchers",
       "research-collaboration",
       "scientific-cooperation",
-      "choose-europe",
-      "research-careers",
-      "research-talent",
-      "brain-drain",
-      "talent-retention"
+      "talent-attraction",
+      "talent-retention",
+      "research-careers"
     ],
     "knowledge-D": [
       "brain-drain",
@@ -1343,7 +1369,11 @@
       "euraxess.ec.europa.eu",
       "eua.eu",
       "scienceeurope.org",
-      "cesaer.org"
+      "cesaer.org",
+      "home-affairs.ec.europa.eu",
+      "education.ec.europa.eu",
+      "europarl.europa.eu",
+      "op.europa.eu"
     ],
     "knowledge-D": [
       "marie-sklodowska-curie-actions.ec.europa.eu",
@@ -1494,7 +1524,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.1-eu-core-external-shock-english-evidence",
+  "recall_profile_version": "v17.13.25-source-supported-english-talent-pipeline",
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1569,16 +1599,16 @@
   "finding_context_query_bank_size": 12,
   "finding_context_queries_per_scan": 4,
   "foreign_language_english_evidence_min_words": 25,
-  "english_evidence_rule": "English is required for the evidence used to admit and write the finding, not necessarily for the whole publication. A non-English publication may qualify from a substantive source-provided/indexed English abstract, executive summary or equivalent English description; machine translation is not an admission basis.",
-  "eu_ri_geopolitics_core_rule": "The subject of Strand A is EU/European research and innovation in geopolitical or strategic context. Normal admission requires EU/European scope + substantive R&I + an explicit or triangulated strategic mechanism.",
-  "material_external_shock_rule": "Exceptional non-EU events or findings may enter only when they are a major step-change in a strategically important R&I capability, match a current EU-context anchor in the same domain, and the implication for Europe can be stated as one specific plain-language sentence. This route is an editorial inference and is labelled as such; generic foreign technology news does not qualify.",
+  "english_evidence_rule": "Public A/B evidence must be an English-language publication. Explicit foreign-language metadata, a non-English publication title, or meaningful non-Latin source prose rejects the record. An English abstract does not rescue a foreign-language publication; no translation is used for admission.",
+  "eu_ri_geopolitics_core_rule": "Strand A requires source-supported EU/European scope + substantive R&I + geopolitical/economic-security relevance. The radar may summarize source evidence but may not manufacture Europe relevance by attaching an inferred external-shock bridge.",
+  "material_external_shock_rule": "Inference-only external-shock admission is disabled. A non-EU development can enter only when the source itself explicitly establishes a substantive effect on EU/European R&I in geopolitical/economic-security terms; it then passes through the normal direct-EU evidence route.",
   "reader_point_max_chars": 120,
   "reader_point_subject_rule": "Every reader-facing finding and why-it-matters point must start with an explicit actor, system or topic. Do not start with vague references such as this, these, those, it, they, such, the study, the paper, the findings or the developments.",
   "reader_point_sentence_rule": "Reader-facing points must be complete sentences of at most 120 characters. Never hard-cut a sentence and never use ellipses to force the limit.",
   "package_file_budget": 100,
   "frontier_gap_balance_enabled": true,
   "frontier_gap_balance_target_cap": 12,
-  "matrix_balance_rotation_profile_version": "v17.13.7-recurring-multifactor-matrix-balance",
+  "matrix_balance_rotation_profile_version": "v17.13.25-external-talent-pipeline-balance",
   "source_attention_profile_version": "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening",
   "preferred_q1_journals_sjr2024": [
     "Research Policy",
@@ -1620,5 +1650,11 @@
     "finding_context",
     "priority_researchers",
     "ri_foresight_methods"
-  ]
+  ],
+  "extended_top_quality_lookback_months": 6,
+  "extended_top_quality_sources_per_scan": 6,
+  "extended_top_quality_stage_seconds": 150,
+  "english_publication_required": true,
+  "allow_foreign_publication_with_english_abstract": false,
+  "allow_inference_only_external_admission": false
 }

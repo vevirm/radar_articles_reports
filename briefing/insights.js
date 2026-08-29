@@ -39,7 +39,7 @@
     if(/[А-Яа-яІіЇїЄєҐґЁё一-龯ぁ-んァ-ン가-힣]/.test(s)) return false;
     const n=` ${s.toLowerCase().replace(/[^a-zà-ž]+/g,' ').replace(/\s+/g,' ').trim()} `;
     const english=(n.match(/\b(the|a|an|and|or|of|to|in|for|on|with|as|is|are|was|were|be|by|from|that|this|its|eu|europe|european)\b/g)||[]).length;
-    const foreign=(n.match(/\b(und|der|die|das|des|den|ein|eine|et|les|des|une|un|dans|pour|avec|sur|del|della|delle|gli|che|con|per|los|las|una|para|con|sobre|y|de|la|el|van|het|een|voor|met|și|sau|din|pentru|cu|w|oraz|dla|jest|na)\b/g)||[]).length;
+    const foreign=(n.match(/\b(und|der|die|das|des|den|ein|eine|et|les|des|une|un|dans|pour|avec|sur|del|della|delle|gli|che|con|per|los|las|una|para|sobre|y|de|la|el|van|het|een|voor|met|și|sau|din|pentru|cu|w|oraz|dla|jest|na|strategi|dalam|menghadapi|dampak|amerika|serikat|tiongkok|terhadap|pengembangan|penelitian|teknologi|eropa)\b/g)||[]).length;
     const words=s.split(/\s+/).filter(Boolean).length;
     if(words<5) return true;
     return english>=2 || foreign<=1;

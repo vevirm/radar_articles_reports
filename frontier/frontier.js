@@ -19,7 +19,7 @@
     {id:'D',name:'Weaker on both',direction:'less control · less competitive',tone:'alarm'}
   ];
   const CELL_NAMES={
-    knowledge:{A:['Attract and keep talent','people and knowledge strengthen Europe'],B:['Protection slows exchange','more control, less collaboration'],C:['Capability from outside','stronger work, but reliant on others'],D:['Talent and knowledge leave','Europe loses people and capability']},
+    knowledge:{A:['Attract and keep talent','people and knowledge strengthen Europe'],B:['Protection slows exchange','more control, less collaboration'],C:['Capability from outside','international talent or expertise strengthens work, but access and retention remain external dependencies'],D:['Talent and knowledge leave','Europe loses people and capability']},
     infrastructure:{A:['European capacity','Europe owns an important tool or input'],B:['Own capacity, higher cost','more control, but performance or cost suffers'],C:['Access without control',"frontier access depends on others"],D:['Access lost','dependency becomes a capability loss']},
     conversion:{A:['European firms scale','research becomes European industrial strength'],B:['Protected but small','more control, but firms remain subscale'],C:['Scale with outside dependence','growth relies on foreign capital, markets or platforms'],D:['Research does not scale here','firms, value or production move away']},
     rules:{A:['Europe shapes the rules','European standards or decisions improve both position and performance'],B:['Protection adds friction','security or autonomy rules slow the system'],C:['Europe follows outside rules','performance depends on external regimes'],D:['Rules arrive too late','fragmentation or delay weakens both control and competitiveness']}
@@ -271,9 +271,11 @@
 
     if(row.id==='knowledge'){
       const kt=norm(`${direct} ${support}`);
-      const externalKnowledge=/(?:foreign|non-eu|third-country|third country|china|chinese|united states|american).{0,55}(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation)|(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation).{0,55}(?:foreign|non-eu|third-country|third country|china|chinese|united states|american)/.test(kt);
-      const knowledgeGain=/benefit|strengthen|boost|improve|excellence|leading|competitive|competitiveness|capacity|capability|access to|fill(?:s|ing)? gap|critical expertise/.test(kt);
-      if(externalKnowledge && knowledgeGain){autonomyDown+=3;performanceUp+=2.8}
+      const externalKnowledge=/(?:foreign|non-eu|third-country|third country|international|china|chinese|united states|american).{0,70}(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation|doctoral candidate|phd student|stem student|international graduate|visiting researcher)|(?:researcher|scientist|research talent|scientific talent|expertise|research collaboration|scientific collaboration|research cooperation|doctoral candidate|phd student|stem student|international graduate|visiting researcher).{0,70}(?:foreign|non-eu|third-country|third country|international|china|chinese|united states|american)/.test(kt);
+      const externalTalentPipeline=/(?:international|foreign|non-eu|third-country|third country|extra-eu).{0,65}(?:students?|graduates?|doctoral candidates?|phd students?|researchers?|scientists?|visiting researchers?|research visitors?)|(?:students?|graduates?|doctoral candidates?|phd students?|researchers?|scientists?|visiting researchers?|research visitors?).{0,65}(?:international|foreign|non-eu|third-country|third country|extra-eu)/.test(kt)
+        && /retain|retention|stay|post-study|post study|post-research|post research|job search|employment|career|research|innovation|stem|skills|workforce|competitiveness|capacity|capability/.test(kt);
+      const knowledgeGain=/benefit|strengthen|boost|improve|excellence|leading|competitive|competitiveness|capacity|capability|access to|fill(?:s|ing)? gap|critical expertise|innovation ecosystem|technological leadership|economic growth|prosperity/.test(kt);
+      if((externalKnowledge && knowledgeGain) || (externalTalentPipeline && EU_SCOPE_RE.test(kt))){autonomyDown+=3;performanceUp+=2.8}
       const euTalentBuild=EU_SCOPE_RE.test(kt) && /brain gain|talent inflow|attract(?:ing|ion)?|retain(?:ing|ed)?|recruit|returning researchers|researchers return/.test(kt);
       if(euTalentBuild && /researcher|scientist|research talent|scientific talent|research workforce/.test(kt)){autonomyUp+=2.6;performanceUp+=2.6}
     }
@@ -398,7 +400,7 @@
     const euScoped=eu.test(t) || (evidenceSignal && ['direct','material_external'].includes(clean(evidence?.eu_relevance||'').toLowerCase()));
 
     const rowPatterns={
-      knowledge:/\b(researcher|researchers|scientist|scientists|academic|academics|faculty|doctoral|phd|research talent|scientific talent|research workforce|science workforce|research collaboration|scientific collaboration|research cooperation|scientific cooperation|knowledge flow|knowledge flows|skills|research careers?|research mobility|researcher mobility|science diplomacy|open science|research security|higher education)\b/,
+      knowledge:/\b(researcher|researchers|scientist|scientists|academic|academics|faculty|doctoral|phd|doctoral candidate|doctoral candidates|phd student|phd students|research talent|scientific talent|research workforce|science workforce|research collaboration|scientific collaboration|research cooperation|scientific cooperation|knowledge flow|knowledge flows|skills|research careers?|research mobility|researcher mobility|visiting researcher|visiting researchers|research visit|research visits|scientific visitor|scientific visitors|international student|international students|international graduate|international graduates|science diplomacy|open science|research security|higher education)\b/,
       infrastructure:/\b(compute|computing|supercomputer|cloud|data center|data centre|semiconductor|semiconductors|chip|chips|microelectronics|quantum|reactor|reactors|nuclear|grid|electricity|energy|battery|batteries|lithium|critical mineral|critical minerals|critical raw material|critical raw materials|rare earth|materials|instrument|instruments|facility|facilities|infrastructure|telecom|telecommunications|5g|6g|satellite|cable|supply chain|supply chains|input|inputs|technology vendor|technology vendors|value chain|value chains)\b/,
       conversion:/\b(firm|firms|company|companies|startup|start-up|scale-up|scaleup|manufacturer|manufacturing|industrial|industry|product|products|commercialisation|commercialization|market|capital|venture|investment|investor|procurement|patent|patents|production|factory|factories|defence|defense|dual-use|dual use|industrial capacity|production capacity|competitiveness fund)\b/,
       rules:/\b(export control|export controls|regulation|regulatory|standard|standards|rule|rules|governance|funding programme|funding program|framework programme|framework program|screening|research security|restriction|restrictions|ban|bans|law|laws|decision|permit|permits|subsidy|subsidies|state aid|sanction|sanctions|licensing|licence|license|policy framework|institutional)\b/
@@ -451,7 +453,9 @@
       }
       if(column.id==='A') return cleanOpening && performanceUp && (autonomyUp || euCapabilityBuild || /brain gain|talent inflow|attract|retain|recruit|return/.test(d)) && euScoped;
       if(column.id==='B') return performanceDown && /research security|screening|visa|restrict|barrier|exclude|suspend|closed lab|collabor|mobility|openness/.test(t) && (autonomyUp||/security|sovereign|protect/.test(t));
-      return performanceUp && (autonomyDown || (ext.test(t)&&/collabor|cooperat|mobility|recruit|expertise|foreign talent|international talent|science diplomacy|knowledge flow|access/.test(t)));
+      const externalTalentInput=/(?:international|foreign|non-eu|third-country|third country|extra-eu).{0,70}(?:researchers?|scientists?|research talent|scientific talent|expertise|doctoral candidates?|phd students?|stem students?|graduates?|visiting researchers?|research visitors?)|(?:researchers?|scientists?|research talent|scientific talent|expertise|doctoral candidates?|phd students?|stem students?|graduates?|visiting researchers?|research visitors?).{0,70}(?:international|foreign|non-eu|third-country|third country|extra-eu)/.test(t);
+      const talentRetentionMechanism=/retain|retention|stay|post-study|post study|post-research|post research|job search|career|employment|mobility|recruit|attract|access|innovation ecosystem|research capacity|scientific capacity|competitiveness|technological leadership/.test(t);
+      return performanceUp && (autonomyDown || (ext.test(t)&&/collabor|cooperat|mobility|recruit|expertise|foreign talent|international talent|science diplomacy|knowledge flow|access/.test(t)) || (externalTalentInput&&talentRetentionMechanism&&euScoped));
     }
 
     if(row.id==='infrastructure'){
@@ -704,7 +708,8 @@
       [/does europe really have a plan for tech sovereignty/, 'EU tech sovereignty still relies on US platforms.'],
       [/intellectual property governance.*artificial intelligence/, 'AI rule fragmentation weakens EU control over digital power.'],
       [/chips act 2\.0/, 'Chips Act 2.0 tests Europe’s second semiconductor push.'],
-      [/industrial accelerator act count/, 'Industrial Accelerator Act risks weak implementation.']
+      [/industrial accelerator act count/, 'Industrial Accelerator Act risks weak implementation.'],
+      [/talent for innovation attraction platform/, 'Europe’s R&I capability relies partly on attracting and retaining international talent.']
     ];
     for(const [re,label] of fixed){if(re.test(n))return label}
 
@@ -746,6 +751,7 @@
   function whyBullet(x){
     const b=shortBullet(x);
     const t=norm(`${b} ${x?.bibliographicTitle||''}`);
+    if(/talent for innovation attraction platform|international talent/.test(t)) return 'This matters because Europe gains research capability from international students and researchers only if it can attract them and convert study or research stays into longer-term careers.';
     if(/ai export controls|frontier compute/.test(t)) return 'This matters because restrictions on frontier compute can directly limit which models European teams can train, audit and deploy.';
     if(/ai supply-chain governance/.test(t)) return 'This matters because control over model, chip, cloud and data-chain bottlenecks determines where Europe remains dependent.';
     if(/ai rule fragmentation|digital power/.test(t)) return 'This matters because fragmented AI rules reduce Europe’s ability to turn regulation into coherent market and technology leverage.';

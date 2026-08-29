@@ -130,17 +130,17 @@
     </div></section>
 
     <div class="statusbar"><div class="wrap status-inner">
-      <span class="pill">Scanner · every 6 hours + manual</span>
-      <span class="pill">Cumulative corpus · no deletion on quiet scans</span>
+      <span class="pill">Scanner · due every 6 hours + hourly catch-up + manual</span>
+      <span class="pill">4-month core · Highest evidence retained to 6 months</span>
       <span id="scanState" class="pill warn">Last run health · pending</span>
-      <span id="lastScan" class="pill">Last scan · pending</span>
+      <span id="lastScan" class="pill">Last completion · pending</span>
       <span class="pill">Evidence weight · same source-merit rules as Stuff</span>
     </div></div>
 
     <div class="wrap" id="radar">
       <section class="minimum-read" aria-label="Minimum useful read">
         <div><div class="label">Read at least this</div><h2 id="minimumReadTitle">Reading the latest issue pattern…</h2><p id="minimumReadText">The summary is rebuilt from the current admitted material.</p></div>
-        <a href="read/?v=17.13.21">Open the 1-minute read →</a>
+        <a href="read/?v=17.13.25">Open the 1-minute read →</a>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
@@ -161,7 +161,7 @@
 
     <main class="wrap">
       <section id="strand-a" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Evidence</div><h2>What is changing Europe’s R&amp;I position?</h2><p>The subject is EU/European R&I in geopolitical context. Strategic pressure may be explicit or implied through dependence, capability, competition, security, standards, international coordination or control. A major US/China/other external shock is an exception only when its consequence for Europe can be stated specifically in one sentence.</p></div><div id="countA" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Evidence</div><h2>What is changing Europe’s R&amp;I position?</h2><p>The subject is EU/European R&I in geopolitical context. Strategic pressure may be explicit or implied through dependence, capability, competition, security, standards, international coordination or control. External developments qualify only when the source itself establishes a substantive European R&I consequence; the radar does not manufacture Europe relevance from a foreign event.</p></div><div id="countA" class="count">0 items</div></div>
         <div id="noteA" class="scan-note"></div><div id="itemsA" class="cards"></div><button id="moreA" class="more" type="button" hidden>Show more</button>
       </section>
 
@@ -175,14 +175,14 @@
         <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <div class="method"><strong>How accumulation works:</strong> every run stays inside a rolling four-month window, rotates across broad discovery themes, and adds a small finding-context lane based on recurring issues already visible in the radar. Results still have to pass the same admission rules before they appear here. Non-English publications are allowed only when the source provides enough English abstract/summary evidence to verify the finding; the radar does not translate a foreign text and treat that translation as evidence.</div>
+      <div class="method"><strong>How accumulation works:</strong> every run prioritises a rolling four-month core. A bounded source-quality lane also checks months 4–6, but only evidence in the existing Highest source-merit band can enter or remain there. All other A/B evidence, weak signals and Matrix-only recovery keep the normal four-month rule. The scanner rotates across broad discovery themes and adds a small finding-context lane based on recurring issues already visible in the radar. Results still have to pass the same admission rules before they appear here. Non-English publications are allowed only when the source provides enough English abstract/summary evidence to verify the finding; the radar does not translate a foreign text and treat that translation as evidence.</div>
     </main>
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="source_merit.js?v=17.13.21"></script>
-<script src="briefing/insights.js?v=17.13.21"></script>
-<script src="read/issues.js?v=17.13.21"></script>
+<script src="source_merit.js?v=17.13.25"></script>
+<script src="briefing/insights.js?v=17.13.25"></script>
+<script src="read/issues.js?v=17.13.25"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:12}};
@@ -193,6 +193,7 @@ document.getElementById("gateForm").addEventListener("submit",async e=>{e.preven
 document.getElementById("lock").addEventListener("click",()=>{sessionStorage.removeItem("radarUnlocked");location.reload()});
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 function fmtDate(v){if(!v)return "";const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric"}).format(d)}
+function fmtDateTime(v){if(!v)return "";const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v);return new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(d)}
 function cleanText(v){return String(v??"").replace(/\s+/g," ").replace(/\.{5,}/g," ").trim()}
 function repairLetterSpacing(v){
   let s=cleanText(v);
@@ -284,7 +285,8 @@ function whereFrom(x){return [x.source,fmtDate(x.date)].filter(Boolean).join(' �
 function provenanceLabel(x){const p=String(x.discovery_provenance||'').toLowerCase();if(p==='both')return 'Automated + manual';if(p==='manual')return 'Manual candidate';if(p==='automated')return 'Automated discovery';const a=Array.isArray(x.provenance)?x.provenance.join(' ').toLowerCase():'';if(a.includes('manual')&&a.includes('automated'))return 'Automated + manual';if(a.includes('manual'))return 'Manual candidate';return 'Automated discovery'}
 function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
 function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance,x.core_message].join(" ")).toLowerCase()}
-function filtered(items){const q=state.query.trim().toLowerCase();return items.filter(x=>globalThis.RadarInsights?.likelyEnglish?.(claimText(x))!==false&&(!state.onlyNew||x.new_this_scan)&&(!q||searchable(x).includes(q)))}
+function publicDisplayOk(x){const t=cleanText(x.title||x.headline||'');return Boolean(t)&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false&&globalThis.RadarInsights?.likelyEnglish?.(claimText(x))!==false}
+function filtered(items){const q=state.query.trim().toLowerCase();return items.filter(x=>publicDisplayOk(x)&&(!state.onlyNew||x.new_this_scan)&&(!q||searchable(x).includes(q)))}
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
 function biblio(x,label='Bibliography'){
   const title=x.title||x.headline||'';const who=x.authors||'';const meta=[x.source,fmtDate(x.date),x.type].filter(Boolean).join(' · ');const englishTitle=!title||globalThis.RadarInsights?.likelyEnglish?.(title)!==false;
@@ -342,11 +344,14 @@ function wire(){document.getElementById("search").addEventListener("input",e=>{s
 wire();
 async function loadRadar(){
   try{
-    const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const d=await r.json();state.data=d;
+    const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const raw=await r.json();
+    const d={...raw,strand_a:(raw.strand_a||[]).filter(publicDisplayOk),strand_b:(raw.strand_b||[]).filter(publicDisplayOk),strand_c:(raw.strand_c||[]).filter(publicDisplayOk)};state.data=d;
     const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
-    document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${d.scan_health==="ok"?"healthy":"degraded"}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent="Last scan · "+(d.last_updated?fmtDate(d.last_updated):"pending");
-    showNote("rotationNote",sr.rotation_note||"");showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
+    const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";const ageMs=completed?(Date.now()-new Date(completed).getTime()):0;const overdue=Boolean(completed&&Number.isFinite(ageMs)&&ageMs>7*60*60*1000);
+    document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${overdue?"overdue":(d.scan_health==="ok"?"healthy":"degraded")}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(!overdue&&d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent=(explicitCompletion?"Last completion · ":"Last recorded run · ")+(completed?fmtDateTime(completed):"pending");
+    const aged=sr.aged_out_this_scan||{};const agedTotal=Number(sr.aged_out_total_this_scan||Object.values(aged).reduce((a,b)=>a+Number(b||0),0));const ext=Number(sr.extended_highest_retained_a||0)+Number(sr.extended_highest_retained_b||0);const ageNote=agedTotal?`Two-tier window aged out ${agedTotal} item${agedTotal===1?"":"s"} (${["strand_a","strand_b","strand_c"].filter(k=>aged[k]).map(k=>`${k.replace("strand_","").toUpperCase()} ${aged[k]}`).join(", ")}). Core evidence normally expires at 4 months; Highest-merit A/B may remain to 6 months. `:(ext?`${ext} Highest-merit A/B item${ext===1?" is":"s are"} currently retained in months 4–6. `:"");
+    showNote("rotationNote",ageNote+(sr.rotation_note||""));showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
   }catch(e){document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>

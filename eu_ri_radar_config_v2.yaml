@@ -949,3 +949,10 @@ manual_candidate_ingest:
     max_urls_per_live_scan: 10
     lower_pass1_thresholds: false
     prioritize_high_quality_primary_domains: true
+
+# V17.13.25 talent-pipeline note
+# Runtime query banks live in radar_config.json. Knowledge-C now explicitly targets
+# international/third-country researchers, visiting researchers, international doctoral
+# candidates and international STEM students/graduates only where the source connects
+# them to retention, post-study/post-research work, R&I capacity or competitiveness.
+# Generic student mobility/Erasmus material remains excluded.

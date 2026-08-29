@@ -1,4 +1,4 @@
-# Radar admission criteria — V17.13.3
+# Radar admission criteria — V17.13.24
 
 ## Strand A: substantive EU R&I in strategic context
 
@@ -25,16 +25,11 @@ A source can pass without the word *geopolitics* when the evidence contains at l
 
 A lone statement that Europe is “competitive”, “innovative”, “leading” or “lagging” is **not** enough.
 
-### Exceptional external-shock route
+### External developments: source-supported Europe relevance only
 
-A development outside Europe can still belong when it **materially changes the strategic position of European R&I**. This is deliberately narrow. All of the following are required:
+Inference-only external-shock admission is **disabled**. A development centred on the US, China, India, the UK or another non-EU actor cannot enter simply because the radar can imagine a consequence for Europe or find a same-domain European comparator.
 
-- a major step-change, breakthrough, cutoff or comparable shock in a strategically important R&I capability (for example AI, chips, quantum, biotechnology, frontier compute);
-- a major external actor such as the US, China or another relevant capability holder;
-- a current admitted EU-context finding in the **same domain**; and
-- a **specific one-sentence plain-language bridge** explaining what changes for Europe’s R&I capability, access, dependence or competitive position.
-
-The bridge is stored as an **editorial radar inference**, not attributed to the source. Generic foreign technology news, ordinary product launches and “this matters to Europe” boilerplate do not pass.
+External developments may still qualify when the **source itself** explicitly establishes all three ordinary Strand-A links: a substantive EU/European consequence, an R&I capability/mechanism, and geopolitical/economic-security significance. Such records use the normal direct-EU route. The radar may summarise that source-backed mechanism, but it may not manufacture an Europe-impact bridge and use its own inference as admission evidence.
 
 ## Aboutness is source-aware
 
@@ -56,7 +51,7 @@ Keep the dominant failure/defer reason precise: `insufficient_text`, `no_direct_
 
 ## Publication quality and reader claims
 
-English remains a hard **evidence** invariant, not a whole-publication invariant. A non-English publication may pass when a source-provided/indexed English abstract, executive summary or equivalent English description is substantive enough to establish the finding and admission bridge. Title-only English metadata is insufficient, and machine translation is not used as admission evidence. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
+The public A/B radar is **English-publication only**. Explicit foreign-language metadata rejects. The publication title must positively pass the English title gate, and meaningful Cyrillic/Greek/CJK/Arabic or other non-Latin source prose rejects. An English abstract or indexed English summary does **not** rescue a foreign-language publication. Machine translation is never an admission basis. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
 
 Titles, authors, source, date, links, abstracts/summaries and review evidence remain available separately.
 
@@ -68,11 +63,11 @@ Strand B is for developed/adapted/extended/refined **reusable futures or forward
 
 ## Strand C
 
-Strand C contains externally observable weak signals/developments that can change how Strand-A evidence should be read. It is deliberately secondary. The public corpus applies a **15% maximum share** for C; this is not a quota to fill. Within the cap, a qualifying external strategic shock is prioritised over ordinary weak signals because the cap must not suppress a genuinely position-changing event.
+Strand C contains externally observable weak signals/developments that can change how Strand-A evidence should be read. It is deliberately secondary. The public corpus applies a **15% maximum share** for C; this is not a quota to fill. Within the cap, every signal still needs a source-supported EU/R&I mechanism; inference-only external-shock anchoring is not permitted.
 
 ## Time boundary
 
-All public A/B/C evidence uses a hard rolling **four-calendar-month** floor. Saved historical rows or Matrix recovery cannot widen it.
+Public evidence uses a **four-calendar-month core**. A/B has one narrow quality exception: evidence scoring **Highest (>=93/100)** under the radar's existing source-merit model may be discovered and retained until six calendar months. Other A/B evidence, all Strand C signals, and Matrix-only recovery use the hard four-month floor. Saved history cannot widen either boundary.
 
 ## Matrix hand-off
 
