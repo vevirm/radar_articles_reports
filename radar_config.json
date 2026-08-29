@@ -1655,7 +1655,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.26-source-supported-english-balanced-matrix-reasoning",
+  "recall_profile_version": "v17.13.32-source-supported-english-balanced-matrix-citation-snowball",
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1820,5 +1820,18 @@
       ]
     }
   ],
-  "foresight_expert_seed_rule": "Named people may receive bounded person-centric discovery attention; no domain or institution is privileged, and every discovered item must pass the ordinary EU R&I A/B gates."
+  "foresight_expert_seed_rule": "Named people may receive bounded person-centric discovery attention; no domain or institution is privileged, and every discovered item must pass the ordinary EU R&I A/B gates.",
+  "citation_snowball_profile_version": "v17.13.32-shared-reference-forward-snowball",
+  "citation_snowball_enabled": true,
+  "citation_snowball_stage_seconds": 120,
+  "citation_snowball_min_seconds_remaining": 150,
+  "citation_snowball_seed_limit": 20,
+  "citation_snowball_min_seed_support": 2,
+  "citation_snowball_reference_pool_limit": 100,
+  "citation_snowball_anchor_limit": 12,
+  "citation_snowball_forward_rows": 25,
+  "citation_snowball_pinned_reference_slots": 3,
+  "citation_snowball_pinned_seed_titles": [
+    "The Global Landscape of National AI Strategies"
+  ]
 }

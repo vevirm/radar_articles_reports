@@ -176,7 +176,8 @@ ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-f
 MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.26-balanced-reasoning-coverage"))
 SOURCE_ATTENTION_PROFILE_VERSION = str(CONFIG.get("source_attention_profile_version", "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
-RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.26-source-supported-english-balanced-matrix-reasoning"))
+RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.32-citation-snowball-consensus"))
+CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_version", "v17.13.32-shared-reference-forward-snowball"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
@@ -3506,6 +3507,303 @@ def collect_openalex(
     if isinstance(execution_stats, dict):
         execution_stats.setdefault("openalex_queries", set()).update(executed_queries)
     return dedupe_candidates(out)
+
+
+def _snowball_seed_weight(item: dict[str, Any]) -> float:
+    """Quality weight for bibliography seeds; it never changes admission."""
+    tier = normalized(item.get("source_tier", ""))
+    typ = normalized(item.get("type", ""))
+    if "tier 1" in tier:
+        return 1.50
+    if "tier 2" in tier and "broad" not in tier:
+        return 1.25
+    if "tier 2" in tier:
+        return 1.10
+    if "peer reviewed" in typ or "peer-reviewed" in typ:
+        return 1.05
+    return 0.80
+
+
+def _snowball_title_similarity(a: str, b: str) -> float:
+    aa = set(norm_title(a).split())
+    bb = set(norm_title(b).split())
+    if not aa or not bb:
+        return 0.0
+    return len(aa & bb) / max(1, len(aa | bb))
+
+
+def _snowball_seed_pool(previous: dict[str, Any], live_candidates: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Choose recent high-quality Strand-A publications as citation-network seeds.
+
+    The lane is discovery-only. A seed can guide us to other work but can never make a
+    cited/citing paper pass the ordinary EU + R&I + strategic-context gates.
+    """
+    pinned = {norm_title(x) for x in CONFIG.get("citation_snowball_pinned_seed_titles", []) if clean_text(x)}
+    raw: list[dict[str, Any]] = []
+    raw.extend(x for x in previous.get("strand_a", []) if isinstance(x, dict))
+    raw.extend(x for x in live_candidates if isinstance(x, dict) and x.get("strand") in {"A", "both"})
+    by_key: dict[str, dict[str, Any]] = {}
+    for item in raw:
+        title = clean_text(item.get("title"))
+        if not title:
+            continue
+        d = parse_date(item.get("date"))
+        if d and d < DATE_FLOOR:
+            continue
+        tier = normalized(item.get("source_tier", ""))
+        typ = normalized(item.get("type", ""))
+        is_pinned = norm_title(title) in pinned
+        quality_ok = (
+            "tier 1" in tier
+            or "tier 2" in tier
+            or "peer reviewed" in typ
+            or "peer-reviewed" in typ
+        )
+        if not (quality_ok or is_pinned):
+            continue
+        # Keep the lane topical: only evidence already accepted for Strand A is a seed.
+        if item.get("eu_relevance") not in {"direct", "material_external"} and not is_pinned:
+            continue
+        key = identity(internalize_previous(item))
+        old = by_key.get(key)
+        if old is None or (_snowball_seed_weight(item), d or dt.date.min) > (_snowball_seed_weight(old), parse_date(old.get("date")) or dt.date.min):
+            x = dict(item)
+            x["_snowball_pinned"] = is_pinned
+            by_key[key] = x
+    vals = list(by_key.values())
+    vals.sort(key=lambda x: (
+        0 if x.get("_snowball_pinned") else 1,
+        -_snowball_seed_weight(x),
+        -(parse_date(x.get("date")) or dt.date.min).toordinal(),
+    ))
+    return vals[:max(1, int(CONFIG.get("citation_snowball_seed_limit", 20) or 20))]
+
+
+def _snowball_resolve_seed(seed: dict[str, Any], timeout: int) -> dict[str, Any] | None:
+    title = clean_text(seed.get("title"))
+    if not title:
+        return None
+    doi_match = re.search(r"10\.\d{4,9}/[^\s?#]+", clean_text(seed.get("link", "")), re.I)
+    params: dict[str, Any]
+    if doi_match:
+        doi = doi_match.group(0).rstrip(".,)")
+        params = {"filter": f"doi:https://doi.org/{doi}", "per-page": 3}
+    else:
+        params = {"search": title, "per-page": 5}
+    r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+    if r.status_code != 200:
+        return None
+    results = (r.json() or {}).get("results") or []
+    if not results:
+        return None
+    exact = [w for w in results if norm_title(w.get("display_name", "")) == norm_title(title)]
+    if exact:
+        return exact[0]
+    ranked = sorted(results, key=lambda w: _snowball_title_similarity(title, w.get("display_name", "")), reverse=True)
+    if ranked and _snowball_title_similarity(title, ranked[0].get("display_name", "")) >= 0.78:
+        return ranked[0]
+    return None
+
+
+def _snowball_fetch_works(ids: list[str], timeout: int) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for start in range(0, len(ids), 100):
+        chunk = [x.rsplit("/", 1)[-1] for x in ids[start:start + 100] if clean_text(x)]
+        if not chunk:
+            continue
+        r = SESSION.get(
+            "https://api.openalex.org/works",
+            params={"filter": "openalex:" + "|".join(chunk), "per-page": len(chunk)},
+            timeout=timeout,
+        )
+        if r.status_code == 200:
+            out.extend((r.json() or {}).get("results") or [])
+    return out
+
+
+def collect_citation_snowball(
+    previous: dict[str, Any],
+    live_candidates: Iterable[dict[str, Any]],
+    warnings: list[str],
+    stage_deadline: float | None,
+    execution_stats: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Backward + forward snowballing from high-quality accepted Strand-A publications.
+
+    First, count references shared across the seed papers (bibliographic coupling in reverse):
+    references cited by several good radar publications become consensus anchors. Then search
+    *forward* from those anchors for recent papers that cite them. A tiny pinned-seed allowance
+    lets an explicitly important seed contribute a few distinctive anchors even before another
+    seed co-cites them. Every discovered work is still passed through candidate_from_openalex().
+    """
+    stats: dict[str, Any] = {
+        "enabled": bool(CONFIG.get("citation_snowball_enabled", True)),
+        "seeds_planned": 0, "seeds_resolved": 0, "references_observed": 0,
+        "shared_references": 0, "anchors_selected": 0, "forward_queries": 0,
+        "backward_admitted": 0, "forward_admitted": 0, "admitted_unique": 0,
+        "anchors": [],
+    }
+    if not stats["enabled"]:
+        return [], stats
+    if stage_deadline is not None and time.monotonic() >= stage_deadline:
+        return [], stats
+    seeds = _snowball_seed_pool(previous, live_candidates)
+    stats["seeds_planned"] = len(seeds)
+    if not seeds:
+        return [], stats
+
+    timeout = max(4, int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+    min_interval = max(0.0, float(CONFIG.get("openalex_public_min_interval_seconds", 0.30) or 0.30))
+    min_support = max(2, int(CONFIG.get("citation_snowball_min_seed_support", 2) or 2))
+    anchor_limit = max(1, int(CONFIG.get("citation_snowball_anchor_limit", 12) or 12))
+    pinned_slots = max(0, int(CONFIG.get("citation_snowball_pinned_reference_slots", 3) or 0))
+    pool_limit = max(anchor_limit, int(CONFIG.get("citation_snowball_reference_pool_limit", 100) or 100))
+    forward_rows = max(5, min(50, int(CONFIG.get("citation_snowball_forward_rows", 25) or 25)))
+
+    ref_count: Counter = Counter()
+    ref_weight: Counter = Counter()
+    ref_seeds: dict[str, list[str]] = {}
+    ref_pinned: set[str] = set()
+    resolved_seed_titles: list[str] = []
+    last_request = 0.0
+
+    def wait_slot() -> bool:
+        nonlocal last_request
+        if stage_deadline is not None and time.monotonic() >= stage_deadline:
+            return False
+        wait = min_interval - (time.monotonic() - last_request)
+        if wait > 0:
+            time.sleep(wait)
+        last_request = time.monotonic()
+        return stage_deadline is None or time.monotonic() < stage_deadline
+
+    try:
+        for seed in seeds:
+            if not wait_slot():
+                break
+            try:
+                work = _snowball_resolve_seed(seed, timeout)
+            except requests.RequestException:
+                continue
+            if not work:
+                continue
+            refs = list(dict.fromkeys(clean_text(x) for x in (work.get("referenced_works") or []) if clean_text(x)))
+            if not refs:
+                continue
+            stats["seeds_resolved"] += 1
+            seed_title = clean_text(seed.get("title"))
+            resolved_seed_titles.append(seed_title)
+            weight = _snowball_seed_weight(seed)
+            for rid in refs:
+                ref_count[rid] += 1
+                ref_weight[rid] += weight
+                ref_seeds.setdefault(rid, []).append(seed_title)
+                if seed.get("_snowball_pinned"):
+                    ref_pinned.add(rid)
+    except Exception as e:
+        warnings.append(f"Citation snowball seed resolution: {type(e).__name__}")
+
+    stats["resolved_seed_titles"] = resolved_seed_titles[:20]
+    stats["references_observed"] = len(ref_count)
+    shared = [rid for rid, n in ref_count.items() if n >= min_support]
+    stats["shared_references"] = len(shared)
+    pool = sorted(
+        set(shared) | ref_pinned,
+        key=lambda rid: (-ref_count[rid], -ref_weight[rid], 0 if rid in ref_pinned else 1, rid),
+    )[:pool_limit]
+    if not pool:
+        return [], stats
+
+    if not wait_slot():
+        return [], stats
+    try:
+        metadata = _snowball_fetch_works(pool, timeout)
+    except requests.RequestException:
+        metadata = []
+    by_id = {clean_text(w.get("id")): w for w in metadata if clean_text(w.get("id"))}
+    ranked = sorted(
+        [rid for rid in pool if rid in by_id],
+        key=lambda rid: (
+            -ref_count[rid],
+            -ref_weight[rid],
+            -int(by_id[rid].get("cited_by_count") or 0),
+            -(parse_date(by_id[rid].get("publication_date")) or dt.date.min).toordinal(),
+        ),
+    )
+
+    anchors: list[str] = []
+    pinned_used = 0
+    for rid in ranked:
+        if ref_count[rid] >= min_support:
+            anchors.append(rid)
+        elif rid in ref_pinned and pinned_used < pinned_slots:
+            anchors.append(rid)
+            pinned_used += 1
+        if len(anchors) >= anchor_limit:
+            break
+    stats["anchors_selected"] = len(anchors)
+
+    out: list[dict[str, Any]] = []
+    for rid in anchors:
+        work = by_id.get(rid) or {}
+        anchor_title = clean_text(work.get("display_name")) or rid.rsplit("/", 1)[-1]
+        seed_titles = list(dict.fromkeys(ref_seeds.get(rid, [])))[:8]
+        anchor_info = {
+            "openalex_id": rid,
+            "title": anchor_title,
+            "seed_support": int(ref_count[rid]),
+            "weighted_support": round(float(ref_weight[rid]), 2),
+            "cited_by_count": int(work.get("cited_by_count") or 0),
+            "pinned_seed_reference": bool(rid in ref_pinned),
+            "seed_titles": seed_titles,
+        }
+        stats["anchors"].append(anchor_info)
+
+        # Backward candidate: only current-window references can enter the radar itself.
+        backward = candidate_from_openalex(work, date_floor=DATE_FLOOR)
+        if backward:
+            backward["discovery_provenance"] = "citation_snowball"
+            backward["provenance"] = list(dict.fromkeys(list(backward.get("provenance") or []) + ["citation_snowball_backward"]))
+            backward["citation_snowball"] = {**anchor_info, "direction": "backward_shared_reference"}
+            out.append(backward)
+            stats["backward_admitted"] += 1
+
+        if not wait_slot():
+            break
+        oid = rid.rsplit("/", 1)[-1]
+        params = {
+            "filter": f"cites:{oid},from_publication_date:{DATE_FLOOR.isoformat()},to_publication_date:{dt.date.today().isoformat()}",
+            "sort": "publication_date:desc",
+            "per-page": forward_rows,
+        }
+        try:
+            r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+        except requests.RequestException:
+            continue
+        if r.status_code == 429:
+            warnings.append("Citation snowball OpenAlex HTTP 429; snowball lane stopped for this scan")
+            break
+        if r.status_code != 200:
+            continue
+        stats["forward_queries"] += 1
+        for citing in (r.json() or {}).get("results") or []:
+            cand = candidate_from_openalex(citing, date_floor=DATE_FLOOR)
+            if not cand:
+                continue
+            cand["discovery_provenance"] = "citation_snowball"
+            cand["provenance"] = list(dict.fromkeys(list(cand.get("provenance") or []) + ["citation_snowball_forward"]))
+            cand["citation_snowball"] = {**anchor_info, "direction": "forward_from_shared_reference"}
+            out.append(cand)
+            stats["forward_admitted"] += 1
+
+    unique = dedupe_candidates(out)
+    stats["admitted_unique"] = len(unique)
+    if isinstance(execution_stats, dict):
+        execution_stats["citation_snowball_seeds_resolved"] = stats["seeds_resolved"]
+        execution_stats["citation_snowball_anchors"] = stats["anchors_selected"]
+        execution_stats["citation_snowball_forward_queries"] = stats["forward_queries"]
+        execution_stats["citation_snowball_admitted"] = stats["admitted_unique"]
+    return unique, stats
 
 def crossref_date(item: dict[str, Any]) -> dt.date | None:
     for key in ("published-online", "published-print", "published", "issued"):
@@ -8326,6 +8624,31 @@ def main() -> int:
             execution_stats["quiet_rescue_crossref_executed"] = rescue_cr_count
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(rescue_execution.get("crossref_abstracts_enrichment_attempted", 0))
 
+    # Citation snowballing is a recall lane, not an admission shortcut. It starts from
+    # accepted/high-quality Strand-A publications, identifies references repeatedly cited
+    # across those seeds, and follows those consensus references forward into the current
+    # window. A small pinned-seed allowance supports curator-identified papers such as the
+    # Radu national-AI-strategies paper without letting one bibliography dominate the lane.
+    snowball_stats: dict[str, Any] = {"enabled": bool(CONFIG.get("citation_snowball_enabled", True))}
+    snowball_candidates: list[dict[str, Any]] = []
+    snowball_min_remaining = max(60, int(CONFIG.get("citation_snowball_min_seconds_remaining", 150) or 150))
+    if snowball_stats["enabled"] and budget_remaining() > snowball_min_remaining and not oa_failed:
+        snowball_seconds = min(
+            int(CONFIG.get("citation_snowball_stage_seconds", 120) or 120),
+            max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
+        )
+        if snowball_seconds >= 30:
+            log_progress("Citation snowball: ranking shared references across high-quality Strand-A seeds, then checking recent forward citations")
+            try:
+                snowball_candidates, snowball_stats = collect_citation_snowball(
+                    previous, oa + cr, warnings, time.monotonic() + snowball_seconds, execution_stats
+                )
+            except Exception as e:
+                warnings.append(f"Citation snowball fatal stage error: {type(e).__name__}: {str(e)[:160]}")
+                snowball_candidates = []
+                snowball_stats = {"enabled": True, "error": type(e).__name__, "admitted_unique": 0}
+            oa.extend(snowball_candidates)
+
     # Exact URLs supplied through the curated manual lane are retried first. This is a
     # precision-preserving recall repair: only the supplied URL is fetched, and admission
     # still uses the normal source-aware A/B gate.
@@ -8931,6 +9254,7 @@ def main() -> int:
         "matrix_balance_rotation_profile_version": MATRIX_BALANCE_ROTATION_PROFILE_VERSION,
         "source_attention_profile_version": SOURCE_ATTENTION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
+        "citation_snowball_profile_version": CITATION_SNOWBALL_PROFILE_VERSION,
         "window_policy_version": WINDOW_POLICY_VERSION,
         "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
         "rule_fix_source_recovery_version": (
@@ -8989,6 +9313,7 @@ def main() -> int:
                 "admitted_candidates": foresight_author_candidates_count,
             },
             "weak_signal_evidence_followup": dict(signal_evidence_followup_stats),
+            "citation_snowball": snowball_stats,
             "finding_context_queries_this_scan": finding_context_focus,
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
@@ -9042,6 +9367,11 @@ def main() -> int:
             "finding_context_queries_executed": finding_context_executed,
             "openalex_exploration_queries_executed": oa_explore_executed + int(execution_stats.get("quiet_rescue_openalex_executed", 0)),
             "openalex_missing_abstract_enrichment_attempted": int(execution_stats.get("openalex_abstracts_enrichment_attempted", 0)),
+            "citation_snowball_seeds_resolved": int(snowball_stats.get("seeds_resolved", 0) or 0),
+            "citation_snowball_shared_references": int(snowball_stats.get("shared_references", 0) or 0),
+            "citation_snowball_anchors_selected": int(snowball_stats.get("anchors_selected", 0) or 0),
+            "citation_snowball_forward_queries": int(snowball_stats.get("forward_queries", 0) or 0),
+            "citation_snowball_admitted": int(snowball_stats.get("admitted_unique", 0) or 0),
             "crossref_broad_queries_this_run": len(cr_batch),
             "crossref_broad_queries_executed": len(set(execution_stats.get("crossref_broad_queries", set()))),
             "crossref_base_queries_executed": cr_base_executed,

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-29T19:23Z",
+  "last_updated": "2026-08-29T19:54Z",
   "run_started_at": "2026-08-29T19:04Z",
   "run_completed_at": "2026-08-29T19:23Z",
   "first_scan_complete": true,
@@ -10546,7 +10546,7 @@
   "rotation_profile_version": "v17.7.1-executed-work-rotation",
   "matrix_balance_rotation_profile_version": "v17.13.26-balanced-reasoning-coverage",
   "source_attention_profile_version": "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening",
-  "recall_profile_version": "v17.13.26-source-supported-english-balanced-matrix-reasoning",
+  "recall_profile_version": "v17.13.32-source-supported-english-balanced-matrix-citation-snowball",
   "window_policy_version": "v17.13.31-six-month-low-evidence-signals",
   "rule_fix_profile_version": "v17.12.11-A-recall-strict-C-retirements-final",
   "rule_fix_source_recovery_version": "",
@@ -12852,6 +12852,19 @@
       "empty_cells_published": 0,
       "published_empty_cells": [],
       "published_qualifying": 43
+    },
+    "citation_snowball": {
+      "enabled": true,
+      "status": "installed_for_next_scan",
+      "profile_version": "v17.13.32-shared-reference-forward-snowball",
+      "pinned_seed_titles": [
+        "The Global Landscape of National AI Strategies"
+      ],
+      "seeds_resolved": 0,
+      "shared_references": 0,
+      "anchors_selected": 0,
+      "forward_queries": 0,
+      "admitted_unique": 0
     }
   },
   "strand_a": [
@@ -13031,6 +13044,55 @@
         "I-A",
         "K-A"
       ]
+    },
+    {
+      "title": "The Global Landscape of National AI Strategies",
+      "authors": "Roxana Radu",
+      "source": "World Bank",
+      "date": "2026-07-28",
+      "link": "https://thedocs.worldbank.org/en/doc/f74e811954e7a2a0045cd6330c967590-0050062026/the-global-landscape-of-national-ai-strategies",
+      "type": "working paper",
+      "strand": "A",
+      "eu_relevance": "direct",
+      "summary": "Radu maps the global evolution of national AI strategies and shows a second generation increasingly centered on compute capacity, workforce transformation and AI sovereignty. For Europe, the paper links the EU AI Act, European Chips Act, EuroStack and concentrated cloud/compute infrastructure to strategic autonomy, international competition and public investment choices.",
+      "core_message": "National AI strategies increasingly connect compute capacity and AI sovereignty to geopolitical competition.",
+      "relevance_note": "Direct European relevance verified in the full text through the EU AI Act, European Chips Act and EuroStack; R&I mechanisms include compute and supercomputing capacity, AI innovation and research ecosystems; strategic mechanisms include AI sovereignty, strategic autonomy and technology competition.",
+      "source_tier": "Tier 3",
+      "a_route": "triangulated-strategic-context",
+      "bridge_sentence": "National AI strategies sit between geopolitical pressures and private-sector innovation, shaping strategic priorities and domestic resource mobilisation.",
+      "external_eu_bridge": "",
+      "external_eu_bridge_is_inference": false,
+      "eu_evidence": [
+        "EU AI Act",
+        "European Chips Act",
+        "EuroStack"
+      ],
+      "ri_evidence": [
+        "compute capacity",
+        "supercomputing infrastructure",
+        "AI innovation",
+        "research ecosystems"
+      ],
+      "geo_evidence": [
+        "AI sovereignty",
+        "strategic autonomy",
+        "strategic competition",
+        "technology dependence"
+      ],
+      "text_mode": "full_text",
+      "first_seen": "2026-08-29T19:54Z",
+      "new_this_scan": false,
+      "provenance": [
+        "curator_supplied_pdf",
+        "manual_source_review"
+      ],
+      "discovery_provenance": "manual",
+      "evidence_status": "verified_primary_source",
+      "source_text_mode": "full_text",
+      "review_resolved_url": "https://thedocs.worldbank.org/en/doc/f74e811954e7a2a0045cd6330c967590-0050062026/the-global-landscape-of-national-ai-strategies",
+      "source_review_status": "reviewed_pass_core_gate",
+      "source_reviewed_at": "2026-08-29T19:54Z",
+      "source_review_basis": "Full uploaded working paper reviewed. It substantively discusses European AI governance and industrial/compute strategy, including the EU AI Act, European Chips Act and EuroStack, and explicitly connects AI infrastructure, sovereignty and strategic competition."
     },
     {
       "title": "EUROPEAN CHIPS ACT 2.0: STRATEGIC AUTONOMY AND TECHNOLOGICAL LEADERSHIP OF THE EU IN THE GLOBAL SEMICONDUCTOR ECOSYSTEM",
@@ -19379,7 +19441,12 @@
       "openalex_reject_no_ri": 353,
       "openalex_reject_no_strategic_context": 48,
       "openalex_reject_non_english": 434
-    }
+    },
+    "citation_snowball_seeds_resolved": 0,
+    "citation_snowball_shared_references": 0,
+    "citation_snowball_anchors_selected": 0,
+    "citation_snowball_forward_queries": 0,
+    "citation_snowball_admitted": 0
   },
   "scan_diagnostics": {
     "source_warning_count": 20,
@@ -19403,5 +19470,13 @@
       "OpenAlex HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run; continuing with Crossref and direct publisher/institution scanning"
     ],
     "transport_failure_warning_count": 4
+  },
+  "citation_snowball_profile_version": "v17.13.32-shared-reference-forward-snowball",
+  "post_scan_curator_update": {
+    "updated_at": "2026-08-29T19:54Z",
+    "added_titles": [
+      "The Global Landscape of National AI Strategies"
+    ],
+    "note": "Curator-supplied Radu paper reviewed in full and added to Strand A. Citation snowballing is installed for subsequent scanner runs; this post-scan update did not execute the new network lane."
   }
 }
