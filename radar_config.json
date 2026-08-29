@@ -1725,7 +1725,6 @@
   "priority_people_crossref_enabled": true,
   "priority_people_rule": "Curated researchers receive extra discovery attention inside the ordinary scholarly rotation. Their works are not labelled, separated, or displayed differently, and admission criteria are unchanged.",
   "priority_people_fallback_rule": "If exact-author discovery yields nothing, use affiliation + topic hints for a bounded contextual scholarly query. Results from this fallback are processed exactly like all other scholarly discoveries and may belong to any researcher.",
-  "strand_c_max_share": 0.15,
   "priority_people_trigger_below_scholarly_candidates": 18,
   "finding_context_query_bank_size": 12,
   "finding_context_queries_per_scan": 4,
@@ -1795,5 +1794,31 @@
     "radar_evidence": "policy-technical R&I language",
     "excel_export": "technical audit language and classifier detail"
   },
-  "presentation_profile_version": "v17.13.28-source-specific-radar-and-source-bullets"
+  "presentation_profile_version": "v17.13.28-source-specific-radar-and-source-bullets",
+  "weak_signal_retention_months": 6,
+  "foresight_author_followup_enabled": true,
+  "foresight_author_followup_per_scan": 4,
+  "foresight_author_followup_stage_seconds": 90,
+  "foresight_author_followup_min_b_items": 1,
+  "foresight_author_followup_rule": "Authors already evidenced by admitted Strand-B foresight/method publications receive a bounded rotating exact-author check in OpenAlex/Crossref. Their later works must pass the ordinary A/B gates; no institution or domain receives a permanent lane.",
+  "weak_signal_evidence_followup_enabled": true,
+  "weak_signal_evidence_followup_per_scan": 6,
+  "weak_signal_evidence_followup_links_per_signal": 5,
+  "weak_signal_evidence_followup_queries_per_scan": 4,
+  "weak_signal_evidence_followup_stage_seconds": 120,
+  "weak_signal_evidence_followup_recheck_days": 21,
+  "weak_signal_evidence_followup_rule": "An interesting low-evidence C item that cites or points to research/report/publication evidence may trigger bounded link-following and scholarly search. Any stronger source is admitted separately through the ordinary A/B gates; the C item itself remains low evidence.",
+  "foresight_expert_seeds": [
+    {
+      "name": "Roxana Radu",
+      "category": "foresight / strategic technology governance",
+      "affiliation_hint": "University of Oxford",
+      "topic_hints": [
+        "AI governance",
+        "national AI strategies",
+        "digital technology policy"
+      ]
+    }
+  ],
+  "foresight_expert_seed_rule": "Named people may receive bounded person-centric discovery attention; no domain or institution is privileged, and every discovered item must pass the ordinary EU R&I A/B gates."
 }

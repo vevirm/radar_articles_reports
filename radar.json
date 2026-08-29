@@ -6,7 +6,7 @@
   "corpus_start_date": "2026-04-29",
   "preferred_corpus_start_date": "2026-04-29",
   "extended_top_quality_start_date": "2026-02-28",
-  "corpus_window_policy": "4-month core; Highest source-merit evidence retained/discovered to 6 months",
+  "corpus_window_policy": "4-month A/B core; Highest source-merit A/B evidence retained/discovered to 6 months; weak signals retained 6 months at low evidential status",
   "source_expansion_version": "v17.5.2-gap-report-recall",
   "quality_profile_version": "v17.13.24-source-supported-relevance-english-publications",
   "aboutness_profile_version": "v17.9.0-source-length-aware",
@@ -10515,7 +10515,7 @@
   "backfill_complete": false,
   "signal_discovery_version": "v17.7.4-direct-institutional-signals",
   "signal_quality_profile_version": "v17.9.0-source-aware-aboutness-matrix-rubric",
-  "c_admission_profile_version": "v17.13.1-minority-C-cap",
+  "c_admission_profile_version": "v17.13.31-six-month-low-evidence-C-evidence-followup",
   "retired_signal_headlines": [
     "Biological AI models: new paradigms to leverage the languages of life",
     "Canada-Japan Funding Fuels Xanadu and Mitsubishi Chemical Partnership on Quantum Semiconductor Research",
@@ -10546,7 +10546,7 @@
   "matrix_balance_rotation_profile_version": "v17.13.26-balanced-reasoning-coverage",
   "source_attention_profile_version": "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening",
   "recall_profile_version": "v17.13.26-source-supported-english-balanced-matrix-reasoning",
-  "window_policy_version": "v17.13.23-four-core-highest-six",
+  "window_policy_version": "v17.13.31-six-month-low-evidence-signals",
   "rule_fix_profile_version": "v17.12.11-A-recall-strict-C-retirements-final",
   "rule_fix_source_recovery_version": "",
   "allocation_profile_version": "v17.13.7-recurring-multifactor-rotation",
@@ -12252,7 +12252,10 @@
     "finding_context_cursor": 0,
     "extended_highest_source_cursor": 18,
     "last_started_at": "2026-08-29T16:45Z",
-    "last_completed_at": "2026-08-29T17:04Z"
+    "last_completed_at": "2026-08-29T17:04Z",
+    "foresight_author_cursor": 0,
+    "foresight_author_completed_cycles": 0,
+    "weak_signal_evidence_followup": {}
   },
   "zero_config_scan": true,
   "admission_profile": "v17.13.1-eu-ri-geopolitics-core-with-material-external-shock-exception",
@@ -12275,7 +12278,11 @@
     "ab_four_month_backfill_this_run": true,
     "c_window_start": "2026-08-22T16:45Z",
     "c_window_end": "2026-08-29T16:45Z",
-    "c_recovery_backfill_this_run": false
+    "c_recovery_backfill_this_run": false,
+    "c_retention_floor": "2026-02-28",
+    "c_retention_months": 6,
+    "c_evidence_status": "low",
+    "c_discovery_lookback_hours": 168
   },
   "scan_results": {
     "new_a": 7,
@@ -12306,7 +12313,7 @@
     "finding_context_queries_executed": 4,
     "note_a": "",
     "note_b": "This scan added 0 new Strand B item(s). Earlier accepted items remain in the corpus.",
-    "note_c": "This scan added 0 new weak signal(s). Strand C remains on the normal four-month retention window.",
+    "note_c": "This scan added 0 new weak signal(s). Strand C remains low evidence and is retained for six months.",
     "frontier_gap_targets": [
       "rules-C",
       "conversion-C",
@@ -18360,76 +18367,6 @@
   ],
   "strand_c": [
     {
-      "headline": "Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors",
-      "source": "Jacques Delors Institute",
-      "date": "2026-10-07T12:00Z",
-      "link": "https://institutdelors.eu/content/uploads/2026/07/TEMPLATE-BLOGPOST-MOULING-EN.pdf",
-      "anchor": "The EU's Tech Sovereignty Package and the future of European digital power | Digital Watch Observatory (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "R&I competitiveness / technological capabilities",
-      "signal_type": "contradicts",
-      "signal_kind": "restriction / security",
-      "core_message": "Moulin: “Strengthening European sovereignty: from integration to competitiveness” - Institut Jacques Delors.",
-      "why_it_matters": "Europe's relative R&I capability may shift in technologies that shape geopolitical power.",
-      "signal_note": "Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors. This may change Europe's relative research and innovation capacity in technologies that increasingly shape geopolitical power.",
-      "first_seen": "2026-08-28T06:44Z",
-      "new_this_scan": false,
-      "what": "Moulin: “Strengthening European sovereignty: from integration to competitiveness” - Institut Jacques Delors."
-    },
-    {
-      "headline": "The Circular Economy: A Strategic Lever for Europe’s Industrial Sovereignty - Institut Jacques Delors",
-      "source": "Jacques Delors Institute",
-      "date": "2026-10-07T12:00Z",
-      "link": "https://institutdelors.eu/content/uploads/2026/06/BGP_ECO_CIRCU-EN.pdf",
-      "anchor": "EU: Shepherded by Brussels, Europe awakens to Chinese technology (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "economic security and R&I",
-      "signal_type": "accelerates",
-      "signal_kind": "restriction / security",
-      "core_message": "Strategic dependencies are changing Europe’s room for manoeuvre in research and technology.",
-      "why_it_matters": "Economic-security policy may steer European R&I funding, capability and dependencies.",
-      "signal_note": "The Circular Economy: A Strategic Lever for Europe’s Industrial Sovereignty - Institut Jacques Delors. This links research and innovation capacity more directly to economic-security policy, funding and strategic dependencies.",
-      "first_seen": "2026-08-28T06:44Z",
-      "new_this_scan": false,
-      "what": "Strategic dependencies are changing Europe’s room for manoeuvre in research and technology."
-    },
-    {
-      "headline": "GenAI4EU: Funding opportunities to boost Generative AI “made in Europe”",
-      "source": "European Commission — Digital Strategy",
-      "date": "2026-09-30T12:00Z",
-      "link": "https://ec.europa.eu/info/funding-tenders/opportunities/docs/2021-2027/digital/wp-call/2025/call-fiche_digital-2025-ai-08_en.pdf",
-      "anchor": "The AI Implementation Gap: Policy–Audit Misalignment in the UAE and Egypt (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "critical and emerging technologies",
-      "signal_type": "accelerates",
-      "signal_kind": "investment / capacity",
-      "what": "GenAI4EU: Funding opportunities to boost Generative AI “made in Europe”.",
-      "core_message": "GenAI4EU: Funding opportunities to boost Generative AI “made in Europe”.",
-      "why_it_matters": "This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
-      "signal_note": "GenAI4EU: Funding opportunities to boost Generative AI “made in Europe”. This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "first_seen": "2026-08-28T20:50Z",
-      "new_this_scan": false
-    },
-    {
-      "headline": "EuroCC 3 and CASTIEL 3: Further supporting the existing European network of National Competence Centres for HPC (NCCs)",
-      "source": "EuroHPC Joint Undertaking",
-      "date": "2026-08-31T12:00Z",
-      "link": "https://www.eurohpc-ju.europa.eu/eurocc-3-and-castiel-3-further-supporting-existing-european-network-national-competence-centres-hpc-2026-08-31_en",
-      "anchor": "The Strategic Role of Artificial Intelligence Technologies in Advancing the Digital Economy (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "critical and emerging technologies",
-      "signal_type": "accelerates",
-      "signal_kind": "investment / capacity",
-      "what": "EuroCC 3 and CASTIEL 3: Further supporting the existing European network of National Competence Centres for HPC (NCCs).",
-      "core_message": "EuroCC 3 and CASTIEL 3: Further supporting the existing European network of National Competence Centres for HPC (NCCs).",
-      "why_it_matters": "European access and investment may shift in a strategically important technology.",
-      "signal_note": "EuroCC 3 and CASTIEL 3: Further supporting the existing European network of National Competence Centres for HPC (NCCs). This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
-      "first_seen": "2026-08-27T22:17Z",
-      "new_this_scan": false
-    },
-    {
       "headline": "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup",
       "source": "European Innovation Council",
       "date": "2026-08-27T12:00Z",
@@ -18444,7 +18381,10 @@
       "why_it_matters": "EU research funding, participation or international cooperation may change.",
       "signal_note": "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup. This could change participation, funding or international cooperation in EU research programmes.",
       "first_seen": "2026-08-28T06:44Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "evidence_status": "low",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "Evolving radio astronomy and its impact on Africa - ITU",
@@ -18461,7 +18401,10 @@
       "first_seen": "2026-08-27T16:14Z",
       "new_this_scan": false,
       "core_message": "African radio astronomy changes may affect EU research partnerships and infrastructure access.",
-      "what": "African radio astronomy changes may affect EU research partnerships and infrastructure access."
+      "what": "African radio astronomy changes may affect EU research partnerships and infrastructure access.",
+      "evidence_status": "low",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "ITU AI/ML Challenge launch: Application inference from packet flows",
@@ -18478,7 +18421,10 @@
       "signal_note": "ITU AI/ML Challenge launch: Application inference from packet flows. This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
       "first_seen": "2026-08-27T14:02Z",
       "new_this_scan": false,
-      "core_message": "ITU AI/ML Challenge launch: Application inference from packet flows."
+      "core_message": "ITU AI/ML Challenge launch: Application inference from packet flows.",
+      "evidence_status": "low",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "AI researcher with a prior European Space Agency placement arrested at NATO’s SHAPE on suspicion of espionage",
@@ -18505,7 +18451,7 @@
         "W16"
       ],
       "manual_ingested_at": "2026-08-25T13:00Z",
-      "evidence_status": "verified_primary_source",
+      "evidence_status": "low",
       "source_text_mode": "partial_text",
       "manual_supplied_url": "https://www.ftm.eu/articles/intern-spy-nato-china-canada-revealed",
       "review_resolved_url": "https://www.om-mp.be/sites/default/files/media/documents/2026-07-25_Communique_persbericht%20-%20SHAPE.pdf",
@@ -18523,7 +18469,9 @@
         "R-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "B"
+      "quadrant_claimed": "B",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations",
@@ -18550,7 +18498,7 @@
         "W1"
       ],
       "manual_ingested_at": "2026-08-25T09:39Z",
-      "evidence_status": "verified_corroborated_current_event",
+      "evidence_status": "low",
       "source_text_mode": "abstract_only",
       "manual_supplied_url": "https://www.scmp.com/economy/global-economy/article/3361732/china-adds-eu-entities-export-control-list",
       "review_resolved_url": "",
@@ -18568,7 +18516,9 @@
         "R-B",
         "C-D"
       ],
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "Machine Learning for ICT infrastructure detection",
@@ -18585,7 +18535,10 @@
       "first_seen": "2026-08-27T14:02Z",
       "new_this_scan": false,
       "core_message": "Machine learning can help map ICT infrastructure relevant to European capability and resilience.",
-      "what": "Machine learning can help map ICT infrastructure relevant to European capability and resilience."
+      "what": "Machine learning can help map ICT infrastructure relevant to European capability and resilience.",
+      "evidence_status": "low",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "Helsing and Quantum Systems raise $1.8bn and $1.2bn mega-rounds to scale European defence AI and autonomous systems",
@@ -18612,7 +18565,7 @@
         "W17"
       ],
       "manual_ingested_at": "2026-08-25T13:00Z",
-      "evidence_status": "verified_primary_source",
+      "evidence_status": "low",
       "source_text_mode": "partial_text",
       "manual_supplied_url": "https://www.defensenews.com/global/europe/2026/07/13/helsing-raises-18-billion-in-europes-biggest-defense-startup-round/",
       "review_resolved_url": "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e",
@@ -18630,7 +18583,9 @@
         "C-C"
       ],
       "curator_cell_agreement": "differs",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "AI and democracy: Threats, safeguards, and the path forward",
@@ -18647,7 +18602,10 @@
       "first_seen": "2026-08-27T14:02Z",
       "new_this_scan": false,
       "core_message": "AI governance for democracy can shape European safeguards and institutional capacity.",
-      "what": "AI governance for democracy can shape European safeguards and institutional capacity."
+      "what": "AI governance for democracy can shape European safeguards and institutional capacity.",
+      "evidence_status": "low",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     },
     {
       "headline": "ERC Advanced Grants: Nearly €840 million to support Europe’s leading researchers",
@@ -18674,7 +18632,7 @@
         "W5"
       ],
       "manual_ingested_at": "2026-08-25T09:39Z",
-      "evidence_status": "verified_primary_source",
+      "evidence_status": "low",
       "source_text_mode": "abstract_only",
       "manual_supplied_url": "https://erc.europa.eu/news-events/news/erc-2025-starting-grants-results",
       "review_resolved_url": "https://erc.europa.eu/news-events/news/erc-2025-advanced-grants-results",
@@ -18693,7 +18651,9 @@
       ],
       "curator_cell_agreement": "agrees",
       "quadrant_claimed": "A",
-      "matrix_reaudit_profile": "v17.13.29-talent-capability-evidence"
+      "matrix_reaudit_profile": "v17.13.29-talent-capability-evidence",
+      "evidence_role": "weak_signal",
+      "retention_window_months": 6
     }
   ],
   "frontier_evidence": [],
@@ -18872,5 +18832,6 @@
       "Crossref scan budget reached; remaining queued scholarly queries skipped"
     ],
     "transport_failure_warning_count": 19
-  }
+  },
+  "weak_signal_retention_start_date": "2026-02-28"
 }

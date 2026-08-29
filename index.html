@@ -140,7 +140,7 @@
     <div class="wrap" id="radar">
       <section class="minimum-read" aria-label="Minimum useful read">
         <div><div class="label">Read at least this</div><h2 id="minimumReadTitle">Reading the latest issue pattern…</h2><p id="minimumReadText">The summary is rebuilt from the current admitted material.</p></div>
-        <a href="read/?v=17.13.29">Open the 1-minute read →</a>
+        <a href="read/?v=17.13.31">Open the 1-minute read →</a>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
@@ -175,14 +175,14 @@
         <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <div class="method"><strong>How accumulation works:</strong> each run prioritises the rolling four-month core. A bounded high-quality recovery lane also checks months 4–6, but only evidence in the existing Highest source-merit band can enter or remain there. All other A/B evidence, weak signals and Matrix-only recovery use the normal four-month window. Search effort rotates across broad R&amp;I-geopolitics themes and is increased for thin Matrix cells, but the same relevance and source-evidence gates still apply. Public A/B evidence is English-publication only: a foreign-language publication is not rescued by an English abstract or machine translation.</div>
+      <div class="method"><strong>How accumulation works:</strong> each run prioritises the rolling four-month core. A bounded high-quality recovery lane also checks months 4–6, but only evidence in the existing Highest source-merit band can enter or remain there. All other A/B evidence and Matrix-only recovery use the normal four-month window. Weak signals are discovered from a short current-news window but, once admitted, are retained for six months and always remain low-evidence; stronger support appears separately as Strand A/B reports, publications or formal notices. Search effort rotates across broad R&amp;I-geopolitics themes and is increased for thin Matrix cells, but the same relevance and source-evidence gates still apply. Public A/B evidence is English-publication only: a foreign-language publication is not rescued by an English abstract or machine translation.</div>
     </main>
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="source_merit.js?v=17.13.29"></script>
-<script src="briefing/insights.js?v=17.13.29"></script>
-<script src="read/issues.js?v=17.13.29"></script>
+<script src="source_merit.js?v=17.13.31"></script>
+<script src="briefing/insights.js?v=17.13.31"></script>
+<script src="read/issues.js?v=17.13.31"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:12}};
@@ -355,7 +355,7 @@ async function loadRadar(){
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
     const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";const ageMs=completed?(Date.now()-new Date(completed).getTime()):0;const overdue=Boolean(completed&&Number.isFinite(ageMs)&&ageMs>7*60*60*1000);
     document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${overdue?"overdue":(d.scan_health==="ok"?"healthy":"degraded")}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(!overdue&&d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent=(explicitCompletion?"Last completion · ":"Last recorded run · ")+(completed?fmtDateTime(completed):"pending");
-    const aged=sr.aged_out_this_scan||{};const agedTotal=Number(sr.aged_out_total_this_scan||Object.values(aged).reduce((a,b)=>a+Number(b||0),0));const ext=Number(sr.extended_highest_retained_a||0)+Number(sr.extended_highest_retained_b||0);const ageNote=agedTotal?`Two-tier window aged out ${agedTotal} item${agedTotal===1?"":"s"} (${["strand_a","strand_b","strand_c"].filter(k=>aged[k]).map(k=>`${k.replace("strand_","").toUpperCase()} ${aged[k]}`).join(", ")}). Core evidence normally expires at 4 months; Highest-merit A/B may remain to 6 months. `:(ext?`${ext} Highest-merit A/B item${ext===1?" is":"s are"} currently retained in months 4–6. `:"");
+    const aged=sr.aged_out_this_scan||{};const agedTotal=Number(sr.aged_out_total_this_scan||Object.values(aged).reduce((a,b)=>a+Number(b||0),0));const ext=Number(sr.extended_highest_retained_a||0)+Number(sr.extended_highest_retained_b||0);const ageNote=agedTotal?`Retention windows aged out ${agedTotal} item${agedTotal===1?"":"s"} (${["strand_a","strand_b","strand_c"].filter(k=>aged[k]).map(k=>`${k.replace("strand_","").toUpperCase()} ${aged[k]}`).join(", ")}). Core A/B evidence normally expires at 4 months; Highest-merit A/B and all admitted low-evidence weak signals may remain to 6 months. `:(ext?`${ext} Highest-merit A/B item${ext===1?" is":"s are"} currently retained in months 4–6. `:"");
     showNote("rotationNote",ageNote+(sr.rotation_note||""));showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
   }catch(e){document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }

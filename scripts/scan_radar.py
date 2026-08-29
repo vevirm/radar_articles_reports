@@ -12,11 +12,18 @@ Key properties
   Explicit development language is preferred; method-first papers with validation/transfer evidence can also qualify. Mere application is not enough.
 * Strand C is not a general news feed: every admitted item must be a factual current development
   or new evidence/indicator capable of reframing Strand A, with a strong R&I/geopolitical bridge.
-  It must be anchored to substantive Strand-A evidence;
-  Strand-B methods never serve as weak-signal anchors.
-  Once admitted, the signal is retained in the cumulative historical corpus.
-* Calls, facility pages, project pages, press releases, news/blog pages, events,
-  jobs and other non-analytical material are rejected for A/B.
+  It must be anchored to substantive Strand-A evidence; Strand-B methods never serve as weak-signal
+  anchors. Once admitted, the signal is retained for six months and always remains low-evidence.
+  An interesting C item that explicitly points to research, a report, data or another publication can
+  trigger a bounded evidence follow-up. Any stronger source found is admitted separately through the
+  ordinary A/B gates; the C record itself is never upgraded.
+* Foresight-expert recall is author-led rather than institution-led: authors evidenced by admitted
+  Strand-B foresight/method work receive a small rotating publication check. This changes recall only;
+  their later work must still satisfy the ordinary EU R&I A/B criteria.
+* Calls, facility pages, project pages, routine press/news/blog pages, events, jobs and other
+  non-analytical material are rejected for A/B. A tightly bounded primary-notice route allows
+  authoritative EU decisions/notifications into Strand A when the underlying source itself
+  passes the normal substantive A gate.
 
 The scanner aims for high-recall discovery with substantive admission: EU scope + R&I/related-system substance + explicit or triangulated strategic context. It does not pad.
 """
@@ -152,6 +159,7 @@ _apply_rule_fix_source_extensions()
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
+WEAK_SIGNAL_RETENTION_MONTHS = int(CONFIG.get("weak_signal_retention_months", 6))
 EXTENDED_TOP_QUALITY_SOURCES_PER_SCAN = int(CONFIG.get("extended_top_quality_sources_per_scan", 6))
 EXTENDED_TOP_QUALITY_STAGE_SECONDS = int(CONFIG.get("extended_top_quality_stage_seconds", 150))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
@@ -161,7 +169,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.13.1-minority-C-cap"
+C_ADMISSION_PROFILE_VERSION = "v17.13.31-six-month-low-evidence-C-evidence-followup"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -172,7 +180,7 @@ RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.26-sou
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
-WINDOW_POLICY_VERSION = "v17.13.23-four-core-highest-six"
+WINDOW_POLICY_VERSION = "v17.13.31-six-month-low-evidence-signals"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
@@ -226,6 +234,7 @@ FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expa
 # corpus floor before discovery starts.
 DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 EXTENDED_DATE_FLOOR = dt.date.today() - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
+SIGNAL_RETENTION_FLOOR = dt.date.today() - relativedelta(months=WEAK_SIGNAL_RETENTION_MONTHS)
 NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 168))
 FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", SIGNAL_BACKFILL_HOURS))
 DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
@@ -517,6 +526,10 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["institution_seen_fingerprints"] = {}
     state.setdefault("priority_people_cursor", 0)
     state.setdefault("priority_people_completed_cycles", 0)
+    state.setdefault("foresight_author_cursor", 0)
+    state.setdefault("foresight_author_completed_cycles", 0)
+    if not isinstance(state.get("weak_signal_evidence_followup"), dict):
+        state["weak_signal_evidence_followup"] = {}
     if not isinstance(state.get("priority_people_openalex_author_ids"), dict):
         state["priority_people_openalex_author_ids"] = {}
     if not isinstance(state.get("frontier_gap_query_cursors"), dict):
@@ -1528,6 +1541,135 @@ def priority_person_context_query(person: dict[str, Any]) -> str:
     category = clean_text(person.get("category"))
     parts = [affiliation, topic_text, category, "Europe research innovation"]
     return clean_text(" ".join(x for x in parts if x))
+
+
+def _likely_person_name(name: str) -> bool:
+    """Conservative person-name filter for author-follow-up discovery."""
+    n = clean_text(name)
+    if not n or len(n) > 90:
+        return False
+    low = normalized(n)
+    if any(term in low for term in [
+        "commission", "council", "university", "institute", "institution", "organisation", "organization",
+        "ministry", "department", "agency", "centre", "center", "laboratory", "laboratories", "consortium",
+        "committee", "secretariat", "foundation", "bank", "office", "team", "project", "network",
+    ]):
+        return False
+    parts = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ'’-]+", n)
+    return 2 <= len(parts) <= 6 and sum(1 for x in parts if len(x) >= 2) >= 2
+
+
+def foresight_authors_from_corpus(data: dict[str, Any]) -> list[dict[str, Any]]:
+    """Derive a rotating expert-attention bank from admitted Strand-B authors.
+
+    This intentionally avoids permanent source/domain privileges. Once the radar has
+    admitted a genuine foresight/method publication, its human authors can receive a
+    bounded exact-author check for later publications. Every resulting work still passes
+    the ordinary A/B gates, so author attention changes recall, not evidential standards.
+    """
+    rows = data.get("strand_b") if isinstance(data, dict) and isinstance(data.get("strand_b"), list) else []
+    min_items = max(1, int(CONFIG.get("foresight_author_followup_min_b_items", 1) or 1))
+    counts: Counter = Counter()
+    sources: dict[str, str] = {}
+    topics: dict[str, list[str]] = {}
+    names: dict[str, str] = {}
+    for item in rows:
+        if not isinstance(item, dict):
+            continue
+        title = clean_text(item.get("title"))
+        summary = clean_text(item.get("summary"))
+        # Only use records that visibly belong to the futures/method lane; legacy B
+        # noise should not create a watched author.
+        evidence_text = normalized(f"{title} {summary} {item.get('relevance_note','')}")
+        title_text = normalized(title)
+        # Expert follow-up is narrower than Strand B itself. "Weak signal detection" can
+        # describe engineering signal processing, and generic method papers are not enough
+        # to establish a foresight-expert relationship. Require an explicit futures/foresight
+        # marker in the publication title (or the scanner's explicit futures-method route).
+        expert_markers = [
+            "foresight", "futures", "horizon scanning", "scenario planning",
+            "scenario building", "backcasting", "roadmapping", "anticipatory governance",
+        ]
+        explicit_future_route = "future-of-a-method" in evidence_text or "ri-futures-analytic-method" in evidence_text
+        if not (contains_any(title_text, expert_markers) or explicit_future_route):
+            continue
+        if "weak signal detection" in title_text and not contains_any(title_text, ["foresight", "horizon scanning", "futures"]):
+            continue
+        author_text = clean_text(item.get("authors"))
+        if not author_text:
+            continue
+        # Scanner output uses comma-separated full names. Semicolons are accepted too.
+        raw_names = [clean_text(x) for x in re.split(r"\s*(?:;|,|\band\b)\s*", author_text) if clean_text(x)]
+        raw_names = raw_names[:6]
+        for raw in raw_names:
+            raw = re.sub(r"\bet\s+al\.?$", "", raw, flags=re.I).strip()
+            if not _likely_person_name(raw):
+                continue
+            key = folded_person_name(raw)
+            if not key:
+                continue
+            counts[key] += 1
+            names.setdefault(key, raw)
+            sources.setdefault(key, clean_text(item.get("source")))
+            topic = clean_text(title)
+            if topic and topic not in topics.setdefault(key, []):
+                topics[key].append(topic)
+    ranked = [k for k, c in counts.most_common() if c >= min_items]
+    derived = [
+        {
+            "name": names[k],
+            "category": "foresight / futures methods",
+            "affiliation_hint": sources.get(k, ""),
+            "topic_hints": topics.get(k, [])[:2],
+            "foresight_evidence_count": counts[k],
+            "expert_basis": "admitted_foresight_publication",
+        }
+        for k in ranked
+    ]
+
+    # Optional curator-provided people are person-centric discovery seeds, not source
+    # privileges. They receive the same bounded exact-author search and the same A/B gate.
+    # This is the right place for known foresight/strategic-intelligence experts whose
+    # high-value reports may appear outside normal journal/index routes.
+    seeds = CONFIG.get("foresight_expert_seeds", [])
+    seeded: list[dict[str, Any]] = []
+    if isinstance(seeds, list):
+        for raw in seeds:
+            if isinstance(raw, str):
+                raw = {"name": raw}
+            if not isinstance(raw, dict):
+                continue
+            name = clean_text(raw.get("name"))
+            if not _likely_person_name(name):
+                continue
+            seeded.append({
+                "name": name,
+                "category": clean_text(raw.get("category")) or "foresight / strategic intelligence",
+                "affiliation_hint": clean_text(raw.get("affiliation_hint")),
+                "topic_hints": [clean_text(x) for x in (raw.get("topic_hints") or []) if clean_text(x)][:4],
+                "foresight_evidence_count": 0,
+                "expert_basis": "curator_seed",
+            })
+
+    out: list[dict[str, Any]] = []
+    seen_people: set[str] = set()
+    for person in seeded + derived:
+        key = folded_person_name(person.get("name", ""))
+        if not key or key in seen_people:
+            continue
+        seen_people.add(key)
+        out.append(person)
+    return out
+
+
+def foresight_author_rotation_plan(state: dict[str, Any], data: dict[str, Any]) -> dict[str, Any]:
+    bank = foresight_authors_from_corpus(data)
+    if not bank or not bool(CONFIG.get("foresight_author_followup_enabled", True)):
+        return {"bank": [], "people": [], "cursor": 0, "wrapped": True}
+    cursor = int(state.get("foresight_author_cursor", 0) or 0)
+    n = max(0, int(CONFIG.get("foresight_author_followup_per_scan", 4) or 0))
+    batch, next_cursor, wrapped = rotating_batch(bank, cursor, n)
+    return {"bank": bank, "people": batch, "cursor": next_cursor, "wrapped": wrapped}
 
 
 ENGLISH_LANGUAGE_CODES = {"en", "eng", "english", "en-us", "en-gb", "en_us", "en_gb"}
@@ -3845,6 +3987,7 @@ def collect_priority_people(
     execution_stats: dict[str, Any] | None = None,
     openalex_allowed: bool = True,
     crossref_allowed: bool = True,
+    force_enabled: bool = False,
 ) -> list[dict[str, Any]]:
     """Give selected researchers extra discovery attention inside normal scholarly scanning.
 
@@ -3853,7 +3996,7 @@ def collect_priority_people(
     discovery. If both exact-author sources yield no record for a person, the caller receives
     one affiliation/topic context query for the normal scholarly collectors.
     """
-    if not people or not bool(CONFIG.get("priority_people_enabled", True)):
+    if not people or (not force_enabled and not bool(CONFIG.get("priority_people_enabled", True))):
         return []
     state = state if isinstance(state, dict) else {}
     cache = state.setdefault("priority_people_openalex_author_ids", {})
@@ -4229,6 +4372,12 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if not published:
         _diag_inc("institution_reject_no_date")
         return None
+    # A publication timestamp must not be an event date in the future. Some CMS pages
+    # expose an upcoming event/deadline as their generic date field; treating that as
+    # publication time creates future-dated weak signals and breaks retention semantics.
+    if published > dt.datetime.now(dt.timezone.utc).date() + dt.timedelta(days=1):
+        _diag_inc("institution_reject_future_date")
+        return None
     effective_publication_floor = publication_floor or DATE_FLOOR
     if published < effective_publication_floor:
         _diag_inc("institution_reject_before_floor")
@@ -4290,10 +4439,42 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                 })
 
     # A/B document-type exclusions are intentionally applied *after* the C discovery
-    # opportunity above.  A news/event/project/facility page must never enter A/B merely
-    # because it contains analytical vocabulary, but it may describe a material current
-    # R&I/geopolitical development that belongs in the anchored C lane.
+    # opportunity above. Routine news/event/project/facility pages remain excluded.
+    # Exception: an authoritative EU primary notice may itself be the evidence for a
+    # material decision (formal adoption, restriction, funding/capacity commitment, etc.).
+    # In that case, let the *underlying official source* try the normal substantive A gate.
     if exclusion:
+        notice_exclusion = normalized(exclusion)
+        notice_surface = any(x in notice_exclusion for x in [
+            "press release", "news article", "news release",
+            "hard exclusion url: /news/", "hard exclusion url: /press-release",
+            "hard exclusion url: /press_releases",
+        ])
+        source_link = canonical or r.url
+        full_notice_text = clean_text(f"{title}. {desc}. {body[:12000]}")
+        notice_themes = themes_for(full_notice_text)
+        notice_material = (
+            contains_any(full_notice_text, MATURE_SIGNAL_MARKERS)
+            or material_update_signal_text(full_notice_text)
+            or reframing_signal_text(full_notice_text)
+        )
+        if (
+            notice_surface
+            and _source_merit_is_eu_official(source, source_link)
+            and notice_material
+            and strong_watch_signal_text(full_notice_text, notice_themes)
+        ):
+            notice_ev = gate_scope(title, desc, body, min(tier, 1), source_kind="institutional")
+            _record_ab_gate_diagnostic("institution", notice_ev)
+            if notice_ev.get("a_pass"):
+                notice_strand = "both" if notice_ev.get("b_pass") else "A"
+                return build_item(
+                    title=title, authors=", ".join(dict.fromkeys(a for a in authors if a)) or source,
+                    source=source, date=published, link=pdf_url or canonical or r.url,
+                    item_type="official notice / primary source", strand=notice_strand,
+                    evidence=notice_ev, source_rank=float(tier), tier_label=f"Tier {tier}",
+                    text=full_notice_text, doi="", preprint=False,
+                )
         _diag_inc("institution_reject_document_exclusion")
         return None
 
@@ -6151,7 +6332,7 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
-        x = dict(old)
+        x = _low_evidence_signal(old)
         x['new_this_scan'] = False
         if any(signals_near_duplicate(x, y) for y in merged):
             continue
@@ -6163,7 +6344,7 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
             continue
         if any(signals_near_duplicate(item, y) for y in merged):
             continue
-        x = dict(item)
+        x = _low_evidence_signal(item)
         x['first_seen'] = x.get('first_seen') or now_iso
         x['new_this_scan'] = True
         new_ids.add(signal_identity(x))
@@ -6577,7 +6758,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             if not source_name:
                 continue
             title = clean_text(getattr(e, "title", ""))
-            desc = clean_text(getattr(e, "summary", "") or getattr(e, "description", ""))
+            raw_desc = getattr(e, "summary", "") or getattr(e, "description", "")
+            desc = clean_text(raw_desc)
             for suffix in [source_name, source_name.replace("|", " ")]:
                 if suffix and title.lower().endswith(" - " + suffix.lower()):
                     title = title[:-(len(suffix) + 3)].strip()
@@ -6593,6 +6775,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
                 "link": clean_text(getattr(e, "link", "")),
                 "_desc": desc,
+                "_desc_html": str(raw_desc or ""),
                 "_themes": themes_for(text),
                 "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
             })
@@ -6620,6 +6803,385 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
         if key not in seen:
             seen.add(key); unique.append(x)
     return unique
+
+
+_SIGNAL_EVIDENCE_CUES = [
+    "study", "report", "paper", "working paper", "policy brief", "research", "researchers",
+    "analysis", "survey", "dataset", "data show", "data shows", "findings", "evidence",
+    "published", "publication", "journal", "preprint", "according to", "new data", "new research",
+]
+_SIGNAL_LINK_CUES = [
+    "study", "report", "paper", "research", "analysis", "survey", "dataset", "publication",
+    "working paper", "policy brief", "briefing", "preprint", "full text", "download", "doi",
+]
+_SIGNAL_LINK_EXCLUDE_DOMAINS = {
+    "facebook.com", "x.com", "twitter.com", "linkedin.com", "instagram.com", "youtube.com",
+    "youtu.be", "tiktok.com", "mailto", "wa.me", "whatsapp.com",
+}
+
+
+def signal_indicates_underlying_evidence(item: dict[str, Any]) -> bool:
+    """Whether a C lead plausibly points beyond itself to stronger evidence."""
+    if not isinstance(item, dict):
+        return False
+    title = clean_text(item.get("headline") or item.get("title"))
+    detail = clean_text(item.get("_desc") or item.get("signal_note") or item.get("what") or item.get("why_it_matters"))
+    text = clean_text(f"{title}. {detail}")
+    if not text:
+        return False
+    themes = set(item.get("_themes") or themes_for(text)) & WATCH_SIGNAL_THEMES
+    if not themes:
+        return False
+    # The follow-up lane is for research/report clues, not for every policy announcement.
+    cue = contains_any(normalized(text), _SIGNAL_EVIDENCE_CUES)
+    return bool(cue and weak_signal_candidate_text(title, detail) and strong_watch_signal_text(text, themes))
+
+
+def _signal_followup_due(item: dict[str, Any], state: dict[str, Any], now: dt.datetime) -> bool:
+    sid = signal_identity(item)
+    hist = state.get("weak_signal_evidence_followup") if isinstance(state.get("weak_signal_evidence_followup"), dict) else {}
+    rec = hist.get(sid) if isinstance(hist, dict) else None
+    if not isinstance(rec, dict) or not rec.get("checked_at"):
+        return True
+    try:
+        checked = dateparser.parse(str(rec.get("checked_at")))
+        if checked.tzinfo is None:
+            checked = checked.replace(tzinfo=dt.timezone.utc)
+        days = max(1, int(CONFIG.get("weak_signal_evidence_followup_recheck_days", 21) or 21))
+        return now - checked >= dt.timedelta(days=days)
+    except Exception:
+        return True
+
+
+def _research_link_score(url: str, label: str) -> int:
+    u = clean_text(url)
+    if not u.startswith(("http://", "https://")):
+        return -100
+    try:
+        domain = (urlparse(u).hostname or "").lower().removeprefix("www.")
+    except Exception:
+        return -100
+    if not domain or any(domain == d or domain.endswith("." + d) for d in _SIGNAL_LINK_EXCLUDE_DOMAINS):
+        return -100
+    low_u = normalized(u)
+    low_l = normalized(label)
+    score = 0
+    if domain == "doi.org" or domain.endswith(".doi.org"):
+        score += 12
+    if ".pdf" in low_u or low_u.endswith("/pdf"):
+        score += 8
+    if any(c in low_l for c in _SIGNAL_LINK_CUES):
+        score += 6
+    if any(c.replace(" ", "-") in low_u or c.replace(" ", "_") in low_u for c in _SIGNAL_LINK_CUES):
+        score += 4
+    if any(x in domain for x in ["arxiv.org", "ssrn.com", "zenodo.org", "researchsquare.com", "openreview.net"]):
+        score += 5
+    if any(x in low_u for x in ["/publication", "/publications", "/report", "/reports", "/paper", "/papers", "/research", "/study", "/studies"]):
+        score += 3
+    if low_l in {"read more", "more", "home", "homepage", "source", "website"}:
+        score -= 4
+    return score
+
+
+def _extract_signal_research_links(item: dict[str, Any], stage_deadline: float | None = None) -> list[tuple[str, str]]:
+    """Fetch a signal page and rank links that look like underlying research/report evidence."""
+    candidates: dict[str, tuple[int, str, str]] = {}
+
+    def add(url: str, label: str = "") -> None:
+        u = clean_text(url)
+        if not u:
+            return
+        score = _research_link_score(u, label)
+        if score < 4:
+            return
+        key = normalized_link(u)
+        if key in KNOWN_AB_LINKS:
+            return
+        old = candidates.get(key)
+        if old is None or score > old[0]:
+            candidates[key] = (score, u, clean_text(label))
+
+    raw_html = item.get("_desc_html")
+    if raw_html:
+        try:
+            soup = BeautifulSoup(str(raw_html), "html.parser")
+            for a in soup.find_all("a", href=True):
+                add(a.get("href", ""), a.get_text(" ", strip=True))
+        except Exception:
+            pass
+
+    page_url = clean_text(item.get("link"))
+    if page_url and page_url.startswith(("http://", "https://")) and not stage_deadline_reached(stage_deadline, 15):
+        try:
+            r = SESSION.get(page_url, timeout=min(12, int(CONFIG.get("institution_page_timeout_seconds", 12) or 12)), allow_redirects=True)
+            if r.status_code == 200 and "html" in r.headers.get("content-type", "text/html").lower():
+                soup = BeautifulSoup(r.text, "html.parser")
+                base = r.url
+                # A redirect that already left an aggregator is useful as the signal page,
+                # but is not automatically treated as the stronger source.
+                for a in soup.find_all("a", href=True):
+                    href = urljoin(base, a.get("href", ""))
+                    if normalized_link(href) == normalized_link(page_url):
+                        continue
+                    add(href, a.get_text(" ", strip=True))
+        except Exception:
+            pass
+
+    ranked = sorted(((v[0], v[1], v[2]) for v in candidates.values()), reverse=True)
+    cap = max(1, int(CONFIG.get("weak_signal_evidence_followup_links_per_signal", 5) or 5))
+    return [(url, label) for _, url, label in ranked[:cap]]
+
+
+def _known_source_for_url(url: str) -> tuple[str, int]:
+    try:
+        domain = (urlparse(url).hostname or "").lower().removeprefix("www.")
+    except Exception:
+        domain = ""
+    for src in CONFIG.get("institution_sources", []):
+        sd = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+        if sd and (domain == sd or domain.endswith("." + sd)):
+            return clean_text(src.get("name")) or domain, int(src.get("tier", 3) or 3)
+    return domain or "Linked publication", 3
+
+
+def _explicit_date_from_text(text: str) -> dt.date | None:
+    head = clean_text(text)[:3500]
+    patterns = [
+        r"\b(20\d{2}-[01]?\d-[0-3]?\d)\b",
+        r"\b([0-3]?\d\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2})\b",
+        r"\b((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+[0-3]?\d,?\s+20\d{2})\b",
+    ]
+    for pat in patterns:
+        m = re.search(pat, head, re.I)
+        if m:
+            d = parse_date(m.group(1))
+            if d:
+                return d
+    return None
+
+
+def _linked_pdf_candidate(url: str, label: str, stage_deadline: float | None = None) -> dict[str, Any] | None:
+    if stage_deadline_reached(stage_deadline, 15):
+        return None
+    try:
+        r = SESSION.get(url, timeout=int(CONFIG.get("pdf_timeout_seconds", 14) or 14))
+        if r.status_code != 200 or len(r.content) > 22_000_000:
+            return None
+        reader = PdfReader(io.BytesIO(r.content))
+        texts = []
+        for page in reader.pages[:55]:
+            try:
+                texts.append(page.extract_text() or "")
+            except Exception:
+                pass
+        body = clean_text(" ".join(texts))
+        if len(body.split()) < 120:
+            return None
+        meta = reader.metadata or {}
+        meta_title = clean_text(getattr(meta, "title", "") or (meta.get("/Title") if hasattr(meta, "get") else ""))
+        title = clean_text(label)
+        if len(title.split()) < 4 or normalized(title) in {"pdf", "download", "download report", "download paper", "full text"}:
+            title = meta_title
+        if len(title.split()) < 4:
+            return None
+        published = None
+        for raw in [getattr(meta, "creation_date", None), getattr(meta, "modification_date", None)]:
+            published = parse_date(raw)
+            if published:
+                break
+        published = published or _explicit_date_from_text(body)
+        today = dt.datetime.now(dt.timezone.utc).date()
+        if not published or published < EXTENDED_DATE_FLOOR or published > today + dt.timedelta(days=1):
+            return None
+        source, tier = _known_source_for_url(r.url or url)
+        ev = gate_scope(title, "", body, tier, source_kind="institutional")
+        _record_ab_gate_diagnostic("signal-linked-pdf", ev)
+        if not (ev.get("a_pass") or ev.get("b_pass")):
+            return None
+        strand = "both" if ev.get("a_pass") and ev.get("b_pass") else "A" if ev.get("a_pass") else "B"
+        return build_item(
+            title=title, authors=source, source=source, date=published, link=r.url or url,
+            item_type="linked report / paper", strand=strand, evidence=ev,
+            source_rank=float(tier), tier_label=f"Tier {tier}", text=body, doi="", preprint=False,
+        )
+    except Exception:
+        return None
+
+
+def _linked_doi_candidate(url: str, stage_deadline: float | None = None) -> dict[str, Any] | None:
+    if stage_deadline_reached(stage_deadline, 15):
+        return None
+    try:
+        parsed = urlparse(url)
+        if (parsed.hostname or "").lower().removeprefix("www.") != "doi.org":
+            return None
+        doi = parsed.path.lstrip("/")
+        if not doi:
+            return None
+        r = SESSION.get("https://api.crossref.org/works/" + quote_plus(doi, safe="/()"), timeout=int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+        if r.status_code != 200:
+            return None
+        raw = (r.json().get("message") or {})
+        return candidate_from_crossref(raw, date_floor=EXTENDED_DATE_FLOOR)
+    except Exception:
+        return None
+
+
+def _linked_publication_candidate(url: str, label: str, stage_deadline: float | None = None) -> dict[str, Any] | None:
+    try:
+        domain = (urlparse(url).hostname or "").lower().removeprefix("www.")
+    except Exception:
+        domain = ""
+    if domain == "doi.org":
+        return _linked_doi_candidate(url, stage_deadline)
+    if ".pdf" in normalized(url) or normalized(url).endswith("/pdf"):
+        return _linked_pdf_candidate(url, label, stage_deadline)
+    source, tier = _known_source_for_url(url)
+    return parse_institution_page(url, source, tier, stage_deadline=stage_deadline, publication_floor=EXTENDED_DATE_FLOOR)
+
+
+def _signal_evidence_query(item: dict[str, Any]) -> str:
+    headline = clean_text(item.get("headline") or item.get("title"))
+    detail = clean_text(item.get("_desc") or item.get("signal_note") or item.get("what"))
+    evidence_sentence = ""
+    for sent in split_sentences(detail, max_chars=3000):
+        if contains_any(normalized(sent), _SIGNAL_EVIDENCE_CUES):
+            evidence_sentence = sent
+            break
+    q = clean_text(f"{headline} {evidence_sentence}")
+    words = q.split()
+    return " ".join(words[:36])
+
+
+
+def _signal_followup_related_candidate(candidate: dict[str, Any], signals: list[dict[str, Any]]) -> bool:
+    """Keep scholarly follow-up results tied to at least one triggering C lead."""
+    if not isinstance(candidate, dict):
+        return False
+    ctext = clean_text(f"{candidate.get('title','')} {candidate.get('summary','')} {candidate.get('relevance_note','')}")
+    ctok = tokens(ctext)
+    cthemes = set(themes_for(ctext))
+    centities = set(distinct_matches(ctext, ENTITY_TERMS + GEO_ACTORS))
+    for sig in signals:
+        stext = clean_text(f"{sig.get('headline','')} {sig.get('_desc','')} {sig.get('signal_note','')} {sig.get('what','')}")
+        stok = tokens(stext)
+        if not stok or not ctok:
+            continue
+        shared_themes = cthemes & set(sig.get('_themes') or themes_for(stext))
+        if not shared_themes:
+            continue
+        inter = len(stok & ctok)
+        jacc = inter / max(1, len(stok | ctok))
+        sentities = set(sig.get('_entities') or distinct_matches(stext, ENTITY_TERMS + GEO_ACTORS))
+        entity_overlap = bool(centities & sentities)
+        # The signal query may use different wording than the publication title, so a
+        # modest lexical overlap plus the same watch theme is enough; named-entity overlap
+        # provides a second route for terse titles.
+        if jacc >= 0.035 or (inter >= 4 and entity_overlap) or (entity_overlap and len(shared_themes) >= 2):
+            return True
+    return False
+
+def collect_weak_signal_evidence_followups(
+    new_signals: list[dict[str, Any]],
+    previous_signals: list[dict[str, Any]],
+    state: dict[str, Any],
+    warnings: list[str],
+    now: dt.datetime,
+    stage_deadline: float | None = None,
+    openalex_allowed: bool = True,
+    crossref_allowed: bool = True,
+    stats: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Use interesting C items as bounded leads to independent A/B evidence.
+
+    A C item never changes evidential status. We only follow explicit research/report clues,
+    inspect likely outbound evidence links, and run a few targeted scholarly searches. Any
+    stronger record must independently pass the normal A/B admission gate and is stored as a
+    separate publication.
+    """
+    stats = stats if isinstance(stats, dict) else {}
+    stats.update({"signals_checked": 0, "links_examined": 0, "direct_ab": 0, "queries": 0, "scholarly_ab": 0})
+    if not bool(CONFIG.get("weak_signal_evidence_followup_enabled", True)):
+        return []
+    hist = state.setdefault("weak_signal_evidence_followup", {})
+    if not isinstance(hist, dict):
+        hist = {}
+        state["weak_signal_evidence_followup"] = hist
+    pool: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for item in list(new_signals) + list(previous_signals):
+        if not isinstance(item, dict):
+            continue
+        sid = signal_identity(item)
+        if sid in seen or not signal_indicates_underlying_evidence(item) or not _signal_followup_due(item, state, now):
+            continue
+        seen.add(sid)
+        pool.append(item)
+    cap = max(0, int(CONFIG.get("weak_signal_evidence_followup_per_scan", 6) or 0))
+    pool = pool[:cap]
+    out: list[dict[str, Any]] = []
+    queries: list[str] = []
+    now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
+    for item in pool:
+        if stage_deadline_reached(stage_deadline, 20):
+            break
+        sid = signal_identity(item)
+        direct_before = len(out)
+        links = _extract_signal_research_links(item, stage_deadline)
+        stats["signals_checked"] += 1
+        stats["links_examined"] += len(links)
+        for url, label in links:
+            if stage_deadline_reached(stage_deadline, 18):
+                break
+            cand = _linked_publication_candidate(url, label, stage_deadline)
+            if cand and identity(cand) not in KNOWN_AB_IDENTITIES:
+                out.append(cand)
+        q = _signal_evidence_query(item)
+        if q and q not in queries:
+            queries.append(q)
+        hist[sid] = {
+            "checked_at": now_iso,
+            "links_examined": len(links),
+            "direct_candidates": max(0, len(out) - direct_before),
+        }
+    stats["direct_ab"] = len(out)
+
+    qcap = max(0, int(CONFIG.get("weak_signal_evidence_followup_queries_per_scan", 4) or 0))
+    queries = queries[:qcap]
+    stats["queries"] = len(queries)
+    if queries and not stage_deadline_reached(stage_deadline, 28) and (openalex_allowed or crossref_allowed):
+        dates = {q: EXTENDED_DATE_FLOOR for q in queries}
+        lanes = {q: "signal-evidence" for q in queries}
+        exec_stats: dict[str, Any] = {}
+        with cf.ThreadPoolExecutor(max_workers=2) as ex:
+            futs: list[tuple[str, Any]] = []
+            if openalex_allowed:
+                futs.append(("oa", ex.submit(
+                    collect_openalex, EXTENDED_DATE_FLOOR, warnings, queries, stage_deadline,
+                    dates, {}, lanes, exec_stats, False
+                )))
+            if crossref_allowed:
+                futs.append(("cr", ex.submit(
+                    collect_crossref, EXTENDED_DATE_FLOOR, warnings, queries, [], [], stage_deadline,
+                    dates, {}, {}, lanes, exec_stats, False
+                )))
+            scholarly: list[dict[str, Any]] = []
+            for _, fut in futs:
+                try:
+                    scholarly.extend(x for x in fut.result() if isinstance(x, dict))
+                except Exception as e:
+                    warnings.append(f"Weak-signal evidence scholarly follow-up: {type(e).__name__}")
+        scholarly = [x for x in scholarly if _signal_followup_related_candidate(x, pool)]
+        scholarly = dedupe_candidates(scholarly)
+        stats["scholarly_ab"] = len(scholarly)
+        out.extend(scholarly)
+    if len(hist) > 1200:
+        newest = sorted(
+            ((k, v) for k, v in hist.items() if isinstance(v, dict)),
+            key=lambda kv: clean_text(kv[1].get("checked_at")), reverse=True
+        )[:1200]
+        state["weak_signal_evidence_followup"] = dict(newest)
+    return dedupe_candidates(out)
 
 
 def signal_relation(text: str) -> str:
@@ -6759,6 +7321,11 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             'signal_note':what.rstrip('. ')+'. '+why,
             'external_eu_bridge': external_bridge,
             'external_eu_bridge_is_inference': bool(external_bridge),
+            # C is a low-evidence early-warning record, never an evidentiary endpoint.
+            # Stronger status is represented by a separate A/B report, publication or formal notice.
+            'evidence_status': 'low',
+            'evidence_role': 'weak_signal',
+            'retention_window_months': WEAK_SIGNAL_RETENTION_MONTHS,
             '_anchor_score':score,
         })
         if any(signals_near_duplicate(item,x) for x in anchored):
@@ -6891,52 +7458,69 @@ def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
 def extended_top_quality_floor(today: dt.date) -> dt.date:
     return today - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
 
-def prune_public_window(data: dict[str, Any], floor: dt.date, extended_floor: dt.date | None = None) -> tuple[dict[str, Any], dict[str, int]]:
-    """Apply the 4-month core + Highest-merit-to-6-month retention contract."""
+def weak_signal_retention_floor(today: dt.date) -> dt.date:
+    return today - relativedelta(months=WEAK_SIGNAL_RETENTION_MONTHS)
+
+def _low_evidence_signal(item: dict[str, Any]) -> dict[str, Any]:
+    """Normalize the public evidentiary contract for Strand C."""
+    x = dict(item)
+    x["evidence_status"] = "low"
+    x["evidence_role"] = "weak_signal"
+    x["retention_window_months"] = WEAK_SIGNAL_RETENTION_MONTHS
+    return x
+
+def prune_public_window(
+    data: dict[str, Any],
+    floor: dt.date,
+    extended_floor: dt.date | None = None,
+    signal_floor: dt.date | None = None,
+) -> tuple[dict[str, Any], dict[str, int]]:
+    """Apply independent A/B and weak-signal retention windows.
+
+    A/B: four-month core, with only Highest source-merit evidence surviving to six months.
+    C: every admitted weak signal survives for six months, but always at low evidential status.
+    """
     out = dict(data) if isinstance(data, dict) else {}
     extended_floor = extended_floor or extended_top_quality_floor(dt.date.today())
+    signal_floor = signal_floor or weak_signal_retention_floor(dt.date.today())
     removed: dict[str, int] = {}
     for strand in ("strand_a", "strand_b"):
         raw = out.get(strand) if isinstance(out.get(strand), list) else []
         kept, removed_count, _ = enforce_two_tier_ab_window(raw, floor, extended_floor)
         removed[strand] = removed_count
         out[strand] = kept
-    for strand in ("strand_c", "frontier_evidence"):
-        raw = out.get(strand) if isinstance(out.get(strand), list) else []
-        kept = []
-        for item in raw:
-            if not isinstance(item, dict):
-                continue
-            d = parse_date(item.get("date"))
-            if d and d < floor:
-                continue
-            kept.append(dict(item))
-        removed[strand] = max(0, len(raw) - len(kept))
-        out[strand] = kept
-    # corpus_start_date stays the preferred/core floor for backward-compatible reader logic.
+
+    raw_c = out.get("strand_c") if isinstance(out.get("strand_c"), list) else []
+    kept_c = []
+    signal_ceiling = signal_floor + relativedelta(months=WEAK_SIGNAL_RETENTION_MONTHS) + dt.timedelta(days=1)
+    for item in raw_c:
+        if not isinstance(item, dict):
+            continue
+        d = parse_date(item.get("date"))
+        if d and (d < signal_floor or d > signal_ceiling):
+            continue
+        kept_c.append(_low_evidence_signal(item))
+    removed["strand_c"] = max(0, len(raw_c) - len(kept_c))
+    out["strand_c"] = kept_c
+
+    raw_frontier = out.get("frontier_evidence") if isinstance(out.get("frontier_evidence"), list) else []
+    kept_frontier = []
+    for item in raw_frontier:
+        if not isinstance(item, dict):
+            continue
+        d = parse_date(item.get("date"))
+        if d and d < floor:
+            continue
+        kept_frontier.append(dict(item))
+    removed["frontier_evidence"] = max(0, len(raw_frontier) - len(kept_frontier))
+    out["frontier_evidence"] = kept_frontier
+
+    # corpus_start_date stays the preferred/core A/B floor for backward-compatible reader logic.
     out["corpus_start_date"] = floor.isoformat()
     out["preferred_corpus_start_date"] = floor.isoformat()
     out["extended_top_quality_start_date"] = extended_floor.isoformat()
+    out["weak_signal_retention_start_date"] = signal_floor.isoformat()
     return out, removed
-
-def cap_strand_c_share(strand_a: list[dict[str, Any]], strand_b: list[dict[str, Any]], strand_c: list[dict[str, Any]], max_share: float) -> tuple[list[dict[str, Any]], int]:
-    """Keep weak signals a minority view (default ceiling: 15% of all public findings)."""
-    max_share = max(0.0, min(float(max_share), 0.49))
-    if max_share <= 0 or not strand_c:
-        return [], len(strand_c)
-    base = len(strand_a) + len(strand_b)
-    if base <= 0:
-        max_c = 0
-    else:
-        max_c = int((max_share * base) / (1.0 - max_share))
-    def c_priority(x: dict[str, Any]) -> tuple[int, str, str]:
-        text = clean_text(f"{x.get('headline','')} {x.get('what','')} {x.get('signal_note','')}")
-        external, _, _ = external_eu_bridge_sentence(text)
-        return (1 if external else 0, str(x.get("date", "")), str(x.get("first_seen", "")))
-    ordered = sorted(strand_c, key=c_priority, reverse=True)
-    kept = ordered[:max_c]
-    return kept, max(0, len(strand_c) - len(kept))
-
 
 def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
     if not FORCE_SOURCE_EXPANSION_BACKFILL:
@@ -6984,7 +7568,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -7000,10 +7584,11 @@ def main() -> int:
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
-    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR)
+    SIGNAL_RETENTION_FLOOR = weak_signal_retention_floor(now.date())
+    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR)
     if sum(age_window_removed.values()):
         log_progress(
-            "Two-tier window: removed expired/non-Highest older public rows "
+            "Retention windows: removed expired/non-Highest public rows "
             + ", ".join(f"{k}={v}" for k, v in age_window_removed.items() if v)
         )
     previous, retired_c_removed = apply_retired_signal_filter(previous)
@@ -7126,6 +7711,16 @@ def main() -> int:
     priority_people_cursor_before = int(state.get("priority_people_cursor", 0) or 0)
     priority_people_names_all = [clean_text(x.get("name")) for x in priority_people_bank]
     priority_people_names_planned = [clean_text(x.get("name")) for x in priority_people_batch]
+
+    # General foresight-expert recall: derive authors from already admitted Strand-B
+    # method publications, then rotate a few exact-author checks. This follows people
+    # demonstrated by the radar's own evidence instead of pinning any institution/domain.
+    foresight_author_plan = foresight_author_rotation_plan(state, previous)
+    foresight_author_bank = list(foresight_author_plan.get("bank", []))
+    foresight_author_batch = list(foresight_author_plan.get("people", []))
+    foresight_author_cursor_before = int(state.get("foresight_author_cursor", 0) or 0)
+    foresight_author_names_all = [clean_text(x.get("name")) for x in foresight_author_bank]
+    foresight_author_names_planned = [clean_text(x.get("name")) for x in foresight_author_batch]
 
     finding_context_bank = finding_context_query_bank(
         previous, max(1, int(CONFIG.get("finding_context_query_bank_size", 12) or 12))
@@ -7326,6 +7921,10 @@ def main() -> int:
         log_progress(
             f"Embedded researcher attention: {len(priority_people_batch)}/{len(priority_people_bank)} people checked inside scholarly discovery; "
             "categories=" + ", ".join(priority_people_plan.get("categories", []))
+        )
+    if foresight_author_batch:
+        log_progress(
+            f"Foresight-author recall: {len(foresight_author_batch)}/{len(foresight_author_bank)} admitted Strand-B author(s) in this rotation"
         )
     log_progress(
         f"Known corpus loaded before discovery: {len(KNOWN_AB_IDENTITIES)} A/B identities, "
@@ -7542,6 +8141,46 @@ def main() -> int:
             execution_stats["priority_people_context_openalex_queries_executed"] = len(set(context_exec.get("openalex_queries", set())))
             execution_stats["priority_people_context_crossref_queries_executed"] = len(set(context_exec.get("crossref_broad_queries", set())))
             execution_stats["priority_people_context_admitted"] = len(context_oa) + len(context_cr)
+
+    # Bounded recurring attention to authors who have already produced admitted
+    # foresight/method publications. This can discover a later A-relevant paper by the
+    # same expert without creating a permanent source-specific publication lane.
+    foresight_author_executed_count = 0
+    foresight_author_candidates_count = 0
+    if foresight_author_batch and budget_remaining() > 75 and not (oa_failed and cr_failed):
+        fa_seconds = min(
+            int(CONFIG.get("foresight_author_followup_stage_seconds", 90) or 90),
+            max(25, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+        )
+        fa_deadline = time.monotonic() + fa_seconds
+        fa_exec: dict[str, Any] = {}
+        fa_candidates = safe_stage(
+            "foresight-author exact-author check",
+            collect_priority_people,
+            foresight_author_batch,
+            DATE_FLOOR,
+            warnings,
+            fa_deadline,
+            state,
+            fa_exec,
+            not oa_failed,
+            not cr_failed,
+            True,
+        )
+        foresight_author_candidates_count = len(fa_candidates)
+        for item in fa_candidates:
+            if not isinstance(item, dict):
+                continue
+            if item.get("_priority_origin") == "crossref":
+                cr.append(item)
+            else:
+                oa.append(item)
+        executed_fa = set(fa_exec.get("priority_people_executed", set()))
+        state["foresight_author_cursor"], fa_wrapped, foresight_author_executed_count = committed_rotation_cursor(
+            foresight_author_names_all, foresight_author_cursor_before, foresight_author_names_planned, executed_fa
+        )
+        if fa_wrapped and foresight_author_executed_count:
+            state["foresight_author_completed_cycles"] = int(state.get("foresight_author_completed_cycles", 0) or 0) + 1
 
     # Before ordinary institutional rotation, give only the newly introduced V17.12.5
     # sources a one-time catch-up from the preserved corpus floor.  The first rule-fix
@@ -7788,6 +8427,38 @@ def main() -> int:
         # recent factual candidates into the same C pipeline; anchoring/dedupe later
         # applies the identical weak-signal quality rules.
         news.extend(dict(x) for x in INSTITUTION_SIGNAL_CANDIDATES if isinstance(x, dict))
+
+    # C-to-evidence bridge: only actual C leads trigger this stage. Anchor the current
+    # news/institutional candidates against the already-published A corpus first; this
+    # prevents ordinary rejected news from consuming evidence-follow-up budget. Any linked
+    # report/paper found here still has to pass the normal A/B gate independently.
+    prev_a_for_signal_followup = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
+    preliminary_c_for_followup = anchor_news(news, prev_a_for_signal_followup)
+    signal_evidence_followup_stats: dict[str, Any] = {
+        "signals_checked": 0, "links_examined": 0, "direct_ab": 0, "queries": 0, "scholarly_ab": 0
+    }
+    signal_evidence_candidates: list[dict[str, Any]] = []
+    if bool(CONFIG.get("weak_signal_evidence_followup_enabled", True)) and budget_remaining() > 90:
+        sef_seconds = min(
+            int(CONFIG.get("weak_signal_evidence_followup_stage_seconds", 120) or 120),
+            max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+        )
+        sef_deadline = time.monotonic() + sef_seconds
+        signal_evidence_candidates = safe_stage(
+            "weak-signal evidence follow-up",
+            collect_weak_signal_evidence_followups,
+            preliminary_c_for_followup,
+            previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else [],
+            state,
+            warnings,
+            now,
+            sef_deadline,
+            not oa_failed,
+            not cr_failed,
+            signal_evidence_followup_stats,
+        )
+        inst.extend(signal_evidence_candidates)
+
     inst_failed = source_stage_failed(warnings, "institution")
     institution_domains_all = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in institution_sources_all]
     official_domains_all = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in official_sources]
@@ -8096,11 +8767,10 @@ def main() -> int:
         item for item in strand_c
         if clean_text(item.get("headline", "")) not in retired_signal_titles
     ]
-    strand_c, c_share_removed = cap_strand_c_share(
-        strand_a, strand_b, strand_c, float(CONFIG.get("strand_c_max_share", 0.15) or 0.15)
-    )
-    if c_share_removed:
-        log_progress(f"Strand C share cap: removed {c_share_removed} older/lower-priority weak signal(s) to keep C at or below the configured minority share")
+    # Retention is now a hard six-month contract for every admitted weak signal.
+    # Do not delete C rows merely to enforce a presentation share ceiling; evidential
+    # hierarchy is conveyed explicitly by evidence_status="low" instead.
+    c_share_removed = 0
 
     # Recompute against exactly what will be published. A cell can change after the
     # final A/C merge even when the in-run provisional matrix looked stable.
@@ -8174,6 +8844,8 @@ def main() -> int:
         "crossref_priority_tasks": len(cr_priority_batch),
         "priority_people": len(priority_people_batch),
         "priority_people_context_queries": len(priority_context_queries),
+        "foresight_authors": len(foresight_author_batch),
+        "weak_signal_evidence_signals_checked": int(signal_evidence_followup_stats.get("signals_checked", 0)),
         "institution_sources": len(inst_batch),
         "rule_fix_new_source_recovery_sources": len(RULE_FIX_INSTITUTION_SOURCES) if rule_fix_source_recovery_needed else 0,
         "manual_recovery_urls": len(manual_recovery_jobs(previous)),
@@ -8228,7 +8900,8 @@ def main() -> int:
         "corpus_start_date": output_corpus_floor.isoformat(),
         "preferred_corpus_start_date": DATE_FLOOR.isoformat(),
         "extended_top_quality_start_date": EXTENDED_DATE_FLOOR.isoformat(),
-        "corpus_window_policy": f"{BOOTSTRAP_LOOKBACK_MONTHS}-month core; Highest source-merit evidence retained/discovered to {EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS} months",
+        "weak_signal_retention_start_date": SIGNAL_RETENTION_FLOOR.isoformat(),
+        "corpus_window_policy": f"{BOOTSTRAP_LOOKBACK_MONTHS}-month A/B core; Highest source-merit A/B evidence retained/discovered to {EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS} months; weak signals retained {WEAK_SIGNAL_RETENTION_MONTHS} months at low evidential status",
         "source_expansion_version": expansion_marker,
         "quality_profile_version": QUALITY_PROFILE_VERSION,
         "aboutness_profile_version": str(CONFIG.get("aboutness_profile_version", "")),
@@ -8288,6 +8961,10 @@ def main() -> int:
             "ab_four_month_backfill_this_run": bootstrap_ab,
             "c_window_start": (now - dt.timedelta(hours=news_lookback)).isoformat(timespec="minutes").replace("+00:00", "Z"),
             "c_window_end": now_iso,
+            "c_discovery_lookback_hours": news_lookback,
+            "c_retention_floor": SIGNAL_RETENTION_FLOOR.isoformat(),
+            "c_retention_months": WEAK_SIGNAL_RETENTION_MONTHS,
+            "c_evidence_status": "low",
             "c_recovery_backfill_this_run": signal_backfill,
         },
         "scan_results": {
@@ -8305,11 +8982,18 @@ def main() -> int:
             "c_prefilter_candidates": len(news),
             "c_anchored_candidates": len(current_c),
             "b_method_queries_this_scan": len(b_method_focus),
+            "foresight_author_followup": {
+                "bank": len(foresight_author_bank),
+                "planned": len(foresight_author_batch),
+                "executed": foresight_author_executed_count,
+                "admitted_candidates": foresight_author_candidates_count,
+            },
+            "weak_signal_evidence_followup": dict(signal_evidence_followup_stats),
             "finding_context_queries_this_scan": finding_context_focus,
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains on the normal four-month retention window." if new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and is retained for six months." if new_c_count < 3 else "",
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),
@@ -8390,6 +9074,15 @@ def main() -> int:
             "major_scholarly_publishers_tracked": len(CONFIG.get("major_scholarly_publishers", [])),
             "priority_journals_tracked": len(CONFIG.get("crossref_priority_journals", [])),
             "priority_journal_queries": len(CONFIG.get("crossref_priority_journal_queries", [])),
+            "foresight_author_bank": len(foresight_author_bank),
+            "foresight_author_planned": len(foresight_author_batch),
+            "foresight_author_executed": foresight_author_executed_count,
+            "foresight_author_candidates": foresight_author_candidates_count,
+            "weak_signal_evidence_signals_checked": int(signal_evidence_followup_stats.get("signals_checked", 0)),
+            "weak_signal_evidence_links_examined": int(signal_evidence_followup_stats.get("links_examined", 0)),
+            "weak_signal_evidence_direct_ab": int(signal_evidence_followup_stats.get("direct_ab", 0)),
+            "weak_signal_evidence_queries": int(signal_evidence_followup_stats.get("queries", 0)),
+            "weak_signal_evidence_scholarly_ab": int(signal_evidence_followup_stats.get("scholarly_ab", 0)),
             "source_expansion_backfill": bootstrap_ab,
             "backfill_complete": backfill_complete,
             "unique_ab_candidates_before_scan_limit": len(deduped),
