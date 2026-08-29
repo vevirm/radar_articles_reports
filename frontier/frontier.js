@@ -447,7 +447,7 @@
     // not a permanent bypass. This protects the Matrix from stale adjudications and from
     // broad keyword matches that happen to mention Europe, technology, investment or risk.
     const d=norm(`${candidateWhat(x)} ${signalTheme(x)} ${clean(x.signal_note||x._evidencePoint||'')}`);
-    const support=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.relevance_note||'')} ${clean(evidence?.matrix_evidence_basis||x._matrixBasis||'')} ${clean(evidence?.bridge_sentence||'')} ${clean(evidence?.external_eu_bridge||'')}`);
+    const support=norm(`${clean(evidence?.title||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.relevance_note||'')} ${clean(x._matrixBasis||evidence?.matrix_evidence_basis||'')} ${clean(evidence?.bridge_sentence||'')} ${clean(evidence?.external_eu_bridge||'')}`);
     const t=`${d} ${support}`;
     const evidenceSignal=x._origin==='Evidence signal';
     const reviewedMatrix=clean(x._matrixSource||evidence?.matrix_classification_source||'')==='reviewed_underlying_source';
@@ -460,7 +460,14 @@
       // Reviewed source adjudications remain valuable, but the saved evidence basis must
       // itself express the row mechanism and both axes. This catches stale/manual mappings
       // without forcing the generic keyword classifier to rediscover a reviewed source.
-      const b=norm(`${clean(evidence?.matrix_evidence_basis||x._matrixBasis||'')} ${clean(evidence?.summary||'')} ${clean(evidence?.title||'')}`);
+      // For reviewed Knowledge-A talent findings, the reviewed basis may select the
+      // source-supported European capability-building mechanism from a source that also
+      // reports a secondary external-talent mechanism. Other cells keep the fuller saved
+      // source context used by the established semantic contract.
+      const reviewedBasis=clean(x._matrixBasis||evidence?.matrix_evidence_basis||'');
+      const b=norm((row.id==='knowledge' && column.id==='A' && reviewedBasis)
+        ? `${reviewedBasis} ${clean(evidence?.title||'')}`
+        : `${reviewedBasis} ${clean(evidence?.summary||'')} ${clean(evidence?.title||'')}`);
       const has2=(a,z)=>a.test(b)&&z.test(b);
       if(row.id==='knowledge'){
         if(column.id==='A') return /researcher|scientist|talent|research workforce|research career|doctoral|research mobility|brain circulation|fifth freedom/.test(b) && /retain|return|domestic|european capacity|leading researchers|research careers|funding|circulation|mobility|career portability|remove barriers|free movement/.test(b) && !/external demand|international talent|third-country|foreign talent|us research disruption|outside europe/.test(b);
@@ -530,7 +537,11 @@
     // A-cells require an observed or committed European capability gain, not aspiration.
     const openingText=evidenceSignal?t:d;
     const openingRealized=/\b(?:operational|deployed|opened|completed|implemented|secured|attracted|retained|recruited|expanded|increased|built|now produces|now provides|market share rose|overtook|outpaced|adopted by|internationally adopted|global adoption|reduced dependence|reduced reliance)\b/.test(openingText);
-    const openingCommitted=/\b(?:launch(?:es|ed|ing)?|co-fund(?:s|ed|ing)?|jointly fund(?:s|ed|ing)?|fund(?:s|ed|ing)?|award(?:s|ed|ing)?|approve(?:s|d|ing)?|select(?:s|ed|ing)?|establish(?:es|ed|ing)?|create(?:s|d|ing)?|sign(?:s|ed|ing)?|adopt(?:s|ed|ing)?|enact(?:s|ed|ing)?|begin(?:s|ning)? construction|under construction|procure(?:s|d|ment)?|invest(?:s|ed|ing)?|commits?\s+(?:€|\$|£|[0-9])|backs?\s+(?:€|\$|£|[0-9]))\b/.test(openingText);
+    // Bare mentions of "funding" in a report are not a capability gain.  Count a
+    // commitment only when the text describes an actual programme/action, award or money.
+    const openingCommitted=/\b(?:launch(?:es|ed|ing)?|co-fund(?:s|ed|ing)?|jointly fund(?:s|ed|ing)?|award(?:s|ed|ing)?|approve(?:s|d|ing)?|select(?:s|ed|ing)?|establish(?:es|ed|ing)?|create(?:s|d|ing)?|sign(?:s|ed|ing)?|adopt(?:s|ed|ing)?|enact(?:s|ed|ing)?|begin(?:s|ning)? construction|under construction|procure(?:s|d|ment)?|invest(?:s|ed|ing)?|commits?\s+(?:€|\$|£|[0-9])|backs?\s+(?:€|\$|£|[0-9]))\b/.test(openingText)
+      || /(?:eu|european commission|erc|msca|horizon europe|programme|program|initiative|grant scheme).{0,70}(?:funds|funded|funding|awards?|allocat(?:es|ed|ing)?|commits?)/.test(openingText)
+      || /(?:funding|grant|investment).{0,45}(?:€|\$|£|[0-9])/.test(openingText);
     const aspirational=/\b(?:aims? to|plans? to|proposal|proposed|roadmap|could|would|should|needs? to|must|potential to|prospects? for|recommend(?:s|ed|ation)|intends? to|seeks? to|calls? for)\b/.test(openingText);
     const nonOpening=/\b(?:funding gap|capital gap|finance gap|shortage|may seek|could seek|might seek)\b/.test(openingText);
     const concreteOpening=(openingRealized||openingCommitted||reviewedMatrix)&&!aspirational&&!nonOpening;
@@ -709,7 +720,7 @@
       anchor:clean(x.anchor||''),
       evidenceTitle:clean(evidence?.title||''),
       abstract:clean(evidence?.summary||x._evidenceSummary||x.summary||''),
-      matrixEvidenceBasis:clean(evidence?.matrix_evidence_basis||x.matrix_evidence_basis||''),
+      matrixEvidenceBasis:clean(x._matrixBasis||x.matrix_evidence_basis||evidence?.matrix_evidence_basis||''),
       row,rowScore:rowPick.score,column,cellName:cell[0],cellSubtitle:cell[1],
       questions,questionFlags:flags,questionCount:qCount,
       direction,triage:{reach,irreversibility,attentionGap:attention,actionability,total:triage},
