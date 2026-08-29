@@ -47,9 +47,11 @@ SCANNER_FILES = [
     ".github/workflows/radar-scan.yml",
     "radar_config.json",
     "priority_people.json",
+    "curator_candidate_tests.json",
     "requirements.txt",
     "scripts/scan_radar.py",
     "scripts/frontier_coverage.js",
+    "tests/test_scanner_features.py",
 ]
 
 # Tiny operational files retained to make future releases reproducible.
@@ -72,13 +74,21 @@ def validate(root: Path) -> None:
         raise SystemExit("Missing required release file(s):\n  " + "\n  ".join(missing))
 
     # Basic structural checks for the data/config files the scanner depends on.
-    for rel in ("radar.json", "radar_config.json", "priority_people.json"):
+    for rel in ("radar.json", "radar_config.json", "priority_people.json", "curator_candidate_tests.json"):
         _validate_json(root / rel)
 
     radar = json.loads((root / "radar.json").read_text(encoding="utf-8"))
     for key in ("strand_a", "strand_b", "strand_c"):
         if not isinstance(radar.get(key), list):
             raise SystemExit(f"radar.json missing list field: {key}")
+
+    curator = json.loads((root / "curator_candidate_tests.json").read_text(encoding="utf-8"))
+    candidates = curator.get("candidates") if isinstance(curator, dict) else None
+    if not isinstance(candidates, list):
+        raise SystemExit("curator_candidate_tests.json missing candidates list")
+    candidate_ids = [str(x.get("candidate_id") or "").strip() for x in candidates if isinstance(x, dict)]
+    if not candidate_ids or any(not x for x in candidate_ids) or len(candidate_ids) != len(set(candidate_ids)):
+        raise SystemExit("curator_candidate_tests.json candidate_id values must be non-empty and unique")
 
     # Guard the central local JS dependencies needed by both browser Matrix and scanner.
     bridge = (root / "scripts/frontier_coverage.js").read_text(encoding="utf-8")

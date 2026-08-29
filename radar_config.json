@@ -1655,7 +1655,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.32-source-supported-english-balanced-matrix-citation-snowball",
+  "recall_profile_version": "v17.13.33-source-supported-english-balanced-matrix-curator-tests-citation-snowball",
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1821,7 +1821,7 @@
     }
   ],
   "foresight_expert_seed_rule": "Named people may receive bounded person-centric discovery attention; no domain or institution is privileged, and every discovered item must pass the ordinary EU R&I A/B gates.",
-  "citation_snowball_profile_version": "v17.13.32-shared-reference-forward-snowball",
+  "citation_snowball_profile_version": "v17.13.33-api-key-observable-shared-reference-forward-snowball",
   "citation_snowball_enabled": true,
   "citation_snowball_stage_seconds": 120,
   "citation_snowball_min_seconds_remaining": 150,
@@ -1833,5 +1833,10 @@
   "citation_snowball_pinned_reference_slots": 3,
   "citation_snowball_pinned_seed_titles": [
     "The Global Landscape of National AI Strategies"
-  ]
+  ],
+  "curator_candidate_testing_enabled": true,
+  "curator_candidate_testing_stage_seconds": 240,
+  "curator_candidate_tests_per_scan": 30,
+  "curator_candidate_retest_rejected": false,
+  "curator_candidate_enrichment_timeout_seconds": 8
 }

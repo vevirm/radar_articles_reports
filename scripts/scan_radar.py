@@ -48,7 +48,7 @@ from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import quote_plus, urljoin, urlparse
+from urllib.parse import quote, quote_plus, urljoin, urlparse
 
 try:
     import feedparser
@@ -96,6 +96,7 @@ CONFIG_PATH = ROOT / "radar_config.json"
 OUT_PATH = ROOT / "radar.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
+CURATOR_CANDIDATE_TESTS_PATH = ROOT / "curator_candidate_tests.json"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
@@ -263,6 +264,19 @@ SESSION.headers.update({
     "Accept-Language": "en-GB,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 })
+
+# GitHub Actions already exposes an optional OPENALEX_API_KEY secret. Earlier
+# scanner builds ignored it, which left every OpenAlex lane (including citation
+# snowballing) on the anonymous allowance. Use the key when present, but preserve
+# fully anonymous operation when it is absent. Never persist or log the key.
+OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
+
+def openalex_get(path: str, *, params: dict[str, Any] | None = None, timeout: int | float | None = None, **kwargs):
+    query = dict(params or {})
+    if OPENALEX_API_KEY:
+        query.setdefault("api_key", OPENALEX_API_KEY)
+    url = path if path.startswith("http") else "https://api.openalex.org/" + path.lstrip("/")
+    return SESSION.get(url, params=query, timeout=timeout or REQUEST_TIMEOUT, **kwargs)
 
 
 def log_progress(message: str) -> None:
@@ -625,14 +639,8 @@ FRONTIER_CELL_ORDER = [
 ]
 
 
-def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], int, str]:
-    """Use the exact browser classifier to count current 4x4 matrix occupancy.
-
-    The repository already requires Node for the Frontier self-tests. Calling the
-    same module here avoids maintaining a second Python approximation that could
-    disagree with the page. Failure is non-fatal: discovery falls back to an even
-    rotation and the cumulative corpus is still preserved.
-    """
+def frontier_matrix_snapshot(previous: dict[str, Any]) -> tuple[dict[str, int], int, list[dict[str, Any]], str]:
+    """Use the exact browser classifier for counts plus source-level placements."""
     empty = {key: 0 for key in FRONTIER_CELL_ORDER}
     try:
         proc = subprocess.run(
@@ -651,9 +659,21 @@ def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], 
             for key in FRONTIER_CELL_ORDER
         }
         qualifying = max(0, int(payload.get("qualifying", sum(counts.values())) or 0)) if isinstance(payload, dict) else sum(counts.values())
-        return counts, qualifying, ""
+        placements = [dict(x) for x in (payload.get("placements") or []) if isinstance(x, dict)] if isinstance(payload, dict) else []
+        return counts, qualifying, placements, ""
     except Exception as exc:
-        return empty, 0, f"{type(exc).__name__}: {str(exc)[:160]}"
+        return empty, 0, [], f"{type(exc).__name__}: {str(exc)[:160]}"
+
+
+def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], int, str]:
+    """Count current 4x4 Matrix occupancy using the exact browser classifier.
+
+    Failure is non-fatal: discovery falls back to an even rotation and the cumulative
+    corpus is still preserved. ``frontier_matrix_snapshot`` additionally exposes
+    source-level placements for curator-candidate audit/status reporting.
+    """
+    counts, qualifying, _placements, error = frontier_matrix_snapshot(previous)
+    return counts, qualifying, error
 
 
 def frontier_balance_snapshot(
@@ -3421,7 +3441,7 @@ def collect_openalex(
                 return [], "endpoint stopped for this run", 0
             wait_slot()
             try:
-                r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+                r = openalex_get("works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("results", [])
                     return convert_works(works, query_from, q), None, len(works)
@@ -3579,6 +3599,11 @@ def _snowball_seed_pool(previous: dict[str, Any], live_candidates: Iterable[dict
     return vals[:max(1, int(CONFIG.get("citation_snowball_seed_limit", 20) or 20))]
 
 
+
+
+class OpenAlexRateLimit(RuntimeError):
+    """Raised when OpenAlex explicitly rate-limits a bounded scanner lane."""
+
 def _snowball_resolve_seed(seed: dict[str, Any], timeout: int) -> dict[str, Any] | None:
     title = clean_text(seed.get("title"))
     if not title:
@@ -3590,7 +3615,9 @@ def _snowball_resolve_seed(seed: dict[str, Any], timeout: int) -> dict[str, Any]
         params = {"filter": f"doi:https://doi.org/{doi}", "per-page": 3}
     else:
         params = {"search": title, "per-page": 5}
-    r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+    r = openalex_get("works", params=params, timeout=timeout)
+    if r.status_code == 429:
+        raise OpenAlexRateLimit("OpenAlex HTTP 429 during seed resolution")
     if r.status_code != 200:
         return None
     results = (r.json() or {}).get("results") or []
@@ -3611,11 +3638,13 @@ def _snowball_fetch_works(ids: list[str], timeout: int) -> list[dict[str, Any]]:
         chunk = [x.rsplit("/", 1)[-1] for x in ids[start:start + 100] if clean_text(x)]
         if not chunk:
             continue
-        r = SESSION.get(
-            "https://api.openalex.org/works",
+        r = openalex_get(
+            "works",
             params={"filter": "openalex:" + "|".join(chunk), "per-page": len(chunk)},
             timeout=timeout,
         )
+        if r.status_code == 429:
+            raise OpenAlexRateLimit("OpenAlex HTTP 429 during snowball reference fetch")
         if r.status_code == 200:
             out.extend((r.json() or {}).get("results") or [])
     return out
@@ -3641,7 +3670,7 @@ def collect_citation_snowball(
         "seeds_planned": 0, "seeds_resolved": 0, "references_observed": 0,
         "shared_references": 0, "anchors_selected": 0, "forward_queries": 0,
         "backward_admitted": 0, "forward_admitted": 0, "admitted_unique": 0,
-        "anchors": [],
+        "anchors": [], "status": "pending", "rate_limited": False,
     }
     if not stats["enabled"]:
         return [], stats
@@ -3683,6 +3712,11 @@ def collect_citation_snowball(
                 break
             try:
                 work = _snowball_resolve_seed(seed, timeout)
+            except OpenAlexRateLimit:
+                stats["status"] = "blocked_openalex_429"
+                stats["rate_limited"] = True
+                warnings.append("Citation snowball seed resolution OpenAlex HTTP 429; snowball lane stopped for this scan")
+                break
             except requests.RequestException:
                 continue
             if not work:
@@ -3712,12 +3746,19 @@ def collect_citation_snowball(
         key=lambda rid: (-ref_count[rid], -ref_weight[rid], 0 if rid in ref_pinned else 1, rid),
     )[:pool_limit]
     if not pool:
+        if stats.get("status") == "pending":
+            stats["status"] = "no_anchor_pool" if stats.get("seeds_resolved") else "no_seeds_resolved"
         return [], stats
 
     if not wait_slot():
         return [], stats
     try:
         metadata = _snowball_fetch_works(pool, timeout)
+    except OpenAlexRateLimit:
+        stats["status"] = "blocked_openalex_429"
+        stats["rate_limited"] = True
+        warnings.append("Citation snowball reference fetch OpenAlex HTTP 429; snowball lane stopped for this scan")
+        return [], stats
     except requests.RequestException:
         metadata = []
     by_id = {clean_text(w.get("id")): w for w in metadata if clean_text(w.get("id"))}
@@ -3777,10 +3818,12 @@ def collect_citation_snowball(
             "per-page": forward_rows,
         }
         try:
-            r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+            r = openalex_get("works", params=params, timeout=timeout)
         except requests.RequestException:
             continue
         if r.status_code == 429:
+            stats["status"] = "blocked_openalex_429"
+            stats["rate_limited"] = True
             warnings.append("Citation snowball OpenAlex HTTP 429; snowball lane stopped for this scan")
             break
         if r.status_code != 200:
@@ -3798,6 +3841,8 @@ def collect_citation_snowball(
 
     unique = dedupe_candidates(out)
     stats["admitted_unique"] = len(unique)
+    if stats.get("status") == "pending":
+        stats["status"] = "completed"
     if isinstance(execution_stats, dict):
         execution_stats["citation_snowball_seeds_resolved"] = stats["seeds_resolved"]
         execution_stats["citation_snowball_anchors"] = stats["anchors_selected"]
@@ -3915,6 +3960,360 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
         doi=doi, preprint=preprint, frontier_targets=frontier_targets,
     )
 
+
+
+
+def load_curator_candidate_tests() -> dict[str, Any]:
+    """Load bounded curator-supplied publication candidates for source-level testing.
+
+    The file is an input queue, not evidence. Titles, notes and Matrix row hints can
+    focus exact resolution, but the ordinary source-derived admission gate remains
+    authoritative and the browser classifier remains authoritative for Matrix cells.
+    """
+    try:
+        raw = json.loads(CURATOR_CANDIDATE_TESTS_PATH.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        return {}
+    except Exception:
+        return {}
+    if not isinstance(raw, dict) or not isinstance(raw.get("candidates"), list):
+        return {}
+    return raw
+
+
+def _curator_candidate_known(entry: dict[str, Any]) -> bool:
+    title = clean_text(entry.get("title"))
+    doi = clean_text(entry.get("doi"))
+    url = clean_text(entry.get("url")) or (f"https://doi.org/{doi}" if doi else "")
+    if stable_item_identity(title, url) in KNOWN_AB_IDENTITIES:
+        return True
+    nurl = normalized_link(url)
+    return bool(nurl and nurl in KNOWN_AB_LINKS)
+
+
+def _curator_crossref_lookup(entry: dict[str, Any], timeout: int) -> tuple[dict[str, Any] | None, str]:
+    doi = clean_text(entry.get("doi")).removeprefix("https://doi.org/").removeprefix("doi:")
+    title = clean_text(entry.get("title"))
+    try:
+        if doi:
+            r = SESSION.get(f"https://api.crossref.org/works/{quote(doi, safe='')}", timeout=timeout)
+            if r.status_code == 429:
+                return None, "crossref_rate_limited"
+            if r.status_code != 200:
+                return None, f"crossref_http_{r.status_code}"
+            msg = (r.json() or {}).get("message") or {}
+            return (msg if isinstance(msg, dict) else None), "crossref_doi"
+        if not title:
+            return None, "missing_title"
+        r = SESSION.get(
+            "https://api.crossref.org/works",
+            params={
+                "query.bibliographic": title,
+                "rows": 6,
+                "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
+            },
+            timeout=timeout,
+        )
+        if r.status_code == 429:
+            return None, "crossref_rate_limited"
+        if r.status_code != 200:
+            return None, f"crossref_http_{r.status_code}"
+        items = ((r.json() or {}).get("message") or {}).get("items") or []
+        ranked = sorted(
+            [x for x in items if isinstance(x, dict)],
+            key=lambda x: _snowball_title_similarity(title, clean_text((x.get("title") or [""])[0])),
+            reverse=True,
+        )
+        if not ranked:
+            return None, "crossref_title_no_match"
+        best = ranked[0]
+        sim = _snowball_title_similarity(title, clean_text((best.get("title") or [""])[0]))
+        if sim < 0.82:
+            return None, "crossref_title_no_exact_match"
+        return best, "crossref_title"
+    except requests.RequestException:
+        return None, "crossref_transport_error"
+
+
+def _curator_crossref_gate_status(raw: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+    title = clean_text((raw.get("title") or [""])[0])
+    abstract = clean_text(raw.get("abstract"))
+    date = crossref_date(raw)
+    detail: dict[str, Any] = {"resolved_title": title, "resolved_date": date.isoformat() if date else ""}
+    if not title or not date:
+        return "deferred_incomplete_metadata", detail
+    if date < EXTENDED_DATE_FLOOR or date > dt.date.today():
+        return "outside_retention_window", detail
+    if not english_record_ok(f"{title}. {abstract}", raw.get("language", ""), title=title):
+        return "rejected_language", detail
+    doc_reason = document_exclusion_reason(title, abstract)
+    if doc_reason:
+        detail["document_exclusion_reason"] = doc_reason
+        return "rejected_document_type", detail
+    ok, tier, _rank, source, _tier_label, _item_type = quality_from_crossref(raw)
+    detail["resolved_source"] = source
+    detail["source_tier_numeric"] = tier
+    if not ok:
+        return "rejected_source_quality", detail
+    ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
+    detail["gate"] = {
+        "a_pass": bool(ev.get("a_pass")), "b_pass": bool(ev.get("b_pass")),
+        "eu_relevance": ev.get("eu_relevance"), "aboutness_reason": ev.get("aboutness_reason"),
+        "a_route": ev.get("a_route", ""),
+    }
+    if ev.get("a_pass") or ev.get("b_pass"):
+        return "passed_gate", detail
+    if clean_text(ev.get("aboutness_reason")) == "insufficient_text" or not abstract:
+        return "deferred_insufficient_text", detail
+    return "rejected_gate", detail
+
+
+def _curator_openalex_gate_status(raw: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+    title = clean_text(raw.get("display_name"))
+    abstract = openalex_abstract(raw.get("abstract_inverted_index"))
+    date = parse_date(raw.get("publication_date"))
+    detail: dict[str, Any] = {"resolved_title": title, "resolved_date": date.isoformat() if date else ""}
+    if not title or not date:
+        return "deferred_incomplete_metadata", detail
+    if date < EXTENDED_DATE_FLOOR or date > dt.date.today():
+        return "outside_retention_window", detail
+    if not english_record_ok(f"{title}. {abstract}", raw.get("language", ""), title=title):
+        return "rejected_language", detail
+    doc_reason = document_exclusion_reason(title, abstract)
+    if doc_reason:
+        detail["document_exclusion_reason"] = doc_reason
+        return "rejected_document_type", detail
+    ok, tier, _rank, source, _tier_label = quality_from_openalex(raw)
+    detail["resolved_source"] = source
+    detail["source_tier_numeric"] = tier
+    if not ok:
+        return "rejected_source_quality", detail
+    ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
+    detail["gate"] = {
+        "a_pass": bool(ev.get("a_pass")), "b_pass": bool(ev.get("b_pass")),
+        "eu_relevance": ev.get("eu_relevance"), "aboutness_reason": ev.get("aboutness_reason"),
+        "a_route": ev.get("a_route", ""),
+    }
+    if ev.get("a_pass") or ev.get("b_pass"):
+        return "passed_gate", detail
+    if clean_text(ev.get("aboutness_reason")) == "insufficient_text" or not abstract:
+        return "deferred_insufficient_text", detail
+    return "rejected_gate", detail
+
+
+def _tag_curator_candidate(item: dict[str, Any], entry: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
+    out = dict(item)
+    meta = {
+        "profile_version": clean_text(batch.get("profile_version")),
+        "batch_id": clean_text(batch.get("batch_id")),
+        "candidate_id": clean_text(entry.get("candidate_id")),
+        "group_id": clean_text(entry.get("group_id")),
+        "role_in_group": clean_text(entry.get("role_in_group")),
+        "frontier_row_hint": clean_text(entry.get("frontier_row_hint")),
+        "secondary_frontier_row_hints": [clean_text(x) for x in (entry.get("secondary_frontier_row_hints") or []) if clean_text(x)],
+    }
+    out["curator_candidate_test"] = meta
+    out["provenance"] = list(dict.fromkeys(list(out.get("provenance") or []) + ["curator_candidate_test"]))
+    out["discovery_provenance"] = "curator_candidate_test"
+    return out
+
+
+def collect_curator_candidate_tests(
+    previous: dict[str, Any],
+    warnings: list[str],
+    stage_deadline: float | None,
+    execution_stats: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Resolve and test curator candidates without granting them evidential privilege.
+
+    Exact DOI is preferred; title-only companion works fall back to exact-title Crossref
+    and then OpenAlex resolution. A candidate is admitted only if the normal source-derived
+    A/B gate passes. Matrix hints are carried only as audit metadata and never populate
+    ``matrix_dimension``/``quadrant_implied``.
+    """
+    batch = load_curator_candidate_tests()
+    prior = previous.get("curator_candidate_testing") if isinstance(previous.get("curator_candidate_testing"), dict) else {}
+    now_iso = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    state: dict[str, Any] = {
+        "profile_version": clean_text(batch.get("profile_version")),
+        "batch_id": clean_text(batch.get("batch_id")),
+        "source_document": clean_text(batch.get("source_document")),
+        "last_tested_at": now_iso,
+        "results": [],
+    }
+    candidates = [dict(x) for x in (batch.get("candidates") or []) if isinstance(x, dict)]
+    state["candidates_total"] = len(candidates)
+    if not candidates or not bool(CONFIG.get("curator_candidate_testing_enabled", True)):
+        state["status"] = "disabled_or_empty"
+        return [], state
+
+    previous_results = {
+        clean_text(x.get("candidate_id")): dict(x)
+        for x in (prior.get("results") or []) if isinstance(x, dict) and clean_text(x.get("candidate_id"))
+    }
+    final_statuses = {
+        "rejected_gate", "rejected_language", "rejected_document_type", "rejected_source_quality",
+        "outside_retention_window", "passed_gate_outside_core_not_highest",
+    }
+    retest_rejected = bool(CONFIG.get("curator_candidate_retest_rejected", False))
+    limit = max(1, int(CONFIG.get("curator_candidate_tests_per_scan", 30) or 30))
+    timeout = max(4, int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+    enrichment_timeout = max(3, int(CONFIG.get("curator_candidate_enrichment_timeout_seconds", 8) or 8))
+    attempted = 0
+    admitted: list[dict[str, Any]] = []
+    results: list[dict[str, Any]] = []
+
+    for entry in candidates:
+        cid = clean_text(entry.get("candidate_id"))
+        title = clean_text(entry.get("title"))
+        base = {
+            "candidate_id": cid, "group_id": clean_text(entry.get("group_id")),
+            "role_in_group": clean_text(entry.get("role_in_group")), "title": title,
+            "frontier_row_hint": clean_text(entry.get("frontier_row_hint")),
+        }
+        if _curator_candidate_known(entry):
+            results.append({**base, "status": "already_in_corpus", "attempted_this_scan": False})
+            continue
+        old = previous_results.get(cid, {})
+        if old.get("status") in final_statuses and not retest_rejected:
+            kept = dict(old)
+            kept.update(base)
+            kept["attempted_this_scan"] = False
+            results.append(kept)
+            continue
+        if attempted >= limit or stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            kept = dict(old) if old else base
+            kept.update(base)
+            kept["status"] = clean_text(kept.get("status")) or "pending"
+            kept["attempted_this_scan"] = False
+            results.append(kept)
+            continue
+
+        attempted += 1
+        result = {**base, "attempted_this_scan": True, "attempted_at": now_iso}
+        raw_cr, resolution = _curator_crossref_lookup(entry, timeout)
+        result["resolution"] = resolution
+        candidate: dict[str, Any] | None = None
+        status = "unresolved"
+        detail: dict[str, Any] = {}
+
+        if raw_cr:
+            doi0 = clean_text(raw_cr.get("DOI"))
+            if not clean_text(raw_cr.get("abstract")) and doi0:
+                recovered = doi_landing_abstract(doi0, enrichment_timeout)
+                if recovered:
+                    raw_cr = dict(raw_cr)
+                    raw_cr["abstract"] = recovered
+                    result["abstract_recovered_from_doi"] = True
+            candidate = candidate_from_crossref(raw_cr, date_floor=EXTENDED_DATE_FLOOR)
+            status, detail = _curator_crossref_gate_status(raw_cr)
+
+        # OpenAlex is a fallback for unresolved records and records whose bibliographic
+        # metadata lacks enough text to make a substantive decision. It is not a second
+        # chance after a genuine gate rejection.
+        if candidate is None and (raw_cr is None or status in {"deferred_insufficient_text", "deferred_incomplete_metadata"}):
+            try:
+                seed = {"title": title, "link": clean_text(entry.get("url")) or (f"https://doi.org/{clean_text(entry.get('doi'))}" if clean_text(entry.get('doi')) else "")}
+                raw_oa = _snowball_resolve_seed(seed, timeout)
+            except OpenAlexRateLimit:
+                raw_oa = None
+                result["openalex_status"] = "rate_limited"
+            except requests.RequestException:
+                raw_oa = None
+                result["openalex_status"] = "transport_error"
+            if raw_oa:
+                doi0 = clean_text(raw_oa.get("doi"))
+                if doi0 and not openalex_abstract(raw_oa.get("abstract_inverted_index")):
+                    recovered = doi_landing_abstract(doi0, enrichment_timeout)
+                    if recovered:
+                        patched = dict(raw_oa)
+                        inv: dict[str, list[int]] = {}
+                        for pos, token in enumerate(clean_text(recovered).split()):
+                            inv.setdefault(token, []).append(pos)
+                        patched["abstract_inverted_index"] = inv
+                        raw_oa = patched
+                        result["abstract_recovered_from_doi"] = True
+                oa_candidate = candidate_from_openalex(raw_oa, date_floor=EXTENDED_DATE_FLOOR)
+                oa_status, oa_detail = _curator_openalex_gate_status(raw_oa)
+                result["openalex_status"] = "resolved"
+                if oa_candidate is not None:
+                    candidate = oa_candidate
+                    status, detail = oa_status, oa_detail
+                    result["resolution"] = "openalex_exact_fallback"
+                elif status in {"unresolved", "deferred_insufficient_text", "deferred_incomplete_metadata"}:
+                    status, detail = oa_status, oa_detail
+                    result["resolution"] = "openalex_exact_fallback"
+
+        result.update(detail)
+        if candidate is not None:
+            candidate = _tag_curator_candidate(candidate, entry, batch)
+            d = parse_date(candidate.get("date"))
+            retention_ok = bool(not d or d >= DATE_FLOOR or (d >= EXTENDED_DATE_FLOOR and highest_source_merit(candidate)))
+            result["strand"] = clean_text(candidate.get("strand"))
+            result["resolved_link"] = clean_text(candidate.get("link"))
+            result["retention_eligible"] = retention_ok
+            if retention_ok:
+                admitted.append(candidate)
+                result["status"] = "admitted_candidate"
+            else:
+                result["status"] = "passed_gate_outside_core_not_highest"
+        else:
+            result["status"] = status
+        results.append(result)
+
+    state["results"] = results
+    state["attempted_this_scan"] = attempted
+    state["admitted_candidates_this_scan"] = len(admitted)
+    state["already_in_corpus"] = sum(1 for x in results if x.get("status") == "already_in_corpus")
+    state["passed_or_existing"] = sum(1 for x in results if x.get("status") in {"already_in_corpus", "admitted_candidate"})
+    state["deferred"] = sum(1 for x in results if clean_text(x.get("status")).startswith("deferred") or x.get("status") in {"unresolved", "pending"})
+    state["rejected"] = sum(1 for x in results if clean_text(x.get("status")).startswith("rejected") or x.get("status") in {"outside_retention_window", "passed_gate_outside_core_not_highest"})
+    state["status"] = "completed_slice" if attempted else "no_attempts"
+    if isinstance(execution_stats, dict):
+        execution_stats["curator_candidate_tests_attempted"] = attempted
+        execution_stats["curator_candidate_tests_admitted"] = len(admitted)
+    return dedupe_candidates(admitted), state
+
+
+def apply_curator_matrix_placements(
+    state: dict[str, Any],
+    placements: list[dict[str, Any]],
+    published: dict[str, Any],
+) -> dict[str, Any]:
+    """Attach actual browser-Matrix placement to curator test results after publication merge."""
+    if not isinstance(state, dict):
+        return {}
+    by_title = {norm_title(x.get("title")): x for x in placements if isinstance(x, dict) and clean_text(x.get("title"))}
+    by_link = {normalized_link(x.get("link")): x for x in placements if isinstance(x, dict) and normalized_link(x.get("link"))}
+    corpus_items = [x for key in ("strand_a", "strand_b", "frontier_evidence") for x in (published.get(key) or []) if isinstance(x, dict)]
+    corpus_by_title = {norm_title(x.get("title")): x for x in corpus_items if clean_text(x.get("title"))}
+    results = []
+    for raw in state.get("results") or []:
+        if not isinstance(raw, dict):
+            continue
+        row = dict(raw)
+        title_key = norm_title(row.get("resolved_title") or row.get("title"))
+        link_key = normalized_link(row.get("resolved_link"))
+        place = by_link.get(link_key) if link_key else None
+        if place is None:
+            place = by_title.get(title_key)
+        corpus_hit = corpus_by_title.get(title_key)
+        if corpus_hit:
+            row["published_strand"] = clean_text(corpus_hit.get("strand")) or ("A" if corpus_hit in (published.get("strand_a") or []) else "B")
+        if place:
+            row["matrix_cell"] = clean_text(place.get("cell"))
+            row["matrix_row"] = clean_text(place.get("row"))
+            row["matrix_column"] = clean_text(place.get("column"))
+            row["matrix_placed"] = True
+        else:
+            row.pop("matrix_cell", None); row.pop("matrix_row", None); row.pop("matrix_column", None)
+            row["matrix_placed"] = False
+        results.append(row)
+    state = dict(state)
+    state["results"] = results
+    state["matrix_placed"] = sum(1 for x in results if x.get("matrix_placed"))
+    state["published_in_ab"] = sum(1 for x in results if x.get("published_strand") in {"A", "B", "both"})
+    return state
 
 def collect_crossref(
     from_date: dt.date,
@@ -4239,7 +4638,7 @@ def _resolve_priority_openalex_author(
     if cached:
         return cached, False
     try:
-        r = SESSION.get("https://api.openalex.org/authors", params={"search": name, "per-page": 10}, timeout=timeout)
+        r = openalex_get("authors", params={"search": name, "per-page": 10}, timeout=timeout)
     except Exception as e:
         warnings.append(f"Priority people OpenAlex author resolution {name}: {type(e).__name__}")
         return "", True
@@ -4341,7 +4740,7 @@ def collect_priority_people(
                         "page": 1,
                     }
                     try:
-                        r = SESSION.get("https://api.openalex.org/works", params=params, timeout=timeout)
+                        r = openalex_get("works", params=params, timeout=timeout)
                     except Exception as e:
                         warnings.append(f"Priority people OpenAlex works {name}: {type(e).__name__}")
                         break
@@ -8302,6 +8701,33 @@ def main() -> int:
     oa_failed = source_stage_failed(warnings, "openalex")
     cr_failed = source_stage_failed(warnings, "crossref")
 
+    # Curator candidate test lane. This is deliberately placed before lower-priority
+    # recall/deepening work so supplied papers are actually tested, not merely stored
+    # as notes. The lane resolves exact DOI/title records and then rejoins the ordinary
+    # scholarly candidate pool; no curator hint can bypass admission or Matrix semantics.
+    curator_candidate_testing_state = deepcopy(previous.get("curator_candidate_testing")) if isinstance(previous.get("curator_candidate_testing"), dict) else {}
+    curator_test_candidates: list[dict[str, Any]] = []
+    if bool(CONFIG.get("curator_candidate_testing_enabled", True)) and load_curator_candidate_tests() and budget_remaining() > 90:
+        curator_seconds = min(
+            int(CONFIG.get("curator_candidate_testing_stage_seconds", 240) or 240),
+            max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+        )
+        if curator_seconds >= 30:
+            log_progress("Curator candidate tests: exact DOI/title resolution through the normal A/B gate")
+            try:
+                curator_test_candidates, curator_candidate_testing_state = collect_curator_candidate_tests(
+                    previous, warnings, time.monotonic() + curator_seconds, execution_stats
+                )
+            except Exception as e:
+                warnings.append(f"Curator candidate testing fatal stage error: {type(e).__name__}: {str(e)[:160]}")
+                curator_candidate_testing_state = dict(curator_candidate_testing_state or {})
+                curator_candidate_testing_state["status"] = "stage_error"
+                curator_candidate_testing_state["error"] = type(e).__name__
+            cr.extend(curator_test_candidates)
+    elif load_curator_candidate_tests():
+        curator_candidate_testing_state = dict(curator_candidate_testing_state or {})
+        curator_candidate_testing_state["status"] = "skipped_budget"
+
     # Commit rotation only for work that actually made a request. A stage deadline,
     # endpoint stop or queued-but-never-started task therefore remains pending instead
     # of disappearing for a whole rotation cycle.
@@ -9098,7 +9524,10 @@ def main() -> int:
     # Recompute against exactly what will be published. A cell can change after the
     # final A/C merge even when the in-run provisional matrix looked stable.
     published_probe = {"strand_a": strand_a, "strand_b": strand_b, "strand_c": strand_c, "frontier_evidence": frontier_evidence}
-    published_counts, published_qualifying, published_matrix_error = frontier_matrix_coverage(published_probe)
+    published_counts, published_qualifying, published_placements, published_matrix_error = frontier_matrix_snapshot(published_probe)
+    curator_candidate_testing_state = apply_curator_matrix_placements(
+        curator_candidate_testing_state, published_placements, published_probe
+    ) if curator_candidate_testing_state else curator_candidate_testing_state
     if not published_matrix_error:
         deepening["empty_cells_published"] = sum(1 for k in FRONTIER_CELL_ORDER if published_counts.get(k, 0) == 0)
         deepening["published_empty_cells"] = [k for k in FRONTIER_CELL_ORDER if published_counts.get(k, 0) == 0]
@@ -9234,6 +9663,8 @@ def main() -> int:
         "reader_language_profile_version": str(CONFIG.get("reader_language_profile_version", previous.get("reader_language_profile_version", ""))),
         "manual_ingest_profile_version": str(CONFIG.get("manual_ingest_profile_version", previous.get("manual_ingest_profile_version", ""))),
         "manual_ingest": manual_ingest_state,
+        "curator_candidate_testing_profile_version": clean_text((load_curator_candidate_tests() or {}).get("profile_version")),
+        "curator_candidate_testing": curator_candidate_testing_state,
         "quality_migration_this_run": False,
         "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
         "inherited_corpus_audit_this_run": inherited_audit,
@@ -9313,6 +9744,12 @@ def main() -> int:
                 "admitted_candidates": foresight_author_candidates_count,
             },
             "weak_signal_evidence_followup": dict(signal_evidence_followup_stats),
+            "curator_candidate_testing": {
+                "batch_id": clean_text(curator_candidate_testing_state.get("batch_id")) if isinstance(curator_candidate_testing_state, dict) else "",
+                "attempted": int(curator_candidate_testing_state.get("attempted_this_scan", 0) or 0) if isinstance(curator_candidate_testing_state, dict) else 0,
+                "admitted_candidates": int(curator_candidate_testing_state.get("admitted_candidates_this_scan", 0) or 0) if isinstance(curator_candidate_testing_state, dict) else 0,
+                "matrix_placed": int(curator_candidate_testing_state.get("matrix_placed", 0) or 0) if isinstance(curator_candidate_testing_state, dict) else 0,
+            },
             "citation_snowball": snowball_stats,
             "finding_context_queries_this_scan": finding_context_focus,
             "finding_context_queries_executed": finding_context_executed,
@@ -9349,8 +9786,11 @@ def main() -> int:
         "frontier_evidence": frontier_evidence,
         "stats": {
             "openalex_admitted_before_dedupe": len(oa),
-            "openalex_public_anonymous": True,
-            "openalex_api_key_configured": False,
+            "openalex_public_anonymous": not bool(OPENALEX_API_KEY),
+            "openalex_api_key_configured": bool(OPENALEX_API_KEY),
+            "curator_candidate_tests_attempted": int(execution_stats.get("curator_candidate_tests_attempted", 0)),
+            "curator_candidate_tests_admitted": int(execution_stats.get("curator_candidate_tests_admitted", 0)),
+            "curator_candidate_tests_matrix_placed": int(curator_candidate_testing_state.get("matrix_placed", 0) or 0) if isinstance(curator_candidate_testing_state, dict) else 0,
             "crossref_admitted_before_dedupe": len(cr),
             "crossref_public_anonymous": True,
             "institutional_admitted_before_dedupe": len(inst),
