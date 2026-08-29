@@ -51,11 +51,11 @@ Keep the dominant failure/defer reason precise: `insufficient_text`, `no_direct_
 
 ## Publication quality and reader claims
 
-The public A/B radar is **English-publication only**. Explicit foreign-language metadata rejects. The publication title must positively pass the English title gate, and meaningful Cyrillic/Greek/CJK/Arabic or other non-Latin source prose rejects. An English abstract or indexed English summary does **not** rescue a foreign-language publication. Machine translation is never an admission basis. Reader-facing claims should state the source-backed point itself in plain language. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
+The public A/B radar is **English-publication only**. Explicit foreign-language metadata rejects. The publication title must positively pass the English title gate, and meaningful Cyrillic/Greek/CJK/Arabic or other non-Latin source prose rejects. An English abstract or indexed English summary does **not** rescue a foreign-language publication. Machine translation is never an admission basis. Main-Radar claims should state the source-backed point clearly in policy-technical language; the Read page provides the simplest translation. Do not pad the claim with researcher biography, institutional boilerplate, method catalogues or generic “this paper examines…” language when the substantive finding can be stated directly.
 
 Titles, authors, source, date, links, abstracts/summaries and review evidence remain available separately.
 
-Reader-facing short claims remain complete sentences within the existing 120-character claim budget. Radar publication cards additionally show **“What it says for EU R&I geopolitics”** as a complete sentence with a hard **150-character maximum**. That line must never be hard-cut or ellipsised; when the stored source does not support a clean finding sentence, state honestly what the source covers rather than publishing a fragment. “Why it matters” must stay materially tied to the individual source text or reviewed evidence and may be longer when needed to state the actual mechanism. Reusable topic fillers such as “EU research funding may change” or “European access to key technologies may change” are not admissible when a source-specific consequence is available. Vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” and “the developments” are not admissible display claims.
+Reader-facing **Read** claims remain complete sentences within the existing short-reader budget. The main Radar is intentionally more detailed: **“What it says for EU R&I geopolitics”** may use up to roughly 300 characters when needed to state the source-specific mechanism. It must prefer the source's concrete finding — named actor, instrument/dependency and consequence — over reusable topic slogans. It must never hard-cut or ellipsise a sentence. If the saved state contains no substantive finding, say so or fall back to the bibliographic source focus rather than inventing a general geopolitical implication. “Why it matters” must stay materially tied to the individual source text or reviewed evidence. Reusable fillers such as “geopolitical competition is pushing Europe to link innovation policy more closely to resilience”, “EU research funding may change” or “European access to key technologies may change” are not admissible Radar claims. Vague openers and scanner/review metadata are not admissible display claims.
 
 ## Strand B
 
@@ -68,6 +68,10 @@ Strand C contains externally observable weak signals/developments that can chang
 ## Time boundary
 
 Public evidence uses a **four-calendar-month core**. A/B has one narrow quality exception: evidence scoring **Highest (>=93/100)** under the radar's existing source-merit model may be discovered and retained until six calendar months. Other A/B evidence, all Strand C signals, and Matrix-only recovery use the hard four-month floor. Saved history cannot widen either boundary.
+
+## Reader-language hierarchy
+
+Presentation is layered without changing evidence: **Read** is simplest; **Matrix and Risks & opportunities** use simple analytical language; **Main Radar and Evidence browser** retain standard R&I-policy terminology; **Excel/evidence export** is the most technical layer. A wording transform must never add an admission fact, causal bridge or Matrix direction that is absent from the source-backed record.
 
 ## Matrix hand-off
 
@@ -98,3 +102,7 @@ This is deliberately a search-allocation rule. A thin cell never lowers the EU +
 ## Reader attention ranking is not admission
 
 The Stuff page may rank primary/official EU acts and reports, strong peer-reviewed research and other high-quality sources for reader attention. This ranking never changes the substantive admission gate and never excludes a useful lower-tier source. When an official primary EU document and secondary reporting about the same development are both present, the primary document should be surfaced first while the reporting remains provenance/context.
+
+## V17.13.26 Matrix reasoning audit
+
+The Matrix search/classification layer now tests every cell for a source-supported causal mechanism rather than literal label words. Reviewed source adjudications are revalidated against the same semantic contract. Discovery can broaden the mechanisms searched within a cell (for example research-network loss in K-D or secure/diversified access in I-A), but Matrix imbalance never changes the substantive radar admission gate.

@@ -165,10 +165,10 @@ C_ADMISSION_PROFILE_VERSION = "v17.13.1-minority-C-cap"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
-MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.25-external-talent-pipeline-balance"))
+MATRIX_BALANCE_ROTATION_PROFILE_VERSION = str(CONFIG.get("matrix_balance_rotation_profile_version", "v17.13.26-balanced-reasoning-coverage"))
 SOURCE_ATTENTION_PROFILE_VERSION = str(CONFIG.get("source_attention_profile_version", "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening"))
 PRIORITY_PEOPLE_PROFILE_VERSION = str(CONFIG.get("priority_people_profile_version", "v17.12.6-priority-people-recurring-rotation"))
-RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.25-source-supported-english-talent-pipeline"))
+RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.26-source-supported-english-balanced-matrix-reasoning"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
@@ -8234,6 +8234,8 @@ def main() -> int:
         "aboutness_profile_version": str(CONFIG.get("aboutness_profile_version", "")),
         "matrix_profile_version": str(CONFIG.get("matrix_profile_version", "")),
         "display_claim_profile_version": str(CONFIG.get("display_claim_profile_version", "")),
+        "presentation_profile_version": str(CONFIG.get("presentation_profile_version", previous.get("presentation_profile_version", ""))),
+        "reader_language_profile_version": str(CONFIG.get("reader_language_profile_version", previous.get("reader_language_profile_version", ""))),
         "manual_ingest_profile_version": str(CONFIG.get("manual_ingest_profile_version", previous.get("manual_ingest_profile_version", ""))),
         "manual_ingest": manual_ingest_state,
         "quality_migration_this_run": False,

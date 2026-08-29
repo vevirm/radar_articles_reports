@@ -60,10 +60,10 @@
   function priorityInterpretation(x){
     const row=x?.row?.id||'other',col=x?.column?.id||'B';
     const topic={knowledge:'people and knowledge',infrastructure:'tools and infrastructure',conversion:'firms and scale',rules:'rules and coordination',other:'research and innovation'}[row]||'research and innovation';
-    if(col==='A') return `Europe gains control and strength in ${topic} with no obvious competitiveness penalty.`;
-    if(col==='B') return `Europe may gain control in ${topic} at a cost to speed, scale or competitiveness.`;
-    if(col==='C') return `Europe gains capability in ${topic} but remains dependent on external access.`;
-    return `Europe loses both control and competitiveness in ${topic}.`;
+    if(col==='A') return `Europe gains control and becomes stronger in ${topic}.`;
+    if(col==='B') return `Europe gains more control in ${topic}, but pays in speed, scale or performance.`;
+    if(col==='C') return `Europe becomes stronger in ${topic}, but still relies on outside access.`;
+    return `Europe loses control and becomes weaker in ${topic}.`;
   }
   function simpleEvidenceText(x){
     let t=clean(x?.title||'').replace(/\s+[–—-]\s+(?:Company Announcement\s+-\s+)?(?:FT\.com|Reuters|Bloomberg).*$/i,'');

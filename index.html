@@ -140,7 +140,7 @@
     <div class="wrap" id="radar">
       <section class="minimum-read" aria-label="Minimum useful read">
         <div><div class="label">Read at least this</div><h2 id="minimumReadTitle">Reading the latest issue pattern…</h2><p id="minimumReadText">The summary is rebuilt from the current admitted material.</p></div>
-        <a href="read/?v=17.13.25">Open the 1-minute read →</a>
+        <a href="read/?v=17.13.28">Open the 1-minute read →</a>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
@@ -175,14 +175,14 @@
         <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <div class="method"><strong>How accumulation works:</strong> every run prioritises a rolling four-month core. A bounded source-quality lane also checks months 4–6, but only evidence in the existing Highest source-merit band can enter or remain there. All other A/B evidence, weak signals and Matrix-only recovery keep the normal four-month rule. The scanner rotates across broad discovery themes and adds a small finding-context lane based on recurring issues already visible in the radar. Results still have to pass the same admission rules before they appear here. Non-English publications are allowed only when the source provides enough English abstract/summary evidence to verify the finding; the radar does not translate a foreign text and treat that translation as evidence.</div>
+      <div class="method"><strong>How accumulation works:</strong> each run prioritises the rolling four-month core. A bounded high-quality recovery lane also checks months 4–6, but only evidence in the existing Highest source-merit band can enter or remain there. All other A/B evidence, weak signals and Matrix-only recovery use the normal four-month window. Search effort rotates across broad R&amp;I-geopolitics themes and is increased for thin Matrix cells, but the same relevance and source-evidence gates still apply. Public A/B evidence is English-publication only: a foreign-language publication is not rescued by an English abstract or machine translation.</div>
     </main>
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="source_merit.js?v=17.13.25"></script>
-<script src="briefing/insights.js?v=17.13.25"></script>
-<script src="read/issues.js?v=17.13.25"></script>
+<script src="source_merit.js?v=17.13.28"></script>
+<script src="briefing/insights.js?v=17.13.28"></script>
+<script src="read/issues.js?v=17.13.28"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:12}};
@@ -219,8 +219,13 @@ function claim80(v){
   return globalThis.RadarInsights?.readerPoint?.(s)||'';
 }
 function claimText(x){
-  const safe=v=>globalThis.RadarInsights?.readerPoint?.(v)||'';
-  return safe(globalThis.RadarInsights?.pointFor?.(x))||safe(coreMessage(x))||safe(globalThis.RadarInsights?.fallbackPoint?.(x))||safe(semanticMessage(x))||'The source does not provide a concise claim.';
+  // Main Radar is policy-technical rather than the site's simplest reader layer.
+  // Prefer the stored, validated source-backed core message without translating
+  // standard R&I-policy terminology; fall back to the shorter reader-safe point.
+  const stored=globalThis.RadarInsights?.completeCoreMessage?.(x?.core_message||'')||'';
+  if(stored)return globalThis.RadarInsights?.radarText?.(stored)||stored;
+  const fallback=globalThis.RadarInsights?.pointFor?.(x)||coreMessage(x)||globalThis.RadarInsights?.fallbackPoint?.(x)||semanticMessage(x)||'';
+  return globalThis.RadarInsights?.radarText?.(fallback)||fallback||'The source does not provide a concise claim.';
 }
 function readablePaperTitle(v){
   let t=cleanText(v).replace(/<\/?b>/gi,'').replace(/\s+[–—-]\s+(?:European Council on Foreign Relations|CEPS|Euractiv\.com|FT\.com)$/i,'').trim();
@@ -262,7 +267,7 @@ function semanticMessage(x){
   if(/advanced material|critical mineral|raw material|battery/.test(text))return 'Access to strategic materials is shaping Europe’s technology resilience and industrial autonomy.';
   if(/dual.?use|military|defen[cs]e/.test(text)&&/innovation|technology|research/.test(text))return 'Security competition is pulling more European research and technology toward dual-use priorities.';
   if(/digital sovereignty|digital strategy|cyber/.test(text))return 'Digital and cyber policy is becoming a tool of Europe’s geopolitical and technological positioning.';
-  if(/industrial policy|innovation ecosystem|competitiveness/.test(text))return 'Geopolitical competition is pushing Europe to link innovation policy more closely to resilience.';
+  if(/industrial policy|innovation ecosystem|competitiveness/.test(text))return paperSpecificMessage(x);
   return paperSpecificMessage(x)||'A geopolitical development is changing a specific part of Europe’s research and innovation system.';
 }
 function norm(v){return cleanText(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
@@ -312,7 +317,7 @@ function allDetails(x){
 function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text&&!x.link)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}${x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">Open source ↗</a>`:''}</div>`}
 function cardHeading(x){const t=cleanText(x.title||x.headline||'');return t&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false?t:claimText(x)}
 function meritOf(x){return globalThis.RadarSourceMerit?.forItem?RadarSourceMerit.forItem(x):null}
-function meritTag(x){const m=meritOf(x);return m?`<span class="merit-badge ${esc(m.tone)}" title="Source merit ${m.score}/100">Evidence: ${esc(m.label)}</span>`:''}
+function meritTag(x){const m=meritOf(x);return m?`<span class="merit-badge ${esc(m.tone)}" title="Source merit ${m.score}/100">Source merit: ${esc(m.label)}</span>`:''}
 function claimButton(x,id){return `<button class="claim-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">${esc(cardHeading(x))}</button>`}
 function abItem(x,i){
   const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"",id=`abstract-a-${i}`;
@@ -331,8 +336,8 @@ function renderCurrentIssues(d){
   const summary=globalThis.RadarIssues?.summary?RadarIssues.summary(issues):null;
   if(summary){
     const t=document.getElementById('minimumReadTitle'),p=document.getElementById('minimumReadText');
-    if(t)t.textContent=globalThis.RadarInsights?.fastReaderText?.(summary.title)||summary.title;
-    if(p)p.textContent=globalThis.RadarInsights?.fastReaderText?.(summary.text)||summary.text;
+    if(t)t.textContent=globalThis.RadarInsights?.radarText?.(summary.title)||summary.title;
+    if(p)p.textContent=globalThis.RadarInsights?.radarText?.(summary.text)||summary.text;
   }
   const jr=document.getElementById('journeyReadText');if(jr)jr.textContent=issues.length?`${issues.length} live issue maps rebuilt from the latest admitted material.`:'Live issue maps rebuilt from the latest admitted material.';
   const pr=document.getElementById('pageReadLink');if(pr)pr.textContent=issues.length?`${issues.length} current issue maps →`:'Current issue maps →';

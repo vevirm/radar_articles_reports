@@ -127,6 +127,15 @@
     const a=authority(x),r=relevance(x),e=evidence(x),ap=authorPoints(x),score=Math.max(0,Math.min(100,a.points+r.points+e.points+ap)),b=band(score);
     return {score,...b,authority:a.kind,relevance:r.kind,evidence:e.kind,authorPoints:ap};
   }
+  function componentsFor(x){
+    const a=authority(x),r=relevance(x),e=evidence(x),ap=authorPoints(x);
+    return {
+      authorityPoints:a.points,authority:a.kind,
+      relevancePoints:r.points,relevance:r.kind,
+      evidencePoints:e.points,evidence:e.kind,
+      authorTransparencyPoints:ap
+    };
+  }
   function scoreFor(x){return forItem(x).score}
   function compare(a,b){return scoreFor(b)-scoreFor(a)}
   function aggregate(items){
@@ -136,5 +145,5 @@
   }
   function badgeText(x,prefix='Evidence'){const m=forItem(x);return `${prefix}: ${m.label}`}
   function explanation(x){const m=forItem(x);return `${m.label} evidence weight (${m.score}/100): ${m.authority}; ${m.relevance.toLowerCase()}; ${m.evidence.toLowerCase()}.`}
-  return {forItem,scoreFor,compare,aggregate,band,badgeText,explanation,isEuOfficial};
+  return {forItem,componentsFor,scoreFor,compare,aggregate,band,badgeText,explanation,isEuOfficial};
 });

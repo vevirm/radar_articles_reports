@@ -1,70 +1,45 @@
-# V17.13.22 — scheduler catch-up + completion timestamps + preservation guard
+# R&I Geopolitics Radar V17.13.28
 
-## V17.13.25 — Matrix balance and cleaner priorities
+## Current release — source-specific Radar claims + source-summary Excel
 
-The People & knowledge / Capability from outside cell now explicitly searches for international research-talent inputs (researchers, visiting researchers, doctoral/PhD talent and research-linked international students/graduates with retention/workforce transitions). Generic student mobility remains excluded. The Risks & opportunities page uses ranked cards so evidence badges no longer interrupt titles.
+V17.13.28 keeps the V17.13.26 Matrix semantic contract and V17.13.27 language hierarchy, but removes reusable topic slogans from the main Radar. The Radar now prefers a concrete source proposition — actor/instrument/dependency plus the specific consequence — and can use a longer policy-technical sentence when necessary. The Excel workbook now begins with a **What sources say** sheet and also carries source-summary bullets in the ranked and technical sheets.
 
+The current evidence rules remain: public A/B evidence is English-publication only; inference-only external-shock bridges are disabled; normal evidence uses a four-calendar-month core; only A/B evidence in the existing Highest source-merit band may be discovered and retained to six months.
 
-- Replaces the single fixed six-hour cron with hourly scheduled wake-ups plus a six-hour due gate based on the **last completed** scan. Manual and push runs still run immediately.
-- `last_updated` now records scan completion rather than scan start; `run_started_at`, `run_completed_at`, `scan_state.last_started_at`, and `scan_state.last_completed_at` make timing explicit.
-- Every scan records rolling-window age-outs separately. The reader shows them as expected date-window expiry.
-- GitHub safety validation now hard-stops a normal scan if any still-in-window Strand A/B item disappears. Four-month age-outs and explicit migration/precision-cleanup runs are exempt.
-- The landing status becomes **overdue** when the latest completion is more than seven hours old.
-- Bundled `radar.json` is the user-supplied post-scan state timestamped 2026-08-29T05:52Z; no fresh discovery scan was run while packaging this repair.
+### Reader-language hierarchy
 
-# R&I Geopolitics Radar V17.13.22
+The same evidence is deliberately phrased at different levels.
 
-V17.13.24 keeps the reader-first design and tightens the subject/language boundary: inference-only external-shock admission is disabled and public A/B evidence is limited to English-language publications. The public evidence policy is a **four-calendar-month core**, with a narrow exception: A/B evidence in the existing **Highest** source-merit band may be discovered and retained until six calendar months. All other evidence retains the four-month rule. A paper or report no longer has to say *geopolitics* explicitly: it may also qualify when genuine EU/European R&I is connected through a conservative, triangulated strategic mechanism such as technological dependence, capability competition, international coordination, research security, critical infrastructure, standard-setting/governance power, or research-talent competition.
+1. **Read at least this — simplest.** Short, ordinary-language explanations. It translates policy vocabulary rather than expecting the reader to know it.
+2. **Matrix and Risks & opportunities — simple analytical.** Short phrases about what Europe gains, loses, controls or relies on. The full Matrix keeps technical placement diagnostics behind a disclosure instead of putting them in the main reading path.
+3. **Main Radar and Evidence browser — policy-technical.** Standard R&I-policy terms such as research security, strategic dependency, technological sovereignty, talent circulation, scale-up finance and research infrastructure are allowed when they are the clearest accurate terms. Record details remain available.
+4. **Excel technical evidence workbook — most technical.** It now also tells the reader what each paper/report says in one to four source-grounded bullets (depending on stored source text), then carries source-merit components, admission/review notes, evidence families, Matrix criteria, placement confidence, screening score, provenance and technical source-review fields.
 
-This is not a looser relevance gate. The non-literal route needs at least **two independent strategic families**, including at least one relational/control family. A generic paper that merely says Europe should be more competitive still fails.
-
-**The subject is EU/European R&I in geopolitical context.** EU relevance is not just one filter among many. The source itself must establish the European R&I subject or consequence. A US, Chinese or other external development does not qualify merely because the radar can imagine an implication for Europe; source-supported European relevance is required.
-
-**The public A/B corpus is English-publication only.** A foreign-language publication is not rescued by an English abstract or index description. Titles must pass the English title gate; explicit foreign-language metadata or meaningful non-Latin source prose fails closed. The radar does not use machine translation as evidence.
+This hierarchy is a presentation rule only. It does not change admission, source merit or Matrix placement.
 
 ## What readers see
 
-### 1. Read at least this = a live issue tree
+### 1. Read at least this
 
-`read/` no longer carries a fixed public list of eight issues. On every page load it rebuilds the leading issue set from the current admitted Strand-A / Matrix evidence and current weak signals in `radar.json`.
+`read/` rebuilds the leading issue set from current admitted material. It is the easiest entry point: short issue trees and source-backed findings in the simplest language used anywhere on the site. The main Radar is the next step when a reader wants the policy terminology and full record detail.
 
-The reader layer uses a broader set of topic lenses only to group evidence coherently; the **visible issue count, selection, order, branches and subissues are data-driven**. A topic can rise, fall, disappear or appear as the underlying four-month corpus changes. The current issue maps are therefore a view of what the latest material is concentrated on, not a permanent taxonomy.
+### 2. Matrix and Risks & opportunities
 
-Each visible issue is shown immediately as a connected branch map: current leading issue → strongest related branches → current source-backed findings. Source merit breaks ties after issue fit, but it does not change admission or Matrix placement. All labels and current findings pass through the plain-language reader boundary.
+The Matrix is intentionally easier to read than the main Radar. Its public rows are **People & knowledge**, **Tools & facilities**, **Firms & growth**, and **Rules & decisions**. Its columns are **More control, stronger**, **More control, some cost**, **Stronger, but reliant**, and **Less control, weaker**. Cell labels use direct outcome language such as **Build and keep talent**, **Useful outside access**, and **Value and scale move abroad**.
 
-### 2. Simpler Matrix
+`frontier/quick/` is the shortest view. `frontier/` adds source detail, while technical classifier diagnostics are tucked under **Technical placement check**. `priorities/` presents ranked risks and opportunities as compact cards using the same simple analytical language.
 
-The reader-facing Matrix uses four plain rows:
+Every Matrix placement must show the **row mechanism + control/dependence direction + performance direction** in source-supported evidence. Generic words such as “foreign”, “risk”, “capacity”, “investment” or “access” cannot create a cell. Sparse cells receive more discovery effort, never lower admission standards.
 
-- People & knowledge
-- Tools & infrastructure
-- Firms & scale
-- Rules & coordination
+### 3. Main Radar and Evidence browser
 
-and four plain outcomes:
+The main Radar is accessible but deliberately more technical than Read or the Matrix. It keeps normal R&I-policy vocabulary when that vocabulary is precise, and gives the reader expandable record detail: original publication title, authors, source, date, source merit, full available summary, relevance/admission note, evidence, discovery route and Matrix material where present.
 
-- Stronger on both
-- More control, more cost
-- Faster, but dependent
-- Weaker on both
+The Evidence browser uses the same policy-technical level as the main Radar, grouped by evidence type.
 
-`frontier/quick/` is the **“just see it”** version. It shows **every** qualifying Matrix finding in its cell as a subject-first bullet of 50 characters or fewer. `frontier/` keeps the full evidence and classification detail.
+### 4. Technical Excel export
 
-Every admitted Strand-A finding is sent to the Matrix classifier. There is no extra hidden “dynamic” pre-filter before classification. The classifier can still leave a finding out when its evidence does not support a defensible row and direction.
-
-### 3. Easy radar keeps the full record reachable
-
-The main radar remains the easy/reader-first view: plain claim first, then a short “why it matters” **only when the individual record supports a separate concise consequence**. Generic topic fillers are not used. Nothing important from the evidence record is discarded from the interface. Each card has **All record details**, and the toolbar has **Show all details** to open the detailed fields across the visible cards at once. That disclosure includes the original title, authors, source, date, type, source tier, EU relevance, discovery route, tracked-since date, full available summary, relevance/admission note, available R&I/strategic evidence, Matrix placement/evidence where present, and the source-backed admission evidence. Legacy inference-only external bridges are removed from the public corpus.
-
-### 4. Reader-first claims
-
-Reader-facing prose is shorter and concrete. Bibliographic and source detail is preserved separately instead of being stuffed into the finding itself. The write boundary includes explicit handling for the e-hryvnia, cyber-governance, AI-for-science, CEPS technology-mapping and EU–India/open-hardware examples. Biographical material such as a researcher's training or job title is not used as the finding unless it is itself relevant evidence.
-
-The Risks & opportunities page is deliberately minimal: two ranked bullet lists, with source detail available on click. It now also shows a short **Plain English terms on this page** box derived from the visible items; dotted-underlined specialist terms expose their one-sentence glossary meaning on hover.
-
-The same plain-language layer is used by the main radar, Matrix, Risks & opportunities and secondary briefing view.
-
-**Reader-point contract:** every displayed finding and “why it matters” point is one complete sentence of **120 characters or fewer**. “Why it matters” must be derived from that record’s summary, reviewed evidence, Matrix evidence or source-bound core message; if no separate consequence can be stated safely, the line is omitted rather than replaced with a generic theme sentence. It must start with an explicit actor, system or topic — never vague openers such as “this”, “these”, “it”, “they”, “the study”, “the findings” or “the developments”. The UI never truncates a sentence or adds an ellipsis to force the limit.
+`stuff/source_merit_ranking.xlsx` is the technical evidence workbook. It opens with **What sources say**, a source-by-source bullet summary, followed by ranked sources, a detailed technical evidence sheet, the full 16-cell Matrix criteria contract and a method sheet explaining the language hierarchy, four-/six-month window and source-merit model. Where the saved radar does not contain substantive source text, the workbook says that explicitly instead of inventing findings.
 
 ## How discovery changed
 
@@ -92,11 +67,16 @@ This makes discovery iterative in a bounded way: the radar can learn where the l
 
 Weak signals no longer receive the protected follow-up query wave. After the A/B/C merge, Strand C is capped at **15% of all public findings**. This is a ceiling, not a quota: the scanner should not search merely to fill C. Within that cap, signals still require source-supported relevance; a generated Europe-impact bridge cannot create eligibility.
 
-## Four-month rule
+## Four-month core + Highest evidence to six months
 
-`BOOTSTRAP_LOOKBACK_MONTHS = 4` is the public-window rule. Saved rows, recovery rows and matrix-only historical rows cannot widen it. On the bundled 28 August 2026 state the publication floor is therefore **2026-04-28**.
+The preferred/current evidence window is the latest four calendar months. On the bundled 29 August 2026 state the four-month floor is **2026-04-29**.
 
-The bundled `radar.json` is the user-supplied **post-scan `radar (35).json`** state, timestamped **2026-08-28T13:43Z** and already using the exact **2026-04-28** public floor. V17.13.5 preserves its admitted records, evidence fields and scan cursors while retaining the current reader interface and scanner rules. **No additional discovery scan was run during packaging.**
+A/B has one narrow exception: a publication/report that scores **Highest (93–100)** under the shared source-merit model may be discovered in the 4–6 month band and retained until six calendar months. The extended floor is **2026-02-28** for the bundled state. All other A/B evidence, Strand C and Matrix-only recovery keep the four-month rule.
+
+The extended lane is bounded and runs after current-window work so older high-quality material cannot crowd out fresh discovery. A record must actually reach the Highest band to use the extension.
+
+The bundled `radar.json` is descended from the user-supplied post-scan `radar (38).json` state and the explicitly requested V17.13.24 precision cleanup; current counts are **182 A / 24 B / 14 C**. V17.13.28 removed four additional high-confidence legacy contaminants exposed by the source-specific claim audit; no discovery scan was run while packaging V17.13.28. See `CURRENT_CORPUS_INPUT.txt`.
+
 
 ## Scanner rotation
 
@@ -118,26 +98,28 @@ Reviewed evidence caches must be tied to the exact curator-supplied URL and reco
 
 - `read/index.html` — issue-tree entry point
 - `frontier/quick/index.html` — simple Matrix
-- `frontier/index.html` — evidence-rich Matrix
+- `frontier/index.html` — full Matrix with source detail; technical diagnostics are secondary
 - `priorities/index.html` — risks & opportunities
 - `literature/index.html` — alphabetical literature used
-- `stuff/index.html` — exports + most important publications
+- `stuff/index.html` — technical evidence workbook + reference-manager exports
 - `scripts/scan_radar.py` — discovery/admission scanner
 - `radar_criteria.md` — admission rules
 - `frontier_criteria.md` — Matrix rules and public/internal terminology mapping
-- `CHANGELOG_V17_13_12.md` — current release changes
-- `VALIDATION_V17_13_12.md` — current validation record
+- `CHANGELOG_V17_13_28.md` — current release changes
+- `VALIDATION_V17_13_28.md` — current validation record
 - `CURRENT_CORPUS_INPUT.txt` — exact input/bundled-state record
 
 ## Validate
 
-The repository-wide suite is the default validation command:
+Current release checks:
 
 ```bash
-pytest -q
+node scripts/presentation_smoke.js
+node scripts/test_matrix_semantic_contract.js
+python -m py_compile scripts/scan_radar.py scripts/manual_ingest.py scripts/build_briefing.py
 ```
 
-`pytest.ini` adds the repository root to the import path, so both `pytest -q` and `python -m pytest -q` work. The historical tests were migrated away from retired helper names, stale version literals, old manual-only workflow assumptions, and pre-source-specific Matrix expectations. See `VALIDATION_V17_13_12.md`.
+`presentation_smoke.js` verifies the page/runtime and reader-language boundaries without running network discovery. `test_matrix_semantic_contract.js` covers all 16 Matrix cells plus false-positive cases. See `VALIDATION_V17_13_28.md`.
 
 
 ## Reader views
@@ -235,7 +217,7 @@ This is a presentation/export repair only: no fresh scan, no Radar-data change, 
 ## V17.13.18 — source merit ranking in Stuff
 
 - Bundled `radar.json` is refreshed to the user-supplied scan state from 2026-08-28T20:50Z (A=224, B=25, C=14).
-- `Stuff` now leads with `source_merit_ranking.xlsx`, a ranked publication/report workbook showing journal or institution, author, source quality/reputation, plain-English relevance, evidence type and source links.
+- `Stuff` now leads with `source_merit_ranking.xlsx`, a ranked publication/report workbook showing journal or institution, author, source quality/reputation, technical evidence, source-merit components, Matrix fields and source links.
 - Official EU primary sources are deliberately ranked highest for this EU R&I geopolitics use case. The score is transparent and documented on the workbook's `Method` sheet.
 - The workbook is not an input to the scanner. Scanner admission, scoring, Matrix classification, source rotation and evidence logic are unchanged.
 - V17.13.17 workflow security hardening and the 6-hour scan schedule remain unchanged.

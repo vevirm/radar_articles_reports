@@ -1,25 +1,32 @@
-V17.13.21 CURRENT CORPUS INPUT — LATEST USER SCAN
+V17.13.28 CURRENT CORPUS STATE
 
-Authoritative user-supplied scan state:
-- file: radar (37).json
-- scanner last_updated: 2026-08-28T20:50Z
-- corpus_start_date: 2026-04-28
-- SHA-256: c6d827d4f533d4efb8271b5d26f41ca570dc43f1271434625a438537f8111645
-- counts: A=224, B=25, C=14, frontier_evidence=0
+Latest user-supplied scan state used as the base:
+- source file: radar (38).json
+- scanner last_updated: 2026-08-29T05:52Z
+- source corpus_start_date: 2026-04-29
 
-Packaging action:
-- radar (37).json is copied byte-for-byte to repository-root radar.json;
-- V17.13.17 workflow security hardening and the 6-hour schedule are retained unchanged;
-- scanner admission, ranking, Matrix classification, source rotation and evidence logic are not changed;
-- Stuff's primary Excel download becomes stuff/source_merit_ranking.xlsx;
-- the workbook ranks deduplicated publications by source authority, EU R&I relevance, evidence strength and author transparency, with official EU sources deliberately highest;
-- the ranking workbook is a presentation/reference export only and is not read by the scanner.
+Current packaged radar.json after the explicitly requested precision/language migrations in V17.13.24–V17.13.28:
+- SHA-256: e70564500ce49c7b32983079caea7e5e27349a5f5b97be575208831962c546f6
+- counts: A=182, B=24, C=14, frontier_evidence=0
+- current Matrix placements under the V17.13.26 semantic contract: 38
 
-V17.13.20 reader-layer note:
-- the same source-merit rules used in Stuff are surfaced across the Radar reader pages;
-- source merit can affect display/priority ordering among otherwise comparable items, but not scanner admission or Matrix placement.
+What changed after the user-supplied scan state:
+- inference-only external-shock admissions and high-confidence irrelevant legacy contamination were removed in the requested V17.13.24 precision cleanup;
+- public A/B is English-publication only;
+- the Knowledge-C talent criterion and search families were broadened in V17.13.25;
+- all 16 Matrix cells were audited/revalidated in V17.13.26;
+- V17.13.27 established the layered reader-language hierarchy;
+- V17.13.28 replaces generic Radar topic slogans with source-specific propositions, adds source-summary bullets to Excel, and removes four further high-confidence legacy contaminants exposed because their saved evidence could not establish a substantive EU R&I geopolitical mechanism.
 
-V17.13.21 reader-layer note:
-- Read at least this and the landing-page issue strip now derive their visible issue set from current admitted material;
-- the public issue count/order/branches are no longer fixed;
-- this downstream reorganisation does not alter scanner admission, Matrix placement, security limits or the six-hour schedule.
+Window policy:
+- normal evidence: four-calendar-month core;
+- A/B evidence scoring Highest (>=93/100 source merit): eligible for discovery/retention to six calendar months;
+- Strand C and Matrix-only recovery remain four months.
+
+Scheduler/data-integrity policy:
+- hourly workflow wake-ups with a six-hour due gate based on the last completed scan;
+- manual/push runs execute immediately;
+- normal scans hard-stop if an in-window A/B record disappears unexpectedly;
+- legitimate rolling-window age-outs are recorded separately.
+
+No network discovery scan was run while packaging V17.13.28.

@@ -130,3 +130,12 @@ Matrix coverage is recalculated on every scan and remains one permanent rotation
 ### V17.13.23 two-tier window
 
 `DATE_FLOOR` remains the four-month core floor and drives the normal scholarly, institutional, Matrix-gap and weak-signal paths. `EXTENDED_DATE_FLOOR` is six months and is used only by a bounded rotating institutional source lane whose sources are capable of reaching Highest source merit. Returned 4–6 month items are filtered again by the Python mirror of `source_merit.js`; only scores >=93 merge into A/B. Final merge enforcement also removes any non-Highest A/B row beyond four months and marks surviving extended rows with `extended_retention=true` and `retention_window_months=6`.
+
+### Reader-language boundary (V17.13.28)
+
+Language is intentionally asymmetric across views: Read is simplest; Matrix/Priorities are simple analytical; Main Radar/Evidence browser are policy-technical; Excel is the technical audit layer. `RadarInsights.readText`, `matrixText`, and `radarText` implement the public wording boundary. The transformations are downstream presentation helpers only and cannot alter corpus admission or Matrix classification.
+
+
+#### Source-specific Radar claim boundary
+
+The main Radar must not use reusable thematic slogans as publication findings. `briefing/insights.js::whatForEuRiGeo` ranks source sentences and reviewed evidence for a concrete proposition and rejects scanner/review scaffolding. The main Radar may use a longer policy-technical sentence than Read/Matrix. If saved source text is insufficient, the UI falls back to an explicit source focus rather than inventing a conclusion. The technical workbook separately records one to four source-grounded takeaways when available and explicitly marks metadata-only saved records.

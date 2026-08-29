@@ -1005,12 +1005,17 @@
     "knowledge-A": [
       "(EU OR Europe OR European) (researchers OR scientists OR \"research talent\") (attract OR retain OR recruit OR \"brain gain\") (\"strategic autonomy\" OR competitiveness OR \"research capacity\")",
       "(EU OR Europe OR European) (\"research talent\" OR researchers OR scientists) (US OR China OR global OR international) (competition OR attraction OR retention) (research OR science OR innovation)",
-      "(\"European Research Area\" OR EU) (research careers OR researcher mobility OR scientific talent) (capacity OR excellence OR competitiveness OR security)"
+      "(\"European Research Area\" OR EU) (research careers OR researcher mobility OR scientific talent) (capacity OR excellence OR competitiveness OR security)",
+      "(EU OR Europe OR European) (research careers OR doctoral training OR researcher retention) (retain OR return OR \"brain gain\") (capacity OR excellence OR competitiveness)",
+      "(EU OR Europe OR European) (researchers OR scientists) (return OR returning OR retention OR careers) (funding OR conditions OR capacity)",
+      "(EU OR Europe OR \"European Research Area\") (\"researcher mobility\" OR \"free movement of researchers\" OR \"brain circulation\" OR \"career portability\") (barriers OR recognition OR mobility OR careers) (capacity OR competitiveness OR excellence)",
+      "(EU OR Europe OR European) (researchers OR scientists) (\"cross-border careers\" OR \"intra-EU mobility\" OR \"return mobility\") (strengthen OR capacity OR competitiveness OR excellence)"
     ],
     "knowledge-B": [
       "(EU OR Europe OR European) (\"research security\" OR screening OR restrictions OR de-risking) (researchers OR collaboration OR mobility) (cost OR delay OR burden OR fragmentation)",
       "(EU OR Europe OR European) (knowledge security OR foreign interference OR export controls) (universities OR researchers OR research collaboration) (barrier OR restriction OR burden)",
-      "(\"European Research Area\" OR EU) (research security OR trusted research) (mobility OR collaboration OR talent) (innovation OR competitiveness)"
+      "(\"European Research Area\" OR EU) (research security OR trusted research) (mobility OR collaboration OR talent) (innovation OR competitiveness)",
+      "(EU OR Europe OR European) (\"knowledge security\" OR \"research security\" OR screening) (visa OR data sharing OR collaboration OR mobility OR openness) (delay OR burden OR restriction OR friction)"
     ],
     "knowledge-C": [
       "(EU OR Europe OR European) (\"international researchers\" OR \"foreign researchers\" OR \"third-country researchers\") (retain OR retention OR mobility OR access) (competitiveness OR \"research capacity\" OR innovation)",
@@ -1018,25 +1023,78 @@
       "(EU OR Europe OR European) (\"doctoral candidates\" OR \"PhD students\") (international OR foreign OR non-EU) (research capacity OR innovation OR competitiveness OR retention)",
       "(EU OR Europe OR European) (\"visiting researchers\" OR \"research visits\" OR \"scientific visitors\") (international OR foreign OR non-EU) (expertise OR capacity OR collaboration OR competitiveness)",
       "(\"European Research Area\" OR EU) (\"international talent\" OR \"foreign expertise\") (researchers OR doctoral OR STEM graduates) (retention OR dependence OR competitiveness)",
-      "(EU OR Europe) (\"stay after\" OR \"post-study\" OR \"post-research\") (international students OR researchers OR graduates) (innovation OR research OR STEM)"
+      "(EU OR Europe) (\"stay after\" OR \"post-study\" OR \"post-research\") (international students OR researchers OR graduates) (innovation OR research OR STEM)",
+      "(EU OR Europe OR European) (\"foreign expertise\" OR \"international research networks\" OR \"non-EU collaborators\") (access OR collaboration OR visiting OR mobility) (research capacity OR excellence OR competitiveness)",
+      "(EU OR Europe OR European) (international postdocs OR foreign postdocs OR internationally trained researchers) (retain OR stay OR recruit) (research OR innovation OR STEM)"
     ],
     "knowledge-D": [
       "(EU OR Europe OR European) (\"brain drain\" OR researcher outflow OR scientists leaving OR research talent loss) (US OR China OR abroad OR foreign) (capacity OR competitiveness OR autonomy)",
       "(\"European Research Area\" OR EU) (researcher outflow OR talent retention OR scientists leaving) (crisis OR decline OR shortage OR competitiveness)",
-      "(EU OR Europe) (research talent OR scientists OR researchers) (leave OR relocate OR move abroad) (\"strategic autonomy\" OR \"research capacity\" OR innovation)"
+      "(EU OR Europe) (research talent OR scientists OR researchers) (leave OR relocate OR move abroad) (\"strategic autonomy\" OR \"research capacity\" OR innovation)",
+      "(EU OR Europe OR European) (knowledge leakage OR knowledge theft OR espionage OR \"loss of know-how\") (research OR university OR technology) (capacity OR competitiveness OR security)",
+      "(EU OR Europe OR European) (research collaboration OR scientific network OR researchers) (excluded OR \"access lost\" OR suspended OR cut off) (capacity OR competitiveness OR science)"
     ],
-    "infrastructure-A": "(EU OR Europe OR European) (build OR expand OR invest OR onshore) (compute OR cloud OR semiconductor OR chips OR reactor OR \"research infrastructure\" OR \"critical raw materials\") (autonomy OR sovereignty OR \"reduce dependence\" OR competitiveness)",
-    "infrastructure-B": "(EU OR Europe OR European) (localise OR localize OR onshore OR sovereignty OR autonomy OR de-risking) (chips OR compute OR cloud OR reactor OR infrastructure OR supply chain) (cost OR delay OR expensive OR shortage OR slower)",
-    "infrastructure-C": "(EU OR Europe OR European) (relies OR depends OR reliance OR access) (US cloud OR American cloud OR Nvidia OR Taiwan OR TSMC OR Chinese OR \"non-EU\" OR foreign) (compute OR chips OR reactors OR infrastructure) (scale OR performance OR capacity)",
-    "infrastructure-D": "(EU OR Europe OR European) (shortage OR \"access cut\" OR ban OR \"export controls\" OR closure OR outage OR disruption) (chips OR compute OR cloud OR reactors OR infrastructure OR \"critical raw materials\") (dependence OR decline OR \"fall behind\" OR competitiveness)",
-    "conversion-A": "(EU OR Europe OR European) (scale-up OR scaleup OR commercialisation OR commercialization OR industrialisation OR industrialization OR procurement OR manufacturing) (AI OR quantum OR biotech OR semiconductor OR \"deep tech\") (lead OR competitiveness OR capacity OR autonomy)",
-    "conversion-B": "(EU OR Europe OR European) (sovereignty OR autonomy OR de-risking OR localisation OR localization OR regulation) (startup OR scale-up OR innovation OR manufacturing OR commercialization) (cost OR delay OR burden OR slower OR fragmentation)",
-    "conversion-C": "(EU OR Europe OR European) (startup OR scale-up OR technology firm OR innovation) (relies OR depends OR foreign capital OR US market OR American cloud OR foreign platform) (scale OR growth OR commercialization OR performance)",
-    "conversion-D": "(EU OR Europe OR European) (startup OR scale-up OR technology firm OR manufacturing) (moves OR exits OR acquired OR closure OR decline OR \"scale-up gap\" OR \"funding gap\") (US OR China OR foreign OR abroad) (competitiveness OR capacity)",
-    "rules-A": "(EU OR Europe OR European) (standard OR regulation OR procurement OR funding OR state aid OR programme OR program) (innovation OR research OR technology) (lead OR advantage OR market OR scale OR autonomy)",
-    "rules-B": "(EU OR Europe OR European) (\"research security\" OR \"export controls\" OR screening OR regulation OR de-risking OR sovereignty) (research OR innovation OR technology OR collaboration) (cost OR delay OR burden OR fragmentation OR slower)",
-    "rules-C": "(EU OR Europe OR European) (relies OR depends OR follows OR access) (US rules OR American rules OR foreign standards OR platform rules OR export licence OR export license) (research OR technology OR innovation) (performance OR access OR scale)",
-    "rules-D": "(EU OR Europe OR European) (\"export controls\" OR sanctions OR foreign rules OR standards OR exclusion OR fragmentation) (research OR technology OR innovation) (blocked OR loses OR decline OR dependence OR \"fall behind\")"
+    "infrastructure-A": [
+      "(EU OR Europe OR European) (build OR expand OR invest OR onshore) (compute OR cloud OR semiconductor OR chips OR reactor OR \"research infrastructure\" OR \"critical raw materials\") (autonomy OR sovereignty OR \"reduce dependence\" OR competitiveness)",
+      "(EU OR Europe OR European) (diversify OR \"alternative suppliers\" OR \"secure access\" OR \"joint procurement\") (compute OR chips OR \"research infrastructure\" OR \"critical raw materials\") (resilience OR autonomy OR capacity)",
+      "(EU OR Europe OR European) (shared OR joint OR federated) (research facility OR supercomputer OR compute OR data infrastructure) (capacity OR autonomy OR competitiveness)",
+      "(EU OR Europe OR European) (substitute OR substitution OR recycling OR alternative) (\"advanced materials\" OR \"critical materials\" OR \"research inputs\") (\"comparable performance\" OR capability) (dependence OR resilience)",
+      "(EU OR Europe OR European) (\"research data\" OR \"scientific data\" OR database OR repository OR biobank) (shared OR federated OR European-controlled OR sovereign) (research capacity OR resilience OR autonomy)"
+    ],
+    "infrastructure-B": [
+      "(EU OR Europe OR European) (localise OR localize OR onshore OR sovereignty OR autonomy OR de-risking) (chips OR compute OR cloud OR reactor OR infrastructure OR supply chain) (cost OR delay OR expensive OR shortage OR slower)",
+      "(EU OR Europe OR European) (redundancy OR diversification OR \"trusted suppliers\" OR sovereign) (compute OR cloud OR chips OR infrastructure) (cost OR duplication OR latency OR delay OR efficiency)"
+    ],
+    "infrastructure-C": [
+      "(EU OR Europe OR European) (relies OR depends OR reliance OR access) (US cloud OR American cloud OR Nvidia OR Taiwan OR TSMC OR Chinese OR \"non-EU\" OR foreign) (compute OR chips OR reactors OR infrastructure) (scale OR performance OR capacity)",
+      "(EU OR Europe OR European) (\"US compute\" OR \"foreign compute\" OR \"non-EU cloud\" OR \"foreign research facility\" OR \"international facility\") (access OR use OR rely OR depend) (frontier OR capacity OR research OR innovation)",
+      "(EU OR Europe OR European) (foreign OR non-EU) (GPU OR instrument OR facility OR critical input) (enables OR supports OR access) (research OR innovation OR technology)",
+      "(EU OR Europe OR European) (\"research data\" OR \"scientific database\" OR \"data repository\" OR biobank) (foreign OR US OR non-EU OR international) (rely OR depend OR access) (enables OR supports OR frontier OR capacity)"
+    ],
+    "infrastructure-D": [
+      "(EU OR Europe OR European) (shortage OR \"access cut\" OR ban OR \"export controls\" OR closure OR outage OR disruption) (chips OR compute OR cloud OR reactors OR infrastructure OR \"critical raw materials\") (dependence OR decline OR \"fall behind\" OR competitiveness)",
+      "(EU OR Europe OR European) (\"licence denied\" OR \"license denied\" OR withdrawal OR outage OR \"vendor exit\" OR \"supply cut\") (compute OR chip OR cloud OR facility OR \"critical input\") (research OR innovation OR capacity)"
+    ],
+    "conversion-A": [
+      "(EU OR Europe OR European) (scale-up OR scaleup OR commercialisation OR commercialization OR industrialisation OR industrialization OR procurement OR manufacturing) (AI OR quantum OR biotech OR semiconductor OR \"deep tech\") (lead OR competitiveness OR capacity OR autonomy)",
+      "(EU OR Europe OR European) (scale-up OR deep tech OR technology firms) (procurement OR growth capital OR manufacturing OR commercialization) (European ownership OR production OR \"value capture\")",
+      "(EU OR Europe OR European) (startup OR scale-up OR deep-tech firm) (\"single market\" OR procurement OR customers) (scale OR commercialise OR expand) (production OR value capture OR competitiveness)"
+    ],
+    "conversion-B": [
+      "(EU OR Europe OR European) (sovereignty OR autonomy OR de-risking OR localisation OR localization OR regulation) (startup OR scale-up OR innovation OR manufacturing OR commercialization) (cost OR delay OR burden OR slower OR fragmentation)",
+      "(EU OR Europe OR European) (\"local content\" OR \"European preference\" OR reshoring OR screening) (scale-up OR manufacturing OR technology firms) (cost OR fragmentation OR delay OR subscale)"
+    ],
+    "conversion-C": [
+      "(EU OR Europe OR European) (startup OR scale-up OR technology firm OR innovation) (relies OR depends OR foreign capital OR US market OR American cloud OR foreign platform) (scale OR growth OR commercialization OR performance)",
+      "(EU OR Europe OR European) (scale-up OR startup OR deep tech) (\"foreign venture capital\" OR \"US market\" OR \"foreign platform\" OR \"overseas manufacturing\") (scale OR growth OR commercialization) (depend OR rely OR access)"
+    ],
+    "conversion-D": [
+      "(EU OR Europe OR European) (startup OR scale-up OR technology firm OR manufacturing) (moves OR exits OR acquired OR closure OR decline OR \"scale-up gap\" OR \"funding gap\") (US OR China OR foreign OR abroad) (competitiveness OR capacity)",
+      "(EU OR Europe OR European) (research OR startup OR deep tech OR technology) (\"value capture abroad\" OR \"IP sold abroad\" OR \"R&D moved\" OR \"production moved\" OR acquisition) (scale OR capability OR competitiveness)",
+      "(EU OR Europe OR European) (scale-up OR startup) (foreign acquisition OR relocation OR \"headquarters moved\") (R&D OR production OR control OR value)",
+      "(EU OR Europe OR European) (startup OR technology firm OR deep tech) (acquired OR acquisition OR listing OR headquarters OR R&D OR IP) (abroad OR foreign OR non-EU) (loss OR relocate OR control OR value capture)"
+    ],
+    "rules-A": [
+      "(EU OR Europe OR European) (standard OR regulation OR procurement OR funding OR state aid OR programme OR program) (innovation OR research OR technology) (lead OR advantage OR market OR scale OR autonomy)",
+      "(EU OR Europe OR European) (\"mutual recognition\" OR harmonisation OR harmonization OR \"joint funding\" OR \"common standard\" OR \"coordinated procurement\") (research OR innovation OR technology) (capacity OR market OR competitiveness OR autonomy)",
+      "(EU OR Europe OR European) (\"mutual recognition\" OR \"common standard\" OR harmonisation OR \"joint funding\" OR \"coordinated procurement\" OR \"science diplomacy\") (innovation OR research OR technology) (access OR interoperability OR faster OR competitiveness OR capacity)",
+      "(EU OR Europe OR European) (\"research agreement\" OR \"association agreement\" OR \"joint programme\") (co-governance OR coordination OR reciprocal OR common rules) (research capacity OR innovation OR access)"
+    ],
+    "rules-B": [
+      "(EU OR Europe OR European) (\"research security\" OR \"export controls\" OR screening OR regulation OR de-risking OR sovereignty) (research OR innovation OR technology OR collaboration) (cost OR delay OR burden OR fragmentation OR slower)",
+      "(EU OR Europe OR European) (research security OR screening OR export controls OR \"knowledge security\") (self-imposed OR European OR EU) (collaboration OR innovation OR mobility) (cost OR delay OR burden OR friction)"
+    ],
+    "rules-C": [
+      "(EU OR Europe OR European) (relies OR depends OR follows OR access) (US rules OR American rules OR foreign standards OR platform rules OR export licence OR export license) (research OR technology OR innovation) (performance OR access OR scale)",
+      "(EU OR Europe OR European) (\"US export licence\" OR \"US export license\" OR \"foreign standard\" OR \"platform terms\" OR \"foreign rules\") (access OR comply OR permission) (technology OR research OR market OR innovation)",
+      "(EU OR Europe OR European) (foreign OR non-EU) (standard OR licence OR license OR platform rule) (preserve access OR market access OR technology access)",
+      "(EU OR Europe OR European) (\"platform licensing terms\" OR \"API terms\" OR \"foreign certification\" OR \"US standard\") (comply OR compliance OR licence OR license) (maintain OR preserve OR enable) (research access OR technology access OR market access)"
+    ],
+    "rules-D": [
+      "(EU OR Europe OR European) (\"export controls\" OR sanctions OR foreign rules OR standards OR exclusion OR fragmentation) (research OR technology OR innovation) (blocked OR loses OR decline OR dependence OR \"fall behind\")",
+      "(EU OR Europe OR European) (\"national fragmentation\" OR \"regulatory fragmentation\" OR \"approval delay\" OR \"permit delay\") (research OR innovation OR technology) (blocked OR slower OR loses OR competitiveness)",
+      "(EU OR Europe OR European) (foreign sanctions OR foreign export controls OR \"licence denied\" OR \"license denied\") (research OR technology OR innovation) (blocked OR access lost OR delay OR capability)"
+    ]
   },
   "frontier_gap_priority_cells": [],
   "frontier_gap_scholarly_queries_per_scan": 32,
@@ -1047,7 +1105,13 @@
       "European Research Area talent global competition research capacity",
       "Europe science talent US China competition researchers",
       "EU research careers economic security talent capacity",
-      "Europe brain gain researchers innovation competitiveness"
+      "Europe brain gain researchers innovation competitiveness",
+      "Europe researcher retention career conditions scientific capacity",
+      "EU returning researchers brain gain research workforce",
+      "European doctoral research workforce retention capacity",
+      "European Research Area researcher mobility free movement career barriers scientific capacity",
+      "EU brain circulation intra-European researcher mobility competitiveness research workforce",
+      "Europe researcher career portability cross-border mobility scientific excellence"
     ],
     "knowledge-B": [
       "EU research security talent mobility collaboration restrictions innovation",
@@ -1055,7 +1119,9 @@
       "European universities knowledge security researcher mobility burden",
       "EU trusted research collaboration restrictions scientific talent",
       "Europe foreign interference research security academic mobility",
-      "European Research Area research security fragmentation collaboration"
+      "European Research Area research security fragmentation collaboration",
+      "EU knowledge security data sharing collaboration friction",
+      "Europe research screening visa scientific mobility cost"
     ],
     "knowledge-C": [
       "Europe international researchers retention research capacity competitiveness",
@@ -1073,7 +1139,9 @@
       "Europe third-country students researchers stay after study innovation",
       "EU post-study international STEM graduates research innovation employment",
       "Europe international scientific talent mobility access expertise capacity",
-      "EU foreign researchers visiting scientists research capacity competitiveness"
+      "EU foreign researchers visiting scientists research capacity competitiveness",
+      "Europe foreign expertise international research networks access capacity",
+      "EU international postdocs retention research innovation workforce"
     ],
     "knowledge-D": [
       "Choose Europe research careers brain drain CESAER survey",
@@ -1088,7 +1156,9 @@
       "Europe researcher outflow retention precarious careers science",
       "European research workforce talent loss emigration data",
       "Europe brain drain academic researchers temporary contracts competitiveness",
-      "EU researchers leave abroad scientific capacity brain drain evidence"
+      "EU researchers leave abroad scientific capacity brain drain evidence",
+      "Europe research knowledge leakage espionage capability loss",
+      "EU exclusion foreign research networks collaboration access loss"
     ],
     "infrastructure-A": [
       "Europe strategic research infrastructure domestic capacity investment",
@@ -1096,7 +1166,11 @@
       "European critical technology infrastructure build autonomy",
       "EU research infrastructure strategic autonomy competitiveness",
       "Europe AI compute infrastructure economic security investment",
-      "European semiconductor research infrastructure sovereignty capacity"
+      "European semiconductor research infrastructure sovereignty capacity",
+      "Europe diversified suppliers research infrastructure secure access autonomy",
+      "EU shared research facilities joint compute capacity resilience",
+      "Europe advanced materials substitution import dependence comparable performance research capability",
+      "EU federated research data infrastructure autonomy scientific capacity"
     ],
     "infrastructure-B": [
       "Europe technology infrastructure sovereignty cost delay",
@@ -1104,7 +1178,9 @@
       "European infrastructure localisation competitiveness delay",
       "EU strategic infrastructure reshoring cost innovation",
       "Europe sovereign cloud research infrastructure fragmentation",
-      "European chip autonomy investment burden competitiveness"
+      "European chip autonomy investment burden competitiveness",
+      "Europe resilient technology infrastructure redundancy cost tradeoff",
+      "EU trusted suppliers compute sovereignty performance cost"
     ],
     "infrastructure-C": [
       "Europe dependence foreign compute chips cloud capacity",
@@ -1112,7 +1188,11 @@
       "European research infrastructure foreign vendor dependence scale",
       "EU strategic dependency semiconductor compute research",
       "Europe cloud infrastructure foreign dependence economic security",
-      "European critical technology infrastructure external reliance"
+      "European critical technology infrastructure external reliance",
+      "Europe foreign frontier compute access research capability dependence",
+      "EU non-EU research facilities instruments access scientific capacity",
+      "European research foreign scientific database data repository access dependence capability",
+      "EU laboratories non-EU research data infrastructure access scientific performance dependence"
     ],
     "infrastructure-D": [
       "Europe critical technology infrastructure access loss shortage",
@@ -1122,7 +1202,9 @@
       "Europe critical research infrastructure supply disruption capacity loss",
       "European compute access restrictions innovation decline",
       "Europe critical technology access cut off no substitute research infrastructure",
-      "EU compute chip access shortage foreign supplier research capacity loss"
+      "EU compute chip access shortage foreign supplier research capacity loss",
+      "Europe foreign technology vendor withdrawal research access loss",
+      "EU licence denied compute chips research capability disruption"
     ],
     "conversion-A": [
       "Europe deep tech scale-up manufacturing strategic autonomy",
@@ -1130,7 +1212,11 @@
       "European technology firms scale manufacturing competitiveness",
       "EU deep tech industrialisation economic security scale",
       "Europe research commercialisation strategic technology leadership",
-      "European innovation procurement scale-up sovereignty"
+      "European innovation procurement scale-up sovereignty",
+      "Europe deep tech growth capital procurement manufacturing value capture",
+      "EU scaleups European production commercialization industrial capacity",
+      "European deep tech scale single market commercialisation value capture",
+      "EU innovation procurement firm scaling manufacturing value capture"
     ],
     "conversion-B": [
       "Europe technology autonomy protected market scale-up costs",
@@ -1138,7 +1224,9 @@
       "European sovereign industrial policy subscale technology firms",
       "EU strategic autonomy industrial policy innovation cost",
       "Europe de-risking scale-up fragmentation technology firms",
-      "European localisation policy commercialization burden"
+      "European localisation policy commercialization burden",
+      "Europe local content technology firms cost fragmentation scale",
+      "EU European preference procurement scaleup competitiveness tradeoff"
     ],
     "conversion-C": [
       "Europe startups foreign capital market dependence scale",
@@ -1146,7 +1234,9 @@
       "European scale-ups foreign platforms capital performance",
       "EU deep tech foreign venture capital strategic dependency",
       "Europe technology firms non-EU cloud platform dependence",
-      "European startups foreign market reliance competitiveness"
+      "European startups foreign market reliance competitiveness",
+      "Europe scaleups foreign venture capital market platform dependence growth",
+      "EU startups overseas manufacturing foreign market scale dependence"
     ],
     "conversion-D": [
       "Europe deep tech firm exit hollowing out capability loss",
@@ -1156,7 +1246,11 @@
       "Europe scale-up acquisition foreign hollowing out innovation",
       "European deep tech funding gap firms leave abroad",
       "Europe deep tech companies leave scale abroad capability loss evidence",
-      "EU startup scaleup relocation abroad innovation capacity hollowing out"
+      "EU startup scaleup relocation abroad innovation capacity hollowing out",
+      "Europe research value capture abroad IP acquisition scaleup loss",
+      "EU startup acquisition R&D relocation production moved abroad",
+      "European technology firms foreign acquisition R&D relocation IP value capture",
+      "EU scaleups listings abroad headquarters relocation innovation capability"
     ],
     "rules-A": [
       "EU technology standards adopted global innovation advantage",
@@ -1164,7 +1258,11 @@
       "EU standards procurement technology rule setter",
       "Europe research regulation strategic advantage innovation",
       "EU standards technology sovereignty market leadership",
-      "European innovation procurement rules competitiveness"
+      "European innovation procurement rules competitiveness",
+      "EU mutual recognition research innovation common standards competitiveness",
+      "Europe coordinated procurement joint funding technology autonomy",
+      "EU mutual recognition technology standards innovation market access coordination",
+      "European joint research programme coordinated funding strategic autonomy innovation"
     ],
     "rules-B": [
       "EU research security regulation collaboration cost delay",
@@ -1172,7 +1270,9 @@
       "EU autonomy regulation fragmentation research innovation",
       "Europe research security rules administrative burden competitiveness",
       "EU technology regulation de-risking innovation delay",
-      "European export controls research collaboration fragmentation"
+      "European export controls research collaboration fragmentation",
+      "EU self-imposed research security screening collaboration friction",
+      "Europe knowledge security export control innovation burden"
     ],
     "rules-C": [
       "EU dependence foreign technology rules standards access",
@@ -1182,7 +1282,11 @@
       "Europe US export controls technology access innovation",
       "European firms non-EU platform rules dependence",
       "Europe follows US technology export rules dependence innovation access",
-      "EU firms dependent on foreign standards technology rules competitiveness"
+      "EU firms dependent on foreign standards technology rules competitiveness",
+      "Europe US export licence technology access dependence rules",
+      "EU foreign standards platform terms market access rule taking",
+      "European research US platform licensing terms access dependence",
+      "EU technology firms foreign certification standards market access rule taking"
     ],
     "rules-D": [
       "EU technology policy gridlock innovation competitiveness",
@@ -1190,7 +1294,9 @@
       "EU research technology decision delay fall behind",
       "European technology restrictions capability decline competitiveness",
       "EU foreign standards exclusion innovation capacity loss",
-      "Europe research access blocked export controls decline"
+      "Europe research access blocked export controls decline",
+      "EU regulatory fragmentation approval delay research innovation capability",
+      "Europe foreign export controls licence denial technology access loss"
     ]
   },
   "inherited_corpus_audit_enabled": true,
@@ -1246,7 +1352,11 @@
       "talent-retention",
       "brain-circulation",
       "research-careers",
-      "choose-europe"
+      "choose-europe",
+      "knowledge-leakage",
+      "knowledge-theft",
+      "research-network",
+      "collaboration-suspended"
     ],
     "infrastructure-A": [
       "research-infrastructure",
@@ -1254,7 +1364,11 @@
       "compute",
       "semiconductor",
       "critical-raw-materials",
-      "strategic-autonomy"
+      "strategic-autonomy",
+      "diversification",
+      "secure-access",
+      "joint-procurement",
+      "shared-infrastructure"
     ],
     "infrastructure-B": [
       "technology-sovereignty",
@@ -1270,7 +1384,11 @@
       "semiconductor",
       "foreign-vendor",
       "supply-chain",
-      "compute"
+      "compute",
+      "foreign-compute",
+      "research-facility",
+      "international-facility",
+      "technology-access"
     ],
     "infrastructure-D": [
       "supply-disruption",
@@ -1311,7 +1429,11 @@
       "hollowing-out",
       "manufacturing-decline",
       "funding-gap",
-      "relocation"
+      "relocation",
+      "value-capture",
+      "ip-transfer",
+      "acquisition",
+      "r-and-d-relocation"
     ],
     "rules-A": [
       "standards",
@@ -1319,7 +1441,11 @@
       "standardization",
       "innovation-policy",
       "funding-programme",
-      "procurement"
+      "procurement",
+      "mutual-recognition",
+      "coordination",
+      "joint-funding",
+      "common-standard"
     ],
     "rules-B": [
       "research-security",
@@ -1342,7 +1468,11 @@
       "export-control",
       "blocked-access",
       "fragmentation",
-      "technology-restrictions"
+      "technology-restrictions",
+      "regulatory-fragmentation",
+      "approval-delay",
+      "licence-denied",
+      "license-denied"
     ]
   },
   "frontier_gap_institution_sources": {
@@ -1524,7 +1654,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.25-source-supported-english-talent-pipeline",
+  "recall_profile_version": "v17.13.26-source-supported-english-balanced-matrix-reasoning",
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1549,8 +1679,8 @@
   "english_only": true,
   "major_eu_ri_focus": true,
   "aboutness_profile_version": "v17.9.0-source-length-aware",
-  "matrix_profile_version": "v17.13.6-semantic-cell-contract",
-  "display_claim_profile_version": "v17.13.2-explicit-subject-120-char",
+  "matrix_profile_version": "v17.13.26-balanced-semantic-contract",
+  "display_claim_profile_version": "v17.13.28-source-specific-radar",
   "aboutness_text_modes": {
     "full_text": {
       "min_body_words": 500,
@@ -1608,7 +1738,7 @@
   "package_file_budget": 100,
   "frontier_gap_balance_enabled": true,
   "frontier_gap_balance_target_cap": 12,
-  "matrix_balance_rotation_profile_version": "v17.13.25-external-talent-pipeline-balance",
+  "matrix_balance_rotation_profile_version": "v17.13.26-balanced-reasoning-coverage",
   "source_attention_profile_version": "v17.13.4-prefer-q1-and-official-eu-without-gate-tightening",
   "preferred_q1_journals_sjr2024": [
     "Research Policy",
@@ -1640,9 +1770,9 @@
   "frontier_gap_balance_rich_cell_ratio": 0.75,
   "frontier_gap_balance_repeat_scale": 4.0,
   "frontier_gap_balance_repeat_cap": 10,
-  "matrix_balance_policy": "Matrix coverage uses the same semantic cell contract as the reader Matrix. Sparse cells get extra discovery attention; admission standards are unchanged and no cell is filled to satisfy a quota.",
+  "matrix_balance_policy": "Matrix coverage uses a source-supported semantic contract for every cell, including reviewed adjudications. Sparse cells get extra discovery attention across multiple plausible mechanisms; no cell is filled to satisfy a quota.",
   "matrix_balance_rotation_mode": "recurring_every_scan",
-  "matrix_balance_rotation_rule": "Matrix coverage is recalculated every scan and during depth waves. Sparse cells receive extra discovery slots as one recurring rotation dimension alongside broad topic rotation, source-quality attention, finding-context queries, researcher attention and the methods lane. It never changes admission standards.",
+  "matrix_balance_rotation_rule": "Coverage is recalculated every scan and during depth waves. Sparse cells receive extra searches for distinct causal mechanisms (talent, access, scale, rules) while every placement must evidence the row plus both control/dependence and performance directions.",
   "rotation_dimensions": [
     "broad_topic_rotation",
     "matrix_coverage_balance",
@@ -1656,5 +1786,13 @@
   "extended_top_quality_stage_seconds": 150,
   "english_publication_required": true,
   "allow_foreign_publication_with_english_abstract": false,
-  "allow_inference_only_external_admission": false
+  "allow_inference_only_external_admission": false,
+  "reader_language_profile_version": "v17.13.28-source-specific-radar",
+  "reader_language_profiles": {
+    "read": "simplest ordinary language",
+    "matrix_priorities": "simple analytical language; simpler than main radar",
+    "radar_evidence": "policy-technical R&I language",
+    "excel_export": "technical audit language and classifier detail"
+  },
+  "presentation_profile_version": "v17.13.28-source-specific-radar-and-source-bullets"
 }

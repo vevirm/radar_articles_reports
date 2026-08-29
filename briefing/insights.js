@@ -77,6 +77,7 @@
     if(/^\s*(?:page\s*)?\d{1,4}\s+(?:annex|appendix|chapter|section|methodology)\b/i.test(s)) return true;
     if(/^(?:annex|appendix|chapter|section)\s+[a-z0-9ivx.-]+\s*[:.-]/i.test(s)) return true;
     if(/^(?:table of contents|contents|list of (?:figures|tables)|bibliography|references|glossary|acronyms?|abbreviations?)\b/i.test(s)) return true;
+    if(/\b(?:info|contact)@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/i.test(s)||/\bCantersteen\b/i.test(s)||/^\d+\s+European Citizen Action Service\b/i.test(s)) return true;
     if(/\b(?:annex|appendix)\s+\d+\s*:\s*(?:methodology|methods?|technical annex)\b/i.test(s)) return true;
     if(/^\s*\d{1,4}\s+[A-Z][A-Z0-9 &()/:,.-]{8,}\s*$/.test(s)) return true;
     if(/^\s*(?:page\s+)?\d{1,4}\s*(?:of\s+\d{1,4})?\s*$/i.test(s)) return true;
@@ -101,6 +102,9 @@
   function prepareSummary(v){
     let s=repairOcr(v);
     if(!s) return '';
+    // Abstract feeds sometimes concatenate sentence boundaries ("industry.The").
+    // Restore the boundary before sentence ranking so source-specific findings are not buried.
+    s=s.replace(/(?<=[a-z0-9])\.(?=[A-Z])/g,'. ');
     // If OCR dumped title-page/navigation material before SUMMARY, keep the actual summary.
     const summaryMatches=[...s.matchAll(/\bSUMMARY\b\s*/gi)];
     if(summaryMatches.length){
@@ -435,6 +439,52 @@
     return s;
   }
 
+  // V17.13.27 reader-language contract. The same evidence is phrased at different
+  // levels on different pages; this changes presentation only, never admission or
+  // Matrix placement. Read is the simplest. Matrix/Priorities are still plain but
+  // keep a few analytical terms. The main Radar keeps policy terminology. Excel
+  // and record-detail exports keep the technical wording and classifier evidence.
+  function readText(v){
+    let s=fastReaderText(v);
+    if(!s)return '';
+    return s
+      .replace(/\bability to act without relying too much on others\b/gi,'freedom to act without relying too much on others')
+      .replace(/\bability to act independently\b/gi,'freedom to act')
+      .replace(/\bcontrol over key technology\b/gi,'control of important technology')
+      .replace(/\brules and decision-making\b/gi,'rules and decisions')
+      .replace(/\bcountries or systems working separately\b/gi,'countries or systems not working together')
+      .replace(/\bone-sided reliance\b/gi,'relying much more on one side')
+      .replace(/\binvestment in young companies\b/gi,'funding for young companies')
+      .replace(/\bexternal suppliers?\b/gi,'suppliers outside Europe')
+      .replace(/\bexternal access\b/gi,'access from outside Europe')
+      .replace(/\boutside dependence\b/gi,'reliance on others')
+      .replace(/\bexternal dependence\b/gi,'reliance on others')
+      .replace(/\bstrategic capability\b/gi,'important European capacity')
+      .replace(/\bstrategic technology\b/gi,'important technology')
+      .replace(/\bgeopolitical competition\b/gi,'international competition')
+      .replace(/\bgeopolitical pressure\b/gi,'international political pressure')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  function matrixText(v){
+    let s=fastReaderText(v);
+    if(!s)return '';
+    return s
+      .replace(/\bexternal dependence\b/gi,'outside reliance')
+      .replace(/\bstrategic dependence\b/gi,'risky reliance on others')
+      .replace(/\bstrategic dependencies\b/gi,'risky reliance on others')
+      .replace(/\bcompetitive position\b/gi,'ability to compete')
+      .replace(/\bgeopolitical leverage\b/gi,'political leverage')
+      .replace(/\bpolicy lever\b/gi,'policy response')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  function radarText(v){
+    // Main Radar: clean extraction/OCR artefacts, but do not translate standard
+    // R&I-policy vocabulary into beginner language.
+    return repairOcr(v).replace(/\s+/g,' ').trim();
+  }
+
   function structuredPoint(x){
     const title=repairOcr(x.title||x.headline||'');
     const s=prepareSummary(x.summary||'');
@@ -698,39 +748,103 @@
 
 
   function whatForEuRiGeo(x){
-    // Reader-facing answer to: “What does this source say for EU R&I in geopolitics?”
-    // The display sentence is capped at 150 characters and is never hard-cut.
-    const current=readerPoint(pointFor(x),150);
-    const fallback=readerPoint(fallbackPoint(x),150);
-    const RI=/\b(research|innovation|science|scientific|technology|technological|university|universit|researcher|talent|skills?|r&d|r&i|compute|cloud|semiconductor|chip|quantum|biotech|infrastructure|funding|horizon|erc|industrial|digital|cyber)\w*/i;
-    const GEO=/\b(geopolit|strategic|security|depend|reli|autonom|sovereign|compet|export control|sanction|de-risk|derisk|supply chain|foreign|international|cross-border|collabor|cooperat|partner|access|control|restrict|screen|fragment|trade|china|chinese|united states|\bus\b|russia|ukraine|nato|india|japan)\w*/i;
-    const EU=/\b(EU|Europe|European|Horizon Europe|ERC|Member States)\b/i;
-    const META_WHAT=/^(?:Learning outcomes?\b|To address this\b|By 20\d{2}\b|The purpose of\b|This (?:study|paper|article|report)\b|The (?:study|paper|article|report)\b)/i;
-    const FINITE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|shows?|finds?|argues?|concludes?|reveals?|indicates?|suggests?|highlights?|affects?|changes?|shifts?|raises?|cuts?|limits?|restricts?|reduces?|increases?|strengthens?|weakens?|depends?|relies?|builds?|funds?|opens?|closes?|adopts?|introduces?|expands?|creates?|links?|leaves?|moves?|trails?|outpaces?|constrains?|enables?|protects?|reshapes?|redirects?|determines?|pressures?|faces?|gains?|loses?|needs?|remains?|becomes?|treats?|uses?|maps?|offers?|supports?|drives?|updates?)\b/i;
-    const ACTION_SENTENCE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|shows?|finds?|argues?|concludes?|reveals?|indicates?|suggests?|highlights?|affects?|changes?|shifts?|raises?|cuts?|restricts?|reduces?|increases?|strengthens?|weakens?|depends?|relies?|builds?|funds?|opens?|closes?|adopts?|introduces?|expands?|creates?|links?|leaves?|moves?|trails?|outpaces?|constrains?|enables?|protects?|reshapes?|redirects?|determines?|pressures?|faces?|gains?|loses?|needs?|remains?|becomes?|treats?|uses?|maps?|offers?|supports?|drives?|updates?)\b/i;
-    const titleLike=v=>!!v&&norm(v).trim()===norm(x?.title||x?.headline||'').trim()&&!ACTION_SENTENCE.test(v);
-    const fit=v=>!!v&&!META_WHAT.test(v)&&!titleLike(v)&&ACTION_SENTENCE.test(v)&&(EU.test(v)||RI.test(v))&&(GEO.test(v)||EU.test(v));
-    if(fit(current)) return current;
-    if(fit(fallback)) return fallback;
+    // Main-Radar answer to: “What does this source actually say for EU R&I geopolitics?”
+    // Reusable topic slogans are deliberately rejected. Prefer a concrete proposition from
+    // this source: named actor/instrument/dependency + the specific change or consequence.
+    const MAX_RADAR_CHARS=300;
+    const GENERIC_RADAR_POINT=/^(?:AI capacity and dependence are becoming strategic issues|Geopolitical competition is pushing Europe|European access and investment may shift|Geopolitical rivalry is changing Europe|Foresight methods can test emerging strategic change|Research-security pressure is changing how Europe|Semiconductor dependence is constraining Europe|Security competition is pulling more European R&I|Geopolitical pressure is reshaping EU research funding|EU–China R&I cooperation may become narrower|Strategic dependencies are changing Europe|Digital and cyber policy is shaping Europe|Quantum capability is becoming part of Europe|Critical raw materials shape Europe|Researcher mobility is becoming a strategic issue|Current geopolitical change may alter Europe)/i;
+    const GENERIC_RADAR_FRAGMENT=/This may affect European access, investment or capability-building in a technology that is becoming strategically important/i;
+    const PROCESS_META=/\b(?:exact .*page (?:was )?reviewed|source (?:was )?reviewed|underlying source|primary source|reviewed_source|review establishes|source text available|scanner|admitted to strand|research is based on|mixed methodology|comparative method|statistical method|analytical method|its EU relevance is classified|explicit EU\/European policy content|consult the linked publication|collected from researchers|responses? \(.*Member States|\bMethod\b)\b/i;
+    const RI=/\b(research|innovation|science|scientific|technology|technological|university|universit|researcher|talent|skills?|r&d|r&i|compute|cloud|semiconductor|chip|quantum|biotech|infrastructure|funding|horizon|erc|industrial|digital|cyber|patent|data|laborator|doctoral|phd|venture capital|scale.?up)\w*/i;
+    const GEO=/\b(geopolit|strategic|security|depend|reli|autonom|sovereign|compet|export control|sanction|de-risk|derisk|supply chain|foreign|international|cross-border|collabor|cooperat|partner|access|control|restrict|screen|fragment|trade|tariff|subsid|locali[sz]ation|procurement|acquisition|china|chinese|united states|\bus\b|russia|ukraine|nato|india|japan|taiwan|global)\w*/i;
+    const EU=/\b(EU|Europe|European|Horizon Europe|ERC|Member States|euro area|European Research Area|Netherlands|Dutch|Finland|Finnish|Germany|German|France|French|Romania|Romanian|Bulgaria|Bulgarian|Poland|Polish)\b/i;
+    const META_WHAT=/^(?:Learning outcomes?\b|To address this\b|By 20\d{2}\b|The purpose of\b|This (?:study|paper|article|report) (?:examines|explores|analyses|analyzes|aims|uses)\b|The (?:study|paper|article|report) (?:examines|explores|analyses|analyzes|aims|uses)\b)/i;
+    const ACTION_SENTENCE=/\b(?:is|are|was|were|has|have|had|can|could|may|might|will|would|should|must|show|find|argu|conclud|reveal|indicat|suggest|highlight|affect|change|shift|raise|cut|limit|restrict|reduc|increas|strengthen|weaken|depend|rely|build|fund|open|close|adopt|introduc|expand|creat|link|leave|move|trail|outpac|constrain|enabl|protect|reshap|redirect|determin|pressur|face|gain|lose|need|remain|becom|treat|use|map|offer|support|driv|updat|propos|coordinat|requir|reward|allow|delay|retain|attract|concentrat|lack|reinforc|translat|reconfigur|narrow|widen|rank|tighten|contribut|correspond|diversif|identif|present)\w*\b/i;
+    const title=repairOcr(x?.title||x?.headline||'');
+    const scope=repairOcr([title,x?.summary||'',x?.relevance_note||'',x?.core_message||''].join(' '));
+    const isB=String(x?.strand||'').toUpperCase()==='B';
+    const METHOD=/\b(foresight|horizon scanning|weak signal|scenario|backcasting|roadmap|Delphi|cross-impact|anticipat|future method|strategic futures|forecast|technology intelligence|emerging technolog)\w*/i;
+    const titleLike=v=>!!v&&norm(v).trim()===norm(title).trim()&&!ACTION_SENTENCE.test(v);
 
-    // Source-bound rescue: choose a complete relevant statement from the fields actually stored for this source.
-    const raw=[];
-    const add=v=>{const q=repairOcr(v||'');if(q)raw.push(q)};
-    add(x?.core_message); add(x?.what); add(x?.signal_note);
-    for(const q of splitSentences(x?.summary||'')) add(q);
-    const candidates=raw
-      .map(q=>({raw:q,p:readerPoint(simplifyCandidate(q),150)||readerPoint(q,150)}))
-      .filter(o=>fit(o.p)&&likelyEnglish(o.p)&&!isDocumentDebris(o.p))
-      .map(o=>({p:o.p,score:candidateScore(o.raw)+(EU.test(o.p)?4:0)+(RI.test(o.p)?4:0)+(GEO.test(o.p)?4:0)}))
-      .sort((a,b)=>b.score-a.score||b.p.length-a.p.length);
-    if(candidates[0]?.p) return candidates[0].p;
-
-    // Last resort: keep the source topic readable as a grammatical sentence instead of showing a chopped title fragment.
-    const topic=repairOcr(current||fallback||x?.title||x?.headline||'').replace(/[.!?]+$/,'').trim();
-    if(topic){
-      const described=readerPoint(`The source covers ${topic}.`,150);
-      if(described) return described;
+    function radarCandidate(raw){
+      let q=repairOcr(raw||'').replace(/^Abstract\s*/i,'').replace(/^Purpose\s+/i,'').trim();
+      if(!q||GENERIC_RADAR_FRAGMENT.test(q)||PROCESS_META.test(q)||isDocumentDebris(q))return '';
+      // Remove academic scaffolding while keeping the proposition itself.
+      q=q.replace(/^(?:It|The (?:study|paper|article|report|analysis)|This (?:study|paper|article|report|analysis))\s+(?:finds|shows|argues|concludes|demonstrates|identifies|reveals|indicates|suggests|highlights)\s+(?:that\s+)?/i,'')
+         .replace(/^Using\b[^,]{0,230},\s*(?:this|the) (?:study|paper|article|report|analysis) (?:examines|shows|finds|argues|demonstrates|identifies) (?:how|that\s+)?/i,'')
+         .replace(/^(?:This|The) (?:study|paper|article|report|analysis) examines how\s+/i,'')
+         .replace(/^(?:This|The) (?:study|paper|article|report|analysis) argues that\s+/i,'')
+         .replace(/^It argues that\s+/i,'')
+         .replace(/^It shows that\s+/i,'')
+         .replace(/^The results show (?:that\s+)?/i,'')
+         .replace(/^Results show (?:that\s+)?/i,'')
+         .replace(/^The findings (?:show|indicate|suggest|reveal) (?:that\s+)?/i,'')
+         .replace(/^Findings (?:show|indicate|suggest|reveal) (?:that\s+)?/i,'')
+         .replace(/^(?:This|The) (?:research|study|paper|article|report) aimed to (?:analyse|analyze|examine|assess)\s+/i,'')
+         .replace(/\bthis Analysis\b/g,'the analysis')
+         .replace(/\.{2,}$/,'.')
+         .replace(/\s+/g,' ').trim();
+      if(/Horizon Europe/i.test(q)&&/Chinese (?:investments?|entities)/i.test(q)&&/de-risking|economic security/i.test(q))
+        q="Excluding Chinese entities from large parts of Horizon Europe and scrutinising Chinese high-tech investment mark the EU's shift from broad openness toward de-risking and economic security.";
+      if(!q||GENERIC_RADAR_POINT.test(q)||PROCESS_META.test(q)||titleLike(q))return '';
+      if(q.length>MAX_RADAR_CHARS){
+        const clauses=q.split(/\s*[;]\s*|\s+[–—]\s+|,\s+(?=(?:while|but|although|whereas|because|which|with|including|allowing|leaving|giving|creating|reducing|increasing|reinforcing|highlighting|showing)\b)/i)
+          .map(clean).filter(c=>c.length>=45&&c.length<=MAX_RADAR_CHARS&&ACTION_SENTENCE.test(c));
+        if(clauses.length) q=clauses.sort((a,b)=>specificity(b)-specificity(a)||b.length-a.length)[0];
+        else return '';
+      }
+      if(!ACTION_SENTENCE.test(q))return '';
+      q=q.replace(/[;:,]+$/,'').trim();
+      if(!/[.!?]$/.test(q))q+='.';
+      return q.charAt(0).toUpperCase()+q.slice(1);
     }
+    const fit=v=>!!v&&!GENERIC_RADAR_POINT.test(v)&&!PROCESS_META.test(v)&&!META_WHAT.test(v)&&!titleLike(v)&&ACTION_SENTENCE.test(v)
+      &&(isB ? (METHOD.test(v)||METHOD.test(scope)) : ((EU.test(v)||EU.test(scope))&&(RI.test(v)||RI.test(scope))&&(GEO.test(v)||GEO.test(scope))));
+    function specificity(v){
+      let score=candidateScore(v);
+      if(GENERIC_RADAR_POINT.test(v)||PROCESS_META.test(v))score-=80;
+      if(/\b(?:tariff|subsid|locali[sz]ation|export control|procurement|screening|retention|post-study|post-research|licen[cs]|standard|acquisition|headquarter|IP|patent|venture capital|funding|grant|compute|fab|factory|supply|repository|database|biobank|doctoral|researcher|R&D|knowledge exchange|science diplomacy)\w*/i.test(v))score+=5;
+      if(/[€$£]\s?\d|\b\d+(?:\.\d+)?\s?(?:%|bn|billion|million|GW|MW|months?|years?)\b/i.test(v))score+=5;
+      if(/\b(?:China|Chinese|US|United States|EU|Europe|European|Ukraine|Russia|India|Japan|Taiwan|NATO|Commission|Council|ECB|ERC|MSCA|Horizon Europe|Netherlands|Germany|France|Finland)\b/i.test(v))score+=3;
+      if(v.length>=95&&v.length<=MAX_RADAR_CHARS)score+=2;
+      return score;
+    }
+    if(/governance logics and foresight functions/i.test(title)&&/networked and anticipatory governance infrastructure/i.test(scope))
+      return 'EU strategic foresight operates as a networked governance infrastructure linking reports, ESPAS, the EU-wide Foresight Network, Better Regulation tools and resilience dashboards, rather than as isolated forecasting.';
+
+    if(/European Commission updates EIC Fund Investment Guidelines/i.test(title)&&/Eligible applicants under the EIC Accelerator/i.test(scope))
+      return 'EIC Accelerator equity targets highly innovative SMEs and small mid-caps established in EU Member States or Horizon Europe associated countries, typically with a strong intellectual-property component.';
+    if(/Fifth Freedom in (?:the )?European Research Area|Insights from Researchers on the Fifth Freedom/i.test(title)&&/researcher|research managers|moving and working across Europe/i.test(scope))
+      return "Surveyed researchers identify barriers to moving and working across Europe and support formal recognition of an EU 'Fifth Freedom' to improve research mobility and knowledge circulation.";
+    const pool=[];
+    const add=(raw,bonus=0)=>{const p=radarCandidate(raw);if(fit(p)&&likelyEnglish(p))pool.push({p,score:specificity(p)+bonus});};
+
+    // Source text first. This prevents a stored legacy slogan from outranking an actual finding.
+    for(const q of splitSentences(x?.summary||''))add(q,15);
+    for(const q of splitSentences(x?.source_review_basis||''))add(q,8);
+    for(const q of (Array.isArray(x?.eu_evidence)?x.eu_evidence:[]))add(q,6);
+    for(const q of (Array.isArray(x?.ri_evidence)?x.ri_evidence:[]))add(q,6);
+    for(const q of (Array.isArray(x?.geo_evidence)?x.geo_evidence:[]))add(q,6);
+    add(x?.why_it_matters,4);
+    add(x?.core_message,1);
+    add(x?.what,1);
+    add(x?.signal_note,1);
+    add(pointFor(x),0);
+    add(fallbackPoint(x),-3);
+
+    pool.sort((a,b)=>b.score-a.score||b.p.length-a.p.length);
+    if(pool[0]?.p)return pool[0].p;
+
+    // Last resort is bibliographically specific rather than a reusable geopolitical slogan.
+    if(x?.headline){
+      const h=repairOcr(x.headline).replace(/[.!?]+$/,'').trim();
+      let m=h.match(/^(.+?):\s*Funding opportunities to boost\s+(.+)$/i);
+      if(m)return `${m[1]} offers funding to boost ${m[2]}.`;
+      if(/EuroCC 3 and CASTIEL 3/i.test(h)&&/National Competence Centres for HPC/i.test(h))return 'EuroCC 3 and CASTIEL 3 continue support for Europe’s network of national HPC competence centres.';
+      if(h&&h.length<=MAX_RADAR_CHARS-2)return `${h}.`;
+    }
+    const topic=repairOcr(title).replace(/[.!?]+$/,'').trim();
+    if(topic&&topic.length<=MAX_RADAR_CHARS-22)return `Source focus: ${topic}.`;
     return '';
   }
 
@@ -1208,5 +1322,5 @@
     return buildInsights({strand_a:Array.isArray(data?.strand_a)?data.strand_a:[],strand_b:[],strand_c:[]});
   }
 
-  return {TOPICS,OTHER,topicFor,pointFor,whatForEuRiGeo,whyFor,whyYouShouldCare,fallbackPoint,plainLanguagePoint,fastReaderText,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
+  return {TOPICS,OTHER,topicFor,pointFor,whatForEuRiGeo,whyFor,whyYouShouldCare,fallbackPoint,plainLanguagePoint,fastReaderText,readText,matrixText,radarText,readerPoint,buildInsights,buildSignals,buildResearchInsights,signalWhat,signalWhy,signalTheme,concise,isDocumentDebris,prepareSummary,candidateScore,structuredPoint,likelyEnglish,completeCoreMessage};
 });
