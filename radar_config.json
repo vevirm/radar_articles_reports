@@ -1655,8 +1655,8 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.35-low-yield-forced-fresh-rotation-highest-fallback",
-  "crossref_missing_abstract_enrichment_per_scan": 18,
+  "recall_profile_version": "v17.14.1-main-recall-repair-source-adapters-priority-text-rescue",
+  "crossref_missing_abstract_enrichment_per_scan": 36,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
   "crossref_source_first_journals_per_scan": 10,
@@ -1700,7 +1700,7 @@
   },
   "eu_anchor_context_rule": "Bare EU is not a European Union anchor when the document explicitly defines EU as another abbreviation (for example environmental uncertainty).",
   "matrix_evidence_rule": "For vetted Strand A evidence, classify row and independence/competitiveness directions from the source-backed title/summary/relevance evidence; direction keywords support the rubric but are not a second gate. Weak signals remain event/mechanism gated.",
-  "openalex_missing_abstract_enrichment_per_scan": 12,
+  "openalex_missing_abstract_enrichment_per_scan": 24,
   "openalex_missing_abstract_enrichment_timeout_seconds": 8,
   "manual_ingest_profile_version": "v17.12.2-bounded-manual-review",
   "manual_recovery_urls_per_scan": 10,
@@ -1766,7 +1766,7 @@
   ],
   "official_eu_priority_sources_per_scan": 8,
   "source_attention_floor_broad_share": 0.4,
-  "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Keep at least 40% of source-first attention broad. Admission gates are unchanged.",
+  "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Core EU sources use bounded source-specific publication hubs when sitemap discovery is weak. Missing scholarly text is rescued by metadata priority before admission. Keep broad rotation and unchanged substantive admission gates.",
   "frontier_gap_balance_rich_cell_ratio": 0.75,
   "frontier_gap_balance_repeat_scale": 4.0,
   "frontier_gap_balance_repeat_cap": 10,
@@ -1851,5 +1851,219 @@
   "low_yield_extended_queries_per_source": 5,
   "low_yield_extended_sources_per_scan": 4,
   "low_yield_extended_fallback_min_seconds_remaining": 150,
-  "low_yield_extended_fallback_stage_seconds": 150
+  "low_yield_extended_fallback_stage_seconds": 150,
+  "main_recall_repair_version": "v17.14.1",
+  "metadata_rescue_priority_enabled": true,
+  "metadata_rescue_priority_min_score": 10,
+  "openalex_missing_abstract_enrichment_per_query": 3,
+  "crossref_missing_abstract_enrichment_per_task": 3,
+  "crossref_relevance_query_mode": "title",
+  "institution_source_adapter_enabled": true,
+  "institution_source_adapter_pages_per_domain": 20,
+  "institution_source_adapter_max_hub_fetches": 6,
+  "institution_source_adapter_crawl_depth": 2,
+  "institution_source_adapters": {
+    "research-and-innovation.ec.europa.eu": {
+      "hub_paths": [
+        "/",
+        "/news/all-research-and-innovation-news_en",
+        "/research-and-innovation_en",
+        "/strategy/strategy-research-and-innovation_en"
+      ],
+      "path_hints": [
+        "publication",
+        "report",
+        "study",
+        "research",
+        "innovation",
+        "horizon",
+        "european-research-area",
+        "economic-security",
+        "competitiveness"
+      ]
+    },
+    "joint-research-centre.ec.europa.eu": {
+      "hub_paths": [
+        "/",
+        "/jrc-news-and-updates_en",
+        "/scientific-activities-z_en",
+        "/jrc-missions-and-values_en"
+      ],
+      "path_hints": [
+        "publication",
+        "report",
+        "science-for-policy",
+        "foresight",
+        "technology",
+        "innovation",
+        "research"
+      ]
+    },
+    "publications.jrc.ec.europa.eu": {
+      "hub_paths": [
+        "/",
+        "/repository/"
+      ],
+      "path_hints": [
+        "repository",
+        "JRC",
+        "publication",
+        "science-for-policy",
+        "report"
+      ]
+    },
+    "op.europa.eu": {
+      "hub_paths": [
+        "/en/home",
+        "/en/web/general-publications/publications",
+        "/en/web/eu-law-and-publications/publications"
+      ],
+      "path_hints": [
+        "publication",
+        "research",
+        "innovation",
+        "report",
+        "study",
+        "foresight",
+        "competitiveness",
+        "technology"
+      ]
+    },
+    "europarl.europa.eu": {
+      "hub_paths": [
+        "/thinktank/en/home",
+        "/stoa/en/home",
+        "/news/en/press-room"
+      ],
+      "path_hints": [
+        "thinktank",
+        "stoa",
+        "study",
+        "briefing",
+        "analysis",
+        "research",
+        "technology",
+        "innovation"
+      ]
+    },
+    "consilium.europa.eu": {
+      "hub_paths": [
+        "/en/press/press-releases/",
+        "/en/policies/",
+        "/en/documents-publications/"
+      ],
+      "path_hints": [
+        "research",
+        "innovation",
+        "horizon",
+        "technology",
+        "competitiveness",
+        "economic-security",
+        "digital",
+        "science"
+      ]
+    },
+    "erc.europa.eu": {
+      "hub_paths": [
+        "/news-events",
+        "/funding",
+        "/projects-statistics"
+      ],
+      "path_hints": [
+        "news",
+        "report",
+        "study",
+        "research",
+        "funding",
+        "talent",
+        "Europe"
+      ]
+    },
+    "marie-sklodowska-curie-actions.ec.europa.eu": {
+      "hub_paths": [
+        "/",
+        "/news",
+        "/about-msca"
+      ],
+      "path_hints": [
+        "research",
+        "career",
+        "mobility",
+        "talent",
+        "policy",
+        "report",
+        "study"
+      ]
+    },
+    "eurohpc-ju.europa.eu": {
+      "hub_paths": [
+        "/",
+        "/news",
+        "/our-projects"
+      ],
+      "path_hints": [
+        "AI",
+        "supercomput",
+        "quantum",
+        "infrastructure",
+        "research",
+        "innovation",
+        "gigafactor"
+      ]
+    },
+    "digital-strategy.ec.europa.eu": {
+      "hub_paths": [
+        "/en/library",
+        "/en/news",
+        "/en/policies"
+      ],
+      "path_hints": [
+        "library",
+        "report",
+        "study",
+        "AI",
+        "cloud",
+        "chips",
+        "quantum",
+        "digital-sovereignty",
+        "technology"
+      ]
+    },
+    "eur-lex.europa.eu": {
+      "hub_paths": [
+        "/homepage.html",
+        "/collection/eu-law/legislation/recent.html"
+      ],
+      "path_hints": [
+        "COM",
+        "CELEX",
+        "research",
+        "innovation",
+        "technology",
+        "digital",
+        "economic-security",
+        "competitiveness"
+      ]
+    },
+    "bruegel.org": {
+      "hub_paths": [
+        "/",
+        "/publications",
+        "/research"
+      ],
+      "path_hints": [
+        "analysis",
+        "policy-brief",
+        "working-paper",
+        "research",
+        "technology",
+        "innovation",
+        "geoeconomics"
+      ]
+    }
+  },
+  "low_yield_full_rescue_run_enabled": true,
+  "low_yield_full_rescue_run_trigger_max_new_ab": 3,
+  "low_yield_full_rescue_run_max_chain": 1,
+  "institution_source_adapter_sources_per_scan": 4
 }

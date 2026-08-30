@@ -270,6 +270,7 @@ SESSION.headers.update({
 # snowballing) on the anonymous allowance. Use the key when present, but preserve
 # fully anonymous operation when it is absent. Never persist or log the key.
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
+RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
 
 def openalex_get(path: str, *, params: dict[str, Any] | None = None, timeout: int | float | None = None, **kwargs):
     query = dict(params or {})
@@ -3370,6 +3371,122 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_reject_aboutness")
 
 
+
+def scholarly_metadata_rescue_priority(
+    title: str,
+    *,
+    query: str = "",
+    source: str = "",
+    publisher: str = "",
+    published: dt.date | None = None,
+    tier: int | None = None,
+) -> int:
+    """Rank abstract-less scholarly metadata for expensive DOI text recovery.
+
+    This is a *recall* priority only. A high score never admits a record: after text
+    recovery the ordinary language, quality, EU, R&I and strategic-context gates run
+    unchanged. The point is to spend the small publisher-fetch budget on records whose
+    title/source metadata already looks plausibly European and R&I-strategic instead of
+    whichever abstract-less result happened to arrive first.
+    """
+    title = clean_text(title)
+    if not title or document_exclusion_reason(title, ""):
+        return -100
+    t = normalized(title)
+    q = normalized(query)
+    src = normalized(source)
+    pub = normalized(publisher)
+    score = 0
+    if has_eu_word(t) or contains_any(t, EU_DIRECT):
+        score += 12
+    elif contains_any(t, EU_GENERIC) or bounded_matches(t, MEMBER_STATE_SCOPE):
+        score += 8
+    elif has_eu_word(q) or contains_any(q, EU_DIRECT + EU_GENERIC):
+        score += 3
+
+    ri_hits = _ri_hits(title)
+    if ri_hits:
+        score += 7 + min(4, len(ri_hits))
+    elif contains_any(t, ["technology", "technological", "innovation", "science", "research", "r&d", "university", "universities"]):
+        score += 5
+
+    if contains_any(t, GEO_STRONG) or contains_any(t, [
+        "economic security", "research security", "strategic autonomy", "technology sovereignty",
+        "technological sovereignty", "dependency", "dependencies", "de-risk", "derisk",
+        "export control", "foreign interference", "strategic competition", "critical technology",
+        "critical technologies", "semiconductor", "quantum", "artificial intelligence", "compute",
+        "science diplomacy", "research cooperation", "talent mobility", "brain drain",
+    ]):
+        score += 8
+    elif contains_any(q, GEO_STRONG) or contains_any(q, ["security", "sovereignty", "geopolit", "competition", "dependency", "cooperation"]):
+        score += 3
+
+    if tier is not None:
+        if tier <= 1:
+            score += 5
+        elif tier <= 2:
+            score += 3
+    priority_journals = {normalized(x) for x in CONFIG.get("preferred_q1_journals_sjr2024", [])}
+    if src in priority_journals:
+        score += 4
+    if any(x in f"{src} {pub}" for x in ["european commission", "european union", "oecd", "research policy", "science and public policy"]):
+        score += 3
+    if published:
+        age = (dt.date.today() - published).days
+        if age <= 45:
+            score += 3
+        elif age <= 120:
+            score += 2
+    return score
+
+
+def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_new_candidates: int = 0) -> dict[str, Any]:
+    """Compress detailed counters into the reader/debugger funnel requested for zero-yield scans."""
+    def n(key: str) -> int:
+        return int(ADMISSION_DIAGNOSTICS.get(key, 0) or 0)
+    raw = n("openalex_raw_records") + n("crossref_raw_records") + n("institution_pages_queued")
+    evaluated = n("openalex_evaluated") + n("crossref_evaluated") + n("institution_evaluated")
+    insufficient = n("openalex_defer_insufficient_text") + n("crossref_defer_insufficient_text") + n("institution_defer_insufficient_text")
+    no_eu = n("openalex_reject_no_direct_eu") + n("crossref_reject_no_direct_eu") + n("institution_reject_no_direct_eu")
+    no_ri = n("openalex_reject_no_ri") + n("crossref_reject_no_ri") + n("institution_reject_no_ri")
+    no_strategy = n("openalex_reject_no_strategic_context") + n("crossref_reject_no_strategic_context") + n("institution_reject_no_strategic_context")
+    other_aboutness = n("openalex_reject_aboutness") + n("crossref_reject_aboutness") + n("institution_reject_aboutness")
+    gate_passed = n("openalex_admitted_gate") + n("crossref_admitted_gate") + n("institution_admitted_gate")
+    enough_text = max(0, evaluated - insufficient)
+    direct_eu = max(0, enough_text - no_eu)
+    ri_substantive = max(0, direct_eu - no_ri)
+    strategic = max(0, ri_substantive - no_strategy - other_aboutness)
+    return {
+        "raw_records_seen": raw,
+        "gate_evaluated": evaluated,
+        "enough_text_to_judge": enough_text,
+        "direct_eu_scope_remaining": direct_eu,
+        "substantive_ri_remaining": ri_substantive,
+        "strategic_context_remaining": strategic,
+        "gate_passed_before_cross_source_dedupe": gate_passed,
+        "unique_gate_candidates": max(0, int(unique_gate_candidates)),
+        "duplicates_or_known_removed_after_gate": max(0, gate_passed - int(unique_gate_candidates)),
+        "genuinely_new_unique_ab": max(0, int(genuinely_new_candidates)),
+        "missing_text_deferred": insufficient,
+        "rejected_no_direct_eu": no_eu,
+        "rejected_no_ri": no_ri,
+        "rejected_no_strategic_context": no_strategy,
+        "rejected_other_aboutness": other_aboutness,
+        "pre_gate_filters": {
+            "non_english": n("openalex_reject_non_english") + n("crossref_reject_non_english") + n("institution_reject_non_english"),
+            "institution_no_date": n("institution_reject_no_date"),
+            "institution_fetch_or_nonhtml": n("institution_reject_fetch_or_nonhtml"),
+            "institution_before_floor": n("institution_reject_before_floor"),
+        },
+        "metadata_text_rescue": {
+            "queued": n("openalex_metadata_rescue_queued") + n("crossref_metadata_rescue_queued"),
+            "attempted": n("openalex_metadata_rescue_attempted") + n("crossref_metadata_rescue_attempted"),
+            "text_recovered": n("openalex_metadata_rescue_recovered") + n("crossref_metadata_rescue_recovered"),
+            "admitted_after_recovery": n("openalex_metadata_rescue_admitted") + n("crossref_metadata_rescue_admitted"),
+        },
+        "institution_source_adapter_jobs": n("institution_adapter_jobs"),
+    }
+
 def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None) -> dict[str, Any] | None:
     title = clean_text(work.get("display_name"))
     abstract = openalex_abstract(work.get("abstract_inverted_index"))
@@ -3457,8 +3574,13 @@ def collect_openalex(
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
+    enrichment_lock = threading.Lock()
+    enrichment_per_query = max(1, int(CONFIG.get("openalex_missing_abstract_enrichment_per_query", 3) or 3))
+    metadata_min_score = int(CONFIG.get("metadata_rescue_priority_min_score", 10) or 10)
+
     def convert_works(works: list[dict[str, Any]], query_from: dt.date, q: str) -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
+        rescue_queue: list[tuple[int, dict[str, Any], str]] = []
         for raw_work in works:
             work = raw_work
             if bool(CONFIG.get("skip_known_items_before_classification", True)):
@@ -3466,38 +3588,55 @@ def collect_openalex(
                 doi0 = clean_text(work.get("doi"))
                 if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
                     continue
-            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
-            if item:
-                out.append(item)
-                continue
-
-            # OpenAlex also has records with title/DOI but no abstract. Treat those as
-            # insufficient text, not a substantive rejection, and make a tightly bounded
-            # DOI landing-page recovery attempt before dropping the candidate.
             title0 = clean_text(work.get("title") or work.get("display_name"))
             doi0 = clean_text(work.get("doi"))
             abstract0 = openalex_abstract(work.get("abstract_inverted_index"))
-            if (
-                not abstract0 and doi0 and title0 and enrichment_total[0] < enrichment_limit
-                and enrichment_by_query[q] < 2 and not document_exclusion_reason(title0, "")
-            ):
+            if abstract0:
+                item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+                if item:
+                    out.append(item)
+                continue
+
+            # Do not let an abstract-less record consume the gate as if missing text
+            # were negative evidence. Queue only plausible metadata for DOI recovery,
+            # and rank that queue before spending the bounded publisher-fetch budget.
+            _diag_inc("openalex_metadata_missing_text")
+            if not doi0 or not title0 or document_exclusion_reason(title0, ""):
+                continue
+            quality_ok, tier, _rank, source, _label = quality_from_openalex(work)
+            if not quality_ok:
+                continue
+            published = parse_date(work.get("publication_date"))
+            score = scholarly_metadata_rescue_priority(title0, query=q, source=source, published=published, tier=tier)
+            if not bool(CONFIG.get("metadata_rescue_priority_enabled", True)) or score >= metadata_min_score:
+                rescue_queue.append((score, work, doi0))
+
+        rescue_queue.sort(key=lambda x: x[0], reverse=True)
+        _diag_inc("openalex_metadata_rescue_queued", len(rescue_queue))
+        for _score, raw_work, doi0 in rescue_queue[:enrichment_per_query]:
+            with enrichment_lock:
+                if enrichment_total[0] >= enrichment_limit:
+                    break
                 enrichment_total[0] += 1
                 enrichment_by_query[q] += 1
-                if execution_stats is not None:
-                    execution_stats["openalex_abstracts_enrichment_attempted"] = int(execution_stats.get("openalex_abstracts_enrichment_attempted", 0)) + 1
-                recovered = doi_landing_abstract(doi0, enrichment_timeout)
-                if recovered:
-                    work = dict(work)
-                    # candidate_from_openalex expects OpenAlex's inverted-index shape.
-                    tokens = clean_text(recovered).split()
-                    inv: dict[str, list[int]] = {}
-                    for pos, token in enumerate(tokens):
-                        inv.setdefault(token, []).append(pos)
-                    work["abstract_inverted_index"] = inv
-                    item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
-                    if item:
-                        item["metadata_note"] = "Abstract recovered from DOI publisher metadata before admission."
-                        out.append(item)
+            _diag_inc("openalex_metadata_rescue_attempted")
+            if execution_stats is not None:
+                execution_stats["openalex_abstracts_enrichment_attempted"] = int(execution_stats.get("openalex_abstracts_enrichment_attempted", 0)) + 1
+            recovered = doi_landing_abstract(doi0, enrichment_timeout)
+            if not recovered:
+                continue
+            _diag_inc("openalex_metadata_rescue_recovered")
+            work = dict(raw_work)
+            tokens = clean_text(recovered).split()
+            inv: dict[str, list[int]] = {}
+            for pos, token in enumerate(tokens):
+                inv.setdefault(token, []).append(pos)
+            work["abstract_inverted_index"] = inv
+            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+            if item:
+                _diag_inc("openalex_metadata_rescue_admitted")
+                item["metadata_note"] = "Abstract recovered from DOI publisher metadata after high-potential metadata prioritisation."
+                out.append(item)
         return out
 
     def fetch_page(q: str, query_from: dt.date, page: int) -> tuple[list[dict[str, Any]], str | None, int]:
@@ -3521,6 +3660,7 @@ def collect_openalex(
                 r = openalex_get("works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("results", [])
+                    _diag_inc("openalex_raw_records", len(works))
                     return convert_works(works, query_from, q), None, len(works)
                 if r.status_code == 429:
                     stop_public.set()
@@ -4453,45 +4593,61 @@ def collect_crossref(
                 time.sleep(wait)
             last_request[0] = time.monotonic()
 
+    enrichment_lock = threading.Lock()
+    enrichment_per_task = max(1, int(CONFIG.get("crossref_missing_abstract_enrichment_per_task", 3) or 3))
+    metadata_min_score = int(CONFIG.get("metadata_rescue_priority_min_score", 10) or 10)
+
     def convert_items(works: list[dict[str, Any]], query_from: dt.date, q: str = "", journal: str = "") -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
         task_key = f"{journal} || {q}" if journal else q
+        rescue_queue: list[tuple[int, dict[str, Any], str]] = []
         for raw_item in works:
             item = raw_item
-            if bool(CONFIG.get("skip_known_items_before_classification", True)):
-                titles0 = item.get("title") or []
-                title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
-                doi0 = clean_text(item.get("DOI"))
-                if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
-                    continue
-            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
-            if c:
-                out.append(c)
+            titles0 = item.get("title") or []
+            title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
+            doi0 = clean_text(item.get("DOI"))
+            if bool(CONFIG.get("skip_known_items_before_classification", True)) and stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+                continue
+            abstract0 = clean_text(item.get("abstract"))
+            if abstract0:
+                c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+                if c:
+                    out.append(c)
                 continue
 
-            # Missing abstracts are a metadata problem, not substantive negative evidence.
-            # Recover only a tiny number of relevance-ranked records per task so this cannot
-            # turn into an uncontrolled publisher crawl or consume the Crossref stage budget.
-            abstract0 = clean_text(item.get("abstract"))
-            doi0 = clean_text(item.get("DOI"))
-            title0 = clean_text((item.get("title") or [""])[0])
-            if (
-                not abstract0 and doi0 and title0 and enrichment_total[0] < enrichment_limit
-                and enrichment_by_task[task_key] < 2
-                and not document_exclusion_reason(title0, "")
-            ):
-                ok0, _, _, _, _, _ = quality_from_crossref(item)
-                if ok0:
-                    enrichment_total[0] += 1
-                    enrichment_by_task[task_key] += 1
-                    recovered = doi_landing_abstract(doi0, enrichment_timeout)
-                    if recovered:
-                        item = dict(item)
-                        item["abstract"] = recovered
-                        c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
-                        if c:
-                            c["metadata_note"] = "Abstract recovered from DOI publisher metadata before admission."
-                            out.append(c)
+            _diag_inc("crossref_metadata_missing_text")
+            if not doi0 or not title0 or document_exclusion_reason(title0, ""):
+                continue
+            ok0, tier, _rank, source, _tier_label, _kind = quality_from_crossref(item)
+            if not ok0:
+                continue
+            published = crossref_date(item)
+            score = scholarly_metadata_rescue_priority(
+                title0, query=q, source=source, publisher=clean_text(item.get("publisher")), published=published, tier=tier
+            )
+            if not bool(CONFIG.get("metadata_rescue_priority_enabled", True)) or score >= metadata_min_score:
+                rescue_queue.append((score, item, doi0))
+
+        rescue_queue.sort(key=lambda x: x[0], reverse=True)
+        _diag_inc("crossref_metadata_rescue_queued", len(rescue_queue))
+        for _score, raw_item, doi0 in rescue_queue[:enrichment_per_task]:
+            with enrichment_lock:
+                if enrichment_total[0] >= enrichment_limit or enrichment_by_task[task_key] >= enrichment_per_task:
+                    break
+                enrichment_total[0] += 1
+                enrichment_by_task[task_key] += 1
+            _diag_inc("crossref_metadata_rescue_attempted")
+            recovered = doi_landing_abstract(doi0, enrichment_timeout)
+            if not recovered:
+                continue
+            _diag_inc("crossref_metadata_rescue_recovered")
+            item = dict(raw_item)
+            item["abstract"] = recovered
+            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+            if c:
+                _diag_inc("crossref_metadata_rescue_admitted")
+                c["metadata_note"] = "Abstract recovered from DOI publisher metadata after high-potential metadata prioritisation."
+                out.append(c)
         return out
 
     def fetch_page(q: str, journal: str, offset: int, lane: str) -> tuple[list[dict[str, Any]], str | None, int]:
@@ -4501,12 +4657,21 @@ def collect_crossref(
         query_from = (query_dates_override or {}).get(q, from_date) if not journal else from_date
         page_rows = priority_rows if journal else rows
         params = {
-            "query.bibliographic": q,
             "filter": f"from-pub-date:{query_from.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
             "rows": page_rows,
             "offset": max(0, int(offset)),
             "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
         }
+        # Relevance pages are deliberately title-focused for broad discovery. Crossref's
+        # bibliographic search is extremely fuzzy and previously returned thousands of
+        # global records that could never pass direct-EU scope. The newest lane remains
+        # bibliographic, preserving recall for records whose strategic context is mainly
+        # in the abstract. Priority-journal tasks also keep bibliographic search.
+        relevance_mode = clean_text(CONFIG.get("crossref_relevance_query_mode", "title")).lower()
+        if lane == "relevance" and not journal and relevance_mode == "title":
+            params["query.title"] = q
+        else:
+            params["query.bibliographic"] = q
         # Crossref query results are relevance ranked by default. Keep that as the
         # primary discovery lane. A separate bounded chronological lane catches
         # genuinely new records without letting future-dated metadata take over.
@@ -4521,6 +4686,7 @@ def collect_crossref(
                 r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("message", {}).get("items", [])
+                    _diag_inc("crossref_raw_records", len(works))
                     return convert_items(works, query_from, q, journal), None, len(works)
                 if r.status_code == 429:
                     if attempt < retries:
@@ -4611,6 +4777,7 @@ def collect_crossref(
                 r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
                     works = r.json().get("message", {}).get("items", [])
+                    _diag_inc("crossref_raw_records", len(works))
                     # query.container-title is fuzzy; retain only the requested venue or a close punctuation variant.
                     target = re.sub(r'[^a-z0-9]+', '', normalized(journal))
                     exact = []
@@ -4990,7 +5157,12 @@ def institution_url_score(url: str, lastmod: dt.date | None, from_date: dt.date)
     now remain eligible; publication-like paths simply rank first.
     """
     low = normalized(url)
-    hard_url_hits = [x for x in URL_HARD_EXCLUDE if x in low]
+    try:
+        parsed = urlparse(url)
+        path_low = normalized(f"{parsed.path} {parsed.query}")
+    except Exception:
+        path_low = low
+    hard_url_hits = [x for x in URL_HARD_EXCLUDE if x in path_low]
     c_discovery_surface = bool(hard_url_hits) and all(
         any(hit == allowed for allowed in C_DISCOVERY_URL_HINTS) for hit in hard_url_hits
     )
@@ -5010,13 +5182,13 @@ def institution_url_score(url: str, lastmod: dt.date | None, from_date: dt.date)
         "technology", "innovation", "working-paper", "discussion-paper", "insight", "briefing",
         "research-paper", "policy-paper", "download",
     ]
-    score += min(12, 3 * sum(1 for h in hints if h in low))
+    score += min(12, 3 * sum(1 for h in hints if h in path_low))
     # Sparse Frontier cells also steer institutional discovery.  This is ranking,
     # not admission: a talent/brain-drain URL is fetched earlier but still has to
     # pass the same substantive A/B gate as every other page.
-    gap_hits = sum(1 for term in ACTIVE_FRONTIER_GAP_URL_TERMS if normalized(term) in low)
+    gap_hits = sum(1 for term in ACTIVE_FRONTIER_GAP_URL_TERMS if normalized(term) in path_low)
     score += min(18, 6 * gap_hits)
-    if re.search(r"/20\d{2}/", low):
+    if re.search(r"/20\d{2}/", path_low):
         score += 1
     return score
 
@@ -5284,8 +5456,108 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     )
 
 
+
+def _source_adapter_domain_jobs(
+    src: dict[str, Any],
+    from_date: dt.date,
+    stage_deadline: float | None = None,
+    reconsider_seen: bool = False,
+) -> list[tuple[str, str, int, str]]:
+    """Bounded source-specific publication-hub discovery for the hardest EU/elite sites.
+
+    Several high-value institutional domains either expose no usable sitemap or expose a
+    sitemap that does not surface analytical publications reliably. Configuration provides
+    a few known publication/research hubs per source. We crawl at most a couple of same-domain
+    layers and still feed every discovered page through the ordinary parser/admission gates.
+    This is not a search-engine shortcut and cannot directly admit anything.
+    """
+    if not bool(CONFIG.get("institution_source_adapter_enabled", True)):
+        return []
+    domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    profiles = CONFIG.get("institution_source_adapters", {})
+    profile = profiles.get(domain) if isinstance(profiles, dict) else None
+    if not domain or not isinstance(profile, dict):
+        return []
+    source_name = clean_text(src.get("name")) or domain
+    tier = int(src.get("tier", 2) or 2)
+    base = f"https://{domain}"
+    raw_hubs = profile.get("hub_paths") if isinstance(profile.get("hub_paths"), list) else []
+    raw_seeds = profile.get("seed_urls") if isinstance(profile.get("seed_urls"), list) else []
+    hubs = []
+    for value in raw_hubs:
+        raw = clean_text(value)
+        if raw:
+            hubs.append(raw if raw.startswith("http") else urljoin(base + "/", raw.lstrip("/")))
+    hubs.extend(clean_text(x) for x in raw_seeds if clean_text(x))
+    hubs = list(dict.fromkeys(hubs))
+    if not hubs:
+        return []
+
+    path_hints = [normalized(x) for x in (profile.get("path_hints") or []) if clean_text(x)]
+    max_fetches = max(1, int(CONFIG.get("institution_source_adapter_max_hub_fetches", 6) or 6))
+    max_pages = max(1, int(CONFIG.get("institution_source_adapter_pages_per_domain", 20) or 20))
+    max_depth = max(0, min(2, int(CONFIG.get("institution_source_adapter_crawl_depth", 2) or 2)))
+    queue: list[tuple[str, int]] = [(u, 0) for u in hubs]
+    fetched: set[str] = set()
+    discovered: dict[str, int] = {}
+
+    while queue and len(fetched) < max_fetches:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        hub, depth = queue.pop(0)
+        nh = normalized_link(hub)
+        if not nh or nh in fetched:
+            continue
+        fetched.add(nh)
+        r = get(hub, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
+        if not r or "html" not in r.headers.get("content-type", "text/html"):
+            continue
+        soup = BeautifulSoup(r.text, "html.parser")
+        for a in soup.find_all("a", href=True):
+            u = urljoin(r.url, a.get("href", ""))
+            pu = urlparse(u)
+            host = (pu.hostname or "").lower().removeprefix("www.")
+            if not host or not (host == domain or host.endswith("." + domain)):
+                continue
+            if pu.scheme not in {"http", "https"} or pu.fragment:
+                continue
+            low = normalized(u)
+            path_probe = normalized(f"{pu.path} {pu.query}")
+            if path_probe.endswith(".pdf") or any(path_probe.endswith(ext) for ext in (".doc", ".docx", ".xls", ".xlsx", ".zip")):
+                continue
+            label = normalized(a.get_text(" ", strip=True))
+            # Hints apply to the path/anchor, not the host name. Otherwise a domain
+            # such as research-and-innovation.ec.europa.eu would make every navigation
+            # link look like a research publication.
+            semantic_hits = sum(1 for hint in path_hints if hint and (hint in path_probe or hint in label))
+            generic_score = institution_url_score(u, None, from_date)
+            year_hit = bool(re.search(r"/(?:2025|2026)(?:/|-)" , path_probe))
+            # Links from an explicitly configured publication hub get a modest trust
+            # bonus, but generic navigation still needs a content/path signal.
+            score = generic_score + min(12, semantic_hits * 4) + (3 if year_hit else 0)
+            if semantic_hits or generic_score >= 3 or year_hit:
+                discovered[u] = max(score, discovered.get(u, -100))
+            if depth < max_depth and semantic_hits and generic_score >= -2 and normalized_link(u) not in fetched:
+                queue.append((u, depth + 1))
+
+    out: list[tuple[str, str, int, str]] = []
+    for u, _score in sorted(discovered.items(), key=lambda kv: kv[1], reverse=True):
+        nu = normalized_link(u)
+        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and nu in KNOWN_AB_LINKS:
+            continue
+        fp = institution_fingerprint(u, None)
+        if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
+            continue
+        out.append((u, source_name, tier, fp))
+        if len(out) >= max_pages:
+            break
+    _diag_inc("institution_adapter_jobs", len(out))
+    return out
+
+
 def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None, reconsider_seen: bool = False) -> tuple[list[tuple[str, str, int, str]], str | None]:
     domain = src["domain"]
+    adapter_jobs = _source_adapter_domain_jobs(src, from_date, stage_deadline, reconsider_seen)
     entries = []
     max_entries = int(CONFIG.get("sitemap_max_entries", 800))
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
@@ -5297,6 +5569,8 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if len(entries) >= max_entries:
             break
     if not entries:
+        if adapter_jobs:
+            return adapter_jobs, f"No usable sitemap: {domain}; using source-specific publication adapter ({len(adapter_jobs)} page(s))"
         # Trusted institutional sources without usable sitemaps still deserve bounded
         # source-local discovery. This follows only same-domain links from a few hubs;
         # it is not a global crawler or search-engine dependency.
@@ -5304,21 +5578,21 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if fallback:
             return fallback, f"No usable sitemap: {domain}; using bounded institutional HTML fallback ({len(fallback)} page(s))"
         return [], f"No usable sitemap: {domain}"
-    seen = set(); jobs = []
+    seen = {normalized_link(u) for u, *_ in adapter_jobs}; jobs = list(adapter_jobs)
     limit_key = "institution_pages_per_domain_bootstrap" if bootstrap else "institution_pages_per_domain"
     limit = int(CONFIG.get(limit_key, CONFIG.get("institution_pages_per_domain", 24)))
     ranked = sorted(entries, key=lambda x: (institution_url_score(x[0], x[1], from_date), x[1] or dt.date.min), reverse=True)
     for u, last in ranked:
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             break
-        if u in seen or institution_url_score(u, last, from_date) < 0:
+        if normalized_link(u) in seen or institution_url_score(u, last, from_date) < 0:
             continue
         if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(u) in KNOWN_AB_LINKS:
             continue
         fp = institution_fingerprint(u, last)
         if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
             continue
-        seen.add(u)
+        seen.add(normalized_link(u))
         jobs.append((u, src["name"], int(src["tier"]), fp))
         if len(jobs) >= limit:
             break
@@ -5352,6 +5626,7 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     max_key = "institution_max_pages_bootstrap" if bootstrap else "institution_max_pages"
     max_jobs = int(CONFIG.get(max_key, default_max))
     jobs = jobs[:max_jobs]
+    _diag_inc("institution_pages_queued", len(jobs))
     log_progress(f"Institutional parsing: {len(jobs)} candidate page(s) queued")
     with cf.ThreadPoolExecutor(max_workers=max(1, page_workers)) as ex:
         futs = [ex.submit(parse_institution_page, u, s, t, stage_deadline, fp, publication_floor) for u, s, t, fp in jobs]
@@ -8676,7 +8951,32 @@ def main() -> int:
             break
     for target, cursor in local_source_cursor.items():
         source_cursors[target] = cursor
-    inst_batch = inst_rotating + gap_sources
+    # Source-specific adapters for the hardest/highest-value EU publication domains get
+    # their own small persisted rotation. This is additive to the broad institutional
+    # source rotation, never a replacement for it. Adapter pages still pass the exact
+    # same institutional parser and A/B admission gates.
+    adapter_profiles = CONFIG.get("institution_source_adapters", {})
+    adapter_domains_all = [
+        clean_text(d).lower().removeprefix("www.")
+        for d in (adapter_profiles.keys() if isinstance(adapter_profiles, dict) else [])
+        if clean_text(d).lower().removeprefix("www.") in source_by_domain
+    ]
+    adapter_cursor_before = int(state.get("institution_source_adapter_cursor", 0) or 0)
+    adapter_domain_batch, _adapter_next, _adapter_wrapped = rotating_batch(
+        adapter_domains_all, adapter_cursor_before,
+        max(0, int(CONFIG.get("institution_source_adapter_sources_per_scan", 4) or 4)),
+    ) if adapter_domains_all else ([], 0, True)
+    adapter_rotating = [source_by_domain[d] for d in adapter_domain_batch if d in source_by_domain]
+
+    inst_batch_raw = inst_rotating + gap_sources + adapter_rotating
+    inst_batch = []
+    inst_batch_seen: set[str] = set()
+    for src in inst_batch_raw:
+        domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+        if not domain or domain in inst_batch_seen:
+            continue
+        inst_batch_seen.add(domain)
+        inst_batch.append(src)
     extended_highest_sources_all = [src for src in institution_sources_all if source_can_reach_highest(src)]
     extended_highest_cursor_before = int(state.get("extended_highest_source_cursor", 0) or 0)
     extended_highest_batch, _extended_highest_next, _extended_highest_wrapped = rotating_batch(
@@ -8699,7 +8999,7 @@ def main() -> int:
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
         f"({len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad) from {cr_from.isoformat()}, "
-        f"institutions {len(inst_batch)} source(s) ({len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist) from {inst_from.isoformat()}; "
+        f"institutions {len(inst_batch)} source(s) ({len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
     if gap_scholarly:
@@ -9330,6 +9630,9 @@ def main() -> int:
     state["institution_cursor"], inst_wrapped, inst_base_executed = committed_rotation_cursor(
         general_domains_all, institution_cursor_before, general_planned_domains, executed_inst
     )
+    state["institution_source_adapter_cursor"], adapter_wrapped, adapter_sources_executed = committed_rotation_cursor(
+        adapter_domains_all, adapter_cursor_before, adapter_domain_batch, executed_inst
+    ) if adapter_domains_all else (0, True, 0)
 
     # V17.13.35 low-yield rule: after the ordinary scholarly + institutional pass,
     # count only genuinely new, unique A/B records that already passed the normal gates.
@@ -9540,6 +9843,15 @@ def main() -> int:
         low_yield_rotation["new_ab_after_extended_fallback"] = len(genuinely_new_ab_candidates(oa + cr + inst))
     else:
         low_yield_rotation["new_ab_after_extended_fallback"] = low_yield_rotation["new_ab_after_fresh_rotation"]
+
+    full_rescue_threshold = max(0, int(CONFIG.get("low_yield_full_rescue_run_trigger_max_new_ab", low_yield_threshold) or low_yield_threshold))
+    low_yield_rotation["full_rescue_run_enabled"] = bool(CONFIG.get("low_yield_full_rescue_run_enabled", True))
+    low_yield_rotation["full_rescue_run_recommended"] = bool(
+        low_yield_rotation["full_rescue_run_enabled"]
+        and low_yield_rotation["new_ab_after_extended_fallback"] <= full_rescue_threshold
+        and not RADAR_RESCUE_MODE
+    )
+    low_yield_rotation["scan_mode"] = "full_low_yield_rescue" if RADAR_RESCUE_MODE else "normal"
 
     # Spend otherwise-idle scan time on the actual gaps. Earlier versions finished
     # in 5-10 minutes even with a 20-minute scanner budget. This phase repeatedly
@@ -9865,6 +10177,10 @@ def main() -> int:
     new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
+    rejection_funnel = build_admission_rejection_funnel(
+        unique_gate_candidates=len(deduped),
+        genuinely_new_candidates=len(genuinely_new_ab_candidates(deduped)),
+    )
 
     signal_backfill_ok = not (
         source_stage_failed(warnings, "weak-signal")
@@ -10012,6 +10328,8 @@ def main() -> int:
         "matrix_balance_rotation_profile_version": MATRIX_BALANCE_ROTATION_PROFILE_VERSION,
         "source_attention_profile_version": SOURCE_ATTENTION_PROFILE_VERSION,
         "recall_profile_version": RECALL_PROFILE_VERSION,
+        "main_recall_repair_version": str(CONFIG.get("main_recall_repair_version", "")),
+        "scan_mode": "full_low_yield_rescue" if RADAR_RESCUE_MODE else "normal",
         "citation_snowball_profile_version": CITATION_SNOWBALL_PROFILE_VERSION,
         "window_policy_version": WINDOW_POLICY_VERSION,
         "rule_fix_profile_version": RULE_FIX_PROFILE_VERSION,
@@ -10115,6 +10433,8 @@ def main() -> int:
             },
             "quiet_scan_rescue": quiet_rescue,
             "low_yield_rotation": low_yield_rotation,
+            "rejection_funnel": rejection_funnel,
+            "full_rescue_run_recommended": bool(low_yield_rotation.get("full_rescue_run_recommended")),
             "matrix_first_deepening": deepening,
         },
         "strand_a": strand_a,
@@ -10178,6 +10498,14 @@ def main() -> int:
             "extended_highest_sources_executed": extended_highest_executed,
             "extended_highest_candidates_admitted": len(extended_highest_candidates),
             "institution_rotating_sources_executed": inst_base_executed,
+            "institution_source_adapter_sources_planned": len(adapter_domain_batch),
+            "institution_source_adapter_sources_executed": adapter_sources_executed,
+            "institution_source_adapter_jobs_queued": int(ADMISSION_DIAGNOSTICS.get("institution_adapter_jobs", 0) or 0),
+            "metadata_text_rescue_queued": int(rejection_funnel.get("metadata_text_rescue", {}).get("queued", 0)),
+            "metadata_text_rescue_attempted": int(rejection_funnel.get("metadata_text_rescue", {}).get("attempted", 0)),
+            "metadata_text_rescue_recovered": int(rejection_funnel.get("metadata_text_rescue", {}).get("text_recovered", 0)),
+            "metadata_text_rescue_admitted": int(rejection_funnel.get("metadata_text_rescue", {}).get("admitted_after_recovery", 0)),
+            "full_rescue_run_recommended": bool(low_yield_rotation.get("full_rescue_run_recommended")),
             "rule_fix_new_source_recovery_attempted": rule_fix_source_recovery_attempted,
             "rule_fix_new_source_recovery_complete": rule_fix_source_recovery_complete,
             "rule_fix_new_source_recovery_sources_attempted": int(execution_stats.get("rule_fix_source_recovery_sources_attempted", 0)),
@@ -10253,6 +10581,7 @@ def main() -> int:
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
             "admission_diagnostics": dict(sorted(ADMISSION_DIAGNOSTICS.items())),
+            "admission_rejection_funnel": rejection_funnel,
         },
         "scan_diagnostics": {
             "source_warning_count": len(warnings),

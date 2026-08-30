@@ -45,6 +45,7 @@ SITE_FILES = [
 # Files required for the recurring scanner and its GitHub Actions schedule.
 SCANNER_FILES = [
     ".github/workflows/radar-scan.yml",
+    ".gitignore",
     "radar_config.json",
     "priority_people.json",
     "curator_candidate_tests.json",
@@ -54,13 +55,26 @@ SCANNER_FILES = [
     "tests/test_scanner_features.py",
 ]
 
+
+# Historical top-tier subsystem is operationally isolated from the live radar, but it is
+# part of the deployable site/repository package. Keeping it on a separate allowlist
+# prevents future live-scanner releases from accidentally omitting it.
+HISTORICAL_FILES = [
+    ".github/workflows/historical-scan.yml",
+    "historical/config.json",
+    "historical/historical.json",
+    "historical/index.html",
+    "historical/scan_historical.py",
+    "historical/tests/test_historical_scanner.py",
+]
+
 # Tiny operational files retained to make future releases reproducible.
 MAINTENANCE_FILES = [
     "VERSION.txt",
     "scripts/build_release.py",
 ]
 
-RELEASE_FILES = SITE_FILES + SCANNER_FILES + MAINTENANCE_FILES
+RELEASE_FILES = SITE_FILES + SCANNER_FILES + HISTORICAL_FILES + MAINTENANCE_FILES
 
 
 def _validate_json(path: Path) -> None:
@@ -74,7 +88,7 @@ def validate(root: Path) -> None:
         raise SystemExit("Missing required release file(s):\n  " + "\n  ".join(missing))
 
     # Basic structural checks for the data/config files the scanner depends on.
-    for rel in ("radar.json", "radar_config.json", "priority_people.json", "curator_candidate_tests.json"):
+    for rel in ("radar.json", "radar_config.json", "priority_people.json", "curator_candidate_tests.json", "historical/config.json", "historical/historical.json"):
         _validate_json(root / rel)
 
     radar = json.loads((root / "radar.json").read_text(encoding="utf-8"))

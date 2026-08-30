@@ -8,6 +8,8 @@ on:
       - main
     paths-ignore:
       - radar.json
+      - 'historical/**'
+      - '.github/workflows/historical-scan.yml'
 
   # Wake hourly. A due-gate below runs the expensive scanner only when
   # at least six hours have elapsed since the last completed scan.
@@ -15,8 +17,15 @@ on:
   schedule:
     - cron: '17 * * * *'
 
-  # Also allows manual scans from the Actions tab.
+  # Also allows manual scans from the Actions tab. The rescue flag is set only
+  # by this workflow when a completed normal scan still yields <=3 new A/B items.
   workflow_dispatch:
+    inputs:
+      rescue_mode:
+        description: 'Full 20-minute low-yield rescue run'
+        required: false
+        default: false
+        type: boolean
 
 # Default to read-only. Jobs below opt into only the extra permission they need.
 permissions:
@@ -34,6 +43,7 @@ jobs:
     # leave a GitHub write credential in the working copy while the scanner runs.
     permissions:
       contents: write
+      actions: write
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -112,6 +122,7 @@ jobs:
         if: steps.due.outputs.run == 'true'
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          RADAR_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
         run: python scripts/scan_radar.py
 
       - name: Safety-check scanner output
@@ -362,6 +373,56 @@ jobs:
 
           git pull --rebase origin main
           git push origin HEAD:main
+
+      - name: Decide whether to launch one full low-yield rescue run
+        id: rescue
+        if: steps.due.outputs.run == 'true'
+        env:
+          RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          doc = json.loads(Path('radar.json').read_text(encoding='utf-8'))
+          stats = doc.get('stats') if isinstance(doc.get('stats'), dict) else {}
+          results = doc.get('scan_results') if isinstance(doc.get('scan_results'), dict) else {}
+          low = results.get('low_yield_rotation') if isinstance(results.get('low_yield_rotation'), dict) else {}
+          cfg = json.loads(Path('radar_config.json').read_text(encoding='utf-8'))
+          threshold = int(cfg.get('low_yield_full_rescue_run_trigger_max_new_ab', 3) or 3)
+          final_yield = low.get('new_ab_after_extended_fallback')
+          if final_yield is None:
+              final_yield = stats.get('low_yield_new_ab_after_extended_fallback', results.get('new_ab_unique', 0))
+          try:
+              final_yield = int(final_yield or 0)
+          except Exception:
+              final_yield = 0
+          already_rescue = str(os.environ.get('RESCUE_MODE', '')).strip().lower() in {'1','true','yes','on'}
+          enabled = bool(low.get('full_rescue_run_enabled', True))
+          dispatch = enabled and (not already_rescue) and final_yield <= threshold
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
+              out.write(f"dispatch={'true' if dispatch else 'false'}\n")
+              out.write(f"final_yield={final_yield}\n")
+          print(f"Full-rescue decision: already_rescue={already_rescue}, final_yield={final_yield}, threshold={threshold}, dispatch={dispatch}")
+          PY
+
+      - name: Launch one fresh 20-minute rescue scan
+        if: steps.rescue.outputs.dispatch == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Low yield persisted after the completed normal scan; dispatching exactly one full rescue run."
+          curl --fail-with-body -L -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/radar-scan.yml/dispatches" \
+            -d '{"ref":"main","inputs":{"rescue_mode":true}}'
 
   publish:
     needs: scan

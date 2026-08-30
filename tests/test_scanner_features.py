@@ -76,7 +76,113 @@ class LowYieldRotationTests(unittest.TestCase):
         self.assertTrue(scan.CONFIG.get("low_yield_fresh_rotation_enabled"))
         self.assertEqual(scan.CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab"), 3)
         self.assertTrue(scan.CONFIG.get("low_yield_extended_fallback_enabled"))
+        self.assertTrue(scan.CONFIG.get("low_yield_full_rescue_run_enabled"))
+        self.assertEqual(scan.CONFIG.get("low_yield_full_rescue_run_trigger_max_new_ab"), 3)
         self.assertEqual(scan.CONFIG.get("extended_top_quality_lookback_months"), 6)
+
+
+class MainRecallRepairTests(unittest.TestCase):
+    def test_metadata_rescue_priority_prefers_eu_ri_strategic_title(self):
+        strong = scan.scholarly_metadata_rescue_priority(
+            "European research security and critical technology dependencies",
+            query="EU research security foreign interference",
+            source="Research Policy",
+            published=__import__('datetime').date.today(),
+            tier=1,
+        )
+        weak = scan.scholarly_metadata_rescue_priority(
+            "A general model of organisational behaviour",
+            query="EU research security foreign interference",
+            source="Generic Journal",
+            published=__import__('datetime').date.today(),
+            tier=2,
+        )
+        self.assertGreater(strong, weak)
+        self.assertGreaterEqual(strong, scan.CONFIG.get("metadata_rescue_priority_min_score", 10))
+
+    def test_institution_url_scoring_does_not_treat_domain_name_as_content_signal(self):
+        score = scan.institution_url_score(
+            "https://research-and-innovation.ec.europa.eu/about", None, __import__('datetime').date(2026, 4, 30)
+        )
+        self.assertEqual(score, 0)
+
+    def test_source_adapter_queues_publication_link_not_generic_navigation(self):
+        class FakeResponse:
+            def __init__(self, url):
+                self.url = url
+                self.headers = {"content-type": "text/html"}
+                self.text = (
+                    '<html><body>'
+                    '<a href="/publications/2026/eu-research-security-report">EU research security report</a>'
+                    '<a href="/about">About</a>'
+                    '</body></html>'
+                )
+        old_seen = scan.INSTITUTION_SEEN_FINGERPRINTS
+        scan.INSTITUTION_SEEN_FINGERPRINTS = {}
+        try:
+            with mock.patch.object(scan, "get", side_effect=lambda url, **kwargs: FakeResponse(url)):
+                jobs = scan._source_adapter_domain_jobs(
+                    {"domain": "research-and-innovation.ec.europa.eu", "name": "EC R&I", "tier": 1},
+                    __import__('datetime').date(2026, 4, 30),
+                    time.monotonic() + 30,
+                    False,
+                )
+        finally:
+            scan.INSTITUTION_SEEN_FINGERPRINTS = old_seen
+        urls = [x[0] for x in jobs]
+        self.assertTrue(any("eu-research-security-report" in x for x in urls))
+        self.assertFalse(any(x.endswith("/about") for x in urls))
+
+    def test_core_eu_source_adapters_are_configured(self):
+        adapters = scan.CONFIG.get("institution_source_adapters", {})
+        for domain in (
+            "research-and-innovation.ec.europa.eu",
+            "joint-research-centre.ec.europa.eu",
+            "op.europa.eu",
+            "europarl.europa.eu",
+            "consilium.europa.eu",
+            "digital-strategy.ec.europa.eu",
+            "eurohpc-ju.europa.eu",
+        ):
+            self.assertIn(domain, adapters)
+            self.assertTrue(adapters[domain].get("hub_paths"))
+
+    def test_rejection_funnel_is_explicit_and_sequential(self):
+        old = scan.ADMISSION_DIAGNOSTICS.copy()
+        try:
+            scan.ADMISSION_DIAGNOSTICS.clear()
+            scan.ADMISSION_DIAGNOSTICS.update({
+                "openalex_raw_records": 100,
+                "openalex_evaluated": 60,
+                "openalex_defer_insufficient_text": 10,
+                "openalex_reject_no_direct_eu": 20,
+                "openalex_reject_no_ri": 10,
+                "openalex_reject_no_strategic_context": 5,
+                "openalex_admitted_gate": 5,
+                "openalex_metadata_rescue_attempted": 4,
+                "openalex_metadata_rescue_recovered": 2,
+                "openalex_metadata_rescue_admitted": 1,
+            })
+            funnel = scan.build_admission_rejection_funnel(unique_gate_candidates=4, genuinely_new_candidates=3)
+        finally:
+            scan.ADMISSION_DIAGNOSTICS.clear()
+            scan.ADMISSION_DIAGNOSTICS.update(old)
+        self.assertEqual(funnel["raw_records_seen"], 100)
+        self.assertEqual(funnel["enough_text_to_judge"], 50)
+        self.assertEqual(funnel["direct_eu_scope_remaining"], 30)
+        self.assertEqual(funnel["substantive_ri_remaining"], 20)
+        self.assertEqual(funnel["strategic_context_remaining"], 15)
+        self.assertEqual(funnel["genuinely_new_unique_ab"], 3)
+        self.assertEqual(funnel["metadata_text_rescue"]["admitted_after_recovery"], 1)
+
+    def test_workflow_has_exactly_one_full_rescue_dispatch_guard(self):
+        text = (ROOT / ".github" / "workflows" / "radar-scan.yml").read_text(encoding="utf-8")
+        self.assertIn("rescue_mode:", text)
+        self.assertIn("actions: write", text)
+        self.assertIn("full low-yield rescue run", text.lower())
+        self.assertIn('/actions/workflows/radar-scan.yml/dispatches', text)
+        self.assertIn("not already_rescue", text)
+
 
 
 class CuratorCandidateQueueTests(unittest.TestCase):
