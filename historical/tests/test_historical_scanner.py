@@ -57,7 +57,42 @@ class HistoricalScannerTests(unittest.TestCase):
         )
         self.assertEqual(row, "infrastructure")
         self.assertIn(col, {"A", "C"})
-        self.assertIn("source concerns", basis)
+        self.assertIn("Source evidence:", basis)
+
+
+    def test_topic_matching_does_not_treat_ai_as_substring(self):
+        self.assertNotIn("ai-compute", H.topic_matches("European researchers study brain metastasis and cancer treatment."))
+        self.assertIn("ai-compute", H.topic_matches("European researchers use AI compute for science."))
+
+    def test_matrix_does_not_force_generic_europe_china_mentions_into_cell(self):
+        row, col, basis = H.matrix_classification(
+            "European researchers compare scientific publication patterns in China and the United States."
+        )
+        self.assertEqual((row, col, basis), ("", "", ""))
+
+    def test_matrix_requires_directional_evidence(self):
+        row, col, basis = H.matrix_classification(
+            "Europe experienced brain drain as researchers left for the United States, weakening the European research workforce."
+        )
+        self.assertEqual(row, "knowledge")
+        self.assertEqual(col, "D")
+        self.assertIn("brain drain", basis.lower())
+
+    def test_curated_workbook_seed_queue_is_loaded(self):
+        seeds = H.curated_seed_items()
+        self.assertGreaterEqual(len(seeds), 160)
+        self.assertTrue(any("Choose Europe" in str(x.get("title")) for x in seeds))
+
+    def test_administrative_documents_are_rejected_before_topic_gates(self):
+        raw = {
+            "title": "JRC privacy statement",
+            "abstract": "European research innovation strategic autonomy and AI policy report. " * 3,
+            "date": "2025-06-01",
+            "url": "https://publications.jrc.ec.europa.eu/privacy.pdf",
+            "venue": "JRC Publications Repository",
+        }
+        self.assertIsNone(H.admit(raw))
+        self.assertEqual(H.DIAG["reject_administrative_document"], 1)
 
     def test_main_radar_paths_are_not_outputs(self):
         self.assertEqual(H.OUT_PATH, ROOT / "historical" / "historical.json")

@@ -219,6 +219,69 @@
         "resilience",
         "technology-foresight"
       ]
+    },
+    {
+      "id": "research-careers",
+      "label": "Research careers, precarity and talent retention",
+      "queries": [
+        "Europe research careers precarity fixed term researchers talent retention research capacity",
+        "EU researcher careers working conditions postdoc precarity talent attraction retention"
+      ],
+      "url_terms": [
+        "research careers",
+        "researchers",
+        "postdoc",
+        "precarity",
+        "fixed term",
+        "talent retention",
+        "working conditions"
+      ]
+    },
+    {
+      "id": "doctoral-workforce",
+      "label": "Doctoral training, skills and researcher labour markets",
+      "queries": [
+        "Europe PhD careers doctorate holders labour market skills research workforce",
+        "EU doctoral training researcher skills non academic careers research workforce"
+      ],
+      "url_terms": [
+        "doctoral",
+        "doctorate",
+        "phd",
+        "research workforce",
+        "researcher skills",
+        "non academic careers"
+      ]
+    },
+    {
+      "id": "open-science-platforms",
+      "label": "Open science, platforms and research-data dependence",
+      "queries": [
+        "Europe open science research platforms data infrastructure dependence governance",
+        "EU open science cloud platformisation research data digital sovereignty"
+      ],
+      "url_terms": [
+        "open science",
+        "research data",
+        "data repository",
+        "platformisation",
+        "platformization",
+        "eosc"
+      ]
+    },
+    {
+      "id": "academic-freedom",
+      "label": "Academic freedom, trust and research-system resilience",
+      "queries": [
+        "Europe academic freedom researchers pressure research system resilience",
+        "EU academic freedom science trust research policy researcher harassment"
+      ],
+      "url_terms": [
+        "academic freedom",
+        "researcher harassment",
+        "science trust",
+        "trust in science"
+      ]
     }
   ],
   "elite_sources": [
@@ -377,6 +440,54 @@
       "domain": "nesta.org.uk",
       "kind": "elite_institute",
       "authority": 53
+    },
+    {
+      "name": "European University Association",
+      "domain": "eua.eu",
+      "kind": "evidence_institute",
+      "authority": 54
+    },
+    {
+      "name": "Science Europe",
+      "domain": "scienceeurope.org",
+      "kind": "evidence_institute",
+      "authority": 54
+    },
+    {
+      "name": "CESAER",
+      "domain": "cesaer.org",
+      "kind": "evidence_institute",
+      "authority": 54
+    },
+    {
+      "name": "Eurodoc",
+      "domain": "eurodoc.net",
+      "kind": "evidence_institute",
+      "authority": 52
+    },
+    {
+      "name": "Cedefop",
+      "domain": "cedefop.europa.eu",
+      "kind": "official_eu",
+      "authority": 56
+    },
+    {
+      "name": "European Research Executive Agency",
+      "domain": "rea.ec.europa.eu",
+      "kind": "official_eu",
+      "authority": 56
+    },
+    {
+      "name": "European Research Area",
+      "domain": "european-research-area.ec.europa.eu",
+      "kind": "official_eu",
+      "authority": 56
+    },
+    {
+      "name": "European Commission — ec.europa.eu",
+      "domain": "ec.europa.eu",
+      "kind": "official_eu",
+      "authority": 57
     }
   ],
   "source_adapters": {
@@ -451,10 +562,17 @@
     "Review of International Political Economy",
     "European Security",
     "Global Policy",
-    "Policy Sciences"
+    "Policy Sciences",
+    "Higher Education",
+    "Studies in Higher Education",
+    "Research Evaluation",
+    "Scientometrics",
+    "Journal of Higher Education Policy and Management"
   ],
   "minimum_runtime_seconds": 600,
   "minimum_runtime_topics_per_wave": 4,
   "minimum_runtime_sources_per_wave": 8,
-  "minimum_runtime_max_extra_waves": 12
+  "minimum_runtime_max_extra_waves": 12,
+  "curated_seed_queries_per_scan": 12,
+  "source_policy_note": "Official EU and elite institutes plus selected high-quality research-system/workforce institutions and top journals; curated workbook entries are discovery seeds only and must still pass admission gates."
 }

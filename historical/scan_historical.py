@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
 OUT_PATH = HIST_DIR / "historical.json"
+CURATED_SEED_PATH = HIST_DIR / "curated_seed_evidence.json"
 CONFIG = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
 DATE_FROM = dt.date.fromisoformat(CONFIG["date_from"])
@@ -75,6 +76,14 @@ BAD_DOC_RE = re.compile(
 ANALYTIC_RE = re.compile(
     r"\b(report|study|paper|analysis|assessment|review|outlook|foresight|forecast|strategy|strategic|policy brief|working paper|"
     r"research article|journal article|evidence|evaluation|impact assessment|communication|recommendation|framework)\b", re.I)
+ADMIN_DOC_RE = re.compile(
+    r"\b(privacy statement|privacy notice|cookie policy|terms of use|accessibility statement|legal notice|site map|sitemap|"
+    r"contact us|subscription|newsletter archive|vacanc(?:y|ies)|procurement notice)\b", re.I)
+SYSTEM_CAPACITY_RE = re.compile(
+    r"\b(research workforce|research careers?|researcher careers?|research talent|talent attraction|talent retention|brain drain|brain gain|"
+    r"researcher mobility|doctoral careers?|doctorate holders?|phd careers?|postdoc|precarity|fixed[- ]term|working conditions|"
+    r"research assessment|research funding|academic freedom|research security|knowledge security|open science|research data|"
+    r"research infrastructure|ai skills|artificial intelligence in science|scientific workforce|science workforce)\b", re.I)
 
 ROW_TERMS = {
     "knowledge": re.compile(r"\b(researcher|researchers|scientist|scientists|talent|skills|university|universities|knowledge|brain drain|brain gain|mobility|research security|science diplomacy|collaboration)\b", re.I),
@@ -89,6 +98,19 @@ OUTCOME_TERMS = {
     "D": re.compile(r"\b(loss|lost|decline|weaken|shortage|chokepoint|cut off|restriction|brain drain|lag|behind|vulnerab|exposure|hollow|dependency risk|fragmentation|fail to scale)\b", re.I),
 }
 
+# Historical Matrix placement is evidence-driven, not a coverage target. These patterns
+# require a directional mechanism, so generic actor/topic words cannot fill a cell.
+A_REALIZED_RE = re.compile(r"\b(built|strengthened|increased|expanded|established|launched|implemented|adopted|secured|diversified|"
+                           r"attracted|retained|scaled(?: up)?|grew|created|became operational|opened|invested)\b", re.I)
+B_CONTROL_RE = re.compile(r"\b(screening|safeguard|protect(?:ion|ed)?|research security|knowledge security|export controls?|"
+                          r"regulation|regulatory|compliance|localisation|localization|security checks?)\b", re.I)
+B_FRICTION_RE = re.compile(r"\b(costs?|burden|delay|friction|slower|barrier|fragmentation|restrict(?:s|ed|ion)?|trade[- ]?off)\b", re.I)
+C_EXTERNAL_RE = re.compile(r"\b(foreign|outside|non[- ]eu|third countr(?:y|ies)|united states|u\.?s\.?|american|china|chinese|"
+                           r"foreign capital|foreign technology|external supplier|external access|import(?:s|ed)?)\b", re.I)
+C_RELIANCE_RE = re.compile(r"\b(rely|relied|relies|reliance|depend(?:s|ed|ence|ency|ent)?|access to|using|through|supplied by|financed by|hosted by)\b", re.I)
+D_LOSS_RE = re.compile(r"\b(brain drain|talent outflow|researcher outflow|lost|loss|declin(?:e|ed|ing)|weaken(?:ed|ing)?|shortage|"
+                       r"chokepoint|cut off|blocked|lag(?:s|ged|ging)?|behind|vulnerab(?:le|ility)|exposure|hollow(?:ing)?|fail(?:ed|s)? to scale)\b", re.I)
+
 
 def clean(value: Any) -> str:
     return re.sub(r"\s+", " ", html.unescape(str(value or ""))).strip()
@@ -96,6 +118,12 @@ def clean(value: Any) -> str:
 
 def norm(value: Any) -> str:
     return re.sub(r"[^a-z0-9]+", " ", clean(value).lower()).strip()
+
+
+def phrase_present(normalized_text: str, phrase: str) -> bool:
+    """Token/phrase match; avoids substring bugs such as ``ai`` matching ``brain``."""
+    p = norm(phrase)
+    return bool(p and f" {p} " in f" {normalized_text} ")
 
 
 def log(msg: str) -> None:
@@ -178,6 +206,13 @@ def source_for(domain: str = "", venue: str = "", publisher: str = "") -> dict[s
         "bruegel": "bruegel.org",
         "centre for european policy studies": "ceps.eu",
         "mercator institute for china studies": "merics.org",
+        "european university association": "eua.eu",
+        "science europe": "scienceeurope.org",
+        "cesaer": "cesaer.org",
+        "eurodoc": "eurodoc.net",
+        "cedefop": "cedefop.europa.eu",
+        "european centre for the development of vocational training": "cedefop.europa.eu",
+        "research executive agency": "rea.ec.europa.eu",
     }
     for alias, target in aliases.items():
         if alias in text:
@@ -198,10 +233,10 @@ def topic_matches(text: str) -> list[str]:
     n = norm(text)
     hits: list[str] = []
     for topic in CONFIG.get("topics", []):
-        phrases = [norm(x.replace("-", " ")) for x in topic.get("url_terms", [])]
-        if any(p and p in n for p in phrases):
+        phrases = [clean(x) for x in topic.get("url_terms", [])]
+        if any(phrase_present(n, p) for p in phrases):
             hits.append(str(topic.get("id")))
-    return hits[:4]
+    return hits[:6]
 
 
 def topic_label(topic_id: str) -> str:
@@ -211,16 +246,54 @@ def topic_label(topic_id: str) -> str:
     return topic_id
 
 
+def _matrix_contexts(text: str) -> list[str]:
+    raw = clean(re.sub(r"<[^>]+>", " ", text or ""))
+    sentences = [clean(x) for x in re.split(r"(?<=[.!?])\s+|\n+", raw) if clean(x)]
+    contexts = sentences[:80]
+    contexts.extend(clean(f"{sentences[i]} {sentences[i+1]}") for i in range(min(len(sentences)-1, 79)))
+    return contexts
+
+
+def _outcome_score(context: str, row: str) -> dict[str, int]:
+    eu = bool(EU_RE.search(context))
+    scores = {c: 0 for c in "ABCD"}
+    if eu and A_REALIZED_RE.search(context):
+        scores["A"] = 4 + len(A_REALIZED_RE.findall(context))
+    if eu and B_CONTROL_RE.search(context) and B_FRICTION_RE.search(context):
+        scores["B"] = 7 + len(B_FRICTION_RE.findall(context))
+    # Outside actors alone are not Column C. The source must describe reliance/access.
+    if eu and C_EXTERNAL_RE.search(context) and C_RELIANCE_RE.search(context):
+        scores["C"] = 6 + len(C_RELIANCE_RE.findall(context))
+    if eu and D_LOSS_RE.search(context):
+        scores["D"] = 7 + len(D_LOSS_RE.findall(context))
+    # Talent outflow is intrinsically a people/knowledge loss mechanism.
+    if eu and row == "knowledge" and re.search(r"\b(brain drain|talent outflow|researcher outflow)\b", context, re.I):
+        scores["D"] = max(scores["D"], 10)
+    return scores
+
+
 def matrix_classification(text: str) -> tuple[str, str, str]:
-    row_scores = {k: len(v.findall(text)) for k, v in ROW_TERMS.items()}
-    row = max(row_scores, key=row_scores.get) if max(row_scores.values(), default=0) else ""
-    outcome_scores = {k: len(v.findall(text)) for k, v in OUTCOME_TERMS.items()}
-    outcome = max(outcome_scores, key=outcome_scores.get) if max(outcome_scores.values(), default=0) else ""
-    if not row or not outcome:
-        return row, outcome, ""
-    row_name = {"knowledge":"people and knowledge","infrastructure":"tools and facilities","conversion":"firms and growth","rules":"rules and decisions"}[row]
-    col_name = {"A":"stronger European capacity or control","B":"protection or control with costs or friction","C":"gains that still relied on outside actors or inputs","D":"lost ground, weaker capability or continuing exposure"}[outcome]
-    return row, outcome, f"The source concerns {row_name} and gives evidence of {col_name}."
+    best: tuple[int, str, str, str] | None = None
+    for context in _matrix_contexts(text):
+        row_scores = {k: len(v.findall(context)) for k, v in ROW_TERMS.items()}
+        for row, rscore in row_scores.items():
+            if rscore <= 0:
+                continue
+            # Generic research language is weak evidence; prefer concrete mechanisms.
+            if row == "infrastructure" and not re.search(r"\b(compute|cloud|data cent(?:er|re)|semiconductor|chip|quantum|research infrastructure|facility|critical raw material|critical mineral|energy|supply chain)\b", context, re.I):
+                continue
+            for outcome, oscore in _outcome_score(context, row).items():
+                if oscore <= 0:
+                    continue
+                score = rscore * 2 + oscore
+                candidate = (score, row, outcome, context)
+                if best is None or candidate[0] > best[0]:
+                    best = candidate
+    if best is None:
+        return "", "", ""
+    _, row, outcome, context = best
+    basis = first_sentence(context, 360)
+    return row, outcome, f"Source evidence: {basis}"
 
 
 def first_sentence(text: str, limit: int = 330) -> str:
@@ -258,6 +331,8 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
     date = parse_date(raw.get("date"))
     if not title:
         _diag("reject_no_title"); return None
+    if ADMIN_DOC_RE.search(title):
+        _diag("reject_administrative_document"); return None
     if date is None:
         _diag("reject_no_date"); return None
     if not (DATE_FROM <= date <= DATE_TO):
@@ -281,7 +356,7 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
     if not RI_RE.search(text):
         _diag("reject_no_ri"); return None
     _diag("ri_scope")
-    if not STRATEGIC_RE.search(text):
+    if not (STRATEGIC_RE.search(text) or SYSTEM_CAPACITY_RE.search(text)):
         _diag("reject_no_strategic_context"); return None
     _diag("strategic_scope")
     if len(text.split()) < 28 and not ANALYTIC_RE.search(text):
@@ -454,9 +529,8 @@ def topic_score(text: str, active_topics: list[dict[str, Any]]) -> int:
     n=norm(text); score=0
     for t in active_topics:
         for term in t.get("url_terms",[]):
-            p=norm(term.replace("-"," "))
-            if p and p in n: score += 3
-    if re.search(r"report|publication|study|analysis|paper|research|foresight|policy|strategy|brief|outlook",n,re.I): score += 2
+            if phrase_present(n, clean(term)): score += 3
+    if re.search(r"\b(report|publication|study|analysis|paper|research|foresight|policy|strategy|brief|outlook)\b",n,re.I): score += 2
     return score
 
 
@@ -543,7 +617,8 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
     if not title and soup.title: title=clean(soup.title.get_text(" ",strip=True))
     desc_tag=soup.find("meta",attrs={"name":"description"}) or soup.find("meta",property="og:description"); desc=clean(desc_tag.get("content") if desc_tag else "")
     for bad in soup(["script","style","nav","footer","form","noscript"]): bad.decompose()
-    body=clean(soup.get_text(" ",strip=True))[:14000]; d=page_date(soup,body)
+    content_root=soup.find("article") or soup.find("main") or soup
+    body=clean(content_root.get_text(" ",strip=True))[:14000]; d=page_date(soup,body)
     return admit({"title":title,"abstract":clean(f"{desc} {body[:9000]}"),"date":d,"url":r.url,"venue":src.get("name"),"publisher":src.get("name"),"discovery":f"direct source · {src.get('name')}"},lane)
 
 
@@ -570,6 +645,45 @@ def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: 
 def rotating(items: list[Any], cursor: int, count: int) -> tuple[list[Any], int]:
     if not items or count<=0: return [],0
     start=cursor%len(items); take=min(count,len(items)); return [items[(start+i)%len(items)] for i in range(take)],(start+take)%len(items)
+
+
+def curated_seed_items() -> list[dict[str, Any]]:
+    if not CURATED_SEED_PATH.exists():
+        return []
+    try:
+        payload=json.loads(CURATED_SEED_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    rows=payload.get("items",[]) if isinstance(payload,dict) else []
+    return [x for x in rows if isinstance(x,dict) and clean(x.get("title"))]
+
+
+def refresh_existing_item(raw: dict[str, Any]) -> dict[str, Any] | None:
+    """Conservatively migrate persisted records produced by older, looser gates.
+
+    Dubious records disappear from the static archive and can only return if a later
+    scan rediscovers them with enough source text to pass the current gates.
+    """
+    item=dict(raw)
+    title=clean(item.get("title")); text=clean(f"{title}. {item.get('reader_point','')}")
+    if not title or ADMIN_DOC_RE.search(title):
+        return None
+    if not RI_RE.search(text):
+        return None
+    official=clean(item.get("source_kind"))=="official_eu"
+    if not official and not EU_RE.search(text):
+        return None
+    if not (STRATEGIC_RE.search(text) or SYSTEM_CAPACITY_RE.search(text)):
+        return None
+    topics=topic_matches(text)
+    if not topics:
+        return None
+    row,outcome,basis=matrix_classification(text)
+    item["topics"]=topics
+    item["topic_labels"]=[topic_label(t) for t in topics]
+    item["matrix_dimension"],item["matrix_outcome"],item["matrix_basis"]=row,outcome,basis
+    item["why_it_matters"]=why_it_matters(row,outcome)
+    return item
 
 
 def dedupe(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -611,8 +725,8 @@ def rejection_funnel(new_items: int, unique_gate_candidates: int) -> dict[str, A
     }
 
 
-def run_rotation(active_topics: list[dict[str, Any]], active_sources: list[dict[str, Any]], warnings: list[str], suffix: str="normal", result_page: int = 1) -> tuple[list[dict[str, Any]], list[str]]:
-    queries=query_plan_for(active_topics); candidates=[]
+def run_rotation(active_topics: list[dict[str, Any]], active_sources: list[dict[str, Any]], warnings: list[str], suffix: str="normal", result_page: int = 1, extra_queries: list[str] | None = None) -> tuple[list[dict[str, Any]], list[str]]:
+    queries=list(dict.fromkeys(query_plan_for(active_topics) + [clean(x) for x in (extra_queries or []) if clean(x)])); candidates=[]
     candidates.extend(collect_openalex(queries,warnings,f"openalex_{suffix}",result_page=result_page))
     candidates.extend(collect_crossref(queries,warnings,f"crossref_{suffix}",result_page=result_page))
     candidates.extend(collect_direct_sources(active_sources,active_topics,warnings))
@@ -623,14 +737,21 @@ def main() -> int:
     try: previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {}
     except Exception: previous={}
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
-    topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[]))
-    topic_cursor=int(state.get("topic_cursor",0)); source_cursor=int(state.get("source_cursor",0))
+    topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items()
+    topic_cursor=int(state.get("topic_cursor",0)); source_cursor=int(state.get("source_cursor",0)); seed_cursor=int(state.get("seed_cursor",0))
     active_topics,next_topic=rotating(topics,topic_cursor,int(CONFIG.get("topics_per_scan",4)))
     active_sources,next_source=rotating(sources,source_cursor,int(CONFIG.get("sources_per_scan",8)))
-    warnings=[]; log("Historical scan starts: full 2023–2025 window, topic rotation only")
+    active_seeds,next_seed=rotating(seeds,seed_cursor,int(CONFIG.get("curated_seed_queries_per_scan",12)))
+    seed_queries=[clean(x.get("title")) for x in active_seeds if clean(x.get("title"))]
+    warnings=[]; log("Historical scan starts: full 2023–2025 window; evidence density is not Matrix-balanced")
     log("Topics: "+" | ".join(str(t.get("label")) for t in active_topics))
-    candidates,queries=run_rotation(active_topics,active_sources,warnings,"normal")
-    old_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]; old_ids={clean(x.get("id")) for x in old_items}
+    if seed_queries: log(f"Curated workbook backfill: {len(seed_queries)} title seed(s)")
+    candidates,queries=run_rotation(active_topics,active_sources,warnings,"normal",extra_queries=seed_queries)
+    old_items=[]
+    for raw in previous.get("items",[]):
+        if isinstance(raw,dict) and (item:=refresh_existing_item(raw)) is not None:
+            old_items.append(item)
+    old_ids={clean(x.get("id")) for x in old_items}
     unique_initial=dedupe(candidates); initial_new=sum(1 for x in unique_initial if clean(x.get("id")) not in old_ids)
     low_threshold=int(CONFIG.get("low_yield_trigger_max_new_items",3)); low_triggered=initial_new<=low_threshold
     rescue_topics=[]; rescue_sources=[]; rescue_queries=[]; rescue_candidates=[]
@@ -677,12 +798,13 @@ def main() -> int:
         "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),
         "scope_note":"Separate historical archive. It does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
         "ranking_note":"Every run searches the whole 2023–2025 period. Topic families rotate; years do not. When otherwise comparable, 2025 is preferred to 2024 and 2024 to 2023.",
-        "source_policy":"Only official EU sources, a small elite institute list and a short list of top political, innovation and technology-foresight journals are eligible.",
+        "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
-        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
+        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
         "last_scan":{
             "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":RESCUE_MODE,
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,
+            "curated_backfill":{"available":len(seeds),"queried_this_run":len(seed_queries),"workbook_ids":[x.get("workbook_id") for x in active_seeds]},
             "low_yield_rotation":{"triggered":low_triggered,"new_items_after_normal_rotation":initial_new,"fresh_topics":[str(t.get("label")) for t in rescue_topics],"fresh_sources":[str(s.get("name")) for s in rescue_sources],"fresh_queries":rescue_queries,"new_items_after_all_in_run_rotations":new_count,"full_rescue_run_enabled":full_rescue_enabled,"full_rescue_run_should_dispatch":should_dispatch},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),
