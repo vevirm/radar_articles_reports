@@ -120,6 +120,13 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Python tests/imports create disposable bytecode caches. Remove them
+          # before checking the repository so generated cache files cannot be
+          # mistaken for scanner output. The safety guard remains strict for all
+          # real repository files.
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
+
           # The scanner is allowed to change radar.json only. Anything else stops
           # the run before GitHub write credentials are introduced.
           unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'radar.json' || true)"
