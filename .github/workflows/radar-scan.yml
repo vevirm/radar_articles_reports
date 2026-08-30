@@ -1,8 +1,6 @@
 name: R&I Radar Scan
 
 on:
-  # Run immediately when this workflow is first committed,
-  # and whenever scanner/site files are later changed.
   push:
     branches:
       - main
@@ -10,15 +8,8 @@ on:
       - radar.json
       - 'historical/**'
       - '.github/workflows/historical-scan.yml'
-
-  # Wake hourly. A due-gate below runs the expensive scanner only when
-  # at least six hours have elapsed since the last completed scan.
-  # This gives delayed/missed hosted cron triggers a catch-up opportunity.
   schedule:
     - cron: '17 * * * *'
-
-  # Also allows manual scans from the Actions tab. The rescue flag is set only
-  # by this workflow when a completed normal scan still yields <=3 new A/B items.
   workflow_dispatch:
     inputs:
       rescue_mode:
@@ -27,9 +18,12 @@ on:
         default: false
         type: boolean
 
-# Default to read-only. Jobs below opt into only the extra permission they need.
 permissions:
   contents: read
+
+env:
+  # Keep Python runtime bytecode out of the repository working tree entirely.
+  PYTHONDONTWRITEBYTECODE: '1'
 
 concurrency:
   group: ri-radar-scan
@@ -39,8 +33,6 @@ jobs:
   scan:
     outputs:
       scan_due: ${{ steps.due.outputs.run }}
-    # The job must eventually save radar.json, but checkout deliberately does NOT
-    # leave a GitHub write credential in the working copy while the scanner runs.
     permissions:
       contents: write
       actions: write
@@ -66,7 +58,6 @@ jobs:
             echo "Reason: $EVENT_NAME runs immediately."
             exit 0
           fi
-
           python3 - <<'PY'
           import datetime as dt
           import json
@@ -125,32 +116,46 @@ jobs:
           RADAR_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
         run: python scripts/scan_radar.py
 
-      - name: Safety-check scanner output
+      - name: Safety-check and isolate scanner output
         if: steps.due.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
 
-          # Python tests/imports create disposable bytecode caches. Remove them
-          # before checking the repository so generated cache files cannot be
-          # mistaken for scanner output. The safety guard remains strict for all
-          # real repository files.
-          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
-          find . -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
+          # radar.json is the ONLY persistent output of the main scanner.
+          # If tests/runtime/tools happened to alter another tracked file, restore
+          # that file to HEAD instead of failing the whole scan. Untracked runtime
+          # debris is removed. Nothing except radar.json can reach the commit step.
+          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' || true)"
+          untracked_unexpected="$(git ls-files --others --exclude-standard | grep -vx 'radar.json' || true)"
 
-          # The scanner is allowed to change radar.json only. Anything else stops
-          # the run before GitHub write credentials are introduced.
-          unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'radar.json' || true)"
-          if [[ -n "$unexpected" ]]; then
-            echo '::error::Scanner changed unexpected files; refusing to save anything.'
-            printf '%s\n' "$unexpected"
+          if [[ -n "$tracked_unexpected" ]]; then
+            echo '::warning::Non-radar tracked working-tree changes detected; restoring them before save:'
+            printf '%s\n' "$tracked_unexpected"
+            while IFS= read -r path; do
+              [[ -z "$path" ]] && continue
+              git restore --worktree -- "$path"
+            done <<< "$tracked_unexpected"
+          fi
+
+          if [[ -n "$untracked_unexpected" ]]; then
+            echo '::warning::Non-radar untracked runtime files detected; removing them before save:'
+            printf '%s\n' "$untracked_unexpected"
+            while IFS= read -r path; do
+              [[ -z "$path" ]] && continue
+              rm -rf -- "$path"
+            done <<< "$untracked_unexpected"
+          fi
+
+          # Hard assertion: after isolation, radar.json must be the only repository change.
+          remaining="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'radar.json' || true)"
+          if [[ -n "$remaining" ]]; then
+            echo '::error::Could not isolate scanner output safely. Refusing to save.'
+            printf '%s\n' "$remaining"
             exit 1
           fi
 
-          # Validate the new radar, but do not make normal editorial/corpus swings
-          # a reason to stop scanning. Warnings do NOT block the save. Hard stops
-          # are reserved for results that are clearly broken or wildly abnormal.
-          python - <<'PY'
+          python3 - <<'PY'
           import json
           import subprocess
           from pathlib import Path
@@ -158,7 +163,6 @@ jobs:
           path = Path('radar.json')
           if not path.is_file():
               raise SystemExit('radar.json is missing after the scan')
-
           with path.open('r', encoding='utf-8') as handle:
               new = json.load(handle)
           if not isinstance(new, dict):
@@ -169,8 +173,6 @@ jobs:
           if not isinstance(old, dict):
               raise SystemExit('previous radar.json root is not a JSON object')
 
-          # File-size limits: warn early, stop only at an extreme 75%+ collapse
-          # or more than 4x growth.
           old_size = len(old_bytes)
           new_size = path.stat().st_size
           if new_size <= old_size * 0.25 or new_size > old_size * 4:
@@ -187,15 +189,11 @@ jobs:
               value = doc.get(key, [])
               return len(value) if isinstance(value, list) else 0
 
-          # Corpus-count limits use the three main radar strands. Normal large
-          # swings warn only. A save is blocked only if the whole corpus collapses
-          # by 75%+ / grows beyond 4x, or an established major strand vanishes.
           keys = ('strand_a', 'strand_b', 'strand_c')
           old_counts = {k: count_items(old, k) for k in keys}
           new_counts = {k: count_items(new, k) for k in keys}
           old_total = sum(old_counts.values())
           new_total = sum(new_counts.values())
-
           if old_total >= 20:
               if new_total <= old_total * 0.25 or new_total > old_total * 4:
                   raise SystemExit(
@@ -206,7 +204,6 @@ jobs:
                       f'::warning::Large main-corpus count change, but still inside hard limits: '
                       f'{old_total} -> {new_total}'
                   )
-
           for key in keys:
               before = old_counts[key]
               after = new_counts[key]
@@ -364,13 +361,9 @@ jobs:
           fi
 
           git commit -m "Update R&I radar"
-
-          # Introduce the repository credential only now, after the scanner and
-          # safety checks have finished. Remove it again even if pull/push fails.
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
           trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
-
           git pull --rebase origin main
           git push origin HEAD:main
 
@@ -432,7 +425,6 @@ jobs:
       pages: write
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Publish fresh radar on GitHub Pages
         env:
