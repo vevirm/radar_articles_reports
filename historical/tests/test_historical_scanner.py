@@ -104,6 +104,18 @@ class HistoricalScannerTests(unittest.TestCase):
         self.assertIn("git add -- historical/historical.json", workflow)
         self.assertNotIn("git add -- radar.json", workflow)
 
+    def test_historical_scan_has_ten_minute_minimum_runtime(self):
+        self.assertEqual(H.CONFIG["minimum_runtime_seconds"], 600)
+        self.assertEqual(H.MIN_RUNTIME_SECONDS, 600)
+        workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
+        self.assertIn("HISTORICAL_MIN_RUNTIME_SECONDS: '600'", workflow)
+
+    def test_deeper_result_pages_are_supported_for_minimum_runtime_rotation(self):
+        import inspect
+        self.assertIn("result_page", inspect.signature(H.collect_openalex).parameters)
+        self.assertIn("result_page", inspect.signature(H.collect_crossref).parameters)
+        self.assertGreaterEqual(H.CONFIG["minimum_runtime_max_extra_waves"], 3)
+
 
 if __name__ == "__main__":
     unittest.main()

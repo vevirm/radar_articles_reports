@@ -42,6 +42,7 @@ DATE_TO = dt.date.fromisoformat(CONFIG["date_to"])
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
 BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", "1050"))
+MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 600))))
 REQUEST_TIMEOUT = int(os.environ.get("HISTORICAL_REQUEST_TIMEOUT", "12"))
 STARTED_MONO = time.monotonic()
 DEADLINE = STARTED_MONO + max(120, BUDGET_SECONDS)
@@ -103,6 +104,34 @@ def log(msg: str) -> None:
 
 def budget_ok(reserve: int = 30) -> bool:
     return time.monotonic() < DEADLINE - reserve
+
+
+def elapsed_seconds() -> float:
+    return time.monotonic() - STARTED_MONO
+
+
+def minimum_runtime_remaining() -> float:
+    return max(0.0, float(MIN_RUNTIME_SECONDS) - elapsed_seconds())
+
+
+def wait_until_minimum_runtime() -> None:
+    """Honor the minimum historical scan window after useful rotations are exhausted.
+
+    This is only a final floor. Normal behavior is to spend the time on additional
+    topic/source/deeper-result rotations first. The sleep path is used only when the
+    configured search space completes unusually quickly.
+    """
+    remaining = minimum_runtime_remaining()
+    if remaining <= 0:
+        return
+    safe_remaining = max(0.0, DEADLINE - time.monotonic() - 45.0)
+    wait_for = min(remaining, safe_remaining)
+    if wait_for <= 0:
+        return
+    log(f"Useful configured rotations finished early; holding the historical scan open for {wait_for:.0f}s to satisfy the {MIN_RUNTIME_SECONDS}s minimum window")
+    end = time.monotonic() + wait_for
+    while time.monotonic() < end:
+        time.sleep(min(5.0, max(0.0, end - time.monotonic())))
 
 
 def parse_date(value: Any) -> dt.date | None:
@@ -336,7 +365,7 @@ def fetch_text(url: str, timeout: int) -> str:
         return ""
 
 
-def collect_openalex(queries: list[str], warnings: list[str], lane: str = "openalex") -> list[dict[str, Any]]:
+def collect_openalex(queries: list[str], warnings: list[str], lane: str = "openalex", result_page: int = 1) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     scan_cap = int(CONFIG.get("openalex_missing_abstract_enrichment_per_scan", 24))
     per_query = int(CONFIG.get("openalex_missing_abstract_enrichment_per_query", 3))
@@ -344,7 +373,7 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
     used_rescue = 0
     for q in queries:
         if not budget_ok(90): break
-        params = {"search":q,"filter":f"from_publication_date:{DATE_FROM.isoformat()},to_publication_date:{DATE_TO.isoformat()},language:en","per-page":int(CONFIG.get("openalex_per_query",50)),"sort":"relevance_score:desc"}
+        params = {"search":q,"filter":f"from_publication_date:{DATE_FROM.isoformat()},to_publication_date:{DATE_TO.isoformat()},language:en","per-page":int(CONFIG.get("openalex_per_query",50)),"page":max(1,int(result_page)),"sort":"relevance_score:desc"}
         if OPENALEX_API_KEY: params["api_key"] = OPENALEX_API_KEY
         try:
             r = SESSION.get("https://api.openalex.org/works", params=params, timeout=REQUEST_TIMEOUT)
@@ -377,13 +406,13 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
     return out
 
 
-def collect_crossref(queries: list[str], warnings: list[str], lane: str = "crossref") -> list[dict[str, Any]]:
+def collect_crossref(queries: list[str], warnings: list[str], lane: str = "crossref", result_page: int = 1) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     scan_cap=int(CONFIG.get("crossref_missing_abstract_enrichment_per_scan",36)); per_task=int(CONFIG.get("crossref_missing_abstract_enrichment_per_query",3)); min_priority=int(CONFIG.get("metadata_rescue_priority_min_score",10)); used_rescue=0
     query_key = "query.title" if clean(CONFIG.get("crossref_relevance_query_mode","title")).lower()=="title" else "query.bibliographic"
     for q in queries:
         if not budget_ok(90): break
-        params={query_key:q,"filter":f"from-pub-date:{DATE_FROM.isoformat()},until-pub-date:{DATE_TO.isoformat()}","rows":int(CONFIG.get("crossref_per_query",50)),"sort":"relevance","order":"desc","select":"DOI,title,abstract,published-print,published-online,published,issued,created,author,container-title,publisher,URL,type"}
+        rows=int(CONFIG.get("crossref_per_query",50)); params={query_key:q,"filter":f"from-pub-date:{DATE_FROM.isoformat()},until-pub-date:{DATE_TO.isoformat()}","rows":rows,"offset":max(0,(max(1,int(result_page))-1)*rows),"sort":"relevance","order":"desc","select":"DOI,title,abstract,published-print,published-online,published,issued,created,author,container-title,publisher,URL,type"}
         try:
             r=SESSION.get("https://api.crossref.org/works",params=params,timeout=REQUEST_TIMEOUT)
             if r.status_code==429: warnings.append("Crossref rate limited (429)"); _diag("crossref_429"); continue
@@ -582,10 +611,10 @@ def rejection_funnel(new_items: int, unique_gate_candidates: int) -> dict[str, A
     }
 
 
-def run_rotation(active_topics: list[dict[str, Any]], active_sources: list[dict[str, Any]], warnings: list[str], suffix: str="normal") -> tuple[list[dict[str, Any]], list[str]]:
+def run_rotation(active_topics: list[dict[str, Any]], active_sources: list[dict[str, Any]], warnings: list[str], suffix: str="normal", result_page: int = 1) -> tuple[list[dict[str, Any]], list[str]]:
     queries=query_plan_for(active_topics); candidates=[]
-    candidates.extend(collect_openalex(queries,warnings,f"openalex_{suffix}"))
-    candidates.extend(collect_crossref(queries,warnings,f"crossref_{suffix}"))
+    candidates.extend(collect_openalex(queries,warnings,f"openalex_{suffix}",result_page=result_page))
+    candidates.extend(collect_crossref(queries,warnings,f"crossref_{suffix}",result_page=result_page))
     candidates.extend(collect_direct_sources(active_sources,active_topics,warnings))
     return candidates,queries
 
@@ -609,8 +638,30 @@ def main() -> int:
         rescue_topics,rescue_next_topic=rotating(topics,next_topic,int(CONFIG.get("low_yield_fresh_topics",4)))
         rescue_sources,rescue_next_source=rotating(sources,next_source,int(CONFIG.get("low_yield_fresh_sources",8)))
         log(f"Low yield ({initial_new}); forcing fresh historical topic/source rotation inside this run")
-        rescue_candidates,rescue_queries=run_rotation(rescue_topics,rescue_sources,warnings,"fresh")
+        rescue_candidates,rescue_queries=run_rotation(rescue_topics,rescue_sources,warnings,"fresh",result_page=1)
         candidates.extend(rescue_candidates); next_topic=rescue_next_topic; next_source=rescue_next_source
+
+    # Minimum-runtime continuation: keep doing useful historical work until at least
+    # the configured floor has elapsed. Topic groups rotate through the whole 2023-2025
+    # window; after one full topic sweep, scholarly APIs move to deeper result pages.
+    continuation_waves=[]
+    topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",CONFIG.get("topics_per_scan",4))))
+    sources_per_wave=max(1,int(CONFIG.get("minimum_runtime_sources_per_wave",CONFIG.get("sources_per_scan",8))))
+    max_extra=max(0,int(CONFIG.get("minimum_runtime_max_extra_waves",12)))
+    blocks_per_topic_sweep=max(1,(len(topics)+topics_per_wave-1)//topics_per_wave)
+    blocks_already=1 + (1 if rescue_topics else 0)
+    while minimum_runtime_remaining()>0 and budget_ok(150) and len(continuation_waves)<max_extra:
+        wave_no=len(continuation_waves)+1
+        wave_topics,wave_next_topic=rotating(topics,next_topic,topics_per_wave)
+        wave_sources,wave_next_source=rotating(sources,next_source,sources_per_wave)
+        result_page=1 + (blocks_already // blocks_per_topic_sweep)
+        log(f"Minimum-runtime continuation wave {wave_no}: page {result_page}; topics: "+" | ".join(str(t.get("label")) for t in wave_topics))
+        wave_candidates,wave_queries=run_rotation(wave_topics,wave_sources,warnings,f"minimum_runtime_{wave_no}",result_page=result_page)
+        candidates.extend(wave_candidates)
+        continuation_waves.append({"wave":wave_no,"result_page":result_page,"topics":[str(t.get("label")) for t in wave_topics],"sources":[str(s.get("name")) for s in wave_sources],"queries":wave_queries,"candidates":len(wave_candidates)})
+        next_topic=wave_next_topic; next_source=wave_next_source; blocks_already+=1
+
+    wait_until_minimum_runtime()
     unique_gate=dedupe(candidates); merged=dedupe(old_items+unique_gate)
     merged=[x for x in merged if (d:=parse_date(x.get("date"))) and DATE_FROM<=d<=DATE_TO]
     merged.sort(key=lambda x:(int(x.get("source_merit_score",0)),int(x.get("year",0)),x.get("date","")),reverse=True)
@@ -633,6 +684,7 @@ def main() -> int:
             "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":RESCUE_MODE,
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,
             "low_yield_rotation":{"triggered":low_triggered,"new_items_after_normal_rotation":initial_new,"fresh_topics":[str(t.get("label")) for t in rescue_topics],"fresh_sources":[str(s.get("name")) for s in rescue_sources],"fresh_queries":rescue_queries,"new_items_after_all_in_run_rotations":new_count,"full_rescue_run_enabled":full_rescue_enabled,"full_rescue_run_should_dispatch":should_dispatch},
+            "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),
             "openalex_api_key_configured":bool(OPENALEX_API_KEY),"rejection_funnel":rejection_funnel(new_count,len(unique_gate)),"diagnostics":{k:int(v) for k,v in sorted(DIAG.items())},"warnings":list(dict.fromkeys(warnings))[:50],
         },

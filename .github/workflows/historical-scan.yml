@@ -60,6 +60,7 @@ jobs:
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           HISTORICAL_SCAN_BUDGET_SECONDS: '1050'
+          HISTORICAL_MIN_RUNTIME_SECONDS: '600'
           HISTORICAL_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
         run: python historical/scan_historical.py
 
