@@ -1,0 +1,166 @@
+name: Historical Top-Tier Scan
+
+on:
+  # Historical code/config changes run immediately, but historical data commits do not
+  # retrigger themselves. The live radar explicitly ignores historical/** and this workflow.
+  push:
+    branches:
+      - main
+    paths:
+      - 'historical/config.json'
+      - 'historical/scan_historical.py'
+      - 'historical/index.html'
+      - 'historical/tests/**'
+      - '.github/workflows/historical-scan.yml'
+  schedule:
+    - cron: '41 3 * * *'
+  workflow_dispatch:
+    inputs:
+      rescue_mode:
+        description: 'One full low-yield historical rescue run'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: historical-top-tier-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    permissions:
+      contents: write
+      actions: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository without stored credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run historical scanner tests
+        run: python -m unittest discover -s historical/tests -p 'test_*.py'
+
+      - name: Scan 2023-2025 historical top-tier evidence
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          HISTORICAL_SCAN_BUDGET_SECONDS: '1050'
+          HISTORICAL_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
+        run: python historical/scan_historical.py
+
+      - name: Verify historical scanner changed only its own data file
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
+          unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'historical/historical.json' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo "Historical scanner changed unexpected files; refusing to save anything."
+            echo "$unexpected"
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('historical/historical.json').read_text(encoding='utf-8'))
+          assert d.get('date_from')=='2023-01-01'
+          assert d.get('date_to')=='2025-12-31'
+          assert isinstance(d.get('items'), list)
+          assert isinstance((d.get('last_scan') or {}).get('rejection_funnel'), dict)
+          print('historical.json safety check passed:', len(d['items']), 'items')
+          PY
+
+      - name: Commit historical results
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- historical/historical.json
+          if git diff --cached --quiet; then
+            echo "No historical data change to commit."
+          else
+            git commit -m "Update historical top-tier archive"
+            auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+            git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+            trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Decide whether to launch one full historical rescue run
+        id: rescue
+        env:
+          RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          d=json.loads(Path('historical/historical.json').read_text(encoding='utf-8'))
+          cfg=json.loads(Path('historical/config.json').read_text(encoding='utf-8'))
+          last=d.get('last_scan') if isinstance(d.get('last_scan'),dict) else {}
+          threshold=int(cfg.get('full_rescue_run_trigger_max_new_items',3) or 3)
+          try: new_items=int(last.get('new_items',0) or 0)
+          except Exception: new_items=0
+          already=str(os.environ.get('RESCUE_MODE','')).lower() in {'1','true','yes','on'}
+          enabled=bool(cfg.get('full_rescue_run_enabled',True))
+          dispatch=enabled and (not already) and new_items<=threshold
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
+              out.write(f"dispatch={'true' if dispatch else 'false'}\n")
+              out.write(f"new_items={new_items}\n")
+          print(f"Historical full-rescue decision: already_rescue={already}, new_items={new_items}, threshold={threshold}, dispatch={dispatch}")
+          PY
+
+      - name: Launch one fresh historical rescue scan
+        if: steps.rescue.outputs.dispatch == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Historical yield stayed <=3; dispatching exactly one fresh historical rescue run."
+          curl --fail-with-body -L -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/historical-scan.yml/dispatches" \
+            -d '{"ref":"main","inputs":{"rescue_mode":true}}'
+
+  publish:
+    needs: scan
+    if: needs.scan.result == 'success'
+    permissions:
+      contents: read
+      pages: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Publish historical page on GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl --fail-with-body -L -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds"
