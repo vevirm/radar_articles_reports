@@ -10,6 +10,9 @@ on:
       - 'historical/config.json'
       - 'historical/scan_historical.py'
       - 'historical/index.html'
+      - 'historical/manual_evidence.json'
+      - 'historical/curated_seed_evidence.json'
+      - 'historical/Research_Workforce_Consolidated_25_2_historical_geopolitical_manual.xlsx'
       - 'historical/tests/**'
       - '.github/workflows/historical-scan.yml'
   schedule:
@@ -56,7 +59,7 @@ jobs:
       - name: Run historical scanner tests
         run: python -m unittest discover -s historical/tests -p 'test_*.py'
 
-      - name: Scan 2023-2025 historical top-tier evidence
+      - name: Scan source-age historical top-tier evidence
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           HISTORICAL_SCAN_BUDGET_SECONDS: '1050'
@@ -68,8 +71,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
-          find . -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
+          # Python bytecode/cache paths are ignored by .gitignore. Do not delete
+          # tracked cache files here: older browser uploads may already have committed
+          # them, and deleting tracked files would itself trip this safety guard.
+          # Untracked ignored cache files are excluded by git ls-files below.
           unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'historical/historical.json' || true)"
           if [[ -n "$unexpected" ]]; then
             echo "Historical scanner changed unexpected files; refusing to save anything."
@@ -79,10 +84,16 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
+          import datetime as dt
+          from dateutil.relativedelta import relativedelta
           d=json.loads(Path('historical/historical.json').read_text(encoding='utf-8'))
-          assert d.get('date_from')=='2023-01-01'
-          assert d.get('date_to')=='2025-12-31'
+          expected_cutoff=dt.date.today()-relativedelta(months=6)
+          assert d.get('date_from')=='2015-01-01'
+          assert d.get('cutoff_exclusive')==expected_cutoff.isoformat()
+          assert d.get('date_to')==(expected_cutoff-dt.timedelta(days=1)).isoformat()
+          assert d.get('main_radar_window_months')==6
           assert isinstance(d.get('items'), list)
+          assert sum(1 for x in d['items'] if x.get('manual_curated')) >= 21
           assert isinstance((d.get('last_scan') or {}).get('rejection_funnel'), dict)
           print('historical.json safety check passed:', len(d['items']), 'items')
           PY
