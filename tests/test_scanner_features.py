@@ -17,6 +17,24 @@ sys.modules[spec.name] = scan
 spec.loader.exec_module(scan)
 
 
+class SchedulerBreadthTests(unittest.TestCase):
+    def test_interleaved_batch_keeps_all_lanes_in_executed_prefix(self):
+        base = [f"base-{i}" for i in range(12)]
+        explore = [f"explore-{i}" for i in range(12)]
+        gaps = [f"gap-{i}" for i in range(32)]
+        methods = [f"method-{i}" for i in range(12)]
+        context = [f"context-{i}" for i in range(4)]
+        batch = scan.interleaved_unique_batch(52, base, explore, gaps, methods, context)
+        self.assertEqual(len(batch), 52)
+        # Simulate a source deadline after only the first 20 queued queries start.
+        prefix = batch[:20]
+        for stem in ("base-", "explore-", "gap-", "method-", "context-"):
+            self.assertTrue(any(x.startswith(stem) for x in prefix), stem)
+        self.assertEqual(sum(x.startswith("base-") for x in batch), 12)
+        self.assertEqual(sum(x.startswith("explore-") for x in batch), 12)
+
+
+
 class CuratorCandidateQueueTests(unittest.TestCase):
     def test_round_xiv_queue_covers_all_groups_and_companions(self):
         doc = json.loads((ROOT / "curator_candidate_tests.json").read_text(encoding="utf-8"))

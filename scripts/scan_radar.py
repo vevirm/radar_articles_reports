@@ -365,6 +365,40 @@ def rotating_batch(items: list[Any], cursor: int, limit: int) -> tuple[list[Any]
 
 
 
+def interleaved_unique_batch(limit: int, *lanes: Iterable[Any]) -> list[Any]:
+    """Compose a capped batch without letting the first lane crowd out the rest.
+
+    Network collectors execute queued work in submission order and may hit a source or
+    stage deadline before the tail of the queue starts. Round-robin composition therefore
+    makes the *executed prefix* representative of broad rotation, exploration, Matrix gaps,
+    methods and finding-context lanes instead of merely making those lanes present on paper.
+    """
+    cap = max(0, int(limit or 0))
+    if cap <= 0:
+        return []
+    queues = [list(dict.fromkeys(lane)) for lane in lanes if lane]
+    out: list[Any] = []
+    seen: set[Any] = set()
+    positions = [0] * len(queues)
+    while len(out) < cap:
+        progressed = False
+        for idx, queue in enumerate(queues):
+            while positions[idx] < len(queue):
+                item = queue[positions[idx]]
+                positions[idx] += 1
+                if item in seen:
+                    continue
+                seen.add(item)
+                out.append(item)
+                progressed = True
+                break
+            if len(out) >= cap:
+                break
+        if not progressed:
+            break
+    return out
+
+
 def committed_rotation_cursor(items: list[Any], original_cursor: int, planned: list[Any], executed: set[Any]) -> tuple[int, bool, int]:
     """Advance a persisted rotation only across the contiguous planned work actually executed.
 
@@ -8428,10 +8462,14 @@ def main() -> int:
         max(0, int(CONFIG.get("finding_context_queries_per_scan", 4) or 0)),
     )
 
-    oa_reserved = len(gap_scholarly) + len(b_method_focus) + len(finding_context_focus) + len(oa_explore)
-    cr_reserved = len(gap_scholarly) + len(b_method_focus) + len(finding_context_focus) + len(cr_explore)
-    oa_base_cap = max(1, oa_cap - min(oa_reserved, max(0, oa_cap - 1)))
-    cr_base_cap = max(1, cr_cap - min(cr_reserved, max(0, cr_cap - 1)))
+    # Guarantee a real broad rotation in the *executed prefix*. Earlier builds appended
+    # base/exploration work after up to 32 Matrix-gap + 12 method queries, then truncated
+    # the queue. Under ordinary stage deadlines this produced runs reporting a wide plan
+    # while executing zero base, exploration or finding-context queries. Keep a minimum
+    # broad slice and interleave every lane so partial execution remains genuinely broad.
+    broad_min = max(1, int(CONFIG.get("scholarly_base_queries_per_scan", 12) or 12))
+    oa_base_cap = min(oa_cap, broad_min)
+    cr_base_cap = min(cr_cap, broad_min)
     oa_cursor_before = int(state.get("openalex_cursor", 0) or 0)
     cr_broad_cursor_before = int(state.get("crossref_broad_cursor", 0) or 0)
     oa_base, _oa_planned_next, _oa_planned_wrapped = rotating_batch(
@@ -8440,8 +8478,12 @@ def main() -> int:
     cr_base, _cr_planned_next, _cr_planned_wrapped = rotating_batch(
         all_queries, cr_broad_cursor_before, cr_base_cap
     )
-    oa_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + finding_context_focus + oa_explore + oa_base))[:oa_cap]
-    cr_batch = list(dict.fromkeys(gap_scholarly + b_method_focus + finding_context_focus + cr_explore + cr_base))[:cr_cap]
+    oa_batch = interleaved_unique_batch(
+        oa_cap, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
+    )
+    cr_batch = interleaved_unique_batch(
+        cr_cap, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
+    )
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
@@ -8960,7 +9002,12 @@ def main() -> int:
     rescue_enabled = bool(CONFIG.get("quiet_scan_rescue_enabled", True))
     rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 180) or 180)
     scholarly_deduped = dedupe_candidates(oa + cr)
-    if rescue_enabled and not rule_fix_source_recovery_attempted and not scholarly_deduped and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed):
+    rescue_trigger = max(1, int(CONFIG.get("quiet_scan_rescue_trigger_below_scholarly_candidates", 1) or 1))
+    if (
+        rescue_enabled and not rule_fix_source_recovery_attempted
+        and len(scholarly_deduped) < rescue_trigger
+        and budget_remaining() > rescue_min_remaining and not (oa_failed and cr_failed)
+    ):
         rescue_n = max(1, int(CONFIG.get("quiet_scan_rescue_queries_per_source", 4) or 4))
         rescue_oa_cursor_before = int(state.get("openalex_explore_cursor", 0) or 0)
         rescue_cr_cursor_before = int(state.get("crossref_explore_cursor", 0) or 0)
@@ -8983,7 +9030,8 @@ def main() -> int:
         }
         if quiet_rescue["attempted"]:
             log_progress(
-                "Quiet-scan rescue before institutional stage: first scholarly slice admitted nothing; trying next historical slice: "
+                f"Low-yield rescue before institutional stage: first scholarly slice admitted {len(scholarly_deduped)} "
+                f"candidate(s), below trigger {rescue_trigger}; trying next historical slice: "
                 + ", ".join(quiet_rescue["themes"])
             )
             rescue_execution: dict[str, Any] = {}
@@ -9245,6 +9293,14 @@ def main() -> int:
     deep_cursor = int(state.get("frontier_gap_depth_cursor", 0) or 0)
     deep_batch_size = max(1, int(CONFIG.get("frontier_gap_deepening_queries_per_wave", 14) or 14))
     deep_max_waves = max(0, int(CONFIG.get("frontier_gap_deepening_max_waves", 16) or 16))
+    if not frontier_focus.get("empty_targets"):
+        # Once every Matrix cell has evidence, balancing thin cells is useful but should
+        # not consume the rest of a 20-minute run. Preserve most remaining time for the
+        # wide recurring lanes and low-yield rescue instead of issuing 100+ gap queries.
+        deep_max_waves = min(
+            deep_max_waves,
+            max(0, int(CONFIG.get("frontier_gap_deepening_max_waves_no_empty", 3) or 3)),
+        )
     finalize_reserve = max(30, int(CONFIG.get("scan_finalize_reserve_seconds", 60) or 60))
     stubborn_enabled = bool(CONFIG.get("frontier_stubborn_recovery_enabled", True)) and bool(frontier_focus.get("empty_targets"))
     stubborn_reserve = max(0, int(CONFIG.get("frontier_stubborn_recovery_seconds", 240) or 0)) if stubborn_enabled else 0

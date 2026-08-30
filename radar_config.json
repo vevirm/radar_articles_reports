@@ -1655,7 +1655,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.13.33-source-supported-english-balanced-matrix-curator-tests-citation-snowball",
+  "recall_profile_version": "v17.13.34-balanced-executed-prefix-low-yield-rescue",
   "crossref_missing_abstract_enrichment_per_scan": 18,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1838,5 +1838,8 @@
   "curator_candidate_testing_stage_seconds": 240,
   "curator_candidate_tests_per_scan": 30,
   "curator_candidate_retest_rejected": false,
-  "curator_candidate_enrichment_timeout_seconds": 8
+  "curator_candidate_enrichment_timeout_seconds": 8,
+  "scholarly_base_queries_per_scan": 12,
+  "quiet_scan_rescue_trigger_below_scholarly_candidates": 8,
+  "frontier_gap_deepening_max_waves_no_empty": 3
 }
