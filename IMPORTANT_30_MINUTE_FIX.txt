@@ -1,9 +1,0 @@
-V17.5.3 — CURRENT-CORPUS CORRECTIVE CLEANUP + INCREMENTAL ROTATION
-
-The GitHub job remains 30 minutes and the scanner hard budget remains 20 minutes.
-
-The first V17.5.3 run uses part of that budget for one corrective A/B audit of the supplied current corpus. Thin A/B failures receive a bounded best-effort DOI/page/PDF refresh using 8 workers and 8-second timeouts. It also performs one lightweight headline-level corrective audit of current Strand C under the tightened EU-first weak-signal gate. The old inherited audit is not repeated.
-
-That run writes precision_corpus_cleanup_complete=true and precision_signal_cleanup_complete=true. Normal later runs have no historical cleanup overhead and keep the rotating source caps plus sparse-cell gap searches.
-
-Version: 17.5.3
