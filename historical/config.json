@@ -1,7 +1,6 @@
 {
-  "profile_version": "v17.14.3-historical-minimum-10-minute-rotation",
-  "date_from": "2023-01-01",
-  "date_to": "2025-12-31",
+  "profile_version": "v17.15.0-source-age-history-manual-layer",
+  "date_from": "2015-01-01",
   "topics_per_scan": 4,
   "sources_per_scan": 8,
   "queries_per_topic": 2,
@@ -25,11 +24,6 @@
   "full_rescue_run_trigger_max_new_items": 3,
   "max_items": 350,
   "minimum_admission_score": 93,
-  "year_preference": {
-    "2025": 8,
-    "2024": 4,
-    "2023": 0
-  },
   "topics": [
     {
       "id": "talent",
@@ -574,5 +568,9 @@
   "minimum_runtime_sources_per_wave": 8,
   "minimum_runtime_max_extra_waves": 12,
   "curated_seed_queries_per_scan": 12,
-  "source_policy_note": "Official EU and elite institutes plus selected high-quality research-system/workforce institutions and top journals; curated workbook entries are discovery seeds only and must still pass admission gates."
+  "source_policy_note": "Official EU and elite institutes plus selected high-quality research-system/workforce institutions and top journals. Manual geopolitical evidence is admitted explicitly and preserved; curated workbook entries are discovery seeds and still pass automated admission gates.",
+  "main_radar_window_months": 6,
+  "cutoff_rule": "Historical sources are those published before the rolling main-radar boundary (today minus main_radar_window_months). Content may itself be forward-looking.",
+  "year_preference_latest_bonus": 12,
+  "year_preference_decay_per_year": 2
 }

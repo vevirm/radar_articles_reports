@@ -15,16 +15,18 @@ class HistoricalScannerTests(unittest.TestCase):
         H.DIAG.clear()
 
     def test_year_preference_is_recent_first(self):
+        self.assertGreater(H.year_bonus(H.dt.date(2026, 2, 1)), H.year_bonus(H.dt.date(2025, 6, 1)))
         self.assertGreater(H.year_bonus(H.dt.date(2025, 6, 1)), H.year_bonus(H.dt.date(2024, 6, 1)))
-        self.assertGreater(H.year_bonus(H.dt.date(2024, 6, 1)), H.year_bonus(H.dt.date(2023, 6, 1)))
 
     def test_rotation_is_topic_not_time_slice(self):
         topics = H.CONFIG["topics"]
         chosen, next_cursor = H.rotating(topics, 0, 4)
         self.assertEqual(len(chosen), 4)
         self.assertEqual(next_cursor, 4)
-        self.assertEqual(H.DATE_FROM.isoformat(), "2023-01-01")
-        self.assertEqual(H.DATE_TO.isoformat(), "2025-12-31")
+        self.assertEqual(H.DATE_FROM.isoformat(), "2015-01-01")
+        self.assertEqual(H.MAIN_RADAR_WINDOW_MONTHS, 6)
+        self.assertEqual(H.DATE_TO, H.CUTOFF_EXCLUSIVE - H.dt.timedelta(days=1))
+        self.assertEqual(H.CUTOFF_EXCLUSIVE, H.historical_cutoff_exclusive())
 
     def test_non_elite_source_is_rejected(self):
         raw = {
@@ -80,8 +82,16 @@ class HistoricalScannerTests(unittest.TestCase):
 
     def test_curated_workbook_seed_queue_is_loaded(self):
         seeds = H.curated_seed_items()
-        self.assertGreaterEqual(len(seeds), 160)
+        self.assertGreaterEqual(len(seeds), 190)
         self.assertTrue(any("Choose Europe" in str(x.get("title")) for x in seeds))
+        self.assertTrue(any(int(x.get("year", 0) or 0) <= 2022 for x in seeds))
+
+    def test_manual_geopolitical_layer_is_persistent_and_people_heavy(self):
+        items = H.manual_evidence_items()
+        self.assertEqual(len(items), 21)
+        self.assertGreaterEqual(sum(1 for x in items if x.get("matrix_dimension") == "knowledge"), 16)
+        self.assertTrue(any(x.get("date") == "2026-02-03" for x in items))
+        self.assertTrue(all(x.get("manual_curated") for x in items))
 
     def test_administrative_documents_are_rejected_before_topic_gates(self):
         raw = {
@@ -137,6 +147,7 @@ class HistoricalScannerTests(unittest.TestCase):
         self.assertIn("historical-scan.yml/dispatches", workflow)
         self.assertNotIn("radar-scan.yml/dispatches", workflow)
         self.assertIn("git add -- historical/historical.json", workflow)
+        self.assertIn("historical/manual_evidence.json", workflow)
         self.assertNotIn("git add -- radar.json", workflow)
 
     def test_historical_scan_has_ten_minute_minimum_runtime(self):

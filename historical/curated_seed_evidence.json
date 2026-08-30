@@ -1,9 +1,469 @@
 {
-  "source_workbook": "Research_Workforce_Consolidated_25_2.xlsx",
-  "date_window": "2023-2025",
-  "purpose": "Curated discovery/backfill queue. Entries are search seeds only; scanner admission gates and source-quality checks still apply.",
-  "count": 167,
+  "source_workbook": "Research_Workforce_Consolidated_25_2_historical_geopolitical_manual.xlsx",
+  "date_window": "Workbook literature from 2015 onward, limited at runtime to sources published before the rolling six-month main-radar boundary",
+  "purpose": "Curated discovery/backfill queue. Historical status is based on source publication age, not whether content is backward- or forward-looking. Entries remain search seeds only; scanner admission gates and source-quality checks still apply.",
+  "count": 195,
   "items": [
+    {
+      "workbook_id": 1,
+      "year": 2015,
+      "title": "International academic mobility: Towards a concentration of the minds in Europe",
+      "citation": "\"Van Der Wende, M. (2015). International academic mobility: Towards a concentration of the minds in Europe. European review, 23(S1), S70-S88.",
+      "type": "Article",
+      "topics": "Researcher mobility",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 101,
+      "year": 2015,
+      "title": "Jacob W J (2015) Interdisciplinary trends in higher education. Palgrave Communications 1:15001 doi: 10.1057/palcomms.2015.1.Footnote",
+      "citation": "Jacob W J (2015) Interdisciplinary trends in higher education. Palgrave Communications 1:15001 doi: 10.1057/palcomms.2015.1.Footnote",
+      "type": "Article",
+      "topics": "Education and training",
+      "doi": "10.1057/palcomms.2015.1.Footnote",
+      "url": "https://doi.org/10.1057/palcomms.2015.1.Footnote"
+    },
+    {
+      "workbook_id": 111,
+      "year": 2016,
+      "title": "The European research elite: A cross-national study of highly productive academics in 11 countries",
+      "citation": "Kwiek, M. (2016). The European research elite: A cross-national study of highly productive academics in 11 countries. Higher education, 71(3), 379-397. Elsevier (2025) Researchers of the Future report. https://www.elsevier.com/en-gb/insights/confidence-in-research/researcher-of-the-future",
+      "type": "Article",
+      "topics": "Researcher mobility",
+      "doi": "",
+      "url": "https://www.elsevier.com/en-gb/insights/confidence-in-research/researcher-of-the-future"
+    },
+    {
+      "workbook_id": 189,
+      "year": 2017,
+      "title": "Zippel, Kathrin. 2017. Women in Global Science: Advancing Academic Careers through International Collaboration, Redwood City: Stanford University Press, doi.org/10.1515/9781503601505",
+      "citation": "Zippel, Kathrin. 2017. Women in Global Science: Advancing Academic Careers through International Collaboration, Redwood City: Stanford University Press, doi.org/10.1515/9781503601505",
+      "type": "Article",
+      "topics": "Researcher mobility",
+      "doi": "10.1515/9781503601505",
+      "url": "https://doi.org/10.1515/9781503601505"
+    },
+    {
+      "workbook_id": 6,
+      "year": 2018,
+      "title": "Science in Times of Challenged Trust and Expertise",
+      "citation": "ALLEA GENERAL ASSEMBLY (2018). Science in Times of Challenged Trust and Expertise. https://www.allea.org/wp-content/uploads/2019/01/ALLEA-ConferenceProceedingsDigital.pdf?_gl=1*1gitv84*_ga*MTEyODYxODI5Ny4xNzcwMTM2NTMz*_ga_LC3PF5JP69*czE3NzA4MTQxMTEkbzIkZzEkdDE3NzA4MTUxOTMkajYwJGwwJGgw&_ga=2.249159175.1617547896.1770814113-1128618297.1770136533",
+      "type": "Article",
+      "topics": "trust in science",
+      "doi": "",
+      "url": "https://www.allea.org/wp-content/uploads/2019/01/ALLEA-ConferenceProceedingsDigital.pdf?_gl=1*1gitv84*_ga*MTEyODYxODI5Ny4xNzcwMTM2NTMz*_ga_LC3PF5JP69*czE3NzA4MTQxMTEkbzIkZzEkdDE3NzA4MTUxOTMkajYwJGwwJGgw&_ga=2.249159175.1617547896.1770814113-1128618297.1770136533"
+    },
+    {
+      "workbook_id": 16,
+      "year": 2020,
+      "title": "Mismatch between demand and supply among higher education graduates in the EU (EUR 30121 EN)",
+      "citation": "Biagi, F., Castaño Muñoz, J., & Di Pietro, G. (2020). Mismatch between demand and supply among higher education graduates in the EU (EUR 30121 EN). Publications Office of the European Union.",
+      "type": "Research article",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 18,
+      "year": 2021,
+      "title": "What comes after a PhD? Findings from the DocEnhance survey of doctorate holders on their employment situation, skills match, and the value of the doctorate",
+      "citation": "Boman, J., Beeson, H., Sanchez Barrioluengo, M., & Rusitoru, M. (2021). What comes after a PhD? Findings from the DocEnhance survey of doctorate holders on their employment situation, skills match, and the value of the doctorate. European Science Foundation (ESF)",
+      "type": "Research report",
+      "topics": "Demand for researchers; Working Conditions Outside Higher Education",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 42,
+      "year": 2021,
+      "title": "DG RTD, MORE4 – mobility patterns and career paths of researchers",
+      "citation": "DG RTD. (2021). MORE4 - Support data collection and analysis concerning mobility patterns and career paths of researchers. Survey on researchers in European higher education institutions. Publications Office. https://data.europa.eu/doi/10.2777/132356.",
+      "type": "Report",
+      "topics": "reserach careers",
+      "doi": "10.2777/132356",
+      "url": "https://data.europa.eu/doi/10.2777/132356"
+    },
+    {
+      "workbook_id": 79,
+      "year": 2021,
+      "title": "Doctoral graduates’ transition to industry: networks as a mechanism? Cases from Norway, Sweden and the UK",
+      "citation": "Germain-Alamartine, E., Ahoba-Sam, R., Moghadam-Saman, S., & Evers, G. (2021). Doctoral graduates’ transition to industry: networks as a mechanism? Cases from Norway, Sweden and the UK. Studies in Higher Education, 46:12, 2680-2695, DOI: 10.1080/03075079.2020.1754783",
+      "type": "Research article",
+      "topics": "Demand for researchers",
+      "doi": "10.1080/03075079.2020.1754783",
+      "url": "https://doi.org/10.1080/03075079.2020.1754783"
+    },
+    {
+      "workbook_id": 135,
+      "year": 2021,
+      "title": "OECD, Reducing the precarity of academic research careers",
+      "citation": "OECD (2021), “Reducing the precarity of academic research careers”, OECD Science, Technology and Industry Policy Papers, No. 113, OECD Publishing, Paris, https://doi.org/10.1787/0f8bd468-en.",
+      "type": "Report",
+      "topics": "Precarity; Researcher mobility",
+      "doi": "10.1787/0f8bd468-en",
+      "url": "https://doi.org/10.1787/0f8bd468-en"
+    },
+    {
+      "workbook_id": 167,
+      "year": 2021,
+      "title": "PhD holders entering non-academic workplaces: Organisational culture shock",
+      "citation": "Skakni, I., Inouye, K., & McAlpine, L. (2022). PhD holders entering non-academic workplaces: Organisational culture shock. Studies in Higher Education, 47(6), 1271-1283.",
+      "type": "Article",
+      "topics": "Working Conditions Outside Higher Education",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 20,
+      "year": 2022,
+      "title": "The academic precariat: Understanding life and labour in the neoliberal academy",
+      "citation": "Burton, S., & Bowman, B. (2022). The academic precariat: Understanding life and labour in the neoliberal academy. British Journal of Sociology of Education, 43(4), 497-512.",
+      "type": "Article",
+      "topics": "Precarity",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 29,
+      "year": 2022,
+      "title": "Speeding up to keep up: Exploring the use of AI in the research process",
+      "citation": "Chubb, J., Cowling, P., & Reed, D. (2022). Speeding up to keep up: Exploring the use of AI in the research process. AI & Society, 37(4), 1439–1457. https://doi.org/10.1007/s00146-021-01259-0",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1007/s00146-021-01259-0",
+      "url": "https://doi.org/10.1007/s00146-021-01259-0"
+    },
+    {
+      "workbook_id": 40,
+      "year": 2022,
+      "title": "Knowledge ecosystems in the new ERA – Using a competence-based approach for career development in academia and beyond",
+      "citation": "De Coen, A. and Núñez, L. (2022). Knowledge ecosystems in the new ERA – Using a competence-based approach for career development in academia and beyond. Publications Office of the European Union. \"",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 84,
+      "year": 2022,
+      "title": "Barriers to full participation in the open science life cycle among early career researchers",
+      "citation": "Gownaris, N. J., Vermeir, K., Bittner, M.-I., Gunawardena, L., Kaur-Ghumaan, S., Lepenies, R., Ntsefong, G. N., & Zakari, I. S. (2022). Barriers to full participation in the open science life cycle among early career researchers. Data Science Journal, 21(1), 2. https://doi.org/10.5334/dsj-2022-002",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "10.5334/dsj-2022-002",
+      "url": "https://doi.org/10.5334/dsj-2022-002"
+    },
+    {
+      "workbook_id": 90,
+      "year": 2022,
+      "title": "Doctoral education in Europe: current developments and trends",
+      "citation": "Hasgall, A. et Peneoasu, A (2022). Doctoral education in Europe: current developments and trends. EUA. \"",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 95,
+      "year": 2022,
+      "title": "Hnatkova et al., Labour market perspectives for PhD graduates in Europe",
+      "citation": "Hnatkova, E., Degtyarova, I., Kersschot, M., & Boman, J. (2022). Labour market perspectives for PhD graduates in Europe. European Journal of Education, 57, 395–409. https://doi.org/10.1111/ejed.12514",
+      "type": "Academic article",
+      "topics": "Labor market; Demand for researchers; Working Conditions Outside Higher Education",
+      "doi": "10.1111/ejed.12514",
+      "url": "https://doi.org/10.1111/ejed.12514"
+    },
+    {
+      "workbook_id": 127,
+      "year": 2022,
+      "title": "Melin et al., Knowledge ecosystems in the new ERA – intersectoral mobility schemes",
+      "citation": "Melin, G. Et al (2022). Knowledge ecosystems in the new ERA – Talent circulation and intersectoral mobility – Update of intersectoral mobility schemes. Publications Office of the European Union, 2022, https://data.europa.eu/doi/10.2777/620810\"",
+      "type": "Report",
+      "topics": "Researcher mobility",
+      "doi": "10.2777/620810",
+      "url": "https://data.europa.eu/doi/10.2777/620810"
+    },
+    {
+      "workbook_id": 146,
+      "year": 2022,
+      "title": "Toward more inclusive metrics and open science to measure research assessment in earth and natural sciences",
+      "citation": "Pourret, O., Irawan, D. E., Shaghaei, N., van Rijsingen, E. M., & Besançon, L. (2022). Toward more inclusive metrics and open science to measure research assessment in earth and natural sciences. Frontiers in Research Metrics and Analytics, 7, 850333. https://doi.org/10.3389/frma.2022.850333",
+      "type": "Opinion article",
+      "topics": "Open science",
+      "doi": "10.3389/frma.2022.850333",
+      "url": "https://doi.org/10.3389/frma.2022.850333"
+    },
+    {
+      "workbook_id": 155,
+      "year": 2022,
+      "title": "Dynamics of cumulative advantage and threats to equity in open science: a scoping review",
+      "citation": "Ross-Hellauer, T., Reichmann, S., Cole, N. L., Fessl, A., Klebel, T., & Pontika, N. (2022). Dynamics of cumulative advantage and threats to equity in open science: a scoping review. Royal Society open science, 9(1), 211032.",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 163,
+      "year": 2022,
+      "title": "Science communication for greater research impact",
+      "citation": "Science Europe (2022). Science communication for greater research impact. https://www.scienceeurope.org/media/bvsc5qv3/202206-science-europe-statement-science-communication.pdf",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "",
+      "url": "https://www.scienceeurope.org/media/bvsc5qv3/202206-science-europe-statement-science-communication.pdf"
+    },
+    {
+      "workbook_id": 181,
+      "year": 2022,
+      "title": "Countering disinformation for the promotion and protection of human rights and fundamental freedoms",
+      "citation": "United Nations. (2022). Countering disinformation for the promotion and protection of human rights and fundamental freedoms. https://docs.un.org/en/A/77/287",
+      "type": "Report",
+      "topics": "Disinformation",
+      "doi": "",
+      "url": "https://docs.un.org/en/A/77/287"
+    },
+    {
+      "workbook_id": 199,
+      "year": 2022,
+      "title": "Knowledge ecosystems in the new ERA – Talent circulation and intersectoral mobility – Analytical report with a mapping of talent mobility and causes of brain drain",
+      "citation": "Van Hoed, M. et al (2022). Knowledge ecosystems in the new ERA – Talent circulation and intersectoral mobility – Analytical report with a mapping of talent mobility and causes of brain drain. Publications Office of the European Union.",
+      "type": "Report",
+      "topics": "Brain drain, talent mobility",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 200,
+      "year": 2022,
+      "title": "Knowledge ecosystems in the new ERA – Talent circulation and intersectoral mobility – Pathways for a balanced talent circulation in EU",
+      "citation": "Van Hoed, M. et al (2022). Knowledge ecosystems in the new ERA – Talent circulation and intersectoral mobility – Pathways for a balanced talent circulation in EU. Publications Office of the European Union.",
+      "type": "Report",
+      "topics": "Talent circulation, EU policy",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 13,
+      "year": 2023,
+      "title": "One foot in academia and one in work-life - The case of Swedish industrial PhD students",
+      "citation": "Bernhard, I., & Olsson, A. K. (2023). One foot in academia and one in work-life - The case of Swedish industrial PhD students. Journal of Workplace Learning, 35(6), 506–523.",
+      "type": "Research article",
+      "topics": "Industrial doctorates; Demand for researchers; Academy vs. work elsewhere",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 25,
+      "year": 2023,
+      "title": "Skills in transition: The way to 2035",
+      "citation": "Cedefop. (2023). Skills in transition: The way to 2035. Publications Office of the European Union.",
+      "type": "Report",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 27,
+      "year": 2023,
+      "title": "Supporting modern and stable research careers in Europe (Position paper)",
+      "citation": "CESAER. (2023). Supporting modern and stable research careers in Europe (Position paper). CESAER. https://doi.org/10.5281/zenodo.8096603",
+      "type": "Position Paper",
+      "topics": "reserach careers",
+      "doi": "10.5281/zenodo.8096603",
+      "url": "https://doi.org/10.5281/zenodo.8096603"
+    },
+    {
+      "workbook_id": 28,
+      "year": 2023,
+      "title": "The Use of Artificial Intelligence (AI) in Qualitative Research for Theory Development",
+      "citation": "Christou, P. A. (2023). The Use of Artificial Intelligence (AI) in Qualitative Research for Theory Development. The Qualitative Report. https://doi.org/10.46743/2160-3715/2023.6536",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.46743/2160-3715/2023.6536",
+      "url": "https://doi.org/10.46743/2160-3715/2023.6536"
+    },
+    {
+      "workbook_id": 34,
+      "year": 2023,
+      "title": "Toward equitable open research: Stakeholder co-created recommendations for research institutions, funders and researchers",
+      "citation": "Cole, N. L., Reichmann, S., & Ross-Hellauer, T. (2023). Toward equitable open research: Stakeholder co-created recommendations for research institutions, funders and researchers. Royal Society Open Science, 10(2), 221460. https://doi.org/10.1098/rsos.221460",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "10.1098/rsos.221460",
+      "url": "https://doi.org/10.1098/rsos.221460"
+    },
+    {
+      "workbook_id": 36,
+      "year": 2023,
+      "title": "Council recommendation of 18 December 2023 on a European framework to attract and retain research, innovation and entrepreneurial talents in Europe (C/2023/1640)",
+      "citation": "Council of the European Union. (2023). Council recommendation of 18 December 2023 on a European framework to attract and retain research, innovation and entrepreneurial talents in Europe (C/2023/1640). Official Journal of the European Union, C 2023/1640. http://data.europa.eu/eli/C/2023/1640/oj",
+      "type": "Council Recommendation",
+      "topics": "EU policy; working conditions researchers",
+      "doi": "",
+      "url": "http://data.europa.eu/eli/C/2023/1640/oj"
+    },
+    {
+      "workbook_id": 37,
+      "year": 2023,
+      "title": "The Platformization of Science: Towards a Scientific Digital Platform Taxonomy",
+      "citation": "da Silva Neto, V. J., & Chiarini, T. (2023). The Platformization of Science: Towards a Scientific Digital Platform Taxonomy. Minerva, 61(1), 1–29. https://doi.org/10.1007/s11024-022-09477-6",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1007/s11024-022-09477-6",
+      "url": "https://doi.org/10.1007/s11024-022-09477-6"
+    },
+    {
+      "workbook_id": 39,
+      "year": 2023,
+      "title": "Postdoctoral researchers' perspectives on working conditions and equal opportunities in German academia",
+      "citation": "Davidson, J. D., de Oliveira Lopes, F. N., Safaei, S., Hillemann, F., Russell, N. J., & Schaare, H. L. (2023). Postdoctoral researchers' perspectives on working conditions and equal opportunities in German academia. Frontiers in Psychology, 14, Article 1217823.",
+      "type": "Article",
+      "topics": "Precarity, Germany",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 54,
+      "year": 2023,
+      "title": "From brain drain to brain circulation: The PSF supports national policy-makers in designing major R&I reforms",
+      "citation": "European Commission. (2023). From brain drain to brain circulation: The PSF supports national policy-makers in designing major R&I reforms. Publications Office of the European Union.",
+      "type": "Report",
+      "topics": "Brain drain",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 88,
+      "year": 2023,
+      "title": "Artificial intelligence adoption in the physical sciences, natural sciences, life sciences, social sciences and the arts and humanities: A bibliometric analysis of research publications from 1960-2021",
+      "citation": "Hajkowicz, S., Sanderson, C., Karimi, S., Bratanova, A., & Naughtin, C. (2023). Artificial intelligence adoption in the physical sciences, natural sciences, life sciences, social sciences and the arts and humanities: A bibliometric analysis of research publications from 1960-2021. Technology in Society, 74, 102260. https://doi.org/10.1016/j.techsoc.2023.102260",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1016/j.techsoc.2023.102260",
+      "url": "https://doi.org/10.1016/j.techsoc.2023.102260"
+    },
+    {
+      "workbook_id": 89,
+      "year": 2023,
+      "title": "Knowledge or science-based economy? The employment of UK PhD graduates in research roles beyond academia",
+      "citation": "Hancock, S. (2023). Knowledge or science-based economy? The employment of UK PhD graduates in research roles beyond academia. Studies in Higher Education, 48(10), 1523-1537.",
+      "type": "Academic article",
+      "topics": "Non-academic, UK; Demand for researchers; Working Conditions Outside Higher Education",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 103,
+      "year": 2023,
+      "title": "Precarity of post doctorate career breaks: Does gender make a difference? Studies in Higher Education, 48(10), 1504-1522",
+      "citation": "Jones, K. (2023). Precarity of post doctorate career breaks: Does gender make a difference? Studies in Higher Education, 48(10), 1504-1522.",
+      "type": "Article",
+      "topics": "Gender, career breaks",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 112,
+      "year": 2023,
+      "title": "Young male and female scientists: A quantitative exploratory study of the changing demographics of the global scientific workforce",
+      "citation": "Kwiek, M., & Szymula, Ł. (2023). Young male and female scientists: A quantitative exploratory study of the changing demographics of the global scientific workforce. Quantitative Science Studies, 4(4), 902–937. https://doi.org/10.1162/qss_a_00276 (MIT Press Direct)",
+      "type": "Scientific publication",
+      "topics": "Demographics of global workforce",
+      "doi": "10.1162/qss_a_00276",
+      "url": "https://doi.org/10.1162/qss_a_00276"
+    },
+    {
+      "workbook_id": 116,
+      "year": 2023,
+      "title": "Implementing interdisciplinarity in research-intensive universities",
+      "citation": "LERU (2023). Implementing interdisciplinarity in research-intensive universities. Advice Paper no.30",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 121,
+      "year": 2023,
+      "title": "The Platformisation of Scholarly Information and How to Fight It",
+      "citation": "Ma, L. (2023). The Platformisation of Scholarly Information and How to Fight It. LIBER Quarterly: The Journal of the Association of European Research Libraries, 33(1), 1-20. https://doi.org/10.53377/lq.13561",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.53377/lq.13561",
+      "url": "https://doi.org/10.53377/lq.13561"
+    },
+    {
+      "workbook_id": 124,
+      "year": 2023,
+      "title": "Is a PhD worth more than a Master’s in the UK labour market? The role of specialisation and managerial position",
+      "citation": "Marini, G., & Henseke, G. (2023). Is a PhD worth more than a Master’s in the UK labour market? The role of specialisation and managerial position. Studies in Higher Education, 48(10), 1538–1550. https://doi.org/10.1080/03075079.2023.2254806",
+      "type": "Article",
+      "topics": "Working Conditions Outside Higher Education",
+      "doi": "10.1080/03075079.2023.2254806",
+      "url": "https://doi.org/10.1080/03075079.2023.2254806"
+    },
+    {
+      "workbook_id": 136,
+      "year": 2023,
+      "title": "Promoting Diverse Career Pathways for Doctoral and Postdoctoral Researchers",
+      "citation": "OECD (2023). Promoting Diverse Career Pathways for Doctoral and Postdoctoral Researchers. OECD Science, Technology and Industry Policy Papers, No. 158. Paris: OECD Publishing.",
+      "type": "Policy paper",
+      "topics": "Demand for researchers; Working Conditions Outside Higher Education; Researcher mobility",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 137,
+      "year": 2023,
+      "title": "Artificial intelligence in science: Challenges, opportunities and the future of research",
+      "citation": "OECD. (2023). Artificial intelligence in science: Challenges, opportunities and the future of research. OECD Publishing.",
+      "type": "Report",
+      "topics": "AI",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 169,
+      "year": 2023,
+      "title": "Professors' gender biases in assessing applicants for professorships",
+      "citation": "Solga, H., Rusconi, A., & Netz, N. (2023). Professors' gender biases in assessing applicants for professorships. European Sociological Review, 39(6), 841-861.",
+      "type": "Article",
+      "topics": "Gender bias",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 176,
+      "year": 2023,
+      "title": "Open Science 2.0: Towards a truly collaborative research ecosystem",
+      "citation": "Thibault, R. T., Amaral, O. B., Argolo, F., Bandrowski, A. E., Davidson, A. R., & Drude, N. I. (2023). Open Science 2.0: Towards a truly collaborative research ecosystem. PLoS Biology, 21(10), e3002362. https://doi.org/10.1371/journal.pbio.3002362",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "10.1371/journal.pbio.3002362",
+      "url": "https://doi.org/10.1371/journal.pbio.3002362"
+    },
+    {
+      "workbook_id": 182,
+      "year": 2023,
+      "title": "Precarious careers: Postdoctoral researchers and wellbeing at work",
+      "citation": "van der Weijden, I., & Teelken, C. (2023). Precarious careers: Postdoctoral researchers and wellbeing at work. Studies in Higher Education, 48(10), 1595-1607.",
+      "type": "Article",
+      "topics": "Mental health",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 188,
+      "year": 2023,
+      "title": "Chapter 39 The Impact of the COVID-19 Pandemic on Global Research: No. 104 Autumn Issue 2020",
+      "citation": "Xu, X. (2024). \"Chapter 39 The Impact of the COVID-19 Pandemic on Global Research: No. 104 Autumn Issue 2020\". In International Dimensions and Trends in Higher Education in Troubled Times. Leiden, The Netherlands: Brill. https://doi.org/10.1163/9789004713901_045",
+      "type": "Book chapter",
+      "topics": "Open science",
+      "doi": "10.1163/9789004713901_045",
+      "url": "https://doi.org/10.1163/9789004713901_045"
+    },
     {
       "workbook_id": 2,
       "year": 2024,
@@ -11,16 +471,6 @@
       "citation": "Abu Sa'a, E., & Yström, A. (2024). Exploring enablers of internal knowledge dissemination for boundary-spanning industrial PhD students. Creativity and Innovation Management, 33(3), 530–550.",
       "type": "Article",
       "topics": "Industrial doctorates, Knowledge transfer",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 3,
-      "year": 2025,
-      "title": "Report: High-level event – Choose Europe for Science",
-      "citation": "ACE²-EU European University Alliance. (2025). Report: High-level event – Choose Europe for Science. Sorbonne University, Paris, 5 May 2025.",
-      "type": "Report",
-      "topics": "Choose Europe, EU policy",
       "doi": "",
       "url": ""
     },
@@ -33,26 +483,6 @@
       "topics": "Digitalisation and Artificial Intelligence",
       "doi": "10.1155/2024/1689353",
       "url": "https://doi.org/10.1155/2024/1689353"
-    },
-    {
-      "workbook_id": 5,
-      "year": 2025,
-      "title": "This is the state of play in the global data centre gold rush",
-      "citation": "Alaamer, K. (2025). This is the state of play in the global data centre gold rush. World Economic Forum. https://www.weforum.org/stories/2025/04/data-centre-gold-rush-ai/",
-      "type": "Website",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "",
-      "url": "https://www.weforum.org/stories/2025/04/data-centre-gold-rush-ai/"
-    },
-    {
-      "workbook_id": 7,
-      "year": 2025,
-      "title": "Examining academic integrity policy and practice in the era of AI: A case study of faculty perspectives",
-      "citation": "Alsharefeen, R., & Al Sayari, N. (2025). Examining academic integrity policy and practice in the era of AI: A case study of faculty perspectives. Frontiers in Education, 10, 1621743. https://doi.org/10.3389/feduc.2025.1621743",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.3389/feduc.2025.1621743",
-      "url": "https://doi.org/10.3389/feduc.2025.1621743"
     },
     {
       "workbook_id": 8,
@@ -75,16 +505,6 @@
       "url": "https://doi.org/10.5281/zenodo.11060207"
     },
     {
-      "workbook_id": 10,
-      "year": 2025,
-      "title": "Inequity, precarity, and disparity: Exploring systemic and institutional barriers in open access publishing",
-      "citation": "Ayeni, P., & Larivière, V. (2025). Inequity, precarity, and disparity: Exploring systemic and institutional barriers in open access publishing. Journal of Librarianship and Information Science. Advance online publication. https://doi.org/10.1177/09610006251353385",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "10.1177/09610006251353385",
-      "url": "https://doi.org/10.1177/09610006251353385"
-    },
-    {
       "workbook_id": 11,
       "year": 2024,
       "title": "From irreversible openness to protectionism: geopolitics and international research cooperation in the European Union",
@@ -105,16 +525,6 @@
       "url": "https://doi.org/10.1080/18918131.2024.2390277"
     },
     {
-      "workbook_id": 13,
-      "year": 2023,
-      "title": "One foot in academia and one in work-life - The case of Swedish industrial PhD students",
-      "citation": "Bernhard, I., & Olsson, A. K. (2023). One foot in academia and one in work-life - The case of Swedish industrial PhD students. Journal of Workplace Learning, 35(6), 506–523.",
-      "type": "Research article",
-      "topics": "Industrial doctorates; Demand for researchers; Academy vs. work elsewhere",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 14,
       "year": 2024,
       "title": "The European Open Science Cloud as a common good Potentials and limitations of this endeavour",
@@ -123,6 +533,516 @@
       "topics": "Open science",
       "doi": "",
       "url": ""
+    },
+    {
+      "workbook_id": 26,
+      "year": 2024,
+      "title": "Research careers: A critical choice for Europe",
+      "citation": "CESAER (2024). Research careers: A critical choice for Europe. https://www.cesaer.org/content/5-operations/2024/20241211-research-careers-report/20241211-cesaer-research-careers-report.pdf",
+      "type": "Report",
+      "topics": "Researcher mobility",
+      "doi": "",
+      "url": "https://www.cesaer.org/content/5-operations/2024/20241211-research-careers-report/20241211-cesaer-research-careers-report.pdf"
+    },
+    {
+      "workbook_id": 33,
+      "year": 2024,
+      "title": "Action 4 ERA policy agenda: “Promote attractive & sustainable research careers” [Webinar presentation]",
+      "citation": "Coimbra Group. (2024). Action 4 ERA policy agenda: “Promote attractive & sustainable research careers” [Webinar presentation]. Inspiring ERA. https://www.inspiring-era.eu/wp-content/uploads/2024/12/Action-4-webinar_4-december-2024-Read-Only.pdf",
+      "type": "Webinar presentation",
+      "topics": "attractive reserach careers",
+      "doi": "",
+      "url": "https://www.inspiring-era.eu/wp-content/uploads/2024/12/Action-4-webinar_4-december-2024-Read-Only.pdf"
+    },
+    {
+      "workbook_id": 43,
+      "year": 2024,
+      "title": "Mutual learning exercise for more attractive and sustainable research careers and better-balanced talent circulation: final report",
+      "citation": "DG RTD. (2024). Mutual learning exercise for more attractive and sustainable research careers and better-balanced talent circulation: final report. Publications Office of the European Union. https://data.europa.eu/doi/10.2777/3702125.",
+      "type": "Report",
+      "topics": "reserach careers",
+      "doi": "10.2777/3702125",
+      "url": "https://data.europa.eu/doi/10.2777/3702125"
+    },
+    {
+      "workbook_id": 46,
+      "year": 2024,
+      "title": "The future of European competitiveness: A competitiveness strategy for Europe (European Commission)",
+      "citation": "Draghi, M. (2024). The future of European competitiveness: A competitiveness strategy for Europe (European Commission). European Commission. https://commission.europa.eu/document/97e481fd-2dc3-412d-be4c-f152a8232961_en",
+      "type": "Policy report",
+      "topics": "EU competitiveness; Demand for researchers",
+      "doi": "",
+      "url": "https://commission.europa.eu/document/97e481fd-2dc3-412d-be4c-f152a8232961_en"
+    },
+    {
+      "workbook_id": 47,
+      "year": 2024,
+      "title": "The effects of witnessing harassment of scientists on public perceptions of science JCOM 23(09), A01",
+      "citation": "Egelhofer, J. L., Seeger, C. and Binder, A. (2024). The effects of witnessing harassment of scientists on public perceptions of science JCOM 23(09), A01. https://doi.org/10.22323/2.23090201",
+      "type": "Academic Paper",
+      "topics": "trust in science",
+      "doi": "10.22323/2.23090201",
+      "url": "https://doi.org/10.22323/2.23090201"
+    },
+    {
+      "workbook_id": 48,
+      "year": 2024,
+      "title": "Progress toward gender equality in research & innovation - 2024 review",
+      "citation": "Elsevier. (2024). Progress toward gender equality in research & innovation - 2024 review. Elsevier.",
+      "type": "Report",
+      "topics": "Gender",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 56,
+      "year": 2024,
+      "title": "HORIZON-WIDERA-2024-ERA-02-03: Talent ecosystems for attractive early research careers – pilot",
+      "citation": "European Commission. (2024). HORIZON-WIDERA-2024-ERA-02-03: Talent ecosystems for attractive early research careers – pilot. EU Funding & Tenders Portal. https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-de-tails/horizon-widera-2024-era-02-03",
+      "type": "Policy document",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-de-tails/horizon-widera-2024-era-02-03"
+    },
+    {
+      "workbook_id": 59,
+      "year": 2024,
+      "title": "A competitive Europe for a sustainable future",
+      "citation": "European Commission: Directorate-General for Research and Innovation, Science, research and innovation performance of the EU. (2024). A competitive Europe for a sustainable future. Publications Office of the European Union. https://data.eu-ropa.eu/doi/10.2777/965670",
+      "type": "Policy document",
+      "topics": "Demand for researchers; Digitalisation and Artificial Intelligence",
+      "doi": "10.2777/965670",
+      "url": "https://data.eu-ropa.eu/doi/10.2777/965670"
+    },
+    {
+      "workbook_id": 62,
+      "year": 2024,
+      "title": "Plenary insights: Public opinion at a glance",
+      "citation": "European Parliament. (2024). Plenary insights: Public opinion at a glance. https://www.europarl.europa.eu/at-your-service/files/be-heard/eurobarometer/2024/en-plenary-insights-march-2024.pdf",
+      "type": "Briefing",
+      "topics": "trust in science",
+      "doi": "",
+      "url": "https://www.europarl.europa.eu/at-your-service/files/be-heard/eurobarometer/2024/en-plenary-insights-march-2024.pdf"
+    },
+    {
+      "workbook_id": 65,
+      "year": 2024,
+      "title": "European University Association CoARA Action Plan (2023–2027) [Briefing]",
+      "citation": "European University Association. (2024). European University Association CoARA Action Plan (2023–2027) [Briefing]. European University Association. https://doi.org/10.5281/zenodo.13969869",
+      "type": "Policy Brief",
+      "topics": "research assessment",
+      "doi": "10.5281/zenodo.13969869",
+      "url": "https://doi.org/10.5281/zenodo.13969869"
+    },
+    {
+      "workbook_id": 68,
+      "year": 2024,
+      "title": "R&D personnel (Statistics Explained)",
+      "citation": "Eurostat. (2024, November). R&D personnel (Statistics Explained). European Commission.",
+      "type": "Statistics",
+      "topics": "Workforce data",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 70,
+      "year": 2024,
+      "title": "R&D Personnel",
+      "citation": "Eurostat. (2024). R&D Personnel. https://ec.europa.eu/eurostat/statistics-explained/index.php?title=R%26D_personnel",
+      "type": "Online data tool",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=R%26D_personnel"
+    },
+    {
+      "workbook_id": 72,
+      "year": 2024,
+      "title": "Platformisation of Science: Conceptual Foundations and Critical Perspectives for the Science System",
+      "citation": "Fecher, B., Kunz, R., Sokolovska, N., & Wrzesinski, M. (2024). Platformisation of Science: Conceptual Foundations and Critical Perspectives for the Science System. LIBER Quarterly: The Journal of the Association of European Research Libraries, 34(1), 1-18. https://doi.org/10.53377/lq.16693",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.53377/lq.16693",
+      "url": "https://doi.org/10.53377/lq.16693"
+    },
+    {
+      "workbook_id": 75,
+      "year": 2024,
+      "title": "Job activity and wellbeing of PhD holders beyond academia: a person-centred approach",
+      "citation": "Garcia-Morante, M., Tikkanen, L., Castelló, M., & Pyhältö, K. (2025). Job activity and wellbeing of PhD holders beyond academia: a person-centred approach. European Journal of Higher Education, 1–21. https://doi.org/10.1080/21568235.2025.2504529",
+      "type": "Article",
+      "topics": "Working Conditions Outside Higher Education",
+      "doi": "10.1080/21568235.2025.2504529",
+      "url": "https://doi.org/10.1080/21568235.2025.2504529"
+    },
+    {
+      "workbook_id": 80,
+      "year": 2024,
+      "title": "Has your paper been used to train an AI model? Almost certainly",
+      "citation": "Gibney, E. (2024). Has your paper been used to train an AI model? Almost certainly. Nature, 632(8026), 715–716. https://doi.org/10.1038/d41586-024-02599-9",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1038/d41586-024-02599-9",
+      "url": "https://doi.org/10.1038/d41586-024-02599-9"
+    },
+    {
+      "workbook_id": 82,
+      "year": 2024,
+      "title": "Enhancing European competitiveness with fairness, sustainability and open strategic autonomy (JRC Working Paper No. 14/2024)",
+      "citation": "Golebiowska-Tataj, D. (2024). Enhancing European competitiveness with fairness, sustainability and open strategic autonomy (JRC Working Paper No. 14/2024). Joint Research Centre, European Commission. https://publications.jrc.ec.europa.eu/repository/handle/JRC139560",
+      "type": "Working paper",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC139560"
+    },
+    {
+      "workbook_id": 83,
+      "year": 2024,
+      "title": "Surveillance and Datafication in Higher Education: Documentation of the Human",
+      "citation": "Gourlay, L. (2024). Surveillance and Datafication in Higher Education: Documentation of the Human. Postdigital Science and Education, 6(4), 1039-1048. https://doi.org/10.1007/s42438-022-00352-x",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1007/s42438-022-00352-x",
+      "url": "https://doi.org/10.1007/s42438-022-00352-x"
+    },
+    {
+      "workbook_id": 85,
+      "year": 2024,
+      "title": "Gaps between Open Science activities and actual recognition systems: Insights from an international survey",
+      "citation": "Grattarola, F., Shmagun, H., Erdmann, C., Cambon-Thomsen, A., Thomsen, M., Kim, J., & Mabile, L. (2024). Gaps between Open Science activities and actual recognition systems: Insights from an international survey. PLoS ONE, 19(12), e0315632. https://doi.org/10.1371/journal.pone.0315632",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "10.1371/journal.pone.0315632",
+      "url": "https://doi.org/10.1371/journal.pone.0315632"
+    },
+    {
+      "workbook_id": 91,
+      "year": 2024,
+      "title": "Research careers: A critical choice for Europe - Results, insights and recommendations from CAESAR",
+      "citation": "Heitor, M., Ratcliff, S., Björnmalm, M., Bondarouk, T., & Klein Ikkink, V. (2024). Research careers: A critical choice for Europe - Results, insights and recommendations from CAESAR. Research Careers Survey 2024.",
+      "type": "Report",
+      "topics": "Careers, EU; reserach careers; Working Conditions Outside Higher Education",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 93,
+      "year": 2024,
+      "title": "Towards a sustainable and responsible model for monitoring open science and research—Analysis of the Finnish model for monitoring open science and research",
+      "citation": "Himanen, L., & Nykyri, S. (2024). Towards a sustainable and responsible model for monitoring open science and research—Analysis of the Finnish model for monitoring open science and research. Research Evaluation. Advance online publication. https://doi.org/10.1093/reseval/rvae008",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "10.1093/reseval/rvae008",
+      "url": "https://doi.org/10.1093/reseval/rvae008"
+    },
+    {
+      "workbook_id": 94,
+      "year": 2024,
+      "title": "Unlocking the Power of Science Communication in Research and Policy Making’",
+      "citation": "Hindle, R. et al. (2024) . Unlocking the Power of Science Communication in Research and Policy Making’. Science Europe. DOI: 10.5281/zenodo.12771539",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "10.5281/zenodo.12771539",
+      "url": ""
+    },
+    {
+      "workbook_id": 97,
+      "year": 2024,
+      "title": "Interdisciplinary research attracts greater attention from policy documents: evidence from COVID-19",
+      "citation": "Hu, L., Huang, Wb. & Bu, Y. (2024) Interdisciplinary research attracts greater attention from policy documents: evidence from COVID-19. Humanit Soc Sci Commun 11, 383.",
+      "type": "Article",
+      "topics": "Education and training",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 106,
+      "year": 2024,
+      "title": "Using artificial intelligence in academic writing and research: An essential productivity tool",
+      "citation": "Khalifa, M., & Albadawy, M. (2024). Using artificial intelligence in academic writing and research: An essential productivity tool. Computer Methods and Programs in Biomedicine Update, 5, 100145. https://doi.org/10.1016/j.cmpbup.2024.100145",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1016/j.cmpbup.2024.100145",
+      "url": "https://doi.org/10.1016/j.cmpbup.2024.100145"
+    },
+    {
+      "workbook_id": 107,
+      "year": 2024,
+      "title": "Research ethics and issues regarding the use of ChatGPT-like artificial intelligence platforms by authors and reviewers: A narrative review",
+      "citation": "Kim, S.-J. (2024). Research ethics and issues regarding the use of ChatGPT-like artificial intelligence platforms by authors and reviewers: A narrative review. Science Editing, 11(2), 96–106. https://doi.org/10.6087/kcse.343",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.6087/kcse.343",
+      "url": "https://doi.org/10.6087/kcse.343"
+    },
+    {
+      "workbook_id": 109,
+      "year": 2024,
+      "title": "The Evaluation Game: How Publication Metrics Shape Scholarly Communication",
+      "citation": "Kulczycki, E. (2023). The Evaluation Game: How Publication Metrics Shape Scholarly Communication. Cambridge: Cambridge University Press.",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 110,
+      "year": 2024,
+      "title": "Chapter 40 Research Evaluation—Unraveling the Metrics-Driven Pressures: No. 115 Summer Issue 2023",
+      "citation": "Kulczycki, E. (2024). \"Chapter 40 Research Evaluation—Unraveling the Metrics-Driven Pressures: No. 115 Summer Issue 2023\". In International Dimensions and Trends in Higher Education in Troubled Times. Leiden, The Netherlands: Brill. https://doi.org/10.1163/9789004713901_046",
+      "type": "Book chapter",
+      "topics": "Open science",
+      "doi": "10.1163/9789004713901_046",
+      "url": "https://doi.org/10.1163/9789004713901_046"
+    },
+    {
+      "workbook_id": 115,
+      "year": 2024,
+      "title": "Communicating with integrity Supporting researchers with best practice in communication",
+      "citation": "LERU (2024). Communicating with integrity Supporting researchers with best practice in communication. Advice Paper no.34",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 117,
+      "year": 2024,
+      "title": "Much more than a market: Speed, security, solidarity - Empowering the Single Market to deliver a sustainable future and prosperity for all EU citizens",
+      "citation": "Letta, E. (2024). Much more than a market: Speed, security, solidarity - Empowering the Single Market to deliver a sustainable future and prosperity for all EU citizens. European Council.",
+      "type": "Report",
+      "topics": "EU policy",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 123,
+      "year": 2024,
+      "title": "Open science: Towards greater transparency and openness in science",
+      "citation": "Maedche, A., Elshan, E., Höhle, H., Lehrer, C., Recker, J., Sunyaev, A., ... & Werth, O. (2024). Open science: Towards greater transparency and openness in science. Business & Information Systems Engineering, 66(4), 517-532.",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 138,
+      "year": 2024,
+      "title": "The state of academic careers in OECD countries: An evidence review (OECD Education Policy Perspectives, No. 91)",
+      "citation": "OECD. (2024). The state of academic careers in OECD countries: An evidence review (OECD Education Policy Perspectives, No. 91). OECD Publishing.",
+      "type": "Research report",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 139,
+      "year": 2024,
+      "title": "The state of higher education: Key insights from the 2024 OECD report",
+      "citation": "OECD. (2024). The state of higher education: Key insights from the 2024 OECD report. OECD Publishing.",
+      "type": "Report",
+      "topics": "HE global",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 145,
+      "year": 2024,
+      "title": "Guidelines for ethical use and acknowledgement of large language models in academic writing",
+      "citation": "Porsdam Mann, S., Vazirani, A. A., Aboy, M., Earp, B. D., Minssen, T., Cohen, I. G., & Savulescu, J. (2024). Guidelines for ethical use and acknowledgement of large language models in academic writing. Nature Machine Intelligence, 6(11), 1272–1274. https://doi.org/10.1038/s42256-024-00922-7",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1038/s42256-024-00922-7",
+      "url": "https://doi.org/10.1038/s42256-024-00922-7"
+    },
+    {
+      "workbook_id": 148,
+      "year": 2024,
+      "title": "Precarity of early career researchers (postdocs): Summary of practices from selected European universities",
+      "citation": "Pugh, J., Ioppolo, B., & Action Research on Research Culture Project Team and Partners. (2024, May 15). Precarity of early career researchers (postdocs): Summary of practices from selected European universities. Bennett Institute for Public Policy, University of Cambridge.",
+      "type": "Policy",
+      "topics": "Mental health, Postdocs, Precarity",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 157,
+      "year": 2024,
+      "title": "Practicing responsible research assessment: Qualitative study of faculty hiring, promotion, and tenure assessments in the United States",
+      "citation": "Rushforth, A. D., & de Rijcke, S. (2024). Practicing responsible research assessment: Qualitative study of faculty hiring, promotion, and tenure assessments in the United States. Research Evaluation, 33(1), rvae007.",
+      "type": "Article",
+      "topics": "Assessment",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 159,
+      "year": 2024,
+      "title": "PhD holders’ working conditions and job satisfaction in Spain: a cross-sector comparison",
+      "citation": "Sala-Bubaré, A., Garcia-Morante, M., Castelló, M., & Weise, C. (2024). PhD holders’ working conditions and job satisfaction in Spain: a cross-sector comparison. Higher Education Research & Development, 43(7), 1571–1585. https://doi.org/10.1080/07294360.2024.2347611",
+      "type": "Article",
+      "topics": "Working Conditions Outside Higher Education",
+      "doi": "10.1080/07294360.2024.2347611",
+      "url": "https://doi.org/10.1080/07294360.2024.2347611"
+    },
+    {
+      "workbook_id": 161,
+      "year": 2024,
+      "title": "The expansion of doctoral education and the changing nature and purpose of the doctorate",
+      "citation": "Sarrico, C. S. (2022). The expansion of doctoral education and the changing nature and purpose of the doctorate. Higher Education, 84(6), 1299-1315.",
+      "type": "Research article",
+      "topics": "Demand for researchers",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 162,
+      "year": 2024,
+      "title": "The Mobility Imperative in Academia: Global Trend or Local Custom? Societé Suisse de Linguistique",
+      "citation": "Sautier, A. (2024) . The Mobility Imperative in Academia: Global Trend or Local Custom? Societé Suisse de Linguistique.",
+      "type": "Article",
+      "topics": "Researcher mobility",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 164,
+      "year": 2024,
+      "title": "Attractive careers in research: The expectations and roles of different stakeholder groups (Event report)",
+      "citation": "Science Europe. (2024). Attractive careers in research: The expectations and roles of different stakeholder groups (Event report). Science Europe. https://doi.org/10.5281/zenodo.14533956",
+      "type": "Report",
+      "topics": "resereach careers, assessment; science communication",
+      "doi": "10.5281/zenodo.14533956",
+      "url": "https://doi.org/10.5281/zenodo.14533956"
+    },
+    {
+      "workbook_id": 175,
+      "year": 2024,
+      "title": "The use of artificial intelligence in research. www.the-guild.eu/publications/position-papers/the-guild-s-position-paper-on-the-use-of-ai-in-research_nov2024.pdf",
+      "citation": "The Guild (2024). The use of artificial intelligence in research. www.the-guild.eu/publications/position-papers/the-guild-s-position-paper-on-the-use-of-ai-in-research_nov2024.pdf",
+      "type": "Report",
+      "topics": "Education and training",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 179,
+      "year": 2024,
+      "title": "Open Science and the impact of Open Access, Open Data, and FAIR publishing principles on data-driven academic research: Towards ever more transparent, accessible, and reproducible academic output?",
+      "citation": "Umbach, G. (2024). Open Science and the impact of Open Access, Open Data, and FAIR publishing principles on data-driven academic research: Towards ever more transparent, accessible, and reproducible academic output?. Statistical Journal of the IAOS, 40(1), 59-70.",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 180,
+      "year": 2024,
+      "title": "The gender gap in science: Status and trends, February 2024",
+      "citation": "United Nations Educational, Scientific and Cultural Organization. (2024). The gender gap in science: Status and trends, February 2024. UNESCO. https://unesdoc.unesco.org/ark:/48223/pf0000388805 (UNESCO Documents)",
+      "type": "UNESCO Recommendation",
+      "topics": "Gender Gap in Science",
+      "doi": "",
+      "url": "https://unesdoc.unesco.org/ark:/48223/pf0000388805"
+    },
+    {
+      "workbook_id": 183,
+      "year": 2024,
+      "title": "Caught between academic calling and academic pressure? Working time characteristics, time pressure and time sovereignty predict PhD students' research engagement",
+      "citation": "van Tienoven, T. P., Glorieux, A., Minnen, J., & Spruyt, B. (2024). Caught between academic calling and academic pressure? Working time characteristics, time pressure and time sovereignty predict PhD students' research engagement. Higher Education, 87, 1885-1904.",
+      "type": "Article",
+      "topics": "Working time",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 184,
+      "year": 2024,
+      "title": "Recruitment, working conditions, career development and progression: Mutual Learning Exercise on Research Careers - First thematic report",
+      "citation": "Vandevelde, K. (2024). Recruitment, working conditions, career development and progression: Mutual Learning Exercise on Research Careers - First thematic report. Publications Office of the European Union.",
+      "type": "Report",
+      "topics": "Working conditions",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 185,
+      "year": 2024,
+      "title": "Future directions and possibilities for the university: Report on literature review and Delphi study",
+      "citation": "Virmajoki, V., Ahokas, I., Witoon, S., Ahlqvist, T., Kirveennummi, A., & Suomalainen, K.-M. (2024). Future directions and possibilities for the university: Report on literature review and Delphi study. University of Turku Strategic Planning Unit in collaboration with the Finland Futures Research Centre (FFRC). ISBN 978-952-249-617-1.",
+      "type": "Report",
+      "topics": "University futures",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 197,
+      "year": 2024,
+      "title": "Science communication conference: Strategic conclusions",
+      "citation": "Science Europe. (2024). Science communication conference: Strategic conclusions. https://scienceeurope.org/our-resources/science-communications-conference-strategic-conclusions/",
+      "type": "Report",
+      "topics": "Science communication",
+      "doi": "",
+      "url": "https://scienceeurope.org/our-resources/science-communications-conference-strategic-conclusions/"
+    },
+    {
+      "workbook_id": 198,
+      "year": 2024,
+      "title": "UNESCO call to action: Closing the gender gap in science",
+      "citation": "United Nations Educational, Scientific and Cultural Organization. (2024). UNESCO call to action: Closing the gender gap in science. https://www.unesco.org/en/science-technology-and-innovation/cta",
+      "type": "Policy document",
+      "topics": "Gender gap in science",
+      "doi": "",
+      "url": "https://www.unesco.org/en/science-technology-and-innovation/cta"
+    },
+    {
+      "workbook_id": 201,
+      "year": 2024,
+      "title": "Chapter 43 Publish or Perish: No. 100 Winter Issue 2020",
+      "citation": "Yudkevich, M. (2024). \"Chapter 43 Publish or Perish: No. 100 Winter Issue 2020\". In International Dimensions and Trends in Higher Education in Troubled Times. Leiden, The Netherlands: Brill. https://doi.org/10.1163/9789004713901_049",
+      "type": "Book chapter",
+      "topics": "Publishing pressure",
+      "doi": "10.1163/9789004713901_049",
+      "url": "https://doi.org/10.1163/9789004713901_049"
+    },
+    {
+      "workbook_id": 3,
+      "year": 2025,
+      "title": "Report: High-level event – Choose Europe for Science",
+      "citation": "ACE²-EU European University Alliance. (2025). Report: High-level event – Choose Europe for Science. Sorbonne University, Paris, 5 May 2025.",
+      "type": "Report",
+      "topics": "Choose Europe, EU policy",
+      "doi": "",
+      "url": ""
+    },
+    {
+      "workbook_id": 5,
+      "year": 2025,
+      "title": "This is the state of play in the global data centre gold rush",
+      "citation": "Alaamer, K. (2025). This is the state of play in the global data centre gold rush. World Economic Forum. https://www.weforum.org/stories/2025/04/data-centre-gold-rush-ai/",
+      "type": "Website",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "",
+      "url": "https://www.weforum.org/stories/2025/04/data-centre-gold-rush-ai/"
+    },
+    {
+      "workbook_id": 7,
+      "year": 2025,
+      "title": "Examining academic integrity policy and practice in the era of AI: A case study of faculty perspectives",
+      "citation": "Alsharefeen, R., & Al Sayari, N. (2025). Examining academic integrity policy and practice in the era of AI: A case study of faculty perspectives. Frontiers in Education, 10, 1621743. https://doi.org/10.3389/feduc.2025.1621743",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.3389/feduc.2025.1621743",
+      "url": "https://doi.org/10.3389/feduc.2025.1621743"
+    },
+    {
+      "workbook_id": 10,
+      "year": 2025,
+      "title": "Inequity, precarity, and disparity: Exploring systemic and institutional barriers in open access publishing",
+      "citation": "Ayeni, P., & Larivière, V. (2025). Inequity, precarity, and disparity: Exploring systemic and institutional barriers in open access publishing. Journal of Librarianship and Information Science. Advance online publication. https://doi.org/10.1177/09610006251353385",
+      "type": "Research article",
+      "topics": "Open science",
+      "doi": "10.1177/09610006251353385",
+      "url": "https://doi.org/10.1177/09610006251353385"
     },
     {
       "workbook_id": 15,
@@ -185,46 +1105,6 @@
       "url": ""
     },
     {
-      "workbook_id": 25,
-      "year": 2023,
-      "title": "Skills in transition: The way to 2035",
-      "citation": "Cedefop. (2023). Skills in transition: The way to 2035. Publications Office of the European Union.",
-      "type": "Report",
-      "topics": "Demand for researchers",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 26,
-      "year": 2024,
-      "title": "Research careers: A critical choice for Europe",
-      "citation": "CESAER (2024). Research careers: A critical choice for Europe. https://www.cesaer.org/content/5-operations/2024/20241211-research-careers-report/20241211-cesaer-research-careers-report.pdf",
-      "type": "Report",
-      "topics": "Researcher mobility",
-      "doi": "",
-      "url": "https://www.cesaer.org/content/5-operations/2024/20241211-research-careers-report/20241211-cesaer-research-careers-report.pdf"
-    },
-    {
-      "workbook_id": 27,
-      "year": 2023,
-      "title": "Supporting modern and stable research careers in Europe (Position paper)",
-      "citation": "CESAER. (2023). Supporting modern and stable research careers in Europe (Position paper). CESAER. https://doi.org/10.5281/zenodo.8096603",
-      "type": "Position Paper",
-      "topics": "reserach careers",
-      "doi": "10.5281/zenodo.8096603",
-      "url": "https://doi.org/10.5281/zenodo.8096603"
-    },
-    {
-      "workbook_id": 28,
-      "year": 2023,
-      "title": "The Use of Artificial Intelligence (AI) in Qualitative Research for Theory Development",
-      "citation": "Christou, P. A. (2023). The Use of Artificial Intelligence (AI) in Qualitative Research for Theory Development. The Qualitative Report. https://doi.org/10.46743/2160-3715/2023.6536",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.46743/2160-3715/2023.6536",
-      "url": "https://doi.org/10.46743/2160-3715/2023.6536"
-    },
-    {
       "workbook_id": 30,
       "year": 2025,
       "title": "The future of research software is the future of research",
@@ -255,26 +1135,6 @@
       "url": "https://coalesceproject.eu/2025/03/18/boosting-the-science-communication-ecosystem-in-europe/"
     },
     {
-      "workbook_id": 33,
-      "year": 2024,
-      "title": "Action 4 ERA policy agenda: “Promote attractive & sustainable research careers” [Webinar presentation]",
-      "citation": "Coimbra Group. (2024). Action 4 ERA policy agenda: “Promote attractive & sustainable research careers” [Webinar presentation]. Inspiring ERA. https://www.inspiring-era.eu/wp-content/uploads/2024/12/Action-4-webinar_4-december-2024-Read-Only.pdf",
-      "type": "Webinar presentation",
-      "topics": "attractive reserach careers",
-      "doi": "",
-      "url": "https://www.inspiring-era.eu/wp-content/uploads/2024/12/Action-4-webinar_4-december-2024-Read-Only.pdf"
-    },
-    {
-      "workbook_id": 34,
-      "year": 2023,
-      "title": "Toward equitable open research: Stakeholder co-created recommendations for research institutions, funders and researchers",
-      "citation": "Cole, N. L., Reichmann, S., & Ross-Hellauer, T. (2023). Toward equitable open research: Stakeholder co-created recommendations for research institutions, funders and researchers. Royal Society Open Science, 10(2), 221460. https://doi.org/10.1098/rsos.221460",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "10.1098/rsos.221460",
-      "url": "https://doi.org/10.1098/rsos.221460"
-    },
-    {
       "workbook_id": 35,
       "year": 2025,
       "title": "Industrial doctorates: A systematic literature review and future research agenda",
@@ -283,26 +1143,6 @@
       "topics": "Industrial doctorates; Demand for researchers",
       "doi": "",
       "url": ""
-    },
-    {
-      "workbook_id": 36,
-      "year": 2023,
-      "title": "Council recommendation of 18 December 2023 on a European framework to attract and retain research, innovation and entrepreneurial talents in Europe (C/2023/1640)",
-      "citation": "Council of the European Union. (2023). Council recommendation of 18 December 2023 on a European framework to attract and retain research, innovation and entrepreneurial talents in Europe (C/2023/1640). Official Journal of the European Union, C 2023/1640. http://data.europa.eu/eli/C/2023/1640/oj",
-      "type": "Council Recommendation",
-      "topics": "EU policy; working conditions researchers",
-      "doi": "",
-      "url": "http://data.europa.eu/eli/C/2023/1640/oj"
-    },
-    {
-      "workbook_id": 37,
-      "year": 2023,
-      "title": "The Platformization of Science: Towards a Scientific Digital Platform Taxonomy",
-      "citation": "da Silva Neto, V. J., & Chiarini, T. (2023). The Platformization of Science: Towards a Scientific Digital Platform Taxonomy. Minerva, 61(1), 1–29. https://doi.org/10.1007/s11024-022-09477-6",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.1007/s11024-022-09477-6",
-      "url": "https://doi.org/10.1007/s11024-022-09477-6"
     },
     {
       "workbook_id": 38,
@@ -315,16 +1155,6 @@
       "url": ""
     },
     {
-      "workbook_id": 39,
-      "year": 2023,
-      "title": "Postdoctoral researchers' perspectives on working conditions and equal opportunities in German academia",
-      "citation": "Davidson, J. D., de Oliveira Lopes, F. N., Safaei, S., Hillemann, F., Russell, N. J., & Schaare, H. L. (2023). Postdoctoral researchers' perspectives on working conditions and equal opportunities in German academia. Frontiers in Psychology, 14, Article 1217823.",
-      "type": "Article",
-      "topics": "Precarity, Germany",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 41,
       "year": 2025,
       "title": "Storm over science: Predatory practices and the fight for research reliability. microLife, 6, uqaf029",
@@ -333,16 +1163,6 @@
       "topics": "Open science",
       "doi": "10.1093/femsml/uqaf029",
       "url": "https://doi.org/10.1093/femsml/uqaf029"
-    },
-    {
-      "workbook_id": 43,
-      "year": 2024,
-      "title": "Mutual learning exercise for more attractive and sustainable research careers and better-balanced talent circulation: final report",
-      "citation": "DG RTD. (2024). Mutual learning exercise for more attractive and sustainable research careers and better-balanced talent circulation: final report. Publications Office of the European Union. https://data.europa.eu/doi/10.2777/3702125.",
-      "type": "Report",
-      "topics": "reserach careers",
-      "doi": "10.2777/3702125",
-      "url": "https://data.europa.eu/doi/10.2777/3702125"
     },
     {
       "workbook_id": 44,
@@ -363,36 +1183,6 @@
       "topics": "Digitalisation and Artificial Intelligence",
       "doi": "",
       "url": "https://worldprivacyforum.org/posts/ai-strategies/"
-    },
-    {
-      "workbook_id": 46,
-      "year": 2024,
-      "title": "The future of European competitiveness: A competitiveness strategy for Europe (European Commission)",
-      "citation": "Draghi, M. (2024). The future of European competitiveness: A competitiveness strategy for Europe (European Commission). European Commission. https://commission.europa.eu/document/97e481fd-2dc3-412d-be4c-f152a8232961_en",
-      "type": "Policy report",
-      "topics": "EU competitiveness; Demand for researchers",
-      "doi": "",
-      "url": "https://commission.europa.eu/document/97e481fd-2dc3-412d-be4c-f152a8232961_en"
-    },
-    {
-      "workbook_id": 47,
-      "year": 2024,
-      "title": "The effects of witnessing harassment of scientists on public perceptions of science JCOM 23(09), A01",
-      "citation": "Egelhofer, J. L., Seeger, C. and Binder, A. (2024). The effects of witnessing harassment of scientists on public perceptions of science JCOM 23(09), A01. https://doi.org/10.22323/2.23090201",
-      "type": "Academic Paper",
-      "topics": "trust in science",
-      "doi": "10.22323/2.23090201",
-      "url": "https://doi.org/10.22323/2.23090201"
-    },
-    {
-      "workbook_id": 48,
-      "year": 2024,
-      "title": "Progress toward gender equality in research & innovation - 2024 review",
-      "citation": "Elsevier. (2024). Progress toward gender equality in research & innovation - 2024 review. Elsevier.",
-      "type": "Report",
-      "topics": "Gender",
-      "doi": "",
-      "url": ""
     },
     {
       "workbook_id": 49,
@@ -435,16 +1225,6 @@
       "url": "https://europa.eu/eurobarometer/surveys/detail/3227"
     },
     {
-      "workbook_id": 54,
-      "year": 2023,
-      "title": "From brain drain to brain circulation: The PSF supports national policy-makers in designing major R&I reforms",
-      "citation": "European Commission. (2023). From brain drain to brain circulation: The PSF supports national policy-makers in designing major R&I reforms. Publications Office of the European Union.",
-      "type": "Report",
-      "topics": "Brain drain",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 55,
       "year": 2025,
       "title": "Guide for applicants: Marie Skłodowska-Curie Actions – 'Choose Europe for Science' (Version 3.0)",
@@ -455,16 +1235,6 @@
       "url": ""
     },
     {
-      "workbook_id": 56,
-      "year": 2024,
-      "title": "HORIZON-WIDERA-2024-ERA-02-03: Talent ecosystems for attractive early research careers – pilot",
-      "citation": "European Commission. (2024). HORIZON-WIDERA-2024-ERA-02-03: Talent ecosystems for attractive early research careers – pilot. EU Funding & Tenders Portal. https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-de-tails/horizon-widera-2024-era-02-03",
-      "type": "Policy document",
-      "topics": "Demand for researchers",
-      "doi": "",
-      "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-de-tails/horizon-widera-2024-era-02-03"
-    },
-    {
       "workbook_id": 57,
       "year": 2025,
       "title": "Communication from the Commission to the European Parliament and the Council: A European Strategy for Artificial Intelligence in Science—Paving the way for the Resource for AI Science in Europe (RAISE) (COM(2025) 724 final)",
@@ -473,16 +1243,6 @@
       "topics": "AI; citizen engagement",
       "doi": "",
       "url": ""
-    },
-    {
-      "workbook_id": 59,
-      "year": 2024,
-      "title": "A competitive Europe for a sustainable future",
-      "citation": "European Commission: Directorate-General for Research and Innovation, Science, research and innovation performance of the EU. (2024). A competitive Europe for a sustainable future. Publications Office of the European Union. https://data.eu-ropa.eu/doi/10.2777/965670",
-      "type": "Policy document",
-      "topics": "Demand for researchers; Digitalisation and Artificial Intelligence",
-      "doi": "10.2777/965670",
-      "url": "https://data.eu-ropa.eu/doi/10.2777/965670"
     },
     {
       "workbook_id": 60,
@@ -505,16 +1265,6 @@
       "url": ""
     },
     {
-      "workbook_id": 62,
-      "year": 2024,
-      "title": "Plenary insights: Public opinion at a glance",
-      "citation": "European Parliament. (2024). Plenary insights: Public opinion at a glance. https://www.europarl.europa.eu/at-your-service/files/be-heard/eurobarometer/2024/en-plenary-insights-march-2024.pdf",
-      "type": "Briefing",
-      "topics": "trust in science",
-      "doi": "",
-      "url": "https://www.europarl.europa.eu/at-your-service/files/be-heard/eurobarometer/2024/en-plenary-insights-march-2024.pdf"
-    },
-    {
       "workbook_id": 63,
       "year": 2025,
       "title": "Choose Europe for Science",
@@ -533,16 +1283,6 @@
       "topics": "citizen engagement",
       "doi": "",
       "url": "https://rea.ec.europa.eu/events/cluster-event-advancing-public-engagement-and-citizen-science-era-2025-06-19_en"
-    },
-    {
-      "workbook_id": 65,
-      "year": 2024,
-      "title": "European University Association CoARA Action Plan (2023–2027) [Briefing]",
-      "citation": "European University Association. (2024). European University Association CoARA Action Plan (2023–2027) [Briefing]. European University Association. https://doi.org/10.5281/zenodo.13969869",
-      "type": "Policy Brief",
-      "topics": "research assessment",
-      "doi": "10.5281/zenodo.13969869",
-      "url": "https://doi.org/10.5281/zenodo.13969869"
     },
     {
       "workbook_id": 66,
@@ -565,16 +1305,6 @@
       "url": "https://ec.europa.eu/euro-stat/databrowser/view/rd_p_persocc__custom_17208182/default/table?lang=en"
     },
     {
-      "workbook_id": 68,
-      "year": 2024,
-      "title": "R&D personnel (Statistics Explained)",
-      "citation": "Eurostat. (2024, November). R&D personnel (Statistics Explained). European Commission.",
-      "type": "Statistics",
-      "topics": "Workforce data",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 69,
       "year": 2025,
       "title": "Demography of Europe – 2025 edition [Interactive publication]",
@@ -583,26 +1313,6 @@
       "topics": "Demography of Europe",
       "doi": "",
       "url": "https://ec.europa.eu/eurostat/web/interactive‑publications/demography‑2025"
-    },
-    {
-      "workbook_id": 70,
-      "year": 2024,
-      "title": "R&D Personnel",
-      "citation": "Eurostat. (2024). R&D Personnel. https://ec.europa.eu/eurostat/statistics-explained/index.php?title=R%26D_personnel",
-      "type": "Online data tool",
-      "topics": "Demand for researchers",
-      "doi": "",
-      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=R%26D_personnel"
-    },
-    {
-      "workbook_id": 72,
-      "year": 2024,
-      "title": "Platformisation of Science: Conceptual Foundations and Critical Perspectives for the Science System",
-      "citation": "Fecher, B., Kunz, R., Sokolovska, N., & Wrzesinski, M. (2024). Platformisation of Science: Conceptual Foundations and Critical Perspectives for the Science System. LIBER Quarterly: The Journal of the Association of European Research Libraries, 34(1), 1-18. https://doi.org/10.53377/lq.16693",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.53377/lq.16693",
-      "url": "https://doi.org/10.53377/lq.16693"
     },
     {
       "workbook_id": 73,
@@ -625,16 +1335,6 @@
       "url": ""
     },
     {
-      "workbook_id": 75,
-      "year": 2024,
-      "title": "Job activity and wellbeing of PhD holders beyond academia: a person-centred approach",
-      "citation": "Garcia-Morante, M., Tikkanen, L., Castelló, M., & Pyhältö, K. (2025). Job activity and wellbeing of PhD holders beyond academia: a person-centred approach. European Journal of Higher Education, 1–21. https://doi.org/10.1080/21568235.2025.2504529",
-      "type": "Article",
-      "topics": "Working Conditions Outside Higher Education",
-      "doi": "10.1080/21568235.2025.2504529",
-      "url": "https://doi.org/10.1080/21568235.2025.2504529"
-    },
-    {
       "workbook_id": 76,
       "year": 2025,
       "title": "Strengths and weaknesses of PhD training to develop alternative careers",
@@ -655,16 +1355,6 @@
       "url": "https://doi.org/10.1080/03075079.2024.2401943"
     },
     {
-      "workbook_id": 80,
-      "year": 2024,
-      "title": "Has your paper been used to train an AI model? Almost certainly",
-      "citation": "Gibney, E. (2024). Has your paper been used to train an AI model? Almost certainly. Nature, 632(8026), 715–716. https://doi.org/10.1038/d41586-024-02599-9",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.1038/d41586-024-02599-9",
-      "url": "https://doi.org/10.1038/d41586-024-02599-9"
-    },
-    {
       "workbook_id": 81,
       "year": 2025,
       "title": "Strengths, Weaknesses, Opportunities, and Threats of Using ChatGPT in Scientific Research",
@@ -675,34 +1365,14 @@
       "url": "https://doi.org/10.46328/ijte.618"
     },
     {
-      "workbook_id": 82,
-      "year": 2024,
-      "title": "Enhancing European competitiveness with fairness, sustainability and open strategic autonomy (JRC Working Paper No. 14/2024)",
-      "citation": "Golebiowska-Tataj, D. (2024). Enhancing European competitiveness with fairness, sustainability and open strategic autonomy (JRC Working Paper No. 14/2024). Joint Research Centre, European Commission. https://publications.jrc.ec.europa.eu/repository/handle/JRC139560",
-      "type": "Working paper",
-      "topics": "Demand for researchers",
-      "doi": "",
-      "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC139560"
-    },
-    {
-      "workbook_id": 83,
-      "year": 2024,
-      "title": "Surveillance and Datafication in Higher Education: Documentation of the Human",
-      "citation": "Gourlay, L. (2024). Surveillance and Datafication in Higher Education: Documentation of the Human. Postdigital Science and Education, 6(4), 1039-1048. https://doi.org/10.1007/s42438-022-00352-x",
-      "type": "Research article",
+      "workbook_id": 86,
+      "year": 2025,
+      "title": "Groznik, Talent for AI in science – Mutual Learning Exercise",
+      "citation": "Groznik, V. (2025). Talent for AI in science: mutual learning exercise on national policies on AI in science: third thematic report. European Commission: Directorate-General for Research and Innovation. Publications Office of the European Union. https://data.europa.eu/doi/10.2777/8779512.",
+      "type": "Research report",
       "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.1007/s42438-022-00352-x",
-      "url": "https://doi.org/10.1007/s42438-022-00352-x"
-    },
-    {
-      "workbook_id": 85,
-      "year": 2024,
-      "title": "Gaps between Open Science activities and actual recognition systems: Insights from an international survey",
-      "citation": "Grattarola, F., Shmagun, H., Erdmann, C., Cambon-Thomsen, A., Thomsen, M., Kim, J., & Mabile, L. (2024). Gaps between Open Science activities and actual recognition systems: Insights from an international survey. PLoS ONE, 19(12), e0315632. https://doi.org/10.1371/journal.pone.0315632",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "10.1371/journal.pone.0315632",
-      "url": "https://doi.org/10.1371/journal.pone.0315632"
+      "doi": "10.2777/8779512",
+      "url": "https://data.europa.eu/doi/10.2777/8779512"
     },
     {
       "workbook_id": 87,
@@ -715,72 +1385,12 @@
       "url": "https://doi.org/10.1007/s00146-024-01946-8"
     },
     {
-      "workbook_id": 88,
-      "year": 2023,
-      "title": "Artificial intelligence adoption in the physical sciences, natural sciences, life sciences, social sciences and the arts and humanities: A bibliometric analysis of research publications from 1960-2021",
-      "citation": "Hajkowicz, S., Sanderson, C., Karimi, S., Bratanova, A., & Naughtin, C. (2023). Artificial intelligence adoption in the physical sciences, natural sciences, life sciences, social sciences and the arts and humanities: A bibliometric analysis of research publications from 1960-2021. Technology in Society, 74, 102260. https://doi.org/10.1016/j.techsoc.2023.102260",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.1016/j.techsoc.2023.102260",
-      "url": "https://doi.org/10.1016/j.techsoc.2023.102260"
-    },
-    {
-      "workbook_id": 89,
-      "year": 2023,
-      "title": "Knowledge or science-based economy? The employment of UK PhD graduates in research roles beyond academia",
-      "citation": "Hancock, S. (2023). Knowledge or science-based economy? The employment of UK PhD graduates in research roles beyond academia. Studies in Higher Education, 48(10), 1523-1537.",
-      "type": "Academic article",
-      "topics": "Non-academic, UK; Demand for researchers; Working Conditions Outside Higher Education",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 91,
-      "year": 2024,
-      "title": "Research careers: A critical choice for Europe - Results, insights and recommendations from CAESAR",
-      "citation": "Heitor, M., Ratcliff, S., Björnmalm, M., Bondarouk, T., & Klein Ikkink, V. (2024). Research careers: A critical choice for Europe - Results, insights and recommendations from CAESAR. Research Careers Survey 2024.",
-      "type": "Report",
-      "topics": "Careers, EU; reserach careers; Working Conditions Outside Higher Education",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 92,
       "year": 2025,
       "title": "Organizing the Swedish academic career 1955–2020: Reforms and recurring problems in national policy discussion",
       "citation": "Henningsson, M. (2025). Organizing the Swedish academic career 1955–2020: Reforms and recurring problems in national policy discussion. Nordic Journal of Studies in Educational Policy, 11(2), 147–160.",
       "type": "Article",
       "topics": "Research careers",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 93,
-      "year": 2024,
-      "title": "Towards a sustainable and responsible model for monitoring open science and research—Analysis of the Finnish model for monitoring open science and research",
-      "citation": "Himanen, L., & Nykyri, S. (2024). Towards a sustainable and responsible model for monitoring open science and research—Analysis of the Finnish model for monitoring open science and research. Research Evaluation. Advance online publication. https://doi.org/10.1093/reseval/rvae008",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "10.1093/reseval/rvae008",
-      "url": "https://doi.org/10.1093/reseval/rvae008"
-    },
-    {
-      "workbook_id": 94,
-      "year": 2024,
-      "title": "Unlocking the Power of Science Communication in Research and Policy Making’",
-      "citation": "Hindle, R. et al. (2024) . Unlocking the Power of Science Communication in Research and Policy Making’. Science Europe. DOI: 10.5281/zenodo.12771539",
-      "type": "Report",
-      "topics": "Education and training",
-      "doi": "10.5281/zenodo.12771539",
-      "url": ""
-    },
-    {
-      "workbook_id": 97,
-      "year": 2024,
-      "title": "Interdisciplinary research attracts greater attention from policy documents: evidence from COVID-19",
-      "citation": "Hu, L., Huang, Wb. & Bu, Y. (2024) Interdisciplinary research attracts greater attention from policy documents: evidence from COVID-19. Humanit Soc Sci Commun 11, 383.",
-      "type": "Article",
-      "topics": "Education and training",
       "doi": "",
       "url": ""
     },
@@ -825,16 +1435,6 @@
       "url": ""
     },
     {
-      "workbook_id": 103,
-      "year": 2023,
-      "title": "Precarity of post doctorate career breaks: Does gender make a difference? Studies in Higher Education, 48(10), 1504-1522",
-      "citation": "Jones, K. (2023). Precarity of post doctorate career breaks: Does gender make a difference? Studies in Higher Education, 48(10), 1504-1522.",
-      "type": "Article",
-      "topics": "Gender, career breaks",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 104,
       "year": 2025,
       "title": "Scientific production in the era of large language models.Science390,1240-1243.DOI:10.1126/science.adw3000",
@@ -855,26 +1455,6 @@
       "url": "https://doi.org/10.1787/7376c776-en"
     },
     {
-      "workbook_id": 106,
-      "year": 2024,
-      "title": "Using artificial intelligence in academic writing and research: An essential productivity tool",
-      "citation": "Khalifa, M., & Albadawy, M. (2024). Using artificial intelligence in academic writing and research: An essential productivity tool. Computer Methods and Programs in Biomedicine Update, 5, 100145. https://doi.org/10.1016/j.cmpbup.2024.100145",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.1016/j.cmpbup.2024.100145",
-      "url": "https://doi.org/10.1016/j.cmpbup.2024.100145"
-    },
-    {
-      "workbook_id": 107,
-      "year": 2024,
-      "title": "Research ethics and issues regarding the use of ChatGPT-like artificial intelligence platforms by authors and reviewers: A narrative review",
-      "citation": "Kim, S.-J. (2024). Research ethics and issues regarding the use of ChatGPT-like artificial intelligence platforms by authors and reviewers: A narrative review. Science Editing, 11(2), 96–106. https://doi.org/10.6087/kcse.343",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.6087/kcse.343",
-      "url": "https://doi.org/10.6087/kcse.343"
-    },
-    {
       "workbook_id": 108,
       "year": 2025,
       "title": "The academic impact of Open Science: a scoping review",
@@ -883,36 +1463,6 @@
       "topics": "Open science",
       "doi": "",
       "url": ""
-    },
-    {
-      "workbook_id": 109,
-      "year": 2024,
-      "title": "The Evaluation Game: How Publication Metrics Shape Scholarly Communication",
-      "citation": "Kulczycki, E. (2023). The Evaluation Game: How Publication Metrics Shape Scholarly Communication. Cambridge: Cambridge University Press.",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 110,
-      "year": 2024,
-      "title": "Chapter 40 Research Evaluation—Unraveling the Metrics-Driven Pressures: No. 115 Summer Issue 2023",
-      "citation": "Kulczycki, E. (2024). \"Chapter 40 Research Evaluation—Unraveling the Metrics-Driven Pressures: No. 115 Summer Issue 2023\". In International Dimensions and Trends in Higher Education in Troubled Times. Leiden, The Netherlands: Brill. https://doi.org/10.1163/9789004713901_046",
-      "type": "Book chapter",
-      "topics": "Open science",
-      "doi": "10.1163/9789004713901_046",
-      "url": "https://doi.org/10.1163/9789004713901_046"
-    },
-    {
-      "workbook_id": 112,
-      "year": 2023,
-      "title": "Young male and female scientists: A quantitative exploratory study of the changing demographics of the global scientific workforce",
-      "citation": "Kwiek, M., & Szymula, Ł. (2023). Young male and female scientists: A quantitative exploratory study of the changing demographics of the global scientific workforce. Quantitative Science Studies, 4(4), 902–937. https://doi.org/10.1162/qss_a_00276 (MIT Press Direct)",
-      "type": "Scientific publication",
-      "topics": "Demographics of global workforce",
-      "doi": "10.1162/qss_a_00276",
-      "url": "https://doi.org/10.1162/qss_a_00276"
     },
     {
       "workbook_id": 113,
@@ -933,36 +1483,6 @@
       "topics": "Digitalisation and Artificial Intelligence",
       "doi": "10.2777/1024414",
       "url": "https://data.europa.eu/doi/10.2777/1024414"
-    },
-    {
-      "workbook_id": 115,
-      "year": 2024,
-      "title": "Communicating with integrity Supporting researchers with best practice in communication",
-      "citation": "LERU (2024). Communicating with integrity Supporting researchers with best practice in communication. Advice Paper no.34",
-      "type": "Report",
-      "topics": "Education and training",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 116,
-      "year": 2023,
-      "title": "Implementing interdisciplinarity in research-intensive universities",
-      "citation": "LERU (2023). Implementing interdisciplinarity in research-intensive universities. Advice Paper no.30",
-      "type": "Report",
-      "topics": "Education and training",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 117,
-      "year": 2024,
-      "title": "Much more than a market: Speed, security, solidarity - Empowering the Single Market to deliver a sustainable future and prosperity for all EU citizens",
-      "citation": "Letta, E. (2024). Much more than a market: Speed, security, solidarity - Empowering the Single Market to deliver a sustainable future and prosperity for all EU citizens. European Council.",
-      "type": "Report",
-      "topics": "EU policy",
-      "doi": "",
-      "url": ""
     },
     {
       "workbook_id": 118,
@@ -995,16 +1515,6 @@
       "url": ""
     },
     {
-      "workbook_id": 121,
-      "year": 2023,
-      "title": "The Platformisation of Scholarly Information and How to Fight It",
-      "citation": "Ma, L. (2023). The Platformisation of Scholarly Information and How to Fight It. LIBER Quarterly: The Journal of the Association of European Research Libraries, 33(1), 1-20. https://doi.org/10.53377/lq.13561",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.53377/lq.13561",
-      "url": "https://doi.org/10.53377/lq.13561"
-    },
-    {
       "workbook_id": 122,
       "year": 2025,
       "title": "Academic Freedom Monitor 2024: Part II: Analysis of de facto state of academic freedom in the EU - Country overview",
@@ -1013,26 +1523,6 @@
       "topics": "Academic freedom",
       "doi": "",
       "url": ""
-    },
-    {
-      "workbook_id": 123,
-      "year": 2024,
-      "title": "Open science: Towards greater transparency and openness in science",
-      "citation": "Maedche, A., Elshan, E., Höhle, H., Lehrer, C., Recker, J., Sunyaev, A., ... & Werth, O. (2024). Open science: Towards greater transparency and openness in science. Business & Information Systems Engineering, 66(4), 517-532.",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 124,
-      "year": 2023,
-      "title": "Is a PhD worth more than a Master’s in the UK labour market? The role of specialisation and managerial position",
-      "citation": "Marini, G., & Henseke, G. (2023). Is a PhD worth more than a Master’s in the UK labour market? The role of specialisation and managerial position. Studies in Higher Education, 48(10), 1538–1550. https://doi.org/10.1080/03075079.2023.2254806",
-      "type": "Article",
-      "topics": "Working Conditions Outside Higher Education",
-      "doi": "10.1080/03075079.2023.2254806",
-      "url": "https://doi.org/10.1080/03075079.2023.2254806"
     },
     {
       "workbook_id": 125,
@@ -1115,46 +1605,6 @@
       "url": ""
     },
     {
-      "workbook_id": 136,
-      "year": 2023,
-      "title": "Promoting Diverse Career Pathways for Doctoral and Postdoctoral Researchers",
-      "citation": "OECD (2023). Promoting Diverse Career Pathways for Doctoral and Postdoctoral Researchers. OECD Science, Technology and Industry Policy Papers, No. 158. Paris: OECD Publishing.",
-      "type": "Policy paper",
-      "topics": "Demand for researchers; Working Conditions Outside Higher Education; Researcher mobility",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 137,
-      "year": 2023,
-      "title": "Artificial intelligence in science: Challenges, opportunities and the future of research",
-      "citation": "OECD. (2023). Artificial intelligence in science: Challenges, opportunities and the future of research. OECD Publishing.",
-      "type": "Report",
-      "topics": "AI",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 138,
-      "year": 2024,
-      "title": "The state of academic careers in OECD countries: An evidence review (OECD Education Policy Perspectives, No. 91)",
-      "citation": "OECD. (2024). The state of academic careers in OECD countries: An evidence review (OECD Education Policy Perspectives, No. 91). OECD Publishing.",
-      "type": "Research report",
-      "topics": "Demand for researchers",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 139,
-      "year": 2024,
-      "title": "The state of higher education: Key insights from the 2024 OECD report",
-      "citation": "OECD. (2024). The state of higher education: Key insights from the 2024 OECD report. OECD Publishing.",
-      "type": "Report",
-      "topics": "HE global",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 141,
       "year": 2025,
       "title": "Mapping the Future of Open Science (OS): The Complex Landscape of OS Initiatives",
@@ -1195,16 +1645,6 @@
       "url": "https://epoch.ai/data/gpu-clusters?view=table#data-insights"
     },
     {
-      "workbook_id": 145,
-      "year": 2024,
-      "title": "Guidelines for ethical use and acknowledgement of large language models in academic writing",
-      "citation": "Porsdam Mann, S., Vazirani, A. A., Aboy, M., Earp, B. D., Minssen, T., Cohen, I. G., & Savulescu, J. (2024). Guidelines for ethical use and acknowledgement of large language models in academic writing. Nature Machine Intelligence, 6(11), 1272–1274. https://doi.org/10.1038/s42256-024-00922-7",
-      "type": "Research article",
-      "topics": "Digitalisation and Artificial Intelligence",
-      "doi": "10.1038/s42256-024-00922-7",
-      "url": "https://doi.org/10.1038/s42256-024-00922-7"
-    },
-    {
       "workbook_id": 147,
       "year": 2025,
       "title": "Freedom from harassment for scientists is essential: Awareness raising and advice",
@@ -1213,16 +1653,6 @@
       "topics": "trust in science",
       "doi": "",
       "url": "https://prepared-project.eu/wp-content/uploads/2025/05/Freedom-from-harassment-for-scientists-is-essential-final.pdf"
-    },
-    {
-      "workbook_id": 148,
-      "year": 2024,
-      "title": "Precarity of early career researchers (postdocs): Summary of practices from selected European universities",
-      "citation": "Pugh, J., Ioppolo, B., & Action Research on Research Culture Project Team and Partners. (2024, May 15). Precarity of early career researchers (postdocs): Summary of practices from selected European universities. Bennett Institute for Public Policy, University of Cambridge.",
-      "type": "Policy",
-      "topics": "Mental health, Postdocs, Precarity",
-      "doi": "",
-      "url": ""
     },
     {
       "workbook_id": 149,
@@ -1285,16 +1715,6 @@
       "url": ""
     },
     {
-      "workbook_id": 157,
-      "year": 2024,
-      "title": "Practicing responsible research assessment: Qualitative study of faculty hiring, promotion, and tenure assessments in the United States",
-      "citation": "Rushforth, A. D., & de Rijcke, S. (2024). Practicing responsible research assessment: Qualitative study of faculty hiring, promotion, and tenure assessments in the United States. Research Evaluation, 33(1), rvae007.",
-      "type": "Article",
-      "topics": "Assessment",
-      "doi": "",
-      "url": ""
-    },
-    {
       "workbook_id": 158,
       "year": 2025,
       "title": "STEM PhD holders working outside academia: the role of social support in career transition",
@@ -1305,16 +1725,6 @@
       "url": "https://doi.org/10.1080/21568235.2024.2404683"
     },
     {
-      "workbook_id": 159,
-      "year": 2024,
-      "title": "PhD holders’ working conditions and job satisfaction in Spain: a cross-sector comparison",
-      "citation": "Sala-Bubaré, A., Garcia-Morante, M., Castelló, M., & Weise, C. (2024). PhD holders’ working conditions and job satisfaction in Spain: a cross-sector comparison. Higher Education Research & Development, 43(7), 1571–1585. https://doi.org/10.1080/07294360.2024.2347611",
-      "type": "Article",
-      "topics": "Working Conditions Outside Higher Education",
-      "doi": "10.1080/07294360.2024.2347611",
-      "url": "https://doi.org/10.1080/07294360.2024.2347611"
-    },
-    {
       "workbook_id": 160,
       "year": 2025,
       "title": "Integrating critical thinking and artificial intelligence in higher education: A bibliometric and systematic review of skills and strategies",
@@ -1323,36 +1733,6 @@
       "topics": "Digitalisation and Artificial Intelligence",
       "doi": "10.1016/j.ssaho.2025.101924",
       "url": "https://doi.org/10.1016/j.ssaho.2025.101924"
-    },
-    {
-      "workbook_id": 161,
-      "year": 2024,
-      "title": "The expansion of doctoral education and the changing nature and purpose of the doctorate",
-      "citation": "Sarrico, C. S. (2022). The expansion of doctoral education and the changing nature and purpose of the doctorate. Higher Education, 84(6), 1299-1315.",
-      "type": "Research article",
-      "topics": "Demand for researchers",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 162,
-      "year": 2024,
-      "title": "The Mobility Imperative in Academia: Global Trend or Local Custom? Societé Suisse de Linguistique",
-      "citation": "Sautier, A. (2024) . The Mobility Imperative in Academia: Global Trend or Local Custom? Societé Suisse de Linguistique.",
-      "type": "Article",
-      "topics": "Researcher mobility",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 164,
-      "year": 2024,
-      "title": "Attractive careers in research: The expectations and roles of different stakeholder groups (Event report)",
-      "citation": "Science Europe. (2024). Attractive careers in research: The expectations and roles of different stakeholder groups (Event report). Science Europe. https://doi.org/10.5281/zenodo.14533956",
-      "type": "Report",
-      "topics": "resereach careers, assessment; science communication",
-      "doi": "10.5281/zenodo.14533956",
-      "url": "https://doi.org/10.5281/zenodo.14533956"
     },
     {
       "workbook_id": 165,
@@ -1383,16 +1763,6 @@
       "topics": "trust in science",
       "doi": "",
       "url": "https://www.hiig.de/en/science-hostility-in-germany/"
-    },
-    {
-      "workbook_id": 169,
-      "year": 2023,
-      "title": "Professors' gender biases in assessing applicants for professorships",
-      "citation": "Solga, H., Rusconi, A., & Netz, N. (2023). Professors' gender biases in assessing applicants for professorships. European Sociological Review, 39(6), 841-861.",
-      "type": "Article",
-      "topics": "Gender bias",
-      "doi": "",
-      "url": ""
     },
     {
       "workbook_id": 170,
@@ -1445,26 +1815,6 @@
       "url": ""
     },
     {
-      "workbook_id": 175,
-      "year": 2024,
-      "title": "The use of artificial intelligence in research. www.the-guild.eu/publications/position-papers/the-guild-s-position-paper-on-the-use-of-ai-in-research_nov2024.pdf",
-      "citation": "The Guild (2024). The use of artificial intelligence in research. www.the-guild.eu/publications/position-papers/the-guild-s-position-paper-on-the-use-of-ai-in-research_nov2024.pdf",
-      "type": "Report",
-      "topics": "Education and training",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 176,
-      "year": 2023,
-      "title": "Open Science 2.0: Towards a truly collaborative research ecosystem",
-      "citation": "Thibault, R. T., Amaral, O. B., Argolo, F., Bandrowski, A. E., Davidson, A. R., & Drude, N. I. (2023). Open Science 2.0: Towards a truly collaborative research ecosystem. PLoS Biology, 21(10), e3002362. https://doi.org/10.1371/journal.pbio.3002362",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "10.1371/journal.pbio.3002362",
-      "url": "https://doi.org/10.1371/journal.pbio.3002362"
-    },
-    {
       "workbook_id": 177,
       "year": 2025,
       "title": "The economic impact of open science: a scoping review",
@@ -1481,66 +1831,6 @@
       "citation": "Ueno, A., Yu, C., Curtis, L., & Dennis, C. (2025). Job demands-resources theory extended: Stress, loneliness, and care responsibilities impacting UK doctoral students mental health. Studies in Higher Education, 50(4), 808-823.",
       "type": "Article",
       "topics": "Mental health",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 179,
-      "year": 2024,
-      "title": "Open Science and the impact of Open Access, Open Data, and FAIR publishing principles on data-driven academic research: Towards ever more transparent, accessible, and reproducible academic output?",
-      "citation": "Umbach, G. (2024). Open Science and the impact of Open Access, Open Data, and FAIR publishing principles on data-driven academic research: Towards ever more transparent, accessible, and reproducible academic output?. Statistical Journal of the IAOS, 40(1), 59-70.",
-      "type": "Research article",
-      "topics": "Open science",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 180,
-      "year": 2024,
-      "title": "The gender gap in science: Status and trends, February 2024",
-      "citation": "United Nations Educational, Scientific and Cultural Organization. (2024). The gender gap in science: Status and trends, February 2024. UNESCO. https://unesdoc.unesco.org/ark:/48223/pf0000388805 (UNESCO Documents)",
-      "type": "UNESCO Recommendation",
-      "topics": "Gender Gap in Science",
-      "doi": "",
-      "url": "https://unesdoc.unesco.org/ark:/48223/pf0000388805"
-    },
-    {
-      "workbook_id": 182,
-      "year": 2023,
-      "title": "Precarious careers: Postdoctoral researchers and wellbeing at work",
-      "citation": "van der Weijden, I., & Teelken, C. (2023). Precarious careers: Postdoctoral researchers and wellbeing at work. Studies in Higher Education, 48(10), 1595-1607.",
-      "type": "Article",
-      "topics": "Mental health",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 183,
-      "year": 2024,
-      "title": "Caught between academic calling and academic pressure? Working time characteristics, time pressure and time sovereignty predict PhD students' research engagement",
-      "citation": "van Tienoven, T. P., Glorieux, A., Minnen, J., & Spruyt, B. (2024). Caught between academic calling and academic pressure? Working time characteristics, time pressure and time sovereignty predict PhD students' research engagement. Higher Education, 87, 1885-1904.",
-      "type": "Article",
-      "topics": "Working time",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 184,
-      "year": 2024,
-      "title": "Recruitment, working conditions, career development and progression: Mutual Learning Exercise on Research Careers - First thematic report",
-      "citation": "Vandevelde, K. (2024). Recruitment, working conditions, career development and progression: Mutual Learning Exercise on Research Careers - First thematic report. Publications Office of the European Union.",
-      "type": "Report",
-      "topics": "Working conditions",
-      "doi": "",
-      "url": ""
-    },
-    {
-      "workbook_id": 185,
-      "year": 2024,
-      "title": "Future directions and possibilities for the university: Report on literature review and Delphi study",
-      "citation": "Virmajoki, V., Ahokas, I., Witoon, S., Ahlqvist, T., Kirveennummi, A., & Suomalainen, K.-M. (2024). Future directions and possibilities for the university: Report on literature review and Delphi study. University of Turku Strategic Planning Unit in collaboration with the Finland Futures Research Centre (FFRC). ISBN 978-952-249-617-1.",
-      "type": "Report",
-      "topics": "University futures",
       "doi": "",
       "url": ""
     },
@@ -1563,16 +1853,6 @@
       "topics": "Open science",
       "doi": "10.2139/ssrn.5111940",
       "url": "https://doi.org/10.2139/ssrn.5111940"
-    },
-    {
-      "workbook_id": 188,
-      "year": 2023,
-      "title": "Chapter 39 The Impact of the COVID-19 Pandemic on Global Research: No. 104 Autumn Issue 2020",
-      "citation": "Xu, X. (2024). \"Chapter 39 The Impact of the COVID-19 Pandemic on Global Research: No. 104 Autumn Issue 2020\". In International Dimensions and Trends in Higher Education in Troubled Times. Leiden, The Netherlands: Brill. https://doi.org/10.1163/9789004713901_045",
-      "type": "Book chapter",
-      "topics": "Open science",
-      "doi": "10.1163/9789004713901_045",
-      "url": "https://doi.org/10.1163/9789004713901_045"
     },
     {
       "workbook_id": 190,
@@ -1645,34 +1925,34 @@
       "url": ""
     },
     {
-      "workbook_id": 197,
-      "year": 2024,
-      "title": "Science communication conference: Strategic conclusions",
-      "citation": "Science Europe. (2024). Science communication conference: Strategic conclusions. https://scienceeurope.org/our-resources/science-communications-conference-strategic-conclusions/",
+      "workbook_id": 96,
+      "year": 2026,
+      "title": "OECD, Exploring possible AI trajectories through 2030",
+      "citation": "Hobbs, H., Docherty, D., Aranda, L., Sugimoto, K., Perset, K., & Kierzenkowski, R. (2026). Exploring possible AI trajectories through 2030 (OECD Artificial Intelligence Papers No. 55). OECD Publishing.",
       "type": "Report",
-      "topics": "Science communication",
+      "topics": "AI in Science",
       "doi": "",
-      "url": "https://scienceeurope.org/our-resources/science-communications-conference-strategic-conclusions/"
+      "url": ""
     },
     {
-      "workbook_id": 198,
-      "year": 2024,
-      "title": "UNESCO call to action: Closing the gender gap in science",
-      "citation": "United Nations Educational, Scientific and Cultural Organization. (2024). UNESCO call to action: Closing the gender gap in science. https://www.unesco.org/en/science-technology-and-innovation/cta",
-      "type": "Policy document",
-      "topics": "Gender gap in science",
-      "doi": "",
-      "url": "https://www.unesco.org/en/science-technology-and-innovation/cta"
+      "workbook_id": 129,
+      "year": 2026,
+      "title": "Mohammadi et al., Is generative AI reshaping academic practices worldwide?",
+      "citation": "Mohammadi, E., Thelwall, M., Cai, Y., Collier, T., Tahamtan, I., & Eftekhar, A. (2026). Is generative AI reshaping academic practices worldwide? A survey of adoption, benefits, and concerns. Information Processing & Management, 63(1), 104350. https://doi.org/10.1016/j.ipm.2025.104350",
+      "type": "Research article",
+      "topics": "Digitalisation and Artificial Intelligence",
+      "doi": "10.1016/j.ipm.2025.104350",
+      "url": "https://doi.org/10.1016/j.ipm.2025.104350"
     },
     {
-      "workbook_id": 201,
-      "year": 2024,
-      "title": "Chapter 43 Publish or Perish: No. 100 Winter Issue 2020",
-      "citation": "Yudkevich, M. (2024). \"Chapter 43 Publish or Perish: No. 100 Winter Issue 2020\". In International Dimensions and Trends in Higher Education in Troubled Times. Leiden, The Netherlands: Brill. https://doi.org/10.1163/9789004713901_049",
-      "type": "Book chapter",
-      "topics": "Publishing pressure",
-      "doi": "10.1163/9789004713901_049",
-      "url": "https://doi.org/10.1163/9789004713901_049"
+      "workbook_id": 153,
+      "year": 2026,
+      "title": "Strong consensus in sector on what ERA Act should do",
+      "citation": "Research Professional News. (2026, February 6). Strong consensus in sector on what ERA Act should do. Research Professional News.",
+      "type": "Article",
+      "topics": "ERA Act",
+      "doi": "",
+      "url": ""
     }
   ]
 }

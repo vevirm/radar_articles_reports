@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Historical 2023–2025 top-tier scanner aligned with the live radar recall engine.
+"""Source-age historical scanner aligned with the live radar recall engine.
 
-Operational isolation is strict: this script reads/writes only historical/config.json and
-historical/historical.json. It does not import radar.json, mutate the live matrix, weak
-signals, live cursors, or dispatch the live workflow.
+Operational isolation is strict: this script writes only historical/historical.json. It
+reads historical/config.json plus the curated/manual historical evidence files. It does
+not import radar.json, mutate the live matrix, weak signals, live cursors, or dispatch
+the live workflow.
 
-The historical mission differs only in scope: 2023–2025, elite sources, stricter merit,
-topic rotation (not year rotation), and a modest 2025 > 2024 > 2023 ranking preference.
+Historical means source age, not backward-looking content: eligible sources are older
+than the rolling six-month main-radar boundary. Topic families rotate across the whole
+eligible period, with recent historical evidence preferred when quality is comparable.
 """
 from __future__ import annotations
 
@@ -29,6 +31,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dateparser
+from dateutil.relativedelta import relativedelta
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,10 +39,18 @@ HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
 OUT_PATH = HIST_DIR / "historical.json"
 CURATED_SEED_PATH = HIST_DIR / "curated_seed_evidence.json"
+MANUAL_EVIDENCE_PATH = HIST_DIR / "manual_evidence.json"
 CONFIG = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
 DATE_FROM = dt.date.fromisoformat(CONFIG["date_from"])
-DATE_TO = dt.date.fromisoformat(CONFIG["date_to"])
+MAIN_RADAR_WINDOW_MONTHS = max(1, int(CONFIG.get("main_radar_window_months", 6)))
+
+def historical_cutoff_exclusive(today: dt.date | None = None) -> dt.date:
+    """First date belonging to the live/main-radar window. Historical dates are earlier."""
+    return (today or dt.date.today()) - relativedelta(months=MAIN_RADAR_WINDOW_MONTHS)
+
+CUTOFF_EXCLUSIVE = historical_cutoff_exclusive()
+DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
 BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", "1050"))
@@ -226,7 +237,10 @@ def source_for(domain: str = "", venue: str = "", publisher: str = "") -> dict[s
 
 
 def year_bonus(d: dt.date) -> int:
-    return int(CONFIG.get("year_preference", {}).get(str(d.year), 0))
+    latest = int(CONFIG.get("year_preference_latest_bonus", 12))
+    decay = max(0, int(CONFIG.get("year_preference_decay_per_year", 2)))
+    years_back = max(0, DATE_TO.year - d.year)
+    return max(0, latest - years_back * decay)
 
 
 def topic_matches(text: str) -> list[str]:
@@ -658,6 +672,29 @@ def curated_seed_items() -> list[dict[str, Any]]:
     return [x for x in rows if isinstance(x,dict) and clean(x.get("title"))]
 
 
+def manual_evidence_items() -> list[dict[str, Any]]:
+    """Load manually reviewed geopolitical signals that must survive automated scans."""
+    if not MANUAL_EVIDENCE_PATH.exists():
+        return []
+    try:
+        payload=json.loads(MANUAL_EVIDENCE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    rows=payload.get("items",[]) if isinstance(payload,dict) else []
+    out=[]
+    for raw in rows:
+        if not isinstance(raw,dict) or not clean(raw.get("title")):
+            continue
+        item=dict(raw)
+        d=parse_date(item.get("date"))
+        if not d or not (DATE_FROM <= d <= DATE_TO):
+            continue
+        item["manual_curated"]=True
+        item["year"]=d.year
+        out.append(item)
+    return out
+
+
 def refresh_existing_item(raw: dict[str, Any]) -> dict[str, Any] | None:
     """Conservatively migrate persisted records produced by older, looser gates.
 
@@ -665,6 +702,8 @@ def refresh_existing_item(raw: dict[str, Any]) -> dict[str, Any] | None:
     scan rediscovers them with enough source text to pass the current gates.
     """
     item=dict(raw)
+    if item.get("manual_curated"):
+        return None
     title=clean(item.get("title")); text=clean(f"{title}. {item.get('reader_point','')}")
     if not title or ADMIN_DOC_RE.search(title):
         return None
@@ -737,17 +776,18 @@ def main() -> int:
     try: previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {}
     except Exception: previous={}
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
-    topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items()
+    topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items(); manual_items=manual_evidence_items()
     topic_cursor=int(state.get("topic_cursor",0)); source_cursor=int(state.get("source_cursor",0)); seed_cursor=int(state.get("seed_cursor",0))
     active_topics,next_topic=rotating(topics,topic_cursor,int(CONFIG.get("topics_per_scan",4)))
     active_sources,next_source=rotating(sources,source_cursor,int(CONFIG.get("sources_per_scan",8)))
     active_seeds,next_seed=rotating(seeds,seed_cursor,int(CONFIG.get("curated_seed_queries_per_scan",12)))
     seed_queries=[clean(x.get("title")) for x in active_seeds if clean(x.get("title"))]
-    warnings=[]; log("Historical scan starts: full 2023–2025 window; evidence density is not Matrix-balanced")
+    warnings=[]; log(f"Historical scan starts: {DATE_FROM.isoformat()} through {DATE_TO.isoformat()} (sources before {CUTOFF_EXCLUSIVE.isoformat()}); content may be future-facing")
     log("Topics: "+" | ".join(str(t.get("label")) for t in active_topics))
     if seed_queries: log(f"Curated workbook backfill: {len(seed_queries)} title seed(s)")
     candidates,queries=run_rotation(active_topics,active_sources,warnings,"normal",extra_queries=seed_queries)
     old_items=[]
+    previous_ids={clean(x.get("id")) for x in previous.get("items",[]) if isinstance(x,dict)}
     for raw in previous.get("items",[]):
         if isinstance(raw,dict) and (item:=refresh_existing_item(raw)) is not None:
             old_items.append(item)
@@ -763,7 +803,7 @@ def main() -> int:
         candidates.extend(rescue_candidates); next_topic=rescue_next_topic; next_source=rescue_next_source
 
     # Minimum-runtime continuation: keep doing useful historical work until at least
-    # the configured floor has elapsed. Topic groups rotate through the whole 2023-2025
+    # the configured floor has elapsed. Topic groups rotate through the whole source-age
     # window; after one full topic sweep, scholarly APIs move to deeper result pages.
     continuation_waves=[]
     topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",CONFIG.get("topics_per_scan",4))))
@@ -783,11 +823,15 @@ def main() -> int:
         next_topic=wave_next_topic; next_source=wave_next_source; blocks_already+=1
 
     wait_until_minimum_runtime()
-    unique_gate=dedupe(candidates); merged=dedupe(old_items+unique_gate)
+    unique_gate=dedupe(candidates); merged=dedupe(manual_items+old_items+unique_gate)
     merged=[x for x in merged if (d:=parse_date(x.get("date"))) and DATE_FROM<=d<=DATE_TO]
     merged.sort(key=lambda x:(int(x.get("source_merit_score",0)),int(x.get("year",0)),x.get("date","")),reverse=True)
-    if MAX_ITEMS>0: merged=merged[:MAX_ITEMS]
-    new_count=sum(1 for x in merged if clean(x.get("id")) not in old_ids)
+    if MAX_ITEMS>0 and len(merged)>MAX_ITEMS:
+        manual_keep=[x for x in merged if x.get("manual_curated")]
+        other_keep=[x for x in merged if not x.get("manual_curated")][:max(0,MAX_ITEMS-len(manual_keep))]
+        merged=manual_keep+other_keep
+        merged.sort(key=lambda x:(int(x.get("source_merit_score",0)),int(x.get("year",0)),x.get("date","")),reverse=True)
+    new_count=sum(1 for x in merged if not x.get("manual_curated") and clean(x.get("id")) not in previous_ids)
     matrix_counts={r:{c:0 for c in "ABCD"} for r in ROW_TERMS}
     for x in merged:
         r,c=clean(x.get("matrix_dimension")),clean(x.get("matrix_outcome"))
@@ -795,9 +839,9 @@ def main() -> int:
     now=dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z")
     full_rescue_enabled=bool(CONFIG.get("full_rescue_run_enabled",True)); full_rescue_threshold=int(CONFIG.get("full_rescue_run_trigger_max_new_items",3)); should_dispatch=(full_rescue_enabled and not RESCUE_MODE and new_count<=full_rescue_threshold)
     data={
-        "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),
-        "scope_note":"Separate historical archive. It does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
-        "ranking_note":"Every run searches the whole 2023–2025 period. Topic families rotate; years do not. When otherwise comparable, 2025 is preferred to 2024 and 2024 to 2023.",
+        "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),"cutoff_exclusive":CUTOFF_EXCLUSIVE.isoformat(),"main_radar_window_months":MAIN_RADAR_WINDOW_MONTHS,
+        "scope_note":"Separate source-age historical archive. A source is historical because it predates the rolling six-month main-radar boundary; its content may be backward- or forward-looking. It does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
+        "ranking_note":f"Every run searches the eligible period from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. Topic families rotate; years do not. More recent historical evidence receives only a tie-break preference when quality and relevance are otherwise comparable.",
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
         "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
@@ -805,6 +849,7 @@ def main() -> int:
             "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":RESCUE_MODE,
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,
             "curated_backfill":{"available":len(seeds),"queried_this_run":len(seed_queries),"workbook_ids":[x.get("workbook_id") for x in active_seeds]},
+            "manual_evidence":{"available":len(manual_items),"included":sum(1 for x in merged if x.get("manual_curated"))},
             "low_yield_rotation":{"triggered":low_triggered,"new_items_after_normal_rotation":initial_new,"fresh_topics":[str(t.get("label")) for t in rescue_topics],"fresh_sources":[str(s.get("name")) for s in rescue_sources],"fresh_queries":rescue_queries,"new_items_after_all_in_run_rotations":new_count,"full_rescue_run_enabled":full_rescue_enabled,"full_rescue_run_should_dispatch":should_dispatch},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),
