@@ -35,6 +35,50 @@ class SchedulerBreadthTests(unittest.TestCase):
 
 
 
+class LowYieldRotationTests(unittest.TestCase):
+    def test_fresh_rotation_skips_queries_already_executed_and_wraps(self):
+        bank = ["q0", "q1", "q2", "q3", "q4", "q5"]
+        batch, next_cursor, wrapped = scan.rotating_batch_excluding(
+            bank, 4, 3, {"q4", "q0"}
+        )
+        self.assertEqual(batch, ["q5", "q1", "q2"])
+        self.assertEqual(next_cursor, 3)
+        self.assertTrue(wrapped)
+
+    def test_low_yield_count_uses_only_genuinely_new_unique_ab(self):
+        old_ids = scan.KNOWN_AB_IDENTITIES
+        old_links = scan.KNOWN_AB_LINKS
+        scan.KNOWN_AB_IDENTITIES = {"title:known paper"}
+        scan.KNOWN_AB_LINKS = {"https://example.org/known-link"}
+        try:
+            rows = [
+                {"title": "Known Paper", "link": "https://example.org/x", "strand": "A"},
+                {"title": "Known Link Different Title", "link": "https://example.org/known-link", "strand": "A"},
+                {"title": "New Paper", "link": "https://example.org/new", "strand": "A"},
+                {"title": "New Paper", "link": "https://example.org/new-duplicate", "strand": "A"},
+                {"title": "Method Paper", "link": "https://example.org/method", "strand": "B"},
+                {"title": "Signal", "link": "https://example.org/signal", "strand": "C"},
+            ]
+            out = scan.genuinely_new_ab_candidates(rows)
+        finally:
+            scan.KNOWN_AB_IDENTITIES = old_ids
+            scan.KNOWN_AB_LINKS = old_links
+        self.assertEqual({x["title"] for x in out}, {"New Paper", "Method Paper"})
+
+    def test_rescue_cursor_does_not_advance_on_partial_execution(self):
+        state = {}
+        scan.commit_planned_cursor_if_executed(state, "cursor", 2, ["a", "b"], 4, {"a"})
+        self.assertEqual(state["cursor"], 2)
+        scan.commit_planned_cursor_if_executed(state, "cursor", 2, ["a", "b"], 4, {"a", "b"})
+        self.assertEqual(state["cursor"], 4)
+
+    def test_config_triggers_fresh_rotation_at_three_or_fewer(self):
+        self.assertTrue(scan.CONFIG.get("low_yield_fresh_rotation_enabled"))
+        self.assertEqual(scan.CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab"), 3)
+        self.assertTrue(scan.CONFIG.get("low_yield_extended_fallback_enabled"))
+        self.assertEqual(scan.CONFIG.get("extended_top_quality_lookback_months"), 6)
+
+
 class CuratorCandidateQueueTests(unittest.TestCase):
     def test_round_xiv_queue_covers_all_groups_and_companions(self):
         doc = json.loads((ROOT / "curator_candidate_tests.json").read_text(encoding="utf-8"))

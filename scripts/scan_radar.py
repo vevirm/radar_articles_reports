@@ -479,6 +479,49 @@ def diversified_query_bank(queries: list[str]) -> list[str]:
     return out
 
 
+def rotating_batch_excluding(items: list[Any], cursor: int, limit: int, excluded: Iterable[Any] | None = None) -> tuple[list[Any], int, bool]:
+    """Take a circular fresh slice while skipping work already executed in this run.
+
+    This is used by the low-yield second-pass rule. Unlike ``rotating_batch`` it may
+    wrap while *planning* because the purpose is explicitly to find still-untried work
+    rather than stop at the end of a persisted cycle. The returned cursor is committed
+    only when the planned requests actually execute.
+    """
+    seq = list(dict.fromkeys(items))
+    if not seq or int(limit or 0) <= 0:
+        return [], 0, True
+    blocked = set(excluded or [])
+    start = int(cursor or 0) % len(seq)
+    idx = start
+    visited = 0
+    out: list[Any] = []
+    wrapped = False
+    while visited < len(seq) and len(out) < int(limit):
+        item = seq[idx]
+        if item not in blocked:
+            out.append(item)
+        idx += 1
+        visited += 1
+        if idx >= len(seq):
+            idx = 0
+            wrapped = True
+    return out, idx, wrapped
+
+
+def commit_planned_cursor_if_executed(state: dict[str, Any], key: str, original_cursor: int, planned: list[Any], planned_next: int, executed: Iterable[Any]) -> int:
+    """Commit a rescue-lane cursor only when its whole planned slice really ran.
+
+    Partial execution intentionally leaves the cursor where it was. Repeating a few
+    requests is safer than silently skipping a low-yield rotation slice after a deadline.
+    """
+    executed_set = set(executed or [])
+    if planned and all(item in executed_set for item in planned):
+        state[key] = int(planned_next or 0)
+    else:
+        state[key] = int(original_cursor or 0)
+    return int(state[key])
+
+
 def scholarly_exploration_plan(
     state: dict[str, Any],
     queries: list[str],
@@ -6222,6 +6265,24 @@ def dedupe_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def genuinely_new_ab_candidates(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Return unique gate-passing A/B candidates not already present in the saved corpus.
+
+    Low-yield decisions must be based on actual potential admissions, not raw API hits,
+    duplicates, or records already known to the radar.
+    """
+    candidates = dedupe_candidates([x for x in items if isinstance(x, dict) and x.get("strand") in {"A", "B", "both"}])
+    out: list[dict[str, Any]] = []
+    for item in candidates:
+        if identity(item) in KNOWN_AB_IDENTITIES:
+            continue
+        link = normalized_link(item.get("link", ""))
+        if link and link in KNOWN_AB_LINKS:
+            continue
+        out.append(item)
+    return out
+
+
 def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
     """Priority, not admission: surface major EU R&I/geopolitical competition first.
 
@@ -8995,9 +9056,9 @@ def main() -> int:
         else:
             log_progress("Targeted new-source catch-up remains pending; no normal cursor was reset or advanced by this lane")
 
-    # Quiet-scan rescue now runs BEFORE the slower institutional stage. This guarantees
-    # that a zero-admission scholarly slice gets a second historical topic/depth slice
-    # while meaningful budget still remains, rather than hoping 260s survive afterwards.
+    # Quiet-scan rescue runs BEFORE the slower institutional stage. If the early
+    # scholarly slice is very sparse (currently three or fewer raw gate-passing
+    # candidates), try another topic/depth slice while meaningful budget remains.
     quiet_rescue = {"attempted": False, "openalex_queries": [], "crossref_queries": [], "themes": []}
     rescue_enabled = bool(CONFIG.get("quiet_scan_rescue_enabled", True))
     rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 180) or 180)
@@ -9269,6 +9330,216 @@ def main() -> int:
     state["institution_cursor"], inst_wrapped, inst_base_executed = committed_rotation_cursor(
         general_domains_all, institution_cursor_before, general_planned_domains, executed_inst
     )
+
+    # V17.13.35 low-yield rule: after the ordinary scholarly + institutional pass,
+    # count only genuinely new, unique A/B records that already passed the normal gates.
+    # If that count is three or fewer, spend remaining discovery time on a *different*
+    # query slice rather than declaring the topic quiet. Raw API hits, duplicates and
+    # already-published records never suppress this second pass. Relevance/quality gates
+    # are unchanged. If the fresh four-month rotation is still sparse, use a bounded
+    # 4-6 month extension and keep only Highest source-merit evidence there.
+    low_yield_threshold = max(0, int(CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab", 3) or 3))
+    low_yield_rotation = {
+        "enabled": bool(CONFIG.get("low_yield_fresh_rotation_enabled", True)),
+        "trigger_max_new_ab": low_yield_threshold,
+        "triggered": False,
+        "new_ab_before": len(genuinely_new_ab_candidates(oa + cr + inst)),
+        "new_ab_after_fresh_rotation": 0,
+        "fresh_openalex_queries": [],
+        "fresh_crossref_queries": [],
+        "fresh_themes": [],
+        "extended_fallback_attempted": False,
+        "extended_openalex_queries": [],
+        "extended_crossref_queries": [],
+        "extended_institution_sources": [],
+        "extended_highest_admitted": 0,
+    }
+    low_yield_rotation["new_ab_after_fresh_rotation"] = low_yield_rotation["new_ab_before"]
+    fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
+    fresh_query_n = max(1, int(CONFIG.get("low_yield_fresh_rotation_queries_per_source", 8) or 8))
+    fresh_bank = diversified_query_bank(all_queries + b_method_bank + finding_context_bank)
+    if (
+        low_yield_rotation["enabled"]
+        and low_yield_rotation["new_ab_before"] <= low_yield_threshold
+        and budget_remaining() > fresh_min_remaining
+        and not (oa_failed and cr_failed)
+        and fresh_bank
+    ):
+        low_yield_rotation["triggered"] = True
+        fresh_oa_cursor_before = int(state.get("low_yield_openalex_cursor", state.get("openalex_explore_cursor", 0)) or 0)
+        fresh_cr_cursor_before = int(state.get("low_yield_crossref_cursor", state.get("crossref_explore_cursor", 0)) or 0)
+        already_oa = set(execution_stats.get("openalex_queries", set()))
+        already_cr = set(execution_stats.get("crossref_broad_queries", set()))
+        fresh_oa_queries, fresh_oa_next, _ = rotating_batch_excluding(
+            fresh_bank, fresh_oa_cursor_before, fresh_query_n if not oa_failed else 0, already_oa
+        )
+        fresh_cr_queries, fresh_cr_next, _ = rotating_batch_excluding(
+            fresh_bank, fresh_cr_cursor_before, fresh_query_n if not cr_failed else 0, already_cr
+        )
+        low_yield_rotation["fresh_openalex_queries"] = fresh_oa_queries
+        low_yield_rotation["fresh_crossref_queries"] = fresh_cr_queries
+        low_yield_rotation["fresh_themes"] = list(dict.fromkeys(query_theme(q) for q in fresh_oa_queries + fresh_cr_queries))
+        if fresh_oa_queries or fresh_cr_queries:
+            log_progress(
+                f"Low-yield fresh rotation: normal pass found {low_yield_rotation['new_ab_before']} genuinely new A/B item(s) "
+                f"(trigger <= {low_yield_threshold}); trying unexecuted four-month query families: "
+                + ", ".join(low_yield_rotation["fresh_themes"])
+            )
+            fresh_exec: dict[str, Any] = {}
+            fresh_seconds = min(
+                max(30, int(CONFIG.get("low_yield_fresh_rotation_stage_seconds", 180) or 180)),
+                max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+            )
+            fresh_deadline = time.monotonic() + fresh_seconds
+            with cf.ThreadPoolExecutor(max_workers=2) as ex:
+                futs: list[tuple[str, Any]] = []
+                if fresh_oa_queries:
+                    futs.append(("oa", ex.submit(
+                        safe_stage, "OpenAlex low-yield fresh rotation", collect_openalex, DATE_FLOOR, warnings,
+                        fresh_oa_queries, fresh_deadline, {q: DATE_FLOOR for q in fresh_oa_queries},
+                        state["result_depth"]["openalex"], {q: "low-yield-fresh" for q in fresh_oa_queries}, fresh_exec
+                    )))
+                if fresh_cr_queries:
+                    futs.append(("cr", ex.submit(
+                        safe_stage, "Crossref low-yield fresh rotation", collect_crossref, DATE_FLOOR, warnings,
+                        fresh_cr_queries, [], [], fresh_deadline, {q: DATE_FLOOR for q in fresh_cr_queries},
+                        state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
+                        {q: "low-yield-fresh" for q in fresh_cr_queries}, fresh_exec
+                    )))
+                for family, fut in futs:
+                    extra = [x for x in fut.result() if isinstance(x, dict)]
+                    (oa if family == "oa" else cr).extend(extra)
+            fresh_oa_executed = set(fresh_exec.get("openalex_queries", set()))
+            fresh_cr_executed = set(fresh_exec.get("crossref_broad_queries", set()))
+            commit_planned_cursor_if_executed(
+                state, "low_yield_openalex_cursor", fresh_oa_cursor_before, fresh_oa_queries, fresh_oa_next, fresh_oa_executed
+            )
+            commit_planned_cursor_if_executed(
+                state, "low_yield_crossref_cursor", fresh_cr_cursor_before, fresh_cr_queries, fresh_cr_next, fresh_cr_executed
+            )
+            execution_stats.setdefault("openalex_queries", set()).update(fresh_oa_executed)
+            execution_stats.setdefault("crossref_broad_queries", set()).update(fresh_cr_executed)
+            execution_stats["low_yield_fresh_openalex_executed"] = len(fresh_oa_executed)
+            execution_stats["low_yield_fresh_crossref_executed"] = len(fresh_cr_executed)
+            execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(fresh_exec.get("crossref_abstracts_enrichment_attempted", 0))
+            low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+
+    # A second low-yield fallback may look into months 4-6, but only the existing
+    # Highest source-merit band is eligible for admission. This is extra recall, not
+    # a relaxation of aboutness, EU scope, language, document-type or quality gates.
+    extended_fallback_enabled = bool(CONFIG.get("low_yield_extended_fallback_enabled", True))
+    extended_fallback_min_remaining = max(45, int(CONFIG.get("low_yield_extended_fallback_min_seconds_remaining", 150) or 150))
+    if (
+        extended_fallback_enabled
+        and low_yield_rotation["new_ab_after_fresh_rotation"] <= low_yield_threshold
+        and budget_remaining() > extended_fallback_min_remaining
+        and (fresh_bank or extended_highest_sources_all)
+    ):
+        low_yield_rotation["extended_fallback_attempted"] = True
+        ext_query_n = max(1, int(CONFIG.get("low_yield_extended_queries_per_source", 5) or 5))
+        ext_oa_cursor_before = int(state.get("low_yield_extended_openalex_cursor", 0) or 0)
+        ext_cr_cursor_before = int(state.get("low_yield_extended_crossref_cursor", max(0, len(fresh_bank) // 2)) or 0)
+        if not oa_failed:
+            ext_oa_queries, ext_oa_next, _ = rotating_batch(fresh_bank, ext_oa_cursor_before, ext_query_n)
+        else:
+            ext_oa_queries, ext_oa_next = [], ext_oa_cursor_before
+        if not cr_failed:
+            ext_cr_queries, ext_cr_next, _ = rotating_batch(fresh_bank, ext_cr_cursor_before, ext_query_n)
+        else:
+            ext_cr_queries, ext_cr_next = [], ext_cr_cursor_before
+        low_yield_rotation["extended_openalex_queries"] = ext_oa_queries
+        low_yield_rotation["extended_crossref_queries"] = ext_cr_queries
+        ext_exec: dict[str, Any] = {}
+        ext_seconds = min(
+            max(45, int(CONFIG.get("low_yield_extended_fallback_stage_seconds", 150) or 150)),
+            max(45, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+        )
+        ext_deadline = time.monotonic() + ext_seconds
+        raw_ext_oa: list[dict[str, Any]] = []
+        raw_ext_cr: list[dict[str, Any]] = []
+        if ext_oa_queries or ext_cr_queries:
+            log_progress(
+                f"Low-yield Highest-merit fallback: still only {low_yield_rotation['new_ab_after_fresh_rotation']} new A/B item(s); "
+                f"checking scholarly/report evidence from {EXTENDED_DATE_FLOOR.isoformat()} to {DATE_FLOOR.isoformat()}"
+            )
+            with cf.ThreadPoolExecutor(max_workers=2) as ex:
+                futs: list[tuple[str, Any]] = []
+                if ext_oa_queries:
+                    futs.append(("oa", ex.submit(
+                        safe_stage, "OpenAlex low-yield 4-6 month fallback", collect_openalex, EXTENDED_DATE_FLOOR, warnings,
+                        ext_oa_queries, ext_deadline, {q: EXTENDED_DATE_FLOOR for q in ext_oa_queries},
+                        state["result_depth"]["openalex"], {q: "low-yield-extended" for q in ext_oa_queries}, ext_exec
+                    )))
+                if ext_cr_queries:
+                    futs.append(("cr", ex.submit(
+                        safe_stage, "Crossref low-yield 4-6 month fallback", collect_crossref, EXTENDED_DATE_FLOOR, warnings,
+                        ext_cr_queries, [], [], ext_deadline, {q: EXTENDED_DATE_FLOOR for q in ext_cr_queries},
+                        state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
+                        {q: "low-yield-extended" for q in ext_cr_queries}, ext_exec
+                    )))
+                for family, fut in futs:
+                    rows = [x for x in fut.result() if isinstance(x, dict)]
+                    (raw_ext_oa if family == "oa" else raw_ext_cr).extend(rows)
+        ext_oa_executed = set(ext_exec.get("openalex_queries", set()))
+        ext_cr_executed = set(ext_exec.get("crossref_broad_queries", set()))
+        commit_planned_cursor_if_executed(
+            state, "low_yield_extended_openalex_cursor", ext_oa_cursor_before, ext_oa_queries, ext_oa_next, ext_oa_executed
+        )
+        commit_planned_cursor_if_executed(
+            state, "low_yield_extended_crossref_cursor", ext_cr_cursor_before, ext_cr_queries, ext_cr_next, ext_cr_executed
+        )
+        execution_stats.setdefault("openalex_queries", set()).update(ext_oa_executed)
+        execution_stats.setdefault("crossref_broad_queries", set()).update(ext_cr_executed)
+        execution_stats["low_yield_extended_openalex_executed"] = len(ext_oa_executed)
+        execution_stats["low_yield_extended_crossref_executed"] = len(ext_cr_executed)
+        execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(ext_exec.get("crossref_abstracts_enrichment_attempted", 0))
+
+        def keep_extended_highest(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+            kept: list[dict[str, Any]] = []
+            for raw in rows:
+                if not isinstance(raw, dict):
+                    continue
+                d = parse_date(raw.get("date"))
+                if d and EXTENDED_DATE_FLOOR <= d < DATE_FLOOR and highest_source_merit(raw):
+                    raw["extended_retention"] = True
+                    raw["retention_window_months"] = EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS
+                    kept.append(raw)
+            return kept
+
+        ext_oa_kept = keep_extended_highest(raw_ext_oa)
+        ext_cr_kept = keep_extended_highest(raw_ext_cr)
+        oa.extend(ext_oa_kept)
+        cr.extend(ext_cr_kept)
+
+        # Also rotate a few additional Highest-capable official/public report sources.
+        ext_source_n = max(0, int(CONFIG.get("low_yield_extended_sources_per_scan", 4) or 0))
+        ext_source_cursor_before = int(state.get("low_yield_extended_source_cursor", 0) or 0)
+        ext_source_batch, _ext_source_next, _ = rotating_batch(
+            extended_highest_sources_all, ext_source_cursor_before, ext_source_n
+        ) if ext_source_n and extended_highest_sources_all else ([], 0, True)
+        low_yield_rotation["extended_institution_sources"] = [clean_text(x.get("domain")) for x in ext_source_batch]
+        ext_inst_kept: list[dict[str, Any]] = []
+        if ext_source_batch and time.monotonic() < ext_deadline - 20:
+            ext_inst_exec: dict[str, Any] = {}
+            ext_inst_rows = safe_stage(
+                "institutional low-yield 4-6 month fallback", collect_institutions, EXTENDED_DATE_FLOOR, warnings,
+                False, ext_source_batch, ext_deadline, ext_inst_exec, False, EXTENDED_DATE_FLOOR
+            )
+            ext_inst_kept = keep_extended_highest(ext_inst_rows)
+            inst.extend(ext_inst_kept)
+            ext_source_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in extended_highest_sources_all]
+            ext_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in ext_source_batch]
+            ext_source_executed = set(ext_inst_exec.get("institution_sources", set()))
+            state["low_yield_extended_source_cursor"], _, _ = committed_rotation_cursor(
+                ext_source_domains, ext_source_cursor_before, ext_planned_domains, ext_source_executed
+            )
+            execution_stats.setdefault("institution_sources", set()).update(ext_source_executed)
+        newly_kept_extended = dedupe_candidates(ext_oa_kept + ext_cr_kept + ext_inst_kept)
+        low_yield_rotation["extended_highest_admitted"] = len(newly_kept_extended)
+        extended_highest_candidates = dedupe_candidates(extended_highest_candidates + newly_kept_extended)
+        low_yield_rotation["new_ab_after_extended_fallback"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+    else:
+        low_yield_rotation["new_ab_after_extended_fallback"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
     # Spend otherwise-idle scan time on the actual gaps. Earlier versions finished
     # in 5-10 minutes even with a 20-minute scanner budget. This phase repeatedly
@@ -9822,9 +10093,18 @@ def main() -> int:
                 "Fresh-window scanning, recurring Matrix-balance targeting and full-window exploration were active together. "
                 "Full-window exploration rotated through: " + ", ".join(exploration.get("themes", [])) + "."
                 + (
-                    " The first slice admitted nothing, so a second full-window slice was also tried: "
+                    " The early scholarly slice was low-yield, so another full-window slice was tried: "
                     + ", ".join(quiet_rescue.get("themes", [])) + "."
                     if quiet_rescue.get("attempted") else ""
+                )
+                + (
+                    " The completed normal pass still produced three or fewer genuinely new A/B items, so a fresh unexecuted query rotation was forced: "
+                    + ", ".join(low_yield_rotation.get("fresh_themes", [])) + "."
+                    if low_yield_rotation.get("triggered") else ""
+                )
+                + (
+                    f" Yield remained at or below {low_yield_threshold}, so the 4-6 month Highest source-merit fallback was also attempted."
+                    if low_yield_rotation.get("extended_fallback_attempted") else ""
                 )
             ) if exploration.get("themes") else "Fresh-window scanning was active; no full-window exploration query was configured.",
             "historical_exploration": {
@@ -9834,6 +10114,7 @@ def main() -> int:
                 "themes": exploration.get("themes", []),
             },
             "quiet_scan_rescue": quiet_rescue,
+            "low_yield_rotation": low_yield_rotation,
             "matrix_first_deepening": deepening,
         },
         "strand_a": strand_a,
@@ -9875,6 +10156,16 @@ def main() -> int:
             "crossref_exploration_queries_executed": cr_explore_executed + int(execution_stats.get("quiet_rescue_crossref_executed", 0)),
             "quiet_scan_rescue_attempted": bool(quiet_rescue.get("attempted")),
             "quiet_scan_rescue_queries": len(quiet_rescue.get("openalex_queries", [])) + len(quiet_rescue.get("crossref_queries", [])),
+            "low_yield_rotation_triggered": bool(low_yield_rotation.get("triggered")),
+            "low_yield_new_ab_before": int(low_yield_rotation.get("new_ab_before", 0)),
+            "low_yield_new_ab_after_fresh_rotation": int(low_yield_rotation.get("new_ab_after_fresh_rotation", 0)),
+            "low_yield_new_ab_after_extended_fallback": int(low_yield_rotation.get("new_ab_after_extended_fallback", 0)),
+            "low_yield_fresh_openalex_queries_executed": int(execution_stats.get("low_yield_fresh_openalex_executed", 0)),
+            "low_yield_fresh_crossref_queries_executed": int(execution_stats.get("low_yield_fresh_crossref_executed", 0)),
+            "low_yield_extended_fallback_attempted": bool(low_yield_rotation.get("extended_fallback_attempted")),
+            "low_yield_extended_openalex_queries_executed": int(execution_stats.get("low_yield_extended_openalex_executed", 0)),
+            "low_yield_extended_crossref_queries_executed": int(execution_stats.get("low_yield_extended_crossref_executed", 0)),
+            "low_yield_extended_highest_admitted": int(low_yield_rotation.get("extended_highest_admitted", 0)),
             "crossref_priority_tasks_this_run": len(cr_priority_batch),
             "crossref_priority_tasks_executed": cr_priority_executed,
             "crossref_source_journals_this_run": len(cr_source_batch),
