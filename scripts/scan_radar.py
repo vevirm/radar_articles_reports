@@ -1470,6 +1470,50 @@ C_GENERIC_INDEX_TITLES = {
     "publications", "research news", "press releases", "media",
 }
 
+# V17.18.4: discovery containers are not evidence.  High-value institutional hubs such as
+# "All research and innovation news" and "Publications" are excellent places to FIND
+# individual documents, but the hub itself must never become an A/B/C record.  Otherwise
+# the parser can attach the hub title/date to the first child-story snippet on the page.
+INSTITUTION_CONTAINER_TITLES = {
+    "all research and innovation news", "all research & innovation news",
+    "all news", "latest news", "news", "news and events", "research and innovation news",
+    "research & innovation news", "news archive", "press releases", "media",
+    "publications", "all publications", "publications and data", "publications & data",
+    "research publications", "reports and publications", "library", "search results",
+}
+INSTITUTION_CONTAINER_PATHS = {
+    "/news/all-research-and-innovation-news_en",
+    "/news/all-research-and-innovation-news",
+    "/news/news-alerts_en",
+    "/knowledge-publications-tools-and-data/publications_en",
+    "/publications-and-data_en",
+    "/jrc-news-and-updates_en",
+}
+
+def institutional_container_page(title: str, url: str = "", page_type: str = "") -> bool:
+    """Return True for list/index/archive surfaces that should only generate child links.
+
+    This deliberately matches exact hub paths/titles rather than broad URL prefixes, so an
+    individual article *under* /news/all-research-and-innovation-news/... remains eligible.
+    """
+    t = normalized(title).strip(" -:|/\\")
+    if t in INSTITUTION_CONTAINER_TITLES:
+        return True
+    if re.fullmatch(r"(?:all|latest|more)\s+(?:research and innovation\s+)?news", t):
+        return True
+    try:
+        path = urlparse(clean_text(url)).path.rstrip("/") or "/"
+    except Exception:
+        path = ""
+    if path in INSTITUTION_CONTAINER_PATHS:
+        return True
+    # A generic CMS content-type label can confirm an already-generic title, but cannot
+    # turn a specific report/article title into a container by itself.
+    pt = normalized(page_type)
+    if t in {"archive", "index", "listing", "results"} and any(x in pt for x in ["collection", "listing", "search", "index"]):
+        return True
+    return False
+
 def routine_signal_noise(title: str, desc: str = "") -> bool:
     """Reject routine institutional activity before Strand-C anchoring.
 
@@ -2501,6 +2545,8 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
 
 
 def document_exclusion_reason(title: str, text: str = "", url: str = "", page_type: str = "") -> str | None:
+    if institutional_container_page(title, url, page_type):
+        return "hard exclusion: listing/index page"
     low = normalized(f"{title} {page_type} {text[:1200]}")
     url_low = normalized(url)
     for marker in AB_HARD_EXCLUDE:
@@ -5737,6 +5783,11 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if not title:
         _diag_inc("institution_reject_no_title")
         return None
+    if institutional_container_page(title, r.url, page_type):
+        # The source adapter/sitemap crawler may use this page as a discovery hub, but the
+        # hub itself is never evidence and must never borrow a child story's date/snippet.
+        _diag_inc("institution_reject_listing_container")
+        return None
 
     published = None
     authors: list[str] = []
@@ -7310,6 +7361,13 @@ def _sanitize_saved_radar(data: Any) -> tuple[dict[str, Any], dict[str, int]]:
             if not isinstance(item, dict):
                 continue
             saved = dict(item)
+            if institutional_container_page(
+                clean_text(saved.get("title") or saved.get("headline")),
+                clean_text(saved.get("link") or saved.get("url")),
+                clean_text(saved.get("type")),
+            ):
+                _diag_inc("saved_reject_listing_container")
+                continue
             if not record_source_integrity_ok(saved):
                 _diag_inc("saved_reject_source_integrity")
                 continue
@@ -7348,7 +7406,16 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
         merged: dict[str, dict[str, Any]] = {}
         # Recovered first, current second so current copy wins on rediscovery.
         for item in rec.get(strand, []) + cur.get(strand, []):
-            if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
+            if not isinstance(item, dict):
+                continue
+            if institutional_container_page(
+                clean_text(item.get("title") or item.get("headline")),
+                clean_text(item.get("link") or item.get("url")),
+                clean_text(item.get("type")),
+            ):
+                _diag_inc("history_reject_listing_container")
+                continue
+            if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
                 _diag_inc("history_reject_source_integrity")
                 continue
             key = identity(internalize_previous(item))
@@ -7361,7 +7428,16 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
 
     merged_c: dict[str, dict[str, Any]] = {}
     for item in rec.get("strand_c", []) + cur.get("strand_c", []):
-        if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
+        if not isinstance(item, dict):
+            continue
+        if institutional_container_page(
+            clean_text(item.get("headline") or item.get("title")),
+            clean_text(item.get("link") or item.get("url")),
+            clean_text(item.get("type")),
+        ):
+            _diag_inc("history_reject_listing_container")
+            continue
+        if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
             _diag_inc("history_reject_source_integrity")
             continue
         if not _saved_signal_passes(item):

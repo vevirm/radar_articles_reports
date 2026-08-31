@@ -151,6 +151,67 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertTrue(any("eu-research-security-report" in x for x in urls))
         self.assertFalse(any(x.endswith("/about") for x in urls))
 
+    def test_commission_news_hub_is_container_not_evidence(self):
+        hub = "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news_en"
+        self.assertTrue(scan.institutional_container_page("All research and innovation news", hub))
+        self.assertEqual(
+            scan.document_exclusion_reason("All research and innovation news", "", hub, ""),
+            "hard exclusion: listing/index page",
+        )
+
+    def test_child_story_under_commission_news_hub_is_not_container(self):
+        child = (
+            "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/"
+            "new-charter-boosts-access-companies-cutting-edge-research-and-technology-infrastructures-europe-2026-07-28_en"
+        )
+        self.assertFalse(scan.institutional_container_page(
+            "New charter boosts access to cutting-edge research and technology infrastructures in Europe", child
+        ))
+
+    def test_parse_never_admits_or_signals_a_news_listing_page(self):
+        class FakeResponse:
+            status_code = 200
+            url = "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news_en"
+            headers = {"content-type": "text/html"}
+            text = (
+                '<html lang="en"><head>'
+                '<meta property="og:title" content="All research and innovation news">'
+                '<meta name="description" content="Latest research and innovation news">'
+                '</head><body><main>'
+                '<article><time datetime="2026-07-16">16 July 2026</time>'
+                '<a href="/news/all-research-and-innovation-news/a-real-story-2026-07-16_en">A real story</a>'
+                'First European research network on antisemitism and Jewish life officially launched. '
+                '</article></main></body></html>'
+            )
+        old_candidates = scan.INSTITUTION_SIGNAL_CANDIDATES
+        scan.INSTITUTION_SIGNAL_CANDIDATES = []
+        try:
+            with mock.patch.object(scan, "get", return_value=FakeResponse()), \
+                 mock.patch.object(scan, "gate_scope") as gate:
+                item = scan.parse_institution_page(
+                    FakeResponse.url, "European Commission — Research & Innovation", 1,
+                    time.monotonic() + 30, "", __import__('datetime').date(2026, 7, 1),
+                )
+                gate.assert_not_called()
+        finally:
+            candidates = list(scan.INSTITUTION_SIGNAL_CANDIDATES)
+            scan.INSTITUTION_SIGNAL_CANDIDATES = old_candidates
+        self.assertIsNone(item)
+        self.assertEqual(candidates, [])
+
+    def test_saved_news_hub_is_removed_even_when_recovered_from_history(self):
+        bad = {
+            "title": "All research and innovation news",
+            "source": "European Commission — Research & Innovation",
+            "date": "2026-07-16",
+            "link": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news_en",
+            "strand": "A",
+            "summary": "First child story accidentally copied from the listing page.",
+        }
+        clean, removed = scan._sanitize_saved_radar({"strand_a": [bad], "strand_b": [], "strand_c": []})
+        self.assertEqual(clean["strand_a"], [])
+        self.assertEqual(removed["strand_a"], 1)
+
     def test_core_eu_source_adapters_are_configured(self):
         adapters = scan.CONFIG.get("institution_source_adapters", {})
         for domain in (
