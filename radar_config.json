@@ -863,7 +863,7 @@
   ],
   "institution_tier3_min_words": 1200,
   "admission_profile": "v17.13.1-eu-ri-geopolitics-core-with-material-external-shock-exception",
-  "scan_budget_seconds": 1200,
+  "scan_budget_seconds": 1320,
   "network_reserve_seconds": 60,
   "request_timeout_seconds": 12,
   "scholarly_api_timeout_seconds": 12,
@@ -928,7 +928,7 @@
     "China semiconductor breakthrough chip capability",
     "United States semiconductor breakthrough chip capability"
   ],
-  "quality_profile_version": "v17.16.0-curated-or-trusted-publisher-journals",
+  "quality_profile_version": "v17.18.2-content-not-provenance-strategic-bridge",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -992,7 +992,7 @@
   "openalex_queries_per_scan": 52,
   "crossref_broad_queries_per_scan": 52,
   "crossref_priority_tasks_per_scan": 32,
-  "institution_sources_per_scan": 24,
+  "institution_sources_per_scan": 30,
   "news_stage_seconds": 240,
   "openalex_stage_seconds": 360,
   "crossref_stage_seconds": 420,
@@ -1647,9 +1647,9 @@
     "new multi criteria portfolio methodology research innovation futures",
     "developing adaptive pathways method technology innovation policy uncertainty"
   ],
-  "queries_b_method_per_scan": 12,
+  "queries_b_method_per_scan": 16,
   "signal_quality_profile_version": "v17.17.5-formal-evidence-a-before-c",
-  "rotation_profile_version": "v17.17.4-source-family-topic-quality-rotation",
+  "rotation_profile_version": "v17.18.3-rate-limit-reallocation-broader-eu-journal-method-rotation",
   "openalex_exploration_queries_per_scan": 12,
   "crossref_exploration_queries_per_scan": 10,
   "quiet_scan_rescue_enabled": true,
@@ -1659,7 +1659,7 @@
   "crossref_missing_abstract_enrichment_per_scan": 36,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
-  "crossref_source_first_journals_per_scan": 10,
+  "crossref_source_first_journals_per_scan": 12,
   "crossref_source_first_rows": 60,
   "public_429_cooldown_seconds": 8,
   "public_429_max_cooldown_seconds": 30,
@@ -1764,7 +1764,7 @@
     "data.europa.eu",
     "ecb.europa.eu"
   ],
-  "official_eu_priority_sources_per_scan": 10,
+  "official_eu_priority_sources_per_scan": 12,
   "source_attention_floor_broad_share": 0.4,
   "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Core EU sources use bounded source-specific publication hubs when sitemap discovery is weak. Missing scholarly text is rescued by metadata priority before admission. Keep broad rotation and unchanged substantive admission gates.",
   "frontier_gap_balance_rich_cell_ratio": 0.75,
@@ -1797,7 +1797,7 @@
   "presentation_profile_version": "v17.13.28-source-specific-radar-and-source-bullets",
   "weak_signal_retention_months": 6,
   "foresight_author_followup_enabled": true,
-  "foresight_author_followup_per_scan": 4,
+  "foresight_author_followup_per_scan": 6,
   "foresight_author_followup_stage_seconds": 90,
   "foresight_author_followup_min_b_items": 1,
   "foresight_author_followup_rule": "Authors already evidenced by admitted Strand-B foresight/method publications receive a bounded rotating exact-author check in OpenAlex/Crossref. Their later works must pass the ordinary A/B gates; no institution or domain receives a permanent lane.",
@@ -2087,7 +2087,7 @@
   "low_yield_full_rescue_run_enabled": true,
   "low_yield_full_rescue_run_trigger_max_new_ab": 19,
   "low_yield_full_rescue_run_max_chain": 1,
-  "institution_source_adapter_sources_per_scan": 8,
+  "institution_source_adapter_sources_per_scan": 10,
   "target_new_ab_per_scan": 20,
   "accept_trusted_publisher_peer_reviewed_journals": true,
   "trusted_broad_journal_publishers": [
@@ -2110,5 +2110,12 @@
   "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Each family keeps independent persisted cursors; no output quota is imposed.",
   "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
   "reader_quality_ranking_rule": "After substantive admission/Matrix placement, reader surfaces rank findings with source merit from source_merit.js (authority + EU relevance + evidence strength + author transparency) as a material part of ordering, never as an admission shortcut.",
-  "formal_evidence_news_promotion_per_scan": 6
+  "formal_evidence_news_promotion_per_scan": 6,
+  "source_failure_reallocation_enabled": true,
+  "source_failure_reallocation_stage_seconds": 240,
+  "source_failure_reallocation_min_seconds_remaining": 210,
+  "source_failure_reallocation_institution_sources": 10,
+  "source_failure_reallocation_crossref_journals": 8,
+  "source_failure_reallocation_crossref_queries": 8,
+  "source_failure_reallocation_policy": "If OpenAlex or Crossref becomes unavailable/rate-limited during a scan, stop retrying that source family for the rest of the run and immediately spend a bounded replacement slice on unused official/institutional publication sources plus trusted-journal/Crossref discovery. Admission rules do not change."
 }

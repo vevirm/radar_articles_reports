@@ -1,16 +1,13 @@
-UPLOAD-ONLY INSTRUCTIONS — v17.18.1
+UPLOAD THE WHOLE REPOSITORY
 
-1. Unzip this ZIP once.
-2. Open your existing GitHub repository.
-3. Choose Add file -> Upload files.
-4. Drag EVERYTHING INSIDE the unzipped repository folder onto the GitHub upload page.
-5. Before Commit changes, use the upload list to make sure these TWO files are present:
-      .github/workflows/radar-scan.yml
-      .github/workflows/historical-scan.yml
-   They are important because GitHub only schedules workflows from the .github/workflows folder.
-6. Leave the commit message as Add files via upload if you like.
+1. Download the ZIP supplied by ChatGPT.
+2. Unzip it once on your computer.
+3. Open your existing GitHub repository.
+4. Choose Add file -> Upload files.
+5. Drag EVERYTHING INSIDE the unzipped folder onto the GitHub upload page.
+6. Make sure .github/workflows/radar-scan.yml and .github/workflows/historical-scan.yml appear in the upload list.
 7. Click Commit changes.
 
-You do not need to delete or edit anything.
+Do not delete files manually. Do not edit individual files.
 
-If the two .github/workflows files are not shown in the upload list, drag the .github folder from the unzipped repository onto the same GitHub upload page as well. This is still upload-only; no editing is required.
+After upload, let the automatically triggered scan finish. This bundle carries a one-run recovery marker so that the scanner merges the larger pre-upload live radar corpus from Git history before applying the new quality cleanup; the upload therefore does not intentionally reset accumulated evidence or rotation cursors.

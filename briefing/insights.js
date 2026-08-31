@@ -848,6 +848,11 @@
     return '';
   }
 
+  function sourceNavigationBoilerplate(v){
+    const n=norm(v);
+    return /access to joint research cent(?:re|er)(?: s)? publications|joint research cent(?:re|er) publications repository|browse jrc publications|search jrc publications/.test(n);
+  }
+
   function whyFor(x){
     // Why-it-matters text is derived from the individual record, not from a reusable topic label.
     // Prefer a source sentence or a faithful compressed clause that is distinct from the visible claim.
@@ -992,7 +997,7 @@
 
     function finish(raw){
       let q=demeta(raw);
-      if(!q||SOURCE_SCAFFOLD.test(q)||GENERIC_WHY.test(q)||BAD_START.test(q)||META.test(q)||isDocumentDebris(q)) return '';
+      if(!q||sourceNavigationBoilerplate(q)||SOURCE_SCAFFOLD.test(q)||GENERIC_WHY.test(q)||BAD_START.test(q)||META.test(q)||isDocumentDebris(q)) return '';
       if(/^(?:create|creates|creating|leave|leaves|leaving|allow|allows|allowing|highlight|highlights|highlighting|place|places|placing|show|shows|showing|find|finds|finding|argue|argues|arguing|make|makes|making|give|gives|giving|provide|provides|providing|link|links|linking)\b/i.test(q)) return '';
       q=q.replace(/\s+([,.!?;:])/g,'$1').replace(/[;:,]+$/,'').trim();
       if(!q||q.length<28||q.length>119||/…|\.\.\./.test(q)||/\?$/.test(q)||!POINT_PREDICATE.test(q)) return '';

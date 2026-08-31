@@ -324,18 +324,23 @@ def stage_deadline_reached(stage_deadline: float | None, reserve_seconds: int = 
 
 
 def source_stage_failed(warnings: list[str], label: str) -> bool:
-    """True only when a source stage actually reported a failure.
+    """True when a source family is unavailable for the remainder of this run.
 
-    This is deliberately warning-based. The check is made after later stages have
-    run, when earlier stage deadlines are naturally already in the past.
+    A normal per-stage time slice ending is *not* a source failure.  But an endpoint
+    that explicitly rate-limits/stops (notably OpenAlex HTTP 429) must be treated as
+    unavailable immediately.  Earlier builds kept trying the stopped endpoint in
+    author, snowball, gap and low-yield lanes, wasting recall time that should have
+    been reallocated to EU/publication and trusted-journal sources.
     """
     nlabel = normalized(label)
     relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
-    # A normal per-stage time slice ending is not a source failure. It means the
-    # remaining planned work must stay pending for a later scan; treating it as a
-    # failure incorrectly poisons cycle/backfill state and disables rescue logic.
     return any(
-        ("fatal stage error" in w) or ("public endpoint unavailable" in w)
+        ("fatal stage error" in w)
+        or ("public endpoint unavailable" in w)
+        or ("source stopped for this run" in w)
+        or ("endpoint stopped for this run" in w)
+        or ("http 429" in w)
+        or ("rate limit" in w)
         for w in relevant
     )
 
@@ -1285,9 +1290,18 @@ A_IMPLIED_STRATEGIC_FAMILIES = {
         "research talent", "scientific talent", "talent competition", "talent attraction",
         "talent retention", "researcher mobility", "scientist mobility", "research careers",
     ],
+    "location_capture": [
+        "startup relocation", "start-up relocation", "relocation abroad", "relocate abroad",
+        "move abroad", "moves abroad", "moving abroad", "headquarters abroad",
+        "retain high-value activities", "retain high value activities", "r&d in europe",
+        "research and development in europe", "ip in europe", "intellectual property in europe",
+    ],
 }
 A_IMPLIED_RELATIONAL_FAMILIES = {
-    "dependence_control", "international_coordination", "security_resilience", "rules_power", "talent_position"
+    "dependence_control", "international_coordination", "security_resilience", "rules_power", "talent_position", "location_capture"
+}
+A_IMPLIED_HARD_STRATEGIC_FAMILIES = {
+    "dependence_control", "security_resilience", "rules_power", "talent_position", "location_capture"
 }
 
 def implied_strategic_context(text: str) -> tuple[bool, list[str], list[str]]:
@@ -1303,7 +1317,13 @@ def implied_strategic_context(text: str) -> tuple[bool, list[str], list[str]]:
         if hits:
             families.append(family)
             evidence.extend(hits[:2])
-    passes = len(set(families)) >= 2 and bool(set(families) & A_IMPLIED_RELATIONAL_FAMILIES)
+    fam = set(families)
+    # V17.18.2 precision repair: generic international/scientific cooperation plus a
+    # generic capacity word is not geopolitics.  A triangulated route needs at least one
+    # hard strategic mechanism (dependence/control, security, rule-setting, talent/location
+    # capture).  The softer international-coordination + capability pairing is handled
+    # separately by a same-sentence Europe/R&I/external-position bridge in _a_focus_ok.
+    passes = len(fam) >= 2 and bool(fam & A_IMPLIED_HARD_STRATEGIC_FAMILIES)
     return passes, list(dict.fromkeys(families)), list(dict.fromkeys(evidence))[:8]
 CHINA_CONTEXT = ["china", "chinese"]
 CHINA_GEO_CONTEXT = [
@@ -2629,6 +2649,23 @@ def geopolitical_matches(text: str) -> list[str]:
 
 
 
+SOURCE_NAVIGATION_BOILERPLATE = [
+    "access to joint research centre's publications",
+    "access to joint research center's publications",
+    "access to joint research centre publications",
+    "access to joint research center publications",
+    "access jrc publications",
+    "joint research centre publications repository",
+    "joint research center publications repository",
+    "browse jrc publications",
+    "search jrc publications",
+]
+
+def source_navigation_boilerplate(text: str) -> bool:
+    low = normalized(text)
+    return bool(low and any(normalized(x) in low for x in SOURCE_NAVIGATION_BOILERPLATE))
+
+
 def _strip_relevance_boilerplate(text: str) -> str:
     """Remove common funding/boilerplate sentences before topical admission.
 
@@ -2638,6 +2675,8 @@ def _strip_relevance_boilerplate(text: str) -> str:
     kept = []
     for sent in split_sentences(text):
         low = normalized(sent)
+        if source_navigation_boilerplate(sent):
+            continue
         if any(x in low for x in [
             'funded by the european union', 'received funding from the european union',
             'horizon europe research and innovation programme under grant',
@@ -2993,6 +3032,30 @@ def external_eu_bridge_sentence(text: str, anchors: list[dict[str, Any]] | None 
     """
     return False, "", []
 
+def _soft_contextual_bridge(text: str) -> tuple[bool, str, list[str]]:
+    """Allow international-coordination + capability only when the source itself ties them.
+
+    This preserves real findings such as European startup/R&D relocation or international
+    R&I competition, while rejecting generic scientific-cooperation/service pages.
+    """
+    cleaned = _strip_relevance_boilerplate(text)
+    for sent in split_sentences(cleaned):
+        if not _ri_hits(sent):
+            continue
+        external = distinct_matches(sent, A_EXTERNAL_RELATION)
+        outcomes = distinct_matches(sent, A_STRATEGIC_RI_OUTCOME)
+        relocation = distinct_matches(sent, A_IMPLIED_STRATEGIC_FAMILIES.get("location_capture", []))
+        eu_here = bool(
+            distinct_matches(sent, EU_DIRECT + EU_GENERIC)
+            or bounded_matches(sent, MEMBER_STATE_SCOPE)
+            or union_eu_word(sent, cleaned)
+        )
+        if eu_here and external and (outcomes or relocation):
+            evidence = list(dict.fromkeys(external + outcomes + relocation))[:8]
+            return True, sent[:420], evidence
+    return False, "", []
+
+
 def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple[bool, list[str], list[str], str, str, list[str]]:
     title = clean_text(title)
     abstract = _strip_relevance_boilerplate(abstract)
@@ -3025,10 +3088,13 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     external = distinct_matches(context_text, A_EXTERNAL_RELATION)
     outcomes = distinct_matches(context_text, A_STRATEGIC_RI_OUTCOME)
     implied_ok, implied_families, implied_terms = implied_strategic_context(context_text)
+    soft_ok, soft_bridge, soft_terms = _soft_contextual_bridge(context_text)
     if source_kind == 'scholarly':
-        contextual_focus = bool(ri_ta and (implied_ok or (external and outcomes)))
+        contextual_focus = bool(ri_ta and (implied_ok or soft_ok))
     else:
-        contextual_focus = bool(ri and (implied_ok or (external and outcomes)))
+        contextual_focus = bool(ri and (implied_ok or soft_ok))
+    if contextual_focus and not bridge and soft_bridge:
+        bridge = soft_bridge
     # The contextual route is an expansion route, so page-type noise is fail-closed here.
     # This does not affect explicit A evidence or Strand B method papers whose abstracts may
     # legitimately mention workshops, calls, facilities or other methodological context.
@@ -3050,7 +3116,7 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
             explicit_focus = False
             contextual_focus = False
     route = 'explicit-geopolitics' if explicit_focus else ('triangulated-strategic-context' if contextual_focus else '')
-    context_evidence = list(dict.fromkeys(implied_families + implied_terms + external + outcomes))[:8] if contextual_focus else []
+    context_evidence = list(dict.fromkeys(implied_families + implied_terms + soft_terms))[:8] if contextual_focus else []
     return focus, ri, geo, bridge, route, context_evidence
 
 
@@ -6651,6 +6717,8 @@ def plain_language_claim(summary: str, title: str, existing: str = "") -> str:
     t = clean_text(title)
     raw = clean_text(summary)
     prior = clean_text(existing)
+    if source_navigation_boilerplate(prior):
+        prior = ""
     context = normalized(f"{t} {raw} {prior}")
 
     # Recurring dense constructions that need a semantic, not merely cosmetic, rewrite.
@@ -6779,7 +6847,7 @@ def concise_core_message(summary: str, title: str) -> str:
     candidates = []
     for i, sent in enumerate(split_sentences(raw)[:24]):
         q = clean_text(sent)
-        if not q:
+        if not q or source_navigation_boilerplate(q):
             continue
         if t and (norm_title(q) == norm_title(t) or normalized(q).startswith(normalized(t)[:120])):
             continue
@@ -6882,7 +6950,8 @@ def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     eu = (evidence.get("eu_relevance") or "unknown").capitalize()
     if strand == "A":
         ri = ", ".join(evidence.get("ri_evidence", [])[:2]) or "substantive R&I evidence"
-        geo = ", ".join(evidence.get("geo_evidence", [])[:2]) or "substantive strategic evidence"
+        geo_terms = evidence.get("geo_evidence", []) or evidence.get("a_context_evidence", [])
+        geo = ", ".join(geo_terms[:3]) or "strategic mechanism not stored"
         bridge = evidence.get("bridge_mode") or "supported"
         eu_scope = ", ".join(evidence.get("eu_evidence", [])[:2]) or "scope established"
         if evidence.get('eu_relevance') == 'material_external':
@@ -6899,9 +6968,10 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
                item_type: str, strand: str, evidence: dict[str, Any], source_rank: float,
                tier_label: str, text: str, doi: str, preprint: bool,
                frontier_targets: Iterable[str] | None = None) -> dict[str, Any]:
-    themes = themes_for(text)
-    summary = make_summary(text, evidence, strand, title, frontier_targets)
-    extracted_claim = concise_core_message(text, title)
+    display_text = _strip_relevance_boilerplate(text)
+    themes = themes_for(display_text)
+    summary = make_summary(display_text, evidence, strand, title, frontier_targets)
+    extracted_claim = concise_core_message(display_text, title)
     return {
         "title": title,
         "authors": authors,
@@ -6912,7 +6982,7 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "strand": strand,
         "eu_relevance": evidence.get("eu_relevance"),
         "summary": summary,
-        "core_message": plain_language_claim(text or summary, title, extracted_claim),
+        "core_message": plain_language_claim(display_text or summary, title, extracted_claim),
         "relevance_note": relevance_note(evidence, strand),
         "source_tier": tier_label,
         "a_route": evidence.get("a_route", ""),
@@ -6922,6 +6992,7 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "eu_evidence": evidence.get("eu_evidence", []),
         "ri_evidence": evidence.get("ri_evidence", []),
         "geo_evidence": evidence.get("geo_evidence", []),
+        "a_context_evidence": evidence.get("a_context_evidence", []),
         "text_mode": evidence.get("text_mode", ""),
         "_source_rank": source_rank,
         "_themes": themes,
@@ -6936,6 +7007,7 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "_gate_evidence": {
             "ri": evidence.get("ri_evidence", []),
             "geopolitics": evidence.get("geo_evidence", []),
+            "strategic_context": evidence.get("a_context_evidence", []),
             "bridge": evidence.get("bridge_sentence", ""),
             "foresight": evidence.get("foresight_evidence", []),
             "method": evidence.get("method_evidence", []),
@@ -7501,11 +7573,37 @@ def surgical_precision_cleanup(previous: dict[str, Any]) -> tuple[dict[str, Any]
                 hard_noise = True
             elif any(x in text for x in unmistakable_noise):
                 hard_noise = True
+            if not hard_noise and strand_key == "strand_a":
+                # V17.18.2: re-check the exact regression class that let institutional
+                # provenance + generic scientific cooperation masquerade as geopolitics.
+                # We intentionally do not re-audit the whole corpus from short summaries.
+                needs_context_recheck = (
+                    normalized(item.get("a_route", "")) == "triangulated-strategic-context"
+                    and not item.get("geo_evidence")
+                    and not clean_text(item.get("bridge_sentence", ""))
+                    and (
+                        source_navigation_boilerplate(item.get("summary", ""))
+                        or source_navigation_boilerplate(item.get("core_message", ""))
+                    )
+                )
+                if needs_context_recheck:
+                    passed, refreshed_ev = _saved_item_passes(item, "a_pass")
+                    if not passed:
+                        hard_noise = True
+                    else:
+                        item = dict(item)
+                        item["relevance_note"] = relevance_note(refreshed_ev, "A")
+                        item["a_context_evidence"] = refreshed_ev.get("a_context_evidence", [])
+                        item["bridge_sentence"] = refreshed_ev.get("bridge_sentence", "")
             if hard_noise:
                 stats[strand_key + "_removed"] += 1
             else:
                 saved = dict(item)
                 saved["new_this_scan"] = False
+                if source_navigation_boilerplate(saved.get("core_message", "")):
+                    cleaned_summary = _strip_relevance_boilerplate(saved.get("summary", ""))
+                    extracted = concise_core_message(cleaned_summary, title)
+                    saved["core_message"] = plain_language_claim(cleaned_summary, title, extracted)
                 kept.append(saved)
                 stats["stored_pass"] += 1
         out[strand_key] = kept
@@ -10264,6 +10362,152 @@ def main() -> int:
     # even when later recall/deepening stages consume the remaining budget.
     inst = dedupe_candidates([x for x in (manual_recovered + rule_fix_recovered + inst_base) if isinstance(x, dict)])
 
+    # V17.18.3: source-failure reallocation. A source family that has explicitly
+    # stopped/rate-limited must not be retried by later recall lanes. Spend a bounded
+    # replacement slice on still-unused official/institutional sources plus the other
+    # scholarly family instead. This changes search allocation only; every candidate
+    # still goes through the identical A/B admission gate.
+    source_failure_reallocation = {
+        "attempted": False,
+        "failed_source_families": [
+            name for name, failed in (("OpenAlex", oa_failed), ("Crossref", cr_failed)) if failed
+        ],
+        "institution_sources_planned": 0,
+        "institution_sources_executed": 0,
+        "crossref_journals_planned": 0,
+        "crossref_journals_executed": 0,
+        "crossref_queries_planned": 0,
+        "crossref_queries_executed": 0,
+        "openalex_queries_planned": 0,
+        "openalex_queries_executed": 0,
+        "admitted_candidates": 0,
+    }
+    realloc_enabled = bool(CONFIG.get("source_failure_reallocation_enabled", True))
+    realloc_min_remaining = max(90, int(CONFIG.get("source_failure_reallocation_min_seconds_remaining", 210) or 210))
+    if realloc_enabled and (oa_failed or cr_failed) and budget_remaining() > realloc_min_remaining:
+        source_failure_reallocation["attempted"] = True
+        realloc_seconds = min(
+            max(60, int(CONFIG.get("source_failure_reallocation_stage_seconds", 240) or 240)),
+            max(60, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
+        )
+        realloc_deadline = time.monotonic() + realloc_seconds
+
+        executed_inst_before = set(execution_stats.get("institution_sources", set()))
+        inst_n = max(0, int(CONFIG.get("source_failure_reallocation_institution_sources", 10) or 0))
+        inst_cursor_before = int(state.get("source_failure_institution_cursor", 0) or 0)
+        # Oversample the rotating source list, then keep sources not already executed
+        # in the protected first institutional slice. Official EU sources remain first
+        # in the source bank, but the dedicated cursor preserves broad rotation.
+        realloc_source_bank = list(official_sources) + [x for x in general_sources if x not in official_sources]
+        sampled_sources, _realloc_inst_next, _ = rotating_batch(
+            realloc_source_bank, inst_cursor_before, min(len(realloc_source_bank), max(inst_n * 3, inst_n))
+        ) if realloc_source_bank and inst_n else ([], inst_cursor_before, True)
+        realloc_inst_sources = []
+        seen_realloc_domains: set[str] = set()
+        for src in sampled_sources:
+            domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+            if not domain or domain in executed_inst_before or domain in seen_realloc_domains:
+                continue
+            seen_realloc_domains.add(domain)
+            realloc_inst_sources.append(src)
+            if len(realloc_inst_sources) >= inst_n:
+                break
+        source_failure_reallocation["institution_sources_planned"] = len(realloc_inst_sources)
+
+        realloc_query_bank = diversified_query_bank(all_queries + b_method_bank + finding_context_bank)
+        realloc_query_n = max(0, int(CONFIG.get("source_failure_reallocation_crossref_queries", 8) or 0))
+        realloc_query_cursor_before = int(state.get("source_failure_query_cursor", 0) or 0)
+        realloc_queries, realloc_query_next, _ = rotating_batch(
+            realloc_query_bank, realloc_query_cursor_before, realloc_query_n
+        ) if realloc_query_bank and realloc_query_n else ([], realloc_query_cursor_before, True)
+
+        realloc_journal_n = max(0, int(CONFIG.get("source_failure_reallocation_crossref_journals", 8) or 0))
+        realloc_journal_cursor_before = int(state.get("source_failure_crossref_journal_cursor", 0) or 0)
+        realloc_journals, realloc_journal_next, _ = rotating_batch(
+            source_journals_all, realloc_journal_cursor_before, realloc_journal_n
+        ) if source_journals_all and realloc_journal_n else ([], realloc_journal_cursor_before, True)
+
+        realloc_exec: dict[str, Any] = {}
+        extra_inst: list[dict[str, Any]] = []
+        extra_cr: list[dict[str, Any]] = []
+        extra_oa: list[dict[str, Any]] = []
+        with cf.ThreadPoolExecutor(max_workers=2) as ex:
+            futs: list[tuple[str, Any]] = []
+            if realloc_inst_sources:
+                futs.append(("inst", ex.submit(
+                    safe_stage, "source-failure institutional reallocation", collect_institutions, DATE_FLOOR, warnings,
+                    False, realloc_inst_sources, realloc_deadline, realloc_exec, False, DATE_FLOOR
+                )))
+            if oa_failed and not cr_failed and (realloc_queries or realloc_journals):
+                source_failure_reallocation["crossref_queries_planned"] = len(realloc_queries)
+                source_failure_reallocation["crossref_journals_planned"] = len(realloc_journals)
+                futs.append(("cr", ex.submit(
+                    safe_stage, "source-failure trusted-journal reallocation", collect_crossref, DATE_FLOOR, warnings,
+                    realloc_queries, [], realloc_journals, realloc_deadline,
+                    {q: DATE_FLOOR for q in realloc_queries},
+                    state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
+                    {q: "source-failure-reallocation" for q in realloc_queries}, realloc_exec
+                )))
+            elif cr_failed and not oa_failed and realloc_queries:
+                source_failure_reallocation["openalex_queries_planned"] = len(realloc_queries)
+                futs.append(("oa", ex.submit(
+                    safe_stage, "source-failure OpenAlex reallocation", collect_openalex, DATE_FLOOR, warnings,
+                    realloc_queries, realloc_deadline, {q: DATE_FLOOR for q in realloc_queries},
+                    state["result_depth"]["openalex"],
+                    {q: "source-failure-reallocation" for q in realloc_queries}, realloc_exec
+                )))
+            for family, fut in futs:
+                rows = [x for x in fut.result() if isinstance(x, dict)]
+                if family == "inst":
+                    extra_inst.extend(rows)
+                elif family == "cr":
+                    extra_cr.extend(rows)
+                else:
+                    extra_oa.extend(rows)
+
+        inst.extend(extra_inst)
+        cr.extend(extra_cr)
+        oa.extend(extra_oa)
+        inst = dedupe_candidates(inst)
+        cr = dedupe_candidates(cr)
+        oa = dedupe_candidates(oa)
+        source_failure_reallocation["admitted_candidates"] = len(dedupe_candidates(extra_inst + extra_cr + extra_oa))
+
+        realloc_inst_executed = set(realloc_exec.get("institution_sources", set()))
+        realloc_cr_queries_executed = set(realloc_exec.get("crossref_broad_queries", set()))
+        realloc_cr_journals_executed = set(realloc_exec.get("crossref_source_journals", set()))
+        realloc_oa_queries_executed = set(realloc_exec.get("openalex_queries", set()))
+        source_failure_reallocation["institution_sources_executed"] = len(realloc_inst_executed)
+        source_failure_reallocation["crossref_queries_executed"] = len(realloc_cr_queries_executed)
+        source_failure_reallocation["crossref_journals_executed"] = len(realloc_cr_journals_executed)
+        source_failure_reallocation["openalex_queries_executed"] = len(realloc_oa_queries_executed)
+
+        realloc_inst_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in realloc_source_bank]
+        planned_realloc_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in realloc_inst_sources]
+        state["source_failure_institution_cursor"], _, _ = committed_rotation_cursor(
+            realloc_inst_domains, inst_cursor_before, planned_realloc_domains, realloc_inst_executed
+        ) if realloc_inst_domains else (inst_cursor_before, False, 0)
+        state["source_failure_query_cursor"], _, _ = committed_rotation_cursor(
+            realloc_query_bank, realloc_query_cursor_before, realloc_queries, realloc_cr_queries_executed | realloc_oa_queries_executed
+        ) if realloc_query_bank else (realloc_query_cursor_before, False, 0)
+        state["source_failure_crossref_journal_cursor"], _, _ = committed_rotation_cursor(
+            source_journals_all, realloc_journal_cursor_before, realloc_journals, realloc_cr_journals_executed
+        ) if source_journals_all else (realloc_journal_cursor_before, False, 0)
+        execution_stats.setdefault("institution_sources", set()).update(realloc_inst_executed)
+        execution_stats.setdefault("crossref_broad_queries", set()).update(realloc_cr_queries_executed)
+        execution_stats.setdefault("crossref_source_journals", set()).update(realloc_cr_journals_executed)
+        execution_stats.setdefault("openalex_queries", set()).update(realloc_oa_queries_executed)
+        execution_stats["source_failure_reallocation"] = dict(source_failure_reallocation)
+        log_progress(
+            "Source-failure reallocation: "
+            + ", ".join(source_failure_reallocation["failed_source_families"])
+            + f" unavailable; replacement slice admitted {source_failure_reallocation['admitted_candidates']} candidate(s) "
+            + f"from {source_failure_reallocation['institution_sources_executed']} institutional source(s), "
+            + f"{source_failure_reallocation['crossref_journals_executed']} trusted journal(s), "
+            + f"{source_failure_reallocation['crossref_queries_executed']} Crossref / "
+            + f"{source_failure_reallocation['openalex_queries_executed']} OpenAlex query/queries."
+        )
+
     # V17.13.23: bounded 4-6 month recovery only for sources capable of reaching the
     # existing Highest source-merit band. The normal four-month institutional stage runs
     # first, so freshness remains preferred. Older candidates are admitted only if their
@@ -11210,6 +11454,7 @@ def main() -> int:
             },
             "quiet_scan_rescue": quiet_rescue,
             "low_yield_rotation": low_yield_rotation,
+            "source_failure_reallocation": source_failure_reallocation,
             "rejection_funnel": rejection_funnel,
             "full_rescue_run_recommended": bool(low_yield_rotation.get("full_rescue_run_recommended")),
             "matrix_first_deepening": deepening,
@@ -11263,6 +11508,12 @@ def main() -> int:
             "low_yield_extended_openalex_queries_executed": int(execution_stats.get("low_yield_extended_openalex_executed", 0)),
             "low_yield_extended_crossref_queries_executed": int(execution_stats.get("low_yield_extended_crossref_executed", 0)),
             "low_yield_extended_highest_admitted": int(low_yield_rotation.get("extended_highest_admitted", 0)),
+            "source_failure_reallocation_attempted": bool(source_failure_reallocation.get("attempted")),
+            "source_failure_reallocation_admitted": int(source_failure_reallocation.get("admitted_candidates", 0)),
+            "source_failure_reallocation_institution_sources": int(source_failure_reallocation.get("institution_sources_executed", 0)),
+            "source_failure_reallocation_crossref_journals": int(source_failure_reallocation.get("crossref_journals_executed", 0)),
+            "source_failure_reallocation_crossref_queries": int(source_failure_reallocation.get("crossref_queries_executed", 0)),
+            "source_failure_reallocation_openalex_queries": int(source_failure_reallocation.get("openalex_queries_executed", 0)),
             "crossref_priority_tasks_this_run": len(cr_priority_batch),
             "crossref_priority_tasks_executed": cr_priority_executed,
             "crossref_source_journals_this_run": len(cr_source_batch),

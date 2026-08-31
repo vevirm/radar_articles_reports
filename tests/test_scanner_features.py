@@ -35,6 +35,23 @@ class SchedulerBreadthTests(unittest.TestCase):
 
 
 
+class SourceFailureReallocationTests(unittest.TestCase):
+    def test_openalex_429_marks_source_unavailable_for_later_lanes(self):
+        warnings = [
+            "OpenAlex HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run; continuing with Crossref and direct publisher/institution scanning"
+        ]
+        self.assertTrue(scan.source_stage_failed(warnings, "openalex"))
+
+    def test_stage_budget_warning_alone_does_not_mark_source_failed(self):
+        self.assertFalse(scan.source_stage_failed(["OpenAlex scan budget reached; 11 queued query/queries skipped"], "openalex"))
+
+    def test_reallocation_config_preserves_strict_gate_but_adds_replacement_search(self):
+        self.assertTrue(scan.CONFIG.get("source_failure_reallocation_enabled"))
+        self.assertGreaterEqual(scan.CONFIG.get("source_failure_reallocation_institution_sources", 0), 8)
+        self.assertGreaterEqual(scan.CONFIG.get("source_failure_reallocation_crossref_journals", 0), 6)
+        self.assertGreaterEqual(scan.CONFIG.get("queries_b_method_per_scan", 0), 12)
+
+
 class LowYieldRotationTests(unittest.TestCase):
     def test_fresh_rotation_skips_queries_already_executed_and_wraps(self):
         bank = ["q0", "q1", "q2", "q3", "q4", "q5"]
@@ -315,6 +332,67 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(stats["formal_evidence_not_c"], 1)
         self.assertEqual(scan.anchor_news([item], []), [])
 
+    def test_jrc_biodiversity_service_does_not_pass_a_from_provenance_and_cooperation(self):
+        title = "JRC Global Biodiversity Data Services (GBDS): Data Distribution Architecture, REST API and Query Builder"
+        desc = "Access to Joint Research Centre's publications."
+        body = (
+            "By improving accessibility, interoperability and transparency, the GBDS strengthen collective capacity "
+            "for biodiversity monitoring and reporting and support regional and global partners, including Technical "
+            "and Scientific Cooperation support Centres, in implementing biodiversity targets. "
+            "Access to Joint Research Centre's publications."
+        )
+        ev = scan.gate_scope(title, desc, body, 1, source_kind="institutional")
+        self.assertEqual(ev["eu_relevance"], "direct")
+        self.assertFalse(ev["a_pass"])
+
+    def test_quantum_standard_setting_with_global_european_position_still_passes_a(self):
+        title = "Standards for Quantum Technologies"
+        body = (
+            "This call supports research and development of European and international standards for quantum technologies. "
+            "It will strengthen Europe's leadership in the global quantum standardisation landscape and ensure that "
+            "European industrial and research priorities are represented in emerging standards."
+        )
+        ev = scan.gate_scope(title, body, "", 1, source_kind="institutional")
+        self.assertTrue(ev["a_pass"])
+
+    def test_jrc_navigation_text_is_removed_from_display_claims(self):
+        raw = (
+            "Relocation of European startups raises concerns about weakening the EU innovation ecosystem. "
+            "Firms expand to foreign markets while retaining high-value R&D in Europe. "
+            "Access to Joint Research Centre's publications."
+        )
+        cleaned = scan._strip_relevance_boilerplate(raw)
+        self.assertNotIn("Access to Joint Research Centre", cleaned)
+        claim = scan.concise_core_message(cleaned, "Is Europe losing its startups?")
+        self.assertNotIn("Joint Research Centre", claim)
+
+    def test_precision_cleanup_removes_saved_biodiversity_false_positive_but_keeps_startup_relocation(self):
+        bad = {
+            "title": "JRC Global Biodiversity Data Services (GBDS): Data Distribution Architecture, REST API and Query Builder",
+            "source": "JRC Publications Repository", "date": "2026-08-31",
+            "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147250",
+            "type": "official policy / institutional framework", "strand": "A",
+            "eu_relevance": "direct", "a_route": "triangulated-strategic-context",
+            "bridge_sentence": "", "geo_evidence": [], "ri_evidence": ["scientific cooperation"],
+            "summary": "By improving accessibility and interoperability, GBDS supports regional and global partners in biodiversity monitoring. Access to Joint Research Centre's publications.",
+            "source_tier": "Tier 1",
+        }
+        good = {
+            "title": "Is Europe losing its startups?", "source": "JRC Publications Repository",
+            "date": "2026-08-31", "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146239",
+            "type": "research/policy paper", "strand": "A", "eu_relevance": "direct",
+            "a_route": "triangulated-strategic-context", "bridge_sentence": "", "geo_evidence": [],
+            "ri_evidence": ["innovation ecosystem", "r&d"], "source_tier": "Tier 1",
+            "summary": "Relocation of European startups raises concerns about weakening the EU innovation ecosystem. Firms expand to foreign markets while retaining high-value R&D in Europe. Access to Joint Research Centre's publications.",
+            "core_message": "Access to Joint Research Centre's publications.",
+        }
+        cleaned, stats = scan.surgical_precision_cleanup({"strand_a": [bad, good], "strand_b": []})
+        titles = {x["title"] for x in cleaned["strand_a"]}
+        self.assertNotIn(bad["title"], titles)
+        self.assertIn(good["title"], titles)
+        kept = next(x for x in cleaned["strand_a"] if x["title"] == good["title"])
+        self.assertNotIn("Joint Research Centre", kept.get("core_message", ""))
+
     def test_signal_quality_version_triggers_new_c_cleanup(self):
         self.assertIn("v17.17.5", scan.SIGNAL_QUALITY_PROFILE_VERSION)
         self.assertTrue(scan.needs_precision_signal_cleanup({
@@ -552,6 +630,16 @@ class RotationAndReaderQualityTests(unittest.TestCase):
     def test_priorities_quality_is_material_not_tiny_tiebreak(self):
         import subprocess
         js = "const P=require('./priorities/priorities.js'); const hi={overall:10,sourceMerit:{score:100},confidence:70,materiality:3}; const lo={overall:10,sourceMerit:{score:65},confidence:70,materiality:3}; if(P.structuralScore(hi)-P.structuralScore(lo)<30) process.exit(2);"
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_reader_why_line_rejects_jrc_repository_navigation_boilerplate(self):
+        import subprocess
+        js = r"""
+const R=require('./briefing/insights.js');
+const x={title:'A European research finding',strand:'A',summary:"Access to Joint Research Centre's publications.",core_message:"Access to Joint Research Centre's publications."};
+const w=R.whyFor(x)||'';
+if(/Joint Research Centre/i.test(w)) process.exit(2);
+"""
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 
     def test_read_page_evidence_selection_is_quality_aware(self):

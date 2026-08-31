@@ -1,11 +1,19 @@
-# v17.18.1 — workflow unjam + safety-preserving decoupling
+# v17.18.3 — recall allocation repair
 
-- Fixed the immediate 12–24 second failures seen on GitHub Actions. The live repository had new scanner tests that asserted a four-hour YAML schedule, while the live workflow YAML was still the old daily/hourly version. That made tests stop both scanners before evidence discovery began.
-- Scanner regression tests now test scanner/evidence behavior only. They no longer fail because a workflow schedule file is stale or partially uploaded.
-- Added `scripts/check_workflow_contract.py` as a separate deployment sanity checker. Both workflows run it with `continue-on-error: true`: a cadence/config mismatch is visible as a warning but cannot jam evidence scanning.
-- Main workflow remains a true four-hour rotation at 00:17/04:17/08:17/12:17/16:17/20:17 UTC. Historical remains a true four-hour rotation, offset at 02:41/06:41/10:41/14:41/18:41/22:41 UTC.
-- Historical minimum runtime remains 0: it searches toward the ~8 finding target instead of padding to ten minutes.
-- Persistence safety is retained: Main can stage/commit only `radar.json`; Historical can stage/commit only `historical/historical.json`.
-- Historical safety is strengthened with before/after file-size and corpus-count checks plus preservation of curated manual evidence.
-- Reader pages remain live views of `radar.json`; Matrix, Read at least this, Risks & opportunities, briefing, Sources and Stuff continue ranking admitted findings with the shared source-merit/evidence-quality model.
-- No relevance, A/B/C, document-integrity, date-integrity, journal-quality or source-rotation gates were loosened.
+This release increases discovery depth without weakening any admission gate.
+
+## Why
+The live diagnostics showed OpenAlex HTTP 429 stopping the public endpoint while later recall lanes still treated OpenAlex as available. That wasted part of the scan on an endpoint that had already asked the scanner to stop, while the run still ended below the search-depth target.
+
+## Changes
+- HTTP 429 / explicit endpoint-stop warnings now mark a source family unavailable for the remainder of that run.
+- A bounded source-failure reallocation stage immediately transfers that time to unused EU/institutional publication sources and the surviving scholarly source family.
+- If OpenAlex stops, the replacement scholarly slice prioritises rotating trusted journals in Crossref plus a fresh mixed A/B query slice.
+- If Crossref stops, the replacement slice uses OpenAlex plus unused institutional sources.
+- Institutional rotation per normal scan increases from 24 to 30 sources, with 12 protected official-EU slots and 10 source-adapter slots.
+- Trusted journal source-first rotation increases from 10 to 12 journals per scan.
+- Dedicated futures-method queries increase from 12 to 16 per scan; foresight-author follow-up increases from 4 to 6.
+- Main runtime budget increases modestly from 20 to 22 minutes; GitHub's 30-minute hard timeout remains unchanged.
+- The substantive A/B/C gates, source-quality rules, deduplication, source-link integrity checks, and Matrix qualification rules are unchanged.
+
+The bundled radar.json is marked as a repository bundle seed. On the first scan after a whole-repository upload, the scanner merges the larger pre-upload live corpus and its persisted rotation cursors from Git history after integrity filtering, so newer live evidence is not intentionally erased by the ZIP.
