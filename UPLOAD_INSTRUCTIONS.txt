@@ -1,47 +1,19 @@
-UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
+UPLOAD THIS WHOLE REPOSITORY TO GITHUB
 
-1. Download and unzip this ZIP once on your computer.
-2. Open your existing GitHub repository.
+1. Unzip this ZIP once.
+2. Open your GitHub repository.
 3. Choose Add file -> Upload files.
-4. Drag EVERYTHING from inside the unzipped folder onto the GitHub upload page.
-   Include the hidden .github folder.
-5. Leave the commit message as "Add files via upload" if you want.
-6. Commit directly to main.
+4. Drag EVERYTHING INSIDE the unzipped folder onto the GitHub upload page.
+5. IMPORTANT: before committing, the upload list must include these two paths:
+      .github/workflows/radar-scan.yml
+      .github/workflows/historical-scan.yml
+   They are ordinary repository files and are required for the four-hour scanners.
+6. Click Commit changes.
 
-You do NOT need to delete or edit individual files.
-Files with the same names are replaced; new files are added.
+Do not delete or edit anything manually.
 
-Version 17.17.9 keeps all scanner strictness/integrity/rotation fixes and corrects the reader layout:
-
-Reader interface in v17.17.9:
-- Read at least this has its original open branch-map charts back;
-- charts keep the central issue, connecting lines, branch boxes and evidence boxes;
-- the Main Radar landing page is much calmer and begins “This is the Main Radar for EU research & innovation in geopolitical context.”;
-- the landing page explains Read at least this, Matrix, Risks & opportunities and Stuff before the full Radar;
-- Stuff is visible at the top and on the reader-page navigation;
-- black / red / white styling remains;
-- publication actions on the evidence Radar remain plainly labelled.
-
-Scanner cadence retained from v17.17.8:
-- live radar: every four hours at minute 17 UTC;
-- historical radar: every four hours at minute 41 UTC, offset by two hours;
-- both retain their persisted source/topic cursors between runs;
-- manual/push runs can occur in addition to the schedule.
-
-- protected, parallel rotation between EU/institutional sources and journals;
-- persisted rotation across journal/source families rather than restarting at the same places;
-- topic-family diversification in the scholarly query bank and executed query prefix;
-- quality-aware ordering for the 4x4 Matrix, “Read at least this”, and Risks & Opportunities;
-- the quality signal is the same source-merit rubric documented in Stuff -> Technical evidence;
-- source merit affects ranking only AFTER substantive admission, never admission itself.
-
-- completed studies/reports are routed to Strand A/B before C regardless of discovery route;
-- the Commission “Study on Cloud and AI Development in the EU” is bundled as Strand A and removed from C;
-- short official report landing pages use their actual executive lead for the A gate;
-- the four-month institutional A recovery is re-armed to recover similarly missed reports;
-- the historical workflow minimum-runtime override is fixed at 0.
-
-Reader-facing cleanup in v17.17.6:
-- Matrix balancing/search rotation stays internal to the scanner.
-- Public Matrix/reader pages no longer tell readers that sparse cells will be searched more on a later scan.
-- Scanner rotation diagnostics remain in radar.json for the automation, but are not rendered on the public site.
+After this upload:
+- Main Radar scan: every 4 hours.
+- Historical scan: every 4 hours, offset from Main.
+- Runtime working-tree noise cannot throw away a finished scan; only the allowed JSON result file is staged.
+- Reader evidence pages load the current radar.json directly and quality-rank admitted evidence.

@@ -41,6 +41,7 @@ SITE_FILES = [
     "literature/index.html",
     "stuff/index.html",
     "stuff/source_merit_ranking.xlsx",
+    "stuff/eu_ri_radar_phrases_by_strand.xlsx",
 ]
 
 # Files required for the recurring scanner and its GitHub Actions schedule.
@@ -48,12 +49,15 @@ SCANNER_FILES = [
     ".github/workflows/radar-scan.yml",
     ".gitignore",
     "radar_config.json",
+    "radar_phrase_rules.json",
     "priority_people.json",
     "curator_candidate_tests.json",
     "requirements.txt",
     "scripts/scan_radar.py",
     "scripts/frontier_coverage.js",
     "tests/test_scanner_features.py",
+    "tests/test_reader_ui_v17179.py",
+    "tests/test_live_pages_and_workflows_v17180.py",
 ]
 
 
