@@ -50,7 +50,21 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
-<link rel="stylesheet" href="simple-ui.css?v=17.17.7">
+<link rel="stylesheet" href="simple-ui.css?v=17.17.9">
+<style id="landing-v17179">
+.landing-hero{padding:0 0 38px!important}
+.landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #3a3a3a;margin-bottom:44px;min-height:54px}
+.landing-nav a{color:#fff;text-decoration:none;font-size:12px;font-weight:850;padding:17px 14px;border-left:1px solid #2d2d2d}
+.landing-nav a:hover{background:#171717;color:#ff4056}.landing-nav .top-stuff{background:#c40018;border-color:#c40018}.landing-nav .top-stuff:hover{background:#a90015;color:#fff}
+.landing-nav .lock{margin-left:auto;border-radius:0!important;border:0!important;border-left:1px solid #3a3a3a!important;padding:17px 14px!important}
+.landing-copy{max-width:1080px}.landing-copy h1{font-size:clamp(42px,6.4vw,78px)!important;line-height:.98!important;margin:9px 0 20px!important}.landing-copy .intro{max-width:980px!important;font-size:clamp(16px,1.8vw,20px)!important;line-height:1.45!important}.landing-copy .intro strong{color:#fff}
+.landing-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#444;border:1px solid #444;margin-top:34px}
+.landing-choices a{display:block;background:#0b0b0b;color:#fff;text-decoration:none;padding:17px 18px;min-height:142px}.landing-choices a:hover{background:#151515}.landing-choices span{display:block;color:#ff4056;text-transform:uppercase;letter-spacing:.09em;font-size:9px;font-weight:950;margin-bottom:12px}.landing-choices strong{display:block;font-size:18px;line-height:1.1;margin-bottom:8px}.landing-choices small{display:block;color:#cfcfcf;font-size:12px;line-height:1.4}
+.landing-radar-link{display:inline-block;margin-top:18px;color:#fff!important;text-decoration:none;border-bottom:2px solid #c40018;padding-bottom:3px;font-size:13px;font-weight:900}
+#radar{padding-top:18px}.dashboard{margin-top:0!important}
+@media(max-width:850px){.landing-nav{flex-wrap:wrap;margin-bottom:30px}.landing-nav .lock{margin-left:0}.landing-choices{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.landing-choices{grid-template-columns:1fr}.landing-nav a,.landing-nav .lock{padding:12px 9px!important;font-size:10px}.landing-copy h1{font-size:42px!important}}
+</style>
 </head>
 <body>
   <section id="gate" aria-label="Password gate">
@@ -67,72 +81,33 @@
   </section>
 
   <div id="app">
-    <header class="hero">
+    <header class="hero landing-hero">
       <div class="wrap">
-        <div class="topline">
-          <div>
-            <div class="kicker">EU RESEARCH &amp; INNOVATION</div>
-            <h1>R&amp;I in EU:<br><span class="red">Geopolitical Context</span></h1>
-            <p class="intro">Who controls the knowledge, infrastructure, firms and rules Europe needs to compete?</p>
-          </div>
+        <nav class="landing-nav" aria-label="Main navigation">
+          <a class="top-stuff" href="stuff/">Stuff</a>
+          <a href="read/">Read at least this</a>
+          <a href="frontier/quick/">Matrix</a>
+          <a href="priorities/">Risks &amp; opportunities</a>
+          <a href="literature/">Sources</a>
           <button id="lock" class="lock">Lock radar</button>
+        </nav>
+        <div class="landing-copy">
+          <div class="kicker">MAIN RADAR</div>
+          <h1>This is the Main Radar for<br><span class="red">EU research &amp; innovation in geopolitical context.</span></h1>
+          <p class="intro">Start with the simple views. <strong>Read at least this</strong> shows the current issue charts. <strong>Matrix</strong> classifies Europe’s position. <strong>Risks &amp; opportunities</strong> turns the evidence into implications. <strong>Stuff</strong> holds the quality rules, files and technical material. The full evidence Radar is below.</p>
         </div>
-        <div class="issue-splash" id="currentIssues" aria-label="Leading issues in the current radar">
-          <a href="read/"><span class="num">…</span><strong>Loading current issues</strong></a>
+        <div class="landing-choices" aria-label="Choose a simple view">
+          <a href="read/"><span>Start here</span><strong>Read at least this</strong><small>Open issue charts from the strongest current findings.</small></a>
+          <a href="frontier/quick/"><span>Classify</span><strong>Matrix</strong><small>See where Europe is gaining, relying, trading off or weakening.</small></a>
+          <a href="priorities/"><span>Interpret</span><strong>Risks &amp; opportunities</strong><small>See the most important implications, ranked by evidence quality.</small></a>
+          <a href="stuff/"><span>Check</span><strong>Stuff</strong><small>Quality criteria, technical evidence, exports and scanner material.</small></a>
         </div>
+        <a class="landing-radar-link" href="#radar">Open the full Radar ↓</a>
       </div>
     </header>
 
-    <section class="inside-map" aria-label="What is inside the radar">
-      <div class="wrap inside-map-inner">
-        <div class="inside-map-kicker">What you find in the pages.</div>
-        <h2>From the big issues to evidence, position, decisions and sources.</h2>
-        <div class="journey" role="navigation" aria-label="Reader path through the radar">
-          <a class="journey-step read" href="read/">
-            <span class="step">1 · Orient</span>
-            <div><strong>Read at least this</strong><p id="journeyReadText">Live issue maps rebuilt from the latest admitted material.</p></div>
-          </a>
-          <div class="journey-arrow" aria-hidden="true">→</div>
-          <a class="journey-step radar" href="#radar">
-            <span class="step">2 · See evidence</span>
-            <div><strong>Radar</strong><p>Findings, methods and weak signals behind the issues.</p></div>
-          </a>
-          <div class="journey-arrow" aria-hidden="true">→</div>
-          <a class="journey-step matrix" href="frontier/quick/">
-            <span class="step">3 · See position</span>
-            <div><strong>Matrix</strong><p>Short view first; full evidence behind every cell.</p></div>
-          </a>
-          <div class="journey-arrow" aria-hidden="true">→</div>
-          <a class="journey-step decisions" href="priorities/">
-            <span class="step">4 · Decide</span>
-            <div><strong>Risks &amp; opportunities</strong><p>What could weaken or improve Europe’s R&amp;I position.</p></div>
-          </a>
-          <div class="journey-arrow" aria-hidden="true">→</div>
-          <a class="journey-step sources" href="literature/">
-            <span class="step">5 · Check</span>
-            <div><strong>Literature used</strong><p>Alphabetical source trail for the material used.</p></div>
-          </a>
-        </div>
-        <div class="inside-map-note"><b>Use it shallow or deep:</b> each short view points to the fuller evidence view. <a href="glossary/"><b>Glossary</b></a> explains terms such as dual-use, de-risking and frontier compute. <a href="historical/"><b>History</b></a> keeps a separate source-age archive for evidence published before the main radar’s rolling six-month boundary. <a href="stuff/"><b>Stuff</b></a> holds exports and the priority-source list.</div>
-      </div>
-    </section>
-
-    <section class="page-map" aria-label="Radar pages"><div class="wrap page-map-inner">
-      <div class="page-map-title">Choose a view</div>
-      <div class="page-map-grid">
-        <div class="page-map-card"><b>Read at least this</b><a id="pageReadLink" href="read/">Current issue maps →</a></div>
-        <div class="page-map-card current"><b>Radar</b><span>Main</span><span class="arrow">↔</span><a href="briefing/">Evidence browser</a></div>
-        <div class="page-map-card"><b>Matrix</b><a href="frontier/quick/">Short</a><span class="arrow">→</span><a href="frontier/">Full evidence</a></div>
-        <div class="page-map-card"><b>Decisions</b><a href="priorities/">Risks &amp; opportunities →</a></div>
-        <div class="page-map-card"><b>History</b><a href="historical/">Source-age historical evidence →</a></div>
-        <div class="page-map-card"><b>Sources</b><a href="literature/">Literature used →</a></div>
-        <div class="page-map-card"><b>Stuff</b><a href="stuff/">Exports + key publications →</a></div>
-        <div class="page-map-card"><b>Glossary</b><a href="glossary/">Plain-English terms →</a></div>
-      </div>
-    </div></section>
-
     <div class="statusbar"><div class="wrap status-inner">
-      <span class="pill">Scanner · due every 6 hours + hourly catch-up + manual</span>
+      <span class="pill">Scanner · every 4 hours + manual</span>
       <span class="pill">4-month core · Highest evidence retained to 6 months</span>
       <span id="scanState" class="pill warn">Last run health · pending</span>
       <span id="lastScan" class="pill">Last completion · pending</span>
@@ -140,10 +115,6 @@
     </div></div>
 
     <div class="wrap" id="radar">
-      <section class="minimum-read" aria-label="Minimum useful read">
-        <div><div class="label">Read at least this</div><h2 id="minimumReadTitle">Reading the latest issue pattern…</h2><p id="minimumReadText">The summary is rebuilt from the current admitted material.</p></div>
-        <a href="read/?v=17.13.31">Open the 1-minute read</a>
-      </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
         <div class="stat"><div class="label">Future methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>

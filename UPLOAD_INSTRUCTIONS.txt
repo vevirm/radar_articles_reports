@@ -11,16 +11,22 @@ UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
 You do NOT need to delete or edit individual files.
 Files with the same names are replaced; new files are added.
 
-Version 17.17.7 keeps all earlier strictness/integrity/rotation fixes and adds a reader-interface simplification:
+Version 17.17.9 keeps all scanner strictness/integrity/rotation fixes and corrects the reader layout:
 
-Reader interface in v17.17.7:
-- black / red / white visual system across all pages;
-- simpler, flatter cards with no decorative dashboard colours;
-- clear action labels: More info and Open link to publication;
-- Read at least this is flattened into a simple issue -> branches -> evidence view;
-- Matrix short view is designed for one-glance reading;
-- Risks & opportunities and source pages use plain ranked/list layouts;
-- the Radar itself keeps its deeper technical detail.
+Reader interface in v17.17.9:
+- Read at least this has its original open branch-map charts back;
+- charts keep the central issue, connecting lines, branch boxes and evidence boxes;
+- the Main Radar landing page is much calmer and begins “This is the Main Radar for EU research & innovation in geopolitical context.”;
+- the landing page explains Read at least this, Matrix, Risks & opportunities and Stuff before the full Radar;
+- Stuff is visible at the top and on the reader-page navigation;
+- black / red / white styling remains;
+- publication actions on the evidence Radar remain plainly labelled.
+
+Scanner cadence retained from v17.17.8:
+- live radar: every four hours at minute 17 UTC;
+- historical radar: every four hours at minute 41 UTC, offset by two hours;
+- both retain their persisted source/topic cursors between runs;
+- manual/push runs can occur in addition to the schedule.
 
 - protected, parallel rotation between EU/institutional sources and journals;
 - persisted rotation across journal/source families rather than restarting at the same places;

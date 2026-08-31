@@ -1,3 +1,26 @@
+# R&I Radar v17.17.9
+
+## Landing page simplified; original Read-at-least-this charts restored
+
+- Reversed the v17.17.7 chart simplification. **Read at least this** again uses the original open branch-map geometry: central issue -> connecting lines -> branch nodes -> evidence nodes. The chart remains visible by default and scrolls horizontally on narrow screens rather than collapsing into a list.
+- The black / red / white reader language is retained, but it no longer overrides the structure of the issue charts.
+- The Main Radar landing area is now an orientation page instead of several competing navigation/dashboard blocks. It opens with **“This is the Main Radar for EU research & innovation in geopolitical context.”** and explains the four simple entrances before the full evidence radar begins.
+- **Stuff** is visible at the top of the landing page and is restored to the top navigation on the reader pages. The Stuff page remains the home of the source-quality workbook, exports and technical material.
+- Removed the duplicate landing-page journey/page-map/minimum-read navigation blocks. Reader choice is now: Read at least this, Matrix, Risks & opportunities, Stuff; then the full Radar below.
+- The visible scanner status now correctly says **every 4 hours + manual**, matching the v17.17.8 workflows.
+- The v17.17.8 four-hour schedules and all persisted source/topic/Matrix rotation logic are retained unchanged.
+
+# R&I Radar v17.17.8
+
+## Both scanners now run on a real four-hour cadence
+
+- Main live radar: scheduled at 00:17, 04:17, 08:17, 12:17, 16:17 and 20:17 UTC.
+- Historical radar: scheduled at 02:41, 06:41, 10:41, 14:41, 18:41 and 22:41 UTC, deliberately offset so the two scanners do not compete for the same API/network budget.
+- Removed the main workflow's old six-hour completion-age gate. That gate could make a nominally frequent workflow skip until roughly eight hours; scheduled four-hour runs now always execute.
+- Push/manual runs still execute immediately in addition to the fixed schedule.
+- Rotation remains persistent rather than restarting: the main radar keeps independent cursors for EU/institutional sources, preferred and broader journals, scholarly topic families, exploration depth, Strand-B methods, Matrix gaps and context queries; the historical radar persists both topic and source cursors and advances them across runs.
+- Matrix balancing stays internal and recurring on every main scan.
+
 # R&I Radar v17.17.7
 
 ## Reader interface: black / red / white, one-glance first

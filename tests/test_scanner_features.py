@@ -644,6 +644,12 @@ class RotationAndReaderQualityTests(unittest.TestCase):
         first_four = [scan.query_theme(q) for q in bank[:4]]
         self.assertGreaterEqual(len(set(first_four)), 4)
 
+    def test_main_workflow_runs_on_fixed_four_hour_schedule(self):
+        workflow = (ROOT / ".github" / "workflows" / "radar-scan.yml").read_text(encoding="utf-8")
+        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", workflow)
+        self.assertNotIn("age_hours >= 6.0", workflow)
+        self.assertIn('echo "run=true"', workflow)
+
     def test_source_family_rotation_has_eu_and_journal_first_class_lanes(self):
         self.assertTrue(scan.CONFIG.get("source_family_parallel_scan"))
         self.assertGreater(scan.CONFIG.get("official_eu_priority_sources_per_scan", 0), 0)

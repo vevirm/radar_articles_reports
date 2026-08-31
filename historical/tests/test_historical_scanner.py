@@ -144,6 +144,10 @@ class HistoricalScannerTests(unittest.TestCase):
         self.assertIn("metadata_text_rescue", f)
         self.assertIn("source_adapter_jobs", f)
 
+    def test_historical_workflow_runs_every_four_hours(self):
+        workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
+        self.assertIn("cron: '41 2,6,10,14,18,22 * * *'", workflow)
+
     def test_workflow_dispatches_only_historical_scanner(self):
         workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
         self.assertIn("historical-scan.yml/dispatches", workflow)
