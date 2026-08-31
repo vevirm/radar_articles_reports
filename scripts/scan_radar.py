@@ -177,7 +177,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.17.0-relational-C-new-point-not-new-topic"
+C_ADMISSION_PROFILE_VERSION = "v17.17.1-relational-C-document-integrity"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -5263,6 +5263,180 @@ def pdf_text(url: str) -> tuple[str, int]:
         return "", 0
 
 
+def _domain_host(value: str) -> str:
+    try:
+        return (urlparse(clean_text(value)).hostname or "").lower().removeprefix("www.")
+    except Exception:
+        return ""
+
+
+def _same_institution_family(a: str, b: str) -> bool:
+    """Conservative host-family match for an institutional page and its own asset host."""
+    ha, hb = _domain_host(a), _domain_host(b)
+    if not ha or not hb:
+        return False
+    if ha == hb or ha.endswith("." + hb) or hb.endswith("." + ha):
+        return True
+    # Commission/JRC/other EU services commonly cross-link assets among europa.eu hosts.
+    if ha.endswith(".europa.eu") and hb.endswith(".europa.eu"):
+        return True
+    return False
+
+
+def _document_title_tokens(value: str) -> set[str]:
+    generic = {
+        "the", "and", "for", "with", "from", "into", "report", "reports", "paper", "papers",
+        "study", "studies", "publication", "publications", "annual", "final", "full", "download",
+        "english", "version", "2024", "2025", "2026", "2027",
+    }
+    # Unlike topical ``tokens()``, document identity must split URL punctuation and retain
+    # short discriminators such as AI/EU. Otherwise a path like
+    # international-ai-safety-report-2026_1.pdf becomes one token and cannot be matched.
+    return {x for x in norm_title(value).split() if x not in generic and len(x) >= 2}
+
+
+def _primary_pdf_link(soup: BeautifulSoup, page_url: str, title: str) -> str:
+    """Select only a PDF that plausibly *is this document*, never the first cited PDF.
+
+    The old implementation picked the first .pdf anywhere in the page. On the 2026
+    International AI Safety Report page that could select a cited Anthropic system card,
+    producing a title/source/URL chimera. A PDF now needs document-level evidence: title
+    overlap plus same institutional host/family, or a very explicit download label.
+    """
+    title_tokens = _document_title_tokens(title)
+    best: tuple[float, str] | None = None
+    for a in soup.find_all("a", href=True):
+        href = urljoin(page_url, clean_text(a.get("href", "")))
+        if not href or ".pdf" not in normalized(href):
+            continue
+        label = clean_text(a.get_text(" ", strip=True))
+        link_text = clean_text(f"{urlparse(href).path} {label}")
+        link_tokens = _document_title_tokens(link_text)
+        overlap = len(title_tokens & link_tokens)
+        ratio = overlap / max(1, min(len(title_tokens), 6))
+        same_family = _same_institution_family(page_url, href)
+        explicit_download = bool(re.search(r"\b(download|full report|full text|english|pdf)\b", normalized(label)))
+        # Off-site references/citations are not document attachments merely because they are PDFs.
+        if same_family:
+            if overlap < 2 and not (explicit_download and overlap >= 1):
+                continue
+        else:
+            if not explicit_download or overlap < 3 or ratio < 0.50:
+                continue
+        score = (8.0 if same_family else 0.0) + 3.0 * overlap + 5.0 * ratio + (3.0 if explicit_download else 0.0)
+        if best is None or score > best[0]:
+            best = (score, href)
+    return best[1] if best else ""
+
+
+def _pdf_text_matches_document(title: str, text: str) -> bool:
+    """Fail closed before replacing an HTML document with linked PDF text."""
+    tt = _document_title_tokens(title)
+    if not tt:
+        return False
+    head = clean_text(text)[:5000]
+    ht = _document_title_tokens(head)
+    overlap = len(tt & ht)
+    return overlap >= 2 and overlap / max(1, min(len(tt), 6)) >= 0.34
+
+
+def _prominent_date_near_title(soup: BeautifulSoup, title: str) -> dt.date | None:
+    """Read a visibly displayed date immediately around the page title.
+
+    This is deliberately narrower than parsing an arbitrary date from body prose. It
+    handles publication pages that render e.g. '3 February 2026 — Annual Report' beside
+    the H1 while exposing only a sitemap modification date in metadata.
+    """
+    h1 = soup.find("h1")
+    if not h1:
+        return None
+    chunks: list[str] = []
+    for sib in list(h1.previous_siblings)[-4:]:
+        try:
+            txt = clean_text(sib.get_text(" ", strip=True) if hasattr(sib, "get_text") else str(sib))
+        except Exception:
+            txt = ""
+        if txt:
+            chunks.append(txt)
+    parent = h1.parent
+    if parent is not None:
+        try:
+            txt = clean_text(parent.get_text(" ", strip=True))[:700]
+            if txt:
+                chunks.append(txt)
+        except Exception:
+            pass
+    patterns = [
+        r"\b([0-3]?\d\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2})\b",
+        r"\b((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+[0-3]?\d,?\s+20\d{2})\b",
+        r"\b(20\d{2}-[01]?\d-[0-3]?\d)\b",
+    ]
+    nt = normalized(title)
+    for chunk in chunks:
+        nc = normalized(chunk)
+        # The date must be in the same compact title block, not somewhere in article prose.
+        if nt and nt not in nc and len(chunk) > 240:
+            continue
+        for pat in patterns:
+            m = re.search(pat, chunk, re.I)
+            if m:
+                d = parse_date(m.group(1))
+                if d:
+                    return d
+    return None
+
+
+def _expected_institution_domain(source: str) -> str:
+    ns = normalized(source)
+    for src in CONFIG.get("institution_sources", []):
+        if not isinstance(src, dict):
+            continue
+        if normalized(src.get("name", "")) == ns:
+            return clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    return ""
+
+
+def signal_record_integrity_ok(item: dict[str, Any]) -> bool:
+    """Prevent stored C records whose title/source and URL belong to different documents."""
+    if not isinstance(item, dict):
+        return False
+    source = clean_text(item.get("source"))
+    link = clean_text(item.get("link") or item.get("url"))
+    headline = clean_text(item.get("headline") or item.get("title"))
+    if not source or not link:
+        return True
+    expected = _expected_institution_domain(source)
+    if not expected:
+        return True
+    host = _domain_host(link)
+    if not host:
+        return False
+    expected_url = f"https://{expected}/"
+    if _same_institution_family(expected_url, link):
+        return True
+    # A rare external asset host is acceptable only when its path still clearly names
+    # the same document. This rejects e.g. IASR title + assets.anthropic.com/Claude-...pdf.
+    ht = _document_title_tokens(headline)
+    lt = _document_title_tokens(urlparse(link).path)
+    overlap = len(ht & lt)
+    return bool(overlap >= 3 and overlap / max(1, min(len(ht), 6)) >= 0.50)
+
+
+def _signal_claim_is_substantive(value: str) -> bool:
+    v = clean_text(value)
+    if len(v.split()) < 6:
+        return False
+    low = normalized(v)
+    boilerplate = [
+        "translated versions", "official un languages", "more languages", "click here", "read more",
+        "download the", "download report", "available under", "can be found under", "cookie",
+        "privacy policy", "terms of use", "publication page",
+    ]
+    if any(x in low for x in boilerplate):
+        return False
+    return True
+
+
 def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "", publication_floor: dt.date | None = None) -> dict[str, Any] | None:
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         return None
@@ -5311,7 +5485,6 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                     obj.get("datePublished")
                     or obj.get("dateCreated")
                     or obj.get("uploadDate")
-                    or obj.get("dateModified")
                 )
             if not article_body and obj.get("articleBody"):
                 article_body = clean_text(obj.get("articleBody"))
@@ -5330,7 +5503,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             "article:published_time", "og:article:published_time", "datePublished", "dateCreated",
             "date", "DC.date", "DC.Date", "DC.date.issued", "DC.Date.issued", "dcterms.date",
             "dcterms.created", "dcterms.issued", "parsely-pub-date", "pubdate", "publication_date",
-            "citation_publication_date", "citation_date", "release_date", "dateModified",
+            "citation_publication_date", "citation_date", "release_date",
         ]))
     if not published:
         # Common institutional CMS fallback: semantic <time> elements.
@@ -5339,6 +5512,10 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             published = parse_date(raw_time)
             if published:
                 break
+    if not published:
+        published = _prominent_date_near_title(soup, title)
+        if published:
+            date_basis = "prominent_page_date"
     if not published:
         # URL dates are reliable enough when all three components are explicit.
         m_url_date = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|3[01])(?:/|$)", urlparse(r.url).path)
@@ -5382,26 +5559,27 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if can and can.get("href"):
         canonical = urljoin(r.url, can["href"])
 
+    # Select a candidate attachment before destructive DOM cleanup. Navigation/main download
+    # controls may otherwise disappear, leaving a cited third-party PDF as the first survivor.
+    primary_pdf_url = _primary_pdf_link(soup, r.url, title)
     for bad in soup(["script", "style", "nav", "header", "footer", "aside", "form", "noscript"]):
         bad.decompose()
     container = soup.find("article") or soup.find("main") or soup.body
     body = article_body or clean_text(container.get_text(" ", strip=True) if container else "")
     word_count = len(body.split())
-    pdf_url = ""
-    for a in soup.find_all("a", href=True):
-        href = urljoin(r.url, a["href"])
-        label = clean_text(a.get_text(" ", strip=True)).lower()
-        if ".pdf" in href.lower() or "download pdf" in label or label in {"pdf", "download report", "download paper"}:
-            pdf_url = href
-            break
+    pdf_url = primary_pdf_url
     if pdf_url and word_count < 2500:
         ptxt, pwords = pdf_text(pdf_url)
-        if pwords > word_count:
+        if pwords > word_count and _pdf_text_matches_document(title, ptxt):
             body, word_count = ptxt, pwords
             # A report/paper linked from a /news/ wrapper must be judged as the underlying
-            # document. Recalculate exclusions against the PDF rather than letting the
-            # wrapper URL permanently block Strand A. Content-level exclusions still apply.
+            # document. Recalculate exclusions against the verified PDF rather than letting
+            # the wrapper URL permanently block Strand A.
             exclusion = document_exclusion_reason(title, body[:1600], pdf_url, "")
+        elif pwords:
+            # Never let an unrelated cited PDF become this record's Source link.
+            _diag_inc("institution_reject_mismatched_linked_pdf")
+            pdf_url = ""
 
     if not english_record_ok(f"{title}. {desc}. {body[:5000]}", html_lang, title=title):
         _diag_inc("institution_reject_non_english")
@@ -7307,6 +7485,9 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
+        if not signal_record_integrity_ok(old):
+            _diag_inc("signal_reject_record_integrity")
+            continue
         internal = internalize_previous(old)
         key = identity(internal)
         if key == "title:":
@@ -7316,6 +7497,9 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     new_ids: set[str] = set()
     for item in new_items:
         if not isinstance(item, dict) or signal_is_retired(item) or not english_public_item_ok(item):
+            continue
+        if not signal_record_integrity_ok(item):
+            _diag_inc("signal_reject_record_integrity")
             continue
         if item.get("strand") not in {strand_name, "both"}:
             continue
@@ -8619,6 +8803,15 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
         what=plain_language_claim(n.get('_desc',''), source_headline, source_headline)
+        if not _signal_claim_is_substantive(what):
+            what = ""
+            for sent in split_sentences(clean_text(n.get('_desc','')), max_chars=5000):
+                candidate = plain_language_claim(sent, source_headline, sent)
+                if _signal_claim_is_substantive(candidate):
+                    what = candidate
+                    break
+        if not what:
+            continue
         why=external_bridge or signal_why(theme,kind)
         item={k:v for k,v in n.items() if not k.startswith('_')}
         item.update({

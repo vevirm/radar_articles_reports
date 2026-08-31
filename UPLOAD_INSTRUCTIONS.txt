@@ -1,18 +1,17 @@
-UPLOAD-ONLY INSTALL
-===================
+UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
 
-You do NOT need to delete anything from the existing GitHub repository.
+1. Unzip this ZIP once on your computer.
+2. Open your existing GitHub repository.
+3. Choose Add file -> Upload files.
+4. Drag EVERYTHING from inside the unzipped folder onto the GitHub upload page.
+   Include hidden folders such as .github if your file manager shows them.
+5. Commit changes to main.
 
-1. Unzip the package on your computer.
-2. Open your existing GitHub repository in the browser.
-3. Choose: Add file -> Upload files.
-4. Drag ALL files and folders from inside this folder onto the GitHub upload page.
-   Important: include the hidden .github folder. If your computer hides dot-folders,
-   use a folder-drag into the upload page rather than selecting individual visible files.
-5. At the bottom, commit directly to the main branch.
+Files with the same names are replaced; new files are added. You do not need to delete old files manually.
 
-Files with the same names replace/update the old versions. New files are added.
-Old extra files can remain; this release does not depend on deleting them.
-
-After the commit, the R&I Radar Scan workflow should start automatically because scanner/config files changed.
-The historical workflow will also use the corrected target-driven settings.
+Version 17.17.1 includes:
+- full v17.17.0 recall/weak-signal improvements
+- historical workflow minimum-runtime fix
+- source-document integrity fix preventing metadata from one publication being paired with an unrelated cited PDF
+- stricter publication-date handling
+- cleanup of already-corrupted C records on subsequent scans
