@@ -11,9 +11,9 @@ UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
 You do NOT need to delete or edit individual files.
 Files with the same names are replaced; new files are added.
 
-Version 17.17.2 specifically fixes the source-link corruption/restoration problem:
-- linkless records are not allowed to publish;
-- unrelated PDFs cannot be attached to another document's title/source;
-- old corrupt rows are filtered even when Git-history recovery runs;
-- sitemap/page update dates are not publication dates;
-- the false-new Commission "Study to identify key strategic digital technologies..." card is not present in this package.
+Version 17.17.3 specifically fixes Strand-C classification:
+- established/systematic EU official activity is A/B evidence, not a weak signal;
+- an EU official page can enter C only when it is genuinely provisional/experimental/uncertain;
+- “European AI Office” cannot enter C;
+- old institutional-as-C rows are filtered during Git-history recovery as well as new discovery;
+- all source-link/date integrity repairs from v17.17.2 remain in force.

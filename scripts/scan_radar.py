@@ -1469,6 +1469,93 @@ def routine_signal_noise(title: str, desc: str = "") -> bool:
         return True
     return False
 
+# V17.17.3: Strand C is a weak-signal relationship, not a second institutional feed.
+# Standing EU offices/programmes/strategies and mature official implementation belong in A
+# when they pass the substantive A gate; otherwise they are omitted.  Only genuinely
+# provisional/experimental/uncertain official developments may be considered for C.
+C_STANDING_INSTITUTION_TITLE_HINTS = [
+    " office", "programme", "program", "strategy", "policy", "initiative", "service",
+    "platform", "network", "joint undertaking", "partnership", "mission", "our work",
+    "what we do", "about ", "overview", "governance", "mandate", "framework",
+]
+C_STANDING_INSTITUTION_LEAD_HINTS = [
+    "supports the development", "supports development", "is responsible for",
+    "is responsible to", "coordinates", "works to", "aims to support", "its mission is",
+    "its role is", "the role of", "provides support", "implements the", "oversees the",
+    "was established to", "is the centre", "is the center", "is a service",
+]
+C_OFFICIAL_PROVISIONAL_MARKERS = [
+    "draft", "consultation", "consults on", "proposal", "proposes", "proposed",
+    "considering", "considers", "mulls", "seeks feedback", "seeks views",
+    "pilot", "trial", "prototype", "testbed", "begins testing", "starts testing",
+    "early-stage", "early stage", "limited to", "targeted areas", "exception",
+    "waiver", "opts out", "opt-out", "delay", "delayed", "postpone", "postponed",
+    "pause", "paused", "tentative", "explores", "exploring",
+]
+
+def signal_headline_has_current_change(title: str) -> bool:
+    """Require an actual change/finding in the headline, not a standing noun phrase.
+
+    Word boundaries matter: nouns such as ``adoption`` must not masquerade as the verb
+    ``adopt`` and turn an established policy page into a new weak signal.
+    """
+    h = normalized(title)
+    if not h:
+        return False
+    return bool(re.search(
+        r"\b(?:announces?|announced|launches?|launched|unveils?|unveiled|proposes?|proposed|"
+        r"considers?|considered|mulls?|seeks?|plans?|planned|pilots?|piloted|tests?|tested|"
+        r"delays?|delayed|postpones?|postponed|pauses?|paused|restricts?|restricted|bans?|banned|"
+        r"tightens?|tightened|invests?|invested|raises?|raised|cuts?|cut|updates?|updated|adopts?|"
+        r"adopted|approves?|approved|signs?|signed|opens?|opened|closes?|closed|expands?|expanded|"
+        r"builds?|built|joins?|joined|withdraws?|withdrew|finds?|found|shows?|showed|reveals?|"
+        r"revealed|reports?|reported|warns?|warned|falls?|fell|rises?|rose|surges?|surged|lags?|"
+        r"leads?|overtakes?|overtook|outpaces?|outpaced)\b",
+        h,
+    ))
+
+def standing_institutional_page(title: str, desc: str = "") -> bool:
+    """True for an established institutional/policy overview rather than a current event."""
+    h = normalized(title)
+    lead = normalized(desc[:1800])
+    if signal_headline_has_current_change(title):
+        return False
+    if contains_any(h, C_STANDING_INSTITUTION_TITLE_HINTS):
+        return True
+    return bool(contains_any(lead, C_STANDING_INSTITUTION_LEAD_HINTS) and not contains_any(lead, C_OFFICIAL_PROVISIONAL_MARKERS))
+
+def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", link: str = "") -> bool:
+    """Fail closed for institutional C candidates.
+
+    * EU-official standing/mature material is primary evidence and therefore belongs in A
+      if it passes A; it is not C.
+    * EU-official C is reserved for provisional/experimental/uncertain developments.
+    * Other institutional sources still need an event/finding in the headline or lead, so
+      generic activity/event/overview pages cannot become weak signals merely because their
+      body text contains strategic vocabulary.
+    """
+    if routine_signal_noise(title, desc):
+        return False
+    lead = clean_text(desc)[:2200]
+    full = normalized(f"{title}. {lead}")
+    official_eu = _source_merit_is_eu_official(source, link)
+    provisional = contains_any(full, C_OFFICIAL_PROVISIONAL_MARKERS)
+    eventlike = signal_headline_has_current_change(title)
+    evidence_like = reframing_signal_text(f"{title}. {lead}")
+
+    if official_eu:
+        # A Commission/agency page describing an established office, programme, strategy,
+        # adopted rule, grant result or other mature public action is A evidence, not a weak
+        # signal.  Only a genuinely provisional/experimental official development may enter C.
+        return bool(provisional and (eventlike or contains_any(full, [
+            "draft", "consultation", "pilot", "trial", "testbed", "proposal", "proposed",
+            "delay", "postpone", "pause", "exception", "waiver", "opts out", "explores",
+        ])))
+
+    if standing_institutional_page(title, lead):
+        return False
+    return bool(eventlike or evidence_like or provisional)
+
 NEWS_EVENT_TERMS = [
     "adopt", "approve", "launch", "announce", "suspend", "ban", "restrict", "curb", "tighten",
     "fund", "funding", "invest", "investment", "award", "back", "sign", "agree", "deal",
@@ -5650,8 +5737,10 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if SIGNAL_WINDOW_START_DATE and published >= SIGNAL_WINDOW_START_DATE:
         signal_text = clean_text(f"{title}. {desc}. {body[:5000]}")
         signal_themes = themes_for(signal_text)
+        source_link_for_signal = pdf_url or canonical or r.url
         if (
-            weak_signal_candidate_text(title, f"{desc} {body[:3500]}")
+            institutional_weak_signal_eligible(title, f"{desc}. {body[:1800]}", source, source_link_for_signal)
+            and weak_signal_candidate_text(title, f"{desc} {body[:3500]}")
             and strong_watch_signal_text(signal_text, signal_themes)
         ):
             signal_key = f"signal:{normalized(source)}:{norm_title(title)}"
@@ -5660,7 +5749,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                     "headline": title,
                     "source": source,
                     "date": dt.datetime.combine(published, dt.time(12, 0), tzinfo=dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z"),
-                    "link": pdf_url or canonical or r.url,
+                    "link": source_link_for_signal,
                     "_desc": clean_text(f"{desc}. {body[:3500]}"),
                     "_themes": signal_themes,
                     "_entities": distinct_matches(signal_text, ENTITY_TERMS + GEO_ACTORS),
@@ -5728,7 +5817,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
 
     strand = "both" if ev["a_pass"] and ev["b_pass"] else "A" if ev["a_pass"] else "B"
     item_type = "institutional report"
-    if "policy brief" in low_title or "briefing" in low_title:
+    if _source_merit_is_eu_official(source, pdf_url or canonical or r.url) and standing_institutional_page(title, f"{desc}. {body[:1800]}"):
+        item_type = "official policy / institutional framework"
+    elif "policy brief" in low_title or "briefing" in low_title:
         item_type = "policy brief"
     elif "working paper" in low_title or "discussion paper" in low_title:
         item_type = "working paper"
@@ -7049,6 +7140,9 @@ def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -
                 if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
                     _diag_inc("history_reject_source_integrity")
                     continue
+                if strand == "strand_c" and not _saved_signal_passes(item):
+                    _diag_inc("history_reject_c_quality")
+                    continue
                 key = signal_identity(item) if strand == "strand_c" else identity(internalize_previous(item))
                 if not key or key in {"title:", "signal::", "signal-link:"}:
                     continue
@@ -7139,6 +7233,9 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
     for item in rec.get("strand_c", []) + cur.get("strand_c", []):
         if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
             _diag_inc("history_reject_source_integrity")
+            continue
+        if not _saved_signal_passes(item):
+            _diag_inc("history_reject_c_quality")
             continue
         key = signal_identity(item)
         if not key or key in {"signal::", "signal-link:"}:
@@ -7791,6 +7888,21 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
         'genocide', 'fiscal, ai, or monetary news', 'crypto firm', 'taiwan? the view from taipei'
     ]):
         return False
+
+    source = clean_text(item.get('source', ''))
+    link = clean_text(item.get('link', ''))
+    # Saved official EU material follows the same rule as new discovery: an established
+    # office/programme/strategy, mature implementation notice or routine grant result is
+    # primary A evidence, not a weak signal. This also prevents Git-history recovery from
+    # resurrecting older Commission-news-as-C rows after a whole-repository upload.
+    if _source_merit_is_eu_official(source, link):
+        return institutional_weak_signal_eligible(headline, desc, source, link)
+
+    # High-authority institutional sources still cannot retain static overview/event pages
+    # as C simply because they mention AI/research/competition somewhere in the text.
+    if source in _SOURCE_MERIT_PUBLIC_HIGH and standing_institutional_page(headline, desc):
+        return False
+
     if eu_news_scope(h):
         return factual_news(headline, desc)
     external_specific = contains_any(h, [
@@ -8802,6 +8914,10 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
     anchored=[]
     for n in news:
         if not english_record_ok(f"{n.get('headline','')}. {n.get('_desc','')}", n.get('language',''), title=clean_text(n.get('headline',''))):
+            continue
+        if n.get('_institutional_signal') and not institutional_weak_signal_eligible(
+            n.get('headline',''), n.get('_desc',''), n.get('source',''), n.get('link','')
+        ):
             continue
         if not weak_signal_candidate_text(n.get('headline',''), n.get('_desc','')):
             continue

@@ -191,6 +191,87 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertIn("new magnitude", dims)
         self.assertIn("new mechanism", dims)
 
+    def test_established_eu_office_is_a_not_c_candidate(self):
+        title = "European AI Office"
+        desc = "The European AI Office supports the development and adoption of trustworthy AI solutions and coordinates implementation of EU AI policy."
+        link = "https://digital-strategy.ec.europa.eu/en/policies/ai-office"
+        self.assertTrue(scan.standing_institutional_page(title, desc))
+        self.assertFalse(scan.institutional_weak_signal_eligible(
+            title, desc, "European Commission — Digital Strategy", link
+        ))
+
+    def test_mature_eu_official_update_is_a_not_c_candidate(self):
+        title = "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup"
+        desc = "The Commission updated the formal investment guidelines for its established funding instruments."
+        link = "https://eic.ec.europa.eu/document/example"
+        self.assertFalse(scan.institutional_weak_signal_eligible(
+            title, desc, "European Innovation Council", link
+        ))
+
+    def test_provisional_eu_official_development_can_still_be_c(self):
+        title = "Commission proposes pilot screening scheme for sensitive research cooperation"
+        desc = "The European Commission proposes a pilot and consultation before deciding whether to adopt the research-security measure."
+        link = "https://research-and-innovation.ec.europa.eu/example"
+        self.assertTrue(scan.institutional_weak_signal_eligible(
+            title, desc, "European Commission — Research & Innovation", link
+        ))
+
+    def test_saved_eu_official_background_page_cannot_survive_c_cleanup(self):
+        item = {
+            "headline": "European AI Office",
+            "source": "European Commission — Digital Strategy",
+            "link": "https://digital-strategy.ec.europa.eu/en/policies/ai-office",
+            "date": "2026-08-31",
+            "signal_note": "The European AI Office supports development and adoption of trustworthy AI solutions.",
+            "anchor": "A paper about European AI capability (Strand A)",
+        }
+        self.assertFalse(scan._saved_signal_passes(item))
+
+    def test_eu_office_page_gets_a_chance_at_a_but_never_enters_c(self):
+        class FakeResponse:
+            status_code = 200
+            url = "https://digital-strategy.ec.europa.eu/en/policies/ai-office"
+            headers = {"content-type": "text/html"}
+            text = (
+                '<html lang="en"><head>'
+                '<meta property="og:title" content="European AI Office">'
+                '<meta name="description" content="The European AI Office supports the development and adoption of trustworthy AI solutions and coordinates implementation of EU AI policy.">'
+                '<meta property="article:published_time" content="2026-08-20">'
+                '</head><body><main>'
+                + ('The European AI Office supports European artificial intelligence policy, innovation, technology capacity, standards, governance and competitiveness. ' * 40)
+                + '</main></body></html>'
+            )
+        old_candidates = scan.INSTITUTION_SIGNAL_CANDIDATES
+        scan.INSTITUTION_SIGNAL_CANDIDATES = []
+        try:
+            with mock.patch.object(scan, "get", return_value=FakeResponse()), \
+                 mock.patch.object(scan, "gate_scope", return_value={
+                     "a_pass": True, "b_pass": False, "eu_relevance": "direct",
+                     "ri_evidence": ["artificial intelligence", "innovation"],
+                     "geo_evidence": ["competitiveness"],
+                     "aboutness_reason": "official EU AI institutional framework", "a_focus_pass": True,
+                 }), \
+                 mock.patch.object(scan, "build_item", side_effect=lambda **kw: {
+                     "title": kw["title"], "strand": kw["strand"], "type": kw["item_type"], "link": kw["link"]
+                 }):
+                item = scan.parse_institution_page(
+                    FakeResponse.url, "European Commission — Digital Strategy", 1,
+                    time.monotonic() + 30, "", __import__('datetime').date(2026, 8, 1)
+                )
+        finally:
+            candidates = list(scan.INSTITUTION_SIGNAL_CANDIDATES)
+            scan.INSTITUTION_SIGNAL_CANDIDATES = old_candidates
+        self.assertEqual(candidates, [])
+        self.assertIsNotNone(item)
+        self.assertEqual(item["strand"], "A")
+        self.assertEqual(item["type"], "official policy / institutional framework")
+
+    def test_signal_quality_version_triggers_new_c_cleanup(self):
+        self.assertIn("v17.17.3", scan.SIGNAL_QUALITY_PROFILE_VERSION)
+        self.assertTrue(scan.needs_precision_signal_cleanup({
+            "signal_quality_profile_version": "v17.17.0-relational-c-ontology-guarded"
+        }))
+
     def test_signal_dedupe_requires_same_point_not_merely_same_topic(self):
         a = {
             "headline": "Europe expands AI compute capacity with new supercomputer investment",

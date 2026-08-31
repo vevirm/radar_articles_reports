@@ -1,31 +1,34 @@
-# R&I Radar v17.17.2
+# R&I Radar v17.17.3
 
 This is a complete upload-ready repository.
 
-## Integrity repair
-- Every public A/B/C record must now have a title/headline, a named source, a real http(s) source link, and a valid date.
-- A record with a missing source link is rejected rather than displayed linkless.
-- Configured institutional/news sources must point to their own host family, unless an external document URL clearly identifies the same document.
-- Unconfigured third-party PDF links must still match the displayed document title; an unrelated cited PDF cannot become the record source.
-- The source-integrity gate now runs on Strand C as well as A/B.
-- The same integrity gate runs while loading saved radar.json, while merging a whole-repository upload with Git history, and while restoring older snapshots. Bad rows cannot be resurrected by upload recovery.
-- The bundled radar.json was proactively cleaned: 5 A rows and 1 C row with incoherent source/link identity were removed.
+## Strand C correction: weak signals are not routine EU institutional activity
+- Strand C is now explicitly a weak-signal / reframing layer, not a second feed of Commission, agency or institutional pages.
+- Established EU offices, programmes, strategies, services, standing initiatives, mature implementation notices, formal grant results and similar systematic public activity cannot enter C simply because they are recent or strategically relevant.
+- EU-official material gets first claim on Strand A/B. If it passes the substantive A/B gate it appears there; otherwise it is omitted.
+- EU-official material can enter C only when it is genuinely provisional, experimental or uncertain (for example a draft, consultation, proposal, pilot, trial, delay, pause, exception, waiver or opt-out) and it still has to reframe a substantive Strand-A issue.
+- Institutional C candidates now need a real current change/finding in the headline or lead. Static overview/activity/event pages do not qualify because strategic words appear somewhere in the body.
+- The exact regression case “European AI Office” is tested: it cannot enter C; when the normal A gate passes it is labelled as an official policy / institutional framework in A.
+- Mature official items such as EIC investment-guideline updates and routine ERC grant-result announcements can no longer survive as C.
+- Git-history recovery applies the same C-quality rule, so old institutional-as-C rows cannot be resurrected after a whole-repository upload.
 
-## Date/document repair
-- Sitemap `lastmod` is now a discovery/crawl hint only. It is never used as a publication date.
-- Legacy records whose date was explicitly based on `sitemap_lastmod` are purged during saved-corpus cleanup.
-- An ongoing webpage about a commissioned study (for example, a page saying the study “aims to”, is “collecting evidence”, or “will provide” outputs) is not labelled as a newly published research/policy paper unless it actually exposes a final report/findings.
-- This removes the false-new Commission “Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027” card that was dated from a 31 July webpage update.
+## Bundled corpus cleanup
+- The bundled Strand C corpus was revalidated under this rule.
+- 6 old institutional/routine C rows were removed (including EIC/ ERC and generic ITU activity/event pages).
+- The bundle now contains 228 A, 24 B and 2 retained C records before the next live scan/history merge.
+- The first post-upload scan repeats the new C migration after merging any larger valid pre-upload snapshot from Git history.
 
-## Whole-repository upload safety
-- This package carries a one-run repository-bundle marker.
-- After upload, the scanner unions the pre-upload Git snapshot with the package after applying the new integrity filters, instead of blindly restoring old corrupt rows or losing newer good rows.
+## Earlier integrity/date repairs retained
+- Every public A/B/C record must have a coherent title/headline, source, real http(s) source link and valid publication date.
+- Unrelated cited PDFs cannot become another document's source link.
+- Sitemap `lastmod` / webpage update time is never treated as publication date.
+- Ongoing commissioned-study/project pages are not mislabelled as newly published research papers.
 
-## Existing radar behaviour retained
+## Recall targets retained
 - Search continues toward roughly 20 strict new A/B findings without padding.
 - Historical continuation targets roughly 8 strict findings.
-- Weak signals remain relational to Strand A: an already-known topic can produce a new C item when the new fact genuinely changes the interpretation.
-- C phrase rules are retrieval/association aids, never standalone admission rules.
+- C phrase rules remain retrieval/association aids only; they never admit a weak signal by themselves.
+- Topic repetition is allowed in C only when the new fact changes the interpretation of an existing Strand-A issue.
 
 ## Validation
-- 48 automated tests pass in the packaged repository.
+- 34 main-scanner regression tests + 20 historical-scanner tests pass: 54/54 total.
