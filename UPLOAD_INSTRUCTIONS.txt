@@ -1,0 +1,18 @@
+UPLOAD-ONLY INSTALL
+===================
+
+You do NOT need to delete anything from the existing GitHub repository.
+
+1. Unzip the package on your computer.
+2. Open your existing GitHub repository in the browser.
+3. Choose: Add file -> Upload files.
+4. Drag ALL files and folders from inside this folder onto the GitHub upload page.
+   Important: include the hidden .github folder. If your computer hides dot-folders,
+   use a folder-drag into the upload page rather than selecting individual visible files.
+5. At the bottom, commit directly to the main branch.
+
+Files with the same names replace/update the old versions. New files are added.
+Old extra files can remain; this release does not depend on deleting them.
+
+After the commit, the R&I Radar Scan workflow should start automatically because scanner/config files changed.
+The historical workflow will also use the corrected target-driven settings.

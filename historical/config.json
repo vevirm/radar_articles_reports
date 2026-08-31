@@ -1,5 +1,5 @@
 {
-  "profile_version": "v17.15.0-source-age-history-manual-layer",
+  "profile_version": "v17.16.0-target-eight-strict-history",
   "date_from": "2015-01-01",
   "topics_per_scan": 4,
   "sources_per_scan": 8,
@@ -17,11 +17,11 @@
   "crossref_missing_abstract_enrichment_per_scan": 36,
   "crossref_missing_abstract_enrichment_per_query": 3,
   "missing_abstract_enrichment_timeout_seconds": 9,
-  "low_yield_trigger_max_new_items": 3,
+  "low_yield_trigger_max_new_items": 7,
   "low_yield_fresh_topics": 4,
   "low_yield_fresh_sources": 8,
   "full_rescue_run_enabled": true,
-  "full_rescue_run_trigger_max_new_items": 3,
+  "full_rescue_run_trigger_max_new_items": 7,
   "max_items": 350,
   "minimum_admission_score": 93,
   "topics": [
@@ -563,7 +563,7 @@
     "Scientometrics",
     "Journal of Higher Education Policy and Management"
   ],
-  "minimum_runtime_seconds": 600,
+  "minimum_runtime_seconds": 0,
   "minimum_runtime_topics_per_wave": 4,
   "minimum_runtime_sources_per_wave": 8,
   "minimum_runtime_max_extra_waves": 12,
@@ -572,5 +572,6 @@
   "main_radar_window_months": 6,
   "cutoff_rule": "Historical sources are those published before the rolling main-radar boundary (today minus main_radar_window_months). Content may itself be forward-looking.",
   "year_preference_latest_bonus": 12,
-  "year_preference_decay_per_year": 2
+  "year_preference_decay_per_year": 2,
+  "target_new_items_per_scan": 8
 }

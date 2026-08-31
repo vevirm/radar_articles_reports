@@ -793,7 +793,8 @@ def main() -> int:
             old_items.append(item)
     old_ids={clean(x.get("id")) for x in old_items}
     unique_initial=dedupe(candidates); initial_new=sum(1 for x in unique_initial if clean(x.get("id")) not in old_ids)
-    low_threshold=int(CONFIG.get("low_yield_trigger_max_new_items",3)); low_triggered=initial_new<=low_threshold
+    target_new=max(1,int(CONFIG.get("target_new_items_per_scan",8) or 8))
+    low_threshold=max(int(CONFIG.get("low_yield_trigger_max_new_items",3)), target_new-1); low_triggered=initial_new<=low_threshold
     rescue_topics=[]; rescue_sources=[]; rescue_queries=[]; rescue_candidates=[]
     if low_triggered and budget_ok(220):
         rescue_topics,rescue_next_topic=rotating(topics,next_topic,int(CONFIG.get("low_yield_fresh_topics",4)))
@@ -802,16 +803,18 @@ def main() -> int:
         rescue_candidates,rescue_queries=run_rotation(rescue_topics,rescue_sources,warnings,"fresh",result_page=1)
         candidates.extend(rescue_candidates); next_topic=rescue_next_topic; next_source=rescue_next_source
 
-    # Minimum-runtime continuation: keep doing useful historical work until at least
-    # the configured floor has elapsed. Topic groups rotate through the whole source-age
-    # window; after one full topic sweep, scholarly APIs move to deeper result pages.
+    # Target-driven continuation: keep searching while the strict-gate yield is below the
+    # configured target.  The target controls search depth only; it never bypasses source,
+    # text, EU, R&I, strategic-context or topic gates.
     continuation_waves=[]
     topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",CONFIG.get("topics_per_scan",4))))
     sources_per_wave=max(1,int(CONFIG.get("minimum_runtime_sources_per_wave",CONFIG.get("sources_per_scan",8))))
     max_extra=max(0,int(CONFIG.get("minimum_runtime_max_extra_waves",12)))
     blocks_per_topic_sweep=max(1,(len(topics)+topics_per_wave-1)//topics_per_wave)
     blocks_already=1 + (1 if rescue_topics else 0)
-    while minimum_runtime_remaining()>0 and budget_ok(150) and len(continuation_waves)<max_extra:
+    current_unique=dedupe(candidates)
+    current_new=sum(1 for x in current_unique if clean(x.get("id")) not in old_ids)
+    while current_new<target_new and budget_ok(150) and len(continuation_waves)<max_extra:
         wave_no=len(continuation_waves)+1
         wave_topics,wave_next_topic=rotating(topics,next_topic,topics_per_wave)
         wave_sources,wave_next_source=rotating(sources,next_source,sources_per_wave)
@@ -821,6 +824,8 @@ def main() -> int:
         candidates.extend(wave_candidates)
         continuation_waves.append({"wave":wave_no,"result_page":result_page,"topics":[str(t.get("label")) for t in wave_topics],"sources":[str(s.get("name")) for s in wave_sources],"queries":wave_queries,"candidates":len(wave_candidates)})
         next_topic=wave_next_topic; next_source=wave_next_source; blocks_already+=1
+        current_unique=dedupe(candidates)
+        current_new=sum(1 for x in current_unique if clean(x.get("id")) not in old_ids)
 
     wait_until_minimum_runtime()
     unique_gate=dedupe(candidates); merged=dedupe(manual_items+old_items+unique_gate)
@@ -852,6 +857,7 @@ def main() -> int:
             "manual_evidence":{"available":len(manual_items),"included":sum(1 for x in merged if x.get("manual_curated"))},
             "low_yield_rotation":{"triggered":low_triggered,"new_items_after_normal_rotation":initial_new,"fresh_topics":[str(t.get("label")) for t in rescue_topics],"fresh_sources":[str(s.get("name")) for s in rescue_sources],"fresh_queries":rescue_queries,"new_items_after_all_in_run_rotations":new_count,"full_rescue_run_enabled":full_rescue_enabled,"full_rescue_run_should_dispatch":should_dispatch},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
+            "target_new_items":target_new,
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),
             "openalex_api_key_configured":bool(OPENALEX_API_KEY),"rejection_funnel":rejection_funnel(new_count,len(unique_gate)),"diagnostics":{k:int(v) for k,v in sorted(DIAG.items())},"warnings":list(dict.fromkeys(warnings))[:50],
         },

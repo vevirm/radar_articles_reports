@@ -1,11 +1,11 @@
 {
   "news_lookback_hours": 168,
   "max_new_ab_per_scan": 0,
-  "max_c_per_scan": 4,
+  "max_c_per_scan": 8,
   "max_corpus_per_strand": 0,
   "openalex_per_query": 80,
   "crossref_rows_per_query": 70,
-  "institution_pages_per_domain": 12,
+  "institution_pages_per_domain": 18,
   "queries_a": [
     "European research security",
     "EU research security foreign interference",
@@ -835,14 +835,14 @@
   "first_news_lookback_hours": 720,
   "discovery_overlap_days": 14,
   "bootstrap_lookback_months": 4,
-  "source_expansion_version": "v17.5.2-gap-report-recall",
+  "source_expansion_version": "v17.16.0-eu-publication-hubs",
   "force_backfill_on_source_expansion": true,
   "institution_pages_per_domain_bootstrap": 12,
   "sitemap_child_budget": 6,
   "sitemap_max_entries": 1200,
   "institution_min_words": 900,
   "institution_tier1_brief_min_words": 500,
-  "accept_broad_peer_reviewed_journals": true,
+  "accept_broad_peer_reviewed_journals": false,
   "major_scholarly_publishers": [
     "Springer Nature",
     "Elsevier",
@@ -882,7 +882,7 @@
   "crossref_public_min_interval_seconds": 1.2,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.7.4-direct-institutional-signals",
+  "signal_discovery_version": "v17.17.0-relational-new-point-not-new-topic",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -928,7 +928,7 @@
     "China semiconductor breakthrough chip capability",
     "United States semiconductor breakthrough chip capability"
   ],
-  "quality_profile_version": "v17.13.24-source-supported-relevance-english-publications",
+  "quality_profile_version": "v17.16.0-curated-or-trusted-publisher-journals",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -992,11 +992,11 @@
   "openalex_queries_per_scan": 52,
   "crossref_broad_queries_per_scan": 52,
   "crossref_priority_tasks_per_scan": 32,
-  "institution_sources_per_scan": 18,
-  "news_stage_seconds": 180,
-  "openalex_stage_seconds": 480,
-  "crossref_stage_seconds": 600,
-  "institution_stage_seconds": 420,
+  "institution_sources_per_scan": 24,
+  "news_stage_seconds": 240,
+  "openalex_stage_seconds": 360,
+  "crossref_stage_seconds": 420,
+  "institution_stage_seconds": 520,
   "skip_known_items_before_classification": true,
   "skip_known_institution_urls_before_fetch": true,
   "institution_seen_cache_max": 5000,
@@ -1648,14 +1648,14 @@
     "developing adaptive pathways method technology innovation policy uncertainty"
   ],
   "queries_b_method_per_scan": 12,
-  "signal_quality_profile_version": "v17.9.0-source-aware-aboutness-matrix-rubric",
+  "signal_quality_profile_version": "v17.17.0-relational-c-ontology-guarded",
   "rotation_profile_version": "v17.7.1-executed-work-rotation",
   "openalex_exploration_queries_per_scan": 12,
   "crossref_exploration_queries_per_scan": 10,
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.14.1-main-recall-repair-source-adapters-priority-text-rescue",
+  "recall_profile_version": "v17.17.0-phrase-ontology-relational-c",
   "crossref_missing_abstract_enrichment_per_scan": 36,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -1670,8 +1670,8 @@
   "frontier_gap_deepening_max_waves": 32,
   "scan_finalize_reserve_seconds": 60,
   "weak_signal_followup_every_n_waves": 2,
-  "weak_signal_followup_queries_per_wave": 0,
-  "weak_signal_followup_max_passes": 1,
+  "weak_signal_followup_queries_per_wave": 8,
+  "weak_signal_followup_max_passes": 3,
   "frontier_gap_recompute_every_n_waves": 1,
   "frontier_stubborn_recovery_enabled": true,
   "frontier_stubborn_recovery_lookback_months": 4,
@@ -1764,7 +1764,7 @@
     "data.europa.eu",
     "ecb.europa.eu"
   ],
-  "official_eu_priority_sources_per_scan": 8,
+  "official_eu_priority_sources_per_scan": 10,
   "source_attention_floor_broad_share": 0.4,
   "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Core EU sources use bounded source-specific publication hubs when sitemap discovery is weak. Missing scholarly text is rescued by metadata priority before admission. Keep broad rotation and unchanged substantive admission gates.",
   "frontier_gap_balance_rich_cell_ratio": 0.75,
@@ -1843,7 +1843,7 @@
   "quiet_scan_rescue_trigger_below_scholarly_candidates": 4,
   "frontier_gap_deepening_max_waves_no_empty": 3,
   "low_yield_fresh_rotation_enabled": true,
-  "low_yield_fresh_rotation_trigger_max_new_ab": 3,
+  "low_yield_fresh_rotation_trigger_max_new_ab": 19,
   "low_yield_fresh_rotation_queries_per_source": 8,
   "low_yield_fresh_rotation_min_seconds_remaining": 180,
   "low_yield_fresh_rotation_stage_seconds": 180,
@@ -1859,8 +1859,8 @@
   "crossref_missing_abstract_enrichment_per_task": 3,
   "crossref_relevance_query_mode": "title",
   "institution_source_adapter_enabled": true,
-  "institution_source_adapter_pages_per_domain": 20,
-  "institution_source_adapter_max_hub_fetches": 6,
+  "institution_source_adapter_pages_per_domain": 36,
+  "institution_source_adapter_max_hub_fetches": 10,
   "institution_source_adapter_crawl_depth": 2,
   "institution_source_adapters": {
     "research-and-innovation.ec.europa.eu": {
@@ -1868,7 +1868,13 @@
         "/",
         "/news/all-research-and-innovation-news_en",
         "/research-and-innovation_en",
-        "/strategy/strategy-research-and-innovation_en"
+        "/strategy/strategy-research-and-innovation_en",
+        "/news/news-alerts_en",
+        "/statistics/performance-indicators_en",
+        "/strategy/support-policy-making/support-national-research-and-innovation-policy-making_en",
+        "/knowledge-publications-tools-and-data/publications_en",
+        "/strategy/support-policy-making/support-national-research-and-innovation-policy-making/research-and-innovation-paper-series_en",
+        "/strategy/support-policy-making/support-national-research-and-innovation-policy-making/srip-report_en"
       ],
       "path_hints": [
         "publication",
@@ -1879,7 +1885,11 @@
         "horizon",
         "european-research-area",
         "economic-security",
-        "competitiveness"
+        "competitiveness",
+        "scoreboard",
+        "performance",
+        "evidence",
+        "assessment"
       ]
     },
     "joint-research-centre.ec.europa.eu": {
@@ -1887,7 +1897,8 @@
         "/",
         "/jrc-news-and-updates_en",
         "/scientific-activities-z_en",
-        "/jrc-missions-and-values_en"
+        "/jrc-missions-and-values_en",
+        "/publications-and-data_en"
       ],
       "path_hints": [
         "publication",
@@ -1896,7 +1907,12 @@
         "foresight",
         "technology",
         "innovation",
-        "research"
+        "research",
+        "policy",
+        "evidence",
+        "assessment",
+        "competitiveness",
+        "security"
       ]
     },
     "publications.jrc.ec.europa.eu": {
@@ -1909,7 +1925,10 @@
         "JRC",
         "publication",
         "science-for-policy",
-        "report"
+        "report",
+        "policy",
+        "science",
+        "technology"
       ]
     },
     "op.europa.eu": {
@@ -1933,7 +1952,9 @@
       "hub_paths": [
         "/thinktank/en/home",
         "/stoa/en/home",
-        "/news/en/press-room"
+        "/news/en/press-room",
+        "/thinktank/en/research.html",
+        "/stoa/en/publications"
       ],
       "path_hints": [
         "thinktank",
@@ -1943,7 +1964,8 @@
         "analysis",
         "research",
         "technology",
-        "innovation"
+        "innovation",
+        "foresight"
       ]
     },
     "consilium.europa.eu": {
@@ -2063,7 +2085,25 @@
     }
   },
   "low_yield_full_rescue_run_enabled": true,
-  "low_yield_full_rescue_run_trigger_max_new_ab": 3,
+  "low_yield_full_rescue_run_trigger_max_new_ab": 19,
   "low_yield_full_rescue_run_max_chain": 1,
-  "institution_source_adapter_sources_per_scan": 4
+  "institution_source_adapter_sources_per_scan": 8,
+  "target_new_ab_per_scan": 20,
+  "accept_trusted_publisher_peer_reviewed_journals": true,
+  "trusted_broad_journal_publishers": [
+    "Springer Nature",
+    "Springer",
+    "Elsevier",
+    "Wiley",
+    "Taylor & Francis",
+    "SAGE",
+    "Oxford University Press",
+    "Cambridge University Press",
+    "IEEE",
+    "ACM",
+    "Royal Society",
+    "AAAS"
+  ],
+  "phrase_ontology_file": "radar_phrase_rules.json",
+  "phrase_ontology_policy": "Strand A/B phrases support conservative discovery and linkage. Strand C phrases are retrieval/re-ranking only and never admit a weak signal without a substantive Strand-A anchor and a distinct new point."
 }

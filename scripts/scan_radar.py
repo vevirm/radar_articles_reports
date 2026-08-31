@@ -97,9 +97,16 @@ OUT_PATH = ROOT / "radar.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
 CURATOR_CANDIDATE_TESTS_PATH = ROOT / "curator_candidate_tests.json"
+PHRASE_RULES_PATH = ROOT / "radar_phrase_rules.json"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
+try:
+    with PHRASE_RULES_PATH.open("r", encoding="utf-8") as f:
+        PHRASE_RULES = json.load(f)
+except Exception:
+    # The scanner remains runnable if an older checkout lacks the curator workbook export.
+    PHRASE_RULES = {"strand_a": [], "strand_b": [], "strand_c_retrieval": []}
 
 # V17.12.5 non-destructive recall repair.  Keep these additions in code rather than
 # requiring a config migration: replacing this scanner file cannot reset persistent
@@ -168,9 +175,9 @@ QUALITY_PROFILE_VERSION = str(CONFIG.get("quality_profile_version", "v17-eu-ri-g
 INHERITED_CORPUS_AUDIT_ENABLED = bool(CONFIG.get("inherited_corpus_audit_enabled", True))
 INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh_failures", True))
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
-SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v16-weak-signals"))
+SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.13.31-six-month-low-evidence-C-evidence-followup"
+C_ADMISSION_PROFILE_VERSION = "v17.17.0-relational-C-new-point-not-new-topic"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -250,6 +257,11 @@ KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
+# Sitemap ``lastmod`` dates are discovery evidence that should survive into the
+# page parser.  Many high-value EU CMS pages omit article:published_time even when
+# their sitemap provides a precise update date.  Keep this run-local map separate
+# from the persisted seen-cache so it cannot become an admission shortcut.
+INSTITUTION_DISCOVERED_DATES: dict[str, dt.date] = {}
 INSTITUTION_SIGNAL_CANDIDATES: list[dict[str, Any]] = []
 SIGNAL_WINDOW_START_DATE: dt.date | None = None
 ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
@@ -1500,7 +1512,7 @@ THEMES = {
     "export controls / dual use": ["export control", "dual use", "dual-use", "technology transfer"],
     "fragmentation of global science": ["fragmentation", "decoupling", "scientific collaboration", "research collaboration"],
     "transatlantic / US–China S&T competition": ["us-china", "u.s.-china", "us–china", "transatlantic", "strategic competition", "technology competition"],
-    "critical and emerging technologies": ["critical technology", "critical technologies", "emerging technology", "semiconductor", "chips", "quantum", "biotech", "artificial intelligence", " ai "],
+    "critical and emerging technologies": ["critical technology", "critical technologies", "emerging technology", "semiconductor", "chips", "quantum", "biotech", "artificial intelligence", " ai ", "biomanufacturing", "fermentation capacity", "neuromorphic", "risc-v", "open-weight model", "open weights", "quantum error correction", "photonic interconnect", "critical technology list"],
     "economic security and R&I": ["economic security", "research funding", "innovation funding", "talent mobility", "strategic dependency", "strategic dependencies"],
     "R&I competitiveness / technological capabilities": ["innovation capacity", "innovation competitiveness", "technological capabilities", "scientific capacity", "research and development", "r&d", "deep tech", "industrial innovation"],
     "supply chains / strategic dependencies": ["supply chain security", "supply chain resilience", "strategic dependency", "strategic dependencies", "critical raw materials", "critical minerals", "friendshoring", "reshoring"],
@@ -3329,11 +3341,20 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
             source, source_tier = hit
             return True, source_tier, float(source_tier), source, f"Tier {source_tier}"
 
-    # Broad scholarly discovery: OpenAlex already classifies the venue as a journal.
-    # The substantive Strand A/B gates remain the admission control, so relevant papers
-    # are not lost merely because their journal was missing from a short hand-maintained list.
-    if CONFIG.get("accept_broad_peer_reviewed_journals", True) and source_type == "journal" and typ in {"article", "review"}:
-        return True, 2, 2.8, source_name or "Scholarly journal", "Tier 2 broad journal"
+    # Broad discovery is useful, but publication type alone is not a quality guarantee.
+    # Outside the curated journal list, require a trusted scholarly host/publisher rather
+    # than promoting every OpenAlex journal to Tier 2.
+    host = clean_text(src.get("host_organization_name") or src.get("publisher"))
+    trusted_publishers = [normalized(x) for x in CONFIG.get("trusted_broad_journal_publishers", []) if clean_text(x)]
+    if (
+        CONFIG.get("accept_trusted_publisher_peer_reviewed_journals", True)
+        and source_type == "journal" and typ in {"article", "review"}
+        and host and any(p in normalized(host) for p in trusted_publishers)
+    ):
+        return True, 2, 2.75, source_name or host, "Tier 2 trusted-publisher journal"
+
+    if CONFIG.get("accept_broad_peer_reviewed_journals", False) and source_type == "journal" and typ in {"article", "review"}:
+        return True, 2, 2.9, source_name or "Scholarly journal", "Tier 2 broad journal"
 
     # Preprints are allowed only from arXiv and are ranked as Tier 3.
     if typ in {"preprint", "posted-content", "working-paper", "working paper"}:
@@ -4092,9 +4113,16 @@ def quality_from_crossref(item: dict[str, Any]) -> tuple[bool, int, float, str, 
     tier, rank, tier_label = source_rank_for_journal(journal)
     if tier and typ in {"journal-article", "article", "review", "proceedings-article"}:
         return True, tier, rank, journal, tier_label, "peer-reviewed article"
-    if CONFIG.get("accept_broad_peer_reviewed_journals", True) and journal and typ in {"journal-article", "article", "review"}:
-        return True, 2, 2.9, journal, "Tier 2 broad journal", "peer-reviewed article"
     publisher = clean_text(item.get("publisher"))
+    trusted_publishers = [normalized(x) for x in CONFIG.get("trusted_broad_journal_publishers", []) if clean_text(x)]
+    if (
+        CONFIG.get("accept_trusted_publisher_peer_reviewed_journals", True)
+        and journal and typ in {"journal-article", "article", "review"}
+        and publisher and any(p in normalized(publisher) for p in trusted_publishers)
+    ):
+        return True, 2, 2.75, journal, "Tier 2 trusted-publisher journal", "peer-reviewed article"
+    if CONFIG.get("accept_broad_peer_reviewed_journals", False) and journal and typ in {"journal-article", "article", "review"}:
+        return True, 2, 2.9, journal, "Tier 2 broad journal", "peer-reviewed article"
     if typ in {"report", "report-component", "book", "book-chapter", "posted-content"}:
         for p in CONFIG.get("crossref_institution_publishers", []):
             if normalized(p) in normalized(publisher + " " + journal):
@@ -5279,7 +5307,12 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             continue
         for obj in jsonld_objects(data):
             if not published:
-                published = parse_date(obj.get("datePublished"))
+                published = parse_date(
+                    obj.get("datePublished")
+                    or obj.get("dateCreated")
+                    or obj.get("uploadDate")
+                    or obj.get("dateModified")
+                )
             if not article_body and obj.get("articleBody"):
                 article_body = clean_text(obj.get("articleBody"))
             a = obj.get("author")
@@ -5291,8 +5324,14 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                         authors.append(clean_text(au["name"]))
                     elif isinstance(au, str):
                         authors.append(clean_text(au))
+    date_basis = "page"
     if not published:
-        published = parse_date(meta_content(soup, ["article:published_time", "datePublished", "date", "DC.date", "parsely-pub-date", "pubdate", "publication_date"]))
+        published = parse_date(meta_content(soup, [
+            "article:published_time", "og:article:published_time", "datePublished", "dateCreated",
+            "date", "DC.date", "DC.Date", "DC.date.issued", "DC.Date.issued", "dcterms.date",
+            "dcterms.created", "dcterms.issued", "parsely-pub-date", "pubdate", "publication_date",
+            "citation_publication_date", "citation_date", "release_date", "dateModified",
+        ]))
     if not published:
         # Common institutional CMS fallback: semantic <time> elements.
         for tm in soup.find_all("time")[:8]:
@@ -5315,6 +5354,15 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         m_labelled = re.search(r"\b(?:published|publication date|date)\s*[:\-]?\s*((?:[0-3]?\d[.\-/ ](?:0?\d|[A-Za-z]{3,9})[.\-/ ]20\d{2})|(?:[A-Za-z]{3,9}\s+[0-3]?\d,?\s+20\d{2})|(?:20\d{2}-\d{1,2}-\d{1,2}))", top_text, re.I)
         if m_labelled:
             published = parse_date(m_labelled.group(1))
+    if not published and fingerprint:
+        # Some authoritative institutional CMSs expose a precise sitemap lastmod but no
+        # article publication meta tag. Accept it only for publication-like URLs that the
+        # institutional scorer ranks positively; generic navigation pages remain ineligible.
+        discovered = INSTITUTION_DISCOVERED_DATES.get(fingerprint)
+        floor = publication_floor or DATE_FLOOR
+        if discovered and institution_url_score(r.url, discovered, floor) >= 3:
+            published = discovered
+            date_basis = "sitemap_lastmod"
     if not published:
         _diag_inc("institution_reject_no_date")
         return None
@@ -5414,13 +5462,16 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             _record_ab_gate_diagnostic("institution", notice_ev)
             if notice_ev.get("a_pass"):
                 notice_strand = "both" if notice_ev.get("b_pass") else "A"
-                return build_item(
+                result = build_item(
                     title=title, authors=", ".join(dict.fromkeys(a for a in authors if a)) or source,
                     source=source, date=published, link=pdf_url or canonical or r.url,
                     item_type="official notice / primary source", strand=notice_strand,
                     evidence=notice_ev, source_rank=float(tier), tier_label=f"Tier {tier}",
                     text=full_notice_text, doi="", preprint=False,
                 )
+                if date_basis != "page":
+                    result["date_basis"] = date_basis
+                return result
         _diag_inc("institution_reject_document_exclusion")
         return None
 
@@ -5448,12 +5499,15 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         item_type = "working paper"
     elif word_count < 3500:
         item_type = "research/policy paper"
-    return build_item(
+    result = build_item(
         title=title, authors=", ".join(dict.fromkeys(a for a in authors if a)) or source,
         source=source, date=published, link=pdf_url or canonical or r.url, item_type=item_type,
         strand=strand, evidence=ev, source_rank=float(tier), tier_label=f"Tier {tier}",
         text=f"{title}. {desc}. {body[:45000]}", doi="", preprint=False,
     )
+    if date_basis != "page":
+        result["date_basis"] = date_basis
+    return result
 
 
 
@@ -5592,6 +5646,8 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         fp = institution_fingerprint(u, last)
         if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
             continue
+        if last:
+            INSTITUTION_DISCOVERED_DATES[fp] = last
         seen.add(normalized_link(u))
         jobs.append((u, src["name"], int(src["tier"]), fp))
         if len(jobs) >= limit:
@@ -7313,15 +7369,38 @@ def _signal_tokens(value: str) -> set[str]:
     return out
 
 
-def signals_near_duplicate(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    ta, tb = _signal_tokens(a.get('headline','')), _signal_tokens(b.get('headline',''))
+def _signal_text_similarity(a: str, b: str) -> tuple[float, float, int]:
+    ta, tb = _signal_tokens(a), _signal_tokens(b)
     if not ta or not tb:
-        return False
+        return 0.0, 0.0, 0
     inter = len(ta & tb)
     union = len(ta | tb)
-    j = inter / max(1, union)
-    containment = inter / max(1, min(len(ta), len(tb)))
-    return j >= 0.72 or (inter >= 5 and containment >= 0.82)
+    return inter / max(1, union), inter / max(1, min(len(ta), len(tb))), inter
+
+
+def signals_near_duplicate(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    """Collapse only substantially the same event/claim/implication.
+
+    Strand C is allowed to revisit an established A topic whenever a new fact changes
+    the interpretation.  Earlier versions used topic-heavy headline overlap and could
+    erase a distinct point merely because both headlines said, for example, Europe +
+    AI + compute.  Exact URLs still collapse immediately; otherwise both the headline
+    and the substantive point must be very close.
+    """
+    la = normalized(a.get('link', ''))
+    lb = normalized(b.get('link', ''))
+    if la and lb and la == lb:
+        return True
+
+    hj, hc, hi = _signal_text_similarity(a.get('headline',''), b.get('headline',''))
+    point_a = clean_text(a.get('what') or a.get('core_message') or a.get('signal_note') or a.get('_desc',''))
+    point_b = clean_text(b.get('what') or b.get('core_message') or b.get('signal_note') or b.get('_desc',''))
+    pj, pc, pi = _signal_text_similarity(point_a, point_b)
+
+    # Near-identical syndication remains one signal.  Merely sharing a topic does not.
+    if hj >= 0.90 or (hi >= 7 and hc >= 0.96):
+        return not point_a or not point_b or pj >= 0.42 or pc >= 0.70
+    return bool(hj >= 0.76 and hc >= 0.86 and pj >= 0.66 and pc >= 0.82 and pi >= 5)
 
 
 def signal_identity(item: dict[str, Any]) -> str:
@@ -7506,6 +7585,100 @@ def eu_news_scope(text: str) -> bool:
     return bool(has_eu_word(full) or contains_any(full, EU_DIRECT + EU_GENERIC) or bounded_matches(full, MEMBER_STATE_SCOPE))
 
 
+def _ontology_variants(row: dict[str, Any]) -> list[str]:
+    phrase = clean_text(row.get("phrase"))
+    rule = clean_text(row.get("match_rule"))
+    vals = [phrase] if phrase else []
+    # Curator workbook expresses common safe variants in quoted text after "also".
+    for v in re.findall(r"['‘]([^'’]{2,80})['’]", rule):
+        v = clean_text(v)
+        if v and v not in vals:
+            vals.append(v)
+    return vals
+
+
+def _ontology_phrase_present(text: str, row: dict[str, Any]) -> bool:
+    """Conservative phrase matcher for the curator workbook.
+
+    These rules are used for discovery/linkage only here. They never bypass the normal
+    A/B substantive gates, and Strand-C rows never admit a signal on their own.
+    """
+    rule = clean_text(row.get("match_rule")).lower()
+    case_sensitive = "case-sensitive" in rule or "case sensitive" in rule
+    for phrase in _ontology_variants(row):
+        hay = clean_text(text) if case_sensitive else normalized(text)
+        needle = clean_text(phrase) if case_sensitive else normalized(phrase)
+        if not needle:
+            continue
+        if "word boundar" in rule or (len(needle) <= 6 and re.fullmatch(r"[A-Za-z0-9&.-]+", needle)):
+            flags = 0 if case_sensitive else re.I
+            if re.search(r"(?<![A-Za-z0-9])" + re.escape(clean_text(phrase)) + r"(?![A-Za-z0-9])", clean_text(text), flags=flags):
+                return True
+        elif needle in hay:
+            return True
+    return False
+
+
+def ontology_phrase_hits(text: str, strand: str = "a", tiers: set[int] | None = None) -> list[dict[str, Any]]:
+    key = {"a": "strand_a", "b": "strand_b", "c": "strand_c_retrieval"}.get(strand.lower(), strand)
+    rows = PHRASE_RULES.get(key, []) if isinstance(PHRASE_RULES, dict) else []
+    out = []
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, dict):
+            continue
+        try:
+            tier = int(row.get("tier", 3))
+        except Exception:
+            tier = 3
+        if tiers is not None and tier not in tiers:
+            continue
+        if _ontology_phrase_present(text, row):
+            out.append(row)
+    return out
+
+
+def relationship_novelty_dimensions(text: str) -> list[str]:
+    """Describe how a current fact could put an existing Strand-A issue in new light.
+
+    A weak signal does not need a new topic. It needs a distinct new point: evidence,
+    actor, magnitude, mechanism, timing, direction, consequence or geography.
+    """
+    full = normalized(text)
+    dims: list[str] = []
+    if contains_any(full, REFRAMING_SIGNAL_EVIDENCE + REFRAMING_SIGNAL_FINDINGS):
+        dims.append("new evidence")
+    if contains_any(full, ["announce", "launch", "sign", "partner", "acquire", "invest", "fund", "open", "build", "restrict", "ban", "approve", "adopt", "withdraw", "join", "propose", "plan", "pilot", "trial", "test", "seek"]):
+        dims.append("new actor move")
+    if re.search(r"(?:€|\$|£)\s?\d|\b\d+(?:[.,]\d+)?\s?(?:%|billion|million|bn|mn|gw|mw|petaflop|exaflop)", full) or contains_any(full, ["gap", "surge", "record", "doubl", "tripl", "increase", "decrease", "share of", "overtake", "outpace"]):
+        dims.append("new magnitude")
+    if contains_any(full, ["because", "due to", "driven by", "bottleneck", "constraint", "grid", "electricity", "licensing", "export control", "supply chain", "access to", "shortage", "dependency"]):
+        dims.append("new mechanism")
+    if contains_any(full, ["delay", "postpone", "accelerat", "fast-track", "deadline", "by 202", "earlier than", "later than", "months", "years"]):
+        dims.append("new timing")
+    if contains_any(full, ["expand", "scale", "cut", "decline", "fall", "rise", "tighten", "loosen", "suspend", "reverse", "shift", "relocat", "outflow", "inflow"]):
+        dims.append("new direction")
+    if contains_any(full, ["impact", "affect", "means", "could leave", "risk", "enable", "undermine", "strengthen", "weaken", "depend", "competitiveness", "capacity"]):
+        dims.append("new consequence")
+    return list(dict.fromkeys(dims))
+
+
+def relational_signal_candidate_text(title: str, desc: str = "") -> bool:
+    """Broad discovery gate for a possible new point on an existing A issue.
+
+    This deliberately does *not* require novelty-of-topic wording. Final C admission still
+    requires a substantive Strand-A anchor in ``anchor_news``.
+    """
+    if routine_signal_noise(title, desc):
+        return False
+    full = normalized(f"{title} {desc}")
+    if not any(x in full for x in NEWS_EVENT_TERMS):
+        return False
+    ri = contains_any(full, MATERIAL_SIGNAL_RI)
+    strategic = contains_any(full, MATERIAL_SIGNAL_STAKES) or bool(set(themes_for(full)) & WATCH_SIGNAL_THEMES)
+    ontology = bool(ontology_phrase_hits(full, "a", {1, 2}))
+    return bool((ri and strategic) and (relationship_novelty_dimensions(full) or ontology))
+
+
 def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> bool:
     """Balanced Strand-C topical gate with an A-anchored derived-Europe evidence route.
 
@@ -7524,7 +7697,10 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
         "research talent", "horizon europe", "fp10", "european research area",
         "research security", "science diplomacy", "research cooperation",
         "scientific cooperation", "research funding", "research programme",
-        "research program", "university research", "academic research",
+        "research program", "university research", "academic research", "technology",
+        "technological", "semiconductor", "quantum", "biotech", "biomanufacturing",
+        "compute", "neuromorphic", "risc-v", "open-weight model", "open weights",
+        "quantum error correction", "photonic interconnect",
     ])
     geo = contains_any(full, GEO_STRONG)
     actors = bool(distinct_matches(full, GEO_ACTORS))
@@ -7558,9 +7734,15 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
             'genocide', 'crypto firm', 'monetary news', 'hospitality', 'sports equipment'
         ])
         external_shock, _, _ = external_eu_bridge_sentence(full)
+        ontology_bridge = bool(ontology_phrase_hits(full, "a", {1, 2}))
+        relational_external = relational_signal_candidate_text(full, "")
         if hard_noise or not (
             external_shock
             or (narrow_external and (reframing_signal_text(full) or material_update_signal_text(full)) and strategic_frame and (found & derived_themes))
+            # Curator ontology can widen *discovery* beyond the old hard-coded tech list,
+            # but only for a factual R&I/strategic update. A concrete Strand-A publication
+            # anchor is still mandatory later, so a spreadsheet phrase never admits C alone.
+            or (ontology_bridge and relational_external and strategic_frame and core_ri and (found & derived_themes))
         ):
             return False
         if external_shock:
@@ -7579,7 +7761,9 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
     critical_tech = contains_any(full, [
         "artificial intelligence", " ai ", "semiconductor", "semiconductors", "chips",
         "quantum", "biotech", "biotechnology", "supercomputer", "cloud",
-        "critical technology", "critical technologies",
+        "critical technology", "critical technologies", "biomanufacturing", "neuromorphic",
+        "risc-v", "open-weight model", "open weights", "quantum error correction",
+        "photonic interconnect",
     ])
     narrow_capacity_tech = contains_any(full, [
         "semiconductor", "semiconductors", "chips", "quantum", "supercomputer",
@@ -7643,6 +7827,8 @@ MATERIAL_SIGNAL_RI = [
     'university', 'horizon europe', 'fp10', 'technology', 'semiconductor', 'chips', 'quantum',
     'biotech', 'artificial intelligence', ' ai ', 'compute', 'cloud', 'data centre', 'data center',
     'critical raw materials', 'critical minerals', 'deep tech', 'patent', 'standards',
+    'biomanufacturing', 'fermentation capacity', 'neuromorphic', 'risc-v', 'open-weight model',
+    'open weights', 'quantum error correction', 'photonic interconnect', 'critical technology list',
 ]
 MATERIAL_SIGNAL_STAKES = [
     'strategic', 'security', 'sovereignty', 'autonomy', 'competitiveness', 'capacity', 'capability',
@@ -7695,20 +7881,33 @@ MATURE_SIGNAL_MARKERS = [
 
 
 def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
-    """A C item may be an early change indicator or new evidence that reframes Strand A."""
+    """Discovery gate for C: new point, not necessarily a new topic.
+
+    Early indicators and reframing evidence still qualify, but so does an otherwise
+    ordinary factual development when it can alter magnitude, mechanism, actor, timing,
+    direction or consequence for a strategic R&I issue. Final admission remains relational
+    and requires a substantive Strand-A publication anchor.
+    """
     if routine_signal_noise(title, desc):
         return False
     full = normalized(f'{title} {desc}')
     early = contains_any(full, WEAK_SIGNAL_MARKERS)
     reframing = reframing_signal_text(full)
     material = material_update_signal_text(full)
-    if not (early or reframing or material):
+    relational = relational_signal_candidate_text(title, desc)
+    if not (early or reframing or material or relational):
         return False
     # Mature implementation is normally not a weak signal. New evidence/indicators are a separate
     # interpretive route, and counter-signals such as delays/opt-outs remain valid early signals.
     mature = contains_any(full, MATURE_SIGNAL_MARKERS)
     counter = contains_any(full, ['delay','delayed','postpone','pause','exception','waiver','limited to','targeted','opts out','declines to','does not include',"doesn't include"])
-    if mature and not counter and not reframing:
+    # A material strategic move remains useful as a current signal even after formal
+    # adoption/commitment.  Earlier code first recognised ``material`` and then
+    # immediately rejected mature implementation, which systematically hid major-media
+    # stories about EU capacity, funding, controls and infrastructure.  The material
+    # route is still strict: it independently requires a concrete change + R&I object +
+    # strategic stake, and ``anchor_news`` still requires a substantive Strand-A anchor.
+    if mature and not counter and not reframing and not material and not relational:
         return False
     return True
 
@@ -7749,7 +7948,28 @@ def news_queries(domain: str, lookback_hours: int) -> list[str]:
 def global_news_queries(lookback_hours: int) -> list[str]:
     days = max(2, min(30, (int(lookback_hours) + 23) // 24))
     when = f"when:{days}d"
-    return [f"{q} {when}" for q in CONFIG.get("news_global_queries", []) if clean_text(q)]
+    base = [f"{q} {when}" for q in CONFIG.get("news_global_queries", []) if clean_text(q)]
+
+    # Curator Strand-C phrases are retrieval seeds only. They widen what the news lane
+    # notices (RISC-V, neuromorphic, biomanufacturing, etc.); they do not bypass the
+    # factual-news, strategic-R&I or substantive Strand-A anchor gates.
+    c_rows = PHRASE_RULES.get("strand_c_retrieval", []) if isinstance(PHRASE_RULES, dict) else []
+    distinctive: list[str] = []
+    for row in c_rows if isinstance(c_rows, list) else []:
+        if not isinstance(row, dict):
+            continue
+        try:
+            tier = int(row.get("tier", 3))
+        except Exception:
+            tier = 3
+        phrase = clean_text(row.get("phrase"))
+        if tier == 1 and phrase and phrase.lower() not in {"suspension of cooperation", "withdrawal from the programme"}:
+            distinctive.append(phrase)
+    ontology_queries = [
+        f'("{p}") (Europe OR European OR EU) (research OR technology OR innovation OR strategic OR capacity OR security) {when}'
+        for p in distinctive[:8]
+    ]
+    return list(dict.fromkeys(base + ontology_queries))
 
 
 def feed_source(entry: Any, fallback_name: str = "", fallback_domain: str = "") -> tuple[str, str]:
@@ -8320,15 +8540,36 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             continue
         if not weak_signal_candidate_text(n.get('headline',''), n.get('_desc','')):
             continue
+        ntext=n.get('headline','')+' '+n.get('_desc','')
         nthemes=set(n.get('_themes',[])) & WATCH_SIGNAL_THEMES
         if not nthemes:
             continue
-        ntok=tokens(n.get('headline','')+' '+n.get('_desc',''))
+        novelty_dimensions=relationship_novelty_dimensions(ntext)
+        if not novelty_dimensions:
+            continue
+        ntok=tokens(ntext)
         nentities=set(n.get('_entities',[]))
+        n_a_ontology=ontology_phrase_hits(ntext, 'a', {1,2})
+        n_c_retrieval=ontology_phrase_hits(ntext, 'c', {1,2})
         best=None
         for a in internals:
             athemes=set(a.get('_themes',[]))
             shared=nthemes & athemes
+            # Named C technologies from the curator workbook are discovery/linkage clues,
+            # never admission triggers.  They may connect to an A publication about
+            # sovereignty/capability/dependencies even when the exact technology was not
+            # named in that older A source.
+            ontology_strategic_themes={
+                'technology sovereignty / strategic autonomy',
+                'R&I competitiveness / technological capabilities',
+                'supply chains / strategic dependencies',
+                'economic security and R&I',
+                'critical and emerging technologies',
+                'export controls / dual use',
+            }
+            ontology_bridge_themes=athemes & ontology_strategic_themes if n_c_retrieval else set()
+            if not shared and ontology_bridge_themes:
+                shared=set(ontology_bridge_themes)
             if not shared:
                 continue
             atok=tokens(a.get('title','')+' '+a.get('summary',''))
@@ -8343,9 +8584,13 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             broad_only=bool(shared) and shared.issubset(broad_themes)
             # A generic AI/innovation theme is not enough. Broad-theme signals need a
             # concrete shared entity/mechanism and textual overlap with the A source.
-            if broad_only and (entity_overlap==0 or jacc<0.025):
+            if broad_only and not n_c_retrieval and (entity_overlap==0 or jacc<0.025):
                 continue
             score=3.0*len(shared)+1.5*entity_overlap+8.0*jacc
+            if n_c_retrieval and ontology_bridge_themes:
+                score += 1.75
+            if n_a_ontology:
+                score += min(1.5, 0.35*len(n_a_ontology))
             if any(t in SPECIFIC_ANCHOR_THEMES for t in shared): score+=1.0
             if best is None or score>best[0]: best=(score,a,sorted(shared))
         anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''
@@ -8353,7 +8598,7 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             score,a,shared_themes=best
             anchor=f"{a['title']} (Strand A)"
             anchor_basis='publication'
-        text=n.get('headline','')+' '+n.get('_desc','')
+        text=ntext
         # Major external capability shocks get a tightly bounded same-domain fallback. This is
         # not a generic foreign-news route: the helper requires a current EU-context anchor and
         # produces the one-sentence Europe-position implication demanded by the editorial rule.
@@ -8393,6 +8638,10 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             'evidence_status': 'low',
             'evidence_role': 'weak_signal',
             'retention_window_months': WEAK_SIGNAL_RETENTION_MONTHS,
+            'reframing_dimensions': novelty_dimensions,
+            'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
+            'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
+            'c_admission_rule': 'new point on a substantive Strand-A issue; topic repetition allowed',
             '_anchor_score':score,
         })
         if any(signals_near_duplicate(item,x) for x in anchored):
@@ -8635,7 +8884,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -8643,6 +8892,7 @@ def main() -> int:
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
+    INSTITUTION_DISCOVERED_DATES = {}
     INSTITUTION_SIGNAL_CANDIDATES = []
     SIGNAL_WINDOW_START_DATE = None
     with ADMISSION_DIAGNOSTICS_LOCK:
@@ -9634,16 +9884,21 @@ def main() -> int:
         adapter_domains_all, adapter_cursor_before, adapter_domain_batch, executed_inst
     ) if adapter_domains_all else (0, True, 0)
 
-    # V17.13.35 low-yield rule: after the ordinary scholarly + institutional pass,
+    # Target-driven low-yield rule: after the ordinary scholarly + institutional pass,
     # count only genuinely new, unique A/B records that already passed the normal gates.
-    # If that count is three or fewer, spend remaining discovery time on a *different*
-    # query slice rather than declaring the topic quiet. Raw API hits, duplicates and
-    # already-published records never suppress this second pass. Relevance/quality gates
-    # are unchanged. If the fresh four-month rotation is still sparse, use a bounded
-    # 4-6 month extension and keep only Highest source-merit evidence there.
-    low_yield_threshold = max(0, int(CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab", 3) or 3))
+    # If that count is below the discovery target, spend remaining time on a *different*
+    # query/source slice rather than declaring the topic quiet. The target affects search
+    # depth only: raw API hits, duplicates and marginal records never count toward it and
+    # the substantive/quality gates remain unchanged. If the fresh four-month rotation is
+    # still sparse, use a bounded 4-6 month extension and keep only Highest-merit evidence.
+    target_new_ab = max(1, int(CONFIG.get("target_new_ab_per_scan", 20) or 20))
+    low_yield_threshold = max(
+        max(0, int(CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab", 3) or 3)),
+        target_new_ab - 1,
+    )
     low_yield_rotation = {
         "enabled": bool(CONFIG.get("low_yield_fresh_rotation_enabled", True)),
+        "target_new_ab": target_new_ab,
         "trigger_max_new_ab": low_yield_threshold,
         "triggered": False,
         "new_ab_before": len(genuinely_new_ab_candidates(oa + cr + inst)),

@@ -129,10 +129,12 @@ class HistoricalScannerTests(unittest.TestCase):
             self.assertIn(domain, adapters)
             self.assertTrue(adapters[domain])
 
-    def test_low_yield_has_one_full_rescue_rule(self):
+    def test_low_yield_rescue_tracks_eight_item_search_target(self):
         self.assertTrue(H.CONFIG["full_rescue_run_enabled"])
-        self.assertEqual(H.CONFIG["full_rescue_run_trigger_max_new_items"], 3)
-        self.assertEqual(H.CONFIG["low_yield_trigger_max_new_items"], 3)
+        target = H.CONFIG["target_new_items_per_scan"]
+        self.assertEqual(target, 8)
+        self.assertEqual(H.CONFIG["full_rescue_run_trigger_max_new_items"], target - 1)
+        self.assertEqual(H.CONFIG["low_yield_trigger_max_new_items"], target - 1)
 
     def test_rejection_funnel_exposes_main_stages(self):
         H.DIAG.update({"raw_records": 12, "source_eligible": 9, "enough_text": 8, "eu_scope": 7, "ri_scope": 6, "strategic_scope": 5, "topic_match": 4, "gate_passed": 3})
@@ -150,11 +152,12 @@ class HistoricalScannerTests(unittest.TestCase):
         self.assertIn("historical/manual_evidence.json", workflow)
         self.assertNotIn("git add -- radar.json", workflow)
 
-    def test_historical_scan_has_ten_minute_minimum_runtime(self):
-        self.assertEqual(H.CONFIG["minimum_runtime_seconds"], 600)
-        self.assertEqual(H.MIN_RUNTIME_SECONDS, 600)
+    def test_historical_scan_is_target_driven_not_time_padded(self):
+        self.assertEqual(H.CONFIG["minimum_runtime_seconds"], 0)
+        self.assertEqual(H.MIN_RUNTIME_SECONDS, 0)
+        self.assertEqual(H.CONFIG["target_new_items_per_scan"], 8)
         workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
-        self.assertIn("HISTORICAL_MIN_RUNTIME_SECONDS: '600'", workflow)
+        self.assertIn("HISTORICAL_MIN_RUNTIME_SECONDS: '0'", workflow)
 
     def test_deeper_result_pages_are_supported_for_minimum_runtime_rotation(self):
         import inspect

@@ -1,0 +1,1436 @@
+{
+  "version": "2026-08-31",
+  "purpose": "Curator-supplied phrase ontology for EU R&I radar admission/discovery. Strand C phrases are retrieval/re-ranking aids only; C admission is relational to substantive Strand A evidence.",
+  "principles": {
+    "strand_a": "Substance: EU R&I where it meets security, sovereignty, competitiveness, dependencies and foreign policy.",
+    "strand_b": "Method: foresight/futures methodology usable to study the future of Strand A.",
+    "strand_c": "Weak signals: new facts/evidence/developments that materially reframe an existing Strand-A issue. C is a relationship to A, not a keyword class.",
+    "c_admission_rule": "Never admit to C on a C phrase alone. A C phrase may retrieve or re-rank a candidate; admission still requires a substantive Strand-A anchor plus a distinct new point/implication.",
+    "duplicate_rule": "Prior coverage of the topic is not disqualifying. Collapse only substantially the same event/claim/implication."
+  },
+  "strand_a": [
+    {
+      "id": 1,
+      "phrase": "as open as possible, as closed as necessary",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Originated as the FAIR/open-data slogan in Horizon 2020 data-management guidance. Still fires on pure research-data-management and repository papers with no security or geopolitics content.",
+      "guard": "Admit alone, but down-rank if the page also contains 'data management plan' or 'repository' and lacks 'security' or 'interference'."
+    },
+    {
+      "id": 2,
+      "phrase": "research security",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Reads as a compound noun in 'information security research', 'security research group', 'cyber security research centre' only if word order is ignored. Exact phrase order is safe. Residual: US-only research-security policy pages.",
+      "guard": "Admit alone. For EU-only corpora require Europe/EU/Member State within the page."
+    },
+    {
+      "id": 3,
+      "phrase": "knowledge security",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Occasional use in knowledge-management and IT literature ('knowledge security in organisations').",
+      "guard": "Admit alone; require a research or university co-term for strictness."
+    },
+    {
+      "id": 4,
+      "phrase": "foreign interference",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Dominated by election-interference and disinformation literature, which is not R&I.",
+      "guard": "Require 'research', 'science', 'university', 'academic' or 'innovation' within the same page."
+    },
+    {
+      "id": 5,
+      "phrase": "undesirable transfer of knowledge",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material. Council-drafted wording.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 6,
+      "phrase": "unwanted knowledge transfer",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 7,
+      "phrase": "intangible technology transfer",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material. Export-control term of art.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 8,
+      "phrase": "military-civil fusion",
+      "match_rule": "Exact phrase, case-insensitive; also 'military-civilian fusion'",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 9,
+      "phrase": "dual-use research",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "'Dual-use research of concern' (DURC) is a US biosecurity/gain-of-function term with a large life-sciences literature that has nothing to do with EU strategic autonomy.",
+      "guard": "Exclude the page if 'of concern', 'DURC', 'gain-of-function' or 'biosafety' appears without a European policy co-term."
+    },
+    {
+      "id": 10,
+      "phrase": "dual-use technologies",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Minor overlap with generic defence-procurement writing.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 11,
+      "phrase": "export controls",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Broad: US/China trade-policy pages, arms-trade reporting, customs compliance guides.",
+      "guard": "Require Europe/EU plus one of research, technology, semiconductor, university."
+    },
+    {
+      "id": 12,
+      "phrase": "Horizon Europe",
+      "match_rule": "Exact phrase, case-sensitive on 'Horizon'",
+      "tier": 1,
+      "opposition": "Safe as a two-word phrase. Never scan on 'Horizon' alone: it matches 'horizon scanning', 'time horizon', 'planning horizon', 'event horizon'. This is the single largest source of junk in the current corpus.",
+      "guard": "Admit alone. Never degrade to the single token."
+    },
+    {
+      "id": 13,
+      "phrase": "association to Horizon Europe",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 14,
+      "phrase": "associated country",
+      "match_rule": "Exact phrase, case-insensitive; also 'associated countries'",
+      "tier": 1,
+      "opposition": "'Associated' is a high-frequency English adjective; 'associated country' as a bigram is rare but appears in statistics writing ('the associated country effect').",
+      "guard": "Require 'Horizon' or 'Framework Programme' on the page."
+    },
+    {
+      "id": 15,
+      "phrase": "Article 22(5)",
+      "match_rule": "Exact string; also 'Article 22.5'",
+      "tier": 1,
+      "opposition": "GDPR Article 22 (automated decision-making) is heavily cited, and other regulations have an Article 22(5).",
+      "guard": "Require 'Horizon Europe' or '2021/695' on the page."
+    },
+    {
+      "id": 16,
+      "phrase": "Regulation (EU) 2021/695",
+      "match_rule": "Exact string",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 17,
+      "phrase": "European Research Area",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None material. Never scan on 'ERA' alone: it is inside 'operate', 'general', 'literature', 'camera', 'several'.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 18,
+      "phrase": "ERA Act",
+      "match_rule": "Exact string, case-sensitive, word boundaries",
+      "tier": 1,
+      "opposition": "'Era' as a common noun adjacent to 'act' ('the era act of...') is vanishingly rare, but lowercase 'era act' would collide.",
+      "guard": "Case-sensitive only; require 'European Research Area' for full safety."
+    },
+    {
+      "id": 19,
+      "phrase": "European Research Area Act",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 20,
+      "phrase": "Framework Programme for Research and Innovation",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 21,
+      "phrase": "FP10",
+      "match_rule": "Exact string, case-sensitive, word boundaries",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 22,
+      "phrase": "Competitiveness Compass",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 23,
+      "phrase": "European Competitiveness Fund",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 24,
+      "phrase": "Multiannual Financial Framework",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 25,
+      "phrase": "European Chips Act",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "Note the separate US CHIPS Act; the word 'European' disambiguates.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 26,
+      "phrase": "Chips Act 2.0",
+      "match_rule": "Exact string",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 27,
+      "phrase": "Cloud and AI Development Act",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 28,
+      "phrase": "Industrial Accelerator Act",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 29,
+      "phrase": "European Technological Sovereignty Package",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 30,
+      "phrase": "technological sovereignty",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Minor: 'data sovereignty' and 'indigenous data sovereignty' literatures are adjacent but use different wording.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 31,
+      "phrase": "tech sovereignty",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 32,
+      "phrase": "digital sovereignty",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Used by non-EU actors (India, Brazil, Russia) about their own policy.",
+      "guard": "Require Europe/EU on the page for an EU-only corpus."
+    },
+    {
+      "id": 33,
+      "phrase": "strategic autonomy",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Occasional use in organisational-behaviour and education research ('learner strategic autonomy'). Low volume.",
+      "guard": "Admit alone; exclude if 'learner', 'student autonomy' or 'pedagog' dominates."
+    },
+    {
+      "id": 34,
+      "phrase": "open strategic autonomy",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 35,
+      "phrase": "economic security",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Collides with household/personal economic security in social-policy and poverty research — a large literature.",
+      "guard": "Require one of: strategy, dependency, technology, export, screening, China, supply chain."
+    },
+    {
+      "id": 36,
+      "phrase": "economic statecraft",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 37,
+      "phrase": "economic coercion",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 38,
+      "phrase": "weaponised interdependence",
+      "match_rule": "Exact phrase; also 'weaponized interdependence'",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Index both spellings; corpus is English-only but mixed orthography."
+    },
+    {
+      "id": 39,
+      "phrase": "foreign investment screening",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 40,
+      "phrase": "investment screening",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "'Screening' collides with medical screening, CV screening, project screening.",
+      "guard": "Require 'foreign', 'FDI', 'outbound' or 'national security' on the page."
+    },
+    {
+      "id": 41,
+      "phrase": "outbound investment",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Ordinary corporate-finance usage for any overseas investment.",
+      "guard": "Require 'screening', 'controls', 'security' or 'critical technology'."
+    },
+    {
+      "id": 42,
+      "phrase": "science diplomacy",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 43,
+      "phrase": "Global Approach to Research and Innovation",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 44,
+      "phrase": "Global Gateway",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "'Gateway' is a common product and networking noun; capitalised bigram is distinctive.",
+      "guard": "Case-sensitive; require EU/Commission for strictness."
+    },
+    {
+      "id": 45,
+      "phrase": "Choose Europe for Science",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 46,
+      "phrase": "ERC Super Grant",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 47,
+      "phrase": "European Research Council",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None. Never scan 'ERC' alone: inside 'commerce', 'exercise', 'percentage', 'mercury'.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 48,
+      "phrase": "Marie Sklodowska-Curie",
+      "match_rule": "Exact phrase; also 'Marie Skłodowska-Curie'",
+      "tier": 1,
+      "opposition": "None. Index both the diacritic and ASCII forms.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 49,
+      "phrase": "EIC Accelerator",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "'Accelerator' alone collides with particle accelerators and startup accelerators.",
+      "guard": "Admit only as the bigram."
+    },
+    {
+      "id": 50,
+      "phrase": "European Innovation Council",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None. Never scan 'EIC' alone: inside 'deicing', 'Reich'.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 51,
+      "phrase": "EuroHPC",
+      "match_rule": "Exact string, case-insensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 52,
+      "phrase": "Joint Undertaking",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "'Undertaking' is common in EU competition law generally.",
+      "guard": "Require a programme name or 'Horizon' for strictness."
+    },
+    {
+      "id": 53,
+      "phrase": "Seal of Excellence",
+      "match_rule": "Exact phrase, case-sensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 54,
+      "phrase": "Funding & Tenders Portal",
+      "match_rule": "Exact phrase; also 'Funding and Tenders Portal'",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 55,
+      "phrase": "under grant agreement No",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Catches EU-funded papers whose text never names a programme. Some non-EU funders use the same wording.",
+      "guard": "Pair with 'European Union' or 'Horizon' on the page."
+    },
+    {
+      "id": 56,
+      "phrase": "funding from the European Union's Horizon",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None. This is the mandatory acknowledgement template.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 57,
+      "phrase": "brain drain",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Dominated by health-workforce and developing-country emigration literature. Your corpus already admitted a Latvian doctor-mobility paper this way (rank 89).",
+      "guard": "Require 'researcher', 'scientist', 'science', 'R&D' or 'university' AND a Europe term."
+    },
+    {
+      "id": 58,
+      "phrase": "talent retention",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Overwhelmingly corporate-HR literature.",
+      "guard": "Require 'research', 'researcher', 'PhD', 'STEM' or 'science'."
+    },
+    {
+      "id": 59,
+      "phrase": "researcher mobility",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Low collision, but generic academic-mobility studies with no strategic angle.",
+      "guard": "Require a policy/geopolitics co-term: ERA, Horizon, sovereignty, security, retention."
+    },
+    {
+      "id": 60,
+      "phrase": "scientific diaspora",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Diaspora-studies literature about non-European countries. Your corpus admitted a Guatemala/Spain paper this way (rank 87).",
+      "guard": "Require the European system to be the subject, not the origin country."
+    },
+    {
+      "id": 61,
+      "phrase": "talent recruitment programme",
+      "match_rule": "Exact phrase; also 'talent recruitment program', 'talent programmes'",
+      "tier": 2,
+      "opposition": "Reads as ordinary corporate recruiting.",
+      "guard": "Require 'foreign', 'China', 'state-sponsored' or 'interference'."
+    },
+    {
+      "id": 62,
+      "phrase": "academic freedom",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Large US campus-speech and governance literature.",
+      "guard": "Require 'security', 'interference', 'export control', 'sanction' or an EU instrument."
+    },
+    {
+      "id": 63,
+      "phrase": "knowledge leakage",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Knowledge-management literature on firms losing know-how to competitors.",
+      "guard": "Require a security, export-control or foreign-actor co-term."
+    },
+    {
+      "id": 64,
+      "phrase": "critical raw materials",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Geology, mining and materials-science papers with no policy content.",
+      "guard": "Require 'dependenc', 'export control', 'supply', 'China' or an EU instrument."
+    },
+    {
+      "id": 65,
+      "phrase": "supply chain resilience",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Enormous operations-management and logistics literature.",
+      "guard": "Require Europe AND a strategic co-term (dependency, chokepoint, security, sovereignty)."
+    },
+    {
+      "id": 66,
+      "phrase": "chokepoint",
+      "match_rule": "Word boundaries; also 'choke point'",
+      "tier": 2,
+      "opposition": "Collides with traffic engineering, hydrology, and 'chokepoint enzyme' in parasitology and drug discovery — a real biomedical term.",
+      "guard": "Require 'supply', 'semiconductor', 'export' or 'technology'."
+    },
+    {
+      "id": 67,
+      "phrase": "strategic dependencies",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Occasional software-engineering use ('strategic dependency model' in i* modelling).",
+      "guard": "Require Europe/EU."
+    },
+    {
+      "id": 68,
+      "phrase": "import dependence",
+      "match_rule": "Exact phrase, case-insensitive; also 'import dependency'",
+      "tier": 2,
+      "opposition": "Standard energy-economics term used worldwide.",
+      "guard": "Require Europe AND technology/research/critical."
+    },
+    {
+      "id": 69,
+      "phrase": "self-reliance",
+      "match_rule": "Word boundaries",
+      "tier": 2,
+      "opposition": "Large psychology, development-studies and food-security literature.",
+      "guard": "Require 'technological', 'strategic', 'industrial' or 'index' plus Europe."
+    },
+    {
+      "id": 70,
+      "phrase": "de-risking",
+      "match_rule": "Word boundaries; also 'derisking'",
+      "tier": 2,
+      "opposition": "Financial de-risking (correspondent banking, pension risk transfer) is a far larger literature than the China-policy sense.",
+      "guard": "Require 'China', 'dependenc', 'supply chain' or 'economic security'."
+    },
+    {
+      "id": 71,
+      "phrase": "reshoring",
+      "match_rule": "Word boundaries; also 'friendshoring', 'nearshoring'",
+      "tier": 2,
+      "opposition": "Generic manufacturing-location literature.",
+      "guard": "Require Europe AND a security/dependency co-term."
+    },
+    {
+      "id": 72,
+      "phrase": "local content requirement",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Long-standing WTO/trade-law literature about developing-country industrial policy.",
+      "guard": "Require EU or an EU instrument name."
+    },
+    {
+      "id": 73,
+      "phrase": "European preference",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Reads as a taste or survey preference in consumer research.",
+      "guard": "Require 'procurement', 'content', 'Act' or 'industrial policy'."
+    },
+    {
+      "id": 74,
+      "phrase": "compute gap",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "None material, but low frequency.",
+      "guard": "Require Europe."
+    },
+    {
+      "id": 75,
+      "phrase": "AI compute",
+      "match_rule": "Exact phrase, case-sensitive on 'AI'",
+      "tier": 2,
+      "opposition": "Scanning 'AI' alone is fatal: it is inside 'bait', 'said', 'plain', 'certain', 'maintain', 'chair'. Even as a token, 'ai' is a Chinese and Japanese romanised name.",
+      "guard": "Case-sensitive, word-boundary \\bAI\\b only. Never substring."
+    },
+    {
+      "id": 76,
+      "phrase": "sovereign cloud",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Vendor marketing pages.",
+      "guard": "Require a policy or dependency co-term."
+    },
+    {
+      "id": 77,
+      "phrase": "frontier compute",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Low volume, low collision.",
+      "guard": "Require Europe."
+    },
+    {
+      "id": 78,
+      "phrase": "semiconductor equipment",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Trade-press product coverage.",
+      "guard": "Require 'export control', 'dependenc' or Europe."
+    },
+    {
+      "id": 79,
+      "phrase": "foundry capacity",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Metal-casting industry uses 'foundry' literally.",
+      "guard": "Require 'semiconductor', 'chip' or 'wafer'."
+    },
+    {
+      "id": 80,
+      "phrase": "technology transfer",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Very large generic university-TTO and licensing literature worldwide.",
+      "guard": "Require 'intangible', 'export control', 'unwanted', 'third country' or 'screening'."
+    },
+    {
+      "id": 81,
+      "phrase": "research infrastructure",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Global and generic: Antarctic stations, African telescopes, national labs. Your corpus admitted an ITU radio-astronomy piece partly this way (rank 108).",
+      "guard": "Require 'ESFRI', 'ERIC', 'European', 'Horizon' or 'access' plus a dependency angle."
+    },
+    {
+      "id": 82,
+      "phrase": "venture capital gap",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Low collision.",
+      "guard": "Require Europe."
+    },
+    {
+      "id": 83,
+      "phrase": "late-stage financing",
+      "match_rule": "Exact phrase, case-insensitive; also 'late-stage funding'",
+      "tier": 2,
+      "opposition": "Clinical-trial 'late-stage' usage is common in pharma reporting.",
+      "guard": "Require 'scale-up', 'venture', 'firm' or 'equity'."
+    },
+    {
+      "id": 84,
+      "phrase": "scale-up",
+      "match_rule": "Word boundaries; also 'scaleup'",
+      "tier": 2,
+      "opposition": "Chemical-engineering and manufacturing 'scale-up' is a large literature; also generic in ML papers.",
+      "guard": "Require 'firm', 'company', 'start-up', 'equity' or 'investment'."
+    },
+    {
+      "id": 85,
+      "phrase": "headquarters relocation",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Corporate-geography literature.",
+      "guard": "Require Europe AND research/technology/IP."
+    },
+    {
+      "id": 86,
+      "phrase": "Article 20",
+      "match_rule": "Exact string",
+      "tier": 2,
+      "opposition": "Matches Article 20 of any instrument.",
+      "guard": "Require 'Horizon Europe' or '2021/695'."
+    },
+    {
+      "id": 87,
+      "phrase": "national security",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Enormous general IR and defence literature.",
+      "guard": "Only as a co-term, never as an admission trigger."
+    },
+    {
+      "id": 88,
+      "phrase": "critical technologies",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Used loosely in engineering roadmaps.",
+      "guard": "Require EU, 'list', 'assessment' or 'screening'."
+    },
+    {
+      "id": 89,
+      "phrase": "standard setting",
+      "match_rule": "Exact phrase, case-insensitive; also 'standard-setting'",
+      "tier": 2,
+      "opposition": "Accounting and education standard-setting literatures are large.",
+      "guard": "Require 'technolog', 'ISO', 'ETSI', 'geopolit' or Europe."
+    },
+    {
+      "id": 90,
+      "phrase": "regulatory fragmentation",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Financial-regulation literature.",
+      "guard": "Require Europe AND research/innovation/technology."
+    },
+    {
+      "id": 91,
+      "phrase": "horizon scanning",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "This is a Strand B trigger, not a Strand A one. Applied outside R&I it reports food-safety, plant-health and medtech scanning results — ranks 3, 195 and 203 in your file. Admitting it to A puts methodology and biosecurity material into the substance strand.",
+      "guard": "Route to B. Never admit to A."
+    },
+    {
+      "id": 92,
+      "phrase": "weak signal detection",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Correct for B, wrong for A — and inside B it still collides with electrical engineering (stochastic resonance, bistable systems). See the Strand B sheet for the guard.",
+      "guard": "Route to B with the engineering exclusion applied. Never admit to A."
+    },
+    {
+      "id": 93,
+      "phrase": "strategic foresight",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "A Strand B trigger. In A it admits general policy-methodology papers such as rank 80.",
+      "guard": "Route to B. Never admit to A."
+    },
+    {
+      "id": 94,
+      "phrase": "scenario planning",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "A Strand B trigger. In A it admits corporate-strategy method reviews such as ranks 76 and 79.",
+      "guard": "Route to B. Never admit to A."
+    },
+    {
+      "id": 95,
+      "phrase": "emerging risks",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Insurance, food safety and public health own this phrase.",
+      "guard": "Remove entirely."
+    },
+    {
+      "id": 96,
+      "phrase": "innovation capacity",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "22 occurrences in your corpus, but it is a generic regional-economics variable. It admitted Russian agricultural bioeconomy (rank 17), Swedish food industry (91) and grey-clustering sustainability mapping (88).",
+      "guard": "Demote to co-term only."
+    },
+    {
+      "id": 97,
+      "phrase": "technological innovation",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Appears in essentially every applied-science abstract.",
+      "guard": "Remove entirely."
+    },
+    {
+      "id": 98,
+      "phrase": "R&D expenditure",
+      "match_rule": "Exact phrase; also 'R&D intensity'",
+      "tier": 3,
+      "opposition": "Standard econometrics variable. Admitted Frankfurt Stock Exchange sustainability (rank 93) and PV recycling (84).",
+      "guard": "Demote to co-term only."
+    },
+    {
+      "id": 99,
+      "phrase": "sustainable development",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Admitted agriculture, waste trading and circular-economy papers with no strategic content.",
+      "guard": "Remove entirely."
+    },
+    {
+      "id": 100,
+      "phrase": "economic growth",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Universal in economics.",
+      "guard": "Remove entirely."
+    },
+    {
+      "id": 101,
+      "phrase": "higher education",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Vast education-research literature.",
+      "guard": "Remove entirely; use only as co-term."
+    },
+    {
+      "id": 102,
+      "phrase": "supply chain",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Operations management owns this.",
+      "guard": "Co-term only."
+    },
+    {
+      "id": 103,
+      "phrase": "artificial intelligence",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Now present in most technical abstracts regardless of topic.",
+      "guard": "Co-term only."
+    },
+    {
+      "id": 104,
+      "phrase": "innovation ecosystem",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Consultancy boilerplate, used globally.",
+      "guard": "Co-term only."
+    },
+    {
+      "id": 105,
+      "phrase": "international collaboration",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "Generic bibliometrics.",
+      "guard": "Co-term only."
+    }
+  ],
+  "strand_b": [
+    {
+      "id": 1,
+      "phrase": "futures studies",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material. Field name.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 2,
+      "phrase": "futures research",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Occasional finance use ('futures research' on commodity futures markets).",
+      "guard": "Exclude if 'commodity', 'derivatives' or 'hedging' present."
+    },
+    {
+      "id": 3,
+      "phrase": "futures literacy",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None. UNESCO term of art.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 4,
+      "phrase": "anticipatory governance",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 5,
+      "phrase": "foresight methodology",
+      "match_rule": "Exact phrase; also 'foresight method', 'foresight methods'",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 6,
+      "phrase": "strategic foresight",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "'Foresight' alone is an ordinary English noun and also a UK government programme name; the bigram is safe. Minor overlap with 'foresight bias' in psychology and finance.",
+      "guard": "Admit alone. Never scan 'foresight' as a single token."
+    },
+    {
+      "id": 7,
+      "phrase": "corporate foresight",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 8,
+      "phrase": "horizon scanning",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Legitimate for B, but drifts hard into biosecurity, plant health, food safety and medtech surveillance, where the method is applied to domains unrelated to R&I futures. Ranks 195 and 203 in your file are that drift.",
+      "guard": "Admit to B, never to A. For a stricter B, require the paper to develop or adapt the method ('framework', 'methodology', 'protocol', 'validation') rather than merely report scanning results."
+    },
+    {
+      "id": 9,
+      "phrase": "environmental scanning",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Collides with environmental science and with 'scanning electron microscope' only if tokens are split.",
+      "guard": "Admit alone as a phrase."
+    },
+    {
+      "id": 10,
+      "phrase": "scenario planning",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Corporate-strategy methodology; broad but on-mission for B.",
+      "guard": "Admit to B, never to A."
+    },
+    {
+      "id": 11,
+      "phrase": "scenario building",
+      "match_rule": "Exact phrase; also 'scenario-building'",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 12,
+      "phrase": "participatory scenario",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 13,
+      "phrase": "backcasting",
+      "match_rule": "Word boundaries",
+      "tier": 1,
+      "opposition": "Hydrology and climate science use 'backcasting' for hindcast data reconstruction.",
+      "guard": "Exclude if 'hindcast', 'reanalysis' or 'streamflow' present."
+    },
+    {
+      "id": 14,
+      "phrase": "causal layered analysis",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None. Distinctive to the field.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 15,
+      "phrase": "three horizons",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "'Horizons' collides with time-horizon language in finance and planning.",
+      "guard": "Require 'framework', 'model' or 'foresight'."
+    },
+    {
+      "id": 16,
+      "phrase": "futures triangle",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 17,
+      "phrase": "cross-impact analysis",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 18,
+      "phrase": "Delphi study",
+      "match_rule": "Exact phrase; also 'Delphi method', 'Delphi panel', 'real-time Delphi'",
+      "tier": 1,
+      "opposition": "'Delphi' alone is a programming language (Embarcadero Delphi), an auto-parts company (Delphi Technologies), a US flu-forecasting group (Delphi at CMU) and the Greek archaeological site. Never scan the bare token.",
+      "guard": "Only as a bigram with study/method/panel/survey/technique."
+    },
+    {
+      "id": 19,
+      "phrase": "technology roadmapping",
+      "match_rule": "Exact phrase; also 'roadmapping framework'",
+      "tier": 1,
+      "opposition": "'Roadmap' alone is corporate boilerplate everywhere.",
+      "guard": "Admit only as 'roadmapping'."
+    },
+    {
+      "id": 20,
+      "phrase": "emerging technology forecasting",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 21,
+      "phrase": "technology intelligence",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Occasional competitive-intelligence vendor marketing.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 22,
+      "phrase": "tech mining",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    },
+    {
+      "id": 23,
+      "phrase": "weak signals",
+      "match_rule": "Exact phrase, plural, case-insensitive",
+      "tier": 1,
+      "opposition": "See the row below. The plural form is far safer than 'weak signal detection' because the futures-studies literature uses the plural and the engineering literature uses the singular with 'detection'.",
+      "guard": "Prefer this form over the singular."
+    },
+    {
+      "id": 24,
+      "phrase": "weak signal detection",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "MAJOR COLLISION. This is a core electrical-engineering term: stochastic resonance, bistable systems, bearing-fault diagnosis, radar and sensor design. Rank 77 (Nonlinear Dynamics, stochastic resonance) and rank 197 (four-dimensional bistable system) in your file are both engineering papers admitted on this phrase, not futures studies.",
+      "guard": "Require one of: foresight, futures, horizon scanning, scenario, Ansoff, environmental scanning. Exclude if 'stochastic resonance', 'bistable', 'signal-to-noise', 'bearing fault', 'radar' or 'oscillator' present."
+    },
+    {
+      "id": 25,
+      "phrase": "Ansoff",
+      "match_rule": "Word boundaries, case-sensitive",
+      "tier": 1,
+      "opposition": "Also cited for the Ansoff growth matrix in marketing.",
+      "guard": "Require 'weak signal' or 'filter' for the foresight sense."
+    },
+    {
+      "id": 26,
+      "phrase": "wild card",
+      "match_rule": "Exact phrase; also 'wild cards'",
+      "tier": 2,
+      "opposition": "Card games, sport qualification, and the computing wildcard character.",
+      "guard": "Require 'scenario', 'foresight' or 'low-probability'."
+    },
+    {
+      "id": 27,
+      "phrase": "black swan",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "The bird, the ballet film, and generic finance-risk usage.",
+      "guard": "Require 'foresight', 'scenario', 'risk governance' or 'tail risk' plus a method co-term."
+    },
+    {
+      "id": 28,
+      "phrase": "morphological analysis",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "HEAVY COLLISION. Linguistics (word morphology), image processing, and materials science all own this phrase, and all three produce far more papers than the Zwicky-box foresight sense.",
+      "guard": "Require 'Zwicky', 'scenario', 'foresight' or 'general morphological'."
+    },
+    {
+      "id": 29,
+      "phrase": "seeds of change",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Agriculture, an organic seed company of that name, and general metaphor.",
+      "guard": "Require 'foresight', 'futures' or 'signal'."
+    },
+    {
+      "id": 30,
+      "phrase": "transformative pathways",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Sustainability-transitions literature, broad.",
+      "guard": "Require 'scenario', 'backcasting' or 'foresight'."
+    },
+    {
+      "id": 31,
+      "phrase": "Delphi",
+      "match_rule": "Word boundaries, case-sensitive, NEVER alone",
+      "tier": 3,
+      "opposition": "Listed only as a warning. Programming language, auto-parts supplier, CMU forecasting group, archaeological site.",
+      "guard": "Never use as an admission trigger in any form."
+    },
+    {
+      "id": 32,
+      "phrase": "foresight",
+      "match_rule": "Word boundaries, NEVER alone",
+      "tier": 3,
+      "opposition": "Ordinary English noun; UK government programme name; 'foresight bias' in psychology.",
+      "guard": "Never use as an admission trigger. Bigrams only."
+    },
+    {
+      "id": 33,
+      "phrase": "methodology",
+      "match_rule": "Word boundaries, NEVER alone",
+      "tier": 3,
+      "opposition": "Present in most empirical abstracts.",
+      "guard": "Co-term only."
+    }
+  ],
+  "strand_c_retrieval": [
+    {
+      "id": 1,
+      "phrase": "suspension of cooperation",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Diplomatic and sporting contexts.",
+      "guard": "Require research, science, university or a programme name."
+    },
+    {
+      "id": 2,
+      "phrase": "withdrawal from the programme",
+      "match_rule": "Exact phrase; also 'withdrew from', 'exit from Horizon'",
+      "tier": 1,
+      "opposition": "Generic.",
+      "guard": "Require a named EU programme."
+    },
+    {
+      "id": 3,
+      "phrase": "moratorium",
+      "match_rule": "Word boundaries",
+      "tier": 2,
+      "opposition": "Debt moratoria, fishing moratoria, eviction moratoria — all larger literatures.",
+      "guard": "Require 'research', 'technology', 'export' or 'collaboration'."
+    },
+    {
+      "id": 4,
+      "phrase": "decoupling",
+      "match_rule": "Word boundaries",
+      "tier": 2,
+      "opposition": "Economics uses 'decoupling' for growth-vs-emissions, and physics for oscillator decoupling.",
+      "guard": "Require 'technolog', 'research', 'US-China' or 'supply'."
+    },
+    {
+      "id": 5,
+      "phrase": "reversal",
+      "match_rule": "Word boundaries",
+      "tier": 3,
+      "opposition": "Ubiquitous.",
+      "guard": "Co-term only; never an admission trigger."
+    },
+    {
+      "id": 6,
+      "phrase": "first evidence",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 2,
+      "opposition": "Extremely common abstract framing across all sciences.",
+      "guard": "Only in combination with an A-strand Tier 1 phrase on the same page."
+    },
+    {
+      "id": 7,
+      "phrase": "challenges the assumption",
+      "match_rule": "Exact phrase; also 'challenges prevailing', 'contrary to expectations'",
+      "tier": 2,
+      "opposition": "Generic academic framing with near-zero topical signal on its own.",
+      "guard": "Only as a re-ranking feature over pages already admitted on an A-strand phrase."
+    },
+    {
+      "id": 8,
+      "phrase": "paradigm shift",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 3,
+      "opposition": "One of the most over-used phrases in academic abstracts. Precision alone is close to zero.",
+      "guard": "Never an admission trigger. Re-ranking feature at most."
+    },
+    {
+      "id": 9,
+      "phrase": "counterintuitive",
+      "match_rule": "Word boundaries",
+      "tier": 3,
+      "opposition": "Generic.",
+      "guard": "Re-ranking feature only."
+    },
+    {
+      "id": 10,
+      "phrase": "unprecedented",
+      "match_rule": "Word boundaries",
+      "tier": 3,
+      "opposition": "Generic; heavily inflated in press releases.",
+      "guard": "Re-ranking feature only."
+    },
+    {
+      "id": 11,
+      "phrase": "biomanufacturing",
+      "match_rule": "Word boundaries",
+      "tier": 1,
+      "opposition": "None material. A named candidate for reshaping industrial dependency maps.",
+      "guard": "Admit alone as a C-strand candidate technology."
+    },
+    {
+      "id": 12,
+      "phrase": "fermentation capacity",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "Brewing and food-industry usage.",
+      "guard": "Require 'industrial', 'chokepoint', 'strategic' or 'capacity race'."
+    },
+    {
+      "id": 13,
+      "phrase": "neuromorphic",
+      "match_rule": "Word boundaries",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone as a candidate technology."
+    },
+    {
+      "id": 14,
+      "phrase": "RISC-V",
+      "match_rule": "Exact string, case-sensitive",
+      "tier": 1,
+      "opposition": "None.",
+      "guard": "Admit alone as a candidate technology."
+    },
+    {
+      "id": 15,
+      "phrase": "open-weight model",
+      "match_rule": "Exact phrase; also 'open weights'",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone as a candidate technology."
+    },
+    {
+      "id": 16,
+      "phrase": "quantum error correction",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone as a candidate technology."
+    },
+    {
+      "id": 17,
+      "phrase": "photonic interconnect",
+      "match_rule": "Exact phrase, case-insensitive",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone as a candidate technology."
+    },
+    {
+      "id": 18,
+      "phrase": "critical technology list",
+      "match_rule": "Exact phrase; also 'list of critical technologies'",
+      "tier": 1,
+      "opposition": "None material.",
+      "guard": "Admit alone."
+    }
+  ],
+  "audit_negative_examples": [
+    {
+      "rank": 3,
+      "strand": "A",
+      "merit": 100,
+      "title": "2025 EFSA Annual Report Emerging Risks and Horizon Scanning Activities",
+      "trigger": "horizon scanning",
+      "assessment": "Food-safety foresight reporting admitted to A. Belongs in B at most, or nowhere."
+    },
+    {
+      "rank": 17,
+      "strand": "A",
+      "merit": 93,
+      "title": "Bioeconomy as a driver of innovation capacity in agricultural regions (Russia)",
+      "trigger": "innovation capacity",
+      "assessment": "Regional agricultural policy; Europe is a comparator only."
+    },
+    {
+      "rank": 83,
+      "strand": "A",
+      "merit": 83,
+      "title": "Smart Innovations and Sustainability in EU Waste Material Trading",
+      "trigger": "R&D intensity / sustainable development",
+      "assessment": "Circular-economy econometrics; EU is the sample, not the subject."
+    },
+    {
+      "rank": 84,
+      "strand": "A",
+      "merit": 83,
+      "title": "Are we ready to handle PV waste? PV recycling regulations review",
+      "trigger": "sustainable development",
+      "assessment": "Recycling regulation review."
+    },
+    {
+      "rank": 85,
+      "strand": "A",
+      "merit": 83,
+      "title": "Sustainable agricultural performance in the European Union",
+      "trigger": "sustainable development",
+      "assessment": "Agricultural economics."
+    },
+    {
+      "rank": 87,
+      "strand": "A",
+      "merit": 83,
+      "title": "Guatemala scientific and professional diaspora in Spain",
+      "trigger": "scientific diaspora",
+      "assessment": "Origin-country diaspora study; no European capability mechanism."
+    },
+    {
+      "rank": 89,
+      "strand": "A",
+      "merit": 83,
+      "title": "Balancing Doctor Mobility and Public Health Delivery: Latvia",
+      "trigger": "brain drain / researcher mobility",
+      "assessment": "Health-workforce emigration, not research capability."
+    },
+    {
+      "rank": 91,
+      "strand": "A",
+      "merit": 83,
+      "title": "Innovation in Sparse Environments: Swedish Food Industry",
+      "trigger": "innovation capacity",
+      "assessment": "Regional innovation study with no external or strategic dimension."
+    },
+    {
+      "rank": 140,
+      "strand": "A",
+      "merit": 77,
+      "title": "Recession and economic depression reflections in Ireland",
+      "trigger": "economic growth",
+      "assessment": "Labour-market reflections."
+    },
+    {
+      "rank": 170,
+      "strand": "A",
+      "merit": 77,
+      "title": "Adaptation of Ukrainian legislation to EU standards in science and technology",
+      "trigger": "international collaboration",
+      "assessment": "Legal harmonisation described without a strategic mechanism."
+    },
+    {
+      "rank": 76,
+      "strand": "B",
+      "merit": null,
+      "title": "Scenario Planning and Organizational Sustainability",
+      "trigger": null,
+      "assessment": "On-mission for B."
+    },
+    {
+      "rank": 77,
+      "strand": "B",
+      "merit": null,
+      "title": "Stochastic resonance / weak signal detection",
+      "trigger": null,
+      "assessment": "Withdrawn as a strand error, but retained as a genuine syntactic collision inside B: this is electrical engineering, not futures studies."
+    },
+    {
+      "rank": 78,
+      "strand": "B",
+      "merit": null,
+      "title": "Horizon Scanning for Medical Technologies (MIST)",
+      "trigger": null,
+      "assessment": "On-mission for B."
+    },
+    {
+      "rank": 79,
+      "strand": "B",
+      "merit": null,
+      "title": "Designing strategic scenarios for the digital transition",
+      "trigger": null,
+      "assessment": "On-mission for B."
+    },
+    {
+      "rank": 80,
+      "strand": "B",
+      "merit": null,
+      "title": "Strategic foresight as a source of evidence for policymaking",
+      "trigger": null,
+      "assessment": "On-mission for B."
+    },
+    {
+      "rank": 180,
+      "strand": "B",
+      "merit": null,
+      "title": "Hybrid foresight: AI and expert judgement",
+      "trigger": null,
+      "assessment": "On-mission for B."
+    },
+    {
+      "rank": 195,
+      "strand": "B",
+      "merit": null,
+      "title": "Forest pests: adapting horizon scanning methodology",
+      "trigger": null,
+      "assessment": "On-mission for B, though the domain is distant."
+    },
+    {
+      "rank": 197,
+      "strand": "B",
+      "merit": null,
+      "title": "Weak Signal Detection, Four-Dimensional Bistable System",
+      "trigger": null,
+      "assessment": "Same engineering collision as rank 77."
+    },
+    {
+      "rank": 203,
+      "strand": "B",
+      "merit": null,
+      "title": "Scientific foundations of Horizon Scanning methodology",
+      "trigger": null,
+      "assessment": "On-mission for B."
+    },
+    {
+      "rank": 108,
+      "strand": "C",
+      "merit": null,
+      "title": "Evolving radio astronomy and its impact on Africa (ITU)",
+      "trigger": null,
+      "assessment": "Strand C admission; withdrawn."
+    },
+    {
+      "rank": 25,
+      "strand": "A",
+      "merit": null,
+      "title": "A self-reliance framework for strategic advanced materials",
+      "trigger": null,
+      "assessment": "Genuine A material; withdrawn."
+    }
+  ],
+  "source_workbook": "stuff/eu_ri_radar_phrases_by_strand.xlsx"
+}
