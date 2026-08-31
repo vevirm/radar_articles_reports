@@ -7,7 +7,11 @@
   function structuralScore(x){
     if(!x) return 0;
     const merit=x.sourceMerit?.score||(Merit?.scoreFor?Merit.scoreFor(x):0);
-    return (x.triage?.total||0)*10 + (x.questionCount||0)*4 + (x.confidence||0)/10 + Math.min(8,x.materiality||0) + merit/2;
+    const finding=Number(x.overall||0);
+    // Matrix qualification/severity comes first. Within qualified findings, source
+    // merit is deliberately a major part of ordering, using the same 0-100 rubric
+    // documented in Stuff rather than a separate reader-page quality score.
+    return finding*4 + merit + (x.confidence||0)/20 + Math.min(8,x.materiality||0);
   }
 
   function topicKey(x){

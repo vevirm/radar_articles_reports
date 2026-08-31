@@ -579,5 +579,47 @@ class FrontierBridgeTests(unittest.TestCase):
             self.assertIn("title", placements[0])
 
 
+class RotationAndReaderQualityTests(unittest.TestCase):
+    def test_topic_bank_interleaves_coarse_families(self):
+        queries = [
+            "European research talent mobility",
+            "European researcher careers",
+            "EU semiconductor technology sovereignty",
+            "EU quantum critical technology",
+            "EU research security foreign interference",
+            "trusted research knowledge security",
+            "Horizon Europe framework programme geopolitics",
+            "FP10 European Research Area",
+        ]
+        bank = scan.diversified_query_bank(queries)
+        first_four = [scan.query_theme(q) for q in bank[:4]]
+        self.assertGreaterEqual(len(set(first_four)), 4)
+
+    def test_source_family_rotation_has_eu_and_journal_first_class_lanes(self):
+        self.assertTrue(scan.CONFIG.get("source_family_parallel_scan"))
+        self.assertGreater(scan.CONFIG.get("official_eu_priority_sources_per_scan", 0), 0)
+        self.assertGreater(scan.CONFIG.get("crossref_source_first_journals_per_scan", 0), 0)
+        source = SCAN_PATH.read_text(encoding="utf-8")
+        self.assertIn("ThreadPoolExecutor(max_workers=4)", source)
+        self.assertIn("fut_inst = ex.submit(", source)
+        self.assertIn('safe_stage, "institutional reports", collect_institutions', source)
+
+    def test_frontier_quality_order_uses_same_source_merit_score(self):
+        import subprocess
+        js = "const F=require('./frontier/frontier.js'); const hi={overall:10,sourceMerit:{score:100}}; const lo={overall:10,sourceMerit:{score:65}}; if(!(F.qualityAwareScore(hi)>F.qualityAwareScore(lo))) process.exit(2);"
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_priorities_quality_is_material_not_tiny_tiebreak(self):
+        import subprocess
+        js = "const P=require('./priorities/priorities.js'); const hi={overall:10,sourceMerit:{score:100},confidence:70,materiality:3}; const lo={overall:10,sourceMerit:{score:65},confidence:70,materiality:3}; if(P.structuralScore(hi)-P.structuralScore(lo)<30) process.exit(2);"
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_read_page_evidence_selection_is_quality_aware(self):
+        source = (ROOT / "read" / "issues.js").read_text(encoding="utf-8")
+        self.assertIn("readEvidenceScore", source)
+        self.assertIn("merit(m.x)+Math.min(4,m.hits)*12", source)
+        self.assertIn(".35+.65*(merit(x)/100)", source)
+
+
 if __name__ == "__main__":
     unittest.main()

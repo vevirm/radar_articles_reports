@@ -1649,7 +1649,7 @@
   ],
   "queries_b_method_per_scan": 12,
   "signal_quality_profile_version": "v17.17.3-c-is-weak-signal-not-standing-eu",
-  "rotation_profile_version": "v17.7.1-executed-work-rotation",
+  "rotation_profile_version": "v17.17.4-source-family-topic-quality-rotation",
   "openalex_exploration_queries_per_scan": 12,
   "crossref_exploration_queries_per_scan": 10,
   "quiet_scan_rescue_enabled": true,
@@ -2105,5 +2105,9 @@
     "AAAS"
   ],
   "phrase_ontology_file": "radar_phrase_rules.json",
-  "phrase_ontology_policy": "Strand A/B phrases support conservative discovery and linkage. Strand C phrases are retrieval/re-ranking only and never admit a weak signal without a substantive Strand-A anchor and a distinct new point. Established or mature EU-official institutional material belongs in A if it passes A; only genuinely provisional/experimental/uncertain official developments may enter C."
+  "phrase_ontology_policy": "Strand A/B phrases support conservative discovery and linkage. Strand C phrases are retrieval/re-ranking only and never admit a weak signal without a substantive Strand-A anchor and a distinct new point. Established or mature EU-official institutional material belongs in A if it passes A; only genuinely provisional/experimental/uncertain official developments may enter C.",
+  "source_family_parallel_scan": true,
+  "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Each family keeps independent persisted cursors; no output quota is imposed.",
+  "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
+  "reader_quality_ranking_rule": "After substantive admission/Matrix placement, reader surfaces rank findings with source merit from source_merit.js (authority + EU relevance + evidence strength + author transparency) as a material part of ordering, never as an admission shortcut."
 }

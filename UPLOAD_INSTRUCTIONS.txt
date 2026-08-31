@@ -11,9 +11,10 @@ UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
 You do NOT need to delete or edit individual files.
 Files with the same names are replaced; new files are added.
 
-Version 17.17.3 specifically fixes Strand-C classification:
-- established/systematic EU official activity is A/B evidence, not a weak signal;
-- an EU official page can enter C only when it is genuinely provisional/experimental/uncertain;
-- “European AI Office” cannot enter C;
-- old institutional-as-C rows are filtered during Git-history recovery as well as new discovery;
-- all source-link/date integrity repairs from v17.17.2 remain in force.
+Version 17.17.4 keeps all earlier strictness/integrity fixes and adds:
+- protected, parallel rotation between EU/institutional sources and journals;
+- persisted rotation across journal/source families rather than restarting at the same places;
+- topic-family diversification in the scholarly query bank and executed query prefix;
+- quality-aware ordering for the 4x4 Matrix, “Read at least this”, and Risks & Opportunities;
+- the quality signal is the same source-merit rubric documented in Stuff -> Technical evidence;
+- source merit affects ranking only AFTER substantive admission, never admission itself.

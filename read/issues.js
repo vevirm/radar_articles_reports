@@ -37,7 +37,7 @@
   function termHits(x,lens){const h=textFor(x);let n=0;for(const t of lens.terms)if(hasTerm(h,t))n++;return n}
   function merit(x){return Number(g.RadarSourceMerit?.scoreFor?.(x)||g.RadarSourceMerit?.forItem?.(x)?.score||55)}
   function stamp(x){const n=Date.parse(x?.date||0);return Number.isFinite(n)?n:0}
-  function itemWeight(x,hits){return (1+Math.min(2,Math.max(0,hits-1))*.18) * (.65+.35*(merit(x)/100)) * (x?.new_this_scan?1.12:1)}
+  function itemWeight(x,hits){return (1+Math.min(2,Math.max(0,hits-1))*.18) * (.35+.65*(merit(x)/100)) * (x?.new_this_scan?1.10:1)}
   function plain(s){return clean(g.RadarInsights?.readText?.(s)||g.RadarInsights?.fastReaderText?.(s)||s)}
   function point(x){return plain(g.RadarInsights?.pointFor?.(x)||x?.core_message||x?.why_it_matters||x?.title||x?.headline||x?.what||'')}
   function idFor(x,i){return clean(x?.link)||clean(x?.title)||clean(x?.headline)||('item-'+i)}
@@ -68,7 +68,8 @@
     return chosen;
   }
 
-  function bestItems(matches,n){return [...matches].sort((a,b)=>b.hits-a.hits||merit(b.x)-merit(a.x)||stamp(b.x)-stamp(a.x)).slice(0,n).map(m=>m.x)}
+  function readEvidenceScore(m){return merit(m.x)+Math.min(4,m.hits)*12+(m.x?.new_this_scan?3:0)}
+  function bestItems(matches,n){return [...matches].sort((a,b)=>readEvidenceScore(b)-readEvidenceScore(a)||merit(b.x)-merit(a.x)||b.hits-a.hits||stamp(b.x)-stamp(a.x)).slice(0,n).map(m=>m.x)}
 
   function branchesFor(theme,evals){
     const companions=evals.filter(e=>e.id!==theme.id).map(e=>{

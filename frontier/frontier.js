@@ -901,6 +901,16 @@
     return rowWhy;
   }
 
+  function qualityAwareScore(x){
+    // Substantive Matrix qualification happens before this function is used. Once a
+    // finding is legitimately placed, combine finding strength with the source-merit
+    // score documented in Stuff (authority + relevance + evidence + transparency).
+    // Source prestige never creates a Matrix placement; it only helps order qualified findings.
+    const meritScore=Number(x?.sourceMerit?.score||0);
+    const findingScore=Number(x?.overall||0);
+    return findingScore*4+meritScore;
+  }
+
   function concentration(items,keyFn){
     const m=new Map();for(const x of items){const k=keyFn(x);m.set(k,(m.get(k)||0)+1)}
     return [...m.entries()].sort((a,b)=>b[1]-a[1]||String(a[0]).localeCompare(String(b[0])))[0]||['None',0];
@@ -911,10 +921,10 @@
     const index=buildEvidenceIndex(data);
     const raw=dedupeCandidates([...weakCandidates(data),...evidenceCandidates(data)]);
     const signals=raw.map(x=>classifySignal(x,data,index,now)).filter(Boolean);
-    signals.sort((a,b)=>b.overall-a.overall||b.triage.total-a.triage.total||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0))||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
+    signals.sort((a,b)=>qualityAwareScore(b)-qualityAwareScore(a)||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0))||b.overall-a.overall||b.triage.total-a.triage.total||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
     const cells={};for(const r of ROWS){cells[r.id]={};for(const c of COLUMNS)cells[r.id][c.id]=[]}
     for(const s of signals)cells[s.row.id][s.column.id].push(s);
-    for(const r of ROWS)for(const c of COLUMNS)cells[r.id][c.id].sort((a,b)=>b.triage.total-a.triage.total||b.overall-a.overall||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0)));
+    for(const r of ROWS)for(const c of COLUMNS)cells[r.id][c.id].sort((a,b)=>qualityAwareScore(b)-qualityAwareScore(a)||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0))||b.overall-a.overall||b.triage.total-a.triage.total);
     const top=signals.slice(0,7);
     const [topRow,topRowCount]=concentration(signals,x=>x.row.name);
     const [topColumn,topColumnCount]=concentration(signals,x=>`${x.column.id}. ${x.column.name}`);
@@ -929,5 +939,5 @@
     };
   }
 
-  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet,whyBullet};
+  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet,whyBullet,qualityAwareScore};
 });

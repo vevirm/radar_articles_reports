@@ -9370,7 +9370,11 @@ def main() -> int:
     # The broad lane is Strand A discovery. Strand B has its own strict method-
     # development lane below; mixing generic "method" queries into the broad bank
     # wastes rotation budget on papers that merely use a method.
-    all_queries = list(dict.fromkeys(CONFIG.get("queries_a", [])))
+    # Interleave the broad Strand-A query bank by coarse topic family *before*
+    # applying persisted cursors. This means even the ordinary/base scholarly
+    # rotation cannot spend a whole scan on whichever topic happens to be grouped
+    # first in radar_config.json. The gate is unchanged; this is search allocation only.
+    all_queries = diversified_query_bank(list(dict.fromkeys(CONFIG.get("queries_a", []))))
     gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
     gap_lookback_months = max(0, int(CONFIG.get("frontier_gap_historical_lookback_months", 0) or 0))
     # Gap priority must first exhaust the scanner's own live corpus window.  A sparse
@@ -9682,8 +9686,11 @@ def main() -> int:
             log_progress(f"{name} failed safely; preserving existing corpus and persisted cursor")
             return []
 
-    # Weak signals, OpenAlex and Crossref start together. Each family has its own
-    # time slice, so no one family can consume the complete scan runtime.
+    # Weak signals, journals/scholarly indexes and institutional/EU reports start
+    # together. Each family has its own time slice and persisted cursor, so a slow
+    # scholarly endpoint cannot consume the scan before EU/publication hubs are tried,
+    # and a slow institutional crawl cannot starve journals. This is source-family
+    # rotation/search allocation only; all candidates still face the same strict gates.
     signal_backfill = needs_signal_backfill(previous)
     first_run = not bool(previous.get("first_scan_complete"))
     news_lookback = SIGNAL_BACKFILL_HOURS if signal_backfill else (FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS)
@@ -9721,8 +9728,9 @@ def main() -> int:
     news_deadline = phase_started + int(CONFIG.get("news_stage_seconds", 240))
     oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
     cr_deadline = phase_started + int(CONFIG.get("crossref_stage_seconds", 450))
+    inst_deadline = phase_started + int(CONFIG.get("institution_stage_seconds", 480))
 
-    with cf.ThreadPoolExecutor(max_workers=3) as ex:
+    with cf.ThreadPoolExecutor(max_workers=4) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
@@ -9734,9 +9742,14 @@ def main() -> int:
             safe_stage, "Crossref", collect_crossref, cr_from, warnings, cr_batch, cr_priority_batch, cr_source_batch, cr_deadline, cr_query_dates,
             state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"], cr_depth_lanes, execution_stats
         )
+        fut_inst = ex.submit(
+            safe_stage, "institutional reports", collect_institutions, inst_from, warnings,
+            bootstrap=inst_backfill, sources_override=inst_batch, stage_deadline=inst_deadline, execution_stats=execution_stats
+        )
         news = fut_news.result()
         oa = fut_oa.result()
         cr = fut_cr.result()
+        inst_base = fut_inst.result()
     warnings.extend(news_warnings)
 
     oa = [x for x in oa if isinstance(x, dict)]
@@ -9996,9 +10009,9 @@ def main() -> int:
         else:
             log_progress("Targeted new-source catch-up remains pending; no normal cursor was reset or advanced by this lane")
 
-    # Quiet-scan rescue runs BEFORE the slower institutional stage. If the early
-    # scholarly slice is very sparse (currently three or fewer raw gate-passing
-    # candidates), try another topic/depth slice while meaningful budget remains.
+    # Quiet-scan rescue runs after the parallel first wave. If the early scholarly
+    # slice is sparse, try another topic/depth slice while meaningful budget remains.
+    # The institutional/EU lane has already had its protected first-class time slice.
     quiet_rescue = {"attempted": False, "openalex_queries": [], "crossref_queries": [], "themes": []}
     rescue_enabled = bool(CONFIG.get("quiet_scan_rescue_enabled", True))
     rescue_min_remaining = int(CONFIG.get("quiet_scan_rescue_min_seconds_remaining", 180) or 180)
@@ -10031,8 +10044,8 @@ def main() -> int:
         }
         if quiet_rescue["attempted"]:
             log_progress(
-                f"Low-yield rescue before institutional stage: first scholarly slice admitted {len(scholarly_deduped)} "
-                f"candidate(s), below trigger {rescue_trigger}; trying next historical slice: "
+                f"Low-yield scholarly rescue after parallel first wave: first scholarly slice admitted {len(scholarly_deduped)} "
+                f"candidate(s), below trigger {rescue_trigger}; trying next rotated topic/depth slice: "
                 + ", ".join(quiet_rescue["themes"])
             )
             rescue_execution: dict[str, Any] = {}
@@ -10133,20 +10146,11 @@ def main() -> int:
         collect_manual_recovery, previous, warnings, manual_recovery_deadline, execution_stats
     )
 
-    # Reports retain a substantial independent slice, but no longer block the quiet
-    # scholarly rescue from firing. High-quality institutional sources remain a core lane.
-    inst_deadline = time.monotonic() + int(CONFIG.get("institution_stage_seconds", 480))
-    inst = safe_stage(
-        "institutional reports",
-        collect_institutions,
-        inst_from,
-        warnings,
-        bootstrap=inst_backfill,
-        sources_override=inst_batch,
-        stage_deadline=inst_deadline,
-        execution_stats=execution_stats,
-    )
-    inst = dedupe_candidates([x for x in (manual_recovered + rule_fix_recovered + inst) if isinstance(x, dict)])
+    # The ordinary institutional/EU lane already ran in parallel with scholarly
+    # discovery above. Merge its results with exact-url and one-time recovery work here.
+    # This preserves the same corpus semantics while guaranteeing source-family balance
+    # even when later recall/deepening stages consume the remaining budget.
+    inst = dedupe_candidates([x for x in (manual_recovered + rule_fix_recovered + inst_base) if isinstance(x, dict)])
 
     # V17.13.23: bounded 4-6 month recovery only for sources capable of reaching the
     # existing Highest source-merit band. The normal four-month institutional stage runs
