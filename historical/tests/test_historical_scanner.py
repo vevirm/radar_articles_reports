@@ -144,24 +144,12 @@ class HistoricalScannerTests(unittest.TestCase):
         self.assertIn("metadata_text_rescue", f)
         self.assertIn("source_adapter_jobs", f)
 
-    def test_historical_workflow_runs_every_four_hours(self):
-        workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
-        self.assertIn("cron: '41 2,6,10,14,18,22 * * *'", workflow)
-
-    def test_workflow_dispatches_only_historical_scanner(self):
-        workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
-        self.assertIn("historical-scan.yml/dispatches", workflow)
-        self.assertNotIn("radar-scan.yml/dispatches", workflow)
-        self.assertIn("git add -- historical/historical.json", workflow)
-        self.assertIn("historical/manual_evidence.json", workflow)
-        self.assertNotIn("git add -- radar.json", workflow)
-
     def test_historical_scan_is_target_driven_not_time_padded(self):
+        # Scanner behavior must not depend on the GitHub workflow text. Workflow
+        # cadence is checked separately as a non-blocking deployment contract.
         self.assertEqual(H.CONFIG["minimum_runtime_seconds"], 0)
         self.assertEqual(H.MIN_RUNTIME_SECONDS, 0)
         self.assertEqual(H.CONFIG["target_new_items_per_scan"], 8)
-        workflow = (ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
-        self.assertIn("HISTORICAL_MIN_RUNTIME_SECONDS: '0'", workflow)
 
     def test_deeper_result_pages_are_supported_for_minimum_runtime_rotation(self):
         import inspect

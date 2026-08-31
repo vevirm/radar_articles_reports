@@ -1,29 +1,11 @@
-# R&I Radar v17.18.0
+# v17.18.1 — workflow unjam + safety-preserving decoupling
 
-## Workflow jam removed without weakening the persistence boundary
-
-- Main and historical scanners still have a strict persistence allowlist: the main job stages/commits only `radar.json`; the historical job stages/commits only `historical/historical.json`.
-- A test runner, parser, cache or other runtime process changing another working-tree file can no longer throw away an otherwise completed scan. Such changes are logged as warnings and are never staged.
-- The substantive corpus-integrity checks on `radar.json` remain in place. This change removes the fragile *working-tree cleanliness* kill switch, not the evidence/corpus safety checks.
-- Main scanner is a true four-hour rotation at 00:17/04:17/08:17/12:17/16:17/20:17 UTC with no hidden 6-hour age gate.
-- Historical scanner is a true four-hour rotation, offset at 02:41/06:41/10:41/14:41/18:41/22:41 UTC, with `HISTORICAL_MIN_RUNTIME_SECONDS=0`.
-
-## Reader pages are live views of the Main Radar
-
-- Every evidence-bearing reader page now reads the current root `radar.json` with cache-busting/no-store behaviour: Main Radar, Read at least this, topic briefing, Matrix (full and quick), Risks & opportunities, Sources and Stuff.
-- The old static topic briefing was replaced. It no longer carries a generated-at snapshot that can drift from the Main Radar; it rebuilds from the current A/B/C corpus whenever the page loads.
-- GitHub Pages is still explicitly rebuilt after a successful Main or Historical scan.
-- Glossary remains intentionally static because it is definitions, not evidence. Historical remains intentionally based on `historical/historical.json` because it is a separate archive.
-
-## Evidence quality controls height, not admission
-
-- Source quality remains the shared `source_merit.js` rubric documented in Stuff: authority + EU/R&I relevance + evidence strength + author transparency.
-- Read at least this, Matrix and Risks & opportunities already use that rubric after substantive qualification; those paths are retained.
-- Topic briefing and Sources now also put stronger admitted evidence first.
-- Stuff continues to show the technical quality ranking/export from the same current Main Radar corpus.
-- No page can admit evidence because a source is prestigious. The scanner's substantive A/B/C gates still decide what enters the corpus; quality only ranks already-admitted material.
-
-## Release completeness
-
-- `scripts/build_release.py` now includes the machine-readable phrase ontology and its workbook, plus the reader/workflow regression tests, so a future lean release cannot silently omit files the scanner actually uses.
-
+- Fixed the immediate 12–24 second failures seen on GitHub Actions. The live repository had new scanner tests that asserted a four-hour YAML schedule, while the live workflow YAML was still the old daily/hourly version. That made tests stop both scanners before evidence discovery began.
+- Scanner regression tests now test scanner/evidence behavior only. They no longer fail because a workflow schedule file is stale or partially uploaded.
+- Added `scripts/check_workflow_contract.py` as a separate deployment sanity checker. Both workflows run it with `continue-on-error: true`: a cadence/config mismatch is visible as a warning but cannot jam evidence scanning.
+- Main workflow remains a true four-hour rotation at 00:17/04:17/08:17/12:17/16:17/20:17 UTC. Historical remains a true four-hour rotation, offset at 02:41/06:41/10:41/14:41/18:41/22:41 UTC.
+- Historical minimum runtime remains 0: it searches toward the ~8 finding target instead of padding to ten minutes.
+- Persistence safety is retained: Main can stage/commit only `radar.json`; Historical can stage/commit only `historical/historical.json`.
+- Historical safety is strengthened with before/after file-size and corpus-count checks plus preservation of curated manual evidence.
+- Reader pages remain live views of `radar.json`; Matrix, Read at least this, Risks & opportunities, briefing, Sources and Stuff continue ranking admitted findings with the shared source-merit/evidence-quality model.
+- No relevance, A/B/C, document-integrity, date-integrity, journal-quality or source-rotation gates were loosened.

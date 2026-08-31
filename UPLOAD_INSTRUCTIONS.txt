@@ -1,19 +1,16 @@
-UPLOAD THIS WHOLE REPOSITORY TO GITHUB
+UPLOAD-ONLY INSTRUCTIONS — v17.18.1
 
 1. Unzip this ZIP once.
-2. Open your GitHub repository.
+2. Open your existing GitHub repository.
 3. Choose Add file -> Upload files.
-4. Drag EVERYTHING INSIDE the unzipped folder onto the GitHub upload page.
-5. IMPORTANT: before committing, the upload list must include these two paths:
+4. Drag EVERYTHING INSIDE the unzipped repository folder onto the GitHub upload page.
+5. Before Commit changes, use the upload list to make sure these TWO files are present:
       .github/workflows/radar-scan.yml
       .github/workflows/historical-scan.yml
-   They are ordinary repository files and are required for the four-hour scanners.
-6. Click Commit changes.
+   They are important because GitHub only schedules workflows from the .github/workflows folder.
+6. Leave the commit message as Add files via upload if you like.
+7. Click Commit changes.
 
-Do not delete or edit anything manually.
+You do not need to delete or edit anything.
 
-After this upload:
-- Main Radar scan: every 4 hours.
-- Historical scan: every 4 hours, offset from Main.
-- Runtime working-tree noise cannot throw away a finished scan; only the allowed JSON result file is staged.
-- Reader evidence pages load the current radar.json directly and quality-rank admitted evidence.
+If the two .github/workflows files are not shown in the upload list, drag the .github folder from the unzipped repository onto the same GitHub upload page as well. This is still upload-only; no editing is required.

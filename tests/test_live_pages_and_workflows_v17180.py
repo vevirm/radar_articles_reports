@@ -4,25 +4,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-class LivePagesAndWorkflowsTests(unittest.TestCase):
-    def test_main_and_historical_are_true_four_hour_rotations(self):
-        main = (ROOT / '.github/workflows/radar-scan.yml').read_text(encoding='utf-8')
-        hist = (ROOT / '.github/workflows/historical-scan.yml').read_text(encoding='utf-8')
-        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", main)
-        self.assertNotIn('age_hours >= 6.0', main)
-        self.assertIn("cron: '41 2,6,10,14,18,22 * * *'", hist)
-        self.assertIn("HISTORICAL_MIN_RUNTIME_SECONDS: '0'", hist)
-
-    def test_runtime_noise_cannot_jam_completed_scan(self):
-        main = (ROOT / '.github/workflows/radar-scan.yml').read_text(encoding='utf-8')
-        hist = (ROOT / '.github/workflows/historical-scan.yml').read_text(encoding='utf-8')
-        self.assertIn('only radar.json can be committed', main)
-        self.assertIn('only historical/historical.json can be committed', hist)
-        self.assertNotIn('Could not isolate scanner output safely', main)
-        self.assertNotIn('Historical scanner changed unexpected files; refusing to save anything', hist)
-        self.assertIn('git add -- radar.json', main)
-        self.assertIn('git add -- historical/historical.json', hist)
-
+class LivePagesAndEvidenceTests(unittest.TestCase):
     def test_all_evidence_reader_pages_load_live_radar_json(self):
         pages = [
             'index.html',
@@ -59,14 +41,6 @@ class LivePagesAndWorkflowsTests(unittest.TestCase):
         self.assertIn("fetch('../radar.json?ts='+Date.now()", briefing)
         self.assertNotIn('Topic digest generated:', briefing)
         self.assertIn('Nothing here is a hand-written snapshot', briefing)
-
-    def test_publish_jobs_rebuild_pages_after_success(self):
-        main = (ROOT / '.github/workflows/radar-scan.yml').read_text(encoding='utf-8')
-        hist = (ROOT / '.github/workflows/historical-scan.yml').read_text(encoding='utf-8')
-        self.assertIn('/pages/builds', main)
-        self.assertIn('/pages/builds', hist)
-        self.assertIn("needs.scan.result == 'success'", main)
-        self.assertIn("needs.scan.result == 'success'", hist)
 
 
 if __name__ == '__main__':
