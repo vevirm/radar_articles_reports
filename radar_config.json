@@ -882,7 +882,7 @@
   "crossref_public_min_interval_seconds": 1.2,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.17.3-c-is-weak-signal-not-standing-eu",
+  "signal_discovery_version": "v17.17.5-formal-evidence-a-before-c",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -1648,7 +1648,7 @@
     "developing adaptive pathways method technology innovation policy uncertainty"
   ],
   "queries_b_method_per_scan": 12,
-  "signal_quality_profile_version": "v17.17.3-c-is-weak-signal-not-standing-eu",
+  "signal_quality_profile_version": "v17.17.5-formal-evidence-a-before-c",
   "rotation_profile_version": "v17.17.4-source-family-topic-quality-rotation",
   "openalex_exploration_queries_per_scan": 12,
   "crossref_exploration_queries_per_scan": 10,
@@ -2109,5 +2109,6 @@
   "source_family_parallel_scan": true,
   "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Each family keeps independent persisted cursors; no output quota is imposed.",
   "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
-  "reader_quality_ranking_rule": "After substantive admission/Matrix placement, reader surfaces rank findings with source merit from source_merit.js (authority + EU relevance + evidence strength + author transparency) as a material part of ordering, never as an admission shortcut."
+  "reader_quality_ranking_rule": "After substantive admission/Matrix placement, reader surfaces rank findings with source merit from source_merit.js (authority + EU relevance + evidence strength + author transparency) as a material part of ordering, never as an admission shortcut.",
+  "formal_evidence_news_promotion_per_scan": 6
 }

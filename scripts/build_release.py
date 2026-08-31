@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 # Files required by the public GitHub Pages site.
 SITE_FILES = [
     "index.html",
+    "simple-ui.css",
     "source_merit.js",
     "radar.json",
     "robots.txt",

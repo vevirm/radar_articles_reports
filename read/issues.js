@@ -118,7 +118,7 @@
 
   function summary(issues){
     const names=(issues||[]).slice(0,3).map(x=>clean(x.title));
-    if(!names.length)return {title:'The current radar has not yet produced a stable issue pattern.',text:'Open the radar evidence while the next scan builds the picture.'};
+    if(!names.length)return {title:'The current radar has not yet produced a stable issue pattern.',text:'Open the radar evidence; no stable issue pattern is available yet.'};
     if(names.length===1)return {title:`The current radar is concentrated on ${names[0]}.`,text:'This issue has the strongest current evidence concentration.'};
     const final=names.pop();
     return {title:`The current radar is concentrated on ${names.join(', ')} and ${final}.`,text:'These are the strongest issue concentrations in the latest admitted material; they can change after the next successful scan.'};

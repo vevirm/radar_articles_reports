@@ -1,0 +1,122 @@
+/* v17.17.7 reader UI — black / red / white, low-clutter, explicit actions */
+:root{
+  --ink:#0b0b0b!important;--muted:#5f5f5f!important;--line:#d7d7d7!important;
+  --bg:#ffffff!important;--card:#ffffff!important;--navy:#0b0b0b!important;
+  --red:#c40018!important;--accent:#c40018!important;--focus:#c40018!important;
+  --soft:#f7f7f7!important;--shadow:none!important;
+}
+*{box-shadow:none!important}
+html{background:#fff}
+body{background:#fff!important;color:#0b0b0b!important}
+a{color:#0b0b0b}
+header:not(.hero){background:#0b0b0b!important;color:#fff!important;border-bottom:4px solid #c40018!important}
+header:not(.hero) .kicker,header:not(.hero) .eyebrow{color:#ff4056!important}
+header:not(.hero) h1,header:not(.hero) .title{color:#fff!important}
+header:not(.hero) .lede,header:not(.hero) .relation,header:not(.hero) .view-relation{color:#e5e5e5!important}
+header:not(.hero) .relation a,header:not(.hero) .view-relation a{color:#fff!important}
+.nav{gap:6px!important}
+.nav a,.top-actions .button{border:1px solid #555!important;background:#0b0b0b!important;color:#fff!important;border-radius:0!important;padding:8px 10px!important;text-decoration:none!important}
+.nav a:hover,.top-actions .button:hover{border-color:#c40018!important;color:#fff!important}
+.nav a.primary,.nav a[aria-current="page"]{background:#c40018!important;border-color:#c40018!important;color:#fff!important}
+
+/* Flat surfaces. */
+.item,.stat,.component,.minimum-read,.issue,.panel,.priority-card,.takeaway,.signal,.intro-card,.download-card,.pub,.term,.list,.entry,.cell,.matrix-cell,.col,.row,.col-head,.row-head,.detail-box,.abstract-panel,.detail-grid,.backstage details,.note,.page-map-card,.journey-step{border-radius:0!important}
+.item,.stat,.component,.issue,.panel,.priority-card,.takeaway,.signal,.pub,.term,.list,.matrix,.matrix-cell,.cell{background:#fff!important;border-color:#d7d7d7!important}
+.dashboard,.cards,.grid,.issue-list{gap:12px!important}
+
+/* No traffic-light pastels. Quality is shown with type + border, not green/yellow colour. */
+.merit-badge,.tag,.chip,.pill,.panel-count,.n,.category,.rank{background:#fff!important;color:#111!important;border:1px solid #bdbdbd!important;border-radius:0!important}
+.merit-badge.highest,.merit-badge.very-strong{border-left:4px solid #c40018!important;color:#111!important}
+.merit-badge.strong{border-left:3px solid #111!important}
+.merit-badge.useful,.merit-badge.supporting{border-left:1px solid #777!important}
+.tag.new,.tag.signal,.chip.fresh{color:#c40018!important;border-color:#c40018!important;background:#fff!important}
+
+/* Inputs and buttons: square, obvious, verbal labels. */
+button,.filter,.btn,.action,.more,.info-button,.publication-link,.evidence-open,.card-link{border-radius:0!important}
+button,.filter,.btn,.action,.more,.info-button{font-weight:850!important}
+.info-button,.publication-link,.evidence-open,.card-link{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 11px;border:1px solid #111;background:#fff;color:#111;text-decoration:none;font-size:12px;font-weight:900;line-height:1.15;cursor:pointer}
+.info-button{background:#111;color:#fff}
+.info-button:hover,.publication-link:hover,.evidence-open:hover,.card-link:hover{border-color:#c40018!important}
+.publication-link:hover,.evidence-open:hover,.card-link:hover{color:#c40018}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 8px}
+.claim-title{font-size:19px;line-height:1.24;letter-spacing:-.025em;margin:11px 0 5px;color:#111}
+.claim-button{font-size:13px!important;border:1px solid #111!important;background:#111!important;color:#fff!important;width:auto!important;padding:8px 11px!important;margin:10px 0 8px!important;text-decoration:none!important}
+.claim-button:after{content:''!important}
+.all-details>summary,.biblio>summary,.technical-check summary,.backstage summary{color:#111!important;font-weight:850!important}
+.all-details>summary{cursor:pointer}
+
+/* Main radar: keep depth, remove decorative colour/shadows. */
+.hero{background:#0b0b0b!important;border-bottom:4px solid #c40018!important}
+.hero:after{display:none!important}
+.hero .kicker,.hero .red{color:#ff243e!important}
+.issue-splash a{background:#0b0b0b!important;border-color:#555!important;border-radius:0!important}
+.issue-splash a:hover{border-color:#c40018!important}
+.inside-map,.page-map,.statusbar{background:#fff!important}
+.journey-step,.page-map-card{background:#fff!important}
+.minimum-read{border-left:6px solid #c40018!important}
+.toolbar{background:rgba(255,255,255,.97)!important}
+
+/* Read-at-least-this: no wiring diagram. One issue, then simple branches and source lines. */
+.issue{border-left:5px solid #111!important}
+.issue-head{display:block!important;padding:18px 20px!important}
+.issue-number{color:#c40018!important}
+.issue-title{font-size:23px!important;font-weight:900!important;margin:4px 0 5px!important}
+.branch-preview{display:none!important}
+.chart-wrap{padding:0 20px 20px!important;overflow:visible!important;border-top:1px solid #ddd!important}
+.issue-chart{min-width:0!important;display:block!important}
+.chart-main{display:none!important}
+.chart-branches{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;padding-top:16px!important}
+.chart-branches:before,.chart-branch:before,.branch-node:after,.sub-stack:before,.sub-node:before{display:none!important}
+.chart-branch{display:block!important;border-top:4px solid #111!important;padding-top:9px!important}
+.branch-node{border:0!important;padding:0 0 8px!important;text-align:left!important;font-size:14px!important;font-weight:900!important}
+.sub-stack{display:grid!important;gap:0!important}
+.sub-node{border:0!important;border-top:1px solid #ddd!important;background:#fff!important;padding:9px 0!important;font-size:12px!important;font-weight:650!important}
+.evidence-claim{display:block;margin-bottom:6px}
+.evidence-open{padding:5px 7px;min-height:0;font-size:10px}
+.issue-evidence{border-top:2px solid #111!important;margin-top:16px!important;padding-top:10px!important}
+.issue-evidence ul{list-style:none!important;padding-left:0!important}
+.issue-evidence li{border-top:1px solid #ddd;padding:9px 0!important}
+
+/* Risks/opportunities: one glance. Red marks risk, black marks opportunity. */
+.panel{padding:18px!important}
+.grid .panel:first-child{border-top:6px solid #c40018!important}
+.grid .panel:last-child{border-top:6px solid #111!important}
+.priority-card{border:0!important;border-top:1px solid #ddd!important}
+.priority-card:first-child{border-top:0!important}
+.priority-main{grid-template-columns:30px minmax(0,1fr) auto!important;padding:12px 0!important}
+.rank{border:0!important;font-size:14px!important;font-weight:950!important}
+.risk .rank{color:#c40018!important}.opportunity .rank{color:#111!important}
+.priority-title{font-size:14px!important;font-weight:850!important;cursor:default!important}
+.priority-title:hover{text-decoration:none!important}
+.priority-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.detail{margin:0 0 12px 40px!important;border-radius:0!important;background:#f7f7f7!important}
+
+/* Matrix: keep the 4x4 logic, remove dashboard-like decoration. */
+.matrix{border-radius:0!important;background:#fff!important}
+.matrix-cell,.cell,.A,.B,.C,.D{background:#fff!important}
+.matrix-cell.A,.cell.A{border-top-color:#111!important}
+.matrix-cell.B,.cell.B{border-top-color:#111!important}
+.matrix-cell.C,.cell.C{border-top-color:#777!important}
+.matrix-cell.D,.cell.D{border-top:4px solid #c40018!important}
+.density{background:#eee!important}.density i{background:#c40018!important}
+.bullets a,.cell-item a,.source-link{color:#111!important;text-decoration:underline!important;text-decoration-color:#c40018!important;text-underline-offset:2px}
+.more-btn{background:#fff!important;color:#111!important;border:1px solid #111!important}
+
+/* Literature / glossary / technical pages. */
+.search{border-radius:0!important;background:#fff!important}
+.letters button{border-radius:0!important}
+.letters button.active{background:#111!important;color:#fff!important;border-color:#111!important}
+.entry.head{background:#0b0b0b!important;color:#fff!important}
+.publication-open{display:inline-block;margin-top:6px;font-size:10px;font-weight:900;text-decoration:underline;text-decoration-color:#c40018;text-underline-offset:2px}
+.term{border-left:4px solid #111!important}.term .label{color:#c40018!important}
+
+/* Historical: same simple language and colour. */
+.historical-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+
+@media(max-width:900px){
+  .chart-branches{grid-template-columns:1fr!important}
+}
+@media(max-width:650px){
+  .card-actions,.priority-actions{display:grid;grid-template-columns:1fr!important}
+  .info-button,.publication-link,.evidence-open,.card-link{width:100%}
+}

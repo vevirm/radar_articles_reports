@@ -50,6 +50,7 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
+<link rel="stylesheet" href="simple-ui.css?v=17.17.7">
 </head>
 <body>
   <section id="gate" aria-label="Password gate">
@@ -141,7 +142,7 @@
     <div class="wrap" id="radar">
       <section class="minimum-read" aria-label="Minimum useful read">
         <div><div class="label">Read at least this</div><h2 id="minimumReadTitle">Reading the latest issue pattern…</h2><p id="minimumReadText">The summary is rebuilt from the current admitted material.</p></div>
-        <a href="read/?v=17.13.31">Open the 1-minute read →</a>
+        <a href="read/?v=17.13.31">Open the 1-minute read</a>
       </section>
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
@@ -155,8 +156,8 @@
     <div class="toolbar"><div class="wrap tools">
       <input id="search" class="search" type="search" placeholder="Search titles, sources, signals, topics…" aria-label="Search radar">
       <button id="onlyNew" class="filter" type="button">New this scan</button>
-      <button id="allDetails" class="filter" type="button">Show all details</button>
-      <button id="clearFilter" class="filter" type="button">Clear</button>
+      <button id="allDetails" class="filter" type="button">Expand all information</button>
+      <button id="clearFilter" class="filter" type="button">Clear filters</button>
       <a class="filter" href="glossary/">Glossary</a>
     </div></div>
 
@@ -296,7 +297,7 @@ function filtered(items){const q=state.query.trim().toLowerCase();return items.f
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
 function biblio(x,label='Bibliography'){
   const title=x.title||x.headline||'';const who=x.authors||'';const meta=[x.source,fmtDate(x.date),x.type].filter(Boolean).join(' · ');const englishTitle=!title||globalThis.RadarInsights?.likelyEnglish?.(title)!==false;
-  return `<details class="biblio" ${state.allDetails?'open':''}><summary>${esc(label==='Source'?'Source details':'Source details')}</summary>${title&&englishTitle?`<div class="biblio-title">${esc(title)}</div>`:''}${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</details>`;
+  return `<details class="biblio" ${state.allDetails?'open':''}><summary>Source information</summary>${title&&englishTitle?`<div class="biblio-title">${esc(title)}</div>`:''}${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</details>`;
 }
 function detailRow(k,v){if(v===undefined||v===null||v===''||(Array.isArray(v)&&!v.length))return '';const shown=Array.isArray(v)?v.join(' · '):String(v);return `<div class="detail-k">${esc(k)}</div><div class="detail-v">${esc(shown)}</div>`}
 function detailWide(k,v){if(!v)return '';return `<div class="detail-wide"><span class="detail-k">${esc(k)}</span><div class="detail-v">${esc(String(v))}</div></div>`}
@@ -311,15 +312,15 @@ function allDetails(x){
     detailRow('Watch theme',x.watch_theme),detailRow('Signal type',x.signal_type),detailRow('Signal kind',x.signal_kind),
     detailRow('Matrix row',x.matrix_dimension),detailRow('Matrix outcome',x.matrix_quadrant||x.quadrant_implied),detailRow('Admission route',x.a_route),detailRow('Evidence status',x.evidence_status),detailRow('Text mode',x.source_text_mode||x.text_mode),detailRow('Anchor',x.anchor),
   ].join('');
-  const link=x.link?`<div class="detail-k">Source link</div><div class="detail-v"><a href="${esc(x.link)}" target="_blank" rel="noopener">Open source ↗</a></div>`:'';
+  const link=x.link?`<div class="detail-k">Publication link</div><div class="detail-v"><a href="${esc(x.link)}" target="_blank" rel="noopener">Open link to publication ↗</a></div>`:'';
   const inference=bridge?`<div class="detail-note">The Europe-impact bridge below is a radar inference based on this source plus an admitted same-domain EU context anchor; it is not presented as the source author's own wording.</div>`:'';
-  return `<details class="all-details" ${state.allDetails?'open':''}><summary>All record details</summary><div class="detail-grid">${rows}${link}${detailWide('Relevance / admission note',x.relevance_note)}${detailWide('EU evidence',Array.isArray(x.eu_evidence)?x.eu_evidence.join(' · '):x.eu_evidence)}${detailWide('R&I evidence',Array.isArray(x.ri_evidence)?x.ri_evidence.join(' · '):x.ri_evidence)}${detailWide('Strategic evidence',Array.isArray(x.geo_evidence)?x.geo_evidence.join(' · '):x.geo_evidence)}${detailWide('Specific Europe-impact bridge',bridge||x.bridge_sentence)}${detailWide('Full available summary',summary)}${detailWide('Core message stored in radar',x.core_message)}${detailWide('Matrix evidence basis',x.matrix_evidence_basis)}${inference}</div></details>`;
+  return `<details class="all-details" ${state.allDetails?'open':''}><summary>Technical details</summary><div class="detail-grid">${rows}${link}${detailWide('Relevance / admission note',x.relevance_note)}${detailWide('EU evidence',Array.isArray(x.eu_evidence)?x.eu_evidence.join(' · '):x.eu_evidence)}${detailWide('R&I evidence',Array.isArray(x.ri_evidence)?x.ri_evidence.join(' · '):x.ri_evidence)}${detailWide('Strategic evidence',Array.isArray(x.geo_evidence)?x.geo_evidence.join(' · '):x.geo_evidence)}${detailWide('Specific Europe-impact bridge',bridge||x.bridge_sentence)}${detailWide('Full available summary',summary)}${detailWide('Core message stored in radar',x.core_message)}${detailWide('Matrix evidence basis',x.matrix_evidence_basis)}${inference}</div></details>`;
 }
-function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text&&!x.link)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}${x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">Open source ↗</a>`:''}</div>`}
+function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}</div>`}
 function cardHeading(x){const t=cleanText(x.title||x.headline||'');return t&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false?t:claimText(x)}
 function meritOf(x){return globalThis.RadarSourceMerit?.forItem?RadarSourceMerit.forItem(x):null}
 function meritTag(x){const m=meritOf(x);return m?`<span class="merit-badge ${esc(m.tone)}" title="Source merit ${m.score}/100">Source merit: ${esc(m.label)}</span>`:''}
-function claimButton(x,id){return `<button class="claim-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">${esc(cardHeading(x))}</button>`}
+function claimButton(x,id){return `<h3 class="claim-title">${esc(cardHeading(x))}</h3><div class="card-actions"><button class="info-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">More info</button>${x.link?`<a class="publication-link" href="${esc(x.link)}" target="_blank" rel="noopener">Open link to publication ↗</a>`:''}</div>`}
 function abItem(x,i){
   const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"",id=`abstract-a-${i}`;
   return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag(x.strand)}${meritTag(x)}</div></div>${claimButton(x,id)}${biblio(x)}${abstractPanel(x,id)}${allDetails(x)}${whatLine(x)}${whyLine(x)}<div class="card-foot"><span>${esc([x.source_tier||x.eu_relevance||'',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
@@ -343,10 +344,10 @@ function renderCurrentIssues(d){
   const jr=document.getElementById('journeyReadText');if(jr)jr.textContent=issues.length?`${issues.length} live issue maps rebuilt from the latest admitted material.`:'Live issue maps rebuilt from the latest admitted material.';
   const pr=document.getElementById('pageReadLink');if(pr)pr.textContent=issues.length?`${issues.length} current issue maps →`:'Current issue maps →';
 }
-function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more of ${f.length}`}
+function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more findings`}
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
-function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:12};render()});document.getElementById("onlyNew").addEventListener("click",e=>{state.onlyNew=!state.onlyNew;e.currentTarget.classList.toggle("active",state.onlyNew);state.limits={A:12,B:12,C:12};render()});document.getElementById("allDetails").addEventListener("click",e=>{state.allDetails=!state.allDetails;e.currentTarget.classList.toggle("active",state.allDetails);e.currentTarget.textContent=state.allDetails?'Hide all details':'Show all details';render();document.querySelectorAll('.abstract-panel').forEach(p=>p.hidden=!state.allDetails);document.querySelectorAll('[data-abstract]').forEach(b=>b.setAttribute('aria-expanded',String(state.allDetails)));document.querySelectorAll('.biblio').forEach(d=>d.open=state.allDetails)});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.onlyNew=false;document.getElementById("search").value="";document.getElementById("onlyNew").classList.remove("active");state.limits={A:12,B:12,C:12};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
+function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:12};render()});document.getElementById("onlyNew").addEventListener("click",e=>{state.onlyNew=!state.onlyNew;e.currentTarget.classList.toggle("active",state.onlyNew);state.limits={A:12,B:12,C:12};render()});document.getElementById("allDetails").addEventListener("click",e=>{state.allDetails=!state.allDetails;e.currentTarget.classList.toggle("active",state.allDetails);e.currentTarget.textContent=state.allDetails?'Collapse all information':'Expand all information';render();document.querySelectorAll('.abstract-panel').forEach(p=>p.hidden=!state.allDetails);document.querySelectorAll('[data-abstract]').forEach(b=>b.setAttribute('aria-expanded',String(state.allDetails)));document.querySelectorAll('.biblio').forEach(d=>d.open=state.allDetails)});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.onlyNew=false;document.getElementById("search").value="";document.getElementById("onlyNew").classList.remove("active");state.limits={A:12,B:12,C:12};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
 wire();
 async function loadRadar(){
   try{
@@ -357,7 +358,7 @@ async function loadRadar(){
     const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";const ageMs=completed?(Date.now()-new Date(completed).getTime()):0;const overdue=Boolean(completed&&Number.isFinite(ageMs)&&ageMs>7*60*60*1000);
     document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${overdue?"overdue":(d.scan_health==="ok"?"healthy":"degraded")}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(!overdue&&d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent=(explicitCompletion?"Last completion · ":"Last recorded run · ")+(completed?fmtDateTime(completed):"pending");
     const aged=sr.aged_out_this_scan||{};const agedTotal=Number(sr.aged_out_total_this_scan||Object.values(aged).reduce((a,b)=>a+Number(b||0),0));const ext=Number(sr.extended_highest_retained_a||0)+Number(sr.extended_highest_retained_b||0);const ageNote=agedTotal?`Retention windows aged out ${agedTotal} item${agedTotal===1?"":"s"} (${["strand_a","strand_b","strand_c"].filter(k=>aged[k]).map(k=>`${k.replace("strand_","").toUpperCase()} ${aged[k]}`).join(", ")}). Core A/B evidence normally expires at 4 months; Highest-merit A/B and all admitted low-evidence weak signals may remain to 6 months. `:(ext?`${ext} Highest-merit A/B item${ext===1?" is":"s are"} currently retained in months 4–6. `:"");
-    showNote("rotationNote",ageNote+(sr.rotation_note||""));showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
+    showNote("rotationNote",ageNote);showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
   }catch(e){document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>

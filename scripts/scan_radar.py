@@ -14,9 +14,10 @@ Key properties
   or new evidence/indicator capable of reframing Strand A, with a strong R&I/geopolitical bridge.
   It must be anchored to substantive Strand-A evidence; Strand-B methods never serve as weak-signal
   anchors. Once admitted, the signal is retained for six months and always remains low-evidence.
-  An interesting C item that explicitly points to research, a report, data or another publication can
-  trigger a bounded evidence follow-up. Any stronger source found is admitted separately through the
-  ordinary A/B gates; the C record itself is never upgraded.
+  A completed study/report/paper is itself an evidence product and therefore gets A/B precedence;
+  discovery through a news lane can never demote it into C. An interesting genuine C item that points
+  to research, a report, data or another publication can trigger a bounded evidence follow-up. Any
+  stronger source found is admitted separately through the ordinary A/B gates.
 * Foresight-expert recall is author-led rather than institution-led: authors evidenced by admitted
   Strand-B foresight/method work receive a small rotating publication check. This changes recall only;
   their later work must still satisfy the ordinary EU R&I A/B criteria.
@@ -188,7 +189,7 @@ RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.32-cit
 CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_version", "v17.13.32-shared-reference-forward-snowball"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
-A_RECALL_RECOVERY_VERSION = "v17.12.9-four-month-institution-A-recovery"
+A_RECALL_RECOVERY_VERSION = "v17.17.5-completed-evidence-A-recovery"
 WINDOW_POLICY_VERSION = "v17.13.31-six-month-low-evidence-signals"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
@@ -1226,7 +1227,7 @@ GEO_STRONG = [
 # generic EU innovation or education paper still does not qualify.
 A_EXTERNAL_RELATION = [
     "china", "chinese", "united states", "u.s.", "us-china", "american", "russia", "russian",
-    "foreign", "non-eu", "non eu", "third country", "third countries", "international competition",
+    "foreign", "non-eu", "non eu", "non-european", "non european", "third country", "third countries", "international competition",
     "global competition", "cross-border", "cross border", "international collaboration",
     "international cooperation", "global supply chain", "global value chain", "foreign capital",
     "foreign investment", "external supplier", "external suppliers", "overseas", "abroad",
@@ -1241,6 +1242,7 @@ A_STRATEGIC_RI_OUTCOME = [
     "researcher outflow", "researcher inflow", "talent attraction", "talent retention",
     "commercialisation", "commercialization", "industrialisation", "industrialization",
     "scale-up", "scale up", "technology transfer", "knowledge transfer", "research infrastructure",
+    "compute capacity", "computing capacity", "cloud capacity", "ai capacity",
 ]
 
 # V17.13 reader/recall repair: strategic context can be implied rather than literally labelled
@@ -1524,6 +1526,53 @@ def standing_institutional_page(title: str, desc: str = "") -> bool:
         return True
     return bool(contains_any(lead, C_STANDING_INSTITUTION_LEAD_HINTS) and not contains_any(lead, C_OFFICIAL_PROVISIONAL_MARKERS))
 
+FORMAL_EVIDENCE_TITLE_HINTS = [
+    "report", "study", "assessment", "evaluation", "working paper", "discussion paper",
+    "policy brief", "research paper", "staff working document", "scoreboard", "evidence review",
+    "literature review", "impact assessment", "white paper",
+]
+FORMAL_EVIDENCE_COMPLETION_CUES = [
+    "publication", "published", "findings", "results", "the study provides", "the report provides",
+    "the study addresses", "the report analyses", "the report analyzes", "the study identifies",
+    "the study was carried out", "read the study", "read the report", "executive summary",
+    "doi", "cost-benefit analysis", "multi-criteria", "empirical evidence",
+]
+FORMAL_EVIDENCE_ONGOING_CUES = [
+    "study aims to", "this study aims to", "will provide", "will identify", "collecting evidence",
+    "tender", "procurement", "call for tenders", "work in progress", "forthcoming report",
+]
+
+def formal_evidence_product(title: str, desc: str = "", source: str = "", link: str = "") -> bool:
+    """True for a completed analytical publication that belongs in A/B, never C.
+
+    Discovery route must not determine strand. A Commission report found through Google News
+    is still a report. This deliberately fails closed for ongoing commissioned-study/project
+    pages, which are not completed evidence products.
+    """
+    h = normalized(title)
+    full = normalized(f"{title}. {desc}")
+    if contains_any(full, FORMAL_EVIDENCE_ONGOING_CUES) and not contains_any(full, [
+        "final report", "published", "publication", "findings", "results", "read the study", "read the report"
+    ]):
+        return False
+    title_like = contains_any(h, FORMAL_EVIDENCE_TITLE_HINTS)
+    product_title_shape = bool(re.search(
+        r"^(?:study|report|assessment|evaluation|working paper|discussion paper|policy brief|research paper|scoreboard)\b|"
+        r"\b(?:report|study|assessment|evaluation)\s+(?:20\d{2}|on|of|for|into)\b",
+        h,
+    ))
+    # Strong publication-page cues can establish the document type even when the title is terse.
+    completion = contains_any(full, FORMAL_EVIDENCE_COMPLETION_CUES)
+    path = normalized(urlparse(clean_text(link)).path if clean_text(link) else "")
+    publication_surface = any(x in path for x in [
+        "/library/", "/publication", "/publications", "/report", "/reports", "/study", "/studies", "/doi/"
+    ])
+    authoritative = _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH
+    # A news headline saying "study finds..." is not itself the study. Product-shaped titles
+    # plus a publication surface/authoritative source distinguish the evidence product.
+    return bool(title_like and product_title_shape and (publication_surface or authoritative) and (completion or authoritative))
+
+
 def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", link: str = "") -> bool:
     """Fail closed for institutional C candidates.
 
@@ -1535,6 +1584,8 @@ def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", 
       body text contains strategic vocabulary.
     """
     if routine_signal_noise(title, desc):
+        return False
+    if formal_evidence_product(title, desc, source, link):
         return False
     lead = clean_text(desc)[:2200]
     full = normalized(f"{title}. {lead}")
@@ -2279,7 +2330,11 @@ def aboutness_for_a(
         # Short institutional papers often have no separate abstract: the available body
         # *is* the concise evidence unit. Earlier builds labelled body>=80 words as
         # abstract_only but then ignored that body here, silently rejecting good briefs.
-        concise = ta if len(clean_text(abstract).split()) >= 8 else clean_text(f"{ta}. {body[:8000]}")
+        # In abstract-only mode, use every available short source text block. Institutional
+        # publication pages often have a neutral metadata description followed by a 100-400
+        # word executive lead containing the actual R&I/geopolitical evidence. Ignoring that
+        # lead caused formal EU studies to miss A and then surface through the news/C lane.
+        concise = clean_text(f"{ta}. {body[:8000]}")
         ri = _ri_hits(concise)
         geo = _geo_hits(concise)
         result["ri_terms"], result["geo_terms"] = ri[:8], geo[:8]
@@ -2631,7 +2686,7 @@ A_TECH_DOMAINS = [
     'semiconductor', 'semiconductors', 'artificial intelligence', ' ai ', 'quantum', 'biotechnology',
     'biotech', 'advanced materials', 'robotics', 'space technology', 'satellite technology',
     'nuclear technology', 'clean technology', 'clean tech', 'digital infrastructure',
-    'compute infrastructure', 'supercomputer', 'data centre', 'data center', 'cloud infrastructure',
+    'compute infrastructure', 'computing infrastructure', 'supercomputer', 'data centre', 'data center', 'cloud infrastructure', 'cloud computing', 'ai computing',
 ]
 
 A_TECH_RI_MECHANISMS = [
@@ -2642,6 +2697,7 @@ A_TECH_RI_MECHANISMS = [
     'commercialization', 'patent', 'scientific capacity', 'innovation capacity',
     'technological capability', 'technological capabilities', 'technology governance', 'technological leadership',
     'technology leadership', 'industrial policy', 'competitiveness', 'research capacity',
+    'compute capacity', 'computing capacity', 'cloud capacity', 'ai capacity',
 ]
 
 A_FOCUS_EXCLUDE_TITLE = [
@@ -5817,7 +5873,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
 
     strand = "both" if ev["a_pass"] and ev["b_pass"] else "A" if ev["a_pass"] else "B"
     item_type = "institutional report"
-    if _source_merit_is_eu_official(source, pdf_url or canonical or r.url) and standing_institutional_page(title, f"{desc}. {body[:1800]}"):
+    if formal_evidence_product(title, f"{desc}. {body[:3000]}", source, pdf_url or canonical or r.url):
+        item_type = "formal study / report"
+    elif _source_merit_is_eu_official(source, pdf_url or canonical or r.url) and standing_institutional_page(title, f"{desc}. {body[:1800]}"):
         item_type = "official policy / institutional framework"
     elif "policy brief" in low_title or "briefing" in low_title:
         item_type = "policy brief"
@@ -7891,6 +7949,8 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
 
     source = clean_text(item.get('source', ''))
     link = clean_text(item.get('link', ''))
+    if formal_evidence_product(headline, desc, source, link):
+        return False
     # Saved official EU material follows the same rule as new discovery: an established
     # office/programme/strategy, mature implementation notice or routine grant result is
     # primary A evidence, not a weak signal. This also prevents Git-history recovery from
@@ -8704,6 +8764,50 @@ def _linked_publication_candidate(url: str, label: str, stage_deadline: float | 
     return parse_institution_page(url, source, tier, stage_deadline=stage_deadline, publication_floor=EXTENDED_DATE_FLOOR)
 
 
+def route_formal_evidence_news_to_ab(
+    news: list[dict[str, Any]],
+    warnings: list[str],
+    stage_deadline: float | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, int]]:
+    """Remove completed evidence products from C and give them an A/B parse attempt.
+
+    Google News is only a discovery transport. A formal Commission/OECD/etc. report found
+    there must not become low-evidence C simply because the institutional crawler did not
+    reach its landing page in the same run. Failure to parse it as A/B still means *not C*.
+    """
+    remaining: list[dict[str, Any]] = []
+    promoted: list[dict[str, Any]] = []
+    stats = {"formal_evidence_seen": 0, "formal_evidence_promoted_ab": 0, "formal_evidence_not_c": 0}
+    cap = max(1, int(CONFIG.get("formal_evidence_news_promotion_per_scan", 6) or 6))
+    attempts = 0
+    for item in news:
+        if not isinstance(item, dict):
+            continue
+        title = clean_text(item.get("headline", ""))
+        desc = clean_text(item.get("_desc", ""))
+        source = clean_text(item.get("source", ""))
+        link = clean_text(item.get("link", ""))
+        if not formal_evidence_product(title, desc, source, link):
+            remaining.append(item)
+            continue
+        stats["formal_evidence_seen"] += 1
+        stats["formal_evidence_not_c"] += 1
+        # Prefer an independent parse of the publication page. This is bounded because
+        # formal evidence products are rare in the short weak-signal window.
+        if attempts < cap and link and not stage_deadline_reached(stage_deadline, 20):
+            attempts += 1
+            try:
+                candidate = _linked_publication_candidate(link, title, stage_deadline)
+            except Exception as e:
+                warnings.append(f"formal evidence promotion: {type(e).__name__}")
+                candidate = None
+            if isinstance(candidate, dict) and candidate.get("strand") in {"A", "B", "both"}:
+                candidate["discovery_provenance"] = "formal_evidence_routed_from_news"
+                promoted.append(candidate)
+                stats["formal_evidence_promoted_ab"] += 1
+    return remaining, dedupe_candidates(promoted), stats
+
+
 def _signal_evidence_query(item: dict[str, Any]) -> str:
     headline = clean_text(item.get("headline") or item.get("title"))
     detail = clean_text(item.get("_desc") or item.get("signal_note") or item.get("what"))
@@ -8915,11 +9019,19 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
     for n in news:
         if not english_record_ok(f"{n.get('headline','')}. {n.get('_desc','')}", n.get('language',''), title=clean_text(n.get('headline',''))):
             continue
-        if n.get('_institutional_signal') and not institutional_weak_signal_eligible(
-            n.get('headline',''), n.get('_desc',''), n.get('source',''), n.get('link','')
+        headline = n.get('headline','')
+        desc = n.get('_desc','')
+        source = n.get('source','')
+        link = n.get('link','')
+        # Discovery route must never turn a completed report/study into C. This applies even
+        # when the item came from Google News rather than the institutional crawler.
+        if formal_evidence_product(headline, desc, source, link):
+            continue
+        if (n.get('_institutional_signal') or _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH) and not institutional_weak_signal_eligible(
+            headline, desc, source, link
         ):
             continue
-        if not weak_signal_candidate_text(n.get('headline',''), n.get('_desc','')):
+        if not weak_signal_candidate_text(headline, desc):
             continue
         ntext=n.get('headline','')+' '+n.get('_desc','')
         nthemes=set(n.get('_themes',[])) & WATCH_SIGNAL_THEMES
@@ -10224,6 +10336,19 @@ def main() -> int:
                 state["a_recall_recovery_version"] = A_RECALL_RECOVERY_VERSION
                 log_progress("Four-month institutional A-recall recovery completed one full source rotation")
 
+    # Completed studies/reports discovered by the short news lane are evidence products,
+    # not weak signals. Route them through the ordinary A/B parser before any C anchoring.
+    formal_evidence_routing_stats = {"formal_evidence_seen": 0, "formal_evidence_promoted_ab": 0, "formal_evidence_not_c": 0}
+    if news:
+        formal_deadline = time.monotonic() + min(90, max(20, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 20)))
+        news, formal_ab, formal_evidence_routing_stats = route_formal_evidence_news_to_ab(news, warnings, formal_deadline)
+        if formal_ab:
+            inst = dedupe_candidates(inst + formal_ab)
+            log_progress(
+                f"Formal evidence routing: promoted {len(formal_ab)} completed report/study item(s) to A/B; "
+                f"kept {formal_evidence_routing_stats['formal_evidence_not_c']} out of C"
+            )
+
     if INSTITUTION_SIGNAL_CANDIDATES:
         # Direct institutional pages are frequently invisible to Google News. Merge
         # recent factual candidates into the same C pipeline; anchoring/dedupe later
@@ -10889,6 +11014,9 @@ def main() -> int:
         "priority_people": len(priority_people_batch),
         "priority_people_context_queries": len(priority_context_queries),
         "foresight_authors": len(foresight_author_batch),
+        "formal_evidence_news_seen": int(formal_evidence_routing_stats.get("formal_evidence_seen", 0)),
+        "formal_evidence_news_promoted_ab": int(formal_evidence_routing_stats.get("formal_evidence_promoted_ab", 0)),
+        "formal_evidence_news_excluded_from_c": int(formal_evidence_routing_stats.get("formal_evidence_not_c", 0)),
         "weak_signal_evidence_signals_checked": int(signal_evidence_followup_stats.get("signals_checked", 0)),
         "institution_sources": len(inst_batch),
         "rule_fix_new_source_recovery_sources": len(RULE_FIX_INSTITUTION_SOURCES) if rule_fix_source_recovery_needed else 0,

@@ -1,3 +1,60 @@
+# R&I Radar v17.17.7
+
+## Reader interface: black / red / white, one-glance first
+
+- Added one shared `simple-ui.css` across the site so the reader layer uses a consistent black, red and white visual language.
+- Removed coloured dashboard/pill styling, decorative shadows and most rounded-card treatment. Source quality remains visible through text and border weight rather than green/yellow traffic-light colours.
+- Main Radar keeps its technical depth, but evidence-card actions are now explicit: **More info**, **Open link to publication**, **Source information**, and **Technical details**. The publication title is no longer a hidden expand/collapse button.
+- The global Radar controls now use clearer wording such as **Expand all information** and **Clear filters**.
+- **Read at least this** no longer presents the issue structure as a wiring diagram. It renders each issue as a simple issue -> branch -> evidence hierarchy, with explicit publication links.
+- **Matrix — short** is retitled **Europe at a glance** and stripped of coloured cell fills. The 4x4 logic is unchanged; red is reserved for clear warning emphasis.
+- **Risks & opportunities** uses plain ranked lists. The finding itself is text; the reader gets a visible **More info** button and a separate **Open link to publication** action.
+- **Sources** and **Technical evidence** use explicit publication links instead of making the title itself the only clickable target.
+- Navigation on the simple reader pages is reduced to the main path: Read at least this, Radar, Matrix, Risks & opportunities, and Sources.
+- Scanner logic, source rotation, Matrix placement, quality scoring, corpus admission and historical logic are unchanged.
+
+# R&I Radar v17.17.6
+
+## Reader-facing Matrix cleanup
+
+- Matrix balancing remains an internal scanner responsibility.
+- Removed public phrases such as “search more next scan”, “thin cells get more search effort”, and other crawler instructions from Matrix and reader pages.
+- Sparse Matrix cells are now described only as areas with less admitted evidence.
+- The main Radar no longer renders `scan_results.rotation_note`; the automation still stores and uses its internal rotation state.
+- Matrix gap recalculation, recurring sparse-cell targeting, source rotation and persisted depth cursors are unchanged.
+
+# R&I Radar v17.17.5
+
+This is a complete upload-ready repository.
+
+## Completed evidence products now take precedence over Strand C
+- A completed study, report, assessment, evaluation, working paper, policy brief, scoreboard or similar evidence product is never a weak signal merely because a news/search lane found it first.
+- Discovery transport no longer determines strand. Formal evidence found through Google News is removed from C and given a bounded ordinary A/B parse attempt. If the A/B parse fails, it is still not admitted to C as a substitute.
+- Saved Strand-C records are revalidated under the same rule, including records restored from Git history after whole-repository uploads.
+- The concrete regression case **Study on Cloud and AI Development in the EU** is now classified as Strand A, not C.
+
+## EU report landing pages get their full short evidence lead
+- Short institutional publication pages often have a neutral metadata description followed by a 100–400 word executive lead containing the actual evidence.
+- The abstract-only gate now judges all available short source text instead of ignoring that lead whenever a metadata description was already present.
+- Strategic technology capability vocabulary was extended narrowly for compute/cloud capacity and non-European supplier dependence, so substantive EU cloud/AI infrastructure evidence can pass A without requiring the literal words “research and innovation”.
+- Ongoing commissioned-study/project pages remain excluded; a completed publication must show publication/completion evidence.
+
+## Four-month recovery is re-armed
+- The institutional A-recall recovery version is bumped, so the scanner rotates again through the trusted institutional source list under the repaired rule and can recover other completed reports missed by the previous classification logic.
+
+## Bundled corpus correction
+- **Study on Cloud and AI Development in the EU** has been removed from Strand C and added to Strand A with the Commission publication page and source-derived findings.
+- Revalidating the bundled weak-signal corpus under the repaired C rule removed four non-C items; three genuine current-development signals remain before the next live scan.
+
+## Historical workflow safety retained
+- `HISTORICAL_MIN_RUNTIME_SECONDS` is set to `0`, matching the target-driven historical scanner configuration. The historical workflow therefore searches toward the ~8-item target instead of being artificially padded to ten minutes.
+
+## Validation
+- 42 main-scanner regression tests + 20 historical-scanner tests pass: **62/62 total**.
+- New regressions cover the exact Commission cloud/AI study, A admission from a short publication landing page, saved-C cleanup, and the case where a formal report is first discovered through the news lane.
+
+---
+
 # R&I Radar v17.17.4
 
 This is a complete upload-ready repository.

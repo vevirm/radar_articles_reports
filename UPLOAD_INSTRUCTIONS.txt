@@ -11,10 +11,31 @@ UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
 You do NOT need to delete or edit individual files.
 Files with the same names are replaced; new files are added.
 
-Version 17.17.4 keeps all earlier strictness/integrity fixes and adds:
+Version 17.17.7 keeps all earlier strictness/integrity/rotation fixes and adds a reader-interface simplification:
+
+Reader interface in v17.17.7:
+- black / red / white visual system across all pages;
+- simpler, flatter cards with no decorative dashboard colours;
+- clear action labels: More info and Open link to publication;
+- Read at least this is flattened into a simple issue -> branches -> evidence view;
+- Matrix short view is designed for one-glance reading;
+- Risks & opportunities and source pages use plain ranked/list layouts;
+- the Radar itself keeps its deeper technical detail.
+
 - protected, parallel rotation between EU/institutional sources and journals;
 - persisted rotation across journal/source families rather than restarting at the same places;
 - topic-family diversification in the scholarly query bank and executed query prefix;
 - quality-aware ordering for the 4x4 Matrix, “Read at least this”, and Risks & Opportunities;
 - the quality signal is the same source-merit rubric documented in Stuff -> Technical evidence;
 - source merit affects ranking only AFTER substantive admission, never admission itself.
+
+- completed studies/reports are routed to Strand A/B before C regardless of discovery route;
+- the Commission “Study on Cloud and AI Development in the EU” is bundled as Strand A and removed from C;
+- short official report landing pages use their actual executive lead for the A gate;
+- the four-month institutional A recovery is re-armed to recover similarly missed reports;
+- the historical workflow minimum-runtime override is fixed at 0.
+
+Reader-facing cleanup in v17.17.6:
+- Matrix balancing/search rotation stays internal to the scanner.
+- Public Matrix/reader pages no longer tell readers that sparse cells will be searched more on a later scan.
+- Scanner rotation diagnostics remain in radar.json for the automation, but are not rendered on the public site.

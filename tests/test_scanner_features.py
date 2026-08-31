@@ -266,8 +266,57 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(item["strand"], "A")
         self.assertEqual(item["type"], "official policy / institutional framework")
 
+    def test_completed_commission_study_is_a_evidence_product_not_c(self):
+        title = "Study on Cloud and AI Development in the EU"
+        desc = (
+            "Publication 11 August 2026. The study was carried out for the European Commission and gathers empirical evidence "
+            "on EU cloud and AI infrastructure. The study identifies limited computing capacity in the EU and dependence on "
+            "cloud and AI computing services provided by non-European suppliers. Read the study and executive summary."
+        )
+        link = "https://digital-strategy.ec.europa.eu/en/library/study-cloud-and-ai-development-eu"
+        self.assertTrue(scan.formal_evidence_product(title, desc, "European Commission — Digital Strategy", link))
+        self.assertFalse(scan.institutional_weak_signal_eligible(title, desc, "European Commission — Digital Strategy", link))
+        saved = {
+            "headline": title, "source": "European Commission — Digital Strategy", "link": link,
+            "date": "2026-08-11", "signal_note": desc, "anchor": "Some Strand A paper (Strand A)",
+        }
+        self.assertFalse(scan._saved_signal_passes(saved))
+
+    def test_cloud_ai_commission_study_passes_a_from_short_publication_page_text(self):
+        title = "Study on Cloud and AI Development in the EU"
+        desc = "The European Commission requested a study to gather empirical evidence on the EU's cloud and AI infrastructure requirements."
+        body = (
+            "The study identifies limited and geographically concentrated computing capacity within the EU and the EU's dependence "
+            "on cloud and AI computing services provided by non-European suppliers. It analyses cross-border barriers, lock-in in the "
+            "AI computing stack, third-country laws with extraterritorial effects, data-centre constraints and policy options. "
+            "The analysis evaluates options using monetised cost-benefit analysis and multi-criteria decision analysis."
+        )
+        ev = scan.gate_scope(title, desc, body, 1, source_kind="institutional")
+        self.assertTrue(ev["a_pass"])
+        self.assertEqual(ev["eu_relevance"], "direct")
+
+    def test_news_discovery_route_cannot_demote_formal_report_into_c(self):
+        title = "Study on Cloud and AI Development in the EU"
+        item = {
+            "headline": title,
+            "source": "European Commission — Digital Strategy",
+            "date": "2026-08-11T12:00Z",
+            "link": "https://digital-strategy.ec.europa.eu/en/library/study-cloud-and-ai-development-eu",
+            "_desc": "Publication 11 August 2026. Read the study. It presents empirical evidence on EU cloud and AI infrastructure.",
+            "_themes": ["critical and emerging technologies"],
+            "_entities": [],
+        }
+        promoted = {"title": title, "strand": "A", "link": item["link"]}
+        with mock.patch.object(scan, "_linked_publication_candidate", return_value=promoted):
+            remaining, ab, stats = scan.route_formal_evidence_news_to_ab([item], [], time.monotonic() + 30)
+        self.assertEqual(remaining, [])
+        self.assertEqual(len(ab), 1)
+        self.assertEqual(ab[0]["strand"], "A")
+        self.assertEqual(stats["formal_evidence_not_c"], 1)
+        self.assertEqual(scan.anchor_news([item], []), [])
+
     def test_signal_quality_version_triggers_new_c_cleanup(self):
-        self.assertIn("v17.17.3", scan.SIGNAL_QUALITY_PROFILE_VERSION)
+        self.assertIn("v17.17.5", scan.SIGNAL_QUALITY_PROFILE_VERSION)
         self.assertTrue(scan.needs_precision_signal_cleanup({
             "signal_quality_profile_version": "v17.17.0-relational-c-ontology-guarded"
         }))
@@ -623,3 +672,33 @@ class RotationAndReaderQualityTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class ReaderFacingMatrixRotationTests(unittest.TestCase):
+    def test_public_pages_do_not_expose_future_search_instructions(self):
+        paths = [
+            ROOT / "index.html",
+            ROOT / "frontier" / "index.html",
+            ROOT / "frontier" / "quick" / "index.html",
+            ROOT / "read" / "index.html",
+            ROOT / "read" / "issues.js",
+        ]
+        banned = (
+            "search more next scan",
+            "extra searching next scan",
+            "more search effort later",
+            "receive more search effort in later scans",
+            "while the next scan builds",
+        )
+        for path in paths:
+            text = path.read_text(encoding="utf-8").lower()
+            for phrase in banned:
+                self.assertNotIn(phrase, text, f"{phrase!r} leaked into {path}")
+
+    def test_rotation_note_is_internal_not_rendered_on_main_reader(self):
+        text = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn('sr.rotation_note', text)
+
+    def test_matrix_rotation_remains_enabled_in_scanner_config(self):
+        self.assertEqual(scan.CONFIG.get("matrix_balance_rotation_mode"), "recurring_every_scan")
+        self.assertGreater(int(scan.CONFIG.get("frontier_gap_deepening_queries_per_wave", 0)), 0)
+        self.assertGreater(int(scan.CONFIG.get("frontier_gap_deepening_max_waves", 0)), 0)
