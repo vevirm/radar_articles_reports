@@ -177,7 +177,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.17.1-relational-C-document-integrity"
+C_ADMISSION_PROFILE_VERSION = "v17.17.2-source-integrity-fail-closed"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -2355,6 +2355,17 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
         return "hard exclusion: facility/laboratory page"
     if "project" in title_low and not re.search(r"\b(report|paper|analysis|study|foresight|policy)\b", title_low):
         return "hard exclusion: project page"
+    # A webpage *about an ongoing study* is not itself a published study/report.  EU CMS
+    # pages often say "collecting evidence", "the study aims to" and "will provide" and
+    # are later updated; admitting those as research/policy papers manufactured false new A.
+    if "study" in title_low and any(x in low for x in [
+        "collecting evidence", "the study aims to", "this study aims to", "study will provide",
+        "will provide recommendations", "stakeholder consultations", "call for expression of interest",
+    ]) and not any(x in low for x in [
+        "final report", "study finds", "study found", "results show", "findings show",
+        "the study provides", "this study provides",
+    ]):
+        return "hard exclusion: ongoing study/project page"
     return None
 
 
@@ -5396,30 +5407,77 @@ def _expected_institution_domain(source: str) -> str:
     return ""
 
 
-def signal_record_integrity_ok(item: dict[str, Any]) -> bool:
-    """Prevent stored C records whose title/source and URL belong to different documents."""
+def record_source_integrity_ok(item: dict[str, Any]) -> bool:
+    """Fail closed when a published record cannot be tied to one coherent source document.
+
+    Every public A/B/C row must have a title/headline, named source and a usable http(s)
+    link.  Known institutional/news sources must stay on their configured host family.
+    A third-party PDF/CDN is allowed only when its path still clearly identifies the same
+    document.  This prevents Git-history recovery from resurrecting title/source/URL
+    chimeras such as an EU/IASR title pointing at an unrelated Anthropic system-card PDF.
+    """
     if not isinstance(item, dict):
         return False
     source = clean_text(item.get("source"))
     link = clean_text(item.get("link") or item.get("url"))
     headline = clean_text(item.get("headline") or item.get("title"))
-    if not source or not link:
-        return True
+    if not headline or not source or not link:
+        return False
+    try:
+        parsed = urlparse(link)
+    except Exception:
+        return False
+    if normalized(parsed.scheme) not in {"http", "https"} or not parsed.netloc:
+        return False
+
+    # Resolve configured source-domain identity across institutional and news sources.
     expected = _expected_institution_domain(source)
     if not expected:
-        return True
+        ns = normalized(source)
+        for row in CONFIG.get("news_sources", []):
+            if not isinstance(row, dict):
+                continue
+            if normalized(row.get("name", "")) == ns:
+                expected = clean_text(row.get("domain", "")).lower().removeprefix("www.")
+                break
+
+    if expected:
+        expected_url = f"https://{expected}/"
+        if _same_institution_family(expected_url, link):
+            return True
+        # A genuine external asset host must still visibly name the same document.
+        ht = _document_title_tokens(headline)
+        lt = _document_title_tokens(urlparse(link).path)
+        overlap = len(ht & lt)
+        return bool(overlap >= 3 and overlap / max(1, min(len(ht), 6)) >= 0.50)
+
+    # For an unconfigured source, ordinary HTML links remain possible, but a cross-document
+    # PDF is high risk: the filename/path must identify the displayed document. DOI links
+    # are bibliographic identifiers and are exempt from filename matching.
     host = _domain_host(link)
-    if not host:
-        return False
-    expected_url = f"https://{expected}/"
-    if _same_institution_family(expected_url, link):
+    if host in {"doi.org", "dx.doi.org"}:
         return True
-    # A rare external asset host is acceptable only when its path still clearly names
-    # the same document. This rejects e.g. IASR title + assets.anthropic.com/Claude-...pdf.
-    ht = _document_title_tokens(headline)
-    lt = _document_title_tokens(urlparse(link).path)
-    overlap = len(ht & lt)
-    return bool(overlap >= 3 and overlap / max(1, min(len(ht), 6)) >= 0.50)
+    path_low = normalized(parsed.path)
+    if path_low.endswith(".pdf") or ".pdf" in path_low:
+        ht = _document_title_tokens(headline)
+        lt = _document_title_tokens(parsed.path)
+        overlap = len(ht & lt)
+        if overlap < 2 or overlap / max(1, min(len(ht), 6)) < 0.34:
+            return False
+    return True
+
+
+def signal_record_integrity_ok(item: dict[str, Any]) -> bool:
+    """Backward-compatible alias for the now general A/B/C source-integrity gate."""
+    return record_source_integrity_ok(item)
+
+def record_date_integrity_ok(item: dict[str, Any]) -> bool:
+    """Reject records whose saved date is absent or was inferred from webpage modification time."""
+    if not isinstance(item, dict) or not parse_date(item.get("date")):
+        return False
+    # V17.16 briefly treated sitemap lastmod as publication evidence.  That can turn an
+    # old project page edited today into a fake new report, so purge those legacy rows.
+    return normalized(item.get("date_basis", "")) != "sitemap_lastmod"
 
 
 def _signal_claim_is_substantive(value: str) -> bool:
@@ -5532,14 +5590,13 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         if m_labelled:
             published = parse_date(m_labelled.group(1))
     if not published and fingerprint:
-        # Some authoritative institutional CMSs expose a precise sitemap lastmod but no
-        # article publication meta tag. Accept it only for publication-like URLs that the
-        # institutional scorer ranks positively; generic navigation pages remain ineligible.
+        # Sitemap lastmod is a crawl-priority hint, NOT evidence of publication date.
+        # Commission project/study pages are frequently edited months or years after launch;
+        # treating lastmod as publication time manufactured false "new" reports.  If a page
+        # exposes no genuine publication/created/date field, fail closed here.
         discovered = INSTITUTION_DISCOVERED_DATES.get(fingerprint)
-        floor = publication_floor or DATE_FLOOR
-        if discovered and institution_url_score(r.url, discovered, floor) >= 3:
-            published = discovered
-            date_basis = "sitemap_lastmod"
+        if discovered:
+            _diag_inc("institution_date_hint_sitemap_lastmod_not_publication")
     if not published:
         _diag_inc("institution_reject_no_date")
         return None
@@ -6989,6 +7046,9 @@ def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -
         for strand in ("strand_a", "strand_b", "strand_c"):
             items = data.get(strand) if isinstance(data.get(strand), list) else []
             for item in items:
+                if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
+                    _diag_inc("history_reject_source_integrity")
+                    continue
                 key = signal_identity(item) if strand == "strand_c" else identity(internalize_previous(item))
                 if not key or key in {"title:", "signal::", "signal-link:"}:
                     continue
@@ -7021,7 +7081,18 @@ def _sanitize_saved_radar(data: Any) -> tuple[dict[str, Any], dict[str, int]]:
     removed: dict[str, int] = {}
     for strand in ("strand_a", "strand_b", "strand_c"):
         raw = out.get(strand) if isinstance(out.get(strand), list) else []
-        clean = [dict(item) for item in raw if isinstance(item, dict)]
+        clean: list[dict[str, Any]] = []
+        for item in raw:
+            if not isinstance(item, dict):
+                continue
+            saved = dict(item)
+            if not record_source_integrity_ok(saved):
+                _diag_inc("saved_reject_source_integrity")
+                continue
+            if not record_date_integrity_ok(saved):
+                _diag_inc("saved_reject_date_integrity")
+                continue
+            clean.append(saved)
         removed[strand] = len(raw) - len(clean)
         out[strand] = clean
     return out, removed
@@ -7053,7 +7124,8 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
         merged: dict[str, dict[str, Any]] = {}
         # Recovered first, current second so current copy wins on rediscovery.
         for item in rec.get(strand, []) + cur.get(strand, []):
-            if not isinstance(item, dict):
+            if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
+                _diag_inc("history_reject_source_integrity")
                 continue
             key = identity(internalize_previous(item))
             if not key or key == "title:":
@@ -7065,7 +7137,8 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
 
     merged_c: dict[str, dict[str, Any]] = {}
     for item in rec.get("strand_c", []) + cur.get("strand_c", []):
-        if not isinstance(item, dict):
+        if not isinstance(item, dict) or not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
+            _diag_inc("history_reject_source_integrity")
             continue
         key = signal_identity(item)
         if not key or key in {"signal::", "signal-link:"}:
@@ -7112,11 +7185,11 @@ def load_previous() -> dict[str, Any]:
         # retain the V15 fast path and never walk history on every scan.
         if bool(current.get("repository_bundle_seed")):
             recovered = _recover_radar_from_git(max_commits=40)
-            if recovered and _saved_corpus_size(recovered) > _saved_corpus_size(clean):
+            if recovered:
                 before = _saved_corpus_size(clean)
                 clean = _merge_saved_snapshots(clean, recovered)
                 print(
-                    "Recovered a larger pre-upload radar corpus from Git history "
+                    "Merged the pre-upload radar corpus from Git history after integrity filtering "
                     f"({before} -> {_saved_corpus_size(clean)} saved A/B/C rows).",
                     flush=True,
                 )
@@ -7485,7 +7558,7 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
-        if not signal_record_integrity_ok(old):
+        if not record_source_integrity_ok(old) or not record_date_integrity_ok(old):
             _diag_inc("signal_reject_record_integrity")
             continue
         internal = internalize_previous(old)
@@ -7498,7 +7571,7 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     for item in new_items:
         if not isinstance(item, dict) or signal_is_retired(item) or not english_public_item_ok(item):
             continue
-        if not signal_record_integrity_ok(item):
+        if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
             _diag_inc("signal_reject_record_integrity")
             continue
         if item.get("strand") not in {strand_name, "both"}:
@@ -7662,6 +7735,9 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
+        if not record_source_integrity_ok(old) or not record_date_integrity_ok(old):
+            _diag_inc("signal_reject_record_integrity")
+            continue
         x = _low_evidence_signal(old)
         x['new_this_scan'] = False
         if any(signals_near_duplicate(x, y) for y in merged):
@@ -7671,6 +7747,9 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
     new_ids: set[str] = set()
     for item in new_items:
         if not isinstance(item, dict) or signal_is_retired(item) or not english_public_item_ok(item):
+            continue
+        if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
+            _diag_inc("signal_reject_record_integrity")
             continue
         if any(signals_near_duplicate(item, y) for y in merged):
             continue
@@ -7695,6 +7774,8 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     is never enough on its own.
     """
     if not isinstance(item, dict):
+        return False
+    if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
         return False
     headline = clean_text(item.get('headline', ''))
     if not headline:

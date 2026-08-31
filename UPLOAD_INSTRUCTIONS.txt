@@ -1,17 +1,19 @@
 UPLOAD THE WHOLE REPOSITORY — NO DELETING OR EDITING REQUIRED
 
-1. Unzip this ZIP once on your computer.
+1. Download and unzip this ZIP once on your computer.
 2. Open your existing GitHub repository.
 3. Choose Add file -> Upload files.
 4. Drag EVERYTHING from inside the unzipped folder onto the GitHub upload page.
-   Include hidden folders such as .github if your file manager shows them.
-5. Commit changes to main.
+   Include the hidden .github folder.
+5. Leave the commit message as "Add files via upload" if you want.
+6. Commit directly to main.
 
-Files with the same names are replaced; new files are added. You do not need to delete old files manually.
+You do NOT need to delete or edit individual files.
+Files with the same names are replaced; new files are added.
 
-Version 17.17.1 includes:
-- full v17.17.0 recall/weak-signal improvements
-- historical workflow minimum-runtime fix
-- source-document integrity fix preventing metadata from one publication being paired with an unrelated cited PDF
-- stricter publication-date handling
-- cleanup of already-corrupted C records on subsequent scans
+Version 17.17.2 specifically fixes the source-link corruption/restoration problem:
+- linkless records are not allowed to publish;
+- unrelated PDFs cannot be attached to another document's title/source;
+- old corrupt rows are filtered even when Git-history recovery runs;
+- sitemap/page update dates are not publication dates;
+- the false-new Commission "Study to identify key strategic digital technologies..." card is not present in this package.

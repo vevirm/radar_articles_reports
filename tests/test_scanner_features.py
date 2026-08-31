@@ -220,7 +220,7 @@ class MainRecallRepairTests(unittest.TestCase):
         ok, *_ = scan.quality_from_crossref({**base, "publisher": "Unknown Vanity Press"})
         self.assertFalse(ok)
 
-    def test_sitemap_lastmod_can_rescue_missing_page_date_for_publication_like_url(self):
+    def test_sitemap_lastmod_is_not_treated_as_publication_date(self):
         class FakeResponse:
             status_code = 200
             url = "https://research-and-innovation.ec.europa.eu/publications/eu-research-security-report"
@@ -252,8 +252,77 @@ class MainRecallRepairTests(unittest.TestCase):
         finally:
             scan.INSTITUTION_DISCOVERED_DATES = old_dates
             scan.INSTITUTION_SEEN_FINGERPRINTS = old_seen
-        self.assertIsNotNone(item)
-        self.assertEqual(item.get("date_basis"), "sitemap_lastmod")
+        self.assertIsNone(item)
+
+    def test_source_integrity_rejects_missing_or_cross_document_links(self):
+        missing = {
+            "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "source": "European Commission — Digital Strategy",
+            "link": "",
+        }
+        self.assertFalse(scan.record_source_integrity_ok(missing))
+
+        chimera = {
+            "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "source": "European Commission — Digital Strategy",
+            "link": "https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf",
+        }
+        self.assertFalse(scan.record_source_integrity_ok(chimera))
+
+        iasr_chimera = {
+            "title": "International AI Safety Report 2026",
+            "source": "International AI Safety Report",
+            "link": "https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf",
+        }
+        self.assertFalse(scan.record_source_integrity_ok(iasr_chimera))
+
+        correct = {
+            "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "source": "European Commission — Digital Strategy",
+            "link": "https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+        }
+        self.assertTrue(scan.record_source_integrity_ok(correct))
+
+    def test_legacy_sitemap_lastmod_rows_are_purged(self):
+        row = {
+            "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "source": "European Commission — Digital Strategy",
+            "link": "https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+            "date": "2026-07-31",
+            "date_basis": "sitemap_lastmod",
+            "strand": "A",
+        }
+        clean, removed = scan._sanitize_saved_radar({"strand_a": [row], "strand_b": [], "strand_c": []})
+        self.assertEqual(clean["strand_a"], [])
+        self.assertEqual(removed["strand_a"], 1)
+
+    def test_ongoing_study_webpage_is_not_a_published_study(self):
+        reason = scan.document_exclusion_reason(
+            "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "Collecting evidence on Research & Innovation needs. The study aims to identify priorities and will provide recommendations after stakeholder consultations.",
+            "https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+            "",
+        )
+        self.assertEqual(reason, "hard exclusion: ongoing study/project page")
+
+    def test_saved_history_sanitizer_does_not_resurrect_bad_link_rows(self):
+        bad = {
+            "title": "International AI Safety Report 2026",
+            "source": "International AI Safety Report",
+            "link": "https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf",
+            "strand": "C",
+        }
+        good = {
+            "title": "Europe hails AI gigafactory plan, but industry fears deeper US tech reliance",
+            "source": "South China Morning Post",
+            "link": "https://www.scmp.com/economy/example",
+            "date": "2026-08-07",
+            "strand": "C",
+        }
+        clean, removed = scan._sanitize_saved_radar({"strand_a": [], "strand_b": [], "strand_c": [bad, good]})
+        self.assertEqual(removed["strand_c"], 1)
+        self.assertEqual(len(clean["strand_c"]), 1)
+        self.assertEqual(clean["strand_c"][0]["source"], "South China Morning Post")
 
     def test_rejection_funnel_is_explicit_and_sequential(self):
         old = scan.ADMISSION_DIAGNOSTICS.copy()
