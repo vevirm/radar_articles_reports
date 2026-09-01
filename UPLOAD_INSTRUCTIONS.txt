@@ -1,17 +1,11 @@
-WHOLE REPOSITORY ONLY
+v17.19.15 — WHOLE REPOSITORY ONLY
 
-Use the full ZIP supplied by ChatGPT. There is no separate workflow file to install.
+1. Unzip this full repository package.
+2. Upload/replace the repository contents as you normally do.
+3. Run the scanner once manually.
 
-1. Unzip the full repository once.
-2. Upload/replace the repository contents in GitHub the same way you normally do.
-3. Run the scanner.
+There is NO separate workflow file to install.
 
-The package contains the correct fixed four-hour workflow. If GitHub web upload retains the older hidden hourly/6-hour workflow anyway, this release is backward-compatible: tests do not block the scanner, and the scanner aligns the old six-hour gate so it becomes due on the next real four-hour slot (00:17, 04:17, 08:17, 12:17, 16:17, 20:17 UTC).
+This release specifically handles the case where GitHub web upload keeps the older hidden .github workflow. The old workflow safety check is not disabled: the scanner now tells it explicitly when a high-confidence precision cleanup happened, so intentional false-positive removal is allowed while unexpected corpus loss still fails closed.
 
-Rules preserved:
-- automatic scanner cadence: every 4 hours
-- A/B/frontier: cumulative unless explicitly cleaned as false positive/duplicate/integrity failure
-- Strand C: expires 60 days after first_seen
-- scanner has no stored repository credential while scanning
-- all non-radar.json changes are removed before push credentials exist
-- only radar.json is staged/committed
+The package contains the latest generated radar state, preserves scan cursors, keeps A/B/frontier cumulative, keeps Strand C for 60 days from first_seen, and preserves the no-credential-during-scan / radar.json-only commit boundary.

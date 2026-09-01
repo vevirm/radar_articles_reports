@@ -349,6 +349,7 @@ ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
 ADMISSION_DIAGNOSTICS: Counter = Counter()
 ADMISSION_DIAGNOSTICS_LOCK = threading.Lock()
 ACTIVE_EU_CONTEXT_ANCHORS: list[dict[str, Any]] = []
+LOAD_SANITIZE_REMOVED: dict[str, int] = {"strand_a": 0, "strand_b": 0, "strand_c": 0}
 UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
 
 SESSION = requests.Session()
@@ -8862,6 +8863,13 @@ def load_previous() -> dict[str, Any]:
     allowing a true *whole repository* ZIP (including radar.json) to be uploaded
     without erasing a newer A/B/C corpus already present in the repository history.
     """
+    global LOAD_SANITIZE_REMOVED
+    LOAD_SANITIZE_REMOVED = {"strand_a": 0, "strand_b": 0, "strand_c": 0}
+
+    def note_removed(removed: dict[str, int]) -> None:
+        for key in ("strand_a", "strand_b", "strand_c"):
+            LOAD_SANITIZE_REMOVED[key] = LOAD_SANITIZE_REMOVED.get(key, 0) + int(removed.get(key, 0) or 0)
+
     try:
         current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
     except Exception:
@@ -8869,6 +8877,7 @@ def load_previous() -> dict[str, Any]:
 
     if _valid_saved_radar(current):
         clean, removed = _sanitize_saved_radar(current)
+        note_removed(removed)
         bad = sum(removed.values())
         if bad:
             print(f"Ignored {bad} malformed historical radar row(s) safely: {removed}.", flush=True)
@@ -8892,6 +8901,7 @@ def load_previous() -> dict[str, Any]:
     recovered = _recover_radar_from_git(max_commits=40)
     if recovered:
         clean, removed = _sanitize_saved_radar(recovered)
+        note_removed(removed)
         print(
             "Recovered prior cumulative radar corpus from Git history "
             f"(A={len(clean.get('strand_a', []))}, "
@@ -8903,7 +8913,8 @@ def load_previous() -> dict[str, Any]:
             print(f"Ignored malformed recovered rows safely: {removed}.", flush=True)
         return clean
 
-    clean, _ = _sanitize_saved_radar(current)
+    clean, removed = _sanitize_saved_radar(current)
+    note_removed(removed)
     return clean
 
 
@@ -11312,7 +11323,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -11347,7 +11358,12 @@ def main() -> int:
     # substantive quality-profile version changes. Normal recurring scans preserve the
     # cumulative corpus and never spend time re-auditing accepted history.
     inherited_audit = needs_inherited_corpus_audit(previous)
-    precision_cleanup = (not inherited_audit) and needs_precision_corpus_cleanup(previous)
+    preload_ab_cleanup = sum(int(LOAD_SANITIZE_REMOVED.get(k, 0) or 0) for k in ("strand_a", "strand_b"))
+    # The loader itself removes only high-confidence integrity/precision failures.  Mark that
+    # as an explicit cleanup run even when a whole-repository upload already carried the new
+    # quality-profile version.  This keeps the old retained v17.19.8 workflow safety gate
+    # informed instead of letting it mistake an intentional cleanup for corpus loss.
+    precision_cleanup = (not inherited_audit) and (needs_precision_corpus_cleanup(previous) or preload_ab_cleanup > 0)
     inherited_audit_stats = {
         "strand_a_removed": 0, "strand_b_removed": 0,
         "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
@@ -11359,6 +11375,9 @@ def main() -> int:
             previous, inherited_audit_stats = audit_inherited_ab(previous, warnings)
         else:
             previous, inherited_audit_stats = surgical_precision_cleanup(previous)
+        if preload_ab_cleanup:
+            inherited_audit_stats["strand_a_removed"] = int(inherited_audit_stats.get("strand_a_removed", 0)) + int(LOAD_SANITIZE_REMOVED.get("strand_a", 0) or 0)
+            inherited_audit_stats["strand_b_removed"] = int(inherited_audit_stats.get("strand_b_removed", 0)) + int(LOAD_SANITIZE_REMOVED.get("strand_b", 0) or 0)
         previous["inherited_corpus_audit_complete"] = True
         previous["precision_corpus_cleanup_complete"] = True
         log_progress(

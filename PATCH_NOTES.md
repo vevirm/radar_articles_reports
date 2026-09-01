@@ -1,3 +1,13 @@
+# v17.19.15 — stale-workflow safety cleanup handshake
+
+- Fixes the exact post-scan failure shown after v17.19.14: the retained v17.19.8 GitHub workflow interpreted an intentional A cleanup as accidental corpus loss and stopped before commit.
+- The scanner now records high-confidence A/B rows removed during load sanitisation as an explicit precision-cleanup run. The old safety gate already recognises that flag, so it permits only the declared cleanup instead of blocking the save. The security/write gate itself is not weakened or bypassed.
+- Bundles the latest generated 20:13–20:23 UTC state and removes exactly five high-confidence A false positives from that state: the ERC Proof-of-Concept awards page, European Capital of Innovation Awards, marine-policy Horizon-project provenance paper, environmental-sustainability R&D-covariate paper, and academic-library service-innovation paper. The European Biotech Act staff working document remains. Public latest-run A is therefore corrected from 5 to 1.
+- Adds a one-run whole-repository seed marker so a normal upload can recover any newer legitimate A/B/C rows from Git history while the same precision guards prevent retired false positives from being resurrected. Cursors and source-rotation state are preserved.
+- Bumps only the A quality-profile migration marker. It does not reset OpenAlex, Crossref, institution, journal, matrix, or C discovery cursors.
+- Keeps v17.19.14's fixed-slot four-hour compatibility, trigger telemetry, Nature hub discovery, claim-aware C anchoring, and Matrix telemetry unchanged.
+- Adds a regression test for the exact ERC-awards/stale-workflow safety failure.
+
 # v17.19.14 — fixed-slot rolling + A precision + Nature hub discovery
 
 - Fixes the legacy-workflow compatibility drift. If GitHub retains the old hourly workflow with its six-hour due gate, the scanner now aligns the internal scheduler reference to the **next real four-hour slot** instead of subtracting a fixed two hours from completion. A run finishing at 20:23 therefore remains not-due at 23:17 and becomes due exactly at 00:17. Public completion timestamps stay exact.

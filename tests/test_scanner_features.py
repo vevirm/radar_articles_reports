@@ -1588,6 +1588,36 @@ class V171913CadenceJournalAndCorpusCleanupTests(unittest.TestCase):
         self.assertTrue(scan._saved_ab_high_confidence_precision_reject(item))
         self.assertFalse(scan.final_ab_candidate_worthiness(item))
 
+
+    def test_loader_precision_removal_is_marked_as_explicit_cleanup(self):
+        award = {
+            "title": "ERC awards Proof of Concept Grants to 182 researchers",
+            "authors": "European Research Council",
+            "source": "European Research Council",
+            "date": "2026-07-14",
+            "link": "https://erc.europa.eu/news-events/news/erc-awards-proof-concept-grants-182-researchers",
+            "type": "research/policy paper",
+            "summary": "The ERC awards Proof of Concept grants to researchers.",
+        }
+        current = {
+            "last_updated": "2026-09-01T20:23Z",
+            "quality_profile_version": scan.QUALITY_PROFILE_VERSION,
+            "inherited_corpus_audit_complete": True,
+            "strand_a": [award], "strand_b": [], "strand_c": [],
+        }
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "radar.json"
+            path.write_text(json.dumps(current), encoding="utf-8")
+            with mock.patch.object(scan, "OUT_PATH", path):
+                loaded = scan.load_previous()
+        self.assertEqual(loaded.get("strand_a"), [])
+        self.assertEqual(scan.LOAD_SANITIZE_REMOVED.get("strand_a"), 1)
+        inherited = scan.needs_inherited_corpus_audit(loaded)
+        preload = sum(scan.LOAD_SANITIZE_REMOVED.get(k, 0) for k in ("strand_a", "strand_b"))
+        precision = (not inherited) and (scan.needs_precision_corpus_cleanup(loaded) or preload > 0)
+        self.assertTrue(precision)
+
     def test_news_source_domain_suffix_is_removed_from_public_claim(self):
         cleaned = scan._clean_signal_claim_source_suffix(
             "UK venture capital investment rebounds as software and biotech attract funding ft.com.",
