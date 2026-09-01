@@ -10,4 +10,4 @@ UPLOAD THE WHOLE REPOSITORY
 
 Do not delete files manually. Do not edit individual files.
 
-After upload, let the automatically triggered scan finish. This bundle carries a one-run recovery marker so that the scanner merges the larger pre-upload live radar corpus from Git history before applying the new quality cleanup; the upload therefore does not intentionally reset accumulated evidence or rotation cursors.
+This bundle already contains the latest supplied live radar state and preserves its scan_state/cursors. The main workflow runs automatically every four hours. Accepted A/B and frontier evidence accumulates; Strand C alone expires 60 days after first_seen. The main scanner still runs without a stored repository credential and only radar.json can be committed by the scanner job.

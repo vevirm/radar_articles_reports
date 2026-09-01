@@ -6,8 +6,8 @@
   "corpus_start_date": "2026-05-01",
   "preferred_corpus_start_date": "2026-05-01",
   "extended_top_quality_start_date": "2026-03-01",
-  "weak_signal_retention_start_date": "2026-03-01",
-  "corpus_window_policy": "4-month A/B core; Highest source-merit A/B evidence retained/discovered to 6 months; weak signals retained 6 months at low evidential status",
+  "weak_signal_retention_start_date": "2026-07-03",
+  "corpus_window_policy": "recent discovery prioritises 4 months (with bounded older recovery); accepted A/B and frontier evidence stay in the radar; Strand C expires 60 days after first insertion",
   "source_expansion_version": "v17.5.2-gap-report-recall",
   "quality_profile_version": "v17.18.2-content-not-provenance-strategic-bridge",
   "aboutness_profile_version": "v17.9.0-source-length-aware",
@@ -11068,7 +11068,7 @@
   "backfill_complete": false,
   "signal_discovery_version": "v17.17.5-formal-evidence-a-before-c",
   "signal_quality_profile_version": "v17.17.5-formal-evidence-a-before-c",
-  "c_admission_profile_version": "v17.17.2-source-integrity-fail-closed",
+  "c_admission_profile_version": "v17.19.9-google-news-publisher-integrity",
   "retired_signal_headlines": [
     "Biological AI models: new paradigms to leverage the languages of life",
     "Canada-Japan Funding Fuels Xanadu and Mitsubishi Chemical Partnership on Quantum Semiconductor Research",
@@ -11102,7 +11102,7 @@
   "main_recall_repair_version": "v17.14.1",
   "scan_mode": "full_low_yield_rescue",
   "citation_snowball_profile_version": "v17.13.33-api-key-observable-shared-reference-forward-snowball",
-  "window_policy_version": "v17.13.31-six-month-low-evidence-signals",
+  "window_policy_version": "v17.19.9-cumulative-ab-c60d-from-first-seen",
   "rule_fix_profile_version": "v17.12.11-A-recall-strict-C-retirements-final",
   "rule_fix_source_recovery_version": "",
   "allocation_profile_version": "v17.13.7-recurring-multifactor-rotation",
@@ -18477,7 +18477,8 @@
       "empty_cells_published": 0,
       "published_empty_cells": [],
       "published_qualifying": 50
-    }
+    },
+    "c_retention_days": 60
   },
   "strand_a": [
     {
@@ -31443,7 +31444,6 @@
       "external_eu_bridge_is_inference": false,
       "evidence_status": "low",
       "evidence_role": "weak_signal",
-      "retention_window_months": 6,
       "reframing_dimensions": [
         "new actor move",
         "new magnitude",
@@ -31455,7 +31455,8 @@
       "c_retrieval_phrase_hits": [],
       "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
       "first_seen": "2026-08-31T11:18Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "retention_window_days": 60
     },
     {
       "headline": "China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations",
@@ -31502,7 +31503,6 @@
       ],
       "curator_cell_agreement": "agrees",
       "evidence_role": "weak_signal",
-      "retention_window_months": 6,
       "external_eu_bridge": "",
       "external_eu_bridge_is_inference": false,
       "reframing_dimensions": [
@@ -31512,7 +31512,8 @@
       ],
       "strand_a_phrase_hits": [],
       "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed"
+      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
+      "retention_window_days": 60
     },
     {
       "headline": "Helsing and Quantum Systems raise $1.8bn and $1.2bn mega-rounds to scale European defence AI and autonomous systems",
@@ -31559,7 +31560,6 @@
       "curator_cell_agreement": "differs",
       "quadrant_claimed": "A",
       "evidence_role": "weak_signal",
-      "retention_window_months": 6,
       "external_eu_bridge": "",
       "external_eu_bridge_is_inference": false,
       "reframing_dimensions": [
@@ -31572,7 +31572,8 @@
         "AI compute"
       ],
       "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed"
+      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
+      "retention_window_days": 60
     }
   ],
   "frontier_evidence": [],
@@ -31831,5 +31832,12 @@
       "No usable sitemap: eur-lex.europa.eu"
     ],
     "transport_failure_warning_count": 8
+  },
+  "retention_policy": {
+    "strand_a": "cumulative_until_explicit_cleanup",
+    "strand_b": "cumulative_until_explicit_cleanup",
+    "frontier_evidence": "cumulative_until_explicit_cleanup",
+    "strand_c": "60_days_from_first_seen",
+    "strand_c_days": 60
   }
 }

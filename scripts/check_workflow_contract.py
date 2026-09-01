@@ -24,10 +24,10 @@ require(main, "cron: '17 0,4,8,12,16,20 * * *'", 'Main scanner four-hour schedul
 require(main, 'git add -- radar.json', 'Main persistence boundary')
 require(main, 'only radar.json can be committed', 'Main persistence-boundary explanation')
 require(main, '/actions/workflows/radar-scan.yml/dispatches', 'Main low-yield rescue dispatch target')
-require(hist, "cron: '41 2,6,10,14,18,22 * * *'", 'Historical four-hour schedule')
-require(hist, "HISTORICAL_MIN_RUNTIME_SECONDS: '0'", 'Historical target-driven runtime')
+require(hist, "cron: '41 3 * * *'", 'Historical daily schedule')
+require(hist, "HISTORICAL_MIN_RUNTIME_SECONDS: '600'", 'Historical bounded runtime')
 require(hist, 'git add -- historical/historical.json', 'Historical persistence boundary')
-require(hist, 'only historical/historical.json can be committed', 'Historical persistence-boundary explanation')
+require(hist, "grep -vx 'historical/historical.json'", 'Historical persistence-boundary explanation')
 
 failed = [x for x in checks if not x[0]]
 for ok, label, rel, needle in checks:

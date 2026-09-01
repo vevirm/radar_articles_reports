@@ -30,6 +30,18 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
         self.assertIn("Could not isolate scanner output safely. Refusing to save.", text)
         self.assertIn("git add -- radar.json", text)
 
+    def test_main_scanner_has_fixed_four_hour_schedule(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", text)
+        self.assertIn("fixed four-hour scheduled scan", text)
+        self.assertNotIn("age_hours >= 6.0", text)
+
+    def test_safety_gate_protects_cumulative_ab_corpus(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("cumulative accepted item(s)", text)
+        self.assertIn("('strand_a', 'strand_b', 'frontier_evidence')", text)
+        self.assertIn("60-day-from-first_seen", text)
+
     def test_push_credential_is_added_only_after_scan_and_safety_gate(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         scan_pos = text.index("- name: Run radar scan")

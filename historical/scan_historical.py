@@ -7,7 +7,7 @@ not import radar.json, mutate the live matrix, weak signals, live cursors, or di
 the live workflow.
 
 Historical means source age, not backward-looking content: eligible sources are older
-than the rolling six-month main-radar boundary. Topic families rotate across the whole
+than the live scanner’s six-month historical-discovery cutoff. Topic families rotate across the whole
 eligible period, with recent historical evidence preferred when quality is comparable.
 """
 from __future__ import annotations
@@ -845,7 +845,7 @@ def main() -> int:
     full_rescue_enabled=bool(CONFIG.get("full_rescue_run_enabled",True)); full_rescue_threshold=int(CONFIG.get("full_rescue_run_trigger_max_new_items",3)); should_dispatch=(full_rescue_enabled and not RESCUE_MODE and new_count<=full_rescue_threshold)
     data={
         "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),"cutoff_exclusive":CUTOFF_EXCLUSIVE.isoformat(),"main_radar_window_months":MAIN_RADAR_WINDOW_MONTHS,
-        "scope_note":"Separate source-age historical archive. A source is historical because it predates the rolling six-month main-radar boundary; its content may be backward- or forward-looking. It does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
+        "scope_note":"Separate source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff; accepted live A/B evidence itself is cumulative. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
         "ranking_note":f"Every run searches the eligible period from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. Topic families rotate; years do not. More recent historical evidence receives only a tie-break preference when quality and relevance are otherwise comparable.",
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,

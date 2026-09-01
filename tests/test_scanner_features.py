@@ -1265,6 +1265,89 @@ if(/Joint Research Centre/i.test(w)) process.exit(2);
         self.assertIn(".35+.65*(merit(x)/100)", source)
 
 
+
+class V17199AccumulationAndSignalTests(unittest.TestCase):
+    def test_google_news_nature_redirect_keeps_configured_source_integrity(self):
+        row = {
+            "headline": "India launches return fellowships to lure scientists back",
+            "source": "Nature",
+            "source_domain": "nature.com",
+            "discovery_provenance": "google_news_rss",
+            "date": "2026-09-01T12:00Z",
+            "link": "https://news.google.com/rss/articles/example",
+        }
+        self.assertTrue(scan.record_source_integrity_ok(row))
+        bad = dict(row, source_domain="example.com")
+        self.assertFalse(scan.record_source_integrity_ok(bad))
+
+    def test_nature_google_news_candidate_survives_anchor_novelty_and_merge(self):
+        data = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
+        desc = (
+            "India launched return fellowships and research funding to attract scientists in AI, quantum computing, "
+            "biotechnology and advanced materials, amid global competition for research talent."
+        )
+        row = {
+            "headline": "India launches return fellowships to lure scientists back",
+            "source": "Nature", "source_domain": "nature.com",
+            "discovery_provenance": "google_news_rss",
+            "date": "2026-09-01T12:00Z",
+            "link": "https://news.google.com/rss/articles/example-nature",
+            "_desc": desc,
+            "_themes": scan.themes_for(desc),
+            "_entities": scan.distinct_matches(desc, scan.ENTITY_TERMS + scan.GEO_ACTORS),
+        }
+        anchored = scan.anchor_news([row], data.get("strand_a", []), [])
+        self.assertEqual(len(anchored), 1)
+        novel = scan._novel_signal_rows(anchored, data.get("strand_c", []))
+        self.assertEqual(len(novel), 1)
+        merged = scan.merge_signal_corpus(data.get("strand_c", []), anchored, "2026-09-01T16:20Z")
+        new_rows = [x for x in merged if x.get("new_this_scan")]
+        self.assertEqual(len(new_rows), 1)
+        self.assertEqual(new_rows[0]["source"], "Nature")
+        self.assertEqual(new_rows[0]["first_seen"], "2026-09-01T16:20Z")
+
+    def test_c_expires_60_days_from_first_seen_not_publication_date(self):
+        now = scan.dt.datetime(2026, 9, 1, 12, 0, tzinfo=scan.dt.timezone.utc)
+        recent_insert_old_source = {
+            "headline": "Old-source-date signal inserted recently",
+            "source": "Nature", "link": "https://doi.org/10.1038/example",
+            "date": "2026-01-01", "first_seen": "2026-08-15T12:00Z",
+        }
+        expired = dict(recent_insert_old_source, headline="Expired signal", first_seen="2026-07-03T11:59Z")
+        data={"strand_a":[],"strand_b":[],"strand_c":[recent_insert_old_source,expired],"frontier_evidence":[]}
+        out, removed = scan.prune_public_window(data, scan.dt.date(2026,5,1), now=now)
+        self.assertEqual(len(out["strand_c"]), 1)
+        self.assertEqual(out["strand_c"][0]["headline"], "Old-source-date signal inserted recently")
+        self.assertEqual(removed["strand_c"], 1)
+        self.assertEqual(out["strand_c"][0]["retention_window_days"], 60)
+
+    def test_ab_and_frontier_are_cumulative_regardless_of_publication_age(self):
+        now = scan.dt.datetime(2026, 9, 1, 12, 0, tzinfo=scan.dt.timezone.utc)
+        old_a={"title":"Older accepted A","source":"Nature","link":"https://doi.org/10.1038/olda","date":"2024-01-01","strand":"A"}
+        old_b={"title":"Older accepted B","source":"Futures","link":"https://doi.org/10.1000/oldb","date":"2023-01-01","strand":"B"}
+        old_f={"title":"Older frontier evidence","source":"JRC","link":"https://example.org/f","date":"2022-01-01"}
+        out, removed=scan.prune_public_window({"strand_a":[old_a],"strand_b":[old_b],"strand_c":[],"frontier_evidence":[old_f]}, scan.dt.date(2026,5,1), now=now)
+        self.assertEqual(len(out["strand_a"]),1)
+        self.assertEqual(len(out["strand_b"]),1)
+        self.assertEqual(len(out["frontier_evidence"]),1)
+        self.assertEqual(removed["strand_a"],0)
+        self.assertEqual(removed["strand_b"],0)
+        self.assertEqual(removed["frontier_evidence"],0)
+
+    def test_public_ui_makes_source_and_signal_what_explicit(self):
+        html=(ROOT/'index.html').read_text(encoding='utf-8')
+        self.assertIn('<strong>Source:</strong>', html)
+        self.assertIn('<strong>What happened:</strong>', html)
+        self.assertIn('Automatic scan every 4 hours', html)
+        self.assertIn('60 days from first insertion', html)
+
+    def test_nature_and_science_remain_first_class_sources(self):
+        direct={x.get('name'):x for x in scan.CONFIG.get('direct_top_journal_sources',[])}
+        self.assertIn('Nature', direct)
+        self.assertIn('Science', direct)
+        self.assertTrue(direct['Nature'].get('feed_urls'))
+        self.assertTrue(direct['Science'].get('feed_urls'))
+
 if __name__ == "__main__":
     unittest.main()
 

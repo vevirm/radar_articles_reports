@@ -21,7 +21,7 @@
 <section class="intro"><div><h2 id="introTitle">Finding the clearest current issues…</h2><p id="introText">This page keeps the language simple. The list can change after each successful scan as new evidence arrives.</p></div></section>
 <div class="issue-list" id="issues"></div>
 <div class="next"><a href="../frontier/quick/">Matrix</a><a href="../frontier/">Full Matrix</a><a href="../">Radar</a><a href="../literature/">Sources</a></div>
-<p class="note">This page uses the same accepted evidence as the Radar. Most evidence stays for four months; only top-quality evidence can stay longer, up to six months. Nothing here changes the underlying evidence or how it is grouped.</p>
+<p class="note">This page uses the same accepted evidence as the Radar. Accepted A/B evidence stays in the radar; Strand C signals expire 60 days after first insertion. Nothing here changes the underlying evidence or how it is grouped.</p>
 </main>
 <footer><div class="wrap">R&amp;I × Geopolitics Radar · issue maps · <span id="footstate">current state</span></div></footer>
 <script src="../source_merit.js?v=17.18.0"></script>
@@ -50,7 +50,7 @@ function issueHtml(issue,i){
     document.getElementById('introTitle').textContent=issues.length?`${issues.length} issues stand out in the current material.`:'No stable issue pattern yet.';
     document.getElementById('introText').textContent='The list is rebuilt after every successful scan. Issues can appear, disappear, merge, split or move as the evidence changes; within each issue, better-supported findings rise using the source-merit rubric documented in Stuff.';
     const upd=(d.last_updated||'').slice(0,10)||'unknown';
-    document.getElementById('state').innerHTML=[`Main evidence: 4 months · top-quality evidence: up to 6 months · ${esc(d.preferred_corpus_start_date||d.corpus_start_date||'')} → ${esc(upd)}`,`${issues.length} current issue maps`,`${A.length} radar findings`,`${B.length} ways to look ahead`,`${C.length} early signs`].map(t=>`<span class="chip">${t}</span>`).join('');
+    document.getElementById('state').innerHTML=[`Evidence accumulates · C signals: 60 days · last update ${esc(upd)}`,`${issues.length} current issue maps`,`${A.length} radar findings`,`${B.length} ways to look ahead`,`${C.length} early signs`].map(t=>`<span class="chip">${t}</span>`).join('');
     document.getElementById('footstate').textContent=`radar state ${upd} · ${issues.length} current issues`;
   }catch(e){
     document.getElementById('issues').innerHTML='<section class="issue"><div class="issue-head"><div><div class="issue-title">Current issue maps could not load</div><p class="issue-line">The page needs the current radar.json because the issue structure is no longer fixed.</p></div></div></section>';

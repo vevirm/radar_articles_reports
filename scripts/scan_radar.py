@@ -13,7 +13,7 @@ Key properties
 * Strand C is not a general news feed: every admitted item must be a factual current development
   or new evidence/indicator capable of reframing Strand A, with a strong R&I/geopolitical bridge.
   It must be anchored to substantive Strand-A evidence; Strand-B methods never serve as weak-signal
-  anchors. Once admitted, the signal is retained for six months and always remains low-evidence.
+  anchors. Once admitted, the signal is retained for 60 days from its first insertion into the radar and always remains low-evidence.
   A completed study/report/paper is itself an evidence product and therefore gets A/B precedence;
   discovery through a news lane can never demote it into C. An interesting genuine C item that points
   to research, a report, data or another publication can trigger a bounded evidence follow-up. Any
@@ -168,7 +168,7 @@ _apply_rule_fix_source_extensions()
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
-WEAK_SIGNAL_RETENTION_MONTHS = int(CONFIG.get("weak_signal_retention_months", 6))
+WEAK_SIGNAL_RETENTION_DAYS = int(CONFIG.get("weak_signal_retention_days", 60))
 EXTENDED_TOP_QUALITY_SOURCES_PER_SCAN = int(CONFIG.get("extended_top_quality_sources_per_scan", 6))
 EXTENDED_TOP_QUALITY_STAGE_SECONDS = int(CONFIG.get("extended_top_quality_stage_seconds", 150))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
@@ -178,7 +178,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.17.2-source-integrity-fail-closed"
+C_ADMISSION_PROFILE_VERSION = "v17.19.9-google-news-publisher-integrity"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -190,7 +190,7 @@ CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_ve
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.17.5-completed-evidence-A-recovery"
-WINDOW_POLICY_VERSION = "v17.13.31-six-month-low-evidence-signals"
+WINDOW_POLICY_VERSION = "v17.19.9-cumulative-ab-c60d-from-first-seen"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
@@ -244,7 +244,7 @@ FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expa
 # corpus floor before discovery starts.
 DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 EXTENDED_DATE_FLOOR = dt.date.today() - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
-SIGNAL_RETENTION_FLOOR = dt.date.today() - relativedelta(months=WEAK_SIGNAL_RETENTION_MONTHS)
+SIGNAL_RETENTION_FLOOR = dt.date.today() - dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
 NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 168))
 FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", SIGNAL_BACKFILL_HOURS))
 DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
@@ -6447,6 +6447,18 @@ def record_source_integrity_ok(item: dict[str, Any]) -> bool:
         expected_url = f"https://{expected}/"
         if _same_institution_family(expected_url, link):
             return True
+        # Google News RSS exposes the canonical publisher in the <source> element while
+        # the article <link> is a news.google.com redirect. Treat that structured publisher
+        # attribution as source integrity only when it exactly matches our configured source
+        # family. This keeps Nature/Science/etc. C candidates from dying after anchoring,
+        # without weakening the cross-document/PDF fail-closed rule for arbitrary URLs.
+        link_host = _domain_host(link)
+        declared_domain = clean_text(item.get("source_domain", "")).lower().removeprefix("www.")
+        provenance = normalized(item.get("discovery_provenance", ""))
+        if link_host == "news.google.com" and provenance in {"google_news_rss", "google news rss"} and declared_domain:
+            if declared_domain == expected or declared_domain.endswith("." + expected) or expected.endswith("." + declared_domain):
+                return True
+            return False
         # A genuine external asset host must still visibly name the same document.
         ht = _document_title_tokens(headline)
         lt = _document_title_tokens(urlparse(link).path)
@@ -8945,6 +8957,7 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
             _diag_inc("signal_reject_record_integrity")
             continue
         x = _low_evidence_signal(old)
+        x['first_seen'] = x.get('first_seen') or now_iso
         x['new_this_scan'] = False
         if any(signals_near_duplicate(x, y) for y in merged):
             continue
@@ -9019,7 +9032,9 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     external_specific = contains_any(h, [
         'export control', 'semiconductor', 'advanced chip', 'compute', 'quantum',
         'research cooperation', 'research collaboration', 'research security', 'research talent',
-        'scientific collaboration', 'critical raw material', 'critical mineral', 'ai investment gap'
+        'researcher', 'scientist', 'talent', 'return fellowship', 'brain drain', 'brain gain',
+        'scientific collaboration', 'research funding', 'biotech', 'biomedical', 'advanced material',
+        'battery', 'industrial policy', 'critical raw material', 'critical mineral', 'ai investment gap'
     ])
     if not external_specific:
         return False
@@ -9557,6 +9572,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             items.append({
                 "headline": title,
                 "source": source_name,
+                "source_domain": source_domain,
+                "discovery_provenance": "google_news_rss",
                 "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
                 "link": clean_text(getattr(e, "link", "")),
                 "_desc": desc,
@@ -10377,7 +10394,7 @@ def anchor_news(
             'external_eu_bridge_is_inference': bool(external_bridge),
             'evidence_status': 'low',
             'evidence_role': 'weak_signal',
-            'retention_window_months': WEAK_SIGNAL_RETENTION_MONTHS,
+            'retention_window_days': WEAK_SIGNAL_RETENTION_DAYS,
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
@@ -10534,98 +10551,119 @@ def source_can_reach_highest(src: dict[str, Any]) -> bool:
     return _source_merit_is_eu_official(source, probe) or source in _SOURCE_MERIT_PUBLIC_HIGH
 
 def enforce_two_tier_ab_window(items: list[dict[str, Any]], preferred_floor: dt.date, extended_floor: dt.date) -> tuple[list[dict[str, Any]], int, int]:
-    """Keep all A/B in the core four months and only Highest-merit evidence in months 4-6."""
+    """Backward-compatible cumulative A/B retention boundary.
+
+    Discovery still prioritises the recent four-month window (plus bounded older recovery),
+    but once an A/B item has entered the radar it is cumulative. It is not aged out merely
+    because its publication date moved beyond a discovery window. Explicit precision,
+    duplicate and integrity cleanups remain separate and may still remove bad records.
+    """
     kept: list[dict[str, Any]] = []
-    removed = 0
-    extended_kept = 0
     for raw in items if isinstance(items, list) else []:
         if not isinstance(raw, dict):
             continue
         item = dict(raw)
-        d = parse_date(item.get("date"))
-        if not d or d >= preferred_floor:
-            item.pop("extended_retention", None)
-            item.pop("retention_window_months", None)
-            kept.append(item)
-            continue
-        if d >= extended_floor and highest_source_merit(item):
-            item["extended_retention"] = True
-            item["retention_window_months"] = EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS
-            extended_kept += 1
-            kept.append(item)
-            continue
-        removed += 1
-    return kept, removed, extended_kept
+        # Legacy presentation flags implied age-based A/B expiry. They no longer apply.
+        item.pop("extended_retention", None)
+        item.pop("retention_window_months", None)
+        item.pop("retention_window_days", None)
+        kept.append(item)
+    return kept, 0, 0
+
 
 def bootstrap_floor(today: dt.date) -> dt.date:
+    """Recent discovery floor; not a deletion boundary for accepted A/B evidence."""
     return today - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 
 
 def preserved_corpus_floor(previous: dict[str, Any], today: dt.date) -> dt.date:
-    """Return the preferred/core four-month floor."""
+    """Return the preferred recent-discovery floor; accepted A/B evidence is cumulative."""
     return bootstrap_floor(today)
+
 
 def extended_top_quality_floor(today: dt.date) -> dt.date:
     return today - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
 
+
 def weak_signal_retention_floor(today: dt.date) -> dt.date:
-    return today - relativedelta(months=WEAK_SIGNAL_RETENTION_MONTHS)
+    """Display/diagnostic floor only. C expiry is calculated from each row's first_seen."""
+    return today - dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
+
+
+def _parse_utc_datetime(value: Any) -> dt.datetime | None:
+    if value in (None, ""):
+        return None
+    try:
+        parsed = dateparser.parse(str(value), fuzzy=False)
+    except Exception:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=dt.timezone.utc)
+    return parsed.astimezone(dt.timezone.utc)
+
 
 def _low_evidence_signal(item: dict[str, Any]) -> dict[str, Any]:
-    """Normalize the public evidentiary contract for Strand C."""
+    """Normalize the public evidentiary and 60-day retention contract for Strand C."""
     x = dict(item)
     x["evidence_status"] = "low"
     x["evidence_role"] = "weak_signal"
-    x["retention_window_months"] = WEAK_SIGNAL_RETENTION_MONTHS
+    x.pop("retention_window_months", None)
+    x["retention_window_days"] = WEAK_SIGNAL_RETENTION_DAYS
     return x
+
+
+def signal_retention_expired(item: dict[str, Any], now: dt.datetime) -> bool:
+    """Expire C exactly 60 days after insertion, never by source/publication date."""
+    seen = _parse_utc_datetime(item.get("first_seen"))
+    if seen is None:
+        return False
+    return now >= seen + dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
+
 
 def prune_public_window(
     data: dict[str, Any],
     floor: dt.date,
     extended_floor: dt.date | None = None,
     signal_floor: dt.date | None = None,
+    now: dt.datetime | None = None,
 ) -> tuple[dict[str, Any], dict[str, int]]:
-    """Apply independent A/B and weak-signal retention windows.
+    """Apply the public accumulation contract.
 
-    A/B: four-month core, with only Highest source-merit evidence surviving to six months.
-    C: every admitted weak signal survives for six months, but always at low evidential status.
+    A/B and frontier evidence are cumulative once admitted. Strand C alone expires,
+    exactly 60 days after ``first_seen``. Publication date does not shorten or extend a
+    signal's life. Explicit false-positive/duplicate/integrity cleanups are independent.
     """
     out = dict(data) if isinstance(data, dict) else {}
     extended_floor = extended_floor or extended_top_quality_floor(dt.date.today())
-    signal_floor = signal_floor or weak_signal_retention_floor(dt.date.today())
-    removed: dict[str, int] = {}
+    now = now or dt.datetime.now(dt.timezone.utc)
+    signal_floor = signal_floor or weak_signal_retention_floor(now.date())
+    removed: dict[str, int] = {"strand_a": 0, "strand_b": 0, "strand_c": 0, "frontier_evidence": 0}
+
     for strand in ("strand_a", "strand_b"):
         raw = out.get(strand) if isinstance(out.get(strand), list) else []
-        kept, removed_count, _ = enforce_two_tier_ab_window(raw, floor, extended_floor)
-        removed[strand] = removed_count
+        kept, _, _ = enforce_two_tier_ab_window(raw, floor, extended_floor)
         out[strand] = kept
 
     raw_c = out.get("strand_c") if isinstance(out.get("strand_c"), list) else []
-    kept_c = []
-    signal_ceiling = signal_floor + relativedelta(months=WEAK_SIGNAL_RETENTION_MONTHS) + dt.timedelta(days=1)
-    for item in raw_c:
-        if not isinstance(item, dict):
+    kept_c: list[dict[str, Any]] = []
+    for raw in raw_c:
+        if not isinstance(raw, dict):
             continue
-        d = parse_date(item.get("date"))
-        if d and (d < signal_floor or d > signal_ceiling):
+        item = _low_evidence_signal(raw)
+        # Legacy rows without first_seen get a fresh insertion timestamp rather than being
+        # incorrectly expired from an old publication date.
+        if not _parse_utc_datetime(item.get("first_seen")):
+            item["first_seen"] = now.isoformat(timespec="minutes").replace("+00:00", "Z")
+        if signal_retention_expired(item, now):
+            removed["strand_c"] += 1
             continue
-        kept_c.append(_low_evidence_signal(item))
-    removed["strand_c"] = max(0, len(raw_c) - len(kept_c))
+        kept_c.append(item)
     out["strand_c"] = kept_c
 
     raw_frontier = out.get("frontier_evidence") if isinstance(out.get("frontier_evidence"), list) else []
-    kept_frontier = []
-    for item in raw_frontier:
-        if not isinstance(item, dict):
-            continue
-        d = parse_date(item.get("date"))
-        if d and d < floor:
-            continue
-        kept_frontier.append(dict(item))
-    removed["frontier_evidence"] = max(0, len(raw_frontier) - len(kept_frontier))
-    out["frontier_evidence"] = kept_frontier
+    out["frontier_evidence"] = [dict(x) for x in raw_frontier if isinstance(x, dict)]
 
-    # corpus_start_date stays the preferred/core A/B floor for backward-compatible reader logic.
+    # These remain discovery-window metadata, not deletion boundaries.
     out["corpus_start_date"] = floor.isoformat()
     out["preferred_corpus_start_date"] = floor.isoformat()
     out["extended_top_quality_start_date"] = extended_floor.isoformat()
@@ -10696,10 +10734,10 @@ def main() -> int:
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
     SIGNAL_RETENTION_FLOOR = weak_signal_retention_floor(now.date())
-    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR)
+    previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, now)
     if sum(age_window_removed.values()):
         log_progress(
-            "Retention windows: removed expired/non-Highest public rows "
+            "Accumulation policy: removed expired Strand-C rows "
             + ", ".join(f"{k}={v}" for k, v in age_window_removed.items() if v)
         )
     previous, retired_c_removed = apply_retired_signal_filter(previous)
@@ -12471,10 +12509,9 @@ def main() -> int:
         )
     prev_frontier_evidence = previous.get("frontier_evidence", []) if isinstance(previous.get("frontier_evidence"), list) else []
     frontier_evidence = merge_corpus(prev_frontier_evidence, frontier_recovery_candidates, "A", now_iso)
-    frontier_evidence = [
-        x for x in frontier_evidence
-        if isinstance(x, dict) and (parse_date(x.get("date")) is None or parse_date(x.get("date")) >= DATE_FLOOR)
-    ]
+    # Frontier evidence is cumulative once accepted, like A/B. DATE_FLOOR remains a
+    # discovery priority only and must not delete previously admitted records.
+    frontier_evidence = [dict(x) for x in frontier_evidence if isinstance(x, dict)]
     output_corpus_floor = DATE_FLOOR
 
     final_c_diagnostics: list[dict[str, str]] = []
@@ -12522,7 +12559,7 @@ def main() -> int:
         item for item in strand_c
         if clean_text(item.get("headline", "")) not in retired_signal_titles
     ]
-    # Retention is now a hard six-month contract for every admitted weak signal.
+    # Strand C alone expires 60 days after first insertion; A/B/frontier are cumulative.
     # Do not delete C rows merely to enforce a presentation share ceiling; evidential
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
     c_share_removed = 0
@@ -12676,7 +12713,14 @@ def main() -> int:
         "preferred_corpus_start_date": DATE_FLOOR.isoformat(),
         "extended_top_quality_start_date": EXTENDED_DATE_FLOOR.isoformat(),
         "weak_signal_retention_start_date": SIGNAL_RETENTION_FLOOR.isoformat(),
-        "corpus_window_policy": f"{BOOTSTRAP_LOOKBACK_MONTHS}-month A/B core; Highest source-merit A/B evidence retained/discovered to {EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS} months; weak signals retained {WEAK_SIGNAL_RETENTION_MONTHS} months at low evidential status",
+        "corpus_window_policy": f"recent discovery prioritises {BOOTSTRAP_LOOKBACK_MONTHS} months (with bounded older recovery); accepted A/B and frontier evidence stay in the radar; Strand C expires {WEAK_SIGNAL_RETENTION_DAYS} days after first insertion",
+        "retention_policy": {
+            "strand_a": "cumulative_until_explicit_cleanup",
+            "strand_b": "cumulative_until_explicit_cleanup",
+            "frontier_evidence": "cumulative_until_explicit_cleanup",
+            "strand_c": "60_days_from_first_seen",
+            "strand_c_days": WEAK_SIGNAL_RETENTION_DAYS,
+        },
         "source_expansion_version": expansion_marker,
         "quality_profile_version": QUALITY_PROFILE_VERSION,
         "aboutness_profile_version": str(CONFIG.get("aboutness_profile_version", "")),
@@ -12743,7 +12787,7 @@ def main() -> int:
             "c_window_end": now_iso,
             "c_discovery_lookback_hours": news_lookback,
             "c_retention_floor": SIGNAL_RETENTION_FLOOR.isoformat(),
-            "c_retention_months": WEAK_SIGNAL_RETENTION_MONTHS,
+            "c_retention_days": WEAK_SIGNAL_RETENTION_DAYS,
             "c_evidence_status": "low",
             "c_recovery_backfill_this_run": signal_backfill,
         },
@@ -12780,7 +12824,7 @@ def main() -> int:
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and is retained for six months." if 0 < new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and each signal stays for 60 days from first insertion." if 0 < new_c_count < 3 else "",
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),

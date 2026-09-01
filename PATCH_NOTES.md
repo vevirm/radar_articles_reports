@@ -1,3 +1,13 @@
+# v17.19.9
+
+- Main workflow now has a fixed automatic four-hour cadence (`17 */4 * * *`). Push/manual scans remain additional; they do not suppress the next scheduled run.
+- A/B and frontier evidence are cumulative once admitted. Ordinary age-window pruning no longer removes accepted non-C evidence. Explicit false-positive, duplicate and integrity cleanups remain allowed.
+- Strand C alone expires 60 days after `first_seen` (insertion into the radar), not 60 days after the source publication date. Legacy C rows missing `first_seen` receive an insertion timestamp rather than being prematurely expired.
+- Google News RSS candidates now carry structured publisher-domain provenance. A configured publisher such as Nature or Science can pass the final source-integrity gate even when the RSS article URL is a `news.google.com` redirect, while arbitrary cross-document links still fail closed. This fixes the observed “prefilter 1 / anchored 1 / new C 0” loss path.
+- Public cards now show a prominent linked `Source:` line. Strand C additionally shows an explicit `What happened:` line, so the reader can immediately see the development and where it came from rather than relying on a strand letter or collapsed bibliography.
+- Nature, Science and comparable top journals remain a first-class discovery pillar alongside EU/institutional sources.
+- Latest live scanner state/cursors are bundled without reset; no retroactive C signal was fabricated.
+
 # v17.19.8 — resilient top-journal transport + final C reserve + evidence-surface cleanup
 
 - Keeps Nature/Science/top journals as a first-class source family, but no longer relies on publisher HTML hubs being accessible from GitHub-hosted runners. The direct journal lane now prefers RSS/Atom where configured, falls back to alternate publisher TOC surfaces (including Science's SPJ surface), and can classify from feed metadata even when individual publisher pages return HTTP 403.
