@@ -895,6 +895,39 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertTrue(ev["a_pass"])
         self.assertTrue(ev["centrality_pass"])
 
+    def test_early_modern_history_is_outside_live_radar_even_with_technology_transfer_language(self):
+        title = "Genoese Migration and Technology Transfer in the Early-Modern Spanish Monarchy"
+        abstract = (
+            "The paper examines Genoese migration, manufacturing knowledge and technology transfer "
+            "within the Spanish monarchy."
+        )
+        self.assertTrue(scan._historical_subject_without_current_ri_implication(title, abstract, ""))
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "historical_subject_outside_live_ri_goal")
+
+    def test_current_neo_academic_cold_war_paper_is_not_mistaken_for_history(self):
+        title = "The Neo-Academic Cold War: Political Traumas and Transnational Paranoia"
+        abstract = (
+            "A new Cold War is emerging, producing rival silos of transnational science cooperation and science diplomacy "
+            "involving the European Union, the United States, China and Russia."
+        )
+        self.assertFalse(scan._historical_subject_without_current_ri_implication(title, abstract, ""))
+
+    def test_saved_sanitizer_removes_early_modern_history_with_same_predicate(self):
+        bad = {
+            "title": "Genoese Migration and Technology Transfer in the Early-Modern Spanish Monarchy",
+            "summary": "An early-modern study of technology transfer in the Spanish monarchy.",
+            "type": "peer-reviewed article",
+            "source": "Itinerario",
+            "date": "2026-05-04",
+            "link": "https://doi.org/10.1017/s0165115326100588",
+        }
+        saved = {"strand_a": [bad], "strand_b": [], "strand_c": []}
+        clean, removed = scan._sanitize_saved_radar(saved)
+        self.assertEqual(clean["strand_a"], [])
+        self.assertEqual(removed["strand_a"], 1)
+
     def test_c_rescue_can_admit_directly_european_unanchored_emerging_signal(self):
         title = "EU launches pilot research security scheme for quantum universities"
         desc = (

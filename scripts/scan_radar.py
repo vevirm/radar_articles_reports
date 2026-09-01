@@ -2930,6 +2930,13 @@ A_SYSTEM_LEVEL_RI_CUES = [
 A_HISTORICAL_CENTURY = re.compile(
     r'\b(?:eighteenth|nineteenth|twentieth|18th|19th|20th)[ -]?centur(?:y|ies)\b', re.I
 )
+# Obvious subject-period language. This is about what the paper studies, not its
+# publication date. It catches history scholarship even when metadata text is thin.
+A_HISTORICAL_ERA = re.compile(
+    r'\b(?:early[ -]?modern|late[ -]?medieval|medieval|middle ages|renaissance|enlightenment|'
+    r'ancien r[eé]gime|interwar|victorian|edwardian|habsburg|ottoman|'
+    r'soviet[ -]?era|colonial (?:era|period)|imperial (?:era|period)|(?:during|in) the cold war|cold war (?:era|period))\b', re.I
+)
 A_HISTORICAL_YEAR_RANGE = re.compile(
     r'\b((?:17|18|19|20)\d{2})\s*[–—-]\s*((?:17|18|19|20)\d{2})\b'
 )
@@ -2940,12 +2947,33 @@ A_CURRENT_FORWARD_CUES = [
 ]
 
 def _historical_subject_without_current_ri_implication(title: str, abstract: str, body: str = '') -> bool:
+    """Reject history scholarship unless the source itself makes a live/forward R&I implication.
+
+    The same predicate is used both for new scholarly admissions and for saved/history
+    sanitisation, so historical material cannot be admitted on one path and resurrected
+    by another.
+    """
     text = clean_text(f"{title}. {abstract}. {body[:5000]}")
     low = normalized(text)
     title_low = normalized(title)
-    if contains_any(low, A_CURRENT_FORWARD_CUES):
-        return False
-    century_subject = bool(A_HISTORICAL_CENTURY.search(title) or A_HISTORICAL_CENTURY.search(abstract))
+
+    # A generic modern word in publisher boilerplate is not enough. Current/future language
+    # must be tied to an R&I/system concept in the same sentence.
+    live_terms = A_SYSTEM_LEVEL_RI_CUES + [
+        'research', 'innovation', 'science policy', 'technology policy', 'r&d',
+        'research and innovation', 'research & innovation', 'scientific cooperation',
+    ]
+    for sent in split_sentences(text):
+        sent_low = normalized(sent)
+        if contains_any(sent_low, A_CURRENT_FORWARD_CUES) and contains_any(sent_low, live_terms):
+            return False
+
+    century_subject = bool(
+        A_HISTORICAL_CENTURY.search(title)
+        or A_HISTORICAL_CENTURY.search(abstract)
+        or A_HISTORICAL_CENTURY.search(body[:5000])
+    )
+    era_subject = bool(A_HISTORICAL_ERA.search(title) or A_HISTORICAL_ERA.search(abstract))
     old_range = False
     for m in A_HISTORICAL_YEAR_RANGE.finditer(title):
         try:
@@ -2957,10 +2985,15 @@ def _historical_subject_without_current_ri_implication(title: str, abstract: str
             break
     explicit_history = bool(re.search(
         r'\b(?:history of|historical (?:study|analysis|account|development|evolution)|reconstructs? the history|'
-        r'from a historical perspective|historical origins?)\b', low, re.I
+        r'reconstructs? (?:the )?(?:development|evolution|circulation)|from a historical perspective|'
+        r'historical origins?|archival (?:study|analysis|research)|drawing on (?:historical|archival) (?:evidence|sources?))\b',
+        low, re.I
     ))
-    title_history = bool(re.search(r'\b(?:history|historical|re-exploring|origins?|the making of)\b', title_low, re.I))
-    return bool(century_subject or old_range or (title_history and explicit_history))
+    title_history = bool(re.search(
+        r'\b(?:history|historical|re-exploring|origins?|the making of|early[ -]?modern|medieval|'
+        r'renaissance|enlightenment|interwar)\b', title_low, re.I
+    ))
+    return bool(century_subject or era_subject or old_range or (title_history and explicit_history))
 
 def _routine_institutional_prestige_title(title: str) -> bool:
     t = clean_text(title)

@@ -1,3 +1,13 @@
+# v17.19.6 — historical-subject guard + safety-check compatibility
+
+- Generalises the live-radar history exclusion beyond century/year ranges to explicit historical eras such as early-modern, medieval, Renaissance, Enlightenment, interwar and Cold War subjects.
+- Historical scholarship remains eligible only when the source itself makes an explicit current or forward R&I implication; generic modern boilerplate does not rescue a history paper.
+- The same historical predicate is used for new scholarly admission and saved/Git-history sanitisation, preventing different discovery/recovery paths from disagreeing.
+- Removes the already-saved false positive `Genoese Migration and Technology Transfer in the Early-Modern Spanish Monarchy` from the bundled radar before upload, so the existing GitHub cumulative-corpus safety gate has no unexplained in-window deletion to block on the next scan.
+- The GitHub workflows are unchanged. The cumulative-corpus safety check is not weakened or bypassed.
+- No recall profile, incremental-state version, quality profile, source cursor or rotation profile is reset.
+- Adds regression coverage for the exact Genoese/early-modern failure and for saved-history sanitisation.
+
 # v17.19.5 — C floor rescue + live-period evidence guard
 
 - Keeps Strand C from quietly collapsing to zero new signals when the ordinary news lane only finds duplicates or over-strict anchor failures. A bounded rescue search runs across diversified R&I weak-signal themes and 14/30-day recovery windows.
