@@ -17961,10 +17961,10 @@
     "c_recovery_backfill_this_run": false
   },
   "scan_results": {
-    "new_a": 7,
+    "new_a": 5,
     "new_b": 0,
-    "new_ab_unique": 10,
-    "new_c": 4,
+    "new_ab_unique": 5,
+    "new_c": 0,
     "aged_out_this_scan": {
       "strand_a": 0,
       "strand_b": 0,
@@ -17975,8 +17975,8 @@
     "extended_highest_retained_a": 14,
     "extended_highest_retained_b": 0,
     "extended_highest_new_candidates": 0,
-    "c_signals": 4,
-    "c_signals_total": 11,
+    "c_signals": 0,
+    "c_signals_total": 7,
     "c_prefilter_candidates": 6,
     "c_anchored_candidates": 6,
     "b_method_queries_this_scan": 8,
@@ -18193,72 +18193,27 @@
       "empty_cells_published": 0,
       "published_empty_cells": [],
       "published_qualifying": 46
+    },
+    "postscan_precision_cleanup": {
+      "release": "v17.19.3",
+      "reason": "content-type and weak-signal relation repair applied to bundled latest run; discovery/state cursors preserved",
+      "removed_strand_a": 2,
+      "removed_strand_c": 4,
+      "removed_a_titles": [
+        "Acquisition, Delivery, Installation and Hardware and Software Maintenance to Upgrade INNOVATE, the EuroHPC Industrial Supercomputer",
+        "ELLIS Summer School 2026: AI for Research | ELLIS Institute Finland"
+      ],
+      "removed_c_headlines": [
+        "Evolving radio astronomy and its impact on Africa - ITU",
+        "Strengthening Digital Sovereignty in EU Public Governance",
+        "The adoption of Generative AI in EU public administrations: exploring individual behaviours and organisational approaches",
+        "The new golden age of radio astronomy - ITU"
+      ],
+      "retained_new_a": 5,
+      "retained_new_c": 0
     }
   },
   "strand_a": [
-    {
-      "title": "ELLIS Summer School 2026: AI for Research | ELLIS Institute Finland",
-      "authors": "ELLIS Institute Finland",
-      "source": "ELLIS Institute Finland",
-      "date": "2026-08-17",
-      "link": "https://www.ellisinstitute.fi/ellis-summer-school-2026",
-      "type": "research/policy paper",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "ELLIS Summer School 2026: AI for Research | ELLIS Institute Finland. Harnessing fundamental and applied AI to advance scientific discovery.. ELLIS Summer School 2026: AI for Research ELLIS, Summer School This summer school brings together researchers and students to explore how AI can support and transform scientific research.",
-      "core_message": "Harnessing fundamental and applied AI to advance scientific discovery..",
-      "relevance_note": "Direct European/EU relevance (finland); R&I evidence:  ai  + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "finland"
-      ],
-      "ri_evidence": [
-        " ai  + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "full_text",
-      "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Acquisition, Delivery, Installation and Hardware and Software Maintenance to Upgrade INNOVATE, the EuroHPC Industrial Supercomputer",
-      "authors": "EuroHPC Joint Undertaking",
-      "source": "EuroHPC Joint Undertaking",
-      "date": "2026-07-16",
-      "link": "https://www.eurohpc-ju.europa.eu/acquisition-delivery-installation-and-hardware-and-software-maintenance-upgrade-innovate-eurohpc_en",
-      "type": "research/policy paper",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "The system will be managed by the INNOVATE Consortium, bringing together expertise from across Italy’s industrial and innovation ecosystem. The consortium includes Almawave S.p.A. , Autostrade per l’Italia S.p.A. , BI-REX - Big Data Innovation & Research Excellence , Fondazione ICSC – Italian Research Center on High Performance Computing, Big Data and Quantum Computing , Fondazione IFAB – International Foundation Big Data and Artificial Intelligence for Human Development , SNAM S.p.A. and Unipol Assicurazioni S.p.A. , under the coordination of Fondazione ICSC, as representative of the private parties, and CINECA as Hosting Entity, which coordinated the design phase according to the industrial needs and will manage the system for the Consortium. Details Status Open Publication date 16 July 2026 Opening date 16 July 2026 Deadline model Single-stage Deadline date 18 September 2026, 17:00 (CEST) Description As Hosting Entity, CINECA will host and operate the industrial-grade supercomputer at the DAMA Tecnopolo, reinforcing the role of the site as a strategic European hub for advanced computing infrastructure.",
-      "core_message": "Italian Research Center on High Performance Computing, Big Data and Quantum Computing , Fondazione IFAB.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: research excellence, innovation ecosystem; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european",
-        "italy",
-        "italian"
-      ],
-      "ri_evidence": [
-        "research excellence",
-        "innovation ecosystem",
-        "artificial intelligence + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": true
-    },
     {
       "title": "Research Infrastructures as Bottleneck Resources: A Pathway-Based Evaluation of Support in Challenge-Driven Access",
       "authors": "Nicolas V. Rüffin, Katharina C. Cramer",
@@ -28014,145 +27969,6 @@
   ],
   "strand_c": [
     {
-      "headline": "The adoption of Generative AI in EU public administrations: exploring individual behaviours and organisational approaches",
-      "source": "JRC Publications Repository",
-      "date": "2026-09-01T12:00Z",
-      "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147095",
-      "anchor": "International investment in artificial intelligence: investment asymmetry and risks of technological dependence in EU countries (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "critical and emerging technologies",
-      "signal_type": "reframes",
-      "signal_kind": "evidence / indicator",
-      "what": "Access to Joint Research Centre's publications.",
-      "core_message": "Access to Joint Research Centre's publications.",
-      "why_it_matters": "This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
-      "signal_note": "Access to Joint Research Centre's publications. This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may affect European access, investment or capability-building in a technology that is becoming strategically important.",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "evidence_status": "low",
-      "evidence_role": "weak_signal",
-      "retention_window_months": 6,
-      "reframing_dimensions": [
-        "new evidence",
-        "new actor move",
-        "new mechanism",
-        "new timing",
-        "new consequence"
-      ],
-      "strand_a_phrase_hits": [
-        "technological sovereignty",
-        "AI compute"
-      ],
-      "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
-      "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": true
-    },
-    {
-      "headline": "Strengthening Digital Sovereignty in EU Public Governance",
-      "source": "JRC Publications Repository",
-      "date": "2026-09-01T12:00Z",
-      "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147599",
-      "anchor": "Strengthening Europe’s Tech Sovereignty (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "technology sovereignty / strategic autonomy",
-      "signal_type": "reframes",
-      "signal_kind": "evidence / indicator",
-      "what": "Strengthening Digital Sovereignty in EU Public Governance.",
-      "core_message": "Strengthening Digital Sovereignty in EU Public Governance.",
-      "why_it_matters": "This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This affects Europe's ability to build, access and control strategic technology capacity rather than depend on external suppliers.",
-      "signal_note": "Strengthening Digital Sovereignty in EU Public Governance. This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This affects Europe's ability to build, access and control strategic technology capacity rather than depend on external suppliers.",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "evidence_status": "low",
-      "evidence_role": "weak_signal",
-      "retention_window_months": 6,
-      "reframing_dimensions": [
-        "new evidence",
-        "new actor move",
-        "new magnitude",
-        "new mechanism",
-        "new consequence"
-      ],
-      "strand_a_phrase_hits": [
-        "digital sovereignty",
-        "strategic autonomy"
-      ],
-      "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
-      "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": true
-    },
-    {
-      "headline": "The new golden age of radio astronomy - ITU",
-      "source": "International Telecommunication Union",
-      "date": "2026-08-31T12:00Z",
-      "link": "https://www.itu.int/hub/2026/08/the-new-golden-age-of-radio-astronomy/",
-      "anchor": "Geopolitical Risk Mitigation in Information Governance:An Evaluation Framework for Algorithmic Bias and Data Security in AI-DrivenGlobal Supply Chains (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "EU–China S&T cooperation / de-risking",
-      "signal_type": "confirms",
-      "signal_kind": "evidence / indicator",
-      "what": "Beasley, we are experiencing a second golden age of radio astronomy, enabled by technology-driven advances..",
-      "core_message": "Beasley, we are experiencing a second golden age of radio astronomy, enabled by technology-driven advances..",
-      "why_it_matters": "This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
-      "signal_note": "Beasley, we are experiencing a second golden age of radio astronomy, enabled by technology-driven advances. This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "evidence_status": "low",
-      "evidence_role": "weak_signal",
-      "retention_window_months": 6,
-      "reframing_dimensions": [
-        "new evidence",
-        "new actor move",
-        "new timing",
-        "new direction",
-        "new consequence"
-      ],
-      "strand_a_phrase_hits": [
-        "Horizon Europe"
-      ],
-      "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
-      "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": true
-    },
-    {
-      "headline": "Evolving radio astronomy and its impact on Africa - ITU",
-      "source": "International Telecommunication Union",
-      "date": "2026-08-27T12:00Z",
-      "link": "https://www.itu.int/hub/2026/08/evolving-radio-astronomy-and-its-impact-on-africa/",
-      "anchor": "Strengthening U.S. Global Leadership in Electric Vehicle Supply Chains Through AI-Driven Fintech Innovation: A Comprehensive Interdisciplinary Analysis (Strand A)",
-      "anchor_basis": "publication",
-      "watch_theme": "EU–China S&T cooperation / de-risking",
-      "signal_type": "reframes",
-      "signal_kind": "evidence / indicator",
-      "what": "The integration of observations from multiple facilities has produced major scientific breakthroughs.",
-      "core_message": "The integration of observations from multiple facilities has produced major scientific breakthroughs.",
-      "why_it_matters": "This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
-      "signal_note": "The integration of observations from multiple facilities has produced major scientific breakthroughs. This is new evidence that may strengthen, weaken or complicate the current Strand-A picture. This may shift the risk–reward balance of EU–China research, technology and innovation cooperation.",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "evidence_status": "low",
-      "evidence_role": "weak_signal",
-      "retention_window_months": 6,
-      "reframing_dimensions": [
-        "new evidence",
-        "new actor move",
-        "new timing",
-        "new direction",
-        "new consequence"
-      ],
-      "strand_a_phrase_hits": [
-        "Horizon Europe",
-        "AI compute"
-      ],
-      "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
-      "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": true
-    },
-    {
       "headline": "From dependency to resilience",
       "source": "JRC Publications Repository",
       "date": "2026-09-01T12:00Z",
@@ -28688,5 +28504,6 @@
       "No usable sitemap: ethz.ch; using bounded institutional HTML fallback (28 page(s))"
     ],
     "transport_failure_warning_count": 1
-  }
+  },
+  "bundle_release": "v17.19.3"
 }

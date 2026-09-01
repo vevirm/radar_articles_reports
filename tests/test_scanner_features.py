@@ -764,6 +764,71 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertIn("sciencebusiness.net", direct)
         self.assertIn("researchprofessionalnews.com", direct)
 
+    def test_summer_school_page_is_not_strand_a_evidence(self):
+        title = "ELLIS Summer School 2026: AI for Research | ELLIS Institute Finland"
+        reason = scan.document_exclusion_reason(
+            title,
+            "This summer school brings together researchers and students to explore how AI can transform scientific research.",
+            "https://www.ellisinstitute.fi/ellis-summer-school-2026",
+        )
+        self.assertIsNotNone(reason)
+        self.assertIn("summer school", reason)
+
+    def test_procurement_style_acquisition_notice_is_not_strand_a_evidence(self):
+        title = "Acquisition, Delivery, Installation and Hardware and Software Maintenance to Upgrade INNOVATE, the EuroHPC Industrial Supercomputer"
+        reason = scan.document_exclusion_reason(title, "EuroHPC infrastructure upgrade contract")
+        self.assertEqual(reason, "hard exclusion: procurement/acquisition notice")
+
+    def test_jrc_repository_handle_is_formal_evidence_not_weak_signal(self):
+        title = "The adoption of Generative AI in EU public administrations: exploring individual behaviours and organisational approaches"
+        link = "https://publications.jrc.ec.europa.eu/repository/handle/JRC147095"
+        self.assertTrue(scan.formal_evidence_product(title, "", "JRC Publications Repository", link))
+        item = {
+            "headline": title,
+            "source": "JRC Publications Repository",
+            "date": "2026-06-19",
+            "link": link,
+            "_desc": "The report examines GenAI adoption in European public administrations.",
+            "_themes": ["critical and emerging technologies"],
+            "_entities": [],
+        }
+        self.assertEqual(scan.anchor_news([item], []), [])
+
+    def test_jrc_visible_bibliographic_date_overrides_later_cms_metadata(self):
+        html = """<html><head><meta name='date' content='2026-09-01'></head><body><main>
+        <h1>The adoption of Generative AI in EU public administrations</h1>
+        <p>Substantive report abstract.</p><div>MIKALEF Patrick; MEDAGLIA Rony;</div>
+        <div>2026-06-19</div><div>Publications Office of the European Union</div>
+        </main></body></html>"""
+        soup = scan.BeautifulSoup(html, "html.parser")
+        got = scan._jrc_repository_publication_date(
+            soup, "https://publications.jrc.ec.europa.eu/repository/handle/JRC147095"
+        )
+        self.assertEqual(str(got), "2026-06-19")
+
+    def test_signal_anchor_theme_must_be_supported_by_the_published_claim(self):
+        a = [{
+            "title": "EU-China research cooperation under de-risking",
+            "summary": "The EU is changing research cooperation with China through de-risking and knowledge-security rules.",
+            "source": "Example journal",
+            "date": "2026-07-01",
+            "link": "https://doi.org/10.1000/example",
+            "strand": "A",
+            "eu_relevance": "direct",
+        }]
+        n = {
+            "headline": "The new golden age of radio astronomy",
+            "source": "International Telecommunication Union",
+            "date": "2026-08-31",
+            "link": "https://www.itu.int/hub/2026/08/the-new-golden-age-of-radio-astronomy/",
+            "_desc": (
+                "Technology-driven advances are creating a second golden age of radio astronomy. "
+                "Elsewhere the article notes European and Chinese research cooperation in astronomy."
+            ),
+            "_themes": ["EU–China S&T cooperation / de-risking"],
+            "_entities": ["China"],
+        }
+        self.assertEqual(scan.anchor_news([n], a), [])
 
 
 class FrontierBridgeTests(unittest.TestCase):

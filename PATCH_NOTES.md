@@ -1,3 +1,19 @@
+# v17.19.3 — content-type, weak-signal relation and JRC date repair
+
+This is a narrow precision release on top of v17.19.2. It keeps the broader R&I-first recall model and the European-R&I centrality gate unchanged.
+
+## Changes
+- Event/training pages such as summer schools are blocked from Strand A unless they are a separate substantive evidence product.
+- Contract-style acquisition/delivery/installation/maintenance notices are treated as procurement, not Strand-A evidence.
+- JRC Publications Repository handles are always treated as completed publication records for routing purposes: they may be assessed for A/B, but never demoted into weak-signal Strand C simply because the title lacks the word report/study.
+- JRC repository parsing now prefers the standalone bibliographic publication date visibly printed on the record over later CMS/index metadata dates.
+- Day-level institutional publication dates remain day-level; the scanner no longer invents a 12:00Z timestamp for Strand-C institutional candidates.
+- Weak-signal anchoring now requires the selected A↔C watch theme to be supported by the actual extracted signal claim, not merely by unrelated text elsewhere on a long page. This blocks spurious links such as radio astronomy → EU–China de-risking.
+- JRC navigation boilerplate (for example “Access to Joint Research Centre's publications”) cannot be used as a weak-signal claim.
+- The bundled radar state is based on the latest uploaded run and removes only six bad additions from that run: two A content-type false positives and four C false/incorrectly-routed records. Five new A items remain.
+- No `recall_profile_version`, `incremental_state_version`, quality profile, source rotation, or GitHub security workflow was changed. Existing source cursors continue from the latest saved state.
+- Added regression tests for summer-school pages, procurement-style notices, JRC publication routing/date extraction, and claim-supported weak-signal anchoring.
+
 # v17.19.2 — EU R&I centrality precision repair
 
 This release keeps the v17.19 recall expansion but adds a narrow centrality guard so Strand A is not filled by papers where Europe or R&I is merely incidental. Strategic/geopolitical wording remains optional.

@@ -1434,7 +1434,7 @@ AB_HARD_EXCLUDE = [
     "news release", "call for proposals", "call for proposal", "funding opportunity",
     "grant opportunity", "tender", "procurement", "vacancy", "job opening", "job vacancy",
     "webinar", "workshop", "conference programme", "conference program", "event page",
-    "course page", "training course", "project page", "project description", "facility page",
+    "course page", "training course", "summer school", "project page", "project description", "facility page",
     "laboratory facility", "lab access", "user access programme", "user access program",
 ]
 URL_HARD_EXCLUDE = [
@@ -1615,6 +1615,21 @@ def formal_evidence_product(title: str, desc: str = "", source: str = "", link: 
     """
     h = normalized(title)
     full = normalized(f"{title}. {desc}")
+    source_low = normalized(source)
+    try:
+        parsed_link = urlparse(clean_text(link))
+        link_host = (parsed_link.hostname or "").lower()
+        link_path = parsed_link.path.lower()
+    except Exception:
+        link_host, link_path = "", ""
+    # JRC repository handles are completed publication records. They still need to pass
+    # the normal A/B relevance gate, but they must never be demoted into Strand C simply
+    # because the title does not literally contain words such as report or study.
+    if (
+        "jrc publications repository" in source_low
+        or (link_host == "publications.jrc.ec.europa.eu" and "/repository/handle/" in link_path)
+    ):
+        return True
     if contains_any(full, FORMAL_EVIDENCE_ONGOING_CUES) and not contains_any(full, [
         "final report", "published", "publication", "findings", "results", "read the study", "read the report"
     ]):
@@ -2549,6 +2564,13 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
         return "hard exclusion: facility/laboratory page"
     if "project" in title_low and not re.search(r"\b(report|paper|analysis|study|foresight|policy)\b", title_low):
         return "hard exclusion: project page"
+    # Procurement notices sometimes omit the words tender/procurement while using a
+    # contract-style title (acquisition + delivery/installation/maintenance). These are
+    # operational purchasing records, not evidence about the R&I system itself.
+    if re.search(r"\b(?:acquisition|purchase|supply)\b", title_low) and re.search(
+        r"\b(?:delivery|installation|maintenance|hardware|software|services?)\b", title_low
+    ):
+        return "hard exclusion: procurement/acquisition notice"
     # A webpage *about an ongoing study* is not itself a published study/report.  EU CMS
     # pages often say "collecting evidence", "the study aims to" and "will provide" and
     # are later updated; admitting those as research/policy papers manufactured false new A.
@@ -5862,6 +5884,40 @@ def _prominent_date_near_title(soup: BeautifulSoup, title: str) -> dt.date | Non
     return None
 
 
+def _jrc_repository_publication_date(soup: BeautifulSoup, url: str) -> dt.date | None:
+    """Return the bibliographic date visibly printed on a JRC repository handle page.
+
+    JRC pages can expose later CMS/index metadata dates. The actual publication date is
+    rendered as a standalone text node in the bibliographic record; prefer that value so
+    an older report cannot appear as a newly published or future-dated record.
+    """
+    try:
+        parsed = urlparse(clean_text(url))
+    except Exception:
+        return None
+    if (parsed.hostname or "").lower() != "publications.jrc.ec.europa.eu":
+        return None
+    if "/repository/handle/" not in parsed.path.lower():
+        return None
+    container = soup.find("main") or soup.body or soup
+    if container is None:
+        return None
+    patterns = [
+        re.compile(r"^20\d{2}-[01]\d-[0-3]\d$"),
+        re.compile(r"^[0-3]?\d\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2}$", re.I),
+        re.compile(r"^(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+[0-3]?\d,?\s+20\d{2}$", re.I),
+    ]
+    for node in container.find_all(string=True):
+        txt = clean_text(str(node))
+        if not txt or len(txt) > 40:
+            continue
+        if any(p.fullmatch(txt) for p in patterns):
+            d = parse_date(txt)
+            if d:
+                return d
+    return None
+
+
 def _expected_institution_domain(source: str) -> str:
     ns = normalized(source)
     for src in CONFIG.get("institution_sources", []):
@@ -5949,6 +6005,8 @@ def _signal_claim_is_substantive(value: str) -> bool:
     v = clean_text(value)
     if len(v.split()) < 6:
         return False
+    if source_navigation_boilerplate(v):
+        return False
     low = normalized(v)
     boilerplate = [
         "translated versions", "official un languages", "more languages", "click here", "read more",
@@ -5999,7 +6057,8 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         _diag_inc("institution_reject_listing_container")
         return None
 
-    published = None
+    published = _jrc_repository_publication_date(soup, r.url)
+    date_basis = "jrc_visible_publication_date" if published else "page"
     authors: list[str] = []
     article_body = ""
     for script in soup.find_all("script", attrs={"type": re.compile("ld\\+json", re.I)}):
@@ -6025,7 +6084,6 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                         authors.append(clean_text(au["name"]))
                     elif isinstance(au, str):
                         authors.append(clean_text(au))
-    date_basis = "page"
     if not published:
         published = parse_date(meta_content(soup, [
             "article:published_time", "og:article:published_time", "datePublished", "dateCreated",
@@ -6131,7 +6189,10 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                 INSTITUTION_SIGNAL_CANDIDATES.append({
                     "headline": title,
                     "source": source,
-                    "date": dt.datetime.combine(published, dt.time(12, 0), tzinfo=dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z"),
+                    # ``published`` is day-level evidence here. Preserve that precision
+                    # instead of inventing a noon timestamp that can appear to be in the future.
+                    "date": published.isoformat(),
+                    "date_basis": date_basis,
                     "link": source_link_for_signal,
                     "_desc": clean_text(f"{desc}. {body[:3500]}"),
                     "_themes": signal_themes,
@@ -9609,6 +9670,16 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
                     break
         if not what:
             continue
+        # Require the selected relationship to be visible in the actual extracted signal
+        # claim, not merely somewhere in a long source body. Retrieval themes can help find
+        # candidates, but they may not invent the published A<->C relationship.
+        claim_themes = set(themes_for(f"{headline}. {what}")) & WATCH_SIGNAL_THEMES
+        if not external_bridge:
+            supported = set(shared_themes) & claim_themes
+            if theme not in claim_themes:
+                if not supported:
+                    continue
+                theme = sorted(supported)[0]
         why=external_bridge or signal_why(theme,kind)
         item={k:v for k,v in n.items() if not k.startswith('_')}
         item.update({
