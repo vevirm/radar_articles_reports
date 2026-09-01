@@ -37,9 +37,14 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
             self.assertNotIn("age_hours >= 6.0", text)
         else:
             self.assertTrue(scan.legacy_workflow_schedule_compatibility_active(text))
-            base = scan.dt.datetime(2026, 9, 1, 16, 0, tzinfo=scan.dt.timezone.utc)
+            # Compatibility is slot-aligned, not a fixed two-hour offset. A run ending
+            # at 20:23 must make the old six-hour gate due exactly at 00:17, while
+            # the preceding 23:17 hourly trigger remains below six hours.
+            base = scan.dt.datetime(2026, 9, 1, 20, 23, tzinfo=scan.dt.timezone.utc)
             adjusted = scan.scheduler_state_completed_at(base, text)
-            self.assertEqual((base - adjusted).total_seconds(), 2 * 3600)
+            self.assertEqual(adjusted.isoformat(), '2026-09-01T18:17:00+00:00')
+            self.assertLess((scan.dt.datetime(2026, 9, 1, 23, 17, tzinfo=scan.dt.timezone.utc) - adjusted).total_seconds(), 6 * 3600)
+            self.assertEqual((scan.dt.datetime(2026, 9, 2, 0, 17, tzinfo=scan.dt.timezone.utc) - adjusted).total_seconds(), 6 * 3600)
 
     def test_cumulative_retention_is_enforced_in_scanner_even_with_legacy_workflow(self):
         old_a = {"title": "Old accepted A", "date": "2024-01-01", "link": "https://example.org/a"}

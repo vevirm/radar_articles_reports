@@ -159,15 +159,22 @@ def legacy_workflow_schedule_compatibility_active(workflow_text=None):
 
 
 def scheduler_state_completed_at(completed, workflow_text=None):
-    """Return the internal scheduler timestamp while keeping public timestamps exact.
+    """Return the internal scheduler reference while keeping public timestamps exact.
 
-    GitHub web bulk-upload can retain the older hidden workflow file. When that exact
-    legacy hourly/6-hour gate is detected, moving only its internal state reference
-    back two hours produces an effective four-hour automatic cadence. The current
-    fixed four-hour workflow never takes this compatibility branch.
+    A GitHub web bulk upload can leave the pre-v17.19.9 hourly workflow in place. That
+    legacy workflow runs at minute 17 of every hour and starts the scanner only when
+    ``scan_state.last_completed_at`` is at least six hours old. A fixed ``completed-2h``
+    reference drifts when a run finishes after the scheduled minute (for example 20:23),
+    causing the next intended 00:17 slot to be skipped.
+
+    Instead, when that *exact* legacy workflow is detected, choose the reference that
+    becomes exactly six hours old at the next real four-hour slot. Hourly legacy triggers
+    before that slot remain below six hours; the intended slot is due. The current fixed
+    four-hour workflow never uses this compatibility branch.
     """
     if legacy_workflow_schedule_compatibility_active(workflow_text):
-        return completed - dt.timedelta(hours=LEGACY_WORKFLOW_COMPAT_OFFSET_HOURS)
+        next_slot = next_automatic_scan_slot(completed)
+        return next_slot - dt.timedelta(hours=LEGACY_WORKFLOW_DUE_HOURS)
     return completed
 
 
@@ -193,8 +200,15 @@ def next_automatic_scan_slot(after: dt.datetime) -> dt.datetime:
 
 
 def run_trigger_label() -> str:
-    """Human-readable workflow trigger for public cadence telemetry."""
-    raw = clean_text(os.environ.get('RADAR_RUN_TRIGGER', '')).lower() if 'clean_text' in globals() else str(os.environ.get('RADAR_RUN_TRIGGER', '')).strip().lower()
+    """Human-readable workflow trigger for public cadence telemetry.
+
+    Current workflows pass ``RADAR_RUN_TRIGGER`` explicitly. Older retained GitHub
+    workflows do not, but GitHub Actions always exposes ``GITHUB_EVENT_NAME``. Falling
+    back to that native variable makes manual/scheduled telemetry work even when the
+    hidden legacy workflow survives a bulk repository upload.
+    """
+    raw_value = os.environ.get('RADAR_RUN_TRIGGER') or os.environ.get('GITHUB_EVENT_NAME') or ''
+    raw = clean_text(raw_value).lower() if 'clean_text' in globals() else str(raw_value).strip().lower()
     rescue = str(os.environ.get('RADAR_RESCUE_MODE', '')).strip().lower() in {'1', 'true', 'yes', 'on'}
     if raw == 'schedule':
         return 'scheduled'
@@ -244,7 +258,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.19.9-google-news-publisher-integrity"
+C_ADMISSION_PROFILE_VERSION = "v17.19.14-claim-aware-specific-anchor"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -836,6 +850,47 @@ def frontier_matrix_coverage(previous: dict[str, Any]) -> tuple[dict[str, int], 
     """
     counts, qualifying, _placements, error = frontier_matrix_snapshot(previous)
     return counts, qualifying, error
+
+
+def annotate_automatic_matrix_cells(
+    corpus_lists: Iterable[list[dict[str, Any]]],
+    placements: Iterable[dict[str, Any]],
+) -> int:
+    """Expose browser-classifier placements without feeding them back as stored evidence.
+
+    ``matrix_dimension``/``matrix_quadrant`` are evidence/adjudication fields consumed by
+    the classifier itself, so writing automatic results there would create a circular lock.
+    ``matrix_auto_cell`` is display/telemetry only and can be recomputed every scan.
+    """
+    by_link: dict[str, str] = {}
+    by_title: dict[str, str] = {}
+    for row in placements or []:
+        if not isinstance(row, dict):
+            continue
+        cell = clean_text(row.get('cell'))
+        if cell not in FRONTIER_CELL_ORDER:
+            continue
+        link = normalized_link(row.get('link', ''))
+        title = norm_title(row.get('title', ''))
+        if link:
+            by_link[link] = cell
+        if title:
+            by_title[title] = cell
+    placed = 0
+    for items in corpus_lists:
+        for item in items if isinstance(items, list) else []:
+            if not isinstance(item, dict):
+                continue
+            link = normalized_link(item.get('link', ''))
+            title = norm_title(item.get('title', ''))
+            cell = by_link.get(link) if link else ''
+            cell = cell or (by_title.get(title) if title else '')
+            if cell:
+                item['matrix_auto_cell'] = cell
+                placed += 1
+            else:
+                item.pop('matrix_auto_cell', None)
+    return placed
 
 
 def frontier_balance_snapshot(
@@ -1806,7 +1861,13 @@ THEMES = {
     "supply chains / strategic dependencies": ["supply chain security", "supply chain resilience", "strategic dependency", "strategic dependencies", "critical raw materials", "critical minerals", "friendshoring", "reshoring"],
     "Horizon Europe / FP10 international participation": ["horizon europe", "fp10", "association agreement", "third country", "third-country", "associated country"],
     "science diplomacy": ["science diplomacy", "scientific diplomacy"],
-    "research talent / mobility / brain drain": ["research talent", "scientific talent", "researcher mobility", "researcher outflow", "researcher inflow", "scientists leaving", "brain drain", "brain gain", "talent retention", "talent attraction", "research careers"],
+    "research talent / mobility / brain drain": [
+        "research talent", "scientific talent", "researcher mobility", "researcher outflow", "researcher inflow",
+        "scientists leaving", "scientists return", "scientists returning", "scientists back",
+        "researchers return", "researchers returning", "researchers back", "returning researchers",
+        "overseas researchers", "return fellowship", "return fellowships", "re-entry fellowship", "reentry fellowship",
+        "brain drain", "brain gain", "talent retention", "talent attraction", "research careers"
+    ],
     "foresight / horizon scanning methodology": ["foresight methodology", "foresight method", "strategic foresight", "horizon scanning", "weak signal"],
     "scenario methods under uncertainty": ["scenario method", "scenario methodology", "scenario planning", "scenario design", "scenario construction", "uncertainty"],
     "anticipatory governance / strategic intelligence": ["anticipatory governance", "strategic intelligence", "anticipatory intelligence", "risk assessment"],
@@ -3013,6 +3074,13 @@ A_RI_INCIDENTAL_PATTERNS = [
     r'\bactions? (?:are |is )?part of\b.{0,100}\b(?:horizon europe|digital europe|innovation programme|innovation program)\b',
     r'\b(?:funded|co-funded|cofunded) by\b.{0,100}\b(?:horizon europe|european union|eu)\b',
     r'\bgrant agreement\b',
+    # A programme can be the provenance of a method/project without being the subject of
+    # the paper. This is common in Horizon Europe environmental/service studies.
+    r'\b(?:methodology|method|framework|approach|project)\b.{0,100}\b(?:from|under|within|developed in)\b.{0,80}\bhorizon europe\b',
+    r'\bhorizon europe\b.{0,80}\b(?:project|funded project|methodology|method|framework)\b',
+    # R&D spending used as one covariate among socioeconomic/environmental variables is not
+    # evidence about the R&I system itself.
+    r'\b(?:variable|variables|factor|factors|indicator|indicators|determinant|determinants|covariate|covariates|predictor|predictors|increases? in|decreases? in)\b.{0,220}\b(?:research and development|r&d)\s+(?:expenditure|expenditures|spending|investment|investments)\b',
 ]
 
 A_EVENT_RECAP_TITLE = re.compile(
@@ -3036,6 +3104,7 @@ A_ROUTINE_PRESTIGE_ACTION = re.compile(
 A_LOCAL_APPLIED_CUES = [
     'clinical implementation', 'clinical service', 'integrated service', 'patient service',
     'health service', 'hospital service', 'care pathway', 'clinical pathway',
+    'service innovation', 'service innovations',
 ]
 A_SYSTEM_LEVEL_RI_CUES = [
     'research policy', 'innovation policy', 'science policy', 'research security', 'knowledge security',
@@ -3123,9 +3192,12 @@ def _historical_subject_without_current_ri_implication(title: str, abstract: str
 
 def _routine_institutional_prestige_title(title: str) -> bool:
     t = clean_text(title)
+    # Awards/prize pages are not evidence about the European R&I system merely because
+    # their eligibility text mentions Horizon Europe, innovation ecosystems or knowledge
+    # transfer. A genuinely substantive report/study/analysis *about* an award programme
+    # can still pass through the explicit substantive-title rescue.
     return bool(
         A_ROUTINE_PRESTIGE_TITLE.search(t)
-        and A_ROUTINE_PRESTIGE_ACTION.search(t)
         and not A_EVENT_SUBSTANTIVE_TITLE.search(t)
     )
 
@@ -5199,6 +5271,114 @@ def _direct_journal_article_from_feed_entry(
     return _direct_journal_article_from_html(synthetic, link, source_cfg, floor)
 
 
+
+def _direct_journal_hub_entries(
+    html_text: str,
+    page_url: str,
+    source_cfg: dict[str, Any],
+    limit: int = 24,
+) -> list[Any]:
+    """Extract article-card metadata directly from a publisher hub.
+
+    Some publishers update their human-facing news hub before their RSS feed. Nature's
+    ``/news`` page is a concrete example: a same-day d41586 news story can be visible on
+    the hub while the ``type=news`` RSS endpoint still starts with the previous day. This
+    parser uses only publisher-hosted title/teaser/date metadata; it does not bypass the
+    normal A/B or C admission gates.
+    """
+    if not bool(source_cfg.get('parse_hub_cards')):
+        return []
+    try:
+        soup = BeautifulSoup(html_text or '', 'html.parser')
+    except Exception:
+        return []
+    domain = clean_text(source_cfg.get('domain')).lower().removeprefix('www.')
+    pattern = clean_text(source_cfg.get('article_path_regex')) or r'/articles/|/doi/'
+    seen: set[str] = set()
+    out: list[Any] = []
+    month_pat = r'(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)'
+
+    for a in soup.find_all('a', href=True):
+        href = urljoin(page_url, a.get('href', ''))
+        pu = urlparse(href)
+        host = (pu.hostname or '').lower().removeprefix('www.')
+        if not host or not (host == domain or host.endswith('.' + domain)):
+            continue
+        if not re.search(pattern, pu.path or '', re.I):
+            continue
+        title = clean_text(a.get_text(' ', strip=True))
+        if len(title.split()) < 4:
+            continue
+        key = normalized_link(href)
+        if not key or key in seen:
+            continue
+
+        # Prefer a card-sized ancestor instead of a large section containing many stories.
+        card = a.find_parent(['article', 'li'])
+        if card is None:
+            node = a
+            for _ in range(4):
+                node = node.parent if node else None
+                if node is None:
+                    break
+                txt = clean_text(node.get_text(' ', strip=True))
+                cls = ' '.join(node.get('class', [])) if hasattr(node, 'get') else ''
+                if len(txt) <= 1800 and (
+                    re.search(r'article|story|card|item|listing|row', cls, re.I)
+                    or re.search(rf'\b\d{{1,2}}\s+{month_pat}\s+20\d{{2}}\b', txt, re.I)
+                    or re.search(rf'\b{month_pat}\s+\d{{1,2}},?\s+20\d{{2}}\b', txt, re.I)
+                ):
+                    card = node
+                    break
+        context = clean_text(card.get_text(' ', strip=True) if card is not None else title)
+        if len(context) > 2200:
+            context = context[:2200]
+
+        raw_date = ''
+        for pat in (
+            rf'\b\d{{1,2}}\s+{month_pat}\s+20\d{{2}}\b',
+            rf'\b{month_pat}\s+\d{{1,2}},?\s+20\d{{2}}\b',
+        ):
+            m = re.search(pat, context, re.I)
+            if m:
+                raw_date = clean_text(m.group(0))
+                break
+        if not raw_date:
+            continue
+        try:
+            parsed = dateparser.parse(raw_date)
+        except Exception:
+            continue
+        if not parsed:
+            continue
+
+        desc = context
+        # Remove the title/date/type shells so the first-pass claim is the publisher teaser.
+        desc = re.sub(re.escape(title), ' ', desc, count=1, flags=re.I)
+        desc = re.sub(re.escape(raw_date), ' ', desc, count=1, flags=re.I)
+        desc = re.sub(r'\b(?:news feature|news q&a|news|comment|correspondence|editorial|world view|career feature|analysis)\b\s*[|·-]*', ' ', desc, flags=re.I)
+        desc = clean_text(desc)
+        if len(desc.split()) < 5:
+            desc = context
+
+        out.append(types.SimpleNamespace(
+            title=title,
+            link=href,
+            summary=desc,
+            description=desc,
+            published=parsed.date().isoformat(),
+            updated='',
+            published_parsed=None,
+            updated_parsed=None,
+            tags=[],
+            authors=[],
+        ))
+        seen.add(key)
+        if len(out) >= max(1, int(limit)):
+            break
+    return out
+
+
 def collect_direct_top_journals(
     sources: list[dict[str, Any]],
     warnings: list[str],
@@ -5268,7 +5448,13 @@ def collect_direct_top_journals(
         # not end the source: Science can fall back to its SPJ TOC and Nature can rely on RSS.
         hubs = [x for x in [hub] + fallback_hubs if x]
         for hub_url in hubs:
-            if len(found) >= links_per or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+            # A full RSS link budget must not suppress publisher hub-card parsing. Nature's
+            # feed can be full of yesterday's stories while a same-day d41586 item is already
+            # visible on /news. For sources without a card parser, the old link-budget short
+            # circuit remains in place.
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+                break
+            if len(found) >= links_per and not bool(src.get('parse_hub_cards')):
                 break
             try:
                 r = SESSION.get(hub_url, timeout=timeout, allow_redirects=True)
@@ -5276,6 +5462,17 @@ def collect_direct_top_journals(
                     transport_errors.append(f'hub HTTP {r.status_code}')
                     continue
                 soup = BeautifulSoup(r.text, 'html.parser')
+                for hub_entry in _direct_journal_hub_entries(r.text, r.url or hub_url, src, links_per):
+                    add_link(clean_text(getattr(hub_entry, 'link', '')), clean_text(getattr(hub_entry, 'title', '')))
+                    a_item, c_item = _direct_journal_article_from_feed_entry(hub_entry, src, DATE_FLOOR)
+                    if a_item:
+                        a_item['discovery_provenance'] = 'direct_top_journal_hub'
+                        a_item['provenance'] = ['direct_top_journal_hub']
+                        ab.append(a_item)
+                    if c_item:
+                        c_item['discovery_provenance'] = 'direct_top_journal_hub'
+                        c_item['source_domain'] = domain
+                        cc.append(c_item)
                 for a in soup.find_all('a', href=True):
                     href = urljoin(r.url, a.get('href', ''))
                     label = clean_text(a.get_text(' ', strip=True))
@@ -8123,6 +8320,10 @@ A_RETIRED_EXACT_TITLES = {
         "Structural Disparities and Firms' Capacity for Sustainability‐Oriented Transformation: Evidence From the European Union",
         'Greening the energy mix: the role of environmental policies in reducing fossil fuel consumption in EU-23 countries',
         'Energy-transition pressure and the asymmetric convergence of enterprise IoT adoption across Europe',
+        'The European Capital of Innovation Awards',
+        'Assessing the role and functioning of Science-Policy-Society Interfaces in EU Green Deal-related marine policies',
+        'The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union',
+        'The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries',
     ]
 }
 
@@ -9535,13 +9736,16 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
             "fragmentation of global science", "transatlantic / US–China S&T competition",
             "export controls / dual use", "critical and emerging technologies",
             "R&I competitiveness / technological capabilities", "supply chains / strategic dependencies",
-            "economic security and R&I",
+            "economic security and R&I", "research talent / mobility / brain drain",
         }
         narrow_external = contains_any(full, [
             'export control', 'semiconductor', 'advanced chip', 'compute infrastructure', 'compute access',
             'quantum', 'research cooperation', 'research collaboration', 'research security',
-            'research talent', 'scientific collaboration', 'critical raw material', 'critical mineral',
-            'biotech', 'biotechnology', 'biomedical technolog', 'battery', 'batteries', 'electric vehicle',
+            'research talent', 'scientific collaboration', 'scientists return', 'scientists returning',
+            'scientists back', 'researchers return', 'researchers returning', 'researchers back',
+            'return fellowship', 'return fellowships', 'brain drain', 'brain gain', 'talent attraction',
+            'critical raw material', 'critical mineral', 'biotech', 'biotechnology', 'biomedical technolog',
+            'battery', 'batteries', 'electric vehicle',
             'industrial policy', 'ai investment gap', 'frontier ai compute'
         ])
         hard_noise = contains_any(full, [
@@ -10659,6 +10863,13 @@ def anchor_news(
         nentities=set(n.get('_entities',[]))
         n_a_ontology=ontology_phrase_hits(ntext, 'a', {1,2})
         n_c_retrieval=ontology_phrase_hits(ntext, 'c', {1,2})
+        # Prefer an A anchor for the mechanism carried by the actual publishable event
+        # sentence. A story can mention several technologies in background text while its
+        # real new point is talent, research security, export controls, etc. Without this
+        # preference a broad 'critical technologies' anchor can win on token overlap and
+        # then fail claim-theme validation even though a strong specific A anchor exists.
+        claim_preview = _signal_what_claim(desc, headline)
+        claim_preview_themes = set(themes_for(f"{headline}. {claim_preview}")) & WATCH_SIGNAL_THEMES if claim_preview else set()
         best=None
         for a in internals:
             athemes=set(a.get('_themes',[]))
@@ -10703,6 +10914,11 @@ def anchor_news(
             if n_a_ontology:
                 score += min(1.5, 0.35*len(n_a_ontology))
             if any(t in SPECIFIC_ANCHOR_THEMES for t in shared): score+=1.0
+            if claim_preview_themes:
+                if shared & claim_preview_themes:
+                    score += 3.0
+                elif any(t in SPECIFIC_ANCHOR_THEMES for t in claim_preview_themes):
+                    score -= 2.5
             if best is None or score>best[0]: best=(score,a,sorted(shared))
         anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''; unanchored=False
         if best and best[0] >= 4.0:
@@ -10737,11 +10953,14 @@ def anchor_news(
             shared_themes=sorted(nthemes)[:1]
             score=3.5
         relation=signal_relation(text)
-        kind=signal_kind(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
         what=_signal_what_claim(n.get('_desc',''), source_headline)
         what=_clean_signal_claim_source_suffix(what, source, clean_text(n.get('source_domain', '')))
+        # Classify the public event claim, not background technologies in the surrounding
+        # article. This keeps a scientist-return programme in the research/talent lane even
+        # when the same Nature teaser also mentions AI, quantum, biotech or materials funding.
+        kind=signal_kind(what or text)
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue
@@ -12952,11 +13171,27 @@ def main() -> int:
         deepening["empty_cells_published"] = sum(1 for k in FRONTIER_CELL_ORDER if published_counts.get(k, 0) == 0)
         deepening["published_empty_cells"] = [k for k in FRONTIER_CELL_ORDER if published_counts.get(k, 0) == 0]
         deepening["published_qualifying"] = published_qualifying
+        published_balance = frontier_balance_snapshot(published_counts, state, advance_cursor=False)
+        deepening["undercovered_cells_published"] = int(published_balance.get("undercovered_cells", 0) or 0)
+        target_count = int(published_balance.get("target_count", 0) or 0)
+        deepening["published_target_count"] = target_count
+        deepening["published_undercovered_cells"] = [
+            k for k in FRONTIER_CELL_ORDER if int(published_counts.get(k, 0) or 0) < target_count
+        ]
+        annotate_automatic_matrix_cells((strand_a, strand_b, frontier_evidence), published_placements)
 
     previous_a_ids = {identity(internalize_previous(x)) for x in prev_a if isinstance(x, dict)}
     previous_b_ids = {identity(internalize_previous(x)) for x in prev_b if isinstance(x, dict)}
     new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
+    new_a_matrix_placed = sum(
+        1 for x in strand_a
+        if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids and clean_text(x.get("matrix_auto_cell"))
+    )
+    new_b_matrix_placed = sum(
+        1 for x in strand_b
+        if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids and clean_text(x.get("matrix_auto_cell"))
+    )
     new_ab_unique_retained = new_ab_unique_count(strand_a, strand_b, previous_a_ids | previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
     if min_new_c > 0 and new_c_count < min_new_c:
@@ -13083,7 +13318,7 @@ def main() -> int:
     state["last_completed_at"] = scheduler_completed.isoformat(timespec="minutes").replace("+00:00", "Z")
     if scheduler_completed != completed:
         state["actual_last_completed_at"] = completed_iso
-        state["schedule_compatibility"] = "legacy-hourly-six-hour-gate-adjusted-to-effective-four-hour-cadence"
+        state["schedule_compatibility"] = "legacy-hourly-six-hour-gate-aligned-to-next-fixed-four-hour-slot"
     else:
         state.pop("actual_last_completed_at", None)
         state.pop("schedule_compatibility", None)
@@ -13212,6 +13447,8 @@ def main() -> int:
             "new_a": new_a_count,
             "new_b": new_b_count,
             "new_ab_unique": new_ab_unique_retained,
+            "new_a_matrix_placed": new_a_matrix_placed,
+            "new_b_matrix_placed": new_b_matrix_placed,
             "new_c": new_c_count,
             "aged_out_this_scan": {k: int(v) for k, v in age_window_removed.items()},
             "aged_out_total_this_scan": int(sum(age_window_removed.values())),

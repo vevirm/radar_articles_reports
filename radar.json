@@ -13,7 +13,7 @@
       "16:17",
       "20:17"
     ],
-    "last_run_trigger": "unknown",
+    "last_run_trigger": "manual",
     "next_scheduled_slot_utc": "2026-09-02T00:17Z"
   },
   "scan_history": [
@@ -56,8 +56,8 @@
     {
       "started_at": "2026-09-01T20:13Z",
       "completed_at": "2026-09-01T20:23Z",
-      "trigger": "unknown",
-      "new_a": 5,
+      "trigger": "manual",
+      "new_a": 1,
       "new_b": 0,
       "new_c": 0,
       "health": "degraded"
@@ -77,7 +77,7 @@
     "strand_c_days": 60
   },
   "source_expansion_version": "v17.5.2-gap-report-recall",
-  "quality_profile_version": "v17.19.13-corpus-cleanup-memberstate-fp10-stale-pages",
+  "quality_profile_version": "v17.19.14-centrality-awards-project-provenance-service-variables",
   "aboutness_profile_version": "v17.9.0-source-length-aware",
   "matrix_profile_version": "v17.13.29-talent-capability-evidence",
   "display_claim_profile_version": "v17.13.28-source-specific-radar",
@@ -18254,13 +18254,13 @@
       ]
     },
     "last_run": "2026-09-01T20:23Z",
-    "last_completed_at": "2026-09-01T18:23Z",
+    "last_completed_at": "2026-09-01T18:17Z",
     "source_failure_institution_cursor": 30,
     "source_failure_query_cursor": 55,
     "source_failure_crossref_journal_cursor": 0,
     "direct_top_journal_cursor": 4,
     "actual_last_completed_at": "2026-09-01T20:23Z",
-    "schedule_compatibility": "legacy-hourly-six-hour-gate-adjusted-to-effective-four-hour-cadence"
+    "schedule_compatibility": "legacy-hourly-six-hour-gate-aligned-to-next-fixed-four-hour-slot"
   },
   "zero_config_scan": true,
   "admission_profile": "v17.13.1-eu-ri-geopolitics-core-with-material-external-shock-exception",
@@ -18290,9 +18290,9 @@
     "c_recovery_backfill_this_run": false
   },
   "scan_results": {
-    "new_a": 5,
+    "new_a": 1,
     "new_b": 0,
-    "new_ab_unique": 5,
+    "new_ab_unique": 1,
     "new_c": 0,
     "aged_out_this_scan": {
       "strand_a": 0,
@@ -18555,8 +18555,29 @@
       "stubborn_recovery_candidates": 0,
       "empty_cells_published": 0,
       "published_empty_cells": [],
-      "published_qualifying": 50
-    }
+      "published_qualifying": 50,
+      "undercovered_cells_published": 15,
+      "published_target_count": 7,
+      "published_undercovered_cells": [
+        "knowledge-A",
+        "knowledge-B",
+        "knowledge-C",
+        "knowledge-D",
+        "infrastructure-A",
+        "infrastructure-B",
+        "infrastructure-C",
+        "infrastructure-D",
+        "conversion-B",
+        "conversion-C",
+        "conversion-D",
+        "rules-A",
+        "rules-B",
+        "rules-C",
+        "rules-D"
+      ]
+    },
+    "new_a_matrix_placed": 0,
+    "new_b_matrix_placed": 0
   },
   "strand_a": [
     {
@@ -18595,129 +18616,6 @@
         "standards"
       ],
       "text_mode": "full_text",
-      "first_seen": "2026-09-01T20:13Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "The European Capital of Innovation Awards",
-      "authors": "European Innovation Council",
-      "source": "European Innovation Council",
-      "date": "2026-06-04",
-      "link": "https://eic.ec.europa.eu/eic-prizes/european-capital-innovation-awards_en",
-      "type": "research/policy paper",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Expanding – acting as a role model for other cities by supporting the dissemination and replication of tested solutions that boost the local innovation ecosystem; by promoting mutual learning, knowledge transfer and capacity building; and by enhancing cooperation and synergies between cities that are front-runners in driving the local innovation ecosystem, and those that are still exploring and testing their role as innovation enablers. Who should apply Cities can apply to only one of the two categories as long as it: has at least 50 000 inhabitants (please see further details and exceptions in the Rules of contest) is located in an EU Member State or an Associated Country to Horizon Europe Eligibility criteria The candidate cities must be located in one of the Member States or Horizon Europe Associated Countries. The European Capital of Innovation Awards.",
-      "core_message": "The calls were open till 4 August 2026, 17:00 CEST.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: horizon europe, innovation ecosystem; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        "horizon europe",
-        "innovation ecosystem",
-        "knowledge transfer"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "full_text",
-      "first_seen": "2026-09-01T20:13Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Assessing the role and functioning of Science-Policy-Society Interfaces in EU Green Deal-related marine policies",
-      "authors": "Ginevra Capurso, Emiliano Ramieri, Folco Soffietti, Paulina Ramírez‐Monsalve, Pierre Strosser, Froukje Maria Platjouw, Laura Bastide, Sašo Gorjanc, et al.",
-      "source": "Environmental Science & Policy",
-      "date": "2026-07-28",
-      "link": "https://doi.org/10.1016/j.envsci.2026.104450",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "This paper uses a methodology from the Horizon Europe CrossGov project to assess SPSIs in various policy and governance contexts, focusing on their role in promoting coherence in EU marine policies (Marine Strategy Framework Directive - MSFD, Water Framework Directive - WFD, Maritime Spatial Planning Directive - MSPD) and in delivering EGD objectives. Assessing the role and functioning of Science-Policy-Society Interfaces in EU Green Deal-related marine policies. The European Green Deal (EGD) proposes a transformative agenda that depends on the coherent design and implementation of environmental policies, including those related to the marine environment.",
-      "core_message": "Science-Policy-Society Interfaces (SPSIs) are central to this process.",
-      "relevance_note": "Direct European/EU relevance (EU); R&I evidence: horizon europe; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "EU"
-      ],
-      "ri_evidence": [
-        "horizon europe"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T20:13Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union",
-      "authors": "Melpomeni Masoura, Sonia Malefaki",
-      "source": "Environment Development and Sustainability",
-      "date": "2026-06-08",
-      "link": "https://doi.org/10.1007/s10668-026-07759-7",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union. Conversely, increases in gross domestic product per capita, non-renewable energy consumption, agricultural value added, research and development expenditures, and the Use of Internet Services and Integration of Digital Technology dimensions of DESI on increasing environmental degradation tend to exacerbate environmental degradation. The European Union (EU) has responded by adopting international protocols to mitigate climate change.",
-      "core_message": "The impact of socio-economic factors and digital performance on environmental sustainability: the case of EU.",
-      "relevance_note": "Direct European/EU relevance (european union, europe); R&I evidence: research and development; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "european union",
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        "research and development"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T20:13Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries",
-      "authors": "Anthony Arundel, David Gago, Nordine Es-Sadki",
-      "source": "The Journal of Academic Librarianship",
-      "date": "2026-07-28",
-      "link": "https://doi.org/10.1016/j.acalib.2026.103313",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Drawing on open innovation and innovation ecosystem perspectives, this paper analyses how consultation, co-creation, and collaboration with external partners contribute to the usefulness of knowledge for innovation. The study uses survey data from 290 academic libraries in 31 European countries to examine the usefulness of knowledge from library staff, faculty/researchers, and students for identifying innovation challenges and developing solutions. The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries.",
-      "core_message": "and collaboration with external partners contribute to the usefulness of knowledge for innovation.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: innovation ecosystem; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european",
-        "european countries"
-      ],
-      "ri_evidence": [
-        "innovation ecosystem"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
       "first_seen": "2026-09-01T20:13Z",
       "new_this_scan": true
     },
@@ -18860,7 +18758,8 @@
         "R-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "Council adopts first ever EU framework for science diplomacy",
@@ -18984,7 +18883,8 @@
         "K-C"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "rules-A"
     },
     {
       "title": "Marie Curie Alumni Association welcomes EU proposal for framework on science diplomacy",
@@ -19201,7 +19101,8 @@
         "I-C",
         "R-C"
       ],
-      "curator_cell_agreement": "differs"
+      "curator_cell_agreement": "differs",
+      "matrix_auto_cell": "infrastructure-D"
     },
     {
       "title": "Beyond ethics washing: evaluating the responsiveness of US, EU, and UN AI governance to expert warnings",
@@ -19292,7 +19193,8 @@
         "I-D"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "B"
+      "quadrant_claimed": "B",
+      "matrix_auto_cell": "conversion-B"
     },
     {
       "title": "Dual-use and Defence Research in Europe",
@@ -19336,7 +19238,8 @@
         "R-B"
       ],
       "curator_cell_agreement": "differs",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "conversion-B"
     },
     {
       "title": "Green manufacturing under geopolitical uncertainty: the role of artificial intelligence, environmental policy, and information in European car makers",
@@ -19489,7 +19392,8 @@
         "K-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "B"
+      "quadrant_claimed": "B",
+      "matrix_auto_cell": "rules-B"
     },
     {
       "title": "Executive Summary: Fragmented Europe: Dealing with China as a technology and innovation power",
@@ -19561,7 +19465,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-08-27T18:34Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "rules-D"
     },
     {
       "title": "Ireland: Interlocking factors shape the approach to China in science-tech innovation",
@@ -19928,7 +19833,8 @@
         "C-D"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "B"
+      "quadrant_claimed": "B",
+      "matrix_auto_cell": "knowledge-B"
     },
     {
       "title": "Joint Statement: MSCA: Research Talent is Europe’s Strategic Advantage.",
@@ -19973,7 +19879,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-08-29T19:04Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-A"
     },
     {
       "title": "EU and Egypt strengthen research and innovation partnership following Horizon Europe association",
@@ -20059,7 +19966,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-09-01T15:59Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-A"
     },
     {
       "title": "EC's Call for evidence on European ocean research and innovation strategy is closing soon",
@@ -20147,7 +20055,8 @@
       "matrix_quadrant": "C",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "Europe remains reliant on US digital technology and can be pressured to soften its own rules to preserve access, a classic rule-taking/productive-dependence configuration.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "rules-C"
     },
     {
       "title": "Associated Countries urge EU to keep FP10 open and research-led",
@@ -20416,7 +20325,8 @@
         "C-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "infrastructure-B"
     },
     {
       "title": "Made in China, Powered by Europe: Mapping the EU’s Strategic Leverage Over the People’s Republic of China",
@@ -20459,7 +20369,8 @@
       "matrix_quadrant": "A",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "European capability in several strategic high-technology niches supplies inputs China still needs, giving Europe a home-controlled chokepoint and leverage.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "infrastructure-A"
     },
     {
       "title": "JRC Security Research and Innovation Campus",
@@ -20715,7 +20626,8 @@
       "geo_evidence": [],
       "text_mode": "abstract_only",
       "first_seen": "2026-08-31T14:42Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "Four New EuroHPC JU Calls to Boost Quantum Innovation and Standardisation in Europe",
@@ -21212,7 +21124,8 @@
         "I-D",
         "I-B"
       ],
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "infrastructure-D"
     },
     {
       "title": "As open as possible? Comparing Scandinavian approaches to research security",
@@ -21349,7 +21262,8 @@
       ],
       "curator_cell_agreement": "agrees",
       "quadrant_claimed": "C",
-      "matrix_reaudit_profile": "v17.13.26-balanced-semantic-contract"
+      "matrix_reaudit_profile": "v17.13.26-balanced-semantic-contract",
+      "matrix_auto_cell": "knowledge-C"
     },
     {
       "title": "Research and innovation projects supporting the upcoming Circular Economy Act",
@@ -21595,7 +21509,8 @@
         "I-D",
         "C-D"
       ],
-      "curator_cell_agreement": "differs"
+      "curator_cell_agreement": "differs",
+      "matrix_auto_cell": "knowledge-D"
     },
     {
       "title": "Transforming European Competitiveness Under Conditions of Geoeconomic Fragmentation",
@@ -21686,7 +21601,8 @@
         "I-C"
       ],
       "curator_cell_agreement": "differs",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "infrastructure-C"
     },
     {
       "title": "A Research Agenda for the Greek Semiconductors Sector Ecosystem: Enabling the Transition from Emerging Capabilities to Strategic Integration",
@@ -21776,7 +21692,8 @@
         "R-D",
         "I-B"
       ],
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "rules-D"
     },
     {
       "title": "From Trade Dependence to Geopolitical Leverage: The EU in an Era of Weaponized Interdependence",
@@ -22254,7 +22171,8 @@
       "matrix_quadrant": "A",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "Repurposing existing European industrial and innovation capacity would increase both strategic capability and productive use of domestic assets, matching a home-champion conversion outcome.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "Global approach to research and innovation",
@@ -22340,7 +22258,8 @@
         "C-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "infrastructure-A"
     },
     {
       "title": "Cyber (Dis)armament in Practice: The EU’s Role in Governing Software Vulnerabilities in a Fragmented International Order",
@@ -22635,7 +22554,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-08-29T16:45Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "Europe’s venture capital gap and the financing of high-growth firms",
@@ -22678,7 +22598,8 @@
         "C-D"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "C"
+      "quadrant_claimed": "C",
+      "matrix_auto_cell": "conversion-D"
     },
     {
       "title": "Governing with cities: Europe's overlooked governance infrastructure | Demos Helsinki",
@@ -22754,7 +22675,8 @@
         "C-C"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "How ERC frontier research strengthens Europe’s competitiveness",
@@ -22881,7 +22803,8 @@
         "C-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "B"
+      "quadrant_claimed": "B",
+      "matrix_auto_cell": "rules-B"
     },
     {
       "title": "Europe’s Geo-Industrial Deal: A path to securing Europe’s competitiveness abroad",
@@ -22924,7 +22847,8 @@
       "matrix_quadrant": "A",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The proposed mechanism combines greater European industrial agency with stronger competitiveness and market access, matching an opening/home-champion outcome.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "Mapping of technology specialisation, complexity and relatedness of the EU and selected global partners – CEPS",
@@ -23041,7 +22965,8 @@
       "matrix_quadrant": "B",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The recommended rules posture seeks greater autonomy and deterrence while explicitly accepting higher economic costs and friction, matching costly autonomy.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "rules-B"
     },
     {
       "title": "The Rise of Collective Actions and the Risk to Portugal’s Economy",
@@ -23157,7 +23082,8 @@
       "matrix_quadrant": "B",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The instrument seeks more domestic control and production but the reviewed source identifies competitiveness costs from overprotection, fitting costly autonomy.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "conversion-B"
     },
     {
       "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
@@ -23237,7 +23163,8 @@
       ],
       "text_mode": "abstract_only",
       "first_seen": "2026-08-29T10:39Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-D"
     },
     {
       "title": "Are we ready to handle PV waste? A review of PV recycling regulations in Europe, the United States, China, and India",
@@ -23989,7 +23916,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-09-01T14:50Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-A"
     },
     {
       "title": "Multi-level governance for improving air quality in cities in the UNECE region: a science policy perspective",
@@ -24052,7 +23980,8 @@
       "a_context_evidence": [],
       "text_mode": "full_text",
       "first_seen": "2026-09-01T11:11Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-C"
     },
     {
       "title": "International cooperation with Serbia in research and innovation",
@@ -24367,7 +24296,8 @@
       "matrix_quadrant": "C",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "Foreign investment improves supply and productive capacity while leaving technology capability externally dependent, matching productive dependence in conversion.",
-      "curator_cell_agreement": "differs"
+      "curator_cell_agreement": "differs",
+      "matrix_auto_cell": "conversion-C"
     },
     {
       "title": "Commission appoints Maive Rute as Deputy Director-General of the Joint Research Centre",
@@ -24464,7 +24394,8 @@
       ],
       "text_mode": "abstract_only",
       "first_seen": "2026-08-31T18:21Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "conversion-D"
     },
     {
       "title": "Proposing an EU Earth Observation science service",
@@ -24573,7 +24504,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-09-01T11:11Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "Ready4EIC: new training programme for innovative SMEs in EU enlargement countries",
@@ -25383,7 +25315,8 @@
       ],
       "manual_recovery": true,
       "first_seen": "2026-08-27T17:46Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "infrastructure-A"
     },
     {
       "title": "Simplifying European Union Policy: Tech Sovereignty Package — virtual discussion summary",
@@ -25426,7 +25359,8 @@
         "I-B",
         "C-B"
       ],
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "rules-B"
     },
     {
       "title": "Strategic procurement in Global Europe: Why EU preferences risk undermining its own ambitions",
@@ -25470,7 +25404,8 @@
       "matrix_quadrant": "B",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The preference policy seeks more European control but can reduce effectiveness and competitiveness when EU suppliers are absent or high-cost, fitting costly autonomy.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "conversion-B"
     },
     {
       "title": "EU Defence Series: European Autonomy in Orbit",
@@ -25514,7 +25449,8 @@
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The observed condition is externally controlled but performance-enabling space access: Europe remains dependent on US/commercial capabilities while continuing to obtain essential services through them.",
       "curator_cell_agreement": "differs",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "infrastructure-C"
     },
     {
       "title": "After the Draghi Report: The Role of Central Europe in Strengthening EU Competitiveness",
@@ -25821,7 +25757,8 @@
       "matrix_quadrant": "D",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The source links external technological dependence to both constrained autonomy and weaker frontier/economic performance, supporting a double-loss infrastructure outcome.",
-      "curator_cell_agreement": "differs"
+      "curator_cell_agreement": "differs",
+      "matrix_auto_cell": "infrastructure-D"
     },
     {
       "title": "Neoclassical realist research program for the 21st century: From topography and traditions to an abductive practical guide",
@@ -26167,7 +26104,8 @@
       "review_resolved_url": "",
       "source_review_status": "reviewed_pass_core_gate",
       "source_reviewed_at": "2026-08-26T09:35Z",
-      "source_review_basis": "The exact Council PDF was reviewed. The Council working document for the Cloud and AI Development Act explicitly links European cloud/AI infrastructure capacity to economic security, sovereignty, resilience, competitiveness and reducing critical external dependencies."
+      "source_review_basis": "The exact Council PDF was reviewed. The Council working document for the Cloud and AI Development Act explicitly links European cloud/AI infrastructure capacity to economic security, sovereignty, resilience, competitiveness and reducing critical external dependencies.",
+      "matrix_auto_cell": "infrastructure-A"
     },
     {
       "title": "Grand Challenge on Quantum Sensors for Inertial Navigation",
@@ -26361,7 +26299,8 @@
       ],
       "text_mode": "full_text",
       "first_seen": "2026-09-01T12:05Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "infrastructure-A"
     },
     {
       "title": "Research and technology infrastructures in the European hydrogen economy: Status, needs and innovation concepts",
@@ -26760,7 +26699,8 @@
       "a_context_evidence": [],
       "text_mode": "abstract_only",
       "first_seen": "2026-09-01T09:39Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-C"
     },
     {
       "title": "Mission‐Led and Place‐Based Policy Outcomes in European Regions",
@@ -27468,7 +27408,8 @@
       "a_context_evidence": [],
       "text_mode": "abstract_only",
       "first_seen": "2026-09-01T09:50Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-C"
     },
     {
       "title": "Does Entrepreneurial Churn Reach Incumbent R&D? Corruption, Time Horizons, and Evidence from Large European Firms",
@@ -28615,7 +28556,8 @@
         "R-B"
       ],
       "curator_cell_agreement": "agrees",
-      "quadrant_claimed": "A"
+      "quadrant_claimed": "A",
+      "matrix_auto_cell": "conversion-A"
     },
     {
       "title": "The causal effects of R&D grants: Evidence from a regression discontinuity",
@@ -28979,7 +28921,8 @@
       "matrix_quadrant": "C",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "The source says EU competitiveness is being supported by attracting and retaining international students and researchers and by converting study/research stays into longer-term careers. Capability improves, but the talent input is international/third-country and therefore depends on continued access and retention.",
-      "quadrant_claimed": "C"
+      "quadrant_claimed": "C",
+      "matrix_auto_cell": "knowledge-C"
     },
     {
       "title": "Health under the Global Gateway: achievements and future prospects – CEPS",
@@ -29097,7 +29040,8 @@
       ],
       "text_mode": "abstract_only",
       "first_seen": "2026-08-27T22:45Z",
-      "new_this_scan": false
+      "new_this_scan": false,
+      "matrix_auto_cell": "knowledge-C"
     },
     {
       "title": "Event Report: Supporting the Ukrainian Research Ecosystem through International Exchange and Collaboration",
@@ -29257,7 +29201,8 @@
       "matrix_quadrant": "D",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "China-controlled critical-material supply is an external infrastructure/input dependence that has already disrupted production and raised costs, supporting an adverse dependence outcome.",
-      "curator_cell_agreement": "agrees"
+      "curator_cell_agreement": "agrees",
+      "matrix_auto_cell": "infrastructure-D"
     },
     {
       "title": "Competitiveness Council (Research) 29 May 2026",
@@ -30121,7 +30066,8 @@
       "matrix_quadrant": "D",
       "matrix_classification_source": "reviewed_underlying_source",
       "matrix_evidence_basis": "A formally autonomy-oriented EU rule set is weakened by exemptions and fragmented implementation, leaving both strategic effect and industrial performance short of the intended outcome.",
-      "curator_cell_agreement": "differs"
+      "curator_cell_agreement": "differs",
+      "matrix_auto_cell": "rules-D"
     },
     {
       "title": "International collaboration in research: insights from pharmaceutical multinationals",
@@ -30666,7 +30612,8 @@
       "quadrant_implied": "A",
       "matrix_quadrant": "A",
       "matrix_classification_source": "reviewed_underlying_source",
-      "matrix_evidence_basis": "The Horizon Europe EdTech Talents project uses reciprocal cross-border and cross-sector secondments across European research systems to build researchers’ skills, professional networks and applied knowledge. The study finds that this mobility supports professional development and brain circulation, including in widening research systems, strengthening Europe’s own research workforce and knowledge base."
+      "matrix_evidence_basis": "The Horizon Europe EdTech Talents project uses reciprocal cross-border and cross-sector secondments across European research systems to build researchers’ skills, professional networks and applied knowledge. The study finds that this mobility supports professional development and brain circulation, including in widening research systems, strengthening Europe’s own research workforce and knowledge base.",
+      "matrix_auto_cell": "knowledge-A"
     },
     {
       "title": "How can citizen participation truly include those most affected by inequality? - ECAS",
@@ -31829,5 +31776,15 @@
       "No usable sitemap: eit.europa.eu; using bounded institutional HTML fallback (15 page(s))"
     ],
     "transport_failure_warning_count": 5
+  },
+  "release_cleanup": {
+    "release": "v17.19.14",
+    "removed_strand_a_false_positives": [
+      "The European Capital of Innovation Awards",
+      "Assessing the role and functioning of Science-Policy-Society Interfaces in EU Green Deal-related marine policies",
+      "The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union",
+      "The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries"
+    ],
+    "reason": "high-confidence admission regressions identified in the 2026-09-01T20:13Z manual run"
   }
 }

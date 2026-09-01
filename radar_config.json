@@ -882,7 +882,7 @@
   "crossref_public_min_interval_seconds": 1.2,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.17.5-formal-evidence-a-before-c",
+  "signal_discovery_version": "v17.19.14-nature-hub-talent-return",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -933,7 +933,7 @@
     "global research talent competition scientists mobility funding",
     "academic mobility researchers global science policy"
   ],
-  "quality_profile_version": "v17.19.13-corpus-cleanup-memberstate-fp10-stale-pages",
+  "quality_profile_version": "v17.19.14-centrality-awards-project-provenance-service-variables",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -2226,8 +2226,10 @@
         "semiconductor OR quantum OR biotechnology OR biotech OR \"artificial intelligence\" OR \"industrial policy\" OR \"technology regulation\""
       ],
       "fallback_hubs": [
+        "https://www.nature.com/latest-news",
         "https://www.nature.com/nature/articles"
-      ]
+      ],
+      "parse_hub_cards": true
     },
     {
       "name": "Science",

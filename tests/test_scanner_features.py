@@ -817,6 +817,46 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertFalse(ev["a_pass"])
         self.assertEqual(ev["centrality_reason"], "routine_award_or_prestige_announcement")
 
+    def test_awards_landing_page_is_not_strand_a_evidence(self):
+        title = "The European Capital of Innovation Awards"
+        abstract = (
+            "Cities in EU Member States or Horizon Europe Associated Countries can apply. "
+            "The award promotes local innovation ecosystems, knowledge transfer and capacity building."
+        )
+        ev = scan.gate_scope(title, abstract, "", 1, source_kind="institutional")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "routine_award_or_prestige_announcement")
+
+    def test_horizon_project_provenance_does_not_make_marine_policy_paper_ri_central(self):
+        title = "Assessing the role and functioning of Science-Policy-Society Interfaces in EU Green Deal-related marine policies"
+        abstract = (
+            "This paper uses a methodology from the Horizon Europe CrossGov project to assess SPSIs "
+            "in EU marine-policy governance and delivery of Green Deal objectives."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "ri_not_central")
+
+    def test_rd_expenditure_as_environmental_covariate_is_not_ri_central(self):
+        title = "The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union"
+        abstract = (
+            "Increases in gross domestic product per capita, non-renewable energy consumption, agricultural value added, "
+            "research and development expenditures and digital indicators are tested as factors associated with environmental degradation."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "ri_not_central")
+
+    def test_academic_library_service_innovation_is_not_core_ri_system_evidence(self):
+        title = "The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries"
+        abstract = (
+            "Drawing on innovation ecosystem perspectives, the study uses survey data from 290 academic libraries in 31 European countries "
+            "to examine service innovation and collaboration."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "local_applied_study_not_ri_system_evidence")
+
     def test_local_clinical_service_research_is_not_core_eu_ri_evidence(self):
         title = "PS09 Building an integrated psychodermatology service in central Europe: clinical implementation and research experience from Pécs, Hungary"
         abstract = (
@@ -1575,6 +1615,94 @@ class V171913CadenceJournalAndCorpusCleanupTests(unittest.TestCase):
         _a, c = scan._direct_journal_article_from_feed_entry(entry, nature, scan.dt.date(2026,5,1))
         self.assertIsNotNone(c)
         self.assertEqual(c.get('source'), 'Nature')
+
+    def test_nature_news_hub_card_can_feed_same_day_talent_signal(self):
+        direct = {x.get('name'): x for x in scan.CONFIG.get('direct_top_journal_sources', [])}
+        nature = dict(direct['Nature'])
+        nature['parse_hub_cards'] = True
+        html = """<html><body><ul><li class='app-article-list-row__item'>
+        <a href='/articles/d41586-026-02636-9'>India has an ambitious plan to lure scientists back — will its plan work?</a>
+        <p>Initiatives to attract Indian researchers who are working abroad do not offer long-term income security, some scientists say. India launched a return programme for researchers.</p>
+        <span>News | 01 Sep 2026</span>
+        </li></ul></body></html>"""
+        entries = scan._direct_journal_hub_entries(html, 'https://www.nature.com/news', nature, 10)
+        self.assertEqual(len(entries), 1)
+        _a, c = scan._direct_journal_article_from_feed_entry(entries[0], nature, scan.dt.date(2026,5,1))
+        self.assertIsNotNone(c)
+        self.assertIn('research talent / mobility / brain drain', c.get('_themes', []))
+
+    def test_full_nature_feed_does_not_suppress_newer_news_hub_card(self):
+        import types, time
+        from unittest import mock
+        direct = {x.get('name'): x for x in scan.CONFIG.get('direct_top_journal_sources', [])}
+        nature = dict(direct['Nature'])
+        nature['google_news_always'] = False
+        nature['google_news_queries'] = []
+        nature['fallback_hubs'] = []
+        feed_entries = [types.SimpleNamespace(
+            title=f'Unrelated Nature research item number {i}',
+            link=f'https://www.nature.com/articles/example-{i}',
+            summary='A basic science result without European research policy relevance.',
+            description='', published_parsed=time.struct_time((2026,8,31,0,0,0,0,243,-1)),
+            updated_parsed=None, published='', updated='', tags=[], authors=[]
+        ) for i in range(4)]
+        hub_html = """<html><body><article>
+        <a href='/articles/d41586-026-02636-9'>India has an ambitious plan to lure scientists back — will its plan work?</a>
+        <p>News | 01 Sep 2026 India launched a public programme to entice overseas researchers to return with research grants.</p>
+        </article></body></html>"""
+        class Resp:
+            def __init__(self, url, text='', content=b''):
+                self.status_code=200; self.url=url; self.text=text; self.content=content
+                self.headers={'content-type':'text/html' if text else 'application/rss+xml'}
+        def fake_get(url, **kwargs):
+            if 'format=rss' in url:
+                return Resp(url, content=b'<rss/>')
+            if url == nature['hub']:
+                return Resp(url, text=hub_html, content=hub_html.encode('utf-8'))
+            return Resp(url, text='<html></html>', content=b'<html></html>')
+        with mock.patch.object(scan.SESSION, 'get', side_effect=fake_get), \
+             mock.patch.object(scan.feedparser, 'parse', return_value=types.SimpleNamespace(entries=feed_entries)), \
+             mock.patch.dict(scan.CONFIG, {'direct_top_journal_links_per_source':4, 'direct_top_journal_pages_per_source':2}, clear=False):
+            _ab, cc = scan.collect_direct_top_journals([nature], [], stage_deadline=None, execution_stats={})
+        self.assertTrue(any(x.get('source') == 'Nature' and 'lure scientists back' in x.get('headline','') for x in cc))
+
+    def test_nature_scientist_return_signal_prefers_talent_anchor_over_broad_tech_anchor(self):
+        import types, time
+        direct = {x.get('name'): x for x in scan.CONFIG.get('direct_top_journal_sources', [])}
+        nature = direct['Nature']
+        entry = types.SimpleNamespace(
+            title='India has an ambitious plan to lure scientists back — will its plan work?',
+            link='https://www.nature.com/articles/d41586-026-02636-9',
+            summary=('India launched a public programme to entice overseas researchers to return, with research grants. '
+                     'The scheme also targets artificial intelligence, quantum computing, biotechnology and advanced materials.'),
+            description='', published_parsed=time.struct_time((2026,9,1,0,0,0,1,244,-1)),
+            updated_parsed=None, published='', updated='', tags=[], authors=[]
+        )
+        _a, c = scan._direct_journal_article_from_feed_entry(entry, nature, scan.dt.date(2026,5,1))
+        anchors = [
+            {'title':'Europe research talent attraction and brain circulation', 'summary':'Europe competes globally to attract and retain research talent and researchers.', 'source':'Policy source', 'date':'2026-08-01', 'link':'https://example.org/talent', 'type':'research/policy paper', 'strand':'A', 'eu_relevance':'direct'},
+            {'title':'The critical in critical technologies', 'summary':'Europe needs quantum, AI and biotechnology capability.', 'source':'Policy source', 'date':'2026-08-01', 'link':'https://example.org/tech', 'type':'research/policy paper', 'strand':'A', 'eu_relevance':'direct'},
+        ]
+        rows = scan.anchor_news([c], anchors)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['watch_theme'], 'research talent / mobility / brain drain')
+        self.assertEqual(rows[0]['signal_kind'], 'research / talent')
+        self.assertIn('research talent', rows[0]['anchor'].lower())
+
+    def test_run_trigger_falls_back_to_native_github_event_name(self):
+        from unittest import mock
+        with mock.patch.dict(scan.os.environ, {'GITHUB_EVENT_NAME':'workflow_dispatch'}, clear=True):
+            self.assertEqual(scan.run_trigger_label(), 'manual')
+        with mock.patch.dict(scan.os.environ, {'GITHUB_EVENT_NAME':'schedule'}, clear=True):
+            self.assertEqual(scan.run_trigger_label(), 'scheduled')
+
+    def test_matrix_auto_cell_annotation_is_non_circular_display_metadata(self):
+        rows = [[{'title':'Example A','link':'https://example.org/a','strand':'A'}]]
+        placements = [{'title':'Example A','link':'https://example.org/a','cell':'knowledge-A'}]
+        placed = scan.annotate_automatic_matrix_cells(rows, placements)
+        self.assertEqual(placed, 1)
+        self.assertEqual(rows[0][0]['matrix_auto_cell'], 'knowledge-A')
+        self.assertNotIn('matrix_quadrant', rows[0][0])
 
     def test_next_automatic_slot_is_fixed_four_hour_schedule(self):
         after = scan.dt.datetime(2026, 9, 1, 18, 45, tzinfo=scan.dt.timezone.utc)

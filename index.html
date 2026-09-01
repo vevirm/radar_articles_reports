@@ -283,7 +283,7 @@ function allDetails(x){
     detailRow('Type',x.type),detailRow('Strand',x.strand||((x.headline)?'C':'')),detailRow('EU relevance',x.eu_relevance),
     detailRow('Source tier',x.source_tier),detailRow('Discovery',provenanceLabel(x)),detailRow('Tracked since',x.first_seen?fmtDate(x.first_seen):''),
     detailRow('Watch theme',x.watch_theme),detailRow('Signal type',x.signal_type),detailRow('Signal kind',x.signal_kind),
-    detailRow('Matrix row',x.matrix_dimension),detailRow('Matrix outcome',x.matrix_quadrant||x.quadrant_implied),detailRow('Admission route',x.a_route),detailRow('Evidence status',x.evidence_status),detailRow('Text mode',x.source_text_mode||x.text_mode),detailRow('Anchor',x.anchor),
+    detailRow('Matrix row',x.matrix_dimension),detailRow('Matrix outcome',x.matrix_quadrant||x.quadrant_implied),detailRow('Automatic Matrix cell',x.matrix_auto_cell),detailRow('Admission route',x.a_route),detailRow('Evidence status',x.evidence_status),detailRow('Text mode',x.source_text_mode||x.text_mode),detailRow('Anchor',x.anchor),
   ].join('');
   const link=x.link?`<div class="detail-k">Publication link</div><div class="detail-v"><a href="${esc(x.link)}" target="_blank" rel="noopener">Open link to publication ↗</a></div>`:'';
   const inference=bridge?`<div class="detail-note">The Europe-impact bridge below is a radar inference based on this source plus an admitted same-domain EU context anchor; it is not presented as the source author's own wording.</div>`:'';

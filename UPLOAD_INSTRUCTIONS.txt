@@ -6,7 +6,7 @@ Use the full ZIP supplied by ChatGPT. There is no separate workflow file to inst
 2. Upload/replace the repository contents in GitHub the same way you normally do.
 3. Run the scanner.
 
-The package contains the correct four-hour workflow. If GitHub web upload retains the older hidden workflow anyway, this release is backward-compatible: the tests will not block the scanner, and the legacy hourly/6-hour due gate is internally adjusted to an effective four-hour cadence.
+The package contains the correct fixed four-hour workflow. If GitHub web upload retains the older hidden hourly/6-hour workflow anyway, this release is backward-compatible: tests do not block the scanner, and the scanner aligns the old six-hour gate so it becomes due on the next real four-hour slot (00:17, 04:17, 08:17, 12:17, 16:17, 20:17 UTC).
 
 Rules preserved:
 - automatic scanner cadence: every 4 hours
