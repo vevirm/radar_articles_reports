@@ -1447,7 +1447,7 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         html=(ROOT/'index.html').read_text(encoding='utf-8')
         self.assertIn('<strong>Source:</strong>', html)
         self.assertIn('<strong>What happened:</strong>', html)
-        self.assertIn('Automatic scan every 4 hours', html)
+        self.assertIn('automatic every 4 hours', html.lower())
         self.assertIn('60 days from first insertion', html)
 
     def test_nature_and_science_remain_first_class_sources(self):
@@ -1489,3 +1489,97 @@ class ReaderFacingMatrixRotationTests(unittest.TestCase):
         self.assertEqual(scan.CONFIG.get("matrix_balance_rotation_mode"), "recurring_every_scan")
         self.assertGreater(int(scan.CONFIG.get("frontier_gap_deepening_queries_per_wave", 0)), 0)
         self.assertGreater(int(scan.CONFIG.get("frontier_gap_deepening_max_waves", 0)), 0)
+
+
+class V171913CadenceJournalAndCorpusCleanupTests(unittest.TestCase):
+    def test_bare_member_states_are_not_eu_scope(self):
+        title = "Green Growth and Technological Innovation in BRICS Economies"
+        abstract = "The study compares Brazil, Russia, India, China and South Africa and discusses cooperation among member states."
+        rel, ev = scan.eu_evidence(title, abstract, "")
+        self.assertIsNone(rel)
+        self.assertNotIn("member states", [str(x).lower() for x in ev])
+
+    def test_eu_member_states_still_count_when_eu_is_explicit(self):
+        rel, ev = scan.eu_evidence(
+            "The Performance of EU Member States in Terms of Industry 5.0",
+            "The study compares technological innovation across European Union member states.",
+            "",
+        )
+        self.assertEqual(rel, "direct")
+        self.assertTrue(ev)
+
+    def test_fp10_requires_framework_programme_context(self):
+        bad = "FP10 Dysregulated aryl hydrocarbon receptor expression in keratinocytes and immune cells"
+        good = "LERU requests safeguards for dual-use research in FP10"
+        self.assertFalse(scan._contextual_fp10(bad))
+        self.assertTrue(scan._contextual_fp10(good))
+        self.assertNotIn("fp10", [str(x).lower() for x in scan._ri_hits(bad)])
+        self.assertIn("fp10", [str(x).lower() for x in scan._ri_hits(good)])
+
+    def test_visible_old_institutional_date_blocks_stale_page(self):
+        item = {
+            "title": "The new generation of microscopic robots",
+            "source": "European Research Council",
+            "date": "2026-05-20",
+            "link": "https://erc.europa.eu/projects-statistics/science-stories/new-generation-microscopic-robots",
+            "type": "research/policy paper",
+            "summary": "The new generation of microscopic robots 20 December 2011 Toxic spills can be devastating.",
+        }
+        self.assertTrue(scan._institutional_visible_old_date_conflict(item))
+        self.assertFalse(scan.final_ab_candidate_worthiness(item))
+
+    def test_short_official_landing_pages_are_not_evidence(self):
+        for item in [
+            {"title":"AI Watch","summary":"Discover our work Focus on News article Latest news","link":"https://ai-watch.ec.europa.eu/index_en","type":"research/policy paper"},
+            {"title":"Science for policy","summary":"Latest news Publications and data Related links","link":"https://joint-research-centre.ec.europa.eu/index_en","type":"research/policy paper"},
+            {"title":"Digital transformation, cybersecurity","summary":"Discover our work Latest news","link":"https://joint-research-centre.ec.europa.eu/what-we-do/scientific-portfolios/digital-transformation-cybersecurity_en","type":"research/policy paper"},
+        ]:
+            self.assertTrue(scan.institutional_evidence_landing_page(item), item["title"])
+
+    def test_retired_cleanup_titles_cannot_return_from_history(self):
+        item = {
+            "title": "Insights into the development and key factors of five European governance innovations for forest ecosystem service provision",
+            "source": "Forest Policy and Economics",
+            "date": "2026-08-20",
+            "link": "https://doi.org/10.1016/j.forpol.2026.103891",
+            "type": "peer-reviewed article",
+            "summary": "Five European governance innovations for forest ecosystem service provision.",
+        }
+        self.assertTrue(scan._saved_ab_high_confidence_precision_reject(item))
+        self.assertFalse(scan.final_ab_candidate_worthiness(item))
+
+    def test_news_source_domain_suffix_is_removed_from_public_claim(self):
+        cleaned = scan._clean_signal_claim_source_suffix(
+            "UK venture capital investment rebounds as software and biotech attract funding ft.com.",
+            "Financial Times",
+            "ft.com",
+        )
+        self.assertEqual(cleaned, "UK venture capital investment rebounds as software and biotech attract funding.")
+
+    def test_nature_news_feed_is_a_first_class_direct_route(self):
+        direct = {x.get('name'): x for x in scan.CONFIG.get('direct_top_journal_sources', [])}
+        nature = direct['Nature']
+        self.assertIn('https://www.nature.com/nature/articles?format=rss&type=news', nature.get('feed_urls', []))
+        self.assertEqual(nature.get('hub'), 'https://www.nature.com/news')
+        self.assertIn('https://www.nature.com/nature/articles', nature.get('fallback_hubs', []))
+        import types, time
+        entry = types.SimpleNamespace(
+            title="India has an ambitious plan to lure scientists back — will it work?",
+            link="https://www.nature.com/articles/d41586-026-02636-9",
+            summary=("India is trying to entice researchers who moved abroad to return with generous fellowships and research funding. "
+                     "Researchers will be selected from strategic fields such as artificial intelligence, quantum computing, biotechnology and advanced materials."),
+            description="",
+            published_parsed=time.struct_time((2026,9,1,0,0,0,1,244,-1)),
+            updated_parsed=None, published="1 Sep 2026", updated="", tags=[], authors=[],
+        )
+        _a, c = scan._direct_journal_article_from_feed_entry(entry, nature, scan.dt.date(2026,5,1))
+        self.assertIsNotNone(c)
+        self.assertEqual(c.get('source'), 'Nature')
+
+    def test_next_automatic_slot_is_fixed_four_hour_schedule(self):
+        after = scan.dt.datetime(2026, 9, 1, 18, 45, tzinfo=scan.dt.timezone.utc)
+        nxt = scan.next_automatic_scan_slot(after)
+        self.assertEqual(nxt.isoformat(), '2026-09-01T20:17:00+00:00')
+        html = (ROOT / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('id="scheduleState"', html)
+        self.assertIn('Next automatic', html)

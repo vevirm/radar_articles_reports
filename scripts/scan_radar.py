@@ -170,6 +170,40 @@ def scheduler_state_completed_at(completed, workflow_text=None):
         return completed - dt.timedelta(hours=LEGACY_WORKFLOW_COMPAT_OFFSET_HOURS)
     return completed
 
+
+FIXED_AUTOMATIC_SCHEDULE_HOURS_UTC = (0, 4, 8, 12, 16, 20)
+FIXED_AUTOMATIC_SCHEDULE_MINUTE_UTC = 17
+
+
+def next_automatic_scan_slot(after: dt.datetime) -> dt.datetime:
+    """Return the next fixed four-hour GitHub schedule slot in UTC."""
+    if after.tzinfo is None:
+        after = after.replace(tzinfo=dt.timezone.utc)
+    after = after.astimezone(dt.timezone.utc)
+    for day_offset in range(3):
+        day = after.date() + dt.timedelta(days=day_offset)
+        for hour in FIXED_AUTOMATIC_SCHEDULE_HOURS_UTC:
+            candidate = dt.datetime(
+                day.year, day.month, day.day, hour, FIXED_AUTOMATIC_SCHEDULE_MINUTE_UTC,
+                tzinfo=dt.timezone.utc,
+            )
+            if candidate > after:
+                return candidate
+    return after + dt.timedelta(hours=4)
+
+
+def run_trigger_label() -> str:
+    """Human-readable workflow trigger for public cadence telemetry."""
+    raw = clean_text(os.environ.get('RADAR_RUN_TRIGGER', '')).lower() if 'clean_text' in globals() else str(os.environ.get('RADAR_RUN_TRIGGER', '')).strip().lower()
+    rescue = str(os.environ.get('RADAR_RESCUE_MODE', '')).strip().lower() in {'1', 'true', 'yes', 'on'}
+    if raw == 'schedule':
+        return 'scheduled'
+    if raw == 'push':
+        return 'push'
+    if raw == 'workflow_dispatch':
+        return 'rescue' if rescue else 'manual'
+    return 'unknown'
+
 def _apply_rule_fix_source_extensions() -> None:
     sources = CONFIG.setdefault("institution_sources", [])
     existing = {
@@ -2380,6 +2414,53 @@ def union_eu_word(text: str, document_text: str = "") -> bool:
     return not _eu_defined_as_non_union(document_text or text)
 
 
+def _contextual_fp10(text: str) -> bool:
+    """Treat FP10 as the EU framework programme only when nearby text proves that meaning.
+
+    Conference/session codes such as ``FP10`` in biomedical abstracts are common and must
+    not become European R&I evidence merely because the token happens to match the shorthand
+    used for the next Framework Programme.
+    """
+    low = normalized(text)
+    if not re.search(r'\bfp10\b', low, re.I):
+        return False
+    context = (
+        r'(?:horizon|framework\s+programme|framework\s+program|research|innovation|funding|'
+        r'european\s+union|european\s+commission|council|erc|msca|eic|dual[- ]use)'
+    )
+    return bool(
+        re.search(context + r'.{0,80}\bfp10\b', low, re.I)
+        or re.search(r'\bfp10\b.{0,80}' + context, low, re.I)
+    )
+
+
+def _eu_direct_scope_hits(text: str, document_text: str = "") -> list[str]:
+    """Return unambiguous EU-scope evidence.
+
+    Bare ``member state(s)`` is not enough: BRICS, NATO and many other organisations have
+    member states too. Likewise bare ``FP10`` is accepted only when nearby text proves it is
+    the EU Framework Programme.
+    """
+    doc = clean_text(document_text or text)
+    direct_terms = [x for x in EU_DIRECT if normalized(x) not in {"member state", "member states", "fp10"}]
+    hits = distinct_matches(text, direct_terms)
+    low_doc = normalized(doc)
+    member_hits = distinct_matches(text, ["member state", "member states"])
+    eu_context = bool(
+        union_eu_word(text, doc)
+        or "european union" in low_doc
+        or "european commission" in low_doc
+        or "european parliament" in low_doc
+        or "horizon europe" in low_doc
+        or "european research area" in low_doc
+    )
+    if member_hits and eu_context:
+        hits.extend(member_hits)
+    if _contextual_fp10(text):
+        hits.append("fp10")
+    return list(dict.fromkeys(hits))
+
+
 def _aboutness_text_mode(abstract: str, body: str) -> str:
     """Choose an aboutness test that matches the amount of source text available."""
     aw = len(clean_text(abstract).split())
@@ -2512,7 +2593,7 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     abstract = clean_text(abstract)
     ta = f"{title}. {abstract}"
 
-    title_direct = distinct_matches(title, EU_DIRECT)
+    title_direct = _eu_direct_scope_hits(title, ta)
     title_generic = distinct_matches(title, EU_GENERIC)
     title_member = bounded_matches(title, MEMBER_STATE_SCOPE)
     if union_eu_word(title, ta):
@@ -2527,7 +2608,7 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     ta_ri = _ri_hits(ta)
     abstract_scope_hits: list[str] = []
     for sent in split_sentences(abstract):
-        sent_direct = distinct_matches(sent, EU_DIRECT)
+        sent_direct = _eu_direct_scope_hits(sent, ta)
         sent_generic = distinct_matches(sent, EU_GENERIC)
         sent_member = bounded_matches(sent, MEMBER_STATE_SCOPE)
         bare_eu = union_eu_word(sent, ta)
@@ -2541,12 +2622,8 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         return "direct", list(dict.fromkeys(abstract_scope_hits))[:4]
 
     full = f"{ta}. {body[:50000]}"
-    direct_body = distinct_matches(full, EU_DIRECT)
-    strong_body_scope = distinct_matches(full, [
-        "european commission", "european parliament", "horizon europe", "fp10",
-        "european research area", "european economic security", "eu research",
-        "eu innovation", "eu science", "eu technology",
-    ])
+    direct_body = _eu_direct_scope_hits(full, full)
+    strong_body_scope = _eu_direct_scope_hits(full, full)
     eu_count = 0 if _eu_defined_as_non_union(full) else len(re.findall(r"\beu\b", normalized(full)))
     # Body-only scope must be explicit/repeated.  Merely mentioning two European
     # countries somewhere in a long document is no longer treated as EU scope.
@@ -3085,6 +3162,8 @@ def _central_ri_hits(text: str) -> list[str]:
     """Return R&I terms that are strong enough to establish subject centrality."""
     txt = _strip_relevance_boilerplate(text)
     hits = distinct_matches(txt, A_CENTRAL_RI_TERMS)
+    if 'fp10' in [normalized(x) for x in hits] and not _contextual_fp10(txt):
+        hits = [x for x in hits if normalized(x) != 'fp10']
     for sent in split_sentences(txt):
         if any(re.search(pat, normalized(sent), re.I) for pat in A_RI_INCIDENTAL_PATTERNS):
             continue
@@ -3098,7 +3177,7 @@ def _central_ri_hits(text: str) -> list[str]:
 
 
 def _scope_hits_in_sentence(sent: str, document: str) -> list[str]:
-    hits = distinct_matches(sent, EU_DIRECT + EU_GENERIC) + bounded_matches(sent, MEMBER_STATE_SCOPE)
+    hits = _eu_direct_scope_hits(sent, document) + distinct_matches(sent, EU_GENERIC) + bounded_matches(sent, MEMBER_STATE_SCOPE)
     if union_eu_word(sent, document):
         hits.append('EU')
     return list(dict.fromkeys(hits))
@@ -3418,6 +3497,8 @@ def _ri_hits(text: str) -> list[str]:
     """R&I evidence for Strand A, keeping generic technology out unless an R&I mechanism is explicit."""
     txt = _strip_relevance_boilerplate(text)
     hits = distinct_matches(txt, A_RI_CORE)
+    if 'fp10' in [normalized(x) for x in hits] and not _contextual_fp10(txt):
+        hits = [x for x in hits if normalized(x) != 'fp10']
     if research_talent_flow_signal(txt) and 'research-talent flow / brain drain' not in hits:
         hits.append('research-talent flow / brain drain')
     for sent in split_sentences(txt):
@@ -5237,7 +5318,7 @@ def collect_direct_top_journals(
                     gtitle = clean_text(getattr(entry, 'title', ''))
                     raw_desc = getattr(entry, 'summary', '') or getattr(entry, 'description', '') or ''
                     gdesc = clean_text(raw_desc)
-                    for suffix in [g_source_name, name, clean_text(g_source_name).replace('|', ' ')]:
+                    for suffix in [g_source_name, name, clean_text(g_source_name).replace('|', ' '), g_source_domain, f"www.{g_source_domain}" if g_source_domain else ""]:
                         if suffix and gtitle.lower().endswith(' - ' + suffix.lower()):
                             gtitle = gtitle[:-(len(suffix) + 3)].strip()
                     if not gtitle:
@@ -5283,20 +5364,32 @@ def collect_direct_top_journals(
 
     ab_all: list[dict[str, Any]] = []
     c_all: list[dict[str, Any]] = []
+    source_counts: dict[str, dict[str, Any]] = {}
     with cf.ThreadPoolExecutor(max_workers=max(1, min(4, len(sources) or 1))) as ex:
-        futs = [ex.submit(one_source, src) for src in sources if isinstance(src, dict)]
+        futs = {
+            ex.submit(one_source, src): clean_text(src.get('name', ''))
+            for src in sources if isinstance(src, dict)
+        }
         for fut in cf.as_completed(futs):
+            source_name = futs.get(fut, '')
             try:
                 ab, cc, err = fut.result()
                 ab_all.extend(ab); c_all.extend(cc)
+                source_counts[source_name] = {
+                    'ab_candidates': len(ab),
+                    'c_candidates': len(cc),
+                    'status': 'warning' if err and err != 'budget' else ('budget' if err == 'budget' else 'ok'),
+                }
                 if err and err != 'budget':
                     warnings.append(f'Direct journal watch: {err}')
             except Exception as e:
+                source_counts[source_name] = {'ab_candidates': 0, 'c_candidates': 0, 'status': f'error:{type(e).__name__}'}
                 warnings.append(f'Direct journal watch worker: {type(e).__name__}')
     if isinstance(execution_stats, dict):
         execution_stats.setdefault('direct_top_journals', set()).update(executed)
         execution_stats['direct_top_journal_ab_candidates'] = int(execution_stats.get('direct_top_journal_ab_candidates', 0)) + len(ab_all)
         execution_stats['direct_top_journal_c_candidates'] = int(execution_stats.get('direct_top_journal_c_candidates', 0)) + len(c_all)
+        execution_stats['direct_top_journal_source_counts'] = source_counts
     return dedupe_candidates(ab_all), c_all
 
 
@@ -7971,8 +8064,10 @@ def institutional_evidence_landing_page(item: dict[str, Any]) -> bool:
     if institutional_container_page(title, link, typ):
         return True
     try:
-        path = normalized(urlparse(link).path)
+        raw_path = (urlparse(link).path or '').lower()
+        path = normalized(raw_path)
     except Exception:
+        raw_path = ''
         path = ''
     # PDFs, repository handles, DOI-like records and explicit report/study pages are products.
     if any(x in path for x in ['/repository/handle/', '/bitstream/', '/doi/', '.pdf']) or re.search(
@@ -7982,15 +8077,88 @@ def institutional_evidence_landing_page(item: dict[str, Any]) -> bool:
         return False
     low = normalized(f'{title}. {summary}')
     nav_cues = sum(1 for cue in [
-        'latest news', 'expert groups', 'aims, plans', 'funding opportunities',
-        'related links', 'see also', 'documents and publications', 'publications and data',
+        'latest news', 'news article', 'expert groups', 'aims, plans', 'funding opportunities',
+        'related links', 'see all', 'see also', 'discover our work', 'focus on',
+        'documents and publications', 'publications and data', 'publications study',
     ] if cue in low)
+    # Short institutional home/portfolio pages are discovery surfaces, not evidence products.
+    # These paths repeatedly produced AI Watch/JRC portfolio pages with a fresh child-news
+    # date attached to the standing page itself.
+    if len(title.split()) <= 7 and (
+        raw_path.endswith('/index_en') or raw_path.endswith('/index')
+        or '/what-we-do/scientific-portfolios/' in raw_path
+        or ('platform' in normalized(title) and nav_cues >= 1)
+    ):
+        return True
     # Short topic pages such as the Commission's "Open science" page can contain excellent
     # child evidence, but the overview itself should not masquerade as a dated paper.
     if len(title.split()) <= 6 and nav_cues >= 1 and standing_institutional_page(title, summary):
         return True
     if len(title.split()) <= 4 and 'latest news' in low and any(x in low for x in ['policy', 'horizon europe', 'research and innovation', 'r&i']):
         return True
+    return False
+
+
+A_RETIRED_EXACT_TITLES = {
+    normalized(x) for x in [
+        'FP10 Dysregulated aryl hydrocarbon receptor expression in keratinocytes and immune cells in atopic dermatitis influences its homeostatic and anti-inflammatory effects',
+        'The new generation of microscopic robots',
+        'AI Watch',
+        'Digital transformation, cybersecurity',
+        'Science for policy',
+        'Knowledge Valorisation Platform',
+        'Knowledge Exchange Platform',
+        'Green Growth, Green Technological Innovation, and Environmental Sustainability: Evidence from BRICS Economies',
+        'Political and legal aspects of BRICS cooperation in the field of artificial intelligence: Towards the development of an alternative regulatory approach',
+        'The WhatsApp World Order: Learning to Live with the New Global Political Economy',
+        'Exploring the Nexus Between Intangible Assets and Firm Value: The Role of Innovation Resources',
+        'Insights into the development and key factors of five European governance innovations for forest ecosystem service provision',
+        'The Ukraine and Eastern Europe Model in Local Economic Improvement and Cultivation Strategy',
+        'Recession and economic depression reflections in Ireland: Insights from working professionals, managers and entrepreneurs',
+        'Democracy and Economic Structural Drivers of Green Supply Chain Management: Evidence From European Economies',
+        'Comparing the Foreign Policy Identities of the United States of America and the European Union in Climate Communications and National Narratives',
+        'Sustainable Development and Trade: Strengthening EU-Lao PDR Cooperation through the EU-ASEAN Partnership',
+        'Sustainable Business Models and Environmental Innovation Capacity: The Moderating Role of Board Effectiveness',
+        'Enabling a Circular Water Transition: Identifying Governance Pathways for Wastewater Reuse',
+        "Structural Disparities and Firms' Capacity for Sustainability‐Oriented Transformation: Evidence From the European Union",
+        'Greening the energy mix: the role of environmental policies in reducing fossil fuel consumption in EU-23 countries',
+        'Energy-transition pressure and the asymmetric convergence of enterprise IoT adoption across Europe',
+    ]
+}
+
+
+def _institutional_visible_old_date_conflict(item: dict[str, Any]) -> bool:
+    """Reject a standing institutional page whose own visible date proves it is old.
+
+    Some institutional pages expose a current crawl/update date in metadata while the body
+    visibly repeats the article title followed by its original publication date.  This is a
+    high-confidence stale-page pattern, not a general rule against papers that discuss history.
+    """
+    if not isinstance(item, dict):
+        return False
+    title = clean_text(item.get('title', ''))
+    summary = clean_text(item.get('summary', ''))
+    raw_date = clean_text(item.get('date', ''))
+    if not title or not summary or not raw_date:
+        return False
+    try:
+        item_date = dateparser.parse(raw_date).date()
+    except Exception:
+        return False
+    month = r'(?:January|February|March|April|May|June|July|August|September|October|November|December)'
+    for m in re.finditer(rf'\b\d{{1,2}}\s+{month}\s+(20\d{{2}})\b', summary, re.I):
+        try:
+            year = int(m.group(1))
+        except Exception:
+            continue
+        if year > item_date.year - 2:
+            continue
+        around = normalized(summary[max(0, m.start()-260):m.start()+40])
+        title_norm = normalized(title)
+        # Use a title prefix for long titles so punctuation/truncation does not decide this.
+        prefix = ' '.join(title_norm.split()[:8])
+        if (title_norm and title_norm in around) or (prefix and len(prefix.split()) >= 4 and prefix in around):
+            return True
     return False
 
 
@@ -8006,6 +8174,8 @@ def final_ab_candidate_worthiness(item: dict[str, Any]) -> bool:
     title = clean_text(item.get('title', ''))
     summary = clean_text(item.get('summary', ''))
     typ = normalized(item.get('type', ''))
+    if normalized(title) in A_RETIRED_EXACT_TITLES:
+        return False
     scholarly = any(x in typ for x in ['peer-reviewed', 'journal', 'preprint', 'article', 'commentary'])
     if scholarly:
         if _historical_subject_without_current_ri_implication(title, summary, ''):
@@ -8018,6 +8188,8 @@ def final_ab_candidate_worthiness(item: dict[str, Any]) -> bool:
                 return False
     else:
         if document_exclusion_reason(title, '', clean_text(item.get('link', '')), typ):
+            return False
+        if _institutional_visible_old_date_conflict(item):
             return False
         if institutional_evidence_landing_page(item):
             return False
@@ -8368,6 +8540,10 @@ def _saved_ab_high_confidence_precision_reject(item: dict[str, Any]) -> bool:
     title = clean_text(item.get('title', ''))
     summary = clean_text(item.get('summary', ''))
     typ = normalized(item.get('type', ''))
+    if normalized(title) in A_RETIRED_EXACT_TITLES:
+        return True
+    if _institutional_visible_old_date_conflict(item):
+        return True
     scholarly = any(x in typ for x in ['peer-reviewed', 'journal', 'preprint', 'article'])
     if not scholarly and _routine_institutional_prestige_title(title):
         return True
@@ -8653,6 +8829,10 @@ def surgical_precision_cleanup(previous: dict[str, Any]) -> tuple[dict[str, Any]
             text = normalized(f"{title} {clean_text(item.get('summary', ''))}")
             hard_noise = False
             if not title:
+                hard_noise = True
+            elif normalized(title) in A_RETIRED_EXACT_TITLES:
+                hard_noise = True
+            elif _institutional_visible_old_date_conflict(item):
                 hard_noise = True
             elif normalized(item.get("a_route", "")) == "external-strategic-shock" or bool(item.get("external_eu_bridge_is_inference")):
                 hard_noise = True
@@ -9685,7 +9865,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             title = clean_text(getattr(e, "title", ""))
             raw_desc = getattr(e, "summary", "") or getattr(e, "description", "")
             desc = clean_text(raw_desc)
-            for suffix in [source_name, source_name.replace("|", " ")]:
+            for suffix in [source_name, source_name.replace("|", " "), source_domain, f"www.{source_domain}" if source_domain else ""]:
                 if suffix and title.lower().endswith(" - " + suffix.lower()):
                     title = title[:-(len(suffix) + 3)].strip()
             if not title or not factual_news(title, desc):
@@ -10355,21 +10535,20 @@ def _signal_what_claim(desc: str, headline: str) -> str:
     return fallback if _signal_claim_is_substantive(fallback) else ''
 
 
-def _clean_signal_claim_source_suffix(claim: str, source: str) -> str:
+def _clean_signal_claim_source_suffix(claim: str, source: str, source_domain: str = "") -> str:
     """Keep the event sentence separate from its visible Source label.
 
-    Google News descriptions often repeat the publisher name at the end of the first
-    sentence. Public cards already render Source explicitly, so "... Financial Times."
-    should not become part of What happened.
+    Google News can append either the publisher name (``Financial Times``) or its host
+    (``ft.com``). Public cards already render Source explicitly, so neither belongs in
+    ``What happened`` or the public headline.
     """
     out = clean_text(claim)
     src = clean_text(source).strip(' .')
-    if not out or not src:
+    domain = clean_text(source_domain).lower().removeprefix('www.').strip(' .')
+    if not out:
         return out
-    variants = {src, src.replace('|', ' ')}
+    variants = {x for x in [src, src.replace('|', ' ') if src else '', domain, f"www.{domain}" if domain else ''] if x}
     for variant in sorted(variants, key=len, reverse=True):
-        if not variant:
-            continue
         candidate = re.sub(
             r'(?:\s*[-–—|:]\s*|\s+)' + re.escape(variant) + r'[.!?]*$',
             '', out, flags=re.I,
@@ -10562,7 +10741,7 @@ def anchor_news(
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
         what=_signal_what_claim(n.get('_desc',''), source_headline)
-        what=_clean_signal_claim_source_suffix(what, source)
+        what=_clean_signal_claim_source_suffix(what, source, clean_text(n.get('source_domain', '')))
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue
@@ -12909,10 +13088,43 @@ def main() -> int:
         state.pop("actual_last_completed_at", None)
         state.pop("schedule_compatibility", None)
 
+    trigger = run_trigger_label()
+    next_slot = next_automatic_scan_slot(completed)
+    prior_history = [dict(x) for x in previous.get("scan_history", []) if isinstance(x, dict)]
+    if not prior_history and clean_text(previous.get("run_completed_at") or previous.get("last_updated")):
+        prior_results = previous.get("scan_results") if isinstance(previous.get("scan_results"), dict) else {}
+        prior_history.append({
+            "started_at": clean_text(previous.get("run_started_at")),
+            "completed_at": clean_text(previous.get("run_completed_at") or previous.get("last_updated")),
+            "trigger": "unknown_pre_telemetry",
+            "new_a": int(prior_results.get("new_a", 0) or 0),
+            "new_b": int(prior_results.get("new_b", 0) or 0),
+            "new_c": int(prior_results.get("new_c", 0) or 0),
+            "health": clean_text(previous.get("scan_health")),
+        })
+    prior_history.append({
+        "started_at": now_iso,
+        "completed_at": completed_iso,
+        "trigger": trigger,
+        "new_a": int(new_a_count),
+        "new_b": int(new_b_count),
+        "new_c": int(new_c_count),
+        "health": health,
+    })
+    scan_history = prior_history[-12:]
+
     data = {
         "last_updated": completed_iso,
         "run_started_at": now_iso,
         "run_completed_at": completed_iso,
+        "scan_schedule": {
+            "automatic_cadence": "every_4_hours",
+            "cron_utc": "17 0,4,8,12,16,20 * * *",
+            "scheduled_slots_utc": ["00:17", "04:17", "08:17", "12:17", "16:17", "20:17"],
+            "last_run_trigger": trigger,
+            "next_scheduled_slot_utc": next_slot.isoformat(timespec="minutes").replace("+00:00", "Z"),
+        },
+        "scan_history": scan_history,
         "first_scan_complete": True,
         "corpus_start_date": output_corpus_floor.isoformat(),
         "preferred_corpus_start_date": DATE_FLOOR.isoformat(),
@@ -13155,6 +13367,11 @@ def main() -> int:
             "major_scholarly_publishers_tracked": len(CONFIG.get("major_scholarly_publishers", [])),
             "priority_journals_tracked": len(CONFIG.get("crossref_priority_journals", [])),
             "priority_journal_queries": len(CONFIG.get("crossref_priority_journal_queries", [])),
+            "direct_top_journals_planned": [clean_text(x.get('name')) for x in direct_journal_batch if isinstance(x, dict)],
+            "direct_top_journals_executed": sorted(executed_direct_journals),
+            "direct_top_journal_ab_candidates": int(execution_stats.get('direct_top_journal_ab_candidates', 0) or 0),
+            "direct_top_journal_c_candidates": int(execution_stats.get('direct_top_journal_c_candidates', 0) or 0),
+            "direct_top_journal_source_counts": dict(execution_stats.get('direct_top_journal_source_counts', {}) or {}),
             "foresight_author_bank": len(foresight_author_bank),
             "foresight_author_planned": len(foresight_author_batch),
             "foresight_author_executed": foresight_author_executed_count,

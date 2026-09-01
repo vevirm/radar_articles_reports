@@ -1,3 +1,18 @@
+# v17.19.13 — visible four-hour cadence + conservative A cleanup + Nature News lane
+
+- Bundles the latest completed live state and performs a one-time conservative Strand-A cleanup: 402 A records become 380. Exactly 22 high-confidence legacy false positives are removed; B remains 24 and C remains 5. This is not a broad re-audit of defensible borderline evidence.
+- Keeps the one good new A from the latest run (Aalto venture-capital/innovation financing) and removes the stale ERC “new generation of microscopic robots” page whose body visibly dates the story to 20 December 2011. Public retained-new counts are therefore 1 A, 0 B and 1 C.
+- Fixes bare `member states` as an EU-scope shortcut. `Member States` now establishes Europe/EU only when the text actually identifies the EU/European Union context, preventing BRICS and other non-EU blocs from leaking into A.
+- Fixes ambiguous `FP10`: the token counts as the EU Framework Programme only with nearby Horizon/research/innovation/funding/ERC/MSCA/EIC-style context. Conference/session codes such as the dermatology `FP10` false positive no longer establish EU or R&I scope.
+- Adds a high-confidence stale institutional-page check and tighter standing landing-page handling for pages such as AI Watch, Science for policy and portfolio/platform hubs. Child reports/news remain discoverable; the hub itself is not stored as evidence.
+- Cleans Google News publisher suffixes from the public Strand-C “What happened” text (`ft.com`, publisher names) and repairs the latest Financial Times venture-capital signal to the direct FT article link while preserving Google News as discovery provenance.
+- Adds Nature’s direct News RSS surface (`nature.com/nature/articles?format=rss&type=news`) and makes `nature.com/news` the primary HTML hub, with the research-article listing retained as fallback alongside the existing research feed. The Nature Basu scientist-return pattern is regression-tested as a C candidate, so Nature News/Comment-style material no longer depends only on generic publisher HTML or scholarly indexes.
+- Adds explicit direct-journal telemetry to `radar.json`: planned/executed top-journal checks plus A/B and C candidate counts by source. The next live JSON will show whether Nature, Science and the other priority journals actually produced candidates, rather than only showing that they were configured.
+- Makes four-hour rolling visible in both JSON and the public status bar. `scan_schedule` records the fixed UTC slots (00:17, 04:17, 08:17, 12:17, 16:17, 20:17), the next slot and the last run trigger; `scan_history` keeps recent run completions. Push/manual runs remain extra and do not replace scheduled runs.
+- The latest uploaded run was only about 55 minutes after the previous one, so it was not proof of the automatic four-hour schedule. This release deliberately labels the pre-telemetry trigger as unknown; the next live runs will distinguish `scheduled`, `push`, `manual` and `rescue` honestly.
+- A/B/frontier remain cumulative. Only Strand C expires 60 days after `first_seen`. Scan-state/cursors are preserved exactly; no recall/state reset.
+- Main workflow security boundary is unchanged: no stored repo credential during scanning, non-`radar.json` changes are isolated before push credentials exist, and only `radar.json` can be staged. Historical workflow is byte-for-byte unchanged.
+
 # v17.19.12 — C anchor precision + journal-source retrieval repair
 
 - Tightens Strand-C anchoring so a broad technology theme cannot connect unrelated technologies. The live false positive `Evolving radio astronomy and its impact on Africa` can no longer anchor to the US EV-supply-chain/AI-fintech paper.

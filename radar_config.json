@@ -933,7 +933,7 @@
     "global research talent competition scientists mobility funding",
     "academic mobility researchers global science policy"
   ],
-  "quality_profile_version": "v17.18.2-content-not-provenance-strategic-bridge",
+  "quality_profile_version": "v17.19.13-corpus-cleanup-memberstate-fp10-stale-pages",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -2212,17 +2212,21 @@
   "direct_top_journal_sources": [
     {
       "name": "Nature",
-      "hub": "https://www.nature.com/nature/articles",
+      "hub": "https://www.nature.com/news",
       "domain": "nature.com",
       "article_path_regex": "/articles/",
       "always": true,
       "feed_urls": [
+        "https://www.nature.com/nature/articles?format=rss&type=news",
         "https://www.nature.com/nature/articles?format=rss"
       ],
       "google_news_always": true,
       "google_news_queries": [
         "researchers OR scientists OR universities OR \"research funding\" OR \"science policy\" OR \"research security\" OR \"academic mobility\" OR doctoral",
         "semiconductor OR quantum OR biotechnology OR biotech OR \"artificial intelligence\" OR \"industrial policy\" OR \"technology regulation\""
+      ],
+      "fallback_hubs": [
+        "https://www.nature.com/nature/articles"
       ]
     },
     {

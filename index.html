@@ -107,8 +107,8 @@
     </header>
 
     <div class="statusbar"><div class="wrap status-inner">
-      <span class="pill">Scanner · every 4 hours + manual</span>
-      <span class="pill">Automatic scan every 4 hours · C signals stay 60 days</span>
+      <span class="pill">Scanner · every 4 hours + manual · automatic every 4 hours schedule</span>
+      <span id="scheduleState" class="pill">Next automatic · pending</span>
       <span id="scanState" class="pill warn">Last run health · pending</span>
       <span id="lastScan" class="pill">Last completion · pending</span>
       <span class="pill">Evidence weight · same source-merit rules as Stuff</span>
@@ -328,11 +328,13 @@ async function loadRadar(){
     const d={...raw,strand_a:(raw.strand_a||[]).filter(publicDisplayOk),strand_b:(raw.strand_b||[]).filter(publicDisplayOk),strand_c:(raw.strand_c||[]).filter(publicDisplayOk)};state.data=d;
     const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
-    const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";const ageMs=completed?(Date.now()-new Date(completed).getTime()):0;const overdue=Boolean(completed&&Number.isFinite(ageMs)&&ageMs>7*60*60*1000);
-    document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${overdue?"overdue":(d.scan_health==="ok"?"healthy":"degraded")}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(!overdue&&d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent=(explicitCompletion?"Last completion · ":"Last recorded run · ")+(completed?fmtDateTime(completed):"pending");
+    const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";const ageMs=completed?(Date.now()-new Date(completed).getTime()):0;const overdue=Boolean(completed&&Number.isFinite(ageMs)&&ageMs>6*60*60*1000);
+    const sched=d.scan_schedule||{};const next=sched.next_scheduled_slot_utc||"";const trig=String(sched.last_run_trigger||"").replaceAll('_',' ');
+    document.getElementById("scheduleState").textContent=`Automatic · every 4 hours${next?` · next ${fmtDateTime(next)}`:""}`;
+    document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${overdue?"overdue":(d.scan_health==="ok"?"healthy":"degraded")}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(!overdue&&d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent=(explicitCompletion?"Last completion · ":"Last recorded run · ")+(completed?fmtDateTime(completed):"pending")+(trig?` · ${trig}`:"");
     const aged=sr.aged_out_this_scan||{};const cAged=Number(aged.strand_c||0);const ageNote=cAged?`${cAged} Strand C signal${cAged===1?'':'s'} expired after 60 days in the radar. A/B evidence is cumulative.`:'';
     showNote("rotationNote",ageNote);showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
-  }catch(e){document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
+  }catch(e){document.getElementById("scheduleState").textContent="Automatic · every 4 hours";document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>
 </body>
