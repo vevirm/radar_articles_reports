@@ -864,7 +864,7 @@
   "institution_tier3_min_words": 1200,
   "admission_profile": "v17.13.1-eu-ri-geopolitics-core-with-material-external-shock-exception",
   "scan_budget_seconds": 1320,
-  "network_reserve_seconds": 60,
+  "network_reserve_seconds": 100,
   "request_timeout_seconds": 12,
   "scholarly_api_timeout_seconds": 12,
   "scholarly_api_workers": 8,
@@ -2164,13 +2164,13 @@
   "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources.",
   "c_min_new_per_successful_scan": 1,
   "c_floor_rescue_enabled": true,
-  "c_floor_rescue_min_seconds_remaining": 110,
-  "c_floor_rescue_stage_seconds": 80,
+  "c_floor_rescue_min_seconds_remaining": 65,
+  "c_floor_rescue_stage_seconds": 60,
   "c_floor_rescue_windows_hours": [
     336,
     720
   ],
-  "c_floor_rescue_queries_per_wave": 6,
+  "c_floor_rescue_queries_per_wave": 4,
   "c_floor_rescue_queries": [
     "Europe research security cooperation universities China",
     "EU semiconductor quantum biotech AI research investment partnership",
@@ -2183,6 +2183,82 @@
     "EU standards regulation research innovation emerging technology",
     "Europe science diplomacy research partnership United States China",
     "EU research funding cut increase strategic technology",
-    "European universities research security foreign interference"
-  ]
+    "European universities research security foreign interference",
+    "scientists return fellowship research talent India Europe competition",
+    "Europe scientist recruitment talent competition United States India China",
+    "China biomedical regulation emerging technology Europe research policy",
+    "US China battery industrial policy Europe research innovation"
+  ],
+  "c_floor_post_reserve_seconds": 20,
+  "priority_policy_journal_watchlist": [
+    "Research Policy",
+    "Science and Public Policy",
+    "Studies in Higher Education",
+    "New Political Economy",
+    "Scientometrics",
+    "Minerva",
+    "Higher Education",
+    "Research Evaluation",
+    "Futures",
+    "Technological Forecasting and Social Change"
+  ],
+  "priority_policy_journal_watchlist_note": "Source-first scholarly lane for research policy, mobility, innovation systems, geoeconomics and foresight. These venues never bypass the same European/EU + substantive R&I admission gate.",
+  "direct_top_journal_sources": [
+    {
+      "name": "Nature",
+      "hub": "https://www.nature.com/nature/articles",
+      "domain": "nature.com",
+      "article_path_regex": "/articles/",
+      "always": true
+    },
+    {
+      "name": "Science",
+      "hub": "https://www.science.org/toc/science/current",
+      "domain": "science.org",
+      "article_path_regex": "/doi/10\\\\.1126/",
+      "always": true
+    },
+    {
+      "name": "Nature Communications",
+      "hub": "https://www.nature.com/ncomms/articles",
+      "domain": "nature.com",
+      "article_path_regex": "/articles/"
+    },
+    {
+      "name": "Science Advances",
+      "hub": "https://www.science.org/toc/sciadv/current",
+      "domain": "science.org",
+      "article_path_regex": "/doi/10\\\\.1126/"
+    },
+    {
+      "name": "Proceedings of the National Academy of Sciences",
+      "hub": "https://www.pnas.org/recent",
+      "domain": "pnas.org",
+      "article_path_regex": "/doi/10\\\\.1073/"
+    },
+    {
+      "name": "Nature Human Behaviour",
+      "hub": "https://www.nature.com/nathumbehav/articles",
+      "domain": "nature.com",
+      "article_path_regex": "/articles/"
+    },
+    {
+      "name": "Nature Machine Intelligence",
+      "hub": "https://www.nature.com/natmachintell/articles",
+      "domain": "nature.com",
+      "article_path_regex": "/articles/"
+    },
+    {
+      "name": "Nature Biotechnology",
+      "hub": "https://www.nature.com/nbt/articles",
+      "domain": "nature.com",
+      "article_path_regex": "/articles/"
+    }
+  ],
+  "direct_top_journal_rotating_sources_per_scan": 2,
+  "direct_top_journal_links_per_source": 18,
+  "direct_top_journal_pages_per_source": 7,
+  "direct_top_journal_timeout_seconds": 9,
+  "direct_top_journal_stage_seconds": 220,
+  "direct_top_journal_policy": "Nature and Science are checked directly every ordinary scan; two additional elite journals rotate through a direct publisher-page lane. Crossref still checks the complete top-journal and priority-policy watchlists source-first. Direct journal pages can feed A/B or, when they are current developments rather than A/B evidence, the C candidate pool. No journal prestige bypasses relevance/quality gates."
 }

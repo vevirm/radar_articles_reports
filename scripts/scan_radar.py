@@ -2881,6 +2881,12 @@ A_INCIDENTAL_EU_SCOPE_PATTERNS = [
     r'\bbeyond (?:its |the )?(?:original |initial )?\b.{0,100}\beuropean\b.{0,80}\b(?:context|contexts|setting|settings|case|cases|framework|model)\b',
     r'\b(?:original|initial|earlier) european\b.{0,80}\b(?:context|contexts|setting|settings|framework|model)\b',
     r'\b(?:concept|framework|model|approach|theory)\b.{0,80}\b(?:developed|originated|derived|established)\b.{0,80}\b(?:in|from) europe\b',
+    # Global/bibliometric papers sometimes mention Europe only inside a geography list.
+    # That is not European study scope, even when the title contains generic R&I words.
+    r'\b(?:leading|top|largest|main)\s+(?:contributor|contributors|country|countries|region|regions)\b.{0,180}\beurope\b',
+    r'\binternational collaborations?\b.{0,180}\beurope\b',
+    r'\bacross europe,?\s+(?:africa|asia|north america|south america)\b',
+    r'\beurope,?\s+(?:africa|asia),?\s+and\s+(?:asia|africa)\b',
 ]
 
 A_RI_INCIDENTAL_PATTERNS = [
@@ -3006,8 +3012,18 @@ def _routine_institutional_prestige_title(title: str) -> bool:
 def _local_applied_study_without_ri_system_implication(title: str, abstract: str, body: str) -> bool:
     text = clean_text(f"{title}. {abstract}. {body[:5000]}")
     low = normalized(text)
+    title_low = normalized(title)
     if not contains_any(low, A_LOCAL_APPLIED_CUES):
         return False
+    # If the title itself says this is clinical/service implementation at one local site,
+    # generic research-programme language in the abstract cannot promote it into R&I-system
+    # evidence. A title-level system/infrastructure/policy cue can still rescue it.
+    if contains_any(title_low, A_LOCAL_APPLIED_CUES):
+        title_system = contains_any(title_low, A_SYSTEM_LEVEL_RI_CUES)
+        member_hits_title = bounded_matches(title, MEMBER_STATE_SCOPE)
+        local_title = bool(re.search(r'\b(?:service|clinical|hospital|clinic|centre|center|department|from\s+[A-ZÀ-ÖØ-Ý][\wÀ-ÿ.-]+)\b', title, re.I))
+        if local_title and len(set(map(normalized, member_hits_title))) <= 1 and not title_system:
+            return True
     # A local applied study remains eligible if it explicitly concerns an R&I-system mechanism
     # or a strategic technology domain. The guard only removes service/clinical implementation
     # papers whose 'research' content is internal to the local application itself.
@@ -3909,8 +3925,18 @@ def url_domain(url: str) -> str:
 
 def source_rank_for_journal(name: str) -> tuple[int | None, float, str]:
     n = normalized(name)
+    # V17.19.7: journal watching is a core source family, not a side effect of broad
+    # scholarly search. Nature/Science-family journals receive first-class source attention
+    # but never bypass the substantive European R&I gate. Policy/society journals central to
+    # R&I, mobility and geoeconomics receive a separate priority rank.
+    elite = {normalized(x) for x in CONFIG.get("top_journal_watchlist", [])}
+    policy = {normalized(x) for x in CONFIG.get("priority_policy_journal_watchlist", [])}
     exact = {normalized(x) for x in CONFIG["tier2_journals"]}
     comparable = {normalized(x) for x in CONFIG.get("tier2_comparable_journals", [])}
+    if n in elite:
+        return 1, 1.55, "Tier 1 journal-watch"
+    if n in policy:
+        return 2, 1.90, "Tier 2 priority journal"
     if n in exact:
         return 2, 2.0, "Tier 2"
     if n in comparable:
@@ -4841,6 +4867,227 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
     )
 
 
+
+
+
+def _direct_journal_article_from_html(
+    html_text: str,
+    page_url: str,
+    source_cfg: dict[str, Any],
+    date_floor: dt.date | None = None,
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    """Parse one direct publisher journal page into A/B and/or C discovery candidates.
+
+    This is an independent transport lane for core journals. It deliberately uses the
+    same A/B admission gate as Crossref/OpenAlex. If the page is current journalistic or
+    commentary material that does not qualify for A/B, it may still join the ordinary C
+    candidate pool; C anchoring/novelty rules remain authoritative downstream.
+    """
+    try:
+        soup = BeautifulSoup(html_text or '', 'html.parser')
+    except Exception:
+        return None, None
+    title = (
+        meta_content(soup, ['citation_title', 'dc.title', 'DC.Title', 'og:title', 'twitter:title', 'headline'])
+        or clean_text(soup.h1.get_text(' ', strip=True) if soup.h1 else '')
+    )
+    if not title:
+        return None, None
+    desc = meta_content(soup, [
+        'citation_abstract', 'dc.description', 'DC.Description', 'description',
+        'og:description', 'twitter:description', 'abstract',
+    ])
+    published = None
+    for key in [
+        'citation_publication_date', 'citation_date', 'article:published_time',
+        'og:article:published_time', 'datePublished', 'parsely-pub-date', 'pubdate', 'publication_date',
+    ]:
+        published = parse_date(meta_content(soup, [key]))
+        if published:
+            break
+    if not published:
+        for script in soup.find_all('script', attrs={'type': re.compile(r'ld\+json', re.I)}):
+            try:
+                raw = json.loads(script.string or script.get_text())
+            except Exception:
+                continue
+            for obj in jsonld_objects(raw):
+                if isinstance(obj, dict):
+                    published = parse_date(obj.get('datePublished') or obj.get('dateCreated'))
+                    if published:
+                        break
+            if published:
+                break
+    if not published:
+        for tm in soup.find_all('time')[:8]:
+            published = parse_date(clean_text(tm.get('datetime') or tm.get_text(' ', strip=True)))
+            if published:
+                break
+    floor = date_floor or DATE_FLOOR
+    if not published or published < floor or published > dt.date.today():
+        return None, None
+
+    canonical = page_url
+    can = soup.find('link', rel=lambda v: v and 'canonical' in v)
+    if can and can.get('href'):
+        canonical = urljoin(page_url, can.get('href'))
+    doi_raw = meta_content(soup, ['citation_doi', 'dc.identifier', 'DC.Identifier'])
+    doi_match = re.search(r'10\.\d{4,9}/[^\s<>"\']+', clean_text(doi_raw or canonical), re.I)
+    doi_raw = doi_match.group(0).rstrip('.,)') if doi_match else clean_text(doi_raw).removeprefix('https://doi.org/').removeprefix('doi:')
+    doi = f'https://doi.org/{doi_raw}' if doi_raw else ''
+
+    authors = []
+    for meta in soup.find_all('meta'):
+        key = normalized(meta.get('name') or meta.get('property') or '')
+        if key in {'citation_author', 'dc.creator', 'dc.creator.personalname', 'author'}:
+            name = clean_text(meta.get('content'))
+            if name and name not in authors:
+                authors.append(name)
+            if len(authors) >= 8:
+                break
+    author_text = ', '.join(authors) or clean_text(source_cfg.get('name')) or 'Unknown author(s)'
+
+    body = ''
+    try:
+        clone = BeautifulSoup(html_text or '', 'html.parser')
+        for bad in clone(['script', 'style', 'nav', 'header', 'footer', 'aside', 'form', 'noscript']):
+            bad.decompose()
+        container = clone.find('article') or clone.find('main') or clone.body
+        body = clean_text(container.get_text(' ', strip=True) if container else '')[:10000]
+    except Exception:
+        body = ''
+
+    source = clean_text(source_cfg.get('name')) or meta_content(soup, ['citation_journal_title']) or 'Journal'
+    tier, source_rank, tier_label = source_rank_for_journal(source)
+    if tier is None:
+        # Every configured direct source must also exist in a journal watchlist; fail closed
+        # rather than creating a new quality path through configuration alone.
+        return None, None
+    evidence_text = clean_text(f'{title}. {desc}. {body}')
+    if not english_record_ok(evidence_text, title=title):
+        return None, None
+
+    ev = gate_scope(title, desc, body, tier, source_kind='scholarly')
+    ab_item = None
+    if ev.get('a_pass') or ev.get('b_pass'):
+        raw_type = normalized(meta_content(soup, ['citation_article_type', 'article_type', 'dc.type', 'type']))
+        if contains_any(raw_type, ['news', 'comment', 'correspondence', 'editorial', 'world view', 'opinion']):
+            item_type = 'journal news/comment'
+        elif contains_any(raw_type, ['research', 'article', 'review']):
+            item_type = 'peer-reviewed article'
+        else:
+            item_type = 'journal article/commentary'
+        strand = 'both' if ev.get('a_pass') and ev.get('b_pass') else 'A' if ev.get('a_pass') else 'B'
+        ab_item = build_item(
+            title=title, authors=author_text, source=source, date=published,
+            link=doi or canonical, item_type=item_type, strand=strand, evidence=ev,
+            source_rank=source_rank, tier_label=tier_label, text=evidence_text,
+            doi=doi or canonical, preprint=False,
+        )
+        ab_item['discovery_provenance'] = 'direct_top_journal'
+        ab_item['provenance'] = ['direct_top_journal']
+
+    c_item = None
+    # Formal scholarly evidence gets A/B precedence. Only non-A/B current journal material
+    # enters the ordinary C candidate pool, where it must still satisfy C rules and anchoring.
+    if ab_item is None and factual_news(title, desc or body[:1200]) and weak_signal_candidate_text(title, desc or body[:1200]):
+        c_text = clean_text(f'{title}. {desc or body[:1800]}')
+        c_item = {
+            'headline': title,
+            'source': source,
+            'date': published.isoformat(),
+            'link': doi or canonical,
+            '_desc': desc or body[:1800],
+            '_desc_html': '',
+            '_themes': themes_for(c_text),
+            '_entities': distinct_matches(c_text, ENTITY_TERMS + GEO_ACTORS),
+            '_direct_journal_source': True,
+        }
+    return ab_item, c_item
+
+
+def collect_direct_top_journals(
+    sources: list[dict[str, Any]],
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Bounded direct publisher-page watch for Nature/Science/PNAS-family journals."""
+    timeout = int(CONFIG.get('direct_top_journal_timeout_seconds', 9) or 9)
+    links_per = max(4, int(CONFIG.get('direct_top_journal_links_per_source', 18) or 18))
+    pages_per = max(2, int(CONFIG.get('direct_top_journal_pages_per_source', 7) or 7))
+    executed: set[str] = set()
+
+    def one_source(src: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str | None]:
+        name = clean_text(src.get('name'))
+        hub = clean_text(src.get('hub'))
+        domain = clean_text(src.get('domain')).lower().removeprefix('www.')
+        pattern = clean_text(src.get('article_path_regex')) or r'/articles/|/doi/'
+        if not name or not hub or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+            return [], [], 'budget'
+        executed.add(name)
+        try:
+            r = SESSION.get(hub, timeout=timeout, allow_redirects=True)
+            if r.status_code != 200 or 'html' not in normalized(r.headers.get('content-type', 'text/html')):
+                return [], [], f'HTTP {r.status_code}'
+            soup = BeautifulSoup(r.text, 'html.parser')
+        except Exception as e:
+            return [], [], type(e).__name__
+        found: dict[str, tuple[int, str]] = {}
+        for a in soup.find_all('a', href=True):
+            href = urljoin(r.url, a.get('href', ''))
+            pu = urlparse(href)
+            host = (pu.hostname or '').lower().removeprefix('www.')
+            if not host or not (host == domain or host.endswith('.' + domain)):
+                continue
+            path = pu.path or ''
+            if not re.search(pattern, path, re.I):
+                continue
+            label = clean_text(a.get_text(' ', strip=True))
+            if len(label.split()) < 4:
+                continue
+            key = normalized_link(href)
+            score = min(10, len(label.split()) // 4)
+            if key and (key not in found or score > found[key][0]):
+                found[key] = (score, href)
+        ranked = [href for _score, href in sorted(found.values(), key=lambda x: x[0], reverse=True)[:links_per]]
+        ab: list[dict[str, Any]] = []
+        cc: list[dict[str, Any]] = []
+        for href in ranked[:pages_per]:
+            # Direct-journal watching is itself part of normal discovery and therefore honors
+            # the global network reserve. C later gets its own explicit reserved slice.
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+                break
+            try:
+                rr = SESSION.get(href, timeout=timeout, allow_redirects=True)
+                if rr.status_code != 200 or 'html' not in normalized(rr.headers.get('content-type', 'text/html')):
+                    continue
+                a_item, c_item = _direct_journal_article_from_html(rr.text, rr.url or href, src, DATE_FLOOR)
+                if a_item:
+                    ab.append(a_item)
+                if c_item:
+                    cc.append(c_item)
+            except Exception:
+                continue
+        return ab, cc, None
+
+    ab_all: list[dict[str, Any]] = []
+    c_all: list[dict[str, Any]] = []
+    with cf.ThreadPoolExecutor(max_workers=max(1, min(4, len(sources) or 1))) as ex:
+        futs = [ex.submit(one_source, src) for src in sources if isinstance(src, dict)]
+        for fut in cf.as_completed(futs):
+            try:
+                ab, cc, err = fut.result()
+                ab_all.extend(ab); c_all.extend(cc)
+                if err and err != 'budget':
+                    warnings.append(f'Direct journal watch: {err}')
+            except Exception as e:
+                warnings.append(f'Direct journal watch worker: {type(e).__name__}')
+    if isinstance(execution_stats, dict):
+        execution_stats.setdefault('direct_top_journals', set()).update(executed)
+        execution_stats['direct_top_journal_ab_candidates'] = int(execution_stats.get('direct_top_journal_ab_candidates', 0)) + len(ab_all)
+        execution_stats['direct_top_journal_c_candidates'] = int(execution_stats.get('direct_top_journal_c_candidates', 0)) + len(c_all)
+    return dedupe_candidates(ab_all), c_all
 
 
 def load_curator_candidate_tests() -> dict[str, Any]:
@@ -7481,6 +7728,36 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
     }
 
 
+def final_ab_candidate_worthiness(item: dict[str, Any]) -> bool:
+    """Last shared precision guard for every A/B discovery route.
+
+    OpenAlex, Crossref, institutional fallback, source-failure reallocation, curator tests
+    and direct journal watching all converge here before selection. The check is intentionally
+    high-confidence and content-type focused; it does not restore strategic-keyword gating.
+    """
+    if not isinstance(item, dict):
+        return False
+    title = clean_text(item.get('title', ''))
+    summary = clean_text(item.get('summary', ''))
+    typ = normalized(item.get('type', ''))
+    scholarly = any(x in typ for x in ['peer-reviewed', 'journal', 'preprint', 'article', 'commentary'])
+    if scholarly:
+        if _historical_subject_without_current_ri_implication(title, summary, ''):
+            return False
+        if _local_applied_study_without_ri_system_implication(title, summary, ''):
+            return False
+        if not _scope_hits_in_sentence(title, clean_text(f"{title}. {summary}")):
+            scope_sentences = [sent for sent in split_sentences(summary) if _scope_hits_in_sentence(sent, summary)]
+            if scope_sentences and all(_incidental_eu_scope_sentence(sent) for sent in scope_sentences):
+                return False
+    else:
+        if _routine_institutional_prestige_title(title):
+            return False
+        if A_EVENT_RECAP_TITLE.search(title) and not A_EVENT_SUBSTANTIVE_TITLE.search(title):
+            return False
+    return True
+
+
 def identity(item: dict[str, Any]) -> str:
     if not isinstance(item, dict):
         return "title:"
@@ -8896,6 +9173,8 @@ MATERIAL_SIGNAL_CHANGE = [
     'open', 'close', 'build', 'expand', 'scale', 'cut', 'increase', 'decrease', 'join',
     'screening', 'export control', 'standard', 'regulation', 'strategy', 'programme', 'program',
     'acquisition', 'relocat', 'outflow', 'inflow', 'shortage', 'bottleneck', 'dependency',
+    'attract researchers', 'attract scientists', 'lure scientists', 'lure researchers',
+    'return fellowship', 'return fellowships', 'bring scientists back', 'bring researchers back',
 ]
 MATERIAL_SIGNAL_RI = [
     'research', 'science', 'scientific', 'innovation', 'r&d', 'researcher', 'researchers',
@@ -10486,8 +10765,23 @@ def main() -> int:
         nonpreferred_journals or source_journals_all, cr_source_cursor_before, broad_n
     )
     # Elite journals are checked every ordinary scan rather than hidden behind a long
-    # policy-journal rotation.  They still face the same EU + substantive-R&I gate.
-    cr_source_batch = list(dict.fromkeys(top_journal_watchlist + cr_preferred_batch + cr_general_batch))
+    # policy-journal rotation. Priority R&I/policy journals are a second source-first bank.
+    # Both still face the same EU + substantive-R&I gate.
+    priority_policy_journals = list(dict.fromkeys(CONFIG.get('priority_policy_journal_watchlist', [])))
+    cr_source_batch = list(dict.fromkeys(top_journal_watchlist + priority_policy_journals + cr_preferred_batch + cr_general_batch))
+
+    # Independent publisher-page journal watch. This means a Crossref/OpenAlex 429 cannot
+    # make Nature/Science-family discovery disappear for the whole run. Nature and Science
+    # are always direct; the other elite journals rotate through a small persisted slice.
+    direct_journal_all = [x for x in CONFIG.get('direct_top_journal_sources', []) if isinstance(x, dict)]
+    direct_journal_always = [x for x in direct_journal_all if bool(x.get('always'))]
+    direct_journal_rotating_bank = [x for x in direct_journal_all if not bool(x.get('always'))]
+    direct_journal_cursor_before = int(state.get('direct_top_journal_cursor', 0) or 0)
+    direct_journal_rotating, _direct_j_next, _direct_j_wrapped = rotating_batch(
+        direct_journal_rotating_bank, direct_journal_cursor_before,
+        max(0, int(CONFIG.get('direct_top_journal_rotating_sources_per_scan', 2) or 2)),
+    ) if direct_journal_rotating_bank else ([], 0, True)
+    direct_journal_batch = direct_journal_always + direct_journal_rotating
 
     institution_sources_all = list(CONFIG.get("institution_sources", []))
     official_domains = {clean_text(x).lower().removeprefix("www.") for x in CONFIG.get("official_eu_priority_domains", []) if clean_text(x)}
@@ -10616,7 +10910,8 @@ def main() -> int:
         "Scan start: persistent incremental mode; "
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
-        f"({len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad) from {cr_from.isoformat()}, "
+        f"({len(top_journal_watchlist)} elite + {len(priority_policy_journals)} R&I-policy + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad) from {cr_from.isoformat()}, "
+        f"direct journal watch {len(direct_journal_batch)} source(s), "
         f"institutions {len(inst_batch)} source(s) ({len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
@@ -10703,8 +10998,9 @@ def main() -> int:
     oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
     cr_deadline = phase_started + int(CONFIG.get("crossref_stage_seconds", 450))
     inst_deadline = phase_started + int(CONFIG.get("institution_stage_seconds", 480))
+    direct_journal_deadline = phase_started + int(CONFIG.get('direct_top_journal_stage_seconds', 220) or 220)
 
-    with cf.ThreadPoolExecutor(max_workers=4) as ex:
+    with cf.ThreadPoolExecutor(max_workers=5) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
@@ -10720,11 +11016,21 @@ def main() -> int:
             safe_stage, "institutional reports", collect_institutions, inst_from, warnings,
             bootstrap=inst_backfill, sources_override=inst_batch, stage_deadline=inst_deadline, execution_stats=execution_stats
         )
+        fut_direct_journals = ex.submit(
+            collect_direct_top_journals, direct_journal_batch, warnings, direct_journal_deadline, execution_stats
+        )
         news = fut_news.result()
         oa = fut_oa.result()
         cr = fut_cr.result()
         inst_base = fut_inst.result()
+        try:
+            direct_journal_ab, direct_journal_c = fut_direct_journals.result()
+        except Exception as e:
+            warnings.append(f'Direct journal watch fatal stage error: {type(e).__name__}: {str(e)[:160]}')
+            direct_journal_ab, direct_journal_c = [], []
     warnings.extend(news_warnings)
+    cr.extend(direct_journal_ab)
+    news.extend(direct_journal_c)
 
     oa = [x for x in oa if isinstance(x, dict)]
     cr = [x for x in cr if isinstance(x, dict)]
@@ -10781,6 +11087,12 @@ def main() -> int:
     state["crossref_source_cursor"], cr_source_wrapped, cr_source_executed = committed_rotation_cursor(
         general_source_bank, cr_source_cursor_before, cr_general_batch, executed_source_journals
     )
+    executed_direct_journals = set(execution_stats.get('direct_top_journals', set()))
+    direct_rotating_names = [clean_text(x.get('name')) for x in direct_journal_rotating_bank]
+    direct_planned_names = [clean_text(x.get('name')) for x in direct_journal_rotating]
+    state['direct_top_journal_cursor'], _direct_commit_wrapped, _direct_commit_count = committed_rotation_cursor(
+        direct_rotating_names, direct_journal_cursor_before, direct_planned_names, executed_direct_journals
+    ) if direct_rotating_names else (0, True, 0)
     method_executed = executed_oa | executed_cr
     state["strand_b_method_cursor"], b_method_wrapped, b_method_executed = committed_rotation_cursor(
         b_method_bank, b_method_cursor_before, b_method_focus, method_executed
@@ -11374,7 +11686,14 @@ def main() -> int:
     # prevents ordinary rejected news from consuming evidence-follow-up budget. Any linked
     # report/paper found here still has to pass the normal A/B gate independently.
     prev_a_for_signal_followup = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
-    preliminary_c_for_followup = anchor_news(news, prev_a_for_signal_followup)
+    # C may legitimately be reframed by a strong A publication discovered in the same run.
+    # Give the provisional anchor pass access to all current A candidates that survive the
+    # shared final worthiness guard, while final publication still happens only after dedupe.
+    provisional_a_for_signal_followup = list(prev_a_for_signal_followup)
+    for _cand in dedupe_candidates(oa + cr + inst):
+        if isinstance(_cand, dict) and _cand.get('strand') in {'A', 'both'} and final_ab_candidate_worthiness(_cand):
+            provisional_a_for_signal_followup.append(_cand)
+    preliminary_c_for_followup = anchor_news(news, provisional_a_for_signal_followup)
 
     # V17.19.5 C floor: a healthy radar should not repeatedly return zero *new* weak signals
     # because a single duplicate/anchor decision exhausted the short news lane. When the
@@ -11389,18 +11708,19 @@ def main() -> int:
     preliminary_novel_c = _novel_signal_rows(preliminary_c_for_followup, previous_c_for_floor)
     if min_new_c > 0 and len(preliminary_novel_c) < min_new_c:
         rescue_enabled = bool(CONFIG.get('c_floor_rescue_enabled', True))
-        rescue_min_remaining = max(45, int(CONFIG.get('c_floor_rescue_min_seconds_remaining', 110) or 110))
+        rescue_min_remaining = max(35, int(CONFIG.get('c_floor_rescue_min_seconds_remaining', 65) or 65))
         if rescue_enabled and budget_remaining() > rescue_min_remaining:
             rescue_bank = c_floor_rescue_queries()
             windows = CONFIG.get('c_floor_rescue_windows_hours', [336, 720])
             windows = [max(168, int(x)) for x in windows if int(x) > 0] if isinstance(windows, list) else [336, 720]
             per_wave = max(1, int(CONFIG.get('c_floor_rescue_queries_per_wave', 6) or 6))
-            stage_seconds = max(35, int(CONFIG.get('c_floor_rescue_stage_seconds', 80) or 80))
+            stage_seconds = max(30, int(CONFIG.get('c_floor_rescue_stage_seconds', 60) or 60))
+            post_reserve = max(12, int(CONFIG.get('c_floor_post_reserve_seconds', 20) or 20))
             cursor = 0
             for wave_idx, hours in enumerate(windows[:2], start=1):
                 if len(c_floor_rescue_signals) + len(preliminary_novel_c) >= min_new_c:
                     break
-                if budget_remaining() <= max(45, int(CONFIG.get('network_reserve_seconds', 60)) + 20):
+                if budget_remaining() <= post_reserve + 25:
                     break
                 queries = rescue_bank[cursor:cursor + per_wave]
                 if len(queries) < per_wave and rescue_bank:
@@ -11408,7 +11728,7 @@ def main() -> int:
                 cursor = (cursor + per_wave) % max(1, len(rescue_bank))
                 deadline = time.monotonic() + min(
                     stage_seconds,
-                    max(30, int(budget_remaining() - int(CONFIG.get('network_reserve_seconds', 60)) - 15)),
+                    max(20, int(budget_remaining() - post_reserve)),
                 )
                 rescue_warnings: list[str] = []
                 extra_news = safe_stage(
@@ -11421,7 +11741,7 @@ def main() -> int:
                     continue
                 # Keep the additional discoveries available to the ordinary final anchor pass too.
                 news.extend(extra_news)
-                strict_rows = anchor_news(extra_news, prev_a_for_signal_followup, c_floor_diagnostics)
+                strict_rows = anchor_news(extra_news, provisional_a_for_signal_followup, c_floor_diagnostics)
                 novel_strict = _novel_signal_rows(strict_rows, previous_c_for_floor, preliminary_novel_c + c_floor_rescue_signals)
                 need = max(0, min_new_c - len(preliminary_novel_c) - len(c_floor_rescue_signals))
                 if novel_strict and need:
@@ -11429,7 +11749,7 @@ def main() -> int:
                     continue
                 # Only after a separate search wave has failed to produce a strict novel anchor
                 # do we allow a directly-European, lower-confidence emerging signal.
-                emerging_rows = anchor_news(extra_news, prev_a_for_signal_followup, c_floor_diagnostics, allow_unanchored=True)
+                emerging_rows = anchor_news(extra_news, provisional_a_for_signal_followup, c_floor_diagnostics, allow_unanchored=True)
                 novel_emerging = _novel_signal_rows(emerging_rows, previous_c_for_floor, preliminary_novel_c + c_floor_rescue_signals)
                 need = max(0, min_new_c - len(preliminary_novel_c) - len(c_floor_rescue_signals))
                 if novel_emerging and need:
@@ -11973,7 +12293,13 @@ def main() -> int:
     finish_cycle("crossref_priority", cr_priority_wrapped, cr_failed)
     finish_cycle("institutions", inst_wrapped, inst_failed)
 
-    deduped = dedupe_candidates(oa + cr + inst)
+    deduped_all_routes = dedupe_candidates(oa + cr + inst)
+    deduped = []
+    for candidate in deduped_all_routes:
+        if final_ab_candidate_worthiness(candidate):
+            deduped.append(candidate)
+        else:
+            _diag_inc('final_reject_evidence_worthiness')
     deduped.sort(key=rank_candidate)
 
     new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped

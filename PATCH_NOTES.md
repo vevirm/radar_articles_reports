@@ -1,3 +1,16 @@
+# v17.19.7 — shared final precision guard + first-class direct journal watch + C runtime reserve
+
+- Makes Nature/Science-family journals a first-class source family independent of OpenAlex/Crossref. Nature and Science are checked directly every ordinary scan; two additional elite journals rotate through direct publisher-page discovery. Direct journal pages can feed A/B or, when they are current developments rather than A/B evidence, the normal C candidate pool.
+- Adds a separate priority R&I/policy journal watchlist including Research Policy, Science and Public Policy, Studies in Higher Education, New Political Economy, Scientometrics, Minerva, Higher Education, Research Evaluation, Futures, and Technological Forecasting and Social Change. Crossref checks these source-first when available.
+- Elite-journal prestige never bypasses European/EU + substantive R&I admission. Strategic/geopolitical wording remains optional.
+- Adds one final evidence-worthiness guard after all discovery routes converge, so OpenAlex, Crossref, direct journals, institutional fallback, source-failure reallocation and curator tests cannot disagree about high-confidence false-positive patterns.
+- Strengthens incidental-Europe detection for global/bibliometric papers where Europe appears only in contributor/collaboration geography lists.
+- Strengthens the local clinical/service rule so a title-level local implementation study cannot be rescued merely by generic `research programme` language deeper in the abstract.
+- Repairs the C-floor runtime design: ordinary network-heavy stages now leave a dedicated reserve, while C rescue is allowed to spend that reserve and keeps only a small post-rescue save margin. C can also anchor against strong A candidates discovered in the same run.
+- Expands C rescue/talent language for current scientist-attraction/return-fellowship competition and related external R&I shifts.
+- The bundled radar is the latest uploaded live state with only two high-confidence A false positives removed (the psychodermatology service paper and the global AI sexual-medicine review). It is not retroactively padded with a C signal.
+- No recall-profile version, incremental-state version, source cursor or GitHub security workflow is reset.
+
 # v17.19.6 — historical-subject guard + safety-check compatibility
 
 - Generalises the live-radar history exclusion beyond century/year ranges to explicit historical eras such as early-modern, medieval, Renaissance, Enlightenment, interwar and Cold War subjects.

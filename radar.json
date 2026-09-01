@@ -18090,9 +18090,9 @@
     "c_recovery_backfill_this_run": false
   },
   "scan_results": {
-    "new_a": 27,
+    "new_a": 25,
     "new_b": 0,
-    "new_ab_unique": 27,
+    "new_ab_unique": 25,
     "new_c": 0,
     "aged_out_this_scan": {
       "strand_a": 0,
@@ -18151,7 +18151,7 @@
       "EU innovation strategic autonomy control technology access"
     ],
     "finding_context_queries_executed": 4,
-    "note_a": "",
+    "note_a": "v17.19.7 precision cleanup removed 2 high-confidence false positives from the latest run; journal/source-failure discovery now converges through one shared final evidence-worthiness guard.",
     "note_b": "This scan added 0 new Strand B item(s). Earlier accepted items remain in the corpus.",
     "note_c": "",
     "frontier_gap_targets": [
@@ -18331,7 +18331,9 @@
       "empty_cells_published": 0,
       "published_empty_cells": [],
       "published_qualifying": 49
-    }
+    },
+    "precision_cleanup_removed": 2,
+    "precision_cleanup_version": "v17.19.7-shared-final-worthiness"
   },
   "strand_a": [
     {
@@ -18520,38 +18522,6 @@
         "foreign interference"
       ],
       "text_mode": "full_text",
-      "first_seen": "2026-09-01T14:15Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "(457) The Role of Artificial Intelligence in Sexual Medicine and Sexual Health: Two Decades of Research and Innovation",
-      "authors": "Y T Tenaw",
-      "source": "The Journal of Sexual Medicine",
-      "date": "2026-06-04",
-      "link": "https://doi.org/10.1093/jsxmed/qdag118.403",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "(457) The Role of Artificial Intelligence in Sexual Medicine and Sexual Health: Two Decades of Research and Innovation. The United States stands as the leading contributor, followed by the United Kingdom, with significant international collaborations involving countries such as Australia, China, India, Canada, and several others across Europe, Africa, and Asia. Abstract Introduction Artificial intelligence (AI) has rapidly evolved as a transformative technology within medicine, offering new capabilities for diagnosis, treatment, risk prediction, and patient engagement.",
-      "core_message": "Abstract Introduction AI (AI) has rapidly evolved.",
-      "relevance_note": "Direct European/EU relevance (europe); R&I evidence: research and innovation, artificial intelligence + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe"
-      ],
-      "ri_evidence": [
-        "research and innovation",
-        "artificial intelligence + research",
-        " ai  + research",
-        " ai  + innovative"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
       "first_seen": "2026-09-01T14:15Z",
       "new_this_scan": true
     },
@@ -18847,37 +18817,6 @@
       "a_context_evidence": [],
       "text_mode": "abstract_only",
       "date_basis": "prominent_page_date",
-      "first_seen": "2026-09-01T14:15Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "PS09 Building an integrated psychodermatology service in central Europe: clinical implementation and research experience from Pécs, Hungary",
-      "authors": "Eszter Szlávicz, Tamás Bancsók, Jutta Major, Rolland Gyulai, Péter Osváth, Zsuzsanna Lengyel",
-      "source": "British Journal of Dermatology",
-      "date": "2026-06-26",
-      "link": "https://doi.org/10.1093/bjd/ljag086.624",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Alongside clinical development, a structured research programme was established. PS09 Building an integrated psychodermatology service in central Europe: clinical implementation and research experience from Pécs, Hungary. Abstract Psychodermatology is a rapidly evolving interdisciplinary field addressing the complex interactions between dermatological diseases and psychological factors.",
-      "core_message": "Alongside clinical development, a structured research programme was established.",
-      "relevance_note": "Direct European/EU relevance (europe, hungary); R&I evidence: research programme, research program; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "hungary"
-      ],
-      "ri_evidence": [
-        "research programme",
-        "research program"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
       "first_seen": "2026-09-01T14:15Z",
       "new_this_scan": true
     },

@@ -998,6 +998,102 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertNotIn("C floor unmet", index_text)
         self.assertNotIn("C_INTERNAL", index_text)
 
+    def test_global_medical_ai_review_with_europe_only_in_collaboration_list_is_not_a(self):
+        title = "(457) The Role of Artificial Intelligence in Sexual Medicine and Sexual Health: Two Decades of Research and Innovation"
+        abstract = (
+            "The United States stands as the leading contributor, followed by the United Kingdom, "
+            "with significant international collaborations involving Australia, China, India, Canada, "
+            "and several others across Europe, Africa and Asia. The review maps two decades of AI research."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
+
+    def test_final_shared_worthiness_guard_catches_known_cross_route_false_positives(self):
+        local = {
+            "title": "PS09 Building an integrated psychodermatology service in central Europe: clinical implementation and research experience from Pécs, Hungary",
+            "summary": "A structured research programme was established alongside local clinical implementation in Pécs, Hungary.",
+            "type": "peer-reviewed article",
+        }
+        global_review = {
+            "title": "The Role of Artificial Intelligence in Sexual Medicine and Sexual Health: Two Decades of Research and Innovation",
+            "summary": "The United States is the leading contributor with international collaborations across Europe, Africa and Asia.",
+            "type": "peer-reviewed article",
+        }
+        good = {
+            "title": "IRIS—The Innovative Research Infrastructure on Applied Superconductivity in Italy",
+            "summary": "IRIS establishes a distributed Italian research infrastructure supporting long-term R&D in superconducting technologies.",
+            "type": "peer-reviewed article",
+        }
+        self.assertFalse(scan.final_ab_candidate_worthiness(local))
+        self.assertFalse(scan.final_ab_candidate_worthiness(global_review))
+        self.assertTrue(scan.final_ab_candidate_worthiness(good))
+
+    def test_nature_science_and_policy_journals_are_first_class_watch_sources(self):
+        elite = scan.CONFIG.get("top_journal_watchlist", [])
+        policy = scan.CONFIG.get("priority_policy_journal_watchlist", [])
+        direct = {x.get("name"): x for x in scan.CONFIG.get("direct_top_journal_sources", [])}
+        self.assertIn("Nature", elite)
+        self.assertIn("Science", elite)
+        self.assertIn("Studies in Higher Education", policy)
+        self.assertIn("New Political Economy", policy)
+        self.assertTrue(direct["Nature"].get("always"))
+        self.assertTrue(direct["Science"].get("always"))
+        tier, rank, label = scan.source_rank_for_journal("Nature")
+        self.assertEqual(tier, 1)
+        self.assertIn("journal-watch", label)
+        self.assertLess(rank, 2.0)
+
+    def test_direct_nature_page_can_feed_a_without_crossref(self):
+        html = """<html><head>
+        <meta name='citation_title' content="Europe should adapt, not copy, China's practical PhD">
+        <meta name='citation_publication_date' content='2026-09-01'>
+        <meta name='citation_doi' content='10.1038/d41586-026-02736-6'>
+        <meta name='citation_author' content='A. Żukowski'>
+        <meta name='description' content='European universities should adapt doctoral training to strengthen research careers, industry links and innovation capability in Europe.'>
+        <meta name='citation_article_type' content='Comment'>
+        </head><body><main><p>Current European doctoral and research policy implications are discussed.</p></main></body></html>"""
+        src = {"name": "Nature", "domain": "nature.com"}
+        old_floor = scan.DATE_FLOOR
+        try:
+            scan.DATE_FLOOR = scan.dt.date(2026, 5, 1)
+            item, c = scan._direct_journal_article_from_html(html, "https://www.nature.com/articles/example", src, scan.DATE_FLOOR)
+        finally:
+            scan.DATE_FLOOR = old_floor
+        self.assertIsNotNone(item)
+        self.assertEqual(item["strand"], "A")
+        self.assertEqual(item["discovery_provenance"], "direct_top_journal")
+        self.assertIsNone(c)
+
+    def test_direct_major_journal_talent_news_can_feed_c_candidate_pool(self):
+        html = """<html><head>
+        <meta name='citation_title' content='India launches return fellowships to lure scientists back'>
+        <meta name='citation_publication_date' content='2026-09-01'>
+        <meta name='citation_doi' content='10.1038/example-talent'>
+        <meta name='description' content='India launched a plan with return fellowships and research funding to attract scientists in AI, quantum, biotechnology and advanced materials.'>
+        <meta name='citation_article_type' content='News'>
+        </head><body><main><p>The move intensifies global competition for research talent.</p></main></body></html>"""
+        src = {"name": "Nature", "domain": "nature.com"}
+        old_floor = scan.DATE_FLOOR
+        try:
+            scan.DATE_FLOOR = scan.dt.date(2026, 5, 1)
+            item, c = scan._direct_journal_article_from_html(html, "https://www.nature.com/articles/example-talent", src, scan.DATE_FLOOR)
+        finally:
+            scan.DATE_FLOOR = old_floor
+        self.assertIsNone(item)
+        self.assertIsNotNone(c)
+        self.assertEqual(c["source"], "Nature")
+        self.assertTrue(c.get("_direct_journal_source"))
+
+    def test_c_floor_has_reserved_runtime_after_other_network_stages_stop(self):
+        reserve = int(scan.CONFIG.get("network_reserve_seconds", 0))
+        minimum = int(scan.CONFIG.get("c_floor_rescue_min_seconds_remaining", 0))
+        post = int(scan.CONFIG.get("c_floor_post_reserve_seconds", 0))
+        self.assertGreater(reserve, minimum)
+        self.assertGreater(minimum, post + 20)
+        scanner_text = (ROOT / "scripts" / "scan_radar.py").read_text(encoding="utf-8")
+        self.assertIn("budget_remaining() <= post_reserve + 25", scanner_text)
+
     def test_signal_anchor_theme_must_be_supported_by_the_published_claim(self):
         a = [{
             "title": "EU-China research cooperation under de-risking",
