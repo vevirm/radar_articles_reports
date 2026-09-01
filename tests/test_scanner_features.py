@@ -1094,6 +1094,101 @@ class V1719RecallModelTests(unittest.TestCase):
         scanner_text = (ROOT / "scripts" / "scan_radar.py").read_text(encoding="utf-8")
         self.assertIn("budget_remaining() <= post_reserve + 25", scanner_text)
 
+
+    def test_direct_journal_feed_survives_blocked_publisher_hub(self):
+        import types
+        entry = types.SimpleNamespace(
+            title="Europe should adapt, not copy, China's practical PhD",
+            link="https://www.nature.com/articles/example-feed",
+            summary="European universities should adapt doctoral training to strengthen research careers and innovation capability in Europe.",
+            published_parsed=time.strptime("2026-09-01", "%Y-%m-%d"),
+            tags=[{"term": "Comment"}],
+            authors=[{"name": "A. Example"}],
+        )
+        class Resp:
+            def __init__(self, status, content=b'', text='', ctype='text/html'):
+                self.status_code=status; self.content=content; self.text=text; self.url='https://www.nature.com/nature/articles'; self.headers={'content-type':ctype}
+        def fake_get(url, *args, **kwargs):
+            if 'format=rss' in url:
+                return Resp(200, content=b'<rss/>', ctype='application/rss+xml')
+            return Resp(403)
+        src={
+            'name':'Nature','domain':'nature.com','hub':'https://www.nature.com/nature/articles',
+            'feed_urls':['https://www.nature.com/nature/articles?format=rss'],
+            'article_path_regex':'/articles/','always':True,
+        }
+        old_floor=scan.DATE_FLOOR
+        try:
+            scan.DATE_FLOOR=scan.dt.date(2026,5,1)
+            with mock.patch.object(scan.SESSION, 'get', side_effect=fake_get), mock.patch.object(scan.feedparser, 'parse', return_value=types.SimpleNamespace(entries=[entry])):
+                ab, cc=scan.collect_direct_top_journals([src], [], stage_deadline=time.monotonic()+30, execution_stats={})
+        finally:
+            scan.DATE_FLOOR=old_floor
+        self.assertEqual(len(ab),1)
+        self.assertEqual(ab[0]['source'],'Nature')
+        self.assertEqual(cc,[])
+
+    def test_top_journal_sources_have_non_html_fallbacks(self):
+        direct={x.get('name'):x for x in scan.CONFIG.get('direct_top_journal_sources',[])}
+        self.assertTrue(direct['Nature'].get('feed_urls'))
+        self.assertTrue(direct['Science'].get('feed_urls'))
+        self.assertTrue(direct['Science'].get('fallback_hubs'))
+        self.assertTrue(direct['Proceedings of the National Academy of Sciences'].get('feed_urls'))
+
+    def test_institutional_collection_and_topic_landing_pages_are_not_a_evidence(self):
+        series={
+            'title':'Research and innovation paper series',
+            'summary':'Working documents from several years are listed here with links to publications.',
+            'link':'https://research-and-innovation.ec.europa.eu/strategy/support-policy-making/support-national-research-and-innovation-policy-making/research-and-innovation-paper-series_en',
+            'type':'research/policy paper',
+        }
+        open_science={
+            'title':'Open science',
+            'summary':"The Commission's open science policy, expert groups, aims, plans under Horizon Europe, latest news.",
+            'link':'https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/open-science_en',
+            'type':'research/policy paper',
+        }
+        access_call={
+            'title':'Open access calls to JRC Research Infrastructures',
+            'summary':'The JRC offers access calls to facilities for researchers from EU Member States.',
+            'link':'https://joint-research-centre.ec.europa.eu/open-access-research-infrastructures_en',
+            'type':'research/policy paper',
+        }
+        self.assertFalse(scan.final_ab_candidate_worthiness(series))
+        self.assertFalse(scan.final_ab_candidate_worthiness(open_science))
+        self.assertFalse(scan.final_ab_candidate_worthiness(access_call))
+
+    def test_jrc_distribution_notice_is_navigation_boilerplate(self):
+        msg='You are not authorized to publish or distribute it outside the European Commission.'
+        self.assertTrue(scan.source_navigation_boilerplate(msg))
+        summary=(msg+' The Security Research & Innovation Campus will bring together researchers and practitioners to turn innovative ideas into real solutions for a stronger and safer Europe.')
+        claim=scan.concise_core_message(scan._strip_relevance_boilerplate(summary), 'JRC Security Research and Innovation Campus')
+        self.assertNotIn('authorized to publish', claim.lower())
+
+    def test_nature_return_scientist_story_can_survive_c_claim_theme_check(self):
+        data=json.loads((ROOT/'radar.json').read_text(encoding='utf-8'))
+        desc=('India launched return fellowships and research funding to attract scientists in AI, quantum computing, '
+              'biotechnology and advanced materials, amid global competition for research talent.')
+        n={
+            'headline':'India launches return fellowships to lure scientists back',
+            'source':'Nature','date':'2026-09-01T00:00Z',
+            'link':'https://doi.org/10.1038/d41586-026-02636-9',
+            '_desc':desc,'_themes':scan.themes_for(desc),
+            '_entities':scan.distinct_matches(desc, scan.ENTITY_TERMS+scan.GEO_ACTORS),
+        }
+        claim=scan._signal_what_claim(desc,n['headline'])
+        self.assertIn('research talent', claim.lower())
+        rows=scan.anchor_news([n], data.get('strand_a',[]), [])
+        self.assertEqual(len(rows),1)
+        self.assertEqual(rows[0]['source'],'Nature')
+
+    def test_c_final_reserve_can_spend_below_normal_network_reserve(self):
+        self.assertTrue(scan.CONFIG.get('c_floor_final_reserve_enabled'))
+        self.assertLess(int(scan.CONFIG.get('c_floor_final_save_margin_seconds', 99)), int(scan.CONFIG.get('network_reserve_seconds', 0)))
+        scanner_text=(ROOT/'scripts'/'scan_radar.py').read_text(encoding='utf-8')
+        self.assertIn("'C-floor final reserve', collect_news", scanner_text)
+        self.assertIn('False, final_save_margin', scanner_text)
+
     def test_signal_anchor_theme_must_be_supported_by_the_published_claim(self):
         a = [{
             "title": "EU-China research cooperation under de-risking",

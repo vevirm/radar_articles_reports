@@ -1480,6 +1480,9 @@ INSTITUTION_CONTAINER_TITLES = {
     "research & innovation news", "news archive", "press releases", "media",
     "publications", "all publications", "publications and data", "publications & data",
     "research publications", "reports and publications", "library", "search results",
+    # V17.19.8: publication-series/index pages are discovery surfaces, not evidence records.
+    "research and innovation paper series", "research & innovation paper series",
+    "research and innovation papers", "research & innovation papers",
 }
 INSTITUTION_CONTAINER_PATHS = {
     "/news/all-research-and-innovation-news_en",
@@ -1500,6 +1503,8 @@ def institutional_container_page(title: str, url: str = "", page_type: str = "")
     if t in INSTITUTION_CONTAINER_TITLES:
         return True
     if re.fullmatch(r"(?:all|latest|more)\s+(?:research and innovation\s+)?news", t):
+        return True
+    if re.search(r"\b(?:paper|publication|working document)s?\s+series\b", t):
         return True
     try:
         path = urlparse(clean_text(url)).path.rstrip("/") or "/"
@@ -2560,6 +2565,8 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
     title_low = normalized(title)
     if re.search(r"\b(call|calls)\b.*\b(proposal|proposals|application|applications|topic|topics)\b", title_low):
         return "hard exclusion: call/funding page"
+    if re.search(r"\b(?:open access calls?|calls? for access|access calls?)\b", title_low) and not re.search(r"\b(?:report|study|assessment|evaluation|analysis|findings)\b", title_low):
+        return "hard exclusion: access call page"
     if (re.search(r"\b(facility|laboratory|lab)\b", title_low) or re.search(r"\b(facility|laboratory)\b", low)) and not re.search(r"\b(policy|governance|security|geopolit|strategy|foresight|economic security)\b", title_low):
         return "hard exclusion: facility/laboratory page"
     if "project" in title_low and not re.search(r"\b(report|paper|analysis|study|foresight|policy)\b", title_low):
@@ -2704,6 +2711,10 @@ def geopolitical_matches(text: str) -> list[str]:
 
 
 SOURCE_NAVIGATION_BOILERPLATE = [
+    "you are not authorized to publish or distribute it outside the european commission",
+    "you are not authorised to publish or distribute it outside the european commission",
+    "not authorized to publish or distribute outside the european commission",
+    "not authorised to publish or distribute outside the european commission",
     "access to joint research centre's publications",
     "access to joint research center's publications",
     "access to joint research centre publications",
@@ -5006,6 +5017,52 @@ def _direct_journal_article_from_html(
     return ab_item, c_item
 
 
+def _direct_journal_article_from_feed_entry(
+    entry: Any,
+    source_cfg: dict[str, Any],
+    date_floor: dt.date | None = None,
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    """Turn a publisher RSS/Atom entry into the same bounded journal candidate shape.
+
+    Publisher article pages can return 403 to GitHub-hosted runners even while their public
+    feeds remain available. Feed metadata is enough for first-pass relevance and keeps this
+    source family independent of Crossref/OpenAlex. Article-page fetching may still enrich it.
+    """
+    title = clean_text(getattr(entry, 'title', ''))
+    link = clean_text(getattr(entry, 'link', ''))
+    when = parse_feed_time(entry)
+    if not title or not link or not when:
+        return None, None
+    published = when.date()
+    floor = date_floor or DATE_FLOOR
+    if published < floor or published > dt.date.today():
+        return None, None
+    raw_desc = getattr(entry, 'summary', '') or getattr(entry, 'description', '') or ''
+    desc = clean_text(raw_desc)
+    tags = []
+    for tag in getattr(entry, 'tags', []) or []:
+        term = clean_text(tag.get('term') if isinstance(tag, dict) else getattr(tag, 'term', ''))
+        if term:
+            tags.append(term)
+    article_type = ', '.join(tags[:4])
+    authors = []
+    for author in getattr(entry, 'authors', []) or []:
+        name = clean_text(author.get('name') if isinstance(author, dict) else getattr(author, 'name', ''))
+        if name:
+            authors.append(name)
+    author_meta = ''.join(f"<meta name='citation_author' content='{html.escape(x, quote=True)}'>" for x in authors[:8])
+    synthetic = (
+        "<html><head>"
+        f"<meta name='citation_title' content='{html.escape(title, quote=True)}'>"
+        f"<meta name='citation_publication_date' content='{published.isoformat()}'>"
+        f"<meta name='description' content='{html.escape(desc, quote=True)}'>"
+        f"<meta name='citation_article_type' content='{html.escape(article_type, quote=True)}'>"
+        f"<link rel='canonical' href='{html.escape(link, quote=True)}'>"
+        f"{author_meta}</head><body><main>{html.escape(desc)}</main></body></html>"
+    )
+    return _direct_journal_article_from_html(synthetic, link, source_cfg, floor)
+
+
 def collect_direct_top_journals(
     sources: list[dict[str, Any]],
     warnings: list[str],
@@ -5021,41 +5078,78 @@ def collect_direct_top_journals(
     def one_source(src: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str | None]:
         name = clean_text(src.get('name'))
         hub = clean_text(src.get('hub'))
+        fallback_hubs = [clean_text(x) for x in src.get('fallback_hubs', []) if clean_text(x)]
+        feed_urls = [clean_text(x) for x in src.get('feed_urls', []) if clean_text(x)]
         domain = clean_text(src.get('domain')).lower().removeprefix('www.')
         pattern = clean_text(src.get('article_path_regex')) or r'/articles/|/doi/'
-        if not name or not hub or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+        if not name or not domain or (not hub and not fallback_hubs and not feed_urls) or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
             return [], [], 'budget'
         executed.add(name)
-        try:
-            r = SESSION.get(hub, timeout=timeout, allow_redirects=True)
-            if r.status_code != 200 or 'html' not in normalized(r.headers.get('content-type', 'text/html')):
-                return [], [], f'HTTP {r.status_code}'
-            soup = BeautifulSoup(r.text, 'html.parser')
-        except Exception as e:
-            return [], [], type(e).__name__
         found: dict[str, tuple[int, str]] = {}
-        for a in soup.find_all('a', href=True):
-            href = urljoin(r.url, a.get('href', ''))
+        ab: list[dict[str, Any]] = []
+        cc: list[dict[str, Any]] = []
+        transport_errors: list[str] = []
+
+        def add_link(href: str, label: str = '') -> None:
+            href = clean_text(href)
+            if not href:
+                return
             pu = urlparse(href)
             host = (pu.hostname or '').lower().removeprefix('www.')
             if not host or not (host == domain or host.endswith('.' + domain)):
-                continue
+                return
             path = pu.path or ''
             if not re.search(pattern, path, re.I):
-                continue
-            label = clean_text(a.get_text(' ', strip=True))
-            if len(label.split()) < 4:
-                continue
+                return
             key = normalized_link(href)
-            score = min(10, len(label.split()) // 4)
+            score = min(12, max(1, len(clean_text(label).split()) // 4))
             if key and (key not in found or score > found[key][0]):
                 found[key] = (score, href)
+
+        # Feed first: this is intentionally the preferred transport on GitHub runners because
+        # Nature/Science publisher HTML hubs can block automated cloud IPs with HTTP 403.
+        for feed_url in feed_urls:
+            if stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+                break
+            try:
+                fr = SESSION.get(feed_url, timeout=timeout, allow_redirects=True)
+                if fr.status_code != 200:
+                    transport_errors.append(f'feed HTTP {fr.status_code}')
+                    continue
+                feed = feedparser.parse(fr.content)
+                entries = list(getattr(feed, 'entries', []) or [])[:links_per]
+                for entry in entries:
+                    add_link(clean_text(getattr(entry, 'link', '')), clean_text(getattr(entry, 'title', '')))
+                    a_item, c_item = _direct_journal_article_from_feed_entry(entry, src, DATE_FLOOR)
+                    if a_item:
+                        ab.append(a_item)
+                    if c_item:
+                        cc.append(c_item)
+            except Exception as e:
+                transport_errors.append(f'feed {type(e).__name__}')
+
+        # Publisher/fallback HTML still enriches discovery when available. A primary 403 does
+        # not end the source: Science can fall back to its SPJ TOC and Nature can rely on RSS.
+        hubs = [x for x in [hub] + fallback_hubs if x]
+        for hub_url in hubs:
+            if len(found) >= links_per or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+                break
+            try:
+                r = SESSION.get(hub_url, timeout=timeout, allow_redirects=True)
+                if r.status_code != 200 or 'html' not in normalized(r.headers.get('content-type', 'text/html')):
+                    transport_errors.append(f'hub HTTP {r.status_code}')
+                    continue
+                soup = BeautifulSoup(r.text, 'html.parser')
+                for a in soup.find_all('a', href=True):
+                    href = urljoin(r.url, a.get('href', ''))
+                    label = clean_text(a.get_text(' ', strip=True))
+                    if len(label.split()) >= 4:
+                        add_link(href, label)
+            except Exception as e:
+                transport_errors.append(f'hub {type(e).__name__}')
+
         ranked = [href for _score, href in sorted(found.values(), key=lambda x: x[0], reverse=True)[:links_per]]
-        ab: list[dict[str, Any]] = []
-        cc: list[dict[str, Any]] = []
         for href in ranked[:pages_per]:
-            # Direct-journal watching is itself part of normal discovery and therefore honors
-            # the global network reserve. C later gets its own explicit reserved slice.
             if stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
                 break
             try:
@@ -5069,7 +5163,10 @@ def collect_direct_top_journals(
                     cc.append(c_item)
             except Exception:
                 continue
-        return ab, cc, None
+        if ab or cc or found:
+            return dedupe_candidates(ab), cc, None
+        err = '; '.join(dict.fromkeys(transport_errors))[:160] if transport_errors else 'no usable feed/hub entries'
+        return [], [], f'{name}: {err}'
 
     ab_all: list[dict[str, Any]] = []
     c_all: list[dict[str, Any]] = []
@@ -7728,6 +7825,48 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
     }
 
 
+def institutional_evidence_landing_page(item: dict[str, Any]) -> bool:
+    """Reject standing institutional landing/collection surfaces as A/B evidence.
+
+    The page may remain valuable to institutional crawling because child links are harvested
+    upstream; this check only prevents the hub itself from being published as a paper/report.
+    It is deliberately conservative and never applies to scholarly records or document-shaped
+    publication URLs.
+    """
+    if not isinstance(item, dict):
+        return False
+    title = clean_text(item.get('title', ''))
+    summary = clean_text(item.get('summary', ''))
+    link = clean_text(item.get('link', ''))
+    typ = normalized(item.get('type', ''))
+    if any(x in typ for x in ['peer-reviewed', 'journal', 'preprint', 'article']):
+        return False
+    if institutional_container_page(title, link, typ):
+        return True
+    try:
+        path = normalized(urlparse(link).path)
+    except Exception:
+        path = ''
+    # PDFs, repository handles, DOI-like records and explicit report/study pages are products.
+    if any(x in path for x in ['/repository/handle/', '/bitstream/', '/doi/', '.pdf']) or re.search(
+        r"\b(?:report|study|assessment|evaluation|working paper|policy brief|staff working document|scoreboard)\b",
+        normalized(title),
+    ):
+        return False
+    low = normalized(f'{title}. {summary}')
+    nav_cues = sum(1 for cue in [
+        'latest news', 'expert groups', 'aims, plans', 'funding opportunities',
+        'related links', 'see also', 'documents and publications', 'publications and data',
+    ] if cue in low)
+    # Short topic pages such as the Commission's "Open science" page can contain excellent
+    # child evidence, but the overview itself should not masquerade as a dated paper.
+    if len(title.split()) <= 6 and nav_cues >= 1 and standing_institutional_page(title, summary):
+        return True
+    if len(title.split()) <= 4 and 'latest news' in low and any(x in low for x in ['policy', 'horizon europe', 'research and innovation', 'r&i']):
+        return True
+    return False
+
+
 def final_ab_candidate_worthiness(item: dict[str, Any]) -> bool:
     """Last shared precision guard for every A/B discovery route.
 
@@ -7751,6 +7890,10 @@ def final_ab_candidate_worthiness(item: dict[str, Any]) -> bool:
             if scope_sentences and all(_incidental_eu_scope_sentence(sent) for sent in scope_sentences):
                 return False
     else:
+        if document_exclusion_reason(title, '', clean_text(item.get('link', '')), typ):
+            return False
+        if institutional_evidence_landing_page(item):
+            return False
         if _routine_institutional_prestige_title(title):
             return False
         if A_EVENT_RECAP_TITLE.search(title) and not A_EVENT_SUBSTANTIVE_TITLE.search(title):
@@ -9353,8 +9496,9 @@ def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
     return False, name
 
 
-def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None, coverage_queries: list[str] | None = None, include_base_queries: bool = True) -> list[dict[str, Any]]:
+def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None, coverage_queries: list[str] | None = None, include_base_queries: bool = True, reserve_seconds: int | None = None) -> list[dict[str, Any]]:
     lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
+    news_reserve = int(CONFIG.get("network_reserve_seconds", 90)) if reserve_seconds is None else max(0, int(reserve_seconds))
     start = now - dt.timedelta(hours=lookback_hours)
     workers = int(CONFIG.get("news_workers", 10))
     timeout = int(CONFIG.get("news_timeout_seconds", 10))
@@ -9373,7 +9517,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
 
     def fetch_job(job: tuple[str, str, str, bool]) -> tuple[list[dict[str, Any]], str | None]:
         name, domain, q, is_global = job
-        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        if stage_deadline_reached(stage_deadline, news_reserve):
             return [], "budget"
         url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
         try:
@@ -9424,7 +9568,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
 
     def fetch_direct_source(src: dict[str, Any]) -> tuple[list[dict[str, Any]], str | None]:
         """Bounded source-local news discovery that does not depend on Google News indexing."""
-        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        if stage_deadline_reached(stage_deadline, news_reserve):
             return [], "budget"
         name = clean_text(src.get("name"))
         domain = clean_text(src.get("domain")).lower().removeprefix("www.")
@@ -9436,7 +9580,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
         candidates: dict[str, tuple[int, str, str]] = {}
 
         for hub in hubs:
-            if stage_deadline_reached(stage_deadline, 20):
+            if stage_deadline_reached(stage_deadline, min(news_reserve, 20)):
                 break
             try:
                 r = SESSION.get(hub, timeout=timeout_direct, allow_redirects=True)
@@ -9467,7 +9611,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
         ranked = sorted(candidates.values(), key=lambda x: x[0], reverse=True)[:max_links]
         direct_items: list[dict[str, Any]] = []
         for _score, href, label in ranked[:max_pages]:
-            if stage_deadline_reached(stage_deadline, 15):
+            if stage_deadline_reached(stage_deadline, min(news_reserve, 15)):
                 break
             try:
                 r = SESSION.get(href, timeout=timeout_direct, allow_redirects=True)
@@ -10048,13 +10192,23 @@ def _signal_claim_is_fragment(claim: str) -> bool:
 
 
 def _signal_what_claim(desc: str, headline: str) -> str:
-    what = plain_language_claim(desc, headline, headline)
-    if _signal_claim_is_substantive(what) and not _signal_claim_is_fragment(what):
+    # Prefer the source description/body over simply echoing the headline. The earlier
+    # ``existing=headline`` call caused concise claim extraction to return the headline
+    # verbatim, after which theme-support validation could reject a perfectly good signal
+    # because the R&I/talent/technology mechanism lived in the description.
+    what = plain_language_claim(desc, headline, "")
+    desc_themes = set(themes_for(clean_text(desc))) & WATCH_SIGNAL_THEMES
+    what_themes = set(themes_for(what)) & WATCH_SIGNAL_THEMES if what else set()
+    if _signal_claim_is_substantive(what) and not _signal_claim_is_fragment(what) and (what_themes or not desc_themes):
         return what
     for sent in split_sentences(clean_text(desc), max_chars=5000):
         candidate = plain_language_claim(sent, headline, sent)
         if _signal_claim_is_substantive(candidate) and not _signal_claim_is_fragment(candidate):
             return candidate
+        raw_candidate = clean_text(sent)
+        raw_themes = set(themes_for(raw_candidate)) & WATCH_SIGNAL_THEMES
+        if raw_themes and _signal_claim_is_substantive(raw_candidate) and not _signal_claim_is_fragment(raw_candidate):
+            return raw_candidate
     fallback = _signal_headline_claim(headline)
     return fallback if _signal_claim_is_substantive(fallback) else ''
 
@@ -11733,7 +11887,7 @@ def main() -> int:
                 rescue_warnings: list[str] = []
                 extra_news = safe_stage(
                     f'C-floor rescue wave {wave_idx}', collect_news,
-                    now, rescue_warnings, hours, deadline, queries, False
+                    now, rescue_warnings, hours, deadline, queries, False, 12
                 )
                 warnings.extend(x for x in rescue_warnings if x not in warnings)
                 extra_news = [x for x in extra_news if isinstance(x, dict)]
@@ -12326,6 +12480,39 @@ def main() -> int:
     final_c_diagnostics: list[dict[str, str]] = []
     current_c = anchor_news(news, strand_a, final_c_diagnostics)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
+
+    # V17.19.8 final C reserve: the ordinary scan can finish with one anchored candidate that
+    # turns out to duplicate a retained signal. Run one last small, source-backed search *after*
+    # final A selection, using only a tiny save margin instead of the normal network reserve.
+    # This fixes the previous contradiction where the "reserved" C lane could call collect_news
+    # while collect_news itself still refused to spend that reserve. No failed/duplicate candidate
+    # is promoted: every reserve result still goes through anchoring, novelty and source integrity.
+    already_novel_c = _novel_signal_rows(current_c + c_floor_rescue_signals, prev_c)
+    if min_new_c > 0 and bool(CONFIG.get('c_floor_final_reserve_enabled', True)) and len(already_novel_c) < min_new_c and budget_remaining() > 24:
+        reserve_queries = c_floor_rescue_queries()
+        final_reserve_seconds = max(16, int(CONFIG.get('c_floor_final_reserve_seconds', 45) or 45))
+        final_save_margin = max(5, int(CONFIG.get('c_floor_final_save_margin_seconds', 8) or 8))
+        reserve_deadline = time.monotonic() + min(final_reserve_seconds, max(16, int(budget_remaining() - final_save_margin)))
+        reserve_warnings: list[str] = []
+        reserve_news = safe_stage(
+            'C-floor final reserve', collect_news,
+            now, reserve_warnings, 720, reserve_deadline, reserve_queries[:10], False, final_save_margin
+        )
+        warnings.extend(x for x in reserve_warnings if x not in warnings)
+        reserve_news = [x for x in reserve_news if isinstance(x, dict)]
+        if reserve_news:
+            news.extend(reserve_news)
+            strict_reserve = anchor_news(reserve_news, strand_a, final_c_diagnostics)
+            novel_reserve = _novel_signal_rows(strict_reserve, prev_c, current_c + c_floor_rescue_signals)
+            need = max(0, min_new_c - len(_novel_signal_rows(current_c + c_floor_rescue_signals, prev_c)))
+            if novel_reserve and need:
+                c_floor_rescue_signals.extend(novel_reserve[:need])
+            if need and not novel_reserve:
+                emerging_reserve = anchor_news(reserve_news, strand_a, final_c_diagnostics, allow_unanchored=True)
+                novel_emerging = _novel_signal_rows(emerging_reserve, prev_c, current_c + c_floor_rescue_signals)
+                if novel_emerging:
+                    c_floor_rescue_signals.extend(novel_emerging[:need])
+
     for rescue_row in c_floor_rescue_signals:
         if not any(signals_near_duplicate(rescue_row, x) for x in current_c):
             current_c.append(rescue_row)

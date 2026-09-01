@@ -1,3 +1,15 @@
+# v17.19.8 — resilient top-journal transport + final C reserve + evidence-surface cleanup
+
+- Keeps Nature/Science/top journals as a first-class source family, but no longer relies on publisher HTML hubs being accessible from GitHub-hosted runners. The direct journal lane now prefers RSS/Atom where configured, falls back to alternate publisher TOC surfaces (including Science's SPJ surface), and can classify from feed metadata even when individual publisher pages return HTTP 403.
+- Adds feed/fallback transports for Nature, Science, PNAS, Nature Communications, Science Advances, Nature Human Behaviour, Nature Machine Intelligence and Nature Biotechnology. Elite-journal prestige still never bypasses the ordinary European/EU + substantive R&I gate.
+- Fixes the last Strand-C disappearance path. C rescue can explicitly spend its reserved network slice instead of being blocked by the ordinary network reserve, and a final bounded 30-day reserve search runs after final Strand-A selection when the only anchored C candidate is old/duplicate. It still cannot manufacture or republish a failed/duplicate signal.
+- Repairs C claim extraction so a terse headline does not erase the substantive mechanism in the source description. The Nature scientist-return example now retains the research-talent/critical-technology evidence and can anchor normally instead of failing the published-claim theme check.
+- Treats institutional paper-series/index/standing topic pages as discovery surfaces rather than evidence records. Child documents remain crawlable. This removes the Commission `Research and innovation paper series` and `Open science` landing-page false positives.
+- Extends the shared final A/B guard to the existing document-type exclusions, including open-access facility/call pages, so fallback routes cannot re-admit them.
+- Adds European Commission/JRC distribution-notice text to source-navigation boilerplate so it cannot become a reader-facing core message.
+- The bundled radar uses the latest uploaded completed run and removes four high-confidence non-evidence/borderline additions from that run; the JRC Security Research and Innovation Campus core message is repaired from its own source summary. The completed run is not retroactively padded with C.
+- No recall/incremental profile is reset. Latest scan-state cursors are preserved, and both GitHub security workflows remain byte-for-byte unchanged.
+
 # v17.19.7 — shared final precision guard + first-class direct journal watch + C runtime reserve
 
 - Makes Nature/Science-family journals a first-class source family independent of OpenAlex/Crossref. Nature and Science are checked directly every ordinary scan; two additional elite journals rotate through direct publisher-page discovery. Direct journal pages can feed A/B or, when they are current developments rather than A/B evidence, the normal C candidate pool.
