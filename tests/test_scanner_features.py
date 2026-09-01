@@ -806,6 +806,75 @@ class V1719RecallModelTests(unittest.TestCase):
         )
         self.assertEqual(str(got), "2026-06-19")
 
+    def test_routine_research_award_announcement_is_not_strand_a_evidence(self):
+        title = "Six ERC grantees win 2024 Public Engagement with Research Award"
+        abstract = (
+            "The European Research Council announced winners of its public engagement award. "
+            "The ERC is funded under Horizon Europe and supports frontier research across Europe."
+        )
+        ev = scan.gate_scope(title, abstract, "", 1, source_kind="institutional")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "routine_award_or_prestige_announcement")
+
+    def test_local_clinical_service_research_is_not_core_eu_ri_evidence(self):
+        title = "PS09 Building an integrated psychodermatology service in central Europe: clinical implementation and research experience from Pécs, Hungary"
+        abstract = (
+            "Alongside clinical implementation, a structured research programme was established at the local service. "
+            "The work reports clinical experience from Pécs, Hungary."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "local_applied_study_not_ri_system_evidence")
+
+    def test_european_conceptual_origin_does_not_make_china_innovation_study_eu_central(self):
+        title = "How regions make missions work: regioning mechanisms in Zhongguancun's innovation trajectory"
+        abstract = (
+            "The study examines mission-oriented innovation policy in Zhongguancun, China. "
+            "It extends the regioning concept beyond its original European federal contexts to China's governance system."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
+
+    def test_signal_claim_falls_back_to_event_headline_when_body_is_fragment(self):
+        got = scan._signal_what_claim(
+            "as European industries scale up AI adoption.",
+            "Second EU-Taiwan Semiconductor Industry Dialogue",
+        )
+        self.assertEqual(got, "The EU and Taiwan held their second semiconductor industry dialogue.")
+
+    def test_bundle_history_merge_cannot_resurrect_fixed_precision_false_positives(self):
+        bad_award = {
+            "title": "Six ERC grantees win 2024 Public Engagement with Research Award",
+            "summary": "The ERC announced award winners under Horizon Europe.",
+            "type": "official notice / primary source",
+        }
+        bad_local = {
+            "title": "PS09 Building an integrated psychodermatology service in central Europe: clinical implementation and research experience from Pécs, Hungary",
+            "summary": "A clinical service in Pécs, Hungary established a structured research programme.",
+            "type": "peer-reviewed article",
+        }
+        good = {
+            "title": "Research and technology infrastructures in the European hydrogen economy: Status, needs and innovation concepts",
+            "summary": "European research infrastructures enable hydrogen technology development and innovation.",
+            "type": "peer-reviewed article",
+        }
+        self.assertTrue(scan._saved_ab_high_confidence_precision_reject(bad_award))
+        self.assertTrue(scan._saved_ab_high_confidence_precision_reject(bad_local))
+        self.assertFalse(scan._saved_ab_high_confidence_precision_reject(good))
+
+    def test_new_ab_unique_count_uses_retained_new_rows_not_gate_candidates(self):
+        a = [{
+            "title": "New retained paper", "link": "https://doi.org/10.1/new",
+            "source": "Journal", "strand": "A", "new_this_scan": True,
+        }]
+        b = [{
+            "title": "Old retained method", "link": "https://doi.org/10.1/old",
+            "source": "Journal", "strand": "B", "new_this_scan": True,
+        }]
+        old_id = scan.identity(scan.internalize_previous(b[0]))
+        self.assertEqual(scan.new_ab_unique_count(a, b, {old_id}), 1)
+
     def test_signal_anchor_theme_must_be_supported_by_the_published_claim(self):
         a = [{
             "title": "EU-China research cooperation under de-risking",

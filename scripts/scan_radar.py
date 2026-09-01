@@ -2876,6 +2876,11 @@ A_INCIDENTAL_EU_SCOPE_PATTERNS = [
     r'\bglobal (?:research |innovation |patent )?(?:pattern|landscape|perspective|analysis)\b.{0,150}\beurope\b',
     r'\b(?:dataset|data set|sample)\b.{0,90}\b(?:school|schools|hospital|hospitals|site|sites)\b.{0,55}\b(?:in|from)\b',
     r'\bbuilds on (?:previous|earlier)\b.{0,220}\b(?:european union|europe|european)\b',
+    # Conceptual/theoretical provenance is not European study scope. This catches papers
+    # that apply a framework elsewhere while merely noting that it originated in Europe.
+    r'\bbeyond (?:its |the )?(?:original |initial )?\b.{0,100}\beuropean\b.{0,80}\b(?:context|contexts|setting|settings|case|cases|framework|model)\b',
+    r'\b(?:original|initial|earlier) european\b.{0,80}\b(?:context|contexts|setting|settings|framework|model)\b',
+    r'\b(?:concept|framework|model|approach|theory)\b.{0,80}\b(?:developed|originated|derived|established)\b.{0,80}\b(?:in|from) europe\b',
 ]
 
 A_RI_INCIDENTAL_PATTERNS = [
@@ -2892,6 +2897,57 @@ A_EVENT_SUBSTANTIVE_TITLE = re.compile(
     r'\b(?:report|study|analysis|paper|brief|statement|declaration|recommendation|strategy|framework|roadmap|position)\b',
     re.I,
 )
+
+# V17.19.4: evidence-worthiness guard. Routine prestige announcements and narrowly local
+# applied/service studies are not core evidence about the European R&I system. This is kept
+# deliberately narrow so it does not re-introduce the old strategic-language bottleneck.
+A_ROUTINE_PRESTIGE_TITLE = re.compile(
+    r'\b(?:award|awards|prize|prizes|medal|medals)\b', re.I
+)
+A_ROUTINE_PRESTIGE_ACTION = re.compile(
+    r'\b(?:win|wins|winner|winners|awarded|receives?|recipients?|announc(?:e|es|ed)|honou?r(?:s|ed)?)\b', re.I
+)
+A_LOCAL_APPLIED_CUES = [
+    'clinical implementation', 'clinical service', 'integrated service', 'patient service',
+    'health service', 'hospital service', 'care pathway', 'clinical pathway',
+]
+A_SYSTEM_LEVEL_RI_CUES = [
+    'research policy', 'innovation policy', 'science policy', 'research security', 'knowledge security',
+    'science diplomacy', 'research system', 'innovation system', 'research governance',
+    'innovation governance', 'research infrastructure', 'research infrastructures',
+    'scientific infrastructure', 'research funding', 'european research area', 'horizon europe',
+    'international research cooperation', 'research collaboration', 'scientific collaboration',
+    'research workforce', 'scientific workforce', 'research talent', 'scientific talent',
+    'research assessment', 'open science', 'research data', 'scientific data',
+    'technology transfer', 'knowledge transfer', 'innovation ecosystem',
+    'legal framework', 'legal frameworks', 'regulatory framework', 'regulatory frameworks',
+]
+
+def _routine_institutional_prestige_title(title: str) -> bool:
+    t = clean_text(title)
+    return bool(
+        A_ROUTINE_PRESTIGE_TITLE.search(t)
+        and A_ROUTINE_PRESTIGE_ACTION.search(t)
+        and not A_EVENT_SUBSTANTIVE_TITLE.search(t)
+    )
+
+def _local_applied_study_without_ri_system_implication(title: str, abstract: str, body: str) -> bool:
+    text = clean_text(f"{title}. {abstract}. {body[:5000]}")
+    low = normalized(text)
+    if not contains_any(low, A_LOCAL_APPLIED_CUES):
+        return False
+    # A local applied study remains eligible if it explicitly concerns an R&I-system mechanism
+    # or a strategic technology domain. The guard only removes service/clinical implementation
+    # papers whose 'research' content is internal to the local application itself.
+    if contains_any(low, A_SYSTEM_LEVEL_RI_CUES) or distinct_matches(low, A_MAJOR_TECH_DOMAINS):
+        return False
+    member_hits = bounded_matches(text, MEMBER_STATE_SCOPE)
+    local_place = bool(re.search(r'\b(?:city|hospital|clinic|centre|center|university|department|service)\b', low))
+    # One member state plus a local service/institution is enough to mark this as local applied
+    # evidence. Generic 'central Europe' wording cannot override that local study design.
+    return bool(local_place and len(set(map(normalized, member_hits))) <= 1 and not any(
+        x in normalized(title) for x in ['european research area', 'european research infrastructure']
+    ))
 
 
 def _central_ri_hits(text: str) -> list[str]:
@@ -2953,8 +3009,14 @@ def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'g
     body = _strip_relevance_boilerplate(body[:12000])
     evidence = clean_text(f"{title}. {abstract}. {body}")
 
+    if source_kind != 'scholarly' and _routine_institutional_prestige_title(title):
+        return False, 'routine_award_or_prestige_announcement', []
+
     if source_kind != 'scholarly' and A_EVENT_RECAP_TITLE.search(title) and not A_EVENT_SUBSTANTIVE_TITLE.search(title):
         return False, 'event_recap_not_substantive_evidence', []
+
+    if source_kind == 'scholarly' and _local_applied_study_without_ri_system_implication(title, abstract, body):
+        return False, 'local_applied_study_not_ri_system_evidence', []
 
     # Fail closed when retrieved institutional text is plainly a related-content/navigation
     # page rather than the named publication. This avoids admitting a good title on bad evidence.
@@ -7377,6 +7439,18 @@ def dedupe_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def new_ab_unique_count(strand_a: Iterable[dict[str, Any]], strand_b: Iterable[dict[str, Any]], previous_ids: set[str]) -> int:
+    """Count genuinely new retained A/B identities, not pre-dedupe gate candidates."""
+    ids: set[str] = set()
+    for item in list(strand_a) + list(strand_b):
+        if not isinstance(item, dict) or not item.get('new_this_scan'):
+            continue
+        ident = identity(internalize_previous(item))
+        if ident and ident not in previous_ids:
+            ids.add(ident)
+    return len(ids)
+
+
 def genuinely_new_ab_candidates(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     """Return unique gate-passing A/B candidates not already present in the saved corpus.
 
@@ -7648,10 +7722,39 @@ def _sanitize_saved_radar(data: Any) -> tuple[dict[str, Any], dict[str, int]]:
             if not record_date_integrity_ok(saved):
                 _diag_inc("saved_reject_date_integrity")
                 continue
+            if strand in {"strand_a", "strand_b"} and _saved_ab_high_confidence_precision_reject(saved):
+                _diag_inc("saved_reject_v17194_precision")
+                continue
             clean.append(saved)
         removed[strand] = len(raw) - len(clean)
         out[strand] = clean
     return out, removed
+
+
+def _saved_ab_high_confidence_precision_reject(item: dict[str, Any]) -> bool:
+    """Block only unmistakable V17.19.4 A/B precision failures during bundle/history merge.
+
+    Whole-repository uploads may merge a larger pre-upload radar snapshot from Git history.
+    These checks prevent already-fixed false positives from being resurrected without
+    re-auditing the entire historical corpus or resetting any discovery cursor.
+    """
+    if not isinstance(item, dict):
+        return True
+    title = clean_text(item.get('title', ''))
+    summary = clean_text(item.get('summary', ''))
+    typ = normalized(item.get('type', ''))
+    scholarly = any(x in typ for x in ['peer-reviewed', 'journal', 'preprint', 'article'])
+    if not scholarly and _routine_institutional_prestige_title(title):
+        return True
+    if scholarly and _local_applied_study_without_ri_system_implication(title, summary, ''):
+        return True
+    # If Europe is absent from the title and every visible European sentence is explicitly
+    # background/comparator/conceptual provenance, it is safe to block resurrection.
+    if scholarly and not _scope_hits_in_sentence(title, clean_text(f"{title}. {summary}")):
+        scope_sentences = [s for s in split_sentences(summary) if _scope_hits_in_sentence(s, summary)]
+        if scope_sentences and all(_incidental_eu_scope_sentence(sent) for sent in scope_sentences):
+            return True
+    return False
 
 
 def _saved_corpus_size(data: Any) -> int:
@@ -7691,6 +7794,9 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
                 continue
             if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
                 _diag_inc("history_reject_source_integrity")
+                continue
+            if _saved_ab_high_confidence_precision_reject(item):
+                _diag_inc("history_reject_v17194_precision")
                 continue
             key = identity(internalize_previous(item))
             if not key or key == "title:":
@@ -9553,6 +9659,43 @@ def signal_why(theme: str, kind: str) -> str:
     return base
 
 
+def _signal_headline_claim(headline: str) -> str:
+    """Turn a clearly event-like headline into a minimal source-backed factual sentence.
+
+    This is only a fallback when body extraction returns a grammatical fragment. It never
+    adds details beyond the headline itself.
+    """
+    h = clean_text(headline).strip(' .')
+    m = re.match(r'^(First|Second|Third|Fourth)\s+EU[-–—]([A-Z][A-Za-z .&-]+?)\s+(.+?\bDialogue)$', h, re.I)
+    if m:
+        ordinal, partner, topic = m.groups()
+        topic = re.sub(r'\bDialogue$', 'dialogue', topic, flags=re.I)
+        topic = ' '.join(w if (w.isupper() and len(w) <= 5) else w.lower() for w in topic.split())
+        return clean_text(f"The EU and {partner} held their {ordinal.lower()} {topic}.")
+    return h + ('' if h.endswith(('.', '!', '?')) else '.') if h else ''
+
+
+def _signal_claim_is_fragment(claim: str) -> bool:
+    c = clean_text(claim)
+    if not c:
+        return True
+    if c[:1].islower():
+        return True
+    return bool(re.match(r'^(?:as|and|but|while|which|with|including|when|where|because|to|for|by|of|in)\b', c, re.I))
+
+
+def _signal_what_claim(desc: str, headline: str) -> str:
+    what = plain_language_claim(desc, headline, headline)
+    if _signal_claim_is_substantive(what) and not _signal_claim_is_fragment(what):
+        return what
+    for sent in split_sentences(clean_text(desc), max_chars=5000):
+        candidate = plain_language_claim(sent, headline, sent)
+        if _signal_claim_is_substantive(candidate) and not _signal_claim_is_fragment(candidate):
+            return candidate
+    fallback = _signal_headline_claim(headline)
+    return fallback if _signal_claim_is_substantive(fallback) else ''
+
+
 def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Anchor C only to substantive Strand-A evidence.
 
@@ -9660,14 +9803,7 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
         kind=signal_kind(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
-        what=plain_language_claim(n.get('_desc',''), source_headline, source_headline)
-        if not _signal_claim_is_substantive(what):
-            what = ""
-            for sent in split_sentences(clean_text(n.get('_desc','')), max_chars=5000):
-                candidate = plain_language_claim(sent, source_headline, sent)
-                if _signal_claim_is_substantive(candidate):
-                    what = candidate
-                    break
+        what=_signal_what_claim(n.get('_desc',''), source_headline)
         if not what:
             continue
         # Require the selected relationship to be visible in the actual extracted signal
@@ -11664,6 +11800,7 @@ def main() -> int:
     previous_b_ids = {identity(internalize_previous(x)) for x in prev_b if isinstance(x, dict)}
     new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
+    new_ab_unique_retained = new_ab_unique_count(strand_a, strand_b, previous_a_ids | previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
     rejection_funnel = build_admission_rejection_funnel(
         unique_gate_candidates=len(deduped),
@@ -11861,7 +11998,7 @@ def main() -> int:
         "scan_results": {
             "new_a": new_a_count,
             "new_b": new_b_count,
-            "new_ab_unique": len(new_selected),
+            "new_ab_unique": new_ab_unique_retained,
             "new_c": new_c_count,
             "aged_out_this_scan": {k: int(v) for k, v in age_window_removed.items()},
             "aged_out_total_this_scan": int(sum(age_window_removed.values())),

@@ -1,3 +1,18 @@
+# v17.19.4 — evidence-worthiness and signal-claim precision
+
+This is a narrow precision release built from the latest uploaded radar run. It keeps the V17.19 recall/centrality model and does not restore the old strategic-language gate.
+
+## Changes
+- Routine institutional award/prize announcements no longer qualify as Strand A evidence merely because they mention Horizon Europe, ERC funding or research.
+- Narrowly local applied/clinical service studies no longer qualify as core European R&I evidence unless they contain an explicit R&I-system mechanism (for example research infrastructure, governance, collaboration, data/open-science, workforce or legal/regulatory framework) or a strategic-technology mechanism.
+- A study does not gain European scope merely because its conceptual framework originated in European contexts; this blocks the Zhongguancun/European-framework false-positive pattern.
+- Strand-C claim extraction now rejects grammatical fragments and falls back to a factual headline-derived sentence when needed. The EU–Taiwan semiconductor dialogue is therefore stored as “The EU and Taiwan held their second semiconductor industry dialogue.” rather than “as European industries scale up AI adoption.”
+- `scan_results.new_ab_unique` now counts genuinely new retained A/B identities, not pre-dedupe/pre-retention gate candidates.
+- Whole-repository Git-history merge has a surgical precision guard so these fixed A/B false positives cannot be resurrected from a larger pre-upload radar snapshot. This is not a full historical re-audit.
+- The bundled radar is based on the latest uploaded run: 15 new A items are retained, 4 high-confidence false positives are removed, and the one relevant C signal is retained with repaired claim text.
+- `recall_profile_version`, incremental state version, source rotations/cursors and both GitHub security workflows are unchanged.
+- Added regression tests for award announcements, local clinical-service studies, conceptual-Europe background, C fragment fallback, retained-new count consistency and bundle-history resurrection protection.
+
 # v17.19.3 — content-type, weak-signal relation and JRC date repair
 
 This is a narrow precision release on top of v17.19.2. It keeps the broader R&I-first recall model and the European-R&I centrality gate unchanged.
