@@ -926,7 +926,12 @@
     "China quantum breakthrough research capability",
     "United States quantum breakthrough research capability",
     "China semiconductor breakthrough chip capability",
-    "United States semiconductor breakthrough chip capability"
+    "United States semiconductor breakthrough chip capability",
+    "India scientists return fellowship research talent quantum biotech AI",
+    "China biomedical technology regulation research innovation",
+    "US China battery industrial policy technology competition",
+    "global research talent competition scientists mobility funding",
+    "academic mobility researchers global science policy"
   ],
   "quality_profile_version": "v17.18.2-content-not-provenance-strategic-bridge",
   "crossref_priority_journals": [
@@ -971,7 +976,9 @@
     "Futures & Foresight Science",
     "Journal of Futures Studies",
     "World Futures Review",
-    "Government Information Quarterly"
+    "Government Information Quarterly",
+    "Studies in Higher Education",
+    "New Political Economy"
   ],
   "crossref_priority_journal_queries": [
     "European research security geopolitics",
@@ -2211,6 +2218,11 @@
       "always": true,
       "feed_urls": [
         "https://www.nature.com/nature/articles?format=rss"
+      ],
+      "google_news_always": true,
+      "google_news_queries": [
+        "researchers OR scientists OR universities OR \"research funding\" OR \"science policy\" OR \"research security\" OR \"academic mobility\" OR doctoral",
+        "semiconductor OR quantum OR biotechnology OR biotech OR \"artificial intelligence\" OR \"industrial policy\" OR \"technology regulation\""
       ]
     },
     {
@@ -2224,6 +2236,11 @@
       ],
       "fallback_hubs": [
         "https://spj.science.org/toc/science/current"
+      ],
+      "google_news_always": true,
+      "google_news_queries": [
+        "researchers OR scientists OR universities OR \"research funding\" OR \"science policy\" OR \"research security\" OR \"academic mobility\" OR doctoral",
+        "semiconductor OR quantum OR biotechnology OR biotech OR \"artificial intelligence\" OR \"industrial policy\" OR \"technology regulation\""
       ]
     },
     {
@@ -2282,6 +2299,32 @@
       "feed_urls": [
         "https://www.nature.com/nbt/articles?format=rss"
       ]
+    },
+    {
+      "name": "New Political Economy",
+      "hub": "https://www.tandfonline.com/journals/cnpe20",
+      "domain": "tandfonline.com",
+      "article_path_regex": "/doi/",
+      "always": true,
+      "feed_urls": [
+        "https://www.tandfonline.com/action/showFeed?type=etoc&feed=rss&jc=cnpe20"
+      ],
+      "google_news_queries": [
+        "\"New Political Economy\" (technology OR research OR science OR industrial OR geopolitical OR innovation OR China OR Europe)"
+      ]
+    },
+    {
+      "name": "Studies in Higher Education",
+      "hub": "https://www.tandfonline.com/journals/cshe20",
+      "domain": "tandfonline.com",
+      "article_path_regex": "/doi/",
+      "always": true,
+      "feed_urls": [
+        "https://www.tandfonline.com/action/showFeed?type=etoc&feed=rss&jc=cshe20"
+      ],
+      "google_news_queries": [
+        "\"Studies in Higher Education\" (researcher OR academic OR mobility OR talent OR careers OR international OR Europe OR China)"
+      ]
     }
   ],
   "direct_top_journal_rotating_sources_per_scan": 2,
@@ -2293,5 +2336,7 @@
   "c_floor_final_reserve_enabled": true,
   "c_floor_final_reserve_seconds": 45,
   "c_floor_final_save_margin_seconds": 8,
-  "weak_signal_retention_days": 60
+  "weak_signal_retention_days": 60,
+  "direct_top_journal_google_news_lookback_days": 14,
+  "direct_top_journal_google_news_queries_per_source": 2
 }

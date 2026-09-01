@@ -40,6 +40,7 @@ import math
 import os
 import re
 import threading
+import types
 import unicodedata
 import subprocess
 import sys
@@ -3113,6 +3114,23 @@ def _incidental_eu_scope_sentence(sent: str) -> bool:
     if len(members) == 1 and not distinct_matches(sent, EU_DIRECT + EU_GENERIC) and not has_eu_word(sent):
         if re.search(r'\b(?:dataset|data set|sample|schools?|hospitals?|sites?|participants?)\b.{0,100}\b(?:in|from)\b', low):
             return True
+        # V17.19.12: a demonym identifying the nationality/provenance of a theorist is not
+        # study scope. This closes the generic-theory leak where e.g. "German sociologist"
+        # made an otherwise non-European innovation-systems paper look directly European.
+        # Keep the rule narrow: it targets intellectual/person provenance, not German/French
+        # researchers as the actual population of a current study.
+        if re.search(
+            r'\b(?:german|french|italian|spanish|dutch|swedish|danish|finnish|austrian|belgian|polish|portuguese|irish|czech|greek|hungarian)\b'
+            r'.{0,45}\b(?:philosopher|sociologist|economist|theorist|scholar|historian|thinker|author)\b',
+            low, re.I,
+        ):
+            return True
+        if re.search(
+            r'\b(?:philosopher|sociologist|economist|theorist|scholar|historian|thinker|author)\b'
+            r'.{0,45}\b(?:german|french|italian|spanish|dutch|swedish|danish|finnish|austrian|belgian|polish|portuguese|irish|czech|greek|hungarian)\b',
+            low, re.I,
+        ):
+            return True
     return False
 
 
@@ -3161,6 +3179,12 @@ def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'g
 
     title_scope = _scope_hits_in_sentence(title, evidence)
     title_ri = _central_ri_hits(title)
+    # A Europe/EU-centred doctoral/PhD title is directly about the research-training
+    # pipeline even when a short Nature correspondence headline says only "PhD" rather
+    # than spelling out "doctoral training". Do not make PhD a global generic R&I token;
+    # this bridge activates only when European scope is already central in the title.
+    if title_scope and re.search(r'\bph\.?d\.?\b', normalized(title), re.I) and 'doctoral training' not in title_ri:
+        title_ri.append('doctoral training')
 
     sentences = split_sentences(clean_text(f"{abstract}. {body}"))
     scope_rows: list[tuple[int, str, list[str]]] = []
@@ -5179,6 +5203,64 @@ def collect_direct_top_journals(
             except Exception as e:
                 transport_errors.append(f'hub {type(e).__name__}')
 
+        # V17.19.12: Nature/Science news, comment and correspondence live outside their
+        # research-article TOC feeds (for Nature this includes d41586-* material). Use a
+        # source-bounded Google News RSS fallback as discovery transport, while preserving
+        # the configured publisher as the evidence source. It runs every scan for sources
+        # marked google_news_always and only as a transport fallback for the others.
+        google_queries = [clean_text(x) for x in src.get('google_news_queries', []) if clean_text(x)]
+        use_google = bool(src.get('google_news_always')) or (not ab and not cc and not found)
+        if use_google and google_queries and not stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+            days = max(2, min(30, int(CONFIG.get('direct_top_journal_google_news_lookback_days', 14) or 14)))
+            for phrase in google_queries[:max(1, int(CONFIG.get('direct_top_journal_google_news_queries_per_source', 2) or 2))]:
+                if stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
+                    break
+                q = f'site:{domain} ({phrase}) when:{days}d'
+                gurl = 'https://news.google.com/rss/search?q=' + quote_plus(q) + '&hl=en-GB&gl=GB&ceid=GB:en'
+                try:
+                    gr = SESSION.get(gurl, timeout=timeout, allow_redirects=True)
+                    if gr.status_code != 200:
+                        transport_errors.append(f'google-news HTTP {gr.status_code}')
+                        continue
+                    gfeed = feedparser.parse(gr.content)
+                except Exception as e:
+                    transport_errors.append(f'google-news {type(e).__name__}')
+                    continue
+                for entry in list(getattr(gfeed, 'entries', []) or [])[:links_per]:
+                    when = parse_feed_time(entry)
+                    if not when or when.date() < DATE_FLOOR or when.date() > dt.date.today():
+                        continue
+                    g_source_name, g_source_domain = feed_source(entry)
+                    g_source_domain = clean_text(g_source_domain).lower().removeprefix('www.')
+                    if g_source_domain and not (g_source_domain == domain or g_source_domain.endswith('.' + domain)):
+                        continue
+                    gtitle = clean_text(getattr(entry, 'title', ''))
+                    raw_desc = getattr(entry, 'summary', '') or getattr(entry, 'description', '') or ''
+                    gdesc = clean_text(raw_desc)
+                    for suffix in [g_source_name, name, clean_text(g_source_name).replace('|', ' ')]:
+                        if suffix and gtitle.lower().endswith(' - ' + suffix.lower()):
+                            gtitle = gtitle[:-(len(suffix) + 3)].strip()
+                    if not gtitle:
+                        continue
+                    # Rebuild a minimal feed entry so the direct-journal parser sees the
+                    # cleaned title instead of Google News' " - Publisher" suffix.
+                    clone = types.SimpleNamespace(
+                        title=gtitle, link=clean_text(getattr(entry, 'link', '')),
+                        summary=gdesc, description=gdesc, published_parsed=getattr(entry, 'published_parsed', None),
+                        updated_parsed=getattr(entry, 'updated_parsed', None), published=clean_text(getattr(entry, 'published', '')),
+                        updated=clean_text(getattr(entry, 'updated', '')), tags=[], authors=[],
+                    )
+                    a_item, c_item = _direct_journal_article_from_feed_entry(clone, src, DATE_FLOOR)
+                    if a_item:
+                        a_item['source_domain'] = domain
+                        a_item['discovery_provenance'] = 'direct_top_journal_google_news'
+                        a_item['provenance'] = ['direct_top_journal_google_news']
+                        ab.append(a_item)
+                    if c_item:
+                        c_item['source_domain'] = domain
+                        c_item['discovery_provenance'] = 'direct_top_journal_google_news'
+                        cc.append(c_item)
+
         ranked = [href for _score, href in sorted(found.values(), key=lambda x: x[0], reverse=True)[:links_per]]
         for href in ranked[:pages_per]:
             if stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 100))):
@@ -6486,7 +6568,9 @@ def record_source_integrity_ok(item: dict[str, Any]) -> bool:
         link_host = _domain_host(link)
         declared_domain = clean_text(item.get("source_domain", "")).lower().removeprefix("www.")
         provenance = normalized(item.get("discovery_provenance", ""))
-        if link_host == "news.google.com" and provenance in {"google_news_rss", "google news rss"} and declared_domain:
+        if link_host == "news.google.com" and provenance in {
+            "google_news_rss", "google news rss", "direct_top_journal_google_news"
+        } and declared_domain:
             if declared_domain == expected or declared_domain.endswith("." + expected) or expected.endswith("." + declared_domain):
                 return True
             return False
@@ -8210,6 +8294,9 @@ def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -
                 if strand == "strand_c" and not _saved_signal_passes(item):
                     _diag_inc("history_reject_c_quality")
                     continue
+                if strand in {"strand_a", "strand_b"} and _saved_ab_high_confidence_precision_reject(item):
+                    _diag_inc("history_reject_v171912_precision")
+                    continue
                 key = signal_identity(item) if strand == "strand_c" else identity(internalize_previous(item))
                 if not key or key in {"title:", "signal::", "signal-link:"}:
                     continue
@@ -8287,6 +8374,12 @@ def _saved_ab_high_confidence_precision_reject(item: dict[str, Any]) -> bool:
     if scholarly and _historical_subject_without_current_ri_implication(title, summary, ''):
         return True
     if scholarly and _local_applied_study_without_ri_system_implication(title, summary, ''):
+        return True
+    # Exact saved-summary protection for the V17.19.11 theory-provenance leak. The live
+    # discovery gate is now general (nationality of a theorist is incidental), but the
+    # shortened public summary no longer contains the original 'German sociologist' sentence.
+    # Keep this one known bad title from being resurrected by a larger pre-upload Git snapshot.
+    if normalized(title) == normalized('Illuhmannating Technological Innovation Systems: Towards a Systems Perspective'):
         return True
     # If Europe is absent from the title and every visible European sentence is explicitly
     # background/comparator/conceptual provenance, it is safe to block resurrection.
@@ -9268,7 +9361,8 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
             'export control', 'semiconductor', 'advanced chip', 'compute infrastructure', 'compute access',
             'quantum', 'research cooperation', 'research collaboration', 'research security',
             'research talent', 'scientific collaboration', 'critical raw material', 'critical mineral',
-            'ai investment gap', 'frontier ai compute'
+            'biotech', 'biotechnology', 'biomedical technolog', 'battery', 'batteries', 'electric vehicle',
+            'industrial policy', 'ai investment gap', 'frontier ai compute'
         ])
         hard_noise = contains_any(full, [
             'table tennis', 'school ai councils', 'student agency', 'drug prices', 'rural america',
@@ -9279,7 +9373,7 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
         relational_external = relational_signal_candidate_text(full, "")
         if hard_noise or not (
             external_shock
-            or (narrow_external and (reframing_signal_text(full) or material_update_signal_text(full)) and strategic_frame and (found & derived_themes))
+            or (narrow_external and (reframing_signal_text(full) or material_update_signal_text(full) or relational_external) and strategic_frame and (found & derived_themes))
             # Curator ontology can widen *discovery* beyond the old hard-coded tech list,
             # but only for a factual R&I/strategic update. A concrete Strand-A publication
             # anchor is still mandatory later, so a spreadsheet phrase never admits C alone.
@@ -10261,6 +10355,69 @@ def _signal_what_claim(desc: str, headline: str) -> str:
     return fallback if _signal_claim_is_substantive(fallback) else ''
 
 
+def _clean_signal_claim_source_suffix(claim: str, source: str) -> str:
+    """Keep the event sentence separate from its visible Source label.
+
+    Google News descriptions often repeat the publisher name at the end of the first
+    sentence. Public cards already render Source explicitly, so "... Financial Times."
+    should not become part of What happened.
+    """
+    out = clean_text(claim)
+    src = clean_text(source).strip(' .')
+    if not out or not src:
+        return out
+    variants = {src, src.replace('|', ' ')}
+    for variant in sorted(variants, key=len, reverse=True):
+        if not variant:
+            continue
+        candidate = re.sub(
+            r'(?:\s*[-–—|:]\s*|\s+)' + re.escape(variant) + r'[.!?]*$',
+            '', out, flags=re.I,
+        ).strip(' .')
+        if candidate != out.strip(' .') and len(candidate.split()) >= 4:
+            out = candidate + ('' if candidate.endswith(('.', '!', '?')) else '.')
+            break
+    return out
+
+
+_ANCHOR_TECH_TOPIC_PATTERNS: dict[str, tuple[str, ...]] = {
+    'quantum': ('quantum',),
+    'semiconductors': ('semiconductor', 'semiconductors', 'chip', 'chips', 'microelectronics'),
+    'ai': ('artificial intelligence', ' ai ', 'ai-driven', 'foundation model', 'large language model', 'machine learning'),
+    'compute': ('high-performance computing', 'high performance computing', 'hpc', 'supercomputer', 'compute capacity', 'computing capacity', 'data centre', 'data center', 'cloud capacity'),
+    'battery_ev': ('battery', 'batteries', 'electric vehicle', 'electric vehicles', ' ev ', 'ev supply chain'),
+    'biotech': ('biotech', 'biotechnology', 'biomedical technolog', 'biomanufactur', 'bioeconomy'),
+    'radio_astronomy': ('radio astronomy', 'astronomical', 'astronomy', 'telescope', 'observatory'),
+    'space': ('space technology', 'satellite', 'spacecraft', 'launcher', 'launch vehicle'),
+    'critical_minerals': ('critical mineral', 'critical minerals', 'critical raw material', 'rare earth'),
+    'nuclear': ('nuclear', 'fusion', 'fission'),
+}
+
+
+def _anchor_tech_topics(text: str) -> set[str]:
+    low = ' ' + normalized(text) + ' '
+    out: set[str] = set()
+    for key, terms in _ANCHOR_TECH_TOPIC_PATTERNS.items():
+        if any(term in low for term in terms):
+            out.add(key)
+    return out
+
+
+def _anchor_title_technology_compatible(signal_headline: str, anchor_title: str) -> bool:
+    """Reject cross-technology anchors when both headlines name different technologies.
+
+    Broad themes such as "critical and emerging technologies" are intentionally wide.
+    They must not make radio astronomy about Africa anchor to an EV/AI-fintech paper merely
+    because both descriptions contain a generic AI/HPC sentence. If both titles name a
+    technology family, at least one family must match.
+    """
+    signal_topics = _anchor_tech_topics(signal_headline)
+    anchor_topics = _anchor_tech_topics(anchor_title)
+    if signal_topics and anchor_topics and not (signal_topics & anchor_topics):
+        return False
+    return True
+
+
 def anchor_news(
     news: list[dict[str, Any]],
     a_corpus: list[dict[str, Any]],
@@ -10340,9 +10497,12 @@ def anchor_news(
                 shared=set(ontology_bridge_themes)
             if not shared:
                 continue
-            atok=tokens(a.get('title','')+' '+a.get('summary',''))
+            atitle=clean_text(a.get('title',''))
+            if not _anchor_title_technology_compatible(headline, atitle):
+                continue
+            atok=tokens(atitle+' '+a.get('summary',''))
             jacc=len(ntok & atok)/max(1,len(ntok | atok))
-            aentities=set(distinct_matches(a.get('title','')+' '+a.get('summary',''), ENTITY_TERMS+GEO_ACTORS))
+            aentities=set(distinct_matches(atitle+' '+a.get('summary',''), ENTITY_TERMS+GEO_ACTORS))
             entity_overlap=len(nentities & aentities)
             broad_themes={
                 'critical and emerging technologies',
@@ -10350,7 +10510,13 @@ def anchor_news(
                 'economic security and R&I',
             }
             broad_only=bool(shared) and shared.issubset(broad_themes)
-            if broad_only and not n_c_retrieval and (entity_overlap==0 or jacc<0.025):
+            # Broad thematic overlap is not an anchor by itself. Require a real named-actor
+            # bridge or substantially stronger lexical overlap. This is deliberately stricter
+            # than discovery, because a wrong A↔C relationship is worse than leaving a signal
+            # for the rescue/unanchored route.
+            if broad_only and not n_c_retrieval and not (
+                (entity_overlap >= 1 and jacc >= 0.035) or jacc >= 0.065
+            ):
                 continue
             score=3.0*len(shared)+1.5*entity_overlap+8.0*jacc
             if n_c_retrieval and ontology_bridge_themes:
@@ -10396,6 +10562,7 @@ def anchor_news(
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
         what=_signal_what_claim(n.get('_desc',''), source_headline)
+        what=_clean_signal_claim_source_suffix(what, source)
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue

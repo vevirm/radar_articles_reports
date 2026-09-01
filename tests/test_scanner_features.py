@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import time
+import types
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -1212,6 +1213,114 @@ class V1719RecallModelTests(unittest.TestCase):
             "_entities": ["China"],
         }
         self.assertEqual(scan.anchor_news([n], a), [])
+
+
+
+class V171912PrecisionAndJournalTests(unittest.TestCase):
+    def test_theorist_nationality_does_not_create_european_study_scope(self):
+        title='Illuhmannating Technological Innovation Systems: Towards a Systems Perspective'
+        abstract=(
+            'The Technological Innovation Systems framework is extended using the work of German sociologist Niklas Luhmann. '
+            'The paper develops a systems-theory account of innovation systems and technological innovation in general.'
+        )
+        ok, reason, evidence=scan.eu_ri_centrality(title, abstract, '', 'scholarly')
+        self.assertFalse(ok)
+        self.assertEqual(reason, 'eu_or_ri_only_incidental')
+
+    def test_radio_astronomy_cannot_anchor_to_ev_ai_fintech(self):
+        a=[{
+            'title':'Strengthening U.S. Global Leadership in Electric Vehicle Supply Chains Through AI-Driven Fintech Innovation',
+            'summary':'The paper examines US electric-vehicle battery supply chains and AI-driven fintech innovation.',
+            'source':'Example journal','date':'2026-07-01','link':'https://doi.org/10.1000/ev','strand':'A','eu_relevance':'direct',
+        }]
+        desc=('Radio astronomy in Africa is driving demand for high-performance computing, advanced networking, '
+              'data-intensive infrastructure and artificial intelligence for observatories.')
+        n={'headline':'Evolving radio astronomy and its impact on Africa','source':'International Telecommunication Union',
+           'date':'2026-08-27','link':'https://www.itu.int/hub/example','_desc':desc,
+           '_themes':scan.themes_for(desc),'_entities':scan.distinct_matches(desc, scan.ENTITY_TERMS+scan.GEO_ACTORS)}
+        self.assertEqual(scan.anchor_news([n],a,[]),[])
+
+    def test_signal_what_does_not_repeat_source_name(self):
+        claim='Government of Canada Invests CAD $195 Million in Xanadu to Build the Quantum Supply Chain Financial Times.'
+        cleaned=scan._clean_signal_claim_source_suffix(claim,'Financial Times')
+        self.assertEqual(cleaned,'Government of Canada Invests CAD $195 Million in Xanadu to Build the Quantum Supply Chain.')
+
+    def test_saved_tis_false_positive_cannot_be_resurrected(self):
+        row={
+            'title':'Illuhmannating Technological Innovation Systems: Towards a Systems Perspective',
+            'summary':'The Technological Innovation Systems framework operates from an economic perspective and is linked to wider environment.',
+            'source':'Systems Research and Behavioral Science','date':'2026-05-26',
+            'link':'https://doi.org/10.1002/sres.70089','type':'peer-reviewed article','strand':'A',
+        }
+        self.assertTrue(scan._saved_ab_high_confidence_precision_reject(row))
+
+    def test_saved_itu_radio_astronomy_false_signal_fails_saved_c_gate(self):
+        row={
+            'headline':'Evolving radio astronomy and its impact on Africa - ITU',
+            'source':'International Telecommunication Union','date':'2026-08-27',
+            'link':'https://www.itu.int/hub/2026/08/evolving-radio-astronomy-and-its-impact-on-africa/',
+            'signal_note':'This transition has accelerated demand for high-performance computing and advanced networking.',
+            'anchor':'Strengthening U.S. Global Leadership in Electric Vehicle Supply Chains Through AI-Driven Fintech Innovation (Strand A)',
+        }
+        self.assertFalse(scan._saved_signal_passes(row))
+
+    def test_europe_practical_phd_nature_title_is_a_scope(self):
+        title="Europe should adapt, not copy, China's practical PhD"
+        ok, reason, evidence=scan.eu_ri_centrality(title, '', '', 'scholarly')
+        self.assertTrue(ok)
+        self.assertIn('doctoral training', evidence)
+
+    def test_external_biomedical_regulation_can_enter_c_discovery(self):
+        title="China's regulatory innovation for new biomedical technologies"
+        desc=('China introduced a regulatory framework for new biomedical technologies, changing how biotechnology '
+              'research and technology development can move toward clinical and industrial use.')
+        self.assertTrue(scan.weak_signal_candidate_text(title,desc))
+        self.assertTrue(scan.factual_news(title,desc))
+
+    def test_nature_science_google_news_fallback_is_configured(self):
+        direct={x.get('name'):x for x in scan.CONFIG.get('direct_top_journal_sources',[])}
+        for name in ('Nature','Science'):
+            self.assertTrue(direct[name].get('google_news_always'))
+            self.assertTrue(direct[name].get('google_news_queries'))
+        self.assertIn('New Political Economy',direct)
+        self.assertIn('Studies in Higher Education',direct)
+        self.assertTrue(direct['New Political Economy'].get('feed_urls'))
+        self.assertTrue(direct['Studies in Higher Education'].get('feed_urls'))
+
+    def test_nature_google_news_fallback_can_produce_c_when_primary_surfaces_403(self):
+        src={
+            'name':'Nature','hub':'https://www.nature.com/nature/articles','domain':'nature.com','article_path_regex':'/articles/',
+            'always':True,'feed_urls':['https://www.nature.com/nature/articles?format=rss'],'google_news_always':True,
+            'google_news_queries':['researchers scientists research funding talent'],
+        }
+        entry=types.SimpleNamespace(
+            title='India has an ambitious plan to lure scientists back — will it work? - Nature',
+            link='https://news.google.com/rss/articles/nature-example',
+            summary=('India launched return fellowships and research funding to attract scientists in AI, quantum computing, '
+                     'biotechnology and advanced materials amid global competition for research talent.'),
+            source=types.SimpleNamespace(title='Nature',href='https://www.nature.com'),
+            published_parsed=time.struct_time((2026,9,1,8,0,0,1,244,0)), updated_parsed=None,
+            published='',updated='',tags=[],authors=[]
+        )
+        class R:
+            def __init__(self,status,content=b'',headers=None,url=''):
+                self.status_code=status; self.content=content; self.headers=headers or {}; self.url=url
+        def fake_get(url,*args,**kwargs):
+            if 'news.google.com/rss/search' in url:
+                return R(200,b'<rss/>',{'content-type':'application/rss+xml'},url)
+            return R(403,b'',{'content-type':'text/html'},url)
+        old_floor=scan.DATE_FLOOR
+        try:
+            scan.DATE_FLOOR=scan.dt.date(2026,5,1)
+            with mock.patch.object(scan.SESSION,'get',side_effect=fake_get), mock.patch.object(scan.feedparser,'parse',return_value=types.SimpleNamespace(entries=[entry])):
+                ab,cc=scan.collect_direct_top_journals([src],[],stage_deadline=time.monotonic()+30,execution_stats={})
+        finally:
+            scan.DATE_FLOOR=old_floor
+        self.assertEqual(ab,[])
+        self.assertEqual(len(cc),1)
+        self.assertEqual(cc[0]['source'],'Nature')
+        self.assertEqual(cc[0]['source_domain'],'nature.com')
+        self.assertEqual(cc[0]['discovery_provenance'],'direct_top_journal_google_news')
 
 
 class FrontierBridgeTests(unittest.TestCase):

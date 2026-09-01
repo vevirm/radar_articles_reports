@@ -1,3 +1,15 @@
+# v17.19.12 — C anchor precision + journal-source retrieval repair
+
+- Tightens Strand-C anchoring so a broad technology theme cannot connect unrelated technologies. The live false positive `Evolving radio astronomy and its impact on Africa` can no longer anchor to the US EV-supply-chain/AI-fintech paper.
+- Raises the evidence requirement for broad C anchors: broad theme overlap alone is not enough; a real actor/lexical bridge is required.
+- Keeps the public `What happened` sentence separate from the visible Source label, removing Google News publisher suffixes such as `Financial Times` from the claim text.
+- Extends the direct top-journal lane beyond research-article TOCs. Nature and Science now run a bounded source-specific Google News RSS fallback every scan so News/Comment/Correspondence material (including Nature d41586-* items) is discoverable even when publisher hubs/feeds are incomplete or return 403. Publisher identity remains source-bounded and must pass the ordinary A/C gates.
+- Adds direct first-class feed/fallback attention for `New Political Economy` and `Studies in Higher Education`, and adds both to the Crossref priority-journal task bank.
+- Adds external-C retrieval seeds for scientist-return/talent competition, biomedical regulation, battery industrial policy and global academic mobility. These are retrieval only and cannot bypass C quality/Europe-impact rules.
+- Treats theorist/person nationality such as `German sociologist` as provenance rather than European study scope. This removes the generic `Illuhmannating Technological Innovation Systems` false positive without excluding studies whose actual population/system is German or European.
+- Bundles the latest completed live state, removing only the two confirmed false positives from that run: the generic TIS paper from A and the ITU radio-astronomy signal from C.
+- Four-hour automatic cadence, cumulative A/B/frontier retention, 60-day-from-first_seen C retention and the credential/write security boundary are unchanged. No scan-state/cursor/profile reset.
+
 # v17.19.11 — whole-repository upload compatibility
 
 This release removes the need for any separate/miniature workflow-file upload. The full repository is the only artifact the curator needs.
