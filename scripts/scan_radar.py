@@ -2806,6 +2806,210 @@ A_OFFTOPIC_CONSUMER_OR_LOCAL = [
     'school teaching', 'smart teaching', 'classroom', 'agricultural marketing', 'marketing logistics',
 ]
 
+# V17.19.2 centrality guard. Recall stays broad, but Strand A must be *about* European
+# R&I rather than merely mentioning Europe somewhere in an otherwise unrelated paper.
+# These are subject/mechanism terms, deliberately stricter than _ri_hits(): generic
+# words such as "research", "science", "innovation" or an AI application do not by
+# themselves establish R&I centrality.
+A_CENTRAL_RI_TERMS = [
+    'research and innovation', 'research & innovation', 'r&i', 'research policy',
+    'innovation policy', 'science policy', 'research security', 'knowledge security',
+    'science diplomacy', 'horizon europe', 'fp10', 'framework programme',
+    'european research area', 'research system', 'innovation system',
+    'research governance', 'innovation governance', 'research infrastructure',
+    'research infrastructures', 'scientific infrastructure', 'research funding',
+    'research programme', 'research program', 'research excellence', 'open science',
+    'research data', 'scientific data', 'research capacity', 'scientific capacity',
+    'innovation capacity', 'research workforce', 'scientific workforce',
+    'research talent', 'scientific talent', 'research careers', 'scientific careers',
+    'doctoral training', 'doctoral candidates', 'research collaboration',
+    'scientific collaboration', 'international research cooperation',
+    'technology transfer', 'knowledge transfer', 'industrial research',
+    'industrial innovation', 'innovation ecosystem', 'r&d', 'research and development',
+    'r&d investment', 'r&d investments', 'research and development investment',
+    'technology development', 'technological capability', 'technological capabilities',
+    'technology capabilities', 'compute capacity', 'computing capacity',
+]
+
+A_CENTRAL_TECH_RI_MECHANISMS = [
+    'r&d', 'research and development', 'research policy', 'innovation policy',
+    'science policy', 'research infrastructure', 'research infrastructures',
+    'scientific infrastructure', 'research funding', 'research programme',
+    'research program', 'research capacity', 'scientific capacity',
+    'innovation capacity', 'innovation ecosystem', 'technology development',
+    'industrial research', 'industrial innovation', 'technology transfer',
+    'knowledge transfer', 'scientific research', 'research collaboration',
+    'scientific collaboration', 'research excellence', 'funding', 'compute capacity',
+    'computing capacity', 'cloud capacity', 'ai capacity',
+]
+
+A_INCIDENTAL_EU_SCOPE_PATTERNS = [
+    r'\b(?:prior|previous|earlier|existing|past)\s+(?:research|studies|literature|evidence)\b.{0,120}\b(?:europe|european)\b',
+    r'\b(?:research|studies|literature|evidence)\b.{0,80}\b(?:dominated by|largely from|mostly from)\b.{0,80}\b(?:europe|european)\b',
+    r'\bevidence from\s+(?:europe|european countries)\b',
+    r'\beuropean colonial (?:power|powers|rule|experience)\b',
+    r'\b(?:eu|european union|europe)\b.{0,70}\b(?:included as|used as)\s+(?:a |the )?(?:comparator|benchmark)\b',
+    r'\b(?:comparator|benchmark)\b.{0,70}\b(?:eu|european union|europe)\b',
+    r'\b(?:top|leading)\s+\w*\s*(?:five|six|seven|eight|nine|ten|\d+)\s+(?:countries|jurisdictions|regions)\b.{0,140}\beurope\b',
+    r'\bglobal (?:research |innovation |patent )?(?:pattern|landscape|perspective|analysis)\b.{0,150}\beurope\b',
+    r'\b(?:dataset|data set|sample)\b.{0,90}\b(?:school|schools|hospital|hospitals|site|sites)\b.{0,55}\b(?:in|from)\b',
+    r'\bbuilds on (?:previous|earlier)\b.{0,220}\b(?:european union|europe|european)\b',
+]
+
+A_RI_INCIDENTAL_PATTERNS = [
+    r'\bactions? (?:are |is )?part of\b.{0,100}\b(?:horizon europe|digital europe|innovation programme|innovation program)\b',
+    r'\b(?:funded|co-funded|cofunded) by\b.{0,100}\b(?:horizon europe|european union|eu)\b',
+    r'\bgrant agreement\b',
+]
+
+A_EVENT_RECAP_TITLE = re.compile(
+    r'\b(?:host|hosts|hosted|attend|attends|attended|participat|meeting|meetings|event|events|conference|visit|workshop)\b',
+    re.I,
+)
+A_EVENT_SUBSTANTIVE_TITLE = re.compile(
+    r'\b(?:report|study|analysis|paper|brief|statement|declaration|recommendation|strategy|framework|roadmap|position)\b',
+    re.I,
+)
+
+
+def _central_ri_hits(text: str) -> list[str]:
+    """Return R&I terms that are strong enough to establish subject centrality."""
+    txt = _strip_relevance_boilerplate(text)
+    hits = distinct_matches(txt, A_CENTRAL_RI_TERMS)
+    for sent in split_sentences(txt):
+        if any(re.search(pat, normalized(sent), re.I) for pat in A_RI_INCIDENTAL_PATTERNS):
+            continue
+        domains = distinct_matches(sent, A_TECH_DOMAINS)
+        mechanisms = distinct_matches(sent, A_CENTRAL_TECH_RI_MECHANISMS)
+        if domains and mechanisms:
+            label = f"{domains[0]} + {mechanisms[0]}"
+            if label not in hits:
+                hits.append(label)
+    return hits
+
+
+def _scope_hits_in_sentence(sent: str, document: str) -> list[str]:
+    hits = distinct_matches(sent, EU_DIRECT + EU_GENERIC) + bounded_matches(sent, MEMBER_STATE_SCOPE)
+    if union_eu_word(sent, document):
+        hits.append('EU')
+    return list(dict.fromkeys(hits))
+
+
+def _incidental_eu_scope_sentence(sent: str) -> bool:
+    low = normalized(sent)
+    if any(re.search(pat, low, re.I) for pat in A_INCIDENTAL_EU_SCOPE_PATTERNS):
+        return True
+    # A single-country location of an application/data set is not automatically European
+    # R&I evidence. Multi-country studies and explicit EU/Europe studies are handled below.
+    members = bounded_matches(sent, MEMBER_STATE_SCOPE)
+    if len(members) == 1 and not distinct_matches(sent, EU_DIRECT + EU_GENERIC) and not has_eu_word(sent):
+        if re.search(r'\b(?:dataset|data set|sample|schools?|hospitals?|sites?|participants?)\b.{0,100}\b(?:in|from)\b', low):
+            return True
+    return False
+
+
+def _study_scope_sentence(sent: str) -> bool:
+    low = normalized(sent)
+    return bool(re.search(
+        r'\b(?:this (?:study|paper|analysis|article)|the (?:study|paper|analysis)|we|our analysis|the analysis)\b.{0,90}'
+        r'\b(?:examines?|analys(?:e|es|ed|ing)|analyz(?:e|es|ed|ing)|assess(?:es|ed|ing)?|investigat(?:e|es|ed|ing)|'
+        r'evaluat(?:e|es|ed|ing)|covers?|uses?|draws? on|focus(?:es|ed|ing)? on|compares?)\b|'
+        r'\b(?:data|evidence|survey|sample)\b.{0,80}\b(?:across|from|covering|in)\b',
+        low,
+    ))
+
+
+def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'general') -> tuple[bool, str, list[str]]:
+    """Require European R&I to be a subject of the source, not an incidental mention.
+
+    This is intentionally *not* a strategic/geopolitical gate. A source may pass with no
+    strategic vocabulary at all. The check only asks whether (1) Europe/EU is genuinely in
+    scope and (2) R&I is a real object/mechanism of the source.
+    """
+    title = clean_text(title)
+    abstract = _strip_relevance_boilerplate(abstract)
+    body = _strip_relevance_boilerplate(body[:12000])
+    evidence = clean_text(f"{title}. {abstract}. {body}")
+
+    if source_kind != 'scholarly' and A_EVENT_RECAP_TITLE.search(title) and not A_EVENT_SUBSTANTIVE_TITLE.search(title):
+        return False, 'event_recap_not_substantive_evidence', []
+
+    # Fail closed when retrieved institutional text is plainly a related-content/navigation
+    # page rather than the named publication. This avoids admitting a good title on bad evidence.
+    if source_kind != 'scholarly':
+        nav_count = len(re.findall(r'\bread more\b', normalized(evidence)))
+        old_date_count = len(re.findall(r'\b20(?:1[0-9]|2[0-4])\b', evidence))
+        if nav_count >= 2 and old_date_count >= 2:
+            return False, 'navigation_or_related_content_contamination', []
+
+    title_scope = _scope_hits_in_sentence(title, evidence)
+    title_ri = _central_ri_hits(title)
+
+    sentences = split_sentences(clean_text(f"{abstract}. {body}"))
+    scope_rows: list[tuple[int, str, list[str]]] = []
+    ri_rows: list[tuple[int, str, list[str]]] = []
+    for idx, sent in enumerate(sentences):
+        scope = _scope_hits_in_sentence(sent, evidence)
+        if scope and not _incidental_eu_scope_sentence(sent):
+            # Publisher/repository metadata is provenance, not subject scope.
+            low = normalized(sent)
+            if any(x in low for x in [
+                'publications office of the european union', 'joint research centre publications repository',
+                'publications repository', 'this document is only visible at the commission level',
+            ]) and not _study_scope_sentence(sent):
+                scope = []
+        else:
+            scope = []
+        if scope:
+            scope_rows.append((idx, sent, scope))
+        ri = _central_ri_hits(sent)
+        if ri and not any(re.search(pat, normalized(sent), re.I) for pat in A_RI_INCIDENTAL_PATTERNS):
+            ri_rows.append((idx, sent, ri))
+
+    if not (title_ri or ri_rows):
+        return False, 'ri_not_central', []
+
+    # Strongest route: Europe/EU and R&I are both central in the title.
+    if title_scope and title_ri:
+        return True, 'title_eu_ri_central', list(dict.fromkeys(title_scope + title_ri))[:8]
+
+    # An EU/European title establishes geography; require real R&I substance somewhere in
+    # the evidence unit, not a programme-list or acknowledgement sentence.
+    if title_scope and ri_rows:
+        return True, 'eu_title_with_substantive_ri', list(dict.fromkeys(title_scope + ri_rows[0][2]))[:8]
+
+    # A clearly R&I-centred title plus a non-incidental European scope sentence is also
+    # sufficient. This captures, for example, a clinical-trial-infrastructure paper whose
+    # title establishes R&I and whose abstract separately establishes Europe as the problem scope.
+    if title_ri and scope_rows:
+        return True, 'ri_title_with_european_scope', list(dict.fromkeys(title_ri + scope_rows[0][2]))[:8]
+
+    # Without EU scope in the title, require a non-incidental scope sentence. R&I may be in
+    # the same or an adjacent sentence; this preserves papers that establish geography and
+    # findings separately while rejecting background/comparator mentions.
+    for s_idx, s_sent, s_hits in scope_rows:
+        for r_idx, r_sent, r_hits in ri_rows:
+            if abs(s_idx - r_idx) <= 1:
+                if _study_scope_sentence(s_sent) or s_idx == r_idx or len(s_hits) >= 2:
+                    return True, 'scope_and_ri_linked_in_evidence', list(dict.fromkeys(s_hits + r_hits))[:8]
+
+    # Repeated non-incidental European scope plus repeated R&I substance is sufficient for
+    # longer institutional material even when extraction breaks prose into fragments.
+    if len(scope_rows) >= 2 and len(ri_rows) >= 2:
+        ev = scope_rows[0][2] + ri_rows[0][2]
+        return True, 'repeated_eu_and_ri_scope', list(dict.fromkeys(ev))[:8]
+
+    # A study explicitly covering several European member states is Europe-centred even if
+    # it does not use the words EU/Europe. Keep the V17.19 recall repair for this case.
+    for s_idx, s_sent, s_hits in scope_rows:
+        member_hits = bounded_matches(s_sent, MEMBER_STATE_SCOPE)
+        if len(set(map(normalized, member_hits))) >= 2 and _study_scope_sentence(s_sent):
+            if title_ri or any(abs(s_idx - r_idx) <= 2 for r_idx, _, _ in ri_rows):
+                ev = member_hits + (title_ri or ri_rows[0][2])
+                return True, 'multi_member_state_ri_study', list(dict.fromkeys(ev))[:8]
+
+    return False, 'eu_or_ri_only_incidental', []
+
 
 def _major_a_focus(text: str, explicit_geo: bool) -> bool:
     """Require system-level or strategically consequential EU R&I centrality.
@@ -3309,7 +3513,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general', eu_context_anchors: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Classify the three-layer radar model.
 
-    A = substantive papers about EU R&I in a geopolitical/economic-security context.
+    A = substantive sources centrally about European/EU R&I; strategic significance may be explicit or inferred downstream.
     B = developed/adapted/extended/refined futures methods, plus forward-looking R&I/technology-analysis methods, reusable for understanding the future of A.
     C is handled separately in the current-development scanner and never admitted here.
     """
@@ -3321,7 +3525,8 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         return {
             'a_pass': False, 'b_pass': False, 'a_focus_pass': False,
             'aboutness_pass': False, 'aboutness_reason': 'language', 'text_mode': '',
-            'aboutness_evidence': {}, 'eu_relevance': None, 'eu_evidence': [],
+            'aboutness_evidence': {}, 'centrality_pass': False, 'centrality_reason': 'language', 'centrality_evidence': [],
+            'eu_relevance': None, 'eu_evidence': [],
             'ri_evidence': [], 'geo_evidence': [], 'bridge_sentence': '', 'a_route': '',
             'a_context_evidence': [], 'external_eu_bridge': '', 'external_eu_bridge_is_inference': False, 'bridge_supported': False, 'bridge_mode': '',
             'foresight_evidence': [], 'method_evidence': [], 'method_bridge': '',
@@ -3332,6 +3537,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
 
     a_focus, ri_hits, geo_hits, a_bridge, a_route, a_context = _a_focus_ok(title, abstract, body, source_kind)
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
+    centrality_ok, centrality_reason, centrality_evidence = eu_ri_centrality(title, abstract, body, source_kind)
     external_ok = False
     external_bridge = ''
     external_evidence: list[str] = []
@@ -3347,7 +3553,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     # A admission is source-supported, European/EU-centred and substantively about R&I.
     # Strategic/geopolitical language is intentionally not a hard gate; implications may
     # be assessed by the radar after admission.
-    a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass'))
+    a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok)
     if external_ok:
         a_route = 'external-strategic-shock'
         a_context = external_evidence
@@ -3360,6 +3566,7 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
             ri_hits = [f"{domain} capability shock"] if domain else ['strategic R&I capability shock']
         geo_hits = list(dict.fromkeys(geo_hits + external_evidence))[:8]
         aboutness = {**aboutness, 'pass': True, 'reason': 'external_strategic_shock_bridge'}
+        centrality_ok, centrality_reason, centrality_evidence = True, 'external_source_supported_bridge', external_evidence
 
     b_pass, b_families, b_bridge, b_suitability, b_route = _b_method_evidence(
         title, abstract, body, source_kind, source_tier
@@ -3378,6 +3585,9 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
             'ri_terms': aboutness.get('ri_terms', [])[:6],
             'geo_terms': aboutness.get('geo_terms', [])[:6],
         },
+        'centrality_pass': bool(centrality_ok),
+        'centrality_reason': centrality_reason,
+        'centrality_evidence': centrality_evidence[:8],
         # Preserve the evaluated EU scope even when another A gate fails. Diagnostics must
         # not rewrite a strategic/aboutness failure as "no direct EU".
         'eu_relevance': eu_rel if eu_rel else ('derived' if b_pass else None),
@@ -3637,6 +3847,8 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_defer_insufficient_text")
     elif ev.get("eu_relevance") != "direct":
         _diag_inc(f"{prefix}_reject_no_direct_eu")
+    elif not ev.get("centrality_pass", True):
+        _diag_inc(f"{prefix}_reject_incidental_eu_ri_scope")
     elif reason in {"no_ri", "incidental_ri"} or not ev.get("ri_evidence"):
         _diag_inc(f"{prefix}_reject_no_ri")
     elif reason in {"no_substantive_ri_focus"}:
@@ -3724,13 +3936,15 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
     evaluated = n("openalex_evaluated") + n("crossref_evaluated") + n("institution_evaluated")
     insufficient = n("openalex_defer_insufficient_text") + n("crossref_defer_insufficient_text") + n("institution_defer_insufficient_text")
     no_eu = n("openalex_reject_no_direct_eu") + n("crossref_reject_no_direct_eu") + n("institution_reject_no_direct_eu")
+    incidental_scope = n("openalex_reject_incidental_eu_ri_scope") + n("crossref_reject_incidental_eu_ri_scope") + n("institution_reject_incidental_eu_ri_scope")
     no_ri = n("openalex_reject_no_ri") + n("crossref_reject_no_ri") + n("institution_reject_no_ri")
     no_strategy = n("openalex_reject_no_strategic_context") + n("crossref_reject_no_strategic_context") + n("institution_reject_no_strategic_context")
     other_aboutness = n("openalex_reject_aboutness") + n("crossref_reject_aboutness") + n("institution_reject_aboutness")
     gate_passed = n("openalex_admitted_gate") + n("crossref_admitted_gate") + n("institution_admitted_gate")
     enough_text = max(0, evaluated - insufficient)
     direct_eu = max(0, enough_text - no_eu)
-    ri_substantive = max(0, direct_eu - no_ri)
+    central_eu_ri = max(0, direct_eu - incidental_scope)
+    ri_substantive = max(0, central_eu_ri - no_ri)
     # V17.19: strategic context is no longer a hard admission gate. Keep historical
     # rejection counters visible for old runs, but do not subtract them from the current
     # admission funnel.
@@ -3740,16 +3954,18 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
         "gate_evaluated": evaluated,
         "enough_text_to_judge": enough_text,
         "direct_eu_scope_remaining": direct_eu,
+        "central_eu_ri_scope_remaining": central_eu_ri,
         "substantive_ri_remaining": ri_substantive,
         "strategic_context_remaining": strategic,
         "strategic_context_gate_active": False,
-        "admission_model": "European/EU scope + substantive R&I; strategic impact assessed after admission",
+        "admission_model": "central European/EU R&I subject + substantive R&I; strategic impact assessed after admission",
         "gate_passed_before_cross_source_dedupe": gate_passed,
         "unique_gate_candidates": max(0, int(unique_gate_candidates)),
         "duplicates_or_known_removed_after_gate": max(0, gate_passed - int(unique_gate_candidates)),
         "genuinely_new_unique_ab": max(0, int(genuinely_new_candidates)),
         "missing_text_deferred": insufficient,
         "rejected_no_direct_eu": no_eu,
+        "rejected_incidental_eu_ri_scope": incidental_scope,
         "rejected_no_ri": no_ri,
         "rejected_no_strategic_context": no_strategy,
         "rejected_other_aboutness": other_aboutness,

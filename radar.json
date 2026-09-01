@@ -17873,9 +17873,9 @@
     "c_recovery_backfill_this_run": false
   },
   "scan_results": {
-    "new_a": 38,
+    "new_a": 18,
     "new_b": 0,
-    "new_ab_unique": 39,
+    "new_ab_unique": 18,
     "new_c": 0,
     "aged_out_this_scan": {
       "strand_a": 0,
@@ -17921,7 +17921,7 @@
       "EU R&D capability gap competitiveness dependency"
     ],
     "finding_context_queries_executed": 4,
-    "note_a": "",
+    "note_a": "v17.19.2 centrality cleanup retained 18 of the prior run's 38 Strand A additions; 20 incidental/comparator/location-only or non-substantive records were removed.",
     "note_b": "This scan added 0 new Strand B item(s). Earlier accepted items remain in the corpus.",
     "note_c": "This scan added 0 new weak signal(s). Strand C remains low evidence and is retained for six months.",
     "frontier_gap_targets": [
@@ -18093,7 +18093,9 @@
       "empty_cells_published": 0,
       "published_empty_cells": [],
       "published_qualifying": 44
-    }
+    },
+    "centrality_cleanup_removed": 20,
+    "centrality_cleanup_version": "v17.19.2-incidental-eu-ri-centrality"
   },
   "strand_a": [
     {
@@ -18160,39 +18162,6 @@
       "a_context_evidence": [],
       "text_mode": "abstract_only",
       "date_basis": "prominent_page_date",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "ALLEA and the Scientific Advice Mechanism Host Science Policy Events in Turin",
-      "authors": "maria ronald",
-      "source": "ALLEA",
-      "date": "2026-07-07",
-      "link": "https://allea.org/allea-and-the-scientific-advice-mechanism-host-science-policy-events-in-turin/",
-      "type": "research/policy paper",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "ALLEA and the Scientific Advice Mechanism Host Science Policy Events in Turin. The visit offered a valuable opportunity for informal exchanges and further discussion among members in a unique cultural setting, before concluding the day with a group dinner in the historic centre of Turin. https://allea.org/wp-content/uploads/2026/07/20260612_Torino-045_small-1.jpg 1333 2000 maria ronald https://allea.org/wp-content/uploads/2019/04/allealogo-1-300x83.png maria ronald 2026-07-07 17:30:47 2026-07-07 17:30:47 ALLEA and the Scientific Advice Mechanism Host Science Policy Events in Turin. Strengthening Trust in Science On 11 June, the ALLEA Task Force on Strengthening Trust in Science also met in Turin, bringing together members from across Europe to take stock of the Task Force’s progress and shape its future direction.",
-      "core_message": "The event was moderated by Antonello Provenzale, a member of the ALLEA Task Force on Strengthening Trust in Science.",
-      "relevance_note": "Direct European/EU relevance (europe, italy); R&I evidence: science policy,  ai  + science; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "italy",
-        "netherlands"
-      ],
-      "ri_evidence": [
-        "science policy",
-        " ai  + science",
-        " ai  + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
       "first_seen": "2026-09-01T09:06Z",
       "new_this_scan": true
     },
@@ -18308,36 +18277,6 @@
       "new_this_scan": true
     },
     {
-      "title": "EU support for the news media sector",
-      "authors": "European Commission — Digital Strategy",
-      "source": "European Commission — Digital Strategy",
-      "date": "2026-07-31",
-      "link": "https://digital-strategy.ec.europa.eu/en/library/eu-support-news-media-sector",
-      "type": "official notice / primary source",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Actions part of innovation programmes ( Digital Europe, Horizon Europe ). EU support for the news media sector. The European Commission works to address structural challenges in media sectors and to promote a free, diverse and pluralistic media environment..",
-      "core_message": "EU support for the news media sector.",
-      "relevance_note": "Direct European/EU relevance (EU); R&I evidence: horizon europe; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "EU"
-      ],
-      "ri_evidence": [
-        "horizon europe"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "date_basis": "prominent_page_date",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
       "title": "Artificial Intelligence for Biology: Capabilities, Readiness, and Policy Implications",
       "authors": "RUIZ, SERRA Victoria, FORTUNA, Paula, CURION, Fabiola, PETRILLO, Mauro, LEONI, Gabriele, BILI, Danai, MELANDRI, Daniela, VANGHELUWE, Nick, COMTE, Valentin, BERTOLINI, AGNOLETTO Lorenzo, COECKE, Sandra, CERESA, Mario, QUERCI, Maddalena, WIESENTHAL, Tobias",
       "source": "JRC Publications Repository",
@@ -18371,101 +18310,6 @@
         "access to",
         "standards"
       ],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Policy Brief 07/2026: Artificial Intelligence and the Future of Citizen Participation",
-      "authors": "Bertelsmann Stiftung",
-      "source": "Bertelsmann Stiftung",
-      "date": "2026-07-28",
-      "link": "https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/Policy_Brief_07_2026_Artificial_Intelligence_Citizen_Participation.pdf",
-      "type": "policy brief",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Policy Brief 07/2026: Artificial Intelligence and the Future of Citizen Participation. The Policy Brief provides a concise summary of the study’s main findings. It highlights key applications, risks and recommendations for the responsible use of AI in citizen participation..",
-      "core_message": "The Policy Brief provides a concise summary of the study’s main findings.",
-      "relevance_note": "Direct European/EU relevance (european commission, european union); R&I evidence: artificial intelligence + innovation; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "european commission",
-        "european union"
-      ],
-      "ri_evidence": [
-        "artificial intelligence + innovation"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "full_text",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Artificial Intelligence and the Future of Citizen Participation",
-      "authors": "Bertelsmann Stiftung",
-      "source": "Bertelsmann Stiftung",
-      "date": "2026-07-28",
-      "link": "https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/Artificial_Intelligence_and_the_Future_of_Citizen_Participation_study__2_.pdf",
-      "type": "institutional report",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "In particular, it builds on previous OECD publications including the results of the 2023 OECD Trust Survey , OECD Guidelines for Citizen Participation Processes, Tackling civic participation challenges with emerging technologies, Exploring New Frontiers in Citizen Participation in the Policy Cycle, Governing with Artificial Intelligence: The State of Play and Way Forward in Core Government Functions , as well as on Bertelsmann Stiftung’s Five ideas for renewing democratic participation , Under Construction: Citizen Participation in the European Union , and Public AI White Paper. Artificial Intelligence and the Future of Citizen Participation. The study shows how AI can make citizen participation more accessible, efficient and scalable.",
-      "core_message": "how AI can make citizen participation more accessible, efficient and scalable.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: artificial intelligence + innovation; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european",
-        "france",
-        "germany"
-      ],
-      "ri_evidence": [
-        "artificial intelligence + innovation"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "full_text",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Translating global innovation scripts: science and innovation policy and organisational change in Chilean universities",
-      "authors": "Pablo Villalobos, Julio Labraña",
-      "source": "Science and Public Policy",
-      "date": "2026-06-24",
-      "link": "https://doi.org/10.1093/scipol/scag059",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Responses are path-dependent: research-intensive, private, and regional institutions translate policy incentives differently based on research capacity, governance model, and territorial position. Abstract Research on science and innovation policy in higher education has been dominated by evidence from Europe and North America. Translating global innovation scripts: science and innovation policy and organisational change in Chilean universities.",
-      "core_message": "Translating global innovation scripts: science and innovation policy and organisational change in Chilean universities.",
-      "relevance_note": "Direct European/EU relevance (europe); R&I evidence: research and innovation, innovation policy; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe"
-      ],
-      "ri_evidence": [
-        "research and innovation",
-        "innovation policy",
-        "r&d",
-        "research capacity",
-        "research-intensive"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
       "text_mode": "abstract_only",
       "first_seen": "2026-09-01T09:06Z",
       "new_this_scan": true
@@ -18533,36 +18377,6 @@
       "new_this_scan": true
     },
     {
-      "title": "Revisiting Dependency in the Twenty-First Century: A Critical Analysis of Africa–China Relations",
-      "authors": "Chick Edmond",
-      "source": "Society",
-      "date": "2026-06-17",
-      "link": "https://doi.org/10.1007/s12115-026-01239-4",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Using qualitative comparative historical analysis, along with specific case studies and secondary sources (academic journals, speeches, government publications, etc.), the research demonstrates that while Africa-China relations exhibit fewer structural features of classical colonialism, they display greater similarities with the colonial and dependency experience particularly regarding trade composition, infrastructure finance, and technology transfer; however, there exist growing and limited examples of African agency in the area of dependency and underdevelopment—when collective action and institutional strength can be applied. Abstract This research assesses the characteristics of today’s Africa–China relations using dependency theory, world systems theory, neocolonialism, and South-South cooperation, using comparisons between historical African dependence on European colonial powers and recent reliance on China in terms of trade, infrastructure, debt, and technology. Revisiting Dependency in the Twenty-First Century: A Critical Analysis of Africa–China Relations.",
-      "core_message": "Revisiting Dependency in the Twenty-First Century: A Critical Analysis of Africa–China Relations.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: technology transfer; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        "technology transfer"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
       "title": "Unravelling the role of innovation and institutions in circular economy actions across European small‐ and medium‐sized enterprises",
       "authors": "Lucio Fuentelsaz, Mercedes Gil‐Lamata, Ana Beatriz Lopes de Sousa Jabbour",
       "source": "European Management Review",
@@ -18622,247 +18436,6 @@
       "new_this_scan": true
     },
     {
-      "title": "AI-Powered Student Dropout Prediction and Personalized Intervention Using TC-Net in Education",
-      "authors": "Meng Luo",
-      "source": "Discover Artificial Intelligence",
-      "date": "2026-08-27",
-      "link": "https://doi.org/10.1007/s44163-026-01241-z",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "AI-Powered Student Dropout Prediction and Personalized Intervention Using TC-Net in Education. Increasing student dropout rates, caused by social, academic, and personal obstacles, raise significant concerns for educational systems. This research introduces an AI-based method for the early detection and support of at-risk students utilizing the Student Final Grade Prediction dataset from two schools in Portugal.",
-      "core_message": "and personal obstacles, raise significant concerns for educational systems.",
-      "relevance_note": "Direct European/EU relevance (portugal); R&I evidence:  ai  + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "portugal"
-      ],
-      "ri_evidence": [
-        " ai  + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "AI washing",
-      "authors": "Moran Ofir",
-      "source": "American Business Law Journal",
-      "date": "2026-08-26",
-      "link": "https://doi.org/10.1111/ablj.70020",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "This Article provides the first comprehensive comparative analysis of AI washing regulation across United States and European Union jurisdictions, and identifies fundamental differences in regulatory approaches on both sides of the Atlantic: the United States employs market‐based enforcement through existing securities laws with penalties up to $225,000, while the EU has adopted comprehensive ex ante regulation through the AI Act, with penalties up to €35 million or 7% of global turnover. Analyzing SEC enforcement actions, EU implementation patterns, and corporate governance implications, this Article demonstrates that effective AI governance requires selective convergence through alignment on key regulatory elements, rather than complete harmonization. Abstract AI washing, the practice of misrepresenting the use or scope of artificial intelligence in goods or services to attract investors and gain competitive advantages, raises distinct regulatory challenges requiring the adaptation of traditional securities laws to novel technological contexts.",
-      "relevance_note": "Direct European/EU relevance (european union, europe); R&I evidence:  ai  + innovation; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "european union",
-        "europe",
-        "european",
-        "EU"
-      ],
-      "ri_evidence": [
-        " ai  + innovation"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Review of artificial intelligence in the agricultural cadastre: transforming agro-territorial management for global sustainability",
-      "authors": "Paulo Escandón-Panchana, Sandra Martínez Cuevas, Eddy Sanclemente Ordoñez, Gricelda Herrera-Franco, N. Ya. Rebouh",
-      "source": "GeoJournal",
-      "date": "2026-08-19",
-      "link": "https://doi.org/10.1007/s10708-026-11697-2",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Review of artificial intelligence in the agricultural cadastre: transforming agro-territorial management for global sustainability. Abstract At the global level, sustainable agro-territorial management depends on cadastral systems that ensure proper land use and protect land rights. Faced with persistent challenges, such as the delimitation and optimisation of agricultural plots, Artificial Intelligence (AI) is emerging as a disruptive tool.",
-      "core_message": "as the delimitation and optimisation of agricultural plots, AI (AI) is emerging.",
-      "relevance_note": "Direct European/EU relevance (czech republic, czech); R&I evidence:  ai  + science; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "czech republic",
-        "czech",
-        "germany",
-        "slovenia"
-      ],
-      "ri_evidence": [
-        " ai  + science"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Cultivating New Economic Momentum: A Bibliometric Analysis of Cross‐Border Integration Between Artificial Intelligence and InsurTech",
-      "authors": "Yuanchao Zhang, Xuanjun Wang, Yuheng Qi, Yaxi Duan",
-      "source": "Journal of Economic Surveys",
-      "date": "2026-08-11",
-      "link": "https://doi.org/10.1111/joes.70155",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "The global research pattern features the rapid rise of Asia and steady development in Europe and the US, and empirical methods are moving toward rigorous causal identification. Cultivating New Economic Momentum: A Bibliometric Analysis of Cross‐Border Integration Between Artificial Intelligence and InsurTech. ABSTRACT Against the backdrop of digital economy development and global economic momentum transformation, the integration of artificial intelligence and InsurTech has become a key driver of high‐quality economic growth.",
-      "core_message": "Micro‐level research dominates while macroeconomic analysis remains insufficient.",
-      "relevance_note": "Direct European/EU relevance (europe); R&I evidence:  ai  + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe"
-      ],
-      "ri_evidence": [
-        " ai  + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Uncovering the directionality of innovation in artificial intelligence for energy transitions: A global perspective on the twin transition using patent analysis",
-      "authors": "Sumit Kumar, Francesco Pasimeni, Mitzi Bolton, Paris Hadfield, Rob Raven",
-      "source": "Energy Research & Social Science",
-      "date": "2026-08-04",
-      "link": "https://doi.org/10.1016/j.erss.2026.104895",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Drawing on the European Patent Office's database (Espacenet) covering the top five jurisdictions (China, the United States, South Korea, Europe and Japan), the analysis shows a high concentration of patent families in China, with the remainder distributed across the other four jurisdictions. Corporations dominate patenting activity in Europe, Japan, and the United States, whereas in China and South Korea universities and government/public institutions play a greater role. Uncovering the directionality of innovation in artificial intelligence for energy transitions: A global perspective on the twin transition using patent analysis.",
-      "core_message": "as energy, transport, buildings and industry.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: artificial intelligence + innovation, artificial intelligence + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        "artificial intelligence + innovation",
-        "artificial intelligence + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "An Evaluation Framework for National AI Regulation",
-      "authors": "Kaushik Sanjay Prabhakar, Tarun Adarsh R S, Amal Dhivyan Gregory, Sreeparvathy Sajeev, Utkarsh Tomar, Avyay M. Casheekar",
-      "source": "arXiv",
-      "date": "2026-08-15",
-      "link": "https://doi.org/10.48550/arxiv.2608.15417",
-      "type": "preprint",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "The European Union is included as a supranational comparator. An Evaluation Framework for National AI Regulation. Governments use laws, institutions, funding programs and nonbinding guidance to shape how AI is developed and used.",
-      "core_message": "Governments use laws, institutions, funding programs and nonbinding guidance to shape how AI is developed and used.",
-      "relevance_note": "Direct European/EU relevance (european union, europe); R&I evidence:  ai  + funding; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 3 preprint",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "european union",
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        " ai  + funding"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Emerging multidisciplinary computing visions: Early-career researchers shaping share futures",
-      "authors": "JRC",
-      "source": "JRC Publications Repository",
-      "date": "2026-09-01",
-      "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147492",
-      "type": "research/policy paper",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "The workshop provided participants with opportunities to receive constructive feedback on their research, discuss common career challenges, and build connections with peers and more experienced professionals working across diverse fields This workshop was organised under JRC FreshMinds initiative in collaboration with the ADAPT Research Ireland Centre for Digital Content Technology. MUNARINI Monique; RODRIGUEZ MÜLLER Paula; LEWIS Dave; SCHADE Sven; 2026-08-21 Publications Office of the European Union JRC147492 978-92-68-42304-2 (online), OP KJ-01-26-324-EN-N (online), https://publications.jrc.ec.europa.eu/repository/handle/JRC147492, 10.2760/4023920 (online), Name Country City Type This document is only visible at the Commission level. You are not authorized to publish or distribute it outside the European Commission.",
-      "core_message": "and career development activities alongside approximately 20 attendees.",
-      "relevance_note": "Direct European/EU relevance (joint research centre); R&I evidence:  ai  + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "joint research centre"
-      ],
-      "ri_evidence": [
-        " ai  + research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Sustainable productivity growth in agriculture: The role of shifts in R&D investments and technology",
-      "authors": "SMEETS, KRISTKOVA Zuzana, VAN, DIJK Michiel, M'BAREK, Robert, VAN, MEIJL Hans, RATINGER, Tomas",
-      "source": "JRC Publications Repository",
-      "date": "2026-09-01",
-      "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC142267",
-      "type": "official policy / institutional framework",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Sustainable productivity growth in agriculture: The role of shifts in R&D investments and technology. Sustainable productivity growth in agriculture: The role of shifts in R&D investments and technology The objective of the paper is to evaluate the long-term prospects of sustainable productivity growth linked to plausible assumptions on public agricultural R\\&D investments as the key productivity driver. SMEETS KRISTKOVA Zuzana; VAN DIJK Michiel; M'BAREK Robert; VAN MEIJL Hans; RATINGER Tomas; 2026-08-14 WILEY JRC142267 2040-5804 (online), https://onlinelibrary.wiley.com/doi/10.1002/aepp.70069, https://publications.jrc.ec.europa.eu/repository/handle/JRC142267, 10.1002/aepp.70069 (online), Name Country City Type This document is only visible at the Commission level.",
-      "core_message": "Sustainable productivity growth in agriculture: The role of shifts in R&D investments and technology.",
-      "relevance_note": "Direct European/EU relevance (joint research centre); R&I evidence: r&d; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "joint research centre"
-      ],
-      "ri_evidence": [
-        "r&d"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
       "title": "ALLEA Supports Joint Call to Safeguard MSCA",
       "authors": "maria ronald",
       "source": "ALLEA",
@@ -18901,36 +18474,6 @@
         "research talent",
         "research careers"
       ],
-      "text_mode": "full_text",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "EUA Strategic Plan",
-      "authors": "Katerina Topalidou",
-      "source": "European University Association",
-      "date": "2026-06-30",
-      "link": "https://eua.eu/images/publications/Publication_PDFs/2026_EUA_Strategic_plan_final.pdf",
-      "type": "institutional report",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Read more Reports 03 Jun 2019 EUA Annual Report 2018 In 2018, EUA worked with members to influence debates on the next generation of EU funding programmes for research and innovation, as well as for Erasmus+. ... Read more Positions 21 May 2015 EUA Antwerp Declaration European Universities met in Antwerp on 16-17 April 2015 to discuss the role of European universities in research and innovation around three main axes: \"People, Policies and Partnerships\". EUA - European University Association.",
-      "core_message": "Download the document to learn more about EUA’s: Identity: Who are we?",
-      "relevance_note": "Direct European/EU relevance (european commission, european parliament); R&I evidence: research and innovation; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 1",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "european commission",
-        "european parliament"
-      ],
-      "ri_evidence": [
-        "research and innovation"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
       "text_mode": "full_text",
       "first_seen": "2026-09-01T09:06Z",
       "new_this_scan": true
@@ -19117,97 +18660,6 @@
       "new_this_scan": true
     },
     {
-      "title": "Environmental Management System (ISO 14001) and Total‐Factor Carbon Emission Performance: A Two‐Stage Malmquist Data Envelopment Analysis",
-      "authors": "Muhammad Ikram, Ernesto D.R. Santibañez González",
-      "source": "Business Strategy and the Environment",
-      "date": "2026-08-26",
-      "link": "https://doi.org/10.1002/bse.71460",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "ABSTRACT As global decarbonization goals become more urgent, it is vital to understand that decoupling carbon from growth is not a purely mechanical process of adopting green machines; it is a socio‐technical transition. Finally, the findings provide a forward‐looking basis suggesting that, without an acceleration in radical technological innovation (frontier‐shift), current efficiency efforts based on voluntary standards will be insufficient to achieve net‐zero emissions goals. Environmental Management System (ISO 14001) and Total‐Factor Carbon Emission Performance: A Two‐Stage Malmquist Data Envelopment Analysis.",
-      "core_message": "Meanwhile, Germany shows consistently shifted the carbon‐efficiency frontier during the study period.",
-      "relevance_note": "Direct European/EU relevance (germany); R&I evidence: technological innovation; strategic evidence: decoupling; bridge: title/abstract.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "explicit-geopolitics",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "germany"
-      ],
-      "ri_evidence": [
-        "technological innovation"
-      ],
-      "geo_evidence": [
-        "decoupling"
-      ],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Digitalization and regional ecosystems: Traditional and digital actors beyond global value chains",
-      "authors": "Miguel A. Crespo-Velando, Hugo Pérez-Moure, Jesús F. Lampón, Óscar García-Álvarez",
-      "source": "European Research on Management and Business Economics",
-      "date": "2026-08-15",
-      "link": "https://doi.org/10.1016/j.iedeen.2026.100328",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Entrepreneurial traditional actors, university research institutes, the technological center, and the cluster related to digital technologies occupy a central position in each block with a high connectivity capacity with firms. Based on a qualitative case study of a traditional European automotive industry region, the results indicate that the different actors form a relational structure, which allows this network to be interpreted as an ecosystem. Digitalization and regional ecosystems: Traditional and digital actors beyond global value chains.",
-      "core_message": "which allows this network to be interpreted.",
-      "relevance_note": "Direct European/EU relevance (europe, european); R&I evidence: university research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        "university research"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Harnessing the wind: foreign direct investment and green innovation",
-      "authors": "Mohammad Jamal Bataineh, Pedro Sánchez-Sellero, Jesús López-Rodríguez, Fayssal Ayad",
-      "source": "Empirical Economics",
-      "date": "2026-07-29",
-      "link": "https://doi.org/10.1007/s00181-026-02937-y",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "While we document that absorptive capacity is consistently driving green innovation, we also find that R&D and technology development partially mediate the FDI–green innovation link. Abstract This paper examines the impact of foreign direct investment (FDI) exposure, absorptive capacity, R&D practices, and technological advancement on green innovation at the firm level. Policymakers and stakeholders can leverage these insights to foster sustainable practices by attracting FDI and encouraging R&D and technological advancements.",
-      "core_message": "and mediation analyses to show that FDI exposure significantly promotes green innovation.",
-      "relevance_note": "Direct European/EU relevance (spanish); R&I evidence: r&d, technology development; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "spanish"
-      ],
-      "ri_evidence": [
-        "r&d",
-        "technology development"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
       "title": "Accelerating Research on Brain Aging: Enabling Brain Imaging Data Sharing in the Open Science Landscape",
       "authors": "Kathrin Giehl, Thilo van Eimeren",
       "source": "European Journal of Neurology",
@@ -19231,64 +18683,6 @@
       ],
       "ri_evidence": [
         "scientific collaboration"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Exploring the knowledge management–innovation nexus: global research insights and emerging themes",
-      "authors": "savita saini",
-      "source": "Future Business Journal",
-      "date": "2026-07-20",
-      "link": "https://doi.org/10.1186/s43093-026-00943-1",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Bibliometric methods such as science mapping and performance analysis were used to examine 145 documents in total. Studies that receive a lot of citations concentrate on absorptive ability, intellectual capital, information sharing, and the mediating function of innovation performance. Exploring the knowledge management–innovation nexus: global research insights and emerging themes.",
-      "core_message": "Bibliometric methods such as science mapping and performance analysis were used to examine 145 documents in total.",
-      "relevance_note": "Direct European/EU relevance (spain); R&I evidence: innovation performance; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "spain"
-      ],
-      "ri_evidence": [
-        "innovation performance"
-      ],
-      "geo_evidence": [],
-      "a_context_evidence": [],
-      "text_mode": "abstract_only",
-      "first_seen": "2026-09-01T09:06Z",
-      "new_this_scan": true
-    },
-    {
-      "title": "Mapping the research landscape of myelodysplastic syndromes: a scientometric analysis (2014–2025)",
-      "authors": "Jieyun Li, Wei Song Seetoh, Hao Xu, Yuchen Tao, Milin Liu, Shuyang Cai, Jiahui Lu, Cuncun Lu",
-      "source": "Clinical and Experimental Medicine",
-      "date": "2026-06-25",
-      "link": "https://doi.org/10.1007/s10238-026-02226-z",
-      "type": "peer-reviewed article",
-      "strand": "A",
-      "eu_relevance": "direct",
-      "summary": "Mapping the research landscape of myelodysplastic syndromes: a scientometric analysis (2014–2025). Abstract This scientometric study critically evaluates the global evolution of myelodysplastic syndromes (MDS) research from 2014 to 2025, aiming to integrate fragmented knowledge and identify emerging trends. A scientometric analysis was conducted using data retrieved from the Web of Science Core Collection on August 2, 2025.",
-      "core_message": "Mapping the research landscape of myelodysplastic syndromes: a scientometric analysis (2014–2025).",
-      "relevance_note": "Direct European/EU relevance (germany); R&I evidence: artificial intelligence + research; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication.",
-      "source_tier": "Tier 2 trusted-publisher journal",
-      "a_route": "ri-relevance-assessment",
-      "bridge_sentence": "",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "eu_evidence": [
-        "germany"
-      ],
-      "ri_evidence": [
-        "artificial intelligence + research"
       ],
       "geo_evidence": [],
       "a_context_evidence": [],
@@ -28303,7 +27697,10 @@
         "admitted_after_recovery": 0
       },
       "institution_source_adapter_jobs": 205
-    }
+    },
+    "centrality_cleanup_removed": 20,
+    "centrality_cleanup_retained_new_a": 18,
+    "centrality_cleanup_version": "v17.19.2-incidental-eu-ri-centrality"
   },
   "scan_diagnostics": {
     "source_warning_count": 24,

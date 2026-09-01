@@ -616,6 +616,7 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(funnel["raw_records_seen"], 100)
         self.assertEqual(funnel["enough_text_to_judge"], 50)
         self.assertEqual(funnel["direct_eu_scope_remaining"], 30)
+        self.assertEqual(funnel["central_eu_ri_scope_remaining"], 30)
         self.assertEqual(funnel["substantive_ri_remaining"], 20)
         self.assertEqual(funnel["strategic_context_remaining"], 20)
         self.assertFalse(funnel["strategic_context_gate_active"])
@@ -672,6 +673,84 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertTrue(ev["a_pass"])
         self.assertEqual(ev["eu_relevance"], "direct")
         self.assertEqual(ev["a_route"], "ri-relevance-assessment")
+
+    def test_incidental_europe_background_does_not_make_chile_paper_direct_a(self):
+        title = "Translating global innovation scripts: science and innovation policy and organisational change in Chilean universities"
+        abstract = (
+            "Responses are path-dependent across Chilean universities. "
+            "Research on science and innovation policy in higher education has been dominated by evidence from Europe and North America."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
+        self.assertIn("incidental", ev["centrality_reason"])
+
+    def test_single_portuguese_dataset_location_does_not_create_eu_ri_centrality(self):
+        title = "AI-Powered Student Dropout Prediction and Personalized Intervention Using TC-Net in Education"
+        abstract = (
+            "This research introduces an AI-based method for early detection of at-risk students "
+            "using a dataset from two schools in Portugal."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
+
+    def test_historical_europe_reference_does_not_make_africa_china_paper_eu_central(self):
+        title = "Revisiting Dependency in the Twenty-First Century: A Critical Analysis of Africa-China Relations"
+        abstract = (
+            "The paper studies trade, infrastructure finance and technology transfer in Africa-China relations. "
+            "It compares recent reliance on China with historical African dependence on European colonial powers."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
+
+    def test_european_hydrogen_research_infrastructure_passes_without_strategy_words(self):
+        title = "Research and technology infrastructures in the European hydrogen economy: Status, needs and innovation concepts"
+        abstract = (
+            "Research and Technology Infrastructures are central enablers of hydrogen technology development in Europe. "
+            "This review assesses the European infrastructure landscape and identifies needs across the hydrogen value chain."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertTrue(ev["a_pass"])
+        self.assertTrue(ev["centrality_pass"])
+        self.assertEqual(ev["a_route"], "ri-relevance-assessment")
+
+    def test_eu_quantum_policy_with_actual_research_funding_mechanism_still_passes(self):
+        title = "How the European Commission aims to promote the EU quantum sector through the Cloud and AI Development Act"
+        abstract = "The proposal creates a European framework for quantum and cloud capacity."
+        body = "The measure supports funding for quantum research infrastructure and technology development in the EU."
+        ev = scan.gate_scope(title, abstract, body, 3, source_kind="institutional")
+        self.assertTrue(ev["a_pass"])
+        self.assertTrue(ev["centrality_pass"])
+
+    def test_eu_programme_list_on_unrelated_sector_page_is_not_ri_central(self):
+        title = "EU support for the news media sector"
+        abstract = (
+            "The European Commission works to support a pluralistic media environment. "
+            "Actions are part of innovation programmes (Digital Europe, Horizon Europe)."
+        )
+        ev = scan.gate_scope(title, abstract, "", 1, source_kind="institutional")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
+        self.assertEqual(ev["centrality_reason"], "ri_not_central")
+
+    def test_institutional_event_recap_is_not_strand_a_evidence(self):
+        title = "ALLEA and the Scientific Advice Mechanism Host Science Policy Events in Turin"
+        abstract = "Members from across Europe met to discuss trust in science and future activities."
+        ev = scan.gate_scope(title, abstract, "", 1, source_kind="institutional")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "event_recap_not_substantive_evidence")
+
+    def test_brain_data_sharing_eu_framework_can_link_across_adjacent_sentences(self):
+        title = "Accelerating Research on Brain Aging: Enabling Brain Imaging Data Sharing in the Open Science Landscape"
+        abstract = (
+            "Substantial barriers for sharing neuroimaging data constrain scientific collaboration and medical innovation. "
+            "We highlight the need for simplified and unified legal frameworks compliant with the General Data Protection Regulation of the European Union."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertTrue(ev["a_pass"])
+        self.assertTrue(ev["centrality_pass"])
 
     def test_elite_journal_watchlist_is_source_first_and_not_news_only(self):
         watch = scan.CONFIG.get("top_journal_watchlist", [])

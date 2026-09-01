@@ -1,3 +1,18 @@
+# v17.19.2 — EU R&I centrality precision repair
+
+This release keeps the v17.19 recall expansion but adds a narrow centrality guard so Strand A is not filled by papers where Europe or R&I is merely incidental. Strategic/geopolitical wording remains optional.
+
+## Changes
+- European/EU scope must be part of the study, policy or evidence subject — not only a historical comparison, literature-background sentence, benchmark/comparator, citation, publisher metadata or single dataset location.
+- R&I must be a real topic or mechanism. Generic AI applications, generic academic wording, and stray programme mentions no longer create R&I centrality.
+- Europe and the R&I finding may still occur in different sentences. Multi-member-state studies and adjacent EU-framework/R&I evidence remain eligible.
+- Institutional event recaps are not Strand A evidence unless the item is itself a report, study, statement, strategy or comparable substantive product.
+- Obvious related-content/navigation contamination is deferred instead of admitted on the strength of a good title.
+- The bundled live radar state was cleaned narrowly: 18 of the prior run's 38 new A items are retained; 20 incidental/non-substantive additions are removed.
+- No recall-profile or incremental-state version was bumped, so OpenAlex/Crossref/institution cursors continue from the saved live state rather than restarting.
+- The GitHub repository write-security boundary is unchanged.
+- Added regression tests for Chile/background-Europe, Africa–China/historical-Europe, Portugal dataset-only scope, EU programme-list noise, event recaps, cross-sentence European R&I, brain-data sharing and quantum R&I policy.
+
 # v17.19.1 — full-repository safety/state guard release
 
 This is the full repository build of the v17.19 recall change. The GitHub write-security boundary is intentionally unchanged: scanning runs without a stored repository credential; after scanning, all tracked/untracked changes except `radar.json` are restored/removed; the workflow hard-fails if any other repository change remains; and `git add -- radar.json` is the only scanner-output staging command.
