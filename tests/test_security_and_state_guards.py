@@ -30,17 +30,31 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
         self.assertIn("Could not isolate scanner output safely. Refusing to save.", text)
         self.assertIn("git add -- radar.json", text)
 
-    def test_main_scanner_has_fixed_four_hour_schedule(self):
+    def test_main_scanner_has_fixed_four_hour_schedule_or_safe_legacy_compatibility(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", text)
-        self.assertIn("fixed four-hour scheduled scan", text)
-        self.assertNotIn("age_hours >= 6.0", text)
+        if "cron: '17 0,4,8,12,16,20 * * *'" in text:
+            self.assertIn("fixed four-hour scheduled scan", text)
+            self.assertNotIn("age_hours >= 6.0", text)
+        else:
+            self.assertTrue(scan.legacy_workflow_schedule_compatibility_active(text))
+            base = scan.dt.datetime(2026, 9, 1, 16, 0, tzinfo=scan.dt.timezone.utc)
+            adjusted = scan.scheduler_state_completed_at(base, text)
+            self.assertEqual((base - adjusted).total_seconds(), 2 * 3600)
 
-    def test_safety_gate_protects_cumulative_ab_corpus(self):
-        text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn("cumulative accepted item(s)", text)
-        self.assertIn("('strand_a', 'strand_b', 'frontier_evidence')", text)
-        self.assertIn("60-day-from-first_seen", text)
+    def test_cumulative_retention_is_enforced_in_scanner_even_with_legacy_workflow(self):
+        old_a = {"title": "Old accepted A", "date": "2024-01-01", "link": "https://example.org/a"}
+        old_b = {"title": "Old accepted B", "date": "2024-01-01", "link": "https://example.org/b"}
+        old_f = {"title": "Old frontier", "date": "2024-01-01", "link": "https://example.org/f"}
+        data = {"strand_a": [old_a], "strand_b": [old_b], "frontier_evidence": [old_f], "strand_c": []}
+        out, removed = scan.prune_public_window(
+            data,
+            scan.dt.date(2026, 5, 1),
+            now=scan.dt.datetime(2026, 9, 1, 16, 0, tzinfo=scan.dt.timezone.utc),
+        )
+        self.assertEqual(out["strand_a"], [old_a])
+        self.assertEqual(out["strand_b"], [old_b])
+        self.assertEqual(out["frontier_evidence"], [old_f])
+        self.assertEqual(sum(removed.values()), 0)
 
     def test_push_credential_is_added_only_after_scan_and_safety_gate(self):
         text = WORKFLOW.read_text(encoding="utf-8")

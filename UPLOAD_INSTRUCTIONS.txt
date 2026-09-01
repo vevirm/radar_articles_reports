@@ -1,13 +1,17 @@
-UPLOAD THE WHOLE REPOSITORY
+WHOLE REPOSITORY ONLY
 
-1. Download the ZIP supplied by ChatGPT.
-2. Unzip it once on your computer.
-3. Open your existing GitHub repository.
-4. Choose Add file -> Upload files.
-5. Drag EVERYTHING INSIDE the unzipped folder onto the GitHub upload page.
-6. Make sure .github/workflows/radar-scan.yml and .github/workflows/historical-scan.yml appear in the upload list.
-7. Click Commit changes.
+Use the full ZIP supplied by ChatGPT. There is no separate workflow file to install.
 
-Do not delete files manually. Do not edit individual files.
+1. Unzip the full repository once.
+2. Upload/replace the repository contents in GitHub the same way you normally do.
+3. Run the scanner.
 
-This bundle already contains the latest supplied live radar state and preserves its scan_state/cursors. The main workflow runs automatically every four hours. Accepted A/B and frontier evidence accumulates; Strand C alone expires 60 days after first_seen. The main scanner still runs without a stored repository credential and only radar.json can be committed by the scanner job.
+The package contains the correct four-hour workflow. If GitHub web upload retains the older hidden workflow anyway, this release is backward-compatible: the tests will not block the scanner, and the legacy hourly/6-hour due gate is internally adjusted to an effective four-hour cadence.
+
+Rules preserved:
+- automatic scanner cadence: every 4 hours
+- A/B/frontier: cumulative unless explicitly cleaned as false positive/duplicate/integrity failure
+- Strand C: expires 60 days after first_seen
+- scanner has no stored repository credential while scanning
+- all non-radar.json changes are removed before push credentials exist
+- only radar.json is staged/committed

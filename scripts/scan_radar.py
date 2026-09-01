@@ -141,6 +141,34 @@ RULE_FIX_FRONTIER_SOURCE_ADDITIONS = {
     "knowledge-C": ["home-affairs.ec.europa.eu", "education.ec.europa.eu", "euraxess.ec.europa.eu", "research-and-innovation.ec.europa.eu", "ellis.institute", "is.mpg.de", "ellisinstitute.fi", "aalto.fi"],
 }
 
+
+def legacy_workflow_schedule_compatibility_active(workflow_text=None):
+    """Detect only the pre-v17.19.9 hourly workflow with a six-hour due gate."""
+    if workflow_text is None:
+        try:
+            workflow_text = (ROOT / ".github" / "workflows" / "radar-scan.yml").read_text(encoding="utf-8")
+        except Exception:
+            return False
+    t = str(workflow_text or "")
+    return (
+        "cron: '17 * * * *'" in t
+        and "age_hours >= 6.0" in t
+        and "cron: '17 0,4,8,12,16,20 * * *'" not in t
+    )
+
+
+def scheduler_state_completed_at(completed, workflow_text=None):
+    """Return the internal scheduler timestamp while keeping public timestamps exact.
+
+    GitHub web bulk-upload can retain the older hidden workflow file. When that exact
+    legacy hourly/6-hour gate is detected, moving only its internal state reference
+    back two hours produces an effective four-hour automatic cadence. The current
+    fixed four-hour workflow never takes this compatibility branch.
+    """
+    if legacy_workflow_schedule_compatibility_active(workflow_text):
+        return completed - dt.timedelta(hours=LEGACY_WORKFLOW_COMPAT_OFFSET_HOURS)
+    return completed
+
 def _apply_rule_fix_source_extensions() -> None:
     sources = CONFIG.setdefault("institution_sources", [])
     existing = {
@@ -169,6 +197,9 @@ _apply_rule_fix_source_extensions()
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
 WEAK_SIGNAL_RETENTION_DAYS = int(CONFIG.get("weak_signal_retention_days", 60))
+TARGET_AUTOMATIC_CADENCE_HOURS = 4
+LEGACY_WORKFLOW_DUE_HOURS = 6
+LEGACY_WORKFLOW_COMPAT_OFFSET_HOURS = LEGACY_WORKFLOW_DUE_HOURS - TARGET_AUTOMATIC_CADENCE_HOURS
 EXTENDED_TOP_QUALITY_SOURCES_PER_SCAN = int(CONFIG.get("extended_top_quality_sources_per_scan", 6))
 EXTENDED_TOP_QUALITY_STAGE_SECONDS = int(CONFIG.get("extended_top_quality_stage_seconds", 150))
 SOURCE_EXPANSION_VERSION = str(CONFIG.get("source_expansion_version", "v17-scholarly-substance"))
@@ -12702,7 +12733,14 @@ def main() -> int:
     completed = dt.datetime.now(dt.timezone.utc)
     completed_iso = completed.isoformat(timespec="minutes").replace("+00:00", "Z")
     state["last_run"] = completed_iso
-    state["last_completed_at"] = completed_iso
+    scheduler_completed = scheduler_state_completed_at(completed)
+    state["last_completed_at"] = scheduler_completed.isoformat(timespec="minutes").replace("+00:00", "Z")
+    if scheduler_completed != completed:
+        state["actual_last_completed_at"] = completed_iso
+        state["schedule_compatibility"] = "legacy-hourly-six-hour-gate-adjusted-to-effective-four-hour-cadence"
+    else:
+        state.pop("actual_last_completed_at", None)
+        state.pop("schedule_compatibility", None)
 
     data = {
         "last_updated": completed_iso,

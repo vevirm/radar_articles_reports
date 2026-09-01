@@ -1,3 +1,27 @@
+# v17.19.11 — whole-repository upload compatibility
+
+This release removes the need for any separate/miniature workflow-file upload. The full repository is the only artifact the curator needs.
+
+## Changes
+- Keeps the v17.19.10 fixed four-hour workflow inside the full repository.
+- If GitHub web bulk-upload nevertheless leaves the older hidden v17.19.8 workflow in place, regression tests no longer stop the scan before it starts.
+- Adds a bounded compatibility path for that exact legacy workflow: its hourly trigger plus hard-coded six-hour due gate receives an internal scheduler reference two hours behind the real completion time, yielding an effective four-hour automatic cadence. Public `run_completed_at` and `last_updated` remain exact. The compatibility activates only when the old hourly/6-hour workflow is actually detected.
+- Cumulative A/B/frontier retention remains enforced in scanner code. Strand C alone expires 60 days after `first_seen`.
+- Credential isolation and the `radar.json`-only write boundary remain mandatory.
+- No scan-state/cursor/profile reset.
+
+# v17.19.10 — workflow upload/contract repair
+
+This release does not change the scanner's substantive A/B/C logic. It fixes the deployment mismatch seen after v17.19.9: the new tests were uploaded, but GitHub retained the old v17.19.8 `.github/workflows/radar-scan.yml`, so the regression step failed before scanning.
+
+## Changes
+- Adds an explicit workflow contract marker on the first line of the main workflow.
+- Keeps the fixed four-hour schedule and cumulative A/B/frontier + 60-day-from-first_seen Strand C safety rules from v17.19.9.
+- Keeps the credential/write boundary unchanged.
+- Makes stale-workflow regression failures concise and actionable instead of dumping the entire workflow into the Actions log.
+- Upload instructions now require explicit verification of the hidden `.github/workflows/radar-scan.yml` after GitHub web upload.
+- No scan-state/cursor/profile reset.
+
 # v17.19.9
 
 - Main workflow now has a fixed automatic four-hour cadence (`17 */4 * * *`). Push/manual scans remain additional; they do not suppress the next scheduled run.
