@@ -2161,5 +2161,28 @@
   "direct_news_pages_per_source": 12,
   "direct_news_links_per_source": 30,
   "direct_news_timeout_seconds": 10,
-  "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources."
+  "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources.",
+  "c_min_new_per_successful_scan": 1,
+  "c_floor_rescue_enabled": true,
+  "c_floor_rescue_min_seconds_remaining": 110,
+  "c_floor_rescue_stage_seconds": 80,
+  "c_floor_rescue_windows_hours": [
+    336,
+    720
+  ],
+  "c_floor_rescue_queries_per_wave": 6,
+  "c_floor_rescue_queries": [
+    "Europe research security cooperation universities China",
+    "EU semiconductor quantum biotech AI research investment partnership",
+    "Europe research talent mobility visa researchers science",
+    "Horizon Europe association international research cooperation",
+    "EU export controls dual use research technology",
+    "Europe scientific infrastructure compute quantum capacity investment",
+    "EU critical minerals technology research supply chain",
+    "Europe deep tech scale-up research lab investment",
+    "EU standards regulation research innovation emerging technology",
+    "Europe science diplomacy research partnership United States China",
+    "EU research funding cut increase strategic technology",
+    "European universities research security foreign interference"
+  ]
 }

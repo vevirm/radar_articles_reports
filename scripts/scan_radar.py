@@ -2923,6 +2923,45 @@ A_SYSTEM_LEVEL_RI_CUES = [
     'legal framework', 'legal frameworks', 'regulatory framework', 'regulatory frameworks',
 ]
 
+# V17.19.5: the live radar is about current and forward European R&I. Historical scholarship
+# is useful background, but it is not core A evidence unless the source itself makes a clear
+# present-day or forward implication. This deliberately targets the *subject period*, not the
+# publication date, so current papers using older longitudinal data can still pass.
+A_HISTORICAL_CENTURY = re.compile(
+    r'\b(?:eighteenth|nineteenth|twentieth|18th|19th|20th)[ -]?centur(?:y|ies)\b', re.I
+)
+A_HISTORICAL_YEAR_RANGE = re.compile(
+    r'\b((?:17|18|19|20)\d{2})\s*[–—-]\s*((?:17|18|19|20)\d{2})\b'
+)
+A_CURRENT_FORWARD_CUES = [
+    'today', 'current', 'currently', 'contemporary', 'present-day', 'present day', 'now',
+    'future', 'forward-looking', 'forward looking', 'implications for', 'lessons for',
+    'policy implications', 'current policy', 'future policy', "today's", 'ongoing',
+]
+
+def _historical_subject_without_current_ri_implication(title: str, abstract: str, body: str = '') -> bool:
+    text = clean_text(f"{title}. {abstract}. {body[:5000]}")
+    low = normalized(text)
+    title_low = normalized(title)
+    if contains_any(low, A_CURRENT_FORWARD_CUES):
+        return False
+    century_subject = bool(A_HISTORICAL_CENTURY.search(title) or A_HISTORICAL_CENTURY.search(abstract))
+    old_range = False
+    for m in A_HISTORICAL_YEAR_RANGE.finditer(title):
+        try:
+            end_year = int(m.group(2))
+        except Exception:
+            continue
+        if end_year <= 2005:
+            old_range = True
+            break
+    explicit_history = bool(re.search(
+        r'\b(?:history of|historical (?:study|analysis|account|development|evolution)|reconstructs? the history|'
+        r'from a historical perspective|historical origins?)\b', low, re.I
+    ))
+    title_history = bool(re.search(r'\b(?:history|historical|re-exploring|origins?|the making of)\b', title_low, re.I))
+    return bool(century_subject or old_range or (title_history and explicit_history))
+
 def _routine_institutional_prestige_title(title: str) -> bool:
     t = clean_text(title)
     return bool(
@@ -3014,6 +3053,9 @@ def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'g
 
     if source_kind != 'scholarly' and A_EVENT_RECAP_TITLE.search(title) and not A_EVENT_SUBSTANTIVE_TITLE.search(title):
         return False, 'event_recap_not_substantive_evidence', []
+
+    if source_kind == 'scholarly' and _historical_subject_without_current_ri_implication(title, abstract, body):
+        return False, 'historical_subject_outside_live_ri_goal', []
 
     if source_kind == 'scholarly' and _local_applied_study_without_ri_system_implication(title, abstract, body):
         return False, 'local_applied_study_not_ri_system_evidence', []
@@ -7746,6 +7788,8 @@ def _saved_ab_high_confidence_precision_reject(item: dict[str, Any]) -> bool:
     scholarly = any(x in typ for x in ['peer-reviewed', 'journal', 'preprint', 'article'])
     if not scholarly and _routine_institutional_prestige_title(title):
         return True
+    if scholarly and _historical_subject_without_current_ri_implication(title, summary, ''):
+        return True
     if scholarly and _local_applied_study_without_ri_system_implication(title, summary, ''):
         return True
     # If Europe is absent from the title and every visible European sentence is explicitly
@@ -8543,7 +8587,14 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
         x['_themes']=themes_for(text)
         x['_entities']=distinct_matches(text, ENTITY_TERMS+GEO_ACTORS)
         raw.append(x)
-    rebuilt=anchor_news(raw, out.get('strand_a',[]) if isinstance(out.get('strand_a'),list) else [])
+    a_saved = out.get('strand_a',[]) if isinstance(out.get('strand_a'),list) else []
+    anchored_raw = [x for x in raw if clean_text(x.get('anchor_status')) != 'unanchored_emerging']
+    emerging_raw = [x for x in raw if clean_text(x.get('anchor_status')) == 'unanchored_emerging']
+    rebuilt = anchor_news(anchored_raw, a_saved)
+    # Rescue-origin signals stay eligible only under the same directly-European,
+    # lower-confidence rule that admitted them. This prevents a later quality migration
+    # from silently deleting valid unanchored emerging signals.
+    rebuilt.extend(anchor_news(emerging_raw, a_saved, allow_unanchored=True))
     # Preserve historical first_seen where event identity matches.
     old_by_id={signal_identity(x):x for x in out.get('strand_c',[]) if isinstance(x,dict)}
     for x in rebuilt:
@@ -9696,41 +9747,63 @@ def _signal_what_claim(desc: str, headline: str) -> str:
     return fallback if _signal_claim_is_substantive(fallback) else ''
 
 
-def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Anchor C only to substantive Strand-A evidence.
+def anchor_news(
+    news: list[dict[str, Any]],
+    a_corpus: list[dict[str, Any]],
+    diagnostics: list[dict[str, str]] | None = None,
+    allow_unanchored: bool = False,
+) -> list[dict[str, Any]]:
+    """Anchor C to substantive Strand-A evidence, with a bounded rescue-only unanchored mode.
 
-    B is a methods library and must never serve as the substantive claim that a weak
-    signal updates. A signal must anchor to a concrete A publication; broad recurring
-    themes alone are not sufficient.
+    Normal admission remains A-anchored. ``allow_unanchored`` is used only by the C-floor
+    rescue lane after an additional search wave has been run. It can admit a genuinely new,
+    directly European factual weak signal at lower confidence when no suitable A anchor exists.
+    Detailed rejection reasons are returned only to the caller for scanner logs; the public
+    site does not render them.
     """
     internals = [internalize_previous(x) for x in a_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != 'title:']
     theme_counts = Counter(t for x in internals for t in x.get('_themes', []))
     recurring = {t for t,c in theme_counts.items() if c >= 2}
     anchored=[]
+
+    def diag(n: dict[str, Any], reason: str, status: str = 'rejected') -> None:
+        if diagnostics is None:
+            return
+        diagnostics.append({
+            'headline': clean_text(n.get('headline', ''))[:220],
+            'source': clean_text(n.get('source', ''))[:120],
+            'status': status,
+            'reason': reason,
+        })
+
     for n in news:
         if not english_record_ok(f"{n.get('headline','')}. {n.get('_desc','')}", n.get('language',''), title=clean_text(n.get('headline',''))):
+            diag(n, 'language')
             continue
         headline = n.get('headline','')
         desc = n.get('_desc','')
         source = n.get('source','')
         link = n.get('link','')
-        # Discovery route must never turn a completed report/study into C. This applies even
-        # when the item came from Google News rather than the institutional crawler.
         if formal_evidence_product(headline, desc, source, link):
+            diag(n, 'formal_evidence_not_c')
             continue
         if (n.get('_institutional_signal') or _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH) and not institutional_weak_signal_eligible(
             headline, desc, source, link
         ):
+            diag(n, 'institutional_page_not_weak_signal')
             continue
         if not weak_signal_candidate_text(headline, desc):
+            diag(n, 'not_weak_signal_candidate')
             continue
         ntext=n.get('headline','')+' '+n.get('_desc','')
         nthemes=set(n.get('_themes',[])) & WATCH_SIGNAL_THEMES
         if not nthemes:
+            diag(n, 'no_watch_theme')
             continue
         novelty_dimensions=relationship_novelty_dimensions(ntext)
         if not novelty_dimensions:
+            diag(n, 'no_relationship_novelty')
             continue
         ntok=tokens(ntext)
         nentities=set(n.get('_entities',[]))
@@ -9740,10 +9813,6 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
         for a in internals:
             athemes=set(a.get('_themes',[]))
             shared=nthemes & athemes
-            # Named C technologies from the curator workbook are discovery/linkage clues,
-            # never admission triggers.  They may connect to an A publication about
-            # sovereignty/capability/dependencies even when the exact technology was not
-            # named in that older A source.
             ontology_strategic_themes={
                 'technology sovereignty / strategic autonomy',
                 'R&I competitiveness / technological capabilities',
@@ -9767,8 +9836,6 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
                 'economic security and R&I',
             }
             broad_only=bool(shared) and shared.issubset(broad_themes)
-            # A generic AI/innovation theme is not enough. Broad-theme signals need a
-            # concrete shared entity/mechanism and textual overlap with the A source.
             if broad_only and not n_c_retrieval and (entity_overlap==0 or jacc<0.025):
                 continue
             score=3.0*len(shared)+1.5*entity_overlap+8.0*jacc
@@ -9778,15 +9845,12 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
                 score += min(1.5, 0.35*len(n_a_ontology))
             if any(t in SPECIFIC_ANCHOR_THEMES for t in shared): score+=1.0
             if best is None or score>best[0]: best=(score,a,sorted(shared))
-        anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''
+        anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''; unanchored=False
         if best and best[0] >= 4.0:
             score,a,shared_themes=best
             anchor=f"{a['title']} (Strand A)"
             anchor_basis='publication'
         text=ntext
-        # Major external capability shocks get a tightly bounded same-domain fallback. This is
-        # not a generic foreign-news route: the helper requires a current EU-context anchor and
-        # produces the one-sentence Europe-position implication demanded by the editorial rule.
         if not anchor:
             ext_ok, external_bridge, _ = external_eu_bridge_sentence(text, a_corpus)
             if ext_ok:
@@ -9798,22 +9862,35 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
                     shared_themes=sorted(nthemes)[:1]
                     score=4.25
         if not anchor:
-            continue
+            if not allow_unanchored:
+                diag(n, 'no_substantive_A_anchor')
+                continue
+            # Rescue-only route: directly European, factual, source-backed and genuinely
+            # change-like. Foreign developments still require an A/context bridge.
+            if not eu_news_scope(f"{headline}. {desc}"):
+                diag(n, 'unanchored_requires_direct_eu_scope')
+                continue
+            if not factual_news(headline, desc):
+                diag(n, 'unanchored_not_factual_news')
+                continue
+            unanchored=True
+            anchor_basis='unanchored-emerging'
+            shared_themes=sorted(nthemes)[:1]
+            score=3.5
         relation=signal_relation(text)
         kind=signal_kind(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
         what=_signal_what_claim(n.get('_desc',''), source_headline)
         if not what:
+            diag(n, 'no_substantive_signal_claim')
             continue
-        # Require the selected relationship to be visible in the actual extracted signal
-        # claim, not merely somewhere in a long source body. Retrieval themes can help find
-        # candidates, but they may not invent the published A<->C relationship.
         claim_themes = set(themes_for(f"{headline}. {what}")) & WATCH_SIGNAL_THEMES
         if not external_bridge:
             supported = set(shared_themes) & claim_themes
             if theme not in claim_themes:
                 if not supported:
+                    diag(n, 'published_claim_does_not_support_signal_theme')
                     continue
                 theme = sorted(supported)[0]
         why=external_bridge or signal_why(theme,kind)
@@ -9821,6 +9898,8 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
         item.update({
             'anchor':anchor,
             'anchor_basis':anchor_basis,
+            'anchor_status':'unanchored_emerging' if unanchored else 'anchored',
+            'signal_confidence':'lower' if unanchored else 'standard',
             'watch_theme':theme,
             'signal_type':relation,
             'signal_kind':kind,
@@ -9830,23 +9909,75 @@ def anchor_news(news: list[dict[str, Any]], a_corpus: list[dict[str, Any]]) -> l
             'signal_note':what.rstrip('. ')+'. '+why,
             'external_eu_bridge': external_bridge,
             'external_eu_bridge_is_inference': bool(external_bridge),
-            # C is a low-evidence early-warning record, never an evidentiary endpoint.
-            # Stronger status is represented by a separate A/B report, publication or formal notice.
             'evidence_status': 'low',
             'evidence_role': 'weak_signal',
             'retention_window_months': WEAK_SIGNAL_RETENTION_MONTHS,
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': 'new point on a substantive Strand-A issue; topic repetition allowed',
+            'c_admission_rule': (
+                'rescue-only directly European emerging signal; no suitable A anchor yet'
+                if unanchored else
+                'new point on a substantive Strand-A issue; topic repetition allowed'
+            ),
             '_anchor_score':score,
         })
         if any(signals_near_duplicate(item,x) for x in anchored):
+            diag(n, 'duplicate_with_current_c_batch')
             continue
         anchored.append(item)
+        diag(n, 'accepted_unanchored_emerging' if unanchored else 'accepted_anchored', 'accepted')
     anchored.sort(key=lambda x:(x.get('_anchor_score',0),x.get('date','')),reverse=True)
     for x in anchored:x.pop('_anchor_score',None)
     return anchored[:MAX_C] if MAX_C>0 else anchored
+
+
+def _novel_signal_rows(rows: list[dict[str, Any]], previous_c: list[dict[str, Any]], selected: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
+    selected = selected or []
+    out: list[dict[str, Any]] = []
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, dict):
+            continue
+        if signal_is_retired(row) or not record_source_integrity_ok(row) or not record_date_integrity_ok(row):
+            continue
+        if any(signals_near_duplicate(row, old) for old in previous_c if isinstance(old, dict)):
+            continue
+        if any(signals_near_duplicate(row, old) for old in selected + out if isinstance(old, dict)):
+            continue
+        out.append(row)
+    return out
+
+
+def c_floor_rescue_queries() -> list[str]:
+    configured = [clean_text(x) for x in CONFIG.get('c_floor_rescue_queries', []) if clean_text(x)]
+    if configured:
+        return list(dict.fromkeys(configured))
+    # Defaults intentionally span policy, capability, talent, infrastructure and international
+    # cooperation so the floor does not become a semiconductor/AI-only news lane.
+    return [
+        'Europe research security cooperation universities China',
+        'EU semiconductor quantum biotech AI research investment partnership',
+        'Europe research talent mobility visa researchers science',
+        'Horizon Europe association international research cooperation',
+        'EU export controls dual use research technology',
+        'Europe scientific infrastructure compute quantum capacity investment',
+        'EU critical minerals technology research supply chain',
+        'Europe deep tech scale-up research lab investment',
+        'EU standards regulation research innovation emerging technology',
+        'Europe science diplomacy research partnership United States China',
+        'EU research funding cut increase strategic technology',
+        'European universities research security foreign interference',
+    ]
+
+
+def log_c_floor_diagnostics(rows: list[dict[str, str]], prefix: str = 'C_INTERNAL') -> None:
+    """Write detailed C rejection reasons to scanner logs only, never to public site fields."""
+    for row in rows[:120]:
+        print(
+            f"[{prefix}] {clean_text(row.get('status'))}: {clean_text(row.get('reason'))} | "
+            f"{clean_text(row.get('source'))} | {clean_text(row.get('headline'))}",
+            flush=True,
+        )
 
 
 # V17.13.23: two-tier evidence window. The normal radar remains a four-month core,
@@ -11211,6 +11342,68 @@ def main() -> int:
     # report/paper found here still has to pass the normal A/B gate independently.
     prev_a_for_signal_followup = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
     preliminary_c_for_followup = anchor_news(news, prev_a_for_signal_followup)
+
+    # V17.19.5 C floor: a healthy radar should not repeatedly return zero *new* weak signals
+    # because a single duplicate/anchor decision exhausted the short news lane. When the
+    # ordinary current-window pass has no novel C row, run a bounded, diversified rescue search.
+    # We do not publish a failed candidate or duplicate an old signal merely to hit a number.
+    # If strict anchoring still finds nothing, one directly-European factual rescue result may
+    # enter as lower-confidence ``unanchored_emerging``. Detailed failures are scanner-log only.
+    c_floor_rescue_signals: list[dict[str, Any]] = []
+    c_floor_diagnostics: list[dict[str, str]] = []
+    previous_c_for_floor = previous.get('strand_c', []) if isinstance(previous.get('strand_c'), list) else []
+    min_new_c = max(0, int(CONFIG.get('c_min_new_per_successful_scan', 1) or 0))
+    preliminary_novel_c = _novel_signal_rows(preliminary_c_for_followup, previous_c_for_floor)
+    if min_new_c > 0 and len(preliminary_novel_c) < min_new_c:
+        rescue_enabled = bool(CONFIG.get('c_floor_rescue_enabled', True))
+        rescue_min_remaining = max(45, int(CONFIG.get('c_floor_rescue_min_seconds_remaining', 110) or 110))
+        if rescue_enabled and budget_remaining() > rescue_min_remaining:
+            rescue_bank = c_floor_rescue_queries()
+            windows = CONFIG.get('c_floor_rescue_windows_hours', [336, 720])
+            windows = [max(168, int(x)) for x in windows if int(x) > 0] if isinstance(windows, list) else [336, 720]
+            per_wave = max(1, int(CONFIG.get('c_floor_rescue_queries_per_wave', 6) or 6))
+            stage_seconds = max(35, int(CONFIG.get('c_floor_rescue_stage_seconds', 80) or 80))
+            cursor = 0
+            for wave_idx, hours in enumerate(windows[:2], start=1):
+                if len(c_floor_rescue_signals) + len(preliminary_novel_c) >= min_new_c:
+                    break
+                if budget_remaining() <= max(45, int(CONFIG.get('network_reserve_seconds', 60)) + 20):
+                    break
+                queries = rescue_bank[cursor:cursor + per_wave]
+                if len(queries) < per_wave and rescue_bank:
+                    queries += rescue_bank[:per_wave - len(queries)]
+                cursor = (cursor + per_wave) % max(1, len(rescue_bank))
+                deadline = time.monotonic() + min(
+                    stage_seconds,
+                    max(30, int(budget_remaining() - int(CONFIG.get('network_reserve_seconds', 60)) - 15)),
+                )
+                rescue_warnings: list[str] = []
+                extra_news = safe_stage(
+                    f'C-floor rescue wave {wave_idx}', collect_news,
+                    now, rescue_warnings, hours, deadline, queries, False
+                )
+                warnings.extend(x for x in rescue_warnings if x not in warnings)
+                extra_news = [x for x in extra_news if isinstance(x, dict)]
+                if not extra_news:
+                    continue
+                # Keep the additional discoveries available to the ordinary final anchor pass too.
+                news.extend(extra_news)
+                strict_rows = anchor_news(extra_news, prev_a_for_signal_followup, c_floor_diagnostics)
+                novel_strict = _novel_signal_rows(strict_rows, previous_c_for_floor, preliminary_novel_c + c_floor_rescue_signals)
+                need = max(0, min_new_c - len(preliminary_novel_c) - len(c_floor_rescue_signals))
+                if novel_strict and need:
+                    c_floor_rescue_signals.extend(novel_strict[:need])
+                    continue
+                # Only after a separate search wave has failed to produce a strict novel anchor
+                # do we allow a directly-European, lower-confidence emerging signal.
+                emerging_rows = anchor_news(extra_news, prev_a_for_signal_followup, c_floor_diagnostics, allow_unanchored=True)
+                novel_emerging = _novel_signal_rows(emerging_rows, previous_c_for_floor, preliminary_novel_c + c_floor_rescue_signals)
+                need = max(0, min_new_c - len(preliminary_novel_c) - len(c_floor_rescue_signals))
+                if novel_emerging and need:
+                    c_floor_rescue_signals.extend(novel_emerging[:need])
+        else:
+            print('[C_INTERNAL] C-floor rescue skipped: insufficient remaining scan budget or rescue disabled.', flush=True)
+
     signal_evidence_followup_stats: dict[str, Any] = {
         "signals_checked": 0, "links_examined": 0, "direct_ab": 0, "queries": 0, "scholarly_ab": 0
     }
@@ -11771,8 +11964,12 @@ def main() -> int:
     ]
     output_corpus_floor = DATE_FLOOR
 
-    current_c = anchor_news(news, strand_a)
+    final_c_diagnostics: list[dict[str, str]] = []
+    current_c = anchor_news(news, strand_a, final_c_diagnostics)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
+    for rescue_row in c_floor_rescue_signals:
+        if not any(signals_near_duplicate(rescue_row, x) for x in current_c):
+            current_c.append(rescue_row)
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
     retired_signal_titles = _retired_signal_headlines(previous)
     strand_c = [
@@ -11802,6 +11999,15 @@ def main() -> int:
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
     new_ab_unique_retained = new_ab_unique_count(strand_a, strand_b, previous_a_ids | previous_b_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
+    if min_new_c > 0 and new_c_count < min_new_c:
+        print(
+            f'[C_INTERNAL] C floor unmet after bounded rescue: new_c={new_c_count}, target={min_new_c}. '
+            'Public scan health is intentionally unchanged; detailed reasons follow in scanner logs only.',
+            flush=True,
+        )
+        log_c_floor_diagnostics(c_floor_diagnostics + final_c_diagnostics)
+    elif c_floor_rescue_signals:
+        print(f'[C_INTERNAL] C floor satisfied by bounded rescue with {len(c_floor_rescue_signals)} novel signal(s).', flush=True)
     rejection_funnel = build_admission_rejection_funnel(
         unique_gate_candidates=len(deduped),
         genuinely_new_candidates=len(genuinely_new_ab_candidates(deduped)),
@@ -12028,7 +12234,7 @@ def main() -> int:
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and is retained for six months." if new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and is retained for six months." if 0 < new_c_count < 3 else "",
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),

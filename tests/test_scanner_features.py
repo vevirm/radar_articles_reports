@@ -875,6 +875,96 @@ class V1719RecallModelTests(unittest.TestCase):
         old_id = scan.identity(scan.internalize_previous(b[0]))
         self.assertEqual(scan.new_ab_unique_count(a, b, {old_id}), 1)
 
+    def test_historical_subject_without_current_implication_is_outside_live_radar_goal(self):
+        title = "The Making of the ‘French Research Model’: Re-exploring the National and the International (1955-1965)"
+        abstract = (
+            "This article examines the French model for research governance that emerged in the 1960s. "
+            "Drawing on transnational history, it reconstructs how scientific policy models circulated internationally."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertEqual(ev["centrality_reason"], "historical_subject_outside_live_ri_goal")
+
+    def test_historical_material_with_explicit_current_ri_implication_can_still_pass(self):
+        title = "Lessons from the French Research Model (1955-1965) for current European research governance"
+        abstract = (
+            "The paper uses historical evidence to derive implications for current European research governance, "
+            "research funding and science policy reform."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertTrue(ev["a_pass"])
+        self.assertTrue(ev["centrality_pass"])
+
+    def test_c_rescue_can_admit_directly_european_unanchored_emerging_signal(self):
+        title = "EU launches pilot research security scheme for quantum universities"
+        desc = (
+            "The European Commission launched a pilot partnership to strengthen quantum research security "
+            "and capability across European universities."
+        )
+        item = {
+            "headline": title,
+            "source": "Science|Business",
+            "date": "2026-09-01",
+            "link": "https://sciencebusiness.net/example",
+            "_desc": desc,
+            "_themes": scan.themes_for(title + " " + desc),
+            "_entities": scan.distinct_matches(title + " " + desc, scan.ENTITY_TERMS + scan.GEO_ACTORS),
+        }
+        self.assertEqual(scan.anchor_news([item], []), [])
+        rescued = scan.anchor_news([item], [], allow_unanchored=True)
+        self.assertEqual(len(rescued), 1)
+        self.assertEqual(rescued[0]["anchor_status"], "unanchored_emerging")
+        self.assertEqual(rescued[0]["signal_confidence"], "lower")
+
+    def test_c_rescue_unanchored_route_still_requires_direct_european_scope(self):
+        title = "US launches pilot quantum research security scheme"
+        desc = "A new pilot partnership will tighten quantum research security and technology access in the United States."
+        item = {
+            "headline": title,
+            "source": "Reuters",
+            "date": "2026-09-01",
+            "link": "https://reuters.com/example",
+            "_desc": desc,
+            "_themes": scan.themes_for(title + " " + desc),
+            "_entities": scan.distinct_matches(title + " " + desc, scan.ENTITY_TERMS + scan.GEO_ACTORS),
+        }
+        self.assertEqual(scan.anchor_news([item], [], allow_unanchored=True), [])
+
+    def test_saved_unanchored_emerging_signal_survives_c_revalidation(self):
+        title = "EU launches pilot research security scheme for quantum universities"
+        desc = "The European Commission launched a pilot partnership to strengthen quantum research security across Europe."
+        item = {
+            "headline": title,
+            "source": "Science|Business",
+            "date": "2026-08-30",
+            "link": "https://sciencebusiness.net/example-saved",
+            "anchor": "",
+            "anchor_basis": "unanchored-emerging",
+            "anchor_status": "unanchored_emerging",
+            "signal_confidence": "lower",
+            "watch_theme": "research security / foreign interference",
+            "signal_type": "instantiates",
+            "signal_kind": "cooperation / alignment",
+            "what": title + ".",
+            "core_message": title + ".",
+            "why_it_matters": "This may affect European research security and capability-building.",
+            "signal_note": title + ". This may affect European research security and capability-building.",
+            "evidence_status": "low",
+            "evidence_role": "weak_signal",
+            "reframing_dimensions": ["new actor move"],
+        }
+        out, stats = scan.revalidate_saved_c({"strand_a": [], "strand_c": [item]})
+        self.assertEqual(stats["strand_c_kept"], 1)
+        self.assertEqual(out["strand_c"][0]["anchor_status"], "unanchored_emerging")
+
+    def test_c_floor_detailed_reasons_are_log_only_not_public_note(self):
+        scanner_text = (ROOT / "scripts" / "scan_radar.py").read_text(encoding="utf-8")
+        self.assertIn("Public scan health is intentionally unchanged", scanner_text)
+        self.assertIn("if 0 < new_c_count < 3 else", scanner_text)
+        index_text = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("C floor unmet", index_text)
+        self.assertNotIn("C_INTERNAL", index_text)
+
     def test_signal_anchor_theme_must_be_supported_by_the_published_claim(self):
         a = [{
             "title": "EU-China research cooperation under de-risking",

@@ -1,3 +1,12 @@
+# v17.19.5 — C floor rescue + live-period evidence guard
+
+- Keeps Strand C from quietly collapsing to zero new signals when the ordinary news lane only finds duplicates or over-strict anchor failures. A bounded rescue search runs across diversified R&I weak-signal themes and 14/30-day recovery windows.
+- The rescue never republishes an old/failed signal merely to hit a quota. It first looks for another strict A-anchored signal; only then may one directly-European factual result enter as `unanchored_emerging` with lower confidence.
+- Detailed C rejection/floor diagnostics are written to scanner logs only. They do **not** alter public `scan_health`, are not exposed in the reader UI, and a zero-C run no longer generates a public `note_c` warning.
+- Excludes scholarship whose subject is clearly historical (old century / old-period research) unless the source itself makes an explicit current or forward European R&I implication.
+- Whole-repository/history merge applies the same high-confidence historical-subject exclusion so removed history items cannot be resurrected from Git history.
+- Preserves all recall/incremental cursor versions and leaves both GitHub repository-write security workflows unchanged.
+
 # v17.19.4 — evidence-worthiness and signal-claim precision
 
 This is a narrow precision release built from the latest uploaded radar run. It keeps the V17.19 recall/centrality model and does not restore the old strategic-language gate.
