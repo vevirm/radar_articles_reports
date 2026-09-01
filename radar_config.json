@@ -1766,7 +1766,7 @@
   ],
   "official_eu_priority_sources_per_scan": 12,
   "source_attention_floor_broad_share": 0.4,
-  "source_attention_policy": "Prefer high-quality journal articles and EU primary reports in discovery. Core EU sources use bounded source-specific publication hubs when sitemap discovery is weak. Missing scholarly text is rescued by metadata priority before admission. Keep broad rotation and unchanged substantive admission gates.",
+  "source_attention_policy": "Prefer direct recent-content checks of elite journals, high-quality R&I/policy journals and EU primary reports. Admission requires European/EU scope plus substantive R&I; strategic significance is assessed after admission and need not be explicit in the source.",
   "frontier_gap_balance_rich_cell_ratio": 0.75,
   "frontier_gap_balance_repeat_scale": 4.0,
   "frontier_gap_balance_repeat_cap": 10,
@@ -2117,5 +2117,49 @@
   "source_failure_reallocation_institution_sources": 10,
   "source_failure_reallocation_crossref_journals": 8,
   "source_failure_reallocation_crossref_queries": 8,
-  "source_failure_reallocation_policy": "If OpenAlex or Crossref becomes unavailable/rate-limited during a scan, stop retrying that source family for the rest of the run and immediately spend a bounded replacement slice on unused official/institutional publication sources plus trusted-journal/Crossref discovery. Admission rules do not change."
+  "source_failure_reallocation_policy": "If OpenAlex or Crossref becomes unavailable/rate-limited during a scan, stop retrying that source family for the rest of the run and immediately spend a bounded replacement slice on unused official/institutional publication sources plus trusted-journal/Crossref discovery. Admission rules do not change.",
+  "top_journal_watchlist": [
+    "Nature",
+    "Science",
+    "Proceedings of the National Academy of Sciences",
+    "Nature Communications",
+    "Science Advances",
+    "Nature Human Behaviour",
+    "Nature Machine Intelligence",
+    "Nature Biotechnology"
+  ],
+  "top_journal_watchlist_note": "Checked source-first on every ordinary scan. Prestige never bypasses the European/EU + substantive R&I admission rules; strategic significance may be inferred after admission.",
+  "direct_news_sources": [
+    {
+      "name": "Science|Business",
+      "domain": "sciencebusiness.net",
+      "hubs": [
+        "https://sciencebusiness.net/news",
+        "https://sciencebusiness.net/"
+      ],
+      "path_hints": [
+        "/news/",
+        "/horizon-europe/",
+        "/research-policy/",
+        "/framework-programmes/"
+      ]
+    },
+    {
+      "name": "Research Professional News",
+      "domain": "researchprofessionalnews.com",
+      "hubs": [
+        "https://www.researchprofessionalnews.com/",
+        "https://www.researchprofessionalnews.com/rr-news-europe/"
+      ],
+      "path_hints": [
+        "/rr-news-europe/",
+        "/rr-news-world/",
+        "/research/"
+      ]
+    }
+  ],
+  "direct_news_pages_per_source": 12,
+  "direct_news_links_per_source": 30,
+  "direct_news_timeout_seconds": 10,
+  "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources."
 }

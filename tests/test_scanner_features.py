@@ -617,7 +617,8 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(funnel["enough_text_to_judge"], 50)
         self.assertEqual(funnel["direct_eu_scope_remaining"], 30)
         self.assertEqual(funnel["substantive_ri_remaining"], 20)
-        self.assertEqual(funnel["strategic_context_remaining"], 15)
+        self.assertEqual(funnel["strategic_context_remaining"], 20)
+        self.assertFalse(funnel["strategic_context_gate_active"])
         self.assertEqual(funnel["genuinely_new_unique_ab"], 3)
         self.assertEqual(funnel["metadata_text_rescue"]["admitted_after_recovery"], 1)
 
@@ -657,6 +658,33 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(stats["seeds_planned"], 1)
         self.assertEqual(stats["seeds_resolved"], 0)
         self.assertTrue(any("429" in x for x in warnings))
+
+
+class V1719RecallModelTests(unittest.TestCase):
+    def test_europe_and_ri_can_be_in_different_abstract_sentences_without_strategy_words(self):
+        title = "Changing patterns in university research"
+        abstract = (
+            "The analysis covers universities in Germany, France and the Netherlands. "
+            "We measure changes in research funding, publication output and laboratory productivity over ten years. "
+            "The results identify persistent shifts in the organisation of scientific work."
+        )
+        ev = scan.gate_scope(title, abstract, "", 1, source_kind="scholarly")
+        self.assertTrue(ev["a_pass"])
+        self.assertEqual(ev["eu_relevance"], "direct")
+        self.assertEqual(ev["a_route"], "ri-relevance-assessment")
+
+    def test_elite_journal_watchlist_is_source_first_and_not_news_only(self):
+        watch = scan.CONFIG.get("top_journal_watchlist", [])
+        self.assertIn("Nature", watch)
+        self.assertIn("Science", watch)
+        self.assertIn("Proceedings of the National Academy of Sciences", watch)
+        self.assertGreaterEqual(len(watch), 6)
+
+    def test_core_news_has_direct_source_lane_in_addition_to_google_news(self):
+        direct = {x.get("domain") for x in scan.CONFIG.get("direct_news_sources", [])}
+        self.assertIn("sciencebusiness.net", direct)
+        self.assertIn("researchprofessionalnews.com", direct)
+
 
 
 class FrontierBridgeTests(unittest.TestCase):

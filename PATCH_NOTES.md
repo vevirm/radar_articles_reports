@@ -1,3 +1,28 @@
+# v17.19.1 — full-repository safety/state guard release
+
+This is the full repository build of the v17.19 recall change. The GitHub write-security boundary is intentionally unchanged: scanning runs without a stored repository credential; after scanning, all tracked/untracked changes except `radar.json` are restored/removed; the workflow hard-fails if any other repository change remains; and `git add -- radar.json` is the only scanner-output staging command.
+
+To avoid the previous “redo everything” failure mode, this release intentionally does **not** bump `recall_profile_version` or `incremental_state_version`. Existing OpenAlex, Crossref and institutional cursors therefore continue from their saved positions instead of resetting to zero. The new elite-journal and direct-news lanes are bounded additions, not a full corpus replay.
+
+Added regression tests that fail if the scanner gains a pre-scan Git credential, if the radar-only commit boundary is removed, or if this release unexpectedly triggers a full recall-state reset.
+
+# v17.19.0 — recall model: find R&I first, assess strategic impact second
+
+This release changes the radar from a hard strategic-wording admission model to a higher-recall foresight model.
+
+## Why
+Relevant research can have important long-run strategic consequences even when the authors do not explicitly use geopolitical, economic-security or strategic-autonomy language. The previous scanner also required Europe/R&I/strategic evidence in overly tight textual proximity, relied too heavily on Google News for core news sources, did not continuously watch broad elite journals, and could miss a late OpenAlex 429 when deciding whether to reallocate search time.
+
+## Changes
+- Strand A now requires European/EU scope plus substantive R&I evidence; explicit or triangulated strategic context is no longer a hard admission gate.
+- European scope and R&I substance may be established across different abstract sentences or different parts of a longer document.
+- Items without explicit strategic evidence are marked for longer-run strategic-significance assessment rather than rejected.
+- Added an always-checked source-first elite-journal lane: Nature, Science, PNAS, Nature Communications, Science Advances, Nature Human Behaviour, Nature Machine Intelligence and Nature Biotechnology. These journals never bypass the substantive EU/R&I gate.
+- Added bounded direct-source discovery for Science|Business and Research Professional News alongside Google News RSS, making Google News supplementary rather than the sole transport for those core sources.
+- Re-check OpenAlex/Crossref health after later scholarly stages so a late HTTP 429 can activate source-failure reallocation.
+- Admission diagnostics now state that the strategic-context gate is inactive; historical strategic-rejection counters remain readable for old runs.
+- Added regression tests for cross-sentence EU/R&I relevance, the elite-journal lane and direct core-news discovery.
+
 # v17.18.4 — institutional hub/container integrity fix
 
 This release fixes a discovery-container false positive without changing the substantive A/B/C relevance thresholds.

@@ -5,7 +5,7 @@ Key properties
 --------------
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
-* Strand A requires direct EU scope plus substantive R&I evidence and a strategic-context bridge. "Geopolitics" need not be named: technological sovereignty, dependence, competitiveness, capability, research security, talent competition, international coordination, critical infrastructure, standards and governance power can establish the strategic context when they triangulate.
+* Strand A requires direct European/EU scope plus substantive R&I evidence. Strategic/geopolitical significance is assessed and recorded when explicit or inferable, but it is not a hard textual admission gate: the radar may surface R&I evidence whose longer-run strategic consequences need editorial interpretation.
 * Strand B is a method-development library: a publication must contribute a new, adapted,
   extended, refined or otherwise explicitly developed futures/foresight method, or a genuinely
   forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
@@ -26,7 +26,7 @@ Key properties
   authoritative EU decisions/notifications into Strand A when the underlying source itself
   passes the normal substantive A gate.
 
-The scanner aims for high-recall discovery with substantive admission: EU scope + R&I/related-system substance + explicit or triangulated strategic context. It does not pad.
+The scanner aims for high-recall discovery with substantive admission: European/EU scope + genuine R&I/related-system substance. Strategic significance is an analytical layer, not a mandatory keyword/co-occurrence test. It does not pad.
 """
 from __future__ import annotations
 
@@ -2362,10 +2362,11 @@ def aboutness_for_a(
 ) -> dict[str, Any]:
     """Apply source-length-aware aboutness for Strand A.
 
-    Governing rule: reject incidental mentions, not short documents.  Full documents
-    must show repeated/spread R&I and geopolitical evidence.  Abstract-only records
-    are judged within the abstract and are never required to contain non-existent
-    sections.  Metadata-only records are deferred rather than labelled irrelevant.
+    Governing rule: reject incidental R&I mentions, not papers that simply lack strategic
+    vocabulary. Full documents must show repeated/spread R&I evidence. Abstract-only
+    records are judged within the available concise source text. Metadata-only records are
+    deferred rather than labelled irrelevant. Strategic context is recorded when present
+    and assessed downstream when it is implicit.
     """
     mode = _aboutness_text_mode(abstract, body)
     ta = clean_text(f"{title}. {abstract}")
@@ -2381,13 +2382,15 @@ def aboutness_for_a(
         result["reason"] = "no_direct_eu"
         return result
     if not a_focus:
-        # Keep the substantive failure reason visible to diagnostics.
+        # Strand A now fails here only for lack of substantive R&I focus (or a hard
+        # contamination exclusion handled upstream). Strategic language is descriptive,
+        # not an admission requirement.
         ri = _ri_hits(ta if mode == "abstract_only" else full)
         probe = ta if mode == "abstract_only" else full
         geo = _geo_hits(probe)
         implied_ok, _, implied_terms = implied_strategic_context(probe)
         result["ri_terms"], result["geo_terms"] = ri[:8], (geo or implied_terms)[:8]
-        result["reason"] = "no_ri" if not ri else ("no_geopolitics" if not (geo or implied_ok) else "no_substantive_bridge")
+        result["reason"] = "no_ri" if not ri else "no_substantive_ri_focus"
         return result
 
     if mode == "abstract_only":
@@ -2401,9 +2404,10 @@ def aboutness_for_a(
         concise = clean_text(f"{ta}. {body[:8000]}")
         ri = _ri_hits(concise)
         geo = _geo_hits(concise)
-        result["ri_terms"], result["geo_terms"] = ri[:8], geo[:8]
-        result["pass"] = bool(ri and (geo or contextual_evidence) and (bridge or a_focus))
-        result["reason"] = "about" if result["pass"] else "no_substantive_bridge"
+        implied_ok, _, implied_terms = implied_strategic_context(concise)
+        result["ri_terms"], result["geo_terms"] = ri[:8], (geo or implied_terms)[:8]
+        result["pass"] = bool(ri and a_focus)
+        result["reason"] = "about" if result["pass"] else "no_substantive_ri_focus"
         return result
 
     # Full text: require the issue to recur across the document. Sentence spread is used
@@ -2432,32 +2436,25 @@ def aboutness_for_a(
                 implied_ok or (distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME))
             ):
                 contextual_sentences += 1
+    # Strategic context is retained as evidence for ranking/explanation, but no longer
+    # acts as a Boolean admission gate.  Full text must instead demonstrate recurring R&I
+    # substance; downstream analysis may infer strategic significance from the findings.
     geo_supported = repeated_geo or contextual_sentences >= 1
-    result["pass"] = bool(repeated_ri and geo_supported)
+    result["pass"] = bool(repeated_ri)
     if not repeated_ri:
         result["reason"] = "incidental_ri"
-    elif not geo_supported:
-        result["reason"] = "incidental_geopolitics"
     else:
         result["reason"] = "about"
     return result
 
 
 def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[str]]:
-    """Classify EU relevance as *scope*, not as a passing geographic mention.
+    """Classify European/EU relevance as document scope, not sentence-level co-occurrence.
 
-    Precision repair (V17.5.10): older builds treated any Europe/member-state name in
-    title+abstract as direct EU relevance.  In comparative/global papers this allowed
-    a single German/French/European study, affiliation or comparator to make an
-    Indonesia/China/US-centred paper look EU-scoped.  Direct scope now requires one of:
-
-    * EU/Europe/member-state scope in the title;
-    * an explicit EU institution/programme/policy marker in the abstract; or
-    * a Europe/member-state abstract sentence that itself carries both R&I and
-      geopolitical/economic-security substance.
-
-    Body-only evidence remains stricter still.  Derived relevance still requires an
-    explicit implication-for-Europe sentence.
+    V17.19 changes the governing principle: strategic/geopolitical wording is not required
+    to establish European scope.  A scholarly abstract may establish Europe in one sentence
+    and its R&I substance elsewhere in the abstract.  For longer body text we still guard
+    against incidental geography by requiring substantive R&I evidence across the document.
     """
     title = clean_text(title)
     abstract = clean_text(abstract)
@@ -2471,32 +2468,25 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     if title_direct or title_generic or title_member:
         return "direct", list(dict.fromkeys(title_direct + title_generic + title_member))[:4]
 
-    # Explicit EU institutional/programme/policy language in the abstract is strong
-    # scope evidence.  A bare "EU" token is accepted only when the sentence is also
-    # substantively about R&I, avoiding incidental footnote/comparator mentions.
+    # European scope and R&I substance may be expressed in different sentences.
+    # Specific EU institutions/programmes remain the strongest scope evidence.  Generic
+    # Europe/member-state language is accepted when the title+abstract as a whole is
+    # substantively about R&I; no strategic/geopolitical co-occurrence is required.
+    ta_ri = _ri_hits(ta)
+    abstract_scope_hits: list[str] = []
     for sent in split_sentences(abstract):
         sent_direct = distinct_matches(sent, EU_DIRECT)
         sent_generic = distinct_matches(sent, EU_GENERIC)
         sent_member = bounded_matches(sent, MEMBER_STATE_SCOPE)
         bare_eu = union_eu_word(sent, ta)
-        ri_here = bool(distinct_matches(sent, RI_STRONG + RI_GENERIC))
-        implied_here, _, _ = implied_strategic_context(sent)
-        geo_here = bool(distinct_matches(sent, GEO_STRONG)) or china_geo_signal(sent) or research_talent_flow_signal(sent) or implied_here
-        # An abstract mentioning the European Union as one comparator/case is not
-        # automatically EU-scoped.  Specific EU institutions/programmes can establish
-        # scope directly; generic "European Union"/bare EU needs substantive R&I +
-        # geopolitical content in the same sentence.
         institutional_direct = [h for h in sent_direct if normalized(h) not in {"european union"}]
         if institutional_direct:
             return "direct", list(dict.fromkeys(institutional_direct))[:4]
-        if sent_direct and ri_here and geo_here:
-            return "direct", list(dict.fromkeys(sent_direct))[:4]
-        if bare_eu and ri_here and geo_here:
-            return "direct", ["EU"]
-        # Generic Europe/member-state names are not enough on their own in an
-        # abstract; the same sentence must establish the R&I-geopolitical scope.
-        if (sent_generic or sent_member) and ri_here and geo_here:
-            return "direct", list(dict.fromkeys(sent_generic + sent_member))[:4]
+        abstract_scope_hits.extend(sent_direct + sent_generic + sent_member)
+        if bare_eu:
+            abstract_scope_hits.append("EU")
+    if abstract_scope_hits and ta_ri:
+        return "direct", list(dict.fromkeys(abstract_scope_hits))[:4]
 
     full = f"{ta}. {body[:50000]}"
     direct_body = distinct_matches(full, EU_DIRECT)
@@ -2512,18 +2502,14 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         evidence = strong_body_scope + direct_body
         return "direct", list(dict.fromkeys(evidence))[:4]
 
-    # Europe is part of the governing scope, not just EU institutions. For full-text
-    # institutional/research documents, a sentence that explicitly connects Europe or
-    # a member state to R&I and a strategic/geopolitical mechanism is direct scope.
-    for sent in split_sentences(body[:50000]):
-        european_here = distinct_matches(sent, EU_GENERIC) + bounded_matches(sent, MEMBER_STATE_SCOPE)
-        if european_here and _ri_hits(sent):
-            implied_here, _, _ = implied_strategic_context(sent)
-            contextual_here = bool(_geo_hits(sent)) or implied_here or bool(
-                distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME)
-            )
-            if contextual_here:
-                return "direct", list(dict.fromkeys(european_here))[:4]
+    # For longer documents, allow European scope and R&I evidence to occur in different
+    # paragraphs.  Requiring them in one sentence was a major recall failure for reports
+    # and papers that establish geography, evidence and implications in separate sections.
+    body_probe = clean_text(body[:50000])
+    body_scope = distinct_matches(body_probe, EU_GENERIC) + bounded_matches(body_probe, MEMBER_STATE_SCOPE)
+    ri_sentence_count, _ = _sentence_block_stats(clean_text(f"{ta}. {body_probe}"), _ri_hits)
+    if body_scope and ri_sentence_count >= 2:
+        return "direct", list(dict.fromkeys(body_scope))[:4]
 
     # Derived EU relevance requires an explicit implication/comparator sentence;
     # generic words such as 'policy' or 'strategy' alone do not establish relevance.
@@ -3119,13 +3105,15 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     ri_ta = _ri_hits(ta)
     geo_ta = _geo_hits(ta)
 
-    # Primary route: explicit R&I + geopolitical/economic-security evidence.
+    # Explicit strategic/geopolitical evidence remains useful for describing why an item
+    # matters, but it is no longer required for admission.  The hard content requirement is
+    # substantive R&I focus in the bibliographic evidence unit (scholarly) or executive lead
+    # (institutional).
     if source_kind == 'scholarly':
+        ri_focus = bool(ri_ta)
         explicit_focus = bool(ri_ta and geo_ta)
     else:
-        # Curated institutional analytical work may establish one side in title/description and
-        # the other in the executive lead. Requiring a same-sentence bridge discarded reports
-        # whose abstracts use neutral policy language before discussing the strategic mechanism.
+        ri_focus = bool(ri)
         explicit_focus = bool(ri and geo)
 
     # Secondary route: direct empirical mechanism of Europe's external R&I position. This route
@@ -3147,7 +3135,7 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     if contextual_focus and document_exclusion_reason(title, context_text):
         contextual_focus = False
 
-    focus = bool(explicit_focus or contextual_focus)
+    focus = bool(ri_focus)
     # V17.8.1: major-EU-R&I is a ranking objective, not a blanket corpus gate.
     # Hard rejection is reserved for obvious contamination (sports/consumer/local topics)
     # that only happen to mention R&D/competition. Broad but genuinely relevant papers stay
@@ -3161,7 +3149,7 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
             focus = False
             explicit_focus = False
             contextual_focus = False
-    route = 'explicit-geopolitics' if explicit_focus else ('triangulated-strategic-context' if contextual_focus else '')
+    route = 'explicit-geopolitics' if explicit_focus else ('triangulated-strategic-context' if contextual_focus else ('ri-relevance-assessment' if focus else ''))
     context_evidence = list(dict.fromkeys(implied_families + implied_terms + soft_terms))[:8] if contextual_focus else []
     return focus, ri, geo, bridge, route, context_evidence
 
@@ -3356,8 +3344,9 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
         contextual_evidence=bool(a_context)
     )
-    # A admission is source-supported and EU-centred. Inference-only external admission is
-    # disabled; an external development must itself establish direct European relevance.
+    # A admission is source-supported, European/EU-centred and substantively about R&I.
+    # Strategic/geopolitical language is intentionally not a hard gate; implications may
+    # be assessed by the radar after admission.
     a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass'))
     if external_ok:
         a_route = 'external-strategic-shock'
@@ -3650,10 +3639,10 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_reject_no_direct_eu")
     elif reason in {"no_ri", "incidental_ri"} or not ev.get("ri_evidence"):
         _diag_inc(f"{prefix}_reject_no_ri")
-    elif reason in {"no_geopolitics", "incidental_geopolitics", "no_substantive_bridge"}:
-        _diag_inc(f"{prefix}_reject_no_strategic_context")
+    elif reason in {"no_substantive_ri_focus"}:
+        _diag_inc(f"{prefix}_reject_no_ri")
     elif not ev.get("a_focus_pass"):
-        _diag_inc(f"{prefix}_reject_no_strategic_context")
+        _diag_inc(f"{prefix}_reject_no_ri")
     else:
         _diag_inc(f"{prefix}_reject_aboutness")
 
@@ -3742,7 +3731,10 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
     enough_text = max(0, evaluated - insufficient)
     direct_eu = max(0, enough_text - no_eu)
     ri_substantive = max(0, direct_eu - no_ri)
-    strategic = max(0, ri_substantive - no_strategy - other_aboutness)
+    # V17.19: strategic context is no longer a hard admission gate. Keep historical
+    # rejection counters visible for old runs, but do not subtract them from the current
+    # admission funnel.
+    strategic = max(0, ri_substantive - other_aboutness)
     return {
         "raw_records_seen": raw,
         "gate_evaluated": evaluated,
@@ -3750,6 +3742,8 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
         "direct_eu_scope_remaining": direct_eu,
         "substantive_ri_remaining": ri_substantive,
         "strategic_context_remaining": strategic,
+        "strategic_context_gate_active": False,
+        "admission_model": "European/EU scope + substantive R&I; strategic impact assessed after admission",
         "gate_passed_before_cross_source_dedupe": gate_passed,
         "unique_gate_candidates": max(0, int(unique_gate_candidates)),
         "duplicates_or_known_removed_after_gate": max(0, gate_passed - int(unique_gate_candidates)),
@@ -7002,12 +6996,15 @@ def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     if strand == "A":
         ri = ", ".join(evidence.get("ri_evidence", [])[:2]) or "substantive R&I evidence"
         geo_terms = evidence.get("geo_evidence", []) or evidence.get("a_context_evidence", [])
-        geo = ", ".join(geo_terms[:3]) or "strategic mechanism not stored"
-        bridge = evidence.get("bridge_mode") or "supported"
+        bridge = evidence.get("bridge_mode") or "not required for admission"
         eu_scope = ", ".join(evidence.get("eu_evidence", [])[:2]) or "scope established"
         if evidence.get('eu_relevance') == 'material_external':
+            geo = ", ".join(geo_terms[:3]) or "external impact mechanism"
             return f"Major external R&I shock with a specific Europe-impact bridge ({eu_scope}); R&I evidence: {ri}; strategic context: {geo}; bridge is a radar inference."
-        return f"{eu} EU relevance ({eu_scope}); R&I evidence: {ri}; strategic evidence: {geo}; bridge: {bridge}."
+        if not geo_terms:
+            return f"{eu} European/EU relevance ({eu_scope}); R&I evidence: {ri}; strategic significance is not explicit in the source and should be assessed as a possible longer-run implication."
+        geo = ", ".join(geo_terms[:3])
+        return f"{eu} European/EU relevance ({eu_scope}); R&I evidence: {ri}; strategic evidence: {geo}; bridge: {bridge}."
     if strand == "B":
         method = ", ".join(evidence.get("method_evidence", [])[:2]) or "substantive foresight method"
         suitable = ', '.join(evidence.get('b_suitability_evidence', [])[:2]) or 'strategic/public-policy futures'
@@ -8679,11 +8676,112 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             })
         return items, None
 
+    def fetch_direct_source(src: dict[str, Any]) -> tuple[list[dict[str, Any]], str | None]:
+        """Bounded source-local news discovery that does not depend on Google News indexing."""
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            return [], "budget"
+        name = clean_text(src.get("name"))
+        domain = clean_text(src.get("domain")).lower().removeprefix("www.")
+        hubs = [clean_text(x) for x in src.get("hubs", []) if clean_text(x)]
+        hints = [normalized(x) for x in src.get("path_hints", []) if clean_text(x)]
+        max_links = max(1, int(CONFIG.get("direct_news_links_per_source", 24) or 24))
+        max_pages = max(1, int(CONFIG.get("direct_news_pages_per_source", 12) or 12))
+        timeout_direct = int(CONFIG.get("direct_news_timeout_seconds", timeout) or timeout)
+        candidates: dict[str, tuple[int, str, str]] = {}
+
+        for hub in hubs:
+            if stage_deadline_reached(stage_deadline, 20):
+                break
+            try:
+                r = SESSION.get(hub, timeout=timeout_direct, allow_redirects=True)
+                if r.status_code != 200 or "html" not in r.headers.get("content-type", "text/html").lower():
+                    continue
+                soup = BeautifulSoup(r.text, "html.parser")
+                for a in soup.find_all("a", href=True):
+                    href = urljoin(r.url, a.get("href", ""))
+                    pu = urlparse(href)
+                    host = (pu.hostname or "").lower().removeprefix("www.")
+                    if not host or not (host == domain or host.endswith("." + domain)):
+                        continue
+                    path = normalized(pu.path)
+                    label = clean_text(a.get_text(" ", strip=True))
+                    if len(label.split()) < 4:
+                        continue
+                    hint_hits = sum(1 for h in hints if h and h in path)
+                    articleish = hint_hits or bool(re.search(r"/(?:20\d{2}/|news/|article/|articles/|analysis/|features?/)", path))
+                    if not articleish:
+                        continue
+                    score = hint_hits * 4 + min(6, len(label.split()) // 5)
+                    key = normalized_link(href)
+                    if key and (key not in candidates or score > candidates[key][0]):
+                        candidates[key] = (score, href, label)
+            except Exception:
+                continue
+
+        ranked = sorted(candidates.values(), key=lambda x: x[0], reverse=True)[:max_links]
+        direct_items: list[dict[str, Any]] = []
+        for _score, href, label in ranked[:max_pages]:
+            if stage_deadline_reached(stage_deadline, 15):
+                break
+            try:
+                r = SESSION.get(href, timeout=timeout_direct, allow_redirects=True)
+                if r.status_code != 200 or "html" not in r.headers.get("content-type", "text/html").lower():
+                    continue
+                soup = BeautifulSoup(r.text, "html.parser")
+                title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else label)
+                desc = meta_content(soup, ["description", "og:description", "twitter:description"])
+                published = None
+                for script in soup.find_all("script", attrs={"type": re.compile(r"ld\+json", re.I)}):
+                    try:
+                        data = json.loads(script.string or script.get_text())
+                    except Exception:
+                        continue
+                    for obj in jsonld_objects(data):
+                        published = published or parse_date(obj.get("datePublished") or obj.get("dateCreated"))
+                if not published:
+                    published = parse_date(meta_content(soup, [
+                        "article:published_time", "og:article:published_time", "datePublished",
+                        "dateCreated", "parsely-pub-date", "pubdate", "publication_date",
+                    ]))
+                if not published:
+                    for tm in soup.find_all("time")[:6]:
+                        published = parse_date(clean_text(tm.get("datetime") or tm.get_text(" ", strip=True)))
+                        if published:
+                            break
+                if not published:
+                    continue
+                when = dt.datetime.combine(published, dt.time.min, tzinfo=dt.timezone.utc)
+                if when < start or when > now + dt.timedelta(days=1):
+                    continue
+                if not title or not factual_news(title, desc):
+                    continue
+                signal_key = f"signal:{normalized(name)}:{norm_title(title)}"
+                if signal_key in KNOWN_SIGNAL_IDENTITIES:
+                    continue
+                canonical = href
+                can = soup.find("link", rel=lambda v: v and "canonical" in v)
+                if can and can.get("href"):
+                    canonical = urljoin(r.url, can.get("href"))
+                text = f"{title}. {desc}"
+                direct_items.append({
+                    "headline": title, "source": name,
+                    "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
+                    "link": canonical, "_desc": desc, "_desc_html": "",
+                    "_themes": themes_for(text),
+                    "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
+                    "_direct_source": True,
+                })
+            except Exception:
+                continue
+        return direct_items, None
+
     out: list[dict[str, Any]] = []
     budget_hits = 0
+    direct_sources = [x for x in CONFIG.get("direct_news_sources", []) if isinstance(x, dict)]
     with cf.ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
-        futs = [ex.submit(fetch_job, j) for j in jobs]
-        for fut in cf.as_completed(futs):
+        google_futs = [ex.submit(fetch_job, j) for j in jobs]
+        direct_futs = [ex.submit(fetch_direct_source, src) for src in direct_sources]
+        for fut in cf.as_completed(google_futs + direct_futs):
             try:
                 items, err = fut.result()
                 out.extend(items)
@@ -8692,7 +8790,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 elif err:
                     warnings.append(err)
             except Exception as e:
-                warnings.append(f"Google News worker: {type(e).__name__}")
+                warnings.append(f"News worker: {type(e).__name__}")
     if budget_hits:
         warnings.append(f"News scan budget reached; {budget_hits} queued query/queries skipped")
     seen = set(); unique = []
@@ -9780,6 +9878,7 @@ def main() -> int:
     # and EU primary sources, but the broad rotating lanes are preserved. Source prestige
     # never bypasses or tightens the substantive admission gate.
     source_journals_all = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
+    top_journal_watchlist = list(dict.fromkeys(CONFIG.get("top_journal_watchlist", [])))
     preferred_q1 = [j for j in list(dict.fromkeys(CONFIG.get("preferred_q1_journals_sjr2024", []))) if j in source_journals_all]
     nonpreferred_journals = [j for j in source_journals_all if j not in preferred_q1]
     source_total = max(0, int(CONFIG.get("crossref_source_first_journals_per_scan", 10) or 0))
@@ -9799,7 +9898,9 @@ def main() -> int:
     cr_general_batch, _cr_source_planned_next, _cr_source_planned_wrapped = rotating_batch(
         nonpreferred_journals or source_journals_all, cr_source_cursor_before, broad_n
     )
-    cr_source_batch = list(dict.fromkeys(cr_preferred_batch + cr_general_batch))
+    # Elite journals are checked every ordinary scan rather than hidden behind a long
+    # policy-journal rotation.  They still face the same EU + substantive-R&I gate.
+    cr_source_batch = list(dict.fromkeys(top_journal_watchlist + cr_preferred_batch + cr_general_batch))
 
     institution_sources_all = list(CONFIG.get("institution_sources", []))
     official_domains = {clean_text(x).lower().removeprefix("www.") for x in CONFIG.get("official_eu_priority_domains", []) if clean_text(x)}
@@ -10422,6 +10523,12 @@ def main() -> int:
                 snowball_candidates = []
                 snowball_stats = {"enabled": True, "error": type(e).__name__, "admitted_unique": 0}
             oa.extend(snowball_candidates)
+
+    # Re-check source health after citation snowball and author/deepening work.  OpenAlex
+    # can start healthy and hit HTTP 429 later in the same run; using the stale status from
+    # the initial discovery phase prevented the promised fallback from running.
+    oa_failed = source_stage_failed(warnings, "openalex")
+    cr_failed = source_stage_failed(warnings, "crossref")
 
     # Exact URLs supplied through the curated manual lane are retried first. This is a
     # precision-preserving recall repair: only the supplied URL is fetched, and admission
