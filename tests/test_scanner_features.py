@@ -1445,16 +1445,87 @@ class RotationAndReaderQualityTests(unittest.TestCase):
         first_four = [scan.query_theme(q) for q in bank[:4]]
         self.assertGreaterEqual(len(set(first_four)), 4)
 
-    def test_priorities_are_independent_of_matrix_and_source_merit(self):
+    def test_priorities_preserve_scanner_lenses_and_interpret_retained_evidence_without_matrix_inference(self):
         import subprocess
         js = r"""
 const P=require('./priorities/priorities.js');
 const data={
- strand_a:[{title:'Embedded label must be ignored',date:'2026-09-01',link:'https://example.org/matrix',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'old embedded passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}}],
- strategic_pathways:[{title:'Strict risk',date:'2026-09-02',link:'https://example.org/risk',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'source passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}}]
+ strand_a:[
+  {title:'Embedded scanner risk',date:'2026-09-01',link:'https://example.org/risk',matrix_auto_cell:'high-high',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'source passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}},
+  {title:'Matrix only item',date:'2026-09-03',link:'https://example.org/matrix',matrix_auto_cell:'high-high',summary:'High impact and high sensitivity.'},
+  {title:'Retained analytical risk',date:'2026-09-02',link:'https://example.org/derived-risk',summary:'A proposed White House rule could restrict international research collaboration, exposing European research access to United States government control.'},
+  {title:'Open quantum call',date:'2026-09-02',link:'https://example.org/opp',summary:'EuroHPC call QTI-2026 aims to strengthen European quantum capability through Horizon Europe. Status Open; applications close in November 2026.'}
+ ],
+ strand_c:[{headline:'China places EU research organisations on its export control list, barring dual-use exports with immediate effect',date:'2026-07-24',link:'https://example.org/shock',signal_note:'China places EU research organisations on its export control list, barring dual-use exports with immediate effect.'}],
+ strategic_pathways:[{title:'Filed opportunity',date:'2026-09-04',link:'https://example.org/filed-opportunity',strategic_classification_source:'source_text',strategic_classification:{primary:'opportunity',lenses:[{type:'opportunity',status:'open',passage:'source passage',components:{mechanism:'could leverage',actor:'agency',instrument:'procurement',gain:'capacity'}}]}}]
 };
 const v=P.buildPriorityView(data,{limit:8});
-if(v.stats.risks!==1||v.risks[0].title!=='Strict risk') process.exit(2);
+if(v.stats.risks!==2) process.exit(2);
+if(!v.risks.some(x=>x.title==='Embedded scanner risk'&&x.interpretationBasis==='scanner_source_classification')) process.exit(3);
+if(!v.risks.some(x=>x.title==='Retained analytical risk'&&x.interpretationBasis==='repository_evidence_interpretation')) process.exit(4);
+if(v.risks.some(x=>x.title==='Matrix only item')||v.opportunities.some(x=>x.title==='Matrix only item')) process.exit(5);
+if(v.stats.opportunities!==2||!v.opportunities.some(x=>x.title==='Open quantum call')) process.exit(6);
+if(v.stats.externalShocks!==1||v.externalShocks[0].interpretationBasis!=='repository_evidence_interpretation') process.exit(7);
+"""
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_external_shock_interpretation_covers_non_policy_exogenous_event_families(self):
+        import subprocess
+        js = r"""
+const P=require('./priorities/priorities.js');
+const data={strand_c:[
+ {headline:'Earthquake struck without prior notice, forcing a European research facility to shut down',date:'2026-09-02',link:'https://example.org/quake',signal_note:'A major earthquake struck without prior notice and forced a European research facility to shut down, suspending research operations and experiments.'},
+ {headline:'Ransomware cyberattack hit a European university network overnight',date:'2026-09-02',link:'https://example.org/cyber',signal_note:'A ransomware cyberattack hit a European university network overnight and disrupted research data access and university operations.'},
+ {headline:'Government plans sanctions next month',date:'2026-09-02',link:'https://example.org/plan',signal_note:'A foreign government plans to impose sanctions next month that could disrupt European research access.'}
+]};
+const v=P.buildPriorityView(data,{limit:50});
+if(v.stats.externalShocks!==2) process.exit(2);
+const families=new Set(v.externalShocks.map(x=>x.lens.shock_family));
+if(!families.has('Natural disasters')) process.exit(3);
+if(!families.has('Cyberattacks')) process.exit(4);
+if(v.externalShocks.some(x=>x.title==='Government plans sanctions next month')) process.exit(5);
+"""
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_external_shock_taxonomy_exposes_all_supported_families(self):
+        import subprocess
+        js = r"""
+const P=require('./priorities/priorities.js');
+const text=[
+ 'earthquake','pandemic','armed conflict','terrorist attack','global financial crisis',
+ 'commodity price shock','energy supply disruption','food supply shock','export ban',
+ 'supply chain disruption','currency crisis','international sanctions','refugee surge',
+ 'cyberattack','technological disruption','extreme heat','political instability in a neighboring region',
+ 'foreign investment withdrawal','global demand shock','major infrastructure disruption'
+].join(' | ');
+const labels=new Set(P.shockFamilies(text).map(x=>x.label));
+const required=['Natural disasters','Pandemics and epidemics','Armed conflicts','Terrorist attacks','Global financial crises','Commodity price shocks','Energy supply disruptions','Food supply shocks','Trade disruptions','Supply chain disruptions','Currency crises','International sanctions','Migration and refugee surges','Cyberattacks','Technological disruptions','Climate-related shocks','Political instability in neighboring regions','Sudden foreign investment withdrawal','Global demand shocks','Major infrastructure disruptions'];
+for(const label of required) if(!labels.has(label)){console.error(label);process.exit(2)}
+"""
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_priority_interpretation_rejects_alarm_and_aspiration_without_required_components(self):
+        import subprocess
+        js = r"""
+const P=require('./priorities/priorities.js');
+const data={strand_a:[
+ {title:'Alarm only',date:'2026-09-01',summary:'Experts warn this is a wake-up call and the stakes could not be higher.'},
+ {title:'Aspiration only',date:'2026-09-01',summary:'Europe has the potential to become a global leader and must seize this unprecedented opportunity.'}
+]};
+const v=P.buildPriorityView(data,{limit:8});
+if(v.stats.risks||v.stats.opportunities||v.stats.externalShocks) process.exit(2);
+"""
+        subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
+
+    def test_current_corpus_has_independent_risk_opportunity_and_shock_interpretations(self):
+        import subprocess
+        js = r"""
+const P=require('./priorities/priorities.js');
+const D=require('./radar.json');
+const v=P.buildPriorityView(D,{limit:50});
+if(v.stats.risks<1) process.exit(2);
+if(v.stats.opportunities<1) process.exit(3);
+if(v.stats.externalShocks<1) process.exit(4);
 """
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 

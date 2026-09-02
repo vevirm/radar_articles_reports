@@ -106,19 +106,29 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertIn('confidence', score_block)
         self.assertIn('triage', score_block)
 
-    def test_risks_opportunities_are_not_derived_from_matrix(self):
+    def test_risks_opportunities_use_repository_analytical_layer_not_matrix_inference(self):
         js = (ROOT / 'priorities' / 'priorities.js').read_text(encoding='utf-8')
         html = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('strategic_classification', js)
+        self.assertIn('repository_evidence_interpretation', js)
+        self.assertIn('data?.strategic_pathways', js)
+        self.assertIn('data?.strand_a', js)
+        self.assertIn('data?.strand_c', js)
         self.assertNotIn('buildFrontier', js)
         self.assertNotIn('column.id', js)
+        self.assertNotIn('matrix_auto_cell', js)
         self.assertNotIn('sourceMerit', js)
-        self.assertNotIn('current Matrix findings support this view', html)
-        self.assertIn('Independent analytical product', html)
+        self.assertIn('The scanner supplies the retained evidence', html)
+        self.assertIn('Matrix placement is not used to create either category', html)
         shocks = (ROOT / 'shocks' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('scanner actively searches event language', shocks)
+        self.assertIn('The scanner supplies the retained evidence', shocks)
+        self.assertIn('repository applies the four-part shock test', shocks)
         self.assertIn('RadarPriorities.buildPriorityView', shocks)
         self.assertNotIn('Matrix placement', shocks)
+        self.assertIn('Shock families covered', shocks)
+        self.assertIn('Natural disasters', shocks)
+        self.assertIn('Cyberattacks', shocks)
+        self.assertIn('Major infrastructure disruptions', shocks)
 
     def test_briefing_is_not_a_stale_generated_snapshot(self):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')
