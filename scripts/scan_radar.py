@@ -3864,6 +3864,7 @@ _SHOCK_EXTERNALITY_CUES = [
     r"\bglobal demand shock\b", r"\bmajor infrastructure disruption\b",
 ]
 _SHOCK_EFFECT_CUES = [
+    r"\bbarring [^.;]{0,100}(?:exports?|access|entities)\b", r"\bbarred [^.;]{0,100}(?:from )?(?:exports?|access)\b",
     r"\bcut off\b", r"\bblocked\b", r"\brestrict(?:ed|ion)\b", r"\brevoked\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b",
     r"\bwent offline\b", r"\bsevered\b", r"\bclosed\b", r"\bprice (?:doubled|spiked|surged)\b", r"\btrading halted\b",
     r"\bstranded\b", r"\bseized\b", r"\bimpounded\b", r"\bexpelled\b", r"\bloss of\b", r"\bdisrupt(?:ed|ion)\b", r"\boutage\b",

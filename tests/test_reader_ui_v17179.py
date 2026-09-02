@@ -13,7 +13,7 @@ class ReaderUiV17179Tests(unittest.TestCase):
         self.assertIn('<nav class="landing-nav"', html)
         nav = html.split('<nav class="landing-nav"', 1)[1].split('</nav>', 1)[0]
         self.assertIn('aria-current="page">Radar</a>', nav)
-        self.assertLess(nav.find('>Radar</a>'), nav.find('>Read</a>'))
+        self.assertLess(nav.find('>Radar</a>'), nav.find('>Read at least this</a>'))
         self.assertLess(nav.find('>Radar</a>'), nav.find('>Matrix</a>'))
         self.assertLess(nav.find('>Radar</a>'), nav.find('>Stuff</a>'))
         self.assertNotIn('>Weak signals</a>', nav)
@@ -23,15 +23,17 @@ class ReaderUiV17179Tests(unittest.TestCase):
         self.assertNotIn("Next automatic", html)
         self.assertNotIn("scheduleState", html)
 
-    def test_read_page_is_simple_and_excludes_weak_signal_module(self):
+    def test_read_at_least_this_is_chart_only_minimum_briefing(self):
         html = (ROOT / "read" / "index.html").read_text(encoding="utf-8")
-        self.assertIn('The clearest current issues affecting Europe’s research and innovation position.', html)
-        self.assertIn('class="branches"', html)
+        self.assertIn('Read at least this', html)
+        self.assertIn('The minimum visual briefing', html)
+        self.assertIn('id="issuesChart"', html)
+        self.assertIn('id="quadrantChart"', html)
+        self.assertIn('id="rowChart"', html)
+        self.assertIn('id="pathwayChart"', html)
+        self.assertNotIn('class="issue-list"', html)
+        self.assertNotIn('class="branches"', html)
         self.assertNotIn('Weak signals to watch', html)
-        self.assertNotIn('weakSignals', html)
-        self.assertNotIn('strand_c', html)
-        self.assertNotIn('issue-chart', html)
-        self.assertIn("const items=[...A,...F]", html)
 
     def test_matrix_reader_is_concise_and_drops_per_item_why_block(self):
         full = (ROOT / "frontier" / "index.html").read_text(encoding="utf-8")

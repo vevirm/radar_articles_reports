@@ -18686,7 +18686,7 @@
     "new_strategic_pathways": 0,
     "strategic_risks": 1,
     "strategic_opportunities": 0,
-    "external_shocks": 0,
+    "external_shocks": 1,
     "possible_external_shocks": 0,
     "new_possible_external_shocks": 0,
     "aged_out_this_scan": {
@@ -34072,6 +34072,51 @@
   ],
   "frontier_evidence": [],
   "strategic_pathways": [
+    {
+      "title": "China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations",
+      "source": "South China Morning Post / corroborated current-event reporting",
+      "authors": "",
+      "date": "2026-07-24",
+      "link": "https://www.scmp.com/economy/global-economy/article/3361732/china-adds-eu-entities-export-control-list",
+      "type": "restriction / security",
+      "discovery_provenance": "manual",
+      "strategic_classification": {
+        "primary": "external_shock",
+        "lenses": [
+          {
+            "type": "external_shock",
+            "passage": "China places 14 EU entities on its export control list, barring dual-use exports with immediate effect — including Rheinmetall (DE), Vigo Photonics (PL), Tatra Trucks (CZ), IHC (NL) and Lafert (IT), plus several technology and research organisations.",
+            "components": {
+              "discrete": "with immediate effect",
+              "event": "with immediate effect",
+              "externality": "china",
+              "effect": "barring dual-use exports",
+              "speed": "with immediate effect"
+            },
+            "shock_family": "Trade disruptions",
+            "shock_family_id": "trade_disruption",
+            "transition_key": ""
+          }
+        ],
+        "trend_context": [],
+        "trend_action": false,
+        "trend_action_passage": ""
+      },
+      "strategic_classification_source": "source_text",
+      "source_quality_gate": {
+        "admissible": true,
+        "basis": "configured_current_event_source"
+      },
+      "eu_relevance": "direct",
+      "eu_evidence": [
+        "EU",
+        "europe",
+        "european"
+      ],
+      "eu_ri_scope_basis": "direct_european_scope",
+      "first_seen": "2026-08-25T09:39Z",
+      "new_this_scan": false
+    },
     {
       "title": "Shared gains, secure links: rethinking EU-Asia digital cooperation – CEPS",
       "source": "CEPS",

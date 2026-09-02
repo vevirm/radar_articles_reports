@@ -1975,6 +1975,17 @@ class StrategicSignalClassificationTests(unittest.TestCase):
         out = scan.classify_strategic_source_text(text)
         self.assertEqual(out["primary"], "external_shock")
 
+    def test_immediate_china_export_control_list_is_filed_as_external_shock(self):
+        text = (
+            "China places 14 EU entities on its export control list, barring dual-use exports "
+            "with immediate effect, including technology and research organisations."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertEqual(out["primary"], "external_shock")
+        lens = out["lenses"][0]
+        self.assertEqual(lens.get("shock_family"), "Trade disruptions")
+        self.assertTrue(all(lens.get("components", {}).values()))
+
     def test_extreme_heat_can_be_a_strict_external_shock_when_ri_effect_has_landed(self):
         text = (
             "On 2 September 2026, extreme heat struck southern Europe and forced European university "
