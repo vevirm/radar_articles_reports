@@ -70,7 +70,7 @@ if(!v.signals.length) process.exit(3);
     def test_reader_assets_use_current_cache_buster(self):
         for rel in [
             "index.html", "read/index.html", "frontier/index.html", "frontier/quick/index.html",
-            "priorities/index.html", "shocks/index.html", "historical/index.html",
+            "priorities/index.html", "shocks/index.html", "shocks/variants.html", "historical/index.html",
             "literature/index.html", "stuff/index.html",
         ]:
             with self.subTest(rel=rel):

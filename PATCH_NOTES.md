@@ -26,3 +26,19 @@ v17.20.0
 - Uses `first_seen` plus the scanner's run timestamps, so the filter shows what entered the Radar rather than merely what has a recent publication date.
 - Keeps `Added 24h` separately because a rescue scan can legitimately add zero items even when earlier scans in the same day added material.
 - Gives the Read-at-least-this topic trees slightly more finished branch connectors while staying strictly black/red/white.
+
+
+## 17.20.4 — shock variants and counter-evidence
+- Every supported direct or reasoned external-shock scenario now has a `Variants & evidence` button leading to a dedicated second-level page.
+- Each shock gets three forms: contained, core shock, and compound, written for that specific mechanism rather than as generic severity labels.
+- The second-level page shows the exact Radar material that speaks for the shock and the strongest material that pushes against it through substitution, resilience, diversification, redundancy or policy capacity.
+- Realised shocks link into the closest supported variant family when the mechanism can be mapped safely (for example export-control shocks to the materials/chips family).
+- Counter-evidence is deliberately not treated as a vote count: the page exposes it so shock reasoning can be challenged instead of merely illustrated.
+
+## 17.20.5 — only Items + New on the Radar
+- The Radar count strip now shows only the total number of retained items and the number of New items.
+- Removes reader-facing records-checked, runtime, 24-hour-addition and per-strand summary counters from the strip. Strand counts remain where they belong: inside Strand A, B and C.
+- Replaces the two addition filters with one pressable `New` filter.
+- `New` follows the latest productive scan (the most recent run that actually inserted A, B or C material), so a zero-yield rotation does not erase the latest additions from view.
+- The scanner records `latest_productive_scan` explicitly, while keeping all normal quality/admission gates unchanged; it never lowers the quality bar just to manufacture a non-zero number.
+

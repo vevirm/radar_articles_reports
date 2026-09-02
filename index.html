@@ -100,19 +100,14 @@
       </div>
     </header>
 
-    <div id="scanStrip" class="scan-strip" aria-label="Radar counts and latest scan"><div class="wrap scan-strip-inner">
-      <div class="scan-metric"><strong id="papersCount">—</strong><span>Papers &amp; reports</span></div>
-      <div class="scan-metric"><strong id="signalsCount">—</strong><span>Weak signals</span></div>
-      <div class="scan-metric"><strong id="checkedCount">—</strong><span>Records checked</span></div>
-      <div class="scan-metric added"><strong id="addedScanCount">—</strong><span>Added last scan</span></div>
-      <div class="scan-metric added"><strong id="added24Count">—</strong><span>Added in 24h</span></div>
-      <div class="scan-metric"><strong id="runtimeCount">—</strong><span>Scan runtime</span></div>
+    <div id="scanStrip" class="scan-strip" aria-label="Radar item counts"><div class="wrap scan-strip-inner">
+      <div class="scan-metric"><strong id="itemsCount">—</strong><span>Items</span></div>
+      <div class="scan-metric added"><strong id="newCount">—</strong><span>New</span></div>
     </div></div>
 
     <div class="toolbar"><div class="wrap tools">
       <input id="search" class="search" type="search" placeholder="Search titles, sources, signals, topics…" aria-label="Search radar">
-      <button id="addedLastScan" class="filter added-filter" type="button">Added last scan</button>
-      <button id="added24h" class="filter added-filter" type="button">Added 24h</button>
+      <button id="newOnly" class="filter added-filter" type="button">New</button>
       <button id="recentOnly" class="filter" type="button">Latest 30 days</button>
       <button id="clearFilter" class="filter" type="button">Clear filters</button>
       <a class="filter" href="glossary/">Glossary</a>
@@ -141,7 +136,7 @@
 <script src="briefing/insights.js?v=17.20.3"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
-const state={data:null,query:"",recentOnly:false,addedMode:"",allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,lastUpdated:0,runStart:0,runEnd:0,added24Floor:0};
+const state={data:null,query:"",recentOnly:false,newOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,newStart:0,newEnd:0};
 async function sha256(text){const data=new TextEncoder().encode(text);const hash=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("")}
 function unlock(){sessionStorage.setItem("radarUnlocked","1");document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";loadRadar()}
 if(sessionStorage.getItem("radarUnlocked")==="1") unlock();
@@ -249,13 +244,18 @@ function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x
 function publicDisplayOk(x){try{const t=cleanText(x?.title||x?.headline||'');if(!t)return false;if(globalThis.RadarInsights?.likelyEnglish?.(t)===false)return false;const claim=claimText(x);return globalThis.RadarInsights?.likelyEnglish?.(claim)!==false}catch(e){console.warn('Radar display filter skipped a problematic item',e);return Boolean(cleanText(x?.title||x?.headline||''))}}
 function dateMs(x){const t=Date.parse(x?.date||'');return Number.isFinite(t)?t:0}
 function firstSeenMs(x){const t=Date.parse(x?.first_seen||'');return Number.isFinite(t)?t:0}
-function addedLastScan(x){const seen=firstSeenMs(x);return Boolean(x?.new_this_scan)||(seen&&state.runStart&&seen>=state.runStart&&(!state.runEnd||seen<=state.runEnd+60000))}
-function added24h(x){const seen=firstSeenMs(x);return Boolean(seen&&state.added24Floor&&seen>=state.added24Floor)}
-function filtered(items){const q=state.query.trim().toLowerCase();const floor=state.latestDate?state.latestDate-30*86400000:0;let out=items.filter(x=>publicDisplayOk(x)&&(!state.recentOnly||dateMs(x)>=floor)&&(!q||searchable(x).includes(q))&&(!state.addedMode||(state.addedMode==='last'?addedLastScan(x):added24h(x))));if(state.addedMode)out=[...out].sort((a,b)=>firstSeenMs(b)-firstSeenMs(a)||dateMs(b)-dateMs(a));return out}
+function productiveWindow(d,items){
+  const explicit=d?.latest_productive_scan;
+  if(explicit&&Number(explicit.new_items)>0){const start=Date.parse(explicit.started_at||''),end=Date.parse(explicit.completed_at||'');if(Number.isFinite(start))return {start,end:Number.isFinite(end)?end:start+60_000}}
+  const history=Array.isArray(d?.scan_history)?d.scan_history:[];
+  for(let i=history.length-1;i>=0;i--){const h=history[i]||{},n=Number(h.new_a||0)+Number(h.new_b||0)+Number(h.new_c||0);if(n<=0)continue;const start=Date.parse(h.started_at||''),end=Date.parse(h.completed_at||'');if(Number.isFinite(start))return {start,end:Number.isFinite(end)?end:start+60_000}}
+  const latest=Math.max(0,...items.map(firstSeenMs));return latest?{start:latest-60_000,end:latest+60_000}:{start:0,end:0};
+}
+function newItem(x){const seen=firstSeenMs(x);return Boolean(x?.new_this_scan)||(seen&&state.newStart&&seen>=state.newStart&&seen<=state.newEnd+60_000)}
+function filtered(items){const q=state.query.trim().toLowerCase();const floor=state.latestDate?state.latestDate-30*86400000:0;let out=items.filter(x=>publicDisplayOk(x)&&(!state.recentOnly||dateMs(x)>=floor)&&(!q||searchable(x).includes(q))&&(!state.newOnly||newItem(x)));if(state.newOnly)out=[...out].sort((a,b)=>firstSeenMs(b)-firstSeenMs(a)||dateMs(b)-dateMs(a));return out}
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
-function addedTag(x){if(addedLastScan(x))return tag('Added last scan','new');if(added24h(x))return tag('Added 24h','new');return ''}
+function addedTag(x){return newItem(x)?tag('New','new'):''}
 function fmtInt(v){const n=Number(v);return Number.isFinite(n)?new Intl.NumberFormat('en-GB').format(n):'—'}
-function fmtRuntime(seconds){const n=Number(seconds);if(!Number.isFinite(n)||n<0)return '—';if(n<60)return `${Math.round(n)}s`;const m=Math.floor(n/60),s=Math.round(n%60);return s&&m<10?`${m}m ${s}s`:`${m}m`}
 function biblio(x,label='Bibliography'){
   const title=x.title||x.headline||'';const who=x.authors||'';const meta=[x.source,fmtDate(x.date),x.type].filter(Boolean).join(' · ');const englishTitle=!title||globalThis.RadarInsights?.likelyEnglish?.(title)!==false;
   return `<details class="biblio" ${state.allDetails?'open':''}><summary>Source information</summary>${title&&englishTitle?`<div class="biblio-title">${esc(title)}</div>`:''}${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</details>`;
@@ -287,8 +287,7 @@ function renderSection(letter,items,renderer,noun){try{const f=filtered(items);c
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,bItem,"item");renderSection("C",C,cItem,"signal");}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
 function resetLimits(){state.limits={A:12,B:12,C:18}}
-function setAddedMode(mode){state.addedMode=state.addedMode===mode?'':mode;document.getElementById('addedLastScan').classList.toggle('active',state.addedMode==='last');document.getElementById('added24h').classList.toggle('active',state.addedMode==='24h');resetLimits();render()}
-function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;resetLimits();render()});document.getElementById('addedLastScan').addEventListener('click',()=>setAddedMode('last'));document.getElementById('added24h').addEventListener('click',()=>setAddedMode('24h'));document.getElementById("recentOnly").addEventListener("click",e=>{state.recentOnly=!state.recentOnly;e.currentTarget.classList.toggle("active",state.recentOnly);resetLimits();render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.recentOnly=false;state.addedMode="";document.getElementById("search").value="";document.getElementById("recentOnly").classList.remove("active");document.getElementById('addedLastScan').classList.remove('active');document.getElementById('added24h').classList.remove('active');resetLimits();render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
+function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;resetLimits();render()});document.getElementById('newOnly').addEventListener('click',e=>{state.newOnly=!state.newOnly;e.currentTarget.classList.toggle('active',state.newOnly);resetLimits();render()});document.getElementById("recentOnly").addEventListener("click",e=>{state.recentOnly=!state.recentOnly;e.currentTarget.classList.toggle("active",state.recentOnly);resetLimits();render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.recentOnly=false;state.newOnly=false;document.getElementById("search").value="";document.getElementById("recentOnly").classList.remove("active");document.getElementById('newOnly').classList.remove('active');resetLimits();render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
 wire();
 async function loadRadar(){
   let raw;
@@ -306,12 +305,10 @@ async function loadRadar(){
   state.data=d;
   const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];
   state.latestDate=Math.max(Date.parse(d.last_updated||'')||0,...[...A,...B,...C].map(dateMs));
-  state.lastUpdated=Date.parse(d.last_updated||d.run_completed_at||'')||state.latestDate||Date.now();
-  state.runStart=Date.parse(d.run_started_at||'')||0;state.runEnd=Date.parse(d.run_completed_at||d.last_updated||'')||0;state.added24Floor=state.lastUpdated-24*86400000;
-  const all=[...A,...B,...C],lastAdded=all.filter(addedLastScan).length,dayAdded=all.filter(added24h).length;
-  const sr=d.scan_results||{},stats=d.stats||{},rawChecked=stats?.admission_rejection_funnel?.raw_records_seen??sr?.rejection_funnel?.raw_records_seen??stats?.rejection_funnel?.raw_records_seen??stats?.raw_records_seen;
-  document.getElementById('papersCount').textContent=fmtInt(A.length+B.length);document.getElementById('signalsCount').textContent=fmtInt(C.length);document.getElementById('checkedCount').textContent=fmtInt(rawChecked);document.getElementById('addedScanCount').textContent=fmtInt(lastAdded);document.getElementById('added24Count').textContent=fmtInt(dayAdded);document.getElementById('runtimeCount').textContent=fmtRuntime(stats.runtime_seconds);
-  const lastBtn=document.getElementById('addedLastScan'),dayBtn=document.getElementById('added24h');lastBtn.textContent=`Added last scan (${lastAdded})`;dayBtn.textContent=`Added 24h (${dayAdded})`;lastBtn.classList.toggle('zero',lastAdded===0);dayBtn.classList.toggle('zero',dayAdded===0);
+  const all=[...A,...B,...C],window=productiveWindow(d,all);state.newStart=window.start;state.newEnd=window.end;
+  const newItems=all.filter(newItem).length;
+  document.getElementById('itemsCount').textContent=fmtInt(all.length);document.getElementById('newCount').textContent=fmtInt(newItems);
+  const newBtn=document.getElementById('newOnly');newBtn.textContent=`New (${newItems})`;
   render();
 }
 </script>

@@ -33,6 +33,26 @@ if(v.externalShocks.length<1)process.exit(5);
 """
         subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=20)
 
+
+    def test_shock_variants_show_three_forms_and_for_against_radar_evidence(self):
+        code=r"""
+const V=require('./shocks/variants.js');
+const S=require('./shocks/scenarios.js');
+const D=require('./radar.json');
+const all=[...S.buildDirect(D),...S.build(D)];
+if(all.length<7)process.exit(2);
+for(const s of all){
+  const v=V.build(D,s.id);
+  if(!v||v.variants.length!==3)process.exit(3);
+  if(v.forEvidence.length<3)process.exit(4);
+  if(v.againstEvidence.length<2){console.error('too little counter evidence',s.id);process.exit(5)}
+}
+const P=require('./priorities/priorities.js');
+const realised=P.buildPriorityView(D,{limit:50}).externalShocks||[];
+if(realised.length&&!realised.some(x=>V.scenarioIdForRealised(x)))process.exit(6);
+"""
+        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=20)
+
     def test_main_scanner_has_24_minute_runtime_budget_and_safe_workflow_envelope(self):
         # The scanner's real runtime budget lives in radar_config.json.  Keep this
         # contract independent of cosmetic/workflow timeout wording so a GitHub

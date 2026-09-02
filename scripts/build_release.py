@@ -39,6 +39,8 @@ SITE_FILES = [
     "priorities/priorities.js",
     "shocks/index.html",
     "shocks/scenarios.js",
+    "shocks/variants.html",
+    "shocks/variants.js",
     "literature/index.html",
     "stuff/index.html",
     "stuff/workbook.js",

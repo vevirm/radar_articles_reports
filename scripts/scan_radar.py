@@ -14419,6 +14419,27 @@ def main() -> int:
     # record of completed runs; this remains summary output, not per-candidate diagnostics.
     scan_history = prior_history[-180:]
 
+    # A rotation can legitimately produce no retained addition without lowering the quality
+    # bar. The reader's compact "New" filter therefore follows the latest *productive*
+    # scan: the most recent run that actually inserted A, B or C material. This never
+    # force-admits a weak candidate merely to manufacture a non-zero count.
+    latest_productive_scan = None
+    for hist in reversed(scan_history):
+        if not isinstance(hist, dict):
+            continue
+        productive_n = sum(int(hist.get(k, 0) or 0) for k in ("new_a", "new_b", "new_c"))
+        if productive_n <= 0:
+            continue
+        latest_productive_scan = {
+            "started_at": clean_text(hist.get("started_at")),
+            "completed_at": clean_text(hist.get("completed_at")),
+            "new_items": productive_n,
+            "new_a": int(hist.get("new_a", 0) or 0),
+            "new_b": int(hist.get("new_b", 0) or 0),
+            "new_c": int(hist.get("new_c", 0) or 0),
+        }
+        break
+
     data = {
         "last_updated": completed_iso,
         "run_started_at": now_iso,
@@ -14431,6 +14452,7 @@ def main() -> int:
             "next_scheduled_slot_utc": next_slot.isoformat(timespec="minutes").replace("+00:00", "Z"),
         },
         "scan_history": scan_history,
+        "latest_productive_scan": latest_productive_scan,
         "first_scan_complete": True,
         "corpus_start_date": output_corpus_floor.isoformat(),
         "preferred_corpus_start_date": DATE_FLOOR.isoformat(),

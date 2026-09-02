@@ -14,6 +14,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
             'frontier/quick/index.html',
             'priorities/index.html',
             'shocks/index.html',
+            'shocks/variants.html',
             'literature/index.html',
             'stuff/index.html',
         ]
@@ -44,7 +45,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         reader_files = [
             'index.html', 'read/index.html', 'briefing/index.html', 'literature/index.html',
             'frontier/index.html', 'frontier/quick/index.html', 'priorities/index.html',
-            'shocks/index.html', 'historical/index.html',
+            'shocks/index.html', 'shocks/variants.html', 'historical/index.html',
         ]
         for rel in reader_files:
             with self.subTest(rel=rel):
@@ -101,6 +102,8 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         manifest=(ROOT / 'scripts' / 'build_release.py').read_text(encoding='utf-8')
         self.assertIn('"shocks/index.html"', manifest)
         self.assertIn('"shocks/scenarios.js"', manifest)
+        self.assertIn('"shocks/variants.html"', manifest)
+        self.assertIn('"shocks/variants.js"', manifest)
         self.assertIn('"stuff/source_merit_ranking.xlsx"', manifest)
         self.assertIn('"stuff/workbook.js"', manifest)
         self.assertIn('"source_merit.js"', manifest)
@@ -138,6 +141,10 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertIn('scenarios.js', shocks)
         self.assertIn('Exact rows used', shocks)
         self.assertIn('Why it is easy to miss', shocks)
+        self.assertIn('Variants &amp; evidence', shocks)
+        variants=(ROOT / 'shocks' / 'variants.html').read_text(encoding='utf-8')
+        self.assertIn('Speaks for the shock', variants)
+        self.assertIn('Pushes against it', variants)
 
     def test_briefing_is_not_a_stale_generated_snapshot(self):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')
