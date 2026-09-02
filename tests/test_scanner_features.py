@@ -1440,9 +1440,17 @@ class RotationAndReaderQualityTests(unittest.TestCase):
         first_four = [scan.query_theme(q) for q in bank[:4]]
         self.assertGreaterEqual(len(set(first_four)), 4)
 
-    def test_priorities_quality_is_material_not_tiny_tiebreak(self):
+    def test_priorities_are_independent_of_matrix_and_source_merit(self):
         import subprocess
-        js = "const P=require('./priorities/priorities.js'); const hi={overall:10,sourceMerit:{score:100},confidence:70,materiality:3}; const lo={overall:10,sourceMerit:{score:65},confidence:70,materiality:3}; if(P.structuralScore(hi)-P.structuralScore(lo)<30) process.exit(2);"
+        js = r"""
+const P=require('./priorities/priorities.js');
+const data={strand_a:[
+ {title:'Matrix-only item',date:'2026-09-01',link:'https://example.org/matrix',strategic_classification:null},
+ {title:'Strict risk',date:'2026-09-02',link:'https://example.org/risk',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'source passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}}
+]};
+const v=P.buildPriorityView(data,{limit:8});
+if(v.stats.risks!==1||v.risks[0].title!=='Strict risk') process.exit(2);
+"""
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 
     def test_reader_why_line_rejects_jrc_repository_navigation_boilerplate(self):
@@ -1888,6 +1896,56 @@ class StrategicSignalClassificationTests(unittest.TestCase):
         self.assertGreaterEqual(scan.CONFIG.get("weak_signal_evidence_followup_per_scan", 0), 10)
         self.assertGreaterEqual(scan.CONFIG.get("c_floor_rescue_queries_per_wave", 0), 6)
         self.assertTrue(any("climate" in q.lower() for q in scan.CONFIG.get("c_floor_rescue_queries", [])))
+
+    def test_active_pathway_queries_cover_all_three_products(self):
+        news = scan.strategic_pathway_queries("news")
+        scholarly = scan.strategic_pathway_queries("scholarly")
+        self.assertTrue(scan.CONFIG.get("strategic_pathway_scan_enabled"))
+        self.assertGreaterEqual(len(news), 12)
+        self.assertTrue(any("could restrict" in q.lower() or "subject to approval" in q.lower() for q in news))
+        self.assertTrue(any("could leverage" in q.lower() or "regulatory sandbox" in q.lower() for q in news))
+        self.assertTrue(any("immediate effect" in q.lower() or "cut off" in q.lower() for q in news))
+        self.assertGreaterEqual(len(scholarly), 4)
+
+    def test_classifier_records_required_components_and_transition_key(self):
+        text = (
+            "European laboratories are dependent on a sole supplier for advanced chips. "
+            "Access is subject to United States export licences and the government could restrict approvals, "
+            "which would deny access to the supply line."
+        )
+        lens = scan.classify_strategic_source_text(text)["lenses"][0]
+        self.assertEqual(set(lens["components"]), {"mechanism", "carrier", "asset"})
+        self.assertTrue(all(lens["components"].values()))
+        self.assertEqual(lens["transition_key"], "united_states|compute_chips|export_licensing")
+
+    def test_external_shock_requires_discreteness_not_just_an_imposed_measure(self):
+        out = scan.classify_strategic_source_text(
+            "The United States imposed an export ban. European research centres were restricted from advanced chip access."
+        )
+        self.assertNotEqual(out["primary"], "external_shock")
+
+    def test_newer_matching_shock_closes_older_risk(self):
+        risk = {
+            "title": "Conditional chip-access risk", "date": "2026-08-01",
+            "strategic_classification_source": "source_text",
+            "strategic_classification": scan.classify_strategic_source_text(
+                "European laboratories are dependent on a sole supplier for advanced chips. "
+                "Access is subject to United States export licences and the government could restrict approvals, "
+                "which would deny access to the supply line."
+            ),
+        }
+        shock = {
+            "title": "Chip-access shock", "date": "2026-08-02",
+            "strategic_classification_source": "source_text",
+            "strategic_classification": scan.classify_strategic_source_text(
+                "The United States imposed an export ban with immediate effect. "
+                "European laboratories were cut off from access to advanced chips overnight."
+            ),
+        }
+        self.assertEqual(scan.apply_strategic_risk_shock_lifecycle([[risk, shock]]), 1)
+        lens = risk["strategic_classification"]["lenses"][0]
+        self.assertEqual(lens["status"], "closed_into_shock")
+        self.assertEqual(lens["closed_by"]["title"], "Chip-access shock")
 
 class StrategicSignalGuardrailTests(unittest.TestCase):
     def test_opportunity_without_named_actor_fails_even_with_procurement_phrase(self):

@@ -1,3 +1,13 @@
+# v17.19.22 — active independent risk, opportunity & external-shock scanning
+
+- Makes risks, opportunities and external shocks active scanner targets rather than passive annotations discovered only through other Radar searches. Dedicated current-news queries cover all three products, and a protected scholarly slice searches for structural risk and actionable-opportunity pathways on every run. These queries allocate attention only; they do not bypass the existing EU R&I relevance or source-admission gates.
+- Keeps the curator definitions strict. Risk requires mechanism + carrier + exposed asset; opportunity requires mechanism + named/unambiguous actor + instrument + gain + current window; external shock requires a discrete event + externality + statable effect + speed. Signal phrases remain retrieval/testing cues, never classifications.
+- Stores the matched test components with each source-text lens for auditability. Bare alarm, aspiration, intention and echo language cannot fill a missing component. A shock also needs an explicit discreteness marker; merely saying that a measure was imposed is not enough.
+- Adds conservative pathway transition keys. When a newer external shock matches an older risk on actor, exposed asset domain and mechanism family, the risk is marked `closed_into_shock`; ambiguous pathways are never auto-closed.
+- Rebuilds Risks & Opportunities as an independent analytical product. It now reads only strict `source_text` strategic classifications, excludes closed risks, and orders/diversifies them without Matrix quadrants, Matrix scores or source-merit ranking. The legacy Matrix fallback is removed completely.
+- External shocks are likewise shown only from strict source-text shock classifications. The reader now exposes the supporting source passage and the component test rather than a Matrix cell.
+- Bumps active strategic discovery/profile versions and reader cache keys to `17.19.22`, so the next scan runs a fresh weak-signal backfill with the new targeted search attention.
+
 # v17.19.21 — resilient Main Radar + Matrix presentation repair
 
 - Separates Main Radar data loading from presentation rendering. Once `radar.json` has loaded, an issue-map or individual card rendering error can no longer blank all A/B/C sections or masquerade as a JSON-load failure.

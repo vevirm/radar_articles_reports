@@ -1827,6 +1827,8 @@ NEWS_EVENT_TERMS = [
     "export control", "licens", "visa", "researcher", "talent", "standard", "patent", "acquisition",
     "study", "research finds", "evidence", "reveals", "suggests", "indicates", "benchmark",
     "ranking", "gap", "outflow", "inflow", "overtake", "leads", "lags", "concentration",
+    "halt", "outage", "cut off", "blacklist", "revoked", "embargo", "force majeure",
+    "seized", "impounded", "collapsed", "bankruptcy", "went offline", "without prior notice",
 ]
 
 WATCH_SIGNAL_THEMES = {
@@ -3727,7 +3729,7 @@ _RISK_MECHANISM_CUES = [
 ]
 _RISK_CARRIER_CUES = [
     r"\bunder review by\b", r"\bcontrolled by\b", r"\brequires approval from\b", r"\bsubject to [^.;]{1,80} jurisdiction\b",
-    r"\bon the entity list\b", r"\bdesignated\b", r"\bstate-linked\b", r"\bmilitary-affiliated\b",
+    r"\bon the entity list\b", r"\bdesignated by\b", r"\bdesignation by\b", r"\bstate-linked\b", r"\bmilitary-affiliated\b",
     r"\bforeign interference\b", r"\btalent recruitment by\b", r"\bcoercion\b", r"\bleverage over\b", r"\bpressure to align\b",
     r"\b(?:china|chinese|united states|u\.s\.|us |american|russia|russian|india|japan|taiwan|south korea|uk |united kingdom|british)\b.{0,90}\b(?:government|regulator|authority|firm|company|law|rule|control|ban|sanction|licen[cs]e|approval)\b",
 ]
@@ -3745,7 +3747,7 @@ _OPPORTUNITY_MECHANISM_CUES = [
     r"\bprocurement could\b", r"\bco-funding available\b", r"\bdesignation as strategic project\b", r"\bregulatory sandbox\b",
 ]
 _OPPORTUNITY_ACTOR_CUES = [
-    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|european research council|erc|universit(?:y|ies)|research organisations?|research organizations?|firms?|companies?|national governments?|regulators?)\b",
+    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|european research council|erc|national governments?|regulators?)\b",
 ]
 _OPPORTUNITY_INSTRUMENT_CUES = [
     r"\bwithin the competence of\b", r"\bmandate to\b", r"\bempowered to\b", r"\bexisting instrument\b",
@@ -3760,7 +3762,7 @@ _OPPORTUNITY_ACTOR_INSTRUMENT_CUES = [
     r"\beligibility criteria allow\b", r"\bassociation agreement\b", r"\bco-funding available\b", r"\bcall open until\b",
     r"\bdesignation as strategic project\b", r"\bfast-track\b", r"\bregulatory sandbox\b", r"\bpilot line\b",
     r"\banchor customer\b", r"\blaunch customer\b",
-    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|universit(?:y|ies)|research organisations?|research organizations?|firms?|companies?)\b.{0,100}\b(?:fund|finance|procure|launch|open|designate|fast-track|pilot|co-fund|mandate|regulat|standard|partner|invest|deploy)\w*\b",
+    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|european research council|erc|national governments?|regulators?)\b.{0,100}\b(?:fund|finance|procure|launch|open|designate|fast-track|pilot|co-fund|mandate|regulat|standard|partner|invest|deploy)\w*\b",
 ]
 _OPPORTUNITY_GAIN_CUES = [
     r"\bstrengthen(?:s|ed|ing)?\b", r"\bsecure(?:s|d|ing)?\b", r"\bexpand(?:s|ed|ing)? (?:capacity|access|production|research|innovation|market)\b",
@@ -3786,10 +3788,21 @@ _SHOCK_EVENT_CUES = [
     r"\bwalked away from the deal\b", r"\bvetoed\b", r"\bfailed to ratify\b", r"\bgovernment fell\b", r"\bsnap election\b",
     r"\bresigned\b", r"\bborders closed\b", r"\bstrait closed\b", r"\bairspace closed\b",
 ]
+_SHOCK_DISCRETE_CUES = [
+    r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bwithout prior notice\b",
+    r"\babruptly\b", r"\bunannounced\b", r"\bovernight\b", r"\bentered into force\b", r"\btook effect\b",
+    r"\bas of \d{1,2} [A-Za-z]+(?: 20\d{2})?\b",
+    r"\bon \d{1,2} [A-Za-z]+ 20\d{2}\b",
+    r"\bon [A-Za-z]+ \d{1,2},? 20\d{2}\b",
+    r"\bwent offline\b", r"\bdeclared force majeure\b", r"\bfiled for bankruptcy\b",
+    r"\bgovernment fell\b", r"\bsnap election\b", r"\btalks collapsed\b", r"\btrading halted\b",
+]
 _SHOCK_EXTERNALITY_CUES = [
     r"\b(?:china|chinese|united states|u\.s\.|american|russia|russian|india|japan|taiwan|south korea|united kingdom|british|foreign)\b",
     r"\bearthquake\b", r"\bflood(?:ing)?\b", r"\bwildfire\b", r"\bstorm\b", r"\bhurricane\b", r"\bheatwave\b", r"\bdrought\b",
     r"\bcyber(?:attack| incident)\b", r"\bsabotage\b", r"\boutage\b", r"\bmarket collapse\b", r"\bstrike\b",
+    r"\bforeign supplier\b", r"\bnon-eu supplier\b", r"\bexternal supplier\b", r"\boperator\b",
+    r"\bsupplier\b", r"\bvendor\b", r"\bcompany\b", r"\bfirm\b",
 ]
 _SHOCK_EFFECT_CUES = [
     r"\bcut off\b", r"\bblocked\b", r"\brestrict(?:ed|ion)\b", r"\brevoked\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b",
@@ -3830,6 +3843,89 @@ _TREND_ACTION_CUES = [
 def _regex_any(text: str, patterns: list[str]) -> bool:
     return any(re.search(p, text, re.I) for p in patterns)
 
+def _regex_match(text: str, patterns: list[str]) -> str:
+    for pattern in patterns:
+        m = re.search(pattern, text, re.I)
+        if m:
+            return clean_text(m.group(0))[:220]
+    return ''
+
+def _strategic_actor_key(text: str) -> str:
+    low = normalized(text)
+    actors = [
+        ('united_states', [r"\bunited states\b", r"\bu\.s\.\b", r"\bus government\b", r"\bamerican government\b"]),
+        ('china', [r"\bchina\b", r"\bchinese government\b", r"\bchinese regulator\b"]),
+        ('russia', [r"\brussia\b", r"\brussian government\b"]),
+        ('united_kingdom', [r"\bunited kingdom\b", r"\bbritish government\b", r"\buk government\b"]),
+        ('india', [r"\bindia\b", r"\bindian government\b"]),
+        ('japan', [r"\bjapan\b", r"\bjapanese government\b"]),
+        ('south_korea', [r"\bsouth korea\b", r"\bkorean government\b"]),
+        ('taiwan', [r"\btaiwan\b", r"\btaiwanese government\b"]),
+        ('eu', [r"\beuropean commission\b", r"\beuropean union\b", r"\beu regulator\b"]),
+    ]
+    for key, pats in actors:
+        if _regex_any(low, pats):
+            return key
+    if _regex_any(low, [r"\bforeign supplier\b", r"\bexternal supplier\b", r"\bnon-eu supplier\b"]):
+        return 'external_supplier'
+    return ''
+
+def _strategic_asset_key(text: str) -> str:
+    low = normalized(text)
+    families = [
+        ('talent', [r"\bresearchers?\b", r"\bscientists?\b", r"\btalent\b", r"\bbrain drain\b", r"\bresearch workforce\b"]),
+        ('compute_chips', [r"\bcompute\b", r"\bgpu", r"\baccelerators?\b", r"\bsemiconductors?\b", r"\bchips?\b", r"\bmicroelectronics\b"]),
+        ('research_data', [r"\bresearch data\b", r"\bscientific data\b", r"\bdata flow\b", r"\bdatabase\b", r"\brepositor(?:y|ies)\b"]),
+        ('research_infrastructure', [r"\bresearch infrastructure\b", r"\bresearch facilit(?:y|ies)\b", r"\blaborator(?:y|ies)\b", r"\binstruments?\b"]),
+        ('materials_supply', [r"\bcritical raw materials?\b", r"\bcritical minerals?\b", r"\bsupply line\b", r"\bsupply chain\b", r"\binputs?\b"]),
+        ('collaboration_access', [r"\bresearch collaboration\b", r"\bscientific collaboration\b", r"\bresearch cooperation\b", r"\bnetwork access\b"]),
+        ('firms_ip', [r"\bstart-?ups?\b", r"\bscale-?ups?\b", r"\bfirms?\b", r"\bcompanies?\b", r"\bintellectual property\b", r"\bip\b"]),
+        ('funding_market', [r"\bresearch funding\b", r"\bfunding access\b", r"\bmarket access\b", r"\bprocurement\b"]),
+        ('technology_access', [r"\btechnology access\b", r"\btechnology capacity\b", r"\bcritical technolog(?:y|ies)\b"]),
+    ]
+    for key, pats in families:
+        if _regex_any(low, pats):
+            return key
+    return ''
+
+def _strategic_mechanism_key(text: str) -> str:
+    low = normalized(text)
+    families = [
+        ('export_licensing', [r"\bexport (?:ban|control|restriction)s?\b", r"\blicen[cs]", r"\bapproval\b", r"\bentity list\b"]),
+        ('access_denial', [r"\bcut off\b", r"\bdeny access\b", r"\bdenied access\b", r"\bblocked\b", r"\brevoked\b", r"\bwithheld\b"]),
+        ('sanctions', [r"\bsanctions?\b", r"\bembargo\b", r"\bsecondary sanctions\b"]),
+        ('supply_interruption', [r"\bsupply (?:interruption|cutoff|cut-off)\b", r"\bforce majeure\b", r"\bshortage\b", r"\brationing\b", r"\ballocation cut\b"]),
+        ('lock_in', [r"\block-?in\b", r"\bswitching costs?\b", r"\bno alternative supplier\b", r"\bno substitute available\b"]),
+        ('ownership_transfer', [r"\bacquisition\b", r"\bforeign ownership\b", r"\btechnology transfer\b", r"\brelocation\b"]),
+        ('talent_flow', [r"\bbrain drain\b", r"\btalent recruitment\b", r"\bresearchers? (?:leave|leaving|relocat)\b"]),
+        ('funding_procurement', [r"\bprocurement\b", r"\bco-funding\b", r"\bcall open\b", r"\bpilot line\b", r"\bregulatory sandbox\b"]),
+    ]
+    for key, pats in families:
+        if _regex_any(low, pats):
+            return key
+    return ''
+
+def _strategic_transition_key(text: str) -> str:
+    actor = _strategic_actor_key(text)
+    asset = _strategic_asset_key(text)
+    mechanism = _strategic_mechanism_key(text)
+    return '|'.join((actor, asset, mechanism)) if actor and asset and mechanism else ''
+
+def strategic_pathway_queries(channel: str) -> list[str]:
+    if not bool(CONFIG.get('strategic_pathway_scan_enabled', True)):
+        return []
+    profiles = CONFIG.get(f'strategic_pathway_{channel}_queries', {})
+    if not isinstance(profiles, dict):
+        return []
+    out: list[str] = []
+    per_category = max(0, int(CONFIG.get('strategic_pathway_scholarly_queries_per_category', 2) or 0)) if channel == 'scholarly' else 0
+    for kind in ('risk', 'opportunity', 'external_shock'):
+        vals = [clean_text(x) for x in (profiles.get(kind) or []) if clean_text(x)]
+        if channel == 'scholarly' and per_category:
+            vals = vals[:per_category]
+        out.extend(vals)
+    return list(dict.fromkeys(out))
+
 def _strategic_passages(text: str) -> list[str]:
     sentences = [clean_text(x) for x in split_sentences(text, max_chars=24000) if clean_text(x)]
     out: list[str] = []
@@ -3844,54 +3940,79 @@ def _strategic_passages(text: str) -> list[str]:
 def classify_strategic_source_text(text: str) -> dict[str, Any]:
     """Strict source-text classification for risk, opportunity, shock and trend action.
 
-    This does not admit a source and never creates European relevance. It annotates a source
-    only when the required components are present in the same sentence or adjacent sentence
-    pair. Noise phrases are not negative evidence; they simply cannot satisfy a component.
+    Phrases are retrieval/testing cues only. A lens is filed only when every required
+    component is present in one sentence or adjacent sentence pair. Noise/aspiration/echo
+    wording cannot satisfy a missing component. A realised external shock supersedes a risk
+    within the same source; cross-source risk closure is applied later using conservative
+    transition keys.
     """
     raw = clean_text(text)
+    empty = {'primary': '', 'lenses': [], 'trend_context': [], 'trend_action': False, 'trend_action_passage': ''}
     if not raw:
-        return {'primary': '', 'lenses': [], 'trend_context': [], 'trend_action': False, 'trend_action_passage': ''}
+        return empty
     passages = _strategic_passages(raw)
-    risk_passage = ''
-    opp_passage = ''
-    shock_passage = ''
+    risk_lens: dict[str, Any] | None = None
+    opp_lens: dict[str, Any] | None = None
+    shock_lens: dict[str, Any] | None = None
     for passage in passages:
         low = normalized(passage)
-        risk = _regex_any(low, _RISK_MECHANISM_CUES) and _regex_any(low, _RISK_CARRIER_CUES) and _regex_any(low, _RISK_ASSET_CUES)
-        if risk and not risk_passage:
-            risk_passage = passage
-        opp = (
-            _regex_any(low, _OPPORTUNITY_MECHANISM_CUES)
-            and _regex_any(low, _OPPORTUNITY_ACTOR_CUES)
-            and _regex_any(low, _OPPORTUNITY_INSTRUMENT_CUES + _OPPORTUNITY_ACTOR_INSTRUMENT_CUES)
-            and _regex_any(low, _OPPORTUNITY_GAIN_CUES)
-            and _regex_any(low, _OPPORTUNITY_WINDOW_CUES + _OPPORTUNITY_INSTRUMENT_CUES)
-        )
-        if opp and not opp_passage:
-            opp_passage = passage
-        own_eu_action = bool(re.search(r"\b(?:european commission|european union|\beu\b|council|member states?)\b.{0,80}\b(?:imposed|adopted|suspended|halted|closed|revoked|blocked)\b", low, re.I))
-        shock = (
-            _regex_any(low, _SHOCK_EVENT_CUES)
-            and _regex_any(low, _SHOCK_EXTERNALITY_CUES)
-            and _regex_any(low, _SHOCK_EFFECT_CUES)
-            and _regex_any(low, _SHOCK_SPEED_CUES)
-            and not own_eu_action
-        )
-        if shock and not shock_passage:
-            shock_passage = passage
-    lenses: list[dict[str, str]] = []
+        risk_parts = {
+            'mechanism': _regex_match(low, _RISK_MECHANISM_CUES),
+            'carrier': _regex_match(low, _RISK_CARRIER_CUES),
+            'asset': _regex_match(low, _RISK_ASSET_CUES),
+        }
+        if all(risk_parts.values()) and risk_lens is None:
+            risk_lens = {
+                'type': 'risk', 'passage': passage[:900], 'components': risk_parts,
+                'transition_key': _strategic_transition_key(passage), 'status': 'open',
+            }
+
+        opp_parts = {
+            'mechanism': _regex_match(low, _OPPORTUNITY_MECHANISM_CUES),
+            'actor': _regex_match(low, _OPPORTUNITY_ACTOR_CUES),
+            'instrument': _regex_match(low, _OPPORTUNITY_INSTRUMENT_CUES + _OPPORTUNITY_ACTOR_INSTRUMENT_CUES),
+            'gain': _regex_match(low, _OPPORTUNITY_GAIN_CUES),
+            'window': _regex_match(low, _OPPORTUNITY_WINDOW_CUES + _OPPORTUNITY_INSTRUMENT_CUES),
+        }
+        if all(opp_parts.values()) and opp_lens is None:
+            opp_lens = {
+                'type': 'opportunity', 'passage': passage[:900], 'components': opp_parts,
+                'transition_key': _strategic_transition_key(passage),
+            }
+
+        own_eu_action = bool(re.search(
+            r"\b(?:european commission|european union|\beu\b|council|member states?)\b.{0,80}\b(?:imposed|adopted|suspended|halted|closed|revoked|blocked)\b",
+            low, re.I,
+        ))
+        shock_parts = {
+            'discrete': _regex_match(low, _SHOCK_DISCRETE_CUES),
+            'event': _regex_match(low, _SHOCK_EVENT_CUES),
+            'externality': _regex_match(low, _SHOCK_EXTERNALITY_CUES),
+            'effect': _regex_match(low, _SHOCK_EFFECT_CUES),
+            'speed': _regex_match(low, _SHOCK_SPEED_CUES),
+        }
+        if all(shock_parts.values()) and not own_eu_action and shock_lens is None:
+            shock_lens = {
+                'type': 'external_shock', 'passage': passage[:900], 'components': shock_parts,
+                'transition_key': _strategic_transition_key(passage),
+            }
+
+    lenses: list[dict[str, Any]] = []
     primary = ''
-    if shock_passage:
+    # Conversion is one-way: once the same source states the realised, fast external event,
+    # file the shock rather than retaining the earlier conditional risk wording as co-primary.
+    if shock_lens:
         primary = 'external_shock'
-        lenses.append({'type': 'external_shock', 'passage': shock_passage[:900]})
+        lenses.append(shock_lens)
     else:
-        if risk_passage:
+        if risk_lens:
             primary = 'risk'
-            lenses.append({'type': 'risk', 'passage': risk_passage[:900]})
-        if opp_passage and (not risk_passage or normalized(opp_passage) != normalized(risk_passage)):
+            lenses.append(risk_lens)
+        if opp_lens and (not risk_lens or normalized(opp_lens['passage']) != normalized(risk_lens['passage'])):
             if not primary:
                 primary = 'opportunity'
-            lenses.append({'type': 'opportunity', 'passage': opp_passage[:900]})
+            lenses.append(opp_lens)
+
     trend_context: list[str] = []
     trend_action_passage = ''
     for passage in passages:
@@ -3911,6 +4032,66 @@ def classify_strategic_source_text(text: str) -> dict[str, Any]:
         'trend_action': bool(trend_action_passage),
         'trend_action_passage': trend_action_passage,
     }
+
+def _enrich_strategic_lens(lens: dict[str, Any]) -> dict[str, Any]:
+    out = dict(lens)
+    passage = clean_text(out.get('passage'))
+    if passage and not clean_text(out.get('transition_key')):
+        out['transition_key'] = _strategic_transition_key(passage)
+    if clean_text(out.get('type')) == 'risk' and not clean_text(out.get('status')):
+        out['status'] = 'open'
+    return out
+
+def apply_strategic_risk_shock_lifecycle(corpora: list[list[dict[str, Any]]]) -> int:
+    """Close an older risk only when a newer shock has the same conservative pathway key.
+
+    This never changes Matrix/A/B/C admission. It updates the analytical lens metadata so the
+    implications reader does not continue presenting a conditional risk after that pathway has
+    actually landed as an external shock. Empty/ambiguous transition keys never auto-close.
+    """
+    records: list[tuple[dict[str, Any], dict[str, Any], dt.date | None]] = []
+    shocks: dict[str, list[tuple[dt.date | None, dict[str, Any], dict[str, Any]]]] = {}
+    for corpus in corpora:
+        for item in corpus if isinstance(corpus, list) else []:
+            if not isinstance(item, dict):
+                continue
+            c = item.get('strategic_classification')
+            if not isinstance(c, dict):
+                continue
+            lenses = [_enrich_strategic_lens(x) for x in (c.get('lenses') or []) if isinstance(x, dict)]
+            c = dict(c); c['lenses'] = lenses; item['strategic_classification'] = c
+            d = parse_date(item.get('date') or item.get('first_seen'))
+            for lens in lenses:
+                records.append((item, lens, d))
+                if clean_text(lens.get('type')) == 'external_shock' and clean_text(lens.get('transition_key')):
+                    shocks.setdefault(clean_text(lens.get('transition_key')), []).append((d, item, lens))
+    closed = 0
+    for item, lens, risk_date in records:
+        if clean_text(lens.get('type')) != 'risk':
+            continue
+        key = clean_text(lens.get('transition_key'))
+        lens.pop('closed_by', None)
+        lens['status'] = 'open'
+        if not key or key not in shocks:
+            continue
+        viable = []
+        for shock_date, shock_item, shock_lens in shocks[key]:
+            if shock_item is item:
+                continue
+            if risk_date and shock_date and shock_date < risk_date:
+                continue
+            viable.append((shock_date or dt.date.min, shock_item, shock_lens))
+        if not viable:
+            continue
+        _, shock_item, _ = sorted(viable, key=lambda x: x[0], reverse=True)[0]
+        lens['status'] = 'closed_into_shock'
+        lens['closed_by'] = {
+            'title': clean_text(shock_item.get('headline') or shock_item.get('title')),
+            'date': clean_text(shock_item.get('date')),
+            'link': clean_text(shock_item.get('link')),
+        }
+        closed += 1
+    return closed
 
 EXTERNAL_SHOCK_DOMAIN_LABELS = {
     'artificial intelligence': ['artificial intelligence', ' ai ', 'agi', 'foundation model', 'frontier model'],
@@ -10417,13 +10598,17 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
     timeout = int(CONFIG.get("news_timeout_seconds", 10))
     per_feed = int(CONFIG.get("news_items_per_feed", 60))
     jobs: list[tuple[str, str, str, bool]] = []
+    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
     if include_base_queries:
+        # Active implications discovery is deliberately first in the queue so a short news
+        # deadline cannot starve risk/opportunity/shock searches behind generic source jobs.
+        for q in strategic_pathway_queries('news'):
+            jobs.append(("", "", f"{q} when:{days}d", True))
         for src in CONFIG["news_sources"]:
             for q in news_queries(src["domain"], lookback_hours):
                 jobs.append((src["name"], src["domain"], q, False))
         for q in global_news_queries(lookback_hours):
             jobs.append(("", "", q, True))
-    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
     for q in coverage_queries or []:
         if clean_text(q):
             jobs.append(("", "", f"{clean_text(q)} when:{days}d", True))
@@ -11812,6 +11997,7 @@ def main() -> int:
     # rotation cannot spend a whole scan on whichever topic happens to be grouped
     # first in radar_config.json. The gate is unchanged; this is search allocation only.
     all_queries = diversified_query_bank(list(dict.fromkeys(CONFIG.get("queries_a", []))))
+    strategic_scholarly_focus = strategic_pathway_queries('scholarly')
     gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
     gap_lookback_months = max(0, int(CONFIG.get("frontier_gap_historical_lookback_months", 0) or 0))
     # Gap priority must first exhaust the scanner's own live corpus window.  A sparse
@@ -11896,10 +12082,10 @@ def main() -> int:
         all_queries, cr_broad_cursor_before, cr_base_cap
     )
     oa_batch = interleaved_unique_batch(
-        oa_cap, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
+        oa_cap, strategic_scholarly_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     cr_batch = interleaved_unique_batch(
-        cr_cap, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
+        cr_cap, strategic_scholarly_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
@@ -13559,6 +13745,10 @@ def main() -> int:
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
     c_share_removed = 0
 
+    strategic_risks_closed_into_shocks = apply_strategic_risk_shock_lifecycle(
+        [strand_a, frontier_evidence, strand_c]
+    )
+
     # Recompute against exactly what will be published. A cell can change after the
     # final A/C merge even when the in-run provisional matrix looked stable.
     published_probe = {"strand_a": strand_a, "strand_b": strand_b, "strand_c": strand_c, "frontier_evidence": frontier_evidence}
@@ -13802,6 +13992,10 @@ def main() -> int:
         "signal_quality_profile_version": SIGNAL_QUALITY_PROFILE_VERSION,
         "c_admission_profile_version": C_ADMISSION_PROFILE_VERSION,
         "strategic_signal_profile_version": str(CONFIG.get("strategic_signal_profile_version", "")),
+        "strategic_pathway_scan_enabled": bool(CONFIG.get("strategic_pathway_scan_enabled", True)),
+        "strategic_pathway_news_queries_configured": len(strategic_pathway_queries('news')),
+        "strategic_pathway_scholarly_queries_this_run": len(strategic_scholarly_focus),
+        "strategic_risks_closed_into_shocks": strategic_risks_closed_into_shocks,
         "weak_signal_attention_profile_version": str(CONFIG.get("weak_signal_attention_profile_version", "")),
         "retired_signal_headlines": sorted(_retired_signal_headlines(previous)),
         "signal_backfill_complete": signal_backfill_complete,
@@ -14032,6 +14226,8 @@ def main() -> int:
             "news_lookback_hours": news_lookback,
             "news_sources_configured": len(CONFIG.get("news_sources", [])),
             "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
+            "strategic_pathway_news_queries_configured": len(strategic_pathway_queries('news')),
+            "strategic_pathway_scholarly_queries_this_run": len(strategic_scholarly_focus),
             "frontier_gap_queries_this_run": len(frontier_focus["queries"]),
             "frontier_gap_scholarly_queries_this_run": len(frontier_focus.get("scholarly_queries", [])),
             "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",

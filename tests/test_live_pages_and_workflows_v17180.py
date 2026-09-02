@@ -43,7 +43,9 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertIn('RadarSourceMerit', read_js)
         self.assertIn('sourceMerit', frontier_js)  # metadata can still serve non-Matrix consumers
         self.assertIn('matrixPriorityScore', frontier_js)
-        self.assertIn('Merit', priorities_js)
+        self.assertNotIn('sourceMerit', priorities_js)
+        self.assertNotIn('Frontier', priorities_js)
+        self.assertIn('strategic_classification', priorities_js)
         self.assertIn('RadarSourceMerit.compare', stuff)
         self.assertIn('RadarSourceMerit.compare', literature)
         self.assertIn('RadarSourceMerit?.scoreFor', briefing)
@@ -64,6 +66,16 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertIn('materiality', score_block)
         self.assertIn('confidence', score_block)
         self.assertIn('triage', score_block)
+
+    def test_risks_opportunities_are_not_derived_from_matrix(self):
+        js = (ROOT / 'priorities' / 'priorities.js').read_text(encoding='utf-8')
+        html = (ROOT / 'priorities' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('strategic_classification', js)
+        self.assertNotIn('buildFrontier', js)
+        self.assertNotIn('column.id', js)
+        self.assertNotIn('sourceMerit', js)
+        self.assertNotIn('current Matrix findings support this view', html)
+        self.assertIn('Independent of Matrix placement', html)
 
     def test_briefing_is_not_a_stale_generated_snapshot(self):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')
