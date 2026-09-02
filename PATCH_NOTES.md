@@ -1,31 +1,31 @@
-# v17.19.29
+# v17.19.30
 
-## Simpler navigation + broader downstream interpretation
+## Clearer Matrix + quieter reader presentation
 
-This release changes the **analytical/representation layer only**. The mature scanner/research engine is preserved byte-for-byte.
+This release changes the **analytical/editorial representation layer only**. The mature scanner/research engine, source rotation, admission logic, phrase rules and GitHub Actions workflows are unchanged.
 
-### Navigation and visual hierarchy
-- The Main Radar is now unmistakably the primary page: **Radar** is the first, active navigation item and the large multi-card landing map has been removed.
-- The Main Radar hero is reduced to a short title and one-line scope statement; live totals, search and evidence follow immediately.
-- Reader navigation is simplified around: Radar, Read, Matrix, Risks & opportunities, External shocks, Historical, Sources and Stuff.
-- Redundant top-navigation links to the Weak Signals anchor are removed; Weak Signals remains a first-class section inside the Main Radar.
-- The large grey orientation block is gone. Surfaces stay white with black structure and red emphasis.
-- Risks/Opportunities and External Shocks headers and explanatory copy are substantially shortened. Detailed methodology remains available only when requested.
-- Risk/opportunity card headlines are capped to a concise reader length; long retained source passages are hidden behind **More info**.
+### Matrix
+- Quick Matrix points are rewritten as plain reader statements capped at **80 characters**.
+- The Quick Matrix shows at most four distinct points per cell; repeated equivalent points are grouped and the remainder links to the Full Matrix.
+- Long publication titles are no longer used as the default Matrix summary when a clearer evidence statement can be made.
+- The Full Matrix removes the repeated **Why this cell** paragraph from every item.
+- Full Matrix cards lead with the same concise point, followed only by compact source/date/type metadata; deeper placement methodology is collapsed below the Matrix.
+- Matrix placement remains independent from Risks & Opportunities and External Shocks.
 
-### Risks and opportunities
-- Repository interpretation now reads the full retained evidence context (source summary, core message, signal note, relevance/bridge evidence and structured EU/R&I/geopolitical evidence) rather than relying on a small set of exact phrases.
-- Risk interpretation recognises more concrete structural pathways such as bottleneck access, research-career precarity/brain drain, concentrated foreign technology supply, investment dependence, export-control exposure and critical-material constraints.
-- Opportunity interpretation recognises live instruments more broadly (calls, programmes, access schemes, partnerships, association mechanisms and funding instruments), but still requires an identifiable actor, instrument, gain and current/open window.
-- Matrix placement remains completely excluded from risk/opportunity classification.
-- On the current saved corpus the analytical layer finds **14 risks, 12 opportunities and 1 strict external shock** before page display limits/diversification.
+### Read + Main Radar
+- **Read** is now a short issue view of established Radar evidence only. The separate weak-signal/Strand C module has been removed from this page.
+- Main Radar Strand B is presented as **Ways to look ahead**, with a concise method insight and a practical **Use** line rather than dry source metadata first.
+- Main Radar Strand C is presented as **Early moves to watch**, with a concise point and one short **Why watch** line; details stay behind More info.
+- Reader navigation keeps **Radar** first and removes the old weak-signal navigation entry.
 
-### External shocks
-- The existing 20-family shock taxonomy is retained.
-- A family match still does not file a shock: discreteness, externality, realised EU R&I effect and speed must all pass.
-- The methodology/taxonomy is collapsed by default to keep the page visually quiet.
+### Visual cleanup
+- Reader surfaces use a restrained **white / black / red** system. Blue-toned and pastel interface colors were removed from reader HTML/CSS.
+- Large gray orientation blocks and decorative reader panels remain removed.
+- Reader assets use the v17.19.30 cache-buster and no-cache metadata so GitHub Pages does not keep serving old presentation assets after upload.
 
 ### Validation
-- Main regression suite: 178/178 passing.
-- Historical regression suite: 19/19 passing.
-- Scanner/config/phrase-rule/workflow files verified byte-for-byte unchanged from v17.19.28.
+- Main regression suite: **181/181 passing**.
+- Historical regression suite: **19/19 passing**.
+- Runtime regression checks every current Matrix point and fails if any exceeds 80 characters.
+- JavaScript syntax, inline page scripts, Python compilation, release validation and ZIP integrity pass.
+- `scan_radar.py`, scanner config, phrase rules and both workflow files are verified byte-for-byte unchanged from the uploaded v17.19.29 source of truth.

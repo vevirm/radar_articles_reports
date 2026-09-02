@@ -739,14 +739,44 @@
   }
 
   function shortBullet(x){
-    // Keep Quick Matrix bullets tied to the individual publication. The column
-    // heading already states the control/competitiveness direction, so repeating
-    // that template in every bullet hides what each source actually says.
-    const rawTitle=clean(x?.bibliographicTitle||x?.title||x?.coreMessage||'');
+    // Reader-facing Matrix point. Keep every point publication-specific, plain,
+    // and no longer than 80 characters. Matrix direction is already encoded in
+    // the cell, so the sentence should say what the evidence actually adds.
+    const rawTitle=clean(x?.bibliographicTitle||x?.title||'');
     const rawCore=clean(x?.coreMessage||'');
-    const n=norm(`${rawTitle} ${rawCore}`);
+    const rawAbstract=clean(x?.abstract||x?._evidenceSummary||'');
+    const n=norm(`${rawTitle} ${rawCore} ${rawAbstract}`);
     const fixed=[
       [/erc advanced grants|€840 million/, 'ERC adds €840m for leading researchers.'],
+      [/eu scientific diplomacy as a tool/, 'EU science diplomacy is shifting from openness toward strategic autonomy.'],
+      [/exploring fair access to quantum computing/, 'Fair quantum access must balance EU autonomy, security and open science.'],
+      [/shared gains secure links/, 'EU–Asia digital cooperation trades access against security and dependence.'],
+      [/internationalization of higher education in ukraine/, 'Ukraine’s EU integration expands access to research networks and funding.'],
+      [/which job offers may mitigate brain drain/, 'Better job offers could reduce researcher departures from Europe.'],
+      [/digital infrastructure innovation capacity and ai technology/, 'Digital infrastructure boosts AI adoption in EU manufacturing.'],
+      [/strengthening translational medical research in ireland/, 'Irish medical research gains from EU and cross-border clinical networks.'],
+      [/allea contributes to high-level discussions.*ukraine/, 'International partnerships are rebuilding Ukraine’s research capacity.'],
+      [/digital infrastructure, innovation capacity, and ai technology/, 'Digital infrastructure boosts AI adoption in EU manufacturing.'],
+      [/coordinated clinical trial networks in nephrology/, 'Fragmented trial infrastructure limits Europe’s ability to run large studies.'],
+      [/digital architecture of information governance.*ukraine/, 'Data fragmentation weakens Ukraine’s research-information infrastructure.'],
+      [/strategic competitiveness between the eu and the us in ai/, 'EU AI rules protect rights, while US policy pushes faster innovation.'],
+      [/digital technologies as key vectors.*ukraine/, 'Ukraine’s defence digitalisation relies on outside technology and integration.'],
+      [/integrating innovation and entrepreneurial capacity.*bulgaria/, 'Bulgaria struggles to turn EU innovation models into local capacity.'],
+      [/is europe losing its startups/, 'European startups scale abroad; keeping R&D in Europe becomes the key issue.'],
+      [/ec launches call for evidence.*eit regulation/, 'EU is redesigning EIT rules to simplify governance and strengthen regions.'],
+      [/ai.?driven risk governance for smes/, 'AI forecasting can help EU SMEs anticipate regulatory and market shocks.'],
+      [/international models of sme sustainable development/, 'Moldovan SMEs align with EU rules but remain weakly tied to value chains.'],
+      [/shepherded by brussels.*chinese technology/, 'EU–China tech policy has shifted from openness toward de-risking.'],
+      [/pockets of excellence in romanian municipalities/, 'Romanian local innovation pockets remain disconnected from national capacity.'],
+      [/eumaster4hpc/, 'EUMaster4HPC builds Europe’s high-performance-computing skills.'],
+      [/science europe calls for stronger minimum standards/, 'Science Europe seeks stronger Europe-wide research-career standards.'],
+      [/supporting the ukrainian research ecosystem/, 'International support keeps Ukrainian research connected to Europe.'],
+      [/future horizon europe.*science diplomacy/, 'EU ministers shape post-2027 Horizon Europe and science diplomacy.'],
+      [/postdoc and doctoral student positions at ellis|apply to join the institute/, 'ELLIS recruits researchers to strengthen Europe’s AI talent base.'],
+      [/zaharieva.*attract and retain|choose europe for science/, 'EU measures aim to attract and retain more research talent.'],
+      [/msca.*research talent.*strategic advantage/, 'MSCA helps Europe attract, train and retain research talent.'],
+      [/how erc frontier research strengthens/, 'ERC grants help turn frontier research into patents and innovation.'],
+      [/frontier research for artificial intelligence/, 'ERC funding strengthens Europe’s AI research base.'],
       [/allea general assembly 2026/, 'ALLEA links open science to research security.'],
       [/science superpower.*rival the us and china/, 'Europe could attract US research talent.'],
       [/arrested at nato.*espionage|suspicion of espionage/, 'NATO espionage case exposes research-security risk.'],
@@ -767,8 +797,8 @@
       [/european autonomy in orbit/, 'Europe still relies on outside space capability.'],
       [/europe tackles tech sovereignty/, 'EU tech-sovereignty policy targets critical dependence.'],
       [/china places 14 eu entities/, 'China cuts dual-use access for 14 EU entities.'],
-      [/geopolitical risk mitigation in information governance/, 'AI supply-chain governance exposes EU dependency risks.'],
-      [/battery cell production machinery/, 'Europe lacks battery-production machinery sovereignty.'],
+      [/geopolitical risk mitigation in information governance/, 'AI supply-chain rules expose EU dependency risks.'],
+      [/battery cell production machinery/, 'Europe lacks control over battery-production machinery.'],
       [/beyond the european chips act/, 'EU chips remain dependent on China, Taiwan and the US.'],
       [/technological dependencies of the european union/, 'EU tech dependence has risen, especially in digital tech.'],
       [/semiconductor geopolitical risk survey/, 'EU chip supply remains exposed to geopolitical shocks.'],
@@ -776,20 +806,20 @@
       [/venture capital gap/, 'Europe’s VC gap increases outside-investor reliance.'],
       [/helsing and quantum systems raise/, 'European defence-tech firms raise $3bn to scale.'],
       [/80 billion investment alliance/, 'Europe launches €80bn tech scale-up alliance.'],
-      [/geo-industrial deal/, 'EU geo-industrial policy links scale with resilience.'],
+      [/geo-industrial deal/, 'EU industrial policy links scale with resilience.'],
       [/driving defence.*automotive/, 'Europe can reuse automotive capacity for defence scale.'],
       [/agile and rapid defence innovation/, 'EU agrees an agile defence-innovation programme.'],
       [/european innovation council opens to defence/, 'EIC opens funding to defence and dual-use tech.'],
-      [/reconfigurability.*digitisation/, 'EU manufacturing resilience depends on reconfigurable digital systems.'],
+      [/reconfigurability.*digitisation/, 'Digital reconfiguration can make EU manufacturing more resilient.'],
       [/strategic procurement in global europe/, 'EU procurement preferences can raise deployment costs.'],
       [/dual-use by design research/, 'Dual-use research creates new export-control risks.'],
       [/industrial accelerator act and how to fix/, 'Industrial Accelerator Act may raise EU costs.'],
       [/dual-use and defence research in europe/, 'EU defence R&D can build capability but add controls.'],
-      [/structural limitations.*eu.?s ai model/, 'EU AI competitiveness is constrained by capital and compute gaps.'],
+      [/structural limitations.*eu.?s ai model/, 'EU AI is constrained by capital and compute gaps.'],
       [/selective conditionality.*foreign investment/, 'EU ties foreign investment to strategic conditions.'],
       [/investor landscape for venture capital/, 'EU scale-ups lack deep institutional capital.'],
       [/investment screening and technology transfers/, 'EU investment screening limits sensitive tech transfer.'],
-      [/circular economy.*industrial sovereignty/, 'Circular economy can reduce EU industrial dependencies.'],
+      [/circular economy.*industrial sovereignty/, 'Recycling can reduce Europe’s industrial dependencies.'],
       [/china.?s dual circulation strategy/, 'China’s dual circulation pressures EU EV industry.'],
       [/portugal.?s productivity gap/, 'Europe’s productivity gap tracks weak R&D and equity.'],
       [/reshaping europe.?s industrial future/, 'CEE industry faces new geopolitical scale pressures.'],
@@ -800,50 +830,91 @@
       [/tech sovereignty.*mimic its rivals/, 'Tech sovereignty can raise costs if Europe copies rivals.'],
       [/national knowledge security guidelines 2026/, 'Dutch 2026 guidance tightens research safeguards.'],
       [/digital instruments of monetary.*cybersecurity/, 'E-hryvnia design stresses transparency and cyber resilience.'],
-      [/from openness to deterrence/, 'EU economic-security policy is moving from openness to deterrence.'],
-      [/^european tech sovereignty\b/, 'EU tech-sovereignty policy combines protection and capacity-building.'],
+      [/from openness to deterrence/, 'EU economic-security policy is moving toward deterrence.'],
+      [/^european tech sovereignty\b/, 'EU tech policy combines protection and capacity-building.'],
       [/mitigate deter escalate/, 'US coercion exposes Europe’s dependence on digital firms.'],
       [/does europe really have a plan for tech sovereignty/, 'EU tech sovereignty still relies on US platforms.'],
       [/intellectual property governance.*artificial intelligence/, 'AI rule fragmentation weakens EU control over digital power.'],
       [/chips act 2\.0/, 'Chips Act 2.0 tests Europe’s second semiconductor push.'],
       [/industrial accelerator act count/, 'Industrial Accelerator Act risks weak implementation.'],
-      [/talent for innovation attraction platform/, 'Europe’s R&I capability relies partly on attracting and retaining international talent.']
+      [/talent for innovation attraction platform/, 'Europe relies partly on attracting and retaining global research talent.'],
+      [/research ministers.*maximise.*contribution|one europe one market/, 'EU ministers target research mobility and funding fragmentation.'],
+      [/research careers across europe/, 'Europe is trying to make research careers more attractive and portable.'],
+      [/regional innovation valleys/, 'Regional Innovation Valleys link EU regions around strategic technologies.'],
+      [/raise: resource for ai science|resource for ai science in europe/, 'RAISE expands shared AI resources for European researchers.'],
+      [/ai gigafactor/, 'EU AI Gigafactories aim to expand Europe’s computing capacity.'],
+      [/hammerhai/, 'EuroHPC is deploying a new European AI supercomputer.'],
+      [/standards for quantum technologies/, 'EU quantum standards work aims to shape emerging global rules.'],
+      [/quantum experimental pilot lines/, 'EU quantum pilot lines aim to move research into production.'],
+      [/startup europe/, 'Startup Europe links tech firms to partners, investors and markets.'],
+      [/eic fund investment guidelines/, 'EIC investment rules are being updated for scale-up financing.'],
+      [/eic scaling club/, 'EIC Scaling Club 2.0 is being set up to help European firms grow.'],
+      [/eic selects new european scale-ups|eight european startups/, 'EIC scale-up funding backs another group of European tech firms.'],
+      [/legal steps completed to set up scaleup europe fund/, 'Scaleup Europe Fund moves from plan toward implementation.'],
+      [/copyright trap/, 'EU copyright rules can constrain data access for AI development.'],
+      [/cloud and ai development act/, 'EU cloud and AI rules aim to expand European digital capacity.'],
+      [/foreign direct investment and green innovation/, 'Foreign investment can support green innovation but adds outside reliance.'],
+      [/pv recycling/, 'PV recycling can cut material dependence if capacity and rules align.'],
+      [/soil health in the eu/, 'EU soil-health rules link research, monitoring and implementation.']
     ];
-    for(const [re,label] of fixed){if(re.test(n))return label}
 
     const abbreviate=v=>clean(v)
-      .replace(/^Executive Summary:\s*/i,'')
-      .replace(/^Event Report:\s*/i,'')
+      .replace(/^(?:executive summary|event report|policy brief|research brief|briefing|report)\s*:\s*/i,'')
       .replace(/\bthe European Union\b/gi,'the EU')
       .replace(/\bEuropean Union\b/gi,'EU')
       .replace(/\bUnited States\b/gi,'US')
       .replace(/\bartificial intelligence\b/gi,'AI')
       .replace(/\bresearch and innovation\b/gi,'R&I')
       .replace(/\btechnological\b/gi,'tech')
-      .replace(/\s+/g,' ')
-      .trim();
-    const finish=v=>{
+      .replace(/\s+/g,' ').trim();
+    const cap80=v=>{
       let q=abbreviate(v).replace(/[;:,]+$/,'').trim();
       if(!q)return '';
-      if(!/[.!?]$/.test(q))q+='.';
+      if(q.length>80){
+        let out='';
+        for(const w of q.split(/\s+/)){const next=out?`${out} ${w}`:w;if(next.length>77)break;out=next}
+        q=(out||q.slice(0,77)).replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim()+ '…';
+      }
       return q;
     };
-    let title=abbreviate(rawTitle);
-    if(title.length<=72)return finish(title);
-    const parts=title.split(/\s+[–—]\s+|:\s+/).map(clean).filter(Boolean);
-    if(parts.length>1){
-      const first=parts[0],pair=`${parts[0]}: ${parts[1]}`;
-      if(pair.length<=72)return finish(pair);
-      if(first.length>=24&&first.length<=72)return finish(first);
+    if(/research ministers.*maximise.*contribution|one europe one market/.test(n) && x?.row?.id==='conversion')return cap80('EU fragmentation slows research-to-market scale across Europe.');
+    for(const [re,label] of fixed){if(re.test(n))return cap80(label)}
+
+    // Prefer an actual proposition from the retained evidence over a publication title.
+    const candidates=[rawCore,...String(rawAbstract).split(/(?<=[.!?])\s+/).slice(0,8),rawTitle]
+      .map(abbreviate).filter(Boolean);
+    const action=/\b(?:adds?|aims?|backs?|builds?|cuts?|depends?|expands?|exposes?|funds?|gains?|helps?|limits?|links?|loses?|raises?|reduces?|relies?|restricts?|shifts?|strengthens?|supports?|targets?|tightens?|uses?|weakens?|can|could|may|will|would|is|are|remains?)\b/i;
+    const rejectStart=/^(?:apply to|representing |supporting the interim evaluation|this evidence|the findings|the relevance of the study|abstract|objectives?|theoretical and practical|what the eu does|it argues|among the issues|cutting across|although|however|nevertheless|the declaration|the values embodied|as a technology|with the help of|polices? ought|strategic dependencies are changing)/i;
+    for(const q of candidates){
+      const raw=abbreviate(q);
+      if(raw.length>80||rejectStart.test(raw))continue;
+      const plain=cap80(raw);
+      if(plain.length>=28&&action.test(plain))return plain;
     }
-    const core=RadarInsights&&RadarInsights.readerPoint?RadarInsights.readerPoint(rawCore,72):'';
-    if(core)return core;
-    const comma=title.split(/,\s+/)[0];
-    if(comma.length>=24&&comma.length<=72)return finish(comma);
-    const words=title.split(/\s+/);let out='';
-    for(const w of words){const next=out?`${out} ${w}`:w;if(next.length>68)break;out=next}
-    out=out.replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim();
-    return finish(out||title.slice(0,68));
+
+    // Last resort: make the analytical relevance explicit from the already-qualified
+    // row/column, instead of exposing a cryptic paper title.
+    const text=n;
+    let topic='This evidence';
+    if(/researcher|talent|career|mobility|doctoral|phd/.test(text))topic='Research talent';
+    else if(/research security|knowledge security|interference|espionage/.test(text))topic='Research security';
+    else if(/horizon europe|erc\b|eic\b|framework programme/.test(text))topic='EU research funding';
+    else if(/semiconductor|\bchip/.test(text))topic='Chip capability';
+    else if(/quantum/.test(text))topic='Quantum capability';
+    else if(/\bai\b|compute|cloud|digital platform/.test(text))topic='AI and digital capacity';
+    else if(/raw material|mineral|battery/.test(text))topic='Critical inputs';
+    else if(/venture|scale-up|startup|capital|investment/.test(text))topic='Scale-up finance';
+    else if(/defen[cs]e|dual-use|military/.test(text))topic='Defence R&I';
+    else if(/standard|regulation|rule|governance|screening/.test(text))topic='EU rules';
+    else if(/manufactur|industry|industrial|production/.test(text))topic='Industrial capacity';
+    const row=x?.row?.id||''; const col=x?.column?.id||'';
+    const templates={
+      knowledge:{A:`${topic}: Europe strengthens its own talent and knowledge base.`,B:`${topic}: more control comes with friction in research exchange.`,C:`${topic}: Europe gains capability but still relies on outside partners.`,D:`${topic}: Europe loses talent, access or control of know-how.`},
+      infrastructure:{A:`${topic}: Europe expands its own research and technology capacity.`,B:`${topic}: more control comes with extra cost or access friction.`,C:`${topic}: capability improves but Europe still relies on outside access.`,D:`${topic}: Europe has less control and weaker capability.`},
+      conversion:{A:`${topic}: European research turns into firms, products or scale.`,B:`${topic}: more control adds cost or limits to scaling.`,C:`${topic}: growth improves but relies on outside capital or markets.`,D:`${topic}: value, firms or production shift away from Europe.`},
+      rules:{A:`${topic}: Europe coordinates and acts more effectively.`,B:`${topic}: more control comes with regulatory friction.`,C:`${topic}: Europe gains capability but remains exposed to outside leverage.`,D:`${topic}: rules fragment or constrain Europe’s R&I decisions.`}
+    };
+    return cap80(templates[row]?.[col]||rawTitle||rawCore||'Qualified Matrix finding');
   }
 
   function whyBullet(x){
