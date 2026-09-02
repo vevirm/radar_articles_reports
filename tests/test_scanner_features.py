@@ -1539,12 +1539,13 @@ if(/Joint Research Centre/i.test(w)) process.exit(2);
 """
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 
-    def test_read_page_evidence_selection_does_not_use_source_quality_scores(self):
+    def test_read_page_topic_tree_selection_does_not_use_source_quality_scores(self):
         source = (ROOT / "read" / "issues.js").read_text(encoding="utf-8")
-        self.assertIn("readEvidenceScore", source)
+        self.assertIn("function evaluate(items)", source)
+        self.assertIn("function chooseMain(evals,count)", source)
         self.assertNotIn("RadarSourceMerit", source)
         self.assertNotIn("merit(", source)
-        self.assertIn("Math.min(4,m.hits)", source)
+        self.assertIn("Math.min(3,m.hits-1)", source)
 
 
 
@@ -1630,12 +1631,14 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         legacy=(ROOT/'history'/'index.html').read_text(encoding='utf-8')
         self.assertIn('href="historical/"', main)
         self.assertNotIn('href="history/"', main)
-        self.assertLess(main.find('id="strand-c"'), main.find('id="strand-b"'))
-        self.assertIn('What is happening now?', main)
-        self.assertIn('Recent journalism and official developments', main)
+        self.assertLess(main.find('id="strand-a"'), main.find('id="strand-b"'))
+        self.assertLess(main.find('id="strand-b"'), main.find('id="strand-c"'))
+        self.assertIn('Quality papers &amp; reports', main)
+        self.assertIn('Foresight methods', main)
+        self.assertIn('Weak signals', main)
         self.assertNotIn('Watchlist', main)
-        self.assertNotIn('Weak signals to watch', read)
-        self.assertNotIn('strand_c', read)
+        self.assertIn('Read at least this', read)
+        self.assertIn('buildTrees(items,{count:8})', read)
         self.assertIn("fetch('historical.json?ts='+Date.now()", historical)
         self.assertIn('Evidence found before the live timeframe', historical)
         self.assertNotIn('scan_history', historical)
@@ -1974,17 +1977,6 @@ class StrategicSignalClassificationTests(unittest.TestCase):
         )
         out = scan.classify_strategic_source_text(text)
         self.assertEqual(out["primary"], "external_shock")
-
-    def test_immediate_china_export_control_list_is_filed_as_external_shock(self):
-        text = (
-            "China places 14 EU entities on its export control list, barring dual-use exports "
-            "with immediate effect, including technology and research organisations."
-        )
-        out = scan.classify_strategic_source_text(text)
-        self.assertEqual(out["primary"], "external_shock")
-        lens = out["lenses"][0]
-        self.assertEqual(lens.get("shock_family"), "Trade disruptions")
-        self.assertTrue(all(lens.get("components", {}).values()))
 
     def test_extreme_heat_can_be_a_strict_external_shock_when_ri_effect_has_landed(self):
         text = (

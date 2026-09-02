@@ -1,127 +1,161 @@
 (function(g){
   'use strict';
 
-  // These are grouping lenses, not a fixed public issue list. The visible issue set,
-  // order, branches and evidence are recomputed from the current radar on every load.
-  const LENSES=[
-    {id:'ai_compute',label:'AI & advanced computing',terms:['artificial intelligence','ai','machine learning','foundation model','compute','computing','supercomputer','gpu','gigafactory','data centre','data center']},
-    {id:'chips',label:'Chips',terms:['semiconductor','semiconductors','chip','chips','microelectronics','processor','processors']},
-    {id:'materials',label:'Critical materials & supply chains',terms:['critical raw materials','raw materials','critical material','critical materials','supply chain','supply chains','rare earth','graphite','lithium','export restriction']},
-    {id:'research_security',label:'Protecting sensitive research',terms:['research security','knowledge security','foreign interference','sensitive research','espionage','security screening','trusted research']},
-    {id:'talent',label:'Researchers, skills & careers',terms:['researcher','researchers','talent','skills','brain drain','mobility','career','careers','doctoral','phd','msca','human capital']},
-    {id:'funding',label:'Funding & EU research programmes',terms:['horizon europe','fp10','framework programme','funding','grant','grants','erc','msca','eic','competitiveness fund','budget']},
-    {id:'firms',label:'Firms, investment & growth',terms:['venture capital','scale-up','scaleup','startup','start-up','commercialisation','commercialization','high-growth','equity','stock market','listing','headquarters']},
-    {id:'rules',label:'Rules and standards',terms:['regulation','regulations','standardisation','standardization','standards','governance','liability','legal framework','regulatory']},
-    {id:'partnerships',label:'International research partnerships',terms:['partnership','partnerships','international cooperation','science diplomacy','association agreement','bilateral','transatlantic','eu-us','eu–us','eu-china','eu–china','india','china','united states']},
-    {id:'control',label:'Control of key technology',terms:['sovereignty','sovereign','strategic autonomy','dependence','dependency','de-risk','derisk','technological independence','economic security']},
-    {id:'quantum',label:'Quantum technologies',terms:['quantum']},
-    {id:'biotech',label:'Biotechnology & life sciences',terms:['biotech','biotechnology','biology','genomic','health data','life science','biosecurity']},
-    {id:'data_cloud',label:'Data, cloud & digital infrastructure',terms:['data infrastructure','data space','cloud','digital infrastructure','data centre','data center','federated data','data access']},
-    {id:'defence',label:'Defence & civilian-military technology',terms:['defence','defense','dual-use','military','nato']},
-    {id:'energy',label:'Energy for research & technology',terms:['energy','electricity','power grid','renewable','nuclear']},
-    {id:'open',label:'Open science & open technology',terms:['open science','open source','open hardware','open research','research openness']},
-    {id:'industry',label:'Production & public buying',terms:['procurement','public buying','manufacturing','production capacity','industrial capacity','factory','factories','gigafactory']},
-    {id:'ip',label:'Patents, ownership & licensing',terms:['intellectual property','patent','patents','licensing','ownership']},
-    {id:'facilities',label:'Research facilities & shared infrastructure',terms:['research infrastructure','research infrastructures','facility','facilities','laboratory','laboratories','telescope','synchrotron','eosc']},
-    {id:'space_comms',label:'Space & communications',terms:['space','satellite','satellites','communications','telecom','telecommunications','6g','5g']},
-    {id:'cyber',label:'Cybersecurity & digital resilience',terms:['cybersecurity','cyber security','cyber','digital resilience']},
-    {id:'competition',label:'Economic strength',terms:['competitiveness','productivity','economic growth','innovation performance']},
-    {id:'diplomacy',label:'Research partnerships and global influence',terms:['science diplomacy','diplomacy','global influence','soft power','international coordination']},
-    {id:'controls',label:'Export controls & investment checks',terms:['export control','export controls','export restriction','investment screening','foreign investment','outbound investment','sanction','sanctions']}
+  /* Eight reader maps are chosen from deliberately different R&I systems.
+     The labels are a hierarchy; the live corpus decides which maps are strongest now. */
+  const HIERARCHIES=[
+    {id:'ai_compute',label:'AI & advanced computing',subs:[
+      {label:'European capacity',leaves:[
+        {label:'AI factories & supercomputers',terms:['ai factory','ai factories','gigafactory','gigafactories','supercomputer','eurohpc','raise']},
+        {label:'Research access to compute',terms:['access to quantum computers','access to supercomput','research access','computing capacity','compute capacity','research infrastructure']}
+      ]},
+      {label:'External dependencies',leaves:[
+        {label:'Chips, cloud & control layers',terms:['cloud','non-european suppliers','chip dependence','semiconductor','gpu','extraterritorial','control layer']}
+      ]}
+    ]},
+    {id:'chips_materials',label:'Chips & critical inputs',subs:[
+      {label:'European production',leaves:[
+        {label:'Chips Act & pilot lines',terms:['chips act','chip pilot line','semiconductor pilot','pilot lines']},
+        {label:'Testing & strategic technology',terms:['quantum testing','quantum experimental','semiconductor research','microelectronics','advanced packaging']}
+      ]},
+      {label:'Supply exposure',leaves:[
+        {label:'Critical materials & export restrictions',terms:['critical raw material','critical materials','rare earth','graphite','export restriction','export control']}
+      ]}
+    ]},
+    {id:'research_security',label:'Research security',subs:[
+      {label:'Protect knowledge',leaves:[
+        {label:'Foreign interference & trusted research',terms:['foreign interference','trusted research','knowledge security','research security']},
+        {label:'Sensitive & dual-use research',terms:['dual-use research','dual use research','sensitive research','dual-use','dual use']}
+      ]},
+      {label:'Keep collaboration open',leaves:[
+        {label:'Screening without isolation',terms:['security screening','international collaboration','international research collaboration','academic freedom','science knows no borders']}
+      ]}
+    ]},
+    {id:'talent',label:'Researchers & skills',subs:[
+      {label:'Attract & retain',leaves:[
+        {label:'Careers & mobility',terms:['research career','research careers','researcher mobility','mobility','fifth freedom','msca']},
+        {label:'Global competition for talent',terms:['research talent','talent competition','lure scientists','attract researchers','retain research talent','brain drain']}
+      ]},
+      {label:'Capability fit',leaves:[
+        {label:'Skills for strategic technologies',terms:['skills','ai skills','digital skills','quantum skills','semiconductor skills','human capital']}
+      ]}
+    ]},
+    {id:'partnerships',label:'International research partnerships',subs:[
+      {label:'Programme relationships',leaves:[
+        {label:'Horizon association & FP10',terms:['horizon europe association','associated countries','association to horizon','fp10']},
+        {label:'Science diplomacy & joint research',terms:['science diplomacy','international cooperation in research and innovation','joint research','bilateral research']}
+      ]},
+      {label:'External pressure',leaves:[
+        {label:'Sanctions, coercion & legal reach',terms:['sanctions','economic coercion','extraterritorial','third-country laws','export control']}
+      ]}
+    ]},
+    {id:'funding',label:'Funding & framework programmes',subs:[
+      {label:'The next programme',leaves:[
+        {label:'FP10 design & research autonomy',terms:['fp10','framework programme 10','next framework programme','horizon europe successor']},
+        {label:'Budget & MFF pressure',terms:['mff','multiannual financial framework','budget','competitiveness fund']}
+      ]},
+      {label:'Who benefits',leaves:[
+        {label:'Widening, cohesion & excellence',terms:['widening','cohesion','widening countries','regional innovation','less developed regions']}
+      ]}
+    ]},
+    {id:'measurement',label:'Research information & assessment',subs:[
+      {label:'Measurement reform',leaves:[
+        {label:'Responsible research assessment',terms:['responsible research assessment','research assessment reform','reforming research assessment','coara']},
+        {label:'Open research information',terms:['open research information','barcelona declaration','openalex','open science']}
+      ]},
+      {label:'Measurement dependency',leaves:[
+        {label:'Indicators, bibliometrics & data ownership',terms:['bibliometric','scopus','innovation scoreboard','indicator','research data','few hands']}
+      ]}
+    ]},
+    {id:'firms',label:'Firms, innovation & scale-up',subs:[
+      {label:'Build in Europe',leaves:[
+        {label:'Start-ups, scale-ups & venture capital',terms:['startup','start-up','scale-up','scaleup','venture capital','high-growth']},
+        {label:'Procurement & commercialisation',terms:['procurement','commercialisation','commercialization','public buying','technology transfer']}
+      ]},
+      {label:'Compete globally',leaves:[
+        {label:'Productivity & innovation performance',terms:['productivity','competitiveness','innovation performance','innovation scoreboard']}
+      ]}
+    ]},
+    {id:'health',label:'Biotech & health research',subs:[
+      {label:'Research networks',leaves:[
+        {label:'Clinical trials & health data',terms:['clinical trial','clinical trials','health data','european health data space','federated health']},
+        {label:'Medicines & life-science innovation',terms:['medicines','pharma','biopharma','biotechnology','life science','life sciences']}
+      ]},
+      {label:'Security & control',leaves:[
+        {label:'Biosecurity, data rules & dependencies',terms:['biosecurity','health data access','data protection','regulatory research','supply dependence']}
+      ]}
+    ]},
+    {id:'quantum',label:'Quantum technologies',subs:[
+      {label:'European capability',leaves:[
+        {label:'Computers & shared infrastructure',terms:['quantum computer','quantum computers','quantum computing','quantum infrastructure']},
+        {label:'Pilot lines & testing',terms:['quantum pilot','quantum experimental','quantum testing','quantum technologies']}
+      ]},
+      {label:'Geopolitical exposure',leaves:[
+        {label:'Controls, supply & access',terms:['quantum export','export controls','supply chain','technology control','dual-use']}
+      ]}
+    ]},
+    {id:'open_facilities',label:'Open science & shared facilities',subs:[
+      {label:'Shared infrastructure',leaves:[
+        {label:'Facilities & open access',terms:['research infrastructure','research infrastructures','open access to jrc','shared facility','shared facilities']},
+        {label:'Federated research data',terms:['eosc','federated data','research data infrastructure','open research information','data space']}
+      ]},
+      {label:'Openness under pressure',leaves:[
+        {label:'Open science & research security',terms:['open science','research security','knowledge security','international collaboration']}
+      ]}
+    ]},
+    {id:'rules',label:'Rules, standards & technology governance',subs:[
+      {label:'Shape emerging technology',leaves:[
+        {label:'AI, data & digital rules',terms:['ai act','artificial intelligence act','data act','digital regulation','ai regulation']},
+        {label:'Standards & regulatory capacity',terms:['standardisation','standardization','standards','regulatory capacity','regulatory framework']}
+      ]},
+      {label:'Rules as geopolitical leverage',leaves:[
+        {label:'Extraterritorial law & market power',terms:['extraterritorial','third-country laws','market power','economic coercion','regulatory power']}
+      ]}
+    ]}
   ];
 
-  function clean(s){return String(s||'').replace(/\s+/g,' ').trim()}
-  function textFor(x){return ['title','headline','what','core_message','relevance_note','watch_theme','why_it_matters','summary'].map(k=>clean(x&&x[k])).join(' ').toLowerCase()}
-  function escRx(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
-  function hasTerm(h,t){const p=escRx(String(t).toLowerCase()).replace(/\\ /g,'\\s+');return new RegExp('(^|[^a-z0-9])'+p+'([^a-z0-9]|$)','i').test(h)}
-  function termHits(x,lens){const h=textFor(x);let n=0;for(const t of lens.terms)if(hasTerm(h,t))n++;return n}
+  const clean=s=>String(s||'').replace(/\s+/g,' ').trim();
+  const escRx=s=>String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const rowText=x=>[x?.title,x?.headline,x?.what,x?.core_message,x?.summary,x?.relevance_note,x?.why_it_matters,x?.source,...(x?.ri_evidence||[]),...(x?.geo_evidence||[])].map(v=>clean(v)).join(' ').toLowerCase();
+  function hasTerm(h,t){const q=clean(t).toLowerCase();if(!q)return false;const p=escRx(q).replace(/\\ /g,'\\s+');return new RegExp('(^|[^a-z0-9])'+p+'([^a-z0-9]|$)','i').test(h)}
+  function termHits(x,leaf){const h=rowText(x);let n=0;for(const t of leaf.terms||[])if(hasTerm(h,t))n++;return n}
   function stamp(x){const n=Date.parse(x?.date||0);return Number.isFinite(n)?n:0}
-  function itemWeight(x,hits){return (1+Math.min(2,Math.max(0,hits-1))*.18) * (x?.new_this_scan?1.10:1)}
-  function plain(s){return clean(g.RadarInsights?.readText?.(s)||g.RadarInsights?.fastReaderText?.(s)||s)}
-  function point(x){return plain(g.RadarInsights?.pointFor?.(x)||x?.core_message||x?.why_it_matters||x?.title||x?.headline||x?.what||'')}
-  function idFor(x,i){return clean(x?.link)||clean(x?.title)||clean(x?.headline)||('item-'+i)}
-  function overlap(a,b){let n=0;for(const k of a)if(b.has(k))n++;return n}
-  function jaccard(a,b){const o=overlap(a,b);return o/(a.size+b.size-o||1)}
 
   function evaluate(items){
-    return LENSES.map(lens=>{
-      const matches=[];let score=0;
-      items.forEach((x,i)=>{const hits=termHits(x,lens);if(!hits)return;const w=itemWeight(x,hits);matches.push({x,i,hits,w,id:idFor(x,i)});score+=w});
-      return {...lens,matches,score,set:new Set(matches.map(m=>m.id))};
-    }).filter(x=>x.matches.length>=2).sort((a,b)=>b.score-a.score||b.matches.length-a.matches.length||a.label.localeCompare(b.label));
-  }
-
-  function chooseThemes(evals,opt){
-    const max=Math.max(5,Math.min(10,Number(opt?.maxIssues)||8));
-    const min=Math.max(4,Math.min(max,Number(opt?.minIssues)||6));
-    if(!evals.length)return [];
-    const top=evals[0].score||1, chosen=[];
-    for(const e of evals){
-      if(chosen.length>=max)break;
-      if(chosen.length>=min && e.score<top*.16 && !e.matches.some(m=>m.x?.new_this_scan))continue;
-      const near=chosen.some(c=>jaccard(c.set,e.set)>.72);
-      if(near)continue;
-      chosen.push(e);
-    }
-    for(const e of evals){if(chosen.length>=min)break;if(!chosen.includes(e))chosen.push(e)}
-    return chosen;
-  }
-
-  function readEvidenceScore(m){return Math.min(4,m.hits)*12+(m.x?.new_this_scan?3:0)}
-  function bestItems(matches,n){return [...matches].sort((a,b)=>readEvidenceScore(b)-readEvidenceScore(a)||b.hits-a.hits||stamp(b.x)-stamp(a.x)).slice(0,n).map(m=>m.x)}
-
-  function branchesFor(theme,evals){
-    const companions=evals.filter(e=>e.id!==theme.id).map(e=>{
-      const ids=new Set(e.matches.map(m=>m.id));
-      const shared=theme.matches.filter(m=>ids.has(m.id));
-      const score=shared.reduce((s,m)=>s+m.w,0);
-      return {e,shared,score,ratio:shared.length/(theme.matches.length||1)};
-    }).filter(z=>z.shared.length>=2).sort((a,b)=>b.score-a.score||b.shared.length-a.shared.length);
-
-    const branches=[];
-    for(const c of companions){
-      if(branches.length>=4)break;
-      if(branches.some(b=>jaccard(b.e.set,c.e.set)>.78))continue;
-      const evidence=bestItems(c.shared,2);
-      if(!evidence.length)continue;
-      branches.push({title:clean(c.e.label),evidence,e:c.e});
-    }
-    if(branches.length<2){
-      const leftovers=bestItems(theme.matches,Math.min(4,theme.matches.length));
-      leftovers.forEach((x,i)=>{if(branches.length<3)branches.push({title:i===0?'Leading finding':'Another current finding',evidence:[x],e:null})});
-    }
-    return branches;
-  }
-
-  function dynamicLabel(theme){return clean(theme.label)}
-  function listPhrase(xs){
-    const a=(xs||[]).filter(Boolean);
-    if(a.length<2)return a[0]||'';
-    if(a.length===2)return `${a[0]} and ${a[1]}`;
-    return `${a.slice(0,-1).join(', ')}, and ${a[a.length-1]}`;
-  }
-
-  function build(items,opt){
     const live=(items||[]).filter(x=>x&&typeof x==='object');
-    const evals=evaluate(live), selected=chooseThemes(evals,opt);
-    return selected.map((theme,index)=>{
-      const branches=branchesFor(theme,evals);
-      const title=dynamicLabel(theme);
-      const evidence=bestItems(theme.matches,3);
-      const phraseLabel=s=>{const t=clean(s);return /^(?:AI|EU|R&I|US|UK)\b/.test(t)?t:(t?t.charAt(0).toLowerCase()+t.slice(1):t)};
-      const branchNames=branches.slice(0,3).map(b=>phraseLabel(b.title));
-      const line=branchNames.length?`Current evidence centres on ${listPhrase(branchNames)}.`:`Current evidence is concentrated around ${phraseLabel(title)}.`;
-      return {id:theme.id,title,line,score:theme.score,count:theme.matches.length,branches,evidence,rank:index+1};
-    });
+    return HIERARCHIES.map(h=>{
+      const leaves=h.subs.flatMap(s=>s.leaves.map(l=>({...l,sub:s.label})));
+      const matches=[];let supported=0,newRows=0,recency=0;
+      const leafSupport=leaves.map(leaf=>{
+        const ms=[];
+        live.forEach((x,i)=>{const hits=termHits(x,leaf);if(hits){const m={x,i,hits,leaf};ms.push(m);matches.push(m);if(x.new_this_scan)newRows++}});
+        if(ms.length)supported++;
+        const newest=ms.reduce((n,m)=>Math.max(n,stamp(m.x)),0);recency=Math.max(recency,newest);
+        return {leaf,matches:ms};
+      });
+      const score=matches.reduce((s,m)=>s+1+Math.min(3,m.hits-1)*.22+(m.x?.new_this_scan ? .12 : 0),0)+supported*6+(newRows?Math.min(3,newRows)*1.5:0)+(recency?recency/1e15:0);
+      return {...h,matches,leafSupport,supported,score};
+    }).filter(x=>x.supported>=2).sort((a,b)=>b.supported-a.supported||b.score-a.score||a.label.localeCompare(b.label));
   }
 
-  function summary(issues){
-    const names=(issues||[]).slice(0,3).map(x=>clean(x.title));
-    if(!names.length)return {title:'The current radar has not yet produced a stable issue pattern.',text:'Open the radar evidence; no stable issue pattern is available yet.'};
-    if(names.length===1)return {title:`The current radar is concentrated on ${names[0]}.`,text:'This issue has the strongest current evidence concentration.'};
-    const final=names.pop();
-    return {title:`The current radar is concentrated on ${names.join(', ')} and ${final}.`,text:'These are the strongest issue concentrations in the latest admitted material; they can change after the next successful scan.'};
+  function chooseMain(evals,count){
+    const n=Math.max(1,Math.min(8,Number(count)||8));
+    const pinned=['ai_compute','chips_materials','research_security','talent','partnerships','funding','measurement','firms'];
+    const out=[];
+    for(const id of pinned){const e=evals.find(x=>x.id===id);if(e&&!out.includes(e)&&out.length<n)out.push(e)}
+    for(const e of evals){if(out.length>=n)break;if(!out.includes(e))out.push(e)}
+    return out.slice(0,n);
   }
 
-  g.RadarIssues={build,summary,lenses:LENSES};
+  function build(items,opt={}){
+    const evals=evaluate(items),count=Math.max(1,Math.min(8,Number(opt.count)||8));
+    const mains=chooseMain(evals,count);
+    return mains.map((h,index)=>({
+      id:h.id,rank:index+1,main:{id:h.id,label:h.label},
+      subs:h.subs.map((s,i)=>({id:`${h.id}-s${i+1}`,label:s.label})),
+      leaves:h.subs.flatMap((s,si)=>s.leaves.map((l,li)=>({id:`${h.id}-s${si+1}-l${li+1}`,label:l.label}))).slice(0,3)
+    }));
+  }
+
+  g.RadarIssues={build,buildTrees:build,evaluate,chooseMain,hierarchies:HIERARCHIES};
 })(globalThis);

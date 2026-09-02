@@ -23,19 +23,22 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
                 self.assertIn('radar.json', text)
                 self.assertIn('no-store', text)
 
-    def test_main_radar_news_and_shocks_use_loaded_strand_arrays(self):
+    def test_main_radar_restores_three_original_strands_without_analytical_dashboard(self):
         html = (ROOT / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('function newsItems(d)', html)
-        self.assertIn('const A=d.strand_a||[],C=d.strand_c||[]', html)
-        self.assertIn('function renderShockStrip(d)', html)
-        self.assertIn('statShock', html)
-        self.assertIn('Recent journalism and official developments', html)
-        self.assertNotIn('New this scan', html)
+        self.assertIn('Strand A', html)
+        self.assertIn('Quality papers &amp; reports', html)
+        self.assertIn('Strand B', html)
+        self.assertIn('Foresight methods', html)
+        self.assertIn('Strand C', html)
+        self.assertIn('Weak signals', html)
+        self.assertIn('C=d.strand_c||[]', html)
+        self.assertNotIn('function newsItems(d)', html)
+        self.assertNotIn('statShock', html)
+        self.assertNotIn('shockStrip', html)
+        self.assertNotIn('Recent journalism and official developments', html)
         self.assertNotIn('Watchlist', html)
         self.assertIn('console.error("Radar data load failed",e)', html)
         self.assertIn('safeCard(renderer,x,i)', html)
-        self.assertIn('Current issues render failed', html)
-        self.assertIn('The radar data itself is loaded.', html)
 
     def test_source_merit_ranking_is_confined_to_stuff(self):
         reader_files = [
@@ -97,6 +100,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
     def test_release_manifest_keeps_shocks_and_stuff_merit_workbook(self):
         manifest=(ROOT / 'scripts' / 'build_release.py').read_text(encoding='utf-8')
         self.assertIn('"shocks/index.html"', manifest)
+        self.assertIn('"shocks/scenarios.js"', manifest)
         self.assertIn('"stuff/source_merit_ranking.xlsx"', manifest)
         self.assertIn('"stuff/workbook.js"', manifest)
         self.assertIn('"source_merit.js"', manifest)
@@ -127,13 +131,13 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertNotIn('retained Radar evidence', html)
         self.assertNotIn('Matrix placement', html)
         shocks = (ROOT / 'shocks' / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('Discrete external events with realised effects', shocks)
+        self.assertIn('Realised shocks, plus cross-evidence scenarios', shocks)
         self.assertIn('RadarPriorities.buildPriorityView', shocks)
         self.assertNotIn('Matrix placement', shocks)
-        self.assertIn('What counts as an external shock?', shocks)
-        self.assertIn('Natural disasters', shocks)
-        self.assertIn('Cyberattacks', shocks)
-        self.assertIn('Major infrastructure disruptions', shocks)
+        self.assertIn('Reasoned shock scenarios', shocks)
+        self.assertIn('scenarios.js', shocks)
+        self.assertIn('Exact rows used', shocks)
+        self.assertIn('Why it is easy to miss', shocks)
 
     def test_briefing_is_not_a_stale_generated_snapshot(self):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')

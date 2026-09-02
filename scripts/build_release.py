@@ -38,6 +38,7 @@ SITE_FILES = [
     "priorities/index.html",
     "priorities/priorities.js",
     "shocks/index.html",
+    "shocks/scenarios.js",
     "literature/index.html",
     "stuff/index.html",
     "stuff/workbook.js",
@@ -62,6 +63,7 @@ SCANNER_FILES = [
     "tests/test_scanner_features.py",
     "tests/test_reader_ui_v17179.py",
     "tests/test_live_pages_and_workflows_v17180.py",
+    "tests/test_v17200_reader_contract.py",
 ]
 
 

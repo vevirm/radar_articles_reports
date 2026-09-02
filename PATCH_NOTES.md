@@ -1,17 +1,8 @@
-# v17.19.34
+v17.20.0
 
-- Restored the intended **Read at least this** section name everywhere. It is no longer a generic “Read” page.
-- Rebuilt **Read at least this** as the chart-only minimum visual briefing. The four charts show the largest current issues, Matrix direction, affected R&I dimensions, and current risks/opportunities/external shocks. The issue-list replacement introduced in v17.19.33 has been removed from this page.
-- Fixed strict scanner recognition of realised export-control shocks where an external actor is explicitly **barring exports with immediate effect**.
-- The retained China event affecting 14 EU entities now files as a **Trade disruptions** external shock in scanner logic as well as in the reader interpretation.
-- Updated the currently published `radar.json` so External shocks is **1 immediately**, without requiring another scan before the corrected release is useful.
-- Kept the full-repository upload workflow: this package is intended to be uploaded over the previous repository in full.
-- Validation: 186 main tests + 19 historical tests passed.
-
-# v17.19.33
-
-- Reframed the main current-affairs feed as **News** instead of a ten-item “Watchlist”. It combines recent journalism and relevant official developments, with major news sources prioritised in the ordering.
-- Surfaced **External shocks** directly on the main Radar.
-- Removed reader-facing scanner/process copy such as “new this scan”, scan-status explanations, admission/classification notes and point-length meta text.
-- Expanded Matrix point text from 80 to **100 characters**, reduced initial bullet density, and opened up spacing.
-- Added small line icons to Matrix row/column headers as visual cues.
+- Restores the main Radar to its three original strands: A quality papers/reports, B foresight methods, C weak signals.
+- Removes the temporary News/Watchlist framing and removes external-shock summaries from above the Radar results.
+- Restores Read at least this as exactly eight visual topic trees (main topic -> subtopic -> sub-subtopic), with no prose digest on that page.
+- Adds realised external shocks plus six cross-evidence shock scenarios with explicit reasoning, second-order effects, why the seam is easy to miss, and the exact evidence rows/fields used.
+- Keeps the roomier 100-character Matrix and simple conceptual line icons.
+- Gives the scanner 24 minutes and the publish/update job 6 minutes.

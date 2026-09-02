@@ -23,17 +23,20 @@ class ReaderUiV17179Tests(unittest.TestCase):
         self.assertNotIn("Next automatic", html)
         self.assertNotIn("scheduleState", html)
 
-    def test_read_at_least_this_is_chart_only_minimum_briefing(self):
+    def test_read_page_is_eight_hierarchical_topic_charts_only(self):
         html = (ROOT / "read" / "index.html").read_text(encoding="utf-8")
+        js = (ROOT / "read" / "issues.js").read_text(encoding="utf-8")
         self.assertIn('Read at least this', html)
-        self.assertIn('The minimum visual briefing', html)
-        self.assertIn('id="issuesChart"', html)
-        self.assertIn('id="quadrantChart"', html)
-        self.assertIn('id="rowChart"', html)
-        self.assertIn('id="pathwayChart"', html)
-        self.assertNotIn('class="issue-list"', html)
-        self.assertNotIn('class="branches"', html)
-        self.assertNotIn('Weak signals to watch', html)
+        self.assertIn('class="issue-chart"', html)
+        self.assertIn('class="tree-svg"', html)
+        self.assertIn('class="node main"', html)
+        self.assertIn('class="node sub one"', html)
+        self.assertIn('class="node leaf three"', html)
+        self.assertIn('buildTrees(items,{count:8})', html)
+        self.assertIn('const items=[...(d.strand_a||[]),...(d.strand_c||[])]', html)
+        self.assertNotIn('issue-list', html)
+        self.assertNotIn('issues stand out', html.lower())
+        self.assertIn('function build(items,opt={})', js)
 
     def test_matrix_reader_is_concise_and_drops_per_item_why_block(self):
         full = (ROOT / "frontier" / "index.html").read_text(encoding="utf-8")

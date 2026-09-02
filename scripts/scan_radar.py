@@ -3864,7 +3864,6 @@ _SHOCK_EXTERNALITY_CUES = [
     r"\bglobal demand shock\b", r"\bmajor infrastructure disruption\b",
 ]
 _SHOCK_EFFECT_CUES = [
-    r"\bbarring [^.;]{0,100}(?:exports?|access|entities)\b", r"\bbarred [^.;]{0,100}(?:from )?(?:exports?|access)\b",
     r"\bcut off\b", r"\bblocked\b", r"\brestrict(?:ed|ion)\b", r"\brevoked\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b",
     r"\bwent offline\b", r"\bsevered\b", r"\bclosed\b", r"\bprice (?:doubled|spiked|surged)\b", r"\btrading halted\b",
     r"\bstranded\b", r"\bseized\b", r"\bimpounded\b", r"\bexpelled\b", r"\bloss of\b", r"\bdisrupt(?:ed|ion)\b", r"\boutage\b",
@@ -13827,7 +13826,7 @@ def main() -> int:
     low_yield_rotation["scan_mode"] = "full_low_yield_rescue" if RADAR_RESCUE_MODE else "normal"
 
     # Spend otherwise-idle scan time on the actual gaps. Earlier versions finished
-    # in 5-10 minutes even with a 20-minute scanner budget. This phase repeatedly
+    # in 5-10 minutes even with a 24-minute scanner budget. This phase repeatedly
     # advances deeper result pages for zero-count Frontier cells and gives Strand C
     # a protected anchor-focused follow-up pass. It stops before the hard deadline so
     # radar.json can still be assembled and committed safely.
@@ -13851,7 +13850,7 @@ def main() -> int:
     deep_max_waves = max(0, int(CONFIG.get("frontier_gap_deepening_max_waves", 16) or 16))
     if not frontier_focus.get("empty_targets"):
         # Once every Matrix cell has evidence, balancing thin cells is useful but should
-        # not consume the rest of a 20-minute run. Preserve most remaining time for the
+        # not consume the rest of a 24-minute run. Preserve most remaining time for the
         # wide recurring lanes and low-yield rescue instead of issuing 100+ gap queries.
         deep_max_waves = min(
             deep_max_waves,

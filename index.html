@@ -51,7 +51,7 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
-<link rel="stylesheet" href="simple-ui.css?v=17.19.34">
+<link rel="stylesheet" href="simple-ui.css?v=17.20.0">
 <style id="landing-v171929">
 .landing-hero{padding:0 0 30px!important}
 .landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #333;margin-bottom:30px;min-height:52px;flex-wrap:wrap}
@@ -99,22 +99,6 @@
       </div>
     </header>
 
-    <div class="statusbar"><div class="wrap status-inner">
-      <span id="lastScan" class="pill">Updated · pending</span>
-      <span id="latestActivity" class="pill">Latest material · pending</span>
-      <a class="pill" href="historical/" style="text-decoration:none;font-weight:850">Open historical evidence →</a>
-    </div></div>
-
-    <div class="wrap" id="radar">
-      <section class="dashboard" aria-label="Radar totals">
-        <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
-        <div class="stat"><div class="label">News</div><div id="statC" class="value">—</div><div class="sub">recent reporting &amp; developments</div></div>
-        <div class="stat"><div class="label">External shocks</div><div id="statShock" class="value">—</div><div class="sub">realised external events</div></div>
-        <div class="stat"><div class="label">Future methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
-      </section>
-      <section id="shockStrip" class="shock-strip" aria-live="polite"><div><div class="eyebrow">External shock</div><h2 id="shockStripTitle"></h2><p id="shockStripMeta"></p></div><a href="shocks/">Open external shocks →</a></section>
-    </div>
-
     <div class="toolbar"><div class="wrap tools">
       <input id="search" class="search" type="search" placeholder="Search titles, sources, signals, topics…" aria-label="Search radar">
       <button id="recentOnly" class="filter" type="button">Latest 30 days</button>
@@ -124,28 +108,25 @@
 
     <main class="wrap">
       <section id="strand-a" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Evidence</div><h2>What is changing Europe’s R&amp;I position?</h2><p>Evidence on how geopolitical competition, dependence, capability, security, standards, international coordination and structural change are affecting Europe’s research and innovation position.</p></div><div id="countA" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand A</div><h2>Quality papers &amp; reports</h2><p>Research, policy papers, reports and comparable high-quality evidence on EU research &amp; innovation in geopolitical context.</p></div><div id="countA" class="count">0 items</div></div>
         <div id="itemsA" class="cards"></div><button id="moreA" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <section id="strand-c" class="strand">
-        <div class="section-head"><div><div class="eyebrow">News</div><h2>What is happening now?</h2><p>Recent journalism and official developments relevant to Europe’s research and innovation position.</p></div><div id="countC" class="count">0 stories</div></div>
-        <div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
-      </section>
-
       <section id="strand-b" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Futures methods</div><h2>Ways to look ahead</h2><p>Reusable methods for scanning, scenarios, forecasting and strategic foresight.</p></div><div id="countB" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Foresight methods</h2><p>Papers and reports on methods that may be useful for horizon scanning, scenarios, forecasting and foresight itself.</p></div><div id="countB" class="count">0 items</div></div>
         <div id="itemsB" class="cards"></div><button id="moreB" class="more" type="button" hidden>Show more</button>
       </section>
 
+      <section id="strand-c" class="strand">
+        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals</h2><p>Trustworthy reporting, papers and other evidence indicating changes or possible changes in EU research &amp; innovation worth keeping an eye on.</p></div><div id="countC" class="count">0 items</div></div>
+        <div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
+      </section>
 
     </main>
     <footer><div class="wrap">R&I × Geopolitics Radar</div></footer>
   </div>
 
-<script src="briefing/insights.js?v=17.19.34"></script>
-<script src="read/issues.js?v=17.19.34"></script>
-<script src="priorities/priorities.js?v=17.19.34"></script>
+<script src="briefing/insights.js?v=17.20.0"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",recentOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0};
@@ -263,10 +244,10 @@ function biblio(x,label='Bibliography'){
 }
 function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}</div>`}
 function cardHeading(x){const t=cleanText(x.title||x.headline||'');return t&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false?t:claimText(x)}
-function cap80(v){let s=cleanText(v);if(s.length<=80)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>77)break;out=n}return (out||s.slice(0,77)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').trim()+'…'}
-function methodPoint(x){const t=cleanText(`${x.title||''} ${x.core_message||''} ${x.summary||''}`).toLowerCase();if(/hybrid foresight/.test(t)&&/expert/.test(t))return 'AI + expert judgement can make horizon scanning iterative.';if(/governance logics.*foresight|foresight functions/.test(t))return 'Choose foresight methods by policy function, horizon and available data.';if(/evidence for the future|robustness.*appropriateness.*inclusivity/.test(t))return 'Robustness, fit and inclusion make foresight more usable as evidence.';if(/multi-agent.*technology intelligence|patents to market signals/.test(t))return 'Multi-agent AI can turn patents and market signals into technology intelligence.';if(/participatory.*scenario/.test(t)||/scenario-building methodology/.test(t))return 'Participatory scenarios connect long-term futures with sector choices.';if(/agentprophet|technology forecasting/.test(t))return 'Source-aware AI agents can forecast emerging technology signals.';if(/analytic hierarchy process|living labs/.test(t))return 'Scenario workshops + AHP can rank options with stakeholders.';if(/field.?topic.?technology|key core technologies/.test(t))return 'Patent mapping can identify key technologies and track their evolution.';const r=globalThis.RadarInsights?.readerPoint?.(x.core_message||x.summary||'',80)||globalThis.RadarInsights?.fastReaderText?.(x.title||'')||x.title||'';return cap80(r)}
+function cap100(v){let s=cleanText(v);if(s.length<=100)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>97)break;out=n}return (out||s.slice(0,97)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').trim()+'…'}
+function methodPoint(x){const t=cleanText(`${x.title||''} ${x.core_message||''} ${x.summary||''}`).toLowerCase();if(/hybrid foresight/.test(t)&&/expert/.test(t))return 'AI + expert judgement can make horizon scanning iterative.';if(/governance logics.*foresight|foresight functions/.test(t))return 'Choose foresight methods by policy function, horizon and available data.';if(/evidence for the future|robustness.*appropriateness.*inclusivity/.test(t))return 'Robustness, fit and inclusion make foresight more usable as evidence.';if(/multi-agent.*technology intelligence|patents to market signals/.test(t))return 'Multi-agent AI can turn patents and market signals into technology intelligence.';if(/participatory.*scenario/.test(t)||/scenario-building methodology/.test(t))return 'Participatory scenarios connect long-term futures with sector choices.';if(/agentprophet|technology forecasting/.test(t))return 'Source-aware AI agents can forecast emerging technology signals.';if(/analytic hierarchy process|living labs/.test(t))return 'Scenario workshops + AHP can rank options with stakeholders.';if(/field.?topic.?technology|key core technologies/.test(t))return 'Patent mapping can identify key technologies and track their evolution.';const r=globalThis.RadarInsights?.readerPoint?.(x.core_message||x.summary||'',100)||globalThis.RadarInsights?.fastReaderText?.(x.title||'')||x.title||'';return cap100(r)}
 function methodUse(x){const t=cleanText(`${x.relevance_note||''} ${x.title||''} ${x.summary||''}`).toLowerCase();if(/horizon scan/.test(t))return 'Use for systematic early-signal discovery and review.';if(/scenario/.test(t))return 'Use to compare plausible futures and test choices before they lock in.';if(/technology intelligence/.test(t))return 'Use to track technologies, competitors and emerging capability gaps.';if(/forecast/.test(t))return 'Use to structure evidence about where a technology may move next.';if(/foresight/.test(t))return 'Use to connect future uncertainty with current policy decisions.';return 'Use as a reusable method for examining future R&I change.'}
-function signalPoint(x){const raw=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';return cap80(globalThis.RadarInsights?.fastReaderText?.(raw)||raw)}
+function signalPoint(x){const raw=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';return cap100(globalThis.RadarInsights?.fastReaderText?.(raw)||raw)}
 function claimButton(x,id,title=cardHeading(x),linkLabel='Open publication ↗'){return `<h3 class="claim-title">${esc(title)}</h3><div class="card-actions"><button class="info-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">More info</button>${x.link?`<a class="publication-link" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(linkLabel)}</a>`:''}</div>`}
 function abItem(x,i){
   const id=`abstract-a-${i}`;
@@ -279,33 +260,13 @@ function bItem(x,i){
 function cItem(x,i){
   const id=`abstract-c-${i}`;
   const why=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div></div>${claimButton(x,id,signalPoint(x),'Open source ↗')}${visibleSource(x)}${why?`<p class="whyline"><strong>Why it matters:</strong> ${esc(cap80(why))}</p>`:''}${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div></div>${claimButton(x,id,signalPoint(x),'Open source ↗')}${visibleSource(x)}${why?`<p class="whyline"><strong>Why it matters:</strong> ${esc(cap100(why))}</p>`:''}${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
-function renderCurrentIssues(d){
-  const A=d.strand_a||[],C=d.strand_c||[],F=d.frontier_evidence||[];
-  const issues=globalThis.RadarIssues?.build?RadarIssues.build([...A,...F,...C],{minIssues:5,maxIssues:9}):[];
-  const splash=document.getElementById('currentIssues');
-  if(splash)splash.innerHTML=issues.length?issues.map((x,i)=>`<a href="read/"><span class="num">${String(i+1).padStart(2,'0')}</span><strong>${esc(globalThis.RadarInsights?.fastReaderText?.(x.title)||x.title)}</strong></a>`).join(''):'<a href="read/"><span class="num">—</span><strong>No stable issue pattern yet</strong></a>';
-  const summary=globalThis.RadarIssues?.summary?RadarIssues.summary(issues):null;
-  if(summary){
-    const t=document.getElementById('minimumReadTitle'),p=document.getElementById('minimumReadText');
-    if(t)t.textContent=globalThis.RadarInsights?.radarText?.(summary.title)||summary.title;
-    if(p)p.textContent=globalThis.RadarInsights?.radarText?.(summary.text)||summary.text;
-  }
-  const jr=document.getElementById('journeyReadText');if(jr)jr.textContent=issues.length?`${issues.length} current issue maps.`:'Current issue maps.';
-  const pr=document.getElementById('pageReadLink');if(pr)pr.textContent=issues.length?`${issues.length} current issue maps →`:'Current issue maps →';
-}
-const NEWS_PREMIUM=/\b(?:Reuters|Financial Times|Bloomberg|POLITICO|Politico|South China Morning Post|BBC|The Economist|Defense News|Euractiv|Science Business)\b/i;
-function premiumNewsSource(s){s=cleanText(s);return NEWS_PREMIUM.test(s)||/^(?:Nature|Science)$/i.test(s)}
-const NEWS_OFFICIAL=/\b(?:European Commission|European Innovation Council|European Research Council|Council of the European Union|European Central Bank|European Investment Bank|EuroHPC|ERA Portal|Marie Skłodowska-Curie|EUISS|Government|Ministry|OECD|International Telecommunication Union)\b/i;
-function newsScore(x){const s=cleanText(x?.source||''),t=cleanText(x?.title||x?.headline||'');let n=dateMs(x)/86400000;if(premiumNewsSource(s))n+=120;if(NEWS_OFFICIAL.test(s))n+=55;if(String(x?.source_tier||'')==='Tier 1')n+=25;if(/launch|appoint|agreement|invest|fund|ban|restrict|export|control|call|partnership|dialogue|raise|rebound|opens?|updates?|announces?|selects?|political agreement|statement/i.test(t))n+=18;if(/Publications Repository|study on|report published|four years of|working paper/i.test(s+' '+t))n-=45;return n}
-function newsItems(d){const A=d.strand_a||[],C=d.strand_c||[];const latest=state.latestDate||Date.now(),floor=latest-75*86400000;const seen=new Set(),out=[];for(const x of [...C,...A]){if(!publicDisplayOk(x)||dateMs(x)<floor)continue;const source=cleanText(x.source||''),title=cleanText(x.headline||x.title||'');const current=C.includes(x)||premiumNewsSource(source)||NEWS_OFFICIAL.test(source);if(!current)continue;if(/JRC Publications Repository/i.test(source)&&!/startups|sovereignty|supply chain|security|competitiveness/i.test(title))continue;if(/postdoc|doctoral student positions|job|vacanc/i.test(title))continue;const key=norm(x.link||title);if(!key||seen.has(key))continue;seen.add(key);out.push(x)}return out.sort((a,b)=>newsScore(b)-newsScore(a)||dateMs(b)-dateMs(a))}
-function renderShockStrip(d){const view=globalThis.RadarPriorities?.buildPriorityView?.(d,{limit:50});const shocks=view?.externalShocks||[];document.getElementById('statShock').textContent=shocks.length;const box=document.getElementById('shockStrip');if(!box)return;if(!shocks.length){box.classList.remove('show');return}const x=shocks[0],title=x.title||globalThis.RadarPriorities?.simplePriorityText?.(x)||'External shock';document.getElementById('shockStripTitle').textContent=globalThis.RadarInsights?.fastReaderText?.(title)||title;document.getElementById('shockStripMeta').textContent=[x.source,fmtDate(x.date)].filter(Boolean).join(' · ');box.classList.add('show')}
 function fallbackCard(x){const title=cleanText(x?.title||x?.headline||x?.core_message||'Finding');const source=cleanText(x?.source||'');const link=cleanText(x?.link||'');return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x?.date))}</div></div><h3 class="claim-title">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="visible-source"><strong>Source:</strong> ${esc(source)}</div>`:''}</article>`}
 function safeCard(renderer,x,i){try{return renderer(x,i)}catch(e){console.error('Radar card render failed',e,x);return fallbackCard(x)}}
 function renderSection(letter,items,renderer,noun){try{const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map((x,i)=>safeCard(renderer,x,i)).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more findings`}catch(e){console.error(`Radar section ${letter} render failed`,e);document.getElementById(`items${letter}`).innerHTML=empty("This section could not be displayed. The radar data itself is loaded.")}}
-function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=newsItems(d);renderSection("A",A,abItem,"item");renderSection("B",B,bItem,"item");renderSection("C",C,cItem,"story");}
+function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,bItem,"item");renderSection("C",C,cItem,"signal");}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
 function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:18};render()});document.getElementById("recentOnly").addEventListener("click",e=>{state.recentOnly=!state.recentOnly;e.currentTarget.classList.toggle("active",state.recentOnly);state.limits={A:12,B:12,C:18};render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.recentOnly=false;document.getElementById("search").value="";document.getElementById("recentOnly").classList.remove("active");state.limits={A:12,B:12,C:18};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
 wire();
@@ -317,8 +278,6 @@ async function loadRadar(){
     raw=await r.json();
   }catch(e){
     console.error("Radar data load failed",e);
-    document.getElementById("lastScan").textContent="Updated · data unavailable";
-    document.getElementById("latestActivity").textContent="Latest material · unavailable";
     for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded.");
     return;
   }
@@ -327,13 +286,6 @@ async function loadRadar(){
   state.data=d;
   const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];
   state.latestDate=Math.max(Date.parse(d.last_updated||'')||0,...[...A,...B,...C].map(dateMs));
-  const news=newsItems(d);
-  document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=news.length;
-  const explicitCompletion=d.run_completed_at||d.scan_state?.actual_last_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";
-  try{document.getElementById("lastScan").textContent=`Updated · ${completed?fmtDateTime(completed):"pending"}`}catch(e){console.warn('Radar timestamp formatting failed',e);document.getElementById("lastScan").textContent=`Updated · ${String(completed||'pending').slice(0,16)}`}
-  const newest=Math.max(...[...A,...B,...C].map(dateMs));document.getElementById("latestActivity").textContent=`Latest material · ${newest?fmtDate(newest):"unavailable"}`;
-  try{renderShockStrip(d)}catch(e){console.error("External shock render failed",e);document.getElementById('statShock').textContent='—'}
-  try{renderCurrentIssues(d)}catch(e){console.error("Current issues render failed",e)}
   render();
 }
 </script>
