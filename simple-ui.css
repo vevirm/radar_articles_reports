@@ -119,3 +119,12 @@ button,.filter,.btn,.action,.more,.info-button{font-weight:850!important}
   .card-actions,.priority-actions{display:grid;grid-template-columns:1fr!important}
   .info-button,.publication-link,.evidence-open,.card-link{width:100%}
 }
+
+/* v17.19.29 navigation simplification: Radar is always the obvious home. */
+.nav a[href="../"],.nav a[href="../../"]{order:-50!important;font-weight:950!important}
+.nav a[href="../#strand-c"],.nav a[href="../../#strand-c"]{display:none!important}
+.nav{align-items:center!important}
+.nav a{white-space:nowrap!important}
+.statusbar .pill,.pill{background:#fff!important}
+.method,.note,.intro-note{background:#fff!important}
+.taxonomy .method-note{grid-column:1/-1;color:#111!important;font-weight:850;margin-top:5px}

@@ -5,15 +5,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReaderUiV17179Tests(unittest.TestCase):
-    def test_landing_page_is_orientation_first_and_reader_views_are_top(self):
+    def test_landing_page_makes_main_radar_primary_and_keeps_navigation_simple(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn("This is the Main Radar for", html)
+        self.assertIn("R&amp;I × Geopolitics", html)
         self.assertIn("EU research &amp; innovation in geopolitical context.", html)
         self.assertIn('<nav class="landing-nav"', html)
         nav = html.split('<nav class="landing-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertLess(nav.find('>Read at least this</a>'), nav.find('>Stuff</a>'))
-        self.assertLess(nav.find('>Weak signals</a>'), nav.find('>Stuff</a>'))
-        self.assertLess(nav.find('>Historical evidence</a>'), nav.find('>Stuff</a>'))
+        self.assertIn('aria-current="page">Radar</a>', nav)
+        self.assertLess(nav.find('>Radar</a>'), nav.find('>Read</a>'))
+        self.assertLess(nav.find('>Radar</a>'), nav.find('>Matrix</a>'))
+        self.assertLess(nav.find('>Radar</a>'), nav.find('>Stuff</a>'))
+        self.assertNotIn('>Weak signals</a>', nav)
+        self.assertNotIn('landing-choices', html)
         self.assertNotIn('<section class="inside-map"', html)
         self.assertNotIn('<section class="page-map"', html)
         self.assertNotIn("Next automatic", html)

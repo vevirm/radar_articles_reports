@@ -1523,8 +1523,8 @@ if(v.stats.risks||v.stats.opportunities||v.stats.externalShocks) process.exit(2)
 const P=require('./priorities/priorities.js');
 const D=require('./radar.json');
 const v=P.buildPriorityView(D,{limit:50});
-if(v.stats.risks<1) process.exit(2);
-if(v.stats.opportunities<1) process.exit(3);
+if(v.stats.risks<10) process.exit(2);
+if(v.stats.opportunities<10) process.exit(3);
 if(v.stats.externalShocks<1) process.exit(4);
 """
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)

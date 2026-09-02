@@ -1,37 +1,31 @@
-# v17.19.28
+# v17.19.29
 
-## Broader external-shock taxonomy in the analytical layer
+## Simpler navigation + broader downstream interpretation
 
-This release broadens what the downstream External Shocks product can recognise from evidence already retained by the mature scanner. The upstream scanner/research engine is not changed.
+This release changes the **analytical/representation layer only**. The mature scanner/research engine is preserved byte-for-byte.
 
-- The four-part shock filing test remains unchanged in principle: **dated/discrete + external + statable realised effect + speed**.
-- Externality is no longer interpreted as only a foreign-government action. A shock can also originate in an environmental, epidemiological, military, terrorist, financial, market, commodity, energy, food, trade, supply-chain, currency, sanctions, migration, cyber, technological, climate, political, investment, demand or infrastructure event outside the control of the affected EU R&I actor.
-- The analytical layer now recognises and labels these 20 shock families:
-  1. Natural disasters
-  2. Pandemics and epidemics
-  3. Armed conflicts
-  4. Terrorist attacks
-  5. Global financial crises
-  6. Commodity price shocks
-  7. Energy supply disruptions
-  8. Food supply shocks
-  9. Trade disruptions
-  10. Supply chain disruptions
-  11. Currency crises
-  12. International sanctions
-  13. Migration and refugee surges
-  14. Cyberattacks
-  15. Technological disruptions
-  16. Climate-related shocks
-  17. Political instability in neighboring regions
-  18. Sudden foreign investment withdrawal
-  19. Global demand shocks
-  20. Major infrastructure disruptions
-- Shock-family language qualifies evidence for the shock test; it does **not** classify an item by itself.
-- Planned, threatened or merely expected events remain excluded from realised shocks.
-- EU/self-authored policy moves remain excluded as external shocks when they are the actor of interest's own decision.
-- The External Shocks page now exposes the shock family on each card and includes a compact expandable taxonomy.
-- Matrix placement remains completely separate and is not an input to shock classification.
-- Current saved data still yields one strict shock; it is now labelled **Trade disruptions**.
+### Navigation and visual hierarchy
+- The Main Radar is now unmistakably the primary page: **Radar** is the first, active navigation item and the large multi-card landing map has been removed.
+- The Main Radar hero is reduced to a short title and one-line scope statement; live totals, search and evidence follow immediately.
+- Reader navigation is simplified around: Radar, Read, Matrix, Risks & opportunities, External shocks, Historical, Sources and Stuff.
+- Redundant top-navigation links to the Weak Signals anchor are removed; Weak Signals remains a first-class section inside the Main Radar.
+- The large grey orientation block is gone. Surfaces stay white with black structure and red emphasis.
+- Risks/Opportunities and External Shocks headers and explanatory copy are substantially shortened. Detailed methodology remains available only when requested.
+- Risk/opportunity card headlines are capped to a concise reader length; long retained source passages are hidden behind **More info**.
 
-Validation added for non-policy shocks (including natural disasters and cyberattacks), all 20 taxonomy families, and continued rejection of intention-only items.
+### Risks and opportunities
+- Repository interpretation now reads the full retained evidence context (source summary, core message, signal note, relevance/bridge evidence and structured EU/R&I/geopolitical evidence) rather than relying on a small set of exact phrases.
+- Risk interpretation recognises more concrete structural pathways such as bottleneck access, research-career precarity/brain drain, concentrated foreign technology supply, investment dependence, export-control exposure and critical-material constraints.
+- Opportunity interpretation recognises live instruments more broadly (calls, programmes, access schemes, partnerships, association mechanisms and funding instruments), but still requires an identifiable actor, instrument, gain and current/open window.
+- Matrix placement remains completely excluded from risk/opportunity classification.
+- On the current saved corpus the analytical layer finds **14 risks, 12 opportunities and 1 strict external shock** before page display limits/diversification.
+
+### External shocks
+- The existing 20-family shock taxonomy is retained.
+- A family match still does not file a shock: discreteness, externality, realised EU R&I effect and speed must all pass.
+- The methodology/taxonomy is collapsed by default to keep the page visually quiet.
+
+### Validation
+- Main regression suite: 178/178 passing.
+- Historical regression suite: 19/19 passing.
+- Scanner/config/phrase-rule/workflow files verified byte-for-byte unchanged from v17.19.28.

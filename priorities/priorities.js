@@ -35,7 +35,12 @@
     /\btermination for convenience\b/i,/\bswitching costs?\b/i,/\block-in\b/i,
     /\blong qualification times?\b/i,/\bno substitute available\b/i,/\bno alternative supplier\b/i,
     /\bproposed .{0,45}restrictions?\b/i,/\bexport controls?\b/i,/\bgrant restrictions?\b/i,
-    /\bforeign interference\b/i,
+    /\bforeign interference\b/i,/\b(?:dependence|dependency|dependencies) (?:on|in)\b/i,
+    /\b(?:constrained|limited|exposed|vulnerable) by\b/i,/\bcan constrain\b/i,/\bexternal dominance\b/i,
+    /\bmarket concentration\b/i,/\bconcentrated supply\b/i,/\bdifficult substitution\b/i,/\bscarcity\b/i,
+    /\b(?:increase|raises?|creates?) .{0,65}(?:costs?|barriers?|exposure|risk)\b/i,/\b(?:disrupt|erode|undermine)s? .{0,65}(?:access|capacity|collaboration|supply|autonomy|competitiveness|research)\b/i,
+    /\b(?:barriers?|fragmentation|precarity|scarcity|shortages?) (?:to|in|of)\b/i,/\blimited (?:access|accessibility|availability)\b/i,
+    /\bbrain drain\b/i,/\b(?:risk|risks) of .{0,80}(?:dependence|loss|restriction|disruption|erosion|transfer)\b/i,
   ];
   const RISK_CARRIER=[
     /\bunder review by\b/i,/\bcontrolled by\b/i,/\brequires approval from\b/i,/\bsubject to .{0,45} jurisdiction\b/i,
@@ -43,18 +48,30 @@
     /\bforeign interference\b/i,/\btalent recruitment by\b/i,/\bcoercion\b/i,/\bleverage over\b/i,/\bpressure to align\b/i,
     /\b(?:white house|u\.s\.|united states|china|chinese|russia|russian|india|canada|united kingdom|uk government)\b/i,
     /\b(?:government|regulator|authority|supplier|provider|platform operator|cloud provider)\b/i,
-    /\bnon-european .{0,30}(?:supplier|provider|company|firm)s?\b/i
+    /\bnon-european .{0,30}(?:supplier|provider|company|firm)s?\b/i,
+    /\b(?:market|supplier|supply|platform|cloud|technology) concentration\b/i,/\bstate-backed .{0,30}(?:competitor|company|firm|actor)s?\b/i,
+    /\b(?:export-control|export control|sanctions?|investment screening|procurement) (?:regime|rules?|restrictions?|controls?)\b/i,
+    /\b(?:china|taiwan|united states|u\.s\.|us|russia) .{0,70}(?:supply|technology|investment|provider|market|control|dominance)\b/i,
+    /\b(?:international|foreign) investments?\b/i,/\bprocurement preferences?\b/i,/\bcritical (?:raw )?materials?(?: supply| market| exports?)?\b/i,/\bdual[- ]use export control regulation\b/i,
+    /\b(?:fragmentation|precarity|mobility barriers?|research career conditions|limited accessibility)\b/i
   ];
   const RISK_ASSET=[
     /\bdependent on .{0,80} for\b/i,/\breliant on imports? of\b/i,/\bno domestic capacity\b/i,/\bsingle source\b/i,/\bsole supplier\b/i,
     /\bconcentrated (?:in|computing capacity)\b/i,/\bmonopoly risk\b/i,/\bbottleneck\b/i,/\bchokepoint\b/i,/\berosion of\b/i,
     /\bhollowing out\b/i,/\bloss of control over\b/i,/\bbrain drain\b/i,/\brelocation of\b/i,/\bforeign ownership of\b/i,
     /\bstrategic dependenc(?:y|ies)\b/i,/\bexposure to retaliation\b/i,/\bdependence on .{0,80}(?:supplier|provider|cloud|technology|imports?)\b/i,
-    /\b(?:research collaboration|academic freedom|research access|research capacity|talent pool|research talent|data flow|computing capacity|cloud and ai infrastructure|supply chain|technology access|equipment|knowledge|semiconductor supply|critical raw material supply)\b/i
+    /\b(?:research collaboration|academic freedom|peer review|research access|research capacity|research careers?|researcher mobility|talent pool|research talent|data flow|research data|computing capacity|compute capacity|cloud and ai infrastructure|research infrastructure|supply chain|technology access|technology transfer|equipment|knowledge|semiconductor supply|semiconductors?|critical raw material supply|critical raw materials?|strategic autonomy|technological autonomy|competitiveness|innovation ecosystem|deep tech|scale-up funding|ai capability|ai capabilities|digital capability|digital capabilities|scientific infrastructure|research excellence|open science|autonomous policy|economic performance)\b/i
   ];
   const RISK_FORWARD=[
     /\b(?:could|would|may|might|can)\b/i,/\bproposed\b/i,/\bunder review\b/i,/\bsubject to\b/i,/\bat the discretion\b/i,
-    /\block-in\b/i,/\bextraterritorial\b/i,/\bno substitute\b/i,/\bno alternative supplier\b/i,/\bdependence\b/i,/\bdependency\b/i
+    /\block-in\b/i,/\bextraterritorial\b/i,/\bno substitute\b/i,/\bno alternative supplier\b/i,/\bdependence\b/i,/\bdependency\b/i,
+    /\bdependencies\b/i,/\b(?:risk|risks|vulnerable|vulnerability|exposure|challenge|constraint|scarcity|shortage)s?\b/i,/\bcan constrain\b/i,
+    /\b(?:foreign interference|brain drain|precarity|fragmentation|barriers?|limited accessibility)\b/i
+  ];
+  const RISK_LOSS=[
+    /\b(?:constrain|restrict|deny|block|cut off|withhold|disrupt|erode|undermine|hollow out|drain|damage|weaken|reduce|limit)s?\b/i,
+    /\b(?:loss|losses|brain drain|dependency|dependence|dependencies|vulnerability|exposure|scarcity|shortage|bottleneck|lock-in|compliance costs?|barriers? to)\b/i,
+    /\b(?:obtain|acquire|extract) .{0,60}(?:advanced knowledge|technology|know-how|research knowledge)\b/i,/\btechnology transfer\b/i,/\brisks?\b/i,/\brestrictions?\b/i
   ];
 
   const OPP_MECHANISM=[
@@ -63,14 +80,18 @@
     /\bbuilds on installed base\b/i,/\btransferable to\b/i,/\bscalable\b/i,/\bdual-use potential\b/i,/\bnetwork effects favour\b/i,
     /\b(?:call|programme|program|fund|initiative)(?: [A-Z0-9_-]{3,})? aims? (?:to|at) (?:strengthen|build|support|expand|accelerate|develop|establish|establishing)\b/i,
     /\b(?:will|can|could) (?:help |allow |enable )?(?:strengthen|build|secure|expand|scale|attract|retain|develop|establish|provide)\b/i,
-    /\bprovide(?:s|d)? .{0,50}(?:funding|investment|access|support)\b/i,/\bpresented upcoming opportunities? under\b/i,/\bopen-access .{0,40}(?:infrastructure|facility)\b/i
+    /\bprovide(?:s|d)? .{0,50}(?:funding|investment|access|support)\b/i,/\bpresented upcoming opportunities? under\b/i,/\bopen-access .{0,40}(?:infrastructure|facility)\b/i,
+    /\b(?:launch(?:es|ed)?|open(?:s|ed)?|offer(?:s|ed)?|fund(?:s|ed)?|support(?:s|ed)?|enable(?:s|d)?|allow(?:s|ed)?) .{0,80}(?:call|programme|program|funding|investment|access|research|innovation|mobility|capacity|companies|projects?)\b/i,
+    /\b(?:agreement|association|partnership|initiative|programme|program|scheme) .{0,65}(?:enable|support|strengthen|expand|increase|accelerate|provide)s?\b/i,
+    /\bcan now (?:request|access|use|apply|participate)\b/i,/\bturn(?:ing)? .{0,65} into .{0,65}(?:gain|capacity|advantage|brain gain)\b/i
   ];
   const OPP_ACTOR=[
     /\beuropean commission\b/i,/\beuropean innovation council\b/i,/\beic\b/i,/\beurohpc(?: joint undertaking)?\b/i,
     /\bhorizon europe\b/i,/\bmarie skłodowska-curie actions\b/i,/\bmsca\b/i,/\beuropean research council\b/i,/\berc\b/i,
     /\beuropean investment bank\b/i,/\beib\b/i,/\bbusiness finland\b/i,/\b(?:national|federal) government\b/i,
-    /\bministry of [a-z -]+\b/i,/\bgovernment of [a-z -]+\b/i,/\bmember states?\b/i,
-    /\b[a-z][a-z&.-]+ (?:agency|authority|council|fund|foundation|joint undertaking)\b/i
+    /\bministry of [a-z -]+\b/i,/\bgovernment of [a-z -]+\b/i,/\bmember states?\b/i,/\beuropean union\b/i,/\beu\b/i,
+    /\bjoint research centre\b/i,/\bjrc\b/i,/\bcouncil of the european union\b/i,/\beuropean parliament\b/i,
+    /\b[a-z][a-z&.-]+ (?:agency|authority|council|fund|foundation|joint undertaking|university|consortium)\b/i
   ];
   const OPP_INSTRUMENT=[
     /\bexisting instrument\b/i,/\blegal basis already exists\b/i,/\bno new legislation required\b/i,/\bprocurement could\b/i,
@@ -78,16 +99,27 @@
     /\bcall open until\b/i,/\bdesignation as strategic project\b/i,/\bfast-track\b/i,/\bregulatory sandbox\b/i,/\bpilot line\b/i,
     /\banchor customer\b/i,/\blaunch customer\b/i,/\bhorizon europe\b/i,/\beic\b/i,/\berc\b/i,/\bmsca\b/i,/\beurohpc\b/i,
     /\b(?:funding|investment) (?:programme|program|instrument|facility|call|scheme)\b/i,/\bwork programme\b/i,/\bopen call\b/i,
+    /\b(?:call|programme|program|initiative|scheme|facility|fund|partnership|association agreement|letter of intent)\b/i,
+    /\b(?:free|open) access to .{0,60}(?:research infrastructure|supercomput|quantum|facility|resource)\b/i,
     /\bcall [A-Z0-9_-]{5,}\b/i,/\b€\s?\d[\d.,]*\s?(?:million|billion)?\b/i,/\beur\s?\d[\d.,]*\s?(?:million|billion)?\b/i
   ];
   const OPP_GAIN=[
     /\b(?:strengthen|secure|build|expand|increase|improve|accelerate|develop|establish|attract|retain|scale|boost) .{0,90}(?:capacity|capabilit|autonomy|resilience|competitiveness|leadership|innovation|research|technology|talent|supply|access|infrastructure|ecosystem|collaboration)\b/i,
-    /\b(?:capacity|capability|autonomy|resilience|competitiveness|leadership|talent|investment|innovation)\b/i
+    /\b(?:capacity|capability|autonomy|resilience|competitiveness|leadership|talent|investment|innovation|research access|research careers?|researcher mobility|knowledge exchange|technology transfer|deep tech|scale-up|supercomputing|quantum|semiconductor|infrastructure|collaboration|brain gain)\b/i
   ];
   const OPP_WINDOW=[
     /\b(?:status )?open\b/i,/\bopening date\b/i,/\bdeadline(?: date)?\b/i,/\bopen until\b/i,/\bapply\b/i,/\bapplications?\b/i,
     /\bupcoming opportunities?\b/i,/\b2026[–-]2027\b/i,/\bcall(?:s)? launched\b/i,/\bnew (?:call|programme|program|fund|initiative)\b/i,
-    /\bavailable for (?:this|the) call\b/i,/\bbudget available for (?:this|the) call\b/i,/\bfunding (?:is )?available\b/i,/\bcurrently open\b/i
+    /\bavailable for (?:this|the) call\b/i,/\bbudget available for (?:this|the) call\b/i,/\bfunding (?:is )?available\b/i,/\bcurrently open\b/i,
+    /\b(?:launch(?:es|ed)?|open(?:s|ed)?) (?:a |an |the )?(?:new )?(?:call|programme|program|initiative|scheme|facility)\b/i,
+    /\bcan now (?:request|access|use|apply|participate)\b/i,/\bupcoming (?:call|calls|opportunities|programme|program)\b/i,/\b2026 (?:call|work programme|programme|program)\b/i
+  ];
+  const OPP_STRONG_WINDOW=[
+    /\bstatus\s+open\b/i,/\bopening date\b/i,/\bdeadline(?: date)?\b/i,/\bopen until\b/i,/\bcall open\b/i,/\bopen call\b/i,
+    /\bapplications? (?:open|close|closing|deadline)\b/i,/\bcall(?:s)? launched\b/i,/\blaunch(?:es|ed) (?:a |an |the )?(?:new )?call\b/i,
+    /\bopen(?:s|ed) (?:a |an |the )?(?:new )?call\b/i,/\bclosing soon\b/i,/\bupcoming opportunities?\b/i,/\bupcoming calls?\b/i,
+    /\bcan now (?:request|access|use|apply|participate)\b/i,/\bopen access to .{0,70}(?:research infrastructure|quantum computers?|supercomput|facility|resource)\b/i,
+    /\bnew (?:funding )?(?:programme|program|scheme|initiative)\b/i,/\b2026(?:–|-|\s)2027 (?:programme|program|work programme|calls?)\b/i
   ];
   const OPP_BASELINE=[/\badopted\b/i,/\bentered into force\b/i,/\btook effect\b/i,/\bselected\b/i,/\bapproved\b/i,/\bnow funds\b/i];
   const OPP_NOISE=[/\bhas the potential to\b/i,/\bcould become a global leader\b/i,/\bvision for\b/i,/\bambition to\b/i,/\baspires to\b/i,/\bmust seize\b/i,/\bcalls for bold action\b/i,/\bunprecedented opportunity\b/i,/\broadmap towards\b/i];
@@ -170,12 +202,23 @@
     return families.length?families[0]:null;
   }
 
-  function evidenceText(x){
+  function evidenceParts(x){
     const filed=(x?.strategic_classification_source==='source_text'&&x?.strategic_classification)||null;
     const filedPassages=Array.isArray(filed?.lenses)?filed.lenses.map(v=>clean(v?.passage)).filter(Boolean):[];
     const trendPassage=clean(filed?.trend_action_passage);
-    const fields=x?.headline?[x.headline,x.signal_note,x.why_it_matters]:[x?.title,x?.summary,x?.core_message,x?.bridge_sentence];
-    return [...filedPassages,trendPassage,...fields.map(clean).filter(Boolean)].filter((v,i,a)=>a.indexOf(v)===i).join(' ');
+    const fields=[x?.headline,x?.title,x?.summary,x?.core_message,x?.what,x?.signal_note,x?.why_it_matters,x?.bridge_sentence,x?.relevance_note,x?.eu_evidence,x?.ri_evidence,x?.geo_evidence,x?.a_context_evidence];
+    return [...filedPassages,trendPassage,...fields.map(clean).filter(Boolean)].filter((v,i,a)=>a.indexOf(v)===i);
+  }
+
+  function evidenceText(x){return evidenceParts(x).join(' ')}
+
+  function inferredOpportunityActor(raw,text){
+    const direct=firstMatch(text,OPP_ACTOR); if(direct) return direct;
+    const source=sourceFor(raw);
+    if(/European Commission|European Innovation Council|EuroHPC|Joint Research Centre|Council of the European Union|European Research Council|Marie Skłodowska-Curie|ERA Portal|European Investment Bank/i.test(source)) return source;
+    const title=titleFor(raw);
+    if(/^EU\b|^European (?:Commission|Union|Innovation Council|Research Council)|^EuroHPC/i.test(title)) return firstMatch(title,[/^EU\b/i,/^European [A-Za-z -]+/i,/^EuroHPC(?: Joint Undertaking)?/i])||source||'European Union';
+    return '';
   }
 
   function inferredLens(raw,kind,text){
@@ -190,12 +233,17 @@
       return {type:'external_shock',passage:t.slice(0,1200),shock_family:family?.label||'',shock_family_id:family?.id||'',shock_families:families,components:{discrete,event,externality,effect,speed},analysis_basis:'repository_evidence_interpretation',analysis_score:100};
     }
     if(kind==='risk'){
-      const mechanism=firstMatch(t,RISK_MECHANISM),carrier=firstMatch(t,RISK_CARRIER),asset=firstMatch(t,RISK_ASSET),conditional=firstMatch(t,RISK_FORWARD);
-      if(!(mechanism&&carrier&&asset&&conditional)) return null;
-      return {type:'risk',status:'open',passage:t.slice(0,1200),components:{mechanism,carrier,asset},analysis_basis:'repository_evidence_interpretation',analysis_score:100};
+      const mechanism=firstMatch(t,RISK_MECHANISM),asset=firstMatch(t,RISK_ASSET),conditional=firstMatch(t,RISK_FORWARD),loss=firstMatch(t,RISK_LOSS);
+      let carrier=firstMatch(t,RISK_CARRIER);
+      const structural=firstMatch(t,[/\blimited accessibility\b/i,/\bprecarity\b/i,/\bfragmentation\b/i,/\b(?:market|supplier|supply|platform|cloud|technology) concentration\b/i,/\bprocurement preferences?\b/i]);
+      if(structural&&/barriers?|fragmentation|precarity|limited|concentrat/i.test(mechanism)) carrier=structural;
+      if(!(mechanism&&carrier&&asset&&conditional&&loss)) return null;
+      if(/^fragmentation/i.test(mechanism)&&/^fragmentation/i.test(carrier)&&!/(constrain|barrier|loss|depend|vulnerab|expos|scarcity|shortage)/i.test(t)) return null;
+      if(/^foreign interference$/i.test(mechanism)&&/^foreign interference$/i.test(carrier)&&!/(obtain|acquire|extract|exploit|transfer|steal|loss|access to)/i.test(t)) return null;
+      return {type:'risk',status:'open',passage:t.slice(0,1200),components:{mechanism,carrier,asset,loss},analysis_basis:'repository_evidence_interpretation',analysis_score:100};
     }
     if(kind==='opportunity'){
-      const mechanism=firstMatch(t,OPP_MECHANISM),actor=firstMatch(t,OPP_ACTOR),instrument=firstMatch(t,OPP_INSTRUMENT),gain=firstMatch(t,OPP_GAIN),window=firstMatch(t,OPP_WINDOW);
+      const mechanism=firstMatch(t,OPP_MECHANISM),actor=inferredOpportunityActor(raw,t),instrument=firstMatch(t,OPP_INSTRUMENT),gain=firstMatch(t,OPP_GAIN),window=firstMatch(t,OPP_STRONG_WINDOW);
       if(!(mechanism&&actor&&instrument&&gain&&window)) return null;
       // An adopted measure is baseline unless the same retained evidence also identifies a live/open instrument window.
       if(any(t,OPP_BASELINE)&&!any(t,OPP_WINDOW)) return null;
@@ -331,11 +379,13 @@
   }
 
   function simplePriorityText(x){
-    const raw=clean(x?.coreMessage||x?.title||'');
-    return Insights?.readerPoint?.(raw)||Insights?.completeCoreMessage?.(raw)||raw||'The retained evidence does not provide a concise claim.';
+    const raw=clean(x?.title||x?.coreMessage||'');
+    const readable=Insights?.fastReaderText?.(raw)||Insights?.readerPoint?.(raw)||Insights?.completeCoreMessage?.(raw)||raw;
+    const text=clean(readable)||'Finding';
+    return text.length>180?text.slice(0,180).replace(/\s+\S*$/,'')+'…':text;
   }
 
   function simpleEvidenceText(x){return clean(x?.title||'')}
 
-  return {buildPriorityView,pathwayScore,diversifiedTop,simplePriorityText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,inferredLens,shockFamilies,primaryShockFamily};
+  return {buildPriorityView,pathwayScore,diversifiedTop,simplePriorityText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily};
 });

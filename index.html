@@ -50,20 +50,16 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
-<link rel="stylesheet" href="simple-ui.css?v=17.19.23">
-<style id="landing-v17179">
-.landing-hero{padding:0 0 38px!important}
-.landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #3a3a3a;margin-bottom:44px;min-height:54px}
-.landing-nav a{color:#fff;text-decoration:none;font-size:12px;font-weight:850;padding:17px 14px;border-left:1px solid #2d2d2d}
-.landing-nav a:hover{background:#171717;color:#ff4056}.landing-nav .top-stuff{background:#c40018;border-color:#c40018}.landing-nav .top-stuff:hover{background:#a90015;color:#fff}
-.landing-nav .lock{margin-left:auto;border-radius:0!important;border:0!important;border-left:1px solid #3a3a3a!important;padding:17px 14px!important}
-.landing-copy{max-width:1080px}.landing-copy h1{font-size:clamp(42px,6.4vw,78px)!important;line-height:.98!important;margin:9px 0 20px!important}.landing-copy .intro{max-width:980px!important;font-size:clamp(16px,1.8vw,20px)!important;line-height:1.45!important}.landing-copy .intro strong{color:#fff}
-.landing-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:#444;border:1px solid #444;margin-top:34px}
-.landing-choices a{display:block;background:#0b0b0b;color:#fff;text-decoration:none;padding:17px 18px;min-height:142px}.landing-choices a:hover{background:#151515}.landing-choices span{display:block;color:#ff4056;text-transform:uppercase;letter-spacing:.09em;font-size:9px;font-weight:950;margin-bottom:12px}.landing-choices strong{display:block;font-size:18px;line-height:1.1;margin-bottom:8px}.landing-choices small{display:block;color:#cfcfcf;font-size:12px;line-height:1.4}
-.landing-radar-link{display:inline-block;margin-top:18px;color:#fff!important;text-decoration:none;border-bottom:2px solid #c40018;padding-bottom:3px;font-size:13px;font-weight:900}
-#radar{padding-top:18px}.dashboard{margin-top:0!important}
-@media(max-width:980px){.landing-nav{flex-wrap:wrap;margin-bottom:30px}.landing-nav .lock{margin-left:0}.landing-choices{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.landing-choices{grid-template-columns:1fr}.landing-nav a,.landing-nav .lock{padding:12px 9px!important;font-size:10px}.landing-copy h1{font-size:42px!important}}
+<link rel="stylesheet" href="simple-ui.css?v=17.19.29">
+<style id="landing-v171929">
+.landing-hero{padding:0 0 30px!important}
+.landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #333;margin-bottom:30px;min-height:52px;flex-wrap:wrap}
+.landing-nav a{color:#fff;text-decoration:none;font-size:12px;font-weight:850;padding:16px 13px;border-left:1px solid #2d2d2d}
+.landing-nav a:hover{background:#171717}.landing-nav a.current{background:#c40018;border-color:#c40018;color:#fff}.landing-nav .top-stuff{border-right:1px solid #2d2d2d}
+.landing-nav .lock{margin-left:auto;border-radius:0!important;border:0!important;border-left:1px solid #3a3a3a!important;padding:16px 13px!important}
+.landing-copy{max-width:900px}.landing-copy h1{font-size:clamp(44px,7vw,82px)!important;line-height:.94!important;margin:8px 0 12px!important;letter-spacing:-.06em!important}.landing-copy .intro{max-width:760px!important;font-size:clamp(16px,1.8vw,20px)!important;line-height:1.35!important;margin:0!important;color:#fff!important}
+#radar{padding-top:16px}.dashboard{margin-top:0!important}
+@media(max-width:760px){.landing-nav .lock{margin-left:0}.landing-nav a,.landing-nav .lock{padding:12px 9px!important;font-size:10px}.landing-copy h1{font-size:44px!important}}
 </style>
 </head>
 <body>
@@ -84,30 +80,21 @@
     <header class="hero landing-hero">
       <div class="wrap">
         <nav class="landing-nav" aria-label="Main navigation">
-          <a href="read/">Read at least this</a>
-          <a href="#strand-c">Weak signals</a>
+          <a class="current" href="#radar" aria-current="page">Radar</a>
+          <a href="read/">Read</a>
           <a href="frontier/quick/">Matrix</a>
           <a href="priorities/">Risks &amp; opportunities</a>
           <a href="shocks/">External shocks</a>
-          <a href="historical/">Historical evidence</a>
+          <a href="historical/">Historical</a>
           <a href="literature/">Sources</a>
           <a class="top-stuff" href="stuff/">Stuff</a>
-          <button id="lock" class="lock">Lock radar</button>
+          <button id="lock" class="lock">Lock</button>
         </nav>
         <div class="landing-copy">
           <div class="kicker">MAIN RADAR</div>
-          <h1>This is the Main Radar for<br><span class="red">EU research &amp; innovation in geopolitical context.</span></h1>
-          <p class="intro">Start with the current picture, then move into the evidence. <strong>Read at least this</strong> shows the main issues. <strong>Weak signals</strong> brings early developments forward. <strong>Matrix</strong> shows Europe’s position. <strong>Risks &amp; opportunities</strong> shows actively scanned pathways to loss or gain. <strong>External shocks</strong> shows discrete outside events that have already imposed an effect. <strong>Historical evidence</strong> shows relevant findings published before the live radar timeframe.</p>
+          <h1>R&amp;I × Geopolitics<br><span class="red">Radar</span></h1>
+          <p class="intro">EU research &amp; innovation in geopolitical context.</p>
         </div>
-        <div class="landing-choices" aria-label="Choose a simple view">
-          <a href="read/"><span>Start here</span><strong>Read at least this</strong><small>The clearest current issues and the evidence behind them.</small></a>
-          <a href="#strand-c"><span>Watch early</span><strong>Weak signals</strong><small>New moves and emerging evidence that may change the picture.</small></a>
-          <a href="frontier/quick/"><span>Position</span><strong>Matrix</strong><small>Where Europe is gaining, relying, trading off or weakening.</small></a>
-          <a href="priorities/"><span>Pathways</span><strong>Risks &amp; opportunities</strong><small>Actively scanned pathways to loss or gain.</small></a>
-          <a href="shocks/"><span>Events</span><strong>External shocks</strong><small>Outside events whose material effect has already landed.</small></a>
-          <a href="historical/"><span>Before the live window</span><strong>Historical evidence</strong><small>Earlier findings discovered outside the current radar timeframe.</small></a>
-        </div>
-        <a class="landing-radar-link" href="#radar">Open the full Radar ↓</a>
       </div>
     </header>
 
