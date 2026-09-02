@@ -35,6 +35,9 @@ from dateutil.relativedelta import relativedelta
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from scanner_run_guard import defer_if_peer_scanner_active
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
 OUT_PATH = HIST_DIR / "historical.json"
@@ -868,4 +871,7 @@ def main() -> int:
     return 0
 
 
-if __name__=="__main__": raise SystemExit(main())
+if __name__=="__main__":
+    if defer_if_peer_scanner_active("historical", ROOT):
+        raise SystemExit(0)
+    raise SystemExit(main())

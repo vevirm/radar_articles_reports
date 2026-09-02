@@ -1,4 +1,12 @@
-v17.19.31 — WHOLE REPOSITORY ONLY
+UPLOAD THE WHOLE REPOSITORY
+===========================
 
-Upload the complete repository contents, including the hidden .github directory.
-Main and Historical scanners now share one queued concurrency lock; do not upload only visible files if workflow changes are intended.
+1. Unzip this package.
+2. Upload/replace the complete contents of the `radar_articles_reports-main` folder in GitHub.
+3. The package already contains the correct hidden `.github/workflows/` files.
+
+IMPORTANT
+---------
+GitHub browser bulk uploads have sometimes left hidden workflow YAML unchanged. v17.19.32 is hardened for that case: even if an older workflow remains on GitHub, the visible scanner code prevents Main and Historical from doing research simultaneously. The preferred/current workflow files are still included and should replace the old ones whenever GitHub accepts them.
+
+You do not need to upload separate patch files from ChatGPT. Use this whole repository package.

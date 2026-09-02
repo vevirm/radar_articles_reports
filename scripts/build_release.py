@@ -56,6 +56,7 @@ SCANNER_FILES = [
     "curator_candidate_tests.json",
     "requirements.txt",
     "scripts/scan_radar.py",
+    "scripts/scanner_run_guard.py",
     "scripts/generate_stuff_workbook.js",
     "scripts/frontier_coverage.js",
     "tests/test_scanner_features.py",

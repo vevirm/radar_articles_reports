@@ -88,6 +88,11 @@ except ModuleNotFoundError:  # lightweight offline/test fallback; normal install
             return types.SimpleNamespace(entries=entries)
     feedparser = _FeedParserCompat()
 import requests
+
+_SCRIPT_DIR = Path(__file__).resolve().parent
+if str(_SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPT_DIR))
+from scanner_run_guard import defer_if_peer_scanner_active
 from bs4 import BeautifulSoup
 from dateutil import parser as dateparser
 from dateutil.relativedelta import relativedelta
@@ -14782,4 +14787,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    _repo_root = Path(__file__).resolve().parents[1]
+    if defer_if_peer_scanner_active("main", _repo_root):
+        raise SystemExit(0)
     raise SystemExit(main())
