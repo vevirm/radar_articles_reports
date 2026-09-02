@@ -3776,6 +3776,46 @@ _OPPORTUNITY_WINDOW_CUES = [
     r"\bwhile the market is unconsolidated\b", r"\bas [^.;]{1,80} withdraws\b", r"\bvacuum left by\b", r"\bfirst credible alternative\b",
     r"\bapplications tripled\b", r"\boversubscribed\b", r"\binflow of\b", r"\bcurrently\b", r"\bnow\b",
 ]
+_SHOCK_FAMILY_PATTERNS = [
+    ('natural_disaster', 'Natural disasters', [
+        r"\bearthquake\b", r"\btsunami\b", r"\bvolcan(?:ic|o)\b", r"\blandslide\b",
+        r"\bflood(?:ing)?\b", r"\bwildfire\b", r"\bstorm\b", r"\bhurricane\b", r"\btyphoon\b", r"\bcyclone\b",
+    ]),
+    ('pandemic_epidemic', 'Pandemics and epidemics', [r"\bpandemic\b", r"\bepidemic\b", r"\bdisease outbreak\b", r"\bviral outbreak\b"]),
+    ('armed_conflict', 'Armed conflicts', [r"\barmed conflict\b", r"\bwar\b", r"\bfighting\b", r"\bmilitary strike\b", r"\bmissile strike\b", r"\binvasion\b"]),
+    ('terrorist_attack', 'Terrorist attacks', [r"\bterrorist attack\b", r"\bterror attack\b"]),
+    ('financial_crisis', 'Global financial crises', [r"\bglobal financial crisis\b", r"\bfinancial crisis\b", r"\bmarket crash\b", r"\bbanking crisis\b"]),
+    ('commodity_price', 'Commodity price shocks', [r"\bcommodity price (?:shock|spike|surge)\b", r"\bcritical mineral price (?:spike|surge)\b", r"\bmetal prices? (?:spiked|surged)\b"]),
+    ('energy_supply', 'Energy supply disruptions', [r"\benergy supply (?:disruption|shock)\b", r"\bpower supply (?:disruption|cut|outage)\b", r"\belectricity (?:shortage|outage|rationing)\b", r"\bgas supply (?:cut|disruption)\b"]),
+    ('food_supply', 'Food supply shocks', [r"\bfood supply (?:shock|disruption)\b", r"\bgrain (?:export|supply) (?:ban|halt|disruption)\b", r"\bwheat (?:export|supply) (?:ban|halt|disruption)\b"]),
+    ('trade_disruption', 'Trade disruptions', [r"\btrade (?:disruption|halt|interruption)\b", r"\bexport ban\b", r"\bimport ban\b", r"\bembargo\b", r"\bexport control list\b"]),
+    ('supply_chain', 'Supply chain disruptions', [r"\bsupply chain (?:disruption|breakdown|interruption)\b", r"\bsupply (?:cutoff|cut-off|interruption)\b", r"\bforce majeure\b", r"\ballocation cut\b"]),
+    ('currency_crisis', 'Currency crises', [r"\bcurrency crisis\b", r"\bcurrency collapse\b", r"\bexchange rate (?:collapse|shock)\b"]),
+    ('sanctions', 'International sanctions', [r"\binternational sanctions\b", r"\bsanctions? (?:were )?imposed\b", r"\bsecondary sanctions\b"]),
+    ('migration_refugee', 'Migration and refugee surges', [r"\brefugee surge\b", r"\bmigration surge\b", r"\bsudden inflow of refugees\b"]),
+    ('cyberattack', 'Cyberattacks', [r"\bcyberattack\b", r"\bcyber attack\b", r"\bransomware attack\b", r"\bmajor data breach\b", r"\bddos attack\b"]),
+    ('technological_disruption', 'Technological disruptions', [r"\btechnological disruption\b", r"\bcloud outage\b", r"\bplatform outage\b", r"\bsoftware outage\b", r"\bnetwork outage\b"]),
+    ('climate_shock', 'Climate-related shocks', [r"\bextreme heat\b", r"\bheatwave\b", r"\bsevere drought\b", r"\bextreme weather event\b", r"\bclimate-related shock\b"]),
+    ('neighbor_instability', 'Political instability in neighboring regions', [r"\bpolitical instability\b", r"\bgovernment fell\b", r"\bcoup\b", r"\bsnap election\b"]),
+    ('foreign_investment_withdrawal', 'Sudden foreign investment withdrawal', [r"\bforeign investment withdrawal\b", r"\bforeign investors? withdrew\b", r"\bcapital flight\b"]),
+    ('global_demand', 'Global demand shocks', [r"\bglobal demand shock\b", r"\bglobal demand (?:collapsed|fell sharply|slumped)\b", r"\bdemand collapse\b"]),
+    ('infrastructure_disruption', 'Major infrastructure disruptions', [r"\bmajor infrastructure disruption\b", r"\bpower grid outage\b", r"\bsubsea cable (?:cut|severed)\b", r"\bdata cent(?:re|er) outage\b", r"\btransport network (?:shutdown|closure)\b"]),
+]
+
+_SHOCK_INTENTION_NOISE = [
+    r"\bplans? to\b", r"\bintends? to\b", r"\bconsiders?\b", r"\bweighs?\b", r"\bmulls?\b",
+    r"\breportedly preparing\b", r"\bthreatens? to\b", r"\bwarns? that\b", r"\bsignals? willingness\b",
+    r"\bexpected to\b", r"\bslated for\b", r"\bon track to\b", r"\bin the coming months\b",
+]
+
+
+def external_shock_family(text: str) -> dict[str, str]:
+    low = normalized(text)
+    for family_id, label, patterns in _SHOCK_FAMILY_PATTERNS:
+        if _regex_any(low, patterns):
+            return {'id': family_id, 'label': label}
+    return {'id': '', 'label': ''}
+
 _SHOCK_EVENT_CUES = [
     r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bas of \d{1,2} [A-Za-z]+\b", r"\bentered into force\b",
     r"\btook effect\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b", r"\bwent offline\b", r"\bdeclared force majeure\b",
@@ -3787,6 +3827,12 @@ _SHOCK_EVENT_CUES = [
     r"\btrading halted\b", r"\bdefault(?:ed)?\b", r"\bfiled for bankruptcy\b", r"\bcollapsed\b", r"\btalks collapsed\b",
     r"\bwalked away from the deal\b", r"\bvetoed\b", r"\bfailed to ratify\b", r"\bgovernment fell\b", r"\bsnap election\b",
     r"\bresigned\b", r"\bborders closed\b", r"\bstrait closed\b", r"\bairspace closed\b",
+    r"\b(?:earthquake|tsunami|wildfire|flood|storm|hurricane|typhoon|cyclone|heatwave|extreme heat|severe drought) (?:hit|struck|forced|disrupted|closed|halted|shut)\b",
+    r"\b(?:pandemic|epidemic|disease outbreak) (?:was declared|hit|erupted|spread|forced|disrupted)\b",
+    r"\b(?:armed conflict|war|fighting|military strike|missile strike|terrorist attack) (?:hit|struck|forced|disrupted|destroyed|damaged)\b",
+    r"\b(?:cyberattack|cyber attack|ransomware attack) (?:hit|struck|disabled|disrupted|shut down)\b",
+    r"\b(?:financial crisis|market crash|currency crisis|demand collapse) (?:hit|triggered|forced|disrupted)\b",
+    r"\b(?:power|electricity|energy|gas|cloud|platform|network|grid|data cent(?:re|er)) (?:outage|failed|went offline|was disrupted|was cut)\b",
 ]
 _SHOCK_DISCRETE_CUES = [
     r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bwithout prior notice\b",
@@ -3796,6 +3842,9 @@ _SHOCK_DISCRETE_CUES = [
     r"\bon [A-Za-z]+ \d{1,2},? 20\d{2}\b",
     r"\bwent offline\b", r"\bdeclared force majeure\b", r"\bfiled for bankruptcy\b",
     r"\bgovernment fell\b", r"\bsnap election\b", r"\btalks collapsed\b", r"\btrading halted\b",
+    r"\b(?:today|yesterday|this morning|this afternoon|this evening|last night)\b",
+    r"\bon (?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b",
+    r"\b(?:earthquake|tsunami|wildfire|flood|storm|hurricane|typhoon|cyclone|heatwave|extreme heat) (?:hit|struck)\b",
 ]
 _SHOCK_EXTERNALITY_CUES = [
     r"\b(?:china|chinese|united states|u\.s\.|american|russia|russian|india|japan|taiwan|south korea|united kingdom|british|foreign)\b",
@@ -3803,15 +3852,27 @@ _SHOCK_EXTERNALITY_CUES = [
     r"\bcyber(?:attack| incident)\b", r"\bsabotage\b", r"\boutage\b", r"\bmarket collapse\b", r"\bstrike\b",
     r"\bforeign supplier\b", r"\bnon-eu supplier\b", r"\bexternal supplier\b", r"\boperator\b",
     r"\bsupplier\b", r"\bvendor\b", r"\bcompany\b", r"\bfirm\b",
+    r"\bextreme heat\b", r"\bpandemic\b", r"\bepidemic\b", r"\barmed conflict\b", r"\bterrorist attack\b",
+    r"\bfinancial crisis\b", r"\bcommodity price (?:shock|spike|surge)\b", r"\benergy supply disruption\b",
+    r"\bfood supply shock\b", r"\bsupply chain disruption\b", r"\bcurrency crisis\b", r"\brefugee surge\b",
+    r"\bransomware attack\b", r"\bcloud outage\b", r"\bpolitical instability\b", r"\bforeign investment withdrawal\b",
+    r"\bglobal demand shock\b", r"\bmajor infrastructure disruption\b",
 ]
 _SHOCK_EFFECT_CUES = [
     r"\bcut off\b", r"\bblocked\b", r"\brestrict(?:ed|ion)\b", r"\brevoked\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b",
     r"\bwent offline\b", r"\bsevered\b", r"\bclosed\b", r"\bprice (?:doubled|spiked|surged)\b", r"\btrading halted\b",
     r"\bstranded\b", r"\bseized\b", r"\bimpounded\b", r"\bexpelled\b", r"\bloss of\b", r"\bdisrupt(?:ed|ion)\b", r"\boutage\b",
+    r"\bforced [^.;]{0,120} to (?:close|shut down|halt|suspend|evacuate|cancel)\b",
+    r"\b(?:damaged|destroyed|disabled) (?:research|laborator|university|data|compute|infrastructure|equipment)\w*\b",
+    r"\b(?:research|laboratory|university|data|compute) (?:operations|access|services|experiments?) (?:were |was )?(?:halted|suspended|disrupted|cancelled|canceled|lost)\b",
+    r"\blost (?:power|access|connectivity|data|compute)\b", r"\bexperiments? (?:were )?(?:halted|suspended|cancelled|canceled)\b",
 ]
 _SHOCK_SPEED_CUES = [
     r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bwithout prior notice\b", r"\babruptly\b", r"\bunannounced\b", r"\bovernight\b",
     r"\bwent offline\b", r"\bshut down\b", r"\bcut off\b", r"\bsevered\b", r"\bcollapsed\b", r"\bclosed\b", r"\bhalted\b",
+    r"\bimmediately\b", r"\bwithin (?:minutes?|hours?)\b", r"\bin less than (?:an hour|\d+ hours?)\b",
+    r"\bforced [^.;]{0,120} to (?:close|shut down|halt|suspend|evacuate|cancel)\b",
+    r"\b(?:earthquake|tsunami|wildfire|flood|storm|hurricane|typhoon|cyclone|heatwave|extreme heat) (?:hit|struck)\b",
 ]
 _STRATEGIC_NOISE_CUES = [
     r"\bwake-up call\b", r"\balarm bells\b", r"\bexistential threat\b", r"\bcrossroads\b", r"\bcritical juncture\b",
@@ -3849,6 +3910,28 @@ def _regex_match(text: str, patterns: list[str]) -> str:
         if m:
             return clean_text(m.group(0))[:220]
     return ''
+
+def external_shock_components(text: str) -> dict[str, Any]:
+    low = normalized(text)
+    own_eu_action = bool(re.search(
+        r"\b(?:european commission|european union|\beu\b|council|member states?)\b.{0,80}\b(?:imposed|adopted|suspended|halted|closed|revoked|blocked)\b",
+        low, re.I,
+    ))
+    family = external_shock_family(low)
+    components = {
+        'discrete': _regex_match(low, _SHOCK_DISCRETE_CUES),
+        'event': _regex_match(low, _SHOCK_EVENT_CUES),
+        'externality': _regex_match(low, _SHOCK_EXTERNALITY_CUES),
+        'effect': _regex_match(low, _SHOCK_EFFECT_CUES),
+        'speed': _regex_match(low, _SHOCK_SPEED_CUES),
+    }
+    return {
+        'components': components,
+        'family': family,
+        'own_eu_action': own_eu_action,
+        'strict': bool(all(components.values()) and not own_eu_action),
+    }
+
 
 def _strategic_actor_key(text: str) -> str:
     low = normalized(text)
@@ -4009,6 +4092,59 @@ def strategic_pathway_candidate_text(text: str, a_corpus: list[dict[str, Any]] |
     return bool(scope_ok)
 
 
+def possible_external_shock_source_text(text: str) -> dict[str, Any] | None:
+    """Return a parked shock candidate when evidence is event-like but not yet fileable.
+
+    This is deliberately separate from ``external_shock``. A parked record must have a
+    recognised shock family plus a realised event/externality signal, but it is missing at
+    least one of the strict discreteness/effect/speed tests. Intention-only language is
+    excluded.
+    """
+    raw = clean_text(text)
+    if not raw:
+        return None
+    best: tuple[int, dict[str, Any], str] | None = None
+    for passage in _strategic_passages(raw):
+        low = normalized(passage)
+        if _regex_any(low, _SHOCK_INTENTION_NOISE):
+            continue
+        test = external_shock_components(passage)
+        family = test.get('family') or {}
+        parts = test.get('components') or {}
+        if test.get('own_eu_action') or test.get('strict') or not clean_text(family.get('label')):
+            continue
+        if not parts.get('event') or not parts.get('externality'):
+            continue
+        score = sum(1 for value in parts.values() if value)
+        if score < 3 or not (parts.get('discrete') or parts.get('effect') or parts.get('speed')):
+            continue
+        if best is None or score > best[0]:
+            best = (score, test, passage)
+    if best is None:
+        return None
+    score, test, passage = best
+    parts = test.get('components') or {}
+    family = test.get('family') or {}
+    return {
+        'type': 'possible_external_shock',
+        'passage': clean_text(passage)[:900],
+        'shock_family': clean_text(family.get('label')),
+        'shock_family_id': clean_text(family.get('id')),
+        'components': parts,
+        'missing_tests': [name for name, value in parts.items() if not value],
+        'tests_passed': score,
+        'status': 'parked',
+    }
+
+
+def possible_external_shock_candidate_text(text: str, a_corpus: list[dict[str, Any]] | None = None) -> bool:
+    candidate = possible_external_shock_source_text(text)
+    if not candidate:
+        return False
+    scope_ok, _ = strategic_pathway_scope_gate(text, a_corpus)
+    return bool(scope_ok)
+
+
 def strategic_pathway_identity(item: dict[str, Any]) -> str:
     link = normalized_link(item.get('link', ''))
     if link:
@@ -4063,6 +4199,95 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
         'eu_evidence': eu_hits[:4],
         'eu_ri_scope_basis': scope_basis,
     }
+
+
+def external_shock_watch_record(item: dict[str, Any], a_corpus: list[dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    if not isinstance(item, dict):
+        return None
+    title = clean_text(item.get('title') or item.get('headline'))
+    if not title:
+        return None
+    source_text = clean_text(item.get('_strategic_source_text')) or clean_text(
+        f"{title}. {item.get('_desc') or item.get('summary') or item.get('signal_note') or item.get('what') or ''}"
+    )
+    candidate = possible_external_shock_source_text(source_text)
+    if not candidate:
+        return None
+    quality_ok, quality_basis = strategic_source_quality_gate(item)
+    if not quality_ok:
+        return None
+    scope_ok, scope_basis = strategic_pathway_scope_gate(source_text, a_corpus)
+    if not scope_ok:
+        return None
+    eu_rel, eu_hits = eu_evidence('', source_text, '')
+    if eu_rel != 'direct' and eu_news_scope(source_text):
+        eu_rel, eu_hits = 'direct', ['direct European scope in source text']
+    return {
+        'title': title,
+        'source': clean_text(item.get('source')),
+        'date': clean_text(item.get('date') or item.get('first_seen')),
+        'link': clean_text(item.get('link')),
+        'discovery_provenance': clean_text(item.get('discovery_provenance') or item.get('_discovery_provenance') or 'scanner'),
+        'status': 'possible_external_shock',
+        'shock_watch': candidate,
+        'source_quality_gate': {'admissible': True, 'basis': quality_basis},
+        'eu_relevance': eu_rel or ('material_external' if scope_basis == 'material_external_europe_effect' else None),
+        'eu_evidence': eu_hits[:4],
+        'eu_ri_scope_basis': scope_basis,
+    }
+
+
+def build_external_shock_watch(
+    previous_records: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    strict_records: list[dict[str, Any]],
+    now_iso: str,
+    a_corpus: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    """Keep a short-lived queue of possible shocks without filing them as shocks."""
+    strict_ids = {
+        strategic_pathway_identity(row)
+        for row in strict_records or []
+        if isinstance(row, dict) and any(
+            isinstance(lens, dict) and clean_text(lens.get('type')) == 'external_shock'
+            for lens in ((row.get('strategic_classification') or {}).get('lenses') or [])
+        )
+    }
+    now_date = parse_date(now_iso) or dt.datetime.now(dt.timezone.utc).date()
+    retention_days = max(1, int(CONFIG.get('external_shock_watch_retention_days', 30) or 30))
+    floor = now_date - dt.timedelta(days=retention_days)
+    by_id: dict[str, dict[str, Any]] = {}
+    prior_ids: set[str] = set()
+    for old in previous_records or []:
+        if not isinstance(old, dict):
+            continue
+        sid = strategic_pathway_identity(old)
+        if not sid or sid in strict_ids:
+            continue
+        d = parse_date(old.get('date') or old.get('first_seen'))
+        if d and d < floor:
+            continue
+        row = dict(old)
+        row['new_this_scan'] = False
+        by_id[sid] = row
+        prior_ids.add(sid)
+    for raw in candidates or []:
+        rec = external_shock_watch_record(raw, a_corpus)
+        if not rec:
+            continue
+        sid = strategic_pathway_identity(rec)
+        if not sid or sid in strict_ids:
+            continue
+        d = parse_date(rec.get('date'))
+        if d and d < floor:
+            continue
+        old = by_id.get(sid)
+        rec['first_seen'] = clean_text((old or {}).get('first_seen')) or clean_text(raw.get('first_seen')) or now_iso
+        rec['new_this_scan'] = sid not in prior_ids
+        by_id[sid] = rec
+    rows = list(by_id.values())
+    rows.sort(key=lambda x: (bool(x.get('new_this_scan')), clean_text(x.get('date'))), reverse=True)
+    return rows
 
 
 def build_strategic_pathway_corpus(
@@ -4173,20 +4398,13 @@ def classify_strategic_source_text(text: str) -> dict[str, Any]:
                 'transition_key': _strategic_transition_key(passage),
             }
 
-        own_eu_action = bool(re.search(
-            r"\b(?:european commission|european union|\beu\b|council|member states?)\b.{0,80}\b(?:imposed|adopted|suspended|halted|closed|revoked|blocked)\b",
-            low, re.I,
-        ))
-        shock_parts = {
-            'discrete': _regex_match(low, _SHOCK_DISCRETE_CUES),
-            'event': _regex_match(low, _SHOCK_EVENT_CUES),
-            'externality': _regex_match(low, _SHOCK_EXTERNALITY_CUES),
-            'effect': _regex_match(low, _SHOCK_EFFECT_CUES),
-            'speed': _regex_match(low, _SHOCK_SPEED_CUES),
-        }
-        if all(shock_parts.values()) and not own_eu_action and shock_lens is None:
+        shock_test = external_shock_components(passage)
+        shock_parts = shock_test['components']
+        if shock_test['strict'] and shock_lens is None:
             shock_lens = {
                 'type': 'external_shock', 'passage': passage[:900], 'components': shock_parts,
+                'shock_family': clean_text((shock_test.get('family') or {}).get('label')),
+                'shock_family_id': clean_text((shock_test.get('family') or {}).get('id')),
                 'transition_key': _strategic_transition_key(passage),
             }
 
@@ -10876,7 +11094,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     title = title[:-(len(suffix) + 3)].strip()
             text = f"{title}. {desc}"
             strict_strategic = bool(strategic_target and strategic_pathway_candidate_text(text))
-            if not title or not (factual_news(title, desc) or strict_strategic):
+            shock_watch = bool(strategic_target and possible_external_shock_candidate_text(text))
+            if not title or not (factual_news(title, desc) or strict_strategic or shock_watch):
                 continue
             signal_key = f"signal:{normalized(source_name)}:{norm_title(title)}"
             if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -10893,7 +11112,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "_themes": themes_for(text),
                 "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
                 "_strategic_discovery": strict_strategic,
-                "_strategic_source_text": text if strict_strategic else "",
+                "_shock_watch_discovery": shock_watch,
+                "_strategic_source_text": text if (strict_strategic or shock_watch) else "",
             })
         return items, None
 
@@ -10976,7 +11196,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     continue
                 text = f"{title}. {desc}"
                 strict_strategic = strategic_pathway_candidate_text(text)
-                if not title or not (factual_news(title, desc) or strict_strategic):
+                shock_watch = possible_external_shock_candidate_text(text)
+                if not title or not (factual_news(title, desc) or strict_strategic or shock_watch):
                     continue
                 signal_key = f"signal:{normalized(name)}:{norm_title(title)}"
                 if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -10994,7 +11215,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
                     "_direct_source": True,
                     "_strategic_discovery": strict_strategic,
-                    "_strategic_source_text": text if strict_strategic else "",
+                    "_shock_watch_discovery": shock_watch,
+                    "_strategic_source_text": text if (strict_strategic or shock_watch) else "",
                 })
             except Exception:
                 continue
@@ -13975,6 +14197,18 @@ def main() -> int:
         now_iso,
         strand_a,
     )
+    previous_shock_watch = previous.get('external_shock_watch', []) if isinstance(previous.get('external_shock_watch'), list) else []
+    shock_watch_candidates = [
+        x for x in news
+        if isinstance(x, dict) and x.get('_shock_watch_discovery')
+    ]
+    external_shock_watch = build_external_shock_watch(
+        previous_shock_watch,
+        shock_watch_candidates,
+        strategic_pathways,
+        now_iso,
+        strand_a,
+    )
     strategic_risks_closed_into_shocks = sum(
         1 for x in strategic_pathways
         for lens in ((x.get('strategic_classification') or {}).get('lenses') or [])
@@ -14292,6 +14526,8 @@ def main() -> int:
             "strategic_risks": int(strategic_counts.get('risk', 0)),
             "strategic_opportunities": int(strategic_counts.get('opportunity', 0)),
             "external_shocks": int(strategic_counts.get('external_shock', 0)),
+            "possible_external_shocks": len(external_shock_watch),
+            "new_possible_external_shocks": sum(1 for x in external_shock_watch if x.get('new_this_scan')),
             "aged_out_this_scan": {k: int(v) for k, v in age_window_removed.items()},
             "aged_out_total_this_scan": int(sum(age_window_removed.values())),
             "extended_highest_retained_a": int(extended_a_kept),
@@ -14363,6 +14599,7 @@ def main() -> int:
         "strand_c": strand_c,
         "frontier_evidence": frontier_evidence,
         "strategic_pathways": strategic_pathways,
+        "external_shock_watch": external_shock_watch,
         "stats": {
             "openalex_admitted_before_dedupe": len(oa),
             "openalex_public_anonymous": not bool(OPENALEX_API_KEY),
@@ -14473,6 +14710,8 @@ def main() -> int:
             "strategic_pathway_news_candidates_this_run": sum(1 for x in news if isinstance(x, dict) and x.get('_strategic_discovery')),
             "strategic_pathway_scholarly_queries_this_run": len(strategic_scholarly_focus),
             "strategic_pathway_records_total": len(strategic_pathways),
+            "external_shock_watch_records_total": len(external_shock_watch),
+            "external_shock_watch_candidates_this_run": len(shock_watch_candidates),
             "frontier_gap_queries_this_run": len(frontier_focus["queries"]),
             "frontier_gap_scholarly_queries_this_run": len(frontier_focus.get("scholarly_queries", [])),
             "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",

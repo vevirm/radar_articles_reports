@@ -6,6 +6,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "radar-scan.yml"
+HIST_WORKFLOW = ROOT / ".github" / "workflows" / "historical-scan.yml"
 SCAN_PATH = ROOT / "scripts" / "scan_radar.py"
 
 spec = importlib.util.spec_from_file_location("radar_scan_security_test_module", SCAN_PATH)
@@ -51,6 +52,25 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
             self.assertEqual(adjusted.isoformat(), '2026-09-01T18:17:00+00:00')
             self.assertLess((scan.dt.datetime(2026, 9, 1, 23, 17, tzinfo=scan.dt.timezone.utc) - adjusted).total_seconds(), 6 * 3600)
             self.assertEqual((scan.dt.datetime(2026, 9, 2, 0, 17, tzinfo=scan.dt.timezone.utc) - adjusted).total_seconds(), 6 * 3600)
+
+    def test_main_and_historical_are_serialized_across_complete_rescue_cycles(self):
+        main = WORKFLOW.read_text(encoding="utf-8")
+        hist = HIST_WORKFLOW.read_text(encoding="utf-8")
+        for text in (main, hist):
+            self.assertIn("group: ri-research-scanners", text)
+            self.assertIn("cancel-in-progress: false", text)
+            self.assertIn("queue: max", text)
+        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", main)
+        self.assertIn("cron: '53 6 * * *'", hist)
+        self.assertIn("rescue_needed: ${{ steps.rescue.outputs.dispatch }}", main)
+        self.assertIn("rescue_needed: ${{ steps.rescue.outputs.dispatch }}", hist)
+        self.assertIn("RADAR_RESCUE_MODE: 'true'", main)
+        self.assertIn("HISTORICAL_RESCUE_MODE: 'true'", hist)
+        self.assertNotIn("/actions/workflows/radar-scan.yml/dispatches", main)
+        self.assertNotIn("/actions/workflows/historical-scan.yml/dispatches", hist)
+        # Rescue jobs must check out the latest main branch after the normal round commits.
+        self.assertRegex(main.split("  rescue:", 1)[1], r"ref: main")
+        self.assertRegex(hist.split("  rescue:", 1)[1], r"ref: main")
 
     def test_cumulative_retention_is_enforced_in_scanner_even_with_legacy_workflow(self):
         old_a = {"title": "Old accepted A", "date": "2024-01-01", "link": "https://example.org/a"}

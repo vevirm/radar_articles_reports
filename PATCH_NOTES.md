@@ -1,31 +1,26 @@
-# v17.19.30
+# v17.19.31
 
-## Clearer Matrix + quieter reader presentation
+## Serialized scanners + active external-shock recall
 
-This release changes the **analytical/editorial representation layer only**. The mature scanner/research engine, source rotation, admission logic, phrase rules and GitHub Actions workflows are unchanged.
+### Main / Historical queueing
+- Main and Historical now share the workflow-level concurrency group `ri-research-scanners`.
+- `queue: max` keeps waiting manual/scheduled runs queued rather than replacing an already pending scan.
+- `cancel-in-progress: false` means neither scanner kills the other.
+- Main automatic runs use the fixed four-hour UTC schedule: `00:17, 04:17, 08:17, 12:17, 16:17, 20:17`.
+- Historical runs daily at `06:53 UTC`, between Main's 04:17 and 08:17 slots.
+- Low-yield rescue scans no longer dispatch a second workflow run. The rescue is a second job inside the same workflow run, so the shared scanner lock remains held from the normal round through the rescue round.
+- Rescue jobs explicitly check out the latest `main` after the normal round has committed, preserving cumulative scanner state.
+- Manually running Main still starts Main only; Historical starts only from its own schedule/push/manual trigger and waits if Main is active.
 
-### Matrix
-- Quick Matrix points are rewritten as plain reader statements capped at **80 characters**.
-- The Quick Matrix shows at most four distinct points per cell; repeated equivalent points are grouped and the remainder links to the Full Matrix.
-- Long publication titles are no longer used as the default Matrix summary when a clearer evidence statement can be made.
-- The Full Matrix removes the repeated **Why this cell** paragraph from every item.
-- Full Matrix cards lead with the same concise point, followed only by compact source/date/type metadata; deeper placement methodology is collapsed below the Matrix.
-- Matrix placement remains independent from Risks & Opportunities and External Shocks.
-
-### Read + Main Radar
-- **Read** is now a short issue view of established Radar evidence only. The separate weak-signal/Strand C module has been removed from this page.
-- Main Radar Strand B is presented as **Ways to look ahead**, with a concise method insight and a practical **Use** line rather than dry source metadata first.
-- Main Radar Strand C is presented as **Early moves to watch**, with a concise point and one short **Why watch** line; details stay behind More info.
-- Reader navigation keeps **Radar** first and removes the old weak-signal navigation entry.
-
-### Visual cleanup
-- Reader surfaces use a restrained **white / black / red** system. Blue-toned and pastel interface colors were removed from reader HTML/CSS.
-- Large gray orientation blocks and decorative reader panels remain removed.
-- Reader assets use the v17.19.30 cache-buster and no-cache metadata so GitHub Pages does not keep serving old presentation assets after upload.
+### External shocks
+- Active strategic-news discovery now includes the full shock-family range rather than primarily policy/trade shocks: natural disasters, extreme heat/heatwaves, pandemics, conflict, terrorism, financial/commodity/energy/food shocks, trade/supply-chain/currency disruptions, sanctions, migration surges, cyber/technology incidents, political instability, investment withdrawal, demand shocks and infrastructure failures.
+- Strict shock filing still requires all core tests: discrete, external, realised effect and speed (plus a realised event marker).
+- The source-text classifier now recognises exogenous event language such as heatwaves striking, earthquakes/floods/wildfires, cyberattacks, outages and forced research-facility shutdowns.
+- A separate `external_shock_watch` stores short-lived **possible shocks** when trusted direct-EU R&I evidence identifies a recognised realised event but one strict filing test is still missing. These records are parked, not counted as filed shocks.
+- External Shocks now shows `filed · possible` and a concise Possible shocks section.
+- Possible-shock retention is 30 days.
 
 ### Validation
-- Main regression suite: **181/181 passing**.
-- Historical regression suite: **19/19 passing**.
-- Runtime regression checks every current Matrix point and fails if any exceeds 80 characters.
-- JavaScript syntax, inline page scripts, Python compilation, release validation and ZIP integrity pass.
-- `scan_radar.py`, scanner config, phrase rules and both workflow files are verified byte-for-byte unchanged from the uploaded v17.19.29 source of truth.
+- Main regression suite: 185 tests passing.
+- Historical regression suite: 19 tests passing.
+- Workflow contract validates the shared lock, queueing, separated schedule and in-workflow rescue behavior.

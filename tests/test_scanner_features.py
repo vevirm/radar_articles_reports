@@ -1973,6 +1973,45 @@ class StrategicSignalClassificationTests(unittest.TestCase):
         out = scan.classify_strategic_source_text(text)
         self.assertEqual(out["primary"], "external_shock")
 
+    def test_extreme_heat_can_be_a_strict_external_shock_when_ri_effect_has_landed(self):
+        text = (
+            "On 2 September 2026, extreme heat struck southern Europe and forced European university "
+            "research laboratories to shut down immediately, halting experiments."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertEqual(out["primary"], "external_shock")
+        lens = out["lenses"][0]
+        self.assertEqual(lens.get("shock_family"), "Climate-related shocks")
+        self.assertTrue(all(lens.get("components", {}).values()))
+
+    def test_extreme_heat_can_be_parked_as_possible_shock_until_effect_is_confirmed(self):
+        text = (
+            "Extreme heat hit southern Europe this week. European university research laboratories "
+            "reported cooling stress and possible closures."
+        )
+        self.assertNotEqual(scan.classify_strategic_source_text(text)["primary"], "external_shock")
+        candidate = scan.possible_external_shock_source_text(text)
+        self.assertIsNotNone(candidate)
+        self.assertEqual(candidate.get("shock_family"), "Climate-related shocks")
+        self.assertIn("effect", candidate.get("missing_tests", []))
+        self.assertTrue(scan.possible_external_shock_candidate_text(text))
+
+    def test_possible_shock_watch_is_separate_from_filed_shocks(self):
+        item = {
+            "headline": "Extreme heat hits European university laboratories",
+            "source": "Reuters",
+            "link": "https://reuters.com/example-heat",
+            "date": "2026-09-02",
+            "_strategic_source_text": (
+                "Extreme heat hit southern Europe this week. European university research laboratories "
+                "reported cooling stress and possible closures."
+            ),
+        }
+        watch = scan.build_external_shock_watch([], [item], [], "2026-09-02T12:00:00Z", [])
+        self.assertEqual(len(watch), 1)
+        self.assertEqual(watch[0].get("status"), "possible_external_shock")
+        self.assertEqual((watch[0].get("shock_watch") or {}).get("shock_family"), "Climate-related shocks")
+
     def test_eu_own_policy_move_is_not_external_shock(self):
         text = (
             "The European Commission imposed new research-security conditions with immediate effect, "
@@ -2020,6 +2059,11 @@ class StrategicSignalClassificationTests(unittest.TestCase):
         self.assertTrue(any("could restrict" in q.lower() or "subject to approval" in q.lower() for q in news))
         self.assertTrue(any("could leverage" in q.lower() or "regulatory sandbox" in q.lower() for q in news))
         self.assertTrue(any("immediate effect" in q.lower() or "cut off" in q.lower() for q in news))
+        self.assertTrue(any("extreme heat" in q.lower() or "heatwave" in q.lower() for q in news))
+        self.assertTrue(any("cyberattack" in q.lower() or "ransomware" in q.lower() for q in news))
+        self.assertTrue(any("energy supply" in q.lower() or "power outage" in q.lower() for q in news))
+        self.assertTrue(any("pandemic" in q.lower() or "epidemic" in q.lower() for q in news))
+        self.assertGreaterEqual(len(news), 30)
         self.assertGreaterEqual(len(scholarly), 4)
 
     def test_active_pathway_corpus_can_file_items_without_main_radar_admission(self):
