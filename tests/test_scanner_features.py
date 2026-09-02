@@ -457,7 +457,7 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertNotIn("Joint Research Centre", kept.get("core_message", ""))
 
     def test_signal_quality_version_triggers_new_c_cleanup(self):
-        self.assertIn("v17.17.5", scan.SIGNAL_QUALITY_PROFILE_VERSION)
+        self.assertIn("v17.19.18", scan.SIGNAL_QUALITY_PROFILE_VERSION)
         self.assertTrue(scan.needs_precision_signal_cleanup({
             "signal_quality_profile_version": "v17.17.0-relational-c-ontology-guarded"
         }))
@@ -1535,8 +1535,19 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         html=(ROOT/'index.html').read_text(encoding='utf-8')
         self.assertIn('<strong>Source:</strong>', html)
         self.assertIn('<strong>What happened:</strong>', html)
-        self.assertIn('automatic every 4 hours', html.lower())
-        self.assertIn('60 days from first insertion', html)
+        self.assertNotIn('automatic every 4 hours', html.lower())
+        self.assertNotIn('60 days from first insertion', html)
+
+    def test_history_is_public_and_weak_signals_are_prominent(self):
+        main=(ROOT/'index.html').read_text(encoding='utf-8')
+        read=(ROOT/'read'/'index.html').read_text(encoding='utf-8')
+        history=(ROOT/'history'/'index.html').read_text(encoding='utf-8')
+        self.assertIn('href="history/"', main)
+        self.assertLess(main.find('id="strand-c"'), main.find('id="strand-b"'))
+        self.assertIn('Weak signals to watch', read)
+        self.assertIn("fetch('../radar.json?ts='+Date.now()", history)
+        self.assertIn('scan_history', history)
+        self.assertIn('Older evidence archive', history)
 
     def test_nature_and_science_remain_first_class_sources(self):
         direct={x.get('name'):x for x in scan.CONFIG.get('direct_top_journal_sources',[])}
@@ -1787,5 +1798,120 @@ class V171913CadenceJournalAndCorpusCleanupTests(unittest.TestCase):
         nxt = scan.next_automatic_scan_slot(after)
         self.assertEqual(nxt.isoformat(), '2026-09-01T20:17:00+00:00')
         html = (ROOT / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('id="scheduleState"', html)
-        self.assertIn('Next automatic', html)
+        self.assertNotIn('id="scheduleState"', html)
+        self.assertNotIn('Next automatic', html)
+        stuff = (ROOT / 'stuff' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('Stuff', stuff)
+
+
+class StrategicSignalClassificationTests(unittest.TestCase):
+    def test_risk_requires_mechanism_carrier_and_asset(self):
+        text = (
+            "European laboratories are dependent on a sole supplier for advanced lithography components. "
+            "Access is subject to United States export licences and the government could restrict approvals, "
+            "which would deny access to the supply line."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertEqual(out["primary"], "risk")
+        self.assertTrue(any(x["type"] == "risk" for x in out["lenses"]))
+
+    def test_alarm_without_pathway_is_not_risk(self):
+        out = scan.classify_strategic_source_text(
+            "Experts warn Europe is at a critical juncture and cannot afford to fall behind in quantum technology."
+        )
+        self.assertEqual(out["primary"], "")
+        self.assertEqual(out["lenses"], [])
+
+    def test_opportunity_requires_actionable_instrument_actor_and_gain(self):
+        text = (
+            "The European Commission could leverage the existing EuroHPC procurement instrument. "
+            "Procurement could scale European compute capacity and strengthen research access; "
+            "co-funding is available now for participating centres."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertEqual(out["primary"], "opportunity")
+        self.assertTrue(any(x["type"] == "opportunity" for x in out["lenses"]))
+
+    def test_aspiration_without_instrument_is_not_opportunity(self):
+        out = scan.classify_strategic_source_text(
+            "Europe has the potential to become a global leader in biotechnology and must seize the opportunity."
+        )
+        self.assertEqual(out["primary"], "")
+
+    def test_external_shock_requires_external_imposed_fast_effect(self):
+        text = (
+            "The United States imposed an export ban with immediate effect. "
+            "European research centres were cut off from access to the controlled accelerators overnight."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertEqual(out["primary"], "external_shock")
+
+    def test_eu_own_policy_move_is_not_external_shock(self):
+        text = (
+            "The European Commission imposed new research-security conditions with immediate effect, "
+            "restricting access to several EU-funded facilities."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertNotEqual(out["primary"], "external_shock")
+
+    def test_climate_action_is_trend_context_not_generic_news(self):
+        text = (
+            "The European Investment Bank launched a new programme funding climate adaptation research infrastructure. "
+            "The investment builds laboratory resilience against extreme weather and climate change."
+        )
+        out = scan.classify_strategic_source_text(text)
+        self.assertIn("climate_change", out["trend_context"])
+        self.assertTrue(out["trend_action"])
+
+    def test_weak_signal_drops_plan_without_pathway_or_action(self):
+        self.assertFalse(scan.weak_signal_candidate_text(
+            "Europe plans to become a global leader in quantum",
+            "Experts warn the stakes could not be higher and the initiative is expected in the coming months."
+        ))
+
+    def test_weak_signal_keeps_proposal_when_strict_risk_pathway_is_present(self):
+        title = "US proposes tighter export licensing for advanced chips"
+        desc = (
+            "European laboratories are dependent on a sole supplier for advanced chips. "
+            "Licences require US government approval and the proposal could restrict approvals, "
+            "which would deny access to the supply line."
+        )
+        self.assertTrue(scan.weak_signal_candidate_text(title, desc))
+
+    def test_weak_signal_attention_budget_is_raised(self):
+        self.assertGreaterEqual(scan.CONFIG.get("c_min_new_per_successful_scan", 0), 2)
+        self.assertGreaterEqual(scan.CONFIG.get("max_c_per_scan", 0), 12)
+        self.assertGreaterEqual(scan.CONFIG.get("weak_signal_evidence_followup_per_scan", 0), 10)
+        self.assertGreaterEqual(scan.CONFIG.get("c_floor_rescue_queries_per_wave", 0), 6)
+        self.assertTrue(any("climate" in q.lower() for q in scan.CONFIG.get("c_floor_rescue_queries", [])))
+
+class StrategicSignalGuardrailTests(unittest.TestCase):
+    def test_opportunity_without_named_actor_fails_even_with_procurement_phrase(self):
+        out = scan.classify_strategic_source_text(
+            "Procurement could leverage existing capacity and strengthen European compute access; co-funding is available now."
+        )
+        self.assertNotEqual(out["primary"], "opportunity")
+
+    def test_climate_action_can_be_a_weak_signal_theme_with_ri_and_strategic_stakes(self):
+        text = (
+            "The EU launched climate adaptation research infrastructure funding to strengthen resilience "
+            "and reduce strategic dependencies in critical research facilities."
+        )
+        themes = set(scan.themes_for(text))
+        self.assertIn("climate transition / adaptation", themes)
+        self.assertTrue(scan.strong_watch_signal_text(text, themes))
+
+    def test_routine_new_pi_profile_is_hard_excluded(self):
+        title = "Meet our new PIs: Simone Parisi on intelligent exploration, autonomy, and AI awareness"
+        self.assertEqual(
+            scan.document_exclusion_reason(title, "Simone Parisi joined a European institute."),
+            "hard exclusion: routine personnel profile",
+        )
+        self.assertTrue(scan._saved_ab_high_confidence_precision_reject({
+            "title": title,
+            "summary": "Simone Parisi joined ELLIS Institute Finland and Tampere University in April 2026.",
+            "type": "institutional report",
+            "date": "2026-06-05",
+            "link": "https://example.org/pi",
+            "source": "ELLIS Institute Finland",
+        }))

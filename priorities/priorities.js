@@ -78,23 +78,35 @@
   function buildPriorityView(data,opts={}){
     const frontier=Frontier.buildFrontier(data,opts);
     const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(12,Math.floor(opts.limit))):10;
+    const types=x=>{
+      const c=x?.strategicClassification;
+      if(!c||typeof c!=='object') return null; // legacy evidence: Matrix fallback below
+      const out=new Set((c.lenses||[]).map(v=>clean(v?.type)).filter(Boolean));
+      if(clean(c.primary)) out.add(clean(c.primary));
+      return out;
+    };
     const allOpportunities=frontier.signals
-      .filter(x=>x.column.id==='A')
+      .filter(x=>{const t=types(x);return t?t.has('opportunity'):x.column.id==='A'})
       .sort((a,b)=>structuralScore(b)-structuralScore(a)||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
     const severity={D:3,C:2,B:1};
     const allRisks=frontier.signals
-      .filter(x=>x.column.id!=='A')
+      .filter(x=>{const t=types(x);return t?t.has('risk'):x.column.id!=='A'})
       .sort((a,b)=>(severity[b.column.id]||0)-(severity[a.column.id]||0)||structuralScore(b)-structuralScore(a)||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
+    const externalShocks=frontier.signals
+      .filter(x=>types(x)?.has('external_shock'))
+      .sort((a,b)=>String(b.date).localeCompare(String(a.date))||structuralScore(b)-structuralScore(a));
     const opportunities=diversifiedTop(allOpportunities,limit,2);
     const risks=diversifiedTop(allRisks,limit,2);
     return {
       frontier,
       opportunities,
       risks,
+      externalShocks,
       stats:{
         cumulativeQualifying:frontier.signals.length,
         opportunities:allOpportunities.length,
         risks:allRisks.length,
+        externalShocks:externalShocks.length,
         shownOpportunities:opportunities.length,
         shownRisks:risks.length,
         doubleLoss:allRisks.filter(x=>x.column.id==='D').length,

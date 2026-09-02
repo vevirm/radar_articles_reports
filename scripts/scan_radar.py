@@ -1843,6 +1843,10 @@ WATCH_SIGNAL_THEMES = {
     "Horizon Europe / FP10 international participation",
     "science diplomacy",
     "research talent / mobility / brain drain",
+    "climate transition / adaptation",
+    "energy transition / strategic capability",
+    "demographic change / research workforce",
+    "biosecurity / health resilience",
 }
 GEO_ACTORS = [
     "china", "chinese", "united states", "u.s.", " us ", "russia", "russian", "japan",
@@ -1869,6 +1873,10 @@ THEMES = {
         "overseas researchers", "return fellowship", "return fellowships", "re-entry fellowship", "reentry fellowship",
         "brain drain", "brain gain", "talent retention", "talent attraction", "research careers"
     ],
+    "climate transition / adaptation": ["climate change", "climate adaptation", "climate mitigation", "extreme weather", "decarbonisation", "decarbonization", "net zero", "climate resilience"],
+    "energy transition / strategic capability": ["energy transition", "clean energy", "renewable energy", "electrification", "hydrogen", "grid capacity", "energy resilience"],
+    "demographic change / research workforce": ["demographic change", "ageing", "aging", "population decline", "skills shortage", "talent shortage", "research workforce"],
+    "biosecurity / health resilience": ["biosecurity", "pandemic preparedness", "health security", "biomanufacturing resilience", "medical supply resilience"],
     "foresight / horizon scanning methodology": ["foresight methodology", "foresight method", "strategic foresight", "horizon scanning", "weak signal"],
     "scenario methods under uncertainty": ["scenario method", "scenario methodology", "scenario planning", "scenario design", "scenario construction", "uncertainty"],
     "anticipatory governance / strategic intelligence": ["anticipatory governance", "strategic intelligence", "anticipatory intelligence", "risk assessment"],
@@ -1877,6 +1885,8 @@ SPECIFIC_ANCHOR_THEMES = {
     "research security / foreign interference", "export controls / dual use",
     "Horizon Europe / FP10 international participation", "science diplomacy",
     "EU–China S&T cooperation / de-risking", "research talent / mobility / brain drain",
+    "climate transition / adaptation", "energy transition / strategic capability",
+    "demographic change / research workforce", "biosecurity / health resilience",
 }
 ENTITY_TERMS = [
     "china", "united states", "u.s.", "horizon europe", "fp10", "quantum", "semiconductor",
@@ -2742,6 +2752,8 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
         return "hard exclusion: facility/laboratory page"
     if "project" in title_low and not re.search(r"\b(report|paper|analysis|study|foresight|policy)\b", title_low):
         return "hard exclusion: project page"
+    if re.search(r"\b(?:meet our new (?:pis?|principal investigators?)|meet the new (?:pis?|principal investigators?)|new principal investigator profile)\b", title_low):
+        return "hard exclusion: routine personnel profile"
     # Procurement notices sometimes omit the words tender/procurement while using a
     # contract-style title (acquisition + delivery/installation/maintenance). These are
     # operational purchasing records, not evidence about the R&I system itself.
@@ -3699,6 +3711,207 @@ EXTERNAL_SHOCK_ACTORS = [
     'china', 'chinese', 'united states', 'u.s.', 'american', 'russia', 'russian',
     'japan', 'south korea', 'korea', 'taiwan', 'india', 'united kingdom', 'britain', 'uk',
 ]
+
+# V17.19.18: source-text strategic signal classification. These annotations never widen
+# the EU R&I admission gate. They are applied only after a source has independently qualified
+# for the radar (or after a current-development candidate has independently qualified for C).
+# Phrases are retrieval/testing cues, not classifications: the component tests below decide.
+_RISK_MECHANISM_CUES = [
+    r"\bcould restrict\b", r"\bcould revoke\b", r"\bwould deny access to\b", r"\bwould cut off\b",
+    r"\bmay be withheld\b", r"\bsubject to (?:a )?licen[cs]e\b", r"\bsubject to approval\b",
+    r"\bconditional on\b", r"\bat the discretion of\b", r"\bcan be weaponised\b", r"\bcan be weaponized\b",
+    r"\bcould be extended to\b", r"\bextraterritorial reach\b", r"\bsecondary sanctions\b",
+    r"\bcatch-all clause\b", r"\btermination for convenience\b", r"\bswitching costs?\b",
+    r"\block-?in\b", r"\blong qualification times?\b", r"\bno substitute available\b",
+    r"\bno alternative supplier\b", r"\bexport (?:ban|restriction|control)s?\b", r"\baccess (?:can|could|may|would) be (?:denied|restricted|revoked)\b",
+]
+_RISK_CARRIER_CUES = [
+    r"\bunder review by\b", r"\bcontrolled by\b", r"\brequires approval from\b", r"\bsubject to [^.;]{1,80} jurisdiction\b",
+    r"\bon the entity list\b", r"\bdesignated\b", r"\bstate-linked\b", r"\bmilitary-affiliated\b",
+    r"\bforeign interference\b", r"\btalent recruitment by\b", r"\bcoercion\b", r"\bleverage over\b", r"\bpressure to align\b",
+    r"\b(?:china|chinese|united states|u\.s\.|us |american|russia|russian|india|japan|taiwan|south korea|uk |united kingdom|british)\b.{0,90}\b(?:government|regulator|authority|firm|company|law|rule|control|ban|sanction|licen[cs]e|approval)\b",
+]
+_RISK_ASSET_CUES = [
+    r"\bdependent on\b", r"\breliant on imports? of\b", r"\bno domestic capacity\b", r"\bsingle source\b", r"\bsole supplier\b",
+    r"\bconcentrated in\b", r"\bmonopoly risk\b", r"\bbottleneck\b", r"\bchokepoint\b", r"\berosion of\b",
+    r"\bhollowing out\b", r"\bloss of control over\b", r"\btechnology transfer\b", r"\bbrain drain\b",
+    r"\brelocation of\b", r"\bacquisition of [^.;]{1,100} by\b", r"\bforeign ownership of\b", r"\bstrategic dependenc(?:y|ies)\b",
+    r"\bexposure to retaliation\b", r"\b(?:supply|data|talent|research|technology|compute|market|legal|funding) (?:access|flow|line|capacity)\b",
+]
+_OPPORTUNITY_MECHANISM_CUES = [
+    r"\bcould leverage\b", r"\bcan convert [^.;]{1,120} into\b", r"\bsubstitution potential\b", r"\brecycling could supply\b",
+    r"\bdemand-side measure\b", r"\bspillover into\b", r"\badjacent market\b", r"\brelatedness to existing strengths\b",
+    r"\bbuilds on installed base\b", r"\btransferable to\b", r"\bscalable\b", r"\bdual-use potential of\b", r"\bnetwork effects favour\b",
+    r"\bprocurement could\b", r"\bco-funding available\b", r"\bdesignation as strategic project\b", r"\bregulatory sandbox\b",
+]
+_OPPORTUNITY_ACTOR_CUES = [
+    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|european research council|erc|universit(?:y|ies)|research organisations?|research organizations?|firms?|companies?|national governments?|regulators?)\b",
+]
+_OPPORTUNITY_INSTRUMENT_CUES = [
+    r"\bwithin the competence of\b", r"\bmandate to\b", r"\bempowered to\b", r"\bexisting instrument\b",
+    r"\blegal basis already exists\b", r"\bno new legislation required\b", r"\bprocurement could\b", r"\bconditionality attached to\b",
+    r"\beligibility criteria allow\b", r"\bassociation agreement\b", r"\bco-funding available\b", r"\bcall open until\b",
+    r"\bdesignation as strategic project\b", r"\bfast-track\b", r"\bregulatory sandbox\b", r"\bpilot line\b",
+    r"\banchor customer\b", r"\blaunch customer\b",
+]
+_OPPORTUNITY_ACTOR_INSTRUMENT_CUES = [
+    r"\bwithin the competence of\b", r"\bmandate to\b", r"\bempowered to\b", r"\bexisting instrument\b",
+    r"\blegal basis already exists\b", r"\bno new legislation required\b", r"\bprocurement could\b", r"\bconditionality attached to\b",
+    r"\beligibility criteria allow\b", r"\bassociation agreement\b", r"\bco-funding available\b", r"\bcall open until\b",
+    r"\bdesignation as strategic project\b", r"\bfast-track\b", r"\bregulatory sandbox\b", r"\bpilot line\b",
+    r"\banchor customer\b", r"\blaunch customer\b",
+    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|universit(?:y|ies)|research organisations?|research organizations?|firms?|companies?)\b.{0,100}\b(?:fund|finance|procure|launch|open|designate|fast-track|pilot|co-fund|mandate|regulat|standard|partner|invest|deploy)\w*\b",
+]
+_OPPORTUNITY_GAIN_CUES = [
+    r"\bstrengthen(?:s|ed|ing)?\b", r"\bsecure(?:s|d|ing)?\b", r"\bexpand(?:s|ed|ing)? (?:capacity|access|production|research|innovation|market)\b",
+    r"\breduce(?:s|d|ing)? (?:dependence|dependency|reliance|exposure)\b", r"\bincrease(?:s|d|ing)? (?:capacity|capability|resilience|competitiveness|access|control)\b",
+    r"\bbuild(?:s|ing)? (?:capacity|capability|resilience|scale)\b", r"\bretain(?:s|ed|ing)? (?:talent|researchers|scientists|capability|control)\b",
+    r"\battract(?:s|ed|ing)? (?:talent|researchers|scientists|investment)\b", r"\bscale(?:s|d|ing)? (?:up|production|deployment|capacity)\b",
+]
+_OPPORTUNITY_WINDOW_CUES = [
+    r"\bcall open until\b", r"\bco-funding available\b", r"\bexisting instrument\b", r"\blegal basis already exists\b",
+    r"\bno new legislation required\b", r"\bwindow before [^.;]{1,100} closes\b", r"\bbefore the standard is set\b",
+    r"\bwhile the market is unconsolidated\b", r"\bas [^.;]{1,80} withdraws\b", r"\bvacuum left by\b", r"\bfirst credible alternative\b",
+    r"\bapplications tripled\b", r"\boversubscribed\b", r"\binflow of\b", r"\bcurrently\b", r"\bnow\b",
+]
+_SHOCK_EVENT_CUES = [
+    r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bas of \d{1,2} [A-Za-z]+\b", r"\bentered into force\b",
+    r"\btook effect\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b", r"\bwent offline\b", r"\bdeclared force majeure\b",
+    r"\binvoked\b", r"\bimposed\b", r"\bwithout prior notice\b", r"\babruptly\b", r"\bunannounced\b", r"\bovernight\b",
+    r"\bcut off\b", r"\bblocked\b", r"\bblacklisted\b", r"\brevoked licen[cs]es\b", r"\bexport ban\b", r"\bembargo\b",
+    r"\bquota imposed\b", r"\ballocation cut\b", r"\brationing\b", r"\bstranded\b", r"\bseized\b", r"\bimpounded\b",
+    r"\bexpelled\b", r"\bdetained\b", r"\barrested\b", r"\braided\b", r"\bbreach detected\b", r"\boutage\b",
+    r"\bstrike on\b", r"\bsabotage of\b", r"\bsevered\b", r"\bprice doubled\b", r"\bspot price spiked\b",
+    r"\btrading halted\b", r"\bdefault(?:ed)?\b", r"\bfiled for bankruptcy\b", r"\bcollapsed\b", r"\btalks collapsed\b",
+    r"\bwalked away from the deal\b", r"\bvetoed\b", r"\bfailed to ratify\b", r"\bgovernment fell\b", r"\bsnap election\b",
+    r"\bresigned\b", r"\bborders closed\b", r"\bstrait closed\b", r"\bairspace closed\b",
+]
+_SHOCK_EXTERNALITY_CUES = [
+    r"\b(?:china|chinese|united states|u\.s\.|american|russia|russian|india|japan|taiwan|south korea|united kingdom|british|foreign)\b",
+    r"\bearthquake\b", r"\bflood(?:ing)?\b", r"\bwildfire\b", r"\bstorm\b", r"\bhurricane\b", r"\bheatwave\b", r"\bdrought\b",
+    r"\bcyber(?:attack| incident)\b", r"\bsabotage\b", r"\boutage\b", r"\bmarket collapse\b", r"\bstrike\b",
+]
+_SHOCK_EFFECT_CUES = [
+    r"\bcut off\b", r"\bblocked\b", r"\brestrict(?:ed|ion)\b", r"\brevoked\b", r"\bsuspended\b", r"\bhalted\b", r"\bshut down\b",
+    r"\bwent offline\b", r"\bsevered\b", r"\bclosed\b", r"\bprice (?:doubled|spiked|surged)\b", r"\btrading halted\b",
+    r"\bstranded\b", r"\bseized\b", r"\bimpounded\b", r"\bexpelled\b", r"\bloss of\b", r"\bdisrupt(?:ed|ion)\b", r"\boutage\b",
+]
+_SHOCK_SPEED_CUES = [
+    r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bwithout prior notice\b", r"\babruptly\b", r"\bunannounced\b", r"\bovernight\b",
+    r"\bwent offline\b", r"\bshut down\b", r"\bcut off\b", r"\bsevered\b", r"\bcollapsed\b", r"\bclosed\b", r"\bhalted\b",
+]
+_STRATEGIC_NOISE_CUES = [
+    r"\bwake-up call\b", r"\balarm bells\b", r"\bexistential threat\b", r"\bcrossroads\b", r"\bcritical juncture\b",
+    r"\bturning point\b", r"\bwatershed moment\b", r"\bperfect storm\b", r"\brace against time\b", r"\bsleepwalking into\b",
+    r"\bthe stakes could not be higher\b", r"\bcannot afford to\b", r"\bhas the potential to\b", r"\bcould become a global leader\b",
+    r"\bvision for\b", r"\bambition to\b", r"\baspires to\b", r"\bmust seize\b", r"\bcalls for bold action\b", r"\bworld-class\b",
+    r"\bgame-changer\b", r"\brevolutionary\b", r"\bunprecedented opportunity\b", r"\bplans to\b", r"\bintends to\b", r"\bconsiders\b",
+    r"\bweighs\b", r"\bmulls\b", r"\breportedly preparing\b", r"\bthreatens to\b", r"\bwarns that\b", r"\bsignals willingness\b",
+    r"\bexpected to\b", r"\bslated for\b", r"\bon track to\b", r"\bin the coming months\b", r"\bsources say\b",
+    r"\bexperts warn\b", r"\banalysts say\b", r"\bconcerns grow\b", r"\bfears mount\b", r"\bquestions remain\b", r"\buncertainty looms\b",
+    r"\bdebate intensifies\b", r"\brenewed calls for\b", r"\breiterated\b", r"\breaffirmed\b", r"\bunderscored the importance of\b",
+    r"\btook note of\b",
+]
+_TREND_FAMILIES = {
+    'climate_change': [r"\bclimate change\b", r"\bglobal warming\b", r"\bclimate adaptation\b", r"\bclimate mitigation\b", r"\bextreme weather\b", r"\bdecarboni[sz]ation\b", r"\bnet zero\b"],
+    'energy_transition': [r"\benergy transition\b", r"\belectrification\b", r"\brenewable energy\b", r"\bclean energy\b", r"\bhydrogen\b"],
+    'demographic_change': [r"\bdemographic change\b", r"\bageing\b", r"\baging\b", r"\bpopulation decline\b", r"\bskills shortage\b", r"\btalent shortage\b"],
+    'ai_and_automation': [r"\bartificial intelligence\b", r"\bgenerative ai\b", r"\bautomation\b", r"\bautonomous systems?\b"],
+    'geopolitical_fragmentation': [r"\bgeopolitical fragmentation\b", r"\bglobal science fragmentation\b", r"\btrade fragmentation\b", r"\bde-risk(?:ing)?\b", r"\bdecoupling\b"],
+    'biosecurity_and_health': [r"\bpandemic preparedness\b", r"\bbiosecurity\b", r"\bhealth security\b", r"\bemerging infectious\b"],
+}
+_TREND_ACTION_CUES = [
+    r"\badopt(?:ed|s|ing)?\b", r"\blaunch(?:ed|es|ing)?\b", r"\bfund(?:ed|s|ing)?\b", r"\binvest(?:ed|s|ing|ment)?\b",
+    r"\bprocure(?:d|s|ment)?\b", r"\bbuild(?:s|ing|t)?\b", r"\bdeploy(?:ed|s|ing|ment)?\b", r"\bpilot(?:ed|s|ing)?\b",
+    r"\bregulat(?:e|ed|es|ing|ion)\b", r"\bmandate(?:d|s)?\b", r"\bstandard(?:s|isation|ization)?\b", r"\bprogramme\b", r"\bprogram\b",
+    r"\bcall open\b", r"\bgrant(?:s|ed)?\b", r"\bsubsid(?:y|ies|ise|ize)\b", r"\badapt(?:ation|ed|ing)?\b", r"\bmitigat(?:e|ed|ing|ion)\b",
+]
+
+def _regex_any(text: str, patterns: list[str]) -> bool:
+    return any(re.search(p, text, re.I) for p in patterns)
+
+def _strategic_passages(text: str) -> list[str]:
+    sentences = [clean_text(x) for x in split_sentences(text, max_chars=24000) if clean_text(x)]
+    out: list[str] = []
+    for i, sent in enumerate(sentences):
+        out.append(sent[:900])
+        if i + 1 < len(sentences):
+            pair = clean_text(f"{sent} {sentences[i+1]}")
+            if len(pair) <= 1300:
+                out.append(pair)
+    return list(dict.fromkeys(out))
+
+def classify_strategic_source_text(text: str) -> dict[str, Any]:
+    """Strict source-text classification for risk, opportunity, shock and trend action.
+
+    This does not admit a source and never creates European relevance. It annotates a source
+    only when the required components are present in the same sentence or adjacent sentence
+    pair. Noise phrases are not negative evidence; they simply cannot satisfy a component.
+    """
+    raw = clean_text(text)
+    if not raw:
+        return {'primary': '', 'lenses': [], 'trend_context': [], 'trend_action': False, 'trend_action_passage': ''}
+    passages = _strategic_passages(raw)
+    risk_passage = ''
+    opp_passage = ''
+    shock_passage = ''
+    for passage in passages:
+        low = normalized(passage)
+        risk = _regex_any(low, _RISK_MECHANISM_CUES) and _regex_any(low, _RISK_CARRIER_CUES) and _regex_any(low, _RISK_ASSET_CUES)
+        if risk and not risk_passage:
+            risk_passage = passage
+        opp = (
+            _regex_any(low, _OPPORTUNITY_MECHANISM_CUES)
+            and _regex_any(low, _OPPORTUNITY_ACTOR_CUES)
+            and _regex_any(low, _OPPORTUNITY_INSTRUMENT_CUES + _OPPORTUNITY_ACTOR_INSTRUMENT_CUES)
+            and _regex_any(low, _OPPORTUNITY_GAIN_CUES)
+            and _regex_any(low, _OPPORTUNITY_WINDOW_CUES + _OPPORTUNITY_INSTRUMENT_CUES)
+        )
+        if opp and not opp_passage:
+            opp_passage = passage
+        own_eu_action = bool(re.search(r"\b(?:european commission|european union|\beu\b|council|member states?)\b.{0,80}\b(?:imposed|adopted|suspended|halted|closed|revoked|blocked)\b", low, re.I))
+        shock = (
+            _regex_any(low, _SHOCK_EVENT_CUES)
+            and _regex_any(low, _SHOCK_EXTERNALITY_CUES)
+            and _regex_any(low, _SHOCK_EFFECT_CUES)
+            and _regex_any(low, _SHOCK_SPEED_CUES)
+            and not own_eu_action
+        )
+        if shock and not shock_passage:
+            shock_passage = passage
+    lenses: list[dict[str, str]] = []
+    primary = ''
+    if shock_passage:
+        primary = 'external_shock'
+        lenses.append({'type': 'external_shock', 'passage': shock_passage[:900]})
+    else:
+        if risk_passage:
+            primary = 'risk'
+            lenses.append({'type': 'risk', 'passage': risk_passage[:900]})
+        if opp_passage and (not risk_passage or normalized(opp_passage) != normalized(risk_passage)):
+            if not primary:
+                primary = 'opportunity'
+            lenses.append({'type': 'opportunity', 'passage': opp_passage[:900]})
+    trend_context: list[str] = []
+    trend_action_passage = ''
+    for passage in passages:
+        low = normalized(passage)
+        families = [name for name, pats in _TREND_FAMILIES.items() if _regex_any(low, pats)]
+        if not families:
+            continue
+        for name in families:
+            if name not in trend_context:
+                trend_context.append(name)
+        if not trend_action_passage and _regex_any(low, _TREND_ACTION_CUES):
+            trend_action_passage = passage[:900]
+    return {
+        'primary': primary,
+        'lenses': lenses[:2],
+        'trend_context': trend_context[:4],
+        'trend_action': bool(trend_action_passage),
+        'trend_action_passage': trend_action_passage,
+    }
+
 EXTERNAL_SHOCK_DOMAIN_LABELS = {
     'artificial intelligence': ['artificial intelligence', ' ai ', 'agi', 'foundation model', 'frontier model'],
     'semiconductors': ['semiconductor', 'semiconductors', 'chips', 'microelectronics'],
@@ -8275,6 +8488,11 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
     themes = themes_for(display_text)
     summary = make_summary(display_text, evidence, strand, title, frontier_targets)
     extracted_claim = concise_core_message(display_text, title)
+    strategic_classification = (
+        classify_strategic_source_text(display_text)
+        if strand in {"A", "both"} else
+        {'primary': '', 'lenses': [], 'trend_context': [], 'trend_action': False, 'trend_action_passage': ''}
+    )
     return {
         "title": title,
         "authors": authors,
@@ -8297,6 +8515,8 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "geo_evidence": evidence.get("geo_evidence", []),
         "a_context_evidence": evidence.get("a_context_evidence", []),
         "text_mode": evidence.get("text_mode", ""),
+        "strategic_classification": strategic_classification,
+        "strategic_classification_source": "source_text",
         "_source_rank": source_rank,
         "_themes": themes,
         "_doi": normalized(doi).replace("https://doi.org/", ""),
@@ -8822,6 +9042,8 @@ def _saved_ab_high_confidence_precision_reject(item: dict[str, Any]) -> bool:
     summary = clean_text(item.get('summary', ''))
     typ = normalized(item.get('type', ''))
     if normalized(title) in A_RETIRED_EXACT_TITLES:
+        return True
+    if re.search(r"\b(?:meet our new (?:pis?|principal investigators?)|meet the new (?:pis?|principal investigators?)|new principal investigator profile)\b", normalized(title)):
         return True
     if _institutional_visible_old_date_conflict(item):
         return True
@@ -9664,6 +9886,15 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
         old=old_by_id.get(signal_identity(x))
         if old and old.get('first_seen'):
             x['first_seen']=old['first_seen']
+        # Saved C rows historically store a radar-written signal note, not necessarily the
+        # original source passage. Never reclassify risk/opportunity/shock from that text.
+        # Preserve only classifications that were originally stamped from source text.
+        if old and clean_text(old.get('strategic_classification_source')) == 'source_text':
+            x['strategic_classification'] = old.get('strategic_classification') or {}
+            x['strategic_classification_source'] = 'source_text'
+        else:
+            x.pop('strategic_classification', None)
+            x.pop('strategic_classification_source', None)
         x['new_this_scan']=False
     old_count=len(out.get('strand_c',[]) if isinstance(out.get('strand_c'),list) else [])
     out['strand_c']=rebuilt
@@ -9867,6 +10098,20 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
     })):
         return True
 
+    trend_action_themes = {
+        "climate transition / adaptation",
+        "energy transition / strategic capability",
+        "demographic change / research workforce",
+        "biosecurity / health resilience",
+    }
+    trend_action = bool(found & trend_action_themes) and _regex_any(full, _TREND_ACTION_CUES)
+    trend_strategic = strategic_frame or contains_any(full, [
+        "resilience", "strategic", "security", "competitiveness", "dependency", "dependencies",
+        "critical materials", "critical minerals", "supply chain", "capacity", "capability", "sovereignty",
+    ])
+    if eu_scope and core_ri and trend_action and trend_strategic:
+        return True
+
     critical_tech = contains_any(full, [
         "artificial intelligence", " ai ", "semiconductor", "semiconductors", "chips",
         "quantum", "biotech", "biotechnology", "supercomputer", "cloud",
@@ -9991,6 +10236,58 @@ MATURE_SIGNAL_MARKERS = [
 ]
 
 
+_SIGNAL_NON_EVENT_CUES = [
+    r"\bplans? to\b", r"\bintends? to\b", r"\bconsiders?\b", r"\bweighs?\b", r"\bmulls?\b",
+    r"\breportedly preparing\b", r"\bthreatens? to\b", r"\bwarns? that\b", r"\bsignals? willingness\b",
+    r"\bexpected to\b", r"\bslated for\b", r"\bon track to\b", r"\bin the coming months\b", r"\bsources say\b",
+    r"\bproposals?\b", r"\bproposes?\b", r"\bproposed\b", r"\bcalls? for\b", r"\burges?\b",
+    r"\bhas the potential to\b", r"\bcould become a global leader\b", r"\bvision for\b", r"\bambition to\b",
+    r"\baspires? to\b", r"\bmust seize\b", r"\bcalls for bold action\b", r"\bunprecedented opportunity\b",
+    r"\bexperts warn\b", r"\banalysts say\b", r"\bconcerns grow\b", r"\bfears mount\b", r"\bquestions remain\b",
+    r"\buncertainty looms\b", r"\bdebate intensifies\b", r"\brenewed calls for\b", r"\breiterated\b", r"\breaffirmed\b",
+    r"\bunderscored the importance of\b", r"\btook note of\b",
+]
+_SIGNAL_CONCRETE_EVENT_CUES = [
+    r"\b(?:launches?|launched|invests?|invested|raises?|raised|signs?|signed|adopts?|adopted|approves?|approved|"
+    r"imposes?|imposed|restricts?|restricted|bans?|banned|suspends?|suspended|blocks?|blocked|opens?|opened|"
+    r"closes?|closed|cuts?|cut|funds?|funded|deploys?|deployed|builds?|built|expands?|expanded|scales?|scaled|"
+    r"joins?|joined|withdraws?|withdrew|relocates?|relocated|acquires?|acquired|enters? into force|entered into force)\b",
+    r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bcall open until\b", r"\bco-funding available\b",
+]
+
+def signal_is_only_intention_or_echo(title: str, desc: str = '') -> bool:
+    """True when C-support is only aspiration/intention/echo, not an observed development.
+
+    A proposal or threat can still survive when the source text passes the strict risk test;
+    mixed prose survives when a separate passage contains a concrete event/action or new
+    evidence.  This implements the curator's 'noise never classifies' rule without using
+    the exclusion phrases as negative evidence against a real event wrapped in commentary.
+    """
+    full = clean_text(f"{title}. {desc}")
+    low = normalized(full)
+    if not _regex_any(low, _SIGNAL_NON_EVENT_CUES):
+        return False
+    strategic = classify_strategic_source_text(full)
+    if strategic.get('lenses'):
+        return False
+    if reframing_signal_text(low):
+        return False
+    # A noisy headline can wrap a real current instrument.  Keep it when the source text
+    # itself says an actor is already using/offering a concrete R&I instrument; the plan
+    # wording is then packaging, not the only evidence.
+    if (
+        re.search(r"\b(?:fellowships?|research funding|funding schemes?|return programmes?|return programs?|initiatives?|programmes?|programs?|pilots?|sandboxes?|open calls?)\b", low, re.I)
+        and re.search(r"\b(?:is trying to|are trying to|offers?|provides?|funds?|supports?|is open|are open|launched|launches|selected|selects|attracts?|entices?|lures?)\b", low, re.I)
+    ):
+        return False
+    for passage in _strategic_passages(full):
+        plow = normalized(passage)
+        if _regex_any(plow, _SIGNAL_NON_EVENT_CUES):
+            continue
+        if _regex_any(plow, _SIGNAL_CONCRETE_EVENT_CUES) and contains_any(plow, MATERIAL_SIGNAL_RI):
+            return False
+    return True
+
 def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
     """Discovery gate for C: new point, not necessarily a new topic.
 
@@ -10000,6 +10297,8 @@ def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
     and requires a substantive Strand-A publication anchor.
     """
     if routine_signal_noise(title, desc):
+        return False
+    if signal_is_only_intention_or_echo(title, desc):
         return False
     full = normalized(f'{title} {desc}')
     early = contains_any(full, WEAK_SIGNAL_MARKERS)
@@ -11089,6 +11388,8 @@ def anchor_news(
                 if unanchored else
                 'new point on a substantive Strand-A issue; topic repetition allowed'
             ),
+            'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
+            'strategic_classification_source': 'source_text',
             '_anchor_score':score,
         })
         if any(signals_near_duplicate(item,x) for x in anchored):
@@ -13443,8 +13744,13 @@ def main() -> int:
         "new_b": int(new_b_count),
         "new_c": int(new_c_count),
         "health": health,
+        "corpus_a": len(strand_a),
+        "corpus_b": len(strand_b),
+        "corpus_c": len(strand_c),
     })
-    scan_history = prior_history[-12:]
+    # Reader-facing History needs more than the last half-day. Keep a bounded rolling
+    # record of completed runs; this remains summary output, not per-candidate diagnostics.
+    scan_history = prior_history[-180:]
 
     data = {
         "last_updated": completed_iso,
@@ -13495,6 +13801,8 @@ def main() -> int:
         "signal_discovery_version": signal_marker,
         "signal_quality_profile_version": SIGNAL_QUALITY_PROFILE_VERSION,
         "c_admission_profile_version": C_ADMISSION_PROFILE_VERSION,
+        "strategic_signal_profile_version": str(CONFIG.get("strategic_signal_profile_version", "")),
+        "weak_signal_attention_profile_version": str(CONFIG.get("weak_signal_attention_profile_version", "")),
         "retired_signal_headlines": sorted(_retired_signal_headlines(previous)),
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,

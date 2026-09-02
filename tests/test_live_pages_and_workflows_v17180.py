@@ -40,7 +40,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')
         self.assertIn("fetch('../radar.json?ts='+Date.now()", briefing)
         self.assertNotIn('Topic digest generated:', briefing)
-        self.assertIn('Nothing here is a hand-written snapshot', briefing)
+        self.assertIn('rebuilt from the current radar data', briefing)
 
 
 if __name__ == '__main__':

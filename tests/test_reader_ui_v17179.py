@@ -5,16 +5,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReaderUiV17179Tests(unittest.TestCase):
-    def test_landing_page_is_orientation_first_and_stuff_is_top(self):
+    def test_landing_page_is_orientation_first_and_reader_views_are_top(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         self.assertIn("This is the Main Radar for", html)
         self.assertIn("EU research &amp; innovation in geopolitical context.", html)
         self.assertIn('<nav class="landing-nav"', html)
         nav = html.split('<nav class="landing-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertLess(nav.find('>Stuff</a>'), nav.find('>Read at least this</a>'))
+        self.assertLess(nav.find('>Read at least this</a>'), nav.find('>Stuff</a>'))
+        self.assertLess(nav.find('>Weak signals</a>'), nav.find('>Stuff</a>'))
+        self.assertLess(nav.find('>History</a>'), nav.find('>Stuff</a>'))
         self.assertNotIn('<section class="inside-map"', html)
         self.assertNotIn('<section class="page-map"', html)
-        self.assertIn("Scanner · every 4 hours + manual", html)
+        self.assertNotIn("Next automatic", html)
+        self.assertNotIn("scheduleState", html)
 
     def test_read_at_least_this_keeps_original_open_branch_chart(self):
         html = (ROOT / "read" / "index.html").read_text(encoding="utf-8")

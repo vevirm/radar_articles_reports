@@ -50,7 +50,7 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
-<link rel="stylesheet" href="simple-ui.css?v=17.18.0">
+<link rel="stylesheet" href="simple-ui.css?v=17.19.18">
 <style id="landing-v17179">
 .landing-hero{padding:0 0 38px!important}
 .landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #3a3a3a;margin-bottom:44px;min-height:54px}
@@ -58,11 +58,11 @@
 .landing-nav a:hover{background:#171717;color:#ff4056}.landing-nav .top-stuff{background:#c40018;border-color:#c40018}.landing-nav .top-stuff:hover{background:#a90015;color:#fff}
 .landing-nav .lock{margin-left:auto;border-radius:0!important;border:0!important;border-left:1px solid #3a3a3a!important;padding:17px 14px!important}
 .landing-copy{max-width:1080px}.landing-copy h1{font-size:clamp(42px,6.4vw,78px)!important;line-height:.98!important;margin:9px 0 20px!important}.landing-copy .intro{max-width:980px!important;font-size:clamp(16px,1.8vw,20px)!important;line-height:1.45!important}.landing-copy .intro strong{color:#fff}
-.landing-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#444;border:1px solid #444;margin-top:34px}
+.landing-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:#444;border:1px solid #444;margin-top:34px}
 .landing-choices a{display:block;background:#0b0b0b;color:#fff;text-decoration:none;padding:17px 18px;min-height:142px}.landing-choices a:hover{background:#151515}.landing-choices span{display:block;color:#ff4056;text-transform:uppercase;letter-spacing:.09em;font-size:9px;font-weight:950;margin-bottom:12px}.landing-choices strong{display:block;font-size:18px;line-height:1.1;margin-bottom:8px}.landing-choices small{display:block;color:#cfcfcf;font-size:12px;line-height:1.4}
 .landing-radar-link{display:inline-block;margin-top:18px;color:#fff!important;text-decoration:none;border-bottom:2px solid #c40018;padding-bottom:3px;font-size:13px;font-weight:900}
 #radar{padding-top:18px}.dashboard{margin-top:0!important}
-@media(max-width:850px){.landing-nav{flex-wrap:wrap;margin-bottom:30px}.landing-nav .lock{margin-left:0}.landing-choices{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:980px){.landing-nav{flex-wrap:wrap;margin-bottom:30px}.landing-nav .lock{margin-left:0}.landing-choices{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.landing-choices{grid-template-columns:1fr}.landing-nav a,.landing-nav .lock{padding:12px 9px!important;font-size:10px}.landing-copy h1{font-size:42px!important}}
 </style>
 </head>
@@ -71,7 +71,7 @@
     <div class="gate-card">
       <div class="gate-mark" aria-hidden="true"></div>
       <h1>Radar</h1>
-      <p>Research intelligence that accumulates across scanner runs and reviewed manual ingestion.</p>
+      <p>Research intelligence on EU research &amp; innovation in geopolitical context.</p>
       <form id="gateForm" class="gate-row">
         <input id="password" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
         <button type="submit">Enter</button>
@@ -84,42 +84,43 @@
     <header class="hero landing-hero">
       <div class="wrap">
         <nav class="landing-nav" aria-label="Main navigation">
-          <a class="top-stuff" href="stuff/">Stuff</a>
           <a href="read/">Read at least this</a>
+          <a href="#strand-c">Weak signals</a>
           <a href="frontier/quick/">Matrix</a>
           <a href="priorities/">Risks &amp; opportunities</a>
+          <a href="history/">History</a>
           <a href="literature/">Sources</a>
+          <a class="top-stuff" href="stuff/">Stuff</a>
           <button id="lock" class="lock">Lock radar</button>
         </nav>
         <div class="landing-copy">
           <div class="kicker">MAIN RADAR</div>
           <h1>This is the Main Radar for<br><span class="red">EU research &amp; innovation in geopolitical context.</span></h1>
-          <p class="intro">Start with the simple views. <strong>Read at least this</strong> shows the current issue charts. <strong>Matrix</strong> classifies Europe’s position. <strong>Risks &amp; opportunities</strong> turns the evidence into implications. <strong>Stuff</strong> holds the quality rules, files and technical material. The full evidence Radar is below.</p>
+          <p class="intro">Start with the current picture, then move into the evidence. <strong>Read at least this</strong> shows the main issues. <strong>Weak signals</strong> brings early developments forward. <strong>Matrix</strong> shows Europe’s position. <strong>Risks &amp; opportunities</strong> shows the clearest implications. <strong>History</strong> shows how the radar has changed over time.</p>
         </div>
         <div class="landing-choices" aria-label="Choose a simple view">
-          <a href="read/"><span>Start here</span><strong>Read at least this</strong><small>Open issue charts from the strongest current findings.</small></a>
-          <a href="frontier/quick/"><span>Classify</span><strong>Matrix</strong><small>See where Europe is gaining, relying, trading off or weakening.</small></a>
-          <a href="priorities/"><span>Interpret</span><strong>Risks &amp; opportunities</strong><small>See the most important implications, ranked by evidence quality.</small></a>
-          <a href="stuff/"><span>Check</span><strong>Stuff</strong><small>Quality criteria, technical evidence, exports and scanner material.</small></a>
+          <a href="read/"><span>Start here</span><strong>Read at least this</strong><small>The clearest current issues and the evidence behind them.</small></a>
+          <a href="#strand-c"><span>Watch early</span><strong>Weak signals</strong><small>New moves and emerging evidence that may change the picture.</small></a>
+          <a href="frontier/quick/"><span>Position</span><strong>Matrix</strong><small>Where Europe is gaining, relying, trading off or weakening.</small></a>
+          <a href="priorities/"><span>Implications</span><strong>Risks &amp; opportunities</strong><small>The clearest current pathways to loss or gain.</small></a>
+          <a href="history/"><span>Over time</span><strong>History</strong><small>What each recorded scan added and how the corpus is changing.</small></a>
         </div>
         <a class="landing-radar-link" href="#radar">Open the full Radar ↓</a>
       </div>
     </header>
 
     <div class="statusbar"><div class="wrap status-inner">
-      <span class="pill">Scanner · every 4 hours + manual · automatic every 4 hours schedule</span>
-      <span id="scheduleState" class="pill">Next automatic · pending</span>
-      <span id="scanState" class="pill warn">Last run health · pending</span>
-      <span id="lastScan" class="pill">Last completion · pending</span>
-      <span class="pill">Evidence weight · same source-merit rules as Stuff</span>
+      <span id="lastScan" class="pill">Updated · pending</span>
+      <span id="latestActivity" class="pill">Latest additions · pending</span>
+      <a class="pill" href="history/" style="text-decoration:none;font-weight:850">Open History →</a>
     </div></div>
 
     <div class="wrap" id="radar">
       <section class="dashboard" aria-label="Radar totals">
         <div class="stat"><div class="label">R&I geopolitics</div><div id="statA" class="value">—</div><div class="sub">evidence items</div></div>
+        <div class="stat"><div class="label">Weak signals</div><div id="statC" class="value">—</div><div class="sub">early developments in view</div></div>
         <div class="stat"><div class="label">Future methods</div><div id="statB" class="value">—</div><div class="sub">accepted publications</div></div>
-        <div class="stat"><div class="label">Weak signals</div><div id="statC" class="value">—</div><div class="sub">accumulated signals</div></div>
-        <div class="stat"><div class="label">New this scan</div><div id="statNew" class="value">—</div><div class="sub">across all strands</div></div>
+        <div class="stat"><div class="label">New this scan</div><div id="statNew" class="value">—</div><div class="sub">new evidence and signals</div></div>
       </section>
       <div id="rotationNote" class="scan-note"></div>
     </div>
@@ -127,15 +128,19 @@
     <div class="toolbar"><div class="wrap tools">
       <input id="search" class="search" type="search" placeholder="Search titles, sources, signals, topics…" aria-label="Search radar">
       <button id="onlyNew" class="filter" type="button">New this scan</button>
-      <button id="allDetails" class="filter" type="button">Expand all information</button>
       <button id="clearFilter" class="filter" type="button">Clear filters</button>
       <a class="filter" href="glossary/">Glossary</a>
     </div></div>
 
     <main class="wrap">
       <section id="strand-a" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Evidence</div><h2>What is changing Europe’s R&amp;I position?</h2><p>The subject is EU/European R&I in geopolitical context. Strategic pressure may be explicit or implied through dependence, capability, competition, security, standards, international coordination or control. External developments qualify only when the source itself establishes a substantive European R&I consequence; the radar does not manufacture Europe relevance from a foreign event.</p></div><div id="countA" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Evidence</div><h2>What is changing Europe’s R&amp;I position?</h2><p>Evidence on how geopolitical competition, dependence, capability, security, standards, international coordination and structural change are affecting Europe’s research and innovation position.</p></div><div id="countA" class="count">0 items</div></div>
         <div id="noteA" class="scan-note"></div><div id="itemsA" class="cards"></div><button id="moreA" class="more" type="button" hidden>Show more</button>
+      </section>
+
+      <section id="strand-c" class="strand">
+        <div class="section-head"><div><div class="eyebrow">Weak signals</div><h2>Early developments worth watching</h2><p>New moves, emerging evidence and actions around larger structural trends that may change the EU R&amp;I geopolitical picture. Weak signals stay visibly separate from established evidence.</p></div><div id="countC" class="count">0 signals</div></div>
+        <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
 
       <section id="strand-b" class="strand">
@@ -143,22 +148,17 @@
         <div id="noteB" class="scan-note"></div><div id="itemsB" class="cards"></div><button id="moreB" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <section id="strand-c" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Weak signals</div><h2>Early developments worth watching</h2><p>Current developments that may change how European R&I should be read. Each card shows what happened and the source; admitted signals remain for 60 days from first insertion.</p></div><div id="countC" class="count">0 signals</div></div>
-        <div id="noteC" class="scan-note"></div><div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
-      </section>
 
-      <div class="method"><strong>How accumulation works:</strong> the scanner runs automatically every four hours. Discovery prioritises recent material, with bounded recovery for older high-value sources, but once A/B or other accepted evidence enters the radar it stays unless it is explicitly removed as a false positive, duplicate or integrity failure. Strand C is the exception: each admitted weak signal stays for 60 days from the moment it was first inserted, then expires automatically. Nature, Science and comparable top journals are a first-class discovery pillar alongside EU/institutional sources.</div>
     </main>
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="source_merit.js?v=17.18.0"></script>
-<script src="briefing/insights.js?v=17.18.0"></script>
-<script src="read/issues.js?v=17.18.0"></script>
+<script src="source_merit.js?v=17.19.18"></script>
+<script src="briefing/insights.js?v=17.19.18"></script>
+<script src="read/issues.js?v=17.19.18"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
-const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:12}};
+const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:16}};
 async function sha256(text){const data=new TextEncoder().encode(text);const hash=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("")}
 function unlock(){sessionStorage.setItem("radarUnlocked","1");document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";loadRadar()}
 if(sessionStorage.getItem("radarUnlocked")==="1") unlock();
@@ -272,35 +272,19 @@ function biblio(x,label='Bibliography'){
   const title=x.title||x.headline||'';const who=x.authors||'';const meta=[x.source,fmtDate(x.date),x.type].filter(Boolean).join(' · ');const englishTitle=!title||globalThis.RadarInsights?.likelyEnglish?.(title)!==false;
   return `<details class="biblio" ${state.allDetails?'open':''}><summary>Source information</summary>${title&&englishTitle?`<div class="biblio-title">${esc(title)}</div>`:''}${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</details>`;
 }
-function detailRow(k,v){if(v===undefined||v===null||v===''||(Array.isArray(v)&&!v.length))return '';const shown=Array.isArray(v)?v.join(' · '):String(v);return `<div class="detail-k">${esc(k)}</div><div class="detail-v">${esc(shown)}</div>`}
-function detailWide(k,v){if(!v)return '';return `<div class="detail-wide"><span class="detail-k">${esc(k)}</span><div class="detail-v">${esc(String(v))}</div></div>`}
-function allDetails(x){
-  const title=x.title||x.headline||'', summary=cleanText(x.summary||x.signal_note||''), bridge=x.external_eu_bridge||'';
-  const merit=meritOf(x);
-  const rows=[
-    detailRow('Original title',title),detailRow('Authors',x.authors),detailRow('Source',x.source),detailRow('Date',fmtDate(x.date)),
-    detailRow('Evidence weight',merit?`${merit.label} · ${merit.score}/100`:''),
-    detailRow('Type',x.type),detailRow('Strand',x.strand||((x.headline)?'C':'')),detailRow('EU relevance',x.eu_relevance),
-    detailRow('Source tier',x.source_tier),detailRow('Discovery',provenanceLabel(x)),detailRow('Tracked since',x.first_seen?fmtDate(x.first_seen):''),
-    detailRow('Watch theme',x.watch_theme),detailRow('Signal type',x.signal_type),detailRow('Signal kind',x.signal_kind),
-    detailRow('Matrix row',x.matrix_dimension),detailRow('Matrix outcome',x.matrix_quadrant||x.quadrant_implied),detailRow('Automatic Matrix cell',x.matrix_auto_cell),detailRow('Admission route',x.a_route),detailRow('Evidence status',x.evidence_status),detailRow('Text mode',x.source_text_mode||x.text_mode),detailRow('Anchor',x.anchor),
-  ].join('');
-  const link=x.link?`<div class="detail-k">Publication link</div><div class="detail-v"><a href="${esc(x.link)}" target="_blank" rel="noopener">Open link to publication ↗</a></div>`:'';
-  const inference=bridge?`<div class="detail-note">The Europe-impact bridge below is a radar inference based on this source plus an admitted same-domain EU context anchor; it is not presented as the source author's own wording.</div>`:'';
-  return `<details class="all-details" ${state.allDetails?'open':''}><summary>Technical details</summary><div class="detail-grid">${rows}${link}${detailWide('Relevance / admission note',x.relevance_note)}${detailWide('EU evidence',Array.isArray(x.eu_evidence)?x.eu_evidence.join(' · '):x.eu_evidence)}${detailWide('R&I evidence',Array.isArray(x.ri_evidence)?x.ri_evidence.join(' · '):x.ri_evidence)}${detailWide('Strategic evidence',Array.isArray(x.geo_evidence)?x.geo_evidence.join(' · '):x.geo_evidence)}${detailWide('Specific Europe-impact bridge',bridge||x.bridge_sentence)}${detailWide('Full available summary',summary)}${detailWide('Core message stored in radar',x.core_message)}${detailWide('Matrix evidence basis',x.matrix_evidence_basis)}${inference}</div></details>`;
-}
 function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}</div>`}
 function cardHeading(x){const t=cleanText(x.title||x.headline||'');return t&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false?t:claimText(x)}
 function meritOf(x){return globalThis.RadarSourceMerit?.forItem?RadarSourceMerit.forItem(x):null}
 function meritTag(x){const m=meritOf(x);return m?`<span class="merit-badge ${esc(m.tone)}" title="Source merit ${m.score}/100">Source merit: ${esc(m.label)}</span>`:''}
+function strategicTags(x){const c=x?.strategic_classification||{};const tags=[];const label={risk:'Risk',opportunity:'Opportunity',external_shock:'External shock'}[c.primary];if(label)tags.push(tag(label,c.primary==='risk'||c.primary==='external_shock'?'new':''));if(c.trend_action){const names=(c.trend_context||[]).map(v=>String(v).replaceAll('_',' '));tags.push(tag(names.length?`${names[0]} action`:'Trend action','signal'))}return tags.join('')}
 function claimButton(x,id){return `<h3 class="claim-title">${esc(cardHeading(x))}</h3><div class="card-actions"><button class="info-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">More info</button>${x.link?`<a class="publication-link" href="${esc(x.link)}" target="_blank" rel="noopener">Open link to publication ↗</a>`:''}</div>`}
 function abItem(x,i){
   const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"",id=`abstract-a-${i}`;
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${meritTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${allDetails(x)}${whatLine(x)}${whyLine(x)}<div class="card-foot"><span>${esc([x.source_tier||x.eu_relevance||'',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${strategicTags(x)}${meritTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}<div class="card-foot"><span>${esc([x.source_tier||x.eu_relevance||'',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
 }
 function cItem(x,i){
   const seen=x.first_seen?`Tracked since ${fmtDate(x.first_seen)}`:"",id=`abstract-c-${i}`;
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}${meritTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${cWhatLine(x)}${biblio(x,'Source')}${abstractPanel(x,id)}${allDetails(x)}${whyLine(x)}<div class="card-foot"><span>${esc([x.signal_kind||x.signal_type||'Weak signal',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${x.new_this_scan?tag("New","new"):""}${tag("Weak signal","signal")}${strategicTags(x)}${meritTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${cWhatLine(x)}${biblio(x,'Source')}${abstractPanel(x,id)}${whyLine(x)}<div class="card-foot"><span>${esc([x.signal_kind||x.signal_type||'Weak signal',provenanceLabel(x)].filter(Boolean).join(' · '))}</span><span>${esc(seen)}</span></div></article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function renderCurrentIssues(d){
@@ -320,7 +304,7 @@ function renderCurrentIssues(d){
 function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more findings`}
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
-function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:12};render()});document.getElementById("onlyNew").addEventListener("click",e=>{state.onlyNew=!state.onlyNew;e.currentTarget.classList.toggle("active",state.onlyNew);state.limits={A:12,B:12,C:12};render()});document.getElementById("allDetails").addEventListener("click",e=>{state.allDetails=!state.allDetails;e.currentTarget.classList.toggle("active",state.allDetails);e.currentTarget.textContent=state.allDetails?'Collapse all information':'Expand all information';render();document.querySelectorAll('.abstract-panel').forEach(p=>p.hidden=!state.allDetails);document.querySelectorAll('[data-abstract]').forEach(b=>b.setAttribute('aria-expanded',String(state.allDetails)));document.querySelectorAll('.biblio').forEach(d=>d.open=state.allDetails)});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.onlyNew=false;document.getElementById("search").value="";document.getElementById("onlyNew").classList.remove("active");state.limits={A:12,B:12,C:12};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
+function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:16};render()});document.getElementById("onlyNew").addEventListener("click",e=>{state.onlyNew=!state.onlyNew;e.currentTarget.classList.toggle("active",state.onlyNew);state.limits={A:12,B:12,C:16};render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.onlyNew=false;document.getElementById("search").value="";document.getElementById("onlyNew").classList.remove("active");state.limits={A:12,B:12,C:16};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
 wire();
 async function loadRadar(){
   try{
@@ -328,13 +312,13 @@ async function loadRadar(){
     const d={...raw,strand_a:(raw.strand_a||[]).filter(publicDisplayOk),strand_b:(raw.strand_b||[]).filter(publicDisplayOk),strand_c:(raw.strand_c||[]).filter(publicDisplayOk)};state.data=d;
     const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
     document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
-    const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";const ageMs=completed?(Date.now()-new Date(completed).getTime()):0;const overdue=Boolean(completed&&Number.isFinite(ageMs)&&ageMs>6*60*60*1000);
-    const sched=d.scan_schedule||{};const next=sched.next_scheduled_slot_utc||"";const trig=String(sched.last_run_trigger||"").replaceAll('_',' ');
-    document.getElementById("scheduleState").textContent=`Automatic · every 4 hours${next?` · next ${fmtDateTime(next)}`:""}`;
-    document.getElementById("scanState").textContent=d.first_scan_complete?`Last run health · ${overdue?"overdue":(d.scan_health==="ok"?"healthy":"degraded")}`:"Last run health · pending";document.getElementById("scanState").className="pill "+(!overdue&&d.scan_health==="ok"?"ok":"warn");document.getElementById("lastScan").textContent=(explicitCompletion?"Last completion · ":"Last recorded run · ")+(completed?fmtDateTime(completed):"pending")+(trig?` · ${trig}`:"");
+    const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";
+    document.getElementById("lastScan").textContent=`Updated · ${completed?fmtDateTime(completed):"pending"}`;
+    const newA=a.filter(x=>x.new_this_scan).length,newB=b.filter(x=>x.new_this_scan).length,newC=c.filter(x=>x.new_this_scan).length;
+    document.getElementById("latestActivity").textContent=`Latest additions · ${newA} evidence · ${newB} methods · ${newC} weak signals`;
     const aged=sr.aged_out_this_scan||{};const cAged=Number(aged.strand_c||0);const ageNote=cAged?`${cAged} Strand C signal${cAged===1?'':'s'} expired after 60 days in the radar. A/B evidence is cumulative.`:'';
     showNote("rotationNote",ageNote);showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
-  }catch(e){document.getElementById("scheduleState").textContent="Automatic · every 4 hours";document.getElementById("scanState").textContent="Last run health · data unavailable";document.getElementById("scanState").className="pill warn";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
+  }catch(e){document.getElementById("lastScan").textContent="Updated · data unavailable";document.getElementById("latestActivity").textContent="Latest additions · unavailable";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
 }
 </script>
 </body>

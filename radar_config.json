@@ -1,7 +1,7 @@
 {
-  "news_lookback_hours": 168,
+  "news_lookback_hours": 240,
   "max_new_ab_per_scan": 0,
-  "max_c_per_scan": 8,
+  "max_c_per_scan": 12,
   "max_corpus_per_strand": 0,
   "openalex_per_query": 80,
   "crossref_rows_per_query": 70,
@@ -882,7 +882,7 @@
   "crossref_public_min_interval_seconds": 1.2,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.19.14-nature-hub-talent-return",
+  "signal_discovery_version": "v17.19.18-trend-action-weak-signal-attention",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -1655,7 +1655,7 @@
     "developing adaptive pathways method technology innovation policy uncertainty"
   ],
   "queries_b_method_per_scan": 16,
-  "signal_quality_profile_version": "v17.17.5-formal-evidence-a-before-c",
+  "signal_quality_profile_version": "v17.19.18-intention-echo-and-saved-c-precision",
   "rotation_profile_version": "v17.18.3-rate-limit-reallocation-broader-eu-journal-method-rotation",
   "openalex_exploration_queries_per_scan": 12,
   "crossref_exploration_queries_per_scan": 10,
@@ -1808,10 +1808,10 @@
   "foresight_author_followup_min_b_items": 1,
   "foresight_author_followup_rule": "Authors already evidenced by admitted Strand-B foresight/method publications receive a bounded rotating exact-author check in OpenAlex/Crossref. Their later works must pass the ordinary A/B gates; no institution or domain receives a permanent lane.",
   "weak_signal_evidence_followup_enabled": true,
-  "weak_signal_evidence_followup_per_scan": 6,
-  "weak_signal_evidence_followup_links_per_signal": 5,
-  "weak_signal_evidence_followup_queries_per_scan": 4,
-  "weak_signal_evidence_followup_stage_seconds": 120,
+  "weak_signal_evidence_followup_per_scan": 10,
+  "weak_signal_evidence_followup_links_per_signal": 6,
+  "weak_signal_evidence_followup_queries_per_scan": 6,
+  "weak_signal_evidence_followup_stage_seconds": 150,
   "weak_signal_evidence_followup_recheck_days": 21,
   "weak_signal_evidence_followup_rule": "An interesting low-evidence C item that cites or points to research/report/publication evidence may trigger bounded link-following and scholarly search. Any stronger source is admitted separately through the ordinary A/B gates; the C item itself remains low evidence.",
   "foresight_expert_seeds": [
@@ -2168,7 +2168,7 @@
   "direct_news_links_per_source": 30,
   "direct_news_timeout_seconds": 10,
   "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources.",
-  "c_min_new_per_successful_scan": 1,
+  "c_min_new_per_successful_scan": 2,
   "c_floor_rescue_enabled": true,
   "c_floor_rescue_min_seconds_remaining": 65,
   "c_floor_rescue_stage_seconds": 60,
@@ -2176,7 +2176,7 @@
     336,
     720
   ],
-  "c_floor_rescue_queries_per_wave": 4,
+  "c_floor_rescue_queries_per_wave": 6,
   "c_floor_rescue_queries": [
     "Europe research security cooperation universities China",
     "EU semiconductor quantum biotech AI research investment partnership",
@@ -2193,7 +2193,15 @@
     "scientists return fellowship research talent India Europe competition",
     "Europe scientist recruitment talent competition United States India China",
     "China biomedical regulation emerging technology Europe research policy",
-    "US China battery industrial policy Europe research innovation"
+    "US China battery industrial policy Europe research innovation",
+    "EU research innovation climate adaptation technology investment",
+    "Europe climate change research infrastructure resilience action",
+    "EU clean technology research industrial transition strategic dependency",
+    "Europe energy transition research innovation critical materials action",
+    "EU demographic change research talent skills policy action",
+    "Europe AI automation research workforce capability policy action",
+    "EU research innovation supply chain reconfiguration geopolitical fragmentation",
+    "Europe biosecurity research preparedness technology capability action"
   ],
   "c_floor_post_reserve_seconds": 20,
   "priority_policy_journal_watchlist": [
@@ -2344,5 +2352,7 @@
   "c_floor_final_save_margin_seconds": 8,
   "weak_signal_retention_days": 60,
   "direct_top_journal_google_news_lookback_days": 14,
-  "direct_top_journal_google_news_queries_per_source": 2
+  "direct_top_journal_google_news_queries_per_source": 2,
+  "strategic_signal_profile_version": "v17.19.18-risk-opportunity-shock-trend-source-tests",
+  "weak_signal_attention_profile_version": "v17.19.18-weak-signals-first-reader-and-rescue"
 }

@@ -1,3 +1,15 @@
+# v17.19.18 — reader history, weak-signal attention, and strategic pathway logic
+
+- Keeps the public site reader-facing: findings and implications stay visible; scanner admission mechanics, schedules, rejection funnels and rescue internals are not promoted on the Main Radar.
+- Adds `/history/` as the live radar history view. It shows past runs and additions from the persisted `scan_history`, while `/historical/` remains the older-evidence archive. Future scanner runs retain up to 180 history summaries and add corpus totals to each entry.
+- Gives weak signals more attention: they move ahead of futures-method material on the Main Radar, appear near the top of Read at least this, default to a larger visible set, and receive larger discovery/follow-up/rescue budgets.
+- Applies the all-categories filler rule to weak-signal discovery: plans, proposals, warnings, aspirations and echo language do not qualify on their own. A noisy passage survives only when the source also contains a strict pathway, a concrete observed action, or new evidence. The C quality profile is bumped for a saved-state recheck.
+- Adds source-text strategic pathway classification behind the scanner. Risk requires mechanism + carrier + exposed asset; opportunity requires mechanism + actor + instrument + gain + current/window evidence; external shock requires a discrete external event + statable effect + speed. Alarm, aspiration and intention phrases alone do not classify.
+- Adds structural-trend action context, including climate transition/adaptation, energy transition, demographic/workforce change and biosecurity/health resilience, while retaining EU R&I in geopolitical context as the hard admission scope.
+- Tightens precision after the recall repair: routine personnel-profile pages such as “Meet our new PIs” are hard-excluded and cannot be resurrected from saved history. The bundled latest state removes the identified ELLIS profile false positive and revalidates saved weak signals, dropping the resurfaced ITU radio-astronomy false bridge while retaining the concrete EU–Taiwan semiconductor dialogue as a valid cooperation signal.
+- Risks & opportunities now prefer the strict source-text strategic classifications when present; legacy Matrix-derived labels remain only for older records without that field. External shocks appear only when the strict shock test passes.
+- Cache keys are bumped across public pages so the revised navigation and logic load immediately.
+
 # v17.19.17 — scanner recall repair from 2026-09-02 live diagnostics
 
 - Starts from the curator-supplied 2026-09-02 06:17Z `radar.json` (385 Strand A, 24 Strand B, 8 Strand C) and preserves the v17.19.16 Matrix evidence-recall repair.

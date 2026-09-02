@@ -745,6 +745,7 @@
       sourceTier:meritInput.sourceTier,
       euRelevance:meritInput.euRelevance,
       sourceMerit,
+      strategicClassification:(x.strategic_classification||evidence?.strategic_classification||null),
       discoveryProvenance:clean(x._provenance||evidence?.discovery_provenance||''),
       quadrantClaimed:clean(x._matrixClaimed||evidence?.quadrant_claimed||''),
       quadrantImplied:clean(x._matrixQuadrant||evidence?.quadrant_implied||column.id||'')
