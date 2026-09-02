@@ -22,13 +22,13 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
         self.assertIn("Confirm no repository credential is stored before scanning", text)
         self.assertIn("^http\\..*\\.extraheader$", text)
 
-    def test_scanner_output_is_isolated_to_radar_json(self):
+    def test_scanner_output_is_isolated_to_data_and_stuff_workbook(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn("radar.json is the ONLY persistent output of the main scanner", text)
-        self.assertIn("git diff --name-only -- . ':!radar.json'", text)
-        self.assertIn("grep -vx 'radar.json'", text)
+        self.assertIn("The scanner persists radar.json plus the Stuff technical-ranking workbook", text)
+        self.assertIn("':!radar.json' ':!stuff/source_merit_ranking.xlsx'", text)
+        self.assertIn("radar.json|stuff/source_merit_ranking", text)
         self.assertIn("Could not isolate scanner output safely. Refusing to save.", text)
-        self.assertIn("git add -- radar.json", text)
+        self.assertIn("git add -- radar.json stuff/source_merit_ranking.xlsx", text)
 
     def test_main_scanner_has_fixed_four_hour_schedule_or_safe_legacy_compatibility(self):
         text = WORKFLOW.read_text(encoding="utf-8")

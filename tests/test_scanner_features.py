@@ -728,6 +728,11 @@ class V1719RecallModelTests(unittest.TestCase):
 
     def test_admission_repair_reopens_targeted_a_recall_without_full_reset(self):
         previous = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
+        # Make the contract deterministic even when the uploaded post-scan state has
+        # already completed this recovery version.
+        previous = dict(previous)
+        previous["scan_state"] = dict(previous.get("scan_state") or {})
+        previous["scan_state"]["a_recall_recovery_version"] = "older-recovery-version"
         state = scan.initial_scan_state(previous)
         self.assertFalse(state.get("recall_reset_this_run"))
         self.assertEqual(state.get("openalex_cursor"), (previous.get("scan_state") or {}).get("openalex_cursor"))
@@ -1444,10 +1449,10 @@ class RotationAndReaderQualityTests(unittest.TestCase):
         import subprocess
         js = r"""
 const P=require('./priorities/priorities.js');
-const data={strand_a:[
- {title:'Matrix-only item',date:'2026-09-01',link:'https://example.org/matrix',strategic_classification:null},
- {title:'Strict risk',date:'2026-09-02',link:'https://example.org/risk',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'source passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}}
-]};
+const data={
+ strand_a:[{title:'Embedded label must be ignored',date:'2026-09-01',link:'https://example.org/matrix',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'old embedded passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}}],
+ strategic_pathways:[{title:'Strict risk',date:'2026-09-02',link:'https://example.org/risk',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',status:'open',passage:'source passage',components:{mechanism:'could restrict',carrier:'government',asset:'research access'}}]}}]
+};
 const v=P.buildPriorityView(data,{limit:8});
 if(v.stats.risks!==1||v.risks[0].title!=='Strict risk') process.exit(2);
 """
@@ -1463,11 +1468,12 @@ if(/Joint Research Centre/i.test(w)) process.exit(2);
 """
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 
-    def test_read_page_evidence_selection_is_quality_aware(self):
+    def test_read_page_evidence_selection_does_not_use_source_quality_scores(self):
         source = (ROOT / "read" / "issues.js").read_text(encoding="utf-8")
         self.assertIn("readEvidenceScore", source)
-        self.assertIn("merit(m.x)+Math.min(4,m.hits)*12", source)
-        self.assertIn(".35+.65*(merit(x)/100)", source)
+        self.assertNotIn("RadarSourceMerit", source)
+        self.assertNotIn("merit(", source)
+        self.assertIn("Math.min(4,m.hits)", source)
 
 
 
@@ -1816,6 +1822,42 @@ class V171913CadenceJournalAndCorpusCleanupTests(unittest.TestCase):
         self.assertIn('Stuff', stuff)
 
 
+class EuRelevanceScannerGateTests(unittest.TestCase):
+    def test_strand_a_requires_direct_eu_scope(self):
+        no_eu = scan.gate_scope(
+            "Research security and semiconductor export controls",
+            "The study analyses research and innovation dependencies, export controls and strategic technology competition in advanced semiconductors.",
+            "", 1, source_kind="scholarly"
+        )
+        self.assertFalse(no_eu["a_pass"])
+        self.assertIsNone(no_eu["eu_relevance"])
+
+        with_eu = scan.gate_scope(
+            "EU research security and semiconductor export controls",
+            "The European Union study analyses research and innovation dependencies, export controls and strategic technology competition in advanced semiconductors.",
+            "", 1, source_kind="scholarly"
+        )
+        self.assertEqual(with_eu["eu_relevance"], "direct")
+
+    def test_strategic_pathways_require_eu_scope_before_classification_is_filed(self):
+        foreign_only = (
+            "Laboratories are dependent on a sole supplier for advanced chips. "
+            "The government could restrict export licences, which would deny access to the supply line."
+        )
+        ok, reason = scan.strategic_pathway_scope_gate(foreign_only)
+        self.assertFalse(ok)
+        self.assertEqual(reason, "no_direct_or_material_europe_link")
+
+        eu_text = (
+            "European laboratories are dependent on a sole supplier for advanced chips. "
+            "Access is subject to United States export licences and the government could restrict approvals, "
+            "which would deny EU researchers access to the supply line."
+        )
+        ok, reason = scan.strategic_pathway_scope_gate(eu_text)
+        self.assertTrue(ok)
+        self.assertEqual(reason, "direct_european_scope")
+
+
 class StrategicSignalClassificationTests(unittest.TestCase):
     def test_risk_requires_mechanism_carrier_and_asset(self):
         text = (
@@ -1906,6 +1948,51 @@ class StrategicSignalClassificationTests(unittest.TestCase):
         self.assertTrue(any("could leverage" in q.lower() or "regulatory sandbox" in q.lower() for q in news))
         self.assertTrue(any("immediate effect" in q.lower() or "cut off" in q.lower() for q in news))
         self.assertGreaterEqual(len(scholarly), 4)
+
+    def test_active_pathway_corpus_can_file_items_without_main_radar_admission(self):
+        cases = [
+            {
+                "title": "Cloud access risk", "source": "Reuters", "link": "https://reuters.com/risk", "date": "2026-09-02",
+                "_strategic_source_text": "European universities are dependent on a United States-controlled cloud supplier for research data. The United States government could restrict access under export licensing, which would deny access to European research data.",
+            },
+            {
+                "title": "Pilot line opportunity", "source": "Reuters", "link": "https://reuters.com/opportunity", "date": "2026-09-02",
+                "_strategic_source_text": "The European Commission could leverage its existing instrument: procurement could fund a pilot line now, strengthening European semiconductor research capacity while co-funding is available.",
+            },
+            {
+                "title": "GPU access shock", "source": "Reuters", "link": "https://reuters.com/shock", "date": "2026-09-02",
+                "_strategic_source_text": "On 2 September 2026, a United States supplier cut off European research laboratories from GPU compute without prior notice, shutting down access overnight.",
+            },
+        ]
+        rows = scan.build_strategic_pathway_corpus([], cases, [], "2026-09-02T12:00:00Z", [])
+        kinds = {r["strategic_classification"]["primary"] for r in rows}
+        self.assertEqual(kinds, {"risk", "opportunity", "external_shock"})
+        self.assertTrue(all(r["source_quality_gate"]["admissible"] for r in rows))
+
+    def test_strategic_source_quality_gate_is_separate_from_eu_relevance(self):
+        direct={"source":"Reuters","link":"https://reuters.com/a","eu_relevance":"direct"}
+        derived={"source":"Reuters","link":"https://reuters.com/b","eu_relevance":"derived"}
+        self.assertEqual(scan.strategic_source_quality_gate(direct), scan.strategic_source_quality_gate(derived))
+        self.assertFalse(scan.strategic_source_quality_gate({"source":"Unknown Blog","link":"https://unknown.invalid/x"})[0])
+
+    def test_dedicated_scholarly_pathway_can_be_filed_without_ab_strand(self):
+        text = (
+            "European laboratories are dependent on a sole supplier for advanced semiconductors. "
+            "Access is subject to United States export licences and the government could restrict approvals, "
+            "which would deny European research centres access to the chips."
+        )
+        candidate = scan._strategic_scholarly_candidate(
+            title="European semiconductor access exposure", authors="A. Researcher",
+            source="Research Policy", date=scan.dt.date(2026, 9, 1),
+            link="https://doi.org/10.0000/example", item_type="peer-reviewed article",
+            tier_label="Tier 2", text=text,
+        )
+        self.assertIsNotNone(candidate)
+        self.assertEqual(candidate["strand"], "strategic")
+        self.assertTrue(candidate["_strategic_discovery"])
+        filed = scan.strategic_pathway_record(candidate, [])
+        self.assertIsNotNone(filed)
+        self.assertEqual(filed["strategic_classification"]["primary"], "risk")
 
     def test_classifier_records_required_components_and_transition_key(self):
         text = (

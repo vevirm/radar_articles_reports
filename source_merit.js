@@ -1,3 +1,6 @@
+/* v17.19.24 — 0–100 technical evidence ranking for Stuff only.
+   EU relevance is intentionally part of this audit/export score.
+   This helper must not be used to order Radar, Matrix, Literature, Risks & Opportunities, External Shocks, issue views or Historical evidence. */
 (function(root,factory){
   const api=factory();
   if(typeof module==='object'&&module.exports) module.exports=api;

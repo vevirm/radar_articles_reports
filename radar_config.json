@@ -2115,7 +2115,9 @@
   "source_family_parallel_scan": true,
   "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Each family keeps independent persisted cursors; no output quota is imposed.",
   "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
-  "reader_quality_ranking_rule": "After substantive admission/Matrix placement, reader surfaces rank findings with source merit from source_merit.js (authority + EU relevance + evidence strength + author transparency) as a material part of ordering, never as an admission shortcut.",
+  "reader_quality_ranking_rule": "Public analytical readers do not display or order by source-quality scores. The Stuff audit/export workbook alone carries a 0-100 technical evidence ranking combining source authority, EU relevance, evidence strength and author transparency.",
+  "scanner_eu_relevance_rule": "EU relevance is an explicit scanner gate for substantive evidence products: Strand A requires direct EU/European scope; Strand C requires direct European scope or its existing tightly bounded A-anchored material-external route; Risks, Opportunities and External Shocks require direct/material EU R&I scope in source-backed text. Strand B is a methodology lane and is admitted for reusable futures methods rather than as a substantive EU finding.",
+  "stuff_ranking_rule": "0-100 audit/export score only: source authority max 55 + EU relevance max 25 + evidence strength max 15 + author transparency max 5. This score must not be used for Matrix placement or public-reader ordering.",
   "formal_evidence_news_promotion_per_scan": 6,
   "source_failure_reallocation_enabled": true,
   "source_failure_reallocation_stage_seconds": 300,
@@ -2353,7 +2355,7 @@
   "weak_signal_retention_days": 60,
   "direct_top_journal_google_news_lookback_days": 14,
   "direct_top_journal_google_news_queries_per_source": 2,
-  "strategic_signal_profile_version": "v17.19.22-active-independent-risk-opportunity-shock",
+  "strategic_signal_profile_version": "v17.19.23-independent-scanned-products",
   "weak_signal_attention_profile_version": "v17.19.18-weak-signals-first-reader-and-rescue",
   "strategic_pathway_scan_enabled": true,
   "strategic_pathway_scholarly_queries_per_category": 2,
@@ -2396,5 +2398,7 @@
       "European research talent attraction funding instrument opportunity",
       "Europe innovation regulatory sandbox pilot line strategic technology"
     ]
-  }
+  },
+  "source_quality_profile_version": "v17.19.24-upstream-gate-plus-stuff-audit-ranking",
+  "source_quality_admission_rule": "Source quality is evaluated upstream as an admissibility question about authority, provenance, evidential proximity and verifiability. EU/R&I relevance, geopolitical significance, Matrix placement and reader importance are separate tests and cannot raise or lower source quality."
 }

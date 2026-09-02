@@ -24,7 +24,6 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE_FILES = [
     "index.html",
     "simple-ui.css",
-    "source_merit.js",
     "radar.json",
     "robots.txt",
     "read/index.html",
@@ -38,8 +37,10 @@ SITE_FILES = [
     "frontier/frontier.js",
     "priorities/index.html",
     "priorities/priorities.js",
+    "shocks/index.html",
     "literature/index.html",
     "stuff/index.html",
+    "source_merit.js",
     "stuff/source_merit_ranking.xlsx",
     "stuff/eu_ri_radar_phrases_by_strand.xlsx",
 ]
@@ -54,6 +55,7 @@ SCANNER_FILES = [
     "curator_candidate_tests.json",
     "requirements.txt",
     "scripts/scan_radar.py",
+    "scripts/generate_stuff_workbook.js",
     "scripts/frontier_coverage.js",
     "tests/test_scanner_features.py",
     "tests/test_reader_ui_v17179.py",

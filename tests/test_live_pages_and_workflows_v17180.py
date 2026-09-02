@@ -13,6 +13,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
             'frontier/index.html',
             'frontier/quick/index.html',
             'priorities/index.html',
+            'shocks/index.html',
             'literature/index.html',
             'stuff/index.html',
         ]
@@ -31,32 +32,56 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertIn('Current issues render failed', html)
         self.assertIn('The radar data itself is loaded.', html)
 
-    def test_source_merit_remains_available_outside_matrix_but_matrix_does_not_display_it(self):
-        read_js = (ROOT / 'read/issues.js').read_text(encoding='utf-8')
-        frontier_js = (ROOT / 'frontier/frontier.js').read_text(encoding='utf-8')
-        frontier = (ROOT / 'frontier/index.html').read_text(encoding='utf-8')
-        quick = (ROOT / 'frontier/quick/index.html').read_text(encoding='utf-8')
-        priorities_js = (ROOT / 'priorities/priorities.js').read_text(encoding='utf-8')
-        stuff = (ROOT / 'stuff/index.html').read_text(encoding='utf-8')
-        literature = (ROOT / 'literature/index.html').read_text(encoding='utf-8')
-        briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')
-        self.assertIn('RadarSourceMerit', read_js)
-        self.assertIn('sourceMerit', frontier_js)  # metadata can still serve non-Matrix consumers
-        self.assertIn('matrixPriorityScore', frontier_js)
-        self.assertNotIn('sourceMerit', priorities_js)
-        self.assertNotIn('Frontier', priorities_js)
-        self.assertIn('strategic_classification', priorities_js)
-        self.assertIn('RadarSourceMerit.compare', stuff)
-        self.assertIn('RadarSourceMerit.compare', literature)
-        self.assertIn('RadarSourceMerit?.scoreFor', briefing)
-        for page in (frontier, quick):
-            self.assertNotIn('source_merit.js', page)
-            self.assertNotIn('merit-badge', page)
-            self.assertNotIn('Source strength', page)
-            self.assertNotIn('Source: ${esc(m.label)}', page)
-            self.assertNotIn('simple-ui.css', page)
-        self.assertIn('Source quality is handled upstream', frontier)
-        self.assertIn('Source quality is handled before Matrix placement', quick)
+    def test_source_merit_ranking_is_confined_to_stuff(self):
+        reader_files = [
+            'index.html', 'read/index.html', 'briefing/index.html', 'literature/index.html',
+            'frontier/index.html', 'frontier/quick/index.html', 'priorities/index.html',
+            'shocks/index.html', 'historical/index.html',
+        ]
+        for rel in reader_files:
+            with self.subTest(rel=rel):
+                text=(ROOT / rel).read_text(encoding='utf-8')
+                self.assertNotIn('source_merit.js', text)
+                self.assertNotIn('RadarSourceMerit', text)
+                self.assertNotIn('merit-badge', text)
+        stuff=(ROOT / 'stuff' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('source_merit.js', stuff)
+        self.assertIn('source_merit_ranking.xlsx', stuff)
+        self.assertIn('0–100', stuff)
+        self.assertIn('EU relevance', stuff)
+        helper=(ROOT / 'source_merit.js').read_text(encoding='utf-8')
+        self.assertIn('scoreFor', helper)
+        self.assertIn('compare', helper)
+        self.assertIn("if(rel==='direct')return {points:25", helper)
+        config=(ROOT / 'radar_config.json').read_text(encoding='utf-8')
+        self.assertIn('Stuff audit/export workbook alone', config)
+        self.assertIn('EU relevance is an explicit scanner gate', config)
+
+
+    def test_historical_reader_does_not_display_or_rank_source_merit(self):
+        html=(ROOT / 'historical' / 'index.html').read_text(encoding='utf-8')
+        scanner=(ROOT / 'historical' / 'scan_historical.py').read_text(encoding='utf-8')
+        self.assertNotIn('source_merit_label||', html)
+        self.assertNotIn('class="merit"', html)
+        self.assertNotIn('(int(x.get("source_merit_score",0)),int(x.get("year",0))', scanner)
+        self.assertIn('Reader/corpus ordering is chronological after admission', scanner)
+
+    def test_main_scan_refreshes_and_commits_stuff_workbook(self):
+        workflow=(ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
+        self.assertIn('node scripts/generate_stuff_workbook.js', workflow)
+        self.assertIn('git add -- radar.json stuff/source_merit_ranking.xlsx', workflow)
+        self.assertIn("- 'stuff/source_merit_ranking.xlsx'", workflow)
+        self.assertIn("':!stuff/source_merit_ranking.xlsx'", workflow)
+        generator=(ROOT / 'scripts' / 'generate_stuff_workbook.js').read_text(encoding='utf-8')
+        self.assertIn("require('../source_merit.js')", generator)
+        self.assertIn('EU relevance / 25', generator)
+
+    def test_release_manifest_keeps_shocks_and_stuff_merit_workbook(self):
+        manifest=(ROOT / 'scripts' / 'build_release.py').read_text(encoding='utf-8')
+        self.assertIn('"shocks/index.html"', manifest)
+        self.assertIn('"stuff/source_merit_ranking.xlsx"', manifest)
+        self.assertIn('"source_merit.js"', manifest)
+
 
     def test_matrix_ordering_does_not_use_source_merit(self):
         frontier_js = (ROOT / 'frontier/frontier.js').read_text(encoding='utf-8')
@@ -75,7 +100,11 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertNotIn('column.id', js)
         self.assertNotIn('sourceMerit', js)
         self.assertNotIn('current Matrix findings support this view', html)
-        self.assertIn('Independent of Matrix placement', html)
+        self.assertIn('Independent analytical product', html)
+        shocks = (ROOT / 'shocks' / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('scanner actively searches event language', shocks)
+        self.assertIn('RadarPriorities.buildPriorityView', shocks)
+        self.assertNotIn('Matrix placement', shocks)
 
     def test_briefing_is_not_a_stale_generated_snapshot(self):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')

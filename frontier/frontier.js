@@ -1,9 +1,8 @@
 (function(root,factory){
-  const merit=(typeof module==='object'&&module.exports)?require('../source_merit.js'):root.RadarSourceMerit;
-  const api=factory(root.RadarInsights,merit);
+  const api=factory(root.RadarInsights);
   if(typeof module==='object'&&module.exports) module.exports=api;
   root.SovereigntyFrontier=api;
-})(typeof globalThis!=='undefined'?globalThis:this,function(RadarInsights,SourceMerit){
+})(typeof globalThis!=='undefined'?globalThis:this,function(RadarInsights){
   'use strict';
 
   const ROWS=[
@@ -593,7 +592,6 @@
   function classifySignal(x,data,index,now=new Date()){
     if(!x||typeof x!=='object') return null;
     const evidence=evidenceFor(x,index);
-    const meritApi=SourceMerit||null;
     const reviewedMatrix=clean(x._matrixSource||evidence?.matrix_classification_source||'')==='reviewed_underlying_source';
     const rows=rowScores(x,evidence);
     const questions=questionScores(x,evidence),flags=questionFlags(questions);
@@ -703,19 +701,8 @@
     const recency=recencyScore(x,now)+(x.new_this_scan?1:0);
     const overall=triage+multi+crossDirection+columnWeight+recency;
     const cell=CELL_NAMES[row.id][column.id];
-    const meritInput={
-      title:clean(x._origin==='Evidence signal' ? (evidence?.title||x.title||candidateWhat(x)) : (x.headline||x.title||candidateWhat(x))),
-      authors:clean(x._origin==='Evidence signal' ? (evidence?.authors||'') : (x.authors||'')),
-      source:sourceFor(x),
-      date:dateFor(x),
-      link:linkFor(x),
-      itemType:clean(x._origin==='Evidence signal' ? (evidence?.type||x.type||'') : (x.type||x.signal_kind||x.signal_type||'')),
-      sourceTier:clean(x._origin==='Evidence signal' ? (evidence?.source_tier||x.source_tier||'') : (x.source_tier||'')),
-      euRelevance:clean(x._origin==='Evidence signal' ? (evidence?.eu_relevance||x.eu_relevance||'') : (x.eu_relevance||'')),
-      origin:x._origin||'Weak signal',
-      strand:clean(x.strand||'')
-    };
-    const sourceMerit=meritApi?.forItem?meritApi.forItem(meritInput):null;
+    const sourceTier=clean(x._origin==='Evidence signal' ? (evidence?.source_tier||x.source_tier||'') : (x.source_tier||''));
+    const euRelevance=clean(x._origin==='Evidence signal' ? (evidence?.eu_relevance||x.eu_relevance||'') : (x.eu_relevance||''));
     return {
       id:norm(linkFor(x)||candidateWhat(x)),
       title:candidateWhat(x),
@@ -742,9 +729,8 @@
       materiality,euLink,overall,
       strongCandidate:qCount>=2,
       confidence:clamp(Math.round((Math.min(6,materiality)/6*.35 + Math.min(6,euLink)/6*.2 + Math.min(3,qCount)/3*.25 + Math.min(8,Math.abs(direction.autonomy)+Math.abs(direction.performance))/8*.2)*100),35,96),
-      sourceTier:meritInput.sourceTier,
-      euRelevance:meritInput.euRelevance,
-      sourceMerit,
+      sourceTier,
+      euRelevance,
       strategicClassification:(x.strategic_classification||evidence?.strategic_classification||null),
       discoveryProvenance:clean(x._provenance||evidence?.discovery_provenance||''),
       quadrantClaimed:clean(x._matrixClaimed||evidence?.quadrant_claimed||''),
@@ -918,7 +904,7 @@
     // Source quality is an upstream admission criterion, not a Matrix dimension.
     // Once a finding is admitted and substantively placed, ordering is based only on
     // the strength of the Matrix evidence: overall movement, materiality, confidence
-    // and triage. Source-merit metadata may still travel with a record for other pages.
+    // and triage. Source quality has already been handled by upstream admission.
     const findingScore=Number(x?.overall||0);
     const materiality=Number(x?.materiality||0);
     const confidence=Number(x?.confidence||0);

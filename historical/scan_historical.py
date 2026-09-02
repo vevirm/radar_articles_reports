@@ -830,12 +830,12 @@ def main() -> int:
     wait_until_minimum_runtime()
     unique_gate=dedupe(candidates); merged=dedupe(manual_items+old_items+unique_gate)
     merged=[x for x in merged if (d:=parse_date(x.get("date"))) and DATE_FROM<=d<=DATE_TO]
-    merged.sort(key=lambda x:(int(x.get("source_merit_score",0)),int(x.get("year",0)),x.get("date","")),reverse=True)
+    merged.sort(key=lambda x:(int(x.get("year",0)),x.get("date",""),clean(x.get("title"))),reverse=True)
     if MAX_ITEMS>0 and len(merged)>MAX_ITEMS:
         manual_keep=[x for x in merged if x.get("manual_curated")]
         other_keep=[x for x in merged if not x.get("manual_curated")][:max(0,MAX_ITEMS-len(manual_keep))]
         merged=manual_keep+other_keep
-        merged.sort(key=lambda x:(int(x.get("source_merit_score",0)),int(x.get("year",0)),x.get("date","")),reverse=True)
+        merged.sort(key=lambda x:(int(x.get("year",0)),x.get("date",""),clean(x.get("title"))),reverse=True)
     new_count=sum(1 for x in merged if not x.get("manual_curated") and clean(x.get("id")) not in previous_ids)
     matrix_counts={r:{c:0 for c in "ABCD"} for r in ROW_TERMS}
     for x in merged:
@@ -846,7 +846,7 @@ def main() -> int:
     data={
         "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),"cutoff_exclusive":CUTOFF_EXCLUSIVE.isoformat(),"main_radar_window_months":MAIN_RADAR_WINDOW_MONTHS,
         "scope_note":"Separate source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff; accepted live A/B evidence itself is cumulative. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
-        "ranking_note":f"Every run searches the eligible period from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. Topic families rotate; years do not. More recent historical evidence receives only a tie-break preference when quality and relevance are otherwise comparable.",
+        "ranking_note":f"Every run searches the eligible period from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. Topic families rotate; years do not. Reader/corpus ordering is chronological after admission; source quality is used only by the upstream evidence gate and duplicate resolution.",
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
         "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},

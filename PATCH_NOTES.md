@@ -1,3 +1,22 @@
+# v17.19.24
+
+- Restored the 0–100 technical evidence ranking in **Stuff** only.
+- The score intentionally includes EU relevance (max 25) alongside source authority (55), evidence strength (15) and author transparency (5).
+- Public analytical readers remain independent of source-score ordering.
+- Reinforced EU relevance as a scanner gate for substantive A/C and strategic risk/opportunity/shock evidence.
+- Strategic-pathway records now persist their EU-relevance classification for audit/export.
+
+# v17.19.23 — independent scanned implications + upstream-only source quality + simplified reader shell
+
+- Treats Risks & Opportunities and External Shocks as independently scanned analytical corpora. Dedicated current-event queries cover risk, opportunity and shock language; protected OpenAlex/Crossref queries cover structural risks and actionable opportunities. A valid pathway can be saved even when the same publication does not enter Main Radar A/B, Strand C or the Matrix.
+- Saves these findings in `radar.json` under `strategic_pathways`. Risks require mechanism + carrier + exposed asset; opportunities require mechanism + actor + instrument + gain + current window; shocks require discreteness + externality + statable effect + speed. Classification is always from source text; query phrases are retrieval cues only.
+- Keeps risk→shock lifecycle one-way: a newer, matching realised shock can close an older conditional risk, while the actor's own response is not converted into a shock or opportunity.
+- Removes the last Matrix dependency from Risks & Opportunities and provides External Shocks as its own reader page. Neither product can be backfilled, classified or ordered from Matrix quadrants.
+- Reforms source quality into an upstream admissibility gate. The reader no longer computes or displays a 0–100 source-merit score, EU relevance is not part of source quality, and source quality does not order Main Radar, Matrix, Literature, issue views, Risks & Opportunities, External Shocks or Historical evidence. Historical evidence retains its internal merit calculation only for admission/duplicate resolution, then orders chronologically.
+- Simplifies the public visual shell to a flat white / black / red system. Decorative shadows, rounded dashboard styling and non-semantic category colours are suppressed by the common reader stylesheet; Historical evidence now loads that stylesheet last and no longer shows green source-merit badges or pastel Matrix cells.
+- Retires the obsolete `stuff/source_merit_ranking.xlsx` release artifact and removes the unused browser source-merit helper from the public release manifest. The manifest now explicitly includes the independent `/shocks/` page.
+- Preserves the post-scan corpus and incremental cursors from the uploaded repository. No live network rescan is baked into this release; the next GitHub scanner run populates the new independent `strategic_pathways` corpus from active discovery.
+
 # v17.19.22 — active independent risk, opportunity & external-shock scanning
 
 - Makes risks, opportunities and external shocks active scanner targets rather than passive annotations discovered only through other Radar searches. Dedicated current-news queries cover all three products, and a protected scholarly slice searches for structural risk and actionable-opportunity pathways on every run. These queries allocate attention only; they do not bypass the existing EU R&I relevance or source-admission gates.

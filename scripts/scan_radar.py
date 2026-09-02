@@ -3926,6 +3926,199 @@ def strategic_pathway_queries(channel: str) -> list[str]:
         out.extend(vals)
     return list(dict.fromkeys(out))
 
+def strategic_source_quality_gate(item: dict[str, Any]) -> tuple[bool, str]:
+    """Source-only admissibility gate for the strategic-pathway product.
+
+    This deliberately does *not* score EU relevance, geopolitical significance, Matrix
+    position or reader importance. Source quality answers one upstream question only:
+    is this a sufficiently accountable source for the proposition being extracted?
+    """
+    if not isinstance(item, dict):
+        return False, 'invalid_record'
+    source = clean_text(item.get('source') or item.get('journal') or item.get('institution'))
+    link = clean_text(item.get('link') or item.get('url'))
+    try:
+        domain = (urlparse(link).hostname or '').lower().removeprefix('www.')
+    except Exception:
+        domain = ''
+
+    if _source_merit_is_eu_official(source, link):
+        return True, 'eu_official_primary_source'
+
+    for src in CONFIG.get('institution_sources', []):
+        if not isinstance(src, dict):
+            continue
+        sd = clean_text(src.get('domain')).lower().removeprefix('www.')
+        sn = clean_text(src.get('name'))
+        if (source and sn and normalized(source) == normalized(sn)) or (domain and sd and (domain == sd or domain.endswith('.' + sd))):
+            return True, 'configured_institutional_source'
+
+    for src in CONFIG.get('news_sources', []):
+        if not isinstance(src, dict):
+            continue
+        sd = clean_text(src.get('domain')).lower().removeprefix('www.')
+        sn = clean_text(src.get('name'))
+        if (source and sn and normalized(source) == normalized(sn)) or (domain and sd and (domain == sd or domain.endswith('.' + sd))):
+            return True, 'configured_current_event_source'
+
+    tier = normalized(item.get('source_tier') or item.get('sourceTier'))
+    if any(x in tier for x in ('tier 1', 'tier 2', 'trusted-publisher journal', 'tier 3 preprint')):
+        return True, 'admitted_scholarly_source'
+    try:
+        journal_tier, _, _ = source_rank_for_journal(source)
+    except Exception:
+        journal_tier = None
+    if journal_tier:
+        return True, 'configured_scholarly_source'
+    return False, 'source_not_on_admissible_source_routes'
+
+
+def strategic_pathway_scope_gate(text: str, a_corpus: list[dict[str, Any]] | None = None) -> tuple[bool, str]:
+    """Require explicit R&I substance plus explicit EU/European relevance.
+
+    EU relevance is a scanner gate, not merely an export score.  Strategic pathways use
+    the common ``eu_evidence`` classifier (plus the current-event scope matcher) before
+    the independent risk/opportunity/shock test is allowed to file a record.
+    """
+    raw = clean_text(text)
+    if not raw:
+        return False, 'empty_text'
+    low = normalized(raw)
+    ri_ok = bool(re.search(
+        r'\b(?:research|science|scientists?|researchers?|innovation|technology|technologies|university|universities|laborator(?:y|ies)|'
+        r'semiconductors?|chips?|quantum|biotech(?:nology)?|artificial intelligence|\bai\b|compute|research infrastructure|patents?|r&d|r\s*&\s*d)\b',
+        low,
+        re.I,
+    ))
+    if not ri_ok:
+        return False, 'no_substantive_ri_object'
+    eu_rel, _ = eu_evidence('', raw, '')
+    if eu_rel == 'direct' or eu_news_scope(raw):
+        return True, 'direct_european_scope'
+    ext_ok, bridge, _ = external_eu_bridge_sentence(raw, a_corpus or [])
+    if ext_ok and bridge:
+        return True, 'material_external_europe_effect'
+    return False, 'no_direct_or_material_europe_link'
+
+
+def strategic_pathway_candidate_text(text: str, a_corpus: list[dict[str, Any]] | None = None) -> bool:
+    classification = classify_strategic_source_text(text)
+    if not classification.get('lenses'):
+        return False
+    scope_ok, _ = strategic_pathway_scope_gate(text, a_corpus)
+    return bool(scope_ok)
+
+
+def strategic_pathway_identity(item: dict[str, Any]) -> str:
+    link = normalized_link(item.get('link', ''))
+    if link:
+        return 'url:' + link
+    title = norm_title(item.get('title') or item.get('headline') or '')
+    source = normalized(item.get('source', ''))
+    date = clean_text(item.get('date', ''))[:10]
+    return f'title:{title}|{source}|{date}' if title else ''
+
+
+def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    if not isinstance(item, dict):
+        return None
+    title = clean_text(item.get('title') or item.get('headline'))
+    if not title:
+        return None
+    source_text = clean_text(item.get('_strategic_source_text'))
+    if not source_text:
+        if clean_text(item.get('strategic_classification_source')) == 'source_text' and isinstance(item.get('strategic_classification'), dict):
+            classification = deepcopy(item.get('strategic_classification') or {})
+            source_text = clean_text(
+                ' '.join(clean_text(x.get('passage')) for x in classification.get('lenses', []) if isinstance(x, dict))
+            ) or clean_text(f"{title}. {item.get('summary') or item.get('signal_note') or item.get('what') or ''}")
+        else:
+            source_text = clean_text(f"{title}. {item.get('_desc') or item.get('summary') or item.get('signal_note') or item.get('what') or ''}")
+            classification = classify_strategic_source_text(source_text)
+    else:
+        classification = classify_strategic_source_text(source_text)
+    if not classification.get('lenses'):
+        return None
+    quality_ok, quality_basis = strategic_source_quality_gate(item)
+    if not quality_ok:
+        return None
+    scope_ok, scope_basis = strategic_pathway_scope_gate(source_text, a_corpus)
+    if not scope_ok:
+        return None
+    eu_rel, eu_hits = eu_evidence('', source_text, '')
+    if eu_rel != 'direct' and eu_news_scope(source_text):
+        eu_rel, eu_hits = 'direct', ['direct European scope in source text']
+    return {
+        'title': title,
+        'source': clean_text(item.get('source')),
+        'authors': clean_text(item.get('authors')),
+        'date': clean_text(item.get('date') or item.get('first_seen')),
+        'link': clean_text(item.get('link')),
+        'type': clean_text(item.get('type') or item.get('signal_kind') or 'strategic pathway evidence'),
+        'discovery_provenance': clean_text(item.get('discovery_provenance') or item.get('_discovery_provenance') or 'scanner'),
+        'strategic_classification': classification,
+        'strategic_classification_source': 'source_text',
+        'source_quality_gate': {'admissible': True, 'basis': quality_basis},
+        'eu_relevance': eu_rel or ('material_external' if scope_basis == 'material_external_europe_effect' else None),
+        'eu_evidence': eu_hits[:4],
+        'eu_ri_scope_basis': scope_basis,
+    }
+
+
+def build_strategic_pathway_corpus(
+    previous_records: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    prior_embedded_records: list[dict[str, Any]],
+    now_iso: str,
+    a_corpus: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    """Build the independent Risks/Opportunities/External-Shocks corpus.
+
+    Candidates come from dedicated pathway news queries plus the ordinary scholarly and
+    institutional source families. They do not need to become Strand C or Matrix evidence.
+    """
+    prior_ids = {
+        strategic_pathway_identity(x) for x in (previous_records or []) + (prior_embedded_records or [])
+        if isinstance(x, dict) and strategic_pathway_identity(x)
+    }
+    by_id: dict[str, dict[str, Any]] = {}
+    for old in previous_records or []:
+        if not isinstance(old, dict):
+            continue
+        sid = strategic_pathway_identity(old)
+        if sid:
+            row = dict(old)
+            row['new_this_scan'] = False
+            by_id[sid] = row
+    for raw in candidates or []:
+        rec = strategic_pathway_record(raw, a_corpus)
+        if not rec:
+            continue
+        sid = strategic_pathway_identity(rec)
+        if not sid:
+            continue
+        old = by_id.get(sid)
+        if old and clean_text(old.get('first_seen')):
+            rec['first_seen'] = clean_text(old.get('first_seen'))
+        else:
+            rec['first_seen'] = clean_text(raw.get('first_seen')) or now_iso
+        rec['new_this_scan'] = sid not in prior_ids
+        # Prefer the record with more complete source passages/lenses when duplicate routes
+        # find the same publication.
+        if old:
+            old_lenses = len((old.get('strategic_classification') or {}).get('lenses') or [])
+            new_lenses = len((rec.get('strategic_classification') or {}).get('lenses') or [])
+            old_passage = sum(len(clean_text(x.get('passage'))) for x in (old.get('strategic_classification') or {}).get('lenses', []) if isinstance(x, dict))
+            new_passage = sum(len(clean_text(x.get('passage'))) for x in (rec.get('strategic_classification') or {}).get('lenses', []) if isinstance(x, dict))
+            if (new_lenses, new_passage) < (old_lenses, old_passage):
+                continue
+        by_id[sid] = rec
+    rows = list(by_id.values())
+    apply_strategic_risk_shock_lifecycle([rows])
+    rows.sort(key=lambda x: (bool(x.get('new_this_scan')), clean_text(x.get('date'))), reverse=True)
+    return rows
+
+
 def _strategic_passages(text: str) -> list[str]:
     sentences = [clean_text(x) for x in split_sentences(text, max_chars=24000) if clean_text(x)]
     out: list[str] = []
@@ -4862,7 +5055,25 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
         "institution_source_adapter_jobs": n("institution_adapter_jobs"),
     }
 
-def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None) -> dict[str, Any] | None:
+def _strategic_scholarly_candidate(*, title: str, authors: str, source: str, date: dt.date, link: str,
+                                     item_type: str, tier_label: str, text: str) -> dict[str, Any] | None:
+    """Minimal independent-pathway record from a dedicated scholarly query.
+
+    This route does not admit the publication to Strand A/B. It only preserves enough
+    accountable source text for the separate risk/opportunity classifier to test later.
+    """
+    if not strategic_pathway_candidate_text(text):
+        return None
+    return {
+        'title': clean_text(title), 'authors': clean_text(authors), 'source': clean_text(source),
+        'date': date.isoformat(), 'link': clean_text(link), 'type': clean_text(item_type),
+        'strand': 'strategic', 'source_tier': clean_text(tier_label),
+        '_strategic_discovery': True, '_strategic_source_text': clean_text(text),
+        'discovery_provenance': 'dedicated_scholarly_pathway_query',
+    }
+
+
+def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None, allow_strategic: bool = False) -> dict[str, Any] | None:
     title = clean_text(work.get("display_name"))
     abstract = openalex_abstract(work.get("abstract_inverted_index"))
     date = parse_date(work.get("publication_date"))
@@ -4879,25 +5090,31 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
         return None
     ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
     _record_ab_gate_diagnostic("openalex", ev)
-    if not (ev["a_pass"] or ev["b_pass"]):
-        return None
-    if tier == 3 and ev["eu_relevance"] is None:
-        return None
-
     doi = clean_text(work.get("doi"))
     if doi and not doi.startswith("http"):
         doi = "https://doi.org/" + doi.removeprefix("doi:")
     link = doi or next((u for u in openalex_locations(work) if u), "")
     typ = normalized(work.get("type")) or "publication"
     is_preprint = typ in {"preprint", "posted-content", "working-paper", "working paper"}
-    strand = "both" if ev["a_pass"] and ev["b_pass"] else "A" if ev["a_pass"] else "B"
+    item_type = "preprint" if is_preprint else "peer-reviewed article"
     full = f"{title}. {abstract}"
-    return build_item(
+    if not (ev["a_pass"] or ev["b_pass"]):
+        return _strategic_scholarly_candidate(
+            title=title, authors=openalex_authors(work), source=source, date=date, link=link,
+            item_type=item_type, tier_label=tier_label, text=full,
+        ) if allow_strategic else None
+    if tier == 3 and ev["eu_relevance"] is None:
+        return None
+    strand = "both" if ev["a_pass"] and ev["b_pass"] else "A" if ev["a_pass"] else "B"
+    row = build_item(
         title=title, authors=openalex_authors(work), source=source, date=date, link=link,
-        item_type="preprint" if is_preprint else "peer-reviewed article",
-        strand=strand, evidence=ev, source_rank=source_rank, tier_label=tier_label,
+        item_type=item_type, strand=strand, evidence=ev, source_rank=source_rank, tier_label=tier_label,
         text=full, doi=doi, preprint=is_preprint, frontier_targets=frontier_targets,
     )
+    if allow_strategic and strategic_pathway_candidate_text(full):
+        row['_strategic_discovery'] = True
+        row['_strategic_source_text'] = full
+    return row
 
 
 def collect_openalex(
@@ -4919,6 +5136,7 @@ def collect_openalex(
     stage budget on repeated retries; Crossref and the other sources then continue.
     """
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
+    strategic_query_set = set(strategic_pathway_queries('scholarly'))
     per_page = int(CONFIG.get("openalex_per_query", 60))
     depth_max = max(1, int(CONFIG.get("openalex_depth_pages_max", 6) or 1))
     workers = max(1, min(int(CONFIG.get("openalex_public_workers", 2)), 3))
@@ -4967,7 +5185,7 @@ def collect_openalex(
             doi0 = clean_text(work.get("doi"))
             abstract0 = openalex_abstract(work.get("abstract_inverted_index"))
             if abstract0:
-                item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+                item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
                 if item:
                     out.append(item)
                 continue
@@ -5007,7 +5225,7 @@ def collect_openalex(
             for pos, token in enumerate(tokens):
                 inv.setdefault(token, []).append(pos)
             work["abstract_inverted_index"] = inv
-            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+            item = candidate_from_openalex(work, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
             if item:
                 _diag_inc("openalex_metadata_rescue_admitted")
                 item["metadata_note"] = "Abstract recovered from DOI publisher metadata after high-potential metadata prioritisation."
@@ -5525,7 +5743,7 @@ def doi_landing_abstract(doi_raw: str, timeout: int = 8) -> str:
     return ""
 
 
-def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None) -> dict[str, Any] | None:
+def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None, allow_strategic: bool = False) -> dict[str, Any] | None:
     title = clean_text((item.get("title") or [""])[0])
     abstract = clean_text(item.get("abstract"))
     date = crossref_date(item)
@@ -5542,22 +5760,31 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
         return None
     ev = gate_scope(title, abstract, "", tier, source_kind="scholarly")
     _record_ab_gate_diagnostic("crossref", ev)
-    if not (ev["a_pass"] or ev["b_pass"]):
-        return None
-    if tier == 3 and ev["eu_relevance"] is None:
-        return None
     doi_raw = clean_text(item.get("DOI"))
     doi = f"https://doi.org/{doi_raw}" if doi_raw else ""
     link = doi or clean_text(item.get("URL"))
     typ = normalized(item.get("type"))
     preprint = typ in {"posted-content", "preprint"}
+    resolved_type = "preprint" if preprint else item_type
+    full = f"{title}. {abstract}"
+    if not (ev["a_pass"] or ev["b_pass"]):
+        return _strategic_scholarly_candidate(
+            title=title, authors=crossref_authors(item), source=source, date=date, link=link,
+            item_type=resolved_type, tier_label=tier_label, text=full,
+        ) if allow_strategic else None
+    if tier == 3 and ev["eu_relevance"] is None:
+        return None
     strand = "both" if ev["a_pass"] and ev["b_pass"] else "A" if ev["a_pass"] else "B"
-    return build_item(
+    row = build_item(
         title=title, authors=crossref_authors(item), source=source, date=date, link=link,
-        item_type="preprint" if preprint else item_type, strand=strand, evidence=ev,
-        source_rank=source_rank, tier_label=tier_label, text=f"{title}. {abstract}",
+        item_type=resolved_type, strand=strand, evidence=ev,
+        source_rank=source_rank, tier_label=tier_label, text=full,
         doi=doi, preprint=preprint, frontier_targets=frontier_targets,
     )
+    if allow_strategic and strategic_pathway_candidate_text(full):
+        row['_strategic_discovery'] = True
+        row['_strategic_source_text'] = full
+    return row
 
 
 
@@ -6442,6 +6669,7 @@ def collect_crossref(
     priority_rows = int(CONFIG.get("crossref_priority_journal_rows", 35))
     depth_max = max(1, int(CONFIG.get("crossref_depth_pages_max", 6) or 1))
     priority_depth_max = max(1, int(CONFIG.get("crossref_priority_depth_pages_max", 4) or 1))
+    strategic_query_set = set(strategic_pathway_queries('scholarly'))
     priority_journals = list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
     priority_queries = list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
     priority_tasks = priority_tasks_override if priority_tasks_override is not None else [(j, q) for j in priority_journals for q in priority_queries]
@@ -6494,7 +6722,7 @@ def collect_crossref(
                 continue
             abstract0 = clean_text(item.get("abstract"))
             if abstract0:
-                c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+                c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
                 if c:
                     out.append(c)
                 continue
@@ -6527,7 +6755,7 @@ def collect_crossref(
             _diag_inc("crossref_metadata_rescue_recovered")
             item = dict(raw_item)
             item["abstract"] = recovered
-            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q))
+            c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
             if c:
                 _diag_inc("crossref_metadata_rescue_admitted")
                 c["metadata_note"] = "Abstract recovered from DOI publisher metadata after high-potential metadata prioritisation."
@@ -10597,24 +10825,24 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
     workers = int(CONFIG.get("news_workers", 10))
     timeout = int(CONFIG.get("news_timeout_seconds", 10))
     per_feed = int(CONFIG.get("news_items_per_feed", 60))
-    jobs: list[tuple[str, str, str, bool]] = []
+    jobs: list[tuple[str, str, str, bool, bool]] = []
     days = max(2, min(30, (int(lookback_hours) + 23) // 24))
     if include_base_queries:
         # Active implications discovery is deliberately first in the queue so a short news
         # deadline cannot starve risk/opportunity/shock searches behind generic source jobs.
         for q in strategic_pathway_queries('news'):
-            jobs.append(("", "", f"{q} when:{days}d", True))
+            jobs.append(("", "", f"{q} when:{days}d", True, True))
         for src in CONFIG["news_sources"]:
             for q in news_queries(src["domain"], lookback_hours):
-                jobs.append((src["name"], src["domain"], q, False))
+                jobs.append((src["name"], src["domain"], q, False, False))
         for q in global_news_queries(lookback_hours):
-            jobs.append(("", "", q, True))
+            jobs.append(("", "", q, True, False))
     for q in coverage_queries or []:
         if clean_text(q):
-            jobs.append(("", "", f"{clean_text(q)} when:{days}d", True))
+            jobs.append(("", "", f"{clean_text(q)} when:{days}d", True, False))
 
-    def fetch_job(job: tuple[str, str, str, bool]) -> tuple[list[dict[str, Any]], str | None]:
-        name, domain, q, is_global = job
+    def fetch_job(job: tuple[str, str, str, bool, bool]) -> tuple[list[dict[str, Any]], str | None]:
+        name, domain, q, is_global, strategic_target = job
         if stage_deadline_reached(stage_deadline, news_reserve):
             return [], "budget"
         url = "https://news.google.com/rss/search?q=" + quote_plus(q) + "&hl=en-GB&gl=GB&ceid=GB:en"
@@ -10646,12 +10874,13 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             for suffix in [source_name, source_name.replace("|", " "), source_domain, f"www.{source_domain}" if source_domain else ""]:
                 if suffix and title.lower().endswith(" - " + suffix.lower()):
                     title = title[:-(len(suffix) + 3)].strip()
-            if not title or not factual_news(title, desc):
+            text = f"{title}. {desc}"
+            strict_strategic = bool(strategic_target and strategic_pathway_candidate_text(text))
+            if not title or not (factual_news(title, desc) or strict_strategic):
                 continue
             signal_key = f"signal:{normalized(source_name)}:{norm_title(title)}"
             if signal_key in KNOWN_SIGNAL_IDENTITIES:
                 continue
-            text = f"{title}. {desc}"
             items.append({
                 "headline": title,
                 "source": source_name,
@@ -10663,6 +10892,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "_desc_html": str(raw_desc or ""),
                 "_themes": themes_for(text),
                 "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
+                "_strategic_discovery": strict_strategic,
+                "_strategic_source_text": text if strict_strategic else "",
             })
         return items, None
 
@@ -10743,7 +10974,9 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 when = dt.datetime.combine(published, dt.time.min, tzinfo=dt.timezone.utc)
                 if when < start or when > now + dt.timedelta(days=1):
                     continue
-                if not title or not factual_news(title, desc):
+                text = f"{title}. {desc}"
+                strict_strategic = strategic_pathway_candidate_text(text)
+                if not title or not (factual_news(title, desc) or strict_strategic):
                     continue
                 signal_key = f"signal:{normalized(name)}:{norm_title(title)}"
                 if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -10760,6 +10993,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     "_themes": themes_for(text),
                     "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
                     "_direct_source": True,
+                    "_strategic_discovery": strict_strategic,
+                    "_strategic_source_text": text if strict_strategic else "",
                 })
             except Exception:
                 continue
@@ -11636,7 +11871,7 @@ def log_c_floor_diagnostics(rows: list[dict[str, str]], prefix: str = 'C_INTERNA
 
 
 # V17.13.23: two-tier evidence window. The normal radar remains a four-month core,
-# while only the existing UI's Highest source-merit band may survive/discover in months 4-6.
+# while only the narrow high-authority institutional route may discover in months 4-6.
 _SOURCE_MERIT_EU_NAMES = [
     "European Commission", "Council of the European Union", "European Central Bank",
     "European Innovation Council", "European Research Council", "European Investment Bank",
@@ -11663,56 +11898,23 @@ def _source_merit_is_eu_official(source: str, link: str) -> bool:
     return domain.endswith(".europa.eu") or domain in {"ecb.europa.eu", "consilium.europa.eu", "data.consilium.europa.eu", "op.europa.eu"}
 
 def source_merit_score(item: dict[str, Any]) -> int:
-    """Python mirror of source_merit.js for the Highest-band retention decision."""
+    """Legacy compatibility helper for the narrow extended-window authority gate.
+
+    This is *not* the Stuff 0–100 audit ranking.  The Stuff ranking intentionally includes
+    EU relevance; this scanner helper remains binary-like because it only protects the
+    highest-authority older evidence from age-based discovery-window effects.
+    """
     if not isinstance(item, dict):
         return 0
     source = clean_text(item.get("source") or item.get("journal") or item.get("institution"))
     link = clean_text(item.get("link") or item.get("url"))
-    typ = clean_text(item.get("type") or item.get("itemType") or "").lower()
-    rel = clean_text(item.get("eu_relevance") or item.get("euRelevance") or "").lower()
-    authors = clean_text(item.get("authors"))
-    official = _source_merit_is_eu_official(source, link)
-    if official:
-        authority = 55
-    elif source in _SOURCE_MERIT_PUBLIC_HIGH:
-        authority = 48
-    else:
-        # No lower authority class can reach the UI's Highest threshold (93/100).
-        return 0
-    if rel == "direct":
-        relevance = 25
-    elif rel == "material_external":
-        relevance = 20
-    elif rel == "derived":
-        relevance = 18
-    elif official:
-        relevance = 25
-    else:
-        relevance = 16
-    if official:
-        evidence = 15
-    elif "peer-reviewed" in typ:
-        evidence = 15
-    elif "institutional report" in typ:
-        evidence = 14
-    elif "manual-verified" in typ:
-        evidence = 14
-    elif "research/policy paper" in typ:
-        evidence = 13
-    elif "preprint" in typ:
-        evidence = 8
-    else:
-        evidence = 10
-    if not authors:
-        author_points = 2
-    elif re.search(r"commission|council|institute|undertaking|bank|agency|organisation|organization|university|academies", authors, re.I):
-        author_points = 4
-    else:
-        author_points = 5
-    return max(0, min(100, authority + relevance + evidence + author_points))
+    if _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH:
+        return 100
+    return 0
 
 def highest_source_merit(item: dict[str, Any]) -> bool:
-    return source_merit_score(item) >= 93
+    """Legacy name: true only for the narrow high-authority retention route."""
+    return source_merit_score(item) == 100
 
 def source_can_reach_highest(src: dict[str, Any]) -> bool:
     if not isinstance(src, dict):
@@ -12966,7 +13168,7 @@ def main() -> int:
     # V17.13.23: bounded 4-6 month recovery only for sources capable of reaching the
     # existing Highest source-merit band. The normal four-month institutional stage runs
     # first, so freshness remains preferred. Older candidates are admitted only if their
-    # computed source merit actually reaches Highest (>=93).
+    # source itself passes the narrow high-authority extended-window gate.
     extended_highest_candidates: list[dict[str, Any]] = []
     extended_highest_executed = 0
     if extended_highest_batch and budget_remaining() > max(120, EXTENDED_TOP_QUALITY_STAGE_SECONDS):
@@ -13666,7 +13868,7 @@ def main() -> int:
     finish_cycle("crossref_priority", cr_priority_wrapped, cr_failed)
     finish_cycle("institutions", inst_wrapped, inst_failed)
 
-    deduped_all_routes = dedupe_candidates(oa + cr + inst)
+    deduped_all_routes = dedupe_candidates([x for x in (oa + cr + inst) if clean_text(x.get('strand')) != 'strategic'])
     deduped = []
     for candidate in deduped_all_routes:
         if final_ab_candidate_worthiness(candidate):
@@ -13745,8 +13947,44 @@ def main() -> int:
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
     c_share_removed = 0
 
-    strategic_risks_closed_into_shocks = apply_strategic_risk_shock_lifecycle(
-        [strand_a, frontier_evidence, strand_c]
+    # Risks, opportunities and external shocks are a separate analytical corpus.
+    # Dedicated strategic news queries may therefore file a pathway even when the same
+    # source does not become Strand C or Matrix evidence. Ordinary scholarly/institutional
+    # collectors can also contribute when their source text passes the strict pathway tests.
+    previous_strategic = previous.get('strategic_pathways', []) if isinstance(previous.get('strategic_pathways'), list) else []
+    previous_embedded_strategic = [
+        x for x in (
+            list(previous.get('strand_a', []) if isinstance(previous.get('strand_a'), list) else [])
+            + list(previous.get('frontier_evidence', []) if isinstance(previous.get('frontier_evidence'), list) else [])
+            + list(previous.get('strand_c', []) if isinstance(previous.get('strand_c'), list) else [])
+        )
+        if isinstance(x, dict)
+        and clean_text(x.get('strategic_classification_source')) == 'source_text'
+        and isinstance(x.get('strategic_classification'), dict)
+        and (x.get('strategic_classification') or {}).get('lenses')
+    ]
+    strategic_candidates = (
+        [x for x in news if isinstance(x, dict) and x.get('_strategic_discovery')]
+        + [x for x in (oa + cr + inst) if isinstance(x, dict) and x.get('_strategic_discovery')]
+        + strand_a + strand_b + frontier_evidence + strand_c
+    )
+    strategic_pathways = build_strategic_pathway_corpus(
+        previous_strategic,
+        strategic_candidates,
+        previous_embedded_strategic,
+        now_iso,
+        strand_a,
+    )
+    strategic_risks_closed_into_shocks = sum(
+        1 for x in strategic_pathways
+        for lens in ((x.get('strategic_classification') or {}).get('lenses') or [])
+        if isinstance(lens, dict) and clean_text(lens.get('type')) == 'risk' and clean_text(lens.get('status')) == 'closed_into_shock'
+    )
+    strategic_counts = Counter(
+        clean_text(lens.get('type'))
+        for x in strategic_pathways
+        for lens in ((x.get('strategic_classification') or {}).get('lenses') or [])
+        if isinstance(lens, dict) and clean_text(lens.get('type'))
     )
 
     # Recompute against exactly what will be published. A cell can change after the
@@ -14050,6 +14288,10 @@ def main() -> int:
             "new_a_matrix_placed": new_a_matrix_placed,
             "new_b_matrix_placed": new_b_matrix_placed,
             "new_c": new_c_count,
+            "new_strategic_pathways": sum(1 for x in strategic_pathways if x.get('new_this_scan')),
+            "strategic_risks": int(strategic_counts.get('risk', 0)),
+            "strategic_opportunities": int(strategic_counts.get('opportunity', 0)),
+            "external_shocks": int(strategic_counts.get('external_shock', 0)),
             "aged_out_this_scan": {k: int(v) for k, v in age_window_removed.items()},
             "aged_out_total_this_scan": int(sum(age_window_removed.values())),
             "extended_highest_retained_a": int(extended_a_kept),
@@ -14099,7 +14341,7 @@ def main() -> int:
                     if low_yield_rotation.get("triggered") else ""
                 )
                 + (
-                    f" Yield remained at or below {low_yield_threshold}, so the 4-6 month Highest source-merit fallback was also attempted."
+                    f" Yield remained at or below {low_yield_threshold}, so the 4-6 month high-authority source fallback was also attempted."
                     if low_yield_rotation.get("extended_fallback_attempted") else ""
                 )
             ) if exploration.get("themes") else "Fresh-window scanning was active; no full-window exploration query was configured.",
@@ -14120,6 +14362,7 @@ def main() -> int:
         "strand_b": strand_b,
         "strand_c": strand_c,
         "frontier_evidence": frontier_evidence,
+        "strategic_pathways": strategic_pathways,
         "stats": {
             "openalex_admitted_before_dedupe": len(oa),
             "openalex_public_anonymous": not bool(OPENALEX_API_KEY),
@@ -14227,7 +14470,9 @@ def main() -> int:
             "news_sources_configured": len(CONFIG.get("news_sources", [])),
             "news_global_queries_configured": len(CONFIG.get("news_global_queries", [])),
             "strategic_pathway_news_queries_configured": len(strategic_pathway_queries('news')),
+            "strategic_pathway_news_candidates_this_run": sum(1 for x in news if isinstance(x, dict) and x.get('_strategic_discovery')),
             "strategic_pathway_scholarly_queries_this_run": len(strategic_scholarly_focus),
+            "strategic_pathway_records_total": len(strategic_pathways),
             "frontier_gap_queries_this_run": len(frontier_focus["queries"]),
             "frontier_gap_scholarly_queries_this_run": len(frontier_focus.get("scholarly_queries", [])),
             "frontier_gap_scholarly_from": gap_from.isoformat() if gap_scholarly else "",

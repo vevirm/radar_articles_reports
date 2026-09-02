@@ -47,11 +47,7 @@
   }
 
   function rawStrategicItems(data){
-    const rows=[
-      ...(Array.isArray(data?.strand_a)?data.strand_a:[]),
-      ...(Array.isArray(data?.frontier_evidence)?data.frontier_evidence:[]),
-      ...(Array.isArray(data?.strand_c)?data.strand_c:[]),
-    ].filter(x=>x&&typeof x==='object');
+    const rows=(Array.isArray(data?.strategic_pathways)?data.strategic_pathways:[]).filter(x=>x&&typeof x==='object');
     const byKey=new Map(),unkeyed=[];
     for(const x of rows){
       const c=x.strategic_classification;
