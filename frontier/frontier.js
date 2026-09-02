@@ -914,15 +914,21 @@
     return rowWhy;
   }
 
-  function qualityAwareScore(x){
-    // Substantive Matrix qualification happens before this function is used. Once a
-    // finding is legitimately placed, combine finding strength with the source-merit
-    // score documented in Stuff (authority + relevance + evidence + transparency).
-    // Source prestige never creates a Matrix placement; it only helps order qualified findings.
-    const meritScore=Number(x?.sourceMerit?.score||0);
+  function matrixPriorityScore(x){
+    // Source quality is an upstream admission criterion, not a Matrix dimension.
+    // Once a finding is admitted and substantively placed, ordering is based only on
+    // the strength of the Matrix evidence: overall movement, materiality, confidence
+    // and triage. Source-merit metadata may still travel with a record for other pages.
     const findingScore=Number(x?.overall||0);
-    return findingScore*4+meritScore;
+    const materiality=Number(x?.materiality||0);
+    const confidence=Number(x?.confidence||0);
+    const triage=Number(x?.triage?.total||0);
+    return findingScore*10 + materiality*2 + confidence/10 + triage;
   }
+
+  // Backward-compatible alias for consumers that still call the old helper name.
+  // It intentionally no longer contains source merit.
+  function qualityAwareScore(x){return matrixPriorityScore(x)}
 
   function concentration(items,keyFn){
     const m=new Map();for(const x of items){const k=keyFn(x);m.set(k,(m.get(k)||0)+1)}
@@ -934,10 +940,10 @@
     const index=buildEvidenceIndex(data);
     const raw=dedupeCandidates([...weakCandidates(data),...evidenceCandidates(data)]);
     const signals=raw.map(x=>classifySignal(x,data,index,now)).filter(Boolean);
-    signals.sort((a,b)=>qualityAwareScore(b)-qualityAwareScore(a)||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0))||b.overall-a.overall||b.triage.total-a.triage.total||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
+    signals.sort((a,b)=>matrixPriorityScore(b)-matrixPriorityScore(a)||b.overall-a.overall||b.triage.total-a.triage.total||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
     const cells={};for(const r of ROWS){cells[r.id]={};for(const c of COLUMNS)cells[r.id][c.id]=[]}
     for(const s of signals)cells[s.row.id][s.column.id].push(s);
-    for(const r of ROWS)for(const c of COLUMNS)cells[r.id][c.id].sort((a,b)=>qualityAwareScore(b)-qualityAwareScore(a)||((b.sourceMerit?.score||0)-(a.sourceMerit?.score||0))||b.overall-a.overall||b.triage.total-a.triage.total);
+    for(const r of ROWS)for(const c of COLUMNS)cells[r.id][c.id].sort((a,b)=>matrixPriorityScore(b)-matrixPriorityScore(a)||b.overall-a.overall||b.triage.total-a.triage.total||String(b.date).localeCompare(String(a.date)));
     const top=signals.slice(0,7);
     const [topRow,topRowCount]=concentration(signals,x=>x.row.name);
     const [topColumn,topColumnCount]=concentration(signals,x=>`${x.column.id}. ${x.column.name}`);
@@ -952,5 +958,5 @@
     };
   }
 
-  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet,whyBullet,qualityAwareScore};
+  return {ROWS,COLUMNS,CELL_NAMES,buildEvidenceIndex,classifySignal,buildFrontier,weakCandidates,evidenceCandidates,questionScores,rowScores,shortBullet,whyBullet,matrixPriorityScore,qualityAwareScore};
 });

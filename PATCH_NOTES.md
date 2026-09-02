@@ -1,3 +1,19 @@
+# v17.19.21 — resilient Main Radar + Matrix presentation repair
+
+- Separates Main Radar data loading from presentation rendering. Once `radar.json` has loaded, an issue-map or individual card rendering error can no longer blank all A/B/C sections or masquerade as a JSON-load failure.
+- Adds per-card and per-section fallbacks so one malformed/edge-case record cannot take down the reader. The status counters and latest-additions line remain available whenever the data itself loads.
+- Rebuilds the Full and Quick Matrix presentation as self-contained pages instead of letting the global `simple-ui.css` override their grid spacing, cell styling, typography and borders. Matrix cells are larger and easier to scan.
+- Removes visible source-quality/source-merit badges and the “source strength” field from both Matrix views. Source quality remains upstream in Radar admission; it is not a Matrix dimension.
+- Removes source-merit weighting from Matrix ordering. Already-qualified Matrix findings are ordered by Matrix evidence strength (overall movement, materiality, confidence and triage). Other pages that intentionally use source merit are unchanged in this release.
+- Bumps public asset cache keys to `17.19.21` and adds regression tests for the resilient Main Radar path and the Matrix no-quality-display contract.
+
+# v17.19.20 — Main Radar runtime loading fix
+
+- Fixes the Main Radar JavaScript crash after `radar.json` loads: the latest-additions calculation now uses the defined `A`, `B`, and `C` arrays instead of undefined lowercase `a`, `b`, and `c` variables.
+- This restores the evidence and weak-signal cards on the Main Radar instead of falling into the misleading data-unavailable state after the headline counters have already populated.
+- The load/render failure path now logs the underlying browser error and uses a neutral display-error message rather than incorrectly implying that `radar.json` itself failed to load.
+- Adds a regression test for the exact variable-case failure and bumps reader asset cache keys to `17.19.20`.
+
 # v17.19.19 — historical evidence navigation correction
 
 - `Historical evidence` now means findings from the dedicated scanner that searches before the live radar timeframe.

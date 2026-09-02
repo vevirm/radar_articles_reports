@@ -50,7 +50,7 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
-<link rel="stylesheet" href="simple-ui.css?v=17.19.19">
+<link rel="stylesheet" href="simple-ui.css?v=17.19.21">
 <style id="landing-v17179">
 .landing-hero{padding:0 0 38px!important}
 .landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #3a3a3a;margin-bottom:44px;min-height:54px}
@@ -153,9 +153,9 @@
     <footer><div class="wrap">R&I × Geopolitics · A/B/C Radar</div></footer>
   </div>
 
-<script src="source_merit.js?v=17.19.19"></script>
-<script src="briefing/insights.js?v=17.19.19"></script>
-<script src="read/issues.js?v=17.19.19"></script>
+<script src="source_merit.js?v=17.19.21"></script>
+<script src="briefing/insights.js?v=17.19.21"></script>
+<script src="read/issues.js?v=17.19.21"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",onlyNew:false,allDetails:false,limits:{A:12,B:12,C:16}};
@@ -265,7 +265,7 @@ function visibleSource(x){const s=cleanText(x.source||'');if(!s)return '';const 
 function provenanceLabel(x){const p=String(x.discovery_provenance||'').toLowerCase();if(p==='both')return 'Automated + manual';if(p==='manual')return 'Manual candidate';if(p==='automated')return 'Automated discovery';const a=Array.isArray(x.provenance)?x.provenance.join(' ').toLowerCase():'';if(a.includes('manual')&&a.includes('automated'))return 'Automated + manual';if(a.includes('manual'))return 'Manual candidate';return 'Automated discovery'}
 function showNote(id,text){const el=document.getElementById(id);if(text){el.textContent=text;el.style.display="block"}else el.style.display="none"}
 function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance,x.core_message].join(" ")).toLowerCase()}
-function publicDisplayOk(x){const t=cleanText(x.title||x.headline||'');return Boolean(t)&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false&&globalThis.RadarInsights?.likelyEnglish?.(claimText(x))!==false}
+function publicDisplayOk(x){try{const t=cleanText(x?.title||x?.headline||'');if(!t)return false;if(globalThis.RadarInsights?.likelyEnglish?.(t)===false)return false;const claim=claimText(x);return globalThis.RadarInsights?.likelyEnglish?.(claim)!==false}catch(e){console.warn('Radar display filter skipped a problematic item',e);return Boolean(cleanText(x?.title||x?.headline||''))}}
 function filtered(items){const q=state.query.trim().toLowerCase();return items.filter(x=>publicDisplayOk(x)&&(!state.onlyNew||x.new_this_scan)&&(!q||searchable(x).includes(q)))}
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
 function biblio(x,label='Bibliography'){
@@ -301,24 +301,40 @@ function renderCurrentIssues(d){
   const jr=document.getElementById('journeyReadText');if(jr)jr.textContent=issues.length?`${issues.length} live issue maps rebuilt from the latest admitted material.`:'Live issue maps rebuilt from the latest admitted material.';
   const pr=document.getElementById('pageReadLink');if(pr)pr.textContent=issues.length?`${issues.length} current issue maps →`:'Current issue maps →';
 }
-function renderSection(letter,items,renderer,noun){const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map(renderer).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more findings`}
+function fallbackCard(x){const title=cleanText(x?.title||x?.headline||x?.core_message||'Finding');const source=cleanText(x?.source||'');const link=cleanText(x?.link||'');return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x?.date))}</div></div><h3 class="claim-title">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="visible-source"><strong>Source:</strong> ${esc(source)}</div>`:''}</article>`}
+function safeCard(renderer,x,i){try{return renderer(x,i)}catch(e){console.error('Radar card render failed',e,x);return fallbackCard(x)}}
+function renderSection(letter,items,renderer,noun){try{const f=filtered(items);const limit=state.limits[letter];const shown=f.slice(0,limit);document.getElementById(`count${letter}`).textContent=`${f.length} ${noun}${f.length===1?"":"s"}${f.length!==items.length?` · ${items.length} total`:""}`;document.getElementById(`items${letter}`).innerHTML=shown.length?shown.map((x,i)=>safeCard(renderer,x,i)).join(""):empty("No items match the current filter.");const b=document.getElementById(`more${letter}`);b.hidden=f.length<=limit;b.textContent=`Show ${Math.min(12,f.length-limit)} more findings`}catch(e){console.error(`Radar section ${letter} render failed`,e);document.getElementById(`items${letter}`).innerHTML=empty("This section could not be displayed. The radar data itself is loaded.")}}
 function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];renderSection("A",A,abItem,"item");renderSection("B",B,abItem,"item");renderSection("C",C,cItem,"signal");}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
 function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;state.limits={A:12,B:12,C:16};render()});document.getElementById("onlyNew").addEventListener("click",e=>{state.onlyNew=!state.onlyNew;e.currentTarget.classList.toggle("active",state.onlyNew);state.limits={A:12,B:12,C:16};render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.onlyNew=false;document.getElementById("search").value="";document.getElementById("onlyNew").classList.remove("active");state.limits={A:12,B:12,C:16};render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
 wire();
 async function loadRadar(){
+  let raw;
   try{
-    const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();const raw=await r.json();
-    const d={...raw,strand_a:(raw.strand_a||[]).filter(publicDisplayOk),strand_b:(raw.strand_b||[]).filter(publicDisplayOk),strand_c:(raw.strand_c||[]).filter(publicDisplayOk)};state.data=d;
-    const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};const newly=[...A,...B,...C].filter(x=>x.new_this_scan).length;
-    document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
-    const explicitCompletion=d.run_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";
-    document.getElementById("lastScan").textContent=`Updated · ${completed?fmtDateTime(completed):"pending"}`;
-    const newA=a.filter(x=>x.new_this_scan).length,newB=b.filter(x=>x.new_this_scan).length,newC=c.filter(x=>x.new_this_scan).length;
-    document.getElementById("latestActivity").textContent=`Latest additions · ${newA} evidence · ${newB} methods · ${newC} weak signals`;
-    const aged=sr.aged_out_this_scan||{};const cAged=Number(aged.strand_c||0);const ageNote=cAged?`${cAged} Strand C signal${cAged===1?'':'s'} expired after 60 days in the radar. A/B evidence is cumulative.`:'';
-    showNote("rotationNote",ageNote);showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");renderCurrentIssues(d);render();
-  }catch(e){document.getElementById("lastScan").textContent="Updated · data unavailable";document.getElementById("latestActivity").textContent="Latest additions · unavailable";for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded yet.")}
+    const r=await fetch("radar.json?ts="+Date.now(),{cache:"no-store"});
+    if(!r.ok)throw new Error(`radar.json HTTP ${r.status}`);
+    raw=await r.json();
+  }catch(e){
+    console.error("Radar data load failed",e);
+    document.getElementById("lastScan").textContent="Updated · data unavailable";
+    document.getElementById("latestActivity").textContent="Latest additions · unavailable";
+    for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded.");
+    return;
+  }
+  const safeFilter=xs=>Array.isArray(xs)?xs.filter(publicDisplayOk):[];
+  const d={...raw,strand_a:safeFilter(raw.strand_a),strand_b:safeFilter(raw.strand_b),strand_c:safeFilter(raw.strand_c)};
+  state.data=d;
+  const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[],sr=d.scan_results||{};
+  const newly=[...A,...B,...C].filter(x=>x?.new_this_scan).length;
+  document.getElementById("statA").textContent=A.length;document.getElementById("statB").textContent=B.length;document.getElementById("statC").textContent=C.length;document.getElementById("statNew").textContent=newly;
+  const explicitCompletion=d.run_completed_at||d.scan_state?.actual_last_completed_at||d.scan_state?.last_completed_at||"";const completed=explicitCompletion||d.last_updated||"";
+  try{document.getElementById("lastScan").textContent=`Updated · ${completed?fmtDateTime(completed):"pending"}`}catch(e){console.warn('Radar timestamp formatting failed',e);document.getElementById("lastScan").textContent=`Updated · ${String(completed||'pending').slice(0,16)}`}
+  const newA=A.filter(x=>x?.new_this_scan).length,newB=B.filter(x=>x?.new_this_scan).length,newC=C.filter(x=>x?.new_this_scan).length;
+  document.getElementById("latestActivity").textContent=`Latest additions · ${newA} evidence · ${newB} methods · ${newC} weak signals`;
+  const aged=sr.aged_out_this_scan||{};const cAged=Number(aged.strand_c||0);const ageNote=cAged?`${cAged} Strand C signal${cAged===1?'':'s'} expired after 60 days in the radar. A/B evidence is cumulative.`:'';
+  showNote("rotationNote",ageNote);showNote("noteA",sr.note_a||"");showNote("noteB",sr.note_b||"");showNote("noteC",sr.note_c||"");
+  try{renderCurrentIssues(d)}catch(e){console.error("Current issues render failed",e)}
+  render();
 }
 </script>
 </body>
