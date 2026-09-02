@@ -671,7 +671,19 @@
       const dir=directionScores(x,evidence,r,questions);
       const col=columnFor(dir);
       if(!col) continue;
-      if(!cellEvidencePass(x,evidence,r,col)) continue;
+      const strictCellPass=cellEvidencePass(x,evidence,r,col);
+      if(!strictCellPass){
+        // Strand A has already passed the radar's source/evidence admission gate. Do not make
+        // the Matrix depend on a second narrow phrase-template gate when the source itself
+        // supports a concrete row mechanism and both Matrix axes. Weak signals keep the
+        // stricter cell contract because their short headlines are much easier to over-read.
+        const axisSupport=Math.min(
+          Math.max(dir.autonomyUp,dir.autonomyDown),
+          Math.max(dir.performanceUp,dir.performanceDown)
+        );
+        const evidenceFallback=x._origin==='Evidence signal' && !reviewedMatrix && qCount>=1 && m>=2.4 && axisSupport>=1.2;
+        if(!evidenceFallback) continue;
+      }
       // With the V17.13.26 cell contract, a single explicit source-backed row mechanism
       // can be enough for an evidence record; weak signals still require the higher
       // materiality threshold because their headlines must carry the mechanism themselves.

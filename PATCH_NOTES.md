@@ -1,3 +1,11 @@
+# v17.19.16 — Matrix evidence recall repair
+
+- Fixes Matrix undercoverage: the bundled corpus has 383 admitted Strand A evidence records, but the exact Matrix classifier was placing only 50 sources because every record had to pass a second narrow cell-specific phrase-template contract.
+- Keeps the strict semantic cell contract for weak-signal headlines and for reviewed adjudications. For already-vetted Strand A evidence, a failed phrase-template match can now fall back to source-backed classification only when the record has a concrete row mechanism (materiality >= 2.4), at least one Matrix question, and evidence on both control/dependence and capability axes.
+- On the bundled radar snapshot this raises Matrix placement from 50 to 136 sources (about 35% of Strand A; about 33% of all 415 A/B/C items) without changing Strand A admission, deduplication, source-merit ranking, or the 4×4 cell definitions.
+- Adds a regression guard requiring the exact browser classifier to place at least 25% of the bundled admitted Strand A corpus, preventing a return to the ~10% coverage failure.
+- Bumps the Matrix script cache key so the full Matrix, Quick Matrix and Risks & opportunities pages load the repaired classifier immediately after deployment.
+
 # v17.19.15 — stale-workflow safety cleanup handshake
 
 - Fixes the exact post-scan failure shown after v17.19.14: the retained v17.19.8 GitHub workflow interpreted an intentional A cleanup as accidental corpus loss and stopped before commit.

@@ -1371,6 +1371,12 @@ class FrontierBridgeTests(unittest.TestCase):
         self.assertIsInstance(counts, dict)
         self.assertIsInstance(placements, list)
         self.assertEqual(qualifying, len(placements))
+        # Matrix classification must not collapse the already-vetted Strand A corpus
+        # behind a second ultra-narrow phrase-template gate.  Keep a meaningful share
+        # of admitted evidence eligible for source-backed row/axis classification.
+        evidence_total = len(data.get("strand_a", []))
+        if evidence_total:
+            self.assertGreaterEqual(qualifying, int(evidence_total * 0.25))
         if placements:
             self.assertIn("cell", placements[0])
             self.assertIn("title", placements[0])
