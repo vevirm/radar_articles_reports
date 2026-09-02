@@ -1,3 +1,11 @@
+# v17.19.19 — historical evidence navigation correction
+
+- `Historical evidence` now means findings from the dedicated scanner that searches before the live radar timeframe.
+- Main reader navigation points directly to `/historical/`; the accidental scan-run-history view is removed from the reader experience.
+- `/history/` remains only as a compatibility redirect to `/historical/`.
+- Historical page hierarchy is simplified around the findings themselves: timeframe, corpus size, year filters, historical Matrix and source cards.
+- Run telemetry and scanner-process explanations are not presented as a reader-facing history product.
+
 # v17.19.18 — reader history, weak-signal attention, and strategic pathway logic
 
 - Keeps the public site reader-facing: findings and implications stay visible; scanner admission mechanics, schedules, rejection funnels and rescue internals are not promoted on the Main Radar.

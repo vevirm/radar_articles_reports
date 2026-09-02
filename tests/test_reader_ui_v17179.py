@@ -13,7 +13,7 @@ class ReaderUiV17179Tests(unittest.TestCase):
         nav = html.split('<nav class="landing-nav"', 1)[1].split('</nav>', 1)[0]
         self.assertLess(nav.find('>Read at least this</a>'), nav.find('>Stuff</a>'))
         self.assertLess(nav.find('>Weak signals</a>'), nav.find('>Stuff</a>'))
-        self.assertLess(nav.find('>History</a>'), nav.find('>Stuff</a>'))
+        self.assertLess(nav.find('>Historical evidence</a>'), nav.find('>Stuff</a>'))
         self.assertNotIn('<section class="inside-map"', html)
         self.assertNotIn('<section class="page-map"', html)
         self.assertNotIn("Next automatic", html)

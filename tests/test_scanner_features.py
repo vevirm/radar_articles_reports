@@ -1538,16 +1538,20 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         self.assertNotIn('automatic every 4 hours', html.lower())
         self.assertNotIn('60 days from first insertion', html)
 
-    def test_history_is_public_and_weak_signals_are_prominent(self):
+    def test_historical_evidence_is_public_and_weak_signals_are_prominent(self):
         main=(ROOT/'index.html').read_text(encoding='utf-8')
         read=(ROOT/'read'/'index.html').read_text(encoding='utf-8')
-        history=(ROOT/'history'/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="history/"', main)
+        historical=(ROOT/'historical'/'index.html').read_text(encoding='utf-8')
+        legacy=(ROOT/'history'/'index.html').read_text(encoding='utf-8')
+        self.assertIn('href="historical/"', main)
+        self.assertNotIn('href="history/"', main)
         self.assertLess(main.find('id="strand-c"'), main.find('id="strand-b"'))
         self.assertIn('Weak signals to watch', read)
-        self.assertIn("fetch('../radar.json?ts='+Date.now()", history)
-        self.assertIn('scan_history', history)
-        self.assertIn('Older evidence archive', history)
+        self.assertIn("fetch('historical.json?ts='+Date.now()", historical)
+        self.assertIn('Evidence found before the live timeframe', historical)
+        self.assertNotIn('scan_history', historical)
+        self.assertNotIn('Scan-by-scan additions', historical)
+        self.assertIn("location.replace('../historical/')", legacy)
 
     def test_nature_and_science_remain_first_class_sources(self):
         direct={x.get('name'):x for x in scan.CONFIG.get('direct_top_journal_sources',[])}
