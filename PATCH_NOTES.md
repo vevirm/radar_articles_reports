@@ -1,3 +1,11 @@
+# v17.19.25 — GitHub web-upload compatibility for Stuff Excel
+
+- Fixes the Actions regression failure seen after a GitHub **Add files via upload** deployment where the hidden `.github/workflows/radar-scan.yml` remained on the older radar.json-only contract. The regression suite now accepts that safe legacy workflow as well as the newer radar.json + Stuff-workbook workflow.
+- Makes the primary Stuff Excel download independent of workflow replacement: the page builds `source_merit_ranking.xlsx` in the browser from the currently loaded `radar.json`, using the same 0–100 source-merit model and EU-relevance component as the repository generator.
+- Keeps a repository workbook snapshot for offline/audit use. When the newer workflow is installed it is still regenerated and committed after a scan; when the hidden legacy workflow remains, the live Stuff download is nevertheless current because it is generated from live radar data.
+- Shares the workbook implementation between browser and Node generation through `stuff/workbook.js`, preventing the two Excel paths from drifting.
+- Does not change scanner admission, Matrix logic, or public-reader ordering. EU relevance remains a scanner gate and a 25-point component only in the Stuff technical ranking.
+
 # v17.19.24
 
 - Restored the 0–100 technical evidence ranking in **Stuff** only.

@@ -66,20 +66,34 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertNotIn('(int(x.get("source_merit_score",0)),int(x.get("year",0))', scanner)
         self.assertIn('Reader/corpus ordering is chronological after admission', scanner)
 
-    def test_main_scan_refreshes_and_commits_stuff_workbook(self):
+    def test_stuff_workbook_is_current_even_with_legacy_hidden_workflow(self):
+        # GitHub's web uploader can leave the hidden .github workflow untouched.
+        # The public Stuff page therefore generates the XLSX from live radar.json;
+        # a newer workflow may additionally refresh the repository snapshot.
         workflow=(ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
-        self.assertIn('node scripts/generate_stuff_workbook.js', workflow)
-        self.assertIn('git add -- radar.json stuff/source_merit_ranking.xlsx', workflow)
-        self.assertIn("- 'stuff/source_merit_ranking.xlsx'", workflow)
-        self.assertIn("':!stuff/source_merit_ranking.xlsx'", workflow)
+        stuff=(ROOT / 'stuff' / 'index.html').read_text(encoding='utf-8')
+        browser_generator=(ROOT / 'stuff' / 'workbook.js').read_text(encoding='utf-8')
         generator=(ROOT / 'scripts' / 'generate_stuff_workbook.js').read_text(encoding='utf-8')
+        self.assertIn('workbook.js', stuff)
+        self.assertIn('downloadExcel', stuff)
+        self.assertIn('RadarStuffWorkbook', stuff)
+        self.assertIn('buildXlsx', browser_generator)
+        self.assertIn('EU relevance / 25', browser_generator)
         self.assertIn("require('../source_merit.js')", generator)
-        self.assertIn('EU relevance / 25', generator)
+        self.assertIn("require('../stuff/workbook.js')", generator)
+        if 'node scripts/generate_stuff_workbook.js' in workflow:
+            self.assertIn('git add -- radar.json stuff/source_merit_ranking.xlsx', workflow)
+            self.assertIn("- 'stuff/source_merit_ranking.xlsx'", workflow)
+            self.assertIn("':!stuff/source_merit_ranking.xlsx'", workflow)
+        else:
+            self.assertIn('git add -- radar.json', workflow)
+            self.assertIn('radar.json is the ONLY persistent output', workflow)
 
     def test_release_manifest_keeps_shocks_and_stuff_merit_workbook(self):
         manifest=(ROOT / 'scripts' / 'build_release.py').read_text(encoding='utf-8')
         self.assertIn('"shocks/index.html"', manifest)
         self.assertIn('"stuff/source_merit_ranking.xlsx"', manifest)
+        self.assertIn('"stuff/workbook.js"', manifest)
         self.assertIn('"source_merit.js"', manifest)
 
 

@@ -40,6 +40,7 @@ SITE_FILES = [
     "shocks/index.html",
     "literature/index.html",
     "stuff/index.html",
+    "stuff/workbook.js",
     "source_merit.js",
     "stuff/source_merit_ranking.xlsx",
     "stuff/eu_ri_radar_phrases_by_strand.xlsx",

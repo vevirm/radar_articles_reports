@@ -1,4 +1,4 @@
-v17.19.24 — WHOLE REPOSITORY ONLY
+v17.19.25 — WHOLE REPOSITORY ONLY
 
 1. Unzip this full repository package.
 2. Upload/replace the complete repository contents, including hidden `.github` files.
@@ -6,6 +6,6 @@ v17.19.24 — WHOLE REPOSITORY ONLY
 
 The uploaded post-scan repository is the source of truth for this build. This release preserves its saved radar corpus and scan cursors. EU relevance remains an explicit scanner gate for substantive EU R&I evidence. The 0–100 technical evidence ranking is restored only in Stuff/Excel (authority 55 + EU relevance 25 + evidence strength 15 + author transparency 5) and does not order the public analytical readers or Matrix. Risks & Opportunities and External Shocks remain independent active scanner products under `strategic_pathways`.
 
-Each successful main scan refreshes both `radar.json` and `stuff/source_merit_ranking.xlsx`; the bot commit is ignored by the push trigger to avoid a scan loop.
+If the hidden `.github` workflow is replaced, each successful main scan refreshes both `radar.json` and the repository workbook snapshot. If GitHub web upload leaves the older hidden workflow in place, the scan still persists `radar.json` safely and the Stuff page generates the current `.xlsx` directly from that live JSON when you click Download.
 
 Do not upload only changed files.
