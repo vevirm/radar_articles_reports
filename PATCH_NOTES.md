@@ -19,3 +19,10 @@ v17.20.0
 - Risks & opportunities use larger typography and a little more breathing room.
 - A site-wide legibility pass raises the smallest reader-facing type without changing the black/red/white visual identity.
 - External shocks now keeps realised shocks and the cross-evidence “aha” scenarios, and adds a separate direct-shock layer for obvious, evidence-supported disruptions.
+
+## 17.20.3 — visible additions on the Radar
+- Adds a compact live count strip to the main Radar: papers/reports, weak signals, records checked, items added in the latest scan, items added in the previous 24 hours, and scanner runtime.
+- Adds pressable `Added last scan` and `Added 24h` filters. Recent additions are sorted by insertion time and visibly tagged.
+- Uses `first_seen` plus the scanner's run timestamps, so the filter shows what entered the Radar rather than merely what has a recent publication date.
+- Keeps `Added 24h` separately because a rescue scan can legitimately add zero items even when earlier scans in the same day added material.
+- Gives the Read-at-least-this topic trees slightly more finished branch connectors while staying strictly black/red/white.
