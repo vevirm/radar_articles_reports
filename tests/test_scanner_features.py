@@ -48,9 +48,10 @@ class SourceFailureReallocationTests(unittest.TestCase):
 
     def test_reallocation_config_preserves_strict_gate_but_adds_replacement_search(self):
         self.assertTrue(scan.CONFIG.get("source_failure_reallocation_enabled"))
-        self.assertGreaterEqual(scan.CONFIG.get("source_failure_reallocation_institution_sources", 0), 8)
+        self.assertGreaterEqual(scan.CONFIG.get("source_failure_reallocation_institution_sources", 0), 16)
         self.assertGreaterEqual(scan.CONFIG.get("source_failure_reallocation_crossref_journals", 0), 6)
         self.assertGreaterEqual(scan.CONFIG.get("queries_b_method_per_scan", 0), 12)
+
 
 
 class LowYieldRotationTests(unittest.TestCase):
@@ -724,6 +725,47 @@ class V1719RecallModelTests(unittest.TestCase):
         ev = scan.gate_scope(title, abstract, body, 3, source_kind="institutional")
         self.assertTrue(ev["a_pass"])
         self.assertTrue(ev["centrality_pass"])
+
+    def test_admission_repair_reopens_targeted_a_recall_without_full_reset(self):
+        previous = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
+        state = scan.initial_scan_state(previous)
+        self.assertFalse(state.get("recall_reset_this_run"))
+        self.assertEqual(state.get("openalex_cursor"), (previous.get("scan_state") or {}).get("openalex_cursor"))
+        self.assertEqual(state.get("crossref_broad_cursor"), (previous.get("scan_state") or {}).get("crossref_broad_cursor"))
+        self.assertNotEqual(state.get("a_recall_recovery_version"), scan.A_RECALL_RECOVERY_VERSION)
+        self.assertGreaterEqual(scan.A_RECALL_RECOVERY_SOURCES_PER_SCAN, 10)
+
+    def test_direct_eu_strategic_tech_can_use_main_ri_evidence_without_duplicate_centrality_vocabulary(self):
+        title = "EUROPEAN CHIPS ACT 2.0: STRATEGIC AUTONOMY AND TECHNOLOGICAL LEADERSHIP OF THE EU IN THE GLOBAL SEMICONDUCTOR ECOSYSTEM"
+        abstract = (
+            "The analysis assesses semiconductor innovation capacity and technological leadership in the European Union. "
+            "It examines how the Chips Act can strengthen research, scale-up capability and strategic autonomy."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertTrue(ev["a_pass"])
+        self.assertTrue(ev["centrality_pass"])
+        self.assertIn(ev["centrality_reason"], {"title_eu_ri_central", "eu_title_with_substantive_ri", "source_supported_eu_ri_bridge"})
+
+    def test_eic_dual_use_innovation_source_is_not_lost_to_domain_vocabulary_mismatch(self):
+        title = "The European Innovation Council opens to defence and dual-use technologies — amended EIC Work Programme 2026"
+        abstract = (
+            "The EIC now funds defence and dual-use start-ups directly, turning the civil-military innovation shift "
+            "into an operating EU scale-up instrument rather than only a policy proposal."
+        )
+        ev = scan.gate_scope(title, abstract, "", 1, source_kind="institutional")
+        self.assertTrue(ev["a_pass"])
+        self.assertTrue(ev["centrality_pass"])
+        self.assertIn("dual-use", " ".join(ev["ri_evidence"]).lower())
+
+    def test_soft_centrality_rescue_still_rejects_incidental_europe_comparator(self):
+        title = "AI startup innovation and competitiveness in China"
+        abstract = (
+            "The European Union is included as a comparator. "
+            "We study artificial intelligence startup innovation, commercialization and competitiveness in China."
+        )
+        ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
+        self.assertFalse(ev["a_pass"])
+        self.assertFalse(ev["centrality_pass"])
 
     def test_eu_programme_list_on_unrelated_sector_page_is_not_ri_central(self):
         title = "EU support for the news media sector"

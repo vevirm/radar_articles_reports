@@ -269,9 +269,9 @@ RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.32-cit
 CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_version", "v17.13.32-shared-reference-forward-snowball"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
-A_RECALL_RECOVERY_VERSION = "v17.17.5-completed-evidence-A-recovery"
+A_RECALL_RECOVERY_VERSION = "v17.19.17-source-supported-eu-ri-centrality-recheck"
 WINDOW_POLICY_VERSION = "v17.19.9-cumulative-ab-c60d-from-first-seen"
-A_RECALL_RECOVERY_SOURCES_PER_SCAN = 6
+A_RECALL_RECOVERY_SOURCES_PER_SCAN = 12
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
 RULE_FIX_SOURCE_RECOVERY_MAX_PAGES = 330
@@ -2947,6 +2947,7 @@ A_RI_CORE = [
     'research and development', 'r&d', 'scientific capacity', 'research capacity',
     'innovation capacity', 'innovation performance', 'technology development',
     'industrial research', 'industrial innovation', 'technological innovation', 'deep tech', 'technology transfer',
+    'defence research', 'defense research',
     'technological capabilities', 'technology capabilities', 'research infrastructure', 'research infrastructures',
     'scientific infrastructure', 'university research', 'academic research',
     'research-intensive', 'research organisation', 'research organization',
@@ -2958,10 +2959,15 @@ A_RI_CORE = [
 
 A_TECH_DOMAINS = [
     'critical technology', 'critical technologies', 'strategic technology', 'strategic technologies',
-    'semiconductor', 'semiconductors', 'artificial intelligence', ' ai ', 'quantum', 'biotechnology',
+    'semiconductor', 'semiconductors', 'microelectronics', 'artificial intelligence', ' ai ', 'quantum', 'biotechnology',
     'biotech', 'advanced materials', 'robotics', 'space technology', 'satellite technology',
     'nuclear technology', 'clean technology', 'clean tech', 'digital infrastructure',
     'compute infrastructure', 'computing infrastructure', 'supercomputer', 'data centre', 'data center', 'cloud infrastructure', 'cloud computing', 'ai computing',
+    # Keep evidence extraction aligned with the strategic-tech focus gate. These still
+    # require an R&I/capability mechanism in the same sentence; the domain word alone
+    # never admits a record.
+    'dual-use', 'dual use', 'defence technology', 'defense technology',
+    'defence innovation', 'defense innovation', 'cybersecurity',
 ]
 
 A_TECH_RI_MECHANISMS = [
@@ -3029,7 +3035,8 @@ A_CENTRAL_RI_TERMS = [
     'doctoral training', 'doctoral candidates', 'research collaboration',
     'scientific collaboration', 'international research cooperation',
     'technology transfer', 'knowledge transfer', 'industrial research',
-    'industrial innovation', 'innovation ecosystem', 'r&d', 'research and development',
+    'industrial innovation', 'technological innovation', 'innovation ecosystem', 'r&d', 'research and development',
+    'academic research', 'university research', 'defence research', 'defense research',
     'r&d investment', 'r&d investments', 'research and development investment',
     'technology development', 'technological capability', 'technological capabilities',
     'technology capabilities', 'compute capacity', 'computing capacity',
@@ -3402,6 +3409,69 @@ def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'g
                 return True, 'multi_member_state_ri_study', list(dict.fromkeys(ev))[:8]
 
     return False, 'eu_or_ri_only_incidental', []
+
+
+SOFT_EU_RI_CENTRALITY_REASONS = {'ri_not_central'}
+
+def source_supported_eu_ri_centrality_rescue(
+    title: str, abstract: str, body: str, centrality_reason: str
+) -> tuple[bool, str, list[str]]:
+    """Recover direct-EU R&I sources rejected only by duplicate centrality vocabulary.
+
+    This is not a keyword waiver. The ordinary A-focus and source-length-aware aboutness
+    gates must already pass before gate_scope calls this helper. Europe/EU must also be
+    visible in the title, or an R&I-centred title must have an explicit European study-scope
+    sentence in the abstract; a body-only Europe mention
+    cannot trigger the rescue. Hard centrality exclusions (awards/events, local applied
+    studies, historical-only work and contaminated navigation pages) never use this route.
+    """
+    if clean_text(centrality_reason) not in SOFT_EU_RI_CENTRALITY_REASONS:
+        return False, centrality_reason, []
+
+    title = clean_text(title)
+    abstract = _strip_relevance_boilerplate(abstract)
+    body_lead = _strip_relevance_boilerplate(body[:4000])
+    document = clean_text(f"{title}. {abstract}. {body_lead}")
+
+    scope_hits: list[str] = []
+    title_scope = _scope_hits_in_sentence(title, document)
+    if title_scope and not _incidental_eu_scope_sentence(title):
+        scope_hits.extend(title_scope)
+
+    # If Europe/EU is not in the title, the abstract must explicitly state that the study
+    # examines a European population/system. A generic background/comparator mention is not
+    # enough. This keeps US-/China-centred global papers from being promoted merely because
+    # one sentence lists the EU among several economies.
+    if not scope_hits and _ri_hits(title):
+        for sent in split_sentences(abstract):
+            hits = _scope_hits_in_sentence(sent, document)
+            if not hits or _incidental_eu_scope_sentence(sent) or not _study_scope_sentence(sent):
+                continue
+            low = normalized(sent)
+            if any(x in low for x in [
+                'publications office of the european union', 'joint research centre publications repository',
+                'publications repository', 'this document is only visible at the commission level',
+            ]):
+                continue
+            scope_hits.extend(hits)
+
+    if not scope_hits:
+        return False, centrality_reason, []
+
+    # Reuse the main R&I extractor instead of maintaining a second narrower vocabulary,
+    # but preserve the centrality guard's sentence-level incidental filters. Programme
+    # provenance, funding acknowledgements and R&D-as-a-covariate must not be rescued.
+    ri_hits: list[str] = []
+    for sent in split_sentences(document):
+        if any(re.search(pat, normalized(sent), re.I) for pat in A_RI_INCIDENTAL_PATTERNS):
+            continue
+        for hit in _ri_hits(sent):
+            if hit not in ri_hits:
+                ri_hits.append(hit)
+    if not ri_hits:
+        return False, centrality_reason, []
+
+    return True, 'source_supported_eu_ri_bridge', list(dict.fromkeys(scope_hits + ri_hits))[:8]
 
 
 def _major_a_focus(text: str, explicit_geo: bool) -> bool:
@@ -3945,6 +4015,15 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
         contextual_evidence=bool(a_context)
     )
+    # V17.19.17 recall repair: the live 2026-09-02 run had 429 direct-EU candidates
+    # but only 22 survived the second centrality vocabulary before the ordinary R&I
+    # aboutness test. Recover only *soft* centrality failures when the normal A-focus and
+    # aboutness gates already pass and title/abstract scope independently establishes EU.
+    if not centrality_ok and eu_rel == 'direct' and a_focus and aboutness.get('pass'):
+        centrality_ok, centrality_reason, centrality_evidence = source_supported_eu_ri_centrality_rescue(
+            title, abstract, body, centrality_reason
+        )
+
     # A admission is source-supported, European/EU-centred and substantively about R&I.
     # Strategic/geopolitical language is intentionally not a hard gate; implications may
     # be assessed by the radar after admission.

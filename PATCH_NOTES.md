@@ -1,3 +1,14 @@
+# v17.19.17 — scanner recall repair from 2026-09-02 live diagnostics
+
+- Starts from the curator-supplied 2026-09-02 06:17Z `radar.json` (385 Strand A, 24 Strand B, 8 Strand C) and preserves the v17.19.16 Matrix evidence-recall repair.
+- Fixes the dominant live admission choke point. The latest rejection funnel evaluated 2,818 records with enough text for 2,805; 429 had direct EU scope, but the duplicate centrality vocabulary reduced these to only 22 before the normal substantive R&I gate.
+- Adds a narrow source-supported centrality bridge only for `ri_not_central` failures. It still requires direct European scope plus the ordinary A-focus/aboutness contract and substantive R&I evidence in title/abstract/body. `eu_or_ri_only_incidental`, programme-provenance, award/event, unrelated-sector and R&D-as-covariate cases remain rejected.
+- Aligns the R&I vocabulary with strategic-technology vocabulary already used elsewhere: microelectronics, dual-use, defence/defense technology and innovation, cybersecurity, academic/university research, defence/defense research and technological innovation can supply the missing mechanism when the full gate is otherwise satisfied.
+- Re-opens the existing targeted four-month institutional A-recall lane by bumping only `A_RECALL_RECOVERY_VERSION`, and increases its batch from 6 to 12 sources per scan. This deliberately ignores rejected-page fingerprints for that lane while preserving normal OpenAlex, Crossref and institution rotation cursors. The global recall profile is **not** bumped.
+- Expands source-failure reallocation from 10 to 18 institutional sources and from 240s to 300s. This matters for the latest live run, where both scholarly families were unavailable/rate-limited and the fallback was the only discovery path that still admitted a new A item.
+- Conservative replay proxy on the supplied 385-item Strand-A corpus (saved title + summary only): v17.19.16 re-accepts 273; v17.19.17 re-accepts 307. This is a regression/recall check, not a promise that the next live scan will find 34 new sources.
+- Adds recall and precision regressions for EU Chips, EIC dual-use/defence innovation, incidental Europe comparators, targeted replay without cursor reset, and source-failure fallback capacity. Full suite: 145/145 tests pass.
+
 # v17.19.16 — Matrix evidence recall repair
 
 - Fixes Matrix undercoverage: the bundled corpus has 383 admitted Strand A evidence records, but the exact Matrix classifier was placing only 50 sources because every record had to pass a second narrow cell-specific phrase-template contract.
