@@ -740,7 +740,7 @@
 
   function shortBullet(x){
     // Reader-facing Matrix point. Keep every point publication-specific, plain,
-    // and no longer than 80 characters. Matrix direction is already encoded in
+    // and no longer than 100 characters. Matrix direction is already encoded in
     // the cell, so the sentence should say what the evidence actually adds.
     const rawTitle=clean(x?.bibliographicTitle||x?.title||'');
     const rawCore=clean(x?.coreMessage||'');
@@ -867,18 +867,18 @@
       .replace(/\bresearch and innovation\b/gi,'R&I')
       .replace(/\btechnological\b/gi,'tech')
       .replace(/\s+/g,' ').trim();
-    const cap80=v=>{
+    const cap100=v=>{
       let q=abbreviate(v).replace(/[;:,]+$/,'').trim();
       if(!q)return '';
-      if(q.length>80){
+      if(q.length>100){
         let out='';
-        for(const w of q.split(/\s+/)){const next=out?`${out} ${w}`:w;if(next.length>77)break;out=next}
-        q=(out||q.slice(0,77)).replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim()+ '…';
+        for(const w of q.split(/\s+/)){const next=out?`${out} ${w}`:w;if(next.length>97)break;out=next}
+        q=(out||q.slice(0,97)).replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim()+ '…';
       }
       return q;
     };
-    if(/research ministers.*maximise.*contribution|one europe one market/.test(n) && x?.row?.id==='conversion')return cap80('EU fragmentation slows research-to-market scale across Europe.');
-    for(const [re,label] of fixed){if(re.test(n))return cap80(label)}
+    if(/research ministers.*maximise.*contribution|one europe one market/.test(n) && x?.row?.id==='conversion')return cap100('EU fragmentation slows research-to-market scale across Europe.');
+    for(const [re,label] of fixed){if(re.test(n))return cap100(label)}
 
     // Prefer an actual proposition from the retained evidence over a publication title.
     const candidates=[rawCore,...String(rawAbstract).split(/(?<=[.!?])\s+/).slice(0,8),rawTitle]
@@ -887,8 +887,8 @@
     const rejectStart=/^(?:apply to|representing |supporting the interim evaluation|this evidence|the findings|the relevance of the study|abstract|objectives?|theoretical and practical|what the eu does|it argues|among the issues|cutting across|although|however|nevertheless|the declaration|the values embodied|as a technology|with the help of|polices? ought|strategic dependencies are changing)/i;
     for(const q of candidates){
       const raw=abbreviate(q);
-      if(raw.length>80||rejectStart.test(raw))continue;
-      const plain=cap80(raw);
+      if(raw.length>100||rejectStart.test(raw))continue;
+      const plain=cap100(raw);
       if(plain.length>=28&&action.test(plain))return plain;
     }
 
@@ -914,7 +914,7 @@
       conversion:{A:`${topic}: European research turns into firms, products or scale.`,B:`${topic}: more control adds cost or limits to scaling.`,C:`${topic}: growth improves but relies on outside capital or markets.`,D:`${topic}: value, firms or production shift away from Europe.`},
       rules:{A:`${topic}: Europe coordinates and acts more effectively.`,B:`${topic}: more control comes with regulatory friction.`,C:`${topic}: Europe gains capability but remains exposed to outside leverage.`,D:`${topic}: rules fragment or constrain Europe’s R&I decisions.`}
     };
-    return cap80(templates[row]?.[col]||rawTitle||rawCore||'Qualified Matrix finding');
+    return cap100(templates[row]?.[col]||rawTitle||rawCore||'Qualified Matrix finding');
   }
 
   function whyBullet(x){

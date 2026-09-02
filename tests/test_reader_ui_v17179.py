@@ -25,7 +25,7 @@ class ReaderUiV17179Tests(unittest.TestCase):
 
     def test_read_page_is_simple_and_excludes_weak_signal_module(self):
         html = (ROOT / "read" / "index.html").read_text(encoding="utf-8")
-        self.assertIn('A short issue view built from established Radar evidence.', html)
+        self.assertIn('The clearest current issues affecting Europe’s research and innovation position.', html)
         self.assertIn('class="branches"', html)
         self.assertNotIn('Weak signals to watch', html)
         self.assertNotIn('weakSignals', html)
@@ -37,22 +37,23 @@ class ReaderUiV17179Tests(unittest.TestCase):
         full = (ROOT / "frontier" / "index.html").read_text(encoding="utf-8")
         quick = (ROOT / "frontier" / "quick" / "index.html").read_text(encoding="utf-8")
         js = (ROOT / "frontier" / "frontier.js").read_text(encoding="utf-8")
-        self.assertIn('Points here are capped at 80 characters', full)
-        self.assertIn('capped at 80 characters', quick)
+        self.assertNotIn('capped at 80 characters', full)
+        self.assertNotIn('capped at 80 characters', quick)
+        self.assertNotIn('source-based', quick)
         self.assertNotIn('Why this cell', full)
         self.assertNotIn('cell-why', full)
         self.assertIn('function shortBullet(x)', js)
-        self.assertIn('q.length>80', js)
-        self.assertIn('cap80', js)
+        self.assertIn('q.length>100', js)
+        self.assertIn('cap100', js)
 
-    def test_current_matrix_points_are_all_80_characters_or_less(self):
+    def test_current_matrix_points_are_all_100_characters_or_less(self):
         js = r"""
 const F=require('./frontier/frontier.js');
 const D=require('./radar.json');
 const v=F.buildFrontier(D);
 for(const x of v.signals){
   const point=F.shortBullet(x);
-  if(point.length>80){
+  if(point.length>100){
     console.error(point.length, point);
     process.exit(2);
   }

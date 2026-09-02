@@ -1623,7 +1623,7 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         self.assertNotIn('automatic every 4 hours', html.lower())
         self.assertNotIn('60 days from first insertion', html)
 
-    def test_historical_evidence_is_public_and_watchlist_stays_on_main_radar(self):
+    def test_historical_evidence_is_public_and_news_stays_on_main_radar(self):
         main=(ROOT/'index.html').read_text(encoding='utf-8')
         read=(ROOT/'read'/'index.html').read_text(encoding='utf-8')
         historical=(ROOT/'historical'/'index.html').read_text(encoding='utf-8')
@@ -1631,7 +1631,9 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         self.assertIn('href="historical/"', main)
         self.assertNotIn('href="history/"', main)
         self.assertLess(main.find('id="strand-c"'), main.find('id="strand-b"'))
-        self.assertIn('Early moves to watch', main)
+        self.assertIn('What is happening now?', main)
+        self.assertIn('Recent journalism and official developments', main)
+        self.assertNotIn('Watchlist', main)
         self.assertNotIn('Weak signals to watch', read)
         self.assertNotIn('strand_c', read)
         self.assertIn("fetch('historical.json?ts='+Date.now()", historical)

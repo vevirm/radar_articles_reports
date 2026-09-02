@@ -23,10 +23,15 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
                 self.assertIn('radar.json', text)
                 self.assertIn('no-store', text)
 
-    def test_main_radar_latest_additions_uses_defined_strand_arrays(self):
+    def test_main_radar_news_and_shocks_use_loaded_strand_arrays(self):
         html = (ROOT / 'index.html').read_text(encoding='utf-8')
-        self.assertIn('const newA=A.filter(x=>x?.new_this_scan).length,newB=B.filter(x=>x?.new_this_scan).length,newC=C.filter(x=>x?.new_this_scan).length;', html)
-        self.assertNotIn('const newA=a.filter(x=>x.new_this_scan).length', html)
+        self.assertIn('function newsItems(d)', html)
+        self.assertIn('const A=d.strand_a||[],C=d.strand_c||[]', html)
+        self.assertIn('function renderShockStrip(d)', html)
+        self.assertIn('statShock', html)
+        self.assertIn('Recent journalism and official developments', html)
+        self.assertNotIn('New this scan', html)
+        self.assertNotIn('Watchlist', html)
         self.assertIn('console.error("Radar data load failed",e)', html)
         self.assertIn('safeCard(renderer,x,i)', html)
         self.assertIn('Current issues render failed', html)
@@ -118,13 +123,14 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         self.assertNotIn('column.id', js)
         self.assertNotIn('matrix_auto_cell', js)
         self.assertNotIn('sourceMerit', js)
-        self.assertIn('Interpreted from retained Radar evidence', html)
+        self.assertIn('Forward-looking risks and opportunities for EU research &amp; innovation.', html)
+        self.assertNotIn('retained Radar evidence', html)
         self.assertNotIn('Matrix placement', html)
         shocks = (ROOT / 'shocks' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('Discrete external events with realised effects', shocks)
         self.assertIn('RadarPriorities.buildPriorityView', shocks)
         self.assertNotIn('Matrix placement', shocks)
-        self.assertIn('Method &amp; shock families', shocks)
+        self.assertIn('What counts as an external shock?', shocks)
         self.assertIn('Natural disasters', shocks)
         self.assertIn('Cyberattacks', shocks)
         self.assertIn('Major infrastructure disruptions', shocks)
@@ -133,7 +139,8 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         briefing = (ROOT / 'briefing/index.html').read_text(encoding='utf-8')
         self.assertIn("fetch('../radar.json?ts='+Date.now()", briefing)
         self.assertNotIn('Topic digest generated:', briefing)
-        self.assertIn('rebuilt from the current radar data', briefing)
+        self.assertIn('The newest findings on the main geopolitical themes', briefing)
+        self.assertNotIn('rebuilt from the current radar data', briefing)
 
 
 if __name__ == '__main__':

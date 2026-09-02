@@ -1,7 +1,10 @@
-# v17.19.32
+# v17.19.33
 
-- Full-repository upload hardening for scanner serialization.
-- Correct `.github/workflows` still use one shared queue so Main and Historical never overlap and rescue rounds stay inside the owning cycle.
-- Added a visible runtime fallback for GitHub web uploads that leave hidden workflow YAML unchanged: the later legacy scanner run exits cleanly before any source requests rather than overlapping the other scanner.
-- The fallback also protects the short gap before a legacy separately-dispatched rescue round.
-- Scanner research methodology, source rotation, admission logic, EU relevance, shock discovery and saved data are unchanged.
+- Reframed the main current-affairs feed as **News** instead of a ten-item “Watchlist”. It now combines recent journalism and relevant official developments, with major news sources prioritised in the ordering.
+- Surfaced **External shocks** directly on the main Radar. The current repository data yields one qualifying realised shock: China’s immediate technology-export restrictions affecting 14 EU entities.
+- Removed reader-facing scanner/process copy such as “new this scan”, scan-status explanations, admission/classification notes and point-length meta text. The pages explain the subject matter, not the machinery behind the page.
+- Expanded Matrix point text from 80 to **100 characters**, reduced initial bullet density, and opened up spacing so the Matrix reads less tightly.
+- Added small, simple line icons to Matrix row/column headers as visual cues for people/knowledge, facilities/capacity, cooperation/dependence and autonomy/control concepts.
+- Simplified the External Shocks and Risks & Opportunities pages so they foreground the event/evidence and why it qualifies rather than scanner terminology.
+- Scanner research, source rotation, admission logic and stored data are unchanged by this reader/UI release.
+- Validation: 204 tests passed (plus 34 subtests).
