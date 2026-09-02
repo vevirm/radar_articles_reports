@@ -1,4 +1,4 @@
-/* v17.20.0 reader UI — white / black / red only */
+/* v17.20.2 reader UI — white / black / red only */
 :root{
   --ink:#0b0b0b!important;--muted:rgba(11,11,11,.62)!important;
   --line:rgba(11,11,11,.18)!important;--bg:#fff!important;--card:#fff!important;
@@ -31,3 +31,15 @@ button,.filter,.btn,.action,.more,.info-button,.publication-link,.evidence-open,
 .letters button{border-radius:0!important;background:#fff!important;color:#111!important}.letters button.active{background:#111!important;color:#fff!important;border-color:#111!important}.entry.head{background:#0b0b0b!important;color:#fff!important}.publication-open,.source-link,.bullets a,.cell-item a{color:#111!important;text-decoration:underline!important;text-decoration-color:#c40018!important;text-underline-offset:2px}.term{border-left:4px solid #111!important}.term .label{color:#c40018!important}.historical-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.download-card,.intro-card{background:#fff!important}
 
 @media(max-width:650px){.card-actions,.priority-actions{display:grid;grid-template-columns:1fr!important}.info-button,.publication-link,.evidence-open,.card-link{width:100%}}
+
+
+/* v17.20.2 legibility pass: slightly larger type, with white carrying more of the page. */
+html,body{font-size:16px!important}
+.nav a,.top-actions .button{font-size:12px!important}
+.info-button,.publication-link,.evidence-open,.card-link{font-size:12.5px!important}
+.claim-button,.claim-title{font-size:19px!important;line-height:1.32!important}
+.visible-source,.whatline,.whyline,.signal-what,.point,.relevance,.priority-title{font-size:14px!important;line-height:1.5!important}
+.meta,.source,.origin,.priority-meta,.card-foot,.count,.small,.state,.note{font-size:12.5px!important;line-height:1.42!important}
+.tag,.chip,.pill,.panel-count,.n,.category,.rank{font-size:10.5px!important}
+.component h3,.term .label{font-size:16px!important}
+.component p,.secondary-view{font-size:12.5px!important;line-height:1.5!important}

@@ -37,6 +37,85 @@
     const chosen=candidates[0];if(chosen)used.add(chosen._row);return chosen||null;
   }
 
+  const DIRECT_TEMPLATES=[
+    {
+      id:'direct_materials_cutoff',direct:true,
+      title:'A critical-material or advanced-chip cutoff suddenly removes inputs Europe cannot replace fast enough',
+      plainly:'An export restriction does not need to hit every product: a small set of controlled materials or advanced chips can stop strategic R&I programmes that have no qualified substitute.',
+      secondOrder:'The damage moves upstream from production into experimentation: prototypes, qualification runs and scale-up schedules slip before headline industrial output does.',
+      minEvidence:4,
+      roles:[
+        ['Critical-material coercion',{any:[/critical raw material weapon/,/critical.raw.material.*export control/,/critical materials.*depend/],preferSource:/EUISS|JRC|Carnegie/}],
+        ['Semiconductor dependence',{any:[/supply chain dependencies on china, taiwan and the united states/,/semiconductor geopolitical risk/,/geopolitics of ai chips/],preferSource:/IAI|Institut Montaigne|MIT/}],
+        ['European compute / strategic-tech build-out',{any:[/ai gigafactor/,/resource for ai science in europe/,/supercomput/,/quantum computer/],preferSource:/European Commission|EuroHPC/}],
+        ['Export-control exposure',{any:[/export control risks/,/dual-use.*export control/,/economic coercion/,/export restriction/],preferSource:/SIPRI|ECFR|EUISS/}],
+      ],
+      reasoning:[
+        'Europe is expanding compute, semiconductor and other strategic-technology capacity.',
+        'The corpus simultaneously documents hard dependencies on imported chips and critical materials.',
+        'Export controls and economic coercion provide a direct external mechanism for cutting those inputs quickly.',
+        'The immediate shock is therefore straightforward: programmes with no qualified substitute stop or slow until a new input is certified.'
+      ]
+    },
+    {
+      id:'direct_cyber_infrastructure',direct:true,
+      title:'A major cyberattack takes a shared European research infrastructure or compute service offline',
+      plainly:'A shared facility can become a single point of failure: if its software, cloud layer or access system is disabled, many projects lose capability at once.',
+      secondOrder:'Teams with no local substitute lose experimental time first, and the queue created during the outage continues long after the systems return.',
+      minEvidence:4,
+      roles:[
+        ['Software-vulnerability / cyber risk',{any:[/software vulnerabilities/,/cybersecurity challenges/,/cybersecurity risks/],preferSource:/SIPRI|EUISS/}],
+        ['Cloud and digital dependence',{any:[/cloud and ai development/,/non-european suppliers/,/digital infrastructure.*innovation capacity/],preferSource:/European Commission|Economics of Innovation/}],
+        ['Shared research infrastructure',{any:[/research infrastructures as bottleneck resources/,/open access to jrc research infrastructures/,/european research infrastructures/],preferSource:/EPJ Research Infrastructures|Joint Research Centre|European Commission/}],
+        ['Compute concentration / access',{any:[/supercomput/,/resource for ai science in europe/,/ai gigafactor/],preferSource:/EuroHPC|European Commission|Bruegel/}],
+      ],
+      reasoning:[
+        'European R&I increasingly relies on shared compute, data and specialised facilities.',
+        'The corpus treats some of those infrastructures explicitly as bottleneck resources.',
+        'It also documents software-vulnerability governance, cybersecurity exposure and cloud dependence.',
+        'A serious cyber incident can therefore create an immediate multi-project outage without destroying any laboratory building.'
+      ]
+    },
+    {
+      id:'direct_conflict_research_corridor',direct:true,
+      title:'An armed-conflict escalation closes a research corridor and displaces people, facilities and collaborations',
+      plainly:'War can remove research capacity in one move: laboratories become inaccessible, researchers move, and international partners inherit projects they were not designed to carry alone.',
+      secondOrder:'Temporary emergency support becomes a structural part of the European research system, while affected fields lose cohorts of early-career researchers and locally held data.',
+      minEvidence:4,
+      roles:[
+        ['War-damaged research ecosystem',{any:[/ukrainian research ecosystem/,/impact of the war.*research infrastructure/,/war-related risks.*research/],preferSource:/ALLEA|International Science Journal/}],
+        ['European integration of affected science',{any:[/integration into the european research area/,/ukraine.*european research area/,/supporting ukrainian science/],preferSource:/ALLEA|ERA Portal/}],
+        ['Researcher mobility dependence',{any:[/fifth freedom/,/researcher mobility/,/cross-border mobility/],preferSource:/European Citizen Action Service|European Commission/}],
+        ['International collaboration dependence',{any:[/international research collaboration/,/international cooperation.*research/,/science diplomacy/],preferSource:/ALLEA|European Commission|European Research Council/}],
+      ],
+      reasoning:[
+        'The corpus already shows that armed conflict can damage research infrastructure and force support for displaced scientific capacity.',
+        'European programmes increasingly integrate that capacity through shared facilities, mobility and collaborative projects.',
+        'A further escalation can abruptly close physical and institutional access even when grants remain legally alive.',
+        'The shock is obvious but consequential: the network has to absorb missing people, facilities and project tasks at the same time.'
+      ]
+    },
+    {
+      id:'direct_collaboration_restriction',direct:true,
+      title:'A major partner abruptly restricts international grants, researcher participation or data exchange',
+      plainly:'Research collaboration can be broken by administrative rules rather than a diplomatic rupture: a grant condition, participation ban or data rule can make joint work impossible almost immediately.',
+      secondOrder:'European teams become more cautious about designing projects around partners whose domestic rules can change the collaboration after awards are made.',
+      minEvidence:4,
+      roles:[
+        ['External restriction on collaboration',{any:[/restrictions.*international research collaboration/,/white house.*international research collaboration/,/grant restrictions/],preferSource:/ALLEA/}],
+        ['EU dependence on mobility',{any:[/fifth freedom/,/researcher mobility/,/free circulation of knowledge/],preferSource:/European Citizen Action Service|ERA Portal/}],
+        ['International programme architecture',{any:[/horizon europe.*association/,/international cooperation in research and innovation/,/science diplomacy/],preferSource:/European Commission|European Research Council/}],
+        ['Research-security friction',{any:[/research security/,/knowledge security/,/dual-use/],preferSource:/ALLEA|SIPRI|HCSS/}],
+      ],
+      reasoning:[
+        'The corpus contains a live example of proposed third-country restrictions on international research collaboration.',
+        'European strategy at the same time depends on researcher mobility, programme association and cross-border science diplomacy.',
+        'Research-security rules add another layer of participation and trust conditions.',
+        'A sudden external rule change can therefore stop a collaboration even when neither government formally ends the partnership.'
+      ]
+    }
+  ];
+
   const TEMPLATES=[
     {
       id:'measurement_mid_river',
@@ -172,9 +251,9 @@
     }
   ];
 
-  function build(data){
+  function buildFromTemplates(data,templates){
     const rows=corpus(data),out=[];
-    for(const t of TEMPLATES){
+    for(const t of templates){
       const used=new Set(),evidence=[];
       for(const [role,spec] of t.roles){const row=pick(rows,spec,used);if(row)evidence.push({role,row})}
       if(evidence.length<(t.minEvidence||t.roles.length))continue;
@@ -182,5 +261,7 @@
     }
     return out;
   }
-  return {build,templates:TEMPLATES,rowText};
+  function build(data){return buildFromTemplates(data,TEMPLATES)}
+  function buildDirect(data){return buildFromTemplates(data,DIRECT_TEMPLATES)}
+  return {build,buildDirect,templates:TEMPLATES,directTemplates:DIRECT_TEMPLATES,rowText};
 });
