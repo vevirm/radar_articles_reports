@@ -348,13 +348,19 @@
       for(const [role,spec] of t.roles){const row=pick(rows,spec,used);if(row)evidence.push({role,row,quality:qualityScore(row)})}
       if(evidence.length<(t.minEvidence||t.roles.length))continue;
       const qs=evidence.map(e=>e.quality),best=Math.max(...qs),avg=qs.reduce((a,b)=>a+b,0)/qs.length;
-      // A cross-evidence shock must be anchored in at least one very strong source and
-      // supported by a credible evidence set. Low-ranked rows can corroborate, not lead.
-      if(best<82||avg<68)continue;
+      const coverage=evidence.length/t.roles.length;
+      const sources=new Set(evidence.map(e=>clean(e.row.source)).filter(Boolean)).size;
+      const strands=new Set(evidence.map(e=>e.row._strand).filter(Boolean)).size;
+      // Inference is recall-first: if the required independent evidence roles are present,
+      // the scenario is inferred. Publication quality changes its confidence and ordering;
+      // it does not erase a supported seam merely because one supporting row ranks lower.
+      const inferenceScore=Math.max(0,Math.min(100,Math.round(
+        avg*0.55+best*0.20+coverage*15+Math.min(1,sources/3)*5+Math.min(1,strands/2)*5
+      )));
       evidence.sort((a,b)=>b.quality-a.quality);
-      out.push({...t,evidence,coverage:evidence.length+'/'+t.roles.length,evidenceQuality:{best,average:Math.round(avg)}});
+      out.push({...t,evidence,coverage:evidence.length+'/'+t.roles.length,evidenceQuality:{best,average:Math.round(avg)},inferenceScore});
     }
-    return out;
+    return out.sort((a,b)=>b.inferenceScore-a.inferenceScore||b.evidenceQuality.best-a.evidenceQuality.best||a.title.localeCompare(b.title));
   }
   function build(data){return buildFromTemplates(data,TEMPLATES)}
   function buildDirect(data){return buildFromTemplates(data,DIRECT_TEMPLATES)}

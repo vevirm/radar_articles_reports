@@ -394,9 +394,10 @@
         const kind=clean(lens.type);
         if(!['risk','opportunity','external_shock'].includes(kind)) continue;
         const interpretationBasis=clean(lens.analysis_basis),quality=qualityScore(raw);
-        // Repository inference needs a credible publication/source underneath it.
-        // Low-quality material may remain in the Radar, but it cannot manufacture an analytical finding.
-        if(interpretationBasis==='repository_evidence_interpretation'&&sourceFor(raw)&&quality<68) continue;
+        // Keep repository inference active. Publication quality is the dominant ordering
+        // signal in pathwayScore(), so stronger papers/reports lead while lower-ranked
+        // evidence can still surface a supported risk or opportunity instead of being
+        // silently discarded by a fixed quality cutoff.
         out.push({
           raw,kind,lens,lensPassage:clean(lens.passage),strategicClassification:raw.strategic_classification||{},
           title:titleFor(raw),coreMessage:coreFor(raw),source:sourceFor(raw),date:clean(raw.date||raw.first_seen||''),

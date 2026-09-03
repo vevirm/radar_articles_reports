@@ -41,9 +41,11 @@ if(!generic||!dual||R.scoreFor(dual)<=R.scoreFor(generic)) process.exit(5);
         shocks = (ROOT / "shocks" / "scenarios.js").read_text(encoding="utf-8")
         variants = (ROOT / "shocks" / "variants.js").read_text(encoding="utf-8")
         self.assertIn("quality*1e13", priorities)
-        self.assertIn("quality<68", priorities)
+        self.assertIn("quality*1e13", priorities)
+        self.assertNotIn("quality<68", priorities)
         self.assertIn("qualityScore(x)*100", shocks)
-        self.assertIn("best<82||avg<68", shocks)
+        self.assertIn("inferenceScore", shocks)
+        self.assertNotIn("best<82||avg<68", shocks)
         self.assertIn("qualityScore(x)*100", variants)
 
     def test_release_contains_reader_ranking_runtime(self):

@@ -1,3 +1,10 @@
+# v17.20.14
+
+- Corrects the inference rule: risks, opportunities and external-shock scenarios must continue to be inferred from retained evidence.
+- Publication/source quality now acts as a dominant weight for ordering and confidence, not as a hard cutoff that can suppress a supported inference.
+- Reasoned/direct shock scenarios receive an inference score from evidence quality, coverage, source diversity and strand diversity and are ordered strongest-first.
+- Lower-ranked evidence may corroborate or surface a seam, while stronger papers/reports lead the reasoning.
+
 # v17.20.13
 
 - Radar cards are ordered by a reader-facing 0–100 score: strongest source + strongest EU R&I geopolitical fit first.
