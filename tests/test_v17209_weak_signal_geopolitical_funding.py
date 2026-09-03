@@ -66,6 +66,29 @@ class WeakSignalGeopoliticalFundingGateTests(unittest.TestCase):
         }
         self.assertFalse(scan._saved_signal_passes(item))
 
+    def test_strand_a_retention_does_not_apply_weak_signal_funding_gate(self):
+        # Regression for v17.20.9: the C-only funding rule was accidentally called
+        # from merge_corpus(), which is the cumulative A/B merge path.
+        item = {
+            "title": "Eight European startups set to receive scale-up funding from the EIC under the STEP Scale Up scheme",
+            "source": "European Innovation Council",
+            "date": "2026-04-27",
+            "date_basis": "page",
+            "link": "https://eic.ec.europa.eu/news/eight-european-startups-set-receive-scale-funding-eic-under-step-scale-scheme-2026-04-27_en",
+            "type": "official notice / primary source",
+            "strand": "A",
+            "eu_relevance": "direct",
+            "summary": "The initiative supports strategic technologies and aims to reduce strategic dependencies.",
+            "core_message": "Eight European startups are selected for EIC STEP scale-up funding.",
+            "source_tier": "Tier 1",
+            "first_seen": "2026-08-31T18:08Z",
+            "new_this_scan": False,
+        }
+        merged = scan.merge_corpus([item], [], "A", "2026-09-03T12:00Z")
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]["title"], item["title"])
+        self.assertFalse(merged[0].get("new_this_scan"))
+
     def test_foreign_funding_signal_is_not_misread_as_generic_eu_funding(self):
         item = {
             "headline": "Canada invests in quantum supply-chain research",

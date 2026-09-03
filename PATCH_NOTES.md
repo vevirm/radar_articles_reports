@@ -1,3 +1,11 @@
+## 17.20.10 — repair cumulative A/B retention after Strand-C funding tightening
+
+- Fixes the scan failure shown after v17.20.9: the new “generic EU funding is not automatically a weak signal” rule was accidentally applied inside the shared A/B merge path.
+- The funding/geopolitical-setting filter is now confined to Strand C, where it belongs. Previously accepted Strand A and B evidence is carried forward cumulatively during normal scans.
+- Valid A material such as science-diplomacy partnerships, strategic-dependency funding and research-infrastructure evidence can no longer disappear merely because the title contains an EU funding/programme move.
+- Strengthens the workflow safety gate to match the actual cumulative contract: on an ordinary scan, every prior A/B item must survive regardless of publication age; only an explicitly flagged precision/migration cleanup may remove a known hard failure.
+- Adds regression coverage so future weak-signal precision changes cannot silently leak into A/B retention.
+
 ## 17.20.9 — weak signals require a geopolitical reason, not merely EU funding
 
 - Strand C no longer treats routine EU grant, call, award or programme-funding announcements as weak signals merely because they concern Horizon Europe, researchers or innovation.

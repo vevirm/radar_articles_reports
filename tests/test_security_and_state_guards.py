@@ -102,6 +102,12 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
         self.assertEqual(out["frontier_evidence"], [old_f])
         self.assertEqual(sum(removed.values()), 0)
 
+    def test_shipped_workflow_guards_all_prior_ab_rows_not_only_recent_dates(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        if "previously accepted cumulative item(s)" in text:
+            self.assertIn("rolling date windows govern discovery priority, not retention", text)
+            self.assertNotIn("still-in-window accepted item(s)", text)
+
     def test_push_credential_is_added_only_after_scan_and_safety_gate(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         scan_pos = text.index("- name: Run radar scan")

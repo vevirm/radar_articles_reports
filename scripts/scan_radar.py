@@ -10307,9 +10307,12 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
-        if not saved_eu_funding_signal_has_geopolitical_setting(old):
-            _diag_inc("signal_reject_generic_eu_funding_without_geopolitical_setting")
-            continue
+        # The geopolitical-setting rule is a Strand-C weak-signal rule only.
+        # A/B are the Radar's cumulative evidence strands: a previously accepted
+        # paper/report/primary source must never be reclassified as a weak signal
+        # merely because its title happens to describe EU funding.  Applying the C
+        # funding gate here used to delete valid A rows during merge and then trip
+        # the workflow's cumulative-corpus safety check.
         if not record_source_integrity_ok(old) or not record_date_integrity_ok(old):
             _diag_inc("signal_reject_record_integrity")
             continue
