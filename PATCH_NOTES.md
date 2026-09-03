@@ -1,3 +1,9 @@
+## 17.20.7 — black links on white + browser-upload-safe regression gate
+
+- Reader links on white surfaces now render black (including visited links); red is retained for borders, underlines, active states and emphasis. Dark headers keep white link text.
+- `Read at least this` supporting links and External Shock variant links follow the same black-on-white rule.
+- The v17.20.6 workflow regression test now tolerates the older hidden `.github` workflow that GitHub's browser bulk uploader can leave in place, while still enforcing the 24-minute scanner budget in visible configuration.
+
 v17.20.0
 
 - Restores the main Radar to its three original strands: A quality papers/reports, B foresight methods, C weak signals.
@@ -42,7 +48,7 @@ v17.20.0
 - `New` follows the latest productive scan (the most recent run that actually inserted A, B or C material), so a zero-yield rotation does not erase the latest additions from view.
 - The scanner records `latest_productive_scan` explicitly, while keeping all normal quality/admission gates unchanged; it never lowers the quality bar just to manufacture a non-zero number.
 
-## 17.20.6 — broader evidence rotation and always-fresh analytical products
+## 17.20.7 — broader evidence rotation and always-fresh analytical products
 - Broadens Strand A discovery across EU institutions, national science bodies, research organisations, journals and working-paper routes, and expands the EU R&I/geopolitics vocabulary without weakening admission gates.
 - Broadens Strand B method discovery for horizon scanning, scenario discovery, robust decision-making, stress testing, red teaming, futures literacy, anticipatory governance, text mining and related foresight methods.
 - Gives strategic risk, opportunity and external-shock searches a protected lane in every scan; the Matrix, Risks & opportunities, External shocks and Read at least this rebuild from the newly published radar.json.
