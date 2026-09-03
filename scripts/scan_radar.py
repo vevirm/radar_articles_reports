@@ -263,7 +263,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.19.14-claim-aware-specific-anchor"
+C_ADMISSION_PROFILE_VERSION = "v17.20.9-eu-funding-needs-geopolitical-setting"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -1784,6 +1784,86 @@ def formal_evidence_product(title: str, desc: str = "", source: str = "", link: 
     return bool(title_like and product_title_shape and (publication_surface or authoritative) and (completion or authoritative))
 
 
+_EU_FUNDING_EVENT_TERMS = [
+    "fund", "funds", "funded", "funding", "grant", "grants", "award", "awards", "awarded",
+    "call for proposals", "funding call", "programme funding", "program funding", "horizon europe",
+]
+
+_EU_FUNDING_GEO_CONTEXT_TERMS = [
+    # Explicit geopolitical / geoeconomic framing.
+    "geopolit", "geoeconomic", "economic security", "research security", "knowledge security",
+    "technology security", "strategic autonomy", "open strategic autonomy", "strategic sovereignty",
+    "technology sovereignty", "technological sovereignty", "digital sovereignty", "ai sovereignty",
+    "de-risk", "derisk", "decoupl", "weaponised interdependence", "weaponized interdependence",
+    "economic coercion", "foreign interference", "foreign influence", "science diplomacy",
+    # Concrete security / dependency mechanisms.
+    "dual-use", "dual use", "defence", "defense", "export control", "export controls", "sanction",
+    "investment screening", "fdi screening", "outbound investment", "critical dependency",
+    "critical dependencies", "strategic dependency", "strategic dependencies", "supply chain",
+    "supply-chain", "critical raw material", "critical mineral", "third-country", "third country",
+    "associated country", "association agreement", "research sanctions", "technology restriction",
+    # Named external-security settings.  A country name alone is not enough elsewhere in C,
+    # but for an EU funding announcement it establishes the specific external setting the
+    # curator asked for when paired with a funding event.
+    "china", "russia", "ukraine", "taiwan", "united states", "u.s.", " us ", "nato", "g7",
+    "canada", "united kingdom", " uk ", "britain", "switzerland", "south korea", "korea",
+    "japan", "india", "israel", "australia", "new zealand", "singapore", "global south",
+]
+
+
+def eu_funding_signal_has_geopolitical_setting(title: str, desc: str = "") -> bool:
+    """Reject generic EU funding announcements from Strand C.
+
+    Funding is not itself a weak signal.  An EU grant, call, award or routine programme
+    announcement becomes C-eligible only when the source text states a *specific*
+    geopolitical/geoeconomic purpose, mechanism or external setting.  This prevents
+    ordinary ERC/Horizon funding news from being promoted merely because the Radar can
+    infer that funding matters for Europe.
+
+    The rule deliberately does not require the literal word ``geopolitics``.  Research
+    security, economic security, de-risking, export controls, strategic dependencies,
+    third-country participation, named geopolitical actors, etc. are valid settings.
+    """
+    full = normalized(f"{title}. {desc}")
+    if not full:
+        return True
+    # Only police direct European/EU funding moves.  Foreign funding developments are
+    # evaluated by the ordinary C relationship/Europe-effect gates.
+    if not eu_news_scope(full):
+        return True
+    if not contains_any(full, _EU_FUNDING_EVENT_TERMS):
+        return True
+    return contains_any(full, _EU_FUNDING_GEO_CONTEXT_TERMS)
+
+
+def saved_eu_funding_signal_has_geopolitical_setting(item: dict[str, Any]) -> bool:
+    """Retention check for already-saved C without re-auditing unrelated signals.
+
+    Old C rows can contain Radar-written consequence text, so the presence of words such as
+    ``international cooperation`` in ``why_it_matters`` must not rescue a routine funding
+    announcement.  When available, the source-text strategic classification is authoritative.
+    """
+    if not isinstance(item, dict):
+        return False
+    headline = clean_text(item.get("headline", ""))
+    source = clean_text(item.get("source", ""))
+    link = clean_text(item.get("link", ""))
+    direct_eu = eu_news_scope(headline) or _source_merit_is_eu_official(source, link)
+    if not direct_eu:
+        return True
+    source_claim = clean_text(item.get("what") or item.get("core_message") or "")
+    sourceish = clean_text(item.get("signal_note") or item.get("why_it_matters") or "")
+    funding_like = contains_any(normalized(f"{headline}. {source_claim}. {sourceish}"), _EU_FUNDING_EVENT_TERMS)
+    if not funding_like:
+        return True
+    classification = item.get("strategic_classification") if isinstance(item.get("strategic_classification"), dict) else {}
+    if clean_text(item.get("strategic_classification_source")) == "source_text":
+        if classification.get("primary") or classification.get("lenses") or classification.get("trend_context"):
+            return True
+        return False
+    return eu_funding_signal_has_geopolitical_setting(headline, source_claim or sourceish)
+
+
 def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", link: str = "") -> bool:
     """Fail closed for institutional C candidates.
 
@@ -1797,6 +1877,8 @@ def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", 
     if routine_signal_noise(title, desc):
         return False
     if formal_evidence_product(title, desc, source, link):
+        return False
+    if not eu_funding_signal_has_geopolitical_setting(title, desc):
         return False
     lead = clean_text(desc)[:2200]
     full = normalized(f"{title}. {lead}")
@@ -10225,6 +10307,9 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
+        if not saved_eu_funding_signal_has_geopolitical_setting(old):
+            _diag_inc("signal_reject_generic_eu_funding_without_geopolitical_setting")
+            continue
         if not record_source_integrity_ok(old) or not record_date_integrity_ok(old):
             _diag_inc("signal_reject_record_integrity")
             continue
@@ -10463,6 +10548,12 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     source = clean_text(item.get('source', ''))
     link = clean_text(item.get('link', ''))
     if formal_evidence_product(headline, desc, source, link):
+        return False
+    # A generic EU grant/call/award does not become geopolitical because the Radar later
+    # wrote a generic consequence sentence about participation or funding.  Prefer the
+    # source-text strategic classification when it exists; otherwise apply the same strict
+    # lexical setting gate used for newly discovered C candidates.
+    if not saved_eu_funding_signal_has_geopolitical_setting(item):
         return False
     # Saved official EU material follows the same rule as new discovery: an established
     # office/programme/strategy, mature implementation notice or routine grant result is
@@ -11882,6 +11973,9 @@ def anchor_news(
             headline, desc, source, link
         ):
             diag(n, 'institutional_page_not_weak_signal')
+            continue
+        if not eu_funding_signal_has_geopolitical_setting(headline, desc):
+            diag(n, 'generic_eu_funding_without_geopolitical_setting')
             continue
         if not weak_signal_candidate_text(headline, desc):
             diag(n, 'not_weak_signal_candidate')

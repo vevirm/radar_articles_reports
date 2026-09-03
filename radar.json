@@ -383,20 +383,20 @@
       "trigger": "rescue",
       "new_a": 6,
       "new_b": 0,
-      "new_c": 1,
+      "new_c": 0,
       "health": "ok",
       "corpus_a": 451,
       "corpus_b": 24,
-      "corpus_c": 13
+      "corpus_c": 12
     }
   ],
   "latest_productive_scan": {
     "started_at": "2026-09-03T09:46Z",
     "completed_at": "2026-09-03T10:02Z",
-    "new_items": 7,
+    "new_items": 6,
     "new_a": 6,
     "new_b": 0,
-    "new_c": 1
+    "new_c": 0
   },
   "reader_products_refresh": {
     "completed_at": "2026-09-03T10:02Z",
@@ -11481,7 +11481,7 @@
   "backfill_complete": false,
   "signal_discovery_version": "v17.19.22-active-strategic-pathway-search",
   "signal_quality_profile_version": "v17.19.18-intention-echo-and-saved-c-precision",
-  "c_admission_profile_version": "v17.19.14-claim-aware-specific-anchor",
+  "c_admission_profile_version": "v17.20.9-eu-funding-needs-geopolitical-setting",
   "strategic_signal_profile_version": "v17.19.31-shock-family-active-recall",
   "strategic_pathway_scan_enabled": true,
   "strategic_pathway_news_queries_configured": 39,
@@ -18935,7 +18935,7 @@
     "new_ab_unique": 6,
     "new_a_matrix_placed": 3,
     "new_b_matrix_placed": 0,
-    "new_c": 1,
+    "new_c": 0,
     "new_strategic_pathways": 0,
     "strategic_risks": 1,
     "strategic_opportunities": 0,
@@ -18952,8 +18952,8 @@
     "extended_highest_retained_a": 0,
     "extended_highest_retained_b": 0,
     "extended_highest_new_candidates": 1,
-    "c_signals": 1,
-    "c_signals_total": 13,
+    "c_signals": 0,
+    "c_signals_total": 12,
     "c_prefilter_candidates": 2,
     "c_anchored_candidates": 1,
     "b_method_queries_this_scan": 15,
@@ -18988,7 +18988,7 @@
     "finding_context_queries_executed": 4,
     "note_a": "",
     "note_b": "This scan added 0 new Strand B item(s). Earlier accepted items remain in the corpus.",
-    "note_c": "This scan added 1 new weak signal(s). Strand C remains low evidence and each signal stays for 60 days from first insertion.",
+    "note_c": "This scan retained 0 new weak signal(s) after the geopolitical-purpose funding gate. Routine EU grant/call/award announcements are not Strand C unless the source states a specific geopolitical setting.",
     "frontier_gap_targets": [
       "knowledge-D",
       "infrastructure-B",
@@ -34883,50 +34883,6 @@
     }
   ],
   "strand_c": [
-    {
-      "headline": "Starting Grants 2026: Examples of projects",
-      "source": "European Research Council",
-      "date": "2026-09-03",
-      "date_basis": "page",
-      "link": "https://erc.europa.eu/news-events/news/starting-grants-2026-examples-projects",
-      "anchor": "Research and innovation for the European Green Deal (Strand A)",
-      "anchor_basis": "publication",
-      "anchor_status": "anchored",
-      "signal_confidence": "standard",
-      "watch_theme": "Horizon Europe / FP10 international participation",
-      "signal_type": "contradicts",
-      "signal_kind": "research / talent",
-      "why_it_matters": "This could change participation, funding or international cooperation in EU research programmes.",
-      "signal_note": "The European Research Council (ERC) has announced the awarding of 421 Starting Grants to outstanding early-career researchers across Europe, as part of the Horizon Europe programme. This could change participation, funding or international cooperation in EU research programmes.",
-      "external_eu_bridge": "",
-      "external_eu_bridge_is_inference": false,
-      "evidence_status": "low",
-      "evidence_role": "weak_signal",
-      "retention_window_days": 60,
-      "reframing_dimensions": [
-        "new actor move",
-        "new magnitude",
-        "new timing",
-        "new direction",
-        "new consequence"
-      ],
-      "strand_a_phrase_hits": [
-        "Horizon Europe",
-        "European Research Council"
-      ],
-      "c_retrieval_phrase_hits": [],
-      "c_admission_rule": "new point on a substantive Strand-A issue; topic repetition allowed",
-      "strategic_classification": {
-        "primary": "",
-        "lenses": [],
-        "trend_context": [],
-        "trend_action": false,
-        "trend_action_passage": ""
-      },
-      "strategic_classification_source": "source_text",
-      "first_seen": "2026-09-03T09:46Z",
-      "new_this_scan": true
-    },
     {
       "headline": "How is Europe responding to the eight pillars of the Chinese plan? - Institut Jacques Delors",
       "source": "Jacques Delors Institute",

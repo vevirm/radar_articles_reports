@@ -1,3 +1,11 @@
+## 17.20.9 — weak signals require a geopolitical reason, not merely EU funding
+
+- Strand C no longer treats routine EU grant, call, award or programme-funding announcements as weak signals merely because they concern Horizon Europe, researchers or innovation.
+- An EU funding move may enter C only when the source itself gives a specific geopolitical/geoeconomic purpose, mechanism or setting — for example research/economic security, strategic autonomy, de-risking, export controls, strategic dependencies, third-country participation, science diplomacy, defence/dual-use, sanctions, or a named external geopolitical actor.
+- The rule is applied both to newly discovered candidates and cumulatively retained C rows, without re-auditing or deleting unrelated weak signals.
+- The generic ERC Starting Grants 2026 announcement in the supplied corpus is removed from Strand C; the latest productive-scan count is corrected accordingly.
+- Adds regression tests so a generic ERC/Horizon funding announcement fails while genuinely geopolitical funding settings remain admissible.
+
 ## 17.20.8 — cumulative historical evidence
 
 - Historical evidence is now append-only during normal scans: once accepted, an item is retained even if later gate/taxonomy changes would not admit it as a new discovery.
