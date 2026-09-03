@@ -6,7 +6,7 @@
   const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
   const low=v=>clean(v).toLowerCase();
   const dateValue=v=>{const n=Date.parse(v||'');return Number.isFinite(n)?n:0};
-  const qualityScore=x=>Math.max(0,Math.min(100,Number(ReaderRank?.scoreFor?.(x))||0));
+  const qualityScore=x=>Math.max(0,Math.min(100,Number(x?._storedQuality??ReaderRank?.scoreFor?.(x))||0));
   const rx=v=>v instanceof RegExp?v:new RegExp(String(v),'i');
   function rowText(x){return low([x.title,x.headline,x.what,x.core_message,x.summary,x.relevance_note,x.why_it_matters,x.source].join(' '))}
   function matches(x,spec){
@@ -173,10 +173,11 @@
   };
 
   function findScenario(data,id){
-    const all=[...(Scenarios?.buildDirect?.(data)||[]),...(Scenarios?.build?.(data)||[])];
+    const all=[...(Scenarios?.buildDirect?.(data)||[]),...(Scenarios?.build?.(data)||[]),...(Scenarios?.buildDynamic?.(data)||[])];
     return all.find(s=>s.id===id)||null;
   }
   function counterEvidence(data,scenario,profile){
+    if(Array.isArray(scenario?.againstEvidence)&&scenario.againstEvidence.length)return scenario.againstEvidence.slice().sort((a,b)=>(b.quality||0)-(a.quality||0)).slice(0,5);
     const rows=corpus(data),used=new Set((scenario.evidence||[]).map(e=>e.row._row)),out=[];
     for(const [role,spec] of profile.counterRoles||[]){const row=pick(rows,spec,used);if(row)out.push({role,row,quality:qualityScore(row)})}
     // If a genuinely double-edged row is already part of the shock case, allow it

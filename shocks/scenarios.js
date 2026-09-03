@@ -6,7 +6,7 @@
   const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
   const low=v=>clean(v).toLowerCase();
   const dateValue=v=>{const n=Date.parse(v||'');return Number.isFinite(n)?n:0};
-  const qualityScore=x=>Math.max(0,Math.min(100,Number(ReaderRank?.scoreFor?.(x))||0));
+  const qualityScore=x=>Math.max(0,Math.min(100,Number(x?._storedQuality??ReaderRank?.scoreFor?.(x))||0));
   function rowText(x){return low([x.title,x.headline,x.what,x.core_message,x.summary,x.relevance_note,x.why_it_matters,x.source].join(' '))}
   function rx(v){return v instanceof RegExp?v:new RegExp(String(v),'i')}
   function matches(x,spec){
@@ -344,25 +344,41 @@
   function buildFromTemplates(data,templates){
     const rows=corpus(data),out=[];
     for(const t of templates){
-      const used=new Set(),evidence=[];
-      for(const [role,spec] of t.roles){const row=pick(rows,spec,used);if(row)evidence.push({role,row,quality:qualityScore(row)})}
-      if(evidence.length<(t.minEvidence||t.roles.length))continue;
-      const qs=evidence.map(e=>e.quality),best=Math.max(...qs),avg=qs.reduce((a,b)=>a+b,0)/qs.length;
-      const coverage=evidence.length/t.roles.length;
-      const sources=new Set(evidence.map(e=>clean(e.row.source)).filter(Boolean)).size;
-      const strands=new Set(evidence.map(e=>e.row._strand).filter(Boolean)).size;
+      const used=new Set(),roleEvidence=[];
+      for(const [role,spec] of t.roles){const row=pick(rows,spec,used);if(row)roleEvidence.push({role,row,quality:qualityScore(row)})}
+      if(roleEvidence.length<(t.minEvidence||t.roles.length))continue;
+      const roleQs=roleEvidence.map(e=>e.quality),best=Math.max(...roleQs),avg=roleQs.reduce((a,b)=>a+b,0)/roleQs.length;
+      const coverage=roleEvidence.length/t.roles.length;
+      const sources=new Set(roleEvidence.map(e=>clean(e.row.source)).filter(Boolean)).size;
+      const strands=new Set(roleEvidence.map(e=>e.row._strand).filter(Boolean)).size;
       // Inference is recall-first: if the required independent evidence roles are present,
       // the scenario is inferred. Publication quality changes its confidence and ordering;
       // it does not erase a supported seam merely because one supporting row ranks lower.
       const inferenceScore=Math.max(0,Math.min(100,Math.round(
         avg*0.55+best*0.20+coverage*15+Math.min(1,sources/3)*5+Math.min(1,strands/2)*5
       )));
-      evidence.sort((a,b)=>b.quality-a.quality);
-      out.push({...t,evidence,coverage:evidence.length+'/'+t.roles.length,evidenceQuality:{best,average:Math.round(avg)},inferenceScore});
+      // Do not let an older top-ranked row hide a genuinely new contribution. If a new
+      // scan adds evidence that matches any role, retain up to two such rows as explicit
+      // corroboration. That makes existing shock hypotheses visibly UPDATED rather than
+      // falsely NEW, while the core role evidence still anchors the inference.
+      const fresh=rows.filter(x=>x.new_this_scan&&!used.has(x._row)&&t.roles.some(([,spec])=>matches(x,spec)))
+        .sort((a,b)=>qualityScore(b)-qualityScore(a)||dateValue(b.date)-dateValue(a.date)).slice(0,2)
+        .map(row=>({role:'New corroboration',row,quality:qualityScore(row)}));
+      const evidence=[...roleEvidence,...fresh].sort((a,b)=>b.quality-a.quality);
+      out.push({...t,evidence,coverage:roleEvidence.length+'/'+t.roles.length,evidenceQuality:{best,average:Math.round(avg)},inferenceScore,updatedThisScan:fresh.length>0});
     }
     return out.sort((a,b)=>b.inferenceScore-a.inferenceScore||b.evidenceQuality.best-a.evidenceQuality.best||a.title.localeCompare(b.title));
   }
+  function dynamicRow(e){return {title:e.title||'Evidence',source:e.source||'',date:e.date||'',link:e.link||'',core_message:e.core_message||'',geo_evidence:Array.isArray(e.geo_evidence)?e.geo_evidence:[],ri_evidence:Array.isArray(e.ri_evidence)?e.ri_evidence:[],a_context_evidence:Array.isArray(e.a_context_evidence)?e.a_context_evidence:[],new_this_scan:!!e.new_this_scan,_row:e.row||'',_strand:e.strand||'',_storedQuality:Number(e.quality)||0}}
+  function buildDynamic(data){
+    const xs=Array.isArray(data?.shock_inference?.dynamic_shocks)?data.shock_inference.dynamic_shocks:[];
+    return xs.map(s=>{
+      const evidence=(Array.isArray(s.support)?s.support:[]).map(e=>({role:e.role||'Supporting evidence',row:dynamicRow(e),quality:Number(e.quality)||0}));
+      const againstEvidence=(Array.isArray(s.against)?s.against:[]).map(e=>({role:e.role||'Counter-evidence',row:dynamicRow(e),quality:Number(e.quality)||0}));
+      return {id:s.id,title:s.title,plainly:s.plainly,secondOrder:s.second_order||'',hidden:s.why_easy_to_miss||'',reasoning:Array.isArray(s.reasoning)?s.reasoning:[],evidence,againstEvidence,dynamic:true,status:s.status||'unchanged',newThisScan:!!s.new_this_scan,updatedThisScan:!!s.updated_this_scan,inferenceScore:Number(s.inference_score)||0,evidenceQuality:{best:Number(s.best_quality)||0,average:Number(s.average_quality)||0},coverage:`${evidence.length} evidence rows`};
+    }).filter(s=>s.id&&s.title&&s.evidence.length).sort((a,b)=>b.inferenceScore-a.inferenceScore||a.title.localeCompare(b.title));
+  }
   function build(data){return buildFromTemplates(data,TEMPLATES)}
   function buildDirect(data){return buildFromTemplates(data,DIRECT_TEMPLATES)}
-  return {build,buildDirect,templates:TEMPLATES,directTemplates:DIRECT_TEMPLATES,rowText};
+  return {build,buildDirect,buildDynamic,templates:TEMPLATES,directTemplates:DIRECT_TEMPLATES,rowText};
 });

@@ -15032,6 +15032,21 @@ def main() -> int:
             "transport_failure_warning_count": transport_failure_count,
         },
     }
+    # Cross-evidence shock inference is refreshed after the A/B/C corpus has been
+    # finalised. The registry is persistent: a hypothesis can be NEW when a fresh
+    # evidence seam appears, UPDATED when later scans strengthen or challenge it,
+    # and unchanged otherwise. This is separate from strict realised-shock filing.
+    from shock_inference import refresh_shock_inference
+    shock_state = refresh_shock_inference(
+        data,
+        previous.get("shock_inference") if isinstance(previous.get("shock_inference"), dict) else {},
+        completed_iso,
+    )
+    data["shock_inference"] = shock_state
+    data["stats"]["inferred_shocks_new_this_run"] = int(shock_state.get("new_count", 0) or 0)
+    data["stats"]["inferred_shocks_updated_this_run"] = int(shock_state.get("updated_count", 0) or 0)
+    data["stats"]["inferred_shocks_registry_total"] = len(shock_state.get("dynamic_shocks", []))
+    data["reader_products_refresh"]["shock_inference"] = True
     normalize_reader_claims(data)
     tmp_out = OUT_PATH.with_suffix(".json.tmp")
     tmp_out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
