@@ -1,3 +1,14 @@
+## 17.20.12 — recall-first discovery across hundreds of quality sources
+
+- Rebalances the scanner toward recall: missing a high-quality, high-relevance paper/report is treated as a larger failure than admitting a marginal source-valid item that reader ranking can push down.
+- Expands the configured institutional/source universe from 112 to 199 bodies and the source-first scholarly journal universe from 58 to 171 venues (370 configured source families before query/search lanes).
+- Every ordinary scan now attempts a full source census of the configured journals and institutional bodies where transport/time allows, instead of touching only a small rotating subset.
+- Institutional parsing is breadth-first: every source with a candidate page gets one parser slot before any source gets a second, so giant sitemaps cannot crowd out smaller academies, funders, ministries or research bodies.
+- Broad scholarly query slices are materially larger (36 base queries; up to 100 OpenAlex and 110 Crossref broad queries per scan), while the 24-minute hard scanner budget remains unchanged.
+- Adds a conservative missing-abstract recall route for Tier-1/2 scholarly records whose title itself clearly establishes European scope plus substantive R&I. Unlisted/low-tier journals do not get this waiver.
+- Expands trusted scholarly publishers and the EU R&I/geopolitics query vocabulary; normal European/EU R&I aboutness remains the topical admission gate and reader priority ranking demotes weaker strategic fit.
+- Bumps the source-expansion marker so the next scan backfills the newly added source universe across the normal retained window rather than only checking the latest overlap.
+
 ## 17.20.11 — risk/opportunity polarity + plain-language reader
 
 - Fixes the core polarity error on the Risks & opportunities page: a measure that is explicitly addressing or mitigating a problem is no longer presented as though the measure itself were the risk.

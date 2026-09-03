@@ -671,13 +671,22 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     """Load or initialise persistent incremental-discovery cursors."""
     old = previous.get("scan_state") if isinstance(previous, dict) else None
     source_done = previous.get("source_expansion_version") == SOURCE_EXPANSION_VERSION if isinstance(previous, dict) else False
+    # Source-list expansion is a discovery-window event, not a reason to erase every
+    # persisted query/depth cursor. Preserve incremental state whenever its schema matches;
+    # a new source_expansion_version simply reopens the per-family backfill flags below.
+    # This lets newly added institutions/journals receive a four-month catch-up without
+    # throwing away the rotation progress of the existing hundreds of sources.
     state_matches = (
         isinstance(old, dict)
         and old.get("version") == INCREMENTAL_STATE_VERSION
-        and old.get("source_expansion_version") == SOURCE_EXPANSION_VERSION
     )
     if state_matches:
         state = dict(old)
+        if not source_done:
+            state.setdefault("backfill", {})
+            for family in ("openalex", "crossref_broad", "crossref_priority", "institutions"):
+                state["backfill"][family] = False
+            state["source_expansion_backfill_reopened"] = True
     else:
         state = {
             "version": INCREMENTAL_STATE_VERSION,
@@ -4955,6 +4964,27 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
         contextual_evidence=bool(a_context)
     )
+    # V17.20.12 recall repair: Crossref/OpenAlex often omit abstracts even for excellent
+    # recent papers. If a Tier-1/2 scholarly title itself establishes both European scope
+    # and substantive R&I, do not treat missing abstract text as negative evidence. This
+    # route is intentionally unavailable to broad/unlisted Tier-3 journals; those still
+    # need an abstract/full-text evidence unit. Reader ranking also pushes title-only rows
+    # below equally relevant records with richer evidence.
+    if (
+        source_kind == 'scholarly'
+        and int(source_tier or 9) <= 2
+        and aboutness.get('reason') == 'insufficient_text'
+        and eu_rel == 'direct'
+        and a_focus
+        and _ri_hits(title)
+        and (_scope_hits_in_sentence(title, clean_text(f"{title}. {abstract}")) or has_eu_word(title) or bounded_matches(title, MEMBER_STATE_SCOPE))
+    ):
+        aboutness = {
+            **aboutness,
+            'pass': True,
+            'reason': 'metadata_title_high_recall',
+            'ri_terms': _ri_hits(title)[:8],
+        }
     # V17.19.17 recall repair: the live 2026-09-02 run had 429 direct-EU candidates
     # but only 22 survived the second centrality vocabulary before the ordinary R&I
     # aboutness test. Recover only *soft* centrality failures when the normal A-focus and
@@ -5243,7 +5273,8 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
         return True, 2, 2.75, source_name or host, "Tier 2 trusted-publisher journal"
 
     if CONFIG.get("accept_broad_peer_reviewed_journals", False) and source_type == "journal" and typ in {"article", "review"}:
-        return True, 2, 2.9, source_name or "Scholarly journal", "Tier 2 broad journal"
+        broad_tier = max(2, int(CONFIG.get("broad_peer_reviewed_journal_tier", 3) or 3))
+        return True, broad_tier, 3.35, source_name or "Scholarly journal", f"Tier {broad_tier} broad scholarly journal"
 
     # Preprints are allowed only from arXiv and are ranked as Tier 3.
     if typ in {"preprint", "posted-content", "working-paper", "working paper"}:
@@ -6047,7 +6078,8 @@ def quality_from_crossref(item: dict[str, Any]) -> tuple[bool, int, float, str, 
     ):
         return True, 2, 2.75, journal, "Tier 2 trusted-publisher journal", "peer-reviewed article"
     if CONFIG.get("accept_broad_peer_reviewed_journals", False) and journal and typ in {"journal-article", "article", "review"}:
-        return True, 2, 2.9, journal, "Tier 2 broad journal", "peer-reviewed article"
+        broad_tier = max(2, int(CONFIG.get("broad_peer_reviewed_journal_tier", 3) or 3))
+        return True, broad_tier, 3.35, journal, f"Tier {broad_tier} broad scholarly journal", "peer-reviewed article"
     if typ in {"report", "report-component", "book", "book-chapter", "posted-content"}:
         for p in CONFIG.get("crossref_institution_publishers", []):
             if normalized(p) in normalized(publisher + " " + journal):
@@ -8406,9 +8438,46 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     default_max = 1200 if bootstrap else 700
     max_key = "institution_max_pages_bootstrap" if bootstrap else "institution_max_pages"
     max_jobs = int(CONFIG.get(max_key, default_max))
-    jobs = jobs[:max_jobs]
+
+    # V17.20.12: breadth before depth. Earlier code concatenated jobs in futures-completion
+    # order and then sliced the first N, allowing a few fast/huge sitemaps to occupy most
+    # parser slots. Round-robin by source instead: every source with a candidate gets one
+    # page before any source gets a second, then a third, etc. This is the central recall
+    # guarantee for a 100+ source institutional census.
+    by_source: dict[str, list[tuple[str, str, int, str]]] = {}
+    source_order = [clean_text(src.get("name")) for src in sources if isinstance(src, dict)]
+    for job in jobs:
+        if not isinstance(job, tuple) or len(job) < 4:
+            continue
+        by_source.setdefault(clean_text(job[1]) or "<unknown>", []).append(job)
+    fair_jobs: list[tuple[str, str, int, str]] = []
+    seen_job_urls: set[str] = set()
+    depth = 0
+    ordered_names = list(dict.fromkeys(source_order + list(by_source.keys())))
+    while len(fair_jobs) < max_jobs:
+        added = False
+        for name in ordered_names:
+            rows = by_source.get(name, [])
+            if depth >= len(rows):
+                continue
+            job = rows[depth]
+            nu = normalized_link(job[0])
+            if nu and nu not in seen_job_urls:
+                fair_jobs.append(job)
+                seen_job_urls.add(nu)
+                added = True
+                if len(fair_jobs) >= max_jobs:
+                    break
+        if not added:
+            break
+        depth += 1
+    jobs = fair_jobs
     _diag_inc("institution_pages_queued", len(jobs))
-    log_progress(f"Institutional parsing: {len(jobs)} candidate page(s) queued")
+    _diag_inc("institution_sources_with_candidate_pages", sum(1 for rows in by_source.values() if rows))
+    log_progress(
+        f"Institutional parsing: {len(jobs)} candidate page(s) queued fairly across "
+        f"{sum(1 for rows in by_source.values() if rows)} source(s)"
+    )
     with cf.ThreadPoolExecutor(max_workers=max(1, page_workers)) as ex:
         futs = [ex.submit(parse_institution_page, u, s, t, stage_deadline, fp, publication_floor) for u, s, t, fp in jobs]
         for fut in cf.as_completed(futs):
@@ -9564,6 +9633,8 @@ def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
     tier = normalized(item.get("source_tier", ""))
     if "tier 1" in tier: score += 3
     elif "comparable" in tier: score += 1
+    if normalized(item.get("text_mode", "")) == "metadata_only":
+        score -= 5
     return score
 
 
@@ -12715,7 +12786,13 @@ def main() -> int:
     # policy-journal rotation. Priority R&I/policy journals are a second source-first bank.
     # Both still face the same EU + substantive-R&I gate.
     priority_policy_journals = list(dict.fromkeys(CONFIG.get('priority_policy_journal_watchlist', [])))
-    cr_source_batch = list(dict.fromkeys(top_journal_watchlist + priority_policy_journals + cr_preferred_batch + cr_general_batch))
+    if bool(CONFIG.get("crossref_full_source_census_each_scan", False)):
+        # Recall-first source census: inspect the recent contents of every configured
+        # scholarly venue before relying on topic-query rotation. The topic gate remains
+        # unchanged, so this increases finding probability rather than relevance leniency.
+        cr_source_batch = list(dict.fromkeys(top_journal_watchlist + priority_policy_journals + source_journals_all))
+    else:
+        cr_source_batch = list(dict.fromkeys(top_journal_watchlist + priority_policy_journals + cr_preferred_batch + cr_general_batch))
 
     # Independent publisher-page journal watch. This means a Crossref/OpenAlex 429 cannot
     # make Nature/Science-family discovery disappear for the whole run. Nature and Science
@@ -12756,11 +12833,19 @@ def main() -> int:
     general_rotating, _inst_planned_next, _inst_planned_wrapped = rotating_batch(
         general_sources or institution_sources_all, institution_cursor_before, general_n
     )
-    inst_rotating = list(dict.fromkeys([clean_text(x.get("domain", "")) for x in official_rotating + general_rotating]))
-    inst_rotating = [
-        next(src for src in official_rotating + general_rotating if clean_text(src.get("domain", "")) == domain)
-        for domain in inst_rotating
-    ]
+    if bool(CONFIG.get("institution_full_census_each_scan", False)):
+        # Recall-first source census: every configured trusted institutional domain is
+        # offered to discovery on every ordinary scan. collect_institutions() applies a
+        # fair per-source page slice so one giant sitemap cannot crowd out smaller bodies.
+        official_rotating = list(official_sources)
+        general_rotating = list(general_sources)
+        inst_rotating = list(institution_sources_all)
+    else:
+        inst_rotating = list(dict.fromkeys([clean_text(x.get("domain", "")) for x in official_rotating + general_rotating]))
+        inst_rotating = [
+            next(src for src in official_rotating + general_rotating if clean_text(src.get("domain", "")) == domain)
+            for domain in inst_rotating
+        ]
     # Keep the persistent source rotation intact, then add specialist sources in
     # scarcity-weighted round-robin order across the selected cells. Source-list
     # ordering therefore cannot accidentally privilege one thematic cell forever.
