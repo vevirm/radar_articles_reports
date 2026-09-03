@@ -1,11 +1,12 @@
 (function(root,factory){
-  if(typeof module==='object'&&module.exports)module.exports=factory();
-  else root.RadarShockScenarios=factory();
-})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  if(typeof module==='object'&&module.exports)module.exports=factory(require('../reader_rank.js'));
+  else root.RadarShockScenarios=factory(root.RadarReaderRank);
+})(typeof globalThis!=='undefined'?globalThis:this,function(ReaderRank){
   'use strict';
   const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
   const low=v=>clean(v).toLowerCase();
   const dateValue=v=>{const n=Date.parse(v||'');return Number.isFinite(n)?n:0};
+  const qualityScore=x=>Math.max(0,Math.min(100,Number(ReaderRank?.scoreFor?.(x))||0));
   function rowText(x){return low([x.title,x.headline,x.what,x.core_message,x.summary,x.relevance_note,x.why_it_matters,x.source].join(' '))}
   function rx(v){return v instanceof RegExp?v:new RegExp(String(v),'i')}
   function matches(x,spec){
@@ -16,12 +17,13 @@
     return true;
   }
   function score(x,spec){
-    const t=rowText(x);let n=dateValue(x.date)/86400000;
+    const t=rowText(x);let n=qualityScore(x)*100;
     for(const p of spec.all||[])if(rx(p).test(t))n+=35;
     for(const p of spec.any||[])if(rx(p).test(t))n+=18;
-    if(spec.preferSource&&rx(spec.preferSource).test(clean(x.source)))n+=80;
-    if(spec.preferTitle&&rx(spec.preferTitle).test(clean(x.title||x.headline)))n+=120;
-    if(x.new_this_scan)n+=8;
+    if(spec.preferSource&&rx(spec.preferSource).test(clean(x.source)))n+=220;
+    if(spec.preferTitle&&rx(spec.preferTitle).test(clean(x.title||x.headline)))n+=260;
+    if(x.new_this_scan)n+=12;
+    n+=dateValue(x.date)/1e12;
     return n;
   }
   function corpus(data){
@@ -343,9 +345,14 @@
     const rows=corpus(data),out=[];
     for(const t of templates){
       const used=new Set(),evidence=[];
-      for(const [role,spec] of t.roles){const row=pick(rows,spec,used);if(row)evidence.push({role,row})}
+      for(const [role,spec] of t.roles){const row=pick(rows,spec,used);if(row)evidence.push({role,row,quality:qualityScore(row)})}
       if(evidence.length<(t.minEvidence||t.roles.length))continue;
-      out.push({...t,evidence,coverage:evidence.length+'/'+t.roles.length});
+      const qs=evidence.map(e=>e.quality),best=Math.max(...qs),avg=qs.reduce((a,b)=>a+b,0)/qs.length;
+      // A cross-evidence shock must be anchored in at least one very strong source and
+      // supported by a credible evidence set. Low-ranked rows can corroborate, not lead.
+      if(best<82||avg<68)continue;
+      evidence.sort((a,b)=>b.quality-a.quality);
+      out.push({...t,evidence,coverage:evidence.length+'/'+t.roles.length,evidenceQuality:{best,average:Math.round(avg)}});
     }
     return out;
   }

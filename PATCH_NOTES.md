@@ -1,3 +1,12 @@
+# v17.20.13
+
+- Radar cards are ordered by a reader-facing 0–100 score: strongest source + strongest EU R&I geopolitical fit first.
+- The score is visible on every Strand A/B/C card; the latest 17 additions therefore appear 100 downward when New is pressed.
+- Added a four-step reader path: Radar → Matrix → Risks & opportunities → External shocks, with larger navigation buttons.
+- Risks/opportunities now let source/evidence quality dominate ordering; low-ranked named sources cannot create repository-inferred findings on their own.
+- Shock scenario and variant evidence selection now gives publication/source quality much more weight; assembled shocks require a strong anchor and credible average evidence quality.
+- Shock evidence tables show the evidence weight used in reasoning.
+
 ## 17.20.12 — recall-first discovery across hundreds of quality sources
 
 - Rebalances the scanner toward recall: missing a high-quality, high-relevance paper/report is treated as a larger failure than admitting a marginal source-valid item that reader ranking can push down.

@@ -1,11 +1,12 @@
 (function(root,factory){
-  if(typeof module==='object'&&module.exports)module.exports=factory(require('./scenarios.js'));
-  else root.RadarShockVariants=factory(root.RadarShockScenarios);
-})(typeof globalThis!=='undefined'?globalThis:this,function(Scenarios){
+  if(typeof module==='object'&&module.exports)module.exports=factory(require('./scenarios.js'),require('../reader_rank.js'));
+  else root.RadarShockVariants=factory(root.RadarShockScenarios,root.RadarReaderRank);
+})(typeof globalThis!=='undefined'?globalThis:this,function(Scenarios,ReaderRank){
   'use strict';
   const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
   const low=v=>clean(v).toLowerCase();
   const dateValue=v=>{const n=Date.parse(v||'');return Number.isFinite(n)?n:0};
+  const qualityScore=x=>Math.max(0,Math.min(100,Number(ReaderRank?.scoreFor?.(x))||0));
   const rx=v=>v instanceof RegExp?v:new RegExp(String(v),'i');
   function rowText(x){return low([x.title,x.headline,x.what,x.core_message,x.summary,x.relevance_note,x.why_it_matters,x.source].join(' '))}
   function matches(x,spec){
@@ -16,12 +17,13 @@
     return true;
   }
   function score(x,spec){
-    const t=rowText(x);let n=dateValue(x.date)/86400000;
+    const t=rowText(x);let n=qualityScore(x)*100;
     for(const p of spec.all||[])if(rx(p).test(t))n+=35;
     for(const p of spec.any||[])if(rx(p).test(t))n+=18;
-    if(spec.preferSource&&rx(spec.preferSource).test(clean(x.source)))n+=80;
-    if(spec.preferTitle&&rx(spec.preferTitle).test(clean(x.title||x.headline)))n+=120;
-    if(x.new_this_scan)n+=8;
+    if(spec.preferSource&&rx(spec.preferSource).test(clean(x.source)))n+=220;
+    if(spec.preferTitle&&rx(spec.preferTitle).test(clean(x.title||x.headline)))n+=260;
+    if(x.new_this_scan)n+=12;
+    n+=dateValue(x.date)/1e12;
     return n;
   }
   function corpus(data){

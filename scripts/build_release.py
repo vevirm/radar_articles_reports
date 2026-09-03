@@ -45,6 +45,7 @@ SITE_FILES = [
     "stuff/index.html",
     "stuff/workbook.js",
     "source_merit.js",
+    "reader_rank.js",
     "stuff/source_merit_ranking.xlsx",
     "stuff/eu_ri_radar_phrases_by_strand.xlsx",
 ]

@@ -1,7 +1,7 @@
 (function(root,factory){
-  if(typeof module==='object'&&module.exports) module.exports=factory(require('../briefing/insights.js'));
-  else root.RadarPriorities=factory(root.RadarInsights);
-})(typeof globalThis!=='undefined'?globalThis:this,function(Insights){
+  if(typeof module==='object'&&module.exports) module.exports=factory(require('../briefing/insights.js'),require('../reader_rank.js'));
+  else root.RadarPriorities=factory(root.RadarInsights,root.RadarReaderRank);
+})(typeof globalThis!=='undefined'?globalThis:this,function(Insights,ReaderRank){
   'use strict';
 
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim()}
@@ -10,6 +10,7 @@
   function titleFor(x){return clean(x?.headline||x?.title||x?.what||x?.core_message||'')}
   function sourceFor(x){return clean(x?.source||x?.authors||'')}
   function linkFor(x){return clean(x?.link||'')}
+  function qualityScore(x){return Math.max(0,Math.min(100,Number(ReaderRank?.scoreFor?.(x))||0))}
   function coreFor(x){return clean(x?.what||x?.core_message||x?.reader_point||x?.summary||x?.signal_note||titleFor(x))}
   function firstMatch(text,patterns){for(const p of patterns){const m=text.match(p);if(m)return clean(m[0])}return ''}
   function any(text,patterns){return !!firstMatch(text,patterns)}
@@ -348,7 +349,10 @@
   function pathwayScore(x){
     const components=x?.lens?.components&&typeof x.lens.components==='object'?Object.values(x.lens.components).filter(Boolean).length:0;
     const basis=clean(x?.lens?.analysis_basis)==='scanner_source_classification'?2:1;
-    return (x?.newThisScan?1e15:0)+dateValue(x?.date)*100+(basis*10)+components;
+    const quality=Number(x?.qualityScore)||qualityScore(x?.raw||x);
+    // Publication/evidence quality is deliberately the dominant ordering signal.
+    // Recency breaks ties; it no longer lets a weak recent source outrank strong evidence.
+    return quality*1e13+basis*1e11+components*1e9+dateValue(x?.date)+(x?.newThisScan?1:0);
   }
 
   function diversifiedTop(items,limit,maxPerTopic=2){
@@ -376,7 +380,7 @@
       const key=norm(linkFor(x)||titleFor(x));
       if(!key){unkeyed.push(x);continue}
       const prior=byKey.get(key);
-      const weight=y=>scannerLenses(y).length*100+(evidenceText(y).length>0?1:0);
+      const weight=y=>scannerLenses(y).length*10000+qualityScore(y)*100+(evidenceText(y).length>0?1:0);
       if(!prior||weight(x)>weight(prior)) byKey.set(key,x);
     }
     return [...byKey.values(),...unkeyed];
@@ -389,11 +393,15 @@
       for(const lens of lenses){
         const kind=clean(lens.type);
         if(!['risk','opportunity','external_shock'].includes(kind)) continue;
+        const interpretationBasis=clean(lens.analysis_basis),quality=qualityScore(raw);
+        // Repository inference needs a credible publication/source underneath it.
+        // Low-quality material may remain in the Radar, but it cannot manufacture an analytical finding.
+        if(interpretationBasis==='repository_evidence_interpretation'&&sourceFor(raw)&&quality<68) continue;
         out.push({
           raw,kind,lens,lensPassage:clean(lens.passage),strategicClassification:raw.strategic_classification||{},
           title:titleFor(raw),coreMessage:coreFor(raw),source:sourceFor(raw),date:clean(raw.date||raw.first_seen||''),
           link:linkFor(raw),abstract:clean(raw.summary||raw.signal_note||raw.why_it_matters||''),newThisScan:!!raw.new_this_scan,
-          interpretationBasis:clean(lens.analysis_basis),
+          interpretationBasis,qualityScore:quality,
         });
       }
     }
