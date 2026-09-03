@@ -178,14 +178,14 @@
   }
   function counterEvidence(data,scenario,profile){
     const rows=corpus(data),used=new Set((scenario.evidence||[]).map(e=>e.row._row)),out=[];
-    for(const [role,spec] of profile.counterRoles||[]){const row=pick(rows,spec,used);if(row)out.push({role,row})}
+    for(const [role,spec] of profile.counterRoles||[]){const row=pick(rows,spec,used);if(row)out.push({role,row,quality:qualityScore(row)})}
     // If a genuinely double-edged row is already part of the shock case, allow it
     // back only when the independent counter search found too little evidence.
     if(out.length<2){
       const used2=new Set();
-      for(const [role,spec] of profile.counterRoles||[]){const row=pick(rows,spec,used2);if(row&&!out.some(e=>e.row._row===row._row))out.push({role,row})}
+      for(const [role,spec] of profile.counterRoles||[]){const row=pick(rows,spec,used2);if(row&&!out.some(e=>e.row._row===row._row))out.push({role,row,quality:qualityScore(row)})}
     }
-    return out.slice(0,5);
+    return out.sort((a,b)=>b.quality-a.quality).slice(0,5);
   }
   const GENERIC_COUNTER_ROLES=[
     ['European substitution / diversification',{any:[/diversif/,/substitut/,/alternative supplier/,/strategic autonomy/,/resilien/]}],

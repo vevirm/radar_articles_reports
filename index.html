@@ -61,9 +61,9 @@
 .landing-nav .lock{margin-left:auto;border-radius:0!important;border:0!important;border-left:1px solid #3a3a3a!important;padding:18px 15px!important;font-size:13px!important}
 .landing-copy{max-width:900px}.landing-copy h1{font-size:clamp(44px,7vw,82px)!important;line-height:.94!important;margin:8px 0 12px!important;letter-spacing:-.06em!important}.landing-copy .intro{max-width:760px!important;font-size:clamp(16px,1.8vw,20px)!important;line-height:1.35!important;margin:0!important;color:#fff!important}
 #radar{padding-top:16px}.dashboard{margin-top:0!important}
-.core-path{background:#fff;border-bottom:1px solid #ddd}.core-path-inner{padding:16px 0 17px}.core-path-grid{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr;align-items:stretch}.core-step{border:1px solid #d6d6d6;background:#fff;color:#111;text-decoration:none;padding:14px 16px;min-height:88px;display:flex;flex-direction:column;justify-content:center}.core-step.current{border-top:5px solid #c40018;padding-top:10px}.core-step .n{font-size:10px;font-weight:950;letter-spacing:.09em;text-transform:uppercase;color:#c40018}.core-step strong{font-size:18px;line-height:1.1;margin-top:4px}.core-step span{font-size:12px;color:#666;margin-top:4px}.core-step:hover{border-color:#c40018}.core-arrow{display:grid;place-items:center;color:#c40018;font-size:25px;font-weight:950}.rank-badge{display:inline-grid;place-items:center;min-width:34px;height:28px;padding:0 7px;border:1px solid #111;background:#fff;color:#111;font-size:12px;font-weight:950;line-height:1}.rank-badge.top{background:#111;color:#fff;border-color:#111}.rank-badge.very-strong{border-color:#c40018}.rank-badge strong{font:inherit}.rank-badge[title]{cursor:help}
+.core-path{background:#fff;border-bottom:1px solid #ddd}.core-path-inner{padding:16px 0 17px}.core-path-grid{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr;align-items:stretch}.core-step{border:1px solid #d6d6d6;background:#fff;color:#111;text-decoration:none;padding:14px 16px;min-height:88px;display:flex;flex-direction:column;justify-content:center}.core-step.current{border-top:5px solid #c40018;padding-top:10px}.core-step .n{font-size:10px;font-weight:950;letter-spacing:.09em;text-transform:uppercase;color:#c40018}.core-step strong{font-size:18px;line-height:1.1;margin-top:4px}.core-step span{font-size:12px;color:#666;margin-top:4px}.core-step:hover{border-color:#c40018}.core-arrow{display:grid;place-items:center;color:#c40018;font-size:25px;font-weight:950}.rank-badge{display:inline-grid;place-items:center;min-width:34px;height:28px;padding:0 7px;border:1px solid #111;background:#fff;color:#111;font-size:12px;font-weight:950;line-height:1}.rank-badge.top{background:#111;color:#fff;border-color:#111}.rank-badge.very-strong{border-color:#c40018}.rank-badge strong{font:inherit}.rank-badge[title]{cursor:help}
 
-@media(max-width:920px){.core-path-grid{grid-template-columns:1fr 28px 1fr}.core-step:nth-of-type(5){grid-column:1}.core-arrow:nth-of-type(4){grid-column:2}.core-step:nth-of-type(7){grid-column:3}}
+@media(max-width:920px){.core-path-grid{display:flex;overflow-x:auto}.core-step{min-width:175px}.core-arrow{min-width:28px}}
 @media(max-width:760px){.landing-nav .lock{margin-left:0}.landing-nav a,.landing-nav .lock{padding:13px 10px!important;font-size:11px!important}.landing-copy h1{font-size:44px!important}.core-path-grid{display:block}.core-step{min-height:0}.core-arrow{height:28px;transform:rotate(90deg)}}
 </style>
 </head>
@@ -88,6 +88,7 @@
           <a class="current" href="#radar" aria-current="page">Radar</a>
           <a href="read/">Read at least this</a>
           <a href="frontier/quick/">Matrix</a>
+          <a href="trends/">Trends</a>
           <a href="priorities/">Risks &amp; opportunities</a>
           <a href="shocks/">External shocks</a>
           <a href="historical/">Historical</a>
@@ -111,8 +112,9 @@
     <section class="core-path" aria-label="Core reader path"><div class="wrap core-path-inner"><div class="core-path-grid">
       <a class="core-step current" href="#strand-a"><span class="n">1</span><strong>Radar</strong><span>Evidence</span></a><div class="core-arrow" aria-hidden="true">→</div>
       <a class="core-step" href="frontier/quick/"><span class="n">2</span><strong>Matrix</strong><span>Patterns</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="priorities/"><span class="n">3</span><strong>Risks &amp; opportunities</strong><span>Implications</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="shocks/"><span class="n">4</span><strong>External shocks</strong><span>Stress cases</span></a>
+      <a class="core-step" href="trends/"><span class="n">3</span><strong>Trends</strong><span>Forces in tension</span></a><div class="core-arrow" aria-hidden="true">→</div>
+      <a class="core-step" href="priorities/"><span class="n">4</span><strong>Risks &amp; opportunities</strong><span>Implications</span></a><div class="core-arrow" aria-hidden="true">→</div>
+      <a class="core-step" href="shocks/"><span class="n">5</span><strong>External shocks</strong><span>Stress cases</span></a>
     </div></div></section>
 
     <div class="toolbar"><div class="wrap tools">
@@ -143,8 +145,8 @@
     <footer><div class="wrap">R&I × Geopolitics Radar</div></footer>
   </div>
 
-<script src="reader_rank.js?v=17.20.13"></script>
-<script src="briefing/insights.js?v=17.20.13"></script>
+<script src="reader_rank.js?v=17.20.15"></script>
+<script src="briefing/insights.js?v=17.20.15"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",recentOnly:false,newOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,newStart:0,newEnd:0};

@@ -31,8 +31,9 @@ if(!generic||!dual||R.scoreFor(dual)<=R.scoreFor(generic)) process.exit(5);
         positions = [
             html.index("1</span><strong>Radar"),
             html.index("2</span><strong>Matrix"),
-            html.index("3</span><strong>Risks &amp; opportunities"),
-            html.index("4</span><strong>External shocks"),
+            html.index("3</span><strong>Trends"),
+            html.index("4</span><strong>Risks &amp; opportunities"),
+            html.index("5</span><strong>External shocks"),
         ]
         self.assertEqual(positions, sorted(positions))
 
