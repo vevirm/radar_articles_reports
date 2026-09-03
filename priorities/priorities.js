@@ -74,11 +74,46 @@
     /\b(?:obtain|acquire|extract) .{0,60}(?:advanced knowledge|technology|know-how|research knowledge)\b/i,/\btechnology transfer\b/i,/\brisks?\b/i,/\brestrictions?\b/i
   ];
 
+  const RESPONSE_TO_RISK=[
+    /\baddress(?:es|ed|ing)? (?:the )?(?:issue|challenge|problem|risk) of\b/i,
+    /\b(?:aims?|designed|intended) to (?:reduce|mitigate|counter|tackle|prevent|reverse|address|overcome)\b/i,
+    /\bturn(?:s|ed|ing)? .{0,80}(?:brain drain|dependence|challenge|loss) .{0,30}into .{0,80}(?:brain gain|capacity|resilience|strength|opportunity)\b/i,
+    /\bincrease the attractiveness of .{0,80}(?:research careers?|european research|europe)\b/i,
+    /\b(?:offer|offers|offering|provide|provides|providing) .{0,70}(?:excellent working conditions|longer-term employment|stable careers?|better research careers?)\b/i
+  ];
+  const RESPONSE_FAILURE=[
+    /\b(?:despite|even with|even after) .{0,100}(?:risk|brain drain|dependence|shortage|barrier|loss) .{0,50}(?:remain|persist|worsen|continue)\w*\b/i,
+    /\b(?:insufficient|not enough|fails? to|failed to|unable to) .{0,90}(?:reduce|reverse|prevent|stop|address|mitigate)\b/i,
+    /\b(?:risk|brain drain|dependence|shortage|barrier|vulnerability) (?:remains?|persists?|continues?|worsens?)\b/i,
+    /\bcould still (?:lose|restrict|deny|cut off|weaken|undermine|worsen|increase)\b/i
+  ];
+  const OPP_REMEDY=[
+    ...RESPONSE_TO_RISK,
+    /\b(?:pilot action|programme|program|scheme|initiative) .{0,90}(?:supports?|funds?|recruits?|enables?|provides?)\b/i,
+    /\bwith a view to (?:offering|providing|building|strengthening|reducing|increasing)\b/i
+  ];
+  const OPP_OPERATIONAL_RESPONSE=[
+    /\bpilot action\b/i, /\bprojects? in which .{0,80}(?:recruit|build|develop|provide|support)\b/i,
+    /\b(?:programme|program|scheme|initiative|action) supports? projects?\b/i,
+    /\b(?:organisation|organization|entity|applicant)s? .{0,45}(?:apply|applies|can apply|may apply)\b/i,
+    /\b(?:funds?|funding|supports?|recruits?|provides?) .{0,80}(?:researchers|projects|capacity|infrastructure|technology|access)\b/i
+  ];
+  const STRATEGIC_PROBLEM=[
+    /\bbrain drain\b/i,/\bprecarity\b/i,/\bstrategic dependenc(?:y|ies)\b/i,/\bdependence on\b/i,/\breliance on\b/i,
+    /\bshortage\b/i,/\bscarcity\b/i,/\bfragmentation\b/i,/\bbarriers?\b/i,/\bvulnerab(?:ility|le)\b/i,/\bexposure\b/i,
+    /\bforeign interference\b/i,/\bexport controls?\b/i,/\bresearch security\b/i,/\bknowledge security\b/i
+  ];
+
+  function remedialOnlyRiskText(text){
+    const t=clean(text);
+    return !!t && any(t,RESPONSE_TO_RISK) && !any(t,RESPONSE_FAILURE);
+  }
+
   const OPP_MECHANISM=[
     /\bcould leverage\b/i,/\bcan leverage\b/i,/\bcan convert .{0,80} into\b/i,/\bsubstitution potential\b/i,/\brecycling could supply\b/i,
     /\bdemand-side measure\b/i,/\bspillover into\b/i,/\badjacent market\b/i,/\brelatedness to existing strengths\b/i,
     /\bbuilds on installed base\b/i,/\btransferable to\b/i,/\bscalable\b/i,/\bdual-use potential\b/i,/\bnetwork effects favour\b/i,
-    /\b(?:call|programme|program|fund|initiative)(?: [A-Z0-9_-]{3,})? aims? (?:to|at) (?:strengthen|build|support|expand|accelerate|develop|establish|establishing)\b/i,
+    /\b(?:call|programme|program|fund|initiative|pilot action|action)(?: [A-Z0-9_-]{3,})? aims? (?:to|at) (?:strengthen|build|support|expand|accelerate|develop|establish|establishing|attract|retain|reduce|address)\b/i,
     /\b(?:will|can|could) (?:help |allow |enable )?(?:strengthen|build|secure|expand|scale|attract|retain|develop|establish|provide)\b/i,
     /\bprovide(?:s|d)? .{0,50}(?:funding|investment|access|support)\b/i,/\bpresented upcoming opportunities? under\b/i,/\bopen-access .{0,40}(?:infrastructure|facility)\b/i,
     /\b(?:launch(?:es|ed)?|open(?:s|ed)?|offer(?:s|ed)?|fund(?:s|ed)?|support(?:s|ed)?|enable(?:s|d)?|allow(?:s|ed)?) .{0,80}(?:call|programme|program|funding|investment|access|research|innovation|mobility|capacity|companies|projects?)\b/i,
@@ -99,7 +134,7 @@
     /\bcall open until\b/i,/\bdesignation as strategic project\b/i,/\bfast-track\b/i,/\bregulatory sandbox\b/i,/\bpilot line\b/i,
     /\banchor customer\b/i,/\blaunch customer\b/i,/\bhorizon europe\b/i,/\beic\b/i,/\berc\b/i,/\bmsca\b/i,/\beurohpc\b/i,
     /\b(?:funding|investment) (?:programme|program|instrument|facility|call|scheme)\b/i,/\bwork programme\b/i,/\bopen call\b/i,
-    /\b(?:call|programme|program|initiative|scheme|facility|fund|partnership|association agreement|letter of intent)\b/i,
+    /\b(?:call|programme|program|initiative|scheme|facility|fund|partnership|association agreement|letter of intent|pilot action|action)\b/i,
     /\b(?:free|open) access to .{0,60}(?:research infrastructure|supercomput|quantum|facility|resource)\b/i,
     /\bcall [A-Z0-9_-]{5,}\b/i,/\b€\s?\d[\d.,]*\s?(?:million|billion)?\b/i,/\beur\s?\d[\d.,]*\s?(?:million|billion)?\b/i
   ];
@@ -233,6 +268,11 @@
       return {type:'external_shock',passage:t.slice(0,1200),shock_family:family?.label||'',shock_family_id:family?.id||'',shock_families:families,components:{discrete,event,externality,effect,speed},analysis_basis:'repository_evidence_interpretation',analysis_score:100};
     }
     if(kind==='risk'){
+      // A programme that is explicitly trying to solve a problem is not itself the risk.
+      // It can still be evidence that the problem exists, but the Risks list should not
+      // turn a mitigation measure into a loss pathway unless the same passage says the
+      // response is failing or the risk remains.
+      if(remedialOnlyRiskText(t)) return null;
       const mechanism=firstMatch(t,RISK_MECHANISM),asset=firstMatch(t,RISK_ASSET),conditional=firstMatch(t,RISK_FORWARD),loss=firstMatch(t,RISK_LOSS);
       let carrier=firstMatch(t,RISK_CARRIER);
       const structural=firstMatch(t,[/\blimited accessibility\b/i,/\bprecarity\b/i,/\bfragmentation\b/i,/\b(?:market|supplier|supply|platform|cloud|technology) concentration\b/i,/\bprocurement preferences?\b/i]);
@@ -243,13 +283,17 @@
       return {type:'risk',status:'open',passage:t.slice(0,1200),components:{mechanism,carrier,asset,loss},analysis_basis:'repository_evidence_interpretation',analysis_score:100};
     }
     if(kind==='opportunity'){
-      const mechanism=firstMatch(t,OPP_MECHANISM),actor=inferredOpportunityActor(raw,t),instrument=firstMatch(t,OPP_INSTRUMENT),gain=firstMatch(t,OPP_GAIN),window=firstMatch(t,OPP_STRONG_WINDOW);
-      if(!(mechanism&&actor&&instrument&&gain&&window)) return null;
-      // An adopted measure is baseline unless the same retained evidence also identifies a live/open instrument window.
-      if(any(t,OPP_BASELINE)&&!any(t,OPP_WINDOW)) return null;
-      // Aspiration is allowed only because all five positive components above independently pass.
+      const remedy=firstMatch(t,OPP_REMEDY),operational=firstMatch(t,OPP_OPERATIONAL_RESPONSE),problem=firstMatch(t,STRATEGIC_PROBLEM);
+      const mechanism=firstMatch(t,OPP_MECHANISM)||remedy,actor=inferredOpportunityActor(raw,t),instrument=firstMatch(t,OPP_INSTRUMENT),gain=firstMatch(t,OPP_GAIN),window=firstMatch(t,OPP_STRONG_WINDOW);
+      const openWindowPath=!!(mechanism&&actor&&instrument&&gain&&window);
+      const strategicResponsePath=!!(remedy&&operational&&problem&&actor&&instrument&&gain);
+      if(!(openWindowPath||strategicResponsePath)) return null;
+      // Adopted measures are not automatically opportunities. They qualify without a live
+      // application window only when the source describes an operational response to a
+      // concrete strategic problem (for example turning brain drain into brain gain).
+      if(any(t,OPP_BASELINE)&&!any(t,OPP_WINDOW)&&!strategicResponsePath) return null;
       const noise=firstMatch(t,OPP_NOISE);
-      return {type:'opportunity',passage:t.slice(0,1200),components:{mechanism,actor,instrument,gain,window},noise_cue:noise||'',analysis_basis:'repository_evidence_interpretation',analysis_score:100};
+      return {type:'opportunity',passage:t.slice(0,1200),components:{mechanism,actor,instrument,gain,window:window||operational},response_to:problem||'',noise_cue:noise||'',analysis_basis:'repository_evidence_interpretation',analysis_score:100};
     }
     return null;
   }
@@ -259,6 +303,10 @@
     if(!c||typeof c!=='object'||clean(raw?.strategic_classification_source)!=='source_text') return [];
     let lenses=Array.isArray(c.lenses)?c.lenses.filter(x=>x&&typeof x==='object'&&['risk','opportunity','external_shock'].includes(clean(x.type))):[];
     if(!lenses.length&&['risk','opportunity','external_shock'].includes(clean(c.primary))) lenses=[{type:clean(c.primary),passage:''}];
+    // Protect the reader from legacy/source-filed polarity errors: a source passage that
+    // describes a mitigation/response is not presented as a risk unless it explicitly says
+    // the response is failing or the risk remains.
+    lenses=lenses.filter(l=>clean(l.type)!=='risk'||!remedialOnlyRiskText(clean(l.passage)||evidenceText(raw)));
     return lenses.map(l=>{const kind=clean(l.type),family=kind==='external_shock'?primaryShockFamily(`${clean(l.passage)} ${evidenceText(raw)}`):null;return {...l,shock_family:clean(l.shock_family||family?.label||''),shock_family_id:clean(l.shock_family_id||family?.id||''),analysis_basis:'scanner_source_classification',analysis_score:110}});
   }
 
@@ -385,7 +433,78 @@
     return text.length>180?text.slice(0,180).replace(/\s+\S*$/,'')+'…':text;
   }
 
+  function pathwayText(x){return norm(`${x?.title||''} ${x?.coreMessage||''} ${x?.lensPassage||''} ${x?.abstract||''}`)}
+
+  function plainPriorityTitle(x){
+    const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind);
+    if(kind==='risk'){
+      if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Europe could lose researchers if research careers remain too precarious.';
+      if(/foreign interference|espionage|knowledge leakage/.test(t)) return 'Foreign interference could pull sensitive research knowledge out of Europe.';
+      if(/semiconductor|chip|microelectronics/.test(t)&&/china|taiwan|export control|supply/.test(t)) return "Europe's chip supply could be disrupted by outside controls or concentrated suppliers.";
+      if(/critical raw|critical mineral|rare earth|materials?/.test(t)) return 'Critical-material shortages or export controls could slow European research and industry.';
+      if(/cloud|compute|ai infrastructure|computing capacity/.test(t)&&/depend|extraterritorial|non-european|supplier/.test(t)) return 'Europe could lose control over computing capacity it depends on from outside suppliers.';
+      if(/international research collaboration|research cooperation/.test(t)&&/restrict|white house|government|export|sanction/.test(t)) return 'Foreign rules could narrow European access to international research collaboration.';
+      if(/research infrastructure|facility|bottleneck|limited access/.test(t)) return 'Limited access to key research infrastructure could slow European research.';
+      if(/technology transfer|technological dependence|technology dependence|strategic depend/.test(t)) return "Dependence on outside technology could limit Europe's freedom to act.";
+      if(/fragmentation/.test(t)&&/open science|research data|research system/.test(t)) return 'Fragmented research systems could make data, collaboration and open science harder to sustain.';
+      if(/investment/.test(t)&&/depend|foreign|asymmetry/.test(t)) return 'Heavy reliance on foreign investment could shift control of strategic technology away from Europe.';
+      return 'A dependency or constraint in the evidence could weaken European research and innovation.';
+    }
+    if(kind==='opportunity'){
+      if(/ocean research|ocean.*innovation strategy/.test(title)) return 'Europe has a chance to improve how ocean research and innovation are coordinated.';
+      if(/eit|innovation agenda|call for evidence/.test(title)) return 'Europe has a chance to reshape innovation policy around future strategic needs.';
+      if(/choose europe for science/.test(title)||(/brain gain|brain drain|precarity/.test(t)&&/research careers?|attract|retain|recruit/.test(t))) return 'Better research careers could help Europe keep and attract researchers.';
+      if(/quantum/.test(title)&&/standards?/.test(title)) return 'European work on quantum standards could help shape the rules of an emerging technology.';
+      if(/quantum/.test(title)&&/pilot line|testing infrastructure|experimental/.test(title)) return 'European quantum testing and pilot facilities could build more capability at home.';
+      if(/quantum/.test(title)&&/open|access/.test(title)) return 'Opening European quantum computers could give researchers more strategic compute access.';
+      if(/quantum/.test(title)) return 'New European quantum calls and facilities could strengthen capability in a strategic technology.';
+      if(/ai gigafactor|computing capacity/.test(title)||(/compute|cloud/.test(t)&&!/quantum/.test(title))) return 'More European computing capacity could reduce dependence and give researchers more room to scale.';
+      if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening European research facilities could give researchers better access to strategic infrastructure.';
+      if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'Deeper research partnerships could widen European networks, talent and access.';
+      return 'A concrete European instrument in the evidence could strengthen research, innovation or strategic capacity.';
+    }
+    return simplePriorityText(x);
+  }
+
+  function plainPriorityExplanation(x){
+    const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind);
+    if(kind==='risk'){
+      if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Short-term or insecure research careers can make Europe less attractive. If researchers leave faster than Europe can recruit and retain them, laboratories, new infrastructure and strategic technology programmes can end up short of people.';
+      if(/foreign interference|espionage|knowledge leakage/.test(t)) return 'The risk is that outside actors obtain sensitive research knowledge, know-how or access through interference, pressure or covert activity. The loss is not only information: it can weaken future European capability and bargaining power.';
+      if(/semiconductor|chip|microelectronics/.test(t)) return 'European research and high-tech production rely on chips made through concentrated global supply chains. Export controls, conflict or supplier decisions can therefore interrupt access faster than Europe can replace it.';
+      if(/critical raw|critical mineral|rare earth|materials?/.test(t)) return 'Many research and industrial technologies depend on materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
+      if(/cloud|compute|ai infrastructure|computing capacity/.test(t)) return 'The risk is that European researchers and firms depend on computing infrastructure controlled by non-European suppliers or foreign legal regimes. Access, price or permitted use can then change for reasons Europe does not control.';
+      if(/international research collaboration|research cooperation/.test(t)) return 'International collaboration can be restricted by a partner government, security rule or sanctions regime. European teams can then lose partners, data or access even when Europe itself has not chosen to close cooperation.';
+      if(/research infrastructure|facility|bottleneck|limited access/.test(t)) return 'Some research depends on scarce facilities that cannot be substituted quickly. When access is limited, the bottleneck can slow experiments, training and innovation even if funding is available.';
+      if(/technology transfer|technological dependence|technology dependence|strategic depend/.test(t)) return 'The risk is not simply importing technology. It is relying on outside actors for capabilities that Europe would struggle to replace quickly, which can narrow policy choices when political or commercial conditions change.';
+      if(/fragmentation/.test(t)) return 'Separate systems, rules or infrastructures can make collaboration and data movement harder. Over time that can reduce the effective scale of European research even when each part still functions on its own.';
+      return 'The evidence points to a plausible pathway in which an external dependency, bottleneck or rule reduces European research capacity, access or freedom to act.';
+    }
+    if(kind==='opportunity'){
+      if(/ocean research|ocean.*innovation strategy/.test(title)) return 'The opportunity is to improve coordination, priorities and governance before the future European ocean R&I strategy is fixed.';
+      if(/eit|innovation agenda|call for evidence/.test(title)) return 'A live policy-design process creates a chance to change priorities and instruments before they are fixed. The gain comes only if the final design addresses a real strategic R&I need.';
+      if(/choose europe for science/.test(title)||(/brain gain|brain drain|precarity/.test(t)&&/research careers?|attract|retain|recruit/.test(t))) return 'The opportunity is to make European research careers stable and attractive enough to keep researchers and bring more of them to Europe. In this case the programme is a response to brain drain, not the risk itself.';
+      if(/quantum/.test(title)&&/standards?/.test(title)) return 'Standards shape interoperability, markets and who gets to set technical rules. Acting early gives Europe a chance to make its research strengths matter in the rules that later govern deployment.';
+      if(/quantum/.test(title)&&/pilot line|testing infrastructure|experimental/.test(title)) return 'Shared testing and pilot facilities can move European quantum work from research toward usable technology without every organisation having to build the same expensive infrastructure itself.';
+      if(/quantum/.test(title)&&/open|access/.test(title)) return 'The opportunity is to let researchers use European quantum computers directly, turning public infrastructure into usable scientific and technological capability.';
+      if(/quantum/.test(title)) return 'The opportunity is to use current calls and facilities to build European quantum capability while the technology and market structure are still developing.';
+      if(/ai gigafactor|computing capacity/.test(title)||(/compute|cloud/.test(t)&&!/quantum/.test(title))) return 'The opportunity is to add European-controlled compute that researchers and firms can actually use. More capacity at home can support AI work while reducing exposure to outside suppliers.';
+      if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening existing facilities lets more researchers use expensive European infrastructure. That can turn sunk public investment into wider capability, collaboration and faster experimentation.';
+      if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'A well-chosen partnership can widen access to researchers, infrastructure, data and complementary expertise while strengthening Europe’s international research position.';
+      return 'The evidence points to a concrete route Europe can use now or soon to strengthen research, innovation, access, resilience or control.';
+    }
+    return simplePriorityText(x);
+  }
+
+  function supportingEvidenceText(x){
+    const raw=clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||'');
+    if(!raw) return 'Evidence text unavailable.';
+    const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');
+    const text=clean(first||raw);
+    return text.length>520?text.slice(0,517).replace(/\s+\S*$/,'')+'…':text;
+  }
+
   function simpleEvidenceText(x){return clean(x?.title||'')}
 
-  return {buildPriorityView,pathwayScore,diversifiedTop,simplePriorityText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily};
+  return {buildPriorityView,pathwayScore,diversifiedTop,simplePriorityText,plainPriorityTitle,plainPriorityExplanation,supportingEvidenceText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily,remedialOnlyRiskText};
 });

@@ -3805,6 +3805,35 @@ EXTERNAL_SHOCK_ACTORS = [
 # the EU R&I admission gate. They are applied only after a source has independently qualified
 # for the radar (or after a current-development candidate has independently qualified for C).
 # Phrases are retrieval/testing cues, not classifications: the component tests below decide.
+_RESPONSE_TO_RISK_CUES = [
+    r"\baddress(?:es|ed|ing)? (?:the )?(?:issue|challenge|problem|risk) of\b",
+    r"\b(?:aims?|designed|intended) to (?:reduce|mitigate|counter|tackle|prevent|reverse|address|overcome)\b",
+    r"\bturn(?:s|ed|ing)? .{0,80}(?:brain drain|dependence|challenge|loss) .{0,30}into .{0,80}(?:brain gain|capacity|resilience|strength|opportunity)\b",
+    r"\bincrease the attractiveness of .{0,80}(?:research careers?|european research|europe)\b",
+    r"\b(?:offer|offers|offering|provide|provides|providing) .{0,70}(?:excellent working conditions|longer-term employment|stable careers?|better research careers?)\b",
+]
+_RESPONSE_FAILURE_CUES = [
+    r"\b(?:despite|even with|even after) .{0,100}(?:risk|brain drain|dependence|shortage|barrier|loss) .{0,50}(?:remain|persist|worsen|continue)\w*\b",
+    r"\b(?:insufficient|not enough|fails? to|failed to|unable to) .{0,90}(?:reduce|reverse|prevent|stop|address|mitigate)\b",
+    r"\b(?:risk|brain drain|dependence|shortage|barrier|vulnerability) (?:remains?|persists?|continues?|worsens?)\b",
+    r"\bcould still (?:lose|restrict|deny|cut off|weaken|undermine|worsen|increase)\b",
+]
+_STRATEGIC_RESPONSE_PROBLEM_CUES = [
+    r"\bbrain drain\b", r"\bprecarity\b", r"\bstrategic dependenc(?:y|ies)\b", r"\bdependence on\b", r"\breliance on\b",
+    r"\bshortage\b", r"\bscarcity\b", r"\bfragmentation\b", r"\bbarriers?\b", r"\bvulnerab(?:ility|le)\b", r"\bexposure\b",
+    r"\bforeign interference\b", r"\bexport controls?\b", r"\bresearch security\b", r"\bknowledge security\b",
+]
+_OPPORTUNITY_OPERATIONAL_RESPONSE_CUES = [
+    r"\bpilot action\b", r"\bprojects? in which .{0,80}(?:recruit|build|develop|provide|support)\b",
+    r"\b(?:programme|program|scheme|initiative|action) supports? projects?\b",
+    r"\b(?:organisation|organization|entity|applicant)s? .{0,45}(?:apply|applies|can apply|may apply)\b",
+    r"\b(?:funds?|funding|supports?|recruits?|provides?) .{0,80}(?:researchers|projects|capacity|infrastructure|technology|access)\b",
+]
+
+def _remedial_only_risk_passage(text: str) -> bool:
+    low = normalized(text)
+    return bool(_regex_any(low, _RESPONSE_TO_RISK_CUES) and not _regex_any(low, _RESPONSE_FAILURE_CUES))
+
 _RISK_MECHANISM_CUES = [
     r"\bcould restrict\b", r"\bcould revoke\b", r"\bwould deny access to\b", r"\bwould cut off\b",
     r"\bmay be withheld\b", r"\bsubject to (?:a )?licen[cs]e\b", r"\bsubject to approval\b",
@@ -3832,16 +3861,17 @@ _OPPORTUNITY_MECHANISM_CUES = [
     r"\bdemand-side measure\b", r"\bspillover into\b", r"\badjacent market\b", r"\brelatedness to existing strengths\b",
     r"\bbuilds on installed base\b", r"\btransferable to\b", r"\bscalable\b", r"\bdual-use potential of\b", r"\bnetwork effects favour\b",
     r"\bprocurement could\b", r"\bco-funding available\b", r"\bdesignation as strategic project\b", r"\bregulatory sandbox\b",
+    *_RESPONSE_TO_RISK_CUES,
 ]
 _OPPORTUNITY_ACTOR_CUES = [
-    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|european research council|erc|national governments?|regulators?)\b",
+    r"\b(?:european commission|commission|european union|\beu\b|member states?|council|eib|european investment bank|eurohpc|european research council|erc|marie skłodowska-curie actions|msca|national governments?|regulators?)\b",
 ]
 _OPPORTUNITY_INSTRUMENT_CUES = [
     r"\bwithin the competence of\b", r"\bmandate to\b", r"\bempowered to\b", r"\bexisting instrument\b",
     r"\blegal basis already exists\b", r"\bno new legislation required\b", r"\bprocurement could\b", r"\bconditionality attached to\b",
     r"\beligibility criteria allow\b", r"\bassociation agreement\b", r"\bco-funding available\b", r"\bcall open until\b",
     r"\bdesignation as strategic project\b", r"\bfast-track\b", r"\bregulatory sandbox\b", r"\bpilot line\b",
-    r"\banchor customer\b", r"\blaunch customer\b",
+    r"\banchor customer\b", r"\blaunch customer\b", r"\bpilot action\b", r"\b(?:programme|program|scheme|initiative|action)\b",
 ]
 _OPPORTUNITY_ACTOR_INSTRUMENT_CUES = [
     r"\bwithin the competence of\b", r"\bmandate to\b", r"\bempowered to\b", r"\bexisting instrument\b",
@@ -3856,6 +3886,9 @@ _OPPORTUNITY_GAIN_CUES = [
     r"\breduce(?:s|d|ing)? (?:dependence|dependency|reliance|exposure)\b", r"\bincrease(?:s|d|ing)? (?:capacity|capability|resilience|competitiveness|access|control)\b",
     r"\bbuild(?:s|ing)? (?:capacity|capability|resilience|scale)\b", r"\bretain(?:s|ed|ing)? (?:talent|researchers|scientists|capability|control)\b",
     r"\battract(?:s|ed|ing)? (?:talent|researchers|scientists|investment)\b", r"\bscale(?:s|d|ing)? (?:up|production|deployment|capacity)\b",
+    r"\bincrease(?:s|d|ing)? (?:the )?attractiveness of .{0,80}(?:research careers?|european research|europe)\b",
+    r"\bturn(?:s|ed|ing)? .{0,80}brain drain .{0,30}into .{0,80}brain gain\b",
+    r"\b(?:offer|offers|offering|provide|provides|providing) .{0,70}(?:excellent working conditions|longer-term employment|stable careers?)\b",
 ]
 _OPPORTUNITY_WINDOW_CUES = [
     r"\bcall open until\b", r"\bco-funding available\b", r"\bexisting instrument\b", r"\blegal basis already exists\b",
@@ -4466,7 +4499,7 @@ def classify_strategic_source_text(text: str) -> dict[str, Any]:
             'carrier': _regex_match(low, _RISK_CARRIER_CUES),
             'asset': _regex_match(low, _RISK_ASSET_CUES),
         }
-        if all(risk_parts.values()) and risk_lens is None:
+        if all(risk_parts.values()) and risk_lens is None and not _remedial_only_risk_passage(passage):
             risk_lens = {
                 'type': 'risk', 'passage': passage[:900], 'components': risk_parts,
                 'transition_key': _strategic_transition_key(passage), 'status': 'open',
@@ -4479,9 +4512,24 @@ def classify_strategic_source_text(text: str) -> dict[str, Any]:
             'gain': _regex_match(low, _OPPORTUNITY_GAIN_CUES),
             'window': _regex_match(low, _OPPORTUNITY_WINDOW_CUES + _OPPORTUNITY_INSTRUMENT_CUES),
         }
-        if all(opp_parts.values()) and opp_lens is None:
+        response_problem = _regex_match(low, _STRATEGIC_RESPONSE_PROBLEM_CUES)
+        operational_response = _regex_match(low, _OPPORTUNITY_OPERATIONAL_RESPONSE_CUES)
+        strategic_response = bool(
+            _regex_any(low, _RESPONSE_TO_RISK_CUES)
+            and response_problem
+            and operational_response
+            and opp_parts['actor']
+            and opp_parts['instrument']
+            and opp_parts['gain']
+        )
+        if (all(opp_parts.values()) or strategic_response) and opp_lens is None:
+            if strategic_response and not opp_parts['mechanism']:
+                opp_parts['mechanism'] = _regex_match(low, _RESPONSE_TO_RISK_CUES)
+            if strategic_response and not opp_parts['window']:
+                opp_parts['window'] = operational_response
             opp_lens = {
                 'type': 'opportunity', 'passage': passage[:900], 'components': opp_parts,
+                'response_to': response_problem or '',
                 'transition_key': _strategic_transition_key(passage),
             }
 

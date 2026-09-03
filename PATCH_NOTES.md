@@ -1,3 +1,14 @@
+## 17.20.11 — risk/opportunity polarity + plain-language reader
+
+- Fixes the core polarity error on the Risks & opportunities page: a measure that is explicitly addressing or mitigating a problem is no longer presented as though the measure itself were the risk.
+- The supplied **Choose Europe for Science** evidence now appears as an opportunity (better career conditions can help Europe retain and attract researchers), not as a risk. Its mention of brain drain remains evidence of the underlying problem, but the programme is treated as the response.
+- Adds a mitigation-direction guard both to the repository reader and to scanner source-text classification, including protection against legacy source-filed risk labels that describe a remedial action.
+- Keeps genuine analytical risks intact when a paper happens to mention a benefit elsewhere; for example, reducing fossil-fuel dependence does not erase a separate critical-material scarcity risk.
+- Broadens opportunity recognition beyond only open calls: an operational programme or pilot can qualify when it is a concrete response to a stated strategic R&I problem and has a credible gain pathway.
+- Rewrites Risks & opportunities cards in plain language. Source/document titles are no longer used as the risk/opportunity statement.
+- Replaces classifier-facing **Why it qualifies** details with a reader-facing **Read more** expander showing **What the risk/opportunity is**, **What the source says**, and the evidence source.
+- Adds regression tests for mitigation polarity, Choose Europe for Science, plain-language presentation, and preservation of unrelated genuine risks.
+
 ## 17.20.10 — repair cumulative A/B retention after Strand-C funding tightening
 
 - Fixes the scan failure shown after v17.20.9: the new “generic EU funding is not automatically a weak signal” rule was accidentally applied inside the shared A/B merge path.
