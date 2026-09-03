@@ -1,5 +1,5 @@
 {
-  "profile_version": "v17.16.0-target-eight-strict-history",
+  "profile_version": "v17.20.8-cumulative-history",
   "date_from": "2015-01-01",
   "topics_per_scan": 4,
   "sources_per_scan": 8,
@@ -22,7 +22,7 @@
   "low_yield_fresh_sources": 8,
   "full_rescue_run_enabled": true,
   "full_rescue_run_trigger_max_new_items": 7,
-  "max_items": 350,
+  "max_items": 0,
   "minimum_admission_score": 93,
   "topics": [
     {
@@ -568,10 +568,11 @@
   "minimum_runtime_sources_per_wave": 8,
   "minimum_runtime_max_extra_waves": 12,
   "curated_seed_queries_per_scan": 12,
-  "source_policy_note": "Official EU and elite institutes plus selected high-quality research-system/workforce institutions and top journals. Manual geopolitical evidence is admitted explicitly and preserved; curated workbook entries are discovery seeds and still pass automated admission gates.",
+  "source_policy_note": "Official EU and elite institutes plus selected high-quality research-system/workforce institutions and top journals. Manual geopolitical evidence is admitted explicitly and preserved; curated workbook entries are discovery seeds and still pass automated admission gates. Accepted historical evidence is cumulative: normal scans add and enrich but do not silently remove previously accepted rows.",
   "main_radar_window_months": 6,
   "cutoff_rule": "Historical sources are those published before the rolling main-radar boundary (today minus main_radar_window_months). Content may itself be forward-looking.",
   "year_preference_latest_bonus": 12,
   "year_preference_decay_per_year": 2,
-  "target_new_items_per_scan": 8
+  "target_new_items_per_scan": 8,
+  "cumulative_retention": true
 }

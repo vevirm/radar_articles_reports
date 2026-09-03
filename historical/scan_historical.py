@@ -699,33 +699,141 @@ def manual_evidence_items() -> list[dict[str, Any]]:
 
 
 def refresh_existing_item(raw: dict[str, Any]) -> dict[str, Any] | None:
-    """Conservatively migrate persisted records produced by older, looser gates.
+    """Preserve a record that was already accepted into the historical archive.
 
-    Dubious records disappear from the static archive and can only return if a later
-    scan rediscovers them with enough source text to pass the current gates.
+    Historical evidence is cumulative.  Current admission rules apply to *new*
+    discoveries only; a normal scan must never silently evict an item merely because
+    the gates, taxonomy or available metadata changed later.  We may enrich missing
+    derived fields, but never require a previously accepted record to re-qualify.
     """
+    if not isinstance(raw, dict):
+        return None
     item=dict(raw)
-    if item.get("manual_curated"):
-        return None
-    title=clean(item.get("title")); text=clean(f"{title}. {item.get('reader_point','')}")
-    if not title or ADMIN_DOC_RE.search(title):
-        return None
-    if not RI_RE.search(text):
-        return None
-    official=clean(item.get("source_kind"))=="official_eu"
-    if not official and not EU_RE.search(text):
-        return None
-    if not (STRATEGIC_RE.search(text) or SYSTEM_CAPACITY_RE.search(text)):
-        return None
-    topics=topic_matches(text)
-    if not topics:
-        return None
-    row,outcome,basis=matrix_classification(text)
-    item["topics"]=topics
-    item["topic_labels"]=[topic_label(t) for t in topics]
-    item["matrix_dimension"],item["matrix_outcome"],item["matrix_basis"]=row,outcome,basis
-    item["why_it_matters"]=why_it_matters(row,outcome)
+    title=clean(item.get("title"))
+    if not clean(item.get("id")):
+        item["id"]=stable_id(title,clean(item.get("url")))
+    d=parse_date(item.get("date"))
+    if d and not item.get("year"):
+        item["year"]=d.year
+    text=clean(f"{title}. {item.get('reader_point','')}")
+    if text:
+        topics=list(item.get("topics") or [])
+        if not topics:
+            topics=topic_matches(text)
+            if topics:
+                item["topics"]=topics
+                item["topic_labels"]=[topic_label(t) for t in topics]
+        if not clean(item.get("matrix_dimension")) or not clean(item.get("matrix_outcome")):
+            row,outcome,basis=matrix_classification(text)
+            if row and outcome:
+                item["matrix_dimension"],item["matrix_outcome"],item["matrix_basis"]=row,outcome,basis
+                if not clean(item.get("why_it_matters")):
+                    item["why_it_matters"]=why_it_matters(row,outcome)
     return item
+
+
+def duplicate_keys(item: dict[str, Any]) -> set[str]:
+    """Stable duplicate keys used only to stop *new* copies entering the archive."""
+    keys=set()
+    ident=clean(item.get("id"))
+    title=norm(item.get("title"))
+    url=clean(item.get("url")).lower().rstrip("/")
+    if ident:
+        keys.add("id:"+ident)
+    if title:
+        keys.add("title:"+title)
+    if url:
+        keys.add("url:"+url)
+    return keys
+
+
+def enrich_existing(existing: dict[str, Any], candidate: dict[str, Any]) -> dict[str, Any]:
+    """Fill gaps in an accepted record without replacing or de-admitting it."""
+    out=dict(existing)
+    for key,value in candidate.items():
+        if key in {"id","title","date","url"}:
+            continue
+        if key in {"topics","topic_labels"}:
+            old=list(out.get(key) or [])
+            add=list(value or []) if isinstance(value,list) else []
+            if add:
+                out[key]=list(dict.fromkeys(old+add))
+            continue
+        if key=="source_merit_score":
+            try:
+                out[key]=max(int(out.get(key,0) or 0),int(value or 0))
+            except Exception:
+                pass
+            continue
+        if (out.get(key) is None or out.get(key)=="" or out.get(key)==[]) and value not in (None,"",[]):
+            out[key]=value
+    return out
+
+
+def cumulative_merge(previous_items: Iterable[dict[str, Any]], manual_items: Iterable[dict[str, Any]], new_items: Iterable[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
+    """Append-only merge for normal historical scans.
+
+    Every previously accepted row survives.  Manual and newly discovered rows are
+    appended only when they are not duplicates of something already retained.  A
+    duplicate may enrich the retained row, but it can never reduce the archive size.
+    Returns ``(merged_items, genuinely_new_scan_items)``.
+    """
+    merged=[]
+    key_to_index={}
+
+    # Preserve every previous row, including any legacy duplicates.  We deliberately
+    # do not deduplicate this layer during an ordinary scan because that would make the
+    # historical count fall.
+    for raw in previous_items:
+        item=refresh_existing_item(raw)
+        if item is None:
+            continue
+        idx=len(merged)
+        merged.append(item)
+        for key in duplicate_keys(item):
+            key_to_index.setdefault(key,idx)
+
+    def add_or_enrich(raw: dict[str, Any], *, count_as_new: bool) -> int:
+        if not isinstance(raw,dict):
+            return 0
+        item=dict(raw)
+        keys=duplicate_keys(item)
+        match=next((key_to_index[k] for k in keys if k in key_to_index),None)
+        if match is not None:
+            merged[match]=enrich_existing(merged[match],item)
+            for key in duplicate_keys(merged[match]):
+                key_to_index.setdefault(key,match)
+            return 0
+        idx=len(merged)
+        merged.append(item)
+        for key in keys:
+            key_to_index.setdefault(key,idx)
+        return 1 if count_as_new else 0
+
+    for item in manual_items:
+        add_or_enrich(item,count_as_new=False)
+    new_count=0
+    for item in new_items:
+        new_count+=add_or_enrich(item,count_as_new=True)
+    return merged,new_count
+
+
+def count_new_against_retained(items: Iterable[dict[str, Any]], retained_items: Iterable[dict[str, Any]]) -> int:
+    retained_keys=set()
+    for item in retained_items:
+        if isinstance(item,dict):
+            retained_keys.update(duplicate_keys(item))
+    count=0
+    local=set(retained_keys)
+    for item in items:
+        if not isinstance(item,dict):
+            continue
+        keys=duplicate_keys(item)
+        if keys and keys & local:
+            continue
+        count+=1
+        local.update(keys)
+    return count
 
 
 def dedupe(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -789,13 +897,12 @@ def main() -> int:
     log("Topics: "+" | ".join(str(t.get("label")) for t in active_topics))
     if seed_queries: log(f"Curated workbook backfill: {len(seed_queries)} title seed(s)")
     candidates,queries=run_rotation(active_topics,active_sources,warnings,"normal",extra_queries=seed_queries)
-    old_items=[]
-    previous_ids={clean(x.get("id")) for x in previous.get("items",[]) if isinstance(x,dict)}
-    for raw in previous.get("items",[]):
-        if isinstance(raw,dict) and (item:=refresh_existing_item(raw)) is not None:
-            old_items.append(item)
-    old_ids={clean(x.get("id")) for x in old_items}
-    unique_initial=dedupe(candidates); initial_new=sum(1 for x in unique_initial if clean(x.get("id")) not in old_ids)
+    previous_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]
+    # Historical retention is append-only: current gates determine what may be added,
+    # never what is allowed to remain.  Manual evidence is part of the retained
+    # baseline for duplicate/yield calculations as well.
+    retained_baseline=previous_items+manual_items
+    unique_initial=dedupe(candidates); initial_new=count_new_against_retained(unique_initial,retained_baseline)
     target_new=max(1,int(CONFIG.get("target_new_items_per_scan",8) or 8))
     low_threshold=max(int(CONFIG.get("low_yield_trigger_max_new_items",3)), target_new-1); low_triggered=initial_new<=low_threshold
     rescue_topics=[]; rescue_sources=[]; rescue_queries=[]; rescue_candidates=[]
@@ -816,7 +923,7 @@ def main() -> int:
     blocks_per_topic_sweep=max(1,(len(topics)+topics_per_wave-1)//topics_per_wave)
     blocks_already=1 + (1 if rescue_topics else 0)
     current_unique=dedupe(candidates)
-    current_new=sum(1 for x in current_unique if clean(x.get("id")) not in old_ids)
+    current_new=count_new_against_retained(current_unique,retained_baseline)
     while current_new<target_new and budget_ok(150) and len(continuation_waves)<max_extra:
         wave_no=len(continuation_waves)+1
         wave_topics,wave_next_topic=rotating(topics,next_topic,topics_per_wave)
@@ -828,18 +935,15 @@ def main() -> int:
         continuation_waves.append({"wave":wave_no,"result_page":result_page,"topics":[str(t.get("label")) for t in wave_topics],"sources":[str(s.get("name")) for s in wave_sources],"queries":wave_queries,"candidates":len(wave_candidates)})
         next_topic=wave_next_topic; next_source=wave_next_source; blocks_already+=1
         current_unique=dedupe(candidates)
-        current_new=sum(1 for x in current_unique if clean(x.get("id")) not in old_ids)
+        current_new=count_new_against_retained(current_unique,retained_baseline)
 
     wait_until_minimum_runtime()
-    unique_gate=dedupe(candidates); merged=dedupe(manual_items+old_items+unique_gate)
-    merged=[x for x in merged if (d:=parse_date(x.get("date"))) and DATE_FROM<=d<=DATE_TO]
-    merged.sort(key=lambda x:(int(x.get("year",0)),x.get("date",""),clean(x.get("title"))),reverse=True)
-    if MAX_ITEMS>0 and len(merged)>MAX_ITEMS:
-        manual_keep=[x for x in merged if x.get("manual_curated")]
-        other_keep=[x for x in merged if not x.get("manual_curated")][:max(0,MAX_ITEMS-len(manual_keep))]
-        merged=manual_keep+other_keep
-        merged.sort(key=lambda x:(int(x.get("year",0)),x.get("date",""),clean(x.get("title"))),reverse=True)
-    new_count=sum(1 for x in merged if not x.get("manual_curated") and clean(x.get("id")) not in previous_ids)
+    unique_gate=dedupe(candidates)
+    merged,new_count=cumulative_merge(previous_items,manual_items,unique_gate)
+    merged.sort(key=lambda x:(int(x.get("year",0) or 0),clean(x.get("date")),clean(x.get("title"))),reverse=True)
+    # No normal-scan size cap: a finite cap would eventually force accepted historical
+    # evidence to disappear, contradicting cumulative retention.  MAX_ITEMS is kept as
+    # a legacy config read only for backwards-compatible diagnostics.
     matrix_counts={r:{c:0 for c in "ABCD"} for r in ROW_TERMS}
     for x in merged:
         r,c=clean(x.get("matrix_dimension")),clean(x.get("matrix_outcome"))
@@ -848,7 +952,7 @@ def main() -> int:
     full_rescue_enabled=bool(CONFIG.get("full_rescue_run_enabled",True)); full_rescue_threshold=int(CONFIG.get("full_rescue_run_trigger_max_new_items",3)); should_dispatch=(full_rescue_enabled and not RESCUE_MODE and new_count<=full_rescue_threshold)
     data={
         "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),"cutoff_exclusive":CUTOFF_EXCLUSIVE.isoformat(),"main_radar_window_months":MAIN_RADAR_WINDOW_MONTHS,
-        "scope_note":"Separate source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff; accepted live A/B evidence itself is cumulative. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
+        "scope_note":"Separate, cumulative source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff. Once historical evidence is accepted, normal scans keep it; current admission gates apply only to newly discovered material. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
         "ranking_note":f"Every run searches the eligible period from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. Topic families rotate; years do not. Reader/corpus ordering is chronological after admission; source quality is used only by the upstream evidence gate and duplicate resolution.",
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
@@ -861,6 +965,7 @@ def main() -> int:
             "low_yield_rotation":{"triggered":low_triggered,"new_items_after_normal_rotation":initial_new,"fresh_topics":[str(t.get("label")) for t in rescue_topics],"fresh_sources":[str(s.get("name")) for s in rescue_sources],"fresh_queries":rescue_queries,"new_items_after_all_in_run_rotations":new_count,"full_rescue_run_enabled":full_rescue_enabled,"full_rescue_run_should_dispatch":should_dispatch},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
             "target_new_items":target_new,
+            "cumulative_retention":{"enabled":True,"previous_items":len(previous_items),"retained_previous_items":len(previous_items),"normal_scan_deletions":0,"legacy_max_items":MAX_ITEMS},
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),
             "openalex_api_key_configured":bool(OPENALEX_API_KEY),"rejection_funnel":rejection_funnel(new_count,len(unique_gate)),"diagnostics":{k:int(v) for k,v in sorted(DIAG.items())},"warnings":list(dict.fromkeys(warnings))[:50],
         },

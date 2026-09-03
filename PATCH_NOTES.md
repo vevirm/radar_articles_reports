@@ -1,3 +1,11 @@
+## 17.20.8 — cumulative historical evidence
+
+- Historical evidence is now append-only during normal scans: once accepted, an item is retained even if later gate/taxonomy changes would not admit it as a new discovery.
+- New scans may enrich an existing historical row or suppress a newly found duplicate, but they do not silently re-test and delete the retained archive.
+- Removes the finite historical `max_items` cap, which would eventually have forced old accepted evidence out as the archive grew.
+- Adds explicit cumulative-retention diagnostics to each historical scan result (`normal_scan_deletions: 0`).
+- New admission quality remains strict: cumulative retention changes what may stay, not what may enter.
+
 ## 17.20.7 — black links on white + browser-upload-safe regression gate
 
 - Reader links on white surfaces now render black (including visited links); red is retained for borders, underlines, active states and emphasis. Dark headers keep white link text.

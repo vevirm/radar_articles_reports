@@ -151,6 +151,38 @@ class HistoricalScannerTests(unittest.TestCase):
         self.assertEqual(H.MIN_RUNTIME_SECONDS, 0)
         self.assertEqual(H.CONFIG["target_new_items_per_scan"], 8)
 
+
+    def test_existing_historical_evidence_is_cumulative(self):
+        old = {
+            "id": "legacy-accepted-row",
+            "title": "A legacy accepted item whose wording would fail today's gates",
+            "date": "2020-05-01",
+            "url": "https://example.invalid/legacy",
+            "reader_point": "Previously accepted historical evidence.",
+            "source_merit_score": 40,
+        }
+        kept = H.refresh_existing_item(old)
+        self.assertIsNotNone(kept)
+        self.assertEqual(kept["id"], old["id"])
+        self.assertEqual(kept["title"], old["title"])
+
+    def test_cumulative_merge_never_shrinks_previous_archive(self):
+        previous = [
+            {"id": "p1", "title": "Previous one", "date": "2020-01-01", "url": "https://example.invalid/p1"},
+            {"id": "p2", "title": "Previous two", "date": "2021-01-01", "url": "https://example.invalid/p2"},
+        ]
+        duplicate = {"id": "new-id", "title": "Previous one", "date": "2020-01-01", "url": "https://other.invalid/p1", "source_merit_score": 100}
+        fresh = {"id": "p3", "title": "New three", "date": "2022-01-01", "url": "https://example.invalid/p3"}
+        merged, new_count = H.cumulative_merge(previous, [], [duplicate, fresh])
+        self.assertGreaterEqual(len(merged), len(previous))
+        self.assertEqual(len(merged), 3)
+        self.assertEqual(new_count, 1)
+        self.assertTrue(all(any(x.get("id") == pid for x in merged) for pid in ("p1", "p2")))
+
+    def test_cumulative_history_has_no_eviction_cap(self):
+        self.assertTrue(H.CONFIG["cumulative_retention"])
+        self.assertEqual(H.CONFIG["max_items"], 0)
+
     def test_deeper_result_pages_are_supported_for_minimum_runtime_rotation(self):
         import inspect
         self.assertIn("result_page", inspect.signature(H.collect_openalex).parameters)
