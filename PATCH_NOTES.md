@@ -1,4 +1,12 @@
-# v17.20.16
+# v17.20.17
+
+- Scanner-first CI: scheduled scans now run scanner-critical regression tests only, so reader/UI release checks cannot prevent evidence collection.
+- Removed the brittle ranking test assumption that exactly 17 items must be new in every future scan; ranking is still checked without depending on the latest rotation.
+- Renamed the standalone page to **Trends vs. countertrend competition** with a light "evidence tug-of-war" edge, while keeping the inference method private.
+- Renamed the External Shocks top index to **Shock list** and ensured realised, direct inferred and reasoned inferred shocks are all added dynamically; shocks using newly scanned evidence get a `new` marker.
+- Kept the Radar scanner and A/B/C evidence gathering as the operational priority.
+
+# v17.20.17
 
 - Kept Trends & countertrends as its own analytical page in the reader path.
 - Removed reader-facing explanation of the trend/countertrend inference method.

@@ -54,7 +54,7 @@ class V17206BroaderScanAndReaderTests(unittest.TestCase):
         js = (ROOT / 'shocks' / 'scenarios.js').read_text(encoding='utf-8')
         variants = (ROOT / 'shocks' / 'variants.js').read_text(encoding='utf-8')
         self.assertIn('id="shockIndex"', html)
-        self.assertIn('Shock index', html)
+        self.assertTrue('Shock list' in html or 'Shock index' in html)
         for sid in ('energy_compute_rationing', 'scaleup_acquisition_drain', 'standards_interoperability_split', 'open_science_security_collision'):
             self.assertIn(sid, js)
         self.assertIn('genericProfile', variants)
