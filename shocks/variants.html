@@ -13,7 +13,7 @@
 <main class="wrap">
 <div id="content"><div class="empty">Loading…</div></div>
 </main>
-<script src="scenarios.js?v=17.20.4"></script><script src="variants.js?v=17.20.4"></script>
+<script src="scenarios.js?v=17.20.6"></script><script src="variants.js?v=17.20.6"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function evidenceField(x){const geo=Array.isArray(x.geo_evidence)?x.geo_evidence.filter(Boolean):[];const ri=Array.isArray(x.ri_evidence)?x.ri_evidence.filter(Boolean):[];const ctx=Array.isArray(x.a_context_evidence)?x.a_context_evidence.filter(Boolean):[];if(geo.length)return `Strategic evidence: ${geo.slice(0,3).join('; ')}`;if(ctx.length)return `Context evidence: ${ctx.slice(0,3).join('; ')}`;if(ri.length)return `R&I evidence: ${ri.slice(0,3).join('; ')}`;return `Core message: ${x.core_message||x.summary||x.relevance_note||''}`}

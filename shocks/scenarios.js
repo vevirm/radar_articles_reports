@@ -25,10 +25,10 @@
     return n;
   }
   function corpus(data){
-    const out=[];
-    for(const [key,prefix] of [['strand_a','A'],['strand_c','C']]){
+    const out=[],seen=new Set();
+    for(const [key,prefix] of [['strand_a','A'],['strand_c','C'],['strategic_pathways','P']]){
       const xs=Array.isArray(data?.[key])?data[key]:[];
-      xs.forEach((x,i)=>{if(x&&typeof x==='object')out.push({...x,_row:`${prefix}${String(i+1).padStart(3,'0')}`,_strand:prefix})});
+      xs.forEach((x,i)=>{if(!x||typeof x!=='object')return;const k=clean(x.link)||clean(x.title||x.headline).toLowerCase();if(k&&seen.has(k))return;if(k)seen.add(k);out.push({...x,_row:`${prefix}${String(i+1).padStart(3,'0')}`,_strand:prefix})});
     }
     return out;
   }
@@ -247,6 +247,94 @@
         'It also documents third-country legal exposure in the digital layer Europe relies on.',
         'Join them and the external shock is legal/technical rather than medical: data can no longer move through the infrastructure on which the trial design depends.',
         'The laboratories remain open, which is why the loss of research capability can be missed until the trial evidence fails.'
+      ]
+    },
+    {
+      id:'energy_compute_rationing',
+      title:'An external energy shock turns Europe’s new AI and supercomputing capacity into rationed research access',
+      plainly:'Owning compute does not guarantee usable compute if electricity becomes the scarce imported input and research workloads are the easiest demand to postpone.',
+      secondOrder:'The projects most dependent on repeated high-end runs lose time non-linearly: queues grow, model-training cycles stretch, and smaller teams are crowded out first.',
+      hidden:'Energy security and research infrastructure are usually monitored in different systems. The coupling appears only when sovereign compute becomes large enough for power availability and price to determine scientific access.',
+      minEvidence:4,
+      roles:[
+        ['European compute build-out',{any:[/ai gigafactor/,/supercomput/,/resource for ai science in europe/,/eurohpc/],preferSource:/European Commission|EuroHPC/}],
+        ['Research access dependency',{any:[/research access.*compute/,/access to.*supercomput/,/research infrastructure/,/computing capacity/]}],
+        ['Energy / grid exposure',{any:[/energy supply/,/electricity/,/grid /,/power supply/,/energy security/,/data cent(?:er|re).*energy/]}],
+        ['External shock mechanism',{any:[/commodity price shock/,/price spike/,/supply disruption/,/energy supply disruption/,/blackout/,/power outage/]}],
+        ['Strategic dependency',{any:[/strategic depend/,/external depend/,/non-european suppliers/,/import dependence/]}],
+      ],
+      reasoning:[
+        'Europe is deliberately concentrating more research capability in AI factories, supercomputers and shared compute.',
+        'That capacity converts electricity into research throughput; access is therefore partly an energy-allocation question.',
+        'The corpus separately treats energy supply, grids and external dependence as resilience issues rather than research issues.',
+        'Join the layers and an external energy shock can leave the machines physically intact but make scientific access economically or operationally rationed.',
+        'The loss is initially invisible in capital-stock measures because Europe still owns the infrastructure.'
+      ]
+    },
+    {
+      id:'scaleup_acquisition_drain',
+      title:'Europe finances a strategic deep-tech scale-up, then loses the capability through acquisition rather than failure',
+      plainly:'A company can remain successful while Europe loses control: foreign acquisition can move key IP, product decisions, data and high-value R&D out of the European innovation system.',
+      secondOrder:'Public R&D and scale-up support can end up increasing the quality of assets available for acquisition unless ownership, procurement and European demand scale together.',
+      hidden:'Innovation policy counts a funded scale-up as a success; economic-security policy watches hostile or sensitive investment. The seam is the ordinary successful acquisition that is legal, commercial and strategically consequential.',
+      minEvidence:4,
+      roles:[
+        ['European scale-up ambition',{any:[/scale-?up/,/startup/,/venture capital/,/deep tech/]}],
+        ['Foreign capital / acquisition channel',{any:[/foreign investment/,/acquisition/,/foreign ownership/,/foreign capital/]}],
+        ['Research-to-market conversion',{any:[/commerciali[sz]ation/,/technology transfer/,/procurement/,/innovation ecosystem/]}],
+        ['Strategic technology capability',{any:[/critical technolog/,/strategic technolog/,/semiconductor/,/quantum/,/artificial intelligence/]}],
+        ['Economic-security / screening layer',{any:[/investment screening/,/economic security/,/strategic autonomy/,/technology sovereignty/]}],
+      ],
+      reasoning:[
+        'The corpus treats R&D, scale-up finance and commercialisation as a pathway to European capability.',
+        'It separately treats foreign investment and screening as a security issue.',
+        'A successful company can cross from one policy file to the other without any operational failure.',
+        'If the acquisition moves control over IP, product roadmaps or R&D location, Europe can lose the capability after paying to create it.',
+        'The shock is therefore a success event in company statistics but a loss event in system capability.'
+      ]
+    },
+    {
+      id:'standards_interoperability_split',
+      title:'A standards split makes a European research network technically open but practically unable to collaborate',
+      plainly:'No border closes and no grant is cancelled; incompatible standards, certification or data rules can make equipment and research outputs stop fitting together.',
+      secondOrder:'European teams spend scarce research time maintaining parallel compliance and conversion layers, while smaller institutions quietly exit international networks.',
+      hidden:'Standards are usually treated as market governance and collaboration as science policy. Interoperability is the hidden infrastructure connecting them.',
+      minEvidence:4,
+      roles:[
+        ['Standards / regulatory layer',{any:[/standardisation/,/standardization/,/technology standards/,/regulatory framework/,/standards and geopolitics/]}],
+        ['International collaboration',{any:[/international research collaboration/,/scientific collaboration/,/science diplomacy/,/research cooperation/]}],
+        ['Shared data / infrastructure',{any:[/research data/,/data infrastructure/,/research infrastructure/,/shared facilit/]}],
+        ['External legal or technology pressure',{any:[/third-country laws/,/extraterritorial/,/technology competition/,/strategic competition/]}],
+        ['European strategic capability',{any:[/strategic autonomy/,/technology sovereignty/,/critical technolog/,/economic security/]}],
+      ],
+      reasoning:[
+        'Research collaboration increasingly depends on technical standards for data, equipment, software and certification.',
+        'The corpus separately shows standards and regulation becoming instruments of geopolitical competition.',
+        'A standards split can therefore break collaboration without a formal political rupture.',
+        'Projects remain funded and institutions remain partnered, but data and equipment require parallel conversion or cannot be mutually recognised.',
+        'That makes interoperability itself a strategic research capability.'
+      ]
+    },
+    {
+      id:'open_science_security_collision',
+      title:'Europe’s open-science architecture and research-security rules collide in a strategically sensitive field',
+      plainly:'The same openness that makes a European network scientifically valuable can become the reason access is restricted once the field is reclassified as sensitive or dual-use.',
+      secondOrder:'Institutions pre-emptively narrow collaboration beyond what the rules require, producing a chilling effect that is larger than the formal restriction.',
+      hidden:'Open science is managed as an access and values agenda; research security is managed as a protection agenda. The shock appears when one dataset, facility or field suddenly belongs to both.',
+      minEvidence:4,
+      roles:[
+        ['Open-science / shared-information architecture',{any:[/open science/,/open research information/,/open access/,/data sharing/]}],
+        ['Research-security tightening',{any:[/research security/,/knowledge security/,/foreign interference/]}],
+        ['Sensitive or dual-use field',{any:[/dual-use/,/dual use/,/critical technolog/,/sensitive research/]}],
+        ['International collaboration dependence',{any:[/international research collaboration/,/research cooperation/,/science diplomacy/]}],
+        ['European shared infrastructure',{any:[/research infrastructure/,/shared facilit/,/eosc/,/federated data/]}],
+      ],
+      reasoning:[
+        'Europe is building research systems around openness, federation and cross-border reuse.',
+        'At the same time, security policy is expanding screening around sensitive knowledge and dual-use technologies.',
+        'Those agendas can coexist until a previously open field is recategorised as strategically sensitive.',
+        'The same shared infrastructure then has to support openness and restriction at once, creating abrupt access and collaboration changes.',
+        'The largest effect may come from institutional over-compliance rather than the formal rule itself.'
       ]
     }
   ];

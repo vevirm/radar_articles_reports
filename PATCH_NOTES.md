@@ -42,3 +42,11 @@ v17.20.0
 - `New` follows the latest productive scan (the most recent run that actually inserted A, B or C material), so a zero-yield rotation does not erase the latest additions from view.
 - The scanner records `latest_productive_scan` explicitly, while keeping all normal quality/admission gates unchanged; it never lowers the quality bar just to manufacture a non-zero number.
 
+## 17.20.6 — broader evidence rotation and always-fresh analytical products
+- Broadens Strand A discovery across EU institutions, national science bodies, research organisations, journals and working-paper routes, and expands the EU R&I/geopolitics vocabulary without weakening admission gates.
+- Broadens Strand B method discovery for horizon scanning, scenario discovery, robust decision-making, stress testing, red teaming, futures literacy, anticipatory governance, text mining and related foresight methods.
+- Gives strategic risk, opportunity and external-shock searches a protected lane in every scan; the Matrix, Risks & opportunities, External shocks and Read at least this rebuild from the newly published radar.json.
+- Adds four further cross-evidence shock families while preserving dynamically filed realised shocks and the existing direct/reasoned shock logic.
+- Adds a compact Shock index at the top of External shocks.
+- Makes Read at least this more compact and editorial: exactly eight hierarchy maps remain, but phrases link to the strongest supporting source and each node can jump to matching Radar evidence.
+- Uses a fixed four-hour scheduled rotation, with a 24-minute scanner budget inside a 36-minute workflow envelope and a 6-minute publish job.

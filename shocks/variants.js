@@ -25,10 +25,10 @@
     return n;
   }
   function corpus(data){
-    const out=[];
-    for(const [key,prefix] of [['strand_a','A'],['strand_c','C']]){
+    const out=[],seen=new Set();
+    for(const [key,prefix] of [['strand_a','A'],['strand_c','C'],['strategic_pathways','P']]){
       const xs=Array.isArray(data?.[key])?data[key]:[];
-      xs.forEach((x,i)=>{if(x&&typeof x==='object')out.push({...x,_row:`${prefix}${String(i+1).padStart(3,'0')}`,_strand:prefix})});
+      xs.forEach((x,i)=>{if(!x||typeof x!=='object')return;const k=clean(x.link)||clean(x.title||x.headline).toLowerCase();if(k&&seen.has(k))return;if(k)seen.add(k);out.push({...x,_row:`${prefix}${String(i+1).padStart(3,'0')}`,_strand:prefix})});
     }
     return out;
   }
@@ -185,9 +185,27 @@
     }
     return out.slice(0,5);
   }
+  const GENERIC_COUNTER_ROLES=[
+    ['European substitution / diversification',{any:[/diversif/,/substitut/,/alternative supplier/,/strategic autonomy/,/resilien/]}],
+    ['Shared or federated European capacity',{any:[/federat/,/shared infrastructure/,/research infrastructure/,/eurohpc/,/open access/]}],
+    ['European policy capacity',{any:[/european commission/,/framework programme/,/horizon europe/,/funding/,/procurement/,/regulatory sandbox/]}],
+    ['Open or international cooperation channel',{any:[/science diplomacy/,/international cooperation/,/association/,/open science/,/research collaboration/]}],
+    ['Talent / capability reinforcement',{any:[/attract and retain/,/research talent/,/skills/,/training/,/capacity building/]}]
+  ];
+  function genericProfile(scenario){
+    return {
+      variants:[
+        {id:'contained',label:'Contained',title:`Contained: ${scenario.title}`,text:'The mechanism appears, but redundancy, substitution, workarounds or policy response keep it local and temporary.'},
+        {id:'core',label:'Core shock',title:scenario.title,text:scenario.plainly||'The identified mechanism reaches the capability described by the supporting evidence.'},
+        {id:'compound',label:'Compound',title:`Compound: ${scenario.title}`,text:`The same mechanism lands together with an adjacent dependency or policy failure. ${scenario.secondOrder||''}`.trim()}
+      ],
+      counterRoles:GENERIC_COUNTER_ROLES
+    };
+  }
   function build(data,id){
-    const scenario=findScenario(data,id),profile=PROFILES[id];
-    if(!scenario||!profile)return null;
+    const scenario=findScenario(data,id);
+    if(!scenario)return null;
+    const profile=PROFILES[id]||genericProfile(scenario);
     return {
       scenario,
       variants:profile.variants,

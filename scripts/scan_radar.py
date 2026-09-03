@@ -14380,6 +14380,7 @@ def main() -> int:
     completed = dt.datetime.now(dt.timezone.utc)
     completed_iso = completed.isoformat(timespec="minutes").replace("+00:00", "Z")
     state["last_run"] = completed_iso
+    state["last_reader_products_refresh"] = completed_iso
     scheduler_completed = scheduler_state_completed_at(completed)
     state["last_completed_at"] = scheduler_completed.isoformat(timespec="minutes").replace("+00:00", "Z")
     if scheduler_completed != completed:
@@ -14453,6 +14454,15 @@ def main() -> int:
         },
         "scan_history": scan_history,
         "latest_productive_scan": latest_productive_scan,
+        "reader_products_refresh": {
+            "completed_at": completed_iso,
+            "matrix": True,
+            "risks_opportunities": True,
+            "external_shocks": True,
+            "read_at_least_this": True,
+            "strategic_scholarly_queries": len(strategic_scholarly_focus),
+            "strategic_news_queries": len(strategic_pathway_queries('news')),
+        },
         "first_scan_complete": True,
         "corpus_start_date": output_corpus_floor.isoformat(),
         "preferred_corpus_start_date": DATE_FLOOR.isoformat(),

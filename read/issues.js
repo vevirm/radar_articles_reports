@@ -147,14 +147,30 @@
     return out.slice(0,n);
   }
 
+  function bestMatch(ms){
+    return [...(ms||[])].sort((a,b)=>(b.hits-a.hits)||((b.x?.new_this_scan?1:0)-(a.x?.new_this_scan?1:0))||(stamp(b.x)-stamp(a.x)))[0]||null;
+  }
+  function nodeMeta(ms,query){
+    const unique=new Map();for(const m of ms||[]){const key=clean(m.x?.link)||clean(m.x?.title)||String(m.i);if(!unique.has(key))unique.set(key,m)}
+    const matches=[...unique.values()],best=bestMatch(matches),x=best?.x||{};
+    return {query:clean(query),evidenceCount:matches.length,sourceLink:clean(x.link),sourceTitle:clean(x.title||x.headline),sourceName:clean(x.source)};
+  }
   function build(items,opt={}){
     const evals=evaluate(items),count=Math.max(1,Math.min(8,Number(opt.count)||8));
     const mains=chooseMain(evals,count);
-    return mains.map((h,index)=>({
-      id:h.id,rank:index+1,main:{id:h.id,label:h.label},
-      subs:h.subs.map((s,i)=>({id:`${h.id}-s${i+1}`,label:s.label})),
-      leaves:h.subs.flatMap((s,si)=>s.leaves.map((l,li)=>({id:`${h.id}-s${si+1}-l${li+1}`,label:l.label}))).slice(0,3)
-    }));
+    return mains.map((h,index)=>{
+      const support=new Map(h.leafSupport.map(v=>[v.leaf.label,v.matches]));
+      const subs=h.subs.map((sub,si)=>{
+        const subMatches=sub.leaves.flatMap(l=>support.get(l.label)||[]);
+        const query=sub.leaves[0]?.terms?.[0]||sub.label;
+        return {id:`${h.id}-s${si+1}`,label:sub.label,...nodeMeta(subMatches,query)};
+      });
+      const leaves=h.subs.flatMap((sub,si)=>sub.leaves.map((leaf,li)=>({
+        id:`${h.id}-s${si+1}-l${li+1}`,label:leaf.label,...nodeMeta(support.get(leaf.label)||[],leaf.terms?.[0]||leaf.label)
+      }))).slice(0,3);
+      const mainQuery=h.subs[0]?.leaves?.[0]?.terms?.[0]||h.label;
+      return {id:h.id,rank:index+1,main:{id:h.id,label:h.label,...nodeMeta(h.matches,mainQuery)},subs,leaves};
+    });
   }
 
   g.RadarIssues={build,buildTrees:build,evaluate,chooseMain,hierarchies:HIERARCHIES};
