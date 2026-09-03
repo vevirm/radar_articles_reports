@@ -1,3 +1,11 @@
+# v17.20.16
+
+- Kept Trends & countertrends as its own analytical page in the reader path.
+- Removed reader-facing explanation of the trend/countertrend inference method.
+- The page now simply says what the Radar evidence appears to show, while still exposing the supporting source material.
+- Removed actor/observer, hostile-witness, claim-role and internal evidence-weight labels from the public Trends page.
+- External Shocks remains a separate page; its for/against shock evidence arrows are unchanged.
+
 # v17.20.15
 
 - Added a Trends & countertrends analytical page built from retained Radar evidence.

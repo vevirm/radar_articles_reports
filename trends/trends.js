@@ -1,4 +1,4 @@
-/* v17.20.15 — paired trends/countertrends inferred from retained Radar evidence.
+/* v17.20.16 — paired trends/countertrends inferred from retained Radar evidence.
    The analytical rules intentionally discount publication cadence and distinguish
    actor-reporting (strong for actions) from observer-reporting (stronger for effects). */
 (function(root,factory){
