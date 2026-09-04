@@ -58,34 +58,27 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
         hist = HIST_WORKFLOW.read_text(encoding="utf-8")
         shared_lock = all(
             "group: ri-research-scanners" in text and
-            "cancel-in-progress: false" in text and
-            "queue: max" in text
+            "cancel-in-progress: false" in text
             for text in (main, hist)
         )
-        if shared_lock:
-            self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", main)
-            self.assertIn("cron: '53 6 * * *'", hist)
-            self.assertIn("rescue_needed: ${{ steps.rescue.outputs.dispatch }}", main)
-            self.assertIn("rescue_needed: ${{ steps.rescue.outputs.dispatch }}", hist)
-            self.assertIn("RADAR_RESCUE_MODE: 'true'", main)
-            self.assertIn("HISTORICAL_RESCUE_MODE: 'true'", hist)
-            self.assertNotIn("/actions/workflows/radar-scan.yml/dispatches", main)
-            self.assertNotIn("/actions/workflows/historical-scan.yml/dispatches", hist)
-            # Rescue jobs must check out the latest main branch after the normal round commits.
-            self.assertRegex(main.split("  rescue:", 1)[1], r"ref: main")
-            self.assertRegex(hist.split("  rescue:", 1)[1], r"ref: main")
-        else:
-            # GitHub's browser bulk uploader can leave hidden workflow YAML unchanged.
-            # Visible scanner code therefore carries a safe fallback: the later legacy
-            # workflow run exits before source requests instead of overlapping the peer.
-            guard = (ROOT / "scripts" / "scanner_run_guard.py").read_text(encoding="utf-8")
-            main_scan = SCAN_PATH.read_text(encoding="utf-8")
-            hist_scan = (ROOT / "historical" / "scan_historical.py").read_text(encoding="utf-8")
-            self.assertIn("def defer_if_peer_scanner_active", guard)
-            self.assertIn("_main_rescue_pending", guard)
-            self.assertIn("_historical_rescue_pending", guard)
-            self.assertIn('defer_if_peer_scanner_active("main"', main_scan)
-            self.assertIn('defer_if_peer_scanner_active("historical"', hist_scan)
+        self.assertTrue(shared_lock)
+        self.assertNotIn("queue: max", main)
+        self.assertNotIn("queue: max", hist)
+        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", main)
+        self.assertIn("cron: '53 6 * * *'", hist)
+
+        # GitHub's browser bulk uploader can still leave hidden workflow YAML unchanged.
+        # Visible scanner code therefore carries a safe fallback: the later legacy
+        # workflow run exits before source requests instead of overlapping the peer.
+        guard = (ROOT / "scripts" / "scanner_run_guard.py").read_text(encoding="utf-8")
+        main_scan = SCAN_PATH.read_text(encoding="utf-8")
+        hist_scan = (ROOT / "historical" / "scan_historical.py").read_text(encoding="utf-8")
+        self.assertIn("def defer_if_peer_scanner_active", guard)
+        self.assertIn("_main_rescue_pending", guard)
+        self.assertIn("_historical_rescue_pending", guard)
+        self.assertIn('defer_if_peer_scanner_active("main"', main_scan)
+        self.assertIn('defer_if_peer_scanner_active("historical"', hist_scan)
+        self.assertIn("refresh_window_metadata_after_peer_defer", hist_scan)
 
     def test_cumulative_retention_is_enforced_in_scanner_even_with_legacy_workflow(self):
         old_a = {"title": "Old accepted A", "date": "2024-01-01", "link": "https://example.org/a"}

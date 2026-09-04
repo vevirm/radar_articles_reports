@@ -1,3 +1,12 @@
+# v17.20.20
+
+- Fixed Main/Historical scanner coordination: both shipped GitHub Actions workflows now use the same repository-level `ri-research-scanners` concurrency group with `cancel-in-progress: false`, so they queue instead of running source retrieval at the same time.
+- Main Radar now uses a fixed four-hour schedule (`00:17, 04:17, 08:17, 12:17, 16:17, 20:17 UTC`); Historical is deliberately placed at `06:53 UTC`, between Main slots.
+- Removed the old six-hour due gate from the fixed four-hour workflow; every scheduled Main slot is a real scan slot. The scanner itself still carries the 24-minute evidence-search budget.
+- Main workflow envelope is 36 minutes and Pages publish is 6 minutes; Historical publish is also 6 minutes.
+- Added a visible-code compatibility safeguard for stale hidden workflow YAML: if an older Historical workflow reaches the runtime collision guard, it performs no source requests, removes no evidence, and refreshes only the expected historical date-window metadata so the legacy verification step does not turn an intentional defer into a false red failure.
+- Historical cumulative retention is unchanged. This release changes coordination only, not historical admission or evidence removal rules.
+
 # v17.20.19
 
 - Added **What matters now** as the landing page: a plain-language current picture drawn dynamically from the live Radar evidence.

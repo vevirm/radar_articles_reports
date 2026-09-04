@@ -70,7 +70,8 @@ class V17206BroaderScanAndReaderTests(unittest.TestCase):
         # a scan merely because the browser did not overwrite hidden YAML.
         if "cron: '17 0,4,8,12,16,20 * * *'" in wf:
             self.assertIn('fixed four-hour scheduled scan', wf)
-            self.assertIn('age_hours >= 4.0', wf)
+            self.assertNotIn('age_hours >= 6.0', wf)
+            self.assertIn('echo "run=true"', wf)
             self.assertIn('timeout-minutes: 36', wf)
             if '  publish:' in wf:
                 self.assertRegex(wf.split('  publish:', 1)[1], r'timeout-minutes:\s*6')

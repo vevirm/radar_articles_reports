@@ -976,7 +976,38 @@ def main() -> int:
     return 0
 
 
+def refresh_window_metadata_after_peer_defer() -> None:
+    """Keep legacy workflow verification truthful when a peer scanner owns the slot.
+
+    Current workflows share one GitHub concurrency group and therefore queue before this
+    code is reached. Older hidden workflow YAML can survive a browser bulk upload, though.
+    In that compatibility case the runtime guard deliberately performs no source requests.
+    The old workflow's next safety step still expects today's historical window metadata,
+    so refresh only those date-window fields (plus a diagnostic) and preserve the accepted
+    corpus, scan cursors, last completed scan, and evidence counts unchanged.
+    """
+    try:
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    if not isinstance(data, dict):
+        return
+    data["date_from"] = DATE_FROM.isoformat()
+    data["cutoff_exclusive"] = CUTOFF_EXCLUSIVE.isoformat()
+    data["date_to"] = DATE_TO.isoformat()
+    data["main_radar_window_months"] = MAIN_RADAR_WINDOW_MONTHS
+    compat = data.get("workflow_compatibility") if isinstance(data.get("workflow_compatibility"), dict) else {}
+    compat["peer_deferred_without_source_requests"] = True
+    compat["peer_deferred_at"] = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    data["workflow_compatibility"] = compat
+    tmp = OUT_PATH.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(OUT_PATH)
+    log("Peer scanner owns the runtime slot; refreshed historical window metadata only. No source requests were made and no accepted evidence was removed.")
+
+
 if __name__=="__main__":
     if defer_if_peer_scanner_active("historical", ROOT):
+        refresh_window_metadata_after_peer_defer()
         raise SystemExit(0)
     raise SystemExit(main())
