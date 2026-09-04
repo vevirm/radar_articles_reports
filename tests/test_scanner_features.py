@@ -1082,7 +1082,7 @@ class V1719RecallModelTests(unittest.TestCase):
         scanner_text = (ROOT / "scripts" / "scan_radar.py").read_text(encoding="utf-8")
         self.assertIn("Public scan health is intentionally unchanged", scanner_text)
         self.assertIn("if 0 < new_c_count < 3 else", scanner_text)
-        index_text = (ROOT / "index.html").read_text(encoding="utf-8")
+        index_text = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("C floor unmet", index_text)
         self.assertNotIn("C_INTERNAL", index_text)
 
@@ -1618,19 +1618,19 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         self.assertEqual(removed["frontier_evidence"],0)
 
     def test_public_ui_makes_source_and_signal_what_explicit(self):
-        html=(ROOT/'index.html').read_text(encoding='utf-8')
+        html=(ROOT/'radar'/'index.html').read_text(encoding='utf-8')
         self.assertIn('<strong>Source:</strong>', html)
         self.assertIn('<strong>What happened:</strong>', html)
         self.assertNotIn('automatic every 4 hours', html.lower())
         self.assertNotIn('60 days from first insertion', html)
 
     def test_historical_evidence_is_public_and_news_stays_on_main_radar(self):
-        main=(ROOT/'index.html').read_text(encoding='utf-8')
+        main=(ROOT/'radar'/'index.html').read_text(encoding='utf-8')
         read=(ROOT/'read'/'index.html').read_text(encoding='utf-8')
         historical=(ROOT/'historical'/'index.html').read_text(encoding='utf-8')
         legacy=(ROOT/'history'/'index.html').read_text(encoding='utf-8')
-        self.assertIn('href="historical/"', main)
-        self.assertNotIn('href="history/"', main)
+        self.assertIn('href="../historical/"', main)
+        self.assertNotIn('href="../history/"', main)
         self.assertLess(main.find('id="strand-a"'), main.find('id="strand-b"'))
         self.assertLess(main.find('id="strand-b"'), main.find('id="strand-c"'))
         self.assertIn('Quality papers &amp; reports', main)
@@ -1659,6 +1659,7 @@ class ReaderFacingMatrixRotationTests(unittest.TestCase):
     def test_public_pages_do_not_expose_future_search_instructions(self):
         paths = [
             ROOT / "index.html",
+            ROOT / "radar" / "index.html",
             ROOT / "frontier" / "index.html",
             ROOT / "frontier" / "quick" / "index.html",
             ROOT / "read" / "index.html",
@@ -1677,7 +1678,7 @@ class ReaderFacingMatrixRotationTests(unittest.TestCase):
                 self.assertNotIn(phrase, text, f"{phrase!r} leaked into {path}")
 
     def test_rotation_note_is_internal_not_rendered_on_main_reader(self):
-        text = (ROOT / "index.html").read_text(encoding="utf-8")
+        text = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")
         self.assertNotIn('sr.rotation_note', text)
 
     def test_matrix_rotation_remains_enabled_in_scanner_config(self):
@@ -1893,7 +1894,7 @@ class V171913CadenceJournalAndCorpusCleanupTests(unittest.TestCase):
         after = scan.dt.datetime(2026, 9, 1, 18, 45, tzinfo=scan.dt.timezone.utc)
         nxt = scan.next_automatic_scan_slot(after)
         self.assertEqual(nxt.isoformat(), '2026-09-01T20:17:00+00:00')
-        html = (ROOT / 'index.html').read_text(encoding='utf-8')
+        html = (ROOT / 'radar' / 'index.html').read_text(encoding='utf-8')
         self.assertNotIn('id="scheduleState"', html)
         self.assertNotIn('Next automatic', html)
         stuff = (ROOT / 'stuff' / 'index.html').read_text(encoding='utf-8')

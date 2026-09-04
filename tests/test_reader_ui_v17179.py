@@ -6,22 +6,26 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReaderUiV17179Tests(unittest.TestCase):
-    def test_landing_page_makes_main_radar_primary_and_keeps_navigation_simple(self):
+    def test_landing_page_is_plain_language_current_picture_with_large_main_radar_link(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn("R&amp;I × Geopolitics", html)
-        self.assertIn("EU research &amp; innovation in geopolitical context.", html)
-        self.assertIn('<nav class="landing-nav"', html)
-        nav = html.split('<nav class="landing-nav"', 1)[1].split('</nav>', 1)[0]
-        self.assertIn('aria-current="page">Radar</a>', nav)
-        self.assertLess(nav.find('>Radar</a>'), nav.find('>Read at least this</a>'))
-        self.assertLess(nav.find('>Radar</a>'), nav.find('>Matrix</a>'))
-        self.assertLess(nav.find('>Radar</a>'), nav.find('>Stuff</a>'))
-        self.assertNotIn('>Weak signals</a>', nav)
-        self.assertNotIn('landing-choices', html)
-        self.assertNotIn('<section class="inside-map"', html)
-        self.assertNotIn('<section class="page-map"', html)
+        self.assertIn("What matters", html)
+        self.assertIn("these are the issues that stand out now — in plain language", html)
+        self.assertIn('class="main-radar-link" href="radar/"', html)
+        self.assertIn("THE MAIN RADAR", html)
+        self.assertIn('id="issues"', html)
+        self.assertIn("buildIssues(data)", html)
+        self.assertIn("Read more", html)
+        self.assertIn("Read at least this", html)
+        self.assertIn("Trends vs. countertrend competition", html)
+        self.assertIn("Risks &amp; opportunities", html)
+        self.assertIn("External shocks", html)
         self.assertNotIn("Next automatic", html)
         self.assertNotIn("scheduleState", html)
+        radar = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('aria-current="page">Main Radar</a>', radar)
+        self.assertIn("Quality papers &amp; reports", radar)
+        self.assertIn("Foresight methods", radar)
+        self.assertIn("Weak signals", radar)
 
     def test_read_page_is_eight_hierarchical_topic_charts_only(self):
         html = (ROOT / "read" / "index.html").read_text(encoding="utf-8")
@@ -69,7 +73,7 @@ if(!v.signals.length) process.exit(3);
 
     def test_reader_assets_use_current_cache_buster(self):
         for rel in [
-            "index.html", "read/index.html", "frontier/index.html", "frontier/quick/index.html",
+            "index.html", "radar/index.html", "read/index.html", "frontier/index.html", "frontier/quick/index.html",
             "priorities/index.html", "shocks/index.html", "shocks/variants.html", "historical/index.html",
             "literature/index.html", "stuff/index.html",
         ]:

@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-<header><div class="wrap top"><div><h1>Read at least this</h1></div><nav class="nav" aria-label="Primary site sections"><a href="../">Radar</a><a class="primary" href="./" aria-current="page">Read at least this</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../shocks/">External shocks</a><a href="../historical/">Historical</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
+<header><div class="wrap top"><div><h1>Read at least this</h1></div><nav class="nav" aria-label="Primary site sections"><a href="../">What matters now</a><a href="../radar/">Main Radar</a><a class="primary" href="./" aria-current="page">Read at least this</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../shocks/">External shocks</a><a href="../historical/">Historical</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
 <main class="wrap"><div class="tree-list" id="trees"><div class="empty">Loading…</div></div></main>
 <footer><div class="wrap">R&amp;I × Geopolitics Radar</div></footer>
 <script src="../briefing/insights.js?v=17.20.7"></script><script src="issues.js?v=17.20.7"></script>
@@ -17,9 +17,9 @@
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function nodeContent(n){
   const q=encodeURIComponent(n?.query||n?.label||'');
-  const source=n?.sourceLink?`<a class="node-title" href="${esc(n.sourceLink)}" target="_blank" rel="noopener" title="Open strongest supporting source">${esc(n.label)}</a>`:`<a class="node-title" href="../?q=${q}" title="Show supporting Radar material">${esc(n.label)}</a>`;
+  const source=n?.sourceLink?`<a class="node-title" href="${esc(n.sourceLink)}" target="_blank" rel="noopener" title="Open strongest supporting source">${esc(n.label)}</a>`:`<a class="node-title" href="../radar/?q=${q}" title="Show supporting Radar material">${esc(n.label)}</a>`;
   const count=Number(n?.evidenceCount||0);
-  const meta=count?`<div class="node-meta"><span>${count} ${count===1?'item':'items'}</span><span>·</span><a href="../?q=${q}">Radar →</a></div>`:'';
+  const meta=count?`<div class="node-meta"><span>${count} ${count===1?'item':'items'}</span><span>·</span><a href="../radar/?q=${q}">Radar →</a></div>`:'';
   return source+meta;
 }
 function chart(x,i){return `<section class="issue-chart" aria-label="Topic map ${i+1}: ${esc(x.main.label)}"><div class="chart-no">${String(i+1).padStart(2,'0')}</div><svg class="tree-svg" viewBox="0 0 1000 268" preserveAspectRatio="none" aria-hidden="true"><path class="root-link" d="M240 134 C300 134 323 89 410 89"/><path class="root-link" d="M240 134 C300 134 323 179 410 179"/><path class="branch-link" d="M700 89 C742 89 760 45 815 45"/><path class="branch-link" d="M700 89 C742 89 760 134 815 134"/><path class="branch-link" d="M700 179 C742 179 760 223 815 223"/><circle class="junction root-junction" cx="240" cy="134" r="3.8"/><circle class="junction" cx="700" cy="89" r="3.2"/><circle class="junction" cx="700" cy="179" r="3.2"/></svg><div class="tree-grid"><div class="node main">${nodeContent(x.main)}</div><div class="node sub one">${nodeContent(x.subs[0]||{label:'Current movement'})}</div><div class="node sub two">${nodeContent(x.subs[1]||{label:'Consequences'})}</div><div class="node leaf one">${nodeContent(x.leaves[0]||{label:'Connected development'})}</div><div class="node leaf two">${nodeContent(x.leaves[1]||{label:'Connected development'})}</div><div class="node leaf three">${nodeContent(x.leaves[2]||{label:'Connected development'})}</div></div></section>`}

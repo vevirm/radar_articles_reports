@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class RecentAdditionReaderContract(unittest.TestCase):
     def test_radar_shows_only_total_items_and_new_items_in_compact_strip(self):
-        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        html = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")
         for needle in (
             'id="itemsCount"',
             'id="newCount"',
@@ -34,7 +34,7 @@ class RecentAdditionReaderContract(unittest.TestCase):
             self.assertNotIn(obsolete, html)
 
     def test_new_filter_uses_latest_productive_scan_and_insertion_time(self):
-        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        html = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")
         self.assertIn("d?.latest_productive_scan", html)
         self.assertIn("d?.scan_history", html)
         self.assertIn("Date.parse(x?.first_seen||'')", html)

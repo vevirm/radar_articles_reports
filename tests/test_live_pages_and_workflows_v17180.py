@@ -25,7 +25,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
                 self.assertIn('no-store', text)
 
     def test_main_radar_restores_three_original_strands_without_analytical_dashboard(self):
-        html = (ROOT / 'index.html').read_text(encoding='utf-8')
+        html = (ROOT / 'radar' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('Strand A', html)
         self.assertIn('Quality papers &amp; reports', html)
         self.assertIn('Strand B', html)

@@ -11,10 +11,10 @@ def test_trends_page_is_in_release_and_core_path():
     build = (ROOT / "scripts/build_release.py").read_text(encoding="utf-8")
     assert '"trends/index.html"' in build
     assert '"trends/trends.js"' in build
-    for rel in ("index.html", "frontier/quick/index.html", "priorities/index.html", "shocks/index.html"):
+    for rel in ("index.html", "radar/index.html", "frontier/quick/index.html", "priorities/index.html", "shocks/index.html"):
         text = (ROOT / rel).read_text(encoding="utf-8")
         assert "Trends" in text
-    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    home = (ROOT / "radar/index.html").read_text(encoding="utf-8")
     assert "1</span><strong>Radar" in home
     assert "3</span><strong>Trends" in home
     assert "5</span><strong>External shocks" in home

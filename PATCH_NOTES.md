@@ -1,3 +1,13 @@
+# v17.20.19
+
+- Added **What matters now** as the landing page: a plain-language current picture drawn dynamically from the live Radar evidence.
+- The landing page shows up to eight well-supported issues, each with a short explanation, a plain **Why it matters**, and a **Read more** section with live supporting sources.
+- Moved the full three-strand evidence reader to **/radar/** and added a large **THE MAIN RADAR** link on the landing page.
+- Added a clear page directory from the landing page to Read at least this, Matrix, Trends vs. countertrend competition, Risks & opportunities, External shocks, Historical, Sources, Glossary and Stuff.
+- Updated reader navigation so **What matters now** and **Main Radar** are distinct destinations; Radar query links now open the separate Main Radar page.
+- Kept scanner-first operation: scheduled scans run the scanner-critical regression suite rather than the complete reader/UI suite before evidence gathering.
+- No A/B/C admission or retrieval logic was loosened by this reader change; the scanner remains the primary evidence engine.
+
 # v17.20.18
 
 - External-shock inference is no longer capped by the fixed 4 direct + 10 reasoned scenario library. The scanner now maintains a persistent cross-evidence **emergent shock registry**.

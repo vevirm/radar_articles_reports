@@ -22,7 +22,7 @@ if(R.scoreFor(dual)<=R.scoreFor(generic)) process.exit(5);
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 
     def test_main_radar_shows_score_and_core_path(self):
-        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        html = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")
         self.assertIn("reader_rank.js", html)
         self.assertIn("rankBadge(x)", html)
         self.assertIn("Reader rank ${n}/100", html)

@@ -23,5 +23,6 @@ def test_shock_page_has_dynamic_shock_list_for_realised_and_inferred_shocks():
     assert "<h2>Shock list</h2>" in page
     assert "direct.forEach" in page
     assert "scenarios.forEach" in page
-    assert "scenarioFresh" in page
+    assert "dynamic.forEach" in page
+    assert "updatedThisScan" in page
     assert "new_this_scan" in page
