@@ -45,7 +45,7 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
         reader_files = [
             'index.html', 'read/index.html', 'briefing/index.html', 'literature/index.html',
             'frontier/index.html', 'frontier/quick/index.html', 'priorities/index.html',
-            'shocks/index.html', 'shocks/variants.html', 'historical/index.html',
+            'shocks/variants.html', 'historical/index.html',
         ]
         for rel in reader_files:
             with self.subTest(rel=rel):
@@ -53,6 +53,14 @@ class LivePagesAndEvidenceTests(unittest.TestCase):
                 self.assertNotIn('source_merit.js', text)
                 self.assertNotIn('RadarSourceMerit', text)
                 self.assertNotIn('merit-badge', text)
+        # The one-shot shock experiment may read the audit score solely to assign
+        # event/surface/mechanism source roles. It must not use it to rank shocks.
+        shocks=(ROOT / 'shocks' / 'index.html').read_text(encoding='utf-8')
+        toy=(ROOT / 'shocks' / 'toy.js').read_text(encoding='utf-8')
+        self.assertIn('source_merit.js', shocks)
+        self.assertIn('score assigns source roles only; it does not rank shocks', shocks)
+        self.assertNotIn('.compare(', toy)
+        self.assertNotIn('sort((a,b)=>score', toy)
         stuff=(ROOT / 'stuff' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('source_merit.js', stuff)
         self.assertIn('source_merit_ranking.xlsx', stuff)

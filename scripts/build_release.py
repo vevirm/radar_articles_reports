@@ -42,6 +42,7 @@ SITE_FILES = [
     "trends/trends.js",
     "shocks/index.html",
     "shocks/scenarios.js",
+    "shocks/toy.js",
     "shocks/variants.html",
     "shocks/variants.js",
     "literature/index.html",

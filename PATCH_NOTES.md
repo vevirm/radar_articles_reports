@@ -1,3 +1,12 @@
+# v17.20.24
+
+- Added an experimental **one-shot shock hypothesis** button at the top of External Shocks. It is reader-side only: nothing is written to `radar.json`, scanner state, local storage or session storage, and pressing again replaces the previous result.
+- The constructor follows the curator method rather than ranking shocks: it starts from a random low-score outside event, uses a 93–100 EU source only to define the European commitment/capability, and uses a 75–92 peer-reviewed/policy source for the explanatory mechanism. The Stuff/source-merit score assigns source roles only.
+- Added conservative structural routes currently supported by the corpus: research-information/indicator dependence, foreign restrictions reaching research organisations, lab-specific substitute blind spots, partner-country funding shocks, external talent pull, and quantum subsidy/supplier competition. Internal route names are never shown to readers.
+- Every displayed hypothesis uses three different sources, keeps the event in the low-score source, limits the path to four steps, rejects the familiar framing vocabulary in the shock sentence, checks that no retained row substantially states the constructed sentence, and always labels the result as constructed/not admitted/not retained.
+- Duplicate titles count once and repeated extracted core-message text is ignored defensively. Weak/current-event sources can carry the event but cannot supply the explanation. After at most five failed constructions the toy shows the failed check instead of padding.
+- The existing realised, emergent, direct and reasoned shock machinery is unchanged. Main Radar discovery/admission and all rotation cursors are unchanged.
+
 # v17.20.23
 
 - Main Radar recall recovery remains narrowly focused on **European/EU research & innovation in geopolitical context**; no shock-generator/toy feature was added.
