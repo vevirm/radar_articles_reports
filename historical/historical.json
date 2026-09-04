@@ -2,8 +2,8 @@
   "profile_version": "v17.20.8-cumulative-history",
   "last_updated": "2026-09-03T11:23:33Z",
   "date_from": "2015-01-01",
-  "date_to": "2026-03-02",
-  "cutoff_exclusive": "2026-03-03",
+  "date_to": "2026-03-03",
+  "cutoff_exclusive": "2026-03-04",
   "main_radar_window_months": 6,
   "scope_note": "Separate, cumulative source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff. Once historical evidence is accepted, normal scans keep it; current admission gates apply only to newly discovered material. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
   "ranking_note": "Every run searches the eligible period from 2015-01-01 through 2026-03-02. Topic families rotate; years do not. Reader/corpus ordering is chronological after admission; source quality is used only by the upstream evidence gate and duplicate resolution.",
@@ -4811,5 +4811,9 @@
       "No usable topic sitemap results: chathamhouse.org",
       "No usable topic sitemap results: isi.fraunhofer.de"
     ]
+  },
+  "workflow_compatibility": {
+    "peer_deferred_without_source_requests": true,
+    "peer_deferred_at": "2026-09-04T08:52:05Z"
   }
 }
