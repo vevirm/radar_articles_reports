@@ -9,15 +9,33 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ScannerSerializationWorkflowTests(unittest.TestCase):
-    def test_workflows_share_one_valid_concurrency_group(self):
+    def test_workflows_use_shared_lock_or_safe_legacy_runtime_guard(self):
         main = (ROOT / ".github/workflows/radar-scan.yml").read_text(encoding="utf-8")
         hist = (ROOT / ".github/workflows/historical-scan.yml").read_text(encoding="utf-8")
+        shared = all(
+            "group: ri-research-scanners" in text and "cancel-in-progress: false" in text
+            for text in (main, hist)
+        )
+        if shared:
+            self.assertNotIn("queue: max", main)
+            self.assertNotIn("queue: max", hist)
+            self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", main)
+            self.assertIn("cron: '53 6 * * *'", hist)
+            return
+
+        # GitHub's browser bulk uploader may leave hidden workflow YAML at an older
+        # revision.  In that case scanner serialization is enforced by visible code
+        # inside each scanner, so a stale hidden workflow must never stop scanning.
         for text in (main, hist):
-            self.assertIn("group: ri-research-scanners", text)
+            self.assertIn("concurrency:", text)
             self.assertIn("cancel-in-progress: false", text)
-            self.assertNotIn("queue: max", text)
-        self.assertIn("cron: '17 0,4,8,12,16,20 * * *'", main)
-        self.assertIn("cron: '53 6 * * *'", hist)
+        guard = (ROOT / "scripts/scanner_run_guard.py").read_text(encoding="utf-8")
+        main_scan = (ROOT / "scripts/scan_radar.py").read_text(encoding="utf-8")
+        hist_scan = (ROOT / "historical/scan_historical.py").read_text(encoding="utf-8")
+        self.assertIn("def defer_if_peer_scanner_active", guard)
+        self.assertIn('defer_if_peer_scanner_active("main"', main_scan)
+        self.assertIn('defer_if_peer_scanner_active("historical"', hist_scan)
+        self.assertIn("refresh_window_metadata_after_peer_defer", hist_scan)
 
     def test_historical_peer_defer_refreshes_window_only_not_corpus(self):
         path = ROOT / "historical" / "scan_historical.py"

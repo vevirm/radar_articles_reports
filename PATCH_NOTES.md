@@ -1,3 +1,10 @@
+# v17.20.21
+
+- Prevent stale hidden GitHub workflow YAML from blocking the main scanner regression step.
+- Scanner-serialization tests now accept either the current shared concurrency lock or the visible runtime guard used when GitHub browser upload leaves `.github/workflows` unchanged.
+- Main and Historical scanners still use `scanner_run_guard.py` as a runtime backstop, so legacy workflows defer the later scanner before source requests instead of colliding.
+- Historical peer-defer remains non-destructive and cumulative.
+
 # v17.20.20
 
 - Fixed Main/Historical scanner coordination: both shipped GitHub Actions workflows now use the same repository-level `ri-research-scanners` concurrency group with `cancel-in-progress: false`, so they queue instead of running source retrieval at the same time.
