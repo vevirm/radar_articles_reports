@@ -3521,7 +3521,7 @@ def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'g
     return False, 'eu_or_ri_only_incidental', []
 
 
-SOFT_EU_RI_CENTRALITY_REASONS = {'ri_not_central'}
+SOFT_EU_RI_CENTRALITY_REASONS = {'ri_not_central', 'eu_or_ri_only_incidental'}
 
 def source_supported_eu_ri_centrality_rescue(
     title: str, abstract: str, body: str, centrality_reason: str
@@ -3566,7 +3566,30 @@ def source_supported_eu_ri_centrality_rescue(
             scope_hits.extend(hits)
 
     if not scope_hits:
-        return False, centrality_reason, []
+        # Recall repair for genuine EU-R&I geopolitics whose extraction separates the
+        # European scope sentence from the R&I finding.  This route is deliberately
+        # unavailable to generic EU-R&I material: it requires source-backed strategic
+        # context (explicit geopolitics/economic-security language or a conservative
+        # multi-family implied mechanism) before body/lead scope can rescue centrality.
+        strategic_probe = clean_text(f"{title}. {abstract}. {body_lead}")
+        implied_ok, implied_families, implied_terms = implied_strategic_context(strategic_probe)
+        explicit_geo = _geo_hits(strategic_probe)
+        soft_ok, soft_bridge, soft_terms = _soft_contextual_bridge(strategic_probe)
+        if not (explicit_geo or implied_ok or soft_ok):
+            return False, centrality_reason, []
+        for sent in split_sentences(clean_text(f"{abstract}. {body_lead}")):
+            hits = _scope_hits_in_sentence(sent, document)
+            if hits and not _incidental_eu_scope_sentence(sent):
+                low = normalized(sent)
+                if any(x in low for x in [
+                    'publications office of the european union', 'joint research centre publications repository',
+                    'publications repository', 'this document is only visible at the commission level',
+                ]) and not _study_scope_sentence(sent):
+                    continue
+                scope_hits.extend(hits)
+                break
+        if not scope_hits:
+            return False, centrality_reason, []
 
     # Reuse the main R&I extractor instead of maintaining a second narrower vocabulary,
     # but preserve the centrality guard's sentence-level incidental filters. Programme
@@ -3581,7 +3604,12 @@ def source_supported_eu_ri_centrality_rescue(
     if not ri_hits:
         return False, centrality_reason, []
 
-    return True, 'source_supported_eu_ri_bridge', list(dict.fromkeys(scope_hits + ri_hits))[:8]
+    strategic_probe = clean_text(f"{title}. {abstract}. {body_lead}")
+    implied_ok, implied_families, implied_terms = implied_strategic_context(strategic_probe)
+    geo_hits = _geo_hits(strategic_probe)
+    soft_ok, _soft_bridge, soft_terms = _soft_contextual_bridge(strategic_probe)
+    strategic_evidence = list(dict.fromkeys(geo_hits + implied_families + implied_terms + soft_terms))[:4]
+    return True, 'source_supported_eu_ri_geopolitical_bridge', list(dict.fromkeys(scope_hits + ri_hits + strategic_evidence))[:8]
 
 
 def _major_a_focus(text: str, explicit_geo: bool) -> bool:
@@ -5134,6 +5162,46 @@ FINDING_CONTEXT_QUERY_MAP = {
         'EU scientific talent brain drain research capability',
     ],
 }
+
+def curator_seed_query_bank(limit: int = 16) -> list[str]:
+    """Turn curator-supplied known-good examples into a discovery lane.
+
+    The examples are *not* admission waivers.  They only teach discovery which
+    geopolitical mechanisms and R&I neighbourhoods deserve extra search attention;
+    every returned record still faces the ordinary source, EU-scope and substantive
+    R&I gates.  This closes the old gap where exact curator examples were merely
+    retested one-by-one without helping the scanner find adjacent publications.
+    """
+    batch = load_curator_candidate_tests()
+    candidates = batch.get('candidates', []) if isinstance(batch, dict) else []
+    queries: list[str] = []
+    seen_themes: list[str] = []
+    for entry in candidates if isinstance(candidates, list) else []:
+        if not isinstance(entry, dict):
+            continue
+        blob = clean_text(f"{entry.get('title','')}. {entry.get('curator_note','')}")
+        for theme in themes_for(blob):
+            if theme in seen_themes:
+                continue
+            seen_themes.append(theme)
+            mapped = FINDING_CONTEXT_QUERY_MAP.get(theme, [])
+            if mapped:
+                queries.extend(mapped)
+        # Notes often contain the useful strategic mechanism even when the title is
+        # intentionally terse.  Add one conservative Europe+R&I formulation rather
+        # than copying the full example title as a near-duplicate search.
+        note = clean_text(entry.get('curator_note'))
+        note_terms = []
+        for family, terms in A_IMPLIED_STRATEGIC_FAMILIES.items():
+            hits = distinct_matches(note, terms)
+            if hits:
+                note_terms.extend(hits[:1])
+        if note_terms:
+            queries.append('Europe research innovation ' + ' '.join(note_terms[:3]))
+        if len(queries) >= max(1, int(limit or 0)) * 2:
+            break
+    return list(dict.fromkeys(q for q in queries if clean_text(q)))[:max(0, int(limit or 0))]
+
 
 def finding_context_query_bank(previous: dict[str, Any], limit: int = 12) -> list[str]:
     """Turn recurring live findings into a small rotating discovery lane.
@@ -7257,53 +7325,88 @@ def collect_crossref(
         return dedupe_candidates(combined + deep), None
 
     def fetch_source_journal(journal: str) -> tuple[list[dict[str, Any]], str | None]:
+        """Inspect newest journal contents plus a persisted deeper page when needed.
+
+        The previous source-first census always stopped at the newest N records.  That is
+        adequate for low-output journals but systematically misses relevant four-month-old
+        work in Nature/Science and other high-output venues.  A full first page therefore
+        triggers one rotating deeper page, while the same ordinary admission gate remains.
+        """
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
         with execution_lock:
             executed_source_journals.add(journal)
-        params = {
-            "query.container-title": journal,
-            "filter": f"from-pub-date:{DATE_FLOOR.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
-            "rows": int(CONFIG.get("crossref_source_first_rows", 60)),
-            "sort": "published", "order": "desc",
-            "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
-        }
-        for attempt in range(retries + 1):
-            wait_for_slot()
-            try:
-                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
-                if r.status_code == 200:
-                    works = r.json().get("message", {}).get("items", [])
-                    _diag_inc("crossref_raw_records", len(works))
-                    # query.container-title is fuzzy; retain only the requested venue or a close punctuation variant.
-                    target = re.sub(r'[^a-z0-9]+', '', normalized(journal))
-                    exact = []
-                    for w in works:
-                        actual = clean_text((w.get("container-title") or [""])[0])
-                        canon = re.sub(r'[^a-z0-9]+', '', normalized(actual))
-                        if actual and (canon == target or canon.replace('and','') == target.replace('and','')):
-                            exact.append(w)
-                    return convert_items(exact, DATE_FLOOR, "source-first recent contents", journal), None
-                if r.status_code == 429:
+        source_rows = int(CONFIG.get("crossref_source_first_rows", 60))
+        source_depth_max = max(1, int(CONFIG.get("crossref_source_first_depth_pages_max", 4) or 1))
+        key = f"source-first::{journal}"
+
+        def request_source_page(offset: int) -> tuple[list[dict[str, Any]], str | None, int]:
+            params = {
+                "query.container-title": journal,
+                "filter": f"from-pub-date:{DATE_FLOOR.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
+                "rows": source_rows,
+                "offset": max(0, int(offset)),
+                "sort": "published", "order": "desc",
+                "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
+            }
+            for attempt in range(retries + 1):
+                if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+                    return [], "budget", 0
+                wait_for_slot()
+                try:
+                    r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                    if r.status_code == 200:
+                        works = r.json().get("message", {}).get("items", [])
+                        _diag_inc("crossref_raw_records", len(works))
+                        target = re.sub(r'[^a-z0-9]+', '', normalized(journal))
+                        exact = []
+                        for w in works:
+                            actual = clean_text((w.get("container-title") or [""])[0])
+                            canon = re.sub(r'[^a-z0-9]+', '', normalized(actual))
+                            if actual and (canon == target or canon.replace('and','') == target.replace('and','')):
+                                exact.append(w)
+                        return exact, None, len(works)
+                    if r.status_code == 429:
+                        if attempt < retries:
+                            retry_after = clean_text(r.headers.get("Retry-After"))
+                            try:
+                                base = float(CONFIG.get("public_429_cooldown_seconds", 8) or 8)
+                                cap = float(CONFIG.get("public_429_max_cooldown_seconds", 30) or 30)
+                                delay = min(cap, max(base * (attempt + 1), float(retry_after))) if retry_after else min(cap, base * (attempt + 1))
+                            except Exception:
+                                delay = min(30.0, 8.0 * (attempt + 1))
+                            time.sleep(delay)
+                            continue
+                        return [], "HTTP 429 rate limited after cooldown retries", 0
+                    if r.status_code in {500, 502, 503, 504} and attempt < retries:
+                        time.sleep(min(8.0, 1.5 * (attempt + 1))); continue
+                    return [], f"HTTP {r.status_code}", 0
+                except Exception as e:
                     if attempt < retries:
-                        retry_after = clean_text(r.headers.get("Retry-After"))
-                        try:
-                            base = float(CONFIG.get("public_429_cooldown_seconds", 8) or 8)
-                            cap = float(CONFIG.get("public_429_max_cooldown_seconds", 30) or 30)
-                            delay = min(cap, max(base * (attempt + 1), float(retry_after))) if retry_after else min(cap, base * (attempt + 1))
-                        except Exception:
-                            delay = min(30.0, 8.0 * (attempt + 1))
-                        time.sleep(delay)
-                        continue
-                    return [], "HTTP 429 rate limited after cooldown retries"
-                if r.status_code in {500, 502, 503, 504} and attempt < retries:
-                    time.sleep(min(8.0, 1.5 * (attempt + 1))); continue
-                return [], f"HTTP {r.status_code}"
-            except Exception as e:
-                if attempt < retries:
-                    time.sleep(min(6.0, 1.5 * (attempt + 1))); continue
-                return [], type(e).__name__
-        return [], "request failed"
+                        time.sleep(min(6.0, 1.5 * (attempt + 1))); continue
+                    return [], type(e).__name__, 0
+            return [], "request failed", 0
+
+        newest, err, raw_count = request_source_page(0)
+        if err:
+            return convert_items(newest, DATE_FLOOR, "source-first recent contents", journal), err
+        combined = list(newest)
+        # Only high-output journals need depth. One extra page per scan prevents the
+        # source census from doubling its request count for the long tail of journals.
+        if source_depth_max > 1 and raw_count >= source_rows and not stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            page = max(2, int(priority_depth_state.get(key, 2) or 2))
+            if page > source_depth_max:
+                page = 2
+            deep, deep_err, deep_raw_count = request_source_page((page - 1) * source_rows)
+            if deep_err == "budget":
+                return convert_items(combined, DATE_FLOOR, "source-first recent contents", journal), deep_err
+            if deep_err:
+                return convert_items(combined, DATE_FLOOR, "source-first recent contents", journal), deep_err
+            combined.extend(deep)
+            priority_depth_state[key] = 2 if deep_raw_count < source_rows or page >= source_depth_max else page + 1
+            if isinstance(execution_stats, dict):
+                execution_stats["crossref_source_depth_pages"] = int(execution_stats.get("crossref_source_depth_pages", 0) or 0) + 1
+        return convert_items(combined, DATE_FLOOR, "source-first recent contents", journal), None
 
     out: list[dict[str, Any]] = []
     budget_hit = False
@@ -12710,6 +12813,18 @@ def main() -> int:
         max(0, int(CONFIG.get("finding_context_queries_per_scan", 4) or 0)),
     )
 
+    # Curator examples now teach discovery rather than serving only as exact-item tests.
+    # This lane rotates independently so a small set of known-good papers/reports can
+    # continuously seed adjacent EU-R&I-geopolitics searches without monopolising the run.
+    curator_seed_bank = curator_seed_query_bank(
+        max(1, int(CONFIG.get("curator_seed_query_bank_size", 16) or 16))
+    )
+    curator_seed_cursor_before = int(state.get("curator_seed_cursor", 0) or 0)
+    curator_seed_focus, _cs_next, _cs_wrapped = rotating_batch(
+        curator_seed_bank, curator_seed_cursor_before,
+        max(0, int(CONFIG.get("curator_seed_queries_per_scan", 6) or 0)),
+    )
+
     # Guarantee a real broad rotation in the *executed prefix*. Earlier builds appended
     # base/exploration work after up to 32 Matrix-gap + 12 method queries, then truncated
     # the queue. Under ordinary stage deadlines this produced runs reporting a wide plan
@@ -12727,10 +12842,10 @@ def main() -> int:
         all_queries, cr_broad_cursor_before, cr_base_cap
     )
     oa_batch = interleaved_unique_batch(
-        oa_cap, strategic_scholarly_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
+        oa_cap, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     cr_batch = interleaved_unique_batch(
-        cr_cap, strategic_scholarly_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
+        cr_cap, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
@@ -12741,6 +12856,11 @@ def main() -> int:
         cr_query_dates[q] = DATE_FLOOR
         oa_depth_lanes[q] = "finding-context"
         cr_depth_lanes[q] = "finding-context"
+    for q in curator_seed_focus:
+        oa_query_dates[q] = DATE_FLOOR
+        cr_query_dates[q] = DATE_FLOOR
+        oa_depth_lanes[q] = "curator-seed"
+        cr_depth_lanes[q] = "curator-seed"
     for q in oa_explore:
         oa_query_dates[q] = DATE_FLOOR
         oa_depth_lanes[q] = "explore"
@@ -13131,6 +13251,9 @@ def main() -> int:
     )
     state["finding_context_cursor"], finding_context_wrapped, finding_context_executed = committed_rotation_cursor(
         finding_context_bank, finding_context_cursor_before, finding_context_focus, method_executed
+    )
+    state["curator_seed_cursor"], curator_seed_wrapped, curator_seed_executed = committed_rotation_cursor(
+        curator_seed_bank, curator_seed_cursor_before, curator_seed_focus, method_executed
     )
     state["openalex_explore_cursor"], _oa_explore_wrapped, oa_explore_executed = committed_rotation_cursor(
         explore_bank, oa_explore_cursor_before, oa_explore, executed_oa

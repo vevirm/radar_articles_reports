@@ -1,3 +1,14 @@
+# v17.20.22
+
+- Fixed low recall in the Main Radar while preserving its core focus: **European/EU research & innovation in geopolitical context**.
+- Added a conservative centrality-recall bridge for sources where EU scope, R&I substance and geopolitical mechanisms are clearly source-backed but appear in separated sentences/sections. Generic EU R&I policy material does not receive this rescue.
+- Curator-supplied known-good examples now seed a small rotating adjacent-discovery lane instead of being used only as exact-item regression/recovery checks. Curator examples never bypass admission.
+- Crossref source-first journal discovery now checks the newest page plus one persisted deeper page for high-output journals, preventing relevant four-month-window articles from being permanently hidden behind the newest 100 records.
+- Increased institutional page depth from 10 to 14 pages per domain, expanded adapter coverage to all configured adapters per run, and increased the global institutional page budget while keeping breadth-first allocation.
+- Increased ranked Crossref missing-abstract recovery so promising EU-R&I-geopolitics records are less likely to be discarded only because Crossref omitted an abstract.
+- Bumped the discovery expansion marker so the new recall logic gets a fresh rolling-window catch-up rather than relying only on old scan-state assumptions.
+- Added regression tests proving that separated EU/R&I evidence is rescued only when genuine geopolitical/strategic context is present.
+
 # v17.20.21
 
 - Prevent stale hidden GitHub workflow YAML from blocking the main scanner regression step.
