@@ -274,9 +274,9 @@ RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.32-cit
 CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_version", "v17.13.32-shared-reference-forward-snowball"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
-A_RECALL_RECOVERY_VERSION = "v17.19.17-source-supported-eu-ri-centrality-recheck"
+A_RECALL_RECOVERY_VERSION = "v17.20.23-document-level-eu-ri-geopolitics-recheck"
 WINDOW_POLICY_VERSION = "v17.19.9-cumulative-ab-c60d-from-first-seen"
-A_RECALL_RECOVERY_SOURCES_PER_SCAN = 12
+A_RECALL_RECOVERY_SOURCES_PER_SCAN = 24
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
 RULE_FIX_SOURCE_RECOVERY_MAX_PAGES = 330
@@ -3523,93 +3523,133 @@ def eu_ri_centrality(title: str, abstract: str, body: str, source_kind: str = 'g
 
 SOFT_EU_RI_CENTRALITY_REASONS = {'ri_not_central', 'eu_or_ri_only_incidental'}
 
+def _nonincidental_scope_rows(text: str, document: str) -> list[tuple[str, list[str]]]:
+    """Return document-scope Europe/EU sentences, excluding provenance/comparator noise."""
+    rows: list[tuple[str, list[str]]] = []
+    for sent in split_sentences(text):
+        hits = _scope_hits_in_sentence(sent, document)
+        if not hits or _incidental_eu_scope_sentence(sent):
+            continue
+        low = normalized(sent)
+        if any(x in low for x in [
+            'publications office of the european union', 'joint research centre publications repository',
+            'publications repository', 'this document is only visible at the commission level',
+        ]) and not _study_scope_sentence(sent):
+            continue
+        rows.append((sent, hits))
+    return rows
+
+
+def _nonincidental_ri_rows(text: str) -> list[tuple[str, list[str]]]:
+    """Return substantive R&I sentences while excluding acknowledgements/provenance."""
+    rows: list[tuple[str, list[str]]] = []
+    for sent in split_sentences(text):
+        if any(re.search(pat, normalized(sent), re.I) for pat in A_RI_INCIDENTAL_PATTERNS):
+            continue
+        hits = _ri_hits(sent)
+        if hits:
+            rows.append((sent, hits))
+    return rows
+
+
 def source_supported_eu_ri_centrality_rescue(
     title: str, abstract: str, body: str, centrality_reason: str
 ) -> tuple[bool, str, list[str]]:
-    """Recover direct-EU R&I sources rejected only by duplicate centrality vocabulary.
+    """Recover genuine EU-R&I-geopolitics sources from an over-literal centrality gate.
 
-    This is not a keyword waiver. The ordinary A-focus and source-length-aware aboutness
-    gates must already pass before gate_scope calls this helper. Europe/EU must also be
-    visible in the title, or an R&I-centred title must have an explicit European study-scope
-    sentence in the abstract; a body-only Europe mention
-    cannot trigger the rescue. Hard centrality exclusions (awards/events, local applied
-    studies, historical-only work and contaminated navigation pages) never use this route.
+    The ordinary gate has already established direct European/EU scope, substantive R&I
+    focus and sufficient source text before this helper is called.  This repair therefore
+    asks a narrower question: is Europe/EU actually part of the document's subject, rather
+    than merely a comparator/provenance mention?  It deliberately allows the European scope,
+    R&I mechanism and geopolitical mechanism to sit in different sentences or sections.
+
+    A soft centrality failure is rescued only when all three are source-backed:
+      * non-incidental European/EU document scope;
+      * substantive R&I evidence; and
+      * a real geopolitical/strategic mechanism (explicit or conservatively implied).
+
+    Hard exclusions still never reach this helper.
     """
     if clean_text(centrality_reason) not in SOFT_EU_RI_CENTRALITY_REASONS:
         return False, centrality_reason, []
 
     title = clean_text(title)
     abstract = _strip_relevance_boilerplate(abstract)
-    body_lead = _strip_relevance_boilerplate(body[:4000])
+    # Centrality needs the executive lead, not the whole scraped page/nav tail.  Twelve
+    # thousand characters is enough to span separated report sections while remaining
+    # conservative against unrelated references deep in a long document.
+    body_lead = _strip_relevance_boilerplate(body[:12000])
     document = clean_text(f"{title}. {abstract}. {body_lead}")
 
-    scope_hits: list[str] = []
-    title_scope = _scope_hits_in_sentence(title, document)
-    if title_scope and not _incidental_eu_scope_sentence(title):
-        scope_hits.extend(title_scope)
-
-    # If Europe/EU is not in the title, the abstract must explicitly state that the study
-    # examines a European population/system. A generic background/comparator mention is not
-    # enough. This keeps US-/China-centred global papers from being promoted merely because
-    # one sentence lists the EU among several economies.
-    if not scope_hits and _ri_hits(title):
-        for sent in split_sentences(abstract):
-            hits = _scope_hits_in_sentence(sent, document)
-            if not hits or _incidental_eu_scope_sentence(sent) or not _study_scope_sentence(sent):
-                continue
-            low = normalized(sent)
-            if any(x in low for x in [
-                'publications office of the european union', 'joint research centre publications repository',
-                'publications repository', 'this document is only visible at the commission level',
-            ]):
-                continue
-            scope_hits.extend(hits)
-
-    if not scope_hits:
-        # Recall repair for genuine EU-R&I geopolitics whose extraction separates the
-        # European scope sentence from the R&I finding.  This route is deliberately
-        # unavailable to generic EU-R&I material: it requires source-backed strategic
-        # context (explicit geopolitics/economic-security language or a conservative
-        # multi-family implied mechanism) before body/lead scope can rescue centrality.
-        strategic_probe = clean_text(f"{title}. {abstract}. {body_lead}")
-        implied_ok, implied_families, implied_terms = implied_strategic_context(strategic_probe)
-        explicit_geo = _geo_hits(strategic_probe)
-        soft_ok, soft_bridge, soft_terms = _soft_contextual_bridge(strategic_probe)
-        if not (explicit_geo or implied_ok or soft_ok):
-            return False, centrality_reason, []
-        for sent in split_sentences(clean_text(f"{abstract}. {body_lead}")):
-            hits = _scope_hits_in_sentence(sent, document)
-            if hits and not _incidental_eu_scope_sentence(sent):
-                low = normalized(sent)
-                if any(x in low for x in [
-                    'publications office of the european union', 'joint research centre publications repository',
-                    'publications repository', 'this document is only visible at the commission level',
-                ]) and not _study_scope_sentence(sent):
-                    continue
-                scope_hits.extend(hits)
-                break
-        if not scope_hits:
-            return False, centrality_reason, []
-
-    # Reuse the main R&I extractor instead of maintaining a second narrower vocabulary,
-    # but preserve the centrality guard's sentence-level incidental filters. Programme
-    # provenance, funding acknowledgements and R&D-as-a-covariate must not be rescued.
-    ri_hits: list[str] = []
+    # The rescue is specifically for the radar's EU-R&I-in-geopolitics purpose.  Generic
+    # Europe+innovation material rejected by centrality is not promoted simply to increase
+    # yield.  Strategic context can be literal (economic security/export controls/etc.) or
+    # a conservative multi-family mechanism such as dependence + capability competition.
+    implied_ok, implied_families, implied_terms = implied_strategic_context(document)
+    geo_hits = _geo_hits(document)
+    soft_ok, soft_bridge, soft_terms = _soft_contextual_bridge(document)
+    relational_geo = False
+    relational_sentence = ''
     for sent in split_sentences(document):
-        if any(re.search(pat, normalized(sent), re.I) for pat in A_RI_INCIDENTAL_PATTERNS):
-            continue
-        for hit in _ri_hits(sent):
-            if hit not in ri_hits:
-                ri_hits.append(hit)
-    if not ri_hits:
+        if distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME):
+            relational_geo = True
+            relational_sentence = sent[:300]
+            break
+    if not (geo_hits or implied_ok or soft_ok or relational_geo):
         return False, centrality_reason, []
 
-    strategic_probe = clean_text(f"{title}. {abstract}. {body_lead}")
-    implied_ok, implied_families, implied_terms = implied_strategic_context(strategic_probe)
-    geo_hits = _geo_hits(strategic_probe)
-    soft_ok, _soft_bridge, soft_terms = _soft_contextual_bridge(strategic_probe)
-    strategic_evidence = list(dict.fromkeys(geo_hits + implied_families + implied_terms + soft_terms))[:4]
-    return True, 'source_supported_eu_ri_geopolitical_bridge', list(dict.fromkeys(scope_hits + ri_hits + strategic_evidence))[:8]
+    title_scope = _scope_hits_in_sentence(title, document)
+    if title_scope and _incidental_eu_scope_sentence(title):
+        title_scope = []
+    scope_rows = _nonincidental_scope_rows(clean_text(f"{abstract}. {body_lead}"), document)
+
+    # One scope sentence is sufficient when it explicitly states the study/report scope or
+    # directly carries the strategic mechanism.  Otherwise require repeated scope so a
+    # background/comparator reference cannot rescue a China/US-centred paper.
+    scope_strong = bool(title_scope)
+    if not scope_strong:
+        for sent, _hits in scope_rows:
+            if _study_scope_sentence(sent):
+                scope_strong = True
+                break
+            sent_implied, _, _ = implied_strategic_context(sent)
+            if _geo_hits(sent) or sent_implied or (
+                distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME)
+            ):
+                scope_strong = True
+                break
+    if not scope_strong and len(scope_rows) >= 2:
+        scope_strong = True
+    if not scope_strong:
+        return False, centrality_reason, []
+
+    title_ri = _ri_hits(title)
+    ri_rows = _nonincidental_ri_rows(clean_text(f"{abstract}. {body_lead}"))
+    ri_terms = list(dict.fromkeys(title_ri + [h for _sent, hits in ri_rows for h in hits]))
+
+    # R&I can be distributed across an abstract/report. A strong R&I title, repeated R&I
+    # sentences, two distinct substantive R&I mechanisms, or one R&I sentence carrying the
+    # strategic mechanism is enough. This avoids the previous near-adjacency requirement.
+    ri_strong = bool(title_ri) or len(ri_rows) >= 2 or len(ri_terms) >= 2
+    if not ri_strong:
+        for sent, _hits in ri_rows:
+            sent_implied, _, _ = implied_strategic_context(sent)
+            if _geo_hits(sent) or sent_implied or (
+                distinct_matches(sent, A_EXTERNAL_RELATION) and distinct_matches(sent, A_STRATEGIC_RI_OUTCOME)
+            ):
+                ri_strong = True
+                break
+    if not ri_strong:
+        return False, centrality_reason, []
+
+    scope_evidence = list(title_scope)
+    for _sent, hits in scope_rows[:2]:
+        scope_evidence.extend(hits)
+    strategic_evidence = list(dict.fromkeys(
+        geo_hits + implied_families + implied_terms + soft_terms + ([relational_sentence] if relational_sentence else [])
+    ))[:4]
+    evidence = list(dict.fromkeys(scope_evidence + ri_terms + strategic_evidence))[:8]
+    return True, 'document_level_eu_ri_geopolitical_bridge', evidence
 
 
 def _major_a_focus(text: str, explicit_geo: bool) -> bool:
@@ -4992,15 +5032,24 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         title, abstract, body, a_focus=a_focus, eu_rel=eu_rel, bridge=a_bridge,
         contextual_evidence=bool(a_context)
     )
-    # V17.20.12 recall repair: Crossref/OpenAlex often omit abstracts even for excellent
-    # recent papers. If a Tier-1/2 scholarly title itself establishes both European scope
-    # and substantive R&I, do not treat missing abstract text as negative evidence. This
-    # route is intentionally unavailable to broad/unlisted Tier-3 journals; those still
-    # need an abstract/full-text evidence unit. Reader ranking also pushes title-only rows
-    # below equally relevant records with richer evidence.
+    # High-recall metadata route: Crossref/OpenAlex often omit abstracts even for excellent
+    # recent papers. Tier-1/2 titles that themselves establish European scope + substantive
+    # R&I may proceed without an abstract. A trusted Tier-3 scholarly source may do so only
+    # when the title also contains a real geopolitical/strategic mechanism. Reader ranking
+    # still pushes title-only rows below equally relevant records with richer evidence.
+    title_probe = clean_text(title)
+    title_implied_geo, _, _ = implied_strategic_context(title_probe)
+    title_soft_geo, _, _ = _soft_contextual_bridge(title_probe)
+    title_geopolitics = bool(_geo_hits(title_probe) or title_implied_geo or title_soft_geo or (
+        distinct_matches(title_probe, A_EXTERNAL_RELATION) and distinct_matches(title_probe, A_STRATEGIC_RI_OUTCOME)
+    ))
+    metadata_title_quality_ok = (
+        int(source_tier or 9) <= 2
+        or (int(source_tier or 9) <= 3 and title_geopolitics)
+    )
     if (
         source_kind == 'scholarly'
-        and int(source_tier or 9) <= 2
+        and metadata_title_quality_ok
         and aboutness.get('reason') == 'insufficient_text'
         and eu_rel == 'direct'
         and a_focus
@@ -7958,6 +8007,64 @@ def _prominent_date_near_title(soup: BeautifulSoup, title: str) -> dt.date | Non
     return None
 
 
+
+def _semantic_publication_date(soup: BeautifulSoup, title: str = "") -> dt.date | None:
+    """Recover a visible/structured publication date from common institutional CMS markup.
+
+    Many policy institutes expose the publication date in a ``div/span`` class or an
+    embedded application-state JSON object rather than schema.org/standard meta tags.
+    Earlier scans rejected these pages as undated even though the date was visibly present.
+    This helper stays fail-closed: only publication-shaped attribute names/JSON keys are
+    inspected, and arbitrary dates from article prose are never used.
+    """
+    today = dt.datetime.now(dt.timezone.utc).date()
+
+    def valid(value: Any) -> dt.date | None:
+        d = parse_date(value)
+        if not d:
+            return None
+        if d < dt.date(2015, 1, 1) or d > today + dt.timedelta(days=1):
+            return None
+        return d
+
+    # Common CMS components: <span class="publication-date">, <div id="published">,
+    # data-published/date attributes, and microdata itemprop values.
+    attr_re = re.compile(r'(?:publish|publication|issued|release|posted|article[-_ ]?date|date[-_ ]?published)', re.I)
+    for tag in soup.find_all(True):
+        attrs = tag.attrs or {}
+        marker_parts: list[str] = []
+        for key in ('class', 'id', 'itemprop', 'property', 'name'):
+            value = attrs.get(key)
+            if isinstance(value, (list, tuple)):
+                marker_parts.extend(clean_text(x) for x in value)
+            elif value:
+                marker_parts.append(clean_text(value))
+        marker = ' '.join(x for x in marker_parts if x)
+        if not marker or not attr_re.search(marker):
+            continue
+        candidates = [
+            attrs.get('datetime'), attrs.get('content'), attrs.get('data-date'),
+            attrs.get('data-published'), attrs.get('data-publication-date'),
+            clean_text(tag.get_text(' ', strip=True))[:180],
+        ]
+        for value in candidates:
+            d = valid(value)
+            if d:
+                return d
+
+    # Application-state JSON commonly uses one of these explicit publication keys even
+    # when it is not JSON-LD. Search only the key/value pair, not arbitrary date strings.
+    raw = str(soup)[:2_500_000]
+    key_pattern = re.compile(
+        r'["\'](?:datePublished|publicationDate|publishedDate|publishedAt|firstPublished|dateIssued|releaseDate)["\']\s*:\s*["\']([^"\']{6,45})["\']',
+        re.I,
+    )
+    for match in key_pattern.finditer(raw):
+        d = valid(match.group(1))
+        if d:
+            return d
+    return None
+
 def _jrc_repository_publication_date(soup: BeautifulSoup, url: str) -> dt.date | None:
     """Return the bibliographic date visibly printed on a JRC repository handle page.
 
@@ -8186,6 +8293,10 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             published = parse_date(raw_time)
             if published:
                 break
+    if not published:
+        published = _semantic_publication_date(soup, title)
+        if published:
+            date_basis = "semantic_page_publication_date"
     if not published:
         published = _prominent_date_near_title(soup, title)
         if published:

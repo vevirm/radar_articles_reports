@@ -1,3 +1,17 @@
+# v17.20.23
+
+- Main Radar recall recovery remains narrowly focused on **European/EU research & innovation in geopolitical context**; no shock-generator/toy feature was added.
+- Reworked the soft EU-R&I centrality recovery so Europe/EU scope, substantive R&I evidence and the geopolitical mechanism may be supported in different sentences or report sections. The previous near-adjacency behaviour was a major false-negative source.
+- The new document-level bridge still fails generic EU innovation/administrative material: it requires explicit or conservatively implied geopolitical/geoeconomic, dependency, security, rules-power, international-position, talent or capability mechanisms.
+- Trusted Tier-3 peer-reviewed metadata can now survive a missing abstract only when the **title itself** establishes European scope + substantive R&I + geopolitical/strategic context. Generic title-only Tier-3 material remains deferred/rejected.
+- Added semantic institutional publication-date recovery for common CMS markup (`publication-date`, published/issued/release fields and publication-shaped application-state JSON), reducing false `no date` rejection without using arbitrary body dates or sitemap modification time as publication evidence.
+- When OpenAlex is rate-limited/unavailable, the replacement lane is now much larger and still rotates: up to 32 additional Crossref queries, 20 trusted journals and 24 institutional sources rather than a token fallback. The OpenAlex cursor is preserved for the next run.
+- Curator-known examples receive more recurring discovery attention: the rotating adjacent-query bank is expanded and 12 seeds are used per scan; exact manual-recovery throughput rises to 25 URLs per scan. These routes never bypass admission.
+- Crossref missing-abstract recovery is enlarged, including more recoveries per task.
+- Bumped only the source-expansion/backfill marker and the targeted A-recall version. The persistent main OpenAlex/Crossref/query rotation cursors are **not reset**.
+- Corrected the shipped GitHub Actions schedule to six real Main scans per day (every four hours) and restored the shared Main/Historical concurrency lock; the stale six-hour due gate is removed.
+- Added regression coverage for document-level EU-R&I-geopolitical evidence separation, Tier-3 title-only safeguards, CMS date recovery, stronger failure reallocation, curator rotation, and rotation-preserving backfill.
+
 # v17.20.22
 
 - Fixed low recall in the Main Radar while preserving its core focus: **European/EU research & innovation in geopolitical context**.

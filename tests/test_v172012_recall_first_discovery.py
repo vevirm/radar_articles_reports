@@ -41,15 +41,19 @@ class RecallFirstDiscoveryTests(unittest.TestCase):
         self.assertEqual(ev['text_mode'], 'metadata_only')
         self.assertEqual(ev['aboutness_reason'], 'metadata_title_high_recall')
 
-    def test_missing_abstract_is_not_a_waiver_for_low_tier_or_vague_title(self):
-        ev = scan.gate_scope(
+    def test_missing_abstract_tier3_requires_explicit_eu_ri_geopolitical_title(self):
+        explicit = scan.gate_scope(
             'European research security and innovation policy',
             '',
             '',
             3,
             source_kind='scholarly',
         )
-        self.assertFalse(ev['a_pass'])
+        self.assertTrue(explicit['a_pass'])
+        generic = scan.gate_scope(
+            'European research and innovation policy', '', '', 3, source_kind='scholarly'
+        )
+        self.assertFalse(generic['a_pass'])
         vague = scan.gate_scope('European policy perspectives', '', '', 1, source_kind='scholarly')
         self.assertFalse(vague['a_pass'])
 
