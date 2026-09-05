@@ -62,6 +62,22 @@ def _main_rescue_pending(root: Path) -> bool:
     return bool(results.get("full_rescue_run_recommended")) and mode != "full_low_yield_rescue"
 
 
+
+def deployment_only_push_event() -> bool:
+    """Return True for GitHub push/upload runs that must not perform discovery.
+
+    GitHub's browser bulk uploader can leave an older hidden workflow in place. Those
+    legacy workflows fire the research scanners on every repository push, so uploading a
+    release can otherwise look like a real scan, move timestamps/cursors, or race Main
+    against Historical. Scanner code therefore treats *push* as deployment-only even when
+    stale YAML still invokes the executable. Scheduled and workflow_dispatch runs remain
+    real discovery runs. Local/offline executions are unaffected.
+    """
+    if str(os.environ.get("GITHUB_ACTIONS") or "").strip().lower() != "true":
+        return False
+    raw = str(os.environ.get("RADAR_RUN_TRIGGER") or os.environ.get("GITHUB_EVENT_NAME") or "").strip().lower()
+    return raw == "push"
+
 def _historical_rescue_pending(root: Path) -> bool:
     doc = _recent(root / "historical" / "historical.json", "last_updated")
     if not doc:

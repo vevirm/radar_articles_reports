@@ -38,7 +38,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
-from scanner_run_guard import defer_if_peer_scanner_active
+from scanner_run_guard import defer_if_peer_scanner_active, deployment_only_push_event
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
 OUT_PATH = HIST_DIR / "historical.json"
@@ -1217,6 +1217,12 @@ def refresh_window_metadata_after_peer_defer() -> None:
 
 
 if __name__=="__main__":
+    if deployment_only_push_event():
+        log(
+            "Repository push/upload event: deployment-only. Historical discovery, "
+            "coverage cursors and timestamps are intentionally unchanged; scheduled/manual runs scan."
+        )
+        raise SystemExit(0)
     if defer_if_peer_scanner_active("historical", ROOT):
         refresh_window_metadata_after_peer_defer()
         raise SystemExit(0)

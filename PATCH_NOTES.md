@@ -1,3 +1,21 @@
+# v17.20.31 — repository uploads are not radar scans
+
+This release fixes the misleading short “Add files via upload” scanner runs. A repository
+push is now deployment-only at the scanner-code level, so even a stale hidden GitHub
+workflow cannot make a browser upload move discovery cursors/timestamps, compete for the
+scanner runtime slot, or masquerade as a completed evidence scan.
+
+- Main discovery runs only on the fixed four-hour schedule or explicit manual dispatch.
+- Historical discovery runs only on its daily schedule or explicit manual dispatch.
+- The shipped workflows no longer contain push triggers. GitHub Pages continues to deploy
+  branch changes independently.
+- A stale legacy workflow may still appear in Actions after browser uploads, but when it
+  invokes either scanner on `push`, visible scanner code exits before any source request and
+  without changing radar/historical state.
+- Scheduled/manual scans retain the v17.20.30 breadth-first scholarly allocation, protected
+  low-yield continuation reserve, strict EU R&I + geopolitical relevance gate, and all
+  persistent rotation cursors.
+
 # v17.20.30 — breadth-first scholarly rotation under real API limits
 
 - Diagnosed the latest saved zero-yield run from the downloaded live repository: the v17.20.29 low-yield reserve worked and ran three fresh continuation waves, but Crossref executed 41 source-first journals and 32 journal/query tasks before executing **0 of 110 broad rotating queries**; OpenAlex reached 54/100 queries before keyless HTTP 429.
