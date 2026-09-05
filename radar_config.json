@@ -1777,7 +1777,7 @@
     "global research talent competition scientists mobility funding",
     "academic mobility researchers global science policy"
   ],
-  "quality_profile_version": "v17.19.15-loader-cleanup-safety-contract",
+  "quality_profile_version": "v17.20.25-eu-ri-geopolitics-hard-final-gate",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -1982,7 +1982,7 @@
   "openalex_queries_per_scan": 100,
   "crossref_broad_queries_per_scan": 110,
   "crossref_priority_tasks_per_scan": 60,
-  "institution_sources_per_scan": 999,
+  "institution_sources_per_scan": 84,
   "news_stage_seconds": 360,
   "openalex_stage_seconds": 900,
   "crossref_stage_seconds": 1120,
@@ -2661,7 +2661,7 @@
   "crossref_missing_abstract_enrichment_per_scan": 180,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
-  "crossref_source_first_journals_per_scan": 999,
+  "crossref_source_first_journals_per_scan": 48,
   "crossref_source_first_rows": 100,
   "public_429_cooldown_seconds": 8,
   "public_429_max_cooldown_seconds": 30,
@@ -2883,10 +2883,10 @@
   "quiet_scan_rescue_trigger_below_scholarly_candidates": 4,
   "frontier_gap_deepening_max_waves_no_empty": 3,
   "low_yield_fresh_rotation_enabled": true,
-  "low_yield_fresh_rotation_trigger_max_new_ab": 19,
-  "low_yield_fresh_rotation_queries_per_source": 8,
+  "low_yield_fresh_rotation_trigger_max_new_ab": 4,
+  "low_yield_fresh_rotation_queries_per_source": 10,
   "low_yield_fresh_rotation_min_seconds_remaining": 180,
-  "low_yield_fresh_rotation_stage_seconds": 300,
+  "low_yield_fresh_rotation_stage_seconds": 240,
   "low_yield_extended_fallback_enabled": true,
   "low_yield_extended_queries_per_source": 5,
   "low_yield_extended_sources_per_scan": 4,
@@ -3124,11 +3124,11 @@
       ]
     }
   },
-  "low_yield_full_rescue_run_enabled": true,
-  "low_yield_full_rescue_run_trigger_max_new_ab": 19,
+  "low_yield_full_rescue_run_enabled": false,
+  "low_yield_full_rescue_run_trigger_max_new_ab": 4,
   "low_yield_full_rescue_run_max_chain": 1,
   "institution_source_adapter_sources_per_scan": 12,
-  "target_new_ab_per_scan": 20,
+  "target_new_ab_per_scan": 5,
   "accept_trusted_publisher_peer_reviewed_journals": true,
   "trusted_broad_journal_publishers": [
     "Springer Nature",
@@ -3163,7 +3163,7 @@
   "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Each family keeps independent persisted cursors; no output quota is imposed.",
   "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
   "reader_quality_ranking_rule": "Public analytical readers do not display or order by source-quality scores. The Stuff audit/export workbook alone carries a 0-100 technical evidence ranking combining source authority, EU relevance, evidence strength and author transparency.",
-  "scanner_eu_relevance_rule": "EU relevance is an explicit scanner gate. Strand A remains focused on substantive European/EU research and innovation in geopolitical context. Discovery is recall-first, but centrality rescue is allowed only when source text also supports a real strategic/geopolitical mechanism; generic EU R&I material does not receive that rescue. Strand C retains its direct/material EU R&I scope rules; Strand B remains the reusable futures-method lane.",
+  "scanner_eu_relevance_rule": "EU relevance is an explicit scanner gate. Strand A requires source-supported central European/EU R&I subject matter AND a real geopolitical/strategic mechanism. The daily yield target only deepens/rotates discovery; it never relaxes admission. Generic EU innovation, social-policy, sector, programme-administration or Europe-comparison material without strategic/geopolitical substance is rejected.",
   "stuff_ranking_rule": "0-100 audit/export score only: source authority max 55 + EU relevance max 25 + evidence strength max 15 + author transparency max 5. This score must not be used for Matrix placement or public-reader ordering.",
   "formal_evidence_news_promotion_per_scan": 6,
   "source_failure_reallocation_enabled": true,
@@ -3495,8 +3495,8 @@
   "discovery_profile_version": "v17.20.12-recall-first-full-source-census",
   "discovery_policy": "Recall-first: search the full configured trusted-source universe on every run where transport/time allows. Admission still requires European/EU R&I substance; source prestige never creates relevance. Marginal but source-valid records may enter at low reader priority rather than being missed upstream.",
   "broad_peer_reviewed_journal_tier": 3,
-  "crossref_full_source_census_each_scan": true,
-  "institution_full_census_each_scan": true,
+  "crossref_full_source_census_each_scan": false,
+  "institution_full_census_each_scan": false,
   "institution_min_pages_per_source": 2,
   "curator_seed_query_bank_size": 32,
   "curator_seed_queries_per_scan": 12,
@@ -3504,5 +3504,6 @@
   "crossref_source_first_depth_pages_max": 4,
   "crossref_source_first_depth_policy": "Every priority journal checks newest contents; high-output journals that fill the first page also rotate through one deeper four-month page per scan so older-in-window articles are not permanently hidden.",
   "institution_semantic_date_recovery_enabled": true,
-  "main_radar_recall_policy": "High recall inside the fixed subject boundary: European/EU research & innovation materially shaped by geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power or talent/capability mechanisms. Discovery may be broad; final admission remains source-supported."
+  "main_radar_recall_policy": "High recall inside the fixed subject boundary: European/EU research & innovation materially shaped by geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power or talent/capability mechanisms. Discovery may be broad; final admission remains source-supported.",
+  "low_yield_fresh_rotation_max_waves": 3
 }

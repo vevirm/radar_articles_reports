@@ -15,8 +15,10 @@ spec.loader.exec_module(scan)
 
 class RecallFirstDiscoveryTests(unittest.TestCase):
     def test_source_universe_is_hundreds_not_a_handful(self):
-        self.assertTrue(scan.CONFIG.get('crossref_full_source_census_each_scan'))
-        self.assertTrue(scan.CONFIG.get('institution_full_census_each_scan'))
+        self.assertFalse(scan.CONFIG.get('crossref_full_source_census_each_scan'))
+        self.assertFalse(scan.CONFIG.get('institution_full_census_each_scan'))
+        self.assertGreaterEqual(scan.CONFIG.get('crossref_source_first_journals_per_scan', 0), 40)
+        self.assertGreaterEqual(scan.CONFIG.get('institution_sources_per_scan', 0), 70)
         self.assertGreaterEqual(len(scan.CONFIG.get('institution_sources', [])), 190)
         self.assertGreaterEqual(len(scan.CONFIG.get('crossref_priority_journals', [])), 160)
         self.assertGreaterEqual(

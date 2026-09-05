@@ -91,13 +91,13 @@ class LowYieldRotationTests(unittest.TestCase):
         scan.commit_planned_cursor_if_executed(state, "cursor", 2, ["a", "b"], 4, {"a", "b"})
         self.assertEqual(state["cursor"], 4)
 
-    def test_config_uses_twenty_item_target_as_search_depth_trigger(self):
+    def test_config_uses_five_item_target_as_search_depth_trigger_not_quota(self):
         self.assertTrue(scan.CONFIG.get("low_yield_fresh_rotation_enabled"))
-        self.assertEqual(scan.CONFIG.get("target_new_ab_per_scan"), 20)
-        self.assertEqual(scan.CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab"), 19)
+        self.assertEqual(scan.CONFIG.get("target_new_ab_per_scan"), 5)
+        self.assertEqual(scan.CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab"), 4)
+        self.assertGreaterEqual(scan.CONFIG.get("low_yield_fresh_rotation_max_waves", 0), 2)
         self.assertTrue(scan.CONFIG.get("low_yield_extended_fallback_enabled"))
-        self.assertTrue(scan.CONFIG.get("low_yield_full_rescue_run_enabled"))
-        self.assertEqual(scan.CONFIG.get("low_yield_full_rescue_run_trigger_max_new_ab"), 19)
+        self.assertFalse(scan.CONFIG.get("low_yield_full_rescue_run_enabled"))
         self.assertEqual(scan.CONFIG.get("extended_top_quality_lookback_months"), 6)
 
 
@@ -620,8 +620,8 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(funnel["direct_eu_scope_remaining"], 30)
         self.assertEqual(funnel["central_eu_ri_scope_remaining"], 30)
         self.assertEqual(funnel["substantive_ri_remaining"], 20)
-        self.assertEqual(funnel["strategic_context_remaining"], 20)
-        self.assertFalse(funnel["strategic_context_gate_active"])
+        self.assertEqual(funnel["strategic_context_remaining"], 15)
+        self.assertTrue(funnel["strategic_context_gate_active"])
         self.assertEqual(funnel["genuinely_new_unique_ab"], 3)
         self.assertEqual(funnel["metadata_text_rescue"]["admitted_after_recovery"], 1)
 
@@ -664,7 +664,7 @@ class MainRecallRepairTests(unittest.TestCase):
 
 
 class V1719RecallModelTests(unittest.TestCase):
-    def test_europe_and_ri_can_be_in_different_abstract_sentences_without_strategy_words(self):
+    def test_europe_and_ri_without_geopolitical_context_are_not_enough(self):
         title = "Changing patterns in university research"
         abstract = (
             "The analysis covers universities in Germany, France and the Netherlands. "
@@ -672,9 +672,8 @@ class V1719RecallModelTests(unittest.TestCase):
             "The results identify persistent shifts in the organisation of scientific work."
         )
         ev = scan.gate_scope(title, abstract, "", 1, source_kind="scholarly")
-        self.assertTrue(ev["a_pass"])
+        self.assertFalse(ev["a_pass"])
         self.assertEqual(ev["eu_relevance"], "direct")
-        self.assertEqual(ev["a_route"], "ri-relevance-assessment")
 
     def test_incidental_europe_background_does_not_make_chile_paper_direct_a(self):
         title = "Translating global innovation scripts: science and innovation policy and organisational change in Chilean universities"
@@ -707,23 +706,22 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertFalse(ev["a_pass"])
         self.assertFalse(ev["centrality_pass"])
 
-    def test_european_hydrogen_research_infrastructure_passes_without_strategy_words(self):
+    def test_european_hydrogen_research_infrastructure_needs_geopolitical_context(self):
         title = "Research and technology infrastructures in the European hydrogen economy: Status, needs and innovation concepts"
         abstract = (
             "Research and Technology Infrastructures are central enablers of hydrogen technology development in Europe. "
             "This review assesses the European infrastructure landscape and identifies needs across the hydrogen value chain."
         )
         ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
-        self.assertTrue(ev["a_pass"])
+        self.assertFalse(ev["a_pass"])
         self.assertTrue(ev["centrality_pass"])
-        self.assertEqual(ev["a_route"], "ri-relevance-assessment")
 
-    def test_eu_quantum_policy_with_actual_research_funding_mechanism_still_passes(self):
+    def test_eu_quantum_policy_without_external_or_strategic_mechanism_is_not_enough(self):
         title = "How the European Commission aims to promote the EU quantum sector through the Cloud and AI Development Act"
         abstract = "The proposal creates a European framework for quantum and cloud capacity."
         body = "The measure supports funding for quantum research infrastructure and technology development in the EU."
         ev = scan.gate_scope(title, abstract, body, 3, source_kind="institutional")
-        self.assertTrue(ev["a_pass"])
+        self.assertFalse(ev["a_pass"])
         self.assertTrue(ev["centrality_pass"])
 
     def test_admission_repair_reopens_targeted_a_recall_without_full_reset(self):
@@ -790,14 +788,14 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertFalse(ev["a_pass"])
         self.assertEqual(ev["centrality_reason"], "event_recap_not_substantive_evidence")
 
-    def test_brain_data_sharing_eu_framework_can_link_across_adjacent_sentences(self):
+    def test_brain_data_sharing_eu_framework_without_geopolitical_context_is_not_a(self):
         title = "Accelerating Research on Brain Aging: Enabling Brain Imaging Data Sharing in the Open Science Landscape"
         abstract = (
             "Substantial barriers for sharing neuroimaging data constrain scientific collaboration and medical innovation. "
             "We highlight the need for simplified and unified legal frameworks compliant with the General Data Protection Regulation of the European Union."
         )
         ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
-        self.assertTrue(ev["a_pass"])
+        self.assertFalse(ev["a_pass"])
         self.assertTrue(ev["centrality_pass"])
 
     def test_elite_journal_watchlist_is_source_first_and_not_news_only(self):
@@ -973,14 +971,14 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertFalse(ev["a_pass"])
         self.assertEqual(ev["centrality_reason"], "historical_subject_outside_live_ri_goal")
 
-    def test_historical_material_with_explicit_current_ri_implication_can_still_pass(self):
+    def test_historical_material_with_current_ri_but_no_geopolitical_context_is_not_a(self):
         title = "Lessons from the French Research Model (1955-1965) for current European research governance"
         abstract = (
             "The paper uses historical evidence to derive implications for current European research governance, "
             "research funding and science policy reform."
         )
         ev = scan.gate_scope(title, abstract, "", 2, source_kind="scholarly")
-        self.assertTrue(ev["a_pass"])
+        self.assertFalse(ev["a_pass"])
         self.assertTrue(ev["centrality_pass"])
 
     def test_early_modern_history_is_outside_live_radar_even_with_technology_transfer_language(self):
@@ -1138,9 +1136,9 @@ class V1719RecallModelTests(unittest.TestCase):
         <meta name='citation_publication_date' content='2026-09-01'>
         <meta name='citation_doi' content='10.1038/d41586-026-02736-6'>
         <meta name='citation_author' content='A. Żukowski'>
-        <meta name='description' content='European universities should adapt doctoral training to strengthen research careers, industry links and innovation capability in Europe.'>
+        <meta name='description' content='European universities should adapt doctoral training as strategic competition with China for scientific talent intensifies, affecting research careers, industry links and innovation capacity in Europe.'>
         <meta name='citation_article_type' content='Comment'>
-        </head><body><main><p>Current European doctoral and research policy implications are discussed.</p></main></body></html>"""
+        </head><body><main><p>Current European doctoral and research policy implications are discussed in the context of strategic competition for scientific talent.</p></main></body></html>"""
         src = {"name": "Nature", "domain": "nature.com"}
         old_floor = scan.DATE_FLOOR
         try:
@@ -1188,7 +1186,7 @@ class V1719RecallModelTests(unittest.TestCase):
         entry = types.SimpleNamespace(
             title="Europe should adapt, not copy, China's practical PhD",
             link="https://www.nature.com/articles/example-feed",
-            summary="European universities should adapt doctoral training to strengthen research careers and innovation capability in Europe.",
+            summary="European universities should adapt doctoral training as strategic competition with China for scientific talent intensifies, affecting research careers and innovation capacity in Europe.",
             published_parsed=time.strptime("2026-09-01", "%Y-%m-%d"),
             tags=[{"term": "Comment"}],
             authors=[{"name": "A. Example"}],

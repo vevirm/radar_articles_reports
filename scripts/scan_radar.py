@@ -1350,7 +1350,7 @@ GEO_STRONG = [
     "national security", "research security", "trusted research", "strategic dependency",
     "strategic dependencies", "weaponization", "weaponisation", "sanctions", "decoupling",
     "science diplomacy", "security screening", "knowledge security", "economic coercion",
-    "strategic rivalry", "technology rivalry", "scientific rivalry",
+    "strategic rivalry", "technology rivalry", "scientific rivalry", "securitisation", "securitization",
     # V12: geoeconomic channels that shape R&I capacity and technology ecosystems.
     "supply chain security", "supply-chain security", "supply chain resilience",
     "strategic supply chain", "foreign investment screening", "investment screening",
@@ -4809,10 +4809,21 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     outcomes = distinct_matches(context_text, A_STRATEGIC_RI_OUTCOME)
     implied_ok, implied_families, implied_terms = implied_strategic_context(context_text)
     soft_ok, soft_bridge, soft_terms = _soft_contextual_bridge(context_text)
+    # A geopolitical mechanism may be distributed across the bibliographic evidence unit:
+    # e.g. the title identifies China/US/foreign dependence while the abstract explains the
+    # European research-capability consequence. Requiring same-sentence adjacency recreated
+    # the old false-negative problem. This document-level route remains conservative because
+    # it needs EU scope + substantive R&I + an external relation + a strategic R&I outcome.
+    scope_probe = bool(
+        has_eu_word(context_text)
+        or distinct_matches(context_text, EU_DIRECT + EU_GENERIC)
+        or bounded_matches(context_text, MEMBER_STATE_SCOPE)
+    )
+    distributed_external_outcome = bool(external and outcomes and scope_probe)
     if source_kind == 'scholarly':
-        contextual_focus = bool(ri_ta and (implied_ok or soft_ok))
+        contextual_focus = bool(ri_ta and (implied_ok or soft_ok or distributed_external_outcome))
     else:
-        contextual_focus = bool(ri and (implied_ok or soft_ok))
+        contextual_focus = bool(ri and (implied_ok or soft_ok or distributed_external_outcome))
     if contextual_focus and not bridge and soft_bridge:
         bridge = soft_bridge
     # The contextual route is an expansion route, so page-type noise is fail-closed here.
@@ -4836,7 +4847,10 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
             explicit_focus = False
             contextual_focus = False
     route = 'explicit-geopolitics' if explicit_focus else ('triangulated-strategic-context' if contextual_focus else ('ri-relevance-assessment' if focus else ''))
-    context_evidence = list(dict.fromkeys(implied_families + implied_terms + soft_terms))[:8] if contextual_focus else []
+    context_evidence = list(dict.fromkeys(
+        implied_families + implied_terms + soft_terms
+        + ((external[:3] + outcomes[:3]) if distributed_external_outcome else [])
+    ))[:8] if contextual_focus else []
     return focus, ri, geo, bridge, route, context_evidence
 
 
@@ -4995,7 +5009,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general', eu_context_anchors: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Classify the three-layer radar model.
 
-    A = substantive sources centrally about European/EU R&I; strategic significance may be explicit or inferred downstream.
+    A = substantive sources centrally about European/EU R&I in a source-supported geopolitical/strategic context.
     B = developed/adapted/extended/refined futures methods, plus forward-looking R&I/technology-analysis methods, reusable for understanding the future of A.
     C is handled separately in the current-development scanner and never admitted here.
     """
@@ -5071,10 +5085,17 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
             title, abstract, body, centrality_reason
         )
 
-    # A admission is source-supported, European/EU-centred and substantively about R&I.
-    # Strategic/geopolitical language is intentionally not a hard gate; implications may
-    # be assessed by the radar after admission.
-    a_pass = bool(a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok)
+    # V17.20.25 precision restoration: Strand A is specifically EU R&I *in geopolitical
+    # context*.  Discovery may be broad, but final admission must carry a source-supported
+    # strategic mechanism.  The mechanism may be explicit (research/economic security,
+    # export controls, strategic competition, etc.) or conservatively triangulated from
+    # dependence/control, external position, rules power, talent allocation, and related
+    # mechanisms.  A generic Europe/R&I paper is never rescued merely to increase yield.
+    strategic_context_pass = a_route in {'explicit-geopolitics', 'triangulated-strategic-context'}
+    a_pass = bool(
+        a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok
+        and strategic_context_pass
+    )
     if external_ok:
         a_route = 'external-strategic-shock'
         a_context = external_evidence
@@ -5427,6 +5448,8 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_reject_no_ri")
     elif not ev.get("a_focus_pass"):
         _diag_inc(f"{prefix}_reject_no_ri")
+    elif clean_text(ev.get("a_route")) not in {"explicit-geopolitics", "triangulated-strategic-context", "external-strategic-shock"}:
+        _diag_inc(f"{prefix}_reject_no_strategic_context")
     else:
         _diag_inc(f"{prefix}_reject_aboutness")
 
@@ -5517,10 +5540,10 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
     direct_eu = max(0, enough_text - no_eu)
     central_eu_ri = max(0, direct_eu - incidental_scope)
     ri_substantive = max(0, central_eu_ri - no_ri)
-    # V17.19: strategic context is no longer a hard admission gate. Keep historical
-    # rejection counters visible for old runs, but do not subtract them from the current
-    # admission funnel.
-    strategic = max(0, ri_substantive - other_aboutness)
+    # V17.20.25: the final Strand-A gate again requires a source-supported strategic/
+    # geopolitical mechanism.  Keep this stage explicit so low yield can be diagnosed as
+    # discovery scarcity versus relevance filtering rather than solved by lowering quality.
+    strategic = max(0, ri_substantive - no_strategy - other_aboutness)
     return {
         "raw_records_seen": raw,
         "gate_evaluated": evaluated,
@@ -5529,8 +5552,8 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
         "central_eu_ri_scope_remaining": central_eu_ri,
         "substantive_ri_remaining": ri_substantive,
         "strategic_context_remaining": strategic,
-        "strategic_context_gate_active": False,
-        "admission_model": "central European/EU R&I subject + substantive R&I; strategic impact assessed after admission",
+        "strategic_context_gate_active": True,
+        "admission_model": "central European/EU R&I subject + substantive R&I + source-supported geopolitical/strategic mechanism",
         "gate_passed_before_cross_source_dedupe": gate_passed,
         "unique_gate_candidates": max(0, int(unique_gate_candidates)),
         "duplicates_or_known_removed_after_gate": max(0, gate_passed - int(unique_gate_candidates)),
@@ -14097,6 +14120,8 @@ def main() -> int:
     fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
     fresh_query_n = max(1, int(CONFIG.get("low_yield_fresh_rotation_queries_per_source", 8) or 8))
     fresh_bank = diversified_query_bank(all_queries + b_method_bank + finding_context_bank)
+    low_yield_rotation["fresh_waves"] = []
+    fresh_max_waves = max(1, int(CONFIG.get("low_yield_fresh_rotation_max_waves", 3) or 3))
     if (
         low_yield_rotation["enabled"]
         and low_yield_rotation["new_ab_before"] <= low_yield_threshold
@@ -14105,24 +14130,31 @@ def main() -> int:
         and fresh_bank
     ):
         low_yield_rotation["triggered"] = True
-        fresh_oa_cursor_before = int(state.get("low_yield_openalex_cursor", state.get("openalex_explore_cursor", 0)) or 0)
-        fresh_cr_cursor_before = int(state.get("low_yield_crossref_cursor", state.get("crossref_explore_cursor", 0)) or 0)
-        already_oa = set(execution_stats.get("openalex_queries", set()))
-        already_cr = set(execution_stats.get("crossref_broad_queries", set()))
-        fresh_oa_queries, fresh_oa_next, _ = rotating_batch_excluding(
-            fresh_bank, fresh_oa_cursor_before, fresh_query_n if not oa_failed else 0, already_oa
-        )
-        fresh_cr_queries, fresh_cr_next, _ = rotating_batch_excluding(
-            fresh_bank, fresh_cr_cursor_before, fresh_query_n if not cr_failed else 0, already_cr
-        )
-        low_yield_rotation["fresh_openalex_queries"] = fresh_oa_queries
-        low_yield_rotation["fresh_crossref_queries"] = fresh_cr_queries
-        low_yield_rotation["fresh_themes"] = list(dict.fromkeys(query_theme(q) for q in fresh_oa_queries + fresh_cr_queries))
-        if fresh_oa_queries or fresh_cr_queries:
+        fresh_oa_cursor = int(state.get("low_yield_openalex_cursor", state.get("openalex_explore_cursor", 0)) or 0)
+        fresh_cr_cursor = int(state.get("low_yield_crossref_cursor", state.get("crossref_explore_cursor", 0)) or 0)
+        for wave_idx in range(1, fresh_max_waves + 1):
+            if low_yield_rotation["new_ab_after_fresh_rotation"] >= target_new_ab:
+                break
+            if budget_remaining() <= fresh_min_remaining:
+                break
+            already_oa = set(execution_stats.get("openalex_queries", set()))
+            already_cr = set(execution_stats.get("crossref_broad_queries", set()))
+            fresh_oa_queries, fresh_oa_next, _ = rotating_batch_excluding(
+                fresh_bank, fresh_oa_cursor, fresh_query_n if not oa_failed else 0, already_oa
+            )
+            fresh_cr_queries, fresh_cr_next, _ = rotating_batch_excluding(
+                fresh_bank, fresh_cr_cursor, fresh_query_n if not cr_failed else 0, already_cr
+            )
+            if not (fresh_oa_queries or fresh_cr_queries):
+                break
+            themes = list(dict.fromkeys(query_theme(q) for q in fresh_oa_queries + fresh_cr_queries))
+            low_yield_rotation["fresh_openalex_queries"].extend(fresh_oa_queries)
+            low_yield_rotation["fresh_crossref_queries"].extend(fresh_cr_queries)
+            low_yield_rotation["fresh_themes"] = list(dict.fromkeys(low_yield_rotation["fresh_themes"] + themes))
             log_progress(
-                f"Low-yield fresh rotation: normal pass found {low_yield_rotation['new_ab_before']} genuinely new A/B item(s) "
-                f"(trigger <= {low_yield_threshold}); trying unexecuted four-month query families: "
-                + ", ".join(low_yield_rotation["fresh_themes"])
+                f"Low-yield continuation wave {wave_idx}/{fresh_max_waves}: "
+                f"{low_yield_rotation['new_ab_after_fresh_rotation']} genuinely new A/B item(s) so far; "
+                "trying fresh unexecuted query families: " + ", ".join(themes)
             )
             fresh_exec: dict[str, Any] = {}
             fresh_seconds = min(
@@ -14134,13 +14166,13 @@ def main() -> int:
                 futs: list[tuple[str, Any]] = []
                 if fresh_oa_queries:
                     futs.append(("oa", ex.submit(
-                        safe_stage, "OpenAlex low-yield fresh rotation", collect_openalex, DATE_FLOOR, warnings,
+                        safe_stage, f"OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, DATE_FLOOR, warnings,
                         fresh_oa_queries, fresh_deadline, {q: DATE_FLOOR for q in fresh_oa_queries},
                         state["result_depth"]["openalex"], {q: "low-yield-fresh" for q in fresh_oa_queries}, fresh_exec
                     )))
                 if fresh_cr_queries:
                     futs.append(("cr", ex.submit(
-                        safe_stage, "Crossref low-yield fresh rotation", collect_crossref, DATE_FLOOR, warnings,
+                        safe_stage, f"Crossref low-yield continuation wave {wave_idx}", collect_crossref, DATE_FLOOR, warnings,
                         fresh_cr_queries, [], [], fresh_deadline, {q: DATE_FLOOR for q in fresh_cr_queries},
                         state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
                         {q: "low-yield-fresh" for q in fresh_cr_queries}, fresh_exec
@@ -14150,18 +14182,39 @@ def main() -> int:
                     (oa if family == "oa" else cr).extend(extra)
             fresh_oa_executed = set(fresh_exec.get("openalex_queries", set()))
             fresh_cr_executed = set(fresh_exec.get("crossref_broad_queries", set()))
-            commit_planned_cursor_if_executed(
-                state, "low_yield_openalex_cursor", fresh_oa_cursor_before, fresh_oa_queries, fresh_oa_next, fresh_oa_executed
-            )
-            commit_planned_cursor_if_executed(
-                state, "low_yield_crossref_cursor", fresh_cr_cursor_before, fresh_cr_queries, fresh_cr_next, fresh_cr_executed
-            )
+            old_oa_cursor, old_cr_cursor = fresh_oa_cursor, fresh_cr_cursor
+            if fresh_oa_queries:
+                fresh_oa_cursor = commit_planned_cursor_if_executed(
+                    state, "low_yield_openalex_cursor", fresh_oa_cursor, fresh_oa_queries, fresh_oa_next, fresh_oa_executed
+                )
+            if fresh_cr_queries:
+                fresh_cr_cursor = commit_planned_cursor_if_executed(
+                    state, "low_yield_crossref_cursor", fresh_cr_cursor, fresh_cr_queries, fresh_cr_next, fresh_cr_executed
+                )
             execution_stats.setdefault("openalex_queries", set()).update(fresh_oa_executed)
             execution_stats.setdefault("crossref_broad_queries", set()).update(fresh_cr_executed)
-            execution_stats["low_yield_fresh_openalex_executed"] = len(fresh_oa_executed)
-            execution_stats["low_yield_fresh_crossref_executed"] = len(fresh_cr_executed)
+            execution_stats["low_yield_fresh_openalex_executed"] = int(execution_stats.get("low_yield_fresh_openalex_executed", 0)) + len(fresh_oa_executed)
+            execution_stats["low_yield_fresh_crossref_executed"] = int(execution_stats.get("low_yield_fresh_crossref_executed", 0)) + len(fresh_cr_executed)
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(fresh_exec.get("crossref_abstracts_enrichment_attempted", 0))
-            low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+            before_wave = low_yield_rotation["new_ab_after_fresh_rotation"]
+            after_wave = len(genuinely_new_ab_candidates(oa + cr + inst))
+            low_yield_rotation["new_ab_after_fresh_rotation"] = after_wave
+            low_yield_rotation["fresh_waves"].append({
+                "wave": wave_idx,
+                "new_ab_before": before_wave,
+                "new_ab_after": after_wave,
+                "openalex_planned": len(fresh_oa_queries),
+                "openalex_executed": len(fresh_oa_executed),
+                "crossref_planned": len(fresh_cr_queries),
+                "crossref_executed": len(fresh_cr_executed),
+                "themes": themes,
+            })
+            # If neither source actually executed a request, another wave in the same
+            # exhausted family cannot help. Preserve cursors and move to other fallbacks.
+            if not fresh_oa_executed and not fresh_cr_executed:
+                state["low_yield_openalex_cursor"] = old_oa_cursor
+                state["low_yield_crossref_cursor"] = old_cr_cursor
+                break
 
     # A second low-yield fallback may look into months 4-6, but only the existing
     # Highest source-merit band is eligible for admission. This is extra recall, not

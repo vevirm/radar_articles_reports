@@ -1,3 +1,12 @@
+# v17.20.25 — one-cycle rotation + hard EU R&I geopolitics precision
+
+- Treats ~5 high-quality A/B additions per four-hour scan as a discovery-depth sanity target, never an admission quota.
+- Keeps low-yield rescue inside the same scanner process with up to three fresh, unexecuted rotating query waves; no second GitHub rescue run is launched.
+- Stops re-reading every Crossref journal from page 1 on every run. Source-first journal attention now rotates in bounded batches while persisted depth pages continue to advance.
+- Institutional source attention also rotates in substantial batches, leaving unused trusted sources available for same-run source-failure reallocation.
+- Strand A now has a hard final geopolitical/strategic-context requirement in addition to central EU/European R&I and substantive R&I aboutness. Generic Europe/R&I material cannot be admitted merely because it mentions capability, access, cost, coordination or dependence.
+- Main workflow is a single fixed four-hour schedule with the shared Main/Historical scanner lock. Historical remains separate.
+
 # v17.20.24
 
 - Added an experimental **one-shot shock hypothesis** button at the top of External Shocks. It is reader-side only: nothing is written to `radar.json`, scanner state, local storage or session storage, and pressing again replaces the previous result.
