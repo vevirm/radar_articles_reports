@@ -1,3 +1,17 @@
+# v17.20.37 — plumbing cleanup: stop losing good evidence after discovery
+
+- Manual/curator scholarly references, especially DOI links, now use scholarly resolution (Crossref/OpenAlex/publisher metadata) instead of being misrouted through the institutional HTML parser.
+- Curator candidates in the 4–6 month recovery window now use the same high-quality journal rule as the repaired fallback, so Tier-1/Tier-2 peer-reviewed articles are no longer discarded for failing an institution-only authority check.
+- Curator rejections are versioned. Rejections made under older broken source/gate plumbing are automatically re-tested once under the current profile, then become stable again.
+- Journal metadata variants such as `Survival: August-September 2026` inherit the configured journal tier, and the source-first Crossref lane uses the same safe matcher. Unsafe generic prefix matching such as `Science` -> `Science Advances` remains forbidden.
+- Direct institutional PDF URLs discovered in sitemaps or publication hubs now have a dedicated PDF parser and pass through the ordinary institutional A/B gate instead of dying at the HTML content-type check.
+- Institutional seen-cache fingerprints are now written only after a document was successfully fetched, genuinely dated and read. Transient fetch/date-extraction failures remain retryable instead of being permanently skipped.
+- A known institutional URL can be revisited when its sitemap `lastmod` changes; the old known-URL shortcut no longer blocks that changed-fingerprint path before parsing.
+- Institutional reports discovered through bibliographic APIs may retain a DOI link when the scanner explicitly records `bibliographic_doi` source integrity. Unmarked institutional-title/DOI chimeras still fail closed.
+- Duplicate identity no longer assumes titles are globally unique. Same title + different DOI is allowed; same DOI is duplicate; DOI-less publisher representations of an already saved DOI record are still suppressed.
+- The Main low-yield sanity target now counts genuinely new Strand-A evidence only. Strand-B foresight-method papers cannot make the scanner stop searching for EU R&I-geopolitics evidence.
+- Added regression tests for each of the above cases. The strict final subject rule is unchanged: central EU/European R&I plus a source-supported geopolitical/strategic mechanism.
+
 # v17.20.36 — repair rotation progress, rate-limit recovery and anti-low-hanging depth
 
 - Fixed a fundamental rotation bug: OpenAlex/Crossref queries and source-first journals now advance their persistent cursors **only after a successful HTTP 200 response**. HTTP 429/failed attempts no longer consume unsearched rotation slots.

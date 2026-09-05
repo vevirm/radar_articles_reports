@@ -342,8 +342,12 @@ LOW_YIELD_RESERVE_ACTIVE = False
 LOW_YIELD_RESERVE_SECONDS = 0
 SCAN_STAGE_DEADLINES: dict[str, float] = {}
 KNOWN_AB_IDENTITIES: set[str] = set()
+# Titles of saved DOI-backed A/B records are tracked separately. A later record with the
+# same title but a different DOI must not be thrown away as a duplicate.
+KNOWN_AB_DOI_TITLES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
+CURATOR_DECISION_PROFILE_VERSION = "v17.20.37-plumbing"
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 # Sitemap ``lastmod`` dates are discovery evidence that should survive into the
 # page parser.  Many high-value EU CMS pages omit article:published_time even when
@@ -475,6 +479,59 @@ def stable_item_identity(title: str = "", doi_or_link: str = "") -> str:
     if m:
         return "doi:" + m.group(0).rstrip(".,)")
     return "title:" + norm_title(title)
+
+
+def known_ab_duplicate(title: str = "", doi_or_link: str = "") -> bool:
+    """True only when the saved A/B corpus already represents this publication.
+
+    Title alone is not globally unique. DOI-backed records are compared by DOI, while
+    title-only saved records can still suppress a DOI representation of the same paper.
+    DOI-less candidates are also compared with titles of DOI-backed saved records so a
+    publisher URL does not re-add a paper already saved under doi.org.
+    """
+    sid = stable_item_identity(title, doi_or_link)
+    title_id = "title:" + norm_title(title)
+    if sid.startswith("doi:"):
+        return sid in KNOWN_AB_IDENTITIES or title_id in KNOWN_AB_IDENTITIES
+    return sid in KNOWN_AB_IDENTITIES or title_id in KNOWN_AB_DOI_TITLES
+
+
+def _journal_issue_suffix(value: str) -> bool:
+    v = normalized(value)
+    if not v:
+        return False
+    months = ("january", "february", "march", "april", "may", "june", "july", "august",
+              "september", "october", "november", "december", "jan", "feb", "mar", "apr",
+              "jun", "jul", "aug", "sep", "sept", "oct", "nov", "dec")
+    return bool(
+        re.search(r"20\d{2}", v)
+        or re.search(r"(?:volume|vol|issue|no)\.?\s*\d+", v)
+        or any(m in v for m in months)
+    )
+
+
+def journal_name_matches(actual: str, configured: str) -> bool:
+    """Match harmless issue/date variants without unsafe generic prefix matching."""
+    a = clean_text(actual)
+    c = clean_text(configured)
+    if not a or not c:
+        return False
+    na, nc = normalized(a), normalized(c)
+    canon_a = re.sub(r"[^a-z0-9]+", "", na).replace("and", "")
+    canon_c = re.sub(r"[^a-z0-9]+", "", nc).replace("and", "")
+    if canon_a == canon_c:
+        return True
+    # Example: "Survival: August-September 2026".
+    if na.startswith(nc + ":"):
+        return True
+    for sep in (" - ", " – ", " — "):
+        if na.startswith(nc + sep) and _journal_issue_suffix(na[len(nc + sep):]):
+            return True
+    return False
+
+
+def journal_matches_any(actual: str, names: Iterable[str]) -> bool:
+    return any(journal_name_matches(actual, x) for x in names if clean_text(x))
 
 
 def normalized_link(value: Any) -> str:
@@ -834,8 +891,9 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     return state
 
 
-def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[str], set[str]]:
+def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[str], set[str], set[str]]:
     ab_ids: set[str] = set()
+    ab_doi_titles: set[str] = set()
     ab_links: set[str] = set()
     sig_ids: set[str] = set()
     for strand in ("strand_a", "strand_b"):
@@ -845,12 +903,11 @@ def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[st
             key = stable_item_identity(item.get("title", ""), item.get("link", ""))
             if key != "title:":
                 ab_ids.add(key)
-            # Keep a title identity alongside DOI/link identity. Discovery endpoints can
-            # rediscover the same publication under a DOI while the saved corpus carries
-            # a publisher URL (or vice versa). The low-yield controller must not count that
-            # representation change as a genuinely new item.
             title_key = "title:" + norm_title(item.get("title", ""))
-            if title_key != "title:":
+            if key.startswith("doi:"):
+                if title_key != "title:":
+                    ab_doi_titles.add(title_key)
+            elif title_key != "title:":
                 ab_ids.add(title_key)
             link = normalized_link(item.get("link", ""))
             if link:
@@ -864,7 +921,7 @@ def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[st
         key = f"signal:{normalized(source)}:{norm_title(title)}" if title and source else f"signal-link:{link}"
         if key not in {"signal::", "signal-link:"}:
             sig_ids.add(key)
-    return ab_ids, ab_links, sig_ids
+    return ab_ids, ab_links, sig_ids, ab_doi_titles
 
 
 FRONTIER_CELL_ORDER = [
@@ -5375,22 +5432,16 @@ def url_domain(url: str) -> str:
 
 
 def source_rank_for_journal(name: str) -> tuple[int | None, float, str]:
-    n = normalized(name)
-    # V17.19.7: journal watching is a core source family, not a side effect of broad
-    # scholarly search. Nature/Science-family journals receive first-class source attention
-    # but never bypass the substantive European R&I gate. Policy/society journals central to
-    # R&I, mobility and geoeconomics receive a separate priority rank.
-    elite = {normalized(x) for x in CONFIG.get("top_journal_watchlist", [])}
-    policy = {normalized(x) for x in CONFIG.get("priority_policy_journal_watchlist", [])}
-    exact = {normalized(x) for x in CONFIG["tier2_journals"]}
-    comparable = {normalized(x) for x in CONFIG.get("tier2_comparable_journals", [])}
-    if n in elite:
+    # Crossref/publisher metadata sometimes appends issue/date labels to a journal name.
+    # Accept those harmless variants while avoiding unsafe prefix matching such as
+    # Science -> Science Advances.
+    if journal_matches_any(name, CONFIG.get("top_journal_watchlist", [])):
         return 1, 1.55, "Tier 1 journal-watch"
-    if n in policy:
+    if journal_matches_any(name, CONFIG.get("priority_policy_journal_watchlist", [])):
         return 2, 1.90, "Tier 2 priority journal"
-    if n in exact:
+    if journal_matches_any(name, CONFIG.get("tier2_journals", [])):
         return 2, 2.0, "Tier 2"
-    if n in comparable:
+    if journal_matches_any(name, CONFIG.get("tier2_comparable_journals", [])):
         return 2, 2.4, "Tier 2 comparable"
     return None, 9.0, ""
 
@@ -5679,6 +5730,8 @@ def candidate_from_openalex(work: dict[str, Any], date_floor: dt.date | None = N
         item_type=item_type, strand=strand, evidence=ev, source_rank=source_rank, tier_label=tier_label,
         text=full, doi=doi, preprint=is_preprint, frontier_targets=frontier_targets,
     )
+    if _domain_host(link) in {"doi.org", "dx.doi.org"} and _expected_institution_domain(source):
+        row["source_integrity_basis"] = "bibliographic_doi"
     if allow_strategic and strategic_pathway_candidate_text(full):
         row['_strategic_discovery'] = True
         row['_strategic_source_text'] = full
@@ -5747,7 +5800,7 @@ def collect_openalex(
             if bool(CONFIG.get("skip_known_items_before_classification", True)):
                 title0 = clean_text(work.get("title") or work.get("display_name"))
                 doi0 = clean_text(work.get("doi"))
-                if stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+                if known_ab_duplicate(title0, doi0):
                     continue
             title0 = clean_text(work.get("title") or work.get("display_name"))
             doi0 = clean_text(work.get("doi"))
@@ -6360,6 +6413,8 @@ def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = N
         source_rank=source_rank, tier_label=tier_label, text=full,
         doi=doi, preprint=preprint, frontier_targets=frontier_targets,
     )
+    if _domain_host(link) in {"doi.org", "dx.doi.org"} and _expected_institution_domain(source):
+        row["source_integrity_basis"] = "bibliographic_doi"
     if allow_strategic and strategic_pathway_candidate_text(full):
         row['_strategic_discovery'] = True
         row['_strategic_source_text'] = full
@@ -6892,7 +6947,7 @@ def _curator_candidate_known(entry: dict[str, Any]) -> bool:
     title = clean_text(entry.get("title"))
     doi = clean_text(entry.get("doi"))
     url = clean_text(entry.get("url")) or (f"https://doi.org/{doi}" if doi else "")
-    if stable_item_identity(title, url) in KNOWN_AB_IDENTITIES:
+    if known_ab_duplicate(title, url):
         return True
     nurl = normalized_link(url)
     return bool(nurl and nurl in KNOWN_AB_LINKS)
@@ -7045,6 +7100,7 @@ def collect_curator_candidate_tests(
         "profile_version": clean_text(batch.get("profile_version")),
         "batch_id": clean_text(batch.get("batch_id")),
         "source_document": clean_text(batch.get("source_document")),
+        "decision_profile_version": CURATOR_DECISION_PROFILE_VERSION,
         "last_tested_at": now_iso,
         "results": [],
     }
@@ -7082,7 +7138,11 @@ def collect_curator_candidate_tests(
             results.append({**base, "status": "already_in_corpus", "attempted_this_scan": False})
             continue
         old = previous_results.get(cid, {})
-        if old.get("status") in final_statuses and not retest_rejected:
+        if (
+            old.get("status") in final_statuses
+            and not retest_rejected
+            and clean_text(old.get("decision_profile_version")) == CURATOR_DECISION_PROFILE_VERSION
+        ):
             kept = dict(old)
             kept.update(base)
             kept["attempted_this_scan"] = False
@@ -7097,7 +7157,8 @@ def collect_curator_candidate_tests(
             continue
 
         attempted += 1
-        result = {**base, "attempted_this_scan": True, "attempted_at": now_iso}
+        result = {**base, "attempted_this_scan": True, "attempted_at": now_iso,
+                  "decision_profile_version": CURATOR_DECISION_PROFILE_VERSION}
         raw_cr, resolution = _curator_crossref_lookup(entry, timeout)
         result["resolution"] = resolution
         candidate: dict[str, Any] | None = None
@@ -7155,7 +7216,7 @@ def collect_curator_candidate_tests(
         if candidate is not None:
             candidate = _tag_curator_candidate(candidate, entry, batch)
             d = parse_date(candidate.get("date"))
-            retention_ok = bool(not d or d >= DATE_FLOOR or (d >= EXTENDED_DATE_FLOOR and highest_source_merit(candidate)))
+            retention_ok = bool(not d or d >= DATE_FLOOR or (d >= EXTENDED_DATE_FLOOR and extended_high_quality_merit(candidate)))
             result["strand"] = clean_text(candidate.get("strand"))
             result["resolved_link"] = clean_text(candidate.get("link"))
             result["retention_eligible"] = retention_ok
@@ -7335,7 +7396,7 @@ def collect_crossref(
             titles0 = item.get("title") or []
             title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
             doi0 = clean_text(item.get("DOI"))
-            if bool(CONFIG.get("skip_known_items_before_classification", True)) and stable_item_identity(title0, doi0) in KNOWN_AB_IDENTITIES:
+            if bool(CONFIG.get("skip_known_items_before_classification", True)) and known_ab_duplicate(title0, doi0):
                 continue
             abstract0 = clean_text(item.get("abstract"))
             if abstract0:
@@ -7545,12 +7606,10 @@ def collect_crossref(
                             executed_source_journals.add(journal)
                         works = r.json().get("message", {}).get("items", [])
                         _diag_inc("crossref_raw_records", len(works))
-                        target = re.sub(r'[^a-z0-9]+', '', normalized(journal))
                         exact = []
                         for w in works:
                             actual = clean_text((w.get("container-title") or [""])[0])
-                            canon = re.sub(r'[^a-z0-9]+', '', normalized(actual))
-                            if actual and (canon == target or canon.replace('and','') == target.replace('and','')):
+                            if actual and journal_name_matches(actual, journal):
                                 exact.append(w)
                         return exact, None, len(works)
                     if r.status_code == 429:
@@ -8001,13 +8060,14 @@ def jsonld_objects(obj: Any):
             yield from jsonld_objects(v)
 
 
-def pdf_text(url: str) -> tuple[str, int]:
+def _pdf_payload(url: str, response: requests.Response | None = None) -> tuple[str, int, dict[str, Any]]:
+    """Fetch/extract a bounded PDF once and return text plus metadata."""
     if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
-        return "", 0
+        return "", 0, {}
     try:
-        r = SESSION.get(url, timeout=int(CONFIG.get("pdf_timeout_seconds", 14)))
+        r = response or SESSION.get(url, timeout=int(CONFIG.get("pdf_timeout_seconds", 14)))
         if r.status_code != 200 or len(r.content) > 22_000_000:
-            return "", 0
+            return "", 0, {}
         reader = PdfReader(io.BytesIO(r.content))
         texts = []
         for page in reader.pages[:55]:
@@ -8016,9 +8076,59 @@ def pdf_text(url: str) -> tuple[str, int]:
             except Exception:
                 pass
         txt = clean_text(" ".join(texts))
-        return txt, len(txt.split())
+        meta_raw = reader.metadata or {}
+        meta = {
+            "title": clean_text(getattr(meta_raw, "title", "") or meta_raw.get("/Title", "")),
+            "author": clean_text(getattr(meta_raw, "author", "") or meta_raw.get("/Author", "")),
+            "creation_date": clean_text(str(getattr(meta_raw, "creation_date", "") or meta_raw.get("/CreationDate", ""))),
+            "modification_date": clean_text(str(getattr(meta_raw, "modification_date", "") or meta_raw.get("/ModDate", ""))),
+        }
+        return txt, len(txt.split()), meta
     except Exception:
-        return "", 0
+        return "", 0, {}
+
+
+def pdf_text(url: str) -> tuple[str, int]:
+    txt, words, _meta = _pdf_payload(url)
+    return txt, words
+
+
+def _pdf_metadata_date(meta: dict[str, Any]) -> dt.date | None:
+    """Extract a conservative creation/publication date from PDF metadata."""
+    for key in ("creation_date", "modification_date"):
+        raw = clean_text(meta.get(key))
+        if not raw:
+            continue
+        # pypdf may expose a datetime string or a PDF D:YYYYMMDDHHmm... value.
+        m = re.search(r"D:?(20\d{2})(\d{2})(\d{2})", raw)
+        if m:
+            try:
+                return dt.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            except ValueError:
+                pass
+        d = parse_date(raw)
+        if d:
+            return d
+    return None
+
+
+def _mark_institution_seen(fingerprint: str) -> None:
+    if fingerprint:
+        INSTITUTION_SEEN_FINGERPRINTS[fingerprint] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
+
+
+def _known_institution_url_should_skip(url: str, fingerprint: str = "", reconsider_seen: bool = False) -> bool:
+    """Skip a known institutional URL unless its sitemap lastmod proves it changed."""
+    if reconsider_seen or not bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)):
+        return False
+    if normalized_link(url) not in KNOWN_AB_LINKS:
+        return False
+    # A dated fingerprint that has never been seen represents an updated sitemap version.
+    if fingerprint and re.search(r"\|20\d{2}-\d{2}-\d{2}$", fingerprint) and fingerprint not in INSTITUTION_SEEN_FINGERPRINTS:
+        return False
+    return True
+
+
 
 
 def _domain_host(value: str) -> str:
@@ -8284,6 +8394,11 @@ def record_source_integrity_ok(item: dict[str, Any]) -> bool:
         expected_url = f"https://{expected}/"
         if _same_institution_family(expected_url, link):
             return True
+        # Bibliographic APIs legitimately identify institutional reports by DOI even
+        # though doi.org is outside the institution's host family.  This is accepted only
+        # when the candidate constructor explicitly recorded that provenance.
+        if _domain_host(link) in {"doi.org", "dx.doi.org"} and normalized(item.get("source_integrity_basis")) == "bibliographic_doi":
+            return True
         # Google News RSS exposes the canonical publisher in the <source> element while
         # the article <link> is a news.google.com redirect. Treat that structured publisher
         # attribution as source integrity only when it exactly matches our configured source
@@ -8350,18 +8465,131 @@ def _signal_claim_is_substantive(value: str) -> bool:
     return True
 
 
+def parse_institution_pdf(
+    url: str,
+    source: str,
+    tier: int,
+    stage_deadline: float | None = None,
+    fingerprint: str = "",
+    publication_floor: dt.date | None = None,
+    response: requests.Response | None = None,
+) -> dict[str, Any] | None:
+    """Parse a direct institutional PDF discovered in a sitemap/hub.
+
+    Older builds queued direct PDF URLs but handed them to the HTML parser, which rejected
+    them before any evidence was read.  This path uses the same A/B gate as institutional
+    HTML pages and never treats sitemap lastmod as a publication date.
+    """
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        return None
+    if _known_institution_url_should_skip(url, fingerprint):
+        _diag_inc("institution_reject_known_before_fetch")
+        return None
+    body, word_count, meta = _pdf_payload(url, response=response)
+    if not body or word_count < 100:
+        _diag_inc("institution_reject_fetch_or_nonhtml")
+        return None
+
+    title = clean_text(meta.get("title"))
+    if not title or len(title.split()) < 3 or normalized(title) in {"untitled", "document", "report"}:
+        sentences = split_sentences(body[:1200])
+        candidate = next((clean_text(x) for x in sentences if 4 <= len(clean_text(x).split()) <= 28 and len(clean_text(x)) <= 220), "")
+        title = candidate
+    if not title:
+        stem = Path(urlparse(url).path).stem
+        title = clean_text(re.sub(r"[-_]+", " ", stem))
+    if not title:
+        _diag_inc("institution_reject_no_title")
+        return None
+
+    published = _pdf_metadata_date(meta)
+    date_basis = "pdf_metadata_date" if published else ""
+    if not published:
+        top_text = body[:3000]
+        m = re.search(
+            r"\b(?:published|publication date|issued|release date|date)\s*[:\-]?\s*"
+            r"((?:[0-3]?\d[.\-/ ](?:0?\d|[A-Za-z]{3,9})[.\-/ ]20\d{2})|"
+            r"(?:[A-Za-z]{3,9}\s+[0-3]?\d,?\s+20\d{2})|(?:20\d{2}-\d{1,2}-\d{1,2}))",
+            top_text, re.I,
+        )
+        if m:
+            published = parse_date(m.group(1))
+            date_basis = "pdf_visible_publication_date"
+    if not published:
+        m_url = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|3[01])(?:/|$)", urlparse(url).path)
+        if m_url:
+            try:
+                published = dt.date(int(m_url.group(1)), int(m_url.group(2)), int(m_url.group(3)))
+                date_basis = "pdf_url_publication_date"
+            except ValueError:
+                published = None
+    if not published:
+        if fingerprint and INSTITUTION_DISCOVERED_DATES.get(fingerprint):
+            _diag_inc("institution_date_hint_sitemap_lastmod_not_publication")
+        _diag_inc("institution_reject_no_date")
+        return None
+    if published > dt.date.today() + dt.timedelta(days=1):
+        _diag_inc("institution_reject_future_date")
+        return None
+    if published < (publication_floor or DATE_FLOOR):
+        _diag_inc("institution_reject_before_floor")
+        return None
+
+    # From this point the document has been successfully fetched, dated and read.  It is
+    # safe to mark the fingerprint even when the substantive gate later rejects it.
+    _mark_institution_seen(fingerprint)
+    if not english_record_ok(f"{title}. {body[:5000]}", "", title=title):
+        _diag_inc("institution_reject_non_english")
+        return None
+    exclusion = document_exclusion_reason(title, body[:1800], url, "pdf")
+    if exclusion:
+        _diag_inc("institution_reject_document_exclusion")
+        return None
+
+    ev = gate_scope(title, "", body, tier, source_kind="institutional")
+    _record_ab_gate_diagnostic("institution", ev)
+    if not (ev.get("a_pass") or ev.get("b_pass")):
+        return None
+    if tier == 3 and ev.get("eu_relevance") is None:
+        return None
+    strand = "both" if ev.get("a_pass") and ev.get("b_pass") else "A" if ev.get("a_pass") else "B"
+    row = build_item(
+        title=title,
+        authors=clean_text(meta.get("author")) or source,
+        source=source,
+        date=published,
+        link=url,
+        item_type="institutional report / PDF",
+        strand=strand,
+        evidence=ev,
+        source_rank=float(tier),
+        tier_label=f"Tier {tier}",
+        text=f"{title}. {body[:45000]}",
+        doi="",
+        preprint=False,
+    )
+    row["source_integrity_basis"] = "institution_pdf"
+    if date_basis:
+        row["date_basis"] = date_basis
+    return row
+
+
 def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "", publication_floor: dt.date | None = None) -> dict[str, Any] | None:
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         return None
-    if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(url) in KNOWN_AB_LINKS:
+    if _known_institution_url_should_skip(url, fingerprint):
         _diag_inc("institution_reject_known_before_fetch")
         return None
     r = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
-    if not r or "html" not in r.headers.get("content-type", "text/html"):
+    if not r:
         _diag_inc("institution_reject_fetch_or_nonhtml")
         return None
-    if fingerprint:
-        INSTITUTION_SEEN_FINGERPRINTS[fingerprint] = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
+    ctype = normalized(r.headers.get("content-type", "text/html"))
+    if "pdf" in ctype or urlparse(r.url or url).path.lower().endswith(".pdf"):
+        return parse_institution_pdf(url, source, tier, stage_deadline, fingerprint, publication_floor, response=r)
+    if "html" not in ctype:
+        _diag_inc("institution_reject_fetch_or_nonhtml")
+        return None
     soup = BeautifulSoup(r.text, "html.parser")
     title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else "")
     page_type = meta_content(soup, ["og:type", "article:section", "type"])
@@ -8502,6 +8730,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             _diag_inc("institution_reject_mismatched_linked_pdf")
             pdf_url = ""
 
+    # Mark only after fetch + genuine publication date + readable document text succeeded.
+    # Transient fetch/date-extraction failures therefore remain retryable on later rotations.
+    _mark_institution_seen(fingerprint)
     if not english_record_ok(f"{title}. {desc}. {body[:5000]}", html_lang, title=title):
         _diag_inc("institution_reject_non_english")
         return None
@@ -8685,7 +8916,8 @@ def _source_adapter_domain_jobs(
                 continue
             low = normalized(u)
             path_probe = normalized(f"{pu.path} {pu.query}")
-            if path_probe.endswith(".pdf") or any(path_probe.endswith(ext) for ext in (".doc", ".docx", ".xls", ".xlsx", ".zip")):
+            is_pdf = path_probe.endswith(".pdf")
+            if any(path_probe.endswith(ext) for ext in (".doc", ".docx", ".xls", ".xlsx", ".zip")):
                 continue
             label = normalized(a.get_text(" ", strip=True))
             # Hints apply to the path/anchor, not the host name. Otherwise a domain
@@ -8696,18 +8928,18 @@ def _source_adapter_domain_jobs(
             year_hit = bool(re.search(r"/(?:2025|2026)(?:/|-)" , path_probe))
             # Links from an explicitly configured publication hub get a modest trust
             # bonus, but generic navigation still needs a content/path signal.
-            score = generic_score + min(12, semantic_hits * 4) + (3 if year_hit else 0)
-            if semantic_hits or generic_score >= 3 or year_hit:
+            score = generic_score + min(12, semantic_hits * 4) + (3 if year_hit else 0) + (4 if is_pdf else 0)
+            if is_pdf or semantic_hits or generic_score >= 3 or year_hit:
                 discovered[u] = max(score, discovered.get(u, -100))
-            if depth < max_depth and semantic_hits and generic_score >= -2 and normalized_link(u) not in fetched:
+            if (not is_pdf) and depth < max_depth and semantic_hits and generic_score >= -2 and normalized_link(u) not in fetched:
                 queue.append((u, depth + 1))
 
     out: list[tuple[str, str, int, str]] = []
     for u, _score in sorted(discovered.items(), key=lambda kv: kv[1], reverse=True):
         nu = normalized_link(u)
-        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and nu in KNOWN_AB_LINKS:
-            continue
         fp = institution_fingerprint(u, None)
+        if _known_institution_url_should_skip(u, fp, reconsider_seen):
+            continue
         if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
             continue
         out.append((u, source_name, tier, fp))
@@ -8749,9 +8981,9 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
             break
         if normalized_link(u) in seen or institution_url_score(u, last, from_date) < 0:
             continue
-        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(u) in KNOWN_AB_LINKS:
-            continue
         fp = institution_fingerprint(u, last)
+        if _known_institution_url_should_skip(u, fp, reconsider_seen):
+            continue
         if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
             continue
         if last:
@@ -8909,9 +9141,9 @@ def _rule_fix_fallback_domain_jobs(
         if not nu or nu in seen:
             continue
         seen.add(nu)
-        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and nu in KNOWN_AB_LINKS:
-            continue
         fp = institution_fingerprint(u, None)
+        if _known_institution_url_should_skip(u, fp, reconsider_seen):
+            continue
         # Direct recovery seeds are intentionally re-evaluated once under this new
         # repair version even if an earlier buggy pass fingerprinted them before
         # the relevant C/A-B logic was fixed. Ordinary hub-discovered pages still
@@ -8963,9 +9195,9 @@ def _rule_fix_recovery_domain_jobs(
         score = institution_url_score(u, last, from_date)
         if score < 0:
             continue
-        if bool(CONFIG.get("skip_known_institution_urls_before_fetch", True)) and normalized_link(u) in KNOWN_AB_LINKS:
-            continue
         fp = institution_fingerprint(u, last)
+        if _known_institution_url_should_skip(u, fp, False):
+            continue
         if fp in INSTITUTION_SEEN_FINGERPRINTS:
             continue
         # Missing sitemap dates remain eligible.  Dated URLs are sampled across months
@@ -9148,6 +9380,72 @@ def manual_recovery_jobs(previous: dict[str, Any], limit: int | None = None) -> 
     return out
 
 
+def _manual_entry_is_scholarly(entry: dict[str, Any]) -> bool:
+    url = clean_text(entry.get("url"))
+    source_kind = normalized(entry.get("source_kind"))
+    doi = clean_text(entry.get("doi"))
+    return bool(
+        doi
+        or re.search(r"(?:doi\.org/)?10\.\d{4,9}/[^\s?#]+", url, re.I)
+        or any(x in source_kind for x in ("scholarly", "journal", "peer reviewed", "peer-reviewed", "article", "preprint"))
+    )
+
+
+def _manual_scholarly_recovery(entry: dict[str, Any], warnings: list[str], stage_deadline: float | None) -> dict[str, Any] | None:
+    """Resolve a curator/manual scholarly reference through scholarly metadata, not HTML.
+
+    The old recovery queue sent every non-PDF URL to ``parse_institution_page``. DOI links
+    therefore behaved like institutional webpages and were commonly lost before the normal
+    scholarly quality/relevance gate ever saw them.
+    """
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        return None
+    timeout = max(4, int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+    enrich_timeout = max(3, int(CONFIG.get("curator_candidate_enrichment_timeout_seconds", 8) or 8))
+    raw_cr, status = _curator_crossref_lookup(entry, timeout)
+    candidate: dict[str, Any] | None = None
+    if raw_cr:
+        doi0 = clean_text(raw_cr.get("DOI"))
+        if not clean_text(raw_cr.get("abstract")) and doi0:
+            recovered = doi_landing_abstract(doi0, enrich_timeout)
+            if recovered:
+                raw_cr = dict(raw_cr)
+                raw_cr["abstract"] = recovered
+        candidate = candidate_from_crossref(raw_cr, date_floor=EXTENDED_DATE_FLOOR)
+    if candidate is None:
+        try:
+            seed = {
+                "title": clean_text(entry.get("title")),
+                "link": clean_text(entry.get("url")) or (f"https://doi.org/{clean_text(entry.get('doi'))}" if clean_text(entry.get("doi")) else ""),
+            }
+            raw_oa = _snowball_resolve_seed(seed, timeout)
+        except OpenAlexRateLimit:
+            raw_oa = None
+            warnings.append("Manual scholarly recovery OpenAlex: rate limited")
+        except requests.RequestException:
+            raw_oa = None
+        if raw_oa:
+            doi0 = clean_text(raw_oa.get("doi"))
+            if doi0 and not openalex_abstract(raw_oa.get("abstract_inverted_index")):
+                recovered = doi_landing_abstract(doi0, enrich_timeout)
+                if recovered:
+                    patched = dict(raw_oa)
+                    inv: dict[str, list[int]] = {}
+                    for pos, token in enumerate(clean_text(recovered).split()):
+                        inv.setdefault(token, []).append(pos)
+                    patched["abstract_inverted_index"] = inv
+                    raw_oa = patched
+            candidate = candidate_from_openalex(raw_oa, date_floor=EXTENDED_DATE_FLOOR)
+    if candidate is None:
+        if status and status not in {"crossref_doi", "crossref_title", "missing_title"}:
+            warnings.append(f"Manual scholarly recovery: {status}")
+        return None
+    d = parse_date(candidate.get("date"))
+    if d and d < DATE_FLOOR and not extended_high_quality_merit(candidate):
+        return None
+    return candidate
+
+
 def collect_manual_recovery(previous: dict[str, Any], warnings: list[str], stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     """Retry exact URLs supplied through manual ingest using the scanner's normal gate."""
     jobs = manual_recovery_jobs(previous)
@@ -9165,7 +9463,9 @@ def collect_manual_recovery(previous: dict[str, Any], warnings: list[str], stage
         tier = int(entry.get("tier", 2) or 2)
         attempted += 1
         item = None
-        if url.lower().split("?", 1)[0].endswith(".pdf"):
+        if _manual_entry_is_scholarly(entry):
+            item = _manual_scholarly_recovery(entry, warnings, stage_deadline)
+        elif url.lower().split("?", 1)[0].endswith(".pdf"):
             body, words = pdf_text(url)
             date = None
             # Manual ingest may store the first day of a year/month solely as a
@@ -9953,15 +10253,23 @@ def genuinely_new_ab_candidates(items: Iterable[dict[str, Any]]) -> list[dict[st
         if not final_ab_candidate_worthiness(item):
             continue
         ident = identity(item)
-        stable_ident = stable_item_identity(item.get("title", ""), item.get("link", ""))
-        title_ident = "title:" + norm_title(item.get("title", ""))
-        if ident in KNOWN_AB_IDENTITIES or stable_ident in KNOWN_AB_IDENTITIES or title_ident in KNOWN_AB_IDENTITIES:
+        doi_or_link = clean_text(item.get("_doi")) or clean_text(item.get("link", ""))
+        if ident in KNOWN_AB_IDENTITIES or known_ab_duplicate(item.get("title", ""), doi_or_link):
             continue
         link = normalized_link(item.get("link", ""))
         if link and link in KNOWN_AB_LINKS:
             continue
         out.append(item)
     return out
+
+
+def genuinely_new_a_candidates(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    """New publishable Strand-A candidates used by the low-yield sanity target.
+
+    Strand B is useful, but foresight-method papers must not convince the Main Radar that
+    it has found enough EU R&I-geopolitics evidence for the cycle.
+    """
+    return [x for x in genuinely_new_ab_candidates(items) if x.get("strand") in {"A", "both"}]
 
 
 def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
@@ -12994,7 +13302,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -13072,7 +13380,7 @@ def main() -> int:
         )
 
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
-    KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES = known_sets_from_previous(previous)
+    KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, KNOWN_AB_DOI_TITLES = known_sets_from_previous(previous)
     state = initial_scan_state(previous)
     INSTITUTION_SEEN_FINGERPRINTS = dict(state.get("institution_seen_fingerprints", {}))
     frontier_focus = frontier_gap_plan(previous, state)
@@ -13555,8 +13863,8 @@ def main() -> int:
     # reason to keep the protected continuation tail. Release it now so curator/author/
     # snowball and other ordinary lanes may use the rest of the scan. If primary yield
     # is low, keep the reserve protected until the continuation controller below.
-    primary_target_new_ab = max(1, int(CONFIG.get("target_new_ab_per_scan", 5) or 5))
-    primary_new_ab = len(genuinely_new_ab_candidates(oa + cr + [x for x in inst_base if isinstance(x, dict)]))
+    primary_target_new_ab = max(1, int(CONFIG.get("target_new_a_per_scan", CONFIG.get("target_new_ab_per_scan", 5)) or 5))
+    primary_new_ab = len(genuinely_new_a_candidates(oa + cr + [x for x in inst_base if isinstance(x, dict)]))
     primary_low_yield = primary_new_ab < primary_target_new_ab
     # When the primary pass is below the five-item search-depth sanity target, preserve
     # scholarly API capacity for the protected broad continuation controller.  Exact-author
@@ -14351,7 +14659,7 @@ def main() -> int:
     # depth only: raw API hits, duplicates and marginal records never count toward it and
     # the substantive/quality gates remain unchanged. If the fresh four-month rotation is
     # still sparse, use a bounded 4-6 month extension and keep only Highest-merit evidence.
-    target_new_ab = max(1, int(CONFIG.get("target_new_ab_per_scan", 20) or 20))
+    target_new_ab = max(1, int(CONFIG.get("target_new_a_per_scan", CONFIG.get("target_new_ab_per_scan", 5)) or 5))
     low_yield_threshold = max(
         max(0, int(CONFIG.get("low_yield_fresh_rotation_trigger_max_new_ab", 3) or 3)),
         target_new_ab - 1,
@@ -14359,11 +14667,12 @@ def main() -> int:
     low_yield_rotation = {
         "enabled": bool(CONFIG.get("low_yield_fresh_rotation_enabled", True)),
         "target_new_ab": target_new_ab,
+        "target_strand": "A",
         "trigger_max_new_ab": low_yield_threshold,
         "triggered": False,
         "reserved_seconds": low_yield_reserved_seconds,
         "actual_seconds_remaining_at_controller": low_yield_actual_seconds_remaining,
-        "new_ab_before": len(genuinely_new_ab_candidates(oa + cr + inst)),
+        "new_ab_before": len(genuinely_new_a_candidates(oa + cr + inst)),
         "new_ab_after_fresh_rotation": 0,
         "fresh_openalex_queries": [],
         "fresh_crossref_queries": [],
@@ -14438,7 +14747,7 @@ def main() -> int:
                     cr.extend(extra_curator)
                 low_yield_rotation["high_signal_recovery"]["curator_exact_candidates"] = len(extra_curator)
 
-        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_a_candidates(oa + cr + inst))
         low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
     fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
@@ -14570,7 +14879,7 @@ def main() -> int:
             execution_stats["low_yield_fresh_institution_sources_executed"] = int(execution_stats.get("low_yield_fresh_institution_sources_executed", 0)) + len(fresh_inst_executed)
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(fresh_exec.get("crossref_abstracts_enrichment_attempted", 0))
             before_wave = low_yield_rotation["new_ab_after_fresh_rotation"]
-            after_wave = len(genuinely_new_ab_candidates(oa + cr + inst))
+            after_wave = len(genuinely_new_a_candidates(oa + cr + inst))
             low_yield_rotation["new_ab_after_fresh_rotation"] = after_wave
             low_yield_rotation["fresh_waves"].append({
                 "wave": wave_idx,
@@ -14655,7 +14964,7 @@ def main() -> int:
             oa.extend(adjacency_snowball)
         low_yield_rotation["high_signal_recovery"]["priority_people_candidates"] = len(adjacency_priority)
         low_yield_rotation["high_signal_recovery"]["citation_snowball_candidates"] = len(adjacency_snowball)
-        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_a_candidates(oa + cr + inst))
         low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
     # A second low-yield fallback may look into months 4-6, but only the existing
@@ -14771,7 +15080,7 @@ def main() -> int:
         newly_kept_extended = dedupe_candidates(ext_oa_kept + ext_cr_kept + ext_inst_kept)
         low_yield_rotation["extended_highest_admitted"] = len(newly_kept_extended)
         extended_highest_candidates = dedupe_candidates(extended_highest_candidates + newly_kept_extended)
-        low_yield_rotation["new_ab_after_extended_fallback"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+        low_yield_rotation["new_ab_after_extended_fallback"] = len(genuinely_new_a_candidates(oa + cr + inst))
     else:
         low_yield_rotation["new_ab_after_extended_fallback"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
