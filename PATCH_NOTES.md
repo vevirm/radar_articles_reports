@@ -1,3 +1,11 @@
+# R&I Radar v17.20.27
+## Browser-upload compatibility: stale hidden workflow can no longer block Main
+- GitHub's browser bulk upload can update visible scanner/test files while leaving `.github/workflows/*.yml` at an older revision. The observed failure was exactly this: the new regression suite ran under the old hourly/six-hour-gate workflow and stopped before `scan_radar.py` executed.
+- Main regression tests now accept either the preferred fixed four-hour workflow or the explicitly recognized legacy hourly/six-hour workflow **only when** the scanner compatibility layer is present.
+- Under that legacy workflow, `scan_radar.py` already aligns `scan_state.last_completed_at` so the old six-hour due gate becomes due at the next real four-hour slot, and it writes `full_rescue_run_enabled=false`, so the old separate GitHub rescue step computes `dispatch=false`.
+- The preferred shipped workflow is unchanged: 00:17/04:17/08:17/12:17/16:17/20:17 UTC, one logical cycle, low-yield continuation inside the scanner, shared Main/Historical lock.
+- This release is deliberately deployment-robust: uploading the complete repository through the browser should no longer produce a red Main job merely because the hidden workflow YAML was not overwritten.
+
 # v17.20.26 — Historical coverage rotation and deeper backfill
 
 - Reworked the Historical scanner from broad whole-period keyword rotation into persistent **coverage rotation** across topic families, elite source batches, two-year publication bands, API result depth and direct-source depth.
