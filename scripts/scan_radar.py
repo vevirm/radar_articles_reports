@@ -808,6 +808,13 @@ def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[st
             key = stable_item_identity(item.get("title", ""), item.get("link", ""))
             if key != "title:":
                 ab_ids.add(key)
+            # Keep a title identity alongside DOI/link identity. Discovery endpoints can
+            # rediscover the same publication under a DOI while the saved corpus carries
+            # a publisher URL (or vice versa). The low-yield controller must not count that
+            # representation change as a genuinely new item.
+            title_key = "title:" + norm_title(item.get("title", ""))
+            if title_key != "title:":
+                ab_ids.add(title_key)
             link = normalized_link(item.get("link", ""))
             if link:
                 ab_links.add(link)
@@ -9815,15 +9822,30 @@ def new_ab_unique_count(strand_a: Iterable[dict[str, Any]], strand_b: Iterable[d
 
 
 def genuinely_new_ab_candidates(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Return unique gate-passing A/B candidates not already present in the saved corpus.
+    """Project the genuinely new A/B rows that could survive final publication.
 
-    Low-yield decisions must be based on actual potential admissions, not raw API hits,
-    duplicates, or records already known to the radar.
+    This function drives low-yield continuation. It therefore mirrors the *final* shared
+    A/B worthiness guard before counting novelty. Earlier builds counted candidates that
+    had a strand label but would later fail ``final_ab_candidate_worthiness``; a scan could
+    consequently report zero retained items while the controller incorrectly believed it
+    already had five and refused to continue.
+
+    DOI/title representation changes are also treated as known: the same paper must not
+    satisfy the search-depth target merely because one endpoint returned a DOI and the
+    saved corpus carries a publisher URL.
     """
-    candidates = dedupe_candidates([x for x in items if isinstance(x, dict) and x.get("strand") in {"A", "B", "both"}])
+    candidates = dedupe_candidates([
+        x for x in items
+        if isinstance(x, dict) and x.get("strand") in {"A", "B", "both"}
+    ])
     out: list[dict[str, Any]] = []
     for item in candidates:
-        if identity(item) in KNOWN_AB_IDENTITIES:
+        if not final_ab_candidate_worthiness(item):
+            continue
+        ident = identity(item)
+        stable_ident = stable_item_identity(item.get("title", ""), item.get("link", ""))
+        title_ident = "title:" + norm_title(item.get("title", ""))
+        if ident in KNOWN_AB_IDENTITIES or stable_ident in KNOWN_AB_IDENTITIES or title_ident in KNOWN_AB_IDENTITIES:
             continue
         link = normalized_link(item.get("link", ""))
         if link and link in KNOWN_AB_LINKS:
@@ -14109,6 +14131,7 @@ def main() -> int:
         "new_ab_after_fresh_rotation": 0,
         "fresh_openalex_queries": [],
         "fresh_crossref_queries": [],
+        "fresh_institution_sources": [],
         "fresh_themes": [],
         "extended_fallback_attempted": False,
         "extended_openalex_queries": [],
@@ -14120,18 +14143,31 @@ def main() -> int:
     fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
     fresh_query_n = max(1, int(CONFIG.get("low_yield_fresh_rotation_queries_per_source", 8) or 8))
     fresh_bank = diversified_query_bank(all_queries + b_method_bank + finding_context_bank)
+    # Institutional continuation is a first-class rescue lane, not merely a fallback
+    # after scholarly APIs. This matters when both OpenAlex and Crossref are rate-limited:
+    # the cycle must still rotate into previously unexecuted source territory instead of
+    # stopping at zero because no scholarly endpoint remains healthy.
+    fresh_inst_n = max(0, int(CONFIG.get("low_yield_fresh_rotation_institution_sources_per_wave", 20) or 0))
+    fresh_inst_source_by_domain: dict[str, dict[str, Any]] = {}
+    for src in institution_sources_all:
+        if not isinstance(src, dict):
+            continue
+        domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+        if domain and domain not in fresh_inst_source_by_domain:
+            fresh_inst_source_by_domain[domain] = src
+    fresh_inst_domain_bank = list(fresh_inst_source_by_domain)
     low_yield_rotation["fresh_waves"] = []
     fresh_max_waves = max(1, int(CONFIG.get("low_yield_fresh_rotation_max_waves", 3) or 3))
     if (
         low_yield_rotation["enabled"]
         and low_yield_rotation["new_ab_before"] <= low_yield_threshold
         and budget_remaining() > fresh_min_remaining
-        and not (oa_failed and cr_failed)
-        and fresh_bank
+        and (fresh_bank or fresh_inst_domain_bank)
     ):
         low_yield_rotation["triggered"] = True
         fresh_oa_cursor = int(state.get("low_yield_openalex_cursor", state.get("openalex_explore_cursor", 0)) or 0)
         fresh_cr_cursor = int(state.get("low_yield_crossref_cursor", state.get("crossref_explore_cursor", 0)) or 0)
+        fresh_inst_cursor = int(state.get("low_yield_institution_cursor", state.get("institution_cursor", 0)) or 0)
         for wave_idx in range(1, fresh_max_waves + 1):
             if low_yield_rotation["new_ab_after_fresh_rotation"] >= target_new_ab:
                 break
@@ -14145,16 +14181,25 @@ def main() -> int:
             fresh_cr_queries, fresh_cr_next, _ = rotating_batch_excluding(
                 fresh_bank, fresh_cr_cursor, fresh_query_n if not cr_failed else 0, already_cr
             )
-            if not (fresh_oa_queries or fresh_cr_queries):
+            already_inst_domains = set(execution_stats.get("institution_sources", set()))
+            fresh_inst_domains, fresh_inst_next, _ = rotating_batch_excluding(
+                fresh_inst_domain_bank, fresh_inst_cursor, fresh_inst_n, already_inst_domains
+            ) if fresh_inst_domain_bank and fresh_inst_n else ([], fresh_inst_cursor, True)
+            fresh_inst_sources = [fresh_inst_source_by_domain[d] for d in fresh_inst_domains if d in fresh_inst_source_by_domain]
+            if not (fresh_oa_queries or fresh_cr_queries or fresh_inst_sources):
                 break
             themes = list(dict.fromkeys(query_theme(q) for q in fresh_oa_queries + fresh_cr_queries))
             low_yield_rotation["fresh_openalex_queries"].extend(fresh_oa_queries)
             low_yield_rotation["fresh_crossref_queries"].extend(fresh_cr_queries)
+            low_yield_rotation["fresh_institution_sources"].extend(fresh_inst_domains)
             low_yield_rotation["fresh_themes"] = list(dict.fromkeys(low_yield_rotation["fresh_themes"] + themes))
+            work_label = ", ".join(themes) if themes else "institutional/source rotation"
+            if fresh_inst_sources:
+                work_label += f" + {len(fresh_inst_sources)} unexecuted institutional source(s)"
             log_progress(
                 f"Low-yield continuation wave {wave_idx}/{fresh_max_waves}: "
-                f"{low_yield_rotation['new_ab_after_fresh_rotation']} genuinely new A/B item(s) so far; "
-                "trying fresh unexecuted query families: " + ", ".join(themes)
+                f"{low_yield_rotation['new_ab_after_fresh_rotation']} publishable genuinely new A/B item(s) so far; "
+                "trying fresh work: " + work_label
             )
             fresh_exec: dict[str, Any] = {}
             fresh_seconds = min(
@@ -14162,7 +14207,7 @@ def main() -> int:
                 max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
             )
             fresh_deadline = time.monotonic() + fresh_seconds
-            with cf.ThreadPoolExecutor(max_workers=2) as ex:
+            with cf.ThreadPoolExecutor(max_workers=3) as ex:
                 futs: list[tuple[str, Any]] = []
                 if fresh_oa_queries:
                     futs.append(("oa", ex.submit(
@@ -14177,12 +14222,23 @@ def main() -> int:
                         state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
                         {q: "low-yield-fresh" for q in fresh_cr_queries}, fresh_exec
                     )))
+                if fresh_inst_sources:
+                    futs.append(("inst", ex.submit(
+                        safe_stage, f"Institutional low-yield continuation wave {wave_idx}", collect_institutions, DATE_FLOOR, warnings,
+                        False, fresh_inst_sources, fresh_deadline, fresh_exec, False, DATE_FLOOR
+                    )))
                 for family, fut in futs:
                     extra = [x for x in fut.result() if isinstance(x, dict)]
-                    (oa if family == "oa" else cr).extend(extra)
+                    if family == "oa":
+                        oa.extend(extra)
+                    elif family == "cr":
+                        cr.extend(extra)
+                    else:
+                        inst.extend(extra)
             fresh_oa_executed = set(fresh_exec.get("openalex_queries", set()))
             fresh_cr_executed = set(fresh_exec.get("crossref_broad_queries", set()))
-            old_oa_cursor, old_cr_cursor = fresh_oa_cursor, fresh_cr_cursor
+            fresh_inst_executed = set(fresh_exec.get("institution_sources", set()))
+            old_oa_cursor, old_cr_cursor, old_inst_cursor = fresh_oa_cursor, fresh_cr_cursor, fresh_inst_cursor
             if fresh_oa_queries:
                 fresh_oa_cursor = commit_planned_cursor_if_executed(
                     state, "low_yield_openalex_cursor", fresh_oa_cursor, fresh_oa_queries, fresh_oa_next, fresh_oa_executed
@@ -14191,10 +14247,16 @@ def main() -> int:
                 fresh_cr_cursor = commit_planned_cursor_if_executed(
                     state, "low_yield_crossref_cursor", fresh_cr_cursor, fresh_cr_queries, fresh_cr_next, fresh_cr_executed
                 )
+            if fresh_inst_domains:
+                fresh_inst_cursor = commit_planned_cursor_if_executed(
+                    state, "low_yield_institution_cursor", fresh_inst_cursor, fresh_inst_domains, fresh_inst_next, fresh_inst_executed
+                )
             execution_stats.setdefault("openalex_queries", set()).update(fresh_oa_executed)
             execution_stats.setdefault("crossref_broad_queries", set()).update(fresh_cr_executed)
+            execution_stats.setdefault("institution_sources", set()).update(fresh_inst_executed)
             execution_stats["low_yield_fresh_openalex_executed"] = int(execution_stats.get("low_yield_fresh_openalex_executed", 0)) + len(fresh_oa_executed)
             execution_stats["low_yield_fresh_crossref_executed"] = int(execution_stats.get("low_yield_fresh_crossref_executed", 0)) + len(fresh_cr_executed)
+            execution_stats["low_yield_fresh_institution_sources_executed"] = int(execution_stats.get("low_yield_fresh_institution_sources_executed", 0)) + len(fresh_inst_executed)
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(fresh_exec.get("crossref_abstracts_enrichment_attempted", 0))
             before_wave = low_yield_rotation["new_ab_after_fresh_rotation"]
             after_wave = len(genuinely_new_ab_candidates(oa + cr + inst))
@@ -14207,13 +14269,16 @@ def main() -> int:
                 "openalex_executed": len(fresh_oa_executed),
                 "crossref_planned": len(fresh_cr_queries),
                 "crossref_executed": len(fresh_cr_executed),
+                "institution_sources_planned": len(fresh_inst_domains),
+                "institution_sources_executed": len(fresh_inst_executed),
                 "themes": themes,
             })
             # If neither source actually executed a request, another wave in the same
             # exhausted family cannot help. Preserve cursors and move to other fallbacks.
-            if not fresh_oa_executed and not fresh_cr_executed:
+            if not fresh_oa_executed and not fresh_cr_executed and not fresh_inst_executed:
                 state["low_yield_openalex_cursor"] = old_oa_cursor
                 state["low_yield_crossref_cursor"] = old_cr_cursor
+                state["low_yield_institution_cursor"] = old_inst_cursor
                 break
 
     # A second low-yield fallback may look into months 4-6, but only the existing

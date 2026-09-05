@@ -84,6 +84,55 @@ class LowYieldRotationTests(unittest.TestCase):
             scan.KNOWN_AB_LINKS = old_links
         self.assertEqual({x["title"] for x in out}, {"New Paper", "Method Paper"})
 
+    def test_low_yield_count_applies_final_worthiness_and_title_novelty(self):
+        old_ids = scan.KNOWN_AB_IDENTITIES
+        old_links = scan.KNOWN_AB_LINKS
+        scan.KNOWN_AB_IDENTITIES = {"title:known doi paper"}
+        scan.KNOWN_AB_LINKS = set()
+        try:
+            rows = [
+                {
+                    "title": "Historical development of universities in Europe, 1850-1950",
+                    "summary": "A historical account of European universities.",
+                    "type": "peer-reviewed article",
+                    "strand": "A",
+                    "link": "https://example.org/historical",
+                },
+                {
+                    "title": "Known DOI Paper",
+                    "summary": "European research security under strategic competition.",
+                    "type": "peer-reviewed article",
+                    "strand": "A",
+                    "link": "https://doi.org/10.1234/example.1",
+                    "_doi": "10.1234/example.1",
+                },
+                {
+                    "title": "Research security in European universities under US-China technology competition",
+                    "summary": "European universities face research-security constraints as US-China technology competition changes scientific collaboration and technology access.",
+                    "type": "peer-reviewed article",
+                    "strand": "A",
+                    "link": "https://doi.org/10.1234/example.2",
+                    "_doi": "10.1234/example.2",
+                },
+            ]
+            out = scan.genuinely_new_ab_candidates(rows)
+        finally:
+            scan.KNOWN_AB_IDENTITIES = old_ids
+            scan.KNOWN_AB_LINKS = old_links
+        self.assertEqual([x["title"] for x in out], [
+            "Research security in European universities under US-China technology competition"
+        ])
+
+    def test_low_yield_continuation_survives_both_scholarly_api_failures(self):
+        src = SCAN_PATH.read_text(encoding='utf-8')
+        start = src.index('# Target-driven low-yield rule:')
+        end = src.index('# A second low-yield fallback may look into months 4-6', start)
+        block = src[start:end]
+        self.assertNotIn('and not (oa_failed and cr_failed)', block)
+        self.assertIn('fresh_inst_sources', block)
+        self.assertIn('low_yield_institution_cursor', block)
+        self.assertGreater(scan.CONFIG.get('low_yield_fresh_rotation_institution_sources_per_wave', 0), 0)
+
     def test_rescue_cursor_does_not_advance_on_partial_execution(self):
         state = {}
         scan.commit_planned_cursor_if_executed(state, "cursor", 2, ["a", "b"], 4, {"a"})

@@ -1,3 +1,13 @@
+# R&I Radar v17.20.28
+
+## Low-yield continuation correctness
+
+- Fixes the controller bug where pre-final A/B candidates could satisfy the five-item search-depth target even though the published scan retained zero genuinely new items.
+- Low-yield counts now apply the same final shared worthiness guard and treat DOI/title representation changes as already known.
+- Adds an institutional continuation lane to every low-yield wave. If OpenAlex and Crossref are both rate-limited, the same four-hour cycle now keeps rotating through previously unexecuted institutional/report sources instead of stopping.
+- Keeps the five-item figure as a search-depth sanity target only. Admission quality is unchanged.
+- Preserves the uploaded v17.20.27 corpus and scan state as the authoritative base.
+
 # R&I Radar v17.20.27
 ## Browser-upload compatibility: stale hidden workflow can no longer block Main
 - GitHub's browser bulk upload can update visible scanner/test files while leaving `.github/workflows/*.yml` at an older revision. The observed failure was exactly this: the new regression suite ran under the old hourly/six-hour-gate workflow and stopped before `scan_radar.py` executed.
