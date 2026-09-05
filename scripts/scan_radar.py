@@ -5,7 +5,7 @@ Key properties
 --------------
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
-* Strand A requires direct European/EU scope plus substantive R&I evidence. Strategic/geopolitical significance is assessed and recorded when explicit or inferable, but it is not a hard textual admission gate: the radar may surface R&I evidence whose longer-run strategic consequences need editorial interpretation.
+* Strand A requires direct European/EU scope, substantive R&I evidence, and a source-supported geopolitical/strategic mechanism. Discovery may be broad, but admission is not padded with generic Europe/R&I material.
 * Strand B is a method-development library: a publication must contribute a new, adapted,
   extended, refined or otherwise explicitly developed futures/foresight method, or a genuinely
   forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
@@ -26,7 +26,7 @@ Key properties
   authoritative EU decisions/notifications into Strand A when the underlying source itself
   passes the normal substantive A gate.
 
-The scanner aims for high-recall discovery with substantive admission: European/EU scope + genuine R&I/related-system substance. Strategic significance is an analytical layer, not a mandatory keyword/co-occurrence test. It does not pad.
+The scanner aims for high-recall discovery with substantive admission: European/EU scope + genuine R&I/related-system substance + a source-supported strategic/geopolitical mechanism. It does not pad.
 """
 from __future__ import annotations
 
@@ -427,31 +427,43 @@ def stage_deadline_reached(stage_deadline: float | None, reserve_seconds: int = 
 
 
 def source_stage_failed(warnings: list[str], label: str) -> bool:
-    """True only when the *core source family* is unavailable for the rest of the run.
+    """True only when the *core source family* is genuinely unavailable.
 
-    A stage time-slice ending is not a source failure.  Just as importantly, a 429 from
-    an auxiliary exact-author / people / snowball lookup must not poison the health flag
-    for the main broad-query collector.  V17.20.32 did exactly that: the primary OpenAlex
-    and Crossref searches completed dozens of rotating queries, then priority-researcher
-    lookups hit 429s; the later low-yield controller consequently disabled *both* broad
-    scholarly continuation lanes and spent all three waves on institutions only.
+    HTTP 429 is deliberately *not* a hard failure here.  It is a temporary throttle.
+    Treating it as fatal made the protected low-yield phase refuse to retry either
+    scholarly source even though ten minutes of scan time remained.  That is especially
+    harmful because the public limits can recover after a cooldown.  Hard authentication,
+    permission and endpoint failures still disable the family for the rest of the run.
 
-    Explicit family-level stop/unavailable messages remain fatal wherever they occur.
-    A bare 429/rate-limit warning is family-fatal only when the warning itself is emitted
-    by that core family (i.e. it starts with ``OpenAlex`` / ``Crossref``), not merely when
-    the family name appears inside an auxiliary-lane warning.
+    Auxiliary-lane warnings never decide the core family health merely because they name
+    the source.  ``source_stage_rate_limited`` records throttling separately.
     """
     nlabel = normalized(label)
     relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
     for w in relevant:
-        if (
-            "fatal stage error" in w
-            or "public endpoint unavailable" in w
-            or "source stopped for this run" in w
-            or "endpoint stopped for this run" in w
+        # A 429 warning can itself contain "source stopped for this run".  It is only a
+        # local collector stop, not evidence that a later cooldown retry is impossible.
+        if "http 429" in w or "rate limit" in w:
+            continue
+        if "fatal stage error" in w or "public endpoint unavailable" in w:
+            return True
+        if w.startswith(nlabel) and re.search(r"http\s+(?:401|403|409)\b", w):
+            return True
+        if w.startswith(nlabel) and (
+            "source stopped for this run" in w or "endpoint stopped for this run" in w
         ):
             return True
-        if w.startswith(nlabel) and ("http 429" in w or "rate limit" in w):
+    return False
+
+
+def source_stage_rate_limited(warnings: list[str], label: str) -> bool:
+    """Whether the core source family encountered a public-endpoint throttle this run."""
+    nlabel = normalized(label)
+    for raw in warnings:
+        w = normalized(raw)
+        if not w.startswith(nlabel):
+            continue
+        if "http 429" in w or "rate limit" in w:
             return True
     return False
 
@@ -5793,7 +5805,6 @@ def collect_openalex(
             return [], "endpoint stopped for this run", 0
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget", 0
-        mark_executed(q)
         params = {
             "search": q,
             "filter": f"from_publication_date:{query_from.isoformat()},to_publication_date:{dt.date.today().isoformat()}",
@@ -5808,6 +5819,10 @@ def collect_openalex(
             try:
                 r = openalex_get("works", params=params, timeout=timeout)
                 if r.status_code == 200:
+                    # Rotation progress means a successful source response, not merely
+                    # that a request was attempted.  Previously a 429 still advanced the
+                    # query cursor because the query was marked before the HTTP call.
+                    mark_executed(q)
                     works = r.json().get("results", [])
                     _diag_inc("openalex_raw_records", len(works))
                     return convert_works(works, query_from, q), None, len(works)
@@ -7280,6 +7295,7 @@ def collect_crossref(
     retries = max(0, int(CONFIG.get("scholarly_public_retries", 2)))
     rate_lock = threading.Lock()
     last_request = [0.0]
+    stop_public = threading.Event()
     broad_depth_state = broad_depth_state if isinstance(broad_depth_state, dict) else {}
     priority_depth_state = priority_depth_state if isinstance(priority_depth_state, dict) else {}
     executed_broad_queries: set[str] = set()
@@ -7364,9 +7380,10 @@ def collect_crossref(
         return out
 
     def fetch_page(q: str, journal: str, offset: int, lane: str) -> tuple[list[dict[str, Any]], str | None, int]:
+        if stop_public.is_set():
+            return [], "endpoint stopped after rate limit", 0
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget", 0
-        mark_executed(q, journal)
         query_from = (query_dates_override or {}).get(q, from_date) if not journal else from_date
         page_rows = priority_rows if journal else rows
         params = {
@@ -7398,6 +7415,10 @@ def collect_crossref(
             try:
                 r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
                 if r.status_code == 200:
+                    # Cursor advancement is success-based.  A rate-limited or failed
+                    # request remains pending for a later rotation instead of silently
+                    # consuming a query/journal slot that never returned evidence.
+                    mark_executed(q, journal)
                     works = r.json().get("message", {}).get("items", [])
                     _diag_inc("crossref_raw_records", len(works))
                     return convert_items(works, query_from, q, journal), None, len(works)
@@ -7412,6 +7433,7 @@ def collect_crossref(
                             delay = min(30.0, 8.0 * (attempt + 1))
                         time.sleep(delay)
                         continue
+                    stop_public.set()
                     return [], "HTTP 429 rate limited after cooldown retries", 0
                 if r.status_code in {500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
@@ -7453,6 +7475,14 @@ def collect_crossref(
         relevant, err, relevant_count = fetch_page(q, journal, 0, "relevance")
         if err:
             return relevant, err
+        # Public Crossref capacity is more valuable as *query breadth* than as a second
+        # page-1 view of the same query.  The old relevance+newest pair doubled request
+        # cost and repeatedly exhausted the public endpoint before the low-yield/depth
+        # rotation could run.  OpenAlex and source-first journal lanes already provide a
+        # strong newest-first view, so ordinary broad Crossref discovery uses one request
+        # per query by default.  Explicit depth-only recovery below remains available.
+        if not journal and not bool(CONFIG.get("crossref_primary_second_lane_enabled", False)):
+            return dedupe_candidates(relevant), None
         newest, newest_err, _ = fetch_page(q, journal, 0, "newest")
         if newest_err == "budget":
             return dedupe_candidates(relevant), newest_err
@@ -7489,13 +7519,13 @@ def collect_crossref(
         """
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             return [], "budget"
-        with execution_lock:
-            executed_source_journals.add(journal)
         source_rows = int(CONFIG.get("crossref_source_first_rows", 60))
         source_depth_max = max(1, int(CONFIG.get("crossref_source_first_depth_pages_max", 4) or 1))
         key = f"source-first::{journal}"
 
         def request_source_page(offset: int) -> tuple[list[dict[str, Any]], str | None, int]:
+            if stop_public.is_set():
+                return [], "endpoint stopped after rate limit", 0
             params = {
                 "query.container-title": journal,
                 "filter": f"from-pub-date:{DATE_FLOOR.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
@@ -7511,6 +7541,8 @@ def collect_crossref(
                 try:
                     r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
                     if r.status_code == 200:
+                        with execution_lock:
+                            executed_source_journals.add(journal)
                         works = r.json().get("message", {}).get("items", [])
                         _diag_inc("crossref_raw_records", len(works))
                         target = re.sub(r'[^a-z0-9]+', '', normalized(journal))
@@ -7532,6 +7564,7 @@ def collect_crossref(
                                 delay = min(30.0, 8.0 * (attempt + 1))
                             time.sleep(delay)
                             continue
+                        stop_public.set()
                         return [], "HTTP 429 rate limited after cooldown retries", 0
                     if r.status_code in {500, 502, 503, 504} and attempt < retries:
                         time.sleep(min(8.0, 1.5 * (attempt + 1))); continue
@@ -7596,6 +7629,10 @@ def collect_crossref(
                 warnings.append(f"Crossref priority {journal}: {err}")
         if err == "budget":
             budget_hit = True
+            break
+        if err and ("429" in err or "rate limit" in normalized(err) or "endpoint stopped after rate limit" in normalized(err)):
+            # Preserve every not-yet-successful task for the next continuation/run rather
+            # than spending the remaining stage on repeated public-endpoint throttles.
             break
 
     if budget_hit:
@@ -9770,6 +9807,8 @@ A_RETIRED_EXACT_TITLES = {
         'The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union',
         'The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries',
         'Addressing poverty and social exclusion: a comparative study of 15 social programs across Europe and the Americas',
+        'Advancing the WEFE nexus: Expert insights on implementation and challenges',
+        '“I understand more what works”: Evaluating an intervention developed to support dramatherapists in writing their first clinical case study',
     ]
 }
 
@@ -12757,6 +12796,30 @@ def highest_source_merit(item: dict[str, Any]) -> bool:
     """Legacy name: true only for the narrow high-authority retention route."""
     return source_merit_score(item) == 100
 
+
+def extended_high_quality_merit(item: dict[str, Any]) -> bool:
+    """Quality gate for low-yield discovery in months 4-6.
+
+    The old fallback queried OpenAlex/Crossref and then discarded virtually every journal
+    result because ``highest_source_merit`` only recognises a small set of official/public
+    institutions.  That made the scholarly half of the fallback mostly decorative.  For
+    recovery only, allow peer-reviewed Tier-1/2 journal evidence as well as the existing
+    highest-authority institutional sources.  The ordinary EU-R&I-geopolitical admission
+    gate has already run before this function is reached, so this changes source-age recall
+    rather than subject precision.
+    """
+    if not isinstance(item, dict):
+        return False
+    if highest_source_merit(item):
+        return True
+    tier = normalized(item.get("source_tier", ""))
+    typ = normalized(item.get("type", ""))
+    if "preprint" in typ or "tier 3" in tier:
+        return False
+    scholarly = "peer reviewed" in typ or "peer-reviewed" in typ or "journal" in typ or "article" in typ
+    good_tier = "tier 1" in tier or "tier 2" in tier
+    return bool(scholarly and good_tier)
+
 def source_can_reach_highest(src: dict[str, Any]) -> bool:
     if not isinstance(src, dict):
         return False
@@ -13901,6 +13964,8 @@ def main() -> int:
     # the initial discovery phase prevented the promised fallback from running.
     oa_failed = source_stage_failed(warnings, "openalex")
     cr_failed = source_stage_failed(warnings, "crossref")
+    oa_rate_limited = source_stage_rate_limited(warnings, "openalex")
+    cr_rate_limited = source_stage_rate_limited(warnings, "crossref")
 
     # Exact URLs supplied through the curated manual lane are retried first. This is a
     # precision-preserving recall repair: only the supplied URL is fetched, and admission
@@ -14309,6 +14374,8 @@ def main() -> int:
         "extended_crossref_queries": [],
         "extended_institution_sources": [],
         "extended_highest_admitted": 0,
+        "openalex_rate_limited_before_controller": bool(oa_rate_limited),
+        "crossref_rate_limited_before_controller": bool(cr_rate_limited),
     }
     low_yield_rotation["new_ab_after_fresh_rotation"] = low_yield_rotation["new_ab_before"]
 
@@ -14376,7 +14443,12 @@ def main() -> int:
 
     fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
     fresh_query_n = max(1, int(CONFIG.get("low_yield_fresh_rotation_queries_per_source", 8) or 8))
-    fresh_bank = diversified_query_bank(all_queries + b_method_bank + finding_context_bank)
+    # Put curator-derived and live-finding queries first in the rescue bank.  These are
+    # empirically closer to the user's known-good EU-R&I-geopolitics examples than the
+    # generic long query bank, while still facing the exact same admission gate.
+    fresh_bank = diversified_query_bank(
+        curator_seed_bank + finding_context_bank + strategic_scholarly_focus + all_queries + b_method_bank
+    )
     # Institutional continuation is a first-class rescue lane, not merely a fallback
     # after scholarly APIs. This matters when both OpenAlex and Crossref are rate-limited:
     # the cycle must still rotate into previously unexecuted source territory instead of
@@ -14407,14 +14479,19 @@ def main() -> int:
                 break
             if budget_remaining() <= fresh_min_remaining:
                 break
-            already_oa = set(execution_stats.get("openalex_queries", set()))
-            already_cr = set(execution_stats.get("crossref_broad_queries", set()))
-            fresh_oa_queries, fresh_oa_next, _ = rotating_batch_excluding(
-                fresh_bank, fresh_oa_cursor, fresh_query_n if not oa_failed else 0, already_oa
-            )
-            fresh_cr_queries, fresh_cr_next, _ = rotating_batch_excluding(
-                fresh_bank, fresh_cr_cursor, fresh_query_n if not cr_failed else 0, already_cr
-            )
+            # The continuation is deliberately a *depth* rotation, not another page-1
+            # query pass.  Reusing a query is fine because the persisted low-yield depth
+            # state moves to page 2/3/4 instead of rediscovering the same easy records.
+            # A temporary 429 does not disable the family; use a smaller cooldown probe
+            # and let success-only cursor accounting preserve any query that still fails.
+            oa_wave_n = min(fresh_query_n, 4) if oa_rate_limited else fresh_query_n
+            cr_wave_n = min(fresh_query_n, 4) if cr_rate_limited else fresh_query_n
+            fresh_oa_queries, fresh_oa_next, _ = rotating_batch(
+                fresh_bank, fresh_oa_cursor, oa_wave_n if not oa_failed else 0
+            ) if fresh_bank and not oa_failed else ([], fresh_oa_cursor, True)
+            fresh_cr_queries, fresh_cr_next, _ = rotating_batch(
+                fresh_bank, fresh_cr_cursor, cr_wave_n if not cr_failed else 0
+            ) if fresh_bank and not cr_failed else ([], fresh_cr_cursor, True)
             already_inst_domains = set(execution_stats.get("institution_sources", set()))
             fresh_inst_domains, fresh_inst_next, _ = rotating_batch_excluding(
                 fresh_inst_domain_bank, fresh_inst_cursor, fresh_inst_n, already_inst_domains
@@ -14447,14 +14524,14 @@ def main() -> int:
                     futs.append(("oa", ex.submit(
                         safe_stage, f"OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, DATE_FLOOR, warnings,
                         fresh_oa_queries, fresh_deadline, {q: DATE_FLOOR for q in fresh_oa_queries},
-                        state["result_depth"]["openalex"], {q: "low-yield-fresh" for q in fresh_oa_queries}, fresh_exec
+                        state["result_depth"]["openalex"], {q: "low-yield-depth" for q in fresh_oa_queries}, fresh_exec, True
                     )))
                 if fresh_cr_queries:
                     futs.append(("cr", ex.submit(
                         safe_stage, f"Crossref low-yield continuation wave {wave_idx}", collect_crossref, DATE_FLOOR, warnings,
                         fresh_cr_queries, [], [], fresh_deadline, {q: DATE_FLOOR for q in fresh_cr_queries},
                         state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
-                        {q: "low-yield-fresh" for q in fresh_cr_queries}, fresh_exec
+                        {q: "low-yield-depth" for q in fresh_cr_queries}, fresh_exec, True
                     )))
                 if fresh_inst_sources:
                     futs.append(("inst", ex.submit(
@@ -14657,7 +14734,7 @@ def main() -> int:
                 if not isinstance(raw, dict):
                     continue
                 d = parse_date(raw.get("date"))
-                if d and EXTENDED_DATE_FLOOR <= d < DATE_FLOOR and highest_source_merit(raw):
+                if d and EXTENDED_DATE_FLOOR <= d < DATE_FLOOR and extended_high_quality_merit(raw):
                     raw["extended_retention"] = True
                     raw["retention_window_months"] = EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS
                     kept.append(raw)

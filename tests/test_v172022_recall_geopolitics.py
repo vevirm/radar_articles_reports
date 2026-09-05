@@ -54,7 +54,10 @@ class RecallWithoutTopicDriftTests(unittest.TestCase):
     def test_high_output_journal_depth_and_institution_depth_are_enabled(self):
         self.assertGreaterEqual(scan.CONFIG.get('crossref_source_first_depth_pages_max', 0), 3)
         self.assertGreaterEqual(scan.CONFIG.get('institution_pages_per_domain', 0), 12)
-        self.assertGreaterEqual(scan.CONFIG.get('crossref_missing_abstract_enrichment_per_scan', 0), 100)
+        # Metadata rescue remains meaningful but is no longer allowed to burn hundreds of
+        # network calls after live runs showed zero admissions from that oversized lane.
+        self.assertGreaterEqual(scan.CONFIG.get('crossref_missing_abstract_enrichment_per_scan', 0), 36)
+        self.assertLessEqual(scan.CONFIG.get('crossref_missing_abstract_enrichment_per_scan', 999), 60)
 
 
 if __name__ == '__main__':

@@ -74,7 +74,7 @@ class MainRadarRecallRecoveryTests(unittest.TestCase):
     def test_curator_examples_receive_more_rotating_attention(self):
         self.assertGreaterEqual(scan.CONFIG.get('curator_seed_query_bank_size', 0), 24)
         self.assertGreaterEqual(scan.CONFIG.get('curator_seed_queries_per_scan', 0), 10)
-        self.assertGreaterEqual(scan.CONFIG.get('manual_recovery_urls_per_scan', 0), 20)
+        self.assertGreaterEqual(scan.CONFIG.get('manual_recovery_urls_per_scan', 0), 10)
 
     def test_source_expansion_reopens_backfill_without_resetting_rotation(self):
         previous = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))

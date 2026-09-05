@@ -1,3 +1,16 @@
+# v17.20.36 — repair rotation progress, rate-limit recovery and anti-low-hanging depth
+
+- Fixed a fundamental rotation bug: OpenAlex/Crossref queries and source-first journals now advance their persistent cursors **only after a successful HTTP 200 response**. HTTP 429/failed attempts no longer consume unsearched rotation slots.
+- HTTP 429 is now treated as a temporary throttle, not a permanent source-family failure. The protected low-yield phase may retry the scholarly family after cooldown; true 401/403/409/fatal endpoint failures still disable it.
+- Low-yield continuation is now a **depth rotation** (page 2/3/4...) over persisted query state instead of another page-1 pass over easy records. Up to three bounded depth waves are available when the genuinely-new A/B count remains below the five-item search-depth target.
+- Crossref broad discovery now uses one page-1 request per ordinary query instead of relevance + newest for every query. OpenAlex/newest/source-first lanes still provide recency coverage, while Crossref capacity is preserved for more distinct and deeper searches.
+- Crossref stops the current collector promptly after a sustained 429 and leaves all not-yet-successful tasks pending, rather than burning the remaining stage on repeated throttled requests.
+- Rebalanced primary public-API load (72 OpenAlex / 80 Crossref broad; bounded 20 source-first and 20 priority Crossref tasks) and reduced low-yield-zero metadata enrichment work so protected depth/search capacity survives to the controller.
+- The 4–6 month low-yield fallback can now retain genuinely high-quality Tier-1/Tier-2 peer-reviewed journal evidence, not only a tiny official-institution allowlist. The ordinary EU R&I + geopolitical relevance gate is unchanged.
+- Low-yield rescue prioritises curator-derived and live-finding query neighbourhoods before the generic bank.
+- Removed the resurrected WEFE and dramatherapy false positives from the packaged corpus and added them to the permanent retired-title guard so Git-history recovery cannot bring them back.
+- Restored the intended shipped workflows: Main runs on upload/manual + fixed four-hour schedule with one internal low-yield cycle; Historical remains daily and separate under the shared scanner lock. Legacy hidden-workflow compatibility remains in visible code.
+
 # v17.20.35 — isolate upload-state recovery from regression tests
 
 - Fixes the v17.20.34 GitHub upload failure where `Run scanner regression tests` saw the repository push event and the new pre-upload Git-history recovery fired inside ordinary unit-test calls to `load_previous()`. That contaminated isolated test fixtures with hundreds of live-corpus rows and stopped the scan before discovery began.

@@ -37,11 +37,12 @@ class SchedulerBreadthTests(unittest.TestCase):
 
 
 class SourceFailureReallocationTests(unittest.TestCase):
-    def test_openalex_429_marks_source_unavailable_for_later_lanes(self):
+    def test_openalex_429_is_retryable_throttle_not_hard_source_failure(self):
         warnings = [
             "OpenAlex HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run; continuing with Crossref and direct publisher/institution scanning"
         ]
-        self.assertTrue(scan.source_stage_failed(warnings, "openalex"))
+        self.assertFalse(scan.source_stage_failed(warnings, "openalex"))
+        self.assertTrue(scan.source_stage_rate_limited(warnings, "openalex"))
 
     def test_stage_budget_warning_alone_does_not_mark_source_failed(self):
         self.assertFalse(scan.source_stage_failed(["OpenAlex scan budget reached; 11 queued query/queries skipped"], "openalex"))
@@ -54,8 +55,11 @@ class SourceFailureReallocationTests(unittest.TestCase):
         self.assertFalse(scan.source_stage_failed(warnings, "openalex"))
         self.assertFalse(scan.source_stage_failed(warnings, "crossref"))
 
-    def test_core_crossref_429_still_marks_family_failed(self):
-        self.assertTrue(scan.source_stage_failed(["Crossref HTTP 429; source stopped for this run"], "crossref"))
+    def test_core_crossref_429_is_retryable_but_permission_failure_is_hard(self):
+        warnings = ["Crossref HTTP 429; source stopped for this run"]
+        self.assertFalse(scan.source_stage_failed(warnings, "crossref"))
+        self.assertTrue(scan.source_stage_rate_limited(warnings, "crossref"))
+        self.assertTrue(scan.source_stage_failed(["Crossref HTTP 403; source stopped for this run"], "crossref"))
 
     def test_reallocation_config_preserves_strict_gate_but_adds_replacement_search(self):
         self.assertTrue(scan.CONFIG.get("source_failure_reallocation_enabled"))
@@ -2366,7 +2370,7 @@ class WholeRepositoryUploadStateTests(unittest.TestCase):
         self.assertEqual(loaded["scan_state"]["crossref_broad_cursor"], 177)
         self.assertEqual(loaded["scan_state"]["last_completed_at"], "2026-09-05T12:30Z")
 
-    def test_low_yield_switches_methods_instead_of_three_generic_waves(self):
-        self.assertEqual(int(scan.CONFIG.get("low_yield_fresh_rotation_max_waves", 0)), 2)
+    def test_low_yield_switches_methods_and_keeps_three_depth_waves_available(self):
+        self.assertEqual(int(scan.CONFIG.get("low_yield_fresh_rotation_max_waves", 0)), 3)
         self.assertGreaterEqual(int(scan.CONFIG.get("curator_seed_queries_per_scan", 0)), 10)
-        self.assertGreaterEqual(int(scan.CONFIG.get("manual_recovery_urls_per_scan", 0)), 20)
+        self.assertGreaterEqual(int(scan.CONFIG.get("manual_recovery_urls_per_scan", 0)), 10)

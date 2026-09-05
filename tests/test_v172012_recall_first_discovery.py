@@ -17,7 +17,9 @@ class RecallFirstDiscoveryTests(unittest.TestCase):
     def test_source_universe_is_hundreds_not_a_handful(self):
         self.assertFalse(scan.CONFIG.get('crossref_full_source_census_each_scan'))
         self.assertFalse(scan.CONFIG.get('institution_full_census_each_scan'))
-        self.assertGreaterEqual(scan.CONFIG.get('crossref_source_first_journals_per_scan', 0), 40)
+        # Source-first work stays bounded so public Crossref capacity is not consumed
+        # before broad/depth rotation. The *universe* remains large and persistent.
+        self.assertGreaterEqual(scan.CONFIG.get('crossref_source_first_journals_per_scan', 0), 16)
         self.assertGreaterEqual(scan.CONFIG.get('institution_sources_per_scan', 0), 70)
         self.assertGreaterEqual(len(scan.CONFIG.get('institution_sources', [])), 190)
         self.assertGreaterEqual(len(scan.CONFIG.get('crossref_priority_journals', [])), 160)
@@ -28,8 +30,11 @@ class RecallFirstDiscoveryTests(unittest.TestCase):
 
     def test_base_query_slice_is_no_longer_tiny(self):
         self.assertGreaterEqual(scan.CONFIG.get('scholarly_base_queries_per_scan', 0), 30)
-        self.assertGreaterEqual(scan.CONFIG.get('openalex_queries_per_scan', 0), 90)
-        self.assertGreaterEqual(scan.CONFIG.get('crossref_broad_queries_per_scan', 0), 100)
+        # Primary breadth is intentionally capped below the public throttle; the protected
+        # low-yield depth waves carry the remaining search budget when yield is low.
+        self.assertGreaterEqual(scan.CONFIG.get('openalex_queries_per_scan', 0), 60)
+        self.assertGreaterEqual(scan.CONFIG.get('crossref_broad_queries_per_scan', 0), 70)
+        self.assertGreaterEqual(scan.CONFIG.get('low_yield_fresh_rotation_max_waves', 0), 3)
 
     def test_missing_abstract_does_not_hide_obvious_tier2_eu_ri_paper(self):
         ev = scan.gate_scope(
