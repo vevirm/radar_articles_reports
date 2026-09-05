@@ -94,7 +94,13 @@ DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
 BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", "1050"))
-MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 600))))
+# Browser bulk uploads can leave the old hidden Historical workflow in place, where
+# HISTORICAL_MIN_RUNTIME_SECONDS=600 was hard-coded.  Newer Historical rotation is
+# target-driven, so visible config may explicitly ignore that stale environment value.
+if bool(CONFIG.get("ignore_legacy_min_runtime_env", True)):
+    MIN_RUNTIME_SECONDS = int(CONFIG.get("minimum_runtime_seconds", 0) or 0)
+else:
+    MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 600))))
 REQUEST_TIMEOUT = int(os.environ.get("HISTORICAL_REQUEST_TIMEOUT", "12"))
 STARTED_MONO = time.monotonic()
 DEADLINE = STARTED_MONO + max(120, BUDGET_SECONDS)

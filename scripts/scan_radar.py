@@ -5846,7 +5846,14 @@ def collect_openalex(
         latest, err, latest_count = fetch_page(q, query_from, 1)
         if err:
             return latest, err
-        if depth_max <= 1 or latest_count < per_page:
+        # Breadth-first primary discovery: page 1 is enough for ordinary rotating queries.
+        # Persisted deeper pages are reserved for explicit exploration/gap/curator lanes,
+        # otherwise keyless OpenAlex spends two requests per query and hits 429 before the
+        # rotating query bank has received broad attention.
+        deep_lanes = {clean_text(x) for x in CONFIG.get(
+            "openalex_primary_deep_lanes", ["explore", "gap", "finding-context", "curator-seed"]
+        ) if clean_text(x)}
+        if depth_max <= 1 or latest_count < per_page or lane not in deep_lanes:
             return latest, None
         with depth_lock:
             page = max(2, int(depth_state.get(depth_key, 2) or 2))
@@ -7192,6 +7199,43 @@ def apply_curator_matrix_placements(
     state["published_in_ab"] = sum(1 for x in results if x.get("published_strand") in {"A", "B", "both"})
     return state
 
+
+def crossref_execution_plan(
+    queries: list[str],
+    priority_tasks: list[tuple[str, str]],
+    source_journals: list[str],
+    broad_weight: int = 2,
+) -> list[tuple[str, Any]]:
+    """Interleave Crossref work so broad rotation cannot be starved by easy source feeds.
+
+    Earlier builds ran every source-first journal, then every journal/query task, and only
+    then the broad rotating query bank.  Under the protected low-yield reserve that often
+    meant the stage deadline arrived with *zero* broad queries executed.  The plan gives
+    broad discovery a configurable repeated slot while still preserving source-first and
+    priority-journal attention.  Cursor advancement remains execution-based, so unexecuted
+    tasks stay available for later scans.
+    """
+    q = list(queries or [])
+    p = list(priority_tasks or [])
+    j = list(source_journals or [])
+    weight = max(1, int(broad_weight or 1))
+    pattern = ["broad"] * weight + ["source", "priority"]
+    qi = pi = ji = 0
+    out: list[tuple[str, Any]] = []
+    while qi < len(q) or pi < len(p) or ji < len(j):
+        progressed = False
+        for kind in pattern:
+            if kind == "broad" and qi < len(q):
+                out.append((kind, q[qi])); qi += 1; progressed = True
+            elif kind == "source" and ji < len(j):
+                out.append((kind, j[ji])); ji += 1; progressed = True
+            elif kind == "priority" and pi < len(p):
+                out.append((kind, p[pi])); pi += 1; progressed = True
+        if not progressed:
+            break
+    return out
+
+
 def collect_crossref(
     from_date: dt.date,
     warnings: list[str],
@@ -7408,7 +7452,14 @@ def collect_crossref(
             return dedupe_candidates(relevant), newest_err
 
         combined = relevant + newest
-        if max_pages <= 1 or relevant_count < page_rows:
+        deep_lanes = {clean_text(x) for x in CONFIG.get(
+            "crossref_primary_deep_lanes", ["explore", "gap", "finding-context", "curator-seed"]
+        ) if clean_text(x)}
+        should_deepen = (
+            (not journal and lane in deep_lanes)
+            or (bool(journal) and bool(CONFIG.get("crossref_priority_query_depth_enabled", False)))
+        )
+        if max_pages <= 1 or relevant_count < page_rows or not should_deepen:
             return dedupe_candidates(combined), None
 
         page = max(2, int(state_map.get(key, 2) or 2))
@@ -7506,44 +7557,38 @@ def collect_crossref(
 
     out: list[dict[str, Any]] = []
     budget_hit = False
-
-    if source_sweep_journals:
-        log_progress(f"Crossref source-first journal sweep: {len(source_sweep_journals)} rotating journal(s) this run")
-        for journal in source_sweep_journals:
+    broad_weight = max(1, int(CONFIG.get("crossref_broad_execution_weight", 2) or 2))
+    plan = crossref_execution_plan(queries, priority_tasks, source_sweep_journals, broad_weight)
+    if plan:
+        log_progress(
+            f"Crossref interleaved rotation: {len(queries)} broad query/queries + "
+            f"{len(source_sweep_journals)} source-first journal(s) + {len(priority_tasks)} priority task(s); "
+            f"broad weight {broad_weight}"
+        )
+    for kind, payload in plan:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            budget_hit = True
+            break
+        if kind == "broad":
+            items, err = fetch_query(str(payload))
+            out.extend(items)
+            if err and err != "budget":
+                warnings.append(f"Crossref {err}")
+        elif kind == "source":
+            journal = str(payload)
             items, err = fetch_source_journal(journal)
             out.extend(items)
-            if err == "budget":
-                budget_hit = True; break
-            if err:
+            if err and err != "budget":
                 warnings.append(f"Crossref source-first {journal}: {err}")
-
-    if priority_tasks and not budget_hit:
-        log_progress(f"Crossref priority journal sweep: {len(priority_tasks)} rotating task(s) this run")
-        for journal, q in priority_tasks:
-            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
-                budget_hit = True
-                break
+        else:
+            journal, q = payload
             items, err = fetch_query(q, journal)
             out.extend(items)
-            if err == "budget":
-                budget_hit = True
-                break
-            if err:
+            if err and err != "budget":
                 warnings.append(f"Crossref priority {journal}: {err}")
-
-    if not budget_hit:
-        log_progress(f"Crossref broad scholarly sweep: {len(queries)} queries")
-        for q in queries:
-            if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
-                budget_hit = True
-                break
-            items, err = fetch_query(q)
-            out.extend(items)
-            if err == "budget":
-                budget_hit = True
-                break
-            if err:
-                warnings.append(f"Crossref {err}")
+        if err == "budget":
+            budget_hit = True
+            break
 
     if budget_hit:
         warnings.append("Crossref scan budget reached; remaining queued scholarly queries skipped")

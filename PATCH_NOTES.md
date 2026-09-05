@@ -1,3 +1,13 @@
+# v17.20.30 — breadth-first scholarly rotation under real API limits
+
+- Diagnosed the latest saved zero-yield run from the downloaded live repository: the v17.20.29 low-yield reserve worked and ran three fresh continuation waves, but Crossref executed 41 source-first journals and 32 journal/query tasks before executing **0 of 110 broad rotating queries**; OpenAlex reached 54/100 queries before keyless HTTP 429.
+- Crossref work is now interleaved instead of source-first → priority → broad. Broad rotating queries receive two slots for every source-first and priority slot, so a partial/time-limited stage still explores fresh query territory instead of spending its whole budget on the easiest journal feeds.
+- Ordinary Crossref query tasks no longer spend a third request on deep result pages. Deep-page rotation is preserved explicitly for exploration, Matrix-gap, finding-context and curator-seed lanes; source-first journals keep their own persisted depth rotation.
+- Ordinary OpenAlex queries are now breadth-first (newest page first). Persisted deep pages remain active for exploration/gap/context/curator lanes, reducing request consumption so more distinct rotating queries can execute before the anonymous endpoint rate-limits.
+- The ~5-good-items-per-cycle value remains a search-depth sanity target only. The hard EU/European R&I + source-supported geopolitical/strategic gate is unchanged.
+- Legacy hidden-workflow compatibility remains active because GitHub browser bulk uploads can leave `.github/workflows` at an older revision. The old hourly workflow may show harmless no-op runs between real four-hour slots; visible scanner state aligns its six-hour due gate to the intended four-hour slots and disables its external rescue dispatch.
+- Historical compatibility also ignores the stale hidden workflow's old 600-second minimum-runtime environment value; current Historical rotation remains target-driven even when that YAML cannot be replaced by the browser uploader.
+
 # R&I Radar v17.20.29
 
 ## Protected low-yield continuation time
