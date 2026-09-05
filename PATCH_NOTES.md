@@ -1,3 +1,10 @@
+# v17.20.33 — low-yield scholarly continuation repair
+
+- Fixes the post-v17.20.32 one-item run where all three protected continuation waves became institution-only. Auxiliary priority-researcher HTTP 429 warnings no longer mark the entire OpenAlex/Crossref family unavailable.
+- When the primary pass is below the five-item search-depth sanity target, exact-author, foresight-author, citation-snowball and weak-signal scholarly follow-ups are deferred so they cannot consume or rate-limit the broad-query capacity reserved for continuation.
+- The strict final admission rule is unchanged: evidence still needs central EU/European R&I plus a source-supported geopolitical/strategic mechanism. The target changes search depth only and never lowers quality.
+- Current corpus and rotation state are preserved; this release changes discovery allocation, not retained evidence.
+
 # v17.20.32 — browser upload again triggers a real Main Radar scan
 
 This release corrects v17.20.31, which wrongly made repository uploads deployment-only.

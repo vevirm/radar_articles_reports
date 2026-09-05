@@ -427,25 +427,33 @@ def stage_deadline_reached(stage_deadline: float | None, reserve_seconds: int = 
 
 
 def source_stage_failed(warnings: list[str], label: str) -> bool:
-    """True when a source family is unavailable for the remainder of this run.
+    """True only when the *core source family* is unavailable for the rest of the run.
 
-    A normal per-stage time slice ending is *not* a source failure.  But an endpoint
-    that explicitly rate-limits/stops (notably OpenAlex HTTP 429) must be treated as
-    unavailable immediately.  Earlier builds kept trying the stopped endpoint in
-    author, snowball, gap and low-yield lanes, wasting recall time that should have
-    been reallocated to EU/publication and trusted-journal sources.
+    A stage time-slice ending is not a source failure.  Just as importantly, a 429 from
+    an auxiliary exact-author / people / snowball lookup must not poison the health flag
+    for the main broad-query collector.  V17.20.32 did exactly that: the primary OpenAlex
+    and Crossref searches completed dozens of rotating queries, then priority-researcher
+    lookups hit 429s; the later low-yield controller consequently disabled *both* broad
+    scholarly continuation lanes and spent all three waves on institutions only.
+
+    Explicit family-level stop/unavailable messages remain fatal wherever they occur.
+    A bare 429/rate-limit warning is family-fatal only when the warning itself is emitted
+    by that core family (i.e. it starts with ``OpenAlex`` / ``Crossref``), not merely when
+    the family name appears inside an auxiliary-lane warning.
     """
     nlabel = normalized(label)
     relevant = [normalized(w) for w in warnings if nlabel in normalized(w)]
-    return any(
-        ("fatal stage error" in w)
-        or ("public endpoint unavailable" in w)
-        or ("source stopped for this run" in w)
-        or ("endpoint stopped for this run" in w)
-        or ("http 429" in w)
-        or ("rate limit" in w)
-        for w in relevant
-    )
+    for w in relevant:
+        if (
+            "fatal stage error" in w
+            or "public endpoint unavailable" in w
+            or "source stopped for this run" in w
+            or "endpoint stopped for this run" in w
+        ):
+            return True
+        if w.startswith(nlabel) and ("http 429" in w or "rate limit" in w):
+            return True
+    return False
 
 
 def stable_item_identity(title: str = "", doi_or_link: str = "") -> str:
@@ -13417,6 +13425,12 @@ def main() -> int:
     # is low, keep the reserve protected until the continuation controller below.
     primary_target_new_ab = max(1, int(CONFIG.get("target_new_ab_per_scan", 5) or 5))
     primary_new_ab = len(genuinely_new_ab_candidates(oa + cr + [x for x in inst_base if isinstance(x, dict)]))
+    primary_low_yield = primary_new_ab < primary_target_new_ab
+    # When the primary pass is below the five-item search-depth sanity target, preserve
+    # scholarly API capacity for the protected broad continuation controller.  Exact-author
+    # and other auxiliary scholarly lookups are useful only after broad discovery has had
+    # enough room; in V17.20.32 they consumed/rate-limited both APIs before continuation.
+    auxiliary_scholarly_allowed = not primary_low_yield
     if primary_new_ab >= primary_target_new_ab:
         LOW_YIELD_RESERVE_ACTIVE = False
         log_progress(
@@ -13505,7 +13519,7 @@ def main() -> int:
     priority_context_cr_count = 0
     priority_people_trigger = max(0, int(CONFIG.get("priority_people_trigger_below_scholarly_candidates", 18) or 18))
     priority_people_needed = (len(oa) + len(cr) < priority_people_trigger) or frontier_focus.get("empty_cells", 0) >= 8
-    if priority_people_batch and priority_people_needed and budget_remaining() > 90 and not (oa_failed and cr_failed):
+    if priority_people_batch and priority_people_needed and auxiliary_scholarly_allowed and budget_remaining() > 90 and not (oa_failed and cr_failed):
         pp_deadline = time.monotonic() + min(
             int(CONFIG.get("priority_people_stage_seconds", 210) or 210),
             max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
@@ -13603,7 +13617,7 @@ def main() -> int:
     # same expert without creating a permanent source-specific publication lane.
     foresight_author_executed_count = 0
     foresight_author_candidates_count = 0
-    if foresight_author_batch and budget_remaining() > 75 and not (oa_failed and cr_failed):
+    if foresight_author_batch and auxiliary_scholarly_allowed and budget_remaining() > 75 and not (oa_failed and cr_failed):
         fa_seconds = min(
             int(CONFIG.get("foresight_author_followup_stage_seconds", 90) or 90),
             max(25, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
@@ -13796,7 +13810,7 @@ def main() -> int:
     snowball_stats: dict[str, Any] = {"enabled": bool(CONFIG.get("citation_snowball_enabled", True))}
     snowball_candidates: list[dict[str, Any]] = []
     snowball_min_remaining = max(60, int(CONFIG.get("citation_snowball_min_seconds_remaining", 150) or 150))
-    if snowball_stats["enabled"] and budget_remaining() > snowball_min_remaining and not oa_failed:
+    if snowball_stats["enabled"] and auxiliary_scholarly_allowed and budget_remaining() > snowball_min_remaining and not oa_failed:
         snowball_seconds = min(
             int(CONFIG.get("citation_snowball_stage_seconds", 120) or 120),
             max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
@@ -14151,7 +14165,7 @@ def main() -> int:
         "signals_checked": 0, "links_examined": 0, "direct_ab": 0, "queries": 0, "scholarly_ab": 0
     }
     signal_evidence_candidates: list[dict[str, Any]] = []
-    if bool(CONFIG.get("weak_signal_evidence_followup_enabled", True)) and budget_remaining() > 90:
+    if bool(CONFIG.get("weak_signal_evidence_followup_enabled", True)) and auxiliary_scholarly_allowed and budget_remaining() > 90:
         sef_seconds = min(
             int(CONFIG.get("weak_signal_evidence_followup_stage_seconds", 120) or 120),
             max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),

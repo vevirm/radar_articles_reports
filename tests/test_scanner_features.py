@@ -46,6 +46,17 @@ class SourceFailureReallocationTests(unittest.TestCase):
     def test_stage_budget_warning_alone_does_not_mark_source_failed(self):
         self.assertFalse(scan.source_stage_failed(["OpenAlex scan budget reached; 11 queued query/queries skipped"], "openalex"))
 
+    def test_auxiliary_priority_people_429_does_not_poison_core_source_health(self):
+        warnings = [
+            "Priority people OpenAlex works Researcher One: HTTP 429",
+            "Priority people Crossref Researcher One: HTTP 429",
+        ]
+        self.assertFalse(scan.source_stage_failed(warnings, "openalex"))
+        self.assertFalse(scan.source_stage_failed(warnings, "crossref"))
+
+    def test_core_crossref_429_still_marks_family_failed(self):
+        self.assertTrue(scan.source_stage_failed(["Crossref HTTP 429; source stopped for this run"], "crossref"))
+
     def test_reallocation_config_preserves_strict_gate_but_adds_replacement_search(self):
         self.assertTrue(scan.CONFIG.get("source_failure_reallocation_enabled"))
         self.assertGreaterEqual(scan.CONFIG.get("source_failure_reallocation_institution_sources", 0), 16)
@@ -172,6 +183,14 @@ class LowYieldRotationTests(unittest.TestCase):
         self.assertGreaterEqual(reserve, 480)
         self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_stage_seconds", 999), 180)
         self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 999), 120)
+
+    def test_low_primary_yield_defers_auxiliary_scholarly_lanes(self):
+        src = SCAN_PATH.read_text(encoding="utf-8")
+        self.assertIn("auxiliary_scholarly_allowed = not primary_low_yield", src)
+        self.assertIn("priority_people_needed and auxiliary_scholarly_allowed", src)
+        self.assertIn("foresight_author_batch and auxiliary_scholarly_allowed", src)
+        self.assertIn('snowball_stats["enabled"] and auxiliary_scholarly_allowed', src)
+        self.assertIn('weak_signal_evidence_followup_enabled", True)) and auxiliary_scholarly_allowed', src)
 
 
 class MainRecallRepairTests(unittest.TestCase):
