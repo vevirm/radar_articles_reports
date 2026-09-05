@@ -2885,13 +2885,13 @@
   "low_yield_fresh_rotation_enabled": true,
   "low_yield_fresh_rotation_trigger_max_new_ab": 4,
   "low_yield_fresh_rotation_queries_per_source": 10,
-  "low_yield_fresh_rotation_min_seconds_remaining": 180,
-  "low_yield_fresh_rotation_stage_seconds": 240,
+  "low_yield_fresh_rotation_min_seconds_remaining": 90,
+  "low_yield_fresh_rotation_stage_seconds": 150,
   "low_yield_extended_fallback_enabled": true,
   "low_yield_extended_queries_per_source": 5,
   "low_yield_extended_sources_per_scan": 4,
-  "low_yield_extended_fallback_min_seconds_remaining": 150,
-  "low_yield_extended_fallback_stage_seconds": 150,
+  "low_yield_extended_fallback_min_seconds_remaining": 90,
+  "low_yield_extended_fallback_stage_seconds": 120,
   "main_recall_repair_version": "v17.14.1",
   "metadata_rescue_priority_enabled": true,
   "metadata_rescue_priority_min_score": 8,
@@ -3506,5 +3506,6 @@
   "institution_semantic_date_recovery_enabled": true,
   "main_radar_recall_policy": "High recall inside the fixed subject boundary: European/EU research & innovation materially shaped by geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power or talent/capability mechanisms. Discovery may be broad; final admission remains source-supported.",
   "low_yield_fresh_rotation_max_waves": 3,
-  "low_yield_fresh_rotation_institution_sources_per_wave": 20
+  "low_yield_fresh_rotation_institution_sources_per_wave": 20,
+  "low_yield_reserved_seconds": 600
 }

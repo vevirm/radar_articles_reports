@@ -149,6 +149,30 @@ class LowYieldRotationTests(unittest.TestCase):
         self.assertFalse(scan.CONFIG.get("low_yield_full_rescue_run_enabled"))
         self.assertEqual(scan.CONFIG.get("extended_top_quality_lookback_months"), 6)
 
+    def test_low_yield_time_reserve_protects_controller_tail(self):
+        old_deadline = scan.SCAN_DEADLINE_MONO
+        old_active = scan.LOW_YIELD_RESERVE_ACTIVE
+        old_seconds = scan.LOW_YIELD_RESERVE_SECONDS
+        try:
+            scan.SCAN_DEADLINE_MONO = 1000.0
+            scan.LOW_YIELD_RESERVE_ACTIVE = True
+            scan.LOW_YIELD_RESERVE_SECONDS = 300
+            with mock.patch.object(scan.time, "monotonic", return_value=100.0):
+                self.assertEqual(scan.total_budget_remaining(), 900.0)
+                self.assertEqual(scan.budget_remaining(), 600.0)
+                scan.LOW_YIELD_RESERVE_ACTIVE = False
+                self.assertEqual(scan.budget_remaining(), 900.0)
+        finally:
+            scan.SCAN_DEADLINE_MONO = old_deadline
+            scan.LOW_YIELD_RESERVE_ACTIVE = old_active
+            scan.LOW_YIELD_RESERVE_SECONDS = old_seconds
+
+    def test_config_reserves_real_time_for_low_yield_waves(self):
+        reserve = int(scan.CONFIG.get("low_yield_reserved_seconds", 0) or 0)
+        self.assertGreaterEqual(reserve, 480)
+        self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_stage_seconds", 999), 180)
+        self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 999), 120)
+
 
 class MainRecallRepairTests(unittest.TestCase):
     def test_metadata_rescue_priority_prefers_eu_ri_strategic_title(self):

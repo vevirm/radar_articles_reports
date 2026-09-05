@@ -1,3 +1,15 @@
+# R&I Radar v17.20.29
+
+## Protected low-yield continuation time
+
+- Fixes the remaining v17.20.28 failure observed in the live 5 September run: the controller correctly counted **0 genuinely new A/B items**, but ordinary discovery had already consumed about 22m55s of the 24-minute scanner budget, leaving only about 65 seconds; the continuation therefore could not legally start.
+- A low-yield Main cycle now protects **600 seconds (10 minutes)** of the existing 24-minute scanner budget for fresh continuation. Ordinary pre-continuation stages see the reduced working budget and cannot consume that protected tail.
+- If the primary pass already reaches the **5-item search-depth sanity target**, the reserve is released immediately so curator/author/snowball and other ordinary follow-up lanes may use the remaining time. The five-item target remains a search-depth trigger, never an admission quota.
+- Fresh continuation waves are shortened to a bounded 150-second slice with a 90-second start threshold, allowing the same run to make multiple genuinely fresh rotations instead of arriving at the controller too late. The extended highest-merit fallback is likewise bounded to 120 seconds.
+- Adds explicit run diagnostics for `low_yield_reserved_seconds` and `low_yield_actual_seconds_remaining_at_controller`, so future zero-yield runs show whether the controller actually had time to act.
+- Admission remains unchanged: only high-quality, highly relevant European/EU R&I evidence with a source-supported geopolitical/strategic mechanism can enter Strand A. No quality threshold was lowered.
+- Preserves the uploaded v17.20.28 corpus and persisted scan cursors as the authoritative base.
+
 # R&I Radar v17.20.28
 
 ## Low-yield continuation correctness

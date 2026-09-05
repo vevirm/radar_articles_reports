@@ -338,6 +338,8 @@ MAX_C = int(CONFIG.get("max_c_per_scan", 0))
 MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 0))
 REQUEST_TIMEOUT = int(CONFIG.get("request_timeout_seconds", 12))
 SCAN_DEADLINE_MONO: float | None = None
+LOW_YIELD_RESERVE_ACTIVE = False
+LOW_YIELD_RESERVE_SECONDS = 0
 SCAN_STAGE_DEADLINES: dict[str, float] = {}
 KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
@@ -392,10 +394,25 @@ def log_progress(message: str) -> None:
 log_progress.started = time.monotonic()
 
 
-def budget_remaining() -> float:
+def total_budget_remaining() -> float:
     if SCAN_DEADLINE_MONO is None:
         return float("inf")
     return SCAN_DEADLINE_MONO - time.monotonic()
+
+
+def budget_remaining() -> float:
+    """Return the time ordinary pre-continuation work may still spend.
+
+    Low-yield continuation used to be evaluated only after nearly the whole 24-minute
+    scan budget had been consumed.  Reserve a protected tail while ordinary discovery
+    is running; the reserve is released immediately before the low-yield controller (or
+    earlier when the primary pass already reaches the five-item search-depth target).
+    This changes allocation only, never admission.
+    """
+    remaining = total_budget_remaining()
+    if LOW_YIELD_RESERVE_ACTIVE:
+        remaining -= max(0, int(LOW_YIELD_RESERVE_SECONDS or 0))
+    return remaining
 
 
 def deadline_reached(reserve_seconds: int = 0) -> bool:
@@ -12792,11 +12809,15 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
     SCAN_DEADLINE_MONO = time.monotonic() + budget_seconds
+    # Protect a real tail of the same GitHub run for anti-low-hanging-fruit
+    # continuation.  The reserve is held only until the controller gets its turn.
+    LOW_YIELD_RESERVE_SECONDS = max(0, int(CONFIG.get("low_yield_reserved_seconds", 600) or 0))
+    LOW_YIELD_RESERVE_ACTIVE = bool(CONFIG.get("low_yield_fresh_rotation_enabled", True) and LOW_YIELD_RESERVE_SECONDS)
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
@@ -13344,6 +13365,19 @@ def main() -> int:
     cr = [x for x in cr if isinstance(x, dict)]
     oa_failed = source_stage_failed(warnings, "openalex")
     cr_failed = source_stage_failed(warnings, "crossref")
+
+    # If the primary pass already reached the search-depth sanity target, there is no
+    # reason to keep the protected continuation tail. Release it now so curator/author/
+    # snowball and other ordinary lanes may use the rest of the scan. If primary yield
+    # is low, keep the reserve protected until the continuation controller below.
+    primary_target_new_ab = max(1, int(CONFIG.get("target_new_ab_per_scan", 5) or 5))
+    primary_new_ab = len(genuinely_new_ab_candidates(oa + cr + [x for x in inst_base if isinstance(x, dict)]))
+    if primary_new_ab >= primary_target_new_ab:
+        LOW_YIELD_RESERVE_ACTIVE = False
+        log_progress(
+            f"Primary discovery already has {primary_new_ab} publishable genuinely new A/B item(s); "
+            "releasing the protected low-yield continuation reserve to ordinary follow-up lanes"
+        )
 
     # Curator candidate test lane. This is deliberately placed before lower-priority
     # recall/deepening work so supplied papers are actually tested, not merely stored
@@ -14110,6 +14144,13 @@ def main() -> int:
         adapter_domains_all, adapter_cursor_before, adapter_domain_batch, executed_inst
     ) if adapter_domains_all else (0, True, 0)
 
+    # Release the protected tail now. A low-yield cycle must reach this controller with
+    # real time left; v17.20.28 correctly counted zero genuine additions but arrived here
+    # after ~23 minutes, so the continuation could not start.
+    LOW_YIELD_RESERVE_ACTIVE = False
+    low_yield_reserved_seconds = int(LOW_YIELD_RESERVE_SECONDS or 0)
+    low_yield_actual_seconds_remaining = max(0, int(total_budget_remaining()))
+
     # Target-driven low-yield rule: after the ordinary scholarly + institutional pass,
     # count only genuinely new, unique A/B records that already passed the normal gates.
     # If that count is below the discovery target, spend remaining time on a *different*
@@ -14127,6 +14168,8 @@ def main() -> int:
         "target_new_ab": target_new_ab,
         "trigger_max_new_ab": low_yield_threshold,
         "triggered": False,
+        "reserved_seconds": low_yield_reserved_seconds,
+        "actual_seconds_remaining_at_controller": low_yield_actual_seconds_remaining,
         "new_ab_before": len(genuinely_new_ab_candidates(oa + cr + inst)),
         "new_ab_after_fresh_rotation": 0,
         "fresh_openalex_queries": [],
@@ -15255,6 +15298,8 @@ def main() -> int:
             "quiet_scan_rescue_attempted": bool(quiet_rescue.get("attempted")),
             "quiet_scan_rescue_queries": len(quiet_rescue.get("openalex_queries", [])) + len(quiet_rescue.get("crossref_queries", [])),
             "low_yield_rotation_triggered": bool(low_yield_rotation.get("triggered")),
+            "low_yield_reserved_seconds": int(low_yield_rotation.get("reserved_seconds", 0)),
+            "low_yield_actual_seconds_remaining_at_controller": int(low_yield_rotation.get("actual_seconds_remaining_at_controller", 0)),
             "low_yield_new_ab_before": int(low_yield_rotation.get("new_ab_before", 0)),
             "low_yield_new_ab_after_fresh_rotation": int(low_yield_rotation.get("new_ab_after_fresh_rotation", 0)),
             "low_yield_new_ab_after_extended_fallback": int(low_yield_rotation.get("new_ab_after_extended_fallback", 0)),
