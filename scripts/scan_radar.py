@@ -5255,6 +5255,27 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         'source_tier': source_tier,
     }
 
+def _theme_term_present(text: str, term: str) -> bool:
+    """Match watch-theme vocabulary as real words/phrases, not substrings.
+
+    Weak-signal anchoring used the generic high-recall ``distinct_matches`` helper. That
+    helper intentionally allows lexical-family substring matching for long phrases, which
+    made ``aging`` match the tail of ``engaging``. In the live corpus that single accident
+    turned a lunar-governance tabletop into a demographic/research-workforce signal and
+    let it anchor to an unrelated Green Deal paper. Watch themes are labels, not search
+    stems, so they must use phrase boundaries.
+    """
+    low = normalized(text)
+    phrase = normalized(term)
+    if not phrase:
+        return False
+    # A few configured labels intentionally name a lexical family. Keep those families
+    # explicit rather than using unrestricted substring matching for every long term.
+    if phrase == "biotech":
+        return bool(re.search(r"(?<![a-z0-9])biotech(?:nology|nologies)?(?![a-z0-9])", low))
+    return bool(re.search(r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])", low))
+
+
 def themes_for(text: str) -> list[str]:
     low = f" {normalized(text)} "
     result = []
@@ -5275,7 +5296,7 @@ def themes_for(text: str) -> list[str]:
             if explicit or (china and eu and ri):
                 result.append(name)
             continue
-        if distinct_matches(low, terms):
+        if any(_theme_term_present(low, term) for term in terms):
             result.append(name)
     return result
 
@@ -7524,7 +7545,14 @@ def collect_crossref(
             page = max(2, int(state_map.get(key, 2) or 2))
             if page > max_pages:
                 page = 2
-            deep, deep_err, deep_count = fetch_page(q, journal, (page - 1) * page_rows, "relevance")
+            # Low-yield recovery must broaden the retrieval method, not just go deeper
+            # through the same title-only result set. Bibliographic search can recover
+            # neutral-titled papers whose abstracts carry the EU R&I geopolitical mechanism.
+            recall_biblio_lanes = {clean_text(x) for x in CONFIG.get(
+                "crossref_recall_bibliographic_lanes", ["low-yield-depth", "low-yield-extended", "recall-bibliographic"]
+            ) if clean_text(x)}
+            request_lane = "bibliographic" if lane in recall_biblio_lanes else "relevance"
+            deep, deep_err, deep_count = fetch_page(q, journal, (page - 1) * page_rows, request_lane)
             if deep_err:
                 return deep, deep_err
             exhausted = deep_count < page_rows or page >= max_pages
@@ -7533,7 +7561,11 @@ def collect_crossref(
                 execution_stats.setdefault("crossref_depth_exhausted", set()).add(q)
             return dedupe_candidates(deep), None
 
-        relevant, err, relevant_count = fetch_page(q, journal, 0, "relevance")
+        recall_biblio_lanes = {clean_text(x) for x in CONFIG.get(
+            "crossref_recall_bibliographic_lanes", ["low-yield-depth", "low-yield-extended", "recall-bibliographic"]
+        ) if clean_text(x)}
+        primary_request_lane = "bibliographic" if (not journal and lane in recall_biblio_lanes) else "relevance"
+        relevant, err, relevant_count = fetch_page(q, journal, 0, primary_request_lane)
         if err:
             return relevant, err
         # Public Crossref capacity is more valuable as *query breadth* than as a second
@@ -8255,6 +8287,59 @@ def _prominent_date_near_title(soup: BeautifulSoup, title: str) -> dt.date | Non
 
 
 
+def _url_publication_date_hint(url: str, *, allow_month_only: bool = True) -> tuple[dt.date | None, str]:
+    """Conservative date hint from explicit /YYYY/MM[/DD] publication paths.
+
+    Many think-tank/news CMS pages omit date metadata but encode the publication month in
+    the canonical path. Older code accepted only YYYY/MM/DD, losing a large number of
+    otherwise readable high-quality reports. Month-only paths are accepted as the first day
+    of that month solely for discovery-window eligibility and are labelled accordingly.
+    """
+    path = urlparse(clean_text(url)).path
+    m = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|3[01])(?:/|$)", path)
+    if m:
+        try:
+            return dt.date(int(m.group(1)), int(m.group(2)), int(m.group(3))), "url_publication_date"
+        except ValueError:
+            return None, ""
+    if allow_month_only:
+        m = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])(?:/|$)", path)
+        if m:
+            try:
+                return dt.date(int(m.group(1)), int(m.group(2)), 1), "url_publication_month"
+            except ValueError:
+                return None, ""
+    return None, ""
+
+
+def _pdf_visible_date_hint(text: str, url: str = "") -> tuple[dt.date | None, str]:
+    """Find a conservative publication-date hint in the first page/URL of a PDF."""
+    top = clean_text(text)[:2200]
+    labelled = re.search(
+        r"\b(?:published|publication date|issued|release date|date)\s*[:\-]?\s*"
+        r"((?:[0-3]?\d[.\-/ ](?:0?\d|[A-Za-z]{3,9})[.\-/ ]20\d{2})|"
+        r"(?:[A-Za-z]{3,9}\s+[0-3]?\d,?\s+20\d{2})|(?:20\d{2}-\d{1,2}-\d{1,2}))",
+        top, re.I,
+    )
+    if labelled:
+        d = parse_date(labelled.group(1))
+        if d:
+            return d, "pdf_visible_publication_date"
+    # A standalone month + year on the first page is common in policy reports. Require
+    # exactly one distinct month/year pair to avoid grabbing bibliography/history dates.
+    month_hits = re.findall(
+        r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})\b",
+        top, re.I,
+    )
+    uniq = {(m.lower(), y) for m, y in month_hits}
+    if len(uniq) == 1:
+        month, year = next(iter(uniq))
+        d = parse_date(f"{month} 1 {year}")
+        if d:
+            return d, "pdf_visible_publication_month"
+    return _url_publication_date_hint(url, allow_month_only=True)
+
+
 def _semantic_publication_date(soup: BeautifulSoup, title: str = "") -> dt.date | None:
     """Recover a visible/structured publication date from common institutional CMS markup.
 
@@ -8516,13 +8601,7 @@ def parse_institution_pdf(
             published = parse_date(m.group(1))
             date_basis = "pdf_visible_publication_date"
     if not published:
-        m_url = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|3[01])(?:/|$)", urlparse(url).path)
-        if m_url:
-            try:
-                published = dt.date(int(m_url.group(1)), int(m_url.group(2)), int(m_url.group(3)))
-                date_basis = "pdf_url_publication_date"
-            except ValueError:
-                published = None
+        published, date_basis = _pdf_visible_date_hint(body, url)
     if not published:
         if fingerprint and INSTITUTION_DISCOVERED_DATES.get(fingerprint):
             _diag_inc("institution_date_hint_sitemap_lastmod_not_publication")
@@ -8667,13 +8746,11 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         if published:
             date_basis = "prominent_page_date"
     if not published:
-        # URL dates are reliable enough when all three components are explicit.
-        m_url_date = re.search(r"/(20\d{2})/(0?[1-9]|1[0-2])/(0?[1-9]|[12]\d|3[01])(?:/|$)", urlparse(r.url).path)
-        if m_url_date:
-            try:
-                published = dt.date(int(m_url_date.group(1)), int(m_url_date.group(2)), int(m_url_date.group(3)))
-            except ValueError:
-                published = None
+        # Explicit publication paths are useful on CMS pages that omit date metadata.
+        # Month-only /YYYY/MM/ paths are labelled as lower-precision month evidence.
+        published, url_date_basis = _url_publication_date_hint(r.url, allow_month_only=True)
+        if published:
+            date_basis = url_date_basis
     if not published:
         # Fail-closed body fallback: only parse an explicitly labelled published/date
         # phrase near the top of the page, never an arbitrary year mentioned in prose.
@@ -8721,6 +8798,16 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         ptxt, pwords = pdf_text(pdf_url)
         if pwords > word_count and _pdf_text_matches_document(title, ptxt):
             body, word_count = ptxt, pwords
+            # If the linked PDF is the evidence body, its own publication date outranks a
+            # wrapper/news-page date. This prevents a 2026 page from laundering a 2025 PDF
+            # into the current corpus (observed live with the ALLEA academic-freedom row).
+            pdf_date, pdf_date_basis = _pdf_visible_date_hint(ptxt, pdf_url)
+            if pdf_date and abs((published - pdf_date).days) > 45:
+                published = pdf_date
+                date_basis = pdf_date_basis or "linked_pdf_publication_date"
+                if published < effective_publication_floor:
+                    _diag_inc("institution_reject_linked_pdf_before_floor")
+                    return None
             # A report/paper linked from a /news/ wrapper must be judged as the underlying
             # document. Recalculate exclusions against the verified PDF rather than letting
             # the wrapper URL permanently block Strand A.
@@ -10095,6 +10182,7 @@ A_RETIRED_EXACT_TITLES = {
         'The Ukraine and Eastern Europe Model in Local Economic Improvement and Cultivation Strategy',
         'Recession and economic depression reflections in Ireland: Insights from working professionals, managers and entrepreneurs',
         'Democracy and Economic Structural Drivers of Green Supply Chain Management: Evidence From European Economies',
+        'ALLEA Calls for Global Defence of International Research Collaboration and Academic Freedom',
         'Comparing the Foreign Policy Identities of the United States of America and the European Union in Climate Communications and National Narratives',
         'Sustainable Development and Trade: Strengthening EU-Lao PDR Cooperation through the EU-ASEAN Partnership',
         'Sustainable Business Models and Environmental Innovation Capacity: The Moderating Role of Board Effectiveness',
@@ -11315,7 +11403,8 @@ MANUALLY_RETIRED_SIGNAL_HEADLINES = [
     "Funding Radar: G7 and Nordics jointly fund quantum research",
     "International educational project at Aalto University funded by the TFK Programme | Aalto University",
     "EU to co-fund seven AI Gigafactories in race for tech autonomy",
-    "EU launches AI Gigafactories call to boost Europe's computing capacity and unlock more than €30 billion in investment - Shaping Europe’s digital future"
+    "EU launches AI Gigafactories call to boost Europe's computing capacity and unlock more than €30 billion in investment - Shaping Europe’s digital future",
+    "Surface tensions: what a lunar coordination tabletop revealed about governance. - ESPI"
 ]
 
 def _retired_signal_headlines(data: dict[str, Any] | None = None) -> set[str]:
@@ -11432,6 +11521,8 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     # High-authority institutional sources still cannot retain static overview/event pages
     # as C simply because they mention AI/research/competition somewhere in the text.
     if source in _SOURCE_MERIT_PUBLIC_HIGH and standing_institutional_page(headline, desc):
+        return False
+    if not weak_signal_ri_strategic_bridge_ok(headline, desc, themes_for(f"{headline}. {desc}")):
         return False
 
     if eu_news_scope(h):
@@ -12634,6 +12725,54 @@ def collect_weak_signal_evidence_followups(
     return dedupe_candidates(out)
 
 
+def weak_signal_ri_strategic_bridge_ok(headline: str, desc: str, themes: Iterable[str] | None = None) -> bool:
+    """Require the source text itself to carry an R&I/strategic mechanism for Strand C.
+
+    An A anchor explains *why* an event matters; it may not manufacture the connection.
+    This gate therefore rejects generic governance/policy stories that happen to share a
+    loose vocabulary hit with the corpus. It is deliberately broad about the mechanism
+    (research, talent, strategic technology, funding, supply, controls, standards, etc.)
+    but requires that mechanism to be visible in the candidate's own headline/description.
+    """
+    full = clean_text(f"{headline}. {desc}")
+    if not full:
+        return False
+    ri_mechanism = contains_any(full, [
+        "research", "scientific", "science", "researcher", "researchers", "scientist", "scientists",
+        "university", "universities", "laboratory", "laboratories", "r&d", "innovation", "innovative",
+        "technology", "technological", "semiconductor", "chip", "chips", "quantum", "biotech",
+        "biotechnology", "artificial intelligence", "compute", "supercomputer", "patent", "standard",
+        "standards", "research infrastructure", "research infrastructures", "research funding",
+        "innovation funding", "venture capital", "deep tech", "dual use", "dual-use",
+    ])
+    if not ri_mechanism:
+        return False
+    strategic_move = contains_any(full, [
+        "export control", "restriction", "restrict", "ban", "sanction", "blacklist", "screening",
+        "security", "dependency", "dependence", "supply chain", "critical material", "critical mineral",
+        "investment", "invest", "funding", "fund", "subsidy", "partnership", "collaboration",
+        "cooperation", "agreement", "association", "talent", "brain drain", "brain gain", "visa",
+        "recruit", "return", "competition", "competitiveness", "capability", "capacity", "sovereignty",
+        "strategic", "geopolit", "de-risk", "derisk", "technology transfer", "standard setting",
+        "standardisation", "standardization", "acquisition", "factory", "facility", "programme", "program",
+    ])
+    external_actor = contains_any(full, GEO_ACTORS + [
+        "canada", "canadian", "australia", "australian", "singapore", "israel", "israeli",
+        "switzerland", "swiss", "norway", "norwegian", "united arab emirates", "saudi arabia",
+    ])
+    direct_europe = eu_news_scope(full)
+    theme_set = set(themes or themes_for(full)) & WATCH_SIGNAL_THEMES
+    specific_theme = bool(theme_set & {
+        "research security / foreign interference", "EU–China S&T cooperation / de-risking",
+        "export controls / dual use", "fragmentation of global science",
+        "transatlantic / US–China S&T competition", "critical and emerging technologies",
+        "economic security and R&I", "R&I competitiveness / technological capabilities",
+        "supply chains / strategic dependencies", "Horizon Europe / FP10 international participation",
+        "science diplomacy", "research talent / mobility / brain drain", "biosecurity / health resilience",
+    })
+    return bool(ri_mechanism and (strategic_move or external_actor or (direct_europe and specific_theme)))
+
+
 def signal_relation(text: str) -> str:
     low = normalized(text)
     if any(w in low for w in ["stall", "delay", "cancel", "scrap", "reverse", "withdraw", "fail", "collapse", "reject", "block", "cut"]):
@@ -12848,6 +12987,9 @@ def anchor_news(
             diag(n, 'not_weak_signal_candidate')
             continue
         ntext=n.get('headline','')+' '+n.get('_desc','')
+        if not weak_signal_ri_strategic_bridge_ok(headline, desc, n.get('_themes', [])):
+            diag(n, 'no_source_backed_ri_strategic_bridge')
+            continue
         nthemes=set(n.get('_themes',[])) & WATCH_SIGNAL_THEMES
         if not nthemes:
             diag(n, 'no_watch_theme')

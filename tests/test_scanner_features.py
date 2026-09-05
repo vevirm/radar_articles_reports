@@ -553,7 +553,7 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertNotIn("Joint Research Centre", kept.get("core_message", ""))
 
     def test_signal_quality_version_triggers_new_c_cleanup(self):
-        self.assertIn("v17.19.18", scan.SIGNAL_QUALITY_PROFILE_VERSION)
+        self.assertIn("v17.20.38", scan.SIGNAL_QUALITY_PROFILE_VERSION)
         self.assertTrue(scan.needs_precision_signal_cleanup({
             "signal_quality_profile_version": "v17.17.0-relational-c-ontology-guarded"
         }))

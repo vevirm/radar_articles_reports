@@ -1,3 +1,16 @@
+# v17.20.38 — signal integrity + recall plumbing cleanup
+
+- Strand-C watch-theme matching now uses real word/phrase boundaries. This fixes the live `engaging` -> `aging` substring bug that misclassified an ESPI lunar-governance tabletop as demographic/research-workforce evidence.
+- New and saved weak signals now need a source-backed R&I/strategic mechanism in their own headline/description. A Strand-A anchor may explain relevance but cannot manufacture the EU-R&I connection from unrelated source text.
+- Removed the live lunar-governance false signal and retired that exact headline so Git-history recovery cannot restore it. The one-time C quality migration is reopened for the new relational gate.
+- Crossref low-yield/depth and 4–6 month recovery now use bibliographic search rather than title-only search. Normal broad discovery remains title-first for precision; only the recall lanes widen retrieval, and all results still face the unchanged strict final EU R&I + geopolitical gate.
+- Institutional date recovery now accepts explicit `/YYYY/MM/` publication paths when a CMS exposes no date metadata, labelled as month-level evidence instead of silently discarding the page.
+- When an institutional wrapper page borrows a linked PDF as its evidence body, the PDF's own visible/path publication date now outranks the wrapper date. This fixes the live ALLEA case where a June-2026 wrapper laundered a February-2025 PDF into the current Main corpus.
+- Removed that misdated ALLEA wrapper record from the packaged Main corpus and retired the exact title from automatic Main restoration. The underlying 2025 evidence belongs in Historical if it qualifies there.
+- Added regression tests for the lunar substring bug, source-backed C bridge, month-only institutional dates, linked-PDF date precedence, and Crossref title-first vs bibliographic low-yield retrieval.
+- Scanner regression tests no longer make the hidden workflow YAML a hard runtime dependency: the shipped workflow is still checked separately by `scripts/check_workflow_contract.py`, while stale browser-upload workflows remain compatible instead of blocking discovery before Python starts.
+- The final Strand-A subject rule is unchanged: central EU/European R&I plus a source-supported geopolitical/strategic mechanism. The ~5-per-cycle figure remains a search-depth sanity target, never a quota.
+
 # v17.20.37 — plumbing cleanup: stop losing good evidence after discovery
 
 - Manual/curator scholarly references, especially DOI links, now use scholarly resolution (Crossref/OpenAlex/publisher metadata) instead of being misrouted through the institutional HTML parser.
