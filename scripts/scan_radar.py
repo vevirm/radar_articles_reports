@@ -5786,8 +5786,12 @@ def collect_openalex(
     """
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     strategic_query_set = set(strategic_pathway_queries('scholarly'))
-    per_page = int(CONFIG.get("openalex_per_query", 60))
-    depth_max = max(1, int(CONFIG.get("openalex_depth_pages_max", 6) or 1))
+    # OpenAlex changed production access in 2026: anonymous traffic now has a very
+    # small daily budget, while a free API key provides 10x more capacity.  In keyless
+    # mode, spend that budget on a few high-value page-1 searches instead of exhausting
+    # it on depth pagination early in the day and disabling citation/adjacency discovery.
+    per_page = 100 if not OPENALEX_API_KEY else int(CONFIG.get("openalex_per_query", 60))
+    depth_max = 1 if not OPENALEX_API_KEY else max(1, int(CONFIG.get("openalex_depth_pages_max", 6) or 1))
     workers = max(1, min(int(CONFIG.get("openalex_public_workers", 2)), 3))
     timeout = int(CONFIG.get("scholarly_api_timeout_seconds", 12))
     min_interval = float(CONFIG.get("openalex_public_min_interval_seconds", 0.30))
@@ -13463,6 +13467,14 @@ def main() -> int:
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
+    if not OPENALEX_API_KEY:
+        warnings.append(
+            "OpenAlex API key is not configured; using a deliberately small keyless lane. "
+            "Set the OPENALEX_API_KEY repository secret to restore full scholarly discovery capacity."
+        )
+        log_progress("OpenAlex: no API key configured; using protected low-volume keyless mode")
+    else:
+        log_progress("OpenAlex: authenticated API key detected")
     INSTITUTION_DISCOVERED_DATES = {}
     INSTITUTION_SIGNAL_CANDIDATES = []
     SIGNAL_WINDOW_START_DATE = None
@@ -13573,6 +13585,11 @@ def main() -> int:
     # query window, never the institutional/new-signal date floor.
     gap_from = DATE_FLOOR  # Public radar and matrix never search outside the rolling four-month window.
     oa_cap = int(CONFIG.get("openalex_queries_per_scan", 40))
+    # Anonymous OpenAlex is demo-scale in 2026.  Keep a tiny rotating lane alive when
+    # no repository secret is configured, but do not let one scan consume the whole
+    # anonymous daily allowance and poison all later low-yield recovery with HTTP 429.
+    if not OPENALEX_API_KEY:
+        oa_cap = min(oa_cap, max(1, int(CONFIG.get("openalex_keyless_queries_per_scan", 6) or 6)))
     cr_cap = int(CONFIG.get("crossref_broad_queries_per_scan", 35))
 
     # Keep a small, persisted future-method lane active every scan. This is
@@ -14933,7 +14950,7 @@ def main() -> int:
                     True,
                     True,
                 )))
-            if bool(CONFIG.get("citation_snowball_enabled", True)) and not oa_failed:
+            if bool(CONFIG.get("citation_snowball_enabled", True)) and OPENALEX_API_KEY and not oa_failed:
                 futs.append(("snowball", ex.submit(
                     collect_citation_snowball,
                     previous,
@@ -15011,7 +15028,7 @@ def main() -> int:
             # state moves to page 2/3/4 instead of rediscovering the same easy records.
             # A temporary 429 does not disable the family; use a smaller cooldown probe
             # and let success-only cursor accounting preserve any query that still fails.
-            oa_wave_n = min(fresh_query_n, 4) if oa_rate_limited else fresh_query_n
+            oa_wave_n = 0 if not OPENALEX_API_KEY else (min(fresh_query_n, 4) if oa_rate_limited else fresh_query_n)
             cr_wave_n = min(fresh_query_n, 4) if cr_rate_limited else fresh_query_n
             fresh_oa_queries, fresh_oa_next, _ = rotating_batch(
                 fresh_bank, fresh_oa_cursor, oa_wave_n if not oa_failed else 0
@@ -16072,6 +16089,8 @@ def main() -> int:
             "manual_recovery_queue_remaining": len(manual_ingest_state.get("recovery_queue", [])) if manual_ingest_state else 0,
             "scholarly_queries_a": len(CONFIG.get("queries_a", [])),
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
+            "openalex_api_key_configured": bool(OPENALEX_API_KEY),
+            "openalex_access_mode": "authenticated" if OPENALEX_API_KEY else "keyless-protected",
             "openalex_queries_this_run": len(oa_batch),
             "openalex_queries_executed": len(set(execution_stats.get("openalex_queries", set()))),
             "openalex_base_queries_executed": oa_base_executed,
