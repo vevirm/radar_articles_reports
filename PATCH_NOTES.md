@@ -1,3 +1,23 @@
+# v17.20.32 — browser upload again triggers a real Main Radar scan
+
+This release corrects v17.20.31, which wrongly made repository uploads deployment-only.
+The user maintains the project by replacing the whole repository through GitHub's browser
+uploader and expects that upload to run the Main Radar immediately. That behavior is restored.
+
+- A push/upload to `main` is again a **real Main Radar discovery cycle**.
+- The proper Main workflow listens to `push`, the fixed four-hour schedule, and manual dispatch.
+- `radar.json` is excluded from the push trigger, so the scanner's own result commit cannot
+  recursively start another Main scan.
+- Historical remains deployment-only on repository push and continues to scan on its daily
+  schedule/manual dispatch. A stale Historical push workflow is explicitly non-blocking, so it cannot
+  steal the runtime slot from the real Main upload scan.
+- The visible role-aware compatibility guard preserves the same behavior even when GitHub's
+  browser uploader leaves the old hidden workflow YAML in place: stale Main push runs scan;
+  stale Historical push runs exit before source requests.
+- All v17.20.30/31 discovery improvements remain intact: breadth-first scholarly rotation,
+  protected low-yield continuation time, strict EU R&I + geopolitical admission, and persisted
+  rotation cursors.
+
 # v17.20.31 — repository uploads are not radar scans
 
 This release fixes the misleading short “Add files via upload” scanner runs. A repository

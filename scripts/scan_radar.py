@@ -15507,13 +15507,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     _repo_root = Path(__file__).resolve().parents[1]
-    if deployment_only_push_event():
-        print(
-            "[radar] Repository push/upload event: deployment-only. "
-            "Discovery, rotation cursors and scan timestamps are intentionally unchanged; "
-            "scheduled/manual runs perform the real radar scan.",
-            flush=True,
-        )
+    if deployment_only_push_event("main"):
         raise SystemExit(0)
     if defer_if_peer_scanner_active("main", _repo_root):
         raise SystemExit(0)

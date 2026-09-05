@@ -1217,7 +1217,7 @@ def refresh_window_metadata_after_peer_defer() -> None:
 
 
 if __name__=="__main__":
-    if deployment_only_push_event():
+    if deployment_only_push_event("historical"):
         log(
             "Repository push/upload event: deployment-only. Historical discovery, "
             "coverage cursors and timestamps are intentionally unchanged; scheduled/manual runs scan."

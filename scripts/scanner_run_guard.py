@@ -63,20 +63,24 @@ def _main_rescue_pending(root: Path) -> bool:
 
 
 
-def deployment_only_push_event() -> bool:
-    """Return True for GitHub push/upload runs that must not perform discovery.
+def deployment_only_push_event(role: str = "historical") -> bool:
+    """Return True only when a GitHub push must be deployment-only for *role*.
 
-    GitHub's browser bulk uploader can leave an older hidden workflow in place. Those
-    legacy workflows fire the research scanners on every repository push, so uploading a
-    release can otherwise look like a real scan, move timestamps/cursors, or race Main
-    against Historical. Scanner code therefore treats *push* as deployment-only even when
-    stale YAML still invokes the executable. Scheduled and workflow_dispatch runs remain
-    real discovery runs. Local/offline executions are unaffected.
+    The repository is maintained through GitHub's browser bulk uploader. For this project a
+    Main Radar upload is intentionally also a manual discovery trigger: the user expects the
+    newly uploaded scanner to run immediately. Historical stays separate on push so the two
+    research scanners cannot compete for the same runtime slot when a whole repository is
+    uploaded. Scheduled and workflow_dispatch runs remain real scans for both roles.
+
+    This role-aware fallback also works when the browser uploader leaves older hidden workflow
+    YAML in place: legacy Main push runs are allowed to scan; legacy Historical push runs exit
+    before source requests. Local/offline executions are unaffected.
     """
     if str(os.environ.get("GITHUB_ACTIONS") or "").strip().lower() != "true":
         return False
     raw = str(os.environ.get("RADAR_RUN_TRIGGER") or os.environ.get("GITHUB_EVENT_NAME") or "").strip().lower()
-    return raw == "push"
+    role = str(role or "").strip().lower()
+    return raw == "push" and role == "historical"
 
 def _historical_rescue_pending(root: Path) -> bool:
     doc = _recent(root / "historical" / "historical.json", "last_updated")
@@ -146,6 +150,21 @@ def defer_if_peer_scanner_active(role: str, root: Path) -> bool:
         return False
 
     peers = [r for r in active if int(r.get("id") or 0) != run_id]
+
+    # Whole-repository browser uploads can trigger an old Historical workflow at the
+    # same time as Main. Historical push discovery is intentionally suppressed by the
+    # role-aware guard above, so that short deployment-only Historical run must never
+    # steal the runtime slot from the real Main upload scan. GitHub's Actions API exposes
+    # both the workflow path and triggering event, which lets us ignore exactly that peer.
+    current_event = str(os.environ.get("RADAR_RUN_TRIGGER") or os.environ.get("GITHUB_EVENT_NAME") or "").strip().lower()
+    if role == "main" and current_event == "push":
+        peers = [
+            r for r in peers
+            if not (
+                str(r.get("event") or "").strip().lower() == "push"
+                and str(r.get("path") or "").endswith("/.github/workflows/historical-scan.yml")
+            )
+        ]
     if not peers:
         return False
 

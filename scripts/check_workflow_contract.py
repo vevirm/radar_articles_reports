@@ -26,8 +26,9 @@ main = ROOT / ".github/workflows/radar-scan.yml"
 hist = ROOT / ".github/workflows/historical-scan.yml"
 
 require(main, "cron: '17 0,4,8,12,16,20 * * *'", "Main scanner fixed four-hour schedule")
-forbid(main, "  push:", "Main uploads are deployment-only, not discovery runs")
-forbid(hist, "  push:", "Historical uploads are deployment-only, not discovery runs")
+require(main, "  push:", "Main browser uploads trigger an immediate discovery run")
+require(main, "      - radar.json", "Main scanner output does not recursively retrigger itself")
+forbid(hist, "  push:", "Historical uploads remain separate from Main discovery")
 require(hist, "cron: '53 6 * * *'", "Historical scan separated from Main schedule")
 for path, label in ((main, "Main"), (hist, "Historical")):
     require(path, "group: ri-research-scanners", f"{label} shared scanner lock")
@@ -49,7 +50,7 @@ require(hist, "grep -vx 'historical/historical.json'", "Historical persistence-b
 guard = ROOT / "scripts/scanner_run_guard.py"
 hist_scan = ROOT / "historical/scan_historical.py"
 require(guard, "def defer_if_peer_scanner_active", "Legacy workflow runtime collision guard")
-require(guard, "def deployment_only_push_event", "Legacy workflow upload/push discovery guard")
+require(guard, "def deployment_only_push_event", "Role-aware legacy workflow upload/push guard")
 require(hist_scan, "refresh_window_metadata_after_peer_defer", "Historical legacy-defer compatibility")
 
 failed = [x for x in checks if not x[0]]
