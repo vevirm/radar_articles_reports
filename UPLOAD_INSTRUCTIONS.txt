@@ -1,4 +1,4 @@
-Release: 17.20.41
+Release: 17.20.42
 
 UPLOAD THE WHOLE REPOSITORY
 ===========================
@@ -12,17 +12,15 @@ This ZIP is a COMPLETE repository snapshot, not a patch.
 
 IMPORTANT ABOUT GITHUB'S HIDDEN WORKFLOW FOLDER
 -----------------------------------------------
-The package includes the intended `.github/workflows/` files. Some browser/Windows upload
-flows do not actually replace that hidden folder. The visible scanner code is therefore
-kept compatible with the older workflow too:
+This release repairs `.github/workflows/radar-scan.yml` and
+`.github/workflows/historical-scan.yml`. Make sure the complete `.github` folder is included
+in the upload. The repaired workflows use one shared scanner concurrency group, Main runs
+on the fixed four-hour schedule, and Historical no longer runs on every repository push.
 
-- the old hourly/6-hour Main gate is aligned by scanner state to the intended real four-hour slots;
-- its old separate rescue dispatch is disabled by visible config;
-- the Historical scanner ignores the stale 10-minute minimum-runtime environment setting;
-- the runtime guard prevents Main/Historical source retrieval from colliding.
-
-If the hidden workflow stays old, GitHub may show harmless short no-op Main workflow runs
-between real scan slots. A real scan is the run where `Run radar scan` lasts minutes rather
-than 0 seconds.
+OPENALEX API KEY
+----------------
+Do NOT place the OpenAlex key in this repository or in any file in the ZIP. In GitHub, add it
+as an Actions repository secret named exactly `OPENALEX_API_KEY` under:
+Settings -> Secrets and variables -> Actions. The workflows already read that secret.
 
 Do not cherry-pick individual files. Use the whole repository package.
