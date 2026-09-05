@@ -1,3 +1,15 @@
+# v17.20.39 — novelty-first low-yield repair + hard strategic precision
+
+- Fixed the live false positive `Regional knowledge base and firm efficiency: Evidence from start-ups and fast-growing medium-sized firms`. Ordinary phrases such as `access to`, `dependence`, `resilience` and generic `technological capabilities` can no longer combine to manufacture a geopolitical/strategic mechanism.
+- The triangulated strategic-context route keeps genuinely relational mechanisms such as foreign/non-EU suppliers, chokepoints, strategic dependencies, rule power, brain drain/outflow and other externally positioned R&I effects.
+- Removed the live false-positive paper from the packaged Strand-A corpus and added it to the exact retired-title guard so upload-state recovery cannot resurrect it.
+- Crossref ordinary broad discovery now uses bibliographic retrieval, not title-only retrieval. A paper can therefore be discovered when its EU-R&I/geopolitical mechanism is mainly in the abstract/metadata; the strict final subject and quality gate is unchanged.
+- The low-yield Strand-A rescue bank no longer spends scarce slots on Strand-B foresight-method queries. Strand B keeps its own recurring method lane.
+- Researcher adjacency and citation snowballing now run before the extra low-yield broad/depth waves. Live runs had been exhausting OpenAlex with 18 extra queries and only then attempting citation discovery, often after HTTP 429 made the smarter lane unusable.
+- Restored the intended four-hour Main workflow and separated Historical workflow in the release package, while retaining the stale-workflow runtime compatibility guard for browser uploads.
+- Added regression tests for the live false-positive mechanism, a genuine external-dependency counterexample, low-yield Strand-A query allocation, adjacency ordering, and broad Crossref bibliographic retrieval.
+- The ~5 Strand-A items per cycle remains a search-depth sanity target, never an admission quota. Relevance still requires central EU/European R&I plus a source-supported geopolitical/strategic mechanism.
+
 # v17.20.38 — signal integrity + recall plumbing cleanup
 
 - Strand-C watch-theme matching now uses real word/phrase boundaries. This fixes the live `engaging` -> `aging` substring bug that misclassified an ESPI lunar-governance tabletop as demographic/research-workforce evidence.

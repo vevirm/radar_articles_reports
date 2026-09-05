@@ -85,7 +85,7 @@ class SignalPrecisionRecallTests(unittest.TestCase):
         self.assertIn('query.bibliographic', calls[0])
         self.assertNotIn('query.title', calls[0])
 
-    def test_normal_crossref_stays_title_first(self):
+    def test_normal_crossref_uses_configured_bibliographic_recall(self):
         calls = []
         def fake_get(url, params=None, timeout=None, **kwargs):
             calls.append(dict(params or {}))
@@ -101,7 +101,8 @@ class SignalPrecisionRecallTests(unittest.TestCase):
                 depth_lane_overrides={}, execution_stats={}, depth_only=False,
             )
         self.assertTrue(calls)
-        self.assertIn('query.title', calls[0])
+        self.assertIn('query.bibliographic', calls[0])
+        self.assertNotIn('query.title', calls[0])
 
 
 if __name__ == '__main__':

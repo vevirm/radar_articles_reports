@@ -1493,10 +1493,14 @@ A_STRATEGIC_RI_OUTCOME = [
 # must be present, and at least one must describe a relational/control mechanism.
 A_IMPLIED_STRATEGIC_FAMILIES = {
     "dependence_control": [
-        "dependence", "dependency", "reliance", "strategic autonomy", "technological sovereignty",
-        "technology sovereignty", "control over", "access to", "bottleneck", "chokepoint",
-        "vendor lock-in", "lock-in", "external supplier", "foreign supplier", "non-eu supplier",
-        "supply security", "supply chain resilience", "resilience",
+        # Only terms that themselves describe control/external dependence belong in the
+        # hard strategic family. Generic words such as "access to", "resilience",
+        # "dependence" or "bottleneck" occur constantly in ordinary innovation/economics
+        # papers and previously manufactured false geopolitical context.
+        "strategic dependency", "strategic dependencies", "strategic autonomy",
+        "technological sovereignty", "technology sovereignty", "control over",
+        "chokepoint", "vendor lock-in", "external supplier", "foreign supplier",
+        "non-eu supplier", "supply security", "supply chain resilience",
     ],
     "competition_capability": [
         "competitiveness", "competitive position", "global competition", "international competition",
@@ -1523,9 +1527,12 @@ A_IMPLIED_STRATEGIC_FAMILIES = {
         "mutual recognition", "international governance", "technology governance",
     ],
     "talent_position": [
+        # Generic research careers/mobility/talent policy is R&I policy, not automatically
+        # geopolitics. Keep only directional or explicitly competitive allocation signals
+        # in the hard strategic family.
         "brain drain", "brain gain", "researcher outflow", "researcher inflow",
-        "research talent", "scientific talent", "talent competition", "talent attraction",
-        "talent retention", "researcher mobility", "scientist mobility", "research careers",
+        "talent competition", "research talent outflow", "scientific talent outflow",
+        "research talent inflow", "scientific talent inflow",
     ],
     "location_capture": [
         "startup relocation", "start-up relocation", "relocation abroad", "relocate abroad",
@@ -7474,11 +7481,10 @@ def collect_crossref(
             "offset": max(0, int(offset)),
             "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
         }
-        # Relevance pages are deliberately title-focused for broad discovery. Crossref's
-        # bibliographic search is extremely fuzzy and previously returned thousands of
-        # global records that could never pass direct-EU scope. The newest lane remains
-        # bibliographic, preserving recall for records whose strategic context is mainly
-        # in the abstract. Priority-journal tasks also keep bibliographic search.
+        # Query mode is configurable. V17.20.39 uses bibliographic search for ordinary
+        # broad discovery as well as rescue: the final EU + substantive-R&I + strategic
+        # gate is now the precision boundary, so retrieval should not discard papers merely
+        # because their geopolitical mechanism appears in the abstract rather than title.
         relevance_mode = clean_text(CONFIG.get("crossref_relevance_query_mode", "title")).lower()
         if lane == "relevance" and not journal and relevance_mode == "title":
             params["query.title"] = q
@@ -10195,6 +10201,7 @@ A_RETIRED_EXACT_TITLES = {
         'The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union',
         'The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries',
         'Addressing poverty and social exclusion: a comparative study of 15 social programs across Europe and the Americas',
+        'Regional knowledge base and firm efficiency: Evidence from start-ups and fast-growing medium-sized firms',
         'Advancing the WEFE nexus: Expert insights on implementation and challenges',
         '“I understand more what works”: Evaluating an intervention developed to support dramatherapists in writing their first clinical case study',
     ]
@@ -14892,13 +14899,82 @@ def main() -> int:
         low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_a_candidates(oa + cr + inst))
         low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
+    # V17.20.39: try adjacency BEFORE the extra broad/depth waves. In live runs the old
+    # ordering spent 18+ extra OpenAlex queries first and then asked citation snowballing
+    # to run after the endpoint had already hit 429. Researcher/citation adjacency is a
+    # different discovery method and deserves first use of the protected low-yield API
+    # reserve. It still passes every ordinary EU-R&I-geopolitics admission rule.
+    if (
+        low_yield_rotation["enabled"]
+        and low_yield_rotation["new_ab_after_fresh_rotation"] <= low_yield_threshold
+        and total_budget_remaining() > 210
+    ):
+        adjacency_deadline = time.monotonic() + min(
+            150,
+            max(60, int(total_budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
+        )
+        adjacency_exec: dict[str, Any] = {}
+        adjacency_priority: list[dict[str, Any]] = []
+        adjacency_snowball: list[dict[str, Any]] = []
+        with cf.ThreadPoolExecutor(max_workers=2) as ex:
+            futs: list[tuple[str, Any]] = []
+            if priority_people_batch and not cr_failed:
+                futs.append(("priority", ex.submit(
+                    safe_stage,
+                    "low-yield Crossref researcher adjacency",
+                    collect_priority_people,
+                    priority_people_batch,
+                    DATE_FLOOR,
+                    warnings,
+                    adjacency_deadline,
+                    state,
+                    adjacency_exec,
+                    False,   # keep OpenAlex capacity for citation snowballing
+                    True,
+                    True,
+                )))
+            if bool(CONFIG.get("citation_snowball_enabled", True)) and not oa_failed:
+                futs.append(("snowball", ex.submit(
+                    collect_citation_snowball,
+                    previous,
+                    oa + cr,
+                    warnings,
+                    adjacency_deadline,
+                    adjacency_exec,
+                )))
+            for family, fut in futs:
+                try:
+                    result = fut.result()
+                except Exception as e:
+                    warnings.append(f"Low-yield adjacency {family}: {type(e).__name__}: {str(e)[:140]}")
+                    continue
+                if family == "priority":
+                    adjacency_priority = [x for x in (result or []) if isinstance(x, dict)]
+                else:
+                    rows, adj_stats = result if isinstance(result, tuple) and len(result) == 2 else ([], {})
+                    adjacency_snowball = [x for x in (rows or []) if isinstance(x, dict)]
+                    if isinstance(adj_stats, dict):
+                        snowball_stats = adj_stats
+        if adjacency_priority:
+            cr.extend(adjacency_priority)
+        if adjacency_snowball:
+            oa.extend(adjacency_snowball)
+        low_yield_rotation["high_signal_recovery"]["priority_people_candidates"] = len(adjacency_priority)
+        low_yield_rotation["high_signal_recovery"]["citation_snowball_candidates"] = len(adjacency_snowball)
+        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_a_candidates(oa + cr + inst))
+        low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
+
+
     fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
     fresh_query_n = max(1, int(CONFIG.get("low_yield_fresh_rotation_queries_per_source", 8) or 8))
     # Put curator-derived and live-finding queries first in the rescue bank.  These are
     # empirically closer to the user's known-good EU-R&I-geopolitics examples than the
     # generic long query bank, while still facing the exact same admission gate.
+    # The low-yield target is Strand A. Strand B already has its own recurring method
+    # lane above, so spending scarce rescue slots on foresight-method queries can falsely
+    # starve EU-R&I-geopolitics recovery while still leaving the A counter at 0-1.
     fresh_bank = diversified_query_bank(
-        curator_seed_bank + finding_context_bank + strategic_scholarly_focus + all_queries + b_method_bank
+        curator_seed_bank + finding_context_bank + strategic_scholarly_focus + all_queries
     )
     # Institutional continuation is a first-class rescue lane, not merely a fallback
     # after scholarly APIs. This matters when both OpenAlex and Crossref are rate-limited:
@@ -15042,72 +15118,6 @@ def main() -> int:
                 state["low_yield_crossref_cursor"] = old_cr_cursor
                 state["low_yield_institution_cursor"] = old_inst_cursor
                 break
-
-    # If fresh broad/source rotation still mostly rediscovered known material, switch
-    # discovery method rather than running a third near-identical query wave.  Crossref
-    # exact-author attention and OpenAlex citation snowballing are deliberately split by
-    # endpoint so they can run in parallel without one auxiliary lane poisoning the other.
-    # These lanes start from already trusted/curator-backed evidence but still pass every
-    # ordinary EU-R&I-geopolitics admission rule.
-    if (
-        low_yield_rotation["enabled"]
-        and low_yield_rotation["new_ab_after_fresh_rotation"] <= low_yield_threshold
-        and total_budget_remaining() > 210
-    ):
-        adjacency_deadline = time.monotonic() + min(
-            150,
-            max(60, int(total_budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
-        )
-        adjacency_exec: dict[str, Any] = {}
-        adjacency_priority: list[dict[str, Any]] = []
-        adjacency_snowball: list[dict[str, Any]] = []
-        with cf.ThreadPoolExecutor(max_workers=2) as ex:
-            futs: list[tuple[str, Any]] = []
-            if priority_people_batch and not cr_failed:
-                futs.append(("priority", ex.submit(
-                    safe_stage,
-                    "low-yield Crossref researcher adjacency",
-                    collect_priority_people,
-                    priority_people_batch,
-                    DATE_FLOOR,
-                    warnings,
-                    adjacency_deadline,
-                    state,
-                    adjacency_exec,
-                    False,   # keep OpenAlex capacity for citation snowballing
-                    True,
-                    True,
-                )))
-            if bool(CONFIG.get("citation_snowball_enabled", True)) and not oa_failed:
-                futs.append(("snowball", ex.submit(
-                    collect_citation_snowball,
-                    previous,
-                    oa + cr,
-                    warnings,
-                    adjacency_deadline,
-                    adjacency_exec,
-                )))
-            for family, fut in futs:
-                try:
-                    result = fut.result()
-                except Exception as e:
-                    warnings.append(f"Low-yield adjacency {family}: {type(e).__name__}: {str(e)[:140]}")
-                    continue
-                if family == "priority":
-                    adjacency_priority = [x for x in (result or []) if isinstance(x, dict)]
-                else:
-                    rows, adj_stats = result if isinstance(result, tuple) and len(result) == 2 else ([], {})
-                    adjacency_snowball = [x for x in (rows or []) if isinstance(x, dict)]
-                    if isinstance(adj_stats, dict):
-                        snowball_stats = adj_stats
-        if adjacency_priority:
-            cr.extend(adjacency_priority)
-        if adjacency_snowball:
-            oa.extend(adjacency_snowball)
-        low_yield_rotation["high_signal_recovery"]["priority_people_candidates"] = len(adjacency_priority)
-        low_yield_rotation["high_signal_recovery"]["citation_snowball_candidates"] = len(adjacency_snowball)
-        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_a_candidates(oa + cr + inst))
-        low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
     # A second low-yield fallback may look into months 4-6, but only the existing
     # Highest source-merit band is eligible for admission. This is extra recall, not
