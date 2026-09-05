@@ -1,3 +1,12 @@
+# v17.20.43 — package the workflow repair that v17.20.42 claimed but did not actually ship
+
+- Fixes the v17.20.42 packaging error: that archive included tests expecting the restored workflow contract while still carrying legacy workflow YAML. GitHub therefore failed the pre-scan tests and **never reached `Run radar scan`**.
+- The shipped Main workflow is now physically present in the package with the fixed four-hour cron `17 0,4,8,12,16,20 * * *`, no legacy six-hour age gate, shared `ri-research-scanners` concurrency, a 36-minute scan job envelope, and scanner-critical preflight tests.
+- The shipped Historical workflow is physically present with daily `53 6 * * *`, no push trigger, the same shared scanner lock, and `HISTORICAL_MIN_RUNTIME_SECONDS: '0'`.
+- Keeps all v17.20.42 admission fixes: R&I vocabulary alignment, `deep tech` centrality, substantive Horizon Europe Joint Committee governance notices, and source-expansion progress preservation.
+- Keeps authenticated OpenAlex support through the repository secret `OPENALEX_API_KEY`. The failed v17.20.42 run never reached the scanner step, so it never exercised the key.
+- No corpus deletion, quality migration, or source-expansion reset is introduced by this packaging repair.
+
 # v17.20.42 — repair admission vocabulary, governance notices, backfill progress and shipped workflows
 
 - Fixed the R&I vocabulary drift between `_ri_hits()` and the mandatory `_central_ri_hits()` gate. Every direct `A_RI_CORE` term is now centrality-visible, and every strategic-technology mechanism accepted by `_ri_hits()` is also available to `_central_ri_hits()`. This removes the contradiction where the scanner recorded valid `ri_evidence` and then rejected the same candidate as `ri_not_central`.

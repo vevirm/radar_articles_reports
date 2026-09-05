@@ -1,4 +1,4 @@
-Release: 17.20.42
+Release: 17.20.43
 
 UPLOAD THE WHOLE REPOSITORY
 ===========================
@@ -13,7 +13,8 @@ This ZIP is a COMPLETE repository snapshot, not a patch.
 IMPORTANT ABOUT GITHUB'S HIDDEN WORKFLOW FOLDER
 -----------------------------------------------
 This release repairs `.github/workflows/radar-scan.yml` and
-`.github/workflows/historical-scan.yml`. Make sure the complete `.github` folder is included
+`.github/workflows/historical-scan.yml`. v17.20.42 accidentally shipped the new workflow-contract
+tests together with the old workflow YAML, so GitHub correctly stopped before the scanner ran. Make sure the complete `.github` folder is included
 in the upload. The repaired workflows use one shared scanner concurrency group, Main runs
 on the fixed four-hour schedule, and Historical no longer runs on every repository push.
 

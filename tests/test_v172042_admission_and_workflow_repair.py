@@ -99,10 +99,10 @@ class WorkflowRepairTests(unittest.TestCase):
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 
     def test_release_has_version_config_and_test_marker(self):
-        self.assertEqual((ROOT / "VERSION.txt").read_text(encoding="utf-8").strip(), "v17.20.42")
+        self.assertEqual((ROOT / "VERSION.txt").read_text(encoding="utf-8").strip(), "v17.20.43")
         cfg = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
-        self.assertIn("v17.20.42", cfg.get("admission_profile", ""))
-        self.assertIn("# v17.20.42", (ROOT / "PATCH_NOTES.md").read_text(encoding="utf-8"))
+        self.assertIn("v17.20.43", cfg.get("admission_profile", ""))
+        self.assertIn("# v17.20.43", (ROOT / "PATCH_NOTES.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
