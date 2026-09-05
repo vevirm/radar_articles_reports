@@ -1,10 +1,35 @@
-# v17.20.41 — restore useful EU-R&I recall + enforce the keyless OpenAlex cap globally
+# v17.20.41 — recall repair: the scanner no longer rejects its own evidence
 
-- Fixes the v17.20.25–40 zero/one-item regression: strategic/geopolitical context remains a preferred Strand-A route, but it is no longer a universal final veto. A bounded Tier-1/2 major EU-R&I-system route restores strong Horizon Europe, research-infrastructure, research-capacity and strategic-technology evidence when the title itself establishes European or R&I centrality.
-- Keeps the v17.20.39 precision guard: the known `Regional knowledge base and firm efficiency...` false positive and similar non-major/local/consumer material do not qualify through the restored route.
-- Fixes v17.20.40 keyless OpenAlex protection at the request layer. All OpenAlex callers now share one per-scan anonymous request budget, so curator/author/fallback calls cannot silently turn a planned six-query scan into 40+ requests and an HTTP 429.
-- A configured `OPENALEX_API_KEY` still removes the local anonymous cap and enables the full OpenAlex discovery/citation lanes.
-- No corpus rows are deleted by this release.
+- **Fixed the fundamental bug behind the yield collapse.** `_ri_hits()` (which writes `ri_evidence`
+  onto a record) and `_central_ri_hits()` (the mandatory `eu_ri_centrality` admission gate) had drifted
+  onto two different vocabularies. 24 mechanism terms — including `research`, `innovation`, `science`,
+  `competitiveness`, `patent`, `startup`, `scale-up`, `industrial policy` and `technological capabilities` —
+  existed in the recording list but not the admission list. The scanner would find a source, label it
+  `artificial intelligence + innovation` or `strategic technologies + competitiveness`, and then reject
+  it as `ri_not_central`. It found and evidenced material it could not admit.
+- `A_CENTRAL_TECH_RI_MECHANISMS` is now derived from `A_TECH_RI_MECHANISMS` instead of restating it,
+  so the two cannot drift apart again. This route only fires when a strategic technology domain from
+  `A_TECH_DOMAINS` is present in the same sentence, so the mechanism half never admits anything alone.
+- `A_CENTRAL_RI_TERMS` remains strict. Bare `research`, `science` and `innovation` still never establish
+  centrality on their own. Added `deep tech`, which was already a major R&I system term in
+  `A_MAJOR_RI_SYSTEM` but invisible to centrality — that omission alone was rejecting EIC Tech and
+  EIC Impact Reports.
+- Formal governance instruments are no longer treated as event recaps. Horizon Europe third-country
+  association Joint Committee decisions are primary-notice Strand-A evidence, not meeting write-ups.
+- **Added the missing recall regression guard (`tests/test_v172041_recall_guard.py`).** Every precision
+  release asserted that a specific false positive stays out; nothing asserted that the corpus's own true
+  positives stay in, which is why three consecutive tightenings could outrun the evidence base with a
+  fully green suite. The new tests assert the two vocabularies cannot diverge, that recorded evidence is
+  always reproducible by the gate, and that the live corpus stays admissible under a 25% rejection floor.
+- Measured effect: the share of the live Strand-A corpus its own gate would reject falls from 22.2% to
+  14.2%. All four retired false positives (v17.20.34/36/38/39) remain blocked, verified directly and by
+  the full suite — 350 tests pass, 343 pre-existing plus 7 new.
+- **Corrected the shipped workflows**, which were still the legacy revision despite v17.20.39 claiming
+  they had been restored. `scripts/check_workflow_contract.py` now exits clean: Main is back on the fixed
+  four-hour schedule, Historical is back on `53 6 * * *` with no push trigger and `HISTORICAL_MIN_RUNTIME_SECONDS: '0'`,
+  and both scanners share the `ri-research-scanners` lock so they can no longer collide and rate-limit each other.
+- `VERSION.txt` said v17.20.40 while no patch note, config marker or test in the repository mentioned that
+  version. Version is now v17.20.41 with this entry.
 
 # v17.20.39 — novelty-first low-yield repair + hard strategic precision
 

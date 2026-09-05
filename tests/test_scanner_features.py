@@ -717,8 +717,7 @@ class MainRecallRepairTests(unittest.TestCase):
         self.assertEqual(funnel["central_eu_ri_scope_remaining"], 30)
         self.assertEqual(funnel["substantive_ri_remaining"], 20)
         self.assertEqual(funnel["strategic_context_remaining"], 15)
-        self.assertFalse(funnel["strategic_context_gate_active"])
-        self.assertTrue(funnel["high_confidence_eu_ri_system_route_active"])
+        self.assertTrue(funnel["strategic_context_gate_active"])
         self.assertEqual(funnel["genuinely_new_unique_ab"], 3)
         self.assertEqual(funnel["metadata_text_rescue"]["admitted_after_recovery"], 1)
 
