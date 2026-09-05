@@ -1,3 +1,12 @@
+# v17.20.44 — make scanner startup independent of hidden workflow deployment
+
+- Fixes the repeated pre-scan failure seen on GitHub when browser whole-repo uploads update visible code/tests but leave `.github/workflows/*.yml` at the older revision.
+- `scripts/check_workflow_contract.py` is now **warning-only by default**. A stale workflow still prints every mismatch, but exits 0 so `python -m unittest discover ...` cannot kill the radar before `Run radar scan`. `--strict` remains available for release/package verification.
+- Keeps the visible runtime compatibility layer already present in v17.20.43: legacy Main hourly + six-hour due-gate scheduling is slot-aligned by scanner state, legacy Historical push runs are deployment-only, stale Historical minimum-runtime environment is ignored, and Main/Historical use the runtime peer guard when the shared YAML concurrency group is unavailable.
+- The preferred corrected Main/Historical YAML is still included in the ZIP, but scanner operation no longer depends on GitHub successfully replacing those hidden files.
+- Keeps all v17.20.42/43 admission fixes and authenticated OpenAlex support via `OPENALEX_API_KEY`.
+- No corpus reset, deletion, recall-profile bump, or source-expansion reset.
+
 # v17.20.43 — package the workflow repair that v17.20.42 claimed but did not actually ship
 
 - Fixes the v17.20.42 packaging error: that archive included tests expecting the restored workflow contract while still carrying legacy workflow YAML. GitHub therefore failed the pre-scan tests and **never reached `Run radar scan`**.

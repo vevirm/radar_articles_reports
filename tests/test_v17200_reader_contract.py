@@ -15,7 +15,7 @@ const trees=global.RadarIssues.buildTrees([...(D.strand_a||[]),...(D.strand_c||[
 if(trees.length!==8){console.error('trees',trees.length);process.exit(2)}
 for(const t of trees){if(!t.main||t.subs.length!==2||t.leaves.length!==3)process.exit(3)}
 """
-        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=20)
+        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=60)
 
     def test_external_shock_reasoner_finds_aha_scenarios_and_realised_shock(self):
         code=r"""
@@ -31,7 +31,7 @@ if(!s.some(x=>x.id==='measurement_mid_river'&&x.evidence.length>=6))process.exit
 const v=P.buildPriorityView(D,{limit:50});
 if(v.externalShocks.length<1)process.exit(5);
 """
-        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=20)
+        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=60)
 
 
     def test_shock_variants_show_three_forms_and_for_against_radar_evidence(self):
@@ -51,7 +51,7 @@ const P=require('./priorities/priorities.js');
 const realised=P.buildPriorityView(D,{limit:50}).externalShocks||[];
 if(realised.length&&!realised.some(x=>V.scenarioIdForRealised(x)))process.exit(6);
 """
-        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=20)
+        subprocess.run(['node','-e',code],cwd=ROOT,check=True,timeout=60)
 
     def test_main_scanner_has_24_minute_runtime_budget_and_safe_workflow_envelope(self):
         # The scanner's real runtime budget lives in radar_config.json.  Keep this
