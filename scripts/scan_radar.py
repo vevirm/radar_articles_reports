@@ -10378,7 +10378,7 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
     return out
 
 
-def load_previous() -> dict[str, Any]:
+def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
     """Load the cumulative corpus and protect it from an older full-repository upload.
 
     Normal scans trust the live radar.json.  We also inspect recent Git history for
@@ -10413,8 +10413,8 @@ def load_previous() -> dict[str, Any]:
         #
         # ``radar.json``-only scanner commits are excluded by the workflow path filter, so a
         # push reaching this code is an upgrade/content upload rather than our own save.
-        is_upgrade_push = run_trigger_label() == "push"
-        if is_upgrade_push or bool(current.get("repository_bundle_seed")):
+        is_upgrade_push = bool(allow_git_recovery and run_trigger_label() == "push")
+        if allow_git_recovery and (is_upgrade_push or bool(current.get("repository_bundle_seed"))):
             recovered = _recover_radar_from_git(max_commits=60, skip_head=is_upgrade_push)
             if recovered:
                 before = _saved_corpus_size(clean)
@@ -10430,7 +10430,7 @@ def load_previous() -> dict[str, Any]:
         clean.pop("repository_bundle_seed", None)
         return clean
 
-    recovered = _recover_radar_from_git(max_commits=40)
+    recovered = _recover_radar_from_git(max_commits=40) if allow_git_recovery else {}
     if recovered:
         clean, removed = _sanitize_saved_radar(recovered)
         note_removed(removed)
@@ -12948,7 +12948,7 @@ def main() -> int:
     SIGNAL_WINDOW_START_DATE = None
     with ADMISSION_DIAGNOSTICS_LOCK:
         ADMISSION_DIAGNOSTICS.clear()
-    previous = load_previous()
+    previous = load_previous(allow_git_recovery=True)
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())

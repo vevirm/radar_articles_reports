@@ -2279,6 +2279,29 @@ class StrategicSignalGuardrailTests(unittest.TestCase):
         }))
 
 class WholeRepositoryUploadStateTests(unittest.TestCase):
+    def test_plain_loader_does_not_reach_git_history_during_push_tests(self):
+        import tempfile
+
+        local = {
+            "first_scan_complete": True,
+            "last_updated": "2026-09-05T10:00Z",
+            "strand_a": [{
+                "title": "European research security evidence local",
+                "source": "Test Journal",
+                "date": "2026-09-01",
+                "link": "https://doi.org/10.1234/local",
+                "type": "peer-reviewed article",
+                "summary": "European research collaboration faces strategic external dependence and capability constraints.",
+            }],
+            "strand_b": [], "strand_c": [],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "radar.json"
+            path.write_text(json.dumps(local), encoding="utf-8")
+            with mock.patch.object(scan, "OUT_PATH", path), mock.patch.dict(os.environ, {"RADAR_RUN_TRIGGER":"push", "GITHUB_EVENT_NAME":"push"}, clear=False):
+                loaded = scan.load_previous()
+        self.assertEqual([x.get("title") for x in loaded.get("strand_a", [])], ["European research security evidence local"])
+
     def test_push_upload_recovers_newer_preupload_corpus_and_rotation_state(self):
         import subprocess
         import tempfile
@@ -2336,7 +2359,7 @@ class WholeRepositoryUploadStateTests(unittest.TestCase):
             subprocess.run(["git", "commit", "-m", "whole repo upload"], cwd=root, check=True, capture_output=True)
 
             with mock.patch.object(scan, "ROOT", root), mock.patch.object(scan, "OUT_PATH", root / "radar.json"), mock.patch.dict(os.environ, {"RADAR_RUN_TRIGGER":"push", "GITHUB_EVENT_NAME":"push"}, clear=False):
-                loaded = scan.load_previous()
+                loaded = scan.load_previous(allow_git_recovery=True)
 
         self.assertEqual(len(loaded.get("strand_a", [])), 2)
         self.assertEqual(loaded["scan_state"]["openalex_cursor"], 121)

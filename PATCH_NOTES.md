@@ -1,3 +1,10 @@
+# v17.20.35 — isolate upload-state recovery from regression tests
+
+- Fixes the v17.20.34 GitHub upload failure where `Run scanner regression tests` saw the repository push event and the new pre-upload Git-history recovery fired inside ordinary unit-test calls to `load_previous()`. That contaminated isolated test fixtures with hundreds of live-corpus rows and stopped the scan before discovery began.
+- Git-history recovery is now an explicit production capability: `load_previous()` is local-only by default, while the real Main scanner entry point calls `load_previous(allow_git_recovery=True)`. Regression tests and temporary fixtures therefore cannot accidentally reach the repository corpus merely because GitHub set `GITHUB_EVENT_NAME=push`.
+- The dedicated whole-repository-upload regression still exercises the recovery path explicitly and verifies that a stale bundled corpus cannot roll back newer corpus size or OpenAlex/Crossref cursor state.
+- No discovery allocation, relevance gate, corpus record, or saved rotation cursor is changed by this release. All v17.20.34 low-yield method switching and monotonic upload-state behavior remain active in real scanner runs.
+
 # v17.20.34 — monotonic upload state + low-yield method switching
 
 - Fixes a fundamental whole-repository-upload bug visible in the live scan history: repeated upgrade uploads could replace a newer live `radar.json` with an older bundled snapshot, shrinking Strand A (for example 590 → 587) and rolling discovery cursors backward. On `push`, Main now inspects the pre-upload Git history, unions any newer/larger cumulative corpus, and keeps whichever scan-state checkpoint is genuinely newer. A ZIP upload therefore cannot send query/source rotation backwards.
