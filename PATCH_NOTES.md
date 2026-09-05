@@ -1,3 +1,16 @@
+# v17.20.26 — Historical coverage rotation and deeper backfill
+
+- Reworked the Historical scanner from broad whole-period keyword rotation into persistent **coverage rotation** across topic families, elite source batches, two-year publication bands, API result depth and direct-source depth.
+- Added a daily under-coverage lane that searches the thinnest retained **topic × time-band** cells while rotating within the gap pool, so a permanently empty cell cannot monopolise future scans.
+- Added rotating known-good-author backtracking through Crossref to find earlier work by researchers already present in high-quality admitted evidence.
+- Curated workbook title seeds are now searched in their likely publication year where available instead of spending the current time-band budget on a seed known to belong elsewhere.
+- Fixed direct institutional/PDF date fallback that previously recognised only 2023–2025-style dates; fallback recovery now covers the full eligible historical window from 2015 to the rolling cutoff.
+- Institutional direct-source discovery now rotates through deeper ranked link pages rather than repeatedly reading only the first block of adapter/sitemap results.
+- Historical low-yield continuation is fully self-contained in the same daily GitHub job. The old separately dispatched Historical rescue workflow is removed. The 8-item target remains a search-depth sanity target, never an admission quota.
+- Tightened Historical precision: generic EU research-system capacity language no longer substitutes for geopolitical/strategic context. New automated additions must contain a source-supported strategic/geopolitical mechanism.
+- Historical scan runtime is target-driven rather than padded to a minimum wall-clock duration; the GitHub job still has the same 30-minute hard ceiling and 17.5-minute scanner budget.
+- Main Radar v17.20.25 discovery/admission, four-hour schedule, shock toy and retained live corpus are otherwise unchanged.
+
 # v17.20.25 — one-cycle rotation + hard EU R&I geopolitics precision
 
 - Treats ~5 high-quality A/B additions per four-hour scan as a discovery-depth sanity target, never an admission quota.

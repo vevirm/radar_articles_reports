@@ -7,8 +7,9 @@ not import radar.json, mutate the live matrix, weak signals, live cursors, or di
 the live workflow.
 
 Historical means source age, not backward-looking content: eligible sources are older
-than the live scanner’s six-month historical-discovery cutoff. Topic families rotate across the whole
-eligible period, with recent historical evidence preferred when quality is comparable.
+than the live scanner’s six-month historical-discovery cutoff. Discovery uses persistent
+coverage rotation across topic families, source batches, publication-age bands and source
+depth, so daily runs deliberately move away from already-harvested low-hanging fruit.
 """
 from __future__ import annotations
 
@@ -51,6 +52,42 @@ MAIN_RADAR_WINDOW_MONTHS = max(1, int(CONFIG.get("main_radar_window_months", 6))
 def historical_cutoff_exclusive(today: dt.date | None = None) -> dt.date:
     """First date belonging to the live/main-radar window. Historical dates are earlier."""
     return (today or dt.date.today()) - relativedelta(months=MAIN_RADAR_WINDOW_MONTHS)
+
+
+def historical_time_bands(date_from: dt.date | None = None, date_to: dt.date | None = None) -> list[dict[str, Any]]:
+    """Build stable publication-age bands that cover the eligible historical window.
+
+    Bands are calendar-year based rather than rolling-day slices so saved cursors remain
+    meaningful from one daily run to the next. The final band is clipped to the current
+    rolling historical cutoff.
+    """
+    start = date_from or DATE_FROM
+    end = date_to or DATE_TO
+    width = max(1, int(CONFIG.get("historical_time_band_years", 2)))
+    bands: list[dict[str, Any]] = []
+    year = start.year
+    while year <= end.year:
+        band_start = max(start, dt.date(year, 1, 1))
+        band_end = min(end, dt.date(year + width - 1, 12, 31))
+        if band_start <= band_end:
+            bands.append({
+                "id": f"{band_start.year}-{band_end.year}",
+                "label": f"{band_start.year}–{band_end.year}",
+                "date_from": band_start,
+                "date_to": band_end,
+            })
+        year += width
+    return bands
+
+
+def band_for_date(value: Any, bands: list[dict[str, Any]] | None = None) -> str:
+    d = parse_date(value)
+    if not d:
+        return ""
+    for band in bands or historical_time_bands():
+        if band["date_from"] <= d <= band["date_to"]:
+            return str(band["id"])
+    return ""
 
 CUTOFF_EXCLUSIVE = historical_cutoff_exclusive()
 DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
@@ -373,7 +410,10 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
     if not RI_RE.search(text):
         _diag("reject_no_ri"); return None
     _diag("ri_scope")
-    if not (STRATEGIC_RE.search(text) or SYSTEM_CAPACITY_RE.search(text)):
+    # Historical breadth must not become generic EU research-policy accumulation.
+    # A research-system-capacity phrase alone is not enough: the source itself must
+    # show a strategic/geopolitical mechanism.
+    if not STRATEGIC_RE.search(text):
         _diag("reject_no_strategic_context"); return None
     _diag("strategic_scope")
     if len(text.split()) < 28 and not ANALYTIC_RE.search(text):
@@ -457,7 +497,7 @@ def fetch_text(url: str, timeout: int) -> str:
         return ""
 
 
-def collect_openalex(queries: list[str], warnings: list[str], lane: str = "openalex", result_page: int = 1) -> list[dict[str, Any]]:
+def collect_openalex(queries: list[str], warnings: list[str], lane: str = "openalex", result_page: int = 1, window_from: dt.date | None = None, window_to: dt.date | None = None) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     scan_cap = int(CONFIG.get("openalex_missing_abstract_enrichment_per_scan", 24))
     per_query = int(CONFIG.get("openalex_missing_abstract_enrichment_per_query", 3))
@@ -465,7 +505,8 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
     used_rescue = 0
     for q in queries:
         if not budget_ok(90): break
-        params = {"search":q,"filter":f"from_publication_date:{DATE_FROM.isoformat()},to_publication_date:{DATE_TO.isoformat()},language:en","per-page":int(CONFIG.get("openalex_per_query",50)),"page":max(1,int(result_page)),"sort":"relevance_score:desc"}
+        wf=window_from or DATE_FROM; wt=window_to or DATE_TO
+        params = {"search":q,"filter":f"from_publication_date:{wf.isoformat()},to_publication_date:{wt.isoformat()},language:en","per-page":int(CONFIG.get("openalex_per_query",50)),"page":max(1,int(result_page)),"sort":"relevance_score:desc"}
         if OPENALEX_API_KEY: params["api_key"] = OPENALEX_API_KEY
         try:
             r = SESSION.get("https://api.openalex.org/works", params=params, timeout=REQUEST_TIMEOUT)
@@ -498,13 +539,14 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
     return out
 
 
-def collect_crossref(queries: list[str], warnings: list[str], lane: str = "crossref", result_page: int = 1) -> list[dict[str, Any]]:
+def collect_crossref(queries: list[str], warnings: list[str], lane: str = "crossref", result_page: int = 1, window_from: dt.date | None = None, window_to: dt.date | None = None) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     scan_cap=int(CONFIG.get("crossref_missing_abstract_enrichment_per_scan",36)); per_task=int(CONFIG.get("crossref_missing_abstract_enrichment_per_query",3)); min_priority=int(CONFIG.get("metadata_rescue_priority_min_score",10)); used_rescue=0
     query_key = "query.title" if clean(CONFIG.get("crossref_relevance_query_mode","title")).lower()=="title" else "query.bibliographic"
     for q in queries:
         if not budget_ok(90): break
-        rows=int(CONFIG.get("crossref_per_query",50)); params={query_key:q,"filter":f"from-pub-date:{DATE_FROM.isoformat()},until-pub-date:{DATE_TO.isoformat()}","rows":rows,"offset":max(0,(max(1,int(result_page))-1)*rows),"sort":"relevance","order":"desc","select":"DOI,title,abstract,published-print,published-online,published,issued,created,author,container-title,publisher,URL,type"}
+        wf=window_from or DATE_FROM; wt=window_to or DATE_TO
+        rows=int(CONFIG.get("crossref_per_query",50)); params={query_key:q,"filter":f"from-pub-date:{wf.isoformat()},until-pub-date:{wt.isoformat()}","rows":rows,"offset":max(0,(max(1,int(result_page))-1)*rows),"sort":"relevance","order":"desc","select":"DOI,title,abstract,published-print,published-online,published,issued,created,author,container-title,publisher,URL,type"}
         try:
             r=SESSION.get("https://api.crossref.org/works",params=params,timeout=REQUEST_TIMEOUT)
             if r.status_code==429: warnings.append("Crossref rate limited (429)"); _diag("crossref_429"); continue
@@ -602,16 +644,37 @@ def sitemap_candidates(domain: str, active_topics: list[dict[str, Any]], warning
     return [u for _,u in sorted(urls,key=lambda x:(-x[0],x[1]))]
 
 
+def historical_date_from_text(text: str) -> dt.date | None:
+    """Recover an eligible historical date from body text or opaque URLs.
+
+    Older code only recognised 2023–2025 in this fallback, which systematically hurt
+    discovery of 2015–2022 institutional material when structured metadata was absent.
+    """
+    for m in re.finditer(r"\b(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})\b", clean(text)[:12000]):
+        d = parse_date(m.group(0))
+        if d and DATE_FROM <= d <= DATE_TO:
+            return d
+    for m in re.finditer(r"\b(20\d{2})\b", clean(text)[:12000]):
+        try:
+            y = int(m.group(1))
+            d = dt.date(y, 1, 1)
+        except Exception:
+            continue
+        if DATE_FROM.year <= y <= DATE_TO.year:
+            return d
+    return None
+
+
 def page_date(soup: BeautifulSoup, text: str) -> dt.date | None:
     candidates=[]
     for tag in soup.find_all("meta"):
         key=clean(tag.get("property") or tag.get("name") or tag.get("itemprop")).lower()
         if key in {"article:published_time","date","datepublished","publication_date","dc.date","dcterms.date"}: candidates.append(clean(tag.get("content")))
-    for t in soup.find_all("time")[:5]: candidates.append(clean(t.get("datetime") or t.get_text(" ",strip=True)))
+    for t in soup.find_all("time")[:8]: candidates.append(clean(t.get("datetime") or t.get_text(" ",strip=True)))
     for c in candidates:
         d=parse_date(c)
         if d and DATE_FROM<=d<=DATE_TO: return d
-    m=re.search(r"\b(202[3-5])[-/.](\d{1,2})[-/.](\d{1,2})\b",text[:7000]); return parse_date(m.group(0)) if m else None
+    return historical_date_from_text(text)
 
 
 def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lane: str="direct") -> dict[str, Any] | None:
@@ -626,7 +689,7 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
             reader=PdfReader(io.BytesIO(r.content)); body=clean(" ".join((p.extract_text() or "") for p in reader.pages[:10])); title=clean(reader.metadata.title if reader.metadata else "") or clean(urlparse(r.url).path.rsplit("/",1)[-1].replace("-"," ")); d=parse_date(reader.metadata.creation_date if reader.metadata else None)
         except Exception: return None
         if not d:
-            m=re.search(r"\b(202[3-5])[-/.](\d{1,2})[-/.](\d{1,2})\b",body[:6000]); d=parse_date(m.group(0)) if m else None
+            d=historical_date_from_text(f"{r.url} {body[:10000]}")
         return admit({"title":title,"abstract":body[:10000],"date":d,"url":r.url,"venue":src.get("name"),"publisher":src.get("name"),"discovery":f"direct source · {src.get('name')}"},lane)
     try: soup=BeautifulSoup(r.text,"html.parser")
     except Exception: return None
@@ -639,8 +702,10 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
     return admit({"title":title,"abstract":clean(f"{desc} {body[:9000]}"),"date":d,"url":r.url,"venue":src.get("name"),"publisher":src.get("name"),"discovery":f"direct source · {src.get('name')}"},lane)
 
 
-def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: list[dict[str, Any]], warnings: list[str]) -> list[dict[str, Any]]:
-    out=[]; limit=int(CONFIG.get("direct_pages_per_source",16))
+def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: list[dict[str, Any]], warnings: list[str], depth_page: int = 1) -> list[dict[str, Any]]:
+    out=[]; limit=max(1,int(CONFIG.get("direct_pages_per_source",10)))
+    max_depth=max(1,int(CONFIG.get("direct_source_depth_pages",4)))
+    requested_page=max(1,int(depth_page))
     for src in active_sources:
         if not budget_ok(120): break
         domain=clean(src.get("domain"));
@@ -651,11 +716,19 @@ def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: 
             k=u.lower().rstrip("/")
             if k not in seen: urls.append(u); seen.add(k)
         admitted=0
-        for url in urls[:limit]:
+        if urls:
+            available_pages=max(1,min(max_depth,(len(urls)+limit-1)//limit))
+            page_index=(requested_page-1)%available_pages
+            start=page_index*limit
+            selected=urls[start:start+limit]
+        else:
+            page_index=0; selected=[]
+        for url in selected:
             if not budget_ok(55): break
             item=fetch_page_candidate(url,src,warnings,"direct")
             if item: out.append(item); admitted+=1
-        log(f"Direct source: {src.get('name')} -> {admitted} admitted")
+        _diag("direct_source_depth_page_"+str(page_index+1))
+        log(f"Direct source: {src.get('name')} depth {page_index+1} -> {admitted} admitted")
     return out
 
 
@@ -875,65 +948,190 @@ def rejection_funnel(new_items: int, unique_gate_candidates: int) -> dict[str, A
     }
 
 
-def run_rotation(active_topics: list[dict[str, Any]], active_sources: list[dict[str, Any]], warnings: list[str], suffix: str="normal", result_page: int = 1, extra_queries: list[str] | None = None) -> tuple[list[dict[str, Any]], list[str]]:
+def run_rotation(active_topics: list[dict[str, Any]], active_sources: list[dict[str, Any]], warnings: list[str], suffix: str="normal", result_page: int = 1, extra_queries: list[str] | None = None, window_from: dt.date | None = None, window_to: dt.date | None = None, direct_depth_page: int = 1, include_direct: bool = True) -> tuple[list[dict[str, Any]], list[str]]:
     queries=list(dict.fromkeys(query_plan_for(active_topics) + [clean(x) for x in (extra_queries or []) if clean(x)])); candidates=[]
-    candidates.extend(collect_openalex(queries,warnings,f"openalex_{suffix}",result_page=result_page))
-    candidates.extend(collect_crossref(queries,warnings,f"crossref_{suffix}",result_page=result_page))
-    candidates.extend(collect_direct_sources(active_sources,active_topics,warnings))
+    candidates.extend(collect_openalex(queries,warnings,f"openalex_{suffix}",result_page=result_page,window_from=window_from,window_to=window_to))
+    candidates.extend(collect_crossref(queries,warnings,f"crossref_{suffix}",result_page=result_page,window_from=window_from,window_to=window_to))
+    if include_direct:
+        candidates.extend(collect_direct_sources(active_sources,active_topics,warnings,depth_page=direct_depth_page))
     return candidates,queries
 
 
+def archive_cell_counts(items: Iterable[dict[str, Any]], bands: list[dict[str, Any]] | None = None) -> dict[tuple[str,str], int]:
+    """Count retained evidence by topic × publication-age band for gap seeking."""
+    use_bands=bands or historical_time_bands(); counts: collections.Counter[tuple[str,str]] = collections.Counter()
+    for item in items:
+        if not isinstance(item,dict): continue
+        bid=band_for_date(item.get("date"),use_bands)
+        if not bid: continue
+        for topic in item.get("topics") or []:
+            if clean(topic): counts[(clean(topic),bid)] += 1
+    return dict(counts)
+
+
+def select_gap_cells(items: Iterable[dict[str, Any]], bands: list[dict[str, Any]], cursor: int, count: int) -> tuple[list[tuple[dict[str,Any],dict[str,Any],int]], int]:
+    """Select under-covered topic × time-band cells without getting stuck on one hole."""
+    topics=[t for t in CONFIG.get("topics",[]) if clean(t.get("id"))]
+    counts=archive_cell_counts(items,bands)
+    cells=[(t,b,int(counts.get((clean(t.get("id")),clean(b.get("id"))),0))) for t in topics for b in bands]
+    cells.sort(key=lambda x:(x[2],clean(x[1].get("id")),clean(x[0].get("id"))))
+    if not cells or count<=0: return [],0
+    # Work inside the least-covered half, but rotate within it so a permanently empty
+    # cell cannot monopolise every daily run.
+    pool=cells[:max(count,min(len(cells),max(12,len(cells)//2)))]
+    chosen,next_cursor=rotating(pool,cursor,count)
+    return chosen,next_cursor
+
+
+def author_seed_pool(items: Iterable[dict[str, Any]]) -> list[str]:
+    """Known-good first authors, used only to discover earlier work by trusted researchers."""
+    out=[]; seen=set()
+    for item in items:
+        authors=clean(item.get("authors"))
+        if not authors: continue
+        first=clean(authors.split(";")[0])
+        key=norm(first)
+        if len(first.split())<2 or key in seen: continue
+        seen.add(key); out.append(first)
+    return out
+
+
+def collect_crossref_authors(authors: list[str], warnings: list[str], window_from: dt.date, window_to: dt.date) -> list[dict[str, Any]]:
+    """Backtrack earlier work by authors already present in high-quality historical evidence."""
+    if not bool(CONFIG.get("historical_author_backfill_enabled",True)): return []
+    out=[]; rows=max(5,int(CONFIG.get("historical_author_results_per_query",30)))
+    for author in authors:
+        if not budget_ok(90): break
+        params={"query.author":author,"filter":f"from-pub-date:{window_from.isoformat()},until-pub-date:{window_to.isoformat()}","rows":rows,"sort":"relevance","order":"desc","select":"DOI,title,abstract,published-print,published-online,published,issued,created,author,container-title,publisher,URL,type"}
+        try:
+            r=SESSION.get("https://api.crossref.org/works",params=params,timeout=REQUEST_TIMEOUT)
+            if r.status_code==429: warnings.append("Crossref author backfill rate limited (429)"); _diag("crossref_author_429"); continue
+            r.raise_for_status(); works=((r.json().get("message") or {}).get("items") or [])
+        except Exception as e:
+            warnings.append(f"Crossref author backfill {type(e).__name__}: {e}"); continue
+        _diag("crossref_author_results",len(works))
+        for w in works:
+            title=clean(" ".join(w.get("title") or [])); venue=clean(" ".join(w.get("container-title") or [])); names="; ".join(clean(f"{a.get('given','')} {a.get('family','')}") for a in (w.get("author") or [])[:12]); doi=clean(w.get("DOI")); url=clean(w.get("URL") or ("https://doi.org/"+doi if doi else ""))
+            raw={"title":title,"abstract":clean(re.sub(r"<[^>]+>"," ",w.get("abstract") or "")),"date":crossref_date(w),"url":url,"doi":doi,"authors":names,"venue":venue,"publisher":clean(w.get("publisher")),"discovery":f"Crossref author backtrack · {author}"}
+            item=admit(raw,"author_backtrack")
+            if item: out.append(item)
+    return out
+
+
 def main() -> int:
-    try: previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {}
-    except Exception: previous={}
+    try:
+        previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {}
+    except Exception:
+        previous={}
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
+    previous_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]
     topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items(); manual_items=manual_evidence_items()
+    bands=historical_time_bands()
+
     topic_cursor=int(state.get("topic_cursor",0)); source_cursor=int(state.get("source_cursor",0)); seed_cursor=int(state.get("seed_cursor",0))
+    band_cursor=int(state.get("time_band_cursor",0)); source_depth_cursor=int(state.get("source_depth_cursor",0)); gap_cursor=int(state.get("gap_cursor",0)); author_cursor=int(state.get("author_cursor",0)); api_depth_cursor=int(state.get("api_depth_cursor",0))
+
     active_topics,next_topic=rotating(topics,topic_cursor,int(CONFIG.get("topics_per_scan",4)))
     active_sources,next_source=rotating(sources,source_cursor,int(CONFIG.get("sources_per_scan",8)))
-    active_seeds,next_seed=rotating(seeds,seed_cursor,int(CONFIG.get("curated_seed_queries_per_scan",12)))
-    seed_queries=[clean(x.get("title")) for x in active_seeds if clean(x.get("title"))]
-    warnings=[]; log(f"Historical scan starts: {DATE_FROM.isoformat()} through {DATE_TO.isoformat()} (sources before {CUTOFF_EXCLUSIVE.isoformat()}); content may be future-facing")
-    log("Topics: "+" | ".join(str(t.get("label")) for t in active_topics))
-    if seed_queries: log(f"Curated workbook backfill: {len(seed_queries)} title seed(s)")
-    candidates,queries=run_rotation(active_topics,active_sources,warnings,"normal",extra_queries=seed_queries)
-    previous_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]
-    # Historical retention is append-only: current gates determine what may be added,
-    # never what is allowed to remain.  Manual evidence is part of the retained
-    # baseline for duplicate/yield calculations as well.
-    retained_baseline=previous_items+manual_items
-    unique_initial=dedupe(candidates); initial_new=count_new_against_retained(unique_initial,retained_baseline)
-    target_new=max(1,int(CONFIG.get("target_new_items_per_scan",8) or 8))
-    low_threshold=max(int(CONFIG.get("low_yield_trigger_max_new_items",3)), target_new-1); low_triggered=initial_new<=low_threshold
-    rescue_topics=[]; rescue_sources=[]; rescue_queries=[]; rescue_candidates=[]
-    if low_triggered and budget_ok(220):
-        rescue_topics,rescue_next_topic=rotating(topics,next_topic,int(CONFIG.get("low_yield_fresh_topics",4)))
-        rescue_sources,rescue_next_source=rotating(sources,next_source,int(CONFIG.get("low_yield_fresh_sources",8)))
-        log(f"Low yield ({initial_new}); forcing fresh historical topic/source rotation inside this run")
-        rescue_candidates,rescue_queries=run_rotation(rescue_topics,rescue_sources,warnings,"fresh",result_page=1)
-        candidates.extend(rescue_candidates); next_topic=rescue_next_topic; next_source=rescue_next_source
+    active_seeds,next_seed=rotating(seeds,seed_cursor,int(CONFIG.get("curated_seed_queries_per_scan",8)))
+    active_bands,next_band=rotating(bands,band_cursor,max(1,int(CONFIG.get("time_bands_per_scan",1))))
+    active_band=active_bands[0] if active_bands else {"id":"all","label":"all years","date_from":DATE_FROM,"date_to":DATE_TO}
+    max_source_depth=max(1,int(CONFIG.get("direct_source_depth_pages",4)))
+    source_depth_page=1+(source_depth_cursor%max_source_depth)
+    max_api_depth=max(1,int(CONFIG.get("api_result_depth_pages",3)))
+    api_result_page=1+(api_depth_cursor%max_api_depth)
 
-    # Target-driven continuation: keep searching while the strict-gate yield is below the
-    # configured target.  The target controls search depth only; it never bypasses source,
-    # text, EU, R&I, strategic-context or topic gates.
+    # Historical retention is append-only: current gates determine what may be added,
+    # never what is allowed to remain. Manual evidence is part of the retained baseline.
+    retained_baseline=previous_items+manual_items
+    warnings=[]
+    log(f"Historical coverage scan: {DATE_FROM.isoformat()} through {DATE_TO.isoformat()} (sources before {CUTOFF_EXCLUSIVE.isoformat()})")
+    log(f"Primary publication band: {active_band['label']} · API page {api_result_page} · direct-source depth {source_depth_page}")
+    log("Topics: "+" | ".join(str(t.get("label")) for t in active_topics))
+
+    # 1) Primary rotating coverage block. Topic, source, time band, API depth and
+    # direct-source depth all advance persistently between daily runs.
+    candidates,queries=run_rotation(
+        active_topics,active_sources,warnings,"coverage",
+        result_page=api_result_page,
+        window_from=active_band["date_from"],window_to=active_band["date_to"],
+        direct_depth_page=source_depth_page,
+    )
+
+    # 2) Curated known-good titles remain a separate backfill lane. Search them across
+    # their own likely publication years rather than wasting the current band on a seed
+    # known to belong elsewhere.
+    seed_queries=[clean(x.get("title")) for x in active_seeds if clean(x.get("title"))]
+    seed_candidates=[]
+    for seed in active_seeds:
+        if not budget_ok(150): break
+        title=clean(seed.get("title"))
+        if not title: continue
+        try: sy=int(seed.get("year") or 0)
+        except Exception: sy=0
+        if sy and DATE_FROM.year<=sy<=DATE_TO.year:
+            sf=max(DATE_FROM,dt.date(sy,1,1)); st=min(DATE_TO,dt.date(sy,12,31))
+        else:
+            sf,st=DATE_FROM,DATE_TO
+        c,_=run_rotation([],[],warnings,"curated_seed",result_page=1,extra_queries=[title],window_from=sf,window_to=st,include_direct=False)
+        seed_candidates.extend(c)
+    candidates.extend(seed_candidates)
+    if seed_queries: log(f"Curated backfill: {len(seed_queries)} title seed(s), year-scoped where possible")
+
+    # 3) Gap seeking. Always spend a small part of the daily budget on the thinnest
+    # topic × publication-band cells, but rotate within the under-covered pool so one
+    # permanently empty cell cannot monopolise every run.
+    gap_count=max(0,int(CONFIG.get("gap_cells_per_scan",2)))
+    gap_cells,next_gap=select_gap_cells(retained_baseline,bands,gap_cursor,gap_count)
+    gap_details=[]
+    for idx,(gap_topic,gap_band,prior_count) in enumerate(gap_cells,1):
+        if not budget_ok(170): break
+        log(f"Gap cell {idx}: {gap_topic.get('label')} × {gap_band.get('label')} (retained={prior_count})")
+        gc,gq=run_rotation([gap_topic],[],warnings,f"gap_{idx}",result_page=1,window_from=gap_band["date_from"],window_to=gap_band["date_to"],include_direct=False)
+        candidates.extend(gc)
+        gap_details.append({"topic":str(gap_topic.get("label")),"topic_id":str(gap_topic.get("id")),"band":str(gap_band.get("label")),"band_id":str(gap_band.get("id")),"retained_before":prior_count,"queries":gq,"candidates":len(gc)})
+
+    # 4) Author backtracking. Rotate first authors from already admitted high-quality
+    # evidence and look for their earlier work in the current age band. Admission gates
+    # still decide whether any result belongs in this archive.
+    authors=author_seed_pool(retained_baseline)
+    active_authors,next_author=rotating(authors,author_cursor,max(0,int(CONFIG.get("historical_authors_per_scan",4))))
+    author_candidates=[]
+    if active_authors and budget_ok(170):
+        author_candidates=collect_crossref_authors(active_authors,warnings,active_band["date_from"],active_band["date_to"])
+        candidates.extend(author_candidates)
+        log(f"Known-good author backtrack: {len(active_authors)} author(s) in {active_band['label']}")
+
+    unique_initial=dedupe(candidates)
+    initial_new=count_new_against_retained(unique_initial,retained_baseline)
+    target_new=max(1,int(CONFIG.get("target_new_items_per_scan",8) or 8))
+    low_threshold=max(int(CONFIG.get("low_yield_trigger_max_new_items",3)),target_new-1)
+    low_triggered=initial_new<=low_threshold
+
+    # 5) Target-driven continuation inside this same GitHub job. Every continuation
+    # advances to fresh topic/source/band/depth territory. The target controls search
+    # depth only: source quality and EU/R&I/geopolitical admission gates never change.
     continuation_waves=[]
-    topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",CONFIG.get("topics_per_scan",4))))
-    sources_per_wave=max(1,int(CONFIG.get("minimum_runtime_sources_per_wave",CONFIG.get("sources_per_scan",8))))
-    max_extra=max(0,int(CONFIG.get("minimum_runtime_max_extra_waves",12)))
-    blocks_per_topic_sweep=max(1,(len(topics)+topics_per_wave-1)//topics_per_wave)
-    blocks_already=1 + (1 if rescue_topics else 0)
+    topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",2)))
+    sources_per_wave=max(1,int(CONFIG.get("minimum_runtime_sources_per_wave",4)))
+    max_extra=max(0,int(CONFIG.get("minimum_runtime_max_extra_waves",4)))
+    next_source_depth=source_depth_cursor+1
+    next_api_depth=api_depth_cursor+1
     current_unique=dedupe(candidates)
     current_new=count_new_against_retained(current_unique,retained_baseline)
-    while current_new<target_new and budget_ok(150) and len(continuation_waves)<max_extra:
+    while current_new<target_new and budget_ok(170) and len(continuation_waves)<max_extra:
         wave_no=len(continuation_waves)+1
         wave_topics,wave_next_topic=rotating(topics,next_topic,topics_per_wave)
         wave_sources,wave_next_source=rotating(sources,next_source,sources_per_wave)
-        result_page=1 + (blocks_already // blocks_per_topic_sweep)
-        log(f"Minimum-runtime continuation wave {wave_no}: page {result_page}; topics: "+" | ".join(str(t.get("label")) for t in wave_topics))
-        wave_candidates,wave_queries=run_rotation(wave_topics,wave_sources,warnings,f"minimum_runtime_{wave_no}",result_page=result_page)
-        candidates.extend(wave_candidates)
-        continuation_waves.append({"wave":wave_no,"result_page":result_page,"topics":[str(t.get("label")) for t in wave_topics],"sources":[str(s.get("name")) for s in wave_sources],"queries":wave_queries,"candidates":len(wave_candidates)})
-        next_topic=wave_next_topic; next_source=wave_next_source; blocks_already+=1
+        wave_bands,wave_next_band=rotating(bands,next_band,1)
+        wave_band=wave_bands[0] if wave_bands else active_band
+        wave_source_page=1+(next_source_depth%max_source_depth)
+        wave_api_page=1+(next_api_depth%max_api_depth)
+        log(f"Continuation {wave_no}: {wave_band['label']} · API page {wave_api_page} · source depth {wave_source_page} · "+" | ".join(str(t.get("label")) for t in wave_topics))
+        wc,wq=run_rotation(wave_topics,wave_sources,warnings,f"continuation_{wave_no}",result_page=wave_api_page,window_from=wave_band["date_from"],window_to=wave_band["date_to"],direct_depth_page=wave_source_page)
+        candidates.extend(wc)
+        continuation_waves.append({"wave":wave_no,"band":str(wave_band.get("label")),"band_id":str(wave_band.get("id")),"api_result_page":wave_api_page,"direct_source_depth_page":wave_source_page,"topics":[str(t.get("label")) for t in wave_topics],"sources":[str(s.get("name")) for s in wave_sources],"queries":wq,"candidates":len(wc)})
+        next_topic=wave_next_topic; next_source=wave_next_source; next_band=wave_next_band; next_source_depth+=1; next_api_depth+=1
         current_unique=dedupe(candidates)
         current_new=count_new_against_retained(current_unique,retained_baseline)
 
@@ -941,28 +1139,34 @@ def main() -> int:
     unique_gate=dedupe(candidates)
     merged,new_count=cumulative_merge(previous_items,manual_items,unique_gate)
     merged.sort(key=lambda x:(int(x.get("year",0) or 0),clean(x.get("date")),clean(x.get("title"))),reverse=True)
-    # No normal-scan size cap: a finite cap would eventually force accepted historical
-    # evidence to disappear, contradicting cumulative retention.  MAX_ITEMS is kept as
-    # a legacy config read only for backwards-compatible diagnostics.
+
     matrix_counts={r:{c:0 for c in "ABCD"} for r in ROW_TERMS}
     for x in merged:
         r,c=clean(x.get("matrix_dimension")),clean(x.get("matrix_outcome"))
         if r in matrix_counts and c in matrix_counts[r]: matrix_counts[r][c]+=1
+
+    cell_counts=archive_cell_counts(merged,bands)
+    band_counts={str(b.get("id")):sum(1 for x in merged if band_for_date(x.get("date"),bands)==str(b.get("id"))) for b in bands}
+    thinnest=[]
+    for (topic_id,band_id),count in sorted(cell_counts.items(),key=lambda kv:(kv[1],kv[0]))[:12]:
+        thinnest.append({"topic_id":topic_id,"band_id":band_id,"count":int(count)})
+
     now=dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z")
-    full_rescue_enabled=bool(CONFIG.get("full_rescue_run_enabled",True)); full_rescue_threshold=int(CONFIG.get("full_rescue_run_trigger_max_new_items",3)); should_dispatch=(full_rescue_enabled and not RESCUE_MODE and new_count<=full_rescue_threshold)
     data={
         "profile_version":CONFIG.get("profile_version"),"last_updated":now,"date_from":DATE_FROM.isoformat(),"date_to":DATE_TO.isoformat(),"cutoff_exclusive":CUTOFF_EXCLUSIVE.isoformat(),"main_radar_window_months":MAIN_RADAR_WINDOW_MONTHS,
         "scope_note":"Separate, cumulative source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff. Once historical evidence is accepted, normal scans keep it; current admission gates apply only to newly discovered material. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
-        "ranking_note":f"Every run searches the eligible period from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. Topic families rotate; years do not. Reader/corpus ordering is chronological after admission; source quality is used only by the upstream evidence gate and duplicate resolution.",
+        "ranking_note":f"Historical discovery deliberately rotates across topic families, source batches, publication-age bands and result/source depth from {DATE_FROM.isoformat()} through {DATE_TO.isoformat()}. It also probes under-covered topic × time-band cells and earlier work by known-good authors. Reader/corpus ordering is chronological after admission; source quality is used only by the upstream evidence gate and duplicate resolution.",
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
-        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
+        "coverage_map":{"bands":[{"id":str(b.get("id")),"label":str(b.get("label")),"date_from":b["date_from"].isoformat(),"date_to":b["date_to"].isoformat(),"items":int(band_counts.get(str(b.get("id")),0))} for b in bands],"thinnest_populated_cells":thinnest},
+        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
         "last_scan":{
-            "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":RESCUE_MODE,
+            "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":False,
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,
+            "coverage_rotation":{"primary_band":str(active_band.get("label")),"primary_band_id":str(active_band.get("id")),"api_result_page":api_result_page,"direct_source_depth_page":source_depth_page,"gap_cells":gap_details,"known_good_authors":active_authors,"author_candidates":len(author_candidates)},
             "curated_backfill":{"available":len(seeds),"queried_this_run":len(seed_queries),"workbook_ids":[x.get("workbook_id") for x in active_seeds]},
             "manual_evidence":{"available":len(manual_items),"included":sum(1 for x in merged if x.get("manual_curated"))},
-            "low_yield_rotation":{"triggered":low_triggered,"new_items_after_normal_rotation":initial_new,"fresh_topics":[str(t.get("label")) for t in rescue_topics],"fresh_sources":[str(s.get("name")) for s in rescue_sources],"fresh_queries":rescue_queries,"new_items_after_all_in_run_rotations":new_count,"full_rescue_run_enabled":full_rescue_enabled,"full_rescue_run_should_dispatch":should_dispatch},
+            "low_yield_rotation":{"triggered":low_triggered,"new_items_before_continuations":initial_new,"new_items_after_all_in_run_rotations":new_count,"separate_rescue_run_enabled":False},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
             "target_new_items":target_new,
             "cumulative_retention":{"enabled":True,"previous_items":len(previous_items),"retained_previous_items":len(previous_items),"normal_scan_deletions":0,"legacy_max_items":MAX_ITEMS},
@@ -971,7 +1175,7 @@ def main() -> int:
         },
     }
     tmp=OUT_PATH.with_suffix(".json.tmp"); tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8"); tmp.replace(OUT_PATH)
-    log(f"historical.json written: {len(merged)} total, {new_count} new; full-rescue-dispatch={should_dispatch}")
+    log(f"historical.json written: {len(merged)} total, {new_count} new; one self-contained daily cycle")
     for w in warnings[:20]: print("WARNING:",w,file=sys.stderr)
     return 0
 

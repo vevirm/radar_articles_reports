@@ -36,7 +36,7 @@ for path, label in ((main, "Main"), (hist, "Historical")):
 
 require(main, "git add -- radar.json", "Main persistence boundary")
 require(main, "radar.json is the ONLY persistent output", "Main persistence-boundary explanation")
-require(hist, "HISTORICAL_MIN_RUNTIME_SECONDS: '600'", "Historical bounded runtime")
+require(hist, "HISTORICAL_MIN_RUNTIME_SECONDS: '0'", "Historical target-driven runtime")
 require(hist, "git add -- historical/historical.json", "Historical persistence boundary")
 require(hist, "grep -vx 'historical/historical.json'", "Historical persistence-boundary explanation")
 
