@@ -1,3 +1,11 @@
+# v17.20.34 — monotonic upload state + low-yield method switching
+
+- Fixes a fundamental whole-repository-upload bug visible in the live scan history: repeated upgrade uploads could replace a newer live `radar.json` with an older bundled snapshot, shrinking Strand A (for example 590 → 587) and rolling discovery cursors backward. On `push`, Main now inspects the pre-upload Git history, unions any newer/larger cumulative corpus, and keeps whichever scan-state checkpoint is genuinely newer. A ZIP upload therefore cannot send query/source rotation backwards.
+- Low-yield discovery no longer protects generic broad-query capacity by suppressing every high-information lane. Once the protected continuation phase begins, it first retries curator/manual exact evidence, then performs fresh broad/source rotation, then switches method to Crossref researcher adjacency plus OpenAlex citation snowballing if yield is still low.
+- Generic continuation waves are reduced from three to two; the third repeated wave is replaced by adjacency discovery. The 4–6 month Highest-merit fallback is widened modestly after these current-window methods have been tried.
+- The strict final subject gate is unchanged: central EU/European R&I plus a source-supported geopolitical/strategic mechanism. No quota or lower-quality admission route was added.
+- The known poverty/social-exclusion false positive is also blocked from resurrection when older Git-history snapshots are merged.
+
 # v17.20.33 — low-yield scholarly continuation repair
 
 - Fixes the post-v17.20.32 one-item run where all three protected continuation waves became institution-only. Auxiliary priority-researcher HTTP 429 warnings no longer mark the entire OpenAlex/Crossref family unavailable.

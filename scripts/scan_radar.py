@@ -9769,6 +9769,7 @@ A_RETIRED_EXACT_TITLES = {
         'Assessing the role and functioning of Science-Policy-Society Interfaces in EU Green Deal-related marine policies',
         'The impact of socio-economic factors and digital performance on environmental sustainability: the case of European Union',
         'The usefulness of knowledge from library staff, faculty and students for developing service innovations in academic libraries',
+        'Addressing poverty and social exclusion: a comparative study of 15 social programs across Europe and the Americas',
     ]
 }
 
@@ -10043,25 +10044,50 @@ def _valid_saved_radar(data: Any) -> bool:
     return bool(data.get("first_scan_complete") or data.get("last_updated") or a or b or c)
 
 
-def _recover_radar_from_git(max_commits: int = 80) -> dict[str, Any]:
+def _snapshot_completed_at(data: Any) -> dt.datetime | None:
+    """Best persisted completion timestamp for comparing two radar snapshots."""
+    if not isinstance(data, dict):
+        return None
+    state = data.get("scan_state") if isinstance(data.get("scan_state"), dict) else {}
+    for value in (
+        state.get("last_completed_at"),
+        data.get("run_completed_at"),
+        data.get("last_updated"),
+    ):
+        if not value:
+            continue
+        try:
+            parsed = dateparser.parse(str(value))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=dt.timezone.utc)
+            return parsed.astimezone(dt.timezone.utc)
+        except Exception:
+            continue
+    return None
+
+
+def _recover_radar_from_git(max_commits: int = 80, *, skip_head: bool = False) -> dict[str, Any]:
     """Find the strongest recent saved radar in Git history.
 
-    This protects the cumulative A/B corpus when an upgrade ZIP contains a
-    reset/pending radar.json.  We inspect recent ancestors and prefer the
-    candidate with the largest saved A/B/C corpus, breaking ties by recency.
-    GitHub Actions checks out full history (fetch-depth: 0), so this works in
-    the normal scanner workflow and also tolerates several upload commits in a
-    row before a scan runs.
+    Whole-repository uploads are a special case: the checked-out ``HEAD`` contains
+    the uploaded bundle, while ``HEAD^`` is the live repository state immediately
+    before that upload.  When ``skip_head`` is true we therefore search ancestors
+    only, so an older bundle cannot win merely because it is the newest commit.
+
+    Among ancestors, prefer the largest cumulative corpus; break ties with the most
+    recently completed scanner state.  GitHub Actions checks out full history in the
+    supported workflow, and the retained legacy workflow also uses ``fetch-depth: 0``.
     """
     try:
+        start_rev = "HEAD^" if skip_head else "HEAD"
         revs = subprocess.run(
-            ["git", "rev-list", f"--max-count={max_commits}", "HEAD"],
+            ["git", "rev-list", f"--max-count={max_commits}", start_rev],
             cwd=ROOT, capture_output=True, text=True, timeout=12, check=True,
         ).stdout.splitlines()
     except Exception:
         return {}
 
-    best: tuple[int, int, dict[str, Any]] | None = None
+    best: tuple[int, float, int, dict[str, Any]] | None = None
     for recency_index, rev in enumerate(revs):
         try:
             raw = subprocess.run(
@@ -10077,10 +10103,12 @@ def _recover_radar_from_git(max_commits: int = 80) -> dict[str, Any]:
         b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
         c = data.get("strand_c") if isinstance(data.get("strand_c"), list) else []
         score = len(a) + len(b) + len(c)
-        candidate = (score, -recency_index, data)
-        if best is None or candidate[:2] > best[:2]:
+        completed = _snapshot_completed_at(data)
+        completed_score = completed.timestamp() if completed else 0.0
+        candidate = (score, completed_score, -recency_index, data)
+        if best is None or candidate[:3] > best[:3]:
             best = candidate
-    return best[2] if best else {}
+    return best[3] if best else {}
 
 
 def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -> dict[str, Any]:
@@ -10305,14 +10333,47 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
         merged_c[key] = saved
     out["strand_c"] = sorted(merged_c.values(), key=lambda x: str(x.get("date", "")), reverse=True)
 
-    # If this is a repeated V17.2 whole-repository upload, keep the newer live
-    # incremental checkpoint as well as its corpus. A bundle seed must not reset
-    # already-advanced source cursors back to zero. Future state versions do not
-    # cross this boundary because their version marker will differ.
+    # Preserve whichever incremental checkpoint is genuinely newer.  A full-repository
+    # upload can carry a perfectly valid but older radar.json, so blindly trusting the
+    # uploaded/current state makes the source/query cursors move backwards and causes
+    # repeated low-hanging-fruit rediscovery.  Conversely, a freshly downloaded bundle
+    # may legitimately be newer than its parent commit, so compare completion timestamps.
+    cur_state = cur.get("scan_state") if isinstance(cur, dict) else None
     rec_state = rec.get("scan_state") if isinstance(rec, dict) else None
-    if isinstance(rec_state, dict) and rec_state.get("version") == INCREMENTAL_STATE_VERSION:
+    cur_completed = _snapshot_completed_at(cur)
+    rec_completed = _snapshot_completed_at(rec)
+    use_recovered_state = bool(
+        isinstance(rec_state, dict)
+        and rec_state.get("version") == INCREMENTAL_STATE_VERSION
+        and (
+            not isinstance(cur_state, dict)
+            or cur_state.get("version") != INCREMENTAL_STATE_VERSION
+            or (rec_completed is not None and (cur_completed is None or rec_completed > cur_completed))
+        )
+    )
+    if use_recovered_state:
         out["scan_state"] = dict(rec_state)
         out["incremental_state_version"] = INCREMENTAL_STATE_VERSION
+        for key in ("run_started_at", "run_completed_at", "last_updated", "latest_productive_scan"):
+            if rec.get(key) is not None:
+                out[key] = rec.get(key)
+        if isinstance(rec.get("scan_history"), list):
+            # Recovered history is authoritative up to the pre-upload commit.  Append any
+            # distinct current-only rows rather than replacing it with the older bundle's
+            # shorter history.
+            merged_history = list(rec.get("scan_history") or [])
+            seen = {
+                (str(x.get("started_at")), str(x.get("completed_at")), str(x.get("trigger")))
+                for x in merged_history if isinstance(x, dict)
+            }
+            for row in cur.get("scan_history", []) if isinstance(cur.get("scan_history"), list) else []:
+                if not isinstance(row, dict):
+                    continue
+                ident = (str(row.get("started_at")), str(row.get("completed_at")), str(row.get("trigger")))
+                if ident not in seen:
+                    merged_history.append(row)
+                    seen.add(ident)
+            out["scan_history"] = merged_history[-120:]
 
     return out
 
@@ -10345,17 +10406,25 @@ def load_previous() -> dict[str, Any]:
         if bad:
             print(f"Ignored {bad} malformed historical radar row(s) safely: {removed}.", flush=True)
 
-        # A complete repository ZIP carries an explicit one-run seed marker.
-        # Only that upgrade case checks Git history; ordinary valid live radars
-        # retain the V15 fast path and never walk history on every scan.
-        if bool(current.get("repository_bundle_seed")):
-            recovered = _recover_radar_from_git(max_commits=40)
+        # Whole-repository uploads are the user's normal deployment path.  On a push,
+        # always compare the uploaded snapshot with the immediately preceding Git history.
+        # This makes cumulative corpus/state monotonic even when a ZIP was prepared from a
+        # download that became stale while scheduled scans continued on GitHub.
+        #
+        # ``radar.json``-only scanner commits are excluded by the workflow path filter, so a
+        # push reaching this code is an upgrade/content upload rather than our own save.
+        is_upgrade_push = run_trigger_label() == "push"
+        if is_upgrade_push or bool(current.get("repository_bundle_seed")):
+            recovered = _recover_radar_from_git(max_commits=60, skip_head=is_upgrade_push)
             if recovered:
                 before = _saved_corpus_size(clean)
+                cur_stamp = _snapshot_completed_at(clean)
+                rec_stamp = _snapshot_completed_at(recovered)
                 clean = _merge_saved_snapshots(clean, recovered)
                 print(
-                    "Merged the pre-upload radar corpus from Git history after integrity filtering "
-                    f"({before} -> {_saved_corpus_size(clean)} saved A/B/C rows).",
+                    "Merged the pre-upload radar corpus/state from Git history after integrity filtering "
+                    f"({before} -> {_saved_corpus_size(clean)} saved A/B/C rows; "
+                    f"bundle_completed={cur_stamp}, live_pre_upload_completed={rec_stamp}).",
                     flush=True,
                 )
         clean.pop("repository_bundle_seed", None)
@@ -14242,6 +14311,69 @@ def main() -> int:
         "extended_highest_admitted": 0,
     }
     low_yield_rotation["new_ab_after_fresh_rotation"] = low_yield_rotation["new_ab_before"]
+
+    # V17.20.34 low-yield method switch.  The previous repair protected API time for
+    # broad query rotation by suppressing exact curator/manual/author/citation lanes
+    # whenever primary yield was low.  Live runs then executed thousands of broad
+    # records but repeatedly rediscovered known items while every high-information
+    # adjacency lane showed zero attempts.  Once the protected reserve is released,
+    # spend a bounded slice on the curator's exact evidence and known-good adjacency
+    # *before* doing more generic queries.  Admission remains identical.
+    low_yield_rotation["high_signal_recovery"] = {
+        "attempted": False,
+        "manual_exact_urls": 0,
+        "curator_exact_candidates": 0,
+        "priority_people_candidates": 0,
+        "citation_snowball_candidates": 0,
+        "new_ab_after": low_yield_rotation["new_ab_before"],
+    }
+    if (
+        low_yield_rotation["enabled"]
+        and low_yield_rotation["new_ab_before"] <= low_yield_threshold
+        and total_budget_remaining() > 240
+    ):
+        low_yield_rotation["high_signal_recovery"]["attempted"] = True
+
+        # Exact curator/manual material is the highest-information recovery source.  Retry
+        # it now even if the earlier ordinary lane was starved by the protected reserve.
+        high_signal_deadline = time.monotonic() + min(
+            120,
+            max(45, int(total_budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 210)),
+        )
+        if high_signal_deadline > time.monotonic() + 30:
+            try:
+                extra_manual = collect_manual_recovery(
+                    previous, warnings, high_signal_deadline, execution_stats
+                )
+            except Exception as e:
+                warnings.append(f"Low-yield manual recovery error: {type(e).__name__}: {str(e)[:140]}")
+                extra_manual = []
+            extra_manual = [x for x in extra_manual if isinstance(x, dict)]
+            if extra_manual:
+                inst.extend(extra_manual)
+            low_yield_rotation["high_signal_recovery"]["manual_exact_urls"] = len(extra_manual)
+
+            # Exact curator candidates are resolved through the same A/B gate; no test hint
+            # or known-good label can waive relevance.  This is discovery, not admission.
+            if total_budget_remaining() > 180:
+                try:
+                    extra_curator, curator_candidate_testing_state = collect_curator_candidate_tests(
+                        previous,
+                        warnings,
+                        time.monotonic() + min(90, max(35, int(total_budget_remaining() - 150))),
+                        execution_stats,
+                    )
+                except Exception as e:
+                    warnings.append(f"Low-yield curator recovery error: {type(e).__name__}: {str(e)[:140]}")
+                    extra_curator = []
+                extra_curator = [x for x in extra_curator if isinstance(x, dict)]
+                if extra_curator:
+                    cr.extend(extra_curator)
+                low_yield_rotation["high_signal_recovery"]["curator_exact_candidates"] = len(extra_curator)
+
+        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+        low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
+
     fresh_min_remaining = max(30, int(CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 180) or 180))
     fresh_query_n = max(1, int(CONFIG.get("low_yield_fresh_rotation_queries_per_source", 8) or 8))
     fresh_bank = diversified_query_bank(all_queries + b_method_bank + finding_context_bank)
@@ -14382,6 +14514,72 @@ def main() -> int:
                 state["low_yield_crossref_cursor"] = old_cr_cursor
                 state["low_yield_institution_cursor"] = old_inst_cursor
                 break
+
+    # If fresh broad/source rotation still mostly rediscovered known material, switch
+    # discovery method rather than running a third near-identical query wave.  Crossref
+    # exact-author attention and OpenAlex citation snowballing are deliberately split by
+    # endpoint so they can run in parallel without one auxiliary lane poisoning the other.
+    # These lanes start from already trusted/curator-backed evidence but still pass every
+    # ordinary EU-R&I-geopolitics admission rule.
+    if (
+        low_yield_rotation["enabled"]
+        and low_yield_rotation["new_ab_after_fresh_rotation"] <= low_yield_threshold
+        and total_budget_remaining() > 210
+    ):
+        adjacency_deadline = time.monotonic() + min(
+            150,
+            max(60, int(total_budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 60)),
+        )
+        adjacency_exec: dict[str, Any] = {}
+        adjacency_priority: list[dict[str, Any]] = []
+        adjacency_snowball: list[dict[str, Any]] = []
+        with cf.ThreadPoolExecutor(max_workers=2) as ex:
+            futs: list[tuple[str, Any]] = []
+            if priority_people_batch and not cr_failed:
+                futs.append(("priority", ex.submit(
+                    safe_stage,
+                    "low-yield Crossref researcher adjacency",
+                    collect_priority_people,
+                    priority_people_batch,
+                    DATE_FLOOR,
+                    warnings,
+                    adjacency_deadline,
+                    state,
+                    adjacency_exec,
+                    False,   # keep OpenAlex capacity for citation snowballing
+                    True,
+                    True,
+                )))
+            if bool(CONFIG.get("citation_snowball_enabled", True)) and not oa_failed:
+                futs.append(("snowball", ex.submit(
+                    collect_citation_snowball,
+                    previous,
+                    oa + cr,
+                    warnings,
+                    adjacency_deadline,
+                    adjacency_exec,
+                )))
+            for family, fut in futs:
+                try:
+                    result = fut.result()
+                except Exception as e:
+                    warnings.append(f"Low-yield adjacency {family}: {type(e).__name__}: {str(e)[:140]}")
+                    continue
+                if family == "priority":
+                    adjacency_priority = [x for x in (result or []) if isinstance(x, dict)]
+                else:
+                    rows, adj_stats = result if isinstance(result, tuple) and len(result) == 2 else ([], {})
+                    adjacency_snowball = [x for x in (rows or []) if isinstance(x, dict)]
+                    if isinstance(adj_stats, dict):
+                        snowball_stats = adj_stats
+        if adjacency_priority:
+            cr.extend(adjacency_priority)
+        if adjacency_snowball:
+            oa.extend(adjacency_snowball)
+        low_yield_rotation["high_signal_recovery"]["priority_people_candidates"] = len(adjacency_priority)
+        low_yield_rotation["high_signal_recovery"]["citation_snowball_candidates"] = len(adjacency_snowball)
+        low_yield_rotation["new_ab_after_fresh_rotation"] = len(genuinely_new_ab_candidates(oa + cr + inst))
+        low_yield_rotation["high_signal_recovery"]["new_ab_after"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
     # A second low-yield fallback may look into months 4-6, but only the existing
     # Highest source-merit band is eligible for admission. This is extra recall, not

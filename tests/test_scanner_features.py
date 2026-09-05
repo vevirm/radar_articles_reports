@@ -2277,3 +2277,73 @@ class StrategicSignalGuardrailTests(unittest.TestCase):
             "link": "https://example.org/pi",
             "source": "ELLIS Institute Finland",
         }))
+
+class WholeRepositoryUploadStateTests(unittest.TestCase):
+    def test_push_upload_recovers_newer_preupload_corpus_and_rotation_state(self):
+        import subprocess
+        import tempfile
+
+        def item(n):
+            return {
+                "title": f"European research security evidence {n}",
+                "source": "Test Journal",
+                "date": "2026-09-01",
+                "link": f"https://doi.org/10.1234/test.{n}",
+                "type": "peer-reviewed article",
+                "summary": "European research collaboration faces strategic external dependence and capability constraints.",
+            }
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            subprocess.run(["git", "init", "-b", "main"], cwd=root, check=True, capture_output=True)
+            subprocess.run(["git", "config", "user.email", "tests@example.invalid"], cwd=root, check=True)
+            subprocess.run(["git", "config", "user.name", "Tests"], cwd=root, check=True)
+
+            live = {
+                "first_scan_complete": True,
+                "last_updated": "2026-09-05T12:30Z",
+                "run_completed_at": "2026-09-05T12:30Z",
+                "incremental_state_version": scan.INCREMENTAL_STATE_VERSION,
+                "scan_state": {
+                    "version": scan.INCREMENTAL_STATE_VERSION,
+                    "last_completed_at": "2026-09-05T12:30Z",
+                    "openalex_cursor": 121,
+                    "crossref_broad_cursor": 177,
+                },
+                "scan_history": [{"started_at":"2026-09-05T12:10Z","completed_at":"2026-09-05T12:30Z","trigger":"scheduled"}],
+                "strand_a": [item(1), item(2)], "strand_b": [], "strand_c": [],
+            }
+            (root / "radar.json").write_text(json.dumps(live), encoding="utf-8")
+            subprocess.run(["git", "add", "radar.json"], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-m", "live scan"], cwd=root, check=True, capture_output=True)
+
+            stale_bundle = {
+                "first_scan_complete": True,
+                "last_updated": "2026-09-05T10:00Z",
+                "run_completed_at": "2026-09-05T10:00Z",
+                "incremental_state_version": scan.INCREMENTAL_STATE_VERSION,
+                "scan_state": {
+                    "version": scan.INCREMENTAL_STATE_VERSION,
+                    "last_completed_at": "2026-09-05T10:00Z",
+                    "openalex_cursor": 80,
+                    "crossref_broad_cursor": 100,
+                },
+                "scan_history": [{"started_at":"2026-09-05T09:40Z","completed_at":"2026-09-05T10:00Z","trigger":"push"}],
+                "strand_a": [item(1)], "strand_b": [], "strand_c": [],
+            }
+            (root / "radar.json").write_text(json.dumps(stale_bundle), encoding="utf-8")
+            subprocess.run(["git", "add", "radar.json"], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-m", "whole repo upload"], cwd=root, check=True, capture_output=True)
+
+            with mock.patch.object(scan, "ROOT", root), mock.patch.object(scan, "OUT_PATH", root / "radar.json"), mock.patch.dict(os.environ, {"RADAR_RUN_TRIGGER":"push", "GITHUB_EVENT_NAME":"push"}, clear=False):
+                loaded = scan.load_previous()
+
+        self.assertEqual(len(loaded.get("strand_a", [])), 2)
+        self.assertEqual(loaded["scan_state"]["openalex_cursor"], 121)
+        self.assertEqual(loaded["scan_state"]["crossref_broad_cursor"], 177)
+        self.assertEqual(loaded["scan_state"]["last_completed_at"], "2026-09-05T12:30Z")
+
+    def test_low_yield_switches_methods_instead_of_three_generic_waves(self):
+        self.assertEqual(int(scan.CONFIG.get("low_yield_fresh_rotation_max_waves", 0)), 2)
+        self.assertGreaterEqual(int(scan.CONFIG.get("curator_seed_queries_per_scan", 0)), 10)
+        self.assertGreaterEqual(int(scan.CONFIG.get("manual_recovery_urls_per_scan", 0)), 20)
