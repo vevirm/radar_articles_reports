@@ -6486,6 +6486,63 @@ def doi_landing_abstract(doi_raw: str, timeout: int = 8) -> str:
     return ""
 
 
+def openalex_abstract_by_doi(doi_raw: str, timeout: int = 8) -> str:
+    """Recover an abstract from OpenAlex by DOI when Crossref is metadata-sparse.
+
+    This is an enrichment transport, never an admission shortcut.  It is deliberately
+    used only when an API key is configured: anonymous OpenAlex capacity is too small
+    to spend on per-record DOI lookups.  The recovered text is still passed through the
+    ordinary language, source-quality, EU/R&I and A/B gates.
+    """
+    doi_raw = clean_text(doi_raw).removeprefix("https://doi.org/").removeprefix("http://doi.org/").removeprefix("doi:")
+    if not doi_raw or not OPENALEX_API_KEY or deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        return ""
+    try:
+        r = openalex_get(
+            "works",
+            params={
+                "filter": f"doi:https://doi.org/{doi_raw}",
+                "per_page": "1",
+                "select": "doi,abstract_inverted_index",
+            },
+            timeout=timeout,
+        )
+        if r.status_code != 200:
+            return ""
+        rows = (r.json() or {}).get("results") or []
+        if not rows:
+            return ""
+        abstract = openalex_abstract((rows[0] or {}).get("abstract_inverted_index"))
+        return abstract[:12000] if len(abstract.split()) >= 20 else ""
+    except Exception:
+        return ""
+
+
+def recover_scholarly_abstract(doi_raw: str, timeout: int = 8) -> tuple[str, str]:
+    """Best-effort abstract recovery with metadata-independent source semantics.
+
+    Prefer authenticated OpenAlex DOI metadata, then fall back to the publisher DOI
+    landing page.  The method label is diagnostic only; neither route changes quality
+    tiers or admission thresholds.
+    """
+    if bool(CONFIG.get("crossref_openalex_doi_enrichment_enabled", True)) and OPENALEX_API_KEY:
+        text = openalex_abstract_by_doi(doi_raw, timeout)
+        if text:
+            return text, "openalex-doi"
+    text = doi_landing_abstract(doi_raw, timeout)
+    return (text, "doi-landing") if text else ("", "")
+
+
+def source_health_is_diagnostic_only() -> bool:
+    """Invariant: observed source yield/metadata health never disables discovery.
+
+    A flagship journal can have zero admissions because the API omitted abstracts, the
+    relevant items were already known, or the current four-month window was quiet. None
+    of those observations is evidence that the source itself is low quality.
+    """
+    return True
+
+
 def candidate_from_crossref(item: dict[str, Any], date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None, allow_strategic: bool = False) -> dict[str, Any] | None:
     title = clean_text((item.get("title") or [""])[0])
     abstract = clean_text(item.get("abstract"))
@@ -7497,22 +7554,94 @@ def collect_crossref(
     enrichment_lock = threading.Lock()
     enrichment_per_task = max(1, int(CONFIG.get("crossref_missing_abstract_enrichment_per_task", 3) or 3))
     metadata_min_score = int(CONFIG.get("metadata_rescue_priority_min_score", 10) or 10)
+    sparse_min_records = max(3, int(CONFIG.get("metadata_sparse_source_min_records", 8) or 8))
+    sparse_max_coverage = max(0.0, min(1.0, float(CONFIG.get("metadata_sparse_source_max_abstract_coverage", 0.15) or 0.15)))
+    sparse_oa_per_journal = max(0, int(CONFIG.get("metadata_sparse_openalex_enrichment_per_journal", 8) or 0))
+    sparse_oa_total_limit = max(0, int(CONFIG.get("metadata_sparse_openalex_enrichment_per_scan", 32) or 0))
+    sparse_oa_total = [0]
+    source_health: dict[str, dict[str, Any]] = {}
+
+    def health_row(source_name: str) -> dict[str, Any]:
+        name = clean_text(source_name) or "Unknown source"
+        return source_health.setdefault(name, {
+            "records_seen": 0,
+            "crossref_abstract_present": 0,
+            "crossref_abstract_missing": 0,
+            "known_or_duplicate_skipped": 0,
+            "metadata_sparse_detected": False,
+            "openalex_doi_enrichment_attempted": 0,
+            "openalex_doi_enrichment_recovered": 0,
+            "doi_landing_enrichment_attempted": 0,
+            "doi_landing_enrichment_recovered": 0,
+            "gate_candidates_emitted": 0,
+        })
 
     def convert_items(works: list[dict[str, Any]], query_from: dt.date, q: str = "", journal: str = "") -> list[dict[str, Any]]:
         out: list[dict[str, Any]] = []
         task_key = f"{journal} || {q}" if journal else q
         rescue_queue: list[tuple[int, dict[str, Any], str]] = []
-        for raw_item in works:
-            item = raw_item
+        prepared = [dict(x) for x in works if isinstance(x, dict)]
+
+        # Metadata-blindness guard.  A source-first batch with very low Crossref abstract
+        # coverage is a transport/metadata problem, not a source-quality signal.  When an
+        # authenticated OpenAlex key exists, rotate a bounded DOI sample through OpenAlex
+        # *before* title-only deferral.  The rotation cursor lives with Crossref depth state
+        # so repeated scans do not enrich the same first eight papers forever.
+        source_first = bool(journal and clean_text(q) == "source-first recent contents")
+        present_initial = sum(1 for x in prepared if clean_text(x.get("abstract")))
+        sparse_batch = bool(
+            source_first
+            and len(prepared) >= sparse_min_records
+            and (present_initial / max(1, len(prepared))) <= sparse_max_coverage
+        )
+        if source_first:
+            h = health_row(journal)
+            h["metadata_sparse_detected"] = bool(h.get("metadata_sparse_detected") or sparse_batch)
+            h["records_seen"] += len(prepared)
+            h["crossref_abstract_present"] += present_initial
+            h["crossref_abstract_missing"] += max(0, len(prepared) - present_initial)
+        if sparse_batch and OPENALEX_API_KEY and sparse_oa_per_journal > 0 and sparse_oa_total[0] < sparse_oa_total_limit:
+            missing_idx = [
+                i for i, x in enumerate(prepared)
+                if clean_text(x.get("DOI")) and not clean_text(x.get("abstract"))
+            ]
+            if missing_idx:
+                cursor_key = f"metadata-rescue::{journal}"
+                cursor = int(priority_depth_state.get(cursor_key, 0) or 0) % len(missing_idx)
+                allowed = min(sparse_oa_per_journal, sparse_oa_total_limit - sparse_oa_total[0], len(missing_idx))
+                selected = [missing_idx[(cursor + step) % len(missing_idx)] for step in range(allowed)]
+                priority_depth_state[cursor_key] = (cursor + allowed) % len(missing_idx)
+                h = health_row(journal)
+                for idx in selected:
+                    doi0 = clean_text(prepared[idx].get("DOI"))
+                    h["openalex_doi_enrichment_attempted"] += 1
+                    sparse_oa_total[0] += 1
+                    _diag_inc("crossref_openalex_doi_enrichment_attempted")
+                    recovered = openalex_abstract_by_doi(doi0, enrichment_timeout)
+                    if recovered:
+                        prepared[idx]["abstract"] = recovered
+                        prepared[idx]["_metadata_recovery_method"] = "openalex-doi"
+                        h["openalex_doi_enrichment_recovered"] += 1
+                        _diag_inc("crossref_openalex_doi_enrichment_recovered")
+
+        for item in prepared:
             titles0 = item.get("title") or []
             title0 = clean_text(titles0[0] if isinstance(titles0, list) and titles0 else titles0)
             doi0 = clean_text(item.get("DOI"))
+            source_name = clean_text((item.get("container-title") or [journal or ""])[0]) or journal
+            h = health_row(source_name) if source_first else None
             if bool(CONFIG.get("skip_known_items_before_classification", True)) and known_ab_duplicate(title0, doi0):
+                if h is not None:
+                    h["known_or_duplicate_skipped"] += 1
                 continue
             abstract0 = clean_text(item.get("abstract"))
             if abstract0:
                 c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
                 if c:
+                    if item.get("_metadata_recovery_method"):
+                        c["metadata_note"] = "Crossref omitted the abstract; text was recovered by authenticated OpenAlex DOI lookup before the ordinary admission gate."
+                    if h is not None:
+                        h["gate_candidates_emitted"] += 1
                     out.append(c)
                 continue
 
@@ -7526,28 +7655,41 @@ def collect_crossref(
             score = scholarly_metadata_rescue_priority(
                 title0, query=q, source=source, publisher=clean_text(item.get("publisher")), published=published, tier=tier
             )
-            if not bool(CONFIG.get("metadata_rescue_priority_enabled", True)) or score >= metadata_min_score:
-                rescue_queue.append((score, item, doi0))
+            # A metadata-sparse configured journal is never treated as low quality because
+            # its titles alone are weak.  The normal bounded DOI-landing rescue therefore
+            # remains eligible even when the title-priority score is below the generic cut.
+            force_sparse_rescue = bool(source_first and sparse_batch)
+            if force_sparse_rescue or not bool(CONFIG.get("metadata_rescue_priority_enabled", True)) or score >= metadata_min_score:
+                rescue_queue.append((score + (100 if force_sparse_rescue else 0), item, doi0))
 
         rescue_queue.sort(key=lambda x: x[0], reverse=True)
         _diag_inc("crossref_metadata_rescue_queued", len(rescue_queue))
-        for _score, raw_item, doi0 in rescue_queue[:enrichment_per_task]:
+        per_task_limit = max(enrichment_per_task, int(CONFIG.get("metadata_sparse_doi_landing_enrichment_per_journal", 6) or 6)) if sparse_batch else enrichment_per_task
+        for _score, raw_item, doi0 in rescue_queue[:per_task_limit]:
             with enrichment_lock:
-                if enrichment_total[0] >= enrichment_limit or enrichment_by_task[task_key] >= enrichment_per_task:
+                if enrichment_total[0] >= enrichment_limit or enrichment_by_task[task_key] >= per_task_limit:
                     break
                 enrichment_total[0] += 1
                 enrichment_by_task[task_key] += 1
             _diag_inc("crossref_metadata_rescue_attempted")
+            source_name = clean_text((raw_item.get("container-title") or [journal or ""])[0]) or journal
+            h = health_row(source_name) if source_first else None
+            if h is not None:
+                h["doi_landing_enrichment_attempted"] += 1
             recovered = doi_landing_abstract(doi0, enrichment_timeout)
             if not recovered:
                 continue
+            if h is not None:
+                h["doi_landing_enrichment_recovered"] += 1
             _diag_inc("crossref_metadata_rescue_recovered")
             item = dict(raw_item)
             item["abstract"] = recovered
             c = candidate_from_crossref(item, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
             if c:
                 _diag_inc("crossref_metadata_rescue_admitted")
-                c["metadata_note"] = "Abstract recovered from DOI publisher metadata after high-potential metadata prioritisation."
+                if h is not None:
+                    h["gate_candidates_emitted"] += 1
+                c["metadata_note"] = "Crossref omitted the abstract; text was recovered from DOI publisher metadata before the ordinary admission gate."
                 out.append(c)
         return out
 
@@ -7822,6 +7964,24 @@ def collect_crossref(
         execution_stats.setdefault("crossref_priority_tasks", set()).update(executed_priority_tasks)
         execution_stats.setdefault("crossref_source_journals", set()).update(executed_source_journals)
         execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(enrichment_total[0])
+        execution_stats["crossref_openalex_doi_enrichment_attempted"] = int(execution_stats.get("crossref_openalex_doi_enrichment_attempted", 0)) + int(sparse_oa_total[0])
+        merged_health = execution_stats.setdefault("source_metadata_health", {})
+        if isinstance(merged_health, dict):
+            for source_name, row in source_health.items():
+                dest = merged_health.setdefault(source_name, {})
+                if not isinstance(dest, dict):
+                    dest = {}; merged_health[source_name] = dest
+                for key, value in row.items():
+                    if key == "metadata_sparse_detected":
+                        dest[key] = bool(dest.get(key) or value)
+                    elif isinstance(value, int):
+                        dest[key] = int(dest.get(key, 0) or 0) + value
+                seen = int(dest.get("records_seen", 0) or 0)
+                present = int(dest.get("crossref_abstract_present", 0) or 0)
+                dest["crossref_abstract_coverage_pct"] = round((100.0 * present / seen), 1) if seen else None
+                recovered = int(dest.get("openalex_doi_enrichment_recovered", 0) or 0) + int(dest.get("doi_landing_enrichment_recovered", 0) or 0)
+                dest["judgeable_after_enrichment"] = min(seen, present + recovered)
+                dest["health_is_diagnostic_only"] = True
     return dedupe_candidates(out)
 
 
@@ -16222,6 +16382,10 @@ def main() -> int:
             "crossref_source_journals_executed": cr_source_executed,
             "recall_backfill_this_run": bool(state.get("recall_reset_this_run")),
             "crossref_missing_abstract_enrichment_attempted": int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)),
+            "crossref_openalex_doi_enrichment_attempted": int(execution_stats.get("crossref_openalex_doi_enrichment_attempted", 0)),
+            "source_metadata_health": dict(execution_stats.get("source_metadata_health", {}) or {}),
+            "source_health_policy": "Diagnostic only: source quality is never inferred from admission yield or abstract coverage, and observed yield never prunes a configured source.",
+            "source_yield_pruning_enabled": False,
             "b_method_queries_executed": b_method_executed,
             "institution_sources_this_run": len(inst_batch),
             "extended_highest_sources_planned": len(extended_highest_batch),

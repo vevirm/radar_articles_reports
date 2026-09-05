@@ -1,3 +1,12 @@
+# v17.20.46 — separate source quality from metadata availability and admission yield
+
+- No configured scholarly source is pruned, demoted or disabled because it admitted few or zero items. `source_yield_pruning_enabled` is explicitly false; source-health observations are diagnostic only.
+- Crossref source-first batches now measure raw abstract coverage separately from admission. `source_metadata_health` reports records seen, Crossref abstracts present/missing, known/duplicate skips, enrichment attempts/recoveries, judgeable records after enrichment and emitted gate candidates.
+- When a configured journal batch is empirically metadata-sparse (enough records but very low Crossref abstract coverage), authenticated OpenAlex DOI lookups recover a bounded rotating sample of abstracts before the ordinary A/B gate. The persisted rotation cursor prevents every scan from enriching the same first records.
+- DOI landing-page recovery remains a bounded fallback. Neither OpenAlex nor publisher enrichment changes source tiers or admission thresholds; recovered text must pass the same language, EU, R&I and A/B tests.
+- Adds a regression reproducing the concrete failure mode: eight recent Research Policy records with zero Crossref abstracts are recognised as metadata-sparse, enriched through OpenAlex, and judged without treating the source as low quality. The same invariant covers Technological Forecasting and Social Change, Futures, Technology in Society and other configured journals when their Crossref batches are similarly sparse.
+- Makes the release-marker regression future-proof: VERSION, admission profile and patch-note marker must agree, instead of hard-coding the previous release number and breaking every legitimate version bump.
+
 # v17.20.45 — close the Horizon governance and browser-upload compatibility gap
 
 - Formal Horizon Europe association Joint Committee / Joint R&I Committee notices are no longer misclassified as routine event recaps when the retrieved evidence describes programme governance, association, research-security, mobility or R&I-cooperation substance.

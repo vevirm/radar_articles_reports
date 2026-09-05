@@ -1706,7 +1706,7 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "v17.20.45-governance-event-recall-and-live-test-compat",
+  "admission_profile": "v17.20.46-metadata-resilience-and-source-health-separation",
   "scan_budget_seconds": 1440,
   "network_reserve_seconds": 100,
   "request_timeout_seconds": 12,
@@ -3534,5 +3534,13 @@
   "crossref_low_yield_query_profile": "v17.20.38-bibliographic-depth-recall",
   "crossref_recall_bibliographic_profile": "v17.20.39-broad-metadata-recall-strict-final-gate",
   "openalex_keyless_queries_per_scan": 6,
-  "openalex_keyless_requests_per_scan": 6
+  "openalex_keyless_requests_per_scan": 6,
+  "crossref_openalex_doi_enrichment_enabled": true,
+  "metadata_sparse_source_min_records": 8,
+  "metadata_sparse_source_max_abstract_coverage": 0.15,
+  "metadata_sparse_openalex_enrichment_per_journal": 8,
+  "metadata_sparse_openalex_enrichment_per_scan": 32,
+  "metadata_sparse_doi_landing_enrichment_per_journal": 6,
+  "source_yield_pruning_enabled": false,
+  "source_yield_policy": "Never disable, demote, or prune a configured source because of low admissions. Track metadata coverage, judgeable records, duplicates/known items and gate yield separately; metadata availability is not source quality."
 }
