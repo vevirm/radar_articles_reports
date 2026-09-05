@@ -1,3 +1,10 @@
+# v17.20.45 — close the Horizon governance and browser-upload compatibility gap
+
+- Formal Horizon Europe association Joint Committee / Joint R&I Committee notices are no longer misclassified as routine event recaps when the retrieved evidence describes programme governance, association, research-security, mobility or R&I-cooperation substance.
+- The final shared A/B worthiness guard now uses the same governance-event exception as `eu_ri_centrality()`, eliminating the second-stage contradiction where an item could pass centrality and then be discarded later.
+- The live `tests/test_v172041_recall_guard.py` contract is included in the package so browser uploads cannot leave an untested stale file behind.
+- Routine workshops/conferences remain excluded.
+
 # v17.20.44 — make scanner startup independent of hidden workflow deployment
 
 - Fixes the repeated pre-scan failure seen on GitHub when browser whole-repo uploads update visible code/tests but leave `.github/workflows/*.yml` at the older revision.

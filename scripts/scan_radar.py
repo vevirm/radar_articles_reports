@@ -3356,10 +3356,16 @@ def _substantive_ri_governance_event(title: str, evidence: str) -> bool:
         'implementation of the agreement', 'agreement implementation',
         'financial contribution mechanism', 'reciprocal access', 'governance structures',
         'work programme', 'framework programme', 'policy developments',
-        'association to horizon europe', 'participation in horizon europe',
+        'association to horizon europe', 'horizon europe association',
+        'participation in horizon europe', 'research and innovation cooperation',
+        'research security', 'researcher mobility', 'research mobility',
         'european research area', 'research infrastructures', 'research careers',
         'science diplomacy', 'joint commitments', 'strategic partnership',
+        'joint decision', 'joint decisions', 'committee decision', 'committee decisions',
     ]
+    # Formal Horizon Europe association committees are governance bodies, not ordinary
+    # conferences/workshops.  Still require substantive programme/governance content in
+    # the retrieved evidence so a bare calendar notice cannot pass on the title alone.
     return contains_any(e, substantive)
 
 # V17.19.4: evidence-worthiness guard. Routine prestige announcements and narrowly local
@@ -10356,7 +10362,11 @@ def final_ab_candidate_worthiness(item: dict[str, Any]) -> bool:
             return False
         if _routine_institutional_prestige_title(title):
             return False
-        if A_EVENT_RECAP_TITLE.search(title) and not A_EVENT_SUBSTANTIVE_TITLE.search(title):
+        if (
+            A_EVENT_RECAP_TITLE.search(title)
+            and not A_EVENT_SUBSTANTIVE_TITLE.search(title)
+            and not _substantive_ri_governance_event(title, clean_text(f"{title}. {summary}"))
+        ):
             return False
     return True
 

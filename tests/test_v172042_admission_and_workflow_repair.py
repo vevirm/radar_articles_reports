@@ -102,10 +102,10 @@ class WorkflowRepairTests(unittest.TestCase):
         self.assertIn("Compatibility mode: workflow mismatches are warnings", checker)
 
     def test_release_has_version_config_and_test_marker(self):
-        self.assertEqual((ROOT / "VERSION.txt").read_text(encoding="utf-8").strip(), "v17.20.44")
+        self.assertEqual((ROOT / "VERSION.txt").read_text(encoding="utf-8").strip(), "v17.20.45")
         cfg = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
-        self.assertIn("v17.20.44", cfg.get("admission_profile", ""))
-        self.assertIn("# v17.20.44", (ROOT / "PATCH_NOTES.md").read_text(encoding="utf-8"))
+        self.assertIn("v17.20.45", cfg.get("admission_profile", ""))
+        self.assertIn("# v17.20.45", (ROOT / "PATCH_NOTES.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
