@@ -1,3 +1,11 @@
+# v17.20.41 — restore useful EU-R&I recall + enforce the keyless OpenAlex cap globally
+
+- Fixes the v17.20.25–40 zero/one-item regression: strategic/geopolitical context remains a preferred Strand-A route, but it is no longer a universal final veto. A bounded Tier-1/2 major EU-R&I-system route restores strong Horizon Europe, research-infrastructure, research-capacity and strategic-technology evidence when the title itself establishes European or R&I centrality.
+- Keeps the v17.20.39 precision guard: the known `Regional knowledge base and firm efficiency...` false positive and similar non-major/local/consumer material do not qualify through the restored route.
+- Fixes v17.20.40 keyless OpenAlex protection at the request layer. All OpenAlex callers now share one per-scan anonymous request budget, so curator/author/fallback calls cannot silently turn a planned six-query scan into 40+ requests and an HTTP 429.
+- A configured `OPENALEX_API_KEY` still removes the local anonymous cap and enables the full OpenAlex discovery/citation lanes.
+- No corpus rows are deleted by this release.
+
 # v17.20.39 — novelty-first low-yield repair + hard strategic precision
 
 - Fixed the live false positive `Regional knowledge base and firm efficiency: Evidence from start-ups and fast-growing medium-sized firms`. Ordinary phrases such as `access to`, `dependence`, `resilience` and generic `technological capabilities` can no longer combine to manufacture a geopolitical/strategic mechanism.

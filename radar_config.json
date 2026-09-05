@@ -1706,7 +1706,7 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "v17.20.23-document-level-eu-ri-geopolitics",
+  "admission_profile": "v17.20.41-strategic-or-high-confidence-eu-ri-system",
   "scan_budget_seconds": 1440,
   "network_reserve_seconds": 100,
   "request_timeout_seconds": 12,
@@ -3163,7 +3163,7 @@
   "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Each family keeps independent persisted cursors; no output quota is imposed.",
   "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
   "reader_quality_ranking_rule": "Public analytical readers do not display or order by source-quality scores. The Stuff audit/export workbook alone carries a 0-100 technical evidence ranking combining source authority, EU relevance, evidence strength and author transparency.",
-  "scanner_eu_relevance_rule": "EU relevance is an explicit scanner gate. Strand A requires source-supported central European/EU R&I subject matter AND a real geopolitical/strategic mechanism. The daily yield target only deepens/rotates discovery; it never relaxes admission. Generic EU innovation, social-policy, sector, programme-administration or Europe-comparison material without strategic/geopolitical substance is rejected.",
+  "scanner_eu_relevance_rule": "EU relevance is an explicit scanner gate. Strand A requires source-supported central European/EU R&I subject matter. Strategic/geopolitical mechanisms remain the preferred route; Tier 1/2 sources may also enter through a bounded major-EU-R&I-system route only when the title itself establishes direct European/EU scope. Generic local/consumer/firm material remains excluded.",
   "stuff_ranking_rule": "0-100 audit/export score only: source authority max 55 + EU relevance max 25 + evidence strength max 15 + author transparency max 5. This score must not be used for Matrix placement or public-reader ordering.",
   "formal_evidence_news_promotion_per_scan": 6,
   "source_failure_reallocation_enabled": true,
@@ -3504,7 +3504,7 @@
   "crossref_source_first_depth_pages_max": 4,
   "crossref_source_first_depth_policy": "Every priority journal checks newest contents; high-output journals that fill the first page also rotate through one deeper four-month page per scan so older-in-window articles are not permanently hidden.",
   "institution_semantic_date_recovery_enabled": true,
-  "main_radar_recall_policy": "High recall inside the fixed subject boundary: European/EU research & innovation materially shaped by geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power or talent/capability mechanisms. Discovery may be broad; final admission remains source-supported.",
+  "main_radar_recall_policy": "High recall for central European/EU research & innovation, prioritising geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power and talent/capability mechanisms. A bounded Tier 1/2 major EU-R&I-system route prevents zero-yield scans when strategically important system evidence is not explicitly labelled geopolitical.",
   "low_yield_fresh_rotation_max_waves": 3,
   "low_yield_fresh_rotation_institution_sources_per_wave": 20,
   "low_yield_reserved_seconds": 600,
@@ -3533,5 +3533,6 @@
   "institution_date_recovery_profile": "v17.20.38-url-month-linked-pdf-date",
   "crossref_low_yield_query_profile": "v17.20.38-bibliographic-depth-recall",
   "crossref_recall_bibliographic_profile": "v17.20.39-broad-metadata-recall-strict-final-gate",
-  "openalex_keyless_queries_per_scan": 6
+  "openalex_keyless_queries_per_scan": 6,
+  "openalex_keyless_requests_per_scan": 6
 }

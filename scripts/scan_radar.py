@@ -376,11 +376,33 @@ SESSION.headers.update({
 # fully anonymous operation when it is absent. Never persist or log the key.
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
+# Every OpenAlex path shares this counter in keyless mode. V17.20.40 capped only the
+# primary query plan, so exact-author/curator/fallback calls could still burn through the
+# anonymous daily allowance later in the same scan. The request-layer cap closes that leak.
+OPENALEX_KEYLESS_REQUEST_COUNT = 0
+OPENALEX_KEYLESS_REQUEST_LOCK = threading.Lock()
+
+class _OpenAlexLocalBudgetResponse:
+    status_code = 429
+    headers = {"X-Radar-OpenAlex-Local-Budget": "1"}
+    url = "https://api.openalex.org/"
+    def json(self):
+        return {}
+
+def _openalex_local_budget_response(response: Any) -> bool:
+    return bool(getattr(response, "headers", {}).get("X-Radar-OpenAlex-Local-Budget"))
 
 def openalex_get(path: str, *, params: dict[str, Any] | None = None, timeout: int | float | None = None, **kwargs):
+    global OPENALEX_KEYLESS_REQUEST_COUNT
     query = dict(params or {})
     if OPENALEX_API_KEY:
         query.setdefault("api_key", OPENALEX_API_KEY)
+    else:
+        cap = max(1, int(CONFIG.get("openalex_keyless_requests_per_scan", CONFIG.get("openalex_keyless_queries_per_scan", 6)) or 6))
+        with OPENALEX_KEYLESS_REQUEST_LOCK:
+            if OPENALEX_KEYLESS_REQUEST_COUNT >= cap:
+                return _OpenAlexLocalBudgetResponse()
+            OPENALEX_KEYLESS_REQUEST_COUNT += 1
     url = path if path.startswith("http") else "https://api.openalex.org/" + path.lstrip("/")
     return SESSION.get(url, params=query, timeout=timeout or REQUEST_TIMEOUT, **kwargs)
 
@@ -5193,16 +5215,34 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
             title, abstract, body, centrality_reason
         )
 
-    # V17.20.25 precision restoration: Strand A is specifically EU R&I *in geopolitical
-    # context*.  Discovery may be broad, but final admission must carry a source-supported
-    # strategic mechanism.  The mechanism may be explicit (research/economic security,
-    # export controls, strategic competition, etc.) or conservatively triangulated from
-    # dependence/control, external position, rules power, talent allocation, and related
-    # mechanisms.  A generic Europe/R&I paper is never rescued merely to increase yield.
+    # V17.20.41 recall repair: v17.20.25 accidentally turned strategic context from an
+    # evidence/ranking dimension into a universal veto. Live scans then collapsed to 0-1 even
+    # when they found strong Horizon Europe, research-infrastructure and EU R&I-system material.
+    # Keep the strict strategic routes, but restore a bounded high-confidence system route:
+    # Tier 1/2 + central/direct EU R&I + major R&I-system/strategic-technology substance +
+    # direct European scope in the title. This does NOT reopen the v17.20.39 false positive,
+    # whose title lacks both direct European scope and a major R&I-system subject.
     strategic_context_pass = a_route in {'explicit-geopolitics', 'triangulated-strategic-context'}
+    title_scope_for_system = bool(_scope_hits_in_sentence(title, clean_text(f"{title}. {abstract}")))
+    # The non-strategic fallback must be title-led. Allowing abstract/body-only system
+    # words made generic Europe-comparison/social-policy papers look like R&I-system evidence.
+    major_system_relevance = bool(_major_a_focus(title, bool(_geo_hits(title))))
+    historical_title_for_system = bool(
+        A_HISTORICAL_CENTURY.search(title) or A_HISTORICAL_ERA.search(title)
+        or any(int(m.group(2)) <= 2005 for m in A_HISTORICAL_YEAR_RANGE.finditer(title))
+    )
+    high_confidence_system_pass = bool(
+        int(source_tier or 9) <= 2
+        and major_system_relevance
+        and title_scope_for_system
+        and not historical_title_for_system
+    )
+    if not strategic_context_pass and high_confidence_system_pass and a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok:
+        a_route = 'eu-ri-system-relevance'
+        a_context = list(dict.fromkeys(centrality_evidence + ri_hits))[:8]
     a_pass = bool(
         a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok
-        and strategic_context_pass
+        and (strategic_context_pass or high_confidence_system_pass)
     )
     if external_ok:
         a_route = 'external-strategic-shock'
@@ -5571,7 +5611,7 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_reject_no_ri")
     elif not ev.get("a_focus_pass"):
         _diag_inc(f"{prefix}_reject_no_ri")
-    elif clean_text(ev.get("a_route")) not in {"explicit-geopolitics", "triangulated-strategic-context", "external-strategic-shock"}:
+    elif clean_text(ev.get("a_route")) not in {"explicit-geopolitics", "triangulated-strategic-context", "external-strategic-shock", "eu-ri-system-relevance"}:
         _diag_inc(f"{prefix}_reject_no_strategic_context")
     else:
         _diag_inc(f"{prefix}_reject_aboutness")
@@ -5675,8 +5715,9 @@ def build_admission_rejection_funnel(unique_gate_candidates: int = 0, genuinely_
         "central_eu_ri_scope_remaining": central_eu_ri,
         "substantive_ri_remaining": ri_substantive,
         "strategic_context_remaining": strategic,
-        "strategic_context_gate_active": True,
-        "admission_model": "central European/EU R&I subject + substantive R&I + source-supported geopolitical/strategic mechanism",
+        "strategic_context_gate_active": False,
+        "high_confidence_eu_ri_system_route_active": True,
+        "admission_model": "central European/EU R&I subject + substantive R&I + either source-supported strategic mechanism or bounded Tier-1/2 major EU-R&I-system relevance",
         "gate_passed_before_cross_source_dedupe": gate_passed,
         "unique_gate_candidates": max(0, int(unique_gate_candidates)),
         "duplicates_or_known_removed_after_gate": max(0, gate_passed - int(unique_gate_candidates)),
@@ -5777,12 +5818,12 @@ def collect_openalex(
     execution_stats: dict[str, Any] | None = None,
     depth_only: bool = False,
 ) -> list[dict[str, Any]]:
-    """Keyless OpenAlex discovery with depth rotation.
+    """OpenAlex discovery with authenticated depth rotation or protected keyless mode.
 
-    Every selected query checks page 1 for newly published work and one persisted
-    deeper page. No API key, email tag, GitHub secret, or other credential is used.
-    A 429 stops this source family quickly for the run instead of spending the
-    stage budget on repeated retries; Crossref and the other sources then continue.
+    With an API key, configured depth rotation is available. Without a key, all callers
+    share a small request-layer budget so one scan cannot exhaust the anonymous daily
+    allowance. A real 429 stops this source family quickly while Crossref and direct
+    publisher/institution discovery continue.
     """
     queries = list(dict.fromkeys(queries_override if queries_override is not None else (CONFIG["queries_a"] + CONFIG["queries_b"])))
     strategic_query_set = set(strategic_pathway_queries('scholarly'))
@@ -5913,6 +5954,8 @@ def collect_openalex(
                     return convert_works(works, query_from, q), None, len(works)
                 if r.status_code == 429:
                     stop_public.set()
+                    if _openalex_local_budget_response(r):
+                        return [], "local-cap", 0
                     return [], "HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run", 0
                 if r.status_code in {401, 403, 409}:
                     stop_public.set()
@@ -5987,6 +6030,9 @@ def collect_openalex(
                 out.extend(items)
                 if err == "budget":
                     budget_hits += 1
+                elif err == "local-cap":
+                    # Planned local protection, not a transport/source failure.
+                    pass
                 elif err and ("source stopped" in err or "endpoint stopped" in err):
                     if not endpoint_stop_reported:
                         warnings.append(f"OpenAlex {err}; continuing with Crossref and direct publisher/institution scanning")
@@ -7774,6 +7820,8 @@ def _resolve_priority_openalex_author(
         warnings.append(f"Priority people OpenAlex author resolution {name}: {type(e).__name__}")
         return "", True
     if r.status_code != 200:
+        if _openalex_local_budget_response(r):
+            return "", False
         warnings.append(f"Priority people OpenAlex author resolution {name}: HTTP {r.status_code}")
         return "", True
     wanted = folded_person_name(name)
@@ -7879,7 +7927,8 @@ def collect_priority_people(
                     if r.status_code == 400 and idx == 0:
                         continue
                     if r.status_code != 200:
-                        warnings.append(f"Priority people OpenAlex works {name}: HTTP {r.status_code}")
+                        if not _openalex_local_budget_response(r):
+                            warnings.append(f"Priority people OpenAlex works {name}: HTTP {r.status_code}")
                         break
                     works = r.json().get("results", [])
                     break
@@ -13455,7 +13504,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
     started = time.time()
     log_progress.started = time.monotonic()
     budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
@@ -13467,6 +13516,7 @@ def main() -> int:
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
+    OPENALEX_KEYLESS_REQUEST_COUNT = 0
     if not OPENALEX_API_KEY:
         warnings.append(
             "OpenAlex API key is not configured; using a deliberately small keyless lane. "
@@ -16078,6 +16128,7 @@ def main() -> int:
             "openalex_admitted_before_dedupe": len(oa),
             "openalex_public_anonymous": not bool(OPENALEX_API_KEY),
             "openalex_api_key_configured": bool(OPENALEX_API_KEY),
+            "openalex_keyless_requests_used": int(OPENALEX_KEYLESS_REQUEST_COUNT) if not OPENALEX_API_KEY else 0,
             "curator_candidate_tests_attempted": int(execution_stats.get("curator_candidate_tests_attempted", 0)),
             "curator_candidate_tests_admitted": int(execution_stats.get("curator_candidate_tests_admitted", 0)),
             "curator_candidate_tests_matrix_placed": int(curator_candidate_testing_state.get("matrix_placed", 0) or 0) if isinstance(curator_candidate_testing_state, dict) else 0,
