@@ -103,8 +103,10 @@ CONFIG_PATH = ROOT / "radar_config.json"
 OUT_PATH = ROOT / "radar.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
-CURATOR_CANDIDATE_TESTS_PATH = ROOT / "curator_candidate_tests.json"
+CURATOR_CANDIDATE_TESTS_PATH = ROOT / "curator_candidate_inputs.json"
 PHRASE_RULES_PATH = ROOT / "radar_phrase_rules.json"
+FRESH_START_PATH = ROOT / "FRESH_START"
+FRESH_START_TOKEN = "RADAR_FRESH_START_V1"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
@@ -358,6 +360,15 @@ def is_fresh_repository_seed(data: Any) -> bool:
     successful first run consumes the bootstrap automatically.
     """
     if not isinstance(data, dict):
+        return False
+    # Fresh-start authority is explicit and local to this package.  The marker file is
+    # consumed by the workflow after the first successful scan, while the JSON marker is
+    # omitted from normal scanner output.  Both must be present for bootstrap mode.
+    try:
+        declaration = FRESH_START_PATH.read_text(encoding="utf-8")
+    except Exception:
+        return False
+    if FRESH_START_TOKEN not in declaration:
         return False
     marker = data.get("fresh_repository_seed")
     if not isinstance(marker, dict) or clean_text(marker.get("version")) != FRESH_REPOSITORY_SEED_VERSION:
@@ -14620,11 +14631,18 @@ def main() -> int:
         + (", ".join(f"{k}({frontier_focus.get('counts', {}).get(k, 0)})" for k in frontier_focus["targets"]) if frontier_focus["targets"] else "none")
     )
 
-    try:
-        last = dateparser.parse(previous.get("last_updated", "")).date()
-        incremental_from = max(DATE_FLOOR, last - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS))
-    except Exception:
-        incremental_from = bootstrap_floor(now.date())
+    if is_fresh_repository_seed(previous):
+        # The curated 200 is the starting evidence baseline, not a request to rebuild an
+        # inherited four-month crawl.  Begin ordinary live discovery with the same short
+        # overlap used by later incremental scans.  Separate exploration/gap lanes can still
+        # inspect the configured rolling corpus window without turning bootstrap into history.
+        incremental_from = max(DATE_FLOOR, now.date() - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS))
+    else:
+        try:
+            last = dateparser.parse(previous.get("last_updated", "")).date()
+            incremental_from = max(DATE_FLOOR, last - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS))
+        except Exception:
+            incremental_from = bootstrap_floor(now.date())
     backfill_from = bootstrap_floor(now.date())
 
     # The broad lane is Strand A discovery. Strand B has its own strict method-
