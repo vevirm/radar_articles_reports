@@ -80,9 +80,28 @@
     return concat([local,central,end]);
   }
 
+  function buildShockRows(data){
+    const shocks=Array.isArray(data?.shock_inference?.dynamic_shocks)?data.shock_inference.dynamic_shocks:[];
+    const evidence=x=>(Array.isArray(x)?x:[]).map(e=>{
+      if(!e||typeof e!=='object')return clean(e);
+      const bits=[e.row?`#${e.row}`:'',clean(e.title),clean(e.source)].filter(Boolean);
+      return bits.join(' · ');
+    }).filter(Boolean).join(' | ');
+    return shocks.map(s=>[
+      clean(s.status),Number(s.inference_score)||0,clean(s.title),clean(s.plainly),clean(s.second_order),
+      (s.conditions||[]).map(clean).filter(Boolean).join(' | '),
+      (s.case_against||[]).map(clean).filter(Boolean).join(' | '),
+      (s.prevention_actions||[]).map(clean).filter(Boolean).join(' | '),
+      (s.watch_for||[]).map(clean).filter(Boolean).join(' | '),
+      clean(s.net_assessment),s.official_trigger_present?'yes':'no',Number(s.coupling_count)||0,
+      evidence(s.support),evidence(s.prevention_evidence||s.against)
+    ]);
+  }
+
   function buildXlsx(data,Merit){
     if(!Merit?.scoreFor||!Merit?.forItem||!Merit?.componentsFor)throw new Error('RadarSourceMerit unavailable');
     const rows=buildRows(data,Merit);
+    const shockRows=buildShockRows(data);
     const h1=['Rank','Score / 100','Band','Title','Date','Product','Source','Authors','Authority / 55','Authority basis','EU relevance / 25','EU relevance basis','Evidence / 15','Evidence basis','Author transparency / 5','Type','EU relevance code','EU evidence','R&I evidence','Strategic evidence','Core message','Relevance / admission note','Matrix auto cell','Strategic classification','Discovery provenance','Source tier','First seen','Source link'];
     const b1=rows.map(r=>[r.rank,r.score,r.band,r.title,r.date,r.product,r.source,r.authors,r.authorityPoints,r.authority,r.relevancePoints,r.relevance,r.evidencePoints,r.evidence,r.authorPoints,r.type,r.euRelevance,r.euEvidence,r.riEvidence,r.geoEvidence,r.core,r.note,r.matrix,r.strategic,r.provenance,r.sourceTier,r.firstSeen,r.link]);
     const widths=[8,11,16,42,12,16,27,32,12,28,15,31,12,28,18,24,18,28,28,28,42,48,20,22,24,20,20,42];
@@ -99,20 +118,27 @@
       ['Reader-ordering rule','The score must not order Radar, Matrix, Literature, Risks & Opportunities, External Shocks, issue views or Historical evidence.'],
       ['Matrix rule','Source quality and this score do not determine Matrix placement. Matrix is a separate analytical product.'],
       ['Strategic-products rule','Risks, Opportunities and External Shocks are independently scanned and classified from source text; this score is audit metadata only.'],
+      ['Shock inference rule','A shock must connect evidence across distinct parts of the corpus, state what must be true, test the case against itself, identify what could prevent it, and list observable indicators.'],
+      ['Shock challenge rule','Surprise is not enough. Missing triggers, weak mechanisms, concentrated evidence, existing protections, or too many required conditions must reduce confidence or replace the dramatic version with a better-supported one.'],
+      ['Shock audit sheet','The Shock audit sheet keeps technical reasoning out of the easiest pages while preserving assumptions, counter-evidence, prevention actions, indicators and source links for review.'],
       ['Current data state',`${clean(data?.run_completed_at||data?.last_updated)} · A=${(data?.strand_a||[]).length} · B=${(data?.strand_b||[]).length} · C=${(data?.strand_c||[]).length} · Strategic pathways=${(data?.strategic_pathways||[]).length}`],
-      ['Workbook rows',`${rows.length} deduplicated evidence records`]
+      ['Workbook rows',`${rows.length} deduplicated evidence records`],
+      ['Shock rows',`${shockRows.length} inferred shock records`]
     ];
+    const shockHeaders=['Status','Inference score','Shock','Plain-language shock','Second-order effect','Conditions that must hold','Case against','What could prevent it','What to watch','Net assessment','Official trigger present','Evidence couplings','Evidence for','Prevention / counter evidence'];
+    const shockWidths=[16,14,34,46,46,58,65,58,58,32,18,16,70,70];
     const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="3"><font><sz val="10"/><name val="Arial"/></font><font><b/><color rgb="FFFFFFFF"/><sz val="10"/><name val="Arial"/></font><font><b/><color rgb="FFC40018"/><sz val="10"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF111111"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment wrapText="1" vertical="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
     const files={
-      '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
+      '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet3.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
       '_rels/.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
-      'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Ranked sources" sheetId="1" r:id="rId1"/><sheet name="Method" sheetId="2" r:id="rId2"/></sheets></workbook>`,
-      'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+      'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Ranked sources" sheetId="1" r:id="rId1"/><sheet name="Method" sheetId="2" r:id="rId2"/><sheet name="Shock audit" sheetId="3" r:id="rId3"/></sheets></workbook>`,
+      'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet3.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
       'xl/styles.xml':styles,
       'xl/worksheets/sheet1.xml':sheetXml(h1,b1,widths),
-      'xl/worksheets/sheet2.xml':sheetXml(['Field','Explanation'],method,[28,95])
+      'xl/worksheets/sheet2.xml':sheetXml(['Field','Explanation'],method,[28,95]),
+      'xl/worksheets/sheet3.xml':sheetXml(shockHeaders,shockRows,shockWidths)
     };
     return zip(files);
   }
-  return {buildRows,buildXlsx};
+  return {buildRows,buildShockRows,buildXlsx};
 });

@@ -1,12 +1,20 @@
-# Fresh-start overlay patch
+# v21.3 production update
 
-This build adds a visible root-level `FRESH_START` declaration.
+This full-repository build aligns the live code with the current operating and writing rules.
 
-It is designed for the exact GitHub browser-upload situation where old files remain in the repository because upload overlays rather than deletes them.
+- Main runs every four hours at minute 17 with a 24-minute research budget.
+- Historical runs every four hours at minute 57 with a 10-minute research budget.
+- Main and Historical share one research concurrency group; Main has priority and may pre-empt Historical.
+- The old rescue dispatch and production regression-test gate are not part of the live workflows.
+- Easiest reader pages use ordinary language. Difficult abbreviations and technical method/classifier language belong behind Read more, in the Glossary, or in Stuff. Visible shortened sentences do not end in ellipses.
+- Shock inference now follows a challenge-first pattern: evidence join → possible shock → required conditions → case against → what could prevent it → what to watch → net assessment.
+- The Stuff evidence workbook now includes a Shock audit sheet for the technical shock trail.
+- The retired manual shock toy is absent.
 
-- `radar.json` still contains the strict one-use `fresh_repository_seed` marker and the curated 200-item A+B baseline.
-- The scanner detects that seed and ignores older Git `radar.json` history on the first run.
-- The workflow uses `FRESH_START` to run only the maintained scanner/security suites.
-- Same-path quarantine replacements are included for legacy `tests/test_v*.py` files, so even an old workflow that still runs `test_*.py` cannot make old archive/version/history assumptions block the fresh start.
-- The scanner's write/security boundary is unchanged: the main scanner may persist only `radar.json`.
-- After the first successful scan, the JSON fresh-seed marker disappears and scanning proceeds incrementally from that run onward.
+The scanner write boundary remains narrow: Main persists `radar.json`; Historical persists `historical/historical.json`. Public pages have no repository write credential.
+
+## GitHub file-count cleanup
+
+- Removed legacy repository-history test wrappers that were already quarantined and permanently skipped for the fresh cumulative baseline.
+- Kept the active Main scanner tests, security/state-guard tests, Historical scanner tests, workflows, site, evidence stores, scripts, configuration and Stuff workbooks.
+- The repository remains a complete usable repo while staying below 100 files for GitHub upload.

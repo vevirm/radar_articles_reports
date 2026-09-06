@@ -1837,9 +1837,9 @@
   "coverage_rotation_note": "Historical discovery rotates persistently across topic families, source batches, two-year publication bands, direct-source depth pages, curated seeds, and known-good authors. Low-yield continuation moves into fresh cells inside the same daily run; it never lowers admission quality.",
   "api_result_depth_pages": 3,
   "ignore_legacy_min_runtime_env": true,
-  "budget_seconds": 900,
+  "budget_seconds": 600,
   "shared_main_queries_per_scan": 18,
   "shared_main_query_policy": "Historical rotates through the same Main A and B query grammar, but only inside publication windows strictly older than the rolling six-month cutoff.",
   "admission_policy": "New historical items must pass the Main scanner gate_scope/final worthiness logic plus Historical source-age and trusted-source constraints. C is never reconstructed historically.",
-  "schedule_note": "Every four hours at minute 57 UTC, after Main; same A/B gate, only publication dates older than the rolling six-month Main window."
+  "schedule_note": "Every four hours at minute 57 UTC, after Main; 10-minute budget; same A/B gate; only publication dates older than the rolling six-month Main window."
 }

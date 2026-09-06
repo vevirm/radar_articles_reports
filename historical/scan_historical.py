@@ -100,9 +100,9 @@ CUTOFF_EXCLUSIVE = historical_cutoff_exclusive()
 DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
-# Production contract: every Historical research cycle gets exactly 15 minutes.
+# Production contract: every Historical research cycle gets exactly 10 minutes.
 # Older hidden workflows may still export 1050 seconds; ignore that stale value.
-BUDGET_SECONDS = 900 if str(os.environ.get("GITHUB_ACTIONS") or "").lower() == "true" else int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 900))))
+BUDGET_SECONDS = 600 if str(os.environ.get("GITHUB_ACTIONS") or "").lower() == "true" else int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 600))))
 # Browser bulk uploads can leave the old hidden Historical workflow in place, where
 # HISTORICAL_MIN_RUNTIME_SECONDS=600 was hard-coded.  Newer Historical rotation is
 # target-driven, so visible config may explicitly ignore that stale environment value.

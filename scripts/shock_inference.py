@@ -18,7 +18,7 @@ import re
 from datetime import datetime, timezone
 from typing import Any, Iterable
 
-PROFILE_VERSION = "17.20.18-emergent-shocks-v1"
+PROFILE_VERSION = "21.2-passport-balanced-shocks-v2"
 
 
 def _clean(v: Any) -> str:
@@ -88,21 +88,21 @@ def _quality(x: dict[str, Any]) -> int:
 
 
 ASSETS: dict[str, tuple[str, str]] = {
-    "compute": (r"\b(ai gigafactor|supercomput|eurohpc|high[- ]performance comput|compute capacity|frontier compute|cloud and ai)\b", "research compute"),
-    "chips": (r"\b(semiconductor|microelectron|advanced chip|chip supply|pilot line)\b", "semiconductor and chip R&D"),
-    "critical_materials": (r"\b(critical raw material|critical mineral|rare earth|gallium|germanium|graphite|lithium|cobalt)\b", "critical materials for R&I"),
+    "compute": (r"\b(ai gigafactor|supercomput|eurohpc|high[- ]performance comput|compute capacity|frontier compute|cloud and ai)\b", "shared research computing"),
+    "chips": (r"\b(semiconductor|microelectron|advanced chip|chip supply|pilot line)\b", "semiconductor research and chip development"),
+    "critical_materials": (r"\b(critical raw material|critical mineral|rare earth|gallium|germanium|graphite|lithium|cobalt)\b", "critical materials used by research and industry"),
     "measurement": (r"\b(bibliometr|scopus|openalex|research assessment|innovation scoreboard|widening indicator|research information|publication data)\b", "research measurement and assessment"),
     "talent": (r"\b(research talent|researcher mobility|brain drain|brain gain|research careers|scientists? leaving|attract researchers|retain researchers)\b", "research talent"),
     "collaboration": (r"\b(international research collaboration|research cooperation|science diplomacy|horizon europe association|associated countr|scientific cooperation|academic cooperation)\b", "international research collaboration"),
     "infrastructure": (r"\b(research infrastructure|shared facilit|research facility|eosc|data infrastructure|laborator(?:y|ies))\b", "research infrastructures"),
     "biotech": (r"\b(biotech|biotechnolog|biosecurity|life science|clinical trial|health data)\b", "biotechnology and clinical research"),
-    "startups": (r"\b(startup|scale[- ]?up|venture capital|deep tech|eic accelerator|eic fund)\b", "deep-tech companies and scale-ups"),
+    "startups": (r"\b(startup|scale[- ]?up|venture capital|deep tech|eic accelerator|eic fund)\b", "technology companies trying to grow in Europe"),
     "space": (r"\b(space research|space technolog|satellite|earth observation|galileo|copernicus)\b", "space R&I"),
     "open_science": (r"\b(open science|open access|open research information|data sharing|research data)\b", "open science and research data"),
     "standards": (r"\b(standardisation|standardization|technology standards|interoperab|certification)\b", "standards and interoperability"),
-    "funding": (r"\b(horizon europe|framework programme|fp10|research funding|r&d funding|innovation funding|erc grant|eic)\b", "European R&I funding"),
-    "ip": (r"\b(intellectual property|patent|technology transfer|knowledge transfer|trade secret)\b", "research IP and technology transfer"),
-    "quantum": (r"\bquantum\b", "quantum R&I"),
+    "funding": (r"\b(horizon europe|framework programme|fp10|research funding|r&d funding|innovation funding|erc grant|eic)\b", "European research and innovation funding"),
+    "ip": (r"\b(intellectual property|patent|technology transfer|knowledge transfer|trade secret)\b", "research ownership and technology transfer"),
+    "quantum": (r"\bquantum\b", "quantum research and technology"),
 }
 
 PRESSURES: dict[str, tuple[str, str, str]] = {
@@ -157,6 +157,178 @@ RESILIENCE_RE = re.compile(
     r"association agreement|science diplomacy|stockpil|mitigat|safeguard|retain|attract|interoperab)\b",
     re.I,
 )
+
+# Passport-style challenge layer. A shock is not only built from evidence that points
+# toward it. The engine also records what would have to be true, what in the same
+# corpus pushes the other way, what could prevent the shock, and which observable
+# changes would strengthen or weaken the hypothesis. These fields are written for
+# audit/read-more use; the easiest pages only show short plain-language selections.
+OFFICIAL_TRIGGER_RE = re.compile(
+    r"\b(European Commission|Council of the European Union|European Parliament|EUR-Lex|"
+    r"Bureau of Industry and Security|Federal Register|Department of Commerce|U\.?S\.? Treasury|"
+    r"White House|UK Government|Department for Science|national government|ministry|regulator|authority)\b",
+    re.I,
+)
+OFFICIAL_TYPE_RE = re.compile(r"\b(official|regulation|decision|consultation|government|policy|guidance|law|legislation)\b", re.I)
+
+ASSET_PREVENTION_ACTIONS: dict[str, list[str]] = {
+    "compute": [
+        "Keep more than one usable route to shared computing capacity.",
+        "Build European alternatives for critical hardware and services before they are urgently needed.",
+        "Agree common European access rules before a crisis forces emergency screening.",
+    ],
+    "chips": [
+        "Qualify alternative chip suppliers before a restriction removes the preferred source.",
+        "Expand European chip production and testing capacity where the dependency is most concentrated.",
+        "Design research programmes so critical experiments are not tied to one supplier.",
+    ],
+    "critical_materials": [
+        "Diversify suppliers and qualify substitutes before a shortage reaches laboratories and factories.",
+        "Increase recycling, stockpiles and European production for the hardest-to-replace materials.",
+    ],
+    "measurement": [
+        "Keep open European alternatives ready before a commercial research-data service becomes unavailable.",
+        "Avoid putting essential funding or assessment decisions on one data provider.",
+    ],
+    "talent": [
+        "Improve long-term research careers so recruited scientists can stay through a disruption.",
+        "Use common European mobility and screening rules instead of many conflicting national responses.",
+    ],
+    "collaboration": [
+        "Keep several international partnership routes open so one rule change does not stop a whole programme.",
+        "Agree common European safeguards that protect research without closing ordinary cooperation.",
+    ],
+    "infrastructure": [
+        "Maintain alternative facilities and access routes for projects that depend on shared infrastructure.",
+        "Avoid a single access system becoming the only route into several European facilities.",
+    ],
+    "biotech": [
+        "Keep compliant European data and trial routes available when an outside provider or jurisdiction is blocked.",
+        "Build enough cross-border European capacity that one country or provider is not indispensable.",
+    ],
+    "startups": [
+        "Give growing European technology firms enough capital and customers to avoid a forced outside sale.",
+        "Use investment safeguards without cutting firms off from the financing they need to scale.",
+    ],
+    "space": [
+        "Keep alternative suppliers, launch routes and data services available for critical European space work.",
+        "Build European replacements for components or services that cannot be substituted quickly today.",
+    ],
+    "open_science": [
+        "Separate genuinely sensitive research from ordinary open research instead of using blanket restrictions.",
+        "Use common European safeguards so institutions do not create incompatible access rules.",
+    ],
+    "standards": [
+        "Build enough European technical capacity to implement standards without relying on one outside provider.",
+        "Keep interoperable alternatives available when a foreign rule changes access conditions.",
+    ],
+    "funding": [
+        "Avoid sudden funding gaps for capabilities that cannot pause without losing people or infrastructure.",
+        "Keep European and national funding routes coordinated when one programme is disrupted.",
+    ],
+    "ip": [
+        "Use clear European ownership and transfer rules before a crisis forces hurried restrictions.",
+        "Keep more than one route for lawful technology transfer and collaboration.",
+    ],
+    "quantum": [
+        "Build multiple European routes to quantum hardware, testing and specialist skills.",
+        "Avoid tying critical projects to one supplier, facility or foreign access rule.",
+    ],
+}
+
+PRESSURE_PREVENTION_ACTIONS: dict[str, list[str]] = {
+    "export_restriction": ["Secure alternative suppliers and licences before a new export rule takes effect."],
+    "legal_order": ["Keep critical European data and technology on routes that remain usable under European law."],
+    "cyber": ["Maintain tested backup access and recovery routes for shared services."],
+    "energy": ["Protect critical research facilities with backup power and prioritised supply arrangements."],
+    "conflict": ["Prepare relocation, remote-access and project-transfer plans before a research corridor closes."],
+    "partner_restriction": ["Design international projects so one partner's rule change cannot make the whole project unusable."],
+    "acquisition": ["Use investment safeguards early enough that control does not move before alternatives are ready."],
+    "commercial": ["Avoid one commercial provider becoming the only route to a critical research service."],
+    "sanctions": ["Keep lawful payment, data and equipment routes diversified across partners."],
+    "supply_chain": ["Qualify substitutes before a concentrated supply chain breaks."],
+    "data_access": ["Keep a compliant European route for essential research data and analysis."],
+    "funding_cut": ["Phase funding changes so irreplaceable teams and facilities are not stranded suddenly."],
+    "security_reclassification": ["Use common, targeted screening rules rather than broad restrictions that fragment European access."],
+}
+
+PRESSURE_WATCH: dict[str, list[str]] = {
+    "export_restriction": [
+        "A government expands export restrictions to inputs used by European research.",
+        "European projects report delayed or denied licences for the affected input.",
+    ],
+    "legal_order": [
+        "A foreign law or court order is applied to technology or data used by European research.",
+        "European providers add new nationality, location or legal-access conditions.",
+    ],
+    "cyber": [
+        "A shared European research service reports a serious security breach or prolonged outage.",
+        "Several projects lose access through the same software or identity layer.",
+    ],
+    "energy": [
+        "Large research facilities face power limits, rationing or exceptional energy costs.",
+        "Projects change schedules because electricity supply is no longer reliable enough.",
+    ],
+    "conflict": [
+        "A research corridor closes, staff are evacuated, or facilities become inaccessible.",
+        "European partners take over work that can no longer be carried out locally.",
+    ],
+    "partner_restriction": [
+        "A major partner narrows who can join grants, projects or research data exchanges.",
+        "Existing European collaborations begin changing staff, contracts or data routes to comply.",
+    ],
+    "acquisition": [
+        "A foreign buyer seeks control of a European firm or facility holding a scarce research capability.",
+        "Investment screening is opened because the capability is considered strategically important.",
+    ],
+    "commercial": [
+        "A critical provider sharply raises prices, changes licences or announces withdrawal.",
+        "European institutions begin emergency moves to alternative services.",
+    ],
+    "sanctions": [
+        "New sanctions block payments, equipment, cloud services or other project inputs.",
+        "A formally active collaboration can no longer perform ordinary project transactions.",
+    ],
+    "supply_chain": [
+        "A concentrated supplier cuts deliveries or lead times rise sharply for a no-substitute input.",
+        "European projects delay tests or production because an input cannot be replaced quickly.",
+    ],
+    "data_access": [
+        "A provider or government restricts cross-border access to data used by European research.",
+        "Projects stop pooling or analysing data that previously moved across borders.",
+    ],
+    "funding_cut": [
+        "A major research programme is cut, suspended or redirected with little transition time.",
+        "Teams begin closing facilities, ending contracts or cancelling planned work because money stops.",
+    ],
+    "security_reclassification": [
+        "Research previously treated as open is moved into a more restricted security category.",
+        "Different European countries apply materially different access decisions to the same work.",
+    ],
+}
+
+
+def _official_trigger(x: dict[str, Any]) -> bool:
+    source = _clean(x.get("source") or x.get("journal") or x.get("institution"))
+    typ = _clean(x.get("type") or x.get("signal_kind") or x.get("signal_type"))
+    tier = _low(x.get("source_tier") or x.get("sourceTier"))
+    return bool(OFFICIAL_TRIGGER_RE.search(source) or ("tier 1" in tier and OFFICIAL_TYPE_RE.search(typ)))
+
+
+def _unique_text(items: Iterable[str], limit: int = 6) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for raw in items:
+        text = _clean(raw)
+        key = _low(text)
+        if not text or key in seen:
+            continue
+        seen.add(key)
+        out.append(text)
+        if len(out) >= limit:
+            break
+    return out
+
 
 
 def _rows(data: dict[str, Any]) -> list[dict[str, Any]]:
@@ -295,35 +467,88 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
 
     asset_counter_re = re.compile(ASSET_COUNTER_PATTERNS.get(asset_id, r"$^"), re.I)
     counter_rows = [
-        x for x in asset_rows
+        x for x in rows
         if x.get("_identity") not in used
-        and (RESILIENCE_RE.search(x.get("_text", "")) or asset_counter_re.search(x.get("_text", "")))
+        and (
+            asset_counter_re.search(x.get("_text", ""))
+            or (_match(asset_pattern, x) and RESILIENCE_RE.search(x.get("_text", "")))
+        )
     ]
-    counters = _dedupe_pick(counter_rows, limit=4, prefer_new=True, focus_pattern=ASSET_COUNTER_PATTERNS.get(asset_id))
+    counters = _dedupe_pick(counter_rows, limit=5, prefer_new=True, focus_pattern=ASSET_COUNTER_PATTERNS.get(asset_id))
+
+    official_pressure = [x for x in pressure_rows if _official_trigger(x)]
+    pressure_sources = {
+        _low(x.get("source") or x.get("journal") or x.get("institution"))
+        for x in pressure_rows if _clean(x.get("source") or x.get("journal") or x.get("institution"))
+    }
+    coupling_sources = {
+        _low(x.get("source") or x.get("journal") or x.get("institution"))
+        for x in coupling if _clean(x.get("source") or x.get("journal") or x.get("institution"))
+    }
 
     title = title_template.format(asset=asset_label)
     plainly = (
-        f"Europe is building or relying on {asset_label}. Separate high-quality evidence shows that {pressure_label} "
-        "can change the conditions quickly. The shock appears if that external move lands before substitution, rerouting or policy response is ready."
+        f"Europe relies on {asset_label}. Separate evidence shows that {pressure_label} can change access quickly. "
+        "The shock occurs if that change arrives before Europe has a workable alternative."
     )
     second = (
-        "The first visible loss may be delay rather than destruction: projects keep their grants and institutions, "
-        "but the capability they assumed would be available becomes slower, narrower or temporarily unusable."
+        "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found."
     )
     hidden = (
-        "The evidence normally sits in different policy files. One describes the European capability; another describes the external mechanism. "
-        "The shock becomes visible only when the two are read as one dependency chain."
+        "The supporting evidence usually sits in separate files. The hypothesis appears only when the European dependency and the outside pressure are read as one chain."
     )
+    conditions = [
+        f"Europe materially depends on {asset_label} for current or planned work.",
+        f"{pressure_label.capitalize()} reaches the supplier, service, partner or rule that the European capability depends on.",
+        "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity.",
+    ]
     reasoning = [
-        f"The Radar contains strong evidence that Europe relies on or is expanding {asset_label}.",
-        f"Separate sources show a live mechanism for {pressure_label}.",
-        "Fresh evidence this scan strengthens the connection between the capability and the pressure.",
-        "The scenario becomes a shock if the external change arrives faster than Europe can substitute, reroute or absorb it.",
+        f"The retained evidence shows European reliance on or expansion of {asset_label}.",
+        f"Separate retained evidence shows a live mechanism for {pressure_label}.",
+        f"At least one retained record links the capability and the pressure; {len(coupling)} such record(s) are currently present.",
+        "The scenario becomes a shock only if the response is slower than the disruption.",
     ]
 
+    case_against: list[str] = []
+    if not official_pressure:
+        case_against.append("The trigger is not yet backed by an official source in the retained evidence.")
+    if len(coupling) == 1:
+        case_against.append("Only one retained record currently links the European capability directly to the outside pressure.")
+    if len(coupling_sources) <= 1:
+        case_against.append("The direct connection is concentrated in one source, so independent confirmation is still weak.")
+    if len(pressure_sources) <= 1:
+        case_against.append("The pressure side is concentrated in one source and could reflect a narrow reading rather than a broad change.")
+    if counters:
+        case_against.append(f"The same corpus contains {len(counters)} strong sign(s) of substitution, resilience or policy response that could absorb the shock.")
+    case_against.append("The scenario still depends on the disruption arriving faster than Europe can respond.")
+    case_against = _unique_text(case_against, 6)
+
+    prevention_actions = _unique_text(
+        ASSET_PREVENTION_ACTIONS.get(asset_id, []) + PRESSURE_PREVENTION_ACTIONS.get(pressure_id, []),
+        4,
+    )
+    watch_for = _unique_text(PRESSURE_WATCH.get(pressure_id, []), 4)
+
     support = [_snapshot(x, role) for x, role in chosen[:7]]
-    against = [_snapshot(x, "Evidence of resilience or substitution") for x in counters]
-    score = round(min(100.0, avg * 0.70 + max(qualities) * 0.20 + min(10, len(sources) * 2)))
+    against = [_snapshot(x, "Evidence that could absorb or prevent the shock") for x in counters]
+
+    base_score = min(100.0, avg * 0.70 + max(qualities) * 0.20 + min(10, len(sources) * 2))
+    challenge_penalty = 0
+    if not official_pressure:
+        challenge_penalty += 5
+    if len(coupling) == 1:
+        challenge_penalty += 5
+    if len(coupling_sources) <= 1:
+        challenge_penalty += 3
+    challenge_penalty += min(10, len(counters) * 2)
+    score = round(max(0.0, base_score - challenge_penalty))
+    if score >= 88 and official_pressure and len(coupling) >= 2:
+        net_assessment = "Well supported enough to watch closely, with clear evidence that could still absorb it."
+    elif score >= 80:
+        net_assessment = "Plausible, but important parts of the trigger or connection still need confirmation."
+    else:
+        net_assessment = "An early hypothesis. Keep it visible only as a watch item until the missing parts strengthen."
+
     cid = f"emergent:{asset_id}:{pressure_id}"
     return {
         "id": cid,
@@ -334,10 +559,19 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
         "second_order": second,
         "why_easy_to_miss": hidden,
         "reasoning": reasoning,
+        "conditions": conditions,
+        "case_against": case_against,
+        "prevention_actions": prevention_actions,
+        "watch_for": watch_for,
+        "net_assessment": net_assessment,
         "inference_score": int(score),
         "support": support,
         "against": against,
+        "prevention_evidence": against,
         "source_count": len(sources),
+        "pressure_source_count": len(pressure_sources),
+        "coupling_count": len(coupling),
+        "official_trigger_present": bool(official_pressure),
         "best_quality": max(qualities),
         "average_quality": round(avg),
         "fresh_coupling": bool(fresh_coupling),
@@ -349,6 +583,9 @@ def _fingerprint(c: dict[str, Any]) -> str:
         "id": c.get("id"),
         "support": [x.get("identity") for x in c.get("support", [])],
         "against": [x.get("identity") for x in c.get("against", [])],
+        "case_against": list(c.get("case_against", [])),
+        "official_trigger_present": bool(c.get("official_trigger_present")),
+        "coupling_count": int(c.get("coupling_count", 0) or 0),
         "score": c.get("inference_score"),
     }
     return hashlib.sha1(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()[:16]
@@ -384,7 +621,12 @@ def refresh_shock_inference(
     # A genuinely NEW shock needs a fresh row that itself links the capability to
     # the external mechanism. Later scans may UPDATE an existing shock with fresh
     # evidence on either side, but we do not create novelty from arbitrary cross-products.
-    new_touched = [c for c in touched_candidates if c["id"] not in prev_by_id and c.get("fresh_coupling")][:6]
+    new_touched = [
+        c for c in touched_candidates
+        if c["id"] not in prev_by_id
+        and c.get("fresh_coupling")
+        and int(c.get("inference_score", 0) or 0) >= 80
+    ][:6]
     selected = {c["id"]: c for c in existing_touched + new_touched}
 
     merged: dict[str, dict[str, Any]] = {}

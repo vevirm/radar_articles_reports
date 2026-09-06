@@ -13,8 +13,8 @@ sys.modules[spec.name] = H
 spec.loader.exec_module(H)
 
 class HistoricalCurrentContractTests(unittest.TestCase):
-    def test_budget_is_fifteen_minutes(self):
-        self.assertEqual(H.BUDGET_SECONDS, 900)
+    def test_budget_is_ten_minutes(self):
+        self.assertEqual(H.BUDGET_SECONDS, 600)
 
     def test_cutoff_is_strictly_older_than_six_months(self):
         self.assertEqual(H.MAIN_RADAR_WINDOW_MONTHS, 6)

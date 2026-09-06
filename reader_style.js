@@ -10,6 +10,7 @@ function expandSurfaceTerms(v){
   let s=clean(v);
   const replacements=[
     [/\bHPC\b/g,'high-performance computing'],
+    [/\bEuroHPC\b/g,'the European shared computing programme'],
     [/\bFP10\b/g,'the next EU research framework programme'],
     [/\bMFF\b/g,'the EU long-term budget'],
     [/\bMSCA\b/g,'Marie Skłodowska-Curie Actions'],
@@ -19,7 +20,13 @@ function expandSurfaceTerms(v){
     [/\bGPUs?\b/g,'graphics processors'],
     [/\bSMEs?\b/g,'small and medium-sized firms'],
     [/\bR&D\b/g,'research and development'],
+    [/\bIPCEI\b/g,'large cross-country European industrial project'],
     [/\bIP\b/g,'intellectual property'],
+    [/\bAI\b/g,'artificial intelligence'],
+    [/\bNLP\b/g,'language analysis'],
+    [/\bDOI\b/g,'publication identifier'],
+    [/\bEOSC\b/g,'European Open Science Cloud'],
+    [/\bSTEM\b/g,'science and engineering'],
     [/\bJRC\b/g,'Joint Research Centre'],
     [/\bERC\b/g,'European Research Council'],
     [/\bEIC\b/g,'European Innovation Council'],
@@ -27,6 +34,20 @@ function expandSurfaceTerms(v){
   ];
   for(const [re,to] of replacements)s=s.replace(re,to);
   s=s.replace(/\bR&I\b/g,'research and innovation');
+  const jargon=[
+    [/\bextraterritorial(?:ity)?\b/gi,'foreign rules applied outside their own country'],
+    [/\bgeoeconomic\b/gi,'economic competition between countries'],
+    [/\bdual[- ]use\b/gi,'civilian and defence'],
+    [/\bbibliometric(?:s)?\b/gi,'research publication analysis'],
+    [/\bscientometric(?:s)?\b/gi,'analysis of research activity'],
+    [/\bcitation burst(?:s)?\b/gi,'sudden rises in citations'],
+    [/\bchange[- ]point detection\b/gi,'detecting sudden changes'],
+    [/\bsemantic shift(?:s)?\b/gi,'changes in language'],
+    [/\bdynamic topic model(?:s)?\b/gi,'methods that track changing research topics'],
+    [/\bgraph anomaly detection\b/gi,'finding unusual changes in networks'],
+    [/\bdeemed export\b/gi,'rules treating access by foreign nationals as an export']
+  ];
+  for(const [re,to] of jargon)s=s.replace(re,to);
   return clean(s);
 }
 
@@ -59,6 +80,9 @@ function limit(v,n){
   if(clipped && !/[.!?)]$/.test(clipped))clipped+='.';
   return clipped;
 }
+
+
+function surfaceText(v){return removeEllipsis(expandSurfaceTerms(v))}
 
 
 function fieldText(v){
@@ -206,5 +230,5 @@ function pagePair(what,why,whatWords=20,whyWords=20){
 }
 function wordCount(v){return words(v).length}
 
-g.RadarReaderStyle={clean,limit,wordCount,whatFor,whyFor,radarPair,matrixPair,pagePair,expandSurfaceTerms,removeEllipsis};
+g.RadarReaderStyle={clean,limit,wordCount,whatFor,whyFor,radarPair,matrixPair,pagePair,surfaceText,expandSurfaceTerms,removeEllipsis};
 })(globalThis);

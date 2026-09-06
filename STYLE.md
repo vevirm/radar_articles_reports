@@ -19,10 +19,11 @@ A WHAT without a WHY is incomplete. A WHY that would work equally well on an unr
 - Section lead-in: ≤ 25 words.
 - Deeper explanatory/read-more material: 300–800 words where used.
 
-Surface pages stay short. Technical depth belongs in source detail, the Glossary and Stuff.
+Surface pages stay short. Technical depth belongs behind **Read more**, in the Glossary and in Stuff.
 
 ## Clarity rules
 
+- **Easiest-page rule:** surface pages use ordinary language. Do not expose technical terms, difficult abbreviations, classifier labels, search grammar or method names when a plain-language equivalent exists.
 - Do not expose an unexplained specialist abbreviation when plain language fits. Expand **HPC** to **high-performance computing**, **MFF** to **EU long-term budget**, and similar terms on first surface use.
 - Familiar institutional names may remain when the name itself is the subject, but the explanatory sentence must still be understandable without specialist knowledge.
 - Do not end shortened surface text with `...` or `…`. A visible sentence should end as a complete readable statement.
@@ -46,6 +47,24 @@ Every node has a label plus a short **WHAT** and **WHY**. Parent, branch and lea
 ## Technical language
 
 Keep technical vocabulary where it is necessary for accuracy, but do not make surface sentences dense merely to sound technical. Terms such as bibliographic coupling, citation burst, change-point detection, semantic shift, technology intelligence, dynamic topic model, graph anomaly detection and related method/classifier language belong primarily in the **Glossary** and **Stuff** workbooks.
+
+## External shocks
+
+A shock is inferred from the evidence corpus; it is not a free-form scenario exercise.
+
+Use this sequence:
+
+1. **Evidence join** — identify an unusual connection between otherwise separate evidence clusters.
+2. **Possible shock** — state the causal chain and the consequence for European research and innovation.
+3. **Conditions** — list what must be true for the shock to occur.
+4. **Case against** — actively search for missing triggers, weak mechanisms, source concentration, ordinary explanations, insufficient scale and too many dependent conditions.
+5. **What could prevent it** — identify policy, capability, substitution, cooperation, standards or other evidence that could absorb or block the shock.
+6. **What to watch** — list observable changes that would strengthen, weaken or kill the scenario.
+7. **Net assessment** — carry forward the best-supported surviving version, even when it is less dramatic than the first hypothesis.
+
+The easiest Shocks page shows only a short WHAT + WHY, **What could stop it**, **What to watch**, and a plain current reading. Technical reasoning, evidence joins, conditions and detailed counter-evidence belong behind **Read more** and in the Stuff shock audit.
+
+A surprising scenario is not automatically a good shock. If the case against defeats the dramatic version, weaken it, keep it as an early watch item, or replace it with the better-supported variant.
 
 ## Links and buttons
 

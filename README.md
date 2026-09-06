@@ -5,7 +5,7 @@ An EU-first evidence radar for research and innovation in geopolitical context.
 ## Operating model
 
 - **Main Radar** runs every four hours at **00:17 / 04:17 / 08:17 / 12:17 / 16:17 / 20:17 UTC**. Every Main run has the standard **24-minute** research budget.
-- **Historical Top-Tier Scan** runs every four hours at **00:57 / 04:57 / 08:57 / 12:57 / 16:57 / 20:57 UTC**, after Main, with a **15-minute** research budget.
+- **Historical Top-Tier Scan** runs every four hours at **00:57 / 04:57 / 08:57 / 12:57 / 16:57 / 20:57 UTC**, after Main, with a **10-minute** research budget.
 - Main and Historical share one GitHub Actions research slot, so they never research concurrently. Historical waits and never cancels Main. If Main becomes due while Historical is still active, Main has priority and may pre-empt Historical.
 - Historical accepts only material published **strictly before the rolling six-month Main boundary** and uses the Main scanner's substantive A/B admission philosophy. It does not create current Strand-C signals.
 - **Strands A and B are cumulative.** The original 190 A + 10 B corpus was a starting baseline, not a cap.
@@ -41,12 +41,13 @@ Visible text follows `STYLE.md`.
 - Matrix surface budget: WHAT ≤ 12 words; WHY ≤ 15 words.
 - WHY must name a consequence specific to EU research and innovation in geopolitical context; generic relevance prose is a writing failure.
 - Matrix items use parallel `WHAT — WHY` grammar and honest gaps rather than filler.
-- Surface prose uses concrete language and expands opaque abbreviations where practical.
-- More technical vocabulary, method language and classifier/search grammar remain available in the **Glossary** and **Stuff** workbook rather than being deleted from the system.
+- The easiest pages use ordinary language: no difficult abbreviations, technical method names, classifier/search grammar or visible `...` / `…`.
+- Technical vocabulary stays available behind **Read more**, in the **Glossary**, and in **Stuff** rather than being deleted from the system.
+- External shocks are inferred from evidence joins, then challenged: required conditions, the case against, possible preventers and observable indicators are stored before a shock is carried forward. A better-supported weaker variant beats a spectacular weak one.
 
 The Stuff directory contains:
 
-- `source_merit_ranking.xlsx` — evidence/provenance ranking snapshot.
+- `source_merit_ranking.xlsx` — evidence/provenance ranking snapshot plus a **Shock audit** sheet containing assumptions, case-against reasoning, prevention actions and indicators.
 - `eu_ri_radar_phrases_by_strand.xlsx` — admission phrase/guard reference.
 - `radar_technical_grammar.xlsx` — computational foresight vocabulary, C change grammar, query-family design, surface-term expansions and writing contracts.
 
@@ -62,4 +63,4 @@ The public pages are static HTML/JavaScript and only read JSON; they have no Git
 
 ## Browser-upload compatibility
 
-The scanner retains compatibility guards for repositories where GitHub browser upload leaves an older hidden workflow file behind. The supported workflows in this bundle are nevertheless the authoritative production configuration: Main first every four hours, Historical 40 minutes later, one shared research slot, 24/15-minute budgets, and no production regression-test gate.
+The scanner retains compatibility guards for repositories where GitHub browser upload leaves an older hidden workflow file behind. The supported workflows in this bundle are nevertheless the authoritative production configuration: Main first every four hours, Historical 40 minutes later, one shared research slot, 24/10-minute budgets, and no production regression-test gate.

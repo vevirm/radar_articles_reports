@@ -7,9 +7,9 @@ This historical layer is **not** a radar about the past. It is a separate, cumul
 - New automated additions must still pass the elite-source, EU/European R&I, strategic/geopolitical-context, topic and merit gates. Generic EU research-system material is not admitted merely because it discusses careers, capacity or open science.
 - Accepted historical evidence is cumulative: normal scans add or enrich evidence but do not silently delete previously accepted rows.
 
-## How daily discovery now avoids low-hanging fruit
+## How four-hour discovery avoids low-hanging fruit
 
-Historical discovery has persistent cursors for several independent dimensions. A daily run deliberately moves through:
+Historical discovery has persistent cursors for several independent dimensions. Each four-hour run deliberately moves through:
 
 1. **Topic families** — different EU R&I/geopolitics themes.
 2. **Elite source batches** — different institutions and trusted source families.
@@ -21,7 +21,7 @@ Historical discovery has persistent cursors for several independent dimensions. 
 
 Every run also probes a small number of the **thinnest topic × publication-band cells** in the retained archive. The gap selector itself rotates within the under-covered pool, so one permanently empty cell cannot consume every future run.
 
-If the strict-gate yield remains below the configured target (currently 8), the scanner can perform fresh continuation waves **inside the same daily GitHub job**. Each continuation advances topic, source, time-band and depth cursors. The target controls search depth only; it never lowers admission quality. There is no separate dispatched Historical rescue job.
+If the strict-gate yield remains below the configured target (currently 8), the scanner can perform fresh continuation waves **inside the same four-hour GitHub job**. Each continuation advances topic, source, time-band and depth cursors. The target controls search depth only; it never lowers admission quality. There is no separate dispatched Historical rescue job.
 
 ## Curated layers
 
