@@ -1737,7 +1737,7 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         main=(ROOT/'radar'/'index.html').read_text(encoding='utf-8')
         read=(ROOT/'read'/'index.html').read_text(encoding='utf-8')
         historical=(ROOT/'historical'/'index.html').read_text(encoding='utf-8')
-        legacy=(ROOT/'history'/'index.html').read_text(encoding='utf-8')
+        legacy_path=ROOT/'history'/'index.html'
         self.assertIn('href="../historical/"', main)
         self.assertNotIn('href="../history/"', main)
         self.assertLess(main.find('id="strand-a"'), main.find('id="strand-b"'))
@@ -1752,7 +1752,12 @@ class V17199AccumulationAndSignalTests(unittest.TestCase):
         self.assertIn('Evidence found before the live timeframe', historical)
         self.assertNotIn('scan_history', historical)
         self.assertNotIn('Scan-by-scan additions', historical)
-        self.assertIn("location.replace('../historical/')", legacy)
+        # A fresh repository does not require the old /history redirect alias. If a
+        # browser upload is overlaid on an older repo the stale alias may still exist,
+        # but it is not part of the maintained fresh package and is never linked.
+        if legacy_path.exists():
+            legacy=legacy_path.read_text(encoding='utf-8')
+            self.assertIn("location.replace('../historical/')", legacy)
 
     def test_nature_and_science_remain_first_class_sources(self):
         direct={x.get('name'):x for x in scan.CONFIG.get('direct_top_journal_sources',[])}

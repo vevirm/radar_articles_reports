@@ -17,6 +17,14 @@ spec.loader.exec_module(scan)
 
 
 class RepositoryWriteBoundaryTests(unittest.TestCase):
+
+    def test_workflow_ignores_stale_versioned_tests_left_by_browser_overlay(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("test_scanner_features.py", text)
+        self.assertIn("test_security_and_state_guards.py", text)
+        self.assertNotIn("-p 'test_*.py'", text)
+        self.assertIn("stale version-specific", text)
+
     def test_checkout_does_not_persist_repository_credentials(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("persist-credentials: false", text)

@@ -1,17 +1,20 @@
-EU R&I RADAR — FRESH REPOSITORY START
-=====================================
+EU R&I RADAR — FRESH REPOSITORY START (OVERLAY-SAFE)
+====================================================
 
-This package is intended for a BRAND-NEW GitHub repository. It starts with the curated
-200-item active evidence baseline (190 Strand A + 10 Strand B) but carries no previous
-scanner run history, scan cursors, accepted-item archive, or old weak signals.
+This package starts from the curated 200-item active evidence baseline (190 Strand A +
+10 Strand B) with no previous scanner run history, scan cursors, accepted-item archive,
+or old weak signals.
 
-The first successful scanner run establishes the new repository's history. From then on,
-normal incremental scanning, active-core curation, New/Updated page behavior, and archive
-retention all continue normally.
+A truly empty GitHub repository is still the cleanest installation. However, this build is
+also safe when uploaded on top of an older Radar repository with GitHub's browser
+"Add files via upload" feature. Browser upload does NOT delete old files, so old versioned
+regression tests may remain in tests/. The Main Radar workflow intentionally runs only the
+two maintained fresh-repository test suites and ignores those stale version-specific files.
+They therefore cannot block the fresh scanner start.
 
 SETUP
 -----
-1. Create a new GitHub repository and upload the complete contents of this package to main.
+1. Upload the complete contents of this package to main.
 2. In GitHub, add your OpenAlex key as a repository Actions secret named exactly:
 
        OPENALEX_API_KEY
@@ -20,10 +23,19 @@ SETUP
 
    Never put the key in radar.json, a Python/JavaScript file, or any committed file.
 3. Enable GitHub Actions for the repository if they are not already enabled.
-4. Configure GitHub Pages for the repository (the site is served from the repository's
-   Pages build).
-5. The initial push is an immediate Main Radar scan trigger. The normal Main Radar schedule
-   is then fixed at 00:17, 04:17, 08:17, 12:17, 16:17 and 20:17 UTC.
+4. Configure GitHub Pages for the repository.
+5. The upload/push triggers an immediate Main Radar scan. The normal schedule is fixed at
+   00:17, 04:17, 08:17, 12:17, 16:17 and 20:17 UTC.
+
+WHAT YOU SHOULD SEE IN ACTIONS
+------------------------------
+The test step is named:
+
+       Run fresh-repository scanner regression tests
+
+It runs the maintained scanner suite and security/fresh-bootstrap suite only. If the log
+still says "Run scanner regression tests" and discovers hundreds of old test_v17....py
+files, .github/workflows/radar-scan.yml was not replaced by this package.
 
 FRESH-START BEHAVIOR
 --------------------
@@ -32,15 +44,17 @@ FRESH-START BEHAVIOR
 - Strand C starts empty.
 - scan_history and scan_state do not exist in the seed.
 - The one-use fresh_repository_seed marker prevents old Git radar history or migration
-  logic from being pulled into the first run.
+  logic from being pulled into the first run, even when the files were overlaid on an old
+  repository whose Git history still contains earlier radar.json snapshots.
 - The first run uses the normal recent discovery overlap rather than a historical bootstrap.
 - The marker is not written into normal scanner output, so it disappears automatically
   after the first successful scan.
 - Security remains strict: repository credentials are not persisted during scanning, only
   radar.json may be committed by the Main scanner, abnormal output is rejected, and prior
-  accepted A/B evidence is protected across the active 200 + ab_archive.
+  accepted A/B evidence is protected across the active 200 + ab_archive after the fresh
+  baseline has started its own history.
 
 PAGE CHANGE
 -----------
-The External Shocks page is unchanged except that the one-shot “Construct one shock” toy
+The External Shocks page is unchanged except that the one-shot "Construct one shock" toy
 has been removed. No scanner logic depends on that toy.
