@@ -76,14 +76,16 @@ class MainRadarRecallRecoveryTests(unittest.TestCase):
         self.assertGreaterEqual(scan.CONFIG.get('curator_seed_queries_per_scan', 0), 10)
         self.assertGreaterEqual(scan.CONFIG.get('manual_recovery_urls_per_scan', 0), 10)
 
-    def test_source_expansion_reopens_backfill_without_resetting_rotation(self):
+    def test_source_expansion_completion_preserves_rotation_without_reopening_global_backfill(self):
         previous = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         old_oa = int((previous.get('scan_state') or {}).get('openalex_cursor', 0))
         old_cr = int((previous.get('scan_state') or {}).get('crossref_broad_cursor', 0))
         state = scan.initial_scan_state(previous)
         self.assertEqual(state['openalex_cursor'], old_oa)
         self.assertEqual(state['crossref_broad_cursor'], old_cr)
-        self.assertTrue(state.get('source_expansion_backfill_reopened'))
+        # v17.20.48+ deliberately retired the old four-month global source-expansion
+        # reset.  New sources are picked up by bounded rotating depth lanes instead.
+        self.assertFalse(state.get('source_expansion_backfill_reopened'))
         self.assertFalse(state.get('recall_reset_this_run'))
 
 
