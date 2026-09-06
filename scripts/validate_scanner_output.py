@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RADAR = ROOT / "radar.json"
+SEED = ROOT / "radar_seed.json"
 
 
 def parse(raw: bytes | str, label: str) -> dict:
@@ -91,11 +92,17 @@ def main() -> int:
     new_raw = RADAR.read_bytes()
     new = parse(new_raw, "new radar.json")
     try:
-        old_raw = subprocess.check_output(["git", "show", "HEAD:radar.json"], cwd=ROOT)
-    except Exception as exc:
-        raise SystemExit(f"cannot read pre-scan radar.json from HEAD: {exc}") from exc
-    old = parse(old_raw, "previous radar.json")
-    fresh = baseline_seed(old)
+        old_raw = subprocess.check_output(["git", "show", "HEAD:radar.json"], cwd=ROOT, stderr=subprocess.DEVNULL)
+        old = parse(old_raw, "previous radar.json")
+        fresh = False
+    except Exception:
+        if not SEED.is_file():
+            raise SystemExit("cannot read pre-scan radar.json and radar_seed.json is missing")
+        old_raw = SEED.read_bytes()
+        old = parse(old_raw, "radar_seed.json")
+        fresh = baseline_seed(old)
+        if not fresh:
+            raise SystemExit("radar_seed.json does not satisfy the clean 190 A + 10 B bootstrap contract")
 
     old_size, new_size = len(old_raw), len(new_raw)
     if fresh:

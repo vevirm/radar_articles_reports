@@ -109,12 +109,11 @@ logging.getLogger("pypdf._page").setLevel(logging.ERROR)
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "radar_config.json"
 OUT_PATH = ROOT / "radar.json"
+SEED_PATH = ROOT / "radar_seed.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
 CURATOR_CANDIDATE_TESTS_PATH = ROOT / "curator_candidate_inputs.json"
 PHRASE_RULES_PATH = ROOT / "radar_phrase_rules.json"
-FRESH_START_PATH = ROOT / "FRESH_START"
-FRESH_START_TOKEN = "RADAR_FRESH_START_V1"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
@@ -285,7 +284,7 @@ CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_ve
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.20.23-document-level-eu-ri-geopolitics-recheck"
-WINDOW_POLICY_VERSION = "v17.19.9-cumulative-ab-c60d-from-first-seen"
+WINDOW_POLICY_VERSION = "v18.0-cumulative-ab-strict-a-anchored-c60d"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 24
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
@@ -369,15 +368,8 @@ def is_fresh_repository_seed(data: Any) -> bool:
     """
     if not isinstance(data, dict):
         return False
-    # Fresh-start authority is explicit and local to this package.  The marker file is
-    # consumed by the workflow after the first successful scan, while the JSON marker is
-    # omitted from normal scanner output.  Both must be present for bootstrap mode.
-    try:
-        declaration = FRESH_START_PATH.read_text(encoding="utf-8")
-    except Exception:
-        return False
-    if FRESH_START_TOKEN not in declaration:
-        return False
+    # The seed marker lives only in radar_seed.json. Normal scanner output never copies it,
+    # so an existing live radar.json cannot accidentally re-enter bootstrap mode.
     marker = data.get("fresh_repository_seed")
     if not isinstance(marker, dict) or clean_text(marker.get("version")) != FRESH_REPOSITORY_SEED_VERSION:
         return False
@@ -434,7 +426,7 @@ SESSION.headers.update({
 # fully anonymous operation when it is absent. Never persist or log the key.
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
-RADAR_DIAGNOSTIC_RUN = os.environ.get("RADAR_DIAGNOSTIC_RUN", "").strip().lower() in {"1", "true", "yes", "on"}
+RADAR_DIAGNOSTIC_RUN = os.environ.get("RADAR_DIAGNOSTIC_RUN", "").strip().lower() in {"1", "true", "yes", "on"} and os.environ.get("RADAR_ALLOW_DIAGNOSTIC_OVERRIDE", "").strip().lower() in {"1", "true", "yes", "on"}
 
 def _pdf_page_cap() -> int:
     """Keep the first fresh diagnostic representative but bounded.
@@ -887,6 +879,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "crossref_source_cursor": 0,
             "crossref_preferred_journal_cursor": 0,
             "strand_b_method_cursor": 0,
+            "dimensional_query_cursor": 0,
             "institution_cursor": 0,
             "official_eu_source_cursor": 0,
             "frontier_gap_cursor": 0,
@@ -980,7 +973,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["source_expansion_legacy_completion_migrated"] = False
     if not expansion_target_changed:
         state["source_expansion_bounded_refresh"] = False
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor", "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor", "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor", "dimensional_query_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["a_recall_recovery_cursor"] = int(state.get("a_recall_recovery_cursor", 0) or 0)
     state.setdefault("a_recall_recovery_version", "")
@@ -11509,7 +11502,11 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
     try:
         current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
     except Exception:
-        current = {}
+        try:
+            current = json.loads(SEED_PATH.read_text(encoding="utf-8"))
+            print("No live radar.json yet; bootstrapping from radar_seed.json.", flush=True)
+        except Exception:
+            current = {}
 
     if _valid_saved_radar(current):
         clean, removed = _sanitize_saved_radar(current)
@@ -12584,7 +12581,7 @@ def apply_retired_signal_filter(data: dict[str, Any]) -> tuple[dict[str, Any], i
     return out, removed
 
 def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], now_iso: str) -> list[dict[str, Any]]:
-    """Keep cumulative C while collapsing repeated coverage of the same weak signal."""
+    """Merge the temporary 60-day C layer while collapsing repeated coverage of one event."""
     merged: list[dict[str, Any]] = []
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
@@ -12700,13 +12697,9 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
         x['_entities']=distinct_matches(text, ENTITY_TERMS+GEO_ACTORS)
         raw.append(x)
     a_saved = out.get('strand_a',[]) if isinstance(out.get('strand_a'),list) else []
-    anchored_raw = [x for x in raw if clean_text(x.get('anchor_status')) != 'unanchored_emerging']
-    emerging_raw = [x for x in raw if clean_text(x.get('anchor_status')) == 'unanchored_emerging']
-    rebuilt = anchor_news(anchored_raw, a_saved)
-    # Rescue-origin signals stay eligible only under the same directly-European,
-    # lower-confidence rule that admitted them. This prevents a later quality migration
-    # from silently deleting valid unanchored emerging signals.
-    rebuilt.extend(anchor_news(emerging_raw, a_saved, allow_unanchored=True))
+    # Every retained signal must still resolve to a substantive Strand-A publication.
+    # Legacy unanchored-emerging rows are deliberately retired on revalidation.
+    rebuilt = anchor_news(raw, a_saved)
     # Preserve historical first_seen where event identity matches.
     old_by_id={signal_identity(x):x for x in out.get('strand_c',[]) if isinstance(x,dict)}
     for x in rebuilt:
@@ -14088,13 +14081,11 @@ def anchor_news(
     diagnostics: list[dict[str, str]] | None = None,
     allow_unanchored: bool = False,
 ) -> list[dict[str, Any]]:
-    """Anchor C to substantive Strand-A evidence, with a bounded rescue-only unanchored mode.
+    """Anchor Strand C strictly to substantive Strand-A evidence.
 
-    Normal admission remains A-anchored. ``allow_unanchored`` is used only by the C-floor
-    rescue lane after an additional search wave has been run. It can admit a genuinely new,
-    directly European factual weak signal at lower confidence when no suitable A anchor exists.
-    Detailed rejection reasons are returned only to the caller for scanner logs; the public
-    site does not render them.
+    C is a temporary relationship to A, never an independent news class.  The legacy
+    ``allow_unanchored`` argument is retained only for call-site compatibility and is ignored:
+    without a substantive A publication anchor the candidate is not published as C.
     """
     internals = [internalize_previous(x) for x in a_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != 'title:']
@@ -14190,7 +14181,7 @@ def anchor_news(
             # Broad thematic overlap is not an anchor by itself. Require a real named-actor
             # bridge or substantially stronger lexical overlap. This is deliberately stricter
             # than discovery, because a wrong A↔C relationship is worse than leaving a signal
-            # for the rescue/unanchored route.
+            # for the strict A-anchored signal route.
             if broad_only and not n_c_retrieval and not (
                 (entity_overlap >= 1 and jacc >= 0.035) or jacc >= 0.065
             ):
@@ -14207,7 +14198,7 @@ def anchor_news(
                 elif any(t in SPECIFIC_ANCHOR_THEMES for t in claim_preview_themes):
                     score -= 2.5
             if best is None or score>best[0]: best=(score,a,sorted(shared))
-        anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''; unanchored=False
+        anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''
         if best and best[0] >= 4.0:
             score,a,shared_themes=best
             anchor=f"{a['title']} (Strand A)"
@@ -14224,21 +14215,8 @@ def anchor_news(
                     shared_themes=sorted(nthemes)[:1]
                     score=4.25
         if not anchor:
-            if not allow_unanchored:
-                diag(n, 'no_substantive_A_anchor')
-                continue
-            # Rescue-only route: directly European, factual, source-backed and genuinely
-            # change-like. Foreign developments still require an A/context bridge.
-            if not eu_news_scope(f"{headline}. {desc}"):
-                diag(n, 'unanchored_requires_direct_eu_scope')
-                continue
-            if not factual_news(headline, desc):
-                diag(n, 'unanchored_not_factual_news')
-                continue
-            unanchored=True
-            anchor_basis='unanchored-emerging'
-            shared_themes=sorted(nthemes)[:1]
-            score=3.5
+            diag(n, 'no_substantive_A_anchor')
+            continue
         relation=signal_relation(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
@@ -14264,8 +14242,8 @@ def anchor_news(
         item.update({
             'anchor':anchor,
             'anchor_basis':anchor_basis,
-            'anchor_status':'unanchored_emerging' if unanchored else 'anchored',
-            'signal_confidence':'lower' if unanchored else 'standard',
+            'anchor_status':'anchored',
+            'signal_confidence':'standard',
             'watch_theme':theme,
             'signal_type':relation,
             'signal_kind':kind,
@@ -14281,11 +14259,7 @@ def anchor_news(
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': (
-                'rescue-only directly European emerging signal; no suitable A anchor yet'
-                if unanchored else
-                'new point on a substantive Strand-A issue; topic repetition allowed'
-            ),
+            'c_admission_rule': 'new point on a substantive Strand-A issue; a substantive A publication anchor is mandatory',
             'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
             'strategic_classification_source': 'source_text',
             '_anchor_score':score,
@@ -14294,7 +14268,7 @@ def anchor_news(
             diag(n, 'duplicate_with_current_c_batch')
             continue
         anchored.append(item)
-        diag(n, 'accepted_unanchored_emerging' if unanchored else 'accepted_anchored', 'accepted')
+        diag(n, 'accepted_anchored', 'accepted')
     anchored.sort(key=lambda x:(x.get('_anchor_score',0),x.get('date','')),reverse=True)
     for x in anchored:x.pop('_anchor_score',None)
     return anchored[:MAX_C] if MAX_C>0 else anchored
@@ -14608,6 +14582,9 @@ def main() -> int:
     log_progress.started = time.monotonic()
     configured_budget_seconds = max(60, int(CONFIG.get("scan_budget_seconds", 1200)))
     budget_override = str(os.environ.get("RADAR_SCAN_BUDGET_SECONDS", "") or "").strip()
+    if budget_override and not RADAR_DIAGNOSTIC_RUN and budget_override != str(configured_budget_seconds):
+        log_progress(f"Ignoring non-production scanner budget override {budget_override!r}; standard main budget is {configured_budget_seconds}s")
+        budget_override = ""
     if budget_override:
         try:
             budget_seconds = max(60, int(budget_override))
@@ -14790,6 +14767,26 @@ def main() -> int:
     # rotation cannot spend a whole scan on whichever topic happens to be grouped
     # first in radar_config.json. The gate is unchanged; this is search allocation only.
     all_queries = diversified_query_bank(list(dict.fromkeys(CONFIG.get("queries_a", []))))
+
+    # Dimensional precision/recall lane.  Instead of relying on one giant Boolean query,
+    # rotate explicit EU × R&I × strategic-mechanism families (research security,
+    # collaboration, capability, industrial policy, dependencies, talent, infrastructure
+    # and standards).  This is discovery only: the ordinary admission gate remains final.
+    dimensional_cfg = CONFIG.get("precision_recall_query_families", {})
+    dimensional_bank: list[str] = []
+    if isinstance(dimensional_cfg, dict):
+        family_lanes = []
+        for _family, _vals in dimensional_cfg.items():
+            vals = _vals if isinstance(_vals, list) else [_vals]
+            family_lanes.append([clean_text(x) for x in vals if clean_text(x)])
+        # Interleave families before applying the persisted cursor so every part of a
+        # partial cycle remains topically diverse.
+        dimensional_bank = interleaved_unique_batch(sum(len(x) for x in family_lanes), *family_lanes) if family_lanes else []
+    dimensional_cursor_before = int(state.get("dimensional_query_cursor", 0) or 0)
+    dimensional_focus, _dimensional_next, _dimensional_wrapped = rotating_batch(
+        dimensional_bank, dimensional_cursor_before,
+        max(0, int(CONFIG.get("precision_recall_queries_per_scan", 0) or 0)),
+    ) if dimensional_bank else ([], 0, True)
     strategic_scholarly_focus = strategic_pathway_queries('scholarly')
     gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
     gap_lookback_months = max(0, int(CONFIG.get("frontier_gap_historical_lookback_months", 0) or 0))
@@ -14906,17 +14903,22 @@ def main() -> int:
         all_queries, cr_broad_cursor_before, cr_base_cap
     )
     oa_batch = interleaved_unique_batch(
-        oa_cap, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
+        oa_cap, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
         oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     cr_batch = interleaved_unique_batch(
-        cr_cap, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
+        cr_cap, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
         cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
     cr_depth_lanes = {q: "gap" for q in gap_scholarly}
+    for q in dimensional_focus:
+        oa_query_dates[q] = DATE_FLOOR
+        cr_query_dates[q] = DATE_FLOOR
+        oa_depth_lanes[q] = "dimensional"
+        cr_depth_lanes[q] = "dimensional"
     for q in evidence_first_focus:
         oa_query_dates[q] = DATE_FLOOR
         cr_query_dates[q] = DATE_FLOOR
@@ -15427,6 +15429,9 @@ def main() -> int:
         direct_rotating_names, direct_journal_cursor_before, direct_planned_names, executed_direct_journals
     ) if direct_rotating_names else (0, True, 0)
     method_executed = executed_oa | executed_cr
+    state["dimensional_query_cursor"], _dimensional_commit_wrapped, dimensional_executed = committed_rotation_cursor(
+        dimensional_bank, dimensional_cursor_before, dimensional_focus, method_executed
+    ) if dimensional_bank else (0, True, 0)
     state["evidence_first_cursor"], _evidence_commit_wrapped, evidence_first_executed = committed_rotation_cursor(
         evidence_first_bank, evidence_first_cursor_before, evidence_first_focus, method_executed
     ) if evidence_first_bank else (0, True, 0)
@@ -16040,8 +16045,7 @@ def main() -> int:
     # because a single duplicate/anchor decision exhausted the short news lane. When the
     # ordinary current-window pass has no novel C row, run a bounded, diversified rescue search.
     # We do not publish a failed candidate or duplicate an old signal merely to hit a number.
-    # If strict anchoring still finds nothing, one directly-European factual rescue result may
-    # enter as lower-confidence ``unanchored_emerging``. Detailed failures are scanner-log only.
+    # Additional search waves may improve recall, but publication remains strictly A-anchored.
     c_floor_rescue_signals: list[dict[str, Any]] = []
     c_floor_diagnostics: list[dict[str, str]] = []
     previous_c_for_floor = previous.get('strand_c', []) if isinstance(previous.get('strand_c'), list) else []
@@ -16088,13 +16092,6 @@ def main() -> int:
                 if novel_strict and need:
                     c_floor_rescue_signals.extend(novel_strict[:need])
                     continue
-                # Only after a separate search wave has failed to produce a strict novel anchor
-                # do we allow a directly-European, lower-confidence emerging signal.
-                emerging_rows = anchor_news(extra_news, provisional_a_for_signal_followup, c_floor_diagnostics, allow_unanchored=True)
-                novel_emerging = _novel_signal_rows(emerging_rows, previous_c_for_floor, preliminary_novel_c + c_floor_rescue_signals)
-                need = max(0, min_new_c - len(preliminary_novel_c) - len(c_floor_rescue_signals))
-                if novel_emerging and need:
-                    c_floor_rescue_signals.extend(novel_emerging[:need])
         else:
             print('[C_INTERNAL] C-floor rescue skipped: insufficient remaining scan budget or rescue disabled.', flush=True)
 
@@ -16584,7 +16581,7 @@ def main() -> int:
         low_yield_rotation["new_ab_after_extended_fallback"] = low_yield_rotation["new_ab_after_fresh_rotation"]
 
     full_rescue_threshold = max(0, int(CONFIG.get("low_yield_full_rescue_run_trigger_max_new_ab", low_yield_threshold) or low_yield_threshold))
-    low_yield_rotation["full_rescue_run_enabled"] = bool(CONFIG.get("low_yield_full_rescue_run_enabled", True))
+    low_yield_rotation["full_rescue_run_enabled"] = bool(CONFIG.get("low_yield_full_rescue_run_enabled", False))
     low_yield_rotation["full_rescue_run_recommended"] = bool(
         low_yield_rotation["full_rescue_run_enabled"]
         and low_yield_rotation["new_ab_after_extended_fallback"] <= full_rescue_threshold
@@ -16632,6 +16629,11 @@ def main() -> int:
     deep_news_limit = max(0, int(CONFIG.get("weak_signal_followup_queries_per_wave", 10) or 10))
     deep_news_max_passes = max(0, int(CONFIG.get("weak_signal_followup_max_passes", 4) or 4))
     deep_news_passes = 0
+    zero_yield_limit = max(1, int(CONFIG.get("frontier_gap_zero_yield_stop_waves", 2) or 2))
+    zero_yield_streak = 0
+    zero_yield_signature: tuple[str, ...] = tuple(active_frontier_focus.get("empty_targets") or active_frontier_focus.get("targets") or [])
+    deepening["zero_yield_stop_waves"] = zero_yield_limit
+    deepening["stopped_after_repeated_zero_yield"] = False
     deep_oa_disabled = oa_failed
     deep_cr_disabled = cr_failed
     exhausted_oa: set[str] = set()
@@ -16699,13 +16701,14 @@ def main() -> int:
                     safe_stage, "weak-signal follow-up", collect_news, now, news_warnings, news_lookback, wave_deadline, signal_queries, False
                 )))
             executed_this_wave: set[str] = set()
+            ab_candidates_this_wave = 0
             for family, fut in futs:
                 extra = [x for x in fut.result() if isinstance(x, dict)]
                 if family == "oa":
-                    oa.extend(extra); deepening["openalex_candidates"] += len(extra)
+                    oa.extend(extra); deepening["openalex_candidates"] += len(extra); ab_candidates_this_wave += len(extra)
                     executed_this_wave.update(wave_exec.get("openalex_queries", set()))
                 elif family == "cr":
-                    cr.extend(extra); deepening["crossref_candidates"] += len(extra)
+                    cr.extend(extra); deepening["crossref_candidates"] += len(extra); ab_candidates_this_wave += len(extra)
                     executed_this_wave.update(wave_exec.get("crossref_broad_queries", set()))
                 else:
                     news.extend(extra); deepening["weak_signal_followup_candidates"] += len(extra)
@@ -16727,6 +16730,23 @@ def main() -> int:
             deep_cursor = (deep_cursor + consumed) % max(1, len(gap_depth_bank))
         if not executed_this_wave:
             break
+
+        current_gap_signature = tuple(active_frontier_focus.get("empty_targets") or active_frontier_focus.get("targets") or [])
+        if current_gap_signature == zero_yield_signature and ab_candidates_this_wave == 0:
+            zero_yield_streak += 1
+        else:
+            zero_yield_signature = current_gap_signature
+            zero_yield_streak = 1 if ab_candidates_this_wave == 0 else 0
+        if zero_yield_streak >= zero_yield_limit:
+            deepening["stopped_after_repeated_zero_yield"] = True
+            deepening["zero_yield_signature"] = list(current_gap_signature)
+            log_progress(
+                f"Matrix depth diversified after {zero_yield_streak} zero-yield wave(s) for "
+                + (", ".join(current_gap_signature) if current_gap_signature else "the same target set")
+                + "; returning remaining time to other discovery lanes."
+            )
+            break
+
         # Recompute the matrix against candidates admitted so far. Once a zero cell
         # receives evidence, subsequent waves immediately stop spending scarce depth
         # on it and reallocate to the cells that remain empty.
@@ -16786,6 +16806,7 @@ def main() -> int:
     deepening["empty_cells_after_current_depth"] = len(remaining_empty)
     if (
         stubborn_enabled and remaining_empty and budget_remaining() > finalize_reserve + 25
+        and not deepening.get("stopped_after_repeated_zero_yield")
         and not (deep_oa_disabled and deep_cr_disabled)
     ):
         recovery_months = max(1, int(CONFIG.get("frontier_stubborn_recovery_lookback_months", 4) or 4))
@@ -16957,11 +16978,6 @@ def main() -> int:
             need = max(0, min_new_c - len(_novel_signal_rows(current_c + c_floor_rescue_signals, prev_c)))
             if novel_reserve and need:
                 c_floor_rescue_signals.extend(novel_reserve[:need])
-            if need and not novel_reserve:
-                emerging_reserve = anchor_news(reserve_news, strand_a, final_c_diagnostics, allow_unanchored=True)
-                novel_emerging = _novel_signal_rows(emerging_reserve, prev_c, current_c + c_floor_rescue_signals)
-                if novel_emerging:
-                    c_floor_rescue_signals.extend(novel_emerging[:need])
 
     for rescue_row in c_floor_rescue_signals:
         if not any(signals_near_duplicate(rescue_row, x) for x in current_c):
@@ -17419,6 +17435,8 @@ def main() -> int:
                 "candidates": len(journal_depth_candidates),
                 "from": DATE_FLOOR.isoformat(),
             },
+            "dimensional_queries_this_scan": dimensional_focus,
+            "dimensional_queries_executed": dimensional_executed,
             "finding_context_queries_this_scan": finding_context_focus,
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
@@ -17500,6 +17518,8 @@ def main() -> int:
             "openalex_queries_executed": len(set(execution_stats.get("openalex_queries", set()))),
             "openalex_base_queries_executed": oa_base_executed,
             "openalex_exploration_queries_this_run": len(oa_explore),
+            "dimensional_queries_this_run": len(dimensional_focus),
+            "dimensional_queries_executed": dimensional_executed,
             "finding_context_queries_this_run": len(finding_context_focus),
             "finding_context_queries_executed": finding_context_executed,
             "openalex_exploration_queries_executed": oa_explore_executed + int(execution_stats.get("quiet_rescue_openalex_executed", 0)),

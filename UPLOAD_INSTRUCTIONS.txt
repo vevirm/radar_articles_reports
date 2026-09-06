@@ -1,24 +1,9 @@
-CLEAN FRESH START
-=================
+R&I GEOPOLITICS RADAR — WHOLE-REPOSITORY UPLOAD
 
-This package is intended for an EMPTY GitHub repository.
-
-1. Create a new empty repository (do not initialise it from the old Radar repository).
-2. Upload the contents of this package, preserving folders including .github/workflows/.
-3. In repository Settings -> Secrets and variables -> Actions, add:
-      OPENALEX_API_KEY
-   with your OpenAlex API key as its value.
-4. The first push can trigger R&I Radar Scan automatically. You can also use Actions ->
-   R&I Radar Scan -> Run workflow.
-5. The repository begins with exactly 200 baseline A+B records (190 A + 10 B).
-   There is no inherited scanner state, scan history, A/B archive or Strand C.
-6. On the first successful scanner run, the scanner creates new state/cursors/history from
-   that run onward and the workflow consumes/deletes FRESH_START.
-7. Later scans continue incrementally from the state created by this repository itself.
-
-There is no legacy regression-test directory in this package. Runtime safety is enforced by
-fresh-start preflight and post-scan output validation instead of old version-specific tests.
-
-CORPUS RULE
------------
-The 200 packaged A/B records are only the starting baseline. Accepted new A/B evidence accumulates publicly (200 -> 201 -> 202 ...); it does not need to displace an old record. Strand C alone expires under its 60-day rule.
+1. Upload the complete contents of this repository bundle to the repository root.
+2. Add repository secret OPENALEX_API_KEY.
+3. Main scanner standard budget is 24 minutes on every scheduled/manual scan.
+4. Historical scanner standard budget is 15 minutes and accepts only publication dates strictly older than the rolling six-month cutoff.
+5. radar.json and historical/historical.json are generated live-state files. This bundle deliberately ships radar_seed.json and historical/historical_seed.json instead, so uploading a new whole-repo version cannot overwrite a newer live corpus. Existing live files remain authoritative. A genuinely new repository bootstraps from the seed files automatically.
+6. Main A/B is cumulative within its live evidence policy; 200 is the starting baseline, not a cap. Strand C is temporary: every C row must be anchored to substantive Strand A evidence and expires exactly 60 days after first_seen.
+7. Browser pages have no repository write credential. Scanner checkout uses persist-credentials:false; only the permitted generated JSON file is authenticated and committed after validation.

@@ -66,6 +66,7 @@
 @media(max-width:920px){.core-path-grid{display:flex;overflow-x:auto}.core-step{min-width:175px}.core-arrow{min-width:28px}}
 @media(max-width:760px){.landing-nav .lock{margin-left:0}.landing-nav a,.landing-nav .lock{padding:13px 10px!important;font-size:11px!important}.landing-copy h1{font-size:44px!important}.core-path-grid{display:block}.core-step{min-height:0}.core-arrow{height:28px;transform:rotate(90deg)}}
 </style>
+<script src="../radar_data.js"></script>
 </head>
 <body>
   <section id="gate" aria-label="Password gate">
@@ -310,9 +311,7 @@ wire();
 async function loadRadar(){
   let raw;
   try{
-    const r=await fetch("../radar.json?ts="+Date.now(),{cache:"no-store"});
-    if(!r.ok)throw new Error(`radar.json HTTP ${r.status}`);
-    raw=await r.json();
+    raw=await RadarData.load("../radar.json","../radar_seed.json");
   }catch(e){
     console.error("Radar data load failed",e);
     for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded.");

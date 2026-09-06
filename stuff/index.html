@@ -11,6 +11,7 @@
 .merit-badge{display:inline-block;margin-left:6px;border:1px solid #dedede;border-radius:999px;padding:2px 6px;font-size:9px;font-weight:900;color:#555555;background:#ffffff}.merit-badge.highest,.merit-badge.very-strong{background:#ffffff;color:#111111}.merit-badge.useful,.merit-badge.supporting{background:#ffffff;color:#111111}
 </style>
 <link rel="stylesheet" href="../simple-ui.css?v=17.20.3">
+<script src="../radar_data.js"></script>
 </head>
 <body>
 <header><div class="wrap top"><div><div class="kicker">Quality, files and technical layer</div><h1>Stuff</h1><p class="lede">The technical layer: a 0–100 evidence ranking, EU-relevance score, provenance and Matrix placement fields for further analysis.</p></div><nav class="nav" aria-label="Primary site sections"><a href="../read/">Read at least this</a><a href="../">What matters now</a><a href="../radar/">Main Radar</a><a href="../radar/#strand-c">Weak signals</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../shocks/">External shocks</a><a href="../historical/">Historical evidence</a><a href="../literature/">Sources</a><a class="primary" href="./" aria-current="page">Stuff</a></nav></div></header>
@@ -50,6 +51,6 @@ document.getElementById('showMore').addEventListener('click',()=>{shown+=24;rend
 document.getElementById('downloadBib').addEventListener('click',()=>download('literature_used.bib',bibtex(),'application/x-bibtex;charset=utf-8'));
 document.getElementById('downloadRis').addEventListener('click',()=>download('literature_used.ris',ris(),'application/x-research-info-systems;charset=utf-8'));
 document.getElementById('downloadExcel').addEventListener('click',()=>{try{if(!radarData)throw new Error('Radar data is still loading');const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit);if(!bytes)throw new Error('Workbook generator unavailable');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));a.download='source_merit_ranking.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){console.error('Excel generation failed',e);alert('The current Excel could not be generated. Try the repository snapshot link below the button.')}});
-(async()=>{try{const r=await fetch('../radar.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('radar');const d=await r.json();radarData=d;publications=allRecords(d);render()}catch(e){document.getElementById('publicationList').innerHTML='<div class="meta">Radar data unavailable.</div>'}})();
+(async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json');radarData=d;publications=allRecords(d);render()}catch(e){document.getElementById('publicationList').innerHTML='<div class="meta">Radar data unavailable.</div>'}})();
 </script>
 </body></html>

@@ -39,12 +39,19 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 from scanner_run_guard import defer_if_peer_scanner_active, deployment_only_push_event
+from scan_radar import (
+    gate_scope as main_gate_scope,
+    final_ab_candidate_worthiness as main_final_ab_candidate_worthiness,
+    diversified_query_bank as main_diversified_query_bank,
+)
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
 OUT_PATH = HIST_DIR / "historical.json"
+SEED_PATH = HIST_DIR / "historical_seed.json"
 CURATED_SEED_PATH = HIST_DIR / "curated_seed_evidence.json"
 MANUAL_EVIDENCE_PATH = HIST_DIR / "manual_evidence.json"
 CONFIG = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+MAIN_CONFIG = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
 
 DATE_FROM = dt.date.fromisoformat(CONFIG["date_from"])
 MAIN_RADAR_WINDOW_MONTHS = max(1, int(CONFIG.get("main_radar_window_months", 6)))
@@ -93,7 +100,7 @@ CUTOFF_EXCLUSIVE = historical_cutoff_exclusive()
 DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
-BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", "1050"))
+BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 900))))
 # Browser bulk uploads can leave the old hidden Historical workflow in place, where
 # HISTORICAL_MIN_RUNTIME_SECONDS=600 was hard-coded.  Newer Historical rotation is
 # target-driven, so visible config may explicitly ignore that stale environment value.
@@ -382,68 +389,59 @@ def _diag(reason: str, n: int = 1) -> None:
     DIAG[reason] += n
 
 
+def _main_source_tier(profile: dict[str, Any]) -> int:
+    authority=int(profile.get("authority",0) or 0)
+    if authority >= 57: return 1
+    if authority >= 54: return 2
+    return 3
+
 def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
-    _diag("raw_records")
-    _diag(f"raw_{lane}")
-    title = clean(raw.get("title"))
-    abstract = clean(raw.get("abstract") or raw.get("summary") or raw.get("body"))
-    url = clean(raw.get("url") or raw.get("doi"))
-    date = parse_date(raw.get("date"))
-    if not title:
-        _diag("reject_no_title"); return None
-    if ADMIN_DOC_RE.search(title):
-        _diag("reject_administrative_document"); return None
-    if date is None:
-        _diag("reject_no_date"); return None
-    if not (DATE_FROM <= date <= DATE_TO):
-        _diag("reject_outside_window"); return None
-    profile = source_for(domain_of(url), clean(raw.get("venue")), clean(raw.get("publisher")))
-    if not profile:
-        _diag("reject_source_not_elite"); return None
+    """Historical admission uses the live Main A/B gate; only the date/source universe differs."""
+    _diag("raw_records"); _diag(f"raw_{lane}")
+    title=clean(raw.get("title")); abstract=clean(raw.get("abstract") or raw.get("summary") or raw.get("body"))
+    url=clean(raw.get("url") or raw.get("doi")); date=parse_date(raw.get("date"))
+    if not title: _diag("reject_no_title"); return None
+    if ADMIN_DOC_RE.search(title): _diag("reject_administrative_document"); return None
+    if date is None: _diag("reject_no_date"); return None
+    if not (DATE_FROM <= date <= DATE_TO): _diag("reject_outside_window"); return None
+    profile=source_for(domain_of(url), clean(raw.get("venue")), clean(raw.get("publisher")))
+    if not profile: _diag("reject_source_not_elite"); return None
     _diag("source_eligible")
-    text = clean(f"{title}. {abstract}")
-    if abstract and len(abstract.split()) >= 20:
-        _diag("enough_text")
-    else:
-        _diag("insufficient_text")
-    if BAD_DOC_RE.search(title) and not ANALYTIC_RE.search(text):
-        _diag("reject_document_exclusion"); return None
-    official = profile.get("kind") == "official_eu"
-    eu_direct = bool(EU_RE.search(text))
-    if not official and not eu_direct:
-        _diag("reject_no_direct_eu"); return None
-    _diag("eu_scope")
-    if not RI_RE.search(text):
-        _diag("reject_no_ri"); return None
-    _diag("ri_scope")
-    # Historical breadth must not become generic EU research-policy accumulation.
-    # A research-system-capacity phrase alone is not enough: the source itself must
-    # show a strategic/geopolitical mechanism.
-    if not STRATEGIC_RE.search(text):
-        _diag("reject_no_strategic_context"); return None
-    _diag("strategic_scope")
-    if len(text.split()) < 28 and not ANALYTIC_RE.search(text):
-        _diag("defer_insufficient_text"); return None
-    topics = topic_matches(text)
+    text=clean(f"{title}. {abstract}")
+    if BAD_DOC_RE.search(title) and not ANALYTIC_RE.search(text): _diag("reject_document_exclusion"); return None
+    source_kind="scholarly" if profile.get("kind")=="top_journal" else "institutional"
+    tier=_main_source_tier(profile)
+    evidence=main_gate_scope(title, abstract, "", tier, source_kind)
+    a_pass=bool(evidence.get("a_pass")); b_pass=bool(evidence.get("b_pass"))
+    if not (a_pass or b_pass):
+        _diag("reject_main_ab_gate"); return None
+    candidate_type="peer-reviewed article" if source_kind=="scholarly" else "institutional report"
+    if not main_final_ab_candidate_worthiness({"title":title,"summary":abstract,"type":candidate_type,"link":url}):
+        _diag("reject_main_final_worthiness"); return None
+    topics=topic_matches(text)
     if not topics:
-        _diag("reject_no_topic_match"); return None
-    _diag("topic_match")
-    authority = int(profile.get("authority", 0))
-    score = authority + (17 if eu_direct else 14) + 10 + 10 + (4 if len(text.split()) >= 80 or ANALYTIC_RE.search(text) else 2) + year_bonus(date)
-    score = min(100, score)
-    if score < MIN_SCORE:
-        _diag("reject_below_merit"); return None
-    _diag("gate_passed")
-    row, outcome, basis = matrix_classification(text)
+        if b_pass:
+            method_text=norm(" ".join(evidence.get("foresight_evidence",[])+evidence.get("method_evidence",[])))
+            topics=["computational-emergence" if any(x in method_text for x in ("topic","citation","semantic","network","novelty","change point","embedding")) else "foresight-methods"]
+        else:
+            topics=["main-a-evidence"]
+    authority=int(profile.get("authority",0)); evidence_bonus=18 if a_pass else 16
+    score=min(100, authority + evidence_bonus + (8 if abstract and len(abstract.split())>=28 else 4) + year_bonus(date))
+    # Source eligibility plus the live Main A/B gate is the admission decision. The score is
+    # retained for historical reader ordering/diagnostics, not as a second contradictory gate.
+    _diag("gate_passed"); _diag("main_a_pass" if a_pass else "main_b_pass")
+    row,outcome,basis=matrix_classification(text)
+    strand="AB" if a_pass and b_pass else ("A" if a_pass else "B")
     return {
-        "id": stable_id(title, url), "title": title, "date": date.isoformat(), "year": date.year,
-        "url": url, "authors": clean(raw.get("authors")), "source": clean(profile.get("name")),
-        "source_kind": clean(profile.get("kind")), "venue": clean(raw.get("venue")), "publisher": clean(raw.get("publisher")),
-        "source_merit_score": score, "source_merit_label": "Historical top tier",
-        "topics": topics, "topic_labels": [topic_label(t) for t in topics],
-        "reader_point": first_sentence(abstract) or title, "why_it_matters": why_it_matters(row, outcome),
-        "matrix_dimension": row, "matrix_outcome": outcome, "matrix_basis": basis,
-        "discovery": clean(raw.get("discovery")),
+        "id":stable_id(title,url),"title":title,"date":date.isoformat(),"year":date.year,"url":url,
+        "authors":clean(raw.get("authors")),"source":clean(profile.get("name")),"source_kind":clean(profile.get("kind")),
+        "venue":clean(raw.get("venue")),"publisher":clean(raw.get("publisher")),"source_merit_score":score,"source_merit_label":"Historical top tier · Main A/B gate",
+        "strand":strand,"a_route":clean(evidence.get("a_route")),"b_route":clean(evidence.get("b_route")),
+        "eu_evidence":list(evidence.get("eu_evidence") or [])[:6],"ri_evidence":list(evidence.get("ri_evidence") or [])[:6],
+        "geo_evidence":list(evidence.get("geo_evidence") or [])[:6],"method_evidence":list(evidence.get("method_evidence") or [])[:6],
+        "topics":topics,"topic_labels":[topic_label(t) for t in topics],
+        "reader_point":first_sentence(abstract) or title,"why_it_matters":why_it_matters(row,outcome),
+        "matrix_dimension":row,"matrix_outcome":outcome,"matrix_basis":basis,"discovery":clean(raw.get("discovery")),
     }
 
 
@@ -1026,7 +1024,8 @@ def collect_crossref_authors(authors: list[str], warnings: list[str], window_fro
 
 def main() -> int:
     try:
-        previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {}
+        previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else json.loads(SEED_PATH.read_text(encoding="utf-8"))
+        if not OUT_PATH.exists(): log("No live historical.json yet; bootstrapping from historical_seed.json")
     except Exception:
         previous={}
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
@@ -1036,6 +1035,14 @@ def main() -> int:
 
     topic_cursor=int(state.get("topic_cursor",0)); source_cursor=int(state.get("source_cursor",0)); seed_cursor=int(state.get("seed_cursor",0))
     band_cursor=int(state.get("time_band_cursor",0)); source_depth_cursor=int(state.get("source_depth_cursor",0)); gap_cursor=int(state.get("gap_cursor",0)); author_cursor=int(state.get("author_cursor",0)); api_depth_cursor=int(state.get("api_depth_cursor",0))
+    main_query_cursor=int(state.get("main_query_cursor",0) or 0)
+    dimensional=[]
+    for vals in (MAIN_CONFIG.get("precision_recall_query_families",{}) or {}).values():
+        dimensional.extend(vals if isinstance(vals,list) else [vals])
+    main_query_bank=main_diversified_query_bank(list(dict.fromkeys(
+        [clean(x) for x in MAIN_CONFIG.get("queries_a",[]) + MAIN_CONFIG.get("queries_b_method",[]) + dimensional if clean(x)]
+    )))
+    main_query_batch,next_main_query=rotating(main_query_bank,main_query_cursor,max(0,int(CONFIG.get("shared_main_queries_per_scan",18))))
 
     active_topics,next_topic=rotating(topics,topic_cursor,int(CONFIG.get("topics_per_scan",4)))
     active_sources,next_source=rotating(sources,source_cursor,int(CONFIG.get("sources_per_scan",8)))
@@ -1060,6 +1067,7 @@ def main() -> int:
     candidates,queries=run_rotation(
         active_topics,active_sources,warnings,"coverage",
         result_page=api_result_page,
+        extra_queries=main_query_batch,
         window_from=active_band["date_from"],window_to=active_band["date_to"],
         direct_depth_page=source_depth_page,
     )
@@ -1165,10 +1173,10 @@ def main() -> int:
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
         "coverage_map":{"bands":[{"id":str(b.get("id")),"label":str(b.get("label")),"date_from":b["date_from"].isoformat(),"date_to":b["date_to"].isoformat(),"items":int(band_counts.get(str(b.get("id")),0))} for b in bands],"thinnest_populated_cells":thinnest},
-        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
+        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"main_query_cursor":next_main_query,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
         "last_scan":{
             "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":False,
-            "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,
+            "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,"shared_main_queries":main_query_batch,
             "coverage_rotation":{"primary_band":str(active_band.get("label")),"primary_band_id":str(active_band.get("id")),"api_result_page":api_result_page,"direct_source_depth_page":source_depth_page,"gap_cells":gap_details,"known_good_authors":active_authors,"author_candidates":len(author_candidates)},
             "curated_backfill":{"available":len(seeds),"queried_this_run":len(seed_queries),"workbook_ids":[x.get("workbook_id") for x in active_seeds]},
             "manual_evidence":{"available":len(manual_items),"included":sum(1 for x in merged if x.get("manual_curated"))},

@@ -1726,7 +1726,7 @@
   "crossref_public_min_interval_seconds": 1.5,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 720,
-  "signal_discovery_version": "v17.19.22-active-strategic-pathway-search",
+  "signal_discovery_version": "v18.0-a-anchored-60d-observable-change",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -1775,7 +1775,21 @@
     "China biomedical technology regulation research innovation",
     "US China battery industrial policy technology competition",
     "global research talent competition scientists mobility funding",
-    "academic mobility researchers global science policy"
+    "academic mobility researchers global science policy",
+    "EU research technology consultation proposal draft guidance strategic",
+    "European research security guidance new restriction cooperation",
+    "EU Horizon work programme amended strategic technology call",
+    "Europe AI factory build fund procure expand",
+    "EU semiconductor pilot line build launch fund expand",
+    "Europe quantum facility build fund launch research",
+    "European research team recruit relocate skills shortage strategic technology",
+    "EU scientific collaboration China restriction suspension screening",
+    "Europe strategic technology export control restriction supply chain",
+    "EU research infrastructure tender procurement supercomputer quantum",
+    "Europe standards new work item 6G AI quantum ETSI",
+    "EU science agreement new bilateral cooperation research",
+    "European technology partnership joint laboratory research strategic",
+    "EU critical technology investment award subsidy capacity expansion"
   ],
   "quality_profile_version": "v17.20.39-hard-strategic-mechanism-no-generic-proxies",
   "crossref_priority_journals": [
@@ -2647,11 +2661,31 @@
     "developing machine learning weak signal detection method foresight",
     "new text mining method horizon scanning weak signals",
     "developing network analysis method emerging technology foresight",
-    "new science mapping method strategic foresight technology"
+    "new science mapping method strategic foresight technology",
+    "horizon scanning novel methodology validation framework",
+    "weak signals method development evaluation benchmark foresight",
+    "scenario construction new method validation strategic foresight",
+    "Delphi methodological framework validation futures",
+    "emerging topic detection algorithm evaluation research fronts",
+    "emerging technology detection method benchmark bibliometrics",
+    "novelty detection scientific literature method validation",
+    "citation burst detection emerging research fronts methodology",
+    "change point detection scientific trends method evaluation",
+    "dynamic topic model emerging research topic methodology",
+    "semantic change detection science technology trends method",
+    "temporal embeddings emerging topics methodological framework",
+    "dynamic community detection research networks emerging fields method",
+    "network anomaly detection innovation systems methodology",
+    "science mapping technology forecasting method validation",
+    "patent landscaping emerging technology method evaluation",
+    "co citation bibliographic coupling research front detection method",
+    "temporal network innovation diffusion methodological framework",
+    "concept drift narrative change detection policy text method",
+    "event detection temporal NLP emerging policy signals methodology"
   ],
   "queries_b_method_per_scan": 24,
-  "signal_quality_profile_version": "v17.20.38-source-backed-ri-strategic-c",
-  "rotation_profile_version": "v17.20.7-broader-eu-ri-geopolitics-methods-shock-refresh",
+  "signal_quality_profile_version": "v18.0-a-anchored-60d-observable-change",
+  "rotation_profile_version": "v18.0-dimensional-rotation-cumulative",
   "openalex_exploration_queries_per_scan": 16,
   "crossref_exploration_queries_per_scan": 14,
   "quiet_scan_rescue_enabled": true,
@@ -2670,7 +2704,7 @@
   "frontier_gap_empty_news_weight": 2,
   "frontier_gap_deepening_queries_per_wave": 14,
   "frontier_gap_deepening_max_waves": 32,
-  "scan_finalize_reserve_seconds": 60,
+  "scan_finalize_reserve_seconds": 75,
   "weak_signal_followup_every_n_waves": 2,
   "weak_signal_followup_queries_per_wave": 8,
   "weak_signal_followup_max_passes": 3,
@@ -3507,7 +3541,7 @@
   "main_radar_recall_policy": "High recall for central European/EU research & innovation, prioritising geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power and talent/capability mechanisms. A bounded Tier 1/2 major EU-R&I-system route prevents zero-yield scans when strategically important system evidence is not explicitly labelled geopolitical.",
   "low_yield_fresh_rotation_max_waves": 2,
   "low_yield_fresh_rotation_institution_sources_per_wave": 8,
-  "low_yield_reserved_seconds": 240,
+  "low_yield_reserved_seconds": 210,
   "crossref_broad_execution_weight": 2,
   "crossref_primary_deep_lanes": [
     "explore",
@@ -3613,5 +3647,64 @@
   "active_core_limit": 0,
   "active_core_strand_b_slots": 0,
   "active_core_profile_version": "v17.21.0-cumulative-public-ab",
-  "active_core_policy": "The packaged 200 A/B records are the starting baseline only. Every newly accepted A/B record remains in the public strand cumulatively; there is no 200-item replacement cap. Deduplication, admission, integrity and explicit precision cleanups still apply."
+  "active_core_policy": "The packaged 200 A/B records are the starting baseline only. Every newly accepted A/B record remains in the public strand cumulatively; there is no 200-item replacement cap. Deduplication, admission, integrity and explicit precision cleanups still apply.",
+  "full_rescue_run_enabled": false,
+  "signal_anchor_policy": "Strand C is a temporary relationship to substantive Strand A evidence. Every published C signal must have a current Strand-A publication anchor; no unanchored-emerging exception is allowed. C expires exactly 60 days after first_seen.",
+  "c_unanchored_rescue_enabled": false,
+  "frontier_gap_zero_yield_stop_waves": 2,
+  "frontier_gap_zero_yield_policy": "If the same Matrix target set produces no A/B candidates in two consecutive depth waves, stop repeating that Matrix depth lane for this run and return time to other rotating discovery families.",
+  "precision_recall_query_families": {
+    "research_security": [
+      "European Union research security universities foreign interference knowledge security",
+      "Europe research trusted research due diligence sensitive technology international collaboration",
+      "EU university research China screening restriction security",
+      "European research collaboration security risk foreign influence"
+    ],
+    "international_collaboration": [
+      "European Union international research collaboration China United States restrictions cooperation",
+      "Horizon Europe third country participation association international scientific cooperation",
+      "Europe science diplomacy research partnership strategic competition",
+      "European scientific collaboration China decline restriction reorientation"
+    ],
+    "capability_competitiveness": [
+      "Europe R&D intensity technology leadership innovation gap scientific capability",
+      "EU technological capability patent share publication share competitiveness",
+      "European research innovation scale-up commercialisation gap technology gap",
+      "EU research system capability global competition science technology"
+    ],
+    "industrial_policy": [
+      "EU strategic technology industrial policy state aid IPCEI research innovation",
+      "Europe public investment semiconductor quantum AI industrial capacity R&D",
+      "European Union strategic investment technology capability domestic production",
+      "EU innovation industrial capacity subsidy strategic autonomy"
+    ],
+    "supply_dependencies": [
+      "EU research technology supply chain strategic dependency bottleneck chokepoint",
+      "Europe critical technology supplier concentration substitution diversification R&D",
+      "European semiconductor quantum AI supply chain dependency economic security",
+      "EU critical raw materials research innovation strategic supply chain"
+    ],
+    "talent": [
+      "Europe quantum semiconductor AI researcher mobility skills shortage brain drain",
+      "EU research talent scientist engineer attraction retention strategic technology",
+      "European research workforce international mobility technology competition",
+      "Europe scientific talent relocation research team strategic capability"
+    ],
+    "infrastructure": [
+      "EU research infrastructure AI factory supercomputer quantum facility strategic capacity",
+      "Europe pilot line semiconductor research infrastructure build fund expand",
+      "European data centre compute capacity research innovation strategic autonomy",
+      "EU scientific infrastructure testbed biomanufacturing facility technology capability"
+    ],
+    "standards_rules": [
+      "EU standards strategic technology ETSI 6G new work item research innovation",
+      "Europe standardisation request semiconductor AI quantum technology competition",
+      "European technical committee standards development strategic technology capability",
+      "EU regulation standards technology sovereignty research innovation"
+    ]
+  },
+  "precision_recall_queries_per_scan": 20,
+  "precision_recall_query_profile_version": "v18.0-dimensional-eu-ri-geo",
+  "signal_change_query_profile_version": "v18.0-observable-change-a-anchored",
+  "source_context_policy": "Context-rich EU primary sources may be searched broadly; general scholarly/news discovery requires multiple independent EU/R&I/strategic dimensions. Generic terms such as Europe, innovation, technology, security, resilience or competitiveness never admit a record alone."
 }
