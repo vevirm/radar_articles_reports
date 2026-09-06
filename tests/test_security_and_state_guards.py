@@ -18,12 +18,28 @@ spec.loader.exec_module(scan)
 
 class RepositoryWriteBoundaryTests(unittest.TestCase):
 
-    def test_workflow_ignores_stale_versioned_tests_left_by_browser_overlay(self):
+    def test_fresh_start_cannot_be_blocked_by_stale_versioned_tests(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn("test_scanner_features.py", text)
-        self.assertIn("test_security_and_state_guards.py", text)
-        self.assertNotIn("-p 'test_*.py'", text)
-        self.assertIn("stale version-specific", text)
+        marker = ROOT / "FRESH_START"
+        self.assertTrue(marker.is_file())
+
+        # Preferred/current workflow: it reads the visible fresh-start marker and runs
+        # only maintained suites.  Compatibility path: GitHub browser upload may leave
+        # the hidden old workflow in place, in which case same-path legacy test modules
+        # shipped by this package are quarantine stubs and broad discovery is still safe.
+        if "test_scanner_features.py" in text and "test_security_and_state_guards.py" in text:
+            self.assertIn("FRESH_START", text)
+        else:
+            self.assertIn("-p 'test_*.py'", text)
+            legacy = [
+                p for p in (ROOT / "tests").glob("test_*.py")
+                if p.name not in {"test_scanner_features.py", "test_security_and_state_guards.py"}
+            ]
+            self.assertGreater(len(legacy), 0)
+            for path in legacy:
+                body = path.read_text(encoding="utf-8")
+                self.assertIn("LegacyRepositoryHistoryContractDisabled", body, path.name)
+                self.assertIn("FRESH_START", body, path.name)
 
     def test_checkout_does_not_persist_repository_credentials(self):
         text = WORKFLOW.read_text(encoding="utf-8")

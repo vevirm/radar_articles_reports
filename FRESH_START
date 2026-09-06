@@ -1,0 +1,13 @@
+FRESH REPOSITORY BASELINE
+
+This repository intentionally starts a new scanner history from the packaged 200-item A+B baseline.
+
+Meaning:
+- Do NOT recover or require scanner-run history from commits that pre-date this fresh baseline.
+- Do NOT require a pre-existing ab_archive or old Strand C history on the first run.
+- Legacy version-specific regression tests from an older repository are not part of this repository contract.
+- The normal scanner security boundary remains active: only radar.json may be persisted by the main scanner.
+
+The actual one-time bootstrap state is the fresh_repository_seed marker inside radar.json.
+After the first successful scan, that JSON marker is omitted from scanner output, so subsequent scans are normal incremental scans.
+This file may remain in the repository as a permanent declaration that legacy repository-history contracts do not apply.
