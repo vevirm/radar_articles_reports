@@ -18,3 +18,7 @@ This package is intended for an EMPTY GitHub repository.
 
 There is no legacy regression-test directory in this package. Runtime safety is enforced by
 fresh-start preflight and post-scan output validation instead of old version-specific tests.
+
+CORPUS RULE
+-----------
+The 200 packaged A/B records are only the starting baseline. Accepted new A/B evidence accumulates publicly (200 -> 201 -> 202 ...); it does not need to displace an old record. Strand C alone expires under its 60-day rule.

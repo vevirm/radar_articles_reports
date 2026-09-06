@@ -1,6 +1,6 @@
 RADAR_FRESH_START_V1
 
-This file explicitly authorises ONE clean scanner bootstrap from the packaged 200-item baseline.
+This file explicitly authorises ONE clean scanner bootstrap from the packaged 200-item starting baseline.
 
 The bootstrap is valid only while radar.json also contains fresh_repository_seed=v1, exactly
 200 active Strand A+B records, no A/B archive, no Strand C, no scan_state, no scan_history,
@@ -9,3 +9,5 @@ creates this repository's own scan_state/cursors/scan_history, and the workflow 
 this FRESH_START file in the same commit.
 
 It does NOT weaken normal scanner security after bootstrap.
+
+Accumulation rule: 200 is not a cap. Every newly accepted A/B record is added to the public corpus; the count may rise above 200.

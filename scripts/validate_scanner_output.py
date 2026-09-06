@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Post-scan security boundary for radar.json.
 
-Allows the expected one-time expansion from the clean 200-item baseline, then applies normal
-continuity checks.  It protects accepted A/B evidence across the public 200 + ab_archive, so
-ranking/rebalancing cannot silently delete accepted evidence.
+Allows the clean 200-item baseline to become a cumulative public A/B corpus. After bootstrap,
+ordinary scans may keep the same count or increase it; they must not silently discard accepted
+A/B evidence. Strand C retains its separate expiry policy.
 """
 from __future__ import annotations
 
@@ -115,8 +115,10 @@ def main() -> int:
         history = new.get("scan_history")
         if not isinstance(history, list) or not history:
             raise SystemExit("first successful scan did not create scan_history")
-        if len(items(new, "strand_a")) + len(items(new, "strand_b")) != 200:
-            raise SystemExit("first successful scan did not preserve the 200-item active A+B core")
+        if len(items(new, "strand_a")) + len(items(new, "strand_b")) < 200:
+            raise SystemExit("first successful scan lost part of the 200-item A+B baseline")
+        if items(new, "ab_archive"):
+            raise SystemExit("fresh cumulative run unexpectedly hid accepted A/B rows in ab_archive")
         preserve_accepted_history(old, new, allow_cleanup=False)
         print(
             "Fresh-start output accepted: baseline preserved, fresh marker consumed, "
@@ -140,6 +142,12 @@ def main() -> int:
         or new.get("quality_migration_this_run")
         or (new.get("precision_corpus_cleanup_this_run") and not new.get("active_core_rebalance_this_run"))
     )
+    old_public_ab = len(items(old, "strand_a")) + len(items(old, "strand_b"))
+    new_public_ab = len(items(new, "strand_a")) + len(items(new, "strand_b"))
+    if not cleanup and new_public_ab < old_public_ab:
+        raise SystemExit(f"cumulative public A/B corpus shrank unexpectedly: {old_public_ab} -> {new_public_ab}")
+    if not cleanup and items(new, "ab_archive"):
+        raise SystemExit("cumulative mode unexpectedly moved accepted A/B rows into ab_archive")
     preserve_accepted_history(old, new, allow_cleanup=cleanup)
     print(
         "Live output accepted: incremental state/history present and accepted A/B continuity protected; "

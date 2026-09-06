@@ -36,6 +36,7 @@ import gzip
 import html
 import io
 import json
+import logging
 import math
 import os
 import re
@@ -97,6 +98,13 @@ from bs4 import BeautifulSoup
 from dateutil import parser as dateparser
 from dateutil.relativedelta import relativedelta
 from pypdf import PdfReader
+
+# pypdf can emit pages of non-fatal font/object warnings for malformed publisher PDFs.
+# Keep Actions logs focused on scanner progress; extraction failures are already handled
+# fail-safely by the PDF helpers below.
+logging.getLogger("pypdf").setLevel(logging.ERROR)
+logging.getLogger("pypdf._reader").setLevel(logging.ERROR)
+logging.getLogger("pypdf._page").setLevel(logging.ERROR)
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "radar_config.json"
@@ -338,15 +346,15 @@ DISCOVERY_OVERLAP_DAYS = int(CONFIG.get("discovery_overlap_days", 14))
 MAX_NEW_AB = int(CONFIG.get("max_new_ab_per_scan", 0))
 MAX_C = int(CONFIG.get("max_c_per_scan", 0))
 MAX_CORPUS = int(CONFIG.get("max_corpus_per_strand", 0))
-# v17.20.50 keeps the public reader compact without forgetting anything.  The active
-# A+B corpus is a curated core; displaced accepted records remain in ``ab_archive`` and
-# continue to participate in deduplication.  This is local ranking/state management only:
-# it does not change the page schema consumed by the existing reader.
-ACTIVE_CORE_LIMIT = max(0, int(CONFIG.get("active_core_limit", 200) or 0))
-ACTIVE_CORE_B_SLOTS = max(0, int(CONFIG.get("active_core_strand_b_slots", 10) or 0))
-ACTIVE_CORE_PROFILE_VERSION = str(CONFIG.get("active_core_profile_version", "v17.20.50-curated-core-200"))
+# Public A/B is cumulative. The 200 packaged records are a bootstrap baseline, not a
+# permanent shelf size. ``active_core_limit`` remains as a backwards-compatible config
+# field; 0 means no public cap and is the production policy for this build.
+ACTIVE_CORE_LIMIT = max(0, int(CONFIG.get("active_core_limit", 0) or 0))
+ACTIVE_CORE_B_SLOTS = max(0, int(CONFIG.get("active_core_strand_b_slots", 0) or 0))
+ACTIVE_CORE_PROFILE_VERSION = str(CONFIG.get("active_core_profile_version", "v17.21.0-cumulative-public-ab"))
 AB_ARCHIVE_KEY = "ab_archive"
 FRESH_REPOSITORY_SEED_VERSION = "v1"
+FRESH_BASELINE_AB_COUNT = max(1, int(CONFIG.get("fresh_baseline_ab_count", 200) or 200))
 
 
 def is_fresh_repository_seed(data: Any) -> bool:
@@ -377,7 +385,7 @@ def is_fresh_repository_seed(data: Any) -> bool:
     b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
     archive = data.get(AB_ARCHIVE_KEY) if isinstance(data.get(AB_ARCHIVE_KEY), list) else []
     c = data.get("strand_c") if isinstance(data.get("strand_c"), list) else []
-    if ACTIVE_CORE_LIMIT <= 0 or len(a) + len(b) != ACTIVE_CORE_LIMIT:
+    if len(a) + len(b) != FRESH_BASELINE_AB_COUNT:
         return False
     if archive or c:
         return False
@@ -426,6 +434,16 @@ SESSION.headers.update({
 # fully anonymous operation when it is absent. Never persist or log the key.
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
+RADAR_DIAGNOSTIC_RUN = os.environ.get("RADAR_DIAGNOSTIC_RUN", "").strip().lower() in {"1", "true", "yes", "on"}
+
+def _pdf_page_cap() -> int:
+    """Keep the first fresh diagnostic representative but bounded.
+
+    Production still reads up to 55 pages. The five-minute bootstrap reads enough front
+    matter to exercise PDF/date/admission code without letting one malformed long PDF
+    consume several minutes after its source-family deadline.
+    """
+    return 12 if RADAR_DIAGNOSTIC_RUN else 55
 # Every OpenAlex path shares this counter in keyless mode. V17.20.40 capped only the
 # primary query plan, so exact-author/curator/fallback calls could still burn through the
 # anonymous daily allowance later in the same scan. The request-layer cap closes that leak.
@@ -1000,8 +1018,9 @@ def known_sets_from_previous(previous: dict[str, Any]) -> tuple[set[str], set[st
     ab_doi_titles: set[str] = set()
     ab_links: set[str] = set()
     sig_ids: set[str] = set()
-    # Active records and archived accepted records are one deduplication memory.  Moving
-    # an item out of the 200-row reader core must never let a later scan call it NEW again.
+    # Public A/B and any legacy archived accepted records are one deduplication memory.
+    # Legacy archive rows may be restored to the cumulative public corpus and must never
+    # be called NEW merely because the storage policy changed.
     ab_collections = []
     for strand in ("strand_a", "strand_b"):
         rows = previous.get(strand, []) if isinstance(previous.get(strand), list) else []
@@ -8570,7 +8589,7 @@ def jsonld_objects(obj: Any):
             yield from jsonld_objects(v)
 
 
-def _pdf_payload(url: str, response: requests.Response | None = None) -> tuple[str, int, dict[str, Any]]:
+def _pdf_payload(url: str, response: requests.Response | None = None, stage_deadline: float | None = None) -> tuple[str, int, dict[str, Any]]:
     """Fetch/extract a bounded PDF once and return text plus metadata."""
     if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
         return "", 0, {}
@@ -8580,7 +8599,11 @@ def _pdf_payload(url: str, response: requests.Response | None = None) -> tuple[s
             return "", 0, {}
         reader = PdfReader(io.BytesIO(r.content))
         texts = []
-        for page in reader.pages[:55]:
+        for page in reader.pages[:_pdf_page_cap()]:
+            # Do not let a PDF that started just before a deadline keep the institutional
+            # stage alive for minutes. This is allocation only; a later rotation can retry.
+            if stage_deadline_reached(stage_deadline, 0) or total_budget_remaining() <= 12:
+                break
             try:
                 texts.append(page.extract_text() or "")
             except Exception:
@@ -8598,8 +8621,8 @@ def _pdf_payload(url: str, response: requests.Response | None = None) -> tuple[s
         return "", 0, {}
 
 
-def pdf_text(url: str) -> tuple[str, int]:
-    txt, words, _meta = _pdf_payload(url)
+def pdf_text(url: str, stage_deadline: float | None = None) -> tuple[str, int]:
+    txt, words, _meta = _pdf_payload(url, stage_deadline=stage_deadline)
     return txt, words
 
 
@@ -9048,7 +9071,7 @@ def parse_institution_pdf(
     if _known_institution_url_should_skip(url, fingerprint):
         _diag_inc("institution_reject_known_before_fetch")
         return None
-    body, word_count, meta = _pdf_payload(url, response=response)
+    body, word_count, meta = _pdf_payload(url, response=response, stage_deadline=stage_deadline)
     if not body or word_count < 100:
         _diag_inc("institution_reject_fetch_or_nonhtml")
         return None
@@ -9273,7 +9296,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     word_count = len(body.split())
     pdf_url = primary_pdf_url
     if pdf_url and word_count < 2500:
-        ptxt, pwords = pdf_text(pdf_url)
+        ptxt, pwords = pdf_text(pdf_url, stage_deadline)
         if pwords > word_count and _pdf_text_matches_document(title, ptxt):
             body, word_count = ptxt, pwords
             # If the linked PDF is the evidence body, its own publication date outranks a
@@ -11302,7 +11325,7 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
     rec, _ = _sanitize_saved_radar(recovered)
     out = dict(cur)
 
-    archive_aware = bool(cur.get("active_core_profile_version") or cur.get(AB_ARCHIVE_KEY))
+    archive_aware = bool(ACTIVE_CORE_LIMIT > 0 and (cur.get("active_core_profile_version") or cur.get(AB_ARCHIVE_KEY)))
     if archive_aware:
         # A pre-upload Git snapshot can still contain the old 624-row active corpus.  Do
         # not let recovery undo the curated-core reset.  Current active rows stay active;
@@ -11356,10 +11379,21 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
             archive_map[key] = saved
         out[AB_ARCHIVE_KEY] = list(archive_map.values())
     else:
+        # Cumulative-public mode.  Merge active rows plus any archive rows left by an
+        # older capped build back into their original public strand.  This lets a code
+        # upgrade remove the 200-item shelf without losing previously accepted evidence.
         for strand in ("strand_a", "strand_b"):
+            label = "A" if strand == "strand_a" else "B"
             merged: dict[str, dict[str, Any]] = {}
+            sources: list[dict[str, Any]] = []
+            sources.extend(rec.get(strand, []) if isinstance(rec.get(strand), list) else [])
+            sources.extend(cur.get(strand, []) if isinstance(cur.get(strand), list) else [])
+            for snapshot in (rec, cur):
+                for archived_item in snapshot.get(AB_ARCHIVE_KEY, []) if isinstance(snapshot.get(AB_ARCHIVE_KEY), list) else []:
+                    if isinstance(archived_item, dict) and _core_strand_label(archived_item) == label:
+                        sources.append(archived_item)
             # Recovered first, current second so current copy wins on rediscovery.
-            for item in rec.get(strand, []) + cur.get(strand, []):
+            for item in sources:
                 if not isinstance(item, dict):
                     continue
                 if institutional_container_page(
@@ -11379,9 +11413,12 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
                 if not key or key == "title:":
                     continue
                 saved = dict(item)
+                saved.pop("archived_from_strand", None)
+                saved["strand"] = label
                 saved["new_this_scan"] = False
                 merged[key] = saved
             out[strand] = list(merged.values())
+        out[AB_ARCHIVE_KEY] = []
 
     merged_c: dict[str, dict[str, Any]] = {}
     for item in rec.get("strand_c", []) + cur.get("strand_c", []):
@@ -11483,8 +11520,9 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
 
         if is_fresh_repository_seed(clean):
             print(
-                "Fresh repository baseline detected: keeping the packaged 200-item active core, "
-                "starting scanner state at zero, and intentionally ignoring pre-seed Git radar history.",
+                "Fresh repository baseline detected: keeping the packaged 200-item starting corpus, "
+                "starting scanner state at zero, and intentionally ignoring pre-seed Git radar history. "
+                "Accepted new A/B evidence will accumulate publicly above 200.",
                 flush=True,
             )
             return clean
@@ -12144,9 +12182,48 @@ def rebalance_active_core(
     local curation must remain cheap.
     """
     if ACTIVE_CORE_LIMIT <= 0:
-        return strand_a, strand_b, list(prior_archive or []), {
-            "active_limit": 0, "active_a": len(strand_a), "active_b": len(strand_b),
-            "archived": len(prior_archive or []), "eligible": len(strand_a) + len(strand_b),
+        # Cumulative mode: there is no scarce public shelf.  If this code is introduced
+        # over a repository produced by the old 200-item curation model, fold every
+        # previously accepted archive row back into its public A/B strand exactly once.
+        # Those rows are established evidence, so they are not marked NEW merely because
+        # the storage policy changed.
+        merged_a: dict[str, dict[str, Any]] = {}
+        merged_b: dict[str, dict[str, Any]] = {}
+        for label, rows, target in (("A", strand_a, merged_a), ("B", strand_b, merged_b)):
+            for raw in rows if isinstance(rows, list) else []:
+                if not isinstance(raw, dict):
+                    continue
+                saved = dict(raw)
+                saved.pop("archived_from_strand", None)
+                saved["strand"] = label
+                key = stable_item_identity(saved.get("title", ""), saved.get("link", ""))
+                if key and key != "title:":
+                    target[key] = saved
+        restored = 0
+        for raw in prior_archive or []:
+            if not isinstance(raw, dict):
+                continue
+            saved = dict(raw)
+            label = _core_strand_label(saved)
+            saved.pop("archived_from_strand", None)
+            saved["strand"] = label
+            saved["new_this_scan"] = False
+            key = stable_item_identity(saved.get("title", ""), saved.get("link", ""))
+            if not key or key == "title:":
+                continue
+            target = merged_b if label == "B" else merged_a
+            if key not in target:
+                target[key] = saved
+                restored += 1
+        public_a = list(merged_a.values())
+        public_b = list(merged_b.values())
+        public_a.sort(key=lambda item: curated_core_sort_key(item, "A"))
+        public_b.sort(key=lambda item: curated_core_sort_key(item, "B"))
+        return public_a, public_b, [], {
+            "active_limit": 0, "active_a": len(public_a), "active_b": len(public_b),
+            "active_total": len(public_a) + len(public_b), "archived": 0,
+            "accepted_history_total": len(public_a) + len(public_b),
+            "eligible": len(public_a) + len(public_b), "restored_from_legacy_archive": restored,
         }
 
     combined: dict[str, tuple[dict[str, Any], str, bool]] = {}
@@ -13535,7 +13612,9 @@ def _linked_pdf_candidate(url: str, label: str, stage_deadline: float | None = N
             return None
         reader = PdfReader(io.BytesIO(r.content))
         texts = []
-        for page in reader.pages[:55]:
+        for page in reader.pages[:_pdf_page_cap()]:
+            if stage_deadline_reached(stage_deadline, 0) or total_budget_remaining() <= 12:
+                break
             try:
                 texts.append(page.extract_text() or "")
             except Exception:
@@ -14566,6 +14645,18 @@ def main() -> int:
             ("c_floor_final_reserve_seconds", 8),
         ):
             _scale_time_key(key, minimum)
+
+    if RADAR_DIAGNOSTIC_RUN:
+        # The first five-minute run is a systems diagnostic, not a full-coverage census.
+        # Keep every source family/admission path active, but bound the heaviest fan-out
+        # so a large sitemap or malformed PDF cannot turn a five-minute check into a
+        # twenty-minute run. These values are in-memory only and production is untouched.
+        CONFIG["institution_pages_per_domain"] = min(int(CONFIG.get("institution_pages_per_domain", 14) or 14), 4)
+        CONFIG["institution_pages_per_domain_bootstrap"] = min(int(CONFIG.get("institution_pages_per_domain_bootstrap", 14) or 14), 4)
+        CONFIG["institution_max_pages"] = min(int(CONFIG.get("institution_max_pages", 1800) or 1800), 160)
+        CONFIG["institution_max_pages_bootstrap"] = min(int(CONFIG.get("institution_max_pages_bootstrap", 2000) or 2000), 160)
+        CONFIG["institution_page_timeout_seconds"] = min(int(CONFIG.get("institution_page_timeout_seconds", 12) or 12), 7)
+        CONFIG["pdf_timeout_seconds"] = min(int(CONFIG.get("pdf_timeout_seconds", 14) or 14), 7)
 
     SCAN_DEADLINE_MONO = time.monotonic() + budget_seconds
     # Protect a real tail of the same GitHub run for anti-low-hanging-fruit
@@ -16812,11 +16903,18 @@ def main() -> int:
     # strand_a/strand_b.  Mark the run as cleanup-compatible *after* the scanner's own
     # stricter active+archive preservation invariant has passed.
     active_core_save_compat = bool(ACTIVE_CORE_LIMIT > 0)
-    log_progress(
-        f"Curated active core: {active_core_stats.get('active_total', len(strand_a) + len(strand_b))} active "
-        f"(A={len(strand_a)}, B={len(strand_b)}), {len(ab_archive)} archived accepted A/B record(s); "
-        "archive remains part of dedupe memory"
-    )
+    if ACTIVE_CORE_LIMIT > 0:
+        log_progress(
+            f"Curated active core: {active_core_stats.get('active_total', len(strand_a) + len(strand_b))} active "
+            f"(A={len(strand_a)}, B={len(strand_b)}), {len(ab_archive)} archived accepted A/B record(s)"
+        )
+    else:
+        restored = int(active_core_stats.get("restored_from_legacy_archive", 0) or 0)
+        log_progress(
+            f"Cumulative public A/B corpus: {len(strand_a) + len(strand_b)} total "
+            f"(A={len(strand_a)}, B={len(strand_b)}); no 200-item cap"
+            + (f"; restored {restored} accepted legacy archive row(s) to the public corpus" if restored else "")
+        )
     if expired_a_after_merge or expired_b_after_merge:
         log_progress(
             f"Two-tier retention after merge: removed A={expired_a_after_merge}, B={expired_b_after_merge}; "
@@ -16953,6 +17051,11 @@ def main() -> int:
 
     previous_a_ids = {identity(internalize_previous(x)) for x in prev_a if isinstance(x, dict)}
     previous_b_ids = {identity(internalize_previous(x)) for x in prev_b if isinstance(x, dict)}
+    previous_archive_ids = {
+        identity(internalize_previous(x))
+        for x in (previous.get(AB_ARCHIVE_KEY, []) if isinstance(previous.get(AB_ARCHIVE_KEY), list) else [])
+        if isinstance(x, dict)
+    }
     new_a_count = sum(1 for x in strand_a if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_a_ids)
     new_b_count = sum(1 for x in strand_b if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids)
     new_a_matrix_placed = sum(
@@ -16963,7 +17066,7 @@ def main() -> int:
         1 for x in strand_b
         if x.get("new_this_scan") and identity(internalize_previous(x)) not in previous_b_ids and clean_text(x.get("matrix_auto_cell"))
     )
-    new_ab_unique_retained = new_ab_unique_count(strand_a, strand_b, previous_a_ids | previous_b_ids)
+    new_ab_unique_retained = new_ab_unique_count(strand_a, strand_b, previous_a_ids | previous_b_ids | previous_archive_ids)
     new_c_count = sum(1 for x in strand_c if x.get("new_this_scan"))
     if min_new_c > 0 and new_c_count < min_new_c:
         print(
@@ -16995,9 +17098,8 @@ def main() -> int:
     if overall_budget_hit:
         warnings.append("Overall scan runtime budget reached; queued work was skipped safely and persisted cursors prevent restarting from query 1")
 
-    # Curated-core operation is an incremental steady state, not a migration campaign.
-    # Retire any stale family-backfill flags inherited from older builds while preserving
-    # the useful rotation/depth cursors themselves.
+    # A capped-core compatibility mode can retire stale family-backfill flags. The normal
+    # cumulative build leaves discovery/backfill state governed by the ordinary rotations.
     if ACTIVE_CORE_LIMIT > 0:
         for _family in ("openalex", "crossref_broad", "crossref_priority", "institutions"):
             state.setdefault("backfill", {})[_family] = True

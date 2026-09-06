@@ -3610,8 +3610,8 @@
     "Industry and Innovation"
   ],
   "scan_allocation_policy": "Normal scans are incremental with a 14-day overlap. Four-month scholarly depth is bounded to rotating evidence queries, priority-journal depth, citation adjacency and highest-merit recovery; migration/profile changes must not reset the whole crawler.",
-  "active_core_limit": 200,
-  "active_core_strand_b_slots": 10,
-  "active_core_profile_version": "v17.20.50-curated-core-200",
-  "active_core_policy": "Keep 200 highest-value accepted A/B records active (190 A / 10 B when available); preserve every displaced accepted record in ab_archive for dedupe and future re-ranking. This is curation only, never an admission shortcut."
+  "active_core_limit": 0,
+  "active_core_strand_b_slots": 0,
+  "active_core_profile_version": "v17.21.0-cumulative-public-ab",
+  "active_core_policy": "The packaged 200 A/B records are the starting baseline only. Every newly accepted A/B record remains in the public strand cumulatively; there is no 200-item replacement cap. Deduplication, admission, integrity and explicit precision cleanups still apply."
 }
