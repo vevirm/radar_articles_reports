@@ -17,11 +17,11 @@
   <section class="method"><details><summary>How to read the Matrix</summary><div class="method-body"><p>Each finding sits where the change happens and by whether it raises or lowers European control and capability.</p></div></details></section>
 </main>
 <footer><div class="wrap">R&amp;I × Geopolitics Radar · Matrix</div></footer>
-<script src="../briefing/insights.js?v=17.20.17"></script><script src="../reader_style.js?v=19.0"></script><script src="frontier.js?v=19.0"></script>
+<script src="../briefing/insights.js?v=22.2"></script><script src="../reader_style.js?v=22.2"></script><script src="frontier.js?v=22.2"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function fmtDate(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
-function cap100(v){let s=(globalThis.RadarInsights?.matrixText?.(v)||String(v||'')).replace(/\s+/g,' ').trim();if(s.length<=100)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>97)break;out=n}return (out||s.slice(0,97)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').trim()+'…'}
+function cap100(v){let s=(globalThis.RadarInsights?.matrixText?.(v)||String(v||'')).replace(/\s+/g,' ').trim();if(s.length<=100)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>97)break;out=n}out=(out||s.slice(0,96)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').replace(/[,:;—–-]+$/,'').trim();if(out&&!/[.!?)]$/.test(out))out+='.';return out}
 function claimText(x){return (globalThis.RadarReaderStyle?.matrixPair?.(x)?.line)||cap100(globalThis.SovereigntyFrontier?.shortBullet?.(x)||x?.coreMessage||x?.title||'Qualified Matrix finding')}
 function metaText(x){return [x?.source,fmtDate(x?.date),x?.itemType].filter(Boolean).join(' · ')}
 const ROW_DISPLAY={knowledge:['People & knowledge','Talent, skills and knowledge flows.'],infrastructure:['Tools & facilities','Compute, data, chips, materials and facilities.'],conversion:['Firms & growth','Turning research into products, firms and scale.'],rules:['Rules & decisions','Funding, standards, security and decision-making.']};

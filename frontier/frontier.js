@@ -873,7 +873,7 @@
       if(q.length>100){
         let out='';
         for(const w of q.split(/\s+/)){const next=out?`${out} ${w}`:w;if(next.length>97)break;out=next}
-        q=(out||q.slice(0,97)).replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim()+ '…';
+        q=(out||q.slice(0,97)).replace(/\b(?:and|or|of|for|to|in|on|with|through|the|a|an)$/i,'').trim();
       }
       return q;
     };

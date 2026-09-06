@@ -1056,18 +1056,19 @@
     const bibliographic=norm([title,x?.bibliographicTitle,x?.core_message,x?.coreMessage,what].join(' '));
     const primary=norm([title,x?.bibliographicTitle,what,x?.core_message,x?.coreMessage].join(' '));
     const mechanism=(()=>{
-      if(/circular economy|resource efficiency|recycl|secondary raw material/.test(bibliographic)) return 'Circular-economy capability matters because reuse and substitution can reduce Europe’s exposure to imported materials and industrial inputs.';
-      if(/cbdc|central bank digital|digital euro|monetary infrastructure|prudential policy/.test(bibliographic)) return 'Digital monetary infrastructure matters because technical standards, cyber resilience and governance determine who controls critical payment rails.';
+      if(/circular economy|resource efficiency|recycl|secondary raw material/.test(bibliographic)) return 'Reuse and substitution can reduce Europe’s exposure to imported materials and vulnerable industrial inputs.';
+      if(/cbdc|central bank digital|digital euro|monetary infrastructure|prudential policy/.test(bibliographic)) return 'Technical standards, cyber resilience and governance determine who controls critical European payment infrastructure.';
       if(String(x?.strand||'').toUpperCase()==='B'||/foresight|horizon scan|weak signal|scenario planning|backcasting/.test(primary)){
         if(/weak signal/.test(primary)) return 'Weak-signal methods matter because they can surface emerging strategic change before it becomes an established trend.';
-        if(/horizon scan/.test(primary)) return 'Horizon scanning matters because it can connect early evidence to emerging risks before policy choices harden.';
+        if(/horizon scan/.test(primary)) return 'Horizon scanning can connect early evidence to emerging risks before policy choices become difficult to reverse.';
         if(/scenario/.test(primary)) return 'Scenario methods matter because they let decision-makers test R&I choices against several plausible strategic futures.';
-        if(/backcasting/.test(primary)) return 'Backcasting matters because it links a desired long-term R&I position to decisions that must be taken earlier.';
+        if(/backcasting/.test(primary)) return 'Backcasting links a desired long-term research position to decisions that must be taken earlier.';
         return 'Foresight methods matter because they make uncertain strategic change testable before it becomes a settled trend.';
       }
       if(/china|chinese/.test(primary)&&/technology|innovation|research|science/.test(primary)) return 'EU–China technology ties matter because de-risking can narrow collaboration while leaving asymmetric dependencies in place.';
-      if(/itu ai ml challenge|application inference from packet flows/.test(primary)) return 'The ITU challenge matters because shared AI/ML benchmarks can shape methods and standards for network intelligence.';
-      if(/high performance computing|hpc|eurocc|castiel/.test(primary)) return 'HPC coordination matters because shared competence centres spread access, skills and know-how across Europe’s compute network.';
+      if(/itu ai ml challenge|application inference from packet flows/.test(primary)) return 'Shared international benchmarks can influence European methods and standards for artificial-intelligence network analysis.';
+      if(/eurocc|castiel/.test(primary)) return 'National competence centres give researchers local routes to European supercomputers, training and specialist support.';
+      if(/high performance computing|hpc/.test(primary)) return 'Shared computing centres give European researchers wider access to supercomputers, training and specialist support.';
       if(/research.?security|knowledge.?security|foreign interference/.test(primary)) return 'Research-security rules change who European researchers can work with and what knowledge can cross borders.';
       if(/artificial intelligence| ai |ai-|ai4s|machine learning/.test(` ${all} `)) return 'AI policy, capital and infrastructure affect whether European researchers and firms can build and govern frontier capability.';
       if(/patent|intellectual property|\bip\b/.test(primary)) return 'IP rules affect who captures value from European research and how technology can be transferred, licensed or reused.';
@@ -1079,37 +1080,37 @@
       if(/compute|supercomput|cloud|ai factory|frontier ai|foundation model/.test(primary)) return 'Compute access determines whether European teams can train and deploy frontier AI without relying on foreign providers.';
       if(/quantum/.test(primary)) return 'Quantum capability affects whether Europe can keep strategic research, infrastructure and industrial know-how at the frontier.';
       if(/critical raw material|critical mineral|rare earth|battery|advanced material/.test(primary)) return 'Strategic-material access affects whether European clean-tech and advanced manufacturing can scale without supply disruption.';
-      if(/circular economy|resource efficiency|recycl|secondary raw material/.test(primary)) return 'Circular-economy capability matters because reuse and substitution can reduce Europe’s exposure to imported materials and industrial inputs.';
-      if(/cbdc|central bank digital|digital euro|monetary infrastructure|prudential policy/.test(primary)) return 'Digital monetary infrastructure matters because technical standards, cyber resilience and governance determine who controls critical payment rails.';
+      if(/circular economy|resource efficiency|recycl|secondary raw material/.test(primary)) return 'Reuse and substitution can reduce Europe’s exposure to imported materials and vulnerable industrial inputs.';
+      if(/cbdc|central bank digital|digital euro|monetary infrastructure|prudential policy/.test(primary)) return 'Technical standards, cyber resilience and governance determine who controls critical European payment infrastructure.';
       if(/venture capital|scale-up|scaleup|startup|start-up|late-stage|listing|headquarter/.test(primary)) return 'Scale-up finance affects whether European firms keep headquarters, IP, talent and high-value jobs in Europe.';
       if(/dual.?use|defen[cs]e|military/.test(primary)) return 'Dual-use policy redirects R&I funding and can add security, export-control and openness constraints.';
       if(/horizon europe|fp10|framework programme|erc|msca|eic|research funding|funding programme/.test(primary)) return 'Funding and eligibility rules determine which European capabilities and international research partnerships can be sustained.';
       if(/science diplomacy|research collaboration|scientific collaboration|international cooperation|cooperation|partnership/.test(primary)) return 'Partnership choices determine which research networks, facilities, expertise and markets remain accessible to Europe.';
-      if(/economic security|reactive assertiveness|de-risking|derisking/.test(primary)) return 'Economic-security policy matters because screening, controls and retaliation can protect strategic capability while narrowing access to partners and markets.';
+      if(/economic security|reactive assertiveness|de-risking|derisking/.test(primary)) return 'Screening and controls can protect strategic capability while narrowing European access to partners, knowledge and markets.';
       if(/productivity gap|r&d and equity|equity finance|r&d investment/.test(primary)) return 'Productivity gaps matter because weak R&D investment and shallow growth capital make it harder for European firms to commercialise and scale research.';
       if(/standard|regulat|governance|directive|liability|rule-setting|rule setting|export control|screening/.test(primary)) return 'Rules and standards determine whether Europe shapes technology markets or adapts to regimes set elsewhere.';
-      if(/radio astronomy|astronomy|telescope|observatory/.test(primary)) return 'International astronomy infrastructure matters because European researchers depend on access to facilities, spectrum, networks and partners outside Europe.';
+      if(/radio astronomy|astronomy|telescope|observatory/.test(primary)) return 'European astronomy depends on continued access to international facilities, spectrum, research networks and external partners.';
       if(/data space|interoperab|research infrastructure|infrastructure|federat|data reuse/.test(primary)) return 'Infrastructure and data rules determine whether European researchers can access and reuse shared assets across borders.';
       if(/cyber|digital sovereignty|digital identity|platform|telecom|5g|6g/.test(primary)) return 'Digital and cyber choices affect Europe’s control over research data, infrastructure and critical technology services.';
       if(/industrial policy|industrial|industry|manufactur|productivity|commerciali|innovation ecosystem|innovation capacity|innovation policy|procurement|electric vehicle/.test(primary)) return 'Industrial-policy choices affect whether European research turns into domestic production, scale and strategic capability.';
       if(/biotech|pharma|health|medical|biobank/.test(primary)) return 'Health and biotech rules affect cross-border research, technology transfer and access to data, trials and markets.';
       if(/energy|climate|clean tech|cleantech|renewable|nuclear|hydrogen/.test(primary)) return 'Energy and clean-tech capability affects the cost and resilience of Europe’s research and industrial transition.';
       if(/geoeconomic|geoeconom/.test(primary)) return 'Geoeconomic tools matter because screening, subsidies and trade measures only create leverage when EU institutions and member states can act coherently.';
-      if(/polish universit|neo-nationalism|higher education.*poland/.test(primary)) return 'University policy matters because geopolitical mobilisation can change institutional autonomy, international openness and the direction of public research.';
-      if(/fintech|digital transition.*eastern europe/.test(primary)) return 'Digital-finance capability matters because geopolitical shocks can change regional access to capital, infrastructure and innovation investment.';
+      if(/polish universit|neo-nationalism|higher education.*poland/.test(primary)) return 'Geopolitical mobilisation can change university autonomy, international openness and the direction of publicly funded research.';
+      if(/fintech|digital transition.*eastern europe/.test(primary)) return 'Geopolitical shocks can change regional access to capital, digital infrastructure and innovation investment.';
       if(/draghi|central europe.*competitiveness/.test(primary)) return 'Competitiveness gaps matter because weak innovation investment and fragmented implementation can keep strategic-autonomy policy from producing scale.';
       if(/three seas|eurasian hinge/.test(primary)) return 'Cross-border infrastructure initiatives matter because they can redirect research, technology and investment links between Europe and neighbouring regions.';
       if(/diaspora/.test(primary)) return 'Scientific diasporas matter because they move expertise, collaboration and science-diplomacy links across national research systems.';
-      if(/green supply chain/.test(primary)) return 'Green supply-chain performance matters because innovation, finance and institutional quality affect how resilient European production is to external shocks.';
-      if(/arctic.*technolog|technological capabilities.*arctic/.test(primary)) return 'Arctic technology capability matters because specialised scientific and industrial know-how can translate into strategic influence and alliance value.';
-      if(/hrm knowledge transfer|knowledge transfer.*multinational/.test(primary)) return 'Cross-border knowledge transfer matters because multinational firms are a channel through which skills and organisational capability spread across European innovation systems.';
+      if(/green supply chain/.test(primary)) return 'Innovation, finance and institutional quality determine how well European production absorbs external supply shocks.';
+      if(/arctic.*technolog|technological capabilities.*arctic/.test(primary)) return 'Specialised Arctic know-how can translate European scientific capability into strategic influence and alliance value.';
+      if(/hrm knowledge transfer|knowledge transfer.*multinational/.test(primary)) return 'Multinational firms can spread skills and organisational capability across European innovation systems through cross-border knowledge transfer.';
       if(/intellectual services.*ukraine|ukraine.*export model/.test(primary)) return 'Knowledge-intensive exports matter because human capital, R&D services and IP commercialisation determine how much innovation value is retained in the region.';
-      if(/strategic resilience.*integration bloc|integration blocs.*fragmentation/.test(primary)) return 'Bloc resilience matters because exposure to sanctions and value-chain shocks determines how reliably research and technology capabilities can be supplied.';
+      if(/strategic resilience.*integration bloc|integration blocs.*fragmentation/.test(primary)) return 'Exposure to sanctions and value-chain shocks determines how reliably research and technology capabilities can be supplied.';
       return 'European R&I is affected through the paper’s evidence on capability, access, cost, coordination or external dependence.';
     })();
     const rawTag=repairOcr(title||what||'').replace(/\s+[–—-]\s+[^–—-]{2,40}$/,'').trim();
     let tag=rawTag;
-    if(tag.length>58){tag=tag.slice(0,59).replace(/\s+\S*$/,'').trim()+'…';}
+    if(tag.length>58){tag=tag.slice(0,59).replace(/\s+\S*$/,'').trim();}
     if(tag && norm(tag)!==whatNorm){
       return `${mechanism.replace(/[.!?]+$/,'')}; in this paper, that mechanism is evidenced through “${tag}”.`;
     }

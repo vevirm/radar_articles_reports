@@ -148,8 +148,8 @@
   </div>
 
 <script src="../reader_rank.js?v=17.20.19"></script>
-<script src="../briefing/insights.js?v=17.20.19"></script>
-<script src="../reader_style.js?v=19.0"></script>
+<script src="../briefing/insights.js?v=22.2"></script>
+<script src="../reader_style.js?v=22.2"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",recentOnly:false,newOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,newStart:0,newEnd:0};
@@ -174,7 +174,7 @@ function hasLetterSpacing(v){
   const s=cleanText(v);
   return /\b(?:[A-Za-z]\s+){2,}[A-Za-z]\b/.test(s)||/\b[A-Z]\s+&\s+[A-Z]\b/.test(s);
 }
-function short(v,n=220){const s=cleanText(v);return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s}
+function short(v,n=220){const s=cleanText(v);if(s.length<=n)return s;const first=(s.match(/^.*?[.!?](?:\s|$)/)||[])[0]?.trim();if(first&&first.length<=n)return first;let out=s.slice(0,n).replace(/\s+\S*$/,'').replace(/[,:;—–-]+$/,'').trim();if(out&&!/[.!?)]$/.test(out))out+='.';return out}
 function complete120(v){
   const s=repairLetterSpacing(v).replace(/^Abstract\s*/i,'').replace(/\s+([,.;:!?])/g,'$1').trim();
   if(!s||hasLetterSpacing(s))return '';
@@ -281,7 +281,7 @@ function biblio(x,label='Bibliography'){
 }
 function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}</div>`}
 function cardHeading(x){const t=cleanText(x.title||x.headline||'');return t&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false?t:claimText(x)}
-function cap100(v){let s=cleanText(v);if(s.length<=100)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>97)break;out=n}return (out||s.slice(0,97)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').trim()+'…'}
+function cap100(v){let s=cleanText(v);if(s.length<=100)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>96)break;out=n}out=(out||s.slice(0,96)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').replace(/[,:;—–-]+$/,'').trim();if(out&&!/[.!?)]$/.test(out))out+='.';return out}
 function methodPoint(x){const t=cleanText(`${x.title||''} ${x.core_message||''} ${x.summary||''}`).toLowerCase();if(/hybrid foresight/.test(t)&&/expert/.test(t))return 'AI + expert judgement can make horizon scanning iterative.';if(/governance logics.*foresight|foresight functions/.test(t))return 'Choose foresight methods by policy function, horizon and available data.';if(/evidence for the future|robustness.*appropriateness.*inclusivity/.test(t))return 'Robustness, fit and inclusion make foresight more usable as evidence.';if(/multi-agent.*technology intelligence|patents to market signals/.test(t))return 'Multi-agent AI can turn patents and market signals into technology intelligence.';if(/participatory.*scenario/.test(t)||/scenario-building methodology/.test(t))return 'Participatory scenarios connect long-term futures with sector choices.';if(/agentprophet|technology forecasting/.test(t))return 'Source-aware AI agents can forecast emerging technology signals.';if(/analytic hierarchy process|living labs/.test(t))return 'Scenario workshops + AHP can rank options with stakeholders.';if(/field.?topic.?technology|key core technologies/.test(t))return 'Patent mapping can identify key technologies and track their evolution.';const r=globalThis.RadarInsights?.readerPoint?.(x.core_message||x.summary||'',100)||globalThis.RadarInsights?.fastReaderText?.(x.title||'')||x.title||'';return cap100(r)}
 function methodUse(x){const t=cleanText(`${x.relevance_note||''} ${x.title||''} ${x.summary||''}`).toLowerCase();if(/horizon scan/.test(t))return 'Use for systematic early-signal discovery and review.';if(/scenario/.test(t))return 'Use to compare plausible futures and test choices before they lock in.';if(/technology intelligence/.test(t))return 'Use to track technologies, competitors and emerging capability gaps.';if(/forecast/.test(t))return 'Use to structure evidence about where a technology may move next.';if(/foresight/.test(t))return 'Use to connect future uncertainty with current policy decisions.';return 'Use as a reusable method for examining future R&I change.'}
 function signalPoint(x){const raw=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';return cap100(globalThis.RadarInsights?.fastReaderText?.(raw)||raw)}

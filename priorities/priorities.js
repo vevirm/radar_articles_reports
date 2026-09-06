@@ -439,7 +439,7 @@
     const raw=clean(x?.title||x?.coreMessage||'');
     const readable=Insights?.fastReaderText?.(raw)||Insights?.readerPoint?.(raw)||Insights?.completeCoreMessage?.(raw)||raw;
     const text=clean(readable)||'Finding';
-    return text.length>180?text.slice(0,180).replace(/\s+\S*$/,'')+'…':text;
+    return text.length>180?text.slice(0,180).replace(/\s+\S*$/,''):text;
   }
 
   function pathwayText(x){return norm(`${x?.title||''} ${x?.coreMessage||''} ${x?.lensPassage||''} ${x?.abstract||''}`)}
@@ -510,7 +510,7 @@
     if(!raw) return 'Evidence text unavailable.';
     const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');
     const text=clean(first||raw);
-    return text.length>520?text.slice(0,517).replace(/\s+\S*$/,'')+'…':text;
+    return text.length>520?text.slice(0,517).replace(/\s+\S*$/,''):text;
   }
 
   function simpleEvidenceText(x){return clean(x?.title||'')}

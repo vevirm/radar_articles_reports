@@ -22,6 +22,8 @@ const TERMS=[
 ['Frontier compute','Digital infrastructure','Very advanced, large-scale computing used for leading-edge AI and computational science.','Who can access frontier compute increasingly affects who can perform the most demanding research and develop frontier AI systems.'],
 ['Geoeconomics','Geopolitics','The use of economic tools and economic relationships as instruments of geopolitical power or competition.','Trade, investment, subsidies, technology controls and supply dependencies can shape Europe’s R&amp;I choices.'],
 ['Horizon Europe association','EU programmes','An agreement that lets a non-EU country participate in Horizon Europe under negotiated conditions, often with access similar to Member States in many calls.','Association changes who can collaborate and compete for EU research funding.'],
+['High-performance computing (HPC)','Digital infrastructure','Very large-scale computing used for demanding simulations, data analysis and artificial-intelligence research.','Access to high-performance computing affects which European teams can run the most computationally intensive research.'],
+['EuroHPC','Digital infrastructure','The European High Performance Computing Joint Undertaking, which coordinates European supercomputing and related infrastructure.','It pools public investment in computing capacity that individual countries or institutions may struggle to build alone.'],
 ['Intellectual property (IP)','Research and firms','Legal rights over inventions, designs, creative works, software, brands or confidential know-how.','Control of IP can determine who captures value from European research and who may use strategic technologies.'],
 ['Knowledge security','Research security','Protecting sensitive knowledge, data, people and research relationships from unwanted transfer, misuse or coercion.','It is central when openness in science conflicts with security or technology-control concerns.'],
 ['Knowledge valorisation','Research and firms','Turning research results and knowledge into economic, social or public value.','Europe can be strong in research yet weak at converting discoveries into scaled firms, products or public capabilities.'],
@@ -65,6 +67,16 @@ const TERMS=[
 ['Dynamic community detection','Foresight methods','Network methods for identifying communities that form, split or merge through time.','It can reveal changing research or technology collaboration structures before aggregate indicators show the shift.'],
 ['Graph anomaly detection','Foresight methods','Methods for identifying unusual nodes, links or structural changes in a network.','It can flag unexpected collaboration or technology-network changes for later evidence checking.'],
 ['Weak signal','Foresight methods','An early, incomplete indication of change whose significance depends on its relationship to established evidence.','In this Radar, a weak signal is temporary, lasts 60 days and must be anchored to relevant Strand A evidence.'],
+
+['Research and innovation (R&I)','Research system','Research activity together with the processes that turn knowledge into new technologies, services, firms or public capabilities.','The Radar uses R&I as shorthand in technical material; surface pages normally spell the phrase out.'],
+['Research and development (R&D)','Research system','Organised work to create new knowledge or develop substantially improved technologies, products or processes.','R&D spending and capacity are common indicators of how much scientific and technological capability an economy can build.'],
+['Joint Research Centre (JRC)','EU institutions','The European Commission’s in-house science and knowledge service.','JRC research and technical analysis often provide primary evidence for EU technology, innovation, standards and economic-security policy.'],
+['European Research Council (ERC)','EU programmes','The EU programme that funds investigator-led frontier research through competitive grants.','ERC funding and researcher mobility affect where frontier scientific capability is built and retained in Europe.'],
+['European Innovation Council (EIC)','EU programmes','The EU programme that supports high-risk innovation and the scaling of technology-intensive companies.','EIC funding can influence whether European research becomes firms and strategic industrial capability.'],
+['Multiannual Financial Framework (MFF)','EU programmes','The EU’s long-term budget framework, normally covering seven years.','Its allocations constrain how much funding is available for research, technology, infrastructure and other strategic priorities.'],
+['Large language model (LLM)','Artificial intelligence','An artificial-intelligence model trained on large text or multimodal datasets to generate and analyse language.','Access to models, computing power and training data can affect European research capability and dependence on external providers.'],
+['Graphics processing unit (GPU)','Digital infrastructure','A processor designed for highly parallel computation and widely used for artificial-intelligence training and scientific computing.','Supply and access to advanced processors can constrain European computing capacity and frontier artificial-intelligence research.'],
+['Small and medium-sized enterprise (SME)','Firms and finance','A company below EU size thresholds for employees, turnover or balance-sheet total.','Many research-intensive firms begin at this scale, where access to finance, procurement and infrastructure can determine whether they grow.'],
 ['Weaponised interdependence','Geoeconomics','Using control over important networks, technologies, finance or supply chains to monitor, pressure or constrain other actors.','It explains why ordinary economic or research dependencies can become sources of geopolitical power.']
 ].map(([term,category,meaning,why])=>({term,category,meaning,why})).sort((a,b)=>a.term.localeCompare(b.term,'en',{sensitivity:'base'}));
 const ALIASES=[
@@ -96,13 +108,23 @@ const ALIASES=[
   ['semiconductor fab','Semiconductor fab'],['foundry','Foundry'],
   ['spinout','Spin-off / spinout'],['spin-off','Spin-off / spinout'],
   ['valley of death','Valley of death'],['weaponised interdependence','Weaponised interdependence'],
+  ['hpc','High-performance computing (HPC)'],['high-performance computing','High-performance computing (HPC)'],['high performance computing','High-performance computing (HPC)'],['eurohpc','EuroHPC'],
   ['horizon scanning','Horizon scanning'],['weak signal','Weak signal'],['weak signals','Weak signal'],
   ['technology intelligence','Technology intelligence'],['research front','Research front'],
   ['emerging topic detection','Emerging topic detection'],['temporal embeddings','Temporal embeddings'],['temporal embedding','Temporal embeddings'],
   ['dynamic community detection','Dynamic community detection'],['graph anomaly detection','Graph anomaly detection'],['network anomaly detection','Graph anomaly detection'],
   ['citation burst','Citation burst'],['change-point detection','Change-point detection'],['changepoint detection','Change-point detection'],
   ['semantic shift','Semantic shift'],['novelty detection','Novelty detection'],['dynamic topic model','Dynamic topic model'],
-  ['bibliographic coupling','Bibliographic coupling'],['co-citation analysis','Co-citation analysis']
+  ['bibliographic coupling','Bibliographic coupling'],['co-citation analysis','Co-citation analysis'],
+  ['r&i','Research and innovation (R&I)'],['research and innovation','Research and innovation (R&I)'],
+  ['r&d','Research and development (R&D)'],['research and development','Research and development (R&D)'],
+  ['jrc','Joint Research Centre (JRC)'],['joint research centre','Joint Research Centre (JRC)'],
+  ['erc','European Research Council (ERC)'],['european research council','European Research Council (ERC)'],
+  ['eic','European Innovation Council (EIC)'],['european innovation council','European Innovation Council (EIC)'],
+  ['mff','Multiannual Financial Framework (MFF)'],['multiannual financial framework','Multiannual Financial Framework (MFF)'],
+  ['llm','Large language model (LLM)'],['large language model','Large language model (LLM)'],
+  ['gpu','Graphics processing unit (GPU)'],['graphics processing unit','Graphics processing unit (GPU)'],
+  ['sme','Small and medium-sized enterprise (SME)'],['small and medium-sized enterprise','Small and medium-sized enterprise (SME)']
 ];
 const byTerm=new Map(TERMS.map(x=>[x.term.toLowerCase(),x]));
 const aliasRows=ALIASES.map(([alias,term])=>({alias,term:byTerm.get(term.toLowerCase())})).filter(x=>x.term).sort((a,b)=>b.alias.length-a.alias.length);
