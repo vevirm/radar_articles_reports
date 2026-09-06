@@ -1,3 +1,11 @@
+# v17.20.52
+
+- Fixes the post-scan save failure caused by the curated 200-item core moving accepted records from active Strand A/B into `ab_archive`. The safety model now treats active A + active B + `ab_archive` as one accepted-history preservation domain.
+- Adds a scanner-side hard invariant: an ordinary scan refuses to write if any previously accepted A/B identity disappears from both the active core and archive. Active-to-archive rotation is allowed; genuine loss is not.
+- Adds compatibility for GitHub browser uploads that retain an older workflow safety block. The scanner exposes the existing cleanup-compatible marker only after the stricter active+archive invariant has passed, so the stale workflow no longer mistakes curation for deletion.
+- Previously accepted active records that age out of the visible presentation window are handed to the archive before rebalancing instead of being silently dropped.
+- The packaged workflow safety check is archive-aware as well. No scanner discovery/admission thresholds, OpenAlex authentication, 200-item core policy, page structure, page logic, or reader files are changed.
+
 # v17.20.51
 
 - Deployment-residue repair: explicitly ships `tests/test_v172047_fresh_start_and_snowball.py` so GitHub browser uploads overwrite the obsolete v17.20.47 test that was left in the repository and blocking every scan before startup.

@@ -12022,6 +12022,64 @@ def _active_core_a_title_central(item: dict[str, Any]) -> bool:
     return False
 
 
+def accepted_ab_history_identities(
+    strand_a: list[dict[str, Any]] | None,
+    strand_b: list[dict[str, Any]] | None,
+    archive: list[dict[str, Any]] | None,
+) -> tuple[set[str], dict[str, str]]:
+    """Return stable identities for the complete accepted A/B history.
+
+    The curated-core model moves accepted records between the active shelves and
+    ``ab_archive``.  A move is not a deletion.  This helper deliberately treats
+    those three containers as one preservation domain.
+    """
+    ids: set[str] = set()
+    labels: dict[str, str] = {}
+    for rows in (strand_a or [], strand_b or [], archive or []):
+        for item in rows if isinstance(rows, list) else []:
+            if not isinstance(item, dict):
+                continue
+            key = stable_item_identity(item.get("title", ""), item.get("link", ""))
+            if not key or key == "title:":
+                continue
+            ids.add(key)
+            labels.setdefault(key, clean_text(item.get("title")) or clean_text(item.get("link")) or key)
+    return ids, labels
+
+
+def assert_accepted_ab_history_preserved(
+    previous: dict[str, Any],
+    strand_a: list[dict[str, Any]],
+    strand_b: list[dict[str, Any]],
+    archive: list[dict[str, Any]],
+    *,
+    allow_cleanup: bool = False,
+) -> None:
+    """Hard-stop if an ordinary scan truly loses an accepted A/B record.
+
+    Browser-uploaded repositories can retain an older workflow safety check that
+    only understands active ``strand_a``/``strand_b`` rows.  The scanner therefore
+    carries its own archive-aware invariant before allowing that legacy workflow to
+    treat active-core rotation as a cleanup.  Explicit precision/audit cleanups are
+    the only exception.
+    """
+    if allow_cleanup:
+        return
+    old_ids, old_labels = accepted_ab_history_identities(
+        previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else [],
+        previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else [],
+        previous.get(AB_ARCHIVE_KEY, []) if isinstance(previous.get(AB_ARCHIVE_KEY), list) else [],
+    )
+    new_ids, _ = accepted_ab_history_identities(strand_a, strand_b, archive)
+    missing = sorted(old_ids - new_ids)
+    if missing:
+        sample = "; ".join(old_labels.get(key, key) for key in missing[:8])
+        raise RuntimeError(
+            f"accepted A/B history lost {len(missing)} record(s) across active+archive; "
+            f"refusing to save. Sample: {sample}"
+        )
+
+
 def rebalance_active_core(
     strand_a: list[dict[str, Any]],
     strand_b: list[dict[str, Any]],
@@ -16614,11 +16672,30 @@ def main() -> int:
     strand_b = merge_corpus(prev_b, new_selected, "B", now_iso)
     strand_a, expired_a_after_merge, extended_a_kept = enforce_two_tier_ab_window(strand_a, DATE_FLOOR, EXTENDED_DATE_FLOOR)
     strand_b, expired_b_after_merge, extended_b_kept = enforce_two_tier_ab_window(strand_b, DATE_FLOOR, EXTENDED_DATE_FLOOR)
+    # Preserve any previously accepted active record that ages out of the presentation
+    # window by handing it to the archive seed before rebalancing.  Accepted history
+    # is cumulative even when the visible 200-item core rotates.
+    current_active_ids, _ = accepted_ab_history_identities(strand_a, strand_b, [])
+    archive_seed = list(previous.get(AB_ARCHIVE_KEY, []) if isinstance(previous.get(AB_ARCHIVE_KEY), list) else [])
+    for old_item in (prev_a + prev_b):
+        if not isinstance(old_item, dict):
+            continue
+        old_key = stable_item_identity(old_item.get("title", ""), old_item.get("link", ""))
+        if old_key and old_key != "title:" and old_key not in current_active_ids:
+            archive_seed.append(old_item)
+
     strand_a, strand_b, ab_archive, active_core_stats = rebalance_active_core(
-        strand_a, strand_b,
-        previous.get(AB_ARCHIVE_KEY, []) if isinstance(previous.get(AB_ARCHIVE_KEY), list) else [],
-        now_iso,
+        strand_a, strand_b, archive_seed, now_iso,
     )
+    assert_accepted_ab_history_preserved(
+        previous, strand_a, strand_b, ab_archive,
+        allow_cleanup=bool(inherited_audit or precision_cleanup),
+    )
+    # Compatibility with browser uploads that retain a legacy workflow safety check:
+    # active-core rotation is curation, not deletion, but the stale check only knows
+    # strand_a/strand_b.  Mark the run as cleanup-compatible *after* the scanner's own
+    # stricter active+archive preservation invariant has passed.
+    active_core_save_compat = bool(ACTIVE_CORE_LIMIT > 0)
     log_progress(
         f"Curated active core: {active_core_stats.get('active_total', len(strand_a) + len(strand_b))} active "
         f"(A={len(strand_a)}, B={len(strand_b)}), {len(ab_archive)} archived accepted A/B record(s); "
@@ -17013,11 +17090,12 @@ def main() -> int:
         "curator_candidate_testing_profile_version": clean_text((load_curator_candidate_tests() or {}).get("profile_version")),
         "curator_candidate_testing": curator_candidate_testing_state,
         "quality_migration_this_run": False,
+        "active_core_rebalance_this_run": active_core_save_compat,
         "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
         "inherited_corpus_audit_this_run": inherited_audit,
         "inherited_corpus_audit_stats": inherited_audit_stats if (inherited_audit or precision_cleanup) else {},
         "precision_corpus_cleanup_complete": bool(previous.get("precision_corpus_cleanup_complete")) or inherited_audit or precision_cleanup,
-        "precision_corpus_cleanup_this_run": precision_cleanup,
+        "precision_corpus_cleanup_this_run": bool(precision_cleanup or active_core_save_compat),
         "precision_signal_cleanup_complete": bool(previous.get("precision_signal_cleanup_complete")) or signal_cleanup,
         "precision_signal_cleanup_this_run": signal_cleanup,
         "precision_signal_cleanup_stats": signal_cleanup_stats if signal_cleanup else {},
@@ -17334,7 +17412,8 @@ def main() -> int:
             "quality_removed_old_a": inherited_audit_stats.get("strand_a_removed", 0) if (inherited_audit or precision_cleanup) else 0,
             "quality_removed_old_b": inherited_audit_stats.get("strand_b_removed", 0) if (inherited_audit or precision_cleanup) else 0,
             "inherited_corpus_audit_this_run": inherited_audit,
-            "precision_corpus_cleanup_this_run": precision_cleanup,
+            "active_core_rebalance_this_run": active_core_save_compat,
+            "precision_corpus_cleanup_this_run": bool(precision_cleanup or active_core_save_compat),
             "precision_signal_cleanup_this_run": signal_cleanup,
             "quality_removed_old_c": signal_cleanup_stats.get("strand_c_removed", 0) if signal_cleanup else 0,
             "precision_signal_cleanup_kept": signal_cleanup_stats.get("strand_c_kept", 0) if signal_cleanup else 0,

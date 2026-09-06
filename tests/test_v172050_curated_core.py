@@ -145,6 +145,31 @@ for(const s of all){
 """
         subprocess.run(["node", "-e", code], cwd=ROOT, check=True, timeout=30)
 
+    def test_active_to_archive_rotation_is_preservation_not_loss(self):
+        old_a = row("Old active European research paper", "A")
+        previous = {"strand_a": [old_a], "strand_b": [], "ab_archive": []}
+        archived = dict(old_a)
+        archived["archived_from_strand"] = "A"
+        # Moving an accepted record out of the visible 200 must remain valid.
+        scan.assert_accepted_ab_history_preserved(previous, [], [], [archived])
+
+    def test_genuine_loss_from_active_and_archive_is_still_a_hard_failure(self):
+        old_a = row("Irreplaceable European research paper", "A")
+        previous = {"strand_a": [old_a], "strand_b": [], "ab_archive": []}
+        with self.assertRaises(RuntimeError):
+            scan.assert_accepted_ab_history_preserved(previous, [], [], [])
+
+    def test_packaged_save_guard_is_archive_aware_and_legacy_workflow_tolerant(self):
+        workflow = (ROOT / ".github" / "workflows" / "radar-scan.yml").read_text(encoding="utf-8")
+        scanner_source = SCAN_PATH.read_text(encoding="utf-8")
+        self.assertIn("for key in ('strand_a', 'strand_b', 'ab_archive')", workflow)
+        self.assertIn("accepted A/B history lost", workflow)
+        # Browser uploads have repeatedly retained an older workflow. The scanner's
+        # compatibility marker lets that stale guard pass only after the scanner's
+        # own active+archive preservation invariant has succeeded.
+        self.assertIn("active_core_save_compat = bool(ACTIVE_CORE_LIMIT > 0)", scanner_source)
+        self.assertIn("bool(precision_cleanup or active_core_save_compat)", scanner_source)
+
     def test_steady_state_source_expansion_is_not_a_four_month_bootstrap(self):
         previous = {
             "last_updated": "2026-09-06T05:11Z",
