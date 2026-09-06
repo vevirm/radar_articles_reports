@@ -2729,7 +2729,7 @@
   "frontier_gap_empty_news_weight": 2,
   "frontier_gap_deepening_queries_per_wave": 14,
   "frontier_gap_deepening_max_waves": 32,
-  "scan_finalize_reserve_seconds": 75,
+  "scan_finalize_reserve_seconds": 35,
   "weak_signal_followup_every_n_waves": 2,
   "weak_signal_followup_queries_per_wave": 8,
   "weak_signal_followup_max_passes": 3,
@@ -3743,5 +3743,13 @@
   "production_schedule_minute_utc": 17,
   "main_window_months": 6,
   "reader_writing_profile": "what-why-surface-v1",
-  "source_universe_note": "EU-primary and high-merit scholarly/institutional sources rotate by family; source context may broaden retrieval but never weakens A/B admission."
+  "source_universe_note": "EU-primary and high-merit scholarly/institutional sources rotate by family; source context may broaden retrieval but never weakens A/B admission.",
+  "full_budget_continuation_enabled": true,
+  "full_budget_continuation_stage_seconds": 75,
+  "full_budget_continuation_queries_per_wave": 8,
+  "full_budget_continuation_institution_sources_per_wave": 10,
+  "full_budget_continuation_news_queries_per_wave": 8,
+  "full_budget_continuation_max_waves": 300,
+  "full_budget_zero_progress_cooldown_seconds": 12,
+  "full_budget_min_wave_seconds": 5
 }

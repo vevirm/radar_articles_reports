@@ -31,6 +31,15 @@ class CurrentRepositoryContractTests(unittest.TestCase):
     def test_main_budget_is_twenty_four_minutes(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
         self.assertEqual(int(cfg.get('scan_budget_seconds', 0)), 1440)
+        self.assertTrue(bool(cfg.get('full_budget_continuation_enabled')))
+        self.assertLessEqual(int(cfg.get('scan_finalize_reserve_seconds', 999)), 45)
+
+    def test_main_spends_early_finish_time_on_more_research(self):
+        source = SCAN_PATH.read_text(encoding='utf-8')
+        self.assertIn('Full-budget continuation', source)
+        self.assertIn('full_budget_continuation', source)
+        self.assertIn('oa_unavailable = bool(oa_failed or oa_rate_limited)', source)
+        self.assertIn('cr_unavailable = bool(cr_failed or cr_rate_limited)', source)
 
     def test_legacy_hourly_workflow_is_mapped_to_four_hour_slots(self):
         text = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')

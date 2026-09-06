@@ -1,8 +1,8 @@
 R&I GEOPOLITICS RADAR — FULL REPOSITORY
 
-1. Replace the repository with the complete contents of this bundle.
+1. Replace the repository with the complete contents of this bundle. Do not merge this bundle over an old file tree: GitHub keeps files that are absent from an upload, which can leave stale tests or an old hidden workflow active.
 2. Keep repository secret OPENALEX_API_KEY configured in GitHub Actions.
-3. Main Radar is scheduled every four hours at minute 17 and always uses a 24-minute research budget.
+3. Main Radar is scheduled every four hours at minute 17 and uses the full 24-minute research allocation: if ordinary queues finish early, remaining time is rotated into different healthy source/query lanes rather than ending the scan.
 4. Historical is scheduled every four hours at minute 57, 40 minutes after Main, and uses a 10-minute budget.
 5. Main and Historical share one concurrency slot. They never research simultaneously. Main has priority; Historical waits or is pre-empted if necessary.
 6. Main A/B is cumulative. The original 200 is a baseline, not a cap.

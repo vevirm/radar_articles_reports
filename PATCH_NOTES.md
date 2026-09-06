@@ -1,3 +1,16 @@
+# v21.4 full-budget scanner repair
+
+This build fixes the early-finish problem seen in live Main scans.
+
+- Main still has a 1,440-second research budget, but that budget is no longer only a ceiling. If ordinary lanes finish early, a full-budget continuation rotates through unused institutions, different Crossref/OpenAlex query slices, deeper scholarly pages and current-development searches until only a small finalisation reserve remains.
+- Repeated zero-yield Matrix waves no longer cause the whole scanner to finish early; they only stop that particular Matrix lane.
+- OpenAlex/Crossref rate limits now count as unavailable source families for reallocation. The previous code promised this in comments but only reallocated on hard failures.
+- An authenticated OpenAlex 429 is now labelled correctly instead of being reported as a keyless limit.
+- Extra time changes search breadth and depth only. A/B/C admission rules are unchanged, so a genuinely quiet cycle may still add zero records rather than lowering quality.
+- Historical remains a 10-minute cycle and now has a 540-second minimum runtime floor before final save work.
+- Production workflow remains Main every four hours at :17 and Historical every four hours at :57, using one shared research slot with Main priority.
+- Repository remains below 100 files.
+
 # v21.3 production update
 
 This full-repository build aligns the live code with the current operating and writing rules.

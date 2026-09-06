@@ -28,9 +28,9 @@ A queries combine EU/institutional context × research/innovation/capability obj
 
 Retrieval is deliberately broader than admission. Generic terms such as *Europe*, *innovation*, *technology*, *security* or *strategic* do not qualify material by themselves. Source quality, phrase combinations, document context and substantive mechanism matter at admission.
 
-Repeated zero-yield Matrix depth waves are bounded: when the same gap set produces no A/B candidates twice, the scanner stops hammering that lane for the run and returns time to other rotating discovery families.
+Repeated zero-yield Matrix depth waves are bounded: when the same gap set produces no A/B candidates twice, the scanner stops hammering that lane and returns the remaining time to other rotating discovery families. Main then keeps using its 24-minute allocation through a full-budget continuation: unused institutions, different scholarly query slices, deeper result pages and current-development searches are rotated until only the final save reserve remains. A quiet scan may still admit zero records; time increases discovery effort, never lowers the evidence gate.
 
-`OPENALEX_API_KEY` materially expands scholarly discovery, author/citation neighbourhoods and query depth.
+If OpenAlex or Crossref is rate-limited, that family is treated as unavailable for the rest of the current allocation and its time is moved to healthy source families. `OPENALEX_API_KEY` materially expands scholarly discovery, author/citation neighbourhoods and query depth.
 
 ## Writing
 

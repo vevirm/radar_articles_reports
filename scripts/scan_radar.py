@@ -6245,10 +6245,12 @@ def collect_openalex(
                     stop_public.set()
                     if _openalex_local_budget_response(r):
                         return [], "local-cap", 0
-                    return [], "HTTP 429 (keyless OpenAlex allowance/rate limit); source stopped for this run", 0
+                    access = "authenticated" if OPENALEX_API_KEY else "keyless"
+                    return [], f"HTTP 429 ({access} OpenAlex rate limit); source stopped for this run", 0
                 if r.status_code in {401, 403, 409}:
                     stop_public.set()
-                    return [], f"HTTP {r.status_code} from keyless OpenAlex; source stopped for this run", 0
+                    access = "authenticated" if OPENALEX_API_KEY else "keyless"
+                    return [], f"HTTP {r.status_code} from {access} OpenAlex; source stopped for this run", 0
                 if r.status_code in {500, 502, 503, 504} and attempt < retries:
                     retry_after = clean_text(r.headers.get("Retry-After"))
                     try:
@@ -15859,10 +15861,12 @@ def main() -> int:
     # replacement slice on still-unused official/institutional sources plus the other
     # scholarly family instead. This changes search allocation only; every candidate
     # still goes through the identical A/B admission gate.
+    oa_unavailable = bool(oa_failed or oa_rate_limited)
+    cr_unavailable = bool(cr_failed or cr_rate_limited)
     source_failure_reallocation = {
         "attempted": False,
         "failed_source_families": [
-            name for name, failed in (("OpenAlex", oa_failed), ("Crossref", cr_failed)) if failed
+            name for name, failed in (("OpenAlex", oa_unavailable), ("Crossref", cr_unavailable)) if failed
         ],
         "institution_sources_planned": 0,
         "institution_sources_executed": 0,
@@ -15876,7 +15880,7 @@ def main() -> int:
     }
     realloc_enabled = bool(CONFIG.get("source_failure_reallocation_enabled", True))
     realloc_min_remaining = max(90, int(CONFIG.get("source_failure_reallocation_min_seconds_remaining", 210) or 210))
-    if realloc_enabled and (oa_failed or cr_failed) and budget_remaining() > realloc_min_remaining:
+    if realloc_enabled and (oa_unavailable or cr_unavailable) and budget_remaining() > realloc_min_remaining:
         source_failure_reallocation["attempted"] = True
         realloc_seconds = min(
             max(60, int(CONFIG.get("source_failure_reallocation_stage_seconds", 240) or 240)),
@@ -15930,7 +15934,7 @@ def main() -> int:
                     safe_stage, "source-failure institutional reallocation", collect_institutions, DATE_FLOOR, warnings,
                     False, realloc_inst_sources, realloc_deadline, realloc_exec, False, DATE_FLOOR
                 )))
-            if oa_failed and not cr_failed and (realloc_queries or realloc_journals):
+            if oa_unavailable and not cr_unavailable and (realloc_queries or realloc_journals):
                 source_failure_reallocation["crossref_queries_planned"] = len(realloc_queries)
                 source_failure_reallocation["crossref_journals_planned"] = len(realloc_journals)
                 futs.append(("cr", ex.submit(
@@ -15940,7 +15944,7 @@ def main() -> int:
                     state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
                     {q: "source-failure-reallocation" for q in realloc_queries}, realloc_exec
                 )))
-            elif cr_failed and not oa_failed and realloc_queries:
+            elif cr_unavailable and not oa_unavailable and realloc_queries:
                 source_failure_reallocation["openalex_queries_planned"] = len(realloc_queries)
                 futs.append(("oa", ex.submit(
                     safe_stage, "source-failure OpenAlex reallocation", collect_openalex, DATE_FLOOR, warnings,
@@ -16931,6 +16935,232 @@ def main() -> int:
             if not post_error:
                 deepening["empty_cells_after_stubborn_recovery"] = sum(1 for k in FRONTIER_CELL_ORDER if post_counts.get(k, 0) == 0)
                 deepening["stubborn_recovery_remaining_cells"] = [k for k in FRONTIER_CELL_ORDER if post_counts.get(k, 0) == 0]
+    # Full-budget continuation. The 24-minute Main budget is a research allocation, not
+    # merely a ceiling. Earlier builds could finish after 8-13 minutes once their initial
+    # queues were exhausted or Matrix depth stopped after repeated zero-yield waves. Keep
+    # searching different territory until only the small finalisation reserve remains.
+    # Admission never changes: extra time buys breadth/depth, not looser quality gates.
+    full_budget_continuation = {
+        "enabled": bool(CONFIG.get("full_budget_continuation_enabled", True)),
+        "attempted": False,
+        "waves": 0,
+        "crossref_queries_executed": 0,
+        "openalex_queries_executed": 0,
+        "institution_sources_executed": 0,
+        "candidates": 0,
+        "news_candidates": 0,
+        "cooldown_seconds": 0.0,
+        "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
+        "seconds_remaining_at_end": None,
+    }
+    if full_budget_continuation["enabled"]:
+        continuation_reserve = max(20, int(CONFIG.get("scan_finalize_reserve_seconds", 35) or 35))
+        continuation_stage_seconds = max(20, int(CONFIG.get("full_budget_continuation_stage_seconds", 75) or 75))
+        continuation_query_n = max(1, int(CONFIG.get("full_budget_continuation_queries_per_wave", 8) or 8))
+        continuation_inst_n = max(0, int(CONFIG.get("full_budget_continuation_institution_sources_per_wave", 10) or 0))
+        continuation_news_n = max(0, int(CONFIG.get("full_budget_continuation_news_queries_per_wave", 8) or 0))
+        continuation_max_waves = max(1, int(CONFIG.get("full_budget_continuation_max_waves", 300) or 300))
+        continuation_cooldown = max(1, int(CONFIG.get("full_budget_zero_progress_cooldown_seconds", 12) or 12))
+        continuation_min_wave_seconds = max(0.0, float(CONFIG.get("full_budget_min_wave_seconds", 5) or 0))
+        # Ordinary stages preserve ~100 seconds for downstream work. At this final
+        # continuation point that downstream work is precisely what the smaller
+        # finalisation reserve protects, so release the oversized network reserve.
+        original_network_reserve = int(CONFIG.get("network_reserve_seconds", 100) or 100)
+        CONFIG["network_reserve_seconds"] = min(original_network_reserve, max(15, continuation_reserve - 10))
+        continuation_bank = diversified_query_bank(
+            curator_seed_bank + finding_context_bank + strategic_scholarly_focus + b_method_bank + all_queries
+        )
+        continuation_news_bank = list(dict.fromkeys(
+            c_floor_rescue_queries() + [
+                "EU research innovation new restriction investment agreement capability",
+                "Europe science technology new policy funding procurement research security",
+                "EU research talent new move appointment shortage collaboration",
+                "Europe critical technology new facility tender standard pilot line",
+                "EU international research cooperation new restriction agreement screening",
+                "Europe strategic technology new evidence dependency supplier capacity",
+            ]
+        ))
+        cont_cr_cursor = int(state.get("full_budget_crossref_cursor", 0) or 0)
+        cont_oa_cursor = int(state.get("full_budget_openalex_cursor", 0) or 0)
+        cont_inst_cursor = int(state.get("full_budget_institution_cursor", 0) or 0)
+        cont_news_cursor = int(state.get("full_budget_news_cursor", 0) or 0)
+        while (
+            full_budget_continuation["waves"] < continuation_max_waves
+            and total_budget_remaining() > continuation_reserve + 8
+        ):
+            full_budget_continuation["attempted"] = True
+            full_budget_continuation["waves"] += 1
+            wave_no = full_budget_continuation["waves"]
+            remaining_before = total_budget_remaining()
+            wave_seconds = min(
+                continuation_stage_seconds,
+                max(12, int(remaining_before - continuation_reserve)),
+            )
+            wave_deadline = time.monotonic() + wave_seconds
+
+            # A 429 is unavailable work for this run even though it is not a permanent
+            # source failure. This is the key distinction the older reallocator missed.
+            cont_oa_unavailable = bool(source_stage_failed(warnings, "openalex") or source_stage_rate_limited(warnings, "openalex"))
+            cont_cr_unavailable = bool(source_stage_failed(warnings, "crossref") or source_stage_rate_limited(warnings, "crossref"))
+            executed_oa_before = set(execution_stats.get("openalex_queries", set()))
+            executed_cr_before = set(execution_stats.get("crossref_broad_queries", set()))
+            executed_inst_before = set(execution_stats.get("institution_sources", set()))
+
+            oa_queries: list[str] = []
+            cr_queries: list[str] = []
+            oa_depth_only = False
+            cr_depth_only = False
+            if continuation_bank and not cont_oa_unavailable:
+                oa_queries, oa_next, _ = rotating_batch_excluding(
+                    continuation_bank, cont_oa_cursor, continuation_query_n, executed_oa_before
+                )
+                if not oa_queries:
+                    oa_queries, oa_next, _ = rotating_batch(continuation_bank, cont_oa_cursor, continuation_query_n)
+                    oa_depth_only = True
+            else:
+                oa_next = cont_oa_cursor
+            if continuation_bank and not cont_cr_unavailable:
+                cr_queries, cr_next, _ = rotating_batch_excluding(
+                    continuation_bank, cont_cr_cursor, continuation_query_n, executed_cr_before
+                )
+                if not cr_queries:
+                    cr_queries, cr_next, _ = rotating_batch(continuation_bank, cont_cr_cursor, continuation_query_n)
+                    cr_depth_only = True
+            else:
+                cr_next = cont_cr_cursor
+
+            inst_domains, inst_next, _ = rotating_batch_excluding(
+                fresh_inst_domain_bank, cont_inst_cursor, continuation_inst_n, executed_inst_before
+            ) if fresh_inst_domain_bank and continuation_inst_n else ([], cont_inst_cursor, True)
+            inst_sources = [fresh_inst_source_by_domain[d] for d in inst_domains if d in fresh_inst_source_by_domain]
+            news_queries, news_next, _ = rotating_batch(
+                continuation_news_bank, cont_news_cursor, continuation_news_n
+            ) if continuation_news_bank and continuation_news_n else ([], cont_news_cursor, True)
+
+            wave_exec: dict[str, Any] = {}
+            wave_candidates = 0
+            wave_news_candidates = 0
+            wave_started = time.monotonic()
+            futures: list[tuple[str, Any]] = []
+            workers = 0
+            if oa_queries:
+                workers += 1
+            if cr_queries:
+                workers += 1
+            if inst_sources:
+                workers += 1
+            if news_queries:
+                workers += 1
+            if workers:
+                log_progress(
+                    f"Full-budget discovery wave {wave_no}: remaining={int(remaining_before)}s; "
+                    f"OA={len(oa_queries)} CR={len(cr_queries)} institutions={len(inst_sources)} current={len(news_queries)}"
+                )
+                with cf.ThreadPoolExecutor(max_workers=min(4, workers)) as ex:
+                    if oa_queries:
+                        futures.append(("oa", ex.submit(
+                            safe_stage, f"OpenAlex full-budget wave {wave_no}", collect_openalex, DATE_FLOOR, warnings,
+                            oa_queries, wave_deadline, {q: DATE_FLOOR for q in oa_queries},
+                            state["result_depth"]["openalex"], {q: "full-budget-depth" for q in oa_queries}, wave_exec, oa_depth_only
+                        )))
+                    if cr_queries:
+                        futures.append(("cr", ex.submit(
+                            safe_stage, f"Crossref full-budget wave {wave_no}", collect_crossref, DATE_FLOOR, warnings,
+                            cr_queries, [], [], wave_deadline, {q: DATE_FLOOR for q in cr_queries},
+                            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
+                            {q: "full-budget-depth" for q in cr_queries}, wave_exec, cr_depth_only
+                        )))
+                    if inst_sources:
+                        futures.append(("inst", ex.submit(
+                            safe_stage, f"Institutional full-budget wave {wave_no}", collect_institutions, DATE_FLOOR, warnings,
+                            False, inst_sources, wave_deadline, wave_exec, False, DATE_FLOOR
+                        )))
+                    if news_queries:
+                        futures.append(("news", ex.submit(
+                            safe_stage, f"Current-development full-budget wave {wave_no}", collect_news,
+                            now, news_warnings, news_lookback, wave_deadline, news_queries, False, continuation_reserve
+                        )))
+                    for family, fut in futures:
+                        rows = [x for x in fut.result() if isinstance(x, dict)]
+                        if family == "oa":
+                            oa.extend(rows)
+                            wave_candidates += len(rows)
+                        elif family == "cr":
+                            cr.extend(rows)
+                            wave_candidates += len(rows)
+                        elif family == "inst":
+                            inst.extend(rows)
+                            wave_candidates += len(rows)
+                        else:
+                            news.extend(rows)
+                            wave_news_candidates += len(rows)
+
+            oa_executed = set(wave_exec.get("openalex_queries", set()))
+            cr_executed = set(wave_exec.get("crossref_broad_queries", set()))
+            inst_executed = set(wave_exec.get("institution_sources", set()))
+            if oa_queries and oa_executed:
+                cont_oa_cursor = commit_planned_cursor_if_executed(
+                    state, "full_budget_openalex_cursor", cont_oa_cursor, oa_queries, oa_next, oa_executed
+                )
+            if cr_queries and cr_executed:
+                cont_cr_cursor = commit_planned_cursor_if_executed(
+                    state, "full_budget_crossref_cursor", cont_cr_cursor, cr_queries, cr_next, cr_executed
+                )
+            if inst_domains and inst_executed:
+                cont_inst_cursor = commit_planned_cursor_if_executed(
+                    state, "full_budget_institution_cursor", cont_inst_cursor, inst_domains, inst_next, inst_executed
+                )
+            if news_queries:
+                cont_news_cursor = news_next
+                state["full_budget_news_cursor"] = cont_news_cursor
+            execution_stats.setdefault("openalex_queries", set()).update(oa_executed)
+            execution_stats.setdefault("crossref_broad_queries", set()).update(cr_executed)
+            execution_stats.setdefault("institution_sources", set()).update(inst_executed)
+            execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(wave_exec.get("crossref_abstracts_enrichment_attempted", 0))
+            full_budget_continuation["openalex_queries_executed"] += len(oa_executed)
+            full_budget_continuation["crossref_queries_executed"] += len(cr_executed)
+            full_budget_continuation["institution_sources_executed"] += len(inst_executed)
+            full_budget_continuation["candidates"] += wave_candidates
+            full_budget_continuation["news_candidates"] += wave_news_candidates
+
+            # If a wave made no observable progress and returned very quickly, pause
+            # briefly before trying a different slice. This is a useful endpoint cooldown,
+            # not an idle early exit; it prevents hammering blocked services while keeping
+            # the 24-minute research allocation available for recovery.
+            elapsed_wave = time.monotonic() - wave_started
+            progressed = bool(oa_executed or cr_executed or inst_executed or wave_candidates or wave_news_candidates)
+            if not progressed and total_budget_remaining() > continuation_reserve + continuation_cooldown + 8:
+                sleep_for = min(float(continuation_cooldown), max(0.0, total_budget_remaining() - continuation_reserve - 8.0))
+                if sleep_for > 0:
+                    log_progress(f"Full-budget discovery wave {wave_no} hit no healthy work; cooling down {int(sleep_for)}s before rotating again")
+                    time.sleep(sleep_for)
+                    full_budget_continuation["cooldown_seconds"] += sleep_for
+            elif elapsed_wave < 1.0 and not workers and total_budget_remaining() > continuation_reserve + continuation_cooldown + 8:
+                sleep_for = min(float(continuation_cooldown), max(0.0, total_budget_remaining() - continuation_reserve - 8.0))
+                if sleep_for > 0:
+                    time.sleep(sleep_for)
+                    full_budget_continuation["cooldown_seconds"] += sleep_for
+
+            # Pace very fast waves so a blocked/fast endpoint cannot burn hundreds of
+            # near-identical requests in seconds. The time is deliberately retained for
+            # later rotations and cooldown recovery within the same 24-minute window.
+            elapsed_wave = time.monotonic() - wave_started
+            if continuation_min_wave_seconds > elapsed_wave and total_budget_remaining() > continuation_reserve + 8:
+                pace = min(
+                    continuation_min_wave_seconds - elapsed_wave,
+                    max(0.0, total_budget_remaining() - continuation_reserve - 8.0),
+                )
+                if pace > 0:
+                    time.sleep(pace)
+                    full_budget_continuation["cooldown_seconds"] += pace
+
+        state["full_budget_crossref_cursor"] = cont_cr_cursor
+        state["full_budget_openalex_cursor"] = cont_oa_cursor
+        state["full_budget_institution_cursor"] = cont_inst_cursor
+        state["full_budget_news_cursor"] = cont_news_cursor
+        CONFIG["network_reserve_seconds"] = original_network_reserve
+    full_budget_continuation["seconds_remaining_at_end"] = max(0, int(total_budget_remaining()))
+
     state["frontier_gap_depth_cursor"] = deep_cursor
     warnings.extend(x for x in news_warnings if x not in warnings)
 
@@ -17542,6 +17772,7 @@ def main() -> int:
             "rejection_funnel": rejection_funnel,
             "full_rescue_run_recommended": bool(low_yield_rotation.get("full_rescue_run_recommended")),
             "matrix_first_deepening": deepening,
+        "full_budget_continuation": full_budget_continuation,
         },
         "active_core_profile_version": ACTIVE_CORE_PROFILE_VERSION,
         "active_core_limit": ACTIVE_CORE_LIMIT,
@@ -17699,6 +17930,13 @@ def main() -> int:
             "frontier_empty_cells_targeted": len(frontier_focus.get("empty_targets", [])),
             "frontier_gap_depth_waves": int(deepening.get("waves", 0)),
             "frontier_gap_depth_queries_executed": int(deepening.get("gap_queries_executed", 0)),
+            "full_budget_continuation_waves": int(full_budget_continuation.get("waves", 0)),
+            "full_budget_continuation_crossref_queries": int(full_budget_continuation.get("crossref_queries_executed", 0)),
+            "full_budget_continuation_openalex_queries": int(full_budget_continuation.get("openalex_queries_executed", 0)),
+            "full_budget_continuation_institution_sources": int(full_budget_continuation.get("institution_sources_executed", 0)),
+            "full_budget_continuation_candidates": int(full_budget_continuation.get("candidates", 0)),
+            "full_budget_continuation_news_candidates": int(full_budget_continuation.get("news_candidates", 0)),
+            "full_budget_seconds_remaining_at_end": int(full_budget_continuation.get("seconds_remaining_at_end", 0) or 0),
             "weak_signal_followup_candidates": int(deepening.get("weak_signal_followup_candidates", 0)),
             "institution_signal_candidates": len(INSTITUTION_SIGNAL_CANDIDATES),
             "frontier_stubborn_recovery_candidates": int(deepening.get("stubborn_recovery_candidates", 0)),
