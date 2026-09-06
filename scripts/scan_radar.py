@@ -857,6 +857,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     state.setdefault("priority_people_completed_cycles", 0)
     state.setdefault("foresight_author_cursor", 0)
     state.setdefault("foresight_author_completed_cycles", 0)
+    state["evidence_first_cursor"] = int(state.get("evidence_first_cursor", 0) or 0)
     if not isinstance(state.get("weak_signal_evidence_followup"), dict):
         state["weak_signal_evidence_followup"] = {}
     if not isinstance(state.get("priority_people_openalex_author_ids"), dict):
@@ -3379,8 +3380,8 @@ A_ROUTINE_PRESTIGE_ACTION = re.compile(
 )
 A_LOCAL_APPLIED_CUES = [
     'clinical implementation', 'clinical service', 'integrated service', 'patient service',
-    'health service', 'hospital service', 'care pathway', 'clinical pathway',
-    'service innovation', 'service innovations',
+    'health service', 'hospital service', 'hospital', 'clinic', 'care pathway', 'clinical pathway',
+    'school', 'classroom', 'construction project', 'service innovation', 'service innovations',
 ]
 A_SYSTEM_LEVEL_RI_CUES = [
     'research policy', 'innovation policy', 'science policy', 'research security', 'knowledge security',
@@ -5169,6 +5170,80 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     method_bridge = creation_bridge or (abstract[:420] if method_contribution else '')
     return True, candidate_families[:5], method_bridge, (suitability + transferability)[:6], route
 
+
+A_RESEARCH_EVIDENCE_CUES = [
+    'empirical', 'evidence', 'dataset', 'data set', 'panel data', 'survey', 'interview',
+    'bibliometric', 'scientometric', 'patent data', 'publication data', 'citation data',
+    'network analysis', 'regression', 'causal', 'difference-in-differences', 'difference in differences',
+    'evaluation', 'impact assessment', 'results show', 'findings show', 'we find', 'we show',
+    'analysis finds', 'analysis shows', 'indicator', 'indicators', 'scoreboard',
+]
+A_RESEARCH_SYSTEM_OUTCOME_CUES = [
+    'research collaboration', 'scientific collaboration', 'researcher mobility',
+    'research careers', 'research workforce', 'scientific workforce',
+    'research talent', 'scientific talent', 'brain drain', 'brain gain',
+    'research productivity', 'scientific productivity', 'publication output',
+    'citation impact', 'r&d intensity', 'research intensity',
+    'technology transfer', 'knowledge transfer', 'commercialisation', 'commercialization',
+    'university-industry collaboration', 'university industry collaboration',
+    'research infrastructure', 'research infrastructures',
+]
+A_RESEARCH_STRONG_SYSTEM_CUES = [
+    'research policy', 'innovation policy', 'science policy',
+    'research system', 'innovation system', 'research governance', 'innovation governance',
+    'research infrastructure', 'research infrastructures', 'scientific infrastructure',
+    'horizon europe', 'fp10', 'framework programme', 'european research area',
+    'research funding system', 'research funding policy',
+    'international research cooperation', 'scientific collaboration', 'research collaboration',
+    'research talent', 'scientific talent', 'research workforce', 'scientific workforce',
+    'research careers', 'researcher mobility', 'brain drain', 'brain gain',
+    'technology transfer', 'knowledge transfer', 'innovation ecosystem',
+    'research assessment', 'open science', 'research data infrastructure',
+]
+
+
+def research_evidence_route_ok(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str]]:
+    """Bounded evidence-first A route for completed research, not news.
+
+    The scanner's mission is still EU/European R&I. This route merely prevents a high-quality
+    empirical paper or analytical report from being rejected because its title is not written
+    in geopolitical-news vocabulary. It requires a Tier-1/2 source, substantive evidence cues
+    and a system-level R&I outcome/mechanism. Local applied technology studies do not qualify.
+    """
+    try:
+        tier = int(source_tier or 9)
+    except Exception:
+        tier = 9
+    if tier > 2 or source_kind not in {'scholarly', 'institutional'}:
+        return False, []
+    title = clean_text(title)
+    abstract = clean_text(abstract)
+    body = clean_text(body)
+    text = clean_text(f"{title}. {abstract}. {body[:6000]}")
+    if not text:
+        return False, []
+    evidence = distinct_matches(text, A_RESEARCH_EVIDENCE_CUES)
+    outcomes = distinct_matches(text, A_RESEARCH_SYSTEM_OUTCOME_CUES)
+    system = distinct_matches(text, A_RESEARCH_STRONG_SYSTEM_CUES)
+    # Institutional pages must look like completed analytical products; otherwise a news/
+    # programme page containing "report" in navigation could be promoted accidentally.
+    if source_kind == 'institutional':
+        title_formal = contains_any(normalized(title), FORMAL_EVIDENCE_TITLE_HINTS)
+        completion = contains_any(normalized(text), FORMAL_EVIDENCE_COMPLETION_CUES)
+        if not (title_formal and completion):
+            return False, []
+    # Scholarly/local-service studies are a recurring contamination source. Evidence about
+    # AI use in one hospital, school, firm, etc. is not R&I-system evidence merely because
+    # the technology is strategically important.
+    if source_kind == 'scholarly' and _local_applied_study_without_ri_system_implication(title, abstract, body):
+        return False, []
+    # Generic "research and innovation project", firm-efficiency or regional-innovation
+    # language is deliberately insufficient. The paper/report must measure a recognisable
+    # R&I-system mechanism (careers, collaboration, infrastructure, transfer, assessment, etc.).
+    ok = bool(evidence and system and (outcomes or len(system) >= 2))
+    return ok, list(dict.fromkeys(evidence[:4] + outcomes[:4] + system[:4]))[:8]
+
+
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general', eu_context_anchors: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Classify the three-layer radar model.
 
@@ -5259,7 +5334,18 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     title_scope_for_system = bool(_scope_hits_in_sentence(title, clean_text(f"{title}. {abstract}")))
     # The non-strategic fallback must be title-led. Allowing abstract/body-only system
     # words made generic Europe-comparison/social-policy papers look like R&I-system evidence.
-    major_system_relevance = bool(_major_a_focus(title, bool(_geo_hits(title))))
+    title_system_terms = distinct_matches(title, A_MAJOR_RI_SYSTEM)
+    title_strategic_tech = distinct_matches(title, A_MAJOR_TECH_DOMAINS)
+    title_system_outcomes = distinct_matches(title, A_STRATEGIC_RI_OUTCOME)
+    # A strategic technology name by itself is not a system-level R&I subject. Earlier builds
+    # let local AI/health/construction studies through merely because "AI" appeared in the title.
+    major_system_relevance = bool(
+        title_system_terms
+        or (title_strategic_tech and title_system_outcomes)
+    )
+    evidence_product_pass, evidence_product_context = research_evidence_route_ok(
+        title, abstract, body, source_kind, source_tier
+    )
     historical_title_for_system = bool(
         A_HISTORICAL_CENTURY.search(title) or A_HISTORICAL_ERA.search(title)
         or any(int(m.group(2)) <= 2005 for m in A_HISTORICAL_YEAR_RANGE.finditer(title))
@@ -5273,9 +5359,15 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     if not strategic_context_pass and high_confidence_system_pass and a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok:
         a_route = 'eu-ri-system-relevance'
         a_context = list(dict.fromkeys(centrality_evidence + ri_hits))[:8]
+    elif (
+        not strategic_context_pass and not high_confidence_system_pass and evidence_product_pass
+        and a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok
+    ):
+        a_route = 'research-evidence'
+        a_context = list(dict.fromkeys(centrality_evidence + evidence_product_context + ri_hits))[:8]
     a_pass = bool(
         a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok
-        and (strategic_context_pass or high_confidence_system_pass)
+        and (strategic_context_pass or high_confidence_system_pass or evidence_product_pass)
     )
     if external_ok:
         a_route = 'external-strategic-shock'
@@ -10617,6 +10709,85 @@ def genuinely_new_a_candidates(items: Iterable[dict[str, Any]]) -> list[dict[str
     return [x for x in genuinely_new_ab_candidates(items) if x.get("strand") in {"A", "both"}]
 
 
+
+def evidence_product_candidate(item: dict[str, Any]) -> bool:
+    """Completed research evidence deserving protected selection attention."""
+    if not isinstance(item, dict):
+        return False
+    typ = normalized(item.get('type', ''))
+    title = clean_text(item.get('title', ''))
+    if any(x in typ for x in [
+        'peer-reviewed', 'journal', 'preprint', 'working paper',
+        'formal study', 'formal report', 'institutional report', 'policy brief',
+    ]):
+        return True
+    if 'research/policy paper' in typ:
+        # Some institutional news pages are typed research/policy paper only because they
+        # are long enough. Treat them as evidence only when they are not routine funding news
+        # and their title has a recognisable analytical/publication shape.
+        if contains_any(normalized(title), _EU_FUNDING_EVENT_TERMS) and signal_headline_has_current_change(title):
+            return False
+        return bool(
+            contains_any(normalized(title), FORMAL_EVIDENCE_TITLE_HINTS)
+            or any(x in normalized(title) for x in [
+                'analysis', 'evidence', 'findings', 'results', 'indicator', 'scoreboard',
+                'research careers', 'research workforce', 'research infrastructure',
+            ])
+        )
+    return False
+
+
+def evidence_product_priority_score(item: dict[str, Any]) -> int:
+    """Ranking-only preference for completed papers/reports over routine announcements."""
+    if not isinstance(item, dict):
+        return 0
+    typ = normalized(item.get('type', ''))
+    title = clean_text(item.get('title', ''))
+    score = 0
+    if 'formal study' in typ or 'formal report' in typ:
+        score += 10
+    elif 'peer-reviewed' in typ or 'journal' in typ:
+        score += 8
+    elif 'working paper' in typ or 'preprint' in typ:
+        score += 7
+    elif 'institutional report' in typ or 'policy brief' in typ:
+        score += 6
+    elif evidence_product_candidate(item):
+        score += 4
+    if 'official notice' in typ or 'primary source' in typ:
+        score -= 4
+    # Horizon/funding terms are not bad by themselves. The penalty applies only to a
+    # current-change announcement that is not itself a completed analytical product.
+    if (
+        contains_any(normalized(title), _EU_FUNDING_EVENT_TERMS)
+        and signal_headline_has_current_change(title)
+        and not evidence_product_candidate(item)
+    ):
+        score -= 6
+    return score
+
+
+def select_balanced_new_ab(candidates: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+    """Reserve some NEW slots for completed research evidence when such candidates exist."""
+    if limit <= 0:
+        return list(candidates)
+    ordered = list(candidates)
+    target = max(0, min(limit, int(CONFIG.get('evidence_product_min_slots_per_scan', 0) or 0)))
+    evidence = [x for x in ordered if evidence_product_candidate(x)]
+    selected = evidence[:target]
+    selected_ids = {identity(x) for x in selected}
+    for item in ordered:
+        if len(selected) >= limit:
+            break
+        ident = identity(item)
+        if ident in selected_ids:
+            continue
+        selected.append(item)
+        selected_ids.add(ident)
+    selected.sort(key=rank_candidate)
+    return selected
+
+
 def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
     """Priority, not admission: surface major EU R&I/geopolitical competition first.
 
@@ -10657,6 +10828,7 @@ def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
     elif "comparable" in tier: score += 1
     if normalized(item.get("text_mode", "")) == "metadata_only":
         score -= 5
+    score += evidence_product_priority_score(item)
     return score
 
 
@@ -13838,6 +14010,20 @@ def main() -> int:
         oa_cap = min(oa_cap, max(1, int(CONFIG.get("openalex_keyless_queries_per_scan", 6) or 6)))
     cr_cap = int(CONFIG.get("crossref_broad_queries_per_scan", 35))
 
+    # Evidence-first scholarly lane. The core query bank is intentionally geopolitical,
+    # which is useful for strategic developments but can under-sample empirical R&I research.
+    # Reserve a rotating slice every scan for papers/reports that measure European research
+    # performance, collaboration, talent, infrastructure, commercialisation and capability.
+    evidence_first_bank = list(dict.fromkeys(
+        clean_text(q) for q in CONFIG.get("evidence_first_queries", []) if clean_text(q)
+    ))
+    evidence_first_cursor_before = int(state.get("evidence_first_cursor", 0) or 0)
+    evidence_first_focus, _evidence_next, _evidence_wrapped = rotating_batch(
+        evidence_first_bank,
+        evidence_first_cursor_before,
+        max(0, int(CONFIG.get("evidence_first_queries_per_scan", 0) or 0)),
+    ) if evidence_first_bank else ([], 0, True)
+
     # Keep a small, persisted future-method lane active every scan. This is
     # separate from the main A/B discovery cursor, so methods suitable for understanding A are
     # not delayed for several runs simply because the broad cursor is currently in
@@ -13924,15 +14110,22 @@ def main() -> int:
         all_queries, cr_broad_cursor_before, cr_base_cap
     )
     oa_batch = interleaved_unique_batch(
-        oa_cap, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
+        oa_cap, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
+        oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     cr_batch = interleaved_unique_batch(
-        cr_cap, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
+        cr_cap, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
+        cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
     )
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
     cr_depth_lanes = {q: "gap" for q in gap_scholarly}
+    for q in evidence_first_focus:
+        oa_query_dates[q] = DATE_FLOOR
+        cr_query_dates[q] = DATE_FLOOR
+        oa_depth_lanes[q] = "evidence"
+        cr_depth_lanes[q] = "evidence"
     for q in finding_context_focus:
         oa_query_dates[q] = DATE_FLOOR
         cr_query_dates[q] = DATE_FLOOR
@@ -14097,6 +14290,20 @@ def main() -> int:
             break
     for target, cursor in local_source_cursor.items():
         source_cursors[target] = cursor
+    # Long-form evidence sources are offered to the institutional collector every scan,
+    # ahead of the rotating news/policy-source census. They still use the same parser and
+    # admission gate; this is source attention only.
+    evidence_report_domains = [
+        clean_text(d).lower().removeprefix("www.")
+        for d in CONFIG.get("evidence_report_priority_domains", [])
+        if clean_text(d)
+    ]
+    evidence_report_cap = max(0, int(CONFIG.get("evidence_report_priority_sources_per_scan", 0) or 0))
+    evidence_report_sources = [
+        source_by_domain[d] for d in evidence_report_domains[:evidence_report_cap]
+        if d in source_by_domain
+    ]
+
     # Source-specific adapters for the hardest/highest-value EU publication domains get
     # their own small persisted rotation. This is additive to the broad institutional
     # source rotation, never a replacement for it. Adapter pages still pass the exact
@@ -14114,7 +14321,7 @@ def main() -> int:
     ) if adapter_domains_all else ([], 0, True)
     adapter_rotating = [source_by_domain[d] for d in adapter_domain_batch if d in source_by_domain]
 
-    inst_batch_raw = inst_rotating + gap_sources + adapter_rotating
+    inst_batch_raw = evidence_report_sources + inst_rotating + gap_sources + adapter_rotating
     inst_batch = []
     inst_batch_seen: set[str] = set()
     for src in inst_batch_raw:
@@ -14146,9 +14353,14 @@ def main() -> int:
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
         f"({len(top_journal_watchlist)} elite + {len(priority_policy_journals)} R&I-policy + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad) from {cr_from.isoformat()}, "
         f"direct journal watch {len(direct_journal_batch)} source(s), "
-        f"institutions {len(inst_batch)} source(s) ({len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
+        f"institutions {len(inst_batch)} source(s) ({len(evidence_report_sources)} evidence-report priority + {len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
+    if evidence_first_focus:
+        log_progress(
+            f"Evidence-first scholarly lane: {len(evidence_first_focus)} rotating empirical/report query/queries "
+            "for completed European R&I evidence"
+        )
     if gap_scholarly:
         log_progress(
             f"Frontier gap-rescue: {len(gap_scholarly)} scholarly query/queries search from "
@@ -14347,6 +14559,9 @@ def main() -> int:
         direct_rotating_names, direct_journal_cursor_before, direct_planned_names, executed_direct_journals
     ) if direct_rotating_names else (0, True, 0)
     method_executed = executed_oa | executed_cr
+    state["evidence_first_cursor"], _evidence_commit_wrapped, evidence_first_executed = committed_rotation_cursor(
+        evidence_first_bank, evidence_first_cursor_before, evidence_first_focus, method_executed
+    ) if evidence_first_bank else (0, True, 0)
     state["strand_b_method_cursor"], b_method_wrapped, b_method_executed = committed_rotation_cursor(
         b_method_bank, b_method_cursor_before, b_method_focus, method_executed
     )
@@ -15787,7 +16002,7 @@ def main() -> int:
             _diag_inc('final_reject_evidence_worthiness')
     deduped.sort(key=rank_candidate)
 
-    new_selected = deduped[:MAX_NEW_AB] if MAX_NEW_AB > 0 else deduped
+    new_selected = select_balanced_new_ab(deduped, MAX_NEW_AB) if MAX_NEW_AB > 0 else deduped
 
     prev_a = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []

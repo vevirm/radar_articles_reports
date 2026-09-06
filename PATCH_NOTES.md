@@ -1,3 +1,12 @@
+# v17.20.47 — research-evidence / long-form balance
+
+- Adds an evidence-first OpenAlex/Crossref query lane on every scan for empirical European R&I research: collaboration, careers/talent, research performance, infrastructure, technology transfer, R&D intensity, innovation-system performance and evaluation.
+- Gives a recurring priority slice to long-form publication sources (JRC Publications, JRC, EU Publications Office, European Parliament/EPRS, OECD, Bruegel, CEPS, CWTS, Rathenau and Science Europe) without bypassing the ordinary admission gate.
+- Adds a bounded `research-evidence` Strand-A route for Tier-1/2 completed scholarly/analytical evidence. It still requires direct European/EU scope, central R&I aboutness, empirical/analytical evidence and a recognisable R&I-system mechanism; generic regional firm studies and project recaps remain out.
+- Tightens the high-confidence strategic-technology fallback so a technology name such as AI alone cannot turn a local hospital/school/application study into EU R&I-system evidence.
+- Ranking now prefers completed peer-reviewed papers, working papers and substantive formal/institutional reports over routine funding/current-event notices when candidates compete for the limited NEW slots.
+- Reserves up to three of the five NEW A/B slots for completed evidence products when at least that many qualifying evidence products exist; remaining slots retain ordinary strategic ranking.
+- No page structure, corpus history, deduplication identifiers or existing reader products were changed.
 # v17.20.46 — separate source quality from metadata availability and admission yield
 
 - No configured scholarly source is pruned, demoted or disabled because it admitted few or zero items. `source_yield_pruning_enabled` is explicitly false; source-health observations are diagnostic only.
