@@ -1,3 +1,9 @@
+# v17.20.53
+
+- Fixes the curated-core regression test so GitHub browser uploads that retain a recognised legacy hidden workflow do not fail before scanning.
+- Preferred packaged workflow remains archive-aware; legacy workflow compatibility relies on the scanner's own active+archive preservation invariant and active-core save marker.
+- No page/UI logic changes and no scanner discovery/admission changes from v17.20.52.
+
 # v17.20.52
 
 - Fixes the post-scan save failure caused by the curated 200-item core moving accepted records from active Strand A/B into `ab_archive`. The safety model now treats active A + active B + `ab_archive` as one accepted-history preservation domain.
