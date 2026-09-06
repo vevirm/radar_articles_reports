@@ -84,14 +84,14 @@
   const PAIRS=[
     {
       id:'build_vs_rent',
-      left:{title:'Building our own',plain:'Europe is putting real money, machines and shared infrastructure into its own compute and strategic-technology capacity.',roles:[
+      left:{title:'Building our own',plain:'Europe is putting real money, machines and shared infrastructure into its own compute and strategic-technology capacity.',why:'More European-controlled capacity reduces exposure to external compute and technology chokepoints.',roles:[
         {label:'AI-compute investment',claimType:'action',spec:{any:[/ai gigafactor/,/€30 billion.*ai/,/30 billion.*ai/],preferSource:/European Commission/}},
         {label:'Supercomputing capacity',claimType:'action',spec:{any:[/top500.*jupiter/,/supercomput.*europe/,/ai supercomputer/],preferSource:/EuroHPC/}},
         {label:'Quantum capacity',claimType:'action',spec:{any:[/quantum computer.*europe/,/six new quantum calls/,/quantum-testing infrastructure/,/quantum experimental pilot lines/],preferSource:/EuroHPC/}},
         {label:'Federated access',claimType:'action',spec:{any:[/federation platform.*supercomput/,/resource for ai science in europe/,/opens access to its quantum computers/]}},
         {label:'Sovereignty policy',claimType:'action',spec:{any:[/tech sovereignty package/,/strengthening europe.*tech sovereignty/,/digital autonomy and resilience/]}}
       ]},
-      right:{title:'Renting theirs',plain:'European research and industry still depend on non-European cloud, frontier compute, chips and technology layers that cannot be substituted quickly.',roles:[
+      right:{title:'Renting theirs',plain:'European research and industry still depend on non-European cloud, frontier compute, chips and technology layers that cannot be substituted quickly.',why:'External control over critical layers can constrain European research access, cost and strategic freedom.',roles:[
         {label:'Cloud and AI dependence',claimType:'effect',hostileWitness:true,hostileSource:/European Commission/,spec:{any:[/cloud and ai development.*limited/,/dependence on non-european suppliers/,/cloud.*non-european supplier/],preferTitle:/Cloud and AI Development/}},
         {label:'Frontier-compute gap',claimType:'diagnosis',spec:{any:[/compute gap/,/purchas.*us.*compute/,/frontier compute/],preferSource:/Bruegel/}},
         {label:'Military-AI capability gap',claimType:'diagnosis',spec:{any:[/military ai.*10.?15 year/,/autonomy that cannot be bought/,/military ai.*capability gap/],preferSource:/VoxEU|CEPR/}},
@@ -102,14 +102,14 @@
     },
     {
       id:'money_in_vs_firms_out',
-      left:{title:'Money coming in',plain:'EU institutions are putting more public capital and scale-up instruments behind European deep-tech firms.',roles:[
+      left:{title:'Money coming in',plain:'EU institutions are putting more public capital and scale-up instruments behind European deep-tech firms.',why:'More scale-up finance can keep research-intensive firms and their capabilities inside Europe.',roles:[
         {label:'Large-scale investment alliance',claimType:'action',spec:{any:[/€80 billion investment alliance/,/80 billion investment alliance/],preferSource:/European Investment Bank/}},
         {label:'STEP scale-up capital',claimType:'action',spec:{any:[/step scale up investments/,/scale-up funding.*step scale up/],preferSource:/European Innovation Council/}},
         {label:'Startup and scale-up strategy',claimType:'action',spec:{any:[/eu startup and scaleup strategy/],preferSource:/European Commission/}},
         {label:'EIC investment capacity',claimType:'action',spec:{any:[/eic fund investment guidelines/,/eic impact report.*scaling hub/],preferSource:/European Innovation Council/}},
         {label:'Deep-tech support',claimType:'action',spec:{any:[/deep tech.*funding/,/scale up tech leaders/,/european scale-ups/]}}
       ]},
-      right:{title:'Companies going out',plain:'The private-capital gap still gives successful European firms reasons to tap foreign markets, investors and sometimes foreign locations.',roles:[
+      right:{title:'Companies going out',plain:'The private-capital gap still gives successful European firms reasons to tap foreign markets, investors and sometimes foreign locations.',why:'Foreign financing and relocation can move ownership, know-how and future growth outside Europe.',roles:[
         {label:'Startup relocation',claimType:'effect',hostileWitness:true,hostileSource:/JRC|Joint Research Centre/,spec:{any:[/is europe losing its startups/,/virtual relocation.*vc markets abroad/],preferTitle:/losing its startups/}},
         {label:'Late-stage VC gap',claimType:'diagnosis',spec:{any:[/late-stage vc gap/,/venture capital gap.*high-growth/],preferSource:/European Central Bank/}},
         {label:'Reliance on non-EU investors',claimType:'effect',spec:{any:[/reliance on non-eu investors/,/non-eu investors.*relocation/],preferSource:/European Central Bank/}},
@@ -120,13 +120,13 @@
     },
     {
       id:'open_vs_secure',
-      left:{title:'Opening the research system',plain:'Europe is expanding open research information, federated data, shared infrastructure and cross-border access.',roles:[
+      left:{title:'Opening the research system',plain:'Europe is expanding open research information, federated data, shared infrastructure and cross-border access.',why:'Wider access can strengthen collaboration, reuse and the effective reach of European research infrastructure.',roles:[
         {label:'Open research information',claimType:'action',spec:{any:[/barcelona declaration on open research information/,/open research information/]}},
         {label:'Open science implementation',claimType:'action',spec:{any:[/open science/,/open access.*research infrastructure/],preferSource:/European Commission|Science and Public Policy/}},
         {label:'Federated research data',claimType:'action',spec:{any:[/federated.*data/,/eosc/,/data sharing.*open science/]}},
         {label:'Shared research infrastructure',claimType:'action',spec:{any:[/european research infrastructures/,/open access to jrc research infrastructures/],preferSource:/European Commission|JRC/}}
       ]},
-      right:{title:'Closing sensitive edges',plain:'Research-security, dual-use and knowledge-security rules are creating more conditions around who can access sensitive knowledge and collaboration.',roles:[
+      right:{title:'Closing sensitive edges',plain:'Research-security, dual-use and knowledge-security rules are creating more conditions around who can access sensitive knowledge and collaboration.',why:'Tighter controls can reduce leakage while also adding friction to legitimate scientific cooperation.',roles:[
         {label:'Research-security rules',claimType:'action',spec:{any:[/research security/,/knowledge security/],preferSource:/ALLEA|Government of the Netherlands|Science and Public Policy/}},
         {label:'Dual-use safeguards',claimType:'action',spec:{any:[/dual-use.*safeguard/,/dual-use regulation/,/dual use.*research/]}},
         {label:'Foreign-interference concern',claimType:'diagnosis',spec:{any:[/foreign interference.*research/,/knowledge security.*foreign/]}},
@@ -136,13 +136,13 @@
     },
     {
       id:'collaborate_vs_derisk',
-      left:{title:'More science through partnerships',plain:'Europe is widening formal science-diplomacy, Horizon association and international research links.',roles:[
+      left:{title:'More science through partnerships',plain:'Europe is widening formal science-diplomacy, Horizon association and international research links.',why:'Broader partnerships can expand capability, talent access and influence beyond Europe’s domestic research base.',roles:[
         {label:'Science-diplomacy framework',claimType:'action',spec:{any:[/framework for science diplomacy/],preferSource:/Council of the European Union|European Commission/}},
         {label:'New Horizon associations',claimType:'action',spec:{any:[/successfully conclude horizon europe negotiations/,/horizon europe association joint committee/,/association to horizon europe/],preferSource:/European Commission/}},
         {label:'International R&I cooperation',claimType:'action',spec:{any:[/international cooperation in research and innovation/],preferSource:/European Commission/}},
         {label:'Partnership strategy',claimType:'action',spec:{any:[/autonomy through partnerships/,/shared gains, secure links/]}}
       ]},
-      right:{title:'More selective collaboration',plain:'The same system is narrowing or conditioning collaboration where security, technology dependence and strategic competition are judged material.',roles:[
+      right:{title:'More selective collaboration',plain:'The same system is narrowing or conditioning collaboration where security, technology dependence and strategic competition are judged material.',why:'Selective access can protect sensitive capability but fragment networks Europe still depends on.',roles:[
         {label:'Knowledge-security controls',claimType:'action',spec:{any:[/national knowledge security guidelines/,/knowledge security/]}},
         {label:'EU–China de-risking',claimType:'effect',spec:{any:[/eu.?china research cooperation.*de-risking/,/securitisation of knowledge.*eu science policy/]}},
         {label:'Dual-use restrictions',claimType:'action',spec:{any:[/dual-use regulation/,/safeguards for dual-use research/]}},
@@ -152,13 +152,13 @@
     },
     {
       id:'talent_pull_vs_talent_friction',
-      left:{title:'Trying harder to attract talent',plain:'European institutions are treating researchers and specialist skills as strategic capacity and are building programmes to attract, retain and train them.',roles:[
+      left:{title:'Trying harder to attract talent',plain:'European institutions are treating researchers and specialist skills as strategic capacity and are building programmes to attract, retain and train them.',why:'Talent gains increase the human capability needed to use new European research infrastructure and funding.',roles:[
         {label:'Choose Europe / attraction',claimType:'action',spec:{any:[/choose europe for science/,/attract and retain research talent/],preferSource:/European Commission|Marie Skłodowska-Curie/}},
         {label:'Strategic talent framing',claimType:'action',spec:{any:[/research talent is europe.*strategic advantage/],preferSource:/ALLEA/}},
         {label:'Researcher mobility',claimType:'action',spec:{any:[/fifth freedom/,/researcher mobility/]}},
         {label:'Specialist skills pipeline',claimType:'action',spec:{any:[/eumaster4hpc/,/hpc skills in europe/,/doctoral.*ai|postdoc.*ai/]}}
       ]},
-      right:{title:'Talent frictions remain',plain:'Career precarity, stronger external offers and security/mobility frictions can still pull scarce researchers away from the places Europe is investing in.',roles:[
+      right:{title:'Talent frictions remain',plain:'Career precarity, stronger external offers and security/mobility frictions can still pull scarce researchers away from the places Europe is investing in.',why:'Infrastructure and funding cannot create capability if scarce researchers leave or cannot be recruited.',roles:[
         {label:'Career precarity / brain drain',claimType:'effect',hostileWitness:true,hostileSource:/European Commission|Marie Skłodowska-Curie/,spec:{any:[/precarity.*brain drain/,/researchers leaving europe.*brain drain/]}},
         {label:'External talent pull',claimType:'effect',spec:{any:[/lure scientists back/,/attract.*researchers.*abroad/,/talent.*competition/]}},
         {label:'Research-security friction',claimType:'diagnosis',spec:{any:[/research security.*mobility/,/knowledge security.*researcher/,/foreign interference.*researcher/]}},

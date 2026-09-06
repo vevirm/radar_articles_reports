@@ -1189,7 +1189,7 @@ def main() -> int:
         },
     }
     tmp=OUT_PATH.with_suffix(".json.tmp"); tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8"); tmp.replace(OUT_PATH)
-    log(f"historical.json written: {len(merged)} total, {new_count} new; one self-contained daily cycle")
+    log(f"historical.json written: {len(merged)} total, {new_count} new; one self-contained four-hour cycle")
     for w in warnings[:20]: print("WARNING:",w,file=sys.stderr)
     return 0
 

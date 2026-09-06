@@ -153,7 +153,9 @@
   function nodeMeta(ms,query){
     const unique=new Map();for(const m of ms||[]){const key=clean(m.x?.link)||clean(m.x?.title)||String(m.i);if(!unique.has(key))unique.set(key,m)}
     const matches=[...unique.values()],best=bestMatch(matches),x=best?.x||{};
-    return {query:clean(query),evidenceCount:matches.length,sourceLink:clean(x.link),sourceTitle:clean(x.title||x.headline),sourceName:clean(x.source)};
+    const whyRaw=globalThis.RadarReaderStyle?.whyFor?.(x)||clean(x.why_it_matters||x.relevance_note||'');
+    const why=globalThis.RadarReaderStyle?.limit?.(whyRaw||'This branch changes a documented capability, dependency, rule or partnership in European R&I.',15)||whyRaw;
+    return {query:clean(query),evidenceCount:matches.length,sourceLink:clean(x.link),sourceTitle:clean(x.title||x.headline),sourceName:clean(x.source),why};
   }
   function build(items,opt={}){
     const evals=evaluate(items),count=Math.max(1,Math.min(8,Number(opt.count)||8));

@@ -426,7 +426,7 @@ SESSION.headers.update({
 # fully anonymous operation when it is absent. Never persist or log the key.
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
-RADAR_DIAGNOSTIC_RUN = os.environ.get("RADAR_DIAGNOSTIC_RUN", "").strip().lower() in {"1", "true", "yes", "on"} and os.environ.get("RADAR_ALLOW_DIAGNOSTIC_OVERRIDE", "").strip().lower() in {"1", "true", "yes", "on"}
+RADAR_DIAGNOSTIC_RUN = False  # v19 production: the temporary five-minute bootstrap/debug mode is retired
 
 def _pdf_page_cap() -> int:
     """Keep the first fresh diagnostic representative but bounded.
@@ -14664,7 +14664,7 @@ def main() -> int:
     SIGNAL_WINDOW_START_DATE = None
     with ADMISSION_DIAGNOSTICS_LOCK:
         ADMISSION_DIAGNOSTICS.clear()
-    previous = load_previous(allow_git_recovery=True)
+    previous = load_previous(allow_git_recovery=False)
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
@@ -15191,7 +15191,7 @@ def main() -> int:
         )
     if oa_explore or cr_explore:
         log_progress(
-            "Historical exploration lane: "
+            "Deep recent exploration lane: "
             f"OpenAlex {len(oa_explore)} + Crossref {len(cr_explore)} query/queries from {DATE_FLOOR.isoformat()}; "
             "themes=" + ", ".join(exploration.get("themes", []))
         )
@@ -15229,7 +15229,10 @@ def main() -> int:
     first_run = (not bool(previous.get("first_scan_complete"))) and not is_fresh_repository_seed(previous)
     news_lookback = SIGNAL_BACKFILL_HOURS if signal_backfill else (FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS)
     SIGNAL_WINDOW_START_DATE = (now - dt.timedelta(hours=news_lookback)).date()
-    log_progress(f"Weak-signal window: {news_lookback}h (recovery backfill={signal_backfill})")
+    log_progress(
+        f"Weak-signal discovery lookback: {news_lookback}h (recovery backfill={signal_backfill}); "
+        f"published C retention: {WEAK_SIGNAL_RETENTION_DAYS} days from first_seen; Strand-A anchor required"
+    )
     news_warnings: list[str] = []
     execution_stats: dict[str, Any] = {}
     # V17.12.6 activation repair: a version string alone is NOT proof that the

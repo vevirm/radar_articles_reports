@@ -149,6 +149,7 @@
 
 <script src="../reader_rank.js?v=17.20.19"></script>
 <script src="../briefing/insights.js?v=17.20.19"></script>
+<script src="../reader_style.js?v=19.0"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",recentOnly:false,newOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,newStart:0,newEnd:0};
@@ -248,9 +249,9 @@ function coreMessage(x){
   return claim80(readablePaperTitle(title));
 }
 function whatForGeo(x){return globalThis.RadarInsights?.whatForEuRiGeo?.(x)||claimText(x)}
-function whatLine(x){const w=whatForGeo(x);return w?`<p class="whatline"><strong>What it says for EU R&amp;I geopolitics:</strong> ${esc(w)}</p>`:''}
+function whatLine(x){const pair=globalThis.RadarReaderStyle?.radarPair?.(x)||{what:whatForGeo(x)};return pair.what?`<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p>`:''}
 function simpleWhy(x){return globalThis.RadarInsights?.whyFor?.(x)||''}
-function whyLine(x){const w=simpleWhy(x);return w?`<p class="whyline"><strong>Why it matters:</strong> ${esc(w)}</p>`:''}
+function whyLine(x){const pair=globalThis.RadarReaderStyle?.radarPair?.(x)||{why:simpleWhy(x)};return pair.why?`<p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>`:''}
 function cWhatLine(x){const w=cleanText(globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||'');return w?`<p class="signal-what"><strong>What happened:</strong> ${esc(w)}</p>`:''}
 
 function whereFrom(x){return [x.source,fmtDate(x.date)].filter(Boolean).join(' · ')}
@@ -291,12 +292,15 @@ function abItem(x,i){
 }
 function bItem(x,i){
   const id=`abstract-b-${i}`;
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${tag("Method")}</div></div>${claimButton(x,id,methodPoint(x))}${visibleSource(x)}<p class="whyline"><strong>Use:</strong> ${esc(methodUse(x))}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
+  const pair=globalThis.RadarReaderStyle?.pagePair?.(methodPoint(x),methodUse(x),20,20)||{what:methodPoint(x),why:methodUse(x)};
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
 }
 function cItem(x,i){
   const id=`abstract-c-${i}`;
-  const why=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id,signalPoint(x),'Open source ↗')}${visibleSource(x)}${why?`<p class="whyline"><strong>Why it matters:</strong> ${esc(cap100(why))}</p>`:''}${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
+  const rawWhat=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';
+  const rawWhy=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
+  const pair=globalThis.RadarReaderStyle?.pagePair?.(rawWhat,rawWhy,20,20)||{what:rawWhat,why:rawWhy};
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function fallbackCard(x){const title=cleanText(x?.title||x?.headline||x?.core_message||'Finding');const source=cleanText(x?.source||'');const link=cleanText(x?.link||'');return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x?.date))}</div></div><h3 class="claim-title">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="visible-source"><strong>Source:</strong> ${esc(source)}</div>`:''}</article>`}

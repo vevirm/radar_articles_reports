@@ -1,67 +1,27 @@
 #!/usr/bin/env python3
-"""Deployment/workflow sanity checks.
-
-These checks stay separate from scanner regression tests. A stale or partially uploaded
-hidden workflow must never prevent the evidence engine from running, but the shipped
-workflows should serialize Main and Historical scans at repository level.
-"""
+"""Static production workflow contract check. Not run as a pre-scan regression gate."""
 from pathlib import Path
 import sys
-
-ROOT = Path(__file__).resolve().parents[1]
-checks = []
-
-
-def require(path, needle, label):
-    text = path.read_text(encoding="utf-8")
-    checks.append((needle in text, label, str(path.relative_to(ROOT)), needle))
-
-
-def forbid(path, needle, label):
-    text = path.read_text(encoding="utf-8")
-    checks.append((needle not in text, label, str(path.relative_to(ROOT)), f"not {needle}"))
-
-
-main = ROOT / ".github/workflows/radar-scan.yml"
-hist = ROOT / ".github/workflows/historical-scan.yml"
-
-require(main, "cron: '17 0,4,8,12,16,20 * * *'", "Main scanner fixed four-hour schedule")
-require(main, "  push:", "Main browser uploads trigger an immediate discovery run")
-require(main, "      - radar.json", "Main scanner output does not recursively retrigger itself")
-forbid(hist, "  push:", "Historical uploads remain separate from Main discovery")
-require(hist, "cron: '53 6 * * *'", "Historical scan separated from Main schedule")
-for path, label in ((main, "Main"), (hist, "Historical")):
-    require(path, "group: ri-research-scanners", f"{label} shared scanner lock")
-    require(path, "cancel-in-progress: false", f"{label} never cancels an active scanner")
-    # GitHub Actions concurrency has no `queue: max` key. A shared group already queues
-    # one pending run and prevents simultaneous execution.
-    forbid(path, "queue: max", f"{label} uses valid GitHub concurrency syntax")
-
-require(main, "git add -- radar.json", "Main persistence boundary")
-require(main, "radar.json is the ONLY persistent output", "Main persistence-boundary explanation")
-require(hist, "HISTORICAL_MIN_RUNTIME_SECONDS: '0'", "Historical target-driven runtime")
-require(hist, "git add -- historical/historical.json", "Historical persistence boundary")
-require(hist, "grep -vx 'historical/historical.json'", "Historical persistence-boundary explanation")
-
-# Visible-code fallback for the recurring case where a browser upload leaves hidden
-# workflow YAML stale. Main/Historical scanners still refuse to overlap; Historical also
-# refreshes only the expected date-window metadata so the legacy safety step does not turn
-# a deliberate defer into a false red failure.
-guard = ROOT / "scripts/scanner_run_guard.py"
-hist_scan = ROOT / "historical/scan_historical.py"
-require(guard, "def defer_if_peer_scanner_active", "Legacy workflow runtime collision guard")
-require(guard, "def deployment_only_push_event", "Role-aware legacy workflow upload/push guard")
-require(hist_scan, "refresh_window_metadata_after_peer_defer", "Historical legacy-defer compatibility")
-
-failed = [x for x in checks if not x[0]]
-for ok, label, rel, needle in checks:
-    print(("OK  " if ok else "WARN") + f" {label}: {rel}")
-if failed:
-    print("\nWorkflow contract mismatch. Scanner code remains protected by its runtime guard; continuing so stale hidden workflow YAML cannot block discovery.")
-    for _, label, rel, needle in failed:
-        print(f" - {label}: expected {needle!r} in {rel}")
-    if "--strict" in sys.argv[1:]:
-        sys.exit(1)
-    print("Compatibility mode: workflow mismatches are warnings, not scanner-test failures.")
-    sys.exit(0)
-print("Workflow contract looks correct.")
+ROOT=Path(__file__).resolve().parents[1]
+main=(ROOT/'.github/workflows/radar-scan.yml').read_text(encoding='utf-8')
+hist=(ROOT/'.github/workflows/historical-scan.yml').read_text(encoding='utf-8')
+checks=[
+ ("cron: '17 */4 * * *'" in main,'Main runs every four hours at :17 UTC'),
+ ("cron: '57 */4 * * *'" in hist,'Historical runs every four hours at :57 UTC'),
+ ('group: ri-radar-research-scanners' in main and 'group: ri-radar-research-scanners' in hist,'Shared scanner concurrency lock'),
+ ('cancel-in-progress: true' in main,'Main can pre-empt Historical and therefore has priority'),
+ ('cancel-in-progress: false' in hist,'Historical never cancels Main'),
+ ('Run standard 24-minute Main scanner' in main,'Main production budget step'),
+ ("HISTORICAL_SCAN_BUDGET_SECONDS: '900'" in hist,'Historical 15-minute budget'),
+ ('Run scanner regression tests' not in main,'No legacy regression discovery before Main research'),
+ ('Run historical scanner tests' not in hist,'No legacy regression discovery before Historical research'),
+ ('Launch one fresh 20-minute rescue scan' not in main,'No second rescue workflow behind Main'),
+ ('Launch one fresh historical rescue scan' not in hist,'No second rescue workflow behind Historical'),
+ ('git add -- radar.json' in main,'Main persistence boundary'),
+ ('git add -- historical/historical.json' in hist,'Historical persistence boundary'),
+]
+failed=False
+for ok,label in checks:
+ print(('OK  ' if ok else 'FAIL')+label)
+ failed|=not ok
+if failed: raise SystemExit(1)

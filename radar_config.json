@@ -1464,6 +1464,31 @@
       "name": "World Trade Organization",
       "domain": "wto.org",
       "tier": 2
+    },
+    {
+      "name": "European Defence Agency",
+      "domain": "eda.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "ETSI",
+      "domain": "etsi.org",
+      "tier": 1
+    },
+    {
+      "name": "CEN-CENELEC",
+      "domain": "cencenelec.eu",
+      "tier": 1
+    },
+    {
+      "name": "COST Association",
+      "domain": "cost.eu",
+      "tier": 1
+    },
+    {
+      "name": "EUREKA",
+      "domain": "eurekanetwork.org",
+      "tier": 1
     }
   ],
   "crossref_institution_publishers": [
@@ -1678,7 +1703,7 @@
   ],
   "first_news_lookback_hours": 720,
   "discovery_overlap_days": 14,
-  "bootstrap_lookback_months": 4,
+  "bootstrap_lookback_months": 6,
   "source_expansion_version": "v17.20.23-main-radar-recall-recovery",
   "force_backfill_on_source_expansion": false,
   "institution_pages_per_domain_bootstrap": 14,
@@ -2710,7 +2735,7 @@
   "weak_signal_followup_max_passes": 3,
   "frontier_gap_recompute_every_n_waves": 1,
   "frontier_stubborn_recovery_enabled": true,
-  "frontier_stubborn_recovery_lookback_months": 4,
+  "frontier_stubborn_recovery_lookback_months": 6,
   "frontier_stubborn_recovery_seconds": 240,
   "frontier_stubborn_recovery_max_queries": 30,
   "english_only": true,
@@ -3706,5 +3731,17 @@
   "precision_recall_queries_per_scan": 20,
   "precision_recall_query_profile_version": "v18.0-dimensional-eu-ri-geo",
   "signal_change_query_profile_version": "v18.0-observable-change-a-anchored",
-  "source_context_policy": "Context-rich EU primary sources may be searched broadly; general scholarly/news discovery requires multiple independent EU/R&I/strategic dimensions. Generic terms such as Europe, innovation, technology, security, resilience or competitiveness never admit a record alone."
+  "source_context_policy": "Context-rich EU primary sources may be searched broadly; general scholarly/news discovery requires multiple independent EU/R&I/strategic dimensions. Generic terms such as Europe, innovation, technology, security, resilience or competitiveness never admit a record alone.",
+  "production_schedule_hours_utc": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "production_schedule_minute_utc": 17,
+  "main_window_months": 6,
+  "reader_writing_profile": "what-why-surface-v1",
+  "source_universe_note": "EU-primary and high-merit scholarly/institutional sources rotate by family; source context may broaden retrieval but never weakens A/B admission."
 }

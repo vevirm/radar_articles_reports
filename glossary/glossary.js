@@ -50,6 +50,21 @@ const TERMS=[
 ['Third country','EU terminology','In EU policy language, a country that is outside the European Union. It does not mean the country is hostile or unimportant.','The term appears frequently in rules on research participation, data, investment and international cooperation.'],
 ['Trusted research','Research security','An approach to international research that tries to keep collaboration open while identifying and managing security, integrity and dependency risks.','It gives researchers and institutions a practical framework for deciding when extra safeguards are needed.'],
 ['Valley of death','Innovation finance','The difficult stage between a promising research result and a product or company that can attract enough commercial finance and customers.','European technologies can fail to scale if funding, demonstration or early demand disappears at this stage.'],
+['Bibliographic coupling','Foresight methods','A similarity measure based on two publications citing some of the same earlier sources.','It can reveal emerging research fronts before a mature field name is widely used.'],
+['Change-point detection','Foresight methods','Statistical methods for identifying when the behaviour of a time series or stream changes materially.','It can flag breaks in publication, patent, funding or collaboration patterns that deserve strategic attention.'],
+['Citation burst','Foresight methods','A sharp temporary increase in citations to a publication, topic or reference.','Bursts can help identify fast-rising research fronts before conventional indicators catch up.'],
+['Co-citation analysis','Foresight methods','Mapping how often two publications or authors are cited together by later work.','It can expose changing intellectual clusters and the structure behind an emerging technology field.'],
+['Dynamic topic model','Foresight methods','A topic model designed to track how latent themes change across time slices.','It can detect vocabulary and topic shifts that ordinary static keyword counts miss.'],
+['Horizon scanning','Foresight methods','A structured process for finding early evidence of emerging change, risks and opportunities.','It helps the Radar search beyond already-established policy language and identify developments before they become mainstream.'],
+['Novelty detection','Foresight methods','Methods that identify observations, combinations or texts that differ materially from an established reference set.','For weak signals, novelty is useful as a candidate generator but does not replace evidence and relevance checks.'],
+['Research front','Foresight methods','A relatively coherent cluster of recent research activity forming around a shared problem, method or technology.','Tracking research fronts can show where capability and competition are moving before journal categories or policy labels catch up.'],
+['Semantic shift','Foresight methods','A measurable change in how a word or concept is used across time or contexts.','It can reveal narrative change, such as collaboration language moving closer to security, screening or risk language.'],
+['Technology intelligence','Foresight methods','Systematic collection and analysis of evidence about technologies, actors, capabilities and trajectories.','It connects papers, patents, firms and policy signals into a view of where strategic technology competition may be moving.'],
+['Emerging topic detection','Foresight methods','Computational methods for identifying research themes that are forming or accelerating.','It can generate candidates before a field has a stable label, but the Radar still requires substantive evidence before admission.'],
+['Temporal embeddings','Foresight methods','Representations designed to track how words, entities or relationships move across time.','They can help detect changing concepts or networks, while the final Radar judgement remains evidence-based.'],
+['Dynamic community detection','Foresight methods','Network methods for identifying communities that form, split or merge through time.','It can reveal changing research or technology collaboration structures before aggregate indicators show the shift.'],
+['Graph anomaly detection','Foresight methods','Methods for identifying unusual nodes, links or structural changes in a network.','It can flag unexpected collaboration or technology-network changes for later evidence checking.'],
+['Weak signal','Foresight methods','An early, incomplete indication of change whose significance depends on its relationship to established evidence.','In this Radar, a weak signal is temporary, lasts 60 days and must be anchored to relevant Strand A evidence.'],
 ['Weaponised interdependence','Geoeconomics','Using control over important networks, technologies, finance or supply chains to monitor, pressure or constrain other actors.','It explains why ordinary economic or research dependencies can become sources of geopolitical power.']
 ].map(([term,category,meaning,why])=>({term,category,meaning,why})).sort((a,b)=>a.term.localeCompare(b.term,'en',{sensitivity:'base'}));
 const ALIASES=[
@@ -80,7 +95,14 @@ const ALIASES=[
   ['intellectual property','Intellectual property (IP)'],['ip','Intellectual property (IP)'],
   ['semiconductor fab','Semiconductor fab'],['foundry','Foundry'],
   ['spinout','Spin-off / spinout'],['spin-off','Spin-off / spinout'],
-  ['valley of death','Valley of death'],['weaponised interdependence','Weaponised interdependence']
+  ['valley of death','Valley of death'],['weaponised interdependence','Weaponised interdependence'],
+  ['horizon scanning','Horizon scanning'],['weak signal','Weak signal'],['weak signals','Weak signal'],
+  ['technology intelligence','Technology intelligence'],['research front','Research front'],
+  ['emerging topic detection','Emerging topic detection'],['temporal embeddings','Temporal embeddings'],['temporal embedding','Temporal embeddings'],
+  ['dynamic community detection','Dynamic community detection'],['graph anomaly detection','Graph anomaly detection'],['network anomaly detection','Graph anomaly detection'],
+  ['citation burst','Citation burst'],['change-point detection','Change-point detection'],['changepoint detection','Change-point detection'],
+  ['semantic shift','Semantic shift'],['novelty detection','Novelty detection'],['dynamic topic model','Dynamic topic model'],
+  ['bibliographic coupling','Bibliographic coupling'],['co-citation analysis','Co-citation analysis']
 ];
 const byTerm=new Map(TERMS.map(x=>[x.term.toLowerCase(),x]));
 const aliasRows=ALIASES.map(([alias,term])=>({alias,term:byTerm.get(term.toLowerCase())})).filter(x=>x.term).sort((a,b)=>b.alias.length-a.alias.length);

@@ -1,5 +1,5 @@
 {
-  "profile_version": "v18.0-main-aligned-older-than-6m",
+  "profile_version": "v19.0-main-aligned-older-than-6m",
   "date_from": "2015-01-01",
   "topics_per_scan": 4,
   "sources_per_scan": 8,
@@ -1548,6 +1548,36 @@
       "domain": "wto.org",
       "kind": "elite_institute",
       "authority": 55
+    },
+    {
+      "name": "European Defence Agency",
+      "domain": "eda.europa.eu",
+      "kind": "official_eu",
+      "authority": 58
+    },
+    {
+      "name": "ETSI",
+      "domain": "etsi.org",
+      "kind": "official_eu",
+      "authority": 57
+    },
+    {
+      "name": "CEN-CENELEC",
+      "domain": "cencenelec.eu",
+      "kind": "official_eu",
+      "authority": 57
+    },
+    {
+      "name": "COST Association",
+      "domain": "cost.eu",
+      "kind": "official_eu",
+      "authority": 56
+    },
+    {
+      "name": "EUREKA",
+      "domain": "eurekanetwork.org",
+      "kind": "official_eu",
+      "authority": 56
     }
   ],
   "source_adapters": {
@@ -1810,5 +1840,6 @@
   "budget_seconds": 900,
   "shared_main_queries_per_scan": 18,
   "shared_main_query_policy": "Historical rotates through the same Main A and B query grammar, but only inside publication windows strictly older than the rolling six-month cutoff.",
-  "admission_policy": "New historical items must pass the Main scanner gate_scope/final worthiness logic plus Historical source-age and trusted-source constraints. C is never reconstructed historically."
+  "admission_policy": "New historical items must pass the Main scanner gate_scope/final worthiness logic plus Historical source-age and trusted-source constraints. C is never reconstructed historically.",
+  "schedule_note": "Every four hours at minute 57 UTC, after Main; same A/B gate, only publication dates older than the rolling six-month Main window."
 }
