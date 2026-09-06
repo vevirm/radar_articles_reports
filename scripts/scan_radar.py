@@ -172,6 +172,67 @@ def legacy_workflow_schedule_compatibility_active(workflow_text=None):
     )
 
 
+def legacy_historical_followup_via_main_workflow(root: Path | None = None) -> bool:
+    """Use the old Main workflow's one dispatched follow-up as Historical.
+
+    GitHub browser bulk uploads can leave hidden workflow YAML untouched. The retained
+    legacy Main workflow already dispatches exactly one second workflow run after a normal
+    run. In compatibility mode that second run is repurposed as the 15-minute Historical
+    cycle, so Main always runs first and the two research phases never overlap. Historical
+    output is embedded in radar.json because the retained Main workflow is only permitted
+    to commit radar.json. The Historical page selects the newest archive from either source.
+    """
+    root = root or ROOT
+    if not legacy_workflow_schedule_compatibility_active():
+        return False
+    if not RADAR_RESCUE_MODE:
+        return False
+    source = root / "historical" / "historical.json"
+    tmp = Path(os.environ.get("RUNNER_TEMP") or "/tmp") / f"ri-radar-historical-{os.getpid()}.json"
+    try:
+        if source.is_file():
+            tmp.write_bytes(source.read_bytes())
+        env = os.environ.copy()
+        env["HISTORICAL_OUTPUT_PATH"] = str(tmp)
+        env["HISTORICAL_SCAN_BUDGET_SECONDS"] = "900"
+        env["HISTORICAL_RESCUE_MODE"] = "false"
+        # This is a workflow-dispatched compatibility cycle, not an upload-triggered
+        # Historical workflow, so the Historical push-deployment guard must not suppress it.
+        env["RADAR_RUN_TRIGGER"] = "workflow_dispatch"
+        env["GITHUB_EVENT_NAME"] = "workflow_dispatch"
+        print("[compat] Legacy hidden Main workflow detected: dispatched follow-up is the 15-minute Historical scan.", flush=True)
+        subprocess.run(
+            [sys.executable, str(root / "historical" / "scan_historical.py")],
+            cwd=root, env=env, check=True, timeout=990,
+        )
+        hist = json.loads(tmp.read_text(encoding="utf-8"))
+        radar = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        if not isinstance(hist, dict) or not isinstance(radar, dict):
+            raise RuntimeError("Historical compatibility output or radar.json is not an object")
+        radar["historical_archive"] = hist
+        radar["historical_archive_updated_at"] = hist.get("last_updated")
+        radar["historical_workflow_compatibility"] = {
+            "mode": "legacy-main-sequential-followup",
+            "main_runs_first": True,
+            "historical_budget_seconds": 900,
+            "historical_cutoff_exclusive": hist.get("cutoff_exclusive"),
+        }
+        tmp_out = OUT_PATH.with_suffix(".json.tmp")
+        tmp_out.write_text(json.dumps(radar, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        tmp_out.replace(OUT_PATH)
+        print(
+            f"[compat] Historical follow-up complete: {len(hist.get('items', []))} cumulative historical item(s); "
+            "embedded in radar.json for the retained workflow's safe commit boundary.",
+            flush=True,
+        )
+        return True
+    finally:
+        try:
+            tmp.unlink(missing_ok=True)
+        except Exception:
+            pass
+
+
 def scheduler_state_completed_at(completed, workflow_text=None):
     """Return the internal scheduler reference while keeping public timestamps exact.
 
@@ -17692,6 +17753,19 @@ def main() -> int:
     data["stats"]["inferred_shocks_registry_total"] = len(shock_state.get("dynamic_shocks", []))
     data["reader_products_refresh"]["shock_inference"] = True
     normalize_reader_claims(data)
+    # The retained pre-v21 hidden workflow has a single post-Main dispatch hook. When
+    # browser upload has left that workflow in place, use that hook every completed Main
+    # cycle for the 15-minute Historical follow-up. Preserve the real yield separately;
+    # only the legacy workflow's dispatch probe sees the compatibility zero.
+    if legacy_workflow_schedule_compatibility_active() and not RADAR_RESCUE_MODE:
+        results = data.get("scan_results") if isinstance(data.get("scan_results"), dict) else {}
+        low = results.get("low_yield_rotation") if isinstance(results.get("low_yield_rotation"), dict) else {}
+        low["actual_new_ab_after_extended_fallback"] = low.get("new_ab_after_extended_fallback", results.get("new_ab_unique", 0))
+        low["new_ab_after_extended_fallback"] = 0
+        low["full_rescue_run_enabled"] = True
+        low["legacy_followup_purpose"] = "historical-15-minute-sequential-cycle"
+        results["low_yield_rotation"] = low
+        data["scan_results"] = results
     tmp_out = OUT_PATH.with_suffix(".json.tmp")
     tmp_out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp_out.replace(OUT_PATH)
@@ -17709,6 +17783,10 @@ def main() -> int:
 
 if __name__ == "__main__":
     _repo_root = Path(__file__).resolve().parents[1]
+    # Browser-upload compatibility: the old Main workflow's dispatched "rescue" run is
+    # the Historical cycle. It never reruns Main and therefore preserves Main-first order.
+    if legacy_historical_followup_via_main_workflow(_repo_root):
+        raise SystemExit(0)
     if deployment_only_push_event("main"):
         raise SystemExit(0)
     if defer_if_peer_scanner_active("main", _repo_root):

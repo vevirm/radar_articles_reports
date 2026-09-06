@@ -47,3 +47,8 @@ The clean `radar_seed.json` remains the fresh-repository fallback. If a genuinel
 ## Security boundary
 
 The public pages are static HTML/JS and only fetch JSON; they have no GitHub write credential. Scanner checkout uses `persist-credentials: false`. The OpenAlex key is supplied only as an Actions secret environment variable. After scanning, unexpected repository changes are restored/removed, output is validated, and authentication is added only for the final commit of the permitted generated JSON file.
+
+
+### Browser-upload compatibility
+
+GitHub browser uploads can leave hidden `.github/workflows` files from an older repository version in place. The visible runtime therefore remains compatible with the retained workflows: old regression discovery is reduced to the current live contract plus quarantined legacy suites; upload-triggered Historical runs perform no source requests; and an old Main workflow's one post-Main dispatch is repurposed as the sequential 15-minute Historical cycle. This preserves Main-first ordering and prevents simultaneous research even when the hidden YAML was not replaced.

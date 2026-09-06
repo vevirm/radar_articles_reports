@@ -46,7 +46,7 @@ from scan_radar import (
 )
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
-OUT_PATH = HIST_DIR / "historical.json"
+OUT_PATH = Path(os.environ.get("HISTORICAL_OUTPUT_PATH", str(HIST_DIR / "historical.json")))
 SEED_PATH = HIST_DIR / "historical_seed.json"
 CURATED_SEED_PATH = HIST_DIR / "curated_seed_evidence.json"
 MANUAL_EVIDENCE_PATH = HIST_DIR / "manual_evidence.json"
@@ -100,7 +100,9 @@ CUTOFF_EXCLUSIVE = historical_cutoff_exclusive()
 DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
-BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 900))))
+# Production contract: every Historical research cycle gets exactly 15 minutes.
+# Older hidden workflows may still export 1050 seconds; ignore that stale value.
+BUDGET_SECONDS = 900 if str(os.environ.get("GITHUB_ACTIONS") or "").lower() == "true" else int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 900))))
 # Browser bulk uploads can leave the old hidden Historical workflow in place, where
 # HISTORICAL_MIN_RUNTIME_SECONDS=600 was hard-coded.  Newer Historical rotation is
 # target-driven, so visible config may explicitly ignore that stale environment value.
@@ -123,6 +125,15 @@ SESSION.headers.update({
 })
 
 DIAG: collections.Counter[str] = collections.Counter()
+
+
+def legacy_hidden_historical_workflow_active() -> bool:
+    """Detect the retained pre-v21 hidden workflow used by browser-uploaded repos."""
+    try:
+        text=(ROOT / ".github" / "workflows" / "historical-scan.yml").read_text(encoding="utf-8")
+    except Exception:
+        return False
+    return "cron: '41 3 * * *'" in text and "HISTORICAL_SCAN_BUDGET_SECONDS: '1050'" in text
 
 EU_RE = re.compile(r"\b(EU|European Union|Europe|European|Horizon Europe|ERC|EIC|JRC|European Commission|European Parliament|Council of the EU)\b", re.I)
 RI_RE = re.compile(
@@ -1194,8 +1205,8 @@ def main() -> int:
     return 0
 
 
-def refresh_window_metadata_after_peer_defer() -> None:
-    """Keep legacy workflow verification truthful when a peer scanner owns the slot.
+def refresh_window_metadata_only(reason: str = "peer scanner owns the slot") -> None:
+    """Keep legacy workflow verification truthful without doing Historical research.
 
     Current workflows share one GitHub concurrency group and therefore queue before this
     code is reached. Older hidden workflow YAML can survive a browser bulk upload, though.
@@ -1215,23 +1226,28 @@ def refresh_window_metadata_after_peer_defer() -> None:
     data["date_to"] = DATE_TO.isoformat()
     data["main_radar_window_months"] = MAIN_RADAR_WINDOW_MONTHS
     compat = data.get("workflow_compatibility") if isinstance(data.get("workflow_compatibility"), dict) else {}
-    compat["peer_deferred_without_source_requests"] = True
-    compat["peer_deferred_at"] = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    compat["metadata_only_without_source_requests"] = True
+    compat["metadata_only_reason"] = str(reason)
+    compat["metadata_only_at"] = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     data["workflow_compatibility"] = compat
     tmp = OUT_PATH.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp.replace(OUT_PATH)
-    log("Peer scanner owns the runtime slot; refreshed historical window metadata only. No source requests were made and no accepted evidence was removed.")
+    log(f"{reason}; refreshed historical window metadata only. No source requests were made and no accepted evidence was removed.")
 
 
 if __name__=="__main__":
+    event=str(os.environ.get("GITHUB_EVENT_NAME") or os.environ.get("RADAR_RUN_TRIGGER") or "").strip().lower()
     if deployment_only_push_event("historical"):
-        log(
-            "Repository push/upload event: deployment-only. Historical discovery, "
-            "coverage cursors and timestamps are intentionally unchanged; scheduled/manual runs scan."
-        )
+        refresh_window_metadata_only("Repository push/upload event is deployment-only for Historical")
+        raise SystemExit(0)
+    # Under the old hidden daily workflow, automatic Historical work is supplied by the
+    # Main workflow's sequential follow-up compatibility run every four hours. Skip the
+    # obsolete daily schedule so it cannot duplicate or overlap research. Manual runs remain valid.
+    if event == "schedule" and legacy_hidden_historical_workflow_active():
+        log("Legacy daily Historical schedule detected; skipping. Four-hour Historical work is chained after Main.")
         raise SystemExit(0)
     if defer_if_peer_scanner_active("historical", ROOT):
-        refresh_window_metadata_after_peer_defer()
+        refresh_window_metadata_only("Peer scanner owns the runtime slot")
         raise SystemExit(0)
     raise SystemExit(main())

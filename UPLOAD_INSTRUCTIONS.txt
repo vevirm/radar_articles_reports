@@ -10,4 +10,4 @@ R&I GEOPOLITICS RADAR — FULL REPOSITORY
 8. Historical accepts only publications strictly older than the rolling six-month Main boundary and does not create Strand C.
 9. The production workflows do not run old repository-history regression tests before the scanner.
 10. Browser pages have no repository write credential. Only radar.json (Main) or historical/historical.json (Historical) may survive a scanner run and be committed after validation.
-11. Uploading files does not itself run a research scan in this version. Use Actions → R&I Radar Scan → Run workflow if you want an immediate Main scan; otherwise the next four-hour schedule starts it.
+11. A whole-repository upload may trigger Main immediately. If GitHub retains an older hidden Historical workflow, you may also briefly see a Historical action on upload; compatibility code makes that upload-triggered Historical run metadata-only with zero source requests, so Main remains the only research scan. Scheduled Historical research remains separate and 15 minutes.
