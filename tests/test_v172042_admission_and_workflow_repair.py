@@ -60,7 +60,7 @@ class AdmissionRecallRepairTests(unittest.TestCase):
         self.assertFalse(ok)
         self.assertEqual(reason, "event_recap_not_substantive_evidence")
 
-    def test_stale_top_level_marker_closes_already_cycled_family_backfill(self):
+    def test_current_expansion_target_does_not_reset_unfinished_family_progress(self):
         previous = {
             "last_updated": "2026-09-05T14:00:00Z",
             "source_expansion_version": "older-completion-marker",
@@ -83,13 +83,10 @@ class AdmissionRecallRepairTests(unittest.TestCase):
             },
         }
         state = scan.initial_scan_state(previous)
-        # The family has already completed multiple cycles under the current expansion target.
-        # A stale top-level completion marker must not keep reopening a four-month migration forever.
         self.assertEqual(
             state["backfill"],
-            {"openalex": True, "crossref_broad": True, "crossref_priority": True, "institutions": True},
+            {"openalex": True, "crossref_broad": False, "crossref_priority": True, "institutions": True},
         )
-        self.assertTrue(state.get("source_expansion_legacy_completion_migrated"))
         self.assertFalse(state.get("recall_reset_this_run"))
 
 

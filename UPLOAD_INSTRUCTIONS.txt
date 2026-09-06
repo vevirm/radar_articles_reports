@@ -1,4 +1,4 @@
-Release: 17.20.48
+Release: 17.20.47
 
 UPLOAD THE WHOLE REPOSITORY
 ===========================
@@ -10,24 +10,24 @@ This ZIP is a COMPLETE repository snapshot, not a patch.
 3. Upload/replace the COMPLETE contents of that folder on top of the existing GitHub repository.
 4. Let files with the same names replace the older versions.
 
+FRESH START IN THIS RELEASE (v17.20.47)
+---------------------------------------
+The bundled radar.json is already reset to the 200 most important accepted A/B items
+(A=190, B=10) with fresh discovery state. Upload it together with everything else. The
+next scan starts its full four-month pass from the beginning and citation snowballing
+now seeds from DOI-backed publications only. Pruned items are listed under
+`corpus_reset.pruned_titles` in radar.json and are not re-admitted by rotation.
+
 IMPORTANT: STALE .github WORKFLOWS NO LONGER BLOCK THE SCANNER
 -------------------------------------------------------------
 GitHub browser uploads have repeatedly left `.github/workflows/*.yml` at an older revision.
-v17.20.48 remains deliberately compatible with that situation. The scanner regression suite no
+v17.20.44 is deliberately compatible with that situation. The scanner regression suite no
 longer exits non-zero merely because hidden workflow YAML is stale. Visible Python runtime
 guards handle the legacy hourly/six-hour Main workflow and prevent Main/Historical overlap.
 
 The package still contains the preferred corrected workflows. If GitHub accepts them, Main
 runs on the fixed four-hour schedule and Main/Historical share one concurrency group. If
 GitHub leaves the old YAML in place, the upload-triggered Main scan still proceeds.
-
-
-V17.20.48 SCANNER CLEANUP
--------------------------
-This release keeps the existing radar corpus and reader pages, but retires migration-era
-scanner load: normal scholarly discovery is incremental, priority-journal depth rotates in
-a small bounded lane, DOI-backed citation snowballing rotates through new seed neighborhoods,
-and low-yield generic rescue no longer reserves 600 seconds of every run.
 
 OPENALEX API KEY
 ----------------

@@ -76,11 +76,11 @@ class RotationRepairTests(unittest.TestCase):
             scan.CONFIG['crossref_primary_second_lane_enabled'] = old_second
         self.assertEqual(stats.get('crossref_broad_queries'), {'EU research security test'})
 
-    def test_low_yield_is_depth_rotation_and_has_two_bounded_waves(self):
+    def test_low_yield_is_depth_rotation_and_has_three_waves(self):
         src = SCAN_PATH.read_text(encoding='utf-8')
         self.assertIn('low-yield-depth', src)
         self.assertIn('fresh_exec, True', src)
-        self.assertEqual(scan.CONFIG.get('low_yield_fresh_rotation_max_waves'), 2)
+        self.assertEqual(scan.CONFIG.get('low_yield_fresh_rotation_max_waves'), 3)
         self.assertEqual(scan.CONFIG.get('target_new_ab_per_scan'), 5)
 
     def test_known_false_positives_cannot_be_resurrected(self):

@@ -31,10 +31,10 @@ class RecallFirstDiscoveryTests(unittest.TestCase):
     def test_base_query_slice_is_no_longer_tiny(self):
         self.assertGreaterEqual(scan.CONFIG.get('scholarly_base_queries_per_scan', 0), 30)
         # Primary breadth is intentionally capped below the public throttle; the protected
-        # a short bounded low-yield continuation remains available when primary yield is low.
+        # low-yield depth waves carry the remaining search budget when yield is low.
         self.assertGreaterEqual(scan.CONFIG.get('openalex_queries_per_scan', 0), 60)
-        self.assertGreaterEqual(scan.CONFIG.get('crossref_broad_queries_per_scan', 0), 60)
-        self.assertEqual(scan.CONFIG.get('low_yield_fresh_rotation_max_waves', 0), 2)
+        self.assertGreaterEqual(scan.CONFIG.get('crossref_broad_queries_per_scan', 0), 70)
+        self.assertGreaterEqual(scan.CONFIG.get('low_yield_fresh_rotation_max_waves', 0), 3)
 
     def test_missing_abstract_does_not_hide_obvious_tier2_eu_ri_paper(self):
         ev = scan.gate_scope(
