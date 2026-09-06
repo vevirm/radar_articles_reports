@@ -46,3 +46,106 @@ html,body{font-size:16px!important}
 
 /* v17.20.3: recent-addition controls */
 .filter.added-filter.active{background:#c40018!important;border-color:#c40018!important;color:#fff!important}.scan-strip{background:#fff!important}.scan-metric strong{color:#111!important}.scan-metric.added strong{color:#c40018!important}
+/* v21.6 final palette and navigation contract */
+:root{
+  --ui-black:#0b0b0b!important;
+  --ui-red:#c40018!important;
+  --ui-white:#fff!important;
+  --ink:#0b0b0b!important;
+  --muted:rgba(11,11,11,.66)!important;
+  --line:rgba(11,11,11,.20)!important;
+  --bg:#fff!important;
+  --card:#fff!important;
+  --navy:#0b0b0b!important;
+  --red:#c40018!important;
+  --accent:#c40018!important;
+  --focus:#c40018!important;
+  --soft:#fff!important;
+}
+html,body{background:#fff!important;color:#0b0b0b!important}
+body,main,section,article,.wrap,.toolbar,.statebar,.statusbar,.inside-map,.page-map,.method,.note,.intro-note{background-color:#fff!important}
+
+/* Header and menu: always visibly black/white/red. */
+header,#app header,.hero{background:#0b0b0b!important;color:#fff!important;border-color:#c40018!important}
+header h1,header h2,header .title,header .brand,#app header h1,#app header .brand{color:#fff!important}
+header .kicker,header .eyebrow,.hero .kicker,.hero .red,.hero h1 span{color:#c40018!important}
+header .lede,header .relation,header .view-relation,header .state,#app header .lede,#app header .state{color:rgba(255,255,255,.82)!important}
+
+.nav,.landing-nav,.topbar{display:flex!important;align-items:center!important;gap:0!important;background:#0b0b0b!important}
+.nav{justify-content:flex-end!important;flex-wrap:wrap!important}
+.nav a,.landing-nav a,.topbar a,.topbar button,.top-actions .button{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:40px!important;padding:9px 11px!important;
+  background:#0b0b0b!important;color:#fff!important;
+  border:1px solid rgba(255,255,255,.28)!important;border-right:0!important;
+  border-radius:0!important;text-decoration:none!important;white-space:nowrap!important;
+  font-weight:850!important;line-height:1.15!important;
+}
+.nav a:last-child,.landing-nav a:last-of-type,.topbar a:last-of-type{border-right:1px solid rgba(255,255,255,.28)!important}
+.nav a:hover,.nav a:focus-visible,.nav a.primary,.nav a.current,.nav a[aria-current="page"],
+.landing-nav a:hover,.landing-nav a:focus-visible,.landing-nav a.current,
+.topbar a:hover,.topbar a:focus-visible,.topbar button:hover,.topbar button:focus-visible,
+.top-actions .button:hover,.top-actions .button:focus-visible{
+  background:#c40018!important;color:#fff!important;border-color:#c40018!important;outline:none!important;
+}
+.nav a[href="../"],.nav a[href="../../"]{font-weight:950!important}
+
+/* Controls and content: no colored fills outside the three-color palette. */
+button,input,select,textarea,.search,.filter,.btn,.action,.more,.info-button,.publication-link,.evidence-open,.card-link,
+.item,.stat,.component,.minimum-read,.issue,.panel,.priority-card,.takeaway,.signal,.intro-card,.download-card,.pub,.term,.list,.entry,.cell,.matrix-cell,.col,.row,.col-head,.row-head,.detail-box,.abstract-panel,.detail-grid,.backstage details,.page-map-card,.journey-step,.shock,.scenario,.surface-box,.shock-arrow,.argument,.variant,.shock-summary,.shock-index,.page-link,.subpages a{
+  background-color:#fff!important;color:#0b0b0b!important;border-color:rgba(11,11,11,.22)!important;
+}
+button,.btn,.info-button,.filter.active,.letters button.active,.page-link.primary{
+  background:#0b0b0b!important;color:#fff!important;border-color:#0b0b0b!important;
+}
+button:hover,.btn:hover,.info-button:hover,.filter.active:hover,.letters button.active:hover{background:#c40018!important;color:#fff!important;border-color:#c40018!important}
+.tag,.chip,.pill,.panel-count,.n,.category,.rank,.family,.status{background:#fff!important;color:#0b0b0b!important;border-color:rgba(11,11,11,.30)!important}
+.tag.new,.tag.signal,.chip.fresh,.risk .rank,.term .label,.role,.issue-number,.page-link .n,.shock-index .kind,.shock-index .status{color:#c40018!important;border-color:#c40018!important}
+
+/* Secondary text uses black opacity, never a fourth hue. */
+.muted,.meta,.source,.origin,.priority-meta,.card-foot,.count,.small,.state,.note,.whatline,.whyline,.visible-source,.section-title span,.field,.empty,.assessment,.hidden-why,.page-link span:last-child,footer{color:rgba(11,11,11,.66)!important}
+header .meta,header .small,header .state,.page-link.primary span:last-child{color:rgba(255,255,255,.78)!important}
+
+/* Red remains the single accent for rules, links and active states. */
+a{outline-color:#c40018!important}
+.publication-open,.source-link,.bullets a,.cell-item a,.evidence a,.more-radar,.back,.actions a.variants,.subpages a:hover{color:#0b0b0b!important;text-decoration-color:#c40018!important}
+.minimum-read,.term,.detail,.second,.shock-arrow.against,.grid .panel:first-child,.scenario,.shock-summary{border-left-color:#c40018!important;border-top-color:#c40018!important}
+.grid .panel:last-child,.shock-arrow.for,.direct .scenario{border-top-color:#0b0b0b!important;border-left-color:#0b0b0b!important}
+
+/* Keyboard focus must be unmistakable. */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{
+  outline:3px solid #c40018!important;outline-offset:2px!important;
+}
+
+/* On phones, keep the menu readable instead of compressing or forming a very tall block. */
+@media(max-width:760px){
+  header .top,.top{gap:14px!important}
+  .nav,.landing-nav,.topbar{
+    width:100%!important;max-width:100%!important;justify-content:flex-start!important;
+    flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;scrollbar-width:thin!important;
+    border-bottom:2px solid #c40018!important;
+  }
+  .nav a,.landing-nav a,.topbar a,.topbar button,.top-actions .button{
+    flex:0 0 auto!important;min-height:44px!important;padding:11px 12px!important;font-size:12px!important;
+  }
+  .landing-nav .lock{margin-left:0!important;flex:0 0 auto!important}
+}
+
+/* v21.6 rendered-header correction */
+header .wrap,#app header .wrap,header .top,#app header .top,header .landing-copy,.hero .wrap{
+  background:transparent!important;
+}
+header .main-radar-link,#app header .main-radar-link{
+  background:#fff!important;color:#0b0b0b!important;
+}
+header .main-radar-link small,#app header .main-radar-link small{
+  color:rgba(11,11,11,.66)!important;
+}
+header .main-radar-link .arrow,#app header .main-radar-link .arrow{color:#c40018!important}
+
+/* v21.6 exact accent normalization: one red only */
+header:not(.hero) .kicker,header:not(.hero) .eyebrow,header .kicker,header .eyebrow,
+.hero .kicker,.hero .red,.eyebrow,.minimum-read .label,.page-map-title,.year{
+  color:#c40018!important;
+}

@@ -1,3 +1,11 @@
+# v21.6 — Historical full-window + visual palette audit
+
+- Historical scanner updated to the v21.5 full ten-minute research-window behavior: item targets no longer stop discovery; only an 8-second final save margin is protected.
+- Historical and Main production workflows restored to the required four-hour offset with one shared research lock and Main priority.
+- Public pages now share one final white/black/red UI override. Menus use black backgrounds, white labels and red active/hover/focus states.
+- Mobile navigation uses a readable horizontal strip rather than compressed labels or a tall wrapped menu.
+- Removed Python bytecode caches and obsolete quarantined version tests; active production tests remain.
+
 # v21.4 full-budget scanner repair
 
 This build fixes the early-finish problem seen in live Main scans.

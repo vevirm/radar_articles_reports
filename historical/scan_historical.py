@@ -103,13 +103,12 @@ MAX_ITEMS = int(CONFIG.get("max_items", 350))
 # Production contract: every Historical research cycle gets exactly 10 minutes.
 # Older hidden workflows may still export 1050 seconds; ignore that stale value.
 BUDGET_SECONDS = 600 if str(os.environ.get("GITHUB_ACTIONS") or "").lower() == "true" else int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 600))))
-# Browser bulk uploads can leave the old hidden Historical workflow in place, where
-# HISTORICAL_MIN_RUNTIME_SECONDS=600 was hard-coded.  Newer Historical rotation is
-# target-driven, so visible config may explicitly ignore that stale environment value.
-if bool(CONFIG.get("ignore_legacy_min_runtime_env", True)):
-    MIN_RUNTIME_SECONDS = int(CONFIG.get("minimum_runtime_seconds", 0) or 0)
-else:
-    MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 600))))
+# The production contract is a real ten-minute research window.  Older builds treated
+# 600 seconds as a ceiling while reserving 90-170 seconds inside most discovery stages,
+# which could leave a large idle tail.  Historical now keeps rotating useful discovery
+# until only a small local-finalisation margin remains.
+MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 600))))
+FINALIZE_MARGIN_SECONDS = max(5, int(CONFIG.get("finalize_margin_seconds", 8) or 8))
 REQUEST_TIMEOUT = int(os.environ.get("HISTORICAL_REQUEST_TIMEOUT", "12"))
 STARTED_MONO = time.monotonic()
 DEADLINE = STARTED_MONO + max(120, BUDGET_SECONDS)
@@ -206,7 +205,15 @@ def log(msg: str) -> None:
 
 
 def budget_ok(reserve: int = 30) -> bool:
-    return time.monotonic() < DEADLINE - reserve
+    """Return True while useful research may still start.
+
+    Historical used to honour each caller's very large reserve literally.  That made
+    90-170 seconds of a ten-minute run unavailable to research.  The caller reserve is
+    now capped by the small finalisation margin, so all discovery lanes can use almost
+    the whole research window while JSON assembly/saving still has protected time.
+    """
+    effective_reserve = min(max(0, int(reserve)), FINALIZE_MARGIN_SECONDS)
+    return time.monotonic() < DEADLINE - effective_reserve
 
 
 def elapsed_seconds() -> float:
@@ -218,23 +225,12 @@ def minimum_runtime_remaining() -> float:
 
 
 def wait_until_minimum_runtime() -> None:
-    """Honor the minimum historical scan window after useful rotations are exhausted.
+    """Compatibility no-op.
 
-    This is only a final floor. Normal behavior is to spend the time on additional
-    topic/source/deeper-result rotations first. The sleep path is used only when the
-    configured search space completes unusually quickly.
+    v21.5 no longer fills an early-finished Historical run with idle sleep.  The main
+    continuation loop spends the remaining research window on fresh rotations instead.
     """
-    remaining = minimum_runtime_remaining()
-    if remaining <= 0:
-        return
-    safe_remaining = max(0.0, DEADLINE - time.monotonic() - 45.0)
-    wait_for = min(remaining, safe_remaining)
-    if wait_for <= 0:
-        return
-    log(f"Useful configured rotations finished early; holding the historical scan open for {wait_for:.0f}s to satisfy the {MIN_RUNTIME_SECONDS}s minimum window")
-    end = time.monotonic() + wait_for
-    while time.monotonic() < end:
-        time.sleep(min(5.0, max(0.0, end - time.monotonic())))
+    return
 
 
 def parse_date(value: Any) -> dt.date | None:
@@ -526,7 +522,9 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
         try:
             r = SESSION.get("https://api.openalex.org/works", params=params, timeout=REQUEST_TIMEOUT)
             if r.status_code == 429:
-                warnings.append("OpenAlex rate limited (429)"); _diag("openalex_429"); time.sleep(1.2); continue
+                warnings.append("OpenAlex rate limited (429); remaining Historical time reallocated to other sources")
+                _diag("openalex_429")
+                break
             r.raise_for_status(); works = r.json().get("results", [])
         except Exception as e:
             warnings.append(f"OpenAlex {type(e).__name__}: {e}"); continue
@@ -1133,18 +1131,19 @@ def main() -> int:
     low_threshold=max(int(CONFIG.get("low_yield_trigger_max_new_items",3)),target_new-1)
     low_triggered=initial_new<=low_threshold
 
-    # 5) Target-driven continuation inside this same GitHub job. Every continuation
-    # advances to fresh topic/source/band/depth territory. The target controls search
-    # depth only: source quality and EU/R&I/geopolitical admission gates never change.
+    # 5) Full-window continuation inside this same GitHub job. Every continuation
+    # advances to fresh topic/source/band/depth territory. Reaching the new-item target
+    # never ends research early; the scanner keeps using the ten-minute window. Source
+    # quality and EU/R&I/geopolitical admission gates never change.
     continuation_waves=[]
     topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",2)))
     sources_per_wave=max(1,int(CONFIG.get("minimum_runtime_sources_per_wave",4)))
-    max_extra=max(0,int(CONFIG.get("minimum_runtime_max_extra_waves",4)))
+    max_extra=max(1,int(CONFIG.get("minimum_runtime_max_extra_waves",200)))
     next_source_depth=source_depth_cursor+1
     next_api_depth=api_depth_cursor+1
     current_unique=dedupe(candidates)
     current_new=count_new_against_retained(current_unique,retained_baseline)
-    while current_new<target_new and budget_ok(170) and len(continuation_waves)<max_extra:
+    while budget_ok(FINALIZE_MARGIN_SECONDS) and len(continuation_waves)<max_extra:
         wave_no=len(continuation_waves)+1
         wave_topics,wave_next_topic=rotating(topics,next_topic,topics_per_wave)
         wave_sources,wave_next_source=rotating(sources,next_source,sources_per_wave)
@@ -1192,7 +1191,7 @@ def main() -> int:
             "curated_backfill":{"available":len(seeds),"queried_this_run":len(seed_queries),"workbook_ids":[x.get("workbook_id") for x in active_seeds]},
             "manual_evidence":{"available":len(manual_items),"included":sum(1 for x in merged if x.get("manual_curated"))},
             "low_yield_rotation":{"triggered":low_triggered,"new_items_before_continuations":initial_new,"new_items_after_all_in_run_rotations":new_count,"separate_rescue_run_enabled":False},
-            "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"satisfied":elapsed_seconds()>=MIN_RUNTIME_SECONDS,"continuation_waves":continuation_waves},
+            "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"research_window_seconds":BUDGET_SECONDS,"finalize_margin_seconds":FINALIZE_MARGIN_SECONDS,"satisfied":elapsed_seconds()>=max(0,MIN_RUNTIME_SECONDS-FINALIZE_MARGIN_SECONDS),"continuation_waves":continuation_waves},
             "target_new_items":target_new,
             "cumulative_retention":{"enabled":True,"previous_items":len(previous_items),"retained_previous_items":len(previous_items),"normal_scan_deletions":0,"legacy_max_items":MAX_ITEMS},
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),

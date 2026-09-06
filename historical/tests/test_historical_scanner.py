@@ -16,6 +16,14 @@ class HistoricalCurrentContractTests(unittest.TestCase):
     def test_budget_is_ten_minutes(self):
         self.assertEqual(H.BUDGET_SECONDS, 600)
 
+
+    def test_full_ten_minute_research_window(self):
+        self.assertEqual(H.MIN_RUNTIME_SECONDS, 600)
+        self.assertLessEqual(H.FINALIZE_MARGIN_SECONDS, 10)
+        source = PATH.read_text(encoding='utf-8')
+        self.assertIn('while budget_ok(FINALIZE_MARGIN_SECONDS)', source)
+        self.assertNotIn('current_new<target_new and budget_ok', source)
+
     def test_cutoff_is_strictly_older_than_six_months(self):
         self.assertEqual(H.MAIN_RADAR_WINDOW_MONTHS, 6)
         self.assertEqual(H.DATE_TO, H.CUTOFF_EXCLUSIVE - H.dt.timedelta(days=1))
