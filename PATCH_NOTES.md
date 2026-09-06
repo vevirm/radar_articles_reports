@@ -1,3 +1,14 @@
+# v21.7 — richer Trends / counter-trends
+
+- Expanded the Trends page from the previous thin set to nine current evidence tug-of-war pairs supported by the present Radar corpus.
+- Trend admission is now easy to explain: each side needs at least three current Radar records from at least two sources; the opposite side must pass the same gate.
+- Kept the evidence weighting because it makes the balance useful and lively. Stronger and more independent evidence pulls harder; repeated publication from the same source is discounted. The displayed number is explicitly a balance score, not a forecast.
+- Historical publications are read only from `historical/historical.json` and only when they are older than the rolling six-month boundary. They can add roots/persistence/reversal context, but they cannot create or qualify a current trend.
+- Added more readable and occasionally playful pair framing while keeping WHAT/WHY explanations serious and evidence-grounded.
+- Trends evidence remains closed to the repository evidence base: current Radar first, Historical only as optional older context; no outside facts are added by the page.
+- Carried forward the v21.6 production workflows: Main every four hours at :17 with 24 minutes; Historical every four hours at :57 with 10 minutes; one shared research slot with Main priority.
+- Repository remains below 100 files after removal of cache files and obsolete quarantined test wrappers.
+
 # v21.6 — Historical full-window + visual palette audit
 
 - Historical scanner updated to the v21.5 full ten-minute research-window behavior: item targets no longer stop discovery; only an 8-second final save margin is protected.

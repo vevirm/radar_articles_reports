@@ -20,6 +20,12 @@ Main scanner → Radar evidence → Matrix → Trends → Risks & opportunities 
 
 Historical is deliberately separate. Older A/B evidence accumulates in `historical/historical.json`; it does not become current C and does not overwrite the live Matrix or shock state.
 
+### Trends and counter-trends
+
+The Trends page uses the current Radar corpus first. A side appears only when it has at least **three current records from at least two sources**. The opposite side must pass the same rule. Stronger and more independent evidence pulls harder in the playful balance score; repeated evidence from the same publisher is discounted. The score is a tug-of-war indicator, not a probability or forecast.
+
+Historical publications are optional context only. The page may show material strictly older than the rolling six-month boundary when it helps demonstrate roots, persistence or reversal, but historical material can never make a current trend qualify by itself.
+
 ## Discovery and quality
 
 The scanner rotates rather than repeating one giant query. It combines OpenAlex, Crossref, journal/source-first discovery, EU and trusted institutional sources, researchers/authors, citation neighbourhoods, method discovery, observable-change discovery for C, and Matrix-gap recovery.
