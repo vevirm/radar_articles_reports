@@ -14527,12 +14527,58 @@ def main() -> int:
     global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
     started = time.time()
     log_progress.started = time.monotonic()
-    budget_seconds = int(CONFIG.get("scan_budget_seconds", 1200))
+    configured_budget_seconds = max(60, int(CONFIG.get("scan_budget_seconds", 1200)))
+    budget_override = str(os.environ.get("RADAR_SCAN_BUDGET_SECONDS", "") or "").strip()
+    if budget_override:
+        try:
+            budget_seconds = max(60, int(budget_override))
+        except ValueError:
+            raise SystemExit(f"Invalid RADAR_SCAN_BUDGET_SECONDS={budget_override!r}; expected whole seconds")
+    else:
+        budget_seconds = configured_budget_seconds
+
+    # A short diagnostic run must not inherit reserves and stage slices sized for the
+    # normal 24-minute production scan.  Scale only *time allocation* in memory; query
+    # banks, admission rules, rotations, corpus logic and the on-disk config stay the
+    # same.  With no override the production profile is byte-for-byte equivalent to
+    # the configured timings.
+    if budget_seconds < configured_budget_seconds:
+        ratio = max(0.05, min(1.0, budget_seconds / float(configured_budget_seconds)))
+
+        def _scale_time_key(key: str, minimum: int) -> None:
+            try:
+                original = int(CONFIG.get(key, 0) or 0)
+            except Exception:
+                return
+            if original > 0:
+                CONFIG[key] = max(minimum, min(original, int(round(original * ratio))))
+
+        for key in list(CONFIG):
+            if key.endswith("_stage_seconds"):
+                _scale_time_key(key, 8)
+            elif key.endswith("_min_seconds_remaining"):
+                _scale_time_key(key, 8)
+        for key, minimum in (
+            ("network_reserve_seconds", 15),
+            ("scan_finalize_reserve_seconds", 12),
+            ("low_yield_reserved_seconds", 20),
+            ("c_floor_post_reserve_seconds", 8),
+            ("c_floor_final_reserve_seconds", 8),
+        ):
+            _scale_time_key(key, minimum)
+
     SCAN_DEADLINE_MONO = time.monotonic() + budget_seconds
     # Protect a real tail of the same GitHub run for anti-low-hanging-fruit
     # continuation.  The reserve is held only until the controller gets its turn.
     LOW_YIELD_RESERVE_SECONDS = max(0, int(CONFIG.get("low_yield_reserved_seconds", 600) or 0))
     LOW_YIELD_RESERVE_ACTIVE = bool(CONFIG.get("low_yield_fresh_rotation_enabled", True) and LOW_YIELD_RESERVE_SECONDS)
+    if budget_override and budget_seconds < configured_budget_seconds:
+        log_progress(
+            f"Scanner time budget: {budget_seconds}s diagnostic override "
+            f"(production profile: {configured_budget_seconds}s)"
+        )
+    else:
+        log_progress(f"Scanner time budget: {budget_seconds}s production profile")
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
