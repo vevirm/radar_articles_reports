@@ -1706,7 +1706,7 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "v17.20.48-incremental-scholarly-engine-cleanup",
+  "admission_profile": "v17.20.49-incremental-scholarly-engine-cleanup-compat",
   "scan_budget_seconds": 1440,
   "network_reserve_seconds": 100,
   "request_timeout_seconds": 12,
@@ -3501,7 +3501,7 @@
   "curator_seed_query_bank_size": 32,
   "curator_seed_queries_per_scan": 12,
   "curator_seed_discovery_policy": "Curator-supplied known-good examples seed rotating adjacent searches for EU R&I in geopolitical context. They never bypass source quality, direct European/EU scope, substantive R&I, or final admission checks.",
-  "crossref_source_first_depth_pages_max": 1,
+  "crossref_source_first_depth_pages_max": 3,
   "crossref_source_first_depth_policy": "Every priority journal checks newest contents; high-output journals that fill the first page also rotate through one deeper four-month page per scan so older-in-window articles are not permanently hidden.",
   "institution_semantic_date_recovery_enabled": true,
   "main_radar_recall_policy": "High recall for central European/EU research & innovation, prioritising geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power and talent/capability mechanisms. A bounded Tier 1/2 major EU-R&I-system route prevents zero-yield scans when strategically important system evidence is not explicitly labelled geopolitical.",
@@ -3517,7 +3517,6 @@
   ],
   "crossref_priority_query_depth_enabled": false,
   "openalex_primary_deep_lanes": [
-    "evidence",
     "explore",
     "gap",
     "finding-context",

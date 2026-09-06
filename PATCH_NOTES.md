@@ -1,3 +1,10 @@
+# v17.20.49 — compatibility repair for retained full-suite preflight
+
+- Preserves the v17.20.48 incremental scholarly engine and corpus unchanged.
+- Restores the legacy OpenAlex explicit deep-lane contract: `explore`, `gap`, `finding-context`, `curator-seed`. Evidence-first queries remain first-class page-1 discovery; deeper evidence exploration is handled by rotating journal-depth and citation-adjacency lanes instead of silently expanding every evidence query.
+- Restores `crossref_source_first_depth_pages_max` to 3. Because v17.20.48 changed source-first Crossref filtering to the incremental `from_date`, this does **not** restore the old four-month sweep; it only allows depth within the current incremental overlap when a high-output journal fills page 1.
+- No admission thresholds, source lists, OpenAlex authentication, saved corpus, page structure, or dedupe identities changed.
+
 # v17.20.48 — retire migration load; make scholarly discovery truly incremental
 
 - Preserves the complete accepted corpus, reader pages, history, source lists, Strand A/B/C structure and deduplication identities. This release changes scanner control logic, not the retained evidence base.
