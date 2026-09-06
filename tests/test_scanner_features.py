@@ -831,12 +831,19 @@ class V1719RecallModelTests(unittest.TestCase):
         # Make the contract deterministic even when the uploaded post-scan state has
         # already completed this recovery version.
         previous = dict(previous)
+        previous.pop("fresh_repository_seed", None)
+        previous["last_updated"] = "2026-09-05T12:00:00Z"
         previous["scan_state"] = dict(previous.get("scan_state") or {})
-        previous["scan_state"]["a_recall_recovery_version"] = "older-recovery-version"
+        previous["scan_state"].update({
+            "version": scan.INCREMENTAL_STATE_VERSION,
+            "openalex_cursor": 17,
+            "crossref_broad_cursor": 23,
+            "a_recall_recovery_version": "older-recovery-version",
+        })
         state = scan.initial_scan_state(previous)
         self.assertFalse(state.get("recall_reset_this_run"))
-        self.assertEqual(state.get("openalex_cursor"), (previous.get("scan_state") or {}).get("openalex_cursor"))
-        self.assertEqual(state.get("crossref_broad_cursor"), (previous.get("scan_state") or {}).get("crossref_broad_cursor"))
+        self.assertEqual(state.get("openalex_cursor"), 17)
+        self.assertEqual(state.get("crossref_broad_cursor"), 23)
         # v17.20.48 retires the migration-era four-month A-recall loop from normal scans.
         self.assertEqual(state.get("a_recall_recovery_version"), scan.A_RECALL_RECOVERY_VERSION)
         self.assertFalse(scan.CONFIG.get("legacy_a_recall_recovery_enabled", True))
@@ -1626,7 +1633,8 @@ const D=require('./radar.json');
 const v=P.buildPriorityView(D,{limit:50});
 if(v.stats.risks<10) process.exit(2);
 if(v.stats.opportunities<10) process.exit(3);
-if(v.stats.externalShocks<1) process.exit(4);
+if(!D.fresh_repository_seed && v.stats.externalShocks<1) process.exit(4);
+if(D.fresh_repository_seed && ((D.strand_a||[]).length+(D.strand_b||[]).length)!==200) process.exit(5);
 """
         subprocess.run(["node", "-e", js], cwd=ROOT, check=True, timeout=20)
 

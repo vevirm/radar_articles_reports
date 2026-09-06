@@ -120,14 +120,21 @@ class RepositoryWriteBoundaryTests(unittest.TestCase):
         self.assertGreater(extraheader_pos, isolate_pos)
 
 
-class IncrementalStatePreservationTests(unittest.TestCase):
-    def test_current_repo_does_not_trigger_full_recall_reset(self):
+class FreshRepositoryBootstrapTests(unittest.TestCase):
+    def test_packaged_repo_is_a_one_use_200_item_fresh_seed(self):
         previous = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
-        old = dict(previous.get("scan_state") or {})
-        self.assertTrue(old)
+        self.assertTrue(scan.is_fresh_repository_seed(previous))
+        self.assertEqual(len(previous.get("strand_a", [])) + len(previous.get("strand_b", [])), 200)
+        self.assertEqual(previous.get("ab_archive"), [])
+        self.assertEqual(previous.get("strand_c"), [])
+        self.assertNotIn("scan_state", previous)
+        self.assertNotIn("scan_history", previous)
+        self.assertNotIn("last_updated", previous)
+
+    def test_fresh_seed_initializes_zero_cursors_without_historical_backfill(self):
+        previous = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
         state = scan.initial_scan_state(previous)
         self.assertFalse(state.get("recall_reset_this_run"))
-        # Installing this release must preserve the expensive rotation positions.
         for key in (
             "openalex_cursor",
             "crossref_broad_cursor",
@@ -135,16 +142,22 @@ class IncrementalStatePreservationTests(unittest.TestCase):
             "crossref_source_cursor",
             "institution_cursor",
         ):
-            self.assertEqual(state.get(key), old.get(key), key)
+            self.assertEqual(state.get(key), 0, key)
+        self.assertTrue(all(state.get("backfill", {}).get(k) for k in ("openalex", "crossref_broad", "crossref_priority", "institutions")))
+        floor, bootstrap = scan.scan_from_date(previous, scan.dt.date(2026, 9, 6))
+        self.assertFalse(bootstrap)
+        self.assertGreaterEqual(floor, scan.dt.date(2026, 8, 23))
 
-    def test_recall_profile_was_not_bumped_for_admission_only_change(self):
+    def test_seed_profile_matches_current_scanner_without_inherited_migration(self):
         config = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
         previous = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
         self.assertEqual(config.get("recall_profile_version"), previous.get("recall_profile_version"))
-        self.assertEqual(
-            config.get("recall_profile_version"),
-            (previous.get("scan_state") or {}).get("recall_profile_version"),
-        )
+        self.assertFalse(scan.needs_source_expansion_backfill(previous))
+        self.assertFalse(scan.needs_inherited_corpus_audit(previous))
+        self.assertFalse(scan.needs_precision_corpus_cleanup(previous))
+        self.assertFalse(scan.needs_precision_signal_cleanup(previous))
+        self.assertFalse(scan.needs_signal_backfill(previous))
+
 
 
 if __name__ == "__main__":

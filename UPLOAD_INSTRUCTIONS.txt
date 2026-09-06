@@ -1,40 +1,46 @@
-v17.20.50: upload the complete repository. Existing OPENALEX_API_KEY Actions secret is reused automatically. Page HTML/CSS/reader logic is unchanged; this release resets only the active corpus/state and scanner-side curation/discovery machinery.
+EU R&I RADAR — FRESH REPOSITORY START
+=====================================
 
-Release: 17.20.50
+This package is intended for a BRAND-NEW GitHub repository. It starts with the curated
+200-item active evidence baseline (190 Strand A + 10 Strand B) but carries no previous
+scanner run history, scan cursors, accepted-item archive, or old weak signals.
 
-UPLOAD THE WHOLE REPOSITORY
-===========================
+The first successful scanner run establishes the new repository's history. From then on,
+normal incremental scanning, active-core curation, New/Updated page behavior, and archive
+retention all continue normally.
 
-This ZIP is a COMPLETE repository snapshot, not a patch.
+SETUP
+-----
+1. Create a new GitHub repository and upload the complete contents of this package to main.
+2. In GitHub, add your OpenAlex key as a repository Actions secret named exactly:
 
-1. Unzip the package.
-2. Open the `radar_articles_reports-main` folder.
-3. Upload/replace the COMPLETE contents of that folder on top of the existing GitHub repository.
-4. Let files with the same names replace the older versions.
+       OPENALEX_API_KEY
 
-IMPORTANT: STALE .github WORKFLOWS NO LONGER BLOCK THE SCANNER
--------------------------------------------------------------
-GitHub browser uploads have repeatedly left `.github/workflows/*.yml` at an older revision.
-v17.20.48 remains deliberately compatible with that situation. The scanner regression suite no
-longer exits non-zero merely because hidden workflow YAML is stale. Visible Python runtime
-guards handle the legacy hourly/six-hour Main workflow and prevent Main/Historical overlap.
+   Path: Settings -> Secrets and variables -> Actions -> New repository secret
 
-The package still contains the preferred corrected workflows. If GitHub accepts them, Main
-runs on the fixed four-hour schedule and Main/Historical share one concurrency group. If
-GitHub leaves the old YAML in place, the upload-triggered Main scan still proceeds.
+   Never put the key in radar.json, a Python/JavaScript file, or any committed file.
+3. Enable GitHub Actions for the repository if they are not already enabled.
+4. Configure GitHub Pages for the repository (the site is served from the repository's
+   Pages build).
+5. The initial push is an immediate Main Radar scan trigger. The normal Main Radar schedule
+   is then fixed at 00:17, 04:17, 08:17, 12:17, 16:17 and 20:17 UTC.
 
+FRESH-START BEHAVIOR
+--------------------
+- radar.json ships with exactly 200 active A/B records.
+- ab_archive starts empty.
+- Strand C starts empty.
+- scan_history and scan_state do not exist in the seed.
+- The one-use fresh_repository_seed marker prevents old Git radar history or migration
+  logic from being pulled into the first run.
+- The first run uses the normal recent discovery overlap rather than a historical bootstrap.
+- The marker is not written into normal scanner output, so it disappears automatically
+  after the first successful scan.
+- Security remains strict: repository credentials are not persisted during scanning, only
+  radar.json may be committed by the Main scanner, abnormal output is rejected, and prior
+  accepted A/B evidence is protected across the active 200 + ab_archive.
 
-V17.20.48 SCANNER CLEANUP
--------------------------
-This release keeps the existing radar corpus and reader pages, but retires migration-era
-scanner load: normal scholarly discovery is incremental, priority-journal depth rotates in
-a small bounded lane, DOI-backed citation snowballing rotates through new seed neighborhoods,
-and low-yield generic rescue no longer reserves 600 seconds of every run.
-
-OPENALEX API KEY
-----------------
-Do NOT place the OpenAlex key in this repository or in any file in the ZIP. In GitHub, add it
-as an Actions repository secret named exactly `OPENALEX_API_KEY` under:
-Settings -> Secrets and variables -> Actions. The workflows already read that secret.
-
-Do not cherry-pick individual files. Use the whole repository package.
+PAGE CHANGE
+-----------
+The External Shocks page is unchanged except that the one-shot “Construct one shock” toy
+has been removed. No scanner logic depends on that toy.

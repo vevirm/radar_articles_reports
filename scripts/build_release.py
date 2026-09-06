@@ -42,7 +42,6 @@ SITE_FILES = [
     "trends/trends.js",
     "shocks/index.html",
     "shocks/scenarios.js",
-    "shocks/toy.js",
     "shocks/variants.html",
     "shocks/variants.js",
     "literature/index.html",
@@ -87,6 +86,7 @@ HISTORICAL_FILES = [
 # Tiny operational files retained to make future releases reproducible.
 MAINTENANCE_FILES = [
     "VERSION.txt",
+    "UPLOAD_INSTRUCTIONS.txt",
     "scripts/build_release.py",
 ]
 

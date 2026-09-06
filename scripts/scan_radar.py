@@ -344,6 +344,37 @@ ACTIVE_CORE_LIMIT = max(0, int(CONFIG.get("active_core_limit", 200) or 0))
 ACTIVE_CORE_B_SLOTS = max(0, int(CONFIG.get("active_core_strand_b_slots", 10) or 0))
 ACTIVE_CORE_PROFILE_VERSION = str(CONFIG.get("active_core_profile_version", "v17.20.50-curated-core-200"))
 AB_ARCHIVE_KEY = "ab_archive"
+FRESH_REPOSITORY_SEED_VERSION = "v1"
+
+
+def is_fresh_repository_seed(data: Any) -> bool:
+    """Recognise the one-use 200-item baseline shipped for a brand-new repository.
+
+    The marker is deliberately strict: it is valid only before any scanner telemetry/state
+    exists and only when the packaged active A+B core is exactly the configured 200-item
+    baseline with no inherited archive or weak-signal history.  This prevents an ordinary
+    live repository from bypassing continuity/migration safeguards by merely carrying a
+    marker-shaped field.  The field is not copied into normal scanner output, so a
+    successful first run consumes the bootstrap automatically.
+    """
+    if not isinstance(data, dict):
+        return False
+    marker = data.get("fresh_repository_seed")
+    if not isinstance(marker, dict) or clean_text(marker.get("version")) != FRESH_REPOSITORY_SEED_VERSION:
+        return False
+    a = data.get("strand_a") if isinstance(data.get("strand_a"), list) else []
+    b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
+    archive = data.get(AB_ARCHIVE_KEY) if isinstance(data.get(AB_ARCHIVE_KEY), list) else []
+    c = data.get("strand_c") if isinstance(data.get("strand_c"), list) else []
+    if ACTIVE_CORE_LIMIT <= 0 or len(a) + len(b) != ACTIVE_CORE_LIMIT:
+        return False
+    if archive or c:
+        return False
+    if data.get("last_updated") or data.get("run_completed_at") or data.get("first_scan_complete"):
+        return False
+    if data.get("scan_history") or data.get("scan_state"):
+        return False
+    return True
 REQUEST_TIMEOUT = int(CONFIG.get("request_timeout_seconds", 12))
 SCAN_DEADLINE_MONO: float | None = None
 LOW_YIELD_RESERVE_ACTIVE = False
@@ -793,8 +824,9 @@ def scholarly_exploration_plan(
 
 def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     """Load or initialise persistent incremental-discovery cursors."""
-    old = previous.get("scan_state") if isinstance(previous, dict) else None
-    source_done = previous.get("source_expansion_version") == SOURCE_EXPANSION_VERSION if isinstance(previous, dict) else False
+    fresh_seed = is_fresh_repository_seed(previous)
+    old = None if fresh_seed else (previous.get("scan_state") if isinstance(previous, dict) else None)
+    source_done = fresh_seed or (previous.get("source_expansion_version") == SOURCE_EXPANSION_VERSION if isinstance(previous, dict) else False)
     # The top-level marker records *completion*. scan_state.source_expansion_version records
     # which expansion target the per-family backfill flags belong to. Once a target has been
     # opened, do not reset those flags on every run merely because the completion marker is
@@ -11438,6 +11470,14 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
         if bad:
             print(f"Ignored {bad} malformed historical radar row(s) safely: {removed}.", flush=True)
 
+        if is_fresh_repository_seed(clean):
+            print(
+                "Fresh repository baseline detected: keeping the packaged 200-item active core, "
+                "starting scanner state at zero, and intentionally ignoring pre-seed Git radar history.",
+                flush=True,
+            )
+            return clean
+
         # Whole-repository uploads are the user's normal deployment path.  On a push,
         # always compare the uploaded snapshot with the immediately preceding Git history.
         # This makes cumulative corpus/state monotonic even when a ZIP was prepared from a
@@ -14417,6 +14457,8 @@ def prune_public_window(
     return out, removed
 
 def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
+    if is_fresh_repository_seed(previous):
+        return False
     if not FORCE_SOURCE_EXPANSION_BACKFILL:
         return not bool(previous.get("last_updated"))
     if previous.get("source_expansion_version") != SOURCE_EXPANSION_VERSION:
@@ -14424,7 +14466,9 @@ def needs_source_expansion_backfill(previous: dict[str, Any]) -> bool:
     return False
 
 def needs_inherited_corpus_audit(previous: dict[str, Any]) -> bool:
-    """True only until the legacy A/B corpus has completed its one-time migration."""
+    """True only until a legacy A/B corpus has completed its one-time migration."""
+    if is_fresh_repository_seed(previous):
+        return False
     return INHERITED_CORPUS_AUDIT_ENABLED and not bool(previous.get("inherited_corpus_audit_complete"))
 
 
@@ -14435,20 +14479,28 @@ def needs_precision_corpus_cleanup(previous: dict[str, Any]) -> bool:
     repositories that had already completed an older cleanup would preserve newly polluted
     historical A/B forever.  The output quality-profile version is now the migration marker.
     """
+    if is_fresh_repository_seed(previous):
+        return False
     return previous.get("quality_profile_version") != QUALITY_PROFILE_VERSION
 
 
 def needs_precision_signal_cleanup(previous: dict[str, Any]) -> bool:
     """Re-audit C whenever the weak-signal quality model changes."""
+    if is_fresh_repository_seed(previous):
+        return False
     return previous.get('signal_quality_profile_version') != SIGNAL_QUALITY_PROFILE_VERSION
 
 
 def needs_signal_backfill(previous: dict[str, Any]) -> bool:
     """Run one wider weak-signal recovery window whenever Strand-C discovery changes."""
+    if is_fresh_repository_seed(previous):
+        return False
     return previous.get("signal_discovery_version") != SIGNAL_DISCOVERY_VERSION
 
 
 def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, bool]:
+    if is_fresh_repository_seed(previous):
+        return max(DATE_FLOOR, today - dt.timedelta(days=DISCOVERY_OVERLAP_DAYS)), False
     bootstrap = needs_source_expansion_backfill(previous)
     if bootstrap or not previous.get("last_updated"):
         # A/B source expansion always gets one full four-calendar-month pass.
@@ -15017,7 +15069,7 @@ def main() -> int:
     # and a slow institutional crawl cannot starve journals. This is source-family
     # rotation/search allocation only; all candidates still face the same strict gates.
     signal_backfill = needs_signal_backfill(previous)
-    first_run = not bool(previous.get("first_scan_complete"))
+    first_run = (not bool(previous.get("first_scan_complete"))) and not is_fresh_repository_seed(previous)
     news_lookback = SIGNAL_BACKFILL_HOURS if signal_backfill else (FIRST_NEWS_LOOKBACK_HOURS if first_run else NEWS_LOOKBACK_HOURS)
     SIGNAL_WINDOW_START_DATE = (now - dt.timedelta(hours=news_lookback)).date()
     log_progress(f"Weak-signal window: {news_lookback}h (recovery backfill={signal_backfill})")
@@ -17091,12 +17143,12 @@ def main() -> int:
         "curator_candidate_testing": curator_candidate_testing_state,
         "quality_migration_this_run": False,
         "active_core_rebalance_this_run": active_core_save_compat,
-        "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit,
+        "inherited_corpus_audit_complete": bool(previous.get("inherited_corpus_audit_complete")) or inherited_audit or is_fresh_repository_seed(previous),
         "inherited_corpus_audit_this_run": inherited_audit,
         "inherited_corpus_audit_stats": inherited_audit_stats if (inherited_audit or precision_cleanup) else {},
-        "precision_corpus_cleanup_complete": bool(previous.get("precision_corpus_cleanup_complete")) or inherited_audit or precision_cleanup,
+        "precision_corpus_cleanup_complete": bool(previous.get("precision_corpus_cleanup_complete")) or inherited_audit or precision_cleanup or is_fresh_repository_seed(previous),
         "precision_corpus_cleanup_this_run": bool(precision_cleanup or active_core_save_compat),
-        "precision_signal_cleanup_complete": bool(previous.get("precision_signal_cleanup_complete")) or signal_cleanup,
+        "precision_signal_cleanup_complete": bool(previous.get("precision_signal_cleanup_complete")) or signal_cleanup or is_fresh_repository_seed(previous),
         "precision_signal_cleanup_this_run": signal_cleanup,
         "precision_signal_cleanup_stats": signal_cleanup_stats if signal_cleanup else {},
         "backfill_complete": backfill_complete,
