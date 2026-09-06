@@ -182,15 +182,20 @@ class LowYieldRotationTests(unittest.TestCase):
             scan.LOW_YIELD_RESERVE_ACTIVE = old_active
             scan.LOW_YIELD_RESERVE_SECONDS = old_seconds
 
-    def test_config_reserves_real_time_for_low_yield_waves(self):
+    def test_config_keeps_low_yield_tail_bounded_so_primary_discovery_can_finish(self):
         reserve = int(scan.CONFIG.get("low_yield_reserved_seconds", 0) or 0)
-        self.assertGreaterEqual(reserve, 480)
-        self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_stage_seconds", 999), 180)
+        self.assertGreaterEqual(reserve, 180)
+        self.assertLessEqual(reserve, 300)
+        effective_primary = int(scan.CONFIG.get("scan_budget_seconds", 0) or 0) - reserve
+        self.assertLessEqual(int(scan.CONFIG.get("openalex_stage_seconds", 0) or 0), effective_primary)
+        self.assertLessEqual(int(scan.CONFIG.get("crossref_stage_seconds", 0) or 0), effective_primary)
+        self.assertLessEqual(int(scan.CONFIG.get("institution_stage_seconds", 0) or 0), effective_primary)
+        self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_stage_seconds", 999), 120)
         self.assertLessEqual(scan.CONFIG.get("low_yield_fresh_rotation_min_seconds_remaining", 999), 120)
 
-    def test_low_primary_yield_defers_auxiliary_scholarly_lanes(self):
+    def test_low_primary_yield_keeps_auxiliary_scholarly_lanes_available(self):
         src = SCAN_PATH.read_text(encoding="utf-8")
-        self.assertIn("auxiliary_scholarly_allowed = not primary_low_yield", src)
+        self.assertIn("auxiliary_scholarly_allowed = True", src)
         self.assertIn("priority_people_needed and auxiliary_scholarly_allowed", src)
         self.assertIn("foresight_author_batch and auxiliary_scholarly_allowed", src)
         self.assertIn('snowball_stats["enabled"] and auxiliary_scholarly_allowed', src)
@@ -832,8 +837,9 @@ class V1719RecallModelTests(unittest.TestCase):
         self.assertFalse(state.get("recall_reset_this_run"))
         self.assertEqual(state.get("openalex_cursor"), (previous.get("scan_state") or {}).get("openalex_cursor"))
         self.assertEqual(state.get("crossref_broad_cursor"), (previous.get("scan_state") or {}).get("crossref_broad_cursor"))
-        self.assertNotEqual(state.get("a_recall_recovery_version"), scan.A_RECALL_RECOVERY_VERSION)
-        self.assertGreaterEqual(scan.A_RECALL_RECOVERY_SOURCES_PER_SCAN, 10)
+        # v17.20.48 retires the migration-era four-month A-recall loop from normal scans.
+        self.assertEqual(state.get("a_recall_recovery_version"), scan.A_RECALL_RECOVERY_VERSION)
+        self.assertFalse(scan.CONFIG.get("legacy_a_recall_recovery_enabled", True))
 
     def test_direct_eu_strategic_tech_can_use_main_ri_evidence_without_duplicate_centrality_vocabulary(self):
         title = "EUROPEAN CHIPS ACT 2.0: STRATEGIC AUTONOMY AND TECHNOLOGICAL LEADERSHIP OF THE EU IN THE GLOBAL SEMICONDUCTOR ECOSYSTEM"
@@ -2371,7 +2377,7 @@ class WholeRepositoryUploadStateTests(unittest.TestCase):
         self.assertEqual(loaded["scan_state"]["crossref_broad_cursor"], 177)
         self.assertEqual(loaded["scan_state"]["last_completed_at"], "2026-09-05T12:30Z")
 
-    def test_low_yield_switches_methods_and_keeps_three_depth_waves_available(self):
-        self.assertEqual(int(scan.CONFIG.get("low_yield_fresh_rotation_max_waves", 0)), 3)
+    def test_low_yield_switches_methods_without_consuming_the_primary_scan(self):
+        self.assertEqual(int(scan.CONFIG.get("low_yield_fresh_rotation_max_waves", 0)), 2)
         self.assertGreaterEqual(int(scan.CONFIG.get("curator_seed_queries_per_scan", 0)), 10)
         self.assertGreaterEqual(int(scan.CONFIG.get("manual_recovery_urls_per_scan", 0)), 10)

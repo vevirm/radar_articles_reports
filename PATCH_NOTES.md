@@ -1,3 +1,15 @@
+# v17.20.48 — retire migration load; make scholarly discovery truly incremental
+
+- Preserves the complete accepted corpus, reader pages, history, source lists, Strand A/B/C structure and deduplication identities. This release changes scanner control logic, not the retained evidence base.
+- Ends the permanent four-month source-expansion loop. A stale top-level completion marker is migrated safely when the current target has already completed source-family rotations; future source-list changes use bounded rotating refresh instead of resetting every crawler family.
+- Admission-profile changes no longer zero scholarly/institutional cursors or reopen four-month backfills. The old 24-source A-recall migration loop is retired from normal scans; accepted older works remain untouched.
+- Normal source-first journal checks now use the incremental overlap window. A separate small rotating depth lane handles delayed indexing for Research Policy, Technological Forecasting and Social Change, Futures, Technology in Society and related R&I journals.
+- Citation snowballing now prioritises DOI-resolvable scholarly seeds and persists a seed cursor, instead of filling the top-20 pool with Tier-1 institutional notices that OpenAlex cannot use effectively.
+- Low primary yield no longer disables researcher/citation adjacency. With an authenticated OpenAlex key, bounded high-information scholarly adjacency runs before generic rescue rotation.
+- Cuts the protected low-yield reserve from 600s to 240s and bounds generic rescue waves, so productive OpenAlex/Crossref/institutional discovery is not truncated merely to save 40% of the run for broad fallback queries.
+- Main workflow is a real four-hour cycle with one shared Main/Historical concurrency group and no external rescue dispatch; Historical has no push trigger. Scheduled scans run a compact scanner-critical regression set rather than the slow full repository suite.
+- Adds v17.20.48 regression coverage for stale-backfill migration, no global reset on profile/source changes, incremental journal windows, rotating DOI snowball seeds, bounded time allocation and the fixed workflow contract.
+
 # v17.20.47 — research-evidence / long-form balance
 
 - Adds an evidence-first OpenAlex/Crossref query lane on every scan for empirical European R&I research: collaboration, careers/talent, research performance, infrastructure, technology transfer, R&D intensity, innovation-system performance and evaluation.

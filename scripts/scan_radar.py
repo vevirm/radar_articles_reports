@@ -793,11 +793,11 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     # still old; otherwise no long rotation can ever finish.
     state_expansion_target = clean_text(old.get("source_expansion_version")) if isinstance(old, dict) else ""
     expansion_target_changed = (not source_done) and state_expansion_target != SOURCE_EXPANSION_VERSION
-    # Source-list expansion is a discovery-window event, not a reason to erase every
-    # persisted query/depth cursor. Preserve incremental state whenever its schema matches;
-    # a new source_expansion_version simply reopens the per-family backfill flags below.
-    # This lets newly added institutions/journals receive a four-month catch-up without
-    # throwing away the rotation progress of the existing hundreds of sources.
+    # Source-list expansion is no longer a reason to reopen the *entire* four-month crawler.
+    # Preserve incremental state whenever its schema matches. Newly added journals/sources
+    # are picked up by their rotating source-first/depth lanes; restarting all OpenAlex,
+    # Crossref and institutional families made every source-list tweak reprocess months of
+    # known material.
     state_matches = (
         isinstance(old, dict)
         and old.get("version") == INCREMENTAL_STATE_VERSION
@@ -805,10 +805,8 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     if state_matches:
         state = dict(old)
         if expansion_target_changed:
-            state.setdefault("backfill", {})
-            for family in ("openalex", "crossref_broad", "crossref_priority", "institutions"):
-                state["backfill"][family] = False
-            state["source_expansion_backfill_reopened"] = True
+            state["source_expansion_backfill_reopened"] = False
+            state["source_expansion_bounded_refresh"] = True
         state["source_expansion_version"] = SOURCE_EXPANSION_VERSION
     else:
         state = {
@@ -891,29 +889,54 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["backfill"].setdefault(key, False)
         state["completed_cycles"].setdefault(key, 0)
         state["cycle_failed"].setdefault(key, False)
+
+    # V17.20.48 migration cleanup. Several older builds left the top-level completion
+    # marker stale even after the *current* source-expansion target had already completed
+    # multiple rotations. That kept the main scanner in a permanent four-month backfill
+    # posture. If this state already belongs to the current target and every family has
+    # completed at least one logical cycle, treat the legacy migration as finished. This
+    # changes discovery allocation only; it never removes or rewrites accepted evidence.
+    current_target_already_rotated = (
+        not expansion_target_changed
+        and
+        clean_text(state.get("source_expansion_version")) == SOURCE_EXPANSION_VERSION
+        and all(int(state["completed_cycles"].get(k, 0) or 0) > 0 for k in ("openalex", "crossref_broad", "crossref_priority", "institutions"))
+    )
+    if current_target_already_rotated and not source_done:
+        for key in ("openalex", "crossref_broad", "crossref_priority", "institutions"):
+            state["backfill"][key] = True
+            state["cycle_failed"][key] = False
+        state["source_expansion_legacy_completion_migrated"] = True
+    else:
+        state["source_expansion_legacy_completion_migrated"] = False
+    if not expansion_target_changed:
+        state["source_expansion_bounded_refresh"] = False
     for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor", "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["a_recall_recovery_cursor"] = int(state.get("a_recall_recovery_cursor", 0) or 0)
     state.setdefault("a_recall_recovery_version", "")
 
-    # Admission recall expansions must re-search previously rejected material. Earlier builds
-    # cached rejected institutional URLs and preserved query/depth cursors across gate changes,
-    # so a wider classifier could never reconsider much of the corpus it was intended to rescue.
+    # Admission-profile changes used to reset every scholarly/institutional cursor and reopen
+    # a four-month backfill. That made each precision/recall tweak behave like a fresh crawler
+    # migration and repeatedly reprocessed the same corpus. Preserve normal rotation state now;
+    # the evidence-first, journal-depth and citation-adjacency lanes provide bounded rechecking.
     recall_changed = bool(previous.get("last_updated")) and previous.get("recall_profile_version") != RECALL_PROFILE_VERSION
     if recall_changed:
-        for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor",
-                    "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "openalex_explore_cursor", "crossref_explore_cursor", "finding_context_cursor"):
-            state[key] = 0
-        state["result_depth"] = {"openalex": {}, "crossref_broad": {}, "crossref_priority": {}}
-        state["frontier_recovery_depth"] = {"openalex": {}, "crossref": {}}
-        state["frontier_recovery_query_cursors"] = {}
-        state["institution_seen_fingerprints"] = {}
-        state["backfill"] = {"openalex": False, "crossref_broad": False, "crossref_priority": False, "institutions": False}
-        state["completed_cycles"] = {"openalex": 0, "crossref_broad": 0, "crossref_priority": 0, "institutions": 0}
-        state["cycle_failed"] = {"openalex": False, "crossref_broad": False, "crossref_priority": False, "institutions": False}
-        state["recall_reset_this_run"] = True
-    else:
+        state["recall_profile_changed_this_run"] = True
+        state["recall_recheck_runs_remaining"] = max(
+            int(state.get("recall_recheck_runs_remaining", 0) or 0),
+            max(0, int(CONFIG.get("recall_recheck_runs_after_profile_change", 2) or 0)),
+        )
         state["recall_reset_this_run"] = False
+    else:
+        state["recall_profile_changed_this_run"] = False
+        state["recall_reset_this_run"] = False
+
+    # Retire the old migration-era 24-source/four-month institutional recall loop. Its
+    # evidence is preserved in the corpus; normal recurring depth lanes now do the useful
+    # rechecking without reopening the whole institutional archive after every code change.
+    if not bool(CONFIG.get("legacy_a_recall_recovery_enabled", False)):
+        state["a_recall_recovery_version"] = A_RECALL_RECOVERY_VERSION
 
     state["version"] = INCREMENTAL_STATE_VERSION
     state["source_expansion_version"] = SOURCE_EXPANSION_VERSION
@@ -5237,6 +5260,16 @@ def research_evidence_route_ok(title: str, abstract: str, body: str, source_kind
     # the technology is strategically important.
     if source_kind == 'scholarly' and _local_applied_study_without_ri_system_implication(title, abstract, body):
         return False, []
+    # Evidence-first recall is for the live R&I system, not history papers that append a
+    # contemporary-policy paragraph. A historically framed title may still enter via an
+    # explicit strategic route, but the non-geopolitical research-evidence fallback must not
+    # promote it merely because the abstract says there are current lessons.
+    historical_title = bool(
+        A_HISTORICAL_CENTURY.search(title) or A_HISTORICAL_ERA.search(title)
+        or any(int(m.group(2)) <= 2005 for m in A_HISTORICAL_YEAR_RANGE.finditer(title))
+    )
+    if historical_title:
+        return False, []
     # Generic "research and innovation project", firm-efficiency or regional-innovation
     # language is deliberately insufficient. The paper/report must measure a recognisable
     # R&I-system mechanism (careers, collaboration, infrastructure, transfer, assessment, etc.).
@@ -5736,7 +5769,7 @@ def _record_ab_gate_diagnostic(prefix: str, ev: dict[str, Any]) -> None:
         _diag_inc(f"{prefix}_reject_no_ri")
     elif not ev.get("a_focus_pass"):
         _diag_inc(f"{prefix}_reject_no_ri")
-    elif clean_text(ev.get("a_route")) not in {"explicit-geopolitics", "triangulated-strategic-context", "external-strategic-shock", "eu-ri-system-relevance"}:
+    elif clean_text(ev.get("a_route")) not in {"explicit-geopolitics", "triangulated-strategic-context", "external-strategic-shock", "eu-ri-system-relevance", "research-evidence"}:
         _diag_inc(f"{prefix}_reject_no_strategic_context")
     else:
         _diag_inc(f"{prefix}_reject_aboutness")
@@ -6173,19 +6206,44 @@ def collect_openalex(
     return dedupe_candidates(out)
 
 
+def _snowball_seed_doi(item: dict[str, Any]) -> str:
+    """Return a DOI suitable for exact OpenAlex seed resolution, if present."""
+    for value in (item.get("doi"), item.get("link"), item.get("url")):
+        m = re.search(r"10\.\d{4,9}/[^\s?#]+", clean_text(value), re.I)
+        if m:
+            return m.group(0).rstrip(".,);]}")
+    return ""
+
+
+def _snowball_seed_is_scholarly(item: dict[str, Any]) -> bool:
+    typ = normalized(item.get("type", ""))
+    return bool(
+        _snowball_seed_doi(item)
+        or any(x in typ for x in (
+            "peer reviewed", "peer-reviewed", "journal article", "working paper",
+            "preprint", "formal study", "research article", "scholarly",
+        ))
+    )
+
+
 def _snowball_seed_weight(item: dict[str, Any]) -> float:
-    """Quality weight for bibliography seeds; it never changes admission."""
+    """Quality weight for bibliography seeds; DOI-backed scholarship ranks first."""
     tier = normalized(item.get("source_tier", ""))
     typ = normalized(item.get("type", ""))
+    score = 0.80
+    if _snowball_seed_doi(item):
+        score += 0.65
+    if "peer reviewed" in typ or "peer-reviewed" in typ or "journal article" in typ:
+        score += 0.55
+    elif "working paper" in typ or "preprint" in typ or "formal study" in typ:
+        score += 0.35
     if "tier 1" in tier:
-        return 1.50
-    if "tier 2" in tier and "broad" not in tier:
-        return 1.25
-    if "tier 2" in tier:
-        return 1.10
-    if "peer reviewed" in typ or "peer-reviewed" in typ:
-        return 1.05
-    return 0.80
+        score += 0.20
+    elif "tier 2" in tier and "broad" not in tier:
+        score += 0.15
+    elif "tier 2" in tier:
+        score += 0.05
+    return score
 
 
 def _snowball_title_similarity(a: str, b: str) -> float:
@@ -6196,11 +6254,18 @@ def _snowball_title_similarity(a: str, b: str) -> float:
     return len(aa & bb) / max(1, len(aa | bb))
 
 
-def _snowball_seed_pool(previous: dict[str, Any], live_candidates: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Choose recent high-quality Strand-A publications as citation-network seeds.
+def _snowball_seed_pool(
+    previous: dict[str, Any],
+    live_candidates: Iterable[dict[str, Any]],
+    state: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Choose rotating DOI-resolvable scholarly Strand-A seeds.
 
-    The lane is discovery-only. A seed can guide us to other work but can never make a
-    cited/citing paper pass the ordinary EU + R&I + strategic-context gates.
+    Citation snowballing used to rank Tier-1 institutional webpages above papers, so the
+    top seed slice could contain zero DOI-bearing works and OpenAlex resolved nothing.
+    The normal seed pool is now scholarly and DOI-backed; a tiny pinned allowance may use
+    title resolution for a curator-specified scholarly seed. A persisted cursor moves to a
+    different citation neighbourhood every run instead of re-expanding the same 20 works.
     """
     pinned = {norm_title(x) for x in CONFIG.get("citation_snowball_pinned_seed_titles", []) if clean_text(x)}
     raw: list[dict[str, Any]] = []
@@ -6214,34 +6279,44 @@ def _snowball_seed_pool(previous: dict[str, Any], live_candidates: Iterable[dict
         d = parse_date(item.get("date"))
         if d and d < DATE_FLOOR:
             continue
-        tier = normalized(item.get("source_tier", ""))
-        typ = normalized(item.get("type", ""))
         is_pinned = norm_title(title) in pinned
-        quality_ok = (
-            "tier 1" in tier
-            or "tier 2" in tier
-            or "peer reviewed" in typ
-            or "peer-reviewed" in typ
-        )
-        if not (quality_ok or is_pinned):
+        if not (_snowball_seed_is_scholarly(item) or is_pinned):
             continue
-        # Keep the lane topical: only evidence already accepted for Strand A is a seed.
         if item.get("eu_relevance") not in {"direct", "material_external"} and not is_pinned:
+            continue
+        doi = _snowball_seed_doi(item)
+        # Ordinary seeds must be exactly resolvable. Pinned scholarly seeds may fall back
+        # to title resolution, but institutional notices/press releases are never used.
+        if not doi and not (is_pinned and _snowball_seed_is_scholarly(item)):
             continue
         key = identity(internalize_previous(item))
         old = by_key.get(key)
         if old is None or (_snowball_seed_weight(item), d or dt.date.min) > (_snowball_seed_weight(old), parse_date(old.get("date")) or dt.date.min):
             x = dict(item)
             x["_snowball_pinned"] = is_pinned
+            x["_snowball_doi"] = doi
             by_key[key] = x
+
     vals = list(by_key.values())
     vals.sort(key=lambda x: (
-        0 if x.get("_snowball_pinned") else 1,
         -_snowball_seed_weight(x),
         -(parse_date(x.get("date")) or dt.date.min).toordinal(),
+        norm_title(x.get("title")),
     ))
-    return vals[:max(1, int(CONFIG.get("citation_snowball_seed_limit", 20) or 20))]
+    limit = max(1, int(CONFIG.get("citation_snowball_seed_limit", 20) or 20))
+    pinned_limit = min(limit, max(0, int(CONFIG.get("citation_snowball_pinned_seed_limit", 2) or 0)))
+    pinned_vals = [x for x in vals if x.get("_snowball_pinned")][0:pinned_limit]
+    regular = [x for x in vals if not x.get("_snowball_pinned")]
+    slots = max(0, limit - len(pinned_vals))
+    if not regular or slots <= 0:
+        return pinned_vals
 
+    cursor = int((state or {}).get("citation_snowball_seed_cursor", 0) or 0) % len(regular)
+    rotated, next_cursor, _ = rotating_batch(regular, cursor, slots)
+    if isinstance(state, dict):
+        state["citation_snowball_seed_cursor"] = next_cursor
+        state["citation_snowball_seed_pool_size"] = len(regular)
+    return pinned_vals + rotated
 
 
 
@@ -6252,10 +6327,9 @@ def _snowball_resolve_seed(seed: dict[str, Any], timeout: int) -> dict[str, Any]
     title = clean_text(seed.get("title"))
     if not title:
         return None
-    doi_match = re.search(r"10\.\d{4,9}/[^\s?#]+", clean_text(seed.get("link", "")), re.I)
+    doi = clean_text(seed.get("_snowball_doi")) or _snowball_seed_doi(seed)
     params: dict[str, Any]
-    if doi_match:
-        doi = doi_match.group(0).rstrip(".,)")
+    if doi:
         params = {"filter": f"doi:https://doi.org/{doi}", "per-page": 3}
     else:
         params = {"search": title, "per-page": 5}
@@ -6300,6 +6374,7 @@ def collect_citation_snowball(
     warnings: list[str],
     stage_deadline: float | None,
     execution_stats: dict[str, Any] | None = None,
+    state: dict[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Backward + forward snowballing from high-quality accepted Strand-A publications.
 
@@ -6320,8 +6395,9 @@ def collect_citation_snowball(
         return [], stats
     if stage_deadline is not None and time.monotonic() >= stage_deadline:
         return [], stats
-    seeds = _snowball_seed_pool(previous, live_candidates)
+    seeds = _snowball_seed_pool(previous, live_candidates, state)
     stats["seeds_planned"] = len(seeds)
+    stats["doi_seeds_planned"] = sum(1 for x in seeds if clean_text(x.get("_snowball_doi")) or _snowball_seed_doi(x))
     if not seeds:
         return [], stats
 
@@ -7944,7 +8020,7 @@ def collect_crossref(
                 return [], "endpoint stopped after rate limit", 0
             params = {
                 "query.container-title": journal,
-                "filter": f"from-pub-date:{DATE_FLOOR.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
+                "filter": f"from-pub-date:{from_date.isoformat()},until-pub-date:{dt.date.today().isoformat()}",
                 "rows": source_rows,
                 "offset": max(0, int(offset)),
                 "sort": "published", "order": "desc",
@@ -7991,7 +8067,7 @@ def collect_crossref(
 
         newest, err, raw_count = request_source_page(0)
         if err:
-            return convert_items(newest, DATE_FLOOR, "source-first recent contents", journal), err
+            return convert_items(newest, from_date, "source-first recent contents", journal), err
         combined = list(newest)
         # Only high-output journals need depth. One extra page per scan prevents the
         # source census from doubling its request count for the long tail of journals.
@@ -8001,14 +8077,14 @@ def collect_crossref(
                 page = 2
             deep, deep_err, deep_raw_count = request_source_page((page - 1) * source_rows)
             if deep_err == "budget":
-                return convert_items(combined, DATE_FLOOR, "source-first recent contents", journal), deep_err
+                return convert_items(combined, from_date, "source-first recent contents", journal), deep_err
             if deep_err:
-                return convert_items(combined, DATE_FLOOR, "source-first recent contents", journal), deep_err
+                return convert_items(combined, from_date, "source-first recent contents", journal), deep_err
             combined.extend(deep)
             priority_depth_state[key] = 2 if deep_raw_count < source_rows or page >= source_depth_max else page + 1
             if isinstance(execution_stats, dict):
                 execution_stats["crossref_source_depth_pages"] = int(execution_stats.get("crossref_source_depth_pages", 0) or 0) + 1
-        return convert_items(combined, DATE_FLOOR, "source-first recent contents", journal), None
+        return convert_items(combined, from_date, "source-first recent contents", journal), None
 
     out: list[dict[str, Any]] = []
     budget_hit = False
@@ -14177,17 +14253,38 @@ def main() -> int:
     cr_general_batch, _cr_source_planned_next, _cr_source_planned_wrapped = rotating_batch(
         nonpreferred_journals or source_journals_all, cr_source_cursor_before, broad_n
     )
-    # Elite journals are checked every ordinary scan rather than hidden behind a long
-    # policy-journal rotation. Priority R&I/policy journals are a second source-first bank.
-    # Both still face the same EU + substantive-R&I gate.
+    # Policy/R&I journals get a dedicated *rotating* source-first slice. Older builds put
+    # every elite journal and the same policy journals at the front of each Crossref plan;
+    # stage truncation then repeatedly favoured the same early sources. Elite journals are
+    # already covered by the independent publisher watch below, so Crossref source-first
+    # attention can concentrate on Research Policy / TFSC / Futures / Technology in Society
+    # and their peers without duplicating Nature/Science work every run.
     priority_policy_journals = list(dict.fromkeys(CONFIG.get('priority_policy_journal_watchlist', [])))
+    policy_journal_cursor_before = int(state.get('crossref_policy_journal_cursor', 0) or 0)
+    priority_policy_batch, _policy_next, _policy_wrapped = rotating_batch(
+        priority_policy_journals,
+        policy_journal_cursor_before,
+        max(0, int(CONFIG.get('priority_policy_journals_per_scan', 6) or 0)),
+    ) if priority_policy_journals else ([], 0, True)
+    # A separate small depth lane deliberately revisits a *different* rotating slice of
+    # core R&I journals across the retained four-month window. The ordinary source-first
+    # sweep below is now incremental, so we no longer reread four months of 20 journals on
+    # every scan. This bounded lane is where Research Policy / TFSC / Futures-type delayed
+    # indexing and metadata enrichment happens.
+    journal_depth_bank = list(dict.fromkeys(CONFIG.get('journal_depth_watchlist', priority_policy_journals)))
+    journal_depth_cursor_before = int(state.get('crossref_journal_depth_cursor', 0) or 0)
+    journal_depth_batch, _journal_depth_next, _journal_depth_wrapped = rotating_batch(
+        journal_depth_bank,
+        journal_depth_cursor_before,
+        max(0, int(CONFIG.get('journal_depth_journals_per_scan', 3) or 0)),
+    ) if journal_depth_bank else ([], 0, True)
     if bool(CONFIG.get("crossref_full_source_census_each_scan", False)):
         # Recall-first source census: inspect the recent contents of every configured
         # scholarly venue before relying on topic-query rotation. The topic gate remains
         # unchanged, so this increases finding probability rather than relevance leniency.
-        cr_source_batch = list(dict.fromkeys(top_journal_watchlist + priority_policy_journals + source_journals_all))
+        cr_source_batch = list(dict.fromkeys(priority_policy_journals + source_journals_all))
     else:
-        cr_source_batch = list(dict.fromkeys(top_journal_watchlist + priority_policy_journals + cr_preferred_batch + cr_general_batch))
+        cr_source_batch = list(dict.fromkeys(priority_policy_batch + cr_preferred_batch + cr_general_batch))[:source_total]
 
     # Independent publisher-page journal watch. This means a Crossref/OpenAlex 429 cannot
     # make Nature/Science-family discovery disappear for the whole run. Nature and Science
@@ -14351,8 +14448,8 @@ def main() -> int:
         "Scan start: persistent incremental mode; "
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
-        f"({len(top_journal_watchlist)} elite + {len(priority_policy_journals)} R&I-policy + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad) from {cr_from.isoformat()}, "
-        f"direct journal watch {len(direct_journal_batch)} source(s), "
+        f"({len(priority_policy_batch)} rotating R&I-policy + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad; overlaps capped) from {cr_from.isoformat()}, "
+        f"direct elite-journal watch {len(direct_journal_batch)} source(s), "
         f"institutions {len(inst_batch)} source(s) ({len(evidence_report_sources)} evidence-report priority + {len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
@@ -14483,6 +14580,49 @@ def main() -> int:
     oa_failed = source_stage_failed(warnings, "openalex")
     cr_failed = source_stage_failed(warnings, "crossref")
 
+    # Bounded journal-depth pass. Ordinary source-first journal checks are incremental;
+    # this small rotating slice is the only place that deliberately looks across the full
+    # retained four-month window for priority journals. That preserves delayed-indexing
+    # recall without rereading months of every configured journal on every scan.
+    journal_depth_exec: dict[str, Any] = {}
+    journal_depth_candidates: list[dict[str, Any]] = []
+    if (
+        journal_depth_batch
+        and bool(CONFIG.get('journal_depth_enabled', True))
+        and budget_remaining() > max(120, int(CONFIG.get('journal_depth_min_seconds_remaining', 180) or 180))
+        and not cr_failed
+    ):
+        journal_depth_seconds = min(
+            max(45, int(CONFIG.get('journal_depth_stage_seconds', 120) or 120)),
+            max(45, int(budget_remaining() - int(CONFIG.get('network_reserve_seconds', 90)) - 45)),
+        )
+        if journal_depth_seconds >= 45:
+            log_progress(
+                "Journal depth rotation: " + ", ".join(journal_depth_batch)
+                + f" from {DATE_FLOOR.isoformat()} (ordinary journal sweep remains incremental)"
+            )
+            journal_depth_candidates = safe_stage(
+                "Crossref journal depth",
+                collect_crossref,
+                DATE_FLOOR,
+                warnings,
+                [],
+                [],
+                journal_depth_batch,
+                time.monotonic() + journal_depth_seconds,
+                None,
+                {},
+                {},
+                {},
+                journal_depth_exec,
+            )
+            journal_depth_candidates = [x for x in journal_depth_candidates if isinstance(x, dict)]
+            cr.extend(journal_depth_candidates)
+            execution_stats["journal_depth_candidates"] = len(journal_depth_candidates)
+            execution_stats["journal_depth_journals_planned"] = len(journal_depth_batch)
+            execution_stats["journal_depth_journals_executed"] = len(set(journal_depth_exec.get('crossref_source_journals', set())))
+            execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(journal_depth_exec.get("crossref_abstracts_enrichment_attempted", 0))
+
     # If the primary pass already reached the search-depth sanity target, there is no
     # reason to keep the protected continuation tail. Release it now so curator/author/
     # snowball and other ordinary lanes may use the rest of the scan. If primary yield
@@ -14490,11 +14630,12 @@ def main() -> int:
     primary_target_new_ab = max(1, int(CONFIG.get("target_new_a_per_scan", CONFIG.get("target_new_ab_per_scan", 5)) or 5))
     primary_new_ab = len(genuinely_new_a_candidates(oa + cr + [x for x in inst_base if isinstance(x, dict)]))
     primary_low_yield = primary_new_ab < primary_target_new_ab
-    # When the primary pass is below the five-item search-depth sanity target, preserve
-    # scholarly API capacity for the protected broad continuation controller.  Exact-author
-    # and other auxiliary scholarly lookups are useful only after broad discovery has had
-    # enough room; in V17.20.32 they consumed/rate-limited both APIs before continuation.
-    auxiliary_scholarly_allowed = not primary_low_yield
+    # Keep high-information scholarly adjacency alive *especially* on a low-yield run.
+    # Older builds disabled exact-author and citation lanes whenever broad discovery was
+    # sparse, then spent the reserved tail on more generic query rotation. With an
+    # authenticated OpenAlex key that is backwards: low yield is exactly when researcher,
+    # journal and citation neighbourhoods should get a bounded chance to find new evidence.
+    auxiliary_scholarly_allowed = True
     if primary_new_ab >= primary_target_new_ab:
         LOW_YIELD_RESERVE_ACTIVE = False
         log_progress(
@@ -14552,6 +14693,13 @@ def main() -> int:
     state["crossref_source_cursor"], cr_source_wrapped, cr_source_executed = committed_rotation_cursor(
         general_source_bank, cr_source_cursor_before, cr_general_batch, executed_source_journals
     )
+    state["crossref_policy_journal_cursor"], _policy_commit_wrapped, policy_journal_executed = committed_rotation_cursor(
+        priority_policy_journals, policy_journal_cursor_before, priority_policy_batch, executed_source_journals
+    ) if priority_policy_journals else (0, True, 0)
+    depth_executed_journals = set(journal_depth_exec.get('crossref_source_journals', set()))
+    state["crossref_journal_depth_cursor"], _journal_depth_commit_wrapped, journal_depth_executed = committed_rotation_cursor(
+        journal_depth_bank, journal_depth_cursor_before, journal_depth_batch, depth_executed_journals
+    ) if journal_depth_bank else (0, True, 0)
     executed_direct_journals = set(execution_stats.get('direct_top_journals', set()))
     direct_rotating_names = [clean_text(x.get('name')) for x in direct_journal_rotating_bank]
     direct_planned_names = [clean_text(x.get('name')) for x in direct_journal_rotating]
@@ -14886,7 +15034,7 @@ def main() -> int:
             log_progress("Citation snowball: ranking shared references across high-quality Strand-A seeds, then checking recent forward citations")
             try:
                 snowball_candidates, snowball_stats = collect_citation_snowball(
-                    previous, oa + cr, warnings, time.monotonic() + snowball_seconds, execution_stats
+                    previous, oa + cr, warnings, time.monotonic() + snowball_seconds, execution_stats, state
                 )
             except Exception as e:
                 warnings.append(f"Citation snowball fatal stage error: {type(e).__name__}: {str(e)[:160]}")
@@ -15419,6 +15567,7 @@ def main() -> int:
                     warnings,
                     adjacency_deadline,
                     adjacency_exec,
+                    state,
                 )))
             for family, fut in futs:
                 try:
@@ -16437,6 +16586,9 @@ def main() -> int:
             "frontier_gap_historical_lookback_months": gap_lookback_months if gap_scholarly else 0,
             "openalex_from": oa_from.isoformat(),
             "crossref_from": cr_from.isoformat(),
+            "crossref_source_first_from": cr_from.isoformat(),
+            "crossref_priority_journal_depth_from": DATE_FLOOR.isoformat() if journal_depth_batch else "",
+            "incremental_overlap_days": DISCOVERY_OVERLAP_DAYS,
             "historical_exploration_from": DATE_FLOOR.isoformat(),
             "institutions_from": inst_from.isoformat(),
             "rule_fix_new_source_recovery_from": DATE_FLOOR.isoformat() if rule_fix_source_recovery_attempted else "",
@@ -16487,6 +16639,12 @@ def main() -> int:
                 "matrix_placed": int(curator_candidate_testing_state.get("matrix_placed", 0) or 0) if isinstance(curator_candidate_testing_state, dict) else 0,
             },
             "citation_snowball": snowball_stats,
+            "journal_depth": {
+                "planned": journal_depth_batch,
+                "executed": sorted(set(journal_depth_exec.get('crossref_source_journals', set()))),
+                "candidates": len(journal_depth_candidates),
+                "from": DATE_FLOOR.isoformat(),
+            },
             "finding_context_queries_this_scan": finding_context_focus,
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
@@ -16553,6 +16711,13 @@ def main() -> int:
             "scholarly_queries_b": len(CONFIG.get("queries_b", [])),
             "openalex_api_key_configured": bool(OPENALEX_API_KEY),
             "openalex_access_mode": "authenticated" if OPENALEX_API_KEY else "keyless-protected",
+            "source_expansion_legacy_completion_migrated": bool(state.get("source_expansion_legacy_completion_migrated")),
+            "source_expansion_bounded_refresh": bool(state.get("source_expansion_bounded_refresh")),
+            "legacy_a_recall_recovery_enabled": bool(CONFIG.get("legacy_a_recall_recovery_enabled", False)),
+            "low_yield_reserved_seconds": int(LOW_YIELD_RESERVE_SECONDS or 0),
+            "journal_depth_journals_planned": len(journal_depth_batch),
+            "journal_depth_journals_executed": len(set(journal_depth_exec.get('crossref_source_journals', set()))),
+            "journal_depth_candidates": len(journal_depth_candidates),
             "openalex_queries_this_run": len(oa_batch),
             "openalex_queries_executed": len(set(execution_stats.get("openalex_queries", set()))),
             "openalex_base_queries_executed": oa_base_executed,
