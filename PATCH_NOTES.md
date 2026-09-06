@@ -1,3 +1,10 @@
+# v17.20.51
+
+- Deployment-residue repair: explicitly ships `tests/test_v172047_fresh_start_and_snowball.py` so GitHub browser uploads overwrite the obsolete v17.20.47 test that was left in the repository and blocking every scan before startup.
+- The replacement test checks the current curated-core/incremental architecture rather than the retired destructive corpus-reset implementation.
+- Citation snowball seed capacity is restored to 20 DOI-resolvable scholarly seeds per pass now that authenticated OpenAlex is configured.
+- No page/UI file or reader logic is changed.
+
 # v17.20.50 — curated 200-item core; preserve history, retire scanner baggage
 
 - Keeps the existing page structure and reader logic byte-for-byte unchanged. This release changes scanner state, discovery/curation logic and `radar.json` data only.
