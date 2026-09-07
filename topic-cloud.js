@@ -39,11 +39,15 @@
     return out;
   }
 
-  function render(data,vocab){
+  function render(data,historical,vocab){
     const topics=buildTopics(data,vocab);
     const records=[...(data.strand_a||[]),...(data.strand_b||[]),...(data.strand_c||[])];
-    const sources=new Set(records.map(sourceKey).filter(Boolean));
-    document.getElementById('evidenceCount').textContent=records.length.toLocaleString('en-GB');
+    const historicalRecords=Array.isArray(historical?.items)?historical.items:[];
+    const allRecords=[...records,...historicalRecords];
+    const sources=new Set(allRecords.map(sourceKey).filter(Boolean));
+    document.getElementById('evidenceCount').textContent=allRecords.length.toLocaleString('en-GB');
+    document.getElementById('currentCount').textContent=records.length.toLocaleString('en-GB');
+    document.getElementById('historicalCount').textContent=historicalRecords.length.toLocaleString('en-GB');
     document.getElementById('sourceCount').textContent=sources.size.toLocaleString('en-GB');
     document.getElementById('updated').textContent=fmtDate(data.last_updated||data.run_completed_at)||'recently';
 
@@ -65,9 +69,13 @@
 
   async function load(){
     try{
-      const [data,vocab]=await Promise.all([RadarData.load('radar.json','radar_seed.json'),fetch('topic_vocabulary.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('topic vocabulary');return r.json()})]);
-      render(data,vocab);
-      let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(()=>render(data,vocab),120)});
+      const [data,historical,vocab]=await Promise.all([
+        RadarData.load('radar.json','radar_seed.json'),
+        fetch('historical/historical.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('historical data');return r.json()}),
+        fetch('topic_vocabulary.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('topic vocabulary');return r.json()})
+      ]);
+      render(data,historical,vocab);
+      let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(()=>render(data,historical,vocab),120)});
     }catch(err){console.error(err);document.getElementById('cloud').innerHTML='<div style="font-size:18px">Current topic map unavailable.</div>'}
   }
   window.TopicCloud={load};

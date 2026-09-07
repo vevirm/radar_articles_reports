@@ -1,20 +1,14 @@
-R&I GEOPOLITICS RADAR — FULL REPOSITORY UPLOAD
-UPLOAD-READY EDITION: 85 FILES TOTAL
+UPLOAD THIS WHOLE REPO THROUGH THE GITHUB WEB UPLOADER
 
-This version is specifically compacted to stay below GitHub's 100-file web-upload limit.
-You still upload the complete repository; there is no patching or merging.
+This version is designed for your exact constraint: browser uploads do not delete old files.
 
-1. Unzip this bundle on your computer.
-2. Open your GitHub repository and choose Add file > Upload files.
-3. Drag the ENTIRE unzipped folder into the upload area so its subfolders are included too.
-4. Upload all 85 files as one complete repository replacement.
-5. Make sure the .github folder is included. It contains the automated scanners.
-6. Keep the existing GitHub Actions secret OPENALEX_API_KEY configured.
-7. Commit the upload to main.
+1. Unzip this download on your computer.
+2. Open your GitHub repository.
+3. Add file -> Upload files.
+4. Drag everything INSIDE this folder into GitHub.
+5. Commit the changes.
 
-WHY THERE ARE FEWER FILES:
-The original package had dozens of individual Python regression-test files plus a bundled test archive.
-This upload-ready edition stores the 38 main regression tests inside tests/all_tests.zip and keeps
-one loader, tests/test_all.py. GitHub Actions still runs that same test bundle normally.
+IMPORTANT: You do NOT need to delete old test files manually.
+The main workflow now deliberately runs only tests/test_all.py, which loads the current bundled regression suite from tests/all_tests.zip. Any stale old test_*.py files left behind by previous browser uploads are ignored.
 
-DO NOT unzip tests/all_tests.zip. It belongs inside the repository as one file.
+Do not unzip tests/all_tests.zip. It belongs in the repository exactly as-is.

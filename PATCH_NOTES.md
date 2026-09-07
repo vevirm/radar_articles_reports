@@ -1,3 +1,11 @@
+# v22.1 — browser-upload compatibility + honest corpus count
+
+- Fixed GitHub Actions failure caused by stale old test files surviving browser uploads.
+- Main workflow now discovers only `tests/test_all.py`; that loader runs the bundled current suite.
+- Homepage count now covers both corpora: current radar + historical.
+- Homepage labels the second number explicitly as **source organisations**, not publications.
+- Topic cloud itself remains based on current radar evidence only, so "moving" topics stay genuinely current.
+
 # v22.0 — reader navigation and layout reform
 
 - Replaces the old landing hierarchy with a one-screen homepage: live evidence/source count, full menu and a source-weighted topic map.
