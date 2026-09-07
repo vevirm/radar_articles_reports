@@ -11,6 +11,7 @@ An EU-first evidence radar for research and innovation in geopolitical context.
 - **Strands A and B are cumulative.** The original 190 A + 10 B corpus was a starting baseline, not a cap.
 - **Strand C is temporary and relative to A.** Every C signal must represent a distinct current development anchored to substantive Strand-A evidence. C discovery covers the current **60-day** window and each signal expires **60 days after `first_seen`**.
 - Production workflows do **not** run the old repository-wide regression-test discovery before research. Runtime preflight, output validation and write-boundary checks protect the live state instead.
+- **Source diversity is an allocation rule, not an admission quota.** Crossref priority work is interleaved across journals, and a rotating part of the source-first scholarly budget checks journals with little or no representation in the current A/B corpus. Institutional and already-productive sources remain eligible, but they no longer monopolise a deadline-truncated scholarly prefix.
 
 ## Evidence flow
 

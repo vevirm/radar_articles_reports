@@ -18,6 +18,7 @@
   function clean(v){return String(v??'').replace(/\s+/g,' ').trim()}
   function norm(v){return clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim()}
   function pretty(v){return norm(v).replace(/\bai\b/g,'AI').replace(/\beu\b/g,'EU').replace(/\bus\b/g,'US').replace(/\br i\b/g,'R&I')}
+  function capHeading(v){return clean(v).replace(/[A-Za-zÀ-ÖØ-öø-ÿ]/,c=>c.toUpperCase())}
   function dateOf(x){return clean(x?.date).slice(0,10)}
   function sourceOf(x){return clean(x?.source||x?.source_domain||x?.venue||x?.publisher||'Unknown source')}
   function sourceCount(rows){return new Set(rows.map(sourceOf).filter(Boolean)).size}
@@ -175,6 +176,7 @@
         claim,why:'The two issues have separate headings elsewhere. Their intersection may be the more important continuity.',caseAgainst:against,
         currentCount:p.count,currentSources:p.sourceCount,historicalCount:old.count,historicalSources:old.sourceCount,
         currentLift:p.lift,historicalLift:old.lift,liftGain:gain,score:displayScore(raw),
+        topicIds:[p.a,p.b],topicLabels:[a,b],
         currentEvidence:evidenceSlice(p.rows,4),historicalEvidence:evidenceSlice(old.rows,3),
         metrics:[
           {value:p.count,label:'current joint records'},{value:p.sourceCount,label:'current sources'},
@@ -187,6 +189,113 @@
     strong.sort((a,b)=>b.score-a.score||b.currentCount-a.currentCount);
     candidates.sort((a,b)=>b.score-a.score||b.currentCount-a.currentCount);
     return {strong,candidates};
+  }
+
+  function conjunctionComponents(items){
+    const edges=Array.isArray(items)?items.filter(x=>Array.isArray(x?.topicIds)&&x.topicIds.length===2):[];
+    const adj=new Map();
+    for(const e of edges){
+      const [a,b]=e.topicIds;
+      if(!adj.has(a))adj.set(a,new Set());
+      if(!adj.has(b))adj.set(b,new Set());
+      adj.get(a).add(b);adj.get(b).add(a);
+    }
+    const seen=new Set(),components=[];
+    for(const start of adj.keys()){
+      if(seen.has(start))continue;
+      const stack=[start],nodes=[];seen.add(start);
+      while(stack.length){
+        const n=stack.pop();nodes.push(n);
+        for(const nxt of adj.get(n)||[])if(!seen.has(nxt)){seen.add(nxt);stack.push(nxt)}
+      }
+      const nodeSet=new Set(nodes);
+      const componentEdges=edges.filter(e=>e.topicIds.every(id=>nodeSet.has(id)));
+      components.push({nodes,edges:componentEdges});
+    }
+    return components;
+  }
+
+  function bipartition(nodes,edges){
+    const adj=new Map(nodes.map(n=>[n,new Set()]));
+    for(const e of edges){const [a,b]=e.topicIds;adj.get(a)?.add(b);adj.get(b)?.add(a)}
+    const color=new Map();
+    for(const start of nodes){
+      if(color.has(start))continue;
+      color.set(start,0);const q=[start];
+      while(q.length){
+        const n=q.shift(),c=color.get(n);
+        for(const nxt of adj.get(n)||[]){
+          if(!color.has(nxt)){color.set(nxt,1-c);q.push(nxt)}
+          else if(color.get(nxt)===c)return null;
+        }
+      }
+    }
+    const left=nodes.filter(n=>color.get(n)===0),right=nodes.filter(n=>color.get(n)===1);
+    return left.length&&right.length?[left,right]:null;
+  }
+
+  function naturalJoin(labels){
+    const xs=labels.filter(Boolean);
+    if(xs.length<=1)return xs[0]||'';
+    if(xs.length===2)return `${xs[0]} and ${xs[1]}`;
+    return `${xs.slice(0,-1).join(', ')} and ${xs[xs.length-1]}`;
+  }
+
+  function bundleConjunctions(items,topicById){
+    const output=[],used=new Set();
+    // A weak edge should not drag an otherwise crisp pattern into a sprawling mega-bundle.
+    // Within each connected family, only sibling pairings close to that family's strongest
+    // attention score are eligible for synthesis. Lower-scoring edges remain standalone.
+    const components=[];
+    for(const raw of conjunctionComponents(items)){
+      if(!raw.edges.length)continue;
+      const peak=Math.max(...raw.edges.map(e=>Number(e.score)||0));
+      const tight=raw.edges.filter(e=>(Number(e.score)||0)>=peak-8);
+      components.push(...conjunctionComponents(tight));
+    }
+    for(const comp of components){
+      if(comp.nodes.length<3||comp.edges.length<2)continue;
+      const edgeIds=new Set(comp.edges.map(e=>e.id));
+      const labels=id=>compactLabel(topicById.get(id));
+      const parts=bipartition(comp.nodes,comp.edges);
+      let title,claim;
+      if(parts&&parts[0].length<=3&&parts[1].length<=3){
+        const a=naturalJoin(parts[0].map(labels)),b=naturalJoin(parts[1].map(labels));
+        title=`${a} are converging around ${b}`;
+        claim=`Several strengthening pairings connect ${a} with ${b}. The network is the finding; the individual pairs are supporting facets, not separate discoveries.`;
+      }else{
+        const names=naturalJoin(comp.nodes.slice(0,5).map(labels));
+        title=`A ${comp.nodes.length}-part policy bundle is emerging: ${names}`;
+        claim=`These topics form one connected set of strengthening pairings in the current radar. Reading each pair separately would overstate the number of distinct discoveries.`;
+      }
+      const currentEvidence=evidenceSlice(comp.edges.flatMap(e=>e.currentEvidence||[]),6);
+      const historicalEvidence=evidenceSlice(comp.edges.flatMap(e=>e.historicalEvidence||[]),5);
+      const avgLift=comp.edges.reduce((a,e)=>a+(Number(e.currentLift)||0),0)/comp.edges.length;
+      const avgGain=comp.edges.reduce((a,e)=>a+(Number(e.liftGain)||0),0)/comp.edges.length;
+      const maxScore=Math.max(...comp.edges.map(e=>Number(e.score)||0));
+      const facets=comp.edges.slice().sort((a,b)=>b.score-a.score).map(e=>({
+        a:e.topicLabels?.[0]||labels(e.topicIds[0]),b:e.topicLabels?.[1]||labels(e.topicIds[1]),
+        currentCount:e.currentCount,currentSources:e.currentSources,historicalCount:e.historicalCount,
+        currentLift:e.currentLift,liftGain:e.liftGain,score:e.score
+      }));
+      output.push({
+        id:`bundle-${comp.nodes.slice().sort().join('-')}`,kind:'convergence',shape:'Convergence bundle',
+        title,claim,
+        why:'Several near-duplicate pair findings share the same underlying network. Showing the bundle reveals the higher-order pattern instead of repeating versions of it.',
+        caseAgainst:'Current topics are inferred from configured evidence terms while older topics are archive labels. A single broad matcher or source rotation can connect a network that is weaker in reality; inspect the facets and sources before treating the bundle as structural.',
+        score:Math.min(99,Math.round(maxScore+Math.min(4,comp.edges.length-2))),
+        currentEvidence,historicalEvidence,facets,
+        metrics:[
+          {value:comp.edges.length,label:'strengthening links'},
+          {value:comp.nodes.length,label:'connected topics'},
+          {value:`${avgLift.toFixed(1)}×`,label:'average current coupling lift'},
+          {value:`+${avgGain.toFixed(1)}×`,label:'average lift gain vs older'}
+        ]
+      });
+      for(const id of edgeIds)used.add(id);
+    }
+    for(const item of items)if(!used.has(item.id))output.push(item);
+    return output.sort((a,b)=>b.score-a.score);
   }
 
   function termStats(rows,term){
@@ -270,9 +379,12 @@
     const assignments=buildAssignments(currentRows,historicalRows,topics);
     const ctx={currentRows,historicalRows,topics,...assignments};
     const conj=conjunctions(ctx,namedPhenomena),rename=vocabularyShifts(ctx);
-    const findings=[...rename.strong,...conj.strong].sort((a,b)=>b.score-a.score).slice(0,8);
+    const strongConjunctions=bundleConjunctions(conj.strong,ctx.topicById);
+    const candidateConjunctions=bundleConjunctions(conj.candidates,ctx.topicById);
+    const findings=[...rename.strong,...strongConjunctions].sort((a,b)=>b.score-a.score).slice(0,8);
     const findingIds=new Set(findings.map(x=>x.id));
-    const candidates=[...rename.candidates,...conj.candidates].filter(x=>!findingIds.has(x.id)).sort((a,b)=>b.score-a.score).slice(0,8);
+    const candidates=[...rename.candidates,...candidateConjunctions].filter(x=>!findingIds.has(x.id)).sort((a,b)=>b.score-a.score).slice(0,8);
+    for(const item of [...findings,...candidates])item.title=capHeading(item.title);
     const dark=darkCorpus(currentRows,namedPhenomena);
     return {
       findings,candidates,

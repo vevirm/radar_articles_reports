@@ -821,6 +821,64 @@ def diversified_query_bank(queries: list[str]) -> list[str]:
     return out
 
 
+def journal_representation_counts(journals: Iterable[str], previous: dict[str, Any]) -> dict[str, int]:
+    """Count how often configured journals are already represented in public A/B.
+
+    This is discovery-allocation context only. A low count never relaxes admission and a high
+    count never excludes a journal; it simply lets the source-first planner spend some of its
+    fixed request budget on venues the reader has seen less often.
+    """
+    rows: list[dict[str, Any]] = []
+    if isinstance(previous, dict):
+        for key in ("strand_a", "strand_b"):
+            vals = previous.get(key, [])
+            if isinstance(vals, list):
+                rows.extend(x for x in vals if isinstance(x, dict))
+    source_counts: dict[str, int] = {}
+    for row in rows:
+        source = clean_text(row.get("source") or row.get("journal") or "")
+        if source:
+            source_counts[source] = source_counts.get(source, 0) + 1
+    out: dict[str, int] = {}
+    for journal in list(dict.fromkeys(clean_text(x) for x in journals if clean_text(x))):
+        out[journal] = sum(
+            count for actual, count in source_counts.items()
+            if journal_name_matches(actual, journal)
+        )
+    return out
+
+
+def underrepresented_journal_bank(journals: Iterable[str], previous: dict[str, Any], max_existing: int = 1) -> list[str]:
+    """Return a stable rotating bank of journals scarcely represented in the radar.
+
+    The original configured order is preserved inside the low-representation pool so the
+    persisted cursor can make steady progress rather than repeatedly jumping to the same
+    alphabetic prefix. If every venue is already represented, least-represented venues lead.
+    """
+    ordered = list(dict.fromkeys(clean_text(x) for x in journals if clean_text(x)))
+    counts = journal_representation_counts(ordered, previous)
+    threshold = max(0, int(max_existing or 0))
+    pool = [j for j in ordered if counts.get(j, 0) <= threshold]
+    if pool:
+        return pool
+    return sorted(ordered, key=lambda j: (counts.get(j, 0), ordered.index(j)))
+
+
+def diversified_priority_journal_tasks(journals: Iterable[str], queries: Iterable[str]) -> list[tuple[str, str]]:
+    """Interleave journal-query tasks so one journal cannot monopolise a partial run.
+
+    Older builds flattened journal × query with the journal outermost. A 16-task slice could
+    therefore spend almost the entire priority lane on one venue. Round-robin journal lanes
+    keep the same request budget and the same admission gate while materially broadening the
+    scholarly source mix.
+    """
+    js = list(dict.fromkeys(clean_text(x) for x in journals if clean_text(x)))
+    qs = list(dict.fromkeys(clean_text(x) for x in queries if clean_text(x)))
+    lanes = [[(j, q) for q in qs] for j in js]
+    total = sum(len(lane) for lane in lanes)
+    return interleaved_unique_batch(total, *lanes) if total else []
+
+
 def rotating_batch_excluding(items: list[Any], cursor: int, limit: int, excluded: Iterable[Any] | None = None) -> tuple[list[Any], int, bool]:
     """Take a circular fresh slice while skipping work already executed in this run.
 
@@ -939,6 +997,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
             "crossref_priority_cursor": 0,
             "crossref_source_cursor": 0,
             "crossref_preferred_journal_cursor": 0,
+            "crossref_diversity_journal_cursor": 0,
             "strand_b_method_cursor": 0,
             "dimensional_query_cursor": 0,
             "institution_cursor": 0,
@@ -1034,7 +1093,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
         state["source_expansion_legacy_completion_migrated"] = False
     if not expansion_target_changed:
         state["source_expansion_bounded_refresh"] = False
-    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor", "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor", "dimensional_query_cursor"):
+    for key in ("openalex_cursor", "crossref_broad_cursor", "crossref_priority_cursor", "crossref_source_cursor", "crossref_preferred_journal_cursor", "crossref_diversity_journal_cursor", "strand_b_method_cursor", "institution_cursor", "official_eu_source_cursor", "frontier_gap_cursor", "frontier_gap_depth_cursor", "finding_context_cursor", "dimensional_query_cursor"):
         state[key] = int(state.get(key, 0) or 0)
     state["a_recall_recovery_cursor"] = int(state.get("a_recall_recovery_cursor", 0) or 0)
     state.setdefault("a_recall_recovery_version", "")
@@ -15003,11 +15062,10 @@ def main() -> int:
     for q in cr_explore:
         cr_query_dates[q] = DATE_FLOOR
         cr_depth_lanes[q] = "explore"
-    priority_tasks_all = [
-        (journal, query)
-        for journal in list(dict.fromkeys(CONFIG.get("crossref_priority_journals", [])))
-        for query in list(dict.fromkeys(CONFIG.get("crossref_priority_journal_queries", [])))
-    ]
+    priority_tasks_all = diversified_priority_journal_tasks(
+        CONFIG.get("crossref_priority_journals", []),
+        CONFIG.get("crossref_priority_journal_queries", []),
+    )
     cr_priority_cursor_before = int(state.get("crossref_priority_cursor", 0) or 0)
     cr_priority_batch, _cr_priority_planned_next, _cr_priority_planned_wrapped = rotating_batch(
         priority_tasks_all,
@@ -15038,6 +15096,17 @@ def main() -> int:
     cr_general_batch, _cr_source_planned_next, _cr_source_planned_wrapped = rotating_batch(
         nonpreferred_journals or source_journals_all, cr_source_cursor_before, broad_n
     )
+    # Diversity lane: reserve part of the *same* source-first budget for journals that are
+    # absent or scarcely represented in the current public A/B corpus. This changes where
+    # we look, never what we accept. The persisted cursor prevents the large zero-count
+    # pool from restarting at the same journals every scan.
+    diversity_max_existing = max(0, int(CONFIG.get("journal_diversity_max_existing_items", 1) or 1))
+    diversity_bank = underrepresented_journal_bank(source_journals_all, previous, diversity_max_existing)
+    diversity_cursor_before = int(state.get("crossref_diversity_journal_cursor", 0) or 0)
+    diversity_batch, _diversity_next, _diversity_wrapped = rotating_batch(
+        diversity_bank, diversity_cursor_before,
+        max(0, int(CONFIG.get("crossref_underrepresented_journals_per_scan", 8) or 0)),
+    ) if diversity_bank else ([], 0, True)
     # Policy/R&I journals get a dedicated *rotating* source-first slice. Older builds put
     # every elite journal and the same policy journals at the front of each Crossref plan;
     # stage truncation then repeatedly favoured the same early sources. Elite journals are
@@ -15069,7 +15138,12 @@ def main() -> int:
         # unchanged, so this increases finding probability rather than relevance leniency.
         cr_source_batch = list(dict.fromkeys(priority_policy_journals + source_journals_all))
     else:
-        cr_source_batch = list(dict.fromkeys(priority_policy_batch + cr_preferred_batch + cr_general_batch))[:source_total]
+        # Round-robin the source-first lanes. Concatenation used to let policy/Q1 lists
+        # consume the front of a deadline-truncated batch, leaving broad and unseen journals
+        # nominally planned but rarely executed. The total request budget is unchanged.
+        cr_source_batch = interleaved_unique_batch(
+            source_total, priority_policy_batch, diversity_batch, cr_preferred_batch, cr_general_batch
+        )
 
     # Independent publisher-page journal watch. This means a Crossref/OpenAlex 429 cannot
     # make Nature/Science-family discovery disappear for the whole run. Nature and Science
@@ -15233,7 +15307,7 @@ def main() -> int:
         "Scan start: persistent incremental mode; "
         f"OpenAlex {len(oa_batch)}/{len(all_queries)} query(s) from {oa_from.isoformat()}, "
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
-        f"({len(priority_policy_batch)} rotating R&I-policy + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad; overlaps capped) from {cr_from.isoformat()}, "
+        f"({len(priority_policy_batch)} rotating R&I-policy + {len(diversity_batch)} underrepresented-journal + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad; interleaved/overlaps capped) from {cr_from.isoformat()}, "
         f"direct elite-journal watch {len(direct_journal_batch)} source(s), "
         f"institutions {len(inst_batch)} source(s) ({len(evidence_report_sources)} evidence-report priority + {len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
@@ -15481,6 +15555,9 @@ def main() -> int:
     state["crossref_source_cursor"], cr_source_wrapped, cr_source_executed = committed_rotation_cursor(
         general_source_bank, cr_source_cursor_before, cr_general_batch, executed_source_journals
     )
+    state["crossref_diversity_journal_cursor"], _diversity_commit_wrapped, diversity_journal_executed = committed_rotation_cursor(
+        diversity_bank, diversity_cursor_before, diversity_batch, executed_source_journals
+    ) if diversity_bank else (0, True, 0)
     state["crossref_policy_journal_cursor"], _policy_commit_wrapped, policy_journal_executed = committed_rotation_cursor(
         priority_policy_journals, policy_journal_cursor_before, priority_policy_batch, executed_source_journals
     ) if priority_policy_journals else (0, True, 0)
@@ -17852,7 +17929,12 @@ def main() -> int:
             "crossref_priority_tasks_this_run": len(cr_priority_batch),
             "crossref_priority_tasks_executed": cr_priority_executed,
             "crossref_source_journals_this_run": len(cr_source_batch),
-            "crossref_source_journals_executed": cr_source_executed,
+            "crossref_source_journals_executed": len(executed_source_journals),
+            "crossref_underrepresented_journal_pool": len(diversity_bank),
+            "crossref_underrepresented_journals_planned": len(diversity_batch),
+            "crossref_underrepresented_journals_executed": diversity_journal_executed,
+            "crossref_priority_task_journals_planned": len({j for j, _q in cr_priority_batch}),
+            "crossref_priority_task_journals_executed": len({j for j, _q in executed_priority}),
             "recall_backfill_this_run": bool(state.get("recall_reset_this_run")),
             "crossref_missing_abstract_enrichment_attempted": int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)),
             "crossref_openalex_doi_enrichment_attempted": int(execution_stats.get("crossref_openalex_doi_enrichment_attempted", 0)),
