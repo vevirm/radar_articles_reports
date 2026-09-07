@@ -50,7 +50,17 @@ class CurrentRepositoryContractTests(unittest.TestCase):
             next_slot = scan.next_automatic_scan_slot(completed)
             self.assertEqual(adjusted, next_slot - dt.timedelta(hours=6))
         else:
-            self.assertIn("cron: '17 */4 * * *'", text)
+            self.assertTrue("cron: '17 */4 * * *'" in text or "cron: '17 0,4,8,12,16,20 * * *'" in text)
+
+    def test_main_historical_are_two_hours_offset_and_share_queue(self):
+        main = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
+        hist = (ROOT / '.github' / 'workflows' / 'historical-scan.yml').read_text(encoding='utf-8')
+        self.assertTrue("cron: '17 */4 * * *'" in main or "cron: '17 0,4,8,12,16,20 * * *'" in main)
+        self.assertIn("cron: '17 2,6,10,14,18,22 * * *'", hist)
+        self.assertIn('group: ri-radar-research-scanners', main)
+        self.assertIn('group: ri-radar-research-scanners', hist)
+        self.assertIn('cancel-in-progress: false', main)
+        self.assertIn('cancel-in-progress: false', hist)
 
     def test_runtime_serialization_guard_is_present(self):
         guard = (ROOT / 'scripts' / 'scanner_run_guard.py').read_text(encoding='utf-8')
