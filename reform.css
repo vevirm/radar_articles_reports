@@ -21,3 +21,130 @@
 @media(max-width:700px){.calm-site .matrix{display:block!important;min-width:0!important;width:100%!important}.calm-site .matrix>.corner,.calm-site .matrix>.col-head,.calm-site .matrix>.col{display:none!important}.calm-site .matrix>.row-head,.calm-site .matrix>.row{display:block!important;margin-top:20px!important;padding:12px!important;border:1px solid #111!important;border-left:5px solid #111!important}.calm-site .matrix>.matrix-cell,.calm-site .matrix>.cell{display:block!important;margin:0!important;padding:14px!important;border:1px solid var(--r-line)!important;border-top:0!important;background:#fff!important}.calm-site .matrix>.matrix-cell::before,.calm-site .matrix>.cell::before{display:block!important;margin-bottom:7px!important;font-size:var(--r-small)!important;font-weight:900!important;color:var(--r-red)!important}.calm-site .matrix>.matrix-cell.A::before,.calm-site .matrix>.cell.A::before{content:'More control, stronger'}.calm-site .matrix>.matrix-cell.B::before,.calm-site .matrix>.cell.B::before{content:'More control, some cost'}.calm-site .matrix>.matrix-cell.C::before,.calm-site .matrix>.cell.C::before{content:'Stronger, but reliant'}.calm-site .matrix>.matrix-cell.D::before,.calm-site .matrix>.cell.D::before{content:'Less control, weaker'}}
 /* v23.1 reader simplification: keep method/metrics available, remove dashboard-like stamps from ordinary reading. */
 .calm-site .pattern>.pattern-head{padding:20px 0 16px!important;border-bottom:1px solid var(--r-line)!important}.calm-site .pattern>.pattern-head h3{font-size:clamp(22px,3vw,30px)!important;line-height:1.08!important;margin:0 0 8px!important}.calm-site .pattern>.pattern-head .claim{font-size:16px!important;line-height:1.45!important;font-weight:400!important;color:rgba(11,11,11,.72)!important;margin:0!important}.calm-site .pattern{border-left:0!important;border-right:0!important;border-bottom:0!important;border-top:5px solid #c40018!important}.calm-site .pattern.candidate{border-top-color:#777!important}.calm-site .pattern-depth>summary{padding:12px 0!important;font-size:14px!important}.calm-site .phenomenon>.head{padding:18px 0 14px!important}.calm-site .phenomenon>.head h3{font-size:25px!important}.calm-site .phenomenon .pair{gap:10px!important}.calm-site .phenomenon .pair p{font-size:15px!important;line-height:1.45!important}.calm-site .section-head p{font-size:15px!important}.calm-site .section-count{font-size:12px!important;color:rgba(11,11,11,.62)!important}
+
+/* v23.3 — reader-first pass. Normal pages are summaries, not audit screens. */
+:root{--r-page:2rem;--r-section:1.35rem;--r-claim:1.02rem;--r-text:.94rem;--r-small:.78rem}
+.calm-site{font-size:15px!important;line-height:1.45!important}
+.calm-bar{min-height:50px!important}
+.calm-brand{font-size:15px!important}
+.calm-header nav a{min-height:50px!important;padding:0 11px!important;font-size:12px!important}
+.calm-intro-inner{padding:17px 0 15px!important}
+.calm-intro h1{font-size:var(--r-page)!important;line-height:1.04!important;letter-spacing:-.035em!important}
+.calm-intro p{font-size:.92rem!important;line-height:1.35!important;margin-top:5px!important;max-width:640px!important}
+.calm-site main{padding-top:18px!important;padding-bottom:56px!important}
+.calm-site h2{font-size:var(--r-section)!important;letter-spacing:-.02em!important}
+.calm-site h3{font-size:var(--r-claim)!important;letter-spacing:-.012em!important}
+.calm-site p,.calm-site li{font-size:var(--r-text)!important}
+.calm-top{font-size:12px!important;padding:7px 9px!important}
+
+/* On normal reader pages, hide audit metadata and diagnostics. Radar is separate and Stuff is exempt. */
+.surface-page .method,
+.surface-page .corpus-line,
+.surface-page .quality-line,
+.surface-page .meta,
+.surface-page .count,
+.surface-page .section-count,
+.surface-page .panel-count,
+.surface-page .status,
+.surface-page .kind,
+.surface-page .score,
+.surface-page .support,
+.surface-page .pull-note,
+.surface-page .priority-meta,
+.surface-page .rank,
+.surface-page .badge,
+.surface-page .chip,
+.surface-page .tag,
+.surface-page .eyebrow,
+.surface-page .label{display:none!important}
+
+/* Read this first: one headline and two plain sentences. */
+.page-read .issue-chart{padding:14px 0!important}
+.page-read .chart-no,.page-read .node-meta,.page-read .issue-depth{display:none!important}
+.page-read .node.main a.node-title{font-size:1.05rem!important;line-height:1.25!important}
+.page-read .node.main .node-what,.page-read .node.main .node-why{font-size:.92rem!important;line-height:1.4!important;margin-top:4px!important}
+.page-read .node.main .node-what strong,.page-read .node.main .node-why strong{display:none!important}
+
+/* Trends: show the two directions and the plain-language case, not the scoring machinery. */
+.page-trends .pair-list{gap:8px!important}
+.page-trends .pair{border:0!important;border-bottom:1px solid var(--r-line)!important;padding:10px 0 14px!important}
+.page-trends .pair-head{display:none!important}
+.page-trends .axis{grid-template-columns:1fr 1fr!important;gap:28px!important}
+.page-trends .side{padding:0!important;border:0!important}
+.page-trends .side+.side{border:0!important}
+.page-trends .side h3{font-size:1rem!important;line-height:1.2!important;margin:0 0 5px!important}
+.page-trends .side .score,.page-trends .support,.page-trends details,.page-trends .pair-foot{display:none!important}
+.page-trends .plain,.page-trends .why{font-size:.9rem!important;line-height:1.4!important;margin:0 0 4px!important;font-weight:400!important}
+.page-trends .plain strong,.page-trends .why strong{display:none!important}
+.page-trends .why{color:var(--r-muted)!important}
+
+/* Ongoing patterns: findings only. No method, scores, candidate diagnostics or evidence drill-down. */
+.page-phenomena .pattern-list{display:block!important}
+.page-phenomena .pattern{padding:14px 0!important;border-bottom:1px solid var(--r-line)!important}
+.page-phenomena .pattern-head h3{font-size:1.02rem!important;margin:0 0 4px!important}
+.page-phenomena .pattern .claim{font-size:.92rem!important;line-height:1.4!important;margin:0!important;color:var(--r-muted)!important}
+.page-phenomena .pattern-depth,.page-phenomena .section-depth{display:none!important}
+.page-phenomena .section-head{margin-bottom:4px!important}
+.page-phenomena .section-head p{font-size:.88rem!important;margin:3px 0 0!important}
+
+/* Risks & opportunities: title + plain reason. */
+.page-priorities main>.grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:34px!important;max-width:none!important}
+.page-priorities .grid>.panel{margin:0!important}
+.page-priorities .panel-head{border-bottom:2px solid #111!important;padding:0 0 8px!important}
+.page-priorities .priority-main{display:block!important;padding:12px 0!important;border-bottom:1px solid var(--r-line)!important}
+.page-priorities .priority-title{font-size:1rem!important;line-height:1.25!important}
+.page-priorities .priority-what,.page-priorities .priority-actions,.page-priorities .detail,.page-priorities .hint,.page-priorities .info-button{display:none!important}
+.page-priorities .priority-why{font-size:.9rem!important;line-height:1.4!important;margin:4px 0 0!important;color:var(--r-muted)!important}
+.page-priorities .priority-why strong{display:none!important}
+
+/* External shocks: no duplicate index, stamps, scores, evidence buttons or audit boxes. */
+.page-shocks .shock-index,.page-shocks .shock-change,.page-shocks .actions,.page-shocks .detail,.page-shocks .surface-balance,.page-shocks .assessment,.page-shocks .shock-arrows,.page-shocks .evidence,.page-shocks .watch-note{display:none!important}
+.page-shocks .section-title{border-bottom:2px solid #111!important;padding-bottom:7px!important;margin-top:4px!important}
+.page-shocks .section-title span{display:none!important}
+.page-shocks .realised,.page-shocks .emergent,.page-shocks .direct{margin-bottom:22px!important}
+.page-shocks .shock,.page-shocks .scenario{border:0!important;border-bottom:1px solid var(--r-line)!important;padding:12px 0!important}
+.page-shocks .scenario-list{gap:0!important}
+.page-shocks .shock .title,.page-shocks .scenario h3{font-size:1.02rem!important;line-height:1.28!important;letter-spacing:-.01em!important;margin:0 0 4px!important}
+.page-shocks .scenario h3 .status{display:none!important}
+.page-shocks .plainly{font-size:.9rem!important;line-height:1.4!important;font-weight:400!important;color:var(--r-muted)!important;margin:0!important}
+.page-shocks .plainly strong{display:none!important}
+.page-shocks .shock .plainly:nth-of-type(n+2),.page-shocks .scenario .plainly:nth-of-type(n+2){display:none!important}
+.page-shocks .empty{border:0!important;padding:10px 0!important}
+
+/* Evidence by topic: findings only; no status/count/action furniture. */
+.page-briefing .actions,.page-briefing .more,.page-briefing .state{display:none!important}
+.page-briefing .topic{padding:12px 0!important;border-bottom:1px solid var(--r-line)!important}
+.page-briefing .topic-head{padding:0!important}
+.page-briefing .item{padding:9px 0!important}
+.page-briefing .point{font-size:.94rem!important}
+.page-briefing .why{font-size:.88rem!important;color:var(--r-muted)!important}
+
+/* Matrix: keep the picture, remove the machinery around it. */
+.page-frontier .method,.page-frontier .axis-note,.page-frontier .cell-meta,.page-frontier .more-btn,.page-frontier .state{display:none!important}
+.page-frontier .matrix-cell{padding:12px!important}
+.page-frontier .cell-point{font-size:.88rem!important;line-height:1.35!important}
+
+/* Sources: searchable list, but not an audit table. */
+.page-literature .channel,.page-literature .year{display:none!important}
+.page-literature .entry{padding-top:9px!important;padding-bottom:9px!important}
+.page-literature .name,.page-literature .title{font-size:.92rem!important}
+
+/* History: keep search/browsing controls; suppress scanner-status furniture. */
+.page-historical .statusbar,.page-historical .stats,.page-historical .pill,.page-historical .historical-actions{display:none!important}
+.page-historical .card{padding:11px 0!important}
+
+/* Stuff is deliberately the technical exception, but its page chrome should still be calm. */
+.technical-page .calm-intro p{max-width:720px!important}
+.technical-page .download-card{border:0!important;border-top:3px solid var(--r-red)!important;padding:18px 0!important}
+.technical-page .download-card h2{font-size:1.3rem!important}
+.technical-page .download-card p{font-size:.92rem!important}
+
+@media(max-width:760px){
+  :root{--r-page:1.8rem;--r-section:1.25rem}
+  .calm-bar{display:flex!important;padding-top:0!important;width:calc(100% - 24px)!important}
+  .calm-brand{padding-bottom:0!important}
+  .calm-header nav{display:flex!important;width:auto!important}
+  .calm-header nav a{min-height:50px!important;border-top:0!important}
+  .page-trends .axis,.page-priorities main>.grid{grid-template-columns:1fr!important;gap:10px!important}
+  .page-trends .side+.side{padding-top:9px!important;border-top:1px solid var(--r-line)!important}
+}
