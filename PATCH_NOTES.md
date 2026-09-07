@@ -1,3 +1,12 @@
+# v21.9
+
+- Rebuilt the homepage hierarchy around the Main Radar as the primary product.
+- Removed the duplicate site-map and all-pages directory from the homepage.
+- Kept A/B/C visible once, inside the Main Radar hero.
+- Added three downstream routes: patterns, what it could mean, and go deeper.
+- Made Main Radar the strongest navigation item across reader pages while keeping the current page visible with a red underline.
+- Preserved live evidence, historical evidence, scanner state, Trends, Ongoing phenomena, schedules and admission rules.
+
 # v21.8 — clearer reader path + ongoing phenomena
 
 - Built on the latest uploaded live state after the user-triggered 2026-09-07 scan; `radar.json` is preserved, including its one newly accepted A record and scan cursors.

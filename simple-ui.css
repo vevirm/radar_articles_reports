@@ -149,3 +149,15 @@ header:not(.hero) .kicker,header:not(.hero) .eyebrow,header .kicker,header .eyeb
 .hero .kicker,.hero .red,.eyebrow,.minimum-read .label,.page-map-title,.year{
   color:#c40018!important;
 }
+
+/* v21.9 navigation hierarchy: Radar stays the dominant destination. */
+.nav a[href="../radar/"],.nav a[href="../../radar/"],.nav a[href="radar/"],
+.landing-nav a[href="../radar/"],.landing-nav a[href="../../radar/"],.landing-nav a[href="radar/"]{
+  background:#c40018!important;border-color:#c40018!important;color:#fff!important;font-weight:950!important;
+}
+.nav a[aria-current="page"]:not([href="../radar/"]):not([href="../../radar/"]):not([href="radar/"]),
+.nav a.current:not([href="../radar/"]):not([href="../../radar/"]):not([href="radar/"]),
+.nav a.primary:not([href="../radar/"]):not([href="../../radar/"]):not([href="radar/"]){
+  background:#0b0b0b!important;color:#fff!important;border-color:rgba(255,255,255,.34)!important;
+  box-shadow:inset 0 -4px 0 #c40018!important;
+}

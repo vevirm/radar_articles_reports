@@ -52,18 +52,23 @@ console.log(JSON.stringify({count:P.build({strand_a:[],strand_c:[]},h).length}))
         )
         self.assertEqual(result["count"], 0)
 
-    def test_home_explains_layers_and_reader_chain(self):
+    def test_home_makes_radar_primary_and_uses_one_downstream_hierarchy(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         for phrase in [
+            "The main product", "OPEN THE MAIN RADAR",
             "Established evidence", "Ways to look ahead", "Weak signals",
-            "Collect evidence", "Organise it", "Find patterns", "Look ahead", "Ongoing phenomena"
+            "From the Radar", "Read the patterns", "Look ahead", "Go deeper",
+            "Matrix", "Trends &amp; counter-trends", "Ongoing phenomena",
+            "Risks &amp; opportunities", "External shocks", "Stuff"
         ]:
             self.assertIn(phrase, html)
         header_end = html.index("</header>")
         for phrase in ["Established evidence", "Ways to look ahead", "Weak signals"]:
             self.assertLess(html.index(phrase), header_end, phrase)
-        for code in [">A</span>", ">B</span>", ">C</span>"]:
-            self.assertIn(code, html)
+        self.assertNotIn("What is on this site", html)
+        self.assertNotIn("All reader pages", html)
+        self.assertNotIn("Collect evidence", html)
+        self.assertIn('class="radar-primary" href="radar/"', html)
 
     def test_main_radar_exposes_a_b_c_jumps_before_items(self):
         html = (ROOT / "radar" / "index.html").read_text(encoding="utf-8")

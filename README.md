@@ -14,6 +14,8 @@ An EU-first evidence radar for research and innovation in geopolitical context.
 
 ## Evidence flow
 
+**Main Radar is the primary reader product.** Its A/B/C evidence feeds every other analytical view.
+
 Main scanner → A/B/C Radar evidence → Matrix and reading maps → Trends + Ongoing phenomena → Risks & opportunities → External shocks.
 
 **What matters now**, **Read at least this**, **Evidence by topic**, **Briefing** and **Sources** are reader views of the same current Main evidence. The Matrix, risks/opportunities and shock pages do not launch their own research scans; they interpret accepted Radar evidence and scanner-produced analytical fields.
