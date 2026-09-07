@@ -1,3 +1,11 @@
+# v21.13 — two-hour alternating scanner cadence
+
+- Main scheduled starts: 00:17 / 04:17 / 08:17 / 12:17 / 16:17 / 20:17 UTC.
+- Historical scheduled starts: 02:17 / 06:17 / 10:17 / 14:17 / 18:17 / 22:17 UTC.
+- Each scanner therefore runs every four hours; scheduled starts alternate every two hours.
+- Both workflows use the same `ri-radar-research-scanners` concurrency group with `cancel-in-progress: false`, so a later scanner waits for the active scanner instead of overlapping or being cancelled.
+- Historical accumulation remains intact at the packaged state; no evidence was removed for this scheduling change.
+
 # v21.9
 
 - Rebuilt the homepage hierarchy around the Main Radar as the primary product.
