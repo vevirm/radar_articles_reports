@@ -1,3 +1,9 @@
+# v21.22
+
+- Ongoing Phenomena / Pattern Watch now leads every pattern card with one plain-language finding sentence.
+- Tags, metrics, facets, why-it-matters, artefact check and evidence follow after the sentence.
+- Main scanner, Historical scanner, workflows, evidence corpora and the v21.20 journal-diversity allocation are unchanged.
+
 # v21.16 — workflow-upload compatibility repair
 
 - Fixes the Main pre-scan regression gate when GitHub browser bulk upload leaves the older hidden `.github/workflows` YAML in place.
