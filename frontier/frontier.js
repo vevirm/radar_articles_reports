@@ -586,7 +586,7 @@
     if(flags.compete) parts.push('changes how well Europe can compete');
     if(flags.failure) parts.push('shows a concrete way access or capability can fail');
     const s=parts.length?parts.join('; '):'changes Europe’s control and competitive position';
-    return `${s}. Matrix cell: ${row.name} / ${column.name}.`;
+    return `${s}.`;
   }
 
   function classifySignal(x,data,index,now=new Date()){

@@ -9,6 +9,7 @@
 </style>
 <link rel="stylesheet" href="../../simple-ui.css?v=21.9">
 <script src="../../radar_data.js"></script>
+<link rel="stylesheet" href="../../reform.css?v=1.0">
 </head><body>
 <header><div class="wrap top"><div><div class="kicker">Matrix</div><h1>Europe at a glance</h1><p class="lede">Rows locate change in the research and innovation system. Columns show its effect on European control and capability.</p><div class="state" id="state">Loading</div></div><nav class="nav"><a href="../../">Start</a><a href="../../radar/">Main Radar</a><a href="../../read/">Read at least this</a><a class="primary" href="./">Matrix</a><a href="../">Full Matrix</a><a href="../../trends/">Trends</a><a href="../../phenomena/">Ongoing phenomena</a><a href="../../priorities/">Risks &amp; opportunities</a><a href="../../shocks/">External shocks</a><a href="../../historical/">Historical</a><a href="../../stuff/">Stuff</a></nav></div></header>
 <section class="core-flow" aria-label="Core reader path"><div class="wrap flow"><a href="../../radar/">1 · Radar</a><span>→</span><a class="current" href="./">2 · Matrix</a><span>→</span><a href="../../trends/">3 · Trends</a><span>→</span><a href="../../priorities/">4 · Risks &amp; opportunities</a><span>→</span><a href="../../shocks/">5 · External shocks</a></div></section>
@@ -30,4 +31,5 @@ const CELL_DISPLAY={'Strength from outside':'Strength from outside','Protection 
 function cellLabel(v){return plain(CELL_DISPLAY[v]||v)}
 function render(v){let sourceCount=0,pointCount=0;let h='<div class="matrix"><div class="corner"></div>';for(const c of v.columns){const d=COL_DISPLAY[c.id]||[c.name,c.direction];h+=`<div class="col ${c.id}">${icon(COL_ICON[c.id])}<b>${esc(d[0])}</b><span>${esc(d[1])}</span></div>`}for(const r of v.rows){const rd=ROW_DISPLAY[r.id]||[plain(r.name),plain(r.description)];h+=`<div class="row">${icon(ROW_ICON[r.id])}<b>${esc(rd[0])}</b><span>${esc(rd[1])}</span></div>`;for(const c of v.columns){const xs=v.cells[r.id][c.id]||[],groups=groupCell(xs),cell=v.cellNames[r.id][c.id];sourceCount+=xs.length;pointCount+=groups.length;h+=`<div class="cell ${c.id}"><div class="cell-head"><b>${esc(cellLabel(cell[0]))}</b><span class="n">${groups.length} points</span></div>${cellBullets(groups)}</div>`}}h+='</div>';document.getElementById('grid').innerHTML=h;document.getElementById('state').textContent=`${pointCount} findings · ${sourceCount} sources · updated ${String(v.lastUpdated||'').slice(0,10)}`}
 (async()=>{try{const d=await RadarData.load('../../radar.json','../../radar_seed.json');render(SovereigntyFrontier.buildFrontier(d));}catch(e){document.getElementById('grid').innerHTML='<p>Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
-</script></body></html>
+</script><script src="../../site-shell.js?v=1.0"></script>
+</body></html>

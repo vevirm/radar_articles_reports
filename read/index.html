@@ -9,6 +9,7 @@
 </style>
 <link rel="stylesheet" href="../simple-ui.css?v=21.9">
 <script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../reform.css?v=1.0">
 </head>
 <body>
 <header><div class="wrap top"><div><h1>Read at least this</h1></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a class="primary" href="./" aria-current="page">Read at least this</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing phenomena</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../shocks/">External shocks</a><a href="../historical/">Historical</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
@@ -31,4 +32,5 @@ function nodeContent(n){
 function chart(x,i){return `<section class="issue-chart" aria-label="Topic map ${i+1}: ${esc(x.main.label)}"><div class="chart-no">${String(i+1).padStart(2,'0')}</div><svg class="tree-svg" viewBox="0 0 1000 268" preserveAspectRatio="none" aria-hidden="true"><path class="root-link" d="M240 134 C300 134 323 89 410 89"/><path class="root-link" d="M240 134 C300 134 323 179 410 179"/><path class="branch-link" d="M700 89 C742 89 760 45 815 45"/><path class="branch-link" d="M700 89 C742 89 760 134 815 134"/><path class="branch-link" d="M700 179 C742 179 760 223 815 223"/><circle class="junction root-junction" cx="240" cy="134" r="3.8"/><circle class="junction" cx="700" cy="89" r="3.2"/><circle class="junction" cx="700" cy="179" r="3.2"/></svg><div class="tree-grid"><div class="node main">${nodeContent(x.main)}</div><div class="node sub one">${nodeContent(x.subs[0]||{label:'Current movement'})}</div><div class="node sub two">${nodeContent(x.subs[1]||{label:'Consequences'})}</div><div class="node leaf one">${nodeContent(x.leaves[0]||{label:'Connected development'})}</div><div class="node leaf two">${nodeContent(x.leaves[1]||{label:'Connected development'})}</div><div class="node leaf three">${nodeContent(x.leaves[2]||{label:'Connected development'})}</div></div></section>`}
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json');const items=[...(d.strand_a||[]),...(d.strand_c||[])];const trees=globalThis.RadarIssues?.buildTrees?RadarIssues.buildTrees(items,{count:8}):[];document.getElementById('trees').innerHTML=trees.length?trees.map(chart).join(''):'<div class="empty">No topic maps available.</div>'}catch(e){console.error(e);document.getElementById('trees').innerHTML='<div class="empty">Topic maps unavailable.</div>'}})();
 </script>
+<script src="../site-shell.js?v=1.0"></script>
 </body></html>

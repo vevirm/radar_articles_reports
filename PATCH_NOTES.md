@@ -1,3 +1,16 @@
+# v22.0 — reader navigation and layout reform
+
+- Replaces the old landing hierarchy with a one-screen homepage: live evidence/source count, full menu and a source-weighted topic map.
+- `Read at least this` is now the first red route everywhere.
+- Adds one shared inner-page shell with a plain-language purpose sentence for every main page.
+- Adds a single five-role type scale with a 14px minimum label size.
+- Replaces horizontally disappearing mobile navigation with a visible grid.
+- Collapses the Matrix into readable row/cell sections on phones instead of squeezing five columns.
+- Adds persistent Top controls and Filters controls where a filter toolbar exists.
+- Removes the visible `Matrix cell: …` internal plumbing text.
+- Adds `topic_vocabulary.json`, `topic-cloud.js`, `home.css`, `reform.css`, `site-shell.js` and `DESIGN_CONTRACT.md`.
+- Scanner admission, radar/historical corpora and analytical page engines are preserved.
+
 # v21.22
 
 - Ongoing Phenomena / Pattern Watch now leads every pattern card with one plain-language finding sentence.

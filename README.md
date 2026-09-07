@@ -2,6 +2,14 @@
 
 An EU-first evidence radar for research and innovation in geopolitical context.
 
+## Reader reform v22
+
+The reader layer now uses one navigation and type system across the site. The homepage is a one-screen index: project name, live evidence/source count, every main route and a source-weighted topic map. **Read at least this** is the first and red entry point on the homepage and every inner-page menu. The Radar remains the underlying evidence product; the new wording explains what each page is for before the reader reaches its content.
+
+The topic vocabulary is maintained by hand in `topic_vocabulary.json`. Topic size counts independent sources rather than records; red marks at most six topics with at least five sources where a majority of matching sources have recent evidence. The complete implementation contract is in `DESIGN_CONTRACT.md`.
+
+The reader reform does not change scanner admission, evidence corpora, or page-specific analytical engines. Existing routes and Radar `?q=` filtering are preserved.
+
 ## Operating model
 
 - **Main Radar** runs every four hours at **00:17 / 04:17 / 08:17 / 12:17 / 16:17 / 20:17 UTC**. Every Main run has the standard **24-minute** research budget.
