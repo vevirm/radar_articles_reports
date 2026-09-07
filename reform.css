@@ -148,3 +148,46 @@
   .page-trends .axis,.page-priorities main>.grid{grid-template-columns:1fr!important;gap:10px!important}
   .page-trends .side+.side{padding-top:9px!important;border-top:1px solid var(--r-line)!important}
 }
+
+/* v23.4 — quiet pages + permanent desktop sidebar. */
+:root{--r-side:214px;--r-page:1.55rem;--r-section:1.15rem;--r-claim:.98rem;--r-text:.91rem;--r-small:.74rem;--r-max:900px}
+.calm-site{padding-left:var(--r-side)!important;font-size:14.5px!important}
+.calm-sidebar{position:fixed;z-index:80;left:0;top:0;bottom:0;width:var(--r-side);overflow:auto;background:#f7f7f7;color:#111;border-right:1px solid var(--r-line);padding:18px 0 22px}
+.calm-side-brand{display:block;color:#111!important;text-decoration:none;font-size:14px;font-weight:900;line-height:1.2;padding:0 16px 16px;border-bottom:1px solid var(--r-line)}
+.calm-sidebar nav{display:block;padding-top:7px}
+.calm-sidebar nav a{display:block;color:#222!important;text-decoration:none;font-size:12.5px;font-weight:700;line-height:1.2;padding:8px 16px;border-left:4px solid transparent}
+.calm-sidebar nav a:hover{background:#ededed}
+.calm-sidebar nav a[aria-current="page"]{background:#fff;color:var(--r-red)!important;border-left-color:var(--r-red);font-weight:900}
+.calm-header{display:none!important}
+.calm-intro-inner{width:min(calc(100% - 48px),var(--r-max))!important;padding:16px 0 12px!important}
+.calm-intro h1{font-size:var(--r-page)!important;line-height:1.1!important;letter-spacing:-.025em!important}
+.surface-page .calm-intro p{display:none!important}
+.technical-page .calm-intro p{font-size:.85rem!important;margin-top:4px!important}
+.calm-site main,.calm-site .wrap{width:min(calc(100% - 48px),var(--r-max))!important}
+.calm-site main{padding-top:14px!important}
+.calm-site h2{font-size:var(--r-section)!important;line-height:1.2!important;letter-spacing:-.01em!important}
+.calm-site h3{font-size:var(--r-claim)!important;line-height:1.28!important}
+.calm-site p,.calm-site li{font-size:var(--r-text)!important;line-height:1.42!important}
+
+/* Topic page: conclusions only. Publication names and metadata belong in Radar/Stuff. */
+.page-briefing .topic{border-top:0!important;border-bottom:1px solid var(--r-line)!important;padding:14px 0 16px!important}
+.page-briefing .topic:first-child{padding-top:0!important}
+.page-briefing .topic h2{font-size:1.08rem!important;margin:0 0 8px!important}
+.page-briefing .items{display:block!important;margin:0!important}
+.page-briefing .item{border:0!important;padding:3px 0 3px 18px!important;position:relative!important}
+.page-briefing .item::before{content:'•';position:absolute;left:2px;top:1px;color:var(--r-red);font-weight:900}
+.page-briefing .item-top{display:block!important}
+.page-briefing .point,.page-briefing .meta,.page-briefing .actions,.page-briefing .count,.page-briefing .state{display:none!important}
+.page-briefing .why{display:block!important;color:#222!important;font-size:.89rem!important;line-height:1.4!important;margin:0!important}
+.page-briefing .why strong{display:none!important}
+
+@media(max-width:820px){
+  .calm-site{padding-left:0!important}
+  .calm-sidebar{display:none!important}
+  .calm-header{display:block!important}
+  .calm-bar{display:flex!important;padding-top:0!important;width:calc(100% - 24px)!important}
+  .calm-brand{padding-bottom:0!important}
+  .calm-header nav{display:flex!important;width:auto!important}
+  .calm-header nav a{min-height:46px!important;border-top:0!important}
+  .calm-intro-inner,.calm-site main,.calm-site .wrap{width:calc(100% - 24px)!important}
+}

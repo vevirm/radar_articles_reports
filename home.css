@@ -14,3 +14,16 @@
 .site-menu{margin-top:18px}.site-menu a{min-height:54px;padding-top:9px;padding-bottom:9px}.site-menu strong{font-size:17px}.site-menu .menu-main strong{font-size:19px}.site-menu span{font-size:12px;max-width:250px}
 .word-cloud-panel{padding-top:24px}.cloud-head h1{font-size:clamp(22px,2.4vw,30px)}
 @media(max-width:760px){.total-number{font-size:54px}.total-copy{font-size:21px}.site-menu strong{font-size:17px}.site-menu .menu-main strong{font-size:19px}}
+
+/* v23.4 — menu becomes a quiet sidebar; the main view is count + real word cloud. */
+@media(min-width:821px){
+  .home-main{display:grid;grid-template-columns:205px minmax(0,1fr);grid-template-areas:'menu summary' 'menu cloud';column-gap:30px;align-items:start}
+  .home-summary{grid-area:summary}
+  .site-menu{grid-area:menu;display:block!important;margin-top:0!important;border-top:3px solid #111!important;position:sticky;top:18px;align-self:start}
+  .site-menu a,.site-menu a:nth-child(odd),.site-menu a:nth-child(even){display:block!important;min-height:0!important;padding:8px 5px 8px 0!important;border-right:0!important;border-bottom:1px solid var(--line)!important}
+  .site-menu strong,.site-menu .menu-main strong{font-size:13px!important;line-height:1.2!important;color:#111!important}
+  .site-menu .menu-main strong{color:var(--red)!important}
+  .site-menu span{display:none!important}
+  .word-cloud-panel{grid-area:cloud;padding-top:22px!important}
+  .cloud-head h1{font-size:21px!important;letter-spacing:-.02em!important}
+}
