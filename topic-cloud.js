@@ -57,22 +57,22 @@ allRecords=[...records,...historicalRecords]
 
   function placeCloud(container,items){
     container.innerHTML='';
-    const W=Math.max(300,container.clientWidth),H=Math.max(440,container.clientHeight);
+    const W=Math.max(300,container.clientWidth),H=Math.max(300,container.clientHeight);
     const mobile=W<620;
-    const maxItems=mobile?58:82;
+    const maxItems=mobile?34:44;
     const chosen=items.slice(0,maxItems);
     if(!chosen.length){container.innerHTML='<div class="cloud-loading">No words yet</div>';return}
     const counts=chosen.map(x=>x.records),min=Math.min(...counts),max=Math.max(...counts);
     const size=x=>{
       const r=max===min?.5:(Math.sqrt(x.records)-Math.sqrt(min))/(Math.sqrt(max)-Math.sqrt(min));
-      return (mobile?15:17)+r*(mobile?29:43);
+      return (mobile?10.5:10)+r*(mobile?5:4.5);
     };
     const boxes=[];
     const cx=W/2,cy=H/2;
     chosen.forEach((item,rank)=>{
       const fs=size(item),el=document.createElement('a');
-      const h=hash(item.word),rot=rank<8?0:([0,0,0,0,90,-90][h%6]);
-      el.className='cloud-word'+((rank<7||(h%11===0))?' red':'');
+      const h=hash(item.word),rot=rank<7?0:([0,0,0,0,0,90,-90][h%7]);
+      el.className='cloud-word'+((rank<6||(h%13===0))?' red':'');
       el.textContent=item.word;
       el.href=`radar/?q=${encodeURIComponent(item.word)}`;
       el.title=`${item.records} records · ${item.sourceCount} sources`;

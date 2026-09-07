@@ -1,243 +1,111 @@
-:root{--r-black:#0b0b0b;--r-red:#c40018;--r-line:#d8d8d8;--r-muted:#626262;--r-max:1040px;--r-page:3.1rem;--r-section:1.8rem;--r-claim:1.16rem;--r-text:1rem;--r-small:.875rem}
-*{box-sizing:border-box}.calm-site{background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif!important;font-size:16px!important;line-height:1.5!important}.calm-site a{color:inherit}.legacy-site-header,.legacy-site-furniture{display:none!important}.calm-header{background:var(--r-black);color:#fff;border-bottom:5px solid var(--r-red);position:relative;z-index:30}.calm-bar{width:min(calc(100% - 32px),var(--r-max));min-height:58px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}.calm-brand{font-weight:900;text-decoration:none;font-size:16px;white-space:nowrap}.calm-header nav{display:flex;align-items:stretch}.calm-header nav a{min-height:58px;display:flex;align-items:center;padding:0 13px;text-decoration:none;font-size:14px;font-weight:800;border-left:1px solid rgba(255,255,255,.18)}.calm-header nav a:hover,.calm-header nav a[aria-current="page"]{background:var(--r-red)}
-.calm-intro{background:#fff;border-bottom:1px solid var(--r-line)}.calm-intro-inner{width:min(calc(100% - 32px),var(--r-max));margin:auto;padding:28px 0 24px}.calm-intro h1{font-size:var(--r-page)!important;line-height:.98!important;letter-spacing:-.05em!important;margin:0!important;color:#111!important}.calm-intro p{font-size:1.05rem!important;line-height:1.45!important;color:var(--r-muted)!important;margin:10px 0 0!important;max-width:760px!important}.calm-site main,.calm-site .wrap{width:min(calc(100% - 32px),var(--r-max))!important;margin-left:auto!important;margin-right:auto!important}.calm-site main{padding-top:26px!important;padding-bottom:70px!important}
-.calm-site h2{font-size:var(--r-section)!important;line-height:1.08!important;letter-spacing:-.035em!important}.calm-site h3{font-size:var(--r-claim)!important;line-height:1.25!important}.calm-site p,.calm-site li{font-size:var(--r-text)!important}.calm-site small,.calm-site .meta,.calm-site .count,.calm-site .eyebrow,.calm-site .label,.calm-site .tag{font-size:var(--r-small)!important}.calm-site .eyebrow{color:var(--r-red)!important;font-weight:900!important}.calm-site .muted{color:var(--r-muted)!important}
-.depth-fold{max-width:760px;margin:26px 0;border-top:1px solid var(--r-line)}.depth-fold>summary{padding:12px 0;cursor:pointer;font-weight:800;list-style:none}.depth-fold>summary::before{content:'+ ';color:var(--r-red)}.depth-fold[open]>summary::before{content:'− '}.calm-top{position:fixed;right:14px;bottom:14px;z-index:60;border:1px solid #111;background:#fff;color:#111;padding:9px 12px;font-size:14px;font-weight:800;opacity:0;pointer-events:none}.calm-top.show{opacity:1;pointer-events:auto}.calm-top:hover{background:#111;color:#fff}
-/* Surface pages: reduce chrome and let the finding lead. */
-.calm-site .nav,.calm-site .core-path,.calm-site .core-flow,.calm-site .statusbar,.calm-site .scan-strip,.calm-site .site-guide,.calm-site .dashboard{display:none!important}.calm-site .summary{color:var(--r-muted)!important;margin:0 0 24px!important}.calm-site .section-head{display:block!important;margin:0 0 15px!important}.calm-site .section-head p{max-width:760px!important;color:var(--r-muted)!important}.calm-site .panel,.calm-site .pattern,.calm-site .phenomenon,.calm-site .publication,.calm-site .pub,.calm-site .term,.calm-site .entry{box-shadow:none!important;border-radius:0!important}.calm-site .panel,.calm-site .pattern,.calm-site .phenomenon{border-left:0!important;border-right:0!important}.calm-site .btn,.calm-site button,.calm-site .filter{border-radius:0!important}.calm-site .tag,.calm-site .chip,.calm-site .badge{border-radius:0!important}
-/* Read at least this: one claim at a time, evidence only on request. */
-.reader-calm .tree-list{display:block!important}.reader-calm .issue-chart{min-height:0!important;border:0!important;border-bottom:1px solid var(--r-line)!important;padding:20px 0!important;overflow:visible!important}.reader-calm .chart-no{position:static!important;color:var(--r-red)!important;font-size:var(--r-small)!important;font-weight:900!important;margin-bottom:7px!important}.reader-calm .tree-svg{display:none!important}.reader-calm .tree-grid{display:block!important;min-height:0!important;padding:0!important}.reader-calm .node{display:none!important}.reader-calm .node.main{display:block!important;position:static!important;margin:0!important;background:#fff!important;color:#111!important;border:0!important;padding:0!important;text-align:left!important;min-height:0!important}.reader-calm .node.main a.node-title{color:#111!important;font-size:1.28rem!important;line-height:1.2!important;font-weight:850!important;text-decoration:none!important}.reader-calm .node.main .node-what,.reader-calm .node.main .node-why{color:var(--r-muted)!important;font-size:1rem!important;line-height:1.5!important;margin-top:6px!important}.reader-calm .node.main .node-what strong,.reader-calm .node.main .node-why strong{color:#111!important}.reader-calm .node.main .node-meta{color:var(--r-muted)!important;font-size:var(--r-small)!important;margin-top:8px!important}.issue-depth{margin-top:10px!important}.issue-depth>summary{cursor:pointer;font-size:var(--r-small)!important;font-weight:850!important;list-style:none}.issue-depth>summary::before{content:'+ ';color:var(--r-red)}.issue-depth[open]>summary::before{content:'− '}.issue-depth .node.sub,.issue-depth .node.leaf{display:block!important;margin:10px 0 0 20px!important;border:0!important;border-left:3px solid #111!important;padding:8px 0 8px 12px!important;text-align:left!important}.issue-depth .node.leaf{margin-left:38px!important;border-left-color:var(--r-red)!important}
-/* Risks & opportunities: one reading stream, no competing two-column wall. */
-.calm-site main>.grid{display:block!important;max-width:860px!important}.calm-site .grid>.panel{border:0!important;padding:0!important;margin:0 0 46px!important}.calm-site .panel-head{border-bottom:3px solid #111!important;padding:0 0 10px!important;margin-bottom:2px!important}.calm-site .priority-main{padding:18px 0!important;grid-template-columns:30px minmax(0,1fr)!important}.calm-site .priority-what{display:none!important}.calm-site .priority-why{color:var(--r-muted)!important;margin-top:7px!important}.calm-site .priority-actions{margin-top:9px!important}.calm-site .detail{margin:0 0 14px 40px!important;border:0!important;border-left:3px solid var(--r-red)!important;background:#fff!important;padding:10px 0 10px 12px!important}
-/* Phenomena: finding first; diagnostics/evidence folded. */
-.calm-site .pattern{padding:22px 0!important}.calm-site .pattern .metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important}.calm-site .pattern .metric{border:0!important;border-top:1px solid var(--r-line)!important;padding:10px 0!important}.pattern-depth{margin:0!important;border:0!important;border-top:1px solid var(--r-line)!important}.pattern-depth>summary{cursor:pointer;list-style:none;padding:11px 0!important;font-size:var(--r-small)!important;font-weight:850!important}.pattern-depth>summary::before{content:'+ ';color:var(--r-red)}.pattern-depth[open]>summary::before{content:'− '}.calm-site .pattern .case{border-left:3px solid #111!important;padding:9px 0 9px 12px!important}
-/* Matrix: real phone collapse. */
-.calm-site .matrix-wrap{max-width:100%!important}.calm-site .matrix-cell,.calm-site .cell,.calm-site .row-head,.calm-site .row,.calm-site .col-head,.calm-site .col{min-width:0!important;overflow-wrap:anywhere!important}
-/* Publications/method pages: prevent sideways overflow. */
-.calm-site .pub,.calm-site .publication,.calm-site .publication-list,.calm-site .say,.calm-site .matter,.calm-site .meta,.calm-site .entry,.calm-site .term,.calm-site .card{min-width:0!important;max-width:100%!important;overflow-wrap:anywhere!important}.calm-site pre,.calm-site code{max-width:100%;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
-/* Explore index */
-.explore-page{margin:0;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif}.explore-main{width:min(calc(100% - 32px),960px)!important;margin:auto!important;padding:42px 0 70px!important}.explore-lead{max-width:720px;margin-bottom:30px}.explore-lead .eyebrow{color:var(--r-red);font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.explore-lead h1{font-size:clamp(42px,6vw,68px);line-height:.98;letter-spacing:-.05em;margin:8px 0 12px}.explore-lead p{font-size:18px;color:var(--r-muted);margin:0}.explore-grid{border-top:4px solid #111}.explore-grid a{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:20px;align-items:baseline;text-decoration:none;border-bottom:1px solid var(--r-line);padding:18px 0}.explore-grid a:hover strong{text-decoration:underline;text-decoration-color:var(--r-red);text-decoration-thickness:3px;text-underline-offset:4px}.explore-grid strong{font-size:21px;line-height:1.2}.explore-grid span{font-size:14px;color:var(--r-muted);text-align:right}.explore-small{font-size:14px!important;color:var(--r-muted);margin-top:22px}.explore-small a{font-weight:800;color:#111}
-@media(max-width:760px){:root{--r-page:2.3rem;--r-section:1.55rem}.calm-bar{width:calc(100% - 24px);display:grid;grid-template-columns:1fr;gap:0;padding-top:10px}.calm-brand{padding-bottom:8px}.calm-header nav{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr}.calm-header nav a{min-height:44px;padding:0 8px;justify-content:center;border-top:1px solid rgba(255,255,255,.18)}.calm-intro-inner,.calm-site main,.calm-site .wrap{width:calc(100% - 24px)!important}.calm-intro-inner{padding:20px 0 18px}.calm-site main{padding-top:18px!important}.calm-site .tools{display:grid!important;grid-template-columns:1fr 1fr!important}.calm-site .search{grid-column:1/-1!important;width:100%!important}.calm-site .filter{width:100%!important}.calm-site .pattern .metrics{grid-template-columns:1fr 1fr!important}.explore-main{width:calc(100% - 24px)!important;padding-top:28px!important}.explore-grid a{grid-template-columns:1fr;gap:4px;padding:16px 0}.explore-grid span{text-align:left}.explore-grid strong{font-size:19px}}
-@media(max-width:700px){.calm-site .matrix{display:block!important;min-width:0!important;width:100%!important}.calm-site .matrix>.corner,.calm-site .matrix>.col-head,.calm-site .matrix>.col{display:none!important}.calm-site .matrix>.row-head,.calm-site .matrix>.row{display:block!important;margin-top:20px!important;padding:12px!important;border:1px solid #111!important;border-left:5px solid #111!important}.calm-site .matrix>.matrix-cell,.calm-site .matrix>.cell{display:block!important;margin:0!important;padding:14px!important;border:1px solid var(--r-line)!important;border-top:0!important;background:#fff!important}.calm-site .matrix>.matrix-cell::before,.calm-site .matrix>.cell::before{display:block!important;margin-bottom:7px!important;font-size:var(--r-small)!important;font-weight:900!important;color:var(--r-red)!important}.calm-site .matrix>.matrix-cell.A::before,.calm-site .matrix>.cell.A::before{content:'More control, stronger'}.calm-site .matrix>.matrix-cell.B::before,.calm-site .matrix>.cell.B::before{content:'More control, some cost'}.calm-site .matrix>.matrix-cell.C::before,.calm-site .matrix>.cell.C::before{content:'Stronger, but reliant'}.calm-site .matrix>.matrix-cell.D::before,.calm-site .matrix>.cell.D::before{content:'Less control, weaker'}}
-/* v23.1 reader simplification: keep method/metrics available, remove dashboard-like stamps from ordinary reading. */
-.calm-site .pattern>.pattern-head{padding:20px 0 16px!important;border-bottom:1px solid var(--r-line)!important}.calm-site .pattern>.pattern-head h3{font-size:clamp(22px,3vw,30px)!important;line-height:1.08!important;margin:0 0 8px!important}.calm-site .pattern>.pattern-head .claim{font-size:16px!important;line-height:1.45!important;font-weight:400!important;color:rgba(11,11,11,.72)!important;margin:0!important}.calm-site .pattern{border-left:0!important;border-right:0!important;border-bottom:0!important;border-top:5px solid #c40018!important}.calm-site .pattern.candidate{border-top-color:#777!important}.calm-site .pattern-depth>summary{padding:12px 0!important;font-size:14px!important}.calm-site .phenomenon>.head{padding:18px 0 14px!important}.calm-site .phenomenon>.head h3{font-size:25px!important}.calm-site .phenomenon .pair{gap:10px!important}.calm-site .phenomenon .pair p{font-size:15px!important;line-height:1.45!important}.calm-site .section-head p{font-size:15px!important}.calm-site .section-count{font-size:12px!important;color:rgba(11,11,11,.62)!important}
+:root{
+  --r-black:#0b0b0b;
+  --r-red:#c40018;
+  --r-line:#d8d8d8;
+  --r-muted:#616161;
+  --r-side:270px;
+  --r-max:1040px;
+  --r-page:1.8rem;
+  --r-section:1.28rem;
+  --r-claim:1.08rem;
+  --r-text:1rem;
+  --r-small:.875rem;
+}
+*{box-sizing:border-box}
+.calm-site{margin:0!important;padding-left:var(--r-side)!important;background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif!important;font-size:16px!important;line-height:1.48!important;overflow-x:hidden!important}
+.calm-site a{color:inherit}.calm-site img,.calm-site svg{max-width:100%;height:auto}
+.legacy-site-header,.legacy-site-furniture,.calm-site .nav,.calm-site .core-path,.calm-site .core-flow,.calm-site .site-guide,.calm-site .minimum-read,.calm-site .dashboard,.calm-site .statusbar,.calm-site .scan-strip{display:none!important}
 
-/* v23.3 — reader-first pass. Normal pages are summaries, not audit screens. */
-:root{--r-page:2rem;--r-section:1.35rem;--r-claim:1.02rem;--r-text:.94rem;--r-small:.78rem}
-.calm-site{font-size:15px!important;line-height:1.45!important}
-.calm-bar{min-height:50px!important}
-.calm-brand{font-size:15px!important}
-.calm-header nav a{min-height:50px!important;padding:0 11px!important;font-size:12px!important}
-.calm-intro-inner{padding:17px 0 15px!important}
-.calm-intro h1{font-size:var(--r-page)!important;line-height:1.04!important;letter-spacing:-.035em!important}
-.calm-intro p{font-size:.92rem!important;line-height:1.35!important;margin-top:5px!important;max-width:640px!important}
-.calm-site main{padding-top:18px!important;padding-bottom:56px!important}
-.calm-site h2{font-size:var(--r-section)!important;letter-spacing:-.02em!important}
-.calm-site h3{font-size:var(--r-claim)!important;letter-spacing:-.012em!important}
-.calm-site p,.calm-site li{font-size:var(--r-text)!important}
-.calm-top{font-size:12px!important;padding:7px 9px!important}
+/* Left menu is deliberately more prominent than the word cloud and page furniture. */
+.calm-sidebar{position:fixed;z-index:80;left:0;top:0;bottom:0;width:var(--r-side);overflow:auto;background:#f7f7f7;color:#111;border-right:1px solid #cfcfcf;border-top:6px solid var(--r-red)}
+.calm-side-brand{display:block;background:#111;color:#fff!important;text-decoration:none;font-size:17px;font-weight:900;line-height:1.2;padding:18px 20px;border-bottom:5px solid var(--r-red)}
+.calm-sidebar nav{display:block;padding:7px 0 20px}
+.calm-sidebar nav a{display:block;color:#171717!important;text-decoration:none;font-size:16px;font-weight:800;line-height:1.2;padding:11px 20px;border-left:5px solid transparent;border-bottom:1px solid #e5e5e5}
+.calm-sidebar nav a:hover{background:#fff;color:var(--r-red)!important}
+.calm-sidebar nav a[aria-current="page"]{background:var(--r-red)!important;color:#fff!important;border-left-color:#111!important;font-weight:900}
 
-/* On normal reader pages, hide audit metadata and diagnostics. Radar is separate and Stuff is exempt. */
-.surface-page .method,
-.surface-page .corpus-line,
-.surface-page .quality-line,
-.surface-page .meta,
-.surface-page .count,
-.surface-page .section-count,
-.surface-page .panel-count,
-.surface-page .status,
-.surface-page .kind,
-.surface-page .score,
-.surface-page .support,
-.surface-page .pull-note,
-.surface-page .priority-meta,
-.surface-page .rank,
-.surface-page .badge,
-.surface-page .chip,
-.surface-page .tag,
-.surface-page .eyebrow,
-.surface-page .label{display:none!important}
+/* Mobile fallback header. */
+.calm-header{display:none!important;background:var(--r-black);color:#fff;border-bottom:5px solid var(--r-red)}
+.calm-bar{width:calc(100% - 24px);min-height:52px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.calm-brand{font-weight:900;text-decoration:none;font-size:15px;white-space:nowrap}
+.calm-header nav{display:flex;align-items:stretch}.calm-header nav a{display:flex;align-items:center;min-height:52px;padding:0 10px;text-decoration:none;font-size:13px;font-weight:850;border-left:1px solid rgba(255,255,255,.18)}
+.calm-header nav a:hover,.calm-header nav a[aria-current="page"]{background:var(--r-red)}
 
-/* Read this first: one headline and two plain sentences. */
-.page-read .issue-chart{padding:14px 0!important}
-.page-read .chart-no,.page-read .node-meta,.page-read .issue-depth{display:none!important}
-.page-read .node.main a.node-title{font-size:1.05rem!important;line-height:1.25!important}
-.page-read .node.main .node-what,.page-read .node.main .node-why{font-size:.92rem!important;line-height:1.4!important;margin-top:4px!important}
-.page-read .node.main .node-what strong,.page-read .node.main .node-why strong{display:none!important}
+/* Page title and content scale. */
+.calm-intro{background:#fff;border-bottom:1px solid var(--r-line)}
+.calm-intro-inner,.calm-site main,.calm-site .wrap{width:min(calc(100% - 52px),var(--r-max))!important;margin-left:auto!important;margin-right:auto!important;min-width:0!important;max-width:100%!important}
+.calm-intro-inner{padding:19px 0 14px!important}.calm-intro h1{font-size:var(--r-page)!important;line-height:1.08!important;letter-spacing:-.03em!important;margin:0!important;color:#111!important;font-weight:900!important}
+.calm-intro h1::after{content:"";display:block;width:54px;height:4px;background:var(--r-red);margin-top:9px}
+.surface-page .calm-intro p{display:none!important}.technical-page .calm-intro p{font-size:.94rem!important;line-height:1.4!important;color:var(--r-muted)!important;margin:7px 0 0!important;max-width:720px!important}
+.calm-site main{padding-top:18px!important;padding-bottom:64px!important}.calm-site main>*{min-width:0;max-width:100%}
+.calm-site h2{font-size:var(--r-section)!important;line-height:1.2!important;letter-spacing:-.015em!important;margin-top:0!important}.calm-site h3{font-size:var(--r-claim)!important;line-height:1.28!important;letter-spacing:-.01em!important}.calm-site p,.calm-site li{font-size:var(--r-text)!important;line-height:1.46!important}.calm-site small,.calm-site .meta,.calm-site .count{font-size:var(--r-small)!important}
+.calm-site .muted{color:var(--r-muted)!important}.surface-page main h2{border-left:4px solid var(--r-red);padding-left:10px}.surface-page main a:hover{color:var(--r-red)!important}
+.calm-site .panel,.calm-site .pattern,.calm-site .phenomenon,.calm-site .publication,.calm-site .pub,.calm-site .term,.calm-site .entry,.calm-site .card{box-shadow:none!important;border-radius:0!important;min-width:0!important;max-width:100%!important}
+.calm-site .btn,.calm-site button,.calm-site .filter,.calm-site .tag,.calm-site .chip,.calm-site .badge{border-radius:0!important}
+.calm-site pre,.calm-site code{max-width:100%;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
 
-/* Trends: show the two directions and the plain-language case, not the scoring machinery. */
-.page-trends .pair-list{gap:8px!important}
-.page-trends .pair{border:0!important;border-bottom:1px solid var(--r-line)!important;padding:10px 0 14px!important}
-.page-trends .pair-head{display:none!important}
-.page-trends .axis{grid-template-columns:1fr 1fr!important;gap:28px!important}
-.page-trends .side{padding:0!important;border:0!important}
-.page-trends .side+.side{border:0!important}
-.page-trends .side h3{font-size:1rem!important;line-height:1.2!important;margin:0 0 5px!important}
-.page-trends .side .score,.page-trends .support,.page-trends details,.page-trends .pair-foot{display:none!important}
-.page-trends .plain,.page-trends .why{font-size:.9rem!important;line-height:1.4!important;margin:0 0 4px!important;font-weight:400!important}
-.page-trends .plain strong,.page-trends .why strong{display:none!important}
-.page-trends .why{color:var(--r-muted)!important}
+/* Normal pages explain. Audit furniture belongs only in Radar Read more and Stuff. */
+.surface-page .method,.surface-page .corpus-line,.surface-page .quality-line,.surface-page .meta,.surface-page .count,.surface-page .section-count,.surface-page .panel-count,.surface-page .status,.surface-page .kind,.surface-page .score,.surface-page .support,.surface-page .pull-note,.surface-page .priority-meta,.surface-page .rank,.surface-page .badge,.surface-page .chip,.surface-page .tag,.surface-page .eyebrow,.surface-page .label,.surface-page .state{display:none!important}
 
-/* Ongoing patterns: findings only. No method, scores, candidate diagnostics or evidence drill-down. */
-.page-phenomena .pattern-list{display:block!important}
-.page-phenomena .pattern{padding:14px 0!important;border-bottom:1px solid var(--r-line)!important}
-.page-phenomena .pattern-head h3{font-size:1.02rem!important;margin:0 0 4px!important}
-.page-phenomena .pattern .claim{font-size:.92rem!important;line-height:1.4!important;margin:0!important;color:var(--r-muted)!important}
-.page-phenomena .pattern-depth,.page-phenomena .section-depth{display:none!important}
-.page-phenomena .section-head{margin-bottom:4px!important}
-.page-phenomena .section-head p{font-size:.88rem!important;margin:3px 0 0!important}
+/* Read this first: headline + plain explanation only. */
+.page-read .issue-chart{min-height:0!important;border:0!important;border-bottom:1px solid var(--r-line)!important;padding:14px 0!important;overflow:visible!important}
+.page-read .chart-no,.page-read .tree-svg,.page-read .node-meta,.page-read .issue-depth,.page-read .node.sub,.page-read .node.leaf{display:none!important}
+.page-read .tree-grid,.page-read .tree-list{display:block!important;min-height:0!important;padding:0!important}.page-read .node{display:none!important}.page-read .node.main{display:block!important;position:static!important;margin:0!important;background:#fff!important;color:#111!important;border:0!important;padding:0!important;text-align:left!important;min-height:0!important}
+.page-read .node.main a.node-title{color:#111!important;font-size:1.12rem!important;line-height:1.26!important;font-weight:900!important;text-decoration:none!important}.page-read .node.main .node-what,.page-read .node.main .node-why{font-size:.98rem!important;line-height:1.45!important;margin-top:5px!important;color:var(--r-muted)!important}.page-read .node.main .node-what strong,.page-read .node.main .node-why strong{display:none!important}
 
-/* Risks & opportunities: title + plain reason. */
-.page-priorities main>.grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:34px!important;max-width:none!important}
-.page-priorities .grid>.panel{margin:0!important}
-.page-priorities .panel-head{border-bottom:2px solid #111!important;padding:0 0 8px!important}
-.page-priorities .priority-main{display:block!important;padding:12px 0!important;border-bottom:1px solid var(--r-line)!important}
-.page-priorities .priority-title{font-size:1rem!important;line-height:1.25!important}
-.page-priorities .priority-what,.page-priorities .priority-actions,.page-priorities .detail,.page-priorities .hint,.page-priorities .info-button{display:none!important}
-.page-priorities .priority-why{font-size:.9rem!important;line-height:1.4!important;margin:4px 0 0!important;color:var(--r-muted)!important}
-.page-priorities .priority-why strong{display:none!important}
+/* Trends: keep the useful tug-of-war numbers and nothing audit-like. */
+.page-trends .pair-list{display:grid!important;gap:0!important}.page-trends .pair{border:0!important;border-bottom:1px solid var(--r-line)!important;padding:16px 0 20px!important;background:#fff!important}.page-trends .pair-head,.page-trends .support,.page-trends details,.page-trends .pair-foot,.page-trends .side .score{display:none!important}
+.page-trends .tug-score{display:grid!important;grid-template-columns:38px minmax(120px,1fr) 38px;gap:10px;align-items:center;margin:0 0 13px!important;font-variant-numeric:tabular-nums}.page-trends .tug-score>strong{font-size:1.05rem!important;line-height:1!important;font-weight:900!important;text-align:left;color:#111!important}.page-trends .tug-score>strong:last-child{color:var(--r-red)!important;text-align:right}.page-trends .tug-track{height:8px;display:flex;background:#eee;overflow:hidden}.page-trends .tug-left{background:#111;min-width:1px}.page-trends .tug-right{background:var(--r-red);min-width:1px}
+.page-trends .axis{display:grid!important;grid-template-columns:1fr 1fr!important;gap:34px!important}.page-trends .side{padding:0!important;border:0!important}.page-trends .side+.side{border:0!important}.page-trends .side h3{font-size:1.12rem!important;line-height:1.22!important;margin:0 0 6px!important}.page-trends .side.right h3{color:var(--r-red)!important}.page-trends .plain,.page-trends .why{font-size:.98rem!important;line-height:1.45!important;margin:0 0 5px!important;font-weight:400!important}.page-trends .plain strong,.page-trends .why strong{display:none!important}.page-trends .why{color:var(--r-muted)!important}
 
-/* External shocks: no duplicate index, stamps, scores, evidence buttons or audit boxes. */
-.page-shocks .shock-index,.page-shocks .shock-change,.page-shocks .actions,.page-shocks .detail,.page-shocks .surface-balance,.page-shocks .assessment,.page-shocks .shock-arrows,.page-shocks .evidence,.page-shocks .watch-note{display:none!important}
-.page-shocks .section-title{border-bottom:2px solid #111!important;padding-bottom:7px!important;margin-top:4px!important}
-.page-shocks .section-title span{display:none!important}
-.page-shocks .realised,.page-shocks .emergent,.page-shocks .direct{margin-bottom:22px!important}
-.page-shocks .shock,.page-shocks .scenario{border:0!important;border-bottom:1px solid var(--r-line)!important;padding:12px 0!important}
-.page-shocks .scenario-list{gap:0!important}
-.page-shocks .shock .title,.page-shocks .scenario h3{font-size:1.02rem!important;line-height:1.28!important;letter-spacing:-.01em!important;margin:0 0 4px!important}
-.page-shocks .scenario h3 .status{display:none!important}
-.page-shocks .plainly{font-size:.9rem!important;line-height:1.4!important;font-weight:400!important;color:var(--r-muted)!important;margin:0!important}
-.page-shocks .plainly strong{display:none!important}
-.page-shocks .shock .plainly:nth-of-type(n+2),.page-shocks .scenario .plainly:nth-of-type(n+2){display:none!important}
-.page-shocks .empty{border:0!important;padding:10px 0!important}
+/* Patterns: one finding, once. No repeated boilerplate, candidate diagnostics or evidence drawers. */
+.page-phenomena .section-head{margin:0 0 6px!important}.page-phenomena .section-head p{font-size:.96rem!important;margin:3px 0 0!important;color:var(--r-muted)!important}.page-phenomena .pattern-list{display:block!important}.page-phenomena .pattern{border:0!important;border-left:4px solid var(--r-red)!important;border-bottom:1px solid var(--r-line)!important;padding:15px 0 15px 14px!important}.page-phenomena .pattern.candidate{border-left-color:#777!important}.page-phenomena .pattern-head h3{font-size:1.12rem!important;line-height:1.27!important;margin:0!important}.page-phenomena .pattern .claim,.page-phenomena .pattern-depth,.page-phenomena .section-depth,.page-phenomena #candidateSection{display:none!important}
 
-/* Evidence by topic: findings only; no status/count/action furniture. */
-.page-briefing .actions,.page-briefing .more,.page-briefing .state{display:none!important}
-.page-briefing .topic{padding:12px 0!important;border-bottom:1px solid var(--r-line)!important}
-.page-briefing .topic-head{padding:0!important}
-.page-briefing .item{padding:9px 0!important}
-.page-briefing .point{font-size:.94rem!important}
-.page-briefing .why{font-size:.88rem!important;color:var(--r-muted)!important}
+/* Risks & opportunities: title + one reason. */
+.page-priorities main>.grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:38px!important;max-width:none!important}.page-priorities .grid>.panel{border:0!important;padding:0!important;margin:0!important}.page-priorities .panel-head{border-bottom:3px solid #111!important;padding:0 0 9px!important;margin-bottom:0!important}.page-priorities .priority-main{display:block!important;padding:14px 0 14px 13px!important;border:0!important;border-left:3px solid var(--r-red)!important;border-bottom:1px solid var(--r-line)!important}.page-priorities .priority-title{font-size:1.08rem!important;line-height:1.28!important}.page-priorities .priority-what,.page-priorities .priority-actions,.page-priorities .detail,.page-priorities .hint,.page-priorities .info-button{display:none!important}.page-priorities .priority-why{font-size:.96rem!important;line-height:1.45!important;margin:5px 0 0!important;color:var(--r-muted)!important}.page-priorities .priority-why strong{display:none!important}
 
-/* Matrix: keep the picture, remove the machinery around it. */
-.page-frontier .method,.page-frontier .axis-note,.page-frontier .cell-meta,.page-frontier .more-btn,.page-frontier .state{display:none!important}
-.page-frontier .matrix-cell{padding:12px!important}
-.page-frontier .cell-point{font-size:.88rem!important;line-height:1.35!important}
+/* Big outside events: clean list; no stamps, status or audit boxes. */
+.page-shocks .shock-index,.page-shocks .shock-change,.page-shocks .actions,.page-shocks .detail,.page-shocks .surface-balance,.page-shocks .assessment,.page-shocks .shock-arrows,.page-shocks .evidence,.page-shocks .watch-note{display:none!important}.page-shocks .section-title{border-bottom:3px solid #111!important;padding-bottom:7px!important;margin-top:4px!important}.page-shocks .section-title span{display:none!important}.page-shocks .realised,.page-shocks .emergent,.page-shocks .direct{margin-bottom:24px!important}.page-shocks .shock,.page-shocks .scenario{border:0!important;border-left:3px solid var(--r-red)!important;border-bottom:1px solid var(--r-line)!important;padding:13px 0 13px 13px!important}.page-shocks .scenario-list{gap:0!important}.page-shocks .shock .title,.page-shocks .scenario h3{font-size:1.08rem!important;line-height:1.3!important;letter-spacing:-.01em!important;margin:0 0 4px!important}.page-shocks .plainly{font-size:.96rem!important;line-height:1.45!important;font-weight:400!important;color:var(--r-muted)!important;margin:0!important}.page-shocks .plainly strong{display:none!important}.page-shocks .shock .plainly:nth-of-type(n+2),.page-shocks .scenario .plainly:nth-of-type(n+2){display:none!important}.page-shocks .empty{border:0!important;padding:10px 0!important}
 
-/* Sources: searchable list, but not an audit table. */
-.page-literature .channel,.page-literature .year{display:none!important}
-.page-literature .entry{padding-top:9px!important;padding-bottom:9px!important}
-.page-literature .name,.page-literature .title{font-size:.92rem!important}
+/* Topics: conclusions, not publication titles. */
+.page-briefing .topic{border:0!important;border-bottom:1px solid var(--r-line)!important;padding:15px 0 17px!important}.page-briefing .topic:first-child{padding-top:0!important}.page-briefing .topic h2{font-size:1.16rem!important;margin:0 0 7px!important;color:var(--r-red)!important;border-left:0!important;padding-left:0!important}.page-briefing .items{display:block!important;margin:0!important}.page-briefing .item{border:0!important;padding:4px 0 4px 18px!important;position:relative!important}.page-briefing .item::before{content:'•';position:absolute;left:2px;top:1px;color:var(--r-red);font-weight:900}.page-briefing .point,.page-briefing .actions,.page-briefing .more,.page-briefing .state{display:none!important}.page-briefing .why{display:block!important;color:#222!important;font-size:.98rem!important;line-height:1.44!important;margin:0!important}.page-briefing .why strong{display:none!important}
 
-/* History: keep search/browsing controls; suppress scanner-status furniture. */
-.page-historical .statusbar,.page-historical .stats,.page-historical .pill,.page-historical .historical-actions{display:none!important}
-.page-historical .card{padding:11px 0!important}
+/* Matrix: keep the picture; hide its audit machinery. */
+.page-frontier .method,.page-frontier .axis-note,.page-frontier .cell-meta,.page-frontier .more-btn,.page-frontier .state{display:none!important}.page-frontier .matrix-wrap{max-width:100%!important}.page-frontier .matrix-cell,.page-frontier .cell,.page-frontier .row-head,.page-frontier .row,.page-frontier .col-head,.page-frontier .col{min-width:0!important;overflow-wrap:anywhere!important}.page-frontier .matrix-cell{padding:13px!important}.page-frontier .cell-point{font-size:.96rem!important;line-height:1.4!important}
 
-/* Stuff is deliberately the technical exception, but its page chrome should still be calm. */
-.technical-page .calm-intro p{max-width:720px!important}
-.technical-page .download-card{border:0!important;border-top:3px solid var(--r-red)!important;padding:18px 0!important}
-.technical-page .download-card h2{font-size:1.3rem!important}
-.technical-page .download-card p{font-size:.92rem!important}
+/* Sources: two readable columns. Search stays useful; hidden audit columns are gone. */
+.page-literature .tools{display:flex!important;gap:10px!important;align-items:center!important;margin-bottom:12px!important}.page-literature .search{flex:1!important;min-width:0!important;border:1px solid #aaa!important;padding:9px 10px!important;font-size:1rem!important}.page-literature .letters{display:flex!important;gap:5px!important;flex-wrap:wrap!important;margin-bottom:14px!important}.page-literature .letters button{border:1px solid #999!important;background:#fff!important;padding:5px 8px!important;font-size:.78rem!important;font-weight:850!important}.page-literature .letters button.active{background:#111!important;color:#fff!important}.page-literature .list{border:1px solid var(--r-line)!important;border-radius:0!important;overflow:hidden!important}.page-literature .entry{display:grid!important;grid-template-columns:minmax(220px,.85fr) minmax(0,2.15fr)!important;column-gap:26px!important;row-gap:0!important;align-items:start!important;width:100%!important;padding:12px 14px!important;border:0!important;border-left:3px solid transparent!important;border-bottom:1px solid var(--r-line)!important}.page-literature .entry:hover{border-left-color:var(--r-red)!important}.page-literature .entry.head{display:none!important}.page-literature .entry>.name{grid-column:1!important;min-width:0!important;font-size:.98rem!important;font-weight:850!important;overflow-wrap:break-word!important}.page-literature .entry>.title{grid-column:2!important;min-width:0!important;font-size:.98rem!important;line-height:1.42!important;overflow-wrap:break-word!important;word-break:normal!important}.page-literature .entry>.year,.page-literature .entry>.channel{display:none!important}.page-literature .publication-open{display:inline-block!important;margin-top:5px!important;font-size:.86rem!important;font-weight:750!important;text-decoration:underline!important;text-decoration-color:var(--r-red)!important;text-underline-offset:3px!important;overflow-wrap:normal!important;word-break:normal!important}.page-literature footer{display:none!important}
 
-@media(max-width:760px){
-  :root{--r-page:1.8rem;--r-section:1.25rem}
-  .calm-bar{display:flex!important;padding-top:0!important;width:calc(100% - 24px)!important}
-  .calm-brand{padding-bottom:0!important}
-  .calm-header nav{display:flex!important;width:auto!important}
-  .calm-header nav a{min-height:50px!important;border-top:0!important}
-  .page-trends .axis,.page-priorities main>.grid{grid-template-columns:1fr!important;gap:10px!important}
-  .page-trends .side+.side{padding-top:9px!important;border-top:1px solid var(--r-line)!important}
+/* History: browse older evidence, without scanner status. */
+.page-historical .statusbar,.page-historical .stats,.page-historical .pill,.page-historical .historical-actions{display:none!important}.page-historical .card{padding:12px 0!important;border-radius:0!important}.page-history .statusbar,.page-history .stats,.page-history .pill{display:none!important}
+
+/* Stuff is the intentional technical exception. */
+.technical-page .download-card{border:0!important;border-top:4px solid var(--r-red)!important;padding:18px 0!important}.technical-page .download-card h2{font-size:1.35rem!important}.technical-page .download-card p{font-size:.98rem!important}.technical-page table{font-size:.9rem!important}
+
+.calm-top{position:fixed;right:14px;bottom:14px;z-index:60;border:1px solid #111;background:#fff;color:#111;padding:8px 10px;font-size:12px;font-weight:850;opacity:0;pointer-events:none}.calm-top.show{opacity:1;pointer-events:auto}.calm-top:hover{background:#111;color:#fff}
+
+@media(max-width:900px){
+  .page-literature .entry{grid-template-columns:1fr!important;gap:5px!important}.page-literature .entry>.name,.page-literature .entry>.title{grid-column:1!important}
+}
+@media(max-width:820px){
+  :root{--r-side:0px;--r-page:1.65rem;--r-section:1.22rem}
+  .calm-site{padding-left:0!important}.calm-sidebar{display:none!important}.calm-header{display:block!important}
+  .calm-intro-inner,.calm-site main,.calm-site .wrap{width:calc(100% - 28px)!important}.calm-intro-inner{padding:16px 0 12px!important}.calm-site main{padding-top:15px!important}
+  .page-trends .axis,.page-priorities main>.grid{grid-template-columns:1fr!important;gap:12px!important}.page-trends .side+.side{padding-top:10px!important;border-top:1px solid var(--r-line)!important}.page-trends .tug-score{grid-template-columns:34px minmax(90px,1fr) 34px}
+}
+@media(max-width:700px){
+  .page-frontier .matrix{display:block!important;min-width:0!important;width:100%!important}.page-frontier .matrix>.corner,.page-frontier .matrix>.col-head,.page-frontier .matrix>.col{display:none!important}.page-frontier .matrix>.row-head,.page-frontier .matrix>.row{display:block!important;margin-top:18px!important;padding:12px!important;border:1px solid #111!important;border-left:5px solid #111!important}.page-frontier .matrix>.matrix-cell,.page-frontier .matrix>.cell{display:block!important;margin:0!important;padding:13px!important;border:1px solid var(--r-line)!important;border-top:0!important;background:#fff!important}
 }
 
-/* v23.4 — quiet pages + permanent desktop sidebar. */
-:root{--r-side:214px;--r-page:1.55rem;--r-section:1.15rem;--r-claim:.98rem;--r-text:.91rem;--r-small:.74rem;--r-max:900px}
-.calm-site{padding-left:var(--r-side)!important;font-size:14.5px!important}
-.calm-sidebar{position:fixed;z-index:80;left:0;top:0;bottom:0;width:var(--r-side);overflow:auto;background:#f7f7f7;color:#111;border-right:1px solid var(--r-line);padding:18px 0 22px}
-.calm-side-brand{display:block;color:#111!important;text-decoration:none;font-size:14px;font-weight:900;line-height:1.2;padding:0 16px 16px;border-bottom:1px solid var(--r-line)}
-.calm-sidebar nav{display:block;padding-top:7px}
-.calm-sidebar nav a{display:block;color:#222!important;text-decoration:none;font-size:12.5px;font-weight:700;line-height:1.2;padding:8px 16px;border-left:4px solid transparent}
-.calm-sidebar nav a:hover{background:#ededed}
-.calm-sidebar nav a[aria-current="page"]{background:#fff;color:var(--r-red)!important;border-left-color:var(--r-red);font-weight:900}
-.calm-header{display:none!important}
-.calm-intro-inner{width:min(calc(100% - 48px),var(--r-max))!important;padding:16px 0 12px!important}
-.calm-intro h1{font-size:var(--r-page)!important;line-height:1.1!important;letter-spacing:-.025em!important}
-.surface-page .calm-intro p{display:none!important}
-.technical-page .calm-intro p{font-size:.85rem!important;margin-top:4px!important}
-.calm-site main,.calm-site .wrap{width:min(calc(100% - 48px),var(--r-max))!important}
-.calm-site main{padding-top:14px!important}
-.calm-site h2{font-size:var(--r-section)!important;line-height:1.2!important;letter-spacing:-.01em!important}
-.calm-site h3{font-size:var(--r-claim)!important;line-height:1.28!important}
-.calm-site p,.calm-site li{font-size:var(--r-text)!important;line-height:1.42!important}
-
-/* Topic page: conclusions only. Publication names and metadata belong in Radar/Stuff. */
-.page-briefing .topic{border-top:0!important;border-bottom:1px solid var(--r-line)!important;padding:14px 0 16px!important}
-.page-briefing .topic:first-child{padding-top:0!important}
-.page-briefing .topic h2{font-size:1.08rem!important;margin:0 0 8px!important}
-.page-briefing .items{display:block!important;margin:0!important}
-.page-briefing .item{border:0!important;padding:3px 0 3px 18px!important;position:relative!important}
-.page-briefing .item::before{content:'•';position:absolute;left:2px;top:1px;color:var(--r-red);font-weight:900}
-.page-briefing .item-top{display:block!important}
-.page-briefing .point,.page-briefing .meta,.page-briefing .actions,.page-briefing .count,.page-briefing .state{display:none!important}
-.page-briefing .why{display:block!important;color:#222!important;font-size:.89rem!important;line-height:1.4!important;margin:0!important}
-.page-briefing .why strong{display:none!important}
-
-@media(max-width:820px){
-  .calm-site{padding-left:0!important}
-  .calm-sidebar{display:none!important}
-  .calm-header{display:block!important}
-  .calm-bar{display:flex!important;padding-top:0!important;width:calc(100% - 24px)!important}
-  .calm-brand{padding-bottom:0!important}
-  .calm-header nav{display:flex!important;width:auto!important}
-  .calm-header nav a{min-height:46px!important;border-top:0!important}
-  .calm-intro-inner,.calm-site main,.calm-site .wrap{width:calc(100% - 24px)!important}
-}
-
-
-/* v23.6 — clearer red language, resilient layouts, and simple trend tug numbers. */
-:root{--r-side:228px;--r-max:960px}
-.calm-site{overflow-x:hidden!important}
-.calm-site main,.calm-site .wrap,.calm-intro-inner{min-width:0!important;max-width:100%!important}
-.calm-site main>*{min-width:0;max-width:100%}
-.calm-site img,.calm-site svg{max-width:100%;height:auto}
-
-/* Red should guide the eye, not behave like metadata. */
-.calm-sidebar{background:#f7f7f7!important;border-right:1px solid #cfcfcf!important;border-top:5px solid var(--r-red)!important;padding-top:0!important}
-.calm-side-brand{background:#111!important;color:#fff!important;border-bottom:5px solid var(--r-red)!important;padding:15px 18px!important;font-size:15px!important}
-.calm-sidebar nav{padding-top:6px!important}
-.calm-sidebar nav a{font-size:13px!important;padding:9px 17px!important;border-left:5px solid transparent!important}
-.calm-sidebar nav a:hover{color:var(--r-red)!important;background:#fff!important}
-.calm-sidebar nav a[aria-current="page"]{background:var(--r-red)!important;color:#fff!important;border-left-color:#111!important}
-.calm-intro{border-bottom:1px solid var(--r-line)!important}
-.calm-intro h1::after{content:"";display:block;width:48px;height:4px;background:var(--r-red);margin-top:9px}
-.surface-page main h2{border-left:4px solid var(--r-red);padding-left:10px}
-.surface-page main a:hover{color:var(--r-red)!important}
-
-/* Trends: one compact tug-of-war line per pair. Numbers are evidence pull, not probability. */
-.page-trends .pair{padding:13px 0 17px!important;border-bottom:1px solid var(--r-line)!important}
-.page-trends .tug-score{display:grid!important;grid-template-columns:34px minmax(100px,1fr) 34px;gap:9px;align-items:center;margin:0 0 11px!important;font-variant-numeric:tabular-nums}
-.page-trends .tug-score>strong{font-size:1rem!important;line-height:1!important;font-weight:900!important;color:#111!important;text-align:left}
-.page-trends .tug-score>strong:last-child{color:var(--r-red)!important;text-align:right}
-.page-trends .tug-track{height:7px;display:flex;background:#eee;overflow:hidden}
-.page-trends .tug-left{background:#111;min-width:1px}
-.page-trends .tug-right{background:var(--r-red);min-width:1px}
-.page-trends .side h3{font-size:1.01rem!important;margin-bottom:5px!important}
-.page-trends .side.right h3{color:var(--r-red)!important}
-
-/* Ongoing patterns: one specific statement is enough; remove generic repeated filler. */
-.page-phenomena .pattern{border-left:4px solid var(--r-red)!important;padding:12px 0 12px 12px!important;border-top:0!important}
-.page-phenomena .pattern.candidate{border-left-color:#777!important}
-.page-phenomena .pattern .claim:empty{display:none!important}
-.page-phenomena .phenomenon>.head{border-left:4px solid var(--r-red)!important;padding-left:12px!important}
-
-/* Other reader pages get one visible red cue per finding, without bringing back stamps. */
-.page-priorities .priority-main{border-left:3px solid var(--r-red)!important;padding-left:12px!important}
-.page-shocks .shock,.page-shocks .scenario{border-left:3px solid var(--r-red)!important;padding-left:12px!important}
-.page-briefing .topic h2{color:var(--r-red)!important;border-left:0!important;padding-left:0!important}
-.page-literature .entry{border-left:3px solid transparent!important;padding-left:10px!important}
-.page-literature .entry:hover{border-left-color:var(--r-red)!important}
-
-@media(max-width:820px){
-  :root{--r-side:0px}
-  .surface-page main h2{padding-left:8px}
-  .page-trends .tug-score{grid-template-columns:30px minmax(80px,1fr) 30px}
+/* Mobile Matrix labels retained for the existing reader contract. */
+@media(max-width:700px){
+  .calm-site .matrix{display:block!important;min-width:0!important;width:100%!important}
+  .calm-site .matrix>.corner,.calm-site .matrix>.col-head,.calm-site .matrix>.col{display:none!important}
+  .calm-site .matrix>.row-head,.calm-site .matrix>.row{display:block!important;margin-top:18px!important;padding:12px!important;border:1px solid #111!important;border-left:5px solid #111!important}
+  .calm-site .matrix>.matrix-cell,.calm-site .matrix>.cell{display:block!important;margin:0!important;padding:13px!important;border:1px solid var(--r-line)!important;border-top:0!important;background:#fff!important}
+  .calm-site .matrix>.matrix-cell::before,.calm-site .matrix>.cell::before{display:block!important;margin-bottom:7px!important;font-size:var(--r-small)!important;font-weight:900!important;color:var(--r-red)!important}
+  .calm-site .matrix>.matrix-cell.A::before,.calm-site .matrix>.cell.A::before{content:'More control, stronger'}
+  .calm-site .matrix>.matrix-cell.B::before,.calm-site .matrix>.cell.B::before{content:'More control, some cost'}
+  .calm-site .matrix>.matrix-cell.C::before,.calm-site .matrix>.cell.C::before{content:'Stronger, but reliant'}
+  .calm-site .matrix>.matrix-cell.D::before,.calm-site .matrix>.cell.D::before{content:'Less control, weaker'}
 }

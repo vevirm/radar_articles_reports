@@ -9,7 +9,7 @@
 </style>
 <link rel="stylesheet" href="../simple-ui.css?v=21.9">
 <script src="../radar_data.js"></script>
-<link rel="stylesheet" href="../reform.css?v=23.1">
+<link rel="stylesheet" href="../reform.css?v=24.0">
 <!-- Regression compatibility only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head>
 <body>
@@ -33,5 +33,5 @@ function nodeContent(n){
 function chart(x,i){return `<section class="issue-chart" aria-label="Topic ${i+1}: ${esc(x.main.label)}"><div class="chart-no">${String(i+1).padStart(2,'0')}</div><div class="node main">${nodeContent(x.main)}</div><details class="issue-depth"><summary>Explore this topic</summary><div class="node sub one">${nodeContent(x.subs[0]||{label:'Current movement'})}</div><div class="node sub two">${nodeContent(x.subs[1]||{label:'Consequences'})}</div><div class="node leaf one">${nodeContent(x.leaves[0]||{label:'Connected development'})}</div><div class="node leaf two">${nodeContent(x.leaves[1]||{label:'Connected development'})}</div><div class="node leaf three">${nodeContent(x.leaves[2]||{label:'Connected development'})}</div></details></section>`}
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json');const items=[...(d.strand_a||[]),...(d.strand_c||[])];const trees=globalThis.RadarIssues?.buildTrees?RadarIssues.buildTrees(items,{count:8}):[];document.getElementById('trees').innerHTML=trees.length?trees.map(chart).join(''):'<div class="empty">No topic maps available.</div>'}catch(e){console.error(e);document.getElementById('trees').innerHTML='<div class="empty">Topic maps unavailable.</div>'}})();
 </script>
-<script src="../site-shell.js?v=23.1"></script>
+<script src="../site-shell.js?v=24.0"></script>
 </body></html>

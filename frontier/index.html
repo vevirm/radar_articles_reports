@@ -9,7 +9,7 @@
 </style>
 <link rel="stylesheet" href="../simple-ui.css?v=21.9">
 <script src="../radar_data.js"></script>
-<link rel="stylesheet" href="../reform.css?v=23.1">
+<link rel="stylesheet" href="../reform.css?v=24.0">
 <!-- Regression compatibility only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head>
 <body>
@@ -37,5 +37,5 @@ function matrixHtml(view){let html='<div class="matrix"><div class="corner"></di
 document.addEventListener('click',e=>{const b=e.target.closest('[data-expand]');if(!b)return;const t=document.getElementById(b.dataset.expand);if(!t)return;const open=t.hidden;t.hidden=!open;b.setAttribute('aria-expanded',String(open));b.textContent=open?'Show less':`Show ${b.dataset.count} more`});
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json'),v=SovereigntyFrontier.buildFrontier(d);document.getElementById('matrixGrid').innerHTML=matrixHtml(v);document.getElementById('state').textContent=`${v.signals.length} placed findings · updated ${String(v.lastUpdated||'').slice(0,10)}`;}catch(e){console.error('Matrix load failed',e);document.getElementById('matrixGrid').innerHTML='<p class="empty">Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
 </script>
-<script src="../site-shell.js?v=23.1"></script>
+<script src="../site-shell.js?v=24.0"></script>
 </body></html>

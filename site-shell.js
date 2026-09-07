@@ -10,6 +10,7 @@
     ['priorities/','Risks and opportunities','What could go wrong — or right.'],
     ['shocks/','Big outside events','Events outside research that could change things fast.'],
     ['historical/','History','Older findings for comparison.'],
+    ['history/','History','Older findings for comparison.'],
     ['literature/','Sources','Where the findings come from.'],
     ['glossary/','Words','Plain meanings.'],
     ['stuff/','Stuff','Full technical data.'],
@@ -52,7 +53,7 @@
   const sidebar=document.createElement('aside');
   sidebar.className='calm-sidebar';
   sidebar.setAttribute('aria-label','Site menu');
-  sidebar.innerHTML=`<a class="calm-side-brand" href="${prefix}">R&amp;I × Geopolitics</a><nav>${menu.map(([target,label])=>`<a${activeFor(target)?' aria-current="page"':''} href="${hrefFor(target)}">${label}</a>`).join('')}</nav>`;
+  sidebar.innerHTML=`<a class="calm-side-brand" href="${prefix}">R&amp;I × Geopolitics Radar</a><nav>${menu.map(([target,label])=>`<a${activeFor(target)?' aria-current="page"':''} href="${hrefFor(target)}">${label}</a>`).join('')}</nav>`;
   document.body.insertBefore(sidebar,document.body.firstChild);
 
   const header=document.createElement('header');
