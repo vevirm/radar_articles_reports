@@ -193,17 +193,27 @@
     const currentRows=currentCorpus(data,history),historicalRows=historicalCorpus(history),out=[];
     const coveredTopics=new Set(PHENOMENA.flatMap(p=>p.historical||[]));
     const definitions=[...PHENOMENA,...automaticDefinitions(config,coveredTopics)];
+    const qualified=[];
     for(const p of definitions){
       const current=unique(currentRows.filter(x=>matchCurrent(x,p)));
       const historical=unique(historicalRows.filter(x=>matchHistorical(x,p)));
       const currentSources=sourceCount(current),historicalSources=sourceCount(historical);
       if(current.length<3||currentSources<2||historical.length<2||historicalSources<2)continue;
+      qualified.push({p,current,historical,currentSources,historicalSources});
+    }
+    const hitCount=new Map();
+    for(const q of qualified)for(const row of q.current)hitCount.set(row,(hitCount.get(row)||0)+1);
+    for(const q of qualified){
+      const {p,current,historical,currentSources,historicalSources}=q;
       const dates=historical.map(dateOf).filter(Boolean).sort();
       const newest=current.map(dateOf).filter(Boolean).sort().slice(-1)[0]||'';
-      const score=Math.min(40,current.length)*2+Math.min(20,currentSources)*3+Math.min(30,historical.length)+Math.min(15,historicalSources)*2;
-      out.push({...p,currentCount:current.length,currentSources,historicalCount:historical.length,historicalSources,firstSeen:dates[0]||'',latestSeen:newest,currentEvidence:evidenceSlice(current,4),historicalEvidence:evidenceSlice(historical,3,true),score});
+      const overlapRate=current.length?current.filter(row=>(hitCount.get(row)||0)>1).length/current.length:0;
+      const evidence=Math.log2(1+current.length)*2+Math.log2(1+historical.length)+Math.min(6,currentSources)+Math.min(6,historicalSources);
+      const surprise=evidence*(1-0.55*overlapRate)*(p.autoDetected?1.12:1);
+      const score=Math.round(surprise*10)/10;
+      out.push({...p,currentCount:current.length,currentSources,historicalCount:historical.length,historicalSources,firstSeen:dates[0]||'',latestSeen:newest,currentEvidence:evidenceSlice(current,4),historicalEvidence:evidenceSlice(historical,3,true),overlapRate,evidenceScore:evidence,score});
     }
-    return out.sort((a,b)=>b.score-a.score||b.currentCount-a.currentCount||a.title.localeCompare(b.title));
+    return out.sort((a,b)=>b.score-a.score||b.currentSources-a.currentSources||a.title.localeCompare(b.title));
   }
   function stats(data,history){
     return {current:currentCorpus(data,history).length,historical:historicalCorpus(history).length,cutoff:cutoff(history)};
