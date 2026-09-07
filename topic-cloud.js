@@ -28,8 +28,8 @@
 
   function visibleLimit(){
     const w=innerWidth,h=innerHeight;
-    let n=w>=1500?63:w>=1200?50:w>=900?35:w>=700?28:w>=520?18:10;
-    if(h<700) n=Math.min(n,w<620?10:28);
+    let n=w>=1200?18:w>=850?15:w>=620?12:10;
+    if(h<680) n=Math.min(n,w<620?9:12);
     return n;
   }
 
@@ -55,7 +55,7 @@
     const n=Math.min(visibleLimit(),topics.length);
     const shown=topics.slice(0,n);
     const counts=shown.map(t=>t.sourceCount); const min=Math.min(...counts,1),max=Math.max(...counts,1);
-    const mobile=innerWidth<620; const minPx=mobile?14:14,maxPx=mobile?24:38;
+    const mobile=innerWidth<620; const minPx=mobile?16:18,maxPx=mobile?26:34;
     const size=t=>{if(max===min)return(minPx+maxPx)/2;const r=(Math.sqrt(t.sourceCount)-Math.sqrt(min))/(Math.sqrt(max)-Math.sqrt(min));return minPx+r*(maxPx-minPx)};
     const cloud=document.getElementById('cloud');
     cloud.innerHTML=distribute(shown).map(t=>`<a class="topic${moving.has(t.label)?' moving':''}" style="--size:${size(t).toFixed(1)}px" href="radar/?q=${encodeURIComponent(t.patterns[0]||t.label)}" title="${t.sourceCount} sources">${esc(t.label)}</a>`).join('');

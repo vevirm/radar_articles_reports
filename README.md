@@ -1,89 +1,28 @@
-# R&I × Geopolitics Radar
+# Research & Innovation × Geopolitics Radar
 
-> **Current reader build: v22.3-radar-restored.** The Radar page is isolated from the shared reader shell and keeps its original application JavaScript; the redesign changes presentation/navigation without replacing scanner or corpus logic.
+Static GitHub Pages reader plus automated research scanners.
 
+## Reader paths
 
-An EU-first evidence radar for research and innovation in geopolitical context.
+- `/` — simple start page: briefing, Radar, or deeper analysis
+- `/read/` — shortest useful briefing
+- `/radar/` — searchable current evidence
+- `/explore/` — question-led route into Matrix, Trends, phenomena, risks, shocks, history, sources and methods
 
-## Reader reform v22
+## Data
 
-The reader layer now uses one navigation and type system across the site. The homepage is a one-screen index: project name, live evidence/source count, every main route and a source-weighted topic map. **Read at least this** is the first and red entry point on the homepage and every inner-page menu. The Radar remains the underlying evidence product; the new wording explains what each page is for before the reader reaches its content.
+- `radar.json` — live/current corpus
+- `historical/historical.json` — older evidence kept separate from current signals
 
-The topic vocabulary is maintained by hand in `topic_vocabulary.json`. Topic size counts independent sources rather than records; red marks at most six topics with at least five sources where a majority of matching sources have recent evidence. The complete implementation contract is in `DESIGN_CONTRACT.md`.
+## Scanners
 
-The reader reform does not change scanner admission, evidence corpora, or page-specific analytical engines. Existing routes and Radar `?q=` filtering are preserved.
+- `scripts/scan_radar.py` — main scan
+- `historical/scan_historical.py` — historical scan
+- `.github/workflows/radar-scan.yml` — main automation
+- `.github/workflows/historical-scan.yml` — historical automation
 
-## Operating model
+## Tests
 
-- **Main Radar** runs every four hours at **00:17 / 04:17 / 08:17 / 12:17 / 16:17 / 20:17 UTC**. Every Main run has the standard **24-minute** research budget.
-- **Historical Top-Tier Scan** runs every four hours at **02:17 / 06:17 / 10:17 / 14:17 / 18:17 / 22:17 UTC**, exactly two hours after each scheduled Main start, with a **10-minute** research budget.
-- Main and Historical share one GitHub Actions research slot, so they never research concurrently. Historical waits and never cancels Main. If Main becomes due while Historical is still active, Main has priority and may pre-empt Historical.
-- Historical accepts only material published **strictly before the rolling six-month Main boundary** and uses the Main scanner's substantive A/B admission philosophy. It does not create current Strand-C signals.
-- **Strands A and B are cumulative.** The original 190 A + 10 B corpus was a starting baseline, not a cap.
-- **Strand C is temporary and relative to A.** Every C signal must represent a distinct current development anchored to substantive Strand-A evidence. C discovery covers the current **60-day** window and each signal expires **60 days after `first_seen`**.
-- Production workflows do **not** run the old repository-wide regression-test discovery before research. Runtime preflight, output validation and write-boundary checks protect the live state instead.
-- **Source diversity is an allocation rule, not an admission quota.** Crossref priority work is interleaved across journals, and a rotating part of the source-first scholarly budget checks journals with little or no representation in the current A/B corpus. Institutional and already-productive sources remain eligible, but they no longer monopolise a deadline-truncated scholarly prefix.
+The main maintained regression suite is bundled inside `tests/all_tests.zip` and loaded by `tests/test_all.py`. The release also remains compatible with obsolete standalone tests that may have been left in an older repository by GitHub browser uploads.
 
-## Evidence flow
-
-**Main Radar is the primary reader product.** Its A/B/C evidence feeds every other analytical view.
-
-Main scanner → A/B/C Radar evidence → Matrix and reading maps → Trends + Ongoing phenomena → Risks & opportunities → External shocks.
-
-**What matters now**, **Read at least this**, **Evidence by topic**, **Briefing** and **Sources** are reader views of the same current Main evidence. The Matrix, risks/opportunities and shock pages do not launch their own research scans; they interpret accepted Radar evidence and scanner-produced analytical fields.
-
-Historical is deliberately separate. Older A/B evidence accumulates in `historical/historical.json`; it does not become current C and does not overwrite the live Matrix or shock state. Ongoing phenomena may read Historical only to show that a current issue also existed before the six-month boundary.
-
-### Trends and counter-trends
-
-The Trends page uses the current Radar corpus first. A side appears only when it has at least **three current records from at least two sources**. The opposite side must pass the same rule. Stronger and more independent evidence pulls harder in the playful balance score; repeated evidence from the same publisher is discounted. The score is a tug-of-war indicator, not a probability or forecast.
-
-Historical publications are optional context only. The page may show material strictly older than the rolling six-month boundary when it helps demonstrate roots, persistence or reversal, but historical material can never make a current trend qualify by itself.
-
-## Discovery and quality
-
-The scanner rotates rather than repeating one giant query. It combines OpenAlex, Crossref, journal/source-first discovery, EU and trusted institutional sources, researchers/authors, citation neighbourhoods, method discovery, observable-change discovery for C, and Matrix-gap recovery.
-
-A queries combine EU/institutional context × research/innovation/capability object × strategic mechanism. B combines method × evidence of method development. C combines a trusted context × strategic object × observable change, then requires an A anchor before publication.
-
-Retrieval is deliberately broader than admission. Generic terms such as *Europe*, *innovation*, *technology*, *security* or *strategic* do not qualify material by themselves. Source quality, phrase combinations, document context and substantive mechanism matter at admission.
-
-Repeated zero-yield Matrix depth waves are bounded: when the same gap set produces no A/B candidates twice, the scanner stops hammering that lane and returns the remaining time to other rotating discovery families. Main then keeps using its 24-minute allocation through a full-budget continuation: unused institutions, different scholarly query slices, deeper result pages and current-development searches are rotated until only the final save reserve remains. A quiet scan may still admit zero records; time increases discovery effort, never lowers the evidence gate.
-
-If OpenAlex or Crossref is rate-limited, that family is treated as unavailable for the rest of the current allocation and its time is moved to healthy source families. `OPENALEX_API_KEY` materially expands scholarly discovery, author/citation neighbourhoods and query depth.
-
-## Writing
-
-Visible text follows `STYLE.md`.
-
-- Every evidence unit is written as **WHAT + WHY**.
-- Radar surface budget: WHAT ≤ 20 words; WHY ≤ 20 words.
-- Matrix surface budget: WHAT ≤ 12 words; WHY ≤ 15 words.
-- WHY must name a consequence specific to EU research and innovation in geopolitical context; generic relevance prose is a writing failure.
-- Matrix items use parallel `WHAT — WHY` grammar and honest gaps rather than filler.
-- The easiest pages use ordinary language: no difficult abbreviations, technical method names, classifier/search grammar or visible `...` / `…`.
-- Technical vocabulary stays available behind **Read more**, in the **Glossary**, and in **Stuff** rather than being deleted from the system.
-- External shocks are inferred from evidence joins, then challenged: required conditions, the case against, possible preventers and observable indicators are stored before a shock is carried forward. A better-supported weaker variant beats a spectacular weak one.
-
-The Stuff directory contains:
-
-- `source_merit_ranking.xlsx` — evidence/provenance ranking snapshot plus a **Shock audit** sheet containing assumptions, case-against reasoning, prevention actions and indicators.
-- `eu_ri_radar_phrases_by_strand.xlsx` — admission phrase/guard reference.
-- `radar_technical_grammar.xlsx` — computational foresight vocabulary, C change grammar, query-family design, surface-term expansions and writing contracts.
-
-## Live data and fresh repositories
-
-This bundle preserves the current live `radar.json` and `historical/historical.json` from the repository supplied for this build.
-
-`radar_seed.json` remains the clean 190 A + 10 B fallback for a genuinely new repository. A new Main scanner creates its own state/history on its first normal 24-minute run. Historical has the corresponding `historical/historical_seed.json` fallback.
-
-## Security boundary
-
-The public pages are static HTML/JavaScript and only read JSON; they have no GitHub write credential. Scanner checkout uses `persist-credentials: false`. `OPENALEX_API_KEY` is supplied only through GitHub Actions secrets. After research, workflows validate output and isolate unexpected repository changes. Authentication is added only for the final commit of the permitted generated JSON file.
-
-## Browser-upload compatibility
-
-The scanner retains compatibility guards for repositories where GitHub browser upload leaves an older hidden workflow file behind. The supported workflows in this bundle are nevertheless the authoritative production configuration: Main every four hours at :17, Historical exactly two hours later, one shared research slot, 24/10-minute budgets, and the workflow regression gates retained.
-
-### Ongoing phenomena
-`phenomena/` answers a different question from Trends. Trends asks which direction repeated evidence is moving. Ongoing phenomena asks which underlying issues keep resurfacing across time. A phenomenon must be visible both before the rolling six-month boundary in `historical/historical.json` and inside the current six-month picture from `radar.json`; older evidence cannot create a current phenomenon on its own.
+Version: **v23.0-calm-working-radar**

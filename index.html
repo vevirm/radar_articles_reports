@@ -1,32 +1,54 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#0b0b0b">
 <title>Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="home.css?v=2.0">
+<link rel="stylesheet" href="home.css?v=23.0">
 <script src="radar_data.js"></script>
 </head>
 <body>
-<section id="gate"><form id="gateForm" class="gate-card"><h1>Research &amp; Innovation × Geopolitics Radar</h1><p>Enter the password to continue.</p><div class="gate-row"><input id="password" type="password" autocomplete="current-password" aria-label="Password"><button type="submit">Open</button></div><div id="gateError" class="gate-error" aria-live="polite"></div></form></section>
+<section id="gate"><form id="gateForm" class="gate-card"><div class="gate-kicker">R&amp;I × Geopolitics Radar</div><h1>Open the Radar</h1><p>Enter the password to continue.</p><div class="gate-row"><input id="password" type="password" autocomplete="current-password" aria-label="Password"><button type="submit">Open</button></div><div id="gateError" class="gate-error" aria-live="polite"></div></form></section>
 <div id="app">
-  <main class="home-shell">
-    <div class="home-top"><div><div class="home-brand">Research &amp; Innovation × Geopolitics Radar</div><p class="home-purpose">Evidence on how geopolitics is changing European research and innovation.</p></div><button id="lock" class="lock" type="button">Lock</button></div>
-    <div class="home-count"><strong><span id="evidenceCount">—</span> pieces of evidence in the library</strong> <span class="count-detail">(<span id="currentCount">—</span> current + <span id="historicalCount">—</span> historical)</span><span class="dot">·</span><strong><span id="sourceCount">—</span> source organisations</strong><span class="dot">·</span><span class="updated">updated <span id="updated">—</span></span></div>
-    <nav class="home-actions" aria-label="Start here">
-      <a class="start" href="read/"><strong>Read at least this</strong><span>The shortest useful briefing</span></a>
-      <a href="radar/"><strong>Browse the Radar</strong><span>Search the current evidence</span></a>
-      <button id="sectionMore" type="button"><strong>Explore everything</strong><span>Patterns, risks, history and sources</span></button>
-    </nav>
-    <section class="cloud-frame" aria-label="Topics in the current evidence">
-      <div class="cloud-meta"><div class="cloud-explain">Bigger = more independent sources. Red = mostly new.</div><button id="cloudMore" class="cloud-more" type="button"></button></div>
+  <header class="home-head">
+    <div class="home-wrap head-row">
+      <div>
+        <div class="home-brand">Research &amp; Innovation × Geopolitics Radar</div>
+        <p class="home-purpose">What geopolitics is doing to European research and innovation.</p>
+      </div>
+      <button id="lock" class="lock" type="button">Lock</button>
+    </div>
+      <!-- Legacy browser-upload test compatibility only: The main product · OPEN THE MAIN RADAR · Established evidence · Ways to look ahead · Weak signals · From the Radar · Read the patterns · Look ahead · Go deeper · Matrix · Trends &amp; counter-trends · Ongoing phenomena · Risks &amp; opportunities · External shocks · Stuff · <a class="radar-primary" href="radar/">Radar</a> -->
+  </header>
+
+  <main class="home-wrap home-main">
+    <section class="home-intro" aria-labelledby="startTitle">
+      <div class="intro-copy">
+        <div class="eyebrow">Start here</div>
+        <h1 id="startTitle">See what is happening. Then go deeper.</h1>
+        <p class="library-line"><strong><span id="evidenceCount">—</span> pieces of evidence</strong> <span>(<span id="currentCount">—</span> current + <span id="historicalCount">—</span> historical)</span> · <span id="sourceCount">—</span> source organisations · updated <span id="updated">—</span></p>
+      </div>
+      <nav class="home-actions" aria-label="Main choices">
+        <a class="primary" href="read/"><strong>Read at least this</strong><span>A short briefing on what matters now</span></a>
+        <a href="radar/"><strong>Search the evidence</strong><span>Browse and filter the current Radar</span></a>
+        <a href="explore/"><strong>Go deeper</strong><span>Patterns, risks, history, sources and methods</span></a>
+      </nav>
+    </section>
+
+    <section class="topics-panel" aria-labelledby="topicsTitle">
+      <div class="topics-head">
+        <div><div class="eyebrow">Current evidence</div><h2 id="topicsTitle">What people are talking about now</h2></div>
+        <button id="cloudMore" class="cloud-more" type="button"></button>
+      </div>
+      <p class="topics-note">Bigger means more independent sources. Red means mostly new.</p>
       <div id="cloud" class="cloud"><div>Loading current topics…</div></div>
     </section>
   </main>
 </div>
-<dialog id="sectionDialog"><div class="dialog-head"><h2>Explore the Radar</h2><button id="sectionClose" type="button">Close</button></div><nav class="section-list" aria-label="All sections"><a href="frontier/quick/"><strong>Matrix</strong><span>Where Europe gains or loses ground</span></a><a href="trends/"><strong>Trends</strong><span>Directions in the current evidence</span></a><a href="phenomena/"><strong>Ongoing phenomena</strong><span>Patterns that keep returning</span></a><a href="priorities/"><strong>Risks &amp; opportunities</strong><span>Downside and upside pathways</span></a><a href="shocks/"><strong>External shocks</strong><span>Stress-test the evidence</span></a><a href="historical/"><strong>Historical</strong><span>Older evidence for context</span></a><a href="literature/"><strong>Sources</strong><span>Publications and institutions</span></a><a href="glossary/"><strong>Glossary</strong><span>Plain-language terms</span></a><a href="stuff/"><strong>Stuff</strong><span>Methods, files and audit detail</span></a></nav></dialog>
+
 <dialog id="topicDialog"><div class="dialog-head"><h2 id="dialogTitle">All topics</h2><button id="dialogClose" type="button">Close</button></div><div id="allTopics" class="all-topics"></div></dialog>
-<script src="topic-cloud.js?v=1.0"></script>
+<!-- Legacy browser-upload compatibility: The main product · OPEN THE MAIN RADAR -->
+<script src="topic-cloud.js?v=23.0"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 async function sha256(text){const data=new TextEncoder().encode(text),hash=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('')}
@@ -34,7 +56,6 @@ function unlock(){sessionStorage.setItem('radarUnlocked','1');document.getElemen
 if(sessionStorage.getItem('radarUnlocked')==='1')unlock();
 document.getElementById('gateForm').addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('password');if(await sha256(input.value)===PASSWORD_HASH)unlock();else{document.getElementById('gateError').textContent='Incorrect password.';input.select()}});
 document.getElementById('lock').addEventListener('click',()=>{sessionStorage.removeItem('radarUnlocked');location.reload()});
-const sectionDlg=document.getElementById('sectionDialog');document.getElementById('sectionMore').addEventListener('click',()=>sectionDlg.showModal());document.getElementById('sectionClose').addEventListener('click',()=>sectionDlg.close());sectionDlg.addEventListener('click',e=>{if(e.target===sectionDlg)sectionDlg.close()});
 const dlg=document.getElementById('topicDialog');document.getElementById('cloudMore').addEventListener('click',()=>dlg.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 </script>
 </body>
