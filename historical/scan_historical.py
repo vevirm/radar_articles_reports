@@ -1031,12 +1031,70 @@ def collect_crossref_authors(authors: list[str], warnings: list[str], window_fro
     return out
 
 
-def main() -> int:
+def load_previous_archive(
+    out_path: Path = OUT_PATH,
+    seed_path: Path = SEED_PATH,
+    radar_path: Path = ROOT / "radar.json",
+) -> dict[str, Any]:
+    """Load the retained historical baseline without ever failing open.
+
+    A historical scan is cumulative, so an existing archive is authoritative state.
+    If that file exists but is unreadable or structurally invalid, continuing from an
+    empty dictionary would turn a transient/corrupt checkout into a destructive corpus
+    reset.  Abort instead.  The seed is used only when no live archive exists yet.
+    """
+    source = out_path if out_path.exists() else seed_path
+    if source == seed_path:
+        log("No live historical.json yet; bootstrapping from historical_seed.json")
     try:
-        previous=json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else json.loads(SEED_PATH.read_text(encoding="utf-8"))
-        if not OUT_PATH.exists(): log("No live historical.json yet; bootstrapping from historical_seed.json")
-    except Exception:
-        previous={}
+        previous = json.loads(source.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise RuntimeError(f"Cannot read cumulative Historical baseline {source}: {exc}") from exc
+    if not isinstance(previous, dict):
+        raise RuntimeError(f"Cumulative Historical baseline {source} is not a JSON object")
+    items = previous.get("items")
+    if not isinstance(items, list):
+        raise RuntimeError(f"Cumulative Historical baseline {source} has no valid items array")
+    bad = [i for i, item in enumerate(items) if not isinstance(item, dict)]
+    if bad:
+        raise RuntimeError(
+            f"Cumulative Historical baseline {source} contains non-object item(s); "
+            f"first bad index={bad[0]}"
+        )
+    # Legacy Main compatibility runs can persist a Historical follow-up only by
+    # embedding it in radar.json.  Treat that as a second retained mirror and union it
+    # with the standalone file.  Timestamp alone is not enough: a later stale-baseline
+    # run can have a newer timestamp but fewer rows (the exact failure this guard fixes).
+    embedded = None
+    try:
+        if radar_path.is_file():
+            radar = json.loads(radar_path.read_text(encoding="utf-8"))
+            candidate = radar.get("historical_archive") if isinstance(radar, dict) else None
+            if isinstance(candidate, dict) and isinstance(candidate.get("items"), list):
+                if all(isinstance(item, dict) for item in candidate["items"]):
+                    embedded = candidate
+    except Exception as exc:
+        print(f"WARNING: Cannot read embedded Historical retention mirror {radar_path}: {exc}", file=sys.stderr)
+
+    if embedded:
+        merged_items, recovered = cumulative_merge(previous["items"], [], embedded["items"])
+        if recovered:
+            _diag("baseline_embedded_items_recovered", recovered)
+            log(
+                f"Recovered {recovered} retained Historical item(s) from radar.json mirror "
+                f"({len(previous['items'])} -> {len(merged_items)} baseline items)"
+            )
+        def stamp(doc: dict[str, Any]) -> str:
+            return clean(doc.get("last_updated") or (doc.get("scan_state") or {}).get("last_completed_at"))
+        newest = embedded if stamp(embedded) > stamp(previous) else previous
+        combined = dict(newest)
+        combined["items"] = merged_items
+        previous = combined
+    return previous
+
+
+def main() -> int:
+    previous=load_previous_archive()
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
     previous_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]
     topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items(); manual_items=manual_evidence_items()

@@ -86,7 +86,17 @@
     }
   ];
 
+  // Topics that describe scanning/foresight methodology rather than a substantive
+  // R&I-geopolitical continuity.  Everything else in historical/config.json may
+  // automatically become an ongoing phenomenon when both evidence thresholds are met.
+  const AUTO_EXCLUDE=new Set(['foresight-methods','computational-emergence','main-a-evidence']);
+  const GENERIC_AUTO_TERMS=new Set([
+    'research','innovation','technology','technologies','europe','european','eu','policy',
+    'future','futures','governance','resilience','digital','data','strategic'
+  ]);
+
   function clean(v){return String(v??'').replace(/\s+/g,' ').trim()}
+  function norm(v){return clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim()}
   function dateOf(x){return clean(x?.date).slice(0,10)}
   function textOf(x){return clean([x?.title,x?.headline,x?.summary,x?.core_message,x?.relevance_note,x?.signal_note,x?.anchor,x?.why_it_matters,x?.watch_theme].filter(Boolean).join(' '))}
   function sourceOf(x){return clean(x?.source||x?.source_domain||x?.venue||x?.publisher||'Unknown source')}
@@ -106,10 +116,70 @@
     }
     return out;
   }
-  function matchCurrent(row,p){return p.current.test(textOf(row))}
+  function identityKeys(row){
+    const out=[];
+    const id=clean(row?.id),url=clean(row?.link||row?.url).toLowerCase().replace(/\/$/,''),title=norm(row?.title||row?.headline);
+    if(id)out.push(`id:${id}`);
+    if(url)out.push(`url:${url}`);
+    if(title)out.push(`title:${title}`);
+    return out;
+  }
+  function mergeHistories(fileHistory,embeddedHistory){
+    const a=fileHistory&&typeof fileHistory==='object'?fileHistory:null;
+    const b=embeddedHistory&&typeof embeddedHistory==='object'?embeddedHistory:null;
+    if(!a)return b||{};
+    if(!b)return a;
+    const at=Date.parse(a.last_updated||'')||0,bt=Date.parse(b.last_updated||'')||0;
+    const primary=bt>at?b:a,secondary=primary===a?b:a;
+    const items=[...historicalCorpus(primary)],seen=new Set();
+    for(const row of items)for(const key of identityKeys(row))seen.add(key);
+    for(const row of historicalCorpus(secondary)){
+      const keys=identityKeys(row);
+      if(keys.length&&keys.some(key=>seen.has(key)))continue;
+      items.push(row);
+      for(const key of keys)seen.add(key);
+    }
+    return {...primary,items};
+  }
+  function topicTerms(topic){
+    const terms=[];
+    for(const raw of Array.isArray(topic?.url_terms)?topic.url_terms:[]){
+      const term=norm(raw);
+      if(!term||GENERIC_AUTO_TERMS.has(term)||term.length<4)continue;
+      terms.push(term);
+    }
+    return [...new Set(terms)].slice(0,16);
+  }
+  function textHasTerm(text,term){return (` ${norm(text)} `).includes(` ${term} `)}
+  function matchCurrent(row,p){
+    const text=textOf(row);
+    if(p.current&&p.current.test(text))return true;
+    const terms=Array.isArray(p.currentTerms)?p.currentTerms:[];
+    return terms.some(term=>textHasTerm(text,term));
+  }
   function matchHistorical(row,p){
     const topics=Array.isArray(row?.topics)?row.topics:[];
     return p.historical.some(t=>topics.includes(t));
+  }
+  function automaticDefinitions(config,coveredTopics){
+    const topics=Array.isArray(config?.topics)?config.topics:[];
+    const out=[];
+    for(const topic of topics){
+      const id=clean(topic?.id),label=clean(topic?.label);
+      if(!id||!label||coveredTopics.has(id)||AUTO_EXCLUDE.has(id))continue;
+      const terms=topicTerms(topic);
+      if(!terms.length)continue;
+      out.push({
+        id:`auto-${id}`,
+        title:label,
+        what:`${label} appears in both older evidence and the current six-month radar picture.`,
+        why:'The continuity is promoted automatically only when independent older and current sources both support it.',
+        historical:[id],
+        currentTerms:terms,
+        autoDetected:true
+      });
+    }
+    return out;
   }
   function evidenceSlice(rows,n,oldestToo=false){
     const sorted=unique(rows).sort((a,b)=>dateOf(b).localeCompare(dateOf(a))||sourceOf(a).localeCompare(sourceOf(b)));
@@ -119,9 +189,11 @@
     if(oldest&&!out.includes(oldest))out.push(oldest);
     return out.slice(0,n);
   }
-  function build(data,history){
+  function build(data,history,config){
     const currentRows=currentCorpus(data,history),historicalRows=historicalCorpus(history),out=[];
-    for(const p of PHENOMENA){
+    const coveredTopics=new Set(PHENOMENA.flatMap(p=>p.historical||[]));
+    const definitions=[...PHENOMENA,...automaticDefinitions(config,coveredTopics)];
+    for(const p of definitions){
       const current=unique(currentRows.filter(x=>matchCurrent(x,p)));
       const historical=unique(historicalRows.filter(x=>matchHistorical(x,p)));
       const currentSources=sourceCount(current),historicalSources=sourceCount(historical);
@@ -136,5 +208,5 @@
   function stats(data,history){
     return {current:currentCorpus(data,history).length,historical:historicalCorpus(history).length,cutoff:cutoff(history)};
   }
-  return {build,stats,phenomena:PHENOMENA,currentCorpus,historicalCorpus};
+  return {build,stats,phenomena:PHENOMENA,currentCorpus,historicalCorpus,automaticDefinitions,mergeHistories};
 });
