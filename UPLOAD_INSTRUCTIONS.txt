@@ -1,14 +1,17 @@
 UPLOAD THIS WHOLE REPO THROUGH THE GITHUB WEB UPLOADER
 
-This version is designed for your exact constraint: browser uploads do not delete old files.
+This version is deliberately under GitHub's 100-file browser-upload limit.
+It is also designed for the fact that browser uploads replace/add files but do not delete old ones.
 
 1. Unzip this download on your computer.
 2. Open your GitHub repository.
-3. Add file -> Upload files.
-4. Drag everything INSIDE this folder into GitHub.
+3. Choose Add file -> Upload files.
+4. Drag EVERYTHING INSIDE the unzipped folder into GitHub.
 5. Commit the changes.
 
-IMPORTANT: You do NOT need to delete old test files manually.
-The main workflow now deliberately runs only tests/test_all.py, which loads the current bundled regression suite from tests/all_tests.zip. Any stale old test_*.py files left behind by previous browser uploads are ignored.
+You do NOT need to delete the stale old standalone test files first.
+The main workflow deliberately runs only tests/test_all.py, which loads the current bundled regression suite from tests/all_tests.zip. Old test_*.py files left behind by prior browser uploads are ignored.
 
 Do not unzip tests/all_tests.zip. It belongs in the repository exactly as-is.
+
+Version: v22.3-radar-restored

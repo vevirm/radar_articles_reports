@@ -1,5 +1,8 @@
 # R&I × Geopolitics Radar
 
+> **Current reader build: v22.3-radar-restored.** The Radar page is isolated from the shared reader shell and keeps its original application JavaScript; the redesign changes presentation/navigation without replacing scanner or corpus logic.
+
+
 An EU-first evidence radar for research and innovation in geopolitical context.
 
 ## Reader reform v22

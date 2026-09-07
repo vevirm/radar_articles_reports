@@ -68,7 +68,7 @@
 @media(max-width:760px){.landing-nav .lock{margin-left:0}.landing-nav a,.landing-nav .lock{padding:13px 10px!important;font-size:11px!important}.landing-copy h1{font-size:44px!important}.core-path-grid{display:block}.core-step{min-height:0}.core-arrow{height:28px;transform:rotate(90deg)}}
 </style>
 <script src="../radar_data.js"></script>
-<link rel="stylesheet" href="../reform.css?v=1.0">
+<link rel="stylesheet" href="../radar-calm.css?v=1.0">
 </head>
 <body>
   <section id="gate" aria-label="Password gate">
@@ -85,76 +85,69 @@
   </section>
 
   <div id="app">
-    <header class="hero landing-hero">
-      <div class="wrap">
-        <nav class="landing-nav" aria-label="Main navigation">
-          <a href="../">Start</a>
-          <a class="current" href="#radar" aria-current="page">Main Radar</a>
-          <a href="../read/">Read at least this</a>
-          <a href="../frontier/quick/">Matrix</a>
-          <a href="../trends/">Trends</a>
-          <a href="../phenomena/">Ongoing phenomena</a>
-          <a href="../priorities/">Risks &amp; opportunities</a>
-          <a href="../shocks/">External shocks</a>
-          <a href="../historical/">Historical</a>
-          <a href="../literature/">Sources</a>
-          <a class="top-stuff" href="../stuff/">Stuff</a>
-          <button id="lock" class="lock">Lock</button>
+    <header class="radar-header">
+      <div class="wrap radar-bar">
+        <a class="radar-brand" href="../">R&amp;I × Geopolitics Radar</a>
+        <nav class="radar-nav" aria-label="Primary navigation">
+          <a class="radar-start" href="../read/">Read at least this</a>
+          <a class="radar-current" href="./" aria-current="page">Radar</a>
+          <details class="radar-explore">
+            <summary>Explore</summary>
+            <div class="radar-menu">
+              <a href="../frontier/quick/"><strong>Matrix</strong><span>Where Europe gains or loses ground</span></a>
+              <a href="../trends/"><strong>Trends</strong><span>Directions in the evidence</span></a>
+              <a href="../phenomena/"><strong>Ongoing phenomena</strong><span>Patterns that keep returning</span></a>
+              <a href="../priorities/"><strong>Risks &amp; opportunities</strong><span>Downside and upside pathways</span></a>
+              <a href="../shocks/"><strong>External shocks</strong><span>Stress-test the evidence</span></a>
+              <a href="../historical/"><strong>Historical</strong><span>Older evidence for context</span></a>
+              <a href="../literature/"><strong>Sources</strong><span>Publications and institutions</span></a>
+              <a href="../glossary/"><strong>Glossary</strong><span>Terms in plain language</span></a>
+              <a href="../stuff/"><strong>Stuff</strong><span>Methods, files and audit detail</span></a>
+            </div>
+          </details>
+          <button id="lock" class="radar-lock" type="button">Lock</button>
         </nav>
-        <div class="landing-copy">
-          <div class="kicker">MAIN RADAR · EVIDENCE</div>
-          <h1>R&amp;I × Geopolitics<br><span class="red">Radar</span></h1>
-          <p class="intro">EU research &amp; innovation in geopolitical context.</p>
-        </div>
       </div>
     </header>
 
-    <div id="scanStrip" class="scan-strip" aria-label="Radar item counts"><div class="wrap scan-strip-inner">
-      <div class="scan-metric"><strong id="itemsCount">—</strong><span>Items</span></div>
-      <div class="scan-metric added"><strong id="newCount">—</strong><span>New</span></div>
-    </div></div>
+    <section class="radar-intro">
+      <div class="wrap radar-intro-inner">
+        <div class="radar-title-block">
+          <div class="radar-kicker">Current evidence</div>
+          <h1>Radar</h1>
+          <p>Search what the scanner has found. Open a finding only when you want the evidence behind it.</p>
+        </div>
+        <div id="scanStrip" class="radar-counts" aria-label="Radar item counts">
+          <div><strong id="itemsCount">—</strong><span>current records</span></div>
+          <div class="new"><strong id="newCount">—</strong><span>new</span></div>
+        </div>
+      </div>
+    </section>
 
-    <section class="core-path" aria-label="Core reader path"><div class="wrap core-path-inner"><div class="core-path-grid">
-      <a class="core-step current" href="#strand-a"><span class="n">1</span><strong>Radar</strong><span>Evidence</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../frontier/quick/"><span class="n">2</span><strong>Matrix</strong><span>Patterns</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../trends/"><span class="n">3</span><strong>Trends</strong><span>Direction</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../phenomena/"><span class="n">4</span><strong>Ongoing phenomena</strong><span>Recurrence</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../priorities/"><span class="n">5</span><strong>Risks &amp; opportunities</strong><span>Implications</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../shocks/"><span class="n">6</span><strong>External shocks</strong><span>Stress cases</span></a>
-    </div></div></section>
-
-
-    <section class="strand-jump" aria-label="Radar evidence layers"><div class="wrap strand-jump-grid">
-      <a href="#strand-a"><b>A · Established evidence</b><span>Papers and reports behind the site.</span></a>
-      <a href="#strand-b"><b>B · Ways to look ahead</b><span>Methods used to improve scanning and foresight.</span></a>
-      <a href="#strand-c"><b>C · Weak signals</b><span>Recent changes tied back to established evidence.</span></a>
-    </div></section>
-    <div class="toolbar"><div class="wrap tools">
-      <input id="search" class="search" type="search" placeholder="Search titles, sources, signals and topics" aria-label="Search radar">
+    <div class="toolbar" id="radarFilters"><div class="wrap tools">
+      <input id="search" class="search" type="search" placeholder="Search topic, title or source" aria-label="Search radar">
       <button id="newOnly" class="filter added-filter" type="button">New</button>
       <button id="recentOnly" class="filter" type="button">Latest 30 days</button>
-      <button id="clearFilter" class="filter" type="button">Clear filters</button>
-      <a class="filter" href="../glossary/">Glossary</a>
+      <button id="clearFilter" class="filter" type="button">Clear</button>
     </div></div>
 
-    <main class="wrap">
+    <main class="wrap radar-main">
       <section id="strand-a" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand A</div><h2>Quality papers &amp; reports</h2><p>Research, policy papers, reports and comparable high-quality evidence on EU research &amp; innovation in geopolitical context.</p></div><div id="countA" class="count">0 items</div></div>
+        <div class="section-head"><div><div class="eyebrow">Established evidence</div><h2>What the evidence says</h2><p>Papers and reports on how geopolitics is changing European research and innovation.</p></div><div id="countA" class="count">0 items</div></div>
         <div id="itemsA" class="cards"></div><button id="moreA" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <section id="strand-b" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand B</div><h2>Foresight methods</h2><p>Papers and reports on methods that may be useful for horizon scanning, scenarios, forecasting and foresight itself.</p></div><div id="countB" class="count">0 items</div></div>
+      <section id="strand-b" class="strand radar-depth-section">
+        <div class="section-head"><div><div class="eyebrow">Ways to look ahead</div><h2>Foresight methods</h2><p>Methods useful for horizon scanning, scenarios, forecasting and foresight.</p></div><div id="countB" class="count">0 items</div></div>
         <div id="itemsB" class="cards"></div><button id="moreB" class="more" type="button" hidden>Show more</button>
       </section>
 
-      <section id="strand-c" class="strand">
-        <div class="section-head"><div><div class="eyebrow">Strand C</div><h2>Weak signals</h2><p>Trustworthy reporting, papers and other evidence indicating changes or possible changes in EU research &amp; innovation worth keeping an eye on.</p></div><div id="countC" class="count">0 items</div></div>
+      <section id="strand-c" class="strand radar-depth-section">
+        <div class="section-head"><div><div class="eyebrow">Weak signals</div><h2>Recent changes worth watching</h2><p>Recent evidence of changes that may matter for European research and innovation.</p></div><div id="countC" class="count">0 items</div></div>
         <div id="itemsC" class="cards"></div><button id="moreC" class="more" type="button" hidden>Show more</button>
       </section>
-
     </main>
-    <footer><div class="wrap">R&I × Geopolitics Radar</div></footer>
+    <footer><div class="wrap radar-footer"><a href="../read/">Read at least this</a><a href="../">Home</a><a href="#radarFilters">Back to search</a></div></footer>
   </div>
 
 <script src="../reader_rank.js?v=17.20.19"></script>
@@ -343,6 +336,5 @@ async function loadRadar(){
   render();
 }
 </script>
-<script src="../site-shell.js?v=1.0"></script>
 </body>
 </html>

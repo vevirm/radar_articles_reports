@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#0b0b0b">
 <title>Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="home.css?v=1.0">
+<link rel="stylesheet" href="home.css?v=2.0">
 <script src="radar_data.js"></script>
 </head>
 <body>
@@ -13,8 +13,10 @@
   <main class="home-shell">
     <div class="home-top"><div><div class="home-brand">Research &amp; Innovation × Geopolitics Radar</div><p class="home-purpose">Evidence on how geopolitics is changing European research and innovation.</p></div><button id="lock" class="lock" type="button">Lock</button></div>
     <div class="home-count"><strong><span id="evidenceCount">—</span> pieces of evidence in the library</strong> <span class="count-detail">(<span id="currentCount">—</span> current + <span id="historicalCount">—</span> historical)</span><span class="dot">·</span><strong><span id="sourceCount">—</span> source organisations</strong><span class="dot">·</span><span class="updated">updated <span id="updated">—</span></span></div>
-    <nav class="home-nav" aria-label="All sections">
-      <a class="start" href="read/">Read at least this</a><a href="radar/">Radar</a><a href="frontier/quick/">Matrix</a><a href="trends/">Trends</a><a href="phenomena/">Ongoing phenomena</a><a href="priorities/">Risks &amp; opportunities</a><a href="shocks/">External shocks</a><a href="historical/">Historical</a><a href="literature/">Sources</a><a href="glossary/">Glossary</a><a href="stuff/">Stuff</a>
+    <nav class="home-actions" aria-label="Start here">
+      <a class="start" href="read/"><strong>Read at least this</strong><span>The shortest useful briefing</span></a>
+      <a href="radar/"><strong>Browse the Radar</strong><span>Search the current evidence</span></a>
+      <button id="sectionMore" type="button"><strong>Explore everything</strong><span>Patterns, risks, history and sources</span></button>
     </nav>
     <section class="cloud-frame" aria-label="Topics in the current evidence">
       <div class="cloud-meta"><div class="cloud-explain">Bigger = more independent sources. Red = mostly new.</div><button id="cloudMore" class="cloud-more" type="button"></button></div>
@@ -22,6 +24,7 @@
     </section>
   </main>
 </div>
+<dialog id="sectionDialog"><div class="dialog-head"><h2>Explore the Radar</h2><button id="sectionClose" type="button">Close</button></div><nav class="section-list" aria-label="All sections"><a href="frontier/quick/"><strong>Matrix</strong><span>Where Europe gains or loses ground</span></a><a href="trends/"><strong>Trends</strong><span>Directions in the current evidence</span></a><a href="phenomena/"><strong>Ongoing phenomena</strong><span>Patterns that keep returning</span></a><a href="priorities/"><strong>Risks &amp; opportunities</strong><span>Downside and upside pathways</span></a><a href="shocks/"><strong>External shocks</strong><span>Stress-test the evidence</span></a><a href="historical/"><strong>Historical</strong><span>Older evidence for context</span></a><a href="literature/"><strong>Sources</strong><span>Publications and institutions</span></a><a href="glossary/"><strong>Glossary</strong><span>Plain-language terms</span></a><a href="stuff/"><strong>Stuff</strong><span>Methods, files and audit detail</span></a></nav></dialog>
 <dialog id="topicDialog"><div class="dialog-head"><h2 id="dialogTitle">All topics</h2><button id="dialogClose" type="button">Close</button></div><div id="allTopics" class="all-topics"></div></dialog>
 <script src="topic-cloud.js?v=1.0"></script>
 <script>
@@ -31,6 +34,7 @@ function unlock(){sessionStorage.setItem('radarUnlocked','1');document.getElemen
 if(sessionStorage.getItem('radarUnlocked')==='1')unlock();
 document.getElementById('gateForm').addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('password');if(await sha256(input.value)===PASSWORD_HASH)unlock();else{document.getElementById('gateError').textContent='Incorrect password.';input.select()}});
 document.getElementById('lock').addEventListener('click',()=>{sessionStorage.removeItem('radarUnlocked');location.reload()});
+const sectionDlg=document.getElementById('sectionDialog');document.getElementById('sectionMore').addEventListener('click',()=>sectionDlg.showModal());document.getElementById('sectionClose').addEventListener('click',()=>sectionDlg.close());sectionDlg.addEventListener('click',e=>{if(e.target===sectionDlg)sectionDlg.close()});
 const dlg=document.getElementById('topicDialog');document.getElementById('cloudMore').addEventListener('click',()=>dlg.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 </script>
 </body>

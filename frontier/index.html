@@ -9,7 +9,7 @@
 </style>
 <link rel="stylesheet" href="../simple-ui.css?v=21.9">
 <script src="../radar_data.js"></script>
-<link rel="stylesheet" href="../reform.css?v=1.0">
+<link rel="stylesheet" href="../reform.css?v=2.0">
 </head>
 <body>
 <header><div class="wrap top"><div><div class="kicker">Matrix · full evidence</div><h1>Where Europe gains or loses ground</h1><p class="lede">Rows = where change happens. Columns = what it does to European control and capability.</p><div class="state" id="state">Loading Matrix</div></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read at least this</a><a class="primary" href="./" aria-current="page">Matrix</a><a href="quick/">Quick Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing phenomena</a><a href="../priorities/">Risks &amp; opportunities</a><a href="../shocks/">External shocks</a><a href="../historical/">Historical</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
@@ -36,5 +36,5 @@ function matrixHtml(view){let html='<div class="matrix"><div class="corner"></di
 document.addEventListener('click',e=>{const b=e.target.closest('[data-expand]');if(!b)return;const t=document.getElementById(b.dataset.expand);if(!t)return;const open=t.hidden;t.hidden=!open;b.setAttribute('aria-expanded',String(open));b.textContent=open?'Show less':`Show ${b.dataset.count} more`});
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json'),v=SovereigntyFrontier.buildFrontier(d);document.getElementById('matrixGrid').innerHTML=matrixHtml(v);document.getElementById('state').textContent=`${v.signals.length} placed findings · updated ${String(v.lastUpdated||'').slice(0,10)}`;}catch(e){console.error('Matrix load failed',e);document.getElementById('matrixGrid').innerHTML='<p class="empty">Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
 </script>
-<script src="../site-shell.js?v=1.0"></script>
+<script src="../site-shell.js?v=2.0"></script>
 </body></html>

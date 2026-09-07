@@ -1,3 +1,21 @@
+# v22.3 — Radar restored as a working application + calmer reader pages
+
+- Rebuilt `/radar/` from the original uploaded Radar page rather than layering the global redesign on top of it.
+- Preserves the original Radar application JavaScript byte-for-byte; only the surrounding markup/CSS shell changed.
+- Radar now opens directly on search, current counts and evidence. The six-step journey strip, giant repeated menu and global shell are gone from this page.
+- Added a dedicated `radar-calm.css` so global reader styles cannot interfere with Radar controls or rendering.
+- Verified in a real browser harness with the actual corpus: 318 current records load; searching `quantum` returns 11; Latest 30 days narrows the result; Clear restores the full set; evidence detail expansion works.
+- Other reader pages now use progressive disclosure: compact primary navigation, less repeated furniture, and secondary methodology/evidence behind `Read evidence`/details controls.
+- Risks & opportunities reads as one calm stream rather than two dense side-by-side walls. Ongoing Phenomena leads with findings and hides diagnostics/evidence until requested.
+- Main scanner, historical scanner, both corpora and both GitHub workflow files remain unchanged.
+
+# v22.2 — calm reader hierarchy
+
+- Replaced the always-visible full navigation grid and process strip on inner pages with a compact primary bar and an `Explore` menu.
+- Removed repeated status/journey furniture before the actual content.
+- Kept `Read at least this` as the red primary route and Radar as a direct primary route.
+- Moved secondary explanations and methodology behind disclosure controls where possible.
+
 # v22.1 — browser-upload compatibility + honest corpus count
 
 - Fixed GitHub Actions failure caused by stale old test files surviving browser uploads.
