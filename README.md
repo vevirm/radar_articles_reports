@@ -14,11 +14,11 @@ An EU-first evidence radar for research and innovation in geopolitical context.
 
 ## Evidence flow
 
-Main scanner → Radar evidence → Matrix → Trends → Risks & opportunities → External shocks.
+Main scanner → A/B/C Radar evidence → Matrix and reading maps → Trends + Ongoing phenomena → Risks & opportunities → External shocks.
 
 **What matters now**, **Read at least this**, **Evidence by topic**, **Briefing** and **Sources** are reader views of the same current Main evidence. The Matrix, risks/opportunities and shock pages do not launch their own research scans; they interpret accepted Radar evidence and scanner-produced analytical fields.
 
-Historical is deliberately separate. Older A/B evidence accumulates in `historical/historical.json`; it does not become current C and does not overwrite the live Matrix or shock state.
+Historical is deliberately separate. Older A/B evidence accumulates in `historical/historical.json`; it does not become current C and does not overwrite the live Matrix or shock state. Ongoing phenomena may read Historical only to show that a current issue also existed before the six-month boundary.
 
 ### Trends and counter-trends
 
@@ -70,3 +70,6 @@ The public pages are static HTML/JavaScript and only read JSON; they have no Git
 ## Browser-upload compatibility
 
 The scanner retains compatibility guards for repositories where GitHub browser upload leaves an older hidden workflow file behind. The supported workflows in this bundle are nevertheless the authoritative production configuration: Main first every four hours, Historical 40 minutes later, one shared research slot, 24/10-minute budgets, and no production regression-test gate.
+
+### Ongoing phenomena
+`phenomena/` answers a different question from Trends. Trends asks which direction repeated evidence is moving. Ongoing phenomena asks which underlying issues keep resurfacing across time. A phenomenon must be visible both before the rolling six-month boundary in `historical/historical.json` and inside the current six-month picture from `radar.json`; older evidence cannot create a current phenomenon on its own.

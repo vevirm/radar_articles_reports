@@ -31,6 +31,7 @@
     .statusbar{position:relative;z-index:2;margin-top:-1px;background:#fff;border-bottom:1px solid var(--line)}.status-inner{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 0}.pill{border-radius:999px;padding:5px 9px;font-size:12px;color:var(--muted);background:#ffffff;border:1px solid #dedede}.pill.ok{color:var(--ok);background:#fff0f2}.pill.warn{color:#111111;background:#ffffff}
     .scan-strip{background:#fff;border-bottom:1px solid var(--line)}.scan-strip-inner{display:flex;gap:0;flex-wrap:wrap;align-items:stretch;padding:0}.scan-metric{padding:10px 14px 9px 0;margin-right:14px;border-right:1px solid var(--line);font-size:12px;line-height:1.25;color:var(--muted);white-space:nowrap}.scan-metric:last-child{border-right:0}.scan-metric strong{display:block;color:var(--ink);font-size:16px;line-height:1.05;letter-spacing:-.02em}.scan-metric.added strong{color:var(--accent)}
     .dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:23px 0 20px}.stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow-sm)}.stat .label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800}.stat .value{font-size:32px;line-height:1;margin-top:8px;letter-spacing:-.04em;font-weight:800}.stat .sub{font-size:12px;color:var(--muted);margin-top:7px}
+.strand-jump{background:#fff;border-bottom:1px solid #ddd}.strand-jump-grid{display:grid;grid-template-columns:repeat(3,1fr);padding:11px 0}.strand-jump a{display:flex;flex-direction:column;gap:2px;padding:10px 13px;border:1px solid #ddd;border-right:0;text-decoration:none}.strand-jump a:last-child{border-right:1px solid #ddd}.strand-jump a:hover{border-bottom:4px solid #c40018;padding-bottom:7px}.strand-jump b{font-size:13px}.strand-jump span{font-size:11.5px;color:#666}@media(max-width:700px){.strand-jump-grid{display:flex;overflow-x:auto}.strand-jump a{min-width:225px;flex:0 0 auto}.strand-jump a:last-child{border-right:1px solid #ddd}}
     .toolbar{position:sticky;top:0;z-index:8;background:rgba(243,246,249,.91);backdrop-filter:blur(12px);padding:9px 0 11px;border-bottom:1px solid rgba(221,227,234,.8)}.tools{display:flex;gap:10px;align-items:center}.search{flex:1;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;outline:none}.search:focus{border-color:#777777;box-shadow:0 0 0 3px rgba(196,0,24,.10)}
     .filter{border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:9px 11px;cursor:pointer;font-weight:700;font-size:13px;text-decoration:none}.filter.active{background:var(--navy);border-color:var(--navy);color:#fff}.filter.added-filter.active{background:var(--accent);border-color:var(--accent);color:#fff}.filter.zero{color:var(--muted)}
     main{padding:3px 0 70px}.strand{padding-top:36px}.section-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;margin-bottom:14px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:var(--accent)}.section-head h2{font-size:27px;letter-spacing:-.035em;line-height:1.12;margin:4px 0 5px}.section-head p{margin:0;color:var(--muted);max-width:840px;font-size:14px}.count{font-size:13px;color:var(--muted);white-space:nowrap}
@@ -52,7 +53,7 @@
     @media(max-width:980px){.issue-splash{grid-template-columns:repeat(2,minmax(0,1fr))}.page-map-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:650px){.issue-splash{grid-template-columns:1fr 1fr}.page-map-grid{grid-template-columns:1fr}.hero h1{font-size:48px}.issue-splash a{min-height:76px}}
 </style>
-<link rel="stylesheet" href="../simple-ui.css?v=21.6">
+<link rel="stylesheet" href="../simple-ui.css?v=21.8">
 <style id="landing-v171929">
 .landing-hero{padding:0 0 30px!important}
 .landing-nav{display:flex;gap:0;align-items:center;border-bottom:1px solid #333;margin-bottom:30px;min-height:52px;flex-wrap:wrap}
@@ -61,7 +62,7 @@
 .landing-nav .lock{margin-left:auto;border-radius:0!important;border:0!important;border-left:1px solid #3a3a3a!important;padding:18px 15px!important;font-size:13px!important}
 .landing-copy{max-width:900px}.landing-copy h1{font-size:clamp(44px,7vw,82px)!important;line-height:.94!important;margin:8px 0 12px!important;letter-spacing:-.06em!important}.landing-copy .intro{max-width:760px!important;font-size:clamp(16px,1.8vw,20px)!important;line-height:1.35!important;margin:0!important;color:#fff!important}
 #radar{padding-top:16px}.dashboard{margin-top:0!important}
-.core-path{background:#fff;border-bottom:1px solid #ddd}.core-path-inner{padding:16px 0 17px}.core-path-grid{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr;align-items:stretch}.core-step{border:1px solid #d6d6d6;background:#fff;color:#111;text-decoration:none;padding:14px 16px;min-height:88px;display:flex;flex-direction:column;justify-content:center}.core-step.current{border-top:5px solid #c40018;padding-top:10px}.core-step .n{font-size:10px;font-weight:950;letter-spacing:.09em;text-transform:uppercase;color:#c40018}.core-step strong{font-size:18px;line-height:1.1;margin-top:4px}.core-step span{font-size:12px;color:#666;margin-top:4px}.core-step:hover{border-color:#c40018}.core-arrow{display:grid;place-items:center;color:#c40018;font-size:25px;font-weight:950}.rank-badge{display:inline-grid;place-items:center;min-width:34px;height:28px;padding:0 7px;border:1px solid #111;background:#fff;color:#111;font-size:12px;font-weight:950;line-height:1}.rank-badge.top{background:#111;color:#fff;border-color:#111}.rank-badge.very-strong{border-color:#c40018}.rank-badge strong{font:inherit}.rank-badge[title]{cursor:help}
+.core-path{background:#fff;border-bottom:1px solid #ddd}.core-path-inner{padding:16px 0 17px}.core-path-grid{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr 24px 1fr 24px 1fr;align-items:stretch}.core-step{border:1px solid #d6d6d6;background:#fff;color:#111;text-decoration:none;padding:14px 16px;min-height:88px;display:flex;flex-direction:column;justify-content:center}.core-step.current{border-top:5px solid #c40018;padding-top:10px}.core-step .n{font-size:10px;font-weight:950;letter-spacing:.09em;text-transform:uppercase;color:#c40018}.core-step strong{font-size:18px;line-height:1.1;margin-top:4px}.core-step span{font-size:12px;color:#666;margin-top:4px}.core-step:hover{border-color:#c40018}.core-arrow{display:grid;place-items:center;color:#c40018;font-size:25px;font-weight:950}.rank-badge{display:inline-grid;place-items:center;min-width:34px;height:28px;padding:0 7px;border:1px solid #111;background:#fff;color:#111;font-size:12px;font-weight:950;line-height:1}.rank-badge.top{background:#111;color:#fff;border-color:#111}.rank-badge.very-strong{border-color:#c40018}.rank-badge strong{font:inherit}.rank-badge[title]{cursor:help}
 
 @media(max-width:920px){.core-path-grid{display:flex;overflow-x:auto}.core-step{min-width:175px}.core-arrow{min-width:28px}}
 @media(max-width:760px){.landing-nav .lock{margin-left:0}.landing-nav a,.landing-nav .lock{padding:13px 10px!important;font-size:11px!important}.landing-copy h1{font-size:44px!important}.core-path-grid{display:block}.core-step{min-height:0}.core-arrow{height:28px;transform:rotate(90deg)}}
@@ -86,11 +87,12 @@
     <header class="hero landing-hero">
       <div class="wrap">
         <nav class="landing-nav" aria-label="Main navigation">
-          <a href="../">What matters now</a>
+          <a href="../">Start</a>
           <a class="current" href="#radar" aria-current="page">Main Radar</a>
           <a href="../read/">Read at least this</a>
           <a href="../frontier/quick/">Matrix</a>
           <a href="../trends/">Trends</a>
+          <a href="../phenomena/">Ongoing phenomena</a>
           <a href="../priorities/">Risks &amp; opportunities</a>
           <a href="../shocks/">External shocks</a>
           <a href="../historical/">Historical</a>
@@ -114,11 +116,18 @@
     <section class="core-path" aria-label="Core reader path"><div class="wrap core-path-inner"><div class="core-path-grid">
       <a class="core-step current" href="#strand-a"><span class="n">1</span><strong>Radar</strong><span>Evidence</span></a><div class="core-arrow" aria-hidden="true">→</div>
       <a class="core-step" href="../frontier/quick/"><span class="n">2</span><strong>Matrix</strong><span>Patterns</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../trends/"><span class="n">3</span><strong>Trends</strong><span>Forces in tension</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../priorities/"><span class="n">4</span><strong>Risks &amp; opportunities</strong><span>Implications</span></a><div class="core-arrow" aria-hidden="true">→</div>
-      <a class="core-step" href="../shocks/"><span class="n">5</span><strong>External shocks</strong><span>Stress cases</span></a>
+      <a class="core-step" href="../trends/"><span class="n">3</span><strong>Trends</strong><span>Direction</span></a><div class="core-arrow" aria-hidden="true">→</div>
+      <a class="core-step" href="../phenomena/"><span class="n">4</span><strong>Ongoing phenomena</strong><span>Recurrence</span></a><div class="core-arrow" aria-hidden="true">→</div>
+      <a class="core-step" href="../priorities/"><span class="n">5</span><strong>Risks &amp; opportunities</strong><span>Implications</span></a><div class="core-arrow" aria-hidden="true">→</div>
+      <a class="core-step" href="../shocks/"><span class="n">6</span><strong>External shocks</strong><span>Stress cases</span></a>
     </div></div></section>
 
+
+    <section class="strand-jump" aria-label="Radar evidence layers"><div class="wrap strand-jump-grid">
+      <a href="#strand-a"><b>A · Established evidence</b><span>Papers and reports behind the site.</span></a>
+      <a href="#strand-b"><b>B · Ways to look ahead</b><span>Methods used to improve scanning and foresight.</span></a>
+      <a href="#strand-c"><b>C · Weak signals</b><span>Recent changes tied back to established evidence.</span></a>
+    </div></section>
     <div class="toolbar"><div class="wrap tools">
       <input id="search" class="search" type="search" placeholder="Search titles, sources, signals and topics" aria-label="Search radar">
       <button id="newOnly" class="filter added-filter" type="button">New</button>

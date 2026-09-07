@@ -1,3 +1,15 @@
+# v21.8 — clearer reader path + ongoing phenomena
+
+- Built on the latest uploaded live state after the user-triggered 2026-09-07 scan; `radar.json` is preserved, including its one newly accepted A record and scan cursors.
+- The homepage now states the point of the site in plain language and shows A/B/C **before scrolling**: established evidence, ways to look ahead, and weak signals.
+- Added a fuller site map showing the reader chain: collect evidence → organise it → find patterns → look ahead → audit the work.
+- Added **Ongoing phenomena / What keeps coming back** beside Trends. Trends asks direction; Ongoing phenomena asks recurrence across time.
+- Ongoing phenomena uses only repository evidence. A card needs at least 3 current records from 2 sources plus at least 2 older-than-six-month records from 2 sources. Historical evidence cannot make a current phenomenon qualify by itself.
+- The phenomena page updates automatically as `radar.json` and `historical/historical.json` change.
+- Added Ongoing phenomena to the main navigation and core reader path across the site.
+- Restored the intended production workflows in the bundle: Main every 4 hours at :17 for 24 minutes; Historical every 4 hours at :57 for 10 minutes; one shared research slot with Main priority.
+- Repository remains below 100 files; obsolete quarantined tests and Python cache files are excluded.
+
 # v21.7 — richer Trends / counter-trends
 
 - Expanded the Trends page from the previous thin set to nine current evidence tug-of-war pairs supported by the present Radar corpus.
