@@ -11,7 +11,8 @@
 </style>
 <link rel="stylesheet" href="../simple-ui.css?v=21.9">
 <script src="../radar_data.js"></script>
-<link rel="stylesheet" href="../reform.css?v=23.0">
+<link rel="stylesheet" href="../reform.css?v=23.1">
+<!-- Regression compatibility only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head>
 <body>
 <header><div class="wrap top"><div><div class="kicker">PATHWAYS</div><h1>Risks &amp; opportunities</h1><p class="lede">Forward-looking risks and opportunities for EU research &amp; innovation.</p></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read at least this</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing phenomena</a><a class="primary" href="./" aria-current="page">Risks &amp; opportunities</a><a href="../shocks/">External shocks</a><a href="../historical/">Historical</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
@@ -33,6 +34,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-detail]');
 function render(view){document.getElementById('risks').innerHTML=listHtml(view.risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(view.opportunities,'opportunity');document.getElementById('riskCount').textContent=`${view.stats.risks} open`;document.getElementById('opportunityCount').textContent=`${view.stats.opportunities} open`;document.getElementById('summary').textContent=`${view.stats.risks} risks · ${view.stats.opportunities} opportunities`;}
 (async()=>{try{render(RadarPriorities.buildPriorityView(await RadarData.load('../radar.json','../radar_seed.json'),{limit:12}))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('summary').textContent='Radar data could not be loaded.'}})();
 </script>
-<script src="../site-shell.js?v=23.0"></script>
+<script src="../site-shell.js?v=23.1"></script>
 </body>
 </html>

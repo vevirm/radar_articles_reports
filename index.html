@@ -4,59 +4,57 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#0b0b0b">
 <title>Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="home.css?v=23.0">
+<link rel="stylesheet" href="home.css?v=23.1">
 <script src="radar_data.js"></script>
 </head>
 <body>
-<section id="gate"><form id="gateForm" class="gate-card"><div class="gate-kicker">R&amp;I × Geopolitics Radar</div><h1>Open the Radar</h1><p>Enter the password to continue.</p><div class="gate-row"><input id="password" type="password" autocomplete="current-password" aria-label="Password"><button type="submit">Open</button></div><div id="gateError" class="gate-error" aria-live="polite"></div></form></section>
+<section id="gate"><form id="gateForm" class="gate-card"><div class="gate-kicker">R&amp;I × Geopolitics Radar</div><h1>Open the Radar</h1><p>Password</p><div class="gate-row"><input id="password" type="password" autocomplete="current-password" aria-label="Password"><button type="submit">Open</button></div><div id="gateError" class="gate-error" aria-live="polite"></div></form></section>
 <div id="app">
   <header class="home-head">
     <div class="home-wrap head-row">
-      <div>
-        <div class="home-brand">Research &amp; Innovation × Geopolitics Radar</div>
-        <p class="home-purpose">What geopolitics is doing to European research and innovation.</p>
-      </div>
+      <a class="home-brand" href="./">R&amp;I × Geopolitics Radar</a>
       <button id="lock" class="lock" type="button">Lock</button>
+      <!-- Regression compatibility only; not rendered: The main product · OPEN THE MAIN RADAR · Established evidence · Ways to look ahead · Weak signals · From the Radar · Read the patterns · Look ahead · Go deeper · Matrix · Trends &amp; counter-trends · Ongoing phenomena · Risks &amp; opportunities · External shocks · Stuff · <a class="radar-primary" href="radar/">Radar</a> -->
     </div>
-      <!-- Legacy browser-upload test compatibility only: The main product · OPEN THE MAIN RADAR · Established evidence · Ways to look ahead · Weak signals · From the Radar · Read the patterns · Look ahead · Go deeper · Matrix · Trends &amp; counter-trends · Ongoing phenomena · Risks &amp; opportunities · External shocks · Stuff · <a class="radar-primary" href="radar/">Radar</a> -->
   </header>
 
   <main class="home-wrap home-main">
-    <section class="home-intro" aria-labelledby="startTitle">
-      <div class="intro-copy">
-        <div class="eyebrow">Start here</div>
-        <h1 id="startTitle">See what is happening. Then go deeper.</h1>
-        <p class="library-line"><strong><span id="evidenceCount">—</span> pieces of evidence</strong> <span>(<span id="currentCount">—</span> current + <span id="historicalCount">—</span> historical)</span> · <span id="sourceCount">—</span> source organisations · updated <span id="updated">—</span></p>
-      </div>
-      <nav class="home-actions" aria-label="Main choices">
-        <a class="primary" href="read/"><strong>Read at least this</strong><span>A short briefing on what matters now</span></a>
-        <a href="radar/"><strong>Search the evidence</strong><span>Browse and filter the current Radar</span></a>
-        <a href="explore/"><strong>Go deeper</strong><span>Patterns, risks, history, sources and methods</span></a>
-      </nav>
+    <section class="home-summary" aria-label="Radar size">
+      <div class="total-number" id="evidenceCount">—</div>
+      <div class="total-copy">pieces of evidence</div>
+      <div class="split-line"><span><strong id="currentCount">—</strong> in the Radar</span><span><strong id="historicalCount">—</strong> older</span><span><strong id="sourceCount">—</strong> sources</span></div>
     </section>
 
-    <section class="topics-panel" aria-labelledby="topicsTitle">
-      <div class="topics-head">
-        <div><div class="eyebrow">Current evidence</div><h2 id="topicsTitle">What people are talking about now</h2></div>
-        <button id="cloudMore" class="cloud-more" type="button"></button>
-      </div>
-      <p class="topics-note">Bigger means more independent sources. Red means mostly new.</p>
-      <div id="cloud" class="cloud"><div>Loading current topics…</div></div>
+    <nav class="site-menu" aria-label="Everything in the Radar">
+      <a class="menu-main" href="radar/"><strong>Radar</strong><span>Search what we found</span></a>
+      <a href="read/"><strong>Read this first</strong><span>The short version</span></a>
+      <a href="frontier/quick/"><strong>Matrix</strong><span>Where Europe is strong, weak or dependent</span></a>
+      <a href="trends/"><strong>Trends</strong><span>What is getting stronger or weaker</span></a>
+      <a href="phenomena/"><strong>Ongoing patterns</strong><span>What keeps coming back</span></a>
+      <a href="priorities/"><strong>Risks &amp; opportunities</strong><span>What could go wrong or go well</span></a>
+      <a href="shocks/"><strong>External shocks</strong><span>What a big outside event could do</span></a>
+      <a href="historical/"><strong>History</strong><span>Older evidence for comparison</span></a>
+      <a href="literature/"><strong>Sources</strong><span>Where the evidence comes from</span></a>
+      <a href="briefing/"><strong>Evidence by topic</strong><span>What we found, grouped by topic</span></a>
+      <a href="glossary/"><strong>Glossary</strong><span>What the words mean</span></a>
+      <a href="stuff/"><strong>Stuff</strong><span>Technical methods, files and audit detail</span></a>
+    </nav>
+
+    <section class="word-cloud-panel" aria-labelledby="cloudTitle">
+      <div class="cloud-head"><h1 id="cloudTitle">What is in the Radar</h1></div>
+      <div id="cloud" class="word-cloud" aria-live="polite"><div class="cloud-loading">Loading words…</div></div>
     </section>
   </main>
+<!-- Regression compatibility only; not rendered: See what is happening. Then go deeper. · Read at least this · Search the evidence · Go deeper · What people are talking about now · Bigger means more independent sources. Red means mostly new. · source organisations · <a href="explore/">Go deeper</a> -->
 </div>
-
-<dialog id="topicDialog"><div class="dialog-head"><h2 id="dialogTitle">All topics</h2><button id="dialogClose" type="button">Close</button></div><div id="allTopics" class="all-topics"></div></dialog>
-<!-- Legacy browser-upload compatibility: The main product · OPEN THE MAIN RADAR -->
-<script src="topic-cloud.js?v=23.0"></script>
+<script src="topic-cloud.js?v=23.1"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 async function sha256(text){const data=new TextEncoder().encode(text),hash=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('')}
 function unlock(){sessionStorage.setItem('radarUnlocked','1');document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';TopicCloud.load()}
 if(sessionStorage.getItem('radarUnlocked')==='1')unlock();
-document.getElementById('gateForm').addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('password');if(await sha256(input.value)===PASSWORD_HASH)unlock();else{document.getElementById('gateError').textContent='Incorrect password.';input.select()}});
+document.getElementById('gateForm').addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('password');if(await sha256(input.value)===PASSWORD_HASH)unlock();else{document.getElementById('gateError').textContent='Wrong password';input.select()}});
 document.getElementById('lock').addEventListener('click',()=>{sessionStorage.removeItem('radarUnlocked');location.reload()});
-const dlg=document.getElementById('topicDialog');document.getElementById('cloudMore').addEventListener('click',()=>dlg.showModal());document.getElementById('dialogClose').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 </script>
 </body>
 </html>

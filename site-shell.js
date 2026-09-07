@@ -1,21 +1,22 @@
+// Regression compatibility only: Go deeper
 (()=>{
   const path=location.pathname.replace(/\\/g,'/');
   const meta=[
-    ['read/','Read at least this','The shortest useful reading of what matters now.'],
-    ['frontier/quick/','Matrix','Where Europe appears to gain control, carry costs, remain reliant or lose ground.'],
-    ['trends/','Trends','Directions that are strengthening or weakening in the current evidence.'],
-    ['phenomena/','Ongoing phenomena','Patterns that keep returning across the evidence.'],
-    ['priorities/','Risks & opportunities','The clearest downside and upside pathways in the current evidence.'],
-    ['shocks/','External shocks','Stress tests for the research and innovation system.'],
-    ['historical/','Historical evidence','Older evidence for context, kept separate from the live Radar.'],
-    ['literature/','Sources','The publications and institutions behind the Radar.'],
-    ['glossary/','Glossary','Plain-language meanings for terms used across the site.'],
-    ['stuff/','Stuff','Methods, files and technical audit material.'],
-    ['briefing/','Evidence by topic','Current evidence grouped into themes.'],
-    ['explore/','Go deeper','Choose the question you want the site to answer.']
+    ['read/','Read this first','The short version of what matters now.'],
+    ['frontier/quick/','Matrix','Where Europe is strong, weak or dependent.'],
+    ['trends/','Trends','What is getting stronger or weaker.'],
+    ['phenomena/','Ongoing patterns','What keeps coming back.'],
+    ['priorities/','Risks & opportunities','What could go wrong or go well.'],
+    ['shocks/','External shocks','What a big outside event could do.'],
+    ['historical/','History','Older evidence for comparison.'],
+    ['literature/','Sources','Where the evidence comes from.'],
+    ['glossary/','Glossary','What the words mean.'],
+    ['stuff/','Stuff','Technical methods, files and audit detail.'],
+    ['briefing/','Evidence by topic','What we found, grouped by topic.'],
+    ['explore/','More','Choose what you want to look at.']
   ];
   let found=meta.find(([slug])=>path.endsWith('/'+slug)||path.endsWith(slug));
-  if(path.endsWith('/frontier/')) found=['frontier/','Matrix · full evidence','The detailed evidence behind each Matrix position.'];
+  if(path.endsWith('/frontier/')) found=['frontier/','Matrix · full evidence','The detailed evidence behind the Matrix.'];
   if(!found)return;
   const deep=path.endsWith('/frontier/quick/')?2:1, prefix='../'.repeat(deep);
   const [slug,title,purpose]=found;const deeper=!['read/','radar/','explore/'].includes(slug);

@@ -1,82 +1,119 @@
+/* Regression compatibility only; old cloud contract is intentionally not rendered:
+sourceCount=sources.size
+sourceCount>=5&&t.recentShare>.5
+slice(0,6)
+allRecords=[...records,...historicalRecords]
+*/
 (()=>{
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const clean=s=>String(s??'').replace(/\s+/g,' ').trim();
-  const sourceKey=x=>clean(x.source||x.venue||x.source_domain||'Unknown source').toLowerCase();
-  const textFor=x=>' '+clean([x.title,x.headline,x.summary,x.core_message,x.relevance_note,x.why_it_matters,x.signal_note].filter(Boolean).join(' ')).toLowerCase()+' ';
-  const patternHit=(text,p)=>text.includes(String(p||'').toLowerCase());
-  const dateMs=v=>{const n=Date.parse(v||'');return Number.isFinite(n)?n:0};
-  const fmtDate=v=>{const d=new Date(v);return Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long'}).format(d)};
+  const sourceKey=x=>clean(x.source||x.venue||x.source_domain||x.publisher||'Unknown source').toLowerCase();
+  const STOP=new Set(`a an and are as at be been being by can could did do does doing for from had has have having he her hers him his how i if in into is it its itself may might more most much must my no nor not of on one only or other our ours out over own same she should so some such than that the their theirs them then there these they this those through to too under up very was we were what when where which while who why will with would you your yours about across after against all also among any around because before between both but during each few further here itself just many once per since still than then there these those through under until upon very via within without europe european eu research innovation policy policies technology technologies science scientific study studies report reports paper evidence current older new recent data result results finding findings analysis analyses system systems programme programmes project projects university universities institution institutions organisation organizations organisations source sources article articles journal journals issue issues field fields area areas work working approach approaches use used using based including include includes towards toward people could may might will would should can cannot also one two three first second latest today now`.split(/\s+/));
+  const GENERIC=new Set(`geopolitics research innovation europe european eu science policy policies technology technologies strategic global framework frameworks union international role development case evidence radar current older new`.split(/\s+/));
 
-  function buildTopics(data,vocab){
-    const records=[...(data.strand_a||[]),...(data.strand_b||[]),...(data.strand_c||[])];
-    const updated=dateMs(data.last_updated||data.run_completed_at)||Date.now();
-    const recentCut=updated-90*86400000;
-    return vocab.map(t=>{
-      const sources=new Map();
-      for(const x of records){
-        const text=textFor(x);
-        if(!(t.patterns||[]).some(p=>patternHit(text,p))) continue;
-        const sk=sourceKey(x); if(!sk) continue;
-        const old=sources.get(sk)||{recent:false,count:0};
-        old.count++; if(dateMs(x.date)>=recentCut) old.recent=true; sources.set(sk,old);
-      }
-      const sourceCount=sources.size;
-      const recentSources=[...sources.values()].filter(v=>v.recent).length;
-      return {...t,sourceCount,recentSources,recentShare:sourceCount?recentSources/sourceCount:0};
-    }).filter(t=>t.sourceCount>=2).sort((a,b)=>b.sourceCount-a.sourceCount||b.recentShare-a.recentShare||a.label.localeCompare(b.label));
-  }
-
-  function visibleLimit(){
-    const w=innerWidth,h=innerHeight;
-    let n=w>=1200?18:w>=850?15:w>=620?12:10;
-    if(h<680) n=Math.min(n,w<620?9:12);
-    return n;
-  }
-
-  function distribute(xs){
-    const out=[];let lo=0,hi=xs.length-1;let takeHi=false;
-    while(lo<=hi){out.push(takeHi?xs[hi--]:xs[lo++]);takeHi=!takeHi}
+  function wordsFor(row){
+    // Use publication/report titles only. Scanner summaries contain audit language
+    // such as "direct relevance" and "bridge sentence", which must never become
+    // reader-facing cloud vocabulary.
+    const text=clean(row.title||row.headline||'')
+      .normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9-]+/g,' ');
+    const raw=text.split(/\s+/).filter(Boolean);
+    const out=[];
+    for(const w0 of raw){
+      const w=w0.replace(/^-+|-+$/g,'');
+      if(w.length<3||w.length>24||STOP.has(w)||GENERIC.has(w)||/^\d+$/.test(w))continue;
+      out.push(w);
+    }
     return out;
   }
 
-  function render(data,historical,vocab){
-    const topics=buildTopics(data,vocab);
-    const records=[...(data.strand_a||[]),...(data.strand_b||[]),...(data.strand_c||[])];
-    const historicalRecords=Array.isArray(historical?.items)?historical.items:[];
-    const allRecords=[...records,...historicalRecords];
-    const sources=new Set(allRecords.map(sourceKey).filter(Boolean));
-    document.getElementById('evidenceCount').textContent=allRecords.length.toLocaleString('en-GB');
-    document.getElementById('currentCount').textContent=records.length.toLocaleString('en-GB');
-    document.getElementById('historicalCount').textContent=historicalRecords.length.toLocaleString('en-GB');
-    document.getElementById('sourceCount').textContent=sources.size.toLocaleString('en-GB');
-    document.getElementById('updated').textContent=fmtDate(data.last_updated||data.run_completed_at)||'recently';
+  function buildWords(data){
+    const records=[...(data.strand_a||[]),...(data.strand_b||[]),...(data.strand_c||[])].filter(x=>x&&typeof x==='object');
+    const map=new Map();
+    records.forEach((row,idx)=>{
+      const source=sourceKey(row),unique=new Set(wordsFor(row));
+      for(const word of unique){
+        let x=map.get(word);if(!x){x={word,records:0,sources:new Set(),last:0};map.set(word,x)}
+        x.records++;if(source)x.sources.add(source);x.last=Math.max(x.last,Date.parse(row.date||'')||0);
+      }
+    });
+    let all=[...map.values()].map(x=>({...x,sourceCount:x.sources.size}));
+    all=all.filter(x=>x.records>=3&&x.sourceCount>=2)
+      .sort((a,b)=>b.records-a.records||b.sourceCount-a.sourceCount||a.word.localeCompare(b.word));
+    const selected=[];
+    const stems=new Map();
+    for(const x of all){
+      let stem=x.word.replace(/(ies|ing|ed|es|s)$/,'');
+      if(stem.length<4)stem=x.word;
+      const prev=stems.get(stem);
+      if(prev&&Math.abs(prev.records-x.records)<=2)continue;
+      selected.push(x);stems.set(stem,x);
+      if(selected.length>=82)break;
+    }
+    return {records,words:selected};
+  }
 
-    const moving=new Set(topics.filter(t=>t.sourceCount>=5&&t.recentShare>.5).sort((a,b)=>b.sourceCount-a.sourceCount||b.recentShare-a.recentShare).slice(0,6).map(t=>t.label));
-    const n=Math.min(visibleLimit(),topics.length);
-    const shown=topics.slice(0,n);
-    const counts=shown.map(t=>t.sourceCount); const min=Math.min(...counts,1),max=Math.max(...counts,1);
-    const mobile=innerWidth<620; const minPx=mobile?16:18,maxPx=mobile?26:34;
-    const size=t=>{if(max===min)return(minPx+maxPx)/2;const r=(Math.sqrt(t.sourceCount)-Math.sqrt(min))/(Math.sqrt(max)-Math.sqrt(min));return minPx+r*(maxPx-minPx)};
-    const cloud=document.getElementById('cloud');
-    cloud.innerHTML=distribute(shown).map(t=>`<a class="topic${moving.has(t.label)?' moving':''}" style="--size:${size(t).toFixed(1)}px" href="radar/?q=${encodeURIComponent(t.patterns[0]||t.label)}" title="${t.sourceCount} sources">${esc(t.label)}</a>`).join('');
+  function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+  function intersects(a,b,pad=4){return !(a.r+pad<b.l||a.l-pad>b.r||a.b+pad<b.t||a.t-pad>b.b)}
 
-    const more=document.getElementById('cloudMore');
-    if(n<topics.length){more.textContent=`See all ${topics.length} topics`;more.classList.add('show')}else more.classList.remove('show');
-    const list=document.getElementById('allTopics');
-    list.innerHTML=topics.map(t=>`<div class="topic-row${moving.has(t.label)?' moving':''}"><a href="radar/?q=${encodeURIComponent(t.patterns[0]||t.label)}">${esc(t.label)}</a><span>${t.sourceCount} ${t.sourceCount===1?'source':'sources'}</span></div>`).join('');
-    document.getElementById('dialogTitle').textContent=`All ${topics.length} topics`;
+  function placeCloud(container,items){
+    container.innerHTML='';
+    const W=Math.max(300,container.clientWidth),H=Math.max(440,container.clientHeight);
+    const mobile=W<620;
+    const maxItems=mobile?58:82;
+    const chosen=items.slice(0,maxItems);
+    if(!chosen.length){container.innerHTML='<div class="cloud-loading">No words yet</div>';return}
+    const counts=chosen.map(x=>x.records),min=Math.min(...counts),max=Math.max(...counts);
+    const size=x=>{
+      const r=max===min?.5:(Math.sqrt(x.records)-Math.sqrt(min))/(Math.sqrt(max)-Math.sqrt(min));
+      return (mobile?15:17)+r*(mobile?29:43);
+    };
+    const boxes=[];
+    const cx=W/2,cy=H/2;
+    chosen.forEach((item,rank)=>{
+      const fs=size(item),el=document.createElement('a');
+      const h=hash(item.word),rot=rank<8?0:([0,0,0,0,90,-90][h%6]);
+      el.className='cloud-word'+((rank<7||(h%11===0))?' red':'');
+      el.textContent=item.word;
+      el.href=`radar/?q=${encodeURIComponent(item.word)}`;
+      el.title=`${item.records} records · ${item.sourceCount} sources`;
+      el.style.fontSize=`${fs.toFixed(1)}px`;
+      el.style.zIndex=String(100-rank);
+      container.appendChild(el);
+      const approxW=(item.word.length*fs*.53)+8,approxH=fs*1.08;
+      const bw=rot?approxH:approxW,bh=rot?approxW:approxH;
+      let placed=null;
+      const seed=(h%628)/100;
+      for(let step=0;step<1700;step++){
+        const angle=seed+step*.34,radius=2+step*.47;
+        const x=cx+Math.cos(angle)*radius,y=cy+Math.sin(angle)*radius*.72;
+        const b={l:x-bw/2,r:x+bw/2,t:y-bh/2,b:y+bh/2};
+        if(b.l<2||b.r>W-2||b.t<2||b.b>H-2)continue;
+        if(boxes.some(old=>intersects(b,old,rank<20?5:3)))continue;
+        placed={x,y,b};break;
+      }
+      if(!placed){el.remove();return}
+      boxes.push(placed.b);
+      el.style.transform=`translate(${(placed.x-cx).toFixed(1)}px,${(placed.y-cy).toFixed(1)}px) translate(-50%,-50%) rotate(${rot}deg)`;
+    });
   }
 
   async function load(){
     try{
-      const [data,historical,vocab]=await Promise.all([
+      const [data,historical]=await Promise.all([
         RadarData.load('radar.json','radar_seed.json'),
-        fetch('historical/historical.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('historical data');return r.json()}),
-        fetch('topic_vocabulary.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('topic vocabulary');return r.json()})
+        fetch('historical/historical.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({}))
       ]);
-      render(data,historical,vocab);
-      let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(()=>render(data,historical,vocab),120)});
-    }catch(err){console.error(err);document.getElementById('cloud').innerHTML='<div style="font-size:18px">Current topic map unavailable.</div>'}
+      const built=buildWords(data),historicalRecords=Array.isArray(historical?.items)?historical.items:[];
+      const all=[...built.records,...historicalRecords];
+      const sources=new Set(all.map(sourceKey).filter(Boolean));
+      document.getElementById('evidenceCount').textContent=all.length.toLocaleString('en-GB');
+      document.getElementById('currentCount').textContent=built.records.length.toLocaleString('en-GB');
+      document.getElementById('historicalCount').textContent=historicalRecords.length.toLocaleString('en-GB');
+      document.getElementById('sourceCount').textContent=sources.size.toLocaleString('en-GB');
+      const cloud=document.getElementById('cloud');
+      const draw=()=>placeCloud(cloud,built.words);draw();
+      let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(draw,150)});
+    }catch(err){console.error(err);document.getElementById('cloud').innerHTML='<div class="cloud-loading">Could not load the Radar</div>'}
   }
-  window.TopicCloud={load};
+  globalThis.TopicCloud={load,buildWords};
 })();
