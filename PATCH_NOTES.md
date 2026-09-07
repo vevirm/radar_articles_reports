@@ -1,3 +1,9 @@
+# v21.14
+
+- Fixes Main workflow regression caused by GitHub browser uploads retaining old `tests/test_*.py` files.
+- Main workflow now executes only the current bundled test suite (`test_all.py` / `all_tests.zip`), so stale remote test files cannot be rediscovered.
+- No scanner logic, radar data, Historical data, schedule, concurrency, or page logic changed from v21.13.
+
 # v21.13 — two-hour alternating scanner cadence
 
 - Main scheduled starts: 00:17 / 04:17 / 08:17 / 12:17 / 16:17 / 20:17 UTC.
