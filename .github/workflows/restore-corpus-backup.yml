@@ -1,0 +1,75 @@
+name: RESTORE Corpus Backup
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+# Restoration also waits for Main/Historical rather than racing them.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install scanner dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore exact pre-cleanup radar.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -f backups/one-time-corpus-cleanup/LATEST_BACKUP.txt ]]; then
+            echo '::error::No one-time cleanup backup exists. Nothing was changed.'
+            exit 1
+          fi
+          backup="$(cat backups/one-time-corpus-cleanup/LATEST_BACKUP.txt)"
+          if [[ ! -f "$backup" ]]; then
+            echo "::error::Backup file is missing: $backup"
+            exit 1
+          fi
+          cp "$backup" radar.json
+          echo "Restored radar.json from $backup"
+
+      - name: Validate restored corpus
+        run: |
+          python scripts/validate_scanner_output.py radar.json
+          python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Commit restoration
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add radar.json
+          if git diff --cached --quiet; then
+            echo 'radar.json already matches the backup; nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'Restore Radar corpus from pre-cleanup backup'
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo '## Corpus restore' >> "$GITHUB_STEP_SUMMARY"
+          echo 'The restore action only replaces radar.json with the exact pre-cleanup backup. Scanner code, workflows, scan_state files, and configuration are not changed.' >> "$GITHUB_STEP_SUMMARY"
