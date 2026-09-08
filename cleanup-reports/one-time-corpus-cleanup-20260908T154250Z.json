@@ -1,0 +1,105 @@
+{
+  "operation": "one_time_inherited_ab_cleanup",
+  "completed_at_utc": "20260908T154250Z",
+  "policy": {
+    "scope": [
+      "strand_a",
+      "strand_b"
+    ],
+    "strand_c_touched": false,
+    "frontier_evidence_touched": false,
+    "scan_state_touched": false,
+    "cleanup_marker_only_top_level_change": true,
+    "surviving_records_rewritten": false,
+    "network_failure_policy": "KEEP",
+    "deletion_standard": "scanner high-confidence precision rules, hard integrity failures, exact same-strand duplicates, superseded primary landing pages, and six explicitly reviewed Strand-B candidates only when reliable source refresh still fails the current B gate"
+  },
+  "before": {
+    "strand_a": 318,
+    "strand_b": 12,
+    "total_ab": 330
+  },
+  "after": {
+    "strand_a": 317,
+    "strand_b": 9,
+    "total_ab": 326
+  },
+  "removed": {
+    "strand_a": 1,
+    "strand_b": 3,
+    "total_ab": 4
+  },
+  "decisions": {
+    "scanner_precision_removed": 0,
+    "hard_integrity_removed": 0,
+    "approved_b_recheck_removed": 3,
+    "approved_b_recheck_kept": 2,
+    "approved_b_refresh_unavailable_kept": 1,
+    "duplicate_removed": 0,
+    "superseded_landing_removed": 1
+  },
+  "scanner_surgical_stats": {
+    "strand_a_removed": 0,
+    "strand_b_removed": 0,
+    "stored_pass": 330,
+    "refreshed_pass": 0,
+    "refresh_unavailable": 0
+  },
+  "snowball_safety": {
+    "scan_state_preserved": true,
+    "seed_candidates_before": 20,
+    "seed_candidates_after": 20,
+    "saved_cursor_before": 60,
+    "saved_cursor_after_cleanup": 60,
+    "next_selector_cursor_after_modulo": 80
+  },
+  "backup_path": "backups/one-time-corpus-cleanup/radar-before-cleanup-20260908T154250Z.json",
+  "old_sha256": "12b7a1079880082adebf625db4bdb48c9bf069eda557179711b4e893740e8859",
+  "new_sha256": "d9d242555f9dfd96090b6a36a196d9db9e1da7a9d82b321c9aae6d183810d327",
+  "removed_records": [
+    {
+      "strand": "B",
+      "title": "Scenario Planning and Organizational Sustainability: A Literature Review and Conceptual Model",
+      "link": "https://doi.org/10.1002/bse.71191",
+      "date": "2026-07-08",
+      "first_seen": "",
+      "reason": "approved_historical_B_contamination_confirmed_after_source_refresh",
+      "refreshed_gate": {
+        "aboutness_reason": "no_direct_eu"
+      },
+      "refreshed_title": "Scenario Planning and Organizational Sustainability: A Literature Review and Conceptual Model"
+    },
+    {
+      "strand": "B",
+      "title": "Stochastic resonance: advanced theories, novel methodologies, and cutting-edge applications in weak signal detection",
+      "link": "https://doi.org/10.1007/s11071-026-12746-8",
+      "date": "2026-07-01",
+      "first_seen": "",
+      "reason": "approved_historical_B_contamination_confirmed_after_source_refresh",
+      "refreshed_gate": {
+        "aboutness_reason": "no_direct_eu"
+      },
+      "refreshed_title": "Stochastic resonance: advanced theories, novel methodologies, and cutting-edge applications in weak signal detection - Nonlinear Dynamics"
+    },
+    {
+      "strand": "B",
+      "title": "Scientific foundations of Horizon Scanning methodology for early signal identification in healthcare",
+      "link": "https://doi.org/10.32352/0367-3057.3.26.03",
+      "date": "2026-05-26",
+      "first_seen": "",
+      "reason": "approved_historical_B_contamination_confirmed_after_source_refresh",
+      "refreshed_gate": {
+        "aboutness_reason": "no_direct_eu"
+      },
+      "refreshed_title": "Scientific foundations of Horizon Scanning methodology for early signal identification in healthcare"
+    },
+    {
+      "strand": "A",
+      "title": "Proposal for the Cloud and AI Development Act (CADA)",
+      "link": "https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada",
+      "date": "2026-06-03",
+      "first_seen": "2026-09-08T09:59Z",
+      "reason": "superseded_landing_page_primary_document_retained"
+    }
+  ]
+}
