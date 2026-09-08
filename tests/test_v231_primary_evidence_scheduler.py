@@ -147,13 +147,42 @@ class V231PrimaryEvidenceSchedulerTests(unittest.TestCase):
         self.assertTrue(pdf_parser.called)
 
     def test_primary_target_is_incomplete_when_only_landing_page_is_saved(self):
-        baseline = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
         spec = {
             'url': 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada',
             'source': 'European Commission — Digital Strategy', 'tier': 1,
             'label': 'Cloud and AI Development Act (CADA) proposal',
         }
-        self.assertFalse(sr._primary_target_present(spec, baseline))
+        # Regression fixtures must not depend on the live cumulative radar.json: once the
+        # scanner successfully discovers the PDF, a live-corpus fixture would invert this
+        # test's premise and make success break the next scheduled run.
+        previous = {'strand_a': [{
+            'title': 'Proposal for the Cloud and AI Development Act (CADA)',
+            'source': 'European Commission — Digital Strategy',
+            'date': '2026-06-03',
+            'link': spec['url'],
+            'landing_page_url': spec['url'],
+            'primary_document_role': 'landing_page',
+            'source_integrity_basis': 'institution_html',
+        }]}
+        self.assertFalse(sr._primary_target_present(spec, previous))
+
+    def test_primary_target_is_incomplete_when_only_companion_annex_is_saved(self):
+        spec = {
+            'url': 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada',
+            'source': 'European Commission — Digital Strategy', 'tier': 1,
+            'label': 'Cloud and AI Development Act (CADA) proposal',
+        }
+        previous = {'strand_a': [{
+            'title': 'Cloud and AI Development Act (CADA) — Annexes',
+            'source': 'European Commission — Digital Strategy',
+            'date': '2026-06-03',
+            'link': 'https://ec.europa.eu/newsroom/dae/redirection/document/129112',
+            'landing_page_url': spec['url'],
+            'primary_evidence_target_label': spec['label'],
+            'primary_document_role': 'annex',
+            'source_integrity_basis': 'institution_pdf',
+        }]}
+        self.assertFalse(sr._primary_target_present(spec, previous))
 
     def test_primary_target_is_complete_when_downloadable_primary_document_is_saved(self):
         spec = {
@@ -174,16 +203,25 @@ class V231PrimaryEvidenceSchedulerTests(unittest.TestCase):
         self.assertTrue(sr._primary_target_present(spec, previous))
 
     def test_merge_upgrades_landing_wrapper_without_fake_new_item_or_losing_first_seen(self):
-        baseline = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        old = next(x for x in baseline['strand_a'] if 'Cloud and AI Development Act' in x.get('title', ''))
-        landing = old['link']
+        landing = 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada'
+        old = {
+            'title': 'Proposal for the Cloud and AI Development Act (CADA)',
+            'source': 'European Commission — Digital Strategy',
+            'date': '2026-06-03',
+            'link': landing,
+            'landing_page_url': landing,
+            'strand': 'A',
+            'source_integrity_basis': 'institution_html',
+            'first_seen': '2026-09-08T09:59Z',
+            'new_this_scan': False,
+        }
         new = copy.deepcopy(old)
         new.update({
             'title': 'Proposal for a Regulation on Cloud and AI Development',
             'link': 'https://ec.europa.eu/newsroom/dae/redirection/document/129200',
             'landing_page_url': landing,
             'primary_document_role': 'proposal',
-            'source_integrity_basis': 'institution PDF',
+            'source_integrity_basis': 'institution_pdf',
             'primary_evidence_upgrade': True,
             'primary_evidence_upgrade_from_link': landing,
             'primary_evidence_upgrade_from_title': old['title'],
@@ -195,6 +233,59 @@ class V231PrimaryEvidenceSchedulerTests(unittest.TestCase):
         self.assertEqual(merged[0]['landing_page_url'], landing)
         self.assertEqual(merged[0]['first_seen'], old['first_seen'])
         self.assertFalse(merged[0]['new_this_scan'])
+
+    def test_merge_does_not_readd_landing_wrapper_discovered_in_parallel_with_pdf(self):
+        landing = 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada'
+        old = {
+            'title': 'Proposal for the Cloud and AI Development Act (CADA)',
+            'source': 'European Commission — Digital Strategy',
+            'date': '2026-06-03',
+            'link': landing, 'landing_page_url': landing, 'strand': 'A',
+            'source_integrity_basis': 'institution_html',
+            'first_seen': '2026-09-08T09:59Z', 'new_this_scan': False,
+        }
+        pdf = {
+            **old,
+            'title': 'Proposal for a Regulation on Cloud and AI Development',
+            'link': 'https://ec.europa.eu/newsroom/dae/redirection/document/129200',
+            'primary_document_role': 'proposal',
+            'source_integrity_basis': 'institution_pdf',
+            'primary_evidence_upgrade': True,
+            'primary_evidence_upgrade_from_link': landing,
+        }
+        rediscovered_wrapper = {**old, 'new_this_scan': True}
+        merged = sr.merge_corpus([old], [pdf, rediscovered_wrapper], 'A', '2026-09-08T12:00Z')
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]['link'], pdf['link'])
+        self.assertEqual(merged[0]['first_seen'], old['first_seen'])
+        self.assertFalse(merged[0]['new_this_scan'])
+
+    def test_merge_repairs_existing_wrapper_duplicate_when_primary_is_already_saved(self):
+        landing = 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada'
+        wrapper = {
+            'title': 'Proposal for the Cloud and AI Development Act (CADA)',
+            'source': 'European Commission — Digital Strategy', 'date': '2026-06-03',
+            'link': landing, 'landing_page_url': landing, 'strand': 'A',
+            'source_integrity_basis': 'institution_html',
+            'first_seen': '2026-09-08T09:59Z', 'new_this_scan': False,
+        }
+        pdf = {
+            'title': 'Proposal for a Regulation on Cloud and AI Development',
+            'source': 'European Commission — Digital Strategy', 'date': '2026-06-03',
+            'link': 'https://ec.europa.eu/newsroom/dae/redirection/document/129200',
+            'landing_page_url': landing, 'strand': 'A',
+            'primary_document_role': 'proposal', 'source_integrity_basis': 'institution_pdf',
+            'first_seen': '2026-09-08T10:10Z', 'new_this_scan': False,
+        }
+        merged = sr.merge_corpus([wrapper, pdf], [], 'A', '2026-09-08T12:00Z')
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]['link'], pdf['link'])
+        self.assertEqual(merged[0]['first_seen'], wrapper['first_seen'])
+
+    def test_workflow_cumulative_guard_accepts_primary_wrapper_upgrade(self):
+        workflow = (ROOT / '.github' / 'workflows' / 'radar-scan.yml').read_text(encoding='utf-8')
+        self.assertIn('def primary_upgrade_landings(items):', workflow)
+        self.assertIn('link in upgraded_landings', workflow)
 
     def test_open_call_is_precursor_not_public_done_event(self):
         claim = 'The EU launched a call for tenders to establish up to seven AI Gigafactories across Europe.'

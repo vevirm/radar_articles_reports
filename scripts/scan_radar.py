@@ -9937,14 +9937,18 @@ def _primary_page_publication_date(soup: BeautifulSoup, page_url: str, title: st
 
 
 def _primary_target_present(spec: dict[str, Any], previous: dict[str, Any]) -> bool:
-    """True only when the target is already backed by a substantive primary document.
+    """True only when the target is already backed by the *right* primary document.
 
-    A prior landing-page-only admission is intentionally *not* considered complete: the
-    new deep lane should revisit it and upgrade the saved record to the downloadable
-    proposal/report when possible.
+    A prior landing-page-only admission is intentionally not considered complete. For a
+    target explicitly labelled as a proposal/report, a companion annex or impact
+    assessment is not enough either: the deep lane must keep revisiting the hub until the
+    proposal/report itself has been recovered.
     """
     target_url = normalized_link(spec.get("url"))
-    label = norm_title(clean_text(spec.get("label")))
+    raw_label = clean_text(spec.get("label"))
+    label = norm_title(raw_label)
+    expected_role = _primary_document_role(raw_label)
+    role_is_required = expected_role in {"proposal", "report"}
     for key in ("strand_a", "strand_b", AB_ARCHIVE_KEY, "frontier_evidence"):
         for row in previous.get(key, []) if isinstance(previous.get(key), list) else []:
             if not isinstance(row, dict):
@@ -9962,6 +9966,10 @@ def _primary_target_present(spec: dict[str, Any], previous: dict[str, Any]) -> b
             link = normalized_link(row.get("link") or row.get("url"))
             role = normalized(row.get("primary_document_role"))
             basis = normalized(row.get("source_integrity_basis"))
+            if role_is_required and role != expected_role:
+                # Do not let an annex/SWD/impact assessment make a proposal/report target
+                # look complete. Those are useful companion documents, not the target.
+                continue
             if link and link != target_url and role != "landing_page" and (
                 basis == "institution pdf"
                 or ".pdf" in normalized(urlparse(link).path)
@@ -13109,14 +13117,68 @@ def rebalance_active_core(
 def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]], strand_name: str, now_iso: str) -> list[dict[str, Any]]:
     """Merge admitted A/B items without deleting earlier accepted material.
 
-    A rediscovered item is refreshed but is not labelled NEW again.  MAX_CORPUS is
+    A rediscovered item is refreshed but is not labelled NEW again. MAX_CORPUS is
     an optional safety cap; 0 means unlimited, which is the default for this build.
+
+    Primary-source hubs are special: once a substantive downloadable document is known,
+    the HTML landing-page wrapper is navigation metadata, not a second evidence item. This
+    merge therefore removes stale wrappers and suppresses wrappers rediscovered in the same
+    scan, while preserving the wrapper's earliest ``first_seen`` on the deeper document.
     """
     merged: dict[str, dict[str, Any]] = {}
-    # A deep primary-document rediscovery may have a different formal PDF title from the
-    # older landing-page wrapper. Treat that as a source upgrade of the same evidence, not
-    # as a new finding. The old first_seen survives and the wrapper URL remains recorded in
-    # landing_page_url / primary_evidence_upgrade_from_link.
+
+    def primary_landing(row: dict[str, Any]) -> str:
+        return normalized_link(row.get("landing_page_url"))
+
+    def row_link(row: dict[str, Any]) -> str:
+        return normalized_link(row.get("link") or row.get("url"))
+
+    def substantive_primary_landing(row: dict[str, Any]) -> str:
+        """Landing URL when *row* is a genuine downloaded primary object behind it."""
+        landing = primary_landing(row)
+        link = row_link(row)
+        if not landing or not link or landing == link:
+            return ""
+        role = normalized(row.get("primary_document_role"))
+        basis = normalized(row.get("source_integrity_basis"))
+        if role == "landing_page":
+            return ""
+        if (
+            basis == "institution pdf"
+            or ".pdf" in normalized(urlparse(link).path)
+            or "download-handler" in normalized(link)
+            or "/redirection/document/" in normalized(urlparse(link).path)
+        ):
+            return landing
+        return ""
+
+    # Build this from BOTH saved and newly discovered rows. This repairs an already-saved
+    # wrapper+PDF duplicate even when the primary target is now ALREADY_PRESENT and the
+    # dedicated recovery lane correctly skips another network fetch.
+    substantive_landings: set[str] = set()
+    for row in list(previous) + list(new_items):
+        if isinstance(row, dict):
+            landing = substantive_primary_landing(row)
+            if landing:
+                substantive_landings.add(landing)
+
+    # Earliest wrapper observation is evidence-history metadata. If the wrapper is replaced
+    # by its downloadable object, carry that timestamp forward rather than pretending the
+    # deeper URL was a brand-new discovery.
+    wrapper_first_seen: dict[str, str] = {}
+    for old in previous:
+        if not isinstance(old, dict):
+            continue
+        link = row_link(old)
+        landing = primary_landing(old) or link
+        if link and link == landing and landing in substantive_landings:
+            seen = clean_text(old.get("first_seen"))
+            if seen and (landing not in wrapper_first_seen or seen < wrapper_first_seen[landing]):
+                wrapper_first_seen[landing] = seen
+
+    # Explicit evidence upgrades remain useful provenance, but wrapper suppression is no
+    # longer dependent on the flag: ordinary institutional discovery can rediscover the
+    # same landing page in parallel with the deep primary-document lane.
     upgrade_by_landing: dict[str, dict[str, Any]] = {}
     for item in new_items:
         if not isinstance(item, dict) or not item.get("primary_evidence_upgrade"):
@@ -13124,30 +13186,44 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
         landing = normalized_link(item.get("landing_page_url") or item.get("primary_evidence_upgrade_from_link"))
         if landing:
             upgrade_by_landing[landing] = item
-    upgrade_first_seen: dict[str, str] = {}
+
+    upgrade_first_seen: dict[str, str] = dict(wrapper_first_seen)
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
         # The geopolitical-setting rule is a Strand-C weak-signal rule only.
         # A/B are the Radar's cumulative evidence strands: a previously accepted
         # paper/report/primary source must never be reclassified as a weak signal
-        # merely because its title happens to describe EU funding.  Applying the C
+        # merely because its title happens to describe EU funding. Applying the C
         # funding gate here used to delete valid A rows during merge and then trip
         # the workflow's cumulative-corpus safety check.
         if not record_source_integrity_ok(old) or not record_date_integrity_ok(old):
             _diag_inc("signal_reject_record_integrity")
             continue
-        old_link = normalized_link(old.get("link") or old.get("url"))
-        old_landing = normalized_link(old.get("landing_page_url")) or old_link
+        old_link = row_link(old)
+        old_landing = primary_landing(old) or old_link
+        # Once a substantive primary object is present, the hub itself is no longer a
+        # separate corpus item. This also cleans up wrapper duplicates left by older runs.
+        if old_landing in substantive_landings and old_link == old_landing:
+            seen = clean_text(old.get("first_seen"))
+            if seen and (old_landing not in upgrade_first_seen or seen < upgrade_first_seen[old_landing]):
+                upgrade_first_seen[old_landing] = seen
+            continue
         if old_landing in upgrade_by_landing and old_link == old_landing:
             upgrade_first_seen[old_landing] = clean_text(old.get("first_seen"))
             continue
         internal = internalize_previous(old)
+        landing = substantive_primary_landing(internal)
+        inherited_seen = upgrade_first_seen.get(landing, "") if landing else ""
+        current_seen = clean_text(internal.get("first_seen"))
+        if inherited_seen and (not current_seen or inherited_seen < current_seen):
+            internal["first_seen"] = inherited_seen
         key = identity(internal)
         if key == "title:":
             continue
         internal["new_this_scan"] = False
         merged[key] = internal
+
     new_ids: set[str] = set()
     for item in new_items:
         if not isinstance(item, dict) or signal_is_retired(item) or not english_public_item_ok(item):
@@ -13157,16 +13233,26 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
             continue
         if item.get("strand") not in {strand_name, "both"}:
             continue
+        link = row_link(item)
+        landing = primary_landing(item) or link
+        # Generic institution parsing may rediscover the hub in the same scan that the
+        # deep lane recovers its PDF. Never re-add the wrapper after removing/upgrading it.
+        if link and link == landing and landing in substantive_landings:
+            continue
         key = identity(item)
         if key == "title:":
             continue
         existing = merged.get(key)
-        landing = normalized_link(item.get("landing_page_url") or item.get("primary_evidence_upgrade_from_link"))
-        upgrade_seen = upgrade_first_seen.get(landing, "") if item.get("primary_evidence_upgrade") else ""
-        if existing is None and not upgrade_seen:
+        substantive_landing = substantive_primary_landing(item)
+        inherited_seen = upgrade_first_seen.get(substantive_landing, "") if substantive_landing else ""
+        explicit_landing = normalized_link(item.get("landing_page_url") or item.get("primary_evidence_upgrade_from_link"))
+        upgrade_seen = upgrade_first_seen.get(explicit_landing, "") if item.get("primary_evidence_upgrade") else ""
+        preserved_seen = inherited_seen or upgrade_seen
+        if existing is None and not preserved_seen:
             new_ids.add(key)
-        first_seen = existing.get("first_seen") if existing else (upgrade_seen or now_iso)
+        first_seen = existing.get("first_seen") if existing else (preserved_seen or now_iso)
         merged[key] = {**item, "first_seen": first_seen, "new_this_scan": key in new_ids}
+
     vals = list(merged.values())
     vals.sort(key=lambda x: (not bool(x.get("new_this_scan")),) + rank_candidate(x))
     if MAX_CORPUS > 0:
