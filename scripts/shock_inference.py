@@ -18,7 +18,7 @@ import re
 from datetime import datetime, timezone
 from typing import Any, Iterable
 
-PROFILE_VERSION = "21.2-passport-balanced-shocks-v2"
+PROFILE_VERSION = "23.3-context-weighted-shocks-v3"
 
 
 def _clean(v: Any) -> str:
@@ -59,8 +59,14 @@ def _quality(x: dict[str, Any]) -> int:
     typ = _low(x.get("type") or x.get("itemType") or x.get("signal_kind") or x.get("signal_type"))
     source = _clean(x.get("source") or x.get("journal") or x.get("institution"))
     strand = _clean(x.get("_strand") or x.get("strand")).upper()
+    try:
+        merit = int(round(float(x.get("source_merit_score")))) if x.get("source_merit_score") not in (None, "") else 0
+    except Exception:
+        merit = 0
 
-    if "tier 1" in tier:
+    if merit:
+        score = max(0, min(100, merit))
+    elif "tier 1" in tier:
         score = 96
     elif "priority journal" in tier:
         score = 94
@@ -332,9 +338,30 @@ def _unique_text(items: Iterable[str], limit: int = 6) -> list[str]:
 
 
 def _rows(data: dict[str, Any]) -> list[dict[str, Any]]:
+    """Build substantive inference rows with explicit evidence roles.
+
+    Strand B is intentionally absent: it is a methods library. Strand C and trusted-media
+    strategic-pathway rows are contextual evidence only. Historical Strand-A rows are also
+    contextual and can never be marked fresh.
+    """
     out: list[dict[str, Any]] = []
     seen: set[str] = set()
-    for key, prefix in (("strand_a", "A"), ("strand_b", "B"), ("strand_c", "C"), ("strategic_pathways", "P")):
+    weights = data.get("shock_inference_weights") if isinstance(data.get("shock_inference_weights"), dict) else {}
+    try:
+        weak_weight = max(0.0, min(1.0, float(weights.get("weak_signal", 0.30))))
+    except Exception:
+        weak_weight = 0.30
+    try:
+        historical_weight = max(0.0, min(1.0, float(weights.get("historical_context", 0.45))))
+    except Exception:
+        historical_weight = 0.45
+
+    for key, prefix in (
+        ("strand_a", "A"),
+        ("strand_c", "C"),
+        ("strategic_pathways", "P"),
+        ("historical_context", "H"),
+    ):
         xs = data.get(key, [])
         if not isinstance(xs, list):
             continue
@@ -349,6 +376,25 @@ def _rows(data: dict[str, Any]) -> list[dict[str, Any]]:
             row["_row"] = f"{prefix}{i:03d}"
             row["_strand"] = prefix
             row["_identity"] = ident
+            role = _low(row.get("evidence_role"))
+            basis = _low((row.get("source_quality_gate") or {}).get("basis") if isinstance(row.get("source_quality_gate"), dict) else "")
+            if prefix == "H":
+                evidence_weight = historical_weight
+                context_kind = "historical"
+                row["new_this_scan"] = False
+            elif prefix == "C" or row.get("context_only") or role in {"weak_signal", "weak signal", "weak_signal_context", "weak signal context"} or (not role and basis == "configured_current_event_source"):
+                try:
+                    evidence_weight = float(row.get("analytical_weight", weak_weight) or weak_weight)
+                except Exception:
+                    evidence_weight = weak_weight
+                evidence_weight = max(0.0, min(weak_weight, evidence_weight))
+                context_kind = "weak_signal"
+            else:
+                evidence_weight = 1.0
+                context_kind = "primary"
+            row["_evidence_weight"] = evidence_weight
+            row["_context_kind"] = context_kind
+            row["_primary_evidence"] = bool(evidence_weight >= 0.999 and context_kind == "primary")
             row["_quality"] = _quality(row)
             row["_text"] = _text(row)
             out.append(row)
@@ -397,13 +443,15 @@ def _snapshot(x: dict[str, Any], role: str) -> dict[str, Any]:
         "row": x.get("_row", ""),
         "strand": x.get("_strand", ""),
         "role": role,
+        "evidence_role": _clean(x.get("evidence_role") or x.get("_context_kind") or "primary_evidence"),
+        "analytical_weight": round(float(x.get("_evidence_weight", 1.0) or 0.0), 2),
         "title": _clean(x.get("title") or x.get("headline") or x.get("what") or "Evidence"),
         "source": _clean(x.get("source") or x.get("journal") or x.get("institution")),
         "date": _clean(x.get("date")),
         "link": _clean(x.get("link") or x.get("url")),
         "quality": int(x.get("_quality", _quality(x))),
         "new_this_scan": bool(x.get("new_this_scan")),
-        "core_message": _clean(x.get("core_message") or x.get("summary") or x.get("relevance_note"))[:800],
+        "core_message": _clean(x.get("core_message") or x.get("summary") or x.get("relevance_note") or x.get("reader_point"))[:800],
         "geo_evidence": list(x.get("geo_evidence") or [])[:4] if isinstance(x.get("geo_evidence"), list) else [],
         "ri_evidence": list(x.get("ri_evidence") or [])[:4] if isinstance(x.get("ri_evidence"), list) else [],
         "a_context_evidence": list(x.get("a_context_evidence") or [])[:4] if isinstance(x.get("a_context_evidence"), list) else [],
@@ -421,54 +469,84 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
         return None
 
     coupling = [x for x in asset_rows if _match(pressure_pattern, x)]
-    touched = [x for x in asset_rows + pressure_rows if x.get("new_this_scan")]
-    if not touched or not coupling:
+    primary_asset = [x for x in asset_rows if x.get("_primary_evidence")]
+    primary_pressure = [x for x in pressure_rows if x.get("_primary_evidence")]
+    primary_coupling = [x for x in coupling if x.get("_primary_evidence")]
+    # Context may corroborate an already-supported seam, but cannot supply a missing primary
+    # capability, pressure or coupling.
+    if not primary_asset or not primary_pressure or not primary_coupling:
         return None
-    fresh_coupling = any(x.get("new_this_scan") for x in coupling)
 
-    # Anchor both sides with strong evidence.  A fresh row is deliberately retained
-    # when relevant even if an older Tier-1 row would otherwise crowd it out.
-    chosen: list[tuple[dict[str, Any], str]] = []
+    touched = [
+        x for x in asset_rows + pressure_rows
+        if x.get("new_this_scan") and x.get("_context_kind") != "historical"
+    ]
+    if not touched:
+        return None
+    # NEW shocks require fresh primary coupling. A new C/news item can update an existing
+    # hypothesis but cannot create one.
+    fresh_coupling = any(x.get("new_this_scan") for x in primary_coupling)
+
+    chosen_primary: list[tuple[dict[str, Any], str]] = []
+    chosen_context: list[tuple[dict[str, Any], str]] = []
     used: set[str] = set()
 
-    def add(pool: Iterable[dict[str, Any]], role: str, limit: int, prefer_new: bool = False, focus_pattern: str | None = None) -> None:
+    def add_primary(pool: Iterable[dict[str, Any]], role: str, limit: int, prefer_new: bool = False, focus_pattern: str | None = None) -> None:
         for x in _dedupe_pick(pool, limit=limit, prefer_new=prefer_new, focus_pattern=focus_pattern):
             ident = str(x.get("_identity"))
             if ident in used:
                 continue
             used.add(ident)
-            chosen.append((x, role))
+            chosen_primary.append((x, role))
 
-    add([x for x in coupling if x.get("new_this_scan")], "New coupling evidence", 1, True, asset_pattern)
-    add([x for x in touched if x.get("new_this_scan")], "New evidence", 1, True, asset_pattern)
-    add(coupling, "Capability × external mechanism", 1, False, asset_pattern)
-    add(asset_rows, f"European capability: {asset_label}", 2, False, asset_pattern)
-    add(pressure_rows, f"External mechanism: {pressure_label}", 2, False, pressure_pattern)
+    def add_context(pool: Iterable[dict[str, Any]], role: str, limit: int, prefer_new: bool = False, focus_pattern: str | None = None) -> None:
+        for x in _dedupe_pick(pool, limit=limit, prefer_new=prefer_new, focus_pattern=focus_pattern):
+            ident = str(x.get("_identity"))
+            if ident in used:
+                continue
+            used.add(ident)
+            chosen_context.append((x, role))
 
-    if len(chosen) < 4:
+    add_primary([x for x in primary_coupling if x.get("new_this_scan")], "New primary coupling evidence", 1, True, asset_pattern)
+    add_primary([x for x in touched if x.get("_primary_evidence")], "New primary evidence", 1, True, asset_pattern)
+    add_primary(primary_coupling, "Capability × external mechanism", 1, False, asset_pattern)
+    add_primary(primary_asset, f"European capability: {asset_label}", 2, False, asset_pattern)
+    add_primary(primary_pressure, f"External mechanism: {pressure_label}", 2, False, pressure_pattern)
+
+    if len(chosen_primary) < 4:
         return None
-    sources = {_low(x.get("source")) for x, _ in chosen if _clean(x.get("source"))}
+    sources = {
+        _low(x.get("source") or x.get("journal") or x.get("institution"))
+        for x, _ in chosen_primary if _clean(x.get("source") or x.get("journal") or x.get("institution"))
+    }
     if len(sources) < 3:
         return None
-    qualities = [int(x.get("_quality", 0)) for x, _ in chosen]
+    qualities = [int(x.get("_quality", 0)) for x, _ in chosen_primary]
     if max(qualities, default=0) < 90:
         return None
     avg = sum(qualities) / max(1, len(qualities))
     if avg < 82:
         return None
+    if max((_quality(x) for x in primary_asset), default=0) < 88:
+        return None
+    if max((_quality(x) for x in primary_pressure), default=0) < 88:
+        return None
 
-    # At least one strong source has to anchor the capability and one strong source
-    # the external mechanism; this prevents a single low-quality fresh item from
-    # creating a shock by itself.
-    if max((_quality(x) for x in asset_rows), default=0) < 88:
-        return None
-    if max((_quality(x) for x in pressure_rows), default=0) < 88:
-        return None
+    # Add only a small number of contextual rows after the primary gates have passed.
+    weak_rows = [x for x in asset_rows + pressure_rows if x.get("_context_kind") == "weak_signal"]
+    historical_rows = [x for x in asset_rows + pressure_rows if x.get("_context_kind") == "historical"]
+    weak_coupling = [x for x in coupling if x.get("_context_kind") == "weak_signal"]
+    historical_coupling = [x for x in coupling if x.get("_context_kind") == "historical"]
+    add_context([x for x in weak_coupling if x.get("new_this_scan")], "Recent weak-signal corroboration", 1, True, asset_pattern)
+    add_context(weak_rows, "Recent weak-signal context", 2, True, asset_pattern)
+    add_context(historical_coupling, "Historical coupling context", 1, False, asset_pattern)
+    add_context(historical_rows, "Historical structural context", 2, False, asset_pattern)
 
     asset_counter_re = re.compile(ASSET_COUNTER_PATTERNS.get(asset_id, r"$^"), re.I)
     counter_rows = [
         x for x in rows
-        if x.get("_identity") not in used
+        if x.get("_primary_evidence")
+        and x.get("_identity") not in used
         and (
             asset_counter_re.search(x.get("_text", ""))
             or (_match(asset_pattern, x) and RESILIENCE_RE.search(x.get("_text", "")))
@@ -476,26 +554,33 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
     ]
     counters = _dedupe_pick(counter_rows, limit=5, prefer_new=True, focus_pattern=ASSET_COUNTER_PATTERNS.get(asset_id))
 
-    official_pressure = [x for x in pressure_rows if _official_trigger(x)]
+    official_pressure = [x for x in primary_pressure if _official_trigger(x)]
     pressure_sources = {
         _low(x.get("source") or x.get("journal") or x.get("institution"))
-        for x in pressure_rows if _clean(x.get("source") or x.get("journal") or x.get("institution"))
+        for x in primary_pressure if _clean(x.get("source") or x.get("journal") or x.get("institution"))
     }
     coupling_sources = {
         _low(x.get("source") or x.get("journal") or x.get("institution"))
-        for x in coupling if _clean(x.get("source") or x.get("journal") or x.get("institution"))
+        for x in primary_coupling if _clean(x.get("source") or x.get("journal") or x.get("institution"))
     }
+
+    weak_context_count = sum(1 for x, _ in chosen_context if x.get("_context_kind") == "weak_signal")
+    historical_context_count = sum(1 for x, _ in chosen_context if x.get("_context_kind") == "historical")
+    context_weight_total = sum(float(x.get("_evidence_weight", 0.0) or 0.0) for x, _ in chosen_context)
+    context_strength = sum(
+        float(x.get("_evidence_weight", 0.0) or 0.0) * (float(x.get("_quality", 0) or 0) / 100.0)
+        for x, _ in chosen_context
+    )
 
     title = title_template.format(asset=asset_label)
     plainly = (
-        f"Europe relies on {asset_label}. Separate evidence shows that {pressure_label} can change access quickly. "
-        "The shock occurs if that change arrives before Europe has a workable alternative."
+        f"Europe relies on {asset_label}. Separate primary evidence shows that {pressure_label} can change access quickly. "
+        "Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own."
     )
-    second = (
-        "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found."
-    )
+    second = "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found."
     hidden = (
-        "The supporting evidence usually sits in separate files. The hypothesis appears only when the European dependency and the outside pressure are read as one chain."
+        "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; "
+        "low-weight current signals and history are then used only as context."
     )
     conditions = [
         f"Europe materially depends on {asset_label} for current or planned work.",
@@ -503,25 +588,31 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
         "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity.",
     ]
     reasoning = [
-        f"The retained evidence shows European reliance on or expansion of {asset_label}.",
-        f"Separate retained evidence shows a live mechanism for {pressure_label}.",
-        f"At least one retained record links the capability and the pressure; {len(coupling)} such record(s) are currently present.",
-        "The scenario becomes a shock only if the response is slower than the disruption.",
+        f"Primary retained evidence shows European reliance on or expansion of {asset_label}.",
+        f"Separate primary retained evidence shows a live mechanism for {pressure_label}.",
+        f"Primary evidence contains {len(primary_coupling)} direct capability × pressure coupling record(s).",
     ]
+    if weak_context_count:
+        reasoning.append(f"{weak_context_count} recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.")
+    if historical_context_count:
+        reasoning.append(f"{historical_context_count} historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.")
+    reasoning.append("The scenario becomes a shock only if the response is slower than the disruption.")
 
     case_against: list[str] = []
     if not official_pressure:
-        case_against.append("The trigger is not yet backed by an official source in the retained evidence.")
-    if len(coupling) == 1:
-        case_against.append("Only one retained record currently links the European capability directly to the outside pressure.")
+        case_against.append("The trigger is not yet backed by an official primary source in the retained current evidence.")
+    if len(primary_coupling) == 1:
+        case_against.append("Only one primary retained record currently links the European capability directly to the outside pressure.")
     if len(coupling_sources) <= 1:
-        case_against.append("The direct connection is concentrated in one source, so independent confirmation is still weak.")
+        case_against.append("The primary direct connection is concentrated in one source, so independent confirmation is still weak.")
     if len(pressure_sources) <= 1:
-        case_against.append("The pressure side is concentrated in one source and could reflect a narrow reading rather than a broad change.")
+        case_against.append("The primary pressure side is concentrated in one source and could reflect a narrow reading rather than a broad change.")
     if counters:
-        case_against.append(f"The same corpus contains {len(counters)} strong sign(s) of substitution, resilience or policy response that could absorb the shock.")
+        case_against.append(f"The primary corpus contains {len(counters)} strong sign(s) of substitution, resilience or policy response that could absorb the shock.")
+    if weak_context_count:
+        case_against.append("Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.")
     case_against.append("The scenario still depends on the disruption arriving faster than Europe can respond.")
-    case_against = _unique_text(case_against, 6)
+    case_against = _unique_text(case_against, 7)
 
     prevention_actions = _unique_text(
         ASSET_PREVENTION_ACTIONS.get(asset_id, []) + PRESSURE_PREVENTION_ACTIONS.get(pressure_id, []),
@@ -529,25 +620,28 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
     )
     watch_for = _unique_text(PRESSURE_WATCH.get(pressure_id, []), 4)
 
-    support = [_snapshot(x, role) for x, role in chosen[:7]]
-    against = [_snapshot(x, "Evidence that could absorb or prevent the shock") for x in counters]
+    support = [_snapshot(x, role) for x, role in (chosen_primary + chosen_context)[:10]]
+    against = [_snapshot(x, "Primary evidence that could absorb or prevent the shock") for x in counters]
 
     base_score = min(100.0, avg * 0.70 + max(qualities) * 0.20 + min(10, len(sources) * 2))
+    # Context is deliberately bounded. Even several strong weak signals/history items can only
+    # move the score a few points; they never affect the primary admission gates above.
+    context_bonus = min(5.0, context_strength * 3.0)
     challenge_penalty = 0
     if not official_pressure:
         challenge_penalty += 5
-    if len(coupling) == 1:
+    if len(primary_coupling) == 1:
         challenge_penalty += 5
     if len(coupling_sources) <= 1:
         challenge_penalty += 3
     challenge_penalty += min(10, len(counters) * 2)
-    score = round(max(0.0, base_score - challenge_penalty))
-    if score >= 88 and official_pressure and len(coupling) >= 2:
-        net_assessment = "Well supported enough to watch closely, with clear evidence that could still absorb it."
+    score = round(max(0.0, min(100.0, base_score + context_bonus - challenge_penalty)))
+    if score >= 88 and official_pressure and len(primary_coupling) >= 2:
+        net_assessment = "Well supported enough to watch closely, with contextual signals reinforcing rather than carrying the case."
     elif score >= 80:
-        net_assessment = "Plausible, but important parts of the trigger or connection still need confirmation."
+        net_assessment = "Plausible, but important parts of the primary trigger or connection still need confirmation."
     else:
-        net_assessment = "An early hypothesis. Keep it visible only as a watch item until the missing parts strengthen."
+        net_assessment = "An early hypothesis. Keep it visible only as a watch item until the primary evidence strengthens."
 
     cid = f"emergent:{asset_id}:{pressure_id}"
     return {
@@ -569,23 +663,33 @@ def _candidate(asset_id: str, pressure_id: str, rows: list[dict[str, Any]]) -> d
         "against": against,
         "prevention_evidence": against,
         "source_count": len(sources),
+        "primary_source_count": len(sources),
         "pressure_source_count": len(pressure_sources),
-        "coupling_count": len(coupling),
+        "coupling_count": len(primary_coupling),
+        "context_coupling_count": len([x for x in coupling if not x.get("_primary_evidence")]),
+        "weak_signal_context_count": weak_context_count,
+        "historical_context_count": historical_context_count,
+        "context_weight_total": round(context_weight_total, 2),
+        "context_score_bonus": round(context_bonus, 1),
         "official_trigger_present": bool(official_pressure),
         "best_quality": max(qualities),
         "average_quality": round(avg),
         "fresh_coupling": bool(fresh_coupling),
+        "fresh_context": any(x.get("new_this_scan") for x, _ in chosen_context),
     }
 
 
 def _fingerprint(c: dict[str, Any]) -> str:
     payload = {
         "id": c.get("id"),
-        "support": [x.get("identity") for x in c.get("support", [])],
+        "support": [(x.get("identity"), x.get("analytical_weight")) for x in c.get("support", [])],
         "against": [x.get("identity") for x in c.get("against", [])],
         "case_against": list(c.get("case_against", [])),
         "official_trigger_present": bool(c.get("official_trigger_present")),
         "coupling_count": int(c.get("coupling_count", 0) or 0),
+        "weak_signal_context_count": int(c.get("weak_signal_context_count", 0) or 0),
+        "historical_context_count": int(c.get("historical_context_count", 0) or 0),
+        "context_weight_total": c.get("context_weight_total"),
         "score": c.get("inference_score"),
     }
     return hashlib.sha1(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()[:16]
@@ -675,8 +779,9 @@ def refresh_shock_inference(
         ),
         reverse=True,
     )
-    # Persistent but bounded. The most recently changed and strongest hypotheses stay.
-    active = active[:30]
+    # Persistent analytical memory: a newly inferred shock never deletes an older one merely
+    # by crowding it out of a fixed-size registry. Reader layers may show only a sparse subset,
+    # but the registry itself accumulates until evidence explicitly changes the hypothesis.
     unchanged_count = sum(1 for x in active if x.get("status") == "unchanged")
     return {
         "profile_version": PROFILE_VERSION,
