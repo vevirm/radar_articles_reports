@@ -98,12 +98,14 @@ jobs:
           report_md_path = REPORT_DIR / f'one-time-corpus-cleanup-{stamp}.md'
           backup_path.write_bytes(original_bytes)
 
-          # Give evidence refresh ample room, but never let this maintenance operation
-          # consume the normal discovery state/budget. We import admission helpers only;
-          # scripts.scan_radar.main() is never called.
-          sr.SCAN_DEADLINE_MONO = time.monotonic() + 20 * 60
-          # Critical safety difference from the old migration mode: retrieval failure is
-          # NEVER evidence of irrelevance. We delete only confirmed failures.
+          # This cleanup follows the scanner's own historical-corpus safety model.
+          # It does NOT re-run the full modern admission gate over every old A/B record:
+          # the scanner deliberately avoids that because concise saved summaries and later
+          # vocabulary changes can make legitimate historical evidence look weaker than it was
+          # at admission time.  We remove only high-confidence contamination classes, exact
+          # duplicates/superseded wrappers, plus six Strand-B records whose full sources were
+          # manually reviewed after the first safety stop.  Discovery/snowball state is untouched.
+          sr.SCAN_DEADLINE_MONO = time.monotonic() + 12 * 60
           sr.INHERITED_CORPUS_AUDIT_FAIL_CLOSED = False
 
           def fingerprint(item: dict[str, Any]) -> str:
@@ -119,11 +121,8 @@ jobs:
           def short_gate(ev: dict[str, Any] | None) -> dict[str, Any]:
               if not isinstance(ev, dict):
                   return {}
-              keys = (
-                  'aboutness_reason', 'eu_relevance', 'a_route', 'b_route',
-                  'bridge_sentence', 'ri_evidence', 'geo_evidence',
-                  'a_context_evidence', 'b_method_evidence'
-              )
+              keys = ('aboutness_reason', 'eu_relevance', 'a_route', 'b_route', 'bridge_sentence',
+                      'ri_evidence', 'geo_evidence', 'a_context_evidence', 'b_method_evidence')
               out = {}
               for key in keys:
                   val = ev.get(key)
@@ -137,61 +136,62 @@ jobs:
               typ = sr.normalized(item.get('type'))
               role = sr.normalized(item.get('primary_document_role'))
               basis = sr.normalized(item.get('source_integrity_basis'))
-              return bool(
-                  'manual-verified' in typ
-                  or 'official notice' in typ
-                  or 'primary source' in typ
-                  or basis == 'institution pdf'
-                  or (role and role != 'landing_page')
-              )
+              return bool('manual-verified' in typ or 'official notice' in typ or 'primary source' in typ
+                          or basis == 'institution pdf' or (role and role != 'landing_page'))
 
-          def saved_current_gate(
-              item: dict[str, Any], pass_key: str, *,
-              title: str | None = None, abstract: str | None = None, body: str = ''
-          ) -> tuple[bool, dict[str, Any]]:
-              # Some current scanner routes intentionally bypass the generic document-type
-              # exclusion *after* applying a stricter source-aware gate: official EU notices,
-              # deep primary PDFs and manually verified recovery. A cleanup must respect
-              # those routes rather than misclassifying them as old news/procurement pages.
+          def saved_current_gate(item: dict[str, Any], pass_key: str, *, title: str | None = None,
+                                 abstract: str | None = None, body: str = '') -> tuple[bool, dict[str, Any]]:
               if special_saved_route(item):
                   t = sr.clean_text(item.get('title')) if title is None else sr.clean_text(title)
                   a = sr.clean_text(item.get('summary')) if abstract is None else sr.clean_text(abstract)
                   if not t:
                       return False, {}
-                  ev = sr.gate_scope(
-                      t, a, sr.clean_text(body), sr._saved_tier(item),
-                      source_kind=sr._saved_source_kind(item)
-                  )
+                  ev = sr.gate_scope(t, a, sr.clean_text(body), sr._saved_tier(item),
+                                     source_kind=sr._saved_source_kind(item))
                   return bool(ev.get(pass_key)), ev
               return sr._saved_item_passes(item, pass_key, title=title, abstract=abstract, body=body)
 
+          # These six were the exact small-shelf contamination class that triggered the first
+          # 6/12 Strand-B safety stop.  They are allowed to be removed ONLY if GitHub can reopen
+          # the source reliably and the current B gate still rejects it.  This is an allow-list,
+          # not a lowered mass-deletion threshold.
+          approved_b_recheck_titles = {
+              sr.normalized(x) for x in [
+                  'Design and Application of Weak Signal Detection Method Based on the Four-Dimensional Bistable Stochastic Resonance System',
+                  'Scenario Planning and Organizational Sustainability: A Literature Review and Conceptual Model',
+                  'Stochastic resonance: advanced theories, novel methodologies, and cutting-edge applications in weak signal detection',
+                  'Scientific foundations of Horizon Scanning methodology for early signal identification in healthcare',
+                  'New institutional economics outlook for uncovering frictions in implementing the new Philippine graduate education policy',
+                  'Foresight study to 2035 of the citrus agroindustrial chain. Alignment of scenarios, Delphi method and complement with python libraries',
+              ]
+          }
+
           removed: list[dict[str, Any]] = []
           decisions = {
-              'stored_pass': 0,
-              'refreshed_pass': 0,
-              'refresh_unavailable_kept': 0,
-              'refresh_unreliable_kept': 0,
-              'hard_exclusion_removed': 0,
               'scanner_precision_removed': 0,
-              'confirmed_gate_failure_removed': 0,
+              'hard_integrity_removed': 0,
+              'approved_b_recheck_removed': 0,
+              'approved_b_recheck_kept': 0,
+              'approved_b_refresh_unavailable_kept': 0,
+              'duplicate_removed': 0,
               'superseded_landing_removed': 0,
           }
 
-          # Scanner's own high-confidence legacy precision cleanup. We use it ONLY as a
-          # classifier: surviving records are copied from the original, so no summaries,
-          # first_seen values, NEW flags, or other finding metadata are rewritten.
+          # Scanner-owned high-confidence precision migration. Use it only as a classifier;
+          # survivors below are the exact original dictionaries, with first_seen/provenance intact.
           surgical_doc, surgical_stats = sr.surgical_precision_cleanup(copy.deepcopy(original))
           surgical_survivors: dict[str, Counter[str]] = {
               'strand_a': Counter(fingerprint(x) for x in surgical_doc.get('strand_a', []) if isinstance(x, dict)),
               'strand_b': Counter(fingerprint(x) for x in surgical_doc.get('strand_b', []) if isinstance(x, dict)),
           }
 
-          pending: list[tuple[str, str, dict[str, Any], dict[str, Any]]] = []
           kept: dict[str, list[dict[str, Any]]] = {'strand_a': [], 'strand_b': []}
+          approved_b_pending: list[dict[str, Any]] = []
 
-          for strand_key, pass_key in (('strand_a', 'a_pass'), ('strand_b', 'b_pass')):
+          for strand_key in ('strand_a', 'strand_b'):
               for item in original.get(strand_key, []) if isinstance(original.get(strand_key), list) else []:
                   if not isinstance(item, dict):
+                      decisions['hard_integrity_removed'] += 1
                       continue
                   fp = fingerprint(item)
                   if surgical_survivors[strand_key][fp] <= 0:
@@ -200,102 +200,106 @@ jobs:
                           'strand': 'A' if strand_key == 'strand_a' else 'B',
                           'title': item.get('title', ''), 'link': item.get('link', ''),
                           'date': item.get('date', ''), 'first_seen': item.get('first_seen', ''),
-                          'reason': 'scanner_surgical_precision_cleanup',
+                          'reason': 'scanner_high_confidence_precision_cleanup',
                       })
                       continue
                   surgical_survivors[strand_key][fp] -= 1
 
                   title = sr.clean_text(item.get('title'))
-                  summary = sr.clean_text(item.get('summary'))
                   link = sr.clean_text(item.get('link') or item.get('url'))
-                  hard_reason = sr.document_exclusion_reason(title, summary, link)
-                  # Even a current hard-exclusion match is refreshed before deletion.
-                  # This protects older records from stale summaries or URLs that now
-                  # redirect. If the source cannot be reopened, the record is kept.
-                  if not sr.english_public_item_ok(item):
-                      decisions['hard_exclusion_removed'] += 1
+                  if (not sr.english_public_item_ok(item) or not sr.record_source_integrity_ok(item)
+                          or not sr.record_date_integrity_ok(item)):
+                      decisions['hard_integrity_removed'] += 1
                       removed.append({
                           'strand': 'A' if strand_key == 'strand_a' else 'B',
                           'title': title, 'link': link, 'date': item.get('date', ''),
                           'first_seen': item.get('first_seen', ''),
-                          'reason': 'hard_non_english_or_non_public_item',
-                      })
-                      continue
-                  if not sr.record_source_integrity_ok(item) or not sr.record_date_integrity_ok(item):
-                      decisions['hard_exclusion_removed'] += 1
-                      removed.append({
-                          'strand': 'A' if strand_key == 'strand_a' else 'B',
-                          'title': title, 'link': link, 'date': item.get('date', ''),
-                          'first_seen': item.get('first_seen', ''),
-                          'reason': 'hard_source_or_date_integrity_failure',
+                          'reason': 'hard_source_language_or_date_integrity_failure',
                       })
                       continue
 
-                  passed, ev = saved_current_gate(item, pass_key)
-                  if passed:
-                      kept[strand_key].append(item)
-                      decisions['stored_pass'] += 1
+                  if strand_key == 'strand_b' and sr.normalized(title) in approved_b_recheck_titles:
+                      approved_b_pending.append(item)
+                      continue
+                  kept[strand_key].append(item)
+
+          # Re-open only the six explicitly reviewed B candidates. A blocked/failed/mismatched
+          # fetch is KEEP. A title is removed only when refreshed document-level evidence still
+          # fails the current B method-development gate.
+          if approved_b_pending:
+              workers = max(1, min(6, int(sr.CONFIG.get('inherited_corpus_audit_workers', 8) or 8)))
+              refresh_results: dict[int, tuple[str, str, str] | None] = {}
+              with cf.ThreadPoolExecutor(max_workers=workers) as ex:
+                  futs = {ex.submit(sr._audit_refresh_document, item): i for i, item in enumerate(approved_b_pending)}
+                  for fut in cf.as_completed(futs):
+                      i = futs[fut]
+                      try:
+                          refresh_results[i] = fut.result()
+                      except Exception:
+                          refresh_results[i] = None
+
+              for i, item in enumerate(approved_b_pending):
+                  refreshed = refresh_results.get(i)
+                  if not refreshed:
+                      kept['strand_b'].append(item)
+                      decisions['approved_b_refresh_unavailable_kept'] += 1
+                      continue
+                  title2, abstract2, body2 = refreshed
+                  saved_title = sr.clean_text(item.get('title'))
+                  refreshed_title = sr.clean_text(title2)
+                  if refreshed_title and saved_title:
+                      sim = sr._snowball_title_similarity(saved_title, refreshed_title)
+                      ns, nr = sr.norm_title(saved_title), sr.norm_title(refreshed_title)
+                      if sim < 0.20 and ns not in nr and nr not in ns:
+                          kept['strand_b'].append(item)
+                          decisions['approved_b_refresh_unavailable_kept'] += 1
+                          continue
+                  passed, ev = saved_current_gate(item, 'b_pass', title=title2, abstract=abstract2, body=body2)
+                  if passed or (ev or {}).get('aboutness_reason') == 'insufficient_text':
+                      kept['strand_b'].append(item)
+                      decisions['approved_b_recheck_kept'] += 1
                   else:
-                      pending.append((strand_key, pass_key, item, ev))
+                      decisions['approved_b_recheck_removed'] += 1
+                      removed.append({
+                          'strand': 'B', 'title': item.get('title', ''), 'link': item.get('link', ''),
+                          'date': item.get('date', ''), 'first_seen': item.get('first_seen', ''),
+                          'reason': 'approved_historical_B_contamination_confirmed_after_source_refresh',
+                          'refreshed_gate': short_gate(ev), 'refreshed_title': refreshed_title,
+                      })
 
-          # Re-open only records whose concise stored representation fails the modern gate.
-          # A failed/blocked fetch is a KEEP. This avoids turning 403/rate limits into deletions.
-          refresh_results: dict[int, tuple[str, str, str] | None] = {}
-          workers = max(1, min(8, int(sr.CONFIG.get('inherited_corpus_audit_workers', 8) or 8)))
-          with cf.ThreadPoolExecutor(max_workers=workers) as ex:
-              futs = {ex.submit(sr._audit_refresh_document, row[2]): i for i, row in enumerate(pending)}
-              for fut in cf.as_completed(futs):
-                  i = futs[fut]
+          # Remove same-strand exact identity duplicates without rewriting a survivor. Prefer
+          # the existing row with the earliest first_seen timestamp; otherwise keep first order.
+          for strand_key in ('strand_a', 'strand_b'):
+              rows = kept[strand_key]
+              groups: dict[str, list[tuple[int, dict[str, Any]]]] = {}
+              passthrough: list[tuple[int, dict[str, Any]]] = []
+              for idx, item in enumerate(rows):
                   try:
-                      refresh_results[i] = fut.result()
+                      ident = sr.identity(sr.internalize_previous(item))
                   except Exception:
-                      refresh_results[i] = None
-
-          for i, (strand_key, pass_key, item, stored_ev) in enumerate(pending):
-              refreshed = refresh_results.get(i)
-              if not refreshed:
-                  kept[strand_key].append(item)
-                  decisions['refresh_unavailable_kept'] += 1
-                  continue
-
-              title2, abstract2, body2 = refreshed
-              saved_title = sr.clean_text(item.get('title'))
-              refreshed_title = sr.clean_text(title2)
-              # Redirects/login/homepages are not trustworthy negative evidence. If the
-              # fetched page no longer resembles the saved publication, keep the record.
-              if refreshed_title and saved_title:
-                  sim = sr._snowball_title_similarity(saved_title, refreshed_title)
-                  ns, nr = sr.norm_title(saved_title), sr.norm_title(refreshed_title)
-                  if sim < 0.20 and ns not in nr and nr not in ns:
-                      kept[strand_key].append(item)
-                      decisions['refresh_unreliable_kept'] += 1
-                      continue
-
-              passed2, ev2 = saved_current_gate(
-                  item, pass_key, title=title2, abstract=abstract2, body=body2
-              )
-              if passed2:
-                  # Preserve the original record byte-for-byte at record level. The
-                  # refreshed text is evidence for the decision, not a metadata rewrite.
-                  kept[strand_key].append(item)
-                  decisions['refreshed_pass'] += 1
-                  continue
-
-              if (ev2 or {}).get('aboutness_reason') == 'insufficient_text':
-                  kept[strand_key].append(item)
-                  decisions['refresh_unreliable_kept'] += 1
-                  continue
-
-              decisions['confirmed_gate_failure_removed'] += 1
-              removed.append({
-                  'strand': 'A' if strand_key == 'strand_a' else 'B',
-                  'title': item.get('title', ''), 'link': item.get('link', ''),
-                  'date': item.get('date', ''), 'first_seen': item.get('first_seen', ''),
-                  'reason': 'confirmed_current_admission_failure_after_source_refresh',
-                  'stored_gate': short_gate(stored_ev),
-                  'refreshed_gate': short_gate(ev2),
-                  'refreshed_title': refreshed_title,
-              })
+                      ident = ''
+                  if not ident or ident == 'title:':
+                      passthrough.append((idx, item))
+                  else:
+                      groups.setdefault(ident, []).append((idx, item))
+              chosen: list[tuple[int, dict[str, Any]]] = list(passthrough)
+              for ident, members in groups.items():
+                  if len(members) == 1:
+                      chosen.append(members[0]); continue
+                  winner = min(members, key=lambda pair: (str(pair[1].get('first_seen') or '9999'), pair[0]))
+                  chosen.append(winner)
+                  for idx, item in members:
+                      if item is winner[1]:
+                          continue
+                      decisions['duplicate_removed'] += 1
+                      removed.append({
+                          'strand': 'A' if strand_key == 'strand_a' else 'B',
+                          'title': item.get('title', ''), 'link': item.get('link', ''),
+                          'date': item.get('date', ''), 'first_seen': item.get('first_seen', ''),
+                          'reason': 'same_strand_duplicate_identity',
+                      })
+              chosen.sort(key=lambda pair: pair[0])
+              kept[strand_key] = [item for _, item in chosen]
 
           # Apply the scanner's primary-source continuity rule without calling merge_corpus:
           # if the actual downloadable primary object is already retained, its HTML hub is
@@ -369,8 +373,17 @@ jobs:
           # backup/report in the runner logs but REFUSE to write or commit radar.json.
           if removed_a > max(20, int(len(before_a) * 0.25)):
               raise SystemExit(f'Safety stop: proposed Strand-A removal is too large ({removed_a}/{len(before_a)}).')
-          if len(before_b) >= 8 and removed_b > max(4, int(len(before_b) * 0.40)):
-              raise SystemExit(f'Safety stop: proposed Strand-B removal is too large ({removed_b}/{len(before_b)}).')
+          # Strand B is a tiny shelf. The first run intentionally stopped at 6/12 so the
+          # proposed records could be reviewed. V2 may remove those exact approved titles, but
+          # any *other* B deletion still has a much smaller blast-radius cap.
+          approved_b_removed = int(decisions.get('approved_b_recheck_removed', 0) or 0)
+          unapproved_b_removed = max(0, removed_b - approved_b_removed)
+          if approved_b_removed > len(approved_b_recheck_titles):
+              raise SystemExit('Safety stop: approved Strand-B removals exceed the explicit allow-list.')
+          if unapproved_b_removed > max(2, int(len(before_b) * 0.25)):
+              raise SystemExit(f'Safety stop: too many unapproved Strand-B removals ({unapproved_b_removed}/{len(before_b)}).')
+          if len(before_b) >= 8 and removed_b > max(8, int(len(before_b) * 0.70)):
+              raise SystemExit(f'Safety stop: proposed total Strand-B removal is still too large ({removed_b}/{len(before_b)}).')
           if removed_total > max(25, int(before_total * 0.25)):
               raise SystemExit(f'Safety stop: proposed total A/B removal is too large ({removed_total}/{before_total}).')
 
@@ -416,7 +429,7 @@ jobs:
                   'cleanup_marker_only_top_level_change': True,
                   'surviving_records_rewritten': False,
                   'network_failure_policy': 'KEEP',
-                  'deletion_standard': 'hard exclusion, scanner precision rule, superseded primary landing, or confirmed current-gate failure after reliable source refresh',
+                  'deletion_standard': 'scanner high-confidence precision rules, hard integrity failures, exact same-strand duplicates, superseded primary landing pages, and six explicitly reviewed Strand-B candidates only when reliable source refresh still fails the current B gate',
               },
               'before': {'strand_a': len(before_a), 'strand_b': len(before_b), 'total_ab': before_total},
               'after': {'strand_a': after_a, 'strand_b': after_b, 'total_ab': after_a + after_b},
