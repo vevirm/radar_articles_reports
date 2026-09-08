@@ -33,6 +33,7 @@ from __future__ import annotations
 import concurrent.futures as cf
 import datetime as dt
 import gzip
+import hashlib
 import html
 import io
 import json
@@ -413,6 +414,7 @@ ACTIVE_CORE_LIMIT = max(0, int(CONFIG.get("active_core_limit", 0) or 0))
 ACTIVE_CORE_B_SLOTS = max(0, int(CONFIG.get("active_core_strand_b_slots", 0) or 0))
 ACTIVE_CORE_PROFILE_VERSION = str(CONFIG.get("active_core_profile_version", "v17.21.0-cumulative-public-ab"))
 AB_ARCHIVE_KEY = "ab_archive"
+SIGNAL_ARCHIVE_KEY = "signal_archive"
 FRESH_REPOSITORY_SEED_VERSION = "v1"
 FRESH_BASELINE_AB_COUNT = max(1, int(CONFIG.get("fresh_baseline_ab_count", 200) or 200))
 
@@ -760,6 +762,84 @@ def committed_rotation_cursor(items: list[Any], original_cursor: int, planned: l
     end = min(len(seq), start + consumed)
     wrapped = bool(consumed and end >= len(seq))
     return (0 if wrapped else end), wrapped, consumed
+
+
+def _probe_token(value: Any) -> str:
+    """Stable, compact identity for persisted scheduler probes."""
+    if isinstance(value, dict):
+        raw = clean_text(value.get("domain") or value.get("url") or value.get("name") or json.dumps(value, sort_keys=True, ensure_ascii=False))
+    elif isinstance(value, (tuple, list)):
+        raw = " | ".join(clean_text(x) for x in value)
+    else:
+        raw = clean_text(value)
+    return hashlib.sha1(normalized(raw).encode("utf-8")).hexdigest()[:20]
+
+
+def least_recent_probe_batch(state: dict[str, Any], lane: str, items: Iterable[Any], limit: int) -> list[Any]:
+    """Pick least-recently executed probes without destructive cursor migration.
+
+    Legacy cursor fields remain in radar.json for backwards compatibility, but this
+    scheduler prevents an unexecuted first item from pinning a whole lane at cursor zero.
+    A probe that never executes remains oldest and is therefore retried naturally.
+    """
+    seq = list(dict.fromkeys(items)) if all(not isinstance(x, dict) for x in items) else list(items)
+    if not seq or limit <= 0:
+        return []
+    if not bool(CONFIG.get("probe_registry_enabled", True)):
+        batch, _, _ = rotating_batch(seq, 0, limit)
+        return batch
+    registry = state.setdefault("probe_registry", {})
+    if not isinstance(registry, dict):
+        registry = {}
+        state["probe_registry"] = registry
+    indexed = []
+    for idx, item in enumerate(seq):
+        key = f"{lane}:{_probe_token(item)}"
+        meta = registry.get(key) if isinstance(registry.get(key), dict) else {}
+        stamp = clean_text(meta.get("last_executed_at"))
+        visits = int(meta.get("visits", 0) or 0)
+        indexed.append((stamp or "", visits, idx, item))
+    indexed.sort(key=lambda row: (row[0], row[1], row[2]))
+    return [row[3] for row in indexed[: min(len(indexed), max(1, int(limit)))]]
+
+
+def note_probe_execution(state: dict[str, Any], lane: str, executed: Iterable[Any], at_iso: str) -> None:
+    """Persist successful scheduler visits; unknown/legacy state is tolerated."""
+    if not bool(CONFIG.get("probe_registry_enabled", True)):
+        return
+    registry = state.setdefault("probe_registry", {})
+    if not isinstance(registry, dict):
+        registry = {}
+        state["probe_registry"] = registry
+    for item in executed:
+        token = _probe_token(item)
+        key = f"{lane}:{token}"
+        meta = registry.get(key) if isinstance(registry.get(key), dict) else {}
+        meta["lane"] = lane
+        meta["last_executed_at"] = at_iso
+        meta["visits"] = int(meta.get("visits", 0) or 0) + 1
+        registry[key] = meta
+    max_entries = max(500, int(CONFIG.get("probe_registry_max_entries", 5000) or 5000))
+    if len(registry) > max_entries:
+        keep = sorted(
+            registry.items(),
+            key=lambda kv: clean_text((kv[1] or {}).get("last_executed_at")) if isinstance(kv[1], dict) else "",
+            reverse=True,
+        )[:max_entries]
+        state["probe_registry"] = dict(keep)
+
+
+def probe_lane_complete(state: dict[str, Any], lane: str, items: Iterable[Any]) -> bool:
+    """True once every configured probe in a lane has executed at least once."""
+    seq = list(items)
+    if not seq:
+        return True
+    registry = state.get("probe_registry") if isinstance(state.get("probe_registry"), dict) else {}
+    for item in seq:
+        meta = registry.get(f"{lane}:{_probe_token(item)}")
+        if not isinstance(meta, dict) or int(meta.get("visits", 0) or 0) <= 0:
+            return False
+    return True
 
 def rotating_variants(items: list[Any], cursor: int, count: int = 1) -> tuple[list[Any], int]:
     """Take a circular per-topic slice and persist where that topic should resume.
@@ -8842,7 +8922,21 @@ def _primary_pdf_link(soup: BeautifulSoup, page_url: str, title: str) -> str:
         score = (8.0 if same_family else 0.0) + 3.0 * overlap + 5.0 * ratio + (3.0 if explicit_download else 0.0)
         if best is None or score > best[0]:
             best = (score, href)
-    return best[1] if best else ""
+    if best:
+        return best[1]
+    # Publications Office download controls are often JavaScript-backed and expose no
+    # literal .pdf anchor in the server-rendered HTML. Publication-detail UUIDs map to
+    # the public Cellar download handler; use it only as a document-level fallback.
+    parsed = urlparse(page_url)
+    if (parsed.hostname or "").lower().removeprefix("www.") == "op.europa.eu":
+        m = re.search(r"/publication/([0-9a-f]{8}-[0-9a-f-]{27,})", parsed.path, re.I)
+        if m:
+            identifier = m.group(1)
+            return (
+                "https://op.europa.eu/o/opportal-service/download-handler"
+                f"?identifier={identifier}&format=pdf&language=en&productionSystem=cellar&part="
+            )
+    return ""
 
 
 def _pdf_text_matches_document(title: str, text: str) -> bool:
@@ -9696,6 +9790,52 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if len(jobs) >= limit:
             break
     return jobs, None
+
+
+def collect_must_not_miss_primary_evidence(
+    previous: dict[str, Any],
+    warnings: list[str],
+    stage_deadline: float | None = None,
+) -> list[dict[str, Any]]:
+    """Retry a tiny set of canonical EU primary documents through the normal parser.
+
+    These URLs are recovery probes, not admissions. They exist so a broken sitemap or
+    JavaScript publication hub cannot make an obvious primary document unreachable.
+    Existing accepted titles are never duplicated and all normal date/scope/quality gates
+    still apply.
+    """
+    specs = CONFIG.get("must_not_miss_primary_evidence_urls", [])
+    if not bool(CONFIG.get("primary_evidence_lane_enabled", True)) or not isinstance(specs, list):
+        return []
+    existing_titles = {
+        norm_title(clean_text(x.get("title") or x.get("headline")))
+        for key in ("strand_a", "strand_b", AB_ARCHIVE_KEY, "frontier_evidence")
+        for x in (previous.get(key, []) if isinstance(previous.get(key), list) else [])
+        if isinstance(x, dict) and clean_text(x.get("title") or x.get("headline"))
+    }
+    out: list[dict[str, Any]] = []
+    for spec in specs:
+        if not isinstance(spec, dict) or not spec.get("main", True):
+            continue
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        url = clean_text(spec.get("url"))
+        label = clean_text(spec.get("label"))
+        if not url or (label and norm_title(label) in existing_titles):
+            continue
+        try:
+            item = parse_institution_page(
+                url, clean_text(spec.get("source")) or _domain_host(url),
+                int(spec.get("tier", 1) or 1), stage_deadline, "",
+                EXTENDED_DATE_FLOOR,
+            )
+            if item:
+                item["primary_evidence_recovery"] = True
+                item["landing_page_url"] = url
+                out.append(item)
+        except Exception as exc:
+            warnings.append(f"Primary evidence recovery {label or url}: {type(exc).__name__}")
+    return out
 
 
 def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None, reconsider_seen: bool = False, publication_floor: dt.date | None = None) -> list[dict[str, Any]]:
@@ -12687,18 +12827,64 @@ def signal_is_retired(item: dict[str, Any], data: dict[str, Any] | None = None) 
         return False
     return clean_text(item.get("headline", "")) in _retired_signal_headlines(data)
 
+def archive_signal_rows(existing_archive: list[dict[str, Any]], rows: Iterable[dict[str, Any]], reason: str, now_iso: str | None = None) -> list[dict[str, Any]]:
+    """Retain no-longer-public weak signals without letting them clutter Strand C.
+
+    Strand C is intentionally a rolling public weak-signal window.  The underlying
+    scanner, however, is cumulative: expiry or curator retirement moves the accepted
+    row into a private archive rather than deleting it from radar.json.
+    """
+    stamp = now_iso or dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for raw in existing_archive if isinstance(existing_archive, list) else []:
+        if not isinstance(raw, dict):
+            continue
+        item = dict(raw)
+        key = signal_identity(item)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(item)
+    for raw in rows:
+        if not isinstance(raw, dict):
+            continue
+        item = dict(raw)
+        key = signal_identity(item)
+        if not key or key in {"signal::", "signal-link:"} or key in seen:
+            continue
+        item["new_this_scan"] = False
+        item["public_active"] = False
+        item["archive_reason"] = reason
+        item.setdefault("archived_at", stamp)
+        seen.add(key)
+        out.append(item)
+    out.sort(key=lambda x: str(x.get("date") or x.get("first_seen") or ""), reverse=True)
+    return out
+
+
 def apply_retired_signal_filter(data: dict[str, Any]) -> tuple[dict[str, Any], int]:
     if not isinstance(data, dict):
         return {}, 0
     out = dict(data)
     retired = _retired_signal_headlines(out)
     raw = out.get("strand_c") if isinstance(out.get("strand_c"), list) else []
+    removed_rows = [
+        dict(item) for item in raw
+        if isinstance(item, dict) and clean_text(item.get("headline", "")) in retired
+    ]
     kept = [
         dict(item) for item in raw
         if isinstance(item, dict) and clean_text(item.get("headline", "")) not in retired
     ]
     removed = len(raw) - len(kept)
     out["strand_c"] = kept
+    if removed_rows:
+        out[SIGNAL_ARCHIVE_KEY] = archive_signal_rows(
+            out.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(out.get(SIGNAL_ARCHIVE_KEY), list) else [],
+            removed_rows,
+            "curator_retired",
+        )
     out["retired_signal_headlines"] = sorted(retired)
     return out, removed
 
@@ -12838,8 +13024,17 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
             x.pop('strategic_classification', None)
             x.pop('strategic_classification_source', None)
         x['new_this_scan']=False
-    old_count=len(out.get('strand_c',[]) if isinstance(out.get('strand_c'),list) else [])
+    old_rows=[dict(x) for x in out.get('strand_c',[]) if isinstance(x,dict)] if isinstance(out.get('strand_c'),list) else []
+    old_count=len(old_rows)
+    kept_ids={signal_identity(x) for x in rebuilt if isinstance(x,dict)}
+    removed_rows=[x for x in old_rows if signal_identity(x) not in kept_ids]
     out['strand_c']=rebuilt
+    if removed_rows:
+        out[SIGNAL_ARCHIVE_KEY] = archive_signal_rows(
+            out.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(out.get(SIGNAL_ARCHIVE_KEY), list) else [],
+            removed_rows,
+            'quality_revalidated_out',
+        )
     return out, {'strand_c_removed':max(0,old_count-len(rebuilt)),'strand_c_kept':len(rebuilt)}
 
 def parse_feed_time(entry: Any) -> dt.datetime | None:
@@ -13196,6 +13391,54 @@ _SIGNAL_CONCRETE_EVENT_CUES = [
     r"joins?|joined|withdraws?|withdrew|relocates?|relocated|acquires?|acquired|enters? into force|entered into force)\b",
     r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bcall open until\b", r"\bco-funding available\b",
 ]
+
+_SIGNAL_PROPOSAL_STATUS_CUES = [
+    r"\bproposal for\b", r"\bproposals?\b", r"\bproposes?\b", r"\bproposed\b",
+    r"\bpublic consultation\b", r"\bconsultation launched\b", r"\bcall for evidence\b",
+    r"\bdraft (?:regulation|law|act|strategy|roadmap|guidance|work programme)\b",
+    r"\broadmap\b", r"\bstrategy (?:sets out|aims|proposes|envisages)\b",
+    r"\bplans? to\b", r"\bintends? to\b", r"\baims? to\b",
+]
+_SIGNAL_OBSERVED_STATUS_CUES = [
+    r"\b(?:study|report|analysis|survey|data|evidence) (?:finds?|found|shows?|showed|reveals?|revealed|indicates?|documents?|estimates?)\b",
+    r"\b(?:results?|findings?) (?:show|shows|showed|find|finds|found|indicate|indicates|reveal|reveals)\b",
+    r"\bdata (?:show|shows|showed|indicate|indicates|reveal|reveals)\b",
+]
+_SIGNAL_COMMITTED_STATUS_CUES = [
+    r"\b(?:funding|grant|contract|award) (?:was |has been )?(?:awarded|allocated|approved|committed)\b",
+    r"\b(?:awarded|allocated|committed|approved) (?:€|EUR|\$|USD|£|GBP)\s?[0-9]",
+    r"\bselected \d+ .*?(?:projects?|sites?|consortia|facilities)\b",
+    r"\b(?:procurement|tender) (?:was |has been )?(?:awarded|signed)\b",
+]
+
+
+def signal_event_status(claim: str, headline: str = "", desc: str = "") -> str:
+    """Classify what the source says happened, independently of topical relevance.
+
+    Proposal/consultation/plan language is deliberately checked before generic verbs such
+    as "adopted": "the Commission adopted a proposal" is still PROPOSED, not DONE.
+    """
+    full = normalized(clean_text(f"{claim}. {headline}. {desc}"))
+    if not full:
+        return "UNKNOWN"
+    # Descriptive funding/programme boilerplate says how an activity is financed, not
+    # what newly happened. It must never become a public weak signal by matching "funded".
+    if re.search(r"\b(?:is|are|was|were|being) (?:co-?funded|funded) by\b", full, re.I) or "co-funded by the eu" in full:
+        return "UNKNOWN"
+    if _regex_any(full, _SIGNAL_OBSERVED_STATUS_CUES) or reframing_signal_text(full):
+        return "OBSERVED"
+    if _regex_any(full, _SIGNAL_PROPOSAL_STATUS_CUES):
+        return "PROPOSED"
+    if _regex_any(full, _SIGNAL_COMMITTED_STATUS_CUES):
+        return "COMMITTED"
+    if _regex_any(full, _SIGNAL_CONCRETE_EVENT_CUES):
+        return "DONE"
+    return "UNKNOWN"
+
+
+def public_signal_event_status(status: str) -> bool:
+    allowed = CONFIG.get("weak_signal_public_event_statuses", ["OBSERVED", "DONE", "COMMITTED"])
+    return clean_text(status).upper() in {clean_text(x).upper() for x in allowed}
 
 def signal_is_only_intention_or_echo(title: str, desc: str = '') -> bool:
     """True when C-support is only aspiration/intention/echo, not an observed development.
@@ -14351,6 +14594,10 @@ def anchor_news(
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue
+        event_status = signal_event_status(what, headline, desc)
+        if not public_signal_event_status(event_status):
+            diag(n, f'event_status_{event_status.lower()}_not_public')
+            continue
         claim_themes = set(themes_for(f"{headline}. {what}")) & WATCH_SIGNAL_THEMES
         if not external_bridge:
             supported = set(shared_themes) & claim_themes
@@ -14369,6 +14616,7 @@ def anchor_news(
             'watch_theme':theme,
             'signal_type':relation,
             'signal_kind':kind,
+            'event_status':event_status,
             'what':what,
             'core_message':what,
             'why_it_matters':why,
@@ -14394,6 +14642,74 @@ def anchor_news(
     anchored.sort(key=lambda x:(x.get('_anchor_score',0),x.get('date','')),reverse=True)
     for x in anchored:x.pop('_anchor_score',None)
     return anchored[:MAX_C] if MAX_C>0 else anchored
+
+
+def build_precursor_watch(previous_watch: list[dict[str, Any]], candidates: list[dict[str, Any]], now_iso: str) -> list[dict[str, Any]]:
+    """Retain strategically relevant proposals/plans privately until something happens.
+
+    This watch is intentionally not Strand C and is ignored by the reader. It lets later
+    scans recognise a precursor without publishing intention-language as realised change.
+    """
+    if not bool(CONFIG.get("precursor_watch_enabled", True)):
+        return []
+    try:
+        now_dt = dateparser.parse(now_iso)
+    except Exception:
+        now_dt = dt.datetime.now(dt.timezone.utc)
+    if now_dt.tzinfo is None:
+        now_dt = now_dt.replace(tzinfo=dt.timezone.utc)
+    floor = now_dt - dt.timedelta(days=max(30, int(CONFIG.get("precursor_watch_retention_days", 180) or 180)))
+    rows: dict[str, dict[str, Any]] = {}
+
+    def key_for(row: dict[str, Any]) -> str:
+        link = normalized_link(row.get("link") or row.get("url"))
+        title = norm_title(clean_text(row.get("headline") or row.get("title")))
+        return link or title
+
+    for raw in previous_watch if isinstance(previous_watch, list) else []:
+        if not isinstance(raw, dict):
+            continue
+        try:
+            stamp = dateparser.parse(clean_text(raw.get("last_seen") or raw.get("date") or raw.get("first_seen")))
+            if stamp.tzinfo is None:
+                stamp = stamp.replace(tzinfo=dt.timezone.utc)
+            if stamp < floor:
+                continue
+        except Exception:
+            continue
+        k = key_for(raw)
+        if k:
+            row = dict(raw); row["new_this_scan"] = False; rows[k] = row
+
+    for raw in candidates if isinstance(candidates, list) else []:
+        if not isinstance(raw, dict):
+            continue
+        headline = clean_text(raw.get("headline") or raw.get("title"))
+        desc = clean_text(raw.get("_desc") or raw.get("summary"))
+        claim = _signal_what_claim(desc, headline)
+        status = signal_event_status(claim, headline, desc)
+        if status != "PROPOSED":
+            continue
+        if not weak_signal_ri_strategic_bridge_ok(headline, desc, raw.get("_themes", [])):
+            continue
+        k = key_for(raw)
+        if not k:
+            continue
+        old = rows.get(k, {})
+        rows[k] = {
+            "headline": headline,
+            "source": clean_text(raw.get("source")),
+            "date": clean_text(raw.get("date")),
+            "link": clean_text(raw.get("link") or raw.get("url")),
+            "event_status": "PROPOSED",
+            "precursor_claim": claim,
+            "first_seen": clean_text(old.get("first_seen")) or now_iso,
+            "last_seen": now_iso,
+            "new_this_scan": not bool(old),
+            "private_watch_only": True,
+        }
+    out = sorted(rows.values(), key=lambda x: clean_text(x.get("last_seen") or x.get("date")), reverse=True)
+    return out[: max(20, int(CONFIG.get("precursor_watch_max_items", 180) or 180))]
 
 
 def _novel_signal_rows(rows: list[dict[str, Any]], previous_c: list[dict[str, Any]], selected: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
@@ -14618,6 +14934,7 @@ def prune_public_window(
 
     raw_c = out.get("strand_c") if isinstance(out.get("strand_c"), list) else []
     kept_c: list[dict[str, Any]] = []
+    expired_c: list[dict[str, Any]] = []
     for raw in raw_c:
         if not isinstance(raw, dict):
             continue
@@ -14628,9 +14945,17 @@ def prune_public_window(
             item["first_seen"] = now.isoformat(timespec="minutes").replace("+00:00", "Z")
         if signal_retention_expired(item, now):
             removed["strand_c"] += 1
+            expired_c.append(item)
             continue
         kept_c.append(item)
     out["strand_c"] = kept_c
+    if expired_c:
+        out[SIGNAL_ARCHIVE_KEY] = archive_signal_rows(
+            out.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(out.get(SIGNAL_ARCHIVE_KEY), list) else [],
+            expired_c,
+            "public_window_expired",
+            now.isoformat(timespec="minutes").replace("+00:00", "Z"),
+        )
 
     raw_frontier = out.get("frontier_evidence") if isinstance(out.get("frontier_evidence"), list) else []
     out["frontier_evidence"] = [dict(x) for x in raw_frontier if isinstance(x, dict)]
@@ -14786,7 +15111,11 @@ def main() -> int:
     SIGNAL_WINDOW_START_DATE = None
     with ADMISSION_DIAGNOSTICS_LOCK:
         ADMISSION_DIAGNOSTICS.clear()
-    previous = load_previous(allow_git_recovery=False)
+    # Whole-repository uploads are the supported deployment path.  On a push,
+    # recover and union the immediately preceding cumulative radar snapshot from
+    # Git history before scanning, so uploading a bundle can never roll the corpus
+    # or scheduler state backwards if a scheduled scan landed after the bundle was made.
+    previous = load_previous(allow_git_recovery=(run_trigger_label() == "push"))
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
@@ -14905,10 +15234,10 @@ def main() -> int:
         # partial cycle remains topically diverse.
         dimensional_bank = interleaved_unique_batch(sum(len(x) for x in family_lanes), *family_lanes) if family_lanes else []
     dimensional_cursor_before = int(state.get("dimensional_query_cursor", 0) or 0)
-    dimensional_focus, _dimensional_next, _dimensional_wrapped = rotating_batch(
-        dimensional_bank, dimensional_cursor_before,
+    dimensional_focus = least_recent_probe_batch(
+        state, "dimensional", dimensional_bank,
         max(0, int(CONFIG.get("precision_recall_queries_per_scan", 0) or 0)),
-    ) if dimensional_bank else ([], 0, True)
+    ) if dimensional_bank else []
     strategic_scholarly_focus = strategic_pathway_queries('scholarly')
     gap_scholarly = list(dict.fromkeys(frontier_focus.get("scholarly_queries", [])))
     gap_lookback_months = max(0, int(CONFIG.get("frontier_gap_historical_lookback_months", 0) or 0))
@@ -14933,11 +15262,10 @@ def main() -> int:
         clean_text(q) for q in CONFIG.get("evidence_first_queries", []) if clean_text(q)
     ))
     evidence_first_cursor_before = int(state.get("evidence_first_cursor", 0) or 0)
-    evidence_first_focus, _evidence_next, _evidence_wrapped = rotating_batch(
-        evidence_first_bank,
-        evidence_first_cursor_before,
+    evidence_first_focus = least_recent_probe_batch(
+        state, "evidence_first", evidence_first_bank,
         max(0, int(CONFIG.get("evidence_first_queries_per_scan", 0) or 0)),
-    ) if evidence_first_bank else ([], 0, True)
+    ) if evidence_first_bank else []
 
     # Keep a small, persisted future-method lane active every scan. This is
     # separate from the main A/B discovery cursor, so methods suitable for understanding A are
@@ -14945,9 +15273,8 @@ def main() -> int:
     # the Strand-A portion of the query bank.
     b_method_bank = list(dict.fromkeys(CONFIG.get("queries_b_method", [])))
     b_method_cursor_before = int(state.get("strand_b_method_cursor", 0) or 0)
-    b_method_focus, _b_method_planned_next, _b_method_planned_wrapped = rotating_batch(
-        b_method_bank,
-        b_method_cursor_before,
+    b_method_focus = least_recent_probe_batch(
+        state, "strand_b_method", b_method_bank,
         int(CONFIG.get("queries_b_method_per_scan", 6)),
     )
 
@@ -14991,8 +15318,8 @@ def main() -> int:
         previous, max(1, int(CONFIG.get("finding_context_query_bank_size", 12) or 12))
     )
     finding_context_cursor_before = int(state.get("finding_context_cursor", 0) or 0)
-    finding_context_focus, _fc_next, _fc_wrapped = rotating_batch(
-        finding_context_bank, finding_context_cursor_before,
+    finding_context_focus = least_recent_probe_batch(
+        state, "finding_context", finding_context_bank,
         max(0, int(CONFIG.get("finding_context_queries_per_scan", 4) or 0)),
     )
 
@@ -15003,8 +15330,8 @@ def main() -> int:
         max(1, int(CONFIG.get("curator_seed_query_bank_size", 16) or 16))
     )
     curator_seed_cursor_before = int(state.get("curator_seed_cursor", 0) or 0)
-    curator_seed_focus, _cs_next, _cs_wrapped = rotating_batch(
-        curator_seed_bank, curator_seed_cursor_before,
+    curator_seed_focus = least_recent_probe_batch(
+        state, "curator_seed", curator_seed_bank,
         max(0, int(CONFIG.get("curator_seed_queries_per_scan", 6) or 0)),
     )
 
@@ -15018,12 +15345,8 @@ def main() -> int:
     cr_base_cap = min(cr_cap, broad_min)
     oa_cursor_before = int(state.get("openalex_cursor", 0) or 0)
     cr_broad_cursor_before = int(state.get("crossref_broad_cursor", 0) or 0)
-    oa_base, _oa_planned_next, _oa_planned_wrapped = rotating_batch(
-        all_queries, oa_cursor_before, oa_base_cap
-    )
-    cr_base, _cr_planned_next, _cr_planned_wrapped = rotating_batch(
-        all_queries, cr_broad_cursor_before, cr_base_cap
-    )
+    oa_base = least_recent_probe_batch(state, "openalex_base", all_queries, oa_base_cap)
+    cr_base = least_recent_probe_batch(state, "crossref_base", all_queries, cr_base_cap)
     oa_batch = interleaved_unique_batch(
         oa_cap, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
         oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
@@ -15177,12 +15500,10 @@ def main() -> int:
         official_n = 1
         general_n = max(0, inst_total - 1)
     official_eu_cursor_before = int(state.get("official_eu_source_cursor", 0) or 0)
-    official_rotating, _official_next, _official_wrapped = rotating_batch(
-        official_sources, official_eu_cursor_before, official_n
-    )
+    official_rotating = least_recent_probe_batch(state, "official_eu_source", official_sources, official_n)
     institution_cursor_before = int(state.get("institution_cursor", 0) or 0)
-    general_rotating, _inst_planned_next, _inst_planned_wrapped = rotating_batch(
-        general_sources or institution_sources_all, institution_cursor_before, general_n
+    general_rotating = least_recent_probe_batch(
+        state, "institution_source", general_sources or institution_sources_all, general_n
     )
     if bool(CONFIG.get("institution_full_census_each_scan", False)):
         # Recall-first source census: every configured trusted institutional domain is
@@ -15271,10 +15592,10 @@ def main() -> int:
         if clean_text(d).lower().removeprefix("www.") in source_by_domain
     ]
     adapter_cursor_before = int(state.get("institution_source_adapter_cursor", 0) or 0)
-    adapter_domain_batch, _adapter_next, _adapter_wrapped = rotating_batch(
-        adapter_domains_all, adapter_cursor_before,
+    adapter_domain_batch = least_recent_probe_batch(
+        state, "institution_adapter", adapter_domains_all,
         max(0, int(CONFIG.get("institution_source_adapter_sources_per_scan", 4) or 4)),
-    ) if adapter_domains_all else ([], 0, True)
+    ) if adapter_domains_all else []
     adapter_rotating = [source_by_domain[d] for d in adapter_domain_batch if d in source_by_domain]
 
     inst_batch_raw = evidence_report_sources + inst_rotating + gap_sources + adapter_rotating
@@ -15404,8 +15725,9 @@ def main() -> int:
     cr_deadline = phase_started + int(CONFIG.get("crossref_stage_seconds", 450))
     inst_deadline = phase_started + int(CONFIG.get("institution_stage_seconds", 480))
     direct_journal_deadline = phase_started + int(CONFIG.get('direct_top_journal_stage_seconds', 220) or 220)
+    primary_evidence_deadline = phase_started + int(CONFIG.get('primary_evidence_stage_seconds', 180) or 180)
 
-    with cf.ThreadPoolExecutor(max_workers=5) as ex:
+    with cf.ThreadPoolExecutor(max_workers=6) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
         )
@@ -15424,10 +15746,17 @@ def main() -> int:
         fut_direct_journals = ex.submit(
             collect_direct_top_journals, direct_journal_batch, warnings, direct_journal_deadline, execution_stats
         )
+        fut_primary_evidence = ex.submit(
+            safe_stage, "must-not-miss primary EU evidence", collect_must_not_miss_primary_evidence,
+            previous, warnings, primary_evidence_deadline
+        )
         news = fut_news.result()
         oa = fut_oa.result()
         cr = fut_cr.result()
         inst_base = fut_inst.result()
+        primary_evidence_rows = fut_primary_evidence.result()
+        if primary_evidence_rows:
+            inst_base.extend(primary_evidence_rows)
         try:
             direct_journal_ab, direct_journal_c = fut_direct_journals.result()
         except Exception as e:
@@ -15538,6 +15867,17 @@ def main() -> int:
     executed_oa = set(execution_stats.get("openalex_queries", set()))
     executed_cr = set(execution_stats.get("crossref_broad_queries", set()))
     executed_priority = set(execution_stats.get("crossref_priority_tasks", set()))
+    note_probe_execution(state, "openalex_base", [q for q in oa_base if q in executed_oa], now_iso)
+    note_probe_execution(state, "crossref_base", [q for q in cr_base if q in executed_cr], now_iso)
+    note_probe_execution(state, "dimensional", [q for q in dimensional_focus if q in (executed_oa | executed_cr)], now_iso)
+    note_probe_execution(state, "evidence_first", [q for q in evidence_first_focus if q in (executed_oa | executed_cr)], now_iso)
+    note_probe_execution(state, "strand_b_method", [q for q in b_method_focus if q in (executed_oa | executed_cr)], now_iso)
+    note_probe_execution(state, "finding_context", [q for q in finding_context_focus if q in (executed_oa | executed_cr)], now_iso)
+    note_probe_execution(state, "curator_seed", [q for q in curator_seed_focus if q in (executed_oa | executed_cr)], now_iso)
+    if probe_lane_complete(state, "openalex_base", all_queries):
+        state.setdefault("backfill", {})["openalex"] = True
+    if probe_lane_complete(state, "crossref_base", all_queries):
+        state.setdefault("backfill", {})["crossref_broad"] = True
     state["openalex_cursor"], oa_wrapped, oa_base_executed = committed_rotation_cursor(
         all_queries, oa_cursor_before, oa_base, executed_oa
     )
@@ -16272,6 +16612,19 @@ def main() -> int:
     official_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in official_rotating]
     general_planned_domains = [clean_text(x.get("domain", "")).lower().removeprefix("www.") for x in general_rotating]
     executed_inst = set(execution_stats.get("institution_sources", set()))
+    note_probe_execution(
+        state, "official_eu_source",
+        [src for src in official_rotating if clean_text(src.get("domain", "")).lower().removeprefix("www.") in executed_inst],
+        now_iso,
+    )
+    note_probe_execution(
+        state, "institution_source",
+        [src for src in general_rotating if clean_text(src.get("domain", "")).lower().removeprefix("www.") in executed_inst],
+        now_iso,
+    )
+    note_probe_execution(state, "institution_adapter", [d for d in adapter_domain_batch if d in executed_inst], now_iso)
+    if probe_lane_complete(state, "institution_source", general_sources or institution_sources_all):
+        state.setdefault("backfill", {})["institutions"] = True
     state["official_eu_source_cursor"], official_wrapped, official_executed = committed_rotation_cursor(
         official_domains_all, official_eu_cursor_before, official_planned_domains, executed_inst
     )
@@ -17354,6 +17707,10 @@ def main() -> int:
         if not any(signals_near_duplicate(rescue_row, x) for x in current_c):
             current_c.append(rescue_row)
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
+    precursor_watch = build_precursor_watch(
+        previous.get("precursor_watch", []) if isinstance(previous.get("precursor_watch"), list) else [],
+        news, now_iso,
+    )
     retired_signal_titles = _retired_signal_headlines(previous)
     strand_c = [
         item for item in strand_c
@@ -17715,6 +18072,7 @@ def main() -> int:
         "strategic_risks_closed_into_shocks": strategic_risks_closed_into_shocks,
         "weak_signal_attention_profile_version": str(CONFIG.get("weak_signal_attention_profile_version", "")),
         "retired_signal_headlines": sorted(_retired_signal_headlines(previous)),
+        "precursor_watch": precursor_watch,
         "signal_backfill_complete": signal_backfill_complete,
         "incremental_state_version": INCREMENTAL_STATE_VERSION,
         "rotation_profile_version": ROTATION_PROFILE_VERSION,
@@ -17858,6 +18216,7 @@ def main() -> int:
         "strand_b": strand_b,
         AB_ARCHIVE_KEY: ab_archive,
         "strand_c": strand_c,
+        SIGNAL_ARCHIVE_KEY: previous.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(previous.get(SIGNAL_ARCHIVE_KEY), list) else [],
         "frontier_evidence": frontier_evidence,
         "strategic_pathways": strategic_pathways,
         "external_shock_watch": external_shock_watch,
@@ -18021,6 +18380,8 @@ def main() -> int:
             "full_budget_seconds_remaining_at_end": int(full_budget_continuation.get("seconds_remaining_at_end", 0) or 0),
             "weak_signal_followup_candidates": int(deepening.get("weak_signal_followup_candidates", 0)),
             "institution_signal_candidates": len(INSTITUTION_SIGNAL_CANDIDATES),
+            "precursor_watch_total": len(precursor_watch),
+            "precursor_watch_new_this_run": sum(1 for x in precursor_watch if isinstance(x, dict) and x.get("new_this_scan")),
             "frontier_stubborn_recovery_candidates": int(deepening.get("stubborn_recovery_candidates", 0)),
             "frontier_stubborn_recovery_queries_executed": int(deepening.get("stubborn_recovery_queries_executed", 0)),
             "frontier_evidence_total": len(frontier_evidence),

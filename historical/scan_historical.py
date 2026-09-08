@@ -22,6 +22,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import xml.etree.ElementTree as ET
@@ -407,11 +408,12 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
     _diag("raw_records"); _diag(f"raw_{lane}")
     title=clean(raw.get("title")); abstract=clean(raw.get("abstract") or raw.get("summary") or raw.get("body"))
     url=clean(raw.get("url") or raw.get("doi")); date=parse_date(raw.get("date"))
+    landing_page_url=clean(raw.get("landing_page_url"))
     if not title: _diag("reject_no_title"); return None
     if ADMIN_DOC_RE.search(title): _diag("reject_administrative_document"); return None
     if date is None: _diag("reject_no_date"); return None
     if not (DATE_FROM <= date <= DATE_TO): _diag("reject_outside_window"); return None
-    profile=source_for(domain_of(url), clean(raw.get("venue")), clean(raw.get("publisher")))
+    profile=source_for(domain_of(landing_page_url or url), clean(raw.get("venue")), clean(raw.get("publisher")))
     if not profile: _diag("reject_source_not_elite"); return None
     _diag("source_eligible")
     text=clean(f"{title}. {abstract}")
@@ -441,6 +443,7 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
     strand="AB" if a_pass and b_pass else ("A" if a_pass else "B")
     return {
         "id":stable_id(title,url),"title":title,"date":date.isoformat(),"year":date.year,"url":url,
+        "landing_page_url": landing_page_url,
         "authors":clean(raw.get("authors")),"source":clean(profile.get("name")),"source_kind":clean(profile.get("kind")),
         "venue":clean(raw.get("venue")),"publisher":clean(raw.get("publisher")),"source_merit_score":score,"source_merit_label":"Historical top tier · Main A/B gate",
         "strand":strand,"a_route":clean(evidence.get("a_route")),"b_route":clean(evidence.get("b_route")),
@@ -690,6 +693,49 @@ def page_date(soup: BeautifulSoup, text: str) -> dt.date | None:
     return historical_date_from_text(text)
 
 
+def _historical_doc_tokens(value: str) -> set[str]:
+    generic={"the","and","for","with","from","report","study","publication","download","english","version","2024","2025","2026"}
+    return {x for x in re.sub(r"[^a-z0-9]+"," ",norm(value)).split() if len(x)>=2 and x not in generic}
+
+
+def _historical_primary_document_url(soup: BeautifulSoup, page_url: str, title: str) -> str:
+    """Prefer the downloadable English document behind an institutional landing page."""
+    parsed=urlparse(page_url); host=(parsed.hostname or "").lower().removeprefix("www.")
+    if host=="op.europa.eu":
+        m=re.search(r"/publication/([0-9a-f]{8}-[0-9a-f-]{27,})",parsed.path,re.I)
+        if m:
+            return ("https://op.europa.eu/o/opportal-service/download-handler"
+                    f"?identifier={m.group(1)}&format=pdf&language=en&productionSystem=cellar&part=")
+    tt=_historical_doc_tokens(title); best=None
+    for a in soup.find_all("a",href=True):
+        href=urljoin(page_url,clean(a.get("href"))); label=clean(a.get_text(" ",strip=True))
+        low=norm(f"{href} {label}")
+        if ".pdf" not in low and "download" not in low:
+            continue
+        lt=_historical_doc_tokens(f"{href} {label}"); overlap=len(tt&lt)
+        explicit=bool(re.search(r"\b(download|full report|full text|english|pdf|impact assessment|proposal)\b",low))
+        if overlap<1 and not explicit:
+            continue
+        score=overlap*4+(3 if explicit else 0)+(2 if ".pdf" in low else 0)
+        if best is None or score>best[0]: best=(score,href)
+    return best[1] if best else ""
+
+
+def _historical_pdf_body(url: str, title: str) -> tuple[str,int]:
+    try:
+        r=SESSION.get(url,timeout=REQUEST_TIMEOUT,allow_redirects=True)
+        if not r.ok: return "",0
+        reader=PdfReader(io.BytesIO(r.content))
+        body=clean(" ".join((p.extract_text() or "") for p in reader.pages[:12]))
+    except Exception:
+        return "",0
+    if not body: return "",0
+    tt=_historical_doc_tokens(title); ht=_historical_doc_tokens(body[:5000]); overlap=len(tt&ht)
+    if tt and overlap<max(1,min(2,len(tt))):
+        return "",0
+    return body,len(body.split())
+
+
 def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lane: str="direct") -> dict[str, Any] | None:
     if not budget_ok(50): return None
     try:
@@ -709,10 +755,18 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
     title_tag=soup.find("meta",property="og:title"); title=clean(title_tag.get("content") if title_tag else "")
     if not title and soup.title: title=clean(soup.title.get_text(" ",strip=True))
     desc_tag=soup.find("meta",attrs={"name":"description"}) or soup.find("meta",property="og:description"); desc=clean(desc_tag.get("content") if desc_tag else "")
+    primary_document_url=_historical_primary_document_url(soup,r.url,title) if bool(CONFIG.get("prefer_downloadable_primary_document",True)) else ""
     for bad in soup(["script","style","nav","footer","form","noscript"]): bad.decompose()
     content_root=soup.find("article") or soup.find("main") or soup
     body=clean(content_root.get_text(" ",strip=True))[:14000]; d=page_date(soup,body)
-    return admit({"title":title,"abstract":clean(f"{desc} {body[:9000]}"),"date":d,"url":r.url,"venue":src.get("name"),"publisher":src.get("name"),"discovery":f"direct source · {src.get('name')}"},lane)
+    evidence_body=body; evidence_url=r.url
+    if primary_document_url and budget_ok(35):
+        pdf_body,pdf_words=_historical_pdf_body(primary_document_url,title)
+        if pdf_words>=120:
+            evidence_body=pdf_body[:20000]; evidence_url=primary_document_url
+            if not d: d=historical_date_from_text(f"{primary_document_url} {pdf_body[:10000]}")
+            _diag("direct_downloadable_primary_document")
+    return admit({"title":title,"abstract":clean(f"{desc} {evidence_body[:12000]}"),"date":d,"url":evidence_url,"landing_page_url":r.url,"venue":src.get("name"),"publisher":src.get("name"),"discovery":f"direct source · {src.get('name')}"},lane)
 
 
 def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: list[dict[str, Any]], warnings: list[str], depth_page: int = 1) -> list[dict[str, Any]]:
@@ -1031,6 +1085,56 @@ def collect_crossref_authors(authors: list[str], warnings: list[str], window_fro
     return out
 
 
+def _historical_snapshot_stamp(doc: dict[str, Any]) -> str:
+    if not isinstance(doc, dict):
+        return ""
+    state = doc.get("scan_state") if isinstance(doc.get("scan_state"), dict) else {}
+    return clean(doc.get("last_updated") or state.get("last_completed_at"))
+
+
+def _recover_historical_from_git(max_commits: int = 60, *, skip_head: bool = False) -> dict[str, Any]:
+    """Recover the strongest pre-upload Historical archive from Git history.
+
+    Whole-repository upload is the supported deployment mode.  A bundle may contain
+    a historical.json that became stale while scheduled scanners kept accumulating on
+    GitHub.  On the upload-triggered workflow, inspect ancestors (never the uploaded
+    HEAD itself), prefer the largest valid cumulative archive and break ties by the
+    latest completed timestamp.  Failure to inspect Git history is non-fatal; the
+    checked-in archive remains authoritative in that case.
+    """
+    try:
+        start_rev = "HEAD^" if skip_head else "HEAD"
+        revs = subprocess.run(
+            ["git", "rev-list", f"--max-count={max_commits}", start_rev, "--", "historical/historical.json"],
+            cwd=ROOT, capture_output=True, text=True, timeout=12, check=True,
+        ).stdout.splitlines()
+    except Exception:
+        return {}
+
+    best: tuple[int, float, int, dict[str, Any]] | None = None
+    for recency_index, rev in enumerate(revs):
+        try:
+            raw = subprocess.run(
+                ["git", "show", f"{rev}:historical/historical.json"],
+                cwd=ROOT, capture_output=True, text=True, timeout=8, check=True,
+            ).stdout
+            data = json.loads(raw)
+        except Exception:
+            continue
+        items = data.get("items") if isinstance(data, dict) else None
+        if not isinstance(items, list) or not all(isinstance(item, dict) for item in items):
+            continue
+        stamp = _historical_snapshot_stamp(data)
+        try:
+            completed_score = dt.datetime.fromisoformat(stamp.replace("Z", "+00:00")).timestamp() if stamp else 0.0
+        except Exception:
+            completed_score = 0.0
+        candidate = (len(items), completed_score, -recency_index, data)
+        if best is None or candidate[:3] > best[:3]:
+            best = candidate
+    return best[3] if best else {}
+
+
 def load_previous_archive(
     out_path: Path = OUT_PATH,
     seed_path: Path = SEED_PATH,
@@ -1090,6 +1194,33 @@ def load_previous_archive(
         combined = dict(newest)
         combined["items"] = merged_items
         previous = combined
+    # A full-repository browser upload can overwrite historical.json with the
+    # bundle copy even if GitHub accumulated newer Historical rows after the bundle
+    # was created.  The push-triggered workflow has full Git history, so union the
+    # strongest pre-upload archive back in before any new scan begins.
+    if str(os.environ.get("GITHUB_EVENT_NAME", "")).strip().lower() == "push":
+        recovered_git = _recover_historical_from_git(max_commits=60, skip_head=True)
+        if recovered_git:
+            recovered_items = recovered_git.get("items") if isinstance(recovered_git.get("items"), list) else []
+            merged_items, recovered_count = cumulative_merge(previous["items"], [], recovered_items)
+            if recovered_count:
+                _diag("baseline_git_items_recovered", recovered_count)
+                log(
+                    f"Recovered {recovered_count} retained Historical item(s) from pre-upload Git history "
+                    f"({len(previous['items'])} -> {len(merged_items)} baseline items)"
+                )
+            # Prefer the more advanced scan-state metadata, while always carrying the
+            # unioned append-only corpus.  completed_runs is monotonic by design.
+            cur_state = previous.get("scan_state") if isinstance(previous.get("scan_state"), dict) else {}
+            git_state = recovered_git.get("scan_state") if isinstance(recovered_git.get("scan_state"), dict) else {}
+            cur_runs = int(cur_state.get("completed_runs", 0) or 0)
+            git_runs = int(git_state.get("completed_runs", 0) or 0)
+            cur_stamp = _historical_snapshot_stamp(previous)
+            git_stamp = _historical_snapshot_stamp(recovered_git)
+            base = recovered_git if (git_runs, git_stamp) > (cur_runs, cur_stamp) else previous
+            combined = dict(base)
+            combined["items"] = merged_items
+            previous = combined
     return previous
 
 
@@ -1125,6 +1256,20 @@ def main() -> int:
     # never what is allowed to remain. Manual evidence is part of the retained baseline.
     retained_baseline=previous_items+manual_items
     warnings=[]
+    # Deterministic recovery for a tiny set of canonical EU primary documents. These
+    # are ordinary candidates: normal date/source/A-B gates still decide admission.
+    primary_seed_candidates=[]
+    existing_titles={norm(x.get("title")) for x in retained_baseline if isinstance(x,dict) and clean(x.get("title"))}
+    seed_specs=CONFIG.get("primary_evidence_seed_urls",[]) if isinstance(CONFIG.get("primary_evidence_seed_urls",[]),list) else []
+    for spec in seed_specs[:max(0,int(CONFIG.get("primary_evidence_seed_urls_per_scan",6) or 6))]:
+        if not isinstance(spec,dict) or not budget_ok(45): break
+        url=clean(spec.get("url")); label=clean(spec.get("label"))
+        if not url or (label and norm(label) in existing_titles): continue
+        src=source_for(domain_of(url)) or {"name":clean(spec.get("source")) or domain_of(url),"domain":domain_of(url),"kind":"official_eu","authority":58}
+        item=fetch_page_candidate(url,src,warnings,"primary_evidence_seed")
+        if item:
+            item["primary_evidence_recovery"]=True
+            primary_seed_candidates.append(item)
     log(f"Historical coverage scan: {DATE_FROM.isoformat()} through {DATE_TO.isoformat()} (sources before {CUTOFF_EXCLUSIVE.isoformat()})")
     log(f"Primary publication band: {active_band['label']} · API page {api_result_page} · direct-source depth {source_depth_page}")
     log("Topics: "+" | ".join(str(t.get("label")) for t in active_topics))
@@ -1138,6 +1283,9 @@ def main() -> int:
         window_from=active_band["date_from"],window_to=active_band["date_to"],
         direct_depth_page=source_depth_page,
     )
+    candidates.extend(primary_seed_candidates)
+    if primary_seed_candidates:
+        log(f"Primary EU evidence recovery: {len(primary_seed_candidates)} canonical document(s) passed the normal gate")
 
     # 2) Curated known-good titles remain a separate backfill lane. Search them across
     # their own likely publication years rather than wasting the current band on a seed
@@ -1247,6 +1395,7 @@ def main() -> int:
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,"shared_main_queries":main_query_batch,
             "coverage_rotation":{"primary_band":str(active_band.get("label")),"primary_band_id":str(active_band.get("id")),"api_result_page":api_result_page,"direct_source_depth_page":source_depth_page,"gap_cells":gap_details,"known_good_authors":active_authors,"author_candidates":len(author_candidates)},
             "curated_backfill":{"available":len(seeds),"queried_this_run":len(seed_queries),"workbook_ids":[x.get("workbook_id") for x in active_seeds]},
+            "primary_evidence_recovery":{"configured":len(seed_specs),"admitted_this_run":len(primary_seed_candidates)},
             "manual_evidence":{"available":len(manual_items),"included":sum(1 for x in merged if x.get("manual_curated"))},
             "low_yield_rotation":{"triggered":low_triggered,"new_items_before_continuations":initial_new,"new_items_after_all_in_run_rotations":new_count,"separate_rescue_run_enabled":False},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"research_window_seconds":BUDGET_SECONDS,"finalize_margin_seconds":FINALIZE_MARGIN_SECONDS,"satisfied":elapsed_seconds()>=max(0,MIN_RUNTIME_SECONDS-FINALIZE_MARGIN_SECONDS),"continuation_waves":continuation_waves},

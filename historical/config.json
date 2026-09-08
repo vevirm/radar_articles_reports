@@ -1842,5 +1842,16 @@
   "shared_main_query_policy": "Historical rotates through the same Main A and B query grammar, but only inside publication windows strictly older than the rolling six-month cutoff.",
   "admission_policy": "New historical items must pass the Main scanner gate_scope/final worthiness logic plus Historical source-age and trusted-source constraints. C is never reconstructed historically.",
   "schedule_note": "Every four hours at minute 57 UTC, after Main; full 10-minute research window with only a small final save margin; same A/B gate; only publication dates older than the rolling six-month Main window.",
-  "finalize_margin_seconds": 8
+  "finalize_margin_seconds": 8,
+  "scanner_repair_profile_version": "v23.1-primary-evidence-document-preference",
+  "primary_evidence_seed_urls": [
+    {
+      "url": "https://op.europa.eu/en/publication-detail/-/publication/7348956d-1389-11f1-8870-01aa75ed71a1/language-en",
+      "source": "European Commission — DG Research & Innovation",
+      "tier": 1,
+      "label": "Research Security Monitor 2025"
+    }
+  ],
+  "primary_evidence_seed_urls_per_scan": 6,
+  "prefer_downloadable_primary_document": true
 }
