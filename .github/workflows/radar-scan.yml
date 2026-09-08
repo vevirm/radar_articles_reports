@@ -9,7 +9,7 @@ on:
       - 'historical/**'
       - '.github/workflows/historical-scan.yml'
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17 0,4,8,12,16,20 * * *'
   workflow_dispatch:
     inputs:
       rescue_mode:
@@ -26,7 +26,7 @@ env:
   PYTHONDONTWRITEBYTECODE: '1'
 
 concurrency:
-  group: ri-radar-scan
+  group: ri-radar-research-scanners
   cancel-in-progress: false
 
 jobs:
@@ -48,41 +48,15 @@ jobs:
 
       - name: Decide whether a scheduled scan is due
         id: due
-        env:
-          EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "$EVENT_NAME" != "schedule" ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            echo "Reason: $EVENT_NAME runs immediately."
-            exit 0
-          fi
-          python3 - <<'PY'
-          import datetime as dt
-          import json
-          import os
-          from pathlib import Path
-
-          doc = json.loads(Path('radar.json').read_text(encoding='utf-8'))
-          state = doc.get('scan_state') if isinstance(doc.get('scan_state'), dict) else {}
-          stamp = state.get('last_completed_at') or doc.get('run_completed_at') or doc.get('last_updated')
-          due = True
-          age_hours = None
-          if stamp:
-              try:
-                  last = dt.datetime.fromisoformat(str(stamp).replace('Z', '+00:00'))
-                  now = dt.datetime.now(dt.timezone.utc)
-                  age_hours = (now - last).total_seconds() / 3600.0
-                  due = age_hours >= 6.0
-              except Exception:
-                  due = True
-          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
-              out.write(f"run={'true' if due else 'false'}\n")
-              if age_hours is not None:
-                  out.write(f"age_hours={age_hours:.2f}\n")
-          print(f"Scheduled due gate: stamp={stamp!r}, age_hours={age_hours}, run={due}")
-          PY
+          # The workflow itself is now scheduled only on the six canonical four-hour
+          # production slots. Pushes and manual dispatches also run immediately. Do not
+          # apply the old hourly-workflow 6h age gate here: on a real 4h cron it would
+          # incorrectly skip every other production scan.
+          echo "run=true" >> "$GITHUB_OUTPUT"
+          echo "Reason: canonical four-hour schedule, push, or manual dispatch."
 
       - name: Set up Python
         if: steps.due.outputs.run == 'true'
@@ -314,9 +288,34 @@ jobs:
                       titles.add(title)
               return links, titles
 
+          def primary_upgrade_landings(items):
+              # A deep primary-document recovery intentionally replaces the HTML hub
+              # with the downloadable proposal/report. Treat that as corpus continuity,
+              # not loss of an accepted item. The landing URL remains attached to the
+              # deeper record as provenance/navigation metadata.
+              landings = set()
+              for item in items if isinstance(items, list) else []:
+                  if not isinstance(item, dict):
+                      continue
+                  landing = str(item.get('landing_page_url') or '').strip().lower().rstrip('/')
+                  link = str(item.get('link') or item.get('url') or '').strip().lower().rstrip('/')
+                  role = str(item.get('primary_document_role') or '').strip().lower()
+                  basis = str(item.get('source_integrity_basis') or '').strip().lower().replace('_', ' ')
+                  if not landing or not link or landing == link or role == 'landing_page':
+                      continue
+                  if (
+                      basis == 'institution pdf'
+                      or '.pdf' in link.split('?', 1)[0]
+                      or 'download-handler' in link
+                      or '/redirection/document/' in link
+                  ):
+                      landings.add(landing)
+              return landings
+
           if not cleanup:
               for key in ('strand_a', 'strand_b'):
                   new_links, new_titles = identities(new.get(key, []))
+                  upgraded_landings = primary_upgrade_landings(new.get(key, []))
                   missing = []
                   for item in old.get(key, []) if isinstance(old.get(key), list) else []:
                       if not isinstance(item, dict):
@@ -328,6 +327,9 @@ jobs:
                       link = str(item.get('link') or item.get('url') or '').strip().lower().rstrip('/')
                       title = norm_text(item.get('title'))
                       if (link and link in new_links) or (title and title in new_titles):
+                          continue
+                      if link and link in upgraded_landings:
+                          # The exact wrapper was replaced by its deeper primary object.
                           continue
                       missing.append(item.get('title') or link or '<untitled>')
                   if missing:

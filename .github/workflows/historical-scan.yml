@@ -16,7 +16,7 @@ on:
       - 'historical/tests/**'
       - '.github/workflows/historical-scan.yml'
   schedule:
-    - cron: '41 3 * * *'
+    - cron: '17 2,6,10,14,18,22 * * *'
   workflow_dispatch:
     inputs:
       rescue_mode:
@@ -29,7 +29,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: historical-top-tier-scan
+  group: ri-radar-research-scanners
   cancel-in-progress: false
 
 jobs:
