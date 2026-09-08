@@ -2709,7 +2709,7 @@
     "event detection temporal NLP emerging policy signals methodology"
   ],
   "queries_b_method_per_scan": 24,
-  "signal_quality_profile_version": "v18.0-a-anchored-60d-observable-change",
+  "signal_quality_profile_version": "v18.1-a-anchored-observed-done-committed-no-open-calls",
   "rotation_profile_version": "v21.20-source-and-journal-diversity",
   "openalex_exploration_queries_per_scan": 16,
   "crossref_exploration_queries_per_scan": 14,
@@ -3769,7 +3769,7 @@
   "full_budget_continuation_max_waves": 300,
   "full_budget_zero_progress_cooldown_seconds": 12,
   "full_budget_min_wave_seconds": 5,
-  "scanner_repair_profile_version": "v23.1-primary-evidence-probe-registry-event-status",
+  "scanner_repair_profile_version": "v23.2-deep-primary-documents-c-history-event-contract",
   "primary_evidence_lane_enabled": true,
   "primary_evidence_sources_per_scan": 12,
   "primary_evidence_lookback_months": 12,
@@ -3782,7 +3782,7 @@
   "must_not_miss_primary_evidence_urls": [
     {
       "url": "https://digital-strategy.ec.europa.eu/en/library/proposal-chips-act-20",
-      "source": "European Commission — DG CONNECT",
+      "source": "European Commission — Digital Strategy",
       "tier": 1,
       "label": "Chips Act 2.0 proposal",
       "main": true,
@@ -3790,7 +3790,7 @@
     },
     {
       "url": "https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada",
-      "source": "European Commission — DG CONNECT",
+      "source": "European Commission — Digital Strategy",
       "tier": 1,
       "label": "Cloud and AI Development Act proposal",
       "main": true,
@@ -3813,5 +3813,6 @@
   "weak_signal_precursor_event_statuses": [
     "PROPOSED"
   ],
-  "primary_evidence_stage_seconds": 180
+  "primary_evidence_stage_seconds": 180,
+  "primary_evidence_documents_per_target": 3
 }

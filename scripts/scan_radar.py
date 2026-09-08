@@ -8891,52 +8891,146 @@ def _document_title_tokens(value: str) -> set[str]:
     return {x for x in norm_title(value).split() if x not in generic and len(x) >= 2}
 
 
-def _primary_pdf_link(soup: BeautifulSoup, page_url: str, title: str) -> str:
-    """Select only a PDF that plausibly *is this document*, never the first cited PDF.
+def _primary_document_role(value: str) -> str:
+    """Coarse role for an official attachment discovered on a primary-source hub."""
+    low = normalized(value)
+    if "summary" in low and "impact assessment" in low:
+        return "impact_assessment_summary"
+    if "impact assessment" in low:
+        return "impact_assessment"
+    if "staff working document" in low or re.search(r"\bswd\b", low):
+        return "staff_working_document"
+    if "annex" in low or "annexes" in low:
+        return "annex"
+    if "proposal" in low or "draft regulation" in low or "regulation proposal" in low:
+        return "proposal"
+    if any(x in low for x in ["report", "monitor", "study", "evaluation", "assessment"]):
+        return "report"
+    return "document"
 
-    The old implementation picked the first .pdf anywhere in the page. On the 2026
-    International AI Safety Report page that could select a cited Anthropic system card,
-    producing a title/source/URL chimera. A PDF now needs document-level evidence: title
-    overlap plus same institutional host/family, or a very explicit download label.
+
+def _primary_document_anchor_context(a: Any) -> str:
+    """Return the small download-block context around an attachment link.
+
+    Commission publication hubs frequently render the anchor itself as only ``Download``
+    while the document name sits in the surrounding field. Looking only at anchor text
+    therefore misses real proposal/report PDFs even when the site exposes them explicitly.
+    """
+    parts = [clean_text(a.get_text(" ", strip=True))]
+    parent = a.find_parent(["li", "p", "dd", "td", "tr", "div"])
+    if parent is not None:
+        text = clean_text(parent.get_text(" ", strip=True))
+        if text and len(text) <= 700:
+            parts.append(text)
+    # Some Drupal download components put the label immediately before the link rather
+    # than inside the same small container. Keep this bounded to avoid absorbing a whole page.
+    for sib in list(a.previous_siblings)[-3:]:
+        try:
+            text = clean_text(sib.get_text(" ", strip=True) if hasattr(sib, "get_text") else str(sib))
+        except Exception:
+            text = ""
+        if text and len(text) <= 260:
+            parts.append(text)
+    return clean_text(" ".join(dict.fromkeys(x for x in parts if x)))[:900]
+
+
+def _primary_document_candidates(soup: BeautifulSoup, page_url: str, title: str) -> list[dict[str, Any]]:
+    """Rank genuine downloadable evidence objects behind an institutional landing page.
+
+    The URL does *not* need to end in ``.pdf``. EU sites commonly use redirect endpoints
+    such as ``/newsroom/.../redirection/document/129104`` whose response is the PDF.
+    We therefore combine same-institution provenance, download-block context, document
+    identity overlap and known download URL shapes, while continuing to reject unrelated
+    cited PDFs.
     """
     title_tokens = _document_title_tokens(title)
-    best: tuple[float, str] | None = None
-    for a in soup.find_all("a", href=True):
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    role_bonus = {
+        "proposal": 8.0,
+        "report": 7.0,
+        "staff_working_document": 6.5,
+        "impact_assessment_summary": 6.0,
+        "impact_assessment": 5.5,
+        "annex": 2.0,
+        "document": 0.0,
+    }
+    for order, a in enumerate(soup.find_all("a", href=True)):
         href = urljoin(page_url, clean_text(a.get("href", "")))
-        if not href or ".pdf" not in normalized(href):
+        nhref = normalized_link(href)
+        if not href or not nhref or nhref in seen:
             continue
-        label = clean_text(a.get_text(" ", strip=True))
-        link_text = clean_text(f"{urlparse(href).path} {label}")
+        context = _primary_document_anchor_context(a)
+        context_low = normalized(context)
+        href_low = normalized(href)
+        if "print as pdf" in context_low:
+            continue
+        path = normalized(urlparse(href).path)
+        looks_document_url = bool(
+            ".pdf" in path
+            or "download-handler" in href_low
+            or "/redirection/document/" in path
+            or "/download/" in path
+            or "/downloads/" in path
+        )
+        explicit_download = bool(re.search(
+            r"\b(download|full report|full text|english(?: version)?|pdf|proposal|impact assessment|staff working document|annex(?:es)?)\b",
+            context_low, re.I,
+        ))
+        if not looks_document_url and not explicit_download:
+            continue
+        link_text = clean_text(f"{urlparse(href).path} {context}")
         link_tokens = _document_title_tokens(link_text)
         overlap = len(title_tokens & link_tokens)
         ratio = overlap / max(1, min(len(title_tokens), 6))
         same_family = _same_institution_family(page_url, href)
-        explicit_download = bool(re.search(r"\b(download|full report|full text|english|pdf)\b", normalized(label)))
-        # Off-site references/citations are not document attachments merely because they are PDFs.
+        role = _primary_document_role(context or href)
+        # Same-family download blocks may have a generic ``Download`` anchor, but the
+        # surrounding label must still identify a document. Cross-family PDFs remain much
+        # stricter because they could simply be citations/references.
         if same_family:
-            if overlap < 2 and not (explicit_download and overlap >= 1):
+            if overlap < 1 and role == "document" and not (looks_document_url and explicit_download):
                 continue
         else:
-            if not explicit_download or overlap < 3 or ratio < 0.50:
+            if not looks_document_url or not explicit_download or overlap < 3 or ratio < 0.50:
                 continue
-        score = (8.0 if same_family else 0.0) + 3.0 * overlap + 5.0 * ratio + (3.0 if explicit_download else 0.0)
-        if best is None or score > best[0]:
-            best = (score, href)
-    if best:
-        return best[1]
+        score = (8.0 if same_family else 0.0) + 3.5 * overlap + 5.0 * ratio
+        score += 3.0 if explicit_download else 0.0
+        score += 2.0 if looks_document_url else 0.0
+        score += role_bonus.get(role, 0.0)
+        rows.append({
+            "url": href,
+            "label": context or clean_text(a.get_text(" ", strip=True)),
+            "role": role,
+            "score": score,
+            "order": order,
+        })
+        seen.add(nhref)
+
     # Publications Office download controls are often JavaScript-backed and expose no
-    # literal .pdf anchor in the server-rendered HTML. Publication-detail UUIDs map to
-    # the public Cellar download handler; use it only as a document-level fallback.
+    # literal attachment anchor in the server-rendered HTML. Publication-detail UUIDs map
+    # to the public Cellar English PDF download handler.
     parsed = urlparse(page_url)
     if (parsed.hostname or "").lower().removeprefix("www.") == "op.europa.eu":
         m = re.search(r"/publication/([0-9a-f]{8}-[0-9a-f-]{27,})", parsed.path, re.I)
         if m:
-            identifier = m.group(1)
-            return (
+            fallback = (
                 "https://op.europa.eu/o/opportal-service/download-handler"
-                f"?identifier={identifier}&format=pdf&language=en&productionSystem=cellar&part="
+                f"?identifier={m.group(1)}&format=pdf&language=en&productionSystem=cellar&part="
             )
-    return ""
+            if normalized_link(fallback) not in seen:
+                rows.append({
+                    "url": fallback, "label": title, "role": _primary_document_role(title),
+                    "score": 25.0, "order": -1,
+                })
+    rows.sort(key=lambda x: (-float(x.get("score", 0.0)), int(x.get("order", 0))))
+    return rows
+
+
+def _primary_pdf_link(soup: BeautifulSoup, page_url: str, title: str) -> str:
+    """Backward-compatible single-document selector used by ordinary institutional crawl."""
+    rows = _primary_document_candidates(soup, page_url, title)
+    return clean_text(rows[0].get("url")) if rows else ""
 
 
 def _pdf_text_matches_document(title: str, text: str) -> bool:
@@ -9268,6 +9362,10 @@ def parse_institution_pdf(
     fingerprint: str = "",
     publication_floor: dt.date | None = None,
     response: requests.Response | None = None,
+    title_hint: str = "",
+    fallback_publication_date: dt.date | None = None,
+    fallback_date_basis: str = "landing_page_publication_date",
+    landing_page_url: str = "",
 ) -> dict[str, Any] | None:
     """Parse a direct institutional PDF discovered in a sitemap/hub.
 
@@ -9286,7 +9384,15 @@ def parse_institution_pdf(
         return None
 
     title = clean_text(meta.get("title"))
-    if not title or len(title.split()) < 3 or normalized(title) in {"untitled", "document", "report"}:
+    hint = clean_text(title_hint)
+    title_is_weak = not title or len(title.split()) < 3 or normalized(title) in {"untitled", "document", "report"}
+    # Exact download blocks on official hubs often carry the human-readable document title
+    # while the PDF metadata is blank or an internal filename. Trust the landing-page hint
+    # only when the PDF body itself overlaps that title.
+    if hint and _pdf_text_matches_document(hint, body) and (title_is_weak or not _pdf_text_matches_document(title, body)):
+        title = hint
+        title_is_weak = False
+    if title_is_weak:
         sentences = split_sentences(body[:1200])
         candidate = next((clean_text(x) for x in sentences if 4 <= len(clean_text(x).split()) <= 28 and len(clean_text(x)) <= 220), "")
         title = candidate
@@ -9312,6 +9418,9 @@ def parse_institution_pdf(
             date_basis = "pdf_visible_publication_date"
     if not published:
         published, date_basis = _pdf_visible_date_hint(body, url)
+    if not published and fallback_publication_date:
+        published = fallback_publication_date
+        date_basis = fallback_date_basis or "landing_page_publication_date"
     if not published:
         if fingerprint and INSTITUTION_DISCOVERED_DATES.get(fingerprint):
             _diag_inc("institution_date_hint_sitemap_lastmod_not_publication")
@@ -9358,6 +9467,8 @@ def parse_institution_pdf(
         preprint=False,
     )
     row["source_integrity_basis"] = "institution_pdf"
+    if landing_page_url:
+        row["landing_page_url"] = clean_text(landing_page_url)
     if date_basis:
         row["date_basis"] = date_basis
     return row
@@ -9374,7 +9485,12 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         _diag_inc("institution_reject_fetch_or_nonhtml")
         return None
     ctype = normalized(r.headers.get("content-type", "text/html"))
-    if "pdf" in ctype or urlparse(r.url or url).path.lower().endswith(".pdf"):
+    response_is_pdf = bool(
+        "pdf" in ctype
+        or urlparse(r.url or url).path.lower().endswith(".pdf")
+        or bytes((getattr(r, "content", b"") or b"")[:5]).startswith(b"%PDF-")
+    )
+    if response_is_pdf:
         return parse_institution_pdf(url, source, tier, stage_deadline, fingerprint, publication_floor, response=r)
     if "html" not in ctype:
         _diag_inc("institution_reject_fetch_or_nonhtml")
@@ -9792,50 +9908,270 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     return jobs, None
 
 
+def _primary_page_publication_date(soup: BeautifulSoup, page_url: str, title: str) -> tuple[dt.date | None, str]:
+    """Conservative publication date for an exact official document hub."""
+    published = _jrc_repository_publication_date(soup, page_url)
+    if published:
+        return published, "jrc_visible_publication_date"
+    published = parse_date(meta_content(soup, [
+        "article:published_time", "og:article:published_time", "datePublished", "dateCreated",
+        "date", "DC.date", "DC.Date", "DC.date.issued", "DC.Date.issued", "dcterms.date",
+        "dcterms.created", "dcterms.issued", "parsely-pub-date", "pubdate", "publication_date",
+        "citation_publication_date", "citation_date", "release_date",
+    ]))
+    if published:
+        return published, "page"
+    for tm in soup.find_all("time")[:8]:
+        raw_time = clean_text(tm.get("datetime") or tm.get_text(" ", strip=True))
+        published = parse_date(raw_time)
+        if published:
+            return published, "page_time"
+    published = _semantic_publication_date(soup, title)
+    if published:
+        return published, "semantic_page_publication_date"
+    published = _prominent_date_near_title(soup, title)
+    if published:
+        return published, "prominent_page_date"
+    published, basis = _url_publication_date_hint(page_url, allow_month_only=True)
+    return published, basis or ""
+
+
+def _primary_target_present(spec: dict[str, Any], previous: dict[str, Any]) -> bool:
+    """True only when the target is already backed by a substantive primary document.
+
+    A prior landing-page-only admission is intentionally *not* considered complete: the
+    new deep lane should revisit it and upgrade the saved record to the downloadable
+    proposal/report when possible.
+    """
+    target_url = normalized_link(spec.get("url"))
+    label = norm_title(clean_text(spec.get("label")))
+    for key in ("strand_a", "strand_b", AB_ARCHIVE_KEY, "frontier_evidence"):
+        for row in previous.get(key, []) if isinstance(previous.get(key), list) else []:
+            if not isinstance(row, dict):
+                continue
+            same_target = False
+            if clean_text(row.get("primary_evidence_target_label")) and norm_title(row.get("primary_evidence_target_label")) == label:
+                same_target = True
+            if target_url and normalized_link(row.get("landing_page_url")) == target_url:
+                same_target = True
+            title = norm_title(clean_text(row.get("title") or row.get("headline")))
+            if label and title and (label == title or (len(label.split()) >= 4 and label in title)):
+                same_target = True
+            if not same_target:
+                continue
+            link = normalized_link(row.get("link") or row.get("url"))
+            role = normalized(row.get("primary_document_role"))
+            basis = normalized(row.get("source_integrity_basis"))
+            if link and link != target_url and role != "landing_page" and (
+                basis == "institution pdf"
+                or ".pdf" in normalized(urlparse(link).path)
+                or "download-handler" in normalized(link)
+                or "/redirection/document/" in normalized(urlparse(link).path)
+            ):
+                return True
+    return False
+
+
+def _primary_target_landing_only_record(spec: dict[str, Any], previous: dict[str, Any]) -> dict[str, Any] | None:
+    """Return an older wrapper-page record that should be upgraded, not duplicated."""
+    target_url = normalized_link(spec.get("url"))
+    if not target_url:
+        return None
+    for key in ("strand_a", "strand_b", AB_ARCHIVE_KEY, "frontier_evidence"):
+        for row in previous.get(key, []) if isinstance(previous.get(key), list) else []:
+            if not isinstance(row, dict):
+                continue
+            landing = normalized_link(row.get("landing_page_url"))
+            link = normalized_link(row.get("link") or row.get("url"))
+            if (landing == target_url or link == target_url) and link == target_url:
+                return dict(row)
+    return None
+
+
+def _primary_evidence_from_landing(
+    spec: dict[str, Any],
+    warnings: list[str],
+    stage_deadline: float | None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Deep-read an exact primary-source publication hub and its downloadable documents.
+
+    This is deliberately separate from the generic institutional parser. A canonical EU
+    publication page is a *hub*: the proposal/report/SWD/impact assessment behind its
+    download controls is the preferred evidence. Redirect URLs and octet-stream PDFs are
+    followed even when the href has no ``.pdf`` suffix.
+    """
+    url = clean_text(spec.get("url"))
+    source = clean_text(spec.get("source")) or _domain_host(url)
+    tier = int(spec.get("tier", 1) or 1)
+    label = clean_text(spec.get("label"))
+    status: dict[str, Any] = {
+        "label": label or url, "url": url, "status": "FAILED_TO_RETRIEVE",
+        "attachments_discovered": 0, "attachments_fetched": 0, "admitted": 0,
+    }
+    if not url or stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        status["reason"] = "stage_budget" if url else "missing_url"
+        return [], status
+    landing = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
+    if not landing:
+        status["reason"] = "landing_fetch_failed"
+        return [], status
+    ctype = normalized(landing.headers.get("content-type", "text/html"))
+    if "html" not in ctype:
+        # An exact target may itself redirect straight to a PDF. Parse that object directly.
+        if "pdf" in ctype or bytes((getattr(landing, "content", b"") or b"")[:5]).startswith(b"%PDF-"):
+            item = parse_institution_pdf(
+                url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR, response=landing,
+                title_hint=label, landing_page_url=url,
+            )
+            if item:
+                item["primary_evidence_recovery"] = True
+                item["primary_evidence_target_label"] = label
+                item["primary_document_role"] = _primary_document_role(label)
+                status.update({"status": "FOUND", "attachments_fetched": 1, "admitted": 1})
+                return [item], status
+        status["reason"] = f"landing_content_type:{ctype or 'unknown'}"
+        return [], status
+
+    soup = BeautifulSoup(landing.text, "html.parser")
+    page_title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else "") or label
+    published, date_basis = _primary_page_publication_date(soup, landing.url or url, page_title)
+    attachments = _primary_document_candidates(soup, landing.url or url, page_title)
+    status["attachments_discovered"] = len(attachments)
+    max_docs = max(1, int(CONFIG.get("primary_evidence_documents_per_target", 3) or 3))
+    out: list[dict[str, Any]] = []
+    used_roles: set[str] = set()
+    for cand in attachments:
+        if len(out) >= max_docs or stage_deadline_reached(stage_deadline, 12):
+            break
+        doc_url = clean_text(cand.get("url"))
+        role = clean_text(cand.get("role")) or "document"
+        if not doc_url or normalized_link(doc_url) in KNOWN_AB_LINKS:
+            continue
+        # Avoid three-part impact assessments crowding out the proposal/report. One object
+        # per role is enough for the must-not-miss lane; ordinary source discovery can find
+        # companion annexes later.
+        if role in used_roles and role in {"impact_assessment", "annex", "document"}:
+            continue
+        try:
+            response = get(doc_url, timeout=int(CONFIG.get("pdf_timeout_seconds", 14)))
+            if not response:
+                continue
+            status["attachments_fetched"] = int(status.get("attachments_fetched", 0)) + 1
+            doc_ctype = normalized(response.headers.get("content-type", ""))
+            is_pdf = bool(
+                "pdf" in doc_ctype
+                or urlparse(response.url or doc_url).path.lower().endswith(".pdf")
+                or bytes((getattr(response, "content", b"") or b"")[:5]).startswith(b"%PDF-")
+            )
+            if not is_pdf:
+                # Some download endpoints resolve to an HTML intermediary; hand it back to
+                # the ordinary parser rather than pretending it is a PDF.
+                item = parse_institution_page(
+                    doc_url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR,
+                )
+            else:
+                title_hint = clean_text(cand.get("label"))
+                # A download block may contain numbering or a generic Download token. Keep
+                # the target label as a cleaner fallback when the block is unhelpful.
+                if len(title_hint.split()) < 3 or normalized(title_hint) == "download":
+                    title_hint = label or page_title
+                item = parse_institution_pdf(
+                    doc_url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR, response=response,
+                    title_hint=title_hint, fallback_publication_date=published,
+                    fallback_date_basis=date_basis or "landing_page_publication_date",
+                    landing_page_url=landing.url or url,
+                )
+            if item:
+                item["primary_evidence_recovery"] = True
+                item["primary_evidence_target_label"] = label
+                item["primary_document_role"] = role
+                item["landing_page_url"] = landing.url or url
+                out.append(item)
+                used_roles.add(role)
+        except Exception as exc:
+            warnings.append(f"Primary evidence attachment {label or doc_url}: {type(exc).__name__}")
+
+    if out:
+        status.update({"status": "FOUND", "admitted": len(out)})
+        return dedupe_candidates(out), status
+
+    # Last-resort fallback: the landing page itself can still be primary evidence when it
+    # records an adopted/completed action and passes the ordinary A/B gate. It is never
+    # preferred over an available substantive downloadable document.
+    try:
+        fallback = parse_institution_page(
+            url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR,
+        )
+    except Exception as exc:
+        warnings.append(f"Primary evidence landing fallback {label or url}: {type(exc).__name__}")
+        fallback = None
+    if fallback:
+        fallback["primary_evidence_recovery"] = True
+        fallback["primary_evidence_target_label"] = label
+        fallback["primary_document_role"] = "landing_page"
+        fallback["landing_page_url"] = landing.url or url
+        status.update({"status": "FOUND", "admitted": 1, "reason": "landing_page_fallback"})
+        return [fallback], status
+    status["status"] = "RETRIEVED_NO_ADMISSION"
+    status["reason"] = "documents_failed_normal_gate" if attachments else "no_downloadable_documents_and_landing_failed_gate"
+    return [], status
+
+
 def collect_must_not_miss_primary_evidence(
     previous: dict[str, Any],
     warnings: list[str],
     stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Retry a tiny set of canonical EU primary documents through the normal parser.
+    """Deep-read a tiny set of canonical EU primary-document hubs.
 
-    These URLs are recovery probes, not admissions. They exist so a broken sitemap or
-    JavaScript publication hub cannot make an obvious primary document unreachable.
-    Existing accepted titles are never duplicated and all normal date/scope/quality gates
-    still apply.
+    Exact targets are recovery probes, not forced admissions. Each hub is inspected for
+    downloadable proposal/report/SWD/impact-assessment objects first; every recovered
+    document still passes the ordinary A/B gate. A target can therefore report FOUND,
+    ALREADY_PRESENT, RETRIEVED_NO_ADMISSION or FAILED_TO_RETRIEVE instead of vanishing
+    silently inside the generic institutional crawl.
     """
     specs = CONFIG.get("must_not_miss_primary_evidence_urls", [])
     if not bool(CONFIG.get("primary_evidence_lane_enabled", True)) or not isinstance(specs, list):
         return []
-    existing_titles = {
-        norm_title(clean_text(x.get("title") or x.get("headline")))
-        for key in ("strand_a", "strand_b", AB_ARCHIVE_KEY, "frontier_evidence")
-        for x in (previous.get(key, []) if isinstance(previous.get(key), list) else [])
-        if isinstance(x, dict) and clean_text(x.get("title") or x.get("headline"))
-    }
+    stats = execution_stats if isinstance(execution_stats, dict) else {}
+    target_status: dict[str, Any] = {}
     out: list[dict[str, Any]] = []
     for spec in specs:
         if not isinstance(spec, dict) or not spec.get("main", True):
             continue
+        label = clean_text(spec.get("label")) or clean_text(spec.get("url"))
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            target_status[label] = {"status": "FAILED_TO_RETRIEVE", "reason": "stage_budget"}
             break
-        url = clean_text(spec.get("url"))
-        label = clean_text(spec.get("label"))
-        if not url or (label and norm_title(label) in existing_titles):
+        if _primary_target_present(spec, previous):
+            target_status[label] = {"status": "ALREADY_PRESENT", "url": clean_text(spec.get("url"))}
             continue
+        upgrade_from = _primary_target_landing_only_record(spec, previous)
         try:
-            item = parse_institution_page(
-                url, clean_text(spec.get("source")) or _domain_host(url),
-                int(spec.get("tier", 1) or 1), stage_deadline, "",
-                EXTENDED_DATE_FLOOR,
-            )
-            if item:
-                item["primary_evidence_recovery"] = True
-                item["landing_page_url"] = url
+            rows, status = _primary_evidence_from_landing(spec, warnings, stage_deadline)
+            target_status[label] = status
+            for item in rows:
+                # Do not suppress same-identity rows here. merge_corpus deliberately refreshes
+                # rediscovered items while preserving first_seen/new_this_scan=False. If an
+                # older wrapper-page row exists, stamp the deeper document as an explicit
+                # evidence upgrade even when the PDF's formal title differs from the hub title.
+                if upgrade_from and clean_text(item.get("primary_document_role")) != "landing_page":
+                    item["primary_evidence_upgrade"] = True
+                    item["primary_evidence_upgrade_from_title"] = clean_text(upgrade_from.get("title") or upgrade_from.get("headline"))
+                    item["primary_evidence_upgrade_from_link"] = clean_text(upgrade_from.get("link") or upgrade_from.get("url"))
                 out.append(item)
         except Exception as exc:
-            warnings.append(f"Primary evidence recovery {label or url}: {type(exc).__name__}")
-    return out
+            warnings.append(f"Primary evidence recovery {label}: {type(exc).__name__}: {str(exc)[:120]}")
+            target_status[label] = {
+                "status": "FAILED_TO_RETRIEVE", "url": clean_text(spec.get("url")),
+                "reason": f"{type(exc).__name__}:{str(exc)[:100]}",
+            }
+    stats["primary_evidence_target_status"] = target_status
+    stats["primary_evidence_targets_configured"] = len([x for x in specs if isinstance(x, dict) and x.get("main", True)])
+    stats["primary_evidence_targets_found"] = sum(1 for x in target_status.values() if isinstance(x, dict) and x.get("status") == "FOUND")
+    stats["primary_evidence_targets_already_present"] = sum(1 for x in target_status.values() if isinstance(x, dict) and x.get("status") == "ALREADY_PRESENT")
+    return dedupe_candidates(out)
 
 
 def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: bool = False, sources_override: list[dict[str, Any]] | None = None, stage_deadline: float | None = None, execution_stats: dict[str, Any] | None = None, reconsider_seen: bool = False, publication_floor: dt.date | None = None) -> list[dict[str, Any]]:
@@ -11378,13 +11714,77 @@ def _recover_radar_from_git(max_commits: int = 80, *, skip_head: bool = False) -
         a = data.get("strand_a") if isinstance(data.get("strand_a"), list) else []
         b = data.get("strand_b") if isinstance(data.get("strand_b"), list) else []
         c = data.get("strand_c") if isinstance(data.get("strand_c"), list) else []
-        score = len(a) + len(b) + len(c)
+        c_archive = data.get(SIGNAL_ARCHIVE_KEY) if isinstance(data.get(SIGNAL_ARCHIVE_KEY), list) else []
+        score = len(a) + len(b) + len(c) + len(c_archive)
         completed = _snapshot_completed_at(data)
         completed_score = completed.timestamp() if completed else 0.0
         candidate = (score, completed_score, -recency_index, data)
         if best is None or candidate[:3] > best[:3]:
             best = candidate
     return best[3] if best else {}
+
+
+def _recover_signal_archive_from_git(current: dict[str, Any], max_commits: int = 120, *, skip_head: bool = False) -> dict[str, Any]:
+    """Recover every previously accepted Strand-C row into private history on an upload.
+
+    Strand C is a rolling public window, but accepted signal history must be cumulative.
+    Earlier scanner versions could remove a C row before ``signal_archive`` existed. On an
+    upgrade push we therefore inspect recent Git versions of ``radar.json`` and preserve any
+    no-longer-active signal privately. This never resurrects an old signal into the public
+    window and never touches A/B.
+    """
+    if not _valid_saved_radar(current):
+        return current
+    try:
+        start_rev = "HEAD^" if skip_head else "HEAD"
+        revs = subprocess.run(
+            ["git", "rev-list", f"--max-count={max_commits}", start_rev, "--", "radar.json"],
+            cwd=ROOT, capture_output=True, text=True, timeout=12, check=True,
+        ).stdout.splitlines()
+    except Exception:
+        return current
+
+    out = dict(current)
+    active = {signal_identity(x) for x in out.get("strand_c", []) if isinstance(x, dict)}
+    archive = archive_signal_rows(
+        out.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(out.get(SIGNAL_ARCHIVE_KEY), list) else [],
+        [], "git_history_recovered",
+    )
+    archived = {signal_identity(x) for x in archive if isinstance(x, dict)}
+    recovered_rows: list[dict[str, Any]] = []
+    for rev in revs:
+        try:
+            raw = subprocess.run(
+                ["git", "show", f"{rev}:radar.json"], cwd=ROOT, capture_output=True,
+                text=True, timeout=8, check=True,
+            ).stdout
+            data = json.loads(raw)
+        except Exception:
+            continue
+        if not _valid_saved_radar(data):
+            continue
+        history_rows = []
+        history_rows.extend(data.get("strand_c", []) if isinstance(data.get("strand_c"), list) else [])
+        history_rows.extend(data.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(data.get(SIGNAL_ARCHIVE_KEY), list) else [])
+        for row in history_rows:
+            if not isinstance(row, dict):
+                continue
+            # Private history is preservation, not re-admission. Keep any structurally coherent
+            # previously published signal even if today's stricter public-C quality gate rejects it.
+            if not record_source_integrity_ok(row) or not record_date_integrity_ok(row):
+                continue
+            key = signal_identity(row)
+            if not key or key in {"signal::", "signal-link:"} or key in active or key in archived:
+                continue
+            saved = dict(row)
+            saved["new_this_scan"] = False
+            saved["public_active"] = False
+            recovered_rows.append(saved)
+            archived.add(key)
+    if recovered_rows:
+        archive = archive_signal_rows(archive, recovered_rows, "git_history_recovered")
+    out[SIGNAL_ARCHIVE_KEY] = archive
+    return out
 
 
 def _augment_with_git_history(current: dict[str, Any], max_commits: int = 120) -> dict[str, Any]:
@@ -11493,6 +11893,27 @@ def _sanitize_saved_radar(data: Any) -> tuple[dict[str, Any], dict[str, int]]:
         removed[strand] = len(raw) - len(clean)
         out[strand] = clean
 
+    # ``signal_archive`` is private accepted-signal history. Preserve it structurally even
+    # when today's public-C quality model would reject the row; that is the point of an
+    # archive. Only malformed/source-incoherent rows are ignored safely.
+    raw_signal_archive = out.get(SIGNAL_ARCHIVE_KEY) if isinstance(out.get(SIGNAL_ARCHIVE_KEY), list) else []
+    clean_signal_archive: list[dict[str, Any]] = []
+    seen_signal_archive: set[str] = set()
+    for item in raw_signal_archive:
+        if not isinstance(item, dict):
+            continue
+        saved = dict(item)
+        if not record_source_integrity_ok(saved) or not record_date_integrity_ok(saved):
+            continue
+        key = signal_identity(saved)
+        if not key or key in {"signal::", "signal-link:"} or key in seen_signal_archive:
+            continue
+        saved["new_this_scan"] = False
+        saved["public_active"] = False
+        clean_signal_archive.append(saved)
+        seen_signal_archive.add(key)
+    out[SIGNAL_ARCHIVE_KEY] = clean_signal_archive
+
     # ``ab_archive`` is deliberately not a fourth public strand.  It is accepted-history
     # storage used for dedupe and local re-ranking.  Apply the same structural/integrity
     # protection as A/B, but do not re-admit or re-audit it merely because it is archived.
@@ -11563,7 +11984,7 @@ def _saved_corpus_size(data: Any) -> int:
         return 0
     return sum(
         len(data.get(k, [])) if isinstance(data.get(k), list) else 0
-        for k in ("strand_a", "strand_b", "strand_c", AB_ARCHIVE_KEY)
+        for k in ("strand_a", "strand_b", "strand_c", AB_ARCHIVE_KEY, SIGNAL_ARCHIVE_KEY)
     )
 
 
@@ -11676,7 +12097,14 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
         out[AB_ARCHIVE_KEY] = []
 
     merged_c: dict[str, dict[str, Any]] = {}
-    for item in rec.get("strand_c", []) + cur.get("strand_c", []):
+    merged_c_archive = archive_signal_rows(
+        list(rec.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(rec.get(SIGNAL_ARCHIVE_KEY), list) else [])
+        + list(cur.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(cur.get(SIGNAL_ARCHIVE_KEY), list) else []),
+        [], "snapshot_archive_merge",
+    )
+    rejected_recovered_c: list[dict[str, Any]] = []
+    # Recovered snapshot first, current snapshot second so the current active copy wins.
+    for origin, item in ([('recovered', x) for x in rec.get("strand_c", [])] + [('current', x) for x in cur.get("strand_c", [])]):
         if not isinstance(item, dict):
             continue
         if institutional_container_page(
@@ -11689,16 +12117,24 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
         if not record_source_integrity_ok(item) or not record_date_integrity_ok(item):
             _diag_inc("history_reject_source_integrity")
             continue
-        if not _saved_signal_passes(item):
-            _diag_inc("history_reject_c_quality")
-            continue
         key = signal_identity(item)
         if not key or key in {"signal::", "signal-link:"}:
+            continue
+        if not _saved_signal_passes(item):
+            _diag_inc("history_reject_c_quality")
+            # A prior accepted signal that no longer satisfies the stricter public-C
+            # contract is history, not garbage. Preserve it privately instead of losing it.
+            rejected_recovered_c.append(dict(item))
             continue
         saved = dict(item)
         saved["new_this_scan"] = False
         merged_c[key] = saved
     out["strand_c"] = sorted(merged_c.values(), key=lambda x: str(x.get("date", "")), reverse=True)
+    if rejected_recovered_c:
+        merged_c_archive = archive_signal_rows(
+            merged_c_archive, rejected_recovered_c, "snapshot_public_c_rejected",
+        )
+    out[SIGNAL_ARCHIVE_KEY] = merged_c_archive
 
     # Preserve whichever incremental checkpoint is genuinely newer.  A full-repository
     # upload can carry a perfectly valid but older radar.json, so blindly trusting the
@@ -11805,6 +12241,22 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
                     "Merged the pre-upload radar corpus/state from Git history after integrity filtering "
                     f"({before} -> {_saved_corpus_size(clean)} saved A/B/C rows; "
                     f"bundle_completed={cur_stamp}, live_pre_upload_completed={rec_stamp}).",
+                    flush=True,
+                )
+            # Earlier builds could delete C before signal_archive existed. Recover that
+            # accepted signal history from recent Git revisions on upgrade pushes only.
+            # Missing rows go to the private archive and are never resurrected publicly.
+            before_archive = len(clean.get(SIGNAL_ARCHIVE_KEY, [])) if isinstance(clean.get(SIGNAL_ARCHIVE_KEY), list) else 0
+            # Git-history signal recovery is meaningful only for the live repository output.
+            # Tests and utility callers often patch OUT_PATH to a temporary file; do not make
+            # those paths walk repository history (slow and unrelated to their fixture).
+            if OUT_PATH.resolve() == (ROOT / "radar.json").resolve():
+                clean = _recover_signal_archive_from_git(clean, max_commits=120, skip_head=is_upgrade_push)
+            after_archive = len(clean.get(SIGNAL_ARCHIVE_KEY, [])) if isinstance(clean.get(SIGNAL_ARCHIVE_KEY), list) else 0
+            if after_archive > before_archive:
+                print(
+                    f"Recovered {after_archive - before_archive} previously accepted weak-signal row(s) "
+                    "from Git history into private signal_archive; public Strand C unchanged.",
                     flush=True,
                 )
         clean.pop("repository_bundle_seed", None)
@@ -12661,6 +13113,18 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
     an optional safety cap; 0 means unlimited, which is the default for this build.
     """
     merged: dict[str, dict[str, Any]] = {}
+    # A deep primary-document rediscovery may have a different formal PDF title from the
+    # older landing-page wrapper. Treat that as a source upgrade of the same evidence, not
+    # as a new finding. The old first_seen survives and the wrapper URL remains recorded in
+    # landing_page_url / primary_evidence_upgrade_from_link.
+    upgrade_by_landing: dict[str, dict[str, Any]] = {}
+    for item in new_items:
+        if not isinstance(item, dict) or not item.get("primary_evidence_upgrade"):
+            continue
+        landing = normalized_link(item.get("landing_page_url") or item.get("primary_evidence_upgrade_from_link"))
+        if landing:
+            upgrade_by_landing[landing] = item
+    upgrade_first_seen: dict[str, str] = {}
     for old in previous:
         if not isinstance(old, dict) or signal_is_retired(old) or not english_public_item_ok(old):
             continue
@@ -12672,6 +13136,11 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
         # the workflow's cumulative-corpus safety check.
         if not record_source_integrity_ok(old) or not record_date_integrity_ok(old):
             _diag_inc("signal_reject_record_integrity")
+            continue
+        old_link = normalized_link(old.get("link") or old.get("url"))
+        old_landing = normalized_link(old.get("landing_page_url")) or old_link
+        if old_landing in upgrade_by_landing and old_link == old_landing:
+            upgrade_first_seen[old_landing] = clean_text(old.get("first_seen"))
             continue
         internal = internalize_previous(old)
         key = identity(internal)
@@ -12692,9 +13161,11 @@ def merge_corpus(previous: list[dict[str, Any]], new_items: list[dict[str, Any]]
         if key == "title:":
             continue
         existing = merged.get(key)
-        if existing is None:
+        landing = normalized_link(item.get("landing_page_url") or item.get("primary_evidence_upgrade_from_link"))
+        upgrade_seen = upgrade_first_seen.get(landing, "") if item.get("primary_evidence_upgrade") else ""
+        if existing is None and not upgrade_seen:
             new_ids.add(key)
-        first_seen = existing.get("first_seen") if existing else now_iso
+        first_seen = existing.get("first_seen") if existing else (upgrade_seen or now_iso)
         merged[key] = {**item, "first_seen": first_seen, "new_this_scan": key in new_ids}
     vals = list(merged.values())
     vals.sort(key=lambda x: (not bool(x.get("new_this_scan")),) + rank_candidate(x))
@@ -13395,6 +13866,8 @@ _SIGNAL_CONCRETE_EVENT_CUES = [
 _SIGNAL_PROPOSAL_STATUS_CUES = [
     r"\bproposal for\b", r"\bproposals?\b", r"\bproposes?\b", r"\bproposed\b",
     r"\bpublic consultation\b", r"\bconsultation launched\b", r"\bcall for evidence\b",
+    r"\bcall for (?:proposals?|tenders?|applications?)\b", r"\bopen call\b",
+    r"\b(?:tender|procurement) (?:is |was |has been )?(?:launched|opened|announced)\b",
     r"\bdraft (?:regulation|law|act|strategy|roadmap|guidance|work programme)\b",
     r"\broadmap\b", r"\bstrategy (?:sets out|aims|proposes|envisages)\b",
     r"\bplans? to\b", r"\bintends? to\b", r"\baims? to\b",
@@ -14356,6 +14829,21 @@ def _signal_claim_is_fragment(claim: str) -> bool:
     return bool(re.match(r'^(?:as|and|but|while|which|with|including|when|where|because|to|for|by|of|in)\b', c, re.I))
 
 
+def _clean_signal_event_claim(value: str) -> str:
+    """Strip CMS/navigation prefixes without inventing any event content."""
+    c = clean_text(value)
+    if not c:
+        return ""
+    # Common institutional page extraction prefix: ``Introduction Previous Next 30 Jul
+    # 2026 <headline> On 30 July 2026, ...``. Prefer the explicit dated event clause.
+    month = r"(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)"
+    m = re.search(rf"\bOn\s+[0-3]?\d\s+{month}\s+20\d{{2}},", c, re.I)
+    if m and m.start() > 0:
+        c = c[m.start():]
+    c = re.sub(r"^(?:(?:Introduction|Previous|Next)\s+){1,6}", "", c, flags=re.I).strip()
+    return clean_text(c)
+
+
 def _signal_what_claim(desc: str, headline: str) -> str:
     # Prefer the source description/body over simply echoing the headline. The earlier
     # ``existing=headline`` call caused concise claim extraction to return the headline
@@ -14364,17 +14852,19 @@ def _signal_what_claim(desc: str, headline: str) -> str:
     what = plain_language_claim(desc, headline, "")
     desc_themes = set(themes_for(clean_text(desc))) & WATCH_SIGNAL_THEMES
     what_themes = set(themes_for(what)) & WATCH_SIGNAL_THEMES if what else set()
+    what = _clean_signal_event_claim(what)
+    what_themes = set(themes_for(what)) & WATCH_SIGNAL_THEMES if what else set()
     if _signal_claim_is_substantive(what) and not _signal_claim_is_fragment(what) and (what_themes or not desc_themes):
         return what
     for sent in split_sentences(clean_text(desc), max_chars=5000):
-        candidate = plain_language_claim(sent, headline, sent)
+        candidate = _clean_signal_event_claim(plain_language_claim(sent, headline, sent))
         if _signal_claim_is_substantive(candidate) and not _signal_claim_is_fragment(candidate):
             return candidate
-        raw_candidate = clean_text(sent)
+        raw_candidate = _clean_signal_event_claim(clean_text(sent))
         raw_themes = set(themes_for(raw_candidate)) & WATCH_SIGNAL_THEMES
         if raw_themes and _signal_claim_is_substantive(raw_candidate) and not _signal_claim_is_fragment(raw_candidate):
             return raw_candidate
-    fallback = _signal_headline_claim(headline)
+    fallback = _clean_signal_event_claim(_signal_headline_claim(headline))
     return fallback if _signal_claim_is_substantive(fallback) else ''
 
 
@@ -15748,7 +16238,7 @@ def main() -> int:
         )
         fut_primary_evidence = ex.submit(
             safe_stage, "must-not-miss primary EU evidence", collect_must_not_miss_primary_evidence,
-            previous, warnings, primary_evidence_deadline
+            previous, warnings, primary_evidence_deadline, execution_stats
         )
         news = fut_news.result()
         oa = fut_oa.result()
@@ -17716,6 +18206,20 @@ def main() -> int:
         item for item in strand_c
         if clean_text(item.get("headline", "")) not in retired_signal_titles
     ]
+    # Final continuity guard: if a previously public signal is not carried forward for any
+    # reason (quality migration, integrity change, duplicate collapse, retirement), archive
+    # the prior accepted row before writing radar.json. Expiry/retirement may already have
+    # archived it earlier; archive_signal_rows is identity-idempotent.
+    signal_archive = previous.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(previous.get(SIGNAL_ARCHIVE_KEY), list) else []
+    dropped_previous_c = []
+    for old in prev_c:
+        if not isinstance(old, dict):
+            continue
+        if any(signals_near_duplicate(old, cur) for cur in strand_c if isinstance(cur, dict)):
+            continue
+        dropped_previous_c.append(old)
+    if dropped_previous_c:
+        signal_archive = archive_signal_rows(signal_archive, dropped_previous_c, "not_carried_forward", now_iso)
     # Strand C alone expires 60 days after first insertion; A/B/frontier are cumulative.
     # Do not delete C rows merely to enforce a presentation share ceiling; evidential
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
@@ -18216,7 +18720,7 @@ def main() -> int:
         "strand_b": strand_b,
         AB_ARCHIVE_KEY: ab_archive,
         "strand_c": strand_c,
-        SIGNAL_ARCHIVE_KEY: previous.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(previous.get(SIGNAL_ARCHIVE_KEY), list) else [],
+        SIGNAL_ARCHIVE_KEY: signal_archive,
         "frontier_evidence": frontier_evidence,
         "strategic_pathways": strategic_pathways,
         "external_shock_watch": external_shock_watch,
@@ -18231,6 +18735,11 @@ def main() -> int:
             "crossref_admitted_before_dedupe": len(cr),
             "crossref_public_anonymous": True,
             "institutional_admitted_before_dedupe": len(inst),
+            "primary_evidence_target_status": dict(execution_stats.get("primary_evidence_target_status", {}) or {}),
+            "primary_evidence_targets_configured": int(execution_stats.get("primary_evidence_targets_configured", 0) or 0),
+            "primary_evidence_targets_found": int(execution_stats.get("primary_evidence_targets_found", 0) or 0),
+            "primary_evidence_targets_already_present": int(execution_stats.get("primary_evidence_targets_already_present", 0) or 0),
+            "signal_archive_total": len(signal_archive),
             "manual_recovery_urls_attempted": int(execution_stats.get("manual_recovery_urls_attempted", 0)),
             "manual_recovery_admitted": int(execution_stats.get("manual_recovery_admitted", 0)),
             "manual_recovery_queue_remaining": len(manual_ingest_state.get("recovery_queue", [])) if manual_ingest_state else 0,

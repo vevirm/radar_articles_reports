@@ -495,7 +495,7 @@ def fetch_text(url: str, timeout: int) -> str:
     except Exception:
         return ""
     ctype = (r.headers.get("Content-Type") or "").lower()
-    if "pdf" in ctype or r.url.lower().endswith(".pdf"):
+    if "pdf" in ctype or r.url.lower().endswith(".pdf") or bytes((getattr(r,"content",b"") or b"")[:5]).startswith(b"%PDF-"):
         try:
             reader = PdfReader(io.BytesIO(r.content))
             return clean(" ".join((p.extract_text() or "") for p in reader.pages[:10]))[:14000]
@@ -698,8 +698,36 @@ def _historical_doc_tokens(value: str) -> set[str]:
     return {x for x in re.sub(r"[^a-z0-9]+"," ",norm(value)).split() if len(x)>=2 and x not in generic}
 
 
+def _historical_same_source_family(a: str, b: str) -> bool:
+    try:
+        ha=(urlparse(a).hostname or "").lower().removeprefix("www.")
+        hb=(urlparse(b).hostname or "").lower().removeprefix("www.")
+    except Exception:
+        return False
+    if not ha or not hb: return False
+    if ha==hb or ha.endswith("."+hb) or hb.endswith("."+ha): return True
+    return ha.endswith(".europa.eu") and hb.endswith(".europa.eu")
+
+
+def _historical_download_context(a: Any) -> str:
+    parts=[clean(a.get_text(" ",strip=True))]
+    parent=a.find_parent(["li","p","dd","td","tr","div"])
+    if parent is not None:
+        txt=clean(parent.get_text(" ",strip=True))
+        if txt and len(txt)<=700: parts.append(txt)
+    for sib in list(a.previous_siblings)[-3:]:
+        try: txt=clean(sib.get_text(" ",strip=True) if hasattr(sib,"get_text") else str(sib))
+        except Exception: txt=""
+        if txt and len(txt)<=260: parts.append(txt)
+    return clean(" ".join(dict.fromkeys(x for x in parts if x)))[:900]
+
+
 def _historical_primary_document_url(soup: BeautifulSoup, page_url: str, title: str) -> str:
-    """Prefer the downloadable English document behind an institutional landing page."""
+    """Prefer the actual English report/proposal behind an institutional landing page.
+
+    EU download URLs often have no .pdf suffix, so use the surrounding download-block
+    label plus same-source provenance and known redirect/download URL shapes.
+    """
     parsed=urlparse(page_url); host=(parsed.hostname or "").lower().removeprefix("www.")
     if host=="op.europa.eu":
         m=re.search(r"/publication/([0-9a-f]{8}-[0-9a-f-]{27,})",parsed.path,re.I)
@@ -707,16 +735,21 @@ def _historical_primary_document_url(soup: BeautifulSoup, page_url: str, title: 
             return ("https://op.europa.eu/o/opportal-service/download-handler"
                     f"?identifier={m.group(1)}&format=pdf&language=en&productionSystem=cellar&part=")
     tt=_historical_doc_tokens(title); best=None
-    for a in soup.find_all("a",href=True):
-        href=urljoin(page_url,clean(a.get("href"))); label=clean(a.get_text(" ",strip=True))
-        low=norm(f"{href} {label}")
-        if ".pdf" not in low and "download" not in low:
-            continue
-        lt=_historical_doc_tokens(f"{href} {label}"); overlap=len(tt&lt)
-        explicit=bool(re.search(r"\b(download|full report|full text|english|pdf|impact assessment|proposal)\b",low))
-        if overlap<1 and not explicit:
-            continue
-        score=overlap*4+(3 if explicit else 0)+(2 if ".pdf" in low else 0)
+    for order,a in enumerate(soup.find_all("a",href=True)):
+        href=urljoin(page_url,clean(a.get("href"))); context=_historical_download_context(a)
+        low=norm(f"{href} {context}"); path=norm(urlparse(href).path)
+        if "print as pdf" in norm(context): continue
+        shape=bool(".pdf" in path or "download-handler" in low or "/redirection/document/" in path or "/download/" in path or "/downloads/" in path)
+        explicit=bool(re.search(r"\b(download|full report|full text|english|pdf|impact assessment|proposal|staff working document|annex)\b",norm(context)))
+        if not shape and not explicit: continue
+        lt=_historical_doc_tokens(f"{href} {context}"); overlap=len(tt&lt)
+        ratio=overlap/max(1,min(len(tt),6)); same=_historical_same_source_family(page_url,href)
+        if same:
+            if overlap<1 and not (shape and explicit): continue
+        else:
+            if not shape or not explicit or overlap<3 or ratio<0.5: continue
+        role_bonus=5 if "proposal" in norm(context) else 4 if any(x in norm(context) for x in ["report","study","monitor"]) else 3 if "impact assessment" in norm(context) else 0
+        score=(8 if same else 0)+overlap*4+ratio*5+(3 if explicit else 0)+(2 if shape else 0)+role_bonus-order*0.001
         if best is None or score>best[0]: best=(score,href)
     return best[1] if best else ""
 

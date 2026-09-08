@@ -8,6 +8,8 @@ from pathlib import Path
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 if str(ROOT / 'scripts') not in sys.path:
     sys.path.insert(0, str(ROOT / 'scripts'))
 import scan_radar as sr
@@ -86,10 +88,147 @@ class V231PrimaryEvidenceSchedulerTests(unittest.TestCase):
         self.assertEqual(watch[0]['event_status'], 'PROPOSED')
         self.assertIs(watch[0]['private_watch_only'], True)
 
+    def test_download_block_without_pdf_suffix_is_a_primary_document_candidate(self):
+        from bs4 import BeautifulSoup
+        html = """
+        <html><body><h1>Proposal for the Chips Act 2.0</h1>
+          <div class='download'><span>1 - Proposal Chips Act 2.0</span>
+            <a href='https://ec.europa.eu/newsroom/dae/redirection/document/129104'>Download</a>
+          </div>
+          <div class='download'><span>3 - Impact Assessment (Part 1)</span>
+            <a href='https://ec.europa.eu/newsroom/dae/redirection/document/129106'>Download</a>
+          </div>
+        </body></html>
+        """
+        soup = BeautifulSoup(html, 'html.parser')
+        rows = sr._primary_document_candidates(
+            soup, 'https://digital-strategy.ec.europa.eu/en/library/proposal-chips-act-20',
+            'Proposal for the Chips Act 2.0',
+        )
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]['url'], 'https://ec.europa.eu/newsroom/dae/redirection/document/129104')
+        self.assertEqual(rows[0]['role'], 'proposal')
+
+    def test_primary_evidence_hub_follows_download_redirect_even_without_pdf_suffix(self):
+        class FakeResponse:
+            def __init__(self, url, content_type, text='', content=b''):
+                self.url = url
+                self.headers = {'content-type': content_type}
+                self.text = text
+                self.content = content
+                self.status_code = 200
+
+        landing_url = 'https://digital-strategy.ec.europa.eu/en/library/proposal-chips-act-20'
+        doc_url = 'https://ec.europa.eu/newsroom/dae/redirection/document/129104'
+        landing_html = """
+        <html><head><meta property='og:title' content='Proposal for the Chips Act 2.0'>
+        <meta name='date' content='2026-06-03'></head><body>
+          <h1>Proposal for the Chips Act 2.0</h1>
+          <div><span>1 - Proposal Chips Act 2.0</span><a href='%s'>Download</a></div>
+        </body></html>
+        """ % doc_url
+        responses = {
+            landing_url: FakeResponse(landing_url, 'text/html', text=landing_html),
+            doc_url: FakeResponse(doc_url, 'application/octet-stream', content=b'%PDF-fake'),
+        }
+        parsed = {
+            'title': 'Proposal for the Chips Act 2.0', 'source': 'European Commission — DG CONNECT',
+            'date': '2026-06-03', 'link': doc_url, 'strand': 'A', 'summary': 'Synthetic test',
+        }
+        spec = {'url': landing_url, 'source': 'European Commission — DG CONNECT', 'tier': 1, 'label': 'Chips Act 2.0 proposal'}
+        with mock.patch.object(sr, 'get', side_effect=lambda url, timeout=0: responses.get(url)), \
+             mock.patch.object(sr, 'parse_institution_pdf', return_value=parsed.copy()) as pdf_parser:
+            rows, status = sr._primary_evidence_from_landing(spec, [], None)
+        self.assertEqual(status['status'], 'FOUND')
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['link'], doc_url)
+        self.assertEqual(rows[0]['landing_page_url'], landing_url)
+        self.assertEqual(rows[0]['primary_document_role'], 'proposal')
+        self.assertTrue(pdf_parser.called)
+
+    def test_primary_target_is_incomplete_when_only_landing_page_is_saved(self):
+        baseline = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
+        spec = {
+            'url': 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada',
+            'source': 'European Commission — Digital Strategy', 'tier': 1,
+            'label': 'Cloud and AI Development Act (CADA) proposal',
+        }
+        self.assertFalse(sr._primary_target_present(spec, baseline))
+
+    def test_primary_target_is_complete_when_downloadable_primary_document_is_saved(self):
+        spec = {
+            'url': 'https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada',
+            'source': 'European Commission — Digital Strategy', 'tier': 1,
+            'label': 'Cloud and AI Development Act (CADA) proposal',
+        }
+        previous = {'strand_a': [{
+            'title': 'Proposal for a Regulation on Cloud and AI Development',
+            'source': 'European Commission — Digital Strategy',
+            'date': '2026-06-03',
+            'link': 'https://ec.europa.eu/newsroom/dae/redirection/document/129200',
+            'landing_page_url': spec['url'],
+            'primary_evidence_target_label': spec['label'],
+            'primary_document_role': 'proposal',
+            'source_integrity_basis': 'institution PDF',
+        }]}
+        self.assertTrue(sr._primary_target_present(spec, previous))
+
+    def test_merge_upgrades_landing_wrapper_without_fake_new_item_or_losing_first_seen(self):
+        baseline = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
+        old = next(x for x in baseline['strand_a'] if 'Cloud and AI Development Act' in x.get('title', ''))
+        landing = old['link']
+        new = copy.deepcopy(old)
+        new.update({
+            'title': 'Proposal for a Regulation on Cloud and AI Development',
+            'link': 'https://ec.europa.eu/newsroom/dae/redirection/document/129200',
+            'landing_page_url': landing,
+            'primary_document_role': 'proposal',
+            'source_integrity_basis': 'institution PDF',
+            'primary_evidence_upgrade': True,
+            'primary_evidence_upgrade_from_link': landing,
+            'primary_evidence_upgrade_from_title': old['title'],
+            'new_this_scan': True,
+        })
+        merged = sr.merge_corpus([old], [new], 'A', '2026-09-08T12:00Z')
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]['link'], new['link'])
+        self.assertEqual(merged[0]['landing_page_url'], landing)
+        self.assertEqual(merged[0]['first_seen'], old['first_seen'])
+        self.assertFalse(merged[0]['new_this_scan'])
+
+    def test_open_call_is_precursor_not_public_done_event(self):
+        claim = 'The EU launched a call for tenders to establish up to seven AI Gigafactories across Europe.'
+        self.assertEqual(sr.signal_event_status(claim), 'PROPOSED')
+        self.assertFalse(sr.public_signal_event_status(sr.signal_event_status(claim)))
+
+    def test_snapshot_merge_archives_previously_accepted_c_that_no_longer_passes_public_gate(self):
+        current = {'strand_a': [], 'strand_b': [], 'strand_c': [], 'last_updated': '2026-09-08T12:00:00Z'}
+        recovered = copy.deepcopy(current)
+        old_signal = {
+            'headline': 'EU proposes a future research roadmap',
+            'source': 'Example source',
+            'date': '2026-08-01',
+            'link': 'https://example.eu/proposed-roadmap',
+            'first_seen': '2026-08-01T00:00Z',
+            'signal_note': 'The EU proposes a future research roadmap for strategic technology.',
+            'why_it_matters': 'This may affect European research policy.',
+            'evidence_status': 'low',
+        }
+        recovered['strand_c'] = list(recovered.get('strand_c', [])) + [old_signal]
+        merged = sr._merge_saved_snapshots(current, recovered)
+        self.assertFalse(any(x.get('headline') == old_signal['headline'] for x in merged.get('strand_c', [])))
+        self.assertTrue(any(x.get('headline') == old_signal['headline'] for x in merged.get('signal_archive', [])))
+
+
     def test_main_whole_repo_push_can_union_stronger_preupload_snapshot(self):
         baseline = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
-        current = copy.deepcopy(baseline)
-        recovered = copy.deepcopy(baseline)
+        current = {
+            'strand_a': [copy.deepcopy(baseline['strand_a'][0])],
+            'strand_b': [], 'strand_c': [],
+            'last_updated': '2026-09-08T10:00:00Z',
+            'first_scan_complete': True,
+        }
+        recovered = copy.deepcopy(current)
         extra = copy.deepcopy(recovered['strand_a'][0])
         extra['title'] = 'Synthetic retained pre-upload evidence item for continuity test'
         extra['link'] = 'https://example.eu/retained-pre-upload-evidence'
@@ -107,7 +246,9 @@ class V231PrimaryEvidenceSchedulerTests(unittest.TestCase):
             with mock.patch.object(sr, 'OUT_PATH', out), \
                  mock.patch.object(sr, 'SEED_PATH', seed), \
                  mock.patch.object(sr, 'run_trigger_label', return_value='push'), \
-                 mock.patch.object(sr, '_recover_radar_from_git', return_value=recovered):
+                 mock.patch.object(sr, 'is_fresh_repository_seed', return_value=False), \
+                 mock.patch.object(sr, '_recover_radar_from_git', return_value=recovered), \
+                 mock.patch.object(sr, '_recover_signal_archive_from_git', side_effect=lambda current, *a, **k: current):
                 loaded = sr.load_previous(allow_git_recovery=True)
 
         self.assertTrue(any(x.get('title') == extra['title'] for x in loaded.get('strand_a', [])))
