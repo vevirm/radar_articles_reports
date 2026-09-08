@@ -1,29 +1,16 @@
-V23.2 FIX — EASIEST GITHUB WEB UPLOAD
+UPLOAD THESE TWO FILES INTO THIS EXISTING GITHUB FOLDER:
+.github/workflows/
 
-If your GitHub repository is already the same v23.0 repository that produced the failing
-regression-test screenshot, use the small patch package:
+Replace the existing files with the same names:
+- radar-scan.yml
+- historical-scan.yml
 
-  radar_articles_reports-v23.2-patch-upload.zip
+GitHub web steps:
+1. Open the repository.
+2. Open .github -> workflows.
+3. Click Add file -> Upload files.
+4. Drag radar-scan.yml and historical-scan.yml from this package.
+5. Commit directly to main (or via PR if preferred).
+6. Then open Actions -> R&I Radar Scan -> Run workflow.
 
-1. Unzip the patch package on your computer.
-2. In GitHub, open the repository root.
-3. Choose Add file -> Upload files.
-4. Drag EVERYTHING INSIDE the unzipped patch folder into GitHub.
-5. Make sure the `.github` folder is included; this repair changes both workflow files.
-6. Commit the upload.
-7. Open Actions -> R&I Radar Scan -> Run workflow once manually.
-
-The patch contains only the changed files, so it stays comfortably below the GitHub web
-uploader's per-upload file limit.
-
-If instead you use the full fixed-repository ZIP, use Git/GitHub Desktop or upload it in
-multiple batches: the complete repository has more than 100 files.
-
-IMPORTANT:
-- Do not unzip tests/all_tests.zip. It belongs inside the repository.
-- Do not omit `.github/workflows/radar-scan.yml` or `.github/workflows/historical-scan.yml`.
-- The regression gate should report OK after this patch; then the real `Run radar scan` step
-  will finally execute.
-- The scanner remains a 24-minute production research scan. The patch fixes primary-document
-  depth/merge semantics and restores the intended four-hour scheduler; it does not make the
-  scanner shallower.
+Do NOT upload these two files to repository root; they must replace the existing files inside .github/workflows/.
