@@ -2708,7 +2708,7 @@
     "concept drift narrative change detection policy text method",
     "event detection temporal NLP emerging policy signals methodology"
   ],
-  "queries_b_method_per_scan": 24,
+  "queries_b_method_per_scan": 36,
   "signal_quality_profile_version": "v18.1-a-anchored-observed-done-committed-no-open-calls",
   "rotation_profile_version": "v21.20-source-and-journal-diversity",
   "openalex_exploration_queries_per_scan": 16,
@@ -2735,8 +2735,8 @@
   "frontier_gap_deepening_max_waves": 32,
   "scan_finalize_reserve_seconds": 35,
   "weak_signal_followup_every_n_waves": 2,
-  "weak_signal_followup_queries_per_wave": 8,
-  "weak_signal_followup_max_passes": 3,
+  "weak_signal_followup_queries_per_wave": 10,
+  "weak_signal_followup_max_passes": 4,
   "frontier_gap_recompute_every_n_waves": 1,
   "frontier_stubborn_recovery_enabled": true,
   "frontier_stubborn_recovery_lookback_months": 6,
@@ -2793,6 +2793,8 @@
   "priority_people_trigger_below_scholarly_candidates": 18,
   "finding_context_query_bank_size": 12,
   "finding_context_queries_per_scan": 4,
+  "high_order_inference_query_bank_size": 8,
+  "high_order_inference_feedback_policy": "Persistent Level-4/5 candidates may contribute missing-link and falsifier searches inside the existing finding-context query budget. They do not increase the lane budget, bypass admission, or reduce Strand A evidence standards.",
   "foreign_language_english_evidence_min_words": 25,
   "english_evidence_rule": "Public A/B evidence must be an English-language publication. Explicit foreign-language metadata, a non-English publication title, or meaningful non-Latin source prose rejects the record. An English abstract does not rescue a foreign-language publication; no translation is used for admission.",
   "eu_ri_geopolitics_core_rule": "Strand A requires source-supported EU/European scope + substantive R&I + geopolitical/economic-security relevance. The radar may summarize source evidence but may not manufacture Europe relevance by attaching an inferred external-shock bridge.",
@@ -2900,7 +2902,7 @@
   },
   "presentation_profile_version": "v17.13.28-source-specific-radar-and-source-bullets",
   "foresight_author_followup_enabled": true,
-  "foresight_author_followup_per_scan": 6,
+  "foresight_author_followup_per_scan": 10,
   "foresight_author_followup_stage_seconds": 90,
   "foresight_author_followup_min_b_items": 1,
   "foresight_author_followup_rule": "Authors already evidenced by admitted Strand-B foresight/method publications receive a bounded rotating exact-author check in OpenAlex/Crossref. Their later works must pass the ordinary A/B gates; no institution or domain receives a permanent lane.",
@@ -3276,11 +3278,11 @@
       ]
     }
   ],
-  "direct_news_pages_per_source": 12,
-  "direct_news_links_per_source": 30,
+  "direct_news_pages_per_source": 14,
+  "direct_news_links_per_source": 34,
   "direct_news_timeout_seconds": 10,
   "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources.",
-  "c_min_new_per_successful_scan": 2,
+  "c_min_new_per_successful_scan": 3,
   "c_floor_rescue_enabled": true,
   "c_floor_rescue_min_seconds_remaining": 65,
   "c_floor_rescue_stage_seconds": 60,
@@ -3288,7 +3290,7 @@
     336,
     720
   ],
-  "c_floor_rescue_queries_per_wave": 6,
+  "c_floor_rescue_queries_per_wave": 8,
   "c_floor_rescue_queries": [
     "Europe research security cooperation universities China",
     "EU semiconductor quantum biotech AI research investment partnership",
@@ -3466,7 +3468,7 @@
   "direct_top_journal_google_news_lookback_days": 14,
   "direct_top_journal_google_news_queries_per_source": 2,
   "strategic_signal_profile_version": "v17.19.31-shock-family-active-recall",
-  "weak_signal_attention_profile_version": "v17.19.18-weak-signals-first-reader-and-rescue",
+  "weak_signal_attention_profile_version": "v23.4-context-weighted-c60d-l45-feedback",
   "strategic_pathway_scan_enabled": true,
   "strategic_pathway_scholarly_queries_per_category": 4,
   "strategic_pathway_news_queries": {
@@ -3808,11 +3810,62 @@
   "weak_signal_public_event_statuses": [
     "OBSERVED",
     "DONE",
-    "COMMITTED"
+    "COMMITTED",
+    "INTERPRETIVE"
   ],
   "weak_signal_precursor_event_statuses": [
     "PROPOSED"
   ],
   "primary_evidence_stage_seconds": 180,
-  "primary_evidence_documents_per_target": 3
+  "primary_evidence_documents_per_target": 3,
+  "weak_signal_context_weight": 0.3,
+  "historical_shock_context_weight": 0.45,
+  "weak_signal_commentary_enabled": true,
+  "weak_signal_commentary_min_words": 12,
+  "weak_signal_commentary_sources": [
+    {
+      "name": "Reuters",
+      "domain": "reuters.com"
+    },
+    {
+      "name": "Financial Times",
+      "domain": "ft.com"
+    },
+    {
+      "name": "Bloomberg",
+      "domain": "bloomberg.com"
+    },
+    {
+      "name": "Politico Europe",
+      "domain": "politico.eu"
+    },
+    {
+      "name": "The Economist",
+      "domain": "economist.com"
+    },
+    {
+      "name": "Nature",
+      "domain": "nature.com"
+    },
+    {
+      "name": "Science",
+      "domain": "science.org"
+    },
+    {
+      "name": "Science|Business",
+      "domain": "sciencebusiness.net"
+    },
+    {
+      "name": "Research Professional News",
+      "domain": "researchprofessionalnews.com"
+    },
+    {
+      "name": "Times Higher Education",
+      "domain": "timeshighereducation.com"
+    }
+  ],
+  "strand_a_protected_scholarly_queries_per_source": 20,
+  "strand_a_priority_policy": "The first 20 broad scholarly query slots per source are protected for substantive Strand-A-oriented lanes when budget allows. Strand-B method queries may use remaining broad slots plus bounded method-author/source follow-up, but cannot crowd A out of the executed prefix.",
+  "high_order_inference_news_queries_per_scan": 4,
+  "high_order_inference_news_feedback_policy": "Up to four missing-link/falsifier queries from persistent Level-4/5 candidates may join the ordinary weak-signal coverage lane. Results still need trusted-source, 60-day, A-anchor and C admission rules."
 }

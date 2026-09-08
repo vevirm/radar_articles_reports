@@ -322,6 +322,8 @@ _apply_rule_fix_source_extensions()
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
 WEAK_SIGNAL_RETENTION_DAYS = int(CONFIG.get("weak_signal_retention_days", 60))
+WEAK_SIGNAL_CONTEXT_WEIGHT = float(CONFIG.get("weak_signal_context_weight", 0.30) or 0.30)
+HISTORICAL_SHOCK_CONTEXT_WEIGHT = float(CONFIG.get("historical_shock_context_weight", 0.45) or 0.45)
 TARGET_AUTOMATIC_CADENCE_HOURS = 4
 LEGACY_WORKFLOW_DUE_HOURS = 6
 LEGACY_WORKFLOW_COMPAT_OFFSET_HOURS = LEGACY_WORKFLOW_DUE_HOURS - TARGET_AUTOMATIC_CADENCE_HOURS
@@ -4838,6 +4840,18 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
     eu_rel, eu_hits = eu_evidence('', source_text, '')
     if eu_rel != 'direct' and eu_news_scope(source_text):
         eu_rel, eu_hits = 'direct', ['direct European scope in source text']
+    raw_role = normalized(item.get('evidence_role'))
+    discovery = normalized(item.get('discovery_provenance') or item.get('_discovery_provenance'))
+    current_event_discovery = bool(
+        item.get('_strategic_discovery')
+        or discovery in {'google_news_rss', 'direct_news_source'}
+    )
+    weak_context = bool(
+        raw_role in {'weak signal', 'weak_signal', 'weak signal context', 'weak_signal_context'}
+        or normalized(item.get('evidence_status')) == 'low'
+        or (quality_basis == 'configured_current_event_source' and current_event_discovery)
+    )
+    analytical_weight = WEAK_SIGNAL_CONTEXT_WEIGHT if weak_context else 1.0
     return {
         'title': title,
         'source': clean_text(item.get('source')),
@@ -4852,6 +4866,12 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
         'eu_relevance': eu_rel or ('material_external' if scope_basis == 'material_external_europe_effect' else None),
         'eu_evidence': eu_hits[:4],
         'eu_ri_scope_basis': scope_basis,
+        'evidence_role': 'weak_signal_context' if weak_context else 'primary_evidence',
+        'analytical_weight': analytical_weight,
+        'context_only': bool(weak_context),
+        'retention_window_days': WEAK_SIGNAL_RETENTION_DAYS if weak_context else 0,
+        'source_tier': clean_text(item.get('source_tier') or item.get('sourceTier')),
+        'source_merit_score': item.get('source_merit_score'),
     }
 
 
@@ -4944,6 +4964,18 @@ def build_external_shock_watch(
     return rows
 
 
+def strategic_pathway_context_only(row: dict[str, Any]) -> bool:
+    if not isinstance(row, dict):
+        return False
+    role = normalized(row.get('evidence_role'))
+    basis = normalized((row.get('source_quality_gate') or {}).get('basis') if isinstance(row.get('source_quality_gate'), dict) else '')
+    return bool(
+        row.get('context_only')
+        or role in {'weak signal', 'weak_signal', 'weak signal context', 'weak_signal_context'}
+        or (not role and basis == 'configured current event source')
+    )
+
+
 def build_strategic_pathway_corpus(
     previous_records: list[dict[str, Any]],
     candidates: list[dict[str, Any]],
@@ -4953,9 +4985,13 @@ def build_strategic_pathway_corpus(
 ) -> list[dict[str, Any]]:
     """Build the independent Risks/Opportunities/External-Shocks corpus.
 
-    Candidates come from dedicated pathway news queries plus the ordinary scholarly and
-    institutional source families. They do not need to become Strand C or Matrix evidence.
+    Primary pathways come from durable substantive evidence. Recent trusted-media material
+    may be retained for 60 days as low-weight context, but it cannot originate a reader-facing
+    risk/opportunity/shock or close a primary risk by itself. Strand B methods are excluded.
     """
+    now_date = parse_date(now_iso) or dt.datetime.now(dt.timezone.utc).date()
+    weak_context_floor = now_date - dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
+
     prior_ids = {
         strategic_pathway_identity(x) for x in (previous_records or []) + (prior_embedded_records or [])
         if isinstance(x, dict) and strategic_pathway_identity(x)
@@ -4967,6 +5003,14 @@ def build_strategic_pathway_corpus(
         sid = strategic_pathway_identity(old)
         if sid:
             row = dict(old)
+            if strategic_pathway_context_only(row):
+                d = parse_date(row.get('first_seen') or row.get('date'))
+                if d and d < weak_context_floor:
+                    continue
+                row['evidence_role'] = 'weak_signal_context'
+                row['analytical_weight'] = WEAK_SIGNAL_CONTEXT_WEIGHT
+                row['context_only'] = True
+                row['retention_window_days'] = WEAK_SIGNAL_RETENTION_DAYS
             row['new_this_scan'] = False
             by_id[sid] = row
     for raw in candidates or []:
@@ -4976,6 +5020,10 @@ def build_strategic_pathway_corpus(
         sid = strategic_pathway_identity(rec)
         if not sid:
             continue
+        if strategic_pathway_context_only(rec):
+            d = parse_date(raw.get('first_seen') or rec.get('date'))
+            if d and d < weak_context_floor:
+                continue
         old = by_id.get(sid)
         if old and clean_text(old.get('first_seen')):
             rec['first_seen'] = clean_text(old.get('first_seen'))
@@ -5143,7 +5191,11 @@ def apply_strategic_risk_shock_lifecycle(corpora: list[list[dict[str, Any]]]) ->
             d = parse_date(item.get('date') or item.get('first_seen'))
             for lens in lenses:
                 records.append((item, lens, d))
-                if clean_text(lens.get('type')) == 'external_shock' and clean_text(lens.get('transition_key')):
+                if (
+                    clean_text(lens.get('type')) == 'external_shock'
+                    and clean_text(lens.get('transition_key'))
+                    and not strategic_pathway_context_only(item)
+                ):
                     shocks.setdefault(clean_text(lens.get('transition_key')), []).append((d, item, lens))
     closed = 0
     for item, lens, risk_date in records:
@@ -5871,10 +5923,12 @@ def curator_seed_query_bank(limit: int = 16) -> list[str]:
 
 
 def finding_context_query_bank(previous: dict[str, Any], limit: int = 12) -> list[str]:
-    """Turn recurring live findings into a small rotating discovery lane.
+    """Turn recurring live findings and unfinished L4/L5 candidates into discovery.
 
     This affects discovery only. Every result still has to clear the ordinary
-    source, recency, EU-R&I and triangulated strategic-context gates.
+    source, recency, EU-R&I and triangulated strategic-context gates. Higher-order
+    candidate searches are balanced between missing-link support and falsifiers;
+    they never receive an admission waiver or extra publication weight.
     """
     counts: dict[str, int] = {}
     for item in previous.get('strand_a', []) if isinstance(previous.get('strand_a'), list) else []:
@@ -5885,16 +5939,37 @@ def finding_context_query_bank(previous: dict[str, Any], limit: int = 12) -> lis
             counts[theme] = counts.get(theme, 0) + 1
     ranked = [name for name, _ in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
     # Add unmapped live themes at the end through a conservative generic formulation.
-    queries: list[str] = []
+    ordinary: list[str] = []
     for theme in ranked:
         mapped = FINDING_CONTEXT_QUERY_MAP.get(theme, [])
         if mapped:
-            queries.extend(mapped)
+            ordinary.extend(mapped)
         elif theme:
-            queries.append(f'Europe research innovation {theme} competitiveness dependency capability')
+            ordinary.append(f'Europe research innovation {theme} competitiveness dependency capability')
+        if len(ordinary) >= limit:
+            break
+
+    candidate_queries: list[str] = []
+    try:
+        from high_order_inference import feedback_queries
+        candidate_queries = feedback_queries(
+            previous.get('high_order_inference') if isinstance(previous.get('high_order_inference'), dict) else {},
+            max(0, int(CONFIG.get('high_order_inference_query_bank_size', 8) or 0)),
+        )
+    except Exception:
+        candidate_queries = []
+
+    # Do not increase this lane's total query budget. Alternate unfinished-thought probes
+    # with ordinary live-theme probes so Level-4/5 investigation cannot crowd out A.
+    queries: list[str] = []
+    for i in range(max(len(candidate_queries), len(ordinary))):
+        if i < len(candidate_queries) and candidate_queries[i] not in queries:
+            queries.append(candidate_queries[i])
+        if i < len(ordinary) and ordinary[i] not in queries:
+            queries.append(ordinary[i])
         if len(queries) >= limit:
             break
-    return list(dict.fromkeys(q for q in queries if clean_text(q)))[:limit]
+    return queries[:limit]
 
 
 def get(url: str, timeout: int = REQUEST_TIMEOUT) -> requests.Response | None:
@@ -13534,7 +13609,7 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
         return False
 
     if eu_news_scope(h):
-        return factual_news(headline, desc)
+        return factual_news(headline, desc) or trusted_analytical_commentary_candidate(headline, desc, source, '', link)
     external_specific = contains_any(h, [
         'export control', 'semiconductor', 'advanced chip', 'compute', 'quantum',
         'research cooperation', 'research collaboration', 'research security', 'research talent',
@@ -13544,7 +13619,7 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     ])
     if not external_specific:
         return False
-    return factual_news(headline, desc)
+    return factual_news(headline, desc) or trusted_analytical_commentary_candidate(headline, desc, source, '', link)
 
 
 def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
@@ -14065,6 +14140,82 @@ def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
         return False
     return True
 
+def trusted_weak_signal_commentary_source(source: str = "", domain: str = "", link: str = "") -> bool:
+    """Return True only for the small configured set of high-trust commentary outlets.
+
+    This route exists solely for Strand-C context. It never upgrades commentary into A/B
+    evidence and never bypasses the A-anchor requirement.
+    """
+    if not bool(CONFIG.get("weak_signal_commentary_enabled", True)):
+        return False
+    source_n = normalized(source)
+    domain_n = clean_text(domain).lower().removeprefix("www.")
+    if not domain_n and clean_text(link):
+        try:
+            domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
+        except Exception:
+            domain_n = ""
+    for row in CONFIG.get("weak_signal_commentary_sources", []):
+        if not isinstance(row, dict):
+            continue
+        rn = normalized(row.get("name"))
+        rd = clean_text(row.get("domain")).lower().removeprefix("www.")
+        if rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd)):
+            return True
+        if rn and source_n and rn == source_n:
+            return True
+    return False
+
+
+def trusted_analytical_commentary_candidate(
+    title: str,
+    desc: str = "",
+    source: str = "",
+    domain: str = "",
+    link: str = "",
+) -> bool:
+    """Narrow C-only route for well-formed analysis/opinion on trusted platforms.
+
+    Commentary may corroborate a live A-backed issue, but cannot be primary evidence. Pure
+    advocacy ("Europe should...") without a concrete diagnosis, mechanism or observed shift
+    still fails. The item must carry its own R&I/strategic bridge and a distinct reframing point.
+    """
+    if routine_signal_noise(title, desc) or not trusted_weak_signal_commentary_source(source, domain, link):
+        return False
+    full = normalized(f"{title}. {desc}")
+    if not full:
+        return False
+    labels = ["opinion", "commentary", "editorial", "analysis:", "analysis -", "column", "viewpoint", "comment:", "comment -"]
+    if not contains_any(full, labels):
+        return False
+    if contains_any(full, ["podcast", "book review", "letter to the editor", "interview", "sponsored", "advertorial"]):
+        return False
+    min_words = max(8, int(CONFIG.get("weak_signal_commentary_min_words", 12) or 12))
+    if len(clean_text(f"{title} {desc}").split()) < min_words:
+        return False
+    if not weak_signal_ri_strategic_bridge_ok(title, desc, themes_for(full)):
+        return False
+    diagnostic = contains_any(full, [
+        "risk", "opportunity", "dependency", "dependence", "bottleneck", "constraint", "fragmentation",
+        "shift", "changing", "competition", "competitiveness", "security", "access", "capacity", "capability",
+        "supply chain", "export control", "talent", "brain drain", "brain gain", "sovereignty", "strategic autonomy",
+        "could", "may", "might", "signals", "suggests", "indicates", "shows", "reveals", "warns", "argues",
+    ])
+    if not diagnostic:
+        return False
+    # Advice alone is not a weak signal. Keep a prescriptive piece only when it also contains
+    # a concrete diagnosis/reframing that can be checked against the A corpus.
+    prescriptive = bool(re.search(r"\b(?:should|must|needs? to|ought to)\b", full, re.I))
+    evidence_like = bool(
+        relationship_novelty_dimensions(full)
+        or reframing_signal_text(full)
+        or contains_any(full, ["because", "due to", "data", "evidence", "findings", "survey", "report", "study", "as a result"])
+    )
+    if prescriptive and not evidence_like:
+        return False
+    return bool(evidence_like)
+
+
 def factual_news(title: str, desc: str) -> bool:
     if routine_signal_noise(title, desc):
         return False
@@ -14089,7 +14240,7 @@ def factual_news(title: str, desc: str) -> bool:
     return strong_watch_signal_text(full, themes)
 
 def news_queries(domain: str, lookback_hours: int) -> list[str]:
-    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
+    days = max(2, min(60, (int(lookback_hours) + 23) // 24))
     when = f"when:{days}d"
     return [
         f'site:{domain} (research OR science OR innovation OR university OR researchers OR "Horizon Europe") (security OR cooperation OR funding OR talent OR China) (EU OR Europe OR European) {when}',
@@ -14100,7 +14251,7 @@ def news_queries(domain: str, lookback_hours: int) -> list[str]:
 
 
 def global_news_queries(lookback_hours: int) -> list[str]:
-    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
+    days = max(2, min(60, (int(lookback_hours) + 23) // 24))
     when = f"when:{days}d"
     base = [f"{q} {when}" for q in CONFIG.get("news_global_queries", []) if clean_text(q)]
 
@@ -14161,7 +14312,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
     timeout = int(CONFIG.get("news_timeout_seconds", 10))
     per_feed = int(CONFIG.get("news_items_per_feed", 60))
     jobs: list[tuple[str, str, str, bool, bool]] = []
-    days = max(2, min(30, (int(lookback_hours) + 23) // 24))
+    days = max(2, min(60, (int(lookback_hours) + 23) // 24))
     if include_base_queries:
         # Active implications discovery is deliberately first in the queue so a short news
         # deadline cannot starve risk/opportunity/shock searches behind generic source jobs.
@@ -14212,7 +14363,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             text = f"{title}. {desc}"
             strict_strategic = bool(strategic_target and strategic_pathway_candidate_text(text))
             shock_watch = bool(strategic_target and possible_external_shock_candidate_text(text))
-            if not title or not (factual_news(title, desc) or strict_strategic or shock_watch):
+            trusted_commentary = trusted_analytical_commentary_candidate(title, desc, source_name, source_domain)
+            if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch):
                 continue
             signal_key = f"signal:{normalized(source_name)}:{norm_title(title)}"
             if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -14230,6 +14382,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
                 "_strategic_discovery": strict_strategic,
                 "_shock_watch_discovery": shock_watch,
+                "_trusted_commentary_signal": bool(trusted_commentary),
                 "_strategic_source_text": text if (strict_strategic or shock_watch) else "",
             })
         return items, None
@@ -14314,7 +14467,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 text = f"{title}. {desc}"
                 strict_strategic = strategic_pathway_candidate_text(text)
                 shock_watch = possible_external_shock_candidate_text(text)
-                if not title or not (factual_news(title, desc) or strict_strategic or shock_watch):
+                trusted_commentary = trusted_analytical_commentary_candidate(title, desc, name, domain, href)
+                if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch):
                     continue
                 signal_key = f"signal:{normalized(name)}:{norm_title(title)}"
                 if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -14326,6 +14480,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 text = f"{title}. {desc}"
                 direct_items.append({
                     "headline": title, "source": name,
+                    "discovery_provenance": "direct_news_source",
                     "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
                     "link": canonical, "_desc": desc, "_desc_html": "",
                     "_themes": themes_for(text),
@@ -14333,6 +14488,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     "_direct_source": True,
                     "_strategic_discovery": strict_strategic,
                     "_shock_watch_discovery": shock_watch,
+                    "_trusted_commentary_signal": bool(trusted_commentary),
                     "_strategic_source_text": text if (strict_strategic or shock_watch) else "",
                 })
             except Exception:
@@ -15063,7 +15219,10 @@ def anchor_news(
         if not eu_funding_signal_has_geopolitical_setting(headline, desc):
             diag(n, 'generic_eu_funding_without_geopolitical_setting')
             continue
-        if not weak_signal_candidate_text(headline, desc):
+        trusted_commentary = bool(n.get('_trusted_commentary_signal')) or trusted_analytical_commentary_candidate(
+            headline, desc, source, clean_text(n.get('source_domain', '')), link
+        )
+        if not weak_signal_candidate_text(headline, desc) and not trusted_commentary:
             diag(n, 'not_weak_signal_candidate')
             continue
         ntext=n.get('headline','')+' '+n.get('_desc','')
@@ -15075,6 +15234,8 @@ def anchor_news(
             diag(n, 'no_watch_theme')
             continue
         novelty_dimensions=relationship_novelty_dimensions(ntext)
+        if not novelty_dimensions and trusted_commentary:
+            novelty_dimensions = ['interpretive reframing']
         if not novelty_dimensions:
             diag(n, 'no_relationship_novelty')
             continue
@@ -15166,11 +15327,11 @@ def anchor_news(
         # Classify the public event claim, not background technologies in the surrounding
         # article. This keeps a scientist-return programme in the research/talent lane even
         # when the same Nature teaser also mentions AI, quantum, biotech or materials funding.
-        kind=signal_kind(what or text)
+        kind='analysis / interpretation' if trusted_commentary else signal_kind(what or text)
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue
-        event_status = signal_event_status(what, headline, desc)
+        event_status = 'INTERPRETIVE' if trusted_commentary else signal_event_status(what, headline, desc)
         if not public_signal_event_status(event_status):
             diag(n, f'event_status_{event_status.lower()}_not_public')
             continue
@@ -15188,7 +15349,7 @@ def anchor_news(
             'anchor':anchor,
             'anchor_basis':anchor_basis,
             'anchor_status':'anchored',
-            'signal_confidence':'standard',
+            'signal_confidence':'contextual' if trusted_commentary else 'standard',
             'watch_theme':theme,
             'signal_type':relation,
             'signal_kind':kind,
@@ -15201,11 +15362,13 @@ def anchor_news(
             'external_eu_bridge_is_inference': bool(external_bridge),
             'evidence_status': 'low',
             'evidence_role': 'weak_signal',
+            'analytical_weight': WEAK_SIGNAL_CONTEXT_WEIGHT,
             'retention_window_days': WEAK_SIGNAL_RETENTION_DAYS,
+            'weak_signal_mode': 'trusted_commentary' if trusted_commentary else 'current_development',
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': 'new point on a substantive Strand-A issue; a substantive A publication anchor is mandatory',
+            'c_admission_rule': 'low-evidence current development or trusted analytical reframing of a substantive Strand-A issue; a substantive A publication anchor is mandatory',
             'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
             'strategic_classification_source': 'source_text',
             '_anchor_score':score,
@@ -15471,6 +15634,7 @@ def _low_evidence_signal(item: dict[str, Any]) -> dict[str, Any]:
     x = dict(item)
     x["evidence_status"] = "low"
     x["evidence_role"] = "weak_signal"
+    x["analytical_weight"] = WEAK_SIGNAL_CONTEXT_WEIGHT
     x.pop("retention_window_months", None)
     x["retention_window_days"] = WEAK_SIGNAL_RETENTION_DAYS
     return x
@@ -15923,14 +16087,18 @@ def main() -> int:
     cr_broad_cursor_before = int(state.get("crossref_broad_cursor", 0) or 0)
     oa_base = least_recent_probe_batch(state, "openalex_base", all_queries, oa_base_cap)
     cr_base = least_recent_probe_batch(state, "crossref_base", all_queries, cr_base_cap)
-    oa_batch = interleaved_unique_batch(
-        oa_cap, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
-        oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus
-    )
-    cr_batch = interleaved_unique_batch(
-        cr_cap, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus,
-        cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus
-    )
+    # A remains the protected scholarly backbone. B has a dedicated method lane, but
+    # method queries cannot crowd the substantive A-oriented lanes out of the executed prefix.
+    a_protected = max(0, int(CONFIG.get("strand_a_protected_scholarly_queries_per_source", 20) or 0))
+    b_method_set = set(b_method_bank)
+    oa_explore_a = [q for q in oa_explore if q not in b_method_set]
+    cr_explore_a = [q for q in cr_explore if q not in b_method_set]
+    oa_a_prefix = interleaved_unique_batch(min(oa_cap, a_protected), dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore_a, gap_scholarly, finding_context_focus)
+    cr_a_prefix = interleaved_unique_batch(min(cr_cap, a_protected), dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore_a, gap_scholarly, finding_context_focus)
+    oa_rest = interleaved_unique_batch(oa_cap * 2, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus)
+    cr_rest = interleaved_unique_batch(cr_cap * 2, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus)
+    oa_batch = list(dict.fromkeys(oa_a_prefix + oa_rest))[:oa_cap]
+    cr_batch = list(dict.fromkeys(cr_a_prefix + cr_rest))[:cr_cap]
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
@@ -16303,9 +16471,20 @@ def main() -> int:
     direct_journal_deadline = phase_started + int(CONFIG.get('direct_top_journal_stage_seconds', 220) or 220)
     primary_evidence_deadline = phase_started + int(CONFIG.get('primary_evidence_stage_seconds', 180) or 180)
 
+    high_order_news_focus = []
+    try:
+        from high_order_inference import feedback_queries
+        high_order_news_focus = feedback_queries(
+            previous.get("high_order_inference") if isinstance(previous.get("high_order_inference"), dict) else {},
+            max(0, int(CONFIG.get("high_order_inference_news_queries_per_scan", 4) or 0)),
+        )
+    except Exception:
+        high_order_news_focus = []
+
     with cf.ThreadPoolExecutor(max_workers=6) as ex:
         fut_news = ex.submit(
-            safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline, frontier_focus["queries"]
+            safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline,
+            list(dict.fromkeys(list(frontier_focus["queries"]) + high_order_news_focus))
         )
         fut_oa = ex.submit(
             safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, oa_query_dates,
@@ -18311,10 +18490,10 @@ def main() -> int:
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
     c_share_removed = 0
 
-    # Risks, opportunities and external shocks are a separate analytical corpus.
-    # Dedicated strategic news queries may therefore file a pathway even when the same
-    # source does not become Strand C or Matrix evidence. Ordinary scholarly/institutional
-    # collectors can also contribute when their source text passes the strict pathway tests.
+    # Risks, opportunities and external shocks are a separate analytical corpus, but their
+    # evidence hierarchy follows the substantive strands: A/frontier evidence is primary;
+    # C and trusted current-media discoveries are low-weight context only. Strand B is a
+    # persistent methods library and is deliberately excluded from substantive implications.
     previous_strategic = previous.get('strategic_pathways', []) if isinstance(previous.get('strategic_pathways'), list) else []
     previous_embedded_strategic = [
         x for x in (
@@ -18330,7 +18509,7 @@ def main() -> int:
     strategic_candidates = (
         [x for x in news if isinstance(x, dict) and x.get('_strategic_discovery')]
         + [x for x in (oa + cr + inst) if isinstance(x, dict) and x.get('_strategic_discovery')]
-        + strand_a + strand_b + frontier_evidence + strand_c
+        + strand_a + frontier_evidence + strand_c
     )
     strategic_pathways = build_strategic_pathway_corpus(
         previous_strategic,
@@ -19013,13 +19192,29 @@ def main() -> int:
             "transport_failure_warning_count": transport_failure_count,
         },
     }
-    # Cross-evidence shock inference is refreshed after the A/B/C corpus has been
-    # finalised. The registry is persistent: a hypothesis can be NEW when a fresh
-    # evidence seam appears, UPDATED when later scans strengthen or challenge it,
-    # and unchanged otherwise. This is separate from strict realised-shock filing.
+    # Cross-evidence shock inference is refreshed after the substantive current corpus has
+    # been finalised. Strand B is intentionally excluded: it is a persistent methods library,
+    # not evidence about the external world. Historical Strand-A records may provide low-weight
+    # structural context, while current Strand-C weak signals contribute at 30% weight and can
+    # update/corroborate an existing supported seam but cannot originate a new shock by themselves.
+    historical_shock_context: list[dict[str, Any]] = []
+    try:
+        historical_doc = json.loads((ROOT / "historical" / "historical.json").read_text(encoding="utf-8"))
+        historical_shock_context = [
+            dict(x) for x in (historical_doc.get("items", []) if isinstance(historical_doc, dict) else [])
+            if isinstance(x, dict) and clean_text(x.get("strand")).upper() == "A"
+        ]
+    except Exception as e:
+        warnings.append(f"Historical shock context unavailable: {type(e).__name__}")
+    shock_input = dict(data)
+    shock_input["historical_context"] = historical_shock_context
+    shock_input["shock_inference_weights"] = {
+        "weak_signal": WEAK_SIGNAL_CONTEXT_WEIGHT,
+        "historical_context": HISTORICAL_SHOCK_CONTEXT_WEIGHT,
+    }
     from shock_inference import refresh_shock_inference
     shock_state = refresh_shock_inference(
-        data,
+        shock_input,
         previous.get("shock_inference") if isinstance(previous.get("shock_inference"), dict) else {},
         completed_iso,
     )
@@ -19027,7 +19222,35 @@ def main() -> int:
     data["stats"]["inferred_shocks_new_this_run"] = int(shock_state.get("new_count", 0) or 0)
     data["stats"]["inferred_shocks_updated_this_run"] = int(shock_state.get("updated_count", 0) or 0)
     data["stats"]["inferred_shocks_registry_total"] = len(shock_state.get("dynamic_shocks", []))
+    data["stats"]["historical_shock_context_records_available"] = len(historical_shock_context)
     data["reader_products_refresh"]["shock_inference"] = True
+
+    # Hidden cumulative Level-4/5 reasoning registry. The examples supplied for this
+    # layer are encoded as reasoning *grammars*, never as canned findings. A/frontier
+    # evidence alone closes current-world roles; C and history may add context only.
+    # Unfinished candidates persist and feed a bounded, balanced missing-link/falsifier
+    # search lane on later scans. Nothing here bypasses A/B/C admission or is shown as
+    # chain-of-thought on the site.
+    try:
+        from high_order_inference import refresh_high_order_inference
+        high_order_input = dict(data)
+        high_order_input["historical_context"] = historical_shock_context
+        high_order_state = refresh_high_order_inference(
+            high_order_input,
+            previous.get("high_order_inference") if isinstance(previous.get("high_order_inference"), dict) else {},
+            completed_iso,
+        )
+        data["high_order_inference"] = high_order_state
+        data["stats"]["high_order_candidates_total"] = len(high_order_state.get("candidates", []))
+        data["stats"]["high_order_candidates_qualified"] = int(high_order_state.get("qualified_count", 0) or 0)
+        data["stats"]["high_order_candidates_watch"] = int(high_order_state.get("watch_count", 0) or 0)
+        data["stats"]["high_order_candidates_dormant"] = int(high_order_state.get("dormant_count", 0) or 0)
+        data["stats"]["high_order_candidates_new_this_run"] = int(high_order_state.get("new_count", 0) or 0)
+        data["stats"]["high_order_candidates_updated_this_run"] = int(high_order_state.get("updated_count", 0) or 0)
+        data["reader_products_refresh"]["high_order_inference"] = True
+    except Exception as e:
+        warnings.append(f"High-order inference registry unavailable: {type(e).__name__}")
+
     normalize_reader_claims(data)
     # The retained pre-v21 hidden workflow has a single post-Main dispatch hook. When
     # browser upload has left that workflow in place, use that hook every completed Main

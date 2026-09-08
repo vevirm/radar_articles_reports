@@ -278,6 +278,25 @@
     }
   ];
 
+  function highOrderPairs(data){
+    const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
+    const ids=Array.isArray(state?.publications?.trend)?state.publications.trend:[];
+    const map=new Map((Array.isArray(state?.candidates)?state.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
+    return ids.map(id=>map.get(clean(id))).filter(Boolean).map(c=>{
+      const b=c.trend_balance||{},lp=Number(b.left_pull),rp=Number(b.right_pull);
+      if(!Number.isFinite(lp)||!Number.isFinite(rp)||Math.round(lp+rp)!==100)return null;
+      const support=Array.isArray(c.support)?c.support:[];
+      const leftEvidence=support.filter(x=>clean(x?.role).startsWith('Concentrating action')).map(x=>({row:x}));
+      const rightEvidence=support.filter(x=>clean(x?.role).startsWith('Spreading action')).map(x=>({row:x}));
+      return {id:c.id,emergent:true,support:Number(c.score)||0,
+        left:{title:clean(b.left_title||'Pull A'),plain:clean(c.reader_summary||''),why:`${b.left_actions||0} qualifying actions from ${b.left_sources||0} sources; repeated-source actions are discounted.`,pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
+        right:{title:clean(b.right_title||'Pull B'),plain:clean(c.reader_summary||''),why:`${b.right_actions||0} qualifying actions from ${b.right_sources||0} sources; this side is searched as the counter-force, not as decoration.`,pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
+        pullRange:{left:b.left_range||[],right:b.right_range||[]},
+        actionStats:{leftActions:Number(b.left_actions)||0,rightActions:Number(b.right_actions)||0,leftSources:Number(b.left_sources)||0,rightSources:Number(b.right_sources)||0,rawLeft:Number(b.raw_left_pull),rawRight:Number(b.raw_right_pull)},
+        currentEvidenceCount:Number(c.primary_records)||0,historicalContextCount:0};
+    }).filter(Boolean);
+  }
+
   function build(data,history){
     const currentRows=currentCorpus(data),historicalRows=historicalCorpus(history),out=[];
     for(const pair of PAIRS){
@@ -291,6 +310,7 @@
       const support=Math.round((left.averageQuality+right.averageQuality)/2+Math.min(10,left.sourceCount+right.sourceCount)+Math.min(4,left.history.length+right.history.length));
       out.push({...pair,left:{...pair.left,...left,pull:leftPull},right:{...pair.right,...right,pull:rightPull},support,currentEvidenceCount:left.evidence.length+right.evidence.length,historicalContextCount:left.history.length+right.history.length});
     }
+    for(const x of highOrderPairs(data))if(!out.some(y=>y.id===x.id))out.push(x);
     return out.sort((a,b)=>b.support-a.support||Math.abs(50-a.left.pull)-Math.abs(50-b.left.pull)||a.id.localeCompare(b.id));
   }
   function stats(data,history){

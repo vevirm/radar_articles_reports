@@ -350,9 +350,29 @@
     const components=x?.lens?.components&&typeof x.lens.components==='object'?Object.values(x.lens.components).filter(Boolean).length:0;
     const basis=clean(x?.lens?.analysis_basis)==='scanner_source_classification'?2:1;
     const quality=Number(x?.qualityScore)||qualityScore(x?.raw||x);
+    // Weak-signal context is a bounded tie-breaker only.  It can reinforce an already
+    // supported primary pathway, but it cannot compensate for weaker primary evidence.
+    const context=Math.min(0.60,Math.max(0,Number(x?.contextWeightTotal)||0));
     // Publication/evidence quality is deliberately the dominant ordering signal.
-    // Recency breaks ties; it no longer lets a weak recent source outrank strong evidence.
-    return quality*1e13+basis*1e11+components*1e9+dateValue(x?.date)+(x?.newThisScan?1:0);
+    // Recency and corroborating context break close ties; neither lets weak evidence lead.
+    return quality*1e13+basis*1e11+Math.round(context*100)*1e9+components*1e8+dateValue(x?.date)+(x?.newThisScan?1:0);
+  }
+
+  function analyticalWeight(raw){
+    const explicit=Number(raw?.analytical_weight);
+    const role=norm(raw?.evidence_role||'');
+    const low=norm(raw?.evidence_status||'')==='low'||raw?.context_only===true||/weak signal|weak_signal|context/.test(role);
+    if(low) return Math.min(0.30,Math.max(0,Number.isFinite(explicit)?explicit:0.30));
+    return 1;
+  }
+
+  function contextOnly(raw){return analyticalWeight(raw)<0.999}
+
+  function sourceIdentity(x){
+    const raw=x?.raw||x||{};
+    const link=linkFor(raw);
+    try{if(link)return new URL(link).hostname.toLowerCase().replace(/^www\./,'')}catch(_e){}
+    return norm(sourceFor(raw)||x?.source||'');
   }
 
   function diversifiedTop(items,limit,maxPerTopic=2){
@@ -370,7 +390,7 @@
     const collections=[
       Array.isArray(data?.strategic_pathways)?data.strategic_pathways:[],
       Array.isArray(data?.strand_a)?data.strand_a:[],
-      Array.isArray(data?.strand_b)?data.strand_b:[],
+      // Strand B is a persistent methods library, not evidence about the external world.
       Array.isArray(data?.frontier_evidence)?data.frontier_evidence:[],
       Array.isArray(data?.strand_c)?data.strand_c:[],
     ];
@@ -402,7 +422,7 @@
           raw,kind,lens,lensPassage:clean(lens.passage),strategicClassification:raw.strategic_classification||{},
           title:titleFor(raw),coreMessage:coreFor(raw),source:sourceFor(raw),date:clean(raw.date||raw.first_seen||''),
           link:linkFor(raw),abstract:clean(raw.summary||raw.signal_note||raw.why_it_matters||''),newThisScan:!!raw.new_this_scan,
-          interpretationBasis,qualityScore:quality,
+          interpretationBasis,qualityScore:quality,analyticalWeight:analyticalWeight(raw),contextOnly:contextOnly(raw),
         });
       }
     }
@@ -413,22 +433,58 @@
     return items.sort((a,b)=>pathwayScore(b)-pathwayScore(a)||String(b.date).localeCompare(String(a.date))||a.title.localeCompare(b.title));
   }
 
+  function attachWeakContext(primary,contexts){
+    const pSource=sourceIdentity(primary),topic=topicKey(primary),used=new Set(),matches=[];
+    for(const c of sortPathways([...contexts])){
+      if(c.kind!==primary.kind||topicKey(c)!==topic) continue;
+      const sid=sourceIdentity(c);
+      if(sid&&sid===pSource) continue;
+      if(sid&&used.has(sid)) continue;
+      if(sid) used.add(sid);
+      matches.push(c);
+      if(matches.length>=3) break;
+    }
+    const total=matches.reduce((n,c)=>n+Math.min(0.30,Math.max(0,Number(c.analyticalWeight)||0.30)),0);
+    return {...primary,weakSignalContext:matches,contextWeightTotal:Math.min(0.60,total)};
+  }
+
+  function highOrderRows(data,kind){
+    const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
+    const ids=Array.isArray(state?.publications?.[kind])?state.publications[kind]:[];
+    const byId=new Map((Array.isArray(state?.candidates)?state.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
+    return ids.map(id=>byId.get(clean(id))).filter(Boolean).map(c=>{
+      const support=Array.isArray(c.support)?c.support:[],ctx=Array.isArray(c.context)?c.context:[];
+      return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Cross-evidence finding'),coreMessage:clean(c.reader_summary||''),
+        source:'Cross-evidence pattern',date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
+        qualityScore:Number(c.score)||0,analyticalWeight:1,contextOnly:false,lens:{type:kind,passage:clean(c.reader_summary||'')},
+        lensPassage:clean(c.reader_summary||''),interpretationBasis:'cross_evidence_inference',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
+        primaryRecords:Number(c.primary_records)||0,primarySources:Number(c.primary_sources)||0,counterRecords:Number(c.counter_records)||0,
+        weakSignalContext:ctx.map(x=>({title:x.title||'',source:x.source||'',date:x.date||'',link:x.link||''})),contextWeightTotal:Math.min(.60,ctx.reduce((n,x)=>n+(Number(x.analytical_weight)||.30),0)),
+        evidenceSummary:support.slice(0,5).map(x=>x.title).filter(Boolean).join('; ')};
+    });
+  }
+
   function buildPriorityView(data,opts={}){
     const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(50,Math.floor(opts.limit))):10;
     const rows=lensRows(data);
-    const closedRisks=rows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)==='closed_into_shock');
-    const allRisks=sortPathways(rows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)!=='closed_into_shock'));
-    const allOpportunities=sortPathways(rows.filter(x=>x.kind==='opportunity'));
-    const externalShocks=sortPathways(rows.filter(x=>x.kind==='external_shock'));
-    const sourceFiled=rows.filter(x=>x.interpretationBasis==='scanner_source_classification').length;
-    const repositoryInterpreted=rows.filter(x=>x.interpretationBasis==='repository_evidence_interpretation').length;
+    const primaryRows=rows.filter(x=>!x.contextOnly);
+    const contextRows=rows.filter(x=>x.contextOnly);
+    const closedRisks=primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)==='closed_into_shock');
+    const allRisks=sortPathways([...primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)!=='closed_into_shock').map(x=>attachWeakContext(x,contextRows)),...highOrderRows(data,'risk')]);
+    const allOpportunities=sortPathways([...primaryRows.filter(x=>x.kind==='opportunity').map(x=>attachWeakContext(x,contextRows)),...highOrderRows(data,'opportunity')]);
+    // Reader-level external-shock lenses are also primary-only.  The dedicated shock page
+    // uses the stricter Python inference engine, where C/history are explicitly contextual.
+    const externalShocks=sortPathways(primaryRows.filter(x=>x.kind==='external_shock'));
+    const sourceFiled=primaryRows.filter(x=>x.interpretationBasis==='scanner_source_classification').length;
+    const repositoryInterpreted=primaryRows.filter(x=>x.interpretationBasis==='repository_evidence_interpretation').length;
+    const weakSignalContextUsed=[...allRisks,...allOpportunities].reduce((n,x)=>n+(x.weakSignalContext?.length||0),0);
     return {
       risks:diversifiedTop(allRisks,limit,2),
       opportunities:diversifiedTop(allOpportunities,limit,2),
       externalShocks,
       stats:{
         interpreted:allRisks.length+allOpportunities.length+externalShocks.length,
-        sourceFiled,repositoryInterpreted,
+        sourceFiled,repositoryInterpreted,weakSignalContextUsed,
         risks:allRisks.length,opportunities:allOpportunities.length,externalShocks:externalShocks.length,
         closedRisks:closedRisks.length,shownRisks:Math.min(limit,allRisks.length),shownOpportunities:Math.min(limit,allOpportunities.length),
       }
@@ -445,6 +501,7 @@
   function pathwayText(x){return norm(`${x?.title||''} ${x?.coreMessage||''} ${x?.lensPassage||''} ${x?.abstract||''}`)}
 
   function plainPriorityTitle(x){
+    if(x?.highOrder)return clean(x.title)||'Cross-evidence finding';
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind);
     if(kind==='risk'){
       if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Europe could lose researchers if research careers remain too precarious.';
@@ -476,6 +533,7 @@
   }
 
   function plainPriorityExplanation(x){
+    if(x?.highOrder)return clean(x.coreMessage||x.abstract)||'Several independent evidence streams support this higher-order finding.';
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind);
     if(kind==='risk'){
       if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Short-term or insecure research careers can make Europe less attractive. If researchers leave faster than Europe can recruit and retain them, laboratories, new infrastructure and strategic technology programmes can end up short of people.';
@@ -506,6 +564,7 @@
   }
 
   function supportingEvidenceText(x){
+    if(x?.highOrder){const lead=clean(x.evidenceSummary);return `Cross-evidence support: ${x.primaryRecords||0} primary records from ${x.primarySources||0} sources${x.counterRecords?`, with ${x.counterRecords} counter-evidence record(s) tested`:''}.${lead?` Key evidence: ${lead}`:''}`;}
     const raw=clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||'');
     if(!raw) return 'Evidence text unavailable.';
     const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');

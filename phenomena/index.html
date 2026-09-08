@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>Patterns · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../reform.css?v=25.0">
+<link rel="stylesheet" href="../reform.css?v=24.2">
 <style>
   .pattern-simple-main{padding-top:20px!important}
   .pattern-simple-section{margin:0 0 30px}
@@ -116,7 +116,11 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
     const history=RadarPhenomena.mergeHistories(fileHistory,data?.historical_archive);
     const established=RadarPhenomena.build(data,history,historyConfig);
     const patterns=RadarContinuity.build(data,history,historyConfig,RadarPhenomena.phenomena);
-    const changing=unique((patterns.findings||[]).map(changingStatement));
+    const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
+    const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
+    const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
+    const highOrder=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>clean(c.reader_title||c.reader_summary||c.topic_label));
+    const changing=unique([...(patterns.findings||[]).map(changingStatement),...highOrder]);
     const returning=unique(established.filter(x=>!x.autoDetected).map(returningStatement));
     render('changing',changing);
     render('returning',returning);
@@ -126,6 +130,6 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
   }
 })();
 </script>
-<script src="../site-shell.js?v=25.0"></script>
+<script src="../site-shell.js?v=24.2"></script>
 </body>
 </html>
