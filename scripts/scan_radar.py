@@ -16232,7 +16232,9 @@ def main() -> int:
         CONFIG["openalex_exploration_queries_per_scan"] = 3
         CONFIG["crossref_exploration_queries_per_scan"] = 3
         CONFIG["scholarly_base_queries_per_scan"] = 10
-        CONFIG["strand_a_protected_scholarly_queries_per_source"] = 8
+        # With production Matrix depth removed, let A use a little more of the early
+        # scholarly slice. B keeps exactly the same protected allocation.
+        CONFIG["strand_a_protected_scholarly_queries_per_source"] = 10
         CONFIG["b_method_protected_scholarly_queries_per_source"] = 6
         CONFIG["queries_b_method_recent_per_scan"] = 6
         CONFIG["queries_b_method_foundational_per_scan"] = 2
@@ -16276,11 +16278,13 @@ def main() -> int:
         CONFIG["c_floor_rescue_enabled"] = True
         CONFIG["c_floor_rescue_windows_hours"] = [336]
         CONFIG["c_floor_rescue_min_seconds_remaining"] = 45
-        CONFIG["c_floor_rescue_stage_seconds"] = 45
+        CONFIG["c_floor_rescue_stage_seconds"] = 55
         CONFIG["c_floor_rescue_queries_per_wave"] = 8
         CONFIG["c_floor_post_reserve_seconds"] = 20
         CONFIG["c_floor_final_reserve_enabled"] = True
-        CONFIG["c_floor_final_reserve_seconds"] = 40
+        # Matrix depth used roughly a minute in the first sweep implementation.
+        # Reserve most of that recovered time for final C judgement instead.
+        CONFIG["c_floor_final_reserve_seconds"] = 70
         CONFIG["c_floor_final_save_margin_seconds"] = 8
         CONFIG["weak_signal_evidence_followup_enabled"] = True
         CONFIG["weak_signal_evidence_followup_stage_seconds"] = 35
@@ -18484,7 +18488,14 @@ def main() -> int:
     using_fallback_depth = not bool(frontier_focus.get("empty_targets"))
     deep_cursor = int(state.get("frontier_gap_depth_cursor", 0) or 0)
     deep_batch_size = max(1, int(CONFIG.get("frontier_gap_deepening_queries_per_wave", 14) or 14))
-    deep_max_waves = max(0, int(CONFIG.get("frontier_gap_deepening_max_waves", 16) or 16))
+    # A configured zero is meaningful. Do not use ``or 16`` here: that converted the
+    # Quick Sweep's explicit zero back into sixteen Matrix-depth waves. Quick mode must
+    # hard-bypass production Matrix searching; the final matrix snapshot/annotations are
+    # still computed later from whatever A/B/C evidence the sweep actually found.
+    if RADAR_QUICK_SCAN:
+        deep_max_waves = 0
+    else:
+        deep_max_waves = max(0, int(CONFIG.get("frontier_gap_deepening_max_waves", 16)))
     if not frontier_focus.get("empty_targets"):
         # Once every Matrix cell has evidence, balancing thin cells is useful but should
         # not consume the rest of a 24-minute run. Preserve most remaining time for the
