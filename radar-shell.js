@@ -43,7 +43,12 @@
       card.querySelectorAll('.info-button').forEach(b=>{if(b.textContent.trim()==='More info')b.textContent='Evidence';});
       card.querySelectorAll('.publication-link').forEach(a=>{if(/^(Open publication|Open source evidence)/i.test(a.textContent.trim()))a.textContent='Source';});
       card.querySelectorAll('.biblio summary').forEach(x=>{if(x.textContent.trim()==='Source information')x.textContent='Details';});
-      card.querySelectorAll('.whatline strong,.whyline strong,.signal-what strong').forEach(x=>{if(/^(WHAT|WHY):?$/i.test(x.textContent.trim()))x.remove();});
+      // The WHAT/WHY pair is part of the reader contract, so the label stays.
+      // It is only normalised to sentence case, which reads better at label size.
+      card.querySelectorAll('.whatline strong,.whyline strong,.signal-what strong').forEach(x=>{
+        const m=/^(WHAT|WHY):?$/i.exec(x.textContent.trim());
+        if(m){const t=m[1].toLowerCase()==='what'?'What':'Why';if(x.textContent!==t)x.textContent=t;}
+      });
       card.querySelectorAll('.visible-source strong').forEach(x=>{if(/^Source:?$/i.test(x.textContent.trim()))x.remove();});
       const sourceBox=card.querySelector('.visible-source');
       if(sourceBox){
@@ -55,7 +60,7 @@
   observer.observe(document.documentElement,{childList:true,subtree:true});
   tidyRadar();
   const s=document.createElement('script');
-  s.src='../site-shell.js?v=27';
+  s.src='../site-shell.js?v=28';
   s.async=false;
   document.body.appendChild(s);
 })();

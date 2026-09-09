@@ -4,15 +4,15 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <title>Topics · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=27">
-<script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../radar.css?v=28">
+<script src="../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head><body>
 <header><div class="wrap top"><div><div class="kicker">Current evidence</div><h1>Evidence by topic</h1><p class="lede">The newest findings on the main geopolitical themes affecting European research and innovation.</p><div id="state" class="state">Loading current radar</div></div><nav class="nav"><a href="../read/">Read At Least This</a><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../radar/#strand-c">Weak signals</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing Phenomena</a><a href="../priorities/">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a><a href="../historical/">Earlier Findings</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
 <main class="wrap"><div id="topics"><div class="empty">Loading current evidence</div></div></main>
-<script src="insights.js?v=22.2"></script><script src="../reader_style.js?v=22.3"></script>
+<script src="insights.js?v=22.2"></script><script src="../reader_style.js?v=28.1"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const topicNames={
@@ -56,5 +56,5 @@ function render(data){
   }).join(''):'<div class="empty">No topics to show right now.</div>';
 }
 (async()=>{try{render(await RadarData.load('../radar.json','../radar_seed.json'))}catch(e){document.getElementById('state').textContent='';document.getElementById('topics').innerHTML='<div class="empty">The Radar could not be loaded.</div>'}})();
-</script><script src="../site-shell.js?v=27"></script>
+</script><script src="../site-shell.js?v=28"></script>
 </body></html>

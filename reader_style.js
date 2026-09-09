@@ -216,11 +216,18 @@ function whyFor(x){
   return raw;
 }
 function radarPair(x,opt={}){
+  // Reader text written once at admission always wins over browser-side derivation.
+  // When the WHY was withheld because the material did not support a specific one,
+  // it stays empty. A generic fallback is what produced one sentence on 28 cards.
+  const storedWhat=clean(x?.reader_what||''),storedWhy=clean(x?.reader_why||'');
+  if(storedWhat)return {what:limit(storedWhat,20),why:storedWhy?limit(storedWhy,20):''};
   const w=limit(opt.what||whatFor(x),20);
   const y=limit(opt.why||whyFor(x)||'It changes a documented capability, dependency, rule or partnership in European research and innovation.',20);
   return {what:w,why:y};
 }
 function matrixPair(x,opt={}){
+  const storedWhat=clean(x?.reader_what||''),storedWhy=clean(x?.reader_why||'');
+  if(storedWhat&&storedWhy){const sw=limit(storedWhat,12),sy=limit(storedWhy,15);return {what:sw,why:sy,line:`${sw} — ${sy}`};}
   const w=limit(opt.what||g.SovereigntyFrontier?.shortBullet?.(x)||whatFor(x),12);
   const y=limit(opt.why||x?.why||whyFor(x)||'It changes European control or capability in this part of the research and innovation system.',15);
   return {what:w,why:y,line:`${w} — ${y}`};

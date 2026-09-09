@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Sources — EU R&amp;I Radar</title>
-<link rel="stylesheet" href="../radar.css?v=27">
-<script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../radar.css?v=28">
+<script src="../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
@@ -23,5 +23,5 @@ function renderLetters(){const ls=['All',...new Set(state.items.map(initial))];d
 function render(){const q=state.q.toLowerCase();const xs=state.items.filter(x=>(state.letter==='All'||initial(x)===state.letter)&&(!q||[name(x),title(x),x.source,year(x)].join(' ').toLowerCase().includes(q)));document.getElementById('count').textContent=`${xs.length} publications`;document.getElementById('list').innerHTML=xs.length?xs.map(x=>`<div class="entry"><div class="name">${esc(name(x))}</div><div class="title">${x.link?`<a class="publication-open" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(title(x))}</a>`:esc(title(x))}</div><div class="meta">${esc(year(x))}</div></div>`).join(''):'<div class="empty">No matching publication.</div>';renderLetters()}
 document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value;render()});document.getElementById('letters').addEventListener('click',e=>{const b=e.target.closest('[data-letter]');if(!b)return;state.letter=b.dataset.letter;render()});
 (async()=>{try{state.items=allRecords(await RadarData.load('../radar.json','../radar_seed.json'));render()}catch(e){document.getElementById('list').innerHTML='<div class="empty">Radar data unavailable.</div>';document.getElementById('count').textContent='Unavailable'}})();
-</script><script src="../site-shell.js?v=27"></script>
+</script><script src="../site-shell.js?v=28"></script>
 </body></html>

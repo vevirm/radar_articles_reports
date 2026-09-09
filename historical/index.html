@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#111111">
 <title>Earlier Findings · R&amp;I × Geopolitics</title>
 
-<link rel="stylesheet" href="../radar.css?v=27">
+<link rel="stylesheet" href="../radar.css?v=28">
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
@@ -28,7 +28,7 @@
 </main>
 <footer><div class="wrap">Earlier Findings — EU R&amp;I × Geopolitics Radar</div></footer>
 </div>
-<script src="../briefing/insights.js?v=17.20.3"></script><script src="../reader_style.js?v=19.0"></script>
+<script src="../briefing/insights.js?v=17.20.3"></script><script src="../reader_style.js?v=28.1"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const S={data:null,year:'all',q:'',limit:40};
@@ -55,6 +55,6 @@ function mergeHistorical(a,b){if(!a)return b;if(!b)return a;const primary=update
 async function load(){try{const [fileData,radarData]=await Promise.all([fetchJsonMaybe('historical.json'),fetchJsonMaybe('../radar.json')]);const embedded=radarData&&radarData.historical_archive&&typeof radarData.historical_archive==='object'?radarData.historical_archive:null;let chosen=mergeHistorical(fileData,embedded);if(!chosen)chosen=await fetchJsonMaybe('historical_seed.json');if(!chosen)throw new Error('No historical data source available');S.data=chosen;buildYearFilters();render()}catch(e){document.getElementById('cards').innerHTML=`<div class="empty">Earlier findings could not be loaded: ${esc(e.message)}</div>`}}
 document.getElementById('search').addEventListener('input',e=>{S.q=e.target.value.trim();S.limit=40;render()});document.getElementById('moreHistorical').addEventListener('click',()=>{S.limit+=40;render()});
 </script>
-<script src="../site-shell.js?v=27"></script>
+<script src="../site-shell.js?v=28"></script>
 </body>
 </html>

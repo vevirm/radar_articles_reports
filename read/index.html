@@ -4,15 +4,15 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <title>Read At Least This · EU research and innovation × geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=27">
-<script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../radar.css?v=28">
+<script src="../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head>
 <body>
 <main class="wrap"><div class="tree-list" id="trees"><div class="empty">Loading</div></div></main>
-<script src="../briefing/insights.js?v=22.2"></script><script src="../reader_style.js?v=22.3"></script><script src="issues.js?v=22.2"></script>
+<script src="../briefing/insights.js?v=22.2"></script><script src="../reader_style.js?v=28.1"></script><script src="issues.js?v=22.2"></script>
 <script>
 const surface=v=>globalThis.RadarReaderStyle?.surfaceText?.(v)||String(v||'');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -54,5 +54,5 @@ function drawAllTrees(){document.querySelectorAll('.issue-chart').forEach(drawTr
 let treeResizeTimer;addEventListener('resize',()=>{clearTimeout(treeResizeTimer);treeResizeTimer=setTimeout(drawAllTrees,80)});
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json');const items=[...(d.strand_a||[]),...(d.strand_c||[])];const trees=globalThis.RadarIssues?.buildTrees?RadarIssues.buildTrees(items,{count:8}):[];document.getElementById('trees').innerHTML=trees.length?trees.map(chart).join(''):'<div class="empty">No topic maps available.</div>';requestAnimationFrame(()=>requestAnimationFrame(drawAllTrees))}catch(e){console.error(e);document.getElementById('trees').innerHTML='<div class="empty">Topic maps unavailable.</div>'}})();
 </script>
-<script src="../site-shell.js?v=27"></script>
+<script src="../site-shell.js?v=28"></script>
 </body></html>

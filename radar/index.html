@@ -7,8 +7,8 @@
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="theme-color" content="#111111">
   <title>R&I × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=27">
-<script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../radar.css?v=28">
+<script src="../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression token only: radar-calm.css?v=23.0 -->
@@ -84,7 +84,7 @@
 
 <script src="../reader_rank.js?v=17.20.19"></script>
 <script src="../briefing/insights.js?v=22.2"></script>
-<script src="../reader_style.js?v=22.3"></script>
+<script src="../reader_style.js?v=28.1"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
 const state={data:null,query:"",recentOnly:false,newOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,newStart:0,newEnd:0};
@@ -214,7 +214,7 @@ function biblio(x,label='Bibliography'){
   const title=x.title||x.headline||'';const who=x.authors||'';const meta=[x.source,fmtDate(x.date),x.type].filter(Boolean).join(' · ');const englishTitle=!title||globalThis.RadarInsights?.likelyEnglish?.(title)!==false;
   return `<details class="biblio" ${state.allDetails?'open':''}><summary>Source information</summary>${title&&englishTitle?`<div class="biblio-title">${esc(title)}</div>`:''}${who?`<div class="biblio-row">${esc(who)}</div>`:''}${meta?`<div class="biblio-row">${esc(meta)}</div>`:''}</details>`;
 }
-function abstractPanel(x,id){const text=globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}</div>`}
+function abstractPanel(x,id){const readerMore=cleanText(x?.reader_more||'');const text=readerMore||globalThis.RadarInsights?.prepareSummary?.(x.summary||'')||cleanText(x.summary||x.signal_note||'');if(!text)return '';return `<div id="${id}" class="abstract-panel" ${state.allDetails?'':'hidden'}>${text?`<p>${esc(short(text,700))}</p>`:''}</div>`}
 function cardHeading(x){const t=cleanText(x.title||x.headline||'');return t&&globalThis.RadarInsights?.likelyEnglish?.(t)!==false?t:claimText(x)}
 function cap100(v){let s=cleanText(v);if(s.length<=100)return s;let out='';for(const w of s.split(/\s+/)){const n=out?`${out} ${w}`:w;if(n.length>96)break;out=n}out=(out||s.slice(0,96)).replace(/\b(?:and|or|of|for|to|in|on|with|the|a|an)$/i,'').replace(/[,:;—–-]+$/,'').trim();if(out&&!/[.!?)]$/.test(out))out+='.';return out}
 function methodPoint(x){const t=cleanText(`${x.title||''} ${x.core_message||''} ${x.summary||''}`).toLowerCase();if(/hybrid foresight/.test(t)&&/expert/.test(t))return 'AI + expert judgement can make horizon scanning iterative.';if(/governance logics.*foresight|foresight functions/.test(t))return 'Choose foresight methods by policy function, horizon and available data.';if(/evidence for the future|robustness.*appropriateness.*inclusivity/.test(t))return 'Robustness, fit and inclusion make foresight more usable as evidence.';if(/multi-agent.*technology intelligence|patents to market signals/.test(t))return 'Multi-agent AI can turn patents and market signals into technology intelligence.';if(/participatory.*scenario/.test(t)||/scenario-building methodology/.test(t))return 'Participatory scenarios connect long-term futures with sector choices.';if(/agentprophet|technology forecasting/.test(t))return 'Source-aware AI agents can forecast emerging technology signals.';if(/analytic hierarchy process|living labs/.test(t))return 'Scenario workshops + AHP can rank options with stakeholders.';if(/field.?topic.?technology|key core technologies/.test(t))return 'Patent mapping can identify key technologies and track their evolution.';const r=globalThis.RadarInsights?.readerPoint?.(x.core_message||x.summary||'',100)||globalThis.RadarInsights?.fastReaderText?.(x.title||'')||x.title||'';return cap100(r)}
@@ -227,14 +227,14 @@ function abItem(x,i){
 }
 function bItem(x,i){
   const id=`abstract-b-${i}`;
-  const pair=globalThis.RadarReaderStyle?.pagePair?.(methodPoint(x),methodUse(x),20,20)||{what:methodPoint(x),why:methodUse(x)};
+  const pair=globalThis.RadarReaderStyle?.radarPair?.(x,{what:methodPoint(x),why:methodUse(x)})||{what:methodPoint(x),why:methodUse(x)};
   return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
 }
 function cItem(x,i){
   const id=`abstract-c-${i}`;
   const rawWhat=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';
   const rawWhy=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
-  const pair=globalThis.RadarReaderStyle?.pagePair?.(rawWhat,rawWhy,20,20)||{what:rawWhat,why:rawWhy};
+  const pair=globalThis.RadarReaderStyle?.radarPair?.(x,{what:rawWhat,why:rawWhy})||{what:rawWhat,why:rawWhy};
   return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
@@ -268,6 +268,6 @@ async function loadRadar(){
   render();
 }
 </script>
-<script src="../radar-shell.js?v=27"></script>
+<script src="../radar-shell.js?v=28"></script>
 </body>
 </html>

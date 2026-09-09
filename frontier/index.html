@@ -4,8 +4,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#111111"><title>Matrix · full evidence</title>
-<link rel="stylesheet" href="../radar.css?v=27">
-<script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../radar.css?v=28">
+<script src="../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
@@ -18,7 +18,7 @@
   <section class="method"><details><summary>How to read the Matrix</summary><div class="method-body"><p>Each finding sits where the change happens and by whether it raises or lowers European control and capability.</p></div></details></section>
 </main>
 <footer><div class="wrap">R&amp;I × Geopolitics Radar · Matrix</div></footer>
-<script src="../briefing/insights.js?v=22.2"></script><script src="../reader_style.js?v=22.3"></script><script src="frontier.js?v=22.2"></script>
+<script src="../briefing/insights.js?v=22.2"></script><script src="../reader_style.js?v=28.1"></script><script src="frontier.js?v=22.2"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function fmtDate(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v).slice(0,10);return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
@@ -35,5 +35,5 @@ function matrixHtml(view){let html='<div class="matrix"><div class="corner"></di
 document.addEventListener('click',e=>{const b=e.target.closest('[data-expand]');if(!b)return;const t=document.getElementById(b.dataset.expand);if(!t)return;const open=t.hidden;t.hidden=!open;b.setAttribute('aria-expanded',String(open));b.textContent=open?'Show less':`Show ${b.dataset.count} more`});
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json'),v=SovereigntyFrontier.buildFrontier(d);document.getElementById('matrixGrid').innerHTML=matrixHtml(v);document.getElementById('state').textContent=`${v.signals.length} placed findings. Updated ${fmtDate(v.lastUpdated)}.`;}catch(e){console.error('Matrix load failed',e);document.getElementById('matrixGrid').innerHTML='<p class="empty">Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
 </script>
-<script src="../site-shell.js?v=27"></script>
+<script src="../site-shell.js?v=28"></script>
 </body></html>

@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>EU research and innovation · Risks &amp; Opportunities</title>
-<link rel="stylesheet" href="../radar.css?v=27">
-<script src="../radar_data.js"></script>
+<link rel="stylesheet" href="../radar.css?v=28">
+<script src="../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
@@ -21,7 +21,7 @@
 </div></main>
 <script src="../reader_rank.js?v=17.20.17"></script>
 <script src="../briefing/insights.js?v=22.2"></script>
-<script src="../reader_style.js?v=22.3"></script>
+<script src="../reader_style.js?v=28.1"></script>
 <script src="priorities.js?v=23.3"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -49,6 +49,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-detail]');
 function render(view){document.getElementById('risks').innerHTML=listHtml(view.risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(view.opportunities,'opportunity');document.getElementById('riskCount').textContent=String(view.stats.risks);document.getElementById('opportunityCount').textContent=String(view.stats.opportunities);document.getElementById('summary').textContent=`${view.stats.risks} risks and ${view.stats.opportunities} opportunities${view.stats.weakSignalContextUsed?`. ${view.stats.weakSignalContextUsed} recent weak-signal ${view.stats.weakSignalContextUsed===1?'item provides':'items provide'} supporting context.`:'.'}`;}
 (async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');for(const c of (data?.high_order_inference?.candidates||[])){const title=String(c?.reader_title||c?.topic_label||'').trim();if(title)HIGH_ORDER_DISTANCE.set(title,Number(c?.inferential_distance)||4)}render(RadarPriorities.buildPriorityView(data,{limit:12}))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('summary').textContent='Radar data could not be loaded.'}})();
 </script>
-<script src="../site-shell.js?v=27"></script>
+<script src="../site-shell.js?v=28"></script>
 </body>
 </html>

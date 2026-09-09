@@ -51,15 +51,26 @@
   const sidebar=document.createElement('aside');
   sidebar.className='site-sidebar';
   sidebar.setAttribute('aria-label','Site menu');
-  sidebar.innerHTML=`<a class="site-sidebar-brand" href="${prefix}">R&amp;I × Geopolitics Radar</a><nav>${menu.map(([target,label,cls])=>`<a${cls?` class="${cls}"`:''}${activeFor(target)?' aria-current="page"':''} href="${prefix+target}">${label}</a>`).join('')}</nav>`;
+  sidebar.innerHTML=`<a class="site-sidebar-brand" href="${prefix}">R&amp;I × Geopolitics Radar</a><button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="siteMap">Menu</button><nav id="siteMap">${menu.map(([target,label,cls])=>`<a${cls?` class="${cls}"`:''}${activeFor(target)?' aria-current="page"':''} href="${prefix+target}">${label}</a>`).join('')}</nav>`;
   document.body.insertBefore(sidebar,document.body.firstChild);
+
+  // Small screens carry the same complete map, behind one Menu button.
+  const toggle=sidebar.querySelector('.site-menu-toggle');
+  toggle.addEventListener('click',()=>{
+    const open=sidebar.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',String(open));
+  });
 
   const host=document.getElementById('app')||document.body;
   const intro=document.createElement('section');
   intro.className='shared-page-intro';
   intro.innerHTML=`<div class="shared-page-intro-inner"><h1>${page.title}</h1><p>${page.purpose}</p></div>`;
-  const main=host.querySelector('main');
-  if(main)host.insertBefore(intro,main); else host.insertBefore(intro,host.firstChild);
+  // The page name and the reader's question come before the fact strip and the search
+  // toolbar, so the reader always knows what page they are on before they filter it.
+  // On pages with no #app wrapper the host is <body>, where the sidebar is already
+  // first; the map must stay ahead of the page name when the shell stacks on mobile.
+  if(host===document.body)host.insertBefore(intro,sidebar.nextSibling);
+  else host.insertBefore(intro,host.firstChild);
 
   document.querySelectorAll('header,.core-flow,.core-path,.site-guide,.minimum-read').forEach(el=>el.classList.add('legacy-site-furniture'));
 })();

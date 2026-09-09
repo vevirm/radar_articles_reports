@@ -4,8 +4,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <title>Quick Matrix · EU research and innovation × geopolitics</title>
-<link rel="stylesheet" href="../../radar.css?v=27">
-<script src="../../radar_data.js"></script>
+<link rel="stylesheet" href="../../radar.css?v=28">
+<script src="../../radar_data.js?v=28.1"></script>
 
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
@@ -14,7 +14,7 @@
 <section class="core-flow" aria-label="Core reader path"><div class="wrap flow"><a href="../../radar/">1 · Radar</a><span>→</span><a class="current" href="./">2 · Matrix</a><span>→</span><a href="../../trends/">3 · Trends</a><span>→</span><a href="../../priorities/">4 · Risks &amp; opportunities</a><span>→</span><a href="../../shocks/">5 · External shocks</a></div></section>
 <main class="wrap"><div class="matrix-scroll"><div id="grid"></div></div></main>
 <footer><div class="wrap">Research &amp; Innovation × Geopolitics Radar · Matrix</div></footer>
-<script src="../../briefing/insights.js?v=22.2"></script><script src="../../reader_style.js?v=22.3"></script><script src="../frontier.js?v=22.2"></script>
+<script src="../../briefing/insights.js?v=22.2"></script><script src="../../reader_style.js?v=28.1"></script><script src="../frontier.js?v=22.2"></script>
 <script>
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fmtDate(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return String(v);return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
@@ -31,5 +31,5 @@ const CELL_DISPLAY={'Strength from outside':'Strength from outside','Protection 
 function cellLabel(v){return plain(CELL_DISPLAY[v]||v)}
 function render(v){let sourceCount=0,pointCount=0;let h='<div class="matrix"><div class="corner"></div>';for(const c of v.columns){const d=COL_DISPLAY[c.id]||[c.name,c.direction];h+=`<div class="col ${c.id}">${icon(COL_ICON[c.id])}<b>${esc(d[0])}</b><span>${esc(d[1])}</span></div>`}for(const r of v.rows){const rd=ROW_DISPLAY[r.id]||[plain(r.name),plain(r.description)];h+=`<div class="row">${icon(ROW_ICON[r.id])}<b>${esc(rd[0])}</b><span>${esc(rd[1])}</span></div>`;for(const c of v.columns){const xs=v.cells[r.id][c.id]||[],groups=groupCell(xs),cell=v.cellNames[r.id][c.id];sourceCount+=xs.length;pointCount+=groups.length;h+=`<div class="cell ${c.id}${groups.length?' has-evidence':''}"><div class="cell-head"><b>${esc(cellLabel(cell[0]))}</b><span class="n">${groups.length} points</span></div>${cellBullets(groups)}</div>`}}h+='</div>';document.getElementById('grid').innerHTML=h;document.getElementById('state').textContent=`${pointCount} findings from ${sourceCount} sources. Updated ${fmtDate(v.lastUpdated)}.`}
 (async()=>{try{const d=await RadarData.load('../../radar.json','../../radar_seed.json');render(SovereigntyFrontier.buildFrontier(d));}catch(e){document.getElementById('grid').innerHTML='<p>Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
-</script><script src="../../site-shell.js?v=27"></script>
+</script><script src="../../site-shell.js?v=28"></script>
 </body></html>
