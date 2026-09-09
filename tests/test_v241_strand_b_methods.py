@@ -67,7 +67,7 @@ class StrandBMethodsContractTests(unittest.TestCase):
     def test_b_is_recent_first_with_foundational_fallback(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text())
         self.assertEqual(cfg['b_method_recent_lookback_years'], 5)
-        self.assertEqual(cfg['b_method_lookback_years'], 10)
+        self.assertEqual(cfg['b_method_lookback_years'], 15)
         self.assertGreater(cfg['queries_b_method_recent_per_scan'], cfg['queries_b_method_foundational_per_scan'])
         self.assertTrue(any('systematic review' in q for q in cfg['queries_b_method_recent']))
         self.assertTrue(any('evaluation' in q for q in cfg['queries_b_method_recent']))
