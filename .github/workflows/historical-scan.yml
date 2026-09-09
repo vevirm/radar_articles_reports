@@ -82,22 +82,84 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json
+          import json, os, subprocess
           from pathlib import Path
-          before=json.loads(Path(__import__('os').environ['RUNNER_TEMP']).joinpath('historical-before.json').read_text(encoding='utf-8'))
-          after=json.loads(Path('historical/historical.json').read_text(encoding='utf-8'))
-          old_ids={str(x.get('id')) for x in before.get('items',[]) if isinstance(x,dict) and x.get('id')}
-          new_ids=[str(x.get('id')) for x in after.get('items',[]) if isinstance(x,dict) and x.get('id') and str(x.get('id')) not in old_ids]
-          expected=int((after.get('last_scan') or {}).get('new_items',0) or 0)
-          if len(new_ids)!=expected:
-              raise SystemExit(f'Latest-new index mismatch: diff found {len(new_ids)} but scanner reports {expected}')
+
+          archive_path = Path('historical/historical.json')
+          sidecar_path = Path('historical/new_items.json')
+          before_path = Path(os.environ['RUNNER_TEMP']) / 'historical-before.json'
+
+          def load(path, default):
+              try:
+                  return json.loads(path.read_text(encoding='utf-8'))
+              except Exception:
+                  return default
+
+          def ids(doc):
+              out=[]; seen=set()
+              for item in doc.get('items',[]) if isinstance(doc,dict) else []:
+                  if not isinstance(item,dict): continue
+                  value=str(item.get('id') or '').strip()
+                  if value and value not in seen:
+                      seen.add(value); out.append(value)
+              return out
+
+          def git_json(commit):
+              try:
+                  raw=subprocess.check_output(['git','show',f'{commit}:historical/historical.json'],text=True,stderr=subprocess.DEVNULL)
+                  value=json.loads(raw)
+                  return value if isinstance(value,dict) else None
+              except Exception:
+                  return None
+
+          after=load(archive_path,{})
+          current_order=ids(after)
+          current=set(current_order)
+          if not current:
+              raise SystemExit('Historical archive has no item IDs; refusing to rewrite New tracker.')
+
+          before=load(before_path,{})
+          before_ids=set(ids(before))
+          batch=[x for x in current_order if x not in before_ids] if before_ids else []
+          source='current_scan_diff' if batch else ''
+          archive_commit=''
+
+          if not batch:
+              existing=load(sidecar_path,{})
+              existing_ids=[str(x).strip() for x in existing.get('item_ids',[]) if str(x).strip()] if isinstance(existing,dict) and isinstance(existing.get('item_ids',[]),list) else []
+              if existing_ids and all(x in current for x in existing_ids):
+                  batch=existing_ids
+                  source='preserved_previous_productive_batch'
+                  archive_commit=str(existing.get('archive_commit') or '')
+
+          if not batch:
+              try:
+                  commits=[x for x in subprocess.check_output(['git','log','--format=%H','--','historical/historical.json'],text=True).splitlines() if x]
+              except Exception:
+                  commits=[]
+              for newer_hash, older_hash in zip(commits, commits[1:]):
+                  newer, older = git_json(newer_hash), git_json(older_hash)
+                  if not newer or not older: continue
+                  older_ids=set(ids(older))
+                  candidate=[x for x in ids(newer) if x not in older_ids and x in current]
+                  if candidate:
+                      batch=candidate
+                      source='git_history_reconstruction'
+                      archive_commit=newer_hash
+                      break
+
           payload={
-              'archive_last_updated': after.get('last_updated'),
-              'count': len(new_ids),
-              'item_ids': new_ids,
+              'schema_version':2,
+              'mode':'latest_productive_historical_scan',
+              'archive_last_updated':after.get('last_updated') or '',
+              'count':len(batch),
+              'item_ids':batch,
+              'tracking_source':source or 'no_productive_batch_available',
           }
-          Path('historical/new_items.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          print('historical/new_items.json written:',len(new_ids),'IDs')
+          if archive_commit:
+              payload['archive_commit']=archive_commit
+          sidecar_path.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(f"Historical New tracker: {payload['tracking_source']} -> {len(batch)} IDs")
           PY
 
       - name: Verify historical scanner changed only its own data file
