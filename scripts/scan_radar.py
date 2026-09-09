@@ -504,7 +504,7 @@ KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_DOI_TITLES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
-CURATOR_DECISION_PROFILE_VERSION = "v24.3-priority-benchmark-repair"
+CURATOR_DECISION_PROFILE_VERSION = "v24.4-benchmark-false-negative-repair"
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 # Sitemap ``lastmod`` dates are discovery evidence that should survive into the
 # page parser.  Many high-value EU CMS pages omit article:published_time even when
@@ -1785,6 +1785,7 @@ RI_STRONG = [
     "european research area", "research system", "innovation system",
     "international research cooperation", "international scientific cooperation",
     "research governance", "innovation governance", "research excellence",
+    "research activity", "research activities",
     "innovation ecosystem", "research infrastructure policy", "knowledge security",
     # V12: include the wider R&I system, not only texts that use explicit policy language.
     "research and development", "r&d", "science and technology", "science & technology",
@@ -3282,7 +3283,7 @@ def title_level_a_system_evidence(title: str) -> tuple[bool, list[str]]:
         'innovation ecosystems', 'innovation financing', 'financing instruments for innovation',
         'technology adoption', 'technology governance', 'strategic technology governance',
         'university patenting', 'patenting', 'patents', 'research careers', 'research collaboration',
-        'research funding', 'research evaluation', 'research infrastructure', 'digital infrastructure', 'infrastructure', 'key infrastructure',
+        'research funding', 'research evaluation', 'research activity', 'research activities', 'research infrastructure', 'digital infrastructure', 'infrastructure', 'key infrastructure',
         'manufacturing', 'industrial', 'deep tech', 'deep-tech', 'startup', 'startups', 'scale-up', 'scale up',
     ])
     ok = bool(system or compounds or (tech and (outcomes or contextual)))
@@ -3360,10 +3361,19 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
     )
     if institutional_container_page(title, url, page_type):
         return "hard exclusion: listing/index page"
-    low = normalized(f"{title} {page_type} {text[:1200]}")
+    # Document-type hard exclusions must be established by document metadata (title/page
+    # type), not by stray words inside a scholarly abstract.  A paper may analyse a
+    # workshop, procurement, call, project or conference without *being* that document
+    # type.  URL- and structure-specific checks below still exclude the operational pages.
+    low = normalized(f"{title} {page_type}")
     url_low = normalized(url)
     for marker in AB_HARD_EXCLUDE:
         if marker in low:
+            # ``procurement``/``tender`` are also legitimate research subjects.  Do not
+            # infer an operational purchasing document from the noun alone; the bounded
+            # notice/contract test below handles actual procurement records.
+            if marker in {"procurement", "tender"}:
+                continue
             if formal_eu_act and marker in {"press release", "news article", "news release"}:
                 continue
             return f"hard exclusion: {marker}"
@@ -3415,6 +3425,19 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
             return "hard exclusion: project page"
     if re.search(r"\b(?:meet our new (?:pis?|principal investigators?)|meet the new (?:pis?|principal investigators?)|new principal investigator profile)\b", title_low):
         return "hard exclusion: routine personnel profile"
+    # Explicit procurement/tender notices are operational records.  Keep analytical
+    # scholarship *about* procurement eligible (e.g. big-science innovation procurement).
+    if re.search(r"\b(?:procurement|tender)\b", title_low):
+        operational_procurement = bool(
+            re.search(r"\b(?:notice|contract|award|bid|bidding|invitation|deadline|submission|supply|purchase|delivery|installation|maintenance|equipment|services?)\b", title_low)
+            or re.match(r"^(?:procurement|tender)\b", title_low)
+        )
+        analytical_procurement = bool(re.search(
+            r"\b(?:analysis|study|research|learning|mechanisms?|governance|policy|innovation|effects?|impact|role|evaluation|evidence|framework|approach)\b",
+            title_low,
+        ))
+        if operational_procurement and not analytical_procurement:
+            return "hard exclusion: procurement/acquisition notice"
     # Procurement notices sometimes omit the words tender/procurement while using a
     # contract-style title (acquisition + delivery/installation/maintenance). These are
     # operational purchasing records, not evidence about the R&I system itself.
@@ -3615,7 +3638,7 @@ A_RI_CORE = [
     'science and technology cooperation', 'scientific cooperation',
     'international research cooperation', 'international scientific cooperation',
     'research funding', 'research grants', 'research grant', 'research evaluation',
-    'research assessment', 'research funder', 'research funders', 'european research council',
+    'research assessment', 'research activity', 'research activities', 'research funder', 'research funders', 'european research council',
     'erc grant', 'erc grants',
     'research programme', 'research program', 'horizon europe', 'fp10',
     'european research area', 'research system', 'innovation system', 'research governance',
@@ -3677,7 +3700,8 @@ A_MAJOR_RI_SYSTEM = [
     'research workforce', 'scientific workforce', 'brain drain', 'brain gain', 'technology transfer',
     'industrial innovation', 'deep tech', 'deep-tech', 'innovation capacity', 'innovation ecosystem',
     'innovation ecosystems', 'innovation financing', 'financing instruments for innovation', 'research careers',
-    'research evaluation', 'research assessment', 'grant evaluation', 'grant evaluations',
+    'research evaluation', 'research assessment', 'research activity', 'research activities',
+    'grant evaluation', 'grant evaluations',
     'research funder', 'research funders', 'science-policy interface', 'science policy interface',
     'scientific knowledge in policymaking', 'scientific knowledge in policy making',
     'university alliances', 'university patenting', 'patent', 'patents', 'digital innovation hub',
@@ -4493,6 +4517,16 @@ def _ri_system_compound_hits(text: str) -> list[str]:
             and re.search(r'\b(?:policy ?making|public policy|policy process|policy processes|evidence[- ](?:informed|based) policy)\b', low)
         ):
             hits.append('science-policy knowledge use')
+        # KIS = knowledge-intensive services.  In innovation-system scholarship the
+        # university--KIS linkage is itself an R&I-system object.  Keep this bounded to
+        # explicit university + interaction/linkage/mapping language so the acronym KIS
+        # alone never becomes a generic admission token.
+        if (
+            re.search(r'\buniversit\w*\b', low)
+            and re.search(r'\b(?:kis|knowledge[- ]intensive services?)\b', low)
+            and re.search(r'\b(?:interactions?|linkages?|relations?|mapping|networks?|collaboration)\b', low)
+        ):
+            hits.append('university-knowledge-intensive-services linkages')
     return list(dict.fromkeys(hits))
 
 
@@ -5781,7 +5815,8 @@ A_RESEARCH_SYSTEM_OUTCOME_CUES = [
     'research collaboration', 'scientific collaboration', 'researcher mobility',
     'research careers', 'research workforce', 'scientific workforce',
     'research talent', 'scientific talent', 'brain drain', 'brain gain',
-    'research evaluation', 'research assessment', 'grant evaluation', 'grant evaluations',
+    'research evaluation', 'research assessment', 'research activity', 'research activities',
+    'grant evaluation', 'grant evaluations',
     'research funder', 'research funders', 'research grant', 'research grants',
     'research productivity', 'scientific productivity', 'publication output',
     'citation impact', 'r&d intensity', 'research intensity',
@@ -5799,7 +5834,8 @@ A_RESEARCH_STRONG_SYSTEM_CUES = [
     'research talent', 'scientific talent', 'research workforce', 'scientific workforce',
     'research careers', 'researcher mobility', 'brain drain', 'brain gain',
     'technology transfer', 'knowledge transfer', 'innovation ecosystem',
-    'research evaluation', 'research assessment', 'grant evaluation', 'grant evaluations',
+    'research evaluation', 'research assessment', 'research activity', 'research activities',
+    'grant evaluation', 'grant evaluations',
     'research funder', 'research funders', 'science-policy interface', 'science policy interface',
     'scientific knowledge in policymaking', 'scientific knowledge in policy making',
     'open science', 'research data infrastructure',
