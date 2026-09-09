@@ -19,6 +19,8 @@ from urllib.request import Request, urlopen
 
 SCANNER_WORKFLOW_SUFFIXES = (
     "/.github/workflows/radar-scan.yml",
+    "/.github/workflows/radar-quick-scan.yml",
+    "/.github/workflows/priority-docx-scan.yml",
     "/.github/workflows/historical-scan.yml",
 )
 

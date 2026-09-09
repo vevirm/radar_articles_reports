@@ -113,7 +113,10 @@ OUT_PATH = ROOT / "radar.json"
 SEED_PATH = ROOT / "radar_seed.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
-CURATOR_CANDIDATE_TESTS_PATH = ROOT / "curator_candidate_inputs.json"
+_curator_inputs_override = os.environ.get("RADAR_CURATOR_CANDIDATE_INPUTS", "").strip()
+CURATOR_CANDIDATE_TESTS_PATH = Path(_curator_inputs_override) if _curator_inputs_override else (ROOT / "curator_candidate_inputs.json")
+if _curator_inputs_override and not CURATOR_CANDIDATE_TESTS_PATH.is_absolute():
+    CURATOR_CANDIDATE_TESTS_PATH = ROOT / CURATOR_CANDIDATE_TESTS_PATH
 PHRASE_RULES_PATH = ROOT / "radar_phrase_rules.json"
 
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
@@ -495,6 +498,8 @@ SESSION.headers.update({
 # fully anonymous operation when it is absent. Never persist or log the key.
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
+RADAR_QUICK_SCAN = os.environ.get("RADAR_QUICK_SCAN", "").strip().lower() in {"1", "true", "yes", "on"}
+RADAR_PRIORITY_SCAN = os.environ.get("RADAR_PRIORITY_SCAN", "").strip().lower() in {"1", "true", "yes", "on"}
 RADAR_DIAGNOSTIC_RUN = False  # v19 production: the temporary five-minute bootstrap/debug mode is retired
 
 def _pdf_page_cap() -> int:
@@ -7750,6 +7755,121 @@ def load_curator_candidate_tests() -> dict[str, Any]:
     return raw
 
 
+def priority_scan_candidates() -> list[dict[str, Any]]:
+    """Return the temporary APA-derived priority list for a dedicated priority run."""
+    if not RADAR_PRIORITY_SCAN:
+        return []
+    batch = load_curator_candidate_tests()
+    return [dict(x) for x in (batch.get("candidates") or []) if isinstance(x, dict) and clean_text(x.get("title"))]
+
+
+def priority_news_queries(limit: int = 40) -> list[str]:
+    """Exact-title news queries for APA references; normal C gates remain final."""
+    out: list[str] = []
+    for entry in priority_scan_candidates():
+        title = clean_text(entry.get("title"))
+        if not title:
+            continue
+        escaped = title.replace('"', '')
+        out.append(f'"{escaped}"')
+        if len(out) >= max(1, int(limit)):
+            break
+    return list(dict.fromkeys(out))
+
+
+def collect_priority_news_references(
+    now: dt.datetime,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+) -> list[dict[str, Any]]:
+    """Fetch direct news/commentary URLs from the APA priority list.
+
+    APA metadata is only a locator.  The live source page supplies title/description/date;
+    the returned row still goes through ``anchor_news`` and all ordinary C gates.
+    """
+    out: list[dict[str, Any]] = []
+    timeout = min(10, int(CONFIG.get("news_timeout_seconds", 10) or 10))
+    for entry in priority_scan_candidates():
+        if stage_deadline_reached(stage_deadline, 5):
+            break
+        if normalized(entry.get("source_kind")) not in {"news or commentary", "news_or_commentary"}:
+            continue
+        url = clean_text(entry.get("url"))
+        title_hint = clean_text(entry.get("title"))
+        if not url.startswith(("http://", "https://")) or "doi.org/" in normalized(url):
+            continue
+        try:
+            domain = (urlparse(url).hostname or "").lower().removeprefix("www.")
+        except Exception:
+            domain = ""
+        source_hint = clean_text(entry.get("source")) or domain
+        ok_source, canonical_source = allowed_global_news_source(source_hint, domain)
+        if not ok_source:
+            # Keep the same source-integrity boundary as ordinary C discovery.
+            continue
+        try:
+            r = SESSION.get(url, timeout=timeout, allow_redirects=True)
+            if r.status_code != 200 or "html" not in normalized(r.headers.get("content-type", "text/html")):
+                continue
+            soup = BeautifulSoup(r.text, "html.parser")
+            title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(
+                soup.h1.get_text(" ", strip=True) if soup.h1 else title_hint
+            )
+            desc = meta_content(soup, ["description", "og:description", "twitter:description"])
+            published = None
+            for script in soup.find_all("script", attrs={"type": re.compile(r"ld\+json", re.I)}):
+                try:
+                    data = json.loads(script.string or script.get_text())
+                except Exception:
+                    continue
+                for obj in jsonld_objects(data):
+                    published = published or parse_date(obj.get("datePublished") or obj.get("dateCreated"))
+            if not published:
+                published = parse_date(meta_content(soup, [
+                    "article:published_time", "og:article:published_time", "datePublished",
+                    "dateCreated", "parsely-pub-date", "pubdate", "publication_date",
+                ]))
+            # APA day/month dates are useful as a last-resort locator date, but a bare year is not.
+            if not published and clean_text(entry.get("date_precision")) in {"day", "month"}:
+                published = parse_date(entry.get("date"))
+            if not published:
+                continue
+            when = dt.datetime.combine(published, dt.time.min, tzinfo=dt.timezone.utc)
+            if when < now - dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS) or when > now + dt.timedelta(days=1):
+                continue
+            text = f"{title}. {desc}"
+            trusted_commentary = trusted_analytical_commentary_candidate(title, desc, canonical_source, domain, r.url or url)
+            strict_strategic = strategic_pathway_candidate_text(text)
+            shock_watch = possible_external_shock_candidate_text(text)
+            formal_proposal = formal_proposal_is_public_signal(text, title, desc, canonical_source, r.url or url)
+            if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch or formal_proposal):
+                continue
+            signal_key = f"signal:{normalized(canonical_source)}:{norm_title(title)}"
+            if signal_key in KNOWN_SIGNAL_IDENTITIES:
+                continue
+            out.append({
+                "headline": title,
+                "source": canonical_source,
+                "source_domain": domain,
+                "discovery_provenance": "priority_docx_direct",
+                "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
+                "link": r.url or url,
+                "_desc": desc,
+                "_desc_html": "",
+                "_themes": themes_for(text),
+                "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
+                "_strategic_discovery": strict_strategic,
+                "_shock_watch_discovery": shock_watch,
+                "_trusted_commentary_signal": bool(trusted_commentary),
+                "_formal_proposal_signal": bool(formal_proposal),
+                "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal) else "",
+                "priority_docx_id": clean_text(entry.get("candidate_id")),
+            })
+        except Exception as e:
+            warnings.append(f"Priority DOCX direct news fetch: {type(e).__name__}")
+    return out
+
+
 def _curator_candidate_known(entry: dict[str, Any]) -> bool:
     title = clean_text(entry.get("title"))
     doi = clean_text(entry.get("doi"))
@@ -7980,7 +8100,7 @@ def collect_curator_candidate_tests(
                     raw_cr = dict(raw_cr)
                     raw_cr["abstract"] = recovered
                     result["abstract_recovered_from_doi"] = True
-            candidate = candidate_from_crossref(raw_cr, date_floor=EXTENDED_DATE_FLOOR)
+            candidate = candidate_from_crossref(raw_cr, date_floor=min(EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR))
             status, detail = _curator_crossref_gate_status(raw_cr)
 
         # OpenAlex is a fallback for unresolved records and records whose bibliographic
@@ -8008,7 +8128,7 @@ def collect_curator_candidate_tests(
                         patched["abstract_inverted_index"] = inv
                         raw_oa = patched
                         result["abstract_recovered_from_doi"] = True
-                oa_candidate = candidate_from_openalex(raw_oa, date_floor=EXTENDED_DATE_FLOOR)
+                oa_candidate = candidate_from_openalex(raw_oa, date_floor=min(EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR))
                 oa_status, oa_detail = _curator_openalex_gate_status(raw_oa)
                 result["openalex_status"] = "resolved"
                 if oa_candidate is not None:
@@ -8023,7 +8143,13 @@ def collect_curator_candidate_tests(
         if candidate is not None:
             candidate = _tag_curator_candidate(candidate, entry, batch)
             d = parse_date(candidate.get("date"))
-            retention_ok = bool(not d or d >= DATE_FLOOR or (d >= EXTENDED_DATE_FLOOR and extended_high_quality_merit(candidate)))
+            candidate_strand = clean_text(candidate.get("strand"))
+            retention_ok = bool(
+                not d
+                or d >= DATE_FLOOR
+                or (candidate_strand in {"B", "both"} and d >= B_METHOD_DATE_FLOOR)
+                or (d >= EXTENDED_DATE_FLOOR and extended_high_quality_merit(candidate))
+            )
             result["strand"] = clean_text(candidate.get("strand"))
             result["resolved_link"] = clean_text(candidate.get("link"))
             result["retention_eligible"] = retention_ok
@@ -14536,8 +14662,16 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
     per_feed = int(CONFIG.get("news_items_per_feed", 60))
     jobs: list[tuple[str, str, str, bool, bool]] = []
     days = max(2, min(60, (int(lookback_hours) + 23) // 24))
+    coverage_jobs = [
+        ("", "", f"{clean_text(q)} when:{days}d", True, False)
+        for q in (coverage_queries or []) if clean_text(q)
+    ]
+    # On a dedicated DOCX priority run, exact supplied titles go first so a short
+    # budget cannot spend itself on the ordinary feed rotation before testing them.
+    if RADAR_PRIORITY_SCAN:
+        jobs.extend(coverage_jobs)
     if include_base_queries:
-        # Active implications discovery is deliberately first in the queue so a short news
+        # Active implications discovery is deliberately first in ordinary runs so a short news
         # deadline cannot starve risk/opportunity/shock searches behind generic source jobs.
         for q in strategic_pathway_queries('news'):
             jobs.append(("", "", f"{q} when:{days}d", True, True))
@@ -14546,9 +14680,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 jobs.append((src["name"], src["domain"], q, False, False))
         for q in global_news_queries(lookback_hours):
             jobs.append(("", "", q, True, False))
-    for q in coverage_queries or []:
-        if clean_text(q):
-            jobs.append(("", "", f"{clean_text(q)} when:{days}d", True, False))
+    if not RADAR_PRIORITY_SCAN:
+        jobs.extend(coverage_jobs)
 
     def fetch_job(job: tuple[str, str, str, bool, bool]) -> tuple[list[dict[str, Any]], str | None]:
         name, domain, q, is_global, strategic_target = job
@@ -16021,7 +16154,7 @@ def main() -> int:
     log_progress.started = time.monotonic()
     configured_budget_seconds = max(60, int(CONFIG.get("scan_budget_seconds", 1200)))
     budget_override = str(os.environ.get("RADAR_SCAN_BUDGET_SECONDS", "") or "").strip()
-    if budget_override and not RADAR_DIAGNOSTIC_RUN and budget_override != str(configured_budget_seconds):
+    if budget_override and not (RADAR_DIAGNOSTIC_RUN or RADAR_QUICK_SCAN or RADAR_PRIORITY_SCAN) and budget_override != str(configured_budget_seconds):
         log_progress(f"Ignoring non-production scanner budget override {budget_override!r}; standard main budget is {configured_budget_seconds}s")
         budget_override = ""
     if budget_override:
@@ -16062,6 +16195,17 @@ def main() -> int:
         ):
             _scale_time_key(key, minimum)
 
+    if RADAR_PRIORITY_SCAN:
+        # A priority-DOCX run is still the ordinary scanner, but curator-supplied works
+        # must get first use of the short budget.  This changes allocation only: exact
+        # references still pass the normal duplicate, source, language and A/B/C gates.
+        CONFIG["curator_candidate_testing_enabled"] = True
+        CONFIG["curator_candidate_tests_per_scan"] = max(50, int(CONFIG.get("curator_candidate_tests_per_scan", 30) or 30))
+        CONFIG["curator_candidate_testing_stage_seconds"] = max(120, int(CONFIG.get("curator_candidate_testing_stage_seconds", 30) or 30))
+        CONFIG["full_budget_continuation_enabled"] = False
+        CONFIG["low_yield_fresh_rotation_enabled"] = False
+        CONFIG["low_yield_reserved_seconds"] = 0
+
     if RADAR_DIAGNOSTIC_RUN:
         # The first five-minute run is a systems diagnostic, not a full-coverage census.
         # Keep every source family/admission path active, but bound the heaviest fan-out
@@ -16080,9 +16224,10 @@ def main() -> int:
     LOW_YIELD_RESERVE_SECONDS = max(0, int(CONFIG.get("low_yield_reserved_seconds", 600) or 0))
     LOW_YIELD_RESERVE_ACTIVE = bool(CONFIG.get("low_yield_fresh_rotation_enabled", True) and LOW_YIELD_RESERVE_SECONDS)
     if budget_override and budget_seconds < configured_budget_seconds:
+        mode = "priority" if RADAR_PRIORITY_SCAN else "quick" if RADAR_QUICK_SCAN else "diagnostic"
         log_progress(
-            f"Scanner time budget: {budget_seconds}s diagnostic override "
-            f"(production profile: {configured_budget_seconds}s)"
+            f"Scanner time budget: {budget_seconds}s {mode} profile "
+            f"(production profile: {configured_budget_seconds}s; stage/reserve seconds scaled proportionally in memory)"
         )
     else:
         log_progress(f"Scanner time budget: {budget_seconds}s production profile")
@@ -16788,6 +16933,36 @@ def main() -> int:
     rule_fix_source_recovery_needed = False
     rule_fix_source_recovery_attempted = False
     rule_fix_recovered: list[dict[str, Any]] = []
+
+    # Dedicated "scan these now" lane: resolve the APA-derived exact titles/DOIs before
+    # broad discovery.  Candidates simply rejoin the ordinary A/B pool afterwards.
+    priority_curator_candidates: list[dict[str, Any]] = []
+    priority_curator_state: dict[str, Any] = {}
+    if RADAR_PRIORITY_SCAN and priority_scan_candidates() and budget_remaining() > 45:
+        priority_seconds = min(
+            max(30, int(CONFIG.get("curator_candidate_testing_stage_seconds", 120) or 120)),
+            max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 15)) - 30)),
+        )
+        if priority_seconds >= 30:
+            log_progress(f"Priority DOCX: testing {len(priority_scan_candidates())} exact APA reference(s) first")
+            try:
+                priority_curator_candidates, priority_curator_state = collect_curator_candidate_tests(
+                    previous, warnings, time.monotonic() + priority_seconds, execution_stats=None
+                )
+            except Exception as e:
+                warnings.append(f"Priority DOCX exact-resolution error: {type(e).__name__}: {str(e)[:160]}")
+
+    priority_direct_news: list[dict[str, Any]] = []
+    if RADAR_PRIORITY_SCAN and budget_remaining() > 30:
+        try:
+            priority_direct_news = collect_priority_news_references(
+                now, warnings, time.monotonic() + min(30, max(10, int(budget_remaining() - 25)))
+            )
+            if priority_direct_news:
+                log_progress(f"Priority DOCX: resolved {len(priority_direct_news)} direct current news/commentary reference(s)")
+        except Exception as e:
+            warnings.append(f"Priority DOCX direct-news stage error: {type(e).__name__}: {str(e)[:160]}")
+
     phase_started = time.monotonic()
     news_deadline = phase_started + int(CONFIG.get("news_stage_seconds", 240))
     oa_deadline = phase_started + int(CONFIG.get("openalex_stage_seconds", 360))
@@ -16809,7 +16984,7 @@ def main() -> int:
     with cf.ThreadPoolExecutor(max_workers=6) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline,
-            list(dict.fromkeys(list(frontier_focus["queries"]) + high_order_news_focus))
+            list(dict.fromkeys(list(priority_news_queries()) + list(frontier_focus["queries"]) + high_order_news_focus))
         )
         fut_oa = ex.submit(
             safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, oa_query_dates,
@@ -16832,8 +17007,12 @@ def main() -> int:
             previous, warnings, primary_evidence_deadline, execution_stats
         )
         news = fut_news.result()
+        if priority_direct_news:
+            news.extend(priority_direct_news)
         oa = fut_oa.result()
         cr = fut_cr.result()
+        if priority_curator_candidates:
+            cr.extend(priority_curator_candidates)
         inst_base = fut_inst.result()
         primary_evidence_rows = fut_primary_evidence.result()
         if primary_evidence_rows:
@@ -16919,9 +17098,12 @@ def main() -> int:
     # recall/deepening work so supplied papers are actually tested, not merely stored
     # as notes. The lane resolves exact DOI/title records and then rejoins the ordinary
     # scholarly candidate pool; no curator hint can bypass admission or Matrix semantics.
-    curator_candidate_testing_state = deepcopy(previous.get("curator_candidate_testing")) if isinstance(previous.get("curator_candidate_testing"), dict) else {}
+    curator_candidate_testing_state = (
+        dict(priority_curator_state) if RADAR_PRIORITY_SCAN and priority_curator_state
+        else deepcopy(previous.get("curator_candidate_testing")) if isinstance(previous.get("curator_candidate_testing"), dict) else {}
+    )
     curator_test_candidates: list[dict[str, Any]] = []
-    if bool(CONFIG.get("curator_candidate_testing_enabled", True)) and load_curator_candidate_tests() and budget_remaining() > 90:
+    if (not RADAR_PRIORITY_SCAN) and bool(CONFIG.get("curator_candidate_testing_enabled", True)) and load_curator_candidate_tests() and budget_remaining() > 90:
         curator_seconds = min(
             int(CONFIG.get("curator_candidate_testing_stage_seconds", 240) or 240),
             max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
@@ -16938,7 +17120,7 @@ def main() -> int:
                 curator_candidate_testing_state["status"] = "stage_error"
                 curator_candidate_testing_state["error"] = type(e).__name__
             cr.extend(curator_test_candidates)
-    elif load_curator_candidate_tests():
+    elif load_curator_candidate_tests() and not RADAR_PRIORITY_SCAN:
         curator_candidate_testing_state = dict(curator_candidate_testing_state or {})
         curator_candidate_testing_state["status"] = "skipped_budget"
 
