@@ -504,7 +504,7 @@ KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_DOI_TITLES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
-CURATOR_DECISION_PROFILE_VERSION = "v24.4-benchmark-false-negative-repair"
+CURATOR_DECISION_PROFILE_VERSION = "v24.5-final-b-method-recall"
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 # Sitemap ``lastmod`` dates are discovery evidence that should survive into the
 # page parser.  Many high-value EU CMS pages omit article:published_time even when
@@ -4300,10 +4300,10 @@ def _major_a_focus(text: str, explicit_geo: bool) -> bool:
 
 B_METHOD_FAMILIES = [
     # Core futures/foresight methods. These are the methods Strand B is actually about.
-    'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods',
+    'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods', 'foresight',
     'horizon scanning', 'weak signal detection', 'weak signals detection', 'weak signal analysis',
     'scenario planning', 'scenario construction', 'scenario building', 'scenario development',
-    'scenario methodology', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
+    'scenario methodology', 'scenario method', 'scenario methods', 'scenario approach', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
     'technology roadmapping', 'technology roadmap', 'roadmapping', 'wild cards', 'wild card',
     'futures wheel', 'causal layered analysis', 'emerging issue detection',
     'futures literacy', 'three horizons', 'experiential futures', 'participatory foresight',
@@ -4323,10 +4323,10 @@ B_METHOD_FAMILIES = [
 # Domain prediction systems, assessment frameworks and ordinary Delphi applications are not B,
 # even when they are technically novel or described as an "early-warning method".
 B_CORE_FUTURES_METHODS = [
-    'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods',
+    'strategic foresight', 'foresight methodology', 'foresight method', 'foresight methods', 'foresight',
     'horizon scanning', 'weak signal detection', 'weak signals detection', 'weak signal analysis',
     'scenario planning', 'scenario construction', 'scenario building', 'scenario development',
-    'scenario methodology', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
+    'scenario methodology', 'scenario method', 'scenario methods', 'scenario approach', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
     'technology roadmapping', 'technology roadmap', 'roadmapping', 'wild cards', 'wild card',
     'futures wheel', 'causal layered analysis', 'emerging issue detection',
     'futures literacy', 'three horizons', 'experiential futures', 'participatory foresight',
@@ -4394,7 +4394,8 @@ B_EXPLICIT_FUTURES_FRAMING = [
 B_METHOD_CONTRIBUTION_CUES = [
     'new method', 'new methodology', 'new framework', 'new protocol', 'new toolkit',
     'novel method', 'novel methodology', 'novel framework', 'novel protocol', 'novel toolkit',
-    'method development', 'methodological development', 'method design', 'methodological design',
+    'method development', 'methodological development', 'methodology development', 'method design', 'methodological design',
+    'framework development', 'methodological framework development', 'approach development', 'technique development',
     'adapted method', 'adapted methodology', 'extended method', 'extended methodology',
     'refined method', 'refined methodology', 'reusable method', 'transferable method',
     'generalizable method', 'generalisable method',
@@ -4420,19 +4421,21 @@ B_METHOD_STUDY_CUES = [
     'foresight impact assessment', 'foresight capability', 'anticipatory capacity',
     'embedding foresight', 'institutionalising foresight', 'institutionalizing foresight',
     'foresight practice', 'foresight process', 'methodological discussion',
+    'feasibility of the method', 'method feasibility', 'feasibility study', 'feasibility of using',
+    'research on the method', 'study of the method', 'study of the methodology',
 ]
 
 B_METHOD_STUDY_ACTIONS = re.compile(
     r'\b(?:review|synthesi[sz]|compar(?:e|es|ed|ing|ison)|evaluat(?:e|es|ed|ing|ion)|'
     r'validat(?:e|es|ed|ing|ion)|benchmark(?:s|ed|ing)?|test(?:s|ed|ing)?|assess(?:es|ed|ing|ment)?|'
     r'critiqu(?:e|es|ed|ing)|systemati[sz](?:e|es|ed|ing|ation)|taxonom(?:y|ies)|typolog(?:y|ies)|'
-    r'discuss(?:es|ed|ing|ion)|examin(?:e|es|ed|ing)|investigat(?:e|es|ed|ing|ion))\b',
+    r'discuss(?:es|ed|ing|ion)|examin(?:e|es|ed|ing)|investigat(?:e|es|ed|ing|ion)|research(?:es|ed|ing)?)\b',
     re.I,
 )
 
 B_METHOD_OBJECT_TERMS = [
     'method', 'methods', 'methodology', 'methodological', 'framework', 'approach', 'toolkit',
-    'protocol', 'process', 'practice', 'quality criteria', 'design principles', 'guidelines',
+    'protocol', 'technique', 'techniques', 'process', 'practice', 'quality criteria', 'design principles', 'guidelines',
 ]
 
 B_PURE_APPLICATION_CUES = [
@@ -4447,11 +4450,11 @@ B_CREATION_VERBS = re.compile(
     r'\b(?:develop(?:s|ed|ing)?|propos(?:e|es|ed|ing)|introduc(?:e|es|ed|ing)|design(?:s|ed|ing)?|'
     r'adapt(?:s|ed|ing)?|extend(?:s|ed|ing)?|refin(?:e|es|ed|ing)|creat(?:e|es|ed|ing)|'
     r'construct(?:s|ed|ing)?|formulat(?:e|es|ed|ing)|operationali[sz](?:e|es|ed|ing))\b'
-    r'.{0,140}\b(?:method|methodology|approach|framework|toolkit|protocol)\b',
+    r'.{0,140}\b(?:method|methodology|approach|framework|toolkit|protocol|technique)\b',
     re.I,
 )
 B_CREATION_PASSIVE = re.compile(
-    r'\b(?:method|methodology|approach|framework|toolkit|protocol)\b.{0,45}\b(?:is|was|were|has been|have been)\s+'
+    r'\b(?:method|methodology|approach|framework|toolkit|protocol|technique)\b.{0,45}\b(?:is|was|were|has been|have been)\s+'
     r'(?:developed|proposed|introduced|designed|adapted|extended|refined|created|constructed|formulated|operationalised|operationalized)\b',
     re.I,
 )
@@ -5625,6 +5628,26 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
     return focus, ri, geo, bridge, route, context_evidence
 
 
+def _generic_b_method_family(text: str) -> list[str]:
+    """High-precision fallback for titles that clearly make a futures method the object.
+
+    This deliberately does *not* make ordinary applications B.  It only supplies a method-family
+    label when the text contains both a futures/anticipation object and explicit methodological
+    language.  The ordinary contribution/application checks in ``_b_method_evidence`` still apply.
+    """
+    low = re.sub(r'[-–—/]+', ' ', normalized(text))
+    method_object = re.search(r'\b(?:method|methods|methodology|methodological|framework|approach|protocol|toolkit|technique|techniques)\b', low)
+    if not method_object:
+        return []
+    if re.search(r'\b(?:foresight|futures? studies|futures? research|horizon scanning|weak signals?|scenario(?:s)?|backcasting|roadmapping)\b', low):
+        return ['generic futures/foresight method']
+    if re.search(r'\b(?:emerging technolog(?:y|ies)|technology emerg(?:ence|ing)|research fronts?|technology trajector(?:y|ies)|innovation trajector(?:y|ies))\b', low):
+        return ['R&I futures analytic method']
+    if re.search(r'\b(?:innovation|technology|technological|research|science)\b.{0,45}\bscann(?:ing|er|ers)\b|\bscann(?:ing|er|ers)\b.{0,45}\b(?:innovation|technology|technological|research|science)\b', low):
+        return ['R&I scanning method']
+    return []
+
+
 def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str], str, list[str], str]:
     """Return whether the futures/foresight method itself is a substantive object of inquiry.
 
@@ -5648,23 +5671,25 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     core_families = _method_matches(ta, B_CORE_FUTURES_METHODS)
     auxiliary = _method_matches(ta, B_AUXILIARY_METHODS)
     ri_families = _method_matches(ta, B_RI_FUTURES_METHODS)
+    generic_families = _generic_b_method_family(ta)
     futures_framing = distinct_matches(ta, B_EXPLICIT_FUTURES_FRAMING)
     ri_future_framing = distinct_matches(ta, B_RI_FUTURES_FRAMING)
     ri_context = distinct_matches(ta, B_RI_METHOD_CONTEXT)
-    if not all_families:
+    if not (all_families or generic_families):
         return False, [], '', [], ''
 
-    classic_candidate = core_families or (auxiliary if futures_framing else [])
-    ri_transfer_candidate = bool(ri_families and ri_future_framing and ri_context)
-    candidate_families = core_families or (auxiliary if futures_framing else []) or (ri_families if ri_transfer_candidate else [])
+    classic_candidate = core_families or (auxiliary if futures_framing else []) or ([x for x in generic_families if 'R&I' not in x])
+    ri_transfer_candidate = bool((ri_families and ri_future_framing and ri_context) or [x for x in generic_families if 'R&I' in x])
+    candidate_families = core_families or (auxiliary if futures_framing else []) or (ri_families if ri_transfer_candidate else []) or generic_families
     if not candidate_families:
         return False, all_families[:5], '', [], ''
 
     strategic_ri_context = distinct_matches(ta, B_STRATEGIC_RI_RELEVANCE)
     off_topic_application = distinct_matches(ta, B_OFFTOPIC_APPLICATION_DOMAINS)
-    # B still needs a destination relevant to studying R&I/science/technology/policy futures.
-    # The broader method-contribution definition does not turn B into generic futures studies.
-    if not strategic_ri_context:
+    # Classic futures/foresight methodology is Strand B on its own when the method itself is
+    # developed/studied.  It must not be forced through Strand A's Europe/R&I subject gate.
+    # The separate R&I-analytic transfer route still needs an R&I/STI destination.
+    if not strategic_ri_context and not classic_candidate:
         return False, candidate_families[:5], '', [], ''
     if off_topic_application and not distinct_matches(ta, [
         'research and innovation', 'innovation policy', 'research policy', 'science policy',
@@ -5690,10 +5715,12 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         sent_futures = distinct_matches(sent, B_EXPLICIT_FUTURES_FRAMING)
         sent_ri_future = distinct_matches(sent, B_RI_FUTURES_FRAMING)
         sent_ri_context = distinct_matches(sent, B_RI_METHOD_CONTEXT)
+        sent_generic = _generic_b_method_family(sent)
         return bool(
             sent_core
             or (sent_aux and sent_futures)
             or (sent_ri and sent_ri_future and sent_ri_context)
+            or sent_generic
         )
 
     def method_study_sentence(sent: str) -> bool:
@@ -5768,7 +5795,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     # A method-first title plus explicit validation/comparison/transfer evidence is also enough.
     method_first_title = bool(
         title_candidate
-        and re.search(r'\b(?:method|methodology|framework|toolkit|protocol|approach)\b', title_norm)
+        and re.search(r'\b(?:method|methodology|framework|toolkit|protocol|approach|technique)\b', title_norm)
         and not re.search(r'\b(?:using|application of|applications of|case study|case studies)\b', title_norm)
     )
     contribution_evidence = bool(re.search(
@@ -5776,7 +5803,11 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         r'robust|accuracy|performance|quality|transferab|reusab|generaliz|generalis|procedure|workflow|taxonomy|typology)\w*',
         normalized(abstract),
     ))
-    method_contribution = bool(method_first_title and contribution_evidence)
+    title_design_assertion = bool(
+        method_first_title
+        and re.search(r'\b(?:dynamic|adaptive|integrated|hybrid|participatory|structured|systematic|mission oriented|mission-oriented)\b', title_norm)
+    )
+    method_contribution = bool(method_first_title and (contribution_evidence or title_design_assertion))
 
     # Pure case applications are deliberately not B.  Application wording is harmless only when
     # there is independent evidence that the paper also studies/develops the method itself.
@@ -5784,10 +5815,10 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         r'\b(?:we|this (?:paper|study|article))\s+(?:use|uses|used|apply|applies|applied|employ|employs|employed)\b',
         normalized(abstract),
     ))
-    method_object_contribution = bool(creation_bridge or title_creation or method_study_bridge or title_method_study or method_contribution)
+    method_object_contribution = bool(creation_bridge or title_creation or method_study_bridge or title_method_study or method_contribution or title_design_assertion)
     if not method_object_contribution:
         return False, candidate_families[:5], '', [], ''
-    if application_language and not (creation_bridge or title_creation or method_study_bridge or title_method_study):
+    if application_language and not (creation_bridge or title_creation or method_study_bridge or title_method_study or title_design_assertion):
         return False, candidate_families[:5], '', [], ''
 
     # The R&I-futures route must remain about a reusable forward-looking analytical method, not
