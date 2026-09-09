@@ -42,6 +42,7 @@ if str(ROOT / "scripts") not in sys.path:
 from scanner_run_guard import defer_if_peer_scanner_active, deployment_only_push_event
 from scan_radar import (
     gate_scope as main_gate_scope,
+    document_exclusion_reason as main_document_exclusion_reason,
     final_ab_candidate_worthiness as main_final_ab_candidate_worthiness,
     diversified_query_bank as main_diversified_query_bank,
 )
@@ -125,6 +126,20 @@ SESSION.headers.update({
 })
 
 DIAG: collections.Counter[str] = collections.Counter()
+HIST_DEFERRED_THIS_RUN: dict[str, dict[str, Any]] = {}
+
+def _hist_deferred_key(raw: dict[str, Any]) -> str:
+    return norm(clean(raw.get('doi') or raw.get('url'))) or norm(clean(raw.get('title')))
+
+def _remember_hist_deferred(raw: dict[str, Any], lane: str) -> None:
+    key=_hist_deferred_key(raw)
+    if not key: return
+    HIST_DEFERRED_THIS_RUN[key]={"key":key,"raw":dict(raw),"lane":lane,"attempts":0,"last_seen":dt.datetime.now(dt.timezone.utc).isoformat()}
+
+def _resolve_hist_deferred(raw: dict[str, Any]) -> None:
+    key=_hist_deferred_key(raw)
+    if key: HIST_DEFERRED_THIS_RUN.pop(key,None)
+
 
 
 def legacy_hidden_historical_workflow_active() -> bool:
@@ -417,7 +432,7 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
     if not profile: _diag("reject_source_not_elite"); return None
     _diag("source_eligible")
     text=clean(f"{title}. {abstract}")
-    if BAD_DOC_RE.search(title) and not ANALYTIC_RE.search(text): _diag("reject_document_exclusion"); return None
+    if main_document_exclusion_reason(title, abstract, url): _diag("reject_document_exclusion"); return None
     source_kind="scholarly" if profile.get("kind")=="top_journal" else "institutional"
     tier=_main_source_tier(profile)
     evidence=main_gate_scope(title, abstract, "", tier, source_kind)
@@ -545,6 +560,13 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
             raw={"title":w.get("title"),"abstract":openalex_abstract(w.get("abstract_inverted_index")),"date":w.get("publication_date"),"url":url,"doi":doi,"authors":authors,"venue":src.get("display_name"),"publisher":src.get("host_organization_name"),"discovery":f"OpenAlex · {q}"}
             raw_list.append(raw)
             if not raw["abstract"]:
+                title_only=admit(raw,lane)
+                if title_only:
+                    raw["_title_only_admitted"]=title_only
+                    _diag("openalex_metadata_title_only_admitted")
+                    _resolve_hist_deferred(raw)
+                    continue
+                _remember_hist_deferred(raw,lane)
                 prof=source_for(domain_of(url), clean(raw.get("venue")), clean(raw.get("publisher")))
                 p=metadata_rescue_priority(clean(raw.get("title")), q, prof, parse_date(raw.get("date")))
                 if p >= min_priority: rescue_queue.append((p, raw))
@@ -552,8 +574,12 @@ def collect_openalex(queries: list[str], warnings: list[str], lane: str = "opena
         for _, raw in rescue_queue[:max(0,min(per_query,scan_cap-used_rescue))]:
             text=fetch_text(clean(raw.get("url")), int(CONFIG.get("missing_abstract_enrichment_timeout_seconds",9)))
             used_rescue += 1; _diag("openalex_metadata_rescue_attempted")
-            if text: raw["abstract"]=text; _diag("openalex_metadata_rescue_recovered")
+            if text:
+                raw["abstract"]=text; _diag("openalex_metadata_rescue_recovered"); _resolve_hist_deferred(raw)
         for raw in raw_list:
+            title_only=raw.pop("_title_only_admitted",None)
+            if title_only:
+                out.append(title_only); continue
             item=admit(raw,lane)
             if item: out.append(item)
         log(f"OpenAlex: {q[:68]} -> {len(out)} admitted cumulative")
@@ -581,13 +607,24 @@ def collect_crossref(queries: list[str], warnings: list[str], lane: str = "cross
             raw={"title":title,"abstract":clean(re.sub(r"<[^>]+>"," ",w.get("abstract") or "")),"date":crossref_date(w),"url":url,"doi":doi,"authors":authors,"venue":venue,"publisher":clean(w.get("publisher")),"discovery":f"Crossref · {q}"}
             raw_list.append(raw)
             if not raw["abstract"]:
+                title_only=admit(raw,lane)
+                if title_only:
+                    raw["_title_only_admitted"]=title_only
+                    _diag("crossref_metadata_title_only_admitted")
+                    _resolve_hist_deferred(raw)
+                    continue
+                _remember_hist_deferred(raw,lane)
                 prof=source_for(domain_of(url),venue,clean(raw.get("publisher"))); p=metadata_rescue_priority(title,q,prof,parse_date(raw.get("date")))
                 if p>=min_priority: rescue_queue.append((p,raw))
         rescue_queue.sort(key=lambda x:x[0],reverse=True); _diag("crossref_metadata_rescue_queued",len(rescue_queue))
         for _,raw in rescue_queue[:max(0,min(per_task,scan_cap-used_rescue))]:
             text=fetch_text(clean(raw.get("url")),int(CONFIG.get("missing_abstract_enrichment_timeout_seconds",9))); used_rescue+=1; _diag("crossref_metadata_rescue_attempted")
-            if text: raw["abstract"]=text; _diag("crossref_metadata_rescue_recovered")
+            if text:
+                raw["abstract"]=text; _diag("crossref_metadata_rescue_recovered"); _resolve_hist_deferred(raw)
         for raw in raw_list:
+            title_only=raw.pop("_title_only_admitted",None)
+            if title_only:
+                out.append(title_only); continue
             item=admit(raw,lane)
             if item: out.append(item)
         log(f"Crossref: {q[:68]} -> {len(out)} admitted cumulative")
@@ -1262,9 +1299,47 @@ def load_previous_archive(
     return previous
 
 
+def recover_historical_deferred(state: dict[str, Any], warnings: list[str]) -> list[dict[str, Any]]:
+    pending=state.get('deferred_metadata_queue') if isinstance(state.get('deferred_metadata_queue'),list) else []
+    admitted=[]; retained=[]; cap=max(0,int(CONFIG.get('deferred_metadata_recovery_per_scan',20) or 20)); attempts=0
+    for row in pending:
+        if not isinstance(row,dict): continue
+        raw=dict(row.get('raw') or {}) if isinstance(row.get('raw'),dict) else {}
+        lane=clean(row.get('lane')) or 'persistent_metadata'
+        if not raw: continue
+        title_only=admit(raw,lane)
+        if title_only:
+            admitted.append(title_only); continue
+        if attempts>=cap or not budget_ok(90): retained.append(row); continue
+        url=clean(raw.get('url') or raw.get('doi'))
+        if not url:
+            row['attempts']=int(row.get('attempts',0) or 0)+1; retained.append(row); continue
+        attempts+=1
+        text=fetch_text(url,int(CONFIG.get('missing_abstract_enrichment_timeout_seconds',9)))
+        if not text:
+            row['attempts']=int(row.get('attempts',0) or 0)+1; row['last_attempted']=dt.datetime.now(dt.timezone.utc).isoformat(); retained.append(row); continue
+        raw['abstract']=text
+        item=admit(raw,lane)
+        if item: admitted.append(item)
+        # Recovered text turns a miss into an admission decision; only retrieval failures persist.
+    state['deferred_metadata_queue']=retained[:max(50,int(CONFIG.get('deferred_metadata_queue_max',500) or 500))]
+    return admitted
+
+def persist_historical_deferred(state: dict[str, Any]) -> list[dict[str, Any]]:
+    merged={}
+    for row in state.get('deferred_metadata_queue',[]) if isinstance(state.get('deferred_metadata_queue'),list) else []:
+        if isinstance(row,dict) and clean(row.get('key')): merged[clean(row.get('key'))]=row
+    for key,row in HIST_DEFERRED_THIS_RUN.items():
+        old=merged.get(key,{})
+        if old: row={**row,'attempts':max(int(old.get('attempts',0) or 0),int(row.get('attempts',0) or 0))}
+        merged[key]=row
+    return list(merged.values())[-max(50,int(CONFIG.get('deferred_metadata_queue_max',500) or 500)):]
+
+
 def main() -> int:
     previous=load_previous_archive()
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
+    persistent_metadata_candidates=recover_historical_deferred(state,[])
     previous_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]
     topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items(); manual_items=manual_evidence_items()
     bands=historical_time_bands()
@@ -1321,6 +1396,7 @@ def main() -> int:
         window_from=active_band["date_from"],window_to=active_band["date_to"],
         direct_depth_page=source_depth_page,
     )
+    candidates.extend(persistent_metadata_candidates)
     candidates.extend(primary_seed_candidates)
     if primary_seed_candidates:
         log(f"Primary EU evidence recovery: {len(primary_seed_candidates)} canonical document(s) passed the normal gate")
@@ -1427,7 +1503,7 @@ def main() -> int:
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
         "coverage_map":{"bands":[{"id":str(b.get("id")),"label":str(b.get("label")),"date_from":b["date_from"].isoformat(),"date_to":b["date_to"].isoformat(),"items":int(band_counts.get(str(b.get("id")),0))} for b in bands],"thinnest_populated_cells":thinnest},
-        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"main_query_cursor":next_main_query,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
+        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"main_query_cursor":next_main_query,"deferred_metadata_queue":persist_historical_deferred(state),"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
         "last_scan":{
             "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":False,
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,"shared_main_queries":main_query_batch,
