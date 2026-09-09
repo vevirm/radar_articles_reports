@@ -593,10 +593,11 @@ p,li,dd,.plain,.why,.point,.priority-what,.priority-why,.node-what,.node-why{fon
 
 /* Earlier findings */
 .page-historical .intro-note{margin:var(--s-24) 0 0}
-.page-historical .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-16);margin:var(--s-24) 0}
+.page-historical .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-16);margin:var(--s-24) 0}
 .page-historical .stat{padding:var(--s-16) var(--s-24)}
 .page-historical .stat .label{font-family:var(--sans);font-size:var(--t-meta);color:var(--quiet)}
 .page-historical .stat .value{font-family:var(--sans);font-size:26px;font-weight:700;line-height:1.15;margin-top:var(--s-4)}
+.page-historical .stat.new .value{color:var(--red)}
 .page-historical .stat .cutoff-value{font-size:var(--t-title)}
 .page-historical .section{padding-top:0}
 .page-historical .head{
