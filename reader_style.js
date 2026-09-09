@@ -45,10 +45,45 @@ function expandSurfaceTerms(v){
     [/\bsemantic shift(?:s)?\b/gi,'changes in language'],
     [/\bdynamic topic model(?:s)?\b/gi,'methods that track changing research topics'],
     [/\bgraph anomaly detection\b/gi,'finding unusual changes in networks'],
-    [/\bdeemed export\b/gi,'rules treating access by foreign nationals as an export']
+    [/\bdeemed export\b/gi,'rules treating access by foreign nationals as an export'],
+    [/\bcompute access\b/gi,'access to computing power'],
+    [/\bcompute capacity\b/gi,'computing capacity'],
+    [/\bcompute infrastructure\b/gi,'computing infrastructure'],
+    [/\bgeopolitical chokepoints?\b/gi,'geopolitical bottlenecks'],
+    [/\bchokepoints?\b/gi,'critical bottlenecks'],
+    [/\binteroperability\b/gi,'ability of systems to work together'],
+    [/\bpilot lines?\b/gi,'test production lines'],
+    [/\btestbeds?\b/gi,'test facilities'],
+    [/\bdeep[- ]tech\b/gi,'advanced technology'],
+    [/\bde[- ]risking\b/gi,'reducing strategic dependencies'],
+    [/\btechnology sovereignty\b/gi,'control over critical technology'],
+    [/\bfrontier research\b/gi,'cutting-edge research'],
+    [/\bscale[- ]ups?\b/gi,'growing technology firms'],
+    [/\bscale[- ]up\b/gi,'growth'],
+    [/\bexport controls?\b/gi,'rules limiting technology exports']
   ];
   for(const [re,to] of jargon)s=s.replace(re,to);
   return clean(s);
+}
+
+// Source pages sometimes expose interface labels or institutional document codes as if
+// they were part of the title. Keep the original source title in the record, but remove
+// that residue from reader-facing headings.
+function displayTitle(v){
+  let s=surfaceText(v);
+  s=s.replace(/^(?:download|view|open|read)\s*(?:\d+)?\s*(?:[-–—:|]\s*)+/i,'');
+  s=s.replace(/^(?:COM|SWD|SEC)\s*\(\s*\d{4}\s*\)\s*\d+(?:\s+final)?\s*(?:[-–—:]\s*)+/i,'');
+  s=s.replace(/^document\s+\d+\s*(?:[-–—:]\s*)+/i,'');
+  s=s.replace(/^pdf\s*(?:[-–—:]\s*)+/i,'');
+  s=s.replace(/^(?:proposal for a regulation|proposal regulation)\s+/i,'Proposed regulation: ');
+  s=s.replace(/Cloud and artificial intelligence Development Act/gi,'Cloud and Artificial Intelligence Development Act');
+  s=s.replace(/\s*\(CADA\)\s*/gi,' ');
+  s=s.replace(/\s+(?:download|view|open|read more)\s*$/i,'');
+  s=s.replace(/\bservi\s+ces\b/gi,'services');
+  s=s.replace(/\bnon\s*-\s*European\b/gi,'non-European');
+  s=s.replace(/artificial[- ]intelligence/gi,'artificial intelligence');
+  s=s.replace(/\s+/g,' ').trim();
+  return s;
 }
 
 function removeEllipsis(v){
@@ -82,7 +117,15 @@ function limit(v,n){
 }
 
 
-function surfaceText(v){return removeEllipsis(expandSurfaceTerms(v))}
+function surfaceText(v){
+  return removeEllipsis(expandSurfaceTerms(v))
+    .replace(/\bservi\s+ces\b/gi,'services')
+    .replace(/\bnon\s*-\s*European\b/gi,'non-European')
+    .replace(/\s+([,.;:!?])/g,'$1')
+    .replace(/\s+-\s+/g,'-')
+    .replace(/\s+/g,' ')
+    .trim();
+}
 
 
 function fieldText(v){
@@ -93,6 +136,8 @@ function fieldText(v){
 function whatFor(x){
   const nTitle=clean(x?.title||x?.headline||'').toLowerCase();
   const specialWhat=[
+    [/cloud and ai development act|\bcada\b/, 'The Commission proposes rules to expand European cloud and artificial intelligence computing capacity.'],
+    [/summary of the impact assessment|impact assessment.*cloud and ai/, 'The impact assessment says Europe depends heavily on non-European cloud and artificial intelligence computing services.'],
     [/targeted consultation.*dual-use regulation|evaluation of the dual-use regulation/, 'The Commission is consulting on the evaluation of EU dual-use export-control rules.'],
     [/management plan 2026.*research and innovation/, 'The Commission’s 2026 plan sets research and innovation priorities, actions and delivery targets.'],
     [/eic fund investment guidelines|eic accelerator.*step scaleup/, 'The Commission updated investment guidelines for EU deep-tech and scale-up financing.'],
@@ -112,7 +157,7 @@ function whatFor(x){
   const candidates=[
     x?.core_message,x?.what,
     g.RadarInsights?.whatForEuRiGeo?.(x),g.RadarInsights?.signalWhat?.(x),g.RadarInsights?.pointFor?.(x),
-    x?.headline,x?.title
+    displayTitle(x?.headline),displayTitle(x?.title)
   ].map(clean).filter(Boolean);
   const badStart=/^(?:source focus:|its eu relevance|this includes:|as ‘open|as 'open|and\b|or\b|but\b|because\b|with\b|using\b|based on\b)/i;
   const predicate=/\b(?:is|are|was|were|has|have|had|can|could|will|would|may|might|must|should|targets?|builds?|expands?|reduces?|increases?|limits?|restricts?|shifts?|changes?|remains?|depends?|drives?|links?|uses?|proposes?|shows?|finds?|creates?|supports?|funds?|strengthens?|weakens?|requires?|faces?|puts?|makes?|becomes?|reconfigures?|affects?|determines?|gives?|provides?|opens?|closes?|moves?|concentrates?|exposes?)\b/i;
@@ -237,5 +282,5 @@ function pagePair(what,why,whatWords=20,whyWords=20){
 }
 function wordCount(v){return words(v).length}
 
-g.RadarReaderStyle={clean,limit,wordCount,whatFor,whyFor,radarPair,matrixPair,pagePair,surfaceText,expandSurfaceTerms,removeEllipsis};
+g.RadarReaderStyle={clean,limit,wordCount,whatFor,whyFor,radarPair,matrixPair,pagePair,surfaceText,expandSurfaceTerms,removeEllipsis,displayTitle};
 })(globalThis);

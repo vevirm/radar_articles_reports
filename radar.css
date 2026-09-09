@@ -244,7 +244,27 @@ p,li,dd,.plain,.why,.point,.priority-what,.priority-why,.node-what,.node-why{fon
 }
 .page-radar .search,.page-historical .search{flex:1 1 320px;min-width:0}
 #yearFilters{display:flex;gap:var(--s-8);flex-wrap:wrap}
-.page-radar .strand-jump{display:none}
+/* Three strands stay visible at the top: evidence, methods, weak signals. */
+.page-radar .strand-jump{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-8);
+  margin-top:var(--s-12);font-family:var(--sans);
+}
+.page-radar .strand-jump a{
+  min-width:0;display:grid;grid-template-columns:34px minmax(0,1fr) auto;
+  align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-12);
+  background:var(--paper);border:var(--w-struct) solid var(--ink);
+  color:var(--ink);text-decoration:none;
+}
+.page-radar .strand-jump a:hover{border-color:var(--red)}
+.page-radar .strand-jump strong{
+  width:30px;height:30px;display:grid;place-items:center;background:var(--ink);
+  color:var(--paper);font-size:var(--t-meta);line-height:1;font-weight:800;
+}
+.page-radar .strand-jump .strand-b-link strong{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.page-radar .strand-jump .strand-c-link strong{background:var(--red);color:var(--paper)}
+.page-radar .strand-jump span{font-size:var(--t-meta);font-weight:650;line-height:1.2}
+.page-radar .strand-jump em{font-size:var(--t-meta);font-style:normal;color:var(--quiet);font-weight:600}
+
 
 /* ─────────────────────────────────────────────────────────────
    Radar
@@ -411,19 +431,19 @@ p,li,dd,.plain,.why,.point,.priority-what,.priority-why,.node-what,.node-why{fon
 .page-phenomena .pattern-simple-section,.page-shocks .external-shock-main{max-width:none}
 .page-phenomena .pattern-simple-section h2,.page-shocks .external-shock-main h2{
   font-size:var(--t-h2);margin:0 0 var(--s-24);
-  padding-top:var(--s-16);border-top:var(--w-emph) solid var(--ink);
+  padding-top:var(--s-16);border-top:var(--w-emph) solid var(--red);
 }
 .page-phenomena .pattern-simple-list,.page-shocks .external-shock-list{
   list-style:none;padding:0;margin:0;display:grid;gap:var(--s-16);
 }
 .page-phenomena .pattern-simple-list li,.page-shocks .external-shock-list li{
-  padding:var(--s-24) var(--s-32);border-left:var(--w-emph) solid var(--ink);
+  padding:var(--s-16) var(--s-24);border-left:var(--w-emph) solid var(--red);
 }
 .page-phenomena .pattern-simple-list strong,.page-shocks .external-shock-list strong{
-  display:block;font-size:var(--t-title);line-height:1.35;font-weight:600;max-width:var(--measure);
+  display:block;font-size:22px;line-height:1.32;font-weight:650;max-width:var(--measure);
 }
 .page-phenomena .pattern-simple-list p,.page-shocks .external-shock-list p{
-  max-width:var(--measure);margin:var(--s-8) 0 0;font-size:var(--t-body);
+  max-width:var(--measure);margin:var(--s-8) 0 0;font-size:16px;line-height:1.45;color:var(--quiet);
 }
 .page-phenomena .pattern-simple-main{display:block}
 
@@ -898,3 +918,8 @@ body:not(.radar-site){font-family:var(--serif)}
   padding:var(--s-12) 0 0;max-width:none;order:6;
 }
 .page-historical .cards{gap:var(--s-8)}
+
+@media (max-width:760px){
+  .page-radar .strand-jump{grid-template-columns:1fr}
+  .page-radar .strand-jump a{grid-template-columns:34px minmax(0,1fr) auto}
+}

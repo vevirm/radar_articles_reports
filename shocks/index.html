@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>External Shock · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28">
+<link rel="stylesheet" href="../radar.css?v=28.2">
 <script src="../radar_data.js?v=28.1"></script>
 
 
@@ -37,6 +37,23 @@ const SIMPLE={
   energy_compute_rationing:'An energy shock forces Europe to ration AI and supercomputing access.',
   clinical_data_order:'A foreign data order freezes a pan-European clinical research network.'
 };
+
+function shockExplanation(v){
+  const t=norm(v);
+  if(/cyberattack|computing service offline/.test(t))return 'Shared European computing capacity could become unavailable precisely when research teams have no immediate substitute.';
+  if(/critical materials|advanced chips|cutoff/.test(t))return 'European research and production could stop where critical inputs have no fast substitute.';
+  if(/conflict|research corridor|displaces people/.test(t))return 'Researchers, facilities and collaborations could be disrupted at once, with no quick replacement for lost capacity.';
+  if(/partner restricts grants|researcher participation|data exchange/.test(t))return 'European teams could suddenly lose funding links, people, data or expertise they rely on.';
+  if(/pulling researchers home|tightens research security/.test(t))return 'Talent loss and tighter security checks could weaken collaboration and specialist capacity at the same time.';
+  if(/sanctions|horizon europe partnership/.test(t))return 'Formal association would no longer guarantee practical access to funds, partners or projects.';
+  if(/standards split|unable to work together/.test(t))return 'Shared research systems could fragment if equipment, data or rules stop working together.';
+  if(/technology company is bought|taking key capability/.test(t))return 'Intellectual property, talent and growth capacity could move outside European control.';
+  if(/foreign control layer|ai computing capacity unusable/.test(t))return 'European artificial-intelligence research could lose access to computing capacity even when infrastructure remains in Europe.';
+  if(/energy shock|ration.*computing/.test(t))return 'Scarce electricity could force research facilities to compete with other essential uses for computing capacity.';
+  if(/foreign data order|clinical research network/.test(t))return 'Cross-border studies could stop if researchers can no longer lawfully move or access patient data.';
+  if(/security reclassification|restricts access/.test(t))return 'A sudden security decision could close projects, data or partnerships before alternatives are available.';
+  return 'The disruption would remove an important capability, input or connection before European research could replace it.';
+}
 function evidenceStats(s){
   const ev=Array.isArray(s?.evidence)?s.evidence:[];
   const rows=ev.map(e=>e?.row||e).filter(Boolean);
@@ -68,7 +85,7 @@ function collect(data){
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
     const items=collect(data);
-    el.innerHTML=items.length?items.map(x=>`<li>${esc(x.text)}<span class="evidence-count">${x.records||0} ${(x.records||0)===1?'record':'records'} from ${x.sources||0} ${(x.sources||0)===1?'source':'sources'}</span></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
+    el.innerHTML=items.length?items.map(x=>`<li><strong>${esc(x.text)}</strong><p>${esc(shockExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
   }catch(e){console.error(e);el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

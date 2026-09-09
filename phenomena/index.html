@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>Ongoing Phenomena · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28">
+<link rel="stylesheet" href="../radar.css?v=28.2">
 <script src="../radar_data.js?v=28.1"></script>
 
 
@@ -95,9 +95,26 @@ function unique(items){
   return out;
 }
 function patternDistance(x){if(x?.kind==='convergence')return 4;if(x?.kind==='conjunction'||x?.kind==='renaming')return 3;return 2}
+
+function phenomenonExplanation(v){
+  const t=norm(v);
+  if(/computing power|computing capacity|supercomput/.test(t))return 'Access to large computing systems affects which technologies European researchers and firms can develop independently.';
+  if(/rules and standards|regulation|rulebook|standards/.test(t))return 'European rules can steer technical choices, markets and access around strategically important technologies.';
+  if(/research funding|research money|funding/.test(t))return 'Public research money is increasingly tied to capabilities Europe considers strategically important.';
+  if(/international research cooperation|science diplomacy|collaboration/.test(t)&&/security|conditions|restriction/.test(t))return 'Collaboration remains important, but partners, data and knowledge flows face tighter security conditions.';
+  if(/scale|companies that grow|industrial/.test(t))return 'Strong research does not automatically become globally competitive firms or production capacity in Europe.';
+  if(/research infrastructure|facility|infrastructure/.test(t))return 'Shared facilities and computing systems now matter directly to European resilience and strategic capability.';
+  if(/talent|career|researcher|skills/.test(t))return 'Skills, mobility and career conditions determine whether Europe can retain specialised scientific capability.';
+  if(/open science|opposite directions/.test(t))return 'Europe is trying to keep research open while protecting sensitive knowledge, data and partnerships.';
+  if(/critical materials|energy|upstream bottleneck/.test(t))return 'Research and production remain exposed when essential inputs come from concentrated external suppliers.';
+  if(/semiconductor|chip/.test(t))return 'Chip access and production shape what European research and technology can build without external constraints.';
+  if(/china|rivalry|technology controls|export/.test(t))return 'Technology competition is increasingly shaping which partnerships, inputs and markets remain open to European research.';
+  if(/long term strategy|foresight/.test(t))return 'Long-term planning is being pulled closer to decisions about security, capability and international dependence.';
+  return 'The pattern is recurring across otherwise separate research, policy and technology developments.';
+}
 function render(id,items){
   const el=document.getElementById(id),ordered=[...items].sort((a,b)=>(a.distance||2)-(b.distance||2)||(b.sources||0)-(a.sources||0)||(b.records||0)-(a.records||0));
-  el.innerHTML=ordered.length?ordered.map(x=>`<li data-obviousness="${x.distance||2}">${esc(x.text)}<span class="evidence-count">${x.records||0} ${(x.records||0)===1?'record':'records'} from ${x.sources||0} ${(x.sources||0)===1?'source':'sources'}</span></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show in this section yet. It will appear when the current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
+  el.innerHTML=ordered.length?ordered.map(x=>`<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong><p>${esc(phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show in this section yet. It will appear when the current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
