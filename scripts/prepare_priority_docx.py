@@ -42,6 +42,23 @@ def docx_paragraphs(path: Path) -> list[str]:
     return out
 
 
+
+def looks_like_apa_reference_paragraph(text: str) -> bool:
+    """Return True for a bibliographic APA-style paragraph, not section prose/headings.
+
+    Priority DOCX is a discovery queue, so headings such as ``Evidence``/``Methods`` and
+    scan notes must never become fake unresolved candidates. APA7 references in this
+    workflow are expected to contain a parenthesised year/date plus bibliographic text.
+    """
+    text = clean(text)
+    m = YEAR_RE.search(text)
+    if not m:
+        return False
+    before = clean(text[:m.start()])
+    after = clean(text[m.end():])
+    # Require both an author/institution side and a plausible work-title side.
+    return bool(before and len(after.split()) >= 3)
+
 def strip_terminal_link(text: str) -> str:
     return clean(URL_RE.sub(" ", text))
 
@@ -146,9 +163,9 @@ def main() -> None:
     args = ap.parse_args()
     if not args.docx.is_file():
         raise SystemExit(f"DOCX not found: {args.docx}")
-    refs = docx_paragraphs(args.docx)
+    refs = [ref for ref in docx_paragraphs(args.docx) if looks_like_apa_reference_paragraph(ref)]
     candidates = [parse_reference(ref, i + 1) for i, ref in enumerate(refs)]
-    candidates = [x for x in candidates if x.get("raw_reference")]
+    candidates = [x for x in candidates if x.get("raw_reference") and x.get("title")]
     parsed = sum(1 for x in candidates if x.get("title"))
     if not candidates:
         raise SystemExit("No non-empty APA references found in the DOCX")

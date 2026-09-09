@@ -504,7 +504,7 @@ KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_DOI_TITLES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
-CURATOR_DECISION_PROFILE_VERSION = "v24.2-a-c-historical-admission-repair"
+CURATOR_DECISION_PROFILE_VERSION = "v24.3-priority-benchmark-repair"
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 # Sitemap ``lastmod`` dates are discovery evidence that should survive into the
 # page parser.  Many high-value EU CMS pages omit article:published_time even when
@@ -3276,6 +3276,7 @@ def title_level_a_system_evidence(title: str) -> tuple[bool, list[str]]:
     system = distinct_matches(t, A_MAJOR_RI_SYSTEM)
     tech = distinct_matches(t, A_MAJOR_TECH_DOMAINS)
     outcomes = distinct_matches(t, A_STRATEGIC_RI_OUTCOME)
+    compounds = _ri_system_compound_hits(t)
     contextual = distinct_matches(t, [
         'research', 'science', 'scientific', 'innovation', 'innovation capacity', 'innovation ecosystem',
         'innovation ecosystems', 'innovation financing', 'financing instruments for innovation',
@@ -3284,8 +3285,8 @@ def title_level_a_system_evidence(title: str) -> tuple[bool, list[str]]:
         'research funding', 'research evaluation', 'research infrastructure', 'digital infrastructure', 'infrastructure', 'key infrastructure',
         'manufacturing', 'industrial', 'deep tech', 'deep-tech', 'startup', 'startups', 'scale-up', 'scale up',
     ])
-    ok = bool(system or (tech and (outcomes or contextual)))
-    return ok, list(dict.fromkeys(system + outcomes + contextual + tech))[:8]
+    ok = bool(system or compounds or (tech and (outcomes or contextual)))
+    return ok, list(dict.fromkeys(system + compounds + outcomes + contextual + tech))[:8]
 
 
 def eu_scope_admissible(value: str | None) -> bool:
@@ -3613,7 +3614,10 @@ A_RI_CORE = [
     'science diplomacy', 'research collaboration', 'scientific collaboration',
     'science and technology cooperation', 'scientific cooperation',
     'international research cooperation', 'international scientific cooperation',
-    'research funding', 'research programme', 'research program', 'horizon europe', 'fp10',
+    'research funding', 'research grants', 'research grant', 'research evaluation',
+    'research assessment', 'research funder', 'research funders', 'european research council',
+    'erc grant', 'erc grants',
+    'research programme', 'research program', 'horizon europe', 'fp10',
     'european research area', 'research system', 'innovation system', 'research governance',
     'innovation governance', 'research excellence', 'innovation ecosystem',
     'research and development', 'r&d', 'scientific capacity', 'research capacity',
@@ -3672,7 +3676,10 @@ A_MAJOR_RI_SYSTEM = [
     'scientific collaboration', 'research collaboration', 'research talent', 'scientific talent',
     'research workforce', 'scientific workforce', 'brain drain', 'brain gain', 'technology transfer',
     'industrial innovation', 'deep tech', 'deep-tech', 'innovation capacity', 'innovation ecosystem',
-    'innovation ecosystems', 'innovation financing', 'financing instruments for innovation', 'research careers', 'research evaluation',
+    'innovation ecosystems', 'innovation financing', 'financing instruments for innovation', 'research careers',
+    'research evaluation', 'research assessment', 'grant evaluation', 'grant evaluations',
+    'research funder', 'research funders', 'science-policy interface', 'science policy interface',
+    'scientific knowledge in policymaking', 'scientific knowledge in policy making',
     'university alliances', 'university patenting', 'patent', 'patents', 'digital innovation hub',
     'digital innovation hubs', 'innovation act', 'technological sovereignty', 'technology sovereignty',
     'strategic autonomy', 'economic security', 'strategic dependency', 'strategic dependencies',
@@ -3938,6 +3945,9 @@ def _central_ri_hits(text: str) -> list[str]:
     """Return R&I terms that are strong enough to establish subject centrality."""
     txt = _strip_relevance_boilerplate(text)
     hits = distinct_matches(txt, A_CENTRAL_RI_TERMS)
+    for compound in _ri_system_compound_hits(txt):
+        if compound not in hits:
+            hits.append(compound)
     if 'fp10' in [normalized(x) for x in hits] and not _contextual_fp10(txt):
         hits = [x for x in hits if normalized(x) != 'fp10']
     for sent in split_sentences(txt):
@@ -4275,7 +4285,7 @@ B_METHOD_FAMILIES = [
     'futures literacy', 'three horizons', 'experiential futures', 'participatory foresight',
     'computational foresight', 'quantitative foresight', 'data-driven foresight', 'data driven foresight',
     'automated horizon scanning', 'ai for foresight', 'llm-based horizon scanning', 'llm based horizon scanning',
-    'technology assessment', 'participatory technology assessment', 'exploratory modelling',
+    'technology foresight', 'technology assessment', 'participatory technology assessment', 'exploratory modelling',
     'exploratory modeling', 'dynamic adaptive policy pathways', 'structured expert judgement',
     'structured expert judgment',
     # Auxiliary techniques can support a futures method, but never qualify by themselves.
@@ -4298,7 +4308,7 @@ B_CORE_FUTURES_METHODS = [
     'futures literacy', 'three horizons', 'experiential futures', 'participatory foresight',
     'computational foresight', 'quantitative foresight', 'data-driven foresight', 'data driven foresight',
     'automated horizon scanning', 'ai for foresight', 'llm-based horizon scanning', 'llm based horizon scanning',
-    'technology assessment', 'participatory technology assessment', 'exploratory modelling',
+    'technology foresight', 'technology assessment', 'participatory technology assessment', 'exploratory modelling',
     'exploratory modeling', 'dynamic adaptive policy pathways', 'structured expert judgement',
     'structured expert judgment',
 ]
@@ -4463,10 +4473,36 @@ def _method_matches(text: str, terms: list[str]) -> list[str]:
     return distinct_matches(re.sub(r'[-–—/]+', ' ', clean_text(text)), terms)
 
 
+def _ri_system_compound_hits(text: str) -> list[str]:
+    """Bounded R&I-system mechanisms that are meaningful only as phrase combinations.
+
+    Keep generic words such as ``grant`` or ``scientific knowledge`` out on their own.
+    These combinations capture research-funding evaluation and the science-policy interface
+    without turning every grant, policy, or knowledge-use paper into R&I evidence.
+    """
+    hits: list[str] = []
+    for sent in split_sentences(_strip_relevance_boilerplate(text)):
+        low = normalized(sent)
+        if (
+            re.search(r'\bgrant evaluations?\b|\bgrant peer review\b', low)
+            and re.search(r'\b(?:research|scientific|academic|university|funder|funding agenc|european research council|erc)\w*\b', low)
+        ):
+            hits.append('research grant evaluation')
+        if (
+            re.search(r'\b(?:scientific|research) knowledge\b', low)
+            and re.search(r'\b(?:policy ?making|public policy|policy process|policy processes|evidence[- ](?:informed|based) policy)\b', low)
+        ):
+            hits.append('science-policy knowledge use')
+    return list(dict.fromkeys(hits))
+
+
 def _ri_hits(text: str) -> list[str]:
     """R&I evidence for Strand A, keeping generic technology out unless an R&I mechanism is explicit."""
     txt = _strip_relevance_boilerplate(text)
     hits = distinct_matches(txt, A_RI_CORE)
+    for compound in _ri_system_compound_hits(txt):
+        if compound not in hits:
+            hits.append(compound)
     if 'fp10' in [normalized(x) for x in hits] and not _contextual_fp10(txt):
         hits = [x for x in hits if normalized(x) != 'fp10']
     if research_talent_flow_signal(txt) and 'research-talent flow / brain drain' not in hits:
@@ -5745,6 +5781,8 @@ A_RESEARCH_SYSTEM_OUTCOME_CUES = [
     'research collaboration', 'scientific collaboration', 'researcher mobility',
     'research careers', 'research workforce', 'scientific workforce',
     'research talent', 'scientific talent', 'brain drain', 'brain gain',
+    'research evaluation', 'research assessment', 'grant evaluation', 'grant evaluations',
+    'research funder', 'research funders', 'research grant', 'research grants',
     'research productivity', 'scientific productivity', 'publication output',
     'citation impact', 'r&d intensity', 'research intensity',
     'technology transfer', 'knowledge transfer', 'commercialisation', 'commercialization',
@@ -5761,7 +5799,10 @@ A_RESEARCH_STRONG_SYSTEM_CUES = [
     'research talent', 'scientific talent', 'research workforce', 'scientific workforce',
     'research careers', 'researcher mobility', 'brain drain', 'brain gain',
     'technology transfer', 'knowledge transfer', 'innovation ecosystem',
-    'research assessment', 'open science', 'research data infrastructure',
+    'research evaluation', 'research assessment', 'grant evaluation', 'grant evaluations',
+    'research funder', 'research funders', 'science-policy interface', 'science policy interface',
+    'scientific knowledge in policymaking', 'scientific knowledge in policy making',
+    'open science', 'research data infrastructure',
 ]
 
 
@@ -8043,7 +8084,7 @@ def _curator_crossref_gate_status(raw: dict[str, Any]) -> tuple[str, dict[str, A
     detail: dict[str, Any] = {"resolved_title": title, "resolved_date": date.isoformat() if date else ""}
     if not title or not date:
         return "deferred_incomplete_metadata", detail
-    if date < EXTENDED_DATE_FLOOR or date > dt.date.today():
+    if date < min(EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR) or date > dt.date.today():
         return "outside_retention_window", detail
     if not english_record_ok(f"{title}. {abstract}", raw.get("language", ""), title=title):
         return "rejected_language", detail
@@ -8076,7 +8117,7 @@ def _curator_openalex_gate_status(raw: dict[str, Any]) -> tuple[str, dict[str, A
     detail: dict[str, Any] = {"resolved_title": title, "resolved_date": date.isoformat() if date else ""}
     if not title or not date:
         return "deferred_incomplete_metadata", detail
-    if date < EXTENDED_DATE_FLOOR or date > dt.date.today():
+    if date < min(EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR) or date > dt.date.today():
         return "outside_retention_window", detail
     if not english_record_ok(f"{title}. {abstract}", raw.get("language", ""), title=title):
         return "rejected_language", detail
