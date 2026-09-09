@@ -22,7 +22,8 @@ class ScannerFeatureContractTests(unittest.TestCase):
             'Knowledge transfer through disciplinary lenses: insights from German universities',
             'This study examines knowledge transfer practices and research collaboration.', ''
         )
-        self.assertIsNone(rel)
+        self.assertEqual(rel, 'unclear')
+        self.assertTrue(evidence)
         rel2, evidence2 = scan.eu_evidence(
             'Research security and strategic capabilities',
             'DG RTD examines research security, research infrastructures and strategic dependencies.', ''
