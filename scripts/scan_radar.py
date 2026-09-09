@@ -5,15 +5,15 @@ Key properties
 --------------
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
-* Strand A requires direct European/EU scope, substantive R&I evidence, and a source-supported geopolitical/strategic mechanism. Discovery may be broad, but admission is not padded with generic Europe/R&I material.
+* Strand A requires source-supported European/EU scope (direct or supported) plus substantive R&I evidence. A source-backed strategic/geopolitical mechanism is one route; strong evidence about the European R&I system itself (capability, funding, talent, networks, infrastructure, strategic technology, dependencies, patents, deep-tech ecosystems, etc.) is also admissible. A single member-state mention and inference-only foreign-to-Europe bridges remain insufficient.
 * Strand B is a methods library: the foresight/futures method itself must be an object of inquiry.
   A publication may develop/adapt a method, or test, validate, compare, evaluate, critique, review,
   systematise or discuss how such methods should be designed and used for research, science, technology
   or innovation futures. Mere application of Delphi/scenarios/horizon scanning to a case is not enough.
 * Strand C is not a general news feed: every admitted item must be a factual current development
   or trusted analytical weak signal on the same EU-R&I/geopolitics themes, with its own strong
-  R&I/geopolitical bridge. A substantive Strand-A anchor is preferred but not mandatory; unanchored
-  signals remain explicitly emergent/low-weight so later A evidence can be checked against them. Once admitted, the signal is retained for 60 days from its first insertion into the radar and always remains low-evidence.
+  source-backed European R&I relevance. A substantive Strand-A anchor is optional; unanchored
+  signals remain explicitly emergent/low-weight so later A evidence can be checked against them. Retention is status-aware: routine/analytical signals use the base window, active formal processes persist longer, and durable adopted/operating developments persist longest; all C remains low-evidence.
   A completed study/report/paper is itself an evidence product and therefore gets A/B precedence;
   discovery through a news lane can never demote it into C. An interesting genuine C item that points
   to research, a report, data or another publication can trigger a bounded evidence follow-up. Any
@@ -341,7 +341,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v24.0-independent-theme-aligned-c"
+C_ADMISSION_PROFILE_VERSION = "v24.2-event-analysis-status-aware-c"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -352,9 +352,44 @@ RECALL_PROFILE_VERSION = str(CONFIG.get("recall_profile_version", "v17.13.32-cit
 CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_version", "v17.13.32-shared-reference-forward-snowball"))
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
-A_RECALL_RECOVERY_VERSION = "v17.20.23-document-level-eu-ri-geopolitics-recheck"
-WINDOW_POLICY_VERSION = "v24.0-cumulative-ab-independent-c60d-durable-b"
+A_RECALL_RECOVERY_VERSION = "v24.2-graded-europe-system-evidence-recheck"
+WINDOW_POLICY_VERSION = "v24.2-cumulative-ab-status-aware-c-durable-b"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 24
+
+_METADATA_DEFERRED_LOCK = threading.Lock()
+_METADATA_DEFERRED_THIS_SCAN: dict[str, dict[str, Any]] = {}
+
+def _metadata_deferred_key(provider: str, raw: dict[str, Any]) -> str:
+    doi = clean_text(raw.get('doi') or raw.get('DOI')).lower().replace('https://doi.org/', '')
+    title_raw = raw.get('title') or raw.get('display_name') or ''
+    if isinstance(title_raw, list):
+        title_raw = title_raw[0] if title_raw else ''
+    title = norm_title(clean_text(title_raw))
+    return f"{provider}:{doi or title}" if (doi or title) else ''
+
+def remember_deferred_metadata(provider: str, raw: dict[str, Any], *, query: str = '', date_floor: dt.date | None = None, frontier_targets: Iterable[str] | None = None, allow_strategic: bool = False) -> None:
+    """Persist unresolved scholarly metadata so missing text is retried across scans."""
+    if not isinstance(raw, dict):
+        return
+    key = _metadata_deferred_key(provider, raw)
+    if not key:
+        return
+    row = {
+        'key': key, 'provider': provider, 'raw': raw, 'query': clean_text(query),
+        'date_floor': (date_floor or DATE_FLOOR).isoformat() if 'DATE_FLOOR' in globals() else '',
+        'frontier_targets': list(frontier_targets or []), 'allow_strategic': bool(allow_strategic),
+        'attempts': 0, 'last_seen': dt.datetime.now(dt.timezone.utc).isoformat(),
+    }
+    with _METADATA_DEFERRED_LOCK:
+        _METADATA_DEFERRED_THIS_SCAN[key] = row
+
+def resolve_deferred_metadata(provider: str, raw: dict[str, Any]) -> None:
+    key = _metadata_deferred_key(provider, raw)
+    if not key:
+        return
+    with _METADATA_DEFERRED_LOCK:
+        _METADATA_DEFERRED_THIS_SCAN.pop(key, None)
+
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
 RULE_FIX_SOURCE_RECOVERY_MAX_PAGES = 330
@@ -469,7 +504,7 @@ KNOWN_AB_IDENTITIES: set[str] = set()
 KNOWN_AB_DOI_TITLES: set[str] = set()
 KNOWN_AB_LINKS: set[str] = set()
 KNOWN_SIGNAL_IDENTITIES: set[str] = set()
-CURATOR_DECISION_PROFILE_VERSION = "v17.20.37-plumbing"
+CURATOR_DECISION_PROFILE_VERSION = "v24.2-a-c-historical-admission-repair"
 INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 # Sitemap ``lastmod`` dates are discovery evidence that should survive into the
 # page parser.  Many high-value EU CMS pages omit article:published_time even when
@@ -1128,6 +1163,7 @@ def initial_scan_state(previous: dict[str, Any]) -> dict[str, Any]:
     state.setdefault("priority_people_completed_cycles", 0)
     state.setdefault("foresight_author_cursor", 0)
     state.setdefault("foresight_author_completed_cycles", 0)
+    state.setdefault("deferred_metadata_queue", [])
     state["evidence_first_cursor"] = int(state.get("evidence_first_cursor", 0) or 0)
     if not isinstance(state.get("weak_signal_evidence_followup"), dict):
         state["weak_signal_evidence_followup"] = {}
@@ -2352,8 +2388,6 @@ def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", 
         return False
     if formal_evidence_product(title, desc, source, link):
         return False
-    if not eu_funding_signal_has_geopolitical_setting(title, desc):
-        return False
     lead = clean_text(desc)[:2200]
     full = normalized(f"{title}. {lead}")
     official_eu = _source_merit_is_eu_official(source, link)
@@ -2362,10 +2396,14 @@ def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", 
     evidence_like = reframing_signal_text(f"{title}. {lead}")
 
     if official_eu:
-        # A Commission/agency page describing an established office, programme, strategy,
-        # adopted rule, grant result or other mature public action is A evidence, not a weak
-        # signal.  Only a genuinely provisional/experimental official development may enter C.
-        return bool(provisional and (eventlike or contains_any(full, [
+        # Formal proposals and newly launched calls/pilots are factual institutional events.
+        # Their realisation status stays proposed/announced; this does not treat the promised
+        # outcome as achieved. Standing programme pages still fail below.
+        formal_current = bool(re.search(
+            r"\b(?:proposes?|tabled|published|presented|launches?|launched|opens?|opened)\b.{0,70}\b(?:proposal|draft|consultation|call|pilot|trial|testbed)\b",
+            full, re.I
+        ))
+        return bool((provisional or formal_current) and (eventlike or formal_current or contains_any(full, [
             "draft", "consultation", "pilot", "trial", "testbed", "proposal", "proposed",
             "delay", "postpone", "pause", "exception", "waiver", "opts out", "explores",
         ])))
@@ -2410,6 +2448,8 @@ WATCH_SIGNAL_THEMES = {
     "energy transition / strategic capability",
     "demographic change / research workforce",
     "biosecurity / health resilience",
+    "capital and ownership",
+    "energy and siting",
 }
 GEO_ACTORS = [
     "china", "chinese", "united states", "u.s.", " us ", "russia", "russian", "japan",
@@ -3152,8 +3192,8 @@ def aboutness_for_a(
     if mode == "metadata_only":
         result["reason"] = "insufficient_text"
         return result
-    if eu_rel != "direct":
-        result["reason"] = "no_direct_eu"
+    if not eu_scope_admissible(eu_rel):
+        result["reason"] = "no_supported_eu_scope"
         return result
     if not a_focus:
         # Strand A now fails here only for lack of substantive R&I focus (or a hard
@@ -3225,13 +3265,42 @@ def aboutness_for_a(
     return result
 
 
-def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[str]]:
-    """Classify EU scope from substantive evidence rather than vocabulary accidents.
+def title_level_a_system_evidence(title: str) -> tuple[bool, list[str]]:
+    """Strong title-only evidence that the object is a European R&I/technology system.
 
-    Explicit EU institutions, programmes and instruments are strong direct evidence wherever
-    they occur. Generic Europe language needs R&I substance. A member-state name/adjective
-    alone is weak evidence and becomes direct only in a genuinely comparative/cross-border
-    European R&I frame. This keeps the radar EU-focused without making author wording a trap.
+    Used only after source-quality and Europe-scope gates. It deliberately requires a
+    system mechanism, capability outcome or strategic-technology + system-context pair;
+    a generic occurrence of "innovation" or a technology name is not enough.
+    """
+    t = clean_text(title)
+    system = distinct_matches(t, A_MAJOR_RI_SYSTEM)
+    tech = distinct_matches(t, A_MAJOR_TECH_DOMAINS)
+    outcomes = distinct_matches(t, A_STRATEGIC_RI_OUTCOME)
+    contextual = distinct_matches(t, [
+        'research', 'science', 'scientific', 'innovation', 'innovation capacity', 'innovation ecosystem',
+        'innovation ecosystems', 'innovation financing', 'financing instruments for innovation',
+        'technology adoption', 'technology governance', 'strategic technology governance',
+        'university patenting', 'patenting', 'patents', 'research careers', 'research collaboration',
+        'research funding', 'research evaluation', 'research infrastructure', 'digital infrastructure', 'infrastructure', 'key infrastructure',
+        'manufacturing', 'industrial', 'deep tech', 'deep-tech', 'startup', 'startups', 'scale-up', 'scale up',
+    ])
+    ok = bool(system or (tech and (outcomes or contextual)))
+    return ok, list(dict.fromkeys(system + outcomes + contextual + tech))[:8]
+
+
+def eu_scope_admissible(value: str | None) -> bool:
+    """Return True only for source-supported European scope usable by Strand A."""
+    return clean_text(value).lower() in {"direct", "supported"}
+
+
+def eu_evidence(title: str, abstract: str, body: str) -> tuple[str, list[str]]:
+    """Classify European scope as direct | supported | unclear | none.
+
+    ``direct`` is reserved for explicit EU institutions, programmes and instruments.
+    ``supported`` covers source-grounded European R&I study/system scope (for example
+    Europe-wide data, European regions, or multi-country comparative R&I). A single
+    member-state name is not enough on its own. ``unclear`` records Europe/member-state
+    wording that is only incidental or implication language; it is not admissible for A.
     """
     title = clean_text(title)
     abstract = clean_text(abstract)
@@ -3249,10 +3318,11 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     ri_full = _ri_hits(full)
     generic_ta = distinct_matches(ta, EU_GENERIC)
     generic_body = distinct_matches(body_probe, EU_GENERIC)
-    if generic_ta and ri_ta:
-        return "direct", list(dict.fromkeys(generic_ta))[:4]
+    title_system_ok, _title_system_terms = title_level_a_system_evidence(title)
+    if generic_ta and (ri_ta or title_system_ok):
+        return "supported", list(dict.fromkeys(generic_ta))[:4]
     if generic_body and len(ri_full) >= 2:
-        return "direct", list(dict.fromkeys(generic_body))[:4]
+        return "supported", list(dict.fromkeys(generic_body))[:4]
 
     members = _distinct_member_states(full)
     comparative = contains_any(full, [
@@ -3261,7 +3331,7 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         "europe wide", "single market", "european research area",
     ])
     if len(members) >= 2 and comparative and ri_full:
-        return "direct", members[:4]
+        return "supported", members[:4]
 
     derived_cues = [
         "implication for", "implications for", "consequence for", "consequences for",
@@ -3273,19 +3343,33 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
     ]
     for sent in split_sentences(full):
         if (contains_any(sent, EU_GENERIC) or bool(bounded_matches(sent, MEMBER_STATE_SCOPE)) or union_eu_word(sent, full)) and contains_any(sent, derived_cues):
-            return "derived", [sent[:260]]
-    return None, []
+            return "unclear", [sent[:260]]
+    if members or distinct_matches(full, EU_GENERIC):
+        return "unclear", members[:4] or distinct_matches(full, EU_GENERIC)[:4]
+    return "none", []
 
 def document_exclusion_reason(title: str, text: str = "", url: str = "", page_type: str = "") -> str | None:
+    formal_eu_act = bool(
+        re.search(r"\b(?:European Commission|Commission|Council of the European Union|Council of the EU|European Parliament|EuroHPC|European Research Council|ERC)\b", clean_text(f"{title}. {text[:2600]}"), re.I)
+        and re.search(
+            r"\b(?:proposes?|proposed|tables?|tabled|publishes?|published|presents?|presented|adopts?|adopted|approves?|approved|"
+            r"general approach|negotiating (?:position|mandate)|enters? into force|entered into force|launches?|launched)\b",
+            clean_text(f"{title}. {text[:2600]}"), re.I
+        )
+    )
     if institutional_container_page(title, url, page_type):
         return "hard exclusion: listing/index page"
     low = normalized(f"{title} {page_type} {text[:1200]}")
     url_low = normalized(url)
     for marker in AB_HARD_EXCLUDE:
         if marker in low:
+            if formal_eu_act and marker in {"press release", "news article", "news release"}:
+                continue
             return f"hard exclusion: {marker}"
     for marker in URL_HARD_EXCLUDE:
         if marker in url_low:
+            if formal_eu_act and marker in {"/news/", "/press-release", "/press_releases"}:
+                continue
             return f"hard exclusion URL: {marker}"
     # High-risk false-positive document types, especially the kind that admitted the PAMEC item.
     title_low = normalized(title)
@@ -3587,7 +3671,10 @@ A_MAJOR_RI_SYSTEM = [
     'research funding', 'research programme', 'research program', 'international research cooperation',
     'scientific collaboration', 'research collaboration', 'research talent', 'scientific talent',
     'research workforce', 'scientific workforce', 'brain drain', 'brain gain', 'technology transfer',
-    'industrial innovation', 'deep tech', 'technological sovereignty', 'technology sovereignty',
+    'industrial innovation', 'deep tech', 'deep-tech', 'innovation capacity', 'innovation ecosystem',
+    'innovation ecosystems', 'innovation financing', 'financing instruments for innovation', 'research careers', 'research evaluation',
+    'university alliances', 'university patenting', 'patent', 'patents', 'digital innovation hub',
+    'digital innovation hubs', 'innovation act', 'technological sovereignty', 'technology sovereignty',
     'strategic autonomy', 'economic security', 'strategic dependency', 'strategic dependencies',
 ]
 A_MAJOR_TECH_DOMAINS = [
@@ -4061,8 +4148,8 @@ def source_supported_eu_ri_centrality_rescue(
 ) -> tuple[bool, str, list[str]]:
     """Recover genuine EU-R&I-geopolitics sources from an over-literal centrality gate.
 
-    The ordinary gate has already established direct European/EU scope, substantive R&I
-    focus and sufficient source text before this helper is called.  This repair therefore
+    The ordinary gate has already established admissible source-supported European/EU scope,
+    substantive R&I focus and sufficient source text before this helper is called.  This repair therefore
     asks a narrower question: is Europe/EU actually part of the document's subject, rather
     than merely a comparator/provenance mention?  It deliberately allows the European scope,
     R&I mechanism and geopolitical mechanism to sit in different sentences or sections.
@@ -4835,7 +4922,7 @@ def strategic_pathway_scope_gate(text: str, a_corpus: list[dict[str, Any]] | Non
     if not ri_ok:
         return False, 'no_substantive_ri_object'
     eu_rel, _ = eu_evidence('', raw, '')
-    if eu_rel == 'direct' or eu_news_scope(raw):
+    if eu_scope_admissible(eu_rel) or eu_news_scope(raw):
         return True, 'direct_european_scope'
     ext_ok, bridge, _ = external_eu_bridge_sentence(raw, a_corpus or [])
     if ext_ok and bridge:
@@ -4941,7 +5028,7 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
     if not scope_ok:
         return None
     eu_rel, eu_hits = eu_evidence('', source_text, '')
-    if eu_rel != 'direct' and eu_news_scope(source_text):
+    if not eu_scope_admissible(eu_rel) and eu_news_scope(source_text):
         eu_rel, eu_hits = 'direct', ['direct European scope in source text']
     raw_role = normalized(item.get('evidence_role'))
     discovery = normalized(item.get('discovery_provenance') or item.get('_discovery_provenance'))
@@ -4997,7 +5084,7 @@ def external_shock_watch_record(item: dict[str, Any], a_corpus: list[dict[str, A
     if not scope_ok:
         return None
     eu_rel, eu_hits = eu_evidence('', source_text, '')
-    if eu_rel != 'direct' and eu_news_scope(source_text):
+    if not eu_scope_admissible(eu_rel) and eu_news_scope(source_text):
         eu_rel, eu_hits = 'direct', ['direct European scope in source text']
     return {
         'title': title,
@@ -5337,6 +5424,8 @@ EXTERNAL_SHOCK_DOMAIN_LABELS = {
     'space': ['space technology', 'satellite', 'launch vehicle'],
     'compute': ['supercomputer', 'compute infrastructure', 'data centre', 'data center', 'cloud infrastructure'],
     'robotics': ['robotics', 'robot', 'autonomous system'],
+    "capital and ownership": ["capex", "acquisition", "acquires", "stake", "majority investment", "venture investment", "sovereign fund", "investment commitment", "commits €", "commits $", "commits £"],
+    "energy and siting": ["data centre", "data center", "power purchase agreement", "offtake", "power offtake", "gigawatt", "siting", "nuclear offtake", "energy contract"],
 }
 
 def _external_shock_domain(text: str) -> str:
@@ -5350,13 +5439,13 @@ def _anchor_supports_external_domain(anchor: dict[str, Any], domain: str) -> boo
     if not isinstance(anchor, dict) or not domain:
         return False
     text = clean_text(' '.join(str(anchor.get(k, '')) for k in ('title','summary','core_message','relevance_note')))
-    return _external_shock_domain(text) == domain and bool(eu_evidence(anchor.get('title',''), anchor.get('summary',''), anchor.get('relevance_note',''))[0] == 'direct')
+    return _external_shock_domain(text) == domain and bool(eu_scope_admissible(eu_evidence(anchor.get('title',''), anchor.get('summary',''), anchor.get('relevance_note',''))[0]))
 
 def external_eu_bridge_sentence(text: str, anchors: list[dict[str, Any]] | None = None) -> tuple[bool, str, list[str]]:
     """Inference-only external admission is permanently disabled.
 
-    External developments can still enter Strand A when the source itself establishes direct
-    EU/European R&I + geopolitical/economic-security relevance; those records pass through
+    External developments can still enter Strand A when the source itself establishes substantive
+    EU/European R&I relevance and the required strategic/economic-security linkage; those records pass through
     ``eu_evidence`` and the ordinary source-supported A gate. This legacy helper remains only
     so old call sites fail closed instead of manufacturing a Europe-impact sentence.
     """
@@ -5754,12 +5843,18 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         }
 
     a_focus, ri_hits, geo_hits, a_bridge, a_route, a_context = _a_focus_ok(title, abstract, body, source_kind)
+    title_system_focus_ok, title_system_focus_evidence = title_level_a_system_evidence(title)
+    if not a_focus and title_system_focus_ok and not _local_applied_study_without_ri_system_implication(title, abstract, body):
+        a_focus = True
+        ri_hits = list(dict.fromkeys(ri_hits + title_system_focus_evidence))[:8]
+        a_route = a_route or 'eu-ri-system-title-subject'
+        a_context = list(dict.fromkeys(a_context + title_system_focus_evidence))[:8]
     eu_rel, eu_hits = eu_evidence(title, abstract, body)
     centrality_ok, centrality_reason, centrality_evidence = eu_ri_centrality(title, abstract, body, source_kind)
     external_ok = False
     external_bridge = ''
     external_evidence: list[str] = []
-    if eu_rel != 'direct':
+    if not eu_scope_admissible(eu_rel):
         external_ok, external_bridge, external_evidence = external_eu_bridge_sentence(
             clean_text(f"{title}. {abstract}. {body[:6000]}"),
             eu_context_anchors,
@@ -5779,30 +5874,27 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     title_geopolitics = bool(_geo_hits(title_probe) or title_implied_geo or title_soft_geo or (
         distinct_matches(title_probe, A_EXTERNAL_RELATION) and distinct_matches(title_probe, A_STRATEGIC_RI_OUTCOME)
     ))
-    metadata_title_quality_ok = (
-        int(source_tier or 9) <= 2
-        or (int(source_tier or 9) <= 3 and title_geopolitics)
-    )
+    metadata_title_quality_ok = int(source_tier or 9) <= 3
     if (
         source_kind == 'scholarly'
         and metadata_title_quality_ok
         and aboutness.get('reason') == 'insufficient_text'
-        and eu_rel == 'direct'
+        and eu_scope_admissible(eu_rel)
         and a_focus
-        and _ri_hits(title)
+        and (_ri_hits(title) or title_level_a_system_evidence(title)[0])
         and (_scope_hits_in_sentence(title, clean_text(f"{title}. {abstract}")) or has_eu_word(title) or bounded_matches(title, MEMBER_STATE_SCOPE))
     ):
         aboutness = {
             **aboutness,
             'pass': True,
             'reason': 'metadata_title_high_recall',
-            'ri_terms': _ri_hits(title)[:8],
+            'ri_terms': (_ri_hits(title) or title_level_a_system_evidence(title)[1])[:8],
         }
     # V17.19.17 recall repair: the live 2026-09-02 run had 429 direct-EU candidates
     # but only 22 survived the second centrality vocabulary before the ordinary R&I
     # aboutness test. Recover only *soft* centrality failures when the normal A-focus and
     # aboutness gates already pass and title/abstract scope independently establishes EU.
-    if not centrality_ok and eu_rel == 'direct' and a_focus and aboutness.get('pass'):
+    if not centrality_ok and eu_scope_admissible(eu_rel) and a_focus and aboutness.get('pass'):
         centrality_ok, centrality_reason, centrality_evidence = source_supported_eu_ri_centrality_rescue(
             title, abstract, body, centrality_reason
         )
@@ -5811,11 +5903,11 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     # evidence/ranking dimension into a universal veto. Live scans then collapsed to 0-1 even
     # when they found strong Horizon Europe, research-infrastructure and EU R&I-system material.
     # Keep the strict strategic routes, but restore a bounded high-confidence system route:
-    # Tier 1/2 + central/direct EU R&I + major R&I-system/strategic-technology substance +
-    # direct European scope in the title. This does NOT reopen the v17.20.39 false positive,
-    # whose title lacks both direct European scope and a major R&I-system subject.
+    # Tier 1/2 + admissible European/EU scope + major R&I-system/strategic-technology substance.
+    # This does NOT reopen the v17.20.39 false positive, whose title lacks both supported
+    # European system scope and a major R&I-system subject.
     strategic_context_pass = a_route in {'explicit-geopolitics', 'triangulated-strategic-context'}
-    title_scope_for_system = bool(_scope_hits_in_sentence(title, clean_text(f"{title}. {abstract}")))
+    title_scope_for_system = eu_scope_admissible(eu_evidence(title, '', '')[0])
     # The non-strategic fallback must be title-led. Allowing abstract/body-only system
     # words made generic Europe-comparison/social-policy papers look like R&I-system evidence.
     title_system_terms = distinct_matches(title, A_MAJOR_RI_SYSTEM)
@@ -5823,10 +5915,8 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     title_system_outcomes = distinct_matches(title, A_STRATEGIC_RI_OUTCOME)
     # A strategic technology name by itself is not a system-level R&I subject. Earlier builds
     # let local AI/health/construction studies through merely because "AI" appeared in the title.
-    major_system_relevance = bool(
-        title_system_terms
-        or (title_strategic_tech and title_system_outcomes)
-    )
+    title_system_evidence_ok, title_system_evidence = title_level_a_system_evidence(title)
+    major_system_relevance = bool(title_system_evidence_ok)
     evidence_product_pass, evidence_product_context = research_evidence_route_ok(
         title, abstract, body, source_kind, source_tier
     )
@@ -5835,22 +5925,30 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         or any(int(m.group(2)) <= 2005 for m in A_HISTORICAL_YEAR_RANGE.finditer(title))
     )
     high_confidence_system_pass = bool(
-        int(source_tier or 9) <= 2
+        int(source_tier or 9) <= 3
         and major_system_relevance
         and title_scope_for_system
         and not historical_title_for_system
     )
-    if not strategic_context_pass and high_confidence_system_pass and a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok:
+    if (
+        high_confidence_system_pass and not centrality_ok and a_focus
+        and eu_scope_admissible(eu_rel) and aboutness.get('pass')
+        and aboutness.get('reason') == 'metadata_title_high_recall'
+    ):
+        centrality_ok = True
+        centrality_reason = 'metadata_title_eu_ri_system_centrality'
+        centrality_evidence = list(dict.fromkeys(title_system_evidence + eu_hits))[:8]
+    if not strategic_context_pass and high_confidence_system_pass and a_focus and eu_scope_admissible(eu_rel) and aboutness.get('pass') and centrality_ok:
         a_route = 'eu-ri-system-relevance'
         a_context = list(dict.fromkeys(centrality_evidence + ri_hits))[:8]
     elif (
         not strategic_context_pass and not high_confidence_system_pass and evidence_product_pass
-        and a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok
+        and a_focus and eu_scope_admissible(eu_rel) and aboutness.get('pass') and centrality_ok
     ):
         a_route = 'research-evidence'
         a_context = list(dict.fromkeys(centrality_evidence + evidence_product_context + ri_hits))[:8]
     a_pass = bool(
-        a_focus and eu_rel == 'direct' and aboutness.get('pass') and centrality_ok
+        a_focus and eu_scope_admissible(eu_rel) and aboutness.get('pass') and centrality_ok
         and (strategic_context_pass or high_confidence_system_pass or evidence_product_pass)
     )
     if external_ok:
@@ -5889,8 +5987,8 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         'centrality_evidence': centrality_evidence[:8],
         # Preserve the evaluated EU scope even when another A gate fails. Diagnostics must
         # not rewrite a strategic/aboutness failure as "no direct EU".
-        'eu_relevance': eu_rel if eu_rel else ('derived' if b_pass else None),
-        'eu_evidence': eu_hits if eu_rel in {'direct', 'material_external'} else (['method suitable for analysing future EU R&I/geopolitics'] if b_pass else []),
+        'eu_relevance': eu_rel if eu_scope_admissible(eu_rel) else ('material_external' if eu_rel == 'material_external' else ('derived' if b_pass else None)),
+        'eu_evidence': eu_hits if eu_scope_admissible(eu_rel) or eu_rel == 'material_external' else (['method suitable for analysing future EU R&I/geopolitics'] if b_pass else []),
         'ri_evidence': ri_hits[:5],
         'geo_evidence': geo_hits[:5],
         'bridge_sentence': a_bridge,
@@ -6520,11 +6618,24 @@ def collect_openalex(
             # were negative evidence. Queue only plausible metadata for DOI recovery,
             # and rank that queue before spending the bounded publisher-fetch budget.
             _diag_inc("openalex_metadata_missing_text")
-            if not doi0 or not title0 or document_exclusion_reason(title0, ""):
+            if not title0 or document_exclusion_reason(title0, ""):
                 continue
             quality_ok, tier, _rank, source, _label = quality_from_openalex(work)
             if not quality_ok:
                 continue
+            title_only = candidate_from_openalex(
+                work, date_floor=min(DATE_FLOOR, query_from),
+                frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set
+            )
+            if title_only:
+                title_only["metadata_note"] = "Admitted from explicit title-level evidence; abstract was unavailable and was not treated as negative evidence."
+                out.append(title_only)
+                resolve_deferred_metadata('openalex', work)
+                _diag_inc("openalex_metadata_title_only_admitted")
+                continue
+            if not doi0:
+                continue
+            remember_deferred_metadata('openalex', work, query=q, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
             published = parse_date(work.get("publication_date"))
             score = scholarly_metadata_rescue_priority(title0, query=q, source=source, published=published, tier=tier)
             if not bool(CONFIG.get("metadata_rescue_priority_enabled", True)) or score >= metadata_min_score:
@@ -6555,6 +6666,7 @@ def collect_openalex(
             if item:
                 _diag_inc("openalex_metadata_rescue_admitted")
                 item["metadata_note"] = "Abstract recovered from DOI publisher metadata after high-potential metadata prioritisation."
+                resolve_deferred_metadata('openalex', raw_work)
                 out.append(item)
         return out
 
@@ -8253,6 +8365,88 @@ def crossref_execution_plan(
     return out
 
 
+def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str], stage_deadline: float | None = None) -> list[dict[str, Any]]:
+    """Retry unresolved scholarly candidates from prior scans under the current gates."""
+    pending = state.get('deferred_metadata_queue') if isinstance(state.get('deferred_metadata_queue'), list) else []
+    if not pending:
+        state['deferred_metadata_queue'] = []
+        return []
+    cap = max(0, int(CONFIG.get('deferred_metadata_recovery_per_scan', 16) or 16))
+    timeout = max(3, int(CONFIG.get('deferred_metadata_recovery_timeout_seconds', 8) or 8))
+    admitted: list[dict[str, Any]] = []
+    retained: list[dict[str, Any]] = []
+    attempted = 0
+    for row in pending:
+        if not isinstance(row, dict):
+            continue
+        if attempted >= cap or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 15))):
+            retained.append(row); continue
+        provider = clean_text(row.get('provider')).lower()
+        raw = dict(row.get('raw') or {}) if isinstance(row.get('raw'), dict) else {}
+        if provider not in {'openalex', 'crossref'} or not raw:
+            continue
+        try:
+            floor = dt.date.fromisoformat(clean_text(row.get('date_floor'))) if clean_text(row.get('date_floor')) else DATE_FLOOR
+        except Exception:
+            floor = DATE_FLOOR
+        frontier = row.get('frontier_targets') if isinstance(row.get('frontier_targets'), list) else []
+        allow = bool(row.get('allow_strategic'))
+        # Admission rules may have improved since this row was deferred. Re-run title-only first.
+        try:
+            candidate = candidate_from_openalex(raw, date_floor=floor, frontier_targets=frontier, allow_strategic=allow) if provider == 'openalex' else candidate_from_crossref(raw, date_floor=floor, frontier_targets=frontier, allow_strategic=allow)
+        except Exception:
+            candidate = None
+        if candidate:
+            candidate['metadata_note'] = 'Recovered from the persistent metadata queue and admitted under the current ordinary gate.'
+            admitted.append(candidate)
+            continue
+        doi = clean_text(raw.get('doi') or raw.get('DOI'))
+        if not doi:
+            row['attempts'] = int(row.get('attempts', 0) or 0) + 1
+            retained.append(row); continue
+        attempted += 1
+        recovered = doi_landing_abstract(doi, timeout)
+        if not recovered:
+            row['attempts'] = int(row.get('attempts', 0) or 0) + 1
+            row['last_attempted'] = dt.datetime.now(dt.timezone.utc).isoformat()
+            retained.append(row); continue
+        try:
+            if provider == 'openalex':
+                tokens0 = clean_text(recovered).split(); inv: dict[str, list[int]] = {}
+                for pos, token in enumerate(tokens0): inv.setdefault(token, []).append(pos)
+                raw['abstract_inverted_index'] = inv
+                candidate = candidate_from_openalex(raw, date_floor=floor, frontier_targets=frontier, allow_strategic=allow)
+            else:
+                raw['abstract'] = recovered
+                candidate = candidate_from_crossref(raw, date_floor=floor, frontier_targets=frontier, allow_strategic=allow)
+        except Exception as e:
+            warnings.append(f"Persistent metadata recovery: {type(e).__name__}: {str(e)[:120]}")
+            candidate = None
+        if candidate:
+            candidate['metadata_note'] = 'Abstract recovered from the persistent metadata queue; ordinary A/B admission rules applied.'
+            admitted.append(candidate)
+        # Once substantive text was recovered, a non-admission is a gate decision rather than a retrieval failure.
+    state['deferred_metadata_queue'] = retained[: max(50, int(CONFIG.get('deferred_metadata_queue_max', 400) or 400))]
+    return admitted
+
+def persist_current_metadata_queue(state: dict[str, Any]) -> None:
+    existing = state.get('deferred_metadata_queue') if isinstance(state.get('deferred_metadata_queue'), list) else []
+    merged: dict[str, dict[str, Any]] = {}
+    for row in existing:
+        if isinstance(row, dict) and clean_text(row.get('key')):
+            merged[clean_text(row.get('key'))] = row
+    with _METADATA_DEFERRED_LOCK:
+        current = list(_METADATA_DEFERRED_THIS_SCAN.values())
+    for row in current:
+        if isinstance(row, dict) and clean_text(row.get('key')):
+            old = merged.get(clean_text(row.get('key')), {})
+            if old:
+                row = {**row, 'attempts': max(int(old.get('attempts', 0) or 0), int(row.get('attempts', 0) or 0))}
+            merged[clean_text(row.get('key'))] = row
+    cap = max(50, int(CONFIG.get('deferred_metadata_queue_max', 400) or 400))
+    state['deferred_metadata_queue'] = list(merged.values())[-cap:]
+
+
 def collect_crossref(
     from_date: dt.date,
     warnings: list[str],
@@ -8411,11 +8605,26 @@ def collect_crossref(
                 continue
 
             _diag_inc("crossref_metadata_missing_text")
-            if not doi0 or not title0 or document_exclusion_reason(title0, ""):
+            if not title0 or document_exclusion_reason(title0, ""):
                 continue
             ok0, tier, _rank, source, _tier_label, _kind = quality_from_crossref(item)
             if not ok0:
                 continue
+            title_only = candidate_from_crossref(
+                item, date_floor=min(DATE_FLOOR, query_from),
+                frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set
+            )
+            if title_only:
+                title_only["metadata_note"] = "Admitted from explicit title-level evidence; abstract was unavailable and was not treated as negative evidence."
+                if h is not None:
+                    h["gate_candidates_emitted"] += 1
+                out.append(title_only)
+                resolve_deferred_metadata('crossref', item)
+                _diag_inc("crossref_metadata_title_only_admitted")
+                continue
+            if not doi0:
+                continue
+            remember_deferred_metadata('crossref', item, query=q, date_floor=min(DATE_FLOOR, query_from), frontier_targets=frontier_targets_for_query(q), allow_strategic=q in strategic_query_set)
             published = crossref_date(item)
             score = scholarly_metadata_rescue_priority(
                 title0, query=q, source=source, publisher=clean_text(item.get("publisher")), published=published, tier=tier
@@ -8455,6 +8664,7 @@ def collect_crossref(
                 if h is not None:
                     h["gate_candidates_emitted"] += 1
                 c["metadata_note"] = "Crossref omitted the abstract; text was recovered from DOI publisher metadata before the ordinary admission gate."
+                resolve_deferred_metadata('crossref', raw_item)
                 out.append(c)
         return out
 
@@ -11487,6 +11697,57 @@ def relevance_note(evidence: dict[str, Any], strand: str) -> str:
     return f"Qualifies independently as Strand A evidence and as a Strand B future-method contribution ({eu} EU scope for A)."
 
 
+REALISATION_STATUSES = {
+    'announced', 'proposed', 'in_negotiation', 'adopted', 'in_force',
+    'operating', 'delivered', 'abandoned', 'lapsed',
+}
+
+def realisation_status_for(text: str, *, item_type: str = '', event_status: str = '') -> str:
+    """Classify what has actually been realised, without flattening proposals into outcomes."""
+    low = normalized(text)
+    typ = normalized(item_type)
+    status = clean_text(event_status).upper()
+    if status == 'PROPOSED':
+        return 'proposed'
+    if status in {'OBSERVED', 'INTERPRETIVE'}:
+        return 'delivered'
+    if any(x in typ for x in ['peer-reviewed', 'journal', 'article', 'preprint', 'working paper']):
+        return 'delivered'
+    if re.search(r'\b(?:abandoned|withdrawn|cancelled|canceled|scrapped)\b', low):
+        return 'abandoned'
+    if re.search(r'\b(?:lapsed|expired|sunsetted|sunset)\b', low):
+        return 'lapsed'
+    if re.search(r'\b(?:entered into force|enters into force|in force|applies from|effective from)\b', low):
+        return 'in_force'
+    if re.search(r'\b(?:trilogue|negotiating mandate|negotiating position|general approach|partial general approach|in negotiations?|under negotiation)\b', low):
+        return 'in_negotiation'
+    if re.search(r'\b(?:formally adopted|adopted|approved|agreement reached|passed by parliament|passed the parliament)\b', low):
+        return 'adopted'
+    if re.search(r'\b(?:proposes?|proposed|proposal for|tabled|draft regulation|draft act|draft law|public consultation|call for evidence)\b', low):
+        if not re.search(r'\b(?:plans?|intends?|expects?|aims?) to propose\b', low):
+            return 'proposed'
+    if re.search(r'\b(?:operational|operating|in operation|opened|is open|running|deployed|commissioned|facility launched)\b', low):
+        return 'operating'
+    if status in {'DONE', 'COMMITTED'} or re.search(r'\b(?:announces?|announced|launches?|launched|commits?|committed|signed)\b', low):
+        return 'announced'
+    if re.search(r'\b(?:published|publishes|report|study|analysis|findings|results)\b', low):
+        return 'delivered'
+    return 'announced'
+
+
+def c_retention_days_for(item: dict[str, Any]) -> int:
+    """Retention is status-aware and separate from the news discovery lookback."""
+    base = max(1, int(CONFIG.get('weak_signal_retention_days', 60) or 60))
+    active = max(base, int(CONFIG.get('weak_signal_active_process_retention_days', 180) or 180))
+    durable = max(active, int(CONFIG.get('weak_signal_durable_development_retention_days', 365) or 365))
+    status = clean_text(item.get('realisation_status')).lower()
+    if status in {'proposed', 'in_negotiation', 'announced'}:
+        return active
+    if status in {'adopted', 'in_force', 'operating'}:
+        return durable
+    return base
+
+
 def build_item(*, title: str, authors: str, source: str, date: dt.date, link: str,
                item_type: str, strand: str, evidence: dict[str, Any], source_rank: float,
                tier_label: str, text: str, doi: str, preprint: bool,
@@ -11508,6 +11769,7 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "link": link,
         "type": item_type,
         "strand": strand,
+        "realisation_status": realisation_status_for(display_text or title, item_type=item_type) if strand in {"A", "both"} else "",
         "eu_relevance": evidence.get("eu_relevance"),
         "summary": summary,
         "core_message": plain_language_claim(display_text or summary, title, extracted_claim),
@@ -13851,38 +14113,27 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     link = clean_text(item.get('link', ''))
     if formal_evidence_product(headline, desc, source, link):
         return False
-    # A generic EU grant/call/award does not become geopolitical because the Radar later
-    # wrote a generic consequence sentence about participation or funding.  Prefer the
-    # source-text strategic classification when it exists; otherwise apply the same strict
-    # lexical setting gate used for newly discovered C candidates.
-    if not saved_eu_funding_signal_has_geopolitical_setting(item):
+    # Saved C is rechecked under the same two routes as new C. Use the saved source claim
+    # (``what``/``core_message``) rather than Radar-written consequence prose.
+    source_claim = clean_text(item.get('what') or item.get('core_message') or desc)
+    relevance_ok, _scope_rel, _scope_hits = c_source_backed_eu_ri_relevance(headline, source_claim)
+    if not relevance_ok:
         return False
-    # Saved official EU material follows the same rule as new discovery: an established
-    # office/programme/strategy, mature implementation notice or routine grant result is
-    # primary A evidence, not a weak signal. This also prevents Git-history recovery from
-    # resurrecting older Commission-news-as-C rows after a whole-repository upload.
-    if _source_merit_is_eu_official(source, link):
-        return institutional_weak_signal_eligible(headline, desc, source, link)
-
-    # High-authority institutional sources still cannot retain static overview/event pages
-    # as C simply because they mention AI/research/competition somewhere in the text.
-    if source in _SOURCE_MERIT_PUBLIC_HIGH and standing_institutional_page(headline, desc):
+    themes = set(themes_for(f"{headline}. {source_claim}")) & WATCH_SIGNAL_THEMES
+    if not themes and not c_fallback_watch_theme(headline, source_claim):
         return False
-    if not weak_signal_ri_strategic_bridge_ok(headline, desc, themes_for(f"{headline}. {desc}")):
+    if _source_merit_is_eu_official(source, link) and not institutional_weak_signal_eligible(headline, source_claim, source, link):
         return False
-
-    if eu_news_scope(h):
-        return factual_news(headline, desc) or trusted_analytical_commentary_candidate(headline, desc, source, '', link)
-    external_specific = contains_any(h, [
-        'export control', 'semiconductor', 'advanced chip', 'compute', 'quantum',
-        'research cooperation', 'research collaboration', 'research security', 'research talent',
-        'researcher', 'scientist', 'talent', 'return fellowship', 'brain drain', 'brain gain',
-        'scientific collaboration', 'research funding', 'biotech', 'biomedical', 'advanced material',
-        'battery', 'industrial policy', 'critical raw material', 'critical mineral', 'ai investment gap'
-    ])
-    if not external_specific:
+    event_date = clean_text(item.get('c_event_date')) or c_event_date(item.get('date'))
+    if not event_date:
         return False
-    return factual_news(headline, desc) or trusted_analytical_commentary_candidate(headline, desc, source, '', link)
+    trusted_commentary = trusted_analytical_commentary_candidate(headline, source_claim, source, '', link)
+    status = clean_text(item.get('event_status')).upper() or signal_event_status(source_claim, headline, source_claim)
+    formal_proposal = status == 'PROPOSED' and formal_proposal_is_public_signal(source_claim, headline, source_claim, source, link)
+    actor = clean_text(item.get('c_event_actor')) or c_event_actor(headline, source_claim, source)
+    event_route = bool(actor and (public_signal_event_status(status) or formal_proposal))
+    analysis_route = bool(trusted_commentary and (reframing_signal_text(f"{headline}. {source_claim}") or relationship_novelty_dimensions(f"{headline}. {source_claim}")))
+    return bool(event_route or analysis_route)
 
 
 def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
@@ -13893,7 +14144,7 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
         if not _saved_signal_passes(item):
             continue
         x=dict(item)
-        desc=clean_text(x.get('signal_note','') or x.get('why_it_matters',''))
+        desc=clean_text(x.get('what') or x.get('core_message') or x.get('signal_note','') or x.get('why_it_matters',''))
         text=f"{x.get('headline','')} {desc}"
         x['_desc']=desc
         x['_themes']=themes_for(text)
@@ -14272,7 +14523,7 @@ _SIGNAL_NON_EVENT_CUES = [
     r"\bplans? to\b", r"\bintends? to\b", r"\bconsiders?\b", r"\bweighs?\b", r"\bmulls?\b",
     r"\breportedly preparing\b", r"\bthreatens? to\b", r"\bwarns? that\b", r"\bsignals? willingness\b",
     r"\bexpected to\b", r"\bslated for\b", r"\bon track to\b", r"\bin the coming months\b", r"\bsources say\b",
-    r"\bproposals?\b", r"\bproposes?\b", r"\bproposed\b", r"\bcalls? for\b", r"\burges?\b",
+    r"\bcalls? for\b", r"\burges?\b",
     r"\bhas the potential to\b", r"\bcould become a global leader\b", r"\bvision for\b", r"\bambition to\b",
     r"\baspires? to\b", r"\bmust seize\b", r"\bcalls for bold action\b", r"\bunprecedented opportunity\b",
     r"\bexperts warn\b", r"\banalysts say\b", r"\bconcerns grow\b", r"\bfears mount\b", r"\bquestions remain\b",
@@ -14297,6 +14548,7 @@ _SIGNAL_PROPOSAL_STATUS_CUES = [
     r"\bplans? to\b", r"\bintends? to\b", r"\baims? to\b",
 ]
 _SIGNAL_OBSERVED_STATUS_CUES = [
+    r"\b(?:success rate|application demand|applications?|demand|share|rate)\b.{0,45}\b(?:record|below|above|rose|risen|fell|fallen|declined|increased|decreased|reached|reaches)\b",
     r"\b(?:study|report|analysis|survey|data|evidence) (?:finds?|found|shows?|showed|reveals?|revealed|indicates?|documents?|estimates?)\b",
     r"\b(?:results?|findings?) (?:show|shows|showed|find|finds|found|indicate|indicates|reveal|reveals)\b",
     r"\bdata (?:show|shows|showed|indicate|indicates|reveal|reveals)\b",
@@ -14350,6 +14602,7 @@ def formal_proposal_is_public_signal(claim: str, headline: str = "", desc: str =
     if not full:
         return False
     formal_action = bool(re.search(
+        r"\b(?:European Commission|Commission|Council of the European Union|Council of the EU|European Parliament)\b.{0,30}\bproposes?\b|"
         r"\b(?:tabled|tables|published|publishes|presented|presents|adopted|adopts|unveiled|unveils|launched|launches)\b.{0,60}\b(?:proposal|draft|consultation|call for evidence|roadmap)\b|"
         r"\b(?:proposal|draft)\b.{0,45}\b(?:tabled|published|presented|adopted|unveiled)\b|"
         r"\b(?:public consultation|consultation|call for evidence)\b.{0,35}\b(?:launched|opened|published)\b",
@@ -15355,6 +15608,76 @@ def weak_signal_ri_strategic_bridge_ok(headline: str, desc: str, themes: Iterabl
     return bool(ri_mechanism and (strategic_move or external_actor or (direct_europe and specific_theme)))
 
 
+def c_source_backed_eu_ri_relevance(headline: str, desc: str) -> tuple[bool, str, list[str]]:
+    """C scope gate: the candidate itself must establish Europe + R&I/system relevance."""
+    full = clean_text(f"{headline}. {desc}")
+    rel, hits = eu_evidence(headline, desc, "")
+    scope_ok = eu_scope_admissible(rel)
+    ri_ok = bool(
+        _ri_hits(full)
+        or title_level_a_system_evidence(headline)[0]
+        or contains_any(full, [
+            'research funding', 'research grant', 'starting grant', 'innovation act', 'innovation policy',
+            'research programme', 'research program', 'research infrastructure', 'ai factory', 'ai factories',
+            'gigafactory', 'gigafactories', 'semiconductor fab', 'chip fab', 'pilot line', 'compute capacity',
+            'data centre', 'data center', 'deep tech', 'deep-tech', 'research careers', 'research talent',
+        ])
+    )
+    return bool(scope_ok and ri_ok), rel, hits
+
+
+def c_fallback_watch_theme(headline: str, desc: str) -> str:
+    full = normalized(f"{headline}. {desc}")
+    if contains_any(full, ['power purchase agreement', 'offtake', 'data centre', 'data center', 'gigawatt', 'siting', 'energy contract']):
+        return 'energy and siting'
+    if contains_any(full, ['capex', 'acquisition', 'acquires', 'stake', 'majority investment', 'investment commitment', 'venture investment']):
+        return 'capital and ownership'
+    if contains_any(full, ['horizon europe', 'fp10', 'erc', 'european research council', 'starting grant']):
+        return 'Horizon Europe / FP10 international participation'
+    if contains_any(full, ['research security', 'knowledge security', 'foreign interference']):
+        return 'research security / foreign interference'
+    if contains_any(full, ['semiconductor', 'chip', 'quantum', 'artificial intelligence', ' ai ', 'compute', 'biotech', 'space']):
+        return 'critical and emerging technologies'
+    if contains_any(full, ['research', 'science', 'innovation', 'technology', 'r&d', 'r&i', 'patent', 'deep tech', 'deep-tech']):
+        return 'R&I competitiveness / technological capabilities'
+    return ''
+
+
+def c_event_actor(headline: str, desc: str, source: str = '') -> str:
+    full = clean_text(f"{headline}. {desc}")
+    actors = [
+        'European Commission', 'Council of the European Union', 'Council of the EU', 'European Parliament',
+        'EuroHPC Joint Undertaking', 'European Research Council', 'ERC', 'European Innovation Council',
+        'Joint Research Centre', 'JRC', 'OECD', 'NATO', 'ESA', 'CERN', 'EPO', 'imec',
+        'Google', 'Microsoft', 'Amazon', 'AWS', 'Nvidia', 'IBM', 'ASML', 'Intel', 'TSMC', 'Meta',
+    ]
+    for actor in actors:
+        if re.search(r'(?<![A-Za-z0-9])'+re.escape(actor)+r'(?![A-Za-z0-9])', full, re.I):
+            return actor
+    m = re.match(
+        r'^(.{2,100}?)\s+(?:launches?|launched|proposes?|proposed|publishes?|published|adopts?|adopted|approves?|approved|invests?|invested|signs?|signed|opens?|opened|builds?|built|funds?|funded|announces?|announced|reports?|reported)\b',
+        clean_text(headline), re.I
+    )
+    if m:
+        actor = clean_text(re.sub(r'^(?:Analysis|Commentary|Opinion)\s*:\s*', '', m.group(1), flags=re.I))
+        if actor and normalized(actor) not in {'europe', 'eu', 'research', 'science'}:
+            return actor[:100]
+    if _source_merit_is_eu_official(source, '') and clean_text(source):
+        return clean_text(source)[:100]
+    return ''
+
+
+def c_event_date(value: Any) -> str:
+    raw = clean_text(value)
+    if not raw:
+        return ''
+    try:
+        parsed = dateparser.parse(raw)
+        return parsed.date().isoformat()
+    except Exception:
+        return ''
+
+
 def signal_relation(text: str) -> str:
     low = normalized(text)
     if any(w in low for w in ["stall", "delay", "cancel", "scrap", "reverse", "withdraw", "fail", "collapse", "reject", "block", "cut"]):
@@ -15400,6 +15723,8 @@ def signal_why(theme: str, kind: str) -> str:
         "Horizon Europe / FP10 international participation": "This could change participation, funding or international cooperation in EU research programmes.",
         "science diplomacy": "This may create, narrow or redirect channels for scientific cooperation in a more geopolitical environment.",
         "research talent / mobility / brain drain": "This can change Europe's ability to attract, retain and circulate researchers, with direct effects on research capacity and competitiveness.",
+        "capital and ownership": "This changes who finances or controls strategically important European research and technology capacity.",
+        "energy and siting": "This links European compute and technology capacity to concrete siting and power constraints.",
     }
     base = explanations.get(theme, f"This is a current {kind} development with a plausible effect on Europe's research, innovation or strategic technology position.")
     if kind == 'evidence / indicator':
@@ -15578,32 +15903,46 @@ def anchor_news(
         ):
             diag(n, 'institutional_page_not_weak_signal')
             continue
-        if not eu_funding_signal_has_geopolitical_setting(headline, desc):
-            diag(n, 'generic_eu_funding_without_geopolitical_setting')
-            continue
         trusted_commentary = bool(n.get('_trusted_commentary_signal')) or trusted_analytical_commentary_candidate(
             headline, desc, source, clean_text(n.get('source_domain', '')), link
         )
         formal_proposal = bool(n.get('_formal_proposal_signal')) or formal_proposal_is_public_signal(
             f"{headline}. {desc}", headline, desc, source, link
         )
-        if not weak_signal_candidate_text(headline, desc) and not trusted_commentary and not formal_proposal:
-            diag(n, 'not_weak_signal_candidate')
-            continue
         ntext=n.get('headline','')+' '+n.get('_desc','')
-        if not weak_signal_ri_strategic_bridge_ok(headline, desc, n.get('_themes', [])):
-            diag(n, 'no_source_backed_ri_strategic_bridge')
+        c_relevance_ok, c_scope_rel, c_scope_hits = c_source_backed_eu_ri_relevance(headline, desc)
+        if not c_relevance_ok:
+            diag(n, 'no_source_backed_eu_ri_relevance')
             continue
         nthemes=set(n.get('_themes',[])) & WATCH_SIGNAL_THEMES
         if not nthemes:
+            fallback_theme = c_fallback_watch_theme(headline, desc)
+            if fallback_theme:
+                nthemes = {fallback_theme}
+        if not nthemes:
             diag(n, 'no_watch_theme')
             continue
-        novelty_dimensions=relationship_novelty_dimensions(ntext)
-        if not novelty_dimensions and trusted_commentary:
-            novelty_dimensions = ['interpretive reframing']
-        if not novelty_dimensions:
-            diag(n, 'no_relationship_novelty')
+        event_date = c_event_date(n.get('date'))
+        if not event_date:
+            diag(n, 'no_c_event_date')
             continue
+        event_actor = c_event_actor(headline, desc, source)
+        pre_event_status = signal_event_status(f"{headline}. {desc}", headline, desc)
+        public_event = public_signal_event_status(pre_event_status) or (pre_event_status == 'PROPOSED' and formal_proposal)
+        analysis_specific = bool(
+            trusted_commentary
+            and (reframing_signal_text(ntext) or relationship_novelty_dimensions(ntext))
+        )
+        event_route = bool(event_actor and public_event)
+        analysis_route = bool(analysis_specific)
+        if not (event_route or analysis_route):
+            diag(n, 'no_concrete_event_or_specific_analysis')
+            continue
+        novelty_dimensions=relationship_novelty_dimensions(ntext)
+        if not novelty_dimensions and analysis_route:
+            novelty_dimensions = ['interpretive reframing']
+        if not novelty_dimensions and event_route:
+            novelty_dimensions = ['concrete dated development']
         ntok=tokens(ntext)
         nentities=set(n.get('_entities',[]))
         n_a_ontology=ontology_phrase_hits(ntext, 'a', {1,2})
@@ -15715,12 +16054,16 @@ def anchor_news(
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue
-        event_status = 'INTERPRETIVE' if trusted_commentary else signal_event_status(what, headline, desc)
-        if not public_signal_event_status(event_status):
+        event_status = 'INTERPRETIVE' if analysis_route and not event_route else signal_event_status(what, headline, desc)
+        if event_route and not public_signal_event_status(event_status):
             if event_status != 'PROPOSED' or not formal_proposal_is_public_signal(what, headline, desc, source, link):
                 diag(n, f'event_status_{event_status.lower()}_not_public')
                 continue
         claim_themes = set(themes_for(f"{headline}. {what}")) & WATCH_SIGNAL_THEMES
+        if not claim_themes:
+            fallback_claim_theme = c_fallback_watch_theme(headline, what)
+            if fallback_claim_theme:
+                claim_themes = {fallback_claim_theme}
         if not external_bridge:
             supported = (set(shared_themes) if shared_themes else set(nthemes)) & claim_themes
             if theme not in claim_themes:
@@ -15739,6 +16082,12 @@ def anchor_news(
             'signal_type':relation,
             'signal_kind':kind,
             'event_status':event_status,
+            'realisation_status':realisation_status_for(what or text, item_type=kind, event_status=event_status),
+            'c_event_actor':event_actor or clean_text(source),
+            'c_event_date':event_date,
+            'c_admission_route':'event' if event_route else 'analysis',
+            'eu_relevance':c_scope_rel,
+            'eu_evidence':c_scope_hits[:6],
             'what':what,
             'core_message':what,
             'why_it_matters':why,
@@ -15748,12 +16097,12 @@ def anchor_news(
             'evidence_status': 'low',
             'evidence_role': 'weak_signal',
             'analytical_weight': WEAK_SIGNAL_CONTEXT_WEIGHT if anchor else min(WEAK_SIGNAL_CONTEXT_WEIGHT, float(CONFIG.get('c_unanchored_analytical_weight', 0.22) or 0.22)),
-            'retention_window_days': WEAK_SIGNAL_RETENTION_DAYS,
+            'retention_window_days': c_retention_days_for({'realisation_status': realisation_status_for(what or text, item_type=kind, event_status=event_status)}),
             'weak_signal_mode': 'trusted_commentary' if trusted_commentary else 'current_development',
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': 'independent low-evidence current development or trusted analytical reframing on the EU-R&I/geopolitics watch themes; A anchor optional',
+            'c_admission_rule': 'dated source-backed European R&I event, or dated trusted analysis with a specific reframing/contradiction; A anchor optional',
             'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
             'strategic_classification_source': 'source_text',
             '_anchor_score':score,
@@ -16021,16 +16370,16 @@ def _low_evidence_signal(item: dict[str, Any]) -> dict[str, Any]:
     x["evidence_role"] = "weak_signal"
     x["analytical_weight"] = WEAK_SIGNAL_CONTEXT_WEIGHT
     x.pop("retention_window_months", None)
-    x["retention_window_days"] = WEAK_SIGNAL_RETENTION_DAYS
+    x["retention_window_days"] = c_retention_days_for(x)
     return x
 
 
 def signal_retention_expired(item: dict[str, Any], now: dt.datetime) -> bool:
-    """Expire C exactly 60 days after insertion, never by source/publication date."""
+    """Expire C from first insertion using status-aware retention, not discovery age."""
     seen = _parse_utc_datetime(item.get("first_seen"))
     if seen is None:
         return False
-    return now >= seen + dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
+    return now >= seen + dt.timedelta(days=c_retention_days_for(item))
 
 
 def prune_public_window(
@@ -16042,9 +16391,11 @@ def prune_public_window(
 ) -> tuple[dict[str, Any], dict[str, int]]:
     """Apply the public accumulation contract.
 
-    A/B and frontier evidence are cumulative once admitted. Strand C alone expires,
-    exactly 60 days after ``first_seen``. Publication date does not shorten or extend a
-    signal's life. Explicit false-positive/duplicate/integrity cleanups are independent.
+    A/B and frontier evidence are cumulative once admitted. Strand C retention is measured
+    from ``first_seen`` but is status-aware: routine/analysis rows use the base window, active
+    proposal/negotiation rows persist longer, and adopted/in-force/operating rows persist longest.
+    Publication date does not control retention. Explicit false-positive/duplicate/integrity
+    cleanups are independent.
     """
     out = dict(data) if isinstance(data, dict) else {}
     extended_floor = extended_floor or extended_top_quality_floor(dt.date.today())
@@ -16423,6 +16774,9 @@ def main() -> int:
     DATE_FLOOR = preserved_corpus_floor(previous, now.date())
     KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, KNOWN_AB_DOI_TITLES = known_sets_from_previous(previous)
     state = initial_scan_state(previous)
+    persistent_metadata_candidates = recover_persistent_metadata_queue(
+        state, warnings, time.monotonic() + max(10, int(CONFIG.get('deferred_metadata_recovery_stage_seconds', 35) or 35))
+    )
     INSTITUTION_SEEN_FINGERPRINTS = dict(state.get("institution_seen_fingerprints", {}))
     previous_admission_profile = clean_text((previous.get("stats") or {}).get("admission_profile") if isinstance(previous.get("stats"), dict) else "")
     current_admission_profile = clean_text(CONFIG.get("admission_profile"))
@@ -17117,6 +17471,8 @@ def main() -> int:
             news.extend(priority_direct_news)
         oa = fut_oa.result()
         cr = fut_cr.result()
+        if persistent_metadata_candidates:
+            cr.extend(persistent_metadata_candidates)
         if priority_curator_candidates:
             cr.extend(priority_curator_candidates)
         inst_base = fut_inst.result()
@@ -19262,7 +19618,7 @@ def main() -> int:
         dropped_previous_c.append(old)
     if dropped_previous_c:
         signal_archive = archive_signal_rows(signal_archive, dropped_previous_c, "not_carried_forward", now_iso)
-    # Strand C alone expires 60 days after first insertion; A/B/frontier are cumulative.
+    # Strand C alone has finite, status-aware retention from first insertion; A/B/frontier are cumulative.
     # Do not delete C rows merely to enforce a presentation share ceiling; evidential
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
     c_share_removed = 0
@@ -19551,6 +19907,7 @@ def main() -> int:
         }
         break
 
+    persist_current_metadata_queue(state)
     data = {
         "last_updated": completed_iso,
         "run_started_at": now_iso,
