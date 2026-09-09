@@ -1,0 +1,377 @@
+name: R&I Radar Quick Scan — 6 min
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Keep Python runtime bytecode out of the repository working tree entirely.
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    outputs:
+      scan_due: ${{ steps.due.outputs.run }}
+    permissions:
+      contents: write
+      actions: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Check out repository without stored credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Decide whether a scheduled scan is due
+        id: due
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The workflow itself is now scheduled only on the six canonical four-hour
+          # production slots. Manual dispatches also run immediately. Do not
+          # apply the old hourly-workflow 6h age gate here: on a real 4h cron it would
+          # incorrectly skip every other production scan.
+          echo "run=true" >> "$GITHUB_OUTPUT"
+          echo "Reason: manual six-minute quick scan."
+
+      - name: Set up Python
+        if: steps.due.outputs.run == 'true'
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install scanner dependencies
+        if: steps.due.outputs.run == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Run scanner regression tests
+        if: steps.due.outputs.run == 'true'
+        run: python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Confirm no repository credential is stored before scanning
+        if: steps.due.outputs.run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git config --local --get-regexp '^http\..*\.extraheader$' >/dev/null 2>&1; then
+            echo '::error::A repository credential is unexpectedly present before the scan.'
+            exit 1
+          fi
+
+      - name: Run radar scan
+        if: steps.due.outputs.run == 'true'
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          RADAR_QUICK_SCAN: 'true'
+          RADAR_SCAN_BUDGET_SECONDS: '360'
+          RADAR_RESCUE_MODE: 'false'
+        run: python scripts/scan_radar.py
+
+      - name: Safety-check and isolate scanner output
+        if: steps.due.outputs.run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # radar.json is the ONLY persistent output of the main scanner.
+          # If tests/runtime/tools happened to alter another tracked file, restore
+          # that file to HEAD instead of failing the whole scan. Untracked runtime
+          # debris is removed. Nothing except radar.json can reach the commit step.
+          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' || true)"
+          untracked_unexpected="$(git ls-files --others --exclude-standard | grep -vx 'radar.json' || true)"
+
+          if [[ -n "$tracked_unexpected" ]]; then
+            echo '::warning::Non-radar tracked working-tree changes detected; restoring them before save:'
+            printf '%s\n' "$tracked_unexpected"
+            while IFS= read -r path; do
+              [[ -z "$path" ]] && continue
+              git restore --worktree -- "$path"
+            done <<< "$tracked_unexpected"
+          fi
+
+          if [[ -n "$untracked_unexpected" ]]; then
+            echo '::warning::Non-radar untracked runtime files detected; removing them before save:'
+            printf '%s\n' "$untracked_unexpected"
+            while IFS= read -r path; do
+              [[ -z "$path" ]] && continue
+              rm -rf -- "$path"
+            done <<< "$untracked_unexpected"
+          fi
+
+          # Hard assertion: after isolation, radar.json must be the only repository change.
+          remaining="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'radar.json' || true)"
+          if [[ -n "$remaining" ]]; then
+            echo '::error::Could not isolate scanner output safely. Refusing to save.'
+            printf '%s\n' "$remaining"
+            exit 1
+          fi
+
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          path = Path('radar.json')
+          if not path.is_file():
+              raise SystemExit('radar.json is missing after the scan')
+          with path.open('r', encoding='utf-8') as handle:
+              new = json.load(handle)
+          if not isinstance(new, dict):
+              raise SystemExit('radar.json root is not a JSON object')
+
+          old_bytes = subprocess.check_output(['git', 'show', 'HEAD:radar.json'])
+          old = json.loads(old_bytes.decode('utf-8'))
+          if not isinstance(old, dict):
+              raise SystemExit('previous radar.json root is not a JSON object')
+
+          old_size = len(old_bytes)
+          new_size = path.stat().st_size
+          if new_size <= old_size * 0.25 or new_size > old_size * 4:
+              raise SystemExit(
+                  f'radar.json size is clearly abnormal: {old_size} -> {new_size} bytes'
+              )
+          if new_size < old_size * 0.60 or new_size > old_size * 1.75:
+              print(
+                  f'::warning::Large radar.json size change, but still inside hard limits: '
+                  f'{old_size} -> {new_size} bytes'
+              )
+
+          def count_items(doc, key):
+              value = doc.get(key, [])
+              return len(value) if isinstance(value, list) else 0
+
+          keys = ('strand_a', 'strand_b', 'strand_c')
+          old_counts = {k: count_items(old, k) for k in keys}
+          new_counts = {k: count_items(new, k) for k in keys}
+          old_total = sum(old_counts.values())
+          new_total = sum(new_counts.values())
+          if old_total >= 20:
+              if new_total <= old_total * 0.25 or new_total > old_total * 4:
+                  raise SystemExit(
+                      f'main radar corpus count is clearly abnormal: {old_total} -> {new_total}'
+                  )
+              if new_total < old_total * 0.60 or new_total > old_total * 1.75:
+                  print(
+                      f'::warning::Large main-corpus count change, but still inside hard limits: '
+                      f'{old_total} -> {new_total}'
+                  )
+          for key in keys:
+              before = old_counts[key]
+              after = new_counts[key]
+              if before >= 10 and after == 0:
+                  raise SystemExit(
+                      f'{key} unexpectedly disappeared completely: {before} -> 0 items'
+                  )
+              if before >= 10 and (after < before * 0.40 or after > before * 2.5):
+                  print(
+                      f'::warning::Large {key} change, but not a hard-stop condition: '
+                      f'{before} -> {after}'
+                  )
+
+          # Strong cumulative-corpus guard. During an ordinary scan, every previously
+          # accepted A/B item still inside the four-month core must survive. In the
+          # 4-6 month extension, Highest-merit A/B must also survive until month six.
+          # Other evidence may age out at month four. Explicit migration/precision
+          # cleanup runs are allowed to remove hard failures.
+          cleanup = bool(
+              new.get('inherited_corpus_audit_this_run')
+              or new.get('precision_corpus_cleanup_this_run')
+              or new.get('quality_migration_this_run')
+          )
+          floor_raw = str(new.get('preferred_corpus_start_date') or new.get('corpus_start_date') or '')
+          try:
+              floor = __import__('datetime').date.fromisoformat(floor_raw)
+          except Exception:
+              raise SystemExit(f'invalid preferred/core corpus floor after scan: {floor_raw!r}')
+
+          def item_date(item):
+              raw = str(item.get('date') or '')[:10]
+              try:
+                  return __import__('datetime').date.fromisoformat(raw)
+              except Exception:
+                  return None
+
+          def norm_text(value):
+              import re
+              return re.sub(r'[^a-z0-9]+', ' ', str(value or '').lower()).strip()
+
+          extended_raw = str(new.get('extended_top_quality_start_date') or '')
+          try:
+              extended_floor = __import__('datetime').date.fromisoformat(extended_raw)
+          except Exception:
+              extended_floor = floor
+
+          def highest_merit(item):
+              import re
+              from urllib.parse import urlparse
+              source = str(item.get('source') or item.get('journal') or item.get('institution') or '').strip()
+              link = str(item.get('link') or item.get('url') or '').strip()
+              typ = str(item.get('type') or item.get('itemType') or '').strip().lower()
+              rel = str(item.get('eu_relevance') or item.get('euRelevance') or '').strip().lower()
+              authors = str(item.get('authors') or '').strip()
+              try:
+                  domain = (urlparse(link).hostname or '').lower().removeprefix('www.')
+              except Exception:
+                  domain = ''
+              eu_names = (
+                  'European Commission','Council of the European Union','European Central Bank',
+                  'European Innovation Council','European Research Council','European Investment Bank',
+                  'EuroHPC Joint Undertaking','European Union Institute for Security Studies','EUISS',
+                  'EFSA Supporting Publications',
+              )
+              public_high = {
+                  'OECD','International Telecommunication Union',
+                  'National Contact Point for Knowledge Security, Government of the Netherlands',
+                  'Rathenau Instituut',
+              }
+              official = any(n.lower() in source.lower() for n in eu_names) or domain.endswith('.europa.eu') or domain in {
+                  'ecb.europa.eu','consilium.europa.eu','data.consilium.europa.eu','op.europa.eu'
+              }
+              if official:
+                  authority = 55
+              elif source in public_high:
+                  authority = 48
+              else:
+                  return False
+              relevance = 25 if rel == 'direct' else 20 if rel == 'material_external' else 18 if rel == 'derived' else 25 if official else 16
+              if official or 'peer-reviewed' in typ:
+                  evidence = 15
+              elif 'institutional report' in typ or 'manual-verified' in typ:
+                  evidence = 14
+              elif 'research/policy paper' in typ:
+                  evidence = 13
+              elif 'preprint' in typ:
+                  evidence = 8
+              else:
+                  evidence = 10
+              if not authors:
+                  author_points = 2
+              elif re.search(r'commission|council|institute|undertaking|bank|agency|organisation|organization|university|academies', authors, re.I):
+                  author_points = 4
+              else:
+                  author_points = 5
+              return authority + relevance + evidence + author_points >= 93
+
+          def identities(items):
+              links, titles = set(), set()
+              for item in items if isinstance(items, list) else []:
+                  if not isinstance(item, dict):
+                      continue
+                  link = str(item.get('link') or item.get('url') or '').strip().lower().rstrip('/')
+                  title = norm_text(item.get('title'))
+                  if link:
+                      links.add(link)
+                  if title:
+                      titles.add(title)
+              return links, titles
+
+          def primary_upgrade_landings(items):
+              # A deep primary-document recovery intentionally replaces the HTML hub
+              # with the downloadable proposal/report. Treat that as corpus continuity,
+              # not loss of an accepted item. The landing URL remains attached to the
+              # deeper record as provenance/navigation metadata.
+              landings = set()
+              for item in items if isinstance(items, list) else []:
+                  if not isinstance(item, dict):
+                      continue
+                  landing = str(item.get('landing_page_url') or '').strip().lower().rstrip('/')
+                  link = str(item.get('link') or item.get('url') or '').strip().lower().rstrip('/')
+                  role = str(item.get('primary_document_role') or '').strip().lower()
+                  basis = str(item.get('source_integrity_basis') or '').strip().lower().replace('_', ' ')
+                  if not landing or not link or landing == link or role == 'landing_page':
+                      continue
+                  if (
+                      basis == 'institution pdf'
+                      or '.pdf' in link.split('?', 1)[0]
+                      or 'download-handler' in link
+                      or '/redirection/document/' in link
+                  ):
+                      landings.add(landing)
+              return landings
+
+          if not cleanup:
+              for key in ('strand_a', 'strand_b'):
+                  new_links, new_titles = identities(new.get(key, []))
+                  upgraded_landings = primary_upgrade_landings(new.get(key, []))
+                  missing = []
+                  for item in old.get(key, []) if isinstance(old.get(key), list) else []:
+                      if not isinstance(item, dict):
+                          continue
+                      d = item_date(item)
+                      if d is not None and d < floor:
+                          if d < extended_floor or not highest_merit(item):
+                              continue
+                      link = str(item.get('link') or item.get('url') or '').strip().lower().rstrip('/')
+                      title = norm_text(item.get('title'))
+                      if (link and link in new_links) or (title and title in new_titles):
+                          continue
+                      if link and link in upgraded_landings:
+                          # The exact wrapper was replaced by its deeper primary object.
+                          continue
+                      missing.append(item.get('title') or link or '<untitled>')
+                  if missing:
+                      sample = '; '.join(str(x) for x in missing[:8])
+                      raise SystemExit(
+                          f'{key} lost {len(missing)} still-in-window accepted item(s); '
+                          f'refusing to save. Sample: {sample}'
+                      )
+
+          print(
+              'radar.json safety check passed; '
+              f'size {old_size}->{new_size}; corpus {old_total}->{new_total}; '
+              f'strands {old_counts}->{new_counts}'
+          )
+          PY
+
+      - name: Commit fresh results
+        if: steps.due.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- radar.json
+
+          if git diff --cached --quiet; then
+            echo "No radar data change to commit."
+            exit 0
+          fi
+
+          git commit -m "Quick update R&I radar"
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+
+  publish:
+    needs: scan
+    if: needs.scan.result == 'success' && needs.scan.outputs.scan_due == 'true'
+    permissions:
+      contents: read
+      pages: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Publish fresh radar on GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl --fail-with-body -L -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds"
