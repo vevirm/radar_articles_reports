@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-09-09T00:44Z",
-  "run_started_at": "2026-09-09T00:20Z",
-  "run_completed_at": "2026-09-09T00:44Z",
+  "last_updated": "2026-09-09T02:18Z",
+  "run_started_at": "2026-09-09T01:54Z",
+  "run_completed_at": "2026-09-09T02:18Z",
   "scan_schedule": {
     "automatic_cadence": "every_4_hours",
     "cron_utc": "17 */4 * * *",
@@ -13,7 +13,7 @@
       "16:17",
       "20:17"
     ],
-    "last_run_trigger": "push",
+    "last_run_trigger": "manual",
     "next_scheduled_slot_utc": "2026-09-09T04:17Z"
   },
   "scan_history": [
@@ -408,6 +408,20 @@
       "corpus_ab_archive": 0,
       "corpus_ab_accepted_history": 335,
       "corpus_c": 1
+    },
+    {
+      "started_at": "2026-09-09T01:54Z",
+      "completed_at": "2026-09-09T02:18Z",
+      "trigger": "manual",
+      "new_a": 0,
+      "new_b": 0,
+      "new_c": 0,
+      "health": "degraded",
+      "corpus_a": 323,
+      "corpus_b": 12,
+      "corpus_ab_archive": 0,
+      "corpus_ab_accepted_history": 335,
+      "corpus_c": 1
     }
   ],
   "latest_productive_scan": {
@@ -419,7 +433,7 @@
     "new_c": 0
   },
   "reader_products_refresh": {
-    "completed_at": "2026-09-09T00:44Z",
+    "completed_at": "2026-09-09T02:18Z",
     "matrix": true,
     "risks_opportunities": true,
     "external_shocks": true,
@@ -457,7 +471,7 @@
     "batch_id": "round-xiv-2026-08-25",
     "source_document": "curation/EU_RI_Relevant_Papers_Round_XIV.docx",
     "decision_profile_version": "v17.20.37-plumbing",
-    "last_tested_at": "2026-09-09T00:33:11Z",
+    "last_tested_at": "2026-09-09T02:09:47Z",
     "results": [
       {
         "candidate_id": "K42",
@@ -588,7 +602,7 @@
         "title": "Engineering the digital technology sphere: China's new technology diplomacy and telecom ecosystem niche construction",
         "frontier_row_hint": "infrastructure",
         "attempted_this_scan": true,
-        "attempted_at": "2026-09-09T00:33:11Z",
+        "attempted_at": "2026-09-09T02:09:47Z",
         "decision_profile_version": "v17.20.37-plumbing",
         "resolution": "openalex_exact_fallback",
         "openalex_status": "resolved",
@@ -910,7 +924,7 @@
         "title": "A European Way of War Without the United States",
         "frontier_row_hint": "rules",
         "attempted_this_scan": true,
-        "attempted_at": "2026-09-09T00:33:11Z",
+        "attempted_at": "2026-09-09T02:09:47Z",
         "decision_profile_version": "v17.20.37-plumbing",
         "resolution": "crossref_title",
         "resolved_title": "A European Way of War Without the United States",
@@ -975,7 +989,7 @@
         "title": "Fragmented Global AI Governance? Chinese AI Standards and Governance Exports",
         "frontier_row_hint": "rules",
         "attempted_this_scan": true,
-        "attempted_at": "2026-09-09T00:33:11Z",
+        "attempted_at": "2026-09-09T02:09:47Z",
         "decision_profile_version": "v17.20.37-plumbing",
         "resolution": "crossref_title_no_exact_match",
         "status": "unresolved",
@@ -1121,7 +1135,7 @@
       "event_status": "PROPOSED",
       "precursor_claim": "IBM acquires HRL to expand quantum roadmap.",
       "first_seen": "2026-09-08T21:40Z",
-      "last_seen": "2026-09-09T00:20Z",
+      "last_seen": "2026-09-09T01:54Z",
       "new_this_scan": false,
       "private_watch_only": true
     }
@@ -1142,19 +1156,19 @@
   "scan_state": {
     "version": "v17.2-persistent-source-cursors",
     "source_expansion_version": "v17.20.23-main-radar-recall-recovery",
-    "openalex_cursor": 100,
-    "crossref_broad_cursor": 72,
-    "crossref_priority_cursor": 448,
-    "crossref_source_cursor": 6,
-    "crossref_preferred_journal_cursor": 5,
-    "strand_b_method_cursor": 0,
-    "institution_cursor": 58,
-    "official_eu_source_cursor": 0,
+    "openalex_cursor": 107,
+    "crossref_broad_cursor": 79,
+    "crossref_priority_cursor": 464,
+    "crossref_source_cursor": 12,
+    "crossref_preferred_journal_cursor": 0,
+    "strand_b_method_cursor": 7,
+    "institution_cursor": 116,
+    "official_eu_source_cursor": 14,
     "frontier_gap_cursor": 11,
-    "openalex_explore_cursor": 125,
-    "crossref_explore_cursor": 65,
-    "finding_context_cursor": 4,
-    "priority_people_cursor": 16,
+    "openalex_explore_cursor": 132,
+    "crossref_explore_cursor": 72,
+    "finding_context_cursor": 8,
+    "priority_people_cursor": 32,
     "priority_people_completed_cycles": 3,
     "priority_people_openalex_author_ids": {
       "nikolaus rajewsky": "A5073506559",
@@ -1264,35 +1278,35 @@
       "reinhilde veugelers": "A5025678672"
     },
     "frontier_gap_query_cursors": {
-      "news:infrastructure-C": 0,
-      "news:conversion-B": 0,
-      "news:rules-C": 0,
-      "news:rules-D": 1,
-      "news:conversion-D": 0,
-      "news:rules-B": 0,
-      "news:infrastructure-D": 0,
-      "news:knowledge-D": 3,
-      "news:infrastructure-B": 0,
-      "news:rules-A": 0,
-      "news:knowledge-C": 4,
-      "news:knowledge-B": 0,
-      "news:conversion-C": 0,
+      "news:infrastructure-C": 1,
+      "news:conversion-B": 1,
+      "news:rules-C": 1,
+      "news:rules-D": 2,
+      "news:conversion-D": 1,
+      "news:rules-B": 1,
+      "news:infrastructure-D": 1,
+      "news:knowledge-D": 4,
+      "news:infrastructure-B": 1,
+      "news:rules-A": 1,
+      "news:knowledge-C": 5,
+      "news:knowledge-B": 1,
+      "news:conversion-C": 1,
       "scholarly:knowledge-A": 0,
-      "scholarly:knowledge-B": 4,
-      "scholarly:knowledge-C": 4,
-      "scholarly:knowledge-D": 7,
+      "scholarly:knowledge-B": 5,
+      "scholarly:knowledge-C": 5,
+      "scholarly:knowledge-D": 5,
       "scholarly:infrastructure-A": 2,
-      "scholarly:infrastructure-B": 4,
-      "scholarly:infrastructure-C": 0,
-      "scholarly:infrastructure-D": 4,
+      "scholarly:infrastructure-B": 5,
+      "scholarly:infrastructure-C": 1,
+      "scholarly:infrastructure-D": 5,
       "scholarly:conversion-A": 5,
-      "scholarly:conversion-B": 6,
-      "scholarly:conversion-C": 4,
-      "scholarly:conversion-D": 1,
-      "scholarly:rules-A": 4,
-      "scholarly:rules-B": 1,
-      "scholarly:rules-C": 6,
-      "scholarly:rules-D": 4,
+      "scholarly:conversion-B": 4,
+      "scholarly:conversion-C": 5,
+      "scholarly:conversion-D": 0,
+      "scholarly:rules-A": 5,
+      "scholarly:rules-B": 7,
+      "scholarly:rules-C": 7,
+      "scholarly:rules-D": 3,
       "news:infrastructure-A": 2,
       "news:conversion-A": 2
     },
@@ -1300,9 +1314,9 @@
       "infrastructure-C": 0,
       "conversion-B": 4,
       "rules-C": 0,
-      "rules-D": 3,
+      "rules-D": 0,
       "conversion-D": 4,
-      "rules-B": 5,
+      "rules-B": 4,
       "infrastructure-D": 7,
       "knowledge-D": 7,
       "infrastructure-B": 1,
@@ -1368,21 +1382,21 @@
         "curator-seed::Europe research innovation foreign": 9,
         "explore::European research security": 3,
         "explore::European science policy geopolitics": 3,
-        "gap::Europe technology autonomy protected market scale-up costs": 2,
-        "curator-seed::Europe critical technologies research capability dependency": 2,
+        "gap::Europe technology autonomy protected market scale-up costs": 3,
+        "curator-seed::Europe critical technologies research capability dependency": 3,
         "curator-seed::Europe research technology supply chain dependency resilience": 10,
         "explore::Europe science diplomacy strategic competition": 3,
         "explore::technology transfer controls European research": 3,
-        "gap::EU research technology decision delay fall behind": 8,
+        "gap::EU research technology decision delay fall behind": 9,
         "curator-seed::EU innovation critical inputs supply security capability": 10,
         "explore::critical technologies European economic security": 3,
         "explore::Horizon Europe third country association geopolitics": 3,
         "gap::EU technology regulation de-risking innovation delay": 5,
-        "finding-context::Europe research innovation technological capabilities global competition": 5,
+        "finding-context::Europe research innovation technological capabilities global competition": 6,
         "curator-seed::Europe research innovation competitiveness": 9,
         "explore::research talent Europe strategic competition": 3,
         "explore::developing strategic foresight methodology public policy": 3,
-        "finding-context::EU R&D capability gap competitiveness dependency": 5,
+        "finding-context::EU R&D capability gap competitiveness dependency": 6,
         "curator-seed::Europe research US China technology competition capability": 7,
         "explore::EU research security foreign interference": 3,
         "explore::European research innovation geopolitics": 3,
@@ -1391,7 +1405,7 @@
         "explore::EU China research cooperation": 3,
         "explore::European research strategic dependencies technology": 3,
         "gap::European scientists relocate abroad research security capacity": 3,
-        "curator-seed::Europe research innovation third countries": 9,
+        "curator-seed::Europe research innovation third countries": 10,
         "explore::semiconductor research innovation policy Europe security": 3,
         "explore::European Research Area economic security": 3,
         "gap::EU mutual recognition research innovation common standards competitiveness": 7,
@@ -1401,56 +1415,56 @@
         "gap::European startups foreign market reliance competitiveness": 6,
         "gap::European innovation procurement scale-up sovereignty": 4,
         "gap::European semiconductor research infrastructure sovereignty capacity": 3,
-        "gap::Europe local content technology firms cost fragmentation scale": 8,
+        "gap::Europe local content technology firms cost fragmentation scale": 9,
         "gap::EU regulatory fragmentation approval delay research innovation capability": 4,
         "gap::EU self-imposed research security screening collaboration friction": 2,
         "gap::Europe deep tech companies leave scale abroad capability loss evidence": 2,
-        "gap::Europe follows US technology export rules dependence innovation access": 9,
+        "gap::Europe follows US technology export rules dependence innovation access": 10,
         "gap::Europe resilient technology infrastructure redundancy cost tradeoff": 2,
         "gap::EU technology policy gridlock innovation competitiveness": 2,
-        "gap::EU research security regulation collaboration cost delay": 6,
+        "gap::EU research security regulation collaboration cost delay": 7,
         "gap::Europe deep tech firm exit hollowing out capability loss": 2,
-        "gap::EU dependence foreign technology rules standards access": 7,
+        "gap::EU dependence foreign technology rules standards access": 8,
         "gap::Choose Europe research careers brain drain CESAER survey": 2,
-        "gap::EU technology standards adopted global innovation advantage": 7,
-        "gap::Europe technology infrastructure sovereignty cost delay": 7,
-        "gap::Europe critical technology infrastructure access loss shortage": 6,
+        "gap::EU technology standards adopted global innovation advantage": 8,
+        "gap::Europe technology infrastructure sovereignty cost delay": 8,
+        "gap::Europe critical technology infrastructure access loss shortage": 7,
         "gap::Europe dependence foreign compute chips cloud capacity": 2,
-        "gap::Europe international researchers retention research capacity competitiveness": 6,
+        "gap::Europe international researchers retention research capacity competitiveness": 7,
         "gap::EU research security talent mobility collaboration restrictions innovation": 2,
-        "gap::Europe startups foreign capital market dependence scale": 6,
+        "gap::Europe startups foreign capital market dependence scale": 7,
         "gap::Europe deep tech scale-up manufacturing strategic autonomy": 3,
         "gap::EU localisation innovation firms fragmentation burden": 2,
-        "gap::Europe foreign export controls blocked technology access": 7,
-        "gap::European technology screening export controls innovation burden": 8,
-        "gap::EU scale-up gap firms moving abroad technology": 2,
-        "gap::Europe follows US technology rules export licences performance": 2,
+        "gap::Europe foreign export controls blocked technology access": 8,
+        "gap::European technology screening export controls innovation burden": 10,
+        "gap::EU scale-up gap firms moving abroad technology": 4,
+        "gap::Europe follows US technology rules export licences performance": 3,
         "gap::EU brain drain research talent strategic autonomy competitiveness": 2,
-        "gap::European research innovation rules funding competitive advantage": 7,
+        "gap::European research innovation rules funding competitive advantage": 8,
         "gap::EU domestic compute chips autonomy higher costs": 2,
         "gap::EU chips compute supply disruption dependence no substitute": 2,
-        "gap::EU non-EU technology infrastructure reliance performance": 7,
-        "gap::EU third-country researchers scientific workforce innovation capacity": 7,
-        "gap::Europe research security screening researchers competitiveness cost": 7,
-        "gap::EU technology firms US market dependence growth": 7,
+        "gap::EU non-EU technology infrastructure reliance performance": 8,
+        "gap::EU third-country researchers scientific workforce innovation capacity": 8,
+        "gap::Europe research security screening researchers competitiveness cost": 8,
+        "gap::EU technology firms US market dependence growth": 8,
         "gap::EU innovation commercialisation procurement home champions": 2,
         "gap::European sovereign industrial policy subscale technology firms": 2,
-        "gap::EU autonomy regulation fragmentation research innovation": 9,
-        "gap::European manufacturing closure innovation capability decline": 4,
-        "gap::European innovation foreign standards rule taker dependence": 9,
-        "gap::Europe scientists leaving US China research capacity": 8,
+        "gap::EU autonomy regulation fragmentation research innovation": 10,
+        "gap::European manufacturing closure innovation capability decline": 5,
+        "gap::European innovation foreign standards rule taker dependence": 10,
+        "gap::Europe scientists leaving US China research capacity": 9,
         "gap::EU standards procurement technology rule setter": 2,
-        "gap::European infrastructure localisation competitiveness delay": 3,
+        "gap::European infrastructure localisation competitiveness delay": 4,
         "gap::European infrastructure chokepoint restricted access competitiveness": 2,
-        "gap::European research infrastructure foreign vendor dependence scale": 2,
-        "gap::Europe foreign-born researchers scientific workforce dependence": 3,
-        "gap::European universities knowledge security researcher mobility burden": 7,
-        "gap::European scale-ups foreign platforms capital performance": 7,
+        "gap::European research infrastructure foreign vendor dependence scale": 3,
+        "gap::Europe foreign-born researchers scientific workforce dependence": 2,
+        "gap::European universities knowledge security researcher mobility burden": 8,
+        "gap::European scale-ups foreign platforms capital performance": 8,
         "gap::European technology firms scale manufacturing competitiveness": 3,
         "gap::EU strategic autonomy industrial policy innovation cost": 4,
-        "gap::European technology restrictions capability decline competitiveness": 7,
-        "gap::Europe research security rules administrative burden competitiveness": 6,
-        "gap::EU technology company relocation strategic capacity loss": 8,
+        "gap::European technology restrictions capability decline competitiveness": 8,
+        "gap::Europe research security rules administrative burden competitiveness": 7,
+        "gap::EU technology company relocation strategic capacity loss": 2,
         "gap::EU research technology foreign regulation strategic dependency": 5,
         "gap::European Research Area researcher outflow innovation decline": 9,
         "gap::Europe research regulation strategic advantage innovation": 4,
@@ -1462,35 +1476,35 @@
         "gap::EU deep tech foreign venture capital strategic dependency": 2,
         "gap::EU deep tech industrialisation economic security scale": 2,
         "gap::Europe de-risking scale-up fragmentation technology firms": 4,
-        "gap::EU foreign standards exclusion innovation capacity loss": 5,
+        "gap::EU foreign standards exclusion innovation capacity loss": 6,
         "gap::Europe scale-up acquisition foreign hollowing out innovation": 2,
         "gap::Europe US export controls technology access innovation": 5,
         "gap::EU research talent loss scientific workforce competitiveness": 4,
         "gap::EU standards technology sovereignty market leadership": 3,
-        "gap::Europe sovereign cloud research infrastructure fragmentation": 4,
+        "gap::Europe sovereign cloud research infrastructure fragmentation": 5,
         "gap::Europe critical research infrastructure supply disruption capacity loss": 3,
         "gap::Europe cloud infrastructure foreign dependence economic security": 4,
         "gap::Europe international PhD graduates stay after graduation research innovation": 2,
         "gap::Europe foreign interference research security academic mobility": 4,
         "gap::Europe technology firms non-EU cloud platform dependence": 4,
         "gap::Europe research commercialisation strategic technology leadership": 3,
-        "curator-seed::Europe China science technology de-risking research security": 8,
+        "curator-seed::Europe China science technology de-risking research security": 9,
         "explore::scientific talent mobility Europe economic security": 3,
         "explore::new horizon scanning methodology strategic policy": 3,
-        "finding-context::Horizon Europe international participation research security capability": 5,
+        "finding-context::Horizon Europe international participation research security capability": 6,
         "explore::research security Europe universities international cooperation": 3,
         "explore::EU technology sovereignty innovation policy": 3,
         "explore::Europe China science technology cooperation security": 3,
         "explore::research infrastructures geopolitics Europe policy": 3,
         "finding-context::Europe research technological sovereignty dependency capability": 5,
-        "curator-seed::Europe research innovation standards": 9,
+        "curator-seed::Europe research innovation standards": 10,
         "explore::quantum policy Europe sovereignty research": 3,
         "finding-context::EU innovation strategic autonomy control technology access": 5,
         "explore::academic research security Europe China": 3,
         "explore::adapted horizon scanning method emerging issues": 3,
         "explore::knowledge security European research policy": 3,
         "explore::European technological sovereignty research policy": 3,
-        "gap::Europe research careers brain drain survey universities researchers": 2,
+        "gap::Europe research careers brain drain survey universities researchers": 3,
         "explore::EU China research de-risking": 3,
         "explore::European industrial innovation strategic autonomy": 3,
         "gap::Europe coordinated procurement joint funding technology autonomy": 5,
@@ -1518,7 +1532,7 @@
         "gap::Europe deep tech growth capital procurement manufacturing value capture": 3,
         "explore::biotechnology policy Europe economic security": 3,
         "explore::European research talent security mobility China": 3,
-        "curator-seed::EU China research cooperation capability dependency": 6,
+        "curator-seed::EU China research cooperation capability dependency": 7,
         "explore::trusted research Europe policy geopolitics": 3,
         "explore::novel weak signal detection method strategic foresight": 3,
         "explore::EU strategic autonomy science technology": 3,
@@ -1681,7 +1695,7 @@
         "low-yield-depth::trusted research Europe policy geopolitics": 3,
         "low-yield-depth::biotechnology policy Europe economic security": 3,
         "low-yield-depth::European academic internationalisation geopolitical risk": 3,
-        "low-yield-depth::EU R&D capability gap competitiveness dependency": 3,
+        "low-yield-depth::EU R&D capability gap competitiveness dependency": 4,
         "low-yield-depth::Europe technology dependencies innovation research": 3,
         "low-yield-depth::Europe China science technology cooperation security": 3,
         "finding-context::Europe research innovation openness and security in research funding/programmes common decision object unresolved criteria": 2,
@@ -1718,54 +1732,68 @@
         "low-yield-depth::open science geopolitics Europe research security": 3,
         "low-yield-depth::EU quantum research economic security policy": 3,
         "low-yield-depth::Europe academic brain drain research careers": 3,
-        "low-yield-depth::Europe research innovation openness and security in research funding/programmes single rule resolves conflict": 3
+        "low-yield-depth::Europe research innovation openness and security in research funding/programmes single rule resolves conflict": 3,
+        "explore::EU innovation ecosystem scale-up dependency foreign capital": 3,
+        "explore::European semiconductor innovation economic security": 3,
+        "explore::European research talent international competition strategic technologies": 3,
+        "explore::developing robust decision making method strategic foresight policy": 3,
+        "explore::EU research security knowledge security universities": 3,
+        "explore::European R&D strategic competition technology": 3,
+        "explore::Horizon Europe China cooperation security": 3,
+        "low-yield-depth::European technology transfer economic security": 3,
+        "low-yield-depth::EU US China technology competition": 3,
+        "low-yield-depth::Horizon Europe research security international cooperation": 3,
+        "low-yield-depth::EU biotechnology research economic security policy": 3,
+        "low-yield-depth::European researcher mobility brain drain": 3,
+        "low-yield-depth::European R&D investment strategic dependencies": 3,
+        "low-yield-depth::Horizon Europe international cooperation security": 3
       },
       "crossref_broad": {
-        "gap::Europe dependence foreign compute chips cloud capacity": 5,
-        "gap::Europe technology autonomy protected market scale-up costs": 5,
-        "gap::EU dependence foreign technology rules standards access": 5,
-        "gap::EU technology policy gridlock innovation competitiveness": 5,
-        "gap::Europe deep tech firm exit hollowing out capability loss": 5,
-        "gap::EU research security regulation collaboration cost delay": 5,
-        "gap::Europe critical technology infrastructure access loss shortage": 5,
-        "gap::Choose Europe research careers brain drain CESAER survey": 5,
-        "gap::Europe technology infrastructure sovereignty cost delay": 5,
-        "gap::EU technology standards adopted global innovation advantage": 5,
-        "gap::Europe international researchers retention research capacity competitiveness": 5,
-        "gap::EU research security talent mobility collaboration restrictions innovation": 5,
-        "gap::Europe startups foreign capital market dependence scale": 5,
-        "gap::EU non-EU technology infrastructure reliance performance": 4,
-        "gap::EU localisation innovation firms fragmentation burden": 3,
-        "gap::Europe follows US technology rules export licences performance": 3,
-        "gap::Europe foreign export controls blocked technology access": 4,
-        "gap::EU scale-up gap firms moving abroad technology": 3,
-        "gap::European technology screening export controls innovation burden": 3,
-        "gap::EU chips compute supply disruption dependence no substitute": 4,
-        "gap::EU brain drain research talent strategic autonomy competitiveness": 3,
-        "gap::EU domestic compute chips autonomy higher costs": 4,
-        "gap::European research innovation rules funding competitive advantage": 4,
-        "gap::EU third-country researchers scientific workforce innovation capacity": 4,
-        "gap::Europe research security screening researchers competitiveness cost": 4,
-        "gap::EU technology firms US market dependence growth": 4,
-        "gap::European research infrastructure foreign vendor dependence scale": 4,
-        "gap::European sovereign industrial policy subscale technology firms": 5,
-        "gap::European innovation foreign standards rule taker dependence": 5,
-        "gap::EU research technology decision delay fall behind": 4,
-        "gap::European manufacturing closure innovation capability decline": 4,
-        "gap::EU autonomy regulation fragmentation research innovation": 5,
-        "gap::European infrastructure chokepoint restricted access competitiveness": 4,
-        "gap::Europe scientists leaving US China research capacity": 5,
-        "gap::European infrastructure localisation competitiveness delay": 5,
-        "gap::EU standards procurement technology rule setter": 4,
-        "gap::Europe foreign-born researchers scientific workforce dependence": 4,
-        "gap::European universities knowledge security researcher mobility burden": 4,
-        "gap::European scale-ups foreign platforms capital performance": 4,
+        "gap::Europe dependence foreign compute chips cloud capacity": 6,
+        "gap::Europe technology autonomy protected market scale-up costs": 6,
+        "gap::EU dependence foreign technology rules standards access": 6,
+        "gap::EU technology policy gridlock innovation competitiveness": 6,
+        "gap::Europe deep tech firm exit hollowing out capability loss": 6,
+        "gap::EU research security regulation collaboration cost delay": 6,
+        "gap::Europe critical technology infrastructure access loss shortage": 6,
+        "gap::Choose Europe research careers brain drain CESAER survey": 6,
+        "gap::Europe technology infrastructure sovereignty cost delay": 6,
+        "gap::EU technology standards adopted global innovation advantage": 6,
+        "gap::Europe international researchers retention research capacity competitiveness": 6,
+        "gap::EU research security talent mobility collaboration restrictions innovation": 6,
+        "gap::Europe startups foreign capital market dependence scale": 6,
+        "gap::EU non-EU technology infrastructure reliance performance": 5,
+        "gap::EU localisation innovation firms fragmentation burden": 4,
+        "gap::Europe follows US technology rules export licences performance": 4,
+        "gap::Europe foreign export controls blocked technology access": 5,
+        "gap::EU scale-up gap firms moving abroad technology": 4,
+        "gap::European technology screening export controls innovation burden": 4,
+        "gap::EU chips compute supply disruption dependence no substitute": 5,
+        "gap::EU brain drain research talent strategic autonomy competitiveness": 4,
+        "gap::EU domestic compute chips autonomy higher costs": 5,
+        "gap::European research innovation rules funding competitive advantage": 5,
+        "gap::EU third-country researchers scientific workforce innovation capacity": 5,
+        "gap::Europe research security screening researchers competitiveness cost": 5,
+        "gap::EU technology firms US market dependence growth": 5,
+        "gap::European research infrastructure foreign vendor dependence scale": 5,
+        "gap::European sovereign industrial policy subscale technology firms": 6,
+        "gap::European innovation foreign standards rule taker dependence": 6,
+        "gap::EU research technology decision delay fall behind": 5,
+        "gap::European manufacturing closure innovation capability decline": 5,
+        "gap::EU autonomy regulation fragmentation research innovation": 6,
+        "gap::European infrastructure chokepoint restricted access competitiveness": 5,
+        "gap::Europe scientists leaving US China research capacity": 6,
+        "gap::European infrastructure localisation competitiveness delay": 6,
+        "gap::EU standards procurement technology rule setter": 5,
+        "gap::Europe foreign-born researchers scientific workforce dependence": 5,
+        "gap::European universities knowledge security researcher mobility burden": 5,
+        "gap::European scale-ups foreign platforms capital performance": 5,
         "gap::EU strategic dependency semiconductor compute research": 2,
         "gap::EU strategic autonomy industrial policy innovation cost": 3,
         "gap::EU research technology foreign regulation strategic dependency": 10,
-        "gap::European technology restrictions capability decline competitiveness": 4,
-        "gap::EU technology company relocation strategic capacity loss": 4,
-        "gap::Europe research security rules administrative burden competitiveness": 10,
+        "gap::European technology restrictions capability decline competitiveness": 5,
+        "gap::EU technology company relocation strategic capacity loss": 5,
+        "gap::Europe research security rules administrative burden competitiveness": 2,
         "gap::EU semiconductor export controls infrastructure shortage": 2,
         "gap::European Research Area researcher outflow innovation decline": 5,
         "gap::EU strategic infrastructure reshoring cost innovation": 2,
@@ -2047,13 +2075,21 @@
         "low-yield-depth::Europe science diplomacy strategic competition research cooperation": 3,
         "low-yield-depth::European technological capabilities economic security": 3,
         "low-yield-depth::Europe industrial R&D foreign investment screening technology": 3,
-        "low-yield-depth::EU Framework Programme international cooperation strategic autonomy": 3
+        "low-yield-depth::EU Framework Programme international cooperation strategic autonomy": 3,
+        "low-yield-depth::European innovation capacity economic security": 3,
+        "low-yield-depth::Europe research data infrastructure strategic autonomy": 3,
+        "low-yield-depth::European deep tech geopolitical competition": 3,
+        "low-yield-depth::European scientific capacity geopolitical competition": 3,
+        "low-yield-depth::Europe innovation systems global fragmentation": 3,
+        "low-yield-depth::European knowledge transfer strategic competition": 3,
+        "low-yield-depth::European standards technology geopolitics innovation": 3,
+        "low-yield-depth::EU research innovation geopolitics": 3
       },
       "crossref_priority": {
-        "source-first::Research Policy": 2,
-        "source-first::Science and Public Policy": 3,
-        "source-first::Studies in Higher Education": 2,
-        "source-first::New Political Economy": 2,
+        "source-first::Research Policy": 3,
+        "source-first::Science and Public Policy": 2,
+        "source-first::Studies in Higher Education": 3,
+        "source-first::New Political Economy": 3,
         "metadata-rescue::Technovation": 19,
         "source-first::Journal of European Public Policy": 3,
         "source-first::Review of International Political Economy": 3,
@@ -2062,13 +2098,13 @@
         "source-first::Futures": 2,
         "metadata-rescue::Futures": 5,
         "source-first::Technology in Society": 3,
-        "source-first::Issues in Science and Technology": 2,
-        "source-first::Research Evaluation": 3,
-        "source-first::R&D Management": 2,
-        "source-first::Science, Technology, & Human Values": 2,
+        "source-first::Issues in Science and Technology": 3,
+        "source-first::Research Evaluation": 2,
+        "source-first::R&D Management": 3,
+        "source-first::Science, Technology, & Human Values": 3,
         "source-first::Higher Education": 2,
-        "source-first::Science Technology and Human Values": 2,
-        "source-first::European Security": 2,
+        "source-first::Science Technology and Human Values": 3,
+        "source-first::European Security": 3,
         "source-first::Global Policy": 2,
         "source-first::European Journal of Futures Research": 3,
         "source-first::Policy Sciences": 2,
@@ -2153,12 +2189,12 @@
         "source-first::Energy Policy": 2,
         "source-first::Climate Policy": 2,
         "source-first::Space Policy": 2,
-        "source-first::Telecommunications Policy": 2,
-        "source-first::Information Economics and Policy": 2,
-        "source-first::Journal of Cyber Policy": 2,
-        "source-first::Digital Policy, Regulation and Governance": 2,
-        "source-first::AI & Society": 2,
-        "source-first::Big Data & Society": 2,
+        "source-first::Telecommunications Policy": 3,
+        "source-first::Information Economics and Policy": 3,
+        "source-first::Journal of Cyber Policy": 3,
+        "source-first::Digital Policy, Regulation and Governance": 3,
+        "source-first::AI & Society": 3,
+        "source-first::Big Data & Society": 3,
         "source-first::Data & Policy": 2,
         "source-first::Internet Policy Review": 2,
         "source-first::Journal of International Business Policy": 2,
@@ -2261,7 +2297,7 @@
       "https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034|2026-08-24": "2026-09-06T13:39Z",
       "https://kesai.eu/publications|": "2026-09-06T13:39Z",
       "https://health.ec.europa.eu/health-security-and-infectious-diseases/crisis-management/health-security-committee-reports_en|2026-09-04": "2026-09-06T13:39Z",
-      "https://ellis.institute/news/bernhard-scholkopf-elected-fellow-of-the-royal-society|": "2026-09-08T22:43Z",
+      "https://ellis.institute/news/bernhard-scholkopf-elected-fellow-of-the-royal-society|": "2026-09-09T02:15Z",
       "https://ellisinstitute.fi/postdoc-and-phd-recruit-autumn-2026|2026-08-26": "2026-09-06T13:39Z",
       "https://hcss.nl/news/topic/technology-and-innovation|2026-09-04": "2026-09-06T13:39Z",
       "https://www.eurohpc-ju.europa.eu/acquisition-delivery-installation-and-hardware-and-software-maintenance-meluxina-q-quantum-computer_en|": "2026-09-06T13:39Z",
@@ -2270,7 +2306,7 @@
       "https://marie-sklodowska-curie-actions.ec.europa.eu/actions/doctoral-networks|": "2026-09-06T13:39Z",
       "https://www.csis.org/analysis/rice-crossroads-rethinking-japans-food-security|2026-08-20": "2026-09-06T13:39Z",
       "https://merics.org/en/merics-briefs/humanoid-robots-decarbonization-platform-economy|2026-08-27": "2026-09-06T13:39Z",
-      "https://aiforgood.itu.int/event/ai-and-democracy-threats-safeguards-and-the-path-forward|": "2026-09-09T00:24Z",
+      "https://aiforgood.itu.int/event/ai-and-democracy-threats-safeguards-and-the-path-forward|": "2026-09-09T01:58Z",
       "https://www.bertelsmann-stiftung.de/de/unsere-projekte/abgeschlossene-projekte/faktencheck-gesundheit/reportagen/aerztedichte|2026-09-06": "2026-09-06T13:39Z",
       "https://www.unesco.org/en/reports|": "2026-09-06T13:39Z",
       "https://dgap.org/en/research/expertise/european-union|": "2026-09-06T13:39Z",
@@ -2279,7 +2315,7 @@
       "https://era.gv.at/news-items/msca-is-funding-29-new-doctoral-training-and-postdoctoral-fellowship-programmes|2026-09-01": "2026-09-06T13:39Z",
       "https://www.cfr.org/education/insights/250-years-of-history-built-for-different-types-of-classrooms|2026-08-26": "2026-09-06T13:39Z",
       "https://ecfr.eu/?taxonomy=publication_format&term=policy-brief|": "2026-09-06T13:39Z",
-      "https://imprs.is.mpg.de/news/imprs-is-faculty-and-scholars-join-founding-team-of-new-european-physical-ai-lab|": "2026-09-08T22:44Z",
+      "https://imprs.is.mpg.de/news/imprs-is-faculty-and-scholars-join-founding-team-of-new-european-physical-ai-lab|": "2026-09-09T02:15Z",
       "https://www.sipri.org/ja/node/7948|2026-08-17": "2026-09-06T13:39Z",
       "https://ellis.institute/de/news/bernhard-scholkopf-elected-fellow-of-the-royal-society|": "2026-09-06T13:39Z",
       "https://ellisinstitute.fi/ellis-institute-finland|2026-09-03": "2026-09-06T13:39Z",
@@ -5216,11 +5252,33 @@
       "https://www.eurocontrol.int/sites/default/files/2026-03/ectl-src-260015.pdf|2026-03-31": "2026-09-09T00:41Z",
       "https://www.espi.eu/events/ila-2026|2026-06-01": "2026-09-09T00:41Z",
       "https://www.eurocontrol.int/sites/default/files/2026-03/ectl-src-250160-cancellation.pdf|2026-03-31": "2026-09-09T00:42Z",
-      "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-29-august-4-september-week-36|": "2026-09-09T00:42Z"
+      "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-29-august-4-september-week-36|": "2026-09-09T00:42Z",
+      "https://publications.jrc.ec.europa.eu/repository/handle/jrc145987|": "2026-09-09T01:59Z",
+      "https://www.kva.se/evenemang/seminarium-pa-bokmassan-nar-naturvetenskaperna-blir-kontroversiella-i-skolan|2026-09-09": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0780|2026-09-09": "2026-09-09T01:59Z",
+      "https://www.kva.se/evenemang/forskning-i-primarvarden-hur-knyter-vi-ihop-sjukvardssystemet|2026-09-09": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0777|2026-09-09": "2026-09-09T01:59Z",
+      "https://www.bennettschool.cam.ac.uk/about-us/person/michael-kummer|2026-09-08": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0781|2026-09-09": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0775|2026-09-09": "2026-09-09T01:59Z",
+      "https://www.kva.se/evenemang/sparen-forskracker-nya-upptackter-och-perspektiv-kring-steget-fran-vatten-till-land|2026-09-09": "2026-09-09T01:59Z",
+      "https://www.kva.se/evenemang/barncancer-och-bananflugor-en-berattelse-om-grundforskning|2026-09-09": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0776|2026-09-09": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0778|2026-09-09": "2026-09-09T01:59Z",
+      "https://www.kva.se/evenemang/beyond-one-size-fits-all-radiotherapy-from-imaging-biomarkers-to-clinical-trials|2026-09-09": "2026-09-09T01:59Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0774|2026-09-09": "2026-09-09T02:00Z",
+      "https://unidir.org/work/cybersecurity|2026-09-08": "2026-09-09T02:00Z",
+      "https://unidir.org/work/science-tech-innovation|2026-09-08": "2026-09-09T02:00Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0772|2026-09-09": "2026-09-09T02:00Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0773|2026-09-09": "2026-09-09T02:00Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0771|2026-09-09": "2026-09-09T02:00Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0770|2026-09-09": "2026-09-09T02:00Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0769|2026-09-09": "2026-09-09T02:00Z",
+      "https://post.parliament.uk/research-briefings/post-pn-0768|2026-09-09": "2026-09-09T02:01Z"
     },
-    "foresight_author_cursor": 20,
-    "foresight_author_completed_cycles": 7,
-    "evidence_first_cursor": 8,
+    "foresight_author_cursor": 0,
+    "foresight_author_completed_cycles": 8,
+    "evidence_first_cursor": 16,
     "weak_signal_evidence_followup": {
       "signal:fast track to the eic accelerator call 5": {
         "checked_at": "2026-09-06T18:07Z",
@@ -5245,21 +5303,21 @@
     },
     "source_expansion_legacy_completion_migrated": false,
     "source_expansion_bounded_refresh": false,
-    "frontier_gap_depth_cursor": 0,
+    "frontier_gap_depth_cursor": 42,
     "a_recall_recovery_cursor": 0,
     "a_recall_recovery_version": "v17.20.23-document-level-eu-ri-geopolitics-recheck",
     "recall_profile_changed_this_run": false,
     "recall_reset_this_run": false,
     "recall_profile_version": "v17.17.0-phrase-ontology-relational-c",
-    "crossref_policy_journal_cursor": 0,
-    "crossref_journal_depth_cursor": 0,
-    "direct_top_journal_cursor": 0,
-    "curator_seed_cursor": 0,
-    "citation_snowball_seed_cursor": 140,
-    "citation_snowball_seed_pool_size": 144,
-    "extended_highest_source_cursor": 6,
+    "crossref_policy_journal_cursor": 6,
+    "crossref_journal_depth_cursor": 3,
+    "direct_top_journal_cursor": 4,
+    "curator_seed_cursor": 8,
+    "citation_snowball_seed_cursor": 20,
+    "citation_snowball_seed_pool_size": 147,
+    "extended_highest_source_cursor": 12,
     "institution_source_adapter_cursor": 0,
-    "last_started_at": "2026-09-09T00:20Z",
+    "last_started_at": "2026-09-09T01:54Z",
     "last_batches": {
       "openalex_queries": 60,
       "openalex_exploration_queries": 16,
@@ -5269,12 +5327,12 @@
       "crossref_priority_tasks": 16,
       "priority_people": 16,
       "priority_people_context_queries": 3,
-      "foresight_authors": 10,
+      "foresight_authors": 2,
       "formal_evidence_news_seen": 0,
       "formal_evidence_news_promoted_ab": 0,
       "formal_evidence_news_excluded_from_c": 0,
       "weak_signal_evidence_signals_checked": 0,
-      "institution_sources": 96,
+      "institution_sources": 94,
       "rule_fix_new_source_recovery_sources": 0,
       "manual_recovery_urls": 0,
       "frontier_gap_queries": 13,
@@ -5371,24 +5429,24 @@
         "conversion-C"
       ]
     },
-    "last_run": "2026-09-09T00:44Z",
-    "last_reader_products_refresh": "2026-09-09T00:44Z",
-    "last_completed_at": "2026-09-09T00:44Z",
-    "dimensional_query_cursor": 24,
+    "last_run": "2026-09-09T02:18Z",
+    "last_reader_products_refresh": "2026-09-09T02:18Z",
+    "last_completed_at": "2026-09-09T02:18Z",
+    "dimensional_query_cursor": 0,
     "source_failure_institution_cursor": 21,
     "source_failure_query_cursor": 128,
     "source_failure_crossref_journal_cursor": 100,
-    "low_yield_openalex_cursor": 64,
-    "low_yield_crossref_cursor": 216,
-    "low_yield_institution_cursor": 24,
-    "full_budget_crossref_cursor": 194,
-    "full_budget_institution_cursor": 201,
-    "full_budget_news_cursor": 8,
-    "full_budget_openalex_cursor": 134,
-    "low_yield_extended_openalex_cursor": 24,
-    "low_yield_extended_crossref_cursor": 193,
-    "low_yield_extended_source_cursor": 38,
-    "crossref_diversity_journal_cursor": 93,
+    "low_yield_openalex_cursor": 72,
+    "low_yield_crossref_cursor": 224,
+    "low_yield_institution_cursor": 46,
+    "full_budget_crossref_cursor": 210,
+    "full_budget_institution_cursor": 49,
+    "full_budget_news_cursor": 0,
+    "full_budget_openalex_cursor": 154,
+    "low_yield_extended_openalex_cursor": 27,
+    "low_yield_extended_crossref_cursor": 196,
+    "low_yield_extended_source_cursor": 40,
+    "crossref_diversity_journal_cursor": 99,
     "probe_registry": {
       "openalex_base:3b14c70e82ecf338a479": {
         "lane": "openalex_base",
@@ -5612,18 +5670,18 @@
       },
       "finding_context:3fe57b0cb6ebacc06f5c": {
         "lane": "finding_context",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "finding_context:751fe314d56aa6822ba6": {
         "lane": "finding_context",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "curator_seed:9332bbca1bd68201151d": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 8
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 9
       },
       "curator_seed:76ae1ccc4807f91e1a58": {
         "lane": "curator_seed",
@@ -5647,33 +5705,33 @@
       },
       "curator_seed:61dd3dc0e7ff9c6bf3ab": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "curator_seed:e4862a148d37cb6488e6": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "curator_seed:a3442b25b4ced3dbc658": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "curator_seed:c70ce691264014d251fc": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "curator_seed:ea7a707915217da3e0cb": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "official_eu_source:b8c60b8f4bdb76e84185": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "official_eu_source:4db6527b5ed2d3f2bde6": {
         "lane": "official_eu_source",
@@ -6032,63 +6090,63 @@
       },
       "institution_adapter:b8c60b8f4bdb76e84185": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:c7bcc1cd3fc36969d144": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:68f7cd466224e283118e": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:67df9ddffbef9ef5383b": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:ee2ea6d123edc75f1918": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:8ad2a2c12965694e025a": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:b4702af5705d74ce9f7f": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:12b9c5b467968a40f5b0": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:825bbb87e92f1104e12f": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:4ff5f878b89fe1ef77a8": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:141650a692c6b9c9d446": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "institution_adapter:c4a3494014d84634e79a": {
         "lane": "institution_adapter",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 10
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 11
       },
       "openalex_base:bdea38424ed0a9692e0e": {
         "lane": "openalex_base",
@@ -6202,43 +6260,43 @@
       },
       "evidence_first:e4e3b78e266996c0cd71": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:37aefe766f805d6b7e7f": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:2e6592cfc5fb0db31d42": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:ddbe3c0308c98bbeefa9": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:b67309acce7f5f258856": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:bbefb46464290e8b9de9": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:ee55081be749e513401d": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "evidence_first:ccd5dd64b4a5c66b796f": {
         "lane": "evidence_first",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "strand_b_method:4b158c7878b32546a837": {
         "lane": "strand_b_method",
@@ -6257,18 +6315,18 @@
       },
       "strand_b_method:a8f7357cd95c786702d3": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T12:05Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:01e2bae54d36c25f95b2": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T12:05Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:41943ba11f783b5c7998": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T12:05Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:92b8f55a21ec06edf059": {
         "lane": "strand_b_method",
@@ -6277,28 +6335,28 @@
       },
       "strand_b_method:d4aeeb6699c29f427c86": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T12:05Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:ec23c0c8a2df5f100a49": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T12:05Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:cfe466df4853a4842107": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T12:05Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "finding_context:3f4a4249b3cf1bbd1d02": {
         "lane": "finding_context",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "finding_context:ff32c23a5039f37d709c": {
         "lane": "finding_context",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "finding_context:4bf2231df5b31634e814": {
         "lane": "finding_context",
@@ -6312,13 +6370,13 @@
       },
       "curator_seed:28cb47c258b92a8e315f": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "curator_seed:18c3cad0a032bed4e7c2": {
         "lane": "curator_seed",
-        "last_executed_at": "2026-09-09T00:20Z",
-        "visits": 7
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 8
       },
       "official_eu_source:825bbb87e92f1104e12f": {
         "lane": "official_eu_source",
@@ -6542,143 +6600,143 @@
       },
       "institution_source:79fef322313ebcdc69f0": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:6fc943d2e6a02c06873b": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:970caef63e4d7f016434": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:41b8adfc235d62c3d21d": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:b323b9c04d0106b62e90": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:95386e3ac7651a50d929": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:30e64bdd9d5947bc26e3": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:33b6dacf41c5cc9aa744": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:4decc7f679eadb9771ea": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:2e251343d566fd472197": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:dfb1a2ddff6cccccfef1": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:62737cef6c0738c5a2a0": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:e250adbb2023ad9221c7": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:387fef44ec21b0ad3a82": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:93aa8dffd7e60f5f850f": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:5a365c9ae4137567cb82": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:d9b0be326cd22a64cda2": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:2da78f928a6ac7cfed13": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:98d1012fa0fbf0ef21e9": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:d7c6e235bd641fe49936": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:4ddcf1b7bdd57549235c": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:f1266011da01b8774a87": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:2c7f7b07753481139c98": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:99658cc788c0aa36c910": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:e33fdb45d0ef0854b9cc": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:29291df3348f230e2e1f": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:df006bbf072c9d8a228b": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:4af4f47cc5b81f69f6f7": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "openalex_base:d905cb959828ae1f394c": {
         "lane": "openalex_base",
@@ -6752,43 +6810,43 @@
       },
       "dimensional:2878d7fd6de28f9a9edf": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:795ec9f727ad46982953": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:badf0e486c8cf72bcbbe": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:b378ff1e3d2364a4e1f4": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:9fb032e07b7e8e87af74": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:7f30db1d5e056c7a8f35": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:0b69b3bd9d7f7a60bcea": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "dimensional:21ca4cf5ca5e090685b7": {
         "lane": "dimensional",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "evidence_first:14fa0fd13f3735ad0302": {
         "lane": "evidence_first",
@@ -6842,8 +6900,8 @@
       },
       "strand_b_method:a1aa7c2fd46286da58bf": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T13:45Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:4631bb0f972736300838": {
         "lane": "strand_b_method",
@@ -6937,173 +6995,173 @@
       },
       "official_eu_source:05057f5d4db7b079363b": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:45da0c0a17704027cd54": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:0c332b2b0c49bac53399": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:751222077096a97c57ed": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "institution_source:3134d41c7d2fd68fdf50": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:b36d70a5e2cfed05f21f": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:699672f3237c1dd5c50b": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:acc31642b8f416e6e37b": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:00f4e47ed7cbe2e16c3a": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:aada5c7b9f1b84117e51": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:8345451594faac7e494b": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:1b7010e80b06c0f1681b": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:7cf3d20a4d14c2acc23c": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:0ddb944237f89045942d": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:b730bec7b5bd776a40c7": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:ac212da061e499be0f58": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:48e258211f06b752ec0c": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:258e4e3674755d6dc41f": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:3b2adb1e74c829060723": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:55ff8e0292d31a835389": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:db2d823c539e167158e4": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:6e25aee3fcf08db40c51": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:567902a8a57d4f388cfc": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:eef62ae2378260847e22": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:5e53ec040be191aeee33": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:03b229b6a90da75c5d88": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:cb197c1ce609ad05c744": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:a88109bc4868252ee45f": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:089641235dcdc81fc913": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:1a733068602e18cc78a1": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:216f6b02260e82e5d52f": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:a032ced72913d845d6f1": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:808f48a7766091994ed0": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:fee7ba1abd6761284b51": {
         "lane": "institution_source",
-        "last_executed_at": "2026-09-08T22:41Z",
-        "visits": 3
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 4
       },
       "institution_source:b70d1e9f8f249ec4c3ee": {
         "lane": "institution_source",
@@ -7297,8 +7355,8 @@
       },
       "strand_b_method:b84764e4917f425c9614": {
         "lane": "strand_b_method",
-        "last_executed_at": "2026-09-08T14:45Z",
-        "visits": 1
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 2
       },
       "strand_b_method:96a46587e0088a25bf3c": {
         "lane": "strand_b_method",
@@ -7307,48 +7365,48 @@
       },
       "official_eu_source:15b81fbd65b562a8cb39": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:31cc66d994c92719186c": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:0db2c94a68d02d9bf52b": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:a424ebaecb76b4150c60": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:2a0f0301b75d0eba96ba": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T19:26Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:2322caddf4809c0d1864": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:ed91d77e518cbf1d86df": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:eaf40d2df5e1b456eb6d": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "official_eu_source:5295a48a3a7821116d31": {
         "lane": "official_eu_source",
-        "last_executed_at": "2026-09-08T21:40Z",
-        "visits": 2
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 3
       },
       "crossref_base:072bf2195000755a0cac": {
         "lane": "crossref_base",
@@ -7889,6 +7947,76 @@
         "lane": "finding_context",
         "last_executed_at": "2026-09-09T00:20Z",
         "visits": 1
+      },
+      "openalex_base:bf7807205fa4b6fc50e8": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "openalex_base:ecb5edb0ab40ba1d06ab": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "openalex_base:8d167e2057fab4326765": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "openalex_base:c1da1bd35a1f111e900a": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "openalex_base:01b8cc858af4dd09943b": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "openalex_base:d98dd0b5bcefb2da8631": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "openalex_base:b2fed2c3e9b52bd6ab21": {
+        "lane": "openalex_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:c776d76d4c6655e10174": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:facd8bd7ec1c63938ba0": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:231ab5abea4696707079": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:5578356e51abafb717fd": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:31f8bdedc409013f915e": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:466d94c080cdb83698a8": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
+      },
+      "crossref_base:9dbebeae80208963afff": {
+        "lane": "crossref_base",
+        "last_executed_at": "2026-09-09T01:54Z",
+        "visits": 1
       }
     }
   },
@@ -7901,21 +8029,21 @@
     "ab_extended_highest_floor": "2026-03-09",
     "extended_highest_sources_planned": 6,
     "extended_highest_sources_executed": 6,
-    "ab_discovery_from_this_run": "2026-08-25",
+    "ab_discovery_from_this_run": "2026-08-26",
     "frontier_gap_scholarly_from": "2026-03-09",
     "frontier_gap_historical_lookback_months": 0,
-    "openalex_from": "2026-08-25",
-    "crossref_from": "2026-08-25",
-    "crossref_source_first_from": "2026-08-25",
+    "openalex_from": "2026-08-26",
+    "crossref_from": "2026-08-26",
+    "crossref_source_first_from": "2026-08-26",
     "crossref_priority_journal_depth_from": "2026-03-09",
     "incremental_overlap_days": 14,
     "historical_exploration_from": "2026-03-09",
-    "institutions_from": "2026-08-25",
+    "institutions_from": "2026-08-26",
     "rule_fix_new_source_recovery_from": "",
     "rule_fix_new_source_recovery_this_run": false,
     "ab_four_month_backfill_this_run": false,
-    "c_window_start": "2026-07-11T00:20Z",
-    "c_window_end": "2026-09-09T00:20Z",
+    "c_window_start": "2026-07-11T01:54Z",
+    "c_window_end": "2026-09-09T01:54Z",
     "c_discovery_lookback_hours": 1440,
     "c_retention_floor": "2026-07-11",
     "c_retention_days": 60,
@@ -7947,14 +8075,14 @@
     "extended_highest_new_candidates": 0,
     "c_signals": 0,
     "c_signals_total": 1,
-    "c_prefilter_candidates": 34,
+    "c_prefilter_candidates": 26,
     "c_anchored_candidates": 0,
     "b_method_queries_this_scan": 36,
     "foresight_author_followup": {
       "bank": 22,
-      "planned": 10,
-      "executed": 10,
-      "admitted_candidates": 2
+      "planned": 2,
+      "executed": 2,
+      "admitted_candidates": 1
     },
     "weak_signal_evidence_followup": {
       "signals_checked": 0,
@@ -7972,55 +8100,81 @@
     "citation_snowball": {
       "enabled": true,
       "seeds_planned": 20,
-      "seeds_resolved": 11,
-      "references_observed": 318,
-      "shared_references": 0,
-      "anchors_selected": 0,
-      "forward_queries": 0,
+      "seeds_resolved": 18,
+      "references_observed": 506,
+      "shared_references": 2,
+      "anchors_selected": 2,
+      "forward_queries": 2,
       "backward_admitted": 0,
-      "forward_admitted": 0,
-      "admitted_unique": 0,
-      "anchors": [],
-      "status": "no_anchor_pool",
+      "forward_admitted": 4,
+      "admitted_unique": 4,
+      "anchors": [
+        {
+          "openalex_id": "https://openalex.org/W2108795964",
+          "title": "Absorptive Capacity: A New Perspective on Learning and Innovation",
+          "seed_support": 3,
+          "weighted_support": 6.45,
+          "cited_by_count": 35250,
+          "pinned_seed_reference": false,
+          "seed_titles": [
+            "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+            "Exploring the nexus between intangible assets and firm value: The role of innovation resources",
+            "Creative hubs and regional innovation: Intermediary institutions in the mediterranean textile sector"
+          ]
+        },
+        {
+          "openalex_id": "https://openalex.org/W2791808130",
+          "title": "Smart specialization policy in the European Union: relatedness, knowledge complexity and regional diversification",
+          "seed_support": 3,
+          "weighted_support": 6.45,
+          "cited_by_count": 832,
+          "pinned_seed_reference": false,
+          "seed_titles": [
+            "Technological proximity and place-based innovation policy outcomes: university–industry alignment in Italian provinces (2000-2022)",
+            "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+            "Creative hubs and regional innovation: Intermediary institutions in the mediterranean textile sector"
+          ]
+        }
+      ],
+      "status": "completed",
       "rate_limited": false,
       "doi_seeds_planned": 20,
       "resolved_seed_titles": [
-        "Structural limitations and competitiveness challenges of the European Union’s AI model",
-        "Institutional Typologies in European Research Funding: A Cluster Analysis of Organized Participation Patterns",
-        "Integrating Innovation and Entrepreneurial Capacity through the MIT REAP Framework: Evidence from Bulgaria",
-        "The role of the non-academic staff heterogeneity in the performance of European universities",
-        "Mapping Strategic Innovation Capacity and Sustainable Development in the European Union: Evidence from Grey Clustering",
-        "Beyond ethics washing: evaluating the responsiveness of US, EU, and UN AI governance to expert warnings",
-        "Identifying barriers and policy priorities for rare disease research in underrepresented European countries",
-        "A Research Agenda for the Greek Semiconductors Sector Ecosystem: Enabling the Transition from Emerging Capabilities to Strategic Integration",
-        "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
-        "Green manufacturing under geopolitical uncertainty: the role of artificial intelligence, environmental policy, and information in European car makers",
-        "EU scientific diplomacy as a tool of strategic autonomy"
+        "Bioeconomy as a driver of innovation capacity in agricultural regions: international experience and adaptation in Russian regions",
+        "Technological sovereignty in healthcare innovation and production for defence: proposal for an evaluation index to guide European policies",
+        "Lost in Research Infrastructures – Reflections on European Research Infrastructures in the Humanities",
+        "Career Pathways in the Global Labour Market: Non‐European Master's Graduates in Germany, Italy, and the United Kingdom",
+        "Green technological innovation and global energy security: evidence from 61 economies",
+        "Designing a Pan-African Research Infrastructure for Digital Sciences: DIGITAfrica Vision, Blueprint Methodology, and Roadmap",
+        "Technological proximity and place-based innovation policy outcomes: university–industry alignment in Italian provinces (2000-2022)",
+        "Between Weltoffenheit and securitisation: Germany’s partial securitisation of science policy towards the People’s Republic of China",
+        "From Science Diplomacy to Sustainable Agri-Food Innovation: Assessing Multidimensional Contributions of the PRIMA Programme in the Mediterranean Region",
+        "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+        "Exploring the nexus between intangible assets and firm value: The role of innovation resources",
+        "Research and technology infrastructures in the European hydrogen economy: Status, needs and innovation concepts",
+        "China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle",
+        "Creative hubs and regional innovation: Intermediary institutions in the mediterranean textile sector",
+        "Drivers of carbon emissions in G7 economies: Evidence on energy use, globalisation, urbanisation, industrialisation and innovation",
+        "Horizon Europe and regional funds as factors in the development of small and medium-sized enterprises in the EU",
+        "Opportunities for vein‐to‐vein datasets from a blood establishment perspective: Towards a ‘Pan‐European Transfusion Research InfrAstructure ’",
+        "When less data is better: Exploratory privacy-by-design in AI-based human resource analytics based on synthetic data"
       ]
     },
     "journal_depth": {
       "planned": [
-        "R&D Management",
-        "Journal of Technology Transfer",
-        "Industry and Innovation"
+        "Research Policy",
+        "Technological Forecasting and Social Change",
+        "Futures"
       ],
       "executed": [
-        "Industry and Innovation",
-        "Journal of Technology Transfer",
-        "R&D Management"
+        "Futures",
+        "Research Policy",
+        "Technological Forecasting and Social Change"
       ],
       "candidates": 0,
       "from": "2026-03-09"
     },
     "dimensional_queries_this_scan": [
-      "Europe research trusted research due diligence sensitive technology international collaboration",
-      "Horizon Europe third country participation association international scientific cooperation",
-      "EU technological capability patent share publication share competitiveness",
-      "Europe public investment semiconductor quantum AI industrial capacity R&D",
-      "Europe critical technology supplier concentration substitution diversification R&D",
-      "EU research talent scientist engineer attraction retention strategic technology",
-      "Europe pilot line semiconductor research infrastructure build fund expand",
-      "Europe standardisation request semiconductor AI quantum technology competition",
       "EU university research China screening restriction security",
       "Europe science diplomacy research partnership strategic competition",
       "European research innovation scale-up commercialisation gap technology gap",
@@ -8032,14 +8186,22 @@
       "European research collaboration security risk foreign influence",
       "European scientific collaboration China decline restriction reorientation",
       "EU research system capability global competition science technology",
-      "EU innovation industrial capacity subsidy strategic autonomy"
+      "EU innovation industrial capacity subsidy strategic autonomy",
+      "EU critical raw materials research innovation strategic supply chain",
+      "Europe scientific talent relocation research team strategic capability",
+      "EU scientific infrastructure testbed biomanufacturing facility technology capability",
+      "EU regulation standards technology sovereignty research innovation",
+      "European Union research security universities foreign interference knowledge security",
+      "European Union international research collaboration China United States restrictions cooperation",
+      "Europe R&D intensity technology leadership innovation gap scientific capability",
+      "EU strategic technology industrial policy state aid IPCEI research innovation"
     ],
     "dimensional_queries_executed": 8,
     "finding_context_queries_this_scan": [
-      "Europe research innovation speed and safeguards in research funding/programmes common decision object unresolved criteria",
-      "Europe research innovation speed and safeguards in research funding/programmes integrated guidance common balancing rule",
-      "Europe critical technologies research capability dependency",
-      "EU AI quantum semiconductor biotech research competitiveness"
+      "Europe research innovation technological capabilities global competition",
+      "EU R&D capability gap competitiveness dependency",
+      "Horizon Europe international participation research security capability",
+      "FP10 international cooperation research competitiveness Europe"
     ],
     "finding_context_queries_executed": 4,
     "note_a": "This scan added 0 new Strand A item(s). Earlier accepted items remain in the corpus.",
@@ -8086,76 +8248,58 @@
       "ri_foresight_methods"
     ],
     "frontier_empty_cells_before_scan": 0,
-    "rotation_note": "Fresh-window scanning, recurring Matrix-balance targeting and full-window exploration were active together. Full-window exploration rotated through: foresight methods, research security, R&I geopolitics, international cooperation, capacity and dependencies, critical technologies, talent and mobility. The early scholarly slice was low-yield, so another full-window slice was tried: foresight methods, research security, R&I geopolitics, international cooperation, capacity and dependencies, critical technologies, talent and mobility. The completed normal pass still produced three or fewer genuinely new A/B items, so a fresh unexecuted query rotation was forced: talent and mobility, R&I geopolitics, capacity and dependencies, international cooperation, critical technologies, research security. Yield remained at or below 4, so the 4-6 month high-authority source fallback was also attempted.",
+    "rotation_note": "Fresh-window scanning, recurring Matrix-balance targeting and full-window exploration were active together. Full-window exploration rotated through: capacity and dependencies, critical technologies, talent and mobility, foresight methods, research security, R&I geopolitics, international cooperation. The completed normal pass still produced three or fewer genuinely new A/B items, so a fresh unexecuted query rotation was forced: capacity and dependencies, international cooperation, research security, critical technologies, R&I geopolitics, talent and mobility. Yield remained at or below 4, so the 4-6 month high-authority source fallback was also attempted.",
     "historical_exploration": {
       "from": "2026-03-09",
       "openalex_queries": [
-        "new system dynamics methodology strategic foresight scenarios",
-        "Horizon Europe 2028 2034 geopolitical competitiveness research security",
-        "European innovation competitiveness geopolitics",
-        "European science diplomacy geopolitical competition",
-        "European research infrastructure dependency resilience",
-        "EU critical technologies research innovation security",
-        "European scientific talent competition capability",
-        "new agent based modelling method strategic foresight scenarios",
-        "European research security capability resilience technology",
-        "Europe research development geopolitical competition",
-        "European research collaboration sanctions export controls",
         "EU innovation ecosystem scale-up dependency foreign capital",
         "European semiconductor innovation economic security",
         "European research talent international competition strategic technologies",
         "developing robust decision making method strategic foresight policy",
-        "EU research security knowledge security universities"
+        "EU research security knowledge security universities",
+        "European R&D strategic competition technology",
+        "Horizon Europe China cooperation security",
+        "EU technological sovereignty research infrastructure data cloud",
+        "European AI research innovation economic security",
+        "European research careers internationalisation security mobility",
+        "new scenario discovery methodology strategic uncertainty policy",
+        "European universities foreign interference knowledge transfer research security",
+        "European science technology capabilities geopolitics",
+        "European science policy US China competition",
+        "European knowledge transfer technology transfer national security research",
+        "European quantum research strategic autonomy"
       ],
       "crossref_queries": [
-        "open science geopolitics Europe research security",
-        "European research export controls",
-        "FP10 international cooperation Europe",
-        "European technology transfer economic security",
-        "EU biotechnology research economic security policy",
-        "Europe academic brain drain research careers",
-        "developing cross impact analysis foresight methodology",
-        "Horizon Europe research security international cooperation",
-        "dual use research Europe policy",
-        "European science diplomacy China United States",
-        "European R&D investment strategic dependencies",
-        "EU artificial intelligence research strategic autonomy",
-        "European researcher mobility brain drain",
-        "new technology roadmapping methodology emerging technologies foresight"
+        "new technology roadmapping methodology emerging technologies foresight",
+        "higher education geopolitics Europe research security",
+        "global science fragmentation Europe",
+        "research sanctions international collaboration Europe",
+        "EU industrial technology policy research innovation economic security",
+        "European critical technology ecosystems geopolitics",
+        "EU research talent attraction retention",
+        "new foresight evaluation methodology public policy",
+        "European research security international collaboration",
+        "transatlantic science technology cooperation Europe",
+        "research collaboration sanctions Europe science policy",
+        "European research infrastructure strategic autonomy technology",
+        "European semiconductor innovation strategic competition",
+        "European scientific talent outflow inflow"
       ],
       "themes": [
+        "capacity and dependencies",
+        "critical technologies",
+        "talent and mobility",
         "foresight methods",
         "research security",
         "R&I geopolitics",
-        "international cooperation",
-        "capacity and dependencies",
-        "critical technologies",
-        "talent and mobility"
+        "international cooperation"
       ]
     },
     "quiet_scan_rescue": {
-      "attempted": true,
-      "openalex_queries": [
-        "new agent based modelling method strategic foresight scenarios",
-        "European research security capability resilience technology",
-        "Europe research development geopolitical competition",
-        "European research collaboration sanctions export controls"
-      ],
-      "crossref_queries": [
-        "European science diplomacy China United States",
-        "European R&D investment strategic dependencies",
-        "EU artificial intelligence research strategic autonomy",
-        "European researcher mobility brain drain"
-      ],
-      "themes": [
-        "foresight methods",
-        "research security",
-        "R&I geopolitics",
-        "international cooperation",
-        "capacity and dependencies",
-        "critical technologies",
-        "talent and mobility"
-      ]
+      "attempted": false,
+      "openalex_queries": [],
+      "crossref_queries": [],
+      "themes": []
     },
     "low_yield_rotation": {
       "enabled": true,
@@ -8164,69 +8308,69 @@
       "trigger_max_new_ab": 4,
       "triggered": true,
       "reserved_seconds": 210,
-      "actual_seconds_remaining_at_controller": 665,
+      "actual_seconds_remaining_at_controller": 531,
       "new_ab_before": 0,
       "new_ab_after_fresh_rotation": 0,
       "fresh_openalex_queries": [
-        "European research brain drain brain gain",
-        "Europe research innovation technological capabilities global competition",
-        "European research infrastructure strategic autonomy",
-        "international scientific collaboration geopolitics Europe",
-        "open science geopolitics Europe research security",
-        "EU quantum research economic security policy",
-        "Europe academic brain drain research careers",
-        "Europe research innovation openness and security in research funding/programmes single rule resolves conflict"
+        "European technology transfer economic security",
+        "EU US China technology competition",
+        "Horizon Europe research security international cooperation",
+        "EU biotechnology research economic security policy",
+        "European researcher mobility brain drain",
+        "EU R&D capability gap competitiveness dependency",
+        "European R&D investment strategic dependencies",
+        "Horizon Europe international cooperation security"
       ],
       "fresh_crossref_queries": [
-        "European science sanctions research international cooperation",
-        "Europe AI research compute sovereignty research access",
-        "European science technology capabilities geopolitics",
-        "EU clean technology innovation strategic supply chains",
-        "Europe science diplomacy strategic competition research cooperation",
-        "European technological capabilities economic security",
-        "Europe industrial R&D foreign investment screening technology",
-        "EU Framework Programme international cooperation strategic autonomy"
+        "European innovation capacity economic security",
+        "Europe research data infrastructure strategic autonomy",
+        "European deep tech geopolitical competition",
+        "European scientific capacity geopolitical competition",
+        "Europe innovation systems global fragmentation",
+        "European knowledge transfer strategic competition",
+        "European standards technology geopolitics innovation",
+        "EU research innovation geopolitics"
       ],
       "fresh_institution_sources": [
-        "espas.eu",
-        "cepr.org",
-        "merics.org",
-        "swp-berlin.org",
-        "ifri.org",
-        "iss.europa.eu",
-        "clingendael.org",
-        "chathamhouse.org",
-        "isi.fraunhofer.de",
-        "rathenau.nl",
-        "cwts.nl",
-        "nesta.org.uk",
-        "oecd.org",
-        "rand.org",
-        "csis.org",
-        "brookings.edu"
+        "carnegieendowment.org",
+        "cset.georgetown.edu",
+        "aspi.org.au",
+        "nber.org",
+        "eeas.europa.eu",
+        "eit.europa.eu",
+        "eua.eu",
+        "scienceeurope.org",
+        "leru.org",
+        "earto.eu",
+        "cer.eu",
+        "epc.eu",
+        "dgap.org",
+        "cidob.org",
+        "institutdelors.eu",
+        "bertelsmann-stiftung.de"
       ],
       "fresh_themes": [
-        "talent and mobility",
-        "R&I geopolitics",
         "capacity and dependencies",
         "international cooperation",
+        "research security",
         "critical technologies",
-        "research security"
+        "R&I geopolitics",
+        "talent and mobility"
       ],
       "extended_fallback_attempted": true,
       "extended_openalex_queries": [
-        "EU transatlantic science technology dependence competitiveness",
-        "technology transfer controls European research",
-        "EU research technology sanctions licensing strategic dependency"
+        "EU research security foreign interference",
+        "critical technologies European economic security",
+        "scientific talent mobility Europe economic security"
       ],
       "extended_crossref_queries": [
-        "foreign investment screening research technology Europe",
-        "EU research infrastructure critical supply chains",
-        "European scientific decoupling research collaboration China"
+        "European semiconductor policy research pilot lines strategic autonomy",
+        "outbound investment technology research Europe policy",
+        "EU research instrumentation supply chain security"
       ],
       "extended_institution_sources": [
-        "policy.trade.ec.europa.eu",
-        "single-market-economy.ec.europa.eu"
+        "energy.ec.europa.eu",
+        "climate.ec.europa.eu"
       ],
       "extended_highest_admitted": 0,
       "openalex_rate_limited_before_controller": false,
@@ -8236,7 +8380,7 @@
         "manual_exact_urls": 0,
         "curator_exact_candidates": 0,
         "priority_people_candidates": 0,
-        "citation_snowball_candidates": 0,
+        "citation_snowball_candidates": 4,
         "new_ab_after": 0
       },
       "fresh_waves": [
@@ -8251,11 +8395,11 @@
           "institution_sources_planned": 8,
           "institution_sources_executed": 8,
           "themes": [
-            "talent and mobility",
-            "R&I geopolitics",
             "capacity and dependencies",
             "international cooperation",
-            "critical technologies"
+            "research security",
+            "critical technologies",
+            "R&I geopolitics"
           ]
         },
         {
@@ -8269,12 +8413,10 @@
           "institution_sources_planned": 8,
           "institution_sources_executed": 8,
           "themes": [
-            "research security",
-            "critical technologies",
             "talent and mobility",
             "R&I geopolitics",
-            "international cooperation",
-            "capacity and dependencies"
+            "capacity and dependencies",
+            "international cooperation"
           ]
         }
       ],
@@ -8297,47 +8439,47 @@
       "admitted_candidates": 0
     },
     "rejection_funnel": {
-      "raw_records_seen": 31594,
-      "gate_evaluated": 5188,
-      "enough_text_to_judge": 5096,
-      "direct_eu_scope_remaining": 795,
-      "central_eu_ri_scope_remaining": 98,
-      "substantive_ri_remaining": 93,
-      "strategic_context_remaining": 35,
+      "raw_records_seen": 27659,
+      "gate_evaluated": 4308,
+      "enough_text_to_judge": 4231,
+      "direct_eu_scope_remaining": 660,
+      "central_eu_ri_scope_remaining": 72,
+      "substantive_ri_remaining": 65,
+      "strategic_context_remaining": 13,
       "strategic_context_gate_active": false,
       "high_confidence_eu_ri_system_route_active": true,
       "admission_model": "central European/EU R&I subject + substantive R&I + either source-supported strategic mechanism or bounded Tier-1/2 major EU-R&I-system relevance",
-      "gate_passed_before_cross_source_dedupe": 35,
-      "unique_gate_candidates": 14,
-      "duplicates_or_known_removed_after_gate": 21,
+      "gate_passed_before_cross_source_dedupe": 13,
+      "unique_gate_candidates": 6,
+      "duplicates_or_known_removed_after_gate": 7,
       "genuinely_new_unique_ab": 0,
-      "missing_text_deferred": 92,
-      "rejected_no_direct_eu": 4301,
-      "rejected_incidental_eu_ri_scope": 697,
-      "rejected_no_ri": 5,
-      "rejected_no_strategic_context": 58,
+      "missing_text_deferred": 77,
+      "rejected_no_direct_eu": 3571,
+      "rejected_incidental_eu_ri_scope": 588,
+      "rejected_no_ri": 7,
+      "rejected_no_strategic_context": 52,
       "rejected_other_aboutness": 0,
       "pre_gate_filters": {
-        "non_english": 1214,
-        "institution_no_date": 1030,
-        "institution_fetch_or_nonhtml": 84,
-        "institution_before_floor": 785
+        "non_english": 1104,
+        "institution_no_date": 733,
+        "institution_fetch_or_nonhtml": 98,
+        "institution_before_floor": 495
       },
       "metadata_text_rescue": {
-        "queued": 2425,
-        "attempted": 428,
-        "text_recovered": 72,
+        "queued": 2144,
+        "attempted": 317,
+        "text_recovered": 67,
         "admitted_after_recovery": 0
       },
-      "institution_source_adapter_jobs": 397
+      "institution_source_adapter_jobs": 325
     },
     "full_rescue_run_recommended": false,
     "matrix_first_deepening": {
       "attempted": true,
-      "waves": 2,
-      "gap_queries_executed": 23,
+      "waves": 3,
+      "gap_queries_executed": 42,
       "openalex_candidates": 0,
-      "crossref_candidates": 0,
+      "crossref_candidates": 1,
       "weak_signal_followup_candidates": 0,
       "empty_cells_start": 0,
       "empty_cells_after_current_depth": 0,
@@ -8346,23 +8488,8 @@
       "stubborn_recovery_queries_executed": 0,
       "stubborn_recovery_candidates": 0,
       "zero_yield_stop_waves": 2,
-      "stopped_after_repeated_zero_yield": true,
+      "stopped_after_repeated_zero_yield": false,
       "undercovered_cells_after_current_depth": 13,
-      "zero_yield_signature": [
-        "rules-D",
-        "conversion-D",
-        "rules-B",
-        "knowledge-D",
-        "conversion-B",
-        "rules-C",
-        "infrastructure-B",
-        "rules-A",
-        "infrastructure-D",
-        "infrastructure-C",
-        "knowledge-C",
-        "knowledge-B",
-        "conversion-C"
-      ],
       "empty_cells_published": 0,
       "published_empty_cells": [],
       "published_qualifying": 99,
@@ -8387,15 +8514,15 @@
     "full_budget_continuation": {
       "enabled": true,
       "attempted": true,
-      "waves": 8,
-      "crossref_queries_executed": 63,
-      "openalex_queries_executed": 61,
-      "institution_sources_executed": 80,
-      "candidates": 1,
-      "news_candidates": 10,
+      "waves": 3,
+      "crossref_queries_executed": 23,
+      "openalex_queries_executed": 21,
+      "institution_sources_executed": 30,
+      "candidates": 0,
+      "news_candidates": 2,
       "cooldown_seconds": 0.0,
-      "seconds_remaining_at_start": 420,
-      "seconds_remaining_at_end": 34
+      "seconds_remaining_at_start": 187,
+      "seconds_remaining_at_end": 31
     }
   },
   "active_core_profile_version": "v17.21.0-cumulative-public-ab",
@@ -10100,15 +10227,16 @@
         "citation_snowball_forward"
       ],
       "citation_snowball": {
-        "openalex_id": "https://openalex.org/W4383342899",
-        "title": "Transforming Europe? The EU's industrial policy and geopolitical turn",
-        "seed_support": 2,
-        "weighted_support": 4.3,
-        "cited_by_count": 219,
+        "openalex_id": "https://openalex.org/W2791808130",
+        "title": "Smart specialization policy in the European Union: relatedness, knowledge complexity and regional diversification",
+        "seed_support": 3,
+        "weighted_support": 6.45,
+        "cited_by_count": 832,
         "pinned_seed_reference": false,
         "seed_titles": [
-          "China and Limits to the European Union's Geoeconomic Turn",
-          "Characterizing collaboration dynamics in a social innovation ecosystem: exploring horizon Europe as a regional booster"
+          "Technological proximity and place-based innovation policy outcomes: university–industry alignment in Italian provinces (2000-2022)",
+          "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+          "Creative hubs and regional innovation: Intermediary institutions in the mediterranean textile sector"
         ],
         "direction": "forward_from_shared_reference"
       },
@@ -14934,15 +15062,16 @@
         "citation_snowball_forward"
       ],
       "citation_snowball": {
-        "openalex_id": "https://openalex.org/W2129208071",
-        "title": "Proximity and Innovation: A Critical Assessment",
-        "seed_support": 2,
-        "weighted_support": 4.3,
-        "cited_by_count": 5992,
+        "openalex_id": "https://openalex.org/W2791808130",
+        "title": "Smart specialization policy in the European Union: relatedness, knowledge complexity and regional diversification",
+        "seed_support": 3,
+        "weighted_support": 6.45,
+        "cited_by_count": 832,
         "pinned_seed_reference": false,
         "seed_titles": [
-          "Knowledge transfer interactions in regional innovation ecosystems: exploring the third mission of universities of applied sciences in the Dutch healthcare domain",
-          "Closed Clubs and Inclusive Interaction: Acquiring Digitalization Knowledge Through Learning‐by‐Interacting in a Peripheral Innovation System"
+          "Technological proximity and place-based innovation policy outcomes: university–industry alignment in Italian provinces (2000-2022)",
+          "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+          "Creative hubs and regional innovation: Intermediary institutions in the mediterranean textile sector"
         ],
         "direction": "forward_from_shared_reference"
       },
@@ -15071,16 +15200,16 @@
         "citation_snowball_forward"
       ],
       "citation_snowball": {
-        "openalex_id": "https://openalex.org/W2095197847",
-        "title": "The dynamics of innovation: from National Systems and “Mode 2” to a Triple Helix of university–industry–government relations",
+        "openalex_id": "https://openalex.org/W2791808130",
+        "title": "Smart specialization policy in the European Union: relatedness, knowledge complexity and regional diversification",
         "seed_support": 3,
         "weighted_support": 6.45,
-        "cited_by_count": 8498,
+        "cited_by_count": 832,
         "pinned_seed_reference": false,
         "seed_titles": [
-          "International collaboration in research: insights from pharmaceutical multinationals",
-          "Knowledge transfer interactions in regional innovation ecosystems: exploring the third mission of universities of applied sciences in the Dutch healthcare domain",
-          "The Interplay of Policy and Practice on Europeanisation in the Context of the European Universities Initiative"
+          "Technological proximity and place-based innovation policy outcomes: university–industry alignment in Italian provinces (2000-2022)",
+          "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+          "Creative hubs and regional innovation: Intermediary institutions in the mediterranean textile sector"
         ],
         "direction": "forward_from_shared_reference"
       },
@@ -24143,14 +24272,14 @@
   ],
   "external_shock_watch": [],
   "stats": {
-    "openalex_admitted_before_dedupe": 14,
+    "openalex_admitted_before_dedupe": 7,
     "openalex_public_anonymous": false,
     "openalex_api_key_configured": true,
     "openalex_keyless_requests_used": 0,
     "curator_candidate_tests_attempted": 3,
     "curator_candidate_tests_admitted": 0,
     "curator_candidate_tests_matrix_placed": 0,
-    "crossref_admitted_before_dedupe": 1,
+    "crossref_admitted_before_dedupe": 3,
     "crossref_public_anonymous": true,
     "institutional_admitted_before_dedupe": 1,
     "primary_evidence_target_status": {
@@ -24185,29 +24314,29 @@
     "journal_depth_journals_executed": 3,
     "journal_depth_candidates": 0,
     "openalex_queries_this_run": 60,
-    "openalex_queries_executed": 154,
+    "openalex_queries_executed": 128,
     "openalex_base_queries_executed": 7,
     "openalex_exploration_queries_this_run": 16,
     "dimensional_queries_this_run": 20,
     "dimensional_queries_executed": 8,
     "finding_context_queries_this_run": 4,
     "finding_context_queries_executed": 4,
-    "openalex_exploration_queries_executed": 11,
+    "openalex_exploration_queries_executed": 7,
     "openalex_missing_abstract_enrichment_attempted": 16,
-    "citation_snowball_seeds_resolved": 11,
-    "citation_snowball_shared_references": 0,
-    "citation_snowball_anchors_selected": 0,
-    "citation_snowball_forward_queries": 0,
-    "citation_snowball_admitted": 0,
+    "citation_snowball_seeds_resolved": 18,
+    "citation_snowball_shared_references": 2,
+    "citation_snowball_anchors_selected": 2,
+    "citation_snowball_forward_queries": 2,
+    "citation_snowball_admitted": 4,
     "crossref_broad_queries_this_run": 64,
-    "crossref_broad_queries_executed": 165,
-    "crossref_base_queries_executed": 8,
+    "crossref_broad_queries_executed": 138,
+    "crossref_base_queries_executed": 7,
     "crossref_exploration_queries_this_run": 14,
-    "crossref_exploration_queries_executed": 13,
-    "quiet_scan_rescue_attempted": true,
-    "quiet_scan_rescue_queries": 8,
+    "crossref_exploration_queries_executed": 7,
+    "quiet_scan_rescue_attempted": false,
+    "quiet_scan_rescue_queries": 0,
     "low_yield_rotation_triggered": true,
-    "low_yield_actual_seconds_remaining_at_controller": 665,
+    "low_yield_actual_seconds_remaining_at_controller": 531,
     "low_yield_new_ab_before": 0,
     "low_yield_new_ab_after_fresh_rotation": 0,
     "low_yield_new_ab_after_extended_fallback": 0,
@@ -24229,44 +24358,59 @@
     "crossref_source_journals_executed": 18,
     "crossref_underrepresented_journal_pool": 163,
     "crossref_underrepresented_journals_planned": 8,
-    "crossref_underrepresented_journals_executed": 5,
+    "crossref_underrepresented_journals_executed": 6,
     "crossref_priority_task_journals_planned": 16,
     "crossref_priority_task_journals_executed": 16,
     "recall_backfill_this_run": false,
-    "crossref_missing_abstract_enrichment_attempted": 334,
-    "crossref_openalex_doi_enrichment_attempted": 16,
+    "crossref_missing_abstract_enrichment_attempted": 262,
+    "crossref_openalex_doi_enrichment_attempted": 0,
     "source_metadata_health": {
-      "Higher Education": {
-        "records_seen": 0,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 0,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": null,
-        "judgeable_after_enrichment": 0,
-        "health_is_diagnostic_only": true
-      },
-      "Cambridge Journal of Regions, Economy and Society": {
-        "records_seen": 0,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 0,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": null,
-        "judgeable_after_enrichment": 0,
-        "health_is_diagnostic_only": true
-      },
       "Research Policy": {
+        "records_seen": 0,
+        "crossref_abstract_present": 0,
+        "crossref_abstract_missing": 0,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": null,
+        "judgeable_after_enrichment": 0,
+        "health_is_diagnostic_only": true
+      },
+      "Telecommunications Policy": {
+        "records_seen": 0,
+        "crossref_abstract_present": 0,
+        "crossref_abstract_missing": 0,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": null,
+        "judgeable_after_enrichment": 0,
+        "health_is_diagnostic_only": true
+      },
+      "Scientometrics": {
+        "records_seen": 18,
+        "crossref_abstract_present": 9,
+        "crossref_abstract_missing": 9,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 3,
+        "doi_landing_enrichment_recovered": 3,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": 50.0,
+        "judgeable_after_enrichment": 12,
+        "health_is_diagnostic_only": true
+      },
+      "Issues in Science and Technology": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
         "crossref_abstract_missing": 0,
@@ -24296,6 +24440,21 @@
         "judgeable_after_enrichment": 0,
         "health_is_diagnostic_only": true
       },
+      "Information Economics and Policy": {
+        "records_seen": 0,
+        "crossref_abstract_present": 0,
+        "crossref_abstract_missing": 0,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": null,
+        "judgeable_after_enrichment": 0,
+        "health_is_diagnostic_only": true
+      },
       "Research Evaluation": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
@@ -24311,7 +24470,7 @@
         "judgeable_after_enrichment": 0,
         "health_is_diagnostic_only": true
       },
-      "Energy Research & Social Science": {
+      "Studies in Higher Education": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
         "crossref_abstract_missing": 0,
@@ -24326,82 +24485,52 @@
         "judgeable_after_enrichment": 0,
         "health_is_diagnostic_only": true
       },
-      "Technovation": {
-        "records_seen": 21,
+      "Journal of Cyber Policy": {
+        "records_seen": 0,
         "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 21,
+        "crossref_abstract_missing": 0,
         "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": true,
-        "openalex_doi_enrichment_attempted": 8,
-        "openalex_doi_enrichment_recovered": 2,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": null,
+        "judgeable_after_enrichment": 0,
+        "health_is_diagnostic_only": true
+      },
+      "R&D Management": {
+        "records_seen": 0,
+        "crossref_abstract_present": 0,
+        "crossref_abstract_missing": 0,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": null,
+        "judgeable_after_enrichment": 0,
+        "health_is_diagnostic_only": true
+      },
+      "New Political Economy": {
+        "records_seen": 1,
+        "crossref_abstract_present": 0,
+        "crossref_abstract_missing": 1,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
         "doi_landing_enrichment_attempted": 0,
         "doi_landing_enrichment_recovered": 0,
         "gate_candidates_emitted": 0,
         "crossref_abstract_coverage_pct": 0.0,
-        "judgeable_after_enrichment": 2,
-        "health_is_diagnostic_only": true
-      },
-      "Technological Forecasting and Social Change": {
-        "records_seen": 0,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 0,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": null,
         "judgeable_after_enrichment": 0,
         "health_is_diagnostic_only": true
       },
-      "Futures": {
-        "records_seen": 20,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 20,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": true,
-        "openalex_doi_enrichment_attempted": 8,
-        "openalex_doi_enrichment_recovered": 3,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": 0.0,
-        "judgeable_after_enrichment": 3,
-        "health_is_diagnostic_only": true
-      },
-      "Energy Policy": {
-        "records_seen": 0,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 0,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": null,
-        "judgeable_after_enrichment": 0,
-        "health_is_diagnostic_only": true
-      },
-      "Journal of European Public Policy": {
-        "records_seen": 0,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 0,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": null,
-        "judgeable_after_enrichment": 0,
-        "health_is_diagnostic_only": true
-      },
-      "Foresight": {
+      "Digital Policy, Regulation and Governance": {
         "records_seen": 1,
         "crossref_abstract_present": 1,
         "crossref_abstract_missing": 0,
@@ -24416,37 +24545,7 @@
         "judgeable_after_enrichment": 1,
         "health_is_diagnostic_only": true
       },
-      "foresight": {
-        "records_seen": 0,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 0,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": null,
-        "judgeable_after_enrichment": 0,
-        "health_is_diagnostic_only": true
-      },
-      "Climate Policy": {
-        "records_seen": 2,
-        "crossref_abstract_present": 0,
-        "crossref_abstract_missing": 2,
-        "known_or_duplicate_skipped": 0,
-        "metadata_sparse_detected": false,
-        "openalex_doi_enrichment_attempted": 0,
-        "openalex_doi_enrichment_recovered": 0,
-        "doi_landing_enrichment_attempted": 0,
-        "doi_landing_enrichment_recovered": 0,
-        "gate_candidates_emitted": 0,
-        "crossref_abstract_coverage_pct": 0.0,
-        "judgeable_after_enrichment": 0,
-        "health_is_diagnostic_only": true
-      },
-      "Review of International Political Economy": {
+      "Science, Technology, & Human Values": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
         "crossref_abstract_missing": 0,
@@ -24462,8 +24561,8 @@
         "health_is_diagnostic_only": true
       },
       "Minerva": {
-        "records_seen": 3,
-        "crossref_abstract_present": 3,
+        "records_seen": 2,
+        "crossref_abstract_present": 2,
         "crossref_abstract_missing": 0,
         "known_or_duplicate_skipped": 0,
         "metadata_sparse_detected": false,
@@ -24473,10 +24572,25 @@
         "doi_landing_enrichment_recovered": 0,
         "gate_candidates_emitted": 0,
         "crossref_abstract_coverage_pct": 100.0,
-        "judgeable_after_enrichment": 3,
+        "judgeable_after_enrichment": 2,
         "health_is_diagnostic_only": true
       },
-      "Space Policy": {
+      "AI & Society": {
+        "records_seen": 2,
+        "crossref_abstract_present": 1,
+        "crossref_abstract_missing": 1,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": 50.0,
+        "judgeable_after_enrichment": 1,
+        "health_is_diagnostic_only": true
+      },
+      "AI & SOCIETY": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
         "crossref_abstract_missing": 0,
@@ -24491,7 +24605,7 @@
         "judgeable_after_enrichment": 0,
         "health_is_diagnostic_only": true
       },
-      "Government Information Quarterly": {
+      "Science Technology and Human Values": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
         "crossref_abstract_missing": 0,
@@ -24506,7 +24620,22 @@
         "judgeable_after_enrichment": 0,
         "health_is_diagnostic_only": true
       },
-      "Technology in Society": {
+      "Big Data & Society": {
+        "records_seen": 0,
+        "crossref_abstract_present": 0,
+        "crossref_abstract_missing": 0,
+        "known_or_duplicate_skipped": 0,
+        "metadata_sparse_detected": false,
+        "openalex_doi_enrichment_attempted": 0,
+        "openalex_doi_enrichment_recovered": 0,
+        "doi_landing_enrichment_attempted": 0,
+        "doi_landing_enrichment_recovered": 0,
+        "gate_candidates_emitted": 0,
+        "crossref_abstract_coverage_pct": null,
+        "judgeable_after_enrichment": 0,
+        "health_is_diagnostic_only": true
+      },
+      "European Security": {
         "records_seen": 0,
         "crossref_abstract_present": 0,
         "crossref_abstract_missing": 0,
@@ -24525,17 +24654,17 @@
     "source_health_policy": "Diagnostic only: source quality is never inferred from admission yield or abstract coverage, and observed yield never prunes a configured source.",
     "source_yield_pruning_enabled": false,
     "b_method_queries_executed": 7,
-    "institution_sources_this_run": 96,
+    "institution_sources_this_run": 94,
     "extended_highest_sources_planned": 6,
     "extended_highest_sources_executed": 6,
     "extended_highest_candidates_admitted": 0,
     "institution_rotating_sources_executed": 58,
     "institution_source_adapter_sources_planned": 12,
     "institution_source_adapter_sources_executed": 12,
-    "institution_source_adapter_jobs_queued": 397,
-    "metadata_text_rescue_queued": 2425,
-    "metadata_text_rescue_attempted": 428,
-    "metadata_text_rescue_recovered": 72,
+    "institution_source_adapter_jobs_queued": 325,
+    "metadata_text_rescue_queued": 2144,
+    "metadata_text_rescue_attempted": 317,
+    "metadata_text_rescue_recovered": 67,
     "metadata_text_rescue_admitted": 0,
     "full_rescue_run_recommended": false,
     "rule_fix_new_source_recovery_attempted": false,
@@ -24546,7 +24675,7 @@
     "known_ab_identities_loaded": 335,
     "known_ab_links_loaded": 330,
     "known_signal_identities_loaded": 1,
-    "institution_page_fingerprints_cached": 2971,
+    "institution_page_fingerprints_cached": 2993,
     "institution_sources_configured": 215,
     "major_scholarly_publishers_tracked": 16,
     "priority_journals_tracked": 171,
@@ -24556,15 +24685,19 @@
       "Science",
       "New Political Economy",
       "Studies in Higher Education",
-      "Nature Machine Intelligence",
-      "Nature Biotechnology"
+      "Nature Communications",
+      "Science Advances",
+      "Proceedings of the National Academy of Sciences",
+      "Nature Human Behaviour"
     ],
     "direct_top_journals_executed": [
       "Nature",
-      "Nature Biotechnology",
-      "Nature Machine Intelligence",
+      "Nature Communications",
+      "Nature Human Behaviour",
       "New Political Economy",
+      "Proceedings of the National Academy of Sciences",
       "Science",
+      "Science Advances",
       "Studies in Higher Education"
     ],
     "direct_top_journal_ab_candidates": 0,
@@ -24580,31 +24713,41 @@
         "c_candidates": 0,
         "status": "warning"
       },
+      "Science Advances": {
+        "ab_candidates": 0,
+        "c_candidates": 0,
+        "status": "warning"
+      },
       "Science": {
         "ab_candidates": 0,
         "c_candidates": 0,
         "status": "warning"
+      },
+      "Proceedings of the National Academy of Sciences": {
+        "ab_candidates": 0,
+        "c_candidates": 0,
+        "status": "warning"
+      },
+      "Nature Communications": {
+        "ab_candidates": 0,
+        "c_candidates": 0,
+        "status": "ok"
       },
       "Nature": {
         "ab_candidates": 0,
         "c_candidates": 0,
         "status": "ok"
       },
-      "Nature Machine Intelligence": {
-        "ab_candidates": 0,
-        "c_candidates": 0,
-        "status": "ok"
-      },
-      "Nature Biotechnology": {
+      "Nature Human Behaviour": {
         "ab_candidates": 0,
         "c_candidates": 0,
         "status": "ok"
       }
     },
     "foresight_author_bank": 22,
-    "foresight_author_planned": 10,
-    "foresight_author_executed": 10,
-    "foresight_author_candidates": 2,
+    "foresight_author_planned": 2,
+    "foresight_author_executed": 2,
+    "foresight_author_candidates": 1,
     "weak_signal_evidence_signals_checked": 0,
     "weak_signal_evidence_links_examined": 0,
     "weak_signal_evidence_direct_ab": 0,
@@ -24612,8 +24755,8 @@
     "weak_signal_evidence_scholarly_ab": 0,
     "source_expansion_backfill": false,
     "backfill_complete": true,
-    "unique_ab_candidates_before_scan_limit": 14,
-    "news_candidates_current_window": 34,
+    "unique_ab_candidates_before_scan_limit": 6,
+    "news_candidates_current_window": 26,
     "news_admitted_current_window": 0,
     "news_lookback_hours": 1440,
     "news_sources_configured": 35,
@@ -24630,25 +24773,25 @@
     "frontier_gap_targets_this_run": 13,
     "frontier_gap_query_cursor_cells": 31,
     "frontier_gap_source_cursor_cells": 15,
-    "openalex_depth_queries_tracked": 354,
-    "crossref_broad_depth_queries_tracked": 327,
-    "openalex_exploration_depth_queries_tracked": 119,
+    "openalex_depth_queries_tracked": 368,
+    "crossref_broad_depth_queries_tracked": 335,
+    "openalex_exploration_depth_queries_tracked": 126,
     "crossref_exploration_depth_queries_tracked": 0,
     "crossref_priority_depth_tasks_tracked": 175,
     "frontier_qualifying_before_scan": 99,
     "frontier_empty_cells_before_scan": 0,
     "frontier_empty_cells_targeted": 0,
-    "frontier_gap_depth_waves": 2,
-    "frontier_gap_depth_queries_executed": 23,
-    "full_budget_continuation_waves": 8,
-    "full_budget_continuation_crossref_queries": 63,
-    "full_budget_continuation_openalex_queries": 61,
-    "full_budget_continuation_institution_sources": 80,
-    "full_budget_continuation_candidates": 1,
-    "full_budget_continuation_news_candidates": 10,
-    "full_budget_seconds_remaining_at_end": 34,
+    "frontier_gap_depth_waves": 3,
+    "frontier_gap_depth_queries_executed": 42,
+    "full_budget_continuation_waves": 3,
+    "full_budget_continuation_crossref_queries": 23,
+    "full_budget_continuation_openalex_queries": 21,
+    "full_budget_continuation_institution_sources": 30,
+    "full_budget_continuation_candidates": 0,
+    "full_budget_continuation_news_candidates": 2,
+    "full_budget_seconds_remaining_at_end": 31,
     "weak_signal_followup_candidates": 0,
-    "institution_signal_candidates": 2,
+    "institution_signal_candidates": 0,
     "precursor_watch_total": 1,
     "precursor_watch_new_this_run": 0,
     "frontier_stubborn_recovery_candidates": 0,
@@ -24672,99 +24815,100 @@
     "inherited_corpus_audit_stored_pass": 0,
     "inherited_corpus_audit_refreshed_pass": 0,
     "inherited_corpus_audit_refresh_unavailable": 0,
-    "source_warnings": 83,
-    "transport_failure_warnings": 9,
+    "source_warnings": 67,
+    "transport_failure_warnings": 1,
     "scan_budget_seconds": 1440,
     "budget_reached": false,
     "partial_stage_budget_reached": true,
-    "runtime_seconds": 1426.5,
+    "runtime_seconds": 1431.7,
     "admission_diagnostics": {
-      "crossref_a_route_triangulated-strategic-context": 1,
-      "crossref_admitted_gate": 5,
-      "crossref_defer_insufficient_text": 54,
-      "crossref_evaluated": 990,
-      "crossref_metadata_missing_text": 7086,
-      "crossref_metadata_rescue_attempted": 342,
-      "crossref_metadata_rescue_queued": 2307,
-      "crossref_metadata_rescue_recovered": 52,
-      "crossref_openalex_doi_enrichment_attempted": 16,
-      "crossref_openalex_doi_enrichment_recovered": 5,
-      "crossref_raw_records": 16443,
-      "crossref_reject_incidental_eu_ri_scope": 215,
-      "crossref_reject_no_direct_eu": 699,
-      "crossref_reject_no_strategic_context": 17,
-      "crossref_reject_non_english": 232,
-      "final_reject_evidence_worthiness": 2,
+      "crossref_a_route_triangulated-strategic-context": 3,
+      "crossref_admitted_gate": 4,
+      "crossref_defer_insufficient_text": 56,
+      "crossref_evaluated": 922,
+      "crossref_metadata_missing_text": 6059,
+      "crossref_metadata_rescue_attempted": 271,
+      "crossref_metadata_rescue_queued": 2066,
+      "crossref_metadata_rescue_recovered": 57,
+      "crossref_raw_records": 14968,
+      "crossref_reject_incidental_eu_ri_scope": 194,
+      "crossref_reject_no_direct_eu": 651,
+      "crossref_reject_no_ri": 1,
+      "crossref_reject_no_strategic_context": 16,
+      "crossref_reject_non_english": 195,
+      "final_reject_evidence_worthiness": 3,
       "institution_a_route_explicit-geopolitics": 1,
-      "institution_adapter_jobs": 397,
+      "institution_adapter_jobs": 325,
       "institution_admitted_gate": 1,
-      "institution_date_hint_sitemap_lastmod_not_publication": 564,
-      "institution_evaluated": 14,
-      "institution_pages_queued": 2254,
-      "institution_reject_before_floor": 785,
-      "institution_reject_document_exclusion": 5,
-      "institution_reject_fetch_or_nonhtml": 84,
-      "institution_reject_future_date": 88,
-      "institution_reject_incidental_eu_ri_scope": 8,
-      "institution_reject_linked_pdf_before_floor": 1,
-      "institution_reject_listing_container": 144,
-      "institution_reject_mismatched_linked_pdf": 1,
-      "institution_reject_no_date": 1030,
+      "institution_date_hint_sitemap_lastmod_not_publication": 349,
+      "institution_evaluated": 15,
+      "institution_pages_queued": 1613,
+      "institution_reject_before_floor": 495,
+      "institution_reject_document_exclusion": 3,
+      "institution_reject_fetch_or_nonhtml": 98,
+      "institution_reject_future_date": 47,
+      "institution_reject_incidental_eu_ri_scope": 7,
+      "institution_reject_linked_pdf_before_floor": 2,
+      "institution_reject_listing_container": 97,
+      "institution_reject_no_date": 733,
       "institution_reject_no_direct_eu": 5,
-      "institution_reject_no_title": 62,
-      "institution_reject_non_english": 40,
-      "institution_reject_too_short": 6,
-      "institution_sources_with_candidate_pages": 151,
-      "openalex_a_route_explicit-geopolitics": 20,
+      "institution_reject_no_ri": 1,
+      "institution_reject_no_strategic_context": 1,
+      "institution_reject_no_title": 16,
+      "institution_reject_non_english": 18,
+      "institution_reject_too_short": 1,
+      "institution_sources_with_candidate_pages": 105,
+      "openalex_a_route_eu-ri-system-relevance": 1,
+      "openalex_a_route_explicit-geopolitics": 1,
       "openalex_a_route_research-evidence": 4,
-      "openalex_admitted_gate": 29,
-      "openalex_defer_insufficient_text": 38,
-      "openalex_evaluated": 4184,
-      "openalex_metadata_missing_text": 675,
-      "openalex_metadata_rescue_attempted": 86,
-      "openalex_metadata_rescue_queued": 118,
-      "openalex_metadata_rescue_recovered": 20,
-      "openalex_raw_records": 12897,
-      "openalex_reject_incidental_eu_ri_scope": 474,
-      "openalex_reject_no_direct_eu": 3597,
+      "openalex_admitted_gate": 8,
+      "openalex_defer_insufficient_text": 21,
+      "openalex_evaluated": 3371,
+      "openalex_metadata_missing_text": 561,
+      "openalex_metadata_rescue_attempted": 46,
+      "openalex_metadata_rescue_queued": 78,
+      "openalex_metadata_rescue_recovered": 10,
+      "openalex_raw_records": 11078,
+      "openalex_reject_incidental_eu_ri_scope": 387,
+      "openalex_reject_no_direct_eu": 2915,
       "openalex_reject_no_ri": 5,
-      "openalex_reject_no_strategic_context": 41,
-      "openalex_reject_non_english": 942
+      "openalex_reject_no_strategic_context": 35,
+      "openalex_reject_non_english": 891
     },
     "admission_rejection_funnel": {
-      "raw_records_seen": 31594,
-      "gate_evaluated": 5188,
-      "enough_text_to_judge": 5096,
-      "direct_eu_scope_remaining": 795,
-      "central_eu_ri_scope_remaining": 98,
-      "substantive_ri_remaining": 93,
-      "strategic_context_remaining": 35,
+      "raw_records_seen": 27659,
+      "gate_evaluated": 4308,
+      "enough_text_to_judge": 4231,
+      "direct_eu_scope_remaining": 660,
+      "central_eu_ri_scope_remaining": 72,
+      "substantive_ri_remaining": 65,
+      "strategic_context_remaining": 13,
       "strategic_context_gate_active": false,
       "high_confidence_eu_ri_system_route_active": true,
       "admission_model": "central European/EU R&I subject + substantive R&I + either source-supported strategic mechanism or bounded Tier-1/2 major EU-R&I-system relevance",
-      "gate_passed_before_cross_source_dedupe": 35,
-      "unique_gate_candidates": 14,
-      "duplicates_or_known_removed_after_gate": 21,
+      "gate_passed_before_cross_source_dedupe": 13,
+      "unique_gate_candidates": 6,
+      "duplicates_or_known_removed_after_gate": 7,
       "genuinely_new_unique_ab": 0,
-      "missing_text_deferred": 92,
-      "rejected_no_direct_eu": 4301,
-      "rejected_incidental_eu_ri_scope": 697,
-      "rejected_no_ri": 5,
-      "rejected_no_strategic_context": 58,
+      "missing_text_deferred": 77,
+      "rejected_no_direct_eu": 3571,
+      "rejected_incidental_eu_ri_scope": 588,
+      "rejected_no_ri": 7,
+      "rejected_no_strategic_context": 52,
       "rejected_other_aboutness": 0,
       "pre_gate_filters": {
-        "non_english": 1214,
-        "institution_no_date": 1030,
-        "institution_fetch_or_nonhtml": 84,
-        "institution_before_floor": 785
+        "non_english": 1104,
+        "institution_no_date": 733,
+        "institution_fetch_or_nonhtml": 98,
+        "institution_before_floor": 495
       },
       "metadata_text_rescue": {
-        "queued": 2425,
-        "attempted": 428,
-        "text_recovered": 72,
+        "queued": 2144,
+        "attempted": 317,
+        "text_recovered": 67,
         "admitted_after_recovery": 0
       },
-      "institution_source_adapter_jobs": 397
+      "institution_source_adapter_jobs": 325
     },
     "inferred_shocks_new_this_run": 0,
     "inferred_shocks_updated_this_run": 0,
@@ -24778,93 +24922,79 @@
     "high_order_candidates_updated_this_run": 0
   },
   "scan_diagnostics": {
-    "source_warning_count": 83,
+    "source_warning_count": 67,
     "source_warnings": [
+      "No usable sitemap: eurofound.europa.eu",
       "Direct journal watch: New Political Economy: feed HTTP 403; hub HTTP 403",
       "Direct journal watch: Studies in Higher Education: feed HTTP 403; hub HTTP 403",
+      "Direct journal watch: Science Advances: feed HTTP 403; hub HTTP 403",
+      "No usable sitemap: wzb.eu",
+      "No usable sitemap: academie-sciences.fr",
       "Direct journal watch: Science: feed HTTP 403; hub HTTP 403",
-      "No usable sitemap: cern.ch; using bounded institutional HTML fallback (1 page(s))",
-      "No usable sitemap: esa.int; using bounded institutional HTML fallback (3 page(s))",
+      "No usable sitemap: kennisveiligheid.nl",
       "No usable sitemap: europarl.europa.eu",
-      "No usable sitemap: dgap.org; using bounded institutional HTML fallback (13 page(s))",
-      "No usable sitemap: esfri.eu",
+      "Direct journal watch: Proceedings of the National Academy of Sciences: hub HTTP 403",
+      "No usable sitemap: diw.de; using bounded institutional HTML fallback (17 page(s))",
       "No usable sitemap: consilium.europa.eu",
-      "No usable sitemap: iai.it",
-      "No usable sitemap: chips-ju.europa.eu; using bounded institutional HTML fallback (18 page(s))",
-      "No usable sitemap: css.ethz.ch; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: nap.nationalacademies.org",
-      "No usable sitemap: knaw.nl",
-      "No usable sitemap: ae-info.org; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: easac.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: atlanticcouncil.org; using bounded institutional HTML fallback (3 page(s))",
-      "No usable sitemap: era-learn.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: ri.se",
-      "No usable sitemap: e-fi.de; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: un.org; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: dea.nu",
+      "No usable sitemap: eesc.europa.eu; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: regjeringen.no",
+      "No usable sitemap: wellcome.org",
+      "No usable sitemap: the-guild.eu",
+      "No usable sitemap: dff.dk; using bounded institutional HTML fallback (5 page(s))",
+      "No usable sitemap: turing.ac.uk",
+      "No usable sitemap: eurodoc.net; using bounded institutional HTML fallback (15 page(s))",
+      "No usable sitemap: thebritishacademy.ac.uk",
+      "No usable sitemap: ui.se; using bounded institutional HTML fallback (3 page(s))",
+      "No usable sitemap: oxfordmartin.ox.ac.uk",
+      "No usable sitemap: instituteforgovernment.org.uk; using bounded institutional HTML fallback (25 page(s))",
+      "No usable sitemap: coleurope.eu; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: oii.ox.ac.uk",
+      "No usable sitemap: nistep.go.jp",
+      "No usable sitemap: csiro.au",
+      "No usable sitemap: iea.org",
+      "No usable sitemap: irena.org",
+      "No usable sitemap: eea.europa.eu; using bounded institutional HTML fallback (3 page(s))",
+      "No usable sitemap: unctad.org",
       "No usable sitemap: bruegel.org",
-      "No usable sitemap: fraunhofer.de; using bounded institutional HTML fallback (2 page(s))",
-      "No usable sitemap: eua.eu; using bounded institutional HTML fallback (10 page(s))",
+      "No usable sitemap: un.org; using bounded institutional HTML fallback (28 page(s))",
       "No usable sitemap: itu.int; using bounded institutional HTML fallback (28 page(s))",
       "No usable sitemap: marie-sklodowska-curie-actions.ec.europa.eu; using source-specific publication adapter (1 page(s))",
-      "No usable sitemap: bertelsmann-stiftung.de; using bounded institutional HTML fallback (14 page(s))",
-      "No usable sitemap: npsa.gov.uk",
-      "No usable sitemap: unesco.org; using bounded institutional HTML fallback (20 page(s))",
+      "No usable sitemap: strategie.gouv.fr",
+      "No usable sitemap: growthanalysis.se",
       "No usable sitemap: publications.jrc.ec.europa.eu; using source-specific publication adapter (36 page(s))",
-      "Priority people Crossref Michael Grätzel: HTTP 429",
-      "Priority people Crossref Kristina Edström: HTTP 429",
-      "Priority people Crossref Robert Schlögl: HTTP 429",
-      "Priority people Crossref Emmanuelle Charpentier: HTTP 429",
-      "Priority people Crossref Alena Buyx: HTTP 429",
-      "Priority people Crossref Fabiano Armellini: HTTP 429",
-      "Priority people Crossref Bernhard Schölkopf: HTTP 429",
+      "No usable sitemap: ema.europa.eu; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: oecd.org",
+      "Priority people Crossref Max Lemme: HTTP 429",
+      "No usable sitemap: aspi.org.au",
+      "No usable sitemap: scienceeurope.org; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: eua.eu; using bounded institutional HTML fallback (10 page(s))",
+      "No usable sitemap: nber.org; using bounded institutional HTML fallback (12 page(s))",
+      "No usable sitemap: epc.eu",
+      "No usable sitemap: cer.eu; using bounded institutional HTML fallback (8 page(s))",
+      "No usable sitemap: dgap.org; using bounded institutional HTML fallback (13 page(s))",
+      "No usable sitemap: leru.org; using bounded institutional HTML fallback (27 page(s))",
+      "No usable sitemap: bertelsmann-stiftung.de; using bounded institutional HTML fallback (14 page(s))",
+      "No usable sitemap: ethz.ch; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: ellis.institute; using bounded institutional HTML fallback (28 page(s))",
+      "No usable sitemap: is.mpg.de; using bounded institutional HTML fallback (5 page(s))",
+      "No usable sitemap: cencenelec.eu; using bounded institutional HTML fallback (13 page(s))",
+      "No usable sitemap: ellis.eu; using bounded institutional HTML fallback (28 page(s))",
       "No usable sitemap: clingendael.org",
       "No usable sitemap: chathamhouse.org",
       "No usable sitemap: espas.eu",
-      "No usable sitemap: rand.org",
       "No usable sitemap: isi.fraunhofer.de; using bounded institutional HTML fallback (3 page(s))",
+      "No usable sitemap: rand.org",
       "No usable sitemap: cwts.nl; using bounded institutional HTML fallback (6 page(s))",
-      "No usable sitemap: oecd.org",
-      "Institutional report stage budget reached; remaining pages/sources will continue from the persisted cursor on later runs",
-      "No usable sitemap: eca.europa.eu; using bounded institutional HTML fallback (6 page(s))",
-      "No usable sitemap: education.ec.europa.eu; using bounded institutional HTML fallback (25 page(s))",
-      "No usable sitemap: academie-sciences.fr",
-      "No usable sitemap: wzb.eu",
-      "No usable sitemap: diw.de; using bounded institutional HTML fallback (17 page(s))",
-      "No usable sitemap: kennisveiligheid.nl",
-      "No usable sitemap: growthanalysis.se",
-      "No usable sitemap: ui.se; using bounded institutional HTML fallback (3 page(s))",
-      "No usable sitemap: regjeringen.no",
-      "No usable sitemap: dea.nu",
-      "No usable sitemap: thebritishacademy.ac.uk",
-      "No usable sitemap: dff.dk; using bounded institutional HTML fallback (5 page(s))",
-      "No usable sitemap: wellcome.org",
-      "No usable sitemap: turing.ac.uk",
-      "No usable sitemap: the-guild.eu",
-      "No usable sitemap: eurodoc.net; using bounded institutional HTML fallback (15 page(s))",
-      "No usable sitemap: instituteforgovernment.org.uk; using bounded institutional HTML fallback (26 page(s))",
-      "No usable sitemap: eurofound.europa.eu",
-      "No usable sitemap: ecdc.europa.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: ema.europa.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: eea.europa.eu; using bounded institutional HTML fallback (3 page(s))",
-      "No usable sitemap: eesc.europa.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: oxfordmartin.ox.ac.uk",
-      "No usable sitemap: oii.ox.ac.uk",
-      "No usable sitemap: coleurope.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: unctad.org",
-      "No usable sitemap: nistep.go.jp",
-      "No usable sitemap: irena.org",
-      "No usable sitemap: iea.org",
-      "No usable sitemap: eda.europa.eu; using bounded institutional HTML fallback (28 page(s))",
-      "No usable sitemap: csiro.au",
-      "No usable sitemap: wto.org; using bounded institutional HTML fallback (20 page(s))",
       "OpenAlex scan budget reached; 3 queued query/queries skipped",
-      "Crossref scan budget reached; remaining queued scholarly queries skipped"
+      "Crossref scan budget reached; remaining queued scholarly queries skipped",
+      "Institutional report stage budget reached; remaining pages/sources will continue from the persisted cursor on later runs"
     ],
-    "transport_failure_warning_count": 9
+    "transport_failure_warning_count": 1
   },
   "shock_inference": {
     "profile_version": "23.3-context-weighted-shocks-v3",
-    "evaluated_at": "2026-09-09T00:44Z",
+    "evaluated_at": "2026-09-09T02:18Z",
     "new_count": 0,
     "updated_count": 0,
     "unchanged_count": 7,
@@ -27613,7 +27743,7 @@
   },
   "high_order_inference": {
     "profile_version": "v23.4-cumulative-adversarial-level45",
-    "evaluated_at": "2026-09-09T00:44Z",
+    "evaluated_at": "2026-09-09T02:18Z",
     "new_count": 0,
     "updated_count": 0,
     "qualified_count": 6,
