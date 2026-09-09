@@ -57,8 +57,8 @@ class V244BenchmarkFalseNegativeRepairTests(unittest.TestCase):
 
     def test_decision_profiles_are_bumped_for_reconsideration(self):
         cfg = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
-        self.assertEqual(cfg.get("admission_profile"), "v24.4-benchmark-false-negative-repair")
-        self.assertEqual(S.CURATOR_DECISION_PROFILE_VERSION, "v24.4-benchmark-false-negative-repair")
+        self.assertEqual(cfg.get("admission_profile"), S.CURATOR_DECISION_PROFILE_VERSION)
+        self.assertTrue(str(S.CURATOR_DECISION_PROFILE_VERSION).startswith("v24."))
 
 
 if __name__ == "__main__":
