@@ -1,0 +1,137 @@
+name: Reader Language — Safe Sidecar
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'What to do'
+        required: true
+        default: 'DRY_RUN'
+        type: choice
+        options:
+          - DRY_RUN
+          - GENERATE
+          - DISABLE
+      limit:
+        description: 'GENERATE only: number of missing/stale records to process'
+        required: false
+        default: '20'
+      refresh_stale:
+        description: 'GENERATE only: regenerate entries whose source text changed'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+# Same lock as both scanners. The reader sidecar can never be committed while a
+# scanner is in the middle of updating radar.json/historical data.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  reader-language:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out main without stored credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Reader-language coverage only
+        if: inputs.operation == 'DRY_RUN'
+        run: |
+          python scripts/restate_reader_text.py --dry-run --refresh-stale
+          python scripts/check_reader_text.py
+
+      - name: Install optional language client
+        if: inputs.operation == 'GENERATE'
+        run: pip install --quiet anthropic
+
+      - name: Generate reader language into sidecar only
+        if: inputs.operation == 'GENERATE'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LIMIT: ${{ inputs.limit }}
+          REFRESH: ${{ inputs.refresh_stale }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--limit "${LIMIT:-20}")
+          if [[ "$REFRESH" == 'true' ]]; then args+=(--refresh-stale); fi
+          python scripts/restate_reader_text.py "${args[@]}"
+          python scripts/check_reader_text.py
+
+          # Hard safety assertion: a reader-language run may change only the sidecar.
+          unexpected="$(git diff --name-only -- . ':!reader_text.json' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo '::error::Reader-language code changed a scanner/site file. Refusing to save.'
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+
+      - name: Disable reader language safely
+        if: inputs.operation == 'DISABLE'
+        shell: bash
+        run: |
+          cat > reader_text.json <<'EOF'
+          {
+            "version": 1,
+            "profile": "safe-reader-sidecar-v1",
+            "generated_at": null,
+            "records": {}
+          }
+          EOF
+          python scripts/check_reader_text.py
+
+      - name: Configure secure push authentication
+        if: inputs.operation != 'DRY_RUN'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-reader-language-bot'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Commit sidecar only
+        if: inputs.operation != 'DRY_RUN'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add reader_text.json
+          staged="$(git diff --cached --name-only)"
+          if [[ -n "$staged" && "$staged" != 'reader_text.json' ]]; then
+            echo '::error::Unexpected file staged by reader-language workflow.'
+            printf '%s\n' "$staged"
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo 'No reader-language change to commit.'
+            exit 0
+          fi
+          git commit -m "Reader language sidecar: ${{ inputs.operation }}"
+          git push origin HEAD:main
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
