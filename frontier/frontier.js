@@ -12,10 +12,10 @@
     {id:'rules',name:'Rules & decisions',short:'Rules & decisions',description:'Standards, security checks, funding rules and how quickly Europe can act.'}
   ];
   const COLUMNS=[
-    {id:'A',name:'More control, stronger',direction:'Europe gains control · capability improves',tone:'opportunity'},
-    {id:'B',name:'More control, some cost',direction:'Europe gains control · capability pays a price',tone:'tradeoff'},
-    {id:'C',name:'Stronger, but reliant',direction:'capability improves · Europe still relies on others',tone:'exposure'},
-    {id:'D',name:'Less control, weaker',direction:'Europe loses control · capability also weakens',tone:'alarm'}
+    {id:'A',name:'More control, stronger',direction:'Europe gains control, capability improves',tone:'opportunity'},
+    {id:'B',name:'More control, some cost',direction:'Europe gains control, capability pays a price',tone:'tradeoff'},
+    {id:'C',name:'Stronger, but reliant',direction:'capability improves, Europe still relies on others',tone:'exposure'},
+    {id:'D',name:'Less control, weaker',direction:'Europe loses control, capability also weakens',tone:'alarm'}
   ];
   const CELL_NAMES={
     knowledge:{A:['Build and keep talent','Europe strengthens its own research workforce, skills and knowledge base'],B:['Protection slows exchange','European safeguards protect knowledge but make some collaboration or mobility harder'],C:['Strength from outside','international researchers, expertise or research networks strengthen European work while the input still comes from outside'],D:['People or know-how are lost','Europe loses researchers, knowledge, network access or protected know-how']},

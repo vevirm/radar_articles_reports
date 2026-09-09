@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>External Shock · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=26">
+<link rel="stylesheet" href="../radar.css?v=27">
 <script src="../radar_data.js"></script>
 
 
@@ -68,10 +68,10 @@ function collect(data){
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
     const items=collect(data);
-    el.innerHTML=items.length?items.map(x=>`<li>${esc(x.text)}<span class="evidence-count">${x.records||0} ${(x.records||0)===1?'record':'records'} · ${x.sources||0} ${(x.sources||0)===1?'source':'sources'}</span></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
+    el.innerHTML=items.length?items.map(x=>`<li>${esc(x.text)}<span class="evidence-count">${x.records||0} ${(x.records||0)===1?'record':'records'} from ${x.sources||0} ${(x.sources||0)===1?'source':'sources'}</span></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
   }catch(e){console.error(e);el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
-<script src="../site-shell.js?v=26"></script>
+<script src="../site-shell.js?v=27"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>Ongoing Phenomena · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=26">
+<link rel="stylesheet" href="../radar.css?v=27">
 <script src="../radar_data.js"></script>
 
 
@@ -97,7 +97,7 @@ function unique(items){
 function patternDistance(x){if(x?.kind==='convergence')return 4;if(x?.kind==='conjunction'||x?.kind==='renaming')return 3;return 2}
 function render(id,items){
   const el=document.getElementById(id),ordered=[...items].sort((a,b)=>(a.distance||2)-(b.distance||2)||(b.sources||0)-(a.sources||0)||(b.records||0)-(a.records||0));
-  el.innerHTML=ordered.length?ordered.map(x=>`<li data-obviousness="${x.distance||2}">${esc(x.text)}<span class="evidence-count">${x.records||0} ${(x.records||0)===1?'record':'records'} · ${x.sources||0} ${(x.sources||0)===1?'source':'sources'}</span></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show in this section yet. It will appear when the current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
+  el.innerHTML=ordered.length?ordered.map(x=>`<li data-obviousness="${x.distance||2}">${esc(x.text)}<span class="evidence-count">${x.records||0} ${(x.records||0)===1?'record':'records'} from ${x.sources||0} ${(x.sources||0)===1?'source':'sources'}</span></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show in this section yet. It will appear when the current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
@@ -124,6 +124,6 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
   }
 })();
 </script>
-<script src="../site-shell.js?v=26"></script>
+<script src="../site-shell.js?v=27"></script>
 </body>
 </html>
