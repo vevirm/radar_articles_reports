@@ -59,6 +59,16 @@ jobs:
       - name: Run historical scanner tests
         run: python -m unittest discover -s historical/tests -p 'test_*.py'
 
+      - name: Snapshot archive before scan for reader-side New tracking
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f historical/historical.json ]]; then
+            cp historical/historical.json "$RUNNER_TEMP/historical-before.json"
+          else
+            printf '{"items":[]}\n' > "$RUNNER_TEMP/historical-before.json"
+          fi
+
       - name: Scan source-age historical top-tier evidence
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
@@ -66,6 +76,29 @@ jobs:
           HISTORICAL_MIN_RUNTIME_SECONDS: '600'
           HISTORICAL_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
         run: python historical/scan_historical.py
+
+      - name: Build reader-side latest-new index
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          before=json.loads(Path(__import__('os').environ['RUNNER_TEMP']).joinpath('historical-before.json').read_text(encoding='utf-8'))
+          after=json.loads(Path('historical/historical.json').read_text(encoding='utf-8'))
+          old_ids={str(x.get('id')) for x in before.get('items',[]) if isinstance(x,dict) and x.get('id')}
+          new_ids=[str(x.get('id')) for x in after.get('items',[]) if isinstance(x,dict) and x.get('id') and str(x.get('id')) not in old_ids]
+          expected=int((after.get('last_scan') or {}).get('new_items',0) or 0)
+          if len(new_ids)!=expected:
+              raise SystemExit(f'Latest-new index mismatch: diff found {len(new_ids)} but scanner reports {expected}')
+          payload={
+              'archive_last_updated': after.get('last_updated'),
+              'count': len(new_ids),
+              'item_ids': new_ids,
+          }
+          Path('historical/new_items.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('historical/new_items.json written:',len(new_ids),'IDs')
+          PY
 
       - name: Verify historical scanner changed only its own data file
         shell: bash
@@ -75,7 +108,7 @@ jobs:
           # tracked cache files here: older browser uploads may already have committed
           # them, and deleting tracked files would itself trip this safety guard.
           # Untracked ignored cache files are excluded by git ls-files below.
-          unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'historical/historical.json' || true)"
+          unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -Evx 'historical/historical.json|historical/new_items.json' || true)"
           if [[ -n "$unexpected" ]]; then
             echo "Historical scanner changed unexpected files; refusing to save anything."
             echo "$unexpected"
@@ -106,7 +139,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- historical/historical.json
+          git add -- historical/historical.json historical/new_items.json
           if git diff --cached --quiet; then
             echo "No historical data change to commit."
           else
