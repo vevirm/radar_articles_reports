@@ -4,12 +4,11 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <title>Stuff · EU R&amp;I Radar</title>
-<style>
-:root{--ink:#111;--muted:#666;--line:#ddd;--red:#c40018}*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}.wrap{width:min(calc(100% - 34px),1040px);margin:auto}a{color:inherit}header{background:#0b0b0b;color:#fff;border-bottom:4px solid var(--red)}.top{padding:20px 0}.top h1{margin:0}.nav{display:none}main{padding:24px 0 60px}.download-card{border-top:4px solid var(--red);padding:20px 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center}.download-card h2{font-size:24px;line-height:1.15;margin:0 0 8px}.download-card p{margin:0;color:var(--muted);max-width:700px;font-size:15px}.btn,button{display:inline-block;border:1px solid #111;background:#111;color:#fff;padding:11px 14px;font:inherit;font-size:13px;font-weight:800;cursor:pointer;text-decoration:none}.btn.red{background:var(--red);border-color:var(--red)}.btn.secondary{background:#fff;color:#111}.note{font-size:12px;color:var(--muted);margin-top:8px}.section{margin-top:26px;border-top:1px solid var(--line);padding-top:16px}.section h2{font-size:18px;margin:0 0 8px}.formats{display:flex;gap:8px;flex-wrap:wrap}@media(max-width:720px){.download-card{grid-template-columns:1fr}.download-card button{width:100%}}
-</style>
+<link rel="stylesheet" href="../radar.css?v=26">
 <script src="../radar_data.js"></script>
-<link rel="stylesheet" href="../reform.css?v=25.0">
-<!-- Regression compatibility only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
+
+
+<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head>
 <body>
 <header><div class="wrap top"><h1>Stuff</h1></div></header>
@@ -27,5 +26,5 @@ let radarData=null;
 document.getElementById('downloadExcel').addEventListener('click',()=>{try{if(!radarData)throw new Error('Radar data is still loading');const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit);if(!bytes)throw new Error('Workbook generator unavailable');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));a.download='radar_all_publication_data.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){console.error('Excel generation failed',e);alert('The current Excel could not be generated. Try the repository snapshot link.')}});
 (async()=>{try{radarData=await RadarData.load('../radar.json','../radar_seed.json')}catch(e){console.error(e);document.getElementById('downloadExcel').disabled=true;document.getElementById('downloadExcel').textContent='Radar data unavailable'}})();
 </script>
-<script src="../site-shell.js?v=25.0"></script>
+<script src="../site-shell.js?v=26"></script>
 </body></html>
