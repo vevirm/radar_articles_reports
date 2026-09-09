@@ -581,12 +581,20 @@
   }
 
   function whyQualifies(flags,column,row){
+    const rowCopy={
+      knowledge:{sustain:'changes Europe’s ability to retain, attract or share research knowledge',compete:'changes the strength of Europe’s research workforce and knowledge base',failure:'shows how researchers, know-how or collaboration can be lost'},
+      infrastructure:{sustain:'changes who controls or can access the tools and facilities European research depends on',compete:'changes the capacity, cost or performance of European research infrastructure',failure:'shows how access to a critical tool, input or facility can break'},
+      conversion:{sustain:'changes who controls firms, production or the route from research to scale',compete:'changes Europe’s ability to turn research into firms, products and market position',failure:'shows how value, production or scale can move away from Europe'},
+      rules:{sustain:'changes who sets the rules and conditions European research operates under',compete:'changes how quickly and effectively Europe can coordinate, fund or regulate',failure:'shows how rules, restrictions or fragmentation can block research and innovation'}
+    };
+    const copy=rowCopy[row?.id]||{};
     const parts=[];
-    if(flags.sustain) parts.push('changes how much control Europe has');
-    if(flags.compete) parts.push('changes how well Europe can compete');
-    if(flags.failure) parts.push('shows a concrete way access or capability can fail');
-    const s=parts.length?parts.join('; '):'changes Europe’s control and competitive position';
-    return `${s}.`;
+    if(flags.sustain&&copy.sustain)parts.push(copy.sustain);
+    if(flags.compete&&copy.compete)parts.push(copy.compete);
+    if(flags.failure&&copy.failure)parts.push(copy.failure);
+    if(parts.length)return `${parts.join('; ')}.`;
+    const cell=CELL_NAMES[row?.id]?.[column?.id];
+    return `${clean(cell?.[1]||'This changes European capability or control')}.`;
   }
 
   function classifySignal(x,data,index,now=new Date()){

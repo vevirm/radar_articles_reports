@@ -15284,11 +15284,17 @@ def anchor_news(
             # bridge or substantially stronger lexical overlap. This is deliberately stricter
             # than discovery, because a wrong A↔C relationship is worse than leaving a signal
             # for the strict A-anchored signal route.
-            if broad_only and not n_c_retrieval and not (
-                (entity_overlap >= 1 and jacc >= 0.035) or jacc >= 0.065
-            ):
-                continue
+            trusted_anchor_recall = bool(trusted_commentary) or source in _SOURCE_MERIT_PUBLIC_HIGH or _source_merit_is_eu_official(source, link)
+            if broad_only and not n_c_retrieval:
+                broad_bridge_ok = (
+                    (entity_overlap >= 1 and jacc >= (0.025 if trusted_anchor_recall else 0.035))
+                    or jacc >= (0.050 if trusted_anchor_recall else 0.065)
+                )
+                if not broad_bridge_ok:
+                    continue
             score=3.0*len(shared)+1.5*entity_overlap+8.0*jacc
+            if trusted_anchor_recall:
+                score += 0.45
             if n_c_retrieval and ontology_bridge_themes:
                 score += 1.75
             if n_a_ontology:
@@ -15301,7 +15307,9 @@ def anchor_news(
                     score -= 2.5
             if best is None or score>best[0]: best=(score,a,sorted(shared))
         anchor=''; score=0.0; shared_themes=[]; anchor_basis=''; external_bridge=''
-        if best and best[0] >= 4.0:
+        trusted_anchor_recall = bool(trusted_commentary) or source in _SOURCE_MERIT_PUBLIC_HIGH or _source_merit_is_eu_official(source, link)
+        min_anchor_score = 3.65 if trusted_anchor_recall else 4.0
+        if best and best[0] >= min_anchor_score:
             score,a,shared_themes=best
             anchor=f"{a['title']} (Strand A)"
             anchor_basis='publication'

@@ -514,7 +514,7 @@
       if(/technology transfer|technological dependence|technology dependence|strategic depend/.test(t)) return "Dependence on outside technology could limit Europe's freedom to act.";
       if(/fragmentation/.test(t)&&/open science|research data|research system/.test(t)) return 'Fragmented research systems could make data, collaboration and open science harder to sustain.';
       if(/investment/.test(t)&&/depend|foreign|asymmetry/.test(t)) return 'Heavy reliance on foreign investment could shift control of strategic technology away from Europe.';
-      return 'A dependency or constraint in the evidence could weaken European research and innovation.';
+      return simplePriorityText(x);
     }
     if(kind==='opportunity'){
       if(/ocean research|ocean.*innovation strategy/.test(title)) return 'Europe has a chance to improve how ocean research and innovation are coordinated.';
@@ -527,7 +527,7 @@
       if(/ai gigafactor|computing capacity/.test(title)||(/compute|cloud/.test(t)&&!/quantum/.test(title))) return 'More European computing capacity could reduce dependence and give researchers more room to scale.';
       if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening European research facilities could give researchers better access to strategic infrastructure.';
       if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'Deeper research partnerships could widen European networks, talent and access.';
-      return 'A concrete European instrument in the evidence could strengthen research, innovation or strategic capacity.';
+      return simplePriorityText(x);
     }
     return simplePriorityText(x);
   }
