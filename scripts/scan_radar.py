@@ -16196,71 +16196,101 @@ def main() -> int:
             _scale_time_key(key, minimum)
 
     if RADAR_QUICK_SCAN:
-        # Six-minute quick scans are not miniature 24-minute production scans. Fixed
-        # setup/fetch costs make proportional quartering waste too much of a short run on
-        # institutional fan-out and late continuation. Keep the same admission gates and
-        # query banks, but use a deliberately front-loaded allocation: A core evidence, a
-        # protected B-method slice, and enough C evaluation/rescue time to finish judging
-        # current signals. These overrides exist only in memory for RADAR_QUICK_SCAN.
-        CONFIG["news_stage_seconds"] = 80
-        CONFIG["institution_stage_seconds"] = 70
-        CONFIG["institution_sources_per_scan"] = 18
-        CONFIG["frontier_gap_institution_extra_sources_per_scan"] = 4
-        CONFIG["institution_source_adapter_sources_per_scan"] = 3
-        CONFIG["source_failure_reallocation_institution_sources"] = 4
-        CONFIG["institution_pages_per_domain"] = 5
-        CONFIG["institution_pages_per_domain_bootstrap"] = 5
-        CONFIG["institution_source_adapter_pages_per_domain"] = 10
-        CONFIG["institution_max_pages"] = 320
-        CONFIG["institution_max_pages_bootstrap"] = 320
+        # Six-minute QUICK SWEEP: deliberately *not* a miniature production scan.
+        # The 24-minute workflow still uses the full stage graph. Quick mode spends its
+        # short budget only on the high-yield current-intelligence lanes: primary EU
+        # evidence, a compact recent A scholarly/report slice, a protected Strand-B
+        # method-as-object slice, and current C news/analysis with enough tail time to
+        # finish admission. All substantive A/B/C gates, duplicate checks and publication
+        # semantics are unchanged.
+        CONFIG["news_stage_seconds"] = 105
+        CONFIG["openalex_stage_seconds"] = 145
+        CONFIG["crossref_stage_seconds"] = 150
+        CONFIG["institution_stage_seconds"] = 75
+        CONFIG["primary_evidence_stage_seconds"] = 90
 
-        # Run fewer scholarly requests, but make the executed prefix intentional. A keeps
-        # the largest share; B receives a real method-as-object slice rather than waiting
-        # behind the full production queue.
-        CONFIG["openalex_queries_per_scan"] = 28
-        CONFIG["crossref_broad_queries_per_scan"] = 30
-        CONFIG["openalex_exploration_queries_per_scan"] = 8
-        CONFIG["crossref_exploration_queries_per_scan"] = 8
-        CONFIG["scholarly_base_queries_per_scan"] = 16
-        CONFIG["strand_a_protected_scholarly_queries_per_source"] = 12
+        # A compact institutional/current-report lane. In production, evidence-report,
+        # gap-specialist and adapter additions can turn an 18-source plan into dozens of
+        # domains. For a sweep, keep only a small base rotation plus two report-priority
+        # sources; the normal production census remains untouched.
+        CONFIG["institution_full_census_each_scan"] = False
+        CONFIG["institution_sources_per_scan"] = 8
+        CONFIG["official_eu_priority_sources_per_scan"] = 4
+        CONFIG["evidence_report_priority_sources_per_scan"] = 2
+        CONFIG["frontier_gap_institution_extra_sources_per_scan"] = 0
+        CONFIG["institution_source_adapter_sources_per_scan"] = 0
+        CONFIG["institution_pages_per_domain"] = 3
+        CONFIG["institution_pages_per_domain_bootstrap"] = 3
+        CONFIG["institution_source_adapter_pages_per_domain"] = 0
+        CONFIG["institution_max_pages"] = 120
+        CONFIG["institution_max_pages_bootstrap"] = 120
+
+        # Small scholarly prefix, intentionally split between A and B. B receives real
+        # protected room, but no item is admitted merely to meet an 8:1:3 aspiration.
+        CONFIG["openalex_queries_per_scan"] = 18
+        CONFIG["crossref_broad_queries_per_scan"] = 18
+        CONFIG["openalex_exploration_queries_per_scan"] = 3
+        CONFIG["crossref_exploration_queries_per_scan"] = 3
+        CONFIG["scholarly_base_queries_per_scan"] = 10
+        CONFIG["strand_a_protected_scholarly_queries_per_source"] = 8
         CONFIG["b_method_protected_scholarly_queries_per_source"] = 6
         CONFIG["queries_b_method_recent_per_scan"] = 6
         CONFIG["queries_b_method_foundational_per_scan"] = 2
         CONFIG["b_method_journals_per_scan"] = 2
-        CONFIG["crossref_priority_tasks_per_scan"] = 6
-        CONFIG["crossref_source_first_journals_per_scan"] = 6
-        CONFIG["preferred_q1_journals_per_scan"] = 2
+        CONFIG["crossref_priority_tasks_per_scan"] = 4
+        CONFIG["crossref_source_first_journals_per_scan"] = 4
+        CONFIG["preferred_q1_journals_per_scan"] = 1
+        CONFIG["crossref_full_source_census_each_scan"] = False
 
-        # In the first live six-minute test the generic quiet rescue and a second broad
-        # continuation wave consumed the time that the C floor needed to judge already
-        # retrieved current items. Remove the zero-yield quiet pass and permit exactly one
-        # mixed continuation wave. Quality thresholds are unchanged.
+        # Metadata rescue can dominate a short Crossref pass. Keep just enough enrichment
+        # to judge a promising sparse record rather than queueing dozens of rescues.
+        CONFIG["crossref_missing_abstract_enrichment_per_scan"] = 8
+        CONFIG["crossref_missing_abstract_enrichment_per_task"] = 1
+        CONFIG["openalex_missing_abstract_enrichment_per_scan"] = 4
+        CONFIG["metadata_sparse_openalex_enrichment_per_scan"] = 4
+
+        # Production-only depth/adjacency machinery. These stages are useful in 24 minutes
+        # but repeatedly consumed the six-minute run after current candidates had already
+        # been retrieved. Quick sweep skips them completely.
+        CONFIG["direct_top_journal_sources"] = []
+        CONFIG["direct_top_journal_rotating_sources_per_scan"] = 0
+        CONFIG["journal_depth_enabled"] = False
+        CONFIG["curator_candidate_testing_enabled"] = False
+        CONFIG["priority_people_enabled"] = False
+        CONFIG["foresight_author_followup_enabled"] = False
         CONFIG["quiet_scan_rescue_enabled"] = False
+        CONFIG["citation_snowball_enabled"] = False
+        CONFIG["source_failure_reallocation_enabled"] = False
+        CONFIG["legacy_a_recall_recovery_enabled"] = False
         CONFIG["low_yield_fresh_rotation_enabled"] = False
-        CONFIG["low_yield_reserved_seconds"] = 0
-        CONFIG["full_budget_continuation_enabled"] = True
-        CONFIG["full_budget_continuation_stage_seconds"] = 30
-        CONFIG["full_budget_continuation_queries_per_wave"] = 4
-        CONFIG["full_budget_continuation_institution_sources_per_wave"] = 4
-        CONFIG["full_budget_continuation_news_queries_per_wave"] = 6
-        CONFIG["full_budget_continuation_max_waves"] = 1
-        CONFIG["full_budget_zero_progress_cooldown_seconds"] = 4
+        CONFIG["low_yield_extended_fallback_enabled"] = False
+        CONFIG["low_yield_full_rescue_run_enabled"] = False
+        CONFIG["frontier_gap_deepening_max_waves"] = 0
+        CONFIG["frontier_gap_deepening_max_waves_no_empty"] = 0
+        CONFIG["frontier_stubborn_recovery_enabled"] = False
+        CONFIG["full_budget_continuation_enabled"] = False
 
-        # Protect a real final C decision window. This does not manufacture three C items:
-        # the existing strict C gate still decides admission; it merely gets time to finish
-        # evaluating/rescuing candidates that the news lane already found.
-        CONFIG["c_floor_rescue_min_seconds_remaining"] = 35
-        CONFIG["c_floor_rescue_stage_seconds"] = 35
-        CONFIG["c_floor_rescue_queries_per_wave"] = 6
+        # C is current intelligence, so it gets a real decision tail. One diversified
+        # rescue window plus a small source-evidence follow-up is enough in a sweep; the
+        # strict C gate remains unchanged and may legitimately return zero.
+        CONFIG["c_floor_rescue_enabled"] = True
+        CONFIG["c_floor_rescue_windows_hours"] = [336]
+        CONFIG["c_floor_rescue_min_seconds_remaining"] = 45
+        CONFIG["c_floor_rescue_stage_seconds"] = 45
+        CONFIG["c_floor_rescue_queries_per_wave"] = 8
         CONFIG["c_floor_post_reserve_seconds"] = 20
-        CONFIG["c_floor_final_reserve_seconds"] = 35
+        CONFIG["c_floor_final_reserve_enabled"] = True
+        CONFIG["c_floor_final_reserve_seconds"] = 40
         CONFIG["c_floor_final_save_margin_seconds"] = 8
-        CONFIG["scan_finalize_reserve_seconds"] = 20
-        CONFIG["network_reserve_seconds"] = 25
+        CONFIG["weak_signal_evidence_followup_enabled"] = True
+        CONFIG["weak_signal_evidence_followup_stage_seconds"] = 35
+        CONFIG["weak_signal_evidence_followup_per_scan"] = 4
+        CONFIG["weak_signal_evidence_followup_links_per_signal"] = 3
+        CONFIG["weak_signal_evidence_followup_queries_per_scan"] = 2
 
-        # Keep the highest-value direct EU lane visible even in a short sweep.
+        CONFIG["scan_finalize_reserve_seconds"] = 22
+        CONFIG["network_reserve_seconds"] = 22
         CONFIG["primary_evidence_sources_per_scan"] = 8
-        CONFIG["institution_source_adapter_sources_per_scan"] = 3
 
     if RADAR_PRIORITY_SCAN:
         # A priority-DOCX run is still the ordinary scanner, but curator-supplied works
@@ -16291,10 +16321,15 @@ def main() -> int:
     LOW_YIELD_RESERVE_SECONDS = max(0, int(CONFIG.get("low_yield_reserved_seconds", 600) or 0))
     LOW_YIELD_RESERVE_ACTIVE = bool(CONFIG.get("low_yield_fresh_rotation_enabled", True) and LOW_YIELD_RESERVE_SECONDS)
     if budget_override and budget_seconds < configured_budget_seconds:
-        mode = "priority" if RADAR_PRIORITY_SCAN else "quick" if RADAR_QUICK_SCAN else "diagnostic"
+        mode = "priority" if RADAR_PRIORITY_SCAN else "quick sweep" if RADAR_QUICK_SCAN else "diagnostic"
+        detail = (
+            "high-yield lanes only; production depth stages disabled in memory"
+            if RADAR_QUICK_SCAN
+            else "stage/reserve seconds scaled proportionally in memory"
+        )
         log_progress(
             f"Scanner time budget: {budget_seconds}s {mode} profile "
-            f"(production profile: {configured_budget_seconds}s; stage/reserve seconds scaled proportionally in memory)"
+            f"(production profile: {configured_budget_seconds}s; {detail})"
         )
     else:
         log_progress(f"Scanner time budget: {budget_seconds}s production profile")
@@ -17764,7 +17799,7 @@ def main() -> int:
     # source itself passes the narrow high-authority extended-window gate.
     extended_highest_candidates: list[dict[str, Any]] = []
     extended_highest_executed = 0
-    if extended_highest_batch and budget_remaining() > max(120, EXTENDED_TOP_QUALITY_STAGE_SECONDS):
+    if (not RADAR_QUICK_SCAN) and extended_highest_batch and budget_remaining() > max(120, EXTENDED_TOP_QUALITY_STAGE_SECONDS):
         extended_deadline = time.monotonic() + min(
             EXTENDED_TOP_QUALITY_STAGE_SECONDS,
             max(45, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 150))))
@@ -17801,7 +17836,7 @@ def main() -> int:
     # fingerprint cache; normal institution_cursor/backfill state is untouched. The lane rotates
     # across all configured institutions and completes over several scans.
     a_recall_complete = state.get("a_recall_recovery_version") == A_RECALL_RECOVERY_VERSION
-    if (not a_recall_complete) and budget_remaining() > 210:
+    if (not RADAR_QUICK_SCAN) and (not a_recall_complete) and budget_remaining() > 210:
         recovery_cursor = int(state.get("a_recall_recovery_cursor", 0) or 0)
         recovery_sources, recovery_next, recovery_wrapped = rotating_batch(
             institution_sources_all, recovery_cursor, A_RECALL_RECOVERY_SOURCES_PER_SCAN
@@ -17921,7 +17956,7 @@ def main() -> int:
         "signals_checked": 0, "links_examined": 0, "direct_ab": 0, "queries": 0, "scholarly_ab": 0
     }
     signal_evidence_candidates: list[dict[str, Any]] = []
-    if bool(CONFIG.get("weak_signal_evidence_followup_enabled", True)) and auxiliary_scholarly_allowed and budget_remaining() > 90:
+    if bool(CONFIG.get("weak_signal_evidence_followup_enabled", True)) and auxiliary_scholarly_allowed and budget_remaining() > (55 if RADAR_QUICK_SCAN else 90):
         sef_seconds = min(
             int(CONFIG.get("weak_signal_evidence_followup_stage_seconds", 120) or 120),
             max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
