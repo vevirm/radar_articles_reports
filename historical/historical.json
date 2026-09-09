@@ -2,8 +2,8 @@
   "profile_version": "v19.0-main-aligned-older-than-6m",
   "last_updated": "2026-09-08T21:19:28Z",
   "date_from": "2015-01-01",
-  "date_to": "2026-03-07",
-  "cutoff_exclusive": "2026-03-08",
+  "date_to": "2026-03-08",
+  "cutoff_exclusive": "2026-03-09",
   "main_radar_window_months": 6,
   "scope_note": "Separate, cumulative source-age historical archive. A source is historical here because it predates the live scanner’s six-month historical-discovery cutoff. Once historical evidence is accepted, normal scans keep it; current admission gates apply only to newly discovered material. Historical content may be backward- or forward-looking. This archive does not feed the live radar, live Matrix, weak signals or live scan scheduling.",
   "ranking_note": "Historical discovery deliberately rotates across topic families, source batches, publication-age bands and result/source depth from 2015-01-01 through 2026-03-07. It also probes under-covered topic × time-band cells and earlier work by known-good authors. Reader/corpus ordering is chronological after admission; source quality is used only by the upstream evidence gate and duplicate resolution.",
@@ -12964,5 +12964,10 @@
       "No usable topic sitemap results: cedefop.europa.eu",
       "No usable topic sitemap results: european-research-area.ec.europa.eu"
     ]
+  },
+  "workflow_compatibility": {
+    "metadata_only_without_source_requests": true,
+    "metadata_only_reason": "Repository push/upload event is deployment-only for Historical",
+    "metadata_only_at": "2026-09-09T00:03:49Z"
   }
 }
