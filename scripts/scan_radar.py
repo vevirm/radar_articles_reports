@@ -16195,6 +16195,73 @@ def main() -> int:
         ):
             _scale_time_key(key, minimum)
 
+    if RADAR_QUICK_SCAN:
+        # Six-minute quick scans are not miniature 24-minute production scans. Fixed
+        # setup/fetch costs make proportional quartering waste too much of a short run on
+        # institutional fan-out and late continuation. Keep the same admission gates and
+        # query banks, but use a deliberately front-loaded allocation: A core evidence, a
+        # protected B-method slice, and enough C evaluation/rescue time to finish judging
+        # current signals. These overrides exist only in memory for RADAR_QUICK_SCAN.
+        CONFIG["news_stage_seconds"] = 80
+        CONFIG["institution_stage_seconds"] = 70
+        CONFIG["institution_sources_per_scan"] = 18
+        CONFIG["frontier_gap_institution_extra_sources_per_scan"] = 4
+        CONFIG["institution_source_adapter_sources_per_scan"] = 3
+        CONFIG["source_failure_reallocation_institution_sources"] = 4
+        CONFIG["institution_pages_per_domain"] = 5
+        CONFIG["institution_pages_per_domain_bootstrap"] = 5
+        CONFIG["institution_source_adapter_pages_per_domain"] = 10
+        CONFIG["institution_max_pages"] = 320
+        CONFIG["institution_max_pages_bootstrap"] = 320
+
+        # Run fewer scholarly requests, but make the executed prefix intentional. A keeps
+        # the largest share; B receives a real method-as-object slice rather than waiting
+        # behind the full production queue.
+        CONFIG["openalex_queries_per_scan"] = 28
+        CONFIG["crossref_broad_queries_per_scan"] = 30
+        CONFIG["openalex_exploration_queries_per_scan"] = 8
+        CONFIG["crossref_exploration_queries_per_scan"] = 8
+        CONFIG["scholarly_base_queries_per_scan"] = 16
+        CONFIG["strand_a_protected_scholarly_queries_per_source"] = 12
+        CONFIG["b_method_protected_scholarly_queries_per_source"] = 6
+        CONFIG["queries_b_method_recent_per_scan"] = 6
+        CONFIG["queries_b_method_foundational_per_scan"] = 2
+        CONFIG["b_method_journals_per_scan"] = 2
+        CONFIG["crossref_priority_tasks_per_scan"] = 6
+        CONFIG["crossref_source_first_journals_per_scan"] = 6
+        CONFIG["preferred_q1_journals_per_scan"] = 2
+
+        # In the first live six-minute test the generic quiet rescue and a second broad
+        # continuation wave consumed the time that the C floor needed to judge already
+        # retrieved current items. Remove the zero-yield quiet pass and permit exactly one
+        # mixed continuation wave. Quality thresholds are unchanged.
+        CONFIG["quiet_scan_rescue_enabled"] = False
+        CONFIG["low_yield_fresh_rotation_enabled"] = False
+        CONFIG["low_yield_reserved_seconds"] = 0
+        CONFIG["full_budget_continuation_enabled"] = True
+        CONFIG["full_budget_continuation_stage_seconds"] = 30
+        CONFIG["full_budget_continuation_queries_per_wave"] = 4
+        CONFIG["full_budget_continuation_institution_sources_per_wave"] = 4
+        CONFIG["full_budget_continuation_news_queries_per_wave"] = 6
+        CONFIG["full_budget_continuation_max_waves"] = 1
+        CONFIG["full_budget_zero_progress_cooldown_seconds"] = 4
+
+        # Protect a real final C decision window. This does not manufacture three C items:
+        # the existing strict C gate still decides admission; it merely gets time to finish
+        # evaluating/rescuing candidates that the news lane already found.
+        CONFIG["c_floor_rescue_min_seconds_remaining"] = 35
+        CONFIG["c_floor_rescue_stage_seconds"] = 35
+        CONFIG["c_floor_rescue_queries_per_wave"] = 6
+        CONFIG["c_floor_post_reserve_seconds"] = 20
+        CONFIG["c_floor_final_reserve_seconds"] = 35
+        CONFIG["c_floor_final_save_margin_seconds"] = 8
+        CONFIG["scan_finalize_reserve_seconds"] = 20
+        CONFIG["network_reserve_seconds"] = 25
+
+        # Keep the highest-value direct EU lane visible even in a short sweep.
+        CONFIG["primary_evidence_sources_per_scan"] = 8
+        CONFIG["institution_source_adapter_sources_per_scan"] = 3
+
     if RADAR_PRIORITY_SCAN:
         # A priority-DOCX run is still the ordinary scanner, but curator-supplied works
         # must get first use of the short budget.  This changes allocation only: exact
