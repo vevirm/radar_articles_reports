@@ -18977,6 +18977,152 @@ def main() -> int:
         CONFIG["network_reserve_seconds"] = original_network_reserve
     full_budget_continuation["seconds_remaining_at_end"] = max(0, int(total_budget_remaining()))
 
+    # Six-minute QUICK SWEEP productive tail. The core sweep often completes in three
+    # to four minutes once production Matrix/rescue machinery is disabled. Do not idle
+    # or re-enable those deep stages: spend otherwise-unused time on fresh A discovery
+    # plus C news/analysis. Strand B is deliberately left exactly as the protected core
+    # slice found it; the tail does not add extra B allocation or loosen any gate.
+    quick_sweep_tail = {
+        "enabled": bool(RADAR_QUICK_SCAN),
+        "attempted": False,
+        "waves": 0,
+        "openalex_queries_executed": 0,
+        "crossref_queries_executed": 0,
+        "news_queries_planned": 0,
+        "candidates": 0,
+        "news_candidates": 0,
+        "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
+        "seconds_remaining_at_end": None,
+    }
+    if RADAR_QUICK_SCAN and total_budget_remaining() > 75:
+        # Keep enough room for final A/B merge, C anchoring/final reserve, serialization
+        # and git-side safety checks. Up to three compact waves should normally use the
+        # sweep's remaining two-ish minutes without turning it back into a deep scan.
+        tail_reserve = 42
+        tail_max_waves = 3
+        tail_stage_seconds = 48
+        tail_a_per_source = 5
+        tail_c_per_wave = 8
+
+        # A-only bank: the broad A bank never contains generic B-method queries. Add
+        # precision/evidence/strategic lanes for diversity, then exclude work already
+        # attempted during the core sweep.
+        tail_a_bank = diversified_query_bank(
+            list(dimensional_bank)
+            + list(evidence_first_bank)
+            + list(strategic_scholarly_focus)
+            + list(curator_seed_bank)
+            + list(finding_context_bank)
+            + list(all_queries)
+        )
+        tail_c_bank = list(dict.fromkeys(
+            c_floor_rescue_queries()
+            + list(priority_news_queries())
+            + list(frontier_focus.get("queries", []))
+            + [
+                "EU research innovation new restriction agreement capability",
+                "Europe science technology new policy funding research security",
+                "EU research talent collaboration mobility new development",
+                "Europe critical technology supplier capacity new development",
+                "EU international research cooperation restriction agreement screening",
+            ]
+        ))
+        tail_a_cursor = int(state.get("quick_sweep_tail_a_cursor", 0) or 0)
+        tail_c_cursor = int(state.get("quick_sweep_tail_c_cursor", 0) or 0)
+
+        while quick_sweep_tail["waves"] < tail_max_waves and total_budget_remaining() > tail_reserve + 15:
+            quick_sweep_tail["attempted"] = True
+            quick_sweep_tail["waves"] += 1
+            wave_no = quick_sweep_tail["waves"]
+            remaining_before = total_budget_remaining()
+            wave_seconds = min(tail_stage_seconds, max(18, int(remaining_before - tail_reserve)))
+            wave_deadline = time.monotonic() + wave_seconds
+
+            executed_oa_before = set(execution_stats.get("openalex_queries", set()))
+            executed_cr_before = set(execution_stats.get("crossref_broad_queries", set()))
+            already_a = executed_oa_before | executed_cr_before
+            a_queries, a_next, _ = rotating_batch_excluding(
+                tail_a_bank, tail_a_cursor, tail_a_per_source, already_a
+            ) if tail_a_bank else ([], tail_a_cursor, True)
+            if not a_queries and tail_a_bank:
+                # If the small bank has already been sampled this run, rotate to the
+                # next slice rather than repeating the same exact queries.
+                a_queries, a_next, _ = rotating_batch(tail_a_bank, tail_a_cursor, tail_a_per_source)
+
+            c_queries, c_next, _ = rotating_batch(
+                tail_c_bank, tail_c_cursor, tail_c_per_wave
+            ) if tail_c_bank else ([], tail_c_cursor, True)
+            quick_sweep_tail["news_queries_planned"] += len(c_queries)
+            log_progress(
+                f"Quick-sweep productive tail wave {wave_no}: "
+                f"{len(a_queries)} A query/queries per scholarly source + {len(c_queries)} C query/queries"
+            )
+
+            tail_exec: dict[str, Any] = {}
+            tail_news_warnings: list[str] = []
+            workers: list[tuple[str, Any]] = []
+            with cf.ThreadPoolExecutor(max_workers=3) as ex:
+                if a_queries and not (oa_failed or source_stage_rate_limited(warnings, "openalex")):
+                    workers.append(("oa", ex.submit(
+                        safe_stage, f"OpenAlex quick-tail wave {wave_no}", collect_openalex,
+                        DATE_FLOOR, warnings, a_queries, wave_deadline,
+                        {q: DATE_FLOOR for q in a_queries}, state["result_depth"]["openalex"],
+                        {q: "quick-tail-a" for q in a_queries}, tail_exec
+                    )))
+                if a_queries and not (cr_failed or source_stage_rate_limited(warnings, "crossref")):
+                    workers.append(("cr", ex.submit(
+                        safe_stage, f"Crossref quick-tail wave {wave_no}", collect_crossref,
+                        DATE_FLOOR, warnings, a_queries, [], [], wave_deadline,
+                        {q: DATE_FLOOR for q in a_queries}, state["result_depth"]["crossref_broad"], {},
+                        {q: "quick-tail-a" for q in a_queries}, tail_exec
+                    )))
+                if c_queries:
+                    workers.append(("news", ex.submit(
+                        safe_stage, f"weak-signal quick-tail wave {wave_no}", collect_news,
+                        now, tail_news_warnings, max(NEWS_LOOKBACK_HOURS, 720), wave_deadline, c_queries, False, 8
+                    )))
+
+                wave_candidates = 0
+                wave_news_candidates = 0
+                for family, fut in workers:
+                    extra = fut.result()
+                    extra = [x for x in extra if isinstance(x, dict)]
+                    if family == "oa":
+                        oa.extend(extra)
+                        wave_candidates += len(extra)
+                    elif family == "cr":
+                        cr.extend(extra)
+                        wave_candidates += len(extra)
+                    else:
+                        news.extend(extra)
+                        wave_news_candidates += len(extra)
+
+            warnings.extend(x for x in tail_news_warnings if x not in warnings)
+            oa_executed = set(tail_exec.get("openalex_queries", set()))
+            cr_executed = set(tail_exec.get("crossref_broad_queries", set()))
+            execution_stats.setdefault("openalex_queries", set()).update(oa_executed)
+            execution_stats.setdefault("crossref_broad_queries", set()).update(cr_executed)
+            execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(tail_exec.get("crossref_abstracts_enrichment_attempted", 0))
+            quick_sweep_tail["openalex_queries_executed"] += len(oa_executed)
+            quick_sweep_tail["crossref_queries_executed"] += len(cr_executed)
+            quick_sweep_tail["candidates"] += wave_candidates
+            quick_sweep_tail["news_candidates"] += wave_news_candidates
+
+            if a_queries and (oa_executed or cr_executed):
+                tail_a_cursor = a_next
+                state["quick_sweep_tail_a_cursor"] = tail_a_cursor
+            if c_queries:
+                tail_c_cursor = c_next
+                state["quick_sweep_tail_c_cursor"] = tail_c_cursor
+
+            # No artificial sleep: a sweep may still finish early if every endpoint is
+            # exhausted/blocked. Normally the extra rotations consume the previously
+            # unused time productively.
+            if not workers:
+                break
+
+    quick_sweep_tail["seconds_remaining_at_end"] = max(0, int(total_budget_remaining()))
+
     state["frontier_gap_depth_cursor"] = deep_cursor
     warnings.extend(x for x in news_warnings if x not in warnings)
 
