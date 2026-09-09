@@ -6,10 +6,10 @@ Key properties
 * No API keys or paid services are required.
 * Discovery is broad; admission is selective but not brittle.
 * Strand A requires direct European/EU scope, substantive R&I evidence, and a source-supported geopolitical/strategic mechanism. Discovery may be broad, but admission is not padded with generic Europe/R&I material.
-* Strand B is a method-development library: a publication must contribute a new, adapted,
-  extended, refined or otherwise explicitly developed futures/foresight method, or a genuinely
-  forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
-  Explicit development language is preferred; method-first papers with validation/transfer evidence can also qualify. Mere application is not enough.
+* Strand B is a methods library: the foresight/futures method itself must be an object of inquiry.
+  A publication may develop/adapt a method, or test, validate, compare, evaluate, critique, review,
+  systematise or discuss how such methods should be designed and used for research, science, technology
+  or innovation futures. Mere application of Delphi/scenarios/horizon scanning to a case is not enough.
 * Strand C is not a general news feed: every admitted item must be a factual current development
   or trusted analytical weak signal on the same EU-R&I/geopolitics themes, with its own strong
   R&I/geopolitical bridge. A substantive Strand-A anchor is preferred but not mandatory; unanchored
@@ -321,7 +321,8 @@ _apply_rule_fix_source_extensions()
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
-B_METHOD_LOOKBACK_YEARS = max(1, int(CONFIG.get("b_method_lookback_years", 15) or 15))
+B_METHOD_LOOKBACK_YEARS = max(1, int(CONFIG.get("b_method_lookback_years", 10) or 10))
+B_METHOD_RECENT_LOOKBACK_YEARS = max(1, int(CONFIG.get("b_method_recent_lookback_years", 5) or 5))
 WEAK_SIGNAL_RETENTION_DAYS = int(CONFIG.get("weak_signal_retention_days", 60))
 WEAK_SIGNAL_CONTEXT_WEIGHT = float(CONFIG.get("weak_signal_context_weight", 0.30) or 0.30)
 HISTORICAL_SHOCK_CONTEXT_WEIGHT = float(CONFIG.get("historical_shock_context_weight", 0.45) or 0.45)
@@ -403,7 +404,8 @@ FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expa
 # corpus floor before discovery starts.
 DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 EXTENDED_DATE_FLOOR = dt.date.today() - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
-B_METHOD_DATE_FLOOR = dt.date.today() - relativedelta(years=B_METHOD_LOOKBACK_YEARS)
+B_METHOD_DATE_FLOOR = dt.date(dt.date.today().year - B_METHOD_LOOKBACK_YEARS, 1, 1)
+B_METHOD_RECENT_DATE_FLOOR = dt.date(dt.date.today().year - B_METHOD_RECENT_LOOKBACK_YEARS, 1, 1)
 SIGNAL_RETENTION_FLOOR = dt.date.today() - dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
 NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 168))
 FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", SIGNAL_BACKFILL_HOURS))
@@ -4178,6 +4180,12 @@ B_METHOD_FAMILIES = [
     'scenario methodology', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
     'technology roadmapping', 'technology roadmap', 'roadmapping', 'wild cards', 'wild card',
     'futures wheel', 'causal layered analysis', 'emerging issue detection',
+    'futures literacy', 'three horizons', 'experiential futures', 'participatory foresight',
+    'computational foresight', 'quantitative foresight', 'data-driven foresight', 'data driven foresight',
+    'automated horizon scanning', 'ai for foresight', 'llm-based horizon scanning', 'llm based horizon scanning',
+    'technology assessment', 'participatory technology assessment', 'exploratory modelling',
+    'exploratory modeling', 'dynamic adaptive policy pathways', 'structured expert judgement',
+    'structured expert judgment',
     # Auxiliary techniques can support a futures method, but never qualify by themselves.
     'delphi', 'real-time delphi', 'policy delphi', 'morphological analysis',
     'system dynamics', 'agent-based modelling', 'agent-based modeling', 'expert elicitation',
@@ -4195,6 +4203,12 @@ B_CORE_FUTURES_METHODS = [
     'scenario methodology', 'backcasting', 'cross-impact analysis', 'cross impact analysis',
     'technology roadmapping', 'technology roadmap', 'roadmapping', 'wild cards', 'wild card',
     'futures wheel', 'causal layered analysis', 'emerging issue detection',
+    'futures literacy', 'three horizons', 'experiential futures', 'participatory foresight',
+    'computational foresight', 'quantitative foresight', 'data-driven foresight', 'data driven foresight',
+    'automated horizon scanning', 'ai for foresight', 'llm-based horizon scanning', 'llm based horizon scanning',
+    'technology assessment', 'participatory technology assessment', 'exploratory modelling',
+    'exploratory modeling', 'dynamic adaptive policy pathways', 'structured expert judgement',
+    'structured expert judgment',
 ]
 
 B_AUXILIARY_METHODS = [
@@ -4218,6 +4232,9 @@ B_RI_FUTURES_METHODS = [
     'technology convergence detection', 'science technology intelligence', 'science and technology intelligence',
     'robust decision making', 'adaptive pathways', 'research portfolio analysis', 'innovation portfolio analysis',
     'multi-criteria portfolio', 'multi criteria portfolio', 'innovation portfolio method', 'research portfolio method',
+    'tech mining', 'technology mining', 'emergence indicators', 'burst detection', 'citation burst detection',
+    'novelty detection', 'topic evolution', 'link prediction', 'knowledge graph forecasting',
+    'dynamic topic model', 'dynamic topic modelling', 'dynamic topic modeling',
 ]
 B_RI_FUTURES_FRAMING = [
     'forecast', 'forecasting', 'future', 'futures', 'forward-looking', 'forward looking', 'anticipatory',
@@ -4227,6 +4244,8 @@ B_RI_FUTURES_FRAMING = [
     'technology evolution', 'technological evolution', 'technology convergence', 'convergence',
     'long-term', 'long term', 'strategic intelligence', 'technology intelligence',
     'strategic uncertainty', 'deep uncertainty', 'robust decision', 'adaptive pathways', 'portfolio',
+    'emergence indicator', 'emergence indicators', 'burst detection', 'novelty detection',
+    'topic evolution', 'knowledge graph forecasting', 'link prediction',
 ]
 B_RI_METHOD_CONTEXT = [
     'research', 'science', 'scientific', 'innovation', 'technology', 'technological', 'r&d',
@@ -4256,6 +4275,44 @@ B_METHOD_CONTRIBUTION_CUES = [
 ]
 
 B_METHOD_CREATION_CUES = B_METHOD_CONTRIBUTION_CUES
+
+# Strand B is not limited to invention.  A method can itself be studied: tested, validated,
+# compared, evaluated, reviewed, critiqued, systematised or discussed as a reusable practice.
+# These cues are useful only when the same bibliographic evidence also names a real futures/
+# foresight method family; ordinary applications remain outside B.
+B_METHOD_STUDY_CUES = [
+    'systematic review', 'scoping review', 'method review', 'methods review', 'methodological review',
+    'comparison of methods', 'method comparison', 'methods comparison', 'compare methods',
+    'method evaluation', 'methods evaluation', 'methodological evaluation', 'evaluate the method',
+    'evaluation of the method', 'validation of the method', 'method validation', 'validate the method',
+    'benchmarking methods', 'method benchmark', 'quality criteria', 'quality assessment',
+    'method selection', 'method choice', 'selection of methods', 'taxonomy of methods',
+    'typology of methods', 'method taxonomy', 'method typology', 'state of the art',
+    'methodological challenges', 'methodological limitations', 'methodological critique',
+    'strengths and weaknesses', 'design principles', 'best practice', 'best practices',
+    'guidelines for foresight', 'foresight evaluation', 'evaluating foresight',
+    'foresight impact assessment', 'foresight capability', 'anticipatory capacity',
+    'embedding foresight', 'institutionalising foresight', 'institutionalizing foresight',
+    'foresight practice', 'foresight process', 'methodological discussion',
+]
+
+B_METHOD_STUDY_ACTIONS = re.compile(
+    r'\b(?:review|synthesi[sz]|compar(?:e|es|ed|ing|ison)|evaluat(?:e|es|ed|ing|ion)|'
+    r'validat(?:e|es|ed|ing|ion)|benchmark(?:s|ed|ing)?|test(?:s|ed|ing)?|assess(?:es|ed|ing|ment)?|'
+    r'critiqu(?:e|es|ed|ing)|systemati[sz](?:e|es|ed|ing|ation)|taxonom(?:y|ies)|typolog(?:y|ies)|'
+    r'discuss(?:es|ed|ing|ion)|examin(?:e|es|ed|ing)|investigat(?:e|es|ed|ing|ion))\b',
+    re.I,
+)
+
+B_METHOD_OBJECT_TERMS = [
+    'method', 'methods', 'methodology', 'methodological', 'framework', 'approach', 'toolkit',
+    'protocol', 'process', 'practice', 'quality criteria', 'design principles', 'guidelines',
+]
+
+B_PURE_APPLICATION_CUES = [
+    'using', 'we use', 'we used', 'we apply', 'we applied', 'application of', 'applications of',
+    'applied to', 'case study', 'case studies', 'case application', 'demonstrated in',
+]
 
 # Creation must point to a method/framework/protocol/toolkit/approach AND the sentence must also
 # contain a real futures/foresight family. This prevents "we develop an earthquake early-warning
@@ -4296,7 +4353,10 @@ B_STRATEGIC_RI_RELEVANCE = [
     'anticipatory governance', 'policy domains', 'emerging technology', 'emerging technologies',
     'critical technology', 'critical technologies', 'technology intelligence', 'strategic intelligence',
     'research front', 'research fronts', 'innovation trajectories', 'technology trajectories',
-    'technology fields', 'industrial policy', 'geopolit', 'geoeconomic', 'economic security',
+    'technology fields', 'research system', 'innovation system', 'science system',
+    'r&d investment', 'r&d investments', 'research investment', 'research investments',
+    'science and technology', 'science technology', 'technology foresight', 'technology assessment',
+    'industrial policy', 'geopolit', 'geoeconomic', 'economic security',
     'strategic competition', 'research portfolio', 'r&i portfolio',
 ]
 B_OFFTOPIC_APPLICATION_DOMAINS = [
@@ -5402,16 +5462,17 @@ def _a_focus_ok(title: str, abstract: str, body: str, source_kind: str) -> tuple
 
 
 def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, source_tier: int) -> tuple[bool, list[str], str, list[str], str]:
-    """Return whether a publication develops a reusable method for studying futures of Strand A.
+    """Return whether the futures/foresight method itself is a substantive object of inquiry.
 
-    Two admission routes are allowed:
-      1. a futures/foresight method as such (the V17.6 precision route); or
-      2. a newly developed forward-looking method for detecting, mapping or forecasting change
-         in research, science, innovation or technology (V17.7 R&I-futures transfer route).
+    Strand B is a reusable methods library, not an application library. A publication may qualify
+    because it develops/adapts a method *or* because it tests, validates, compares, evaluates,
+    critiques, reviews, systematises or discusses the design/quality/use of a futures method for
+    research, science, technology, innovation or public-policy futures. Merely applying Delphi,
+    scenarios, horizon scanning, bibliometrics, etc. to a case does not qualify.
 
-    Both routes require a genuine method-development claim in title/abstract. Ordinary method
-    use, reviews, domain early-warning systems, descriptive bibliometrics/patent studies and
-    generic assessment frameworks still fail.
+    Two subject routes remain:
+      1. futures/foresight methods as such; or
+      2. forward-looking analytical methods for detecting/mapping/forecasting change in R&I/STI.
     """
     title = clean_text(title)
     abstract = clean_text(abstract)
@@ -5437,9 +5498,8 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
 
     strategic_ri_context = distinct_matches(ta, B_STRATEGIC_RI_RELEVANCE)
     off_topic_application = distinct_matches(ta, B_OFFTOPIC_APPLICATION_DOMAINS)
-    # Live Strand-B discovery remains precision-first: the method must have a policy/R&I/
-    # technology-system destination. V17.8.1 only changes *historical migration*: older saved
-    # B records are not mass-deleted from shortened summaries.
+    # B still needs a destination relevant to studying R&I/science/technology/policy futures.
+    # The broader method-contribution definition does not turn B into generic futures studies.
     if not strategic_ri_context:
         return False, candidate_families[:5], '', [], ''
     if off_topic_application and not distinct_matches(ta, [
@@ -5449,11 +5509,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     ]):
         return False, candidate_families[:5], '', [], ''
 
-    # "Scenario construction/building/development" is linguistically ambiguous: it can mean
-    # constructing a simulated teaching/engineering scene rather than a future scenario. When
-    # these are the only futures-family hits, require an independent temporal/strategic futures
-    # cue. This keeps genuine scenario methodology while blocking false positives such as
-    # smart-classroom scenario construction.
+    # Scenario wording is especially ambiguous outside futures work.
     ambiguous_scenario_only = bool(candidate_families) and all(
         f in {'scenario construction', 'scenario building', 'scenario development'} for f in candidate_families
     )
@@ -5476,28 +5532,56 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
             or (sent_ri and sent_ri_future and sent_ri_context)
         )
 
+    def method_study_sentence(sent: str) -> bool:
+        """True only when the sentence studies the method/practice rather than just using it."""
+        if not sentence_is_candidate(sent):
+            return False
+        low = re.sub(r'[-–—/]+', ' ', normalized(sent))
+        direct = bool(_method_matches(low, B_METHOD_STUDY_CUES))
+        if direct:
+            return True
+        actions = bool(B_METHOD_STUDY_ACTIONS.search(low))
+        if not actions:
+            return False
+        object_terms = bool(_method_matches(low, B_METHOD_OBJECT_TERMS))
+        families_here = _method_matches(low, B_METHOD_FAMILIES + B_RI_FUTURES_METHODS)
+        # Comparing two named methods is methodological even when the word "method" is omitted.
+        comparative_multi_method = len(set(families_here)) >= 2 and bool(re.search(r'\b(?:compar|versus|vs\.?|relative performance)\w*', low))
+        quality_language = bool(re.search(
+            r'\b(?:validity|reliability|accuracy|performance|quality|rigou?r|robustness|strengths?|weaknesses?|limitations?|'
+            r'transferab\w*|reusab\w*|generaliz\w*|generalis\w*|effectiveness|impact of foresight)\b',
+            low,
+        ))
+        return bool(object_terms or comparative_multi_method or quality_language)
+
     creation_bridge = ''
+    method_study_bridge = ''
     for sent in split_sentences(ta):
         if not sentence_is_candidate(sent):
             continue
         low = re.sub(r'[-–—/]+', ' ', normalized(sent))
         low = re.sub(r'^design\s+methodology\s+approach\s+', '', low)
-        if re.search(r'\b(?:does not|do not|did not|not|without)\b.{0,120}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*', low):
-            continue
-        creation_language = bool(
-            _method_matches(sent, B_METHOD_CREATION_CUES)
-            or B_CREATION_VERBS.search(low)
-            or B_CREATION_PASSIVE.search(low)
-            or re.search(
-                r'\b(?:new|novel|adapted|extended|refined|reusable|transferable)\b.{0,110}'
-                r'\b(?:foresight|horizon scanning|weak signal|scenario|backcasting|cross impact|roadmap|futures|'
-                r'bibliometric|scientometric|patent|technology intelligence|technology forecasting|science mapping|'
-                r'technology mapping|research front|emerging technology|trajectory|convergence|robust decision|adaptive pathways|portfolio)\b',
-                low,
+        if not creation_bridge and not re.search(
+            r'\b(?:does not|do not|did not|not|without)\b.{0,120}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*',
+            low,
+        ):
+            creation_language = bool(
+                _method_matches(sent, B_METHOD_CREATION_CUES)
+                or B_CREATION_VERBS.search(low)
+                or B_CREATION_PASSIVE.search(low)
+                or re.search(
+                    r'\b(?:new|novel|adapted|extended|refined|reusable|transferable)\b.{0,110}'
+                    r'\b(?:foresight|horizon scanning|weak signal|scenario|backcasting|cross impact|roadmap|futures|'
+                    r'bibliometric|scientometric|patent|technology intelligence|technology forecasting|science mapping|'
+                    r'technology mapping|research front|emerging technology|trajectory|convergence|robust decision|adaptive pathways|portfolio)\b',
+                    low,
+                )
             )
-        )
-        if creation_language:
-            creation_bridge = sent[:420]
+            if creation_language:
+                creation_bridge = sent[:420]
+        if not method_study_bridge and method_study_sentence(sent):
+            method_study_bridge = sent[:420]
+        if creation_bridge and method_study_bridge:
             break
 
     title_norm = re.sub(r'[-–—/]+', ' ', normalized(title))
@@ -5515,42 +5599,44 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
             )
         )
     )
+    title_method_study = bool(title_candidate and method_study_sentence(title))
 
-    # Method papers do not always use the performative verbs "we develop/propose". A method-first
-    # title plus validation/comparison/transfer evidence is sufficient when the paper is clearly
-    # about the reusable analytical method rather than merely applying one in a case study.
+    # A method-first title plus explicit validation/comparison/transfer evidence is also enough.
     method_first_title = bool(
         title_candidate
         and re.search(r'\b(?:method|methodology|framework|toolkit|protocol|approach)\b', title_norm)
         and not re.search(r'\b(?:using|application of|applications of|case study|case studies)\b', title_norm)
     )
     contribution_evidence = bool(re.search(
-        r'\b(?:validat|benchmark|compar(?:e|es|ed|ing|ison)|evaluat|robust|accuracy|performance|transferab|reusab|generaliz|generalis|procedure|workflow)\w*',
+        r'\b(?:validat|benchmark|compar(?:e|es|ed|ing|ison)|evaluat|test(?:s|ed|ing)?|review|synthesi[sz]|critiqu|'
+        r'robust|accuracy|performance|quality|transferab|reusab|generaliz|generalis|procedure|workflow|taxonomy|typology)\w*',
         normalized(abstract),
     ))
-    explicit_non_creation = bool(re.search(
-        r'\b(?:does not|do not|did not|without)\b.{0,140}\b(?:develop|propos|introduc|design|adapt|extend|refin|creat|construct|formulat|operationalis|operationaliz)\w*',
+    method_contribution = bool(method_first_title and contribution_evidence)
+
+    # Pure case applications are deliberately not B.  Application wording is harmless only when
+    # there is independent evidence that the paper also studies/develops the method itself.
+    application_language = bool(_method_matches(title_norm, B_PURE_APPLICATION_CUES)) or bool(re.search(
+        r'\b(?:we|this (?:paper|study|article))\s+(?:use|uses|used|apply|applies|applied|employ|employs|employed)\b',
         normalized(abstract),
-    )) or contains_any(normalized(abstract), ['existing method', 'existing methodology', 'existing framework', 'existing protocol'])
-    method_contribution = bool(method_first_title and contribution_evidence and not explicit_non_creation)
-
-    if not (creation_bridge or title_creation or method_contribution):
+    ))
+    method_object_contribution = bool(creation_bridge or title_creation or method_study_bridge or title_method_study or method_contribution)
+    if not method_object_contribution:
+        return False, candidate_families[:5], '', [], ''
+    if application_language and not (creation_bridge or title_creation or method_study_bridge or title_method_study):
         return False, candidate_families[:5], '', [], ''
 
-    review_like = bool(re.search(r'\b(?:review|synthesis|overview|perspective|commentary|lessons from|using|application of|applications of)\b', title_norm))
-    if review_like and not (creation_bridge or method_contribution):
-        return False, candidate_families[:5], '', [], ''
-
-    # The R&I-futures route must remain about a reusable analytical method, not a domain-specific
-    # prediction system that happens to mention technology. Requiring R&I/science/technology-system
-    # context in the bibliographic evidence unit is the key guardrail.
+    # The R&I-futures route must remain about a reusable forward-looking analytical method, not
+    # descriptive bibliometrics/patent analysis or a domain prediction system.
     route = 'future-of-A-method' if classic_candidate else 'ri-futures-analytic-method'
     if route == 'ri-futures-analytic-method' and not ri_transfer_candidate:
         return False, candidate_families[:5], '', [], ''
 
     suitability = distinct_matches(ta, B_SUITABILITY_CONTEXT + B_RI_METHOD_CONTEXT)
     transferability = distinct_matches(ta, B_TRANSFERABILITY_CUES)
-    method_bridge = creation_bridge or (abstract[:420] if method_contribution else '')
+    method_bridge = creation_bridge or method_study_bridge or (abstract[:420] if method_contribution else '')
+    if method_study_bridge and not (creation_bridge or title_creation):
+        route = 'future-method-study' if classic_candidate else 'ri-futures-method-study'
     return True, candidate_families[:5], method_bridge, (suitability + transferability)[:6], route
 
 
@@ -15930,7 +16016,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR, B_METHOD_RECENT_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
     started = time.time()
     log_progress.started = time.monotonic()
     configured_budget_seconds = max(60, int(CONFIG.get("scan_budget_seconds", 1200)))
@@ -16025,7 +16111,8 @@ def main() -> int:
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
-    B_METHOD_DATE_FLOOR = now.date() - relativedelta(years=B_METHOD_LOOKBACK_YEARS)
+    B_METHOD_DATE_FLOOR = dt.date(now.year - B_METHOD_LOOKBACK_YEARS, 1, 1)
+    B_METHOD_RECENT_DATE_FLOOR = dt.date(now.year - B_METHOD_RECENT_LOOKBACK_YEARS, 1, 1)
     SIGNAL_RETENTION_FLOOR = weak_signal_retention_floor(now.date())
     previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, now)
     if sum(age_window_removed.values()):
@@ -16187,14 +16274,30 @@ def main() -> int:
     # separate from the main A/B discovery cursor, so methods suitable for understanding A are
     # not delayed for several runs simply because the broad cursor is currently in
     # the Strand-A portion of the query bank.
-    b_method_bank = list(dict.fromkeys(CONFIG.get("queries_b_method", [])))
-    b_method_lookback_years = max(1, int(CONFIG.get("b_method_lookback_years", 12) or 12))
-    b_method_date_floor = now.date() - relativedelta(years=b_method_lookback_years)
+    b_method_recent_bank = list(dict.fromkeys(
+        clean_text(q) for q in CONFIG.get("queries_b_method_recent", []) if clean_text(q)
+    ))
+    b_method_foundational_bank = list(dict.fromkeys(
+        clean_text(q) for q in CONFIG.get("queries_b_method_foundational", []) if clean_text(q)
+    ))
+    # Backwards-compatible fallback for older configs.
+    if not b_method_recent_bank:
+        b_method_recent_bank = list(dict.fromkeys(
+            clean_text(q) for q in CONFIG.get("queries_b_method", []) if clean_text(q)
+        ))
+    b_method_bank = list(dict.fromkeys(b_method_recent_bank + b_method_foundational_bank))
+    b_method_recent_floor = B_METHOD_RECENT_DATE_FLOOR
+    b_method_date_floor = B_METHOD_DATE_FLOOR
     b_method_cursor_before = int(state.get("strand_b_method_cursor", 0) or 0)
-    b_method_focus = least_recent_probe_batch(
-        state, "strand_b_method", b_method_bank,
-        int(CONFIG.get("queries_b_method_per_scan", 6)),
+    b_method_recent_focus = least_recent_probe_batch(
+        state, "strand_b_method_recent", b_method_recent_bank,
+        max(0, int(CONFIG.get("queries_b_method_recent_per_scan", 9) or 9)),
     )
+    b_method_foundational_focus = least_recent_probe_batch(
+        state, "strand_b_method_foundational", b_method_foundational_bank,
+        max(0, int(CONFIG.get("queries_b_method_foundational_per_scan", 3) or 3)),
+    )
+    b_method_focus = list(dict.fromkeys(b_method_recent_focus + b_method_foundational_focus))
 
     # A separate persisted exploration lane searches the whole retained corpus
     # window, not just the short incremental overlap. This is the practical
@@ -16273,10 +16376,15 @@ def main() -> int:
     cr_explore_a = [q for q in cr_explore if q not in b_method_set]
     oa_a_prefix = interleaved_unique_batch(min(oa_cap, a_protected), dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore_a, gap_scholarly, finding_context_focus)
     cr_a_prefix = interleaved_unique_batch(min(cr_cap, a_protected), dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore_a, gap_scholarly, finding_context_focus)
+    # Give B a small guaranteed place in the actually executed scholarly prefix.  This is
+    # discovery allocation only: it does not reserve publication slots or weaken the B gate.
+    b_protected = max(0, int(CONFIG.get("b_method_protected_scholarly_queries_per_source", 8) or 8))
+    oa_b_prefix = interleaved_unique_batch(min(oa_cap, b_protected), b_method_recent_focus, b_method_foundational_focus)
+    cr_b_prefix = interleaved_unique_batch(min(cr_cap, b_protected), b_method_recent_focus, b_method_foundational_focus)
     oa_rest = interleaved_unique_batch(oa_cap * 2, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus)
     cr_rest = interleaved_unique_batch(cr_cap * 2, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus)
-    oa_batch = list(dict.fromkeys(oa_a_prefix + oa_rest))[:oa_cap]
-    cr_batch = list(dict.fromkeys(cr_a_prefix + cr_rest))[:cr_cap]
+    oa_batch = list(dict.fromkeys(oa_a_prefix + oa_b_prefix + oa_rest))[:oa_cap]
+    cr_batch = list(dict.fromkeys(cr_a_prefix + cr_b_prefix + cr_rest))[:cr_cap]
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
@@ -16291,11 +16399,16 @@ def main() -> int:
         cr_query_dates[q] = DATE_FLOOR
         oa_depth_lanes[q] = "evidence"
         cr_depth_lanes[q] = "evidence"
-    for q in b_method_focus:
-        oa_query_dates[q] = B_METHOD_DATE_FLOOR
-        cr_query_dates[q] = B_METHOD_DATE_FLOOR
-        oa_depth_lanes[q] = "b-method-durable"
-        cr_depth_lanes[q] = "b-method-durable"
+    for q in b_method_recent_focus:
+        oa_query_dates[q] = b_method_recent_floor
+        cr_query_dates[q] = b_method_recent_floor
+        oa_depth_lanes[q] = "b-method-recent"
+        cr_depth_lanes[q] = "b-method-recent"
+    for q in b_method_foundational_focus:
+        oa_query_dates[q] = b_method_date_floor
+        cr_query_dates[q] = b_method_date_floor
+        oa_depth_lanes[q] = "b-method-foundational"
+        cr_depth_lanes[q] = "b-method-foundational"
     for q in finding_context_focus:
         oa_query_dates[q] = DATE_FLOOR
         cr_query_dates[q] = DATE_FLOOR
@@ -16312,16 +16425,25 @@ def main() -> int:
     for q in cr_explore:
         cr_query_dates[q] = DATE_FLOOR
         cr_depth_lanes[q] = "explore"
-    # Foresight-method value decays much more slowly than current geopolitical evidence.
-    # Search the dedicated B lane across a long horizon while keeping the same strict
-    # method-contribution gate. This is a discovery difference, not a relevance waiver.
-    for q in b_method_set:
+    # B is recent-first rather than recent-only.  Current method debates get most of the
+    # query slots (roughly the last five years); a smaller foundational lane reaches back to
+    # the 2016-era window.  Once admitted, B remains cumulative and is not aged out.
+    b_method_recent_set = set(b_method_recent_bank)
+    b_method_foundational_set = set(b_method_foundational_bank)
+    for q in b_method_recent_set:
+        if q in oa_batch or q in oa_explore:
+            oa_query_dates[q] = b_method_recent_floor
+            oa_depth_lanes[q] = "b-method-recent"
+        if q in cr_batch or q in cr_explore:
+            cr_query_dates[q] = b_method_recent_floor
+            cr_depth_lanes[q] = "b-method-recent"
+    for q in b_method_foundational_set:
         if q in oa_batch or q in oa_explore:
             oa_query_dates[q] = b_method_date_floor
-            oa_depth_lanes[q] = "b-method-long-horizon"
+            oa_depth_lanes[q] = "b-method-foundational"
         if q in cr_batch or q in cr_explore:
             cr_query_dates[q] = b_method_date_floor
-            cr_depth_lanes[q] = "b-method-long-horizon"
+            cr_depth_lanes[q] = "b-method-foundational"
     priority_tasks_all = diversified_priority_journal_tasks(
         CONFIG.get("crossref_priority_journals", []),
         CONFIG.get("crossref_priority_journal_queries", []),
@@ -16380,6 +16502,16 @@ def main() -> int:
         policy_journal_cursor_before,
         max(0, int(CONFIG.get('priority_policy_journals_per_scan', 6) or 0)),
     ) if priority_policy_journals else ([], 0, True)
+    # Strand B gets a tiny source-first slice of method-heavy journals.  This catches recent
+    # methodological work whose title/abstract does not happen to match our query vocabulary.
+    # The ordinary B gate still decides admission; the journal name never confers eligibility.
+    b_method_journal_bank = list(dict.fromkeys(CONFIG.get('b_method_journal_watchlist', [])))
+    b_method_journal_cursor_before = int(state.get('crossref_b_method_journal_cursor', 0) or 0)
+    b_method_journal_batch, _b_journal_next, _b_journal_wrapped = rotating_batch(
+        b_method_journal_bank,
+        b_method_journal_cursor_before,
+        max(0, int(CONFIG.get('b_method_journals_per_scan', 2) or 0)),
+    ) if b_method_journal_bank else ([], 0, True)
     # A separate small depth lane deliberately revisits a *different* rotating slice of
     # core R&I journals across the retained four-month window. The ordinary source-first
     # sweep below is now incremental, so we no longer reread four months of 20 journals on
@@ -16396,13 +16528,13 @@ def main() -> int:
         # Recall-first source census: inspect the recent contents of every configured
         # scholarly venue before relying on topic-query rotation. The topic gate remains
         # unchanged, so this increases finding probability rather than relevance leniency.
-        cr_source_batch = list(dict.fromkeys(priority_policy_journals + source_journals_all))
+        cr_source_batch = list(dict.fromkeys(b_method_journal_bank + priority_policy_journals + source_journals_all))
     else:
         # Round-robin the source-first lanes. Concatenation used to let policy/Q1 lists
         # consume the front of a deadline-truncated batch, leaving broad and unseen journals
         # nominally planned but rarely executed. The total request budget is unchanged.
         cr_source_batch = interleaved_unique_batch(
-            source_total, priority_policy_batch, diversity_batch, cr_preferred_batch, cr_general_batch
+            source_total, b_method_journal_batch, priority_policy_batch, diversity_batch, cr_preferred_batch, cr_general_batch
         )
 
     # Independent publisher-page journal watch. This means a Crossref/OpenAlex 429 cannot
@@ -16820,7 +16952,8 @@ def main() -> int:
     note_probe_execution(state, "crossref_base", [q for q in cr_base if q in executed_cr], now_iso)
     note_probe_execution(state, "dimensional", [q for q in dimensional_focus if q in (executed_oa | executed_cr)], now_iso)
     note_probe_execution(state, "evidence_first", [q for q in evidence_first_focus if q in (executed_oa | executed_cr)], now_iso)
-    note_probe_execution(state, "strand_b_method", [q for q in b_method_focus if q in (executed_oa | executed_cr)], now_iso)
+    note_probe_execution(state, "strand_b_method_recent", [q for q in b_method_recent_focus if q in (executed_oa | executed_cr)], now_iso)
+    note_probe_execution(state, "strand_b_method_foundational", [q for q in b_method_foundational_focus if q in (executed_oa | executed_cr)], now_iso)
     note_probe_execution(state, "finding_context", [q for q in finding_context_focus if q in (executed_oa | executed_cr)], now_iso)
     note_probe_execution(state, "curator_seed", [q for q in curator_seed_focus if q in (executed_oa | executed_cr)], now_iso)
     if probe_lane_complete(state, "openalex_base", all_queries):
@@ -16850,6 +16983,9 @@ def main() -> int:
     state["crossref_policy_journal_cursor"], _policy_commit_wrapped, policy_journal_executed = committed_rotation_cursor(
         priority_policy_journals, policy_journal_cursor_before, priority_policy_batch, executed_source_journals
     ) if priority_policy_journals else (0, True, 0)
+    state["crossref_b_method_journal_cursor"], _b_journal_commit_wrapped, b_method_journal_executed = committed_rotation_cursor(
+        b_method_journal_bank, b_method_journal_cursor_before, b_method_journal_batch, executed_source_journals
+    ) if b_method_journal_bank else (0, True, 0)
     depth_executed_journals = set(journal_depth_exec.get('crossref_source_journals', set()))
     state["crossref_journal_depth_cursor"], _journal_depth_commit_wrapped, journal_depth_executed = committed_rotation_cursor(
         journal_depth_bank, journal_depth_cursor_before, journal_depth_batch, depth_executed_journals
@@ -19113,6 +19249,9 @@ def main() -> int:
             "c_prefilter_candidates": len(news),
             "c_anchored_candidates": len(current_c),
             "b_method_queries_this_scan": len(b_method_focus),
+            "b_method_recent_queries_this_scan": len(b_method_recent_focus),
+            "b_method_foundational_queries_this_scan": len(b_method_foundational_focus),
+            "b_method_journals_planned": list(b_method_journal_batch),
             "foresight_author_followup": {
                 "bank": len(foresight_author_bank),
                 "planned": len(foresight_author_batch),
@@ -19275,6 +19414,9 @@ def main() -> int:
             "source_health_policy": "Diagnostic only: source quality is never inferred from admission yield or abstract coverage, and observed yield never prunes a configured source.",
             "source_yield_pruning_enabled": False,
             "b_method_queries_executed": b_method_executed,
+            "b_method_recent_queries_executed": sum(1 for q in b_method_recent_focus if q in method_executed),
+            "b_method_foundational_queries_executed": sum(1 for q in b_method_foundational_focus if q in method_executed),
+            "b_method_journals_executed": b_method_journal_executed,
             "institution_sources_this_run": len(inst_batch),
             "extended_highest_sources_planned": len(extended_highest_batch),
             "extended_highest_sources_executed": extended_highest_executed,
@@ -19381,8 +19523,10 @@ def main() -> int:
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,
             "admission_profile": clean_text(CONFIG.get("admission_profile")),
+            "b_method_recent_discovery_from": B_METHOD_RECENT_DATE_FLOOR.isoformat(),
+            "b_method_foundational_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "b_method_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
-            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 10) or 10), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False},
+            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False},
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),

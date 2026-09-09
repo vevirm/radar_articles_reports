@@ -95,7 +95,7 @@ class V240AdmissionRepairTests(unittest.TestCase):
     def test_budget_and_mix_targets(self):
         cfg=json.loads((ROOT/'radar_config.json').read_text())
         self.assertEqual(int(cfg['full_budget_continuation_max_waves']),2)
-        self.assertEqual((int(cfg['target_new_a_per_scan']),int(cfg['target_new_b_per_scan']),int(cfg['target_new_c_per_scan'])),(10,1,3))
+        self.assertEqual((int(cfg['target_new_a_per_scan']),int(cfg['target_new_b_per_scan']),int(cfg['target_new_c_per_scan'])),(8,1,3))
         self.assertEqual(int(cfg['discovery_overlap_days']),45)
 
     def test_main_workflow_is_schedule_or_manual_not_push(self):

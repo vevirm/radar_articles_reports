@@ -31,7 +31,7 @@ class ScannerFeatureContractTests(unittest.TestCase):
         self.assertTrue(any('dg rtd' in x.lower() for x in evidence2))
 
     def test_v235_strand_mix_and_b_horizon_are_targets_not_quotas(self):
-        self.assertEqual((int(scan.CONFIG.get('target_new_a_per_scan',0)), int(scan.CONFIG.get('target_new_b_per_scan',0)), int(scan.CONFIG.get('target_new_c_per_scan',0))), (10,1,3))
+        self.assertEqual((int(scan.CONFIG.get('target_new_a_per_scan',0)), int(scan.CONFIG.get('target_new_b_per_scan',0)), int(scan.CONFIG.get('target_new_c_per_scan',0))), (8,1,3))
         self.assertIn('Never reject', str(scan.CONFIG.get('target_item_mix_rule','')))
         self.assertGreaterEqual(int(scan.CONFIG.get('b_method_lookback_years',0)), 10)
 
