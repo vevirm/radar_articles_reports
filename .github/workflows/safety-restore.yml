@@ -1,0 +1,199 @@
+name: Safety — Save / Restore
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Choose what to do'
+        required: true
+        default: 'SAVE_SAFE_POINT'
+        type: choice
+        options:
+          - SAVE_SAFE_POINT
+          - RESTORE_CODE_ONLY
+          - RESTORE_EVERYTHING
+      confirm_restore:
+        description: 'Required for either RESTORE option'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+# Use the same lock as the research scanners. A save/restore will wait for an
+# active scan instead of changing files underneath it.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  safety:
+    permissions:
+      contents: write
+      pages: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out main without stored credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate requested operation
+        env:
+          OPERATION: ${{ inputs.operation }}
+          CONFIRM_RESTORE: ${{ inputs.confirm_restore }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$OPERATION" in
+            SAVE_SAFE_POINT)
+              echo 'Saving current main as the known-good restore point.'
+              ;;
+            RESTORE_CODE_ONLY|RESTORE_EVERYTHING)
+              if [[ "$CONFIRM_RESTORE" != 'true' ]]; then
+                echo '::error::Restore was selected, but confirm_restore was not checked.'
+                exit 1
+              fi
+              ;;
+            *)
+              echo "::error::Unknown operation: $OPERATION"
+              exit 1
+              ;;
+          esac
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save current main as safe-last-good
+        if: inputs.operation == 'SAVE_SAFE_POINT'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
+          safe_commit="$(git rev-parse HEAD)"
+
+          # This branch is intentionally movable: every deliberate SAVE operation
+          # replaces the previous known-good point. The user's downloaded ZIP remains
+          # an independent offline backup as well.
+          git push --force origin "${safe_commit}:refs/heads/safe-last-good"
+
+          echo "SAFE_COMMIT=${safe_commit}" >> "$GITHUB_ENV"
+          echo "### Safe point saved" >> "$GITHUB_STEP_SUMMARY"
+          echo "\`safe-last-good\` now points to \`${safe_commit}\`." >> "$GITHUB_STEP_SUMMARY"
+          echo "Nothing on main was changed." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fetch safe point
+        if: inputs.operation != 'SAVE_SAFE_POINT'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git ls-remote --exit-code --heads origin safe-last-good >/dev/null 2>&1; then
+            echo '::error::No safe-last-good branch exists. Run this workflow once with SAVE_SAFE_POINT first.'
+            exit 1
+          fi
+          git fetch origin refs/heads/safe-last-good:refs/remotes/origin/safe-last-good
+          safe_commit="$(git rev-parse origin/safe-last-good)"
+          echo "SAFE_COMMIT=${safe_commit}" >> "$GITHUB_ENV"
+          echo "Restoring from safe point: ${safe_commit}"
+
+      - name: Restore code and visuals, keep current data
+        if: inputs.operation == 'RESTORE_CODE_ONLY'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # These are scanner-owned or reader-owned DATA files. Keep their current
+          # contents while every other tracked path is restored to safe-last-good.
+          # Missing optional files are simply ignored.
+          preserve_root="$(mktemp -d)"
+          preserve_files=(
+            'radar.json'
+            'historical/historical.json'
+            'reader_text.json'
+          )
+
+          for path in "${preserve_files[@]}"; do
+            if [[ -f "$path" ]]; then
+              mkdir -p "$preserve_root/$(dirname "$path")"
+              cp -p -- "$path" "$preserve_root/$path"
+              echo "Preserving current data: $path"
+            fi
+          done
+
+          # Make index + worktree match the safe snapshot without moving HEAD.
+          # The resulting changes are committed normally on top of main; no force
+          # push of main and no history rewriting is used.
+          git read-tree --reset -u "$SAFE_COMMIT"
+
+          for path in "${preserve_files[@]}"; do
+            if [[ -f "$preserve_root/$path" ]]; then
+              mkdir -p "$(dirname "$path")"
+              cp -p -- "$preserve_root/$path" "$path"
+            fi
+          done
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Main already matches the safe code/visual snapshot.'
+          else
+            git commit -m 'Emergency restore: code and visuals to safe point'
+            git push origin HEAD:main
+          fi
+
+          echo "### Code/visual restore complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "Restored from \`${SAFE_COMMIT}\`." >> "$GITHUB_STEP_SUMMARY"
+          echo 'Preserved current `radar.json`, `historical/historical.json`, and `reader_text.json` when present.' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Restore the complete safe snapshot
+        if: inputs.operation == 'RESTORE_EVERYTHING'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Full restore includes radar.json and historical/historical.json from the
+          # safe point. This is intentionally the stronger emergency option.
+          git read-tree --reset -u "$SAFE_COMMIT"
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo 'Main already matches the complete safe snapshot.'
+          else
+            git commit -m 'Emergency restore: complete safe snapshot'
+            git push origin HEAD:main
+          fi
+
+          echo "### Full restore complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "Everything was restored from \`${SAFE_COMMIT}\`, including corpus data." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Request a GitHub Pages rebuild after restore
+        if: inputs.operation != 'SAVE_SAFE_POINT'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body -L -X POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2026-03-10' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds"
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: |
+          git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
