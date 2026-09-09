@@ -43,28 +43,38 @@ const SIMPLE={
   energy_compute_rationing:'An energy shock forces Europe to ration AI and supercomputing access.',
   clinical_data_order:'A foreign data order freezes a pan-European clinical research network.'
 };
+function evidenceStats(s){
+  const ev=Array.isArray(s?.evidence)?s.evidence:[];
+  const rows=ev.map(e=>e?.row||e).filter(Boolean);
+  const sources=new Set(rows.map(r=>clean(r?.source)).filter(Boolean));
+  return {records:rows.length,sources:sources.size};
+}
 function collect(data){
-  const out=[],seen=new Set();
-  const add=text=>{text=clean(text);const k=norm(text);if(!text||!k||seen.has(k))return;seen.add(k);out.push(text)};
+  const out=[],seen=new Map();
+  const add=(text,distance=2,stats={})=>{text=clean(text);const k=norm(text);if(!text||!k)return;const item={text,distance:Number(distance)||2,records:Number(stats.records)||0,sources:Number(stats.sources)||0};const old=seen.get(k);if(old){if(item.distance<old.distance)Object.assign(old,item);return}seen.set(k,item);out.push(item)};
   const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
   const hids=Array.isArray(hi?.publications?.shock)?hi.publications.shock:[];
   const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-  for(const id of hids){const c=hmap.get(clean(id));if(c)add(c.reader_title||c.topic_label)}
+  for(const id of hids){const c=hmap.get(clean(id));if(c)add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources})}
   const dynamic=RadarShockScenarios.buildDynamic?.(data)||[];
-  if(dynamic.length)add('A security reclassification suddenly restricts access to European research, technology and collaboration.');
-  for(const s of RadarShockScenarios.buildDirect?.(data)||[])add(SIMPLE[s.id]||s.title);
+  if(dynamic.length){
+    const records=dynamic.reduce((n,s)=>n+evidenceStats(s).records,0);
+    const sourceSet=new Set();for(const s of dynamic)for(const e of (s.evidence||[])){const src=clean((e.row||e)?.source);if(src)sourceSet.add(src)}
+    add('A security reclassification suddenly restricts access to European research, technology and collaboration.',3,{records,sources:sourceSet.size});
+  }
+  for(const s of RadarShockScenarios.buildDirect?.(data)||[])add(SIMPLE[s.id]||s.title,1,evidenceStats(s));
   for(const s of RadarShockScenarios.build?.(data)||[]){
     if(['pilot_lines_materials','open_science_security_collision','measurement_mid_river'].includes(s.id))continue;
-    add(SIMPLE[s.id]||s.title);
+    add(SIMPLE[s.id]||s.title,2,evidenceStats(s));
   }
-  return out;
+  return out.sort((a,b)=>a.distance-b.distance||b.sources-a.sources||b.records-a.records||a.text.localeCompare(b.text));
 }
 (async()=>{
   const el=document.getElementById('shockList');
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
     const items=collect(data);
-    el.innerHTML=items.length?items.map(x=>`<li>${esc(x)}</li>`).join(''):'<li class="empty">No external shock is currently supported by the Radar.</li>';
+    el.innerHTML=items.length?items.map(x=>`<li>${esc(x.text)}<span class="evidence-count">${x.records||0} records · ${x.sources||0} sources</span></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
   }catch(e){console.error(e);el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

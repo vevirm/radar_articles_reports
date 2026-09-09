@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Patterns · Research &amp; Innovation × Geopolitics Radar</title>
+<title>Ongoing Phenomena · Research &amp; Innovation × Geopolitics Radar</title>
 <link rel="stylesheet" href="../reform.css?v=24.2">
 <style>
   .pattern-simple-main{padding-top:20px!important}
@@ -25,12 +25,12 @@
 <body>
 <main class="wrap pattern-simple-main">
   <section class="pattern-simple-section">
-    <h2>What is changing</h2>
-    <ul id="changing" class="pattern-simple-list"><li class="empty">Loading</li></ul>
-  </section>
-  <section class="pattern-simple-section">
     <h2>What keeps coming back</h2>
     <ul id="returning" class="pattern-simple-list"><li class="empty">Loading</li></ul>
+  </section>
+  <section class="pattern-simple-section">
+    <h2>What is changing</h2>
+    <ul id="changing" class="pattern-simple-list"><li class="empty">Loading</li></ul>
   </section>
 </main>
 <script src="phenomena.js?v=21.22"></script>
@@ -95,15 +95,17 @@ function tokens(v){return new Set(norm(v).split(' ').filter(w=>w.length>3))}
 function similarity(a,b){const A=tokens(a),B=tokens(b);let hit=0;for(const w of A)if(B.has(w))hit++;return hit/(A.size+B.size-hit||1)}
 function unique(items){
   const out=[];
-  for(const text of items.map(clean).filter(Boolean)){
-    if(out.some(old=>norm(old)===norm(text)||similarity(old,text)>.82))continue;
-    out.push(text);
+  for(const item of items.filter(Boolean)){
+    const text=clean(item.text||item);
+    if(!text||out.some(old=>norm(old.text)===norm(text)||similarity(old.text,text)>.82))continue;
+    out.push(typeof item==='object'?{...item,text}:{text,records:0,sources:0,distance:2});
   }
   return out;
 }
+function patternDistance(x){if(x?.kind==='convergence')return 4;if(x?.kind==='conjunction'||x?.kind==='renaming')return 3;return 2}
 function render(id,items){
-  const el=document.getElementById(id);
-  el.innerHTML=items.length?items.map(x=>`<li>${esc(x)}</li>`).join(''):'<li class="empty">Nothing clear enough to show yet.</li>';
+  const el=document.getElementById(id),ordered=[...items].sort((a,b)=>(a.distance||2)-(b.distance||2)||(b.sources||0)-(a.sources||0)||(b.records||0)-(a.records||0));
+  el.innerHTML=ordered.length?ordered.map(x=>`<li data-obviousness="${x.distance||2}">${esc(x.text)}<span class="evidence-count">${x.records||0} records · ${x.sources||0} sources</span></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show in this section yet. It will appear when the current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
@@ -119,9 +121,9 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
     const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
     const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
     const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-    const highOrder=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>clean(c.reader_title||c.reader_summary||c.topic_label));
-    const changing=unique([...(patterns.findings||[]).map(changingStatement),...highOrder]);
-    const returning=unique(established.filter(x=>!x.autoDetected).map(returningStatement));
+    const highOrder=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.reader_summary||c.topic_label),records:Number(c.primary_records)||0,sources:Number(c.primary_sources)||0,distance:Number(c.inferential_distance)||4}));
+    const changing=unique([...(patterns.findings||[]).map(x=>({text:changingStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:patternDistance(x)})),...highOrder]);
+    const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1})));
     render('changing',changing);
     render('returning',returning);
   }catch(e){
