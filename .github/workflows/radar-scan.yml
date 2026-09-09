@@ -1,13 +1,6 @@
 name: R&I Radar Scan
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - radar.json
-      - 'historical/**'
-      - '.github/workflows/historical-scan.yml'
   schedule:
     - cron: '17 0,4,8,12,16,20 * * *'
   workflow_dispatch:
@@ -52,11 +45,11 @@ jobs:
         run: |
           set -euo pipefail
           # The workflow itself is now scheduled only on the six canonical four-hour
-          # production slots. Pushes and manual dispatches also run immediately. Do not
+          # production slots. Manual dispatches also run immediately. Do not
           # apply the old hourly-workflow 6h age gate here: on a real 4h cron it would
           # incorrectly skip every other production scan.
           echo "run=true" >> "$GITHUB_OUTPUT"
-          echo "Reason: canonical four-hour schedule, push, or manual dispatch."
+          echo "Reason: canonical four-hour schedule or manual dispatch."
 
       - name: Set up Python
         if: steps.due.outputs.run == 'true'
