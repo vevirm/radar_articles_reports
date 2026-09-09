@@ -248,7 +248,7 @@ function whyLine(x){const pair=globalThis.RadarReaderStyle?.radarPair?.(x)||{why
 function cWhatLine(x){const w=cleanText(globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||'');return w?`<p class="signal-what"><strong>What happened:</strong> ${esc(w)}</p>`:''}
 
 function whereFrom(x){return [x.source,fmtDate(x.date)].filter(Boolean).join(' · ')}
-function visibleSource(x,strand='A'){const s=cleanText(x.source||'');const body=s?(x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(s)}</a>`:esc(s)):'';const type=cleanText(x.type||(strand==='B'?'Method evidence':strand==='C'?'Weak signal':'Established evidence'));return `<div class="visible-source">${body?`<span class="source-name">${body}</span>`:''}${type?`<span class="source-type">${esc(type)}</span>`:''}</div>`}
+function visibleSource(x){const s=cleanText(x.source||'');if(!s)return '';const d=fmtDate(x.date);const body=x.link?`<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(s)}</a>`:esc(s);return `<div class="visible-source"><strong>Source:</strong> ${body}${d?` · ${esc(d)}`:''}</div>`}
 function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x.summary,x.relevance_note,x.signal_note,x.anchor,x.type,x.eu_relevance,x.core_message].join(" ")).toLowerCase()}
 function publicDisplayOk(x){try{const t=cleanText(x?.title||x?.headline||'');if(!t)return false;if(globalThis.RadarInsights?.likelyEnglish?.(t)===false)return false;const claim=claimText(x);return globalThis.RadarInsights?.likelyEnglish?.(claim)!==false}catch(e){console.warn('Radar display filter skipped a problematic item',e);return Boolean(cleanText(x?.title||x?.headline||''))}}
 function dateMs(x){const t=Date.parse(x?.date||'');return Number.isFinite(t)?t:0}
@@ -281,19 +281,19 @@ function signalPoint(x){const raw=globalThis.RadarInsights?.signalWhat?.(x)||x.w
 function claimButton(x,id,title=cardHeading(x),linkLabel='Open publication ↗'){return `<h3 class="claim-title">${esc(title)}</h3><div class="card-actions"><button class="info-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">More info</button>${x.link?`<a class="publication-link" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(linkLabel)}</a>`:''}</div>`}
 function abItem(x,i){
   const id=`abstract-a-${i}`;
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x,'A')}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}</article>`
 }
 function bItem(x,i){
   const id=`abstract-b-${i}`;
   const pair=globalThis.RadarReaderStyle?.pagePair?.(methodPoint(x),methodUse(x),20,20)||{what:methodPoint(x),why:methodUse(x)};
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x,'B')}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
 }
 function cItem(x,i){
   const id=`abstract-c-${i}`;
   const rawWhat=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';
   const rawWhy=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
   const pair=globalThis.RadarReaderStyle?.pagePair?.(rawWhat,rawWhy,20,20)||{what:rawWhat,why:rawWhy};
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x,'C')}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function fallbackCard(x){const title=cleanText(x?.title||x?.headline||x?.core_message||'Finding');const source=cleanText(x?.source||'');const link=cleanText(x?.link||'');return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x?.date))}</div></div><h3 class="claim-title">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="visible-source"><strong>Source:</strong> ${esc(source)}</div>`:''}</article>`}
