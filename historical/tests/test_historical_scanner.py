@@ -33,6 +33,13 @@ class HistoricalCurrentContractTests(unittest.TestCase):
         self.assertIn('main_gate_scope', source)
         self.assertIn('main_final_ab_candidate_worthiness', source)
 
+    def test_v235_historical_reuses_main_ab_gate_and_b_is_age_tolerant(self):
+        source = PATH.read_text(encoding='utf-8')
+        self.assertIn('historical_age_neutral_bonus', source)
+        self.assertNotIn('age_component = year_bonus(date) if a_pass else', source)
+        self.assertGreaterEqual(int(H.CONFIG.get('historical_age_neutral_bonus', 0)), 1)
+        self.assertIn('v24.0-main-aligned', str(H.CONFIG.get('profile_version', '')))
+
     def test_existing_archive_loads(self):
         data = json.loads((ROOT / 'historical' / 'historical.json').read_text(encoding='utf-8'))
         self.assertIsInstance(data.get('items'), list)

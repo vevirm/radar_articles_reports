@@ -114,7 +114,8 @@ class ContextEvidenceHierarchyTests(unittest.TestCase):
 
     def test_c_discovery_really_uses_sixty_days_and_trusted_commentary_lane(self):
         self.assertTrue(all("when:60d" in q for q in scanner.news_queries("reuters.com", 1440)))
-        self.assertGreaterEqual(int(scanner.CONFIG.get("queries_b_method_per_scan", 0)), 32)
+        self.assertGreaterEqual(int(scanner.CONFIG.get("b_method_lookback_years", 0)), 10)
+        self.assertLessEqual(int(scanner.CONFIG.get("queries_b_method_per_scan", 99)), 12)
         self.assertAlmostEqual(float(scanner.CONFIG.get("weak_signal_context_weight", 0)), .30)
         self.assertTrue(scanner.trusted_analytical_commentary_candidate(
             "Analysis: Europe’s research security dilemma is changing",

@@ -1,7 +1,7 @@
 {
   "news_lookback_hours": 1440,
   "max_new_ab_per_scan": 0,
-  "max_c_per_scan": 12,
+  "max_c_per_scan": 6,
   "max_corpus_per_strand": 0,
   "openalex_per_query": 80,
   "crossref_rows_per_query": 70,
@@ -1699,10 +1699,62 @@
     {
       "name": "eeNews Europe",
       "domain": "eenewseurope.com"
+    },
+    {
+      "name": "LSE European Politics and Policy",
+      "domain": "blogs.lse.ac.uk"
+    },
+    {
+      "name": "Bruegel",
+      "domain": "bruegel.org"
+    },
+    {
+      "name": "CEPS",
+      "domain": "ceps.eu"
+    },
+    {
+      "name": "MERICS",
+      "domain": "merics.org"
+    },
+    {
+      "name": "Rathenau Instituut",
+      "domain": "rathenau.nl"
+    },
+    {
+      "name": "Chatham House",
+      "domain": "chathamhouse.org"
+    },
+    {
+      "name": "SWP Berlin",
+      "domain": "swp-berlin.org"
+    },
+    {
+      "name": "Clingendael",
+      "domain": "clingendael.org"
+    },
+    {
+      "name": "VoxEU",
+      "domain": "cepr.org"
+    },
+    {
+      "name": "ECFR",
+      "domain": "ecfr.eu"
+    },
+    {
+      "name": "Centre for European Reform",
+      "domain": "cer.eu"
+    },
+    {
+      "name": "RUSI",
+      "domain": "rusi.org"
+    },
+    {
+      "name": "Tech Policy Press",
+      "domain": "techpolicy.press"
     }
   ],
   "first_news_lookback_hours": 1440,
-  "discovery_overlap_days": 14,
+  "discovery_overlap_days": 45,
   "bootstrap_lookback_months": 6,
   "source_expansion_version": "v17.20.23-main-radar-recall-recovery",
   "force_backfill_on_source_expansion": false,
@@ -1731,7 +1783,7 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "v17.20.53-curated-core-archive-aware-save-compat",
+  "admission_profile": "v24.0-eu-ri-geopolitics-recall-state-separation",
   "scan_budget_seconds": 1440,
   "network_reserve_seconds": 100,
   "request_timeout_seconds": 12,
@@ -1751,7 +1803,7 @@
   "crossref_public_min_interval_seconds": 1.5,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 1440,
-  "signal_discovery_version": "v18.0-a-anchored-60d-observable-change",
+  "signal_discovery_version": "v24.0-theme-aligned-independent-c60d",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -2023,9 +2075,9 @@
   "crossref_priority_tasks_per_scan": 16,
   "institution_sources_per_scan": 72,
   "news_stage_seconds": 300,
-  "openalex_stage_seconds": 820,
-  "crossref_stage_seconds": 900,
-  "institution_stage_seconds": 900,
+  "openalex_stage_seconds": 560,
+  "crossref_stage_seconds": 600,
+  "institution_stage_seconds": 600,
   "skip_known_items_before_classification": true,
   "skip_known_institution_urls_before_fetch": true,
   "institution_seen_cache_max": 5000,
@@ -2708,8 +2760,8 @@
     "concept drift narrative change detection policy text method",
     "event detection temporal NLP emerging policy signals methodology"
   ],
-  "queries_b_method_per_scan": 36,
-  "signal_quality_profile_version": "v18.1-a-anchored-observed-done-committed-no-open-calls",
+  "queries_b_method_per_scan": 12,
+  "signal_quality_profile_version": "v24.0-theme-aligned-independent-c",
   "rotation_profile_version": "v21.20-source-and-journal-diversity",
   "openalex_exploration_queries_per_scan": 16,
   "crossref_exploration_queries_per_scan": 14,
@@ -2740,7 +2792,7 @@
   "frontier_gap_recompute_every_n_waves": 1,
   "frontier_stubborn_recovery_enabled": true,
   "frontier_stubborn_recovery_lookback_months": 6,
-  "frontier_stubborn_recovery_seconds": 240,
+  "frontier_stubborn_recovery_seconds": 90,
   "frontier_stubborn_recovery_max_queries": 30,
   "english_only": true,
   "major_eu_ri_focus": true,
@@ -2769,7 +2821,7 @@
   "openalex_missing_abstract_enrichment_timeout_seconds": 8,
   "manual_ingest_profile_version": "v17.12.2-bounded-manual-review",
   "manual_recovery_urls_per_scan": 12,
-  "manual_recovery_stage_seconds": 240,
+  "manual_recovery_stage_seconds": 90,
   "manual_recall_added_domains": [
     "hcss.nl",
     "iai.it",
@@ -2781,10 +2833,10 @@
   "priority_people_file": "priority_people.json",
   "priority_people_enabled": true,
   "priority_people_per_scan": 16,
-  "priority_people_stage_seconds": 210,
+  "priority_people_stage_seconds": 120,
   "priority_people_rows_per_person": 40,
   "priority_people_context_fallback_per_scan": 4,
-  "priority_people_context_stage_seconds": 90,
+  "priority_people_context_stage_seconds": 60,
   "priority_people_abstract_recovery_per_scan": 8,
   "priority_people_openalex_enabled": true,
   "priority_people_crossref_enabled": true,
@@ -2889,7 +2941,7 @@
   ],
   "extended_top_quality_lookback_months": 6,
   "extended_top_quality_sources_per_scan": 6,
-  "extended_top_quality_stage_seconds": 150,
+  "extended_top_quality_stage_seconds": 90,
   "english_publication_required": true,
   "allow_foreign_publication_with_english_abstract": false,
   "allow_inference_only_external_admission": false,
@@ -2903,14 +2955,14 @@
   "presentation_profile_version": "v17.13.28-source-specific-radar-and-source-bullets",
   "foresight_author_followup_enabled": true,
   "foresight_author_followup_per_scan": 10,
-  "foresight_author_followup_stage_seconds": 90,
+  "foresight_author_followup_stage_seconds": 60,
   "foresight_author_followup_min_b_items": 1,
   "foresight_author_followup_rule": "Authors already evidenced by admitted Strand-B foresight/method publications receive a bounded rotating exact-author check in OpenAlex/Crossref. Their later works must pass the ordinary A/B gates; no institution or domain receives a permanent lane.",
   "weak_signal_evidence_followup_enabled": true,
   "weak_signal_evidence_followup_per_scan": 12,
   "weak_signal_evidence_followup_links_per_signal": 6,
   "weak_signal_evidence_followup_queries_per_scan": 8,
-  "weak_signal_evidence_followup_stage_seconds": 150,
+  "weak_signal_evidence_followup_stage_seconds": 90,
   "weak_signal_evidence_followup_recheck_days": 21,
   "weak_signal_evidence_followup_rule": "An interesting low-evidence C item that cites or points to research/report/publication evidence may trigger bounded link-following and scholarly search. Any stronger source is admitted separately through the ordinary A/B gates; the C item itself remains low evidence.",
   "foresight_expert_seeds": [
@@ -2928,7 +2980,7 @@
   "foresight_expert_seed_rule": "Named people may receive bounded person-centric discovery attention; no domain or institution is privileged, and every discovered item must pass the ordinary EU R&I A/B gates.",
   "citation_snowball_profile_version": "v17.13.33-api-key-observable-shared-reference-forward-snowball",
   "citation_snowball_enabled": true,
-  "citation_snowball_stage_seconds": 150,
+  "citation_snowball_stage_seconds": 90,
   "citation_snowball_min_seconds_remaining": 90,
   "citation_snowball_seed_limit": 20,
   "citation_snowball_min_seed_support": 2,
@@ -2940,7 +2992,7 @@
     "The Global Landscape of National AI Strategies"
   ],
   "curator_candidate_testing_enabled": true,
-  "curator_candidate_testing_stage_seconds": 240,
+  "curator_candidate_testing_stage_seconds": 120,
   "curator_candidate_tests_per_scan": 30,
   "curator_candidate_retest_rejected": false,
   "curator_candidate_enrichment_timeout_seconds": 8,
@@ -2951,12 +3003,12 @@
   "low_yield_fresh_rotation_trigger_max_new_ab": 4,
   "low_yield_fresh_rotation_queries_per_source": 4,
   "low_yield_fresh_rotation_min_seconds_remaining": 75,
-  "low_yield_fresh_rotation_stage_seconds": 90,
+  "low_yield_fresh_rotation_stage_seconds": 120,
   "low_yield_extended_fallback_enabled": true,
   "low_yield_extended_queries_per_source": 3,
   "low_yield_extended_sources_per_scan": 2,
   "low_yield_extended_fallback_min_seconds_remaining": 90,
-  "low_yield_extended_fallback_stage_seconds": 90,
+  "low_yield_extended_fallback_stage_seconds": 120,
   "main_recall_repair_version": "v17.14.1",
   "metadata_rescue_priority_enabled": true,
   "metadata_rescue_priority_min_score": 8,
@@ -3223,7 +3275,7 @@
     "Johns Hopkins University Press"
   ],
   "phrase_ontology_file": "radar_phrase_rules.json",
-  "phrase_ontology_policy": "Strand A/B phrases support conservative discovery and linkage. Strand C phrases are retrieval/re-ranking only and never admit a weak signal without a substantive Strand-A anchor and a distinct new point. Established or mature EU-official institutional material belongs in A if it passes A; only genuinely provisional/experimental/uncertain official developments may enter C.",
+  "phrase_ontology_policy": "Strand A/B phrases support conservative discovery and linkage. Strand C phrases are retrieval/re-ranking only and never admit a weak signal without its own source-backed EU/R&I strategic bridge, trusted-source eligibility, watch-theme relevance and a distinct new point. An A anchor is optional context. Established or mature EU-official institutional evidence products belong in A if they pass A; genuinely current/interpretive developments may enter C.",
   "source_family_parallel_scan": true,
   "source_family_rotation_rule": "Every ordinary scan gives institutional/EU sources and scholarly journal collectors concurrent first-class time slices. Scholarly source-first work is interleaved across policy, Q1, broad and underrepresented-journal lanes, while priority journal-query tasks are interleaved across venues. Each family keeps independent persisted cursors; no output quota is imposed and source diversity never bypasses admission.",
   "topic_rotation_rule": "The Strand-A scholarly query bank is interleaved by coarse topic family before persistent rotation, and Matrix-gap/finding-context/method lanes are round-robin interleaved into the executed prefix.",
@@ -3232,7 +3284,7 @@
   "stuff_ranking_rule": "0-100 audit/export score only: source authority max 55 + EU relevance max 25 + evidence strength max 15 + author transparency max 5. This score must not be used for Matrix placement or public-reader ordering.",
   "formal_evidence_news_promotion_per_scan": 6,
   "source_failure_reallocation_enabled": true,
-  "source_failure_reallocation_stage_seconds": 420,
+  "source_failure_reallocation_stage_seconds": 180,
   "source_failure_reallocation_min_seconds_remaining": 210,
   "source_failure_reallocation_institution_sources": 24,
   "source_failure_reallocation_crossref_journals": 20,
@@ -3459,7 +3511,7 @@
   "direct_top_journal_links_per_source": 18,
   "direct_top_journal_pages_per_source": 7,
   "direct_top_journal_timeout_seconds": 9,
-  "direct_top_journal_stage_seconds": 340,
+  "direct_top_journal_stage_seconds": 300,
   "direct_top_journal_policy": "Nature and Science are checked directly every ordinary scan; two additional elite journals rotate through a direct publisher-page lane. Crossref still checks the complete top-journal and priority-policy watchlists source-first. Direct journal pages can feed A/B or, when they are current developments rather than A/B evidence, the C candidate pool. No journal prestige bypasses relevance/quality gates.",
   "c_floor_final_reserve_enabled": true,
   "c_floor_final_reserve_seconds": 45,
@@ -3572,7 +3624,7 @@
   "main_radar_recall_policy": "High recall for central European/EU research & innovation, prioritising geopolitical, geoeconomic, security, dependency, international-competition/cooperation, rules-power and talent/capability mechanisms. A bounded Tier 1/2 major EU-R&I-system route prevents zero-yield scans when strategically important system evidence is not explicitly labelled geopolitical.",
   "low_yield_fresh_rotation_max_waves": 2,
   "low_yield_fresh_rotation_institution_sources_per_wave": 8,
-  "low_yield_reserved_seconds": 210,
+  "low_yield_reserved_seconds": 240,
   "crossref_broad_execution_weight": 2,
   "crossref_primary_deep_lanes": [
     "explore",
@@ -3588,7 +3640,7 @@
     "curator-seed"
   ],
   "crossref_primary_second_lane_enabled": false,
-  "target_new_a_per_scan": 5,
+  "target_new_a_per_scan": 10,
   "crossref_recall_bibliographic_lanes": [
     "low-yield-depth",
     "low-yield-extended",
@@ -3671,7 +3723,7 @@
   "priority_policy_journals_per_scan": 6,
   "journal_depth_enabled": true,
   "journal_depth_journals_per_scan": 3,
-  "journal_depth_stage_seconds": 120,
+  "journal_depth_stage_seconds": 90,
   "journal_depth_min_seconds_remaining": 170,
   "journal_depth_watchlist": [
     "Research Policy",
@@ -3687,14 +3739,14 @@
     "Journal of Technology Transfer",
     "Industry and Innovation"
   ],
-  "scan_allocation_policy": "Normal scans are incremental with a 14-day overlap. Four-month scholarly depth is bounded to rotating evidence queries, priority-journal depth, citation adjacency and highest-merit recovery; migration/profile changes must not reset the whole crawler.",
+  "scan_allocation_policy": "Normal scans use a 45-day overlap, protect A-oriented discovery/evaluation, keep a small long-horizon B-method lane, and reserve bounded time for C and low-yield recovery. Repetitive continuation is capped; admission quality is never lowered to meet output targets.",
   "active_core_limit": 0,
   "active_core_strand_b_slots": 0,
   "active_core_profile_version": "v17.21.0-cumulative-public-ab",
   "active_core_policy": "The packaged 200 A/B records are the starting baseline only. Every newly accepted A/B record remains in the public strand cumulatively; there is no 200-item replacement cap. Deduplication, admission, integrity and explicit precision cleanups still apply.",
   "full_rescue_run_enabled": false,
-  "signal_anchor_policy": "Strand C is a temporary relationship to substantive Strand A evidence. Every published C signal must have a current Strand-A publication anchor; no unanchored-emerging exception is allowed. C expires exactly 60 days after first_seen.",
-  "c_unanchored_rescue_enabled": false,
+  "signal_anchor_policy": "Strand C is an independent temporary weak-signal stream on the same EU-R&I/geopolitics watch themes. A publication anchor is optional context, not an admission condition. C expires exactly 60 days after first_seen.",
+  "c_unanchored_rescue_enabled": true,
   "frontier_gap_zero_yield_stop_waves": 2,
   "frontier_gap_zero_yield_policy": "If the same Matrix target set produces no A/B candidates in two consecutive depth waves, stop repeating that Matrix depth lane for this run and return time to other rotating discovery families.",
   "precision_recall_query_families": {
@@ -3768,10 +3820,10 @@
   "full_budget_continuation_queries_per_wave": 8,
   "full_budget_continuation_institution_sources_per_wave": 10,
   "full_budget_continuation_news_queries_per_wave": 8,
-  "full_budget_continuation_max_waves": 300,
-  "full_budget_zero_progress_cooldown_seconds": 12,
+  "full_budget_continuation_max_waves": 2,
+  "full_budget_zero_progress_cooldown_seconds": 30,
   "full_budget_min_wave_seconds": 5,
-  "scanner_repair_profile_version": "v23.2-deep-primary-documents-c-history-event-contract",
+  "scanner_repair_profile_version": "v24.0-admission-recall-independent-c-long-horizon-b",
   "primary_evidence_lane_enabled": true,
   "primary_evidence_sources_per_scan": 12,
   "primary_evidence_lookback_months": 12,
@@ -3862,10 +3914,123 @@
     {
       "name": "Times Higher Education",
       "domain": "timeshighereducation.com"
+    },
+    {
+      "name": "LSE European Politics and Policy",
+      "domain": "blogs.lse.ac.uk"
+    },
+    {
+      "name": "Bruegel analysis",
+      "domain": "bruegel.org"
+    },
+    {
+      "name": "CEPS analysis",
+      "domain": "ceps.eu"
+    },
+    {
+      "name": "MERICS analysis",
+      "domain": "merics.org"
+    },
+    {
+      "name": "Rathenau Instituut",
+      "domain": "rathenau.nl"
+    },
+    {
+      "name": "Chatham House",
+      "domain": "chathamhouse.org"
+    },
+    {
+      "name": "SWP Berlin",
+      "domain": "swp-berlin.org"
+    },
+    {
+      "name": "Clingendael",
+      "domain": "clingendael.org"
+    },
+    {
+      "name": "VoxEU",
+      "domain": "cepr.org"
+    },
+    {
+      "name": "ECFR",
+      "domain": "ecfr.eu"
+    },
+    {
+      "name": "Centre for European Reform",
+      "domain": "cer.eu"
+    },
+    {
+      "name": "RUSI",
+      "domain": "rusi.org"
+    },
+    {
+      "name": "Tech Policy Press",
+      "domain": "techpolicy.press"
     }
   ],
   "strand_a_protected_scholarly_queries_per_source": 20,
   "strand_a_priority_policy": "The first 20 broad scholarly query slots per source are protected for substantive Strand-A-oriented lanes when budget allows. Strand-B method queries may use remaining broad slots plus bounded method-author/source follow-up, but cannot crowd A out of the executed prefix.",
   "high_order_inference_news_queries_per_scan": 4,
-  "high_order_inference_news_feedback_policy": "Up to four missing-link/falsifier queries from persistent Level-4/5 candidates may join the ordinary weak-signal coverage lane. Results still need trusted-source, 60-day, A-anchor and C admission rules."
+  "high_order_inference_news_feedback_policy": "Up to four missing-link/falsifier queries may join ordinary weak-signal coverage. Results still need trusted-source, 60-day and C substantive admission rules; an existing A anchor is preferred but not mandatory.",
+  "target_new_b_per_scan": 1,
+  "target_new_c_per_scan": 3,
+  "b_method_lookback_years": 15,
+  "target_item_mix_rule": "Soft diagnostic target only: roughly 10 A : 1 B : 3 C. Never reject or suppress an otherwise qualified item merely to enforce this ratio.",
+  "c_unanchored_analytical_weight": 0.22,
+  "c_unanchored_rule": "Independent C is allowed without an existing A anchor when a trusted source supplies its own EU/R&I-to-strategic bridge, a watch theme, novelty/reframing evidence and a public current/interpretive claim. It remains low-evidence/emergent for later manual checking against A.",
+  "institution_sitemap_lastmod_fallback_enabled": true,
+  "institution_rejected_reconsideration_rule": "Institution fingerprints are persisted as seen only after A/B admission. Rejected, incomplete, or previously misclassified pages remain reconsiderable.",
+  "weak_signal_unlabelled_commentary_sources": [
+    {
+      "name": "LSE European Politics and Policy",
+      "domain": "blogs.lse.ac.uk"
+    },
+    {
+      "name": "Bruegel",
+      "domain": "bruegel.org"
+    },
+    {
+      "name": "CEPS",
+      "domain": "ceps.eu"
+    },
+    {
+      "name": "MERICS",
+      "domain": "merics.org"
+    },
+    {
+      "name": "Chatham House",
+      "domain": "chathamhouse.org"
+    },
+    {
+      "name": "SWP Berlin",
+      "domain": "swp-berlin.org"
+    },
+    {
+      "name": "Clingendael",
+      "domain": "clingendael.org"
+    },
+    {
+      "name": "VoxEU",
+      "domain": "cepr.org"
+    },
+    {
+      "name": "ECFR",
+      "domain": "ecfr.eu"
+    },
+    {
+      "name": "Centre for European Reform",
+      "domain": "cer.eu"
+    },
+    {
+      "name": "RUSI",
+      "domain": "rusi.org"
+    },
+    {
+      "name": "Tech Policy Press",
+      "domain": "techpolicy.press"
+    }
+  ],
+  "c_source_discovery_rule": "Configured high-trust news and research-analysis/blog domains are queried as C discovery sources. Completed reports/studies/papers discovered there are promoted to ordinary A/B evaluation and never downgraded into C.",
+  "weak_signal_formal_proposals_enabled": true,
+  "weak_signal_formal_proposal_rule": "A PROPOSED C item is public only when a configured accountable source reports a named EU/member-state institution formally tabling/publishing/adopting a proposal/draft or launching a consultation/call for evidence. Generic plans and intentions remain precursor-only."
 }

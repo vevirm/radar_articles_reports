@@ -90,7 +90,7 @@ def test_b_is_not_part_of_high_order_world_evidence_contract():
 def test_scanner_keeps_a_protected_while_slightly_expanding_b_and_c():
     cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
     assert cfg['strand_a_protected_scholarly_queries_per_source'] >= 20
-    assert cfg['queries_b_method_per_scan'] == 36
+    assert 6 <= cfg['queries_b_method_per_scan'] <= 12
     assert cfg['foresight_author_followup_per_scan'] == 10
     assert cfg['weak_signal_followup_queries_per_wave'] == 10
     assert cfg['high_order_inference_news_queries_per_scan'] == 4

@@ -11,9 +11,9 @@ Key properties
   forward-looking R&I/technology-analysis method, reusable for understanding the future of Strand A.
   Explicit development language is preferred; method-first papers with validation/transfer evidence can also qualify. Mere application is not enough.
 * Strand C is not a general news feed: every admitted item must be a factual current development
-  or new evidence/indicator capable of reframing Strand A, with a strong R&I/geopolitical bridge.
-  It must be anchored to substantive Strand-A evidence; Strand-B methods never serve as weak-signal
-  anchors. Once admitted, the signal is retained for 60 days from its first insertion into the radar and always remains low-evidence.
+  or trusted analytical weak signal on the same EU-R&I/geopolitics themes, with its own strong
+  R&I/geopolitical bridge. A substantive Strand-A anchor is preferred but not mandatory; unanchored
+  signals remain explicitly emergent/low-weight so later A evidence can be checked against them. Once admitted, the signal is retained for 60 days from its first insertion into the radar and always remains low-evidence.
   A completed study/report/paper is itself an evidence product and therefore gets A/B precedence;
   discovery through a news lane can never demote it into C. An interesting genuine C item that points
   to research, a report, data or another publication can trigger a bounded evidence follow-up. Any
@@ -321,6 +321,7 @@ _apply_rule_fix_source_extensions()
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
+B_METHOD_LOOKBACK_YEARS = max(1, int(CONFIG.get("b_method_lookback_years", 15) or 15))
 WEAK_SIGNAL_RETENTION_DAYS = int(CONFIG.get("weak_signal_retention_days", 60))
 WEAK_SIGNAL_CONTEXT_WEIGHT = float(CONFIG.get("weak_signal_context_weight", 0.30) or 0.30)
 HISTORICAL_SHOCK_CONTEXT_WEIGHT = float(CONFIG.get("historical_shock_context_weight", 0.45) or 0.45)
@@ -336,7 +337,7 @@ INHERITED_CORPUS_AUDIT_REFRESH = bool(CONFIG.get("inherited_corpus_audit_refresh
 INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fail_closed", True))
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
-C_ADMISSION_PROFILE_VERSION = "v17.20.9-eu-funding-needs-geopolitical-setting"
+C_ADMISSION_PROFILE_VERSION = "v24.0-independent-theme-aligned-c"
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -348,7 +349,7 @@ CITATION_SNOWBALL_PROFILE_VERSION = str(CONFIG.get("citation_snowball_profile_ve
 RULE_FIX_PROFILE_VERSION = "v17.12.11-A-recall-strict-C-retirements-final"
 RULE_FIX_SOURCE_RECOVERY_VERSION = "v17.12.9-new-institution-source-catchup-A-only"
 A_RECALL_RECOVERY_VERSION = "v17.20.23-document-level-eu-ri-geopolitics-recheck"
-WINDOW_POLICY_VERSION = "v18.0-cumulative-ab-strict-a-anchored-c60d"
+WINDOW_POLICY_VERSION = "v24.0-cumulative-ab-independent-c60d-durable-b"
 A_RECALL_RECOVERY_SOURCES_PER_SCAN = 24
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
 RULE_FIX_SOURCE_RECOVERY_PAGES_PER_DOMAIN = 28
@@ -402,6 +403,7 @@ FORCE_SOURCE_EXPANSION_BACKFILL = bool(CONFIG.get("force_backfill_on_source_expa
 # corpus floor before discovery starts.
 DATE_FLOOR = dt.date.today() - relativedelta(months=BOOTSTRAP_LOOKBACK_MONTHS)
 EXTENDED_DATE_FLOOR = dt.date.today() - relativedelta(months=EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS)
+B_METHOD_DATE_FLOOR = dt.date.today() - relativedelta(years=B_METHOD_LOOKBACK_YEARS)
 SIGNAL_RETENTION_FLOOR = dt.date.today() - dt.timedelta(days=WEAK_SIGNAL_RETENTION_DAYS)
 NEWS_LOOKBACK_HOURS = int(CONFIG.get("news_lookback_hours", 168))
 FIRST_NEWS_LOOKBACK_HOURS = int(CONFIG.get("first_news_lookback_hours", SIGNAL_BACKFILL_HOURS))
@@ -1907,6 +1909,15 @@ EU_DIRECT = [
     "joint research centre", "joint research center", "jrc", "euiss", "european council",
     "european economic security", "eu research", "eu innovation", "eu science",
     "eu technology", "eu policy", "eu strategy", "eu framework", "eu regulation",
+    # Explicit EU R&I institutions/programmes/instruments are stronger scope evidence
+    # than generic country adjectives. Keep these usable wherever they occur in a source.
+    "directorate-general", "dg cnect", "dg grow", "dg defis",
+    "council of the european union", "european research council", "erc",
+    "european innovation council", "eic", "european institute of innovation and technology", "eit",
+    "esfri", "cost action", "framework programme", "framework program", "fp9",
+    "chips act", "ai act", "data act", "digital markets act",
+    "marie skłodowska-curie", "marie sklodowska-curie", "msca",
+    "eurohpc", "euratom", "eurostat", "era-net",
 ]
 EU_GENERIC = ["europe", "european", "europe's", "european countries"]
 MEMBER_STATE_SCOPE = [
@@ -1917,6 +1928,20 @@ MEMBER_STATE_SCOPE = [
     "luxembourg", "malta", "maltese", "netherlands", "dutch", "poland", "polish", "portugal", "portuguese",
     "romania", "romanian", "slovakia", "slovak", "slovenia", "slovenian", "spain", "spanish", "sweden", "swedish",
 ]
+MEMBER_STATE_CANONICAL = {
+    "austria":"austria","austrian":"austria","belgium":"belgium","belgian":"belgium","bulgaria":"bulgaria","bulgarian":"bulgaria",
+    "croatia":"croatia","croatian":"croatia","cyprus":"cyprus","cypriot":"cyprus","czechia":"czechia","czech republic":"czechia","czech":"czechia",
+    "denmark":"denmark","danish":"denmark","estonia":"estonia","estonian":"estonia","finland":"finland","finnish":"finland","france":"france","french":"france",
+    "germany":"germany","german":"germany","greece":"greece","greek":"greece","hungary":"hungary","hungarian":"hungary","ireland":"ireland","irish":"ireland",
+    "italy":"italy","italian":"italy","latvia":"latvia","latvian":"latvia","lithuania":"lithuania","lithuanian":"lithuania","luxembourg":"luxembourg",
+    "malta":"malta","maltese":"malta","netherlands":"netherlands","dutch":"netherlands","poland":"poland","polish":"poland","portugal":"portugal","portuguese":"portugal",
+    "romania":"romania","romanian":"romania","slovakia":"slovakia","slovak":"slovakia","slovenia":"slovenia","slovenian":"slovenia","spain":"spain","spanish":"spain","sweden":"sweden","swedish":"sweden",
+}
+
+def _distinct_member_states(text: str) -> list[str]:
+    hits = bounded_matches(text, MEMBER_STATE_SCOPE)
+    return list(dict.fromkeys(MEMBER_STATE_CANONICAL.get(normalized(h), normalized(h)) for h in hits))
+
 
 # Research-talent allocation is itself part of the R&I/geoeconomic system.  It is
 # handled explicitly rather than by treating generic words such as ``migration`` or
@@ -2004,7 +2029,7 @@ AB_HARD_EXCLUDE = [
     "grant opportunity", "tender", "procurement", "vacancy", "job opening", "job vacancy",
     "webinar", "workshop", "conference programme", "conference program", "event page",
     "course page", "training course", "summer school", "project page", "project description", "facility page",
-    "laboratory facility", "lab access", "user access programme", "user access program",
+    "lab access", "user access programme", "user access program",
 ]
 URL_HARD_EXCLUDE = [
     "/news/", "/blog/", "/blogs/", "/events/", "/event/", "/jobs/", "/vacancies/",
@@ -2879,7 +2904,13 @@ def english_record_ok(text: str, metadata_language: Any = "", *, title: str = ""
     )
     if explicit_english:
         return bool(body_ok or english_block)
-    return bool(body_ok and english_block)
+    # Unknown/absent language metadata is common in scholarly indexes and institutional
+    # pages.  Requiring a 25-word English evidence block *in addition* to a positively
+    # English title and positively English source text rejected short abstracts/briefs that
+    # were plainly English.  Keep the fail-closed foreign-language checks above, but let
+    # two independent positive signals (English title + English available text) establish
+    # English when metadata is silent.
+    return bool(body_ok and (english_block or probably_english(title, title_mode=True)))
 
 def english_public_item_ok(item: dict[str, Any]) -> bool:
     """Publication-time guard for already-admitted public records.
@@ -3158,7 +3189,10 @@ def aboutness_for_a(
     full_cfg = modes.get("full_text") or {}
     min_ri_sents = int(full_cfg.get("min_ri_hit_sentences", 2))
     min_geo_sents = int(full_cfg.get("min_geopolitics_hit_sentences", 2))
-    repeated_ri = ri_sents >= min_ri_sents and (len(ri_terms) >= 2 or ri_sents >= max(3, min_ri_sents))
+    repeated_ri = (
+        (ri_sents >= min_ri_sents and (len(ri_terms) >= 2 or ri_sents >= max(3, min_ri_sents)))
+        or (ri_sents >= 1 and len(ri_terms) >= 3 and bool(_ri_hits(title) or _ri_hits(abstract)))
+    )
     repeated_geo = geo_sents >= min_geo_sents and (len(geo_terms) >= 2 or geo_sents >= max(3, min_geo_sents))
     # A source may express geopolitics as an external-position mechanism (dependence,
     # comparative capability, talent loss, foreign access) rather than repeat a GEO_STRONG
@@ -3185,66 +3219,43 @@ def aboutness_for_a(
 
 
 def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[str]]:
-    """Classify European/EU relevance as document scope, not sentence-level co-occurrence.
+    """Classify EU scope from substantive evidence rather than vocabulary accidents.
 
-    V17.19 changes the governing principle: strategic/geopolitical wording is not required
-    to establish European scope.  A scholarly abstract may establish Europe in one sentence
-    and its R&I substance elsewhere in the abstract.  For longer body text we still guard
-    against incidental geography by requiring substantive R&I evidence across the document.
+    Explicit EU institutions, programmes and instruments are strong direct evidence wherever
+    they occur. Generic Europe language needs R&I substance. A member-state name/adjective
+    alone is weak evidence and becomes direct only in a genuinely comparative/cross-border
+    European R&I frame. This keeps the radar EU-focused without making author wording a trap.
     """
     title = clean_text(title)
     abstract = clean_text(abstract)
-    ta = f"{title}. {abstract}"
-
-    title_direct = _eu_direct_scope_hits(title, ta)
-    title_generic = distinct_matches(title, EU_GENERIC)
-    title_member = bounded_matches(title, MEMBER_STATE_SCOPE)
-    if union_eu_word(title, ta):
-        title_direct.append("EU")
-    if title_direct or title_generic or title_member:
-        return "direct", list(dict.fromkeys(title_direct + title_generic + title_member))[:4]
-
-    # European scope and R&I substance may be expressed in different sentences.
-    # Specific EU institutions/programmes remain the strongest scope evidence.  Generic
-    # Europe/member-state language is accepted when the title+abstract as a whole is
-    # substantively about R&I; no strategic/geopolitical co-occurrence is required.
-    ta_ri = _ri_hits(ta)
-    abstract_scope_hits: list[str] = []
-    for sent in split_sentences(abstract):
-        sent_direct = _eu_direct_scope_hits(sent, ta)
-        sent_generic = distinct_matches(sent, EU_GENERIC)
-        sent_member = bounded_matches(sent, MEMBER_STATE_SCOPE)
-        bare_eu = union_eu_word(sent, ta)
-        institutional_direct = [h for h in sent_direct if normalized(h) not in {"european union"}]
-        if institutional_direct:
-            return "direct", list(dict.fromkeys(institutional_direct))[:4]
-        abstract_scope_hits.extend(sent_direct + sent_generic + sent_member)
-        if bare_eu:
-            abstract_scope_hits.append("EU")
-    if abstract_scope_hits and ta_ri:
-        return "direct", list(dict.fromkeys(abstract_scope_hits))[:4]
-
-    full = f"{ta}. {body[:50000]}"
-    direct_body = _eu_direct_scope_hits(full, full)
-    strong_body_scope = _eu_direct_scope_hits(full, full)
-    eu_count = 0 if _eu_defined_as_non_union(full) else len(re.findall(r"\beu\b", normalized(full)))
-    # Body-only scope must be explicit/repeated.  Merely mentioning two European
-    # countries somewhere in a long document is no longer treated as EU scope.
-    if strong_body_scope or eu_count >= 2:
-        evidence = strong_body_scope + direct_body
-        return "direct", list(dict.fromkeys(evidence))[:4]
-
-    # For longer documents, allow European scope and R&I evidence to occur in different
-    # paragraphs.  Requiring them in one sentence was a major recall failure for reports
-    # and papers that establish geography, evidence and implications in separate sections.
     body_probe = clean_text(body[:50000])
-    body_scope = distinct_matches(body_probe, EU_GENERIC) + bounded_matches(body_probe, MEMBER_STATE_SCOPE)
-    ri_sentence_count, _ = _sentence_block_stats(clean_text(f"{ta}. {body_probe}"), _ri_hits)
-    if body_scope and ri_sentence_count >= 2:
-        return "direct", list(dict.fromkeys(body_scope))[:4]
+    ta = clean_text(f"{title}. {abstract}")
+    full = clean_text(f"{ta}. {body_probe}")
 
-    # Derived EU relevance requires an explicit implication/comparator sentence;
-    # generic words such as 'policy' or 'strategy' alone do not establish relevance.
+    direct = _eu_direct_scope_hits(full, full)
+    if union_eu_word(full, full):
+        direct.append("EU")
+    if direct:
+        return "direct", list(dict.fromkeys(direct))[:6]
+
+    ri_ta = _ri_hits(ta)
+    ri_full = _ri_hits(full)
+    generic_ta = distinct_matches(ta, EU_GENERIC)
+    generic_body = distinct_matches(body_probe, EU_GENERIC)
+    if generic_ta and ri_ta:
+        return "direct", list(dict.fromkeys(generic_ta))[:4]
+    if generic_body and len(ri_full) >= 2:
+        return "direct", list(dict.fromkeys(generic_body))[:4]
+
+    members = _distinct_member_states(full)
+    comparative = contains_any(full, [
+        "cross-border", "cross border", "across europe", "across european", "member states",
+        "comparative", "compared with", "between european", "within europe", "europe-wide",
+        "europe wide", "single market", "european research area",
+    ])
+    if len(members) >= 2 and comparative and ri_full:
+        return "direct", members[:4]
+
     derived_cues = [
         "implication for", "implications for", "consequence for", "consequences for",
         "for europe", "for the eu", "for european policymakers", "for eu policymakers",
@@ -3252,15 +3263,11 @@ def eu_evidence(title: str, abstract: str, body: str) -> tuple[str | None, list[
         "lessons for europe", "lessons for the eu", "relevant for europe", "relevant for the eu",
         "affects europe", "affects the eu", "matters for europe", "matters for the eu",
         "what this means for europe", "what this means for the eu",
-        "policy options for europe", "policy options for the eu", "strategy for europe",
-        "strategy for the eu", "recommendations for europe", "recommendations for the eu",
     ]
     for sent in split_sentences(full):
-        if contains_any(sent, EU_GENERIC) or bool(bounded_matches(sent, MEMBER_STATE_SCOPE)) or union_eu_word(sent, full):
-            if contains_any(sent, derived_cues):
-                return "derived", [sent[:260]]
+        if (contains_any(sent, EU_GENERIC) or bool(bounded_matches(sent, MEMBER_STATE_SCOPE)) or union_eu_word(sent, full)) and contains_any(sent, derived_cues):
+            return "derived", [sent[:260]]
     return None, []
-
 
 def document_exclusion_reason(title: str, text: str = "", url: str = "", page_type: str = "") -> str | None:
     if institutional_container_page(title, url, page_type):
@@ -3279,10 +3286,41 @@ def document_exclusion_reason(title: str, text: str = "", url: str = "", page_ty
         return "hard exclusion: call/funding page"
     if re.search(r"\b(?:open access calls?|calls? for access|access calls?)\b", title_low) and not re.search(r"\b(?:report|study|assessment|evaluation|analysis|findings)\b", title_low):
         return "hard exclusion: access call page"
-    if (re.search(r"\b(facility|laboratory|lab)\b", title_low) or re.search(r"\b(facility|laboratory)\b", low)) and not re.search(r"\b(policy|governance|security|geopolit|strategy|foresight|economic security)\b", title_low):
+    # Operational project/facility pages remain out of scope, but these words are not
+    # themselves evidence of irrelevance.  v23.4 looked only at the title here, so an
+    # analytical brief such as "Project-based funding and strategic autonomy" or a
+    # laboratory/facility assessment with strategic substance could be killed before
+    # the A gate ever saw its abstract/body.  Treat the first substantive text as
+    # disambiguating evidence while keeping routine project/access pages excluded.
+    exclusion_context = normalized(f"{title} {text[:2400]}")
+    strong_strategic_context = re.search(
+        r"\b(?:strategic autonomy|research security|economic security|technology sovereignty|"
+        r"technological sovereignty|geopolit\w*|strategic dependenc\w*|critical dependenc\w*|"
+        r"industrial policy|research policy|innovation policy|governance|foresight|"
+        r"strategic compet\w*|resilien\w*)\b",
+        exclusion_context,
+    )
+    analytical_context = re.search(
+        r"\b(?:report|paper|analysis|assessment|evaluation|study|findings?|evidence|"
+        r"implications?|policy brief|research brief|working paper)\b",
+        exclusion_context,
+    )
+    facility_like = bool(
+        re.search(r"\b(?:facility|laboratory|lab)\b", title_low)
+        or re.search(r"\b(?:facility|laboratory)\b", low)
+    )
+    if facility_like and not (strong_strategic_context and analytical_context):
         return "hard exclusion: facility/laboratory page"
-    if "project" in title_low and not re.search(r"\b(report|paper|analysis|study|foresight|policy)\b", title_low):
-        return "hard exclusion: project page"
+    if "project" in title_low:
+        title_is_analytical = bool(re.search(r"\b(?:report|paper|analysis|study|foresight|policy|assessment|evaluation)\b", title_low))
+        title_is_strategic = bool(re.search(
+            r"\b(?:strategic autonomy|research security|economic security|technology sovereignty|"
+            r"technological sovereignty|geopolit\w*|strategic dependenc\w*|critical dependenc\w*|"
+            r"industrial policy|research policy|innovation policy|governance|foresight)\b",
+            title_low,
+        ))
+        if not (title_is_analytical or title_is_strategic or (strong_strategic_context and analytical_context)):
+            return "hard exclusion: project page"
     if re.search(r"\b(?:meet our new (?:pis?|principal investigators?)|meet the new (?:pis?|principal investigators?)|new principal investigator profile)\b", title_low):
         return "hard exclusion: routine personnel profile"
     # Procurement notices sometimes omit the words tender/procurement while using a
@@ -9404,7 +9442,7 @@ def signal_record_integrity_ok(item: dict[str, Any]) -> bool:
     return record_source_integrity_ok(item)
 
 def record_date_integrity_ok(item: dict[str, Any]) -> bool:
-    """Reject records whose saved date is absent or was inferred from webpage modification time."""
+    """Require a usable date; explicitly approximate sitemap dates remain usable but unverified."""
     if not isinstance(item, dict) or not parse_date(item.get("date")):
         return False
     # V17.16 briefly treated sitemap lastmod as publication evidence.  That can turn an
@@ -9496,9 +9534,14 @@ def parse_institution_pdf(
     if not published and fallback_publication_date:
         published = fallback_publication_date
         date_basis = fallback_date_basis or "landing_page_publication_date"
-    if not published:
-        if fingerprint and INSTITUTION_DISCOVERED_DATES.get(fingerprint):
+    if not published and fingerprint and bool(CONFIG.get("institution_sitemap_lastmod_fallback_enabled", True)):
+        discovered = INSTITUTION_DISCOVERED_DATES.get(fingerprint)
+        if discovered:
             _diag_inc("institution_date_hint_sitemap_lastmod_not_publication")
+            _diag_inc("institution_date_from_sitemap_lastmod")
+            published = parse_date(discovered)
+            date_basis = "sitemap_lastmod_approximate"
+    if not published:
         _diag_inc("institution_reject_no_date")
         return None
     if published > dt.date.today() + dt.timedelta(days=1):
@@ -9508,9 +9551,8 @@ def parse_institution_pdf(
         _diag_inc("institution_reject_before_floor")
         return None
 
-    # From this point the document has been successfully fetched, dated and read.  It is
-    # safe to mark the fingerprint even when the substantive gate later rejects it.
-    _mark_institution_seen(fingerprint)
+    # Do not tombstone a page before the substantive gate. A prior analytical rejection
+    # must remain reconsiderable after gate/profile improvements.
     if not english_record_ok(f"{title}. {body[:5000]}", "", title=title):
         _diag_inc("institution_reject_non_english")
         return None
@@ -9546,6 +9588,9 @@ def parse_institution_pdf(
         row["landing_page_url"] = clean_text(landing_page_url)
     if date_basis:
         row["date_basis"] = date_basis
+    if date_basis == "sitemap_lastmod_approximate":
+        row["publication_date_approximate"] = True
+    _mark_institution_seen(fingerprint)
     return row
 
 
@@ -9659,14 +9704,15 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         m_labelled = re.search(r"\b(?:published|publication date|date)\s*[:\-]?\s*((?:[0-3]?\d[.\-/ ](?:0?\d|[A-Za-z]{3,9})[.\-/ ]20\d{2})|(?:[A-Za-z]{3,9}\s+[0-3]?\d,?\s+20\d{2})|(?:20\d{2}-\d{1,2}-\d{1,2}))", top_text, re.I)
         if m_labelled:
             published = parse_date(m_labelled.group(1))
-    if not published and fingerprint:
-        # Sitemap lastmod is a crawl-priority hint, NOT evidence of publication date.
-        # Commission project/study pages are frequently edited months or years after launch;
-        # treating lastmod as publication time manufactured false "new" reports.  If a page
-        # exposes no genuine publication/created/date field, fail closed here.
+    if not published and fingerprint and bool(CONFIG.get("institution_sitemap_lastmod_fallback_enabled", True)):
+        # Lastmod is not publication proof, but discarding the page entirely loses a large
+        # share of institutional reports. Accept it only as explicitly approximate metadata.
         discovered = INSTITUTION_DISCOVERED_DATES.get(fingerprint)
         if discovered:
             _diag_inc("institution_date_hint_sitemap_lastmod_not_publication")
+            _diag_inc("institution_date_from_sitemap_lastmod")
+            published = parse_date(discovered)
+            date_basis = "sitemap_lastmod_approximate"
     if not published:
         _diag_inc("institution_reject_no_date")
         return None
@@ -9718,9 +9764,8 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
             _diag_inc("institution_reject_mismatched_linked_pdf")
             pdf_url = ""
 
-    # Mark only after fetch + genuine publication date + readable document text succeeded.
-    # Transient fetch/date-extraction failures therefore remain retryable on later rotations.
-    _mark_institution_seen(fingerprint)
+    # Do not mark seen until an A/B item is actually admitted. Rejected pages remain
+    # eligible for later re-evaluation when the admission profile changes.
     if not english_record_ok(f"{title}. {desc}. {body[:5000]}", html_lang, title=title):
         _diag_inc("institution_reject_non_english")
         return None
@@ -9794,6 +9839,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
                 )
                 if date_basis != "page":
                     result["date_basis"] = date_basis
+                if date_basis == "sitemap_lastmod_approximate":
+                    result["publication_date_approximate"] = True
+                _mark_institution_seen(fingerprint)
                 return result
         _diag_inc("institution_reject_document_exclusion")
         return None
@@ -9834,6 +9882,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     )
     if date_basis != "page":
         result["date_basis"] = date_basis
+    if date_basis == "sitemap_lastmod_approximate":
+        result["publication_date_approximate"] = True
+    _mark_institution_seen(fingerprint)
     return result
 
 
@@ -13623,7 +13674,7 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
 
 
 def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[str, int]]:
-    """Rebuild historical C under the A-only weak-signal relationship."""
+    """Revalidate saved C under the independent theme-aligned weak-signal contract."""
     out=dict(previous) if isinstance(previous,dict) else {}
     raw=[]
     for item in out.get('strand_c',[]) if isinstance(out.get('strand_c'),list) else []:
@@ -13637,8 +13688,8 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
         x['_entities']=distinct_matches(text, ENTITY_TERMS+GEO_ACTORS)
         raw.append(x)
     a_saved = out.get('strand_a',[]) if isinstance(out.get('strand_a'),list) else []
-    # Every retained signal must still resolve to a substantive Strand-A publication.
-    # Legacy unanchored-emerging rows are deliberately retired on revalidation.
+    # Re-run the current C gate. A publication anchor is preserved when available
+    # but is not required for an otherwise valid theme-aligned weak signal.
     rebuilt = anchor_news(raw, a_saved)
     # Preserve historical first_seen where event identity matches.
     old_by_id={signal_identity(x):x for x in out.get('strand_c',[]) if isinstance(x,dict)}
@@ -13770,8 +13821,8 @@ def relationship_novelty_dimensions(text: str) -> list[str]:
 def relational_signal_candidate_text(title: str, desc: str = "") -> bool:
     """Broad discovery gate for a possible new point on an existing A issue.
 
-    This deliberately does *not* require novelty-of-topic wording. Final C admission still
-    requires a substantive Strand-A anchor in ``anchor_news``.
+    This deliberately does *not* require novelty-of-topic wording. Final C admission
+    requires its own R&I-strategic bridge and watch theme; an A anchor is optional context.
     """
     if routine_signal_noise(title, desc):
         return False
@@ -13820,8 +13871,8 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
         # V17.8.1: external developments are allowed only through a narrow materiality
         # route. This keeps export-control/compute/quantum/research-system shocks that can
         # change Europe's relative position, while blocking generic foreign AI, health,
-        # education, politics and consumer-sector stories. A specific A anchor is still
-        # mandatory later in the pipeline.
+        # education, politics and consumer-sector stories. Independent C still has to
+        # prove its own EU/R&I strategic relevance; an A anchor is optional context.
         derived_themes = {
             "fragmentation of global science", "transatlantic / US–China S&T competition",
             "export controls / dual use", "critical and emerging technologies",
@@ -13927,8 +13978,8 @@ def reframing_signal_text(text: str) -> bool:
     """Detect new evidence that can strengthen, weaken or complicate the Strand-A picture.
 
     This is intentionally narrower than accepting any report or study. Evidence language must be
-    paired with a finding/measurement or a directional shift. EU relevance and A anchoring are
-    enforced separately, so this widens interpretive recall without turning C into a news feed.
+    paired with a finding/measurement or a directional shift. EU/R&I/strategic relevance is
+    enforced separately. An A anchor may add context later, but is not required for admission.
     """
     full = normalized(text)
     evidence = contains_any(full, REFRAMING_SIGNAL_EVIDENCE)
@@ -13964,9 +14015,9 @@ MATERIAL_SIGNAL_STAKES = [
 def material_update_signal_text(text: str) -> bool:
     """Current factual changes that can update an A claim even if they are not 'early'.
 
-    Strand C is interpretive evidence, not only pilots and drafts. The later A-anchor
-    gate remains mandatory, so this route can admit consequential policy/capability
-    moves without turning C into a general technology-news feed. Generic analytical
+    Strand C is interpretive evidence, not only pilots and drafts. Its own R&I/strategic
+    bridge and watch-theme gates remain mandatory, so this route can admit consequential
+    policy/capability moves without turning C into a general technology-news feed. Generic analytical
     framings such as "building resilience" are not themselves an event.
     """
     full = normalized(text)
@@ -14074,6 +14125,41 @@ def public_signal_event_status(status: str) -> bool:
     allowed = CONFIG.get("weak_signal_public_event_statuses", ["OBSERVED", "DONE", "COMMITTED"])
     return clean_text(status).upper() in {clean_text(x).upper() for x in allowed}
 
+def formal_proposal_is_public_signal(claim: str, headline: str = "", desc: str = "", source: str = "", link: str = "") -> bool:
+    """Allow a formally tabled institutional proposal as C without treating aspiration as fact.
+
+    The observed fact is that an accountable institution tabled/published/launched the proposal;
+    the proposed policy itself is not represented as implemented. Generic plans, calls from
+    commentators, expectations and unnamed-source intentions remain non-public precursor material.
+    """
+    if not bool(CONFIG.get("weak_signal_formal_proposals_enabled", True)):
+        return False
+    full = normalized(clean_text(f"{headline}. {claim}. {desc}"))
+    if not full:
+        return False
+    formal_action = bool(re.search(
+        r"\b(?:tabled|tables|published|publishes|presented|presents|adopted|adopts|unveiled|unveils|launched|launches)\b.{0,60}\b(?:proposal|draft|consultation|call for evidence|roadmap)\b|"
+        r"\b(?:proposal|draft)\b.{0,45}\b(?:tabled|published|presented|adopted|unveiled)\b|"
+        r"\b(?:public consultation|consultation|call for evidence)\b.{0,35}\b(?:launched|opened|published)\b",
+        full, re.I
+    ))
+    if not formal_action:
+        return False
+    eu_actor = contains_any(full, [
+        "european commission", "commission proposed", "commission proposal",
+        "dg rtd", "dg cnect", "dg grow", "dg defis",
+        "european parliament", "council of the european union", "council of the eu",
+        "european research council", "european innovation council",
+        "european institute of innovation and technology", "joint research centre", "joint research center",
+    ])
+    member_government = bool(
+        bounded_matches(full, MEMBER_STATE_SCOPE)
+        and re.search(r"\b(?:government|ministry|minister|parliament|agency|research council)\b", full, re.I)
+    )
+    source_accountable = bool(_source_merit_is_eu_official(source, link) or trusted_independent_c_source(source, "", link))
+    return bool(source_accountable and (eu_actor or member_government))
+
+
 def signal_is_only_intention_or_echo(title: str, desc: str = '') -> bool:
     """True when C-support is only aspiration/intention/echo, not an observed development.
 
@@ -14112,8 +14198,9 @@ def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
 
     Early indicators and reframing evidence still qualify, but so does an otherwise
     ordinary factual development when it can alter magnitude, mechanism, actor, timing,
-    direction or consequence for a strategic R&I issue. Final admission remains relational
-    and requires a substantive Strand-A publication anchor.
+    direction or consequence for a strategic R&I issue. Final admission still requires the
+    candidate's own source-backed R&I/strategic bridge, watch theme and public claim; an A
+    publication anchor is optional context.
     """
     if routine_signal_noise(title, desc):
         return False
@@ -14135,7 +14222,7 @@ def weak_signal_candidate_text(title: str, desc: str = '') -> bool:
     # immediately rejected mature implementation, which systematically hid major-media
     # stories about EU capacity, funding, controls and infrastructure.  The material
     # route is still strict: it independently requires a concrete change + R&I object +
-    # strategic stake, and ``anchor_news`` still requires a substantive Strand-A anchor.
+    # strategic stake. A Strand-A anchor can strengthen context but is not mandatory.
     if mature and not counter and not reframing and not material and not relational:
         return False
     return True
@@ -14144,7 +14231,7 @@ def trusted_weak_signal_commentary_source(source: str = "", domain: str = "", li
     """Return True only for the small configured set of high-trust commentary outlets.
 
     This route exists solely for Strand-C context. It never upgrades commentary into A/B
-    evidence and never bypasses the A-anchor requirement.
+    evidence and never upgrades commentary into primary A/B evidence.
     """
     if not bool(CONFIG.get("weak_signal_commentary_enabled", True)):
         return False
@@ -14167,6 +14254,56 @@ def trusted_weak_signal_commentary_source(source: str = "", domain: str = "", li
     return False
 
 
+def trusted_unlabelled_commentary_source(source: str = "", domain: str = "", link: str = "") -> bool:
+    """Configured research-analysis platforms may publish useful analysis without an Opinion label."""
+    source_n = normalized(source)
+    domain_n = clean_text(domain).lower().removeprefix("www.")
+    if not domain_n and clean_text(link):
+        try:
+            domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
+        except Exception:
+            domain_n = ""
+    for row in CONFIG.get("weak_signal_unlabelled_commentary_sources", []):
+        if not isinstance(row, dict):
+            continue
+        rn = normalized(row.get("name")); rd = clean_text(row.get("domain")).lower().removeprefix("www.")
+        if rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd)):
+            return True
+        if rn and source_n and rn == source_n:
+            return True
+    return False
+
+
+def trusted_independent_c_source(source: str = "", domain: str = "", link: str = "") -> bool:
+    """Whether an unanchored C item comes from a configured accountable source.
+
+    The configured news-source list is already the scanner's editorial allow-list for global
+    discovery.  Requiring a separate A anchor on top of that made credible Reuters/FT/Euractiv/
+    Nature/Science-style developments disappear when A had not caught up yet.  Independent C
+    may therefore use any configured news source, the narrower commentary list, or an
+    authoritative public/EU source. Subject relevance is still established by C's own gates.
+    """
+    source_n = normalized(source)
+    domain_n = clean_text(domain).lower().removeprefix("www.")
+    if not domain_n and clean_text(link):
+        try:
+            domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
+        except Exception:
+            domain_n = ""
+    if trusted_weak_signal_commentary_source(source, domain_n, link):
+        return True
+    for row in CONFIG.get("news_sources", []):
+        if not isinstance(row, dict):
+            continue
+        rn = normalized(row.get("name"))
+        rd = clean_text(row.get("domain")).lower().removeprefix("www.")
+        if rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd)):
+            return True
+        if rn and source_n and rn == source_n:
+            return True
+    return bool(_source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH)
+
+
 def trusted_analytical_commentary_candidate(
     title: str,
     desc: str = "",
@@ -14186,7 +14323,7 @@ def trusted_analytical_commentary_candidate(
     if not full:
         return False
     labels = ["opinion", "commentary", "editorial", "analysis:", "analysis -", "column", "viewpoint", "comment:", "comment -"]
-    if not contains_any(full, labels):
+    if not contains_any(full, labels) and not trusted_unlabelled_commentary_source(source, domain, link):
         return False
     if contains_any(full, ["podcast", "book review", "letter to the editor", "interview", "sponsored", "advertorial"]):
         return False
@@ -14257,7 +14394,7 @@ def global_news_queries(lookback_hours: int) -> list[str]:
 
     # Curator Strand-C phrases are retrieval seeds only. They widen what the news lane
     # notices (RISC-V, neuromorphic, biomanufacturing, etc.); they do not bypass the
-    # factual-news, strategic-R&I or substantive Strand-A anchor gates.
+    # factual-news, strategic-R&I, trusted-source or watch-theme gates.
     c_rows = PHRASE_RULES.get("strand_c_retrieval", []) if isinstance(PHRASE_RULES, dict) else []
     distinctive: list[str] = []
     for row in c_rows if isinstance(c_rows, list) else []:
@@ -14364,7 +14501,9 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             strict_strategic = bool(strategic_target and strategic_pathway_candidate_text(text))
             shock_watch = bool(strategic_target and possible_external_shock_candidate_text(text))
             trusted_commentary = trusted_analytical_commentary_candidate(title, desc, source_name, source_domain)
-            if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch):
+            entry_link = clean_text(getattr(e, "link", ""))
+            formal_proposal = formal_proposal_is_public_signal(text, title, desc, source_name, entry_link)
+            if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch or formal_proposal):
                 continue
             signal_key = f"signal:{normalized(source_name)}:{norm_title(title)}"
             if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -14375,7 +14514,7 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "source_domain": source_domain,
                 "discovery_provenance": "google_news_rss",
                 "date": when.isoformat(timespec="minutes").replace("+00:00", "Z"),
-                "link": clean_text(getattr(e, "link", "")),
+                "link": entry_link,
                 "_desc": desc,
                 "_desc_html": str(raw_desc or ""),
                 "_themes": themes_for(text),
@@ -14383,7 +14522,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "_strategic_discovery": strict_strategic,
                 "_shock_watch_discovery": shock_watch,
                 "_trusted_commentary_signal": bool(trusted_commentary),
-                "_strategic_source_text": text if (strict_strategic or shock_watch) else "",
+                "_formal_proposal_signal": bool(formal_proposal),
+                "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal) else "",
             })
         return items, None
 
@@ -14468,7 +14608,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 strict_strategic = strategic_pathway_candidate_text(text)
                 shock_watch = possible_external_shock_candidate_text(text)
                 trusted_commentary = trusted_analytical_commentary_candidate(title, desc, name, domain, href)
-                if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch):
+                formal_proposal = formal_proposal_is_public_signal(text, title, desc, name, href)
+                if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch or formal_proposal):
                     continue
                 signal_key = f"signal:{normalized(name)}:{norm_title(title)}"
                 if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -14489,7 +14630,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     "_strategic_discovery": strict_strategic,
                     "_shock_watch_discovery": shock_watch,
                     "_trusted_commentary_signal": bool(trusted_commentary),
-                    "_strategic_source_text": text if (strict_strategic or shock_watch) else "",
+                    "_formal_proposal_signal": bool(formal_proposal),
+                    "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal) else "",
                 })
             except Exception:
                 continue
@@ -15178,11 +15320,12 @@ def anchor_news(
     diagnostics: list[dict[str, str]] | None = None,
     allow_unanchored: bool = False,
 ) -> list[dict[str, Any]]:
-    """Anchor Strand C strictly to substantive Strand-A evidence.
+    """Build Strand C as an independent weak-signal stream on the same core themes.
 
-    C is a temporary relationship to A, never an independent news class.  The legacy
-    ``allow_unanchored`` argument is retained only for call-site compatibility and is ignored:
-    without a substantive A publication anchor the candidate is not published as C.
+    A matching Strand-A publication is useful context when available, but is not an
+    admission requirement. This lets the radar retain a trustworthy early signal now and
+    manually connect it to later A evidence. The candidate must still independently pass
+    source, R&I-strategic bridge, watch-theme, novelty and claim-status checks.
     """
     internals = [internalize_previous(x) for x in a_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != 'title:']
@@ -15222,7 +15365,10 @@ def anchor_news(
         trusted_commentary = bool(n.get('_trusted_commentary_signal')) or trusted_analytical_commentary_candidate(
             headline, desc, source, clean_text(n.get('source_domain', '')), link
         )
-        if not weak_signal_candidate_text(headline, desc) and not trusted_commentary:
+        formal_proposal = bool(n.get('_formal_proposal_signal')) or formal_proposal_is_public_signal(
+            f"{headline}. {desc}", headline, desc, source, link
+        )
+        if not weak_signal_candidate_text(headline, desc) and not trusted_commentary and not formal_proposal:
             diag(n, 'not_weak_signal_candidate')
             continue
         ntext=n.get('headline','')+' '+n.get('_desc','')
@@ -15247,7 +15393,7 @@ def anchor_news(
         # sentence. A story can mention several technologies in background text while its
         # real new point is talent, research security, export controls, etc. Without this
         # preference a broad 'critical technologies' anchor can win on token overlap and
-        # then fail claim-theme validation even though a strong specific A anchor exists.
+        # provide misleading context even though a stronger specific A anchor exists.
         claim_preview = _signal_what_claim(desc, headline)
         claim_preview_themes = set(themes_for(f"{headline}. {claim_preview}")) & WATCH_SIGNAL_THEMES if claim_preview else set()
         best=None
@@ -15283,7 +15429,7 @@ def anchor_news(
             # Broad thematic overlap is not an anchor by itself. Require a real named-actor
             # bridge or substantially stronger lexical overlap. This is deliberately stricter
             # than discovery, because a wrong A↔C relationship is worse than leaving a signal
-            # for the strict A-anchored signal route.
+            # correctly unanchored for later manual comparison.
             trusted_anchor_recall = bool(trusted_commentary) or source in _SOURCE_MERIT_PUBLIC_HIGH or _source_merit_is_eu_official(source, link)
             if broad_only and not n_c_retrieval:
                 broad_bridge_ok = (
@@ -15324,9 +15470,20 @@ def anchor_news(
                     anchor_basis='publication-external-shock-context'
                     shared_themes=sorted(nthemes)[:1]
                     score=4.25
+        # A is optional for C, but independence raises the source bar. The candidate has
+        # already passed its own R&I-strategic bridge/theme/novelty tests; without an A anchor
+        # it must also come from a configured trusted media/research-analysis or official source.
+        anchor_status = 'anchored' if anchor else 'unanchored'
         if not anchor:
-            diag(n, 'no_substantive_A_anchor')
-            continue
+            if not bool(allow_unanchored or CONFIG.get('c_unanchored_rescue_enabled', False)):
+                diag(n, 'no_substantive_A_anchor')
+                continue
+            source_domain = clean_text(n.get('source_domain', ''))
+            trusted_independent = trusted_independent_c_source(source, source_domain, link)
+            if not trusted_independent:
+                diag(n, 'unanchored_source_not_trusted')
+                continue
+            anchor_basis = 'theme-aligned-independent-signal'
         relation=signal_relation(text)
         theme=shared_themes[0] if shared_themes else sorted(nthemes)[0]
         source_headline=clean_text(n.get('headline',''))
@@ -15341,11 +15498,12 @@ def anchor_news(
             continue
         event_status = 'INTERPRETIVE' if trusted_commentary else signal_event_status(what, headline, desc)
         if not public_signal_event_status(event_status):
-            diag(n, f'event_status_{event_status.lower()}_not_public')
-            continue
+            if event_status != 'PROPOSED' or not formal_proposal_is_public_signal(what, headline, desc, source, link):
+                diag(n, f'event_status_{event_status.lower()}_not_public')
+                continue
         claim_themes = set(themes_for(f"{headline}. {what}")) & WATCH_SIGNAL_THEMES
         if not external_bridge:
-            supported = set(shared_themes) & claim_themes
+            supported = (set(shared_themes) if shared_themes else set(nthemes)) & claim_themes
             if theme not in claim_themes:
                 if not supported:
                     diag(n, 'published_claim_does_not_support_signal_theme')
@@ -15356,8 +15514,8 @@ def anchor_news(
         item.update({
             'anchor':anchor,
             'anchor_basis':anchor_basis,
-            'anchor_status':'anchored',
-            'signal_confidence':'contextual' if trusted_commentary else 'standard',
+            'anchor_status':anchor_status,
+            'signal_confidence':('contextual' if trusted_commentary else 'standard') if anchor else 'emergent',
             'watch_theme':theme,
             'signal_type':relation,
             'signal_kind':kind,
@@ -15370,13 +15528,13 @@ def anchor_news(
             'external_eu_bridge_is_inference': bool(external_bridge),
             'evidence_status': 'low',
             'evidence_role': 'weak_signal',
-            'analytical_weight': WEAK_SIGNAL_CONTEXT_WEIGHT,
+            'analytical_weight': WEAK_SIGNAL_CONTEXT_WEIGHT if anchor else min(WEAK_SIGNAL_CONTEXT_WEIGHT, float(CONFIG.get('c_unanchored_analytical_weight', 0.22) or 0.22)),
             'retention_window_days': WEAK_SIGNAL_RETENTION_DAYS,
             'weak_signal_mode': 'trusted_commentary' if trusted_commentary else 'current_development',
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': 'low-evidence current development or trusted analytical reframing of a substantive Strand-A issue; a substantive A publication anchor is mandatory',
+            'c_admission_rule': 'independent low-evidence current development or trusted analytical reframing on the EU-R&I/geopolitics watch themes; A anchor optional',
             'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
             'strategic_classification_source': 'source_text',
             '_anchor_score':score,
@@ -15385,7 +15543,7 @@ def anchor_news(
             diag(n, 'duplicate_with_current_c_batch')
             continue
         anchored.append(item)
-        diag(n, 'accepted_anchored', 'accepted')
+        diag(n, 'accepted_anchored' if anchor else 'accepted_unanchored', 'accepted')
     anchored.sort(key=lambda x:(x.get('_anchor_score',0),x.get('date','')),reverse=True)
     for x in anchored:x.pop('_anchor_score',None)
     return anchored[:MAX_C] if MAX_C>0 else anchored
@@ -15772,7 +15930,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
     started = time.time()
     log_progress.started = time.monotonic()
     configured_budget_seconds = max(60, int(CONFIG.get("scan_budget_seconds", 1200)))
@@ -15867,6 +16025,7 @@ def main() -> int:
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
+    B_METHOD_DATE_FLOOR = now.date() - relativedelta(years=B_METHOD_LOOKBACK_YEARS)
     SIGNAL_RETENTION_FLOOR = weak_signal_retention_floor(now.date())
     previous, age_window_removed = prune_public_window(previous, DATE_FLOOR, EXTENDED_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, now)
     if sum(age_window_removed.values()):
@@ -15927,6 +16086,15 @@ def main() -> int:
     KNOWN_AB_IDENTITIES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, KNOWN_AB_DOI_TITLES = known_sets_from_previous(previous)
     state = initial_scan_state(previous)
     INSTITUTION_SEEN_FINGERPRINTS = dict(state.get("institution_seen_fingerprints", {}))
+    previous_admission_profile = clean_text((previous.get("stats") or {}).get("admission_profile") if isinstance(previous.get("stats"), dict) else "")
+    current_admission_profile = clean_text(CONFIG.get("admission_profile"))
+    if INSTITUTION_SEEN_FINGERPRINTS and previous_admission_profile != current_admission_profile:
+        # Legacy radar.json files predate the admission_profile field entirely, and older
+        # profiles persisted fingerprints even for pages rejected later by A/B gates.
+        # Treat a missing old profile as a mismatch too: the first v24 run must clear those
+        # tombstones so improved admission logic can reconsider the already-discovered pages.
+        INSTITUTION_SEEN_FINGERPRINTS = {}
+        _diag_inc("institution_seen_cache_reset_for_admission_profile")
     frontier_focus = frontier_gap_plan(previous, state)
     url_term_profiles = CONFIG.get("frontier_gap_institution_url_terms", {})
     ACTIVE_FRONTIER_GAP_URL_TERMS = list(dict.fromkeys(
@@ -16020,6 +16188,8 @@ def main() -> int:
     # not delayed for several runs simply because the broad cursor is currently in
     # the Strand-A portion of the query bank.
     b_method_bank = list(dict.fromkeys(CONFIG.get("queries_b_method", [])))
+    b_method_lookback_years = max(1, int(CONFIG.get("b_method_lookback_years", 12) or 12))
+    b_method_date_floor = now.date() - relativedelta(years=b_method_lookback_years)
     b_method_cursor_before = int(state.get("strand_b_method_cursor", 0) or 0)
     b_method_focus = least_recent_probe_batch(
         state, "strand_b_method", b_method_bank,
@@ -16121,6 +16291,11 @@ def main() -> int:
         cr_query_dates[q] = DATE_FLOOR
         oa_depth_lanes[q] = "evidence"
         cr_depth_lanes[q] = "evidence"
+    for q in b_method_focus:
+        oa_query_dates[q] = B_METHOD_DATE_FLOOR
+        cr_query_dates[q] = B_METHOD_DATE_FLOOR
+        oa_depth_lanes[q] = "b-method-durable"
+        cr_depth_lanes[q] = "b-method-durable"
     for q in finding_context_focus:
         oa_query_dates[q] = DATE_FLOOR
         cr_query_dates[q] = DATE_FLOOR
@@ -16137,6 +16312,16 @@ def main() -> int:
     for q in cr_explore:
         cr_query_dates[q] = DATE_FLOOR
         cr_depth_lanes[q] = "explore"
+    # Foresight-method value decays much more slowly than current geopolitical evidence.
+    # Search the dedicated B lane across a long horizon while keeping the same strict
+    # method-contribution gate. This is a discovery difference, not a relevance waiver.
+    for q in b_method_set:
+        if q in oa_batch or q in oa_explore:
+            oa_query_dates[q] = b_method_date_floor
+            oa_depth_lanes[q] = "b-method-long-horizon"
+        if q in cr_batch or q in cr_explore:
+            cr_query_dates[q] = b_method_date_floor
+            cr_depth_lanes[q] = "b-method-long-horizon"
     priority_tasks_all = diversified_priority_journal_tasks(
         CONFIG.get("crossref_priority_journals", []),
         CONFIG.get("crossref_priority_journal_queries", []),
@@ -16374,7 +16559,7 @@ def main() -> int:
     bootstrap_ab = oa_backfill or cr_backfill or inst_backfill
     oa_from = backfill_from if oa_backfill else incremental_from
     cr_from = backfill_from if cr_backfill else incremental_from
-    inst_from = backfill_from if inst_backfill else incremental_from
+    inst_from = backfill_from if inst_backfill else EXTENDED_DATE_FLOOR
 
     log_progress(
         "Scan start: persistent incremental mode; "
@@ -16441,7 +16626,7 @@ def main() -> int:
     SIGNAL_WINDOW_START_DATE = (now - dt.timedelta(hours=news_lookback)).date()
     log_progress(
         f"Weak-signal discovery lookback: {news_lookback}h (recovery backfill={signal_backfill}); "
-        f"published C retention: {WEAK_SIGNAL_RETENTION_DAYS} days from first_seen; Strand-A anchor required"
+        f"published C retention: {WEAK_SIGNAL_RETENTION_DAYS} days from first_seen; A anchor preferred, independent trusted C allowed"
     )
     news_warnings: list[str] = []
     execution_stats: dict[str, Any] = {}
@@ -16504,7 +16689,8 @@ def main() -> int:
         )
         fut_inst = ex.submit(
             safe_stage, "institutional reports", collect_institutions, inst_from, warnings,
-            bootstrap=inst_backfill, sources_override=inst_batch, stage_deadline=inst_deadline, execution_stats=execution_stats
+            bootstrap=inst_backfill, sources_override=inst_batch, stage_deadline=inst_deadline,
+            execution_stats=execution_stats, publication_floor=EXTENDED_DATE_FLOOR
         )
         fut_direct_journals = ex.submit(
             collect_direct_top_journals, direct_journal_batch, warnings, direct_journal_deadline, execution_stats
@@ -17024,7 +17210,10 @@ def main() -> int:
     # Exact URLs supplied through the curated manual lane are retried first. This is a
     # precision-preserving recall repair: only the supplied URL is fetched, and admission
     # still uses the normal source-aware A/B gate.
-    manual_recovery_deadline = time.monotonic() + int(CONFIG.get("manual_recovery_stage_seconds", 120))
+    manual_recovery_deadline = time.monotonic() + min(
+        int(CONFIG.get("manual_recovery_stage_seconds", 120)),
+        max(30, int(budget_remaining() - int(CONFIG.get("network_reserve_seconds", 90)) - 45)),
+    )
     manual_recovered = safe_stage(
         "manual exact-url recovery",
         collect_manual_recovery, previous, warnings, manual_recovery_deadline, execution_stats
@@ -17652,23 +17841,26 @@ def main() -> int:
             fresh_deadline = time.monotonic() + fresh_seconds
             with cf.ThreadPoolExecutor(max_workers=3) as ex:
                 futs: list[tuple[str, Any]] = []
+                # A zero/low-yield rescue must explore older unseen territory, not merely
+                # spend more time paging through the same recent window.  Use the six-month
+                # evidence floor for all three families while preserving result-depth rotation.
                 if fresh_oa_queries:
                     futs.append(("oa", ex.submit(
-                        safe_stage, f"OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, DATE_FLOOR, warnings,
-                        fresh_oa_queries, fresh_deadline, {q: DATE_FLOOR for q in fresh_oa_queries},
+                        safe_stage, f"OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, EXTENDED_DATE_FLOOR, warnings,
+                        fresh_oa_queries, fresh_deadline, {q: EXTENDED_DATE_FLOOR for q in fresh_oa_queries},
                         state["result_depth"]["openalex"], {q: "low-yield-depth" for q in fresh_oa_queries}, fresh_exec, True
                     )))
                 if fresh_cr_queries:
                     futs.append(("cr", ex.submit(
-                        safe_stage, f"Crossref low-yield continuation wave {wave_idx}", collect_crossref, DATE_FLOOR, warnings,
-                        fresh_cr_queries, [], [], fresh_deadline, {q: DATE_FLOOR for q in fresh_cr_queries},
+                        safe_stage, f"Crossref low-yield continuation wave {wave_idx}", collect_crossref, EXTENDED_DATE_FLOOR, warnings,
+                        fresh_cr_queries, [], [], fresh_deadline, {q: EXTENDED_DATE_FLOOR for q in fresh_cr_queries},
                         state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
                         {q: "low-yield-depth" for q in fresh_cr_queries}, fresh_exec, True
                     )))
                 if fresh_inst_sources:
                     futs.append(("inst", ex.submit(
-                        safe_stage, f"Institutional low-yield continuation wave {wave_idx}", collect_institutions, DATE_FLOOR, warnings,
-                        False, fresh_inst_sources, fresh_deadline, fresh_exec, False, DATE_FLOOR
+                        safe_stage, f"Institutional low-yield continuation wave {wave_idx}", collect_institutions, EXTENDED_DATE_FLOOR, warnings,
+                        False, fresh_inst_sources, fresh_deadline, fresh_exec, False, EXTENDED_DATE_FLOOR
                     )))
                 for family, fut in futs:
                     extra = [x for x in fut.result() if isinstance(x, dict)]
@@ -19188,6 +19380,9 @@ def main() -> int:
             "source_warnings": len(warnings),
             "transport_failure_warnings": transport_failure_count,
             "scan_budget_seconds": budget_seconds,
+            "admission_profile": clean_text(CONFIG.get("admission_profile")),
+            "b_method_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
+            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 10) or 10), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False},
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),

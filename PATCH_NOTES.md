@@ -1,3 +1,16 @@
+# v24.0 — admission recall repair, independent C, durable B
+
+This repair keeps the editorial core narrow — **EU research & innovation in geopolitical/strategic context** — while removing false-negative mechanics that were collapsing high-volume discovery to 0–2 admissions.
+
+- **A admission repaired, not broadly loosened.** Explicit EU R&I institutions/programmes count as direct scope wherever they occur; a single member-state adjective no longer proves EU scope. Short clearly English records are no longer rejected solely because language metadata is absent, and analytical project/facility titles are not killed by a title word before their evidence is read.
+- **Rejected institutional pages are reconsiderable.** A fingerprint is persisted as seen only after A/B admission; admission-profile changes clear legacy institutional tombstones. Sitemap `lastmod` may be used only as explicitly approximate fallback date metadata.
+- **Institutional evidence gets a six-month evaluation floor.** This separates report discovery rhythm from the short incremental scholarly overlap while retaining identity dedupe.
+- **B methods get a durable discovery horizon.** Dedicated B-method queries search up to 15 years with the same strict method-contribution gate. Historical B ranking is age-neutral.
+- **C is independent of A.** An A publication anchor is optional context. Unanchored C must come from a configured accountable news/analysis/official source and independently prove an R&I-to-strategic bridge, watch-theme relevance, novelty/reframing and a publishable current/interpretive claim.
+- **Soft mix target:** roughly **10 A : 1 B : 3 C**. This is diagnostic only; qualified items are never rejected to enforce a quota.
+- **Time allocation rebalanced.** Repetitive continuation is capped at two waves; oversized early/sequential ceilings are trimmed; low-yield recovery retains protected time and searches the six-month evidence floor instead of repeating only the recent window. Main scheduled scans no longer also run on every push.
+- **Historical parity.** The historical scanner continues to call the live A/B gate and final worthiness guard. Age determines whether material belongs in Historical and which coverage band finds it; it no longer lowers A or B merit merely because the item is older.
+
 # v23.4 — cumulative adversarial inference + protected A priority
 
 This release adds a hidden post-scan analytical layer for the higher-order patterns discussed in the Level-4/5 worked examples. The examples are encoded as **reasoning grammars**, not as canned conclusions or topic lookups. The exact worked-example detectors remain only as executable regression/specification helpers; the production detector list uses relation-level grammars rather than privileged programme/document-name shortcuts. Every completed main scan runs the analytical pass. Most new evidence should change nothing visible; unfinished candidates persist, accumulate support or counter-evidence, generate bounded missing-link/falsifier searches, and compete for a very small number of reader-facing slots.

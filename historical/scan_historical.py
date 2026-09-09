@@ -435,9 +435,14 @@ def admit(raw: dict[str, Any], lane: str = "unknown") -> dict[str, Any] | None:
         else:
             topics=["main-a-evidence"]
     authority=int(profile.get("authority",0)); evidence_bonus=18 if a_pass else 16
-    score=min(100, authority + evidence_bonus + (8 if abstract and len(abstract.split())>=28 else 4) + year_bonus(date))
+    # Historical age is a coverage/date dimension, not evidence quality. Penalising an A item
+    # for being older inside the archive makes every older item look intrinsically less relevant
+    # even though age is the reason it belongs here. B methods are especially durable, but the
+    # same principle applies to historical A: use a constant age-neutral component for both.
+    age_component = int(CONFIG.get("historical_age_neutral_bonus", CONFIG.get("b_age_neutral_bonus", 8)) or 8)
+    score=min(100, authority + evidence_bonus + (8 if abstract and len(abstract.split())>=28 else 4) + age_component)
     # Source eligibility plus the live Main A/B gate is the admission decision. The score is
-    # retained for historical reader ordering/diagnostics, not as a second contradictory gate.
+    # retained for diagnostics/display only, not as a second contradictory gate.
     _diag("gate_passed"); _diag("main_a_pass" if a_pass else "main_b_pass")
     row,outcome,basis=matrix_classification(text)
     strand="AB" if a_pass and b_pass else ("A" if a_pass else "B")

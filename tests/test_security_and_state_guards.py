@@ -23,10 +23,27 @@ class CurrentRepositoryContractTests(unittest.TestCase):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
         self.assertEqual(int(cfg.get('max_corpus_per_strand', 0) or 0), 0)
 
-    def test_c_retention_is_sixty_days_and_requires_a_anchor(self):
+    def test_c_retention_is_sixty_days_and_a_anchor_is_optional(self):
         self.assertEqual(scan.WEAK_SIGNAL_RETENTION_DAYS, 60)
+        cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
+        self.assertTrue(bool(cfg.get('c_unanchored_rescue_enabled')))
         source = SCAN_PATH.read_text(encoding='utf-8')
-        self.assertIn('Strand-A anchor required', source)
+        self.assertIn("anchor_status = 'anchored' if anchor else 'unanchored'", source)
+
+    def test_rejected_institutional_pages_are_not_persisted_as_seen(self):
+        source = SCAN_PATH.read_text(encoding='utf-8')
+        pdf_gate = source.index('ev = gate_scope(title, "", body, tier, source_kind="institutional")')
+        pdf_mark = source.index('_mark_institution_seen(fingerprint)', pdf_gate)
+        self.assertGreater(pdf_mark, pdf_gate)
+        self.assertIn('institution_seen_cache_reset_for_admission_profile', source)
+
+    def test_continuation_is_bounded_and_rescue_has_reserved_time(self):
+        cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
+        self.assertLessEqual(int(cfg.get('full_budget_continuation_max_waves',999)), 2)
+        self.assertGreaterEqual(int(cfg.get('low_yield_reserved_seconds',0)), 240)
+        source = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
+        self.assertIn('OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, EXTENDED_DATE_FLOOR', source)
+        self.assertIn('Institutional low-yield continuation wave {wave_idx}", collect_institutions, EXTENDED_DATE_FLOOR', source)
 
     def test_main_budget_is_twenty_four_minutes(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
