@@ -144,10 +144,12 @@ def main() -> int:
     if old_total >= 20 and (new_total <= old_total * 0.25 or new_total > old_total * 4):
         raise SystemExit(f"main radar corpus count is abnormal: {old_total} -> {new_total}")
 
+    full_revalidation = new.get("full_corpus_revalidation") if isinstance(new.get("full_corpus_revalidation"), dict) else {}
     cleanup = bool(
         new.get("inherited_corpus_audit_this_run")
         or new.get("quality_migration_this_run")
         or (new.get("precision_corpus_cleanup_this_run") and not new.get("active_core_rebalance_this_run"))
+        or (full_revalidation.get("completed_at") and full_revalidation.get("discovery_scan") is False)
     )
     old_public_ab = len(items(old, "strand_a")) + len(items(old, "strand_b"))
     new_public_ab = len(items(new, "strand_a")) + len(items(new, "strand_b"))
