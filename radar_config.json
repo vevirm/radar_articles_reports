@@ -1,7 +1,7 @@
 {
   "news_lookback_hours": 1440,
   "max_new_ab_per_scan": 0,
-  "max_c_per_scan": 6,
+  "max_c_per_scan": 0,
   "max_corpus_per_strand": 0,
   "openalex_per_query": 80,
   "crossref_rows_per_query": 70,
@@ -3441,8 +3441,8 @@
   "direct_news_links_per_source": 48,
   "direct_news_timeout_seconds": 10,
   "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources.",
-  "c_min_new_per_successful_scan": 3,
-  "c_floor_rescue_enabled": true,
+  "c_min_new_per_successful_scan": 0,
+  "c_floor_rescue_enabled": false,
   "c_floor_rescue_min_seconds_remaining": 65,
   "c_floor_rescue_stage_seconds": 60,
   "c_floor_rescue_windows_hours": [
@@ -4082,7 +4082,7 @@
   "target_new_b_per_scan": 1,
   "target_new_c_per_scan": 3,
   "b_method_lookback_years": 15,
-  "target_item_mix_rule": "Hard publication invariant for NEW admissions after substantive gates: up to 8 A, 1 B, 3 C. Quality gates decide eligibility first; a short lane stays short and is never filled with weaker material. Historical accepted records are not deleted by the quota.",
+  "target_item_mix_rule": "Soft publication mix shares for NEW admissions: A:B:C = 8:1:3 (about 66.7% / 8.3% / 25%). These are relative target shares, not absolute caps or floors. Quality and novelty gates decide eligibility; no valid row is suppressed and no weak row is rescued solely to hit the mix.",
   "c_unanchored_analytical_weight": 0.22,
   "c_unanchored_rule": "Independent C may be admitted from a trusted source when it is a dated, concrete, source-backed external R&I/technology development capable of changing a European A state variable. The event facts must come from the source; Europe-impact language may be a clearly labelled radar inference. A publication anchor is preferred but not mandatory.",
   "institution_sitemap_lastmod_fallback_enabled": true,
@@ -4442,5 +4442,6 @@
       "role": "official_primary"
     }
   ],
-  "c_event_integrity_profile_version": "v24.7.2-c-event-dedup-ranking"
+  "c_event_integrity_profile_version": "v24.7.3-soft-mix-shares",
+  "target_item_mix_mode": "soft_shares"
 }
