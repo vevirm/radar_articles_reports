@@ -72,13 +72,14 @@ class V2472CSelectionDedup(unittest.TestCase):
         headlines = [x["headline"] for x in selected]
         self.assertNotIn("Japan formally joins Horizon Europe as associated country", headlines)
         self.assertNotIn("EU opens applications for €10bn AI gigafactory scheme", headlines)
-        self.assertNotIn("The EU's AI Boom Could Undermine its Own Chip Strategy", headlines)
         self.assertEqual(headlines, [
             "EU's first quantum tech regulation delayed by six months",
             "EU-China research cooperation limited to targeted areas",
             "Intel to invest €5bn in Leixlip campus on next-generation chips to power AI",
+            "The EU's AI Boom Could Undermine its Own Chip Strategy",
         ])
-        self.assertEqual(stats["selected_c"], 3)
+        self.assertEqual(stats["selected_c"], 4)
+        self.assertEqual(stats["suppressed_c"], 0)
 
     def test_repaired_good_signals_ignore_legacy_retirement_tombstones(self):
         row = c("EU-China research cooperation limited to ‘targeted areas’", "2026-09-10")

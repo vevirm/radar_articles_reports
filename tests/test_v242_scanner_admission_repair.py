@@ -144,10 +144,12 @@ class V242ScannerAdmissionRepairTests(unittest.TestCase):
         self.assertFalse(S.signal_retention_expired(proposed, now))
         self.assertTrue(S.signal_retention_expired(delivered, now))
 
-    def test_c_floor_targets_three_without_lowering_quality(self):
+    def test_c_share_targets_three_without_forcing_a_floor(self):
         cfg = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
-        self.assertEqual(int(cfg.get("c_min_new_per_successful_scan", -1)), 3)
-        self.assertTrue(bool(cfg.get("c_floor_rescue_enabled")))
+        self.assertEqual(int(cfg.get("target_new_c_per_scan", -1)), 3)
+        self.assertEqual(int(cfg.get("c_min_new_per_successful_scan", -1)), 0)
+        self.assertFalse(bool(cfg.get("c_floor_rescue_enabled", True)))
+        self.assertEqual(cfg.get("target_item_mix_mode"), "soft_shares")
 
     def test_missing_text_queue_is_persistent_state(self):
         state = S.initial_scan_state({})

@@ -31,9 +31,10 @@ class ScannerFeatureContractTests(unittest.TestCase):
         self.assertEqual(rel2, 'direct')
         self.assertTrue(any('dg rtd' in x.lower() for x in evidence2))
 
-    def test_v246_strand_mix_is_hard_publication_invariant(self):
+    def test_v2473_strand_mix_is_soft_publication_share(self):
         self.assertEqual((int(scan.CONFIG.get('target_new_a_per_scan',0)), int(scan.CONFIG.get('target_new_b_per_scan',0)), int(scan.CONFIG.get('target_new_c_per_scan',0))), (8,1,3))
-        self.assertIn('Hard publication invariant', str(scan.CONFIG.get('target_item_mix_rule','')))
+        self.assertIn('Soft publication mix shares', str(scan.CONFIG.get('target_item_mix_rule','')))
+        self.assertEqual(scan.CONFIG.get('target_item_mix_mode'), 'soft_shares')
         self.assertGreaterEqual(int(scan.CONFIG.get('b_method_lookback_years',0)), 10)
 
     def test_v235_research_analysis_platform_can_be_unlabelled_commentary(self):

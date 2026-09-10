@@ -376,28 +376,36 @@ class V246CriteriaRepairTests(unittest.TestCase):
         self.assertEqual(S.signal_event_status("", "Netherlands tightens screening of researchers in sensitive technologies", ""), "DONE")
         self.assertTrue(S.signal_headline_has_current_change("Council ratifies research association agreement"))
 
-    # --- hard publication mix is downstream of quality ---
-    def test_hard_8_1_ab_mix(self):
+    # --- publication mix is a soft share downstream of quality ---
+    def test_soft_8_1_ab_share_does_not_cap_valid_rows(self):
         candidates = []
         for i in range(20):
             candidates.append({"title": f"A candidate {i}", "link": f"https://a/{i}", "strand": "A"})
         for i in range(20):
             candidates.append({"title": f"B candidate {i}", "link": f"https://b/{i}", "strand": "B"})
         selected, stats = S.select_hard_new_ab_mix(candidates)
-        self.assertEqual(sum(x["strand"] == "A" for x in selected), 8)
-        self.assertEqual(sum(x["strand"] == "B" for x in selected), 1)
-        self.assertEqual(stats["selected_a"], 8)
-        self.assertEqual(stats["selected_b"], 1)
+        self.assertEqual(sum(x["strand"] == "A" for x in selected), 20)
+        self.assertEqual(sum(x["strand"] == "B" for x in selected), 20)
+        self.assertEqual(stats["selected_a"], 20)
+        self.assertEqual(stats["selected_b"], 20)
+        self.assertEqual(stats["suppressed_a"], 0)
+        self.assertEqual(stats["suppressed_b"], 0)
 
-    def test_both_candidate_cannot_leak_past_b_cap(self):
+    def test_both_candidate_is_normalised_without_b_cap(self):
         candidates = [{"title": "Both", "link": "https://x/both", "strand": "both"}]
         candidates += [{"title": f"A {i}", "link": f"https://x/a{i}", "strand": "A"} for i in range(12)]
         candidates += [{"title": f"B {i}", "link": f"https://x/b{i}", "strand": "B"} for i in range(12)]
-        selected, _ = S.select_hard_new_ab_mix(candidates)
-        self.assertEqual(sum(x["strand"] == "B" for x in selected), 1)
-        self.assertTrue(all(x["strand"] in {"A", "B"} for x in selected))
+        selected, stats = S.select_hard_new_ab_mix(candidates)
+        self.assertEqual(sum(x["strand"] == "B" for x in selected), 12)
+        self.assertEqual(sum(x["strand"] == "A" for x in selected), 12)
+        self.assertEqual(sum(x["strand"] == "both" for x in selected), 1)
+        self.assertEqual(stats["selected_a"], 13)
+        self.assertEqual(stats["selected_b"], 13)
+        self.assertTrue(all(x["strand"] in {"A", "B", "both"} for x in selected))
+        self.assertEqual(stats["suppressed_a"], 0)
+        self.assertEqual(stats["suppressed_b"], 0)
 
-    def test_hard_c_cap_only_limits_novel_rows(self):
+    def test_c_share_does_not_cap_novel_rows(self):
         headlines = [
             "China restricts quantum exports", "US cuts NSF science funding",
             "Germany opens AI research factory", "France funds biotech laboratory",
@@ -406,9 +414,9 @@ class V246CriteriaRepairTests(unittest.TestCase):
         ]
         rows = [{"headline": h, "link": f"https://reuters.com/signal-{i}", "date": "2026-09-10", "source": "Reuters"} for i, h in enumerate(headlines)]
         selected, stats = S.select_hard_new_c_mix(rows, [])
-        self.assertEqual(len(selected), 3)
-        self.assertEqual(stats["selected_c"], 3)
-        self.assertEqual(stats["suppressed_c"], 5)
+        self.assertEqual(len(selected), 8)
+        self.assertEqual(stats["selected_c"], 8)
+        self.assertEqual(stats["suppressed_c"], 0)
 
     # --- one-time migration of the known v24.5 flood/current curator negatives ---
     def test_v246_b_library_cleanup_revalidates_all_saved_b_rows(self):
@@ -487,8 +495,9 @@ class V246CriteriaRepairTests(unittest.TestCase):
         self.assertEqual(S.C_ADMISSION_PROFILE_VERSION, "v24.6-state-variable-change-c")
         self.assertEqual(S.CURATOR_DECISION_PROFILE_VERSION, "v24.6-criteria-repair")
         self.assertEqual((cfg["target_new_a_per_scan"], cfg["target_new_b_per_scan"], cfg["target_new_c_per_scan"]), (8, 1, 3))
-        self.assertEqual(cfg["c_min_new_per_successful_scan"], 3)
-        self.assertTrue(cfg["c_floor_rescue_enabled"])
+        self.assertEqual(cfg["c_min_new_per_successful_scan"], 0)
+        self.assertFalse(cfg["c_floor_rescue_enabled"])
+        self.assertEqual(cfg.get("target_item_mix_mode"), "soft_shares")
 
 
 if __name__ == "__main__":
