@@ -33,15 +33,19 @@ jobs:
       - name: Install scanner dependencies
         run: pip install -r requirements.txt
 
-      - name: Restore exact pre-cleanup radar.json
+      - name: Restore exact pre-revalidation/pre-cleanup radar.json
         shell: bash
         run: |
           set -euo pipefail
-          if [[ ! -f backups/one-time-corpus-cleanup/LATEST_BACKUP.txt ]]; then
-            echo '::error::No one-time cleanup backup exists. Nothing was changed.'
+          if [[ -f backups/one-time-full-corpus-revalidation/LATEST_BACKUP.txt ]]; then
+            pointer='backups/one-time-full-corpus-revalidation/LATEST_BACKUP.txt'
+          elif [[ -f backups/one-time-corpus-cleanup/LATEST_BACKUP.txt ]]; then
+            pointer='backups/one-time-corpus-cleanup/LATEST_BACKUP.txt'
+          else
+            echo '::error::No corpus backup pointer exists. Nothing was changed.'
             exit 1
           fi
-          backup="$(cat backups/one-time-corpus-cleanup/LATEST_BACKUP.txt)"
+          backup="$(cat "$pointer")"
           if [[ ! -f "$backup" ]]; then
             echo "::error::Backup file is missing: $backup"
             exit 1
@@ -60,16 +64,16 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add radar.json
+          git add -- radar.json
           if git diff --cached --quiet; then
             echo 'radar.json already matches the backup; nothing to commit.'
             exit 0
           fi
-          git commit -m 'Restore Radar corpus from pre-cleanup backup'
+          git commit -m 'Restore Radar corpus from pre-revalidation backup'
           git push
 
       - name: Summary
         if: always()
         run: |
           echo '## Corpus restore' >> "$GITHUB_STEP_SUMMARY"
-          echo 'The restore action only replaces radar.json with the exact pre-cleanup backup. Scanner code, workflows, scan_state files, and configuration are not changed.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This action restores radar.json from the newest full-revalidation backup when available, otherwise from the earlier one-time-cleanup backup. Scanner code, configuration and scan-state files are not rewritten.' >> "$GITHUB_STEP_SUMMARY"

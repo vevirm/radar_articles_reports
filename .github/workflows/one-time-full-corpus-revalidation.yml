@@ -1,0 +1,153 @@
+name: ONE-TIME Full Corpus Revalidation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+# Use the same queue as Main/Historical so revalidation cannot race a discovery scan.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  revalidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Refuse a second full revalidation
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f backups/one-time-full-corpus-revalidation/COMPLETED.json ]]; then
+            echo '::error::The one-time full corpus revalidation has already completed. Nothing was changed.'
+            echo 'Use RESTORE Corpus Backup if that completed run must be undone.'
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install scanner dependencies
+        run: pip install -r requirements.txt
+
+      - name: Prove current repository is healthy before backup
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/check_workflow_contract.py
+          python scripts/validate_scanner_output.py radar.json
+
+      - name: Create exact recoverable backup
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+          backup_dir='backups/one-time-full-corpus-revalidation'
+          report_dir='revalidation-reports'
+          mkdir -p "$backup_dir" "$report_dir"
+          backup="$backup_dir/radar-before-full-revalidation-$stamp.json"
+          report_json="$report_dir/full-corpus-revalidation-$stamp.json"
+          report_md="$report_dir/full-corpus-revalidation-$stamp.md"
+          cp radar.json "$backup"
+          sha256sum radar.json > "$backup.sha256"
+          printf '%s\n' "$backup" > "$backup_dir/LATEST_BACKUP.txt"
+          {
+            echo "REVALIDATION_STAMP=$stamp"
+            echo "REVALIDATION_BACKUP=$backup"
+            echo "REVALIDATION_REPORT_JSON=$report_json"
+            echo "REVALIDATION_REPORT_MD=$report_md"
+          } >> "$GITHUB_ENV"
+
+      - name: Commit backup before changing corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- backups/one-time-full-corpus-revalidation
+          git commit -m 'Backup Radar corpus before full revalidation'
+          git push
+
+      - name: Revalidate the complete accepted evidence corpus
+        shell: bash
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          FULL_REVALIDATION_NETWORK_BUDGET_SECONDS: '1800'
+          FULL_REVALIDATION_MIN_REFRESH_SUCCESS_RATIO: '0.20'
+        run: |
+          set -euo pipefail
+          python scripts/full_corpus_revalidate.py \
+            --radar radar.json \
+            --report-json "$REVALIDATION_REPORT_JSON" \
+            --report-md "$REVALIDATION_REPORT_MD"
+
+      - name: Validate cleaned corpus and rerun every regression test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_scanner_output.py radar.json
+          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/check_workflow_contract.py
+
+      - name: Record completion marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          backup_dir='backups/one-time-full-corpus-revalidation'
+          printf '%s\n' "$REVALIDATION_REPORT_JSON" > "$backup_dir/LATEST_REPORT.txt"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('backups/one-time-full-corpus-revalidation/COMPLETED.json')
+          p.write_text(json.dumps({
+              'workflow': 'ONE-TIME Full Corpus Revalidation',
+              'completed': True,
+              'stamp': os.environ['REVALIDATION_STAMP'],
+              'backup': os.environ['REVALIDATION_BACKUP'],
+              'report_json': os.environ['REVALIDATION_REPORT_JSON'],
+              'report_md': os.environ['REVALIDATION_REPORT_MD'],
+          }, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit cleaned corpus and complete audit trail
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- radar.json revalidation-reports backups/one-time-full-corpus-revalidation
+          git commit -m 'Complete one-time full Radar corpus revalidation'
+          git push
+
+      - name: Upload cleaned radar and audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-corpus-revalidation-result-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            radar.json
+            revalidation-reports/full-corpus-revalidation-*.json
+            revalidation-reports/full-corpus-revalidation-*.md
+            backups/one-time-full-corpus-revalidation/*.sha256
+
+      - name: Revalidation summary
+        if: always()
+        shell: bash
+        run: |
+          echo '## ONE-TIME Full Corpus Revalidation' >> "$GITHUB_STEP_SUMMARY"
+          if [[ -n "${REVALIDATION_REPORT_MD:-}" && -f "$REVALIDATION_REPORT_MD" ]]; then
+            cat "$REVALIDATION_REPORT_MD" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'The run stopped before a final audit report was produced. The pre-run corpus remains recoverable from the committed backup.' >> "$GITHUB_STEP_SUMMARY"
+          fi
