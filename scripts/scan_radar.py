@@ -13087,47 +13087,24 @@ def select_balanced_new_ab(candidates: list[dict[str, Any]], limit: int) -> list
 
 
 def select_hard_new_ab_mix(candidates: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    """Apply the publication invariant to *new* A/B admissions after substantive gates.
+    """Compatibility wrapper for the 8:1 A:B *share*, never an absolute publication cap.
 
-    Quality decides eligibility first. Quotas never rescue a weak row and never delete history.
-    Dual-labelled candidates are materialised separately so a ``both`` row cannot leak through
-    the B ceiling merely because it was selected for A.
+    The substantive gates decide what is publishable. The 8:1:3 values are soft mix/share
+    weights for discovery, ordering and diagnostics; they must not suppress a valid A or B
+    row, and they must never rescue a weaker row merely to make the mix look right.
     """
-    target_a = max(0, int(CONFIG.get('target_new_a_per_scan', 8) or 8))
-    target_b = max(0, int(CONFIG.get('target_new_b_per_scan', 1) or 1))
-    ordered = list(candidates)
-    selected: list[dict[str, Any]] = []
-    used_a: set[str] = set()
-    used_b: set[str] = set()
-
-    # Preserve ranking within each lane. A dual candidate may occupy both quotas, but only
-    # through explicit A and B copies; it never silently creates an extra B publication.
-    for lane, target, used in [('A', target_a, used_a), ('B', target_b, used_b)]:
-        if target <= 0:
-            continue
-        for item in ordered:
-            strand = clean_text(item.get('strand'))
-            if lane == 'A' and strand not in {'A', 'both'}:
-                continue
-            if lane == 'B' and strand not in {'B', 'both'}:
-                continue
-            ident = identity(item)
-            if ident in used:
-                continue
-            copy = dict(item)
-            copy['strand'] = lane
-            selected.append(copy)
-            used.add(ident)
-            if len(used) >= target:
-                break
+    ordered = [dict(x) for x in candidates if isinstance(x, dict)]
+    eligible_a = sum(1 for x in ordered if clean_text(x.get('strand')) in {'A', 'both'})
+    eligible_b = sum(1 for x in ordered if clean_text(x.get('strand')) in {'B', 'both'})
     stats = {
-        'eligible_a': sum(1 for x in ordered if clean_text(x.get('strand')) in {'A','both'}),
-        'eligible_b': sum(1 for x in ordered if clean_text(x.get('strand')) in {'B','both'}),
-        'selected_a': len(used_a), 'selected_b': len(used_b),
+        'eligible_a': eligible_a,
+        'eligible_b': eligible_b,
+        'selected_a': eligible_a,
+        'selected_b': eligible_b,
+        'suppressed_a': 0,
+        'suppressed_b': 0,
     }
-    stats['suppressed_a'] = max(0, stats['eligible_a'] - stats['selected_a'])
-    stats['suppressed_b'] = max(0, stats['eligible_b'] - stats['selected_b'])
-    return selected, stats
+    return ordered, stats
 
 
 def major_eu_ri_priority_score(item: dict[str, Any]) -> int:
@@ -17647,9 +17624,9 @@ def anchor_news(
     for x in anchored:x.pop('_anchor_score',None)
     # Do not apply the publication cap before saved-C novelty is known.  Previously MAX_C
     # (normally 6) could be filled by fresh coverage of already-published events, preventing
-    # lower-ranked genuinely novel signals from ever reaching ``select_hard_new_c_mix``.
-    # Keep only a generous runtime safety bound here; the real 3-item publication target is
-    # applied after novelty/deduplication.
+    # lower-ranked genuinely novel signals from ever reaching final event-level deduplication.
+    # Keep only a generous runtime safety bound here. The 8:1:3 publication rule is a soft
+    # share target, so there is no three-item C publication cap after novelty/deduplication.
     pre_novelty_cap = max(0, int(CONFIG.get('c_pre_novelty_candidate_cap', 30) or 0))
     return anchored[:pre_novelty_cap] if pre_novelty_cap > 0 else anchored
 
@@ -17754,20 +17731,20 @@ def _c_publication_rank_key(item: dict[str, Any]) -> tuple[int, int, int]:
 
 
 def select_hard_new_c_mix(current_c: list[dict[str, Any]], previous_c: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    """Cap only genuinely novel C publications and rank concrete developments first."""
-    target = max(0, int(CONFIG.get('target_new_c_per_scan', 3) or 3))
+    """Keep every genuinely novel valid C row; 3 is a soft share weight, not a cap.
+
+    Event-level deduplication still removes repeat coverage of an already represented
+    development. Concrete dated changes are ordered ahead of commentary for reader priority,
+    but no otherwise-valid novel signal is discarded solely because three C rows already exist.
+    """
     novel = _novel_signal_rows(current_c, previous_c)
     novel.sort(key=_c_publication_rank_key, reverse=True)
-    selected_novel = novel[:target]
     stats = {
         'eligible_c': len(novel),
-        'selected_c': len(selected_novel),
-        'suppressed_c': max(0, len(novel) - len(selected_novel)),
+        'selected_c': len(novel),
+        'suppressed_c': 0,
     }
-    # Retained C is already preserved by merge_signal_corpus(previous_c, ...). Returning
-    # matching current coverage here only creates redundant work and makes diagnostics look
-    # as if old events were selected again. Publish only the genuinely novel top-N rows.
-    return selected_novel, stats
+    return novel, stats
 
 
 def c_floor_rescue_queries() -> list[str]:
@@ -21692,7 +21669,7 @@ def main() -> int:
             "finding_context_queries_executed": finding_context_executed,
             "note_a": f"This scan added {new_a_count} new Strand A item(s). Earlier accepted items remain in the corpus." if new_a_count < 3 else "",
             "note_b": f"This scan added {new_b_count} new Strand B item(s). Earlier accepted items remain in the corpus." if new_b_count < 3 else "",
-            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and each signal stays for 60 days from first insertion." if 0 < new_c_count < 3 else "",
+            "note_c": f"This scan added {new_c_count} new weak signal(s). Strand C remains low evidence and each signal stays for its status-aware retention window." if new_c_count > 0 else "",
             "frontier_gap_targets": frontier_focus["targets"],
             "frontier_gap_deficits": {k: frontier_focus.get("deficits", {}).get(k, 0) for k in frontier_focus["targets"]},
             "frontier_gap_target_count": frontier_focus.get("target_count", 3),
@@ -21940,7 +21917,7 @@ def main() -> int:
             "b_method_recent_discovery_from": B_METHOD_RECENT_DATE_FLOOR.isoformat(),
             "b_method_foundational_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "b_method_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
-            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": True, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
+            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False, "mode": "soft_shares", "share_weights": {"A": 8, "B": 1, "C": 3}, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
