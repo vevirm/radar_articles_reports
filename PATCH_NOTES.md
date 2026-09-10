@@ -1,3 +1,13 @@
+# v24.6 — criteria repair and hard 8:1:3 publication mix
+
+- **A:** admission is relationship-based. Internal EU R&I evidence can qualify when it establishes a strategic state variable (capability, funding, talent, infrastructure/compute, collaboration, scale-up, dependency, governance, research security, standards), even if the source does not itself use geopolitical language. Generic Europe + technology/research co-occurrence is insufficient.
+- **B:** a real foresight/futures method must be identified first, and the method/construct itself must be studied. Bare `future research`, `scenario(s)`, generic method words, method application, organisational use, HTA homonyms and engineering weak-signal homonyms cannot establish B.
+- **C:** direct European changes and materially transboundary R&I changes can qualify. The external event remains source-backed and any Europe-impact bridge is labelled radar inference. Product/vendor PR, generic foreign tech investment, event/index pages and operational procurement notices stay out.
+- **Balance:** after quality and novelty, new publication is capped at **8 A / 1 B / 3 C**. No lane steals another lane's unused capacity and no quota rescues a failed item.
+- **Diagnostics:** C admission/rejection reasons are persisted in bounded scan diagnostics instead of existing only in stdout.
+- **Migration:** the saved B library is revalidated once through the repaired method-object gate (including the known v24.5 flood window); saved C is revalidated and rejected rows are archived. Historical A is not globally replayed from abbreviated summaries.
+- **Regression suite:** curator benchmarks plus expanded C/adversarial coverage; current packaged tree passes **197 tests with 33 skipped and 0 failures**.
+
 # v24.0 — admission recall repair, independent C, durable B
 
 This repair keeps the editorial core narrow — **EU research & innovation in geopolitical/strategic context** — while removing false-negative mechanics that were collapsing high-volume discovery to 0–2 admissions.
