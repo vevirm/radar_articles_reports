@@ -346,6 +346,7 @@ INHERITED_CORPUS_AUDIT_FAIL_CLOSED = bool(CONFIG.get("inherited_corpus_audit_fai
 SIGNAL_DISCOVERY_VERSION = str(CONFIG.get("signal_discovery_version", "v17.17-relational-weak-signals"))
 SIGNAL_QUALITY_PROFILE_VERSION = str(CONFIG.get("signal_quality_profile_version", SIGNAL_DISCOVERY_VERSION))
 C_ADMISSION_PROFILE_VERSION = "v24.6-state-variable-change-c"
+C_EVENT_INTEGRITY_PROFILE_VERSION = str(CONFIG.get("c_event_integrity_profile_version", "v24.7.1-c-event-integrity-hotfix"))
 SIGNAL_BACKFILL_HOURS = int(CONFIG.get("signal_backfill_hours", 720))
 INCREMENTAL_STATE_VERSION = str(CONFIG.get("incremental_state_version", "v17.2-persistent-source-cursors"))
 ROTATION_PROFILE_VERSION = str(CONFIG.get("rotation_profile_version", "v17.6.4-fresh-plus-historical-exploration"))
@@ -2266,7 +2267,7 @@ def signal_headline_has_current_change(title: str) -> bool:
     return bool(re.search(
         r"\b(?:announces?|announced|launches?|launched|unveils?|unveiled|proposes?|proposed|"
         r"considers?|considered|mulls?|seeks?|plans?|planned|pilots?|piloted|tests?|tested|"
-        r"delays?|delayed|postpones?|postponed|pauses?|paused|restricts?|restricted|bans?|banned|"
+        r"delays?|delayed|postpones?|postponed|pauses?|paused|restricts?|restricted|limits?|limited|narrows?|narrowed|bans?|banned|"
         r"tightens?|tightened|invests?|invested|raises?|raised|cuts?|cut|increases?|increased|decreases?|decreased|updates?|updated|adopts?|"
         r"adopted|approves?|approved|signs?|signed|opens?|opened|closes?|closed|expands?|expanded|"
         r"builds?|built|joins?|joined|withdraws?|withdrew|finds?|found|shows?|showed|reveals?|"
@@ -2427,6 +2428,112 @@ def saved_eu_funding_signal_has_geopolitical_setting(item: dict[str, Any]) -> bo
     return eu_funding_signal_has_geopolitical_setting(headline, source_claim or sourceish)
 
 
+def c_standing_funding_or_call_page(title: str, desc: str = "", source: str = "", link: str = "") -> bool:
+    """Return True for standing funding/topic/application pages rather than a new C event.
+
+    A call/programme page can be excellent A provenance, but it is not a weak signal merely
+    because its sitemap timestamp changed or because the page contains words such as launch,
+    budget, proposals or funding.  C requires a separately identifiable current act/change.
+    """
+    h = normalized(title)
+    lead = normalized(clean_text(desc)[:5000])
+    full = normalized(f"{title}. {desc}")
+    path = normalized(urlparse(clean_text(link)).path if clean_text(link) else "")
+    funding_surface = bool(
+        "/funding-and-grants/" in path
+        or "/funding-opportunities/" in path
+        or "/calls/" in path
+        or "/call-for-proposals" in path
+        or "/apply-for-funding" in path
+    )
+    operational_cues = sum(bool(x in full) for x in [
+        "apply now", "who should apply", "how to apply", "support for applicants",
+        "call for proposals", "call is closed", "call closed", "funding and tenders opportunities portal",
+        "funding & tenders opportunities portal", "deadline for applicants", "proposals submitted",
+        "overall indicative budget", "work programme", "work program", "info day",
+    ])
+    generic_topic_title = bool(
+        not signal_headline_has_current_change(title)
+        and not re.search(r"\b(?:agreement reached|funding awarded|contract awarded|selected projects?|entered into force|construction started|opens? new|opened new)\b", h, re.I)
+    )
+    return bool((funding_surface and operational_cues >= 2) or (operational_cues >= 4 and generic_topic_title))
+
+
+def c_date_basis_is_event_usable(item: dict[str, Any]) -> bool:
+    """Sitemap modification dates may retrieve a page but cannot date a Strand-C event."""
+    if not isinstance(item, dict):
+        return False
+    basis = normalized(item.get("date_basis", ""))
+    if basis in {"sitemap_lastmod", "sitemap_lastmod_approximate"}:
+        return False
+    if bool(item.get("publication_date_approximate")):
+        return False
+    return True
+
+
+def _configured_country_news_source(source: str = "", source_domain: str = "", link: str = "") -> str:
+    """Return the configured home country for a curated national-news source, if any."""
+    src = normalized(source)
+    domain = clean_text(source_domain).lower().removeprefix("www.").strip(" .")
+    if not domain:
+        domain = _source_merit_domain(link)
+    for row in CONFIG.get("country_news_sources", []) if isinstance(CONFIG.get("country_news_sources"), list) else []:
+        if not isinstance(row, dict):
+            continue
+        rdomain = clean_text(row.get("domain")).lower().removeprefix("www.").strip(" .")
+        rname = normalized(row.get("name", ""))
+        if (domain and rdomain and (domain == rdomain or domain.endswith("." + rdomain))) or (src and rname and src == rname):
+            return clean_text(row.get("country"))
+    return ""
+
+
+def c_country_source_capacity_scope(headline: str, desc: str, source: str = "", source_domain: str = "", link: str = "") -> tuple[bool, list[str]]:
+    """Bounded fallback for locally worded strategic-capacity news from curated national media.
+
+    National outlets often headline a city (Leixlip, Espoo, Jülich) without repeating the
+    country.  We may use the outlet's configured home country only for a hard, quantified or
+    physical R&I-capacity move and only when the text does not explicitly locate the event in a
+    different geopolitical actor/country.  Source geography never makes ordinary local news C.
+    """
+    country = _configured_country_news_source(source, source_domain, link)
+    if not country:
+        return False, []
+    full = normalized(f"{headline}. {desc}")
+    concrete_move = bool(re.search(
+        r"\b(?:invests?|invested|will invest|to invest|commits?|committed|allocates?|allocated|builds?|built|"
+        r"opens?|opened|expands?|expanded|acquires?|acquired|starts? construction|began construction|under construction)\b",
+        full, re.I,
+    ))
+    capacity_object = contains_any(full, [
+        "ai infrastructure", "data centre", "data center", "compute", "computing capacity", "supercomputer",
+        "ai factory", "ai factories", "gigafactory", "gigafactories", "semiconductor", "semiconductors", "chip", "chips", "chip fab",
+        "pilot line", "quantum", "deep tech", "deep-tech", "research infrastructure", "research facility",
+        "r&d facility", "r&d campus", "laboratory", "laboratories", "space technology",
+    ])
+    hard_commitment = bool(
+        re.search(r"(?:€|EUR|\$|USD|£|GBP)\s?\d|\b\d+(?:[.,]\d+)?\s?(?:billion|million|bn|mn|gw|mw)\b", full, re.I)
+        or re.search(r"\b(?:under construction|began construction|starts? construction|opened|commissioned)\b", full, re.I)
+    )
+    # Do not infer the outlet's home country when the event text explicitly names a different
+    # non-European geopolitical location/actor (for example an Irish paper covering a US fab).
+    country_low = normalized(country)
+    other_external = bool(distinct_matches(full, GEO_ACTORS)) and country_low not in full
+    return bool(concrete_move and capacity_object and hard_commitment and not other_external), [country]
+
+
+def c_precursor_promotion_evidence(headline: str, claim: str, desc: str = "") -> bool:
+    """Require explicit source-backed realisation before a watched proposal is promoted."""
+    low = normalized(f"{headline}. {claim}. {desc}")
+    # Hypothetical/conditional wording is not evidence of realisation.
+    low = re.sub(r"\b(?:if|when|once|should it be|would be|could be|may be)\s+(?:adopted|approved|signed|ratified|implemented)\b", " ", low, flags=re.I)
+    return bool(re.search(
+        r"\b(?:adopted|approved|signed|ratified|entered into force|agreement reached|political agreement|"
+        r"funding awarded|grant awarded|contract awarded|selected \d+|construction (?:started|began)|"
+        r"began construction|opened|commissioned|implemented|took effect)\b",
+        low, re.I,
+    ))
+
+
 def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", link: str = "") -> bool:
     """Fail closed for institutional C candidates.
 
@@ -2440,6 +2547,8 @@ def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", 
     if routine_signal_noise(title, desc):
         return False
     if formal_evidence_product(title, desc, source, link):
+        return False
+    if c_standing_funding_or_call_page(title, desc, source, link):
         return False
     lead = clean_text(desc)[:2200]
     full = normalized(f"{title}. {lead}")
@@ -14977,6 +15086,29 @@ def merge_signal_corpus(previous: list[dict[str, Any]], new_items: list[dict[str
         merged = merged[:MAX_CORPUS]
     return [public_item(x, new_this_scan=signal_identity(x) in new_ids, first_seen=x.get('first_seen')) for x in merged]
 
+def c_saved_source_claim(item: dict[str, Any]) -> str:
+    """Recover the source-backed proposition from a saved C row without using Radar inference.
+
+    Older rows sometimes stored the generated ``Radar inference: ...`` sentence in ``what``.
+    When that happened, ``signal_note`` still begins with the source proposition.  Revalidation
+    must evaluate that proposition, not either the generated Europe bridge or generated Why text.
+    """
+    if not isinstance(item, dict):
+        return ""
+    direct = clean_text(item.get("what") or item.get("core_message") or "")
+    if direct and not normalized(direct).startswith("radar inference:"):
+        return direct
+    note = clean_text(item.get("signal_note") or "")
+    if note:
+        note = re.split(r"\bRadar inference:\s*", note, maxsplit=1, flags=re.I)[0].strip()
+        why = clean_text(item.get("why_it_matters") or "")
+        if why and note.endswith(why):
+            note = note[:-len(why)].rstrip(" .")
+        if note:
+            return note
+    return direct if direct and not normalized(direct).startswith("radar inference:") else ""
+
+
 def _saved_signal_passes(item: dict[str, Any]) -> bool:
     """Surgical saved-C precision gate.
 
@@ -15013,9 +15145,13 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     link = clean_text(item.get('link', ''))
     if formal_evidence_product(headline, desc, source, link):
         return False
+    if not c_date_basis_is_event_usable(item):
+        return False
+    if c_standing_funding_or_call_page(headline, desc, source, link):
+        return False
     # Saved C is rechecked under the same two routes as new C. Use the saved source claim
     # (``what``/``core_message``) rather than Radar-written consequence prose.
-    source_claim = clean_text(item.get('what') or item.get('core_message') or desc)
+    source_claim = c_saved_source_claim(item) or desc
     relevance_ok, _scope_rel, _scope_hits = c_source_backed_eu_ri_relevance(
         headline, source_claim, source, '', link
     )
@@ -15046,7 +15182,7 @@ def revalidate_saved_c(previous: dict[str, Any]) -> tuple[dict[str, Any], dict[s
         if not _saved_signal_passes(item):
             continue
         x=dict(item)
-        desc=clean_text(x.get('what') or x.get('core_message') or x.get('signal_note','') or x.get('why_it_matters',''))
+        desc=c_saved_source_claim(x) or clean_text(x.get('signal_note','') or x.get('why_it_matters',''))
         text=f"{x.get('headline','')} {desc}"
         x['_desc']=desc
         x['_themes']=themes_for(text)
@@ -15439,7 +15575,7 @@ _SIGNAL_NON_EVENT_CUES = [
 ]
 _SIGNAL_CONCRETE_EVENT_CUES = [
     r"\b(?:launches?|launched|invests?|invested|raises?|raised|signs?|signed|adopts?|adopted|approves?|approved|"
-    r"imposes?|imposed|restricts?|restricted|tightens?|tightened|bans?|banned|suspends?|suspended|blocks?|blocked|opens?|opened|"
+    r"imposes?|imposed|restricts?|restricted|limits?|limited|narrows?|narrowed|delays?|delayed|postpones?|postponed|tightens?|tightened|bans?|banned|suspends?|suspended|blocks?|blocked|opens?|opened|"
     r"closes?|closed|cuts?|cut|increases?|increased|decreases?|decreased|funds?|funded|deploys?|deployed|builds?|built|expands?|expanded|scales?|scaled|"
     r"joins?|joined|withdraws?|withdrew|relocates?|relocated|acquires?|acquired|ratifies?|ratified|passes?|passed|votes?|voted|decides?|decided|accelerates?|accelerated|lifts?|lifted|freezes?|froze|halts?|halted|scraps?|scrapped|rejects?|rejected|overhauls?|overhauled|merges?|merged|establishes?|established|allocates?|allocated|earmarks?|earmarked|pledges?|pledged|commits?|committed|agrees?|agreed|enters? into force|entered into force)\b",
     r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bcall open until\b", r"\bco-funding available\b",
@@ -16770,10 +16906,16 @@ def c_source_backed_eu_ri_relevance(
         capacity_scope, member_hits = c_member_state_capacity_move_scope(headline, desc)
         if capacity_scope:
             rel, hits, scope_ok = 'supported', member_hits, True
+    country_source_scope = False
+    if not scope_ok:
+        country_source_scope, country_hits = c_country_source_capacity_scope(headline, desc, source, source_domain, link)
+        if country_source_scope:
+            rel, hits, scope_ok = 'member_state', country_hits, True
     ri_ok = bool(
         _ri_hits(full)
         or a_structural_state_variable_evidence(headline, desc, '', 'general')[0]
         or capacity_scope
+        or country_source_scope
         or contains_any(full, [
             'research funding', 'research grant', 'starting grant', 'innovation act', 'innovation policy',
             'research programme', 'research program', 'research infrastructure', 'ai factory', 'ai factories',
@@ -16781,6 +16923,10 @@ def c_source_backed_eu_ri_relevance(
             'deep tech', 'deep-tech', 'research careers', 'research talent', 'scientist', 'scientists',
             'researcher', 'researchers', 'export control', 'technology transfer', 'technical standards',
             'space technology', 'space sector', 'satellite', 'satellites', 'launch vehicle', 'iris2', 'iris²',
+            'quantum', 'quantum technology', 'quantum tech', 'semiconductor', 'semiconductors', 'chip', 'chips',
+            'artificial intelligence infrastructure', 'ai infrastructure', 'high-performance computing', 'hpc',
+            'research cooperation', 'research collaboration', 'scientific collaboration', 'scientific cooperation',
+            'defence innovation', 'defense innovation', 'dual-use innovation', 'biotechnology', 'biotech',
         ])
     )
     if scope_ok and ri_ok:
@@ -17182,6 +17328,7 @@ def anchor_news(
     a_corpus: list[dict[str, Any]],
     diagnostics: list[dict[str, str]] | None = None,
     allow_unanchored: bool = False,
+    precursor_watch: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """Build Strand C as an independent weak-signal stream on the same core themes.
 
@@ -17195,6 +17342,16 @@ def anchor_news(
     theme_counts = Counter(t for x in internals for t in x.get('_themes', []))
     recurring = {t for t,c in theme_counts.items() if c >= 2}
     anchored=[]
+    prior_precursor_keys: set[str] = set()
+    for _p in precursor_watch if isinstance(precursor_watch, list) else []:
+        if not isinstance(_p, dict):
+            continue
+        _plink = normalized_link(_p.get('link') or _p.get('url'))
+        _ptitle = norm_title(clean_text(_p.get('headline') or _p.get('title')))
+        if _plink:
+            prior_precursor_keys.add('url:' + _plink)
+        if _ptitle:
+            prior_precursor_keys.add('title:' + _ptitle)
 
     def diag(n: dict[str, Any], reason: str, status: str = 'rejected') -> None:
         if diagnostics is None:
@@ -17214,6 +17371,12 @@ def anchor_news(
         desc = n.get('_desc','')
         source = n.get('source','')
         link = n.get('link','')
+        if not c_date_basis_is_event_usable(n):
+            diag(n, 'approximate_sitemap_date_not_c_event_date')
+            continue
+        if c_standing_funding_or_call_page(headline, desc, source, link):
+            diag(n, 'standing_funding_call_page_not_c')
+            continue
         if formal_evidence_product(headline, desc, source, link):
             diag(n, 'formal_evidence_not_c')
             continue
@@ -17249,6 +17412,16 @@ def anchor_news(
             continue
         event_actor = c_event_actor(headline, desc, source)
         pre_event_status = signal_event_status(f"{headline}. {desc}", headline, desc)
+        _candidate_keys = set()
+        _clink = normalized_link(link)
+        _ctitle = norm_title(clean_text(headline))
+        if _clink:
+            _candidate_keys.add('url:' + _clink)
+        if _ctitle:
+            _candidate_keys.add('title:' + _ctitle)
+        if prior_precursor_keys & _candidate_keys and pre_event_status in {'DONE', 'COMMITTED', 'OBSERVED'}:
+            if not c_precursor_promotion_evidence(headline, _signal_what_claim(desc, headline), desc):
+                pre_event_status = 'PROPOSED'
         public_event = public_signal_event_status(pre_event_status) or (pre_event_status == 'PROPOSED' and formal_proposal)
         analysis_specific = bool(
             trusted_commentary
@@ -17623,7 +17796,8 @@ _SOURCE_MERIT_EU_NAMES = [
     "European Commission", "Council of the European Union", "European Central Bank",
     "European Innovation Council", "European Research Council", "European Investment Bank",
     "EuroHPC Joint Undertaking", "European Union Institute for Security Studies", "EUISS",
-    "EFSA Supporting Publications",
+    "EFSA Supporting Publications", "EU Digital Strategy", "Shaping Europe’s digital future",
+    "European Research Executive Agency",
 ]
 _SOURCE_MERIT_PUBLIC_HIGH = {
     "OECD", "International Telecommunication Union",
@@ -17859,7 +18033,10 @@ def needs_precision_signal_cleanup(previous: dict[str, Any]) -> bool:
     """Re-audit C whenever the weak-signal quality model changes."""
     if is_fresh_repository_seed(previous):
         return False
-    return previous.get('signal_quality_profile_version') != SIGNAL_QUALITY_PROFILE_VERSION
+    return bool(
+        previous.get('signal_quality_profile_version') != SIGNAL_QUALITY_PROFILE_VERSION
+        or previous.get('c_event_integrity_profile_version') != C_EVENT_INTEGRITY_PROFILE_VERSION
+    )
 
 
 def needs_signal_backfill(previous: dict[str, Any]) -> bool:
@@ -19640,7 +19817,8 @@ def main() -> int:
     for _cand in dedupe_candidates(oa + cr + inst):
         if isinstance(_cand, dict) and _cand.get('strand') in {'A', 'both'} and final_ab_candidate_worthiness(_cand):
             provisional_a_for_signal_followup.append(_cand)
-    preliminary_c_for_followup = anchor_news(news, provisional_a_for_signal_followup)
+    previous_precursor_watch = previous.get('precursor_watch', []) if isinstance(previous.get('precursor_watch'), list) else []
+    preliminary_c_for_followup = anchor_news(news, provisional_a_for_signal_followup, precursor_watch=previous_precursor_watch)
 
     # V17.19.5 C floor: a healthy radar should not repeatedly return zero *new* weak signals
     # because a single duplicate/anchor decision exhausted the short news lane. When the
@@ -19687,7 +19865,7 @@ def main() -> int:
                     continue
                 # Keep the additional discoveries available to the ordinary final anchor pass too.
                 news.extend(extra_news)
-                strict_rows = anchor_news(extra_news, provisional_a_for_signal_followup, c_floor_diagnostics)
+                strict_rows = anchor_news(extra_news, provisional_a_for_signal_followup, c_floor_diagnostics, precursor_watch=previous_precursor_watch)
                 novel_strict = _novel_signal_rows(strict_rows, previous_c_for_floor, preliminary_novel_c + c_floor_rescue_signals)
                 need = max(0, min_new_c - len(preliminary_novel_c) - len(c_floor_rescue_signals))
                 if novel_strict and need:
@@ -20945,7 +21123,7 @@ def main() -> int:
     output_corpus_floor = DATE_FLOOR
 
     final_c_diagnostics: list[dict[str, str]] = []
-    current_c = anchor_news(news, strand_a, final_c_diagnostics)
+    current_c = anchor_news(news, strand_a, final_c_diagnostics, precursor_watch=previous_precursor_watch)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
 
     # V17.19.8 final C reserve: the ordinary scan can finish with one anchored candidate that
@@ -20969,7 +21147,7 @@ def main() -> int:
         reserve_news = [x for x in reserve_news if isinstance(x, dict)]
         if reserve_news:
             news.extend(reserve_news)
-            strict_reserve = anchor_news(reserve_news, strand_a, final_c_diagnostics)
+            strict_reserve = anchor_news(reserve_news, strand_a, final_c_diagnostics, precursor_watch=previous_precursor_watch)
             novel_reserve = _novel_signal_rows(strict_reserve, prev_c, current_c + c_floor_rescue_signals)
             need = max(0, min_new_c - len(_novel_signal_rows(current_c + c_floor_rescue_signals, prev_c)))
             if novel_reserve and need:
@@ -20981,7 +21159,7 @@ def main() -> int:
     current_c, c_quota_stats = select_hard_new_c_mix(current_c, prev_c)
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
     precursor_watch = build_precursor_watch(
-        previous.get("precursor_watch", []) if isinstance(previous.get("precursor_watch"), list) else [],
+        previous_precursor_watch,
         news, now_iso,
     )
     retired_signal_titles = _retired_signal_headlines(previous)
@@ -21356,6 +21534,7 @@ def main() -> int:
         "signal_discovery_version": signal_marker,
         "signal_quality_profile_version": SIGNAL_QUALITY_PROFILE_VERSION,
         "c_admission_profile_version": C_ADMISSION_PROFILE_VERSION,
+        "c_event_integrity_profile_version": C_EVENT_INTEGRITY_PROFILE_VERSION,
         "strategic_signal_profile_version": str(CONFIG.get("strategic_signal_profile_version", "")),
         "strategic_pathway_scan_enabled": bool(CONFIG.get("strategic_pathway_scan_enabled", True)),
         "strategic_pathway_news_queries_configured": len(strategic_pathway_queries('news')),
