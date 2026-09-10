@@ -2289,7 +2289,8 @@ def standing_institutional_page(title: str, desc: str = "") -> bool:
 FORMAL_EVIDENCE_TITLE_HINTS = [
     "report", "study", "assessment", "evaluation", "working paper", "discussion paper",
     "policy brief", "research paper", "staff working document", "scoreboard", "evidence review",
-    "literature review", "impact assessment", "white paper",
+    "literature review", "impact assessment", "white paper", "issue paper", "policy paper",
+    "briefing paper", "technical report", "research report",
 ]
 FORMAL_EVIDENCE_COMPLETION_CUES = [
     "publication", "published", "findings", "results", "the study provides", "the report provides",
@@ -2331,9 +2332,14 @@ def formal_evidence_product(title: str, desc: str = "", source: str = "", link: 
     ]):
         return False
     title_like = contains_any(h, FORMAL_EVIDENCE_TITLE_HINTS)
+    lead = normalized(desc[:900])
+    explicit_document_label = bool(re.search(
+        r'\b(?:issue paper|policy paper|briefing paper|technical report|research report|working paper|discussion paper|policy brief)\b',
+        normalized(f"{title}. {lead}"), re.I,
+    ))
     product_title_shape = bool(re.search(
-        r"^(?:study|report|assessment|evaluation|working paper|discussion paper|policy brief|research paper|scoreboard)\b|"
-        r"\b(?:report|study|assessment|evaluation)\s+(?:20\d{2}|on|of|for|into)\b",
+        r"^(?:study|report|assessment|evaluation|working paper|discussion paper|policy brief|research paper|scoreboard|issue paper|policy paper|briefing paper|technical report|research report)\b|"
+        r"\b(?:report|study|assessment|evaluation|issue paper|policy paper|briefing paper|technical report|research report)\s+(?:20\d{2}|on|of|for|into)\b",
         h,
     ))
     # Strong publication-page cues can establish the document type even when the title is terse.
@@ -2342,10 +2348,16 @@ def formal_evidence_product(title: str, desc: str = "", source: str = "", link: 
     publication_surface = any(x in path for x in [
         "/library/", "/publication", "/publications", "/report", "/reports", "/study", "/studies", "/doi/"
     ])
+    pdf_surface = bool(link_path.endswith('.pdf'))
     authoritative = _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH
     # A news headline saying "study finds..." is not itself the study. Product-shaped titles
-    # plus a publication surface/authoritative source distinguish the evidence product.
-    return bool(title_like and product_title_shape and (publication_surface or authoritative) and (completion or authoritative))
+    # plus a publication surface/authoritative source distinguish the evidence product. Some
+    # think-tank/research-centre PDFs expose the document label only in the PDF lead (e.g.
+    # "ISSUE PAPER"), so treat that explicit label + PDF/publication surface as decisive too.
+    return bool(
+        (title_like and product_title_shape and (publication_surface or authoritative or pdf_surface) and (completion or authoritative or pdf_surface))
+        or (explicit_document_label and (publication_surface or authoritative or pdf_surface))
+    )
 
 
 _EU_FUNDING_EVENT_TERMS = [
@@ -4219,7 +4231,9 @@ A_MAJOR_RI_SYSTEM = [
     'scientific knowledge in policymaking', 'scientific knowledge in policy making',
     'university alliances', 'university patenting', 'patent', 'patents', 'digital innovation hub',
     'digital innovation hubs', 'innovation act', 'technological sovereignty', 'technology sovereignty',
-    'strategic autonomy', 'economic security', 'strategic dependency', 'strategic dependencies',
+    # Geopolitical labels are not themselves R&I-system evidence. They remain available
+    # through the geopolitical/strategic gate, but need an independent R&I mechanism/state
+    # variable before a paper can enter Strand A.
 ]
 A_MAJOR_TECH_DOMAINS = [
     'semiconductor', 'semiconductors', 'microelectronics', 'artificial intelligence', ' ai ',
@@ -6223,7 +6237,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     # only when the paper is explicitly about the technique's methodological quality/design in
     # an S&T/R&I setting. This recovers genuine Delphi-method critique without admitting ordinary
     # Delphi applications used to rank options in an arbitrary domain.
-    aux_quality_terms = r'(?:bias|validity|reliability|rigou?r|quality|panel(?:ist)?(?:s)?|expert judg(?:e)?ment|rationale(?:s)?|consensus|stability|response rate|attrition|sampling|selection|design|methodological|limitations?)'
+    aux_quality_terms = r'(?:bias|validity|reliability|rigou?r|quality|panel(?:ist)?(?:s)?|consensus stability|consensus measurement|consensus formation|degree of consensus|stability|response rate|attrition|sampling|selection|method design|methodological design|methodological limitations?)'
     aux_method_quality_candidate = bool(
         auxiliary and ri_context
         and re.search(aux_quality_terms, ta_low)
@@ -6300,7 +6314,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         families_here = _method_matches(low, B_METHOD_FAMILIES + B_RI_FUTURES_METHODS)
         # Comparing two named methods is methodological even when the word "method" is omitted.
         comparative_multi_method = len(set(families_here)) >= 2 and bool(re.search(r'\b(?:compar|versus|vs\.?|relative performance)\w*', low))
-        quality_terms = r'(?:bias|expert judg(?:e)?ment|panel(?:ist)?(?:s)?|rationale(?:s)?|consensus|stability|response rate|attrition|validity|reliability|accuracy|quality|rigou?r|robustness|limitations?|transferab\w*|reusab\w*|replicab\w*|generaliz\w*|generalis\w*|feasibility|design principles?|method selection|method choice)'
+        quality_terms = r'(?:bias|panel(?:ist)?(?:s)?|consensus stability|consensus measurement|consensus formation|degree of consensus|stability|response rate|attrition|validity|reliability|accuracy|quality|rigou?r|robustness|methodological limitations?|transferab\w*|reusab\w*|replicab\w*|generaliz\w*|generalis\w*|feasibility|design principles?|method selection|method choice)'
         method_ref = r'(?:method|methods|methodology|framework|approach|technique|foresight|horizon scanning|scenario planning|scenario analysis|backcasting|roadmapping|delphi(?:s)?|cross impact|technology intelligence)'
         quality_low = re.sub(r'\bresearch limitations?(?:\s*/\s*implications?)?\b', ' ', low)
         quality_language = bool(
@@ -6328,7 +6342,14 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         # 'evaluate'/'assess': titles like 'Bias in ... Delphi' state the methodological
         # question nominally.  ``quality_language`` already requires the quality/design term
         # to sit close to the named method and strips generic 'research limitations' prose.
-        named_method_quality = bool(families_here and quality_language)
+        strong_named_quality = bool(
+            families_here and re.search(
+                rf'\b(?:bias|validity|reliability|rigou?r|robustness|methodological design|methodological limitations?)\b.{{0,120}}\b{method_ref}\b|'
+                rf'\b{method_ref}\b.{{0,120}}\b(?:bias|validity|reliability|rigou?r|robustness|methodological design|methodological limitations?)\b',
+                quality_low, re.I,
+            )
+        )
+        named_method_quality = bool(families_here and (quality_language or strong_named_quality))
         # Conceptual/meta-method papers often study what foresight or horizon scanning *is*, how
         # it functions, or how it should be organised without using psychometric words such as
         # validity/reliability. Require a real method family plus strong meta-method language in
@@ -6404,7 +6425,26 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
                 or B_CREATION_PASSIVE.search(low)
             )
             if creation_language:
-                creation_bridge = sent[:420]
+                sent_families = _method_matches(sent, B_METHOD_FAMILIES + B_RI_FUTURES_METHODS)
+                sent_core = _method_matches(sent, B_CORE_FUTURES_METHODS)
+                sent_aux = _method_matches(sent, B_AUXILIARY_METHODS)
+                sent_ri_methods = _method_matches(sent, B_RI_FUTURES_METHODS)
+                # If the only recognised family is an auxiliary technique such as Delphi,
+                # require grammar showing that the Delphi/elicitation method itself is being
+                # designed/adapted/refined. "Use Delphi to refine a capability framework" is
+                # an application, not a contribution to Delphi methodology.
+                if sent_aux and not (sent_core or sent_ri_methods or distinct_matches(sent, B_EXPLICIT_FUTURES_FRAMING)):
+                    aux_name = r'(?:delphi|expert elicitation|morphological analysis|system dynamics|agent[- ]based model(?:ling|ing))'
+                    method_noun = r'(?:method|methodology|approach|protocol|technique|process|design)'
+                    creation_verb = r'(?:develop|propos|introduc|design|adapt|extend|refin|modif|creat|construct|formulat|operationali[sz])\w*'
+                    aux_method_creation = bool(
+                        re.search(rf'\b{creation_verb}\b.{{0,70}}\b{aux_name}\b.{{0,20}}\b{method_noun}\b', low, re.I)
+                        or re.search(rf'\b{aux_name}\b.{{0,20}}\b{method_noun}\b.{{0,70}}\b{creation_verb}\b', low, re.I)
+                    )
+                    if not aux_method_creation:
+                        creation_language = False
+                if creation_language:
+                    creation_bridge = sent[:420]
         if not method_study_bridge and method_study_sentence(sent):
             method_study_bridge = sent[:420]
         if creation_bridge and method_study_bridge:
@@ -6472,6 +6512,10 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
     application_language = bool(_method_matches(title_norm, B_PURE_APPLICATION_CUES)) or bool(re.search(
         r'\b(?:we|this (?:paper|study|article))\s+(?:use|uses|used|apply|applies|applied|employ|employs|employed)\b',
         normalized(abstract),
+    )) or bool(re.search(
+        r'\busing\b.{0,45}\b(?:delphi|foresight|scenario planning|horizon scanning|backcasting|roadmapping|expert elicitation)\b|'
+        r'\b(?:adopts?|employs?)\b.{0,45}\b(?:delphi|foresight|scenario planning|horizon scanning|backcasting|roadmapping)\b',
+        normalized(abstract), re.I,
     ))
     application_title = bool(re.search(
         r'\b(?:using|utilising|utilizing|applying|application of)\b|'
