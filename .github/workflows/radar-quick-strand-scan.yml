@@ -200,6 +200,10 @@ jobs:
           if selected not in key_for:
               raise SystemExit(f'invalid selected strand in workflow: {selected!r}')
 
+          def norm_text(value):
+              import re
+              return re.sub(r'[^a-z0-9]+', ' ', str(value or '').lower()).strip()
+
           def stable_ids(doc, key):
               out = set()
               for item in doc.get(key, []) if isinstance(doc.get(key), list) else []:
@@ -245,10 +249,6 @@ jobs:
                   return __import__('datetime').date.fromisoformat(raw)
               except Exception:
                   return None
-
-          def norm_text(value):
-              import re
-              return re.sub(r'[^a-z0-9]+', ' ', str(value or '').lower()).strip()
 
           extended_raw = str(new.get('extended_top_quality_start_date') or '')
           try:
