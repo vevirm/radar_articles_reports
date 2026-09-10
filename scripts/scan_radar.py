@@ -14960,6 +14960,28 @@ def news_queries(domain: str, lookback_hours: int) -> list[str]:
     ]
 
 
+def c_capital_infrastructure_fast_queries(lookback_hours: int) -> list[str]:
+    """Small front-of-queue C discovery lane for concrete European capacity moves.
+
+    Capital, data-centre, compute and power deals are often reported in investment/energy
+    language rather than research-policy vocabulary.  These queries are deliberately only
+    *discovery* seeds: every result still has to pass the normal trusted-source, Europe,
+    R&I, event/analysis and weak-signal admission gates.  Keeping the lane tiny and first
+    in the queue improves recall under short news-stage budgets without loosening C.
+    """
+    days = max(2, min(60, (int(lookback_hours) + 23) // 24))
+    when = f"when:{days}d"
+    queries = [
+        '(Finland OR Sweden OR Denmark OR Norway OR Germany OR France OR Netherlands OR Ireland OR Belgium OR Austria OR Switzerland OR UK OR "United Kingdom") ("AI infrastructure" OR "data centre" OR "data center" OR cloud OR compute) (invest OR investment OR build OR expand OR capex)',
+        '(Spain OR Italy OR Portugal OR Poland OR Czechia OR Czech OR Romania OR Greece OR Estonia OR Latvia OR Lithuania OR Slovenia OR Slovakia OR Croatia OR Hungary OR Bulgaria) ("AI infrastructure" OR "data centre" OR "data center" OR cloud OR compute) (invest OR investment OR build OR expand OR capex)',
+        '(Europe OR European OR EU) (Google OR Microsoft OR Amazon OR AWS OR Meta OR Nvidia) ("AI infrastructure" OR "data centre" OR "data center" OR compute OR cloud) (invest OR investment OR build OR expand OR capex)',
+        '(Europe OR European OR EU OR Finland OR Sweden OR Germany OR France) ("power purchase agreement" OR offtake OR nuclear OR grid OR gigawatt) ("data centre" OR "data center" OR AI OR compute) (Google OR Microsoft OR Amazon OR AWS OR Meta)',
+        '(Europe OR European OR EU) (semiconductor OR fab OR "pilot line" OR supercomputer OR "AI factory") (invest OR investment OR build OR expand OR capacity)',
+        '(Europe OR European OR EU) ("deep tech" OR startup OR scale-up OR scaleup) (acquisition OR acquires OR stake OR investment OR majority)',
+    ]
+    return [f"{q} {when}" for q in queries]
+
+
 def global_news_queries(lookback_hours: int) -> list[str]:
     days = max(2, min(60, (int(lookback_hours) + 23) // 24))
     when = f"when:{days}d"
@@ -15032,7 +15054,13 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
     if RADAR_PRIORITY_SCAN:
         jobs.extend(coverage_jobs)
     if include_base_queries:
-        # Active implications discovery is deliberately first in ordinary runs so a short news
+        # Concrete European capital/infrastructure moves are easy to miss because headlines
+        # often say "€13bn investment", "data centre" or "power deal" rather than R&I or
+        # strategic-autonomy language. Give this tiny C lane first shot at the news budget;
+        # it changes discovery order only, never admission criteria.
+        for q in c_capital_infrastructure_fast_queries(lookback_hours):
+            jobs.append(("", "", q, True, False))
+        # Active implications discovery is deliberately early in ordinary runs so a short news
         # deadline cannot starve risk/opportunity/shock searches behind generic source jobs.
         for q in strategic_pathway_queries('news'):
             jobs.append(("", "", f"{q} when:{days}d", True, True))
@@ -15716,11 +15744,46 @@ def weak_signal_ri_strategic_bridge_ok(headline: str, desc: str, themes: Iterabl
     return bool(ri_mechanism and (strategic_move or external_actor or (direct_europe and specific_theme)))
 
 
+def c_member_state_capacity_move_scope(headline: str, desc: str) -> tuple[bool, list[str]]:
+    """Narrow C-only scope route for concrete strategic-capacity moves in Europe.
+
+    A single member-state name remains insufficient for Strand A and for ordinary C news.
+    But a named European country plus a concrete investment/build/acquisition/power deal
+    involving AI/compute/data-centre/chip/quantum/deep-tech capacity is itself a European
+    capacity event.  This is the bounded route for hyperscaler capex and similar weak
+    signals that are usually written in finance/energy language rather than EU-policy terms.
+    """
+    full = normalized(f"{headline}. {desc}")
+    members = _distinct_member_states(full)
+    if not members:
+        return False, []
+    concrete_move = contains_any(full, [
+        'invest', 'investment', 'capex', 'commit', 'commits', 'committed', 'build', 'builds',
+        'expand', 'expands', 'acquire', 'acquires', 'acquisition', 'stake', 'majority investment',
+        'sign', 'signs', 'signed', 'power purchase agreement', 'offtake', 'launch', 'opens', 'open',
+    ])
+    capacity_object = contains_any(full, [
+        'ai infrastructure', 'artificial intelligence infrastructure', 'data centre', 'data center',
+        'cloud infrastructure', 'cloud capacity', 'compute', 'computing capacity', 'supercomputer',
+        'ai factory', 'ai factories', 'gigafactory', 'gigafactories', 'semiconductor', 'chip fab',
+        'semiconductor fab', 'pilot line', 'quantum facility', 'quantum computer', 'deep tech', 'deep-tech',
+    ])
+    hard_commitment = bool(
+        contains_any(full, ['investment', 'capex', 'power purchase agreement', 'offtake', 'acquisition', 'stake'])
+        or re.search(r'(?:€|\$|£)\s?\d|\b\d+(?:[.,]\d+)?\s?(?:billion|million|bn|mn|gw|mw)\b', full, re.I)
+    )
+    return bool(concrete_move and capacity_object and hard_commitment), members[:4]
+
+
 def c_source_backed_eu_ri_relevance(headline: str, desc: str) -> tuple[bool, str, list[str]]:
     """C scope gate: the candidate itself must establish Europe + R&I/system relevance."""
     full = clean_text(f"{headline}. {desc}")
     rel, hits = eu_evidence(headline, desc, "")
     scope_ok = eu_scope_admissible(rel)
+    if not scope_ok:
+        capacity_scope, member_hits = c_member_state_capacity_move_scope(headline, desc)
+        if capacity_scope:
+            rel, hits, scope_ok = 'supported', member_hits, True
     ri_ok = bool(
         _ri_hits(full)
         or title_level_a_system_evidence(headline)[0]
