@@ -14908,18 +14908,45 @@ def _signal_text_similarity(a: str, b: str) -> tuple[float, float, int]:
     return inter / max(1, union), inter / max(1, min(len(ta), len(tb))), inter
 
 
-def signals_near_duplicate(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    """Collapse only substantially the same event/claim/implication.
+def _signal_event_family_key(item: dict[str, Any]) -> str:
+    """Return a narrow cross-publisher event family for obvious same-event rewrites.
 
-    Strand C is allowed to revisit an established A topic whenever a new fact changes
-    the interpretation.  Earlier versions used topic-heavy headline overlap and could
-    erase a distinct point merely because both headlines said, for example, Europe +
-    AI + compute.  Exact URLs still collapse immediately; otherwise both the headline
-    and the substantive point must be very close.
+    This deliberately handles only highly distinctive programme/event families where headline
+    wording varies enough that token similarity misses the duplicate.  It is not a topic key.
     """
+    text = normalized(clean_text(
+        f"{item.get('headline','')}. {item.get('what') or item.get('core_message') or item.get('signal_note') or item.get('_desc','')}"
+    ))
+    if 'horizon europe' in text and 'japan' in text and contains_any(text, [
+        'association', 'associated country', 'joins horizon', 'join horizon', 'sign off', 'signed off'
+    ]):
+        return 'horizon-europe-association:japan'
+    if re.search(r'\b(?:ai|artificial intelligence)\b', text) and re.search(r'\b(?:giga|mega)factor(?:y|ies)\b', text):
+        return 'eu-ai-gigafactories'
+    return ''
+
+
+def _signal_dates_within_days(a: dict[str, Any], b: dict[str, Any], days: int = 7) -> bool:
+    vals = []
+    for item in (a, b):
+        raw = clean_text(item.get('c_event_date') or item.get('date'))
+        try:
+            vals.append(dateparser.parse(raw).date())
+        except Exception:
+            return False
+    return abs((vals[0] - vals[1]).days) <= max(0, int(days))
+
+
+def signals_near_duplicate(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    """Collapse substantially the same event/claim, including obvious cross-publisher rewrites."""
     la = normalized(a.get('link', ''))
     lb = normalized(b.get('link', ''))
     if la and lb and la == lb:
+        return True
+
+    family_a = _signal_event_family_key(a)
+    family_b = _signal_event_family_key(b)
+    if family_a and family_a == family_b and _signal_dates_within_days(a, b, 7):
         return True
 
     hj, hc, hi = _signal_text_similarity(a.get('headline',''), b.get('headline',''))
@@ -14964,14 +14991,20 @@ MANUALLY_RETIRED_SIGNAL_HEADLINES = [
     "Flash report - General Working Group of the Health Security Committee Meeting (12 August 2026)",
     "China’s self-driving push gears up in Europe as Momenta, Pony.ai expand",
     "Japan's Rakuten to partner with German AI defense drone startup",
-    "EU's first quantum tech regulation delayed by six months - euractiv.com",
-    "EU-China research cooperation limited to ‘targeted areas’",
     "Funding Radar: G7 and Nordics jointly fund quantum research",
     "International educational project at Aalto University funded by the TFK Programme | Aalto University",
     "EU to co-fund seven AI Gigafactories in race for tech autonomy",
     "EU launches AI Gigafactories call to boost Europe's computing capacity and unlock more than €30 billion in investment - Shaping Europe’s digital future",
     "Surface tensions: what a lunar coordination tabletop revealed about governance. - ESPI",
 ]
+
+# v24.7.2: these two were retired under an older, overly narrow C gate.  The repaired
+# source-backed state-variable logic now admits them, so legacy tombstones must not keep
+# suppressing them forever in repositories that already persisted retired_signal_headlines.
+REINSTATED_SIGNAL_HEADLINES = {
+    "EU's first quantum tech regulation delayed by six months - euractiv.com",
+    "EU-China research cooperation limited to ‘targeted areas’",
+}
 
 def _retired_signal_headlines(data: dict[str, Any] | None = None) -> set[str]:
     retired = {clean_text(x) for x in MANUALLY_RETIRED_SIGNAL_HEADLINES if clean_text(x)}
@@ -14981,6 +15014,7 @@ def _retired_signal_headlines(data: dict[str, Any] | None = None) -> set[str]:
             for x in stored:
                 if clean_text(x):
                     retired.add(clean_text(x))
+    retired.difference_update(REINSTATED_SIGNAL_HEADLINES)
     return retired
 
 def signal_is_retired(item: dict[str, Any], data: dict[str, Any] | None = None) -> bool:
@@ -17704,21 +17738,36 @@ def _novel_signal_rows(rows: list[dict[str, Any]], previous_c: list[dict[str, An
     return out
 
 
+def _c_publication_rank_key(item: dict[str, Any]) -> tuple[int, int, int]:
+    """Prefer concrete dated state-variable changes over commentary when C slots are scarce."""
+    route = normalized(item.get('c_admission_route', ''))
+    status = normalized(item.get('event_status', ''))
+    kind = normalized(item.get('signal_kind', ''))
+    concrete = int(route == 'event' and status != 'interpretive' and kind != 'analysis / interpretation')
+    try:
+        d = dateparser.parse(clean_text(item.get('c_event_date') or item.get('date'))).date().toordinal()
+    except Exception:
+        d = 0
+    # Among equally concrete/fresh rows, anchored evidence is a weak tie-break only.
+    anchored = int(normalized(item.get('anchor_status', '')) == 'anchored')
+    return concrete, d, anchored
+
+
 def select_hard_new_c_mix(current_c: list[dict[str, Any]], previous_c: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    """Cap only novel C publications; preserve current matches to retained signals."""
+    """Cap only genuinely novel C publications and rank concrete developments first."""
     target = max(0, int(CONFIG.get('target_new_c_per_scan', 3) or 3))
     novel = _novel_signal_rows(current_c, previous_c)
+    novel.sort(key=_c_publication_rank_key, reverse=True)
     selected_novel = novel[:target]
-    existing_matches = [
-        x for x in current_c if isinstance(x, dict)
-        and not any(signals_near_duplicate(x, n) for n in novel)
-    ]
     stats = {
         'eligible_c': len(novel),
         'selected_c': len(selected_novel),
         'suppressed_c': max(0, len(novel) - len(selected_novel)),
     }
-    return existing_matches + selected_novel, stats
+    # Retained C is already preserved by merge_signal_corpus(previous_c, ...). Returning
+    # matching current coverage here only creates redundant work and makes diagnostics look
+    # as if old events were selected again. Publish only the genuinely novel top-N rows.
+    return selected_novel, stats
 
 
 def c_floor_rescue_queries() -> list[str]:
