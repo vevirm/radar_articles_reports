@@ -1,0 +1,12 @@
+v24.6 CRITERIA REPAIR - NO-TOOLS OVERLAY
+
+This archive contains only the files that must be added/replaced in an existing radar_articles_reports-main folder.
+
+Windows install:
+1. Make a backup copy of your current radar_articles_reports-main folder.
+2. Open this ZIP.
+3. Select all contents inside the ZIP and copy/extract them INTO the top-level radar_articles_reports-main folder (the folder containing scripts, tests, radar_config.json).
+4. When Windows asks whether to replace files, choose Replace the files in the destination / Yes to all.
+5. Keep the folder structure. Do NOT move scan_radar.py out of scripts or test files out of tests.
+
+This overlay does not contain radar.json, so it does not directly alter the live corpus. The one-time v24.6 migration happens when the repaired scanner next runs.

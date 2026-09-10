@@ -65,8 +65,8 @@ class V245FinalBMethodRecallTests(unittest.TestCase):
 
     def test_version_bumped_for_reconsideration(self):
         cfg = json.loads((ROOT / "radar_config.json").read_text(encoding="utf-8"))
-        self.assertEqual(cfg.get("admission_profile"), "v24.5-final-b-method-recall")
-        self.assertEqual(S.CURATOR_DECISION_PROFILE_VERSION, "v24.5-final-b-method-recall")
+        self.assertEqual(cfg.get("admission_profile"), "v24.6-criteria-repair")
+        self.assertEqual(S.CURATOR_DECISION_PROFILE_VERSION, "v24.6-criteria-repair")
 
 
 if __name__ == "__main__":

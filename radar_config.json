@@ -1783,7 +1783,7 @@
     "National Academies Press"
   ],
   "institution_tier3_min_words": 1200,
-  "admission_profile": "v24.5-final-b-method-recall",
+  "admission_profile": "v24.6-criteria-repair",
   "scan_budget_seconds": 1440,
   "network_reserve_seconds": 100,
   "request_timeout_seconds": 12,
@@ -1803,7 +1803,7 @@
   "crossref_public_min_interval_seconds": 1.5,
   "scholarly_public_retries": 2,
   "signal_backfill_hours": 1440,
-  "signal_discovery_version": "v24.0-theme-aligned-independent-c60d",
+  "signal_discovery_version": "v24.6-independent-c-state-variable-change-c60d",
   "news_items_per_feed": 70,
   "news_global_queries": [
     "Europe research security foreign interference universities",
@@ -1868,7 +1868,7 @@
     "European technology partnership joint laboratory research strategic",
     "EU critical technology investment award subsidy capacity expansion"
   ],
-  "quality_profile_version": "v17.20.39-hard-strategic-mechanism-no-generic-proxies",
+  "quality_profile_version": "v24.6-criteria-repair",
   "crossref_priority_journals": [
     "Research Policy",
     "Science and Public Policy",
@@ -2780,7 +2780,7 @@
     "foresight methods taxonomy public policy"
   ],
   "queries_b_method_per_scan": 12,
-  "signal_quality_profile_version": "v24.0-theme-aligned-independent-c",
+  "signal_quality_profile_version": "v24.6-independent-c-state-variable-change",
   "rotation_profile_version": "v21.20-source-and-journal-diversity",
   "openalex_exploration_queries_per_scan": 16,
   "crossref_exploration_queries_per_scan": 14,
@@ -3354,8 +3354,8 @@
   "direct_news_links_per_source": 34,
   "direct_news_timeout_seconds": 10,
   "news_discovery_policy": "Run bounded direct-source checks for core R&I news publishers in parallel with Google News RSS. Google News is supplementary discovery, not the sole transport for configured core sources.",
-  "c_min_new_per_successful_scan": 0,
-  "c_floor_rescue_enabled": false,
+  "c_min_new_per_successful_scan": 3,
+  "c_floor_rescue_enabled": true,
   "c_floor_rescue_min_seconds_remaining": 65,
   "c_floor_rescue_stage_seconds": 60,
   "c_floor_rescue_windows_hours": [
@@ -3995,9 +3995,9 @@
   "target_new_b_per_scan": 1,
   "target_new_c_per_scan": 3,
   "b_method_lookback_years": 15,
-  "target_item_mix_rule": "Soft discovery/output expectation only: roughly 8 A : 1 B : 3 C. B receives protected method-search attention. Never reject, suppress or admit an item merely to enforce the ratio.",
+  "target_item_mix_rule": "Hard publication invariant for NEW admissions after substantive gates: up to 8 A, 1 B, 3 C. Quality gates decide eligibility first; a short lane stays short and is never filled with weaker material. Historical accepted records are not deleted by the quota.",
   "c_unanchored_analytical_weight": 0.22,
-  "c_unanchored_rule": "Independent C is allowed without an existing A anchor when a trusted source supplies its own EU/R&I-to-strategic bridge, a watch theme, novelty/reframing evidence and a public current/interpretive claim. It remains low-evidence/emergent for later manual checking against A.",
+  "c_unanchored_rule": "Independent C may be admitted from a trusted source when it is a dated, concrete, source-backed external R&I/technology development capable of changing a European A state variable. The event facts must come from the source; Europe-impact language may be a clearly labelled radar inference. A publication anchor is preferred but not mandatory.",
   "institution_sitemap_lastmod_fallback_enabled": true,
   "institution_rejected_reconsideration_rule": "Institution fingerprints are persisted as seen only after A/B admission. Rejected, incomplete, or previously misclassified pages remain reconsiderable.",
   "weak_signal_unlabelled_commentary_sources": [
