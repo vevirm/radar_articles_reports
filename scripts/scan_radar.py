@@ -3504,7 +3504,7 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
 # is enough on its own.  Title placement can establish that a strong R&I state variable is
 # the study object; deliberately ambiguous title terms still need a relationship cue.
 A_STRUCTURAL_SUPPORT_ONLY_TERMS = {
-    'innovation capacity', 'innovation performance',
+    'innovation capacity', 'innovation performance', 'performance gap',
     'doctoral candidates', 'doctoral training',
     'innovation ecosystem', 'innovation ecosystems',
     'deep tech', 'deep-tech', 'industrial innovation',
@@ -6437,7 +6437,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         low = normalized(sent)
         if (
             distinct_matches(sent, B_TRANSFERABILITY_CUES)
-            and re.search(r'\b(?:method|methods|methodology|methodological|framework|approach|technique|process|practice|tool|tools)\b', low)
+            and re.search(r'\b(?:method|methods|methodology|methodological|framework|approach|technique|process|practice|toolkit)\b', low)
         ):
             transferable_method_bridge = sent[:420]
             break
@@ -14894,9 +14894,14 @@ def _signal_event_family_key(item: dict[str, Any]) -> str:
     text = normalized(clean_text(
         f"{item.get('headline','')}. {item.get('what') or item.get('core_message') or item.get('signal_note') or item.get('_desc','')}"
     ))
-    if 'horizon europe' in text and 'japan' in text and contains_any(text, [
-        'association', 'associated country', 'joins horizon', 'join horizon', 'sign off', 'signed off'
-    ]):
+    if (
+        'horizon europe' in text
+        and 'japan' in text
+        and (
+            bool(re.search(r'\bjoin(?:s|ed|ing)?\b', text))
+            or contains_any(text, ['association', 'associated country', 'sign off', 'signed off'])
+        )
+    ):
         return 'horizon-europe-association:japan'
     if re.search(r'\b(?:ai|artificial intelligence)\b', text) and re.search(r'\b(?:giga|mega)factor(?:y|ies)\b', text):
         return 'eu-ai-gigafactories'
