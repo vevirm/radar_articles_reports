@@ -539,6 +539,11 @@ SESSION.headers.update({
 OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
 RADAR_QUICK_SCAN = os.environ.get("RADAR_QUICK_SCAN", "").strip().lower() in {"1", "true", "yes", "on"}
+RADAR_QUICK_STRAND = os.environ.get("RADAR_QUICK_STRAND", "").strip().upper()
+if RADAR_QUICK_STRAND not in {"", "A", "B", "C"}:
+    raise SystemExit(f"Invalid RADAR_QUICK_STRAND={RADAR_QUICK_STRAND!r}; expected A, B, C, or empty")
+if RADAR_QUICK_STRAND and not RADAR_QUICK_SCAN:
+    raise SystemExit("RADAR_QUICK_STRAND is only valid together with RADAR_QUICK_SCAN=true")
 RADAR_PRIORITY_SCAN = os.environ.get("RADAR_PRIORITY_SCAN", "").strip().lower() in {"1", "true", "yes", "on"}
 RADAR_DIAGNOSTIC_RUN = False  # v19 production: the temporary five-minute bootstrap/debug mode is retired
 
@@ -18283,6 +18288,58 @@ def main() -> int:
         CONFIG["network_reserve_seconds"] = 22
         CONFIG["primary_evidence_sources_per_scan"] = 8
 
+        # Optional strand-only quick mode. This changes discovery time allocation and
+        # publication routing only; every candidate still passes the same substantive
+        # A/B/C gates used by the normal scanner. The unselected public strands are
+        # preserved rather than being repopulated from incidental cross-lane hits.
+        if RADAR_QUICK_STRAND == "A":
+            CONFIG["news_stage_seconds"] = 20
+            CONFIG["openalex_stage_seconds"] = 185
+            CONFIG["crossref_stage_seconds"] = 185
+            CONFIG["institution_stage_seconds"] = 105
+            CONFIG["primary_evidence_stage_seconds"] = 70
+            CONFIG["strand_a_protected_scholarly_queries_per_source"] = 14
+            CONFIG["b_method_protected_scholarly_queries_per_source"] = 0
+            CONFIG["queries_b_method_recent_per_scan"] = 0
+            CONFIG["queries_b_method_foundational_per_scan"] = 0
+            CONFIG["b_method_journals_per_scan"] = 0
+            CONFIG["c_floor_rescue_enabled"] = False
+            CONFIG["c_floor_final_reserve_enabled"] = False
+            CONFIG["weak_signal_evidence_followup_enabled"] = False
+        elif RADAR_QUICK_STRAND == "B":
+            CONFIG["news_stage_seconds"] = 15
+            CONFIG["openalex_stage_seconds"] = 220
+            CONFIG["crossref_stage_seconds"] = 220
+            CONFIG["institution_stage_seconds"] = 35
+            CONFIG["primary_evidence_stage_seconds"] = 25
+            CONFIG["strand_a_protected_scholarly_queries_per_source"] = 0
+            CONFIG["b_method_protected_scholarly_queries_per_source"] = 14
+            CONFIG["queries_b_method_recent_per_scan"] = 10
+            CONFIG["queries_b_method_foundational_per_scan"] = 4
+            CONFIG["b_method_journals_per_scan"] = 4
+            CONFIG["c_floor_rescue_enabled"] = False
+            CONFIG["c_floor_final_reserve_enabled"] = False
+            CONFIG["weak_signal_evidence_followup_enabled"] = False
+        elif RADAR_QUICK_STRAND == "C":
+            CONFIG["news_stage_seconds"] = 330
+            CONFIG["openalex_stage_seconds"] = 20
+            CONFIG["crossref_stage_seconds"] = 20
+            CONFIG["institution_stage_seconds"] = 105
+            CONFIG["primary_evidence_stage_seconds"] = 35
+            CONFIG["openalex_queries_per_scan"] = 2
+            CONFIG["crossref_broad_queries_per_scan"] = 2
+            CONFIG["openalex_exploration_queries_per_scan"] = 0
+            CONFIG["crossref_exploration_queries_per_scan"] = 0
+            CONFIG["scholarly_base_queries_per_scan"] = 0
+            CONFIG["strand_a_protected_scholarly_queries_per_source"] = 0
+            CONFIG["b_method_protected_scholarly_queries_per_source"] = 0
+            CONFIG["queries_b_method_recent_per_scan"] = 0
+            CONFIG["queries_b_method_foundational_per_scan"] = 0
+            CONFIG["b_method_journals_per_scan"] = 0
+            CONFIG["c_floor_rescue_stage_seconds"] = 80
+            CONFIG["c_floor_final_reserve_seconds"] = 90
+            CONFIG["weak_signal_evidence_followup_stage_seconds"] = 45
+
     if RADAR_PRIORITY_SCAN:
         # A priority-DOCX run is still the ordinary scanner, but curator-supplied works
         # must get first use of the short budget.  This changes allocation only: exact
@@ -18312,9 +18369,16 @@ def main() -> int:
     LOW_YIELD_RESERVE_SECONDS = max(0, int(CONFIG.get("low_yield_reserved_seconds", 600) or 0))
     LOW_YIELD_RESERVE_ACTIVE = bool(CONFIG.get("low_yield_fresh_rotation_enabled", True) and LOW_YIELD_RESERVE_SECONDS)
     if budget_override and budget_seconds < configured_budget_seconds:
-        mode = "priority" if RADAR_PRIORITY_SCAN else "quick sweep" if RADAR_QUICK_SCAN else "diagnostic"
+        mode = (
+            "priority" if RADAR_PRIORITY_SCAN
+            else f"quick Strand {RADAR_QUICK_STRAND}" if (RADAR_QUICK_SCAN and RADAR_QUICK_STRAND)
+            else "quick sweep" if RADAR_QUICK_SCAN
+            else "diagnostic"
+        )
         detail = (
-            "high-yield lanes only; production depth stages disabled in memory"
+            "selected-strand discovery allocation; same substantive admission gates"
+            if (RADAR_QUICK_SCAN and RADAR_QUICK_STRAND)
+            else "high-yield lanes only; production depth stages disabled in memory"
             if RADAR_QUICK_SCAN
             else "stage/reserve seconds scaled proportionally in memory"
         )
@@ -18346,6 +18410,10 @@ def main() -> int:
     # Git history before scanning, so uploading a bundle can never roll the corpus
     # or scheduler state backwards if a scheduled scan landed after the bundle was made.
     previous = load_previous(allow_git_recovery=(run_trigger_label() == "push"))
+    # Keep a pre-housekeeping snapshot for strand-only quick runs. The selected lane
+    # may change; the other public evidence lanes are restored from this snapshot so
+    # a focused A/B/C button cannot accidentally clean, age or republish another lane.
+    quick_strand_baseline = deepcopy(previous) if RADAR_QUICK_STRAND else {}
     ACTIVE_EU_CONTEXT_ANCHORS = [dict(x) for x in previous.get('strand_a', []) if isinstance(x, dict)]
     DATE_FLOOR = bootstrap_floor(now.date())
     EXTENDED_DATE_FLOOR = extended_top_quality_floor(now.date())
@@ -18370,11 +18438,17 @@ def main() -> int:
     # cumulative corpus and never spend time re-auditing accepted history.
     inherited_audit = needs_inherited_corpus_audit(previous)
     preload_ab_cleanup = sum(int(LOAD_SANITIZE_REMOVED.get(k, 0) or 0) for k in ("strand_a", "strand_b"))
+    if RADAR_QUICK_STRAND == "C":
+        # A C-only quick run is discovery, not an A/B migration boundary.
+        inherited_audit = False
+        preload_ab_cleanup = 0
     # The loader itself removes only high-confidence integrity/precision failures.  Mark that
     # as an explicit cleanup run even when a whole-repository upload already carried the new
     # quality-profile version.  This keeps the old retained v17.19.8 workflow safety gate
     # informed instead of letting it mistake an intentional cleanup for corpus loss.
     precision_cleanup = (not inherited_audit) and (needs_precision_corpus_cleanup(previous) or preload_ab_cleanup > 0)
+    if RADAR_QUICK_STRAND == "C":
+        precision_cleanup = False
     inherited_audit_stats = {
         "strand_a_removed": 0, "strand_b_removed": 0,
         "stored_pass": 0, "refreshed_pass": 0, "refresh_unavailable": 0,
@@ -18397,6 +18471,9 @@ def main() -> int:
         )
 
     signal_cleanup = needs_precision_signal_cleanup(previous)
+    if RADAR_QUICK_STRAND in {"A", "B"}:
+        # A/B-only quick runs never mutate C lifecycle state.
+        signal_cleanup = False
     signal_cleanup_stats = {"strand_c_removed": 0, "strand_c_kept": len(previous.get("strand_c", []))}
     if signal_cleanup:
         log_progress("One-time corrective weak-signal cleanup: checking current Strand C before discovery")
@@ -21143,6 +21220,31 @@ def main() -> int:
 
     new_selected, hard_mix_stats = select_hard_new_ab_mix(deduped)
 
+    # A/B/C quick buttons share this scanner and these exact admission rules.
+    # In strand-only mode, route newly admitted A/B evidence only into the chosen
+    # strand. A candidate classified as ``both`` is deliberately published only in
+    # the strand the user asked to scan, so the other lane does not change as a
+    # side effect of a focused run. C-only publishes no new A/B evidence.
+    if RADAR_QUICK_STRAND:
+        routed: list[dict[str, Any]] = []
+        if RADAR_QUICK_STRAND in {"A", "B"}:
+            for candidate in new_selected:
+                if not isinstance(candidate, dict):
+                    continue
+                candidate_strand = clean_text(candidate.get("strand")).upper()
+                if candidate_strand not in {RADAR_QUICK_STRAND, "BOTH"}:
+                    continue
+                row = dict(candidate)
+                row["strand"] = RADAR_QUICK_STRAND
+                routed.append(row)
+        new_selected = routed
+        hard_mix_stats = {
+            **hard_mix_stats,
+            "quick_strand": RADAR_QUICK_STRAND,
+            "selected_a": sum(1 for x in new_selected if clean_text(x.get("strand")).upper() == "A"),
+            "selected_b": sum(1 for x in new_selected if clean_text(x.get("strand")).upper() == "B"),
+        }
+
     prev_a = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []
     strand_a = merge_corpus(prev_a, new_selected, "A", now_iso)
@@ -21197,9 +21299,37 @@ def main() -> int:
     frontier_evidence = [dict(x) for x in frontier_evidence if isinstance(x, dict)]
     output_corpus_floor = DATE_FLOOR
 
+    # A focused quick run must not silently change the other durable evidence lane
+    # or the auxiliary frontier corpus. Reset old rows' new_this_scan flag so scan
+    # diagnostics describe only this invocation.
+    if RADAR_QUICK_STRAND == "A":
+        strand_b = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("strand_b", []) if isinstance(x, dict)]
+        frontier_evidence = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("frontier_evidence", []) if isinstance(x, dict)]
+    elif RADAR_QUICK_STRAND == "B":
+        strand_a = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("strand_a", []) if isinstance(x, dict)]
+        frontier_evidence = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("frontier_evidence", []) if isinstance(x, dict)]
+    elif RADAR_QUICK_STRAND == "C":
+        strand_a = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("strand_a", []) if isinstance(x, dict)]
+        strand_b = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("strand_b", []) if isinstance(x, dict)]
+        frontier_evidence = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("frontier_evidence", []) if isinstance(x, dict)]
+        ab_archive = [dict(x) for x in quick_strand_baseline.get(AB_ARCHIVE_KEY, []) if isinstance(x, dict)]
+        active_core_stats = {
+            **active_core_stats,
+            "active_a": len(strand_a),
+            "active_b": len(strand_b),
+            "active_total": len(strand_a) + len(strand_b),
+            "archived": len(ab_archive),
+            "accepted_history_total": len(strand_a) + len(strand_b) + len(ab_archive),
+        }
+
     final_c_diagnostics: list[dict[str, str]] = []
     current_c = anchor_news(news, strand_a, final_c_diagnostics, precursor_watch=previous_precursor_watch)
     prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
+    if RADAR_QUICK_STRAND in {"A", "B"}:
+        current_c = []
+        final_c_diagnostics = []
+        c_floor_rescue_signals = []
+        min_new_c = 0
 
     # V17.19.8 final C reserve: the ordinary scan can finish with one anchored candidate that
     # turns out to duplicate a retained signal. Run one last small, source-backed search *after*
@@ -21256,6 +21386,13 @@ def main() -> int:
         dropped_previous_c.append(old)
     if dropped_previous_c:
         signal_archive = archive_signal_rows(signal_archive, dropped_previous_c, "not_carried_forward", now_iso)
+    if RADAR_QUICK_STRAND in {"A", "B"}:
+        # Strand-only A/B runs leave the current C evidence and C lifecycle stores
+        # untouched; only clear new_this_scan so this run cannot claim old C as new.
+        strand_c = [dict(x, new_this_scan=False) for x in quick_strand_baseline.get("strand_c", []) if isinstance(x, dict)]
+        precursor_watch = [dict(x) for x in quick_strand_baseline.get("precursor_watch", []) if isinstance(x, dict)]
+        signal_archive = [dict(x) for x in quick_strand_baseline.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(x, dict)]
+        c_quota_stats = {"eligible_c": 0, "selected_c": 0, "suppressed_c": 0, "quick_strand": RADAR_QUICK_STRAND}
     # Strand C alone has finite, status-aware retention from first insertion; A/B/frontier are cumulative.
     # Do not delete C rows merely to enforce a presentation share ceiling; evidential
     # hierarchy is conveyed explicitly by evidence_status="low" instead.
@@ -21966,6 +22103,7 @@ def main() -> int:
             "b_method_recent_discovery_from": B_METHOD_RECENT_DATE_FLOOR.isoformat(),
             "b_method_foundational_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "b_method_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
+            "quick_strand_mode": RADAR_QUICK_STRAND or "",
             "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False, "mode": "soft_shares", "share_weights": {"A": 8, "B": 1, "C": 3}, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
