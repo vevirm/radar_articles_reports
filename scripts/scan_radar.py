@@ -2102,10 +2102,8 @@ NEWS_EXCLUDE = [
 C_ROUTINE_EXCLUDE = [
     "honorary doctorate", "honorary degree", "elected fellow", "fellow of the",
     "medal", "prize", "award ceremony", "receives award", "wins award", "wins prize",
-    "distinguished lecture", "guest lecture", "public lecture", "seminar", "webinar",
-    "workshop", "conference programme", "conference program", "conference agenda",
-    "postdoctoral position", "postdoc position", "phd position", "doctoral position",
-    "doctoral researcher", "job vacancy", "vacancy", "career opportunity", "recruiting",
+    "distinguished lecture", "guest lecture", "public lecture",
+    "conference programme", "conference program", "conference agenda",
     "educational project", "student project", "summer school", "training course",
 ]
 C_GENERIC_INDEX_TITLES = {
@@ -2173,6 +2171,22 @@ def routine_signal_noise(title: str, desc: str = "") -> bool:
     if ht.strip(" -:|/") in C_GENERIC_INDEX_TITLES:
         return True
     if contains_any(full, C_ROUTINE_EXCLUDE):
+        return True
+    # Job advertisements are noise, but a news story saying a state/company is recruiting
+    # European researchers can be a high-value talent-flow signal.  Require the structural
+    # combination of a position/vacancy cue with application logistics instead of banning the
+    # ordinary verb "recruiting" everywhere in the article text.
+    job_position = bool(re.search(
+        r"\b(?:job vacancy|vacanc(?:y|ies)|job opening|career opportunity|phd position|doctoral position|"
+        r"postdoctoral position|postdoc position|doctoral researcher position|researcher position)\b",
+        full,
+    ))
+    job_logistics = bool(re.search(
+        r"\b(?:apply|application deadline|deadline|applications close|applications are invited|"
+        r"salary|contract duration|full[- ]time|part[- ]time|job reference|position available)\b",
+        full,
+    ))
+    if job_position and (job_logistics or job_position and ht == full.strip()):
         return True
     # Award/honour headlines are routine prestige news even when the biography mentions
     # research capacity, Europe or competitiveness.
@@ -2253,11 +2267,11 @@ def signal_headline_has_current_change(title: str) -> bool:
         r"\b(?:announces?|announced|launches?|launched|unveils?|unveiled|proposes?|proposed|"
         r"considers?|considered|mulls?|seeks?|plans?|planned|pilots?|piloted|tests?|tested|"
         r"delays?|delayed|postpones?|postponed|pauses?|paused|restricts?|restricted|bans?|banned|"
-        r"tightens?|tightened|invests?|invested|raises?|raised|cuts?|cut|updates?|updated|adopts?|"
+        r"tightens?|tightened|invests?|invested|raises?|raised|cuts?|cut|increases?|increased|decreases?|decreased|updates?|updated|adopts?|"
         r"adopted|approves?|approved|signs?|signed|opens?|opened|closes?|closed|expands?|expanded|"
         r"builds?|built|joins?|joined|withdraws?|withdrew|finds?|found|shows?|showed|reveals?|"
         r"revealed|reports?|reported|warns?|warned|falls?|fell|rises?|rose|surges?|surged|lags?|"
-        r"leads?|overtakes?|overtook|outpaces?|outpaced|imposes?|imposed|lifts?|lifted|ratifies?|ratified|passes?|passed|votes?|voted|freezes?|froze|halts?|halted|scraps?|scrapped|rejects?|rejected|overhauls?|overhauled|merges?|merged|establishes?|established|allocates?|allocated|earmarks?|earmarked|pledges?|pledged|commits?|committed|agrees?|agreed|enters? into force|entered into force)\b",
+        r"leads?|overtakes?|overtook|outpaces?|outpaced|imposes?|imposed|decides?|decided|accelerates?|accelerated|lifts?|lifted|ratifies?|ratified|passes?|passed|votes?|voted|freezes?|froze|halts?|halted|scraps?|scrapped|rejects?|rejected|overhauls?|overhauled|merges?|merged|establishes?|established|allocates?|allocated|earmarks?|earmarked|pledges?|pledged|commits?|committed|agrees?|agreed|enters? into force|entered into force)\b",
         h,
     ))
 
@@ -2453,7 +2467,7 @@ def institutional_weak_signal_eligible(title: str, desc: str, source: str = "", 
     return bool(eventlike or evidence_like or provisional)
 
 NEWS_EVENT_TERMS = [
-    "adopt", "approve", "launch", "announce", "suspend", "ban", "restrict", "curb", "tighten",
+    "adopt", "approve", "launch", "announce", "unveil", "present", "table", "pass", "vote", "suspend", "ban", "restrict", "curb", "tighten",
     "fund", "funding", "invest", "investment", "award", "back", "sign", "agree", "deal",
     "partner", "partnership", "collaborat", "memorandum", "mou", "delay", "stall", "cancel",
     "scrap", "reverse", "withdraw", "open", "close", "create", "build", "expand", "scale",
@@ -2503,11 +2517,11 @@ THEMES = {
     "export controls / dual use": ["export control", "dual use", "dual-use", "technology transfer", "entity list", "technology theft", "military-civil fusion", "military civil fusion"],
     "fragmentation of global science": ["fragmentation", "decoupling", "scientific collaboration", "research collaboration"],
     "transatlantic / US–China S&T competition": ["us-china", "u.s.-china", "us–china", "transatlantic", "strategic competition", "technology competition"],
-    "critical and emerging technologies": ["critical technology", "critical technologies", "emerging technology", "semiconductor", "chips", "quantum", "biotech", "artificial intelligence", " ai ", "biomanufacturing", "fermentation capacity", "neuromorphic", "risc-v", "open-weight model", "open weights", "quantum error correction", "photonic interconnect", "critical technology list", "dual-use research", "dual use research", "defence innovation", "defense innovation", "european defence fund", "european defense fund", "nato diana"],
+    "critical and emerging technologies": ["critical technology", "critical technologies", "emerging technology", "semiconductor", "chips", "quantum", "biotech", "artificial intelligence", " ai ", "space technology", "space sector", "satellite", "satellites", "launch vehicle", "iris2", "iris²", "biomanufacturing", "fermentation capacity", "neuromorphic", "risc-v", "open-weight model", "open weights", "quantum error correction", "photonic interconnect", "critical technology list", "dual-use research", "dual use research", "defence innovation", "defense innovation", "european defence fund", "european defense fund", "nato diana"],
     "economic security and R&I": ["economic security", "research funding", "innovation funding", "talent mobility", "strategic dependency", "strategic dependencies", "state aid", "subsidy race", "federal science funding", "nsf cuts", "nih cuts", "technical standards", "standardisation", "standardization"],
     "R&I competitiveness / technological capabilities": ["innovation capacity", "innovation competitiveness", "technological capabilities", "scientific capacity", "research and development", "r&d", "deep tech", "industrial innovation"],
     "supply chains / strategic dependencies": ["supply chain security", "supply chain resilience", "strategic dependency", "strategic dependencies", "critical raw materials", "critical minerals", "friendshoring", "reshoring"],
-    "Horizon Europe / FP10 international participation": ["horizon europe", "fp10", "association agreement", "third country", "third-country", "associated country", "framework programme", "framework program", "competitiveness fund", "research budget", "budget cut", "european research council", "erc", "msca", "widening", "eu missions", "eic", "eit", "multiannual financial framework", "mff"],
+    "Horizon Europe / FP10 international participation": ["horizon europe", "fp10", "association agreement", "third country", "third-country", "associated country", "framework programme", "framework program", "competitiveness fund", "research budget", "budget cut", "european research council", "erc", "msca", "widening", "eu missions", "eic", "eit", "multiannual financial framework", "mff", "european research area", "era act", "research and innovation act", "innovation act"],
     "science diplomacy": ["science diplomacy", "scientific diplomacy"],
     "research talent / mobility / brain drain": [
         "research talent", "scientific talent", "researcher mobility", "researcher outflow", "researcher inflow",
@@ -3311,10 +3325,24 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
         'research system', 'innovation system', 'research governance', 'innovation governance',
         'research funding', 'innovation funding', 'r&d investment', 'research investment',
         'horizon europe', 'fp10', 'framework programme', 'european research area',
-        'research evaluation', 'research assessment', 'research funder', 'research funders',
+        'research evaluation', 'research evaluations', 'research assessment', 'research funder', 'research funders',
+        'grant evaluation', 'grant evaluations', 'research grant allocation', 'research grant allocations',
         'science-policy interface', 'science policy interface', 'scientific knowledge in policymaking',
-        'scientific knowledge in policy making', 'technology governance', 'strategic technology governance',
+        'scientific knowledge in policy making', 'use of scientific knowledge', 'scientific knowledge use',
+        'technology governance', 'strategic technology governance',
         'innovation financing', 'financing instruments for innovation',
+    ],
+    'capital / investment / financing': [
+        'r&d investment', 'research investment', 'innovation investment',
+        'private r&d investment', 'public r&d investment', 'business r&d investment',
+        'research capital', 'innovation capital', 'deep tech investment', 'deep-tech investment',
+        'strategic technology investment', 'technology investment', 'venture capital for deep tech',
+        'deep tech venture capital', 'deep-tech venture capital', 'scale-up financing',
+        'scale up financing', 'growth capital for technology', 'growth capital for deep tech',
+        'patient capital for innovation', 'risk capital for innovation',
+        'research infrastructure investment', 'scientific infrastructure investment',
+        'innovation financing gap', 'scale-up financing gap', 'technology financing gap',
+        'r&d financing', 'research financing',
     ],
     'capability / performance': [
         'research capacity', 'scientific capacity', 'innovation capacity', 'innovation performance',
@@ -3338,6 +3366,7 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
         'research collaboration', 'scientific collaboration', 'international research cooperation',
         'international scientific cooperation', 'science and technology cooperation',
         'university-industry collaboration', 'university industry collaboration',
+        'innovation cooperation', 'innovation collaboration',
         'university-kis interactions', 'university–kis interactions',
     ],
     'translation / scale-up': [
@@ -3352,27 +3381,189 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
         'supply chain security', 'patent position', 'patent portfolio', 'patent landscape',
         'university patenting', 'technology sovereignty', 'technological sovereignty', 'digital sovereignty', 'data sovereignty', 'compute sovereignty', 'sovereign cloud',
     ],
+    'standards / rule-setting capacity': [
+        'standard-setting capacity', 'standards leadership', 'standardisation leadership',
+        'standardization leadership', 'technical standards leadership', 'standards influence',
+        'standardisation influence', 'standardization influence', 'standards participation',
+        'standardisation participation', 'standardization participation',
+        'technical committee participation', 'international standards committees',
+        'standards-setting role', 'standard-setting role', 'rule-setting capacity',
+    ],
 }
 
-def a_structural_state_variable_evidence(title: str, abstract: str = '', body: str = '', source_kind: str = 'general') -> tuple[bool, list[str]]:
-    """Identify evidence about a geopolitically consequential European R&I state variable.
+# Broad state-variable vocabulary is useful for retrieval, but no abstract/body keyword
+# is enough on its own.  Title placement can establish that a strong R&I state variable is
+# the study object; deliberately ambiguous title terms still need a relationship cue.
+A_STRUCTURAL_SUPPORT_ONLY_TERMS = {
+    'innovation capacity', 'innovation performance',
+    'doctoral candidates', 'doctoral training',
+    'innovation ecosystem', 'innovation ecosystems',
+    'deep tech', 'deep-tech', 'industrial innovation',
+    'technology investment', 'research capital', 'innovation capital',
+    'grant evaluation', 'grant evaluations',
+    'technology standards', 'technical standards', 'interoperability standards',
+    'iso/iec', 'iso iec', 'etsi',
+}
 
-    The source need not use geopolitical vocabulary. It must, however, establish something
-    about the R&I system that can materially shape capability, position, dependencies or
-    options. Generic technology/research words are retrieval signals, not admission evidence.
+# Relationship language for structural-A evidence.  These cues describe a state, trajectory,
+# distribution, comparison or causal link.  Generic words such as ``funding``/``investment``
+# are intentionally absent: they are state-variable vocabulary, not proof of a relationship.
+A_STRUCTURAL_RELATION_CUES = re.compile(
+    r'\b(?:gap|gaps|level|levels|rate|rates|share|shares|stock|stocks|flow|flows|outflow|inflow|'
+    r'distribution|concentration|availability|shortage|bottleneck|position|leadership|'
+    r'dependenc(?:e|y|ies)|reliance|resilience|retention|attraction|'
+    r'growth|decline|declines|declined|increase|increases|increased|decrease|decreases|decreased|'
+    r'rise|rises|rose|fall|falls|fell|change|changes|changed|changing|shift|shifts|shifted|trend|trends|'
+    r'compar(?:e|es|ed|ing|ison)|benchmark(?:s|ed|ing)?|measure(?:s|d|ment)?|quantif(?:y|ies|ied|ying)|'
+    r'track(?:s|ed|ing)?|map(?:s|ped|ping)|mapping|assess(?:es|ed|ing|ment)?|evaluat(?:e|es|ed|ing|ion)|'
+    r'lag|lags|lagged|lead|leads|led|outpace|outpaces|outpaced|relocat(?:e|es|ed|ing|ion))\b',
+    re.I,
+)
+A_STRUCTURAL_CAUSAL_CUES = re.compile(
+    r'\b(?:affect(?:s|ed|ing)?|influenc(?:e|es|ed|ing)|shape(?:s|d|ing)?|drive(?:s|n|ving)?|'
+    r'constrain(?:s|ed|ing)?|enable(?:s|d|ing)?|determin(?:e|es|ed|ing)|strengthen(?:s|ed|ing)?|'
+    r'weaken(?:s|ed|ing)?|reduce(?:s|d|ing)?|increase(?:s|d|ing)?|undermin(?:e|es|ed|ing)|'
+    r'associated with|link(?:s|ed|ing)?(?: to)?|correlat(?:e|es|ed|ing|ion))\b',
+    re.I,
+)
+A_STRUCTURAL_INCIDENTAL_CUES = re.compile(
+    r'\b(?:control(?:led|ling)? for|covariate|control variable|moderator|mediator|included as|'
+    r'adjusted for|sensitivity covariate|background characteristic|descriptive characteristic)\b',
+    re.I,
+)
+
+
+def _structural_state_term_pairs(text: str) -> list[tuple[str, str]]:
+    """Return ``(family, term)`` pairs found in text, preserving ontology order."""
+    out: list[tuple[str, str]] = []
+    for family, terms in A_STRUCTURAL_STATE_VARIABLES.items():
+        for term in distinct_matches(text, terms):
+            pair = (family, term)
+            if pair not in out:
+                out.append(pair)
+    return out
+
+
+def _support_only_structural_relation_ok(title: str, weak_hits: list[str]) -> bool:
+    """True when an ambiguous structural phrase is demonstrably the title-level study object."""
+    title_low = normalized(title)
+    title_weak = [x for x in weak_hits if normalized(x) in title_low]
+    if not title_weak:
+        return False
+    # A relation cue must add information beyond the ambiguous phrase itself.  For
+    # example, ``grant evaluation`` contains the letters ``evaluat`` but that does not
+    # make a generic cultural-grant paper R&I-system evidence.
+    relation_probe = title_low
+    for term in title_weak:
+        relation_probe = relation_probe.replace(normalized(term), ' ')
+    if A_STRUCTURAL_RELATION_CUES.search(relation_probe):
+        return True
+    # Only an additional explicit R&I-system noun can rescue an otherwise ambiguous title.
+    # Do not let the ambiguous phrase rescue itself (e.g. ``innovation ecosystem`` or
+    # ``innovation capacity``).
+    return bool(re.search(
+        r'\b(?:research system|research systems|innovation system|innovation systems|r&d system|'
+        r'research workforce|research infrastructure|research policy|innovation policy|'
+        r'research governance|innovation governance)\b',
+        title_low,
+    ))
+
+
+def _structural_sentence_relationship_ok(sentence: str, pairs: list[tuple[str, str]]) -> bool:
+    """Require an actual relationship when a state-variable phrase appears outside the title.
+
+    This prevents a covariate/moderator/background mention from becoming Strand A while keeping
+    empirical statements about levels, gaps, trajectories, distributions and causal links between
+    R&I state variables.  The relation is deliberately lexical/grammatical rather than inferential.
+    """
+    if not pairs:
+        return False
+    low = normalized(sentence)
+    if A_STRUCTURAL_INCIDENTAL_CUES.search(low):
+        return False
+
+    terms = [term for _, term in pairs]
+    families = {family for family, _ in pairs}
+    relation = bool(A_STRUCTURAL_RELATION_CUES.search(low))
+    causal = bool(A_STRUCTURAL_CAUSAL_CUES.search(low))
+    system_outcomes = distinct_matches(sentence, A_RESEARCH_SYSTEM_OUTCOME_CUES + A_STRATEGIC_RI_OUTCOME)
+
+    # A measurement/change/comparison cue in the same sentence is enough for an unambiguous
+    # state variable. Ambiguous phrases require either another R&I state/outcome or stronger
+    # local system framing so ``innovation performance ... moderator`` and ``doctoral candidates``
+    # sample descriptions do not pass.
+    ambiguous = [t for t in terms if normalized(t) in {normalized(x) for x in A_STRUCTURAL_SUPPORT_ONLY_TERMS}]
+    if relation:
+        if not ambiguous:
+            return True
+        if len(families) >= 2 or system_outcomes:
+            return True
+        # For a lone ambiguous phrase, require a tight grammatical relation to the state
+        # variable itself. This keeps ``we measure innovation capacity`` but rejects
+        # ``we measure anxiety ... among doctoral candidates``.
+        for term in ambiguous:
+            t = re.escape(normalized(term))
+            if re.search(rf'(?:{A_STRUCTURAL_RELATION_CUES.pattern})\s*.{{0,28}}\b{t}\b|\b{t}\b.{{0,28}}(?:{A_STRUCTURAL_RELATION_CUES.pattern})', low, re.I):
+                return True
+
+    # Causal language is admitted only when it connects two R&I-system states/outcomes.  This
+    # blocks ``research funding pressure correlates with stress`` while retaining e.g. funding
+    # cuts that reduce publication output or researcher retention.
+    if causal and (len(families) >= 2 or system_outcomes):
+        return True
+    return False
+
+
+def a_structural_state_variable_evidence(title: str, abstract: str = '', body: str = '', source_kind: str = 'general') -> tuple[bool, list[str]]:
+    """Identify evidence about a consequential European R&I state variable.
+
+    Keywords retrieve; relationships admit. A strong state variable in a real title can establish
+    the study object. A term that appears only in an abstract/body must sit in a sentence that
+    measures, compares, changes or causally links R&I-system states. Generic technology/research
+    words and statistical-control mentions never create this route by themselves.
     """
     title = clean_text(title)
     abstract = _strip_relevance_boilerplate(abstract)
     body = _strip_relevance_boilerplate(body)
-    evidence = clean_text(f"{title}. {abstract}. {body[:2500] if source_kind != 'scholarly' else ''}")
-    hits: list[str] = []
-    for family, terms in A_STRUCTURAL_STATE_VARIABLES.items():
-        fam_hits = distinct_matches(evidence, terms)
-        if fam_hits:
-            hits.append(family)
-            hits.extend(fam_hits[:3])
+    body_probe = body[:2500] if source_kind != 'scholarly' else ''
+    evidence = clean_text(f"{title}. {abstract}. {body_probe}")
 
-    # Strategic-technology papers qualify structurally only when the *same sentence* concerns
+    all_pairs = _structural_state_term_pairs(evidence)
+
+    qualified_pairs: list[tuple[str, str]] = []
+    support_only_norm = {normalized(x) for x in A_STRUCTURAL_SUPPORT_ONLY_TERMS}
+
+    # Title placement is strong subject evidence, but broad/ambiguous terms still need a
+    # title-level relationship/system cue.  Avoid treating a long text blob passed as ``title``
+    # by internal helper callers as automatically title-subject evidence.
+    title_pairs = _structural_state_term_pairs(title)
+    title_is_title_like = len(title.split()) <= 35 and len(title) <= 320
+    if title_is_title_like:
+        weak_title = [term for _, term in title_pairs if normalized(term) in support_only_norm]
+        weak_ok = _support_only_structural_relation_ok(title, weak_title) if weak_title else False
+        for pair in title_pairs:
+            if normalized(pair[1]) not in support_only_norm or weak_ok:
+                if pair not in qualified_pairs:
+                    qualified_pairs.append(pair)
+
+    # Outside the title, only sentence-level relationships count.  This is the central repair
+    # for structural-A false positives caused by incidental abstract mentions.
+    prose = clean_text(f"{abstract}. {body_probe}")
+    for sent in split_sentences(prose):
+        pairs = _structural_state_term_pairs(sent)
+        if _structural_sentence_relationship_ok(sent, pairs):
+            for pair in pairs:
+                if pair not in qualified_pairs:
+                    qualified_pairs.append(pair)
+
+    hits: list[str] = []
+    for family, term in qualified_pairs:
+        if family not in hits:
+            hits.append(family)
+        if term not in hits:
+            hits.append(term)
+
+    # Strategic-technology papers qualify structurally only when the same sentence concerns
     # capability-building, infrastructure, funding, scaling, research or technology position.
     strong_tech_mechanisms = [
         'research capacity', 'scientific capacity', 'innovation capacity', 'technological capability',
@@ -3385,25 +3576,30 @@ def a_structural_state_variable_evidence(title: str, abstract: str = '', body: s
     for sent in split_sentences(evidence):
         domains = distinct_matches(sent, A_TECH_DOMAINS)
         mechanisms = distinct_matches(sent, strong_tech_mechanisms)
-        if domains and mechanisms:
-            hits.extend(['strategic-technology capability', domains[0], mechanisms[0]])
+        if domains and mechanisms and not A_STRUCTURAL_INCIDENTAL_CUES.search(normalized(sent)):
+            for x in ['strategic-technology capability', domains[0], mechanisms[0]]:
+                if x not in hits:
+                    hits.append(x)
             break
+
     # Abstracts often introduce the strategic technology in one sentence and use a pronoun
-    # in the next (``Biotechnology is ... It can strengthen Europe's industrial base``).
-    # Allow that tightly bounded anaphoric form only when the title already names the
+    # in the next. Allow that tightly bounded anaphoric form only when the title names the
     # technology and the mechanism sentence itself carries European scope.
-    if not any(x == 'strategic-technology capability' for x in hits):
+    if 'strategic-technology capability' not in hits:
         title_domains = distinct_matches(title, A_TECH_DOMAINS)
         if title_domains:
             for sent in split_sentences(abstract):
                 mechanisms = distinct_matches(sent, strong_tech_mechanisms)
-                if mechanisms and (eu_scope_admissible(eu_evidence(sent, '', '')[0]) or eu_scope_admissible(eu_evidence(title, '', '')[0])):
-                    hits.extend(['strategic-technology capability', title_domains[0], mechanisms[0]])
+                if mechanisms and not A_STRUCTURAL_INCIDENTAL_CUES.search(normalized(sent)) and (
+                    eu_scope_admissible(eu_evidence(sent, '', '')[0])
+                    or eu_scope_admissible(eu_evidence(title, '', '')[0])
+                ):
+                    for x in ['strategic-technology capability', title_domains[0], mechanisms[0]]:
+                        if x not in hits:
+                            hits.append(x)
                     break
+
     low_title = normalized(title)
-    # Distribution/deployment can be a state variable only when the technology itself is
-    # what is being mapped. A paper that merely uses European regions to estimate a labour,
-    # health, education or other downstream outcome is not evidence about Europe's R&I system.
     tech_terms = distinct_matches(title, A_TECH_DOMAINS)
     if tech_terms and re.search(
         r'\b(?:distribution|deployment|diffusion|adoption|capacity|capabilit(?:y|ies)|infrastructure|position)\b.{0,70}\b(?:ai|artificial intelligence|semiconductor|chips?|quantum|biotech|biotechnology|cloud|compute|satellite)\b|'
@@ -3411,18 +3607,52 @@ def a_structural_state_variable_evidence(title: str, abstract: str = '', body: s
         r'\bgeograph(?:y|ic|ical)\b.{0,35}\b(?:of\s+)?(?:ai|artificial intelligence|semiconductor|chips?|quantum|biotech|biotechnology|cloud|compute|satellite)\b',
         low_title,
     ):
-        hits.extend(['technology position / capability distribution', tech_terms[0]])
+        for x in ['technology position / capability distribution', tech_terms[0]]:
+            if x not in hits:
+                hits.append(x)
     if distinct_matches(title, A_TECH_DOMAINS) and re.search(r'\b(?:dependenc(?:e|y|ies)|reliance|bottleneck|shortage|resilience|access|chokepoint)\b', low_title):
-        hits.extend(['technology position / dependency', 'strategic-technology dependency'])
-    # Research activity is too generic globally, but comparative evidence about universities
-    # across EU/candidate-country systems is a genuine research-system state variable.
-    if re.search(r'\bresearch activit(?:y|ies)\b', low_title) and re.search(r'\buniversit\w*\b', low_title) and re.search(r'\b(?:eu|europe|european|candidate countries|public and private)\b', low_title):
-        hits.extend(['capability / performance', 'research activity across university systems'])
-    # University--KIS mapping is a knowledge-network state variable.
-    if re.search(r'\buniversit\w*\b.{0,80}\b(?:kis|knowledge intensive services?)\b|\b(?:kis|knowledge intensive services?)\b.{0,80}\buniversit\w*\b', low_title):
-        hits.extend(['knowledge networks / collaboration', 'university-KIS interactions'])
-    return bool(hits), list(dict.fromkeys(hits))[:10]
+        for x in ['technology position / dependency', 'strategic-technology dependency']:
+            if x not in hits:
+                hits.append(x)
 
+    # Deep-tech startup/scale-up ecosystems are a system-level translation/financing object,
+    # unlike generic sectoral/local ``innovation ecosystem`` papers (e.g. wine tourism).
+    if re.search(r'\bdeep[- ]tech\b', low_title) and re.search(r'\b(?:startup|startups|scale[- ]?up|scale[- ]?ups|entrepreneurial)\b', low_title) and re.search(r'\becosystem(?:s)?\b', low_title):
+        for x in ['translation / scale-up', 'deep-tech startup ecosystem']:
+            if x not in hits:
+                hits.append(x)
+
+    # Generic grant evaluation is not automatically R&I (arts/culture grants also exist).
+    # It becomes an R&I-system object only when the source itself ties the evaluation to
+    # research funders, research grants or science/research funding allocation.
+    if re.search(r'\bgrant evaluation(?:s)?\b', low_title) and re.search(
+        r'\b(?:research funder(?:s)?|research grant(?:s)?|research grant allocation|science funder(?:s)?|scientific grant(?:s)?)\b',
+        normalized(clean_text(f"{abstract}. {body_probe}")),
+    ):
+        for x in ['R&I governance / funding', 'research grant evaluation']:
+            if x not in hits:
+                hits.append(x)
+
+    # Standard-setting is a strategic R&I state variable when the source measures Europe's
+    # participation/leadership/influence in technology-standard institutions.
+    if re.search(r'\b(?:iso\s*/?\s*iec|etsi|standard(?:s|isation|ization)?|standard[- ]setting)\b', low_title) and re.search(
+        r'\b(?:leadership|participation|influence|representation|committee|committees|position|capacity|role|rule[- ]setting)\b',
+        low_title,
+    ) and (distinct_matches(title, A_TECH_DOMAINS) or re.search(r'\b(?:technology|digital|telecom|6g|5g|cyber|data|ai)\b', low_title)):
+        for x in ['standards / rule-setting capacity', 'technology standards / rule-setting capacity']:
+            if x not in hits:
+                hits.append(x)
+
+    if re.search(r'\bresearch activit(?:y|ies)\b', low_title) and re.search(r'\buniversit\w*\b', low_title) and re.search(r'\b(?:eu|europe|european|candidate countries|public and private)\b', low_title):
+        for x in ['capability / performance', 'research activity across university systems']:
+            if x not in hits:
+                hits.append(x)
+    if re.search(r'\buniversit\w*\b.{0,80}\b(?:kis|knowledge intensive services?)\b|\b(?:kis|knowledge intensive services?)\b.{0,80}\buniversit\w*\b', low_title):
+        for x in ['knowledge networks / collaboration', 'university-KIS interactions']:
+            if x not in hits:
+                hits.append(x)
+
+    return bool(hits), list(dict.fromkeys(hits))[:10]
 
 def title_level_a_system_evidence(title: str) -> tuple[bool, list[str]]:
     """Strong title-only evidence that the object is a European R&I/technology system.
@@ -4606,7 +4836,7 @@ B_METHOD_STUDY_CUES = [
 ]
 
 B_METHOD_STUDY_ACTIONS = re.compile(
-    r'\b(?:review|synthesi[sz]|compar(?:e|es|ed|ing|ison)|evaluat(?:e|es|ed|ing|ion)|'
+    r'\b(?:review(?:s|ed|ing)?|synthesi[sz](?:e|es|ed|ing|ation)?|compar(?:e|es|ed|ing|ison)|evaluat(?:e|es|ed|ing|ion)|'
     r'validat(?:e|es|ed|ing|ion)|benchmark(?:s|ed|ing)?|test(?:s|ed|ing)?|assess(?:es|ed|ing|ment)?|'
     r'critiqu(?:e|es|ed|ing)|systemati[sz](?:e|es|ed|ing|ation)|taxonom(?:y|ies)|typolog(?:y|ies)|'
     r'discuss(?:es|ed|ing|ion)|examin(?:e|es|ed|ing)|investigat(?:e|es|ed|ing|ion))\b',
@@ -4683,7 +4913,7 @@ B_STRATEGIC_RI_RELEVANCE = [
 B_OFFTOPIC_APPLICATION_DOMAINS = [
     'table tennis', 'basketball', 'football', 'soccer', 'sports equipment', 'sport equipment',
     'hospitality branding', 'hotel branding', 'tourism marketing', 'school teaching', 'smart teaching',
-    'forest pest', 'forest pests', 'hospital bed', 'gold mining', 'patient education',
+    'hospital bed', 'gold mining', 'patient education',
 ]
 
 def _method_matches(text: str, terms: list[str]) -> list[str]:
@@ -4736,6 +4966,14 @@ def _ri_hits(text: str) -> list[str]:
         hits = [x for x in hits if normalized(x) != 'fp10']
     if research_talent_flow_signal(txt) and 'research-talent flow / brain drain' not in hits:
         hits.append('research-talent flow / brain drain')
+    for sent in split_sentences(txt):
+        low = normalized(sent)
+        if re.search(r'\b(?:iso\s*/?\s*iec|etsi|standard(?:s|isation|ization)?|standard[- ]setting)\b', low) and re.search(
+            r'\b(?:leadership|participation|influence|representation|committee|committees|position|capacity|role|rule[- ]setting)\b',
+            low,
+        ) and (distinct_matches(sent, A_TECH_DOMAINS) or re.search(r'\b(?:technology|digital|telecom|6g|5g|cyber|data|ai)\b', low)):
+            if 'technology standards / rule-setting capacity' not in hits:
+                hits.append('technology standards / rule-setting capacity')
     for sent in split_sentences(txt):
         if distinct_matches(sent, ['knowledge transfer']) and distinct_matches(sent, [
             'research', 'science', 'innovation', 'technology', 'r&d', 'university research', 'research collaboration'
@@ -5953,7 +6191,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
         families_here = _method_matches(low, B_METHOD_FAMILIES + B_RI_FUTURES_METHODS)
         # Comparing two named methods is methodological even when the word "method" is omitted.
         comparative_multi_method = len(set(families_here)) >= 2 and bool(re.search(r'\b(?:compar|versus|vs\.?|relative performance)\w*', low))
-        quality_terms = r'(?:bias|expert judg(?:e)?ment|panel(?:ist)?(?:s)?|rationale(?:s)?|consensus|stability|response rate|attrition|validity|reliability|accuracy|performance|quality|rigou?r|robustness|limitations?|transferab\w*|reusab\w*|replicab\w*|generaliz\w*|generalis\w*|feasibility|design principles?|method selection|method choice)'
+        quality_terms = r'(?:bias|expert judg(?:e)?ment|panel(?:ist)?(?:s)?|rationale(?:s)?|consensus|stability|response rate|attrition|validity|reliability|accuracy|quality|rigou?r|robustness|limitations?|transferab\w*|reusab\w*|replicab\w*|generaliz\w*|generalis\w*|feasibility|design principles?|method selection|method choice)'
         method_ref = r'(?:method|methods|methodology|framework|approach|technique|foresight|horizon scanning|scenario planning|scenario analysis|backcasting|roadmapping|delphi(?:s)?|cross impact|technology intelligence)'
         quality_low = re.sub(r'\bresearch limitations?(?:\s*/\s*implications?)?\b', ' ', low)
         quality_language = bool(
@@ -5961,6 +6199,10 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
             or re.search(r'\bresearch on .{0,70}\b(?:method|methodology|foresight|roadmapping|scenario planning)\b', quality_low)
             or re.search(r'\bfeasibility of using .{0,70}\bmethods?\b', low)
             or 'impact of foresight' in low
+            # "performance" is methodological evidence only when grammatically attached to
+            # the method itself.  Bare proximity previously admitted papers about firm or
+            # organisational performance merely because scenario planning appeared nearby.
+            or bool(re.search(r'\bperformance of (?:the )?.{0,20}\b(?:method|methodology|foresight|scenario planning|horizon scanning|roadmapping|delphi)\b|\b(?:method|methodology|foresight|scenario planning|horizon scanning|roadmapping|delphi)\s+(?:method\s+)?performance\b', low))
             or bool(re.search(r'\b(?:effectiveness|strengths? and weaknesses?) of .{0,25}\b(?:method|methodology|foresight|scenario planning|horizon scanning|roadmapping|delphi)\b|\b(?:method|methodology|foresight|scenario planning|horizon scanning|roadmapping|delphi)\s+(?:method\s+)?(?:effectiveness|strengths? and weaknesses?)\b', low))
         )
         explicit_method_study = bool(re.search(
@@ -5991,6 +6233,10 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
             families_here
             and re.search(r'\bresearch on (?:the )?.{0,70}\b(?:method|methodology|roadmapping|foresight|horizon scanning|scenario planning|delphi(?:s)?)\b', low)
         )
+        review_of_approaches = bool(
+            families_here and object_terms
+            and re.search(r'\b(?:review(?:s|ed|ing)?|synthesi[sz](?:e|es|ed|ing|ation)?|taxonom(?:y|ies)|typolog(?:y|ies))\b', low)
+        )
         # A paper can study foresight as an institutional/practice construct without using
         # generic method-evaluation vocabulary.  Keep this relation local: a recognised
         # foresight family must itself be described as functioning/serving as infrastructure.
@@ -6018,7 +6264,7 @@ def _b_method_evidence(title: str, abstract: str, body: str, source_kind: str, s
                 )
             )
         )
-        return bool(explicit_method_study or comparative_multi_method or named_method_quality or strong_meta or named_method_research or foresight_meta_relation or (actions and object_terms and quality_language) or (direct and object_terms and quality_language))
+        return bool(explicit_method_study or comparative_multi_method or named_method_quality or strong_meta or named_method_research or review_of_approaches or foresight_meta_relation or (actions and object_terms and quality_language) or (direct and object_terms and quality_language))
 
     creation_bridge = ''
     method_study_bridge = ''
@@ -6405,6 +6651,38 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
     title_structural_state_ok, title_structural_state_evidence = a_structural_state_variable_evidence(
         title, '', '', source_kind
     )
+    # A structural state variable can itself establish substantive R&I focus when the title
+    # makes that variable the study object.  This is the bounded internal-system route for
+    # cases such as a European deep-tech scale-up financing gap: the paper need not repeat a
+    # generic ``research/innovation`` token when it is plainly measuring capital available to
+    # a strategic R&I function.  Crucially, ``a_structural_state_variable_evidence(title)``
+    # already rejects support-only/incidental terms such as a bare ``innovation performance``
+    # or ``innovation ecosystem`` mention, so this rescue does not reopen those false positives.
+    structural_title_focus_rescue = bool(
+        int(source_tier or 9) <= 3
+        and source_kind in {'scholarly', 'institutional'}
+        and eu_scope_admissible(eu_rel)
+        and title_structural_state_ok
+    )
+    if structural_title_focus_rescue:
+        a_focus = True
+        a_route = a_route or 'eu-ri-structural-state-title-subject'
+        ri_hits = list(dict.fromkeys(
+            ri_hits + [x for x in title_structural_state_evidence if x not in A_STRUCTURAL_STATE_VARIABLES]
+        ))[:8]
+        # The normal aboutness/centrality lexicons intentionally omit several state-variable
+        # families.  Once the title-level structural test has positively identified the R&I
+        # object, record that evidence directly instead of requiring a redundant generic term.
+        aboutness = {
+            **aboutness,
+            'pass': True,
+            'reason': 'structural_state_title_subject',
+            'ri_terms': ri_hits[:8] or title_structural_state_evidence[:8],
+        }
+        if not centrality_ok:
+            centrality_ok = True
+            centrality_reason = 'structural_state_title_centrality'
+            centrality_evidence = list(dict.fromkeys(title_structural_state_evidence + eu_hits))[:8]
     # Direct-strategic A can be expressed in the source with vocabulary that the legacy
     # R&I matcher does not know (for example, an EU innovation gap discussed explicitly in
     # geopolitical terms). A recognised R&I state variable is itself valid R&I evidence;
@@ -14942,7 +15220,8 @@ def strong_watch_signal_text(text: str, themes: Iterable[str] | None = None) -> 
         "scientific cooperation", "research funding", "research programme",
         "research program", "university research", "academic research", "technology",
         "technological", "semiconductor", "quantum", "biotech", "biomanufacturing",
-        "compute", "neuromorphic", "risc-v", "open-weight model", "open weights",
+        "compute", "space technology", "space sector", "satellite", "satellites", "launch vehicle", "iris2", "iris²",
+        "neuromorphic", "risc-v", "open-weight model", "open weights",
         "quantum error correction", "photonic interconnect",
     ])
     geo = contains_any(full, GEO_STRONG)
@@ -15077,7 +15356,8 @@ def reframing_signal_text(text: str) -> bool:
 
 
 MATERIAL_SIGNAL_CHANGE = [
-    'announce', 'launch', 'approve', 'adopt', 'propose', 'restrict', 'tighten', 'ban',
+    'announce', 'launch', 'approve', 'adopt', 'propose', 'unveil', 'present', 'table', 'pass', 'vote',
+    'restrict', 'tighten', 'ban',
     'suspend', 'delay', 'cancel', 'withdraw', 'sign', 'agree', 'partner', 'fund', 'invest',
     'open', 'close', 'build', 'expand', 'scale', 'cut', 'increase', 'decrease', 'join',
     'screening', 'export control', 'standard', 'regulation', 'strategy', 'programme', 'program',
@@ -15090,13 +15370,16 @@ MATERIAL_SIGNAL_RI = [
     'university', 'horizon europe', 'fp10', 'technology', 'semiconductor', 'chips', 'quantum',
     'biotech', 'artificial intelligence', ' ai ', 'compute', 'cloud', 'data centre', 'data center',
     'critical raw materials', 'critical minerals', 'deep tech', 'patent', 'standards',
+    'space technology', 'space sector', 'satellite', 'satellites', 'launch vehicle', 'iris2', 'iris²',
     'biomanufacturing', 'fermentation capacity', 'neuromorphic', 'risc-v', 'open-weight model',
     'open weights', 'quantum error correction', 'photonic interconnect', 'critical technology list',
 ]
 MATERIAL_SIGNAL_STAKES = [
     'strategic', 'security', 'sovereignty', 'autonomy', 'competitiveness', 'capacity', 'capability',
     'dependence', 'dependency', 'supply chain', 'collaboration', 'cooperation', 'talent', 'mobility',
-    'funding', 'investment', 'access', 'export', 'foreign', 'china', 'united states', 'u.s.', ' us ',
+    'funding', 'investment', 'access', 'policy', 'governance', 'regulation', 'law', ' act ',
+    'programme', 'program', 'budget', 'procurement', 'intellectual property',
+    'export', 'foreign', 'china', 'united states', 'u.s.', ' us ',
 ]
 
 def material_update_signal_text(text: str) -> bool:
@@ -15157,8 +15440,8 @@ _SIGNAL_NON_EVENT_CUES = [
 _SIGNAL_CONCRETE_EVENT_CUES = [
     r"\b(?:launches?|launched|invests?|invested|raises?|raised|signs?|signed|adopts?|adopted|approves?|approved|"
     r"imposes?|imposed|restricts?|restricted|tightens?|tightened|bans?|banned|suspends?|suspended|blocks?|blocked|opens?|opened|"
-    r"closes?|closed|cuts?|cut|funds?|funded|deploys?|deployed|builds?|built|expands?|expanded|scales?|scaled|"
-    r"joins?|joined|withdraws?|withdrew|relocates?|relocated|acquires?|acquired|ratifies?|ratified|passes?|passed|votes?|voted|lifts?|lifted|freezes?|froze|halts?|halted|scraps?|scrapped|rejects?|rejected|overhauls?|overhauled|merges?|merged|establishes?|established|allocates?|allocated|earmarks?|earmarked|pledges?|pledged|commits?|committed|agrees?|agreed|enters? into force|entered into force)\b",
+    r"closes?|closed|cuts?|cut|increases?|increased|decreases?|decreased|funds?|funded|deploys?|deployed|builds?|built|expands?|expanded|scales?|scaled|"
+    r"joins?|joined|withdraws?|withdrew|relocates?|relocated|acquires?|acquired|ratifies?|ratified|passes?|passed|votes?|voted|decides?|decided|accelerates?|accelerated|lifts?|lifted|freezes?|froze|halts?|halted|scraps?|scrapped|rejects?|rejected|overhauls?|overhauled|merges?|merged|establishes?|established|allocates?|allocated|earmarks?|earmarked|pledges?|pledged|commits?|committed|agrees?|agreed|enters? into force|entered into force)\b",
     r"\bwith immediate effect\b", r"\beffective immediately\b", r"\bcall open until\b", r"\bco-funding available\b",
 ]
 
@@ -15184,6 +15467,8 @@ _SIGNAL_COMMITTED_STATUS_CUES = [
     r"\b(?:awarded|allocated|committed|approved) (?:€|EUR|\$|USD|£|GBP)\s?[0-9]",
     r"\bselected \d+ .*?(?:projects?|sites?|consortia|facilities)\b",
     r"\b(?:procurement|tender) (?:was |has been )?(?:awarded|signed)\b",
+    r"\b(?:announces?|announced|commits?|committed|will invest|to invest)\b.{0,90}(?:€|EUR|\$|USD|£|GBP)\s?[0-9]",
+    r"(?:€|EUR|\$|USD|£|GBP)\s?[0-9][^.;]{0,90}\b(?:investment|invested|committed|commitment)\b",
 ]
 
 
@@ -15202,10 +15487,10 @@ def signal_event_status(claim: str, headline: str = "", desc: str = "") -> str:
         return "UNKNOWN"
     if _regex_any(full, _SIGNAL_OBSERVED_STATUS_CUES) or reframing_signal_text(full):
         return "OBSERVED"
-    if _regex_any(full, _SIGNAL_PROPOSAL_STATUS_CUES):
-        return "PROPOSED"
     if _regex_any(full, _SIGNAL_COMMITTED_STATUS_CUES):
         return "COMMITTED"
+    if _regex_any(full, _SIGNAL_PROPOSAL_STATUS_CUES):
+        return "PROPOSED"
     if _regex_any(full, _SIGNAL_CONCRETE_EVENT_CUES):
         return "DONE"
     return "UNKNOWN"
@@ -15227,8 +15512,24 @@ def formal_proposal_is_public_signal(claim: str, headline: str = "", desc: str =
     full = normalized(clean_text(f"{headline}. {claim}. {desc}"))
     if not full:
         return False
+    # Newspaper future-tense headlines such as ``Commission to present ... next week`` are
+    # precursor information, not evidence that the proposal has actually been tabled.  Do
+    # not let the bare infinitive ``present`` satisfy the formal-action grammar below.
+    future_only = bool(re.search(
+        r"\b(?:plans?|intends?|aims?|expects?) to\b|\b(?:commission|council|parliament) to "
+        r"(?:present|unveil|publish|table|launch)\b",
+        full, re.I,
+    ))
+    completed_formal_act = bool(re.search(
+        r"\b(?:presented|unveiled|published|tabled|launched|opened|adopted)\b|"
+        r"\b(?:commission|council|parliament)\s+(?:proposes?|proposed)\b",
+        full, re.I,
+    ))
+    if future_only and not completed_formal_act:
+        return False
     formal_action = bool(re.search(
         r"\b(?:European Commission|Commission|Council of the European Union|Council of the EU|European Parliament|Council presidency|presidency of the EU Council)\b.{0,45}\bproposes?\b|"
+        r"\b(?:European Commission|Commission|Council of the European Union|Council of the EU|European Parliament)\b.{0,70}\b(?:unveils?|unveiled|presents?|presented|publishes?|published)\b.{0,70}\b(?:act|legislation|regulation|legislative proposal)\b|"
         r"\b(?:tabled|tables|published|publishes|presented|presents|adopted|adopts|unveiled|unveils|launched|launches)\b.{0,60}\b(?:proposal|draft|consultation|call for evidence|roadmap|negotiating box|budget position)\b|"
         r"\b(?:proposal|draft|negotiating box|budget position)\b.{0,45}\b(?:tabled|published|presented|adopted|unveiled|proposes?)\b|"
         r"\b(?:Council presidency|presidency of the EU Council|EU Council)\b.{0,90}\b(?:Horizon Europe|framework programme|research budget|budget)\b|"
@@ -15384,16 +15685,57 @@ def trusted_independent_c_source(source: str = "", domain: str = "", link: str =
             domain_n = ""
     if trusted_weak_signal_commentary_source(source, domain_n, link):
         return True
-    for row in CONFIG.get("news_sources", []):
+    for row in configured_c_news_sources():
         if not isinstance(row, dict):
             continue
         rn = normalized(row.get("name"))
         rd = clean_text(row.get("domain")).lower().removeprefix("www.")
-        if rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd)):
-            return True
-        if rn and source_n and rn == source_n:
-            return True
+        matched = bool(
+            (rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd)))
+            or (rn and source_n and rn == source_n)
+        )
+        if matched:
+            # Source role controls what an unanchored C item may rely on. Curated public-service,
+            # independent reporting, specialist research-news and accountable analytical sources
+            # may establish a current event. Actor/self-report sources remain useful discovery
+            # surfaces but cannot independently establish strategic significance merely because
+            # they are on the allow-list. Existing rows without a role preserve v24.6 behaviour.
+            role = normalized(row.get("role") or "independent_high_quality")
+            return role in {
+                "independent_high_quality", "public_service", "specialist_research",
+                "research_analysis", "official_primary",
+            }
     return bool(_source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH)
+
+
+def configured_c_news_sources() -> list[dict[str, Any]]:
+    """Return the editorial C-source universe without conflating discovery lanes.
+
+    ``news_sources`` remains the compact Europe/global core used for ordinary source-bounded
+    queries. ``country_news_sources`` is a separate high-quality national-media layer searched
+    with domestic state-variable queries. ``trusted_primary_c_sources`` contains accountable
+    international/European institutions already covered by the institutional crawler, so they can
+    support C without spending duplicate Google-News query budget. All three buckets are eligible
+    for publisher/source validation; relevance and event gates remain unchanged.
+    """
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for bucket in (
+        CONFIG.get("news_sources", []),
+        CONFIG.get("country_news_sources", []),
+        CONFIG.get("trusted_primary_c_sources", []),
+    ):
+        for row in bucket or []:
+            if not isinstance(row, dict):
+                continue
+            domain = clean_text(row.get("domain")).lower().removeprefix("www.")
+            name = normalized(row.get("name"))
+            key = domain or name
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            rows.append(row)
+    return rows
 
 
 def trusted_analytical_commentary_candidate(
@@ -15479,6 +15821,26 @@ def news_queries(domain: str, lookback_hours: int) -> list[str]:
     ]
 
 
+def country_news_queries(domain: str, country: str, lookback_hours: int) -> list[str]:
+    """Source-bounded C discovery for high-quality national European media.
+
+    Country reporting often describes an R&I-system move as a domestic budget, plant,
+    university, data-centre, defence, space or investment story and never says "Europe".
+    Retrieval therefore keys on the country's own system and state-variable mechanisms;
+    final Strand-C admission still has to prove material R&I relevance and source-backed
+    European/member-state scope.
+    """
+    days = max(2, min(60, (int(lookback_hours) + 23) // 24))
+    when = f"when:{days}d"
+    place = clean_text(country)
+    return [
+        f'site:{domain} ({place}) (research OR science OR university OR researchers OR R&D OR innovation) (funding OR budget OR reform OR law OR security OR cooperation OR talent OR mobility OR recruit OR cuts OR investment) {when}',
+        f'site:{domain} ({place}) (AI OR "artificial intelligence" OR semiconductor OR chips OR quantum OR biotech OR supercomputer OR "data centre" OR "data center" OR cloud OR "deep tech") (investment OR build OR expand OR funding OR acquisition OR facility OR capacity OR restriction) {when}',
+        f'site:{domain} ({place}) (space OR defence OR defense OR "dual use" OR standards OR standardisation OR standardization OR patents OR "research infrastructure") (technology OR research OR innovation OR investment OR procurement OR capability) {when}',
+        f'site:{domain} ({place}) (startup OR "scale-up" OR scaleup OR venture OR capital OR acquisition OR ownership OR plant OR laboratory OR lab) (technology OR research OR innovation OR AI OR semiconductor OR quantum OR biotech) {when}',
+    ]
+
+
 def c_capital_infrastructure_fast_queries(lookback_hours: int) -> list[str]:
     """Small front-of-queue C discovery lane for concrete European capacity moves.
 
@@ -15541,7 +15903,7 @@ def feed_source(entry: Any, fallback_name: str = "", fallback_domain: str = "") 
 def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
     nd = (domain or "").lower().removeprefix("www.")
     nn = norm_title(name)
-    sources = CONFIG.get("news_sources", [])
+    sources = configured_c_news_sources()
     # Prefer the publisher URL. This avoids ambiguous title matches such as
     # "Science" versus "Science|Business".
     for src in sources:
@@ -15586,6 +15948,18 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
         for src in CONFIG["news_sources"]:
             for q in news_queries(src["domain"], lookback_hours):
                 jobs.append((src["name"], src["domain"], q, False, False))
+            if clean_text(src.get("country")):
+                for q in country_news_queries(src["domain"], src.get("country", ""), lookback_hours):
+                    jobs.append((src["name"], src["domain"], q, False, False))
+        # National European media are a distinct discovery lane.  They are deliberately not
+        # given all generic Europe/global queries as well: domestic reporting often omits the
+        # words EU/Europe, and duplicating both query families would waste the bounded news
+        # budget.  Admission remains identical to every other C candidate.
+        for src in CONFIG.get("country_news_sources", []):
+            if not isinstance(src, dict) or not clean_text(src.get("domain")):
+                continue
+            for q in country_news_queries(src["domain"], src.get("country", ""), lookback_hours):
+                jobs.append((src.get("name", ""), src["domain"], q, False, False))
         for q in global_news_queries(lookback_hours):
             jobs.append(("", "", q, True, False))
     if not RADAR_PRIORITY_SCAN:
@@ -15708,6 +16082,28 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 soup = BeautifulSoup(r.text, "html.parser")
                 title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else label)
                 desc = meta_content(soup, ["description", "og:description", "twitter:description"])
+                # Priority direct sources deserve enough source text for the C gate to find
+                # the actual decision/change rather than only an aspirational meta teaser.
+                # Keep this bounded: a handful of article-like lead paragraphs, never the
+                # whole page or navigation/footer text.
+                lead_parts: list[str] = []
+                lead_chars = 0
+                article_container = soup.find("article") or soup.find("main") or soup
+                for pnode in article_container.find_all("p")[:40]:
+                    part = clean_text(pnode.get_text(" ", strip=True))
+                    if len(part.split()) < 8 or len(part) > 900:
+                        continue
+                    plow = normalized(part)
+                    if contains_any(plow, ["cookie", "privacy policy", "sign up", "newsletter", "subscribe", "advertisement"]):
+                        continue
+                    if normalized(part) in normalized(desc):
+                        continue
+                    lead_parts.append(part)
+                    lead_chars += len(part)
+                    if len(lead_parts) >= 5 or lead_chars >= 1800:
+                        break
+                if lead_parts:
+                    desc = clean_text(". ".join([x for x in [desc] + lead_parts if clean_text(x)]))[:2200]
                 published = None
                 for script in soup.find_all("script", attrs={"type": re.compile(r"ld\+json", re.I)}):
                     try:
@@ -16234,6 +16630,7 @@ def weak_signal_ri_strategic_bridge_ok(headline: str, desc: str, themes: Iterabl
         "biotechnology", "artificial intelligence", "compute", "supercomputer", "patent", "standard",
         "standards", "research infrastructure", "research infrastructures", "research funding",
         "innovation funding", "venture capital", "deep tech", "dual use", "dual-use",
+        "space technology", "space sector", "satellite", "satellites", "launch vehicle", "iris2", "iris²",
     ])
     if not ri_mechanism:
         return False
@@ -16383,6 +16780,7 @@ def c_source_backed_eu_ri_relevance(
             'ai megafactory', 'ai megafactories', 'gigafactory', 'gigafactories', 'semiconductor fab', 'chip fab', 'pilot line', 'compute capacity',
             'deep tech', 'deep-tech', 'research careers', 'research talent', 'scientist', 'scientists',
             'researcher', 'researchers', 'export control', 'technology transfer', 'technical standards',
+            'space technology', 'space sector', 'satellite', 'satellites', 'launch vehicle', 'iris2', 'iris²',
         ])
     )
     if scope_ok and ri_ok:
@@ -16425,7 +16823,7 @@ def c_fallback_watch_theme(headline: str, desc: str) -> str:
         return 'energy and siting'
     if contains_any(full, ['capex', 'acquisition', 'acquires', 'stake', 'majority investment', 'investment commitment', 'venture investment']):
         return 'capital and ownership'
-    if contains_any(full, ['horizon europe', 'fp10', 'erc', 'european research council', 'starting grant']):
+    if contains_any(full, ['horizon europe', 'fp10', 'erc', 'european research council', 'starting grant', 'european research area', 'era act', 'innovation act']):
         return 'Horizon Europe / FP10 international participation'
     if contains_any(full, ['research security', 'knowledge security', 'foreign interference']):
         return 'research security / foreign interference'
@@ -16519,7 +16917,27 @@ def signal_kind(text: str) -> str:
     return "policy / strategy"
 
 
-def signal_why(theme: str, kind: str) -> str:
+def signal_why(theme: str, kind: str, text: str = "") -> str:
+    """Explain the European R&I state variable a C signal could move.
+
+    Keep the explanation auditable and specific where the source gives enough detail;
+    theme-level prose remains the fallback.  This avoids generic What/Why duplication.
+    """
+    low = normalized(text)
+    if any(x in low for x in ["data centre", "data center", "supercomputer", "ai factory", "compute capacity", "computing capacity", "ai infrastructure"]):
+        return "This could change Europe's available compute infrastructure, where frontier capacity is located, and its dependence on external technology suppliers."
+    if any(x in low for x in ["innovation act", "r&d procurement", "research and innovation act", "intellectual property"]):
+        return "This could change the rules for financing, procuring, testing and commercialising R&D in Europe, affecting how quickly research-based firms can scale."
+    if any(x in low for x in ["horizon europe", "fp10", "framework programme", "framework program"]) and any(x in low for x in ["delay", "postpone", "vote", "budget", "funding"]):
+        return "This could change the timing, predictability or scale of EU research funding and international participation in the next framework programme."
+    if any(x in low for x in ["researcher", "researchers", "scientist", "scientists", "research talent", "brain drain", "brain gain"]):
+        return "This could change Europe's ability to attract, retain and circulate researchers, directly affecting the depth and location of research capability."
+    if any(x in low for x in ["standard-setting", "standard setting", "standardisation", "standardization", "iso/iec", "etsi", "technical committee"]):
+        return "This could change Europe's influence over technical rules and interoperability, affecting market access and the position of European technologies."
+    if any(x in low for x in ["space sector", "space technology", "satellite", "satellites", "iris2", "iris²", "launch vehicle"]):
+        return "This could change Europe's independent space and satellite capability, with consequences for research infrastructure, security and reliance on non-European systems."
+    if any(x in low for x in ["venture capital", "growth capital", "scale-up financing", "deep-tech investment", "deep tech investment", "r&d investment", "research investment"]):
+        return "This could change the capital available to develop and scale European research-based technologies, including whether strategic capabilities remain located and controlled in Europe."
     explanations = {
         "research security / foreign interference": "This could change how European research organisations manage international collaboration, access, openness and security.",
         "technology sovereignty / strategic autonomy": "This affects Europe's ability to build, access and control strategic technology capacity rather than depend on external suppliers.",
@@ -16584,25 +17002,69 @@ def _clean_signal_event_claim(value: str) -> str:
 
 
 def _signal_what_claim(desc: str, headline: str) -> str:
-    # Prefer the source description/body over simply echoing the headline. The earlier
-    # ``existing=headline`` call caused concise claim extraction to return the headline
-    # verbatim, after which theme-support validation could reject a perfectly good signal
-    # because the R&I/talent/technology mechanism lived in the description.
-    what = plain_language_claim(desc, headline, "")
-    desc_themes = set(themes_for(clean_text(desc))) & WATCH_SIGNAL_THEMES
-    what_themes = set(themes_for(what)) & WATCH_SIGNAL_THEMES if what else set()
-    what = _clean_signal_event_claim(what)
-    what_themes = set(themes_for(what)) & WATCH_SIGNAL_THEMES if what else set()
-    if _signal_claim_is_substantive(what) and not _signal_claim_is_fragment(what) and (what_themes or not desc_themes):
-        return what
-    for sent in split_sentences(clean_text(desc), max_chars=5000):
-        candidate = _clean_signal_event_claim(plain_language_claim(sent, headline, sent))
-        if _signal_claim_is_substantive(candidate) and not _signal_claim_is_fragment(candidate):
-            return candidate
-        raw_candidate = _clean_signal_event_claim(clean_text(sent))
-        raw_themes = set(themes_for(raw_candidate)) & WATCH_SIGNAL_THEMES
-        if raw_themes and _signal_claim_is_substantive(raw_candidate) and not _signal_claim_is_fragment(raw_candidate):
-            return raw_candidate
+    """Choose the most concrete source-backed event/finding sentence for public C text.
+
+    News teasers often open with aspiration ("Europe seeks...", "leaders call for...")
+    and only then state the observable decision, investment or measured change.  Ranking
+    all available source sentences prevents that packaging sentence from becoming What.
+    """
+    desc_clean = clean_text(desc)
+    candidates: list[str] = []
+
+    # Include the normal concise extraction, but do not privilege it over more concrete
+    # sentences later in the source description/body.
+    initial = _clean_signal_event_claim(plain_language_claim(desc_clean, headline, ""))
+    if initial:
+        candidates.append(initial)
+    for sent in split_sentences(desc_clean, max_chars=5000):
+        raw = _clean_signal_event_claim(clean_text(sent))
+        if raw:
+            candidates.append(raw)
+        concise = _clean_signal_event_claim(plain_language_claim(sent, headline, sent))
+        if concise:
+            candidates.append(concise)
+
+    uniq: list[str] = []
+    seen: set[str] = set()
+    for c in candidates:
+        key = normalized(c)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        if _signal_claim_is_substantive(c) and not _signal_claim_is_fragment(c):
+            uniq.append(c)
+
+    def score(c: str) -> float:
+        low = normalized(c)
+        sc = 0.0
+        status = signal_event_status(c, "", "")
+        sc += {"OBSERVED": 8.0, "COMMITTED": 7.5, "DONE": 7.0, "PROPOSED": 3.0}.get(status, 0.0)
+        if _regex_any(low, _SIGNAL_CONCRETE_EVENT_CUES):
+            sc += 5.0
+        if reframing_signal_text(low):
+            sc += 4.0
+        if contains_any(low, MATERIAL_SIGNAL_RI):
+            sc += 2.5
+        sc += min(3.0, 0.75 * len(relationship_novelty_dimensions(low)))
+        if set(themes_for(c)) & WATCH_SIGNAL_THEMES:
+            sc += 2.0
+        if re.search(r"(?:€|EUR|\$|USD|£|GBP)\s?[0-9]|\b\d+(?:[.,]\d+)?\s?(?:%|billion|million|bn|mn|gw|mw|satellites?)\b", c, re.I):
+            sc += 2.0
+        # Penalise rhetorical/aspirational packaging unless that same sentence also carries
+        # a concrete action. Calls, hopes and ambitions can be context, not the public fact.
+        if _regex_any(low, _SIGNAL_NON_EVENT_CUES) and not _regex_any(low, _SIGNAL_CONCRETE_EVENT_CUES):
+            sc -= 7.0
+        if contains_any(low, ["seeking to", "aims to", "ambition", "vision", "stronger sector"]):
+            sc -= 2.5
+        # Prefer a compact factual sentence over a long paragraph when substance is equal.
+        sc -= max(0, len(c) - 420) / 180.0
+        return sc
+
+    if uniq:
+        best = max(enumerate(uniq), key=lambda pair: (score(pair[1]), -pair[0]))[1]
+        if score(best) > -2.0:
+            return best
+
     fallback = _clean_signal_event_claim(_signal_headline_claim(headline))
     return fallback if _signal_claim_is_substantive(fallback) else ''
 
@@ -16933,7 +17395,7 @@ def anchor_news(
                     diag(n, 'published_claim_does_not_support_signal_theme')
                     continue
                 theme = sorted(supported)[0]
-        why=external_bridge or signal_why(theme,kind)
+        why=external_bridge or signal_why(theme, kind, f"{headline}. {what}. {desc}")
         item={k:v for k,v in n.items() if not k.startswith('_')}
         item.update({
             'anchor':anchor,
@@ -16976,7 +17438,13 @@ def anchor_news(
         diag(n, 'accepted_anchored' if anchor else 'accepted_unanchored', 'accepted')
     anchored.sort(key=lambda x:(x.get('_anchor_score',0),x.get('date','')),reverse=True)
     for x in anchored:x.pop('_anchor_score',None)
-    return anchored[:MAX_C] if MAX_C>0 else anchored
+    # Do not apply the publication cap before saved-C novelty is known.  Previously MAX_C
+    # (normally 6) could be filled by fresh coverage of already-published events, preventing
+    # lower-ranked genuinely novel signals from ever reaching ``select_hard_new_c_mix``.
+    # Keep only a generous runtime safety bound here; the real 3-item publication target is
+    # applied after novelty/deduplication.
+    pre_novelty_cap = max(0, int(CONFIG.get('c_pre_novelty_candidate_cap', 30) or 0))
+    return anchored[:pre_novelty_cap] if pre_novelty_cap > 0 else anchored
 
 
 def build_precursor_watch(previous_watch: list[dict[str, Any]], candidates: list[dict[str, Any]], now_iso: str) -> list[dict[str, Any]]:
