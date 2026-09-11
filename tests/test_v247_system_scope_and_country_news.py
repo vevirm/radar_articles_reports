@@ -192,6 +192,39 @@ class V247SystemScopeAndCountryNews(unittest.TestCase):
         )
         self.assertFalse(ok, diagnostics)
 
+
+    def test_scmp_is_not_a_strand_c_source_even_when_story_mentions_europe(self):
+        ok, diagnostics = self.c_admitted(
+            "China’s self-driving push gears up in Europe as Momenta and Pony.ai expand",
+            "Chinese autonomous-driving companies are expanding operations in Europe and opening new European partnerships.",
+            "South China Morning Post", "scmp.com", "https://www.scmp.com/example",
+        )
+        self.assertFalse(ok, diagnostics)
+        self.assertTrue(any(d.get("reason") == "source_not_europe_trusted" for d in diagnostics), diagnostics)
+
+    def test_nikkei_asia_is_not_a_strand_c_source(self):
+        ok, diagnostics = self.c_admitted(
+            "Asian chip group expands European research operations",
+            "The company announced a new research and semiconductor development operation in Europe.",
+            "Nikkei Asia", "asia.nikkei.com", "https://asia.nikkei.com/example",
+        )
+        self.assertFalse(ok, diagnostics)
+
+    def test_reuters_direct_eu_development_remains_c(self):
+        ok, diagnostics = self.c_admitted(
+            "EU agrees new research-security screening rules for sensitive technologies",
+            "European Union governments agreed new screening rules affecting research collaboration and dual-use technology projects.",
+            "Reuters", "reuters.com", "https://www.reuters.com/world/europe/example",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_configured_c_discovery_excludes_scmp_and_nikkei(self):
+        domains = {str(x.get("domain")) for x in S.configured_c_news_sources()}
+        self.assertNotIn("scmp.com", domains)
+        self.assertNotIn("asia.nikkei.com", domains)
+        self.assertIn("politico.eu", domains)
+        self.assertIn("reuters.com", domains)
+
     def test_C_pre_novelty_cap_is_not_publication_cap(self):
         self.assertGreaterEqual(int(S.CONFIG.get("c_pre_novelty_candidate_cap", 0)), 20)
         self.assertLessEqual(int(S.CONFIG.get("c_min_new_per_successful_scan", 3)), 3)

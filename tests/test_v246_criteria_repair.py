@@ -191,7 +191,7 @@ class V246CriteriaRepairTests(unittest.TestCase):
         self.assertTrue(ev["a_pass"], ev)
 
 
-    # --- C: external material developments may enter; actor regex is not a veto ---
+    # --- C: Europe/EU source lane; external-only developments stay out ---
     def test_c_external_domestic_biotech_investment_stays_out(self):
         row = {
             "headline": "China invests $8 billion in new biotech research hub",
@@ -206,7 +206,7 @@ class V246CriteriaRepairTests(unittest.TestCase):
         out = S.anchor_news([row], [], diagnostics, allow_unanchored=True)
         self.assertEqual(out, [], diagnostics)
 
-    def test_c_external_us_science_funding_shock_can_enter(self):
+    def test_c_external_us_science_funding_shock_stays_out(self):
         row = {
             "headline": "US cuts NSF research funding",
             "_desc": "The US government cuts National Science Foundation funding for university research and scientific programmes.",
@@ -218,9 +218,7 @@ class V246CriteriaRepairTests(unittest.TestCase):
         }
         diagnostics = []
         out = S.anchor_news([row], [], diagnostics, allow_unanchored=True)
-        self.assertEqual(len(out), 1, diagnostics)
-        self.assertEqual(out[0]["eu_relevance"], "external")
-        self.assertTrue(out[0]["external_eu_bridge_is_inference"])
+        self.assertEqual(out, [], diagnostics)
 
     def test_c_direct_european_ai_capacity_commitment_can_enter(self):
         headline = "Europe commits €5 billion to fund seven AI megafactories and catch up with the US and China"
@@ -238,7 +236,7 @@ class V246CriteriaRepairTests(unittest.TestCase):
         out = S.anchor_news([row], [], diagnostics, allow_unanchored=True)
         self.assertTrue(out, diagnostics)
 
-    def test_c_external_research_collaboration_restriction_can_enter(self):
+    def test_c_external_research_collaboration_restriction_stays_out(self):
         row = {
             "headline": "US politicians push agencies to restrict research collaboration with China",
             "_desc": "US lawmakers are pressing federal science agencies to restrict research collaboration with Chinese institutions in sensitive technologies.",
@@ -250,11 +248,9 @@ class V246CriteriaRepairTests(unittest.TestCase):
         }
         diagnostics = []
         out = S.anchor_news([row], [], diagnostics, allow_unanchored=True)
-        self.assertEqual(len(out), 1, diagnostics)
-        self.assertEqual(out[0]["eu_relevance"], "external")
-        self.assertTrue(out[0]["external_eu_bridge_is_inference"])
+        self.assertEqual(out, [], diagnostics)
 
-    def test_c_external_china_chip_control_can_enter(self):
+    def test_c_external_china_chip_control_stays_out(self):
         row = {
             "headline": "China restricts exports of advanced chipmaking materials",
             "_desc": "The Chinese government imposed new export controls affecting semiconductor research and production capacity.",
@@ -266,10 +262,7 @@ class V246CriteriaRepairTests(unittest.TestCase):
         }
         diagnostics = []
         out = S.anchor_news([row], [], diagnostics, allow_unanchored=True)
-        self.assertEqual(len(out), 1, diagnostics)
-        self.assertEqual(out[0]["eu_relevance"], "external")
-        self.assertTrue(out[0]["external_eu_bridge_is_inference"])
-        self.assertIn("Radar inference", out[0]["why_it_matters"])
+        self.assertEqual(out, [], diagnostics)
 
     def test_c_fast_deep_tech_discovery_queries_include_funding_round_language(self):
         queries = S.c_capital_infrastructure_fast_queries(72)

@@ -56,8 +56,8 @@ class V246ExpandedCGold(unittest.TestCase):
             "Le Monde", "lemonde.fr", "https://www.lemonde.fr/example", "2026-07-31",
         )
 
-    def test_external_research_collaboration_restriction(self):
-        self.assertAdmitted(
+    def test_external_research_collaboration_restriction_stays_out(self):
+        self.assertRejected(
             "US politicians push agencies to restrict research collaboration with China",
             "US lawmakers are pressing federal science agencies to restrict research collaboration with Chinese institutions in sensitive technology fields, potentially segmenting international scientific networks.",
             "Nature", "nature.com", "https://www.nature.com/example", "2026-07-16",
