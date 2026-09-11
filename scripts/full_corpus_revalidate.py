@@ -29,7 +29,7 @@ if str(ROOT) not in sys.path:
 
 import scripts.scan_radar as sr
 
-TOOL_VERSION = "v1.0-current-scanner-rules"
+TOOL_VERSION = "v1.1-current-scanner-rules"
 AB_KEYS = ("strand_a", "strand_b", sr.AB_ARCHIVE_KEY)
 C_KEYS = ("strand_c", sr.SIGNAL_ARCHIVE_KEY)
 PROTECTED_HIGHER_ORDER_KEYS = (
@@ -64,14 +64,37 @@ def source_tier(item: dict[str, Any]) -> int:
 
 
 def _ab_gate(item: dict[str, Any], refreshed: tuple[str, str, str] | None = None) -> dict[str, Any]:
+    """Run the scanner-owned saved-record gate, including document exclusions.
+
+    A refreshed page may provide richer text, but it must not bypass the current scanner's
+    hard document/URL exclusions (for example routine news/press-release landing pages).
+    ``_saved_item_passes`` is therefore authoritative both before and after refresh.
+    """
     if refreshed:
-        title, abstract, body = refreshed
-        return sr.gate_scope(
-            clean(title), clean(abstract), clean(body), source_tier(item), source_kind=source_kind(item)
-        )
+        title, abstract, body = (clean(x) for x in refreshed)
+    else:
+        title = clean(item.get("title"))
+        abstract = clean(item.get("summary"))
+        body = ""
+
+    link = clean(item.get("link"))
+    exclusion = sr.document_exclusion_reason(title, abstract, link) if title else "missing title"
+    if exclusion:
+        return {
+            "a_pass": False,
+            "b_pass": False,
+            "document_rejected": True,
+            "aboutness_reason": exclusion,
+        }
+
     # _saved_item_passes is the scanner-owned saved-record entrypoint. Asking for A returns
     # the complete evidence dictionary, including both a_pass and b_pass.
-    _ok, ev = sr._saved_item_passes(item, "a_pass")
+    if refreshed:
+        _ok, ev = sr._saved_item_passes(
+            item, "a_pass", title=title, abstract=abstract, body=body
+        )
+    else:
+        _ok, ev = sr._saved_item_passes(item, "a_pass")
     return ev or {}
 
 
@@ -109,6 +132,8 @@ def _gate_snapshot(ev: dict[str, Any]) -> dict[str, Any]:
     return {
         "a_pass": bool(ev.get("a_pass")),
         "b_pass": bool(ev.get("b_pass")),
+        "document_rejected": bool(ev.get("document_rejected")),
+        "language_rejected": bool(ev.get("language_rejected")),
         "aboutness_reason": clean(ev.get("aboutness_reason")),
         "centrality_reason": clean(ev.get("centrality_reason")),
         "eu_relevance": clean(ev.get("eu_relevance")),
