@@ -136,6 +136,38 @@ class V247SystemScopeAndCountryNews(unittest.TestCase):
         )
         self.assertFalse(ok, diagnostics)
 
+    def test_eu_ai_data_centre_commitment_is_C(self):
+        ok, diagnostics = self.c_admitted(
+            "EU launches €30B push to build 7 massive AI data centers",
+            "The programme launches seven AI data centres as new European compute capacity.",
+            "Politico Europe", "politico.eu",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_member_state_ai_factory_is_C(self):
+        ok, diagnostics = self.c_admitted(
+            "Baltics' first AI factory to open in Estonia",
+            "Estonia is opening the Baltic region's first AI factory to add computing capacity for research and companies.",
+            "ERR News", "err.ee",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_explicit_europe_sovereign_ai_financing_move_is_C(self):
+        ok, diagnostics = self.c_admitted(
+            "Mistral bags €3B to build Europe's sovereign AI champion",
+            "The financing will expand European AI model and compute capability.",
+            "The Register", "theregister.com",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_europe_plan_without_realised_change_still_is_not_C(self):
+        ok, diagnostics = self.c_admitted(
+            "Europe looks to challenge US dominance in space sector with €10 billion plan",
+            "Officials are considering a plan that could support future European space technology capacity.",
+            "France 24", "france24.com",
+        )
+        self.assertFalse(ok, diagnostics)
+
     def test_C_pre_novelty_cap_is_not_publication_cap(self):
         self.assertGreaterEqual(int(S.CONFIG.get("c_pre_novelty_candidate_cap", 0)), 20)
         self.assertLessEqual(int(S.CONFIG.get("c_min_new_per_successful_scan", 3)), 3)
