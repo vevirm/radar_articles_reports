@@ -13802,13 +13802,19 @@ def _merge_saved_snapshots(current: dict[str, Any], recovered: dict[str, Any]) -
 
 
 def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
-    """Load the cumulative corpus and protect it from an older full-repository upload.
+    """Load the cumulative corpus without ever mistaking a missing live file for a fresh repo.
 
-    Normal scans trust the live radar.json.  We also inspect recent Git history for
-    one strongest snapshot.  Only when that snapshot contains a larger corpus than
-    the bundled/current file do we merge it back.  This keeps normal scans fast while
-    allowing a true *whole repository* ZIP (including radar.json) to be uploaded
-    without erasing a newer A/B/C corpus already present in the repository history.
+    A valid live ``radar.json`` remains authoritative during ordinary scheduled/manual
+    scans.  Upgrade pushes may additionally union a stronger pre-upload snapshot from Git
+    history, as before.  The important recovery boundary is different: if the live file is
+    missing, unreadable, or structurally invalid, recent Git history is always consulted
+    *before* ``radar_seed.json`` is considered.  Otherwise a transient/deployment loss of
+    ``radar.json`` can silently turn an established cumulative repository into a fresh
+    200-item bootstrap.
+
+    An intentional fresh start is still respected when the live ``radar.json`` itself
+    carries the strict one-use ``fresh_repository_seed`` marker.  The seed file is only a
+    last-resort bootstrap when no recoverable cumulative live snapshot exists.
     """
     global LOAD_SANITIZE_REMOVED
     LOAD_SANITIZE_REMOVED = {"strand_a": 0, "strand_b": 0, "strand_c": 0}
@@ -13817,14 +13823,13 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
         for key in ("strand_a", "strand_b", "strand_c"):
             LOAD_SANITIZE_REMOVED[key] = LOAD_SANITIZE_REMOVED.get(key, 0) + int(removed.get(key, 0) or 0)
 
+    live_exists = OUT_PATH.is_file()
+    live_error = ""
     try:
         current = json.loads(OUT_PATH.read_text(encoding="utf-8"))
-    except Exception:
-        try:
-            current = json.loads(SEED_PATH.read_text(encoding="utf-8"))
-            print("No live radar.json yet; bootstrapping from radar_seed.json.", flush=True)
-        except Exception:
-            current = {}
+    except Exception as exc:
+        current = {}
+        live_error = clean_text(exc)
 
     if _valid_saved_radar(current):
         clean, removed = _sanitize_saved_radar(current)
@@ -13833,9 +13838,12 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
         if bad:
             print(f"Ignored {bad} malformed historical radar row(s) safely: {removed}.", flush=True)
 
+        # A fresh start is intentional only when the *live* radar file itself carries the
+        # strict bootstrap marker.  Merely falling back to radar_seed.json must never erase
+        # the fact that an established cumulative database exists in Git history.
         if is_fresh_repository_seed(clean):
             print(
-                "Fresh repository baseline detected: keeping the packaged 200-item starting corpus, "
+                "Fresh repository baseline detected in live radar.json: keeping the packaged 200-item starting corpus, "
                 "starting scanner state at zero, and intentionally ignoring pre-seed Git radar history. "
                 "Accepted new A/B evidence will accumulate publicly above 200.",
                 flush=True,
@@ -13882,19 +13890,38 @@ def load_previous(*, allow_git_recovery: bool = False) -> dict[str, Any]:
         clean.pop("repository_bundle_seed", None)
         return clean
 
-    recovered = _recover_radar_from_git(max_commits=40) if allow_git_recovery else {}
+    # Critical continuity guard: if the live file is absent/corrupt/empty, recover the
+    # established cumulative database from Git on *every* trigger, not only on push.  This
+    # recovery does not undo a deliberate cleanup because it runs only when the live file is
+    # not a valid saved radar at all.
+    recovered = _recover_radar_from_git(max_commits=80)
     if recovered:
         clean, removed = _sanitize_saved_radar(recovered)
         note_removed(removed)
+        reason = "missing" if not live_exists else "unreadable or invalid"
         print(
-            "Recovered prior cumulative radar corpus from Git history "
+            f"Live radar.json is {reason}; recovered prior cumulative radar corpus from Git history "
             f"(A={len(clean.get('strand_a', []))}, "
             f"B={len(clean.get('strand_b', []))}, "
             f"C={len(clean.get('strand_c', []))}).",
             flush=True,
         )
+        if live_error:
+            print(f"Live radar.json load detail: {live_error}", flush=True)
         if sum(removed.values()):
             print(f"Ignored malformed recovered rows safely: {removed}.", flush=True)
+        return clean
+
+    # No live cumulative state exists anywhere recoverable.  Only now may the packaged seed
+    # bootstrap a genuinely new repository.
+    try:
+        seed = json.loads(SEED_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        seed = {}
+    if _valid_saved_radar(seed):
+        clean, removed = _sanitize_saved_radar(seed)
+        note_removed(removed)
+        print("No recoverable cumulative radar found; bootstrapping from radar_seed.json.", flush=True)
         return clean
 
     clean, removed = _sanitize_saved_radar(current)
