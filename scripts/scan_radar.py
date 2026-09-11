@@ -8958,7 +8958,13 @@ def collect_priority_news_references(
             strict_strategic = strategic_pathway_candidate_text(text)
             shock_watch = possible_external_shock_candidate_text(text)
             formal_proposal = formal_proposal_is_public_signal(text, title, desc, canonical_source, r.url or url)
-            if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch or formal_proposal):
+            trusted_europe_publication, _, _ = trusted_european_c_publication_candidate(
+                title, desc, canonical_source, domain, r.url or url
+            )
+            if not title or not (
+                factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch
+                or formal_proposal or trusted_europe_publication
+            ):
                 continue
             signal_key = f"signal:{normalized(canonical_source)}:{norm_title(title)}"
             if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -8978,7 +8984,8 @@ def collect_priority_news_references(
                 "_shock_watch_discovery": shock_watch,
                 "_trusted_commentary_signal": bool(trusted_commentary),
                 "_formal_proposal_signal": bool(formal_proposal),
-                "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal) else "",
+                "_trusted_europe_publication": bool(trusted_europe_publication),
+                "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal or trusted_europe_publication) else "",
                 "priority_docx_id": clean_text(entry.get("candidate_id")),
             })
         except Exception as e:
@@ -15257,20 +15264,28 @@ def _saved_signal_passes(item: dict[str, Any]) -> bool:
     # Saved C is rechecked under the same two routes as new C. Use the saved source claim
     # (``what``/``core_message``) rather than Radar-written consequence prose.
     source_claim = c_saved_source_claim(item) or desc
-    relevance_ok, _scope_rel, _scope_hits = c_source_backed_eu_ri_relevance(
+    trusted_europe_publication, _trusted_rel, _trusted_hits = trusted_european_c_publication_candidate(
         headline, source_claim, source, '', link
     )
+    if trusted_europe_publication:
+        relevance_ok = True
+    else:
+        relevance_ok, _scope_rel, _scope_hits = c_source_backed_eu_ri_relevance(
+            headline, source_claim, source, '', link
+        )
     if not relevance_ok:
         return False
     themes = set(themes_for(f"{headline}. {source_claim}")) & WATCH_SIGNAL_THEMES
     if not themes and not c_fallback_watch_theme(headline, source_claim):
         return False
-    if _source_merit_is_eu_official(source, link) and not institutional_weak_signal_eligible(headline, source_claim, source, link):
+    if _source_merit_is_eu_official(source, link) and not trusted_europe_publication and not institutional_weak_signal_eligible(headline, source_claim, source, link):
         return False
     event_date = clean_text(item.get('c_event_date')) or c_event_date(item.get('date'))
     if not event_date:
         return False
     trusted_commentary = trusted_analytical_commentary_candidate(headline, source_claim, source, '', link)
+    if trusted_europe_publication:
+        return True
     status = clean_text(item.get('event_status')).upper() or signal_event_status(source_claim, headline, source_claim)
     formal_proposal = status == 'PROPOSED' and formal_proposal_is_public_signal(source_claim, headline, source_claim, source, link)
     actor = clean_text(item.get('c_event_actor')) or c_event_actor(headline, source_claim, source)
@@ -15949,6 +15964,134 @@ def trusted_independent_c_source(source: str = "", domain: str = "", link: str =
     return bool(_source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH)
 
 
+def configured_c_source_role(source: str = "", domain: str = "", link: str = "") -> str:
+    """Return the configured editorial role for a trusted Strand-C source."""
+    source_n = normalized(source)
+    domain_n = clean_text(domain).lower().removeprefix("www.")
+    if not domain_n and clean_text(link):
+        try:
+            domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
+        except Exception:
+            domain_n = ""
+    for row in configured_c_news_sources():
+        if not isinstance(row, dict):
+            continue
+        rn = normalized(row.get("name"))
+        rd = clean_text(row.get("domain")).lower().removeprefix("www.")
+        if (rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd))) or (rn and source_n and rn == source_n):
+            return normalized(row.get("role") or "independent_high_quality")
+    if _source_merit_is_eu_official(source, link):
+        return "official_primary"
+    return ""
+
+
+def trusted_european_c_publication_candidate(
+    headline: str,
+    desc: str = "",
+    source: str = "",
+    source_domain: str = "",
+    link: str = "",
+) -> tuple[bool, str, list[str]]:
+    """Broad Europe-first C route for dated current publications from trusted sources.
+
+    Strand C is a current-intelligence lane, not a second scholarly gate. Once the publisher
+    is on the configured trusted-source allow-list, a dated item may enter C when its own
+    headline/description establishes European/EU/member-state scope and substantive R&I or
+    strategic-technology relevance. It does not need an A anchor, a novelty phrase, or an
+    implementation-status verb. This deliberately includes proposals, consultations, policy
+    announcements and trusted analysis while retaining the existing exclusions for jobs, event
+    listings, evergreen funding pages, formal evidence products and unrelated foreign tech news.
+    """
+    if not bool(CONFIG.get("c_trusted_europe_publication_route_enabled", True)):
+        return False, "", []
+    if not trusted_independent_c_source(source, source_domain, link):
+        return False, "", []
+    if routine_signal_noise(headline, desc):
+        return False, "", []
+
+    semantic_headline = _strip_c_publisher_identity(headline, source, source_domain, link)
+    semantic_desc = _strip_c_publisher_identity(desc, source, source_domain, link)
+    full = clean_text(f"{semantic_headline}. {semantic_desc}")
+    if not full:
+        return False, "", []
+
+    rel, hits = eu_evidence(semantic_headline, semantic_desc, "")
+    official_eu = bool(_source_merit_is_eu_official(source, link))
+    explicit_europe = bool(re.search(
+        r"\b(?:EU|European Union|Europe|European|eurozone|EEA|Nordic|Nordics|Baltic|Baltics|Scandinavia|Scandinavian)\b",
+        full, re.I,
+    ))
+    member_hits = bounded_matches(full, MEMBER_STATE_SCOPE)
+    source_country = _configured_country_news_source(source, source_domain, link)
+    source_country_scope = False
+    if source_country and not member_hits and not explicit_europe and not eu_scope_admissible(rel):
+        # A curated national source may establish domestic scope when the item reads as a
+        # domestic R&I story and does not explicitly point to a different geopolitical actor.
+        foreign_geo = [x for x in distinct_matches(full, GEO_ACTORS + GEO_STRONG) if normalized(x) != normalized(source_country)]
+        domestic_cue = bool(re.search(
+            r"\b(?:government|ministry|minister|parliament|agency|university|universities|research council|national)\b",
+            full, re.I,
+        ))
+        source_country_scope = bool(domestic_cue and not foreign_geo)
+
+    scope_ok = bool(official_eu or eu_scope_admissible(rel) or explicit_europe or member_hits or source_country_scope)
+    if not scope_ok:
+        return False, rel, hits
+
+    topic_hits = list(dict.fromkeys(
+        _ri_hits(full)
+        + list(set(themes_for(full)) & WATCH_SIGNAL_THEMES)
+        + distinct_matches(full, [
+            "research", "science", "scientific", "innovation", "R&D", "R&I", "technology", "technological",
+            "university", "universities", "researcher", "researchers", "scientist", "scientists",
+            "Horizon Europe", "FP10", "European Research Area", "ERC", "EIC",
+            "artificial intelligence", "AI", "quantum", "semiconductor", "semiconductors", "chips",
+            "biotech", "biotechnology", "space", "deep tech", "deep-tech", "supercomputer",
+            "high-performance computing", "compute capacity", "data centre", "data center",
+            "research infrastructure", "digital infrastructure", "critical raw materials", "critical minerals",
+            "research security", "economic security", "strategic autonomy", "technology sovereignty",
+            "export control", "dual-use", "dual use", "technology transfer", "patent", "patents",
+            "intellectual property", "defence innovation", "defense innovation",
+        ])
+    ))
+    if not topic_hits:
+        return False, rel, hits
+
+    if official_eu and not eu_scope_admissible(rel):
+        rel = "supported"
+        hits = list(dict.fromkeys(list(hits) + [clean_text(source) or "EU official source"]))
+    elif member_hits and not eu_scope_admissible(rel):
+        rel = "member_state"
+        hits = list(dict.fromkeys(list(hits) + member_hits))
+    elif explicit_europe and not eu_scope_admissible(rel):
+        rel = "supported"
+        hits = list(dict.fromkeys(list(hits) + ["Europe"]))
+    elif source_country_scope and not eu_scope_admissible(rel):
+        rel = "member_state"
+        hits = list(dict.fromkeys(list(hits) + [source_country]))
+    return True, rel, hits[:8]
+
+
+def trusted_european_publication_status(
+    headline: str,
+    desc: str,
+    source: str = "",
+    source_domain: str = "",
+    link: str = "",
+) -> str:
+    """Status label for the broad trusted-Europe publication route."""
+    status = signal_event_status(f"{headline}. {desc}", headline, desc)
+    if status != "UNKNOWN":
+        return status
+    full = normalized(f"{headline}. {desc}")
+    if re.search(r"\b(?:proposal|proposes?|proposed|draft|consultation|call for evidence|roadmap|legislative proposal)\b", full, re.I):
+        return "PROPOSED"
+    role = configured_c_source_role(source, source_domain, link)
+    if role == "research_analysis" or re.search(r"\b(?:analysis|commentary|opinion|viewpoint)\b", full, re.I):
+        return "INTERPRETIVE"
+    return "OBSERVED"
+
+
 def configured_c_news_sources() -> list[dict[str, Any]]:
     """Return the editorial C-source universe without conflating discovery lanes.
 
@@ -16245,7 +16388,13 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             trusted_commentary = trusted_analytical_commentary_candidate(title, desc, source_name, source_domain)
             entry_link = clean_text(getattr(e, "link", ""))
             formal_proposal = formal_proposal_is_public_signal(text, title, desc, source_name, entry_link)
-            if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch or formal_proposal):
+            trusted_europe_publication, _, _ = trusted_european_c_publication_candidate(
+                title, desc, source_name, source_domain, entry_link
+            )
+            if not title or not (
+                factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch
+                or formal_proposal or trusted_europe_publication
+            ):
                 continue
             signal_key = f"signal:{normalized(source_name)}:{norm_title(title)}"
             if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -16265,7 +16414,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 "_shock_watch_discovery": shock_watch,
                 "_trusted_commentary_signal": bool(trusted_commentary),
                 "_formal_proposal_signal": bool(formal_proposal),
-                "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal) else "",
+                "_trusted_europe_publication": bool(trusted_europe_publication),
+                "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal or trusted_europe_publication) else "",
             })
         return items, None
 
@@ -16373,7 +16523,13 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                 shock_watch = possible_external_shock_candidate_text(text)
                 trusted_commentary = trusted_analytical_commentary_candidate(title, desc, name, domain, href)
                 formal_proposal = formal_proposal_is_public_signal(text, title, desc, name, href)
-                if not title or not (factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch or formal_proposal):
+                trusted_europe_publication, _, _ = trusted_european_c_publication_candidate(
+                    title, desc, name, domain, href
+                )
+                if not title or not (
+                    factual_news(title, desc) or trusted_commentary or strict_strategic or shock_watch
+                    or formal_proposal or trusted_europe_publication
+                ):
                     continue
                 signal_key = f"signal:{normalized(name)}:{norm_title(title)}"
                 if signal_key in KNOWN_SIGNAL_IDENTITIES:
@@ -16395,7 +16551,8 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
                     "_shock_watch_discovery": shock_watch,
                     "_trusted_commentary_signal": bool(trusted_commentary),
                     "_formal_proposal_signal": bool(formal_proposal),
-                    "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal) else "",
+                    "_trusted_europe_publication": bool(trusted_europe_publication),
+                    "_strategic_source_text": text if (strict_strategic or shock_watch or formal_proposal or trusted_europe_publication) else "",
                 })
             except Exception:
                 continue
@@ -17453,12 +17610,12 @@ def anchor_news(
     allow_unanchored: bool = False,
     precursor_watch: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Build Strand C as an independent weak-signal stream on the same core themes.
+    """Build Strand C as a trusted Europe-first current-intelligence stream.
 
-    A matching Strand-A publication is useful context when available, but is not an
-    admission requirement. This lets the radar retain a trustworthy early signal now and
-    manually connect it to later A evidence. The candidate must still independently pass
-    source, R&I-strategic bridge, watch-theme, novelty and claim-status checks.
+    Dated publications from configured trusted sources may enter when their own text establishes
+    EU/European/member-state scope and substantive R&I or strategic-technology relevance. An A
+    anchor is optional context, not an admission gate. External/global developments remain on the
+    stricter materiality bridge so C does not become a generic technology-news feed.
     """
     internals = [internalize_previous(x) for x in a_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != 'title:']
@@ -17503,10 +17660,14 @@ def anchor_news(
         if formal_evidence_product(headline, desc, source, link):
             diag(n, 'formal_evidence_not_c')
             continue
-        if (n.get('_institutional_signal') or _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH) and not institutional_weak_signal_eligible(
+        trusted_europe_publication, trusted_scope_rel, trusted_scope_hits = trusted_european_c_publication_candidate(
+            headline, desc, source, clean_text(n.get('source_domain', '')), link
+        )
+        trusted_europe_publication = bool(n.get('_trusted_europe_publication')) or trusted_europe_publication
+        if (n.get('_institutional_signal') or _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH) and not trusted_europe_publication and not institutional_weak_signal_eligible(
             headline, desc, source, link
         ):
-            diag(n, 'institutional_page_not_weak_signal')
+            diag(n, 'institutional_page_not_current_publication')
             continue
         trusted_commentary = bool(n.get('_trusted_commentary_signal')) or trusted_analytical_commentary_candidate(
             headline, desc, source, clean_text(n.get('source_domain', '')), link
@@ -17515,9 +17676,12 @@ def anchor_news(
             f"{headline}. {desc}", headline, desc, source, link
         )
         ntext=n.get('headline','')+' '+n.get('_desc','')
-        c_relevance_ok, c_scope_rel, c_scope_hits = c_source_backed_eu_ri_relevance(
-            headline, desc, source, clean_text(n.get('source_domain', '')), link
-        )
+        if trusted_europe_publication:
+            c_relevance_ok, c_scope_rel, c_scope_hits = True, trusted_scope_rel, trusted_scope_hits
+        else:
+            c_relevance_ok, c_scope_rel, c_scope_hits = c_source_backed_eu_ri_relevance(
+                headline, desc, source, clean_text(n.get('source_domain', '')), link
+            )
         if not c_relevance_ok:
             diag(n, 'no_source_backed_eu_ri_relevance')
             continue
@@ -17546,23 +17710,49 @@ def anchor_news(
             if not c_precursor_promotion_evidence(headline, _signal_what_claim(desc, headline), desc):
                 pre_event_status = 'PROPOSED'
         public_event = public_signal_event_status(pre_event_status) or (pre_event_status == 'PROPOSED' and formal_proposal)
+        source_role = configured_c_source_role(source, clean_text(n.get('source_domain', '')), link)
         analysis_specific = bool(
             trusted_commentary
             and (reframing_signal_text(ntext) or relationship_novelty_dimensions(ntext))
+        )
+        trusted_analysis_has_hard_event = bool(re.search(
+            r"\b(?:announces?|announced|launches?|launched|proposes?|proposed|adopts?|adopted|approves?|approved|"
+            r"signs?|signed|invests?|invested|funds?|funded|cuts?|cut|increases?|increased|delays?|delayed|"
+            r"restricts?|restricted|bans?|banned|joins?|joined|withdraws?|withdrew|opened|builds?|built|"
+            r"expands?|expanded|passes?|passed|votes?|voted|allocates?|allocated|commits?|committed)\b",
+            normalized(headline), re.I,
+        ))
+        trusted_analysis_publication = bool(
+            trusted_europe_publication
+            and (source_role == 'research_analysis' or trusted_commentary)
+            and not trusted_analysis_has_hard_event
         )
         event_route = c_public_event_route_ok(
             headline, desc, pre_event_status, event_actor,
             bool(pre_event_status == 'PROPOSED' and formal_proposal),
         )
-        analysis_route = bool(analysis_specific)
-        if not (event_route or analysis_route):
+        analysis_route = bool(analysis_specific or trusted_analysis_publication)
+        trusted_publication_route = bool(trusted_europe_publication)
+        # Keep mere future intentions out even on trusted European sources. C now accepts
+        # published proposals/plans and trusted current analysis, but a story that only says
+        # an institution *intends to present* something later remains precursor material until
+        # the proposal/plan is actually published, tabled, launched or otherwise made concrete.
+        if (
+            trusted_publication_route
+            and pre_event_status == 'PROPOSED'
+            and signal_is_only_intention_or_echo(headline, desc)
+            and not formal_proposal
+        ):
+            diag(n, 'future_intention_precursor_only')
+            continue
+        if not (event_route or analysis_route or trusted_publication_route):
             diag(n, 'no_concrete_event_or_specific_analysis')
             continue
         novelty_dimensions=relationship_novelty_dimensions(ntext)
         if not novelty_dimensions and analysis_route:
-            novelty_dimensions = ['interpretive reframing']
-        if not novelty_dimensions and event_route:
-            novelty_dimensions = ['concrete dated development']
+            novelty_dimensions = ['trusted European analysis'] if trusted_publication_route else ['interpretive reframing']
+        if not novelty_dimensions and (event_route or trusted_publication_route):
+            novelty_dimensions = ['trusted European current publication'] if trusted_publication_route else ['concrete dated development']
         ntok=tokens(ntext)
         nentities=set(n.get('_entities',[]))
         n_a_ontology=ontology_phrase_hits(ntext, 'a', {1,2})
@@ -17674,8 +17864,15 @@ def anchor_news(
         if not what:
             diag(n, 'no_substantive_signal_claim')
             continue
-        event_status = 'INTERPRETIVE' if analysis_route and not event_route else signal_event_status(what, headline, desc)
-        if event_route and not public_signal_event_status(event_status):
+        if trusted_publication_route:
+            event_status = trusted_european_publication_status(
+                headline, desc, source, clean_text(n.get('source_domain', '')), link
+            )
+            if analysis_route and (not event_route or trusted_analysis_publication):
+                event_status = 'INTERPRETIVE'
+        else:
+            event_status = 'INTERPRETIVE' if analysis_route and not event_route else signal_event_status(what, headline, desc)
+        if event_route and not trusted_publication_route and not public_signal_event_status(event_status):
             if event_status != 'PROPOSED' or not formal_proposal_is_public_signal(what, headline, desc, source, link):
                 diag(n, f'event_status_{event_status.lower()}_not_public')
                 continue
@@ -17705,7 +17902,8 @@ def anchor_news(
             'realisation_status':realisation_status_for(what or text, item_type=kind, event_status=event_status),
             'c_event_actor':event_actor or clean_text(source),
             'c_event_date':event_date,
-            'c_admission_route':'event' if event_route else 'analysis',
+            'c_admission_route':'analysis' if analysis_route and (not event_route or trusted_analysis_publication) else 'event',
+            'c_admission_basis':'trusted_europe_publication' if trusted_publication_route else 'strict_signal',
             'eu_relevance':c_scope_rel,
             'eu_evidence':c_scope_hits[:6],
             'what':what,
@@ -17722,7 +17920,7 @@ def anchor_news(
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': 'dated source-backed European R&I event OR material external R&I/technology development with a defensible Europe-relevance bridge; A anchor optional',
+            'c_admission_rule': 'trusted dated European/EU/member-state R&I publication OR strict material external R&I/technology development; A anchor optional',
             'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
             'strategic_classification_source': 'source_text',
             '_anchor_score':score,
@@ -17731,7 +17929,7 @@ def anchor_news(
             diag(n, 'duplicate_with_current_c_batch')
             continue
         anchored.append(item)
-        diag(n, 'accepted_anchored' if anchor else 'accepted_unanchored', 'accepted')
+        diag(n, ('accepted_trusted_europe_publication' if trusted_publication_route else ('accepted_anchored' if anchor else 'accepted_unanchored')), 'accepted')
     anchored.sort(key=lambda x:(x.get('_anchor_score',0),x.get('date','')),reverse=True)
     for x in anchored:x.pop('_anchor_score',None)
     # Do not apply the publication cap before saved-C novelty is known.  Previously MAX_C
