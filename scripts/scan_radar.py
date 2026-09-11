@@ -15923,6 +15923,73 @@ def trusted_unlabelled_commentary_source(source: str = "", domain: str = "", lin
     return False
 
 
+# Strand C is intentionally a Europe/EU current-intelligence lane.  The scanner may
+# discover global material, but C publication itself is restricted to accountable
+# Europe-oriented sources.  This prevents regional non-European outlets from entering C
+# merely because an article mentions Europe or can be attached to a Strand-A anchor.
+_C_EUROPE_C_SOURCE_NAMES = {
+    "science|business", "research professional news", "reuters", "financial times",
+    "politico europe", "euractiv", "euobserver", "euronews", "the economist",
+    "nature", "times higher education", "sifted", "the register", "handelsblatt",
+    "le monde", "nrc", "el país", "european commission", "eu research & innovation",
+    "eu digital strategy", "council of the eu", "european parliament",
+    "joint research centre", "oecd", "cesaer", "interface europe", "eenews europe",
+    "lse european politics and policy", "bruegel", "ceps", "merics",
+    "rathenau instituut", "chatham house", "swp berlin", "clingendael", "voxeu",
+    "ecfr", "centre for european reform", "rusi", "nato", "european space agency",
+    "cern", "european patent office", "european investment bank",
+}
+_C_EUROPE_C_SOURCE_DOMAINS = {
+    "sciencebusiness.net", "researchprofessionalnews.com", "reuters.com", "ft.com",
+    "politico.eu", "euractiv.com", "euobserver.com", "euronews.com", "economist.com",
+    "nature.com", "timeshighereducation.com", "sifted.eu", "theregister.com",
+    "handelsblatt.com", "lemonde.fr", "nrc.nl", "elpais.com", "commission.europa.eu",
+    "research-and-innovation.ec.europa.eu", "digital-strategy.ec.europa.eu",
+    "consilium.europa.eu", "europarl.europa.eu", "joint-research-centre.ec.europa.eu",
+    "oecd.org", "cesaer.org", "interface-eu.org", "eenewseurope.com", "blogs.lse.ac.uk",
+    "bruegel.org", "ceps.eu", "merics.org", "rathenau.nl", "chathamhouse.org",
+    "swp-berlin.org", "clingendael.org", "cepr.org", "ecfr.eu", "cer.eu", "rusi.org",
+    "nato.int", "esa.int", "cern.ch", "epo.org", "eib.org",
+}
+_C_NON_EUROPE_C_BLOCKED_DOMAINS = {"scmp.com", "asia.nikkei.com"}
+_C_NON_EUROPE_C_BLOCKED_NAMES = {"south china morning post", "nikkei asia"}
+
+def trusted_europe_c_source(source: str = "", domain: str = "", link: str = "") -> bool:
+    """Return True only for the approved Europe/EU Strand-C source universe.
+
+    All country-news sources configured for C are European national/public-service outlets.
+    The compact named/domain allow-list adds Europe-oriented specialist, analytical and
+    transnational sources plus accountable European institutions.  Explicitly regional
+    non-European outlets are denied even when a headline itself mentions Europe.
+    """
+    source_n = normalized(source)
+    domain_n = clean_text(domain).lower().removeprefix("www.")
+    if not domain_n and clean_text(link):
+        try:
+            domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
+        except Exception:
+            domain_n = ""
+    if any(domain_n == d or domain_n.endswith("." + d) for d in _C_NON_EUROPE_C_BLOCKED_DOMAINS):
+        return False
+    if source_n in _C_NON_EUROPE_C_BLOCKED_NAMES:
+        return False
+    if _source_merit_is_eu_official(source, link):
+        return True
+    if source_n in _C_EUROPE_C_SOURCE_NAMES:
+        return True
+    if any(domain_n == d or domain_n.endswith("." + d) for d in _C_EUROPE_C_SOURCE_DOMAINS):
+        return True
+    # European national/public-service layer: every configured country-news row is curated
+    # explicitly for this lane, so matching one is sufficient source provenance.
+    for row in CONFIG.get("country_news_sources", []) or []:
+        if not isinstance(row, dict):
+            continue
+        rn = normalized(row.get("name")); rd = clean_text(row.get("domain")).lower().removeprefix("www.")
+        if (rn and source_n == rn) or (rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd))):
+            return True
+    return False
+
+
 def trusted_independent_c_source(source: str = "", domain: str = "", link: str = "") -> bool:
     """Whether an unanchored C item comes from a configured accountable source.
 
@@ -16004,7 +16071,7 @@ def trusted_european_c_publication_candidate(
     """
     if not bool(CONFIG.get("c_trusted_europe_publication_route_enabled", True)):
         return False, "", []
-    if not trusted_independent_c_source(source, source_domain, link):
+    if not trusted_europe_c_source(source, source_domain, link):
         return False, "", []
     if routine_signal_noise(headline, desc):
         return False, "", []
@@ -16116,6 +16183,10 @@ def configured_c_news_sources() -> list[dict[str, Any]]:
             name = normalized(row.get("name"))
             key = domain or name
             if not key or key in seen:
+                continue
+            # Do not spend discovery budget on sources that can never publish into the
+            # Europe/EU Strand-C lane.
+            if not trusted_europe_c_source(clean_text(row.get("name")), domain, ""):
                 continue
             seen.add(key)
             rows.append(row)
@@ -17219,27 +17290,9 @@ def c_source_backed_eu_ri_relevance(
         if signal_headline_has_current_change(headline) or relationship_novelty_dimensions(full):
             return True, 'member_state', list(dict.fromkeys(member_hits + _ri_hits(full)))[:8]
 
-    # External route: require a real R&I/strategic mechanism in the source plus material
-    # change/evidence language. Bare AI/company/energy vocabulary is not enough.
-    external_actor = bool(distinct_matches(full, GEO_ACTORS)) or contains_any(full, [
-        'white house', 'congress', 'beijing', 'chinese government', 'us government', 'u.s. government',
-        'nsf', 'nih', 'darpa', 'mext', 'taiwan', 'india', 'korea', 'japan',
-    ])
-    strategic_ri = weak_signal_ri_strategic_bridge_ok(headline, desc)
-    external_materiality_ok, external_materiality_hits = c_external_materiality_channel(full)
-    material_change = bool(
-        signal_headline_has_current_change(headline)
-        or relationship_novelty_dimensions(full)
-        or reframing_signal_text(full)
-    )
-    if ri_ok and strategic_ri and external_materiality_ok and material_change and (external_actor or distinct_matches(full, GEO_STRONG)):
-        ext_hits = list(dict.fromkeys(
-            external_materiality_hits
-            + distinct_matches(full, GEO_ACTORS + GEO_STRONG)
-            + _ri_hits(full)
-            + a_structural_state_variable_evidence(headline, desc, '', 'general')[1]
-        ))[:8]
-        return True, 'external', ext_hits
+    # No external/global publication route in Strand C.  External developments may still
+    # inform A/shock reasoning elsewhere, but C itself is reserved for source-backed Europe/EU
+    # current intelligence from the approved source universe.
     return False, rel, hits
 
 
@@ -17614,8 +17667,8 @@ def anchor_news(
 
     Dated publications from configured trusted sources may enter when their own text establishes
     EU/European/member-state scope and substantive R&I or strategic-technology relevance. An A
-    anchor is optional context, not an admission gate. External/global developments remain on the
-    stricter materiality bridge so C does not become a generic technology-news feed.
+    anchor is optional context, not an admission gate. External/global-source publication is not
+    a Strand-C route: C is reserved for trusted Europe/EU-oriented sources.
     """
     internals = [internalize_previous(x) for x in a_corpus if isinstance(x, dict)]
     internals = [x for x in internals if identity(x) != 'title:']
@@ -17651,6 +17704,10 @@ def anchor_news(
         desc = n.get('_desc','')
         source = n.get('source','')
         link = n.get('link','')
+        source_domain = clean_text(n.get('source_domain', ''))
+        if not trusted_europe_c_source(source, source_domain, link):
+            diag(n, 'source_not_europe_trusted')
+            continue
         if not c_date_basis_is_event_usable(n):
             diag(n, 'approximate_sitemap_date_not_c_event_date')
             continue
@@ -17661,7 +17718,7 @@ def anchor_news(
             diag(n, 'formal_evidence_not_c')
             continue
         trusted_europe_publication, trusted_scope_rel, trusted_scope_hits = trusted_european_c_publication_candidate(
-            headline, desc, source, clean_text(n.get('source_domain', '')), link
+            headline, desc, source, source_domain, link
         )
         trusted_europe_publication = bool(n.get('_trusted_europe_publication')) or trusted_europe_publication
         if (n.get('_institutional_signal') or _source_merit_is_eu_official(source, link) or source in _SOURCE_MERIT_PUBLIC_HIGH) and not trusted_europe_publication and not institutional_weak_signal_eligible(
@@ -17670,7 +17727,7 @@ def anchor_news(
             diag(n, 'institutional_page_not_current_publication')
             continue
         trusted_commentary = bool(n.get('_trusted_commentary_signal')) or trusted_analytical_commentary_candidate(
-            headline, desc, source, clean_text(n.get('source_domain', '')), link
+            headline, desc, source, source_domain, link
         )
         formal_proposal = bool(n.get('_formal_proposal_signal')) or formal_proposal_is_public_signal(
             f"{headline}. {desc}", headline, desc, source, link
@@ -17680,7 +17737,7 @@ def anchor_news(
             c_relevance_ok, c_scope_rel, c_scope_hits = True, trusted_scope_rel, trusted_scope_hits
         else:
             c_relevance_ok, c_scope_rel, c_scope_hits = c_source_backed_eu_ri_relevance(
-                headline, desc, source, clean_text(n.get('source_domain', '')), link
+                headline, desc, source, source_domain, link
             )
         if not c_relevance_ok:
             diag(n, 'no_source_backed_eu_ri_relevance')
@@ -17828,16 +17885,6 @@ def anchor_news(
             anchor=f"{a['title']} (Strand A)"
             anchor_basis='publication'
         text=ntext
-        if c_scope_rel == 'external':
-            external_bridge, bridge_hits = c_external_europe_bridge(text, a_corpus)
-            if external_bridge and not anchor:
-                domain = _external_shock_domain(text)
-                a = next((x for x in internals if _anchor_supports_external_domain(x, domain)), None)
-                if a:
-                    anchor=f"{a['title']} (Strand A)"
-                    anchor_basis='publication-external-materiality-context'
-                    shared_themes=sorted(nthemes)[:1]
-                    score=4.25
         # A is optional for C, but independence raises the source bar. The candidate has
         # already passed its own R&I-strategic bridge/theme/novelty tests; without an A anchor
         # it must also come from a configured trusted media/research-analysis or official source.
@@ -17920,7 +17967,7 @@ def anchor_news(
             'reframing_dimensions': novelty_dimensions,
             'strand_a_phrase_hits': [clean_text(x.get('phrase')) for x in n_a_ontology[:6]],
             'c_retrieval_phrase_hits': [clean_text(x.get('phrase')) for x in n_c_retrieval[:6]],
-            'c_admission_rule': 'trusted dated European/EU/member-state R&I publication OR strict material external R&I/technology development; A anchor optional',
+            'c_admission_rule': 'trusted dated Europe/EU/member-state R&I publication from an approved Europe-oriented source; A anchor optional',
             'strategic_classification': classify_strategic_source_text(clean_text(f"{headline}. {desc}")),
             'strategic_classification_source': 'source_text',
             '_anchor_score':score,
@@ -21862,7 +21909,30 @@ def main() -> int:
 
     final_c_diagnostics: list[dict[str, str]] = []
     current_c = anchor_news(news, strand_a, final_c_diagnostics, precursor_watch=previous_precursor_watch)
-    prev_c = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
+    prev_c_all = previous.get("strand_c", []) if isinstance(previous.get("strand_c"), list) else []
+    # Apply the Europe-source contract to retained C as well as new discovery.  Otherwise
+    # previously admitted SCMP/Nikkei/external-source rows would remain visible until natural
+    # expiry even after the policy changed. A/B-only quick runs preserve C byte-for-byte.
+    source_policy_removed_c: list[dict[str, Any]] = []
+    if RADAR_QUICK_STRAND in {"A", "B"}:
+        prev_c = prev_c_all
+    else:
+        prev_c = []
+        for _old_c in prev_c_all:
+            if not isinstance(_old_c, dict):
+                continue
+            _src = clean_text(_old_c.get("source", ""))
+            _link = clean_text(_old_c.get("link", ""))
+            _domain = clean_text(_old_c.get("source_domain", ""))
+            if not _domain and _link:
+                try:
+                    _domain = (urlparse(_link).hostname or "").lower().removeprefix("www.")
+                except Exception:
+                    _domain = ""
+            if trusted_europe_c_source(_src, _domain, _link):
+                prev_c.append(_old_c)
+            else:
+                source_policy_removed_c.append(_old_c)
     if RADAR_QUICK_STRAND in {"A", "B"}:
         current_c = []
         final_c_diagnostics = []
@@ -21915,6 +21985,8 @@ def main() -> int:
     # the prior accepted row before writing radar.json. Expiry/retirement may already have
     # archived it earlier; archive_signal_rows is identity-idempotent.
     signal_archive = previous.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(previous.get(SIGNAL_ARCHIVE_KEY), list) else []
+    if source_policy_removed_c:
+        signal_archive = archive_signal_rows(signal_archive, source_policy_removed_c, "source_not_europe_trusted", now_iso)
     dropped_previous_c = []
     for old in prev_c:
         if not isinstance(old, dict):
