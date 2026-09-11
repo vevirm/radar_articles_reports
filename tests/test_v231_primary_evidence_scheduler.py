@@ -345,6 +345,39 @@ class V231PrimaryEvidenceSchedulerTests(unittest.TestCase):
         self.assertTrue(any(x.get('title') == extra['title'] for x in loaded.get('strand_a', [])))
         self.assertGreaterEqual(len(loaded.get('strand_a', [])), len(current['strand_a']) + 1)
 
+    def test_missing_live_radar_recovers_cumulative_git_before_seed_on_schedule(self):
+        baseline = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
+        recovered = {
+            'strand_a': [copy.deepcopy(baseline['strand_a'][0])],
+            'strand_b': [copy.deepcopy(baseline['strand_b'][0])],
+            'strand_c': [],
+            'last_updated': '2026-09-11T02:00:00Z',
+            'first_scan_complete': True,
+            'scan_state': {'version': sr.INCREMENTAL_STATE_VERSION},
+            'scan_history': [{'completed_at': '2026-09-11T02:00:00Z'}],
+        }
+        seed = {
+            'fresh_repository_seed': {'version': 'v1'},
+            'strand_a': [copy.deepcopy(baseline['strand_a'][0]) for _ in range(sr.FRESH_BASELINE_AB_COUNT)],
+            'strand_b': [],
+            'strand_c': [],
+        }
+
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            out = td / 'radar.json'  # deliberately absent
+            seed_path = td / 'radar_seed.json'
+            seed_path.write_text(json.dumps(seed), encoding='utf-8')
+            with mock.patch.object(sr, 'OUT_PATH', out), \
+                 mock.patch.object(sr, 'SEED_PATH', seed_path), \
+                 mock.patch.object(sr, '_recover_radar_from_git', return_value=recovered):
+                loaded = sr.load_previous(allow_git_recovery=False)
+
+        self.assertTrue(loaded.get('first_scan_complete'))
+        self.assertEqual(len(loaded.get('strand_a', [])), 1)
+        self.assertEqual(len(loaded.get('strand_b', [])), 1)
+        self.assertNotIn('fresh_repository_seed', loaded)
+
     def test_historical_whole_repo_push_unions_preupload_archive(self):
         import historical.scan_historical as hs
 
