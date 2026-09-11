@@ -16851,7 +16851,7 @@ def weak_signal_ri_strategic_bridge_ok(headline: str, desc: str, themes: Iterabl
     full = clean_text(f"{headline}. {desc}")
     if not full:
         return False
-    ri_mechanism = contains_any(full, [
+    ri_mechanism = bool(contains_any(full, [
         "research", "scientific", "science", "researcher", "researchers", "scientist", "scientists",
         "university", "universities", "laboratory", "laboratories", "r&d", "innovation", "innovative",
         "technology", "technological", "semiconductor", "chip", "chips", "quantum", "biotech",
@@ -16859,18 +16859,21 @@ def weak_signal_ri_strategic_bridge_ok(headline: str, desc: str, themes: Iterabl
         "standards", "research infrastructure", "research infrastructures", "research funding",
         "innovation funding", "venture capital", "deep tech", "dual use", "dual-use",
         "space technology", "space sector", "satellite", "satellites", "launch vehicle", "iris2", "iris²",
-    ])
+        "data centre", "data centres", "data center", "data centers", "ai factory", "ai factories",
+        "ai gigafactory", "ai gigafactories",
+    ]) or re.search(r"\bAI\b", full, re.I))
     if not ri_mechanism:
         return False
-    strategic_move = contains_any(full, [
+    strategic_move = bool(contains_any(full, [
         "export control", "restriction", "restrict", "ban", "sanction", "blacklist", "screening",
         "security", "dependency", "dependence", "supply chain", "critical material", "critical mineral",
         "investment", "invest", "funding", "fund", "subsidy", "partnership", "collaboration",
         "cooperation", "agreement", "association", "talent", "brain drain", "brain gain", "visa",
-        "recruit", "return", "competition", "competitiveness", "capability", "capacity", "sovereignty",
+        "recruit", "return", "competition", "competitiveness", "capability", "capacity", "sovereignty", "sovereign",
         "strategic", "geopolit", "de-risk", "derisk", "technology transfer", "standard setting",
         "standardisation", "standardization", "acquisition", "factory", "facility", "programme", "program",
-    ])
+        "funding round", "raises", "raised",
+    ]) or re.search(r"(?:€|\$|£)\s?\d|\b\d+(?:[.,]\d+)?\s?(?:billion|million|bn|mn)\b", full, re.I))
     external_actor = contains_any(full, GEO_ACTORS + [
         "canada", "canadian", "australia", "australian", "singapore", "israel", "israeli",
         "switzerland", "swiss", "norway", "norwegian", "united arab emirates", "saudi arabia",
@@ -17017,12 +17020,27 @@ def c_source_backed_eu_ri_relevance(
             'space technology', 'space sector', 'satellite', 'satellites', 'launch vehicle', 'iris2', 'iris²',
             'quantum', 'quantum technology', 'quantum tech', 'semiconductor', 'semiconductors', 'chip', 'chips',
             'artificial intelligence infrastructure', 'ai infrastructure', 'high-performance computing', 'hpc',
+            'data centre', 'data centres', 'data center', 'data centers', 'cloud infrastructure', 'cloud capacity',
             'research cooperation', 'research collaboration', 'scientific collaboration', 'scientific cooperation',
             'defence innovation', 'defense innovation', 'dual-use innovation', 'biotechnology', 'biotech',
         ])
-    )
+    ) or bool(re.search(r"\bAI\b", full, re.I))
     if scope_ok and ri_ok:
         return True, rel, hits
+
+    # C is intentionally more responsive than structural Strand A.  A source that explicitly
+    # says Europe/European and reports a concrete strategic R&I/technology change should not be
+    # rejected merely because the general EU-evidence classifier labels the geographic word
+    # alone as ``unclear``.  Keep this route narrow: the item must independently carry an R&I
+    # mechanism, a strategic mechanism and a present change/relationship signal in its own text.
+    europe_named = bool(re.search(r"\b(?:Europe|European)\b", full, re.I))
+    if (
+        europe_named
+        and ri_ok
+        and weak_signal_ri_strategic_bridge_ok(headline, desc)
+        and (signal_headline_has_current_change(headline) or relationship_novelty_dimensions(full))
+    ):
+        return True, 'supported', list(dict.fromkeys(list(hits) + ['Europe']))[:8]
 
     # A single member state is intentionally too narrow for structural Strand A, but it can
     # be a valid Strand C signal when the source reports a concrete strategic R&I change.
