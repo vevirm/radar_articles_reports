@@ -84,6 +84,7 @@ jobs:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           RADAR_QUICK_SCAN: 'true'
           RADAR_SCAN_BUDGET_SECONDS: '600'
+          RADAR_QUICK_STRAND_MIN_RUNTIME_SECONDS: '540'
           RADAR_QUICK_STRAND: ${{ inputs.strand }}
           RADAR_RESCUE_MODE: 'false'
         run: python scripts/scan_radar.py
