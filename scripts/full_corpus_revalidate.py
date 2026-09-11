@@ -29,7 +29,7 @@ if str(ROOT) not in sys.path:
 
 import scripts.scan_radar as sr
 
-TOOL_VERSION = "v1.1-current-scanner-rules"
+TOOL_VERSION = "v1.2-current-scanner-rules"
 AB_KEYS = ("strand_a", "strand_b", sr.AB_ARCHIVE_KEY)
 C_KEYS = ("strand_c", sr.SIGNAL_ARCHIVE_KEY)
 PROTECTED_HIGHER_ORDER_KEYS = (
@@ -147,14 +147,46 @@ def _gate_snapshot(ev: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _refresh_failed_ab(items: list[dict[str, Any]], *, workers: int, enabled: bool) -> tuple[dict[int, tuple[str, str, str] | None], dict[str, int]]:
-    results: dict[int, tuple[str, str, str] | None] = {}
-    stats = {"attempted": 0, "succeeded": 0, "unavailable": 0}
+def _openalex_exact_doi_fallback(item: dict[str, Any]) -> tuple[str, str, str] | None:
+    """Recover scholarly source text by exact DOI using the scanner's own helper.
+
+    This is retrieval resilience only. Admission still goes through ``_saved_item_passes``
+    and therefore uses the repository's current document, EU-scope, R&I and A/B rules.
+    """
+    doi = sr._snowball_seed_doi(item)
+    if not doi:
+        return None
+    timeout = int(sr.CONFIG.get("inherited_corpus_audit_timeout_seconds", 8))
+    abstract = clean(sr.openalex_abstract_by_doi(doi, timeout=timeout))
+    if not abstract:
+        return None
+    return clean(item.get("title")), abstract, ""
+
+
+def _refresh_one_ab(item: dict[str, Any]) -> tuple[str, str, str, str] | None:
+    """Use the scanner's normal audit refresh, then its exact-DOI OpenAlex helper."""
+    try:
+        primary = sr._audit_refresh_document(item)
+    except Exception:
+        primary = None
+    if primary:
+        return (*primary, "scanner_refresh")
+    fallback = _openalex_exact_doi_fallback(item)
+    if fallback:
+        return (*fallback, "openalex_exact_doi")
+    return None
+
+def _refresh_failed_ab(items: list[dict[str, Any]], *, workers: int, enabled: bool) -> tuple[dict[int, tuple[Any, ...] | None], dict[str, int]]:
+    results: dict[int, tuple[Any, ...] | None] = {}
+    stats = {
+        "attempted": 0, "succeeded": 0, "unavailable": 0,
+        "scanner_refresh_succeeded": 0, "openalex_exact_doi_succeeded": 0,
+    }
     if not enabled or not items:
         return results, stats
     stats["attempted"] = len(items)
     with cf.ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
-        futures = {ex.submit(sr._audit_refresh_document, item): idx for idx, item in enumerate(items)}
+        futures = {ex.submit(_refresh_one_ab, item): idx for idx, item in enumerate(items)}
         for fut in cf.as_completed(futures):
             idx = futures[fut]
             try:
@@ -164,6 +196,11 @@ def _refresh_failed_ab(items: list[dict[str, Any]], *, workers: int, enabled: bo
             results[idx] = val
             if val:
                 stats["succeeded"] += 1
+                mode = clean(val[3]) if len(val) >= 4 else "scanner_refresh"
+                if mode == "openalex_exact_doi":
+                    stats["openalex_exact_doi_succeeded"] += 1
+                else:
+                    stats["scanner_refresh_succeeded"] += 1
             else:
                 stats["unavailable"] += 1
     return results, stats
@@ -452,8 +489,10 @@ def revalidate_document(
         meta = ab_meta[meta_idx]
         refreshed = refresh_results.get(j)
         if refreshed:
-            meta["final_ev"] = _ab_gate(meta["row"], refreshed)
-            meta["refresh"] = "refreshed"
+            refresh_doc = tuple(refreshed[:3])
+            refresh_mode = clean(refreshed[3]) if len(refreshed) >= 4 else "scanner_refresh"
+            meta["final_ev"] = _ab_gate(meta["row"], refresh_doc)
+            meta["refresh"] = refresh_mode
         else:
             meta["refresh"] = "unavailable" if network_refresh else "disabled"
 
