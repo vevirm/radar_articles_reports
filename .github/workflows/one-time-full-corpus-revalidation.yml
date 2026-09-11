@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Determine first run or v1.0 correction rerun
+      - name: Determine first run or final correction rerun
         shell: bash
         run: |
           set -euo pipefail
@@ -41,7 +41,7 @@ jobs:
           print((data.get('full_corpus_revalidation') or {}).get('tool_version', ''))
           PY
           )"
-          if [[ "$tool_version" != 'v1.0-current-scanner-rules' ]]; then
+          if [[ "$tool_version" != 'v1.0-current-scanner-rules' && "$tool_version" != 'v1.1-current-scanner-rules' ]]; then
             echo '::error::The corrected one-time full corpus revalidation has already completed. Nothing was changed.'
             echo 'Use RESTORE Corpus Backup if that completed run must be undone.'
             exit 1
@@ -49,7 +49,7 @@ jobs:
 
           latest='backups/one-time-full-corpus-revalidation/LATEST_BACKUP.txt'
           if [[ ! -f "$latest" ]]; then
-            echo '::error::Cannot run the v1.1 correction because the original pre-revalidation backup pointer is missing.'
+            echo '::error::Cannot run the final v1.2 correction because the original pre-revalidation backup pointer is missing.'
             exit 1
           fi
           backup="$(cat "$latest")"
@@ -65,7 +65,7 @@ jobs:
           fi
           echo 'REVALIDATION_MODE=correction' >> "$GITHUB_ENV"
           echo "REVALIDATION_BACKUP=$backup" >> "$GITHUB_ENV"
-          echo 'A v1.0 completed run was found. The corrected v1.1 tool will re-run from the exact original backup.'
+          echo 'A completed v1.0/v1.1 run was found. The final v1.2 tool will re-run from the exact original backup.'
 
       - name: Set up Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
@@ -118,13 +118,13 @@ jobs:
           git commit -m 'Backup Radar corpus before full revalidation'
           git push
 
-      - name: Restore exact original backup in runner for v1.0 correction
+      - name: Restore exact original pre-revalidation backup in runner
         if: env.REVALIDATION_MODE == 'correction'
         shell: bash
         run: |
           set -euo pipefail
           cp "$REVALIDATION_BACKUP" radar.json
-          echo 'The runner is now revalidating the exact corpus that existed before the v1.0 run; the committed backup itself was not changed.'
+          echo 'The runner is now revalidating the exact corpus that existed before the first full-revalidation run; the committed backup itself was not changed.'
 
       - name: Revalidate the complete accepted evidence corpus
         shell: bash
@@ -160,7 +160,7 @@ jobs:
           p.write_text(json.dumps({
               'workflow': 'ONE-TIME Full Corpus Revalidation',
               'completed': True,
-              'tool_version': 'v1.1-current-scanner-rules',
+              'tool_version': 'v1.2-current-scanner-rules',
               'mode': os.environ.get('REVALIDATION_MODE', 'first'),
               'stamp': os.environ['REVALIDATION_STAMP'],
               'backup': os.environ['REVALIDATION_BACKUP'],
@@ -176,7 +176,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- radar.json revalidation-reports backups/one-time-full-corpus-revalidation
-          git commit -m 'Complete corrected one-time full Radar corpus revalidation'
+          git commit -m 'Complete final corrected one-time full Radar corpus revalidation'
           git push
 
       - name: Upload cleaned radar and audit report
