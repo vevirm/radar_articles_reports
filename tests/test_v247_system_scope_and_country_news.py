@@ -160,11 +160,35 @@ class V247SystemScopeAndCountryNews(unittest.TestCase):
         )
         self.assertTrue(ok, diagnostics)
 
-    def test_europe_plan_without_realised_change_still_is_not_C(self):
+    def test_trusted_europe_plan_is_C_even_before_realisation(self):
         ok, diagnostics = self.c_admitted(
             "Europe looks to challenge US dominance in space sector with €10 billion plan",
-            "Officials are considering a plan that could support future European space technology capacity.",
+            "Officials are considering a published €10 billion plan that could support future European space technology capacity.",
             "France 24", "france24.com",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_trusted_europe_analysis_without_change_verb_is_C(self):
+        ok, diagnostics = self.c_admitted(
+            "Europe’s strategic autonomy depends on open and secure science",
+            "The analysis examines how open science, research security and European strategic autonomy interact across the research system.",
+            "LSE European Politics and Policy", "blogs.lse.ac.uk",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_trusted_nordic_quantum_funding_news_is_C(self):
+        ok, diagnostics = self.c_admitted(
+            "Funding Radar: G7 and Nordics jointly fund quantum research",
+            "Nordic funders and G7 partners announced joint funding for quantum research collaboration and strategic technology projects.",
+            "Science|Business", "sciencebusiness.net",
+        )
+        self.assertTrue(ok, diagnostics)
+
+    def test_trusted_europe_route_still_rejects_unrelated_foreign_tech_news(self):
+        ok, diagnostics = self.c_admitted(
+            "IBM links cryogenic modules to scale fault-tolerant quantum computing",
+            "IBM introduced cryogenic control modules for quantum computing in the United States.",
+            "eeNews Europe", "eenewseurope.com",
         )
         self.assertFalse(ok, diagnostics)
 
