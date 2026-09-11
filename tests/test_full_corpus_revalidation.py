@@ -132,6 +132,26 @@ class FullCorpusRevalidationTests(unittest.TestCase):
         self.assertEqual(report["diagnostics"]["A"]["removed"], 1)
         self.assertEqual(report["decision_count"], 1)
 
+    def test_refresh_cannot_bypass_current_saved_record_document_exclusion(self):
+        item = ab(
+            "EU research policy announcement",
+            "A",
+            "https://example.org/news/eu-research-policy-announcement",
+        )
+        refreshed = (
+            item["title"],
+            "European Union research and innovation capacity, research security and strategic autonomy.",
+            "Substantive European R&I system evidence.",
+        )
+        with mock.patch.object(R.sr, "document_exclusion_reason", return_value="hard exclusion URL: /news/"), \
+             mock.patch.object(R.sr, "gate_scope", return_value=ev(True, False)) as gate_scope:
+            result = R._ab_gate(item, refreshed)
+        self.assertFalse(result["a_pass"])
+        self.assertFalse(result["b_pass"])
+        self.assertTrue(result["document_rejected"])
+        self.assertIn("/news/", result["aboutness_reason"])
+        gate_scope.assert_not_called()
+
     @mock.patch.object(R.sr, "record_date_integrity_ok", return_value=True)
     @mock.patch.object(R.sr, "record_source_integrity_ok", return_value=True)
     def test_failed_saved_ab_is_reopened_before_final_decision(self, _src, _date):
@@ -204,6 +224,9 @@ class FullCorpusRevalidationTests(unittest.TestCase):
         self.assertGreaterEqual(wf.count("python -m unittest discover -s tests -p 'test_*.py'"), 2)
         self.assertIn("actions/upload-artifact@v4", wf)
         self.assertIn("group: ri-radar-research-scanners", wf)
+        self.assertIn("Determine first run or v1.0 correction rerun", wf)
+        self.assertIn("Restore exact original backup in runner for v1.0 correction", wf)
+        self.assertIn("v1.1-current-scanner-rules", wf)
 
     def test_restore_prefers_new_full_revalidation_backup(self):
         wf = (ROOT / ".github" / "workflows" / "restore-corpus-backup.yml").read_text(encoding="utf-8")
