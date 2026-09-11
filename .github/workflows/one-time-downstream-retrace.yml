@@ -1,0 +1,173 @@
+name: ONE-TIME Downstream Retrace
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+# Use the scanner queue so the evidence corpus cannot change while ancestry is rebuilt.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  retrace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Refuse a second downstream retrace
+        shell: bash
+        run: |
+          set -euo pipefail
+          marker='backups/one-time-downstream-retrace/COMPLETED.json'
+          if [[ -f "$marker" ]]; then
+            echo '::error::ONE-TIME Downstream Retrace has already completed. Nothing was changed.'
+            echo 'The pre-retrace radar remains recoverable from backups/one-time-downstream-retrace/LATEST_BACKUP.txt.'
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install scanner dependencies
+        run: pip install -r requirements.txt
+
+      - name: Confirm cleaned corpus and current repository are healthy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('radar.json').read_text(encoding='utf-8'))
+          r=d.get('full_corpus_revalidation') if isinstance(d.get('full_corpus_revalidation'),dict) else {}
+          if r.get('tool_version') != 'v1.2-current-scanner-rules':
+              raise SystemExit('radar.json is not marked as the final v1.2 full-corpus revalidation output.')
+          print('Cleaned corpus marker:', r.get('tool_version'))
+          print('A/B/C:', len(d.get('strand_a',[])), len(d.get('strand_b',[])), len(d.get('strand_c',[])))
+          PY
+          python scripts/validate_scanner_output.py radar.json
+          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/check_workflow_contract.py
+
+      - name: Prepare and commit recoverable backup
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+          backup_dir='backups/one-time-downstream-retrace'
+          report_dir='downstream-retrace-reports'
+          mkdir -p "$backup_dir" "$report_dir"
+          backup="$backup_dir/radar-before-downstream-retrace-$stamp.json"
+          report_json="$report_dir/downstream-retrace-$stamp.json"
+          report_md="$report_dir/downstream-retrace-$stamp.md"
+          cp radar.json "$backup"
+          sha256sum "$backup" > "$backup.sha256"
+          printf '%s\n' "$backup" > "$backup_dir/LATEST_BACKUP.txt"
+          {
+            echo "RETRACE_STAMP=$stamp"
+            echo "RETRACE_BACKUP=$backup"
+            echo "RETRACE_REPORT_JSON=$report_json"
+            echo "RETRACE_REPORT_MD=$report_md"
+          } >> "$GITHUB_ENV"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$backup_dir"
+          git commit -m 'Backup Radar before one-time downstream retrace'
+          git push
+
+      - name: Rebuild downstream ancestry from cleaned evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/downstream_retrace.py \
+            --radar radar.json \
+            --report-json "$RETRACE_REPORT_JSON" \
+            --report-md "$RETRACE_REPORT_MD"
+
+      - name: Validate rebuilt Radar and rerun every regression test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_scanner_output.py radar.json
+          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/check_workflow_contract.py
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          report=json.loads(Path(os.environ['RETRACE_REPORT_JSON']).read_text(encoding='utf-8'))
+          n=report['diagnostics']['orphan_references_remaining']
+          if n != 0:
+              raise SystemExit(f'Integrity failure: {n} orphan downstream evidence references remain.')
+          if not report.get('integrity_check',{}).get('passed'):
+              raise SystemExit('Integrity report did not pass.')
+          print('Final downstream orphan references: 0')
+          PY
+
+      - name: Record completion marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          backup_dir='backups/one-time-downstream-retrace'
+          printf '%s\n' "$RETRACE_REPORT_JSON" > "$backup_dir/LATEST_REPORT.txt"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          report=json.loads(Path(os.environ['RETRACE_REPORT_JSON']).read_text(encoding='utf-8'))
+          p=Path('backups/one-time-downstream-retrace/COMPLETED.json')
+          p.write_text(json.dumps({
+              'workflow':'ONE-TIME Downstream Retrace',
+              'completed':True,
+              'tool_version':'v1.0-current-downstream-rules',
+              'stamp':os.environ['RETRACE_STAMP'],
+              'backup':os.environ['RETRACE_BACKUP'],
+              'report_json':os.environ['RETRACE_REPORT_JSON'],
+              'report_md':os.environ['RETRACE_REPORT_MD'],
+              'diagnostics':report.get('diagnostics',{}),
+          }, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit rebuilt downstream products and audit trail
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- radar.json downstream-retrace-reports backups/one-time-downstream-retrace
+          git commit -m 'Complete one-time downstream evidence retrace'
+          git push
+
+      - name: Upload rebuilt radar and diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: downstream-retrace-result-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            radar.json
+            downstream-retrace-reports/downstream-retrace-*.json
+            downstream-retrace-reports/downstream-retrace-*.md
+            backups/one-time-downstream-retrace/*.sha256
+
+      - name: Downstream retrace summary
+        if: always()
+        shell: bash
+        run: |
+          echo '## ONE-TIME Downstream Retrace' >> "$GITHUB_STEP_SUMMARY"
+          if [[ -n "${RETRACE_REPORT_MD:-}" && -f "$RETRACE_REPORT_MD" ]]; then
+            cat "$RETRACE_REPORT_MD" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'The run stopped before a final retrace report was produced. If the backup step completed, the pre-retrace radar is already committed and recoverable.' >> "$GITHUB_STEP_SUMMARY"
+          fi
