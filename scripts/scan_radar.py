@@ -605,6 +605,19 @@ def total_budget_remaining() -> float:
     return SCAN_DEADLINE_MONO - time.monotonic()
 
 
+def bounded_quick_strand_min_runtime(budget_seconds: int, requested_seconds: int, finalize_reserve_seconds: int) -> int:
+    """Clamp a focused quick-strand minimum runtime inside its hard scan budget.
+
+    The focused A/B/C workflows use this as a lower-bound contract. Discovery may
+    continue beyond the minimum (normally until the finalisation reserve), but the
+    minimum can never consume the reserve needed to dedupe, admit and serialize.
+    """
+    budget = max(0, int(budget_seconds or 0))
+    reserve = max(0, int(finalize_reserve_seconds or 0))
+    requested = max(0, int(requested_seconds or 0))
+    return min(requested, max(0, budget - reserve))
+
+
 def budget_remaining() -> float:
     """Return the time ordinary pre-continuation work may still spend.
 
@@ -21092,13 +21105,295 @@ def main() -> int:
         CONFIG["network_reserve_seconds"] = original_network_reserve
     full_budget_continuation["seconds_remaining_at_end"] = max(0, int(total_budget_remaining()))
 
+    # Focused A/B/C quick-strand continuation. The workflow budget is ten minutes and,
+    # unlike a generic quick sweep, a focused button is expected to use essentially the
+    # whole allocation on its selected lane. Earlier builds disabled full-budget
+    # continuation and then capped the quick tail at three A+C waves, so a B run could
+    # finish after ~4 minutes while its remaining time was unusable. Keep rotating fresh
+    # selected-strand territory until the finalisation reserve, with a 9-minute minimum
+    # runtime contract for the 600-second workflow. Admission gates remain unchanged.
+    quick_strand_continuation = {
+        "enabled": bool(RADAR_QUICK_SCAN and RADAR_QUICK_STRAND in {"A", "B", "C"}),
+        "strand": RADAR_QUICK_STRAND or "",
+        "attempted": False,
+        "waves": 0,
+        "minimum_runtime_seconds": 0,
+        "finalize_reserve_seconds": 0,
+        "openalex_queries_executed": 0,
+        "crossref_queries_executed": 0,
+        "crossref_journals_executed": 0,
+        "institution_sources_executed": 0,
+        "news_queries_planned": 0,
+        "candidates": 0,
+        "news_candidates": 0,
+        "cooldown_seconds": 0.0,
+        "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
+        "seconds_remaining_at_end": None,
+    }
+    if quick_strand_continuation["enabled"]:
+        quick_finalize_reserve = max(30, int(CONFIG.get("scan_finalize_reserve_seconds", 22) or 22))
+        try:
+            quick_min_requested = int(str(os.environ.get("RADAR_QUICK_STRAND_MIN_RUNTIME_SECONDS", "540") or "540").strip())
+        except ValueError:
+            quick_min_requested = 540
+        quick_min_runtime = bounded_quick_strand_min_runtime(
+            budget_seconds, quick_min_requested, quick_finalize_reserve
+        )
+        quick_strand_continuation["minimum_runtime_seconds"] = quick_min_runtime
+        quick_strand_continuation["finalize_reserve_seconds"] = quick_finalize_reserve
+
+        # Keep waves compact enough to rotate territory repeatedly. A/B use scholarly
+        # endpoints; B additionally gets method-heavy source-first journal sweeps. C uses
+        # current-development search plus rotating institutional sources and no A/B query
+        # bank at all.
+        strand_wave_seconds = 42
+        strand_query_n = 6
+        strand_journal_n = 3
+        strand_news_n = 8
+        strand_inst_n = 6
+        strand_min_wave_seconds = 5.0
+        strand_cooldown_seconds = 8.0
+
+        a_tail_bank = diversified_query_bank(
+            list(dimensional_bank)
+            + list(evidence_first_bank)
+            + list(strategic_scholarly_focus)
+            + list(curator_seed_bank)
+            + list(finding_context_bank)
+            + list(all_queries)
+        )
+        b_tail_bank = list(dict.fromkeys(b_method_recent_bank + b_method_foundational_bank))
+        b_tail_journals = list(dict.fromkeys(b_method_journal_bank))
+        c_tail_bank = list(dict.fromkeys(
+            c_floor_rescue_queries()
+            + list(priority_news_queries())
+            + list(frontier_focus.get("queries", []))
+            + [
+                "EU research innovation new restriction agreement capability",
+                "Europe science technology new policy funding research security",
+                "EU research talent collaboration mobility new development",
+                "Europe critical technology supplier capacity new development",
+                "EU international research cooperation restriction agreement screening",
+            ]
+        ))
+
+        strand = RADAR_QUICK_STRAND
+        qa_cursor = int(state.get(f"quick_strand_{strand.lower()}_query_cursor", 0) or 0)
+        qj_cursor = int(state.get("quick_strand_b_journal_cursor", 0) or 0)
+        qc_cursor = int(state.get("quick_strand_c_news_cursor", 0) or 0)
+        qi_cursor = int(state.get("quick_strand_c_institution_cursor", 0) or 0)
+
+        while total_budget_remaining() > quick_finalize_reserve + 5:
+            quick_strand_continuation["attempted"] = True
+            quick_strand_continuation["waves"] += 1
+            wave_no = quick_strand_continuation["waves"]
+            remaining_before = total_budget_remaining()
+            wave_seconds = min(
+                strand_wave_seconds,
+                max(12, int(remaining_before - quick_finalize_reserve)),
+            )
+            wave_deadline = time.monotonic() + wave_seconds
+            wave_started = time.monotonic()
+            wave_exec: dict[str, Any] = {}
+            wave_news_warnings: list[str] = []
+            workers: list[tuple[str, Any]] = []
+            wave_candidates = 0
+            wave_news_candidates = 0
+
+            with cf.ThreadPoolExecutor(max_workers=3) as ex:
+                if strand in {"A", "B"}:
+                    query_bank = a_tail_bank if strand == "A" else b_tail_bank
+                    executed_oa_before = set(execution_stats.get("openalex_queries", set()))
+                    executed_cr_before = set(execution_stats.get("crossref_broad_queries", set()))
+                    already = executed_oa_before | executed_cr_before
+                    queries, query_next, _ = rotating_batch_excluding(
+                        query_bank, qa_cursor, strand_query_n, already
+                    ) if query_bank else ([], qa_cursor, True)
+                    if not queries and query_bank:
+                        # Depth rotation is still productive once every exact query has
+                        # appeared in this run; collectors advance their persisted pages.
+                        queries, query_next, _ = rotating_batch(query_bank, qa_cursor, strand_query_n)
+
+                    query_dates: dict[str, dt.date] = {}
+                    query_lanes: dict[str, str] = {}
+                    for q in queries:
+                        if strand == "B" and q in set(b_method_foundational_bank):
+                            query_dates[q] = B_METHOD_DATE_FLOOR
+                            query_lanes[q] = "quick-strand-b-foundational"
+                        elif strand == "B":
+                            query_dates[q] = B_METHOD_RECENT_DATE_FLOOR
+                            query_lanes[q] = "quick-strand-b-recent"
+                        else:
+                            query_dates[q] = DATE_FLOOR
+                            query_lanes[q] = "quick-strand-a"
+
+                    journals: list[str] = []
+                    journal_next = qj_cursor
+                    if strand == "B" and b_tail_journals:
+                        already_journals = set(execution_stats.get("crossref_source_journals", set()))
+                        journals, journal_next, _ = rotating_batch_excluding(
+                            b_tail_journals, qj_cursor, strand_journal_n, already_journals
+                        )
+                        if not journals:
+                            journals, journal_next, _ = rotating_batch(
+                                b_tail_journals, qj_cursor, strand_journal_n
+                            )
+
+                    log_progress(
+                        f"Quick Strand {strand} continuation wave {wave_no}: remaining={int(remaining_before)}s; "
+                        f"queries={len(queries)} journals={len(journals)}"
+                    )
+                    oa_depth_only = bool(queries) and all(q in executed_oa_before for q in queries)
+                    cr_depth_only = bool(queries) and all(q in executed_cr_before for q in queries)
+                    if queries and not (oa_failed or source_stage_rate_limited(warnings, "openalex")):
+                        workers.append(("oa", ex.submit(
+                            safe_stage, f"OpenAlex quick Strand {strand} wave {wave_no}", collect_openalex,
+                            min(query_dates.values()) if query_dates else DATE_FLOOR, warnings, queries, wave_deadline,
+                            query_dates, state["result_depth"]["openalex"], query_lanes, wave_exec, oa_depth_only
+                        )))
+                    if (queries or journals) and not (cr_failed or source_stage_rate_limited(warnings, "crossref")):
+                        workers.append(("cr", ex.submit(
+                            safe_stage, f"Crossref quick Strand {strand} wave {wave_no}", collect_crossref,
+                            min(query_dates.values()) if query_dates else B_METHOD_DATE_FLOOR, warnings,
+                            queries, [], journals, wave_deadline, query_dates,
+                            state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
+                            query_lanes, wave_exec, cr_depth_only
+                        )))
+
+                else:  # Strand C
+                    news_queries, news_next, _ = rotating_batch(
+                        c_tail_bank, qc_cursor, strand_news_n
+                    ) if c_tail_bank else ([], qc_cursor, True)
+                    executed_inst_before = set(execution_stats.get("institution_sources", set()))
+                    inst_domains, inst_next, _ = rotating_batch_excluding(
+                        fresh_inst_domain_bank, qi_cursor, strand_inst_n, executed_inst_before
+                    ) if fresh_inst_domain_bank else ([], qi_cursor, True)
+                    if not inst_domains and fresh_inst_domain_bank:
+                        inst_domains, inst_next, _ = rotating_batch(
+                            fresh_inst_domain_bank, qi_cursor, strand_inst_n
+                        )
+                    inst_sources = [fresh_inst_source_by_domain[d] for d in inst_domains if d in fresh_inst_source_by_domain]
+                    quick_strand_continuation["news_queries_planned"] += len(news_queries)
+                    log_progress(
+                        f"Quick Strand C continuation wave {wave_no}: remaining={int(remaining_before)}s; "
+                        f"current={len(news_queries)} institutions={len(inst_sources)}"
+                    )
+                    if news_queries:
+                        workers.append(("news", ex.submit(
+                            safe_stage, f"Current-development quick Strand C wave {wave_no}", collect_news,
+                            now, wave_news_warnings, max(NEWS_LOOKBACK_HOURS, 720), wave_deadline,
+                            news_queries, False, quick_finalize_reserve
+                        )))
+                    if inst_sources:
+                        workers.append(("inst", ex.submit(
+                            safe_stage, f"Institutional quick Strand C wave {wave_no}", collect_institutions,
+                            DATE_FLOOR, warnings, False, inst_sources, wave_deadline, wave_exec, False, DATE_FLOOR
+                        )))
+
+                for family, fut in workers:
+                    extra = [x for x in fut.result() if isinstance(x, dict)]
+                    if family == "oa":
+                        oa.extend(extra)
+                        wave_candidates += len(extra)
+                    elif family == "cr":
+                        cr.extend(extra)
+                        wave_candidates += len(extra)
+                    elif family == "inst":
+                        inst.extend(extra)
+                        wave_candidates += len(extra)
+                    else:
+                        news.extend(extra)
+                        wave_news_candidates += len(extra)
+
+            warnings.extend(x for x in wave_news_warnings if x not in warnings)
+            oa_executed = set(wave_exec.get("openalex_queries", set()))
+            cr_executed = set(wave_exec.get("crossref_broad_queries", set()))
+            cr_journals_executed = set(wave_exec.get("crossref_source_journals", set()))
+            inst_executed = set(wave_exec.get("institution_sources", set()))
+            execution_stats.setdefault("openalex_queries", set()).update(oa_executed)
+            execution_stats.setdefault("crossref_broad_queries", set()).update(cr_executed)
+            execution_stats.setdefault("crossref_source_journals", set()).update(cr_journals_executed)
+            execution_stats.setdefault("institution_sources", set()).update(inst_executed)
+            execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(wave_exec.get("crossref_abstracts_enrichment_attempted", 0))
+            quick_strand_continuation["openalex_queries_executed"] += len(oa_executed)
+            quick_strand_continuation["crossref_queries_executed"] += len(cr_executed)
+            quick_strand_continuation["crossref_journals_executed"] += len(cr_journals_executed)
+            quick_strand_continuation["institution_sources_executed"] += len(inst_executed)
+            quick_strand_continuation["candidates"] += wave_candidates
+            quick_strand_continuation["news_candidates"] += wave_news_candidates
+
+            if strand in {"A", "B"}:
+                if oa_executed or cr_executed:
+                    qa_cursor = query_next
+                    state[f"quick_strand_{strand.lower()}_query_cursor"] = qa_cursor
+                if strand == "B" and cr_journals_executed:
+                    qj_cursor = journal_next
+                    state["quick_strand_b_journal_cursor"] = qj_cursor
+            else:
+                if news_queries:
+                    qc_cursor = news_next
+                    state["quick_strand_c_news_cursor"] = qc_cursor
+                if inst_executed:
+                    qi_cursor = inst_next
+                    state["quick_strand_c_institution_cursor"] = qi_cursor
+
+            # A focused run is a time allocation, not a three-wave cap. If endpoints are
+            # blocked or a wave returns almost instantly, use a short recovery cooldown and
+            # rotate again rather than declaring the scan finished at minute four. This is
+            # deliberately bounded by the same hard deadline/finalisation reserve.
+            elapsed_wave = time.monotonic() - wave_started
+            progressed = bool(
+                oa_executed or cr_executed or cr_journals_executed or inst_executed
+                or wave_candidates or wave_news_candidates
+            )
+            if not progressed and total_budget_remaining() > quick_finalize_reserve + strand_cooldown_seconds + 5:
+                cooldown = min(
+                    strand_cooldown_seconds,
+                    max(0.0, total_budget_remaining() - quick_finalize_reserve - 5.0),
+                )
+                if cooldown > 0:
+                    log_progress(
+                        f"Quick Strand {strand} wave {wave_no} found no healthy work; "
+                        f"cooling down {int(cooldown)}s before rotating again"
+                    )
+                    time.sleep(cooldown)
+                    quick_strand_continuation["cooldown_seconds"] += cooldown
+            elif elapsed_wave < strand_min_wave_seconds and total_budget_remaining() > quick_finalize_reserve + 5:
+                pace = min(
+                    strand_min_wave_seconds - elapsed_wave,
+                    max(0.0, total_budget_remaining() - quick_finalize_reserve - 5.0),
+                )
+                if pace > 0:
+                    time.sleep(pace)
+                    quick_strand_continuation["cooldown_seconds"] += pace
+
+        elapsed_at_tail_end = max(0.0, time.monotonic() - log_progress.started)
+        # Normally the reserve cutoff above already places us beyond nine minutes. Keep
+        # the explicit lower-bound contract for future config changes: if a larger reserve
+        # would otherwise end discovery too early, retain the run until the requested
+        # minimum while never consuming the protected finalisation reserve.
+        if elapsed_at_tail_end < quick_min_runtime and total_budget_remaining() > quick_finalize_reserve:
+            hold = min(
+                quick_min_runtime - elapsed_at_tail_end,
+                max(0.0, total_budget_remaining() - quick_finalize_reserve),
+            )
+            if hold > 0:
+                log_progress(
+                    f"Quick Strand {strand}: preserving {quick_min_runtime}s minimum runtime contract "
+                    f"with {int(hold)}s endpoint recovery cooldown"
+                )
+                time.sleep(hold)
+                quick_strand_continuation["cooldown_seconds"] += hold
+
+    quick_strand_continuation["seconds_remaining_at_end"] = max(0, int(total_budget_remaining()))
+
     # Six-minute QUICK SWEEP productive tail. The core sweep often completes in three
     # to four minutes once production Matrix/rescue machinery is disabled. Do not idle
     # or re-enable those deep stages: spend otherwise-unused time on fresh A discovery
     # plus C news/analysis. Strand B is deliberately left exactly as the protected core
     # slice found it; the tail does not add extra B allocation or loosen any gate.
     quick_sweep_tail = {
-        "enabled": bool(RADAR_QUICK_SCAN),
+        "enabled": bool(RADAR_QUICK_SCAN and not RADAR_QUICK_STRAND),
         "attempted": False,
         "waves": 0,
         "openalex_queries_executed": 0,
@@ -21109,7 +21404,7 @@ def main() -> int:
         "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
         "seconds_remaining_at_end": None,
     }
-    if RADAR_QUICK_SCAN and total_budget_remaining() > 75:
+    if RADAR_QUICK_SCAN and not RADAR_QUICK_STRAND and total_budget_remaining() > 75:
         # Keep enough room for final A/B merge, C anchoring/final reserve, serialization
         # and git-side safety checks. Up to three compact waves should normally use the
         # sweep's remaining two-ish minutes without turning it back into a deep scan.
@@ -21937,7 +22232,9 @@ def main() -> int:
             "rejection_funnel": rejection_funnel,
             "full_rescue_run_recommended": bool(low_yield_rotation.get("full_rescue_run_recommended")),
             "matrix_first_deepening": deepening,
-        "full_budget_continuation": full_budget_continuation,
+            "full_budget_continuation": full_budget_continuation,
+            "quick_strand_continuation": quick_strand_continuation,
+            "quick_sweep_tail": quick_sweep_tail,
         },
         "active_core_profile_version": ACTIVE_CORE_PROFILE_VERSION,
         "active_core_limit": ACTIVE_CORE_LIMIT,
@@ -22116,6 +22413,15 @@ def main() -> int:
             "full_budget_continuation_candidates": int(full_budget_continuation.get("candidates", 0)),
             "full_budget_continuation_news_candidates": int(full_budget_continuation.get("news_candidates", 0)),
             "full_budget_seconds_remaining_at_end": int(full_budget_continuation.get("seconds_remaining_at_end", 0) or 0),
+            "quick_strand_continuation_waves": int(quick_strand_continuation.get("waves", 0)),
+            "quick_strand_minimum_runtime_seconds": int(quick_strand_continuation.get("minimum_runtime_seconds", 0)),
+            "quick_strand_seconds_remaining_at_end": int(quick_strand_continuation.get("seconds_remaining_at_end", 0) or 0),
+            "quick_strand_crossref_queries": int(quick_strand_continuation.get("crossref_queries_executed", 0)),
+            "quick_strand_openalex_queries": int(quick_strand_continuation.get("openalex_queries_executed", 0)),
+            "quick_strand_crossref_journals": int(quick_strand_continuation.get("crossref_journals_executed", 0)),
+            "quick_strand_institution_sources": int(quick_strand_continuation.get("institution_sources_executed", 0)),
+            "quick_strand_candidates": int(quick_strand_continuation.get("candidates", 0)),
+            "quick_strand_news_candidates": int(quick_strand_continuation.get("news_candidates", 0)),
             "weak_signal_followup_candidates": int(deepening.get("weak_signal_followup_candidates", 0)),
             "institution_signal_candidates": len(INSTITUTION_SIGNAL_CANDIDATES),
             "precursor_watch_total": len(precursor_watch),
