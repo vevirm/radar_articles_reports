@@ -152,6 +152,17 @@ class FullCorpusRevalidationTests(unittest.TestCase):
         self.assertIn("/news/", result["aboutness_reason"])
         gate_scope.assert_not_called()
 
+    def test_exact_doi_openalex_fallback_recovers_abstract_after_primary_refresh_failure(self):
+        item = ab("European innovation capacity", "A", "https://doi.org/10.1234/example.2026.1")
+        abstract = "European research and innovation capacity matters for competitiveness and collaboration across the European Union research system."
+        with mock.patch.object(R.sr, "_audit_refresh_document", return_value=None), \
+             mock.patch.object(R.sr, "openalex_abstract_by_doi", return_value=abstract) as oa:
+            val = R._refresh_one_ab(item)
+        self.assertIsNotNone(val)
+        self.assertEqual(val[3], "openalex_exact_doi")
+        self.assertIn("European research and innovation capacity", val[1])
+        oa.assert_called_once()
+
     @mock.patch.object(R.sr, "record_date_integrity_ok", return_value=True)
     @mock.patch.object(R.sr, "record_source_integrity_ok", return_value=True)
     def test_failed_saved_ab_is_reopened_before_final_decision(self, _src, _date):
@@ -161,7 +172,7 @@ class FullCorpusRevalidationTests(unittest.TestCase):
              mock.patch.object(R, "_refresh_failed_ab", return_value=(refreshed, {"attempted": 1, "succeeded": 1, "unavailable": 0})):
             out, report = R.revalidate_document(doc, now=NOW, network_refresh=True, workers=1)
         self.assertEqual(len(out["strand_a"]), 1)
-        self.assertEqual(report["decisions"][0]["evidence_refresh"], "refreshed")
+        self.assertEqual(report["decisions"][0]["evidence_refresh"], "scanner_refresh")
         self.assertEqual(report["decisions"][0]["decision"], "keep")
 
     @mock.patch.object(R.sr, "record_date_integrity_ok", return_value=True)
@@ -224,8 +235,9 @@ class FullCorpusRevalidationTests(unittest.TestCase):
         self.assertGreaterEqual(wf.count("python -m unittest discover -s tests -p 'test_*.py'"), 2)
         self.assertIn("actions/upload-artifact@v4", wf)
         self.assertIn("group: ri-radar-research-scanners", wf)
-        self.assertIn("Determine first run or v1.0 correction rerun", wf)
-        self.assertIn("Restore exact original backup in runner for v1.0 correction", wf)
+        self.assertIn("Determine first run or final correction rerun", wf)
+        self.assertIn("Restore exact original pre-revalidation backup in runner", wf)
+        self.assertIn("v1.2-current-scanner-rules", wf)
         self.assertIn("v1.1-current-scanner-rules", wf)
 
     def test_restore_prefers_new_full_revalidation_backup(self):
