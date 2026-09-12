@@ -381,9 +381,9 @@
     const conj=conjunctions(ctx,namedPhenomena),rename=vocabularyShifts(ctx);
     const strongConjunctions=bundleConjunctions(conj.strong,ctx.topicById);
     const candidateConjunctions=bundleConjunctions(conj.candidates,ctx.topicById);
-    const findings=[...rename.strong,...strongConjunctions].sort((a,b)=>b.score-a.score).slice(0,8);
+    const findings=[...rename.strong,...strongConjunctions].sort((a,b)=>b.score-a.score);
     const findingIds=new Set(findings.map(x=>x.id));
-    const candidates=[...rename.candidates,...candidateConjunctions].filter(x=>!findingIds.has(x.id)).sort((a,b)=>b.score-a.score).slice(0,8);
+    const candidates=[...rename.candidates,...candidateConjunctions].filter(x=>!findingIds.has(x.id)).sort((a,b)=>b.score-a.score);
     for(const item of [...findings,...candidates])item.title=capHeading(item.title);
     const dark=darkCorpus(currentRows,namedPhenomena);
     return {

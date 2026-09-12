@@ -16,13 +16,10 @@
 </head>
 <body>
 <main class="wrap pattern-simple-main">
+  <div id="phenomenaSummary" class="summary">Loading</div>
   <section class="pattern-simple-section">
-    <h2>What keeps coming back</h2>
-    <ul id="returning" class="pattern-simple-list"><li class="empty">Loading</li></ul>
-  </section>
-  <section class="pattern-simple-section">
-    <h2>What is changing</h2>
-    <ul id="changing" class="pattern-simple-list"><li class="empty">Loading</li></ul>
+    <h2>Highest-ranked ongoing phenomena</h2>
+    <ul id="phenomena" class="pattern-simple-list"><li class="empty">Loading</li></ul>
   </section>
 </main>
 <script src="phenomena.js?v=21.22"></script>
@@ -95,6 +92,8 @@ function unique(items){
   return out;
 }
 function patternDistance(x){if(x?.kind==='convergence')return 4;if(x?.kind==='conjunction'||x?.kind==='renaming')return 3;return 2}
+const PHENOMENA_DISPLAY_LIMIT=30;
+function rankItems(items){return [...items].sort((a,b)=>(b.rankScore||0)-(a.rankScore||0)||(b.sources||0)-(a.sources||0)||(b.records||0)-(a.records||0)||(a.distance||2)-(b.distance||2)||a.text.localeCompare(b.text))}
 
 function phenomenonExplanation(v){
   const t=norm(v);
@@ -112,9 +111,9 @@ function phenomenonExplanation(v){
   if(/long term strategy|foresight/.test(t))return 'Long-term planning is being pulled closer to decisions about security, capability and international dependence.';
   return 'The pattern is recurring across otherwise separate research, policy and technology developments.';
 }
-function render(id,items){
-  const el=document.getElementById(id),ordered=[...items].sort((a,b)=>(a.distance||2)-(b.distance||2)||(b.sources||0)-(a.sources||0)||(b.records||0)-(a.records||0));
-  el.innerHTML=ordered.length?ordered.map(x=>`<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong><p>${esc(phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show in this section yet. It will appear when the current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
+function render(items){
+  const el=document.getElementById('phenomena');
+  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${x.group==='changing'?'Changing pattern':'Recurring pattern'}</div><strong>${esc(x.text)}</strong><p>${esc(phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show yet. An ongoing phenomenon appears when current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
@@ -130,14 +129,17 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
     const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
     const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
     const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-    const highOrder=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.reader_summary||c.topic_label),records:Number(c.primary_records)||0,sources:Number(c.primary_sources)||0,distance:Number(c.inferential_distance)||4}));
-    const changing=unique([...(patterns.findings||[]).map(x=>({text:changingStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:patternDistance(x)})),...highOrder]);
-    const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1})));
-    render('changing',changing);
-    render('returning',returning);
+    const highOrder=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.reader_summary||c.topic_label),records:Number(c.primary_records)||0,sources:Number(c.primary_sources)||0,distance:Number(c.inferential_distance)||4,rankScore:Number(c.score)||0,group:'changing'}));
+    const changing=unique([...(patterns.findings||[]).map(x=>({text:changingStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:patternDistance(x),rankScore:Number(x.score)||0,group:'changing'})),...highOrder]);
+    const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1,rankScore:Math.min(99,(Number(x.score)||0)*4),group:'returning'})));
+    const all=rankItems(unique([...changing,...returning]));
+    const shown=all.slice(0,PHENOMENA_DISPLAY_LIMIT);
+    document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length} supported`:' supported'}.`;
+    render(shown);
   }catch(e){
     console.error(e);
-    render('changing',[]);render('returning',[]);
+    document.getElementById('phenomenaSummary').textContent='Ongoing-phenomena evidence is unavailable.';
+    render([]);
   }
 })();
 </script>
