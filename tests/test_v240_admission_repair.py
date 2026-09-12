@@ -26,8 +26,10 @@ class V240AdmissionRepairTests(unittest.TestCase):
         self.assertTrue(S.trusted_independent_c_source('Reuters','reuters.com','https://www.reuters.com/example'))
         self.assertFalse(S.trusted_independent_c_source('Random Blog','random.example','https://random.example/post'))
         configured={str(x.get('domain','')) for x in S.CONFIG.get('news_sources',[]) if isinstance(x,dict)}
-        self.assertIn('blogs.lse.ac.uk', configured)
-        self.assertIn('bruegel.org', configured)
+        self.assertNotIn('blogs.lse.ac.uk', configured)
+        self.assertNotIn('bruegel.org', configured)
+        self.assertIn('sciencebusiness.net', configured)
+        self.assertIn('ft.com', configured)
 
     def test_project_word_does_not_kill_strategic_analysis_title(self):
         title='Project-based funding and strategic autonomy in European research'
@@ -66,7 +68,7 @@ class V240AdmissionRepairTests(unittest.TestCase):
         self.assertEqual(removed,0)
         self.assertEqual(len(kept),1)
 
-    def test_trusted_analysis_can_be_independent_c_without_a(self):
+    def test_think_tank_analysis_is_context_not_independent_public_c(self):
         text=('Europe research security analysis warns that foreign interference and strategic dependencies in advanced compute '
               'are changing university access to research infrastructure and scientific capability.')
         news=[{
@@ -78,9 +80,7 @@ class V240AdmissionRepairTests(unittest.TestCase):
             '_trusted_commentary_signal':True,
         }]
         out=S.anchor_news(news, [], allow_unanchored=True)
-        self.assertEqual(len(out),1)
-        self.assertEqual(out[0].get('anchor_status'),'unanchored')
-        self.assertEqual(out[0].get('weak_signal_mode'),'trusted_commentary')
+        self.assertEqual(out, [])
 
     def test_missing_legacy_admission_profile_does_not_protect_old_seen_tombstones(self):
         source=PATH.read_text(encoding='utf-8')

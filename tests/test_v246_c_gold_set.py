@@ -53,7 +53,7 @@ class V246ExpandedCGold(unittest.TestCase):
         self.assertAdmitted(
             "Europe commits €5 billion to fund seven AI megafactories and catch up with the US and China",
             "The European Union committed €5 billion to seven AI megafactories, expanding European high-performance compute capacity for frontier AI research and development.",
-            "Le Monde", "lemonde.fr", "https://www.lemonde.fr/example", "2026-07-31",
+            "Reuters", "reuters.com", "https://www.reuters.com/example-eu-ai-megafactories", "2026-07-31",
         )
 
     def test_external_research_collaboration_restriction_stays_out(self):

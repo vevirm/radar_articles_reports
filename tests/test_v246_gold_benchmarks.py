@@ -100,9 +100,9 @@ class V246GoldBenchmarks(unittest.TestCase):
         admitted, diagnostics = self.c_admitted(
             "Sharp rise in ERC advanced grant applications from outside Europe",
             "The number of scientists outside Europe who won a European Research Council grant has more than doubled following the launch of Choose Europe for Science. The ERC reported a sharp rise in applications from researchers outside the EU, and researchers relocating to Europe can request additional funding to establish a laboratory and research team in Europe.",
-            "Times Higher Education",
-            "timeshighereducation.com",
-            "https://www.timeshighereducation.com/news/sharp-rise-erc-advanced-grant-applications-outside-europe",
+            "Research Professional News",
+            "researchprofessionalnews.com",
+            "https://www.researchprofessionalnews.com/example-erc-external-applications",
             "2026-06-23",
         )
         self.assertTrue(admitted, diagnostics)
@@ -163,7 +163,7 @@ class V246GoldBenchmarks(unittest.TestCase):
         diagnostics = []
         out = S.anchor_news([row], [], diagnostics, allow_unanchored=True)
         self.assertEqual(out, [], diagnostics)
-        self.assertEqual(diagnostics[-1]["reason"], "no_source_backed_eu_ri_relevance")
+        self.assertEqual(diagnostics[-1]["reason"], "source_not_europe_trusted")
 
 
 

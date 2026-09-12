@@ -44,7 +44,7 @@ from scan_radar import (
     gate_scope as main_gate_scope,
     document_exclusion_reason as main_document_exclusion_reason,
     final_ab_candidate_worthiness as main_final_ab_candidate_worthiness,
-    diversified_query_bank as main_diversified_query_bank,
+    weighted_strand_query_bank as main_weighted_strand_query_bank,
 )
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
@@ -1350,9 +1350,13 @@ def main() -> int:
     dimensional=[]
     for vals in (MAIN_CONFIG.get("precision_recall_query_families",{}) or {}).values():
         dimensional.extend(vals if isinstance(vals,list) else [vals])
-    main_query_bank=main_diversified_query_bank(list(dict.fromkeys(
-        [clean(x) for x in MAIN_CONFIG.get("queries_a",[]) + MAIN_CONFIG.get("queries_b_method",[]) + dimensional if clean(x)]
-    )))
+    # Historical is strictly A+B: the same canonical Main A/B query grammar is ordered
+    # with the same 8:1 relative work weights, then applied to older publication windows.
+    # Strand C is intentionally absent from both discovery and admission.
+    main_query_bank=main_weighted_strand_query_bank(
+        [clean(x) for x in MAIN_CONFIG.get("queries_a",[]) + dimensional if clean(x)],
+        [clean(x) for x in MAIN_CONFIG.get("queries_b_method",[]) if clean(x)],
+    )
     main_query_batch,next_main_query=rotating(main_query_bank,main_query_cursor,max(0,int(CONFIG.get("shared_main_queries_per_scan",18))))
 
     active_topics,next_topic=rotating(topics,topic_cursor,int(CONFIG.get("topics_per_scan",4)))

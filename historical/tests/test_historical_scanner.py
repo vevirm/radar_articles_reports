@@ -32,6 +32,10 @@ class HistoricalCurrentContractTests(unittest.TestCase):
         source = PATH.read_text(encoding='utf-8')
         self.assertIn('main_gate_scope', source)
         self.assertIn('main_final_ab_candidate_worthiness', source)
+        self.assertIn('main_weighted_strand_query_bank', source)
+        self.assertNotIn('collect_news(', source)
+        self.assertNotIn('anchor_news(', source)
+        self.assertNotIn('strand_c', source)
 
     def test_v235_historical_reuses_main_ab_gate_and_b_is_age_tolerant(self):
         source = PATH.read_text(encoding='utf-8')

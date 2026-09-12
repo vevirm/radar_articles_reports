@@ -235,17 +235,19 @@ def test_production_detectors_use_reasoning_grammars_not_worked_example_shortcut
     assert '_concentration_distribution_tension' not in names
 
 
-def test_generic_dependency_grammar_can_reconstruct_example_shape_without_specific_detector():
+def test_generic_dependency_grammar_can_reconstruct_qualified_shape_without_specific_detector():
+    # The exact live-corpus topic may change after evidence/source cleanup. The contract here
+    # is that the generic grammar still reconstructs at least one qualified dependency chain
+    # without relying on a worked-example detector.
     state = _real_state()
     generic = [
         c for c in state['candidates']
         if c.get('grammar_id') == 'omitted_dependency_chain'
         and c.get('generic_grammar')
-        and c.get('topic_key') == 'compute_ai-materials_energy'
+        and c.get('status') == 'qualified'
     ]
     assert generic
     c = generic[0]
-    assert c['status'] == 'qualified'
     assert c['synthesis_across_records'] is True
     assert c['primary_sources'] >= 4
     assert not c['missing_links']

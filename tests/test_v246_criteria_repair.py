@@ -226,8 +226,8 @@ class V246CriteriaRepairTests(unittest.TestCase):
         row = {
             "headline": headline,
             "_desc": desc,
-            "source": "Le Monde",
-            "source_domain": "lemonde.fr",
+            "source": "Reuters",
+            "source_domain": "reuters.com",
             "link": "https://example.test/europe-ai-megafactories",
             "date": "2026-07-31",
             "_themes": list(S.themes_for(f"{headline}. {desc}")),

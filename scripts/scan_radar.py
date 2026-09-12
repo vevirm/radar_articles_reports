@@ -970,6 +970,85 @@ def diversified_query_bank(queries: list[str]) -> list[str]:
     return out
 
 
+def target_mix_weights() -> dict[str, int]:
+    """Canonical relative work shares. These are weights, never publication caps."""
+    raw = CONFIG.get("target_item_mix_weights", {"A": 8, "B": 1, "C": 3})
+    out: dict[str, int] = {}
+    for strand, fallback in (("A", 8), ("B", 1), ("C", 3)):
+        try:
+            out[strand] = max(0, int((raw or {}).get(strand, fallback)))
+        except Exception:
+            out[strand] = fallback
+    if not any(out.values()):
+        return {"A": 8, "B": 1, "C": 3}
+    return out
+
+
+def weighted_strand_query_bank(a_queries: Iterable[str], b_queries: Iterable[str], a_weight: int | None = None, b_weight: int | None = None) -> list[str]:
+    """Interleave all A/B queries in a relative weighted order without dropping any.
+
+    A:B=8:1 changes which queries reach a deadline first; it does not cap how many A or B
+    papers may be admitted. Dedicated B protection can still add extra method searches because
+    B has a much lower hit rate than A.
+    """
+    weights = target_mix_weights()
+    aw = max(1, int(a_weight if a_weight is not None else weights.get("A", 8)))
+    bw = max(1, int(b_weight if b_weight is not None else weights.get("B", 1)))
+    a = diversified_query_bank(list(a_queries))
+    b = diversified_query_bank(list(b_queries))
+    out: list[str] = []
+    ai = bi = 0
+    while ai < len(a) or bi < len(b):
+        for _ in range(aw):
+            if ai >= len(a):
+                break
+            q = a[ai]; ai += 1
+            if q not in out:
+                out.append(q)
+        for _ in range(bw):
+            if bi >= len(b):
+                break
+            q = b[bi]; bi += 1
+            if q not in out:
+                out.append(q)
+        if ai >= len(a) and bi < len(b):
+            out.extend(q for q in b[bi:] if q not in out)
+            break
+        if bi >= len(b) and ai < len(a):
+            out.extend(q for q in a[ai:] if q not in out)
+            break
+    return out
+
+
+def relative_mix_discovery_state(counts: dict[str, int], enabled: Iterable[str] = ("A", "B", "C")) -> dict[str, Any]:
+    """Describe which strands are below their relative target share.
+
+    Used only to allocate *extra* discovery work after every enabled strand has already had
+    its baseline search. A strand above target loses bonus searches, never valid publications.
+    """
+    weights = target_mix_weights()
+    enabled_set = {str(x).upper() for x in enabled if str(x).upper() in weights}
+    if not enabled_set:
+        enabled_set = {"A", "B", "C"}
+    clean_counts = {k: max(0, int(counts.get(k, 0) or 0)) for k in weights}
+    total = sum(clean_counts[k] for k in enabled_set)
+    weight_total = sum(weights[k] for k in enabled_set) or 1
+    expected = {k: (total * weights[k] / weight_total if k in enabled_set else 0.0) for k in weights}
+    if total == 0:
+        under = {k: (k in enabled_set and weights[k] > 0) for k in weights}
+    else:
+        under = {k: (k in enabled_set and clean_counts[k] + 1e-9 < expected[k]) for k in weights}
+    deficit = {k: max(0.0, expected[k] - clean_counts[k]) for k in weights}
+    return {
+        "weights": weights,
+        "counts": clean_counts,
+        "expected": expected,
+        "deficit": deficit,
+        "under_target": under,
+        "enabled": sorted(enabled_set),
+    }
+
+
 def journal_representation_counts(journals: Iterable[str], previous: dict[str, Any]) -> dict[str, int]:
     """Count how often configured journals are already represented in public A/B.
 
@@ -13156,11 +13235,11 @@ def select_balanced_new_ab(candidates: list[dict[str, Any]], limit: int) -> list
 
 
 def select_hard_new_ab_mix(candidates: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, int]]:
-    """Compatibility wrapper for the 8:1 A:B *share*, never an absolute publication cap.
+    """Compatibility wrapper: relative mix is enforced upstream in discovery, not by caps.
 
-    The substantive gates decide what is publishable. The 8:1:3 values are soft mix/share
-    weights for discovery, ordering and diagnostics; they must not suppress a valid A or B
-    row, and they must never rescue a weaker row merely to make the mix look right.
+    The substantive gates decide what is publishable. The 8:1:3 values allocate search effort
+    and ordering; they never suppress a valid A/B row or rescue a weaker row merely to make
+    the published batch look numerically tidy.
     """
     ordered = [dict(x) for x in candidates if isinstance(x, dict)]
     eligible_a = sum(1 for x in ordered if clean_text(x.get('strand')) in {'A', 'both'})
@@ -15015,6 +15094,32 @@ def _signal_dates_within_days(a: dict[str, Any], b: dict[str, Any], days: int = 
     return abs((vals[0] - vals[1]).days) <= max(0, int(days))
 
 
+_SIGNAL_EVENT_NAME_STOP = {
+    'europe','european','union','research','science','technology','technologies','artificial',
+    'intelligence','company','firm','funding','investment','invests','invested','raises','raised',
+    'valuation','billion','million','record','latest','after','with','from','into','amid','race',
+    'french','german','finland','finnish','france','germany','irish','ireland','commission',
+    'parliament','council','digital','strategy','programme','program','sector','industry',
+}
+
+def _signal_capital_event_tokens(item: dict[str, Any]) -> set[str]:
+    """Distinctive headline tokens for conservative same-day financing deduplication."""
+    headline = normalized(clean_text(item.get('headline') or item.get('title')))
+    if not headline:
+        return set()
+    full = normalized(clean_text(
+        f"{headline} {item.get('what') or item.get('core_message') or item.get('_desc') or ''}"
+    ))
+    if not re.search(r'\b(?:funding|funded|fundraise|fundraising|raises?|raised|investment|invests?|invested|financing|valuation|valued|stake|capital)\b', full, re.I):
+        return set()
+    return {
+        t for t in re.findall(r'[a-z][a-z0-9-]{4,}', headline)
+        if t not in _SIGNAL_EVENT_NAME_STOP
+    }
+
+def _same_signal_calendar_date(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    return _signal_dates_within_days(a, b, 0)
+
 def signals_near_duplicate(a: dict[str, Any], b: dict[str, Any]) -> bool:
     """Collapse substantially the same event/claim, including obvious cross-publisher rewrites."""
     la = normalized(a.get('link', ''))
@@ -15025,6 +15130,16 @@ def signals_near_duplicate(a: dict[str, Any], b: dict[str, Any]) -> bool:
     family_a = _signal_event_family_key(a)
     family_b = _signal_event_family_key(b)
     if family_a and family_a == family_b and _signal_dates_within_days(a, b, 7):
+        return True
+
+    # Cross-publisher financing headlines often describe one transaction using different
+    # figures (amount raised vs post-money valuation), so lexical similarity can be tiny.
+    # Treat them as one event only when they occur on the same calendar date and share a
+    # distinctive actor/name token. This collapses Reuters/FT/Euractiv rewrites without
+    # merging separate investments by the same actor on later dates.
+    capital_a = _signal_capital_event_tokens(a)
+    capital_b = _signal_capital_event_tokens(b)
+    if capital_a and capital_b and (capital_a & capital_b) and _same_signal_calendar_date(a, b):
         return True
 
     hj, hc, hi = _signal_text_similarity(a.get('headline',''), b.get('headline',''))
@@ -15923,45 +16038,40 @@ def trusted_unlabelled_commentary_source(source: str = "", domain: str = "", lin
     return False
 
 
-# Strand C is intentionally a Europe/EU current-intelligence lane.  The scanner may
-# discover global material, but C publication itself is restricted to accountable
-# Europe-oriented sources.  This prevents regional non-European outlets from entering C
-# merely because an article mentions Europe or can be attached to a Strand-A anchor.
-_C_EUROPE_C_SOURCE_NAMES = {
-    "science|business", "research professional news", "reuters", "financial times",
-    "politico europe", "euractiv", "euobserver", "euronews", "the economist",
-    "nature", "times higher education", "sifted", "the register", "handelsblatt",
-    "le monde", "nrc", "el país", "european commission", "eu research & innovation",
-    "eu digital strategy", "council of the eu", "european parliament",
-    "joint research centre", "oecd", "cesaer", "interface europe", "eenews europe",
-    "lse european politics and policy", "bruegel", "ceps", "merics",
-    "rathenau instituut", "chatham house", "swp berlin", "clingendael", "voxeu",
-    "ecfr", "centre for european reform", "rusi", "nato", "european space agency",
-    "cern", "european patent office", "european investment bank",
-}
-_C_EUROPE_C_SOURCE_DOMAINS = {
-    "sciencebusiness.net", "researchprofessionalnews.com", "reuters.com", "ft.com",
-    "politico.eu", "euractiv.com", "euobserver.com", "euronews.com", "economist.com",
-    "nature.com", "timeshighereducation.com", "sifted.eu", "theregister.com",
-    "handelsblatt.com", "lemonde.fr", "nrc.nl", "elpais.com", "commission.europa.eu",
-    "research-and-innovation.ec.europa.eu", "digital-strategy.ec.europa.eu",
-    "consilium.europa.eu", "europarl.europa.eu", "joint-research-centre.ec.europa.eu",
-    "oecd.org", "cesaer.org", "interface-eu.org", "eenewseurope.com", "blogs.lse.ac.uk",
-    "bruegel.org", "ceps.eu", "merics.org", "rathenau.nl", "chathamhouse.org",
-    "swp-berlin.org", "clingendael.org", "cepr.org", "ecfr.eu", "cer.eu", "rusi.org",
-    "nato.int", "esa.int", "cern.ch", "epo.org", "eib.org",
-}
+# Strand C is intentionally a high-trust current-intelligence lane. Discovery can be
+# broad, but publication provenance is deliberately compact: elite Europe-facing reporting,
+# EU primary institutions, and a small configured set of authoritative international actors.
+# This keeps recall alive without turning national/general news or think-tank commentary into
+# a routine weak-signal firehose.
 _C_NON_EUROPE_C_BLOCKED_DOMAINS = {"scmp.com", "asia.nikkei.com"}
 _C_NON_EUROPE_C_BLOCKED_NAMES = {"south china morning post", "nikkei asia"}
 
-def trusted_europe_c_source(source: str = "", domain: str = "", link: str = "") -> bool:
-    """Return True only for the approved Europe/EU Strand-C source universe.
+def _configured_public_c_source_rows() -> list[dict[str, Any]]:
+    """Canonical non-EU-official Strand-C publisher allow-list.
 
-    All country-news sources configured for C are European national/public-service outlets.
-    The compact named/domain allow-list adds Europe-oriented specialist, analytical and
-    transnational sources plus accountable European institutions.  Explicitly regional
-    non-European outlets are denied even when a headline itself mentions Europe.
+    ``news_sources`` is the elite reporting/specialist-news set.
+    ``trusted_primary_c_sources`` is the authoritative international-primary set
+    (OECD/NATO/ESA/CERN/EPO/EIB/UNESCO/World Bank, etc.).  National-media and
+    think-tank context may still feed Strand A through other scanner lanes, but does not
+    independently qualify a row for public Strand C.
     """
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for bucket in (CONFIG.get("news_sources", []), CONFIG.get("trusted_primary_c_sources", [])):
+        for row in bucket or []:
+            if not isinstance(row, dict):
+                continue
+            domain_n = clean_text(row.get("domain")).lower().removeprefix("www.")
+            name_n = normalized(row.get("name"))
+            key = domain_n or name_n
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            rows.append(row)
+    return rows
+
+def trusted_europe_c_source(source: str = "", domain: str = "", link: str = "") -> bool:
+    """Return True only for the canonical high-trust Strand-C source universe."""
     source_n = normalized(source)
     domain_n = clean_text(domain).lower().removeprefix("www.")
     if not domain_n and clean_text(link):
@@ -15973,18 +16083,13 @@ def trusted_europe_c_source(source: str = "", domain: str = "", link: str = "") 
         return False
     if source_n in _C_NON_EUROPE_C_BLOCKED_NAMES:
         return False
+    # EU institutions remain authoritative even when a specific sub-domain is not repeated
+    # in the compact C publisher config.
     if _source_merit_is_eu_official(source, link):
         return True
-    if source_n in _C_EUROPE_C_SOURCE_NAMES:
-        return True
-    if any(domain_n == d or domain_n.endswith("." + d) for d in _C_EUROPE_C_SOURCE_DOMAINS):
-        return True
-    # European national/public-service layer: every configured country-news row is curated
-    # explicitly for this lane, so matching one is sufficient source provenance.
-    for row in CONFIG.get("country_news_sources", []) or []:
-        if not isinstance(row, dict):
-            continue
-        rn = normalized(row.get("name")); rd = clean_text(row.get("domain")).lower().removeprefix("www.")
+    for row in _configured_public_c_source_rows():
+        rn = normalized(row.get("name"))
+        rd = clean_text(row.get("domain")).lower().removeprefix("www.")
         if (rn and source_n == rn) or (rd and domain_n and (domain_n == rd or domain_n.endswith("." + rd))):
             return True
     return False
@@ -16160,37 +16265,15 @@ def trusted_european_publication_status(
 
 
 def configured_c_news_sources() -> list[dict[str, Any]]:
-    """Return the editorial C-source universe without conflating discovery lanes.
+    """Return the canonical public Strand-C publisher universe.
 
-    ``news_sources`` remains the compact Europe/global core used for ordinary source-bounded
-    queries. ``country_news_sources`` is a separate high-quality national-media layer searched
-    with domestic state-variable queries. ``trusted_primary_c_sources`` contains accountable
-    international/European institutions already covered by the institutional crawler, so they can
-    support C without spending duplicate Google-News query budget. All three buckets are eligible
-    for publisher/source validation; relevance and event gates remain unchanged.
+    The list is intentionally shared by source-bounded news discovery and global-news source
+    validation. Broad national-media and analytical/think-tank layers are not routine C
+    publishers; they remain available elsewhere in the scanner for A/context discovery.
     """
-    rows: list[dict[str, Any]] = []
-    seen: set[str] = set()
-    for bucket in (
-        CONFIG.get("news_sources", []),
-        CONFIG.get("country_news_sources", []),
-        CONFIG.get("trusted_primary_c_sources", []),
-    ):
-        for row in bucket or []:
-            if not isinstance(row, dict):
-                continue
-            domain = clean_text(row.get("domain")).lower().removeprefix("www.")
-            name = normalized(row.get("name"))
-            key = domain or name
-            if not key or key in seen:
-                continue
-            # Do not spend discovery budget on sources that can never publish into the
-            # Europe/EU Strand-C lane.
-            if not trusted_europe_c_source(clean_text(row.get("name")), domain, ""):
-                continue
-            seen.add(key)
-            rows.append(row)
-    return rows
+    return [dict(row) for row in _configured_public_c_source_rows() if trusted_europe_c_source(
+        clean_text(row.get("name")), clean_text(row.get("domain")), ""
+    )]
 
 
 def trusted_analytical_commentary_candidate(
@@ -16406,15 +16489,9 @@ def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | No
             if clean_text(src.get("country")):
                 for q in country_news_queries(src["domain"], src.get("country", ""), lookback_hours):
                     jobs.append((src["name"], src["domain"], q, False, False))
-        # National European media are a distinct discovery lane.  They are deliberately not
-        # given all generic Europe/global queries as well: domestic reporting often omits the
-        # words EU/Europe, and duplicating both query families would waste the bounded news
-        # budget.  Admission remains identical to every other C candidate.
-        for src in CONFIG.get("country_news_sources", []):
-            if not isinstance(src, dict) or not clean_text(src.get("domain")):
-                continue
-            for q in country_news_queries(src["domain"], src.get("country", ""), lookback_hours):
-                jobs.append((src.get("name", ""), src["domain"], q, False, False))
+        # v24.7.4: no broad national-media C fan-out. Country/public-service reporting can
+        # still inform A through institutional/context lanes, but C discovery is reserved for
+        # the compact elite/authoritative publisher universe above.
         for q in global_news_queries(lookback_hours):
             jobs.append(("", "", q, True, False))
     if not RADAR_PRIORITY_SCAN:
@@ -18924,10 +19001,13 @@ def main() -> int:
     # window, not just the short incremental overlap. This is the practical
     # rotation guarantee: every run moves to a different topic slice, and when a
     # topic comes around again its ``explore::`` depth page continues forward.
-    explore_bank = diversified_query_bank(all_queries + b_method_bank)
+    # Shared A/B exploration follows the 8:1 relative work order. This affects only
+    # which query reaches a finite deadline first; the dedicated B lane below remains
+    # protected because method papers have a lower hit rate.
+    explore_bank = weighted_strand_query_bank(all_queries, b_method_bank)
     oa_explore_cursor_before = int(state.get("openalex_explore_cursor", state.get("openalex_cursor", 0)) or 0)
     cr_explore_cursor_before = int(state.get("crossref_explore_cursor", state.get("crossref_broad_cursor", 0)) or 0)
-    exploration = scholarly_exploration_plan(state, all_queries + b_method_bank)
+    exploration = scholarly_exploration_plan(state, explore_bank)
     oa_explore = exploration["openalex"]
     cr_explore = exploration["crossref"]
     # Planning is not progress. Restore the persisted positions until the collectors
@@ -20285,6 +20365,19 @@ def main() -> int:
     previous_c_for_floor = previous.get('strand_c', []) if isinstance(previous.get('strand_c'), list) else []
     min_new_c = max(0, int(CONFIG.get('c_min_new_per_successful_scan', 1) or 0))
     preliminary_novel_c = _novel_signal_rows(preliminary_c_for_followup, previous_c_for_floor)
+
+    # Relative 8:1:3 balance controls only BONUS discovery after every lane has received
+    # its normal baseline pass. An overrepresented strand is never publication-capped; it
+    # simply stops consuming extra continuation searches while another strand is behind.
+    _pre_mix_ab = genuinely_new_ab_candidates(oa + cr + inst)
+    _pre_mix_counts = {
+        "A": sum(1 for x in _pre_mix_ab if clean_text(x.get("strand")) in {"A", "both"}),
+        "B": sum(1 for x in _pre_mix_ab if clean_text(x.get("strand")) in {"B", "both"}),
+        "C": len(preliminary_novel_c),
+    }
+    _mix_enabled = (RADAR_QUICK_STRAND,) if RADAR_QUICK_STRAND in {"A", "B", "C"} else ("A", "B", "C")
+    preliminary_mix_state = relative_mix_discovery_state(_pre_mix_counts, _mix_enabled)
+
     if min_new_c > 0 and len(preliminary_novel_c) < min_new_c:
         rescue_enabled = bool(CONFIG.get('c_floor_rescue_enabled', True))
         rescue_min_remaining = max(35, int(CONFIG.get('c_floor_rescue_min_seconds_remaining', 65) or 65))
@@ -20936,7 +21029,12 @@ def main() -> int:
                     {q: "gap" for q in batch}, wave_exec, True
                 )))
             # Protected C lane: do not make weak signals wait for whatever time A/B leaves.
-            if deep_news_limit and deep_news_passes < deep_news_max_passes and wave_no % deep_news_every == 1:
+            if (
+                deep_news_limit
+                and preliminary_mix_state.get("under_target", {}).get("C", False)
+                and deep_news_passes < deep_news_max_passes
+                and wave_no % deep_news_every == 1
+            ):
                 dynamic_signal_queries: list[str] = []
                 news_profiles = CONFIG.get("frontier_gap_search_queries", {})
                 for cell in active_frontier_focus.get("empty_targets") or active_frontier_focus.get("targets", []):
@@ -21147,7 +21245,14 @@ def main() -> int:
         continuation_stage_seconds = max(20, int(CONFIG.get("full_budget_continuation_stage_seconds", 75) or 75))
         continuation_query_n = max(1, int(CONFIG.get("full_budget_continuation_queries_per_wave", 8) or 8))
         continuation_inst_n = max(0, int(CONFIG.get("full_budget_continuation_institution_sources_per_wave", 10) or 0))
-        continuation_news_n = max(0, int(CONFIG.get("full_budget_continuation_news_queries_per_wave", 8) or 0))
+        # C always receives its baseline elite-source scan. Extra C continuation runs only
+        # while C is below its relative 3/12 share in the current discovery batch. This is
+        # the anti-firehose brake that does not recreate the old C=0 hard choke.
+        continuation_news_n = (
+            max(0, int(CONFIG.get("full_budget_continuation_news_queries_per_wave", 8) or 0))
+            if preliminary_mix_state.get("under_target", {}).get("C", False)
+            else 0
+        )
         continuation_max_waves = max(1, int(CONFIG.get("full_budget_continuation_max_waves", 300) or 300))
         continuation_cooldown = max(1, int(CONFIG.get("full_budget_zero_progress_cooldown_seconds", 12) or 12))
         continuation_min_wave_seconds = max(0.0, float(CONFIG.get("full_budget_min_wave_seconds", 5) or 0))
@@ -21156,9 +21261,19 @@ def main() -> int:
         # finalisation reserve protects, so release the oversized network reserve.
         original_network_reserve = int(CONFIG.get("network_reserve_seconds", 100) or 100)
         CONFIG["network_reserve_seconds"] = min(original_network_reserve, max(15, continuation_reserve - 10))
-        continuation_bank = diversified_query_bank(
-            curator_seed_bank + finding_context_bank + strategic_scholarly_focus + b_method_bank + all_queries
-        )
+        continuation_a_bank = list(dict.fromkeys(
+            curator_seed_bank + finding_context_bank + strategic_scholarly_focus + all_queries
+        ))
+        _a_under = bool(preliminary_mix_state.get("under_target", {}).get("A", False))
+        _b_under = bool(preliminary_mix_state.get("under_target", {}).get("B", False))
+        if _b_under and not _a_under:
+            # B is behind its 1/12 share: bonus scholarly work temporarily favours methods.
+            # Baseline A work has already happened, so this is catch-up rather than a new cap.
+            continuation_bank = weighted_strand_query_bank(continuation_a_bank, b_method_bank, 1, 3)
+        elif _a_under and not _b_under:
+            continuation_bank = weighted_strand_query_bank(continuation_a_bank, b_method_bank, 12, 1)
+        else:
+            continuation_bank = weighted_strand_query_bank(continuation_a_bank, b_method_bank)
         continuation_news_bank = list(dict.fromkeys(
             c_floor_rescue_queries() + [
                 "EU research innovation new restriction investment agreement capability",
@@ -22439,6 +22554,7 @@ def main() -> int:
             "b_method_recent_queries_this_scan": len(b_method_recent_focus),
             "b_method_foundational_queries_this_scan": len(b_method_foundational_focus),
             "b_method_journals_planned": list(b_method_journal_batch),
+            "relative_mix_discovery": preliminary_mix_state,
             "foresight_author_followup": {
                 "bank": len(foresight_author_bank),
                 "planned": len(foresight_author_batch),

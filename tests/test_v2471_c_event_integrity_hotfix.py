@@ -94,15 +94,14 @@ class V2471CEventIntegrityHotfix(unittest.TestCase):
         self.assertEqual(len(out), 1, diagnostics)
         self.assertEqual(out[0]["signal_type"], "contradicts")
 
-    def test_local_city_headline_from_curated_country_source_can_establish_member_state_capacity_move(self):
+    def test_broad_national_source_no_longer_localises_city_headline_into_public_c(self):
         out, diagnostics = self.admit(
             "Intel to invest €5bn in Leixlip campus on next-generation chips to power AI",
             "Intel will invest €5 billion in its Leixlip campus to develop and manufacture next-generation chips for AI.",
             "The Irish Times", "irishtimes.com",
         )
-        self.assertEqual(len(out), 1, diagnostics)
-        self.assertEqual(out[0]["eu_relevance"], "member_state")
-        self.assertIn("Ireland", out[0]["eu_evidence"])
+        self.assertEqual(out, [], diagnostics)
+        self.assertTrue(any(x.get("reason") == "source_not_europe_trusted" for x in diagnostics), diagnostics)
 
     def test_country_source_does_not_localise_explicit_foreign_capacity_story(self):
         ok, hits = S.c_country_source_capacity_scope(

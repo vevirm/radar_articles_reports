@@ -1621,70 +1621,6 @@
       "role": "specialist_research"
     },
     {
-      "name": "Times Higher Education",
-      "domain": "timeshighereducation.com",
-      "role": "specialist_research"
-    },
-    {
-      "name": "Sifted",
-      "domain": "sifted.eu",
-      "role": "specialist_research"
-    },
-    {
-      "name": "Defense News",
-      "domain": "defensenews.com",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "TechCrunch",
-      "domain": "techcrunch.com",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "IEEE Spectrum",
-      "domain": "spectrum.ieee.org",
-      "role": "specialist_research"
-    },
-    {
-      "name": "The Register",
-      "domain": "theregister.com",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "Nikkei Asia",
-      "domain": "asia.nikkei.com",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "South China Morning Post",
-      "domain": "scmp.com",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "Handelsblatt",
-      "domain": "handelsblatt.com",
-      "role": "independent_high_quality",
-      "country": "Germany"
-    },
-    {
-      "name": "Le Monde",
-      "domain": "lemonde.fr",
-      "role": "independent_high_quality",
-      "country": "France"
-    },
-    {
-      "name": "NRC",
-      "domain": "nrc.nl",
-      "role": "independent_high_quality",
-      "country": "Netherlands"
-    },
-    {
-      "name": "El País",
-      "domain": "elpais.com",
-      "role": "independent_high_quality",
-      "country": "Spain"
-    },
-    {
       "name": "European Commission",
       "domain": "commission.europa.eu",
       "role": "official_primary"
@@ -1718,91 +1654,6 @@
       "name": "OECD",
       "domain": "oecd.org",
       "role": "official_primary"
-    },
-    {
-      "name": "Marie Skłodowska-Curie Actions",
-      "domain": "marie-sklodowska-curie-actions.ec.europa.eu",
-      "role": "official_primary"
-    },
-    {
-      "name": "CESAER",
-      "domain": "cesaer.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Interface Europe",
-      "domain": "interface-eu.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "eeNews Europe",
-      "domain": "eenewseurope.com",
-      "role": "specialist_research"
-    },
-    {
-      "name": "LSE European Politics and Policy",
-      "domain": "blogs.lse.ac.uk",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Bruegel",
-      "domain": "bruegel.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "CEPS",
-      "domain": "ceps.eu",
-      "role": "research_analysis"
-    },
-    {
-      "name": "MERICS",
-      "domain": "merics.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Rathenau Instituut",
-      "domain": "rathenau.nl",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Chatham House",
-      "domain": "chathamhouse.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "SWP Berlin",
-      "domain": "swp-berlin.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Clingendael",
-      "domain": "clingendael.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "VoxEU",
-      "domain": "cepr.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "ECFR",
-      "domain": "ecfr.eu",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Centre for European Reform",
-      "domain": "cer.eu",
-      "role": "research_analysis"
-    },
-    {
-      "name": "RUSI",
-      "domain": "rusi.org",
-      "role": "research_analysis"
-    },
-    {
-      "name": "Tech Policy Press",
-      "domain": "techpolicy.press",
-      "role": "specialist_research"
     }
   ],
   "first_news_lookback_hours": 1440,
@@ -3417,16 +3268,6 @@
       ]
     },
     {
-      "name": "Yle News",
-      "domain": "yle.fi",
-      "hubs": [
-        "https://yle.fi/news"
-      ],
-      "path_hints": [
-        "/a/"
-      ]
-    },
-    {
       "name": "Euronews",
       "domain": "euronews.com",
       "hubs": [
@@ -4082,7 +3923,7 @@
   "target_new_b_per_scan": 1,
   "target_new_c_per_scan": 3,
   "b_method_lookback_years": 15,
-  "target_item_mix_rule": "Soft publication mix shares for NEW admissions: A:B:C = 8:1:3 (about 66.7% / 8.3% / 25%). These are relative target shares, not absolute caps or floors. Quality and novelty gates decide eligibility; no valid row is suppressed and no weak row is rescued solely to hit the mix.",
+  "target_item_mix_rule": "Soft publication mix shares for NEW admissions: A:B:C = 8:1:3 (about 66.7% / 8.3% / 25%). These are relative target shares, not absolute caps or floors. The implementation corrects imbalance through discovery/search allocation and C event deduplication; valid novel rows are not discarded merely to hit the ratio.",
   "c_unanchored_analytical_weight": 0.22,
   "c_unanchored_rule": "Independent C may be admitted from a trusted source when it is a dated, concrete, source-backed external R&I/technology development capable of changing a European A state variable. The event facts must come from the source; Europe-impact language may be a clearly labelled radar inference. A publication anchor is preferred but not mandatory.",
   "institution_sitemap_lastmod_fallback_enabled": true,
@@ -4260,146 +4101,7 @@
   "deferred_metadata_recovery_timeout_seconds": 8,
   "deferred_metadata_queue_max": 400,
   "c_pre_novelty_candidate_cap": 30,
-  "country_news_sources": [
-    {
-      "name": "Yle News",
-      "domain": "yle.fi",
-      "country": "Finland",
-      "role": "public_service"
-    },
-    {
-      "name": "ERR News",
-      "domain": "err.ee",
-      "country": "Estonia",
-      "role": "public_service"
-    },
-    {
-      "name": "LRT",
-      "domain": "lrt.lt",
-      "country": "Lithuania",
-      "role": "public_service"
-    },
-    {
-      "name": "RTÉ News",
-      "domain": "rte.ie",
-      "country": "Ireland",
-      "role": "public_service"
-    },
-    {
-      "name": "The Irish Times",
-      "domain": "irishtimes.com",
-      "country": "Ireland",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "Deutsche Welle",
-      "domain": "dw.com",
-      "country": "Germany",
-      "role": "public_service"
-    },
-    {
-      "name": "France 24",
-      "domain": "france24.com",
-      "country": "France",
-      "role": "public_service"
-    },
-    {
-      "name": "SWI swissinfo.ch",
-      "domain": "swissinfo.ch",
-      "country": "Switzerland",
-      "role": "public_service"
-    },
-    {
-      "name": "BBC News",
-      "domain": "bbc.com",
-      "country": "United Kingdom",
-      "role": "public_service"
-    },
-    {
-      "name": "SVT Nyheter",
-      "domain": "svt.se",
-      "country": "Sweden",
-      "role": "public_service"
-    },
-    {
-      "name": "DR News",
-      "domain": "dr.dk",
-      "country": "Denmark",
-      "role": "public_service"
-    },
-    {
-      "name": "NOS",
-      "domain": "nos.nl",
-      "country": "Netherlands",
-      "role": "public_service"
-    },
-    {
-      "name": "ORF",
-      "domain": "orf.at",
-      "country": "Austria",
-      "role": "public_service"
-    },
-    {
-      "name": "RTVE",
-      "domain": "rtve.es",
-      "country": "Spain",
-      "role": "public_service"
-    },
-    {
-      "name": "RaiNews",
-      "domain": "rainews.it",
-      "country": "Italy",
-      "role": "public_service"
-    },
-    {
-      "name": "RTP",
-      "domain": "rtp.pt",
-      "country": "Portugal",
-      "role": "public_service"
-    },
-    {
-      "name": "ČT24",
-      "domain": "ceskatelevize.cz",
-      "country": "Czechia",
-      "role": "public_service"
-    },
-    {
-      "name": "RTV Slovenija",
-      "domain": "rtvslo.si",
-      "country": "Slovenia",
-      "role": "public_service"
-    },
-    {
-      "name": "HRT",
-      "domain": "hrt.hr",
-      "country": "Croatia",
-      "role": "public_service"
-    },
-    {
-      "name": "Luxembourg Times",
-      "domain": "luxtimes.lu",
-      "country": "Luxembourg",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "Times of Malta",
-      "domain": "timesofmalta.com",
-      "country": "Malta",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "Cyprus Mail",
-      "domain": "cyprus-mail.com",
-      "country": "Cyprus",
-      "role": "independent_high_quality"
-    },
-    {
-      "name": "Balkan Insight",
-      "domain": "balkaninsight.com",
-      "country": "Romania",
-      "role": "independent_high_quality"
-    }
-  ],
+  "country_news_sources": [],
   "trusted_primary_c_sources": [
     {
       "name": "OECD",
@@ -4443,5 +4145,14 @@
     }
   ],
   "c_event_integrity_profile_version": "v24.7.3-soft-mix-shares",
-  "target_item_mix_mode": "soft_shares"
+  "target_item_mix_mode": "soft_shares",
+  "c_source_policy": "Elite Europe-facing current reporting plus authoritative EU/international primary institutions. Broad national-media and think-tank layers are context for A/institutional discovery, not routine Strand-C publication sources.",
+  "c_source_policy_version": "v24.7.4-elite-c-balanced",
+  "historical_strand_policy": "A+B only. Historical never searches for, reconstructs, admits, or publishes Strand C.",
+  "target_item_mix_implementation": "relative_discovery_weights_no_publication_caps",
+  "target_item_mix_weights": {
+    "A": 8,
+    "B": 1,
+    "C": 3
+  }
 }

@@ -112,20 +112,24 @@ class V247SystemScopeAndCountryNews(unittest.TestCase):
         )
         self.assertTrue(ok, diagnostics)
 
-    def test_youtube_no_not_youtube(self):
-        # Guard the configured-source helper and the new national-media source universe.
+    def test_configured_c_sources_are_elite_not_broad_national_media(self):
         names = {str(x.get("name")) for x in S.configured_c_news_sources()}
-        self.assertIn("Yle News", names)
+        self.assertIn("Reuters", names)
+        self.assertIn("Politico Europe", names)
+        self.assertIn("NATO", names)
+        self.assertIn("OECD", names)
+        self.assertNotIn("Yle News", names)
         self.assertNotIn("YouTube", names)
 
-    def test_yle_google_finland_investment_is_C(self):
+    def test_yle_google_finland_investment_is_context_not_public_C(self):
         ok, diagnostics = self.c_admitted(
             "Google announces €13bn additional investment in Finland",
             "Google announced an additional €13 billion investment in Finland to expand data centres "
             "and AI infrastructure, its largest investment in Europe.",
             "Yle News", "yle.fi", "https://yle.fi/a/74-20245301",
         )
-        self.assertTrue(ok, diagnostics)
+        self.assertFalse(ok, diagnostics)
+        self.assertTrue(any(d.get("reason") == "source_not_europe_trusted" for d in diagnostics), diagnostics)
 
     def test_dialogue_without_change_is_not_C(self):
         ok, diagnostics = self.c_admitted(
@@ -144,37 +148,37 @@ class V247SystemScopeAndCountryNews(unittest.TestCase):
         )
         self.assertTrue(ok, diagnostics)
 
-    def test_member_state_ai_factory_is_C(self):
+    def test_member_state_public_service_ai_factory_is_not_routine_C(self):
         ok, diagnostics = self.c_admitted(
             "Baltics' first AI factory to open in Estonia",
             "Estonia is opening the Baltic region's first AI factory to add computing capacity for research and companies.",
             "ERR News", "err.ee",
         )
-        self.assertTrue(ok, diagnostics)
+        self.assertFalse(ok, diagnostics)
 
-    def test_explicit_europe_sovereign_ai_financing_move_is_C(self):
+    def test_general_tech_outlet_is_not_routine_C(self):
         ok, diagnostics = self.c_admitted(
             "Mistral bags €3B to build Europe's sovereign AI champion",
             "The financing will expand European AI model and compute capability.",
             "The Register", "theregister.com",
         )
-        self.assertTrue(ok, diagnostics)
+        self.assertFalse(ok, diagnostics)
 
-    def test_trusted_europe_plan_is_C_even_before_realisation(self):
+    def test_broad_international_tv_news_is_not_routine_C(self):
         ok, diagnostics = self.c_admitted(
             "Europe looks to challenge US dominance in space sector with €10 billion plan",
             "Officials are considering a published €10 billion plan that could support future European space technology capacity.",
             "France 24", "france24.com",
         )
-        self.assertTrue(ok, diagnostics)
+        self.assertFalse(ok, diagnostics)
 
-    def test_trusted_europe_analysis_without_change_verb_is_C(self):
+    def test_think_tank_or_academic_commentary_is_not_routine_C(self):
         ok, diagnostics = self.c_admitted(
             "Europe’s strategic autonomy depends on open and secure science",
             "The analysis examines how open science, research security and European strategic autonomy interact across the research system.",
             "LSE European Politics and Policy", "blogs.lse.ac.uk",
         )
-        self.assertTrue(ok, diagnostics)
+        self.assertFalse(ok, diagnostics)
 
     def test_trusted_nordic_quantum_funding_news_is_C(self):
         ok, diagnostics = self.c_admitted(

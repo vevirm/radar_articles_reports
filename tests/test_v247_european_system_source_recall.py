@@ -15,7 +15,7 @@ class V247EuropeanSystemAndSourceRecallTests(unittest.TestCase):
     def gate(self, title, abstract="", kind="scholarly", tier=2):
         return S.gate_scope(title, abstract, "", tier, source_kind=kind)
 
-    def signal(self, headline, desc, source="Yle News", domain="yle.fi", link="https://example.test/item"):
+    def signal(self, headline, desc, source="Reuters", domain="reuters.com", link="https://example.test/item"):
         return {
             "headline": headline,
             "_desc": desc,
@@ -112,13 +112,13 @@ class V247EuropeanSystemAndSourceRecallTests(unittest.TestCase):
         d = "Register for the workshop. Speakers, venue and agenda are available online."
         self.assertTrue(S.routine_signal_noise(h, d))
 
-    def test_c_y_le_finland_compute_investment_can_enter(self):
+    def test_c_y_le_finland_compute_investment_is_context_not_public_c(self):
         h = "Google announces €13bn additional investment in Finland"
         d = "Google announced €13 billion additional investment in Finland over the next two years, focused on data centres and AI infrastructure. The investment confirms plans for new data centres will go ahead."
         diagnostics = []
-        out = S.anchor_news([self.signal(h, d)], [], diagnostics, allow_unanchored=True)
-        self.assertEqual(len(out), 1, diagnostics)
-        self.assertIn("compute infrastructure", out[0]["why_it_matters"])
+        out = S.anchor_news([self.signal(h, d, "Yle News", "yle.fi", "https://yle.fi/a/74-20245301")], [], diagnostics, allow_unanchored=True)
+        self.assertEqual(out, [], diagnostics)
+        self.assertTrue(any(x.get("reason") == "source_not_europe_trusted" for x in diagnostics), diagnostics)
 
     def test_c_innovation_act_formal_proposal_can_enter(self):
         h = "EU Innovation Act aims to boost growth of R&D-based companies"
@@ -166,13 +166,11 @@ class V247EuropeanSystemAndSourceRecallTests(unittest.TestCase):
         # Country-local discovery is deliberately allowed to find internally worded events.
         self.assertNotIn('"europe"', joined)
 
-    def test_y_le_is_configured_as_public_service_and_direct_source(self):
-        rows = [x for x in S.CONFIG.get("country_news_sources", []) if x.get("domain") == "yle.fi"]
-        self.assertTrue(rows)
-        self.assertEqual(rows[0].get("role"), "public_service")
-        direct = [x for x in S.CONFIG.get("direct_news_sources", []) if x.get("domain") == "yle.fi"]
-        self.assertTrue(direct)
-        self.assertIn("/a/", direct[0].get("path_hints", []))
+    def test_broad_national_media_lane_is_disabled_for_routine_c(self):
+        self.assertEqual(S.CONFIG.get("country_news_sources", []), [])
+        direct_domains = {x.get("domain") for x in S.CONFIG.get("direct_news_sources", [])}
+        self.assertNotIn("yle.fi", direct_domains)
+        self.assertIn("sciencebusiness.net", direct_domains)
 
 
     def test_high_quality_international_primary_sources_are_trusted_without_extra_news_lane(self):

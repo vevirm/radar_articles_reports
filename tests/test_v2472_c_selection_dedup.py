@@ -55,6 +55,13 @@ class V2472CSelectionDedup(unittest.TestCase):
         b = c("EU selects first AI gigafactory sites for construction", "2026-09-30", kind="investment / capacity")
         self.assertFalse(S.signals_near_duplicate(a, b))
 
+    def test_same_day_mistral_financing_rewrites_collapse_across_elite_publishers(self):
+        a = c("French AI company Mistral hits $24 billion valuation in funding round", "2026-09-08", kind="investment / capacity", source="Euractiv")
+        a["source_domain"] = "euractiv.com"
+        b = c("Mistral raises record €3bn as Europe strains to keep pace in AI race", "2026-09-08", kind="investment / capacity", source="Science|Business")
+        b["source_domain"] = "sciencebusiness.net"
+        self.assertTrue(S.signals_near_duplicate(a, b))
+
     def test_final_selection_excludes_existing_event_rewrites_and_prefers_concrete_events(self):
         previous = [
             c("Japan and EU sign off Horizon Europe association", "2026-07-30", kind="cooperation / alignment"),

@@ -64,6 +64,24 @@ class V2473SoftMixShares(unittest.TestCase):
         self.assertFalse(bool(S.CONFIG.get("c_floor_rescue_enabled", True)))
         self.assertEqual(S.CONFIG.get("target_item_mix_mode"), "soft_shares")
 
+    def test_relative_mix_weights_are_8_1_3(self):
+        self.assertEqual(S.target_mix_weights(), {"A": 8, "B": 1, "C": 3})
+
+    def test_overrepresented_c_loses_bonus_searches_not_publications(self):
+        state = S.relative_mix_discovery_state({"A": 3, "B": 0, "C": 11})
+        self.assertTrue(state["under_target"]["A"], state)
+        self.assertTrue(state["under_target"]["B"], state)
+        self.assertFalse(state["under_target"]["C"], state)
+
+    def test_weighted_ab_query_order_is_relative_not_truncating(self):
+        a = [f"A{i}" for i in range(16)]
+        b = ["B0", "B1"]
+        bank = S.weighted_strand_query_bank(a, b)
+        self.assertEqual(set(bank), set(a + b))
+        self.assertEqual(len(bank), 18)
+        self.assertEqual(bank[8], "B0")
+        self.assertEqual(bank[17], "B1")
+
 
 if __name__ == "__main__":
     unittest.main()
