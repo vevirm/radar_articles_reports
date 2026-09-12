@@ -1,0 +1,129 @@
+name: One-time repair — Risks & Opportunities page
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/one-time-repair-priorities.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Repair the priority page safely
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          index_path = Path("priorities/index.html")
+          js_path = Path("priorities/priorities.js")
+
+          index = index_path.read_text(encoding="utf-8")
+          js = js_path.read_text(encoding="utf-8")
+
+          # 1) Fix the accidental malformed edit that leaves the page stuck on "Loading".
+          #    Also remove the original 12-item renderer truncation if it is still present.
+          index = re.sub(
+              r"ordered\.slice\(0,\s*12\)\.map\(\(x,i\)=>item\(x,kind,i\)\)\.join\(''\)",
+              "ordered.map((x,i)=>item(x,kind,i)).join('')",
+              index,
+          )
+          index = re.sub(
+              r"ordered\.map\(\(x,i\)=>item\(x,kind,i\)\)\s*=>item\(x,kind,i\)\)\.join\(''\)",
+              "ordered.map((x,i)=>item(x,kind,i)).join('')",
+              index,
+          )
+
+          # 2) Remove the explicit 12-item build limit.
+          index = re.sub(
+              r"RadarPriorities\.buildPriorityView\(data,\{limit:\s*12\}\)",
+              "RadarPriorities.buildPriorityView(data)",
+              index,
+          )
+
+          # 3) Ensure the builder has no hidden 10/50-item ceiling.
+          old_limit = (
+              "const limit=Number.isFinite(opts.limit)"
+              "?Math.max(1,Math.min(50,Math.floor(opts.limit))):10;"
+          )
+          uncapped_limit = (
+              "const limit=Number.isFinite(opts.limit)"
+              "?Math.max(1,Math.floor(opts.limit)):Number.POSITIVE_INFINITY;"
+          )
+          if old_limit in js:
+              js = js.replace(old_limit, uncapped_limit)
+          elif uncapped_limit not in js:
+              print("ERROR: Could not identify the priority-view limit line safely.")
+              sys.exit(1)
+
+          # 4) Cache-bust the repaired JavaScript.
+          index = re.sub(
+              r'priorities\.js\?v=23\.[0-9]+',
+              'priorities.js?v=23.5',
+              index,
+          )
+
+          # Safety checks: the known broken/capped forms must be gone.
+          forbidden = [
+              "ordered.slice(0,12)",
+              "ordered.slice(0, 12)",
+              "buildPriorityView(data,{limit:12})",
+              "buildPriorityView(data,{limit: 12})",
+              "))=>item(x,kind,i)).join('')",
+          ]
+          leftovers = [x for x in forbidden if x in index]
+          if leftovers:
+              print("ERROR: Unsafe priority-page text remains:", leftovers)
+              sys.exit(1)
+
+          index_path.write_text(index, encoding="utf-8")
+          js_path.write_text(js, encoding="utf-8")
+          PY
+
+      - name: Syntax-check JavaScript
+        shell: bash
+        run: |
+          node --check priorities/priorities.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          html = Path("priorities/index.html").read_text(encoding="utf-8")
+          blocks = re.findall(r"<script>(.*?)</script>", html, flags=re.S)
+          if not blocks:
+              raise SystemExit("No inline JavaScript block found.")
+          for i, block in enumerate(blocks, 1):
+              Path(f"/tmp/priorities-inline-{i}.js").write_text(block, encoding="utf-8")
+          print(f"Extracted {len(blocks)} inline JavaScript block(s).")
+          PY
+          for f in /tmp/priorities-inline-*.js; do
+            node --check "$f"
+          done
+
+      - name: Commit repaired page
+        shell: bash
+        run: |
+          if git diff --quiet -- priorities/index.html priorities/priorities.js; then
+            echo "No repair was needed."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add priorities/index.html priorities/priorities.js
+          git commit -m "Repair uncapped Risks and Opportunities view"
+          git push
