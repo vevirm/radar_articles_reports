@@ -27,7 +27,7 @@ jobs:
       contents: write
       actions: write
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 18
 
     steps:
       - name: Check out repository without stored credentials
@@ -96,7 +96,7 @@ jobs:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           RADAR_QUICK_SCAN: 'true'
           RADAR_PRIORITY_SCAN: 'true'
-          RADAR_SCAN_BUDGET_SECONDS: '360'
+          RADAR_SCAN_BUDGET_SECONDS: '900'
           RADAR_CURATOR_CANDIDATE_INPUTS: /tmp/priority_candidates.json
           RADAR_RESCUE_MODE: 'false'
         run: python scripts/scan_radar.py
