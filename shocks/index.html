@@ -16,6 +16,7 @@
 </head>
 <body>
 <main class="wrap external-shock-main">
+  <div id="shockSummary" class="summary">Loading</div>
   <ol id="shockList" class="external-shock-list"><li class="empty">Loading</li></ol>
 </main>
 <script src="../reader_rank.js?v=17.20.18"></script>
@@ -24,6 +25,7 @@
 const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
 const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const SHOCK_DISPLAY_LIMIT=30;
 const SIMPLE={
   direct_cyber_infrastructure:'A major cyberattack knocks a shared European research or computing service offline.',
   direct_materials_cutoff:'A cutoff in critical materials or advanced chips stops research that has no quick substitute.',
@@ -62,31 +64,33 @@ function evidenceStats(s){
 }
 function collect(data){
   const out=[],seen=new Map();
-  const add=(text,distance=2,stats={})=>{text=clean(text);const k=norm(text);if(!text||!k)return;const item={text,distance:Number(distance)||2,records:Number(stats.records)||0,sources:Number(stats.sources)||0};const old=seen.get(k);if(old){if(item.distance<old.distance)Object.assign(old,item);return}seen.set(k,item);out.push(item)};
+  const add=(text,distance=2,stats={},score=0,explanation='')=>{
+    text=clean(text);const k=norm(text);if(!text||!k)return;
+    const item={text,distance:Number(distance)||2,records:Number(stats.records)||0,sources:Number(stats.sources)||0,score:Number(score)||0,explanation:clean(explanation)};
+    const old=seen.get(k);
+    if(old){if(item.score>old.score||(item.score===old.score&&item.sources>old.sources))Object.assign(old,item);return}
+    seen.set(k,item);out.push(item)
+  };
   const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
   const hids=Array.isArray(hi?.publications?.shock)?hi.publications.shock:[];
   const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-  for(const id of hids){const c=hmap.get(clean(id));if(c)add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources})}
-  const dynamic=RadarShockScenarios.buildDynamic?.(data)||[];
-  if(dynamic.length){
-    const records=dynamic.reduce((n,s)=>n+evidenceStats(s).records,0);
-    const sourceSet=new Set();for(const s of dynamic)for(const e of (s.evidence||[])){const src=clean((e.row||e)?.source);if(src)sourceSet.add(src)}
-    add('A security reclassification suddenly restricts access to European research, technology and collaboration.',3,{records,sources:sourceSet.size});
-  }
-  for(const s of RadarShockScenarios.buildDirect?.(data)||[])add(SIMPLE[s.id]||s.title,1,evidenceStats(s));
+  for(const id of hids){const c=hmap.get(clean(id));if(c)add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources},Number(c.score)||0,c.reader_summary||'')}
+  for(const s of RadarShockScenarios.buildDynamic?.(data)||[])add(s.title,3,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'');
+  for(const s of RadarShockScenarios.buildDirect?.(data)||[])add(SIMPLE[s.id]||s.title,1,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'');
   for(const s of RadarShockScenarios.build?.(data)||[]){
     if(['pilot_lines_materials','open_science_security_collision','measurement_mid_river'].includes(s.id))continue;
-    add(SIMPLE[s.id]||s.title,2,evidenceStats(s));
+    add(SIMPLE[s.id]||s.title,2,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'');
   }
-  return out.sort((a,b)=>a.distance-b.distance||b.sources-a.sources||b.records-a.records||a.text.localeCompare(b.text));
+  return out.sort((a,b)=>b.score-a.score||b.sources-a.sources||b.records-a.records||a.distance-b.distance||a.text.localeCompare(b.text));
 }
 (async()=>{
   const el=document.getElementById('shockList');
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
-    const items=collect(data);
-    el.innerHTML=items.length?items.map(x=>`<li><strong>${esc(x.text)}</strong><p>${esc(shockExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
-  }catch(e){console.error(e);el.innerHTML='<li class="empty">Unavailable.</li>'}
+    const all=collect(data),items=all.slice(0,SHOCK_DISPLAY_LIMIT);
+    document.getElementById('shockSummary').textContent=`Showing ${items.length} highest-ranked possible shock${items.length===1?'':'s'}${all.length>items.length?` of ${all.length} supported`:' supported'}.`;
+    el.innerHTML=items.length?items.map(x=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
+  }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
 <script src="../site-shell.js?v=28"></script>
