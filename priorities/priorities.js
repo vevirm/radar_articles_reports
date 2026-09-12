@@ -465,7 +465,7 @@
   }
 
   function buildPriorityView(data,opts={}){
-    const limit=Number.isFinite(opts.limit)?Math.max(1,Math.min(50,Math.floor(opts.limit))):10;
+    const limit=Number.isFinite(opts.limit)?Math.max(1,Math.floor(opts.limit)):Number.POSITIVE_INFINITY;
     const rows=lensRows(data);
     const primaryRows=rows.filter(x=>!x.contextOnly);
     const contextRows=rows.filter(x=>x.contextOnly);
