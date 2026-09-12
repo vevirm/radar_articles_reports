@@ -18228,19 +18228,288 @@ def _novel_signal_rows(rows: list[dict[str, Any]], previous_c: list[dict[str, An
     return out
 
 
+
+C_EXCEPTIONAL_RELEASE_PROFILE_VERSION = "v24.7.6-substantial-event-bypass"
+
+
+def _exceptional_c_source_text(item: dict[str, Any]) -> str:
+    """Source-backed C text only; never use generated Radar impact prose for the bypass."""
+    if not isinstance(item, dict):
+        return ""
+    return clean_text(". ".join(
+        x for x in (
+            clean_text(item.get("headline")),
+            c_saved_source_claim(item),
+            clean_text(item.get("description") or item.get("desc") or ""),
+        ) if x
+    ))
+
+
+def _exceptional_c_large_money(text: str) -> bool:
+    """True for an actually reported >=1bn-scale commitment/transaction.
+
+    The threshold is intentionally coarse: this is an urgency bypass, not a financial model.
+    Currency conversion is deliberately avoided; EUR/USD/GBP billion-scale events are all
+    sufficiently large for this narrow gate.
+    """
+    low = normalized(text)
+    if re.search(r"\bmulti-?billion(?:-dollar|-euro|-pound)?\b", low, re.I):
+        return True
+    for m in re.finditer(
+        r"(?:€|eur\b|\$|usd\b|£|gbp\b)\s*([0-9]+(?:[.,][0-9]+)?)\s*(billion|bn|million|mn|m)\b",
+        text,
+        re.I,
+    ):
+        try:
+            value = float(m.group(1).replace(",", "."))
+        except ValueError:
+            continue
+        unit = normalized(m.group(2))
+        millions = value * 1000.0 if unit in {"billion", "bn"} else value
+        if millions >= 1000.0:
+            return True
+    return False
+
+
+def _exceptional_c_large_observed_shift(text: str) -> bool:
+    """Very large measured system shifts only; ordinary trend reporting stays ratio-bound."""
+    low = normalized(text)
+    metric = bool(re.search(
+        r"\b(?:research funding|r&d investment|r&i investment|research investment|researchers?|scientists?|"
+        r"patents?|horizon europe|research participation|research collaboration|venture capital|deep[- ]tech investment|"
+        r"compute capacity|semiconductor(?:s| output)?|chip(?:s| output)?|research talent|science funding)\b",
+        low,
+        re.I,
+    ))
+    if not metric:
+        return False
+    if re.search(r"\b(?:record (?:high|low|rise|fall|drop|decline|surge)|doubled|tripled|halved|collapsed|collapse)\b", low, re.I):
+        return True
+    for m in re.finditer(r"\b([0-9]{1,3}(?:\.[0-9]+)?)\s*%", low):
+        try:
+            pct = float(m.group(1))
+        except ValueError:
+            continue
+        if pct >= 30 and re.search(r"\b(?:rise|rose|increase|increased|surge|surged|jump|jumped|fall|fell|drop|dropped|decline|declined|cut|cuts|reduction)\b", low, re.I):
+            return True
+    return False
+
+
+def exceptional_c_release_decision(item: dict[str, Any]) -> dict[str, Any]:
+    """Whether a C item may bypass the 8:1:3 wait because something substantial happened.
+
+    This is deliberately much stricter than normal Strand-C admission.  The bypass is about
+    timeliness, not analytical weight: qualifying rows remain low-weight C context and still
+    count in the publication ledger, so ordinary C remains blocked until A catches up.
+
+    A bypass requires all of the following:
+      * an event route with a realised/observed event (never commentary or a proposal alone),
+      * a top-tier independent/specialist source or authoritative primary institution,
+      * direct/supported European scope, or an unusually large member-state capital/control event,
+      * and one narrow materiality class below (major programme change, enacted rule/restriction,
+        >=1bn capital/control shift, strategic infrastructure becoming operational, severe
+        disruption, or an exceptionally large measured system shift).
+    """
+    result: dict[str, Any] = {
+        "eligible": False,
+        "reason": "",
+        "profile_version": C_EXCEPTIONAL_RELEASE_PROFILE_VERSION,
+        "source_role": "",
+    }
+    if not bool(CONFIG.get("c_exceptional_release_enabled", True)) or not isinstance(item, dict):
+        result["reason"] = "disabled_or_invalid"
+        return result
+
+    route = normalized(item.get("c_admission_route", ""))
+    status = clean_text(item.get("event_status", "")).upper()
+    if route != "event" or status not in {"DONE", "COMMITTED", "OBSERVED"}:
+        result["reason"] = "not_realised_event"
+        return result
+
+    source = clean_text(item.get("source", ""))
+    domain = clean_text(item.get("source_domain", ""))
+    link = clean_text(item.get("link", ""))
+    role = configured_c_source_role(source, domain, link)
+    result["source_role"] = role
+    if role not in {"official_primary", "independent_high_quality", "specialist_research"} and not _source_merit_is_eu_official(source, link):
+        result["reason"] = "source_not_strong_enough"
+        return result
+
+    text = _exceptional_c_source_text(item)
+    low = normalized(text)
+    if not low:
+        result["reason"] = "no_source_claim"
+        return result
+
+    # These are real publication events, but not realised changes in the R&I operating environment.
+    # A hard completed-action phrase can override future/modal language in a longer sentence.
+    hard_completed = bool(re.search(
+        r"\b(?:entered into force|enters into force|formally adopted|adopted|approved|passed|ratified|"
+        r"formally joins?|rejoins?|joined|rejoined|withdrawn|withdrew|suspended|blocked|banned|sanctioned|"
+        r"raised|raises|invested|committed|allocated|awarded|acquired|acquires|bought|takes? control|"
+        r"opened|commissioned|became operational|becomes operational|launched|shut down|closed|destroyed|severed)\b",
+        low,
+        re.I,
+    ))
+    non_realised_only = bool(re.search(
+        r"\b(?:proposal|proposes?|consultation|call for|calls for|calls on|urges?|warns?|plans? to|"
+        r"intends? to|aims? to|targets? europe|needed|investment needed|required by 20[0-9]{2}|"
+        r"could|may|should|would|debate|opinion|commentary)\b",
+        low,
+        re.I,
+    ))
+    if non_realised_only and not hard_completed:
+        result["reason"] = "not_a_completed_material_change"
+        return result
+
+    rel = normalized(item.get("eu_relevance", ""))
+    direct_scope = rel in {"direct", "supported"}
+    member_scope = rel == "member_state"
+
+    ri_system = bool(re.search(
+        r"\b(?:research|science|scientific|innovation|r&d|r&i|technology|technological|horizon europe|fp10|"
+        r"erc|eic|research programme|research program|research infrastructure|research security|export control|"
+        r"semiconductor|chip|artificial intelligence|\bai\b|quantum|biotech|biotechnology|space|supercomput|"
+        r"compute|data cent(?:re|er)|critical raw material|critical mineral|patent|intellectual property|"
+        r"university|researcher|scientist|deep[- ]tech)\b",
+        low,
+        re.I,
+    ))
+    if not ri_system:
+        result["reason"] = "not_systemically_ri_material"
+        return result
+
+    # 1) Participation/access to a major European research programme actually changes.
+    major_programme = bool(re.search(r"\b(?:horizon europe|framework programme|framework program|erc|eic|esa|cern)\b", low, re.I))
+    programme_change = bool(re.search(
+        r"\b(?:formally joins?|joined|joins|rejoins?|rejoined|becomes? associated|associated country|"
+        r"association agreement (?:signed|enters into force|entered into force)|withdraws?|withdrew|"
+        r"suspends?|suspended|excluded|locked out|terminates?|terminated)\b",
+        low,
+        re.I,
+    ))
+    if direct_scope and major_programme and programme_change:
+        result.update(eligible=True, reason="major_research_programme_access_changed")
+        return result
+
+    # 2) A binding system rule/security restriction is adopted or actually imposed.
+    binding_action = bool(re.search(
+        r"\b(?:entered into force|enters into force|formally adopted|adopted|approved|passed|ratified|"
+        r"imposed|imposes|banned|bans|blocked|blocks|restricted|restricts|suspended|suspends|revoked|revokes|"
+        r"sanctioned|sanctions|blacklisted|freezes?|halted|halts|cut off|severed)\b",
+        low,
+        re.I,
+    ))
+    binding_scope = bool(re.search(
+        r"\b(?:export control|sanction|research security|technology transfer|foreign investment|screening|"
+        r"artificial intelligence|\bai\b|semiconductor|chip|quantum|biotech|space|data|research funding|"
+        r"research collaboration|scientific cooperation|intellectual property|patent|critical technolog|dual[- ]use)\b",
+        low,
+        re.I,
+    ))
+    proposal_text = bool(re.search(r"\b(?:proposal|draft|consultation)\b", low, re.I))
+    binding_final = bool(re.search(
+        r"\b(?:entered into force|enters into force|formally adopted (?:law|act|regulation|rule)|"
+        r"(?:law|act|regulation|rule) (?:was )?adopted|passed (?:a |the )?(?:law|act|regulation)|ratified|"
+        r"imposed|banned|blocked|restricted|suspended|revoked|sanctioned|blacklisted|cut off|severed)\b",
+        low,
+        re.I,
+    ))
+    if direct_scope and binding_action and binding_scope and (not proposal_text or binding_final):
+        result.update(eligible=True, reason="binding_rule_or_critical_access_change")
+        return result
+
+    # 3) A truly large realised capital/ownership move in strategic European R&I capacity.
+    large_money = _exceptional_c_large_money(text)
+    money_action = bool(re.search(
+        r"\b(?:raises?|raised|invests?|invested|commits?|committed|allocates?|allocated|awards?|awarded|"
+        r"acquires?|acquired|buys?|bought|secures?|secured|closes? (?:a )?(?:funding|financing|deal)|"
+        r"announces? (?:a |an )?(?:€|eur|\$|usd|£|gbp))\b",
+        low,
+        re.I,
+    ))
+    control_change = bool(re.search(
+        r"\b(?:acquires?|acquired|takeover|takes? control|majority stake|controlling stake|buys?|bought|merger completed|merges with)\b",
+        low,
+        re.I,
+    ))
+    strategic_asset = bool(re.search(
+        r"\b(?:artificial intelligence|\bai\b|semiconductor|chip|quantum|biotech|space|supercomput|"
+        r"research infrastructure|deep[- ]tech|critical technolog|data cent(?:re|er)|cloud infrastructure)\b",
+        low,
+        re.I,
+    ))
+    if strategic_asset and ((large_money and money_action) or control_change) and (direct_scope or member_scope):
+        result.update(eligible=True, reason="major_strategic_capital_or_control_change")
+        return result
+
+    # 4) A strategic facility/capability actually becomes operational (not merely a call or plan).
+    infrastructure = bool(re.search(
+        r"\b(?:supercomputer|exascale|ai factor(?:y|ies)|gigafactor(?:y|ies)|semiconductor fab|chip fab|"
+        r"quantum computer|research infrastructure|satellite constellation|iris2|iris²|compute facility)\b",
+        low,
+        re.I,
+    ))
+    operating = bool(re.search(
+        r"\b(?:opened|opens|commissioned|became operational|becomes operational|in operation|starts operations|went live|goes live|launched)\b",
+        low,
+        re.I,
+    ))
+    future_build = bool(re.search(
+        r"\b(?:call for|call to|proposal|tender|consultation|to build|will build|to develop|will develop|"
+        r"planned|plans? to|expected to open|will open|to be built)\b",
+        low,
+        re.I,
+    ))
+    if direct_scope and infrastructure and operating and not future_build:
+        result.update(eligible=True, reason="major_strategic_capability_became_operational")
+        return result
+
+    # 5) A severe disruption actually removes/interrupts European R&I access or capacity.
+    disruption = bool(re.search(
+        r"\b(?:shut down|shutdown|closed|closure|destroyed|severed|cut off|blocked|suspended|halted|"
+        r"major outage|disrupted|disruption|revoked|withdrawn)\b",
+        low,
+        re.I,
+    ))
+    access_capacity = bool(re.search(
+        r"\b(?:access|research programme|research program|research funding|research infrastructure|facility|"
+        r"compute|supercomputer|laborator(?:y|ies)|collaboration|cooperation|supply|researchers?|scientists?|data)\b",
+        low,
+        re.I,
+    ))
+    if (direct_scope or member_scope) and disruption and access_capacity:
+        result.update(eligible=True, reason="severe_ri_access_or_capacity_disruption")
+        return result
+
+    # 6) Observed evidence can bypass only for an unmistakably large Europe-wide system shift.
+    if status == "OBSERVED" and direct_scope and _exceptional_c_large_observed_shift(text):
+        result.update(eligible=True, reason="exceptionally_large_observed_system_shift")
+        return result
+
+    result["reason"] = "material_but_not_exceptional"
+    return result
+
+
 def _c_publication_rank_key(item: dict[str, Any]) -> tuple[int, int, int]:
-    """Prefer concrete dated state-variable changes over commentary when C slots are scarce."""
+    """Prefer exceptional realised events, then concrete/fresh C, when slots are scarce.
+
+    Keep the historical three-field return shape because downstream maintenance scripts unpack
+    it directly. Priority 2/3 means exceptional; priority 1 means ordinary concrete C.
+    """
+    exceptional = int(bool(exceptional_c_release_decision(item).get("eligible")))
     route = normalized(item.get('c_admission_route', ''))
     status = normalized(item.get('event_status', ''))
     kind = normalized(item.get('signal_kind', ''))
     concrete = int(route == 'event' and status != 'interpretive' and kind != 'analysis / interpretation')
+    priority = concrete + (2 * exceptional)
     try:
         d = dateparser.parse(clean_text(item.get('c_event_date') or item.get('date'))).date().toordinal()
     except Exception:
         d = 0
-    # Among equally concrete/fresh rows, anchored evidence is a weak tie-break only.
+    # Among equally exceptional/concrete/fresh rows, anchored evidence is a weak tie-break only.
     anchored = int(normalized(item.get('anchor_status', '')) == 'anchored')
-    return concrete, d, anchored
+    return priority, d, anchored
 
 
 def select_hard_new_c_mix(current_c: list[dict[str, Any]], previous_c: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, int]]:
@@ -18258,6 +18527,78 @@ def select_hard_new_c_mix(current_c: list[dict[str, Any]], previous_c: list[dict
         'suppressed_c': 0,
     }
     return novel, stats
+
+
+
+def select_relative_c_release(
+    current_c: list[dict[str, Any]],
+    published: dict[str, int],
+    new_a: int,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    """Apply normal 8:1:3 C slots plus a strict substantial-event urgency bypass.
+
+    Exceptional rows consume ordinary slots first. Only exceptional rows beyond those slots
+    bypass the ratio. Every published exceptional row is still added to the same C ledger by
+    the caller, creating C debt that blocks ordinary C until A catches up.
+    """
+    c_slots, target_c_total, projected_a = relative_mix_release_slots(published, new_a, "C")
+    ranked = [dict(x) for x in current_c if isinstance(x, dict)]
+    ranked.sort(key=_c_publication_rank_key, reverse=True)
+
+    selected: list[dict[str, Any]] = list(ranked[:c_slots])
+    selected_ids = {signal_identity(x) for x in selected}
+    exceptional_all: list[tuple[dict[str, Any], dict[str, Any]]] = []
+    for row in ranked:
+        decision = exceptional_c_release_decision(row)
+        if decision.get("eligible"):
+            exceptional_all.append((row, decision))
+
+    bypass_ids: set[str] = set()
+    for row, _decision in exceptional_all:
+        sid = signal_identity(row)
+        if sid in selected_ids:
+            continue
+        selected.append(row)
+        selected_ids.add(sid)
+        bypass_ids.add(sid)
+
+    annotated_selected: list[dict[str, Any]] = []
+    for row in selected:
+        out = dict(row)
+        decision = exceptional_c_release_decision(out)
+        if decision.get("eligible"):
+            out["exceptional_c_release"] = True
+            out["exceptional_c_release_reason"] = clean_text(decision.get("reason"))
+            out["exceptional_c_release_profile_version"] = C_EXCEPTIONAL_RELEASE_PROFILE_VERSION
+            out["exceptional_c_ratio_bypass"] = signal_identity(out) in bypass_ids
+        else:
+            out.pop("exceptional_c_release", None)
+            out.pop("exceptional_c_release_reason", None)
+            out.pop("exceptional_c_release_profile_version", None)
+            out.pop("exceptional_c_ratio_bypass", None)
+        annotated_selected.append(out)
+
+    deferred: list[dict[str, Any]] = []
+    for row in ranked:
+        if signal_identity(row) in selected_ids:
+            continue
+        out = dict(row)
+        out.pop("exceptional_c_release", None)
+        out.pop("exceptional_c_release_reason", None)
+        out.pop("exceptional_c_release_profile_version", None)
+        out.pop("exceptional_c_ratio_bypass", None)
+        deferred.append(out)
+
+    stats: dict[str, Any] = {
+        "projected_a_total": projected_a,
+        "relative_target_c_total": target_c_total,
+        "release_slots": c_slots,
+        "exceptional_eligible_c": len(exceptional_all),
+        "exceptional_selected_c": sum(1 for x in annotated_selected if x.get("exceptional_c_release")),
+        "exceptional_ratio_bypass_c": len(bypass_ids),
+        "exceptional_release_profile_version": C_EXCEPTIONAL_RELEASE_PROFILE_VERSION,
+    }
+    return annotated_selected, deferred, stats
 
 
 def c_floor_rescue_queries() -> list[str]:
@@ -22214,9 +22555,7 @@ def main() -> int:
     if not RADAR_QUICK_STRAND:
         ledger_counts = mix_publication.get("published", {})
         new_a_for_ratio = sum(1 for x in strand_a if isinstance(x, dict) and x.get("new_this_scan"))
-        c_slots, target_c_total, projected_a = relative_mix_release_slots(ledger_counts, new_a_for_ratio, "C")
-        selected_c = list(current_c[:c_slots])
-        deferred_c = list(current_c[c_slots:])
+        selected_c, deferred_c, c_release_meta = select_relative_c_release(current_c, ledger_counts, new_a_for_ratio)
         mix_publication["pending_c"] = _dedupe_pending_rows(deferred_c, signal=True)
         current_c = selected_c
         c_quota_stats = {
@@ -22224,13 +22563,16 @@ def main() -> int:
             "selected_c": len(selected_c),
             "suppressed_c": len(deferred_c),
             "deferred_c": len(deferred_c),
-            "relative_target_c_total": target_c_total,
-            "release_slots": c_slots,
+            **c_release_meta,
         }
         relative_mix_release_stats.update({
-            "target_c_total": target_c_total,
-            "c_release_slots": c_slots,
+            "target_c_total": c_release_meta["relative_target_c_total"],
+            "c_release_slots": c_release_meta["release_slots"],
             "c_deferred": len(deferred_c),
+            "c_exceptional_eligible": c_release_meta["exceptional_eligible_c"],
+            "c_exceptional_selected": c_release_meta["exceptional_selected_c"],
+            "c_exceptional_ratio_bypass": c_release_meta["exceptional_ratio_bypass_c"],
+            "c_exceptional_release_profile_version": C_EXCEPTIONAL_RELEASE_PROFILE_VERSION,
         })
     elif RADAR_QUICK_STRAND == "C":
         # A focused C scan is intentionally allowed to publish its own strand.  Main mixed
