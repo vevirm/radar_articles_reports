@@ -45,6 +45,7 @@ from scan_radar import (
     document_exclusion_reason as main_document_exclusion_reason,
     final_ab_candidate_worthiness as main_final_ab_candidate_worthiness,
     weighted_strand_query_bank as main_weighted_strand_query_bank,
+    relative_mix_release_slots as main_relative_mix_release_slots,
 )
 HIST_DIR = ROOT / "historical"
 CONFIG_PATH = HIST_DIR / "config.json"
@@ -1339,6 +1340,14 @@ def persist_historical_deferred(state: dict[str, Any]) -> list[dict[str, Any]]:
 def main() -> int:
     previous=load_previous_archive()
     state=previous.get("scan_state") if isinstance(previous.get("scan_state"),dict) else {}
+    historical_mix = state.get("relative_mix_publication") if isinstance(state.get("relative_mix_publication"),dict) else {}
+    if clean(historical_mix.get("version")) != "v24.7.5-historical-8-1":
+        historical_mix = {"version":"v24.7.5-historical-8-1","published":{"A":0,"B":0},"pending_b":[]}
+    historical_mix["published"] = {
+        "A": max(0,int((historical_mix.get("published") or {}).get("A",0) or 0)),
+        "B": max(0,int((historical_mix.get("published") or {}).get("B",0) or 0)),
+    }
+    historical_mix["pending_b"] = [dict(x) for x in historical_mix.get("pending_b",[]) if isinstance(x,dict)]
     persistent_metadata_candidates=recover_historical_deferred(state,[])
     previous_items=[x for x in previous.get("items",[]) if isinstance(x,dict)]
     topics=list(CONFIG.get("topics",[])); sources=list(CONFIG.get("elite_sources",[])); seeds=curated_seed_items(); manual_items=manual_evidence_items()
@@ -1484,8 +1493,38 @@ def main() -> int:
         current_new=count_new_against_retained(current_unique,retained_baseline)
 
     wait_until_minimum_runtime()
-    unique_gate=dedupe(candidates)
-    merged,new_count=cumulative_merge(previous_items,manual_items,unique_gate)
+    unique_gate=dedupe(candidates + historical_mix.get("pending_b",[]))
+
+    # Historical is A+B only and uses the same relative A-anchored release principle as
+    # the mixed live scanner.  Surplus valid B method work is deferred privately rather
+    # than discarded, so an unusually productive B search cannot swamp the archive.
+    retained_keys=set()
+    for _row in list(previous_items)+list(manual_items):
+        if isinstance(_row,dict): retained_keys.update(duplicate_keys(_row))
+    known_gate=[]; novel_gate=[]; local_keys=set(retained_keys)
+    for _row in unique_gate:
+        if not isinstance(_row,dict): continue
+        _keys=duplicate_keys(_row)
+        if _keys and _keys & retained_keys:
+            known_gate.append(_row); continue
+        if _keys and _keys & local_keys:
+            continue
+        novel_gate.append(_row); local_keys.update(_keys)
+    novel_a=[x for x in novel_gate if clean(x.get("strand")).upper() in {"A","BOTH"}]
+    novel_b=[x for x in novel_gate if clean(x.get("strand")).upper()=="B"]
+    _pub={"A":historical_mix["published"]["A"],"B":historical_mix["published"]["B"],"C":0}
+    b_slots,b_target,projected_a=main_relative_mix_release_slots(_pub,len(novel_a),"B")
+    selected_b=novel_b[:b_slots]
+    deferred_b=novel_b[b_slots:]
+    historical_mix["pending_b"]=[dict(x,new_this_scan=False) for x in deferred_b][-240:]
+    selected_gate=known_gate+novel_a+selected_b
+    merged,new_count=cumulative_merge(previous_items,manual_items,selected_gate)
+    historical_mix["published"]["A"] += len(novel_a)
+    historical_mix["published"]["B"] += len(selected_b)
+    historical_mix["last_release"]={
+        "new_a":len(novel_a),"eligible_b":len(novel_b),"new_b":len(selected_b),
+        "deferred_b":len(deferred_b),"target_b_total":b_target,"projected_a_total":projected_a,
+    }
     merged.sort(key=lambda x:(int(x.get("year",0) or 0),clean(x.get("date")),clean(x.get("title"))),reverse=True)
 
     matrix_counts={r:{c:0 for c in "ABCD"} for r in ROW_TERMS}
@@ -1507,7 +1546,7 @@ def main() -> int:
         "source_policy":clean(CONFIG.get("source_policy_note")) or "High-quality historical research-system evidence; curated seeds still pass the same admission gates.",
         "items":merged,"matrix_counts":matrix_counts,
         "coverage_map":{"bands":[{"id":str(b.get("id")),"label":str(b.get("label")),"date_from":b["date_from"].isoformat(),"date_to":b["date_to"].isoformat(),"items":int(band_counts.get(str(b.get("id")),0))} for b in bands],"thinnest_populated_cells":thinnest},
-        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"main_query_cursor":next_main_query,"deferred_metadata_queue":persist_historical_deferred(state),"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
+        "scan_state":{"topic_cursor":next_topic,"source_cursor":next_source,"seed_cursor":next_seed,"time_band_cursor":next_band,"source_depth_cursor":next_source_depth%max_source_depth,"api_depth_cursor":next_api_depth%max_api_depth,"gap_cursor":next_gap,"author_cursor":next_author,"main_query_cursor":next_main_query,"deferred_metadata_queue":persist_historical_deferred(state),"relative_mix_publication":historical_mix,"completed_runs":int(state.get("completed_runs",0))+1,"last_completed_at":now},
         "last_scan":{
             "status":"ok" if not warnings else "completed_with_warnings","rescue_mode":False,
             "topics":[str(t.get("label")) for t in active_topics],"sources":[str(s.get("name")) for s in active_sources],"queries":queries,"shared_main_queries":main_query_batch,
@@ -1518,6 +1557,7 @@ def main() -> int:
             "low_yield_rotation":{"triggered":low_triggered,"new_items_before_continuations":initial_new,"new_items_after_all_in_run_rotations":new_count,"separate_rescue_run_enabled":False},
             "minimum_runtime":{"configured_seconds":MIN_RUNTIME_SECONDS,"research_window_seconds":BUDGET_SECONDS,"finalize_margin_seconds":FINALIZE_MARGIN_SECONDS,"satisfied":elapsed_seconds()>=max(0,MIN_RUNTIME_SECONDS-FINALIZE_MARGIN_SECONDS),"continuation_waves":continuation_waves},
             "target_new_items":target_new,
+            "relative_mix":{"weights":{"A":8,"B":1},"historical_c_enabled":False,"release":dict(historical_mix.get("last_release",{})),"ledger":dict(historical_mix.get("published",{})),"pending_b":len(historical_mix.get("pending_b",[]))},
             "cumulative_retention":{"enabled":True,"previous_items":len(previous_items),"retained_previous_items":len(previous_items),"normal_scan_deletions":0,"legacy_max_items":MAX_ITEMS},
             "new_items":new_count,"candidates_seen":len(candidates),"unique_gate_candidates":len(unique_gate),"total_items":len(merged),"runtime_seconds":round(time.monotonic()-STARTED_MONO,1),
             "openalex_api_key_configured":bool(OPENALEX_API_KEY),"rejection_funnel":rejection_funnel(new_count,len(unique_gate)),"diagnostics":{k:int(v) for k,v in sorted(DIAG.items())},"warnings":list(dict.fromkeys(warnings))[:50],

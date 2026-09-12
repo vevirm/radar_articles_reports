@@ -1,3 +1,14 @@
+# v24.7.5 — relative 8:1:3 publication release
+
+- **The balance is relative, not an 8/1/3 ceiling.** Main mixed scanning still discovers every valid A/B/C candidate, but publication release now follows the cumulative A:B:C ratio **8:1:3**.
+- **A is the anchor.** New A publishes normally. B and C receive release slots as A accumulates. At 8 published A the running target is 1 B / 3 C; at 80 A it is 10 B / 30 C.
+- **Surplus B/C is deferred, not rejected.** Valid ahead-of-ratio B/C candidates are kept in the scanner state and released on later mixed scans when A catches up. This prevents a run such as 1 A / 1 B / 26 C from flooding the site without recreating the earlier C-starvation problem.
+- **Focused strand scans remain focused.** A-only, B-only and C-only scans may publish the selected strand they were explicitly asked to search. Their publications are recorded in the same running ledger so later mixed scans can compensate.
+- **Historical remains A+B only.** Historical uses the same relative principle as **8:1** for A/B and has no C discovery, admission or publication route.
+- **The already-published 26-C run was repaired.** Its strongest C item remains public; the other 25 valid C candidates were moved to the private pending backlog. The visible latest-run count is now 1 A / 1 B / 1 C, and the downstream reasoning registries were retraced against that evidence base.
+- **Reasoning rules were not weakened or rewritten.** The retrace removed stale references created by deferring the 25 C rows and finished with **0 orphan references**.
+- **Regression result:** `python -m unittest discover -s tests -p 'test_*.py'` → **438 tests, 0 failures, 33 intentional skips**.
+
 # v24.6 — criteria repair and hard 8:1:3 publication mix
 
 - **A:** admission is relationship-based. Internal EU R&I evidence can qualify when it establishes a strategic state variable (capability, funding, talent, infrastructure/compute, collaboration, scale-up, dependency, governance, research security, standards), even if the source does not itself use geopolitical language. Generic Europe + technology/research co-occurrence is insufficient.

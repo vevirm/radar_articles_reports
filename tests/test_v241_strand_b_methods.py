@@ -62,8 +62,8 @@ class StrandBMethodsContractTests(unittest.TestCase):
         self.assertEqual(cfg['queries_b_method_recent_per_scan'] + cfg['queries_b_method_foundational_per_scan'], 12)
         self.assertGreaterEqual(cfg['b_method_protected_scholarly_queries_per_source'], 6)
         self.assertGreaterEqual(len(cfg['b_method_journal_watchlist']), 10)
-        self.assertIn('Soft publication mix shares', cfg['target_item_mix_rule'])
-        self.assertEqual(cfg.get('target_item_mix_mode'), 'soft_shares')
+        self.assertIn('Relative publication balance', cfg['target_item_mix_rule'])
+        self.assertEqual(cfg.get('target_item_mix_mode'), 'relative_release')
 
     def test_b_is_recent_first_with_foundational_fallback(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text())

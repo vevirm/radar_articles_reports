@@ -149,7 +149,7 @@ class V242ScannerAdmissionRepairTests(unittest.TestCase):
         self.assertEqual(int(cfg.get("target_new_c_per_scan", -1)), 3)
         self.assertEqual(int(cfg.get("c_min_new_per_successful_scan", -1)), 0)
         self.assertFalse(bool(cfg.get("c_floor_rescue_enabled", True)))
-        self.assertEqual(cfg.get("target_item_mix_mode"), "soft_shares")
+        self.assertEqual(cfg.get("target_item_mix_mode"), "relative_release")
 
     def test_missing_text_queue_is_persistent_state(self):
         state = S.initial_scan_state({})

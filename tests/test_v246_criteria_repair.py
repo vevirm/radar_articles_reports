@@ -490,7 +490,7 @@ class V246CriteriaRepairTests(unittest.TestCase):
         self.assertEqual((cfg["target_new_a_per_scan"], cfg["target_new_b_per_scan"], cfg["target_new_c_per_scan"]), (8, 1, 3))
         self.assertEqual(cfg["c_min_new_per_successful_scan"], 0)
         self.assertFalse(cfg["c_floor_rescue_enabled"])
-        self.assertEqual(cfg.get("target_item_mix_mode"), "soft_shares")
+        self.assertEqual(cfg.get("target_item_mix_mode"), "relative_release")
 
 
 if __name__ == "__main__":

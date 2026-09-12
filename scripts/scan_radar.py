@@ -1049,6 +1049,85 @@ def relative_mix_discovery_state(counts: dict[str, int], enabled: Iterable[str] 
     }
 
 
+RELATIVE_MIX_PUBLICATION_VERSION = "v24.7.5-relative-publication-8-1-3"
+
+
+def relative_mix_target_count(a_count: int, strand: str, already_published: int = 0) -> int:
+    """Cumulative relative target for B/C given published A work.
+
+    The ratio is anchored on Strand A: every eight A works support one B and three C.
+    This is deliberately *not* an absolute per-run ceiling such as 8/1/3.  The target
+    grows with A.  A one-item start pulse is allowed for B/C after the first A so a
+    small mixed scan does not make a healthy lane look broken; that borrowed item is
+    then absorbed by the ratio before another one can be released.
+    """
+    weights = target_mix_weights()
+    label = clean_text(strand).upper()
+    if label not in {"B", "C"}:
+        return max(0, int(a_count or 0)) if label == "A" else 0
+    a_total = max(0, int(a_count or 0))
+    published = max(0, int(already_published or 0))
+    a_weight = max(1, int(weights.get("A", 8) or 8))
+    weight = max(0, int(weights.get(label, 0) or 0))
+    target = (a_total * weight) // a_weight
+    # Anti-starvation at tiny sample sizes.  This is a one-off debt, not a recurring floor:
+    # once one B/C item has been published, no second item appears until A catches up.
+    if a_total > 0 and weight > 0 and published == 0 and target == 0:
+        target = 1
+    return target
+
+
+def relative_mix_release_slots(published: dict[str, int], new_a: int, strand: str) -> tuple[int, int, int]:
+    """Return (slots_now, cumulative_target, projected_A) for B or C."""
+    clean = {k: max(0, int((published or {}).get(k, 0) or 0)) for k in ("A", "B", "C")}
+    projected_a = clean["A"] + max(0, int(new_a or 0))
+    label = clean_text(strand).upper()
+    target = relative_mix_target_count(projected_a, label, clean.get(label, 0))
+    return max(0, target - clean.get(label, 0)), target, projected_a
+
+
+def relative_mix_publication_state(state: dict[str, Any]) -> dict[str, Any]:
+    """Return the persistent mixed-scan publication ledger/backlog.
+
+    Excess valid B/C candidates are deferred, not rejected.  This is what lets the
+    main scanner respect 8:1:3 without recreating the old Strand-C starvation bug.
+    """
+    raw = state.get("relative_mix_publication") if isinstance(state, dict) else None
+    if not isinstance(raw, dict) or clean_text(raw.get("version")) != RELATIVE_MIX_PUBLICATION_VERSION:
+        raw = {
+            "version": RELATIVE_MIX_PUBLICATION_VERSION,
+            "published": {"A": 0, "B": 0, "C": 0},
+            "pending_b": [],
+            "pending_c": [],
+        }
+    published = raw.get("published") if isinstance(raw.get("published"), dict) else {}
+    raw["published"] = {k: max(0, int(published.get(k, 0) or 0)) for k in ("A", "B", "C")}
+    for key in ("pending_b", "pending_c"):
+        vals = raw.get(key) if isinstance(raw.get(key), list) else []
+        raw[key] = [dict(x) for x in vals if isinstance(x, dict)]
+    state["relative_mix_publication"] = raw
+    return raw
+
+
+def _dedupe_pending_rows(rows: Iterable[dict[str, Any]], *, signal: bool = False, limit: int = 240) -> list[dict[str, Any]]:
+    """Small private backlog dedupe.  Pending rows are never reader-facing."""
+    out: list[dict[str, Any]] = []
+    for raw in rows:
+        if not isinstance(raw, dict):
+            continue
+        row = dict(raw)
+        row["new_this_scan"] = False
+        if signal:
+            if any(signals_near_duplicate(row, old) for old in out):
+                continue
+        else:
+            ident = identity(internalize_previous(row))
+            if not ident or ident == "title:" or any(identity(internalize_previous(old)) == ident for old in out):
+                continue
+        out.append(row)
+    return out[:max(1, int(limit or 240))]
+
+
 def journal_representation_counts(journals: Iterable[str], previous: dict[str, Any]) -> dict[str, int]:
     """Count how often configured journals are already represented in public A/B.
 
@@ -21945,12 +22024,53 @@ def main() -> int:
             "selected_b": sum(1 for x in new_selected if clean_text(x.get("strand")).upper() == "B"),
         }
 
+    # Relative publication balance is enforced at release time, not by weakening discovery.
+    # Valid B/C work that is ahead of the 8:1:3 mix is kept privately and can be released
+    # later when A catches up.  Focused strand scans bypass this release throttle.
+    mix_publication = relative_mix_publication_state(state)
+    if (not RADAR_QUICK_STRAND) or RADAR_QUICK_STRAND == "B":
+        pending_b = _dedupe_pending_rows(mix_publication.get("pending_b", []), signal=False)
+        if pending_b:
+            new_selected = dedupe_candidates(list(new_selected) + pending_b)
+
     prev_a = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []
     strand_a = merge_corpus(prev_a, new_selected, "A", now_iso)
     strand_b = merge_corpus(prev_b, new_selected, "B", now_iso)
     strand_a, expired_a_after_merge, extended_a_kept = enforce_two_tier_ab_window(strand_a, DATE_FLOOR, EXTENDED_DATE_FLOOR)
     strand_b, expired_b_after_merge, extended_b_kept = enforce_two_tier_ab_window(strand_b, DATE_FLOOR, EXTENDED_DATE_FLOOR)
+
+    relative_mix_release_stats: dict[str, Any] = {
+        "mode": "focused" if RADAR_QUICK_STRAND else "mixed_8_1_3",
+        "ledger_before": dict(mix_publication.get("published", {})),
+        "new_a_before_release": sum(1 for x in strand_a if isinstance(x, dict) and x.get("new_this_scan")),
+        "new_b_before_release": sum(1 for x in strand_b if isinstance(x, dict) and x.get("new_this_scan")),
+    }
+    if not RADAR_QUICK_STRAND:
+        new_a_for_ratio = relative_mix_release_stats["new_a_before_release"]
+        ledger_counts = mix_publication.get("published", {})
+        b_slots, target_b_total, projected_a = relative_mix_release_slots(ledger_counts, int(new_a_for_ratio), "B")
+        new_b_rows = [x for x in strand_b if isinstance(x, dict) and x.get("new_this_scan")]
+        new_b_rows.sort(key=rank_candidate)
+        keep_b_ids = {identity(internalize_previous(x)) for x in new_b_rows[:b_slots]}
+        deferred_b = [x for x in new_b_rows if identity(internalize_previous(x)) not in keep_b_ids]
+        if deferred_b:
+            strand_b = [
+                x for x in strand_b
+                if not (isinstance(x, dict) and x.get("new_this_scan") and identity(internalize_previous(x)) not in keep_b_ids)
+            ]
+        mix_publication["pending_b"] = _dedupe_pending_rows(deferred_b, signal=False)
+        relative_mix_release_stats.update({
+            "projected_a_total": projected_a,
+            "target_b_total": target_b_total,
+            "b_release_slots": b_slots,
+            "b_deferred": len(deferred_b),
+        })
+    elif RADAR_QUICK_STRAND == "B":
+        # A focused B scan intentionally publishes the B work it finds.  The ledger below
+        # records that choice so subsequent mixed scans compensate toward 8:1:3.
+        mix_publication["pending_b"] = []
+
     # Preserve any previously accepted active record that ages out of the presentation
     # window by handing it to the archive seed before rebalancing.  Accepted history
     # is cumulative even when the visible 200-item core rotates.
@@ -22084,7 +22204,39 @@ def main() -> int:
     for rescue_row in c_floor_rescue_signals:
         if not any(signals_near_duplicate(rescue_row, x) for x in current_c):
             current_c.append(rescue_row)
+
+    if (not RADAR_QUICK_STRAND) or RADAR_QUICK_STRAND == "C":
+        pending_c = _dedupe_pending_rows(mix_publication.get("pending_c", []), signal=True)
+        if pending_c:
+            current_c.extend(pending_c)
+
     current_c, c_quota_stats = select_hard_new_c_mix(current_c, prev_c)
+    if not RADAR_QUICK_STRAND:
+        ledger_counts = mix_publication.get("published", {})
+        new_a_for_ratio = sum(1 for x in strand_a if isinstance(x, dict) and x.get("new_this_scan"))
+        c_slots, target_c_total, projected_a = relative_mix_release_slots(ledger_counts, new_a_for_ratio, "C")
+        selected_c = list(current_c[:c_slots])
+        deferred_c = list(current_c[c_slots:])
+        mix_publication["pending_c"] = _dedupe_pending_rows(deferred_c, signal=True)
+        current_c = selected_c
+        c_quota_stats = {
+            **c_quota_stats,
+            "selected_c": len(selected_c),
+            "suppressed_c": len(deferred_c),
+            "deferred_c": len(deferred_c),
+            "relative_target_c_total": target_c_total,
+            "release_slots": c_slots,
+        }
+        relative_mix_release_stats.update({
+            "target_c_total": target_c_total,
+            "c_release_slots": c_slots,
+            "c_deferred": len(deferred_c),
+        })
+    elif RADAR_QUICK_STRAND == "C":
+        # A focused C scan is intentionally allowed to publish its own strand.  Main mixed
+        # scans will see that in the ledger and rebalance later rather than choking discovery.
+        mix_publication["pending_c"] = []
+
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
     precursor_watch = build_precursor_watch(
         previous_precursor_watch,
@@ -22118,10 +22270,33 @@ def main() -> int:
         precursor_watch = [dict(x) for x in quick_strand_baseline.get("precursor_watch", []) if isinstance(x, dict)]
         signal_archive = [dict(x) for x in quick_strand_baseline.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(x, dict)]
         c_quota_stats = {"eligible_c": 0, "selected_c": 0, "suppressed_c": 0, "quick_strand": RADAR_QUICK_STRAND}
+    # Update the persistent publication ledger only after final strand routing.  Focused
+    # scans are counted too: they may deliberately skew the public corpus for that invocation,
+    # and later mixed scans compensate rather than pretending those publications never happened.
+    final_mix_new = {
+        "A": sum(1 for x in strand_a if isinstance(x, dict) and x.get("new_this_scan")),
+        "B": sum(1 for x in strand_b if isinstance(x, dict) and x.get("new_this_scan")),
+        "C": sum(1 for x in strand_c if isinstance(x, dict) and x.get("new_this_scan")),
+    }
+    mix_counts = mix_publication.get("published", {})
+    for _strand in ("A", "B", "C"):
+        mix_counts[_strand] = max(0, int(mix_counts.get(_strand, 0) or 0)) + int(final_mix_new[_strand])
+    mix_publication["published"] = mix_counts
+    mix_publication["last_release"] = {
+        "new": dict(final_mix_new),
+        "quick_strand": RADAR_QUICK_STRAND or "",
+        "pending_b": len(mix_publication.get("pending_b", [])),
+        "pending_c": len(mix_publication.get("pending_c", [])),
+    }
+    relative_mix_release_stats["new_after_release"] = dict(final_mix_new)
+    relative_mix_release_stats["ledger_after"] = dict(mix_counts)
+    relative_mix_release_stats["pending_b"] = len(mix_publication.get("pending_b", []))
+    relative_mix_release_stats["pending_c"] = len(mix_publication.get("pending_c", []))
+    state["relative_mix_publication"] = mix_publication
+
     # Strand C alone has finite, status-aware retention from first insertion; A/B/frontier are cumulative.
-    # Do not delete C rows merely to enforce a presentation share ceiling; evidential
-    # hierarchy is conveyed explicitly by evidence_status="low" instead.
-    c_share_removed = 0
+    # Ratio balancing defers surplus valid C privately; it does not weaken C admission or discovery.
+    c_share_removed = int(c_quota_stats.get("deferred_c", 0) or 0)
 
     # Risks, opportunities and external shocks are a separate analytical corpus, but their
     # evidence hierarchy follows the substantive strands: A/frontier evidence is primary;
@@ -22841,7 +23016,7 @@ def main() -> int:
             "b_method_foundational_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "b_method_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "quick_strand_mode": RADAR_QUICK_STRAND or "",
-            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False, "mode": "soft_shares", "share_weights": {"A": 8, "B": 1, "C": 3}, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
+            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False, "mode": "relative_release", "share_weights": target_mix_weights(), "release_stats": relative_mix_release_stats, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),

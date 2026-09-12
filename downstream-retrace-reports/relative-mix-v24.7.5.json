@@ -1,0 +1,1493 @@
+{
+  "tool": "ONE-TIME Downstream Retrace",
+  "tool_version": "v1.0-current-downstream-rules",
+  "completed_at": "2026-09-12T09:28:27Z",
+  "source_revalidation_report": "revalidation-reports/full-corpus-revalidation-20260911T005837Z.json",
+  "diagnostics": {
+    "derived_objects_checked": 47,
+    "unchanged": 23,
+    "rebuilt": 24,
+    "materially_rewritten": 0,
+    "newly_inferred": 0,
+    "retired": 0,
+    "stale_evidence_references_before": 72,
+    "stale_evidence_references_removed": 72,
+    "orphan_references_remaining": 0,
+    "active_evidence_reference_occurrences_checked": 474,
+    "shock_support_chains_changed_after_a_removal": 0,
+    "active_dynamic_shocks": 16,
+    "active_high_order_candidates": 24,
+    "active_strategic_pathways": 3,
+    "active_possible_external_shocks": 0,
+    "standalone_matrix_objects": 0,
+    "removed_evidence_decision_refs_seen_in_previous_downstream": 0,
+    "reclassified_evidence_decision_refs_seen_in_previous_downstream": 0
+  },
+  "object_audit": [
+    {
+      "kind": "high_order",
+      "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
+      "title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 84,
+      "current_score": 84,
+      "previous_evidence_refs": 13,
+      "current_evidence_refs": 13,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmitwfbvv95cuxpqwqtq2pacwxfqlz6tg1smnnsy29ywxi0r19lags5edjmwtnrrtbqoendt3nhtgflvef5qvkxumlwm2rxtvv4rxrftzblsnpic29imhd6tvg3r1lwefvleerlnuvtlujadmftwdzptxluumt6exzheedrewjztvzncgppdmxkdkdjqwxordvbotvvyw5uu3vssmvia3l1wes1bkzsvuxpq0tza0zms2hfbedksmledkk?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-speed-vs-safeguard",
+      "title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
+      "retrace_status": "rebuilt",
+      "previous_status": "dormant",
+      "current_status": "dormant",
+      "previous_score": 72,
+      "current_score": 72,
+      "previous_evidence_refs": 9,
+      "current_evidence_refs": 9,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmitwfbvv95cuxpqwqtq2pacwxfqlz6tg1smnnsy29ywxi0r19lags5edjmwtnrrtbqoendt3nhtgflvef5qvkxumlwm2rxtvv4rxrftzblsnpic29imhd6tvg3r1lwefvleerlnuvtlujadmftwdzptxluumt6exzheedrewjztvzncgppdmxkdkdjqwxordvbotvvyw5uu3vssmvia3l1wes1bkzsvuxpq0tza0zms2hfbedksmledkk?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
+      "title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 91,
+      "current_score": 91,
+      "previous_evidence_refs": 13,
+      "current_evidence_refs": 13,
+      "removed_evidence_refs_detected": [
+        "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-reforming-and-enhancing-european-ri-system/reforming-and-enhancing-eu-research-and-innovation-system_en"
+      ],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://policy.trade.ec.europa.eu/consultations/public-consultation-first-review-functioning-international-procurement-instrument_en"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
+      "title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
+      "retrace_status": "rebuilt",
+      "previous_status": "dormant",
+      "current_status": "dormant",
+      "previous_score": 72,
+      "current_score": 72,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 12,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://policy.trade.ec.europa.eu/consultations/public-consultation-first-review-functioning-international-procurement-instrument_en"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
+      "title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 84,
+      "current_score": 84,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 12,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmihafbvv95cuxor3p4sxpzmvhszk0yn3v0tdzxt3pnv1vawknrc2hoyxpat3rdagzzvuhzclrkmhvdbhnimg5vqjfmy21gqk5lcdfhwlcxahzzekvqqkk4z28yu2fkegnybvb4eufizkwzqtfemnziofdrdgdnwfztnkxfeunawklsbvrtbhe?oc=5",
+        "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+        "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxpd0gwbwzosnfyb1bnsuzmdu5oamqxcllhltgtwm5pwfhkn2npbkjfddzvrkdovurdbwvxdnrquup0uwtfowc2aexreuqtbvjetxh4uefvagrjsnptbnbgagxibdeydthfanlvtgvdd3dqc1hrdgnez3n3qlvwzf9oulf0zffzdujmuuhjy045zlv5tlbzz3jowezzqvlzq0zeuxfiqvdn?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxqzzjvm0xhz2exruziwedhd1m5ajzkuu16u3rsbhnntlfvrzjotuvkaw91tms3wwvitxrkauhmr2rnz3pldwvgs1pmvfjlynl2mk1jsghsv1dwunrbsehqv2xqd0c2mudeywpxexjvmthwnk42nfzaauhjctllzlpiekvlv0t0aefeqmdnnkvqymlvlwdkmfffahlwdtkwuv9rsdjnseiyvlj0unp2uzfgvhewrq?oc=5",
+        "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxnqvlgoxfdoetpczltc1ndrktzvjdvluppuefjtxd5cmpsr3hqt1v0wmw1rm1onec5vmpsy2jkzxezq1m3b0gwmnq4y1jca1btejzzavn5sdjnwelhb2lfbzfwbk5xuue4mhi5c3hivxn0vl9lzzi3m2dkzu9sannuodlnclbjdexlqwtnweptlvz1vdfcevbxbzdgqzvtsvhfuxfotm93?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxnu0dkoevcbthktwvgteywz3rrnexhnxbnwdlszwpfsmrsr0davjdzewzkn0rrqxlzcedncexbm29stlbfcerkdkx1b0hswjffohpltud1r2hqs1jjdc0zdxfradj1wwrrtuhmmtdwn0lnylpmcwdlym9zdvranm9ud0tqlxz5welbbxznmdjgvhdbnzq3cv9wogu4sxo4a0jkwwwwnhborjrjb1v1atbr?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixwfbvv95cuxoc1h1tjkzuv9dvwf0n0p0cjbnsfnpahcxajblmmdrrkprvzfnmjvhmve0bko3egtiwhdtnudwakluwk9xtvuwahzsvzzvzflndggzrzbvvljpoghsn1dnzmdsulpptwzbdzdfcjvlbm8yymxpbhfgskvabunguup2x2hmzlbpu2nyd1dyvgdrmhjfc0k4bxnjd0vmtenlejr5n2twv3p2nurvvxzkz29ymxhfcvvjrwiwbevrzzn2wulit0duou1v?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixwfbvv95cuxodepldmzuoxbldvy2t2jlchdybfh3blq3whuxwdliaw82x01ld1niv3hfuhlnvk11cfhpcdctaku5wjfkwevinkvjmjzhwxb2mhptzti0vgdxwnozbefnwel3bmzznfd1qnzbmhbimxb6m2zfz2hpedlwcfbsd0dytuj3enizv0g2a3jyde85u3bibfy1oerzek00nezpmxz0x0t4ujy4x3k3eulkddg1sunmnwvrtelrdevhs1ribm0yrdjxvvvr?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiywfbvv95cuxouzk2du1rrdvkvuy2yva1yjrkx2htz3m4rvvpcnjqved3cnzvtjvovnlqwnhvmvb0dzfmmjdgzjlhzzl6znhfwkn2twm3cunhs3hlwllky3lga3byahjwq294dnpymtvoemzfng94yvvzmmflvjr3rzzxejh0mdvrwmjjq0fpnja4y21aaznztmjytlnfqmjpvvrnb2d2otzmazgtderhdmdwdfpft3npthfkx2rhmxfymvaxuwvjzvdln1g4vfjmnwpjtq?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
+      "title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
+      "retrace_status": "rebuilt",
+      "previous_status": "dormant",
+      "current_status": "dormant",
+      "previous_score": 72,
+      "current_score": 72,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 12,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmihafbvv95cuxor3p4sxpzmvhszk0yn3v0tdzxt3pnv1vawknrc2hoyxpat3rdagzzvuhzclrkmhvdbhnimg5vqjfmy21gqk5lcdfhwlcxahzzekvqqkk4z28yu2fkegnybvb4eufizkwzqtfemnziofdrdgdnwfztnkxfeunawklsbvrtbhe?oc=5",
+        "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+        "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxpd0gwbwzosnfyb1bnsuzmdu5oamqxcllhltgtwm5pwfhkn2npbkjfddzvrkdovurdbwvxdnrquup0uwtfowc2aexreuqtbvjetxh4uefvagrjsnptbnbgagxibdeydthfanlvtgvdd3dqc1hrdgnez3n3qlvwzf9oulf0zffzdujmuuhjy045zlv5tlbzz3jowezzqvlzq0zeuxfiqvdn?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxqzzjvm0xhz2exruziwedhd1m5ajzkuu16u3rsbhnntlfvrzjotuvkaw91tms3wwvitxrkauhmr2rnz3pldwvgs1pmvfjlynl2mk1jsghsv1dwunrbsehqv2xqd0c2mudeywpxexjvmthwnk42nfzaauhjctllzlpiekvlv0t0aefeqmdnnkvqymlvlwdkmfffahlwdtkwuv9rsdjnseiyvlj0unp2uzfgvhewrq?oc=5",
+        "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxnqvlgoxfdoetpczltc1ndrktzvjdvluppuefjtxd5cmpsr3hqt1v0wmw1rm1onec5vmpsy2jkzxezq1m3b0gwmnq4y1jca1btejzzavn5sdjnwelhb2lfbzfwbk5xuue4mhi5c3hivxn0vl9lzzi3m2dkzu9sannuodlnclbjdexlqwtnweptlvz1vdfcevbxbzdgqzvtsvhfuxfotm93?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxnu0dkoevcbthktwvgteywz3rrnexhnxbnwdlszwpfsmrsr0davjdzewzkn0rrqxlzcedncexbm29stlbfcerkdkx1b0hswjffohpltud1r2hqs1jjdc0zdxfradj1wwrrtuhmmtdwn0lnylpmcwdlym9zdvranm9ud0tqlxz5welbbxznmdjgvhdbnzq3cv9wogu4sxo4a0jkwwwwnhborjrjb1v1atbr?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixwfbvv95cuxoc1h1tjkzuv9dvwf0n0p0cjbnsfnpahcxajblmmdrrkprvzfnmjvhmve0bko3egtiwhdtnudwakluwk9xtvuwahzsvzzvzflndggzrzbvvljpoghsn1dnzmdsulpptwzbdzdfcjvlbm8yymxpbhfgskvabunguup2x2hmzlbpu2nyd1dyvgdrmhjfc0k4bxnjd0vmtenlejr5n2twv3p2nurvvxzkz29ymxhfcvvjrwiwbevrzzn2wulit0duou1v?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixwfbvv95cuxodepldmzuoxbldvy2t2jlchdybfh3blq3whuxwdliaw82x01ld1niv3hfuhlnvk11cfhpcdctaku5wjfkwevinkvjmjzhwxb2mhptzti0vgdxwnozbefnwel3bmzznfd1qnzbmhbimxb6m2zfz2hpedlwcfbsd0dytuj3enizv0g2a3jyde85u3bibfy1oerzek00nezpmxz0x0t4ujy4x3k3eulkddg1sunmnwvrtelrdevhs1ribm0yrdjxvvvr?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiywfbvv95cuxouzk2du1rrdvkvuy2yva1yjrkx2htz3m4rvvpcnjqved3cnzvtjvovnlqwnhvmvb0dzfmmjdgzjlhzzl6znhfwkn2twm3cunhs3hlwllky3lga3byahjwq294dnpymtvoemzfng94yvvzmmflvjr3rzzxejh0mdvrwmjjq0fpnja4y21aaznztmjytlnfqmjpvvrnb2d2otzmazgtderhdmdwdfpft3npthfkx2rhmxfymvaxuwvjzvdln1g4vfjmnwpjtq?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:goal_measurement_gap:competitiveness",
+      "title": "Europe keeps pursuing competitiveness without a settled way to measure whether it is succeeding.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 77,
+      "current_score": 77,
+      "previous_evidence_refs": 9,
+      "current_evidence_refs": 9,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxpb1a1ufatwdbmtzjuetfev0z0nkhvcknwwthocs0ywe9uallmd3jvvdn5ngtns3ytqmpvt1jux0lnd05jckdswmftvxf3s0rtsurxm3ozc2s3s3u2nmjyazn4t3hvykvuoupxykrjteh6r20zwtbotjbylwxptw9tbuvpt05qujrhnc13umprcu5duulodvfbzk9pb05ncwllsmnfnhhhouzaow1jeu9mafjtznjiyk83tkr3x2t0dvnqwem0rmtqzfrlwhbtumnv?oc=5",
+        "url:https://news.google.com/rss/articles/cbmilafbvv95cuxqx1phwdhouwiwb3lbahgttnjpuhoyef9hvg9ubxr3q3fcd2hiahdiqxzszm9szja1dtjxn1gydevtyvrsue9kzxk5btftauzwx0xzbgjgtkhjofbpr2tlmxr0wfnssgltzfe0shvjsef2ohdfm3lqegrzwe9bwg5qemjor2x2suthluwwbkfisc00d0nk?oc=5",
+        "url:https://news.google.com/rss/articles/cbmingfbvv95cuxocta3suxlauyydeq5ujz4t2j4t3rmeld6mlbzmti4thi4um9jczqzx0lpynvdbnvsdhphbefxvmhdejhjdtmtduzrrgvmedntzfrnmzhtlvk3slfbutzjdwiza1nlrc01vvf6mmzzvecwckp1ry1fx2ppzhbqs3f3nujzt2xpylayc3lldukys1nft25xmg9izm52uln0dw?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiqwfbvv95cuxnbe9sbxnrz1byznbbatrquuneuzfldg1vellqoffrvmkxr2lottlqmjztcs1rwhzvzunkyulmcmvnwtjuuvfjn2jisgswr2e3y0xduzzqueplsedpz2v3b0xvoerozvvovwxudu83wmdwrgz1wepwcnhoakxpwu5ozuy1dfnswndoavdtqzg2q1ntrlnjrfpfz2zqvy1sltlqrmw4v2pfde40wnm?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixafbvv95cuxoqkjoownzrjfzumgzdxvtoc1irzg2ulvxv0vox0nwcuzcugqytulqrk16lthcy3l6azz4z1vruljhc3czn3znakz5oerfynb0wuzhevlmufvpmdleswhtnjkymvq3tlbqzvp2tur0lwhkttc0mtvhzzhnyursc3nwrlbswmfynefuymncvzzxqud1d1lenkrzx3h0dg55otm1azjimg05nknzazbvdm5luflyzhbtn3e3bgfywjhjt1nvudlk?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiywfbvv95cuxnoxhbofnhcezhzmk1rghpbxdwcklsaml6ujlkuezctznhn3djbdfhugjjtnrtdkdiekjlwuktefpqz3duv3lmc0m3mfj5dhdovxznmgw2bevlzw9flwv3y0ctutzru3nurddwbxrsemrmnjrsczfsttnizhzhsgfqrzzpn1nrqkfkzm9lovktquvhngtxd1rneddqnux2bxzfrunvdwzkx3drzxl2ykvezxlkt1a4bhvowhjtcgpbrhrhbzvry2pgcwtrna?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmiiafbvv95cuxouxbkzmnklvdzus1jlth3unzjtg90uex3um1vofluthnwmgvsemrxdxzwm3pos3jib181mwp6tthpuurvlxd1bnrlc2jmnfnlwvfzz191rw9om082rdnnuhv3zfv0s3f1reg2m0c2yug0uklaoui3u1lyvzrgykzod2y2whpkztfh?oc=5",
+        "url:https://news.google.com/rss/articles/cbminajbvv95cuxnv1blsv84mnfnrc1ou2rctfd0mdlurvlvrtdkof9ndjbynlo3r1htow82qnfis1n6s1vzlvvnmjfzwjjst2xyvs1fues3mmnimwztcwpkys1ecexmbvnklxa2shdfcv9mcgnmlvj4cjbox2ffbwlcwhm4dejvus1dndztrlzpofjvv3ryu3i4z0xyd0lvq0joewvfnu9zytfpmmfyvzawellrtegtwji5eu92wfe5qxatrwtsmmmzbfe4v1rwcvrjdhlpueviv0w1umo1d3jyatvcc0trouxqwxutswfls3ctovbgowljdu1wsvb5zmzmvtzhr3pvmtfqd2z6ejmzrzbjoedvudruvkdschhiwlizoxj0cg?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiqwfbvv95cuxpbff4wxi3rzq5we1wrwveowz2dxk0cwt4suuyada5n0hxbjrkeeetss1ictnkatjlamtorkrqvtboeer5ehhncnf0eg5knw52rwdir3luedfmswpebvnebut5evjmn09vvg9kb1luz3nhug5nu2t1b0nrtwj1m3rtvlp6luftmvnvwgdrbwlitknsvzjsdvvlvfbgrgnzwhh5n25ua0pks3pvm2m?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirgfbvv95cuxpsm1ou19yvzfibvvvqnktn0fczzfateuzmjfpszh2bthvakpym25gbhrmy05aazhnbtd2cjrjdfnpzwxsx1pwt01kcdkzbvz5dudxvnngbmk4vjzxbzfwdgfyrkfkou1mwc1woddobjlqsgtkcdi1dflpq2futxlubtnuv1itq2dhzhhmme1pwgxscwrizzk1mhbzvdvuvdj6bwyxce1gv0pkmgs0exc?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiyafbvv95cuxnwm83wuq3egzdu1zrnurpugdpn25zwgxit2npmfjhajhazjb4qjfqcvnsouxptndjn2jnlvzryxitqlg2v1dzqkrqumr2uue3zuvawu9plxb2d0lzzthczw40bknlehbsogr0r2dqtge0y1q0mxlhs01trfbut05cnvrgrmfuugw2bxytlukzbzjjchhidexfq1fnnvvzc1hqbfmxbnvkqjrwrgtreejydk4zdenstul4dxrzsjhhwg5behdruhzxvg?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiygfbvv95cuxowmrvodznzfnzy09iclbltk1catyzcv93yvfsa0peqvn4dfngahzpsvfjt2n0ehdktehhzxnuvkncvkpwotb2tgn6r0iwegzdqtngv05wsghjnlpom1duy0lrtme0blq5ukm3mdrmnjjqy2hibwrhlwizu2exbwtgano2buets3nfbno4zvbfc1r4wvmwnfjlq2t4nuduoeyxmhfjrhrpqzvxtxgzsthoefgzexbruddqexzlv1nhwnnfv0z5zxczujrn?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:goal_measurement_gap:openness",
+      "title": "Europe keeps pursuing openness without a settled way to measure whether it is succeeding.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 75,
+      "current_score": 73,
+      "previous_evidence_refs": 9,
+      "current_evidence_refs": 5,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1057/s41304-025-00534-8",
+        "url:https://doi.org/10.1080/10438599.2025.2459764",
+        "url:https://era.gv.at/news-items/scienceeurope-publishes-position-statement-on-connecting-open-science-and-research-assessment-reform",
+        "url:https://era.gv.at/open-positions/seconded-national-expert-policy-officer-european-open-science-cloud-and-fair-data-services-rtd-a-4"
+      ],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:goal_measurement_gap:research-security",
+      "title": "Europe keeps pursuing research security without a settled way to measure whether it is succeeding.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 78,
+      "current_score": 77,
+      "previous_evidence_refs": 9,
+      "current_evidence_refs": 6,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1080/09662839.2022.2127317",
+        "url:https://op.europa.eu/o/opportal-service/download-handler?identifier=7348956d-1389-11f1-8870-01aa75ed71a1&format=pdf&language=en&productionsystem=cellar&part=",
+        "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding"
+      ],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:goal_measurement_gap:sovereignty",
+      "title": "Europe keeps pursuing technological sovereignty/strategic autonomy without a settled way to measure whether it is succeeding.",
+      "retrace_status": "rebuilt",
+      "previous_status": "qualified",
+      "current_status": "qualified",
+      "previous_score": 97,
+      "current_score": 96,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 9,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1007/978-3-032-20210-9",
+        "url:https://doi.org/10.1080/07036337.2025.2537373",
+        "url:https://news.google.com/rss/articles/cbmi7afbvv95cuxoymjsbfvwvzfzmudru0fwsxvlu1hboffumu9hutqyemn0b2njrny4bhvjs3jruulsvndmedq2evm3afdgm2x4dwrszwplnm4xu2xqykv1udeya1hebgkxohd1zdrynkdanxfybwh0chjxnvg4dgz4v3v5rgxoy0pvdlzvcfjteuoyndfbwmp2vzjoy2vhwwj3m3bsaneyx2xxoxjwm3gyb0iyevn6elo3slptwxhadvdute5ft3hrotg1zkrjn211qwhfqwlfahdytffvteficy1jcgpxnkjjawtkou1yu2xwdg1eoa?oc=5"
+      ],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "title": "A hidden AI/compute dependency could transmit a shock into European research infrastructure.",
+      "retrace_status": "rebuilt",
+      "previous_status": "qualified",
+      "current_status": "qualified",
+      "previous_score": 93,
+      "current_score": 93,
+      "previous_evidence_refs": 14,
+      "current_evidence_refs": 14,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+        "url:https://news.google.com/rss/articles/cbminafbvv95cuxqyunxuk5ms2vstxvbn1hdunzsshvpwknsetdvze02edf2cdncndqxowp6rkq3s3bom2pvb0wyzmdoufrzrtdzrno4zetjngxmcugyrhhgqmfvc1zkuux6me9btlaxdutwsmdts0rytu4tmenwdv9wvgjkztdxmgxptdm3agffvzvizhj3wjjstujpre5rtnpurmxwtkq?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxqqllkci0yzwc0dknavv9mywfsvnnib3ppt1hunfrycgiwvvzvywhaovbozg9juzblzf9zquhyaupfq1n2wl9qm2vku1bnduhyof9er1pya0vwv2rraepgckytbgjpa3pxqlzvb0phmepsn083x0t1txvyyzfot182alhyujk4bvlktermwthvbvnqrne3rjjns3vzbw1uczdxww1orkzsm0len2rldwfz?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiwwfbvv95cuxnb24zexzudlvzz19nqu1grjrtr0vzd3rfdy1odtntzey3ykrklxu1bfu4ulh1bs0ybdr1n2lhm0f1vjhvc0izumg5ae5zww5ztgvva25gvkl5ukrzyw1lm2xgnurvtlm3cffoak5snvpdvk1gngnjovjkyjkzmv93zeprrtr2zzm2det5skk3q3bvvmjirdfssnnlqwrfa2dfugnlrdf4egpfm25tx0vzugpjmfl2znnodutrbu5unfltsdg?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixafbvv95cuxqb0lsykxysy1tyuvzrnlhqmn5q1lonw14dl9oywz4ufpwx0n6tgnmdudtsfrhmdbsmzmwazv2rkfkm01jtgfvbhpjutk4zvnzvgzjc3ftawlhmgvimep2zhfucezunmf3mud3ujf3eec4zc04mdewwmp3rlyzsmfpztnltvlptursdenede1fmlnzrjc1tzfqd2tssunoqmtxrf9dquvir0ftams3zm5kufz1dhhrzetkuflsqufyevozsmxk?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmicefvx3lxte5fafbkuxlfmmjknjfxyu96x2hxs0xdbgdtylo0n21wdgo4clzbz3nmshphnhgtdnhquwnjaglcdjvlmmvfv01wyvvjrxjrodjfenc5vurieuj6bgn5vlpga1nkauq4ec1eae9xutzvcg4?oc=5",
+        "url:https://news.google.com/rss/articles/cbmidkfvx3lxte9ha3r3ltvns3n5vmheqvnemw4tyvdcawmzadlur3lrvwlrchhix3rkrzntde0xrjdqnuj5tfnsndbcb3rvvzn1wjzjb1v4dwy2tdhqvgxvvxfvewfmzvyxcwpxuhvmsf9ontayagvuqtu3tg1fu0e?oc=5",
+        "url:https://news.google.com/rss/articles/cbmijwfbvv95cuxnahfqcgnky19ydjbcbwhtnvnnclfibdrbzwhnckn6wvf3ehdunuvezhdyekf3uw5wtv9avwkzn1jvadj0smhcog1wce1uuunvafy5rmk0rgvnvwgtmhqwel9wnfdmvvc2u3q0mtb3vzdvchp6d2tyq2zmrkdodgfmx05tekfyenbgd3ptrhz3tq?oc=5",
+        "url:https://news.google.com/rss/articles/cbmimgfbvv95cuxncxj3dkrpou5yne52zfryafrucmkyzv8xvlg0nendnnrccnztz2jhmvpwoxbkn2c3dm5sz0pqdfdvsejyamdrz2d3ngdcy0nkterkwnbocllrbmdnzlkwwdjvbmd1su1nughnd200ugvqwufkz3ewzfr1ev9qadbtz1g3rnnim2llrwlpb3bmvetsavpuaucwsjjn?oc=5",
+        "url:https://news.google.com/rss/articles/cbmizafbvv95cuxoquhbnxfscdg4qvlfbdfut2ixyzfxrnnid0zjxza2yzlnnc1zmhvmcncxd0x2enbgq3zvrjfex29ptgjooddlcgxfb2npqwfbuvoty0pqz0vuwkczav9mdtqybmtpwxdqnlbnmkxoanbleuhevmh6ov9iskc4z0pjtk1nanzpb2fcc3hqdxe4tmn6rxdmbjl2zzlqumq4mjbpd1pxsgxcs3hmd2g1nvnszzjtvty4tudbmffuvmhuywnxqkhxthzzzfq1mky?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:opposing_actions_same_object:ri-capacity-distribution",
+      "title": "Building big in a few places, keeping every region in.",
+      "retrace_status": "unchanged",
+      "previous_status": "qualified",
+      "current_status": "qualified",
+      "previous_score": 86,
+      "current_score": 86,
+      "previous_evidence_refs": 8,
+      "current_evidence_refs": 8,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:practice_precedes_doctrine:generic-collaboration-diplomacy",
+      "title": "Formal policy around science diplomacy/collaboration may be codifying a practice that was already operating.",
+      "retrace_status": "rebuilt",
+      "previous_status": "qualified",
+      "current_status": "qualified",
+      "previous_score": 90,
+      "current_score": 90,
+      "previous_evidence_refs": 16,
+      "current_evidence_refs": 16,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmitwfbvv95cuxpqwqtq2pacwxfqlz6tg1smnnsy29ywxi0r19lags5edjmwtnrrtbqoendt3nhtgflvef5qvkxumlwm2rxtvv4rxrftzblsnpic29imhd6tvg3r1lwefvleerlnuvtlujadmftwdzptxluumt6exzheedrewjztvzncgppdmxkdkdjqwxordvbotvvyw5uu3vssmvia3l1wes1bkzsvuxpq0tza0zms2hfbedksmledkk?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:practice_precedes_doctrine:generic-funding-programme",
+      "title": "Formal policy around research funding/programmes may be codifying a practice that was already operating.",
+      "retrace_status": "rebuilt",
+      "previous_status": "qualified",
+      "current_status": "qualified",
+      "previous_score": 90,
+      "current_score": 90,
+      "previous_evidence_refs": 16,
+      "current_evidence_refs": 16,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://policy.trade.ec.europa.eu/consultations/public-consultation-first-review-functioning-international-procurement-instrument_en"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:practice_precedes_doctrine:generic-quantum",
+      "title": "Formal policy around quantum may be codifying a practice that was already operating.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 85,
+      "current_score": 84,
+      "previous_evidence_refs": 11,
+      "current_evidence_refs": 8,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://www.cnrs.fr/en/our-research/france-2030/pepr/quantum",
+        "url:https://www.eurekanetwork.org/impact/germany-pioneering-scalable-quantum-cooling",
+        "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and"
+      ],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:practice_precedes_doctrine:generic-research-data",
+      "title": "Formal policy around research data may be codifying a practice that was already operating.",
+      "retrace_status": "unchanged",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 76,
+      "current_score": 76,
+      "previous_evidence_refs": 4,
+      "current_evidence_refs": 4,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:practice_precedes_doctrine:generic-standards-testing",
+      "title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
+      "retrace_status": "unchanged",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 83,
+      "current_score": 83,
+      "previous_evidence_refs": 10,
+      "current_evidence_refs": 10,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:practice_precedes_doctrine:generic-startups-scaleup",
+      "title": "Formal policy around startups/scale-up may be codifying a practice that was already operating.",
+      "retrace_status": "unchanged",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 84,
+      "current_score": 84,
+      "previous_evidence_refs": 13,
+      "current_evidence_refs": 13,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:success_metric_blind_spot:generic-resilience-chips",
+      "title": "Europe may be measuring delivery before it can measure the resilience in semiconductors outcome it actually wants.",
+      "retrace_status": "unchanged",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 80,
+      "current_score": 80,
+      "previous_evidence_refs": 10,
+      "current_evidence_refs": 10,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
+      "title": "Europe may be measuring delivery before it can measure the resilience in AI/compute outcome it actually wants.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 80,
+      "current_score": 80,
+      "previous_evidence_refs": 10,
+      "current_evidence_refs": 10,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+        "url:https://news.google.com/rss/articles/cbminafbvv95cuxqyunxuk5ms2vstxvbn1hdunzsshvpwknsetdvze02edf2cdncndqxowp6rkq3s3bom2pvb0wyzmdoufrzrtdzrno4zetjngxmcugyrhhgqmfvc1zkuux6me9btlaxdutwsmdts0rytu4tmenwdv9wvgjkztdxmgxptdm3agffvzvizhj3wjjstujpre5rtnpurmxwtkq?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxqqllkci0yzwc0dknavv9mywfsvnnib3ppt1hunfrycgiwvvzvywhaovbozg9juzblzf9zquhyaupfq1n2wl9qm2vku1bnduhyof9er1pya0vwv2rraepgckytbgjpa3pxqlzvb0phmepsn083x0t1txvyyzfot182alhyujk4bvlktermwthvbvnqrne3rjjns3vzbw1uczdxww1orkzsm0len2rldwfz?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiwwfbvv95cuxnb24zexzudlvzz19nqu1grjrtr0vzd3rfdy1odtntzey3ykrklxu1bfu4ulh1bs0ybdr1n2lhm0f1vjhvc0izumg5ae5zww5ztgvva25gvkl5ukrzyw1lm2xgnurvtlm3cffoak5snvpdvk1gngnjovjkyjkzmv93zeprrtr2zzm2det5skk3q3bvvmjirdfssnnlqwrfa2dfugnlrdf4egpfm25tx0vzugpjmfl2znnodutrbu5unfltsdg?oc=5",
+        "url:https://news.google.com/rss/articles/cbmixafbvv95cuxqb0lsykxysy1tyuvzrnlhqmn5q1lonw14dl9oywz4ufpwx0n6tgnmdudtsfrhmdbsmzmwazv2rkfkm01jtgfvbhpjutk4zvnzvgzjc3ftawlhmgvimep2zhfucezunmf3mud3ujf3eec4zc04mdewwmp3rlyzsmfpztnltvlptursdenede1fmlnzrjc1tzfqd2tssunoqmtxrf9dquvir0ftams3zm5kufz1dhhrzetkuflsqufyevozsmxk?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmicefvx3lxte5fafbkuxlfmmjknjfxyu96x2hxs0xdbgdtylo0n21wdgo4clzbz3nmshphnhgtdnhquwnjaglcdjvlmmvfv01wyvvjrxjrodjfenc5vurieuj6bgn5vlpga1nkauq4ec1eae9xutzvcg4?oc=5",
+        "url:https://news.google.com/rss/articles/cbmidkfvx3lxte9ha3r3ltvns3n5vmheqvnemw4tyvdcawmzadlur3lrvwlrchhix3rkrzntde0xrjdqnuj5tfnsndbcb3rvvzn1wjzjb1v4dwy2tdhqvgxvvxfvewfmzvyxcwpxuhvmsf9ontayagvuqtu3tg1fu0e?oc=5",
+        "url:https://news.google.com/rss/articles/cbmijwfbvv95cuxnahfqcgnky19ydjbcbwhtnvnnclfibdrbzwhnckn6wvf3ehdunuvezhdyekf3uw5wtv9avwkzn1jvadj0smhcog1wce1uuunvafy5rmk0rgvnvwgtmhqwel9wnfdmvvc2u3q0mtb3vzdvchp6d2tyq2zmrkdodgfmx05tekfyenbgd3ptrhz3tq?oc=5",
+        "url:https://news.google.com/rss/articles/cbmimgfbvv95cuxncxj3dkrpou5yne52zfryafrucmkyzv8xvlg0nendnnrccnztz2jhmvpwoxbkn2c3dm5sz0pqdfdvsejyamdrz2d3ngdcy0nkterkwnbocllrbmdnzlkwwdjvbmd1su1nughnd200ugvqwufkz3ewzfr1ev9qadbtz1g3rnnim2llrwlpb3bmvetsavpuaucwsjjn?oc=5",
+        "url:https://news.google.com/rss/articles/cbmizafbvv95cuxoquhbnxfscdg4qvlfbdfut2ixyzfxrnnid0zjxza2yzlnnc1zmhvmcncxd0x2enbgq3zvrjfex29ptgjooddlcgxfb2npqwfbuvoty0pqz0vuwkczav9mdtqybmtpwxdqnlbnmkxoanbleuhevmh6ov9iskc4z0pjtk1nanzpb2fcc3hqdxe4tmn6rxdmbjl2zzlqumq4mjbpd1pxsgxcs3hmd2g1nvnszzjtvty4tudbmffuvmhuywnxqkhxthzzzfq1mky?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:success_metric_blind_spot:generic-resilience-infrastructure",
+      "title": "Europe may be measuring delivery before it can measure the resilience in research infrastructure outcome it actually wants.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 78,
+      "current_score": 77,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 9,
+      "removed_evidence_refs_detected": [
+        "url:https://www.eurohpc-ju.europa.eu/eurohpc-ju-launches-call-tender-new-industrial-supercomputer-bologna-italy-2026-07-16_en"
+      ],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1057/s41304-025-00534-8",
+        "url:https://doi.org/10.1093/scipol/scae054",
+        "url:https://era.gv.at/open-positions/programme-officer-research-and-innovation-or-infrastructure-unit-eurohpc202502"
+      ],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:success_metric_blind_spot:generic-resilience-materials-energy",
+      "title": "Europe may be measuring delivery before it can measure the resilience in energy/materials outcome it actually wants.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 80,
+      "current_score": 80,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 12,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmihafbvv95cuxor3p4sxpzmvhszk0yn3v0tdzxt3pnv1vawknrc2hoyxpat3rdagzzvuhzclrkmhvdbhnimg5vqjfmy21gqk5lcdfhwlcxahzzekvqqkk4z28yu2fkegnybvb4eufizkwzqtfemnziofdrdgdnwfztnkxfeunawklsbvrtbhe?oc=5",
+        "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxpd0gwbwzosnfyb1bnsuzmdu5oamqxcllhltgtwm5pwfhkn2npbkjfddzvrkdovurdbwvxdnrquup0uwtfowc2aexreuqtbvjetxh4uefvagrjsnptbnbgagxibdeydthfanlvtgvdd3dqc1hrdgnez3n3qlvwzf9oulf0zffzdujmuuhjy045zlv5tlbzz3jowezzqvlzq0zeuxfiqvdn?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxqzzjvm0xhz2exruziwedhd1m5ajzkuu16u3rsbhnntlfvrzjotuvkaw91tms3wwvitxrkauhmr2rnz3pldwvgs1pmvfjlynl2mk1jsghsv1dwunrbsehqv2xqd0c2mudeywpxexjvmthwnk42nfzaauhjctllzlpiekvlv0t0aefeqmdnnkvqymlvlwdkmfffahlwdtkwuv9rsdjnseiyvlj0unp2uzfgvhewrq?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmikwfbvv95cuxnwkp0qw1uugzsmnrjotk2axz6zeitzk5kd2neqthkvxdusnlyahv4cxnsrgdqbjzps25maxhvnlizr3pwwuttxzz1ohvqrjjwenddn1g2yzzuu3zjek9jugfhc3o3mwmttm8tdkloodlbmwtaallhaepgvzkytnbzcdlaefdgwne2serpunzia2zcbe0?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirgfbvv95cuxncglwegflrdryzvowu2y0y0fjtlrmqw5ubjjwngcxb3nsqnrbuvo5ewtmdnhoslazm0fkdljhwkpjr2lxzuzhcwg5cfbqb1nxnm9ma0mwr3aweezpueftz1jrz3pjsdn6v2vode1nujhbqu1pdlj5z29xsdlozhzooexrbhotyvlrudd0x2tpa2jvr3u1ntbhc3vhzkyzmdn4ze9kwl9lznfbzzkwzee?oc=5",
+        "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxnbhvyy1eyvkn0ejvtznjmxzvmvgncqtjzumnmwtjkvi1zwnrfrtjsd3ntt3v3zmduc2xxdgzhohvpunntrvznt1b4vkv3dwjhwfvzamjjt0fzdelsbgrvsk90ue1isjfor0txnmttdxfsudnfcvviwwlzedhamnfhyktsb2fuym9qzgpuqxdcoerjce5awmqzwm9as0jkmum0ymxly3nnseezuwficthku3vuna?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
+      "title": "Europe may be measuring delivery before it can measure the widening participation in research funding/programmes outcome it actually wants.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 80,
+      "current_score": 80,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 12,
+      "removed_evidence_refs_detected": [
+        "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-reforming-and-enhancing-european-ri-system/reforming-and-enhancing-eu-research-and-innovation-system_en"
+      ],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmihafbvv95cuxpcwnkutjpwmprtu9izu1yavryvdrrtjbodxbhbktzz01lcxvlrmdzawv0tkflnglkv1nlvk5im1ljrzfjx2dsz1rcrvrueg5kqvgytwhzaeptsuxktwptslvptkx6a1zvajezdvbza3bzbw9oqmxhmdayuu9gumj0vy12mwu?oc=5"
+      ]
+    },
+    {
+      "kind": "high_order",
+      "id": "l45:success_metric_blind_spot:generic-widening-participation-infrastructure",
+      "title": "Europe may be measuring delivery before it can measure the widening participation in research infrastructure outcome it actually wants.",
+      "retrace_status": "rebuilt",
+      "previous_status": "watch",
+      "current_status": "watch",
+      "previous_score": 78,
+      "current_score": 77,
+      "previous_evidence_refs": 10,
+      "current_evidence_refs": 7,
+      "removed_evidence_refs_detected": [
+        "url:https://www.eurohpc-ju.europa.eu/eurohpc-ju-launches-call-tender-new-industrial-supercomputer-bologna-italy-2026-07-16_en"
+      ],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1057/s41304-025-00534-8",
+        "url:https://doi.org/10.1093/scipol/scae054",
+        "url:https://era.gv.at/open-positions/programme-officer-research-and-innovation-or-infrastructure-unit-eurohpc202502"
+      ],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:biotech:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s biotechnology and clinical research",
+      "retrace_status": "rebuilt",
+      "previous_status": "updated",
+      "current_status": "updated",
+      "previous_score": 83,
+      "current_score": 81,
+      "previous_evidence_refs": 15,
+      "current_evidence_refs": 13,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation",
+        "url:https://news.google.com/rss/articles/cbmisafbvv95cuxotkc4m1uwqk9pafr2ouj2ykd6nm13cgw2bg9wr3zqz3rvbum5sxhxcuetlw94nmlboufqqnf4nutsq2tzbc1tnw04vevtts1xzlczmgvlq3y4lxzuuhnjwkdrde0xadj4c3ptcldhrmdkzlfazxdomjk2nhjla1fvckzsn2zosevotffrvg5lsxdly1dnlvptmmeyq0nlcxm2rvzzmuh0mhdpqtbfwxgtva?oc=5",
+        "url:https://op.europa.eu/o/opportal-service/download-handler?identifier=7348956d-1389-11f1-8870-01aa75ed71a1&format=pdf&language=en&productionsystem=cellar&part="
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmizafbvv95cuxqvfz1ekloq1g2b3fjblbedhnvr2uzedhqae0xu2tvsenqohjosdzpowetmdbkx3zudwl2nghmumnmblpmm1rpa0zvbdjktkvdee5lnmnwvnvjchy2ze9beux0rtdsounszvj0z0vubgntck1jz3j0oed6ahjmvnznefjrnurotzjjnhflwjnuovhkq2vmdggzvzu4ulp2ews1twyyv3jonzzoyxo0tetmzxu5n1rnaxzlyxbcsg51t3pxrwg0ujrvbuc0chq?oc=5"
+      ]
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:collaboration:export_restriction",
+      "title": "An export restriction abruptly cuts Europe’s access to international research collaboration",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 80,
+      "current_score": 80,
+      "previous_evidence_refs": 16,
+      "current_evidence_refs": 16,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:collaboration:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s international research collaboration",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 86,
+      "current_score": 86,
+      "previous_evidence_refs": 16,
+      "current_evidence_refs": 16,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:funding:export_restriction",
+      "title": "An export restriction abruptly cuts Europe’s access to European research and innovation funding",
+      "retrace_status": "rebuilt",
+      "previous_status": "updated",
+      "current_status": "updated",
+      "previous_score": 90,
+      "current_score": 88,
+      "previous_evidence_refs": 19,
+      "current_evidence_refs": 17,
+      "removed_evidence_refs_detected": [
+        "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures_en"
+      ],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxpvxv6umz4eutwuhjyemvibldjogjcq1rxvdzyr1v0qwh1wvnnwlbcmed5rxvvueftddbir1zxq1vmn1rxb3zkugxpodfnnuj3wfduu05asfjmd0ffm19wtlplvufgejvid0ewd0thvnj2ruxumvbicvfqy2ncoehqzfj6vzfyrzhpemviegdlb3c5ri1rvdm2vfdlznk3zjbmswy0smlwswtat0r5a1itswrgy0zashvjulpinvp0y0zfehmtzeeytwuzskxvekx3?oc=5",
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+        "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
+        "url:https://www.earto.eu/earto-inputs-on-healthcare-research-and-innovation-for-the-next-strategic-plan-of-horizon-europe-2025-2027"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxoyjvkavdvx2cwzhbpwe5kqlvprnffevfvt2jwtwvuwtlfq0luegpazwkzauxdmtzkuhzru2d6ovvmywuwsek4vgn0n0pnwuyyxzzfndfotwxqenfwaknmbmpzd2h1zdfrt2vfvlpwnjjvadl1elz2yxbsywu0tg9jskstvjdpmw03lui4x1vwdu1nyzv4wmcxukg3we16wulib0rznhu5n3ltx19cowrcde1dawhmohbhekpua0rmveh2wgfdcl9hsgviwk90n3zu?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxnu0dkoevcbthktwvgteywz3rrnexhnxbnwdlszwpfsmrsr0davjdzewzkn0rrqxlzcedncexbm29stlbfcerkdkx1b0hswjffohpltud1r2hqs1jjdc0zdxfradj1wwrrtuhmmtdwn0lnylpmcwdlym9zdvranm9ud0tqlxz5welbbxznmdjgvhdbnzq3cv9wogu4sxo4a0jkwwwwnhborjrjb1v1atbr?oc=5"
+      ]
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:funding:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s European research and innovation funding",
+      "retrace_status": "rebuilt",
+      "previous_status": "updated",
+      "current_status": "updated",
+      "previous_score": 90,
+      "current_score": 88,
+      "previous_evidence_refs": 19,
+      "current_evidence_refs": 17,
+      "removed_evidence_refs_detected": [
+        "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures_en"
+      ],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxpvxv6umz4eutwuhjyemvibldjogjcq1rxvdzyr1v0qwh1wvnnwlbcmed5rxvvueftddbir1zxq1vmn1rxb3zkugxpodfnnuj3wfduu05asfjmd0ffm19wtlplvufgejvid0ewd0thvnj2ruxumvbicvfqy2ncoehqzfj6vzfyrzhpemviegdlb3c5ri1rvdm2vfdlznk3zjbmswy0smlwswtat0r5a1itswrgy0zashvjulpinvp0y0zfehmtzeeytwuzskxvekx3?oc=5",
+        "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+        "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
+        "url:https://www.earto.eu/earto-inputs-on-healthcare-research-and-innovation-for-the-next-strategic-plan-of-horizon-europe-2025-2027"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxoyjvkavdvx2cwzhbpwe5kqlvprnffevfvt2jwtwvuwtlfq0luegpazwkzauxdmtzkuhzru2d6ovvmywuwsek4vgn0n0pnwuyyxzzfndfotwxqenfwaknmbmpzd2h1zdfrt2vfvlpwnjjvadl1elz2yxbsywu0tg9jskstvjdpmw03lui4x1vwdu1nyzv4wmcxukg3we16wulib0rznhu5n3ltx19cowrcde1dawhmohbhekpua0rmveh2wgfdcl9hsgviwk90n3zu?oc=5",
+        "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxnu0dkoevcbthktwvgteywz3rrnexhnxbnwdlszwpfsmrsr0davjdzewzkn0rrqxlzcedncexbm29stlbfcerkdkx1b0hswjffohpltud1r2hqs1jjdc0zdxfradj1wwrrtuhmmtdwn0lnylpmcwdlym9zdvranm9ud0tqlxz5welbbxznmdjgvhdbnzq3cv9wogu4sxo4a0jkwwwwnhborjrjb1v1atbr?oc=5"
+      ]
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:infrastructure:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s research infrastructures",
+      "retrace_status": "rebuilt",
+      "previous_status": "updated",
+      "current_status": "updated",
+      "previous_score": 83,
+      "current_score": 81,
+      "previous_evidence_refs": 17,
+      "current_evidence_refs": 15,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1057/s41304-025-00534-8",
+        "url:https://doi.org/10.1093/scipol/scae054",
+        "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmixwfbvv95cuxodepldmzuoxbldvy2t2jlchdybfh3blq3whuxwdliaw82x01ld1niv3hfuhlnvk11cfhpcdctaku5wjfkwevinkvjmjzhwxb2mhptzti0vgdxwnozbefnwel3bmzznfd1qnzbmhbimxb6m2zfz2hpedlwcfbsd0dytuj3enizv0g2a3jyde85u3bibfy1oerzek00nezpmxz0x0t4ujy4x3k3eulkddg1sunmnwvrtelrdevhs1ribm0yrdjxvvvr?oc=5"
+      ]
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:ip:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s research ownership and technology transfer",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 92,
+      "current_score": 92,
+      "previous_evidence_refs": 10,
+      "current_evidence_refs": 10,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:ip:supply_chain",
+      "title": "A supply-chain break removes a no-substitute input from Europe’s research ownership and technology transfer",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 83,
+      "current_score": 83,
+      "previous_evidence_refs": 8,
+      "current_evidence_refs": 8,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:open_science:conflict",
+      "title": "A conflict escalation severs Europe’s access to open science and research data",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 82,
+      "current_score": 82,
+      "previous_evidence_refs": 12,
+      "current_evidence_refs": 12,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:open_science:export_restriction",
+      "title": "An export restriction abruptly cuts Europe’s access to open science and research data",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 81,
+      "current_score": 81,
+      "previous_evidence_refs": 14,
+      "current_evidence_refs": 14,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:quantum:export_restriction",
+      "title": "An export restriction abruptly cuts Europe’s access to quantum research and technology",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 81,
+      "current_score": 81,
+      "previous_evidence_refs": 15,
+      "current_evidence_refs": 15,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:quantum:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s quantum research and technology",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 87,
+      "current_score": 87,
+      "previous_evidence_refs": 15,
+      "current_evidence_refs": 15,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:space:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s space R&I",
+      "retrace_status": "rebuilt",
+      "previous_status": "updated",
+      "current_status": "updated",
+      "previous_score": 90,
+      "current_score": 88,
+      "previous_evidence_refs": 11,
+      "current_evidence_refs": 9,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [
+        "url:https://doi.org/10.1007/s11192-016-2053-8",
+        "url:https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation",
+        "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5"
+      ],
+      "evidence_refs_added_to_chain": [
+        "url:https://news.google.com/rss/articles/cbmihafbvv95cuxptk90t2tnuuk5etmwrdfxsuvrn0hqtja0d0zlzfiwtnnqahv0we5xcf9ase1zx29uyutjy2raos1dqlpdcln1lutolug3d0vizjrhzkxtukkyq0dgvgteazjytkvwn3jdc2d3tmhezzu1z0lxrgtguny2mez6oufenkg5tjm?oc=5"
+      ]
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:startups:conflict",
+      "title": "A conflict escalation severs Europe’s access to technology companies trying to grow in Europe",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 83,
+      "current_score": 83,
+      "previous_evidence_refs": 15,
+      "current_evidence_refs": 15,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:startups:security_reclassification",
+      "title": "A security reclassification abruptly narrows access to Europe’s technology companies trying to grow in Europe",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 88,
+      "current_score": 88,
+      "previous_evidence_refs": 14,
+      "current_evidence_refs": 14,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "shock",
+      "id": "emergent:talent:conflict",
+      "title": "A conflict escalation severs Europe’s access to research talent",
+      "retrace_status": "unchanged",
+      "previous_status": "unchanged",
+      "current_status": "unchanged",
+      "previous_score": 80,
+      "current_score": 80,
+      "previous_evidence_refs": 16,
+      "current_evidence_refs": 16,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "strategic_pathway",
+      "id": "url:https://cdn.ceps.eu/2026/06/2026-08-fpu-eu-asia-digital-cooperation.pdf",
+      "title": "Shared gains, secure links: rethinking EU-Asia digital cooperation – CEPS",
+      "retrace_status": "unchanged",
+      "previous_status": "",
+      "current_status": "",
+      "previous_score": null,
+      "current_score": null,
+      "previous_evidence_refs": 1,
+      "current_evidence_refs": 1,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "strategic_pathway",
+      "id": "url:https://ec.europa.eu/newsroom/dae/redirection/document/129109",
+      "title": "Download 6 - Summary of the Impact Assessment Download",
+      "retrace_status": "unchanged",
+      "previous_status": "",
+      "current_status": "",
+      "previous_score": null,
+      "current_score": null,
+      "previous_evidence_refs": 1,
+      "current_evidence_refs": 1,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "strategic_pathway",
+      "id": "url:https://marie-sklodowska-curie-actions.ec.europa.eu/actions/choose-europe-for-science",
+      "title": "Choose Europe for Science",
+      "retrace_status": "unchanged",
+      "previous_status": "",
+      "current_status": "",
+      "previous_score": null,
+      "current_score": null,
+      "previous_evidence_refs": 1,
+      "current_evidence_refs": 1,
+      "removed_evidence_refs_detected": [],
+      "reclassified_evidence_refs_detected": [],
+      "evidence_refs_removed_from_chain": [],
+      "evidence_refs_added_to_chain": []
+    },
+    {
+      "kind": "reader_publication",
+      "product": "continuity",
+      "id": "l45:goal_measurement_gap:sovereignty",
+      "retrace_status": "unchanged"
+    },
+    {
+      "kind": "reader_publication",
+      "product": "continuity",
+      "id": "l45:practice_precedes_doctrine:generic-funding-programme",
+      "retrace_status": "unchanged"
+    },
+    {
+      "kind": "reader_publication",
+      "product": "shock",
+      "id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "retrace_status": "unchanged"
+    },
+    {
+      "kind": "reader_publication",
+      "product": "trend",
+      "id": "l45:opposing_actions_same_object:ri-capacity-distribution",
+      "retrace_status": "unchanged"
+    }
+  ],
+  "shock_support_chains_changed_after_a_removal": [],
+  "orphan_references_before": [
+    {
+      "kind": "shock",
+      "object_id": "emergent:space:security_reclassification",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5",
+      "title": "IRIS² - Europe’s space-based secure connectivity system",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:space:security_reclassification",
+      "field": "support",
+      "identity": "url:https://doi.org/10.1007/s11192-016-2053-8",
+      "title": "50 years of space research in Europe: a bibliometric profile of the European Space Agency (ESA)",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:space:security_reclassification",
+      "field": "support",
+      "identity": "url:https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation",
+      "title": "Three Franco-German priorities for Europe’s China policy: economic security, proactive innovation and coordination on Asia-Pacific",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:security_reclassification",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxpvxv6umz4eutwuhjyemvibldjogjcq1rxvdzyr1v0qwh1wvnnwlbcmed5rxvvueftddbir1zxq1vmn1rxb3zkugxpodfnnuj3wfduu05asfjmd0ffm19wtlplvufgejvid0ewd0thvnj2ruxumvbicvfqy2ncoehqzfj6vzfyrzhpemviegdlb3c5ri1rvdm2vfdlznk3zjbmswy0smlwswtat0r5a1itswrgy0zashvjulpinvp0y0zfehmtzeeytwuzskxvekx3?oc=5",
+      "title": "UK rewards from EU research funding go beyond success rates",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:security_reclassification",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:security_reclassification",
+      "field": "support",
+      "identity": "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
+      "title": "Considering research security is part of responsible research funding",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:security_reclassification",
+      "field": "support",
+      "identity": "url:https://www.earto.eu/earto-inputs-on-healthcare-research-and-innovation-for-the-next-strategic-plan-of-horizon-europe-2025-2027",
+      "title": "EARTO Inputs on Healthcare Research and Innovation for the next Strategic Plan of Horizon Europe (2025-2027) | EARTO",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:export_restriction",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxpvxv6umz4eutwuhjyemvibldjogjcq1rxvdzyr1v0qwh1wvnnwlbcmed5rxvvueftddbir1zxq1vmn1rxb3zkugxpodfnnuj3wfduu05asfjmd0ffm19wtlplvufgejvid0ewd0thvnj2ruxumvbicvfqy2ncoehqzfj6vzfyrzhpemviegdlb3c5ri1rvdm2vfdlznk3zjbmswy0smlwswtat0r5a1itswrgy0zashvjulpinvp0y0zfehmtzeeytwuzskxvekx3?oc=5",
+      "title": "UK rewards from EU research funding go beyond success rates",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:export_restriction",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:export_restriction",
+      "field": "support",
+      "identity": "url:https://www.earto.eu/earto-inputs-on-healthcare-research-and-innovation-for-the-next-strategic-plan-of-horizon-europe-2025-2027",
+      "title": "EARTO Inputs on Healthcare Research and Innovation for the next Strategic Plan of Horizon Europe (2025-2027) | EARTO",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:funding:export_restriction",
+      "field": "support",
+      "identity": "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
+      "title": "Considering research security is part of responsible research funding",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:infrastructure:security_reclassification",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5",
+      "title": "IRIS² - Europe’s space-based secure connectivity system",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:infrastructure:security_reclassification",
+      "field": "support",
+      "identity": "url:https://doi.org/10.1093/scipol/scae054",
+      "title": "Science diplomacy in the European and Latin American and Caribbean research infrastructure collaboration",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:infrastructure:security_reclassification",
+      "field": "support",
+      "identity": "url:https://doi.org/10.1057/s41304-025-00534-8",
+      "title": "Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:biotech:security_reclassification",
+      "field": "support",
+      "identity": "url:https://news.google.com/rss/articles/cbmisafbvv95cuxotkc4m1uwqk9pafr2ouj2ykd6nm13cgw2bg9wr3zqz3rvbum5sxhxcuetlw94nmlboufqqnf4nutsq2tzbc1tnw04vevtts1xzlczmgvlq3y4lxzuuhnjwkdrde0xadj4c3ptcldhrmdkzlfazxdomjk2nhjla1fvckzsn2zosevotffrvg5lsxdly1dnlvptmmeyq0nlcxm2rvzzmuh0mhdpqtbfwxgtva?oc=5",
+      "title": "Greece, Poland urge Irish EU presidency to advance biotech and medicines security",
+      "strand": "C"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:biotech:security_reclassification",
+      "field": "support",
+      "identity": "url:https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation",
+      "title": "Three Franco-German priorities for Europe’s China policy: economic security, proactive innovation and coordination on Asia-Pacific",
+      "strand": "H"
+    },
+    {
+      "kind": "shock",
+      "object_id": "emergent:biotech:security_reclassification",
+      "field": "support",
+      "identity": "url:https://op.europa.eu/o/opportal-service/download-handler?identifier=7348956d-1389-11f1-8870-01aa75ed71a1&format=pdf&language=en&productionsystem=cellar&part=",
+      "title": "Research security monitor 2025 - Publications Office of the EU",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:sovereignty",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmi7afbvv95cuxoymjsbfvwvzfzmudru0fwsxvlu1hboffumu9hutqyemn0b2njrny4bhvjs3jruulsvndmedq2evm3afdgm2x4dwrszwplnm4xu2xqykv1udeya1hebgkxohd1zdrynkdanxfybwh0chjxnvg4dgz4v3v5rgxoy0pvdlzvcfjteuoyndfbwmp2vzjoy2vhwwj3m3bsaneyx2xxoxjwm3gyb0iyevn6elo3slptwxhadvdute5ft3hrotg1zkrjn211qwhfqwlfahdytffvteficy1jcgpxnkjjawtkou1yu2xwdg1eoa?oc=5",
+      "title": "€14 Trillion in Investment Needed to Advance Europe’s Strategic Autonomy by 2035, According to Bloomberg Intelligence | Press | Bloomberg LP",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:sovereignty",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1007/978-3-032-20210-9",
+      "title": "Strategic Autonomy of the European Union",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:sovereignty",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1080/07036337.2025.2537373",
+      "title": "Cautious optimism: unravelling Chinese views on European strategic autonomy",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxqqllkci0yzwc0dknavv9mywfsvnnib3ppt1hunfrycgiwvvzvywhaovbozg9juzblzf9zquhyaupfq1n2wl9qm2vku1bnduhyof9er1pya0vwv2rraepgckytbgjpa3pxqlzvb0phmepsn083x0t1txvyyzfot182alhyujk4bvlktermwthvbvnqrne3rjjns3vzbw1uczdxww1orkzsm0len2rldwfz?oc=5",
+      "title": "ECB’s Nagel Says AI Will Be ‘Litmus Test’ for Europe’s Future",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiwwfbvv95cuxnb24zexzudlvzz19nqu1grjrtr0vzd3rfdy1odtntzey3ykrklxu1bfu4ulh1bs0ybdr1n2lhm0f1vjhvc0izumg5ae5zww5ztgvva25gvkl5ukrzyw1lm2xgnurvtlm3cffoak5snvpdvk1gngnjovjkyjkzmv93zeprrtr2zzm2det5skk3q3bvvmjirdfssnnlqwrfa2dfugnlrdf4egpfm25tx0vzugpjmfl2znnodutrbu5unfltsdg?oc=5",
+      "title": "Cerebras targets Europe with multibillion-dollar AI expansion, challenging Nvidia",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmixafbvv95cuxqb0lsykxysy1tyuvzrnlhqmn5q1lonw14dl9oywz4ufpwx0n6tgnmdudtsfrhmdbsmzmwazv2rkfkm01jtgfvbhpjutk4zvnzvgzjc3ftawlhmgvimep2zhfucezunmf3mud3ujf3eec4zc04mdewwmp3rlyzsmfpztnltvlptursdenede1fmlnzrjc1tzfqd2tssunoqmtxrf9dquvir0ftams3zm5kufz1dhhrzetkuflsqufyevozsmxk?oc=5",
+      "title": "EXCLUSIVE: OpenAI agents hijacked German website in previously undisclosed AI breakout this spring",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbminafbvv95cuxqyunxuk5ms2vstxvbn1hdunzsshvpwknsetdvze02edf2cdncndqxowp6rkq3s3bom2pvb0wyzmdoufrzrtdzrno4zetjngxmcugyrhhgqmfvc1zkuux6me9btlaxdutwsmdts0rytu4tmenwdv9wvgjkztdxmgxptdm3agffvzvizhj3wjjstujpre5rtnpurmxwtkq?oc=5",
+      "title": "EU pension funds buying into US AI boom, as ECB warns credit ratings may be understating future risk",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:omitted_dependency_chain:infrastructure-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+      "title": "Listen: Can local opposition derail Europe’s data centre boom?",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:practice_precedes_doctrine:generic-funding-programme",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:practice_precedes_doctrine:generic-collaboration-diplomacy",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:practice_precedes_doctrine:generic-quantum",
+      "field": "context",
+      "identity": "url:https://www.eurekanetwork.org/impact/germany-pioneering-scalable-quantum-cooling",
+      "title": "Germany: Pioneering scalable quantum cooling",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:practice_precedes_doctrine:generic-quantum",
+      "field": "context",
+      "identity": "url:https://www.cnrs.fr/en/our-research/france-2030/pepr/quantum",
+      "title": "National research programme Quantum (PEPR Quantique)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:practice_precedes_doctrine:generic-quantum",
+      "field": "context",
+      "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
+      "title": "New Finnish Quantum Institute brings together top expertise in research and commercialisation | VTT",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxpd0gwbwzosnfyb1bnsuzmdu5oamqxcllhltgtwm5pwfhkn2npbkjfddzvrkdovurdbwvxdnrquup0uwtfowc2aexreuqtbvjetxh4uefvagrjsnptbnbgagxibdeydthfanlvtgvdd3dqc1hrdgnez3n3qlvwzf9oulf0zffzdujmuuhjy045zlv5tlbzz3jowezzqvlzq0zeuxfiqvdn?oc=5",
+      "title": "Power-hungry data centers are expanding in Europe. So is the resistance.",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+      "title": "Listen: Can local opposition derail Europe’s data centre boom?",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5",
+      "title": "IRIS² - Europe’s space-based secure connectivity system",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxqzzjvm0xhz2exruziwedhd1m5ajzkuu16u3rsbhnntlfvrzjotuvkaw91tms3wwvitxrkauhmr2rnz3pldwvgs1pmvfjlynl2mk1jsghsv1dwunrbsehqv2xqd0c2mudeywpxexjvmthwnk42nfzaauhjctllzlpiekvlv0t0aefeqmdnnkvqymlvlwdkmfffahlwdtkwuv9rsdjnseiyvlj0unp2uzfgvhewrq?oc=5",
+      "title": "Ireland keeps nuclear door open as data centre energy demand surges",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmihafbvv95cuxor3p4sxpzmvhszk0yn3v0tdzxt3pnv1vawknrc2hoyxpat3rdagzzvuhzclrkmhvdbhnimg5vqjfmy21gqk5lcdfhwlcxahzzekvqqkk4z28yu2fkegnybvb4eufizkwzqtfemnziofdrdgdnwfztnkxfeunawklsbvrtbhe?oc=5",
+      "title": "Data centres drive Ireland to reopen nuclear power debate",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmirwfbvv95cuxqqllkci0yzwc0dknavv9mywfsvnnib3ppt1hunfrycgiwvvzvywhaovbozg9juzblzf9zquhyaupfq1n2wl9qm2vku1bnduhyof9er1pya0vwv2rraepgckytbgjpa3pxqlzvb0phmepsn083x0t1txvyyzfot182alhyujk4bvlktermwthvbvnqrne3rjjns3vzbw1uczdxww1orkzsm0len2rldwfz?oc=5",
+      "title": "ECB’s Nagel Says AI Will Be ‘Litmus Test’ for Europe’s Future",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiwwfbvv95cuxnb24zexzudlvzz19nqu1grjrtr0vzd3rfdy1odtntzey3ykrklxu1bfu4ulh1bs0ybdr1n2lhm0f1vjhvc0izumg5ae5zww5ztgvva25gvkl5ukrzyw1lm2xgnurvtlm3cffoak5snvpdvk1gngnjovjkyjkzmv93zeprrtr2zzm2det5skk3q3bvvmjirdfssnnlqwrfa2dfugnlrdf4egpfm25tx0vzugpjmfl2znnodutrbu5unfltsdg?oc=5",
+      "title": "Cerebras targets Europe with multibillion-dollar AI expansion, challenging Nvidia",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmixafbvv95cuxqb0lsykxysy1tyuvzrnlhqmn5q1lonw14dl9oywz4ufpwx0n6tgnmdudtsfrhmdbsmzmwazv2rkfkm01jtgfvbhpjutk4zvnzvgzjc3ftawlhmgvimep2zhfucezunmf3mud3ujf3eec4zc04mdewwmp3rlyzsmfpztnltvlptursdenede1fmlnzrjc1tzfqd2tssunoqmtxrf9dquvir0ftams3zm5kufz1dhhrzetkuflsqufyevozsmxk?oc=5",
+      "title": "EXCLUSIVE: OpenAI agents hijacked German website in previously undisclosed AI breakout this spring",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbminafbvv95cuxqyunxuk5ms2vstxvbn1hdunzsshvpwknsetdvze02edf2cdncndqxowp6rkq3s3bom2pvb0wyzmdoufrzrtdzrno4zetjngxmcugyrhhgqmfvc1zkuux6me9btlaxdutwsmdts0rytu4tmenwdv9wvgjkztdxmgxptdm3agffvzvizhj3wjjstujpre5rtnpurmxwtkq?oc=5",
+      "title": "EU pension funds buying into US AI boom, as ECB warns credit ratings may be understating future risk",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+      "title": "Listen: Can local opposition derail Europe’s data centre boom?",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-materials-energy",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxpd0gwbwzosnfyb1bnsuzmdu5oamqxcllhltgtwm5pwfhkn2npbkjfddzvrkdovurdbwvxdnrquup0uwtfowc2aexreuqtbvjetxh4uefvagrjsnptbnbgagxibdeydthfanlvtgvdd3dqc1hrdgnez3n3qlvwzf9oulf0zffzdujmuuhjy045zlv5tlbzz3jowezzqvlzq0zeuxfiqvdn?oc=5",
+      "title": "Power-hungry data centers are expanding in Europe. So is the resistance.",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-materials-energy",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxqzzjvm0xhz2exruziwedhd1m5ajzkuu16u3rsbhnntlfvrzjotuvkaw91tms3wwvitxrkauhmr2rnz3pldwvgs1pmvfjlynl2mk1jsghsv1dwunrbsehqv2xqd0c2mudeywpxexjvmthwnk42nfzaauhjctllzlpiekvlv0t0aefeqmdnnkvqymlvlwdkmfffahlwdtkwuv9rsdjnseiyvlj0unp2uzfgvhewrq?oc=5",
+      "title": "Ireland keeps nuclear door open as data centre energy demand surges",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-materials-energy",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmihafbvv95cuxor3p4sxpzmvhszk0yn3v0tdzxt3pnv1vawknrc2hoyxpat3rdagzzvuhzclrkmhvdbhnimg5vqjfmy21gqk5lcdfhwlcxahzzekvqqkk4z28yu2fkegnybvb4eufizkwzqtfemnziofdrdgdnwfztnkxfeunawklsbvrtbhe?oc=5",
+      "title": "Data centres drive Ireland to reopen nuclear power debate",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-widening-participation-infrastructure",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1057/s41304-025-00534-8",
+      "title": "Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-widening-participation-infrastructure",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1093/scipol/scae054",
+      "title": "Science diplomacy in the European and Latin American and Caribbean research infrastructure collaboration",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-widening-participation-infrastructure",
+      "field": "context",
+      "identity": "url:https://era.gv.at/open-positions/programme-officer-research-and-innovation-or-infrastructure-unit-eurohpc202502",
+      "title": "ERA Portal Austria – Programme Officer - Research and Innovation or Infrastructure Unit (EuroHPC/2025/02)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-infrastructure",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1057/s41304-025-00534-8",
+      "title": "Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-infrastructure",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1093/scipol/scae054",
+      "title": "Science diplomacy in the European and Latin American and Caribbean research infrastructure collaboration",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:success_metric_blind_spot:generic-resilience-infrastructure",
+      "field": "context",
+      "identity": "url:https://era.gv.at/open-positions/programme-officer-research-and-innovation-or-infrastructure-unit-eurohpc202502",
+      "title": "ERA Portal Austria – Programme Officer - Research and Innovation or Infrastructure Unit (EuroHPC/2025/02)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:research-security",
+      "field": "context",
+      "identity": "url:https://op.europa.eu/o/opportal-service/download-handler?identifier=7348956d-1389-11f1-8870-01aa75ed71a1&format=pdf&language=en&productionsystem=cellar&part=",
+      "title": "Research security monitor 2025 - Publications Office of the EU",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:research-security",
+      "field": "context",
+      "identity": "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
+      "title": "Considering research security is part of responsible research funding",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:research-security",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1080/09662839.2022.2127317",
+      "title": "D reams Lab: assembling knowledge security in Sino-Dutch research collaborations",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:competitiveness",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmi0afbvv95cuxpb1a1ufatwdbmtzjuetfev0z0nkhvcknwwthocs0ywe9uallmd3jvvdn5ngtns3ytqmpvt1jux0lnd05jckdswmftvxf3s0rtsurxm3ozc2s3s3u2nmjyazn4t3hvykvuoupxykrjteh6r20zwtbotjbylwxptw9tbuvpt05qujrhnc13umprcu5duulodvfbzk9pb05ncwllsmnfnhhhouzaow1jeu9mafjtznjiyk83tkr3x2t0dvnqwem0rmtqzfrlwhbtumnv?oc=5",
+      "title": "UK ‘must face up to questions’ on EU research programme bill",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:competitiveness",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmilafbvv95cuxqx1phwdhouwiwb3lbahgttnjpuhoyef9hvg9ubxr3q3fcd2hiahdiqxzszm9szja1dtjxn1gydevtyvrsue9kzxk5btftauzwx0xzbgjgtkhjofbpr2tlmxr0wfnssgltzfe0shvjsef2ohdfm3lqegrzwe9bwg5qemjor2x2suthluwwbkfisc00d0nk?oc=5",
+      "title": "Locked out of EU science, Hungary falls behind on Alzheimer's",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:competitiveness",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmixafbvv95cuxoqkjoownzrjfzumgzdxvtoc1irzg2ulvxv0vox0nwcuzcugqytulqrk16lthcy3l6azz4z1vruljhc3czn3znakz5oerfynb0wuzhevlmufvpmdleswhtnjkymvq3tlbqzvp2tur0lwhkttc0mtvhzzhnyursc3nwrlbswmfynefuymncvzzxqud1d1lenkrzx3h0dg55otm1azjimg05nknzazbvdm5luflyzhbtn3e3bgfywjhjt1nvudlk?oc=5",
+      "title": "EU must support research managers in central and eastern Europe, says Visegrad fund head",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:competitiveness",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiqwfbvv95cuxnbe9sbxnrz1byznbbatrquuneuzfldg1vellqoffrvmkxr2lottlqmjztcs1rwhzvzunkyulmcmvnwtjuuvfjn2jisgswr2e3y0xduzzqueplsedpz2v3b0xvoerozvvovwxudu83wmdwrgz1wepwcnhoakxpwu5ozuy1dfnswndoavdtqzg2q1ntrlnjrfpfz2zqvy1sltlqrmw4v2pfde40wnm?oc=5",
+      "title": "JRC Security Research & Innovation Campus",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:competitiveness",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmingfbvv95cuxocta3suxlauyydeq5ujz4t2j4t3rmeld6mlbzmti4thi4um9jczqzx0lpynvdbnvsdhphbefxvmhdejhjdtmtduzrrgvmedntzfrnmzhtlvk3slfbutzjdwiza1nlrc01vvf6mmzzvecwckp1ry1fx2ppzhbqs3f3nujzt2xpylayc3lldukys1nft25xmg9izm52uln0dw?oc=5",
+      "title": "JRC science for digital wellbeing",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:competitiveness",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiywfbvv95cuxnoxhbofnhcezhzmk1rghpbxdwcklsaml6ujlkuezctznhn3djbdfhugjjtnrtdkdiekjlwuktefpqz3duv3lmc0m3mfj5dhdovxznmgw2bevlzw9flwv3y0ctutzru3nurddwbxrsemrmnjrsczfsttnizhzhsgfqrzzpn1nrqkfkzm9lovktquvhngtxd1rneddqnux2bxzfrunvdwzkx3drzxl2ykvezxlkt1a4bhvowhjtcgpbrhrhbzvry2pgcwtrna?oc=5",
+      "title": "R&I funding at risk from frugal EU leaders’ desire for cuts",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:openness",
+      "field": "context",
+      "identity": "url:https://era.gv.at/news-items/scienceeurope-publishes-position-statement-on-connecting-open-science-and-research-assessment-reform",
+      "title": "ERA Portal Austria – ScienceEurope publishes position statement on connecting Open Science and Research Assessment Reform",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:openness",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1057/s41304-025-00534-8",
+      "title": "Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:openness",
+      "field": "context",
+      "identity": "url:https://doi.org/10.1080/10438599.2025.2459764",
+      "title": "Reconciling open science with technological sovereignty",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:goal_measurement_gap:openness",
+      "field": "context",
+      "identity": "url:https://era.gv.at/open-positions/seconded-national-expert-policy-officer-european-open-science-cloud-and-fair-data-services-rtd-a-4",
+      "title": "ERA Portal Austria – Seconded National Expert - Policy Officer - European Open Science Cloud and FAIR data services (RTD-A-4)",
+      "strand": "H"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmipgfbvv95cuxpd0gwbwzosnfyb1bnsuzmdu5oamqxcllhltgtwm5pwfhkn2npbkjfddzvrkdovurdbwvxdnrquup0uwtfowc2aexreuqtbvjetxh4uefvagrjsnptbnbgagxibdeydthfanlvtgvdd3dqc1hrdgnez3n3qlvwzf9oulf0zffzdujmuuhjy045zlv5tlbzz3jowezzqvlzq0zeuxfiqvdn?oc=5",
+      "title": "Power-hungry data centers are expanding in Europe. So is the resistance.",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmilafbvv95cuxnbzr3q3fxwgx0twdhc09jntjtsuvredh1ehbzc241y3k0sk9omupvvtjkrhjrsmzymlfrmjniq0i4utluowrqtkxjdvpqbnrmedv0m2jrbvzuynzynhrothbxczbuslzeuk01ltbwethwzehhamhctkg0mfbscuzmtnd5mljpqtrqdnlfulhjx1jhsvrt?oc=5",
+      "title": "Listen: Can local opposition derail Europe’s data centre boom?",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprtrrehixb01uls1xngzzdhi1dfq0tk5rbwljlwdqumpirkreuvdoeflnqy1vqmtedjfkltiwbfhxtdu1zmjvtdnyn1zpcde0cfrpdhc0rmranuxqzzlouehregljyjfrt0jbql96sly2nlvxnhzoemmwqvlyawhjbk9wwufzawjbbmplekfhnnh4c3nwzmhsu1ktunz1lwpjv3gzy1hwyjr6vlzybfzfzfpxdte0ohvjxzh4ea?oc=5",
+      "title": "IRIS² - Europe’s space-based secure connectivity system",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmiswfbvv95cuxqzzjvm0xhz2exruziwedhd1m5ajzkuu16u3rsbhnntlfvrzjotuvkaw91tms3wwvitxrkauhmr2rnz3pldwvgs1pmvfjlynl2mk1jsghsv1dwunrbsehqv2xqd0c2mudeywpxexjvmthwnk42nfzaauhjctllzlpiekvlv0t0aefeqmdnnkvqymlvlwdkmfffahlwdtkwuv9rsdjnseiyvlj0unp2uzfgvhewrq?oc=5",
+      "title": "Ireland keeps nuclear door open as data centre energy demand surges",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmihafbvv95cuxor3p4sxpzmvhszk0yn3v0tdzxt3pnv1vawknrc2hoyxpat3rdagzzvuhzclrkmhvdbhnimg5vqjfmy21gqk5lcdfhwlcxahzzekvqqkk4z28yu2fkegnybvb4eufizkwzqtfemnziofdrdgdnwfztnkxfeunawklsbvrtbhe?oc=5",
+      "title": "Data centres drive Ireland to reopen nuclear power debate",
+      "strand": "C"
+    },
+    {
+      "kind": "high_order",
+      "object_id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-speed-vs-safeguard",
+      "field": "context",
+      "identity": "url:https://news.google.com/rss/articles/cbmizwfbvv95cuxnrddoyuzgzk9ednzxukvintjpberxbejanwrzeexfcmxndwgyvupzntr0t1f2cldfadexsfrhchjlmnu1vvrfovbqregtulo2vlj6ue91ddc2v1zxn0riazbqs0jbrmp0bnnnv1a4ywq2v0lmtxf3cgdwaepdm1lfekx2bdgztjljrdb6x1a4otfynelwovdqq19hujc5amxaouladwjpd0dptkj0yl91rgvgr0gzbwttc3niuvy2a2zsam9ttfhsvknotutxneu?oc=5",
+      "title": "Japan formally joins Horizon Europe as associated country",
+      "strand": "C"
+    }
+  ],
+  "orphan_references_after": [],
+  "integrity_check": {
+    "passed": true,
+    "requirement": "zero active downstream objects reference evidence absent from the eligible surviving corpus"
+  }
+}
