@@ -8,50 +8,56 @@
 <script src="../../radar_data.js?v=28.1"></script>
 
 <style id="matrix-navigation-style">
-/* Display-only navigation aid for the large Matrix. */
-.matrix-shell{position:relative}
-.matrix-overview{
-  position:fixed;left:calc(var(--sidebar) + 18px);top:14px;z-index:45;width:356px;
-  padding:10px;background:var(--paper);border:var(--w-struct) solid var(--ink);
-  font-family:var(--sans);box-shadow:0 2px 12px rgba(0,0,0,.14);
-  opacity:0;pointer-events:none;transform:translateY(-6px);
-  transition:opacity .12s ease,transform .12s ease;
-}
-.matrix-overview.visible{opacity:1;pointer-events:auto;transform:none}
-.matrix-overview-title{font-size:12px;font-weight:700;line-height:1.2;margin:0 0 7px}
-.matrix-mini-grid{display:grid;grid-template-columns:68px repeat(4,minmax(0,1fr));gap:3px;align-items:stretch}
-.matrix-mini-corner,.matrix-mini-col,.matrix-mini-row{
-  display:flex;align-items:center;justify-content:center;min-height:25px;
-  font-size:9px;line-height:1.12;font-weight:700;text-align:center;color:var(--quiet)
-}
-.matrix-mini-col{padding:2px}
-.matrix-mini-row{justify-content:flex-start;text-align:left;padding-right:4px}
-.matrix-mini-cell{
-  appearance:none;display:flex;align-items:center;justify-content:center;position:relative;
-  min-width:0;min-height:48px;padding:4px 3px;margin:0;
-  border:var(--w-hair) solid var(--rule);background:var(--inset);cursor:pointer;
-  font:700 8px/1.12 var(--sans);text-align:center;color:var(--ink);
-}
-.matrix-mini-cell:hover{background:var(--paper);border-color:var(--ink)}
-.matrix-mini-cell.active{background:var(--red);border-color:var(--red);color:var(--paper);outline:2px solid var(--ink);outline-offset:1px}
-.matrix-mini-count{position:absolute;right:2px;bottom:1px;font-size:7px;line-height:1;font-weight:700;opacity:.72}
-.matrix-overview-current{
-  margin-top:8px;padding-top:7px;border-top:var(--w-hair) solid var(--rule);
-  font-size:11px;line-height:1.3;font-weight:600
-}
+/* Display-only navigation aid for the large Matrix. The miniature lives in the
+   existing empty corner cell, so it never covers Matrix content. */
+.page-frontier-quick .matrix-scroll{position:relative}
 .page-frontier-quick .matrix-scroll .col{position:sticky;top:8px;z-index:5;background:var(--inset)}
 .page-frontier-quick .matrix-scroll .row{position:sticky;left:0;z-index:6;background:var(--inset)}
-.page-frontier-quick .matrix-scroll .corner{position:sticky;left:0;top:8px;z-index:7;background:var(--field)}
-@media(max-width:980px){.matrix-overview{width:316px}.matrix-mini-grid{grid-template-columns:62px repeat(4,minmax(0,1fr))}.matrix-mini-cell{font-size:7.5px}}
-@media(max-width:760px){.matrix-overview{display:none}}
-@media(prefers-reduced-motion:reduce){.matrix-overview{transition:none}}
+.page-frontier-quick .matrix-scroll .corner{
+  position:sticky;left:0;top:8px;z-index:7;align-self:stretch;
+  background:var(--field);border:0;padding:0;min-height:118px;
+  display:flex;align-items:flex-start;justify-content:flex-start;
+}
+.matrix-corner-map{
+  width:100%;box-sizing:border-box;padding:7px 5px 6px;
+  font-family:var(--sans);color:var(--ink);
+}
+.matrix-corner-map-title{
+  margin:0 0 4px;font-size:9px;line-height:1.1;font-weight:700;color:var(--quiet);
+  letter-spacing:.02em;text-transform:uppercase;
+}
+.matrix-mini-grid{
+  position:relative;display:grid;
+  grid-template-columns:12px repeat(4,minmax(0,1fr));
+  grid-template-rows:10px repeat(4,23px);gap:2px;
+}
+.matrix-mini-axis{
+  display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;
+  font:700 7px/1 var(--sans);color:var(--quiet);text-align:center;
+}
+.matrix-mini-axis.row-axis{justify-content:flex-start}
+.matrix-mini-cell{
+  appearance:none;position:relative;display:flex;align-items:center;justify-content:center;
+  min-width:0;min-height:0;padding:1px;margin:0;overflow:hidden;
+  border:1px solid var(--rule);background:var(--paper);color:var(--quiet);cursor:pointer;
+  font:700 6.2px/1.02 var(--sans);text-align:center;
+}
+.matrix-mini-cell span{display:block;max-height:20px;overflow:hidden}
+.matrix-mini-cell:hover{border-color:var(--ink);color:var(--ink)}
+/* Cells currently visible in the large Matrix. */
+.matrix-mini-cell.in-view{background:rgba(210,0,30,.16);border-color:var(--red);color:var(--ink)}
+.matrix-mini-cell.focus-cell{outline:2px solid var(--red);outline-offset:-2px;background:rgba(210,0,30,.27)}
+@media(max-width:760px){
+  .page-frontier-quick .matrix-scroll .corner{min-height:0}
+  .matrix-corner-map{display:none}
+}
 </style>
 
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
 </head><body>
 <header><div class="wrap top"><div><div class="kicker">Matrix</div><h1>Europe at a glance</h1><p class="lede">Rows locate change in the research and innovation system. Columns show its effect on European control and capability.</p><div class="state" id="state">Loading</div></div><nav class="nav"><a href="../../">Start</a><a href="../../radar/">Main Radar</a><a href="../../read/">Read At Least This</a><a class="primary" href="./">Matrix</a><a href="../">Full Matrix</a><a href="../../trends/">Trends</a><a href="../../phenomena/">Ongoing Phenomena</a><a href="../../priorities/">Risks &amp; Opportunities</a><a href="../../shocks/">External Shocks</a><a href="../../historical/">Earlier Findings</a><a href="../../stuff/">Stuff</a></nav></div></header>
 <section class="core-flow" aria-label="Core reader path"><div class="wrap flow"><a href="../../radar/">1 · Radar</a><span>→</span><a class="current" href="./">2 · Matrix</a><span>→</span><a href="../../trends/">3 · Trends</a><span>→</span><a href="../../priorities/">4 · Risks &amp; opportunities</a><span>→</span><a href="../../shocks/">5 · External shocks</a></div></section>
-<main class="wrap matrix-shell"><aside class="matrix-overview" id="matrixOverview" aria-label="Matrix overview" aria-hidden="true"><div class="matrix-overview-title">Matrix map</div><div class="matrix-mini-grid" id="matrixMiniGrid"></div><div class="matrix-overview-current" id="matrixOverviewCurrent">Scroll the Matrix to navigate.</div></aside><div class="matrix-scroll" id="matrixScroll"><div id="grid"></div></div></main>
+<main class="wrap matrix-shell"><div class="matrix-scroll" id="matrixScroll"><div id="grid"></div></div></main>
 <footer><div class="wrap">Research &amp; Innovation × Geopolitics Radar · Matrix</div></footer>
 <script src="../../briefing/insights.js?v=22.2"></script><script src="../../reader_style.js?v=28.1"></script><script src="../frontier.js?v=22.2"></script>
 <script>
@@ -69,38 +75,63 @@ const COL_DISPLAY={A:['More control, stronger','EU control ↑, capability ↑']
 const CELL_DISPLAY={'Strength from outside':'Strength from outside','Protection slows exchange':'Protection slows exchange','More secure European capacity':'More secure European capacity','Useful outside access':'Useful outside access','Outside limits hurt capability':'Outside limits hurt capability','Growth using outside capital or markets':'Growth via outside capital/markets','Protection adds friction':'Protection adds friction','Rules split or block Europe':'Rules split or block Europe'};
 function cellLabel(v){return plain(CELL_DISPLAY[v]||v)}
 function buildMatrixOverview(v){
-  const mini=document.getElementById('matrixMiniGrid'),overview=document.getElementById('matrixOverview'),current=document.getElementById('matrixOverviewCurrent'),scroller=document.getElementById('matrixScroll');
-  if(!mini||!overview||!current||!scroller)return;
-  const rowShort={knowledge:'People',infrastructure:'Tools',conversion:'Firms',rules:'Rules'};
-  const colShort={A:'Control + strength',B:'Control + cost',C:'Strength + reliance',D:'Less control + weaker'};
+  const corner=document.querySelector('.matrix .corner'),scroller=document.getElementById('matrixScroll');
+  if(!corner||!scroller)return;
+  const rowShort={knowledge:'P',infrastructure:'T',conversion:'F',rules:'R'};
+  const rowFull={knowledge:'People & knowledge',infrastructure:'Tools & facilities',conversion:'Firms & growth',rules:'Rules & decisions'};
+  const colShort={A:'A',B:'B',C:'C',D:'D'};
   const cellShort={
-    'Build and keep talent':'Build & keep talent','Protection slows exchange':'Protection slows exchange','Strength from outside':'Strength from outside','People or know-how are lost':'People / know-how lost',
-    'More secure European capacity':'Secure EU capacity','More control, higher cost':'Control, higher cost','Useful outside access':'Useful outside access','Outside limits hurt capability':'Outside limits hurt',
-    'European firms grow at home':'EU firms grow at home','More control, less scale':'Control, less scale','Growth using outside capital or markets':'Outside capital / markets','Value and scale move abroad':'Value & scale abroad',
-    'Europe aligns rules and action':'EU aligns rules / action','Protection adds friction':'Protection adds friction','Access on outside rules':'Access on outside rules','Rules split or block Europe':'Rules split / block EU'
+    'Build and keep talent':'Keep talent','Protection slows exchange':'Slow exchange','Strength from outside':'Outside strength','People or know-how are lost':'Talent lost',
+    'More secure European capacity':'Secure capacity','More control, higher cost':'Control + cost','Useful outside access':'Outside access','Outside limits hurt capability':'Limits hurt',
+    'European firms grow at home':'EU growth','More control, less scale':'Control / scale','Growth using outside capital or markets':'Outside growth','Value and scale move abroad':'Scale abroad',
+    'Europe aligns rules and action':'Align rules','Protection adds friction':'Rules friction','Access on outside rules':'Outside rules','Rules split or block Europe':'Rules split'
   };
-  let mh='<div class="matrix-mini-corner" aria-hidden="true"></div>';
-  for(const c of v.columns){const cd=COL_DISPLAY[c.id]||[c.name,c.direction];mh+=`<div class="matrix-mini-col" title="${esc(cd[0])}">${esc(colShort[c.id]||cd[0])}</div>`}
+  const wrap=document.createElement('div');wrap.className='matrix-corner-map';wrap.setAttribute('aria-label','Matrix overview');
+  let mh='<div class="matrix-corner-map-title">Matrix overview</div><div class="matrix-mini-grid"><div></div>';
+  for(const c of v.columns)mh+=`<div class="matrix-mini-axis" title="${esc((COL_DISPLAY[c.id]||[c.name])[0])}">${esc(colShort[c.id]||c.id)}</div>`;
   for(const r of v.rows){
-    const rd=ROW_DISPLAY[r.id]||[plain(r.name),plain(r.description)];mh+=`<div class="matrix-mini-row" title="${esc(rd[0])}">${esc(rowShort[r.id]||rd[0])}</div>`;
+    mh+=`<div class="matrix-mini-axis row-axis" title="${esc(rowFull[r.id]||r.name)}">${esc(rowShort[r.id]||'•')}</div>`;
     for(const c of v.columns){
-      const groups=groupCell(v.cells[r.id][c.id]||[]),n=groups.length,cd=COL_DISPLAY[c.id]||[c.name,c.direction],cell=v.cellNames[r.id][c.id],full=cellLabel(cell[0]),short=cellShort[cell[0]]||full;
-      mh+=`<button type="button" class="matrix-mini-cell" data-mini-row="${esc(r.id)}" data-mini-col="${esc(c.id)}" aria-label="Go to ${esc(rd[0])}, ${esc(cd[0])}: ${esc(full)}" title="${esc(rd[0])} × ${esc(cd[0])} — ${esc(full)}${n?` — ${n} points`:''}"><span>${esc(short)}</span>${n?`<span class="matrix-mini-count">${n}</span>`:''}</button>`;
+      const cell=v.cellNames[r.id][c.id],full=cellLabel(cell[0]),short=cellShort[cell[0]]||full;
+      mh+=`<button type="button" class="matrix-mini-cell" data-mini-row="${esc(r.id)}" data-mini-col="${esc(c.id)}" title="${esc((rowFull[r.id]||r.name)+' × '+(COL_DISPLAY[c.id]?.[0]||c.name)+' — '+full)}" aria-label="Go to ${esc(full)}"><span>${esc(short)}</span></button>`;
     }
   }
-  mini.innerHTML=mh;
+  mh+='</div>';
+  wrap.innerHTML=mh;corner.replaceChildren(wrap);
   function targetCell(row,col){return document.querySelector(`.matrix .cell[data-row="${row}"][data-col="${col}"]`)}
-  function go(row,col){const el=targetCell(row,col);if(!el)return;const left=Math.max(0,el.offsetLeft-176);scroller.scrollTo({left,behavior:'smooth'});const top=window.scrollY+el.getBoundingClientRect().top-104;window.scrollTo({top:Math.max(0,top),behavior:'smooth'});}
-  mini.querySelectorAll('.matrix-mini-cell').forEach(b=>b.addEventListener('click',()=>go(b.dataset.miniRow,b.dataset.miniCol)));
+  function go(row,col){
+    const el=targetCell(row,col);if(!el)return;
+    const rowHead=document.querySelector(`.matrix .row[data-row-head="${row}"]`);
+    const left=Math.max(0,el.offsetLeft-(rowHead?.offsetWidth||168)-8);
+    scroller.scrollTo({left,behavior:'smooth'});
+    const top=window.scrollY+el.getBoundingClientRect().top-96;
+    window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+  }
+  wrap.querySelectorAll('.matrix-mini-cell').forEach(b=>b.addEventListener('click',()=>go(b.dataset.miniRow,b.dataset.miniCol)));
   let ticking=false;
   function update(){
-    ticking=false;const sr=scroller.getBoundingClientRect();const show=sr.top<90&&sr.bottom>150;overview.classList.toggle('visible',show);overview.setAttribute('aria-hidden',show?'false':'true');if(!show)return;
-    const x=Math.min(window.innerWidth-24,Math.max(sr.left+190,(sr.left+sr.right)/2)),y=Math.min(window.innerHeight-80,Math.max(120,window.innerHeight*.52));let best=null,bestD=Infinity;
-    document.querySelectorAll('.matrix .cell[data-row][data-col]').forEach(el=>{const r=el.getBoundingClientRect();const cx=(Math.max(r.left,sr.left)+Math.min(r.right,sr.right))/2,cy=(Math.max(r.top,0)+Math.min(r.bottom,window.innerHeight))/2,visible=r.right>sr.left&&r.left<sr.right&&r.bottom>0&&r.top<window.innerHeight;if(!visible)return;const d=(cx-x)*(cx-x)+(cy-y)*(cy-y);if(d<bestD){bestD=d;best=el}});
-    if(!best)return;const row=best.dataset.row,col=best.dataset.col;mini.querySelectorAll('.matrix-mini-cell').forEach(b=>b.classList.toggle('active',b.dataset.miniRow===row&&b.dataset.miniCol===col));const rd=ROW_DISPLAY[row]?.[0]||row,cd=COL_DISPLAY[col]?.[0]||col,cell=v.cellNames[row][col],name=cellLabel(cell[0]);current.textContent=`${rd} × ${cd} — ${name}`;
+    ticking=false;
+    const sr=scroller.getBoundingClientRect();
+    const buttons=[...wrap.querySelectorAll('.matrix-mini-cell')];
+    buttons.forEach(b=>b.classList.remove('in-view','focus-cell'));
+    let best=null,bestArea=-1;
+    document.querySelectorAll('.matrix .cell[data-row][data-col]').forEach(el=>{
+      const r=el.getBoundingClientRect();
+      const left=Math.max(r.left,sr.left),right=Math.min(r.right,sr.right);
+      const top=Math.max(r.top,0),bottom=Math.min(r.bottom,window.innerHeight);
+      const area=Math.max(0,right-left)*Math.max(0,bottom-top);
+      if(area<=0)return;
+      const b=wrap.querySelector(`.matrix-mini-cell[data-mini-row="${el.dataset.row}"][data-mini-col="${el.dataset.col}"]`);
+      if(b)b.classList.add('in-view');
+      if(area>bestArea){bestArea=area;best=b}
+    });
+    if(best)best.classList.add('focus-cell');
   }
   function requestUpdate(){if(ticking)return;ticking=true;requestAnimationFrame(update)}
-  scroller.addEventListener('scroll',requestUpdate,{passive:true});window.addEventListener('scroll',requestUpdate,{passive:true});window.addEventListener('resize',requestUpdate);requestUpdate();
+  scroller.addEventListener('scroll',requestUpdate,{passive:true});
+  window.addEventListener('scroll',requestUpdate,{passive:true});
+  window.addEventListener('resize',requestUpdate);
+  requestUpdate();
 }
 function render(v){let sourceCount=0,pointCount=0;let h='<div class="matrix"><div class="corner"></div>';for(const c of v.columns){const d=COL_DISPLAY[c.id]||[c.name,c.direction];h+=`<div class="col ${c.id}" data-col-head="${esc(c.id)}">${icon(COL_ICON[c.id])}<b>${esc(d[0])}</b><span>${esc(d[1])}</span></div>`}for(const r of v.rows){const rd=ROW_DISPLAY[r.id]||[plain(r.name),plain(r.description)];h+=`<div class="row" data-row-head="${esc(r.id)}">${icon(ROW_ICON[r.id])}<b>${esc(rd[0])}</b><span>${esc(rd[1])}</span></div>`;for(const c of v.columns){const xs=v.cells[r.id][c.id]||[],groups=groupCell(xs),cell=v.cellNames[r.id][c.id];sourceCount+=xs.length;pointCount+=groups.length;h+=`<div class="cell ${c.id}${groups.length?' has-evidence':''}" data-row="${esc(r.id)}" data-col="${esc(c.id)}"><div class="cell-head"><b>${esc(cellLabel(cell[0]))}</b><span class="n">${groups.length} points</span></div>${cellBullets(groups)}</div>`}}h+='</div>';document.getElementById('grid').innerHTML=h;document.getElementById('state').textContent=`${pointCount} findings from ${sourceCount} sources. Updated ${fmtDate(v.lastUpdated)}.`;buildMatrixOverview(v)}
 (async()=>{try{const d=await RadarData.load('../../radar.json','../../radar_seed.json');render(SovereigntyFrontier.buildFrontier(d));}catch(e){document.getElementById('grid').innerHTML='<p>Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
