@@ -12,7 +12,7 @@ It exists so a new chat or operator can see what has already been verified and w
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260913T211609Z-b902da86ea79`
+- Current package: `worker-a-20260913T211800Z-b902da86ea79`
 - Assigned unresolved records: **36**
   1. `link:https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research/`
   2. `link:https://doi.org/10.26565/2786-4995-2026-2-14`
@@ -25,7 +25,7 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260913T211624Z-4ade465bcac9`
+- Current package: `worker-b-20260913T211810Z-4ade465bcac9`
 - Assigned unresolved records: **36**
   1. `link:https://www.elgaronline.com/doi/10.4337/9781035365616.00011`
   2. `link:https://doi.org/10.24818/aras/2026/7/2.03`
