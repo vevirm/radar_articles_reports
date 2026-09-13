@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-13T22:20:33Z",
+  "generated_at": "2026-09-13T22:43:14Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-offline-v1",
@@ -2125,27 +2125,94 @@
       ]
     },
     "link:https://www.eurohpc-ju.europa.eu/six-new-quantum-calls-launched-eurohpc-joint-undertaking-2026-08-14_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "dac4bbf1",
-      "reader_title": "EuroHPC opens six quantum calls targeting thousand-qubit machines and secure communications",
-      "reader_what": "Six Horizon Europe calls fund trapped-ion, superconducting and neutral-atom processors plus quantum-secure communications.",
-      "reader_why": "Sets explicit European hardware targets and aims to build domestic quantum component supply chains.",
-      "reader_more": "The EuroHPC Joint Undertaking launched six calls on 13 August 2026, all closing 17 November 2026, to advance quantum technologies and the infrastructure around them. Three target hardware platforms: a full-stack trapped-ion computer with over 1,000 individually addressable qubits, a superconducting processor of at least 1,000 qubits using chiplet technology, and neutral-atom systems offering 10,000 atoms for simulation and 1,000 qubits for computing with a path towards 10,000. A fourth call addresses next-generation quantum key distribution, framed around strategic autonomy in quantum-secure communications, with 24 million euro. Most hardware calls carry 20 million euro over about 3.5 years. Several calls explicitly require building European supply chains for quantum components.",
+      "identity_hash": "e680c80096ead042",
+      "reader_title": "EuroHPC launches six new quantum technology calls",
+      "reader_what": "Calls target full-stack trapped-ion and superconducting machines of over one thousand physical qubits.",
+      "reader_why": "Commits EU budget to European-built quantum hardware integrated with classical supercomputing.",
+      "reader_more": "The EuroHPC Joint Undertaking opened six calls on 13 August 2026 covering strategic quantum technologies and supporting infrastructure. The trapped-ion topic, HORIZON-JU-EUROHPC-2026-TIPT-09, seeks a full-stack quantum computer with more than a thousand individually addressable physical qubits, integrated with classical high-performance computing and reachable over cloud platforms, with a budget of twenty million euros and projects running three and a half years. A parallel superconducting topic, SPT-10, targets a comparable qubit count using chiplet technology for long coherence times and error correction. Applications close on 17 November 2026. These are calls for proposals, so no projects or results exist yet.",
       "deep_analysis": {
-        "work_kind": "funding call announcement",
+        "work_kind": "current development (funding call launch)",
         "research_question": "",
-        "main_finding": "EuroHPC has opened six quantum calls with defined technical targets across trapped-ion, superconducting and neutral-atom platforms plus quantum key distribution, tied to European standards and component supply chain development.",
-        "method_or_basis": "Official announcement by the funding body; no evidence or analysis presented.",
-        "qualification": "States funding intent and technical ambition at call stage; whether the qubit counts and integration targets are achievable within 3.5 years is not assessed here.",
-        "radar_relevance": "Concrete public investment and explicit capability targets in a declared strategic technology.",
+        "main_finding": "Six EuroHPC quantum calls opened in August 2026, with named topics, budgets and thousand-qubit technical targets.",
+        "method_or_basis": "Official call announcement carrying topic identifiers, budgets and deadlines.",
+        "qualification": "Calls for proposals only; targets are call specifications, not demonstrated capability.",
+        "radar_relevance": "Direct EU investment in European quantum computing capability and HPC integration.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the EuroHPC JU news page for 14 August 2026; it sets out all six new quantum calls with topic identifiers, objectives, budgets and deadlines."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Official announcement; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "EuroHPC Joint Undertaking is the issuing body and the page carries the Horizon-JU-EuroHPC-2026 call identifiers."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://www.eurohpc-ju.europa.eu/six-new-quantum-calls-launched-eurohpc-joint-undertaking-2026-08-14_en",
+            "title": "Six New Quantum Calls Launched by the EuroHPC Joint Undertaking",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full announcement with concrete instrument detail. Note records 25, 26 and 30 are individual topic pages belonging to this same call family; they are separate web objects, not duplicates of this announcement."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A dated launch of six named EU funding calls with budgets, technical targets and deadlines; a concrete funding instrument rather than a programme description."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "dac4bbf1",
+          "reader_title": "EuroHPC opens six quantum calls targeting thousand-qubit machines and secure communications",
+          "reader_what": "Six Horizon Europe calls fund trapped-ion, superconducting and neutral-atom processors plus quantum-secure communications.",
+          "reader_why": "Sets explicit European hardware targets and aims to build domestic quantum component supply chains.",
+          "reader_more": "The EuroHPC Joint Undertaking launched six calls on 13 August 2026, all closing 17 November 2026, to advance quantum technologies and the infrastructure around them. Three target hardware platforms: a full-stack trapped-ion computer with over 1,000 individually addressable qubits, a superconducting processor of at least 1,000 qubits using chiplet technology, and neutral-atom systems offering 10,000 atoms for simulation and 1,000 qubits for computing with a path towards 10,000. A fourth call addresses next-generation quantum key distribution, framed around strategic autonomy in quantum-secure communications, with 24 million euro. Most hardware calls carry 20 million euro over about 3.5 years. Several calls explicitly require building European supply chains for quantum components.",
+          "deep_analysis": {
+            "work_kind": "funding call announcement",
+            "research_question": "",
+            "main_finding": "EuroHPC has opened six quantum calls with defined technical targets across trapped-ion, superconducting and neutral-atom platforms plus quantum key distribution, tied to European standards and component supply chain development.",
+            "method_or_basis": "Official announcement by the funding body; no evidence or analysis presented.",
+            "qualification": "States funding intent and technical ambition at call stage; whether the qubit counts and integration targets are achievable within 3.5 years is not assessed here.",
+            "radar_relevance": "Concrete public investment and explicit capability targets in a declared strategic technology.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en": {
       "profile": "deep-reader-offline-v1",
@@ -3392,27 +3459,98 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://doi.org/10.46299/j.isjea.20260504.07": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "60b0aecc",
-      "reader_title": "Ukraine has broad digital coverage but fragmented education and research data",
-      "reader_what": "Finds data fragmentation, weak metadata and poor links between research funding and outcomes constrain Ukraine's systems.",
-      "reader_why": "Weak links between research statistics, funding and results hamper evidence-based policy during reconstruction.",
-      "reader_more": "This article proposes information governance as a mechanism for improving quality, resilience and innovation capacity in Ukrainian education and research amid digital transformation, war and European integration. Drawing on data from Eurostat, Eurydice, the OECD, UNESCO, the World Bank and Ukrainian ministries and statistical services, it analyses digital accessibility, education information systems, research funding, open science, AI use and war damage to research infrastructure. The finding is that Ukraine has relatively high digital coverage and key elements of an integrated information ecosystem, but effectiveness is constrained by data fragmentation producing poor metadata quality and digital inequality, alongside cybersecurity threats, academic integrity risks and weak linkage between research statistics, funding and actual outcomes. A four-domain governance model covering data, analytics, decisions and outcomes is proposed.",
+      "identity_hash": "c71a8b3de3522017",
+      "reader_title": "Ukraine study proposes an information-governance model for education and research data",
+      "reader_what": "Digital coverage is high but data fragmentation, weak metadata and cybersecurity risk blunt its usefulness.",
+      "reader_more": "The article treats information governance as a mechanism for improving the quality and resilience of Ukraine's education and research system under wartime and European-integration pressure. It draws on Eurostat, Eurydice, ITU, OECD, UNESCO, World Bank and Ukrainian ministry and statistics-service data to describe digital accessibility, education information systems, R&D funding, open science and AI use. It reports that Ukraine has built key elements of an integrated information ecosystem but that fragmentation, poor metadata quality, digital inequality, cybersecurity threats and weak links between R&D statistics, funding and outcomes limit effectiveness. A four-domain model covering data, analytics, decisions and outcomes is proposed but not empirically tested.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed analytical study with a proposed governance model",
-        "research_question": "How information governance can be structured to turn education and research data into evidence-based decisions in Ukraine.",
-        "main_finding": "Ukraine has substantial digital coverage and key information system components, but fragmentation, metadata quality problems, digital inequality, cybersecurity and integrity risks, and weak linkage between research statistics, funding and outcomes limit their effectiveness.",
-        "method_or_basis": "Systemic, comparative and institutional analysis of trend data from Eurostat, Eurydice, the OECD, UNESCO, the World Bank and Ukrainian national sources.",
-        "qualification": "The four-domain model is proposed rather than implemented or evaluated; the analysis synthesises secondary indicators rather than generating primary evidence.",
-        "radar_relevance": "Concerns the data and governance foundations of a candidate country's research system during wartime and EU accession.",
-        "confidence": "high",
-        "why_supported": true
+        "work_kind": "descriptive analytical study with proposed governance model",
+        "research_question": "What is the scope of information governance for education and research in Ukraine, and how can such data be turned into evidence-based governance decisions?",
+        "main_finding": "Ukraine has broad digital coverage but fragmented data and weak statistical linkage prevent research and education data from supporting governance decisions.",
+        "method_or_basis": "Systemic, comparative and institutional analysis of published international and national statistics; no primary data collection.",
+        "qualification": "Descriptive and secondary-source based; the proposed four-domain model is put forward conceptually and is not validated or applied.",
+        "radar_relevance": "Research-data governance and R&D statistics in a Horizon Europe associated country, but in an unindexed outlet with no tested contribution.",
+        "confidence": "medium",
+        "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI link resolved to the journal article page at isg-journal.com/isjea/article/view/1239, carrying the full abstract, aims, method description, data sources and the proposed four-domain model."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.46299/j.isjea.20260504.07 resolves to International Science Journal of Engineering & Agriculture, issue 2026/05/04, article 07."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title searching returns only the journal's own platform; the item is not carried by Scopus, Web of Science or an independent index."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed the publisher platform hosts the issue; no institutional repository deposit of the same text was located."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://isg-journal.com/isjea/article/view/1239",
+            "title": "Digital architecture of information governance for education and research in Ukraine",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive scope confirmed from the publisher page. The journal is a small open-platform title with no independent indexing, which bears on weight rather than on identity."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_BORDERLINE_SOURCE_QUALITY",
+        "reason": "Genuine and on-topic for European research-policy and research-data governance in a Horizon Europe associated country, but published in an unindexed journal and largely descriptive; the weight to give it needs human judgement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "60b0aecc",
+          "reader_title": "Ukraine has broad digital coverage but fragmented education and research data",
+          "reader_what": "Finds data fragmentation, weak metadata and poor links between research funding and outcomes constrain Ukraine's systems.",
+          "reader_why": "Weak links between research statistics, funding and results hamper evidence-based policy during reconstruction.",
+          "reader_more": "This article proposes information governance as a mechanism for improving quality, resilience and innovation capacity in Ukrainian education and research amid digital transformation, war and European integration. Drawing on data from Eurostat, Eurydice, the OECD, UNESCO, the World Bank and Ukrainian ministries and statistical services, it analyses digital accessibility, education information systems, research funding, open science, AI use and war damage to research infrastructure. The finding is that Ukraine has relatively high digital coverage and key elements of an integrated information ecosystem, but effectiveness is constrained by data fragmentation producing poor metadata quality and digital inequality, alongside cybersecurity threats, academic integrity risks and weak linkage between research statistics, funding and actual outcomes. A four-domain governance model covering data, analytics, decisions and outcomes is proposed.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed analytical study with a proposed governance model",
+            "research_question": "How information governance can be structured to turn education and research data into evidence-based decisions in Ukraine.",
+            "main_finding": "Ukraine has substantial digital coverage and key information system components, but fragmentation, metadata quality problems, digital inequality, cybersecurity and integrity risks, and weak linkage between research statistics, funding and outcomes limit their effectiveness.",
+            "method_or_basis": "Systemic, comparative and institutional analysis of trend data from Eurostat, Eurydice, the OECD, UNESCO, the World Bank and Ukrainian national sources.",
+            "qualification": "The four-domain model is proposed rather than implemented or evaluated; the analysis synthesises secondary indicators rather than generating primary evidence.",
+            "radar_relevance": "Concerns the data and governance foundations of a candidate country's research system during wartime and EU accession.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.24818/aras/2026/7/2.03": {
       "profile": "deep-reader-v2-authoritative",
@@ -3821,27 +3959,94 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://era.gv.at/news-items/eu-launches-ai-gigafactories-call-to-boost-europes-computing-capacity/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "1b850450",
+      "identity_hash": "dc7f67b5aa6ab028",
       "reader_title": "EU opens tender for up to seven AI Gigafactories",
-      "reader_what": "Call seeks up to seven industry-led AI Gigafactories, with up to 10 billion euro public funding.",
-      "reader_why": "Aims to give startups, industry and academia access to frontier model training and inference capacity.",
-      "reader_more": "On 30 July 2026 the EU launched a call for tenders to establish up to seven AI Gigafactories across Europe, presented as part of its push for technological sovereignty and its ambition to become the AI Continent. The initiative is industry-led, supported by up to 10 billion euro in EU and national funding, and is expected to unlock at least 20 billion euro in private investment. The facilities are intended to expand computing capacity and give startups, scale-ups, smaller firms, industry, academia and public authorities access to infrastructure for training, inference and fine-tuning advanced frontier models, combining AI processors, software and cloud stacks, high-speed connectivity and energy-efficient data centres. They complement Europe's existing network of 19 AI Factories. The call closes on 12 November 2026, with awards expected by early 2027.",
+      "reader_what": "Up to ten billion euros of EU and national funding is expected to unlock twenty billion in private investment.",
+      "reader_why": "Expands European compute capacity for training and fine-tuning frontier models.",
+      "reader_more": "On 30 July 2026 the EU launched a call for tenders to establish up to seven AI Gigafactories across Europe. The initiative is industry-led and backed by up to ten billion euros in EU and national funding, which the Commission expects to unlock at least twenty billion euros of private investment. The facilities are to combine advanced AI processors, software and cloud stacks, high-speed connectivity and energy-efficient data centres, and to give start-ups, scale-ups, SMEs, industry, academia and public authorities access to infrastructure for training, inference and fine-tuning of frontier models. They would sit alongside Europe's nineteen AI Factories. The call closes on 12 November 2026, with awards expected in early 2027.",
       "deep_analysis": {
-        "work_kind": "policy announcement reported via a national ERA portal",
+        "work_kind": "current development (call for tenders)",
         "research_question": "",
-        "main_finding": "The EU opened procurement for up to seven industry-led AI Gigafactories backed by up to 10 billion euro of public funding, intended to leverage at least 20 billion euro in private investment and complement 19 existing AI Factories.",
-        "method_or_basis": "Reported announcement of a call for tenders.",
-        "qualification": "Announcement stage: the private investment figure is an expectation, and neither successful consortia nor delivered capacity are known.",
-        "radar_relevance": "The largest concrete EU move to close the compute capacity gap identified in its own cloud and AI studies.",
+        "main_finding": "The EU opened a tender for up to seven AI Gigafactories backed by up to ten billion euros in public funding.",
+        "method_or_basis": "Official report of a call for tenders launched 30 July 2026.",
+        "qualification": "A tender at launch stage; the private-investment figure is an expectation and awards are not due until early 2027.",
+        "radar_relevance": "Core European compute capacity, technological sovereignty and AI infrastructure.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ERA Portal Austria item; the complete report of the 30 July 2026 AI Gigafactories call for tenders is present with funding figures and the closing date."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News item; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ERA Portal Austria is the issuing platform, reporting an EU call for tenders."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://era.gv.at/news-items/eu-launches-ai-gigafactories-call-to-boost-europes-computing-capacity/",
+            "title": "EU launches AI Gigafactories call to boost Europe's computing capacity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Short but complete item reporting a specific, dated tender with quantified funding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A dated EU call for tenders for up to seven AI Gigafactories, with up to ten billion euros of public funding; a concrete instrument, not a programme description."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "1b850450",
+          "reader_title": "EU opens tender for up to seven AI Gigafactories",
+          "reader_what": "Call seeks up to seven industry-led AI Gigafactories, with up to 10 billion euro public funding.",
+          "reader_why": "Aims to give startups, industry and academia access to frontier model training and inference capacity.",
+          "reader_more": "On 30 July 2026 the EU launched a call for tenders to establish up to seven AI Gigafactories across Europe, presented as part of its push for technological sovereignty and its ambition to become the AI Continent. The initiative is industry-led, supported by up to 10 billion euro in EU and national funding, and is expected to unlock at least 20 billion euro in private investment. The facilities are intended to expand computing capacity and give startups, scale-ups, smaller firms, industry, academia and public authorities access to infrastructure for training, inference and fine-tuning advanced frontier models, combining AI processors, software and cloud stacks, high-speed connectivity and energy-efficient data centres. They complement Europe's existing network of 19 AI Factories. The call closes on 12 November 2026, with awards expected by early 2027.",
+          "deep_analysis": {
+            "work_kind": "policy announcement reported via a national ERA portal",
+            "research_question": "",
+            "main_finding": "The EU opened procurement for up to seven industry-led AI Gigafactories backed by up to 10 billion euro of public funding, intended to leverage at least 20 billion euro in private investment and complement 19 existing AI Factories.",
+            "method_or_basis": "Reported announcement of a call for tenders.",
+            "qualification": "Announcement stage: the private investment figure is an expectation, and neither successful consortia nor delivered capacity are known.",
+            "radar_relevance": "The largest concrete EU move to close the compute capacity gap identified in its own cloud and AI studies.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en": {
       "profile": "deep-reader-offline-v1",
@@ -5502,27 +5707,94 @@
       "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
     },
     "link:https://era.gv.at/news-items/european-research-ministers-discuss-how-to-maximise-ri-contribution-to-improve-europes-competitiveness-security-and-prosperity/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "bb280df0",
-      "reader_title": "EU research ministers debate a single market for knowledge ahead of the ERA Act",
-      "reader_what": "Ministers meeting in Dublin backed a fifth freedom, free circulation of knowledge, ahead of the European Research Area Act.",
-      "reader_why": "Frames fragmentation and researcher mobility barriers as the target of forthcoming European Research Area legislation.",
-      "reader_more": "The informal Research and Innovation Council meeting took place in Dublin on 20 and 21 July 2026, bringing together EU member state ministers with representatives from Switzerland, the United Kingdom, Iceland and Norway, and the European Commissioner for Start-ups, Research and Innovation. The first policy debate addressed a genuine single market for knowledge, research and innovation, building on the Letta and Draghi reports and the One Europe, One Market Roadmap, and pointing towards the forthcoming European Research Area Act and a proposed fifth freedom. Ministers emphasised overcoming fragmentation, reducing barriers to researcher mobility and cross-border cooperation, improving framework conditions, and better aligning national and European priorities and funding. Informal meetings produce no binding decisions.",
+      "identity_hash": "5dad123faa74acc3",
+      "reader_title": "EU research ministers debate the ERA Act and the fifth freedom in Dublin",
+      "reader_what": "Ministers focused on ending fragmentation and improving the path from research to market-ready innovation.",
+      "reader_why": "The debates feed directly into the ERA Act and the Single Market for Knowledge.",
+      "reader_more": "The informal Competitiveness Council in research configuration met in Dublin on 20 and 21 July 2026, chaired by Ireland's minister James Lawless and attended by Commissioner Ekaterina Zaharieva, alongside representatives of Switzerland, the United Kingdom, Iceland and Norway. The first debate addressed a genuine single market for knowledge, research and innovation, building on the Letta and Draghi reports and the One Europe, One Market roadmap, and centred on the fifth freedom. The second addressed Europe's innovation gap and the transition from excellent research to competitive companies. This was an informal exchange, so no legal act or Council conclusion was adopted.",
       "deep_analysis": {
-        "work_kind": "current development (ministerial meeting)",
+        "work_kind": "current development (ministerial meeting report)",
         "research_question": "",
-        "main_finding": "Ministers converged on pursuing a single market for knowledge and a fifth freedom, to be taken forward through the ERA Act.",
-        "method_or_basis": "Secondary news item on a national ERA portal reporting an informal COMPET Research meeting",
-        "qualification": "Positions expressed at an informal Council meeting, not decisions; the second policy debate was not fully captured in the available text.",
-        "radar_relevance": "Directly concerns forthcoming ERA Act legislation on knowledge circulation and researcher mobility.",
+        "main_finding": "Ministers converged on reducing fragmentation and barriers to researcher mobility as the route to a single market for knowledge.",
+        "method_or_basis": "Editorial report of an informal Council meeting held 20-21 July 2026 in Dublin.",
+        "qualification": "An informal ministerial exchange: no decision, conclusions or legal act resulted.",
+        "radar_relevance": "Direct signal on ERA Act direction and the fifth freedom ahead of adoption.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ERA Portal Austria news item; the full report of the informal COMPET Research ministerial in Dublin, 20-21 July 2026, is present including both policy debates."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News item; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ERA Portal Austria (era.gv.at) is the Austrian national ERA information platform and is the issuing source for this report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://era.gv.at/news-items/european-research-ministers-discuss-how-to-maximise-ri-contribution-to-improve-europes-competitiveness-security-and-prosperity/",
+            "title": "European Research Ministers discuss how to maximise R&I contribution to improve Europe's competitiveness, security and prosperity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied URL is the full news item, not a listing page. Event, date, chair and agenda all internally consistent."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a specific EU ministerial meeting and the substance of two policy debates feeding the forthcoming ERA Act and the Single Market for Knowledge."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:22Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "bb280df0",
+          "reader_title": "EU research ministers debate a single market for knowledge ahead of the ERA Act",
+          "reader_what": "Ministers meeting in Dublin backed a fifth freedom, free circulation of knowledge, ahead of the European Research Area Act.",
+          "reader_why": "Frames fragmentation and researcher mobility barriers as the target of forthcoming European Research Area legislation.",
+          "reader_more": "The informal Research and Innovation Council meeting took place in Dublin on 20 and 21 July 2026, bringing together EU member state ministers with representatives from Switzerland, the United Kingdom, Iceland and Norway, and the European Commissioner for Start-ups, Research and Innovation. The first policy debate addressed a genuine single market for knowledge, research and innovation, building on the Letta and Draghi reports and the One Europe, One Market Roadmap, and pointing towards the forthcoming European Research Area Act and a proposed fifth freedom. Ministers emphasised overcoming fragmentation, reducing barriers to researcher mobility and cross-border cooperation, improving framework conditions, and better aligning national and European priorities and funding. Informal meetings produce no binding decisions.",
+          "deep_analysis": {
+            "work_kind": "current development (ministerial meeting)",
+            "research_question": "",
+            "main_finding": "Ministers converged on pursuing a single market for knowledge and a fifth freedom, to be taken forward through the ERA Act.",
+            "method_or_basis": "Secondary news item on a national ERA portal reporting an informal COMPET Research meeting",
+            "qualification": "Positions expressed at an informal Council meeting, not decisions; the second policy debate was not fully captured in the available text.",
+            "radar_relevance": "Directly concerns forthcoming ERA Act legislation on knowledge circulation and researcher mobility.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:22Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.1017/aap.2026.10164": {
       "profile": "deep-reader-offline-v1",
@@ -5593,27 +5865,94 @@
       "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
     },
     "link:https://doi.org/10.1007/s11123-026-00819-0": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "ba1b2c19",
-      "reader_title": "Who non-academic university staff are matters more than how many there are",
-      "reader_what": "Across 401 European universities, the share of non-academic staff showed no significant efficiency effect; their composition did.",
-      "reader_why": "Challenges administrative headcount as a performance lever in European university funding and governance debates.",
-      "reader_more": "The study addresses a long-running ambiguity: administrative and technical staff may either free up academics or add bureaucratic burden. Using a sample of 401 European universities, the authors treat the heterogeneity of non-academic staff as an unobserved factor, estimate it with a nonparametric approach, and then test its effect on performance. The proportion of non-academic staff has no statistically significant effect on efficiency. The latent heterogeneity factor, capturing qualitative and structural differences beyond size and composition, significantly influences both the efficient frontier and the distribution of inefficiency. Universities combining very high staff heterogeneity with large administrative shares tend to be less efficient, a pattern the authors read as bureaucratic overload.",
+      "identity_hash": "17c0c7b4f336d039",
+      "reader_title": "What matters for European university performance is staff quality, not the share of non-academic staff",
+      "reader_what": "Across 401 European universities the proportion of non-academic staff has no significant effect on efficiency.",
+      "reader_why": "Shifts the administrative-burden debate from headcount to unobserved structural and qualitative differences.",
+      "reader_more": "The authors examine whether expanding administrative and technical staff helps or hinders European universities. They treat the heterogeneity of non-academic staff as an unobserved factor and estimate it nonparametrically, then test its effect on performance across a sample of 401 European universities. The share of non-academic staff turns out to have no statistically significant effect on efficiency. The latent heterogeneity factor, capturing qualitative and structural differences beyond size and composition, does significantly shape both the efficient frontier and the spread of inefficiency. The result is associational and rests on the chosen frontier specification rather than on any experimental design.",
       "deep_analysis": {
-        "work_kind": "empirical efficiency analysis",
+        "work_kind": "empirical quantitative study",
         "research_question": "Does the size and heterogeneity of non-academic staff affect the performance of European universities?",
-        "main_finding": "Non-academic staff share does not significantly affect efficiency, but their unobserved heterogeneity does, with overload effects at high levels.",
-        "method_or_basis": "Nonparametric estimation of a latent staff heterogeneity factor across 401 European universities",
-        "qualification": "The key variable is a latent estimated factor rather than a directly observed one, so interpretation depends on the modelling choices.",
-        "radar_relevance": "Concerns efficiency and governance of European university systems and how research capacity is supported.",
+        "main_finding": "The proportion of non-academic staff does not significantly affect efficiency, but their unobserved heterogeneity significantly influences both the frontier and the distribution of inefficiencies.",
+        "method_or_basis": "Nonparametric estimation of an unobserved heterogeneity factor, applied to a sample of 401 European universities.",
+        "qualification": "Associational, cross-sectional and dependent on frontier model specification; heterogeneity is inferred rather than directly observed.",
+        "radar_relevance": "Evidence on the performance of European research-performing organisations and on university administrative capacity.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI link resolved to the Springer article page for Journal of Productivity Analysis; abstract, sample, method and results were retrieved in full."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.1007/s11123-026-00819-0 resolves to the Journal of Productivity Analysis article by Avenali, Daraio, Di Leo and Wolszczak-Derlacz."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Springer Nature is the publisher of record; link.springer.com/article/10.1007/s11123-026-00819-0 carries the substantive text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11123-026-00819-0",
+            "title": "The role of the non-academic staff heterogeneity in the performance of European universities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content confirmed from the publisher article page; author list and journal match the scanner record."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Quantitative analysis of performance across 401 European universities, directly addressing how European research and higher-education institutions function."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:22Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "ba1b2c19",
+          "reader_title": "Who non-academic university staff are matters more than how many there are",
+          "reader_what": "Across 401 European universities, the share of non-academic staff showed no significant efficiency effect; their composition did.",
+          "reader_why": "Challenges administrative headcount as a performance lever in European university funding and governance debates.",
+          "reader_more": "The study addresses a long-running ambiguity: administrative and technical staff may either free up academics or add bureaucratic burden. Using a sample of 401 European universities, the authors treat the heterogeneity of non-academic staff as an unobserved factor, estimate it with a nonparametric approach, and then test its effect on performance. The proportion of non-academic staff has no statistically significant effect on efficiency. The latent heterogeneity factor, capturing qualitative and structural differences beyond size and composition, significantly influences both the efficient frontier and the distribution of inefficiency. Universities combining very high staff heterogeneity with large administrative shares tend to be less efficient, a pattern the authors read as bureaucratic overload.",
+          "deep_analysis": {
+            "work_kind": "empirical efficiency analysis",
+            "research_question": "Does the size and heterogeneity of non-academic staff affect the performance of European universities?",
+            "main_finding": "Non-academic staff share does not significantly affect efficiency, but their unobserved heterogeneity does, with overload effects at high levels.",
+            "method_or_basis": "Nonparametric estimation of a latent staff heterogeneity factor across 401 European universities",
+            "qualification": "The key variable is a latent estimated factor rather than a directly observed one, so interpretation depends on the modelling choices.",
+            "radar_relevance": "Concerns efficiency and governance of European university systems and how research capacity is supported.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:22Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.1140/epjs/s11734-026-02451-3": {
       "profile": "deep-reader-offline-v1",
@@ -6685,27 +7024,99 @@
       "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
     },
     "link:https://ecas.org/wp-content/uploads/2026/06/The-Fifth-Freedom-in-the-European-Research-Area-Short-Report.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "73b45c3f",
-      "reader_title": "Researchers report that free movement inside the European Research Area breaks down in practice",
-      "reader_what": "A 62-person survey finds administrative obstacles and discriminatory hiring or eligibility rules are the most-cited barriers.",
-      "reader_why": "Written as input to the European Research Area Act expected in late 2026.",
-      "reader_more": "The Fifth Freedom here means free and equal movement of researchers, open access to scientific knowledge, and research funding circulating across the EU. Sixty-two researchers in eleven member states answered three open questions and one closed one, and about 89 per cent backed formal EU recognition of the freedom. Administrative barriers and discriminatory hiring or funding eligibility were each raised by roughly 48 per cent of respondents, with non-recognition of qualifications next at 33 per cent and named as the most-demanded reform. Respondents supplied costed personal cases, including sworn translation fees of two to three hundred euros per diploma and foreign experience counted at half value in salary scales. The authors describe the sample as a self-selected pilot, not statistically representative.",
+      "identity_hash": "efea356735425fdf",
+      "reader_title": "Researchers report that free movement in the European Research Area still breaks down in practice",
+      "reader_what": "A 62-person survey finds administrative burden and discriminatory hiring or eligibility rules are the most-cited barriers.",
+      "reader_more": "The Fifth Freedom means free movement of researchers, knowledge and research funding across the EU. Sixty-two researchers in eleven member states answered three open questions and one closed one, and about 89 per cent backed formal EU recognition of the freedom. Administrative barriers and discriminatory hiring or funding eligibility were each raised by roughly 48 per cent of respondents; non-recognition of qualifications followed at 33 per cent. Respondents gave costed examples, including sworn translation fees of two to three hundred euros per diploma. The authors describe the sample as a self-selected pilot, not statistically representative.",
       "deep_analysis": {
         "work_kind": "advocacy survey / short policy report",
-        "research_question": "What concrete structural barriers do researchers encounter to free movement of researchers, knowledge and funding within the EU?",
-        "main_finding": "Rights that exist formally in EU law are described as systematically undermined at operational level by national administrations and universities; administrative burden and discriminatory hiring or eligibility rules dominate, and automatic EU-wide recognition of qualifications is the reform most demanded.",
-        "method_or_basis": "Self-selected survey of 62 researchers across 11 member states, December 2025 to April 2026, with 148 open-text responses thematically coded; report PDF supplied in package.",
-        "qualification": "Explicitly a pilot: the sample is small, self-selected and skewed toward Spanish and Danish respondents, so percentages rest on few responses and are not representative of EU researchers.",
-        "radar_relevance": "Produced as direct input to the forthcoming ERA Act and documents specific obstacles to researcher mobility in the European Research Area.",
+        "research_question": "What concrete structural barriers do researchers face to free movement of researchers, knowledge and funding within the EU?",
+        "main_finding": "Respondents overwhelmingly support formal recognition of a Fifth Freedom, but report administrative burden, discriminatory eligibility rules and non-recognition of qualifications as persistent barriers.",
+        "method_or_basis": "Self-selected online call for input; 62 responses from 11 EU member states plus two non-EU, December 2025 to April 2026; three open and one closed question.",
+        "qualification": "Explicitly a self-selected pilot sample, not statistically representative; an advocacy organisation's call for input rather than a controlled study.",
+        "radar_relevance": "Direct primary evidence for the ERA Act debate on researcher mobility and the Fifth Freedom.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECAS PDF at /wp-content/uploads/2026/06/The-Fifth-Freedom-in-the-European-Research-Area-Short-Report.pdf; it is the full short report, authored by Giulia Sandri (ECAS) and Thomas Sturm (ICREA/UAB), June 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is printed on the report and none is listed on the ECAS publication page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ECAS publication page ecas.org/publication/ecas-report-insights-from-researchers-on-the-fifth-freedom-in-europe/ confirms title, June 2026 issue date, survey basis and ERA Act framing."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecas.org/wp-content/uploads/2026/06/The-Fifth-Freedom-in-the-European-Research-Area-Short-Report.pdf",
+            "title": "The Fifth Freedom in the European Research Area - Short Report",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://ecas.org/publication/ecas-report-insights-from-researchers-on-the-fifth-freedom-in-europe/",
+            "title": "ECAS Report: Insights from Researchers on the Fifth Freedom in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied PDF is the full report. ECAS publication page independently confirms authorship, date and survey design. Scanner listed the organisation as author; the report names two individual authors."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Primary evidence on barriers to researcher mobility inside the European Research Area, produced as input to the ERA Act; squarely European research-policy material."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:48Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-13T22:43:13Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "73b45c3f",
+          "reader_title": "Researchers report that free movement inside the European Research Area breaks down in practice",
+          "reader_what": "A 62-person survey finds administrative obstacles and discriminatory hiring or eligibility rules are the most-cited barriers.",
+          "reader_why": "Written as input to the European Research Area Act expected in late 2026.",
+          "reader_more": "The Fifth Freedom here means free and equal movement of researchers, open access to scientific knowledge, and research funding circulating across the EU. Sixty-two researchers in eleven member states answered three open questions and one closed one, and about 89 per cent backed formal EU recognition of the freedom. Administrative barriers and discriminatory hiring or funding eligibility were each raised by roughly 48 per cent of respondents, with non-recognition of qualifications next at 33 per cent and named as the most-demanded reform. Respondents supplied costed personal cases, including sworn translation fees of two to three hundred euros per diploma and foreign experience counted at half value in salary scales. The authors describe the sample as a self-selected pilot, not statistically representative.",
+          "deep_analysis": {
+            "work_kind": "advocacy survey / short policy report",
+            "research_question": "What concrete structural barriers do researchers encounter to free movement of researchers, knowledge and funding within the EU?",
+            "main_finding": "Rights that exist formally in EU law are described as systematically undermined at operational level by national administrations and universities; administrative burden and discriminatory hiring or eligibility rules dominate, and automatic EU-wide recognition of qualifications is the reform most demanded.",
+            "method_or_basis": "Self-selected survey of 62 researchers across 11 member states, December 2025 to April 2026, with 148 open-text responses thematically coded; report PDF supplied in package.",
+            "qualification": "Explicitly a pilot: the sample is small, self-selected and skewed toward Spanish and Danish respondents, so percentages rest on few responses and are not representative of EU researchers.",
+            "radar_relevance": "Produced as direct input to the forthcoming ERA Act and documents specific obstacles to researcher mobility in the European Research Area.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:48Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://doi.org/10.1186/s40309-026-00291-x": {
       "profile": "deep-reader-offline-v1",
@@ -7318,27 +7729,93 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "ce493640",
-      "reader_title": "EU talent dialogue links Choose Europe for Science to forthcoming research area law",
-      "reader_what": "Commissioner-chaired dialogue with thirty stakeholders on attracting researchers; linked initiative funding now approaches one billion euro.",
-      "reader_why": "Feedback feeds the ERA Talent Platform and the forthcoming European Research Area Act.",
-      "reader_more": "On 10 July 2026 Commissioner Ekaterina Zaharieva chaired an Implementation Dialogue on attracting and retaining research talent. Around thirty participants from universities, research institutions, industry, trade unions and student and researcher associations took part. Discussion covered making Europe a destination of choice for researchers and preparing research careers for the future economy. The dialogue sits under the Choose Europe for Science initiative, whose associated funding has grown to almost one billion euro since the first package in May 2025, covering a Marie Sklodowska-Curie pilot, ERC+ grants, ERA Chairs and research infrastructure support. Member States and regions have added more than one hundred complementary initiatives. This is a consultation event, not an evaluation of results.",
+      "identity_hash": "2b81a8aed20868ee",
+      "reader_title": "Commission gathers stakeholders on attracting and keeping research talent in Europe",
+      "reader_what": "Choose Europe for Science funding has grown to almost one billion euros since May 2025.",
+      "reader_more": "Commissioner Ekaterina Zaharieva chaired an Implementation Dialogue on 10 July 2026 with around thirty stakeholders from universities, research institutions, industry, trade unions and student and researcher associations. Discussion covered making Europe the destination of choice for research talent and preparing research careers for a changing economy. The item records that funding tied to the Choose Europe for Science initiative has grown to nearly one billion euros since the first support package in May 2025, covering the MSCA Choose Europe pilot, ERC+ grants, ERA Chairs and research infrastructure support, with more than one hundred complementary national and regional initiatives. Outcomes are to be published.",
       "deep_analysis": {
-        "work_kind": "current development / official news item",
+        "work_kind": "current development (policy dialogue report)",
         "research_question": "",
-        "main_finding": "The Commission held a stakeholder dialogue on research talent whose output will feed the ERA Talent Platform and the planned European Research Area Act, under a Choose Europe for Science package approaching one billion euro.",
-        "method_or_basis": "Packaged text of the ERA Portal Austria news item",
-        "qualification": "Reports a consultation and funding volumes; no evidence yet that the measures change where researchers choose to work.",
-        "radar_relevance": "Tracks EU action on research careers and brain drain, a core European Research Area policy question.",
+        "main_finding": "EU research-talent policy is consolidating around Choose Europe for Science, now near one billion euros, with outputs feeding the ERA Act.",
+        "method_or_basis": "Official report of a stakeholder dialogue held 10 July 2026 with roughly thirty participants.",
+        "qualification": "A consultation event; the figures describe committed funding and intentions, not measured effects on talent retention.",
+        "radar_relevance": "Research careers and talent attraction are core ERA Act components.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ERA Portal Austria item reporting the Implementation Dialogue chaired by Commissioner Zaharieva on 10 July 2026; the stored page is the complete item."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News item; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ERA Portal Austria is the issuing platform; the item ties the dialogue to the Choose Europe for Science initiative and the ERA Talent Platform."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/",
+            "title": "Commissioner Zaharieva leads dialogue on how to attract and retain research talent in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Short but complete official item. Carries concrete programme facts (funding scale, named instruments) rather than only event vocabulary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a specific Commission implementation dialogue and the current scale and instruments of the Choose Europe for Science package feeding the ERA Act."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "ce493640",
+          "reader_title": "EU talent dialogue links Choose Europe for Science to forthcoming research area law",
+          "reader_what": "Commissioner-chaired dialogue with thirty stakeholders on attracting researchers; linked initiative funding now approaches one billion euro.",
+          "reader_why": "Feedback feeds the ERA Talent Platform and the forthcoming European Research Area Act.",
+          "reader_more": "On 10 July 2026 Commissioner Ekaterina Zaharieva chaired an Implementation Dialogue on attracting and retaining research talent. Around thirty participants from universities, research institutions, industry, trade unions and student and researcher associations took part. Discussion covered making Europe a destination of choice for researchers and preparing research careers for the future economy. The dialogue sits under the Choose Europe for Science initiative, whose associated funding has grown to almost one billion euro since the first package in May 2025, covering a Marie Sklodowska-Curie pilot, ERC+ grants, ERA Chairs and research infrastructure support. Member States and regions have added more than one hundred complementary initiatives. This is a consultation event, not an evaluation of results.",
+          "deep_analysis": {
+            "work_kind": "current development / official news item",
+            "research_question": "",
+            "main_finding": "The Commission held a stakeholder dialogue on research talent whose output will feed the ERA Talent Platform and the planned European Research Area Act, under a Choose Europe for Science package approaching one billion euro.",
+            "method_or_basis": "Packaged text of the ERA Portal Austria news item",
+            "qualification": "Reports a consultation and funding volumes; no evidence yet that the measures change where researchers choose to work.",
+            "radar_relevance": "Tracks EU action on research careers and brain drain, a core European Research Area policy question.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s40636-026-00372-3": {
       "profile": "deep-reader-offline-v1",
@@ -8129,26 +8606,97 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://doi.org/10.15837/aijes.v20i1.7635": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "6076ed37",
-      "reader_title": "Case studies of AI in financial decisions at three European industrial firms",
-      "reader_what": "Document-based case study reports AI improving forecasting, cost control and risk management at three European industrial firms.",
-      "reader_more": "The paper asks how integrating artificial intelligence into financial planning, risk management, performance analysis and strategic decisions affects efficiency, resilience and competitive position. It is a qualitative multiple-case study using secondary sources: annual reports, sustainability reports, investor materials and other corporate documents from Siemens, Schneider Electric and the Slovenian pharmaceutical company Krka. The authors report more accurate financial forecasting, cost optimisation, data-driven risk management and better strategic decision support. Siemens and Schneider Electric are described as showing a stronger AI-driven competitiveness model tied to digital platforms and automation, while Krka follows a more gradual path anchored in financial discipline and governance.",
+      "identity_hash": "bf8a476e4ec89985",
+      "reader_title": "Case study of AI in financial decision-making at three European industrial firms",
+      "reader_what": "AI is linked to better forecasting and risk management, but only alongside digital maturity and governance.",
+      "reader_more": "The paper compares Siemens AG, Schneider Electric SE and Krka using published annual, sustainability and investor documents rather than primary data. It reports that AI supports financial forecasting, cost optimisation, risk management and strategic decision support, and that the two larger firms tie AI more tightly to digital platforms, automation and sustainability-oriented value creation, while Krka follows a slower path resting on financial discipline and ESG governance. The design is qualitative and interpretive, with no measurement of firm performance attributable to AI. The European angle is the choice of firms rather than any research, innovation-system or policy question.",
       "deep_analysis": {
         "work_kind": "qualitative multiple-case study",
-        "research_question": "How artificial intelligence in financial decision-making affects efficiency, resilience and competitive advantage in European industrial firms.",
-        "main_finding": "Across three firms the authors report AI-supported gains in forecasting, cost control, risk management and decision support, with stronger integration at the two large engineering groups.",
-        "method_or_basis": "Packaged full text of the journal abstract page",
-        "qualification": "Evidence comes from company self-reporting in corporate publications for only three firms, so the reported benefits are not independently measured.",
-        "radar_relevance": "Concerns AI adoption and competitiveness in European industry.",
+        "research_question": "How does integrating AI into financial planning, risk management and strategic decision-making affect efficiency, resilience and competitive positioning in European industrial firms?",
+        "main_finding": "AI is associated with stronger competitive positioning only when combined with financial management capability, digital maturity and responsible governance.",
+        "method_or_basis": "Multiple-case design over three firms using secondary corporate documents: annual reports, sustainability reports and investor materials.",
+        "qualification": "No primary data, no counterfactual and no performance measurement; conclusions are interpretive and cannot support causal claims.",
+        "radar_relevance": "Touches European industrial technology adoption, but contributes no research-policy or innovation-system evidence and no reusable method.",
         "confidence": "medium",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI link resolved to the AGORA International Journal of Economical Sciences article page at univagora.ro/jour/index.php/aijes/article/view/7635, carrying the full abstract, author ORCID and the definitive title."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.15837/aijes.v20i1.7635 is an Agora University (univagora.ro) prefix and matches volume 20 issue 1."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search surfaced no independent index entry; only the journal's own OJS platform carries the item, which is consistent with a small regional journal."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed AGORA International Journal of Economical Sciences is published by Agora University Oradea (ISSN 2067-3310, E-ISSN 2067-7669) and hosts this issue."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://univagora.ro/jour/index.php/aijes/article/view/7635",
+            "title": "Artificial intelligence in financial decision-making and competitive advantage: evidence from selected European industrial firms",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity confirmed. Note the definitive title ends 'EUROPEAN INDUSTRIAL FIRMS', not 'INDUSTRIES' as the scanner recorded. Admission is the genuinely contested point, not identity."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_BORDERLINE_SCOPE",
+        "reason": "Real study of three European industrial firms, but it is a corporate-finance case study on secondary documents rather than research, innovation-system or research-policy work; whether that meets substantive European R&I relevance needs human judgement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T22:43:13Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "6076ed37",
+          "reader_title": "Case studies of AI in financial decisions at three European industrial firms",
+          "reader_what": "Document-based case study reports AI improving forecasting, cost control and risk management at three European industrial firms.",
+          "reader_more": "The paper asks how integrating artificial intelligence into financial planning, risk management, performance analysis and strategic decisions affects efficiency, resilience and competitive position. It is a qualitative multiple-case study using secondary sources: annual reports, sustainability reports, investor materials and other corporate documents from Siemens, Schneider Electric and the Slovenian pharmaceutical company Krka. The authors report more accurate financial forecasting, cost optimisation, data-driven risk management and better strategic decision support. Siemens and Schneider Electric are described as showing a stronger AI-driven competitiveness model tied to digital platforms and automation, while Krka follows a more gradual path anchored in financial discipline and governance.",
+          "deep_analysis": {
+            "work_kind": "qualitative multiple-case study",
+            "research_question": "How artificial intelligence in financial decision-making affects efficiency, resilience and competitive advantage in European industrial firms.",
+            "main_finding": "Across three firms the authors report AI-supported gains in forecasting, cost control, risk management and decision support, with stronger integration at the two large engineering groups.",
+            "method_or_basis": "Packaged full text of the journal abstract page",
+            "qualification": "Evidence comes from company self-reporting in corporate publications for only three firms, so the reported benefits are not independently measured.",
+            "radar_relevance": "Concerns AI adoption and competitiveness in European industry.",
+            "confidence": "medium",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://era.gv.at/public/documents/5533/2026_09_September_RTD.E.1_VN.pdf": {
       "profile": "deep-reader-offline-v1",
@@ -8281,27 +8829,94 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://merics.org/en/report/eu-shepherded-brussels-europe-awakens-chinese-technology": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "cee3eece",
-      "reader_title": "How EU-China technology relations moved from openness to de-risking",
-      "reader_what": "EU chapter documents exclusion of Chinese entities from much of Horizon Europe and tighter investment screening.",
-      "reader_why": "Marks research funding itself becoming an instrument of European economic security.",
-      "reader_more": "This is the EU chapter of the 2026 European Think-tank Network on China report. It argues that EU-China innovation relations have become contested, even though policy cannot quickly undo deep scientific and business interdependence. Two markers of the shift are the exclusion of Chinese entities from large parts of Horizon Europe and increased national scrutiny of Chinese investment in high-technology sectors. The author places this in the context of rivalry between Beijing and Washington, in which Europeans find themselves relatively disadvantaged and dependent, while still controlling chokepoints in some technologies. Foundational semiconductors and the Nexperia case are used to illustrate strategic dependencies on China as a supplier.",
+      "identity_hash": "d01ed45e0f5c7a45",
+      "reader_title": "EU-China technology cooperation has shifted from open engagement to de-risking",
+      "reader_what": "Horizon Europe exclusions and investment screening mark a structural turn toward economic security.",
+      "reader_why": "Sets out how research-security logic is now embedded in EU funding and investment decisions.",
+      "reader_more": "The chapter argues that deep scientific and business interdependence with China cannot be undone quickly, but that cooperation is no longer politically uncontested. It points to the exclusion of Chinese entities from large parts of Horizon Europe and to tighter national screening of Chinese investment in high-tech sectors as markers of a wider shift. It reads the December 2025 joint communication on economic security as the clearest official statement yet of the risks Brussels sees in China's techno-industrial system. The author also stresses persistent divisions between and within member states over urgency and acceptable cost, so the policy turn is described as uneven rather than settled.",
       "deep_analysis": {
-        "work_kind": "country/bloc chapter in a comparative think-tank report",
-        "research_question": "How the EU approach to technology and innovation cooperation with China has changed and why.",
-        "main_finding": "The EU has moved from largely unconditional openness towards de-risking and economic security, using research programme access and investment screening as instruments, without resolving underlying dependencies.",
-        "method_or_basis": "Packaged full text of the chapter page",
-        "qualification": "Analytical policy commentary; it describes direction of travel rather than measuring effects of the measures.",
-        "radar_relevance": "Directly covers research security and the conditions of access to EU research funding.",
+        "work_kind": "think-tank policy analysis (report chapter)",
+        "research_question": "How has the EU's approach to science, technology and innovation cooperation with China changed, and how far has it been implemented?",
+        "main_finding": "The EU has moved from largely unconditional openness toward de-risking and economic security, but implementation remains fragmented across member states.",
+        "method_or_basis": "Qualitative policy analysis of EU communications, funding rules and investment screening practice within the ETNC comparative network.",
+        "qualification": "Analytical and interpretive; describes policy direction and intent rather than measured effects on research collaboration.",
+        "radar_relevance": "Central to research security, international collaboration and European technological capability.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the MERICS report page; it carries the full EU chapter text of the 2026 European Think Tank Network on China report, by-lined Rebecca Arcesati."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this think-tank report chapter."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "MERICS is the publishing institute and hosts the chapter within the ETNC 2026 report 'Fragmented Europe: Dealing with China as a technology and innovation power'."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://merics.org/en/report/eu-shepherded-brussels-europe-awakens-chinese-technology",
+            "title": "EU: Shepherded by Brussels, Europe awakens to Chinese technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied URL is the substantive chapter itself, not a landing page. Named author recovered from the chapter by-line; the scanner had recorded only the institute."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analytical chapter on how EU science, technology and innovation relations with China have shifted from openness to de-risking, including Horizon Europe exclusions and investment screening."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T22:43:13Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "cee3eece",
+          "reader_title": "How EU-China technology relations moved from openness to de-risking",
+          "reader_what": "EU chapter documents exclusion of Chinese entities from much of Horizon Europe and tighter investment screening.",
+          "reader_why": "Marks research funding itself becoming an instrument of European economic security.",
+          "reader_more": "This is the EU chapter of the 2026 European Think-tank Network on China report. It argues that EU-China innovation relations have become contested, even though policy cannot quickly undo deep scientific and business interdependence. Two markers of the shift are the exclusion of Chinese entities from large parts of Horizon Europe and increased national scrutiny of Chinese investment in high-technology sectors. The author places this in the context of rivalry between Beijing and Washington, in which Europeans find themselves relatively disadvantaged and dependent, while still controlling chokepoints in some technologies. Foundational semiconductors and the Nexperia case are used to illustrate strategic dependencies on China as a supplier.",
+          "deep_analysis": {
+            "work_kind": "country/bloc chapter in a comparative think-tank report",
+            "research_question": "How the EU approach to technology and innovation cooperation with China has changed and why.",
+            "main_finding": "The EU has moved from largely unconditional openness towards de-risking and economic security, using research programme access and investment screening as instruments, without resolving underlying dependencies.",
+            "method_or_basis": "Packaged full text of the chapter page",
+            "qualification": "Analytical policy commentary; it describes direction of travel rather than measuring effects of the measures.",
+            "radar_relevance": "Directly covers research security and the conditions of access to EU research funding.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.1163/29497736-bja00019": {
       "profile": "deep-reader-offline-v1",
@@ -8787,26 +9402,92 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-area_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "3026b604",
-      "reader_title": "Commission overview page on the European Research Area and its governance",
-      "reader_what": "Official page describes the European Research Area as a borderless market for research and sets out its governance.",
-      "reader_more": "This is a European Commission overview page rather than a study. It describes the European Research Area as the ambition to create a single, borderless market for research, innovation and technology across the EU, built on excellence, on prioritising research investment and reform, and on mobility of researchers and free movement of knowledge and technology. It sets out the governance framework, including the ERA Forum, ERAC and the Council, the Pact for Research and Innovation in Europe, and an ERA Policy Agenda of concrete actions. It notes that regions and cities are supported through a relaunched Knowledge Exchange Platform, and that national research and innovation policy recommendations are delivered through the European Semester. The page frames persistent problems as regulatory fragmentation, uneven research investment and barriers to knowledge sharing.",
+      "identity_hash": "8bec71a8c77e731f",
+      "reader_title": "Commission overview page explaining the European Research Area and its governance",
+      "reader_what": "A standing policy landing page summarising ERA aims, governance bodies and the planned 2026 ERA Act.",
+      "reader_more": "The page defines the European Research Area as an ambition to create a single, borderless market for research, innovation and technology, and sets out the governance framework built on the ERA Forum, ERAC and the Council, the Pact for Research and Innovation and the ERA Policy Agenda. It notes the Knowledge Exchange Platform relaunch, the role of research and innovation recommendations in the European Semester, and the Commission's intention to adopt the ERA Act in 2026. Everything on the page is signposting to other material. It is the standing entry point for the topic rather than a dated report of any particular development.",
       "deep_analysis": {
-        "work_kind": "official policy overview page",
+        "work_kind": "institutional overview / navigation page",
         "research_question": "",
-        "main_finding": "The page documents the structure of European Research Area policy, its governance bodies, and the use of the European Semester to steer national research and innovation reforms.",
-        "method_or_basis": "Packaged full text of the European Commission page",
-        "qualification": "Descriptive institutional material; it states aims and machinery rather than evidence of progress.",
-        "radar_relevance": "Reference material on how EU research policy coordination with member states is organised.",
+        "main_finding": "Describes ERA scope, governance architecture and the intention to adopt an ERA Act in 2026.",
+        "method_or_basis": "Editorial web content maintained by DG Research and Innovation.",
+        "qualification": "Undated standing content; the scanner's date reflects when it was crawled.",
+        "radar_relevance": "Vocabulary matches the Radar closely, but the page itself reports no substantive development.",
         "confidence": "high",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Commission page /strategy/strategy-research-and-innovation/our-digital-future/european-research-area_en. It is the standing ERA policy overview: definition, governance, Semester recommendations, progress reports and onward links."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission web page; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed as a DG Research and Innovation strategy section page, not a dated publication or news release."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-area_en",
+            "title": "European Research Area",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page is genuine and fully readable, but it is a navigation and overview page. The scanner date of 25 June 2026 reflects a crawl, not a publication event."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_GENERIC_INSTITUTIONAL_PAGE",
+        "reason": "A standing Commission topic page describing what the ERA is and linking to governance, Semester and progress-report material. It reports no new decision, instrument or evidence release, so it fails the strand C bar."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "3026b604",
+          "reader_title": "Commission overview page on the European Research Area and its governance",
+          "reader_what": "Official page describes the European Research Area as a borderless market for research and sets out its governance.",
+          "reader_more": "This is a European Commission overview page rather than a study. It describes the European Research Area as the ambition to create a single, borderless market for research, innovation and technology across the EU, built on excellence, on prioritising research investment and reform, and on mobility of researchers and free movement of knowledge and technology. It sets out the governance framework, including the ERA Forum, ERAC and the Council, the Pact for Research and Innovation in Europe, and an ERA Policy Agenda of concrete actions. It notes that regions and cities are supported through a relaunched Knowledge Exchange Platform, and that national research and innovation policy recommendations are delivered through the European Semester. The page frames persistent problems as regulatory fragmentation, uneven research investment and barriers to knowledge sharing.",
+          "deep_analysis": {
+            "work_kind": "official policy overview page",
+            "research_question": "",
+            "main_finding": "The page documents the structure of European Research Area policy, its governance bodies, and the use of the European Semester to steer national research and innovation reforms.",
+            "method_or_basis": "Packaged full text of the European Commission page",
+            "qualification": "Descriptive institutional material; it states aims and machinery rather than evidence of progress.",
+            "radar_relevance": "Reference material on how EU research policy coordination with member states is organised.",
+            "confidence": "high",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/": {
       "profile": "deep-reader-offline-v1",
@@ -9141,50 +9822,194 @@
       ]
     },
     "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-ai-science-strategy/raise-resource-ai-science-europe_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "7ade4b41",
-      "reader_title": "EU builds a virtual institute pooling computing and data for AI in science",
-      "reader_what": "RAISE pools computing, data, talent and funding for AI-driven science, with 140 million euro committed in the pilot.",
-      "reader_why": "Concentrates scattered European AI research capacity to compete in AI-enabled science.",
-      "reader_more": "RAISE is a European Commission initiative conceived as a virtual research institute for European research on and with artificial intelligence. It pools computational power, data, talent and research funding and makes them available to European researchers, with the aim of creating cross-disciplinary links between strong AI labs and unlocking both scientific breakthroughs and new AI technologies. The pilot was launched in November 2025 by the Executive Vice-President for Technological Sovereignty and the Commissioner for Startups, Research and Innovation. It mobilises leading scientific organisations and research infrastructures across five pilot areas: fundamental physics and astronomy, materials science, life science, earth sciences, and social sciences and humanities. Funding comes solely from Horizon Europe, 33 million euro in the 2025 work programme and 107 million for 2026 to 2027.",
+      "identity_hash": "66dfaeb0851b8274",
+      "reader_title": "Commission page describing RAISE, its virtual AI research institute initiative",
+      "reader_what": "A standing programme page setting out RAISE funding lines and planned calls.",
+      "reader_more": "RAISE is presented as a virtual research institute intended to pool computational power, data, talent and research funding for European researchers working on and with AI. The page records that the pilot is funded exclusively through Horizon Europe, with thirty-three million euros in the 2025 work programme and one hundred and seven million across 2026 to 2027, and lists thematic networks of excellence, a Science for AI pillar pilot, RAISE doctoral networks and laboratory automation among the funding routes. It notes the official launch at the AI in Science Summit on 4 November 2025. The page is maintained reference content rather than a report of any new development.",
       "deep_analysis": {
-        "work_kind": "official programme description / current development",
+        "work_kind": "institutional programme information page",
         "research_question": "",
-        "main_finding": "The Commission has launched RAISE as a Horizon Europe funded virtual institute pooling compute, data and funding for AI in science across five scientific pilot areas.",
-        "method_or_basis": "Packaged full text of the European Commission page",
-        "qualification": "Describes design and budget of a pilot; no results or uptake evidence yet.",
-        "radar_relevance": "Central EU response on AI research capacity, compute access and technological sovereignty in science.",
+        "main_finding": "Sets out RAISE's design as a virtual AI research institute and its Horizon Europe funding envelope.",
+        "method_or_basis": "Editorial web content maintained by DG Research and Innovation.",
+        "qualification": "Undated standing content; the initiative's launch event predates the crawl by months.",
+        "radar_relevance": "The underlying initiative is relevant, but this page is programme description, not a substantive development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Commission RAISE page under /our-digital-future/european-ai-science-strategy/. It is the standing information page for the initiative, listing funding lines and planned actions."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission web page; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed as a DG Research and Innovation strategy-section page for the RAISE initiative, distinct from the ERA page at record 9."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-ai-science-strategy/raise-resource-ai-science-europe_en",
+            "title": "RAISE: Resource for AI Science in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Genuine and distinct from record 9 despite sharing a URL stem; different page, different identity hash. The content is standing initiative information rather than a dated development."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_GENERIC_PROGRAMME_PAGE",
+        "reason": "A standing Commission initiative page describing what RAISE is and listing its funding lines. The launch it refers to took place in November 2025; the page itself reports no new decision or event."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "7ade4b41",
+          "reader_title": "EU builds a virtual institute pooling computing and data for AI in science",
+          "reader_what": "RAISE pools computing, data, talent and funding for AI-driven science, with 140 million euro committed in the pilot.",
+          "reader_why": "Concentrates scattered European AI research capacity to compete in AI-enabled science.",
+          "reader_more": "RAISE is a European Commission initiative conceived as a virtual research institute for European research on and with artificial intelligence. It pools computational power, data, talent and research funding and makes them available to European researchers, with the aim of creating cross-disciplinary links between strong AI labs and unlocking both scientific breakthroughs and new AI technologies. The pilot was launched in November 2025 by the Executive Vice-President for Technological Sovereignty and the Commissioner for Startups, Research and Innovation. It mobilises leading scientific organisations and research infrastructures across five pilot areas: fundamental physics and astronomy, materials science, life science, earth sciences, and social sciences and humanities. Funding comes solely from Horizon Europe, 33 million euro in the 2025 work programme and 107 million for 2026 to 2027.",
+          "deep_analysis": {
+            "work_kind": "official programme description / current development",
+            "research_question": "",
+            "main_finding": "The Commission has launched RAISE as a Horizon Europe funded virtual institute pooling compute, data and funding for AI in science across five scientific pilot areas.",
+            "method_or_basis": "Packaged full text of the European Commission page",
+            "qualification": "Describes design and budget of a pilot; no results or uptake evidence yet.",
+            "radar_relevance": "Central EU response on AI research capacity, compute access and technological sovereignty in science.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
+    },
+    "link:https://doi.org/10.1093/eurpub/ckag103": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "503fbbd3",
+      "identity_hash": "55a7415bc85bb975",
+      "reader_title": "Survey maps why some European countries rarely lead EU-funded rare disease research",
+      "reader_what": "Fragmented national rare disease policy ranks as the top structural barrier across eighteen under-represented countries.",
+      "reader_why": "Findings feed ERDERA's work on widening participation in Horizon Europe rare disease calls.",
+      "reader_more": "A two-phase Delphi-informed survey run inside the Horizon Europe ERDERA project reached 186 respondents in phase one and 64 in phase two, covering all eighteen countries the programme classes as under-represented. Ranked by Borda count, the leading problems were fragmented or outdated national strategies, too few rare disease specialists, and uneven reimbursement of advanced diagnostics. The most-supported solution was an EU policy setting minimum quality standards for rare disease care, including reimbursement for genetic testing. The authors stress the sample was purposive and unevenly distributed, and that country-level variables were self-reported rather than independently validated.",
+      "deep_analysis": {
+        "work_kind": "empirical survey study (short report)",
+        "research_question": "What barriers limit participation of under-represented European countries in EU rare disease research, and which solutions do stakeholders prioritise?",
+        "main_finding": "Policy fragmentation, scarce specialist capacity and heterogeneous funding dominate; respondents prioritise EU-wide minimum standards for rare disease care.",
+        "method_or_basis": "Modified Delphi-informed two-phase survey, 186 then 64 respondents, Borda-count ranking plus chi-square and Fisher tests.",
+        "qualification": "Purposive convenience sample, no predefined consensus threshold, self-reported national data not externally validated.",
+        "radar_relevance": "Evidence on widening participation and structural inequality in EU research funding.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
-      "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
-    },
-    "link:https://doi.org/10.1093/eurpub/ckag103": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
-      "source_hash": "503fbbd3",
-      "reader_title": "Rare disease research held back by outdated policy in less represented European countries",
-      "reader_what": "Survey of 186 respondents finds fragmented or outdated national policies and uneven funding for rare disease research.",
-      "reader_why": "Identifies where European rare disease research capacity is weakest and what to fix first.",
-      "reader_more": "The study looks at barriers to rare disease research in European countries that are underrepresented in this field. It uses a modified Delphi approach with 186 respondents, run without formal consensus thresholds. Respondents point to fragmented or outdated national policies and to heterogeneous funding arrangements as the main constraints. The priorities identified include access to genetic testing and to essential services, in order to support more uniform patient care and shared research capacity across countries. The packaged record preserved only the abstract, so the country coverage, respondent composition and detailed ranking of priorities could not be checked.",
-      "deep_analysis": {
-        "work_kind": "expert consultation study (modified Delphi)",
-        "research_question": "What barriers and policy priorities shape rare disease research in underrepresented European countries.",
-        "main_finding": "Fragmented or outdated policies and uneven funding are the principal barriers, with access to genetic testing and essential services identified as the leading priorities.",
-        "method_or_basis": "Stored publisher abstract in the package; publisher page returned 403",
-        "qualification": "Expert opinion without formal consensus thresholds, so results reflect respondent judgement rather than measured capacity.",
-        "radar_relevance": "Concerns research capacity gaps between European countries and the European rare disease policy agenda.",
-        "confidence": "medium",
-        "why_supported": true
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "Package retrieval of the DOI link returned HTTP 403 from academic.oup.com, so no stored text was available."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.1093/eurpub/ckag103 resolves to European Journal of Public Health 36(4), article ckag103, published 13 June 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the Oxford Academic article, the PubMed record PMID 42460236-series and a PMC deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved the complete Oxford Academic article page (abstract, introduction, methods, results table, discussion, funding); PMC copy PMC13265805 was behind a reCAPTCHA gate but the publisher open-access text was obtained."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/eurpub/article/36/4/ckag103/8707877",
+            "title": "Identifying barriers and policy priorities for rare disease research in underrepresented European countries",
+            "evidence_used": true
+          },
+          {
+            "kind": "bibliographic_index",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/42290236/",
+            "title": "PubMed record for the same article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Initial 403 was overcome at the publisher step; full CC-BY text read directly, including Borda-count results table and limitations."
       },
-      "deep_read_mode": "offline_llm_package",
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical study of why some European countries under-participate in EU-funded rare disease research, conducted inside the Horizon Europe ERDERA project; direct European research-policy evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T22:43:13Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "503fbbd3",
+          "reader_title": "Rare disease research held back by outdated policy in less represented European countries",
+          "reader_what": "Survey of 186 respondents finds fragmented or outdated national policies and uneven funding for rare disease research.",
+          "reader_why": "Identifies where European rare disease research capacity is weakest and what to fix first.",
+          "reader_more": "The study looks at barriers to rare disease research in European countries that are underrepresented in this field. It uses a modified Delphi approach with 186 respondents, run without formal consensus thresholds. Respondents point to fragmented or outdated national policies and to heterogeneous funding arrangements as the main constraints. The priorities identified include access to genetic testing and to essential services, in order to support more uniform patient care and shared research capacity across countries. The packaged record preserved only the abstract, so the country coverage, respondent composition and detailed ranking of priorities could not be checked.",
+          "deep_analysis": {
+            "work_kind": "expert consultation study (modified Delphi)",
+            "research_question": "What barriers and policy priorities shape rare disease research in underrepresented European countries.",
+            "main_finding": "Fragmented or outdated policies and uneven funding are the principal barriers, with access to genetic testing and essential services identified as the leading priorities.",
+            "method_or_basis": "Stored publisher abstract in the package; publisher page returned 403",
+            "qualification": "Expert opinion without formal consensus thresholds, so results reflect respondent judgement rather than measured capacity.",
+            "radar_relevance": "Concerns research capacity gaps between European countries and the European rare disease policy agenda.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/09662839.2026.2680646": {
       "profile": "deep-reader-v2-authoritative",
@@ -9595,27 +10420,98 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://allea.org/wp-content/uploads/2026/06/ALLEA-Activities-Report-Jan-Dec-2025_May-2026.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "fc92301d",
-      "reader_title": "European academies annual report highlights research security and Ukraine work",
-      "reader_what": "Activities report records a 600-participant European research security conference and membership of the Ukraine science coalition.",
-      "reader_why": "Shows academies positioning research security as compatible with openness and academic freedom.",
-      "reader_more": "The linked document is the ALLEA activities report for January to December 2025, published in Berlin in May 2026, although the scanner recorded it under a general assembly event title. The report covers strategy and governance, a new strategic plan, restructuring of science-policy activities, research culture and research security. It records that in October 2025 ALLEA co-organised the European Flagship Conference on Research Security in Brussels with the European Commission and eleven partner organisations, drawing more than 600 participants to discuss coherent approaches to research security that do not undermine international collaboration or academic freedom. It also records the decision to join the newly established International Coalition for Science, Research and Innovation in Ukraine.",
+      "identity_hash": "c71539d16290fc8d",
+      "reader_title": "ALLEA's annual report records its 2025 governance, research-policy and science-advice activity",
+      "reader_what": "An institutional activity record covering ERA work, research security, research assessment and SAPEA advice.",
+      "reader_more": "The document is ALLEA's own account of its work over the 2025 calendar year, published in Berlin in May 2026. It covers strategy and governance including the General Assembly and a new strategic plan, research culture work on integrity, assessment and inclusion, research policy covering the European Research Area and research security, and science advice delivered through SAPEA. It is a reporting instrument rather than an analytical or evidentiary output, and it does not present findings, a method or a new development. The scanner had attached a different, non-existent title to this file.",
       "deep_analysis": {
         "work_kind": "institutional annual activities report",
         "research_question": "",
-        "main_finding": "ALLEA reports building its research security work around the principle that security measures must not compromise international collaboration or academic freedom, and formalising support for Ukrainian science.",
-        "method_or_basis": "Packaged PDF excerpt of the official activities report; note the scanner title refers to a different event",
-        "qualification": "Self-reported activity record; it documents what the organisation did rather than assessing effects.",
-        "radar_relevance": "Documents how European academies are shaping the research security agenda and Ukraine support.",
-        "confidence": "medium",
-        "why_supported": true
+        "main_finding": "A year-by-year record of ALLEA's governance, research-culture, research-policy and science-advice activities during 2025.",
+        "method_or_basis": "Internal organisational reporting; no research method.",
+        "qualification": "Self-reported institutional account with no independent evidence base.",
+        "radar_relevance": "Fails the strand test: an organisational activity record, not substantive European R&I work or a current development.",
+        "confidence": "high",
+        "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied ALLEA PDF. Its cover page reads 'Activities Report January - December 2025', published Berlin May 2026 with DOI 10.26356/ACTIVITIES2025. It is not an event report on the 2026 General Assembly as the scanner claimed."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The PDF itself prints DOI 10.26356/ACTIVITIES2025, which matches the annual activities report series rather than any General Assembly event record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Searching the scanner's claimed title 'Event Report: ALLEA General Assembly 2026' returns no matching ALLEA publication; the claimed work does not exist as a separate document."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ALLEA is the issuing body; the document's own table of contents covers governance, research culture, research policy including ERA and research security, and science advice through SAPEA."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://allea.org/wp-content/uploads/2026/06/ALLEA-Activities-Report-Jan-Dec-2025_May-2026.pdf",
+            "title": "ALLEA Activities Report January - December 2025",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Clear scanner misidentification: the linked object is ALLEA's annual activities report for 2025, published May 2026. Corrected rather than dropped as unverifiable, because the linked document itself is fully readable."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSTITUTIONAL_ACTIVITY_REPORT",
+        "reason": "The actual linked work is an organisational annual activities report. It documents what ALLEA did rather than contributing substantive research, analysis or a new development, so it fails the strand criteria."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T22:43:13Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "fc92301d",
+          "reader_title": "European academies annual report highlights research security and Ukraine work",
+          "reader_what": "Activities report records a 600-participant European research security conference and membership of the Ukraine science coalition.",
+          "reader_why": "Shows academies positioning research security as compatible with openness and academic freedom.",
+          "reader_more": "The linked document is the ALLEA activities report for January to December 2025, published in Berlin in May 2026, although the scanner recorded it under a general assembly event title. The report covers strategy and governance, a new strategic plan, restructuring of science-policy activities, research culture and research security. It records that in October 2025 ALLEA co-organised the European Flagship Conference on Research Security in Brussels with the European Commission and eleven partner organisations, drawing more than 600 participants to discuss coherent approaches to research security that do not undermine international collaboration or academic freedom. It also records the decision to join the newly established International Coalition for Science, Research and Innovation in Ukraine.",
+          "deep_analysis": {
+            "work_kind": "institutional annual activities report",
+            "research_question": "",
+            "main_finding": "ALLEA reports building its research security work around the principle that security measures must not compromise international collaboration or academic freedom, and formalising support for Ukrainian science.",
+            "method_or_basis": "Packaged PDF excerpt of the official activities report; note the scanner title refers to a different event",
+            "qualification": "Self-reported activity record; it documents what the organisation did rather than assessing effects.",
+            "radar_relevance": "Documents how European academies are shaping the research security agenda and Ukraine support.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf": {
       "profile": "deep-reader-offline-v1",
@@ -11406,6 +12302,330 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-13T22:20:33Z",
       "deep_scan_package_id": "worker-b-20260913T211810Z-4ade465bcac9"
+    },
+    "link:https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "93541144",
+      "identity_hash": "d9215c0cf576979d",
+      "reader_title": "Dutch study maps eight rival views on how geopolitics should reshape science policy",
+      "reader_what": "Stakeholders disagree sharply on openness, defence research priority and collaboration with illiberal states.",
+      "reader_why": "Names the trade-offs European science systems must settle as defence research budgets rise.",
+      "reader_more": "The Rathenau Instituut interviewed and analysed Dutch policymakers and practitioners to surface how they interpret geopolitical change and what they think should follow. It distils eight characteristic perspectives and then sets them against each other to expose five dilemmas: open science versus military interests, European coordination versus national science policy, applied versus basic research, security versus sustainability, and whether to collaborate with illiberal countries. The study is descriptive and exploratory. It does not recommend a settlement or measure effects, and its empirical base is the Dutch science system rather than the EU as a whole.",
+      "deep_analysis": {
+        "work_kind": "exploratory qualitative study / policy report",
+        "research_question": "How do policymakers and practitioners understand the relationship between geopolitics and science, and what does that imply for the science system?",
+        "main_finding": "Eight distinct perspectives coexist, generating five concrete dilemmas that cut across openness, security, funding priority and international collaboration.",
+        "method_or_basis": "Exploratory qualitative study of Dutch policymakers and practitioners, synthesised into perspectives and juxtaposed to derive dilemmas.",
+        "qualification": "Descriptive and Netherlands-focused; maps positions rather than evaluating outcomes or recommending a course.",
+        "radar_relevance": "Directly addresses research security, European versus national coordination and the mobilisation of research under geopolitical pressure.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Rathenau project page, which carries the study summary, the eight perspectives, the named dilemmas and a link to the 888 KB report PDF."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Rathenau assigns no DOI to this exploratory study."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Rathenau Instituut page rathenau.nl/en/.../geopolitics-science-policy confirms publication date 04 May 2026 and lists Chris Eveleens and Jasper Deuten among the researchers."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_page",
+            "url": "https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
+            "title": "Geopolitics in Science Policy: Dilemmas for the mobilisation of research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page independently verified live; date 04 May 2026 and author attribution confirmed. Substantive content (eight perspectives, five dilemmas) read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Exploratory study of how geopolitics is reshaping science policy and the science system, with explicit European coordination dilemmas; core research-policy material."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T22:43:13Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc"
+    },
+    "link:https://era.gv.at/news-items/associated-countries-urge-eu-to-keep-fp10-open-and-research-led/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "95bd71c7",
+      "identity_hash": "8cb4b7e30af9baba",
+      "reader_title": "Associated-country universities press the EU to keep FP10 open and research-led",
+      "reader_what": "They demand a research-led Pillar II, an independent ERC and bottom-up Marie Sklodowska-Curie Actions.",
+      "reader_why": "The letter targets the Council during the FP10 design phase, when association terms are being set.",
+      "reader_more": "The Russell Group, U15 Canada, swissuniversities and Universities New Zealand wrote jointly to the Cyprus EU Presidency asking that the tenth framework programme stay open, research-led and attractive to trusted international partners. They describe Horizon Europe as a success for both science and diplomacy and argue that associated countries strengthen its research base. Their specific asks include a research-led Pillar II, continued observer roles for associated countries in governance, protection for fundamental research, a fully independent European Research Council, bottom-up MSCA, minimal topic exclusions and equal treatment in applications. They also want faster association procedures so trusted partners can join from the start.",
+      "deep_analysis": {
+        "work_kind": "current development (joint sectoral intervention)",
+        "research_question": "",
+        "main_finding": "Four associated-country university groupings publicly pressed the Council to preserve openness and researcher-led design in FP10.",
+        "method_or_basis": "Report of a joint letter addressed to the Cyprus EU Presidency.",
+        "qualification": "An advocacy position from beneficiaries of association; it states demands, not agreed outcomes.",
+        "radar_relevance": "Directly concerns FP10 architecture, association policy and international research collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ERA Portal Austria item; the complete report of the joint letter to the Cyprus EU Presidency is present, including the signatories and their specific FP10 demands."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News item; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ERA Portal Austria is the issuing platform and links onward to the letter itself."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://era.gv.at/news-items/associated-countries-urge-eu-to-keep-fp10-open-and-research-led/",
+            "title": "Associated Countries urge EU to keep FP10 open and research-led",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Complete item. Reports a specific, dated intervention by four named university groupings rather than generic programme vocabulary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a concrete joint intervention by associated-country university groups into the FP10 legislative debate, with specific governance and design demands."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc"
+    },
+    "link:https://allea.org/wp-content/uploads/2026/06/Joint-statement-on-Open-Science-1.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "ae70c2ac",
+      "identity_hash": "25f270106e5ec51a",
+      "reader_title": "Six European research bodies set out what the ERA Act must fix in Open Science",
+      "reader_what": "Financial, linguistic and geographic inequalities still limit equitable participation in and access to Open Science.",
+      "reader_why": "Submitted into the ERA Act consultation, where Open Science provisions are being drafted.",
+      "reader_more": "ALLEA, EIFL, IFLA, LIBER, OPERAS and SPARC Europe issued this statement on behalf of European universities, research-performing organisations, libraries, scholarly infrastructures and academies. They acknowledge progress through the 2021 UNESCO Recommendation, Council conclusions in 2022 and 2023 and national policies, but argue that financial, linguistic and geographic inequalities still block equitable participation. They frame Open Science as fundamental to the fifth freedom, the free circulation of knowledge, and press for opening methods, protocols, software and outputs in line with FAIR principles. They also warn that legislation alone will not be enough, and call for aligned policy, incentives, infrastructure and community-led initiatives.",
+      "deep_analysis": {
+        "work_kind": "multi-organisation joint position statement",
+        "research_question": "",
+        "main_finding": "Open Science progress in Europe remains blocked by economic, organisational and legal barriers that the ERA Act should address directly.",
+        "method_or_basis": "Collective position drafted by six European research, library and infrastructure organisations for the ERA Act consultation.",
+        "qualification": "An advocacy position, not an evidence study; it asserts barriers rather than measuring them.",
+        "radar_relevance": "Open Science and the fifth freedom are central ERA Act questions.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied ALLEA-hosted PDF; it is the full Joint Statement on Open Science signed by ALLEA, EIFL, IFLA, LIBER, OPERAS and SPARC Europe, submitted in the context of the ERA Act consultation."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The joint statement carries no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ALLEA hosts the signed statement; the accompanying ALLEA announcement dates the joint statement to 13 May 2026 and lists the same six signatory organisations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://allea.org/wp-content/uploads/2026/06/Joint-statement-on-Open-Science-1.pdf",
+            "title": "Joint Statement on Open Science: Open Science as a pillar for strengthening the European Research Area",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied PDF is the complete statement. Scanner author field 'maria ronald' is a website byline artefact, corrected to the six signatory organisations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A coordinated position statement from six European research and library organisations identifying concrete Open Science barriers for the ERA Act; substantive European research-policy input."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc"
+    },
+    "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/north-macedonia_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "a2f62bcd",
+      "identity_hash": "1c506c6fa20c3180",
+      "reader_title": "Commission country page on research and innovation cooperation with North Macedonia",
+      "reader_what": "A standing profile recording Horizon Europe association since 2021 and strongest performance in energy and health.",
+      "reader_more": "The page records that North Macedonia has taken part in EU research and innovation programmes since 2007 and became fully associated to Horizon Europe in January 2021, with its strongest results in energy and health. It notes that the country's programme for higher education and scientific research includes actions to strengthen research capacity in line with European Research Area priorities, complemented by a Smart Specialisation Strategy. The remainder of the page points to Horizon Europe funding opportunities, CORDIS project results, success stories and national contact points, and mentions a third EU-North Macedonia joint research and innovation meeting without reporting its outcome.",
+      "deep_analysis": {
+        "work_kind": "institutional country profile page",
+        "research_question": "",
+        "main_finding": "Summarises North Macedonia's Horizon Europe association and participation profile.",
+        "method_or_basis": "Editorial web content maintained by DG Research and Innovation.",
+        "qualification": "Undated reference content; no event, decision or dataset is reported.",
+        "radar_relevance": "Association and widening participation are relevant themes, but this page carries no substantive development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Commission country page for research and innovation cooperation with North Macedonia; it is a standing country profile with participation facts and onward links."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission web page; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed as part of the DG Research and Innovation Europe-in-the-world international cooperation country series."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page_full_text",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/north-macedonia_en",
+            "title": "International cooperation with North Macedonia in research and innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Real page, fully readable, but a country profile in a standing series rather than a dated report of a development."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_GENERIC_INSTITUTIONAL_PAGE",
+        "reason": "A standing country cooperation profile listing association status, strong fields and links to national contact points. It reports no new decision, instrument or evidence release."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc"
+    },
+    "link:https://www.businessfinland.fi/globalassets/julkaisut/signals-of-change-summer-2026.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "21686dd8",
+      "identity_hash": "f1c1ff46d8dd2086",
+      "reader_title": "Finnish foresight report sees defence, technology and economic security converging into one domain",
+      "reader_what": "Export controls, vendor exclusions and allied industrial blocs are fusing security criteria with market access.",
+      "reader_why": "European firms face compliance exposure across conflicting US and Chinese jurisdictional demands.",
+      "reader_more": "Business Finland Foresight compiled its monthly signals from March to May 2026 into four reinforcing development paths. These are a systemic techno-geoeconomic bifurcation driven by US-China export controls and competing AI ecosystems; a deepening securitisation of markets and industrial policy, including the EU's move toward enforceable exclusion of high-risk vendors; alliance-based industrialisation that embeds defence, technology and supply chains into tightly coupled blocs; and the scaling of China's state-driven self-reliance model. The report draws out grey zones where allies align in principle but diverge on cost-sharing and sovereignty. It is a signal-scanning exercise, so its paths are interpretive rather than forecast.",
+      "deep_analysis": {
+        "work_kind": "foresight / weak-signal analysis",
+        "research_question": "What emerging signals indicate about the convergence of defence, technology and economic security, and what does that mean for European firms?",
+        "main_finding": "Economic, technological and defence policy are converging into a single strategic domain in which security criteria increasingly determine market access.",
+        "method_or_basis": "Weak-signal scanning: monthly signal collection March-May 2026, each path evidenced by dated public data points, then synthesised into development paths.",
+        "qualification": "Interpretive foresight, not forecast or measurement; signals are drawn from press and think-tank reporting and are explicitly described as early indicators.",
+        "radar_relevance": "European technological sovereignty, standards-setting, supply-chain exposure and research-security-adjacent industrial policy.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Business Finland PDF 'Signals of Change, Summer 2026'; the full publication was read, including the four development paths and the underlying signal entries with dated data points."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Business Finland foresight publication; no DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Hosted on businessfinland.fi as an official Business Finland Foresight publication compiled from its monthly signals for March to May 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.businessfinland.fi/globalassets/julkaisut/signals-of-change-summer-2026.pdf",
+            "title": "Signals of Change, Summer 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied PDF is the complete publication. Internal text dates it to a March-May 2026 signal window, which is consistent with a summer 2026 issue."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A national innovation agency's foresight analysis of techno-geoeconomic change, with explicit conclusions for European digital sovereignty, standards and supply-chain exposure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T22:43:14Z",
+      "deep_scan_package_id": "worker-b-20260913T222311Z-60cea5778abc"
     }
   }
 }
