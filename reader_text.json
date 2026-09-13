@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-13T18:30:09Z",
+  "generated_at": "2026-09-13T21:09:24Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-offline-v1",
@@ -597,27 +597,89 @@
       ]
     },
     "link:https://doi.org/10.1007/s13132-026-03473-x": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "92323476",
-      "reader_title": "Seven-year assessment of the EU-Mediterranean research partnership PRIMA",
-      "reader_what": "Finds PRIMA built dense north-south research networks and shifted coordinating roles towards southern Mediterranean institutions.",
-      "reader_why": "Shows a joint funding programme working as both research instrument and regional diplomacy.",
-      "reader_more": "This article assesses the Partnership for Research and Innovation in the Mediterranean Area over its first seven years, from 2018 to 2024, treating it as a case of regional science diplomacy. Using funded project data, social network analysis and project performance indicators, the author reports dense research networks linking southern Europe with Mediterranean partner countries, and notes that a 2023 eligibility reform triggered new south-south collaboration between Tunisia, Morocco, Egypt and Jordan. Reported outputs include innovations in drought-tolerant crops, wastewater reuse, circular agri-food chains and climate adaptation, more than 16,000 people reached through training, and 41 open datasets. The author recommends that a future phase prioritise scaling and adoption of results.",
+      "identity_hash": "eee71104404904a9",
+      "reader_title": "PRIMA links science diplomacy with agri-food innovation",
+      "reader_what": "PRIMA built dense Euro-Mediterranean research networks while increasing Southern Mediterranean coordination, data and innovation roles.",
+      "reader_why": "Programme rules and network structure helped strengthen South–South collaboration.",
+      "reader_more": "The study examines PRIMA-funded projects from 2018–2024 using project indicators and social-network analysis. It reports dense North–South collaboration, growing South–South links after eligibility changes, extensive training and outreach, and increasing Southern Mediterranean coordinator roles. These are programme-level associations and outputs, not a causal proof that PRIMA alone produced broader regional development.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed programme evaluation and case study",
-        "research_question": "What PRIMA achieved across research collaboration, sustainability objectives and regional power relations in its first seven years.",
-        "main_finding": "PRIMA created dense north-south research networks and, after the 2023 eligibility reform, new south-south links, while southern Mediterranean institutions increasingly took on coordinating and innovation-developer roles.",
-        "method_or_basis": "Analysis of funded project data, social network analysis of collaboration structures, and project-level key performance indicators.",
-        "qualification": "A single-author assessment of a programme the author writes about from close proximity; indicators capture outputs and network structure rather than independently verified impact.",
-        "radar_relevance": "Evidence on how EU-associated joint programming functions as both research funding and regional diplomacy.",
+        "work_kind": "empirical programme study",
+        "research_question": "How has PRIMA contributed to science diplomacy, collaboration and sustainable agri-food innovation in the Mediterranean?",
+        "main_finding": "PRIMA supported dense cross-Mediterranean collaboration and increasing Southern Mediterranean participation and leadership.",
+        "method_or_basis": "Programme data, project KPIs and social-network analysis of funded collaborations.",
+        "qualification": "Case-study and programme-output evidence does not establish causal regional impacts.",
+        "radar_relevance": "Substantive European R&I programme evidence with direct science-diplomacy and innovation relevance.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The DOI link https://doi.org/10.1007/s13132-026-03473-x resolves to the matching Springer article with substantive full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s13132-026-03473-x matches the title, author and Journal of the Knowledge Economy publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s13132-026-03473-x",
+            "title": "From Science Diplomacy to Sustainable Agri-Food Innovation: Assessing Multidimensional Contributions of the PRIMA Programme in the Mediterranean Region",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer article verifies the PRIMA programme analysis and its Euro-Mediterranean R&I focus."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article evaluates an EU-linked Euro-Mediterranean research and innovation programme and its collaboration, innovation and capacity-building patterns."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "92323476",
+          "reader_title": "Seven-year assessment of the EU-Mediterranean research partnership PRIMA",
+          "reader_what": "Finds PRIMA built dense north-south research networks and shifted coordinating roles towards southern Mediterranean institutions.",
+          "reader_why": "Shows a joint funding programme working as both research instrument and regional diplomacy.",
+          "reader_more": "This article assesses the Partnership for Research and Innovation in the Mediterranean Area over its first seven years, from 2018 to 2024, treating it as a case of regional science diplomacy. Using funded project data, social network analysis and project performance indicators, the author reports dense research networks linking southern Europe with Mediterranean partner countries, and notes that a 2023 eligibility reform triggered new south-south collaboration between Tunisia, Morocco, Egypt and Jordan. Reported outputs include innovations in drought-tolerant crops, wastewater reuse, circular agri-food chains and climate adaptation, more than 16,000 people reached through training, and 41 open datasets. The author recommends that a future phase prioritise scaling and adoption of results.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed programme evaluation and case study",
+            "research_question": "What PRIMA achieved across research collaboration, sustainability objectives and regional power relations in its first seven years.",
+            "main_finding": "PRIMA created dense north-south research networks and, after the 2023 eligibility reform, new south-south links, while southern Mediterranean institutions increasingly took on coordinating and innovation-developer roles.",
+            "method_or_basis": "Analysis of funded project data, social network analysis of collaboration structures, and project-level key performance indicators.",
+            "qualification": "A single-author assessment of a programme the author writes about from close proximity; indicators capture outputs and network structure rather than independently verified impact.",
+            "radar_relevance": "Evidence on how EU-associated joint programming functions as both research funding and regional diplomacy.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://cset.georgetown.edu/wp-content/uploads/CSET-Strengthening-the-U.S.-Semiconductor-Manufacturing-Workforce.pdf": {
       "profile": "deep-reader-offline-v1",
@@ -1336,27 +1398,94 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC140783": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "a7a69c41",
-      "reader_title": "How coordinating bodies make transformative innovation policy work across programme portfolios",
-      "reader_what": "Finds intermediation works through aligned programme portfolios that create synergies across different system levels.",
-      "reader_why": "Offers policymakers a concrete design logic for instruments meant to drive systemic change.",
-      "reader_more": "This Joint Research Centre paper examines systemic intermediation, meaning the coordinating work that connects individual projects to wider transformation goals. It studies the EIT Climate knowledge and innovation community's portfolio using a mixed methods approach, combining interviews with programme managers and social network analysis of food-related innovation projects. The authors identify distinct intermediation activities and network characteristics operating at two system levels. Their conclusion is that a strategically aligned portfolio of programmes and projects is what enables systemic intermediation, producing synergies between interventions and improving complementarity and resource flow between projects, programmes and overarching objectives. They present this as design guidance for policymakers building instruments intended to achieve transformative change.",
+      "identity_hash": "fddc1f84c8b2a92b",
+      "reader_title": "Portfolio intermediation can connect transformative innovation",
+      "reader_what": "A strategically aligned innovation portfolio can enable complementary intermediation across projects, programmes and resource networks.",
+      "reader_why": "Programme managers connect actors and resources that isolated projects cannot coordinate alone.",
+      "reader_more": "The study examines an EIT Climate-KIC food-related innovation portfolio using programme-manager interviews and social-network analysis. It maps how intermediation occurs at project and programme levels and how portfolio structure can support cross-project resource flows. The evidence is a focused portfolio case, so transfer to other programmes should be tested.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed mixed methods study published by a Commission research body",
-        "research_question": "How systemic intermediation operates across system levels when research and innovation policy is delivered through a portfolio of programmes and projects.",
-        "main_finding": "Distinct intermediation activities and network characteristics at two system levels underpin systemic intermediation, and a strategically aligned portfolio enables synergies and resource flows between projects, programmes and strategic objectives.",
-        "method_or_basis": "Semi-structured interviews with programme managers combined with social network analysis of food-related innovation projects in the EIT Climate KIC portfolio.",
-        "qualification": "Based on one portfolio within a single knowledge and innovation community and one thematic subset of projects, so transferability to other instruments is argued rather than demonstrated.",
-        "radar_relevance": "Provides evidence on how EU innovation instruments can be designed to produce systemic rather than project-level effects.",
+        "work_kind": "empirical innovation-policy study",
+        "research_question": "How can portfolio-based intermediation support transformative research and innovation policy?",
+        "main_finding": "Aligned portfolios can support systemic intermediation across projects, programmes and networks.",
+        "method_or_basis": "Semi-structured programme-manager interviews and social-network analysis of an EIT Climate-KIC portfolio.",
+        "qualification": "Single-programme case evidence limits generalisability.",
+        "radar_relevance": "Direct European transformative R&I policy and programme-management evidence.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied JRC repository page https://publications.jrc.ec.europa.eu/repository/handle/JRC140783 is a repository record, not the publication outlet."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The repository metadata identifies DOI 10.1080/13511610.2024.2444535 for the matching journal article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the publisher-version PDF from Utrecht University: https://research-portal.uu.nl/ws/portalfiles/portal/266291094/Systemic_intermediation_for_transformative_research_and_innovation_policy_intermediation_activities_and_networks_enabled_through_a_portfolio_approach.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://research-portal.uu.nl/ws/portalfiles/portal/266291094/Systemic_intermediation_for_transformative_research_and_innovation_policy_intermediation_activities_and_networks_enabled_through_a_portfolio_approach.pdf",
+            "title": "Systemic intermediation for transformative research and innovation policy: intermediation activities and networks enabled through a portfolio approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Utrecht publisher-version PDF establishes the actual journal provenance and full study content."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article studies a European innovation portfolio and how policy intermediaries connect projects and resources for transformative R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:22Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-13T21:09:24Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "a7a69c41",
+          "reader_title": "How coordinating bodies make transformative innovation policy work across programme portfolios",
+          "reader_what": "Finds intermediation works through aligned programme portfolios that create synergies across different system levels.",
+          "reader_why": "Offers policymakers a concrete design logic for instruments meant to drive systemic change.",
+          "reader_more": "This Joint Research Centre paper examines systemic intermediation, meaning the coordinating work that connects individual projects to wider transformation goals. It studies the EIT Climate knowledge and innovation community's portfolio using a mixed methods approach, combining interviews with programme managers and social network analysis of food-related innovation projects. The authors identify distinct intermediation activities and network characteristics operating at two system levels. Their conclusion is that a strategically aligned portfolio of programmes and projects is what enables systemic intermediation, producing synergies between interventions and improving complementarity and resource flow between projects, programmes and overarching objectives. They present this as design guidance for policymakers building instruments intended to achieve transformative change.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed mixed methods study published by a Commission research body",
+            "research_question": "How systemic intermediation operates across system levels when research and innovation policy is delivered through a portfolio of programmes and projects.",
+            "main_finding": "Distinct intermediation activities and network characteristics at two system levels underpin systemic intermediation, and a strategically aligned portfolio enables synergies and resource flows between projects, programmes and strategic objectives.",
+            "method_or_basis": "Semi-structured interviews with programme managers combined with social network analysis of food-related innovation projects in the EIT Climate KIC portfolio.",
+            "qualification": "Based on one portfolio within a single knowledge and innovation community and one thematic subset of projects, so transferability to other instruments is argued rather than demonstrated.",
+            "radar_relevance": "Provides evidence on how EU innovation instruments can be designed to produce systemic rather than project-level effects.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:22Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.58691/man/224300": {
       "profile": "deep-reader-offline-v1",
@@ -1768,27 +1897,94 @@
       ]
     },
     "link:https://doi.org/10.1098/rsos.260721": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "e7f467e7",
-      "reader_title": "Can science diplomacy still protect science as a global public good?",
-      "reader_what": "Identifies strategy, data and people as the three pressure points on science as a shared resource.",
-      "reader_why": "Asks directly whether technological sovereignty is compatible with open collaborative science.",
-      "reader_more": "This article asks whether science diplomacy can safeguard science as a global public good when geopolitical tension constrains collaboration and scientific information carries commercial value. The author organises the problem around three areas. On strategy, the open questions are how to handle research security while preserving academic freedom, whether scientific sanctions are an appropriate response to conflict, and whether technological sovereignty is compatible with science as a shared resource. On data, large datasets underpinning climate and pandemic research are described as at risk from both government deletion policies and appropriation by private companies, while on people, researchers and institutions are increasingly affected by violent conflict and by restrictions on academic freedom. The analysis centres on the EU within a broader international frame.",
+      "identity_hash": "ede541c453d383e6",
+      "reader_title": "Science diplomacy under geopolitical pressure",
+      "reader_what": "Science diplomacy can help protect science as a global public good only by managing openness, security and sovereignty tensions.",
+      "reader_why": "International research cooperation depends on institutions that preserve exchange while addressing legitimate security risks.",
+      "reader_more": "This is a reflective and policy-analytical article rather than a causal empirical evaluation. It examines strategy, data and people, including tensions among academic freedom, open science, research security and technological sovereignty. Its contribution is the structured argument about how science diplomacy should navigate those tensions.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed analytical and normative essay",
-        "research_question": "Whether and how science diplomacy can safeguard science as a global public good under geopolitical pressure.",
-        "main_finding": "The author identifies strategy, data and people as the three decisive challenges, and poses technological sovereignty, scientific sanctions and research security as unresolved tensions with the idea of science as an open collaborative enterprise.",
-        "method_or_basis": "Analytical and explicitly normative argument aimed at academic and policy debate; no new empirical data.",
-        "qualification": "The author states the approach is normative as well as analytical, so the framing embeds a position; the piece raises questions more than it resolves them.",
-        "radar_relevance": "Directly interrogates whether EU technological sovereignty goals are compatible with open international science.",
+        "work_kind": "policy-analytical article",
+        "research_question": "Can science diplomacy help safeguard science as a global public good under geopolitical and commercial pressures?",
+        "main_finding": "It can contribute, but only if security and sovereignty measures do not collapse the openness needed for science.",
+        "method_or_basis": "Conceptual and policy analysis drawing on science-diplomacy practice and governance debates.",
+        "qualification": "Normative/analytical argument; it does not estimate causal effects of specific diplomacy interventions.",
+        "radar_relevance": "Directly relevant to European science diplomacy, research security and international collaboration.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The DOI URL https://doi.org/10.1098/rsos.260721 verified the Royal Society Open Science article identity, but the package did not contain substantive full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1098/rsos.260721 matches Angela Liberatore and the Royal Society Open Science article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery found a legitimate full article copy at https://www.researchgate.net/publication/412163881_Can_science_diplomacy_help_safeguard_science_as_a_global_public_good_Reflections_on_strategy_data_and_people."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.researchgate.net/publication/412163881_Can_science_diplomacy_help_safeguard_science_as_a_global_public_good_Reflections_on_strategy_data_and_people",
+            "title": "Can science diplomacy help safeguard science as a global public good? Reflections on strategy, data and people",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A matching author-accessible full article copy supports the analysis; identity is cross-checked by DOI."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article substantively analyses European science diplomacy, research openness, security and technological sovereignty."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "e7f467e7",
+          "reader_title": "Can science diplomacy still protect science as a global public good?",
+          "reader_what": "Identifies strategy, data and people as the three pressure points on science as a shared resource.",
+          "reader_why": "Asks directly whether technological sovereignty is compatible with open collaborative science.",
+          "reader_more": "This article asks whether science diplomacy can safeguard science as a global public good when geopolitical tension constrains collaboration and scientific information carries commercial value. The author organises the problem around three areas. On strategy, the open questions are how to handle research security while preserving academic freedom, whether scientific sanctions are an appropriate response to conflict, and whether technological sovereignty is compatible with science as a shared resource. On data, large datasets underpinning climate and pandemic research are described as at risk from both government deletion policies and appropriation by private companies, while on people, researchers and institutions are increasingly affected by violent conflict and by restrictions on academic freedom. The analysis centres on the EU within a broader international frame.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed analytical and normative essay",
+            "research_question": "Whether and how science diplomacy can safeguard science as a global public good under geopolitical pressure.",
+            "main_finding": "The author identifies strategy, data and people as the three decisive challenges, and poses technological sovereignty, scientific sanctions and research security as unresolved tensions with the idea of science as an open collaborative enterprise.",
+            "method_or_basis": "Analytical and explicitly normative argument aimed at academic and policy debate; no new empirical data.",
+            "qualification": "The author states the approach is normative as well as analytical, so the framing embeds a position; the piece raises questions more than it resolves them.",
+            "radar_relevance": "Directly interrogates whether EU technological sovereignty goals are compatible with open international science.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://digital-strategy.ec.europa.eu/en/library/study-cloud-and-ai-development-eu": {
       "profile": "deep-reader-offline-v1",
@@ -2710,27 +2906,89 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://doi.org/10.1080/10438599.2026.2710994": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "31a73a84",
-      "reader_title": "Digital infrastructure is the strongest predictor of AI adoption in EU firms",
-      "reader_what": "Digital intensity predicts AI adoption most strongly, with large firms ahead but eastern member states catching up fastest.",
-      "reader_why": "Convergence tests indicate narrowing cross-country disparities in AI diffusion across the EU.",
-      "reader_more": "This paper examines what determines AI adoption among manufacturing and service enterprises across the 27 EU member states, using a balanced panel combining Eurostat's enterprise ICT usage survey, the Digital Intensity Index and the Community Innovation Survey across two waves in 2023 and 2025. Digital infrastructure emerges as the strongest predictor, with the Digital Intensity Index showing a significant positive effect across pooled, random-effects and fixed-effects specifications. Large firms consistently report higher adoption than smaller ones. Central and Eastern European countries still lag Western Europe but record the fastest growth, with Romania showing a 223 percent increase. Tests of sigma and beta convergence indicate narrowing disparities, which the author reads as a catching-up process in AI diffusion across the Union.",
+      "identity_hash": "bee34e070634a42e",
+      "reader_title": "Digital infrastructure predicts EU manufacturing AI uptake",
+      "reader_what": "Better digital infrastructure is the strongest predictor of manufacturing AI adoption, while regional and SME gaps persist.",
+      "reader_why": "Infrastructure and innovation capacity lower practical barriers to adopting AI technologies.",
+      "reader_more": "The study combines Eurostat-based country and firm-size aggregates across two recent waves and estimates pooled, random- and fixed-effects relationships plus convergence measures. It reports a sizeable conditional adoption gap in Central and Eastern Europe but evidence of catch-up. The design uses aggregate observations, so it cannot substitute for firm-level causal evidence.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed quantitative panel study",
-        "research_question": "What determines AI adoption among EU enterprises, and whether cross-country disparities in adoption are narrowing.",
-        "main_finding": "Digital intensity is the strongest and most robust predictor of AI adoption, large firms adopt more than smaller ones, and convergence tests indicate Central and Eastern European states are catching up fastest despite remaining behind.",
-        "method_or_basis": "Balanced panel of 27 member states across 2023 and 2025 survey waves, combining three Eurostat-based datasets, estimated with pooled OLS, random-effects and fixed-effects models.",
-        "qualification": "Only two survey waves, so convergence inference rests on a short series; percentage growth figures such as Romania's are large partly because the starting base is low.",
-        "radar_relevance": "Measures whether AI capability is spreading across the Union or concentrating, with direct implications for cohesion and industrial policy.",
+        "work_kind": "empirical econometric study",
+        "research_question": "Which capabilities explain AI adoption differences in EU manufacturing, and are gaps converging?",
+        "main_finding": "Digital infrastructure is the strongest predictor; CEE and SME gaps remain despite signs of convergence.",
+        "method_or_basis": "EU27 Eurostat ICT/DII/CIS indicators, panel regressions and sigma/beta convergence analysis.",
+        "qualification": "Two-wave aggregate data limit firm-level and causal interpretation.",
+        "radar_relevance": "Direct evidence on EU manufacturing digitalisation, AI adoption and regional innovation capacity.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The package had no substantive stored text for https://doi.org/10.1080/10438599.2026.2710994."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolving DOI 10.1080/10438599.2026.2710994 recovered the matching full Taylor & Francis article at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2710994."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2710994",
+            "title": "Digital infrastructure, innovation capacity, and AI technology adoption in EU manufacturing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher full text verifies the EU27 data, modelling and convergence analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly studies AI adoption and digital/innovation capacity across EU manufacturing."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "31a73a84",
+          "reader_title": "Digital infrastructure is the strongest predictor of AI adoption in EU firms",
+          "reader_what": "Digital intensity predicts AI adoption most strongly, with large firms ahead but eastern member states catching up fastest.",
+          "reader_why": "Convergence tests indicate narrowing cross-country disparities in AI diffusion across the EU.",
+          "reader_more": "This paper examines what determines AI adoption among manufacturing and service enterprises across the 27 EU member states, using a balanced panel combining Eurostat's enterprise ICT usage survey, the Digital Intensity Index and the Community Innovation Survey across two waves in 2023 and 2025. Digital infrastructure emerges as the strongest predictor, with the Digital Intensity Index showing a significant positive effect across pooled, random-effects and fixed-effects specifications. Large firms consistently report higher adoption than smaller ones. Central and Eastern European countries still lag Western Europe but record the fastest growth, with Romania showing a 223 percent increase. Tests of sigma and beta convergence indicate narrowing disparities, which the author reads as a catching-up process in AI diffusion across the Union.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed quantitative panel study",
+            "research_question": "What determines AI adoption among EU enterprises, and whether cross-country disparities in adoption are narrowing.",
+            "main_finding": "Digital intensity is the strongest and most robust predictor of AI adoption, large firms adopt more than smaller ones, and convergence tests indicate Central and Eastern European states are catching up fastest despite remaining behind.",
+            "method_or_basis": "Balanced panel of 27 member states across 2023 and 2025 survey waves, combining three Eurostat-based datasets, estimated with pooled OLS, random-effects and fixed-effects models.",
+            "qualification": "Only two survey waves, so convergence inference rests on a short series; percentage growth figures such as Romania's are large partly because the starting base is low.",
+            "radar_relevance": "Measures whether AI capability is spreading across the Union or concentrating, with direct implications for cohesion and industrial policy.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://www.eurekanetwork.org/impact/malta-microbiome-insights-to-boost-healthy-ageing/": {
       "profile": "deep-reader-offline-v1",
@@ -3099,27 +3357,115 @@
       "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
     },
     "link:https://era.gv.at/news-items/ecs-call-for-evidence-on-european-ocean-research-and-innovation-strategy-is-closing-soon/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "ba8ebf7c",
-      "reader_title": "European Commission consults on a future European Ocean Research and Innovation Strategy",
-      "reader_what": "The Commission opened a call for evidence to shape a European Ocean Research and Innovation Strategy.",
-      "reader_why": "Targets fragmented ocean research governance and infrastructure, a stated barrier to European competitiveness and strategic autonomy.",
-      "reader_more": "The call for evidence opened on 15 June 2026 and closed on 2 August 2026. The planned strategy is presented as a flagship initiative under the EU Water Resilience Strategy and the European Ocean Pact, building on the research and innovation framework programme and the mission to restore oceans and waters by 2030. Stated aims include reducing fragmentation of research and innovation governance including research infrastructures, taking a source-to-sea approach to pollution and resource management, and addressing how new solutions are financed. This record announces a consultation; it is not a strategy or a result.",
+      "identity_hash": "6cf5b2676de4ca54",
+      "reader_title": "European Commission consults on a future Ocean and Water Research and Innovation Strategy",
+      "reader_what": "The Commission opened two calls for evidence to shape an Ocean and Water R&I Strategy.",
+      "reader_why": "Targets fragmented EU, national and regional research coordination and market barriers the Commission identifies as limiting competitiveness.",
+      "reader_more": "The European Commission launched two calls for evidence on 15 June 2026, one on ocean research and innovation and one on water resilience. Both closed on 2 August 2026 through the Have Your Say portal. The planned strategy sits under the European Ocean Pact and the EU Water Resilience Strategy and is expected to be adopted by the end of 2026. Stated aims include structuring research priorities and investment under the next Multiannual Financial Framework, Horizon Europe 2028-2034 and the European Competitiveness Fund. This record documents a consultation step, not an adopted strategy or any measured result.",
       "deep_analysis": {
-        "work_kind": "current development (policy consultation)",
+        "work_kind": "current development (policy consultation announcement)",
         "research_question": "",
-        "main_finding": "A consultation was run to inform a future European Ocean Research and Innovation Strategy; no strategy content is settled.",
-        "method_or_basis": "Secondary news item on a national ERA portal reporting a Commission call for evidence",
-        "qualification": "Consultation stage only; the deadline has passed but this record reports no outcome.",
-        "radar_relevance": "Signals a forthcoming EU research and innovation strategy covering ocean research governance, infrastructures and financing.",
+        "main_finding": "Two calls for evidence were opened on 15 June 2026 and closed on 2 August 2026 to inform an Ocean and Water R&I Strategy expected by end 2026; no strategy content is settled.",
+        "method_or_basis": "Secondary news item on the Austrian ERA portal, verified against the DG Research and Innovation news release of 15 June 2026 and Have Your Say initiative reference 16392.",
+        "qualification": "A consultation launch, not a decision, outcome or measured effect. The strategy was not adopted as of mid-September 2026. The ERA item covers only the ocean call and uses a narrower strategy name than the Commission does.",
+        "radar_relevance": "A dated, verifiable step in EU research-policy formation that the Commission links directly to Horizon Europe 2028-2034, the next MFF and the European Competitiveness Fund.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Direct re-fetch of era.gv.at/news-items/ecs-call-for-evidence-on-european-ocean-research-and-innovation-strategy-is-closing-soon/ was refused by the fetch tool (URL not present in a prior search result). The package's stored full text of that page was used as the work text instead; it is a complete short news item, not an abstract."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "ERA Portal Austria news items carry no DOI and none is present in the scanner metadata or the stored page text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Ran query: \"European ocean research and innovation strategy\" call for evidence Commission 2026. The ERA headline itself did not surface, but the underlying initiative was confirmed by Croatia's Ministry of Science (mzom.gov.hr) giving identical dates (15 June - 2 August 2026) and the same source-to-sea and fragmentation objectives."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_attempted",
+            "note": "Not run as a separate step: the official issuing body was reached directly at step 5, so no further identity disambiguation was needed."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Ran query: ec.europa.eu \"have your say\" European Ocean Research Innovation Strategy call for evidence initiative. Located and fetched the Directorate-General for Research and Innovation news release of 15 June 2026 in full, which names the Have Your Say ocean initiative reference 16392 and confirms both calls closed 02/08/2026."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Identity and substantive content were both established at step 5; no residual identity ambiguity remained to resolve."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_news_release",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/commission-launches-two-calls-evidence-future-ocean-and-water-research-and-innovation-strategy-2026-06-15_en",
+            "title": "Commission launches two calls for evidence on the future ocean and water research and innovation strategy",
+            "evidence_used": true
+          },
+          {
+            "kind": "national_ministry_corroboration",
+            "url": "https://mzom.gov.hr/news/european-commission-opens-three-calls-for-evidence-on-water-ocean-and-horizon-europe-partnership-initiatives/7894",
+            "title": "European Commission Opens Three Calls for Evidence on Water, Ocean and Horizon Europe Partnership Initiatives",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied ERA Portal Austria page is a secondary news item; its factual content was checked line-by-line against the Commission's own DG R&I release. All dates, the flagship framing under the European Ocean Pact and EU Water Resilience Strategy, and the fragmentation/source-to-sea objectives match. One discrepancy: the Commission names the initiative the Ocean AND Water R&I Strategy and launched two calls; the ERA item reports only the ocean call under a narrower name."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "Reports a real, dated step in EU research-policy formation: a Commission call for evidence under the European Ocean Pact, explicitly tied to the next MFF, Horizon Europe 2028-2034 and the European Competitiveness Fund. Confirmed against the issuing body. Moved from A to C because the object is a policy-process event reported in a news item, not a substantive research or analytical work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:21Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-b-20260913T200615Z-bd827bb69a7e",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "ba8ebf7c",
+          "reader_title": "European Commission consults on a future European Ocean Research and Innovation Strategy",
+          "reader_what": "The Commission opened a call for evidence to shape a European Ocean Research and Innovation Strategy.",
+          "reader_why": "Targets fragmented ocean research governance and infrastructure, a stated barrier to European competitiveness and strategic autonomy.",
+          "reader_more": "The call for evidence opened on 15 June 2026 and closed on 2 August 2026. The planned strategy is presented as a flagship initiative under the EU Water Resilience Strategy and the European Ocean Pact, building on the research and innovation framework programme and the mission to restore oceans and waters by 2030. Stated aims include reducing fragmentation of research and innovation governance including research infrastructures, taking a source-to-sea approach to pollution and resource management, and addressing how new solutions are financed. This record announces a consultation; it is not a strategy or a result.",
+          "deep_analysis": {
+            "work_kind": "current development (policy consultation)",
+            "research_question": "",
+            "main_finding": "A consultation was run to inform a future European Ocean Research and Innovation Strategy; no strategy content is settled.",
+            "method_or_basis": "Secondary news item on a national ERA portal reporting a Commission call for evidence",
+            "qualification": "Consultation stage only; the deadline has passed but this record reports no outcome.",
+            "radar_relevance": "Signals a forthcoming EU research and innovation strategy covering ocean research governance, infrastructures and financing.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:21Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.13166/jms/224780": {
       "profile": "deep-reader-offline-v1",
@@ -3351,27 +3697,89 @@
       "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
     },
     "link:https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "eefe2ff2",
-      "reader_title": "Targeted consultation for stakeholders in the EU Dual-Use Regulation evaluation",
-      "reader_what": "The Commission opened targeted surveys for business, research and authorities feeding the required Dual-Use Regulation evaluation.",
-      "reader_why": "Research institutions and academia are explicitly consulted, because export controls condition international research collaboration.",
-      "reader_more": "Article 26(4) of Regulation (EU) 2021/821 obliges the Commission to evaluate the Regulation, including Article 5 on exports of cyber-surveillance technology, and to report to the European Parliament, the Council and the European Economic and Social Committee between 10 September 2026 and 10 September 2028. This targeted consultation opened on 23 July 2026 with a deadline of 11 September 2026, aimed at stakeholders who use or interact with the Regulation, including businesses, trade associations and research institutes. The stated scope covers whether the Regulation has prevented proliferation and protected fundamental rights while minimising burden, maintaining a level playing field, and promoting innovation and international research collaboration. No findings exist at this stage.",
+      "identity_hash": "daafa59d06b1fdf2",
+      "reader_title": "EU dual-use rules enter formal evaluation",
+      "reader_what": "The Commission sought specialist evidence for the mandated evaluation of EU dual-use export controls.",
+      "reader_why": "Export controls can shape innovation and international research collaboration.",
+      "reader_more": "The consultation targeted businesses, public authorities, research institutes and academia that use or interact with Regulation (EU) 2021/821. Its evaluation scope includes security, compliance burden, industrial competitiveness, innovation and international research collaboration. This is a consultation stage, not an evaluation result.",
       "deep_analysis": {
         "work_kind": "current development (policy consultation)",
-        "research_question": "",
-        "main_finding": "A targeted stakeholder consultation was opened to inform the mandated evaluation of the EU Dual-Use Regulation.",
-        "method_or_basis": "Official European Commission trade policy consultation page",
-        "qualification": "Process step only; the evaluation report is due between September 2026 and September 2028 and no conclusions exist yet.",
-        "radar_relevance": "Export controls directly condition international research collaboration and dual-use technology transfer.",
+        "research_question": "How well is the EU Dual-Use Regulation meeting its objectives and what should improve?",
+        "main_finding": "The Commission ran a targeted stakeholder consultation to inform the Regulation’s mandated evaluation.",
+        "method_or_basis": "Official Commission consultation page and legal/evaluation scope.",
+        "qualification": "No evaluation findings are available from this consultation itself.",
+        "radar_relevance": "Directly concerns EU dual-use governance, research collaboration, innovation and strategic autonomy.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the official European Commission consultation page at https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en; it contains the consultation scope, audience, legal basis and dates."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this European Commission policy consultation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_consultation",
+            "url": "https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en",
+            "title": "Targeted consultation on the overall evaluation of the Dual-Use Regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission text verifies a targeted consultation feeding the mandated evaluation and explicitly covers innovation and international research collaboration."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "A real EU regulatory-evaluation consultation directly affecting dual-use research collaboration closed after collecting specialist stakeholder evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:21Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "eefe2ff2",
+          "reader_title": "Targeted consultation for stakeholders in the EU Dual-Use Regulation evaluation",
+          "reader_what": "The Commission opened targeted surveys for business, research and authorities feeding the required Dual-Use Regulation evaluation.",
+          "reader_why": "Research institutions and academia are explicitly consulted, because export controls condition international research collaboration.",
+          "reader_more": "Article 26(4) of Regulation (EU) 2021/821 obliges the Commission to evaluate the Regulation, including Article 5 on exports of cyber-surveillance technology, and to report to the European Parliament, the Council and the European Economic and Social Committee between 10 September 2026 and 10 September 2028. This targeted consultation opened on 23 July 2026 with a deadline of 11 September 2026, aimed at stakeholders who use or interact with the Regulation, including businesses, trade associations and research institutes. The stated scope covers whether the Regulation has prevented proliferation and protected fundamental rights while minimising burden, maintaining a level playing field, and promoting innovation and international research collaboration. No findings exist at this stage.",
+          "deep_analysis": {
+            "work_kind": "current development (policy consultation)",
+            "research_question": "",
+            "main_finding": "A targeted stakeholder consultation was opened to inform the mandated evaluation of the EU Dual-Use Regulation.",
+            "method_or_basis": "Official European Commission trade policy consultation page",
+            "qualification": "Process step only; the evaluation report is due between September 2026 and September 2028 and no conclusions exist yet.",
+            "radar_relevance": "Export controls directly condition international research collaboration and dual-use technology transfer.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:21Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC146654": {
       "profile": "deep-reader-offline-v1",
@@ -4104,27 +4512,89 @@
       ]
     },
     "link:https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "8057da8a",
-      "reader_title": "Fifty-five semiconductor insiders rate the geopolitical risks facing Europe's chip supply to 2031",
-      "reader_what": "Respondents rank export controls on key manufacturing inputs and military conflict over Taiwan as the severest threats.",
-      "reader_why": "Without chip access Europe cannot sustain its medical, defence and other critical industries.",
-      "reader_more": "Fifty-five respondents, predominantly from the semiconductor industry and research and technology organisations, anonymously scored twenty threats on two separate zero-to-ten scales, one for security of supply and one for European competitiveness. The overall picture they give for the period to late 2031 is pessimistic. Alongside export controls and Taiwan, the paper points to unfair competition and high European energy prices. Its recommendations are procedural rather than industrial: monthly risk monitoring, medium-term risk projections, and war-gaming exercises that break down silos between industry and policymakers. This is elicited expert perception rather than measured risk, and it is a first iteration with no earlier round to compare against.",
+      "identity_hash": "3baa17e4b7f6814e",
+      "reader_title": "Europe’s semiconductor risks ranked for 2026–2031",
+      "reader_what": "Industry and research respondents rank export controls and a Taiwan conflict among Europe’s highest semiconductor risks.",
+      "reader_why": "Concentrated dependencies make geopolitical shocks capable of disrupting EU supply and competitiveness.",
+      "reader_more": "The report surveys 55 semiconductor-industry and research-technology respondents and scores 20 geopolitical threats on 0–10 scales. It highlights export controls on key manufacturing inputs and a Taiwan conflict among major risks. It recommends continuous risk monitoring, medium-term projections and crisis stress testing rather than treating the scores as forecasts.",
       "deep_analysis": {
-        "work_kind": "expert survey / policy report",
-        "research_question": "Which geopolitical risks to semiconductor supply and European competitiveness do ecosystem experts judge most severe through 2031?",
-        "main_finding": "Curtailment of key manufacturing inputs through export controls and a military conflict over Taiwan emerge as the highest-scored threats, within a generally bleak outlook for European semiconductor supply and competitiveness.",
-        "method_or_basis": "Anonymous survey of 55 industry, policy and think tank respondents scoring 20 threats on two 0-to-10 scales; PDF excerpt supplied in package.",
-        "qualification": "Subjective expert perception from a predominantly industry sample, not measured probability; first iteration with no baseline, and only an excerpt of the report was available here.",
-        "radar_relevance": "Provides a structured expert risk picture for a technology the EU treats as foundational to industrial and defence capability.",
-        "confidence": "medium",
+        "work_kind": "institutional survey report",
+        "research_question": "Which geopolitical developments pose the largest risks to Europe’s semiconductor ecosystem through 2031?",
+        "main_finding": "Respondents identify several high-impact supply and competitiveness risks, especially around export controls and Taiwan.",
+        "method_or_basis": "Survey of 55 ecosystem/RTO respondents scoring 20 threats, followed by policy analysis.",
+        "qualification": "Expert risk scores are perceptions and scenarios, not observed probabilities or causal estimates.",
+        "radar_relevance": "Directly concerns EU semiconductor industrial capability, resilience and technology security.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied Institut Montaigne PDF https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf; it is the matching report and contains the survey design, threat scores and recommendations."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is used for this Institut Montaigne policy report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_pdf",
+            "url": "https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf",
+            "title": "The EU Semiconductor Geopolitical Risk Survey: Outlook for 2026–2031",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official report PDF supports the survey methodology, risk ranking and policy recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The report directly assesses geopolitical risks to Europe’s semiconductor supply, competitiveness and technology capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "8057da8a",
+          "reader_title": "Fifty-five semiconductor insiders rate the geopolitical risks facing Europe's chip supply to 2031",
+          "reader_what": "Respondents rank export controls on key manufacturing inputs and military conflict over Taiwan as the severest threats.",
+          "reader_why": "Without chip access Europe cannot sustain its medical, defence and other critical industries.",
+          "reader_more": "Fifty-five respondents, predominantly from the semiconductor industry and research and technology organisations, anonymously scored twenty threats on two separate zero-to-ten scales, one for security of supply and one for European competitiveness. The overall picture they give for the period to late 2031 is pessimistic. Alongside export controls and Taiwan, the paper points to unfair competition and high European energy prices. Its recommendations are procedural rather than industrial: monthly risk monitoring, medium-term risk projections, and war-gaming exercises that break down silos between industry and policymakers. This is elicited expert perception rather than measured risk, and it is a first iteration with no earlier round to compare against.",
+          "deep_analysis": {
+            "work_kind": "expert survey / policy report",
+            "research_question": "Which geopolitical risks to semiconductor supply and European competitiveness do ecosystem experts judge most severe through 2031?",
+            "main_finding": "Curtailment of key manufacturing inputs through export controls and a military conflict over Taiwan emerge as the highest-scored threats, within a generally bleak outlook for European semiconductor supply and competitiveness.",
+            "method_or_basis": "Anonymous survey of 55 industry, policy and think tank respondents scoring 20 threats on two 0-to-10 scales; PDF excerpt supplied in package.",
+            "qualification": "Subjective expert perception from a predominantly industry sample, not measured probability; first iteration with no baseline, and only an excerpt of the report was available here.",
+            "radar_relevance": "Provides a structured expert risk picture for a technology the EU treats as foundational to industrial and defence capability.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://www.interface-eu.org/publications/download/public-compute-applied-ai-startups": {
       "profile": "deep-reader-offline-v1",
@@ -5906,27 +6376,100 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://era.gv.at/news-items/study-shows-growing-progress-on-research-assessment-reform-across-europe/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "5f56e4ec",
-      "reader_title": "Independent study finds research assessment reform spreading but uneven across Europe",
-      "reader_what": "Commission-commissioned baseline study finds broad and growing engagement with assessment reform, but uneven progress between countries.",
-      "reader_why": "Provides the first evidence baseline for judging whether assessment reform commitments are being implemented.",
-      "reader_more": "The European Commission has published an independent expert study giving an evidence-informed baseline assessment of progress under the Agreement on Reforming Research Assessment. It reviews how signatory organisations, mostly members of the Coalition for Advancing Research Assessment, are turning commitments into practice, using qualitative and quantitative evidence. It finds engagement broad and increasing, with many research organisations already changing how researchers and projects are evaluated, moving beyond a narrow focus on publications and metrics towards recognising a wider range of contributions, skills and career paths. Progress is uneven across countries and institutions, reflecting different starting points. The study explicitly does not judge success or failure, but records a transition from commitment towards implementation at scale.",
+      "identity_hash": "e8f5f1289ef1adcf",
+      "reader_title": "Research-assessment reform moves toward implementation",
+      "reader_what": "European reform signatories report broader assessment practices and concrete implementation steps, with progress still uneven.",
+      "reader_why": "Action plans and interviews show commitments translating into institutional changes.",
+      "reader_more": "The study analyses submitted action plans and interviews with reform signatories. It finds growing engagement with broader criteria and reduced reliance on narrow publication metrics, while implementation remains uneven. The work does not claim that the reform has already succeeded everywhere.",
       "deep_analysis": {
-        "work_kind": "independent evaluation study reported in a news item",
-        "research_question": "How far signatories of the Agreement on Reforming Research Assessment have implemented their commitments.",
-        "main_finding": "Engagement with research assessment reform is broad and growing across Europe, with concrete changes to evaluation practice under way, but progress differs substantially between countries and institutions.",
-        "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the Commission-published study",
-        "qualification": "A baseline stocktake by design, covering self-selected signatories, and it does not assess whether reforms improve evaluation outcomes.",
-        "radar_relevance": "Measures implementation of a flagship European Research Area reform affecting how researchers are assessed.",
+        "work_kind": "empirical policy study",
+        "research_question": "How are European research organisations implementing research-assessment reform commitments?",
+        "main_finding": "Implementation is advancing beyond formal commitments, but at different speeds across institutions.",
+        "method_or_basis": "Quantitative review of submitted action plans plus qualitative content analysis and in-depth interviews.",
+        "qualification": "The study tracks implementation evidence rather than proving downstream research-quality effects.",
+        "radar_relevance": "Direct evidence on reform of European research institutions and assessment systems.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied ERA Portal page at https://era.gv.at/news-items/study-shows-growing-progress-on-research-assessment-reform-across-europe/ is a secondary news item pointing to the underlying Commission study."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The official Publications Office record identifies DOI 10.2777/5429449 and the matching Commission report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the official Publications Office record at https://op.europa.eu/en/publication-detail/-/publication/5cf35453-703e-11f1-ae88-01aa75ed71a1/language-en with report identity, author and method description."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publication_record",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/5cf35453-703e-11f1-ae88-01aa75ed71a1/language-en",
+            "title": "Implementing research assessment reform: Insights from ARRA action plans and interviews with signatories",
+            "evidence_used": true
+          },
+          {
+            "kind": "secondary_summary",
+            "url": "https://era.gv.at/news-items/study-shows-growing-progress-on-research-assessment-reform-across-europe/",
+            "title": "Study shows growing progress on research assessment reform across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The underlying Commission report, not the ERA news headline, is the verified work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The study directly evaluates implementation of European research-assessment reform using signatory action plans and interviews."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "5f56e4ec",
+          "reader_title": "Independent study finds research assessment reform spreading but uneven across Europe",
+          "reader_what": "Commission-commissioned baseline study finds broad and growing engagement with assessment reform, but uneven progress between countries.",
+          "reader_why": "Provides the first evidence baseline for judging whether assessment reform commitments are being implemented.",
+          "reader_more": "The European Commission has published an independent expert study giving an evidence-informed baseline assessment of progress under the Agreement on Reforming Research Assessment. It reviews how signatory organisations, mostly members of the Coalition for Advancing Research Assessment, are turning commitments into practice, using qualitative and quantitative evidence. It finds engagement broad and increasing, with many research organisations already changing how researchers and projects are evaluated, moving beyond a narrow focus on publications and metrics towards recognising a wider range of contributions, skills and career paths. Progress is uneven across countries and institutions, reflecting different starting points. The study explicitly does not judge success or failure, but records a transition from commitment towards implementation at scale.",
+          "deep_analysis": {
+            "work_kind": "independent evaluation study reported in a news item",
+            "research_question": "How far signatories of the Agreement on Reforming Research Assessment have implemented their commitments.",
+            "main_finding": "Engagement with research assessment reform is broad and growing across Europe, with concrete changes to evaluation practice under way, but progress differs substantially between countries and institutions.",
+            "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the Commission-published study",
+            "qualification": "A baseline stocktake by design, covering self-selected signatories, and it does not assess whether reforms improve evaluation outcomes.",
+            "radar_relevance": "Measures implementation of a flagship European Research Area reform affecting how researchers are assessed.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/esfri-eosc-task-force-publishes-report-on-eosc-and-research-infrastructures/": {
       "profile": "deep-reader-offline-v1",
@@ -7826,6 +8369,71 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-13T18:30:08Z",
       "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
+    },
+    "link:https://doi.org/10.54648/leie2026014": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "35534b24",
+      "identity_hash": "cd8c33b905ab6a76",
+      "reader_title": "Investment screening reaches technology and know-how",
+      "reader_what": "EU, US and UK screening regimes increasingly treat technology transfer as part of economic and national security.",
+      "reader_why": "Controls can reach intangible knowledge flows as well as ownership transactions.",
+      "reader_more": "The article compares investment-screening and security approaches across the EU, United States and United Kingdom. It argues these regimes sit within broader economic-security strategies and may affect formal and informal technology transfers, including university knowledge. This is legal and doctrinal analysis, not an impact evaluation of screening outcomes.",
+      "deep_analysis": {
+        "work_kind": "legal/doctrinal article",
+        "research_question": "How do investment-screening regimes address technology transfers under geopolitical competition?",
+        "main_finding": "Screening is increasingly embedded in wider security policy and can extend to intangible strategic know-how.",
+        "method_or_basis": "Comparative legal and policy analysis of EU, US and UK regimes and related instruments.",
+        "qualification": "The article analyses legal reach and policy direction rather than estimating causal economic effects.",
+        "radar_relevance": "Directly relevant to EU technology security, knowledge transfer and research/innovation governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The DOI URL https://doi.org/10.54648/leie2026014 verified the journal article identity but did not provide accessible substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.54648/leie2026014 matches the Legal Issues of Economic Integration article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the matching manuscript from SSRN at https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6639258."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6639258",
+            "title": "Investment Screening and Technology Transfers in the Times of Geopolitical Upheaval",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The SSRN manuscript matches the final article identity and provides substantive legal analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly analyses EU and allied investment screening as it applies to strategic technology and knowledge transfer."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-13T18:30:09Z",
+  "updated_at": "2026-09-13T21:09:24Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -64,6 +64,90 @@
       ],
       "updated_at": "2026-09-13T18:30:09Z",
       "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
+    },
+    "link:https://era.gv.at/news-items/ecs-call-for-evidence-on-european-ocean-research-and-innovation-strategy-is-closing-soon/": {
+      "fields": {
+        "type": "current development",
+        "text_mode": "full_text",
+        "event_status": "closed"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Scanner typed this as a 'research/policy paper'; it is a short secondary news announcement of a consultation, with no research content. Stored text is the complete item, not an abstract. The call for evidence closed 2 August 2026 per the Commission release, so the event is closed, while the strategy itself remains unadopted as of 13 September 2026.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/commission-launches-two-calls-evidence-future-ocean-and-water-research-and-innovation-strategy-2026-06-15_en",
+        "https://mzom.gov.hr/news/european-commission-opens-three-calls-for-evidence-on-water-ocean-and-horizon-europe-partnership-initiatives/7894"
+      ],
+      "updated_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-b-20260913T200615Z-bd827bb69a7e"
+    },
+    "link:https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en": {
+      "fields": {
+        "authors": "European Commission, Directorate-General for Trade and Economic Security",
+        "source": "European Commission, Directorate-General for Trade and Economic Security",
+        "type": "policy consultation",
+        "event_status": "closed"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official page identifies DG Trade and Economic Security, describes a consultation rather than a study, and shows the 11 September 2026 deadline has passed.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en"
+      ],
+      "updated_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0"
+    },
+    "link:https://era.gv.at/news-items/study-shows-growing-progress-on-research-assessment-reform-across-europe/": {
+      "fields": {
+        "title": "Implementing research assessment reform: Insights from ARRA action plans and interviews with signatories",
+        "authors": "Karen Stroobants",
+        "source": "European Commission, Directorate-General for Research and Innovation / Publications Office of the European Union",
+        "date": "2026-06-24",
+        "type": "formal study / report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official Publications Office record provides the underlying report title, author, issuer and release date; the scanner captured a secondary ERA news headline.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://op.europa.eu/en/publication-detail/-/publication/5cf35453-703e-11f1-ae88-01aa75ed71a1/language-en",
+        "https://era.gv.at/news-items/study-shows-growing-progress-on-research-assessment-reform-across-europe/"
+      ],
+      "updated_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0"
+    },
+    "link:https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf": {
+      "fields": {
+        "authors": "Joris Teer; Pierre Sel"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report identifies Joris Teer and Pierre Sel as authors; the scanner listed only Teer.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf"
+      ],
+      "updated_at": "2026-09-13T21:09:23Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC140783": {
+      "fields": {
+        "authors": "Christoph Brodnik; Cristian Matti; Oscar Yandy Romero-Goyeneche",
+        "source": "Innovation: The European Journal of Social Science Research",
+        "date": "2025-03-12",
+        "type": "peer-reviewed article"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The recovered publisher-version PDF shows the work is a journal article published online 12 March 2025; the JRC page is only a repository record.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://research-portal.uu.nl/ws/portalfiles/portal/266291094/Systemic_intermediation_for_transformative_research_and_innovation_policy_intermediation_activities_and_networks_enabled_through_a_portfolio_approach.pdf"
+      ],
+      "updated_at": "2026-09-13T21:09:24Z",
+      "deep_scan_package_id": "worker-a-20260913T200538Z-f3134e85edf0"
     }
   }
 }
