@@ -3,29 +3,29 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **21**
-- Still needing V2 verification: **647**
+- Authoritative V2 verified: **33**
+- Still needing V2 verification: **635**
 - Currently assigned to workers: **72**
 - Deferred after exhaustive recovery: **0**
-- Pending and not yet assigned: **575**
+- Pending and not yet assigned: **563**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260913T211800Z-b902da86ea79`
+- Current package: `worker-a-20260913T214350Z-47330b640b29`
 - Assigned unresolved records: **36**
-  1. `link:https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research/`
-  2. `link:https://doi.org/10.26565/2786-4995-2026-2-14`
-  3. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147778`
-  4. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC146654`
-  5. `link:https://era.gv.at/news-items/leru-urges-safeguards-for-dual-use-research-in-fp10/`
-  6. `link:https://doi.org/10.1007/s11135-026-02824-9`
-  7. `link:https://doi.org/10.51865/cejgsd.2026.8.1.1`
-  8. `link:https://digital-strategy.ec.europa.eu/en/library/study-cloud-and-ai-development-eu`
+  1. `link:https://doi.org/10.19062/2247-3173.2026.27.30`
+  2. `link:https://doi.org/10.1515/jdis-2025-0374`
+  3. `link:https://doi.org/10.58691/man/224300`
+  4. `link:https://doi.org/10.3390/world7080135`
+  5. `link:https://commission.europa.eu/document/download/11c2eb97-6820-4a07-94c6-db3d684cefb8_en?filename=rtd_mp_2026_en.pdf`
+  6. `link:https://doi.org/10.3390/su18136912`
+  7. `link:https://doi.org/10.1093/scipol/scag060`
+  8. `link:https://era.gv.at/news-items/marie-curie-alumni-association-welcomes-eu-proposal-for-a-framework-on-science-diplomacy/`
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260913T211810Z-4ade465bcac9`
+- Current package: `worker-b-20260913T214423Z-4ade465bcac9`
 - Assigned unresolved records: **36**
   1. `link:https://www.elgaronline.com/doi/10.4337/9781035365616.00011`
   2. `link:https://doi.org/10.24818/aras/2026/7/2.03`
