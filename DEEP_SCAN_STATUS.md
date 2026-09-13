@@ -3,29 +3,29 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **168**
-- Still needing V2 verification: **500**
-- Currently assigned to workers: **84**
+- Authoritative V2 verified: **186**
+- Still needing V2 verification: **482**
+- Currently assigned to workers: **72**
 - Deferred after exhaustive recovery: **3**
-- Pending and not yet assigned: **413**
+- Pending and not yet assigned: **407**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260913T233411Z-8fd374ecdc27`
-- Assigned unresolved records: **48**
-  1. `link:https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/`
-  2. `link:https://erc.europa.eu/sites/default/files/2024-02/report_democracy.pdf`
-  3. `link:https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en`
-  4. `link:https://www.eurekanetwork.org/wp-content/uploads/2026/08/Switzerland-2025-2026-Eureka-Chair-year-in-review.pdf`
-  5. `link:https://eismea.ec.europa.eu/document/download/9951fab9-e030-4305-9c11-16a52b2b8b96_en?filename=wp-10-european-innovation-ecosystems_horizon-2026-2027_en.pdf`
-  6. `link:https://hadea.ec.europa.eu/calls-proposals/using-space-earth-telecommunication-and-earth-observation-horizon-europe-space-2026-calls_en`
-  7. `link:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf`
-  8. `link:https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf`
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260913T233630Z-5e483d6a447f`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1093/scipol/scag041`
+  2. `link:https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028/`
+  3. `link:https://ecas.org/cdn-cgi/l/email-protection#80e9eee6efc0e5e3e1f3aeeff2e7`
+  4. `link:https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/innovation-beyond-europes-borders/`
+  5. `link:https://era.gv.at/news-items/open-access-publishing-platform-open-research-europe-is-entering-a-new-phase-of-operation/`
+  6. `link:https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/a-40-year-old-framework-for-global-innovation-cooperation-has-never-been-more-relevant/`
+  7. `link:https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/trends-in-collaborative-innovation-over-four-decades/`
+  8. `link:https://merics.org/sites/default/files/2026-04/MER-RZ-Report-Embodied-AI-260422-Web.pdf`
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260913T233424Z-308e4c5b3b41`
+- Current package: `worker-b-20260913T233643Z-308e4c5b3b41`
 - Assigned unresolved records: **36**
   1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/`
   2. `link:https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/`

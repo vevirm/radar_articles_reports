@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-13T23:33:47Z",
+  "generated_at": "2026-09-13T23:35:57Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-offline-v1",
@@ -1130,27 +1130,84 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "2a8254bf",
-      "reader_title": "European study warns lunar polar science sites could be contaminated before they are understood",
-      "reader_what": "Review identifies contamination risks to permanently shadowed lunar regions and recommends monitoring and site prioritisation.",
-      "reader_why": "These regions hold volatile records relevant to the origin of water and prebiotic chemistry.",
-      "reader_more": "The European Science Foundation coordinated this review for the European Space Agency's Independent Safety Office, drawing on experts from eight European universities. Permanently shadowed regions near the lunar poles have trapped volatiles including water over billions of years, making them both a scientific archive and a target for extracting resources on site. With many robotic and crewed missions now planned for the south pole, the study warns that spacecraft outgassing, propulsion and surface activity could introduce organic and biological contamination. It identifies knowledge gaps, recommends mitigation based on modelling, monitoring and environmental impact assessment, and calls for contamination traceability and ground-truth baseline data. It proposes prioritising sites and applying timing restrictions to avoid a disorderly rush.",
+      "identity_hash": "9d171f36e0b83618",
+      "reader_title": "European review flags contamination risks to pristine lunar polar science sites",
+      "reader_what": "Review identifies contamination risks to permanently shadowed lunar regions and recommends monitoring, baselines and site prioritisation.",
+      "reader_why": "Pristine polar volatiles preserve scientific records that missions could irreversibly contaminate.",
+      "reader_more": "The review was coordinated by the European Science Foundation for ESA’s Independent Safety Office with experts from eight European universities. It recommends baseline measurements, contamination modelling, monitoring, traceability and environmental assessment before intensive activity reaches sensitive lunar sites.",
       "deep_analysis": {
-        "work_kind": "expert review and recommendations study commissioned by a space agency",
-        "research_question": "How lunar exploration activity could contaminate permanently shadowed regions, and what should be done now to protect their scientific value.",
-        "main_finding": "Contamination risk to permanently shadowed regions is rising quickly with mission density, significant knowledge gaps remain about these regions as scientific archives, and mitigation should combine modelling, monitoring, impact assessment, contamination traceability and prioritised, time-restricted site access.",
-        "method_or_basis": "Expert consortium review of current understanding of organic and biological contamination pathways, conducted for ESA's Independent Safety Office.",
-        "qualification": "Recommendations are advisory and depend on international adoption, since planetary protection under COSPAR policy is not binding on all actors; the study identifies gaps rather than resolving them.",
-        "radar_relevance": "A European scientific body shaping the governance of an emerging area of international competition in space.",
+        "work_kind": "scientific review",
+        "research_question": "How can missions protect scientifically pristine lunar permanently shadowed regions from contamination?",
+        "main_finding": "Lunar exploration can contaminate high-value polar environments; the review recommends modelling, monitoring, environmental assessment and traceability.",
+        "method_or_basis": "ESF-coordinated expert review for ESA drawing on specialists from eight European universities.",
+        "qualification": "Recommendations are precautionary; many planned missions have not yet operated at the sites.",
+        "radar_relevance": "European space research governance and protection of high-value scientific environments.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_page",
+            "url": "https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/",
+            "title": "New ESF Study for ESA Identifies Measures to Protect the Moon’s Most Pristine Environments - ESF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European space research governance and protection of high-value scientific environments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-13T23:35:55Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "2a8254bf",
+          "reader_title": "European study warns lunar polar science sites could be contaminated before they are understood",
+          "reader_what": "Review identifies contamination risks to permanently shadowed lunar regions and recommends monitoring and site prioritisation.",
+          "reader_why": "These regions hold volatile records relevant to the origin of water and prebiotic chemistry.",
+          "reader_more": "The European Science Foundation coordinated this review for the European Space Agency's Independent Safety Office, drawing on experts from eight European universities. Permanently shadowed regions near the lunar poles have trapped volatiles including water over billions of years, making them both a scientific archive and a target for extracting resources on site. With many robotic and crewed missions now planned for the south pole, the study warns that spacecraft outgassing, propulsion and surface activity could introduce organic and biological contamination. It identifies knowledge gaps, recommends mitigation based on modelling, monitoring and environmental impact assessment, and calls for contamination traceability and ground-truth baseline data. It proposes prioritising sites and applying timing restrictions to avoid a disorderly rush.",
+          "deep_analysis": {
+            "work_kind": "expert review and recommendations study commissioned by a space agency",
+            "research_question": "How lunar exploration activity could contaminate permanently shadowed regions, and what should be done now to protect their scientific value.",
+            "main_finding": "Contamination risk to permanently shadowed regions is rising quickly with mission density, significant knowledge gaps remain about these regions as scientific archives, and mitigation should combine modelling, monitoring, impact assessment, contamination traceability and prioritised, time-restricted site access.",
+            "method_or_basis": "Expert consortium review of current understanding of organic and biological contamination pathways, conducted for ESA's Independent Safety Office.",
+            "qualification": "Recommendations are advisory and depend on international adoption, since planetary protection under COSPAR policy is not binding on all actors; the study identifies gaps rather than resolving them.",
+            "radar_relevance": "A European scientific body shaping the governance of an emerging area of international competition in space.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://www.vttresearch.com/en/ourservices/fusion-energy-research-and-services": {
       "profile": "deep-reader-offline-v1",
@@ -1808,27 +1865,84 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://www.eurekanetwork.org/wp-content/uploads/2026/08/Switzerland-2025-2026-Eureka-Chair-year-in-review.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "34494e95",
-      "reader_title": "Review of Switzerland's year chairing the Eureka innovation network",
-      "reader_what": "Swiss chairmanship focused on member value, reshaping the funding portfolio and operational improvement.",
-      "reader_why": "Opened dialogue on a future Eureka partnership with the Commission under the next budget framework.",
-      "reader_more": "Switzerland, a founding member, held the annually rotating Eureka chair from July 2025 to June 2026, managed by the national innovation agency Innosuisse, coinciding with the network's fortieth anniversary. The chairmanship set three priorities: creating value for members and partner organisations, focusing on impact and shaping the future funding portfolio, and operational excellence. Reported activities include an anniversary project highlighting alumni successes, a Global Innovation Summit connecting around 1,000 biotechnology participants from over 50 countries, and new exchange formats at network meetings. The programme was framed around sustaining Eureka as a multilateral innovation alliance in a fragmenting geopolitical and economic environment, and it began discussions on a future partnership with the European Commission.",
+      "identity_hash": "b22bad187c7ed280",
+      "reader_title": "Switzerland reviews its year chairing the Eureka innovation network",
+      "reader_what": "The Swiss chair focused on member value, future funding, impact and operational improvement across the Eureka network.",
+      "reader_why": "It also opened discussion on Eureka’s future relationship with the European Commission.",
+      "reader_more": "Switzerland’s 2025–2026 chairmanship set three priorities and reports network activities undertaken during the fortieth-anniversary year. The report is a self-assessment and does not independently evaluate programme effects.",
       "deep_analysis": {
-        "work_kind": "institutional year-in-review report",
+        "work_kind": "institutional retrospective",
         "research_question": "",
-        "main_finding": "The Swiss chairmanship pursued member value, funding portfolio reform and operational improvement, and initiated dialogue on a future Eureka partnership with the Commission under the next Multiannual Financial Framework.",
-        "method_or_basis": "Self-reported account of activities by the chairing country and network.",
-        "qualification": "A self-assessment listing activities rather than an independent evaluation; no evidence is offered on whether the priorities produced results.",
-        "radar_relevance": "Concerns how intergovernmental innovation cooperation outside the EU framework relates to the next EU budget period.",
+        "main_finding": "Switzerland’s 2025–2026 chairmanship set three priorities and reports network activities undertaken during the fortieth-anniversary year.",
+        "method_or_basis": "Official Eureka year-in-review report issued after the Swiss chairmanship.",
+        "qualification": "The report is a self-assessment and does not independently evaluate programme effects.",
+        "radar_relevance": "European cross-border R&I governance and future funding-network coordination.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://www.eurekanetwork.org/wp-content/uploads/2026/08/Switzerland-2025-2026-Eureka-Chair-year-in-review.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://www.eurekanetwork.org/wp-content/uploads/2026/08/Switzerland-2025-2026-Eureka-Chair-year-in-review.pdf",
+            "title": "Switzerland 2025-2026 Eureka Chair year in review",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European cross-border R&I governance and future funding-network coordination."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:22Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "34494e95",
+          "reader_title": "Review of Switzerland's year chairing the Eureka innovation network",
+          "reader_what": "Swiss chairmanship focused on member value, reshaping the funding portfolio and operational improvement.",
+          "reader_why": "Opened dialogue on a future Eureka partnership with the Commission under the next budget framework.",
+          "reader_more": "Switzerland, a founding member, held the annually rotating Eureka chair from July 2025 to June 2026, managed by the national innovation agency Innosuisse, coinciding with the network's fortieth anniversary. The chairmanship set three priorities: creating value for members and partner organisations, focusing on impact and shaping the future funding portfolio, and operational excellence. Reported activities include an anniversary project highlighting alumni successes, a Global Innovation Summit connecting around 1,000 biotechnology participants from over 50 countries, and new exchange formats at network meetings. The programme was framed around sustaining Eureka as a multilateral innovation alliance in a fragmenting geopolitical and economic environment, and it began discussions on a future partnership with the European Commission.",
+          "deep_analysis": {
+            "work_kind": "institutional year-in-review report",
+            "research_question": "",
+            "main_finding": "The Swiss chairmanship pursued member value, funding portfolio reform and operational improvement, and initiated dialogue on a future Eureka partnership with the Commission under the next Multiannual Financial Framework.",
+            "method_or_basis": "Self-reported account of activities by the chairing country and network.",
+            "qualification": "A self-assessment listing activities rather than an independent evaluation; no evidence is offered on whether the priorities produced results.",
+            "radar_relevance": "Concerns how intergovernmental innovation cooperation outside the EU framework relates to the next EU budget period.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:22Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/sciencebusiness-zaharieva-hopes-for-a-horizon-europe-deal-in-2026/": {
       "profile": "deep-reader-v2-authoritative",
@@ -6841,27 +6955,84 @@
       ]
     },
     "link:https://policy.trade.ec.europa.eu/consultations/open-public-consultation-and-call-evidence-overall-evaluation-regulation-eu-2021821_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "313a4365",
-      "reader_title": "Open public consultation on the evaluation of the EU Dual-Use Regulation",
-      "reader_what": "The Commission opened a public call for evidence on the EU's dual-use export control Regulation.",
-      "reader_why": "Export controls shape whether research collaboration and technology transfer can continue across borders.",
-      "reader_more": "Regulation (EU) 2021/821 governs the export, transit and brokering of dual-use items: goods, software and technology usable for both civilian and military purposes. Adopted in May 2021, it extended controls to cyber-surveillance technology that could enable surveillance and repression, introduced EU General Export Authorisations to reduce administrative burden, and added reporting obligations for Member States. This consultation opened on 23 July 2026 with a deadline of 15 October 2026 and addresses the general public and civil society, with separate targeted surveys for business and for research and academia. It feeds the evaluation required by Article 26(4), due to be reported between September 2026 and September 2028. No findings are available at this stage.",
+      "identity_hash": "036fe73da5220e5f",
+      "reader_title": "Commission opens evaluation of the EU Dual-Use Regulation",
+      "reader_what": "A 2026 consultation seeks evidence on EU controls governing exports, brokering and transit of dual-use goods, software and technology.",
+      "reader_why": "Export-control rules directly shape cross-border research collaboration and sensitive technology transfer.",
+      "reader_more": "The Commission opened the evidence-gathering stage for the required evaluation of Regulation (EU) 2021/821. The consultation has no evaluation findings yet; it is an evidence-gathering process.",
       "deep_analysis": {
-        "work_kind": "current development (policy consultation)",
+        "work_kind": "policy consultation",
         "research_question": "",
-        "main_finding": "A public call for evidence was opened to inform the mandated evaluation of the EU dual-use export control Regulation.",
-        "method_or_basis": "Official European Commission trade policy consultation page",
-        "qualification": "Consultation stage; distinct from the parallel targeted stakeholder consultation, and no results are available.",
-        "radar_relevance": "Dual-use export controls directly affect international research collaboration and technology transfer.",
+        "main_finding": "The Commission opened the evidence-gathering stage for the required evaluation of Regulation (EU) 2021/821.",
+        "method_or_basis": "Official European Commission consultation page describing scope, audiences and evaluation timetable.",
+        "qualification": "The consultation has no evaluation findings yet; it is an evidence-gathering process.",
+        "radar_relevance": "Current EU research-security and technology-transfer policy with direct implications for R&I actors.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://policy.trade.ec.europa.eu/consultations/open-public-consultation-and-call-evidence-overall-evaluation-regulation-eu-2021821_en; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_page",
+            "url": "https://policy.trade.ec.europa.eu/consultations/open-public-consultation-and-call-evidence-overall-evaluation-regulation-eu-2021821_en",
+            "title": "Open Public Consultation and Call for Evidence - Overall Evaluation of Regulation (EU) 2021/821",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Current EU research-security and technology-transfer policy with direct implications for R&I actors."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:21Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "313a4365",
+          "reader_title": "Open public consultation on the evaluation of the EU Dual-Use Regulation",
+          "reader_what": "The Commission opened a public call for evidence on the EU's dual-use export control Regulation.",
+          "reader_why": "Export controls shape whether research collaboration and technology transfer can continue across borders.",
+          "reader_more": "Regulation (EU) 2021/821 governs the export, transit and brokering of dual-use items: goods, software and technology usable for both civilian and military purposes. Adopted in May 2021, it extended controls to cyber-surveillance technology that could enable surveillance and repression, introduced EU General Export Authorisations to reduce administrative burden, and added reporting obligations for Member States. This consultation opened on 23 July 2026 with a deadline of 15 October 2026 and addresses the general public and civil society, with separate targeted surveys for business and for research and academia. It feeds the evaluation required by Article 26(4), due to be reported between September 2026 and September 2028. No findings are available at this stage.",
+          "deep_analysis": {
+            "work_kind": "current development (policy consultation)",
+            "research_question": "",
+            "main_finding": "A public call for evidence was opened to inform the mandated evaluation of the EU dual-use export control Regulation.",
+            "method_or_basis": "Official European Commission trade policy consultation page",
+            "qualification": "Consultation stage; distinct from the parallel targeted stakeholder consultation, and no results are available.",
+            "radar_relevance": "Dual-use export controls directly affect international research collaboration and technology transfer.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:21Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.2478/picbe-2026-0173": {
       "profile": "deep-reader-v2-authoritative",
@@ -10847,27 +11018,84 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
-      "source_hash": "9bcc3bea",
-      "reader_title": "Fusion observatory report benchmarking Europe against China and the United States",
-      "reader_what": "Same fusion benchmarking report, admitted through the agency reports page: Europe leads publications, lags private capital and patents.",
-      "reader_why": "Gives European policymakers a comparative baseline for fusion funding and industrial capacity.",
-      "reader_more": "This record points to the first edition of the Global Fusion Energy Trends report from the Fusion for Energy Observatory, reached through the agency reports listing. It compares China, the EU, Japan, the UK and the United States on public funding, private capital, devices, publications, patents and regulation for 2022 to 2025, covering roughly 20.35 billion euro of identified funding. The United States leads on total identified funding and private capital, China on public totals and patents, while the EU is anchored in ITER and leads recent publication share. Public money accounts for about 78 percent of identified funding. No actor has yet demonstrated integrated power-plant capability.",
+      "source_hash": "d138b90b",
+      "identity_hash": "40a085a977b066c6",
+      "reader_title": "Fusion observatory benchmarks Europe against major global fusion competitors",
+      "reader_what": "The EU leads recent publication share but trails the United States in private capital and China in fusion patents.",
+      "reader_why": "The comparison gives European policymakers a baseline for funding, research and industrial capability.",
+      "reader_more": "The F4E Observatory compares funding, devices, publications, patents, regulation and industry across China, the EU, Japan, the UK and the US. Europe is strong in recent scientific output and ITER-linked capability, while other competitors lead on private investment or patent volume.",
       "deep_analysis": {
-        "work_kind": "institutional benchmarking report",
-        "research_question": "How the five leading fusion actors compare on funding, devices, scientific output, patents and regulation.",
-        "main_finding": "Europe has a strong distributed public research base and a recent publication lead, but trails badly on private fusion capital and patent families, and no actor has yet achieved plant-relevant integrated performance.",
-        "method_or_basis": "Packaged PDF excerpt of the official report, including its executive summary",
-        "qualification": "Duplicate scanner record for the same report as another entry in this package; figures are identified rather than exhaustive totals.",
-        "radar_relevance": "Benchmarks European research and industrial capacity in a strategic energy technology against China and the United States.",
+        "work_kind": "comparative technology report",
+        "research_question": "How do the EU, China, Japan, the UK and United States compare across fusion funding, research, technology and industry?",
+        "main_finding": "The report shows distinct strengths: Europe in recent publications and ITER-linked capability, the US in private capital, and China in patent families.",
+        "method_or_basis": "F4E Fusion Observatory comparison of 2022–2025 funding, devices, publications, patents, regulation and industrial activity.",
+        "qualification": "Indicators are not equivalent measures of commercial readiness; no actor has demonstrated integrated power-plant capability.",
+        "radar_relevance": "Direct benchmarking of European fusion R&I and industrial capacity against global competitors.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf",
+            "title": "F4E publishes the first Global Fusion Energy Trends report - Fusion for Energy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct benchmarking of European fusion R&I and industrial capacity against global competitors."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "9bcc3bea",
+          "reader_title": "Fusion observatory report benchmarking Europe against China and the United States",
+          "reader_what": "Same fusion benchmarking report, admitted through the agency reports page: Europe leads publications, lags private capital and patents.",
+          "reader_why": "Gives European policymakers a comparative baseline for fusion funding and industrial capacity.",
+          "reader_more": "This record points to the first edition of the Global Fusion Energy Trends report from the Fusion for Energy Observatory, reached through the agency reports listing. It compares China, the EU, Japan, the UK and the United States on public funding, private capital, devices, publications, patents and regulation for 2022 to 2025, covering roughly 20.35 billion euro of identified funding. The United States leads on total identified funding and private capital, China on public totals and patents, while the EU is anchored in ITER and leads recent publication share. Public money accounts for about 78 percent of identified funding. No actor has yet demonstrated integrated power-plant capability.",
+          "deep_analysis": {
+            "work_kind": "institutional benchmarking report",
+            "research_question": "How the five leading fusion actors compare on funding, devices, scientific output, patents and regulation.",
+            "main_finding": "Europe has a strong distributed public research base and a recent publication lead, but trails badly on private fusion capital and patent families, and no actor has yet achieved plant-relevant integrated performance.",
+            "method_or_basis": "Packaged PDF excerpt of the official report, including its executive summary",
+            "qualification": "Duplicate scanner record for the same report as another entry in this package; figures are identified rather than exhaustive totals.",
+            "radar_relevance": "Benchmarks European research and industrial capacity in a strategic energy technology against China and the United States.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.2903/sp.efsa.2026.en-10262": {
       "profile": "deep-reader-v2-authoritative",
@@ -12422,27 +12650,109 @@
       ]
     },
     "link:https://era.gv.at/news-items/new-study-confirms-strong-added-value-of-msca-doctoral-networks/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "3cd15ead",
-      "reader_title": "Survey finds EU doctoral networks outperform other doctoral programmes on careers",
-      "reader_what": "Study of about 6,800 respondents finds nine in ten see clear added value and stronger non-academic career outcomes.",
-      "reader_why": "Supplies large-scale evidence for the value of EU doctoral training during budget negotiations.",
-      "reader_more": "The European Research Executive Agency has published a mixed-methods study of Marie Sklodowska-Curie Doctoral Networks, described as the first large-scale evidence on their added value. It draws on roughly 6,800 responses from doctoral candidates and supervisors worldwide. More than nine in ten participants regard these networks as offering clear added value compared with other doctoral programmes. The study reports a high share of researchers employed within a year of completing the doctorate, and graduates three times more likely than comparable non-participants to work in business or other non-academic sectors. It links these outcomes to the cross-border, cross-sector and interdisciplinary design, noting that seven in ten participants undertook interdisciplinary mobility.",
+      "identity_hash": "2eb3768e42728e23",
+      "reader_title": "Large study finds strong added value from MSCA Doctoral Networks",
+      "reader_what": "About 6,800 respondents show stronger employment, non-academic careers, international collaboration and intersectoral experience for MSCA researchers.",
+      "reader_why": "Provides large-scale evidence on an EU doctoral-training instrument during future programme and budget debates.",
+      "reader_more": "The REA study surveyed about 6,800 doctoral candidates and supervisors and compared MSCA with non-MSCA programmes. It reports higher employment, more non-academic career movement and much more cross-sector and international exposure among MSCA participants.",
       "deep_analysis": {
-        "work_kind": "programme evaluation study reported in a news item",
-        "research_question": "What added value Marie Sklodowska-Curie Doctoral Networks provide compared with other doctoral training.",
-        "main_finding": "Participants overwhelmingly report added value over other doctoral programmes, with high early employment and markedly greater movement into non-academic sectors, attributed to cross-border and cross-sector training.",
-        "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the agency study",
-        "qualification": "Rests largely on participant self-report and comparison with non-participants who were not randomly assigned, so selection into the programme may explain part of the gap.",
-        "radar_relevance": "Evidence on the effectiveness of the EU flagship doctoral training instrument ahead of FP10 decisions.",
-        "confidence": "medium",
+        "work_kind": "programme evaluation study",
+        "research_question": "What added value do MSCA Doctoral Networks provide compared with other doctoral programmes?",
+        "main_finding": "More than nine in ten respondents report added value; MSCA graduates show stronger employment and non-academic career outcomes than comparison peers.",
+        "method_or_basis": "REA mixed-methods study conducted in 2024 with about 6,800 doctoral candidates and supervisors, comparing MSCA and non-MSCA experiences.",
+        "qualification": "The evidence combines survey and comparison data and does not eliminate all selection effects between programmes.",
+        "radar_relevance": "Direct evaluation evidence on an EU research-training and mobility instrument.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Opened the supplied ERA Portal Austria item; it summarized the study but was not the underlying issuing source."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is required for the REA evaluation report/news evidence used here."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success_identity",
+            "note": "Exact-title search for the MSCA Doctoral Networks study led to the European Research Executive Agency’s official findings page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success_identity",
+            "note": "Search using MSCA Doctoral Networks, European Research Executive Agency and 2026 confirmed the same study and respondent base."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the official REA page https://rea.ec.europa.eu/news/prepared-career-success-new-findings-msca-doctoral-networks-2026-06-24_en with substantive methods and outcome figures."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_needed",
+            "note": "The official REA evidence was sufficient for a defensible programme-evaluation decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_study_summary",
+            "url": "https://rea.ec.europa.eu/news/prepared-career-success-new-findings-msca-doctoral-networks-2026-06-24_en",
+            "title": "Prepared for career success: new findings on the MSCA Doctoral Networks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance were verified against the cited primary/official source after recovery rather than relying on scanner metadata or search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evaluation evidence on an EU research-training and mobility instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T23:35:57Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "3cd15ead",
+          "reader_title": "Survey finds EU doctoral networks outperform other doctoral programmes on careers",
+          "reader_what": "Study of about 6,800 respondents finds nine in ten see clear added value and stronger non-academic career outcomes.",
+          "reader_why": "Supplies large-scale evidence for the value of EU doctoral training during budget negotiations.",
+          "reader_more": "The European Research Executive Agency has published a mixed-methods study of Marie Sklodowska-Curie Doctoral Networks, described as the first large-scale evidence on their added value. It draws on roughly 6,800 responses from doctoral candidates and supervisors worldwide. More than nine in ten participants regard these networks as offering clear added value compared with other doctoral programmes. The study reports a high share of researchers employed within a year of completing the doctorate, and graduates three times more likely than comparable non-participants to work in business or other non-academic sectors. It links these outcomes to the cross-border, cross-sector and interdisciplinary design, noting that seven in ten participants undertook interdisciplinary mobility.",
+          "deep_analysis": {
+            "work_kind": "programme evaluation study reported in a news item",
+            "research_question": "What added value Marie Sklodowska-Curie Doctoral Networks provide compared with other doctoral training.",
+            "main_finding": "Participants overwhelmingly report added value over other doctoral programmes, with high early employment and markedly greater movement into non-academic sectors, attributed to cross-border and cross-sector training.",
+            "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the agency study",
+            "qualification": "Rests largely on participant self-report and comparison with non-participants who were not randomly assigned, so selection into the programme may explain part of the gap.",
+            "radar_relevance": "Evidence on the effectiveness of the EU flagship doctoral training instrument ahead of FP10 decisions.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-area_en": {
       "profile": "deep-reader-v2-authoritative",
@@ -13576,27 +13886,109 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://www.esf.org/esf-joins-horizon-europe-initiatives-to-streamline-research-infrastructure-access/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "0c016a04",
-      "reader_title": "Three new EU projects launched to simplify access to research infrastructures",
-      "reader_what": "Horizon Europe launched three linked projects on facility access, sustainable funding and infrastructure-industry innovation.",
-      "reader_why": "Addresses fragmented access and funding arrangements across European research facilities.",
-      "reader_more": "The European Science Foundation has announced its participation in a coordinated effort funded under the Horizon Europe INFRADEV-05 topic, launched jointly in Brussels on 3 June 2026. Three interconnected initiatives are involved. Access2Access aims to build an integrated, user-centred framework for accessing facilities and discovering digital services. FUND-RI works on sustainable and coherent financing and long-term investment strategies for European research infrastructures. COORDINA-INNOV focuses on co-innovation and strategic collaboration between research infrastructures and industry. The record documents the launch and the division of labour between projects; no results are reported, since the projects have only just begun.",
+      "identity_hash": "4f386552a1348eb3",
+      "reader_title": "Three Horizon Europe projects target easier access to research infrastructures",
+      "reader_what": "Access2Access, FUND-RI and COORDINA-INNOV address facility access, sustainable funding and research-infrastructure collaboration with industry.",
+      "reader_why": "Together they target structural fragmentation across Europe’s research-infrastructure ecosystem.",
+      "reader_more": "Access2Access focuses on user-centred access and facility discovery, FUND-RI on sustainable financing, and COORDINA-INNOV on research-infrastructure cooperation with industry. The projects launched together in June 2026, so the source supports objectives and design rather than outcomes.",
       "deep_analysis": {
-        "work_kind": "project launch announcement",
+        "work_kind": "current programme development",
         "research_question": "",
-        "main_finding": "Three coordinated Horizon Europe projects have started work on access frameworks, sustainable financing and industry collaboration for European research infrastructures.",
-        "method_or_basis": "Packaged text of the European Science Foundation announcement",
-        "qualification": "Announcement of newly launched projects; outcomes and effectiveness are not yet knowable.",
-        "radar_relevance": "Addresses access and sustainability of European research infrastructure, a recurring Framework Programme concern.",
+        "main_finding": "Three linked Horizon Europe initiatives launched to improve access, financing and industry collaboration across European research infrastructures.",
+        "method_or_basis": "Official ESF project announcement detailing the three initiatives, partners and intended division of labour.",
+        "qualification": "The initiatives had just launched; the source reports planned work rather than results.",
+        "radar_relevance": "Direct European R&I infrastructure coordination and access reform.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success_substantive",
+            "note": "Opened the supplied ESF URL; the official project page describes Access2Access, FUND-RI and COORDINA-INNOV, including objectives and ESF’s role."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this ESF project announcement."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success_identity",
+            "note": "Exact-title search returned the official ESF page dated 10 June 2026."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success_identity",
+            "note": "Searched the title with European Science Foundation and 2026; the official ESF record matched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Used https://www.esf.org/esf-joins-horizon-europe-initiatives-to-streamline-research-infrastructure-access/ as the issuing organisation’s substantive primary page."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_needed",
+            "note": "Official substantive evidence was recovered; no broader substitute source was required."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_project_page",
+            "url": "https://www.esf.org/esf-joins-horizon-europe-initiatives-to-streamline-research-infrastructure-access/",
+            "title": "Connecting European Science: ESF Joins Horizon Europe Initiatives to Streamline Research Infrastructure Access",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance were verified against the cited primary/official source after recovery rather than relying on scanner metadata or search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct European R&I infrastructure coordination and access reform."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "0c016a04",
+          "reader_title": "Three new EU projects launched to simplify access to research infrastructures",
+          "reader_what": "Horizon Europe launched three linked projects on facility access, sustainable funding and infrastructure-industry innovation.",
+          "reader_why": "Addresses fragmented access and funding arrangements across European research facilities.",
+          "reader_more": "The European Science Foundation has announced its participation in a coordinated effort funded under the Horizon Europe INFRADEV-05 topic, launched jointly in Brussels on 3 June 2026. Three interconnected initiatives are involved. Access2Access aims to build an integrated, user-centred framework for accessing facilities and discovering digital services. FUND-RI works on sustainable and coherent financing and long-term investment strategies for European research infrastructures. COORDINA-INNOV focuses on co-innovation and strategic collaboration between research infrastructures and industry. The record documents the launch and the division of labour between projects; no results are reported, since the projects have only just begun.",
+          "deep_analysis": {
+            "work_kind": "project launch announcement",
+            "research_question": "",
+            "main_finding": "Three coordinated Horizon Europe projects have started work on access frameworks, sustainable financing and industry collaboration for European research infrastructures.",
+            "method_or_basis": "Packaged text of the European Science Foundation announcement",
+            "qualification": "Announcement of newly launched projects; outcomes and effectiveness are not yet knowable.",
+            "radar_relevance": "Addresses access and sustainability of European research infrastructure, a recurring Framework Programme concern.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf": {
       "profile": "deep-reader-offline-v1",
@@ -15191,27 +15583,84 @@
       ]
     },
     "link:https://eismea.ec.europa.eu/document/download/9951fab9-e030-4305-9c11-16a52b2b8b96_en?filename=wp-10-european-innovation-ecosystems_horizon-2026-2027_en.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "7ed4ec17",
-      "reader_title": "Horizon Europe work programme for connecting innovation ecosystems across Europe",
-      "reader_what": "Work programme sets out 2026 and 2027 calls to connect innovation ecosystems and help firms scale.",
-      "reader_why": "Directs funding at links between regional innovation ecosystems rather than single institutions.",
-      "reader_more": "This is part ten of the Horizon Europe work programme for 2026 and 2027, covering the European Innovation Ecosystems strand, adopted by Commission decision in December 2025. The programme aims to create more connected, inclusive and efficient innovation ecosystems and to support companies scaling up, in line with the New European Innovation Agenda. The document lists successive calls under Interconnected Innovation Ecosystems for 2026 and 2027, with support designed to let ecosystem actors work together across Europe. The stated benefit for participating organisations is greater research and innovation capacity and productivity, and better embedding in global value chains and new markets. This is a funding programme document, so it sets intentions, budgets and call conditions rather than reporting outcomes.",
+      "identity_hash": "5d4337b63dfbc330",
+      "reader_title": "Horizon Europe programme connects innovation ecosystems and scale-up support",
+      "reader_what": "The 2026–2027 work programme funds interconnected ecosystems, startup hubs and stronger routes from laboratories to markets.",
+      "reader_why": "It directs funding toward cross-regional innovation links rather than isolated institutions.",
+      "reader_more": "The European Innovation Ecosystems work programme sets calls designed to connect regional actors and strengthen company scaling and technology transfer. It defines future calls and expected outcomes rather than observed programme impacts.",
       "deep_analysis": {
-        "work_kind": "official work programme / funding document",
+        "work_kind": "work programme",
         "research_question": "",
-        "main_finding": "The EU has programmed successive 2026 and 2027 calls specifically to interconnect regional innovation ecosystems and support company scaling under the New European Innovation Agenda.",
-        "method_or_basis": "Packaged PDF excerpt of the official Horizon Europe work programme part",
-        "qualification": "A planning document; no evidence about uptake, results or effectiveness.",
-        "radar_relevance": "Sets out the EU instrument architecture for innovation ecosystems and scale-up support.",
+        "main_finding": "The European Innovation Ecosystems work programme sets calls designed to connect regional actors and strengthen company scaling and technology transfer.",
+        "method_or_basis": "Official Horizon Europe 2026–2027 work programme, Part 10, adopted by Commission decision.",
+        "qualification": "It defines future calls and expected outcomes rather than observed programme impacts.",
+        "radar_relevance": "Direct EU R&I programming for connected innovation ecosystems and scale-up capacity.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://webgate.ec.europa.eu/circabc-ewpp/d/d/workspace/SpacesStore/ab50323c-22b9-4151-9e3e-2cfab6843e58/download; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://webgate.ec.europa.eu/circabc-ewpp/d/d/workspace/SpacesStore/ab50323c-22b9-4151-9e3e-2cfab6843e58/download",
+            "title": "European Innovation Ecosystems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct EU R&I programming for connected innovation ecosystems and scale-up capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:53Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "7ed4ec17",
+          "reader_title": "Horizon Europe work programme for connecting innovation ecosystems across Europe",
+          "reader_what": "Work programme sets out 2026 and 2027 calls to connect innovation ecosystems and help firms scale.",
+          "reader_why": "Directs funding at links between regional innovation ecosystems rather than single institutions.",
+          "reader_more": "This is part ten of the Horizon Europe work programme for 2026 and 2027, covering the European Innovation Ecosystems strand, adopted by Commission decision in December 2025. The programme aims to create more connected, inclusive and efficient innovation ecosystems and to support companies scaling up, in line with the New European Innovation Agenda. The document lists successive calls under Interconnected Innovation Ecosystems for 2026 and 2027, with support designed to let ecosystem actors work together across Europe. The stated benefit for participating organisations is greater research and innovation capacity and productivity, and better embedding in global value chains and new markets. This is a funding programme document, so it sets intentions, budgets and call conditions rather than reporting outcomes.",
+          "deep_analysis": {
+            "work_kind": "official work programme / funding document",
+            "research_question": "",
+            "main_finding": "The EU has programmed successive 2026 and 2027 calls specifically to interconnect regional innovation ecosystems and support company scaling under the New European Innovation Agenda.",
+            "method_or_basis": "Packaged PDF excerpt of the official Horizon Europe work programme part",
+            "qualification": "A planning document; no evidence about uptake, results or effectiveness.",
+            "radar_relevance": "Sets out the EU instrument architecture for innovation ecosystems and scale-up support.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:53Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s13132-026-03305-y": {
       "profile": "deep-reader-v2-authoritative",
@@ -17919,6 +18368,685 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-13T23:33:46Z",
       "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://erc.europa.eu/sites/default/files/2024-02/report_democracy.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "aee2ad81",
+      "identity_hash": "a2995d25391a0f13",
+      "reader_title": "ERC portfolio maps how frontier research can support democratic resilience",
+      "reader_what": "Portfolio analysis groups ERC-funded democracy research across governance, voting, participation, rights, disinformation and polarisation.",
+      "reader_why": "Shows how EU frontier-research funding generates evidence relevant to democratic institutions and policy.",
+      "reader_more": "The ERC report maps 215 funded projects worth about €368 million across six democracy-related themes. It is a portfolio overview designed to show where frontier research can inform public debate and EU policy, not an impact evaluation of the grants.",
+      "deep_analysis": {
+        "work_kind": "portfolio analysis report",
+        "research_question": "What democracy-related knowledge has ERC frontier research produced across its funded portfolio?",
+        "main_finding": "The report maps 215 ERC projects worth about €368 million into six democracy-related themes and links frontier research to policy-relevant evidence.",
+        "method_or_basis": "Keyword-based portfolio analysis of ERC-funded projects, presented with thematic project examples.",
+        "qualification": "This is a portfolio mapping exercise, not an evaluation of project impacts.",
+        "radar_relevance": "Direct evidence on the scope and policy relevance of EU-funded frontier research.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://erc.europa.eu/sites/default/files/2024-02/report_democracy.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://erc.europa.eu/sites/default/files/2024-02/report_democracy.pdf",
+            "title": "Frontier research for democracy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on the scope and policy relevance of EU-funded frontier research."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "6b52e746",
+      "identity_hash": "dfd465cedbef4d86",
+      "reader_title": "EU space call targets critical technologies to reduce strategic dependencies",
+      "reader_what": "The 2026 call funds radiation-hard chips, power electronics, irradiation facilities and an in-orbit refuelling interface.",
+      "reader_why": "Targets technical bottlenecks the EU treats as constraints on autonomous space capability.",
+      "reader_more": "HaDEA’s official call groups four topics under EU non-dependence for critical space technologies. They cover radiation-hard FPGA capability, GaN/SiC electronics, high-energy irradiation testing and a refuelling interface; the page describes funding intentions rather than completed technologies.",
+      "deep_analysis": {
+        "work_kind": "funding call",
+        "research_question": "",
+        "main_finding": "HaDEA lists four Horizon Europe topics explicitly aimed at EU non-dependence in critical space components, facilities and equipment.",
+        "method_or_basis": "Official HaDEA call notice for HORIZON-CL4-2026-03 (SPACE), including topic identifiers and scope.",
+        "qualification": "This is an open funding call; it reports intended support, not delivered technological outcomes.",
+        "radar_relevance": "Direct EU R&I funding action for strategic space-technology capability and non-dependence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success_substantive",
+            "note": "Opened the supplied HaDEA call URL; the official page lists the call reference, dates and four EU non-dependence topics in substantive detail."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this European Commission/HaDEA funding call."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success_identity",
+            "note": "Exact-title search returned the same official HaDEA call page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success_identity",
+            "note": "Searched the title with HaDEA and 2026; the official agency page matched the supplied record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Used the official HaDEA call page at https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en as substantive primary evidence."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_needed",
+            "note": "Recovery was already complete on the official HaDEA source; no broader substitute source was used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_call_page",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en",
+            "title": "Boosting Space through EU non-dependence for critical space technologies - Horizon Europe 'Space' 2026 calls",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance were verified against the cited primary/official source after recovery rather than relying on scanner metadata or search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct EU R&I funding action for strategic space-technology capability and non-dependence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://hadea.ec.europa.eu/calls-proposals/using-space-earth-telecommunication-and-earth-observation-horizon-europe-space-2026-calls_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "399d88b2",
+      "identity_hash": "2845633cbd34c013",
+      "reader_title": "EU space calls fund telecom and Earth-observation building blocks",
+      "reader_what": "Two 2026 topics support digital enablers and demonstration missions for Earth observation and satellite telecommunications.",
+      "reader_why": "The calls move shared space technologies from enabling components toward demonstrable European solutions.",
+      "reader_more": "The official HaDEA call contains two topics: digital enablers and building blocks for Earth observation and satellite telecommunications, and preparation of demonstration missions. It is prospective programme evidence, so no delivery outcomes are claimed.",
+      "deep_analysis": {
+        "work_kind": "funding call",
+        "research_question": "",
+        "main_finding": "HaDEA lists Horizon Europe topics for digital building blocks and demonstration missions spanning Earth observation and satellite telecommunications.",
+        "method_or_basis": "Official HaDEA call notice for HORIZON-CL4-2026-03 (SPACE).",
+        "qualification": "This is an open funding call, so it describes intended investment rather than completed results.",
+        "radar_relevance": "Direct EU R&I investment in space-enabled communications and Earth-observation capabilities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success_substantive",
+            "note": "Opened the supplied HaDEA call URL; the official page lists the call reference, dates and two Earth-observation/satellite-telecom topics."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this European Commission/HaDEA funding call."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success_identity",
+            "note": "Exact-title search returned the same official HaDEA call page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success_identity",
+            "note": "Searched the title with HaDEA and 2026; the official agency page matched the supplied record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Used the official HaDEA call page at https://hadea.ec.europa.eu/calls-proposals/using-space-earth-telecommunication-and-earth-observation-horizon-europe-space-2026-calls_en as substantive primary evidence."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_needed",
+            "note": "Recovery was already complete on the official HaDEA source; no broader substitute source was used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_call_page",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/using-space-earth-telecommunication-and-earth-observation-horizon-europe-space-2026-calls_en",
+            "title": "Using Space on Earth – Telecommunication and Earth Observation - Horizon Europe 'Space' 2026 calls",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance were verified against the cited primary/official source after recovery rather than relying on scanner metadata or search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct EU R&I investment in space-enabled communications and Earth-observation capabilities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "d66f45f6",
+      "identity_hash": "a06d155e61061388",
+      "reader_title": "ERA-LEARN links quantum partnerships to European technological sovereignty",
+      "reader_what": "Policy brief examines how European partnerships can strengthen quantum capability while balancing openness, security and international cooperation.",
+      "reader_why": "Quantum’s dual-use character makes partnership design relevant to strategic autonomy and research security.",
+      "reader_more": "The policy brief places quantum partnerships within debates on technological sovereignty and open strategic autonomy. It also treats dual-use research and selective international cooperation as design constraints for European partnership policy.",
+      "deep_analysis": {
+        "work_kind": "policy brief",
+        "research_question": "How can European research partnerships support technological sovereignty and global competitiveness in quantum technologies?",
+        "main_finding": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
+        "method_or_basis": "ERA-LEARN policy analysis of technological sovereignty, partnership participation and quantum cooperation, with a documented methodology.",
+        "qualification": "It is a policy brief and does not measure the causal effects of partnership instruments.",
+        "radar_relevance": "Direct European research-policy evidence on quantum capability, partnerships and technological sovereignty.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+            "title": "New ERA-LEARN Policy Brief on Technological Sovereignty & Global Competition – The Case of Quantum Technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct European research-policy evidence on quantum capability, partnerships and technological sovereignty."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "82cda381",
+      "identity_hash": "d8ef5ba746b91a96",
+      "reader_title": "Hybrid CoE analyses Chinese and Russian AI-enabled information manipulation",
+      "reader_what": "The paper compares how China and Russia use AI for influence operations, data gathering, targeting and content production.",
+      "reader_why": "AI can scale hostile information operations against European and allied democratic decision-making.",
+      "reader_more": "Hybrid CoE Paper 29 compares Chinese and Russian approaches to AI-enabled information manipulation. The report treats AI as an operational amplifier for targeting, data collection and content production and discusses policy responses for the Centre’s EU and NATO participants.",
+      "deep_analysis": {
+        "work_kind": "security policy analysis",
+        "research_question": "How are China and Russia integrating AI into foreign information manipulation, and what does this mean for defenders?",
+        "main_finding": "The analysis finds different Chinese and Russian approaches but a shared potential for AI to increase the scale, speed and targeting of manipulation.",
+        "method_or_basis": "Hybrid CoE Paper 29, a research-question-led expert analysis of AI and foreign information manipulation.",
+        "qualification": "The paper is an expert policy analysis rather than a controlled empirical attribution study.",
+        "radar_relevance": "European research-security and technology-policy relevance through Hybrid CoE’s EU/NATO mission.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf",
+            "title": "Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European research-security and technology-policy relevance through Hybrid CoE’s EU/NATO mission."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://cerre.eu/wp-content/uploads/2026/04/CERRE_Transatlantic-cooperation-on-AI-and-national-security.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "0a7b0632",
+      "identity_hash": "f1aaccd94a892c20",
+      "reader_title": "CERRE maps EU-US friction over AI export controls and security",
+      "reader_what": "Issue paper identifies US policy uncertainty, European China positions and asymmetric leverage as barriers to deeper AI-security cooperation.",
+      "reader_why": "Export controls can constrain European AI competitiveness while creating pressure for pragmatic transatlantic coordination.",
+      "reader_more": "The CERRE issue paper argues that US export-control uncertainty and differing European positions on China make deeper AI-security alignment difficult. It suggests narrower areas such as legacy chips may offer more practical cooperation than frontier AI controls.",
+      "deep_analysis": {
+        "work_kind": "policy issue paper",
+        "research_question": "What limits closer transatlantic cooperation on AI and national security, and where is pragmatic alignment possible?",
+        "main_finding": "The paper argues EU-US AI relations risk managed interdependence unless partners build more structured cooperation, while legacy chips offer easier alignment.",
+        "method_or_basis": "CERRE policy analysis drawing on current export-control and transatlantic technology-policy developments.",
+        "qualification": "This is an issue paper with policy interpretation, not an impact evaluation.",
+        "radar_relevance": "European AI capability, digital sovereignty and transatlantic research-security coordination.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://cerre.eu/wp-content/uploads/2026/04/CERRE_Transatlantic-cooperation-on-AI-and-national-security.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://cerre.eu/wp-content/uploads/2026/04/CERRE_Transatlantic-cooperation-on-AI-and-national-security.pdf",
+            "title": "Transatlantic cooperation on AI and national security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European AI capability, digital sovereignty and transatlantic research-security coordination."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://www.eurekanetwork.org/a-global-innovation-summit-to-commemorate-40-years-of-eureka/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "dd678394",
+      "identity_hash": "aaa465d6cf2eee96",
+      "reader_title": "Eureka anniversary summit reports networking activity, not substantive R&I evidence",
+      "reader_what": "The page recaps a 2026 summit, attendance, matchmaking and speakers without presenting a research result or policy instrument.",
+      "reader_more": "The item primarily documents an anniversary event and networking activity. It does not provide substantive research findings, a new funding instrument or a policy decision beyond the event itself.",
+      "deep_analysis": {
+        "work_kind": "event recap",
+        "research_question": "",
+        "main_finding": "The item primarily documents an anniversary event and networking activity.",
+        "method_or_basis": "Official Eureka event recap, including attendance and matchmaking figures.",
+        "qualification": "It does not provide substantive research findings, a new funding instrument or a policy decision beyond the event itself.",
+        "radar_relevance": "Fails Strand A because the object is a promotional event recap rather than substantive European R&I work.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://www.eurekanetwork.org/a-global-innovation-summit-to-commemorate-40-years-of-eureka/; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_page",
+            "url": "https://www.eurekanetwork.org/a-global-innovation-summit-to-commemorate-40-years-of-eureka/",
+            "title": "A Global Innovation Summit to commemorate 40 years of Eureka",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_RI",
+        "reason": "Fails Strand A because the object is a promotional event recap rather than substantive European R&I work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://doi.org/10.1017/jme.2026.10256": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "0f245936",
+      "identity_hash": "06358b2207673a66",
+      "reader_title": "Medical-AI patent study is global, with the EU only one comparator",
+      "reader_what": "Study scores disclosure quality across 865 US, Chinese and EU medical-AI patents using a five-dimension framework.",
+      "reader_why": "The European subset is too small and secondary to make this a substantive European R&I work.",
+      "reader_more": "The study examines 865 granted medical-AI patents across three jurisdictions with a five-dimension disclosure framework. Europe is represented by only 31 patents, so the work does not meet the package rule requiring Europe to be substantively central rather than merely one comparator.",
+      "deep_analysis": {
+        "work_kind": "empirical patent study",
+        "research_question": "How sufficient is technical disclosure in granted medical-AI patents across the United States, China and the EU?",
+        "main_finding": "The study finds major disclosure gaps across jurisdictions; roughly two-fifths of patents score zero on at least two assessed dimensions.",
+        "method_or_basis": "Cross-jurisdiction patent sample of 865 grants with NLP-assisted and expert scoring across five disclosure dimensions.",
+        "qualification": "Only 31 patents are from the EU, making European evidence exploratory rather than central.",
+        "radar_relevance": "Fails Strand A because Europe is one comparator in a primarily global patent study.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://www.cambridge.org/core/journals/journal-of-law-medicine-and-ethics/article/abs/sufficiency-of-disclosure-in-medical-ai-patents-evidence-from-865-granted-patents-across-the-us-china-and-the-eu/E3E1B16C3C3C1737DF8504324FC9C00D; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_page",
+            "url": "https://www.cambridge.org/core/journals/journal-of-law-medicine-and-ethics/article/abs/sufficiency-of-disclosure-in-medical-ai-patents-evidence-from-865-granted-patents-across-the-us-china-and-the-eu/E3E1B16C3C3C1737DF8504324FC9C00D",
+            "title": "The Sufficiency of Disclosure in Medical AI Patents: Evidence from 865 Granted Patents Across the US, China, and the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_OUT_OF_SCOPE",
+        "reason": "Fails Strand A because Europe is one comparator in a primarily global patent study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:56Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://hcss.nl/wp-content/uploads/2026/04/Europes-Path-to-Strategic-Autonomy-in-the-Defence-Industry-2026.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "ea0f371c",
+      "identity_hash": "ff8beb3dfe812f90",
+      "reader_title": "European defence autonomy requires earlier industrial integration and managed interdependence",
+      "reader_what": "Report argues Europe needs stronger production capacity, coordinated demand and cross-border industrial integration to reduce defence dependencies.",
+      "reader_why": "Industrial fragmentation can slow scaling and leave strategic capability dependent on external suppliers.",
+      "reader_more": "The joint Clingendael/HCSS report treats autonomy as the ability to sustain European defence capability while managing necessary external dependencies. Its recommendations focus on coordinated demand, industrial scale and earlier cross-border integration rather than complete autarky.",
+      "deep_analysis": {
+        "work_kind": "defence industrial policy report",
+        "research_question": "How can Europe increase strategic autonomy in defence while managing unavoidable interdependence?",
+        "main_finding": "The report calls for coordinated European demand, stronger industrial capacity and pragmatic management of dependencies rather than complete autarky.",
+        "method_or_basis": "Joint Clingendael/HCSS policy report examining European defence-industrial capacity, dependencies and policy options.",
+        "qualification": "Strategic autonomy is treated as greater capacity and resilience, not complete self-sufficiency.",
+        "radar_relevance": "Direct analysis of European industrial and technological capability in a strategic sector.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://hcss.nl/wp-content/uploads/2026/04/Europes-Path-to-Strategic-Autonomy-in-the-Defence-Industry-2026.pdf; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_pdf",
+            "url": "https://hcss.nl/wp-content/uploads/2026/04/Europes-Path-to-Strategic-Autonomy-in-the-Defence-Industry-2026.pdf",
+            "title": "Catching Up: Europe’s Path to Strategic Autonomy in the Defence Industry - HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct analysis of European industrial and technological capability in a strategic sector."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:57Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://doi.org/10.1111/1758-5899.70167": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "830b8a77",
+      "identity_hash": "cadda31e1cdb0fe7",
+      "reader_title": "Universities may need counterintelligence-style research-security programmes",
+      "reader_what": "The article argues universities face espionage, interference and IP theft and should adapt counterintelligence concepts to research security.",
+      "reader_why": "European governments already use research-security frameworks, but the article’s main frame is global.",
+      "reader_more": "The authors frame research security as a university counterintelligence problem and discuss frameworks in the EU, UK, Canada and United States. European examples are real and substantive, but the article’s central argument is global, so admission remains a scope judgement.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "Can universities adapt counterintelligence approaches to protect research while preserving academic openness?",
+        "main_finding": "The authors propose a university counterintelligence role that integrates research security with institutional risk management and academic-freedom safeguards.",
+        "method_or_basis": "Open-access policy analysis comparing research-security practice across jurisdictions and university threat environments.",
+        "qualification": "European examples are substantive, but the article is not primarily about Europe and its admission threshold is borderline.",
+        "radar_relevance": "Real European research-security content exists, but Europe is one part of a broader global argument.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success_identity",
+            "note": "Resolved https://doi.org/10.1111/1758-5899.70167 to the Wiley Global Policy article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1111/1758-5899.70167 matches the title, Brendan Walker-Munro and Sascha-Dominik Dov Bachmann, and 15 April 2026 publication."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success_full_text",
+            "note": "Exact-title search recovered the Wiley open-access full article at https://onlinelibrary.wiley.com/doi/full/10.1111/1758-5899.70167."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success_identity",
+            "note": "Title/author/year search independently matched the same Global Policy article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Used the Wiley open-access publisher full text as substantive evidence."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_needed",
+            "note": "Publisher full text resolved both identity and substance; no broader substitute was needed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/1758-5899.70167",
+            "title": "Universities as the Next Counterintelligence Battleground in Geopolitical Contests",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substance were verified against the cited primary/official source after recovery rather than relying on scanner metadata or search snippets."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_BORDERLINE",
+        "reason": "Real European research-security content exists, but Europe is one part of a broader global argument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:57Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://doi.org/10.1007/s41781-026-00164-9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "b44f7675",
+      "identity_hash": "9c66d3eab7c19eae",
+      "reader_title": "CERN collider survey finds opposition is not mainly a knowledge deficit",
+      "reader_what": "Across 10,448 respondents, collider support is broad, while resistance clusters around cultural mistrust rather than low scientific interest.",
+      "reader_why": "Public legitimacy matters for Europe’s largest research infrastructures and cannot be built through information alone.",
+      "reader_more": "The study surveys 10,448 people across nine countries about a future CERN collider. It finds broad support but a distinct resistant group whose attitudes are better explained by cultural mistrust and perceived social value than by simple deficits in scientific knowledge.",
+      "deep_analysis": {
+        "work_kind": "cross-national survey study",
+        "research_question": "What drives public support and resistance toward a proposed next-generation particle collider at CERN?",
+        "main_finding": "The study finds substantial support but identifies a resistant subgroup whose opposition is associated more with values and mistrust than scientific knowledge.",
+        "method_or_basis": "Survey of 10,448 respondents across nine countries with multivariate analysis of attitudes, willingness to pay and perceived benefits.",
+        "qualification": "Stated willingness and attitudes do not directly predict future political behaviour or financing decisions.",
+        "radar_relevance": "Direct evidence on social legitimacy for a major European research-infrastructure proposal.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied matching primary source https://link.springer.com/article/10.1007/s41781-026-00164-9; the packaged text contained substantive evidence sufficient for the recorded decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_page",
+            "url": "https://link.springer.com/article/10.1007/s41781-026-00164-9",
+            "title": "Public Support and Ideological Resistance to Large-Scale Research Infrastructures: Evidence from a New Particle Collider at CERN",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied source matched the claimed work and contained substantive primary evidence; decision and interpretation were checked against that material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on social legitimacy for a major European research-infrastructure proposal."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T23:35:57Z",
+      "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
     }
   }
 }
