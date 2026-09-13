@@ -122,8 +122,12 @@ jobs:
           preserve_root="$(mktemp -d)"
           preserve_files=(
             'radar.json'
+            'radar_active.json'
             'historical/historical.json'
             'reader_text.json'
+            'admission_state.json'
+            'record_corrections.json'
+            'stuff/source_merit_ranking.xlsx'
           )
 
           for path in "${preserve_files[@]}"; do
@@ -156,7 +160,7 @@ jobs:
 
           echo "### Code/visual restore complete" >> "$GITHUB_STEP_SUMMARY"
           echo "Restored from \`${SAFE_COMMIT}\`." >> "$GITHUB_STEP_SUMMARY"
-          echo 'Preserved current `radar.json`, `historical/historical.json`, and `reader_text.json` when present.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Preserved current raw/active Radar data, historical data, Deep Scan reader state, admission state, metadata corrections, and active Excel when present.' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Restore the complete safe snapshot
         if: inputs.operation == 'RESTORE_EVERYTHING'

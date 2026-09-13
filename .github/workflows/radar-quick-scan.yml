@@ -77,18 +77,27 @@ jobs:
           RADAR_RESCUE_MODE: 'false'
         run: python scripts/scan_radar.py
 
+      - name: Rebuild authoritative active corpus and Excel
+        if: steps.due.outputs.run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/rebuild_active_radar.py
+          python scripts/check_active_corpus.py
+          node scripts/generate_stuff_workbook.js
+
       - name: Safety-check and isolate scanner output
         if: steps.due.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
 
-          # radar.json is the ONLY persistent output of the main scanner.
+          # Scanner persists raw evidence plus the generated active snapshot and active Excel.
           # If tests/runtime/tools happened to alter another tracked file, restore
           # that file to HEAD instead of failing the whole scan. Untracked runtime
-          # debris is removed. Nothing except radar.json can reach the commit step.
-          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' || true)"
-          untracked_unexpected="$(git ls-files --others --exclude-standard | grep -vx 'radar.json' || true)"
+          # debris is removed. No other repository file can reach the commit step.
+          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/source_merit_ranking.xlsx' || true)"
+          untracked_unexpected="$(git ls-files --others --exclude-standard | grep -Ev '^(radar_active\.json|stuff/source_merit_ranking\.xlsx)$' || true)"
 
           if [[ -n "$tracked_unexpected" ]]; then
             echo '::warning::Non-radar tracked working-tree changes detected; restoring them before save:'
@@ -108,8 +117,8 @@ jobs:
             done <<< "$untracked_unexpected"
           fi
 
-          # Hard assertion: after isolation, radar.json must be the only repository change.
-          remaining="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -vx 'radar.json' || true)"
+          # Hard assertion: only raw radar, active snapshot and active Excel may change.
+          remaining="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -Ev '^(radar\.json|radar_active\.json|stuff/source_merit_ranking\.xlsx)$' || true)"
           if [[ -n "$remaining" ]]; then
             echo '::error::Could not isolate scanner output safely. Refusing to save.'
             printf '%s\n' "$remaining"
@@ -342,7 +351,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- radar.json
+          git add -- radar.json radar_active.json stuff/source_merit_ranking.xlsx
 
           if git diff --cached --quiet; then
             echo "No radar data change to commit."

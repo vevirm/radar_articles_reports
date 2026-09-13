@@ -1,4 +1,4 @@
-name: Deep Scan — Prepare Package
+name: Deep Scan V2 — Prepare Authoritative Package
 
 on:
   workflow_dispatch:
@@ -35,11 +35,11 @@ jobs:
       - name: Install source-reading dependencies
         run: pip install --quiet -r requirements.txt
 
-      - name: Build one backlog-aware Deep Scan package
+      - name: Build authoritative Deep Scan V2 package
         run: |
           set -euo pipefail
           rm -rf deep_scan_out
-          python scripts/prepare_deep_scan_package.py --output-dir deep_scan_out
+          python scripts/prepare_deep_scan_package.py --output-dir deep_scan_out --max-records 12 --batch-size 12
           ls -lh deep_scan_out
 
       - name: Upload package for download
@@ -55,17 +55,17 @@ jobs:
         shell: bash
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
-          ## Deep Scan package
+          ## Deep Scan V2 package
 
           No AI API was called and no AI API key is needed.
 
           If a package was created:
           1. Download the **deep-scan-package** artifact from this workflow run.
-          2. Give `deep_scan_package.zip` to the LLM subscription you already use.
-          3. Say: **Process this Deep Scan package according to INSTRUCTIONS.md and return the completed result file.**
+          2. Give `deep_scan_package.zip` to a browsing-capable LLM subscription you already use.
+          3. Say: **Process this Deep Scan V2 package strictly according to INSTRUCTIONS.md. Go deeply, do not cherry-pick, exhaust the required recovery ladder for difficult records, and return the completed result file.**
           4. Download the returned `deep_scan_results.json` (or ZIP containing it).
           5. In this repository, open **deep_scan_inbox**, choose **Add file → Upload files**, upload the returned file, and commit it.
-          6. GitHub automatically validates and imports it. Completed works disappear from the next Deep Scan package.
+          6. GitHub automatically validates and imports it. Only authoritative V2-completed works disappear from the next package. Existing V1 interpretations are intentionally queued once for V2 re-verification.
 
           The package itself contains the full instructions for the LLM.
           EOF

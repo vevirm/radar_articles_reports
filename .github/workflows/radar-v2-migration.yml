@@ -1,0 +1,108 @@
+name: Radar V2 — Initialise, Validate & Prepare Deep Scan
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  initialise:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Run V2 safety tests and non-destructive preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/test_deep_reader.py tests/test_active_corpus_v2.py
+          python -m pytest -q tests/test_deep_scan_offline.py
+          python -m pytest -q tests/test_downstream_retrace.py
+          python scripts/build_v2_migration_preview.py
+          python scripts/rebuild_active_radar.py --report migration-reports/v2-initial-active-rebuild.json
+          python scripts/check_reader_text.py
+          python scripts/check_active_corpus.py
+          node scripts/generate_stuff_workbook.js
+
+      - name: Prepare the next Deep Scan V2 group
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf deep_scan_out
+          python scripts/prepare_deep_scan_package.py --output-dir deep_scan_out --max-records 12 --batch-size 12
+          ls -lh deep_scan_out
+
+      - name: Upload migration reports and Deep Scan package
+        uses: actions/upload-artifact@v4
+        with:
+          name: radar-v2-migration-and-deep-scan
+          path: |
+            deep_scan_out/
+            migration-reports/v2-migration-preview.json
+            migration-reports/v2-migration-preview.md
+            migration-reports/v2-initial-active-rebuild.json
+          if-no-files-found: error
+          retention-days: 21
+
+      - name: Commit generated active baseline if needed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-v2-migration'
+          git config user.email 'actions@github.com'
+          git add radar.json radar_active.json stuff/source_merit_ranking.xlsx migration-reports/v2-migration-preview.json migration-reports/v2-migration-preview.md migration-reports/v2-initial-active-rebuild.json
+          if git diff --cached --quiet; then
+            echo 'Generated active baseline already current.'
+            exit 0
+          fi
+          git commit -m 'Radar V2: initialise verified active-corpus layer'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Next step
+        if: always()
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Radar V2 is initialised safely
+
+          This workflow does not delete raw scanner records. It rebuilds `radar_active.json`, validates that inactive evidence cannot leak into active products, and creates a non-destructive migration preview.
+
+          Download the **radar-v2-migration-and-deep-scan** artifact. Inside it, give `deep_scan_package.zip` to a browsing-capable LLM and instruct it to follow `INSTRUCTIONS.md` strictly. The package deliberately queues old Deep Scan V1 records once again because V2 now verifies identity, metadata and admission as well as interpretation.
+
+          Upload returned `deep_scan_results.json` (or its ZIP) to `deep_scan_inbox`. The import workflow validates it, updates active admission/corrections, rebuilds downstream reasoning and Excel, and refuses to alter raw A/B/C evidence.
+          EOF

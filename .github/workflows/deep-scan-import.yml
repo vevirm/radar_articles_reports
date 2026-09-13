@@ -1,4 +1,4 @@
-name: Deep Scan — Import Returned Results
+name: Deep Scan V2 — Import Returned Results
 
 on:
   push:
@@ -14,7 +14,7 @@ permissions:
 env:
   PYTHONDONTWRITEBYTECODE: '1'
 
-# Do not import against radar.json while an automatic scanner is updating it.
+# Deep Scan and automatic scanners must never rewrite corpus state concurrently.
 concurrency:
   group: ri-radar-research-scanners
   cancel-in-progress: false
@@ -24,7 +24,7 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Check out main safely
@@ -39,17 +39,41 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Install Deep Scan dependencies
         run: pip install --quiet -r requirements.txt
 
-      - name: Import and validate returned interpretations
+      - name: Import, rebuild active corpus, and validate
         shell: bash
         run: |
           set -euo pipefail
           python scripts/import_deep_scan_results.py
           python scripts/check_reader_text.py
+          python scripts/rebuild_active_radar.py --report migration-reports/latest-deep-scan-active-rebuild.json
+          python scripts/check_active_corpus.py
+          node scripts/generate_stuff_workbook.js
 
-          unexpected="$(git diff --name-only -- . ':!reader_text.json' ':!deep_scan_inbox/**' || true)"
+          # Deep Scan may change derived products, but must never destructively
+          # rewrite the raw evidence collections in radar.json.
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          before=json.loads(subprocess.check_output(['git','show','HEAD:radar.json']).decode('utf-8'))
+          after=json.loads(Path('radar.json').read_text(encoding='utf-8'))
+          for key in ('strand_a','strand_b','strand_c','frontier_evidence','ab_archive','signal_archive'):
+              if before.get(key) != after.get(key):
+                  raise SystemExit(f'Deep Scan rebuild unexpectedly modified raw evidence collection {key}')
+          print('Raw evidence immutability check passed.')
+          PY
+
+          unexpected="$(git diff --name-only -- . \
+            ':!reader_text.json' ':!admission_state.json' ':!record_corrections.json' \
+            ':!radar.json' ':!radar_active.json' ':!stuff/source_merit_ranking.xlsx' \
+            ':!migration-reports/latest-deep-scan-active-rebuild.json' ':!deep_scan_inbox/**' || true)"
           if [[ -n "$unexpected" ]]; then
             echo '::error::Deep Scan import changed an unexpected file. Refusing to save.'
             printf '%s\n' "$unexpected"
@@ -67,37 +91,57 @@ jobs:
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
 
-      - name: Save imported Deep Scan results
+      - name: Save validated Deep Scan V2 state
         shell: bash
         run: |
           set -euo pipefail
-          git add reader_text.json deep_scan_inbox
-          staged="$(git diff --cached --name-only)"
-          if [[ -n "$staged" ]]; then
-            while IFS= read -r f; do
-              [[ "$f" == 'reader_text.json' || "$f" == deep_scan_inbox/* ]] || {
-                echo "::error::Unexpected staged file: $f"
-                exit 1
-              }
-            done <<< "$staged"
-          fi
+          git add \
+            reader_text.json admission_state.json record_corrections.json \
+            radar.json radar_active.json stuff/source_merit_ranking.xlsx \
+            migration-reports/latest-deep-scan-active-rebuild.json deep_scan_inbox
           if git diff --cached --quiet; then
             echo 'No valid Deep Scan results to commit.'
             exit 0
           fi
-          git commit -m 'Deep Scan: import returned interpretations'
+          git commit -m 'Deep Scan V2: verify evidence and rebuild active Radar'
           git push origin HEAD:main
+
+      - name: Prepare the next Deep Scan V2 group automatically
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf deep_scan_next
+          python scripts/prepare_deep_scan_package.py --output-dir deep_scan_next --max-records 12 --batch-size 12
+          ls -lh deep_scan_next
+
+      - name: Upload the next Deep Scan package
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-deep-scan-package
+          path: deep_scan_next/
+          if-no-files-found: error
+          retention-days: 21
 
       - name: Import summary
         if: always()
         shell: bash
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
-          ## Deep Scan import
+          ## Deep Scan V2 import
 
-          Valid returned interpretations are stored in `reader_text.json`. The normal scanner evidence in `radar.json` is never overwritten.
+          V2 results are authoritative only after validation. A validated result may:
+          - replace provisional reader interpretation;
+          - correct supported bibliographic/source metadata;
+          - KEEP, REVIEW, DROP, or DROP_UNVERIFIABLE a record;
+          - suppress a confirmed duplicate;
+          - rebuild active rankings/Excel and all stored downstream reasoning from active evidence.
 
-          If a returned result no longer matched the record exported in that package, it was skipped for safety. Successfully imported Deep Scan works stay complete and are not automatically re-read later.
+          Raw scanner evidence remains in `radar.json` for audit. The public/readable corpus is generated as `radar_active.json`.
+
+          ### Your next step
+          Download the **next-deep-scan-package** artifact from this same workflow run. It contains the next 12 works in the FIFO verification queue. Give `deep_scan_package.zip` to your browsing-capable LLM with the instruction in `START_HERE.txt`, then upload its returned result to `deep_scan_inbox`.
+
+          Newly discovered scanner records remain provisionally usable in the Radar while they wait behind the existing queue. They do not jump ahead of older queued work.
           EOF
 
       - name: Remove temporary repository credential
