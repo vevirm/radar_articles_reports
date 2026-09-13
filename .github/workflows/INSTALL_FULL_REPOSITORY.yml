@@ -12,8 +12,10 @@ on:
 permissions:
   contents: read
 
+# Use the same lock as the scanners so a scan cannot push while the repository
+# replacement is being committed.
 concurrency:
-  group: radar-full-repository-install
+  group: ri-radar-research-scanners
   cancel-in-progress: false
 
 env:
@@ -47,7 +49,7 @@ jobs:
           unzip -t "$PAYLOAD" >/dev/null
           echo "Payload ZIP is readable."
 
-      - name: Replace working tree from payload
+      - name: Replace repository except GitHub workflow files
         shell: bash
         run: |
           set -euo pipefail
@@ -58,6 +60,7 @@ jobs:
           # The payload contains repository files at its root, not an enclosing folder.
           test -f "$tmp/repo/VERSION.txt"
           test -f "$tmp/repo/scripts/active_corpus.py"
+          test -f "$tmp/repo/.github/workflows/deep-scan-import.yml"
           test -f "$tmp/repo/.github/workflows/radar-v2-migration.yml"
           test -f "$tmp/repo/admission_state.json"
           test -f "$tmp/repo/record_corrections.json"
@@ -68,9 +71,13 @@ jobs:
             exit 1
           fi
 
-          # Replace every tracked/untracked repository file while preserving Git's own
-          # metadata. This also removes the temporary payload ZIP from the installed tree.
-          rsync -a --delete --exclude='.git/' "$tmp/repo/" ./
+          # GitHub deliberately prevents the normal GITHUB_TOKEN from creating or
+          # updating workflow files. Preserve .github/workflows exactly as it is now;
+          # the small workflow bundle is uploaded once through the browser afterwards.
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/workflows/' \
+            "$tmp/repo/" ./
 
           # Minimal structural validation before committing the replacement.
           python -m json.tool admission_state.json >/dev/null
@@ -78,9 +85,20 @@ jobs:
           python -m json.tool reader_text.json >/dev/null
           python -m json.tool radar.json >/dev/null
           python -m json.tool radar_active.json >/dev/null
-          echo "Full repository tree replaced with $version."
+          echo "Repository tree replaced with $version; .github/workflows intentionally preserved."
 
-      - name: Commit full replacement
+      - name: Refuse accidental workflow changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git status --porcelain -- .github/workflows || true)"
+          if [[ -n "$changed" ]]; then
+            echo '::error::Installer unexpectedly changed .github/workflows. Refusing to commit.'
+            printf '%s\n' "$changed"
+            exit 1
+          fi
+
+      - name: Commit repository replacement
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
@@ -89,15 +107,18 @@ jobs:
           git config user.name 'radar-v25-installer'
           git config user.email 'actions@github.com'
           git add -A
+
+          # Belt-and-braces: never stage workflow changes from this action.
+          git reset -- .github/workflows >/dev/null 2>&1 || true
+
           if git diff --cached --quiet; then
-            echo 'Repository already matches the V25 payload.'
+            echo 'Repository already matches the non-workflow V25 payload.'
             exit 0
           fi
           git commit -m 'Install Radar V25 Deep Scan authoritative repository'
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
           trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
-          git pull --rebase origin main
           git push origin HEAD:main
 
       - name: What to do next
@@ -107,7 +128,9 @@ jobs:
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
           ## Full Radar V25 repository installation
 
-          If this run is green, go to **Actions → Radar V2 — Initialise, Validate & Prepare Deep Scan → Run workflow**.
+          If this run is green, the non-workflow V25 repository is installed.
 
-          That action validates the installed repository, rebuilds the active corpus/Excel/reasoning from the V2 trust layer, and gives you the first 12-work Deep Scan V2 package as a downloadable artifact.
+          **One browser upload remains:** upload the supplied V25 workflow files into `.github/workflows` in one batch. GitHub requires this because Actions are not allowed to rewrite workflow files using the normal repository token.
+
+          After that, upload the supplied V25 workflow bundle through the browser, then run **Radar V2 — Initialise, Validate & Prepare Deep Scan**.
           EOF
