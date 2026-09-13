@@ -1,0 +1,2170 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-a-20260913T222236Z-47330b640b29",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.19062/2247-3173.2026.27.30",
+      "source_hash": "8230995c",
+      "identity_hash": "66934f098eafd5c6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package attempted https://www.afahc.ro/AFASESNEW/2026/Volume%202026/30-A.NITESCU,T.TANASE.pdf; retrieval failed at the host and no substantive text was stored."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.19062/2247-3173.2026.27.30; the AFASES 2026 official papers index confirms title, authors and DOI, but not substantive article text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for \"Dual-Use Technologies and Cybersecurity Challenges in the Current Military Defense Environment\" found the official AFASES 2026 index/program only; no accessible manuscript/full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search for the title with Adriana Nițescu, Tiberiu Tănase and 2026 confirmed the AFASES conference programme entry, but yielded no substantive copy."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Searched the Henri Coandă Air Force Academy/AFASES 2026 site and the paper PDF path; the index was visible but the paper file was not retrievable through the available access path."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Bounded searches using DOI fragment 2026.27.30, author surnames, AFASES and distinctive title fragments found identity/program references only, not a legitimate substantive copy."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity is verified from the official AFASES 2026 papers index and programme, but substantive evidence remained inaccessible after all six recovery steps."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The work exists, but no legitimate substantive text could be recovered after the complete mandatory ladder."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1515/jdis-2025-0374",
+      "source_hash": "198284f7",
+      "identity_hash": "3b9ffda71be1451d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.degruyterbrill.com/document/doi/10.1515/jdis-2025-0374/html; it matched the claimed work but the package contained no substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1515/jdis-2025-0374 matched the Journal of Data and Information Science record and bibliographic identity."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery found the author preprint at https://arxiv.org/abs/2602.04871 and an author-uploaded full text, providing substantive evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_preprint",
+            "url": "https://arxiv.org/abs/2602.04871",
+            "title": "Evolving scientific collaboration among EU member states, candidate countries and global partners: 2000-2024",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_record",
+            "url": "https://www.j-jdis.com/EN/10.1515/jdis-2025-0374",
+            "title": "Journal of Data and Information Science record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Full preprint was checked against the final journal identity; substantive findings and method match the claimed work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly analyses EU member-state and candidate-country research collaboration, Framework Programme timing and persistent integration asymmetries."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct from record 34: this final article uses Scopus to study integration, while record 34 explicitly compares OpenAlex with Scopus and bilateral versus multilateral measures."
+      },
+      "reader_title": "Europe’s research network is integrating, but unevenly",
+      "reader_what": "Collaboration intensifies across European groups, while EU-14 remains the network core and structural asymmetries persist.",
+      "reader_why": "Funding cycles coincide with collaboration peaks, suggesting EU programmes help sustain cross-border scientific ties.",
+      "reader_more": "Using Scopus articles from 2000–2024, the study compares relative collaboration intensity for EU-14, EU-13 and candidate countries with European and global partners. Integration increases, but EU-14 remains the core and candidate countries are less connected to it. Peaks for EU-13 and candidate countries align with Framework Programme cycles. Collaboration with Russia remains unusually persistent, while China ties are comparatively weak.",
+      "deep_analysis": {
+        "work_kind": "bibliometric empirical study",
+        "research_question": "How have EU integration, globalisation and geopolitical shocks shaped scientific collaboration among EU groups and global partners?",
+        "main_finding": "European collaboration intensified but retained a hierarchy centred on EU-14, with weaker integration for EU-13 and candidate countries.",
+        "method_or_basis": "Scopus articles, 2000–2024; Relative Intensity of Collaboration across EU-14, EU-13, candidate countries and major global partners.",
+        "qualification": "Framework Programme timing is associational; the design does not establish programme funding as the cause of collaboration changes.",
+        "radar_relevance": "Direct evidence on European research integration, international collaboration and the possible role of EU Framework Programmes.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.58691/man/224300",
+      "source_hash": "a15b2833",
+      "identity_hash": "a60b24aa521040da",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.management-poland.com/Horizon-Europe-and-regional-funds-as-factors-nin-the-development-of-small-and-medium,224300,0,2.html; matching publisher landing page was thin."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.58691/man/224300 matched title, author and journal."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search on the journal recovered the publisher PDF/full article, which was used for methods and findings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.management-poland.com/Horizon-Europe-and-regional-funds-as-factors-nin-the-development-of-small-and-medium,224300,0,2.html",
+            "title": "Horizon Europe and regional funds as factors in the development of small and medium-sized enterprises in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher full text established the comparative design and findings for Poland, Germany, Spain and Finland."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Examines how Horizon Europe and EU regional funds shape SME innovation and modernisation across four EU countries."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon and regional funds support different parts of SME development",
+      "reader_what": "Horizon Europe is linked more to R&D and product innovation; regional funds more to productivity, digitalisation and modernisation.",
+      "reader_why": "Complementarity works best where firms and regions have stronger absorptive capacity.",
+      "reader_more": "The article compares Poland, Germany, Spain and Finland using literature, policy documents and secondary European data. It distinguishes the effects associated with Horizon Europe from those associated with structural and regional funding. The reported pattern is complementary rather than interchangeable: research funding supports R&D and product innovation, while regional funds more often support adoption, digitalisation and productivity. Less-developed regions rely more on incremental upgrading and capacity building.",
+      "deep_analysis": {
+        "work_kind": "comparative policy and secondary-data study",
+        "research_question": "How do Horizon Europe and regional funds contribute differently to SME development in EU member states?",
+        "main_finding": "Horizon Europe is associated with research and product innovation, while structural funds are associated more with modernisation, productivity and digital adoption.",
+        "method_or_basis": "Analytical-comparative desk research using literature, European Commission/Eurostat/OECD material and four country cases.",
+        "qualification": "The study is exploratory and relies on secondary evidence rather than firm-level causal identification.",
+        "radar_relevance": "Directly concerns EU R&I and cohesion instruments and their interaction in SME innovation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.3390/world7080135",
+      "source_hash": "5984fc9f",
+      "identity_hash": "c3307b2e8524b210",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package stored no substantive text for the DOI link https://doi.org/10.3390/world7080135."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.3390/world7080135 resolved to the open-access MDPI article at https://www.mdpi.com/2673-4060/7/8/135, which provided full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.mdpi.com/2673-4060/7/8/135",
+            "title": "The Economic and Technological Resilience in the European Union: Geopolitical Fragmentation, Economic Security and the Future of Competitiveness",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open publisher full text verified the qualitative policy/document analysis and its three EU resilience dimensions."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article substantively analyses EU technological resilience, critical dependencies, economic security and competitiveness."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU resilience policy is shifting from efficiency toward strategic security",
+      "reader_what": "The article argues the EU is rebalancing openness with technological, resource and competitiveness resilience.",
+      "reader_why": "External dependencies turn technology and supply-chain choices into economic-security constraints.",
+      "reader_more": "Using policy analysis, systematic document review and secondary statistics, the article examines technological, resource and competitiveness resilience in the EU. It places critical technologies and external dependencies at the centre of the competitiveness debate. The argument is that resilience now requires managing dependencies and strategic capabilities, not simply maximizing short-run efficiency. The analysis is policy-oriented rather than a causal empirical test.",
+      "deep_analysis": {
+        "work_kind": "policy and document-analysis article",
+        "research_question": "How is geopolitical fragmentation reshaping the EU approach to economic and technological resilience?",
+        "main_finding": "EU policy is moving toward active management of technological and resource dependencies as part of competitiveness and economic security.",
+        "method_or_basis": "Qualitative policy analysis, systematic document analysis and secondary statistics from European and international institutions.",
+        "qualification": "The evidence is interpretive and policy-analytic; it does not estimate causal effects of resilience policies.",
+        "radar_relevance": "Direct evidence on EU technological capacity, economic security and long-term competitiveness.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://commission.europa.eu/document/download/11c2eb97-6820-4a07-94c6-db3d684cefb8_en?filename=rtd_mp_2026_en.pdf",
+      "source_hash": "28be1e33",
+      "identity_hash": "fea353fb8609c89b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied a 43-page substantive official PDF extract from https://commission.europa.eu/document/download/11c2eb97-6820-4a07-94c6-db3d684cefb8_en?filename=rtd_mp_2026_en.pdf, including objectives, actions and performance material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://commission.europa.eu/document/download/11c2eb97-6820-4a07-94c6-db3d684cefb8_en?filename=rtd_mp_2026_en.pdf",
+            "title": "Management Plan 2026 — Directorate-General for Research and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive official Commission document establishes DG RTD priorities and 2026 actions."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The DG RTD management plan directly sets 2026 EU research, innovation, talent, ERA and strategic-technology priorities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "DG RTD’s 2026 plan links science, scale-up and strategic technology",
+      "reader_what": "The plan prioritises scientific progress, commercialisation, ERA capacity and dual-use research capabilities.",
+      "reader_why": "Its objectives connect research funding and ecosystem measures to EU competitiveness and security priorities.",
+      "reader_more": "The Commission plan sets operational objectives for 2026 across scientific progress, transforming research into scalable innovation, the European Research Area, talent and strategic technologies. It also connects R&I with green, digital, health and security priorities. The document is a management plan, so it records intended actions and performance targets rather than observed policy effects. Its value is as authoritative evidence of current Commission priorities.",
+      "deep_analysis": {
+        "work_kind": "official management plan",
+        "research_question": "What will DG Research and Innovation prioritise and deliver in 2026?",
+        "main_finding": "The plan centres on scientific and technological progress, innovation scale-up, ERA/talent and strategic or dual-use R&I capabilities.",
+        "method_or_basis": "Official Commission management plan with objectives, activities and performance tables.",
+        "qualification": "Plans and targets are intentions and management commitments, not evidence that outcomes have already occurred.",
+        "radar_relevance": "Primary evidence of EU R&I policy direction and implementation priorities for 2026.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.3390/su18136912",
+      "source_hash": "7dedd702",
+      "identity_hash": "63f11c48550564c9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package stored no substantive text for https://doi.org/10.3390/su18136912."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.3390/su18136912 resolved to the open-access publisher full text at https://www.mdpi.com/2071-1050/18/13/6912."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.mdpi.com/2071-1050/18/13/6912",
+            "title": "Mapping Strategic Innovation Capacity and Sustainable Development in the European Union: Evidence from Grey Clustering",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article verified EU27 indicators, grey-clustering design, scenarios and sensitivity analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirically maps innovation capacity and sustainable-development outcomes across EU member states using Eurostat data."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Innovation capacity and sustainable outcomes do not always move together",
+      "reader_what": "EU countries cluster into distinct innovation-sustainability profiles, with persistent gaps between leaders and lagging states.",
+      "reader_why": "High innovation inputs do not guarantee matching sustainability outcomes, so capacity and outcomes need separate diagnosis.",
+      "reader_more": "The study uses Eurostat indicators for all EU member states and applies grey clustering across innovation inputs and sustainability outcomes. It tests multiple scenarios and sensitivity to weighting. Denmark, Sweden and the Netherlands emerge among stronger systemic performers, while some Central and Eastern European countries remain in weaker clusters. The authors stress that innovation resources and sustainability results can diverge.",
+      "deep_analysis": {
+        "work_kind": "cross-country quantitative study",
+        "research_question": "How well do EU member states align strategic innovation capacity with sustainable-development outcomes?",
+        "main_finding": "Member states form differentiated profiles, and strong innovation capacity does not automatically translate into stronger sustainability outcomes.",
+        "method_or_basis": "Eurostat indicators, grey clustering, multiple scenarios and sensitivity tests across EU27 countries.",
+        "qualification": "Clustering is descriptive and sensitive to indicator choices; it does not establish causal mechanisms.",
+        "radar_relevance": "Direct comparative evidence on innovation capacity and convergence within the EU.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/scipol/scag060",
+      "source_hash": "fd6bf68c",
+      "identity_hash": "8f4699bc0eb8fa17",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package retrieval of https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag060/8715769 returned 403; no substantive text was stored."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/scipol/scag060 resolves to Oxford Academic and confirms the title, authors and 24 June 2026 publication date, but the accessible page is abstract-only/get-access."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the Oxford abstract page and a ResearchGate publication record; neither exposed a legitimate full manuscript."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title plus Jaime Llorca/Mireia Reus/Sergio Villanueva Baselga and 2026 found University of Barcelona bibliographic records only."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Checked Oxford Academic, University of Barcelona/CHARM-EU and author/repository-style results; no accessible accepted manuscript or full text was recovered."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Bounded searches for scag060, DOI fragments, title variants and “PDF/manuscript” returned the publisher abstract and bibliographic listings, not substantive text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "The Oxford record confirms identity and a detailed abstract, but substantive/full text remained inaccessible after all six required steps."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is secure, but the package requires substantive evidence and only abstract/bibliographic material could be recovered."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/marie-curie-alumni-association-welcomes-eu-proposal-for-a-framework-on-science-diplomacy/",
+      "source_hash": "cc0d26f6",
+      "identity_hash": "57ea3789f2d4b59f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the complete matching ERA Portal news text from https://era.gv.at/news-items/marie-curie-alumni-association-welcomes-eu-proposal-for-a-framework-on-science-diplomacy/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_era_portal_news",
+            "url": "https://era.gv.at/news-items/marie-curie-alumni-association-welcomes-eu-proposal-for-a-framework-on-science-diplomacy/",
+            "title": "Marie Curie Alumni Association welcomes EU proposal for framework on science diplomacy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full news item records the MCAA response, policy context and specific implementation requests."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantively reports a European research-community response to the proposed EU science-diplomacy framework and implementation design."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "news item"
+        },
+        "unset": [],
+        "reason": "The ERA Portal source is a dated news item reporting a stakeholder response, not a research/policy paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Researchers’ network backs EU science diplomacy but asks for stronger delivery",
+      "reader_what": "MCAA welcomes the proposed framework while requesting clearer implementation, dedicated resources and links to existing EU instruments.",
+      "reader_why": "Researcher mobility networks can operationalise science diplomacy only if policy commitments connect to resources and implementation channels.",
+      "reader_more": "The ERA Portal item reports the Marie Curie Alumni Association’s response to the Commission proposal for an EU science-diplomacy framework. MCAA highlights mobility, interdisciplinary cooperation and its ERA stakeholder role as practical assets. It supports the initiative but calls for clearer implementation pathways, resources and stronger links to existing policy instruments. This is a stakeholder position, not evidence that the framework has produced effects.",
+      "deep_analysis": {
+        "work_kind": "current R&I policy stakeholder development",
+        "research_question": "What position does MCAA take on the proposed EU science-diplomacy framework?",
+        "main_finding": "MCAA supports the proposal but argues that implementation needs clearer pathways, dedicated resources and stronger policy-instrument links.",
+        "method_or_basis": "Full ERA Portal report of the association’s public response and stated policy asks.",
+        "qualification": "The item reports a stakeholder position rather than an adopted policy outcome or evaluated impact.",
+        "radar_relevance": "Directly concerns EU science diplomacy, researcher mobility and ERA stakeholder governance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/eu-research-and-innovation-funding-expands-to-defence-and-dual-use-technologies/",
+      "source_hash": "639aeb75",
+      "identity_hash": "d3dfe64e2e046826",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the full matching ERA Portal item from https://era.gv.at/news-items/eu-research-and-innovation-funding-expands-to-defence-and-dual-use-technologies/, including programme amendment, eligibility and financing details."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_era_portal_news",
+            "url": "https://era.gv.at/news-items/eu-research-and-innovation-funding-expands-to-defence-and-dual-use-technologies/",
+            "title": "EU research and innovation funding expands to defence and dual-use technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full source describes the amended EIC Work Programme and new defence/dual-use financing terms."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "Reports a concrete 2026 EIC programme change opening grants/equity to dual-use and defence technologies plus a new €100m scale-up call."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "news item"
+        },
+        "unset": [],
+        "reason": "The ERA Portal source is a dated news item reporting a programme change, not a research/policy paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EIC funding opens further to defence and dual-use firms",
+      "reader_what": "The 2026 EIC programme now allows dual-use and defence applicants and adds a €100 million defence scale-up call.",
+      "reader_why": "The amendment changes eligibility and financing channels, directly expanding EU support for strategic technology scale-up.",
+      "reader_more": "The item describes an adopted amendment to the EIC Work Programme 2026 implementing the Defence Mini-Omnibus. Eligible start-ups and SMEs can seek grants and equity under the EIC Accelerator and STEP Scale Up. It also reports a new €100 million EIC STEP Defence Scale Up call and says this is the first direct-equity defence investment by an EU funding programme. These are programme changes, not projected effects.",
+      "deep_analysis": {
+        "work_kind": "current funding-programme development",
+        "research_question": "What changed in EU R&I funding for defence and dual-use technologies in 2026?",
+        "main_finding": "EIC eligibility and financing were expanded to dual-use and defence technologies, including a new €100 million defence scale-up call.",
+        "method_or_basis": "Full ERA Portal report of the amended EIC Work Programme 2026 and financing terms.",
+        "qualification": "The source establishes the programme change and announced financing, not subsequent company or capability outcomes.",
+        "radar_relevance": "A concrete current change in EU innovation finance for strategic and defence technologies.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/scipol/scag056",
+      "source_hash": "c4b6ed34",
+      "identity_hash": "7f1d75e43f09deef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.1093/scipol/scag056."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/scipol/scag056 resolved to the open Oxford article; institutional research portals also expose an open final version."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag056/8704042",
+            "title": "As open as possible? Comparing Scandinavian approaches to research security",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository_record",
+            "url": "https://research.cbs.dk/en/publications/as-open-as-possible-comparing-scandinavian-approaches-to-research/",
+            "title": "CBS Research Portal record and open final version",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Full article and institutional metadata establish the comparative Scandinavian governance analysis and publication date."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct comparative evidence on European research-security governance and responsible internationalisation in Denmark, Norway and Sweden."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-06-08"
+        },
+        "unset": [],
+        "reason": "Oxford Academic and the Copenhagen Business School research portal both identify the published-online date as 8 June 2026; the scanner stored 29 May 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Scandinavian research-security models diverge despite similar systems",
+      "reader_what": "Denmark, Norway and Sweden organise research security differently, producing distinct balances between openness and strategic protection.",
+      "reader_why": "Institutional structures and policy processes shape how similar research systems translate security concerns into governance.",
+      "reader_more": "The article compares research-security governance in Denmark, Norway and Sweden using a longitudinal qualitative design. It identifies contrasting models: more centralised and controlled arrangements in Denmark, more consultative collective responsibility in Norway, and more distributed autonomy in Sweden. The authors build a typology from structural and process dimensions. These are governance patterns, not measured effects on research performance.",
+      "deep_analysis": {
+        "work_kind": "comparative qualitative policy study",
+        "research_question": "Why do Denmark, Norway and Sweden adopt different research-security approaches despite institutional similarities?",
+        "main_finding": "Differences in structures and policy processes generate distinct national balances between openness and research security.",
+        "method_or_basis": "Longitudinal comparative qualitative analysis of Scandinavian policy structures, processes and frames.",
+        "qualification": "The study explains governance variation; it does not quantify downstream effects on collaboration or innovation.",
+        "radar_relevance": "Highly direct European evidence on research security and responsible internationalisation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.24833/2071-8160-2026-2-107-24-46",
+      "source_hash": "9c1ed2c6",
+      "identity_hash": "b1cedaf9b25668be",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.24833/2071-8160-2026-2-107-24-46."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI matched the MGIMO Review article and HSE institutional publication record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered an author-uploaded full text at ResearchGate, sufficient to inspect the argument and examples."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository_full_text",
+            "url": "https://www.researchgate.net/publication/408580947_Naucnaa_diplomatia_ES_kak_instrument_strategiceskoj_avtonomii",
+            "title": "EU scientific diplomacy as a tool of strategic autonomy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Author-uploaded full text verified the institutionalist analysis, EU policy documents and SESAME/Arctic examples."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Examines EU science diplomacy as an R&I and foreign-policy instrument for strategic autonomy and technological sovereignty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU science diplomacy is becoming more strategic and security-oriented",
+      "reader_what": "The article argues EU science diplomacy is shifting from liberal soft power toward strategic autonomy and technological sovereignty.",
+      "reader_why": "Geopolitical fragmentation and technology competition push scientific cooperation into security and foreign-policy calculations.",
+      "reader_more": "Using an institutionalist approach, the article traces EU science-diplomacy concepts, organisations and strategic documents. It argues that the policy model is becoming more geopolitical, with stronger attention to security, technological advantage and strategic autonomy. SESAME and Arctic cooperation are used as cases. The analysis is interpretive and does not show that science diplomacy can overcome wider geopolitical conflict.",
+      "deep_analysis": {
+        "work_kind": "policy-analysis journal article",
+        "research_question": "How is EU science diplomacy changing as the Union pursues strategic autonomy?",
+        "main_finding": "EU science diplomacy is shifting toward a more strategic and geopolitical model focused on technology, security and autonomy.",
+        "method_or_basis": "Institutionalist analysis of EU policy documents, organisational arrangements, expert networks and selected cooperation cases.",
+        "qualification": "The work is interpretive and cannot demonstrate that science diplomacy itself resolves political conflict or delivers technological sovereignty.",
+        "radar_relevance": "Directly addresses EU science diplomacy, research cooperation, security and strategic autonomy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/s1062798726100635",
+      "source_hash": "7a70b1bf",
+      "identity_hash": "a0e863951e5e2105",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial matching Cambridge article text from https://www.cambridge.org/core/journals/european-review/article/choose-europe-research-careers-brain-drain-and-policy-lessons-from-the-cesaer-2024-survey/713E6B8C16ED9791756A712DC2C3D950, including abstract, survey evidence, cases and recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/european-review/article/choose-europe-research-careers-brain-drain-and-policy-lessons-from-the-cesaer-2024-survey/713E6B8C16ED9791756A712DC2C3D950",
+            "title": "Choose Europe: Research Careers, Brain Drain and Policy Lessons from the CESAER 2024 Survey",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher text establishes the 24-university survey, three case studies and European research-career recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Provides empirical evidence on European research careers, brain drain and policy options for retaining and attracting scientific talent."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe’s research-career system remains uneven and precarious",
+      "reader_what": "A 24-university survey finds workforce growth alongside widespread temporary contracts and uneven long-term career pathways.",
+      "reader_why": "Precarious, project-based hiring weakens Europe’s ability to attract and retain research talent.",
+      "reader_more": "The article draws on CESAER’s 2024 survey of 24 European universities and case studies from Lisbon, Twente and Bergen. It finds growth in research employment but substantial reliance on temporary contracts and large institutional variation. It proposes a European careers observatory, assessment reform and stronger EU–national co-funding for durable pathways. The recommendations are policy proposals rather than evaluated interventions.",
+      "deep_analysis": {
+        "work_kind": "survey-based policy study",
+        "research_question": "What conditions shape European research careers and brain circulation, and what policy responses follow?",
+        "main_finding": "European research employment has grown, but precarious and uneven career structures undermine talent attraction and retention.",
+        "method_or_basis": "CESAER 2024 survey of 24 European universities plus case studies of Lisbon, Twente and Bergen.",
+        "qualification": "The sample is a selected university network; proposed remedies are not evaluated for causal impact.",
+        "radar_relevance": "Direct evidence on European research careers, talent mobility and ERA competitiveness.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/scipol/scag024",
+      "source_hash": "79ea6f0c",
+      "identity_hash": "8883ca58b30d742c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.1093/scipol/scag024."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/scipol/scag024 resolved to the open Oxford full article at https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag024/8659325."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag024/8659325",
+            "title": "Exploring geopolitics and innovation: the role of bilateral relationships in shaping research collaboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article shows a global country-pair study using PATSTAT and GDELT; Europe is not the substantive object of analysis."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_FAIL",
+        "reason": "The study is global and country-pair based; use of EPO PATSTAT is a data source, not substantive European R&I focus."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-04-20"
+        },
+        "unset": [],
+        "reason": "Oxford Academic gives the publication date as 20 April 2026; the scanner stored 10 March 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Global geopolitics shapes scientific collaboration",
+      "reader_what": "Better bilateral relations are associated with more cross-country patent collaboration, while quality effects are less consistent.",
+      "reader_why": "Scientific mobility and high-tech trade are identified as channels linking bilateral relations to collaboration volume.",
+      "reader_more": "The study combines global patent records with GDELT bilateral-event data at country-pair level. It finds stronger bilateral relations associated with greater probability and volume of scientific collaboration, and international collaboration with higher patent quality. Effects on collaboration quality are less consistent. Although PATSTAT is maintained by the European Patent Office, the empirical question is global rather than European, so the work fails Strand A’s substantive-Europe test.",
+      "deep_analysis": {
+        "work_kind": "global quantitative collaboration study",
+        "research_question": "How are bilateral geopolitical relationships associated with research collaboration and innovation outcomes across countries?",
+        "main_finding": "Better bilateral relations are associated with more collaboration; effects on the quality of existing collaborations are weaker and less consistent.",
+        "method_or_basis": "Matched EPO PATSTAT patent data and GDELT event data with country-pair regressions and mechanism tests.",
+        "qualification": "Associations and mediation tests do not by themselves prove causality; the study is global rather than Europe-centred.",
+        "radar_relevance": "Fails Strand A because Europe is not the substantive research object; a European database is only an input source.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://royalsociety.org/-/media/policy/publications/2026/uk-ukraine-research-bridge-workshop-report.pdf",
+      "source_hash": "2264512e",
+      "identity_hash": "4ffad8649bd4fd51",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied a long matching official Royal Society PDF extract from https://royalsociety.org/-/media/policy/publications/2026/uk-ukraine-research-bridge-workshop-report.pdf, including discussion summaries and future-action areas."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://royalsociety.org/-/media/policy/publications/2026/uk-ukraine-research-bridge-workshop-report.pdf",
+            "title": "The UK–Ukraine ResearchBridge: Accelerating Reconstruction through Science & Innovation — conference report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive conference report establishes current UK–Ukraine R&I priorities, barriers and partnership proposals."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantively addresses UK–Ukraine research and innovation cooperation, reconstruction, resilience and scientific capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "UK–Ukraine research cooperation is being organised around reconstruction",
+      "reader_what": "The report identifies practical collaboration priorities spanning resilience, health, digital technology, AI and innovation.",
+      "reader_why": "Structured cross-system partnerships can connect complementary expertise while reducing barriers to wartime and reconstruction research.",
+      "reader_more": "This Royal Society conference report summarises discussions on strengthening UK–Ukraine science and innovation links under the 100-Year Partnership. Participants highlight energy resilience, health, digital technologies, AI and defence-related innovation, alongside institutional and practical barriers. The report identifies future actions for the ResearchBridge programme. It records participant priorities and proposals, not demonstrated reconstruction outcomes.",
+      "deep_analysis": {
+        "work_kind": "conference and policy report",
+        "research_question": "How can UK–Ukraine research and innovation partnerships support reconstruction and strengthen both research systems?",
+        "main_finding": "Participants identify priority collaboration areas and call for sustained structures that connect researchers, align needs and reduce practical barriers.",
+        "method_or_basis": "Official conference report synthesising stakeholder discussions, examples and proposed future actions.",
+        "qualification": "The report reflects conference participants and programme planning; it is not an impact evaluation.",
+        "radar_relevance": "Directly concerns European research cooperation, resilience, reconstruction and innovation capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s41781-026-00184-5",
+      "source_hash": "aadd28a7",
+      "identity_hash": "0cadb68c5ff2b14e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial open Springer full text from https://link.springer.com/article/10.1007/s41781-026-00184-5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s41781-026-00184-5",
+            "title": "Designing a Pan-African Research Infrastructure for Digital Sciences: DIGITAfrica Vision, Blueprint Methodology, and Roadmap",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article verifies DIGITAfrica as a Horizon Europe initiative using lessons from ESFRI infrastructures SLICES and SoBigData."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Horizon Europe R&I infrastructure initiative transfers and adapts European RI experience into a federated pan-African digital-science design."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "DIGITAfrica proposes a federated digital research infrastructure for Africa",
+      "reader_what": "The project develops reusable blueprints, shared services and a staged roadmap for interoperable digital-science infrastructure.",
+      "reader_why": "Federated services and reusable experimental environments can reduce fragmentation and support cumulative research capacity.",
+      "reader_more": "The article presents DIGITAfrica, a Horizon Europe initiative preparing a pan-African digital research infrastructure. It combines a multi-country demand analysis with lessons from the ESFRI infrastructures SLICES and SoBigData. Two representative blueprints cover edge-interoperable AI/ML and heterogeneous networking, supported by shared services and stakeholder engagement. The work is a design and roadmap; deployment and long-term sustainability remain future tasks.",
+      "deep_analysis": {
+        "work_kind": "research-infrastructure design article",
+        "research_question": "How can a federated pan-African digital research infrastructure be specified and deployed sustainably?",
+        "main_finding": "DIGITAfrica proposes a blueprint-based, interoperable and incrementally deployable infrastructure model with shared services and stakeholder governance.",
+        "method_or_basis": "Multi-country needs analysis plus design lessons from European ESFRI infrastructures, translated into reusable blueprints and a deployment roadmap.",
+        "qualification": "The paper presents architecture and planning rather than evidence of completed continental deployment or sustained use.",
+        "radar_relevance": "Substantive Horizon Europe infrastructure cooperation drawing directly on European RI models and governance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://merics.org/en/report/italy-biopharma-automotive-and-telecoms-sectors-are-facing-chinas-technological-power",
+      "source_hash": "97b7760a",
+      "identity_hash": "3b5ea910ee1824a3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the complete MERICS/ETNC Italy chapter from https://merics.org/en/report/italy-biopharma-automotive-and-telecoms-sectors-are-facing-chinas-technological-power, including named authors and three sector cases."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://merics.org/en/report/italy-biopharma-automotive-and-telecoms-sectors-are-facing-chinas-technological-power",
+            "title": "Italy: Biopharma, automotive and telecoms sectors are facing China’s technological power",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full chapter verifies authorship and the analysis of Italian technology dependencies and industrial responses."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Examines Italy’s innovation and industrial-capability exposure to China across biopharma, automotive and telecoms in a European technology-power context."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Aurelio Insisa, Francesca Maremonti"
+        },
+        "unset": [],
+        "reason": "The MERICS page itself identifies the chapter as “By Aurelio Insisa … and Francesca Maremonti”; “MERICS” is the publisher/host, not the authorship."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Italy faces sector-specific trade-offs in dealing with China’s technology power",
+      "reader_what": "Biopharma, automotive and telecoms show different combinations of innovation opportunity, dependency and security risk.",
+      "reader_why": "Chinese technological capability forces Italian actors to balance access, competitiveness and strategic dependency in critical sectors.",
+      "reader_more": "The ETNC country chapter analyses three sectors subject to Italy’s special-powers regime: biopharma, electric/autonomous vehicles and ICT including 5G/6G. It asks whether cooperation with Chinese firms strengthens innovation or deepens technological dependence and security exposure. Responses differ by sector rather than following one national template. The chapter is strategic analysis, not a causal estimate of China’s effects.",
+      "deep_analysis": {
+        "work_kind": "country industrial-policy report chapter",
+        "research_question": "How is China’s technological power affecting strategic Italian industries and policy choices?",
+        "main_finding": "Italy faces different innovation, dependency and security trade-offs across biopharma, automotive and telecoms.",
+        "method_or_basis": "Sector case analysis within the 2026 European Think-tank Network on China report, drawing on industrial and policy evidence.",
+        "qualification": "The chapter is analytical and forward-looking; it does not quantify causal effects of Chinese competition or investment.",
+        "radar_relevance": "Direct European industrial-capability and technology-security relevance through Italy and EU competitiveness.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ecipe.org/publications/swedish-life-sciences-sector/#_ftnref9",
+      "source_hash": "edc3f93a",
+      "identity_hash": "5d63fe9d9619d0f9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial matching ECIPE report text from https://ecipe.org/publications/swedish-life-sciences-sector/#_ftnref9; the publisher page identifies four named authors."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecipe.org/publications/swedish-life-sciences-sector/",
+            "title": "A Tale of Three Industries: The Rise, Decline and Rise Again of the Swedish Life Sciences Sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full report verifies the three-phase industry history, renewed R&D/patenting/export growth and policy recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive analysis of Swedish life-science R&D, patents, industrial restructuring and EU policy conditions."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Ismail Abdi, Andrea Dugo, Fredrik Erixon, Oscar Guinea"
+        },
+        "unset": [],
+        "reason": "The ECIPE publication page lists these four named authors; “ECIPE” is the publisher/organisation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Swedish life sciences have rebounded in a more diversified form",
+      "reader_what": "Since 2016 the sector regained R&D, patenting and export momentum while becoming less dependent on a few large firms.",
+      "reader_why": "A more distributed research-intensive industry makes effective IP protection, reimbursement and market access increasingly important.",
+      "reader_more": "The report traces three phases—rise, decline and renewed rise—in Swedish life sciences over roughly three decades. It documents renewed R&D spending, patent activity and export growth, with greater diversification toward smaller research-intensive firms. It argues this structure increases the importance of effective exclusivity and trade-policy conditions. The historical narrative supports policy recommendations but does not isolate single causal drivers.",
+      "deep_analysis": {
+        "work_kind": "industrial and innovation policy report",
+        "research_question": "How has Sweden’s life-sciences industry changed, and what policy conditions matter for its renewed growth?",
+        "main_finding": "The sector has rebounded since the mid-2010s with stronger R&D, patents and exports and a more diversified firm structure.",
+        "method_or_basis": "Long-run sector analysis using industry, trade, R&D and patent evidence with European comparisons.",
+        "qualification": "Multiple structural changes coincide with the rebound; the report does not identify a single causal policy intervention.",
+        "radar_relevance": "Direct evidence on a European life-science innovation system and relevant EU IP/trade policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.5709/alp-02.s1.2026-03",
+      "source_hash": "6b421588",
+      "identity_hash": "ec48b7df252578f5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.5709/alp-02.s1.2026-03."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.5709/alp-02.s1.2026-03 matched the AI, Law, Politics article and 21 August 2026 publication date."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the complete journal article at https://alp-journal.com/index.php/journal/article/download/42/46?inline=1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://alp-journal.com/index.php/journal/article/download/42/46?inline=1",
+            "title": "Project-Mediated Europeanisation in Poland–Ukraine University Cooperation: A Document-Based Case Study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full journal text verified the nine-document corpus, claim-level coding and provisional six-stage governance pathway."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly studies Erasmus+/Jean Monnet-mediated Europeanisation in Poland–Ukraine university cooperation and accountable academic governance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Project activity does not by itself prove institutional change",
+      "reader_what": "Documents confirm participation and feedback roles, but not curricular adoption, improved learning or measured digital resilience.",
+      "reader_why": "Separating planned, documented and inferred claims prevents project outputs from being mistaken for durable institutional outcomes.",
+      "reader_more": "The case study analyses three Jean Monnet modules and six SSPU institutional records from 2024–2026. Claim-level coding distinguishes planned design, documented activity and analytical inference. It proposes a provisional six-stage governance pathway from policy anchoring to institutionalisation, plus an accountability matrix. The author explicitly limits claims: the records do not establish portfolio governance, curricular adoption, improved learning or digital-resilience outcomes.",
+      "deep_analysis": {
+        "work_kind": "document-based higher-education governance case study",
+        "research_question": "How are EU policy priorities translated through Poland–Ukraine university projects, and what would count as institutionalisation?",
+        "main_finding": "Project participation is documented, but durable institutional transformation and resilience outcomes are not established; a testable governance pathway is proposed.",
+        "method_or_basis": "Nine core institutional documents, claim-level P/D/I coding and a bounded synthesis of EU governance, data-protection, AI and integrity frameworks.",
+        "qualification": "Single case, public-document evidence and author insider position limit causal and outcome claims; the pathway remains provisional.",
+        "radar_relevance": "Direct Europeanisation and EU higher-education/R&I governance evidence involving Poland, Ukraine and Jean Monnet instruments.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.3390/systems14081017",
+      "source_hash": "86c32fe6",
+      "identity_hash": "67232d408458a842",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.3390/systems14081017."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.3390/systems14081017 resolved to the complete open MDPI article at https://www.mdpi.com/2079-8954/14/8/1017."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.mdpi.com/2079-8954/14/8/1017",
+            "title": "A Systems-Informed Assessment of Türkiye’s Digital, Human-Capability, and Innovation Enablers for Industry 5.0 Relative to the EU-27",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article supports the benchmark and sensitivity results; admission is borderline because the substantive focal case is Türkiye and EU27 is the benchmark."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_REVIEW",
+        "reason": "EU27 data are used extensively as the full benchmark, but the research question and conclusions centre on Türkiye; this sits directly on Strand A’s comparator boundary."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Türkiye benchmarks poorly against EU27 Industry 5.0 enablers",
+      "reader_what": "Türkiye remains in the lowest readiness group and below the EU27 mean on every measured digital and innovation indicator.",
+      "reader_why": "The largest shortfall is high-tech exports, indicating weak conversion of R&D inputs into scalable technology outputs.",
+      "reader_more": "The study benchmarks Türkiye against all 27 EU member states using digitalisation, skills, R&D and high-technology-export indicators. CRITIC–MARCOS is the primary model with alternative weighting/ranking and sensitivity tests; Türkiye stays between 26th and 28th. The evidence is substantive, but the work’s focal case is Türkiye and the EU serves as the comparison set. Human review is appropriate because Strand A explicitly excludes non-European studies that use the EU merely as a comparator.",
+      "deep_analysis": {
+        "work_kind": "cross-country benchmarking study",
+        "research_question": "How does Türkiye compare with the EU27 on measurable digital, human-capability and innovation enablers for Industry 5.0?",
+        "main_finding": "Türkiye falls below the EU27 mean on every indicator and remains in the lower-readiness group across model specifications.",
+        "method_or_basis": "Seven indicators; CRITIC–MARCOS plus Entropy/TOPSIS alternatives, equal-domain weighting and indicator-exclusion sensitivity tests.",
+        "qualification": "The indicators capture enabling capabilities, not the full human-centred, sustainability or resilience construct; cross-sectional rankings are non-causal.",
+        "radar_relevance": "Substantive EU27 benchmark evidence, but the Europe-scope admission question is borderline because Türkiye is the focal case.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/rea-publishes-mapping-of-research-infrastructures-for-climate-resilience/",
+      "source_hash": "df7294ce",
+      "identity_hash": "64d5de7108ea9ef8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the full matching ERA Portal news item from https://era.gv.at/news-items/rea-publishes-mapping-of-research-infrastructures-for-climate-resilience/, summarising the newly published REA evidence release."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_era_portal_news",
+            "url": "https://era.gv.at/news-items/rea-publishes-mapping-of-research-infrastructures-for-climate-resilience/",
+            "title": "REA publishes mapping of research infrastructures for climate resilience",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_report_landing",
+            "url": "https://rea.ec.europa.eu/publications/research-infrastructures-climate-resilience_en",
+            "title": "Research Infrastructures for climate resilience",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The item reports a specific new REA publication and its main portfolio findings."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "A concrete 2026 evidence release maps 38 EU-funded research-infrastructure projects and over €300m against European climate-resilience priorities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "news item"
+        },
+        "unset": [],
+        "reason": "The ERA Portal source is a dated news announcement of an REA report, not itself a research/policy paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "REA releases a map of EU climate-resilience research infrastructures",
+      "reader_what": "The new review finds a mature, interconnected RI portfolio broadly aligned with European climate-risk priorities.",
+      "reader_why": "Observation, monitoring and foresight infrastructure provide a scientific base for adaptation policy and risk management.",
+      "reader_more": "The ERA Portal item reports the release of an REA mapping of 38 projects representing more than €300 million in EU funding. The review assesses alignment with European climate-risk and adaptation priorities and highlights strengths in observation, monitoring and foresight. This record is the news announcement; the underlying report is separately verified in record 21. It establishes an evidence release, not downstream climate outcomes.",
+      "deep_analysis": {
+        "work_kind": "current evidence-release announcement",
+        "research_question": "What new evidence did REA publish on research infrastructures for climate resilience?",
+        "main_finding": "REA released a portfolio mapping showing broad alignment of 38 EU-funded RI projects with European climate-risk priorities.",
+        "method_or_basis": "Full announcement summarising the official REA report and its headline portfolio findings.",
+        "qualification": "This is an announcement and summary; detailed analytical claims belong to the underlying report.",
+        "radar_relevance": "Qualifies as a substantive current evidence release in EU research-infrastructure policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://rea.ec.europa.eu/publications/research-infrastructures-climate-resilience_en",
+      "source_hash": "22c40392",
+      "identity_hash": "1f18b79deb5d5b31",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the official REA publication page at https://rea.ec.europa.eu/publications/research-infrastructures-climate-resilience_en; it provides a substantive report description and headline findings."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the Publications Office record at https://op.europa.eu/en/publication-detail/-/publication/c164c249-80c3-11f1-bf5e-01aa75ed71a1/language-en, confirming the official report, authors, DOI 10.2848/0838717 and downloadable publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_record",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/c164c249-80c3-11f1-bf5e-01aa75ed71a1/language-en",
+            "title": "Research infrastructures for climate resilience — Mapping the European portfolio across climate risks and adaptation pathways",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official REA and Publications Office sources provide substantive findings and verified report metadata."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official analysis of 38 EU-funded research-infrastructure projects, climate-risk alignment and future Framework Programme opportunities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "institutional report"
+        },
+        "unset": [],
+        "reason": "The REA and Publications Office identify this object as a standalone official publication/report, not a generic research/policy webpage."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European research infrastructures broadly align with climate-risk priorities",
+      "reader_what": "The portfolio review finds strong observation, monitoring and foresight capabilities across 38 EU-funded infrastructure projects.",
+      "reader_why": "Interconnected environmental and digital infrastructures can translate scientific evidence into climate-risk policy and management support.",
+      "reader_more": "The REA report maps a portfolio of 38 projects worth more than €300 million against European climate risks and adaptation pathways. Its official summary says the landscape is mature and interconnected and broadly aligned with EUCRA priorities. Strengths lie in observation, monitoring, foresight, digital services and modelling. The review identifies opportunities for future Framework Programmes rather than claiming that infrastructure investment has already reduced climate damage.",
+      "deep_analysis": {
+        "work_kind": "official portfolio-analysis report",
+        "research_question": "How does the European research-infrastructure portfolio contribute to climate-resilience priorities and where are future gaps?",
+        "main_finding": "The portfolio is broadly aligned with EU climate-risk priorities and strong in observation, monitoring and foresight capabilities.",
+        "method_or_basis": "Official REA portfolio mapping of 38 EU-funded projects and more than €300 million in funding, linked to EUCRA and adaptation pathways.",
+        "qualification": "Alignment and capability do not establish realised adaptation outcomes or avoided losses.",
+        "radar_relevance": "Direct evidence on EU research-infrastructure capacity, programme portfolio design and climate-resilience R&I.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09654313.2026.2695296",
+      "source_hash": "bc31d15b",
+      "identity_hash": "383c0cce1a7e9678",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.1080/09654313.2026.2695296."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1080/09654313.2026.2695296 resolved to the open Taylor & Francis full article at https://www.tandfonline.com/doi/full/10.1080/09654313.2026.2695296."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09654313.2026.2695296",
+            "title": "Diverse agencies in reconfiguring regional innovation systems amid path decline: the Piedmontese automotive crisis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article verified 12 interviews, document analysis and the change-versus-maintenance agency framework."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Studies restructuring of an Italian regional innovation system under the European automotive transition and EU policy pressures."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Regional actors can both drive and obstruct innovation-system transition",
+      "reader_what": "Piedmont actors promote reorientation while others defend the existing automotive path, limiting multilevel transition synergy.",
+      "reader_why": "Maintenance agency can dilute how supranational transition policy translates into regional innovation-system change.",
+      "reader_more": "The authors use 12 semi-structured interviews and document analysis to study Piedmont’s declining automotive path. Their framework distinguishes change agency from maintenance agency across challenge identification, solution search, destabilisation and orchestration. Regional actors agree on the need to preserve capabilities but differ sharply over electrification and “technology neutrality.” The single case illustrates contested restructuring rather than a general causal law.",
+      "deep_analysis": {
+        "work_kind": "qualitative regional-innovation case study",
+        "research_question": "How do different actors shape reconfiguration of Piedmont’s automotive innovation system during path decline?",
+        "main_finding": "Change and maintenance agencies coexist, so regional restructuring can conflict with or dilute supranational transition goals.",
+        "method_or_basis": "Twelve interviews conducted in 2025 plus document analysis, interpreted through a four-process RIS reconfiguration framework.",
+        "qualification": "Single-region case limits generalisation; actor accounts and policy conflict do not directly measure long-run transition outcomes.",
+        "radar_relevance": "Direct European regional innovation-system evidence tied to the automotive transition and EU regulatory context.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.2478/picbe-2026-0372",
+      "source_hash": "2ae0bb07",
+      "identity_hash": "31ee520bc15c623d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantive matching journal text from https://reference-global.com/article/10.2478/picbe-2026-0372, including method, preliminary diagnostics and findings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_text",
+            "url": "https://reference-global.com/article/10.2478/picbe-2026-0372",
+            "title": "Integrating Innovation and Entrepreneurial Capacity through the MIT REAP Framework: Evidence from Bulgaria",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive primary article text verifies the Bulgarian ecosystem diagnosis and use of MIT REAP."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly diagnoses Bulgaria’s innovation and entrepreneurial ecosystem in relation to EU smart-specialisation and modernisation challenges."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Bulgaria’s innovation ecosystem remains fragmented despite improved capacity",
+      "reader_what": "The preliminary assessment finds uneven innovation performance, weak commercialisation links and shortages in scale-up finance and demand.",
+      "reader_why": "Weak links between research, entrepreneurship and scale-up support prevent existing capacity from converting smoothly into growth.",
+      "reader_more": "The paper applies MIT REAP to Bulgaria using multi-stakeholder co-creation, structured diagnostics and secondary indicators. It reports moderate but uneven innovation capacity, persistent fragmentation and weak research-to-commercialisation links. Entrepreneurial capacity is constrained by scale-up finance and demand-side gaps. Because it operationalises an existing framework rather than introducing a clearly new method, its admission rests on substantive Bulgarian/EU R&I content, not Strand B.",
+      "deep_analysis": {
+        "work_kind": "applied innovation-ecosystem diagnostic",
+        "research_question": "What does a MIT REAP diagnostic reveal about Bulgaria’s innovation and entrepreneurial capacity?",
+        "main_finding": "Bulgaria shows moderate but uneven innovation capacity, weak commercialisation links and constraints in scale-up finance and demand.",
+        "method_or_basis": "MIT REAP framework, multi-stakeholder co-creation, structured diagnostic templates and secondary data in the 2025–2027 cohort.",
+        "qualification": "The assessment is preliminary and uses an existing framework; findings should not be treated as a causal evaluation of policies.",
+        "radar_relevance": "Direct EU member-state innovation-system evidence linked to smart specialisation and modernisation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1162/qss.a.489",
+      "source_hash": "91c7eb7f",
+      "identity_hash": "2c4018bab74a6c82",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.1162/qss.a.489."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1162/qss.a.489 matched the Quantitative Science Studies final article identity."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the author-uploaded CC BY preprint/full text at https://www.researchgate.net/publication/399544250_A_global_map_of_science_according_to_a_topic_model_of_EU_grants."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository_full_text",
+            "url": "https://www.researchgate.net/publication/399544250_A_global_map_of_science_according_to_a_topic_model_of_EU_grants",
+            "title": "A global map of science according to a topic model of EU grants",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Author-uploaded full text provides the grant corpus, embedding/topic-model method and mapping results."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Uses the full EU Framework Programme grant corpus to map scientific specialisation and funding landscapes for science-policy analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU grant texts can produce a policy-oriented global map of science",
+      "reader_what": "Topic modelling of EU grants yields a cross-disciplinary map suited to comparing programmes, organisations and territorial specialisation.",
+      "reader_why": "Grant descriptions capture mission-oriented and applied funding emphases that publication-based maps may represent differently.",
+      "reader_more": "The authors map more than 81,000 EU grants from 2003 to mid-2024 using language-model embeddings and topic clustering. The resulting 60-topic landscape is designed for overlays of programmes, organisations and territories. It appears more circular and mission-oriented than classic citation-based maps. The method is useful for EU science-policy analysis, while topic choices and embedding/clustering decisions remain modelling assumptions.",
+      "deep_analysis": {
+        "work_kind": "quantitative science-mapping study",
+        "research_question": "Can topic modelling of EU grant texts provide a useful global map of science for policy analysis?",
+        "main_finding": "A 60-topic grant-based map provides a cross-disciplinary baseline for comparing EU funding portfolios and scientific specialisation.",
+        "method_or_basis": "BERT-style text embeddings and K-means topic clustering applied to more than 81,000 EU grants, with overlay mapping.",
+        "qualification": "Map structure depends on corpus, embedding and clustering choices; the representation is analytical rather than a natural taxonomy of science.",
+        "radar_relevance": "Substantive EU Framework Programme data and a science-policy mapping tool for funding, institutions and territories.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/council-adopts-first-ever-eu-framework-science-diplomacy-2026-05-29_en",
+      "source_hash": "ad461f5f",
+      "identity_hash": "3c53754eca1d2792",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the complete official Commission notice from https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/council-adopts-first-ever-eu-framework-science-diplomacy-2026-05-29_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_notice",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/council-adopts-first-ever-eu-framework-science-diplomacy-2026-05-29_en",
+            "title": "Council adopts first ever EU framework for science diplomacy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission notice establishes adoption of the Council recommendation and its policy framework."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The Council adopted the first EU framework for science diplomacy, a concrete current R&I policy decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Council adopts the EU’s first science-diplomacy framework",
+      "reader_what": "The recommendation creates a coordinated framework for EU and member-state science-diplomacy action.",
+      "reader_why": "A common framework links strategic, operational and enabling actions across research cooperation and external policy.",
+      "reader_more": "The Commission notice reports that the Council adopted a recommendation on an EU framework for science diplomacy. The framework is intended to coordinate EU and member-state action and connect science, research cooperation and external relations. It follows a Commission proposal and broader work on open and secure international cooperation. The source proves adoption and policy content, not future effectiveness.",
+      "deep_analysis": {
+        "work_kind": "current EU policy decision",
+        "research_question": "What new EU-level decision was taken on science diplomacy?",
+        "main_finding": "The Council adopted the first EU framework for science diplomacy as a coordinated basis for EU and member-state action.",
+        "method_or_basis": "Official European Commission notice reporting the Council recommendation and policy context.",
+        "qualification": "Adoption establishes the framework, not whether member states will implement it consistently or achieve intended effects.",
+        "radar_relevance": "A concrete current EU R&I governance development in international scientific cooperation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-infrastructures_en",
+      "source_hash": "3eaf9843",
+      "identity_hash": "65be86eea102480f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial official Commission strategy-page text from https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-infrastructures_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_policy_page",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-infrastructures_en",
+            "title": "European Research Infrastructures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official page describes EU research-infrastructure objectives, instruments, ESFRI/ERIC ecosystem and access/funding links."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive official account of European research-infrastructure policy, governance, access and Framework Programme support."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Research infrastructures are a core component of the European Research Area",
+      "reader_what": "EU policy combines shared facilities, ERIC/ESFRI governance, open access and Framework Programme support to build cross-border capability.",
+      "reader_why": "Pooling expensive facilities and services lets researchers access capabilities that individual institutions or countries cannot efficiently duplicate.",
+      "reader_more": "The Commission page sets out the role of research infrastructures in European science and innovation, including distributed facilities, ESFRI planning, ERIC structures and Horizon Europe support. It links infrastructure policy to open science, transnational access and strategic R&I capacity. The page is policy description rather than an evaluation, so it establishes instruments and objectives rather than their measured effects.",
+      "deep_analysis": {
+        "work_kind": "official EU R&I policy page",
+        "research_question": "How does the EU organise and support European research infrastructures?",
+        "main_finding": "EU policy uses common roadmapping, legal structures, funding and transnational access to develop an integrated research-infrastructure ecosystem.",
+        "method_or_basis": "Official Commission strategy material describing instruments, governance structures, services and links to EU-funded projects.",
+        "qualification": "The page is descriptive and may aggregate initiatives at different stages; it does not by itself measure performance or impact.",
+        "radar_relevance": "Direct primary evidence on the architecture of European research-infrastructure policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/science-diplomacy_en",
+      "source_hash": "ea41f01a",
+      "identity_hash": "b62f3b3791d2920f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial official Commission science-diplomacy strategy text from https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/science-diplomacy_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_policy_page",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/science-diplomacy_en",
+            "title": "Science diplomacy — European Commission Research and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official page documents the EU framework, agenda-building process, conferences and international engagement."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The page documents the current EU science-diplomacy framework and its 2025–2026 policy consolidation, not just generic programme navigation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU science diplomacy is being formalised into a common framework",
+      "reader_what": "The Commission links science diplomacy to open, secure international cooperation and a coordinated European policy agenda.",
+      "reader_why": "Formal networks, conferences and a Council framework create channels for aligning scientific cooperation with external-policy priorities.",
+      "reader_more": "The Commission strategy page traces development of the European science-diplomacy agenda, including working groups, conferences and the Council framework. It situates science diplomacy within the Global Approach to R&I and open but secure cooperation. Because the page records an active framework-building process, it qualifies as a current policy development. It does not demonstrate that the framework has changed diplomatic outcomes.",
+      "deep_analysis": {
+        "work_kind": "current EU policy framework page",
+        "research_question": "How is the EU institutionalising science diplomacy within international R&I cooperation?",
+        "main_finding": "The EU is consolidating science diplomacy through a common framework, expert networks and structured policy dialogue.",
+        "method_or_basis": "Official Commission strategy page documenting the agenda, working groups, conferences and Council-level framework development.",
+        "qualification": "Institutionalisation and policy coordination are documented; downstream diplomatic or scientific effects remain unmeasured.",
+        "radar_relevance": "Direct current evidence on EU science-diplomacy governance and international R&I policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://erc.europa.eu/news-events/magazine-article/science-diplomacy-utopia-pragmatism",
+      "source_hash": "7183c2fc",
+      "identity_hash": "2daee86e0bac17dd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the full ERC magazine essay from https://erc.europa.eu/news-events/magazine-article/science-diplomacy-utopia-pragmatism; the page names Sir Peter Gluckman as author."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://erc.europa.eu/news-events/magazine-article/science-diplomacy-utopia-pragmatism",
+            "title": "Science diplomacy: from utopia to pragmatism",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full essay supports the argument about science diplomacy under fragmented multilateralism and verifies authorship."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive policy analysis of science diplomacy with explicit European institutional context, research cooperation and technology-governance challenges."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Sir Peter Gluckman"
+        },
+        "unset": [],
+        "reason": "The ERC article explicitly says the piece is written by Sir Peter Gluckman; the European Research Council is the publisher/host."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Science diplomacy is becoming more pragmatic in a fractured world",
+      "reader_what": "The essay argues science diplomacy must engage national interests while preserving cooperation on global scientific challenges.",
+      "reader_why": "Science, technology and security are increasingly intertwined, so scientific cooperation cannot be insulated from geopolitical incentives.",
+      "reader_more": "Sir Peter Gluckman argues that weakened multilateralism and strategic technology competition have changed the operating environment for science diplomacy. He calls for pragmatic cooperation grounded in national interests while preserving space for work on global commons. European science-diplomacy efforts are prominent examples in the discussion. This is an expert essay, not an empirical evaluation of policy outcomes.",
+      "deep_analysis": {
+        "work_kind": "expert policy essay",
+        "research_question": "How should science diplomacy adapt to a more fragmented and transactional geopolitical environment?",
+        "main_finding": "Science diplomacy should be pragmatic about national interests while building cooperation on shared scientific and technological problems.",
+        "method_or_basis": "Analytical essay drawing on contemporary diplomacy, international science institutions and recent European/global policy debates.",
+        "qualification": "Argumentative commentary rather than systematic empirical research; proposed institutional responses are normative.",
+        "radar_relevance": "Relevant to European R&I internationalisation, science diplomacy and the governance of strategic technologies.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.55738/journal.v14i1p.35-49",
+      "source_hash": "da4f57c0",
+      "identity_hash": "d393b52857e38061",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://journal.pubalaic.org/index.php/jlacr/article/view/257; it matched the article but the package text was mainly landing/abstract material."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.55738/journal.v14i1p.35-49 matched the journal record and 14 July 2026 publication."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the author-uploaded full article at https://www.researchgate.net/publication/410225277_Academic_Cooperation_from_the_Souths_Geopolitics_of_the_Gaze_Cognitive_and_Epistemic_Justices."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository_full_text",
+            "url": "https://www.researchgate.net/publication/410225277_Academic_Cooperation_from_the_Souths_Geopolitics_of_the_Gaze_Cognitive_and_Epistemic_Justices",
+            "title": "Academic Cooperation from the Souths: Geopolitics of the Gaze, Cognitive and Epistemic Justices",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article is substantive, but Europe is one of several Northern counterparts in a Latin American decolonial reflection, making Strand A admission borderline."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_REVIEW",
+        "reason": "The work substantively discusses academic/scientific cooperation with Europe, but its central frame is Latin American/Caribbean decolonial cooperation and Europe shares the counterpart role with the United States."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Academic cooperation is treated as a field of power, not a neutral exchange",
+      "reader_what": "The essay argues cooperation is shaped by epistemic inequality and should strengthen reciprocity, cognitive justice and South–South networks.",
+      "reader_why": "Funding, institutional hierarchies and whose knowledge is recognised shape what international academic cooperation can produce.",
+      "reader_more": "The article reflects on cooperation among Latin American and Caribbean institutions and partners in Europe and the United States through a decolonial lens. It examines interinstitutionality, interdisciplinarity and intersectorality and calls for stronger South–South and inter-epistemic dialogue. Europe is genuinely part of the object, but not the dominant geographic focus. That makes inclusion under the strict European-substantiveness rule a legitimate human judgement call.",
+      "deep_analysis": {
+        "work_kind": "conceptual and critical policy essay",
+        "research_question": "How should academic and scientific cooperation be understood when power and epistemic inequality are made explicit?",
+        "main_finding": "Cooperation is political and epistemic, requiring reciprocity, cognitive justice and stronger South–South/inter-epistemic relationships.",
+        "method_or_basis": "Decolonial conceptual reflection drawing on Latin American thought and dialogue with African, Asian and critical Northern traditions.",
+        "qualification": "Not an empirical evaluation; Europe and the United States are counterpart regions within a broader South-centred argument.",
+        "radar_relevance": "European cooperation is substantive but shared with other Northern contexts, so Strand A scope remains borderline.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/ckj/sfag257",
+      "source_hash": "0dfa2f19",
+      "identity_hash": "2bd5c45116a4e89e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Package stored no substantive text for https://doi.org/10.1093/ckj/sfag257."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/ckj/sfag257 resolved to the open Clinical Kidney Journal full article at https://academic.oup.com/ckj/advance-article/doi/10.1093/ckj/sfag257/8753259."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/ckj/advance-article/doi/10.1093/ckj/sfag257/8753259",
+            "title": "Coordinated clinical trial networks in nephrology: strengthening research infrastructure and improving trial delivery",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article verifies the European trial-infrastructure problem, NEFRO-NL model and early operational evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Addresses fragmented European clinical-trial infrastructure and a Dutch network model for faster, broader nephrology research delivery."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Coordinated trial networks can reduce friction in nephrology research",
+      "reader_what": "NEFRO-NL centralises feasibility and contracting while keeping trial execution distributed across hospitals.",
+      "reader_why": "Pre-agreed processes and coordinated site outreach can shorten start-up and broaden recruitment opportunities.",
+      "reader_more": "The article describes European nephrology trial constraints and the NEFRO-NL network launched in 2025. The network links hospitals, uses central feasibility assessment and master agreements, and supports multicentre investigator-led trials. Early experience suggests operational gains, but the authors explicitly say long-term effects on trial performance remain to be established. The evidence supports infrastructure design more strongly than final impact.",
+      "deep_analysis": {
+        "work_kind": "clinical research-infrastructure article",
+        "research_question": "How can coordinated nephrology trial networks improve initiation, recruitment and inclusivity in Europe?",
+        "main_finding": "A coordinated national network can streamline feasibility, contracting and site outreach, with promising early delivery experience.",
+        "method_or_basis": "Conceptual framework and early operational experience from NEFRO-NL, including network scale and multicentre trial activity.",
+        "qualification": "Long-term effects on recruitment speed, quality and inclusivity are not yet established.",
+        "radar_relevance": "Direct evidence on European clinical research infrastructure and trial-delivery capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s41781-026-00176-5",
+      "source_hash": "27d17ea8",
+      "identity_hash": "930b779007817c67",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial open Springer full text from https://link.springer.com/article/10.1007/s41781-026-00176-5, including methods and results."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s41781-026-00176-5",
+            "title": "Strengthening Visibility and Stakeholder Engagement in Research Infrastructures: Evidence from Imaging Core Facilities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article verifies interviews across ten European countries, 53 survey responses and stakeholder-mapping results."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical evidence from Euro-BioImaging and European core facilities on research-infrastructure visibility, stakeholder engagement and sustainability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European imaging facilities underinvest in strategic stakeholder engagement",
+      "reader_what": "Facilities value communication but often rely on informal outreach that misses influential funders and decision-makers.",
+      "reader_why": "Better stakeholder segmentation can connect infrastructure visibility to user demand, institutional support and long-term sustainability.",
+      "reader_more": "The study combines 15 expert interviews across ten European countries with 53 survey responses from imaging core facilities and infrastructure stakeholders. Users receive strong attention, but funders and decision-makers are often under-targeted relative to their influence. The authors adapt segmentation and stakeholder-mapping tools and identify four dimensions of visibility. The framework is empirically grounded, though communication changes have not yet been tested for long-run sustainability effects.",
+      "deep_analysis": {
+        "work_kind": "mixed-methods research-infrastructure study",
+        "research_question": "How do European imaging core facilities communicate and engage stakeholders, and where are the strategic gaps?",
+        "main_finding": "Communication is often informal and reactive, with a mismatch between outreach effort and influential groups such as funders and decision-makers.",
+        "method_or_basis": "Fifteen expert interviews across ten European countries plus 53 survey responses, stakeholder mapping and communication-framework adaptation.",
+        "qualification": "The study identifies practices and proposes a framework; it does not test whether changing communication causes financial sustainability.",
+        "radar_relevance": "Direct European research-infrastructure management evidence through Euro-BioImaging and associated facilities.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.2478/picbe-2026-0341",
+      "source_hash": "9f116f3c",
+      "identity_hash": "4b8ca6efde5add64",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantive matching article text from https://reference-global.com/article/10.2478/picbe-2026-0341, including model results and regional distribution."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_text",
+            "url": "https://reference-global.com/article/10.2478/picbe-2026-0341",
+            "title": "The Role of Research Organizations in Shaping Research-Based Spin-Offs (RBS) in Romania. Regional Patterns under EU Funds",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive article text establishes EU-funded programme data, Romanian regional analysis and regression estimates."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct empirical study of Romanian research organisations, EU-funded programmes and regional research-based spin-off formation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Romanian research spin-offs are highly concentrated geographically",
+      "reader_what": "Universities and research institutes predict more spin-offs, while Bucharest-Ilfov accounts for over half of observed activity.",
+      "reader_why": "Research organisations matter, but regional ecosystem conditions affect whether institutional capacity translates into spin-off formation.",
+      "reader_more": "The study uses data from two EU-funded Romanian competitiveness programmes across eight development regions. EViews regression associates each additional research institute with about 0.6 more spin-offs and each additional university with about 0.9, while research centres are not significant. More than half of spin-offs are concentrated in Bucharest-Ilfov. These are statistical associations from a regional dataset, not proof that adding institutions mechanically creates firms.",
+      "deep_analysis": {
+        "work_kind": "regional quantitative innovation study",
+        "research_question": "Does regional research infrastructure influence creation of research-based spin-offs in Romania?",
+        "main_finding": "University and research-institute counts are significant predictors of spin-off numbers, with strong concentration in Bucharest-Ilfov.",
+        "method_or_basis": "Regional programme data from POSCCE and POC with comparative review and EViews regression.",
+        "qualification": "Associational regional design cannot prove causal effects of adding universities or institutes; programme-era coverage also shapes the sample.",
+        "radar_relevance": "Direct Romanian and EU-funds evidence on research commercialisation and regional innovation ecosystems.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s13132-026-03384-x",
+      "source_hash": "e25024d6",
+      "identity_hash": "5304a7f8f085371e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial open Springer article text from https://link.springer.com/article/10.1007/s13132-026-03384-x, including sample construction, models and results."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s13132-026-03384-x",
+            "title": "Does Entrepreneurial Churn Reach Incumbent R&D? Corruption, Time Horizons, and Evidence from Large European Firms",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article verifies the 1,693-firm European panel, fixed-effects design and null churn/R&D result."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Large multi-country European firm evidence on R&D intensity, entrepreneurial churn and institutional conditions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Entrepreneurial churn does not predict incumbent R&D in large European firms",
+      "reader_what": "Across 1,693 firms, entry and exit measures do not explain within-firm R&D intensity once fixed effects are used.",
+      "reader_why": "Broad startup counts may be too coarse to transmit innovation-relevant competitive pressure to incumbent R&D decisions.",
+      "reader_more": "The study merges Orbis firm data with Eurostat indicators for 1,693 large firms in 19 European countries during 2017–2023. Fixed-effects models find no robust within-firm relationship between business registrations or bankruptcies and R&D intensity. Institutional conditions, especially corruption, show more persistent relationships and different short- versus long-run patterns. Administrative churn measures are imperfect proxies for entrepreneurial dynamics, which the authors treat as a key limitation.",
+      "deep_analysis": {
+        "work_kind": "European firm-panel empirical study",
+        "research_question": "Do country-level entrepreneurial entry and exit signals explain R&D intensity among large European incumbent firms?",
+        "main_finding": "Aggregate entrepreneurial churn does not robustly explain within-firm R&D intensity; institutional conditions carry more signal.",
+        "method_or_basis": "Orbis firm panel merged with Eurostat macro indicators; fixed-effects models and long-run specifications for 2017–2023.",
+        "qualification": "Registrations and bankruptcies are coarse proxies for entrepreneurial quality and dynamics; observational models remain non-causal.",
+        "radar_relevance": "Direct multi-country European evidence on incumbent R&D and innovation-system conditions.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://arxiv.org/abs/2606.06336",
+      "source_hash": "69ccefcd",
+      "identity_hash": "417265e0f328258f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://arxiv.org/abs/2606.06336; the supplied page confirms identity and abstract but not the full article text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No journal DOI is claimed; the stable identifier is arXiv:2606.06336 (DOI-form resolver 10.48550/arXiv.2606.06336 only identifies the preprint)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered an author-uploaded CC BY full text at https://www.researchgate.net/publication/406040451_Bilateral_and_multilateral_international_scientific_collaboration_of_EU_member_states_OpenAlex_vs_Scopus_2000-2024."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository_full_text",
+            "url": "https://www.researchgate.net/publication/406040451_Bilateral_and_multilateral_international_scientific_collaboration_of_EU_member_states_OpenAlex_vs_Scopus_2000-2024",
+            "title": "Bilateral and multilateral international scientific collaboration of EU member states: OpenAlex vs Scopus (2000-2024)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full preprint was recovered and checked; it is related to record 2 but has a distinct question, dataset comparison and manuscript identity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly analyses bilateral and multilateral collaboration of EU member states and evaluates OpenAlex versus Scopus for European science-policy measurement."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "Distinct from record 2: this is a separate preprint comparing OpenAlex and Scopus and bilateral versus multilateral collaboration; record 2 is a final Scopus-only journal study."
+      },
+      "reader_title": "OpenAlex can broadly reproduce EU collaboration patterns when filtered",
+      "reader_what": "With cited-article filtering, OpenAlex gives collaboration patterns broadly comparable to Scopus, while European integration remains asymmetric.",
+      "reader_why": "Open data can support country-level collaboration monitoring if coverage and recency biases are handled explicitly.",
+      "reader_more": "The preprint compares OpenAlex and Scopus for EU-14 and EU-13 collaboration from 2000–2024. Multilateral collaboration intensity is generally higher than bilateral intensity, and integration grows across EU groups and candidate countries while structural asymmetries persist. OpenAlex becomes broadly comparable after restricting to cited articles, but recent coverage is distorted by that filter. Russia ties remain above expected levels, especially for EU-13.",
+      "deep_analysis": {
+        "work_kind": "bibliometric methods and EU collaboration study",
+        "research_question": "Can OpenAlex reproduce Scopus-based measures of bilateral and multilateral scientific collaboration for EU countries?",
+        "main_finding": "Filtered OpenAlex yields broadly comparable country-level patterns, while results also show rising but asymmetric European collaboration.",
+        "method_or_basis": "OpenAlex and CWTS Scopus data, Relative Intensity of Collaboration, bilateral/multilateral comparisons and temporal models for 2000–2024.",
+        "qualification": "The cited-article filter biases recent OpenAlex coverage; database differences are larger for some EU groups and partners.",
+        "radar_relevance": "Direct EU research-collaboration evidence plus evaluation of an open bibliometric data source for science-policy monitoring.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC146873",
+      "source_hash": "424b0164",
+      "identity_hash": "2c8d2fd65518c449",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied the substantive official JRC repository summary from https://publications.jrc.ec.europa.eu/repository/handle/JRC146873, including quantitative sector indicators and strategic conclusions."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_jrc_report_record",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146873",
+            "title": "Overall Strategic Analysis of Clean Energy Technology in the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official JRC record provides a detailed strategic summary with 2024 manufacturing, trade, investment and technology-capacity evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU analysis of clean-energy technology manufacturing, R&I investment, venture capital, trade and industrial capability."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "institutional report"
+        },
+        "unset": [],
+        "reason": "The JRC repository object is a CETO strategic analysis report; “research/policy paper” is less accurate than the official report form."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU clean-tech strengths coexist with manufacturing and investment weaknesses",
+      "reader_what": "Wind and some downstream components are strong, while batteries, solar upstream capacity and venture investment remain major vulnerabilities.",
+      "reader_why": "Technology leadership depends on manufacturing scale, investment and supply-chain resilience as well as research performance.",
+      "reader_more": "The JRC CETO analysis updates the EU clean-energy technology picture through 2024. It reports falling overall manufacturing value, a smaller trade deficit, strong wind performance, major battery and upstream solar gaps, and a sharp decline in EU venture-capital investment. Public energy R&I spending remains substantial. The official summary also notes raw-material supply risks and a new sustainability assessment framework.",
+      "deep_analysis": {
+        "work_kind": "official strategic technology report",
+        "research_question": "What is the EU’s current competitive and innovation position across clean-energy technologies?",
+        "main_finding": "The EU has selective manufacturing strengths but persistent gaps in batteries and solar supply chains, alongside weaker venture investment.",
+        "method_or_basis": "JRC Clean Energy Technology Observatory strategic analysis using manufacturing, trade, R&I, VC, employment and capacity indicators through 2024.",
+        "qualification": "The package contains the official substantive summary rather than the complete report; indicators describe position and trends, not causal policy effects.",
+        "radar_relevance": "Direct evidence on EU clean-tech R&I, manufacturing capability, competitiveness and strategic dependencies.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/bilateral-cooperation-science-and-technology-agreements-non-eu-countries/india_en",
+      "source_hash": "b236bfd4",
+      "identity_hash": "e80c3fc84d364e80",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package supplied substantial official Commission page text from https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/bilateral-cooperation-science-and-technology-agreements-non-eu-countries/india_en, including 2026 agreements, TTC outcomes and Horizon Europe association steps."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_policy_page",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/bilateral-cooperation-science-and-technology-agreements-non-eu-countries/india_en",
+            "title": "International cooperation with India in research and innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official page establishes renewal of the STI agreement, Horizon Europe association process, startup partnership and joint innovation activities."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "Reports concrete 2026 developments in EU–India R&I cooperation, including formal Horizon Europe association negotiations and new innovation mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU–India research cooperation moved toward deeper Horizon integration",
+      "reader_what": "The STI agreement was renewed to 2030 and formal Horizon Europe association negotiations began alongside new innovation partnerships.",
+      "reader_why": "Association and joint platforms would give Indian institutions access to EU funding and project leadership while expanding bilateral technology cooperation.",
+      "reader_more": "The Commission page records a renewed science-and-technology agreement to 2030 and the 2026 path from exploratory talks to formal negotiations on India’s Horizon Europe association. It also describes an EU–India startup partnership, an EV charging innovation hub and collaborative research in areas such as batteries and hydrogen. These are concrete institutional developments; association itself was still under negotiation at the time described.",
+      "deep_analysis": {
+        "work_kind": "current international R&I policy development",
+        "research_question": "What changed in EU–India research and innovation cooperation in 2026?",
+        "main_finding": "The partnership deepened through STI-agreement renewal, formal Horizon Europe association negotiations and new startup/technology cooperation mechanisms.",
+        "method_or_basis": "Official Commission policy page documenting agreements, TTC decisions, programme participation and joint R&I initiatives.",
+        "qualification": "Horizon Europe association was not yet concluded; the source describes negotiations and agreed initiatives, not their future outcomes.",
+        "radar_relevance": "A substantive current development in EU international R&I policy and Framework Programme cooperation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    }
+  ]
+}
