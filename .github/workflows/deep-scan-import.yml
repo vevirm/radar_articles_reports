@@ -24,7 +24,7 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     steps:
       - name: Check out main safely
@@ -51,7 +51,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/import_deep_scan_results.py
+          python scripts/import_deep_scan_results.py --work-state deep_scan_work_state.json
           python scripts/check_reader_text.py
           python scripts/rebuild_active_radar.py --report migration-reports/latest-deep-scan-active-rebuild.json
           python scripts/check_active_corpus.py
@@ -70,12 +70,29 @@ jobs:
           print('Raw evidence immutability check passed.')
           PY
 
+      - name: Refresh both persistent worker lanes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf deep_scan_workers
+          python scripts/prepare_deep_scan_package.py \
+            --output-dir deep_scan_workers/worker-A \
+            --lane A --lane-size 36 --batch-size 12 \
+            --work-state deep_scan_work_state.json \
+            --status-file DEEP_SCAN_STATUS.md --write-work-state
+          python scripts/prepare_deep_scan_package.py \
+            --output-dir deep_scan_workers/worker-B \
+            --lane B --lane-size 36 --batch-size 12 \
+            --work-state deep_scan_work_state.json \
+            --status-file DEEP_SCAN_STATUS.md --write-work-state
+
           unexpected="$(git diff --name-only -- . \
             ':!reader_text.json' ':!admission_state.json' ':!record_corrections.json' \
             ':!radar.json' ':!radar_active.json' ':!stuff/source_merit_ranking.xlsx' \
-            ':!migration-reports/latest-deep-scan-active-rebuild.json' ':!deep_scan_inbox/**' || true)"
+            ':!migration-reports/latest-deep-scan-active-rebuild.json' ':!deep_scan_inbox/**' \
+            ':!deep_scan_work_state.json' ':!DEEP_SCAN_STATUS.md' || true)"
           if [[ -n "$unexpected" ]]; then
-            echo '::error::Deep Scan import changed an unexpected file. Refusing to save.'
+            echo '::error::Deep Scan import changed an unexpected tracked file. Refusing to save.'
             printf '%s\n' "$unexpected"
             exit 1
           fi
@@ -91,34 +108,35 @@ jobs:
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
 
-      - name: Save validated Deep Scan V2 state
+      - name: Save validated Deep Scan V2 state and worker ledger
         shell: bash
         run: |
           set -euo pipefail
           git add \
             reader_text.json admission_state.json record_corrections.json \
             radar.json radar_active.json stuff/source_merit_ranking.xlsx \
-            migration-reports/latest-deep-scan-active-rebuild.json deep_scan_inbox
+            migration-reports/latest-deep-scan-active-rebuild.json deep_scan_inbox \
+            deep_scan_work_state.json DEEP_SCAN_STATUS.md
           if git diff --cached --quiet; then
-            echo 'No valid Deep Scan results to commit.'
+            echo 'No valid Deep Scan results or worker-state changes to commit.'
             exit 0
           fi
-          git commit -m 'Deep Scan V2: verify evidence and rebuild active Radar'
+          git commit -m 'Deep Scan V2: verify evidence and refresh parallel queue'
           git push origin HEAD:main
 
-      - name: Prepare the next Deep Scan V2 group automatically
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf deep_scan_next
-          python scripts/prepare_deep_scan_package.py --output-dir deep_scan_next --max-records 12 --batch-size 12
-          ls -lh deep_scan_next
-
-      - name: Upload the next Deep Scan package
+      - name: Upload refreshed Worker A package
         uses: actions/upload-artifact@v4
         with:
-          name: next-deep-scan-package
-          path: deep_scan_next/
+          name: deep-scan-worker-A
+          path: deep_scan_workers/worker-A/
+          if-no-files-found: error
+          retention-days: 21
+
+      - name: Upload refreshed Worker B package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-scan-worker-B
+          path: deep_scan_workers/worker-B/
           if-no-files-found: error
           retention-days: 21
 
@@ -126,23 +144,20 @@ jobs:
         if: always()
         shell: bash
         run: |
-          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF2'
           ## Deep Scan V2 import
 
-          V2 results are authoritative only after validation. A validated result may:
-          - replace provisional reader interpretation;
-          - correct supported bibliographic/source metadata;
-          - KEEP, REVIEW, DROP, or DROP_UNVERIFIABLE a record;
-          - suppress a confirmed duplicate;
-          - rebuild active rankings/Excel and all stored downstream reasoning from active evidence.
+          Returned work is authoritative only after validation. Raw scanner evidence remains preserved in `radar.json`; the active/readable corpus is rebuilt in `radar_active.json`.
 
-          Raw scanner evidence remains in `radar.json` for audit. The public/readable corpus is generated as `radar_active.json`.
+          ### Parallel work model
+          - Worker A and Worker B are persistent, non-overlapping lanes reserved in FIFO assignment order.
+          - A returned file may contain only a carefully completed prefix. Unfinished records stay assigned rather than being forgotten.
+          - A later lane may finish before the earlier lane; this does not let newly discovered records jump the queue because assignment itself remains FIFO.
+          - If a work's identity is confirmed but substantive evidence is still inaccessible after all six recovery steps, the worker may use `defer`; this records the audited blockage without inventing an admission decision.
+          - `DEEP_SCAN_STATUS.md` and `deep_scan_work_state.json` preserve coordination across new LLM chats.
 
-          ### Your next step
-          Download the **next-deep-scan-package** artifact from this same workflow run. It contains the next 12 works in the FIFO verification queue. Give `deep_scan_package.zip` to your browsing-capable LLM with the instruction in `START_HERE.txt`, then upload its returned result to `deep_scan_inbox`.
-
-          Newly discovered scanner records remain provisionally usable in the Radar while they wait behind the existing queue. They do not jump ahead of older queued work.
-          EOF
+          Download **deep-scan-worker-A** and **deep-scan-worker-B** from this run for the next work. Give them to different browsing-capable LLM chats and follow `START_HERE.txt` inside each package.
+          EOF2
 
       - name: Remove temporary repository credential
         if: always()

@@ -1,0 +1,122 @@
+name: Deep Scan V2 — Prepare Parallel Worker Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      lane_size:
+        description: 'Reserved unresolved works per worker lane'
+        required: false
+        default: '36'
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  prepare-workers:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install Deep Scan dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Reserve FIFO work and prepare two non-overlapping packages
+        shell: bash
+        env:
+          LANE_SIZE: ${{ inputs.lane_size }}
+        run: |
+          set -euo pipefail
+          size="${LANE_SIZE:-36}"
+          if ! [[ "$size" =~ ^[0-9]+$ ]] || (( size < 1 || size > 60 )); then
+            echo '::error::lane_size must be an integer from 1 to 60'
+            exit 1
+          fi
+          rm -rf deep_scan_workers
+          python scripts/prepare_deep_scan_package.py \
+            --output-dir deep_scan_workers/worker-A \
+            --lane A --lane-size "$size" --batch-size 12 \
+            --work-state deep_scan_work_state.json \
+            --status-file DEEP_SCAN_STATUS.md --write-work-state
+          python scripts/prepare_deep_scan_package.py \
+            --output-dir deep_scan_workers/worker-B \
+            --lane B --lane-size "$size" --batch-size 12 \
+            --work-state deep_scan_work_state.json \
+            --status-file DEEP_SCAN_STATUS.md --write-work-state
+          cat DEEP_SCAN_STATUS.md
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-deep-scan-coordinator'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save persistent worker assignments
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add deep_scan_work_state.json DEEP_SCAN_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'Worker assignments already current.'
+          else
+            git commit -m 'Deep Scan V2: reserve parallel worker lanes'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload Worker A package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-scan-worker-A
+          path: deep_scan_workers/worker-A/
+          if-no-files-found: error
+          retention-days: 21
+
+      - name: Upload Worker B package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-scan-worker-B
+          path: deep_scan_workers/worker-B/
+          if-no-files-found: error
+          retention-days: 21
+
+      - name: Worker instructions
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF2'
+          ## Parallel Deep Scan workers are ready
+
+          GitHub has persistently reserved two non-overlapping FIFO lanes. Download **deep-scan-worker-A** for one browsing-capable LLM and **deep-scan-worker-B** for the other.
+
+          Each ZIP is self-contained and tells a fresh chat exactly what to do. A worker may return a carefully completed prefix instead of finishing the whole lane. Upload each returned `deep_scan_results.json` to `deep_scan_inbox`; the import workflow records completed work, keeps unfinished assignments, refills both lanes from the oldest unassigned queue, and publishes refreshed worker artifacts.
+
+          `DEEP_SCAN_STATUS.md` and `deep_scan_work_state.json` are the persistent audit trail. Verification/admission remains authoritative only after a returned result passes the normal V2 importer.
+          EOF2
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
