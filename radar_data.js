@@ -13,11 +13,16 @@
     return '';
   }
 
-  // Small deterministic hash. It is not a security primitive; it only prevents
-  // stale reader prose from being overlaid after the source material changes.
+  // Small deterministic hash retained for package/import compatibility. Imported
+  // Deep Scan prose does not expire merely because the fast scanner later changes.
   function sourceHash(r){
-    const material=[r?.title,r?.summary,r?.bridge_sentence,r?.source,r?.type]
-      .map(clean).join('\n');
+    // Hash scanner fields used when a Deep Scan package is exported. GitHub uses
+    // this only to reject a returned result if the record changed before import.
+    const material=[
+      r?.title,r?.headline,r?.summary,r?.signal_note,r?.core_message,r?.what,
+      r?.relevance_note,r?.why_it_matters,r?.bridge_sentence,r?.external_eu_bridge,
+      r?.source,r?.type,r?.signal_kind,r?.event_status,r?.text_mode
+    ].map(clean).join('\n');
     let h=0x811c9dc5;
     for(let i=0;i<material.length;i++){
       h^=material.charCodeAt(i);
@@ -52,15 +57,14 @@
         if(!key)continue;
         const t=table[key];
         if(!t||typeof t!=='object')continue;
-        if(t.source_hash&&t.source_hash!==sourceHash(r)){
-          stale++;
-          continue;
-        }
-        const what=clean(t.reader_what),why=clean(t.reader_why),more=clean(t.reader_more);
+        const title=clean(t.reader_title),what=clean(t.reader_what),why=clean(t.reader_why),more=clean(t.reader_more);
+        if(title)r.reader_title=title;
         if(what)r.reader_what=what;
         if(why)r.reader_why=why;
         if(more)r.reader_more=more;
-        if(what||why||more){
+        if(t.deep_analysis&&typeof t.deep_analysis==='object')r.deep_analysis=t.deep_analysis;
+        if(t.deep_read_mode)r.deep_read_mode=clean(t.deep_read_mode);
+        if(title||what||why||more){
           r.reader_text_model=clean(t.reader_text_model||t.model||'');
           r.reader_text_written_at=clean(t.reader_text_written_at||t.written_at||'');
           applied++;

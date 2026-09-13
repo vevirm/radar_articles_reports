@@ -38,7 +38,9 @@
       const x=best,m=Merit.forItem(x),c=Merit.componentsFor(x);
       const sc=x.strategic_classification&&typeof x.strategic_classification==='object'?clean(x.strategic_classification.primary):'';
       return {
-        score:m.score,band:`${m.code} — ${m.label}`,title:titleOf(x),date:clean(x.date).slice(0,10),product:[...g.products].sort().join(', '),
+        score:m.score,band:`${m.code} — ${m.label}`,title:titleOf(x),readerTitle:clean(x.reader_title),date:clean(x.date).slice(0,10),product:[...g.products].sort().join(', '),
+        readerWhat:clean(x.reader_what),readerWhy:clean(x.reader_why),readerMore:clean(x.reader_more),
+        deepConfidence:clean(x.deep_analysis?.confidence),deepReadMode:clean(x.deep_read_mode),
         source:clean(x.source||x.journal||x.institution),authors:clean(x.authors),authorityPoints:c.authorityPoints,authority:c.authority,
         relevancePoints:c.relevancePoints,relevance:c.relevance,evidencePoints:c.evidencePoints,evidence:c.evidence,
         authorPoints:c.authorTransparencyPoints,type:clean(x.type||x.signal_kind),euRelevance:clean(x.eu_relevance||x.euRelevance),
@@ -145,7 +147,8 @@
     if(k==='products')return 18;if(k==='radar copies')return 12;
     if(k.includes('title')||k.includes('headline'))return 42;
     if(k.includes('link')||k.includes('url'))return 46;
-    if(k.includes('summary')||k.includes('message')||k.includes('note')||k.includes('evidence')||k.includes('basis')||k.includes('passage')||k.includes('versions'))return 52;
+    if(k.includes('summary')||k.includes('message')||k.includes('note')||k.includes('evidence')||k.includes('basis')||k.includes('passage')||k.includes('versions')||k.includes('reader_more'))return 52;
+    if(k.includes('reader_what')||k.includes('reader_why')||k.includes('reader_title'))return 38;
     if(k.includes('authors')||k.includes('source')||k.includes('classification'))return 30;
     return 22;
   }
@@ -155,13 +158,13 @@
     const raw=buildRawPublicationTable(data);
     const rows=buildRows(data,Merit);
     const shockRows=buildShockRows(data);
-    const h1=['Rank','Score / 100','Band','Title','Date','Product','Source','Authors','Authority / 55','Authority basis','EU relevance / 25','EU relevance basis','Evidence / 15','Evidence basis','Author transparency / 5','Type','EU relevance code','EU evidence','R&I evidence','Strategic evidence','Core message','Relevance / admission note','Matrix auto cell','Strategic classification','Discovery provenance','Source tier','First seen','Source link'];
-    const b1=rows.map(r=>[r.rank,r.score,r.band,r.title,r.date,r.product,r.source,r.authors,r.authorityPoints,r.authority,r.relevancePoints,r.relevance,r.evidencePoints,r.evidence,r.authorPoints,r.type,r.euRelevance,r.euEvidence,r.riEvidence,r.geoEvidence,r.core,r.note,r.matrix,r.strategic,r.provenance,r.sourceTier,r.firstSeen,r.link]);
-    const widths=[8,11,16,42,12,16,27,32,12,28,15,31,12,28,18,24,18,28,28,28,42,48,20,22,24,20,20,42];
+    const h1=['Rank','Score / 100','Band','Source title','Plain reader title','Date','Product','Plain finding','Why it matters','Plain explanation','Deep confidence','Deep read depth','Source','Authors','Authority / 55','Authority basis','EU relevance / 25','EU relevance basis','Evidence / 15','Evidence basis','Author transparency / 5','Type','EU relevance code','EU evidence','R&I evidence','Strategic evidence','Core message','Relevance / admission note','Matrix auto cell','Strategic classification','Discovery provenance','Source tier','First seen','Source link'];
+    const b1=rows.map(r=>[r.rank,r.score,r.band,r.title,r.readerTitle,r.date,r.product,r.readerWhat,r.readerWhy,r.readerMore,r.deepConfidence,r.deepReadMode,r.source,r.authors,r.authorityPoints,r.authority,r.relevancePoints,r.relevance,r.evidencePoints,r.evidence,r.authorPoints,r.type,r.euRelevance,r.euEvidence,r.riEvidence,r.geoEvidence,r.core,r.note,r.matrix,r.strategic,r.provenance,r.sourceTier,r.firstSeen,r.link]);
+    const widths=[8,11,16,42,38,12,16,42,42,58,16,20,27,32,12,28,15,31,12,28,18,24,18,28,28,28,42,48,20,22,24,20,20,42];
     const method=[
       ['WHAT THIS FILE IS','The technical data behind the Radar. Normal reader pages deliberately hide most of this.'],
-      ['All publication data','First sheet. One deduplicated publication/report per row. It contains every field currently stored by the scanner for that publication. Nested fields use dot names; arrays and complex values are preserved as JSON. If the same publication has different stored values in different Radar products, both are retained with || between them.'],
-      ['Ranked sources','A smaller audit view with the 0–100 source-merit components. The score does not decide Matrix placement or the reader order.'],
+      ['All publication data','First sheet. One deduplicated publication/report per row. It contains scanner fields plus any currently valid Deep Scan reader fields for that publication. Nested fields use dot names; arrays and complex values are preserved as JSON. If the same publication has different stored values in different Radar products, both are retained with || between them.'],
+      ['Ranked sources','A smaller audit view. Plain reader title/finding/why/explanation appear first when a valid Deep Scan exists, followed by the 0–100 source-merit audit fields.'],
       ['Shock audit','Technical assumptions, counter-evidence, prevention actions and indicators behind inferred shocks.'],
       ['Current data state',`${clean(data?.run_completed_at||data?.last_updated)} · A=${(data?.strand_a||[]).length} · B=${(data?.strand_b||[]).length} · C=${(data?.strand_c||[]).length} · Strategic pathways=${(data?.strategic_pathways||[]).length}`],
       ['Publication rows',`${raw.rows.length} deduplicated publication/report records`],

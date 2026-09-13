@@ -267,7 +267,10 @@ function radarPair(x,opt={}){
   const storedWhat=clean(x?.reader_what||''),storedWhy=clean(x?.reader_why||'');
   if(storedWhat)return {what:limit(storedWhat,20),why:storedWhy?limit(storedWhy,20):''};
   const w=limit(opt.what||whatFor(x),20);
-  const y=limit(opt.why||whyFor(x)||'It changes a documented capability, dependency, rule or partnership in European research and innovation.',20);
+  // Automatic mode stays conservative. If the scanner cannot support a specific
+  // WHY, leave it blank rather than manufacturing a generic significance line.
+  // A later Deep Scan can supply a stronger source-grounded WHY.
+  const y=limit(opt.why||whyFor(x)||'',20);
   return {what:w,why:y};
 }
 function matrixPair(x,opt={}){
