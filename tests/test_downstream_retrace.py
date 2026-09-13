@@ -14,7 +14,11 @@ from scripts import downstream_retrace as dr
 class DownstreamRetraceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.original = json.loads((ROOT / 'radar.json').read_text(encoding='utf-8'))
+        # Downstream reasoning is now defined over the authoritative active
+        # snapshot, while radar.json deliberately retains inactive raw evidence
+        # for audit/reversibility.
+        corpus_path = ROOT / 'radar_active.json'
+        cls.original = json.loads(corpus_path.read_text(encoding='utf-8'))
         cls.revalidation = dr.latest_revalidation_report(ROOT)
         cls.rebuilt, cls.report = dr.retrace_document(
             copy.deepcopy(cls.original),

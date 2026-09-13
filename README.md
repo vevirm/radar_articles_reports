@@ -1,6 +1,6 @@
 # Research & Innovation × Geopolitics Radar
 
-Static GitHub Pages reader plus automated research scanners.
+Static GitHub Pages reader plus automated research scanners and an offline authoritative Deep Scan verification layer.
 
 ## Reader paths
 
@@ -9,27 +9,35 @@ Static GitHub Pages reader plus automated research scanners.
 - `/radar/` — searchable current evidence
 - `/explore/` — question-led route into Matrix, Trends, phenomena, risks, shocks, history, sources and methods
 
-## Data
+## Data / trust layers
 
-- `radar.json` — live/current corpus
-- `historical/historical.json` — older evidence kept separate from current signals
+- `radar.json` — raw scanner evidence plus regenerated derived state; raw A/B/C records are retained for audit/reversibility
+- `radar_active.json` — generated active corpus used by reader/analysis; applies authoritative Deep Scan V2 semantics, admission and corrections
+- `reader_text.json` — Deep Scan interpretations, including preserved legacy versions
+- `admission_state.json` — centralized provisional/keep/review/drop/drop_unverifiable/duplicate state
+- `record_corrections.json` — validated metadata/provenance corrections
+- `historical/historical.json` — older historical evidence kept separate from current signals
 
-## Scanners
+Records without V2 verification remain provisionally active, so the automatic scanner never waits for manual Deep Scan work. Once V2 is imported, V2 is authoritative for the active interpretation/admission and downstream reasoning is rebuilt from the active corpus.
 
-- `scripts/scan_radar.py` — main automatic scan
+## Scanners and Deep Scan
+
+- `scripts/scan_radar.py` — main automatic scanner/admission logic
 - `historical/scan_historical.py` — historical scan
-- `.github/workflows/radar-scan.yml` — main automation
+- `.github/workflows/radar-scan.yml` — main automatic scanner workflow
 - `.github/workflows/historical-scan.yml` — historical automation
-- `scripts/prepare_deep_scan_package.py` — builds one self-contained backlog-aware Deep Scan ZIP; no model API is called
-- `scripts/import_deep_scan_results.py` — validates returned Deep Scan JSON/ZIP files and safely merges the reader sidecar
-- `scripts/deep_read_works.py` — shared record/source/validation helpers; no model API calls
-- `.github/workflows/reader-language.yml` — **Deep Scan — Prepare Package** manual file-export workflow
-- `.github/workflows/deep-scan-import.yml` — automatically validates/imports files uploaded to `deep_scan_inbox`
+- `scripts/active_corpus.py` — centralized active-corpus policy
+- `scripts/rebuild_active_radar.py` — rebuilds active evidence and all derived reasoning from active evidence
+- `scripts/prepare_deep_scan_package.py` — prepares the next FIFO Deep Scan V2 group (12 works by default); no model API
+- `scripts/import_deep_scan_results.py` — validates/imports authoritative V2 results and sidecar state
+- `.github/workflows/reader-language.yml` — manually prepare the next Deep Scan group if needed
+- `.github/workflows/deep-scan-import.yml` — automatically imports uploaded results and creates the next group
+- `.github/workflows/radar-v2-migration.yml` — one-time post-install initialization/validation + first V2 package
 
-The automatic scanner remains the fast path. Deep Scan is an offline file rotation: GitHub prepares a ZIP, a user-provided LLM subscription reads it, and GitHub validates the returned file into the optional `reader_text.json` semantic sidecar. No paid model API key is required. See [`DEEP_SCAN_SETUP.md`](DEEP_SCAN_SETUP.md).
+See **`DEEP_SCAN_SETUP.md`** for the simple download → LLM → upload → next-package rotation.
 
 ## Tests
 
-The main maintained regression suite is bundled inside `tests/all_tests.zip` and loaded by `tests/test_all.py`. The release also remains compatible with obsolete standalone tests that may have been left in an older repository by GitHub browser uploads.
+The repository includes the existing scanner/reader regression suite plus V2 tests covering active-corpus filtering, raw-evidence immutability, Deep Scan authority, metadata corrections, exhaustive unverifiable handling, duplicate suppression and downstream retrace behavior.
 
-Version: **v23.0-calm-working-radar**
+Version: **v25.0.0-deep-scan-authoritative**

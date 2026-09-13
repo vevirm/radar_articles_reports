@@ -1,0 +1,155 @@
+{
+  "profile": "radar-v2-migration-preview-v1",
+  "destructive_changes": false,
+  "raw_counts": {
+    "strand_a": 413,
+    "strand_b": 133,
+    "strand_c": 129
+  },
+  "active_counts_now": {
+    "strand_a": 412,
+    "strand_b": 133,
+    "strand_c": 129
+  },
+  "raw_record_occurrences": 675,
+  "unique_record_keys": 668,
+  "deep_scan_legacy_entries": 300,
+  "deep_scan_v2_entries": 0,
+  "deep_scan_v2_pending_unique_keys": 668,
+  "current_admission_decisions": {
+    "drop": 1
+  },
+  "metadata_corrections": 1,
+  "same_record_key_variant_groups": [
+    {
+      "record_key": "link:https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf",
+      "occurrences": 2,
+      "records": [
+        {
+          "strand": "A",
+          "title": "Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats",
+          "source": "Hybrid CoE — European Centre of Excellence for Countering Hybrid Threats"
+        },
+        {
+          "strand": "A",
+          "title": "Artificial Intelligence and Foreign Information Manipulation - Hybrid CoE Paper 29 - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats",
+          "source": "Hybrid CoE — European Centre of Excellence for Countering Hybrid Threats"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://merics.org/sites/default/files/2026-07/MERICS%2BETNC_Report_2026_WEB%20%281%29.pdf",
+      "occurrences": 3,
+      "records": [
+        {
+          "strand": "A",
+          "title": "Executive Summary: Fragmented Europe: Dealing with China as a technology and innovation power",
+          "source": "MERICS"
+        },
+        {
+          "strand": "A",
+          "title": "Fragmented Europe: Dealing with China as a technology and innovation power",
+          "source": "MERICS"
+        },
+        {
+          "strand": "A",
+          "title": "Ireland: Interlocking factors shape the approach to China in science-tech innovation",
+          "source": "MERICS"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.jer.2026.07.022",
+      "occurrences": 2,
+      "records": [
+        {
+          "strand": "A",
+          "title": "Evaluating bilateral reciprocity in Sino-German innovation cooperation: A Delphi-AHP-Fuzzy framework",
+          "source": "Journal of Engineering Research"
+        },
+        {
+          "strand": "B",
+          "title": "Evaluating bilateral reciprocity in Sino-German innovation cooperation: A Delphi-AHP-Fuzzy framework",
+          "source": "Journal of Engineering Research"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf",
+      "occurrences": 2,
+      "records": [
+        {
+          "strand": "A",
+          "title": "F4E publishes the first Global Fusion Energy Trends report - Fusion for Energy",
+          "source": "Fusion for Energy"
+        },
+        {
+          "strand": "A",
+          "title": "Reports - Fusion for Energy",
+          "source": "Fusion for Energy"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://allea.org/wp-content/uploads/2026/06/Joint-statement-on-Open-Science-1.pdf",
+      "occurrences": 2,
+      "records": [
+        {
+          "strand": "A",
+          "title": "ALLEA and Partners Call for Stronger Action on Open Science in the European Research Area",
+          "source": "ALLEA"
+        },
+        {
+          "strand": "A",
+          "title": "Joint Statement on Open Science: Open Science as a Pillar for Strengthening the European Research Area",
+          "source": "ALLEA"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf",
+      "occurrences": 2,
+      "records": [
+        {
+          "strand": "A",
+          "title": "ALLEA Issues Appeal for Support of Ukrainian Science",
+          "source": "ALLEA"
+        },
+        {
+          "strand": "A",
+          "title": "Appeal of the ALLEA General Assembly in Support of Ukrainian Science",
+          "source": "ALLEA"
+        }
+      ]
+    }
+  ],
+  "high_confidence_distinct_key_duplicate_candidates": [
+    {
+      "reason": "exact_normalized_title",
+      "identity": "a sustainable platform for federated health data access ai innovation and regulatory acceptance in alignment with the european health data space principles",
+      "record_keys": [
+        "link:https://doi.org/10.12688/openreseurope.23459.1",
+        "link:https://doi.org/10.12688/openreseurope.23459.2"
+      ],
+      "titles": [
+        "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+        "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles"
+      ]
+    }
+  ],
+  "legacy_deep_scan_relevance_concerns": [
+    {
+      "record_key": "link:https://www.eurekanetwork.org/wp-content/uploads/2026/08/Switzerland-2025-2026-Eureka-Chair-year-in-review.pdf",
+      "radar_relevance": "Concerns how intergovernmental innovation cooperation outside the EU framework relates to the next EU budget period."
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s11192-026-05690-2",
+      "radar_relevance": "Relevant to ongoing research assessment reform debates, though the study is not Europe-specific and makes no claim about European systems."
+    },
+    {
+      "record_key": "link:https://doi.org/10.55186/25876740_2026_69_3_373",
+      "radar_relevance": "Uses EU bioeconomy policy as a reference model, but the subject is regional policy design outside the EU."
+    }
+  ],
+  "note": "Duplicate candidates and legacy concerns are preview flags only. No new DROP decision is applied by this report."
+}

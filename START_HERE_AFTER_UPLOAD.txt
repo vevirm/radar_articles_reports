@@ -1,0 +1,53 @@
+RADAR V25 — START HERE AFTER THE FULL REPOSITORY UPLOAD
+========================================================
+
+This repository uses Deep Scan V2 as the authoritative verification layer.
+The automatic scanner still runs normally and new discoveries remain provisional and usable until their turn in the FIFO Deep Scan queue.
+
+FIRST RUN (ONCE AFTER UPLOAD)
+-----------------------------
+1. GitHub -> Actions.
+2. Open: "Radar V2 — Initialise, Validate & Prepare Deep Scan".
+3. Click "Run workflow".
+4. Wait for a green successful run.
+5. Open the run and download the artifact "radar-v2-migration-and-deep-scan".
+6. Unzip the artifact and take out "deep_scan_package.zip".
+
+NORMAL DEEP SCAN CYCLE
+----------------------
+1. Give deep_scan_package.zip to a browsing-capable LLM.
+2. Tell it exactly:
+
+   Process this Deep Scan V2 package strictly according to INSTRUCTIONS.md. Go deeply and systematically. Process records in supplied order. Do not cherry-pick. Do not stop early on difficult records. Exhaust the mandatory recovery ladder before declaring a work unverifiable. Return deep_scan_results.json or a ZIP containing it.
+
+3. Download the returned deep_scan_results.json or ZIP.
+4. GitHub -> Code -> deep_scan_inbox -> Add file -> Upload files.
+5. Upload the returned result and commit directly to main.
+6. GitHub automatically runs "Deep Scan V2 — Import Returned Results".
+7. Wait for a green run, open it, and download the artifact "next-deep-scan-package".
+8. Repeat from step 1 with the new deep_scan_package.zip.
+
+WHAT V2 DOES
+------------
+- Raw scanner evidence remains preserved in radar.json.
+- Not-yet-V2-scanned records stay provisional and active.
+- V2 KEEP/REVIEW/DROP/DROP_UNVERIFIABLE and confirmed duplicate status control the active corpus.
+- V2 may correct supported bibliographic/source metadata and authoritative WHAT/WHY interpretation.
+- DROP/DROP_UNVERIFIABLE records cannot contribute to the active page, Excel, rankings or regenerated reasoning.
+- Derived reasoning is rebuilt from the active evidence; Deep Scan does not hand-edit themes/Matrix/conclusions.
+- A failed URL is not enough to drop a record. DROP_UNVERIFIABLE requires the complete retrieval ladder.
+- New scanner discoveries wait their turn in the FIFO queue; they do not jump ahead.
+
+IMPORTANT
+---------
+Do NOT run the old actions named:
+- ONE-TIME Full Corpus Revalidation
+- ONE-TIME Corpus Cleanup
+- ONE-TIME Downstream Retrace
+- RESTORE Corpus Backup
+
+They are retained only as inert historical workflow files and are disabled in V25.
+
+The existing scanner rotation/cadence is preserved. The current workflow contract remains Main every four hours at :17 UTC and Historical two hours after Main, using the shared scanner concurrency lock.
+
+If you open a new ChatGPT chat, upload the repository ZIP or this file and say that this is the completed Radar V25 Deep Scan V2 migration. DEEP_SCAN_SETUP.md contains the detailed operating instructions.

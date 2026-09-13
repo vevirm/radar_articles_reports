@@ -1,12 +1,13 @@
-# Upload this patch to the repository root
+# Upload this complete repository to GitHub
 
-This is the **no-API, one-Deep-Scan-per-work** version.
+This is the full **Deep Scan V2 authoritative** repository, not a small patch.
 
-1. Unzip the patch on your computer.
-2. In the GitHub repository, choose **Add file → Upload files**.
-3. Drag the **contents of this folder** into GitHub, preserving the folders shown here.
-4. Commit the changes to `main`.
-5. Do **not** add Anthropic, OpenAI, Copilot, or other AI API keys.
-6. Open `DEEP_SCAN_SETUP.md` for the normal file rotation.
+The safest intention is to replace the repository files with this complete set while preserving the repository itself (GitHub Pages/settings/secrets/history remain on GitHub).
 
-Important behavior: once a work has a valid imported Deep Scan interpretation, it is considered complete. Normal future scanner changes do not automatically send it through Deep Scan again.
+After upload, run **Actions → Radar V2 — Initialise, Validate & Prepare Deep Scan → Run workflow**. That validates the new active-corpus architecture, regenerates active outputs and gives you the first 12-work Deep Scan package.
+
+Then the normal cycle is only:
+
+**download package → give ZIP to browsing LLM → upload returned result to `deep_scan_inbox` → download the automatically generated next package**.
+
+No AI API key is required. See `DEEP_SCAN_SETUP.md` for exact browser-level instructions.

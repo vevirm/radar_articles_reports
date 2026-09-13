@@ -211,6 +211,7 @@ function rankClass(x){return globalThis.RadarReaderRank?.band?.(rankScore(x))||'
 function filtered(items){const q=state.query.trim().toLowerCase();const floor=state.latestDate?state.latestDate-30*86400000:0;let out=items.filter(x=>publicDisplayOk(x)&&(!state.recentOnly||dateMs(x)>=floor)&&(!q||searchable(x).includes(q))&&(!state.newOnly||newItem(x)));return [...out].sort((a,b)=>(globalThis.RadarReaderRank?.compare?.(a,b)??0)||firstSeenMs(b)-firstSeenMs(a)||dateMs(b)-dateMs(a)||cleanText(a.title||a.headline).localeCompare(cleanText(b.title||b.headline)))}
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
 function addedTag(x){return newItem(x)?tag('New','new'):''}
+function admissionTag(x){const d=cleanText(x?.admission_status||'').toLowerCase();if(d==='review')return tag('Review','review');if(x?.deep_scan_authoritative)return tag('Deep verified','verified');return ''}
 function rankBadge(x){const n=rankScore(x),cls=rankClass(x);return `<span class="rank-badge ${esc(cls)}" title="Reader rank ${n}/100" aria-label="Reader rank ${n} out of 100">${n}</span>`}
 function fmtInt(v){const n=Number(v);return Number.isFinite(n)?new Intl.NumberFormat('en-GB').format(n):'—'}
 function biblio(x,label='Bibliography'){
@@ -226,19 +227,19 @@ function signalPoint(x){const raw=globalThis.RadarInsights?.signalWhat?.(x)||x.w
 function claimButton(x,id,title=cardHeading(x),linkLabel='Open publication ↗'){return `<h3 class="claim-title">${esc(title)}</h3><div class="card-actions"><button class="info-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">More info</button>${x.link?`<a class="publication-link" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(linkLabel)}</a>`:''}</div>`}
 function abItem(x,i){
   const id=`abstract-a-${i}`;
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${admissionTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}</article>`
 }
 function bItem(x,i){
   const id=`abstract-b-${i}`;
   const pair=globalThis.RadarReaderStyle?.radarPair?.(x,{what:methodPoint(x),why:methodUse(x)})||{what:methodPoint(x),why:methodUse(x)};
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${admissionTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
 }
 function cItem(x,i){
   const id=`abstract-c-${i}`;
   const rawWhat=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';
   const rawWhy=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
   const pair=globalThis.RadarReaderStyle?.radarPair?.(x,{what:rawWhat,why:rawWhy})||{what:rawWhat,why:rawWhy};
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${admissionTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function fallbackCard(x){const rawTitle=cleanText(x?.reader_title||x?.title||x?.headline||x?.core_message||'Finding');const title=globalThis.RadarReaderStyle?.displayTitle?.(rawTitle)||rawTitle;const source=cleanText(x?.source||'');const link=cleanText(x?.link||'');return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x?.date))}</div></div><h3 class="claim-title">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="visible-source"><strong>Source:</strong> ${esc(source)}</div>`:''}</article>`}

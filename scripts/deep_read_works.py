@@ -3,22 +3,22 @@
 
 Deep Scan is deliberately *offline from paid model APIs*.
 
-The normal Radar scanner remains the source of truth in ``radar.json``. A manual
-GitHub workflow packages records that need deeper reading into a ZIP. The user
-can give that ZIP to any capable LLM subscription, then upload the returned
-result file to ``deep_scan_inbox``. GitHub validates the result and writes only
-the optional semantic sidecar ``reader_text.json``.
+The automatic scanner stores provisional raw evidence in ``radar.json``. A manual
+GitHub workflow packages records for a much stricter Deep Scan V2. The user can
+give that ZIP to a capable browsing LLM subscription, then upload the returned
+result file to ``deep_scan_inbox``. GitHub validates the result before allowing it
+to affect reader language, admission, metadata or downstream reasoning.
 
-This module holds the common record identity, source-reading and reader-text
-validation logic used by the package and import scripts. It makes no model/API
-calls and needs no AI API key. A successfully deep-read work is considered done;
-it is not automatically queued again just because the fast scanner later changes
-its wording or metadata.
+This module holds shared record identity, source-reading and reader-text validation
+logic. It makes no model/API calls and needs no AI API key. Only the authoritative
+Deep Scan V2 profile counts as complete; older Deep Scan interpretations remain
+available during migration but are deliberately queued once for V2 verification.
 """
 from __future__ import annotations
 
 import argparse
 import difflib
+import hashlib
 import io
 import json
 import re
@@ -33,7 +33,7 @@ from pypdf import PdfReader
 
 CORPUS = Path("radar.json")
 SIDECAR = Path("reader_text.json")
-STRANDS = ("strand_a", "strand_b", "strand_c")
+STRANDS = ("strand_a", "strand_b", "strand_c", "frontier_evidence")
 WORD_CAP = {"what": 20, "why": 20, "title": 18}
 MORE_WORD_CAP = 135
 NEAR_DUPLICATE = 0.86
@@ -41,11 +41,8 @@ SOURCE_CHAR_CAP = 24000
 PDF_PAGE_CAP = 10
 HTTP_TIMEOUT = 12
 USER_AGENT = "EU-RI-Radar-DeepScan-Packager/3.0 (+manual offline semantic pass)"
-ACTIVE_DEEP_PROFILES = {
-    "deep-reader-v2",
-    "deep-reader-v2.1",
-    "deep-reader-offline-v1",
-}
+ACTIVE_DEEP_PROFILES = {"deep-reader-v2-authoritative"}
+LEGACY_DEEP_PROFILES = {"deep-reader-v2", "deep-reader-v2.1", "deep-reader-offline-v1"}
 
 
 def clean(v: Any) -> str:
@@ -62,6 +59,17 @@ def record_key(r: dict[str, Any]) -> str:
         return f"doi:{doi}"
     rid = clean(r.get("id") or r.get("record_id") or r.get("fingerprint"))
     return f"id:{rid}" if rid else ""
+
+
+def identity_hash(r: dict[str, Any]) -> str:
+    """Stable hash of the record identity used by Deep Scan V2.
+
+    V2 can take longer than an automatic scan interval, so semantic scanner wording
+    is allowed to change while a package is being worked. The stable record key must
+    still resolve to the same raw evidence object.
+    """
+    key = record_key(r)
+    return hashlib.sha256(key.encode("utf-8")).hexdigest()[:16] if key else ""
 
 
 def source_hash(r: dict[str, Any]) -> str:
@@ -124,25 +132,32 @@ def pending(
     """
     out: list[tuple[str, str, str, dict[str, Any], str]] = []
     table = sidecar.get("records", {})
+    seen_keys: set[str] = set()
     for strand, r in iter_records(doc):
         key = record_key(r)
-        if not key:
+        if not key or key in seen_keys:
             continue
+        seen_keys.add(key)
         old = table.get(key)
         h = source_hash(r)
         if not old or old.get("profile") not in ACTIVE_DEEP_PROFILES:
-            # A missing entry or a legacy/light reader-language entry means this
-            # work has never completed the Deep Scan process.
-            out.append((strand, key, h, r, "never_deep_read"))
+            # V2 is intentionally a one-time re-verification of the whole legacy
+            # corpus. Existing V1 prose remains usable while migration proceeds,
+            # but it is not authoritative for admission/provenance/reasoning.
+            reason = "upgrade_legacy_deep_scan_to_v2" if isinstance(old, dict) and old.get("profile") in LEGACY_DEEP_PROFILES else "never_deep_read"
+            out.append((strand, key, h, r, reason))
 
-    # Research/report works are read before current-signal/news records. Within
-    # each strand, newer never-read works go first. Completed works are absent.
-    grouped: list[tuple[str, str, str, dict[str, Any], str]] = []
-    for strand in ("strand_a", "strand_b", "strand_c"):
-        rows = [x for x in out if x[0] == strand]
-        rows.sort(key=lambda x: _date_key(x[3]), reverse=True)
-        grouped.extend(rows)
-    return grouped
+    # Deep Scan V2 is a FIFO verification queue. Legacy rows with no ``first_seen``
+    # are deliberately treated as the oldest backlog. Rows with ``first_seen`` are
+    # processed oldest-discovered first across A/B/C, so newly discovered scanner
+    # records enter the Radar provisionally but wait behind work already queued.
+    # Python's sort is stable, preserving repository order for equal timestamps.
+    def queue_key(item: tuple[str, str, str, dict[str, Any], str]) -> tuple[int, str]:
+        first_seen = clean(item[3].get("first_seen"))
+        return (0, "") if not first_seen else (1, first_seen)
+
+    out.sort(key=queue_key)
+    return out
 
 
 @dataclass

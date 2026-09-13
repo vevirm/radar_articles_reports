@@ -52,8 +52,10 @@ def test_offline_package_contains_instructions_manifest_and_all_pending(tmp_path
         instructions = zf.read(f"{root}/INSTRUCTIONS.md").decode("utf-8")
         manifest = json.loads(zf.read(f"{root}/manifest.json"))
         batch = json.loads(zf.read(f"{root}/batches/batch_001.json"))
-    assert "understand each work" in instructions
+    assert "authoritative evidence verifier" in instructions
+    assert "mandatory retrieval ladder" in instructions
     assert "Partial completion" in instructions
+    assert manifest["format"] == "radar-deep-scan-package-v2"
     assert manifest["works_in_package"] == 1
     assert len(batch["jobs"]) == 1
     assert batch["jobs"][0]["record_key"] == record_key(doc["strand_a"][0])
@@ -152,7 +154,7 @@ def test_offline_import_skips_stale_hash(tmp_path):
     assert not returned.exists()
 
 
-def test_offline_package_does_not_requeue_completed_work_after_scanner_change(tmp_path):
+def test_offline_package_requeues_legacy_v1_once_for_authoritative_v2(tmp_path):
     doc, row = _radar_doc()
     old_hash = source_hash(row)
     row["relevance_note"] = "The fast scanner later changed this wording."
@@ -177,5 +179,5 @@ def test_offline_package_does_not_requeue_completed_work_after_scanner_change(tm
         "--output-dir", str(out), "--no-fetch",
     ], cwd=ROOT, check=True)
 
-    assert (out / "NO_DEEP_SCAN_NEEDED.txt").exists()
-    assert not (out / "deep_scan_package.zip").exists()
+    assert not (out / "NO_DEEP_SCAN_NEEDED.txt").exists()
+    assert (out / "deep_scan_package.zip").exists()

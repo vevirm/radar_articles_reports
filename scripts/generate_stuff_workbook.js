@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 'use strict';
-// Generate the repository snapshot of the Stuff audit workbook from radar.json.
-// The public Stuff page can also generate the same workbook live in-browser, so
-// a legacy GitHub workflow that persists only radar.json cannot make the Excel stale.
+// Generate the repository snapshot from the authoritative active corpus.
+// radar_active.json is generated from raw radar.json + Deep Scan/admission sidecars.
+// Falling back to raw radar.json is allowed only before the first V2 active build.
 const fs=require('fs');
 const path=require('path');
 const Merit=require('../source_merit.js');
 const Workbook=require('../stuff/workbook.js');
 const ROOT=path.resolve(__dirname,'..');
-const data=JSON.parse(fs.readFileSync(path.join(ROOT,'radar.json'),'utf8'));
+const active=path.join(ROOT,'radar_active.json');
+const raw=path.join(ROOT,'radar.json');
+const input=fs.existsSync(active)?active:raw;
+const data=JSON.parse(fs.readFileSync(input,'utf8'));
+if(input===raw&&Number(data?.active_corpus?.decision_counts?.drop||0)+Number(data?.active_corpus?.decision_counts?.drop_unverifiable||0)+Number(data?.active_corpus?.decision_counts?.duplicate||0)>0){throw new Error('Refusing to generate active workbook from raw radar.json while inactive decisions exist');}
 const out=path.join(ROOT,'stuff','source_merit_ranking.xlsx');
 const bytes=Workbook.buildXlsx(data,Merit);
 fs.writeFileSync(out,Buffer.from(bytes));
-console.log(`Wrote ${out}: ${Workbook.buildRows(data,Merit).length} ranked records`);
+console.log(`Wrote ${out} from ${path.basename(input)}: ${Workbook.buildRows(data,Merit).length} active ranked records`);
