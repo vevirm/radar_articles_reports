@@ -24,6 +24,10 @@ try:
     from scripts.deep_read_works import (
         CORPUS, SIDECAR, clean, identity_hash, iter_records, load_sidecar, pending, record_key, source_hash, validate,
     )
+    from scripts.deep_scan_work_state import (
+        DEFAULT_WORK_STATE, expected_remaining_for_package, load_state, mark_deferred,
+        mark_verified, save_state, sync_verified,
+    )
 except ModuleNotFoundError:
     from active_corpus import (  # type: ignore
         DEFAULT_ADMISSION, DEFAULT_CORRECTIONS, SAFE_CORRECTION_FIELDS, SAFE_UNSET_FIELDS,
@@ -32,12 +36,16 @@ except ModuleNotFoundError:
     from deep_read_works import (  # type: ignore
         CORPUS, SIDECAR, clean, identity_hash, iter_records, load_sidecar, pending, record_key, source_hash, validate,
     )
+    from deep_scan_work_state import (  # type: ignore
+        DEFAULT_WORK_STATE, expected_remaining_for_package, load_state, mark_deferred,
+        mark_verified, save_state, sync_verified,
+    )
 
 V1_FORMAT = "radar-deep-scan-results-v1"
 V2_FORMAT = "radar-deep-scan-results-v2"
 V1_PROFILE = "deep-reader-offline-v1"
 V2_PROFILE = "deep-reader-v2-authoritative"
-DECISIONS = {"keep", "drop", "review", "drop_unverifiable"}
+DECISIONS = {"keep", "drop", "review", "drop_unverifiable", "defer"}
 DUPLICATE_STATUSES = {"unique", "duplicate", "review"}
 TARGET_STRANDS = {"A", "B", "C"}
 REQUIRED_UNVERIFIABLE_STEPS = {
@@ -47,6 +55,7 @@ REQUIRED_UNVERIFIABLE_STEPS = {
 FORBIDDEN_EVIDENCE_DEPTHS = {"", "title_only", "search_snippet", "snippet_only", "scanner_only", "abstract_only"}
 SUCCESS_OUTCOMES = {"success", "found", "matched", "recovered", "resolved"}
 FAILURE_OUTCOMES = {"failed", "not_found", "no_match", "blocked", "unavailable", "not_applicable"}
+DEFER_EVIDENCE_DEPTH = "identity_only_after_recovery"
 ALLOWED_RECOVERED_DEPTHS = {
     "full_text_primary", "full_text_repository_copy", "official_full_document",
     "full_text_or_substantive_primary", "substantive_primary_after_recovery",
@@ -179,6 +188,31 @@ def validate_v2_result(raw: dict[str, Any], *, key: str, current_keys: set[str])
             problems.append("drop_unverifiable retrieval audit is too repetitive; record what was actually tried at each step")
         if usable:
             problems.append("drop_unverifiable cannot simultaneously cite substantive recovered evidence")
+    elif decision == "defer":
+        if not identity_verified:
+            problems.append("defer requires identity_verified=true")
+        if depth != DEFER_EVIDENCE_DEPTH:
+            problems.append(f"defer requires evidence_depth={DEFER_EVIDENCE_DEPTH}")
+        missing = REQUIRED_UNVERIFIABLE_STEPS - attempt_steps
+        if missing:
+            problems.append("defer requires the full retrieval ladder: " + ",".join(sorted(missing)))
+        thin = [step for step in REQUIRED_UNVERIFIABLE_STEPS if step in audit_by_step and len(clean(audit_by_step[step].get("note"))) < 12]
+        if thin:
+            problems.append("defer retrieval steps need specific audit notes (12+ chars): " + ",".join(sorted(thin)))
+        distinct_notes = {clean(audit_by_step[s].get("note")).lower() for s in REQUIRED_UNVERIFIABLE_STEPS if s in audit_by_step}
+        if len(distinct_notes) < 4:
+            problems.append("defer retrieval audit is too repetitive; record what was actually tried at each step")
+        if clean(admission.get("reason_code")).upper() != "EVIDENCE_ACCESS_LIMITED":
+            problems.append("defer requires reason_code EVIDENCE_ACCESS_LIMITED")
+        fields = correction.get("fields") if isinstance(correction.get("fields"), dict) else {}
+        unset = correction.get("unset") if isinstance(correction.get("unset"), list) else []
+        if fields or unset:
+            problems.append("defer must not apply authoritative metadata corrections")
+        if any(clean(raw.get(name)) for name in ("reader_title", "reader_what", "reader_why", "reader_more")):
+            problems.append("defer must not contain reader interpretation")
+        deep = raw.get("deep_analysis") if isinstance(raw.get("deep_analysis"), dict) else {}
+        if any(clean(deep.get(name)) for name in ("work_kind", "research_question", "main_finding", "method_or_basis", "qualification", "radar_relevance")):
+            problems.append("defer must not contain substantive deep_analysis claims")
     else:
         if not identity_verified:
             problems.append("recovered-work decision requires identity_verified=true")
@@ -262,6 +296,7 @@ def main() -> None:
     ap.add_argument("--corrections", type=Path, default=None)
     ap.add_argument("--inbox", type=Path, default=Path("deep_scan_inbox"))
     ap.add_argument("--files", nargs="*", type=Path, default=None)
+    ap.add_argument("--work-state", type=Path, default=DEFAULT_WORK_STATE)
     args = ap.parse_args()
 
     if args.admission is None:
@@ -272,6 +307,8 @@ def main() -> None:
     sidecar = load_sidecar(args.sidecar)
     admission_state = load_admission(args.admission)
     corrections = load_corrections(args.corrections)
+    work_state = load_state(args.work_state)
+    sync_verified(work_state, sidecar)
     current: dict[str, tuple[str, dict[str, Any], str, str]] = {}
     for strand, row in iter_records(doc):
         key = record_key(row)
@@ -296,7 +333,8 @@ def main() -> None:
     admit_table = admission_state.setdefault("records", {})
     corr_table = corrections.setdefault("records", {})
     avoid_whys = [clean(v.get("reader_why")) for v in table.values() if isinstance(v, dict) and clean(v.get("reader_why"))]
-    accepted_v1 = accepted_v2 = rejected_count = duplicate_count = stale_count = 0
+    accepted_v1 = accepted_v2 = rejected_count = duplicate_count = stale_count = deferred_count = 0
+    work_state_changed = False
     seen_pairs: set[tuple[str, str, str]] = set()
     imported_files: list[Path] = []
     file_failures: list[str] = []
@@ -312,6 +350,8 @@ def main() -> None:
             file_had_valid_doc = True
             fmt = result_doc.get("format")
             package_id = clean(result_doc.get("package_id")) or "unknown-package"
+            package_expected = expected_remaining_for_package(work_state, package_id, sidecar) if fmt == V2_FORMAT else None
+            package_pos = 0
             for idx, raw in enumerate(result_doc.get("results", []), 1):
                 if not isinstance(raw, dict):
                     print(f"REJECT {label} result {idx}: result is not an object")
@@ -342,16 +382,20 @@ def main() -> None:
                     continue
 
                 if fmt == V2_FORMAT:
-                    expected_key = expected_v2_queue[expected_v2_pos] if expected_v2_pos < len(expected_v2_queue) else ""
+                    if package_expected is not None:
+                        expected_key = package_expected[package_pos] if package_pos < len(package_expected) else ""
+                        order_label = f"reserved worker package {package_id}"
+                    else:
+                        expected_key = expected_v2_queue[expected_v2_pos] if expected_v2_pos < len(expected_v2_queue) else ""
+                        order_label = "global FIFO queue"
                     if key != expected_key:
                         print(
-                            f"REJECT {label} result {idx}: out of FIFO order. Next required record is "
+                            f"REJECT {label} result {idx}: out of FIFO order for {order_label}. Next required record is "
                             f"{expected_key[:120] if expected_key else '[none pending]'}"
                         )
                         rejected_count += 1
-                        # Stop this result document here. A carefully completed prefix
-                        # above remains imported; later/easier records must wait until
-                        # the skipped record has been dealt with.
+                        # A returned file must remain a consecutive prefix of the work
+                        # it was assigned. Other reserved worker lanes may progress independently.
                         break
 
                 if fmt == V1_FORMAT:
@@ -397,13 +441,30 @@ def main() -> None:
                     rejected_count += 1
                     continue
 
+                decision = clean((raw.get("admission") or {}).get("decision")).lower()
+                if decision == "defer":
+                    now = utc_now()
+                    mark_deferred(
+                        work_state, key, package_id,
+                        reason=clean((raw.get("admission") or {}).get("reason")),
+                        verification=copy.deepcopy(raw.get("verification") or {}),
+                        when=now,
+                    )
+                    deferred_count += 1
+                    work_state_changed = True
+                    if package_expected is not None:
+                        package_pos += 1
+                    else:
+                        expected_v2_pos += 1
+                    print(f"DEFER {label} result {idx}: identity verified but substantive evidence remains access-limited after full recovery ladder")
+                    continue
+
                 normalized = {
                     "reader_title": raw.get("reader_title"), "reader_what": raw.get("reader_what"),
                     "reader_why": raw.get("reader_why"), "reader_more": raw.get("reader_more"),
                     "deep_analysis": raw.get("deep_analysis"),
                 }
                 accepted, prose_problems = validate(normalized, avoid_whys)
-                decision = clean((raw.get("admission") or {}).get("decision")).lower()
                 if decision in {"keep", "review"}:
                     deep_ok = accepted.get("deep_analysis") if isinstance(accepted.get("deep_analysis"), dict) else {}
                     missing_active = []
@@ -463,7 +524,12 @@ def main() -> None:
                         "updated_at": now, "deep_scan_package_id": package_id,
                     }
                 accepted_v2 += 1
-                expected_v2_pos += 1
+                mark_verified(work_state, key, package_id, when=now)
+                work_state_changed = True
+                if package_expected is not None:
+                    package_pos += 1
+                else:
+                    expected_v2_pos += 1
                 if prose_problems:
                     print(f"ACCEPT {label} result {idx} with prose safeguards: {'; '.join(prose_problems)}")
         if file_had_valid_doc:
@@ -494,6 +560,9 @@ def main() -> None:
         args.admission.write_text(json.dumps(admission_state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         args.corrections.write_text(json.dumps(corrections, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    if work_state_changed:
+        save_state(work_state, args.work_state)
+
     for path in imported_files:
         try:
             path.unlink()
@@ -502,7 +571,7 @@ def main() -> None:
 
     print(
         f"Deep Scan import: V2 accepted {accepted_v2}; legacy V1 accepted {accepted_v1}; "
-        f"stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
+        f"deferred {deferred_count}; stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
     )
     print("Raw radar.json evidence was not deleted. V2 admission/corrections are stored in sidecars for active-corpus rebuild.")
 

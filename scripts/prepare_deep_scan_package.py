@@ -19,10 +19,18 @@ try:
         CORPUS, SIDECAR, SourceRead, clean, fetch_source, iter_records, load_sidecar,
         pending, record_key, identity_hash, scanner_fields,
     )
+    from scripts.deep_scan_work_state import (
+        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, register_package,
+        save_state, sync_verified, write_status_markdown,
+    )
 except ModuleNotFoundError:
     from deep_read_works import (  # type: ignore
         CORPUS, SIDECAR, SourceRead, clean, fetch_source, iter_records, load_sidecar,
         pending, record_key, identity_hash, scanner_fields,
+    )
+    from deep_scan_work_state import (  # type: ignore
+        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, register_package,
+        save_state, sync_verified, write_status_markdown,
     )
 
 FORMAT = "radar-deep-scan-package-v2"
@@ -58,8 +66,9 @@ Therefore every decision must be source-grounded and auditable.
 8. Do not invent a European implication or a WHY.
 9. If a record is difficult or blocked, **keep searching through the mandatory retrieval ladder below**.
    A failed URL is not permission to give up.
-10. If the claimed work still cannot be substantiated after the full mandatory recovery ladder,
-    return `drop_unverifiable`. Unverifiable evidence does not remain in the active Radar.
+10. If the claimed work itself still cannot be substantiated after the full mandatory recovery ladder,
+    return `drop_unverifiable`. If identity is confirmed but substantive evidence remains inaccessible after all six steps,
+    use `defer` rather than inventing a judgement. A defer is coordination-only and leaves the Radar record provisional.
 
 ## Mandatory retrieval ladder for difficult/thin/blocked records
 
@@ -88,7 +97,8 @@ Return exactly one decision:
 - `drop` — the recovered work clearly exists but fails the current criteria.
 - `review` — the work exists and has real evidence, but admission genuinely requires human judgement.
   REVIEW is not a refuge for laziness or failed retrieval.
-- `drop_unverifiable` — after the complete retrieval ladder, the claimed work cannot be substantiated.
+- `drop_unverifiable` — after the complete retrieval ladder, the claimed work itself cannot be substantiated.
+- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all six recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. GitHub logs the audited deferral, removes it from the normal worker lane, and leaves the Radar record provisional for a later retry/human check.
 
 ### Strand A — substantive European R&I work
 
@@ -213,12 +223,14 @@ Return exactly one UTF-8 file named `deep_scan_results.json` (or a ZIP containin
 ```
 
 `confidence` is `high`, `medium` or `low`. `target_strand` is `A`, `B` or `C` for KEEP/REVIEW.
-For DROP/DROP_UNVERIFIABLE it may be the original strand or empty.
+For DROP/DROP_UNVERIFIABLE/DEFER it may be the original strand or empty.
+For DEFER use `reason_code: "EVIDENCE_ACCESS_LIMITED"`, set `verification.evidence_depth` to `identity_only_after_recovery`, report all six retrieval steps with specific notes, and do not invent reader interpretation.
 
 ### Hard validation rules
 
 - KEEP/REVIEW/DROP of a recovered work requires `identity_verified: true` and at least one recovered source
-  actually used as evidence. `title_only` and `search_snippet` are not acceptable evidence depths.
+  actually used as substantive evidence. `title_only` and `search_snippet` are not acceptable evidence depths.
+- DEFER is allowed only after all six retrieval steps when identity is verified but substantive evidence is still unavailable/insufficient. It is not authoritative and must not contain invented reader prose or metadata corrections.
 - `drop_unverifiable` requires all six mandatory retrieval steps to be reported. If no DOI exists, the DOI step
   still appears with outcome `not_applicable`. Each step needs a specific audit note (what was searched/opened
   and what happened); repeated generic notes are rejected. A DROP_UNVERIFIABLE result cannot simultaneously
@@ -259,10 +271,11 @@ def utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
 
-def package_id_for(rows: list[tuple[str, str, str, dict[str, Any], str]]) -> str:
+def package_id_for(rows: list[tuple[str, str, str, dict[str, Any], str]], lane: str = "") -> str:
     seed = "\n".join(f"{key}|{h}" for _strand, key, h, _r, _reason in rows)
     digest = hashlib.sha256(seed.encode("utf-8")).hexdigest()[:12]
-    return f"{time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())}-{digest}"
+    prefix = f"worker-{lane.lower()}-" if lane else ""
+    return f"{prefix}{time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())}-{digest}"
 
 
 def source_for(item: tuple[str, str, str, dict[str, Any], str]):
@@ -382,28 +395,54 @@ def main() -> None:
     ap.add_argument("--sidecar", type=Path, default=SIDECAR)
     ap.add_argument("--output-dir", type=Path, default=Path("deep_scan_out"))
     ap.add_argument("--batch-size", type=int, default=DEFAULT_BATCH_SIZE)
-    ap.add_argument("--max-records", type=int, default=DEFAULT_MAX_RECORDS, help="Maximum records in one human Deep Scan session/package; default 12 for depth; 0 means all pending")
+    ap.add_argument("--max-records", type=int, default=DEFAULT_MAX_RECORDS, help="Maximum records in a legacy single package; default 12; 0 means all pending")
     ap.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
     ap.add_argument("--no-fetch", action="store_true", help="Do not pre-retrieve linked source pages/PDFs")
+    ap.add_argument("--lane", choices=["A", "B", "a", "b"], default="", help="Prepare one persistent parallel worker lane")
+    ap.add_argument("--lane-size", type=int, default=DEFAULT_LANE_SIZE, help="Target unresolved records assigned to a worker lane")
+    ap.add_argument("--work-state", type=Path, default=DEFAULT_WORK_STATE)
+    ap.add_argument("--status-file", type=Path, default=Path("DEEP_SCAN_STATUS.md"))
+    ap.add_argument("--write-work-state", action="store_true", help="Persist lane assignments and package history in the repository")
     args = ap.parse_args()
 
     doc = json.loads(args.corpus.read_text(encoding="utf-8"))
     sidecar = load_sidecar(args.sidecar)
     todo_all = pending(doc, sidecar)
     pending_total = len(todo_all)
-    limit = max(0, int(args.max_records or 0))
-    todo = todo_all[:limit] if limit else todo_all
     total = sum(1 for _ in iter_records(doc))
-    print(f"Radar records: {total}; needing authoritative Deep Scan V2: {pending_total}; packaged now: {len(todo)}")
+    lane = args.lane.upper()
+    state = None
+
+    if lane:
+        state = load_state(args.work_state)
+        sync_verified(state, sidecar)
+        pending_keys = [item[1] for item in todo_all]
+        assigned = fill_lane(state, lane, pending_keys, target_size=max(1, int(args.lane_size)))
+        by_key = {item[1]: item for item in todo_all}
+        todo = [by_key[key] for key in assigned if key in by_key]
+        print(
+            f"Radar records: {total}; needing authoritative Deep Scan V2: {pending_total}; "
+            f"worker {lane} assigned now: {len(todo)}"
+        )
+    else:
+        limit = max(0, int(args.max_records or 0))
+        todo = todo_all[:limit] if limit else todo_all
+        print(f"Radar records: {total}; needing authoritative Deep Scan V2: {pending_total}; packaged now: {len(todo)}")
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     if not todo:
         summary = args.output_dir / "NO_DEEP_SCAN_NEEDED.txt"
-        summary.write_text("All current Radar records already have authoritative Deep Scan V2 verification.\n", encoding="utf-8")
+        if lane and pending_total:
+            summary.write_text(f"Worker {lane} currently has no assignable Deep Scan work.\n", encoding="utf-8")
+        else:
+            summary.write_text("All current Radar records already have authoritative Deep Scan V2 verification.\n", encoding="utf-8")
+        if lane and state is not None and args.write_work_state:
+            save_state(state, args.work_state)
+            write_status_markdown(state, sidecar, [item[1] for item in todo_all], args.status_file)
         print(summary)
         return
 
-    pkg_id = package_id_for(todo)
+    pkg_id = package_id_for(todo, lane=lane)
     dupes = duplicate_index(doc)
     variants = same_key_variants(doc)
     workdir = Path(tempfile.mkdtemp(prefix="radar-deep-scan-v2-"))
@@ -411,8 +450,24 @@ def main() -> None:
         root = workdir / f"deep_scan_package_{pkg_id}"
         batches = root / "batches"
         batches.mkdir(parents=True)
-        (root / "INSTRUCTIONS.md").write_text(INSTRUCTIONS, encoding="utf-8")
-        (root / "START_HERE.txt").write_text(START_HERE, encoding="utf-8")
+        instructions = INSTRUCTIONS
+        if lane:
+            instructions = (
+                f"# Worker lane {lane}\n\n"
+                "This ZIP is a reserved, non-overlapping worker lane from the Radar's persistent Deep Scan queue. "
+                "Process only the records in this ZIP, in their supplied order. Other worker lanes contain different records.\n\n"
+                + instructions
+            )
+        (root / "INSTRUCTIONS.md").write_text(instructions, encoding="utf-8")
+        start_here = START_HERE
+        if lane:
+            start_here = (
+                f"RADAR DEEP SCAN V2 — WORKER {lane}\n\n"
+                "This package is already reserved to this worker lane in GitHub. It does not overlap the other active lane.\n"
+                "A new chat needs no prior conversation history: read INSTRUCTIONS.md and process this ZIP in order.\n\n"
+                + START_HERE
+            )
+        (root / "START_HERE.txt").write_text(start_here, encoding="utf-8")
 
         if args.no_fetch:
             fetched = [(*item, SourceRead("stored_only", "", note="source pre-retrieval disabled; LLM must use the retrieval ladder")) for item in todo]
@@ -441,7 +496,7 @@ def main() -> None:
             chunk = jobs[start:start + batch_size]
             number = start // batch_size + 1
             filename = f"batch_{number:03d}.json"
-            payload = {"format": FORMAT, "package_id": pkg_id, "batch_number": number, "jobs": chunk}
+            payload = {"format": FORMAT, "package_id": pkg_id, "worker_lane": lane or None, "batch_number": number, "jobs": chunk}
             (batches / filename).write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             batch_files.append({"file": f"batches/{filename}", "jobs": len(chunk)})
 
@@ -452,8 +507,8 @@ def main() -> None:
             mode = job["source_material"]["read_mode"]
             source_modes[mode] = source_modes.get(mode, 0) + 1
         manifest = {
-            "format": FORMAT, "result_format": RESULT_FORMAT, "package_id": pkg_id, "created_at": utc_now(),
-            "current_radar_records": total, "works_in_package": len(jobs), "queue_reasons": counts,
+            "format": FORMAT, "result_format": RESULT_FORMAT, "package_id": pkg_id, "worker_lane": lane or None,
+            "created_at": utc_now(), "current_radar_records": total, "works_in_package": len(jobs), "queue_reasons": counts,
             "source_modes": source_modes, "possible_duplicate_records": len(dupes), "same_record_key_variant_groups": len(variants), "batch_size": batch_size,
             "batches": batch_files, "instructions": "INSTRUCTIONS.md", "expected_result_filename": "deep_scan_results.json",
         }
@@ -467,10 +522,15 @@ def main() -> None:
                     zf.write(p, p.relative_to(root.parent))
         shutil.copy2(zip_path, args.output_dir / "deep_scan_package.zip")
         (args.output_dir / "PACKAGE_SUMMARY.txt").write_text(
-            f"Deep Scan V2 package: {pkg_id}\nWorks needing authoritative verification: {len(jobs)}\nInternal batches: {len(batch_files)}\n\n"
+            f"Deep Scan V2 package: {pkg_id}\nWorker lane: {lane or 'legacy single queue'}\nWorks needing authoritative verification: {len(jobs)}\nInternal batches: {len(batch_files)}\n\n"
             "Give deep_scan_package.zip to a browsing-capable LLM and ask it to follow INSTRUCTIONS.md strictly.\n",
             encoding="utf-8",
         )
+        if lane and state is not None:
+            register_package(state, lane, pkg_id, [job["record_key"] for job in jobs])
+            if args.write_work_state:
+                save_state(state, args.work_state)
+                write_status_markdown(state, sidecar, [item[1] for item in todo_all], args.status_file)
         print(f"Created {zip_path} with {len(jobs)} works in {len(batch_files)} internal batches")
     finally:
         shutil.rmtree(workdir, ignore_errors=True)
