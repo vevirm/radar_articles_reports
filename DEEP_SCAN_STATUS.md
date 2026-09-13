@@ -3,16 +3,16 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **120**
-- Still needing V2 verification: **548**
-- Currently assigned to workers: **96**
+- Authoritative V2 verified: **168**
+- Still needing V2 verification: **500**
+- Currently assigned to workers: **84**
 - Deferred after exhaustive recovery: **3**
-- Pending and not yet assigned: **449**
+- Pending and not yet assigned: **413**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260913T224815Z-8fd374ecdc27`
+- Current package: `worker-a-20260913T233411Z-8fd374ecdc27`
 - Assigned unresolved records: **48**
   1. `link:https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/`
   2. `link:https://erc.europa.eu/sites/default/files/2024-02/report_democracy.pdf`
@@ -25,17 +25,17 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260913T224826Z-4866352aa1e6`
-- Assigned unresolved records: **48**
-  1. `link:https://doi.org/10.1111/bioe.70159`
-  2. `link:https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty`
-  3. `link:https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-and-egypt-strengthen-research-and-innovation-partnership-following-horizon-europe-association-2026-06-25_en`
-  4. `link:https://research-and-innovation.ec.europa.eu/research-area/social-sciences-and-humanities/research-and-innovation-funding-democracy-and-governance_en`
-  5. `link:https://allea.org/allea-calls-for-global-defence-of-international-research-collaboration-and-academic-freedom/`
-  6. `link:https://cdn.ceps.eu/wp-content/uploads/2024/09/Code-of-Conduct-CEPS-events.pdf`
-  7. `link:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en`
-  8. `link:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en`
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260913T233424Z-308e4c5b3b41`
+- Assigned unresolved records: **36**
+  1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/`
+  2. `link:https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/`
+  3. `link:https://era.gv.at/news-items/itre-committee-presents-draft-reports-on-fp10-proposal/`
+  4. `link:https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf`
+  5. `link:https://era.gv.at/news-items/european-innovation-act-should-put-universities-at-the-heart-of-innovation-eua-says/`
+  6. `link:https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf`
+  7. `link:https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf`
+  8. `link:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/`
+  - … plus 28 more in the package manifest
 
 ## Deferred recovery queue
 

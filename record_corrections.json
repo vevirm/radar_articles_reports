@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-13T22:45:35Z",
+  "updated_at": "2026-09-13T23:33:47Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -775,6 +775,231 @@
       ],
       "updated_at": "2026-09-13T22:45:35Z",
       "deep_scan_package_id": "worker-a-20260913T222236Z-47330b640b29"
+    },
+    "link:https://cdn.ceps.eu/wp-content/uploads/2024/09/Code-of-Conduct-CEPS-events.pdf": {
+      "fields": {
+        "title": "Mapping of technology specialisation, complexity and relatedness of the EU and selected global partners",
+        "authors": "Pierre-Alexandre Balland, Andrea Renda",
+        "type": "policy report (CEPS In-Depth Analysis)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The CEPS publication page and the report PDF give the authors as Balland and Renda and the document type as a CEPS In-Depth Analysis; the scanner had recorded CEPS itself as author and carried a site-name suffix in the title. The supplied URL pointed to an unrelated CEPS document, so any stored tier derived from it is unsupported.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.ceps.eu/ceps-publications/mapping-of-technology-specialisation-complexity-and-relatedness-of-the-eu-and-selected-global-partners/",
+        "https://cdn.ceps.eu/2026/06/2026-06-GRID-CNECT-TTD.pdf"
+      ],
+      "updated_at": "2026-09-13T23:33:45Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://research-and-innovation.ec.europa.eu/document/download/2f76a0df-b09b-47c2-949c-800c30e4c530_en?filename=ec_rtd_eu-startup-scaleup-strategy-communication.pdf": {
+      "fields": {
+        "date": "2025-05-28",
+        "source": "European Commission",
+        "type": "Commission Communication (COM(2025) 270 final)"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "EUR-Lex CELEX 52025DC0270 shows the document is COM(2025) 270 final, dated Brussels 28.5.2025. The scanner's 2026-08-04 date reflects when the link was crawled, not publication, and the issuing body is the Commission as a whole rather than DG Research and Innovation.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52025DC0270"
+      ],
+      "updated_at": "2026-09-13T23:33:45Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147825": {
+      "fields": {
+        "source": "European Commission, Joint Research Centre",
+        "type": "workshop proceedings report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "'JRC Publications Repository' is the hosting platform, not the issuing organisation; the JRC event page and repository record identify the Joint Research Centre as the issuing body and the item as a workshop synthesis report.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://publications.jrc.ec.europa.eu/repository/handle/JRC147825",
+        "https://joint-research-centre.ec.europa.eu/events/building-resilient-and-robust-clean-energy-supply-chains-challenges-and-opportunities-sustainable-2025-11-27_en"
+      ],
+      "updated_at": "2026-09-13T23:33:45Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://allea.org/allea-contributes-to-high-level-discussions-on-the-role-of-science-in-ukraines-recovery/": {
+      "fields": {
+        "authors": "ALLEA"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 'maria ronald', a content-management system byline artefact on the ALLEA site; the statement is institutional and carries no named author.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://allea.org/allea-contributes-to-high-level-discussions-on-the-role-of-science-in-ukraines-recovery/"
+      ],
+      "updated_at": "2026-09-13T23:33:45Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://doi.org/10.1093/polsoc/puag009": {
+      "fields": {
+        "date": "2026-05-12"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref records the online publication date for 10.1093/polsoc/puag009 as 12 May 2026, and the OUP advance-article copy carries a May 2026 download stamp; the scanner's 2026-03-25 date is not supported.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://academic.oup.com/policyandsociety/advance-article/doi/10.1093/polsoc/puag009/8676562",
+        "https://api.crossref.org/works/10.1093/polsoc/puag009"
+      ],
+      "updated_at": "2026-09-13T23:33:45Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://doi.org/10.32352/0367-3057.3.26.03": {
+      "fields": {
+        "date": "2026-05-28"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The article PDF itself states publication and online posting on 28 May 2026 (volume 81, issue 3), which supersedes the 26 May date carried in the scanner record.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://pharmj.org.ua/index.php/journal/article/download/1514/1401"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://doi.org/10.1007/s43615-026-01115-7": {
+      "fields": {
+        "date": "2026-08-12",
+        "authors": "Eszter Lukacs, Peter Nemeth, Md. Rashed, Mohammad Fakhrul Islam"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the publisher PDF give the online publication date as 12 August 2026 rather than 1 August; the author list is confirmed unchanged by the article itself.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s43615-026-01115-7"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://www.cer.eu/sites/default/files/JG_tech_success_27.5.26.pdf": {
+      "fields": {
+        "authors": "James Green"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The CER PDF byline gives the author as James Green; the scanner had recorded the publishing institution in the author field.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.cer.eu/sites/default/files/JG_tech_success_27.5.26.pdf"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://doi.org/10.2903/sp.efsa.2026.en-10262": {
+      "fields": {
+        "type": "agency annual report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "EFSA Supporting Publications items are agency technical outputs rather than peer-reviewed research articles; Crossref classifies the item as a journal article only because of the hosting platform.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://api.openalex.org/works/doi:10.2903/sp.efsa.2026.en-10262",
+        "https://api.crossref.org/works/10.2903/sp.efsa.2026.en-10262"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://www.espi.eu/wp-content/uploads/2026/09/ESPI-Insights-Issue-August_2026.pdf": {
+      "fields": {
+        "title": "ESPI Insights, Issue 73, August 2026",
+        "authors": "European Space Policy Institute",
+        "type": "monthly sector-watch periodical"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The PDF identifies itself as Issue 73, August 2026; the scanner had captured a website announcement headline as the title and a site byline as the author, while the publication is an institutional periodical.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.espi.eu/wp-content/uploads/2026/09/ESPI-Insights-Issue-August_2026.pdf"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://doi.org/10.1007/s40822-026-00392-9": {
+      "fields": {
+        "source": "Eurasian Economic Review"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the publisher page give the journal title as 'Eurasian Economic Review'; the scanner's value carried a trailing colon from a catalogue record.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s40822-026-00392-9"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-13_Africa%27s%20digital%20edge.pdf": {
+      "fields": {
+        "date": "2026-09-12",
+        "authors": "Clotilde Bomont, Rossella Marangio"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The brief's own cover carries the date 12 September 2026 and names Clotilde Bomont and Rossella Marangio as authors; the scanner had recorded the crawl date and the institution in the author field.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-13_Africa%27s%20digital%20edge.pdf"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://www.businessfinland.fi/globalassets/julkaisut/policy_brief-2_2026_promoting-green-lead-market-formation.pdf": {
+      "fields": {
+        "authors": "Matti Pihlajamaa, Ville Valovirta, Helmi Hamalainen, Pauli Komonen"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The brief's first page names these four VTT Technical Research Centre of Finland authors; the scanner had recorded the publishing agency in the author field.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.businessfinland.fi/globalassets/julkaisut/policy_brief-2_2026_promoting-green-lead-market-formation.pdf"
+      ],
+      "updated_at": "2026-09-13T23:33:46Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://allea.org/event-report-supporting-the-ukrainian-research-ecosystem-through-international-exchange-and-collaboration/": {
+      "fields": {
+        "authors": "ALLEA"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 'maria ronald', a content-management byline artefact on the ALLEA site; the report is institutional and carries no named author.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://allea.org/event-report-supporting-the-ukrainian-research-ecosystem-through-international-exchange-and-collaboration/"
+      ],
+      "updated_at": "2026-09-13T23:33:47Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
+    },
+    "link:https://merics.org/en/report/germany-mutual-benefit-existential-competition-china": {
+      "fields": {
+        "type": "report chapter (European Think Tank Network on China 2026 report)"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The MERICS page states the item is the Germany chapter of the 2026 ETNC report 'Fragmented Europe: Dealing with China as a technology and innovation power', not a standalone research paper.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://merics.org/en/report/germany-mutual-benefit-existential-competition-china"
+      ],
+      "updated_at": "2026-09-13T23:33:47Z",
+      "deep_scan_package_id": "worker-b-20260913T224826Z-4866352aa1e6"
     }
   }
 }
