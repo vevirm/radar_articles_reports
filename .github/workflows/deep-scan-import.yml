@@ -1,0 +1,103 @@
+name: Deep Scan — Import Returned Results
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'deep_scan_inbox/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+# Do not import against radar.json while an automatic scanner is updating it.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  import-deep-scan-results:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Import and validate returned interpretations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/import_deep_scan_results.py
+          python scripts/check_reader_text.py
+
+          unexpected="$(git diff --name-only -- . ':!reader_text.json' ':!deep_scan_inbox/**' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo '::error::Deep Scan import changed an unexpected file. Refusing to save.'
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-deep-scan-importer'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save imported Deep Scan results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add reader_text.json deep_scan_inbox
+          staged="$(git diff --cached --name-only)"
+          if [[ -n "$staged" ]]; then
+            while IFS= read -r f; do
+              [[ "$f" == 'reader_text.json' || "$f" == deep_scan_inbox/* ]] || {
+                echo "::error::Unexpected staged file: $f"
+                exit 1
+              }
+            done <<< "$staged"
+          fi
+          if git diff --cached --quiet; then
+            echo 'No valid Deep Scan results to commit.'
+            exit 0
+          fi
+          git commit -m 'Deep Scan: import returned interpretations'
+          git push origin HEAD:main
+
+      - name: Import summary
+        if: always()
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Deep Scan import
+
+          Valid returned interpretations are stored in `reader_text.json`. The normal scanner evidence in `radar.json` is never overwritten.
+
+          If a returned result no longer matched the record exported in that package, it was skipped for safety. Successfully imported Deep Scan works stay complete and are not automatically re-read later.
+          EOF
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
