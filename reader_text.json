@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "profile": "deep-reader-offline-v1",
-  "generated_at": "2026-09-13T12:57:53Z",
+  "version": 3,
+  "profile": "deep-reader-v2-authoritative",
+  "generated_at": "2026-09-13T18:30:09Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-offline-v1",
@@ -486,27 +486,115 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://doi.org/10.1080/23745118.2026.2726796": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "79d47459",
-      "reader_title": "How German science policy towards China became partially, not fully, securitised",
-      "reader_what": "Finds partial securitisation, limited in intensity and selective in scope, built from accumulated measures.",
-      "reader_why": "Science system bodies filtered political threat claims, determining how far screening actually went.",
-      "reader_more": "This article asks how far German science policy towards China had moved towards a security framing by 2026, and through what sequence of events. Using explaining-outcome process tracing across federal, parliamentary and organisational documents plus investigative journalism, the authors reconstruct four phases between 2014 and 2026. Their key mechanism is audience response: securitising moves by political and media actors were filtered through organisations within the science system, which responded by absorbing procedures, excluding categories of collaboration, or pushing back to defend cooperation capacity. The outcome they theorise is partial securitisation, combining limited intensity with selective scope. They argue the reconfiguration came through accumulated organisational measures rather than any single critical juncture.",
+      "identity_hash": "b9aac4a4ec41e884",
+      "reader_title": "German science policy towards China has become selectively securitised",
+      "reader_what": "Process tracing finds limited, selective securitisation built through accumulated organisational measures rather than one decisive break.",
+      "reader_why": "Science-system organisations filter political threat claims, shaping which safeguards are absorbed, narrowed or resisted.",
+      "reader_more": "The article reconstructs four phases of German science policy towards China from 2014–2026 using federal, parliamentary and organisational documents plus investigative journalism. It characterises the outcome as partial securitisation: risk screening is institutionalised, but categorical exclusions remain selective. The authors identify audience response inside the science system as the mechanism producing that uneven pattern.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed qualitative process-tracing case study",
-        "research_question": "What intensity and scope German science policy towards China reached by 2026, and which sequences of moves and audience responses produced it.",
-        "main_finding": "The outcome is partial securitisation, limited in intensity and selective in scope, produced by accumulated organisational measures rather than one turning point, with audience response inside the science system as the filtering mechanism.",
-        "method_or_basis": "Explaining-outcome process tracing on federal, parliamentary and organisational documents and investigative journalism, reconstructing four phases from 2014 to 2026.",
-        "qualification": "A single-country interpretive case study; partial securitisation is a theorised characterisation rather than a measured quantity, resting on documentary sources.",
-        "radar_relevance": "Directly concerns research security and international scientific cooperation in Europe's largest research system.",
+        "work_kind": "process-tracing study of research security",
+        "research_question": "How far had German science policy towards China become securitised by 2026, and through what sequence and organisational mechanism?",
+        "main_finding": "German science policy underwent partial securitisation: safeguards accumulated and became institutionalised, but their intensity and scope remained selective.",
+        "method_or_basis": "Explaining-outcome process tracing of federal, parliamentary and science-organisation documents plus investigative journalism across four phases from 2014 to 2026.",
+        "qualification": "The study is a document-based single-country explanation and does not reconstruct Chinese policy or measure research-output effects.",
+        "radar_relevance": "Direct evidence on European research-security policy, institutional responses to China-related risk and the organisational filtering of securitisation.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "The package followed https://doi.org/10.1080/23745118.2026.2726796 to Taylor & Francis, but automated full-text retrieval returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Searching DOI 10.1080/23745118.2026.2726796 matched the open-access Taylor & Francis article and its 2 September 2026 publication metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “Between Weltoffenheit and securitisation: Germany’s partial securitisation of science policy towards the People’s Republic of China” recovered the publisher listing and a full-text repository copy."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title, Ilker Gündoğan, Jörn-Carsten Gottwald and 2026 confirmed the same European Politics and Society article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Taylor & Francis verifies the open-access article; the recovered full-text copy at Academia.edu was used for the detailed process-tracing analysis."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using the DOI, authors and phrase “partial securitisation” confirmed the four-phase 2014–2026 study and its audience-response mechanism."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://www.tandfonline.com/journals/rpep21",
+            "title": "European Politics and Society — publisher journal page listing the article",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.academia.edu/172881847/Between_Weltoffenheit_and_securitisation_Germanys_partial_securitisation_of_science_policy_towards_the_Peoples_Republic_of_China",
+            "title": "Between Weltoffenheit and securitisation: Germany’s partial securitisation of science policy towards the People’s Republic of China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher metadata and the recovered full text verify the Germany-China science-policy article and its explaining-outcome process-tracing design."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The recovered full article directly studies Germany’s science-policy securitisation toward China from 2014 to 2026 and identifies the mechanism shaping selective research-security measures."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "79d47459",
+          "reader_title": "How German science policy towards China became partially, not fully, securitised",
+          "reader_what": "Finds partial securitisation, limited in intensity and selective in scope, built from accumulated measures.",
+          "reader_why": "Science system bodies filtered political threat claims, determining how far screening actually went.",
+          "reader_more": "This article asks how far German science policy towards China had moved towards a security framing by 2026, and through what sequence of events. Using explaining-outcome process tracing across federal, parliamentary and organisational documents plus investigative journalism, the authors reconstruct four phases between 2014 and 2026. Their key mechanism is audience response: securitising moves by political and media actors were filtered through organisations within the science system, which responded by absorbing procedures, excluding categories of collaboration, or pushing back to defend cooperation capacity. The outcome they theorise is partial securitisation, combining limited intensity with selective scope. They argue the reconfiguration came through accumulated organisational measures rather than any single critical juncture.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed qualitative process-tracing case study",
+            "research_question": "What intensity and scope German science policy towards China reached by 2026, and which sequences of moves and audience responses produced it.",
+            "main_finding": "The outcome is partial securitisation, limited in intensity and selective in scope, produced by accumulated organisational measures rather than one turning point, with audience response inside the science system as the filtering mechanism.",
+            "method_or_basis": "Explaining-outcome process tracing on federal, parliamentary and organisational documents and investigative journalism, reconstructing four phases from 2014 to 2026.",
+            "qualification": "A single-country interpretive case study; partial securitisation is a theorised characterisation rather than a measured quantity, resting on documentary sources.",
+            "radar_relevance": "Directly concerns research security and international scientific cooperation in Europe's largest research system.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s13132-026-03473-x": {
       "profile": "deep-reader-offline-v1",
@@ -830,27 +918,100 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://doi.org/10.31648/kpp.12912": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "70de5002",
-      "reader_title": "Legal comparison of EU and US approaches to competing in artificial intelligence",
-      "reader_what": "Argues the EU regulates AI around rights and risk while the US prioritises innovation and data access.",
-      "reader_why": "The author contends the more flexible US environment speeds commercialisation of AI technologies.",
-      "reader_more": "This article compares EU and United States strategic competitiveness in AI across three factors: human capital, the regulatory environment and access to data. It uses the Draghi report on European competitiveness as its reference point on the EU side, set against US federal law and administration strategy documents, with close attention to the AI Act, the GDPR and US data management and AI policy legislation. The author concludes that the EU model centres on protecting fundamental rights and managing risk, while the US model emphasises supporting innovation, public-private collaboration and broad data access, and argues the latter accelerates commercialisation. The article closes with recommendations on human capital, regulatory simplification and data availability.",
+      "identity_hash": "6fddbf50b22e10b8",
+      "reader_title": "EU and US AI competitiveness diverges on regulation, talent and data",
+      "reader_what": "Legal comparison contrasts EU rights-focused regulation with a more innovation-oriented US environment across key AI development inputs.",
+      "reader_why": "The author links regulatory flexibility, talent attraction and data access to faster commercialisation, but does not causally test that claim.",
+      "reader_more": "The article reviews EU and US laws, the Draghi competitiveness report, strategy documents and public data across human capital, regulation and data access. It argues that the US environment is more supportive of rapid AI commercialisation and recommends EU action on talent, regulatory simplification and data availability. The analysis is a comparative legal and policy assessment, not an empirical causal test of regulation’s economic effects.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed comparative legal analysis",
-        "research_question": "How the EU and the United States compare in strategic competitiveness for AI development across human capital, regulation and data access.",
-        "main_finding": "The two jurisdictions pursue structurally different models, with the EU oriented to rights protection and risk management and the US to innovation support and data availability; the author argues the US environment yields faster commercialisation and competitive advantage.",
-        "method_or_basis": "Doctrinal review of selected EU and US legal instruments and strategy documents, benchmarked against the Draghi competitiveness report.",
-        "qualification": "The claim that regulatory flexibility drives faster commercialisation is an interpretive argument from document comparison, not an empirical test; published in a Polish law review with a legal rather than economic evidence base.",
-        "radar_relevance": "Addresses whether EU AI regulation helps or hinders European competitive position.",
+        "work_kind": "comparative legal-policy analysis",
+        "research_question": "How do the EU and United States compare in AI competitiveness through human capital, legal frameworks and data access?",
+        "main_finding": "The article contrasts an EU rights-and-risk regulatory model with a more innovation-oriented US environment and recommends EU reforms on talent, regulation and data.",
+        "method_or_basis": "Comparative review of selected EU and US laws, the Draghi competitiveness report, federal strategy documents and public data across three AI-development factors.",
+        "qualification": "The claimed link between regulatory flexibility and faster commercialisation is an interpretive legal-policy assessment rather than a causal empirical test.",
+        "radar_relevance": "Direct European technology-competitiveness analysis focused on EU AI capability, regulation, human capital and data access.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.31648/kpp.12912; it resolves to the matching Kortowski Przegląd Prawniczy article page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.31648/kpp.12912 matches Robert Lizak, issue 3 (2026), pages 97–114 and publication on 27 August 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read the official article page at https://czasopisma.uwm.edu.pl/index.php/kpp/article/view/12912 and its linked English PDF, including the EU–US comparison and recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://czasopisma.uwm.edu.pl/index.php/kpp/article/view/12912",
+            "title": "Strategic competitiveness between the EU and the United States in artificial intelligence development – human capital, legal frameworks and data",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_article_pdf",
+            "url": "https://czasopisma.uwm.edu.pl/index.php/kpp/article/download/12912/9127/57863",
+            "title": "Strategic competitiveness between the EU and the United States in artificial intelligence development – PDF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official journal evidence verifies Robert Lizak’s EU–US AI competitiveness comparison, its legal-policy basis and its EU-focused recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official article directly compares EU and US AI competitiveness and develops recommendations for EU human capital, regulation and data access, making EU technology capability a central object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-13T18:30:09Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "70de5002",
+          "reader_title": "Legal comparison of EU and US approaches to competing in artificial intelligence",
+          "reader_what": "Argues the EU regulates AI around rights and risk while the US prioritises innovation and data access.",
+          "reader_why": "The author contends the more flexible US environment speeds commercialisation of AI technologies.",
+          "reader_more": "This article compares EU and United States strategic competitiveness in AI across three factors: human capital, the regulatory environment and access to data. It uses the Draghi report on European competitiveness as its reference point on the EU side, set against US federal law and administration strategy documents, with close attention to the AI Act, the GDPR and US data management and AI policy legislation. The author concludes that the EU model centres on protecting fundamental rights and managing risk, while the US model emphasises supporting innovation, public-private collaboration and broad data access, and argues the latter accelerates commercialisation. The article closes with recommendations on human capital, regulatory simplification and data availability.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed comparative legal analysis",
+            "research_question": "How the EU and the United States compare in strategic competitiveness for AI development across human capital, regulation and data access.",
+            "main_finding": "The two jurisdictions pursue structurally different models, with the EU oriented to rights protection and risk management and the US to innovation support and data availability; the author argues the US environment yields faster commercialisation and competitive advantage.",
+            "method_or_basis": "Doctrinal review of selected EU and US legal instruments and strategy documents, benchmarked against the Draghi competitiveness report.",
+            "qualification": "The claim that regulatory flexibility drives faster commercialisation is an interpretive argument from document comparison, not an empirical test; published in a Polish law review with a legal rather than economic evidence base.",
+            "radar_relevance": "Addresses whether EU AI regulation helps or hinders European competitive position.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=EIC_Fund_Investment_2026_guidelines_f.pdf": {
       "profile": "deep-reader-offline-v1",
@@ -1496,27 +1657,115 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://doi.org/10.18552/jorma.v5i1.1450": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "ad8108b6",
-      "reader_title": "Argues research security and sustainable development goals need not conflict, given coordinated leadership",
-      "reader_what": "Argues research security can be integrated into existing governance rather than added as separate compliance.",
-      "reader_why": "Poorly designed security measures risk undermining openness and equitable participation in global research.",
-      "reader_more": "This paper uses Ireland's emerging research security framework to examine how security measures intersect with sustainable development objectives, a connection the author says is usually neglected when research security is framed through national security or geopolitical risk alone. The argument is that the two are not inherently in conflict, but aligning them requires coordinated system leadership so that protection does not erode openness, collaboration and equitable participation in global research. It identifies practical obstacles inside research-performing organisations, including limited resources and the difficulty of integrating security with existing governance. The recommended approach is to embed research security within established research integrity and ethics processes, supported by clear guidance, proportionate measures and appropriate national structures, rather than treating it as standalone compliance.",
+      "identity_hash": "738d06627d3373ef",
+      "reader_title": "Ireland’s research-security rollout is framed as a system-leadership problem",
+      "reader_what": "Argues research security should integrate with integrity, ethics and open-research governance instead of standing alone as compliance.",
+      "reader_why": "Coordination and proportionality are proposed to protect security without unnecessarily undermining openness, collaboration or sustainable-development goals.",
+      "reader_more": "Using Ireland’s emerging research-security framework as an illustrative case, the piece relates national developments to wider European policy and the SDGs. It emphasises coordinated leadership, institutional support and integration with existing governance processes. The publisher classifies the work as an Opinion Piece, so these are policy arguments and practical considerations rather than evaluated implementation effects.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed policy analysis in a research management journal",
-        "research_question": "How research security relates to sustainable development objectives, and how it can be implemented without undermining open international collaboration.",
-        "main_finding": "Research security and sustainable development are compatible but require coordinated system leadership, proportionate measures and integration with existing integrity and ethics governance rather than standalone compliance structures.",
-        "method_or_basis": "Analysis of Irish national research security guideline developments considered alongside wider European policy discussion and existing governance frameworks.",
-        "qualification": "An argued position drawing on one national context at an early stage of implementation; no evaluation of whether the recommended integration works in practice.",
-        "radar_relevance": "Addresses the practical governance problem European institutions face as research security requirements spread.",
+        "work_kind": "research-security policy opinion",
+        "research_question": "How can Ireland implement research security in a way aligned with sustainable-development goals and existing research governance?",
+        "main_finding": "Research security should be integrated with integrity, ethics and open-research governance through coordinated system leadership rather than treated as standalone compliance.",
+        "method_or_basis": "Interpretive policy argument using Ireland’s emerging research-security framework, wider European developments and existing research-governance processes.",
+        "qualification": "The publisher classifies the work as an Opinion Piece; it offers governance arguments and practical considerations rather than evaluated implementation outcomes.",
+        "radar_relevance": "Direct European and Irish research-security governance relevance, including institutional implementation, openness and research-integrity trade-offs.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.18552/jorma.v5i1.1450; it resolves to the matching Journal of Research Management and Administration article page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.18552/jorma.v5i1.1450 matches Seán Lacey, volume 5 issue 1, and publication on 12 August 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “System Leadership for SDG-Aligned Research Security in Ireland” found the publisher and Munster Technological University repository."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title, Seán Lacey and 2026 confirmed the same article and institutional repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The journal page supplies the article PDF and classifies it as an Opinion Piece; MTU’s SWORD repository provides a matching institutional copy and impact summary."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using the DOI, Ireland, SDG and research security confirmed the same policy argument and its system-leadership framing."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://publications.coventry.ac.uk/index.php/jorma/article/view/1450",
+            "title": "System Leadership for SDG-Aligned Research Security in Ireland",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://sword.mtu.ie/ricopub2/6/",
+            "title": "System Leadership for SDG-Aligned Research Security in Ireland",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher and MTU repository evidence verify the Ireland-focused research-security argument and show that the journal classifies the item as an Opinion Piece."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article substantively addresses implementation of research security in Ireland within wider European governance and connects it to research integrity, openness and sustainable-development objectives."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T18:30:09Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "ad8108b6",
+          "reader_title": "Argues research security and sustainable development goals need not conflict, given coordinated leadership",
+          "reader_what": "Argues research security can be integrated into existing governance rather than added as separate compliance.",
+          "reader_why": "Poorly designed security measures risk undermining openness and equitable participation in global research.",
+          "reader_more": "This paper uses Ireland's emerging research security framework to examine how security measures intersect with sustainable development objectives, a connection the author says is usually neglected when research security is framed through national security or geopolitical risk alone. The argument is that the two are not inherently in conflict, but aligning them requires coordinated system leadership so that protection does not erode openness, collaboration and equitable participation in global research. It identifies practical obstacles inside research-performing organisations, including limited resources and the difficulty of integrating security with existing governance. The recommended approach is to embed research security within established research integrity and ethics processes, supported by clear guidance, proportionate measures and appropriate national structures, rather than treating it as standalone compliance.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed policy analysis in a research management journal",
+            "research_question": "How research security relates to sustainable development objectives, and how it can be implemented without undermining open international collaboration.",
+            "main_finding": "Research security and sustainable development are compatible but require coordinated system leadership, proportionate measures and integration with existing integrity and ethics governance rather than standalone compliance structures.",
+            "method_or_basis": "Analysis of Irish national research security guideline developments considered alongside wider European policy discussion and existing governance frameworks.",
+            "qualification": "An argued position drawing on one national context at an early stage of implementation; no evaluation of whether the recommended integration works in practice.",
+            "radar_relevance": "Addresses the practical governance problem European institutions face as research security requirements spread.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1098/rsos.260721": {
       "profile": "deep-reader-offline-v1",
@@ -1885,27 +2134,100 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://doi.org/10.17351/ests2023.3113": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "ec099da0",
-      "reader_title": "European partners set the default working methods in African-European forest research collaborations",
-      "reader_what": "Observation of five collaborations found European approaches operated as default while African partners adapted.",
-      "reader_why": "Shows inequality reproduced through everyday practice, not just funding and governance structures.",
-      "reader_more": "This study traces how knowledge is made in five sub-Saharan African and West European forest sustainability collaborations, using positioning analysis of meetings and fieldwork supplemented by interviews. The finding is that European collaborators disproportionately shaped approaches while African collaborators adapted to European practices, with European approaches operating as the default mode. African approaches were taken up where supporting conditions existed, notably fieldwork expertise and disproportionate persistence by those proposing them. African collaborators shaped practice outside meeting spaces in less visible ways and faced barriers to equal participation arising from sociocultural and material factors, with African women encountering combined gender and geography disadvantages. The author frames this as showing how routine daily processes both reproduce and can counter power asymmetries.",
+      "identity_hash": "63b7fab1f540641d",
+      "reader_title": "European approaches became the default in African–European forest research collaborations",
+      "reader_what": "Across five collaborations, European partners disproportionately shaped research approaches while African collaborators adapted and faced participation barriers.",
+      "reader_why": "Everyday meeting and fieldwork practices distribute epistemic authority, allowing some approaches to become defaults while others remain less visible.",
+      "reader_more": "The study follows five sub-Saharan African–West European forest-sustainability collaborations through positioning analysis of meetings and fieldwork, complemented by interviews. European practices were disproportionately influential, while African approaches gained traction through factors including field expertise and persistence. The author also reports sociocultural and material barriers, with layered gender and geography disadvantages for African women.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed qualitative ethnographic study",
-        "research_question": "How asymmetries of epistemic authority emerge in the everyday practices of African-European research collaborations.",
-        "main_finding": "European approaches functioned as the default in all five collaborations, with African partners adapting and needing exceptional persistence or specific fieldwork expertise for their approaches to be adopted, and African women facing compounded barriers.",
-        "method_or_basis": "Positioning analysis of meetings and fieldwork across five forest sustainability collaborations, complemented by interviews.",
-        "qualification": "Five collaborations in one research field, observed qualitatively; findings describe mechanisms rather than establishing how widespread the pattern is.",
-        "radar_relevance": "Bears on the quality and equity of European international research partnerships, a stated aim of EU global cooperation policy.",
+        "work_kind": "qualitative study of international research collaboration",
+        "research_question": "How do geopolitical inequalities shape everyday knowledge-making and epistemic authority in sub-Saharan African–West European forest collaborations?",
+        "main_finding": "European collaborators disproportionately shaped research approaches, while African collaborators adapted more often and faced barriers to equal participation and visibility.",
+        "method_or_basis": "Positioning analysis of meetings and fieldwork across five forest-sustainability collaborations, complemented by interviews.",
+        "qualification": "The study is qualitative and context-specific to five collaborations; it identifies recurring mechanisms and inequalities rather than estimating general population effects.",
+        "radar_relevance": "Direct evidence on European international research collaboration, epistemic authority, participation and inequality in cross-regional knowledge production.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.17351/ests2023.3113 and the package recovered the matching ESTS journal article at https://estsjournal.org/index.php/ests/article/view/3113 with substantive article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.17351/ests2023.3113 matches Camilla Tetley, Engaging Science, Technology, and Society, volume 12, published 5 August 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The ESTS publisher text in the package contains the substantive article through its findings and references; TUM’s author page independently confirms the publication identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://estsjournal.org/index.php/ests/article/view/3113",
+            "title": "Epistemic Authority, Centres, and Peripheries: Geopolitical Inequalities in Processes of Science-Making in Sub-Saharan African–West European Research Collaborations",
+            "evidence_used": true
+          },
+          {
+            "kind": "author_institution_page",
+            "url": "https://www.sts.sot.tum.de/en/sts/people/researchers/msc-camilla-tetley/",
+            "title": "Camilla Tetley — publications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher article text and the author’s institutional publication record verify the five-collaboration study and its findings on epistemic authority and participation barriers."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The publisher-supplied article directly studies knowledge-making and power in five sub-Saharan African–West European research collaborations, making European research collaboration a substantive empirical component."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-13T18:30:09Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "ec099da0",
+          "reader_title": "European partners set the default working methods in African-European forest research collaborations",
+          "reader_what": "Observation of five collaborations found European approaches operated as default while African partners adapted.",
+          "reader_why": "Shows inequality reproduced through everyday practice, not just funding and governance structures.",
+          "reader_more": "This study traces how knowledge is made in five sub-Saharan African and West European forest sustainability collaborations, using positioning analysis of meetings and fieldwork supplemented by interviews. The finding is that European collaborators disproportionately shaped approaches while African collaborators adapted to European practices, with European approaches operating as the default mode. African approaches were taken up where supporting conditions existed, notably fieldwork expertise and disproportionate persistence by those proposing them. African collaborators shaped practice outside meeting spaces in less visible ways and faced barriers to equal participation arising from sociocultural and material factors, with African women encountering combined gender and geography disadvantages. The author frames this as showing how routine daily processes both reproduce and can counter power asymmetries.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed qualitative ethnographic study",
+            "research_question": "How asymmetries of epistemic authority emerge in the everyday practices of African-European research collaborations.",
+            "main_finding": "European approaches functioned as the default in all five collaborations, with African partners adapting and needing exceptional persistence or specific fieldwork expertise for their approaches to be adopted, and African women facing compounded barriers.",
+            "method_or_basis": "Positioning analysis of meetings and fieldwork across five forest sustainability collaborations, complemented by interviews.",
+            "qualification": "Five collaborations in one research field, observed qualitatively; findings describe mechanisms rather than establishing how widespread the pattern is.",
+            "radar_relevance": "Bears on the quality and equity of European international research partnerships, a stated aim of EU global cooperation policy.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/1523908x.2026.2707129": {
       "profile": "deep-reader-offline-v1",
@@ -3602,50 +3924,184 @@
       "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
     },
     "link:https://doi.org/10.1007/s44216-026-00080-0": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "56b6e793",
-      "reader_title": "How EU de-risking is turning research cooperation with China into a security question",
-      "reader_what": "Cooperation structures largely persist but are increasingly overlaid with eligibility rules, risk screening and interference guidance.",
-      "reader_why": "Directly concerns Horizon Europe participation rules and the 2024 Council recommendation on research security.",
-      "reader_more": "The authors read EU policy documents from 2021 to 2025, including the Horizon Europe participation rules, the European Economic Security Strategy and the 2024 Council recommendation on research security, alongside Chinese ministry readouts and state media commentary. They describe a dual trajectory in which formal cooperation architectures and dialogues survive, but are progressively layered with security conditions that narrow who may take part and on what terms. They also track Chinese counter-narratives of openness and reciprocity that contest the legitimacy of these moves. Because this is a qualitative reading of public documents, it establishes how the framing and the policy toolkit developed, not what effect either has had on actual collaboration volumes or research output.",
+      "identity_hash": "dcec8db541ef22db",
+      "reader_title": "EU–China research cooperation is shifting to security-conditional openness",
+      "reader_what": "Cooperation structures persist, but eligibility rules, screening and safeguarding increasingly constrain EU research links with China.",
+      "reader_why": "De-risking narratives become operational through Horizon Europe rules and research-security guidance, while Chinese actors contest the framing.",
+      "reader_more": "The study analyses 23 public documents from 2021–2025, combining policy analysis, discourse analysis, narrative comparison and institutional tracing. It finds institutional continuity alongside tighter security conditions rather than wholesale decoupling. The authors explicitly limit their claim to public governance texts and do not measure implementation behaviour or research-output effects.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed policy analysis",
-        "research_question": "How is the EU's de-risking agenda reconfiguring the governance of research cooperation with China between 2021 and 2025?",
-        "main_finding": "Research security has been constructed as a governance category and translated into concrete eligibility rules, screening and safeguarding guidance layered on top of cooperation structures that themselves remain in place, while Chinese actors mount counter-narratives contesting that framing.",
-        "method_or_basis": "Securitisation theory applied through qualitative analysis of EU policy documents and Chinese official and state-media material; publisher open-access full text supplied.",
-        "qualification": "Document-based interpretation covering discourse and instruments; it does not measure effects on collaboration volumes, funding flows or research output.",
-        "radar_relevance": "Traces how research security conditions entered Horizon Europe participation rules and EU research governance more broadly.",
+        "work_kind": "EU–China research-governance study",
+        "research_question": "How is de-risking translated into EU research-governance tools, how does China respond, and how does this reshape EU–China academic exchange?",
+        "main_finding": "EU–China research cooperation retains established structures while security rules increasingly condition eligibility, screening and safeguarding, producing security-conditional openness.",
+        "method_or_basis": "Qualitative policy and discourse analysis of 23 public documents, using narrative comparison and institutional tracing across EU and Chinese sources from 2021 to 2025.",
+        "qualification": "The evidence concerns public governance texts and narratives; it does not measure implementation behaviour or causal effects on research outputs.",
+        "radar_relevance": "Direct evidence on Horizon Europe participation, EU research security, de-risking and science-diplomacy governance with China.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1007/s44216-026-00080-0; it resolves to the matching open-access Springer article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s44216-026-00080-0 matches the title, Yang Li and Ting Long, Asian Review of Political Economy, and 1 July 2026 publication date."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read the full primary article at https://link.springer.com/article/10.1007/s44216-026-00080-0, including research design, document corpus, findings and limitations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s44216-026-00080-0",
+            "title": "EU–China research cooperation under a “de-risking” framework: the securitisation of knowledge in EU science policy (2021–2025)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer full text verifies the article and its 23-document qualitative analysis of EU de-risking, Horizon Europe rules and Chinese counter-narratives."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The open-access article directly analyses EU–China research governance under Horizon Europe and related EU research-security instruments from 2021 to 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "56b6e793",
+          "reader_title": "How EU de-risking is turning research cooperation with China into a security question",
+          "reader_what": "Cooperation structures largely persist but are increasingly overlaid with eligibility rules, risk screening and interference guidance.",
+          "reader_why": "Directly concerns Horizon Europe participation rules and the 2024 Council recommendation on research security.",
+          "reader_more": "The authors read EU policy documents from 2021 to 2025, including the Horizon Europe participation rules, the European Economic Security Strategy and the 2024 Council recommendation on research security, alongside Chinese ministry readouts and state media commentary. They describe a dual trajectory in which formal cooperation architectures and dialogues survive, but are progressively layered with security conditions that narrow who may take part and on what terms. They also track Chinese counter-narratives of openness and reciprocity that contest the legitimacy of these moves. Because this is a qualitative reading of public documents, it establishes how the framing and the policy toolkit developed, not what effect either has had on actual collaboration volumes or research output.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed policy analysis",
+            "research_question": "How is the EU's de-risking agenda reconfiguring the governance of research cooperation with China between 2021 and 2025?",
+            "main_finding": "Research security has been constructed as a governance category and translated into concrete eligibility rules, screening and safeguarding guidance layered on top of cooperation structures that themselves remain in place, while Chinese actors mount counter-narratives contesting that framing.",
+            "method_or_basis": "Securitisation theory applied through qualitative analysis of EU policy documents and Chinese official and state-media material; publisher open-access full text supplied.",
+            "qualification": "Document-based interpretation covering discourse and instruments; it does not measure effects on collaboration volumes, funding flows or research output.",
+            "radar_relevance": "Traces how research security conditions entered Horizon Europe participation rules and EU research governance more broadly.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s43681-026-01219-8": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "203e3bcc",
-      "reader_title": "Do US, EU and UN artificial intelligence rules answer the concerns experts raised?",
-      "reader_what": "Content analysis finds EU, Biden-era and UN frameworks reflect expert concerns; corporate power concentration is largely sidelined.",
-      "reader_why": "The EU AI Act is one of four frameworks assessed and shares the corporate-power blind spot.",
-      "reader_more": "The benchmark is the open letter calling for a pause on giant AI experiments, treated as a summary of expert concern. Four documents are compared against it: two United States executive orders from the Trump and Biden administrations, the EU AI Act, and the United Nations report Governing AI for Humanity. The authors judge the market-oriented Trump order to deflect most of those concerns, while the Biden order, the EU Act and the UN report engage strongly with human rights, safety and accountability. The gap they highlight is concentration of corporate power, which they find addressed more fully by the UN than by Western regulation. This is qualitative document analysis, so the judgements are interpretive rather than measured.",
+      "identity_hash": "8e971bf54ffe4dca",
+      "reader_title": "EU AI rules reflect many expert warnings but leave a corporate-power gap",
+      "reader_what": "Content analysis finds the EU AI Act reflects many expert concerns while underweighting corporate power concentration.",
+      "reader_why": "Comparing expert warnings with policy texts shows which ethical concerns become formal governance priorities and which remain marginal.",
+      "reader_more": "The study codes concerns from the Pause Giant AI Experiments letter and compares them with two US executive orders, the EU AI Act and the UN Governing AI for Humanity report. It finds stronger alignment on rights, safety and accountability in the Biden, EU and UN frameworks than in the Trump framework. The comparison is interpretive and bounded by one expert baseline and four policy frameworks.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed qualitative content analysis",
-        "research_question": "How far do major AI governance frameworks reflect the ethical concerns articulated by the AI expert community?",
-        "main_finding": "The Biden executive order, the EU AI Act and the UN report reflect expert concerns about rights, safety and accountability, whereas the earlier market-oriented US order refracts them; concentration of corporate power is a shared gap in Western frameworks and better covered by the UN.",
-        "method_or_basis": "Qualitative content analysis comparing four governance documents against concerns stated in the Pause Giant AI Experiments open letter; publisher full text supplied.",
-        "qualification": "The expert baseline is a single open letter, and reflect-versus-refract judgements are the authors' interpretation rather than a validated measure.",
-        "radar_relevance": "Assesses the EU AI Act comparatively and identifies a specific area, corporate concentration, that European rules are said to underweight.",
+        "work_kind": "comparative AI governance content analysis",
+        "research_question": "How strongly do major US, EU and UN AI governance frameworks respond to ethical warnings articulated by AI experts?",
+        "main_finding": "The Biden, EU and UN frameworks reflect many expert concerns on rights, safety and accountability, while Western frameworks under-address corporate power concentration.",
+        "method_or_basis": "Inductive qualitative coding of expert concerns followed by directed qualitative content analysis across two US orders, the EU AI Act and a UN report.",
+        "qualification": "The sample is four policy frameworks and one expert baseline; interpretation is subjective and the study does not assess implementation or real-world effectiveness.",
+        "radar_relevance": "Substantive analysis of the EU AI Act as a major European technology-governance framework, including specific governance strengths and gaps.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1007/s43681-026-01219-8; it resolves to the matching open-access Springer article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s43681-026-01219-8 matches Mir Hasib and Lyombe Eko, AI and Ethics, published 1 July 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read the full Springer article at https://link.springer.com/article/10.1007/s43681-026-01219-8, including coding procedure, results and limitations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s43681-026-01219-8",
+            "title": "Beyond ethics washing: evaluating the responsiveness of US, EU, and UN AI governance to expert warnings",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer full text verifies the four-framework qualitative content analysis and supports the EU-specific findings and methodological limitations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The open-access study gives substantive analysis of the EU AI Act as one of four major governance frameworks and directly evaluates its treatment of expert AI-risk concerns."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "203e3bcc",
+          "reader_title": "Do US, EU and UN artificial intelligence rules answer the concerns experts raised?",
+          "reader_what": "Content analysis finds EU, Biden-era and UN frameworks reflect expert concerns; corporate power concentration is largely sidelined.",
+          "reader_why": "The EU AI Act is one of four frameworks assessed and shares the corporate-power blind spot.",
+          "reader_more": "The benchmark is the open letter calling for a pause on giant AI experiments, treated as a summary of expert concern. Four documents are compared against it: two United States executive orders from the Trump and Biden administrations, the EU AI Act, and the United Nations report Governing AI for Humanity. The authors judge the market-oriented Trump order to deflect most of those concerns, while the Biden order, the EU Act and the UN report engage strongly with human rights, safety and accountability. The gap they highlight is concentration of corporate power, which they find addressed more fully by the UN than by Western regulation. This is qualitative document analysis, so the judgements are interpretive rather than measured.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed qualitative content analysis",
+            "research_question": "How far do major AI governance frameworks reflect the ethical concerns articulated by the AI expert community?",
+            "main_finding": "The Biden executive order, the EU AI Act and the UN report reflect expert concerns about rights, safety and accountability, whereas the earlier market-oriented US order refracts them; concentration of corporate power is a shared gap in Western frameworks and better covered by the UN.",
+            "method_or_basis": "Qualitative content analysis comparing four governance documents against concerns stated in the Pause Giant AI Experiments open letter; publisher full text supplied.",
+            "qualification": "The expert baseline is a single open letter, and reflect-versus-refract judgements are the authors' interpretation rather than a validated measure.",
+            "radar_relevance": "Assesses the EU AI Act comparatively and identifies a specific area, corporate concentration, that European rules are said to underweight.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://institutmontaigne.org/ressources/pdfs/publications/policy-paper-eu-semiconductor-geopolitical-risk-survey-outlook-2026-2031.pdf": {
       "profile": "deep-reader-offline-v1",
@@ -4770,27 +5226,115 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://doi.org/10.2478/kbo-2026-0026": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "8f53e94b",
-      "reader_title": "Proposals for joint EU and NATO governance of dual-use biotechnology",
-      "reader_what": "Identifies fragmented rules and weak oversight of dual-use biotechnology, then proposes EU-NATO biosecurity coordination guidelines.",
-      "reader_why": "Biotechnology governance gaps affect European research oversight as well as defence preparedness.",
-      "reader_more": "The study looks at how advances in synthetic biology, genome editing and automated bioengineering create both innovation and biosecurity risk, framed by a shift in the security environment from volatility and complexity towards brittleness and anxiety. The method is qualitative conceptual and policy analysis based on a literature review and examination of EU and NATO strategic and regulatory documents. The authors identify three main weaknesses: regulatory fragmentation, asymmetrical oversight, and limited coordination on dual-use research. They present NATO and the EU as complementary pillars, one supplying operational coordination and civil-military resilience, the other regulatory governance and scientific integration. From this they derive strategic guidelines for EU-NATO biosecurity coordination. The guidelines are proposals, not adopted policy.",
+      "identity_hash": "86a60ddd5268ccba",
+      "reader_title": "EU–NATO biosecurity coordination proposed for dual-use biotechnology",
+      "reader_what": "The paper identifies fragmented dual-use biotechnology governance and proposes stronger EU–NATO civil-military coordination.",
+      "reader_why": "The proposed interoperability model is intended to connect regulatory oversight, resilience planning and operational biosecurity across institutions.",
+      "reader_more": "Using literature plus EU and NATO strategic and regulatory frameworks, the article discusses synthetic biology, genome editing and automated bioengineering as dual-use domains. It highlights fragmented regulation, uneven oversight and limited coordination as governance gaps. The recommendations are conceptual policy proposals; the paper does not test an implemented interoperability system or demonstrate policy effects.",
       "deep_analysis": {
-        "work_kind": "conceptual and policy analysis (conference article)",
-        "research_question": "How dual-use biotechnology risks should be governed across EU and NATO civil and military institutions.",
-        "main_finding": "Existing governance of dual-use biotechnology is fragmented and unevenly supervised, and the authors propose guidelines for closer EU-NATO biosecurity coordination linking civilian and defence institutions.",
-        "method_or_basis": "Packaged abstract and article text from the journal page",
-        "qualification": "Document-based conceptual analysis; the proposed guidelines have no institutional status and are untested.",
-        "radar_relevance": "Dual-use biotechnology sits directly on the boundary between European research policy and security governance.",
-        "confidence": "medium",
+        "work_kind": "conceptual biosecurity policy analysis",
+        "research_question": "How should EU and NATO governance coordinate around dual-use biotechnology under a more brittle and security-sensitive operating environment?",
+        "main_finding": "The paper identifies fragmented oversight of dual-use biotechnology and proposes stronger EU–NATO civil-military interoperability for biosecurity governance.",
+        "method_or_basis": "Qualitative conceptual and policy analysis based on literature and EU and NATO strategic and regulatory frameworks concerning dual-use biotechnology.",
+        "qualification": "The interoperability model is a policy proposal; it is not an implemented system and the paper does not evaluate observed governance effects.",
+        "radar_relevance": "Direct European R&I relevance through EU–NATO governance of dual-use biotechnology, research oversight and biosecurity resilience.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.2478/kbo-2026-0026; it resolves to the matching Reference Global publisher page with title, authors and abstract."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.2478/kbo-2026-0026 matches Maria Nenovska and Ivo Radulov in International conference KNOWLEDGE-BASED ORGANIZATION, 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “From Vuca to Bani: Governing Dual-Use Biotechnologies Through Eu–Nato Civil-Military Interoperability” recovered publisher metadata and a full author-shared copy."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title, Nenovska, Radulov and 2026 matched the same DOI and publication."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The Reference Global page verifies the article; a full-text copy at ResearchGate was used to examine the conceptual policy argument beyond the abstract."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using the DOI and distinctive phrases “dual-use biotechnologies” and “civil-military interoperability” confirmed the same work and its EU–NATO focus."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://reference-global.com/article/10.2478/kbo-2026-0026",
+            "title": "From Vuca to Bani: Governing Dual-Use Biotechnologies Through Eu–Nato Civil-Military Interoperability",
+            "evidence_used": true
+          },
+          {
+            "kind": "author_shared_full_text",
+            "url": "https://www.researchgate.net/publication/409206092_From_Vuca_to_Bani_Governing_Dual-Use_Biotechnologies_Through_Eu-Nato_Civil-Military_Interoperability",
+            "title": "From Vuca to Bani: Governing Dual-Use Biotechnologies Through Eu–Nato Civil-Military Interoperability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher metadata and the recovered full-text copy verify the paper’s conceptual EU–NATO biosecurity analysis and proposal status."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The recovered article substantively analyses EU and NATO governance of dual-use biotechnology and proposes a European civil-military biosecurity coordination model."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "8f53e94b",
+          "reader_title": "Proposals for joint EU and NATO governance of dual-use biotechnology",
+          "reader_what": "Identifies fragmented rules and weak oversight of dual-use biotechnology, then proposes EU-NATO biosecurity coordination guidelines.",
+          "reader_why": "Biotechnology governance gaps affect European research oversight as well as defence preparedness.",
+          "reader_more": "The study looks at how advances in synthetic biology, genome editing and automated bioengineering create both innovation and biosecurity risk, framed by a shift in the security environment from volatility and complexity towards brittleness and anxiety. The method is qualitative conceptual and policy analysis based on a literature review and examination of EU and NATO strategic and regulatory documents. The authors identify three main weaknesses: regulatory fragmentation, asymmetrical oversight, and limited coordination on dual-use research. They present NATO and the EU as complementary pillars, one supplying operational coordination and civil-military resilience, the other regulatory governance and scientific integration. From this they derive strategic guidelines for EU-NATO biosecurity coordination. The guidelines are proposals, not adopted policy.",
+          "deep_analysis": {
+            "work_kind": "conceptual and policy analysis (conference article)",
+            "research_question": "How dual-use biotechnology risks should be governed across EU and NATO civil and military institutions.",
+            "main_finding": "Existing governance of dual-use biotechnology is fragmented and unevenly supervised, and the authors propose guidelines for closer EU-NATO biosecurity coordination linking civilian and defence institutions.",
+            "method_or_basis": "Packaged abstract and article text from the journal page",
+            "qualification": "Document-based conceptual analysis; the proposed guidelines have no institutional status and are untested.",
+            "radar_relevance": "Dual-use biotechnology sits directly on the boundary between European research policy and security governance.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.2478/kbo-2026-0010": {
       "profile": "deep-reader-offline-v1",
@@ -5681,26 +6225,98 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "88af2357",
-      "reader_title": "Comparing bioeconomy strategies to design policy modules for Russian farm regions",
-      "reader_what": "Comparative study ranks European institutional frameworks as most adaptable for building bioeconomy capacity in a Russian region.",
-      "reader_more": "The study systematises foreign bioeconomy models in agriculture and asks which elements could transfer to Russian regions, using the Republic of Buryatia as the test case. It compares bioeconomy strategies in the EU, United States, China and Latin America, applies content analysis of priorities, a multi-criteria adaptability assessment and scenario modelling of effects to 2035 against a 2025 baseline. The most durable combinations are reported as an institutional and cluster core with cooperation, digitalisation and agricultural technology as diffusion catalysts, plus low-waste processing and bioenergy where demand and infrastructure exist. For Buryatia the assessment scores the European institutional framework highest for adaptability, narrowly ahead of East Asian digital practice.",
+      "identity_hash": "080c4ad8a71a58a8",
+      "reader_title": "Bioeconomy models compared for adaptation to Russian agricultural regions",
+      "reader_what": "The study ranks international bioeconomy models for transfer to Buryatia, with Europe one comparator among several.",
+      "reader_more": "The article compares EU, US, Chinese and Latin American models using content analysis, MCDA and scenario modelling, then proposes a portfolio for Russian regions. Its substantive target is Russia, especially Buryatia; the European model is an input to transfer analysis rather than the object of European R&I study. The methods are applied to this case and are not presented as a novel reusable methodology.",
       "deep_analysis": {
-        "work_kind": "comparative policy study with scenario modelling",
-        "research_question": "Which elements of international bioeconomy models can be transferred to Russian agricultural regions.",
-        "main_finding": "The authors rank the European institutional framework as the most adaptable model for Buryatia, with digitalisation and agricultural technology identified as the main diffusion catalysts.",
-        "method_or_basis": "Packaged full text of the journal article page",
-        "qualification": "Scores come from the authors own multi-criteria weighting and the projections are scenario modelling, not observed outcomes.",
-        "radar_relevance": "Uses EU bioeconomy policy as a reference model, but the subject is regional policy design outside the EU.",
-        "confidence": "medium",
+        "work_kind": "comparative regional bioeconomy policy study",
+        "research_question": "Which foreign bioeconomy models and policy modules appear most adaptable to Russian agricultural regions, using Buryatia as a case?",
+        "main_finding": "The study compares foreign bioeconomy models, ranks their adaptability and proposes a policy portfolio for Russian agricultural regions.",
+        "method_or_basis": "Comparative content analysis of international bioeconomy strategies, multi-criteria adaptability assessment and scenario modelling for Buryatia.",
+        "qualification": "The EU is one comparator among several and the analytical methods are applied to the Russian case rather than introduced as a novel transferable method.",
+        "radar_relevance": "Fails Strand A because European relevance is comparator-only; it also fails Strand B because it applies existing methods rather than demonstrating a new reusable method.",
+        "confidence": "high",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.55186/25876740_2026_69_3_373; the package recovered the matching International Agricultural Journal article at the mshj.ru publisher site."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.55186/25876740_2026_69_3_373 matches the article, its five authors and pages 373–378 in International Agricultural Journal."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The official journal issue at https://iacj.ru/en/nauka/issue/7462/view and substantive publisher article text verify the Russian-region target and comparative methodology."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_article",
+            "url": "https://mshj.ru/en/nauka/publications/article/6a9c166932807fdbab874afa/bioeconomy-as-a-driver-of-innovation-capacity-in-agricultural-regions-international-experience-and-adaptation-in-russian-regions/view",
+            "title": "Bioeconomy as a driver of innovation capacity in agricultural regions: international experience and adaptation in Russian regions",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_journal_issue",
+            "url": "https://iacj.ru/en/nauka/issue/7462/view",
+            "title": "International Agricultural Journal issue containing the article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary journal evidence verifies a Russian regional adaptation study; EU models are comparative inputs, and the methods are applied rather than a new reusable contribution."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_COMPARATOR_ONLY",
+        "reason": "The work targets adaptation of international bioeconomy models to Russian regions; the EU is one comparator among several, not the substantive European R&I object required by Strand A."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "88af2357",
+          "reader_title": "Comparing bioeconomy strategies to design policy modules for Russian farm regions",
+          "reader_what": "Comparative study ranks European institutional frameworks as most adaptable for building bioeconomy capacity in a Russian region.",
+          "reader_more": "The study systematises foreign bioeconomy models in agriculture and asks which elements could transfer to Russian regions, using the Republic of Buryatia as the test case. It compares bioeconomy strategies in the EU, United States, China and Latin America, applies content analysis of priorities, a multi-criteria adaptability assessment and scenario modelling of effects to 2035 against a 2025 baseline. The most durable combinations are reported as an institutional and cluster core with cooperation, digitalisation and agricultural technology as diffusion catalysts, plus low-waste processing and bioenergy where demand and infrastructure exist. For Buryatia the assessment scores the European institutional framework highest for adaptability, narrowly ahead of East Asian digital practice.",
+          "deep_analysis": {
+            "work_kind": "comparative policy study with scenario modelling",
+            "research_question": "Which elements of international bioeconomy models can be transferred to Russian agricultural regions.",
+            "main_finding": "The authors rank the European institutional framework as the most adaptable model for Buryatia, with digitalisation and agricultural technology identified as the main diffusion catalysts.",
+            "method_or_basis": "Packaged full text of the journal article page",
+            "qualification": "Scores come from the authors own multi-criteria weighting and the projections are scenario modelling, not observed outcomes.",
+            "radar_relevance": "Uses EU bioeconomy policy as a reference model, but the subject is regional policy design outside the EU.",
+            "confidence": "medium",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-ai-science-strategy/raise-resource-ai-science-europe_en": {
       "profile": "deep-reader-offline-v1",
@@ -5749,27 +6365,115 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://doi.org/10.1080/09662839.2026.2680646": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "5c8a1111",
-      "reader_title": "Research security as a new form of European geopolitical pragmatism",
-      "reader_what": "Argues EU research security emerges through multi-level coordination and adaptation, reconciling openness with protection.",
-      "reader_why": "Explains how research security became a vehicle for the EU geopolitical identity.",
-      "reader_more": "The article examines the EU turn towards research and knowledge security as part of a change in its geopolitical identity, deliberately moving beyond the vocabulary of technological sovereignty. It presents securitisation of research not as a single decision but as a multi-level process of coordination between EU and national levels, translation of concepts into different institutional settings, and adaptation by the actors involved. The result is described as a distinctly European geopolitical pragmatism that tries to hold together openness and protection, values and interests, and academic freedom and strategic control. The packaged record preserved only the abstract, so the case material and evidence base behind the claim were not available.",
+      "identity_hash": "b3d701f453d41c09",
+      "reader_title": "EU research security is becoming routine geopolitical governance",
+      "reader_what": "Research security spreads through EU coordination, national translation and routine governance rather than exceptional controls.",
+      "reader_why": "Risk appraisal, due diligence and related procedures make openness conditional while preserving cooperation as a policy objective.",
+      "reader_more": "The article traces EU and national policy from 2013–2025 across the Netherlands, Germany, Finland, Italy and Hungary. It argues that security rationales are being embedded in ordinary research governance, producing what it calls securitisation through governance and an epistemic form of sovereignty. The design is interpretive comparative process tracing, so the finding concerns institutionalisation and policy translation rather than measured effects on research output.",
       "deep_analysis": {
-        "work_kind": "conceptual and empirical policy analysis (peer-reviewed article)",
-        "research_question": "How the EU turn to research and knowledge security reflects and shapes its geopolitical identity.",
-        "main_finding": "Research security in the EU develops through multi-level coordination, translation and adaptation, producing a pragmatic European approach that tries to reconcile open science with strategic protection.",
-        "method_or_basis": "Stored publisher abstract in the package; publisher page returned 403",
-        "qualification": "Abstract only; the underlying cases, interviews or documents supporting the argument are unverified.",
-        "radar_relevance": "Directly analyses research security, a defining current issue for European research policy.",
-        "confidence": "medium",
+        "work_kind": "comparative research-security policy study",
+        "research_question": "How does the EU’s turn toward research and knowledge security reflect and contribute to its emergence as a geopolitical actor?",
+        "main_finding": "Research security becomes embedded through multi-level coordination, national translation and routine governance, making scientific openness more conditional.",
+        "method_or_basis": "Qualitative interpretive document analysis and comparative process tracing of EU policy and national translation in five Member States from 2013 to 2025.",
+        "qualification": "The study explains institutionalisation and policy translation; it does not measure causal effects on research outputs or collaboration volumes.",
+        "radar_relevance": "Direct evidence on EU research-security governance, Member State implementation and the changing conditions of international research collaboration.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "The package followed https://doi.org/10.1080/09662839.2026.2680646 to Taylor & Francis, but its automated source retrieval returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolving/searching DOI 10.1080/09662839.2026.2680646 recovered the matching open-access Taylor & Francis full article and publication metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “Governing knowledge, shaping Europe: research security in the EU’s geopolitical turn” matched Taylor & Francis and the University of Groningen repository."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title, Cristina Pinna and 2026 matched the same article, published online 12 June 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Taylor & Francis full text and the University of Groningen research portal provide matching substantive copies and DOI metadata."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using DOI fragments, author and the phrase “securitisation through governance” confirmed the same 22-page work and its five-country design."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2026.2680646",
+            "title": "Governing knowledge, shaping Europe: research security in the EU’s geopolitical turn",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://research.rug.nl/en/publications/governing-knowledge-shaping-europe-research-security-in-the-eus-g/",
+            "title": "Governing knowledge, shaping Europe: research security in the EU’s geopolitical turn",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher and institutional-repository evidence verify Cristina Pinna’s 12 June 2026 article and support the full policy-comparison interpretation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The full article directly studies EU research-security governance and its translation across five Member States, making European research policy the central empirical object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "5c8a1111",
+          "reader_title": "Research security as a new form of European geopolitical pragmatism",
+          "reader_what": "Argues EU research security emerges through multi-level coordination and adaptation, reconciling openness with protection.",
+          "reader_why": "Explains how research security became a vehicle for the EU geopolitical identity.",
+          "reader_more": "The article examines the EU turn towards research and knowledge security as part of a change in its geopolitical identity, deliberately moving beyond the vocabulary of technological sovereignty. It presents securitisation of research not as a single decision but as a multi-level process of coordination between EU and national levels, translation of concepts into different institutional settings, and adaptation by the actors involved. The result is described as a distinctly European geopolitical pragmatism that tries to hold together openness and protection, values and interests, and academic freedom and strategic control. The packaged record preserved only the abstract, so the case material and evidence base behind the claim were not available.",
+          "deep_analysis": {
+            "work_kind": "conceptual and empirical policy analysis (peer-reviewed article)",
+            "research_question": "How the EU turn to research and knowledge security reflects and shapes its geopolitical identity.",
+            "main_finding": "Research security in the EU develops through multi-level coordination, translation and adaptation, producing a pragmatic European approach that tries to reconcile open science with strategic protection.",
+            "method_or_basis": "Stored publisher abstract in the package; publisher page returned 403",
+            "qualification": "Abstract only; the underlying cases, interviews or documents supporting the argument are unverified.",
+            "radar_relevance": "Directly analyses research security, a defining current issue for European research policy.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027/": {
       "profile": "deep-reader-offline-v1",
@@ -6641,26 +7345,114 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://doi.org/10.32782/tnu-2707-0581/2026.3/10": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "21a91370",
-      "reader_title": "Journal article on the Chips Act 2.0 and EU semiconductor autonomy",
-      "reader_what": "Article addressing the European Chips Act 2.0 in relation to EU strategic autonomy and technological leadership.",
-      "reader_more": "The record is a legal journal article whose subject is the European Chips Act 2.0 and its relation to EU strategic autonomy and technological leadership in the global semiconductor ecosystem. Retrieval of the source failed with a broken connection, and the package preserved only the title together with scanner boilerplate. A targeted search recovered abundant material about the Chips Act 2.0 itself but nothing from this particular article, and substituting general commentary for the author own analysis would misrepresent the record. Nothing about the argument, method or conclusions of this work can therefore be stated. The topic is clearly within scope, but the content remains unestablished.",
+      "identity_hash": "40a4ec336d7ec30c",
+      "reader_title": "Chips Act 2.0 is framed as a wider EU semiconductor sovereignty strategy",
+      "reader_what": "Legal-policy analysis argues Chips Act 2.0 should extend beyond fabs to design, skills, materials and supply-chain resilience.",
+      "reader_why": "The proposed architecture links semiconductor capability building to EU strategic autonomy and reduced external dependencies.",
+      "reader_more": "The article reviews the first European Chips Act and develops a prospective architecture for a second phase covering advanced nodes, design and packaging, critical materials, skills, RISC-V, finance and supply chains. It treats Chips Act 2.0 as a policy direction and recommendation rather than an enacted programme with observed outcomes. The analysis also discusses implications for Ukraine’s integration into the European semiconductor ecosystem.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed article (content unestablished)",
-        "research_question": "",
-        "main_finding": "Not established. Only the title and topic could be confirmed; no abstract or text was recoverable through the package or targeted search.",
-        "method_or_basis": "Title only; packaged retrieval failed with an incomplete read and targeted search did not surface the article",
-        "qualification": "No finding should be attributed to this record; general Chips Act commentary must not be read as this author analysis.",
-        "radar_relevance": "Topic falls squarely within EU semiconductor and strategic autonomy policy.",
-        "confidence": "low",
-        "why_supported": false
+        "work_kind": "prospective semiconductor legal-policy analysis",
+        "research_question": "What conceptual and regulatory architecture should a prospective European Chips Act 2.0 have to strengthen EU technological leadership?",
+        "main_finding": "The article argues that a second Chips Act should broaden EU semiconductor strategy beyond fabrication toward design, skills, materials, finance and resilient supply chains.",
+        "method_or_basis": "Legal and policy analysis of the first European Chips Act, competitiveness and industry reports, and related strategic instruments.",
+        "qualification": "Chips Act 2.0 is treated prospectively; the article analyses and recommends an architecture rather than reporting enacted programme effects.",
+        "radar_relevance": "Direct European industrial and R&I policy analysis concerning semiconductor capability, technological leadership and strategic autonomy.",
+        "confidence": "high",
+        "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package attempted https://doi.org/10.32782/tnu-2707-0581/2026.3/10, but source download terminated with an IncompleteRead before a usable article was recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Searching DOI 10.32782/tnu-2707-0581/2026.3/10 identified the matching 2026 article in the Taurida National V.I. Vernadsky University juridical journal."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “EUROPEAN CHIPS ACT 2.0: STRATEGIC AUTONOMY AND TECHNOLOGICAL LEADERSHIP OF THE EU IN THE GLOBAL SEMICONDUCTOR ECOSYSTEM” found the official issue."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title, O. K. Tsyren and 2026 matched the official journal contents and article beginning on page 52."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read the official full issue PDF at https://www.juris.vernadskyjournals.in.ua/journals/2026/3_2026/3_2026.pdf, including the article text and publication metadata."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using “Tsyren”, “Chips Act 2.0”, “page 52” and the DOI confirmed the article’s identity and prospective policy status."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_journal_full_issue_pdf",
+            "url": "https://www.juris.vernadskyjournals.in.ua/journals/2026/3_2026/3_2026.pdf",
+            "title": "Scientific notes of Taurida National V.I. Vernadsky University, 2026 issue 3",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_issue_page",
+            "url": "https://juris.vernadskyjournals.in.ua/eng/current",
+            "title": "Current issue listing EUROPEAN CHIPS ACT 2.0",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official journal issue evidence recovers the full article and verifies a prospective EU semiconductor-policy analysis rather than observed Chips Act 2.0 outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The recovered journal article directly develops a prospective legal and strategic architecture for an EU Chips Act 2.0 and European semiconductor technological leadership."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:53Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "21a91370",
+          "reader_title": "Journal article on the Chips Act 2.0 and EU semiconductor autonomy",
+          "reader_what": "Article addressing the European Chips Act 2.0 in relation to EU strategic autonomy and technological leadership.",
+          "reader_more": "The record is a legal journal article whose subject is the European Chips Act 2.0 and its relation to EU strategic autonomy and technological leadership in the global semiconductor ecosystem. Retrieval of the source failed with a broken connection, and the package preserved only the title together with scanner boilerplate. A targeted search recovered abundant material about the Chips Act 2.0 itself but nothing from this particular article, and substituting general commentary for the author own analysis would misrepresent the record. Nothing about the argument, method or conclusions of this work can therefore be stated. The topic is clearly within scope, but the content remains unestablished.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed article (content unestablished)",
+            "research_question": "",
+            "main_finding": "Not established. Only the title and topic could be confirmed; no abstract or text was recoverable through the package or targeted search.",
+            "method_or_basis": "Title only; packaged retrieval failed with an incomplete read and targeted search did not surface the article",
+            "qualification": "No finding should be attributed to this record; general Chips Act commentary must not be read as this author analysis.",
+            "radar_relevance": "Topic falls squarely within EU semiconductor and strategic autonomy policy.",
+            "confidence": "low",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:53Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.48550/arxiv.2608.14568": {
       "profile": "deep-reader-offline-v1",
@@ -6868,6 +7660,172 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-13T12:57:53Z",
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+    },
+    "link:https://eic.ec.europa.eu/document/download/1da4f37a-2eb2-4571-9342-0ea978b3dfd3_en?filename=DPN_EIC_Accelerator_02_2022.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "b2f85717",
+      "identity_hash": "304537f55f6d3a24",
+      "reader_title": "EIC maps 25 early deep-tech signals for Europe",
+      "reader_what": "EIC horizon scanning identifies 25 low-to-mid-maturity technologies across digital, clean-tech and health domains.",
+      "reader_why": "Portfolio evidence and expert review turn early project signals into structured input for EU technology foresight.",
+      "reader_more": "The report mines EIC funded projects and applications from Q2 2021 to Q1 2025, then combines quantitative filtering with expert assessment. It groups 25 signals across digital and space, clean and resource-efficient technologies, and biotechnology and health. The EIC stresses that these are a curated snapshot, not predictions, rankings or funding priorities.",
+      "deep_analysis": {
+        "work_kind": "EU technology foresight report",
+        "research_question": "Which emerging deep-tech signals in the EIC portfolio may matter for Europe’s future resilience and strategic autonomy?",
+        "main_finding": "The report identifies 25 low-to-mid-maturity deep-tech signals across three strategic domains from EIC portfolio evidence.",
+        "method_or_basis": "Structured horizon scan of EIC funded projects and proposals from Q2 2021 to Q1 2025, combining quantitative screening with expert qualitative assessment and Joint Research Centre support.",
+        "qualification": "The signals are a curated snapshot, not predictions, rankings or EIC funding priorities.",
+        "radar_relevance": "Direct EU R&I foresight on emerging technologies, industrial capability, resilience and strategic autonomy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_match",
+            "note": "Opened https://eic.ec.europa.eu/document/download/1da4f37a-2eb2-4571-9342-0ea978b3dfd3_en?filename=DPN_EIC_Accelerator_02_2022.pdf; it is an EIC Accelerator data-protection notice, not the claimed technology report."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The exported record contains no DOI identity to resolve; the recovered report later displays DOI 10.2826/4784865, which cannot replace the record’s immutable URL identity."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched the exact scanner title “EIC Tech Report 2026 identifies 25 emerging deep tech signals to support Europe’s strategic autonomy and resilience” and found the matching official EIC news page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched “EIC Tech Report 2026 European Innovation Council 2026” and matched the 30 March 2026 EIC publication and issuing organisation."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The official EIC page links the report PDF at https://eic.ec.europa.eu/document/download/ddb9d216-34e9-483c-b1bf-20b4cb100032_en?filename=EIC+TechReport+2026+-+digital+version.pdf, which was used as primary evidence."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using “EIC Tech Report 2026”, “25 signals”, and “2021 to 2025” confirmed the report, its portfolio basis, date, and relationship to the EIC announcement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_pdf",
+            "url": "https://eic.ec.europa.eu/document/download/ddb9d216-34e9-483c-b1bf-20b4cb100032_en?filename=EIC+TechReport+2026+-+digital+version.pdf",
+            "title": "EIC Tech Report 2026",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publication_page",
+            "url": "https://eic.ec.europa.eu/news/eic-tech-report-2026-identifies-25-emerging-deep-tech-signals-support-europes-strategic-autonomy-and-2026-03-30_en",
+            "title": "EIC Tech Report 2026 identifies 25 emerging deep tech signals to support Europe’s strategic autonomy and resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied PDF is unrelated, but the exact title and official EIC publication trail recover the underlying report and verify its identity and substance."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EIC sources verify a substantive EU technology-foresight report based on the EIC innovation portfolio and focused on Europe’s future capabilities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
+    },
+    "link:https://doi.org/10.1093/scipol/scag028": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "c2a08129",
+      "identity_hash": "89e7529c2f4f3d35",
+      "reader_title": "Germany’s research-security committees offer a self-governance model",
+      "reader_what": "Germany’s KEF committees combine institutional peer review with national coordination to govern security-relevant research.",
+      "reader_why": "The model locates routine risk decisions inside research institutions while retaining a national advisory backstop.",
+      "reader_more": "The paper gives a descriptive and normative analysis of Germany’s committees for ethics in security-relevant research. It reports nearly 170 institutions engaging with the model and 124 cases considered by 2024, while cautioning that the underlying aggregate data are limited. Its main contribution is a defence of academic self-governance and a proposal that other states consider adapting the structure, not a causal evaluation of effectiveness.",
+      "deep_analysis": {
+        "work_kind": "research-security governance analysis",
+        "research_question": "How do Germany’s committees for the ethics of security-relevant research operate, and what governance lessons can be drawn from them?",
+        "main_finding": "Germany’s KEF system institutionalises peer-based review of security-relevant research through local committees linked to national coordination and advice.",
+        "method_or_basis": "Descriptive and normative analysis of the KEF governance architecture, institutional uptake, reported case statistics and research-security policy context.",
+        "qualification": "The aggregate case data have important limitations, and the proposed governance lessons are not a causal evaluation of KEF effectiveness.",
+        "radar_relevance": "Direct study of a European research-security governance mechanism balancing academic self-governance, freedom and security risk.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "The package resolved https://doi.org/10.1093/scipol/scag028 to Oxford Academic, but its automated source retrieval returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Searching DOI 10.1093/scipol/scag028 recovered the matching Oxford Academic article, author, journal and publication history."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research” found the Oxford Academic full article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using the title, Brendan Walker-Munro and 2026 confirmed the same Science and Public Policy article and 28 April 2026 publication date."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Oxford Academic provides the substantive primary article, including Germany’s KEF governance model, case counts and the author’s qualifications."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using “KEF”, “124 cases”, “170 institutions” and the author matched the same article and its cited DFG/Leopoldina evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag028/8664218",
+            "title": "Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Oxford Academic verifies the work and shows publication on 28 April 2026, with substantive discussion of Germany’s KEF research-security model."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Oxford Academic article directly examines Germany’s institutional governance of security-relevant research and proposes lessons for research-security self-governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
     }
   }
 }

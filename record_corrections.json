@@ -1,21 +1,69 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-13T00:00:00Z",
+  "updated_at": "2026-09-13T18:30:09Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
-        "source": "International Agricultural Journal"
+        "source": "International Agricultural Journal",
+        "authors": "Andrey Badmaev, Viktoria Baginova, Sergey Ryumkin, Inga Ryumkina, Aleksandr Mangutov"
       },
       "unset": [
         "source_tier"
       ],
-      "reason_code": "SOURCE_MISATTRIBUTED",
-      "reason": "The DOI/article page identifies International Agricultural Journal; the raw scanner record incorrectly labels the source OECD.",
-      "source": "verified_primary_article_page",
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official International Agricultural Journal issue identifies the journal and English author names; OECD is not the issuer. The stored Tier 1 attribution is unsupported by verified provenance.",
+      "source": "deep_scan_v2",
       "evidence": [
-        "https://mshj.ru/en/nauka/publications/article/6a9c166932807fdbab874afa/bioeconomy-as-a-driver-of-innovation-capacity-in-agricultural-regions-international-experience-and-adaptation-in-russian-regions/view"
-      ]
+        "https://mshj.ru/en/nauka/publications/article/6a9c166932807fdbab874afa/bioeconomy-as-a-driver-of-innovation-capacity-in-agricultural-regions-international-experience-and-adaptation-in-russian-regions/view",
+        "https://iacj.ru/en/nauka/issue/7462/view"
+      ],
+      "updated_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
+    },
+    "link:https://eic.ec.europa.eu/document/download/1da4f37a-2eb2-4571-9342-0ea978b3dfd3_en?filename=DPN_EIC_Accelerator_02_2022.pdf": {
+      "fields": {
+        "title": "EIC Tech Report 2026"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Official EIC publication evidence identifies the underlying work as “EIC Tech Report 2026”; the scanner title is the news-announcement headline while the supplied PDF is an unrelated data-protection notice.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://eic.ec.europa.eu/document/download/ddb9d216-34e9-483c-b1bf-20b4cb100032_en?filename=EIC+TechReport+2026+-+digital+version.pdf",
+        "https://eic.ec.europa.eu/news/eic-tech-report-2026-identifies-25-emerging-deep-tech-signals-support-europes-strategic-autonomy-and-2026-03-30_en"
+      ],
+      "updated_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
+    },
+    "link:https://doi.org/10.1093/scipol/scag028": {
+      "fields": {
+        "date": "2026-04-28"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Oxford Academic records the article as published on 28 April 2026; 16 March 2026 is not the publisher’s publication date.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag028/8664218"
+      ],
+      "updated_at": "2026-09-13T18:30:08Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
+    },
+    "link:https://doi.org/10.18552/jorma.v5i1.1450": {
+      "fields": {
+        "type": "opinion piece"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The journal’s own article page classifies the item under the section “Opinion Piece”, so the scanner’s peer-reviewed-article type is not the publisher’s document type.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://publications.coventry.ac.uk/index.php/jorma/article/view/1450",
+        "https://sword.mtu.ie/ricopub2/6/"
+      ],
+      "updated_at": "2026-09-13T18:30:09Z",
+      "deep_scan_package_id": "20260913T174658Z-f474a90e19be"
     }
   }
 }
