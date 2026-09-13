@@ -1,0 +1,113 @@
+name: INSTALL — Full Radar V25 Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_replace:
+        description: 'Type REPLACE to install the uploaded full-repository payload'
+        required: true
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: radar-full-repository-install
+  cancel-in-progress: false
+
+env:
+  PAYLOAD: RADAR_V25_FULL_REPOSITORY_PAYLOAD.zip
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  install:
+    if: ${{ inputs.confirm_replace == 'REPLACE' }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify payload exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -f "$PAYLOAD" ]]; then
+            echo "::error::$PAYLOAD is not in the repository root. Upload it first, then rerun this action."
+            exit 1
+          fi
+          unzip -t "$PAYLOAD" >/dev/null
+          echo "Payload ZIP is readable."
+
+      - name: Replace working tree from payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          unzip -q "$PAYLOAD" -d "$tmp/repo"
+
+          # The payload contains repository files at its root, not an enclosing folder.
+          test -f "$tmp/repo/VERSION.txt"
+          test -f "$tmp/repo/scripts/active_corpus.py"
+          test -f "$tmp/repo/.github/workflows/radar-v2-migration.yml"
+          test -f "$tmp/repo/admission_state.json"
+          test -f "$tmp/repo/record_corrections.json"
+
+          version="$(tr -d '\r\n' < "$tmp/repo/VERSION.txt")"
+          if [[ "$version" != 'v25.0.0-deep-scan-authoritative' ]]; then
+            echo "::error::Unexpected payload version: $version"
+            exit 1
+          fi
+
+          # Replace every tracked/untracked repository file while preserving Git's own
+          # metadata. This also removes the temporary payload ZIP from the installed tree.
+          rsync -a --delete --exclude='.git/' "$tmp/repo/" ./
+
+          # Minimal structural validation before committing the replacement.
+          python -m json.tool admission_state.json >/dev/null
+          python -m json.tool record_corrections.json >/dev/null
+          python -m json.tool reader_text.json >/dev/null
+          python -m json.tool radar.json >/dev/null
+          python -m json.tool radar_active.json >/dev/null
+          echo "Full repository tree replaced with $version."
+
+      - name: Commit full replacement
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-v25-installer'
+          git config user.email 'actions@github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Repository already matches the V25 payload.'
+            exit 0
+          fi
+          git commit -m 'Install Radar V25 Deep Scan authoritative repository'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: What to do next
+        if: always()
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Full Radar V25 repository installation
+
+          If this run is green, go to **Actions → Radar V2 — Initialise, Validate & Prepare Deep Scan → Run workflow**.
+
+          That action validates the installed repository, rebuilds the active corpus/Excel/reasoning from the V2 trust layer, and gives you the first 12-work Deep Scan V2 package as a downloadable artifact.
+          EOF
