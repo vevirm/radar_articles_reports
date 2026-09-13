@@ -5,15 +5,15 @@ It exists so a new chat or operator can see what has already been verified and w
 
 - Authoritative V2 verified: **120**
 - Still needing V2 verification: **548**
-- Currently assigned to workers: **72**
+- Currently assigned to workers: **96**
 - Deferred after exhaustive recovery: **3**
-- Pending and not yet assigned: **473**
+- Pending and not yet assigned: **449**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260913T224608Z-d10b3dc1130e`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260913T224815Z-8fd374ecdc27`
+- Assigned unresolved records: **48**
   1. `link:https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/`
   2. `link:https://erc.europa.eu/sites/default/files/2024-02/report_democracy.pdf`
   3. `link:https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en`
@@ -22,11 +22,11 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://hadea.ec.europa.eu/calls-proposals/using-space-earth-telecommunication-and-earth-observation-horizon-europe-space-2026-calls_en`
   7. `link:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf`
   8. `link:https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf`
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260913T224623Z-6df974de2677`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260913T224826Z-4866352aa1e6`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1111/bioe.70159`
   2. `link:https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty`
   3. `link:https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-and-egypt-strengthen-research-and-innovation-partnership-following-horizon-europe-association-2026-06-25_en`
@@ -35,7 +35,7 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://cdn.ceps.eu/wp-content/uploads/2024/09/Code-of-Conduct-CEPS-events.pdf`
   7. `link:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en`
   8. `link:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en`
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Deferred recovery queue
 
