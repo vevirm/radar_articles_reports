@@ -52,13 +52,45 @@ The original publication title is evidence and must **not** be rewritten in the 
 
 ## Evidence rules
 
-- Prefer source material over the automatic scanner when they conflict.
+- Prefer primary/source material over the automatic scanner when they conflict.
 - The supplied source text can be partial or noisy. Ignore cookie banners, navigation, references and unrelated page material.
 - If source text appears to belong to a different document, ignore it.
-- If only a title or thin source material is available, be cautious: say what the work *examines, argues, proposes or reports* rather than claiming a strong finding.
 - Do not invent a European strategic consequence merely to fill `reader_why`.
-- If a concrete WHY is not supported by the package, return an empty `reader_why` and set `why_supported` to false.
+- If a concrete WHY is not supported after reasonable evidence recovery, return an empty `reader_why` and set `why_supported` to false.
 - Keep important limitations or scope conditions in `qualification` and, when useful, `reader_more`.
+
+## Selective online evidence recovery for difficult records
+
+If your environment has web search/browsing, **use it selectively when the package does not contain enough reliable material to understand the work properly**. Do not give up merely because the supplied source page returned 403, contained only navigation, or exposed only a title.
+
+Online recovery is expected when one or more of these apply:
+- the supplied source text is empty, title-only, extremely thin, blocked, or obviously noisy;
+- there is no abstract/full summary and the automatic scanner appears to be inferring from a title or study-design sentence;
+- the automatic interpretation and supplied source material conflict;
+- you cannot identify an actual finding/claim/result from the package;
+- the record points to an institutional/programme page but appears to refer to an underlying paper, report, evaluation or official document.
+
+Use a targeted retrieval ladder rather than broad browsing:
+
+1. Search the **exact title in quotation marks**. Include DOI, author, organisation or year when available.
+2. Prefer the DOI landing page, publisher abstract/full text, official report page, official PDF, or the organisation that produced the work.
+3. If the publisher is blocked/paywalled, look for legitimate copies or equivalent primary material in institutional repositories, preprint servers, author/university pages, EU/agency repositories, or bibliographic/abstract databases.
+4. For policy reports and institutional publications, prefer the issuing body's official page/PDF, executive summary, annex or evaluation.
+5. Use reputable secondary descriptions only to locate or clarify primary evidence, not as the sole basis for a strong research finding when primary material should exist.
+
+Important web-search safeguards:
+- Search-result snippets are **navigation clues, not sufficient evidence** for a substantive finding.
+- Do not bypass paywalls, access controls or authentication.
+- Match the online source carefully by title/authors/DOI/year before using it.
+- If several versions exist, prefer the final/official version while noting material differences when relevant.
+- Do not substitute a related paper for the actual work.
+- If online evidence contradicts the package, prefer the strongest matching primary source and reflect the disagreement cautiously.
+- Stop searching once you have enough evidence to understand the work; do not waste effort browsing records that are already well supported.
+- If reasonable online recovery still cannot establish a substantive finding, say what can honestly be established, set confidence appropriately, and do not fabricate a result.
+
+When online recovery materially helped, briefly identify the evidence basis in `deep_analysis.method_or_basis`, for example:
+`Publisher abstract + institutional repository full text` or `Official report PDF recovered online`.
+Do not put raw URLs into the reader-facing WHAT/WHY text.
 
 ## Reader language
 
@@ -135,9 +167,9 @@ Return the completed file/package to the user. They will upload it to the reposi
 
 START_HERE = r"""RADAR DEEP SCAN PACKAGE
 
-Give this entire ZIP to the LLM you want to use and say:
+Give this entire ZIP to the LLM you want to use. If the LLM offers web search/browsing, use a mode where it is enabled. Then say:
 
-    Process this Deep Scan package according to INSTRUCTIONS.md and return the completed deep_scan_results.json (or a ZIP containing it).
+    Process this Deep Scan package according to INSTRUCTIONS.md. Use selective online evidence recovery for difficult/blocked records as instructed, and return the completed deep_scan_results.json (or a ZIP containing it).
 
 You do not need to copy prompts or edit the batch files yourself.
 
