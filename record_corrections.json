@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-14T08:05:06Z",
+  "updated_at": "2026-09-14T08:39:46Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -1740,6 +1740,74 @@
       ],
       "updated_at": "2026-09-14T08:05:06Z",
       "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf": {
+      "fields": {
+        "type": "press release",
+        "authors": "Centre for European Reform (announcing a policy brief by Armida van Rij)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The PDF at the supplied URL is headed 'Press release' and announces a policy brief by Armida van Rij; the scanner recorded it as a formal study/report authored by CER. Stored source_tier is unsupported for a press release and should be recomputed.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf"
+      ],
+      "updated_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://arxiv.org/abs/2607.28290": {
+      "fields": {
+        "authors": "Konstantinos E. Zachariadis, Ahmed Sayed, Dimitris Fotakis, Angeliki Mathioudaki, Wan Shuen Siaw",
+        "type": "project final report (arXiv deposit)",
+        "source": "arXiv (final report to the National Federated Compute Services Flexible Fund)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report's title page gives the principal investigator as Professor Konstantinos (Kostas) E. Zachariadis, QMUL; the scanner recorded only the given name 'Konstantinos'. The document is a commissioned NFCS final project report deposited on arXiv, not a standalone preprint article.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://arxiv.org/pdf/2607.28290"
+      ],
+      "updated_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf": {
+      "fields": {
+        "authors": "Bart Gaens",
+        "title": "Japan's security policy under Prime Minister Takaichi"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The briefing paper's own byline and author box name Bart Gaens, Senior Research Fellow at FIIA; the scanner recorded Maiju Kivinen. The scanner title also carried a '| FIIA' site suffix that is not part of the document title.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf"
+      ],
+      "updated_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf": {
+      "fields": {
+        "authors": "Maria-Louise Clausen, Peter Albrecht"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The DIIS Pure cover page and citation give the authors as Clausen, Maria-Louise and Albrecht, Peter; the scanner recorded the issuing institute as the author.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf"
+      ],
+      "updated_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
     }
   }
 }

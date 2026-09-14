@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T08:05:06Z",
+  "generated_at": "2026-09-14T08:39:46Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -374,26 +374,84 @@
       ]
     },
     "link:https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "b775b2b6",
-      "reader_title": "German think tank research programme on geopolitics, geoeconomics and technology",
-      "reader_what": "A standing research programme covering economics, trade, finance, energy and technology in great-power competition.",
-      "reader_more": "This record points to a programme page at the German Council on Foreign Relations rather than to a particular study. The programme is described as addressing challenges arising from intensifying competition between the United States and China and from Russia's war against Ukraine, working across economics, trade, finance, energy and technology. Stored material also indicates an interest in how Germany and Europe can expand sovereignty in areas such as cybersecurity and the information space. The page itself returned an access error during this scan, so no specific argument, finding or publication could be verified.",
+      "identity_hash": "6b43661ed872394c",
       "deep_analysis": {
-        "work_kind": "institutional research programme page",
+        "work_kind": "institutional programme page",
         "research_question": "",
-        "main_finding": "No finding is available: the record describes the scope of a continuing research programme rather than reporting a result.",
-        "method_or_basis": "",
-        "qualification": "The source page could not be retrieved and the record is a programme description, not a work with a claim.",
-        "radar_relevance": "Names an active European research centre working on technological sovereignty and geoeconomic competition, but offers no specific content.",
-        "confidence": "low",
+        "main_finding": "The page describes DGAP's Center for Geopolitics, Geoeconomics and Technology, its themes and its research applications.",
+        "method_or_basis": "Standing institutional description; no data, analysis or dated event is reported.",
+        "qualification": "Content is evergreen navigation text; the scanner's 2026-09-08 date reflects crawling, not publication of a development.",
+        "radar_relevance": "Fails Strand A: vocabulary matches European technological sovereignty debates but the page itself is not a substantive research or innovation work.",
+        "confidence": "high",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology retrieved in full (the package's own 403 was not reproduced); it is a programme landing page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is present or expected for a think-tank programme page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_programme_page",
+            "url": "https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology",
+            "title": "Center for Geopolitics, Geoeconomics, and Technology | DGAP",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page retrieved and read in full. It is a permanent centre description with topic questions and navigation, not a research output or a dated development."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERIC_INSTITUTIONAL_PAGE",
+        "reason": "The URL is DGAP's standing programme page for a research centre: it describes the centre's themes, staff and applications, and reports no specific research finding, publication or development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T08:39:44Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "b775b2b6",
+          "reader_title": "German think tank research programme on geopolitics, geoeconomics and technology",
+          "reader_what": "A standing research programme covering economics, trade, finance, energy and technology in great-power competition.",
+          "reader_more": "This record points to a programme page at the German Council on Foreign Relations rather than to a particular study. The programme is described as addressing challenges arising from intensifying competition between the United States and China and from Russia's war against Ukraine, working across economics, trade, finance, energy and technology. Stored material also indicates an interest in how Germany and Europe can expand sovereignty in areas such as cybersecurity and the information space. The page itself returned an access error during this scan, so no specific argument, finding or publication could be verified.",
+          "deep_analysis": {
+            "work_kind": "institutional research programme page",
+            "research_question": "",
+            "main_finding": "No finding is available: the record describes the scope of a continuing research programme rather than reporting a result.",
+            "method_or_basis": "",
+            "qualification": "The source page could not be retrieved and the record is a programme description, not a work with a claim.",
+            "radar_relevance": "Names an active European research centre working on technological sovereignty and geoeconomic competition, but offers no specific content.",
+            "confidence": "low",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://www.eurohpc-ju.europa.eu/eurohpc-ju-inaugurates-arrhenius-new-mid-range-supercomputer-together-naiss-sweden-2026-09-08_en": {
       "profile": "deep-reader-v2-authoritative",
@@ -1122,27 +1180,89 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "5d516ce8",
-      "reader_title": "Finnish institute briefing on Japan's security policy under Prime Minister Takaichi",
-      "reader_what": "Reports Japan expanding defence exports and dual-use research, shifting from arms importer toward co-producer.",
-      "reader_why": "Japan's move to co-production opens defence technology and industrial cooperation opportunities for Europe and NATO.",
-      "reader_more": "This briefing paper reviews the first ten months of Sanae Takaichi's term as Japan's first female prime minister, describing a realism-based security agenda rooted in Shinzo Abe's legacy and now backed by a parliamentary supermajority. The author identifies her main achievements as expanding defence exports and dual-use research, strengthening intelligence structures, and pressing economic security measures aimed at China, with constitutional revision remaining her most ambitious unmet goal. Dual-use research funding is directed at AI, quantum computing, subsea cables and unmanned vehicles. The paper notes heightened tension with China alongside closer ties to the United States, Australia, the Philippines and Indonesia. It flags several open questions, including whether constitutional reform succeeds and whether new export frameworks deliver.",
+      "identity_hash": "a5eb074a6f9a706c",
+      "reader_title": "Japan's security shift under Takaichi and what it opens up for European defence industry",
+      "reader_what": "Takaichi is expanding defence exports and dual-use R&D, turning Japan from arms importer into co-producer.",
+      "reader_why": "Japan's move to co-production creates concrete openings for European defence-technology and industrial partnerships.",
+      "reader_more": "Sanae Takaichi became Japan's first female prime minister in October 2025 and won a large Diet majority in February 2026. This FIIA briefing argues she is advancing a realism-based security agenda rooted in Shinzo Abe's legacy, now with stronger political backing. Her recorded achievements include expanded defence exports, more dual-use research and development, strengthened intelligence structures and economic-security measures aimed at China. Constitutional revision to recognise Japan's military forces remains her most ambitious and least certain goal. The paper notes heightened tension with China alongside deeper ties with the United States, Australia, the Philippines and Indonesia, and closes by identifying cooperation opportunities for Finland, Europe and NATO as Japan shifts to co-production.",
       "deep_analysis": {
-        "work_kind": "think tank briefing paper",
-        "research_question": "What Takaichi's security agenda has achieved so far and what it implies for the Indo-Pacific, Europe and NATO.",
-        "main_finding": "Japan is consolidating a realist security posture centred on state-directed dual-use research funding and defence export expansion, shifting from arms importer toward co-producer and creating cooperation openings for European partners.",
-        "method_or_basis": "Policy analysis of Japanese government pledges, legislative and budgetary changes, and campaign commitments over a ten-month period.",
-        "qualification": "An interim assessment of an ongoing term; the author explicitly lists major uncertainties, including whether the export and cooperation frameworks produce concrete results.",
-        "radar_relevance": "Identifies a non-European partner whose dual-use research and industrial policy shift bears on European defence technology cooperation.",
-        "confidence": "high",
+        "work_kind": "think-tank briefing paper",
+        "research_question": "How is Japanese security and defence policy developing under Prime Minister Takaichi, and what follows for Europe?",
+        "main_finding": "Takaichi is consolidating a realist security agenda through expanded defence exports, dual-use R&D and economic-security measures, shifting Japan from arms importer toward co-producer.",
+        "method_or_basis": "Policy analysis by a FIIA senior research fellow drawing on Japanese policy documents, campaign pledges and regional developments.",
+        "qualification": "The author flags major uncertainties: whether constitutional reform succeeds, how China relations evolve, and whether new export frameworks deliver concrete results.",
+        "radar_relevance": "European defence-technology and industrial cooperation is analysed in a dedicated section, but the work's primary subject is Japanese domestic and regional security policy.",
+        "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf is the matching FIIA Briefing Paper 441, September 2026; the package captured its text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "FIIA briefing papers carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf",
+            "title": "FIIA Briefing Paper 441: Japan's security policy under Prime Minister Takaichi — Pushing a realist agenda into higher gear",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full briefing paper read. The byline is Bart Gaens, Senior Research Fellow, Global Security and Governance, FIIA — the scanner had recorded Maiju Kivinen as author. The paper's own title carries no '| FIIA' suffix."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_JUDGEMENT",
+        "reason": "A substantive FIIA briefing on Japanese security policy that includes a dedicated closing analysis of resulting defence-technology and industrial-cooperation opportunities for Finland, Europe and NATO. Whether that section makes the work substantively European rather than a non-European study with a European implication needs human judgement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "5d516ce8",
+          "reader_title": "Finnish institute briefing on Japan's security policy under Prime Minister Takaichi",
+          "reader_what": "Reports Japan expanding defence exports and dual-use research, shifting from arms importer toward co-producer.",
+          "reader_why": "Japan's move to co-production opens defence technology and industrial cooperation opportunities for Europe and NATO.",
+          "reader_more": "This briefing paper reviews the first ten months of Sanae Takaichi's term as Japan's first female prime minister, describing a realism-based security agenda rooted in Shinzo Abe's legacy and now backed by a parliamentary supermajority. The author identifies her main achievements as expanding defence exports and dual-use research, strengthening intelligence structures, and pressing economic security measures aimed at China, with constitutional revision remaining her most ambitious unmet goal. Dual-use research funding is directed at AI, quantum computing, subsea cables and unmanned vehicles. The paper notes heightened tension with China alongside closer ties to the United States, Australia, the Philippines and Indonesia. It flags several open questions, including whether constitutional reform succeeds and whether new export frameworks deliver.",
+          "deep_analysis": {
+            "work_kind": "think tank briefing paper",
+            "research_question": "What Takaichi's security agenda has achieved so far and what it implies for the Indo-Pacific, Europe and NATO.",
+            "main_finding": "Japan is consolidating a realist security posture centred on state-directed dual-use research funding and defence export expansion, shifting from arms importer toward co-producer and creating cooperation openings for European partners.",
+            "method_or_basis": "Policy analysis of Japanese government pledges, legislative and budgetary changes, and campaign commitments over a ten-month period.",
+            "qualification": "An interim assessment of an ongoing term; the author explicitly lists major uncertainties, including whether the export and cooperation frameworks produce concrete results.",
+            "radar_relevance": "Identifies a non-European partner whose dual-use research and industrial policy shift bears on European defence technology cooperation.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/23745118.2026.2726796": {
       "profile": "deep-reader-v2-authoritative",
@@ -4897,27 +5017,89 @@
       ]
     },
     "link:https://doi.org/10.1007/s10796-026-10801-8": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "4444b09c",
-      "reader_title": "More cybersecurity training in European small firms means more incidents reported, not fewer",
-      "reader_what": "Awareness correlates with fewer incidents, but training correlates with more reported ones.",
-      "reader_why": "Suggests incident counts partly measure detection capability rather than underlying exposure.",
-      "reader_more": "This study analyses cybercrime experience among European small and medium-sized firms using a 2021 dataset of more than 12,000 representative respondents. Higher awareness of cyber risk is associated with fewer cybercrime incidents, and greater digitalisation with more. The counterintuitive result is that more cybersecurity training is associated with more reported incidents. The authors read this as evidence that training improves detection, or that firms respond reactively, rather than that training causes harm, and they recommend continuous training alongside a proactive security culture. The finding matters mainly as a warning about interpretation: incident counts in survey data conflate how much is happening with how much gets noticed and recorded.",
+      "identity_hash": "891ac324a01e71cc",
+      "reader_title": "European SME survey links cyber-risk awareness to fewer incidents but training to more reported ones",
+      "reader_what": "Higher cyber-risk awareness correlates with fewer cybercrime incidents among European SMEs; more training raises reported incidents.",
+      "reader_why": "SMEs are Europe's weakest cybersecurity link, so detection and culture shape industrial digital resilience.",
+      "reader_more": "The study draws on a 2021 survey of more than 12,000 representative respondents from small and medium-sized enterprises across Europe. Firms reporting greater awareness of cyber risk recorded fewer cybercrime incidents, while firms that had done more cybersecurity training reported more. The authors read this as better detection, or as responses that are reactive rather than preventive, and they also find greater digitalisation associated with more incidents. They recommend continuous training and a proactive security culture rather than one-off measures. The evidence is correlational survey data, so it does not establish that training causes incidents.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed quantitative empirical study",
-        "research_question": "How awareness, training and digitalisation relate to cybercrime experience among European small and medium-sized enterprises.",
-        "main_finding": "Greater risk awareness is associated with fewer incidents and greater digitalisation with more, while more training is associated with more reported incidents, which the authors attribute to improved detection rather than increased exposure.",
-        "method_or_basis": "Empirical analysis of a 2021 Europe-wide dataset of over 12,000 representative respondents from small and medium-sized enterprises.",
-        "qualification": "Cross-sectional associations from self-reported survey data, so the training result is open to the reverse reading that firms train after being attacked; the data are from 2021 and predate recent threat changes.",
-        "radar_relevance": "Bears on the cyber resilience of the firm population that makes up most of the European economy.",
+        "work_kind": "empirical survey study",
+        "research_question": "How do cybercrime experience, risk awareness and training relate in European SMEs?",
+        "main_finding": "Cyber-risk awareness is associated with fewer cybercrime incidents, while more training is associated with more reported incidents, suggesting improved detection.",
+        "method_or_basis": "Regression analysis of a 2021 Europe-wide survey of over 12,000 representative SME respondents.",
+        "qualification": "Cross-sectional correlational evidence; direction of causation between training and reported incidents is not established.",
+        "radar_relevance": "Directly addresses European SME cyber resilience, a core European digital and industrial-capability concern.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s10796-026-10801-8 resolved to link.springer.com/article/10.1007/s10796-026-10801-8, the matching Information Systems Frontiers article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s10796-026-10801-8 confirms title, the four authors, Information Systems Frontiers and 8 August 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10796-026-10801-8.pdf",
+            "title": "Cybersecurity Strategies in European SMEs (Springer open-access PDF, full text)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer open-access PDF retrieved and read in full; abstract, introduction, data and results all match the scanner record."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical study of cybercrime experience and cybersecurity strategy in European SMEs using a 2021 EU-wide survey of over 12,000 respondents; directly about European digital/industrial resilience."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:39:44Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "4444b09c",
+          "reader_title": "More cybersecurity training in European small firms means more incidents reported, not fewer",
+          "reader_what": "Awareness correlates with fewer incidents, but training correlates with more reported ones.",
+          "reader_why": "Suggests incident counts partly measure detection capability rather than underlying exposure.",
+          "reader_more": "This study analyses cybercrime experience among European small and medium-sized firms using a 2021 dataset of more than 12,000 representative respondents. Higher awareness of cyber risk is associated with fewer cybercrime incidents, and greater digitalisation with more. The counterintuitive result is that more cybersecurity training is associated with more reported incidents. The authors read this as evidence that training improves detection, or that firms respond reactively, rather than that training causes harm, and they recommend continuous training alongside a proactive security culture. The finding matters mainly as a warning about interpretation: incident counts in survey data conflate how much is happening with how much gets noticed and recorded.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed quantitative empirical study",
+            "research_question": "How awareness, training and digitalisation relate to cybercrime experience among European small and medium-sized enterprises.",
+            "main_finding": "Greater risk awareness is associated with fewer incidents and greater digitalisation with more, while more training is associated with more reported incidents, which the authors attribute to improved detection rather than increased exposure.",
+            "method_or_basis": "Empirical analysis of a 2021 Europe-wide dataset of over 12,000 representative respondents from small and medium-sized enterprises.",
+            "qualification": "Cross-sectional associations from self-reported survey data, so the training result is open to the reverse reading that firms train after being attacked; the data are from 2021 and predate recent threat changes.",
+            "radar_relevance": "Bears on the cyber resilience of the firm population that makes up most of the European economy.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1163/15691497-20263013": {
       "profile": "deep-reader-offline-v1",
@@ -6321,27 +6503,89 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "8264b632",
-      "reader_title": "Review study finds Digital Decade targets do not reflect sovereignty and security priorities",
-      "reader_what": "Study finds the governance framework still relevant but targets missing cybersecurity, sovereignty and resilience.",
-      "reader_why": "Feeds the Commission's review and alignment with the 2028-2034 budget framework.",
-      "reader_more": "This Commission page presents a study supporting the review of the Digital Decade Policy Programme, which assessed whether its objectives, targets, indicators and governance remain fit for purpose. The study concludes the governance framework remains relevant for fostering EU and member state cooperation but needs updating for geopolitical, technological and economic change. Its notable finding is that current targets do not fully reflect emerging priorities including cybersecurity, technological sovereignty and resilience, and that some indicators need revision to match technological and market developments. It also examined investment needs and alignment with the 2028-2034 Multiannual Financial Framework, and suggested scope to reduce administrative burden, strengthen stakeholder engagement and improve participation by regional and local actors.",
+      "identity_hash": "c7ab4241dddc5e40",
+      "reader_title": "Commission publishes the evidence study underpinning its Digital Decade programme review",
+      "reader_what": "The study finds Digital Decade governance still relevant but targets and indicators needing update for new priorities.",
+      "reader_why": "It sets the evidence base for revising the EU's binding digital targets and 2028-2034 funding alignment.",
+      "reader_more": "The European Commission released the external study supporting its review of the Digital Decade Policy Programme, covering priorities, targets and indicators on one side and governance and stakeholder engagement on the other. It concluded that the governance framework still works for cooperation between the EU and member states but needs updating against geopolitical, technological and economic change. Current targets were found not to reflect emerging priorities such as cybersecurity, technological sovereignty and resilience, and some indicators need revision. The study also considered investment needs and alignment with the 2028-2034 Multiannual Financial Framework. Its recommendations inform, but do not constitute, the Commission's forthcoming review.",
       "deep_analysis": {
-        "work_kind": "commissioned review study, reported via an official page",
-        "research_question": "Whether the Digital Decade Policy Programme's objectives, targets, indicators and governance remain fit for purpose.",
-        "main_finding": "Governance remains effective and relevant, but targets do not fully capture cybersecurity, technological sovereignty and resilience, and several indicators require updating for technological and market change.",
-        "method_or_basis": "Commissioned study drawing on stakeholder consultations, targeted surveys including of regions and cities, a call for evidence, case studies, indicator trajectory estimation and international benchmarking.",
-        "qualification": "Summarised here from the Commission's landing page rather than the full report and annexes; the study was commissioned to inform a review the Commission itself will conduct.",
-        "radar_relevance": "Signals likely revision of the EU's headline digital targets towards sovereignty and security measures.",
+        "work_kind": "official evidence release / supporting study publication",
+        "research_question": "",
+        "main_finding": "The supporting study found Digital Decade governance broadly fit for purpose but its targets and indicators insufficiently aligned with cybersecurity, technological sovereignty and resilience priorities.",
+        "method_or_basis": "Commission-commissioned study drawing on literature review, stakeholder consultations, targeted surveys, a call for evidence and case studies, as listed in annexes A-F.",
+        "qualification": "The study is advisory input; the Commission's actual review and any target changes are still forthcoming.",
+        "radar_relevance": "Directly concerns the evidence base and indicator framework for EU digital and technological-sovereignty policy.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme opened as the matching Commission library item dated 31 July 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission library items of this type carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_commission_publication",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme",
+            "title": "Commission publishes study supporting the Review of the Digital Decade Policy Programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Commission library page read in full, including the summary of study findings and the list of downloadable report, executive summaries and annexes A-F."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Official Commission publication of the study supporting the Digital Decade Policy Programme review, with reported findings on targets, indicators and governance: a substantive evidence release, not a navigation page."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:39:44Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "8264b632",
+          "reader_title": "Review study finds Digital Decade targets do not reflect sovereignty and security priorities",
+          "reader_what": "Study finds the governance framework still relevant but targets missing cybersecurity, sovereignty and resilience.",
+          "reader_why": "Feeds the Commission's review and alignment with the 2028-2034 budget framework.",
+          "reader_more": "This Commission page presents a study supporting the review of the Digital Decade Policy Programme, which assessed whether its objectives, targets, indicators and governance remain fit for purpose. The study concludes the governance framework remains relevant for fostering EU and member state cooperation but needs updating for geopolitical, technological and economic change. Its notable finding is that current targets do not fully reflect emerging priorities including cybersecurity, technological sovereignty and resilience, and that some indicators need revision to match technological and market developments. It also examined investment needs and alignment with the 2028-2034 Multiannual Financial Framework, and suggested scope to reduce administrative burden, strengthen stakeholder engagement and improve participation by regional and local actors.",
+          "deep_analysis": {
+            "work_kind": "commissioned review study, reported via an official page",
+            "research_question": "Whether the Digital Decade Policy Programme's objectives, targets, indicators and governance remain fit for purpose.",
+            "main_finding": "Governance remains effective and relevant, but targets do not fully capture cybersecurity, technological sovereignty and resilience, and several indicators require updating for technological and market change.",
+            "method_or_basis": "Commissioned study drawing on stakeholder consultations, targeted surveys including of regions and cities, a call for evidence, case studies, indicator trajectory estimation and international benchmarking.",
+            "qualification": "Summarised here from the Commission's landing page rather than the full report and annexes; the study was commissioned to inform a review the Commission itself will conduct.",
+            "radar_relevance": "Signals likely revision of the EU's headline digital targets towards sovereignty and security measures.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.38105/spr.vf5ks0gobi": {
       "profile": "deep-reader-v2-authoritative",
@@ -6513,27 +6757,94 @@
       ]
     },
     "link:https://arxiv.org/abs/2607.28290": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "04692bfd",
-      "reader_title": "Compute allocation records measure reservation, not useful work done",
-      "reader_what": "Allocation records capture occupancy rather than utilisation, so productive value cannot currently be assessed.",
-      "reader_why": "Unmanaged federation can concentrate load and harm on receiving systems while lowering average delay.",
-      "reader_more": "This preprint studies how scarce computing is allocated across federated digital research infrastructure, combining a landscape review of UK and international practice including EuroHPC, a mechanism-design model of allocation under strategic user reports, and simulation on a public workload trace. Three findings recur. First, allocation records measure occupancy, meaning resources reserved, rather than utilisation, meaning useful work done, so funders cannot currently answer whether resources deliver productive value. Second, simple transparent scheduling heuristics perform close to a full-information benchmark once tuned, so the near-term opportunity is instrumenting existing schedulers rather than replacing them. Third, unmanaged federation behaves like uncoordinated routing, minimising average delay while concentrating load on receiving systems, analogous to Braess's paradox in road networks.",
+      "identity_hash": "80a2bc4080eb3be9",
+      "reader_title": "A mechanism-design roadmap for allocating shared research computing fairly and efficiently",
+      "reader_what": "Develops an allocation model with strategic reporting mechanisms and welfare metrics, tested by simulation, for federated research computing.",
+      "reader_why": "Allocation, not raw capacity, is where shared research-compute systems lose usable time.",
+      "reader_more": "The report was produced for the UK National Federated Compute Services Flexible Fund, combining stakeholder interviews, a demand-side survey, a literature review and a simulation study to examine how federated research computing is actually allocated. It maps infrastructure tiers and federation models, then examines occupancy, utilisation and the economic case to identify where allocation breaks down. The analytical core is a model of HPC allocation covering jobs, a descriptive scheduler, strategic reporting by users and offline welfare comparisons, with allocation treated as routing under congestion. Recommendations for the NFCS roadmap follow. The mechanisms are modelled and simulated rather than deployed, and the empirical base centres on the UK system with international comparison.",
       "deep_analysis": {
-        "work_kind": "preprint research report, not yet peer reviewed",
-        "research_question": "How scarce compute should be allocated across federated digital research infrastructure, and whether current allocation practice can demonstrate productive value.",
-        "main_finding": "Allocation records track occupancy rather than utilisation so productive value is unmeasurable; tuned simple heuristics approach an offline benchmark; and unmanaged federation can concentrate load harmfully while reducing average delay.",
-        "method_or_basis": "Landscape review of UK and international allocation practice with stakeholder survey, a mechanism-design model, and simulation on the public Fresco/Anvil workload trace plus synthetic stress tests.",
-        "qualification": "A preprint without peer review, framed primarily around UK infrastructure and funders, with EuroHPC appearing in the comparative review rather than as the object of study.",
-        "radar_relevance": "Bears on whether European public compute investment can be shown to deliver research value, a question EuroHPC faces directly.",
-        "confidence": "high",
+        "work_kind": "commissioned final project report with modelling and simulation",
+        "research_question": "How should federated digital research infrastructure be allocated fairly and efficiently across competing users?",
+        "main_finding": "Allocation failures, not just capacity limits, drive poor utilisation of federated research computing; a mechanism-design model with strategic reporting and welfare metrics offers a systematic alternative.",
+        "method_or_basis": "Stakeholder interviews, demand-side survey, literature review and a simulation study built on a formal model of HPC allocation and scheduling.",
+        "qualification": "Mechanisms are evaluated in simulation rather than in production, and the empirical base is centred on the UK system with international comparison.",
+        "radar_relevance": "A geography-independent, reusable allocation and evaluation methodology for shared research infrastructure.",
+        "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2607.28290 opened as the matching arXiv listing."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The record is an arXiv deposit of a project report; no DOI is registered in the supplied link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full report PDF retrieved from https://arxiv.org/pdf/2607.28290 and read, including the contents, methodology and recommendations sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2607.28290",
+            "title": "FAIR-Compute: A Roadmap for Fair and Efficient Allocation of Federated Digital Research Infrastructure — Final Report to the NFCS Flexible Fund",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv PDF read. The title page names Professor Konstantinos (Kostas) E. Zachariadis of Queen Mary University of London as principal investigator, with co-lead Ahmed Sayed (QMUL), advisor Dimitris Fotakis (NTUA) and researchers Angeliki Mathioudaki and Wan Shuen Siaw; the scanner had truncated the first author to a given name."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Final project report developing a model of HPC allocation with strategic reporting mechanisms, welfare evaluation metrics and a simulation study, plus a roadmap: a transferable allocation and evaluation methodology for federated research computing."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "04692bfd",
+          "reader_title": "Compute allocation records measure reservation, not useful work done",
+          "reader_what": "Allocation records capture occupancy rather than utilisation, so productive value cannot currently be assessed.",
+          "reader_why": "Unmanaged federation can concentrate load and harm on receiving systems while lowering average delay.",
+          "reader_more": "This preprint studies how scarce computing is allocated across federated digital research infrastructure, combining a landscape review of UK and international practice including EuroHPC, a mechanism-design model of allocation under strategic user reports, and simulation on a public workload trace. Three findings recur. First, allocation records measure occupancy, meaning resources reserved, rather than utilisation, meaning useful work done, so funders cannot currently answer whether resources deliver productive value. Second, simple transparent scheduling heuristics perform close to a full-information benchmark once tuned, so the near-term opportunity is instrumenting existing schedulers rather than replacing them. Third, unmanaged federation behaves like uncoordinated routing, minimising average delay while concentrating load on receiving systems, analogous to Braess's paradox in road networks.",
+          "deep_analysis": {
+            "work_kind": "preprint research report, not yet peer reviewed",
+            "research_question": "How scarce compute should be allocated across federated digital research infrastructure, and whether current allocation practice can demonstrate productive value.",
+            "main_finding": "Allocation records track occupancy rather than utilisation so productive value is unmeasurable; tuned simple heuristics approach an offline benchmark; and unmanaged federation can concentrate load harmfully while reducing average delay.",
+            "method_or_basis": "Landscape review of UK and international allocation practice with stakeholder survey, a mechanism-design model, and simulation on the public Fresco/Anvil workload trace plus synthetic stress tests.",
+            "qualification": "A preprint without peer review, framed primarily around UK infrastructure and funders, with EuroHPC appearing in the comparative review rather than as the object of study.",
+            "radar_relevance": "Bears on whether European public compute investment can be shown to deliver research value, a question EuroHPC faces directly.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/eu-launches-ai-gigafactories-call-to-boost-europes-computing-capacity/": {
       "profile": "deep-reader-v2-authoritative",
@@ -6626,27 +6937,89 @@
       ]
     },
     "link:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "747df6b3",
-      "reader_title": "EuroHPC sets out how AI Gigafactories will be procured and financed",
-      "reader_what": "Public funding acts as anchor customer, buying compute time to de-risk private capital for sovereign facilities.",
-      "reader_why": "The anchor customer model is the mechanism intended to unlock over 20 billion euro of private investment.",
-      "reader_more": "This is the procuring body's own announcement of the AI Gigafactories call, and it sets out the financing mechanism more precisely than general coverage. EuroHPC and participating states will jointly procure compute access time from the selected facilities, so public funding acts as an anchor customer, de-risking the substantial capital required and helping unlock expected private investment above 20 billion euro. Applications are open to consortia or special purpose vehicles combining companies, public entities and investors. Facilities may sit in a single member state on one or several sites, or be distributed across borders, with up to seven expected across at least seven member states. Following selection in early 2027, facilities are expected to begin operating within 18 months, with the bulk of public financing falling outside the current budget period.",
+      "identity_hash": "9fe3c34f60d18f82",
+      "reader_title": "EuroHPC opens tender for up to seven industry-led AI Gigafactories in the EU",
+      "reader_what": "EuroHPC launched a competitive call for consortia to build and run up to seven large EU AI computing facilities.",
+      "reader_why": "It converts EU sovereign-compute ambitions into a procurement with deadlines, thresholds and public co-funding.",
+      "reader_more": "The EuroHPC Joint Undertaking has opened a call for tenders inviting consortia or special purpose vehicles to build and operate AI Gigafactories in EU member states, with EuroHPC and participating states jointly procuring compute access time from the selected facilities. That joint procurement gives operators an anchor customer. The facilities are to combine large-scale AI processors, software and cloud stacks, high-bandwidth connectivity and energy-efficient data centres, complementing the existing AI Factories. Proposals may be single-site, multi-site or cross-border, and the submission deadline is 12 November 2026, after which bids are competitively evaluated. Selection outcomes and actual construction are still ahead.",
       "deep_analysis": {
-        "work_kind": "procurement announcement by the contracting body",
+        "work_kind": "official call for tenders / funding instrument launch",
         "research_question": "",
-        "main_finding": "The procurement uses joint public purchase of compute access time as an anchor customer mechanism to de-risk private capital, targeting up to seven facilities across at least seven member states, operational within 18 months of early 2027 selection.",
-        "method_or_basis": "Official procurement announcement setting out the strategy, eligibility and timeline.",
-        "qualification": "Announcement stage with no bidders or awards known; the note that most public financing falls beyond the current budget period makes delivery contingent on the next Multiannual Financial Framework.",
-        "radar_relevance": "Reveals the financing design the EU is using to build sovereign AI compute, and its dependence on future budget decisions.",
+        "main_finding": "EuroHPC opened a competitive call for consortia to build and operate up to seven AI Gigafactories, with joint public procurement of compute access time and a 12 November 2026 deadline.",
+        "method_or_basis": "Primary EuroHPC Joint Undertaking announcement setting out the call's scope, eligibility and timetable.",
+        "qualification": "This is the launch of a procurement, not an award; no facility has been selected or built.",
+        "radar_relevance": "A concrete new EU research-infrastructure funding instrument bearing directly on European compute capacity and technological sovereignty.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en opened as the matching official EuroHPC JU news item."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "EU agency news items of this kind carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_agency_announcement",
+            "url": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+            "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official EuroHPC JU page read in full; it states the call structure, eligible consortia/SPVs, joint procurement of compute access time and the 12 November 2026 submission deadline."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Official EuroHPC JU announcement of a live call for tenders to build and operate up to seven AI Gigafactories, with a stated submission deadline: a concrete new EU funding instrument, not a generic programme page."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:39:44Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "747df6b3",
+          "reader_title": "EuroHPC sets out how AI Gigafactories will be procured and financed",
+          "reader_what": "Public funding acts as anchor customer, buying compute time to de-risk private capital for sovereign facilities.",
+          "reader_why": "The anchor customer model is the mechanism intended to unlock over 20 billion euro of private investment.",
+          "reader_more": "This is the procuring body's own announcement of the AI Gigafactories call, and it sets out the financing mechanism more precisely than general coverage. EuroHPC and participating states will jointly procure compute access time from the selected facilities, so public funding acts as an anchor customer, de-risking the substantial capital required and helping unlock expected private investment above 20 billion euro. Applications are open to consortia or special purpose vehicles combining companies, public entities and investors. Facilities may sit in a single member state on one or several sites, or be distributed across borders, with up to seven expected across at least seven member states. Following selection in early 2027, facilities are expected to begin operating within 18 months, with the bulk of public financing falling outside the current budget period.",
+          "deep_analysis": {
+            "work_kind": "procurement announcement by the contracting body",
+            "research_question": "",
+            "main_finding": "The procurement uses joint public purchase of compute access time as an anchor customer mechanism to de-risk private capital, targeting up to seven facilities across at least seven member states, operational within 18 months of early 2027 selection.",
+            "method_or_basis": "Official procurement announcement setting out the strategy, eligibility and timeline.",
+            "qualification": "Announcement stage with no bidders or awards known; the note that most public financing falls beyond the current budget period makes delivery contingent on the next Multiannual Financial Framework.",
+            "radar_relevance": "Reveals the financing design the EU is using to build sovereign AI compute, and its dependence on future budget decisions.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/10438599.2026.2710994": {
       "profile": "deep-reader-v2-authoritative",
@@ -7139,27 +7512,89 @@
       ]
     },
     "link:https://doi.org/10.1371/journal.pone.0271678": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "a901f882",
-      "reader_title": "Collaboration and funding are both associated with less novel research, not more",
-      "reader_what": "Across European regions, scientific collaboration and research funding both correlate negatively with novelty.",
-      "reader_why": "Challenges the assumption that collaborative funded research automatically produces more original work.",
-      "reader_more": "This study uses Web of Science publication data from European regions between 2008 and 2017 to test how collaboration and funding relate to the novelty of research, measuring collaboration at five levels from country through three regional tiers to institutions, and measuring novelty through keyword combinations. The headline results run against common assumptions: there is a negative and significant relationship between scientific collaboration and novelty, and funded papers show lower novelty than unfunded ones. Funding does, however, have a significant moderating effect on the relationship between collaboration and novelty. The authors position the contribution as linking multiple levels of collaboration and funding source to novelty within bibliometric research.",
+      "identity_hash": "04ff03850655936e",
+      "reader_title": "In European regions, more collaboration and more funding came with less novel research",
+      "reader_what": "Collaboration correlates negatively with research novelty, and funded papers were less novel than unfunded ones.",
+      "reader_why": "It questions the assumption that collaboration and funding automatically produce more original science in Europe.",
+      "reader_more": "The authors use Web of Science publications from European regions between 2008 and 2017, measuring collaboration at five levels from country down to institution and measuring novelty from keyword combinations. They find a significant negative relationship between scientific collaboration and novelty. Funded papers also show lower novelty than unfunded ones, though funding significantly moderates the collaboration-novelty relationship. The authors frame this as extending bibliometric work by linking collaboration levels and funding sources to article novelty. The results are associations in bibliometric data, and the keyword-based novelty indicator is one operationalisation among several possible ones.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed bibliometric study",
-        "research_question": "How scientific collaboration and research funding relate to the novelty of research output in European regions.",
-        "main_finding": "Scientific collaboration is negatively and significantly related to novelty, funded papers show lower novelty than unfunded ones, and funding significantly moderates the collaboration-novelty relationship.",
-        "method_or_basis": "Analysis of Web of Science publications from European regions, 2008 to 2017, with collaboration measured at five levels and novelty measured from keyword combinations.",
-        "qualification": "Novelty operationalised through keyword combinations is a proxy that may penalise incremental but valuable work; these are associations, and funded research may be selected for different goals than novelty.",
-        "radar_relevance": "Questions whether the collaborative, funded model dominant in European research policy delivers original knowledge.",
+        "work_kind": "bibliometric empirical study",
+        "research_question": "How do scientific collaboration and research funding relate to the novelty of research output?",
+        "main_finding": "Collaboration is negatively associated with novelty and funded papers are less novel than unfunded ones, though funding moderates the collaboration-novelty link.",
+        "method_or_basis": "Bibliometric analysis of Web of Science articles from European regions, 2008-2017, with a keyword-based novelty measure across five collaboration levels.",
+        "qualification": "Correlational bibliometric evidence; novelty is proxied by keyword combinations, so the finding depends on that operationalisation.",
+        "radar_relevance": "Evidence on how European research funding and collaboration structures shape the originality of science.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1371/journal.pone.0271678 resolved to the matching PLOS ONE article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1371/journal.pone.0271678 confirms title, Shin, Kim and Kogler, PLOS ONE and 25 July 2022."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0271678&type=printable",
+            "title": "Scientific collaboration, research funding, and novelty in scientific knowledge (PLOS ONE full PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full PLOS ONE PDF read; the five collaboration levels, keyword-based novelty measure and funding moderation analysis are all in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Bibliometric study of how collaboration and research funding relate to the novelty of scientific output, using Web of Science publications from European regions over 2008-2017: substantive European research-policy evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:37Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "a901f882",
+          "reader_title": "Collaboration and funding are both associated with less novel research, not more",
+          "reader_what": "Across European regions, scientific collaboration and research funding both correlate negatively with novelty.",
+          "reader_why": "Challenges the assumption that collaborative funded research automatically produces more original work.",
+          "reader_more": "This study uses Web of Science publication data from European regions between 2008 and 2017 to test how collaboration and funding relate to the novelty of research, measuring collaboration at five levels from country through three regional tiers to institutions, and measuring novelty through keyword combinations. The headline results run against common assumptions: there is a negative and significant relationship between scientific collaboration and novelty, and funded papers show lower novelty than unfunded ones. Funding does, however, have a significant moderating effect on the relationship between collaboration and novelty. The authors position the contribution as linking multiple levels of collaboration and funding source to novelty within bibliometric research.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed bibliometric study",
+            "research_question": "How scientific collaboration and research funding relate to the novelty of research output in European regions.",
+            "main_finding": "Scientific collaboration is negatively and significantly related to novelty, funded papers show lower novelty than unfunded ones, and funding significantly moderates the collaboration-novelty relationship.",
+            "method_or_basis": "Analysis of Web of Science publications from European regions, 2008 to 2017, with collaboration measured at five levels and novelty measured from keyword combinations.",
+            "qualification": "Novelty operationalised through keyword combinations is a proxy that may penalise incremental but valuable work; these are associations, and funded research may be selected for different goals than novelty.",
+            "radar_relevance": "Questions whether the collaborative, funded model dominant in European research policy delivers original knowledge.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:37Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1016/j.trip.2021.100424": {
       "profile": "deep-reader-offline-v1",
@@ -10022,27 +10457,89 @@
       "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
     },
     "link:https://doi.org/10.1007/s12027-026-00888-6": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "e4f89445",
-      "reader_title": "Moving EU tokenised securities trading from a temporary sandbox to a permanent regime",
-      "reader_what": "The article argues the DLT pilot regime's low size caps and missing cash settlement limited its uptake.",
-      "reader_why": "Authors tie the successor framework's success to European technological sovereignty and national-level supervision.",
-      "reader_more": "Distributed ledger technology here means shared digital record-keeping that allows securities to be settled and split into smaller units. The authors trace the EU's 2022 pilot regime, a temporary sandbox for trading and settling tokenised instruments, and argue that restrictive capitalisation thresholds and the absence of an integrated cash leg held adoption down. They then assess the Commission's Market Integration and Supervision Package, which would make the arrangement permanent, unbundle central securities depository services into new notary and account-keeping roles, and raise aggregate thresholds to one hundred billion euros. The package is a legislative proposal under negotiation, so its effects are anticipated rather than observed.",
+      "identity_hash": "8a41c07f0bb6b8a6",
+      "reader_title": "Why the EU's blockchain market infrastructure rules hit a ceiling, and what replaces them",
+      "reader_what": "Argues the DLT Pilot Regime's low thresholds and missing cash leg capped adoption; the proposed MISP raises limits substantially.",
+      "reader_why": "Whether EU tokenised market infrastructure scales depends on keeping supervision agile and the technology European.",
+      "reader_more": "The article traces EU regulation of distributed ledger technology in financial markets from Regulation (EU) 2022/858 to the proposed Market Integration and Supervision Package. It sets out the value proposition of tokenisation, namely atomic settlement and fractionalisation, and contrasts successes such as Project Guardian with failures such as the Australian exchange's CHESS replacement. The authors identify a ceiling on success built into the pilot regime: restrictive capitalisation thresholds and no native cash leg. They assess ESMA's 2025 recommendations and the Commission's response, which would unbundle central securities depository services into DLT notaries and account keepers and raise aggregate thresholds to one hundred billion euros. They conclude that success depends on European technological sovereignty and agile national supervision rather than premature centralisation.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed legal/regulatory analysis",
-        "research_question": "Why did the EU's DLT Pilot Regime see limited uptake, and does the proposed successor framework fix the causes?",
-        "main_finding": "The pilot regime carried a built-in ceiling on success through restrictive capitalisation thresholds and lack of native cash settlement; the proposed Market Integration and Supervision Package addresses these through unbundled depository roles and far higher thresholds.",
-        "method_or_basis": "Doctrinal analysis of Regulation (EU) 2022/858, ESMA's 2025 recommendations and the Commission proposal, with contrasting project cases; publisher full text supplied.",
-        "qualification": "The successor package is a proposal still in the legislative process, so claimed benefits are projected, and the sovereignty and supervision conclusions are the authors' argument rather than findings.",
-        "radar_relevance": "Concerns whether Europe's financial market infrastructure is built and supervised in Europe, which the authors frame as a technological sovereignty question.",
+        "work_kind": "legal and regulatory analysis",
+        "research_question": "Can the EU's DLT market infrastructure framework be scaled beyond the limits of the pilot regime?",
+        "main_finding": "The DLT Pilot Regime's restrictive thresholds and missing cash leg capped adoption; the proposed MISP would create a permanent, far larger architecture whose success hinges on European technological sovereignty.",
+        "method_or_basis": "Doctrinal and policy analysis of EU legislation, ESMA recommendations and Commission proposals, with comparative infrastructure cases.",
+        "qualification": "The MISP is a proposal under negotiation, so the article assesses intended architecture rather than observed outcomes.",
+        "radar_relevance": "Concerns EU technological sovereignty in financial market infrastructure and the regulatory conditions for deploying a strategic technology.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s12027-026-00888-6 resolved to the matching open-access ERA Forum article on link.springer.com."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s12027-026-00888-6 confirms title, Buttigieg and Gentilini, ERA Forum and 7 July 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s12027-026-00888-6.pdf",
+            "title": "Expanding the scope and scale of the EU's DLT market infrastructures (Springer open-access PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer open-access PDF read; the DLT Pilot Regime critique, the MISP proposal analysis and the technological-sovereignty conclusion are all in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Legal-institutional analysis of the EU's DLT Pilot Regime and the proposed Market Integration and Supervision Package, arguing that the framework's success depends on European technological sovereignty: substantive EU technology-governance work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "e4f89445",
+          "reader_title": "Moving EU tokenised securities trading from a temporary sandbox to a permanent regime",
+          "reader_what": "The article argues the DLT pilot regime's low size caps and missing cash settlement limited its uptake.",
+          "reader_why": "Authors tie the successor framework's success to European technological sovereignty and national-level supervision.",
+          "reader_more": "Distributed ledger technology here means shared digital record-keeping that allows securities to be settled and split into smaller units. The authors trace the EU's 2022 pilot regime, a temporary sandbox for trading and settling tokenised instruments, and argue that restrictive capitalisation thresholds and the absence of an integrated cash leg held adoption down. They then assess the Commission's Market Integration and Supervision Package, which would make the arrangement permanent, unbundle central securities depository services into new notary and account-keeping roles, and raise aggregate thresholds to one hundred billion euros. The package is a legislative proposal under negotiation, so its effects are anticipated rather than observed.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed legal/regulatory analysis",
+            "research_question": "Why did the EU's DLT Pilot Regime see limited uptake, and does the proposed successor framework fix the causes?",
+            "main_finding": "The pilot regime carried a built-in ceiling on success through restrictive capitalisation thresholds and lack of native cash settlement; the proposed Market Integration and Supervision Package addresses these through unbundled depository roles and far higher thresholds.",
+            "method_or_basis": "Doctrinal analysis of Regulation (EU) 2022/858, ESMA's 2025 recommendations and the Commission proposal, with contrasting project cases; publisher full text supplied.",
+            "qualification": "The successor package is a proposal still in the legislative process, so claimed benefits are projected, and the sovereignty and supervision conclusions are the authors' argument rather than findings.",
+            "radar_relevance": "Concerns whether Europe's financial market infrastructure is built and supervised in Europe, which the authors frame as a technological sovereignty question.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://ecfr.eu/publication/the-future-is-fermented-how-europe-can-succeed-in-the-next-industrial-race/": {
       "profile": "deep-reader-v2-authoritative",
@@ -10474,27 +10971,89 @@
       ]
     },
     "link:https://doi.org/10.1007/s11192-026-05693-z": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "2902b75d",
-      "reader_title": "A new measure of how steadily countries turn research spending into innovation output",
-      "reader_what": "Across thirty countries, measured innovation efficiency stays below 0.25, with East Asia ahead of Europe.",
-      "reader_why": "Places Europe behind East Asia and the Pacific at converting research inputs into innovation outputs.",
-      "reader_more": "Efficiency here is a ratio rather than a level: it asks how much innovation a country gets from the inputs it puts in, so a small system can score well while producing little in absolute terms. The authors add a second measure, sustainable innovation efficiency, meant to capture whether output holds steady when inputs fluctuate. Using data envelopment analysis on thirty countries from 2009 to 2018, they find high-income countries do better on the stability measure while lower-middle-income countries score highest on plain efficiency. The regional comparison puts East Asia and the Pacific ahead of Europe and Central Asia. Results of this method depend heavily on which inputs and outputs are chosen, and the data window closes in 2018.",
+      "identity_hash": "97c0d3efbee609e2",
+      "reader_title": "A new indicator for how stably countries turn R&D inputs into innovation",
+      "reader_what": "Introduces sustainable innovation efficiency, measuring how well countries convert R&D inputs into stable outputs despite volatile inputs.",
+      "reader_why": "Conventional efficiency scores miss whether a national innovation system holds up under input volatility.",
+      "reader_more": "The authors argue that measuring innovation efficiency alone gives an incomplete picture of national innovation performance, and introduce sustainable innovation efficiency to capture how well a country converts research and development inputs into stable outputs when those inputs fluctuate. Using Data Envelopment Analysis on thirty countries from 2009 to 2018, they find overall innovation efficiency is low, with scores consistently below 0.25. High-income countries score better on sustainable innovation efficiency, while lower-middle-income countries score highest on plain innovation efficiency. East Asia and the Pacific outperform Europe, Central Asia and the Middle East and North Africa on innovation efficiency, with variation on the sustainable measure. The construct is new, so its external validity is not yet established.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed empirical study",
-        "research_question": "How efficiently do countries convert R&D inputs into innovation outputs, and how stable is that conversion when inputs are volatile?",
-        "main_finding": "Overall innovation efficiency is low across the sample, consistently below 0.25; high-income countries lead on the new sustainable-efficiency measure while lower-middle-income countries lead on conventional efficiency, and East Asia and the Pacific outperform Europe and Central Asia on the latter.",
-        "method_or_basis": "Data envelopment analysis of 30 countries, 2009-2018, introducing a sustainable innovation efficiency measure alongside conventional innovation efficiency; publisher open-access full text supplied.",
-        "qualification": "Efficiency is relative to the chosen input and output variables and says nothing about absolute innovation capacity; the sample ends in 2018 and covers 30 countries only.",
-        "radar_relevance": "Offers a comparative benchmark placing European performance against East Asia in converting research investment into output.",
+        "work_kind": "measurement/indicator development with empirical validation",
+        "research_question": "How can country-level innovation performance be measured to reflect stability of output under volatile inputs?",
+        "main_finding": "A new sustainable innovation efficiency measure, estimated by DEA across 30 countries, separates stable conversion of R&D inputs from raw efficiency and reorders country rankings accordingly.",
+        "method_or_basis": "Data Envelopment Analysis of 30 countries, 2009-2018, computing both conventional and newly defined sustainable innovation efficiency.",
+        "qualification": "First conceptualisation of the construct; results depend on the DEA input-output specification and the 2009-2018 window, and the measure is not yet externally validated.",
+        "radar_relevance": "A reusable country-level measurement approach for innovation performance, with direct comparative results for Europe.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s11192-026-05693-z resolved to the matching open-access Scientometrics article on link.springer.com."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s11192-026-05693-z confirms title, Tan and Zhao, Scientometrics and July 2026 (131:4823-4845)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s11192-026-05693-z.pdf",
+            "title": "Country-level innovation performance: introducing sustainable innovation efficiency (Springer open-access PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer open-access PDF read; the new construct, the DEA specification, the 30-country 2009-2018 sample and the regional results are in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper introduces and operationalises 'sustainable innovation efficiency' as a new country-level measurement construct alongside conventional innovation efficiency, and validates it with DEA across 30 countries: a new indicator/measurement approach."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "2902b75d",
+          "reader_title": "A new measure of how steadily countries turn research spending into innovation output",
+          "reader_what": "Across thirty countries, measured innovation efficiency stays below 0.25, with East Asia ahead of Europe.",
+          "reader_why": "Places Europe behind East Asia and the Pacific at converting research inputs into innovation outputs.",
+          "reader_more": "Efficiency here is a ratio rather than a level: it asks how much innovation a country gets from the inputs it puts in, so a small system can score well while producing little in absolute terms. The authors add a second measure, sustainable innovation efficiency, meant to capture whether output holds steady when inputs fluctuate. Using data envelopment analysis on thirty countries from 2009 to 2018, they find high-income countries do better on the stability measure while lower-middle-income countries score highest on plain efficiency. The regional comparison puts East Asia and the Pacific ahead of Europe and Central Asia. Results of this method depend heavily on which inputs and outputs are chosen, and the data window closes in 2018.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed empirical study",
+            "research_question": "How efficiently do countries convert R&D inputs into innovation outputs, and how stable is that conversion when inputs are volatile?",
+            "main_finding": "Overall innovation efficiency is low across the sample, consistently below 0.25; high-income countries lead on the new sustainable-efficiency measure while lower-middle-income countries lead on conventional efficiency, and East Asia and the Pacific outperform Europe and Central Asia on the latter.",
+            "method_or_basis": "Data envelopment analysis of 30 countries, 2009-2018, introducing a sustainable innovation efficiency measure alongside conventional innovation efficiency; publisher open-access full text supplied.",
+            "qualification": "Efficiency is relative to the chosen input and output variables and says nothing about absolute innovation capacity; the sample ends in 2018 and covers 30 countries only.",
+            "radar_relevance": "Offers a comparative benchmark placing European performance against East Asia in converting research investment into output.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://doi.org/10.26565/2786-4995-2026-2-14": {
       "profile": "deep-reader-v2-authoritative",
@@ -11763,26 +12322,93 @@
       ]
     },
     "link:https://doi.org/10.1017/pds.2026.10595": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_b",
       "source_hash": "7815af65",
-      "reader_title": "A proposed software architecture to make scenario planning practical for smaller companies",
-      "reader_what": "Design paper proposes a modular AI-assisted scenario pipeline with guided wizard and shared knowledge backbone.",
-      "reader_more": "Scenario management means building and maintaining alternative pictures of the future in order to test strategy against them. The authors start from the observation that smaller firms rarely have the time, expertise or tooling to do this well, and that available tools are fragmented. Their proposal pairs a guided wizard for non-specialists with a fuller environment for experienced users, both drawing on a shared knowledge store so that one exercise can feed later ones instead of ending as a standalone project. Recording where each input came from and keeping a person in the loop are intended to preserve explainability and human judgement. This is an architectural proposal presented at a design conference; it has not been implemented with firms or evaluated against outcomes.",
+      "identity_hash": "15410162982ccd2b",
+      "reader_title": "A modular, explainable AI scenario-management architecture aimed at small and medium-sized firms",
+      "reader_what": "Proposes a modular AI foresight pipeline combining a guided wizard and expert environment on a shared knowledge backbone.",
+      "reader_why": "It targets the cost and expertise barriers that keep scenario planning out of smaller firms.",
+      "reader_more": "Scenario work in small and medium-sized enterprises is typically workshop-based, slide-driven and offline, and full scenario processes are often judged too costly, while compact shortcut methods tend to omit key drivers and interdependencies. The authors propose an architecture that separates a guided wizard for non-specialists from an expert environment, both drawing on one shared knowledge base. The design is provenance-aware and keeps a human in the loop, so structural quality, explainability and traceability survive the use of generative AI. The stated aim is to turn one-off scenario projects into reusable organisational knowledge. The paper presents a design pattern and its rationale rather than an evaluated implementation.",
       "deep_analysis": {
-        "work_kind": "conference design proposal",
-        "research_question": "How can scenario management be made feasible for small and medium-sized enterprises that lack time, expertise and integrated tools?",
-        "main_finding": "The authors propose a modular, provenance-aware and AI-enabled foresight pipeline combining a guided wizard and an expert environment on a shared knowledge backbone, intended to turn one-off scenario projects into reusable organisational knowledge while keeping humans in the loop.",
-        "method_or_basis": "Conceptual architecture and design pattern description; publisher abstract and paper text supplied in package.",
-        "qualification": "A proposal only: no implementation, user trial or evaluation with enterprises is reported, so claimed reductions in effort and improvements in reuse are design intentions.",
-        "radar_relevance": "Concerns foresight capability in smaller firms and the use of AI in scenario methods, though the paper makes no specifically European claim.",
-        "confidence": "high",
-        "why_supported": false
+        "work_kind": "conference paper proposing a method/architecture",
+        "research_question": "How can scenario management be made affordable, explainable and reusable for SMEs using AI?",
+        "main_finding": "A modular, provenance-aware AI scenario architecture with wizard and expert layers on a shared knowledge backbone can reduce effort and fragmentation while preserving human judgement.",
+        "method_or_basis": "Design-research argument built on the scenario-planning and generative-AI literature; an architectural pattern rather than an empirical trial.",
+        "qualification": "The pipeline is proposed, not evaluated; no empirical evidence of effort reduction or scenario quality is reported.",
+        "radar_relevance": "A transferable foresight pipeline design directly usable in Radar-style anticipatory work.",
+        "confidence": "medium",
+        "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1017/pds.2026.10595 resolved to the matching Cambridge Core article in Proceedings of the Design Society; the package's stored capture of that page contains the abstract and body sections."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/pds.2026.10595 confirms title, the five authors, Proceedings of the Design Society and 2 July 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Fraunhofer publica handle 523785 (publica.fraunhofer.de/handle/publica/523785) was opened as an alternate deposit but returned only a bot-challenge/landing shell; the Cambridge text was sufficient."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/proceedings-of-the-design-society/article/aibased-scenario-management-for-smes-the-need-for-modular-explainable-and-reusable-foresight-pipelines/3A9CE65A8E4304E4B163842DCBAEE3E9",
+            "title": "AI-based scenario management for SMEs: the need for modular, explainable and reusable foresight pipelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Cambridge Core article text read beyond the abstract into the introduction and argument; the proposed architecture and its rationale are explicit in the source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper proposes a modular, provenance-aware AI-enabled scenario-management architecture with a guided wizard and expert environment on a shared knowledge backbone: a transferable foresight pipeline design, not an application of an existing tool."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:48Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T08:39:44Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_b",
+          "source_hash": "7815af65",
+          "reader_title": "A proposed software architecture to make scenario planning practical for smaller companies",
+          "reader_what": "Design paper proposes a modular AI-assisted scenario pipeline with guided wizard and shared knowledge backbone.",
+          "reader_more": "Scenario management means building and maintaining alternative pictures of the future in order to test strategy against them. The authors start from the observation that smaller firms rarely have the time, expertise or tooling to do this well, and that available tools are fragmented. Their proposal pairs a guided wizard for non-specialists with a fuller environment for experienced users, both drawing on a shared knowledge store so that one exercise can feed later ones instead of ending as a standalone project. Recording where each input came from and keeping a person in the loop are intended to preserve explainability and human judgement. This is an architectural proposal presented at a design conference; it has not been implemented with firms or evaluated against outcomes.",
+          "deep_analysis": {
+            "work_kind": "conference design proposal",
+            "research_question": "How can scenario management be made feasible for small and medium-sized enterprises that lack time, expertise and integrated tools?",
+            "main_finding": "The authors propose a modular, provenance-aware and AI-enabled foresight pipeline combining a guided wizard and an expert environment on a shared knowledge backbone, intended to turn one-off scenario projects into reusable organisational knowledge while keeping humans in the loop.",
+            "method_or_basis": "Conceptual architecture and design pattern description; publisher abstract and paper text supplied in package.",
+            "qualification": "A proposal only: no implementation, user trial or evaluation with enterprises is reported, so claimed reductions in effort and improvements in reuse are design intentions.",
+            "radar_relevance": "Concerns foresight capability in smaller firms and the use of AI in scenario methods, though the paper makes no specifically European claim.",
+            "confidence": "high",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:48Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s40804-025-00348-7": {
       "profile": "deep-reader-v2-authoritative",
@@ -14604,27 +15230,94 @@
       ]
     },
     "link:https://arxiv.org/abs/2606.31590": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "99aae5f7",
-      "reader_title": "Turning digital sovereignty from slogan into a testable software requirement",
-      "reader_what": "Argues digital sovereignty can be treated as a software architecture quality attribute, making it measurable and testable.",
-      "reader_why": "Offers engineers a concrete way to build EU sovereignty requirements into cloud systems.",
-      "reader_more": "The paper starts from the complaint that digital sovereignty, though politically prominent in the EU and elsewhere, is vague. It analyses the concept as a quality attribute for software architectures in cloud computing, alongside EU policy frameworks. The authors argue that treating digital sovereignty this way sharpens it analytically, and show that it satisfies many classical properties of architectural quality attributes: it can be measured and validated, it involves trade-offs against other attributes, and it fits the scenario-based methods architects already use. The work is conceptual and methodological. It is an unrefereed preprint and does not report an implementation or empirical evaluation.",
+      "identity_hash": "9313257a7242a61b",
+      "reader_title": "Turning EU digital sovereignty from a slogan into a testable software-architecture property",
+      "reader_what": "Argues digital sovereignty behaves like a classical software quality attribute: measurable, validatable and subject to trade-offs.",
+      "reader_why": "Framing sovereignty as a quality attribute makes EU cloud requirements something architects can actually design against.",
+      "reader_more": "Digital sovereignty is a prominent but famously vague political concept, usually framed through dependencies and the vulnerabilities they create. The authors analyse it instead as a quality attribute for software architectures in cloud computing, within the EU's policy frameworks. They show it satisfies many classical properties of quality attributes: it can be measured and validated, it involves trade-offs against other attributes, and it fits the scenario-based methods architects already use to analyse such attributes. The contribution is conceptual and analytical rather than an implementation or case evaluation. The paper is a preprint and has not been peer reviewed.",
       "deep_analysis": {
-        "work_kind": "preprint / conceptual software engineering analysis",
-        "research_question": "Whether digital sovereignty can be made analytically precise by treating it as a software architecture quality attribute.",
-        "main_finding": "Digital sovereignty behaves like a classical architectural quality attribute, so it can be specified, measured, traded off and validated using established software architecture methods.",
-        "method_or_basis": "Packaged arXiv abstract page",
-        "qualification": "Preprint, not peer reviewed; the argument is conceptual with no implementation or empirical test reported.",
-        "radar_relevance": "Connects EU digital sovereignty policy to practical cloud and software architecture requirements.",
+        "work_kind": "conceptual analysis preprint",
+        "research_question": "Can digital sovereignty be sharpened analytically by treating it as a software architecture quality attribute?",
+        "main_finding": "Digital sovereignty satisfies the classical properties of a software architecture quality attribute, including measurability, validation, trade-offs and scenario-based analysis.",
+        "method_or_basis": "Conceptual analysis linking digital sovereignty literature and EU cloud policy frameworks to software architecture quality-attribute theory.",
+        "qualification": "Preprint, not peer reviewed; the argument is conceptual with no implementation or empirical validation.",
+        "radar_relevance": "Directly addresses the EU digital sovereignty agenda and how it translates into technology design requirements.",
         "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2606.31590 opened as the matching arXiv listing for the claimed title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The record is an arXiv preprint; no DOI is registered in the supplied link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full preprint PDF retrieved from https://arxiv.org/pdf/2606.31590 and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2606.31590",
+            "title": "Digital Sovereignty as a Quality Attribute for Software Architectures (arXiv full text)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv PDF read; author affiliations (University of Southern Denmark; UTS/Accenture), the quality-attribute argument and the EU policy framing are explicit."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analysis of digital sovereignty as a software-architecture quality attribute set explicitly in the context of EU cloud policy frameworks, sharpening a vague EU policy concept into something measurable and testable."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "99aae5f7",
+          "reader_title": "Turning digital sovereignty from slogan into a testable software requirement",
+          "reader_what": "Argues digital sovereignty can be treated as a software architecture quality attribute, making it measurable and testable.",
+          "reader_why": "Offers engineers a concrete way to build EU sovereignty requirements into cloud systems.",
+          "reader_more": "The paper starts from the complaint that digital sovereignty, though politically prominent in the EU and elsewhere, is vague. It analyses the concept as a quality attribute for software architectures in cloud computing, alongside EU policy frameworks. The authors argue that treating digital sovereignty this way sharpens it analytically, and show that it satisfies many classical properties of architectural quality attributes: it can be measured and validated, it involves trade-offs against other attributes, and it fits the scenario-based methods architects already use. The work is conceptual and methodological. It is an unrefereed preprint and does not report an implementation or empirical evaluation.",
+          "deep_analysis": {
+            "work_kind": "preprint / conceptual software engineering analysis",
+            "research_question": "Whether digital sovereignty can be made analytically precise by treating it as a software architecture quality attribute.",
+            "main_finding": "Digital sovereignty behaves like a classical architectural quality attribute, so it can be specified, measured, traded off and validated using established software architecture methods.",
+            "method_or_basis": "Packaged arXiv abstract page",
+            "qualification": "Preprint, not peer reviewed; the argument is conceptual with no implementation or empirical test reported.",
+            "radar_relevance": "Connects EU digital sovereignty policy to practical cloud and software architecture requirements.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://merics.org/en/report/eu-shepherded-brussels-europe-awakens-chinese-technology": {
       "profile": "deep-reader-v2-authoritative",
@@ -17661,26 +18354,87 @@
       ]
     },
     "link:https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "5031f639",
-      "reader_title": "Think tank sets short-term priorities for European rearmament and deterrence",
-      "reader_what": "Policy brief argues European allies should buy urgently needed equipment abroad while building domestic defence industry.",
-      "reader_more": "This Centre for European Reform policy brief by Armida van Rij, supported by the Hanns Seidel Foundation, sets out steps European governments can take within one to two years to accelerate rearmament and readiness. It starts from the position that the United States is withdrawing from its European security commitments while Russia intensifies hostile activity, and notes that recent American strategy documents treat conventional deterrence of Russia as Europe responsibility. The brief covers three areas: winning public support for rearmament, ensuring operational equipment and capabilities, and building a pipeline of personnel and skills. It argues European allies need a realistic assessment of which capabilities could fight immediately, and that growing budgets allow them to buy off the shelf from non-European suppliers while still investing in European industrial capacity.",
+      "identity_hash": "81acfd372c9bfe36",
+      "reader_title": "CER press release: Europe must be able to fight tonight to deter Russia",
+      "reader_what": "Announces a CER brief urging European governments to prioritise readiness, munitions stockpiles and defence personnel within one to two years.",
+      "reader_more": "The press release presents Armida van Rij's Centre for European Reform policy brief on short-term European rearmament. It frames the problem as the United States stepping back from European security while Russia intensifies hostile activity. The brief's recommendations fall into three areas: winning public support for rearmament, ensuring equipment and capabilities are actually operational, and building a pipeline of trained personnel. It argues European NATO allies need a realistic assessment of what can fight tonight, and should default to European production where capacity exists, such as ammunition, drones and some air defence, while buying from non-European allies where shortfalls are too large. It also criticises physical entry requirements that screen out people suited to cyber and drone roles.",
       "deep_analysis": {
-        "work_kind": "policy brief",
+        "work_kind": "press release announcing a policy brief",
         "research_question": "",
-        "main_finding": "The author argues Europe can pursue rapid off-the-shelf procurement and long-term European defence industrial capacity simultaneously, rather than treating them as a trade-off.",
-        "method_or_basis": "Packaged PDF excerpt of the press release summarising the policy brief",
-        "qualification": "Policy recommendation based on analysis of the strategic situation; no cost modelling or capability data is shown here.",
-        "radar_relevance": "Concerns European defence industrial capacity building, adjacent to defence research and technology policy.",
+        "main_finding": "The announced brief argues European governments can accelerate deterrence within one to two years by prioritising readiness, stockpiles, European production where capacity exists, and a broader personnel pipeline.",
+        "method_or_basis": "Press release summarising a CER policy brief by Armida van Rij, produced with support from the Hanns Seidel Foundation.",
+        "qualification": "This is promotional summary text, not the analysis itself; the brief's evidence base cannot be assessed from this document.",
+        "radar_relevance": "Substantively about European defence-industrial capability and production, but the indexed object is a press release rather than the underlying study.",
         "confidence": "medium",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf downloaded and read; it is headed 'Press release' and announces the policy brief."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "CER press releases and policy briefs carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_press_release",
+            "url": "https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf",
+            "title": "Press release: European governments need to be ready to fight tonight to deter Russia (announcing 'Rearming Europe for deterrence')",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The PDF at the supplied URL is a CER press release, authored on behalf of the Centre for European Reform and describing a policy brief by Armida van Rij supported by the Hanns Seidel Foundation. The brief's own full text was not at this URL."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_PROVENANCE_JUDGEMENT",
+        "reason": "The linked object is the Centre for European Reform's press release announcing Armida van Rij's policy brief, not the brief itself. It summarises real recommendations on European rearmament, but whether a press release should stand in the Radar as the work needs human judgement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "5031f639",
+          "reader_title": "Think tank sets short-term priorities for European rearmament and deterrence",
+          "reader_what": "Policy brief argues European allies should buy urgently needed equipment abroad while building domestic defence industry.",
+          "reader_more": "This Centre for European Reform policy brief by Armida van Rij, supported by the Hanns Seidel Foundation, sets out steps European governments can take within one to two years to accelerate rearmament and readiness. It starts from the position that the United States is withdrawing from its European security commitments while Russia intensifies hostile activity, and notes that recent American strategy documents treat conventional deterrence of Russia as Europe responsibility. The brief covers three areas: winning public support for rearmament, ensuring operational equipment and capabilities, and building a pipeline of personnel and skills. It argues European allies need a realistic assessment of which capabilities could fight immediately, and that growing budgets allow them to buy off the shelf from non-European suppliers while still investing in European industrial capacity.",
+          "deep_analysis": {
+            "work_kind": "policy brief",
+            "research_question": "",
+            "main_finding": "The author argues Europe can pursue rapid off-the-shelf procurement and long-term European defence industrial capacity simultaneously, rather than treating them as a trade-off.",
+            "method_or_basis": "Packaged PDF excerpt of the press release summarising the policy brief",
+            "qualification": "Policy recommendation based on analysis of the strategic situation; no cost modelling or capability data is shown here.",
+            "radar_relevance": "Concerns European defence industrial capacity building, adjacent to defence research and technology policy.",
+            "confidence": "medium",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://www.sitra.fi/wp-content/uploads/2026/06/Sitra-Building-One-Europe-One-Market.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -17862,27 +18616,89 @@
       ]
     },
     "link:https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "82e339cf",
-      "reader_title": "European strategic autonomy taking concrete shape through Ukraine defence engagement",
-      "reader_what": "Policy brief argues European intervention is being redefined, with strategic autonomy materialising through EU engagement in Ukraine defence.",
-      "reader_why": "Suggests strategic autonomy is becoming operational practice rather than a contested slogan.",
-      "reader_more": "This Danish Institute for International Studies policy brief by Maria-Louise Clausen and Peter Albrecht argues that the war in Ukraine and renewed uncertainty in transatlantic relations are changing what European intervention means. It notes that the EU expanding role in Ukraine defence sector is increasingly tied to strategic autonomy, a concept that has long acted as a flexible frame onto which member states attach different meanings. The stored takeaway is that autonomy is increasingly materialising in practice. The packaged retrieval failed for technical reasons and only the opening and headline takeaway were preserved, so the supporting argument and the full set of conclusions were not available.",
+      "identity_hash": "df49f5861ace0a4e",
+      "reader_title": "European strategic autonomy is becoming arms financing and training rather than crisis management",
+      "reader_what": "Argues EU intervention has shifted from crisis management and statebuilding toward financing arms production and military training.",
+      "reader_why": "Defence-industrial coordination is becoming the concrete form European strategic autonomy takes.",
+      "reader_more": "The brief argues that the war in Ukraine and renewed transatlantic uncertainty are changing what European intervention means. Where the EU once exported crisis management and statebuilding, it now increasingly finances arms production and embeds itself in a wartime economy. The authors observe that combined EU defence budgets have risen by more than half in real terms, and that strategic autonomy is materialising concretely as defence-industrial coordination, direct financing of arms production and military training at unprecedented scale. They also argue that EU engagement with Ukraine blurs the established distinction between donor and recipient, embedding European defence production in a new way. This is an interpretive policy analysis rather than a quantitative evaluation of outcomes.",
       "deep_analysis": {
         "work_kind": "policy brief",
-        "research_question": "How the war in Ukraine and transatlantic uncertainty are reshaping European intervention and strategic autonomy.",
-        "main_finding": "The authors argue strategic autonomy is moving from an abstract, contested concept towards concrete practice, particularly through EU involvement in Ukraine defence sector.",
-        "method_or_basis": "Stored scanner extract only; packaged retrieval of the PDF failed with a technical error",
-        "qualification": "Only the opening and headline takeaway were available; the analysis behind the claim is unverified.",
-        "radar_relevance": "Concerns how European strategic autonomy is being operationalised in defence and industrial engagement.",
-        "confidence": "low",
+        "research_question": "How is European strategic autonomy changing the EU's logic of external intervention?",
+        "main_finding": "European strategic autonomy is materialising as defence-industrial coordination, direct financing of arms production and large-scale training, displacing the older crisis-management and statebuilding model.",
+        "method_or_basis": "Policy analysis by two DIIS researchers drawing on EU defence budget trends and EU engagement with Ukraine.",
+        "qualification": "An interpretive brief; the shift is argued from budget trends and policy direction rather than measured against intervention outcomes.",
+        "radar_relevance": "Directly concerns European defence-industrial capability and the institutional form strategic autonomy is taking.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf downloaded directly (the package's own retrieval had failed on a PDF encryption library) and read in full."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "DIIS policy briefs carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf",
+            "title": "DIIS Policy Brief, June 2026: Strategic autonomy and Europe's new logic of intervention",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full policy brief PDF read. The DIIS Pure cover page gives the authors as Maria-Louise Clausen and Peter Albrecht; the scanner had recorded the institute itself as author."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "DIIS policy brief analysing how European strategic autonomy is materialising as defence-industrial coordination, direct financing of arms production and large-scale military training: substantive European industrial-capability analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:39:46Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "82e339cf",
+          "reader_title": "European strategic autonomy taking concrete shape through Ukraine defence engagement",
+          "reader_what": "Policy brief argues European intervention is being redefined, with strategic autonomy materialising through EU engagement in Ukraine defence.",
+          "reader_why": "Suggests strategic autonomy is becoming operational practice rather than a contested slogan.",
+          "reader_more": "This Danish Institute for International Studies policy brief by Maria-Louise Clausen and Peter Albrecht argues that the war in Ukraine and renewed uncertainty in transatlantic relations are changing what European intervention means. It notes that the EU expanding role in Ukraine defence sector is increasingly tied to strategic autonomy, a concept that has long acted as a flexible frame onto which member states attach different meanings. The stored takeaway is that autonomy is increasingly materialising in practice. The packaged retrieval failed for technical reasons and only the opening and headline takeaway were preserved, so the supporting argument and the full set of conclusions were not available.",
+          "deep_analysis": {
+            "work_kind": "policy brief",
+            "research_question": "How the war in Ukraine and transatlantic uncertainty are reshaping European intervention and strategic autonomy.",
+            "main_finding": "The authors argue strategic autonomy is moving from an abstract, contested concept towards concrete practice, particularly through EU involvement in Ukraine defence sector.",
+            "method_or_basis": "Stored scanner extract only; packaged retrieval of the PDF failed with a technical error",
+            "qualification": "Only the opening and headline takeaway were available; the analysis behind the claim is unverified.",
+            "radar_relevance": "Concerns how European strategic autonomy is being operationalised in defence and industrial engagement.",
+            "confidence": "low",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/european-union-and-australia-successfully-conclude-horizon-europe-negotiations/": {
       "profile": "deep-reader-v2-authoritative",
@@ -28244,6 +29060,638 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-14T08:05:06Z",
       "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://arxiv.org/abs/2606.12788": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "e159365e",
+      "identity_hash": "2370d01b025c139d",
+      "reader_title": "A data-sovereignty architecture for proving embedded emissions across regulated global value chains",
+      "reader_what": "Proposes an International Data Spaces-based RegTech architecture for verifiable emissions data under the EU carbon border mechanism.",
+      "reader_why": "It shows how EU regulatory reporting can work without forcing firms to surrender commercially sensitive data.",
+      "reader_more": "The EU Carbon Border Adjustment Mechanism requires product-level, facility-specific emissions data, which collides with suppliers' unwillingness to expose production detail. The authors propose a reference architecture using the International Data Spaces framework so that environmental telemetry can be exchanged verifiably without ceding control of the underlying data. They separate mandatory CBAM obligations from voluntary Science Based Targets commitments and from Safe-and-Sustainable-by-Design requirements. A prospective roadmapping method is introduced to turn upstream physical dependencies into feedback loops, illustrated on the Taipei-Penang semiconductor corridor. The work is a design proposal and roadmap; it reports no deployment or evaluation.",
+      "deep_analysis": {
+        "work_kind": "preprint proposing a reference architecture and roadmapping method",
+        "research_question": "How can trustworthy emissions data be orchestrated across value chains under EU regulation without breaching data sovereignty?",
+        "main_finding": "A data-spaces reference architecture plus prospective roadmapping can reconcile CBAM transparency demands with supplier data sovereignty.",
+        "method_or_basis": "Conceptual architecture design with a semiconductor/petrochemical corridor case illustration; no implementation results.",
+        "qualification": "Not peer reviewed and not implemented; the claimed benefits are argued rather than measured.",
+        "radar_relevance": "Offers a reusable architecture and method for EU regulatory data flows, with direct bearing on European compliance infrastructure.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2606.12788 opened as the matching arXiv abstract page for the claimed title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The record is an arXiv preprint with no registered DOI in the supplied link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved the full preprint PDF from https://arxiv.org/pdf/2606.12788 and read the architecture and methodology sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2606.12788",
+            "title": "To Share or Not to Share: Orchestrating Trustworthy Data in Global Value Chains (arXiv full text)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv PDF read; the reference architecture, the CBAM/SBTi/SSbD distinction and the prospective roadmapping method are all present in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The preprint introduces a RegTech reference architecture built on the International Data Spaces framework plus a prospective roadmapping methodology for regulated value-chain data sharing; both are transferable beyond the semiconductor case used to illustrate them."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:44Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1007/s10961-026-10327-w": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "6045eefb",
+      "identity_hash": "5a6cde26c4edc26d",
+      "reader_title": "Specialist knowledge and talent, not generic ecosystem quality, drive deep-tech startups in European regions",
+      "reader_what": "Across 272 European regions, deep-tech-enabling knowledge and talent predict deep-tech startup presence better than generic ecosystem quality.",
+      "reader_why": "It tells European public administrations which regional levers actually raise deep-tech startup formation.",
+      "reader_more": "The authors combine the general entrepreneurial-ecosystem framework with elements specific to deep tech, then build a keyword thesaurus to identify deep-tech startups founded between 2019 and 2021. They test their hypotheses quantitatively across 272 NUTS-2 regions in 27 EU member states and the UK. The presence of specialised deep-tech knowledge and talent emerges as the strongest regional predictor, while generic ecosystem quality and specific formal institutions matter less. The authors draw the policy implication that regional support should target knowledge and skills rather than broad startup infrastructure. Findings are cross-sectional associations at regional level, not causal estimates.",
+      "deep_analysis": {
+        "work_kind": "quantitative regional empirical study",
+        "research_question": "Which generic and deep-tech-specific ecosystem elements influence the presence of deep-tech startups in a region?",
+        "main_finding": "Deep-tech-enabling knowledge and talent are more important for deep-tech startup presence than generic entrepreneurial-ecosystem quality or formal institutions.",
+        "method_or_basis": "Regression analysis across 272 European NUTS-2 regions using a purpose-built thesaurus to identify deep-tech startups (2019-2021).",
+        "qualification": "Cross-sectional regional associations; the thesaurus-based identification of deep-tech startups is an operational proxy.",
+        "radar_relevance": "Directly about European regional innovation capacity and the conditions for strategic-autonomy-relevant technologies.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s10961-026-10327-w resolved to the matching open-access Journal of Technology Transfer article on link.springer.com; full text captured in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s10961-026-10327-w confirms title, the three authors, The Journal of Technology Transfer and 9 April 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Utrecht University DSpace handle 1874/488693 was opened as an alternate deposit but served only a shell page; Springer's own open-access text was used instead."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s10961-026-10327-w",
+            "title": "Building deep-tech entrepreneurial ecosystems: factors that promote the presence of deep-tech startups in European regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer open-access article text read through abstract, introduction, research question and results; volume 51, pages 2886-2915."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Quantitative study of the regional conditions behind deep-tech startup presence across 272 NUTS-2 regions in 27 EU countries and the UK, framed against European strategic-autonomy and Draghi-report concerns."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1017/dap.2024.56": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "6c33bf9b",
+      "identity_hash": "df4d25725d8856da",
+      "reader_title": "A three-way taxonomy to help policymakers choose anticipatory methods for migration",
+      "reader_what": "Introduces a taxonomy sorting anticipatory methods into experience-based, exploration-based and expertise-based categories to guide method selection.",
+      "reader_why": "A shared classification lets policymakers match forecasting or foresight methods to the question at hand.",
+      "reader_more": "The authors map the fast-growing field of anticipatory methods used in migration policy, spanning predictive models at one end and qualitative foresight at the other, and note the trend toward mixing quantitative and qualitative approaches and non-traditional data. Their contribution is a taxonomy with three core categories: experience-based, exploration-based and expertise-based methods. Each category is characterised by time horizon and maturity so a decision-maker can see which methods fit which context. The stated purpose is to help migration policy move from reactive to proactive. The paper is a conceptual and review contribution and does not test predictive accuracy.",
+      "deep_analysis": {
+        "work_kind": "conceptual/review paper proposing a taxonomy",
+        "research_question": "How can the range of anticipatory methods available to migration policymakers be systematically organised?",
+        "main_finding": "Anticipatory methods can be usefully organised into experience-based, exploration-based and expertise-based families, each with a characteristic time horizon and maturity.",
+        "method_or_basis": "Structured review and synthesis of forecasting and foresight methods, developed into a classification framework.",
+        "qualification": "The taxonomy is proposed and illustrated rather than empirically validated against method performance.",
+        "radar_relevance": "A geography-independent, reusable classification framework for anticipatory and foresight method selection.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1017/dap.2024.56 resolved to the matching Cambridge Data & Policy article page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/dap.2024.56 confirms title, the three authors and Data & Policy (2025), 7:e24."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the Cambridge open-access PDF (S2632324924000567a.pdf) and read the taxonomy sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/493E652497F13C2653BC9323F4DE9D60/S2632324924000567a.pdf/div-class-title-when-forecasting-and-foresight-meet-data-and-innovation-toward-a-taxonomy-of-anticipatory-methods-for-migration-policy-div.pdf",
+            "title": "When forecasting and foresight meet data and innovation: toward a taxonomy of anticipatory methods for migration policy (full PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Cambridge PDF read, including the policy significance statement and the construction of the three-category taxonomy."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper introduces a new three-category taxonomy (experience-, exploration- and expertise-based) for organising anticipatory methods, explicitly designed to help decision-makers select methods: a transferable classification framework rather than a single application."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1093/eurpub/ckaf161.353": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "c642009f",
+      "identity_hash": "1c1d258017b9d1c5",
+      "deep_analysis": {
+        "work_kind": "conference session abstract",
+        "research_question": "",
+        "main_finding": "The session showcases AI-supported horizon scanning, citizen science and group model building as foresight approaches for public health, illustrated by case studies.",
+        "method_or_basis": "Session description published as a conference supplement abstract; organised by the EUPHA Foresight section, RIVM and Instituto Superior Tecnico.",
+        "qualification": "A programme abstract, not a study: no method is developed, tested or compared, and the key messages are exhortations to innovate further.",
+        "radar_relevance": "Fails Strand B: the item describes and promotes existing foresight methods rather than contributing a new or materially improved one.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1093/eurpub/ckaf161.353 redirects to academic.oup.com/eurpub/article/doi/10.1093/eurpub/ckaf161.353/8302365, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1093/eurpub/ckaf161.353 confirms the session title, European Journal of Public Health and 2025-10-01."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the open-access deposit at PubMed Central, PMC12555468, served the complete published item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12555468/",
+            "title": "6.O. Scientific session: The future of foresight: how to apply innovative methods to strategic foresight (Eur J Public Health 35(Suppl 4))",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; the complete published item was recovered from PubMed Central. The item is a session description with organisers, chair and key messages, which is the whole published record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_METHOD_CONTRIBUTION",
+        "reason": "The record is a conference session abstract from the European Public Health Conference that showcases existing foresight approaches (AI, citizen science, group model building); it presents no new or materially improved method of its own."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1111/dpr.12789": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "a58db086",
+      "identity_hash": "209c4d4010389aea",
+      "deep_analysis": {
+        "work_kind": "exploratory policy study",
+        "research_question": "What are the challenges and opportunities of institutionalising science, technology and innovation foresight in sub-Saharan Africa?",
+        "main_finding": "Foresight is barely practised in sub-Saharan African STI policy processes, mainly because of low awareness, weak technical capacity and the absence of a foresight culture.",
+        "method_or_basis": "Literature review, bibliometric analysis, interviews, an online survey and focus groups with regional stakeholders and science granting councils.",
+        "qualification": "Exploratory and descriptive; the methods used are conventional and are applied to describe a region rather than to develop a technique.",
+        "radar_relevance": "Fails Strand B: a regional diagnosis of foresight uptake, not a reusable methodological contribution. Its subject is sub-Saharan Africa, so it also has no substantive European R&I connection.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1111/dpr.12789 redirects to onlinelibrary.wiley.com/doi/10.1111/dpr.12789, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1111/dpr.12789 confirms title, the three authors, Development Policy Review and June 2024."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the University of Pretoria institutional repository copy at repository.up.ac.za/bitstream/2263/98565/1/ served the full accepted article PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://repository.up.ac.za/bitstream/2263/98565/1/OumaMugabe_Institutionalizing_2024.pdf",
+            "title": "Institutionalizing foresight in science, technology, and innovation in sub-Saharan Africa (University of Pretoria repository copy)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; full text recovered from the University of Pretoria repository and read through motivation, methods, findings and policy implications."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_METHOD_CONTRIBUTION",
+        "reason": "An exploratory regional policy study of whether and how foresight is institutionalised in sub-Saharan African science and technology policy; it uses standard review, bibliometric, interview and survey techniques and contributes no new or materially improved method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1186/s12874-016-0186-3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "63157dbe",
+      "identity_hash": "0f39d4e28995665c",
+      "reader_title": "Comparing two ways of turning expert judgement into probability distributions for decision models",
+      "reader_what": "Histogram and hybrid elicitation gave similar decision conclusions; expert input cut decision uncertainty substantially.",
+      "reader_why": "It shows elicitation method choice matters less than doing elicitation at all when model parameters are missing.",
+      "reader_more": "When data needed for decision-model parameters are missing, formal elicitation of expert judgement can characterise the uncertainty. The authors asked clinical experts to express judgements as probability distributions using two methods, the histogram and the hybrid approach, presented in random order, within a prostate cancer cost-effectiveness model. Distributions were aggregated with and without weighting and fed into probabilistic analysis, and using expert opinion cut the expected value of perfect information at the thirty thousand pound per QALY threshold by 74 to 86 percent. Experts found the histogram method easier but felt the hybrid method captured their views more accurately. Only six of twenty-seven invited experts completed the task, which limits the comparison.",
+      "deep_analysis": {
+        "work_kind": "methodological comparison study",
+        "research_question": "Does the choice of expert elicitation method change the conclusions of a health technology assessment model?",
+        "main_finding": "The two elicitation methods produced broadly similar decision conclusions, while including expert opinion markedly reduced decision uncertainty.",
+        "method_or_basis": "Within-subject elicitation exercise with clinical experts, mathematical aggregation, and probabilistic cost-effectiveness and EVPI analysis.",
+        "qualification": "Only six experts completed the exercise, so the comparison between methods rests on a very small sample.",
+        "radar_relevance": "A transferable evaluation design for expert elicitation, relevant wherever expert judgement feeds quantitative assessment.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1186/s12874-016-0186-3 resolved to the matching open-access BMC Medical Research Methodology article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s12874-016-0186-3 confirms title, the four authors, BMC Medical Research Methodology and 26 July 2016."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://bmcmedresmethodol.biomedcentral.com/track/pdf/10.1186/s12874-016-0186-3",
+            "title": "A comparison of two methods for expert elicitation in health technology assessments (full PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full BMC open-access PDF read, including the elicitation protocol, aggregation approach, EVPI results and expert preference scores."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A head-to-head elicitation experiment comparing the histogram and hybrid methods for eliciting expert probability distributions, including their effect on decision uncertainty: a methodological comparison and evaluation design that transfers to any model-based assessment."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1093/idpl/ipag009": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "eb99bd6b",
+      "identity_hash": "f887b5948517803b",
+      "reader_title": "Why the EU's data protection rules keep spreading: path dependence and network effects",
+      "reader_what": "Argues GDPR's global reach is self-reinforcing: past choices locked in a regime whose value grows as members join.",
+      "reader_why": "Network effects explain why third countries adopt EU-style rules without the EU needing to compel them.",
+      "reader_more": "The article explains the global influence of the General Data Protection Regulation through two mechanisms. Path dependence accounts for how earlier European data-protection choices shaped the present regime and constrain its future. Network effects account for why the regime keeps growing: the more jurisdictions and firms operate inside it, the more valuable membership becomes, which holds existing members in and attracts newcomers. Together these make the EU's leading position self-reinforcing rather than merely coercive, and the authors read the Commission's proposed Digital Omnibus as pointing the same way. The analysis is theoretical and interpretive, and does not quantify adoption or the strength of the claimed effects.",
+      "deep_analysis": {
+        "work_kind": "theoretical legal/economic analysis",
+        "research_question": "What explains the global diffusion and persistence of the EU's data protection regime?",
+        "main_finding": "GDPR's global position is sustained by path dependence in its origins and by network effects that make continued membership of the regime increasingly attractive.",
+        "method_or_basis": "Application of path-dependence and network-effects theory to the history and current trajectory of EU data protection law.",
+        "qualification": "Theoretical argument rather than empirical measurement; the strength of the postulated network effects is not quantified.",
+        "radar_relevance": "Directly concerns the EU's regulatory power over data and digital technology, a core European technology-governance issue.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1093/idpl/ipag009 redirects to academic.oup.com/idpl/article/doi/10.1093/idpl/ipag009/8706447, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1093/idpl/ipag009 confirms title, Kositwatanarerk and Heine, International Data Privacy Law and 20 May 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the Erasmus University Rotterdam research portal copy at pure.eur.nl/ws/files/248513217/Path_dependence_GDPR.pdf served the CC-BY version of record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.eur.nl/ws/files/248513217/Path_dependence_GDPR.pdf",
+            "title": "Path dependence and network effects of the GDPR (EUR research portal, version of record, Int Data Privacy Law 16(2) ipag009)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; the CC-BY version of record was recovered from the Erasmus University research portal and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A theoretical analysis of how the EU's data protection regime acquired and sustains global influence, using path dependence and network effects, and connecting this to the Commission's proposed Digital Omnibus: substantive European technology-governance work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.2196/70323": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "efbbc8ea",
+      "identity_hash": "ad8f9d2a7d6364e5",
+      "reader_title": "Mapping how patent analysis is actually used in health technology horizon scanning",
+      "reader_what": "Reviews patent-based horizon scanning studies, mapping databases, retrieval methods and purposes to support standardised weak-signal detection.",
+      "reader_why": "Inconsistent deduplication across patent studies inflates counts, so shared practice standards change what scanning detects.",
+      "reader_more": "The review comes from the NIHR Innovation Observatory, the UK national horizon-scanning body, and surveys studies that use patent data to identify emerging health technologies. It asks which intellectual-property sources are used, by what retrieval and analysis methods, and for what purpose, identifying up to 47 patent databases with just over a quarter of studies using more than one. Most studies relied on patent databases alone, trend analysis was the most common objective, and a third used automated approaches, often with network visualisation tools. The authors warn that inconsistent deduplication risks inflating results and call for greater transparency and rigour. The review maps practice rather than testing which method detects innovation earliest.",
+      "deep_analysis": {
+        "work_kind": "rapid scoping review of methods",
+        "research_question": "How is patent analysis used within horizon scanning for health care technology, and how could it be standardised?",
+        "main_finding": "Patent analysis is widely used for trend detection in health technology horizon scanning, but inconsistent deduplication and reporting undermine comparability and risk data inflation.",
+        "method_or_basis": "Rapid scoping review of patent research studies, coding sources, retrieval methods, analysis tools and stated objectives.",
+        "qualification": "A rapid rather than full systematic review, and it maps reported practice rather than evaluating method performance.",
+        "radar_relevance": "Supports standardisation of weak-signal detection, a method directly reusable in horizon-scanning and radar work.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.2196/70323 resolved to the matching Interactive Journal of Medical Research article at i-jmr.org/2025/1/e70323."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.2196/70323 confirms title, the six NIHR Innovation Observatory authors and 11 September 2025."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The full open-access text was read from the PubMed Central deposit PMC12425427."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12425427/",
+            "title": "Horizon Scanning Methods for Health Care Technology Innovation Identification: Rapid Scoping Review of Patent Research Studies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read from PMC, including aims, the count of 47 patent databases, the automation and visualisation findings and the standardisation conclusion."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A rapid scoping review that maps patent databases, retrieval and analysis methods and their purposes in health technology horizon scanning, explicitly to support standardisation of weak-signal detection: an evidence-synthesis contribution to method practice."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1002/ffo2.201": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "886771f2",
+      "identity_hash": "13a09eb5e0b05b25",
+      "reader_title": "A horizon-scanning toolkit for environmental regulators facing waste crime",
+      "reader_what": "Builds a horizon-scanning toolkit and design principles helping regulators spot weak signals and act on emerging waste-crime threats.",
+      "reader_why": "Regulators need structured foresight because waste-crime patterns shift faster than historical-trend assumptions allow.",
+      "reader_more": "Waste crime damages the environment and undermines investment in the waste and resources industry, yet its scale and forms are poorly understood. The authors ask how environmental regulators can use horizon scanning to shape decisions and build resilience, reviewing academic and grey literature to identify organisational approaches and design principles for public-sector scanning. They then tested the outputs in a workshop with regulators, criminal intelligence staff and industry professionals. The resulting toolkit and guidance help users spot weak signals early, examine evidence on threats and opportunities, and act on strategically important issues. The work was funded through the EU LIFE SMART Waste project, and the authors note that integration with predictive and hotspot analytics remains future work.",
+      "deep_analysis": {
+        "work_kind": "method development and guidance paper",
+        "research_question": "How can horizon scanning be adopted by environmental regulators to shape decisions and build resilience to waste crime?",
+        "main_finding": "A structured horizon-scanning toolkit with agreed design principles enables regulators to detect weak signals, assess future threats and act on strategic issues.",
+        "method_or_basis": "Review of academic and grey literature on public-sector horizon scanning, followed by a stakeholder workshop with regulators, intelligence and industry participants.",
+        "qualification": "The toolkit is developed and workshopped but not yet evaluated in operational use, and integration with data analytics is flagged as outstanding.",
+        "radar_relevance": "A transferable public-sector horizon-scanning method and toolkit, directly applicable to Radar-style scanning work.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1002/ffo2.201 redirects to onlinelibrary.wiley.com/doi/10.1002/ffo2.201, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.201 confirms title, Garnett, Wilson and Wilkinson, Futures & Foresight Science and 11 November 2024."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: Cranfield CERES item 1826/23195, whose ORIGINAL bundle bitstream Using_Horizon_Scanning-2024.pdf was downloaded via the repository API."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://dspace.lib.cranfield.ac.uk/handle/1826/23195",
+            "title": "Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime (Cranfield CERES full-text deposit)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; the open-access version was recovered from Cranfield's repository via its DSpace API and read in full, including the toolkit design principles and funding acknowledgement (LIFE SMART Waste, LIFE13 ENV-UK-000549)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper builds a horizon-scanning toolkit and design principles for environmental regulators, grounded in a literature review and a stakeholder workshop: an explicit, transferable method and guidance product rather than a one-off application."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://doi.org/10.1186/s13011-024-00617-7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "f42b9a0d",
+      "identity_hash": "7569b83939e1a18f",
+      "reader_title": "Testing whether a Delphi panel's ten-year drug forecasts actually came true",
+      "reader_what": "Experts predicted continuing trends well but missed discontinuities, such as new synthetic drug uptake and stable prices.",
+      "reader_why": "Ex-post checks show where Delphi forecasts are trustworthy and where they systematically fail.",
+      "reader_more": "A Delphi panel conducted in Finland between 2009 and 2011 made predictions about drug use, markets, legislation and care. The authors test those predictions against what actually happened by 2020, using published statistics, survey results, official registers, wastewater analyses and official documents, cross-checking sources where possible. Experts correctly foresaw rising drug use, rising approval of drug use and the absence of legislative change, and correctly anticipated more lenient enforcement toward users and the merging of mental health and addiction care. They were wrong about a surge in new synthetic drugs and did not anticipate stable unit prices or rising buprenorphine misuse. The authors conclude that continuation of existing trends is easier to foresee than discontinuity.",
+      "deep_analysis": {
+        "work_kind": "ex-post validation study of a foresight method",
+        "research_question": "How accurate were expert Delphi predictions about drug-related developments over a ten-year horizon?",
+        "main_finding": "Delphi experts predicted the continuation of existing trends accurately but failed to anticipate discontinuities in drug markets and substance popularity.",
+        "method_or_basis": "Comparison of 2009-2011 Delphi panel predictions against 2020 register, survey, wastewater and official-document evidence, triangulated across sources.",
+        "qualification": "A single national Delphi exercise on one policy domain; the accuracy verdict may not generalise to other topics or panel designs.",
+        "radar_relevance": "Provides a reusable design for retrospectively validating Delphi and other expert-foresight methods.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1186/s13011-024-00617-7 resolved to the matching open-access article in Substance Abuse Treatment, Prevention, and Policy."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s13011-024-00617-7 confirms title, the five Finnish authors and 27 July 2024."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://substanceabusepolicy.biomedcentral.com/counter/pdf/10.1186/s13011-024-00617-7",
+            "title": "Delphi method applicability in drug foresight (full open-access PDF, SATPP 2024 19:35)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full BMC open-access PDF read; the prediction set, the 2020 verification sources and the topic-by-topic accuracy assessment are all present."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The study evaluates the accuracy of a 2009-2011 Delphi panel against a decade of registry, survey, wastewater and official data: a reusable ex-post validation design for testing whether foresight methods actually predict well."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:39:45Z",
+      "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
     }
   }
 }
