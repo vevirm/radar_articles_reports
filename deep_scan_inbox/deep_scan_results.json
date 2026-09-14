@@ -1,0 +1,3045 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-a-20260914T084920Z-588e5480cbde",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1016/j.technovation.2026.103600",
+      "source_hash": "fc051d32",
+      "identity_hash": "79c637ac0de5c11e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.technovation.2026.103600 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0166497226001355",
+            "title": "Auditing AI systems: Integrating ESG principles for sustainable and ethical AI deployment in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Develops an AI audit framework explicitly for sustainable and ethical AI deployment in the EU."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Auditing AI systems: Integrating ESG principles for sustainable and ethical AI deployment in the EU",
+      "reader_what": "An ESG-based audit framework prioritizes transparency, fairness and environmental trade-offs in AI governance.",
+      "reader_why": "It links operational AI auditing to EU regulatory and sustainability expectations.",
+      "reader_more": "An ESG-based audit framework prioritizes transparency, fairness and environmental trade-offs in AI governance. It links operational AI auditing to EU regulatory and sustainability expectations. Framework contribution; practical performance depends on implementation and data quality.",
+      "deep_analysis": {
+        "work_kind": "methodological/conceptual article",
+        "research_question": "",
+        "main_finding": "An ESG-based audit framework prioritizes transparency, fairness and environmental trade-offs in AI governance.",
+        "method_or_basis": "Fuzzy AHP and multicriteria optimization integrated into an ESG audit framework.",
+        "qualification": "Framework contribution; practical performance depends on implementation and data quality.",
+        "radar_relevance": "Directly concerns EU AI governance and sustainable innovation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/10301763.2026.2726657",
+      "source_hash": "53ed3a28",
+      "identity_hash": "24264f3d61bfad43",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Publisher full-text URL returned 403 in package retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "DOI 10.1080/10301763.2026.2726657 was confirmed through the journal listing, but direct article retrieval was blocked."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search found the Taylor & Francis journal listing marking the article Open Access, but not substantive article text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Search for title + Mercy Minoo Kavele + 2026 confirmed identity and publication date but yielded no primary full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Taylor & Francis journal pages confirmed the article; no institutional repository or author manuscript of the exact work was recovered."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Bounded searches using title fragments, author name and productivity/AI terms found secondary summaries and a related 2025 conference paper, not the exact substantive work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_listing",
+            "url": "https://www.tandfonline.com/journals/rlab20",
+            "title": "Digital adoption, AI integration, and labor productivity: empirical insights from the European Union",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity confirmed, but no substantive primary text was recovered after the full six-step ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but a substantive primary copy was not recovered after the mandatory ladder."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "empirical article",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Substantive evidence remained inaccessible.",
+        "radar_relevance": "EU labour productivity and AI adoption are clearly the topic, but admission is deferred.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s13132-026-03451-3",
+      "source_hash": "11f4b1e5",
+      "identity_hash": "0b7f7694f8f74773",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s13132-026-03451-3 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s13132-026-03451-3",
+            "title": "Network Positions and Knowledge Coordination in Multi-Actor Innovation Systems: Evidence from EIP-AGRI Operational Groups",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirically studies knowledge coordination and innovation outcomes in EU EIP-AGRI Operational Groups in Italy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Network Positions and Knowledge Coordination in Multi-Actor Innovation Systems: Evidence from EIP-AGRI Operational Groups",
+      "reader_what": "Network-core embeddedness is associated with better perceived project outcomes; brokerage positions perform worse.",
+      "reader_why": "It identifies coordination structures that can shape EU collaborative innovation effectiveness.",
+      "reader_more": "Network-core embeddedness is associated with better perceived project outcomes; brokerage positions perform worse. It identifies coordination structures that can shape EU collaborative innovation effectiveness. Outcome is perceived project performance and associations are not necessarily causal.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "",
+        "main_finding": "Network-core embeddedness is associated with better perceived project outcomes; brokerage positions perform worse.",
+        "method_or_basis": "Social network analysis plus beta regression on EIP-AGRI partner networks.",
+        "qualification": "Outcome is perceived project performance and associations are not necessarily causal.",
+        "radar_relevance": "Direct evidence on an EU research-and-innovation partnership instrument.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.sftr.2026.102116",
+      "source_hash": "d85ffcc8",
+      "identity_hash": "214eb54a4aeca07f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.sftr.2026.102116 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://doi.org/10.1016/j.sftr.2026.102116",
+            "title": "Decoding Innovation in Circular Economy: Investigating Policy Pathways for the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyzes policy drivers of circular-economy innovation across all 27 EU member states."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Decoding Innovation in Circular Economy: Investigating Policy Pathways for the European Union",
+      "reader_what": "Policy drivers of circular innovation differ across lower- and higher-performing EU countries.",
+      "reader_why": "It supports differentiated EU innovation policy rather than a uniform policy mix.",
+      "reader_more": "Policy drivers of circular innovation differ across lower- and higher-performing EU countries. It supports differentiated EU innovation policy rather than a uniform policy mix. Associations vary by innovation quantile and do not imply one universal policy recipe.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "",
+        "main_finding": "Policy drivers of circular innovation differ across lower- and higher-performing EU countries.",
+        "method_or_basis": "Panel quantile regression across EU-27, 2000–2022.",
+        "qualification": "Associations vary by innovation quantile and do not imply one universal policy recipe.",
+        "radar_relevance": "Substantive EU innovation-policy evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.2478/eoik-2026-0051",
+      "source_hash": "9c85a473",
+      "identity_hash": "d66caae1ed18f7be",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.2478/eoik-2026-0051 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://reference-global.com/article/10.2478/eoik-2026-0051",
+            "title": "FROM R&D INVESTMENT TO INNOVATION OUTPUT: EVIDENCE FROM TRANSFORMATION GAPS IN EU COUNTRIES",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Measures how EU countries convert R&D expenditure into innovation outputs and identifies transformation gaps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "R&D investment to innovation output: EVIDENCE FROM TRANSFORMATION GAPS IN EU COUNTRIES",
+      "reader_what": "EU countries differ substantially in converting R&D spending into patents and high-tech exports.",
+      "reader_why": "It shows why equal R&D spending increases may produce unequal innovation outcomes.",
+      "reader_more": "EU countries differ substantially in converting R&D spending into patents and high-tech exports. It shows why equal R&D spending increases may produce unequal innovation outcomes. Indicator depends on model specification and selected innovation outputs.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "",
+        "main_finding": "EU countries differ substantially in converting R&D spending into patents and high-tech exports.",
+        "method_or_basis": "Correlated random-effects panel model for EU-27, 2011–2024, with residual-based transformation gaps.",
+        "qualification": "Indicator depends on model specification and selected innovation outputs.",
+        "radar_relevance": "Directly concerns EU R&D and innovation performance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.eist.2026.101171",
+      "source_hash": "6869b5f1",
+      "identity_hash": "090b1d34977a4d93",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.eist.2026.101171 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2210422426000729",
+            "title": "From ambition to action: A systematic review of empirical literature on transformative innovation policy implementation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Systematic review finds empirical transformative-innovation-policy implementation studies are strongly concentrated in Europe."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "From ambition to action: A systematic review of empirical literature on transformative innovation policy implementation",
+      "reader_what": "A review of 65 cases identifies recurring implementation patterns and a Europe-heavy evidence base.",
+      "reader_why": "It organizes evidence relevant to designing and implementing transformative innovation policy.",
+      "reader_more": "A review of 65 cases identifies recurring implementation patterns and a Europe-heavy evidence base. It organizes evidence relevant to designing and implementing transformative innovation policy. Evidence is uneven geographically and civil-society participation is underrepresented.",
+      "deep_analysis": {
+        "work_kind": "systematic review",
+        "research_question": "",
+        "main_finding": "A review of 65 cases identifies recurring implementation patterns and a Europe-heavy evidence base.",
+        "method_or_basis": "Systematic review and thematic synthesis of 65 empirical case studies.",
+        "qualification": "Evidence is uneven geographically and civil-society participation is underrepresented.",
+        "radar_relevance": "Europe is a substantive concentration of the reviewed innovation-policy evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s43253-026-00180-w",
+      "source_hash": "fa0a70ba",
+      "identity_hash": "baf6eb0c0a7c6084",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s43253-026-00180-w matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s43253-026-00180-w",
+            "title": "Economic polarization in the European Union: development models in the race for the best location",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyzes EU development models with explicit technological-capability and institutional dimensions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Economic polarization in the European Union: development models in the race for the best location",
+      "reader_what": "EU integration is associated with persistent income divergence and four distinct development models.",
+      "reader_why": "Technological capability differences are part of the mechanisms separating EU development trajectories.",
+      "reader_more": "EU integration is associated with persistent income divergence and four distinct development models. Technological capability differences are part of the mechanisms separating EU development trajectories. Typologies simplify heterogeneous national trajectories.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "",
+        "main_finding": "EU integration is associated with persistent income divergence and four distinct development models.",
+        "method_or_basis": "Data-driven clustering and comparative macro-institutional analysis.",
+        "qualification": "Typologies simplify heterogeneous national trajectories.",
+        "radar_relevance": "Substantive European technology-capability and industrial-development evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/aiv2.70011",
+      "source_hash": "70870d55",
+      "identity_hash": "d2e79d0dfc3cfb4c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/aiv2.70011 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/aiv2.70011"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/aiv2.70011",
+            "title": "Who Owns the Output? Authorship, Creative Labour, and Innovation Capability in Human‐AI Collaboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_FAIL",
+        "reason": "The article is a global conceptual treatment of human-AI authorship and creative labour, not substantively European R&I."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Who Owns the Output? Authorship, Creative Labour, and Innovation Capability in Human‐AI Collaboration",
+      "reader_what": "Human-AI creative work requires new attribution and labour-governance frameworks.",
+      "reader_why": "Its main contribution is global creative-labour governance rather than European R&I.",
+      "reader_more": "Human-AI creative work requires new attribution and labour-governance frameworks. Its main contribution is global creative-labour governance rather than European R&I. Illustrative cases do not make Europe the substantive object of analysis.",
+      "deep_analysis": {
+        "work_kind": "conceptual article",
+        "research_question": "",
+        "main_finding": "Human-AI creative work requires new attribution and labour-governance frameworks.",
+        "method_or_basis": "Conceptual integration of creativity, authorship, digital-labour and innovation-management literatures.",
+        "qualification": "Illustrative cases do not make Europe the substantive object of analysis.",
+        "radar_relevance": "Fails Strand A European relevance despite innovation content.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s43681-026-01260-7",
+      "source_hash": "309e250a",
+      "identity_hash": "67df9f6b84934b9f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s43681-026-01260-7 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s43681-026-01260-7",
+            "title": "Governing AI as infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Applies a new infrastructure lens to six AI governance instruments including European governance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Governing AI as infrastructure",
+      "reader_what": "AI treated as infrastructure requires governance beyond tool-oriented regulatory assumptions.",
+      "reader_why": "The framework exposes governance gaps when AI becomes embedded and unavoidable.",
+      "reader_more": "AI treated as infrastructure requires governance beyond tool-oriented regulatory assumptions. The framework exposes governance gaps when AI becomes embedded and unavoidable. Normative/conceptual evaluation rather than measured policy effects.",
+      "deep_analysis": {
+        "work_kind": "conceptual comparative study",
+        "research_question": "",
+        "main_finding": "AI treated as infrastructure requires governance beyond tool-oriented regulatory assumptions.",
+        "method_or_basis": "Framework distinguishing tool and infrastructure properties, applied to six governance instruments.",
+        "qualification": "Normative/conceptual evaluation rather than measured policy effects.",
+        "radar_relevance": "Europe is substantively included in comparative AI governance analysis.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.48550/arxiv.2608.14568",
+      "source_hash": "a2616843",
+      "identity_hash": "40ecd6e77584120a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.48550/arxiv.2608.14568 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://arxiv.org/abs/2608.14568",
+            "title": "Position: AI Governance Needs ISO-like Interoperability Protocols, Not Just Laws",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_FAIL",
+        "reason": "The position paper is global and uses the EU AI Act as one example in a cross-jurisdictional argument."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Position: AI Governance Needs ISO-like Interoperability Protocols, Not Just Laws",
+      "reader_what": "Proposes machine-readable AI risk manifests and ISO-like interoperability protocols across jurisdictions.",
+      "reader_why": "The proposal targets global regulatory interoperability rather than European R&I specifically.",
+      "reader_more": "Proposes machine-readable AI risk manifests and ISO-like interoperability protocols across jurisdictions. The proposal targets global regulatory interoperability rather than European R&I specifically. Position paper; proposed benefits are not empirically demonstrated.",
+      "deep_analysis": {
+        "work_kind": "position paper",
+        "research_question": "",
+        "main_finding": "Proposes machine-readable AI risk manifests and ISO-like interoperability protocols across jurisdictions.",
+        "method_or_basis": "Conceptual proposal for standardized AI risk manifests and interoperable protocols.",
+        "qualification": "Position paper; proposed benefits are not empirically demonstrated.",
+        "radar_relevance": "EU law is a comparator/example, insufficient for Strand A.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.gmfus.org/geostrategy-work/transatlantic-security",
+      "source_hash": "2b379834",
+      "identity_hash": "316df623343b6e7a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.gmfus.org/geostrategy-work/transatlantic-security",
+            "title": "Transatlantic Security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_FAIL",
+        "reason": "The supplied object is a GMF programme landing page, not a discrete research work or substantive development."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "programme page"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The supplied GMF URL is an ongoing programme landing page, not a discrete research/policy paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Transatlantic Security",
+      "reader_what": "GMF describes an ongoing programme on transatlantic and European security priorities.",
+      "reader_why": "The page is institutional navigation and programme description, not a qualifying research output.",
+      "reader_more": "GMF describes an ongoing programme on transatlantic and European security priorities. The page is institutional navigation and programme description, not a qualifying research output. No single research question, method or evidence release is presented.",
+      "deep_analysis": {
+        "work_kind": "programme page",
+        "research_question": "",
+        "main_finding": "GMF describes an ongoing programme on transatlantic and European security priorities.",
+        "method_or_basis": "Programme description and links to separate insights.",
+        "qualification": "No single research question, method or evidence release is presented.",
+        "radar_relevance": "Generic programme page fails the admission criteria.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.205",
+      "source_hash": "b50d5fbc",
+      "identity_hash": "76c0422afde8be35",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.205 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.205"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.205",
+            "title": "The Scenario Quality Assessment Method: A New Technique for Verifying the Quality of Scenarios",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Introduces and empirically checks a new Scenario Quality Assessment Method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The Scenario Quality Assessment Method: A New Technique for Verifying the Quality of Scenarios",
+      "reader_what": "A new assessment method combines critical-thinking and creativity criteria to rate scenario quality.",
+      "reader_why": "It gives practitioners a repeatable way to assess scenario rigor.",
+      "reader_more": "A new assessment method combines critical-thinking and creativity criteria to rate scenario quality. It gives practitioners a repeatable way to assess scenario rigor. Initial empirical verification is in a crisis-management context.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "A new assessment method combines critical-thinking and creativity criteria to rate scenario quality.",
+        "method_or_basis": "Scenario quality criteria developed from literature and checked for inter-rater reliability.",
+        "qualification": "Initial empirical verification is in a crisis-management context.",
+        "radar_relevance": "Clear reusable foresight assessment method.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.197",
+      "source_hash": "0308b9d9",
+      "identity_hash": "1e036809265588af",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.197 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://publica-rest.fraunhofer.de/server/api/core/bitstreams/a44b0a0e-53ff-4095-bd0d-6ead9ad43aac/content"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/a44b0a0e-53ff-4095-bd0d-6ead9ad43aac/content",
+            "title": "Understanding Foresight‐Policy Interactions: The Role of Institutionalization",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Analyzes institutionalization of governmental foresight but does not introduce a reusable method or evaluation design."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Understanding Foresight‐Policy Interactions: The Role of Institutionalization",
+      "reader_what": "Institutional routines and structures shape how foresight is absorbed into policy-making.",
+      "reader_why": "The contribution is explanatory and conceptual rather than a new transferable method.",
+      "reader_more": "Institutional routines and structures shape how foresight is absorbed into policy-making. The contribution is explanatory and conceptual rather than a new transferable method. Single-country illustration and no new reusable method.",
+      "deep_analysis": {
+        "work_kind": "conceptual/empirical article",
+        "research_question": "",
+        "main_finding": "Institutional routines and structures shape how foresight is absorbed into policy-making.",
+        "method_or_basis": "Public-administration perspective illustrated with German federal-government cases.",
+        "qualification": "Single-country illustration and no new reusable method.",
+        "radar_relevance": "Fails Strand B methodological-contribution threshold.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.172",
+      "source_hash": "bf1fc4be",
+      "identity_hash": "472ddfd447e3de64",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.172 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.172"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ffo2.172",
+            "title": "Quality indicators for Delphi studies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a defined battery of quality indicators for Delphi studies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Quality indicators for Delphi studies",
+      "reader_what": "A practical indicator set helps authors report and readers assess Delphi-study quality.",
+      "reader_why": "It makes Delphi rigor more transparent and comparable across studies.",
+      "reader_more": "A practical indicator set helps authors report and readers assess Delphi-study quality. It makes Delphi rigor more transparent and comparable across studies. Indicators support quality assessment but do not eliminate judgement.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "A practical indicator set helps authors report and readers assess Delphi-study quality.",
+        "method_or_basis": "Literature-based design of quality indicators for expert group, contribution and process performance.",
+        "qualification": "Indicators support quality assessment but do not eliminate judgement.",
+        "radar_relevance": "Reusable measurement and reporting approach.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.165",
+      "source_hash": "2c9ea75b",
+      "identity_hash": "13c4c08aaf2b390c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.165 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.165"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.165",
+            "title": "A probabilistic cross‐impact methodology for explorative scenario analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops a probabilistic cross-impact methodology for exploratory scenario analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A probabilistic cross‐impact methodology for explorative scenario analysis",
+      "reader_what": "A probabilistic cross-impact approach structures dependencies among uncertain scenario factors.",
+      "reader_why": "It gives scenario analysts a transferable quantitative method for internally coherent scenario construction.",
+      "reader_more": "A probabilistic cross-impact approach structures dependencies among uncertain scenario factors. It gives scenario analysts a transferable quantitative method for internally coherent scenario construction. Results depend on elicited probabilities and dependency assumptions.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "A probabilistic cross-impact approach structures dependencies among uncertain scenario factors.",
+        "method_or_basis": "Probabilistic cross-impact scenario methodology.",
+        "qualification": "Results depend on elicited probabilities and dependency assumptions.",
+        "radar_relevance": "Clear reusable foresight method.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s40309-015-0079-4",
+      "source_hash": "d5208c2a",
+      "identity_hash": "232ed018ed2b90e8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s40309-015-0079-4 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s40309-015-0079-4",
+            "title": "A new path in foresight validation? Discussing the socio-epistemic underpinning of foresight quality criteria",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Introduces a social-epistemic validation framework for assessing foresight quality criteria."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A new path in foresight validation? Discussing the socio-epistemic underpinning of foresight quality criteria",
+      "reader_what": "Social epistemology provides a framework for testing whether foresight quality criteria support valid criticism.",
+      "reader_why": "It offers a transferable basis for evaluating the quality criteria used in foresight.",
+      "reader_more": "Social epistemology provides a framework for testing whether foresight quality criteria support valid criticism. It offers a transferable basis for evaluating the quality criteria used in foresight. Demonstrated on one set of criteria and requires broader testing.",
+      "deep_analysis": {
+        "work_kind": "methodological/conceptual article",
+        "research_question": "",
+        "main_finding": "Social epistemology provides a framework for testing whether foresight quality criteria support valid criticism.",
+        "method_or_basis": "Longino-inspired transformative-criticism framework applied to foresight quality criteria.",
+        "qualification": "Demonstrated on one set of criteria and requires broader testing.",
+        "radar_relevance": "Reusable analytical framework for foresight validation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s40309-014-0040-y",
+      "source_hash": "21922616",
+      "identity_hash": "6a7d06d830188a69",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s40309-014-0040-y matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s40309-014-0040-y",
+            "title": "Design and application for a replicable foresight methodology bridging quantitative and qualitative expert data",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Designs a replicable hybrid foresight methodology combining quantitative and qualitative expert data."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Design and application for a replicable foresight methodology bridging quantitative and qualitative expert data",
+      "reader_what": "The E-lab approach combines expert methods and electronic group support into a replicable foresight process.",
+      "reader_why": "It provides a transferable design for integrating qualitative and quantitative expert evidence.",
+      "reader_more": "The E-lab approach combines expert methods and electronic group support into a replicable foresight process. It provides a transferable design for integrating qualitative and quantitative expert evidence. Effectiveness depends on facilitation and expert selection.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "The E-lab approach combines expert methods and electronic group support into a replicable foresight process.",
+        "method_or_basis": "Hybrid expert foresight using Nominal Group Technique and Group Support Systems.",
+        "qualification": "Effectiveness depends on facilitation and expert selection.",
+        "radar_relevance": "Explicit reusable foresight methodology.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2025.103539",
+      "source_hash": "65366b65",
+      "identity_hash": "b1a1fc3697893775",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.futures.2025.103539 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://re.public.polimi.it/bitstream/11311/1297792/1/Pace_Bruno_Schwarz_2025_PersonasInScenarioBuilding.pdf",
+            "title": "Personas in scenario building: Integrating human-centred design methods in foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Provides recommendations for systematically incorporating personas into scenario building."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Personas in scenario building: Integrating human-centred design methods in foresight",
+      "reader_what": "Persona characteristics can be matched to different roles in scenario building and prospective sensemaking.",
+      "reader_why": "It gives foresight practitioners a structured way to integrate human-centred design.",
+      "reader_more": "Persona characteristics can be matched to different roles in scenario building and prospective sensemaking. It gives foresight practitioners a structured way to integrate human-centred design. Recommendations require further testing across settings.",
+      "deep_analysis": {
+        "work_kind": "methodological review",
+        "research_question": "",
+        "main_finding": "Persona characteristics can be matched to different roles in scenario building and prospective sensemaking.",
+        "method_or_basis": "Analysis of case studies linking persona design features to scenario-building roles.",
+        "qualification": "Recommendations require further testing across settings.",
+        "radar_relevance": "Material methodological integration of design and foresight.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-03-2012-0017",
+      "source_hash": "7a290fb1",
+      "identity_hash": "46b0ca3043aacb60",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-03-2012-0017 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://publications.hse.ru/pubs/share/folder/0w1rpvdwwl/146415449.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://publications.hse.ru/pubs/share/folder/0w1rpvdwwl/146415449.pdf",
+            "title": "Foresight evaluation: lessons from project management",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Improves foresight evaluation by importing structured evaluation elements from project management."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight evaluation: lessons from project management",
+      "reader_what": "Project-management evaluation practices can strengthen foresight evaluation models, metrics and transparency.",
+      "reader_why": "It provides reusable improvements for designing and reporting foresight evaluations.",
+      "reader_more": "Project-management evaluation practices can strengthen foresight evaluation models, metrics and transparency. It provides reusable improvements for designing and reporting foresight evaluations. Recommendations are literature-derived rather than tested in one standardized protocol.",
+      "deep_analysis": {
+        "work_kind": "methodological review",
+        "research_question": "",
+        "main_finding": "Project-management evaluation practices can strengthen foresight evaluation models, metrics and transparency.",
+        "method_or_basis": "Comparative review of project and foresight evaluation frameworks.",
+        "qualification": "Recommendations are literature-derived rather than tested in one standardized protocol.",
+        "radar_relevance": "Reusable evaluation-framework contribution.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/14636681211210378",
+      "source_hash": "0c9942b9",
+      "identity_hash": "553bccd0f6a61937",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/14636681211210378 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://research.manchester.ac.uk/en/publications/dynamic-foresight-evaluation/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://research.manchester.ac.uk/en/publications/dynamic-foresight-evaluation/",
+            "title": "Dynamic foresight evaluation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Reframes foresight programmes as extended service encounters and derives a dynamic evaluation approach."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Dynamic foresight evaluation",
+      "reader_what": "Dynamic evaluation follows how foresight activities generate outcomes across stakeholders and policy stages.",
+      "reader_why": "It expands evaluation beyond static end-point measures.",
+      "reader_more": "Dynamic evaluation follows how foresight activities generate outcomes across stakeholders and policy stages. It expands evaluation beyond static end-point measures. Primarily conceptual and illustrated through cases.",
+      "deep_analysis": {
+        "work_kind": "conceptual methodological article",
+        "research_question": "",
+        "main_finding": "Dynamic evaluation follows how foresight activities generate outcomes across stakeholders and policy stages.",
+        "method_or_basis": "Service-process perspective linking foresight stages, stakeholders and policy cycles.",
+        "qualification": "Primarily conceptual and illustrated through cases.",
+        "radar_relevance": "Reusable evaluation framework for foresight programmes.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s44498-026-00170-5",
+      "source_hash": "b11199cc",
+      "identity_hash": "bc6df09efa6a2b33",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s44498-026-00170-5 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s44498-026-00170-5",
+            "title": "Robust policy evaluation in material flow analysis under deep uncertainty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a novel robust policy-evaluation framework for material-flow analysis under deep uncertainty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Robust policy evaluation in material flow analysis under deep uncertainty",
+      "reader_what": "A robust evaluation framework avoids overstating knowledge when material-flow data are scarce.",
+      "reader_why": "It offers a transferable policy-analysis method for deep uncertainty.",
+      "reader_more": "A robust evaluation framework avoids overstating knowledge when material-flow data are scarce. It offers a transferable policy-analysis method for deep uncertainty. Demonstrated in a specific material-flow case.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "A robust evaluation framework avoids overstating knowledge when material-flow data are scarce.",
+        "method_or_basis": "Exploratory modelling/robust policy evaluation integrated with material flow analysis.",
+        "qualification": "Demonstrated in a specific material-flow case.",
+        "radar_relevance": "Clear reusable analytical framework.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s10308-026-00785-0",
+      "source_hash": "f917b358",
+      "identity_hash": "3bbf9bc437f8934f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s10308-026-00785-0 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1007/s10308-026-00785-0",
+            "title": "China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Examines how China’s dual-circulation strategy affects European industry through the electric-vehicle sector."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle",
+      "reader_what": "China’s industrial strategy creates competitiveness and dependency challenges for Europe’s electric-vehicle industry.",
+      "reader_why": "It directly informs European industrial-capability and strategic-dependency policy.",
+      "reader_more": "China’s industrial strategy creates competitiveness and dependency challenges for Europe’s electric-vehicle industry. It directly informs European industrial-capability and strategic-dependency policy. Sector-focused and shaped by evolving trade-policy conditions.",
+      "deep_analysis": {
+        "work_kind": "empirical/policy study",
+        "research_question": "",
+        "main_finding": "China’s industrial strategy creates competitiveness and dependency challenges for Europe’s electric-vehicle industry.",
+        "method_or_basis": "Case analysis of Chinese strategy and European EV industry impacts.",
+        "qualification": "Sector-focused and shaped by evolving trade-policy conditions.",
+        "radar_relevance": "Direct European industrial and innovation relevance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.erss.2026.104895",
+      "source_hash": "cac05341",
+      "identity_hash": "be7aeca5a5df010a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.erss.2026.104895 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.sciencedirect.com/science/article/pii/S221462962600366X",
+            "title": "Uncovering the directionality of innovation in artificial intelligence for energy transitions: A global perspective on the twin transition using patent analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops an anticipatory patent-analysis framework spanning geography, actors, sectors and functions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Uncovering the directionality of innovation in artificial intelligence for energy transitions: A global perspective on the twin transition",
+      "reader_what": "Patent data are organized into a four-dimensional framework for tracking AI-energy innovation directionality.",
+      "reader_why": "It offers a transferable way to use patents as upstream indicators of emerging innovation orientation.",
+      "reader_more": "Patent data are organized into a four-dimensional framework for tracking AI-energy innovation directionality. It offers a transferable way to use patents as upstream indicators of emerging innovation orientation. Patents capture codified inventive activity, not all innovation.",
+      "deep_analysis": {
+        "work_kind": "methodological empirical study",
+        "research_question": "",
+        "main_finding": "Patent data are organized into a four-dimensional framework for tracking AI-energy innovation directionality.",
+        "method_or_basis": "Patent landscape analysis plus a proposed anticipatory framework.",
+        "qualification": "Patents capture codified inventive activity, not all innovation.",
+        "radar_relevance": "Reusable measurement/foresight framework; qualifies under Strand B.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-06-2022-0069",
+      "source_hash": "c71ed75c",
+      "identity_hash": "908a786fee229955",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-06-2022-0069 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://www.emerald.com/fs/article-abstract/25/6/769/188777/Foresight-and-strategic-decision-making-framework"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.emerald.com/fs/article-abstract/25/6/769/188777/Foresight-and-strategic-decision-making-framework",
+            "title": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Constructs a strategic decision-making framework linking AI technology foresight to SME utilization choices."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+      "reader_what": "A combined Delphi and strategic-analysis process links AI development signals to SME strategy choices.",
+      "reader_why": "It provides a reusable decision framework for technology adoption under uncertainty.",
+      "reader_more": "A combined Delphi and strategic-analysis process links AI development signals to SME strategy choices. It provides a reusable decision framework for technology adoption under uncertainty. Evidence is application-specific and broader validation is needed.",
+      "deep_analysis": {
+        "work_kind": "methodological empirical study",
+        "research_question": "",
+        "main_finding": "A combined Delphi and strategic-analysis process links AI development signals to SME strategy choices.",
+        "method_or_basis": "Expert panels, Delphi and strategic analysis in a staged framework.",
+        "qualification": "Evidence is application-specific and broader validation is needed.",
+        "radar_relevance": "Material reusable framework rather than mere case application.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.70015",
+      "source_hash": "e786c12d",
+      "identity_hash": "50d30bd77e1817d3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.70015 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.70015"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.70015",
+            "title": "Interactive Horizon Scanning of the Forest Bioeconomy With a Nested Business Environment Framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Pilots an interactive horizon-scanning method using a nested business-environment framework."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Interactive Horizon Scanning of the Forest Bioeconomy With a Nested Business Environment Framework",
+      "reader_what": "Interactive horizon scanning uses the NEST framework to collect and interpret weak signals with stakeholders.",
+      "reader_why": "It gives organizations a participatory method for turning signals into decision-relevant futures information.",
+      "reader_more": "Interactive horizon scanning uses the NEST framework to collect and interpret weak signals with stakeholders. It gives organizations a participatory method for turning signals into decision-relevant futures information. Piloted in the forest bioeconomy and needs testing in other sectors.",
+      "deep_analysis": {
+        "work_kind": "methodological case study",
+        "research_question": "",
+        "main_finding": "Interactive horizon scanning uses the NEST framework to collect and interpret weak signals with stakeholders.",
+        "method_or_basis": "Stakeholder horizon scanning plus nested business-environment signal interpretation.",
+        "qualification": "Piloted in the forest bioeconomy and needs testing in other sectors.",
+        "radar_relevance": "Reusable horizon-scanning procedure.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.146",
+      "source_hash": "4b6d2181",
+      "identity_hash": "1ac65ccf1af54c87",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.146 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.146"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ffo2.146",
+            "title": "The value of experiments in futures and foresight science as illustrated by the case of scenario planning",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops methodological guidance on experimental designs for testing foresight tools."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The value of experiments in futures and foresight science as illustrated by the case of scenario planning",
+      "reader_what": "Conceptual versus direct replication can make experiments more useful for evaluating foresight methods.",
+      "reader_why": "It strengthens how foresight methods can be tested for effectiveness.",
+      "reader_more": "Conceptual versus direct replication can make experiments more useful for evaluating foresight methods. It strengthens how foresight methods can be tested for effectiveness. Argument is methodological and conceptual rather than a new field trial.",
+      "deep_analysis": {
+        "work_kind": "methodological/conceptual article",
+        "research_question": "",
+        "main_finding": "Conceptual versus direct replication can make experiments more useful for evaluating foresight methods.",
+        "method_or_basis": "Critical-realist analysis of experimental design and units of analysis in foresight research.",
+        "qualification": "Argument is methodological and conceptual rather than a new field trial.",
+        "radar_relevance": "Reusable evaluation-design contribution.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ev.20608",
+      "source_hash": "b4c2c914",
+      "identity_hash": "4ede86de87e9a470",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ev.20608 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/ev.20608"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ev.20608",
+            "title": "Adapting and combining foresight and ex ante impact pathway evaluation for place‐based research planning with stakeholders",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Combines foresight with ex ante impact-pathway evaluation for place-based research planning."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Adapting and combining foresight and ex ante impact pathway evaluation for place‐based research planning with stakeholders",
+      "reader_what": "Foresight before impact-pathway design broadens actors, assumptions and possible impacts considered.",
+      "reader_why": "The combination helps evaluation teams design more plausible and systemic research pathways.",
+      "reader_more": "Foresight before impact-pathway design broadens actors, assumptions and possible impacts considered. The combination helps evaluation teams design more plausible and systemic research pathways. Requires skilled facilitation and evaluative judgement.",
+      "deep_analysis": {
+        "work_kind": "methodological case article",
+        "research_question": "",
+        "main_finding": "Foresight before impact-pathway design broadens actors, assumptions and possible impacts considered.",
+        "method_or_basis": "Integrated foresight plus ex ante impact-pathway procedure illustrated in three cases.",
+        "qualification": "Requires skilled facilitation and evaluative judgement.",
+        "radar_relevance": "Reusable combined evaluation/foresight procedure.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/dpr.12790",
+      "source_hash": "5b30c492",
+      "identity_hash": "ecfbb15e9df99787",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1111/dpr.12790 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/10.1111/dpr.12790"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1111/dpr.12790",
+            "title": "Foresight and futures thinking for international development co‐operation: Promises and pitfalls",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Discusses promises and pitfalls of foresight in development cooperation without introducing a new reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight and futures thinking for international development co‐operation: Promises and pitfalls",
+      "reader_what": "Development practitioners can use foresight, but adoption brings organizational and implementation pitfalls.",
+      "reader_why": "The paper is guidance and reflection rather than a distinct methodological contribution.",
+      "reader_more": "Development practitioners can use foresight, but adoption brings organizational and implementation pitfalls. The paper is guidance and reflection rather than a distinct methodological contribution. No new transferable analytical or evaluation method is specified.",
+      "deep_analysis": {
+        "work_kind": "review/commentary",
+        "research_question": "",
+        "main_finding": "Development practitioners can use foresight, but adoption brings organizational and implementation pitfalls.",
+        "method_or_basis": "Synthesis of development-cooperation foresight issues.",
+        "qualification": "No new transferable analytical or evaluation method is specified.",
+        "radar_relevance": "Fails Strand B method threshold.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/dpr.12778",
+      "source_hash": "3f45a65d",
+      "identity_hash": "a636f499ca4d308f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1111/dpr.12778 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1111/dpr.12778"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/dpr.12778",
+            "title": "Anticipatory Development Foresight: An approach for international and multilateral organizations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Presents an Anticipatory Development Foresight approach with four transferable institutional levers."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Anticipatory Development Foresight: An approach for international and multilateral organizations",
+      "reader_what": "Four levers help institutions embed anticipatory, context-sensitive foresight into policy and planning systems.",
+      "reader_why": "It shifts foresight from one-off tools toward institutionalized anticipatory capability.",
+      "reader_more": "Four levers help institutions embed anticipatory, context-sensitive foresight into policy and planning systems. It shifts foresight from one-off tools toward institutionalized anticipatory capability. Evidence is experiential and largely qualitative.",
+      "deep_analysis": {
+        "work_kind": "methodological practice article",
+        "research_question": "",
+        "main_finding": "Four levers help institutions embed anticipatory, context-sensitive foresight into policy and planning systems.",
+        "method_or_basis": "Qualitative synthesis of UNDP Asia-Pacific practice into an emergent institutional framework.",
+        "qualification": "Evidence is experiential and largely qualitative.",
+        "radar_relevance": "Reusable framework for institutionalizing anticipation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1038/s41598-022-16803-1",
+      "source_hash": "309b3fb4",
+      "identity_hash": "42a6afdd17ccb452",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1038/s41598-022-16803-1 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9316866/",
+            "title": "Horizon scanning process to foresight emerging issues in Arabsphere's water vision",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Defines and demonstrates a structured horizon-scanning process for emerging water issues."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon scanning process to foresight emerging issues in Arabsphere's water vision",
+      "reader_what": "A horizon-scanning process identifies and organizes emerging issues for long-range water planning.",
+      "reader_why": "It provides a repeatable foresight process for surfacing weak signals and emerging risks.",
+      "reader_more": "A horizon-scanning process identifies and organizes emerging issues for long-range water planning. It provides a repeatable foresight process for surfacing weak signals and emerging risks. Regional application may require adaptation elsewhere.",
+      "deep_analysis": {
+        "work_kind": "methodological empirical study",
+        "research_question": "",
+        "main_finding": "A horizon-scanning process identifies and organizes emerging issues for long-range water planning.",
+        "method_or_basis": "Structured horizon scanning applied to Arabsphere water futures.",
+        "qualification": "Regional application may require adaptation elsewhere.",
+        "radar_relevance": "Reusable horizon-scanning method.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.141",
+      "source_hash": "e3664498",
+      "identity_hash": "d4fb18b43d8c33ca",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.141 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://cir.nii.ac.jp/crid/1360584345423983232"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://cir.nii.ac.jp/crid/1360584345423983232",
+            "title": "Computer‐aided scenario design using participatory backcasting: A case study of sustainable vision creation in a Japanese city",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Combines participatory backcasting with computer-aided scenario design."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Computer‐aided scenario design using participatory backcasting: A case study of sustainable vision creation in a Japanese city",
+      "reader_what": "Computer support structures participatory backcasting to create sustainability visions and pathways.",
+      "reader_why": "It offers a transferable process for linking stakeholder participation with formal scenario design.",
+      "reader_more": "Computer support structures participatory backcasting to create sustainability visions and pathways. It offers a transferable process for linking stakeholder participation with formal scenario design. Demonstrated in one Japanese city.",
+      "deep_analysis": {
+        "work_kind": "methodological case study",
+        "research_question": "",
+        "main_finding": "Computer support structures participatory backcasting to create sustainability visions and pathways.",
+        "method_or_basis": "Computer-aided participatory backcasting and scenario design.",
+        "qualification": "Demonstrated in one Japanese city.",
+        "radar_relevance": "Reusable scenario-design method.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-10-2021-0189",
+      "source_hash": "441830c5",
+      "identity_hash": "e5207c8ea42c86b7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-10-2021-0189 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://publications.hse.ru/en/articles/631503853"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://publications.hse.ru/en/articles/631503853",
+            "title": "An integrated approach for the evaluation of corporate foresight: the example of a Russian corporation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops an integrated framework for evaluating corporate foresight throughout its implementation stages."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "An integrated approach for the evaluation of corporate foresight: the example of a Russian corporation",
+      "reader_what": "An integrated evaluation framework links foresight stages to criteria covering design, process, results and impact.",
+      "reader_why": "It supports systematic corporate-foresight evaluation from setup through effects.",
+      "reader_more": "An integrated evaluation framework links foresight stages to criteria covering design, process, results and impact. It supports systematic corporate-foresight evaluation from setup through effects. Pilot testing is limited to one organization.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "An integrated evaluation framework links foresight stages to criteria covering design, process, results and impact.",
+        "method_or_basis": "Literature-derived evaluation criteria mapped to stages and tested in a Russian corporation.",
+        "qualification": "Pilot testing is limited to one organization.",
+        "radar_relevance": "Clear reusable evaluation framework.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s40309-024-00246-0",
+      "source_hash": "9851a41c",
+      "identity_hash": "c6b84703e335ae00",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1186/s40309-024-00246-0 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://link.springer.com/article/10.1186/s40309-024-00246-0",
+            "title": "The role of foresight in public policy: lessons from deliberative democracy and perspectival realism",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Provides conceptual lessons for foresight in public policy but not a distinct reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The role of foresight in public policy: lessons from deliberative democracy and perspectival realism",
+      "reader_what": "Deliberative democracy and perspectival realism help explain the public-policy role of foresight.",
+      "reader_why": "The contribution is philosophical and policy-oriented rather than methodological.",
+      "reader_more": "Deliberative democracy and perspectival realism help explain the public-policy role of foresight. The contribution is philosophical and policy-oriented rather than methodological. No new transferable procedure, metric or evaluation design is specified.",
+      "deep_analysis": {
+        "work_kind": "conceptual article",
+        "research_question": "",
+        "main_finding": "Deliberative democracy and perspectival realism help explain the public-policy role of foresight.",
+        "method_or_basis": "Theoretical synthesis of foresight, deliberation and perspectival realism.",
+        "qualification": "No new transferable procedure, metric or evaluation design is specified.",
+        "radar_relevance": "Fails Strand B method threshold.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1088/1757-899x/1308/1/012008",
+      "source_hash": "d01bb046",
+      "identity_hash": "427e8706c74c7f8d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1088/1757-899x/1308/1/012008 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://doi.org/10.1088/1757-899X/1308/1/012008",
+            "title": "Technology foresight: Capturing the benefits from nuclear science technology and innovation in Malaysian Nuclear Agency",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Applies technology foresight within the Malaysian Nuclear Agency without a material new method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Technology foresight: Capturing the benefits from nuclear science technology and innovation in Malaysian Nuclear Agency",
+      "reader_what": "Technology foresight is used to identify benefits and directions for Malaysian nuclear R&D and innovation.",
+      "reader_why": "The case demonstrates use of foresight rather than a new transferable methodology.",
+      "reader_more": "Technology foresight is used to identify benefits and directions for Malaysian nuclear R&D and innovation. The case demonstrates use of foresight rather than a new transferable methodology. Application-specific and does not materially improve the method itself.",
+      "deep_analysis": {
+        "work_kind": "case study",
+        "research_question": "",
+        "main_finding": "Technology foresight is used to identify benefits and directions for Malaysian nuclear R&D and innovation.",
+        "method_or_basis": "Technology-foresight application in a national nuclear agency.",
+        "qualification": "Application-specific and does not materially improve the method itself.",
+        "radar_relevance": "Fails Strand B because it mainly applies existing foresight.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.96",
+      "source_hash": "51bfe782",
+      "identity_hash": "4a0ab89720414b57",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.96 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.96"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.96",
+            "title": "Identity Wind Tunneling: A method for discovering an organization’s strategic identity using scenarios",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Introduces Identity Wind Tunneling as a new organizational foresight method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Identity Wind Tunneling: A method for discovering an organization’s strategic identity using scenarios",
+      "reader_what": "Identity Wind Tunneling tests organizational identities across scenarios to identify a robust strategic identity.",
+      "reader_why": "It gives organizations a repeatable method for aligning identity with uncertain futures.",
+      "reader_more": "Identity Wind Tunneling tests organizational identities across scenarios to identify a robust strategic identity. It gives organizations a repeatable method for aligning identity with uncertain futures. Case demonstration does not establish universal effectiveness.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "Identity Wind Tunneling tests organizational identities across scenarios to identify a robust strategic identity.",
+        "method_or_basis": "Step-by-step extension of wind tunneling with scenario-based identity testing.",
+        "qualification": "Case demonstration does not establish universal effectiveness.",
+        "radar_relevance": "Explicit new reusable foresight method.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.techfore.2026.124836",
+      "source_hash": "260e146e",
+      "identity_hash": "526f6d33e198c5cc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.techfore.2026.124836 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162526003136",
+            "title": "The role of group composition in collaborative foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a conceptual framework for configuring group composition in collaborative foresight."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The role of group composition in collaborative foresight",
+      "reader_what": "Group heterogeneity and homogeneity across different attributes shape cognition in collaborative foresight.",
+      "reader_why": "The framework helps practitioners design groups to challenge or preserve mental models deliberately.",
+      "reader_more": "Group heterogeneity and homogeneity across different attributes shape cognition in collaborative foresight. The framework helps practitioners design groups to challenge or preserve mental models deliberately. Framework is conceptual and requires empirical testing.",
+      "deep_analysis": {
+        "work_kind": "systematic review/methodological framework",
+        "research_question": "",
+        "main_finding": "Group heterogeneity and homogeneity across different attributes shape cognition in collaborative foresight.",
+        "method_or_basis": "Systematic literature review plus multidimensional group-composition framework.",
+        "qualification": "Framework is conceptual and requires empirical testing.",
+        "radar_relevance": "Reusable analytical/design framework.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-02-2024-0025",
+      "source_hash": "ec4215e2",
+      "identity_hash": "7427f9a0e8732d5e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-02-2024-0025 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://www.nafeezahmed.net/thecuttingedge/2025/1/29/the-planetary-phase-shift-a-theory-for-our-times"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.nafeezahmed.net/thecuttingedge/2025/1/29/the-planetary-phase-shift-a-theory-for-our-times",
+            "title": "“Planetary phase shift” as a new systems framework to navigate the evolutionary transformation of human civilisation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Introduces a new planetary systems framework intended to support collective forward intelligence and scenario construction."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "“Planetary phase shift” as a new systems framework to navigate the evolutionary transformation of human civilisation",
+      "reader_what": "The planetary phase-shift framework integrates cross-system data to interpret civilizational transformation.",
+      "reader_why": "It offers a systems lens for building and testing long-range foresight narratives.",
+      "reader_more": "The planetary phase-shift framework integrates cross-system data to interpret civilizational transformation. It offers a systems lens for building and testing long-range foresight narratives. Broad synthesis; empirical validation across contexts remains needed.",
+      "deep_analysis": {
+        "work_kind": "conceptual methodological article",
+        "research_question": "",
+        "main_finding": "The planetary phase-shift framework integrates cross-system data to interpret civilizational transformation.",
+        "method_or_basis": "Integrated systems framework spanning ecological, energy, technological, political and economic dynamics.",
+        "qualification": "Broad synthesis; empirical validation across contexts remains needed.",
+        "radar_relevance": "New transferable analytical framework.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.70018",
+      "source_hash": "7aed48c3",
+      "identity_hash": "3f6ef297be423774",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.70018 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70018"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70018",
+            "title": "Democratization of Tomorrow's Plate: Synergizing Foresight Methods and Design Thinking in Designing Cellular Agriculture Innovations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Presents a sustainable-design framework integrating foresight methods with design thinking for cellular agriculture."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Democratization of Tomorrow's Plate: Synergizing Foresight Methods and Design Thinking in Designing Cellular Agriculture Innovations",
+      "reader_what": "Foresight methods are mapped into design-thinking stages to anticipate uncertainty in innovation design.",
+      "reader_why": "The integration offers a reusable process for future-oriented sustainable innovation design.",
+      "reader_more": "Foresight methods are mapped into design-thinking stages to anticipate uncertainty in innovation design. The integration offers a reusable process for future-oriented sustainable innovation design. Demonstrated around cellular agriculture and requires broader testing.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "Foresight methods are mapped into design-thinking stages to anticipate uncertainty in innovation design.",
+        "method_or_basis": "Framework integrating foresight tools and design-thinking stages.",
+        "qualification": "Demonstrated around cellular agriculture and requires broader testing.",
+        "radar_relevance": "Material integration of methods qualifies under Strand B.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.70011",
+      "source_hash": "629b4218",
+      "identity_hash": "d699f404742234e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.70011 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/epdf/10.1002/ffo2.70011"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/epdf/10.1002/ffo2.70011",
+            "title": "Participatory Methods in Corporate Foresight: A Systematic Literature Review of Case Studies and Guidelines for Reporting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Creates a taxonomy and reporting guidelines for participatory corporate-foresight case studies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Participatory Methods in Corporate Foresight: A Systematic Literature Review of Case Studies and Guidelines for Reporting",
+      "reader_what": "Reporting guidelines specify how participation should be documented so corporate foresight cases become more replicable.",
+      "reader_why": "Better documentation improves methodological learning and comparison across foresight cases.",
+      "reader_more": "Reporting guidelines specify how participation should be documented so corporate foresight cases become more replicable. Better documentation improves methodological learning and comparison across foresight cases. Guidelines improve reporting but do not guarantee methodological quality.",
+      "deep_analysis": {
+        "work_kind": "systematic review/methodological article",
+        "research_question": "",
+        "main_finding": "Reporting guidelines specify how participation should be documented so corporate foresight cases become more replicable.",
+        "method_or_basis": "Systematic review, documentation taxonomy and reporting guidelines.",
+        "qualification": "Guidelines improve reporting but do not guarantee methodological quality.",
+        "radar_relevance": "Reusable evidence-synthesis and reporting procedure.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.180",
+      "source_hash": "a7d7f96e",
+      "identity_hash": "a8135ff4ee6b0860",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.180 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.180"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.180",
+            "title": "Restoring democratic stability: A backcasting wheel approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Applies an existing backcasting-wheel method to democratic stability rather than developing the method itself."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Restoring democratic stability: A backcasting wheel approach",
+      "reader_what": "A backcasting wheel maps interacting causes of democratic backsliding and strategies to address them.",
+      "reader_why": "The paper demonstrates an existing method in a new domain.",
+      "reader_more": "A backcasting wheel maps interacting causes of democratic backsliding and strategies to address them. The paper demonstrates an existing method in a new domain. Method is credited to earlier work and is primarily applied here.",
+      "deep_analysis": {
+        "work_kind": "method application",
+        "research_question": "",
+        "main_finding": "A backcasting wheel maps interacting causes of democratic backsliding and strategies to address them.",
+        "method_or_basis": "Backcasting wheel applied to democratic backsliding using literature synthesis.",
+        "qualification": "Method is credited to earlier work and is primarily applied here.",
+        "radar_relevance": "Fails Strand B rule against mere application of an existing method.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-01-2025-0007",
+      "source_hash": "78a2d17e",
+      "identity_hash": "d5dd5d573474ff2a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-01-2025-0007 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://research.manchester.ac.uk/en/publications/exploring-the-collective-forward-intelligence-potential-the-fores/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://research.manchester.ac.uk/en/publications/exploring-the-collective-forward-intelligence-potential-the-fores/",
+            "title": "Exploring the “collective forward intelligence” potential: the Foresight 3.0 programme at the Mind-Lab",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops the Foresight 3.0/Mind-Lab approach for collective forward intelligence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Exploring the “collective forward intelligence” potential: the Foresight 3.0 programme at the Mind-Lab",
+      "reader_what": "Foresight 3.0 organizes participatory systems thinking around collective forward intelligence.",
+      "reader_why": "It offers a transferable programme architecture for complex, multi-actor foresight.",
+      "reader_more": "Foresight 3.0 organizes participatory systems thinking around collective forward intelligence. It offers a transferable programme architecture for complex, multi-actor foresight. Framework is programme-based and evidence of comparative effectiveness is limited.",
+      "deep_analysis": {
+        "work_kind": "methodological/conceptual article",
+        "research_question": "",
+        "main_finding": "Foresight 3.0 organizes participatory systems thinking around collective forward intelligence.",
+        "method_or_basis": "Mind-Lab/Foresight 3.0 framework for collective forward intelligence.",
+        "qualification": "Framework is programme-based and evidence of comparative effectiveness is limited.",
+        "radar_relevance": "Reusable foresight framework.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-11-2023-0229",
+      "source_hash": "5a14d834",
+      "identity_hash": "2eae0ad278b421de",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-11-2023-0229 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://repo.driyarkara.ac.id/2148/1/FORESIGHT-Yanuar%202024.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://repo.driyarkara.ac.id/2148/1/FORESIGHT-Yanuar%202024.pdf",
+            "title": "Significance, gaps, and prospects of foresight – lessons from Indonesia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Reports an Indonesian foresight case and lessons but does not introduce a materially new method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Significance, gaps, and prospects of foresight – lessons from Indonesia",
+      "reader_what": "Indonesian workshops show foresight can support planning capacity but also reveal institutional gaps.",
+      "reader_why": "The main contribution is case-based learning about adoption and support conditions.",
+      "reader_more": "Indonesian workshops show foresight can support planning capacity but also reveal institutional gaps. The main contribution is case-based learning about adoption and support conditions. Public-sector participants limit generalizability; methods themselves are established.",
+      "deep_analysis": {
+        "work_kind": "case study",
+        "research_question": "",
+        "main_finding": "Indonesian workshops show foresight can support planning capacity but also reveal institutional gaps.",
+        "method_or_basis": "Foresight workshops with Indonesian government officials.",
+        "qualification": "Public-sector participants limit generalizability; methods themselves are established.",
+        "radar_relevance": "Fails Strand B because it mainly applies existing foresight methods.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-11-2023-0228",
+      "source_hash": "07f18219",
+      "identity_hash": "573ff66278358c58",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-11-2023-0228 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://www.researchgate.net/publication/385382669_Critical_design_futures_thinking_and_GenerativeAI_a_Foresight_30_approach_in_higher_education_to_design_preferred_futures_for_the_industry"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.researchgate.net/publication/385382669_Critical_design_futures_thinking_and_GenerativeAI_a_Foresight_30_approach_in_higher_education_to_design_preferred_futures_for_the_industry",
+            "title": "Critical design futures thinking and GenerativeAI: a Foresight 3.0 approach in higher education to design preferred futures for the industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Applies Foresight 3.0 and an existing Critical Design Futures framework in higher education rather than creating a new method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Critical design futures thinking and GenerativeAI: a Foresight 3.0 approach in higher education to design preferred futures for",
+      "reader_what": "A hospitality education project tests futures-oriented design learning with generative AI.",
+      "reader_why": "It contributes a pedagogical application rather than a distinct reusable foresight method.",
+      "reader_more": "A hospitality education project tests futures-oriented design learning with generative AI. It contributes a pedagogical application rather than a distinct reusable foresight method. Single educational context and existing frameworks drive the intervention.",
+      "deep_analysis": {
+        "work_kind": "educational case study",
+        "research_question": "",
+        "main_finding": "A hospitality education project tests futures-oriented design learning with generative AI.",
+        "method_or_basis": "Application of Foresight 3.0 and Critical Design Futures in a module.",
+        "qualification": "Single educational context and existing frameworks drive the intervention.",
+        "radar_relevance": "Fails Strand B method threshold.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-03-2024-0043",
+      "source_hash": "cbeec9a7",
+      "identity_hash": "e1eb257b0b58a680",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-03-2024-0043 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://www.researchgate.net/publication/384694906_Future_prospectives_in_plantain_agro-chain_by_foresight-by-scenarios_and_Delphi_analysis"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.researchgate.net/publication/384694906_Future_prospectives_in_plantain_agro-chain_by_foresight-by-scenarios_and_Delphi_analysis",
+            "title": "Future prospectives in plantain agro-chain by foresight-by-scenarios and Delphi analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Applies established scenario and Delphi techniques to a Colombian plantain value chain."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Future prospectives in plantain agro-chain by foresight-by-scenarios and Delphi analysis",
+      "reader_what": "Scenario and Delphi methods identify variables, technologies and future pathways for the plantain agro-chain.",
+      "reader_why": "The contribution is domain foresight, not a new transferable method.",
+      "reader_more": "Scenario and Delphi methods identify variables, technologies and future pathways for the plantain agro-chain. The contribution is domain foresight, not a new transferable method. Case-specific outputs; methods are established.",
+      "deep_analysis": {
+        "work_kind": "case study",
+        "research_question": "",
+        "main_finding": "Scenario and Delphi methods identify variables, technologies and future pathways for the plantain agro-chain.",
+        "method_or_basis": "Foresight-by-scenarios plus Delphi and validation tools.",
+        "qualification": "Case-specific outputs; methods are established.",
+        "radar_relevance": "Fails Strand B rule against mere application.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ev.20602",
+      "source_hash": "b2fedec7",
+      "identity_hash": "2a19111f132db45d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ev.20602 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://www.researchgate.net/publication/382684558_Expanding_foresight_practitioner_excellence_Assessment_of_practitioner_evaluation_capacity"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.researchgate.net/publication/382684558_Expanding_foresight_practitioner_excellence_Assessment_of_practitioner_evaluation_capacity",
+            "title": "Expanding foresight practitioner excellence: Assessment of practitioner evaluation capacity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Assesses practitioners’ evaluation capacity but does not itself introduce a new reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Expanding foresight practitioner excellence: Assessment of practitioner evaluation capacity",
+      "reader_what": "A practitioner survey finds moderate evaluation capacity but low overall use of evaluation.",
+      "reader_why": "The finding diagnoses a capability gap rather than providing a new foresight method.",
+      "reader_more": "A practitioner survey finds moderate evaluation capacity but low overall use of evaluation. The finding diagnoses a capability gap rather than providing a new foresight method. Self-reported practitioner evidence and no new methodological framework.",
+      "deep_analysis": {
+        "work_kind": "survey study",
+        "research_question": "",
+        "main_finding": "A practitioner survey finds moderate evaluation capacity but low overall use of evaluation.",
+        "method_or_basis": "Survey of Association of Professional Futurists members.",
+        "qualification": "Self-reported practitioner evidence and no new methodological framework.",
+        "radar_relevance": "Fails Strand B method threshold.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ev.20605",
+      "source_hash": "04ceb37b",
+      "identity_hash": "09109c3706a1711c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ev.20605 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/10.1002/ev.20605"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ev.20605",
+            "title": "Bridging foresight and evaluation: A bridge worth building",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Synthesizes links between foresight and evaluation but is an integrative discussion rather than a new method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Bridging foresight and evaluation: A bridge worth building",
+      "reader_what": "Evaluation and foresight can strengthen each other, but capability and practice gaps remain.",
+      "reader_why": "It sets an agenda for integration rather than specifying a distinct reusable technique.",
+      "reader_more": "Evaluation and foresight can strengthen each other, but capability and practice gaps remain. It sets an agenda for integration rather than specifying a distinct reusable technique. Agenda-setting contribution; no new method or measurement design.",
+      "deep_analysis": {
+        "work_kind": "synthesis/commentary",
+        "research_question": "",
+        "main_finding": "Evaluation and foresight can strengthen each other, but capability and practice gaps remain.",
+        "method_or_basis": "Cross-paper synthesis of a special issue on foresight and evaluation.",
+        "qualification": "Agenda-setting contribution; no new method or measurement design.",
+        "radar_relevance": "Fails Strand B method threshold.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/dpr.12788",
+      "source_hash": "4400344c",
+      "identity_hash": "33b678232e4d2fa7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1111/dpr.12788 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://onlinelibrary.wiley.com/doi/full/10.1111/dpr.12788"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/dpr.12788",
+            "title": "Foresight for a better African future: Lessons from six decades of practice",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CRITERIA_FAIL",
+        "reason": "Reviews decades of African foresight practice and policy lessons without creating a new reusable methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight for a better African future: Lessons from six decades of practice",
+      "reader_what": "African foresight has often had limited policy impact when leaders and implementation systems are weakly engaged.",
+      "reader_why": "The paper offers practice lessons rather than a new transferable method.",
+      "reader_more": "African foresight has often had limited policy impact when leaders and implementation systems are weakly engaged. The paper offers practice lessons rather than a new transferable method. Assessments partly rely on authors’ recollections and personal communications.",
+      "deep_analysis": {
+        "work_kind": "historical/practice review",
+        "research_question": "",
+        "main_finding": "African foresight has often had limited policy impact when leaders and implementation systems are weakly engaged.",
+        "method_or_basis": "Review and reflection on foresight exercises across Africa.",
+        "qualification": "Assessments partly rely on authors’ recollections and personal communications.",
+        "radar_relevance": "Fails Strand B methodological-contribution threshold.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-11-2021-0228",
+      "source_hash": "57d1dbae",
+      "identity_hash": "27956e4109d0991b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval was blocked; later recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1108/fs-11-2021-0228 matched the title and work identity."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive source at https://www.emerald.com/fs/article-abstract/25/5/649/79983/Iran-s-approach-to-energy-policy-towards-2040-a"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.emerald.com/fs/article-abstract/25/5/649/79983/Iran-s-approach-to-energy-policy-towards-2040-a",
+            "title": "Iran’s approach to energy policy towards 2040: a participatory scenario method",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Designs a participatory scenario method combining expert judgement, simulation and cross-impact analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Iran’s approach to energy policy towards 2040: a participatory scenario method",
+      "reader_what": "A new participatory scenario process combines interviews, plans, Monte Carlo simulation and cross-impact analysis.",
+      "reader_why": "It provides a reusable hybrid method for national energy-policy foresight.",
+      "reader_more": "A new participatory scenario process combines interviews, plans, Monte Carlo simulation and cross-impact analysis. It provides a reusable hybrid method for national energy-policy foresight. Demonstrated in Iran’s energy sector; transfer requires contextual adaptation.",
+      "deep_analysis": {
+        "work_kind": "methodological case study",
+        "research_question": "",
+        "main_finding": "A new participatory scenario process combines interviews, plans, Monte Carlo simulation and cross-impact analysis.",
+        "method_or_basis": "Expert-informed cross-impact analysis with Monte Carlo simulation in a participatory scenario process.",
+        "qualification": "Demonstrated in Iran’s energy sector; transfer requires contextual adaptation.",
+        "radar_relevance": "Explicitly claims and specifies a new scenario-development method.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    }
+  ]
+}
