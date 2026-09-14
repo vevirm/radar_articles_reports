@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-14T12:09:57Z",
+  "updated_at": "2026-09-14T12:12:09Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -2272,6 +2272,37 @@
       ],
       "updated_at": "2026-09-14T12:09:57Z",
       "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34"
+    },
+    "link:https://doi.org/10.1016/j.jik.2026.101155": {
+      "fields": {
+        "date": "2026-09-07"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "ScienceDirect lists the article as available online on 7 September 2026, not 1 September 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S2444569X26002192"
+      ],
+      "updated_at": "2026-09-14T12:12:08Z",
+      "deep_scan_package_id": "worker-a-20260914T114223Z-87c1046709d1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirAFBVV95cUxNcmUtZEpsdDd6REdrcHhZZ0pSMzRVc0twWmFRcHJDTllDdDJCcF85SGdIb2lSTjIxeHRKU0ZuYmQyNk14Qm03TThSOEd2Q2VtMWpmck5Pa3RyQnhzSGdtWXJ3elRUZG9YdzM4aVRpd1BEeVdGMlJrZlVQalVfc3NmMnJIaDVPWjBnS28xV0c4OWJVR1h3MGRYNlE1emlyME10MV9ZYnQ3a0MweW5N?oc=5": {
+      "fields": {
+        "date": "2026-09-08"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Contemporaneous coverage places the announced financing round on 8 September 2026; the scanner date 2026-08-09 is a day/month reversal.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.euronews.com/programs/business",
+        "https://www.lemonde.fr/en/economy/article/2026/09/08/mistral-ai-raises-3-billion-in-response-to-doubts-over-its-strategic-direction_6757278_19.html"
+      ],
+      "updated_at": "2026-09-14T12:12:09Z",
+      "deep_scan_package_id": "worker-a-20260914T114223Z-87c1046709d1"
     }
   }
 }

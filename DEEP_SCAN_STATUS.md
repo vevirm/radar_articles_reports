@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **498** (Main **498** + Historical **0**)
-- Automatic queue still needing V2 verification: **773** (Main **124** + Historical **649**)
-- Currently assigned to workers: **94** (Main **94** + Historical **0**)
-- Bounded access-recovery retries still eligible: **27**
+- Authoritative V2 verified: **545** (Main **545** + Historical **0**)
+- Automatic queue still needing V2 verification: **726** (Main **77** + Historical **649**)
+- Currently assigned to workers: **82** (Main **51** + Historical **31**)
+- Bounded access-recovery retries still eligible: **26**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **679**
+- Automatic queue pending and not yet assigned: **644**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T121039Z-87c1046709d1`
-- Assigned unresolved records: **48**
-  1. `link:https://news.google.com/rss/articles/CBMidkFVX3lxTE14MWhyc19nX010OTJ5clBuQW1PYmcxY2lDZF9vNjhGMEpzSVI5bW1iYW8yaHM3OG5rWnFfcjJWT3E2QVp6WFd4WlRzVDBoTk90U1RpVUE4dzNmRlB3Q2ZPLU9hS0dUaVhtWmFlRDRhSUhZakpfbVE?oc=5` — Funding for Digital in the 2021-2027 Multiannual Financial Framework - Shaping Europe’s digital future
-  2. `link:https://doi.org/10.1007/s11365-026-01188-8` — Innovation ecosystems and entrepreneurial venture capital: evidence from European countries
-  3. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxNWm83WUQ3eGZDU1ZRNURpUGdpN25ZWGxIT2NpMFJhajhaZjB4QjFqcVNSOUxpTndjN2JnLVZRYXItQlg2V1dzQkRQUmR2UUE3ZUVaWU9PLXB2d0lzZThCZW40bkNleHBsOGR0R2dqTGE0Y1Q0MXlhS01TRFBuT05CNVRGRmFUUGw2bXYtLUkzbzJjcHhIdExfQ1FNNVVzc1hQbFMxbnVKQjRwRGtreEJydk4zdENSTUl4dXRZSjhhWG5BeHdRUHZxVg?oc=5` — [Interview] ‘Not everyone wants to come to Europe’, says IOM researcher warning against migration panic
-  4. `link:https://news.google.com/rss/articles/CBMijwFBVV95cUxNaHFqcGNkY19YdjBCbWhTNVNnclFIbDRBZWhNckN6WVF3eHduNUVEZHdYekF3UW5WTV9aVWkzN1JVaDJ0SmhCOG1wcE1uUUNvaFY5Rmk0RGVnVWgtMHQwel9wNFdMVVc2U3Q0MTB3VzdvcHp6d2tYQ2ZMRkdodGFMX05TekFyenBGd3pTRHZ3TQ?oc=5` — EU tech chief backs global AI rules in wake of extinction warning
-  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNRTNiRXp1VEEyUEhXbTFSSnBmMTlzWngxUDVRTk1wc1lvdmZ6R0hOVnotUGRaRVU4MlhPaXVoaFhrLUladmUtWFYzeGtWV3RfMkVVVEQ3aFNvOS0yeGlwRHY0bWFTMjR4cnJkNl9RdExRSWtJVUItdVdLOXZRQnV1ODlIUFdxZlhsM0lETDdQZEJUV3VBb3JGWjRRRVJ3eEI1U1lIMFpEZXFrMFdJZUE?oc=5` — EU own resources ‘essential’ for future research budget, says leading MEP
-  6. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxNd2E4SWZSeGcyWTNRYzltQ1Y0V0luSE9ja1RTUUhGMDdLUFlIeHQtRlpQYVhLVFdsaXVMUTVvUzYtX3NSbDMyV3ZwWnRKR1MxOVpHclNvRmxBekJoaWN3TjNKbjEtTEZOWS1jal9LQjNXcFVINVFGOEJxcUpUajdNa0JJbkdnZWlUZE1jRFY5RlB6VnhoM05n?oc=5` — Hungary expels 10 Russian diplomats amid espionage concerns
-  7. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxQZjFheXlLYmlkeFFsVUp3Nnlab01sUVRIWkx6WGw4MVpzREo2OFhCS1pEV1BSZjdQTjlWT0VXTWNSdkhic2RvYWdvZEpTMFNTQVRjcnVVOUZKMnRIS1Q3Ny1VOTZqX1dSSDRIZU5HMmNmc0J3MFc4SmdVQnh6aTl1MW9laXBVQW9ydzI0M0ZmMVBQbUtSVXhmNzlVa1J2ZndzZzVUR3RwZGp2OGd1ci04enpiUldJaWIxZDRXek52X04weXJjR0ZrWUpuX0Q5QQ?oc=5` — Investigation alleges widespread misuse of EIT funds
-  8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE4xZGNpNE1kY2J5Ui1EdWYzQ0g0S190bGpIYVBLS1hlS0MwUXN3UGdLdzBpYmZPWWY2bTVoRlJFQzF1NHI0Tnl3eVVtYVE5VTFUZE1SMi1pNGxSaHJ2cEQyRk85VkhkZFlrYXZrdW5tTGp0enduaTVncHpnQllMUQ?oc=5` — European integrated framework for climate resilience | Think Tank | Parlement européen
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260914T121254Z-bc820b643778`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1016/j.abmr.2026.100004` — Technology foresight: A taxonomy
+  2. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNYUpLd1I4Qk5tN3lrREZxemNJbjVxRmR1bG5Ta2hReWtIVXIweHdGREstZjNWUjMyLXYtSFQ0QnJQM0tERGFnSThzVW1YRm1BREtld2tSekNNTGI1WjVwSnR1ZmxUU0ZTZ0U3S3dXWkpQb3Z2Qld4bGRreE16dnAydDlTcEVuNmtHaU9WdlFYSFZMell2dFhmNjVrblZaa01vZnljMXdTYkh4M2dpVzlsTkktUHQ?oc=5` — Europe built its medical science around male bodies – and women are paying the price
+  3. `link:http://arxiv.org/abs/2603.22912` — From the AI Act to a European AI Agency: Completing the Union's Regulatory Architecture
+  4. `historical:id:5358adbff7e986d2` — Digital sovereignty and the means to European digital security: identification of the goals related to digital sovereignty from legal texts published by the European Union
+  5. `historical:id:ea0e35c3450d52cb` — The Economics of Copyright and Data Access in European AI Development – ECIPE
+  6. `historical:id:211f6661f63d7277` — “Get a PhD and Get Out”: is this really the silver bullet? Insights on postdoctoral academic careers from East Central Europe
+  7. `historical:id:f5168176f416900e` — Research security monitor 2025 - Publications Office of the EU
+  8. `historical:id:0b499eadbff962c8` — Copyright, AI, and the CJEU – A Binary Choice That Will Shape Europe’s Role in Global AI – ECIPE
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T121050Z-fb1fe01c1fb2`
+- Current package: `worker-b-20260914T121308Z-fb1fe01c1fb2`
 - Assigned unresolved records: **46**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
