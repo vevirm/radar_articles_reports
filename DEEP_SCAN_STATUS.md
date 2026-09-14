@@ -12,7 +12,7 @@ It exists so a new chat or operator can see what has already been verified and w
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T073030Z-a02443386555`
+- Current package: `worker-a-20260914T075436Z-a02443386555`
 - Assigned unresolved records: **48**
   1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/`
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145459`
@@ -25,7 +25,7 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T073045Z-ee8cbc665694`
+- Current package: `worker-b-20260914T075450Z-ee8cbc665694`
 - Assigned unresolved records: **48**
   1. `link:https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri`
   2. `link:https://doi.org/10.1002/ffo2.70047`
