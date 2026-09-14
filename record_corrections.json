@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-14T11:30:02Z",
+  "updated_at": "2026-09-14T11:40:01Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -2204,6 +2204,41 @@
       ],
       "updated_at": "2026-09-14T11:30:02Z",
       "deep_scan_package_id": "worker-a-20260914T110926Z-7d1142197a5a"
+    },
+    "link:https://doi.org/10.2478/kbo-2026-0010": {
+      "fields": {
+        "date": "2026-06-01"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref registers this article as issued 2026-06-01 in volume XXXII number 1, and the PDF masthead carries the same volume and year. The scanner's 5 July 2026 value is not supported by the publication record.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://reference-global.com/download/article/10.2478/kbo-2026-0010.pdf"
+      ],
+      "updated_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNQVlGOXFDOEtPczltc1NDRktZVjdvLUppUEFJTXd5cmpsR3hqT1V0Wmw1Rm1oNEc5VmpSY2JKZXEzQ1M3b0gwMnQ4Y1JCa1BtejZZaVN5SDJNWElhb2lfbzFwbk5XUUE4MHI5c3hIVXN0Vl9LZzI3M2dkZU9SanNUODlnclBJdExLQWtnWEpTLVZ1VDFCeVBXbzdGQzVtSVhfUXFOTm93?oc=5": {
+      "fields": {
+        "title": "LUMI AI Factory advances toward Europe's first superconducting quantum computer with logical qubits",
+        "source": "CSC - IT Center for Science",
+        "type": "press release",
+        "event_status": "ANNOUNCED"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The republished release names CSC - IT Center for Science as issuer and states it was first published on 10 September by CSC; the FT link is an automated market-announcement wire slot, not Financial Times reporting. The scanner title was a truncated fragment of the why-it-matters sentence. Delivery runs 2027-2029, so the event is announced rather than observed as delivered.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://sciencebusiness.net/network-updates/csc-lumi-ai-factory-advances-toward-europes-first-superconducting-quantum-computer"
+      ],
+      "updated_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
     }
   }
 }

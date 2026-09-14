@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T11:30:02Z",
+  "generated_at": "2026-09-14T11:40:01Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -2924,27 +2924,110 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://doi.org/10.1007/s44163-026-02019-z": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "0b6fc12b",
-      "reader_title": "What organisations now need to deploy AI has shifted from infrastructure to governance",
-      "reader_what": "Interviews suggest data and infrastructure are now baseline, with governance and process discipline the real differentiators.",
-      "reader_why": "Implies AI capability gaps between firms are organisational rather than technical.",
-      "reader_more": "This study asks what organisational readiness for AI means now that generative AI, AI-as-a-service and cheap infrastructure have changed deployment conditions. The authors argue existing readiness models were built during an earlier phase and treat readiness as a static inventory. Drawing on fifteen interviews with senior practitioners in large and smaller firms, they report that interviewees see IT infrastructure and data maturity as having shifted from differentiators to baseline prerequisites, while governance and accountability, process discipline and behavioural alignment now determine whether deployment works. They propose the idea of an organisational AI orchestration capability, meaning the ongoing capacity to integrate and govern varied AI resources, and offer it as a way to sequence investment and avoid scaling too early.",
+      "identity_hash": "0acceb264a67cbb6",
+      "reader_title": "AI readiness is shifting from adoption checklists toward an orchestration capability, European practitioners say",
+      "reader_what": "Interviews suggest readiness now centres on governance and orchestration rather than static technical prerequisites.",
+      "reader_why": "Generative AI and AI-as-a-service commoditised the infrastructure that older readiness models treated as the constraint.",
+      "reader_more": "Existing organisational AI readiness models were built in earlier waves of AI and treat readiness dimensions as static. This study asks how contemporary conditions, including generative AI, AI-as-a-service and commoditised infrastructure, change what readiness means. Drawing on socio-technical systems theory and dynamic capabilities theory and on interviews with practitioners, the authors describe a two-tier architecture and a migration thesis in which readiness moves toward an orchestration capability. Governance emerged as the dominant readiness concern among their European respondents, which the authors link to the EU regulatory environment and present as a possible leading indicator for other jurisdictions. They are explicit that transferability should proceed by analytic rather than statistical generalisation.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed qualitative empirical study",
-        "research_question": "How current deployment conditions reshape what organisational readiness for AI actually requires.",
-        "main_finding": "IT infrastructure and data maturity are perceived as baseline prerequisites rather than differentiators, with governance and accountability, process discipline and behavioural alignment emerging as the primary determinants of effective deployment.",
-        "method_or_basis": "Abductive template analysis combining a literature-derived template with fifteen semi-structured interviews with senior practitioners across corporate and smaller firm contexts.",
-        "qualification": "Findings reflect practitioner perceptions from a small interview sample, not measured deployment outcomes; the proposed orchestration capability is a new construct that has not yet been validated.",
-        "radar_relevance": "Bears on why AI adoption produces uneven returns across European firms.",
-        "confidence": "high",
+        "work_kind": "qualitative interview-based empirical study",
+        "research_question": "How do contemporary AI deployment conditions reshape what organisational readiness for AI actually entails?",
+        "main_finding": "Readiness is migrating from static technical and adoption prerequisites toward a governance-centred orchestration capability, structured as a two-tier architecture.",
+        "method_or_basis": "Qualitative interviews with European practitioners, interpreted through socio-technical systems and dynamic capabilities theory, with saturation assessed against interview count.",
+        "qualification": "Small qualitative sample; the authors themselves specify analytic rather than statistical generalisation, and the governance emphasis may be specific to the EU regulatory setting.",
+        "radar_relevance": "European relevance is real but indirect, resting on the practitioner sample and EU regulatory framing rather than on European research or innovation policy as such.",
+        "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://link.springer.com/article/10.1007/s44163-026-02019-z, the matching Discover Artificial Intelligence article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s44163-026-02019-z matched title and journal, dated 25 August 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Krzysztof Jonak and Andrzej Wodecki, Business School, Warsaw University of Technology, Discover Artificial Intelligence 6:912, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF downloaded from https://link.springer.com/content/pdf/10.1007/s44163-026-02019-z.pdf and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s44163-026-02019-z.pdf",
+            "title": "The evolution of organisational AI readiness toward an orchestration capability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read. European relevance rests on the practitioner sample and an explicit argument about EU regulatory conditions, which is more than a passing mention but less than a study of European research or innovation policy."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_REQUIRES_JUDGEMENT",
+        "reason": "A substantive interview-based study whose European element is real but narrow: the sample is European practitioners and the authors argue their governance-centred readiness pattern reflects an EU regulatory condition other jurisdictions are converging toward. Whether that is substantive European R&I relevance or a management study with a European sample is a judgement call for a human reviewer."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:22Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T11:39:59Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "0b6fc12b",
+          "reader_title": "What organisations now need to deploy AI has shifted from infrastructure to governance",
+          "reader_what": "Interviews suggest data and infrastructure are now baseline, with governance and process discipline the real differentiators.",
+          "reader_why": "Implies AI capability gaps between firms are organisational rather than technical.",
+          "reader_more": "This study asks what organisational readiness for AI means now that generative AI, AI-as-a-service and cheap infrastructure have changed deployment conditions. The authors argue existing readiness models were built during an earlier phase and treat readiness as a static inventory. Drawing on fifteen interviews with senior practitioners in large and smaller firms, they report that interviewees see IT infrastructure and data maturity as having shifted from differentiators to baseline prerequisites, while governance and accountability, process discipline and behavioural alignment now determine whether deployment works. They propose the idea of an organisational AI orchestration capability, meaning the ongoing capacity to integrate and govern varied AI resources, and offer it as a way to sequence investment and avoid scaling too early.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed qualitative empirical study",
+            "research_question": "How current deployment conditions reshape what organisational readiness for AI actually requires.",
+            "main_finding": "IT infrastructure and data maturity are perceived as baseline prerequisites rather than differentiators, with governance and accountability, process discipline and behavioural alignment emerging as the primary determinants of effective deployment.",
+            "method_or_basis": "Abductive template analysis combining a literature-derived template with fifteen semi-structured interviews with senior practitioners across corporate and smaller firm contexts.",
+            "qualification": "Findings reflect practitioner perceptions from a small interview sample, not measured deployment outcomes; the proposed orchestration capability is a new construct that has not yet been validated.",
+            "radar_relevance": "Bears on why AI adoption produces uneven returns across European firms.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:22Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://www.eurekanetwork.org/wp-content/uploads/2026/08/Switzerland-2025-2026-Eureka-Chair-year-in-review.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -3945,27 +4028,110 @@
       ]
     },
     "link:https://doi.org/10.1007/s44162-026-00229-8": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "f50011d7",
-      "reader_title": "Applying European rare disease infrastructure lessons across Portuguese-speaking countries",
-      "reader_what": "Proposes a shared data standards and governance roadmap for rare disease care across Portuguese-speaking countries.",
-      "reader_why": "Adapts European Reference Network practice to settings with limited connectivity and diagnostic capacity.",
-      "reader_more": "This position paper addresses rare disease care across the Community of Portuguese-Speaking Countries, where fragmented governance, uneven diagnostic capacity and poor data interoperability delay diagnosis and access. Anchored in the first World Health Assembly resolution on rare diseases, it proposes pairing standards-based data infrastructure with regulatory alignment, workforce development and cross-border collaboration. It recommends specific standards for disease coding, structured description of symptoms and computable case exchange, alongside governance models for secure federated data sharing. It draws operational lessons from European Reference Networks and tele-expertise platforms, and foregrounds dynamic consent and federated analytics as safeguards suited to low-connectivity settings. The authors propose a sequenced roadmap and note it requires national validation and local adaptation.",
+      "identity_hash": "a386ec37754ae589",
+      "reader_title": "Position paper sets a Lusophone agenda for rare disease data infrastructure and cross-border cooperation",
+      "reader_what": "Couples standards-based health data infrastructure with regulatory alignment, workforce development and cross-border collaboration.",
+      "reader_why": "Fragmented governance and poor data interoperability delay diagnosis across the Portuguese-speaking community.",
+      "reader_more": "Rare diseases affect millions across the Community of Portuguese-Speaking Countries, but fragmented governance, uneven diagnostic capacity and limited data interoperability constrain timely diagnosis and access to care. Anchored in the first World Health Assembly resolution on rare diseases, this paper sets out a pragmatic agenda coupling standards-based data infrastructure with regulatory alignment, workforce development and cross-border collaboration. It draws on a narrative policy-oriented synthesis of scientific literature, policy and institutional documents and existing collaborative efforts among member countries. Practical priorities include professional training, tiered laboratory strengthening, second-line testing to reduce false positives, standardised phenotype documentation and tele-expertise. It is a position paper proposing an agenda, not an evaluation of implemented programmes.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed position paper with narrative policy synthesis",
-        "research_question": "How rare disease diagnosis and care can be strengthened across Portuguese-speaking countries through shared standards and cooperation.",
-        "main_finding": "The authors propose a sequenced roadmap coupling standards-based data infrastructure with regulatory alignment, workforce development and federated cross-border data sharing, adapted from European Reference Network experience.",
-        "method_or_basis": "Narrative, policy-oriented synthesis of scientific literature, policy and institutional documents, international initiatives and existing collaboration among these countries.",
-        "qualification": "The authors state explicitly that the recommendations are propositional and require national validation, local adaptation and sustained governance; no implementation results are reported.",
-        "radar_relevance": "Shows European health research infrastructure models being adapted and exported through international cooperation.",
-        "confidence": "high",
+        "work_kind": "policy position paper (narrative synthesis)",
+        "research_question": "How can rare disease response be strengthened across the Community of Portuguese-Speaking Countries?",
+        "main_finding": "A Lusophone rare disease agenda should combine standards-based, interoperable health data infrastructure with regulatory alignment, workforce development and structured cross-border collaboration.",
+        "method_or_basis": "Narrative, policy-oriented synthesis of scientific literature, policy and institutional documents, international rare disease initiatives and existing collaborative efforts.",
+        "qualification": "A proposed agenda rather than evidence of effect; none of the recommended measures is evaluated against implementation outcomes.",
+        "radar_relevance": "European relevance is partial, arising from Portuguese institutional participation and alignment with European data and regulatory standards rather than from European research policy itself.",
+        "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://link.springer.com/article/10.1007/s44162-026-00229-8, the matching Journal of Rare Diseases position paper."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s44162-026-00229-8 matched title and journal, dated 17 August 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Bernardi et al., Journal of Rare Diseases 5:85, 2026, with authors across Portugal, Brazil, Guinea-Bissau, Angola and Mozambique."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF downloaded from https://link.springer.com/content/pdf/10.1007/s44162-026-00229-8.pdf and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s44162-026-00229-8.pdf",
+            "title": "Strengthening rare disease response in the community of Portuguese-speaking countries: a position paper on digital health innovation and international cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read. European connection runs through Portuguese participation, EU-aligned data standards and regulatory alignment rather than through European research policy as the primary subject."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_REQUIRES_JUDGEMENT",
+        "reason": "A substantive position paper on rare disease governance across the Lusophone community, anchored in the World Health Assembly resolution. Portugal is an EU member state and the paper engages regulatory alignment and data standards, but the agenda is predominantly non-European. Whether that constitutes substantive European R&I relevance needs human judgement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:22Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T11:39:59Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "f50011d7",
+          "reader_title": "Applying European rare disease infrastructure lessons across Portuguese-speaking countries",
+          "reader_what": "Proposes a shared data standards and governance roadmap for rare disease care across Portuguese-speaking countries.",
+          "reader_why": "Adapts European Reference Network practice to settings with limited connectivity and diagnostic capacity.",
+          "reader_more": "This position paper addresses rare disease care across the Community of Portuguese-Speaking Countries, where fragmented governance, uneven diagnostic capacity and poor data interoperability delay diagnosis and access. Anchored in the first World Health Assembly resolution on rare diseases, it proposes pairing standards-based data infrastructure with regulatory alignment, workforce development and cross-border collaboration. It recommends specific standards for disease coding, structured description of symptoms and computable case exchange, alongside governance models for secure federated data sharing. It draws operational lessons from European Reference Networks and tele-expertise platforms, and foregrounds dynamic consent and federated analytics as safeguards suited to low-connectivity settings. The authors propose a sequenced roadmap and note it requires national validation and local adaptation.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed position paper with narrative policy synthesis",
+            "research_question": "How rare disease diagnosis and care can be strengthened across Portuguese-speaking countries through shared standards and cooperation.",
+            "main_finding": "The authors propose a sequenced roadmap coupling standards-based data infrastructure with regulatory alignment, workforce development and federated cross-border data sharing, adapted from European Reference Network experience.",
+            "method_or_basis": "Narrative, policy-oriented synthesis of scientific literature, policy and institutional documents, international initiatives and existing collaboration among these countries.",
+            "qualification": "The authors state explicitly that the recommendations are propositional and require national validation, local adaptation and sustained governance; no implementation results are reported.",
+            "radar_relevance": "Shows European health research infrastructure models being adapted and exported through international cooperation.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:22Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s44443-026-01108-4": {
       "profile": "deep-reader-v2-authoritative",
@@ -9428,27 +9594,110 @@
       ]
     },
     "link:https://arxiv.org/abs/2607.24879": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "e0193de6",
-      "reader_title": "Framework for governing generative AI in research where private and social returns diverge",
-      "reader_what": "Generative AI raises individual research output while risking collective harms, so the authors propose four governance principles.",
-      "reader_why": "Builds on existing EU AI Act scaffolding to address risks individual researchers cannot observe or manage.",
-      "reader_more": "The paper maps disagreement in the research community across four stages: funding, research tasks, publication and peer review, and use and uptake. It reports that evidence for productivity, augmentation and democratisation has strengthened, but that the picture changes once productivity is disaggregated: gains appear in publication volume and citation share, while evidence on novelty, disruption and breakthrough output is ambiguous or negative. Three mechanisms are said to separate private from social returns: information asymmetry, negative externalities on the shared knowledge base, and depletion of research capacity. The proposed response, Responsible Research with AI, sets out disclosure, differentiation, narrative and proportionality. It is a preprint built on a roundtable and existing literature.",
+      "identity_hash": "05432399ccc820cb",
+      "reader_title": "European research-policy scholars map where generative AI helps individuals but creates collective risk",
+      "reader_what": "Maps disagreement across funding, research tasks, publication and uptake, then proposes a responsible-use framework.",
+      "reader_why": "Productivity gains at the individual level can mask homogenisation and concentration across the research system.",
+      "reader_more": "This paper examines the gap between generative AI's benefits for individual researchers and unresolved governance questions raised by its rapid adoption. It draws on an academic roundtable at the AI for Science and Innovation Workshop in Lucca in April 2026 and on a fast-growing empirical literature, mapping disagreement across four stages of research: funding, research tasks, publication and peer review, and use and uptake. The authors accept that evidence for productivity, augmentation and democratisation has strengthened, but argue the picture changes once productivity is disaggregated. They propose a framework for responsible research with AI. It is a synthesis and position piece, so the framework is a proposal rather than a tested intervention.",
       "deep_analysis": {
-        "work_kind": "preprint position paper with literature synthesis",
-        "research_question": "How should research systems govern generative AI when individual gains and collective costs diverge?",
-        "main_finding": "Proposes a four-principle governance framework matched to three distinct mechanisms separating private from social returns.",
-        "method_or_basis": "Synthesis of an academic roundtable and a fast-expanding empirical literature",
-        "qualification": "Preprint, not peer reviewed; the framework is proposed rather than tested, and evidence on novelty effects remains contested.",
-        "radar_relevance": "Concerns governance of AI within the European research system and builds on the EU AI Act.",
+        "work_kind": "research-policy synthesis and position paper (preprint)",
+        "research_question": "How should the research community govern generative AI given that individual benefits and collective risks diverge?",
+        "main_finding": "Evidence for AI's productivity and democratisation effects has strengthened, but disaggregating productivity reveals collective risks across funding, research tasks, publication and uptake that current governance does not address.",
+        "method_or_basis": "Synthesis of a documented academic roundtable and a rapidly expanding empirical literature, organised around four stages of the research process.",
+        "qualification": "A synthesis and framework proposal; the governance framework has not been implemented or evaluated.",
+        "radar_relevance": "Research policy, research integrity and AI in science across the European research system.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://arxiv.org/abs/2607.24879; matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI registered for this arXiv preprint."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Identity fixed by the arXiv identifier at step 1."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Eight alphabetically ordered authors including Castellacci, Ciarli, Marino, Marzi, Riccaboni, Savona and Vannuccini; corresponding author at Scuola IMT Alti Studi Lucca, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded and read the complete PDF from https://arxiv.org/pdf/2607.24879."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2607.24879",
+            "title": "Generative Artificial Intelligence in Scientific Research: Individual Benefits, Collective Risks, and a Framework for Responsible Research with AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied arXiv page matched; complete PDF retrieved and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A research-policy analysis of how generative AI is reshaping funding, research tasks, publication and peer review, and uptake, produced by a European research-policy community and grounded in a roundtable held at Scuola IMT Alti Studi Lucca. Research governance in the European research system is the substance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:21Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "e0193de6",
+          "reader_title": "Framework for governing generative AI in research where private and social returns diverge",
+          "reader_what": "Generative AI raises individual research output while risking collective harms, so the authors propose four governance principles.",
+          "reader_why": "Builds on existing EU AI Act scaffolding to address risks individual researchers cannot observe or manage.",
+          "reader_more": "The paper maps disagreement in the research community across four stages: funding, research tasks, publication and peer review, and use and uptake. It reports that evidence for productivity, augmentation and democratisation has strengthened, but that the picture changes once productivity is disaggregated: gains appear in publication volume and citation share, while evidence on novelty, disruption and breakthrough output is ambiguous or negative. Three mechanisms are said to separate private from social returns: information asymmetry, negative externalities on the shared knowledge base, and depletion of research capacity. The proposed response, Responsible Research with AI, sets out disclosure, differentiation, narrative and proportionality. It is a preprint built on a roundtable and existing literature.",
+          "deep_analysis": {
+            "work_kind": "preprint position paper with literature synthesis",
+            "research_question": "How should research systems govern generative AI when individual gains and collective costs diverge?",
+            "main_finding": "Proposes a four-principle governance framework matched to three distinct mechanisms separating private from social returns.",
+            "method_or_basis": "Synthesis of an academic roundtable and a fast-expanding empirical literature",
+            "qualification": "Preprint, not peer reviewed; the framework is proposed rather than tested, and evidence on novelty effects remains contested.",
+            "radar_relevance": "Concerns governance of AI within the European research system and builds on the EU AI Act.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:21Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s41781-026-00176-5": {
       "profile": "deep-reader-v2-authoritative",
@@ -9620,27 +9869,110 @@
       ]
     },
     "link:https://arxiv.org/abs/2607.22049": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "e1c7c83f",
-      "reader_title": "Position paper arguing ethical and social expertise should shape the EU Quantum Act",
-      "reader_what": "Europe's ethical, legal and social research expertise should be built into the EU Quantum Act, not applied afterwards.",
-      "reader_why": "Treats societal expertise as a competitive asset for European quantum sovereignty rather than a compliance cost.",
-      "reader_more": "The authors argue that reducing societal considerations to risk assessment and after-the-fact regulation wastes an existing European strength. Using concept cars as an analogy for aspirational design, they offer eight recommendations: framing policy targets as quantum moonshots, embedding European values, engaging younger generations' motivations, strengthening international cooperation, developing applications globally and inclusively, integrating continuous technology assessment, building shared sociotechnical repositories, and shaping a European narrative for quantum technologies. The claim is that this approach amplifies benefits, legitimacy and economic prosperity rather than only mitigating risk. This is an advocacy position paper issued as a preprint, so its recommendations are argued rather than evaluated.",
+      "identity_hash": "c941d0c8fe1eaf03",
+      "reader_title": "Position paper urging that European ELSA expertise be written into the forthcoming EU Quantum Act",
+      "reader_what": "Argues Europe's ethical, legal and social research on quantum technology is a strategic asset, not an afterthought.",
+      "reader_why": "Treating societal questions only as ex-post regulation would waste a distinctive European research strength.",
+      "reader_more": "Three researchers from Karlsruhe Institute of Technology and TU Delft argue that European expertise on the ethical, legal and social aspects of emerging technologies should become a central component of the EU Quantum Act rather than being reduced to risk assessment after the fact. They frame this expertise as sitting alongside Europe's research base, industrial players and skilled workforce as a distinctive asset. The paper proposes that ELSA work can translate European values into technological practices, governance structures and concrete policy measures. It is an advocacy document written while the Act is being prepared, so its recommendations are proposals to legislators rather than descriptions of adopted policy.",
       "deep_analysis": {
         "work_kind": "position paper (preprint)",
-        "research_question": "",
-        "main_finding": "Argues that ethical, legal and social expertise should be central to the forthcoming EU Quantum Act, with eight concrete recommendations.",
-        "method_or_basis": "Argumentative position paper drawing on ethical, legal and social aspects scholarship; no empirical study",
-        "qualification": "Advocacy rather than evidence; the EU Quantum Act was still forthcoming and the recommendations are untested.",
-        "radar_relevance": "Aims directly at the design of a forthcoming EU legislative instrument on quantum technologies.",
+        "research_question": "What role should European ethical, legal and social aspects expertise play in the EU Quantum Act?",
+        "main_finding": "ELSA expertise should be embedded as a central element of the EU Quantum Act, translating European values into governance structures and policy measures rather than serving only as ex-post risk regulation.",
+        "method_or_basis": "Argumentative policy analysis grounded in the European quantum technology landscape and the state of the forthcoming Act.",
+        "qualification": "Advocacy rather than evidence of effect; the Act was still in preparation and none of the recommendations had been adopted.",
+        "radar_relevance": "EU research policy, quantum technology governance and European technological sovereignty.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://arxiv.org/abs/2607.22049; matched the claimed position paper."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI registered for this arXiv preprint."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "arXiv identifier already fixed identity at step 1."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Adrian Schmidt and Zeki C. Seskir (ITAS, Karlsruhe Institute of Technology) and Pieter Vermaas (TU Delft), 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded and read the complete PDF from https://arxiv.org/pdf/2607.22049 including the executive summary."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2607.22049",
+            "title": "ELSA as an asset to the EU Quantum Act: A position paper",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied arXiv page matched the work; complete PDF retrieved and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Argues that European ethical, legal and social aspects expertise should be built into the forthcoming EU Quantum Act. The object is an EU legislative instrument and European research capability in quantum technologies."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:21Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "e1c7c83f",
+          "reader_title": "Position paper arguing ethical and social expertise should shape the EU Quantum Act",
+          "reader_what": "Europe's ethical, legal and social research expertise should be built into the EU Quantum Act, not applied afterwards.",
+          "reader_why": "Treats societal expertise as a competitive asset for European quantum sovereignty rather than a compliance cost.",
+          "reader_more": "The authors argue that reducing societal considerations to risk assessment and after-the-fact regulation wastes an existing European strength. Using concept cars as an analogy for aspirational design, they offer eight recommendations: framing policy targets as quantum moonshots, embedding European values, engaging younger generations' motivations, strengthening international cooperation, developing applications globally and inclusively, integrating continuous technology assessment, building shared sociotechnical repositories, and shaping a European narrative for quantum technologies. The claim is that this approach amplifies benefits, legitimacy and economic prosperity rather than only mitigating risk. This is an advocacy position paper issued as a preprint, so its recommendations are argued rather than evaluated.",
+          "deep_analysis": {
+            "work_kind": "position paper (preprint)",
+            "research_question": "",
+            "main_finding": "Argues that ethical, legal and social expertise should be central to the forthcoming EU Quantum Act, with eight concrete recommendations.",
+            "method_or_basis": "Argumentative position paper drawing on ethical, legal and social aspects scholarship; no empirical study",
+            "qualification": "Advocacy rather than evidence; the EU Quantum Act was still forthcoming and the recommendations are untested.",
+            "radar_relevance": "Aims directly at the design of a forthcoming EU legislative instrument on quantum technologies.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:21Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en": {
       "profile": "deep-reader-v2-authoritative",
@@ -10740,26 +11072,108 @@
       ]
     },
     "link:https://doi.org/10.1017/aap.2026.10164": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "3d70941e",
-      "reader_title": "Sustainability of data work in archaeology and the case for governance reform",
-      "reader_what": "The article argues archaeological data work is unsustainable and calls for reforms centring public goods and Indigenous rights.",
-      "reader_more": "The argument is that technology adoption in United States archaeology has outpaced professional and ethical frameworks, leaving data work unsustainable in an under-resourced discipline. The authors review the Western legal and intellectual property paradigms behind archaeological data standards, and contend these produce poor outcomes for data labour, distance the public from heritage data, disregard Indigenous Data Sovereignty, and enable extractive commodification of heritage for AI businesses. The proposed response is to centre public goods and Indigenous rights, and to adopt data ecosystem governance practices. The review covers CARE and FAIR principles and the US OPEN Government Data Act. This is a critical review advancing a normative position rather than an empirical assessment.",
+      "identity_hash": "7a2a94fa90da7377",
+      "reader_title": "US archaeology's data labour is unsustainable without ethical, policy and data sovereignty reform",
+      "reader_what": "Technological adoption has outpaced the professional and ethical frameworks needed to sustain archaeological data work.",
+      "reader_more": "The authors argue that the spread of information and communication technologies across US archaeology has created extensive expectations for professional labour throughout the data life cycle, while professional and ethical frameworks have not kept pace. They review the Western legal and intellectual property paradigms that shaped archaeological data standards, arguing these produce poor outcomes for data labour, distance the public from primary data of publicly mandated heritage preservation, and disregard Indigenous Data Sovereignty. Meeting ethical expectations entails substantial and complex labour that is not supported by higher education preparation, workplace technical infrastructure or available finance. The analysis is grounded in US legal mandates and North American disciplinary practice, and it offers no European research or innovation dimension.",
       "deep_analysis": {
-        "work_kind": "critical review with normative argument",
-        "research_question": "Is archaeological data labour sustainable, and what governance reforms would make it so?",
-        "main_finding": "Argues that current data standards and intellectual property paradigms make archaeological data labour unsustainable and marginalise Indigenous data rights.",
-        "method_or_basis": "Critical review of policy, legislation and ethics frameworks governing archaeological data",
-        "qualification": "A normative argument grounded in United States practice; no empirical measurement of data labour is offered.",
-        "radar_relevance": "Probable mis-admission: the 'data act' signal refers to the US OPEN Government Data Act, not the EU Data Act, and the work is US-focused.",
+        "work_kind": "disciplinary policy review and argument",
+        "research_question": "Is archaeological data labour sustainable given current technological adoption and professional frameworks?",
+        "main_finding": "Archaeological data labour in the United States is unsustainable because technological adoption has outrun ethical, policy and resourcing frameworks, and reform requires ethical and policy change, public engagement and Indigenous Data Sovereignty.",
+        "method_or_basis": "Critical review of legal and intellectual property paradigms, data standards and professional practice in US archaeology.",
+        "qualification": "An argued review rather than an empirical measurement of data labour costs or outcomes.",
+        "radar_relevance": "No substantive European research or innovation connection; the legal, institutional and disciplinary setting is North American.",
         "confidence": "high",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1017/aap.2026.10164 to the Advances in Archaeological Practice article on Cambridge Core."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/aap.2026.10164 matched title and journal, dated 20 July 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Joshua J. Wells (Indiana University South Bend), Neha Gupta (University of British Columbia) and Kelsey Noack Myers (Bureau of Ocean Energy Management); received December 2025, accepted May 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF retrieved from Cambridge Core and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1017/aap.2026.10164",
+            "title": "Is Archaeological Data Labor Sustainable? Only through Ethical and Policy Reforms, Open Data Emphases on Public Engagement, and Indigenous Data Sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read. The three mentions of Europe are incidental; the subject, legal frameworks and institutional setting are North American."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RELEVANCE",
+        "reason": "The article is explicitly about US archaeology, with authors in the United States and Canada, addressing US legal and intellectual property models, federally mandated heritage preservation and Indigenous Data Sovereignty. There is no substantive European research, innovation or research-policy connection."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:22Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "3d70941e",
+          "reader_title": "Sustainability of data work in archaeology and the case for governance reform",
+          "reader_what": "The article argues archaeological data work is unsustainable and calls for reforms centring public goods and Indigenous rights.",
+          "reader_more": "The argument is that technology adoption in United States archaeology has outpaced professional and ethical frameworks, leaving data work unsustainable in an under-resourced discipline. The authors review the Western legal and intellectual property paradigms behind archaeological data standards, and contend these produce poor outcomes for data labour, distance the public from heritage data, disregard Indigenous Data Sovereignty, and enable extractive commodification of heritage for AI businesses. The proposed response is to centre public goods and Indigenous rights, and to adopt data ecosystem governance practices. The review covers CARE and FAIR principles and the US OPEN Government Data Act. This is a critical review advancing a normative position rather than an empirical assessment.",
+          "deep_analysis": {
+            "work_kind": "critical review with normative argument",
+            "research_question": "Is archaeological data labour sustainable, and what governance reforms would make it so?",
+            "main_finding": "Argues that current data standards and intellectual property paradigms make archaeological data labour unsustainable and marginalise Indigenous data rights.",
+            "method_or_basis": "Critical review of policy, legislation and ethics frameworks governing archaeological data",
+            "qualification": "A normative argument grounded in United States practice; no empirical measurement of data labour is offered.",
+            "radar_relevance": "Probable mis-admission: the 'data act' signal refers to the US OPEN Government Data Act, not the EU Data Act, and the work is US-focused.",
+            "confidence": "high",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:22Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s11135-026-02982-w": {
       "profile": "deep-reader-v2-authoritative",
@@ -13169,26 +13583,109 @@
       ]
     },
     "link:https://doi.org/10.1007/s11192-026-05690-2": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_b",
+      "corpus_scope": "main",
       "source_hash": "e51c7ed1",
-      "reader_title": "A backcasting study of how humanities research evaluation could work by 2040",
-      "reader_what": "Review and backcasting propose three transitions: from indices to impact, toward open science, and toward technology-shaped evaluation.",
-      "reader_more": "Backcasting works backwards from a desired future state to the steps needed to reach it. The authors pair that technique with a scoping review of the literature to sketch humanities research evaluation in 2040, sorting what they find into transitions, requirements and constraints. The three transitions are a move from index-based counting toward impact, from siloed work toward open science, and from tools toward what they term technopoly, meaning evaluation increasingly shaped by technology. They then set out nine policies with twelve first-level and twenty-eight second-level actionable steps. These are recommendations derived from literature and structured reasoning rather than tested interventions, and no particular national system or funder is examined empirically.",
+      "identity_hash": "8ae96b32c54062df",
+      "reader_title": "Scoping review builds toward a discipline-appropriate framework for evaluating humanities research by 2040",
+      "reader_what": "Identifies approaches, indicators, tools and infrastructures that could make humanities evaluation stable and self-sustaining.",
+      "reader_why": "Existing evaluation models borrowed from the sciences remain insufficient for humanities outputs in practice.",
+      "reader_more": "Research evaluation in the humanities has long relied on models and indicators developed elsewhere, and the article argues these remain inadequate in practice. It combines a scoping review with a forward-looking horizon of 2040 to identify existing and potential approaches, policies, methodologies, criteria, indicators, tools and infrastructures that could support a more suitable evaluation framework. It also considers novel drivers and disruptors that unsettle the static assumptions behind current evaluation practice. The output is an organised map of options and requirements rather than a validated evaluation instrument, so the framework it points toward still needs to be built and tested.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed scoping review with backcasting",
-        "research_question": "What approaches, policies, indicators and infrastructures could support a discipline-appropriate framework for evaluating humanities research by 2040?",
-        "main_finding": "Three transitions are identified for humanities research evaluation, from index to impact, from siloed practice to open science, and from tools to technology-shaped evaluation, supported by nine proposed policies and forty actionable steps.",
-        "method_or_basis": "Scoping review of the literature integrated with backcasting from a 2040 endpoint; publisher full text supplied in package.",
-        "qualification": "Outputs are normative recommendations derived from literature, not empirical findings or tested measures; no specific national or institutional evaluation system is assessed.",
-        "radar_relevance": "Relevant to ongoing research assessment reform debates, though the study is not Europe-specific and makes no claim about European systems.",
-        "confidence": "high",
-        "why_supported": false
+        "work_kind": "scoping review with forward-looking evaluation design",
+        "research_question": "What approaches, indicators, tools and infrastructures could support a discipline-appropriate framework for evaluating humanities research?",
+        "main_finding": "Current humanities evaluation models remain insufficient in practice, and a stable framework requires assembling discipline-appropriate criteria, indicators, tools and infrastructures rather than importing science-derived metrics.",
+        "method_or_basis": "Scoping review of the research evaluation literature combined with a forward projection to a 2040 horizon.",
+        "qualification": "Maps options rather than validating an instrument; the proposed framework has not been implemented or tested.",
+        "radar_relevance": "A measurement and evaluation-design contribution transferable across research assessment systems.",
+        "confidence": "medium",
+        "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://link.springer.com/article/10.1007/s11192-026-05690-2 and retrieved the full article text through to the reference list."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s11192-026-05690-2 matched title and Scientometrics, dated 20 July 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI and supplied URL matched."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "Bibliographic identity settled via Crossref."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher article text retrieved from link.springer.com; Unpaywall reports the record as closed, so no repository copy was required."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "No residual ambiguity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-026-05690-2",
+            "title": "The future of research evaluation in the humanities: a scoping review",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied Springer URL resolved to the matching article and the substantive text was read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Goes beyond reviewing to assemble the approaches, criteria, indicators, tools and infrastructures that could constitute a discipline-appropriate humanities evaluation framework, and projects them to a 2040 horizon. This is a measurement and evaluation-design contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:48Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_b",
+          "source_hash": "e51c7ed1",
+          "reader_title": "A backcasting study of how humanities research evaluation could work by 2040",
+          "reader_what": "Review and backcasting propose three transitions: from indices to impact, toward open science, and toward technology-shaped evaluation.",
+          "reader_more": "Backcasting works backwards from a desired future state to the steps needed to reach it. The authors pair that technique with a scoping review of the literature to sketch humanities research evaluation in 2040, sorting what they find into transitions, requirements and constraints. The three transitions are a move from index-based counting toward impact, from siloed work toward open science, and from tools toward what they term technopoly, meaning evaluation increasingly shaped by technology. They then set out nine policies with twelve first-level and twenty-eight second-level actionable steps. These are recommendations derived from literature and structured reasoning rather than tested interventions, and no particular national system or funder is examined empirically.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed scoping review with backcasting",
+            "research_question": "What approaches, policies, indicators and infrastructures could support a discipline-appropriate framework for evaluating humanities research by 2040?",
+            "main_finding": "Three transitions are identified for humanities research evaluation, from index to impact, from siloed practice to open science, and from tools to technology-shaped evaluation, supported by nine proposed policies and forty actionable steps.",
+            "method_or_basis": "Scoping review of the literature integrated with backcasting from a 2040 endpoint; publisher full text supplied in package.",
+            "qualification": "Outputs are normative recommendations derived from literature, not empirical findings or tested measures; no specific national or institutional evaluation system is assessed.",
+            "radar_relevance": "Relevant to ongoing research assessment reform debates, though the study is not Europe-specific and makes no claim about European systems.",
+            "confidence": "high",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:48Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://doi.org/10.1186/s40309-026-00282-y": {
       "profile": "deep-reader-v2-authoritative",
@@ -15538,26 +16035,109 @@
       ]
     },
     "link:https://doi.org/10.2478/kbo-2026-0010": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "fae7602c",
-      "reader_title": "Using entrepreneurship index data to diagnose Romania innovation capacity",
-      "reader_what": "Uses Global Entrepreneurship Index data to compare Romania with EU peers and suggest improvement directions.",
-      "reader_more": "The article starts from the premise that innovation underpins economic growth, especially during crises, and asks how a country entrepreneurial ecosystem relates to its innovation capacity. That ecosystem is understood as the interaction of stakeholders, resources and institutions. The method combines an exploratory review of the literature with descriptive quantitative analysis of secondary data from the Global Entrepreneurship Index. The authors set out the index dimensions and pillars as they apply to Romania, compare these with other EU countries, and derive directions for improving the Romanian ecosystem along the lines of effort the index model suggests. The work is descriptive and diagnostic; it does not test causal claims or evaluate policy.",
+      "identity_hash": "99385159ab8a014f",
+      "reader_title": "Romania's entrepreneurial ecosystem benchmarked against Germany, Italy and Hungary on innovation capacity",
+      "reader_what": "Uses the Global Entrepreneurship Index to locate bottleneck pillars limiting Romania's aggregate innovation performance.",
+      "reader_why": "In the index a country's weakest pillar caps its overall score, so bottlenecks matter more than averages.",
+      "reader_more": "The study treats innovation as the foundation of economic growth and examines how a country's entrepreneurial ecosystem, formed by interaction among stakeholders, resources and institutions, underpins innovation capacity. It applies the Global Entrepreneurship and Development Index to Romania and compares it with Germany as a benchmark economy, Italy as a second developed economy and Hungary as a comparable one. Under the index methodology the weakest pillar acts as a bottleneck limiting the aggregate score, so the analysis focuses on where Romania's constraints lie. The authors argue that despite EU entrepreneurship funding since the 2014-2020 period, entrepreneurial education, functional clusters and supportive public policy remain underdeveloped. The work applies an existing index rather than proposing a new one.",
       "deep_analysis": {
-        "work_kind": "descriptive comparative analysis (conference article)",
-        "research_question": "How a country entrepreneurial ecosystem relates to its innovation capacity, applied to Romania within the EU.",
-        "main_finding": "The authors map Romania against Global Entrepreneurship Index dimensions relative to EU comparators and derive improvement directions from the weaker pillars.",
-        "method_or_basis": "Packaged abstract and article text from the journal page",
-        "qualification": "Relies on a single composite index and descriptive comparison; no causal evidence and no evaluation of the recommendations.",
-        "radar_relevance": "Concerns measurement of national innovation and entrepreneurship capacity within the EU.",
+        "work_kind": "empirical comparative study using an established index",
+        "research_question": "How does Romania's entrepreneurial ecosystem compare with other EU economies as a measure of innovation capacity?",
+        "main_finding": "Romania's aggregate entrepreneurial and innovation performance is constrained by specific weak pillars, with entrepreneurial education, clusters and public policy identified as persistent gaps despite EU funding.",
+        "method_or_basis": "Exploratory literature analysis plus descriptive-analytical quantitative work on secondary Global Entrepreneurship Index data for Romania, Germany, Italy and Hungary.",
+        "qualification": "Relies on an existing composite index and secondary data; comparisons are descriptive rather than causal, and the study proposes no new measurement approach.",
+        "radar_relevance": "European innovation capacity and national research and innovation policy conditions within EU member states.",
         "confidence": "medium",
-        "why_supported": false
+        "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.2478/kbo-2026-0010 to the Sciendo/reference-global article page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.2478/kbo-2026-0010 matched the title and the International Conference KNOWLEDGE-BASED ORGANIZATION proceedings, issued June 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Diana Elena Ranf, Dorel Badea and Andra-Teodora Gorski, Nicolae Balcescu Land Forces Academy and Lucian Blaga University of Sibiu, vol. XXXII no. 1, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Hybrid open access; full PDF downloaded from https://reference-global.com/download/article/10.2478/kbo-2026-0010.pdf and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://reference-global.com/download/article/10.2478/kbo-2026-0010.pdf",
+            "title": "Theoretical and Practical Models for Analysing a Country's Entrepreneurial Ecosystem as a Measure of Innovation Capacity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI resolved to the matching proceedings article and the full text was read. Scanner date 5 July 2026 differs from the registered issue date of June 2026; corrected to the publication date supported by Crossref and the article itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses Romania's entrepreneurial ecosystem and innovation capacity against Germany, Italy and Hungary using the Global Entrepreneurship Index, and discusses EU funding periods and national innovation policy gaps. European innovation capability is the substance of the analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "fae7602c",
+          "reader_title": "Using entrepreneurship index data to diagnose Romania innovation capacity",
+          "reader_what": "Uses Global Entrepreneurship Index data to compare Romania with EU peers and suggest improvement directions.",
+          "reader_more": "The article starts from the premise that innovation underpins economic growth, especially during crises, and asks how a country entrepreneurial ecosystem relates to its innovation capacity. That ecosystem is understood as the interaction of stakeholders, resources and institutions. The method combines an exploratory review of the literature with descriptive quantitative analysis of secondary data from the Global Entrepreneurship Index. The authors set out the index dimensions and pillars as they apply to Romania, compare these with other EU countries, and derive directions for improving the Romanian ecosystem along the lines of effort the index model suggests. The work is descriptive and diagnostic; it does not test causal claims or evaluate policy.",
+          "deep_analysis": {
+            "work_kind": "descriptive comparative analysis (conference article)",
+            "research_question": "How a country entrepreneurial ecosystem relates to its innovation capacity, applied to Romania within the EU.",
+            "main_finding": "The authors map Romania against Global Entrepreneurship Index dimensions relative to EU comparators and derive improvement directions from the weaker pillars.",
+            "method_or_basis": "Packaged abstract and article text from the journal page",
+            "qualification": "Relies on a single composite index and descriptive comparison; no causal evidence and no evaluation of the recommendations.",
+            "radar_relevance": "Concerns measurement of national innovation and entrepreneurship capacity within the EU.",
+            "confidence": "medium",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/09662839.2026.2700193": {
       "profile": "deep-reader-offline-v1",
@@ -19185,27 +19765,110 @@
       ]
     },
     "link:https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "09731412",
-      "reader_title": "ERA Forum told the Research Area Act will be proposed around November 2026",
-      "reader_what": "Forum update indicates the ERA Act will be mainly a regulation, proposed in late October or early November 2026.",
-      "reader_why": "Signals binding legal form and timing for the next stage of European Research Area policy.",
-      "reader_more": "The ERA Forum held its thirty-third meeting in Malta on 9 and 10 June 2026. The Commission indicated that the European Research Area Act proposal is expected at the end of October or beginning of November 2026, which would allow discussion with Member States and stakeholders at the 2026 Research and Innovation Days before Council negotiations. The Commission confirmed the core of the Act is intended to take the form of a regulation, though some elements may need a directive depending on legal basis, and that the matter is still under examination. Candidate topics have not changed much since the public consultation. Talent attraction measures discussed include faster and more digital visa and residence procedures, shorter processing times, easier moves from study or research into work or entrepreneurship, and better intra-EU mobility.",
+      "identity_hash": "6dbd5960d93eeb9c",
+      "reader_title": "ERA Forum told the ERA Act proposal is expected late 2026 and will be mainly a regulation",
+      "reader_what": "The 33rd ERA Forum covered ERA Act timing and legal form, talent attraction and ERA Policy Agenda implementation.",
+      "reader_why": "Signals the legal instrument and timetable through which European Research Area commitments may become binding.",
+      "reader_more": "The ERA Forum met for its 33rd session in Malta on 9 and 10 June 2026. The Commission indicated that the ERA Act proposal is expected at the end of October or beginning of November 2026, which would allow discussion at the 2026 R&I Days. It confirmed the core of the Act is intended to be a regulation, while noting that some elements may need a directive because different parts require different legal bases. The meeting also covered talent attraction and implementation of the ERA Policy Agenda, including annual updates to the ERA Living Guidelines on generative AI in research and a joint roadmap on AI in science. Timings remain indicative rather than fixed.",
       "deep_analysis": {
-        "work_kind": "governance meeting report",
+        "work_kind": "current development (official report of an EU policy forum meeting)",
         "research_question": "",
-        "main_finding": "The European Research Area Act is expected in late 2026, principally as a regulation, with talent attraction measures focused on visas, residence procedures and intra-EU mobility.",
-        "method_or_basis": "Packaged full text of the ERA Portal Austria meeting report",
-        "qualification": "Reports expectations stated at a meeting; timing, legal form and content remained under examination.",
-        "radar_relevance": "Tracks the legal instrument that will shape European Research Area governance for years.",
+        "main_finding": "The ERA Act proposal is expected around late October or early November 2026 and its core is intended to take the form of a regulation, with some elements possibly proposed as a directive.",
+        "method_or_basis": "Official national ERA platform reporting on the proceedings of the 33rd ERA Forum meeting.",
+        "qualification": "Dates and legal form are stated as expectations under examination, not adopted decisions; the proposal had not been presented at the time of writing.",
+        "radar_relevance": "Directly concerns the governance instrument for the European Research Area and EU research policy implementation.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/ and read the full ERA Portal Austria report of the 33rd ERA Forum meeting."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Institutional policy news item; no DOI registered."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Supplied URL was already the matching official item; no title search required."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Item matches the ERA Forum meeting of 9-10 June 2026 in Malta hosted by Xjenza Malta, consistent with the scanner date of 11 June 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ERA Portal Austria is the Austrian national platform reporting on European Research Area implementation and is itself the issuing body for this item."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Identity settled at step 1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_policy_report",
+            "url": "https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/",
+            "title": "ERA Forum focuses on ERA Act, talent attraction and ERA Policy Agenda implementation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL resolved directly to the matching official item and was read in full; no recovery ladder escalation was needed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports substantive detail from the 33rd ERA Forum: the expected timing of the ERA Act proposal, the Commission's confirmation that its core will take the form of a regulation, and named workstreams including AI in science guidelines. This is more than an event listing."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "09731412",
+          "reader_title": "ERA Forum told the Research Area Act will be proposed around November 2026",
+          "reader_what": "Forum update indicates the ERA Act will be mainly a regulation, proposed in late October or early November 2026.",
+          "reader_why": "Signals binding legal form and timing for the next stage of European Research Area policy.",
+          "reader_more": "The ERA Forum held its thirty-third meeting in Malta on 9 and 10 June 2026. The Commission indicated that the European Research Area Act proposal is expected at the end of October or beginning of November 2026, which would allow discussion with Member States and stakeholders at the 2026 Research and Innovation Days before Council negotiations. The Commission confirmed the core of the Act is intended to take the form of a regulation, though some elements may need a directive depending on legal basis, and that the matter is still under examination. Candidate topics have not changed much since the public consultation. Talent attraction measures discussed include faster and more digital visa and residence procedures, shorter processing times, easier moves from study or research into work or entrepreneurship, and better intra-EU mobility.",
+          "deep_analysis": {
+            "work_kind": "governance meeting report",
+            "research_question": "",
+            "main_finding": "The European Research Area Act is expected in late 2026, principally as a regulation, with talent attraction measures focused on visas, residence procedures and intra-EU mobility.",
+            "method_or_basis": "Packaged full text of the ERA Portal Austria meeting report",
+            "qualification": "Reports expectations stated at a meeting; timing, legal form and content remained under examination.",
+            "radar_relevance": "Tracks the legal instrument that will shape European Research Area governance for years.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://www.cesaer.org/publications/clarifying-and-optimising-civil-dual-use-and-defence-research-and-innovation-in-future-eu-funding-programmes/": {
       "profile": "deep-reader-v2-authoritative",
@@ -21957,26 +22620,109 @@
       ]
     },
     "link:https://arxiv.org/abs/2606.01145": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "ad53f2af",
-      "reader_title": "Reasoning AI models adopted unevenly across scientific disciplines",
-      "reader_what": "Survey across 28 research fields finds reasoning language model adoption concentrated in hard sciences, widening productivity gaps.",
-      "reader_more": "The paper surveys adoption of reasoning language models, meaning AI systems designed for multi-step inference, across 28 scientific disciplines using the European Research Council classification covering social sciences and humanities, physical sciences and engineering, and life sciences. The authors argue that impact is concentrated in hard science fields and that slow adoption elsewhere is widening a gap in research productivity. They examine how these models are developed, evaluated and applied by discipline, and introduce a maturity assessment framework based on the domain-specific development and evaluation resources available. Disparities in maturity are substantial and become more pronounced when only publicly available resources are counted. The paper closes with implementation patterns, challenges and directions for broader adoption.",
+      "identity_hash": "761576042b647ac7",
+      "reader_title": "Survey of reasoning language model uptake across 28 disciplines with a maturity assessment scheme",
+      "reader_what": "Maps how reasoning models are developed, evaluated and applied, and grades disciplinary maturity of adoption.",
+      "reader_why": "Uneven adoption across fields is widening productivity gaps between hard sciences and everything else.",
+      "reader_more": "The authors argue that reasoning language models are concentrated in hard science fields and that slow adoption elsewhere is widening a research productivity gap. They survey adoption across 28 disciplines using the European Research Council's classification, covering social sciences and humanities, physical sciences and engineering, and life sciences, and examine how such models are developed, evaluated and applied in each. The transferable contribution is a maturity-oriented assessment scheme that lets disciplines be placed on a common scale of adoption readiness. The ERC taxonomy is used as an organising device rather than as a study of European research policy, and the survey reports the state of the literature rather than measuring research outcomes directly.",
       "deep_analysis": {
-        "work_kind": "preprint / survey and framework paper",
-        "research_question": "How far reasoning language models have been adopted across scientific disciplines and how mature the supporting resources are.",
-        "main_finding": "Adoption and supporting resources for reasoning language models are concentrated in hard sciences, with substantial maturity gaps across disciplines that widen when only public resources are considered.",
-        "method_or_basis": "Packaged arXiv abstract page",
-        "qualification": "Preprint; maturity is assessed by available resources rather than by measured research outcomes, and the productivity gap claim is asserted rather than quantified.",
-        "radar_relevance": "Concerns uneven uptake of AI across the disciplinary map used by the European Research Council.",
+        "work_kind": "systematic survey with an assessment framework (preprint)",
+        "research_question": "How widely and how maturely have reasoning language models been adopted across the full range of scientific disciplines?",
+        "main_finding": "Adoption is concentrated in hard sciences, and a maturity-oriented assessment applied across 28 ERC-classified disciplines exposes systematic gaps in how other fields develop, evaluate and apply reasoning models.",
+        "method_or_basis": "Structured literature survey across 28 disciplines combined with a newly introduced maturity assessment scheme.",
+        "qualification": "Coverage reflects published literature, so disciplines with thin publishing may appear less mature than actual practice; the maturity scheme is newly proposed and not yet externally validated.",
+        "radar_relevance": "A reusable measurement approach for tracking uneven technology adoption across research fields.",
         "confidence": "medium",
-        "why_supported": false
+        "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://arxiv.org/abs/2606.01145; matched the claimed survey."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI registered for this arXiv preprint."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Identity fixed by the arXiv identifier at step 1."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Large multi-institution author list led from Wroclaw Tech, Poland, with Jagiellonian University, University of Wroclaw and international co-authors, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded and read the complete 38-page PDF from https://arxiv.org/pdf/2606.01145."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2606.01145",
+            "title": "Reasoning4Sciences: Bridging Reasoning Language Models to All Scientific Branches",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied arXiv page matched; complete PDF retrieved and read. The ERC disciplinary taxonomy is used as a classification scheme, which is not by itself substantive European relevance, so the record is targeted at Strand B rather than A."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Beyond surveying adoption, the paper introduces a maturity-oriented assessment scheme for reasoning language model uptake across 28 disciplines, which is a transferable measurement and evaluation approach rather than a one-off application."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:53Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "ad53f2af",
+          "reader_title": "Reasoning AI models adopted unevenly across scientific disciplines",
+          "reader_what": "Survey across 28 research fields finds reasoning language model adoption concentrated in hard sciences, widening productivity gaps.",
+          "reader_more": "The paper surveys adoption of reasoning language models, meaning AI systems designed for multi-step inference, across 28 scientific disciplines using the European Research Council classification covering social sciences and humanities, physical sciences and engineering, and life sciences. The authors argue that impact is concentrated in hard science fields and that slow adoption elsewhere is widening a gap in research productivity. They examine how these models are developed, evaluated and applied by discipline, and introduce a maturity assessment framework based on the domain-specific development and evaluation resources available. Disparities in maturity are substantial and become more pronounced when only publicly available resources are counted. The paper closes with implementation patterns, challenges and directions for broader adoption.",
+          "deep_analysis": {
+            "work_kind": "preprint / survey and framework paper",
+            "research_question": "How far reasoning language models have been adopted across scientific disciplines and how mature the supporting resources are.",
+            "main_finding": "Adoption and supporting resources for reasoning language models are concentrated in hard sciences, with substantial maturity gaps across disciplines that widen when only public resources are considered.",
+            "method_or_basis": "Packaged arXiv abstract page",
+            "qualification": "Preprint; maturity is assessed by available resources rather than by measured research outcomes, and the productivity gap claim is asserted rather than quantified.",
+            "radar_relevance": "Concerns uneven uptake of AI across the disciplinary map used by the European Research Council.",
+            "confidence": "medium",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:53Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.32782/tnu-2707-0581/2026.3/10": {
       "profile": "deep-reader-v2-authoritative",
@@ -36641,6 +37387,1299 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-14T11:30:02Z",
       "deep_scan_package_id": "worker-a-20260914T110926Z-7d1142197a5a"
+    },
+    "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQY0VoUUV2WXpJWV8ybVAxejNfblM5dHEyREE4YWQ1akRjRl9YUzEtRzdiWUZtNHFoODNRcTdhbVZEYlBUeldMc3FLVnpYRU9SLVhYQkpabEVRQU1Ed01uX05jZWVWSjBYSzBCNjc2anhNVTZkYzdmek9HMW1kMEtJRFBxemFtRUlTYjBWMjNWZUdTLU1r?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "c827a738",
+      "identity_hash": "8ab9e0b7b14d97b3",
+      "reader_title": "EU opens bidding for seven AI gigafactories under a roughly 30-billion-euro public-private package",
+      "reader_what": "The Commission launched the formal selection process for seven consortia to build large AI training data centres.",
+      "reader_why": "Concentrates Europe's frontier training compute and shapes how far it depends on outside suppliers.",
+      "reader_more": "The EU has started the official process for industry consortia to build seven AI gigafactories. Four smaller sites would each run 25,000 to 75,000 specialised AI chips and three larger ones 40,000 to 100,000. Public funding is capped at 1 billion euros per smaller project and 2 billion per larger one, with winners chosen by early next year and eighteen months allowed to build. The article notes Germany, Greece, Portugal, Italy and Spain backing the largest hubs. The headline 30-billion-euro figure depends on private capital covering most of the total, so the amount is an expectation rather than committed money.",
+      "deep_analysis": {
+        "work_kind": "current development (news report on a funding instrument)",
+        "research_question": "",
+        "main_finding": "The EU formally opened the selection process for seven AI gigafactory consortia, with defined chip thresholds, public funding ceilings and an eighteen-month construction window.",
+        "method_or_basis": "First-hand reporting from Brussels by POLITICO's technology correspondent, citing the Commission's launch and named member state backers.",
+        "qualification": "The tender is a launch, not an award; the headline investment total is contingent on private co-financing that has not yet been committed.",
+        "radar_relevance": "A direct change to European compute capacity and to the public instruments funding it, squarely within the Radar's technology-capability scope.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News RSS token news.google.com/rss/articles/CBMilAFBVV95cUxQY0Vo... returned only the generic Google News shell; decoded the token via the Google News batchexecute garturlreq endpoint, which resolved to https://www.politico.eu/article/eu-launches-e30-billion-push-build-7-giga-ai-compute-hubs/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News item; no DOI is registered for a POLITICO article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched the resolved slug 'eu-launches-e30-billion-push-build-7-giga-ai-compute-hubs'; surfaced POLITICO's own syndicated copy on E&E News by POLITICO."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Byline Pieter Haeck, 31/07/2026 06:09 EDT, confirmed on the E&E News by POLITICO page metadata."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened https://www.eenews.net/articles/eu-launches-e30b-push-to-build-7-massive-ai-data-centers/ (c) POLITICO LLC and read the complete article body."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Corroborated the underlying EuroHPC call against independent reporting of the same 30 July 2026 tender launch."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.eenews.net/articles/eu-launches-e30b-push-to-build-7-massive-ai-data-centers/",
+            "title": "EU launches EUR30B push to build 7 massive AI data centers (POLITICO, syndicated on E&E News by POLITICO)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL was a Google News redirect. Token decoded to a politico.eu article; full text read from POLITICO's own E&E News syndication."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The page reports an actual procurement launch: the EU opened the formal process for seven AI gigafactory consortia, with stated chip thresholds, funding ceilings and a build timetable. That is a concrete funding-instrument event, not a generic programme page."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:39:59Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxNU0dkOEVCbThKTWVGTEYwZ3RrNExHNXBNWDlSZWpfSmRsR0daVjdZeWZKN0RRQXlzcEdNcExBM29STlBfcERKdkx1b0hsWjFfOHpLTUd1R2hQS1JjdC0zdXFraDJ1WWRrTUhmMTdWN0lnYlpmcWdlYm9zdVRaNm9ud0tQLXZ5WElBbXZnMDJGVHdBNzQ3cV9wOGU4SXo4a0JkWWwwNHBORjRjb1V1aTBr?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a549a72d",
+      "identity_hash": "254d7f88be6193a9",
+      "reader_title": "Deadlock over new EU spending rules postpones Parliament votes on the next Horizon Europe",
+      "reader_what": "Research committee votes on Horizon Europe and the Competitiveness Fund slipped because the Performance Framework Regulation is unresolved.",
+      "reader_why": "Delay compresses the trilogue window and threatens a 2028 start for the next framework programme.",
+      "reader_more": "Legislative work on the next Horizon Europe and the European Competitiveness Fund has stalled while the European Parliament's budgets committee settles the Performance Framework Regulation, a horizontal set of monitoring rules from the Commission's July 2025 MFF proposal. The disagreement is between the S&D, which wants the regulation applied across all sectoral programmes at once, and the EPP, which opposes that. Committee votes originally set for 10 September were postponed and the plenary vote moved from 5 October to mid-November. Research Commissioner Ekaterina Zaharieva had said a deal by end-2026 was needed for a 1 January 2028 start. A separate dispute over expert councils governing Pillar 2 also remains open.",
+      "deep_analysis": {
+        "work_kind": "current development (policy and legislative process reporting)",
+        "research_question": "",
+        "main_finding": "Parliamentary votes on Horizon Europe and the Competitiveness Fund were postponed pending agreement on the Performance Framework Regulation, delaying plenary confirmation to mid-November.",
+        "method_or_basis": "Named on-the-record interviews with MEPs Eszter Lakos and Niclas Herbst plus unattributed Parliament and Council sources.",
+        "qualification": "The delay is procedural and the eventual timetable is still expected rather than fixed; no final budget or programme decision has been taken.",
+        "radar_relevance": "Directly concerns the timing and predictability of the EU's main research funding programme, a core Radar interest.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News RSS token CBMirwFBVV95cUxNU0dkOEVCbThKTWVGTEYwZ3Rr... served the Google News shell only; decoded it to https://sciencebusiness.net/news/fp10/parliament-haggle-over-eu-wide-spending-rules-delays-vote-horizon-europe."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Trade news article; no DOI registered."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched the exact headline 'Parliament haggle over EU-wide spending rules delays vote on Horizon Europe'; Science|Business pages confirmed it dated 10 Sep 2026."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Byline Ole Ellekrog, 10 Sep 2026, confirmed on the article page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened the Science|Business article page directly and read the complete text including quotes from MEPs Lakos and Herbst."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Identity and full text already settled at step 5; no further identity search needed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/fp10/parliament-haggle-over-eu-wide-spending-rules-delays-vote-horizon-europe",
+            "title": "Parliament haggle over EU-wide spending rules delays vote on Horizon Europe (Science|Business)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL was a Google News redirect; decoded token led to the Science|Business article, which was read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a specific legislative development: the Parliament's research committee votes on Horizon Europe and the European Competitiveness Fund were postponed because the budgets committee has not settled the Performance Framework Regulation, pushing the plenary vote from October to mid-November."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://arxiv.org/abs/2605.22332": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "7a621e92",
+      "identity_hash": "17fd60e73530ccf4",
+      "reader_title": "Greek-authored strategic account of building the EU's continent-wide quantum key distribution shield",
+      "reader_what": "Sets out how EuroQCI and the SEEWQCI project combine fibre, satellite and security rules into a protective layer.",
+      "reader_why": "Quantum-capable adversaries threaten current encryption protecting European grids, hospitals and public data.",
+      "reader_more": "The paper argues that advances in quantum computing threaten the cryptography underpinning existing digital systems, and that the European Union's European Quantum Communication Infrastructure is the strategic response. It describes the SEEWQCI project as combining fibre links, satellite communications and strengthened security rules into a continent-scale quantum key distribution layer, aimed at protecting critical services such as power grids and hospitals. The authors write from Greek national government and research infrastructure positions, giving a member state implementation perspective. This is a strategic and architectural position paper rather than an experimental evaluation, so its claims describe intended deployment and design rationale rather than measured performance of a working continent-wide system.",
+      "deep_analysis": {
+        "work_kind": "strategic position paper (preprint)",
+        "research_question": "How should a continent-wide European quantum key distribution infrastructure be structured and justified?",
+        "main_finding": "A layered EuroQCI architecture combining terrestrial fibre, satellite links and hardened security governance is presented as the route to protecting European critical services against quantum-enabled decryption.",
+        "method_or_basis": "Policy and architecture analysis drawing on the EuroQCI programme and the SEEWQCI project, from national ministry and research infrastructure authors.",
+        "qualification": "A strategic view rather than empirical evaluation; deployment outcomes and performance are prospective, not demonstrated.",
+        "radar_relevance": "EU strategic technology capability, research security and infrastructure sovereignty in quantum communications.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://arxiv.org/abs/2605.22332; landing page matched the claimed title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is registered for this arXiv preprint."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Identity confirmed from the arXiv identifier at step 1."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors confirmed as Maglaras, Papastamatiou, Aivaliotis, Markatos and Karantzalos, affiliated to the Greek Ministry of Digital Governance, GRNET and FORTH."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded and read the complete PDF from https://arxiv.org/pdf/2605.22332."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2605.22332",
+            "title": "Building Europe's Quantum Shield: The Strategic view for a Continent-Wide Quantum Key Distribution (QKD) Infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied arXiv landing page matched; complete PDF retrieved from arXiv and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The whole subject is the EU's EuroQCI quantum communication infrastructure and the SEEWQCI national/regional segment, written by authors from a national ministry and national research infrastructure bodies. European strategic technology capability is the object of study, not a passing comparator."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1017/pds.2026.10371": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "a3f896a1",
+      "identity_hash": "82bc817fce24bed4",
+      "reader_title": "New four-dimension framework for evaluating speculative foresight prototypes in design education",
+      "reader_what": "Identifies functional visibility, sensory experience, future adaptability and creative divergence as evaluation dimensions.",
+      "reader_why": "Foresight prototypes were being critiqued without shared criteria for what counts as good evidence.",
+      "reader_more": "Foresight prototyping uses speculative artefacts to explore possible futures and support anticipatory design thinking, but studio critique of such artefacts has lacked shared evaluation criteria. Drawing on a literature review, author interviews and quantitative analysis of perceptual ratings, the study identifies four dimensions: functional visibility, sensory experience, future adaptability and creative divergence. These form the Foresight Prototype Evaluation Framework, intended to support consistent, evidence-based assessment and feedback. The authors note the framework is validated in an educational studio context and argue it should transfer to professional design review, but that professional validation, including comparison against existing review routines, is future work.",
+      "deep_analysis": {
+        "work_kind": "methodological study developing an evaluation framework",
+        "research_question": "On what dimensions can foresight prototypes be evaluated consistently in design education and practice?",
+        "main_finding": "Four dimensions - functional visibility, sensory experience, future adaptability and creative divergence - support consistent evidence-based evaluation of foresight prototypes.",
+        "method_or_basis": "Literature review, author interviews and quantitative analysis of perceptual ratings.",
+        "qualification": "Validated only in an educational studio setting; transfer to professional design review is argued but not yet tested.",
+        "radar_relevance": "A transferable evaluation design for anticipatory and foresight work.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1017/pds.2026.10371 to the Cambridge Core article page for Proceedings of the Design Society and retrieved the full article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/pds.2026.10371 matched title, journal and a publication date of 2 July 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI and supplied URL already matched the work."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "Bibliographic identity settled via Crossref at step 2."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Unpaywall reported hybrid open access and the Cambridge Core copy was read in full."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "No residual ambiguity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1017/pds.2026.10371",
+            "title": "Foresight prototyping: developing an evaluation framework and strategy for future-oriented design",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI resolved to the matching Cambridge Core article and the full text was read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops and validates the Foresight Prototype Evaluation Framework, a four-dimension evaluation instrument for assessing speculative artefacts. This is a new evaluation design rather than an application of an existing one."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1186/s43093-026-00816-7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "85e698ad",
+      "identity_hash": "97dedca43df67169",
+      "reader_title": "Kermanshah urban competitiveness assessed with existing structural analysis and ranking tools",
+      "reader_what": "Twenty-nine expert-developed indicators were analysed with MICMAC, COPRAS and Wizard scenario software.",
+      "reader_more": "This study assesses the competitiveness of Kermanshah metropolis using a descriptive-analytical approach. A panel of experts in economics, urban geography and land management developed and evaluated twenty-nine indicators of urban competitive potential, with experts selected by snowball sampling and Cochran's formula. Structural relationships among variables were examined with MICMAC, alternatives were ranked with COPRAS, and scenarios were produced using Wizard software. The methods discussion sets out why each of these established techniques suits urban competitiveness analysis, for instance COPRAS preserving proportional differences across beneficial and non-beneficial criteria. The contribution is a case assessment of one city in the Global South rather than a methodological advance, which is why it does not meet the reusable-method requirement.",
+      "deep_analysis": {
+        "work_kind": "applied case study using established multi-criteria and scenario tools",
+        "research_question": "Which key factors determine the competitiveness of Kermanshah metropolis?",
+        "main_finding": "Twenty-nine expert-derived indicators, analysed through structural and multi-criteria techniques, identify the key drivers of Kermanshah's urban competitiveness and generate scenarios from them.",
+        "method_or_basis": "Descriptive-analytical design with expert panel indicator development, snowball sampling, MICMAC structural analysis, COPRAS ranking and Wizard scenario software.",
+        "qualification": "Single-city case with expert-derived indicators and snowball-sampled panel; findings are specific to Kermanshah.",
+        "radar_relevance": "Fails Strand B because it applies existing methods to a case rather than contributing a transferable methodological advance.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1186/s43093-026-00816-7 to the Future Business Journal article and retrieved the full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s43093-026-00816-7 matched title and journal, dated 16 June 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Future Business Journal volume 12, article 182, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; complete article text retrieved from the publisher and read, including the methods justification for MICMAC and COPRAS."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1186/s43093-026-00816-7",
+            "title": "Foresight Kermanshah metropolis competitiveness through identification of key factors: a mix method assessment MICMAC, COPRAS, and wizard scenario",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read. The methods section explains the suitability of each pre-existing tool for urban competitiveness analysis rather than introducing a methodological advance."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_NOT_METHOD",
+        "reason": "The study applies established tools - MICMAC structural analysis, COPRAS multi-criteria ranking and Wizard scenario software - to a single city case. The text justifies why each existing technique suits the case but does not propose a new or materially improved method, which Strand B requires."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.2478/ijhrd-2026-0004": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "d275f812",
+      "identity_hash": "598e3cdf674c46ce",
+      "reader_title": "Futures and foresight analysis applied to leadership development and women's progression into leadership",
+      "reader_what": "Concludes HRD academics must shape leadership research direction to affect women's position in leadership.",
+      "reader_more": "The paper applies a futures and foresight analysis to leadership development and its effect on the development of women leaders, organised around two questions: whether leadership development has changed the understanding of leadership since 2021, and whether it has produced more women leaders. The authors reach three main conclusions, the first being that influencing the direction of leadership research is a key challenge for HRD academics and professionals, and the second that having an impact on women's position in leadership requires those academics and professionals to meet such challenges. The foresight analysis is used as an analytical lens applied to an existing debate; the paper does not develop or materially improve a foresight technique that others could reuse.",
+      "deep_analysis": {
+        "work_kind": "conceptual analysis applying an existing foresight lens",
+        "research_question": "Has leadership development changed the understanding of leadership since 2021, and has it produced more women leaders?",
+        "main_finding": "Influencing the direction of leadership research is the central challenge for HRD academics and professionals if the position of women in leadership is to change.",
+        "method_or_basis": "Application of a futures and foresight analysis to the leadership development literature and debate.",
+        "qualification": "Conceptual and argumentative; no new empirical data and no methodological development.",
+        "radar_relevance": "Fails Strand B because the foresight analysis is applied rather than advanced.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.2478/ijhrd-2026-0004 to the Sciendo article page for the International Journal of HRD."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.2478/ijhrd-2026-0004 matched title and journal, dated 25 May 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Sallyann Halliday (Leeds Beckett University) and Jim Stewart (Liverpool John Moores University), IJHRD 10(1) 2026, pages 30-43."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF downloaded from https://reference-global.com/download/article/10.2478/ijhrd-2026-0004.pdf and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://reference-global.com/download/article/10.2478/ijhrd-2026-0004.pdf",
+            "title": "Leadership Development and its Impact on Development of Women Leaders: A Futures and Foresight Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read. The paper states it is based on applying a futures and foresight analysis to the issue, and its three conclusions are about the HRD field rather than about method."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_NOT_METHOD",
+        "reason": "Explicitly presents itself as an application of futures and foresight analysis to a substantive HRD question. Its conclusions concern leadership research direction and women's position in leadership, not an improved or transferable foresight technique."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1186/s43093-026-00821-w": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f1a22fa8",
+      "identity_hash": "e06fc1834b014ad3",
+      "reader_title": "Access to European R&D networks predicts technology adoption in Spanish science parks",
+      "reader_what": "Across 847 firms, breadth of international network access mattered more than depth of individual relationships.",
+      "reader_why": "Diversity of connections appears to carry adoption benefits that repeated ties to the same partners do not.",
+      "reader_more": "This study analyses 847 companies located in Spanish science and technology parks, using negative binomial regression to test how participation in European R&D networks relates to adoption of web technologies. International collaboration is significantly associated with higher adoption, with an average difference of 789 euros per month in technology spending. Structural access to international networks, meaning the breadth and diversity of connections, is more strongly linked to adoption than relational intensity, meaning how frequently firms interact with the same partners. Adoption effects also differ between standardised and more complex smart technologies, which the authors attribute to absorptive capacity and tacit knowledge. The design is cross-sectional and associational, so these are relationships rather than demonstrated causal effects.",
+      "deep_analysis": {
+        "work_kind": "quantitative empirical study",
+        "research_question": "How does participation in European R&D networks relate to digital technology adoption among firms in Spanish science and technology parks?",
+        "main_finding": "International collaboration is significantly associated with higher web technology adoption, and structural network access is more strongly linked to adoption than relational intensity.",
+        "method_or_basis": "Negative binomial regression models on data from 847 companies in Spanish science and technology parks, testing three hypotheses.",
+        "qualification": "Cross-sectional and associational; the study reports associations and spending differences rather than establishing causation.",
+        "radar_relevance": "European R&D network participation, innovation infrastructure and firm-level technology capability in an EU member state.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1186/s43093-026-00821-w to the Future Business Journal article and retrieved the full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s43093-026-00821-w matched title and journal, dated 16 April 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Herrero et al., Future Business Journal 12:111, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF downloaded from https://link.springer.com/content/pdf/10.1186/s43093-026-00821-w.pdf and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1186/s43093-026-00821-w.pdf",
+            "title": "The power of access: international collaboration and the differential adoption of web technologies in Spanish science and technology parks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI resolved to the matching open-access article and the full text was read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Examines 847 companies in Spanish science and technology parks and tests how participation in European R&D networks relates to technology adoption. European research collaboration infrastructure is the explanatory variable, not background context."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1017/dap.2024.45": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "383af283",
+      "identity_hash": "c9963799a918609a",
+      "reader_title": "Displaced Ukrainians in Valencia ran their own horizon scanning to build return-migration scenarios",
+      "reader_what": "A participatory foresight design put scenario-building in the hands of twenty displaced people themselves.",
+      "reader_why": "Foresight about a population usually excludes that population from producing the scenarios.",
+      "reader_more": "This study engaged twenty displaced Ukrainians living in Valencia between May and December 2023 in a participatory foresight process about possible return migration. The process combined workshops, online messaging group discussions, interviews and participatory observation, and ended with an open art exhibition. Participants carried out a collective horizon scan, identifying weak signals and emerging trends, then examined critical uncertainties and built scenarios from them. The methodological point is that people directly affected by an uncertain future acted as the foresight practitioners rather than as subjects. The sample is small and situated in one host city, so the scenarios describe how this group anticipates return rather than forecasting actual return flows.",
+      "deep_analysis": {
+        "work_kind": "participatory foresight study with a methodological contribution",
+        "research_question": "How can displaced people themselves be engaged in anticipating the futures of return migration?",
+        "main_finding": "An inclusive participatory foresight design enabled displaced Ukrainians to conduct collective horizon scanning and build return-migration scenarios from their own identified uncertainties.",
+        "method_or_basis": "Workshops, messaging-group discussions, interviews and participatory observation with twenty displaced Ukrainians in Valencia over eight months, closing with a public art exhibition.",
+        "qualification": "Twenty participants in a single host city; outputs are participant-generated scenarios, not predictions of actual return migration.",
+        "radar_relevance": "A reusable participatory foresight design transferable to other displaced or affected populations.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1017/dap.2024.45 to the Cambridge Core Data & Policy article and retrieved the full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/dap.2024.45 matched title and journal, with an issued year of 2024."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Oksana Udovyk and Ruth M-Domenech, INGENIO (CSIC-UPV), Valencia; received December 2023, accepted September 2024."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access confirmed via Unpaywall; full PDF retrieved from Cambridge Core."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Identity settled earlier in the ladder."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1017/dap.2024.45",
+            "title": "Anticipating return migration to Ukraine: participatory foresight with Ukrainians displaced to Spain",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI resolved to the matching open-access article and the full text was read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Develops an inclusive participatory foresight design in which the affected population itself performs horizon scanning, identifies critical uncertainties and builds scenarios, culminating in a public art exhibition. The methodological design, not the migration finding, is the transferable contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1002/ffo2.70035": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "94367579",
+      "identity_hash": "217d8ebec78d3264",
+      "reader_title": "How to choose anticipatory methods when a technology is too new to forecast conventionally",
+      "reader_what": "Frames method selection around novelty, growth, coherence, potential impact and uncertainty of emerging technologies.",
+      "reader_why": "Radically new technologies break the assumptions that conventional forecasting methods depend on.",
+      "reader_more": "Radically new technologies are difficult to anticipate because the usual forecasting inputs, such as stable trends and established markets, do not yet exist. This article works through the characteristics that mark such emergence: novelty, meaning significant departure from the state of the art; growth in actors, funding and patents; coherence, as research lines converge and a community of practice forms; potential impact across socio-economic systems and disciplines; and persistent uncertainty. It uses these to reason about which anticipatory methods are appropriate at which stage. The contribution is conceptual guidance for navigating uncertainty rather than an empirical test showing that the resulting method choices produce better anticipation.",
+      "deep_analysis": {
+        "work_kind": "conceptual methodological article in foresight",
+        "research_question": "Which anticipatory methods are appropriate for technologies that are radically new and highly uncertain?",
+        "main_finding": "Method selection should be organised around the emergence characteristics of novelty, growth, coherence, potential impact and uncertainty rather than around conventional forecasting assumptions.",
+        "method_or_basis": "Conceptual analysis and synthesis of the anticipation and emerging technology literatures.",
+        "qualification": "Conceptual guidance; no empirical demonstration that the proposed selection logic improves anticipation outcomes.",
+        "radar_relevance": "Transferable guidance on anticipatory method choice for foresight and horizon scanning practice.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1002/ffo2.70035 redirected to Wiley Online Library, which returned a Cloudflare interstitial rather than the article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.70035 confirmed Futures & Foresight Science and a date of 21 January 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI already fixed identity."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors confirmed as B. L. van Veen and J. R. Ortt; cited as Futures and Foresight Science 8(1), article e70035."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the publisher version of record from the Erasmus University Rotterdam research repository at https://pure.eur.nl/ws/files/224403881/ and read it in full."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.eur.nl/ws/files/224403881/",
+            "title": "Anticipatory Methods for the Emergence of Radically New Technologies: Navigating Uncertainty (version of record, EUR repository)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Wiley blocked direct access; the publisher's version of record was legitimately recovered from the Erasmus University Rotterdam institutional repository, which is where the matching work was found."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Addresses how anticipatory methods should be selected and applied to radically new technologies, working through criteria such as novelty, growth, coherence, potential impact and uncertainty. This is a methodological contribution to foresight practice."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:00Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1007/s43508-022-00045-y": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "b427f380",
+      "identity_hash": "d9acff8b1d1a5646",
+      "reader_title": "Proposal for standing horizon scanning and technology audit groups in technology governance",
+      "reader_what": "Argues governance neglects both early anticipation of emerging technologies and later auditing of adopted ones.",
+      "reader_why": "Governance debate concentrates on the approval decision and skips what comes before and after it.",
+      "reader_more": "Technology governance debate, especially in the life sciences, tends to concentrate on limits to research and on whether to permit wide use. This article argues that two stages receive far less attention: anticipating technologies with important effects before they arrive, and monitoring the actual effects of technologies once adopted. It proposes a visible and influential Horizon Scanning Group to spot and analyse emerging technologies, and more formal Technology Audit Groups to assess developments after deployment. A third section works through the organisational questions such bodies raise, including mandate and composition, and suggests specific approaches. The article is a governance proposal; neither body existed, so there is no evidence of how they would perform in practice.",
+      "deep_analysis": {
+        "work_kind": "governance proposal article",
+        "research_question": "How can technology governance be improved at the anticipation and post-adoption monitoring stages?",
+        "main_finding": "Technology governance should be extended by a standing high-profile horizon scanning body and formal technology audit groups covering the neglected stages before and after the approval decision.",
+        "method_or_basis": "Conceptual analysis of the technology governance process with a worked institutional design proposal.",
+        "qualification": "Purely prospective; the proposed bodies do not exist and no evidence is offered on their likely effectiveness.",
+        "radar_relevance": "Sits between a reusable anticipatory governance method and an institutional design proposal, which is why admission needs human judgement.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://link.springer.com/article/10.1007/s43508-022-00045-y, the matching Global Public Policy and Governance article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s43508-022-00045-y matched title and journal, dated 29 August 2022."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Cited as GPPG 2, 266-282 (2022), consistent with the retrieved article text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Unpaywall reports the record as closed; the substantive publisher article text was nonetheless retrieved from link.springer.com and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "No residual identity ambiguity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s43508-022-00045-y",
+            "title": "Governing emerging technologies - looking forward with horizon scanning and looking back with technology audits",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive publisher text retrieved and read. The proposal is specified at the level of organisational arrangements rather than a procedure another team could execute directly, which is what makes the Strand B fit debatable."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_VS_INSTITUTION_JUDGEMENT",
+        "reason": "Proposes a high-profile Horizon Scanning Group and formal Technology Audit Groups to fill anticipation and monitoring gaps in technology governance. Whether this counts as a reusable methodological contribution or primarily an institutional design proposal is a genuine judgement call."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1017/s1368980021000525": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "3187044a",
+      "identity_hash": "733efb7b60d04576",
+      "reader_title": "Structured expert elicitation used to supply missing data on household food security determinants",
+      "reader_what": "The IDEA protocol produced defensible estimates for food cost, disposable income and physical access.",
+      "reader_why": "Structured elicitation curbs the deference and availability biases that informal expert panels reproduce.",
+      "reader_more": "Decisions about household food security often depend on quantities for which no reliable data exist. This study examines structured expert judgement elicitation as a way to produce robust, defensible estimates for three determinants: food cost, household disposable income and physical access, feeding a proof-of-concept decision support system. It implements the Investigate, Discuss, Estimate, Aggregate protocol with both quantitative and qualitative elements, across pre- and post-activity work and a one-day face-to-face workshop supported by briefing materials. The authors argue that informal expert panels are prone to social deference, availability bias and semantic misunderstanding, producing results that are often unreproducible, and that structured approaches mitigate these. The protocol itself is established; its use in high-income household food security is what the authors present as novel.",
+      "deep_analysis": {
+        "work_kind": "methodological application study",
+        "research_question": "Can structured expert judgement elicitation provide defensible data on household food security determinants where empirical data are unavailable?",
+        "main_finding": "The IDEA elicitation protocol yielded usable, defensible estimates for three food security determinants and can supply inputs to a decision support system where data are otherwise missing.",
+        "method_or_basis": "Implementation of the IDEA structured expert judgement protocol with quantitative and qualitative elements, including a facilitated one-day workshop.",
+        "qualification": "Proof-of-concept; the elicited quantities are expert estimates rather than measured values, and the protocol is adopted rather than newly developed.",
+        "radar_relevance": "A transferable elicitation and evidence-generation design, though its Strand B status turns on whether novel application counts as methodological contribution.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1017/s1368980021000525 to the Public Health Nutrition article on Cambridge Core."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/S1368980021000525 matched title and journal, first published online 5 February 2021."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Sue Kleve (Monash University) and Martine J Barons (University of Warwick); submitted August 2020, accepted January 2021."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Bronze open access; full PDF retrieved from Cambridge Core and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1017/s1368980021000525",
+            "title": "A structured expert judgement elicitation approach: how can it inform sound intervention decision-making to support household food security?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read, including the protocol implementation detail and the pre-workshop briefing materials."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_NOVEL_APPLICATION_JUDGEMENT",
+        "reason": "Implements the established IDEA elicitation protocol in a domain where the authors say its use is novel, and demonstrates how elicited quantities feed a decision support system. Whether this is a materially improved elicitation design or the application of an existing protocol to a new case is a genuine judgement call under Strand B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.58691/man/221173": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "c56ea5fe",
+      "identity_hash": "572ab1e791d25c09",
+      "reader_title": "Scenario-based design compares how generative AI models reason under each VUCA condition",
+      "reader_what": "Multiple generative AI tools develop strategies across VUCA scenarios and then evaluate each other's output.",
+      "reader_why": "Volatility, uncertainty, complexity and ambiguity may each strain AI strategic reasoning differently.",
+      "reader_more": "The study asks whether generative AI tools differ in strategy development and strategic reasoning across the separate components of volatility, uncertainty, complexity and ambiguity, rather than treating VUCA as one undifferentiated condition. It uses an exploratory design combining a qualitative scenario method with strategy development by several generative AI systems and an AI-based evaluation step in which model outputs are assessed comparatively. The design itself is the transferable element, offering a repeatable way to benchmark AI strategic reasoning. The authors note limitations: strategy development was conducted in a single-shot manner, and access to these tools is unevenly distributed across organisations, which constrains how far the findings carry into practice.",
+      "deep_analysis": {
+        "work_kind": "exploratory methodological study",
+        "research_question": "Do generative AI tools differ in strategy development and strategic reasoning across individual VUCA components?",
+        "main_finding": "Generative AI strategic reasoning varies by VUCA component, and a multi-model scenario-plus-cross-evaluation design can expose those differences systematically.",
+        "method_or_basis": "Qualitative scenario method combined with multi-GenAI strategy development and an AI-based comparative evaluation approach.",
+        "qualification": "Single-shot strategy generation, exploratory design, and unequal organisational access to the tools limit generalisation.",
+        "radar_relevance": "A replicable evaluation design for benchmarking AI-supported strategy and foresight work.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.58691/man/221173 resolved to the Management journal record; the landing page alone did not carry substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.58691/man/221173 matched the title 'GenAI-Supported strategy development in VUCA scenarios and Multi-GenAI evaluation', journal Management, dated 28 May 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous on title."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Authors Engin Yurdasever (Ordu University) and Canan Yildiran (Karabuk University), Management vol. 30 no. 1, 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF downloaded from the journal at www.management-poland.com and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.management-poland.com/pdf-221173-141136",
+            "title": "GenAI-Supported strategy development in VUCA scenarios and Multi-GenAI evaluation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text retrieved from the journal. Note a publisher inconsistency: the PDF running head carries DOI 10.58691/man/195476 while the registered DOI for this article is 10.58691/man/221173; title, authors, volume and issue all match, so this is treated as a publisher typesetting error and no DOI identity was altered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Combines a qualitative scenario method with multi-model generative AI strategy generation and an AI-based cross-evaluation step, producing a replicable evaluation design for comparing AI strategic reasoning across distinct VUCA components."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://arxiv.org/abs/2604.09597": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "900a1b07",
+      "identity_hash": "1883483d02e22c3b",
+      "reader_title": "Two executable five-step protocols turn creativity and foresight theory into repeatable procedures",
+      "reader_what": "GHOSTY COLLIDER drives cross-domain creative collision; PRECOG PROTOCOL structures weak-signal foresight with timing judgement.",
+      "reader_why": "Classic creativity and weak-signal theories explain why insight happens but not how to produce it.",
+      "reader_more": "The paper takes descriptive theories of creativity and foresight, including Koestler's bisociation, de Bono's lateral thinking and Ansoff's weak signals, and converts them into two executable protocols. GHOSTY COLLIDER is a five-step procedure for cross-domain creative emergence through structural de-labelling and collision; PRECOG PROTOCOL is a five-step procedure for signal-based strategic foresight with multi-axis timing judgement. Both specify explicit quality criteria, anti-pattern detection and measurable outputs. Evaluation uses five case studies, controlled comparisons with and without the protocols, and structural analysis. The author states plainly that all case studies were run by a single operator with AI assistance, so the evidence is proof-of-concept and multi-user validation remains outstanding.",
+      "deep_analysis": {
+        "work_kind": "methodological paper proposing executable protocols (preprint)",
+        "research_question": "How can descriptive theories of creativity and strategic foresight be turned into procedures that can be executed on demand?",
+        "main_finding": "Two five-step protocols operationalise bisociation-style creative collision and weak-signal foresight into repeatable procedures with explicit quality criteria and anti-pattern checks.",
+        "method_or_basis": "Theory formalisation plus five multi-domain case studies and controlled with/without comparisons.",
+        "qualification": "All evaluation was performed by the single author with AI assistance and is presented as preliminary proof-of-concept, not demonstrated general effectiveness.",
+        "radar_relevance": "A directly transferable foresight and ideation method usable outside its originating context.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://arxiv.org/abs/2604.09597; matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI registered for this arXiv preprint."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Identity fixed by the arXiv identifier at step 1."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Single author Shun Fujiyoshi, independent researcher, dated February 2026 on the title page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded and read the complete PDF from https://arxiv.org/pdf/2604.09597 including the evaluation section."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Full text obtained at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2604.09597",
+            "title": "From Theory to Protocol: Executable Frameworks for Creative Emergence and Strategic Foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied arXiv page matched; complete PDF retrieved and read, including the author's own statement that the evaluation is proof-of-concept."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Formalises descriptive theories into two explicitly specified five-step protocols with quality criteria, anti-pattern detection and measurable outputs. That is a genuine reusable method contribution, independent of geography."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1016/j.avb.2021.101685": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "b31d36a2",
+      "identity_hash": "335b04864696b0b6",
+      "reader_title": "Clinical review of psychosocial violence interventions using an off-the-shelf horizon scanning approach",
+      "reader_what": "Clinical trials were treated as filters and signals of innovation, then synthesised and rated for signal strength.",
+      "reader_more": "This review examines recent innovation in psychosocial interventions for reducing violence and aggression in adults. The authors define a conceptual approach in which controlled clinical trials of intervention effectiveness serve as both filters and signals of emerging innovation, citing existing horizon scanning literature for that design. Information extracted from documents identified during filtering is tabulated, findings within and across studies are synthesised and discussed, and the strength of the innovation signal in each study is rated against pre-defined criteria. The clinical framing is anchored in UK NICE definitions and guidance on managing violence and aggression. The horizon scanning method is imported and operationalised for this clinical question rather than advanced as a transferable methodological contribution.",
+      "deep_analysis": {
+        "work_kind": "clinical evidence review using horizon scanning",
+        "research_question": "What recent innovation exists in psychosocial interventions for reducing violence and aggression in adults?",
+        "main_finding": "Using clinical trials as innovation signals, the review identifies and rates emerging psychosocial interventions for violence and aggression, against a background of limited evidence-based options.",
+        "method_or_basis": "Horizon scanning approach with trial-based filtering, tabulation of extracted information, narrative synthesis and pre-defined signal strength rating.",
+        "qualification": "Restricted to what appears in controlled trials, so innovation outside trial evidence is invisible to the scan.",
+        "radar_relevance": "Fails Strand B because the horizon scanning procedure is applied rather than developed or materially improved.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1016/j.avb.2021.101685 redirected to Elsevier, which returned a bot-challenge interstitial rather than the article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.avb.2021.101685 confirmed Aggression and Violent Behavior with an issue date of January 2022."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI already fixed identity."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Semantic Scholar resolved the same DOI and surfaced a Newcastle University eprints deposit at https://eprints.ncl.ac.uk/279183."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved the accepted manuscript PDF from the Newcastle University eprints repository via its fulltext endpoint for deposit 279183 and read it in full."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Matching full text already recovered at step 5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://eprints.ncl.ac.uk/279183",
+            "title": "A Review of Recent Innovation in Psychosocial Interventions for reducing Violence and Aggression in Adults using a Horizon Scanning Approach (Newcastle University eprints)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Elsevier blocked the supplied URL; the accepted manuscript was legitimately recovered from the Newcastle University institutional repository, which is the ladder step that found the matching work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_NOT_METHOD",
+        "reason": "Applies an existing horizon scanning approach, using clinical trials as filters and signals of innovation, to review psychosocial interventions for violence and aggression. The horizon scanning procedure is adopted from prior work rather than developed or improved."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://doi.org/10.1186/s40309-018-0142-z": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "f038a782",
+      "identity_hash": "84b178c8b0c82485",
+      "reader_title": "Synthesis of backcasting as a combined scholarly and planning approach for long-horizon strategy",
+      "reader_what": "Consolidates backcasting into a unified approach linking futures scholarship with strategic urban planning practice.",
+      "reader_why": "Backcasting was being used in two disconnected ways, as research method and as planning tool.",
+      "reader_more": "Backcasting starts from a desired future state and works backwards to identify the steps needed to reach it, in contrast to forecasting from present trends. This article argues the approach has developed along two partly separate tracks, one scholarly and one in planning practice, and synthesises them into a single framework aimed at long-horizon strategic development. It applies the synthesis to smart sustainable city development, treating that domain as an instance of operationalising sustainability goals rather than as the sole target. The work is a conceptual and methodological synthesis of existing literature, so it consolidates and structures backcasting practice rather than reporting a new empirical test of it.",
+      "deep_analysis": {
+        "work_kind": "methodological synthesis article in futures studies",
+        "research_question": "How can backcasting be synthesised into a unified scholarly and planning approach for strategic long-term development?",
+        "main_finding": "Backcasting's scholarly and planning strands can be combined into one operational approach for setting and working back from long-horizon strategic goals.",
+        "method_or_basis": "Conceptual synthesis and structured review of the backcasting, futures studies and sustainable urban development literatures.",
+        "qualification": "A literature-based synthesis; the integrated approach is not empirically evaluated against alternative planning methods.",
+        "radar_relevance": "A widely transferable foresight and strategic planning method, geography-independent under Strand B.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1186/s40309-018-0142-z to the European Journal of Futures Research article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s40309-018-0142-z matched title, journal and a date of 27 July 2018."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "DOI match was unambiguous."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Single author Simon Elias Bibri, 2018."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Gold open access; full PDF retrieved from https://eujournalfuturesresearch.springeropen.com/track/pdf/10.1186/s40309-018-0142-z and read."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Identity settled earlier."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://eujournalfuturesresearch.springeropen.com/track/pdf/10.1186/s40309-018-0142-z",
+            "title": "Backcasting in futures studies: a synthesized scholarly and planning approach to strategic smart sustainable city development",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI resolved to the matching open-access article and the full text was read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Synthesises backcasting as a combined scholarly and planning approach and sets out how it can be operationalised for long-horizon strategic development. The methodological synthesis is the contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNQVlGOXFDOEtPczltc1NDRktZVjdvLUppUEFJTXd5cmpsR3hqT1V0Wmw1Rm1oNEc5VmpSY2JKZXEzQ1M3b0gwMnQ4Y1JCa1BtejZZaVN5SDJNWElhb2lfbzFwbk5XUUE4MHI5c3hIVXN0Vl9LZzI3M2dkZU9SanNUODlnclBJdExLQWtnWEpTLVZ1VDFCeVBXbzdGQzVtSVhfUXFOTm93?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "31670f14",
+      "identity_hash": "cfde5cffdea0fe3c",
+      "reader_title": "Finland's LUMI AI Factory to host a staged IQM quantum computer built for logical qubits",
+      "reader_what": "CSC will host LUMI-IQ, an IQM superconducting machine delivered in stages from 2027 to 2029.",
+      "reader_why": "Places error-corrected quantum hardware inside a European HPC and AI facility the host institution controls.",
+      "reader_more": "CSC - IT Center for Science in Kajaani will host LUMI-IQ, described as Europe's first superconducting quantum computer designed from the outset to operate with logical qubits. Logical qubits combine several error-prone physical qubits into a more reliable computational unit through quantum error correction. An IQM Halocene H4 system with 150 physical qubits arrives in 2027, with error-correction upgrades in 2028 and a Halocene H5 upgrade in 2029, jointly funded by the EuroHPC Joint Undertaking with Finland, Czechia, Norway and Poland. The machine will be integrated with the LUMI AI Factory's classical HPC and AI resources for hybrid workflows. Nothing has been delivered yet, so the announcement sets out a procurement and a schedule rather than an installed capability.",
+      "deep_analysis": {
+        "work_kind": "current development (institutional press release announcing a procurement)",
+        "research_question": "",
+        "main_finding": "CSC will host LUMI-IQ, an IQM superconducting quantum computer built around logical qubits, delivered in three stages between 2027 and 2029 and integrated with the LUMI AI Factory.",
+        "method_or_basis": "First-party announcement by the hosting institution, naming the supplier, funders, hardware generations and qubit counts.",
+        "qualification": "This is a supplier selection and roadmap, not an installed or benchmarked system; the logical-qubit capability is a design intention for hardware not yet delivered.",
+        "radar_relevance": "European sovereign compute capability in quantum and HPC, jointly funded through EuroHPC, which is directly within Radar scope.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News token CBMipgFBVV95cUxNQVlGOXFDOEtPczltc1ND... decoded to https://markets.ft.com/data/announce/detail?dockey, an FT market-announcement wire slot rather than Financial Times journalism; the wire page itself returned no retrievable body."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Corporate/organisational press release; no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched the exact headline; located the same release republished as a Science|Business Network Update attributed to CSC - IT Center for Science."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Issuer CSC - IT Center for Science, first published 10 September 2026, with IQM Quantum Computers as supplier; confirmed on the republished page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened https://sciencebusiness.net/network-updates/csc-lumi-ai-factory-advances-toward-europes-first-superconducting-quantum-computer and read the complete release, which links back to the CSC original at csc.fi."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Issuer, date and technical content all matched at step 5; no residual identity ambiguity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_press_release",
+            "url": "https://sciencebusiness.net/network-updates/csc-lumi-ai-factory-advances-toward-europes-first-superconducting-quantum-computer",
+            "title": "CSC: LUMI AI Factory advances toward Europe's first superconducting quantum computer with logical qubits",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Scanner attributed this to the Financial Times. The supplied link resolves to an FT market-announcement wire slot, and the underlying work is a CSC press release of 10 September 2026, republished by Science|Business as a Network Update. Source and title corrected accordingly; stored source_tier unset because the FT attribution that supported it is unsupported."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A concrete procurement and capacity decision: CSC will host LUMI-IQ, supplied by IQM and jointly funded by the EuroHPC Joint Undertaking with Finland, Czechia, Norway and Poland, delivered in stages 2027-2029."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T11:40:01Z",
+      "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
     }
   }
 }
