@@ -12,7 +12,7 @@ It exists so a new chat or operator can see what has already been verified and w
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T101003Z-0d58e3d159ee`
+- Current package: `worker-a-20260914T101136Z-0d58e3d159ee`
 - Assigned unresolved records: **36**
   1. `link:https://www.euronews.com/next/2026/09/09/sweden-is-preparing-for-ai-powered-election-interference-what-does-that-defence-actually-l`
   2. `link:https://policy.trade.ec.europa.eu/consultations/public-consultation-first-review-functioning-international-procurement-instrument_en`
@@ -25,7 +25,7 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T101013Z-c8a7cb0a8bdb`
+- Current package: `worker-b-20260914T101209Z-c8a7cb0a8bdb`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.cose.2026.105102`
   2. `link:https://doi.org/10.1016/j.technovation.2026.103603`
