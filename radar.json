@@ -1315,7 +1315,7 @@
     "new_c": 0
   },
   "reader_products_refresh": {
-    "completed_at": "2026-09-14T07:54:14Z",
+    "completed_at": "2026-09-14T08:05:22Z",
     "matrix": true,
     "risks_opportunities": true,
     "external_shocks": true,
@@ -92694,7 +92694,7 @@
       "first_seen": "2026-09-06T13:37Z",
       "new_this_scan": false,
       "retrace_status": "unchanged",
-      "retrace_at": "2026-09-14T07:54:14Z"
+      "retrace_at": "2026-09-14T08:05:22Z"
     }
   ],
   "external_shock_watch": [],
@@ -93325,16 +93325,16 @@
     "high_order_candidates_dormant": 3,
     "high_order_candidates_new_this_run": 8,
     "high_order_candidates_updated_this_run": 2,
-    "active_corpus_total": 632,
+    "active_corpus_total": 627,
     "active_strand_a": 319,
-    "active_strand_b": 130,
-    "active_strand_c": 183,
-    "deep_scan_v2_verified": 323,
-    "deep_scan_v2_pending": 346,
-    "inactive_drop": 37,
-    "inactive_unverifiable": 0,
+    "active_strand_b": 127,
+    "active_strand_c": 181,
+    "deep_scan_v2_verified": 336,
+    "deep_scan_v2_pending": 333,
+    "inactive_drop": 40,
+    "inactive_unverifiable": 2,
     "inactive_duplicates": 1,
-    "active_review": 9
+    "active_review": 10
   },
   "scan_diagnostics": {
     "source_warning_count": 70,
@@ -93811,291 +93811,11 @@
   },
   "shock_inference": {
     "profile_version": "23.3-context-weighted-shocks-v3",
-    "evaluated_at": "2026-09-14T07:54:14Z",
+    "evaluated_at": "2026-09-14T08:05:22Z",
     "new_count": 0,
-    "updated_count": 0,
-    "unchanged_count": 9,
+    "updated_count": 1,
+    "unchanged_count": 7,
     "dynamic_shocks": [
-      {
-        "id": "emergent:ip:acquisition",
-        "asset_id": "ip",
-        "pressure_id": "acquisition",
-        "title": "A foreign acquisition moves control of Europe’s research ownership and technology transfer outside the system",
-        "plainly": "Europe relies on research ownership and technology transfer. Separate primary evidence shows that a foreign acquisition or control transfer can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
-        "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
-        "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
-        "reasoning": [
-          "Primary retained evidence shows European reliance on or expansion of research ownership and technology transfer.",
-          "Separate primary retained evidence shows a live mechanism for a foreign acquisition or control transfer.",
-          "Primary evidence contains 2 direct capability × pressure coupling record(s).",
-          "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "3 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
-          "The scenario becomes a shock only if the response is slower than the disruption."
-        ],
-        "conditions": [
-          "Europe materially depends on research ownership and technology transfer for current or planned work.",
-          "A foreign acquisition or control transfer reaches the supplier, service, partner or rule that the European capability depends on.",
-          "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
-        ],
-        "case_against": [
-          "The trigger is not yet backed by an official primary source in the retained current evidence.",
-          "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
-          "The scenario still depends on the disruption arriving faster than Europe can respond."
-        ],
-        "prevention_actions": [
-          "Use clear European ownership and transfer rules before a crisis forces hurried restrictions.",
-          "Keep more than one route for lawful technology transfer and collaboration.",
-          "Use investment safeguards early enough that control does not move before alternatives are ready."
-        ],
-        "watch_for": [
-          "A foreign buyer seeks control of a European firm or facility holding a scarce research capability.",
-          "Investment screening is opened because the capability is considered strategically important."
-        ],
-        "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
-        "inference_score": 95,
-        "support": [
-          {
-            "identity": "url:https://www.delorscentre.eu/en/publications/detail/publication/selective-conditionality",
-            "row": "A300",
-            "strand": "A",
-            "role": "Primary coupling evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Selective Conditionality: The EU’s Emerging Approach to Foreign Investment",
-            "source": "Jacques Delors Centre",
-            "date": "2026-05-11",
-            "link": "https://www.delorscentre.eu/en/publications/detail/publication/selective-conditionality",
-            "quality": 88,
-            "new_this_scan": false,
-            "core_message": "Selective conditionality is narrowly targeted and, as currently designed, likely to exert only limited leverage over foreign investors.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
-            "row": "A050",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
-            "source": "CESAER",
-            "date": "2026-03-17",
-            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Without these cookies, proper communication and navigation are not possible.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "technology transfer",
-              " ai  + science",
-              "strategic-technology capability",
-              " ai "
-            ],
-            "a_context_evidence": [
-              "translation / scale-up",
-              "technology transfer",
-              "strategic-technology capability",
-              " ai "
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s13132-026-03245-7",
-            "row": "A244",
-            "strand": "A",
-            "role": "European capability: research ownership and technology transfer",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Knowledge Transfer and Firm Innovation: The Conditioning Role of Absorptive Capacity in University–Industry Collaboration",
-            "source": "Journal of the Knowledge Economy",
-            "date": "2026-03-24",
-            "link": "https://doi.org/10.1007/s13132-026-03245-7",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Additionally, the study provides a comparative assessment of knowledge obtained from domestic and international sources.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "knowledge transfer",
-              "university-industry collaboration"
-            ],
-            "a_context_evidence": [
-              "knowledge networks / collaboration",
-              "university-industry collaboration",
-              "translation / scale-up",
-              "knowledge transfer"
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.54648/leie2026014",
-            "row": "A032",
-            "strand": "A",
-            "role": "External mechanism: a foreign acquisition or control transfer",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Investment Screening and Technology Transfers in the Times of Geopolitical Upheaval",
-            "source": "Legal Issues of Economic Integration",
-            "date": "2026-05-01",
-            "link": "https://doi.org/10.54648/leie2026014",
-            "quality": 88,
-            "new_this_scan": false,
-            "core_message": "Screening is increasingly embedded in wider security policy and can extend to intangible strategic know-how.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://fiia.fi/wp-content/uploads/2026/06/rp6_the-eus-need-for-a-new-growth-model.pdf",
-            "row": "A130",
-            "strand": "A",
-            "role": "External mechanism: a foreign acquisition or control transfer",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The EU’s need for a new growth model: Innovation under strategic capitalism",
-            "source": "Finnish Institute of International Affairs",
-            "date": "2026-06-06",
-            "link": "https://fiia.fi/wp-content/uploads/2026/06/RP6_The-EUs-need-for-a-new-growth-model.pdf",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The EU's reliance on externally sourced inputs, technologies and infrastructures makes its growth model structurally fragile; of four constructed trajectories only Strategic Europe aligns competitiveness, control over critical flows and innovation direction, which the authors argue requires stronger national and EU policy alignment.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=eic_fund_investment_2026_guidelines_f.pdf",
-            "row": "C006",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup",
-            "source": "European Innovation Council",
-            "date": "2026-08-27",
-            "link": "https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=EIC_Fund_Investment_2026_guidelines_f.pdf",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The guidelines codify eligibility and a deep technology definition, and give the fund explicit tools to protect EU interests, including blocking stakes, secondary share purchase and requirements that company value and intellectual property remain in the EU or associated countries.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
-            "row": "C036",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Strengthening Europe’s Tech Sovereignty",
-            "source": "European Commission — Digital Strategy",
-            "date": "2026-08-07",
-            "link": "https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The Commission adopted a tech-sovereignty package on 3 June 2026 built around the Chips Act 2.0 and the Cloud and AI Development Act.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://cset.georgetown.edu/wp-content/uploads/cset-tracking-ai-investment.pdf",
-            "row": "H315",
-            "strand": "H",
-            "role": "Historical coupling context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Tracking AI Investment | Center for Security and Emerging Technology",
-            "source": "CSET",
-            "date": "2020-01-01",
-            "link": "https://cset.georgetown.edu/wp-content/uploads/CSET-Tracking-AI-Investment.pdf",
-            "quality": 86,
-            "new_this_scan": false,
-            "core_message": "The place to find CSET's publications, reports, and people Tracking AI Investment SEPTEMBER 2020 AUTHORS Zachary Arnold Ilya Rahkovsky Tina Huang INITIAL FINDINGS FROM THE PRIVATE MARKETS Center for Security and Emerging Technology 2 Established in January 201 9, the Center for Security and Emerging Technology (CSET) at Georgeto…",
-            "geo_evidence": [
-              "export control",
-              "national security",
-              "sanctions",
-              "investment screening"
-            ],
-            "ri_evidence": [
-              "r&d",
-              "technology transfer",
-              "research organization",
-              " ai  + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s10961-025-10222-w",
-            "row": "H060",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Bureaucratic constraints and investment attraction: how operational practices influence technology transfer performance in publicly funded business incubators",
-            "source": "Journal of Technology Transfer",
-            "date": "2025-08-04",
-            "link": "https://doi.org/10.1007/s10961-025-10222-w",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Abstract Publicly funded business incubators serve as critical intermediaries in technology transfer ecosystems, yet their effectiveness is often constrained by bureaucratic requirements stemming from their government support.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "innovation policy",
-              "technology transfer"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s10961-022-09989-z",
-            "row": "H206",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China",
-            "source": "Journal of Technology Transfer",
-            "date": "2022-12-29",
-            "link": "https://doi.org/10.1007/s10961-022-09989-z",
-            "quality": 90,
-            "new_this_scan": false,
-            "core_message": "Given that technology transfer provides an important boost for promoting national economic development, technology transfer policy (TTP) has attracted more Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China | The Journal of Technology Transfer | Springer Nat…",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research policy",
-              "innovation policy",
-              "r&d investment",
-              "r&d"
-            ],
-            "a_context_evidence": []
-          }
-        ],
-        "against": [],
-        "prevention_evidence": [],
-        "source_count": 5,
-        "primary_source_count": 5,
-        "pressure_source_count": 3,
-        "coupling_count": 2,
-        "context_coupling_count": 1,
-        "weak_signal_context_count": 2,
-        "historical_context_count": 3,
-        "context_weight_total": 1.95,
-        "context_score_bonus": 5.0,
-        "official_trigger_present": false,
-        "best_quality": 98,
-        "average_quality": 93,
-        "fresh_coupling": false,
-        "fresh_context": false,
-        "first_inferred_at": "2026-09-13T22:20:43Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
-        "fingerprint": "877bbacc345b7081",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
-      },
       {
         "id": "emergent:quantum:security_reclassification",
         "asset_id": "quantum",
@@ -94449,13 +94169,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "8fc5453b8d164886",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "emergent:startups:security_reclassification",
@@ -94822,13 +94542,330 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "761a4a9d3b332de2",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
+      },
+      {
+        "id": "emergent:ip:acquisition",
+        "asset_id": "ip",
+        "pressure_id": "acquisition",
+        "title": "A foreign acquisition moves control of Europe’s research ownership and technology transfer outside the system",
+        "plainly": "Europe relies on research ownership and technology transfer. Separate primary evidence shows that a foreign acquisition or control transfer can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
+        "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
+        "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
+        "reasoning": [
+          "Primary retained evidence shows European reliance on or expansion of research ownership and technology transfer.",
+          "Separate primary retained evidence shows a live mechanism for a foreign acquisition or control transfer.",
+          "Primary evidence contains 2 direct capability × pressure coupling record(s).",
+          "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
+          "3 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+          "The scenario becomes a shock only if the response is slower than the disruption."
+        ],
+        "conditions": [
+          "Europe materially depends on research ownership and technology transfer for current or planned work.",
+          "A foreign acquisition or control transfer reaches the supplier, service, partner or rule that the European capability depends on.",
+          "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
+        ],
+        "case_against": [
+          "The trigger is not yet backed by an official primary source in the retained current evidence.",
+          "The primary corpus contains 1 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
+          "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
+          "The scenario still depends on the disruption arriving faster than Europe can respond."
+        ],
+        "prevention_actions": [
+          "Use clear European ownership and transfer rules before a crisis forces hurried restrictions.",
+          "Keep more than one route for lawful technology transfer and collaboration.",
+          "Use investment safeguards early enough that control does not move before alternatives are ready."
+        ],
+        "watch_for": [
+          "A foreign buyer seeks control of a European firm or facility holding a scarce research capability.",
+          "Investment screening is opened because the capability is considered strategically important."
+        ],
+        "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
+        "inference_score": 91,
+        "support": [
+          {
+            "identity": "url:https://www.delorscentre.eu/en/publications/detail/publication/selective-conditionality",
+            "row": "A300",
+            "strand": "A",
+            "role": "Primary coupling evidence",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Selective Conditionality: The EU’s Emerging Approach to Foreign Investment",
+            "source": "Jacques Delors Centre",
+            "date": "2026-05-11",
+            "link": "https://www.delorscentre.eu/en/publications/detail/publication/selective-conditionality",
+            "quality": 88,
+            "new_this_scan": false,
+            "core_message": "Selective conditionality is narrowly targeted and, as currently designed, likely to exert only limited leverage over foreign investors.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s13132-026-03245-7",
+            "row": "A244",
+            "strand": "A",
+            "role": "Primary evidence",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Knowledge Transfer and Firm Innovation: The Conditioning Role of Absorptive Capacity in University–Industry Collaboration",
+            "source": "Journal of the Knowledge Economy",
+            "date": "2026-03-24",
+            "link": "https://doi.org/10.1007/s13132-026-03245-7",
+            "quality": 92,
+            "new_this_scan": false,
+            "core_message": "Additionally, the study provides a comparative assessment of knowledge obtained from domestic and international sources.",
+            "geo_evidence": [],
+            "ri_evidence": [
+              "knowledge transfer",
+              "university-industry collaboration"
+            ],
+            "a_context_evidence": [
+              "knowledge networks / collaboration",
+              "university-industry collaboration",
+              "translation / scale-up",
+              "knowledge transfer"
+            ]
+          },
+          {
+            "identity": "url:https://doi.org/10.1016/j.erss.2026.104895",
+            "row": "A104",
+            "strand": "A",
+            "role": "European capability: research ownership and technology transfer",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Uncovering the directionality of innovation in artificial intelligence for energy transitions: A global perspective on the twin transition using patent analysis",
+            "source": "Energy Research & Social Science",
+            "date": "2026-08-04",
+            "link": "https://doi.org/10.1016/j.erss.2026.104895",
+            "quality": 90,
+            "new_this_scan": false,
+            "core_message": "as energy, transport, buildings and industry.",
+            "geo_evidence": [],
+            "ri_evidence": [
+              "artificial intelligence + innovation",
+              "artificial intelligence + research"
+            ],
+            "a_context_evidence": [
+              "competition_capability",
+              "leadership",
+              "china",
+              "united states"
+            ]
+          },
+          {
+            "identity": "url:https://doi.org/10.54648/leie2026014",
+            "row": "A032",
+            "strand": "A",
+            "role": "External mechanism: a foreign acquisition or control transfer",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Investment Screening and Technology Transfers in the Times of Geopolitical Upheaval",
+            "source": "Legal Issues of Economic Integration",
+            "date": "2026-05-01",
+            "link": "https://doi.org/10.54648/leie2026014",
+            "quality": 88,
+            "new_this_scan": false,
+            "core_message": "Screening is increasingly embedded in wider security policy and can extend to intangible strategic know-how.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://fiia.fi/wp-content/uploads/2026/06/rp6_the-eus-need-for-a-new-growth-model.pdf",
+            "row": "A130",
+            "strand": "A",
+            "role": "External mechanism: a foreign acquisition or control transfer",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "The EU’s need for a new growth model: Innovation under strategic capitalism",
+            "source": "Finnish Institute of International Affairs",
+            "date": "2026-06-06",
+            "link": "https://fiia.fi/wp-content/uploads/2026/06/RP6_The-EUs-need-for-a-new-growth-model.pdf",
+            "quality": 98,
+            "new_this_scan": false,
+            "core_message": "The EU's reliance on externally sourced inputs, technologies and infrastructures makes its growth model structurally fragile; of four constructed trajectories only Strategic Europe aligns competitiveness, control over critical flows and innovation direction, which the authors argue requires stronger national and EU policy alignment.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=eic_fund_investment_2026_guidelines_f.pdf",
+            "row": "C006",
+            "strand": "C",
+            "role": "Recent weak-signal context",
+            "evidence_role": "weak_signal",
+            "analytical_weight": 0.3,
+            "title": "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup",
+            "source": "European Innovation Council",
+            "date": "2026-08-27",
+            "link": "https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=EIC_Fund_Investment_2026_guidelines_f.pdf",
+            "quality": 98,
+            "new_this_scan": false,
+            "core_message": "The guidelines codify eligibility and a deep technology definition, and give the fund explicit tools to protect EU interests, including blocking stakes, secondary share purchase and requirements that company value and intellectual property remain in the EU or associated countries.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
+            "row": "C036",
+            "strand": "C",
+            "role": "Recent weak-signal context",
+            "evidence_role": "weak_signal",
+            "analytical_weight": 0.3,
+            "title": "Strengthening Europe’s Tech Sovereignty",
+            "source": "European Commission — Digital Strategy",
+            "date": "2026-08-07",
+            "link": "https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
+            "quality": 98,
+            "new_this_scan": false,
+            "core_message": "The Commission adopted a tech-sovereignty package on 3 June 2026 built around the Chips Act 2.0 and the Cloud and AI Development Act.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://cset.georgetown.edu/wp-content/uploads/cset-tracking-ai-investment.pdf",
+            "row": "H315",
+            "strand": "H",
+            "role": "Historical coupling context",
+            "evidence_role": "historical",
+            "analytical_weight": 0.45,
+            "title": "Tracking AI Investment | Center for Security and Emerging Technology",
+            "source": "CSET",
+            "date": "2020-01-01",
+            "link": "https://cset.georgetown.edu/wp-content/uploads/CSET-Tracking-AI-Investment.pdf",
+            "quality": 86,
+            "new_this_scan": false,
+            "core_message": "The place to find CSET's publications, reports, and people Tracking AI Investment SEPTEMBER 2020 AUTHORS Zachary Arnold Ilya Rahkovsky Tina Huang INITIAL FINDINGS FROM THE PRIVATE MARKETS Center for Security and Emerging Technology 2 Established in January 201 9, the Center for Security and Emerging Technology (CSET) at Georgeto…",
+            "geo_evidence": [
+              "export control",
+              "national security",
+              "sanctions",
+              "investment screening"
+            ],
+            "ri_evidence": [
+              "r&d",
+              "technology transfer",
+              "research organization",
+              " ai  + research"
+            ],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s10961-025-10222-w",
+            "row": "H060",
+            "strand": "H",
+            "role": "Historical structural context",
+            "evidence_role": "historical",
+            "analytical_weight": 0.45,
+            "title": "Bureaucratic constraints and investment attraction: how operational practices influence technology transfer performance in publicly funded business incubators",
+            "source": "Journal of Technology Transfer",
+            "date": "2025-08-04",
+            "link": "https://doi.org/10.1007/s10961-025-10222-w",
+            "quality": 92,
+            "new_this_scan": false,
+            "core_message": "Abstract Publicly funded business incubators serve as critical intermediaries in technology transfer ecosystems, yet their effectiveness is often constrained by bureaucratic requirements stemming from their government support.",
+            "geo_evidence": [],
+            "ri_evidence": [
+              "innovation policy",
+              "technology transfer"
+            ],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s10961-022-09989-z",
+            "row": "H206",
+            "strand": "H",
+            "role": "Historical structural context",
+            "evidence_role": "historical",
+            "analytical_weight": 0.45,
+            "title": "Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China",
+            "source": "Journal of Technology Transfer",
+            "date": "2022-12-29",
+            "link": "https://doi.org/10.1007/s10961-022-09989-z",
+            "quality": 90,
+            "new_this_scan": false,
+            "core_message": "Given that technology transfer provides an important boost for promoting national economic development, technology transfer policy (TTP) has attracted more Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China | The Journal of Technology Transfer | Springer Nat…",
+            "geo_evidence": [],
+            "ri_evidence": [
+              "research policy",
+              "innovation policy",
+              "r&d investment",
+              "r&d"
+            ],
+            "a_context_evidence": []
+          }
+        ],
+        "against": [
+          {
+            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
+            "row": "A050",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
+            "source": "CESAER",
+            "date": "2025-10-28",
+            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
+            "quality": 80,
+            "new_this_scan": false,
+            "core_message": "AI adoption in technology transfer is emerging but uneven, with capability and guidance gaps that the report addresses through targeted recommendations.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          }
+        ],
+        "prevention_evidence": [
+          {
+            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
+            "row": "A050",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
+            "source": "CESAER",
+            "date": "2025-10-28",
+            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
+            "quality": 80,
+            "new_this_scan": false,
+            "core_message": "AI adoption in technology transfer is emerging but uneven, with capability and guidance gaps that the report addresses through targeted recommendations.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          }
+        ],
+        "source_count": 5,
+        "primary_source_count": 5,
+        "pressure_source_count": 3,
+        "coupling_count": 2,
+        "context_coupling_count": 1,
+        "weak_signal_context_count": 2,
+        "historical_context_count": 3,
+        "context_weight_total": 1.95,
+        "context_score_bonus": 5.0,
+        "official_trigger_present": false,
+        "best_quality": 98,
+        "average_quality": 91,
+        "fresh_coupling": false,
+        "fresh_context": false,
+        "first_inferred_at": "2026-09-13T22:20:43Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
+        "fingerprint": "175f1bdbfcf56f7b",
+        "new_this_scan": false,
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "emergent:infrastructure:security_reclassification",
@@ -95068,13 +95105,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "407e51171710b933",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "emergent:funding:security_reclassification",
@@ -95520,13 +95557,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "fa284b7504a5990d",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "emergent:collaboration:security_reclassification",
@@ -95981,13 +96018,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "fe73b49fd3e0fac3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "emergent:biotech:security_reclassification",
@@ -96139,7 +96176,7 @@
           },
           {
             "identity": "url:https://news.google.com/rss/articles/cbmizafbvv95cuxqvfz1ekloq1g2b3fjblbedhnvr2uzedhqae0xu2tvsenqohjosdzpowetmdbkx3zudwl2nghmumnmblpmm1rpa0zvbdjktkvdee5lnmnwvnvjchy2ze9beux0rtdsounszvj0z0vubgntck1jz3j0oed6ahjmvnznefjrnurotzjjnhflwjnuovhkq2vmdggzvzu4ulp2ews1twyyv3jonzzoyxo0tetmzxu5n1rnaxzlyxbcsg51t3pxrwg0ujrvbuc0chq?oc=5",
-            "row": "C162",
+            "row": "C161",
             "strand": "C",
             "role": "Recent weak-signal context",
             "evidence_role": "weak_signal",
@@ -96264,257 +96301,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-09T12:05Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "b0d8639016707017",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
-      },
-      {
-        "id": "emergent:ip:data_access",
-        "asset_id": "ip",
-        "pressure_id": "data_access",
-        "title": "A cross-border data restriction breaks Europe’s research ownership and technology transfer",
-        "plainly": "Europe relies on research ownership and technology transfer. Separate primary evidence shows that a cross-border data-access restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
-        "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
-        "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
-        "reasoning": [
-          "Primary retained evidence shows European reliance on or expansion of research ownership and technology transfer.",
-          "Separate primary retained evidence shows a live mechanism for a cross-border data-access restriction.",
-          "Primary evidence contains 1 direct capability × pressure coupling record(s).",
-          "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
-          "The scenario becomes a shock only if the response is slower than the disruption."
-        ],
-        "conditions": [
-          "Europe materially depends on research ownership and technology transfer for current or planned work.",
-          "A cross-border data-access restriction reaches the supplier, service, partner or rule that the European capability depends on.",
-          "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
-        ],
-        "case_against": [
-          "The trigger is not yet backed by an official primary source in the retained current evidence.",
-          "Only one primary retained record currently links the European capability directly to the outside pressure.",
-          "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
-          "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
-          "The scenario still depends on the disruption arriving faster than Europe can respond."
-        ],
-        "prevention_actions": [
-          "Use clear European ownership and transfer rules before a crisis forces hurried restrictions.",
-          "Keep more than one route for lawful technology transfer and collaboration.",
-          "Keep a compliant European route for essential research data and analysis."
-        ],
-        "watch_for": [
-          "A provider or government restricts cross-border access to data used by European research.",
-          "Projects stop pooling or analysing data that previously moved across borders."
-        ],
-        "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
-        "inference_score": 84,
-        "support": [
-          {
-            "identity": "url:https://doi.org/10.1017/aap.2026.10164",
-            "row": "A088",
-            "strand": "A",
-            "role": "Primary coupling evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Is Archaeological Data Labor Sustainable? Only through Ethical and Policy Reforms, Open Data Emphases on Public Engagement, and Indigenous Data Sovereignty",
-            "source": "Advances in Archaeological Practice",
-            "date": "2026-07-20",
-            "link": "https://doi.org/10.1017/aap.2026.10164",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Is Archaeological Data Labor Sustainable?",
-            "geo_evidence": [
-              "data sovereignty"
-            ],
-            "ri_evidence": [
-              "data sovereignty"
-            ],
-            "a_context_evidence": [
-              "technology position / dependency",
-              "data sovereignty",
-              "data act"
-            ]
-          },
-          {
-            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
-            "row": "A050",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
-            "source": "CESAER",
-            "date": "2026-03-17",
-            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Without these cookies, proper communication and navigation are not possible.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "technology transfer",
-              " ai  + science",
-              "strategic-technology capability",
-              " ai "
-            ],
-            "a_context_evidence": [
-              "translation / scale-up",
-              "technology transfer",
-              "strategic-technology capability",
-              " ai "
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s13132-026-03245-7",
-            "row": "A244",
-            "strand": "A",
-            "role": "European capability: research ownership and technology transfer",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Knowledge Transfer and Firm Innovation: The Conditioning Role of Absorptive Capacity in University–Industry Collaboration",
-            "source": "Journal of the Knowledge Economy",
-            "date": "2026-03-24",
-            "link": "https://doi.org/10.1007/s13132-026-03245-7",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Additionally, the study provides a comparative assessment of knowledge obtained from domestic and international sources.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "knowledge transfer",
-              "university-industry collaboration"
-            ],
-            "a_context_evidence": [
-              "knowledge networks / collaboration",
-              "university-industry collaboration",
-              "translation / scale-up",
-              "knowledge transfer"
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
-            "row": "A110",
-            "strand": "A",
-            "role": "External mechanism: a cross-border data-access restriction",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
-            "source": "Open Research Europe",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.12688/openreseurope.23459.2",
-            "quality": 88,
-            "new_this_scan": false,
-            "core_message": "The project presents a modular, standards-based federated platform using privacy-by-design analytics, with lung cancer as its demonstrator, and aims at regulatory and health technology assessment acceptance of real-world evidence.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=eic_fund_investment_2026_guidelines_f.pdf",
-            "row": "C006",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup",
-            "source": "European Innovation Council",
-            "date": "2026-08-27",
-            "link": "https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=EIC_Fund_Investment_2026_guidelines_f.pdf",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The guidelines codify eligibility and a deep technology definition, and give the fund explicit tools to protect EU interests, including blocking stakes, secondary share purchase and requirements that company value and intellectual property remain in the EU or associated countries.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
-            "row": "C036",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Strengthening Europe’s Tech Sovereignty",
-            "source": "European Commission — Digital Strategy",
-            "date": "2026-08-07",
-            "link": "https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The Commission adopted a tech-sovereignty package on 3 June 2026 built around the Chips Act 2.0 and the Cloud and AI Development Act.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s10961-025-10222-w",
-            "row": "H060",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Bureaucratic constraints and investment attraction: how operational practices influence technology transfer performance in publicly funded business incubators",
-            "source": "Journal of Technology Transfer",
-            "date": "2025-08-04",
-            "link": "https://doi.org/10.1007/s10961-025-10222-w",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Abstract Publicly funded business incubators serve as critical intermediaries in technology transfer ecosystems, yet their effectiveness is often constrained by bureaucratic requirements stemming from their government support.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "innovation policy",
-              "technology transfer"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s10961-022-09989-z",
-            "row": "H206",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China",
-            "source": "Journal of Technology Transfer",
-            "date": "2022-12-29",
-            "link": "https://doi.org/10.1007/s10961-022-09989-z",
-            "quality": 90,
-            "new_this_scan": false,
-            "core_message": "Given that technology transfer provides an important boost for promoting national economic development, technology transfer policy (TTP) has attracted more Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China | The Journal of Technology Transfer | Springer Nat…",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research policy",
-              "innovation policy",
-              "r&d investment",
-              "r&d"
-            ],
-            "a_context_evidence": []
-          }
-        ],
-        "against": [],
-        "prevention_evidence": [],
-        "source_count": 4,
-        "primary_source_count": 4,
-        "pressure_source_count": 2,
-        "coupling_count": 1,
-        "context_coupling_count": 0,
-        "weak_signal_context_count": 2,
-        "historical_context_count": 2,
-        "context_weight_total": 1.5,
-        "context_score_bonus": 4.2,
-        "official_trigger_present": false,
-        "best_quality": 98,
-        "average_quality": 92,
-        "fresh_coupling": false,
-        "fresh_context": false,
-        "first_inferred_at": "2026-09-13T23:33:55Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
-        "fingerprint": "37423a88fcbb43e5",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "emergent:open_science:conflict",
@@ -96922,19 +96715,19 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "2ae1fcfd191d666c",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       }
     ]
   },
   "high_order_inference": {
     "profile_version": "v23.5-generative-trends-level45",
-    "evaluated_at": "2026-09-14T07:54:14Z",
+    "evaluated_at": "2026-09-14T08:05:22Z",
     "new_count": 0,
     "updated_count": 0,
     "qualified_count": 10,
@@ -97279,15 +97072,15 @@
           "left_adjusted_points": 19.0,
           "right_adjusted_points": 10.5
         },
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "8b955cf1e85e033e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "newly_inferred",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:opposing_movements_collaborate_derisk:collaborate-derisk-research-security",
@@ -97516,15 +97309,15 @@
           "left_adjusted_points": 2.5,
           "right_adjusted_points": 14.75
         },
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "ec5c6be461cde5fb",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "newly_inferred",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-startups-scaleup",
@@ -97765,15 +97558,15 @@
           "left_adjusted_points": 12.5,
           "right_adjusted_points": 3.5
         },
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "dce7594880a161fb",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "newly_inferred",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-funding-programme",
@@ -98026,15 +97819,15 @@
           "left_adjusted_points": 4.5,
           "right_adjusted_points": 12.375
         },
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "89552feb235f33f8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "newly_inferred",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:omitted_dependency_chain:compute-ai-materials-energy",
@@ -98240,15 +98033,15 @@
         "generic_grammar": true,
         "reader_title": "A hidden energy/materials dependency could transmit a shock into European AI/compute.",
         "reader_summary": "The candidate exists only because primary evidence explicitly connects the asset to the dependency, separately establishes a disruption route, and shows a mechanism by which effects could spread beyond one isolated case.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "58e837178b0639a7",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
@@ -98466,15 +98259,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "530925b233f75ad6",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-eureka",
@@ -98717,15 +98510,15 @@
         "generic_grammar": true,
         "reader_title": "EUREKA may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "ac72543ee4ec6cf5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-business-finland",
@@ -98944,15 +98737,15 @@
         "generic_grammar": true,
         "reader_title": "Business Finland may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "4ba5141080e46f66",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-standards-testing",
@@ -99157,15 +98950,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "99e332bb426faa6d",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-funding-programme",
@@ -99370,15 +99163,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research funding/programmes may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "1aeb6265f69755f0",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-compute-ai",
@@ -99597,15 +99390,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in AI/compute if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "343936fe001aba69",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-infrastructure",
@@ -99812,15 +99605,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in research infrastructure if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "e490242c425cf29d",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:goal_measurement_gap:sovereignty",
@@ -99997,8 +99790,8 @@
         "touched_this_scan": true,
         "reader_eligible": false,
         "historical_records": 15,
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "e1a69f5ef8c8827f",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -100007,7 +99800,7 @@
         "reader_title": "Europe keeps pursuing technological sovereignty/strategic autonomy without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:goal_measurement_gap:competitiveness",
@@ -100160,8 +99953,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 3,
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "766e0ff5d18b2a90",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -100170,7 +99963,7 @@
         "reader_title": "Europe keeps pursuing competitiveness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
@@ -100365,15 +100158,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "b28d51b172f41d08",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:standards-testing-openness-vs-security",
@@ -100568,15 +100361,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on standards/testing may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "e8bfc2fac00db9e3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
@@ -100795,15 +100588,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "e4b95d301838ede5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
@@ -101034,15 +100827,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "885424dc8b882208",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-infrastructure",
@@ -101260,15 +101053,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research infrastructure may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "1b29490bf6660a9e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-startups-scaleup",
@@ -101462,15 +101255,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around startups/scale-up may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "e0d44341c8e93d16",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-talent",
@@ -101664,15 +101457,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research talent may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "66bec20153679500",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-retention-talent",
@@ -101840,15 +101633,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the retention in research talent outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "d405196c9409e5fa",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
@@ -102016,15 +101809,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the widening participation in research funding/programmes outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "833e92556b1dff01",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-infrastructure",
@@ -102204,15 +101997,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in research infrastructure outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "baed6e9091f726e4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
@@ -102392,15 +102185,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in AI/compute outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "ef3dedd4de77fe6c",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:goal_measurement_gap:openness",
@@ -102554,8 +102347,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 14,
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "5f64499715fc998e",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -102564,7 +102357,7 @@
         "reader_title": "Europe keeps pursuing openness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
@@ -102771,15 +102564,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "b7feccec7737a0c5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-chips",
@@ -102935,15 +102728,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in semiconductors outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "5c988a0c964b3183",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:goal_measurement_gap:research-security",
@@ -103097,8 +102890,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 3,
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "443b4efbd0887d0f",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -103107,7 +102900,7 @@
         "reader_title": "Europe keeps pursuing research security without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-health-data",
@@ -103219,21 +103012,21 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in health data if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T07:54:14Z",
-        "last_updated_at": "2026-09-14T07:54:14Z",
+        "first_seen_at": "2026-09-14T08:05:22Z",
+        "last_updated_at": "2026-09-14T08:05:22Z",
         "fingerprint": "25a8f9a999e2cae8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:54:14Z"
+        "retrace_at": "2026-09-14T08:05:22Z"
       }
     ]
   },
   "downstream_archive": {
     "profile_version": "v1.0-current-downstream-rules",
-    "updated_at": "2026-09-14T07:54:14Z",
+    "updated_at": "2026-09-14T08:05:22Z",
     "objects": [
       {
         "kind": "high_order",
@@ -107138,26 +106931,278 @@
           "retrace_status": "unchanged",
           "retrace_at": "2026-09-14T07:12:45Z"
         }
+      },
+      {
+        "kind": "shock",
+        "id": "emergent:ip:data_access",
+        "title": "A cross-border data restriction breaks Europe’s research ownership and technology transfer",
+        "retrace_status": "retired",
+        "retired_at": "2026-09-14T08:05:22Z",
+        "reason": "Current cleaned evidence no longer satisfies the repository's current construction threshold for this downstream object.",
+        "previous_object": {
+          "id": "emergent:ip:data_access",
+          "asset_id": "ip",
+          "pressure_id": "data_access",
+          "title": "A cross-border data restriction breaks Europe’s research ownership and technology transfer",
+          "plainly": "Europe relies on research ownership and technology transfer. Separate primary evidence shows that a cross-border data-access restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
+          "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
+          "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
+          "reasoning": [
+            "Primary retained evidence shows European reliance on or expansion of research ownership and technology transfer.",
+            "Separate primary retained evidence shows a live mechanism for a cross-border data-access restriction.",
+            "Primary evidence contains 1 direct capability × pressure coupling record(s).",
+            "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
+            "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+            "The scenario becomes a shock only if the response is slower than the disruption."
+          ],
+          "conditions": [
+            "Europe materially depends on research ownership and technology transfer for current or planned work.",
+            "A cross-border data-access restriction reaches the supplier, service, partner or rule that the European capability depends on.",
+            "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
+          ],
+          "case_against": [
+            "The trigger is not yet backed by an official primary source in the retained current evidence.",
+            "Only one primary retained record currently links the European capability directly to the outside pressure.",
+            "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
+            "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
+            "The scenario still depends on the disruption arriving faster than Europe can respond."
+          ],
+          "prevention_actions": [
+            "Use clear European ownership and transfer rules before a crisis forces hurried restrictions.",
+            "Keep more than one route for lawful technology transfer and collaboration.",
+            "Keep a compliant European route for essential research data and analysis."
+          ],
+          "watch_for": [
+            "A provider or government restricts cross-border access to data used by European research.",
+            "Projects stop pooling or analysing data that previously moved across borders."
+          ],
+          "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
+          "inference_score": 84,
+          "support": [
+            {
+              "identity": "url:https://doi.org/10.1017/aap.2026.10164",
+              "row": "A088",
+              "strand": "A",
+              "role": "Primary coupling evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Is Archaeological Data Labor Sustainable? Only through Ethical and Policy Reforms, Open Data Emphases on Public Engagement, and Indigenous Data Sovereignty",
+              "source": "Advances in Archaeological Practice",
+              "date": "2026-07-20",
+              "link": "https://doi.org/10.1017/aap.2026.10164",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Is Archaeological Data Labor Sustainable?",
+              "geo_evidence": [
+                "data sovereignty"
+              ],
+              "ri_evidence": [
+                "data sovereignty"
+              ],
+              "a_context_evidence": [
+                "technology position / dependency",
+                "data sovereignty",
+                "data act"
+              ]
+            },
+            {
+              "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
+              "row": "A050",
+              "strand": "A",
+              "role": "Primary evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
+              "source": "CESAER",
+              "date": "2026-03-17",
+              "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "Without these cookies, proper communication and navigation are not possible.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "technology transfer",
+                " ai  + science",
+                "strategic-technology capability",
+                " ai "
+              ],
+              "a_context_evidence": [
+                "translation / scale-up",
+                "technology transfer",
+                "strategic-technology capability",
+                " ai "
+              ]
+            },
+            {
+              "identity": "url:https://doi.org/10.1007/s13132-026-03245-7",
+              "row": "A244",
+              "strand": "A",
+              "role": "European capability: research ownership and technology transfer",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Knowledge Transfer and Firm Innovation: The Conditioning Role of Absorptive Capacity in University–Industry Collaboration",
+              "source": "Journal of the Knowledge Economy",
+              "date": "2026-03-24",
+              "link": "https://doi.org/10.1007/s13132-026-03245-7",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Additionally, the study provides a comparative assessment of knowledge obtained from domestic and international sources.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "knowledge transfer",
+                "university-industry collaboration"
+              ],
+              "a_context_evidence": [
+                "knowledge networks / collaboration",
+                "university-industry collaboration",
+                "translation / scale-up",
+                "knowledge transfer"
+              ]
+            },
+            {
+              "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+              "row": "A110",
+              "strand": "A",
+              "role": "External mechanism: a cross-border data-access restriction",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+              "source": "Open Research Europe",
+              "date": "2026-08-26",
+              "link": "https://doi.org/10.12688/openreseurope.23459.2",
+              "quality": 88,
+              "new_this_scan": false,
+              "core_message": "The project presents a modular, standards-based federated platform using privacy-by-design analytics, with lung cancer as its demonstrator, and aims at regulatory and health technology assessment acceptance of real-world evidence.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=eic_fund_investment_2026_guidelines_f.pdf",
+              "row": "C006",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "European Commission updates EIC Fund Investment Guidelines for the EIC Accelerator and STEP Scaleup",
+              "source": "European Innovation Council",
+              "date": "2026-08-27",
+              "link": "https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=EIC_Fund_Investment_2026_guidelines_f.pdf",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The guidelines codify eligibility and a deep technology definition, and give the fund explicit tools to protect EU interests, including blocking stakes, secondary share purchase and requirements that company value and intellectual property remain in the EU or associated countries.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
+              "row": "C036",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "Strengthening Europe’s Tech Sovereignty",
+              "source": "European Commission — Digital Strategy",
+              "date": "2026-08-07",
+              "link": "https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The Commission adopted a tech-sovereignty package on 3 June 2026 built around the Chips Act 2.0 and the Cloud and AI Development Act.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://doi.org/10.1007/s10961-025-10222-w",
+              "row": "H060",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Bureaucratic constraints and investment attraction: how operational practices influence technology transfer performance in publicly funded business incubators",
+              "source": "Journal of Technology Transfer",
+              "date": "2025-08-04",
+              "link": "https://doi.org/10.1007/s10961-025-10222-w",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Abstract Publicly funded business incubators serve as critical intermediaries in technology transfer ecosystems, yet their effectiveness is often constrained by bureaucratic requirements stemming from their government support.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "innovation policy",
+                "technology transfer"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://doi.org/10.1007/s10961-022-09989-z",
+              "row": "H206",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China",
+              "source": "Journal of Technology Transfer",
+              "date": "2022-12-29",
+              "link": "https://doi.org/10.1007/s10961-022-09989-z",
+              "quality": 90,
+              "new_this_scan": false,
+              "core_message": "Given that technology transfer provides an important boost for promoting national economic development, technology transfer policy (TTP) has attracted more Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China | The Journal of Technology Transfer | Springer Nat…",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research policy",
+                "innovation policy",
+                "r&d investment",
+                "r&d"
+              ],
+              "a_context_evidence": []
+            }
+          ],
+          "against": [],
+          "prevention_evidence": [],
+          "source_count": 4,
+          "primary_source_count": 4,
+          "pressure_source_count": 2,
+          "coupling_count": 1,
+          "context_coupling_count": 0,
+          "weak_signal_context_count": 2,
+          "historical_context_count": 2,
+          "context_weight_total": 1.5,
+          "context_score_bonus": 4.2,
+          "official_trigger_present": false,
+          "best_quality": 98,
+          "average_quality": 92,
+          "fresh_coupling": false,
+          "fresh_context": false,
+          "first_inferred_at": "2026-09-13T23:33:55Z",
+          "last_updated_at": "2026-09-14T07:54:14Z",
+          "fingerprint": "37423a88fcbb43e5",
+          "new_this_scan": false,
+          "updated_this_scan": false,
+          "status": "unchanged",
+          "retrace_status": "unchanged",
+          "retrace_at": "2026-09-14T07:54:14Z"
+        }
       }
     ]
   },
   "downstream_retrace": {
     "tool_version": "v1.0-current-downstream-rules",
-    "completed_at": "2026-09-14T07:54:14Z",
+    "completed_at": "2026-09-14T08:05:22Z",
     "source_revalidation_report": "",
     "diagnostics": {
       "derived_objects_checked": 47,
-      "unchanged": 40,
-      "rebuilt": 0,
+      "unchanged": 45,
+      "rebuilt": 1,
       "materially_rewritten": 0,
-      "newly_inferred": 7,
-      "retired": 0,
+      "newly_inferred": 0,
+      "retired": 1,
       "stale_evidence_references_before": 0,
       "stale_evidence_references_removed": 0,
       "orphan_references_remaining": 0,
-      "active_evidence_reference_occurrences_checked": 495,
+      "active_evidence_reference_occurrences_checked": 489,
       "shock_support_chains_changed_after_a_removal": 0,
-      "active_dynamic_shocks": 9,
+      "active_dynamic_shocks": 8,
       "active_high_order_candidates": 30,
       "active_strategic_pathways": 1,
       "active_possible_external_shocks": 0,
@@ -107169,7 +107214,7 @@
   },
   "active_corpus": {
     "profile": "radar-active-corpus-v1",
-    "rebuilt_at": "2026-09-14T07:54:14Z",
+    "rebuilt_at": "2026-09-14T08:05:22Z",
     "raw_counts": {
       "strand_a": 414,
       "strand_b": 133,
@@ -107178,26 +107223,26 @@
     },
     "active_counts": {
       "strand_a": 319,
-      "strand_b": 130,
-      "strand_c": 183,
+      "strand_b": 127,
+      "strand_c": 181,
       "frontier_evidence": 0
     },
     "raw_total": 676,
-    "active_total": 632,
+    "active_total": 627,
     "decision_counts": {
-      "provisional": 347,
-      "keep": 282,
-      "review": 9,
-      "drop": 37,
-      "drop_unverifiable": 0,
+      "provisional": 334,
+      "keep": 289,
+      "review": 10,
+      "drop": 40,
+      "drop_unverifiable": 2,
       "duplicate": 1
     },
     "review_is_active": true,
     "missing_state_is": "provisional_active",
     "deep_scan_v2": {
       "total_records": 669,
-      "v2_verified": 323,
-      "v2_pending": 346
+      "v2_verified": 336,
+      "v2_pending": 333
     },
     "derived_reasoning_uses_active_corpus": true,
     "metadata_corrections_applied_to_active_view": true,

@@ -3,16 +3,16 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **323**
-- Still needing V2 verification: **346**
-- Currently assigned to workers: **96**
-- Deferred after exhaustive recovery: **21**
-- Pending and not yet assigned: **229**
+- Authoritative V2 verified: **336**
+- Still needing V2 verification: **333**
+- Currently assigned to workers: **84**
+- Deferred after exhaustive recovery: **23**
+- Pending and not yet assigned: **226**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T075436Z-a02443386555`
+- Current package: `worker-a-20260914T080544Z-a02443386555`
 - Assigned unresolved records: **48**
   1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/`
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145459`
@@ -25,17 +25,17 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T075450Z-ee8cbc665694`
-- Assigned unresolved records: **48**
-  1. `link:https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri`
-  2. `link:https://doi.org/10.1002/ffo2.70047`
-  3. `link:https://doi.org/10.1002/ffo2.70043`
-  4. `link:https://doi.org/10.1002/ffo2.70042`
-  5. `link:https://doi.org/10.1007/s11135-026-02883-y`
-  6. `link:https://doi.org/10.1108/fs-08-2025-0177`
-  7. `link:https://doi.org/10.1007/s43621-026-04540-8`
-  8. `link:https://arxiv.org/abs/2607.27029`
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260914T080558Z-7108561a7941`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1111/1758-5899.70201`
+  2. `link:https://doi.org/10.1016/j.ijmedinf.2026.106685`
+  3. `link:https://doi.org/10.1007/s10796-026-10801-8`
+  4. `link:https://doi.org/10.1016/j.exis.2026.102034`
+  5. `link:https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology`
+  6. `link:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en`
+  7. `link:https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme`
+  8. `link:https://doi.org/10.1093/etojnl/vgag243`
+  - … plus 28 more in the package manifest
 
 ## Deferred recovery queue
 
@@ -60,3 +60,5 @@ It exists so a new chat or operator can see what has already been verified and w
 - `link:https://doi.org/10.1007/s11192-026-05619-9` — Identity fully confirmed, but the article is closed access and the only repository record is a JavaScript-gated discovery page with no retrievable file, leaving abstract-level evidence only.
 - `link:https://doi.org/10.1111/jcms.70116` — Identity fully confirmed and a repository deposit exists, but the accepted manuscript is under embargo until April 2027 and was not accessed; only abstracts are available.
 - `link:https://doi.org/10.1016/j.jtrangeo.2026.104813` — Identity confirmed via Crossref, but Elsevier blocked every route to this open-licensed article and no repository copy exists, leaving no substantive text at all.
+- `link:https://www.cifs.dk/read-listen/reports-knowledge/the-role-of-foresight-in-organisations` — Identity verified against the official CIFS publication page, but the whitepaper text is gated behind a download step and no copy exists elsewhere; the landing description alone cannot support a responsible strand B judgement.
+- `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQR1JiOFNtQlZBYUJUUThOYXVYSjFad2h0TG5OSm9ZdDBaY0NrbVk3UkkxUlZJMWFPczJySWd5RmwtYmZsdFE2bS1iOGJnMHFacHBtWE5GUWpqRTN3QXR4SHVtdE1ZRktGY3V6SUc0OWtIQVhSMUp5QVk2ZjE0N29TdFp6ZzgwTmx0aXpkMFpsM2lfb2xrWUtyWXJLY1hlYnRqNEhQWHNZLUhZZThpeklQU3NHWXQ2SGZhNkpmTllLU1JCN1NMU2Jv?oc=5` — Identity is confirmed against the publisher's own article page, but the reporting itself is subscriber-gated; making a strand C admission judgement would require substituting Commission background pages for the claimed work, which is not permitted.

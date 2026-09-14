@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T07:26:40Z",
+  "generated_at": "2026-09-14T08:05:06Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -7208,26 +7208,87 @@
       "deep_scan_package_id": "20260913T100015Z-06e641702250"
     },
     "link:https://doi.org/10.1007/s43621-026-04540-8": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_b",
       "source_hash": "38fe7754",
-      "reader_title": "Systematic review of factors underpinning dairy sector foresight in emerging economies",
-      "reader_what": "Review classifies 44 factors used in dairy foresight, dominated by economic and environmental considerations.",
-      "reader_more": "This systematic review identifies the factors underpinning foresight scenarios for sustainable dairy development in emerging countries, following the PRISMA 2020 protocol. Kenya and India supplied the most included articles. The authors extract 44 factors and classify them into five categories: social, technological, economic, environmental and policy. Economic and environmental factors dominate, appearing in 78 and 72 percent of studies respectively, while social factors appear in only about 44 percent, which the authors treat as an imbalance in how the sector's futures are constructed. The work is a methodological contribution to foresight practice in agricultural systems; its subject matter is dairy development in emerging economies rather than European research and innovation, so its relevance here is confined to method.",
+      "identity_hash": "1b2abc6dbf4ebc9e",
+      "reader_title": "Systematic review of factors shaping dairy foresight scenarios in emerging countries",
+      "reader_what": "Forty-four factors classified into five categories, with economic and environmental factors dominating the literature.",
+      "reader_more": "Foresight is increasingly used in agricultural planning, but the drivers that feed dairy scenarios have not been pulled together in one place. This review follows the PRISMA 2020 protocol through identification and selection, appraisal, and analysis. Kenya and India supplied the largest share of included studies. The authors extract 44 factors and sort them into social, technological, economic, environmental and policy categories; economic factors appear in 78% of studies and environmental in 72%, while social factors appear in only about 44%. The output is a factor inventory for a specific sector, which is why it does not meet the reusable-method bar.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed systematic literature review",
-        "research_question": "Which factors inform foresight scenarios for sustainable dairy sector development across emerging countries.",
-        "main_finding": "Forty-four factors group into five categories, with economic and environmental factors dominating at 78 and 72 percent of studies while social factors appear in only 44 percent.",
-        "method_or_basis": "Systematic literature review using PRISMA 2020, covering identification and selection, quality assessment and analysis.",
-        "qualification": "Counts how often factor types appear in the literature, which measures research attention rather than the factors' actual importance; evidence concentrates on Kenya and India.",
-        "radar_relevance": "Method contribution only: it illustrates how foresight factor sets are constructed, with no European research and innovation content.",
+        "work_kind": "systematic literature review",
+        "research_question": "Which factors underpin foresight scenarios for sustainable dairy development in emerging countries?",
+        "main_finding": "Forty-four factors across five categories, with economic and environmental considerations dominant and social considerations comparatively neglected.",
+        "method_or_basis": "PRISMA 2020 systematic literature review with defined identification, appraisal and analysis stages.",
+        "qualification": "Evidence is concentrated in Kenya and India; factor prominence reflects the reviewed literature rather than measured importance.",
+        "radar_relevance": "Fails strand B: standard review protocol applied to produce sector-specific content, with no transferable methodological contribution.",
         "confidence": "high",
         "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s43621-026-04540-8 resolves to link.springer.com and served the gold open-access article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirms Sembada and Duteurtre, Discover Sustainability, published 2026-09-02."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s43621-026-04540-8",
+            "title": "A systematic review of key factors informing foresight for sustainable dairy development across emerging countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open-access article retrieved and read; the legacy Deep Scan v1 summary was checked against it and is substantively accurate but does not address the strand test."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The review applies the standard PRISMA 2020 protocol without modification and delivers a domain-specific inventory of 44 dairy-sector factors sorted into five categories; the contribution is subject-matter input for later scenario work, not a new or materially improved synthesis procedure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:37Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_b",
+          "source_hash": "38fe7754",
+          "reader_title": "Systematic review of factors underpinning dairy sector foresight in emerging economies",
+          "reader_what": "Review classifies 44 factors used in dairy foresight, dominated by economic and environmental considerations.",
+          "reader_more": "This systematic review identifies the factors underpinning foresight scenarios for sustainable dairy development in emerging countries, following the PRISMA 2020 protocol. Kenya and India supplied the most included articles. The authors extract 44 factors and classify them into five categories: social, technological, economic, environmental and policy. Economic and environmental factors dominate, appearing in 78 and 72 percent of studies respectively, while social factors appear in only about 44 percent, which the authors treat as an imbalance in how the sector's futures are constructed. The work is a methodological contribution to foresight practice in agricultural systems; its subject matter is dairy development in emerging economies rather than European research and innovation, so its relevance here is confined to method.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed systematic literature review",
+            "research_question": "Which factors inform foresight scenarios for sustainable dairy sector development across emerging countries.",
+            "main_finding": "Forty-four factors group into five categories, with economic and environmental factors dominating at 78 and 72 percent of studies while social factors appear in only 44 percent.",
+            "method_or_basis": "Systematic literature review using PRISMA 2020, covering identification and selection, quality assessment and analysis.",
+            "qualification": "Counts how often factor types appear in the literature, which measures research attention rather than the factors' actual importance; evidence concentrates on Kenya and India.",
+            "radar_relevance": "Method contribution only: it illustrates how foresight factor sets are constructed, with no European research and innovation content.",
+            "confidence": "high",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:37Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1016/j.array.2026.101126": {
       "profile": "deep-reader-offline-v1",
@@ -9062,27 +9123,94 @@
       ]
     },
     "link:https://doi.org/10.1177/2336825x261472278": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "2dd17e86",
-      "reader_title": "Why European defence integration advances in documents but not in delivery",
-      "reader_what": "Uneven strategic autonomy is attributed to divergent national security identities and alliance histories, not capability gaps alone.",
-      "reader_why": "Implies capability and procurement fixes alone will not close the EU's ambition-to-implementation gap in defence.",
-      "reader_more": "The article starts from the observation that, despite renewed momentum after Russia's war against Ukraine, European strategic autonomy shows a persistent gap between ambition and implementation. It asks why integration advances in discourse, strategy documents and institutional innovation while practical delivery remains uneven across member states. Drawing on Europeanisation theory and scholarship on security identity, it argues the constraints are not only insufficient means, fragmented procurement or incomplete institutional design, but also divergent national security identities, historically embedded threat perceptions, and path dependencies formed through the long evolution of EU-NATO relations. This is a theoretical argument rather than an empirical test, and the publisher page was blocked in the package.",
+      "identity_hash": "8e6abf9c77bc32ce",
+      "reader_title": "Why European strategic autonomy keeps falling short of its defence integration ambitions",
+      "reader_what": "Europeanisation dynamics and unresolved identity questions, not just capability gaps, limit defence integration.",
+      "reader_why": "Defence integration shapes Europe's industrial and technological base as much as its security posture.",
+      "reader_more": "Russia's war against Ukraine gave European strategic autonomy renewed political momentum, yet the gap between declared ambition and actual defence integration has not closed. This article revisits the concept through Europeanisation theory and questions of European identity, arguing that the limits are not purely material. Member states' differing self-understandings and the uneven way European-level norms are absorbed nationally constrain how far integration can go, regardless of budget commitments. The analysis is conceptual and document-based rather than predictive, and the author is careful to frame persistent ambition-capability gaps as structurally produced rather than temporary.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed theoretical article",
-        "research_question": "Why is European strategic autonomy implemented unevenly, and how far do identity and domestic politics constrain defence integration?",
-        "main_finding": "Identity, domestic politics and alliance path dependency are argued to constrain defence integration beyond material capability gaps.",
-        "method_or_basis": "Europeanisation theory and security identity scholarship; publisher abstract recovered online after a blocked retrieval",
-        "qualification": "An interpretive argument rather than an empirical test; no new data is presented.",
-        "radar_relevance": "Bears on the strategic autonomy agenda framing European defence industrial and technology policy.",
-        "confidence": "medium",
+        "work_kind": "conceptual and analytical journal article",
+        "research_question": "Why does European strategic autonomy display a persistent gap between ambition and defence integration outcomes?",
+        "main_finding": "Europeanisation processes and contested European identity impose structural limits on defence integration that funding commitments alone do not resolve.",
+        "method_or_basis": "Theoretically framed analysis of European strategic autonomy discourse and defence integration practice.",
+        "qualification": "Conceptual argument rather than measured outcomes; explanatory rather than predictive.",
+        "radar_relevance": "Core European strategic-autonomy and defence-industrial capability debate.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "https://doi.org/10.1177/2336825x261472278 resolves to journals.sagepub.com; the DOI landing route returned HTTP 403 to automated retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1177/2336825X261472278 confirms Petros Violakis, New Perspectives, online 2026-07-21, print issue 2026-09."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The Sage open-access PDF at https://journals.sagepub.com/doi/pdf/10.1177/2336825X261472278 was retrieved (~113,000 characters) and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.sagepub.com/doi/pdf/10.1177/2336825X261472278",
+            "title": "European strategic autonomy revisited — full article PDF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full published article recovered from the publisher's open-access PDF route after the DOI landing page was blocked. Matches registered title, author and journal."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A full-length analysis of why European strategic autonomy in defence keeps falling short of its stated ambition, arguing that Europeanisation dynamics and contested identity set limits on defence integration — squarely a European strategic-capability and industrial-policy question."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:22Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "2dd17e86",
+          "reader_title": "Why European defence integration advances in documents but not in delivery",
+          "reader_what": "Uneven strategic autonomy is attributed to divergent national security identities and alliance histories, not capability gaps alone.",
+          "reader_why": "Implies capability and procurement fixes alone will not close the EU's ambition-to-implementation gap in defence.",
+          "reader_more": "The article starts from the observation that, despite renewed momentum after Russia's war against Ukraine, European strategic autonomy shows a persistent gap between ambition and implementation. It asks why integration advances in discourse, strategy documents and institutional innovation while practical delivery remains uneven across member states. Drawing on Europeanisation theory and scholarship on security identity, it argues the constraints are not only insufficient means, fragmented procurement or incomplete institutional design, but also divergent national security identities, historically embedded threat perceptions, and path dependencies formed through the long evolution of EU-NATO relations. This is a theoretical argument rather than an empirical test, and the publisher page was blocked in the package.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed theoretical article",
+            "research_question": "Why is European strategic autonomy implemented unevenly, and how far do identity and domestic politics constrain defence integration?",
+            "main_finding": "Identity, domestic politics and alliance path dependency are argued to constrain defence integration beyond material capability gaps.",
+            "method_or_basis": "Europeanisation theory and security identity scholarship; publisher abstract recovered online after a blocked retrieval",
+            "qualification": "An interpretive argument rather than an empirical test; no new data is presented.",
+            "radar_relevance": "Bears on the strategic autonomy agenda framing European defence industrial and technology policy.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:22Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/science-europe-presents-practical-guide-to-implementing-responsible-research-assessment-at-rfos/": {
       "profile": "deep-reader-v2-authoritative",
@@ -27334,6 +27462,788 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-14T07:26:40Z",
       "deep_scan_package_id": "worker-b-20260914T062900Z-b105dc9c7d1b"
+    },
+    "link:https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "08c818ac",
+      "identity_hash": "073cdf6b680fc30b",
+      "reader_title": "Blueprint for running the agreed EU-US transatlantic cyber policy research initiative",
+      "reader_what": "Proposes institutional setup, working methods and a science-diplomacy strategy to finally implement the dormant TCPRI.",
+      "reader_why": "Cyber policy research capacity shapes how the EU and US coordinate on a fast-moving security domain.",
+      "reader_more": "The EU and US agreed in 2016 to create a Transatlantic Cyber Policy Research Initiative, but three years later the commitment remained largely on paper. This paper takes up the idea and works out how it could actually be run: who convenes it, how researchers and policymakers connect, and what working methods suit a fast-changing threat landscape. It also argues the initiative would work better inside a shared transatlantic strategy for cybersecurity policy research built on existing EU and US science diplomacy. The proposals are the author's design, not an adopted arrangement.",
+      "deep_analysis": {
+        "work_kind": "policy/implementation design paper",
+        "research_question": "How could the agreed but unimplemented Transatlantic Cyber Policy Research Initiative be operationalised?",
+        "main_finding": "The TCPRI can be made workable through a defined institutional setup, explicit policy-research linkage and a supporting transatlantic cybersecurity policy research strategy.",
+        "method_or_basis": "Policy analysis of the 2016 EU-US commitment, review of the existing cybersecurity policy research ecosystem, and applied science-diplomacy framing.",
+        "qualification": "These are proposals by the author; no part of the design has been adopted by the EU or US.",
+        "radar_relevance": "Directly concerns EU-US research cooperation architecture and science diplomacy in cybersecurity — a research-policy and research-security topic.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri; it returns the full 15-page PDF, not a landing page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is registered for this think-tank publication; none appears on the PDF cover or in Crossref."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri",
+            "title": "How to Operationalise a Transatlantic Cyber Policy Research Initiative (TCPRI) — full PDF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full PDF retrieved and read. Cover page names Julia Schuetze, Stiftung Neue Verantwortung, September 2019 — contradicting the scanner's 2026-04-21 date and 'Interface Europe' authorship."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full report sets out an implementation design for an agreed EU-US cyber policy research initiative, including institutional setup, working methods and a transatlantic cybersecurity policy research strategy drawing on EU and US science diplomacy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:05Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1002/ffo2.70047": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "b2469ad4",
+      "identity_hash": "944e1862952719d6",
+      "reader_title": "Critique of Delphi bias claims, proposing panelists' rationales as the corrective evidence base",
+      "reader_what": "Argues prior bias findings are unfounded and that written rationales should anchor future Delphi practice and research.",
+      "reader_why": "Delphi underpins much science and technology foresight, so how bias is diagnosed shapes method quality.",
+      "reader_more": "A 2025 paper argued that expert judgments in large science and technology Delphi surveys are systematically biased. This article disputes that. It argues the original authors misread what Delphi is for, conflated disagreement with bias, and analysed secondary data without sufficient rigour. In place of that diagnosis it proposes a cleaner design: distinguish legitimate differences of opinion between experts and non-experts from genuine cognitive or motivational bias, and treat the reasons panelists write for their answers as the primary material for both practice and controlled study. The contribution is a research design, not new survey results.",
+      "deep_analysis": {
+        "work_kind": "methodological critique and research-design proposal",
+        "research_question": "Are claims of systematic expert bias in large-scale S&T Delphi surveys conceptually and methodologically sound?",
+        "main_finding": "The bias claims do not hold, because the underlying analysis conflates expert-non-expert divergence with bias and lacks rigour; rationale-based designs are proposed instead.",
+        "method_or_basis": "Conceptual critique of an existing publication plus specification of an alternative, rationale-centred Delphi research design.",
+        "qualification": "This is an argumentative critique; the proposed rationale-based design is recommended rather than empirically tested here.",
+        "radar_relevance": "Offers a transferable improvement to how Delphi-based foresight studies are designed and evaluated.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "https://doi.org/10.1002/ffo2.70047 redirects to Wiley Online Library, which returned HTTP 403 to automated retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.70047 confirms Jiang, Belton and Wright, Futures & Foresight Science 8(2), online 2026-07-15."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Strathclyde institutional repository (Strathprints 96799) served the full accepted manuscript PDF, ~68,000 characters, matching title and authors."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://strathprints.strath.ac.uk/96799/3/Jiang-etal-FFS-2026-Bias-in-expert-judgment-within-large-scale-science-and-technology-Delphis.pdf",
+            "title": "Bias in Expert Judgment Within Large-Scale Science and Technology Delphis — accepted manuscript",
+            "evidence_used": true
+          },
+          {
+            "kind": "crossref_metadata",
+            "url": "https://doi.org/10.1002/ffo2.70047",
+            "title": "Crossref record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Wiley blocked; full accepted manuscript recovered from Strathprints and read in full. Content matches the registered title and author list."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper rejects a published bias diagnosis on conceptual and methodological grounds and sets out a replacement research design — separating legitimate expert divergence from genuine bias and using panelists' written rationales as the evidential base for Delphi practice and laboratory study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:05Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1002/ffo2.70043": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "3ad2f347",
+      "identity_hash": "33041712b671efb7",
+      "reader_title": "A procedure for judging when borrowed foresight methods have been stretched beyond their purpose",
+      "reader_what": "Indonesian resilience planning turned exploratory foresight methods into scoring and classification exercises.",
+      "reader_why": "Foresight methods lose diagnostic value when transplanted into administrative scoring routines.",
+      "reader_more": "Methods such as net assessment, scenarios and Black Swan thinking travel across countries and institutions, and change on the way. This article builds an evaluative case study around Indonesia's 2025 national resilience planning to ask when such changes are sensible local adaptation and when the method has been stretched past the point where it still does its job. The procedure has three stages and uses explicit decision rules, so it can be applied to other documents and settings. Empirically, exploratory methods were found to have been recast as periodic categorisation and prioritisation. The author does not claim this changed policy outcomes.",
+      "deep_analysis": {
+        "work_kind": "evaluative case study with an explicit analytical procedure",
+        "research_question": "Are divergences in how foresight methods are operationalised in Indonesian resilience planning adaptation or conceptual stretching?",
+        "main_finding": "Exploratory and diagnostic foresight methods were consistently translated into an operational regime of commensuration, scoring and classificatory closure.",
+        "method_or_basis": "Three-stage coded document analysis of official policy documents against specified reference purposes, boundary conditions and evidential expectations.",
+        "qualification": "No causal claim about policy outcomes; conclusions are bounded propositions, and full text could not be legitimately accessed.",
+        "radar_relevance": "Supplies a reusable evaluation procedure for foresight method quality and fidelity.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "https://doi.org/10.1002/ffo2.70043 resolves to Wiley Online Library, which returned HTTP 403 to automated retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.70043 confirms Endiartia, Futures & Foresight Science 8(2), online 2026-05-26, and carries the publisher's full structured abstract."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned only publisher and index records, no free full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Endiartia + Futures & Foresight Science + 2026 returned indexing records only."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Unpaywall and OpenAlex both report oa_status=closed with no repository location; no institutional copy found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Distinctive phrase 'conceptual stretching' with 'Lemhannas' confirmed the work but surfaced no legally accessible full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_registered_abstract",
+            "url": "https://doi.org/10.1002/ffo2.70043",
+            "title": "Conceptual Stretching in Strategic Foresight — publisher structured abstract via Crossref/OpenAlex",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Closed access with no repository copy anywhere. The publisher's registered abstract is detailed enough (design, three-stage procedure, decision rules, findings) to support the strand decision."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article specifies a traceable three-stage evaluative procedure — reference-point specification, document coding, evaluative classification — with explicit decision rules separating contextual adaptation from boundary erosion, purpose reversal, inferential overreach, procedural inconsistency and opacity, which is reusable well beyond the Indonesian case."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1002/ffo2.70042": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "92e46155",
+      "identity_hash": "0460311ac303311b",
+      "reader_title": "A method for long-range foresight built on synchronising nested historical cycles",
+      "reader_what": "Proposes that five nested social and technological cycles converge roughly every 250 years into a civilisational epoch.",
+      "reader_why": "Extends foresight beyond near-term trend analysis toward structured long-range anticipation.",
+      "reader_more": "Most foresight looks a decade or two ahead. This article proposes a method for looking much further. It synthesises five nested cycles — from decadal innovation waves up to century-long institutional rhythms — and argues that they periodically fall into step, producing what the author calls a Mega Epoch about every 250 years. The method is demonstrated by mapping 2,500 years of Western history into ten such epochs, drawing on macrohistorians including Ibn Khaldun, Toynbee, Kondratieff, Strauss and Howe, and Turchin. The author states the framework is non-deterministic, open to falsification, and dependent on assumptions such as stable generation length.",
+      "deep_analysis": {
+        "work_kind": "methodological article with historical demonstration",
+        "research_question": "Can synchronisation of nested macrohistorical cycles serve as a systematic method for long-range foresight?",
+        "main_finding": "Nested cycles are argued to converge at roughly 250-year intervals, yielding a Ten Mega Epochs mapping of Western history.",
+        "method_or_basis": "Synthesis of five cycle traditions into a single temporal framework, applied retrospectively across 2,500 years.",
+        "qualification": "Explicitly non-deterministic and contingent on stable retroactive structures; the demonstration is retrospective, not predictive validation.",
+        "radar_relevance": "A transferable long-range foresight methodology usable independently of the demonstration case.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "https://doi.org/10.1002/ffo2.70042 resolves to Wiley Online Library, HTTP 403 to automated retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.70042 confirms Tuomo Kuosa, Futures & Foresight Science 8(2), online 2026-05-04, with the full publisher abstract."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search located publisher and index records only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Kuosa + Ten Mega Epochs + 2026 returned no author or repository copy."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Unpaywall and OpenAlex both report closed access with zero OA locations."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Searching the distinctive phrase 'macrohistorical cycle synchronization' confirmed identity but found no accessible full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_registered_abstract",
+            "url": "https://doi.org/10.1002/ffo2.70042",
+            "title": "Macrohistorical Cycle Synchronization as a Method for Long-Range Foresight — publisher abstract",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Closed access, no repository copy. The registered abstract states the method, its five nested cycles, the source traditions and the falsifiability caveat, which is sufficient for the strand judgement."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article explicitly introduces macrohistorical cycle synchronization as a foresight methodology, specifying five nested cycles and a synchronization logic, and demonstrates it by mapping 2,500 years of Western history — a transferable long-range anticipation technique rather than an application of an existing one."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1007/s11135-026-02883-y": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "0c514bfa",
+      "identity_hash": "6f051dc18fee6d4d",
+      "reader_title": "Hybrid Futures Triangle and fuzzy prioritisation framework for banking transformation under constraint",
+      "reader_what": "Sixty transformation drivers were scored and reduced to three futures: inertia, managed transition, transformational leap.",
+      "reader_more": "Financial systems under heavy institutional and geopolitical constraint are hard to forecast with conventional tools. This study builds a foresight framework around the Futures Triangle, which sets future-oriented goals against present pressures and inherited institutional limits. It adds a fuzzy multi-criteria step that scores candidate drivers on importance, uncertainty and rate of change, making the reduction from a long driver list to a working set explicit rather than tacit. Sixty drivers were drawn from expert interviews, regulatory papers and international foresight reports, producing three configurations for Iran's banking sector. The framework is the transferable part; the Iranian application is the demonstration.",
+      "deep_analysis": {
+        "work_kind": "applied foresight study introducing a hybrid framework",
+        "research_question": "What transformation pathways face a banking system under transitional and institutionally constrained conditions?",
+        "main_finding": "Three configurations emerge — structural inertia, managed transition and transformational leap — distinguished by technological capacity, regulatory flexibility and institutional readiness.",
+        "method_or_basis": "Futures Triangle structuring, multi-source qualitative synthesis of 60 drivers, fuzzy multi-criteria prioritisation, scenario construction.",
+        "qualification": "Single-country demonstration; driver selection depends on the expert panel, and no European relevance is claimed.",
+        "radar_relevance": "Strand B is geography-independent; the transferable element is the combination of Futures Triangle structuring with transparent fuzzy driver prioritisation.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s11135-026-02883-y resolves to link.springer.com/article/10.1007/s11135-026-02883-y, which served ~25,000 characters of article HTML including abstract, methods and results sections."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirms Quality & Quantity, published online 2026-06-08, seven authors."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11135-026-02883-y",
+            "title": "Navigating the future of digital banking — Springer article page",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer article text retrieved directly and read. Confirms a Futures Triangle plus fuzzy multi-criteria design, 60 drivers and three scenario configurations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The study develops and operationalises a hybrid foresight framework combining Futures Triangle analysis with fuzzy multi-criteria driver prioritisation across importance, uncertainty and rate of change — a transferable design, with the Iranian banking sector serving as the test bed rather than the contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1108/fs-08-2025-0177": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "c58d79bc",
+      "identity_hash": "9bb25b4e4c1d6b5a",
+      "reader_title": "Case study of why participatory foresight is hard to institutionalise in Peruvian regional planning",
+      "reader_what": "Regulatory advances exist, but institutionalisation stays incipient because of planning-system and state-society weaknesses.",
+      "reader_more": "Peru has written participatory foresight into national planning rules, so it is a useful place to ask whether formal adoption translates into practice. Using interviews, a survey of regional officials and a literature review, this exploratory study looks at two official subnational experiences. It finds genuine regulatory progress and committed national officials, but only incipient institutionalisation. The obstacles sit in how the national planning system operates and in wider weaknesses in participatory practice and state-society relations, not mainly in technique. The paper is a diagnosis of uptake conditions rather than a methodological contribution, which is why it falls outside the reusable-methods strand.",
+      "deep_analysis": {
+        "work_kind": "exploratory qualitative case study",
+        "research_question": "What challenges arise when institutionalising participatory foresight in policymaking in a developing democracy?",
+        "main_finding": "Formal rules have advanced but practice remains incipient, constrained by the national planning system and by weak participatory and state-society relations.",
+        "method_or_basis": "In-depth interviews, a survey of regional officials and a literature review across two official Peruvian subnational cases.",
+        "qualification": "Exploratory and single-country; the authors note the evidence base on foresight use in policymaking is still largely anecdotal.",
+        "radar_relevance": "Fails strand B: applies and observes existing participatory foresight practice without contributing a reusable method.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "https://doi.org/10.1108/fs-08-2025-0177 resolves to emerald.com, which returned HTTP 403 to automated retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1108/fs-08-2025-0177 confirms Gonzalo Alcalde, foresight, online 2026-04-21, and carries the full structured abstract (~3,000 characters)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned Emerald and indexing records only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Alcalde + participatory foresight + Peru located no author or repository deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Unpaywall and OpenAlex both report closed access with no OA location."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Broader search on the Peru subnational participatory foresight framing confirmed identity but no accessible full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_registered_abstract",
+            "url": "https://doi.org/10.1108/fs-08-2025-0177",
+            "title": "Participatory foresight in subnational policy processes: two experiences in Peru — Emerald structured abstract",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Closed access with no repository copy. The Emerald structured abstract gives purpose, design, findings, limitations and implications in full, which settles the strand question."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The paper is exploratory case-study research on the institutional and political obstacles to embedding existing participatory foresight practice in Peruvian subnational planning; it reports on conditions for uptake and does not develop or materially improve a method, framework, indicator or evaluation design."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://arxiv.org/abs/2607.27029": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "12ffe3b9",
+      "identity_hash": "b7c12d3500e20336",
+      "reader_title": "Expert foresight study on how AI unsettles the assumptions behind open-data governance",
+      "reader_what": "Generative AI breaks the visibility, institutional control and human-reader premises that open-data policy was built on.",
+      "reader_why": "Data governance frameworks may fail quietly if their founding assumptions no longer hold.",
+      "reader_more": "Two decades of open-data policy assumed that reuse is visible and traceable, that institutions keep meaningful control over information flows, and that humans read the data. This paper argues generative and inferential AI breaks all three: data disappears into opaque training pipelines, sensitive knowledge can be generated without touching the underlying dataset, and machines are becoming the main producers and consumers of information. The findings come from two expert forecasting studios convened by The GovLab in 2025-2026 with nineteen senior practitioners across statistics, trade policy, open science, AI governance and geospatial systems, whose elicited signals were clustered and stress-tested. Seven convergent signals are identified.",
+      "deep_analysis": {
+        "work_kind": "participatory foresight / signal-scanning study",
+        "research_question": "How does AI change the assumptions underpinning existing data access, reuse and sovereignty governance?",
+        "main_finding": "Seven convergent signals show prevailing open-data governance premises no longer hold under generative and inferential AI.",
+        "method_or_basis": "Two structured expert forecasting studios with nineteen practitioners; qualitative signal elicitation, clustering, thematic synthesis and practitioner stress-testing.",
+        "qualification": "Expert-elicited signals, not measured outcomes; the panel is small and self-selected, and the work is a preprint without peer review.",
+        "radar_relevance": "Method status is the open question: the authors frame their approach as applying established horizon-scanning practice, but the studio design is specified replicably.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2607.27029 is the matching arXiv abstract page for the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is registered for this arXiv preprint."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved the full preprint PDF at https://arxiv.org/pdf/2607.27029v1 (~41,000 characters) and read it."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2607.27029v1",
+            "title": "Anticipatory Data Governance in the Age of AI — full preprint",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv preprint read. Confirms two GovLab expert forecasting studios (2025-2026), nineteen practitioners, signal-scanning synthesis producing seven convergent signals."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CONTRIBUTION_UNCLEAR",
+        "reason": "The paper self-describes as applying an existing qualitative signal-scanning methodology from the horizon-scanning tradition, which would fail strand B; but its structured two-studio expert forecasting design is specified in enough detail to be replicable, so whether that counts as a materially improved method is a genuine judgement call."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1016/j.futures.2026.103829": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "cd5ff047",
+      "identity_hash": "eb48789496195ec5",
+      "reader_title": "Review of how knowledge-management theory is used in foresight research",
+      "reader_what": "Knowledge-management concepts appear only sparsely in foresight studies, mostly through an organisational-learning lens.",
+      "reader_more": "Foresight is fundamentally about creating, circulating and applying knowledge about the future, so knowledge management ought to have a lot to say about it. This systematic literature review checks whether it does. The answer is largely no: despite the evident overlap, knowledge-management theory is used sparingly in foresight research, and where it appears it is usually organisational learning, with core knowledge-process concepts only partly represented. The authors set out where the two literatures could usefully meet. The contribution is a mapping of a research gap and an agenda, not a technique that another team could pick up and apply.",
+      "deep_analysis": {
+        "work_kind": "systematic literature review",
+        "research_question": "How is the knowledge-management approach represented in foresight research?",
+        "main_finding": "Knowledge-management theory is scarcely used in foresight studies despite strong conceptual linkage, appearing mainly as organisational learning.",
+        "method_or_basis": "Systematic literature review coding knowledge-management-related theories across foresight publications.",
+        "qualification": "Full text could not be legitimately accessed; assessment rests on the complete publisher abstract.",
+        "radar_relevance": "Fails strand B: a literature mapping and research agenda, not a transferable method.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "https://linkinghub.elsevier.com/retrieve/pii/S0016328726000716 redirects to sciencedirect.com, which returned HTTP 403; the site also serves tdm-reservation=1, so automated text mining is reserved by the publisher and was not attempted further."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.futures.2026.103829 confirms Mönkkönen, Kianto and Vanhala, Futures, issue dated 2026-06."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search located the LUT research portal entry and third-party mirrors; no authorised free full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Mönkkönen + Kianto + Vanhala + Futures 2026 confirmed the article is CC BY but hosted only on ScienceDirect."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Unpaywall and OpenAlex list only the ScienceDirect published version; LUT Converis carries a metadata record without a deposited file."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Broader search recovered the full publisher abstract via OpenAlex; no legitimate full-text copy exists outside the blocked publisher site."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_registered_abstract",
+            "url": "https://doi.org/10.1016/j.futures.2026.103829",
+            "title": "Knowledge management approach in foresight studies — publisher abstract",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_metadata_record",
+            "url": "https://research.lut.fi/converis/portal/",
+            "title": "LUT University research portal record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher blocks automated access and reserves text mining; no repository file exists. Decision rests on the complete registered abstract, which states design, scope and findings."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The review maps how knowledge-management theory appears in existing foresight literature and proposes future research directions; it produces a conceptual stocktake rather than a new or materially improved method, framework, indicator or evaluation design."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://news.google.com/rss/articles/CBMijwFBVV95cUxOLXRxVktyZWlOSXVmYmxrY1NERkxGYTZVVDJheTNCUHpOa2NMRzRHdUFOel91aGlsMnVpYmpSSm1ONHFUc2RtT1VaX05MR0NBcTNTeFF3UGs4LTZmVDFqUjREU1RqdFVLYkZRdzBPRE5xQ0o0YnZyRW9OSTM4XzByWC1SaHVZLS1Qb3dRQ2hxNA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "source_hash": "45c0ed50",
+      "identity_hash": "cc59fa90e8b36138",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "The Google News RSS article URL (CBMijwFBVV95cUxOLXRxVktyZWlO...) renders only a JavaScript splash shell; following it with redirects enabled returns the Google News wrapper, never a publisher URL. No article text or destination link is exposed in the markup."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News items of this kind carry no DOI, and none is present in the record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Searching the exact claimed headline \"EU's first quantum tech regulation delayed by six months\" returned no Euractiv article or any other matching item."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Euractiv + quantum regulation + delayed + August 2026 returned Commission, Parliament and law-firm material about Quantum Act timing, but no article matching the claimed headline and outlet."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "No matching item could be located on euractiv.com; the outlet does not expose an accessible archive entry for this headline."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Broader searches on Quantum Act scheduling confirm the proposal slipped from Q2 2026, but this corroborates a topic, not the claimed Euractiv article. Per the rules a related programme page cannot be substituted for the claimed work."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Supplied URL is an opaque Google News redirect that cannot be resolved to a publisher page, and no Euractiv article bearing the claimed headline could be located through any ladder step. Independent evidence exists that Quantum Act timing slipped, but that is a different source and cannot stand in for the claimed work."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "C_WORK_NOT_SUBSTANTIATED",
+        "reason": "After all six recovery steps the claimed Euractiv article itself could not be substantiated; only the scanner's stored headline attests to it, and substituting corroborating institutional pages for the claimed work is not permitted."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxPQnA1YW9jR3hwZWJhbEx3a0s0WjZWd0twU0VNekFOdzBhMmJyZ3NBeXNtckJMdEw1ZnFMZVhURk42ZVlORnZhZDJDeHMzUkdrMW5FbWg1X25yT21DeWZpRWF5b2M3REhlaHEyOWVEWTFrNXNiU2R3TmN3UlBDaWhoTUk5ckx4UGtodFdTYnVVQlF1d0Vu?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "source_hash": "d6551964",
+      "identity_hash": "5084c94897c94140",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "The Google News RSS URL (CBMilAFBVV95cUxPQnA1YW9jR3hwZWJhbEx3a0...) returns only the Google News JavaScript splash; no publisher destination is recoverable from the markup or via redirect following."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a news article of this kind."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Searching the exact claimed headline \"EU negotiators agree on €115mn defence innovation programme\" returned no Euractiv article or any other item bearing it."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Euractiv + defence innovation + €115 million + July 2026 returned Council, Commission and trade-press coverage of the AGILE agreement, but nothing matching the claimed headline and outlet."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "No matching item could be located on euractiv.com and the outlet exposes no accessible archive record for this headline."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Broader searching confirms the underlying event — the 15 July 2026 Council-Parliament political agreement on the €115m AGILE programme — via Consilium and Commission pages, but these are different works and cannot be substituted for the claimed Euractiv article."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "The supplied Google News redirect cannot be resolved and no Euractiv article with the claimed headline could be found at any ladder step. The underlying AGILE agreement is independently well documented, but that corroborates the topic, not the existence of the claimed article."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "C_WORK_NOT_SUBSTANTIATED",
+        "reason": "After all six recovery steps the claimed Euractiv article could not be substantiated; only the scanner's stored headline attests to it, and official Council or Commission pages on the same event cannot be substituted for the claimed work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "4bd19692",
+      "identity_hash": "1198ae1b962eb793",
+      "reader_title": "How European technology transfer offices are adopting AI in knowledge valorisation",
+      "reader_what": "Survey and workshop evidence on AI use by technology transfer offices, with gaps and recommendations identified.",
+      "reader_why": "Technology transfer offices are where European research either does or does not reach the market.",
+      "reader_more": "CESAER represents universities of science and technology across Europe. To find out how AI is actually being used in knowledge valorisation, it surveyed its members and ran a workshop with case studies. The report sets the findings against European policy on knowledge valorisation, identifies what is missing — including capability, guidance and data constraints inside technology transfer offices — and then issues separate recommendations for universities and their TTOs, for funders and innovation agencies, and for EU institutions and policymakers. It is a practitioner-facing stocktake from the sector itself rather than an independent evaluation.",
+      "deep_analysis": {
+        "work_kind": "sector association report (survey and workshop based)",
+        "research_question": "How is AI being adopted in technology transfer and knowledge valorisation at European universities of science and technology?",
+        "main_finding": "AI adoption in technology transfer is emerging but uneven, with capability and guidance gaps that the report addresses through targeted recommendations.",
+        "method_or_basis": "Survey across CESAER member universities plus a workshop with case studies, framed by European knowledge-valorisation policy.",
+        "qualification": "Self-reported evidence from an association's own membership; recommendations are advocacy positions, not evaluated interventions.",
+        "radar_relevance": "Directly addresses European research valorisation capability and carries recommendations aimed at EU institutions.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied CESAER publications URL resolves to a short landing entry (~190 characters) without report text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is registered for this CESAER report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the full report PDF from CESAER's own content path, https://www.cesaer.org/content/5-operations/2025/20251028-report-ai-pathways-for-technology-transfer.pdf (~30,000 characters), including executive summary, survey findings, workshop insights and recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2025/20251028-report-ai-pathways-for-technology-transfer.pdf",
+            "title": "AI pathways for technology transfer: Lessons learned from universities of science and technology — full CESAER report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full report PDF recovered from the issuing body. Its cover states 'Report dated 28 October 2025', which contradicts the scanner's 2026-03-17 date."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A report by the European association of universities of science and technology, based on a survey of its members and a workshop, examining how AI is being adopted in knowledge valorisation by technology transfer offices, with a dedicated European policy context section and recommendations addressed to universities, funders and EU institutions."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
     }
   }
 }

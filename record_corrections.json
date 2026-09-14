@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-14T07:26:40Z",
+  "updated_at": "2026-09-14T08:05:06Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -1688,6 +1688,58 @@
       ],
       "updated_at": "2026-09-14T07:26:40Z",
       "deep_scan_package_id": "worker-b-20260914T062900Z-b105dc9c7d1b"
+    },
+    "link:https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri": {
+      "fields": {
+        "authors": "Julia Schuetze",
+        "date": "2019-09",
+        "source": "Stiftung Neue Verantwortung",
+        "text_mode": "full_text",
+        "source_text_mode": "full_text"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "PDF cover and 'About the author' page give Julia Schuetze, Stiftung Neue Verantwortung, September 2019. The scanner's 2026-04-21 date reflects site re-publication under the later 'interface' brand, not publication. Stored tier rested on the guessed organisation, so it should be recomputed.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri"
+      ],
+      "updated_at": "2026-09-14T08:05:05Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://doi.org/10.1007/s11135-026-02883-y": {
+      "fields": {
+        "authors": "Atiye Fazelipanah, Mohammad Rajabi, Seyed Omid Azarkasb, Mohsen Ebrahimi Moghaddam, Seyed Hossein Khasteh, Hossein Jelvehgaran Esfahani, Amir Bahador Morovat"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored author string carried stray combining diacritics before 'Amir Bahador Morovat'; corrected against the Crossref author list and the Springer article byline.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s11135-026-02883-y"
+      ],
+      "updated_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
+    },
+    "link:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/": {
+      "fields": {
+        "date": "2025-10-28",
+        "text_mode": "full_text",
+        "source_text_mode": "full_text"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report PDF states 'Report dated 28 October 2025' on its cover and is filed under CESAER's 2025 content path; the scanner's 2026-03-17 reflects later indexing. Tier was set from landing-page metadata only and should be recomputed from the verified document.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.cesaer.org/content/5-operations/2025/20251028-report-ai-pathways-for-technology-transfer.pdf"
+      ],
+      "updated_at": "2026-09-14T08:05:06Z",
+      "deep_scan_package_id": "worker-b-20260914T073045Z-ee8cbc665694"
     }
   }
 }
