@@ -5,15 +5,15 @@ It exists so a new chat or operator can see what has already been verified and w
 
 - Authoritative V2 verified: **323**
 - Still needing V2 verification: **346**
-- Currently assigned to workers: **72**
+- Currently assigned to workers: **96**
 - Deferred after exhaustive recovery: **21**
-- Pending and not yet assigned: **253**
+- Pending and not yet assigned: **229**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T072708Z-d2a5b5068a6c`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260914T073030Z-a02443386555`
+- Assigned unresolved records: **48**
   1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/`
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145459`
   3. `link:https://ecipe.org/publications/copyright-trap/#_ftnref9`
@@ -22,11 +22,11 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://doi.org/10.1016/j.eiar.2026.108574`
   7. `link:https://www.cnrs.fr/sites/default/files/press_info/2026-05/CP-VivaTech-2026_VEN_0.pdf`
   8. `link:https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf`
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T072719Z-6e204764eea9`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260914T073045Z-ee8cbc665694`
+- Assigned unresolved records: **48**
   1. `link:https://www.interface-eu.org/publications/downloadPdf/how-to-operationalise-a-transatlantic-cyber-policy-research-initiative-tcpri`
   2. `link:https://doi.org/10.1002/ffo2.70047`
   3. `link:https://doi.org/10.1002/ffo2.70043`
@@ -35,7 +35,7 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://doi.org/10.1108/fs-08-2025-0177`
   7. `link:https://doi.org/10.1007/s43621-026-04540-8`
   8. `link:https://arxiv.org/abs/2607.27029`
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Deferred recovery queue
 
