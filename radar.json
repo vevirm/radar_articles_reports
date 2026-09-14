@@ -1315,7 +1315,7 @@
     "new_c": 0
   },
   "reader_products_refresh": {
-    "completed_at": "2026-09-14T07:09:28Z",
+    "completed_at": "2026-09-14T07:12:45Z",
     "matrix": true,
     "risks_opportunities": true,
     "external_shocks": true,
@@ -92693,8 +92693,8 @@
       "source_merit_score": null,
       "first_seen": "2026-09-06T13:37Z",
       "new_this_scan": false,
-      "retrace_status": "materially_rewritten",
-      "retrace_at": "2026-09-14T07:09:28Z"
+      "retrace_status": "unchanged",
+      "retrace_at": "2026-09-14T07:12:45Z"
     },
     {
       "title": "Download 6 - Summary of the Impact Assessment Download",
@@ -92747,7 +92747,7 @@
       "first_seen": "2026-09-08T12:05Z",
       "new_this_scan": false,
       "retrace_status": "unchanged",
-      "retrace_at": "2026-09-14T07:09:28Z"
+      "retrace_at": "2026-09-14T07:12:45Z"
     }
   ],
   "external_shock_watch": [],
@@ -93378,13 +93378,13 @@
     "high_order_candidates_dormant": 3,
     "high_order_candidates_new_this_run": 8,
     "high_order_candidates_updated_this_run": 2,
-    "active_corpus_total": 644,
-    "active_strand_a": 343,
-    "active_strand_b": 132,
+    "active_corpus_total": 639,
+    "active_strand_a": 342,
+    "active_strand_b": 128,
     "active_strand_c": 169,
-    "deep_scan_v2_verified": 243,
-    "deep_scan_v2_pending": 426,
-    "inactive_drop": 25,
+    "deep_scan_v2_verified": 284,
+    "deep_scan_v2_pending": 385,
+    "inactive_drop": 30,
     "inactive_unverifiable": 0,
     "inactive_duplicates": 1,
     "active_review": 8
@@ -93864,10 +93864,10 @@
   },
   "shock_inference": {
     "profile_version": "23.3-context-weighted-shocks-v3",
-    "evaluated_at": "2026-09-14T07:09:28Z",
+    "evaluated_at": "2026-09-14T07:12:45Z",
     "new_count": 0,
-    "updated_count": 0,
-    "unchanged_count": 14,
+    "updated_count": 4,
+    "unchanged_count": 8,
     "dynamic_shocks": [
       {
         "id": "emergent:quantum:security_reclassification",
@@ -94234,13 +94234,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "8fc5453b8d164886",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:startups:security_reclassification",
@@ -94300,7 +94300,7 @@
           },
           {
             "identity": "url:https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o",
-            "row": "A339",
+            "row": "A338",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -94708,13 +94708,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "47a731f4c687f88a",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:ip:acquisition",
@@ -95053,13 +95053,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-13T22:20:43Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "974c6ef4134ef12b",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:infrastructure:security_reclassification",
@@ -95111,26 +95111,12 @@
             "source": "ACS Chemical Health & Safety",
             "date": "2026-09-07",
             "link": "https://doi.org/10.1021/acs.chas.6c00074",
-            "quality": 92,
+            "quality": 90,
             "new_this_scan": false,
-            "core_message": "Abstract the EU Framework for Science Diplomacy marks a significant shift from viewing R&I.",
-            "geo_evidence": [
-              "strategic competition",
-              "research security",
-              "science diplomacy"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              "research security",
-              "science diplomacy",
-              "research governance"
-            ],
-            "a_context_evidence": [
-              "competition_capability",
-              "international_coordination",
-              "security_resilience",
-              "rules_power"
-            ]
+            "core_message": "The commentary argues the EU’s new science-diplomacy framework makes research security central to international chemical collaboration.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
           },
           {
             "identity": "url:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration",
@@ -95321,430 +95307,17 @@
         "context_score_bonus": 4.4,
         "official_trigger_present": true,
         "best_quality": 98,
-        "average_quality": 96,
+        "average_quality": 95,
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "dfde055a047bab78",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
-      },
-      {
-        "id": "emergent:quantum:export_restriction",
-        "asset_id": "quantum",
-        "pressure_id": "export_restriction",
-        "title": "An export restriction abruptly cuts Europe’s access to quantum research and technology",
-        "plainly": "Europe relies on quantum research and technology. Separate primary evidence shows that an external export restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
-        "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
-        "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
-        "reasoning": [
-          "Primary retained evidence shows European reliance on or expansion of quantum research and technology.",
-          "Separate primary retained evidence shows a live mechanism for an external export restriction.",
-          "Primary evidence contains 1 direct capability × pressure coupling record(s).",
-          "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "3 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
-          "The scenario becomes a shock only if the response is slower than the disruption."
-        ],
-        "conditions": [
-          "Europe materially depends on quantum research and technology for current or planned work.",
-          "An external export restriction reaches the supplier, service, partner or rule that the European capability depends on.",
-          "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
-        ],
-        "case_against": [
-          "Only one primary retained record currently links the European capability directly to the outside pressure.",
-          "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
-          "The primary corpus contains 2 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
-          "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
-          "The scenario still depends on the disruption arriving faster than Europe can respond."
-        ],
-        "prevention_actions": [
-          "Build multiple European routes to quantum hardware, testing and specialist skills.",
-          "Avoid tying critical projects to one supplier, facility or foreign access rule.",
-          "Secure alternative suppliers and licences before a new export rule takes effect."
-        ],
-        "watch_for": [
-          "A government expands export restrictions to inputs used by European research.",
-          "European projects report delayed or denied licences for the affected input."
-        ],
-        "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
-        "inference_score": 90,
-        "support": [
-          {
-            "identity": "url:https://doi.org/10.1007/s44464-026-00022-y",
-            "row": "A016",
-            "strand": "A",
-            "role": "Primary coupling evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Implications of EU 2025 dual use regulation for quantum technology innovation",
-            "source": "Discover Quantum Science",
-            "date": "2026-06-15",
-            "link": "https://doi.org/10.1007/s44464-026-00022-y",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Implications of EU 2025 dual use regulation for quantum technology innovation.",
-            "geo_evidence": [
-              "export control",
-              "dual use"
-            ],
-            "ri_evidence": [
-              "quantum + innovation",
-              "semiconductor + research",
-              "quantum + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://doi.org/10.1140/epjs/s11734-026-02451-3",
-            "row": "A134",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The QTF Backbone: proposal for a nationwide optical fibre backbone in Germany for quantum technology and time and frequency metrology",
-            "source": "Fraunhofer Society",
-            "date": "2026-07-16",
-            "link": "https://doi.org/10.1140/epjs/s11734-026-02451-3",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "as that supporting Global Navigation Satellite Systems (GNSS)) and fundamental physics.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research and development",
-              "r&d",
-              "quantum + testbed"
-            ],
-            "a_context_evidence": [
-              "strategic-technology capability",
-              "quantum",
-              "testbed",
-              "germany"
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.1140/epjqt/s40507-026-00560-5",
-            "row": "A103",
-            "strand": "A",
-            "role": "European capability: quantum research and technology",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Rethinking dual-use in quantum technology",
-            "source": "EPJ Quantum Technology",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.1140/epjqt/s40507-026-00560-5",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Rethinking dual-use in quantum technology.",
-            "geo_evidence": [
-              "dual-use"
-            ],
-            "ri_evidence": [
-              "technology development",
-              "quantum + research",
-              "dual-use + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security",
-            "row": "A041",
-            "strand": "A",
-            "role": "External mechanism: an external export restriction",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Self-assessment of research security",
-            "source": "Research Council of Finland",
-            "date": "2026-08-21",
-            "link": "https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The assessment must be prepared using the template provided.",
-            "geo_evidence": [
-              "export control",
-              "dual-use",
-              "research security"
-            ],
-            "ri_evidence": [
-              "research security",
-              "dual-use + research"
-            ],
-            "a_context_evidence": [
-              "international_coordination",
-              "security_resilience",
-              "foreign",
-              "research security"
-            ]
-          },
-          {
-            "identity": "url:https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf",
-            "row": "A035",
-            "strand": "A",
-            "role": "External mechanism: an external export restriction",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Clarifying and optimising civil, dual-use and defence research and innovation in future EU funding programmes",
-            "source": "CESAER",
-            "date": "2026-03-26",
-            "link": "https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Clarifying and optimising civil, dual-use and defence R&I in future EU funding programmes.",
-            "geo_evidence": [
-              "geopolit",
-              "export control",
-              "dual-use",
-              "research security"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              "research & innovation",
-              "r&i",
-              "research security"
-            ],
-            "a_context_evidence": [
-              "competition_capability",
-              "security_resilience",
-              "competitiveness",
-              "research security"
-            ]
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
-            "row": "C033",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Quantum Experimental Pilot Lines for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-08-13",
-            "link": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "EuroHPC is funding experimental quantum pilot lines at TRL 4-6 to connect European quantum research with Chips JU industrial pilot lines.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
-            "row": "C034",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Quantum-Testing Infrastructure for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-08-13",
-            "link": "https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "EuroHPC is funding a distributed, open-access European quantum testing and certification infrastructure at TRL 4-7.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://ecfr.eu/article/missing-money-why-europes-economic-security-requires-a-critical-technology-investment-plan",
-            "row": "H147",
-            "strand": "H",
-            "role": "Historical coupling context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Missing money: Why Europe’s economic security requires a critical technology investment plan – European Council on Foreign Relations",
-            "source": "European Council on Foreign Relations",
-            "date": "2024-01-24",
-            "link": "https://ecfr.eu/article/missing-money-why-europes-economic-security-requires-a-critical-technology-investment-plan/",
-            "quality": 100,
-            "new_this_scan": false,
-            "core_message": "The EU needs to complement defensive economic security measures with a focus on boosting its technological and industrial capacities.",
-            "geo_evidence": [
-              "economic security",
-              "export control",
-              "sanctions"
-            ],
-            "ri_evidence": [
-              "quantum + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
-            "row": "H182",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Strategy for Quantum Technology: Part 1 – World-Class Research and Innovation",
-            "source": "Danish Ministry of Science, Higher Education and Digital Affairs",
-            "date": "2023-06-21",
-            "link": "https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "This publication constitutes the first part of a National Strategy for Quantum Technology, which can prepare Denmark for developing and applying quantum technology.",
-            "geo_evidence": [
-              "geopolit"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              "research funding",
-              "research infrastructure",
-              "quantum + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
-            "row": "H271",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "New Finnish Quantum Institute brings together top expertise in research and commercialisation | VTT",
-            "source": "VTT Technical Research Centre of Finland",
-            "date": "2021-04-07",
-            "link": "https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "VTT, Aalto University and Helsinki University establish together InstituteQ: The Finnish Quantum Institute to coordinate quantum science and technologies Welcome back Want to pick up where you left off?",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research and development",
-              "quantum + research",
-              "quantum + science",
-              " ai  + research"
-            ],
-            "a_context_evidence": []
-          }
-        ],
-        "against": [
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "row": "A273",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-07-30",
-            "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
-            "geo_evidence": [
-              "strategic autonomy",
-              "de-risk"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              " ai  + technological leadership",
-              "quantum + research",
-              "ai gigafactories"
-            ],
-            "a_context_evidence": [
-              "dependence_control",
-              "competition_capability",
-              "strategic autonomy",
-              "leadership"
-            ]
-          },
-          {
-            "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "row": "A008",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
-            "source": "ERA-LEARN",
-            "date": "2026-03-27",
-            "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "quality": 86,
-            "new_this_scan": false,
-            "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "prevention_evidence": [
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "row": "A273",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-07-30",
-            "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
-            "geo_evidence": [
-              "strategic autonomy",
-              "de-risk"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              " ai  + technological leadership",
-              "quantum + research",
-              "ai gigafactories"
-            ],
-            "a_context_evidence": [
-              "dependence_control",
-              "competition_capability",
-              "strategic autonomy",
-              "leadership"
-            ]
-          },
-          {
-            "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "row": "A008",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
-            "source": "ERA-LEARN",
-            "date": "2026-03-27",
-            "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "quality": 86,
-            "new_this_scan": false,
-            "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "source_count": 5,
-        "primary_source_count": 5,
-        "pressure_source_count": 3,
-        "coupling_count": 1,
-        "context_coupling_count": 1,
-        "weak_signal_context_count": 2,
-        "historical_context_count": 3,
-        "context_weight_total": 1.95,
-        "context_score_bonus": 5.0,
-        "official_trigger_present": true,
-        "best_quality": 98,
-        "average_quality": 96,
-        "fresh_coupling": false,
-        "fresh_context": false,
-        "first_inferred_at": "2026-09-09T23:31Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "8fc4d2adda480526",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:funding:security_reclassification",
@@ -95803,37 +95376,10 @@
             "a_context_evidence": []
           },
           {
-            "identity": "url:https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe",
-            "row": "A234",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "European university and research organisations call for stronger investment in Horizon Europe",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "European university and research organisations call for stronger investment in Horizon Europe. Introduction Previous Next 09 Sep 2026 European university and research organisations call for stronger investment in Horizon Europe Seven leading European research and higher education organisations have published a joint statement calling on EU Member States and the European Parliament to secure a budget of at least €200 billion for the next Horizon Europe programme. The Austrian online platform for the European Research Area (ERA) is a promotion initiative aiming at providing comprehensive information on the implementation of the ERA..",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "horizon europe",
-              "european research area",
-              "research organisation"
-            ],
-            "a_context_evidence": [
-              "R&I governance / funding",
-              "horizon europe",
-              "europe",
-              "european"
-            ]
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034",
             "row": "A272",
             "strand": "A",
-            "role": "European capability: European research and innovation funding",
+            "role": "Primary evidence",
             "evidence_role": "primary",
             "analytical_weight": 1.0,
             "title": "Council agrees its position on Horizon Europe 2028-2034",
@@ -95843,6 +95389,24 @@
             "quality": 98,
             "new_this_scan": false,
             "core_message": "The Council adopted a partial position supporting tighter links between Horizon Europe and the European Competitiveness Fund.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
+            "row": "A245",
+            "strand": "A",
+            "role": "European capability: European research and innovation funding",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
+            "source": "ERA Portal Austria",
+            "date": "2026-06-25",
+            "link": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
+            "quality": 98,
+            "new_this_scan": false,
+            "core_message": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
@@ -96004,24 +95568,6 @@
         ],
         "against": [
           {
-            "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
-            "row": "A245",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
-            "source": "ERA Portal Austria",
-            "date": "2026-06-25",
-            "link": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027",
             "row": "A290",
             "strand": "A",
@@ -96103,6 +95649,24 @@
             "quality": 98,
             "new_this_scan": false,
             "core_message": "HaDEA lists four Horizon Europe topics explicitly aimed at EU non-dependence in critical space components, facilities and equipment.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s11192-026-05653-7",
+            "row": "A081",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Co-funding networks as a new tool in research evaluation: a linked open data-based study of the Seventh Framework Programme projects",
+            "source": "Scientometrics",
+            "date": "2026-05-12",
+            "link": "https://doi.org/10.1007/s11192-026-05653-7",
+            "quality": 96,
+            "new_this_scan": false,
+            "core_message": "Linked funding acknowledgements reveal co-funder networks around FP7 projects that conventional programme data miss.",
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
@@ -96110,24 +95674,6 @@
         ],
         "prevention_evidence": [
           {
-            "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
-            "row": "A245",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
-            "source": "ERA Portal Austria",
-            "date": "2026-06-25",
-            "link": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027",
             "row": "A290",
             "strand": "A",
@@ -96209,6 +95755,24 @@
             "quality": 98,
             "new_this_scan": false,
             "core_message": "HaDEA lists four Horizon Europe topics explicitly aimed at EU non-dependence in critical space components, facilities and equipment.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s11192-026-05653-7",
+            "row": "A081",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Co-funding networks as a new tool in research evaluation: a linked open data-based study of the Seventh Framework Programme projects",
+            "source": "Scientometrics",
+            "date": "2026-05-12",
+            "link": "https://doi.org/10.1007/s11192-026-05653-7",
+            "quality": 96,
+            "new_this_scan": false,
+            "core_message": "Linked funding acknowledgements reveal co-funder networks around FP7 projects that conventional programme data miss.",
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
@@ -96229,13 +95793,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "2b4396d7561503ca",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "e8cbbc0ab693383b",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:collaboration:security_reclassification",
@@ -96531,38 +96095,6 @@
             "a_context_evidence": []
           },
           {
-            "identity": "url:https://doi.org/10.1021/acs.chas.6c00074",
-            "row": "A003",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Science Diplomacy in 2026: Why the EU’s New Framework Matters for Chemical Safety",
-            "source": "ACS Chemical Health & Safety",
-            "date": "2026-09-07",
-            "link": "https://doi.org/10.1021/acs.chas.6c00074",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Abstract the EU Framework for Science Diplomacy marks a significant shift from viewing R&I.",
-            "geo_evidence": [
-              "strategic competition",
-              "research security",
-              "science diplomacy"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              "research security",
-              "science diplomacy",
-              "research governance"
-            ],
-            "a_context_evidence": [
-              "competition_capability",
-              "international_coordination",
-              "security_resilience",
-              "rules_power"
-            ]
-          },
-          {
             "identity": "url:https://doi.org/10.1007/s13132-026-03473-x",
             "row": "A025",
             "strand": "A",
@@ -96604,6 +96136,24 @@
               "international cooperation",
               "cross-border"
             ]
+          },
+          {
+            "identity": "url:https://doi.org/10.1098/rsos.260721",
+            "row": "A028",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Can science diplomacy help safeguard science as a global public good? Reflections on strategy, data and people",
+            "source": "Royal Society Open Science",
+            "date": "2026-08-12",
+            "link": "https://doi.org/10.1098/rsos.260721",
+            "quality": 92,
+            "new_this_scan": false,
+            "core_message": "It can contribute, but only if security and sovereignty measures do not collapse the openness needed for science.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
           }
         ],
         "prevention_evidence": [
@@ -96648,38 +96198,6 @@
             "a_context_evidence": []
           },
           {
-            "identity": "url:https://doi.org/10.1021/acs.chas.6c00074",
-            "row": "A003",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Science Diplomacy in 2026: Why the EU’s New Framework Matters for Chemical Safety",
-            "source": "ACS Chemical Health & Safety",
-            "date": "2026-09-07",
-            "link": "https://doi.org/10.1021/acs.chas.6c00074",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Abstract the EU Framework for Science Diplomacy marks a significant shift from viewing R&I.",
-            "geo_evidence": [
-              "strategic competition",
-              "research security",
-              "science diplomacy"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              "research security",
-              "science diplomacy",
-              "research governance"
-            ],
-            "a_context_evidence": [
-              "competition_capability",
-              "international_coordination",
-              "security_resilience",
-              "rules_power"
-            ]
-          },
-          {
             "identity": "url:https://doi.org/10.1007/s13132-026-03473-x",
             "row": "A025",
             "strand": "A",
@@ -96721,6 +96239,24 @@
               "international cooperation",
               "cross-border"
             ]
+          },
+          {
+            "identity": "url:https://doi.org/10.1098/rsos.260721",
+            "row": "A028",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Can science diplomacy help safeguard science as a global public good? Reflections on strategy, data and people",
+            "source": "Royal Society Open Science",
+            "date": "2026-08-12",
+            "link": "https://doi.org/10.1098/rsos.260721",
+            "quality": 92,
+            "new_this_scan": false,
+            "core_message": "It can contribute, but only if security and sovereignty measures do not collapse the openness needed for science.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
           }
         ],
         "source_count": 3,
@@ -96738,13 +96274,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "fb4bdcc898782f1d",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "3383169836832795",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:biotech:security_reclassification",
@@ -97033,13 +96569,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-09T12:05Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b0d8639016707017",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:talent:conflict",
@@ -97535,13 +97071,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "5a031b77d4de2f8b",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:ip:data_access",
@@ -97665,35 +97201,22 @@
             ]
           },
           {
-            "identity": "url:https://doi.org/10.1016/j.telpol.2026.103222",
-            "row": "A010",
+            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+            "row": "A110",
             "strand": "A",
             "role": "External mechanism: a cross-border data-access restriction",
             "evidence_role": "primary",
             "analytical_weight": 1.0,
-            "title": "Enabling the EU's digital Sovereignty: A Europe-level quantum internet as the key infrastructure for a European digital polity",
-            "source": "Telecommunications Policy",
-            "date": "2026-04-20",
-            "link": "https://doi.org/10.1016/j.telpol.2026.103222",
-            "quality": 90,
+            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+            "source": "Open Research Europe",
+            "date": "2026-08-26",
+            "link": "https://doi.org/10.12688/openreseurope.23459.2",
+            "quality": 88,
             "new_this_scan": false,
-            "core_message": "We explore the strengths and limitations of current quantum networks.",
-            "geo_evidence": [
-              "geopolit",
-              "digital sovereignty"
-            ],
-            "ri_evidence": [
-              "technological innovation",
-              "digital sovereignty",
-              "technology position / capability distribution",
-              "quantum"
-            ],
-            "a_context_evidence": [
-              "international_coordination",
-              "cross-border",
-              "access",
-              "technology position / dependency"
-            ]
+            "core_message": "The project presents a modular, standards-based federated platform using privacy-by-design analytics, with lung cancer as its demonstrator, and aims at regulatory and health technology assessment acceptance of real-world evidence.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
           },
           {
             "identity": "url:https://eic.ec.europa.eu/document/download/6df458e7-fa47-4ace-93fa-86099606bdb0_en?filename=eic_fund_investment_2026_guidelines_f.pdf",
@@ -97844,7 +97367,7 @@
         ],
         "source_count": 4,
         "primary_source_count": 4,
-        "pressure_source_count": 3,
+        "pressure_source_count": 2,
         "coupling_count": 1,
         "context_coupling_count": 0,
         "weak_signal_context_count": 2,
@@ -97853,17 +97376,17 @@
         "context_score_bonus": 4.2,
         "official_trigger_present": false,
         "best_quality": 98,
-        "average_quality": 93,
+        "average_quality": 92,
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-13T23:33:55Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "64d85a2e89811911",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "3252a3239d0572e0",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:startups:conflict",
@@ -97936,7 +97459,7 @@
           },
           {
             "identity": "url:https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o",
-            "row": "A339",
+            "row": "A338",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -98333,13 +97856,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "f867cac36d417b03",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:funding:export_restriction",
@@ -98415,37 +97938,10 @@
             ]
           },
           {
-            "identity": "url:https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe",
-            "row": "A234",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "European university and research organisations call for stronger investment in Horizon Europe",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "European university and research organisations call for stronger investment in Horizon Europe. Introduction Previous Next 09 Sep 2026 European university and research organisations call for stronger investment in Horizon Europe Seven leading European research and higher education organisations have published a joint statement calling on EU Member States and the European Parliament to secure a budget of at least €200 billion for the next Horizon Europe programme. The Austrian online platform for the European Research Area (ERA) is a promotion initiative aiming at providing comprehensive information on the implementation of the ERA..",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "horizon europe",
-              "european research area",
-              "research organisation"
-            ],
-            "a_context_evidence": [
-              "R&I governance / funding",
-              "horizon europe",
-              "europe",
-              "european"
-            ]
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034",
             "row": "A272",
             "strand": "A",
-            "role": "European capability: European research and innovation funding",
+            "role": "Primary evidence",
             "evidence_role": "primary",
             "analytical_weight": 1.0,
             "title": "Council agrees its position on Horizon Europe 2028-2034",
@@ -98455,6 +97951,24 @@
             "quality": 98,
             "new_this_scan": false,
             "core_message": "The Council adopted a partial position supporting tighter links between Horizon Europe and the European Competitiveness Fund.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
+            "row": "A245",
+            "strand": "A",
+            "role": "European capability: European research and innovation funding",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
+            "source": "ERA Portal Austria",
+            "date": "2026-06-25",
+            "link": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
+            "quality": 98,
+            "new_this_scan": false,
+            "core_message": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
@@ -98580,24 +98094,6 @@
         ],
         "against": [
           {
-            "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
-            "row": "A245",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
-            "source": "ERA Portal Austria",
-            "date": "2026-06-25",
-            "link": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027",
             "row": "A290",
             "strand": "A",
@@ -98679,6 +98175,24 @@
             "quality": 98,
             "new_this_scan": false,
             "core_message": "HaDEA lists four Horizon Europe topics explicitly aimed at EU non-dependence in critical space components, facilities and equipment.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s11192-026-05653-7",
+            "row": "A081",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Co-funding networks as a new tool in research evaluation: a linked open data-based study of the Seventh Framework Programme projects",
+            "source": "Scientometrics",
+            "date": "2026-05-12",
+            "link": "https://doi.org/10.1007/s11192-026-05653-7",
+            "quality": 96,
+            "new_this_scan": false,
+            "core_message": "Linked funding acknowledgements reveal co-funder networks around FP7 projects that conventional programme data miss.",
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
@@ -98686,24 +98200,6 @@
         ],
         "prevention_evidence": [
           {
-            "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
-            "row": "A245",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
-            "source": "ERA Portal Austria",
-            "date": "2026-06-25",
-            "link": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027",
             "row": "A290",
             "strand": "A",
@@ -98788,11 +98284,29 @@
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s11192-026-05653-7",
+            "row": "A081",
+            "strand": "A",
+            "role": "Primary evidence that could absorb or prevent the shock",
+            "evidence_role": "primary",
+            "analytical_weight": 1.0,
+            "title": "Co-funding networks as a new tool in research evaluation: a linked open data-based study of the Seventh Framework Programme projects",
+            "source": "Scientometrics",
+            "date": "2026-05-12",
+            "link": "https://doi.org/10.1007/s11192-026-05653-7",
+            "quality": 96,
+            "new_this_scan": false,
+            "core_message": "Linked funding acknowledgements reveal co-funder networks around FP7 projects that conventional programme data miss.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
           }
         ],
         "source_count": 3,
         "primary_source_count": 3,
-        "pressure_source_count": 3,
+        "pressure_source_count": 2,
         "coupling_count": 1,
         "context_coupling_count": 0,
         "weak_signal_context_count": 2,
@@ -98805,372 +98319,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-09T10:33Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "b71ed1a2516157a1",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "bbac427a40603262",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
-      },
-      {
-        "id": "emergent:quantum:data_access",
-        "asset_id": "quantum",
-        "pressure_id": "data_access",
-        "title": "A cross-border data restriction breaks Europe’s quantum research and technology",
-        "plainly": "Europe relies on quantum research and technology. Separate primary evidence shows that a cross-border data-access restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
-        "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
-        "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
-        "reasoning": [
-          "Primary retained evidence shows European reliance on or expansion of quantum research and technology.",
-          "Separate primary retained evidence shows a live mechanism for a cross-border data-access restriction.",
-          "Primary evidence contains 1 direct capability × pressure coupling record(s).",
-          "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
-          "The scenario becomes a shock only if the response is slower than the disruption."
-        ],
-        "conditions": [
-          "Europe materially depends on quantum research and technology for current or planned work.",
-          "A cross-border data-access restriction reaches the supplier, service, partner or rule that the European capability depends on.",
-          "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
-        ],
-        "case_against": [
-          "The trigger is not yet backed by an official primary source in the retained current evidence.",
-          "Only one primary retained record currently links the European capability directly to the outside pressure.",
-          "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
-          "The primary corpus contains 2 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
-          "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
-          "The scenario still depends on the disruption arriving faster than Europe can respond."
-        ],
-        "prevention_actions": [
-          "Build multiple European routes to quantum hardware, testing and specialist skills.",
-          "Avoid tying critical projects to one supplier, facility or foreign access rule.",
-          "Keep a compliant European route for essential research data and analysis."
-        ],
-        "watch_for": [
-          "A provider or government restricts cross-border access to data used by European research.",
-          "Projects stop pooling or analysing data that previously moved across borders."
-        ],
-        "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
-        "inference_score": 80,
-        "support": [
-          {
-            "identity": "url:https://doi.org/10.1016/j.telpol.2026.103222",
-            "row": "A010",
-            "strand": "A",
-            "role": "Primary coupling evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Enabling the EU's digital Sovereignty: A Europe-level quantum internet as the key infrastructure for a European digital polity",
-            "source": "Telecommunications Policy",
-            "date": "2026-04-20",
-            "link": "https://doi.org/10.1016/j.telpol.2026.103222",
-            "quality": 90,
-            "new_this_scan": false,
-            "core_message": "We explore the strengths and limitations of current quantum networks.",
-            "geo_evidence": [
-              "geopolit",
-              "digital sovereignty"
-            ],
-            "ri_evidence": [
-              "technological innovation",
-              "digital sovereignty",
-              "technology position / capability distribution",
-              "quantum"
-            ],
-            "a_context_evidence": [
-              "international_coordination",
-              "cross-border",
-              "access",
-              "technology position / dependency"
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.1140/epjs/s11734-026-02451-3",
-            "row": "A134",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The QTF Backbone: proposal for a nationwide optical fibre backbone in Germany for quantum technology and time and frequency metrology",
-            "source": "Fraunhofer Society",
-            "date": "2026-07-16",
-            "link": "https://doi.org/10.1140/epjs/s11734-026-02451-3",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "as that supporting Global Navigation Satellite Systems (GNSS)) and fundamental physics.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research and development",
-              "r&d",
-              "quantum + testbed"
-            ],
-            "a_context_evidence": [
-              "strategic-technology capability",
-              "quantum",
-              "testbed",
-              "germany"
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.1140/epjqt/s40507-026-00560-5",
-            "row": "A103",
-            "strand": "A",
-            "role": "European capability: quantum research and technology",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Rethinking dual-use in quantum technology",
-            "source": "EPJ Quantum Technology",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.1140/epjqt/s40507-026-00560-5",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Rethinking dual-use in quantum technology.",
-            "geo_evidence": [
-              "dual-use"
-            ],
-            "ri_evidence": [
-              "technology development",
-              "quantum + research",
-              "dual-use + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://doi.org/10.1017/aap.2026.10164",
-            "row": "A088",
-            "strand": "A",
-            "role": "External mechanism: a cross-border data-access restriction",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Is Archaeological Data Labor Sustainable? Only through Ethical and Policy Reforms, Open Data Emphases on Public Engagement, and Indigenous Data Sovereignty",
-            "source": "Advances in Archaeological Practice",
-            "date": "2026-07-20",
-            "link": "https://doi.org/10.1017/aap.2026.10164",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Is Archaeological Data Labor Sustainable?",
-            "geo_evidence": [
-              "data sovereignty"
-            ],
-            "ri_evidence": [
-              "data sovereignty"
-            ],
-            "a_context_evidence": [
-              "technology position / dependency",
-              "data sovereignty",
-              "data act"
-            ]
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
-            "row": "C033",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Quantum Experimental Pilot Lines for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-08-13",
-            "link": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "EuroHPC is funding experimental quantum pilot lines at TRL 4-6 to connect European quantum research with Chips JU industrial pilot lines.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
-            "row": "C034",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Quantum-Testing Infrastructure for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-08-13",
-            "link": "https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "EuroHPC is funding a distributed, open-access European quantum testing and certification infrastructure at TRL 4-7.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
-            "row": "H182",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Strategy for Quantum Technology: Part 1 – World-Class Research and Innovation",
-            "source": "Danish Ministry of Science, Higher Education and Digital Affairs",
-            "date": "2023-06-21",
-            "link": "https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "This publication constitutes the first part of a National Strategy for Quantum Technology, which can prepare Denmark for developing and applying quantum technology.",
-            "geo_evidence": [
-              "geopolit"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              "research funding",
-              "research infrastructure",
-              "quantum + research"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
-            "row": "H271",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "New Finnish Quantum Institute brings together top expertise in research and commercialisation | VTT",
-            "source": "VTT Technical Research Centre of Finland",
-            "date": "2021-04-07",
-            "link": "https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "VTT, Aalto University and Helsinki University establish together InstituteQ: The Finnish Quantum Institute to coordinate quantum science and technologies Welcome back Want to pick up where you left off?",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research and development",
-              "quantum + research",
-              "quantum + science",
-              " ai  + research"
-            ],
-            "a_context_evidence": []
-          }
-        ],
-        "against": [
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "row": "A273",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-07-30",
-            "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
-            "geo_evidence": [
-              "strategic autonomy",
-              "de-risk"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              " ai  + technological leadership",
-              "quantum + research",
-              "ai gigafactories"
-            ],
-            "a_context_evidence": [
-              "dependence_control",
-              "competition_capability",
-              "strategic autonomy",
-              "leadership"
-            ]
-          },
-          {
-            "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "row": "A008",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
-            "source": "ERA-LEARN",
-            "date": "2026-03-27",
-            "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "quality": 86,
-            "new_this_scan": false,
-            "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "prevention_evidence": [
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "row": "A273",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-07-30",
-            "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
-            "geo_evidence": [
-              "strategic autonomy",
-              "de-risk"
-            ],
-            "ri_evidence": [
-              "research and innovation",
-              " ai  + technological leadership",
-              "quantum + research",
-              "ai gigafactories"
-            ],
-            "a_context_evidence": [
-              "dependence_control",
-              "competition_capability",
-              "strategic autonomy",
-              "leadership"
-            ]
-          },
-          {
-            "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "row": "A008",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
-            "source": "ERA-LEARN",
-            "date": "2026-03-27",
-            "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
-            "quality": 86,
-            "new_this_scan": false,
-            "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "source_count": 4,
-        "primary_source_count": 4,
-        "pressure_source_count": 3,
-        "coupling_count": 1,
-        "context_coupling_count": 0,
-        "weak_signal_context_count": 2,
-        "historical_context_count": 2,
-        "context_weight_total": 1.5,
-        "context_score_bonus": 4.2,
-        "official_trigger_present": false,
-        "best_quality": 98,
-        "average_quality": 93,
-        "fresh_coupling": false,
-        "fresh_context": false,
-        "first_inferred_at": "2026-09-13T23:33:55Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "1f7ef5f0b57b95bb",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "emergent:open_science:conflict",
@@ -99261,17 +98416,10 @@
             "link": "https://doi.org/10.1093/scipol/scag021",
             "quality": 96,
             "new_this_scan": false,
-            "core_message": "Structured content analysis of open access book policies: European university and research funder approaches.",
+            "core_message": "Structured analysis of 66 policies maps major differences in how European universities and funders govern open-access books.",
             "geo_evidence": [],
-            "ri_evidence": [
-              "research funder"
-            ],
-            "a_context_evidence": [
-              "R&I governance / funding",
-              "research funder",
-              "europe",
-              "european"
-            ]
+            "ri_evidence": [],
+            "a_context_evidence": []
           },
           {
             "identity": "url:https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology",
@@ -99603,23 +98751,23 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "031eac616b8eb4f3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       }
     ]
   },
   "high_order_inference": {
     "profile_version": "v23.4-cumulative-adversarial-level45",
-    "evaluated_at": "2026-09-14T07:09:28Z",
+    "evaluated_at": "2026-09-14T07:12:45Z",
     "new_count": 0,
     "updated_count": 0,
-    "qualified_count": 6,
-    "watch_count": 20,
+    "qualified_count": 7,
+    "watch_count": 19,
     "dormant_count": 0,
     "trigger_summary": {
       "new_primary_records_evaluated": 1,
@@ -99700,13 +98848,13 @@
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market",
+            "identity": "url:https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en",
             "role": "repeated_invocation",
             "strand": "A",
-            "title": "Commission proposes new European Innovation Act to speed up the path from research to market",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
+            "title": "Publication of the REGDUALOSA Policy Brief",
+            "source": "European Commission — Defence Industry and Space",
+            "date": "2026-09-08",
+            "link": "https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en",
             "quality": 96,
             "new_this_scan": false,
             "analytical_weight": 1.0
@@ -99821,9 +98969,9 @@
         "touched_this_scan": true,
         "reader_eligible": true,
         "historical_records": 15,
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "6b38d9d470ed982b",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "e9ec8302faf89689",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
@@ -99831,7 +98979,7 @@
         "reader_title": "Europe keeps pursuing technological sovereignty/strategic autonomy without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:omitted_dependency_chain:compute-ai-materials-energy",
@@ -100037,15 +99185,15 @@
         "generic_grammar": true,
         "reader_title": "A hidden energy/materials dependency could transmit a shock into European AI/compute.",
         "reader_summary": "The candidate exists only because primary evidence explicitly connects the asset to the dependency, separately establishes a disruption route, and shows a mechanism by which effects could spread beyond one isolated case.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "66edfd8e7c7bb318",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
@@ -100071,25 +99219,13 @@
         ],
         "missing_links": [],
         "primary_records": 9,
-        "primary_sources": 7,
+        "primary_sources": 8,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
         "counter_penalty": 0,
         "synthesis_across_records": true,
         "support": [
-          {
-            "identity": "url:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market",
-            "role": "criterion_a",
-            "strand": "A",
-            "title": "Commission proposes new European Innovation Act to speed up the path from research to market",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
           {
             "identity": "url:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
             "role": "criterion_a",
@@ -100111,6 +99247,18 @@
             "date": "2026-06-11",
             "link": "https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/",
             "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1080/13501763.2026.2710717",
+            "role": "criterion_a",
+            "strand": "A",
+            "title": "Promising security, delivering dependency: the material constraints of EU semiconductor collective securitisation",
+            "source": "Journal of European Public Policy",
+            "date": "2026-08-01",
+            "link": "https://doi.org/10.1080/13501763.2026.2710717",
+            "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
           },
@@ -100263,15 +99411,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "f59e927524cd0177",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "437c78450d9783e8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-eureka",
@@ -100514,15 +99662,15 @@
         "generic_grammar": true,
         "reader_title": "EUREKA may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b6fa686020767e45",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-business-finland",
@@ -100741,15 +99889,228 @@
         "generic_grammar": true,
         "reader_title": "Business Finland may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "bba7828199a7cf6d",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
+      },
+      {
+        "id": "l45:practice_precedes_doctrine:generic-standards-testing",
+        "grammar_id": "practice_precedes_doctrine",
+        "product": "continuity",
+        "inferential_distance": 4,
+        "topic_key": "generic:standards_testing",
+        "topic_label": "standards/testing",
+        "status": "qualified",
+        "score": 90,
+        "primary_role_coverage": 1.0,
+        "required_roles": [
+          "formal_doctrine",
+          "earlier_practice",
+          "doctrine_names_existing_tool",
+          "practice_has_effect"
+        ],
+        "covered_roles": [
+          "formal_doctrine",
+          "earlier_practice",
+          "doctrine_names_existing_tool",
+          "practice_has_effect"
+        ],
+        "missing_links": [],
+        "primary_records": 10,
+        "primary_sources": 10,
+        "context_records": 6,
+        "counter_records": 0,
+        "denial_tested": true,
+        "counter_penalty": 0,
+        "synthesis_across_records": true,
+        "support": [
+          {
+            "identity": "url:https://doi.org/10.1021/acs.chas.6c00074",
+            "role": "formal_doctrine",
+            "strand": "A",
+            "title": "Science Diplomacy in 2026: Why the EU’s New Framework Matters for Chemical Safety",
+            "source": "ACS Chemical Health & Safety",
+            "date": "2026-09-07",
+            "link": "https://doi.org/10.1021/acs.chas.6c00074",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1108/dprg-05-2026-0329",
+            "role": "formal_doctrine",
+            "strand": "A",
+            "title": "Governing trustworthy AI in critical communications infrastructure: an ethical and regulatory framework for 5G/6G Open RAN and network automation",
+            "source": "Digital Policy, Regulation and Governance",
+            "date": "2026-08-21",
+            "link": "https://doi.org/10.1108/dprg-05-2026-0329",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://ellis.eu/publication/2022-experimental-standards-for-deep-learning-research-a-natural-language-p",
+            "role": "earlier_practice",
+            "strand": "A",
+            "title": "Experimental Standards for Deep Learning Research: A Natural Language Processing Perspective",
+            "source": "ELLIS Network",
+            "date": "2026-05-19",
+            "link": "https://ellis.eu/publication/2022-experimental-standards-for-deep-learning-research-a-natural-language-p",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://www.businessfinland.fi/globalassets/julkaisut/signals-of-change-summer-2026.pdf",
+            "role": "earlier_practice",
+            "strand": "A",
+            "title": "Signals of Change, Summer 2026",
+            "source": "Business Finland",
+            "date": "2026-05-01",
+            "link": "https://www.businessfinland.fi/globalassets/julkaisut/signals-of-change-summer-2026.pdf",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
+            "role": "earlier_practice",
+            "strand": "A",
+            "title": "EU research funding for security practitioners",
+            "source": "European Research Executive Agency",
+            "date": "2026-04-07",
+            "link": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+            "role": "practice_has_effect",
+            "strand": "A",
+            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+            "source": "Open Research Europe",
+            "date": "2026-08-26",
+            "link": "https://doi.org/10.12688/openreseurope.23459.2",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1007/s44443-026-01108-4",
+            "role": "practice_has_effect",
+            "strand": "A",
+            "title": "When less data is better: Exploratory privacy-by-design in AI-based human resource analytics based on synthetic data",
+            "source": "Journal of King Saud University - Computer and Information Sciences",
+            "date": "2026-08-17",
+            "link": "https://doi.org/10.1007/s44443-026-01108-4",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          }
+        ],
+        "context": [
+          {
+            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Quantum Experimental Pilot Lines for Quantum Technologies",
+            "source": "EuroHPC Joint Undertaking",
+            "date": "2026-08-13",
+            "link": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Quantum-Testing Infrastructure for Quantum Technologies",
+            "source": "EuroHPC Joint Undertaking",
+            "date": "2026-08-13",
+            "link": "https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Commission welcomes political agreement on the Programme for agile and rapid defence innovation (AGILE)",
+            "source": "European Commission — Defence Industry and Space",
+            "date": "2026-07-16",
+            "link": "https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://www.eurohpc-ju.europa.eu/standards-quantum-technologies_en",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Standards for Quantum Technologies",
+            "source": "EuroHPC Joint Undertaking",
+            "date": "2026-06-02",
+            "link": "https://www.eurohpc-ju.europa.eu/standards-quantum-technologies_en",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://www.eurohpc-ju.europa.eu/first-release-eurohpc-federation-platform-streamline-access-europes-supercomputing-resources-2026-04-15_en",
+            "role": "Context only",
+            "strand": "C",
+            "title": "First release of the EuroHPC Federation Platform to streamline access to Europe’s supercomputing resources",
+            "source": "EuroHPC Joint Undertaking",
+            "date": "2026-04-15",
+            "link": "https://www.eurohpc-ju.europa.eu/first-release-eurohpc-federation-platform-streamline-access-europes-supercomputing-resources-2026-04-15_en",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://news.google.com/rss/articles/cbmi2afbvv95cuxpbdntsjbqvmhprglwyk1znm5fmnncrc1lvte2tuzraxlinly2qza2zehoofz2txridvpkyvpoy3vvmthpofmycvf1v2hna2zzude1rddlcdlbzdcwq2kts3fnsu1kzjjtnzfom051wgywx3dms2lhexdleefqm0vfvllcx3lurnc2t04xwnu2m2jtbfzryjhjq3dreks1mwmyqwhkc2tlzlfqwfd2vy10oexknnfmqk5stefqsem0tnlvvfpqvlnezvlqlvhwalvwwutgsdreylg?oc=5",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Commission proposes new European Innovation Act to help innovative European ideas grow and compete globally - Shaping Europe’s digital future",
+            "source": "EU Digital Strategy",
+            "date": "2026-09-09",
+            "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPbDNtSjBQVmhPRGlWYk1zNm5fMnNCRC1LVTE2TUZraXlINlY2QzA2ZEhoOFZ2TXRidVpkYVpoY3VVMThPOFMycVF1V2hna2ZZUDE1RDdlcDlBZDcwQ2ktS3FNSU1kZjJTNzFOM051WGYwX3dmS2lHeXdleEFqM0VFVllCX3luRnc2T04xWnU2M2JtbFZRYjhjQ3dreks1MWMyQWhKc2tLZlFQWFd2Vy10OExKNnFmQk5sTEFQSEM0TnlVVFpqVlNEZVlqLVhWalVwWUtGSDREYlg?oc=5",
+            "quality": 82,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          }
+        ],
+        "against": [],
+        "support_queries": [
+          "Europe research innovation standards/testing practice timeline before formal framework",
+          "Europe research innovation standards/testing framework names existing instrument tool"
+        ],
+        "falsifier_queries": [
+          "Europe research innovation standards/testing framework created new instrument no prior practice"
+        ],
+        "touched_this_scan": false,
+        "reader_eligible": true,
+        "generic_grammar": true,
+        "reader_title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
+        "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "930dc3c34e54f412",
+        "new_this_scan": false,
+        "updated_this_scan": false,
+        "lifecycle": "seeded",
+        "missed_detection_scans": 0,
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-funding-programme",
@@ -100966,15 +100327,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research funding/programmes may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "0b904e24765e8a33",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-compute-ai",
@@ -101193,15 +100554,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in AI/compute if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b9b9a79e911814c1",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-infrastructure",
@@ -101408,15 +100769,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in research infrastructure if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "a9f90dea073a9c6c",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:goal_measurement_gap:competitiveness",
@@ -101448,18 +100809,6 @@
         "synthesis_across_records": false,
         "support": [
           {
-            "identity": "url:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market",
-            "role": "repeated_invocation",
-            "strand": "A",
-            "title": "Commission proposes new European Innovation Act to speed up the path from research to market",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/european-research-innovation-days-2026-will-take-place-on-10-11-november",
             "role": "repeated_invocation",
             "strand": "A",
@@ -101485,7 +100834,7 @@
           },
           {
             "identity": "url:https://era.gv.at/public/documents/5533/2026_09_september_rtd.e.1_vn.pdf",
-            "role": "measurement_attempt_or_critique",
+            "role": "repeated_invocation",
             "strand": "A",
             "title": "Seconded National Expert - Industrial Research&Innovation (Ref: RTD.E.1.)",
             "source": "ERA Portal Austria",
@@ -101581,9 +100930,9 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 3,
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "ae60671ae18a2960",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "40920b3ba69ddbc5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
@@ -101591,7 +100940,7 @@
         "reader_title": "Europe keeps pursuing competitiveness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
@@ -101786,15 +101135,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b28d51b172f41d08",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:standards-testing-openness-vs-security",
@@ -101989,15 +101338,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on standards/testing may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "d9e89109d00b6eb4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
@@ -102216,15 +101565,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b1170f4ccfe86f75",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
@@ -102455,15 +101804,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "885424dc8b882208",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-infrastructure",
@@ -102693,229 +102042,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research infrastructure may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "83d08ec2cf4d20b3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
-      },
-      {
-        "id": "l45:practice_precedes_doctrine:generic-standards-testing",
-        "grammar_id": "practice_precedes_doctrine",
-        "product": "continuity",
-        "inferential_distance": 4,
-        "topic_key": "generic:standards_testing",
-        "topic_label": "standards/testing",
-        "status": "watch",
-        "score": 85,
-        "primary_role_coverage": 0.75,
-        "required_roles": [
-          "formal_doctrine",
-          "earlier_practice",
-          "doctrine_names_existing_tool",
-          "practice_has_effect"
-        ],
-        "covered_roles": [
-          "formal_doctrine",
-          "earlier_practice",
-          "practice_has_effect"
-        ],
-        "missing_links": [
-          "doctrine_names_existing_tool"
-        ],
-        "primary_records": 10,
-        "primary_sources": 10,
-        "context_records": 6,
-        "counter_records": 0,
-        "denial_tested": true,
-        "counter_penalty": 0,
-        "synthesis_across_records": true,
-        "support": [
-          {
-            "identity": "url:https://doi.org/10.1021/acs.chas.6c00074",
-            "role": "formal_doctrine",
-            "strand": "A",
-            "title": "Science Diplomacy in 2026: Why the EU’s New Framework Matters for Chemical Safety",
-            "source": "ACS Chemical Health & Safety",
-            "date": "2026-09-07",
-            "link": "https://doi.org/10.1021/acs.chas.6c00074",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1108/dprg-05-2026-0329",
-            "role": "formal_doctrine",
-            "strand": "A",
-            "title": "Governing trustworthy AI in critical communications infrastructure: an ethical and regulatory framework for 5G/6G Open RAN and network automation",
-            "source": "Digital Policy, Regulation and Governance",
-            "date": "2026-08-21",
-            "link": "https://doi.org/10.1108/dprg-05-2026-0329",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://ellis.eu/publication/2022-experimental-standards-for-deep-learning-research-a-natural-language-p",
-            "role": "earlier_practice",
-            "strand": "A",
-            "title": "Experimental Standards for Deep Learning Research: A Natural Language Processing Perspective",
-            "source": "ELLIS Network",
-            "date": "2026-05-19",
-            "link": "https://ellis.eu/publication/2022-experimental-standards-for-deep-learning-research-a-natural-language-p",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://www.businessfinland.fi/globalassets/julkaisut/signals-of-change-summer-2026.pdf",
-            "role": "earlier_practice",
-            "strand": "A",
-            "title": "Signals of Change, Summer 2026",
-            "source": "Business Finland",
-            "date": "2026-05-01",
-            "link": "https://www.businessfinland.fi/globalassets/julkaisut/signals-of-change-summer-2026.pdf",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
-            "role": "earlier_practice",
-            "strand": "A",
-            "title": "EU research funding for security practitioners",
-            "source": "European Research Executive Agency",
-            "date": "2026-04-07",
-            "link": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
-            "source": "Open Research Europe",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.12688/openreseurope.23459.2",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s44443-026-01108-4",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "When less data is better: Exploratory privacy-by-design in AI-based human resource analytics based on synthetic data",
-            "source": "Journal of King Saud University - Computer and Information Sciences",
-            "date": "2026-08-17",
-            "link": "https://doi.org/10.1007/s44443-026-01108-4",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          }
-        ],
-        "context": [
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Quantum Experimental Pilot Lines for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-08-13",
-            "link": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Quantum-Testing Infrastructure for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-08-13",
-            "link": "https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Commission welcomes political agreement on the Programme for agile and rapid defence innovation (AGILE)",
-            "source": "European Commission — Defence Industry and Space",
-            "date": "2026-07-16",
-            "link": "https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/standards-quantum-technologies_en",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Standards for Quantum Technologies",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-06-02",
-            "link": "https://www.eurohpc-ju.europa.eu/standards-quantum-technologies_en",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://www.eurohpc-ju.europa.eu/first-release-eurohpc-federation-platform-streamline-access-europes-supercomputing-resources-2026-04-15_en",
-            "role": "Context only",
-            "strand": "C",
-            "title": "First release of the EuroHPC Federation Platform to streamline access to Europe’s supercomputing resources",
-            "source": "EuroHPC Joint Undertaking",
-            "date": "2026-04-15",
-            "link": "https://www.eurohpc-ju.europa.eu/first-release-eurohpc-federation-platform-streamline-access-europes-supercomputing-resources-2026-04-15_en",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://news.google.com/rss/articles/cbmi2afbvv95cuxpbdntsjbqvmhprglwyk1znm5fmnncrc1lvte2tuzraxlinly2qza2zehoofz2txridvpkyvpoy3vvmthpofmycvf1v2hna2zzude1rddlcdlbzdcwq2kts3fnsu1kzjjtnzfom051wgywx3dms2lhexdleefqm0vfvllcx3lurnc2t04xwnu2m2jtbfzryjhjq3dreks1mwmyqwhkc2tlzlfqwfd2vy10oexknnfmqk5stefqsem0tnlvvfpqvlnezvlqlvhwalvwwutgsdreylg?oc=5",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Commission proposes new European Innovation Act to help innovative European ideas grow and compete globally - Shaping Europe’s digital future",
-            "source": "EU Digital Strategy",
-            "date": "2026-09-09",
-            "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPbDNtSjBQVmhPRGlWYk1zNm5fMnNCRC1LVTE2TUZraXlINlY2QzA2ZEhoOFZ2TXRidVpkYVpoY3VVMThPOFMycVF1V2hna2ZZUDE1RDdlcDlBZDcwQ2ktS3FNSU1kZjJTNzFOM051WGYwX3dmS2lHeXdleEFqM0VFVllCX3luRnc2T04xWnU2M2JtbFZRYjhjQ3dreks1MWMyQWhKc2tLZlFQWFd2Vy10OExKNnFmQk5sTEFQSEM0TnlVVFpqVlNEZVlqLVhWalVwWUtGSDREYlg?oc=5",
-            "quality": 82,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          }
-        ],
-        "against": [],
-        "support_queries": [
-          "Europe research innovation standards/testing practice timeline before formal framework",
-          "Europe research innovation standards/testing framework names existing instrument tool"
-        ],
-        "falsifier_queries": [
-          "Europe research innovation standards/testing framework created new instrument no prior practice"
-        ],
-        "touched_this_scan": false,
-        "reader_eligible": false,
-        "generic_grammar": true,
-        "reader_title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
-        "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "342ac2e1ce725763",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "lifecycle": "seeded",
-        "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-startups-scaleup",
@@ -102942,7 +102077,7 @@
           "doctrine_names_existing_tool"
         ],
         "primary_records": 12,
-        "primary_sources": 11,
+        "primary_sources": 10,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
@@ -102998,6 +102133,18 @@
             "analytical_weight": 1.0
           },
           {
+            "identity": "url:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market",
+            "role": "practice_has_effect",
+            "strand": "A",
+            "title": "Commission proposes new European Innovation Act to speed up the path from research to market",
+            "source": "ERA Portal Austria",
+            "date": "2026-09-09",
+            "link": "https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
             "identity": "url:https://era.gv.at/news-items/european-research-innovation-days-2026-will-take-place-on-10-11-november",
             "role": "practice_has_effect",
             "strand": "A",
@@ -103006,18 +102153,6 @@
             "date": "2026-09-08",
             "link": "https://era.gv.at/news-items/european-research-innovation-days-2026-will-take-place-on-10-11-november/",
             "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.58691/man/224300",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "Horizon Europe and regional funds as factors in the development of small and medium-sized enterprises in the EU",
-            "source": "Management",
-            "date": "2026-08-19",
-            "link": "https://doi.org/10.58691/man/224300",
-            "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
           }
@@ -103109,15 +102244,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around startups/scale-up may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "7c0fcea6625a0313",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "e97910e89c236de3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-retention-talent",
@@ -103141,7 +102276,7 @@
         "missing_links": [
           "measurement_blind_spot"
         ],
-        "primary_records": 8,
+        "primary_records": 7,
         "primary_sources": 5,
         "context_records": 6,
         "counter_records": 0,
@@ -103186,13 +102321,13 @@
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market",
+            "identity": "url:https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf",
             "role": "delivery_instrument",
             "strand": "A",
-            "title": "Commission proposes new European Innovation Act to speed up the path from research to market",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
+            "title": "Joint Statement: MSCA: Research Talent is Europe’s Strategic Advantage.",
+            "source": "ALLEA",
+            "date": "2026-06-29",
+            "link": "https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf",
             "quality": 96,
             "new_this_scan": false,
             "analytical_weight": 1.0
@@ -103285,15 +102420,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the retention in research talent outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "cb1718fbc65f773d",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "b3c8455a7f7d786e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
@@ -103473,15 +102608,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the widening participation in research funding/programmes outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "24ad963299c6720e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-infrastructure",
@@ -103506,7 +102641,7 @@
           "measurement_blind_spot"
         ],
         "primary_records": 9,
-        "primary_sources": 8,
+        "primary_sources": 9,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
@@ -103550,25 +102685,25 @@
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market",
+            "identity": "url:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
             "role": "delivery_instrument",
             "strand": "A",
-            "title": "Commission proposes new European Innovation Act to speed up the path from research to market",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
+            "title": "Fast Track to the EIC Accelerator expert guidelines",
+            "source": "EUREKA",
+            "date": "2026-07-29",
+            "link": "https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
             "quality": 96,
             "new_this_scan": false,
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe",
+            "identity": "url:https://rea.ec.europa.eu/publications/research-infrastructures-climate-resilience_en",
             "role": "delivery_instrument",
             "strand": "A",
-            "title": "European university and research organisations call for stronger investment in Horizon Europe",
-            "source": "ERA Portal Austria",
-            "date": "2026-09-09",
-            "link": "https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe/",
+            "title": "Research Infrastructures for climate resilience",
+            "source": "European Research Executive Agency",
+            "date": "2026-07-16",
+            "link": "https://rea.ec.europa.eu/publications/research-infrastructures-climate-resilience_en",
             "quality": 96,
             "new_this_scan": false,
             "analytical_weight": 1.0
@@ -103661,15 +102796,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in research infrastructure outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
-        "fingerprint": "6440fecf4430beb6",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
+        "fingerprint": "bbf010543abf0fea",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-chips",
@@ -103693,8 +102828,8 @@
         "missing_links": [
           "measurement_blind_spot"
         ],
-        "primary_records": 7,
-        "primary_sources": 6,
+        "primary_records": 6,
+        "primary_sources": 5,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
@@ -103837,15 +102972,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in semiconductors outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b5359abf135111f4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-compute-ai",
@@ -104025,15 +103160,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in AI/compute outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "7b955ceb82b79e88",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:goal_measurement_gap:openness",
@@ -104187,8 +103322,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 14,
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "5f64499715fc998e",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -104196,8 +103331,8 @@
         "missed_detection_scans": 0,
         "reader_title": "Europe keeps pursuing openness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
@@ -104404,15 +103539,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "b7feccec7737a0c5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:goal_measurement_gap:research-security",
@@ -104566,8 +103701,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 3,
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "f808b2dc4fee451a",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -104575,8 +103710,8 @@
         "missed_detection_scans": 0,
         "reader_title": "Europe keeps pursuing research security without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-talent",
@@ -104758,15 +103893,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research talent may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "d0652c521768fdc6",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-health-data",
@@ -104878,21 +104013,21 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in health data if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T07:09:28Z",
-        "last_updated_at": "2026-09-14T07:09:28Z",
+        "first_seen_at": "2026-09-14T07:12:45Z",
+        "last_updated_at": "2026-09-14T07:12:45Z",
         "fingerprint": "25a8f9a999e2cae8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T07:09:28Z"
+        "retrace_at": "2026-09-14T07:12:45Z"
       }
     ]
   },
   "downstream_archive": {
     "profile_version": "v1.0-current-downstream-rules",
-    "updated_at": "2026-09-14T07:09:28Z",
+    "updated_at": "2026-09-14T07:12:45Z",
     "objects": [
       {
         "kind": "high_order",
@@ -106483,26 +105618,814 @@
           "first_seen": "2026-09-14T06:45Z",
           "new_this_scan": false
         }
+      },
+      {
+        "kind": "shock",
+        "id": "emergent:quantum:data_access",
+        "title": "A cross-border data restriction breaks Europe’s quantum research and technology",
+        "retrace_status": "retired",
+        "retired_at": "2026-09-14T07:12:45Z",
+        "reason": "Current cleaned evidence no longer satisfies the repository's current construction threshold for this downstream object.",
+        "previous_object": {
+          "id": "emergent:quantum:data_access",
+          "asset_id": "quantum",
+          "pressure_id": "data_access",
+          "title": "A cross-border data restriction breaks Europe’s quantum research and technology",
+          "plainly": "Europe relies on quantum research and technology. Separate primary evidence shows that a cross-border data-access restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
+          "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
+          "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
+          "reasoning": [
+            "Primary retained evidence shows European reliance on or expansion of quantum research and technology.",
+            "Separate primary retained evidence shows a live mechanism for a cross-border data-access restriction.",
+            "Primary evidence contains 1 direct capability × pressure coupling record(s).",
+            "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
+            "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+            "The scenario becomes a shock only if the response is slower than the disruption."
+          ],
+          "conditions": [
+            "Europe materially depends on quantum research and technology for current or planned work.",
+            "A cross-border data-access restriction reaches the supplier, service, partner or rule that the European capability depends on.",
+            "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
+          ],
+          "case_against": [
+            "The trigger is not yet backed by an official primary source in the retained current evidence.",
+            "Only one primary retained record currently links the European capability directly to the outside pressure.",
+            "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
+            "The primary corpus contains 2 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
+            "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
+            "The scenario still depends on the disruption arriving faster than Europe can respond."
+          ],
+          "prevention_actions": [
+            "Build multiple European routes to quantum hardware, testing and specialist skills.",
+            "Avoid tying critical projects to one supplier, facility or foreign access rule.",
+            "Keep a compliant European route for essential research data and analysis."
+          ],
+          "watch_for": [
+            "A provider or government restricts cross-border access to data used by European research.",
+            "Projects stop pooling or analysing data that previously moved across borders."
+          ],
+          "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
+          "inference_score": 80,
+          "support": [
+            {
+              "identity": "url:https://doi.org/10.1016/j.telpol.2026.103222",
+              "row": "A010",
+              "strand": "A",
+              "role": "Primary coupling evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Enabling the EU's digital Sovereignty: A Europe-level quantum internet as the key infrastructure for a European digital polity",
+              "source": "Telecommunications Policy",
+              "date": "2026-04-20",
+              "link": "https://doi.org/10.1016/j.telpol.2026.103222",
+              "quality": 90,
+              "new_this_scan": false,
+              "core_message": "We explore the strengths and limitations of current quantum networks.",
+              "geo_evidence": [
+                "geopolit",
+                "digital sovereignty"
+              ],
+              "ri_evidence": [
+                "technological innovation",
+                "digital sovereignty",
+                "technology position / capability distribution",
+                "quantum"
+              ],
+              "a_context_evidence": [
+                "international_coordination",
+                "cross-border",
+                "access",
+                "technology position / dependency"
+              ]
+            },
+            {
+              "identity": "url:https://doi.org/10.1140/epjs/s11734-026-02451-3",
+              "row": "A134",
+              "strand": "A",
+              "role": "Primary evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The QTF Backbone: proposal for a nationwide optical fibre backbone in Germany for quantum technology and time and frequency metrology",
+              "source": "Fraunhofer Society",
+              "date": "2026-07-16",
+              "link": "https://doi.org/10.1140/epjs/s11734-026-02451-3",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "as that supporting Global Navigation Satellite Systems (GNSS)) and fundamental physics.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research and development",
+                "r&d",
+                "quantum + testbed"
+              ],
+              "a_context_evidence": [
+                "strategic-technology capability",
+                "quantum",
+                "testbed",
+                "germany"
+              ]
+            },
+            {
+              "identity": "url:https://doi.org/10.1140/epjqt/s40507-026-00560-5",
+              "row": "A103",
+              "strand": "A",
+              "role": "European capability: quantum research and technology",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Rethinking dual-use in quantum technology",
+              "source": "EPJ Quantum Technology",
+              "date": "2026-08-26",
+              "link": "https://doi.org/10.1140/epjqt/s40507-026-00560-5",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Rethinking dual-use in quantum technology.",
+              "geo_evidence": [
+                "dual-use"
+              ],
+              "ri_evidence": [
+                "technology development",
+                "quantum + research",
+                "dual-use + research"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://doi.org/10.1017/aap.2026.10164",
+              "row": "A088",
+              "strand": "A",
+              "role": "External mechanism: a cross-border data-access restriction",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Is Archaeological Data Labor Sustainable? Only through Ethical and Policy Reforms, Open Data Emphases on Public Engagement, and Indigenous Data Sovereignty",
+              "source": "Advances in Archaeological Practice",
+              "date": "2026-07-20",
+              "link": "https://doi.org/10.1017/aap.2026.10164",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Is Archaeological Data Labor Sustainable?",
+              "geo_evidence": [
+                "data sovereignty"
+              ],
+              "ri_evidence": [
+                "data sovereignty"
+              ],
+              "a_context_evidence": [
+                "technology position / dependency",
+                "data sovereignty",
+                "data act"
+              ]
+            },
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
+              "row": "C033",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "Quantum Experimental Pilot Lines for Quantum Technologies",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-08-13",
+              "link": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "EuroHPC is funding experimental quantum pilot lines at TRL 4-6 to connect European quantum research with Chips JU industrial pilot lines.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
+              "row": "C034",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "Quantum-Testing Infrastructure for Quantum Technologies",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-08-13",
+              "link": "https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "EuroHPC is funding a distributed, open-access European quantum testing and certification infrastructure at TRL 4-7.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
+              "row": "H182",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Strategy for Quantum Technology: Part 1 – World-Class Research and Innovation",
+              "source": "Danish Ministry of Science, Higher Education and Digital Affairs",
+              "date": "2023-06-21",
+              "link": "https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "This publication constitutes the first part of a National Strategy for Quantum Technology, which can prepare Denmark for developing and applying quantum technology.",
+              "geo_evidence": [
+                "geopolit"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                "research funding",
+                "research infrastructure",
+                "quantum + research"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
+              "row": "H271",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "New Finnish Quantum Institute brings together top expertise in research and commercialisation | VTT",
+              "source": "VTT Technical Research Centre of Finland",
+              "date": "2021-04-07",
+              "link": "https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "VTT, Aalto University and Helsinki University establish together InstituteQ: The Finnish Quantum Institute to coordinate quantum science and technologies Welcome back Want to pick up where you left off?",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research and development",
+                "quantum + research",
+                "quantum + science",
+                " ai  + research"
+              ],
+              "a_context_evidence": []
+            }
+          ],
+          "against": [
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "row": "A273",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-07-30",
+              "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
+              "geo_evidence": [
+                "strategic autonomy",
+                "de-risk"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                " ai  + technological leadership",
+                "quantum + research",
+                "ai gigafactories"
+              ],
+              "a_context_evidence": [
+                "dependence_control",
+                "competition_capability",
+                "strategic autonomy",
+                "leadership"
+              ]
+            },
+            {
+              "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "row": "A008",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
+              "source": "ERA-LEARN",
+              "date": "2026-03-27",
+              "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "quality": 86,
+              "new_this_scan": false,
+              "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            }
+          ],
+          "prevention_evidence": [
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "row": "A273",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-07-30",
+              "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
+              "geo_evidence": [
+                "strategic autonomy",
+                "de-risk"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                " ai  + technological leadership",
+                "quantum + research",
+                "ai gigafactories"
+              ],
+              "a_context_evidence": [
+                "dependence_control",
+                "competition_capability",
+                "strategic autonomy",
+                "leadership"
+              ]
+            },
+            {
+              "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "row": "A008",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
+              "source": "ERA-LEARN",
+              "date": "2026-03-27",
+              "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "quality": 86,
+              "new_this_scan": false,
+              "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            }
+          ],
+          "source_count": 4,
+          "primary_source_count": 4,
+          "pressure_source_count": 3,
+          "coupling_count": 1,
+          "context_coupling_count": 0,
+          "weak_signal_context_count": 2,
+          "historical_context_count": 2,
+          "context_weight_total": 1.5,
+          "context_score_bonus": 4.2,
+          "official_trigger_present": false,
+          "best_quality": 98,
+          "average_quality": 93,
+          "fresh_coupling": false,
+          "fresh_context": false,
+          "first_inferred_at": "2026-09-13T23:33:55Z",
+          "last_updated_at": "2026-09-14T07:09:28Z",
+          "fingerprint": "1f7ef5f0b57b95bb",
+          "new_this_scan": false,
+          "updated_this_scan": false,
+          "status": "unchanged",
+          "retrace_status": "unchanged",
+          "retrace_at": "2026-09-14T07:09:28Z"
+        }
+      },
+      {
+        "kind": "shock",
+        "id": "emergent:quantum:export_restriction",
+        "title": "An export restriction abruptly cuts Europe’s access to quantum research and technology",
+        "retrace_status": "retired",
+        "retired_at": "2026-09-14T07:12:45Z",
+        "reason": "Current cleaned evidence no longer satisfies the repository's current construction threshold for this downstream object.",
+        "previous_object": {
+          "id": "emergent:quantum:export_restriction",
+          "asset_id": "quantum",
+          "pressure_id": "export_restriction",
+          "title": "An export restriction abruptly cuts Europe’s access to quantum research and technology",
+          "plainly": "Europe relies on quantum research and technology. Separate primary evidence shows that an external export restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
+          "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
+          "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
+          "reasoning": [
+            "Primary retained evidence shows European reliance on or expansion of quantum research and technology.",
+            "Separate primary retained evidence shows a live mechanism for an external export restriction.",
+            "Primary evidence contains 1 direct capability × pressure coupling record(s).",
+            "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
+            "3 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+            "The scenario becomes a shock only if the response is slower than the disruption."
+          ],
+          "conditions": [
+            "Europe materially depends on quantum research and technology for current or planned work.",
+            "An external export restriction reaches the supplier, service, partner or rule that the European capability depends on.",
+            "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
+          ],
+          "case_against": [
+            "Only one primary retained record currently links the European capability directly to the outside pressure.",
+            "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
+            "The primary corpus contains 2 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
+            "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
+            "The scenario still depends on the disruption arriving faster than Europe can respond."
+          ],
+          "prevention_actions": [
+            "Build multiple European routes to quantum hardware, testing and specialist skills.",
+            "Avoid tying critical projects to one supplier, facility or foreign access rule.",
+            "Secure alternative suppliers and licences before a new export rule takes effect."
+          ],
+          "watch_for": [
+            "A government expands export restrictions to inputs used by European research.",
+            "European projects report delayed or denied licences for the affected input."
+          ],
+          "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
+          "inference_score": 90,
+          "support": [
+            {
+              "identity": "url:https://doi.org/10.1007/s44464-026-00022-y",
+              "row": "A016",
+              "strand": "A",
+              "role": "Primary coupling evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Implications of EU 2025 dual use regulation for quantum technology innovation",
+              "source": "Discover Quantum Science",
+              "date": "2026-06-15",
+              "link": "https://doi.org/10.1007/s44464-026-00022-y",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Implications of EU 2025 dual use regulation for quantum technology innovation.",
+              "geo_evidence": [
+                "export control",
+                "dual use"
+              ],
+              "ri_evidence": [
+                "quantum + innovation",
+                "semiconductor + research",
+                "quantum + research"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://doi.org/10.1140/epjs/s11734-026-02451-3",
+              "row": "A134",
+              "strand": "A",
+              "role": "Primary evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The QTF Backbone: proposal for a nationwide optical fibre backbone in Germany for quantum technology and time and frequency metrology",
+              "source": "Fraunhofer Society",
+              "date": "2026-07-16",
+              "link": "https://doi.org/10.1140/epjs/s11734-026-02451-3",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "as that supporting Global Navigation Satellite Systems (GNSS)) and fundamental physics.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research and development",
+                "r&d",
+                "quantum + testbed"
+              ],
+              "a_context_evidence": [
+                "strategic-technology capability",
+                "quantum",
+                "testbed",
+                "germany"
+              ]
+            },
+            {
+              "identity": "url:https://doi.org/10.1140/epjqt/s40507-026-00560-5",
+              "row": "A103",
+              "strand": "A",
+              "role": "European capability: quantum research and technology",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Rethinking dual-use in quantum technology",
+              "source": "EPJ Quantum Technology",
+              "date": "2026-08-26",
+              "link": "https://doi.org/10.1140/epjqt/s40507-026-00560-5",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Rethinking dual-use in quantum technology.",
+              "geo_evidence": [
+                "dual-use"
+              ],
+              "ri_evidence": [
+                "technology development",
+                "quantum + research",
+                "dual-use + research"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security",
+              "row": "A041",
+              "strand": "A",
+              "role": "External mechanism: an external export restriction",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Self-assessment of research security",
+              "source": "Research Council of Finland",
+              "date": "2026-08-21",
+              "link": "https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security/",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The assessment must be prepared using the template provided.",
+              "geo_evidence": [
+                "export control",
+                "dual-use",
+                "research security"
+              ],
+              "ri_evidence": [
+                "research security",
+                "dual-use + research"
+              ],
+              "a_context_evidence": [
+                "international_coordination",
+                "security_resilience",
+                "foreign",
+                "research security"
+              ]
+            },
+            {
+              "identity": "url:https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf",
+              "row": "A035",
+              "strand": "A",
+              "role": "External mechanism: an external export restriction",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Clarifying and optimising civil, dual-use and defence research and innovation in future EU funding programmes",
+              "source": "CESAER",
+              "date": "2026-03-26",
+              "link": "https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "Clarifying and optimising civil, dual-use and defence R&I in future EU funding programmes.",
+              "geo_evidence": [
+                "geopolit",
+                "export control",
+                "dual-use",
+                "research security"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                "research & innovation",
+                "r&i",
+                "research security"
+              ],
+              "a_context_evidence": [
+                "competition_capability",
+                "security_resilience",
+                "competitiveness",
+                "research security"
+              ]
+            },
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
+              "row": "C033",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "Quantum Experimental Pilot Lines for Quantum Technologies",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-08-13",
+              "link": "https://www.eurohpc-ju.europa.eu/quantum-experimental-pilot-lines-quantum-technologies_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "EuroHPC is funding experimental quantum pilot lines at TRL 4-6 to connect European quantum research with Chips JU industrial pilot lines.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
+              "row": "C034",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "Quantum-Testing Infrastructure for Quantum Technologies",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-08-13",
+              "link": "https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "EuroHPC is funding a distributed, open-access European quantum testing and certification infrastructure at TRL 4-7.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://ecfr.eu/article/missing-money-why-europes-economic-security-requires-a-critical-technology-investment-plan",
+              "row": "H147",
+              "strand": "H",
+              "role": "Historical coupling context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Missing money: Why Europe’s economic security requires a critical technology investment plan – European Council on Foreign Relations",
+              "source": "European Council on Foreign Relations",
+              "date": "2024-01-24",
+              "link": "https://ecfr.eu/article/missing-money-why-europes-economic-security-requires-a-critical-technology-investment-plan/",
+              "quality": 100,
+              "new_this_scan": false,
+              "core_message": "The EU needs to complement defensive economic security measures with a focus on boosting its technological and industrial capacities.",
+              "geo_evidence": [
+                "economic security",
+                "export control",
+                "sanctions"
+              ],
+              "ri_evidence": [
+                "quantum + research"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
+              "row": "H182",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Strategy for Quantum Technology: Part 1 – World-Class Research and Innovation",
+              "source": "Danish Ministry of Science, Higher Education and Digital Affairs",
+              "date": "2023-06-21",
+              "link": "https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "This publication constitutes the first part of a National Strategy for Quantum Technology, which can prepare Denmark for developing and applying quantum technology.",
+              "geo_evidence": [
+                "geopolit"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                "research funding",
+                "research infrastructure",
+                "quantum + research"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
+              "row": "H271",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "New Finnish Quantum Institute brings together top expertise in research and commercialisation | VTT",
+              "source": "VTT Technical Research Centre of Finland",
+              "date": "2021-04-07",
+              "link": "https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "VTT, Aalto University and Helsinki University establish together InstituteQ: The Finnish Quantum Institute to coordinate quantum science and technologies Welcome back Want to pick up where you left off?",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research and development",
+                "quantum + research",
+                "quantum + science",
+                " ai  + research"
+              ],
+              "a_context_evidence": []
+            }
+          ],
+          "against": [
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "row": "A273",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-07-30",
+              "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
+              "geo_evidence": [
+                "strategic autonomy",
+                "de-risk"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                " ai  + technological leadership",
+                "quantum + research",
+                "ai gigafactories"
+              ],
+              "a_context_evidence": [
+                "dependence_control",
+                "competition_capability",
+                "strategic autonomy",
+                "leadership"
+              ]
+            },
+            {
+              "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "row": "A008",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
+              "source": "ERA-LEARN",
+              "date": "2026-03-27",
+              "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "quality": 86,
+              "new_this_scan": false,
+              "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            }
+          ],
+          "prevention_evidence": [
+            {
+              "identity": "url:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "row": "A273",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
+              "source": "EuroHPC Joint Undertaking",
+              "date": "2026-07-30",
+              "link": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call.",
+              "geo_evidence": [
+                "strategic autonomy",
+                "de-risk"
+              ],
+              "ri_evidence": [
+                "research and innovation",
+                " ai  + technological leadership",
+                "quantum + research",
+                "ai gigafactories"
+              ],
+              "a_context_evidence": [
+                "dependence_control",
+                "competition_capability",
+                "strategic autonomy",
+                "leadership"
+              ]
+            },
+            {
+              "identity": "url:https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "row": "A008",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "ERA-LEARN Deliverable D2.9 - Policy Brief on Technological Sovereignty & Global Competition: The Case of Quantum Technologies",
+              "source": "ERA-LEARN",
+              "date": "2026-03-27",
+              "link": "https://www.era-learn.eu/documents/d2-9_policy_qt_tech-sov-era-learn.pdf",
+              "quality": 86,
+              "new_this_scan": false,
+              "core_message": "The brief argues that coordinated partnerships can reinforce European quantum capabilities, industry links and strategic autonomy while preserving selective international cooperation.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            }
+          ],
+          "source_count": 5,
+          "primary_source_count": 5,
+          "pressure_source_count": 3,
+          "coupling_count": 1,
+          "context_coupling_count": 1,
+          "weak_signal_context_count": 2,
+          "historical_context_count": 3,
+          "context_weight_total": 1.95,
+          "context_score_bonus": 5.0,
+          "official_trigger_present": true,
+          "best_quality": 98,
+          "average_quality": 96,
+          "fresh_coupling": false,
+          "fresh_context": false,
+          "first_inferred_at": "2026-09-09T23:31Z",
+          "last_updated_at": "2026-09-14T07:09:28Z",
+          "fingerprint": "8fc4d2adda480526",
+          "new_this_scan": false,
+          "updated_this_scan": false,
+          "status": "unchanged",
+          "retrace_status": "unchanged",
+          "retrace_at": "2026-09-14T07:09:28Z"
+        }
       }
     ]
   },
   "downstream_retrace": {
     "tool_version": "v1.0-current-downstream-rules",
-    "completed_at": "2026-09-14T07:09:28Z",
+    "completed_at": "2026-09-14T07:12:45Z",
     "source_revalidation_report": "",
     "diagnostics": {
-      "derived_objects_checked": 57,
-      "unchanged": 28,
-      "rebuilt": 17,
-      "materially_rewritten": 1,
-      "newly_inferred": 1,
-      "retired": 10,
-      "stale_evidence_references_before": 8,
-      "stale_evidence_references_removed": 8,
+      "derived_objects_checked": 47,
+      "unchanged": 34,
+      "rebuilt": 11,
+      "materially_rewritten": 0,
+      "newly_inferred": 0,
+      "retired": 2,
+      "stale_evidence_references_before": 0,
+      "stale_evidence_references_removed": 0,
       "orphan_references_remaining": 0,
-      "active_evidence_reference_occurrences_checked": 526,
+      "active_evidence_reference_occurrences_checked": 499,
       "shock_support_chains_changed_after_a_removal": 0,
-      "active_dynamic_shocks": 14,
+      "active_dynamic_shocks": 12,
       "active_high_order_candidates": 26,
       "active_strategic_pathways": 2,
       "active_possible_external_shocks": 0,
@@ -106514,7 +106437,7 @@
   },
   "active_corpus": {
     "profile": "radar-active-corpus-v1",
-    "rebuilt_at": "2026-09-14T07:09:28Z",
+    "rebuilt_at": "2026-09-14T07:12:45Z",
     "raw_counts": {
       "strand_a": 414,
       "strand_b": 133,
@@ -106522,18 +106445,18 @@
       "frontier_evidence": 0
     },
     "active_counts": {
-      "strand_a": 343,
-      "strand_b": 132,
+      "strand_a": 342,
+      "strand_b": 128,
       "strand_c": 169,
       "frontier_evidence": 0
     },
     "raw_total": 676,
-    "active_total": 644,
+    "active_total": 639,
     "decision_counts": {
-      "provisional": 427,
-      "keep": 215,
+      "provisional": 386,
+      "keep": 251,
       "review": 8,
-      "drop": 25,
+      "drop": 30,
       "drop_unverifiable": 0,
       "duplicate": 1
     },
@@ -106541,8 +106464,8 @@
     "missing_state_is": "provisional_active",
     "deep_scan_v2": {
       "total_records": 669,
-      "v2_verified": 243,
-      "v2_pending": 426
+      "v2_verified": 284,
+      "v2_pending": 385
     },
     "derived_reasoning_uses_active_corpus": true,
     "metadata_corrections_applied_to_active_view": true,
