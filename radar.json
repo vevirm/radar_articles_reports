@@ -1329,7 +1329,7 @@
     "new_c": 0
   },
   "reader_products_refresh": {
-    "completed_at": "2026-09-14T09:52:43Z",
+    "completed_at": "2026-09-14T10:09:44Z",
     "matrix": true,
     "risks_opportunities": true,
     "external_shocks": true,
@@ -96272,7 +96272,7 @@
       "first_seen": "2026-09-06T13:37Z",
       "new_this_scan": false,
       "retrace_status": "unchanged",
-      "retrace_at": "2026-09-14T09:52:43Z"
+      "retrace_at": "2026-09-14T10:09:44Z"
     }
   ],
   "external_shock_watch": [],
@@ -96814,13 +96814,13 @@
     "high_order_candidates_dormant": 3,
     "high_order_candidates_new_this_run": 10,
     "high_order_candidates_updated_this_run": 0,
-    "active_corpus_total": 621,
-    "active_strand_a": 311,
-    "active_strand_b": 127,
+    "active_corpus_total": 611,
+    "active_strand_a": 306,
+    "active_strand_b": 122,
     "active_strand_c": 183,
-    "deep_scan_v2_verified": 386,
-    "deep_scan_v2_pending": 283,
-    "inactive_drop": 46,
+    "deep_scan_v2_verified": 427,
+    "deep_scan_v2_pending": 242,
+    "inactive_drop": 56,
     "inactive_unverifiable": 2,
     "inactive_duplicates": 1,
     "active_review": 12
@@ -97261,10 +97261,10 @@
   },
   "shock_inference": {
     "profile_version": "23.3-context-weighted-shocks-v3",
-    "evaluated_at": "2026-09-14T09:52:43Z",
+    "evaluated_at": "2026-09-14T10:09:44Z",
     "new_count": 0,
-    "updated_count": 0,
-    "unchanged_count": 8,
+    "updated_count": 1,
+    "unchanged_count": 7,
     "dynamic_shocks": [
       {
         "id": "emergent:quantum:security_reclassification",
@@ -97360,7 +97360,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security",
-            "row": "A135",
+            "row": "A134",
             "strand": "A",
             "role": "External mechanism: a sudden security reclassification",
             "evidence_role": "primary",
@@ -97529,7 +97529,7 @@
         ],
         "source_count": 3,
         "primary_source_count": 3,
-        "pressure_source_count": 25,
+        "pressure_source_count": 24,
         "coupling_count": 3,
         "context_coupling_count": 2,
         "weak_signal_context_count": 2,
@@ -97542,13 +97542,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "ddd9ad858244bb4e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:ip:acquisition",
@@ -97573,7 +97573,6 @@
         ],
         "case_against": [
           "The trigger is not yet backed by an official primary source in the retained current evidence.",
-          "The primary corpus contains 1 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
           "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
           "The scenario still depends on the disruption arriving faster than Europe can respond."
         ],
@@ -97587,11 +97586,11 @@
           "Investment screening is opened because the capability is considered strategically important."
         ],
         "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
-        "inference_score": 91,
+        "inference_score": 92,
         "support": [
           {
             "identity": "url:https://www.delorscentre.eu/en/publications/detail/publication/selective-conditionality",
-            "row": "A293",
+            "row": "A289",
             "strand": "A",
             "role": "Primary coupling evidence",
             "evidence_role": "primary",
@@ -97609,7 +97608,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1007/s13132-026-03245-7",
-            "row": "A242",
+            "row": "A240",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -97626,30 +97625,22 @@
             "a_context_evidence": []
           },
           {
-            "identity": "url:https://doi.org/10.1016/j.erss.2026.104895",
-            "row": "A104",
+            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
+            "row": "A050",
             "strand": "A",
             "role": "European capability: research ownership and technology transfer",
             "evidence_role": "primary",
             "analytical_weight": 1.0,
-            "title": "Uncovering the directionality of innovation in artificial intelligence for energy transitions: A global perspective on the twin transition using patent analysis",
-            "source": "Energy Research & Social Science",
-            "date": "2026-08-04",
-            "link": "https://doi.org/10.1016/j.erss.2026.104895",
-            "quality": 90,
+            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
+            "source": "CESAER",
+            "date": "2025-10-28",
+            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
+            "quality": 80,
             "new_this_scan": false,
-            "core_message": "as energy, transport, buildings and industry.",
+            "core_message": "AI adoption in technology transfer is emerging but uneven, with capability and guidance gaps that the report addresses through targeted recommendations.",
             "geo_evidence": [],
-            "ri_evidence": [
-              "artificial intelligence + innovation",
-              "artificial intelligence + research"
-            ],
-            "a_context_evidence": [
-              "competition_capability",
-              "leadership",
-              "china",
-              "united states"
-            ]
+            "ri_evidence": [],
+            "a_context_evidence": []
           },
           {
             "identity": "url:https://doi.org/10.54648/leie2026014",
@@ -97671,7 +97662,7 @@
           },
           {
             "identity": "url:https://fiia.fi/wp-content/uploads/2026/06/rp6_the-eus-need-for-a-new-growth-model.pdf",
-            "row": "A130",
+            "row": "A129",
             "strand": "A",
             "role": "External mechanism: a foreign acquisition or control transfer",
             "evidence_role": "primary",
@@ -97796,46 +97787,8 @@
             "a_context_evidence": []
           }
         ],
-        "against": [
-          {
-            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
-            "row": "A050",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
-            "source": "CESAER",
-            "date": "2025-10-28",
-            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
-            "quality": 80,
-            "new_this_scan": false,
-            "core_message": "AI adoption in technology transfer is emerging but uneven, with capability and guidance gaps that the report addresses through targeted recommendations.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "prevention_evidence": [
-          {
-            "identity": "url:https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf",
-            "row": "A050",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Report ‘AI pathways for technology transfer: Lessons learned from universities of science and technology’",
-            "source": "CESAER",
-            "date": "2025-10-28",
-            "link": "https://www.cesaer.org/publications/httpswwwcesaerorgcontent5-operations202520251028-report-ai-pathways-for-technology-transferpdf/",
-            "quality": 80,
-            "new_this_scan": false,
-            "core_message": "AI adoption in technology transfer is emerging but uneven, with capability and guidance gaps that the report addresses through targeted recommendations.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
+        "against": [],
+        "prevention_evidence": [],
         "source_count": 5,
         "primary_source_count": 5,
         "pressure_source_count": 3,
@@ -97847,17 +97800,17 @@
         "context_score_bonus": 5.0,
         "official_trigger_present": false,
         "best_quality": 98,
-        "average_quality": 91,
+        "average_quality": 89,
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-13T22:20:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
-        "fingerprint": "175f1bdbfcf56f7b",
+        "last_updated_at": "2026-09-14T10:09:44Z",
+        "fingerprint": "6c5dbc0731b3aac2",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:infrastructure:security_reclassification",
@@ -97918,7 +97871,7 @@
           },
           {
             "identity": "url:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration",
-            "row": "A140",
+            "row": "A139",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -97980,7 +97933,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security",
-            "row": "A135",
+            "row": "A134",
             "strand": "A",
             "role": "External mechanism: a sudden security reclassification",
             "evidence_role": "primary",
@@ -98084,7 +98037,7 @@
         "prevention_evidence": [],
         "source_count": 4,
         "primary_source_count": 4,
-        "pressure_source_count": 25,
+        "pressure_source_count": 24,
         "coupling_count": 1,
         "context_coupling_count": 0,
         "weak_signal_context_count": 2,
@@ -98097,13 +98050,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "407e51171710b933",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:startups:security_reclassification",
@@ -98145,7 +98098,7 @@
         "support": [
           {
             "identity": "url:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-applicant-guidelines.pdf",
-            "row": "A123",
+            "row": "A122",
             "strand": "A",
             "role": "Primary coupling evidence",
             "evidence_role": "primary",
@@ -98163,7 +98116,7 @@
           },
           {
             "identity": "url:https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o",
-            "row": "A308",
+            "row": "A303",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -98206,7 +98159,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security",
-            "row": "A135",
+            "row": "A134",
             "strand": "A",
             "role": "External mechanism: a sudden security reclassification",
             "evidence_role": "primary",
@@ -98324,7 +98277,7 @@
         "against": [
           {
             "identity": "url:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
-            "row": "A124",
+            "row": "A123",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98342,7 +98295,7 @@
           },
           {
             "identity": "url:https://ecipe.org/publications/copyright-trap/#_ftnref9",
-            "row": "A220",
+            "row": "A218",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98407,7 +98360,7 @@
           },
           {
             "identity": "url:https://research-and-innovation.ec.europa.eu/document/download/2f76a0df-b09b-47c2-949c-800c30e4c530_en?filename=ec_rtd_eu-startup-scaleup-strategy-communication.pdf",
-            "row": "A292",
+            "row": "A288",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98427,7 +98380,7 @@
         "prevention_evidence": [
           {
             "identity": "url:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
-            "row": "A124",
+            "row": "A123",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98445,7 +98398,7 @@
           },
           {
             "identity": "url:https://ecipe.org/publications/copyright-trap/#_ftnref9",
-            "row": "A220",
+            "row": "A218",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98510,7 +98463,7 @@
           },
           {
             "identity": "url:https://research-and-innovation.ec.europa.eu/document/download/2f76a0df-b09b-47c2-949c-800c30e4c530_en?filename=ec_rtd_eu-startup-scaleup-strategy-communication.pdf",
-            "row": "A292",
+            "row": "A288",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98529,7 +98482,7 @@
         ],
         "source_count": 3,
         "primary_source_count": 3,
-        "pressure_source_count": 25,
+        "pressure_source_count": 24,
         "coupling_count": 3,
         "context_coupling_count": 1,
         "weak_signal_context_count": 3,
@@ -98542,13 +98495,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "7481931ea7519a68",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:funding:security_reclassification",
@@ -98590,7 +98543,7 @@
         "support": [
           {
             "identity": "url:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-applicant-guidelines.pdf",
-            "row": "A123",
+            "row": "A122",
             "strand": "A",
             "role": "Primary coupling evidence",
             "evidence_role": "primary",
@@ -98608,7 +98561,7 @@
           },
           {
             "identity": "url:https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034",
-            "row": "A256",
+            "row": "A253",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -98626,7 +98579,7 @@
           },
           {
             "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
-            "row": "A234",
+            "row": "A232",
             "strand": "A",
             "role": "European capability: European research and innovation funding",
             "evidence_role": "primary",
@@ -98662,7 +98615,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security",
-            "row": "A135",
+            "row": "A134",
             "strand": "A",
             "role": "External mechanism: a sudden security reclassification",
             "evidence_role": "primary",
@@ -98788,7 +98741,7 @@
         "against": [
           {
             "identity": "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
-            "row": "A246",
+            "row": "A244",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98806,7 +98759,7 @@
           },
           {
             "identity": "url:https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028",
-            "row": "A257",
+            "row": "A254",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98824,7 +98777,7 @@
           },
           {
             "identity": "url:https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en",
-            "row": "A142",
+            "row": "A141",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98842,7 +98795,7 @@
           },
           {
             "identity": "url:https://www.cesaer.org/publications/universities-and-research-institutes-call-on-council-to-build-on-parliaments-momentum-on-fp10-and-the-ecf",
-            "row": "A244",
+            "row": "A242",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98880,7 +98833,7 @@
         "prevention_evidence": [
           {
             "identity": "url:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
-            "row": "A246",
+            "row": "A244",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98898,7 +98851,7 @@
           },
           {
             "identity": "url:https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028",
-            "row": "A257",
+            "row": "A254",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98916,7 +98869,7 @@
           },
           {
             "identity": "url:https://hadea.ec.europa.eu/calls-proposals/boosting-space-through-eu-non-dependence-critical-space-technologies-horizon-europe-space-2026-calls_en",
-            "row": "A142",
+            "row": "A141",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98934,7 +98887,7 @@
           },
           {
             "identity": "url:https://www.cesaer.org/publications/universities-and-research-institutes-call-on-council-to-build-on-parliaments-momentum-on-fp10-and-the-ecf",
-            "row": "A244",
+            "row": "A242",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98971,7 +98924,7 @@
         ],
         "source_count": 3,
         "primary_source_count": 3,
-        "pressure_source_count": 25,
+        "pressure_source_count": 24,
         "coupling_count": 10,
         "context_coupling_count": 3,
         "weak_signal_context_count": 3,
@@ -98984,13 +98937,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "09e6edb6aed5be76",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:collaboration:security_reclassification",
@@ -99032,7 +98985,7 @@
         "support": [
           {
             "identity": "url:https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china",
-            "row": "A269",
+            "row": "A266",
             "strand": "A",
             "role": "Primary coupling evidence",
             "evidence_role": "primary",
@@ -99050,7 +99003,7 @@
           },
           {
             "identity": "url:https://erc.europa.eu/news-events/magazine-article/science-diplomacy-utopia-pragmatism",
-            "row": "A177",
+            "row": "A176",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -99086,7 +99039,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security",
-            "row": "A135",
+            "row": "A134",
             "strand": "A",
             "role": "External mechanism: a sudden security reclassification",
             "evidence_role": "primary",
@@ -99235,7 +99188,7 @@
         "against": [
           {
             "identity": "url:https://www.cesaer.org/publications/shaping-science-diplomacy-perspectives-of-universities-of-science-and-technology",
-            "row": "A249",
+            "row": "A247",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99289,7 +99242,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1007/s44162-026-00229-8",
-            "row": "A237",
+            "row": "A235",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99334,7 +99287,7 @@
         "prevention_evidence": [
           {
             "identity": "url:https://www.cesaer.org/publications/shaping-science-diplomacy-perspectives-of-universities-of-science-and-technology",
-            "row": "A249",
+            "row": "A247",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99388,7 +99341,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1007/s44162-026-00229-8",
-            "row": "A237",
+            "row": "A235",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99432,7 +99385,7 @@
         ],
         "source_count": 3,
         "primary_source_count": 3,
-        "pressure_source_count": 25,
+        "pressure_source_count": 24,
         "coupling_count": 8,
         "context_coupling_count": 5,
         "weak_signal_context_count": 3,
@@ -99445,13 +99398,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "fe73b49fd3e0fac3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:biotech:security_reclassification",
@@ -99513,7 +99466,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1093/ckj/sfag257",
-            "row": "A181",
+            "row": "A180",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -99531,7 +99484,7 @@
           },
           {
             "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
-            "row": "A110",
+            "row": "A109",
             "strand": "A",
             "role": "European capability: biotechnology and clinical research",
             "evidence_role": "primary",
@@ -99567,7 +99520,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security",
-            "row": "A135",
+            "row": "A134",
             "strand": "A",
             "role": "External mechanism: a sudden security reclassification",
             "evidence_role": "primary",
@@ -99676,7 +99629,7 @@
         "against": [
           {
             "identity": "url:https://doi.org/10.1111/bioe.70159",
-            "row": "A272",
+            "row": "A269",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99696,7 +99649,7 @@
         "prevention_evidence": [
           {
             "identity": "url:https://doi.org/10.1111/bioe.70159",
-            "row": "A272",
+            "row": "A269",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99715,7 +99668,7 @@
         ],
         "source_count": 4,
         "primary_source_count": 4,
-        "pressure_source_count": 25,
+        "pressure_source_count": 24,
         "coupling_count": 1,
         "context_coupling_count": 0,
         "weak_signal_context_count": 2,
@@ -99728,13 +99681,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-09T12:05Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "b0d8639016707017",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "emergent:open_science:conflict",
@@ -99778,7 +99731,7 @@
         "support": [
           {
             "identity": "url:https://doi.org/10.1057/s41307-026-00465-z",
-            "row": "A228",
+            "row": "A226",
             "strand": "A",
             "role": "Primary coupling evidence",
             "evidence_role": "primary",
@@ -99796,7 +99749,7 @@
           },
           {
             "identity": "url:https://allea.org/wp-content/uploads/2026/06/joint-statement-on-open-science-1.pdf",
-            "row": "A245",
+            "row": "A243",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -99814,7 +99767,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1093/scipol/scag021",
-            "row": "A146",
+            "row": "A145",
             "strand": "A",
             "role": "European capability: open science and research data",
             "evidence_role": "primary",
@@ -99832,7 +99785,7 @@
           },
           {
             "identity": "url:https://www.eurekanetwork.org/impact/ukraine-within-eurekas-innovation-landscape",
-            "row": "A310",
+            "row": "A305",
             "strand": "A",
             "role": "External mechanism: an armed-conflict escalation",
             "evidence_role": "primary",
@@ -99934,7 +99887,7 @@
         "against": [
           {
             "identity": "url:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-infrastructures_en",
-            "row": "A176",
+            "row": "A175",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99952,7 +99905,7 @@
           },
           {
             "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "row": "A300",
+            "row": "A296",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -99970,7 +99923,7 @@
           },
           {
             "identity": "url:https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
-            "row": "A215",
+            "row": "A213",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -100006,7 +99959,7 @@
           },
           {
             "identity": "url:https://doi.org/10.46299/j.isjea.20260504.07",
-            "row": "A240",
+            "row": "A238",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -100026,7 +99979,7 @@
         "prevention_evidence": [
           {
             "identity": "url:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/our-digital-future/european-research-infrastructures_en",
-            "row": "A176",
+            "row": "A175",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -100044,7 +99997,7 @@
           },
           {
             "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "row": "A300",
+            "row": "A296",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -100062,7 +100015,7 @@
           },
           {
             "identity": "url:https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
-            "row": "A215",
+            "row": "A213",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -100098,7 +100051,7 @@
           },
           {
             "identity": "url:https://doi.org/10.46299/j.isjea.20260504.07",
-            "row": "A240",
+            "row": "A238",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -100117,7 +100070,7 @@
         ],
         "source_count": 4,
         "primary_source_count": 4,
-        "pressure_source_count": 7,
+        "pressure_source_count": 6,
         "coupling_count": 1,
         "context_coupling_count": 0,
         "weak_signal_context_count": 2,
@@ -100130,19 +100083,19 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "dbd5013c99f17352",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       }
     ]
   },
   "high_order_inference": {
     "profile_version": "v23.5-generative-trends-level45",
-    "evaluated_at": "2026-09-14T09:52:43Z",
+    "evaluated_at": "2026-09-14T10:09:44Z",
     "new_count": 0,
     "updated_count": 0,
     "qualified_count": 10,
@@ -100195,7 +100148,7 @@
           "right_movement"
         ],
         "missing_links": [],
-        "primary_records": 25,
+        "primary_records": 24,
         "primary_sources": 23,
         "context_records": 0,
         "counter_records": 0,
@@ -100372,18 +100325,6 @@
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://doi.org/10.1007/s43681-026-01260-7",
-            "role": "Governance movement",
-            "strand": "A",
-            "title": "Governing AI as infrastructure",
-            "source": "AI and Ethics",
-            "date": "2026-07-13",
-            "link": "https://doi.org/10.1007/s43681-026-01260-7",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
             "identity": "url:https://doi.org/10.1007/s40636-026-00372-3",
             "role": "Governance movement",
             "strand": "A",
@@ -100456,34 +100397,34 @@
           "right_role": "Governance movement",
           "left_plain": "Investment, deployment or scale pressure is increasing around AI/compute.",
           "right_plain": "Standards, governance, testing or safeguards are also being built around AI/compute.",
-          "left_pull": 65,
-          "right_pull": 35,
-          "raw_left_pull": 64,
-          "raw_right_pull": 36,
+          "left_pull": 67,
+          "right_pull": 33,
+          "raw_left_pull": 67,
+          "raw_right_pull": 33,
           "left_range": [
-            64,
-            65
+            67,
+            67
           ],
           "right_range": [
-            35,
-            36
+            33,
+            33
           ],
           "left_actions": 16,
-          "right_actions": 9,
+          "right_actions": 8,
           "left_sources": 16,
           "right_sources": 8,
           "left_adjusted_points": 16.0,
-          "right_adjusted_points": 8.5
+          "right_adjusted_points": 8.0
         },
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
-        "fingerprint": "c538d4e124ee3f92",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
+        "fingerprint": "5931a059904ba5bb",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:opposing_movements_collaborate_derisk:collaborate-derisk-research-security",
@@ -100712,15 +100653,15 @@
           "left_adjusted_points": 2.5,
           "right_adjusted_points": 15.25
         },
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "2667059ab52cfca5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-startups-scaleup",
@@ -100949,15 +100890,15 @@
           "left_adjusted_points": 12.5,
           "right_adjusted_points": 2.5
         },
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "2dea64d54f9986ec",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-funding-programme",
@@ -101234,15 +101175,15 @@
           "left_adjusted_points": 5.25,
           "right_adjusted_points": 10.375
         },
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "b252990ab86648b0",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:omitted_dependency_chain:compute-ai-materials-energy",
@@ -101424,15 +101365,15 @@
         "generic_grammar": true,
         "reader_title": "A hidden energy/materials dependency could transmit a shock into European AI/compute.",
         "reader_summary": "The candidate exists only because primary evidence explicitly connects the asset to the dependency, separately establishes a disruption route, and shows a mechanism by which effects could spread beyond one isolated case.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "e00c0c9ad23c971a",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
@@ -101638,15 +101579,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "6e1a786fc238a112",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-eureka",
@@ -101889,15 +101830,15 @@
         "generic_grammar": true,
         "reader_title": "EUREKA may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "3a7ca2202c3da8d7",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-business-finland",
@@ -102116,15 +102057,15 @@
         "generic_grammar": true,
         "reader_title": "Business Finland may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "61af7568aded0dac",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-standards-testing",
@@ -102329,15 +102270,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "2c6f1c6dc8f0d607",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-funding-programme",
@@ -102542,15 +102483,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research funding/programmes may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "8e8e6afc3ed3cfcf",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-compute-ai",
@@ -102577,8 +102518,8 @@
           "payoff_evidence"
         ],
         "missing_links": [],
-        "primary_records": 13,
-        "primary_sources": 13,
+        "primary_records": 12,
+        "primary_sources": 12,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
@@ -102769,15 +102710,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in AI/compute if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "2ccfe3b461d93bb4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-infrastructure",
@@ -102804,8 +102745,8 @@
           "payoff_evidence"
         ],
         "missing_links": [],
-        "primary_records": 7,
-        "primary_sources": 7,
+        "primary_records": 6,
+        "primary_sources": 6,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
@@ -102832,18 +102773,6 @@
             "source": "Economics of Innovation and New Technology",
             "date": "2026-07-29",
             "link": "https://doi.org/10.1080/10438599.2026.2710994",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s43681-026-01260-7",
-            "role": "comparative_weakness",
-            "strand": "A",
-            "title": "Governing AI as infrastructure",
-            "source": "AI and Ethics",
-            "date": "2026-07-13",
-            "link": "https://doi.org/10.1007/s43681-026-01260-7",
             "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
@@ -102984,15 +102913,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in research infrastructure if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
-        "fingerprint": "e490242c425cf29d",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
+        "fingerprint": "defe870a5521f061",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:goal_measurement_gap:sovereignty",
@@ -103157,8 +103086,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 15,
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "656d57feb7b920fe",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -103167,7 +103096,7 @@
         "reader_title": "Europe keeps pursuing technological sovereignty/strategic autonomy without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:goal_measurement_gap:competitiveness",
@@ -103320,8 +103249,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 3,
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "766e0ff5d18b2a90",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -103330,7 +103259,7 @@
         "reader_title": "Europe keeps pursuing competitiveness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
@@ -103525,15 +103454,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "886d356ce85811c8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
@@ -103752,15 +103681,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "e4b95d301838ede5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
@@ -103991,15 +103920,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "885424dc8b882208",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-infrastructure",
@@ -104217,15 +104146,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research infrastructure may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "b5c7ff6d5a1fc2d4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-startups-scaleup",
@@ -104443,15 +104372,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around startups/scale-up may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "20505a0b437c1455",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:standards-testing-openness-vs-security",
@@ -104634,15 +104563,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on standards/testing may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "d2ca790e9243a2fe",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-retention-talent",
@@ -104810,15 +104739,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the retention in research talent outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "d405196c9409e5fa",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
@@ -104986,15 +104915,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the widening participation in research funding/programmes outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "833e92556b1dff01",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-chips",
@@ -105150,15 +105079,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in semiconductors outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "7db1811da1be9014",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:goal_measurement_gap:openness",
@@ -105312,8 +105241,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 14,
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "5f64499715fc998e",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -105322,7 +105251,7 @@
         "reader_title": "Europe keeps pursuing openness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
@@ -105529,15 +105458,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "b7feccec7737a0c5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-talent",
@@ -105719,15 +105648,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research talent may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "8b221602e1e2066e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:goal_measurement_gap:research-security",
@@ -105881,8 +105810,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 3,
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "443b4efbd0887d0f",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -105891,7 +105820,7 @@
         "reader_title": "Europe keeps pursuing research security without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-health-data",
@@ -106003,21 +105932,21 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in health data if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-14T09:52:43Z",
-        "last_updated_at": "2026-09-14T09:52:43Z",
+        "first_seen_at": "2026-09-14T10:09:44Z",
+        "last_updated_at": "2026-09-14T10:09:44Z",
         "fingerprint": "25a8f9a999e2cae8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-14T09:52:43Z"
+        "retrace_at": "2026-09-14T10:09:44Z"
       }
     ]
   },
   "downstream_archive": {
     "profile_version": "v1.0-current-downstream-rules",
-    "updated_at": "2026-09-14T09:52:43Z",
+    "updated_at": "2026-09-14T10:09:44Z",
     "objects": [
       {
         "kind": "high_order",
@@ -108610,19 +108539,19 @@
   },
   "downstream_retrace": {
     "tool_version": "v1.0-current-downstream-rules",
-    "completed_at": "2026-09-14T09:52:43Z",
+    "completed_at": "2026-09-14T10:09:44Z",
     "source_revalidation_report": "",
     "diagnostics": {
       "derived_objects_checked": 44,
-      "unchanged": 44,
-      "rebuilt": 0,
+      "unchanged": 41,
+      "rebuilt": 3,
       "materially_rewritten": 0,
       "newly_inferred": 0,
       "retired": 0,
-      "stale_evidence_references_before": 0,
-      "stale_evidence_references_removed": 0,
+      "stale_evidence_references_before": 3,
+      "stale_evidence_references_removed": 3,
       "orphan_references_remaining": 0,
-      "active_evidence_reference_occurrences_checked": 465,
+      "active_evidence_reference_occurrences_checked": 461,
       "shock_support_chains_changed_after_a_removal": 0,
       "active_dynamic_shocks": 8,
       "active_high_order_candidates": 28,
@@ -108636,7 +108565,7 @@
   },
   "active_corpus": {
     "profile": "radar-active-corpus-v1",
-    "rebuilt_at": "2026-09-14T09:52:43Z",
+    "rebuilt_at": "2026-09-14T10:09:44Z",
     "raw_counts": {
       "strand_a": 414,
       "strand_b": 133,
@@ -108644,18 +108573,18 @@
       "frontier_evidence": 0
     },
     "active_counts": {
-      "strand_a": 311,
-      "strand_b": 127,
+      "strand_a": 306,
+      "strand_b": 122,
       "strand_c": 183,
       "frontier_evidence": 0
     },
     "raw_total": 676,
-    "active_total": 621,
+    "active_total": 611,
     "decision_counts": {
-      "provisional": 284,
-      "keep": 331,
+      "provisional": 243,
+      "keep": 362,
       "review": 12,
-      "drop": 46,
+      "drop": 56,
       "drop_unverifiable": 2,
       "duplicate": 1
     },
@@ -108663,8 +108592,8 @@
     "missing_state_is": "provisional_active",
     "deep_scan_v2": {
       "total_records": 669,
-      "v2_verified": 386,
-      "v2_pending": 283
+      "v2_verified": 427,
+      "v2_pending": 242
     },
     "derived_reasoning_uses_active_corpus": true,
     "metadata_corrections_applied_to_active_view": true,

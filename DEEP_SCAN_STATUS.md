@@ -3,29 +3,29 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **386**
-- Still needing V2 verification: **283**
-- Currently assigned to workers: **96**
-- Deferred after exhaustive recovery: **40**
-- Pending and not yet assigned: **147**
+- Authoritative V2 verified: **427**
+- Still needing V2 verification: **242**
+- Currently assigned to workers: **84**
+- Deferred after exhaustive recovery: **47**
+- Pending and not yet assigned: **111**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T095305Z-ebc57049412e`
-- Assigned unresolved records: **48**
-  1. `link:https://doi.org/10.1080/10301763.2026.2726657`
-  2. `link:https://doi.org/10.1007/s13132-026-03451-3`
-  3. `link:https://doi.org/10.1016/j.sftr.2026.102116`
-  4. `link:https://doi.org/10.2478/eoik-2026-0051`
-  5. `link:https://doi.org/10.1016/j.eist.2026.101171`
-  6. `link:https://doi.org/10.1007/s43253-026-00180-w`
-  7. `link:https://doi.org/10.1002/aiv2.70011`
-  8. `link:https://doi.org/10.1007/s43681-026-01260-7`
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260914T101003Z-0d58e3d159ee`
+- Assigned unresolved records: **36**
+  1. `link:https://www.euronews.com/next/2026/09/09/sweden-is-preparing-for-ai-powered-election-interference-what-does-that-defence-actually-l`
+  2. `link:https://policy.trade.ec.europa.eu/consultations/public-consultation-first-review-functioning-international-procurement-instrument_en`
+  3. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQNmNwVDBfLU5VWDJLeVU1T2NjU1Q1WmNlaVVHdEJJbWRmVXZLNGh0Q1BXN2U1YnZlbzdvUUt0bEtlb2hwdm5ERnh3QXBKTWcwSExYV2YxVUhSWEMtS2ZrSVpGQV9YcXl5bWYxNkJiR0dRSXNDbG4tOHotR3lreGtrc1A5MDlEYlNNbmFJbDZTa2VfWXZjalhHNEZWZHpGMkF4Ry1kVGpqXzlkaFc1M1NXT2pKYzc?oc=5`
+  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxObmNUMkNpaHRGSU5YVjBwaUs2elJrS0YyY2xNT1BpV2lha2JNSVdmZUNoUzRmUmQ1UVFGTjQ2UnZVWlUtcjkxV1B3YzZtWUJyNTExemVaTHdCVUhPVWVCSFItX2NCQUtnYmFwUlZ5ektQcDhQT0lteHN5WEd0ZG5rYXFpQVBSNmVNbFNCRS1YT2ZTeGVSbmVtYlJWYTQtQVE4QTBUSUlZZ3hWdHVlNnc?oc=5`
+  5. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRVhFMmIxN3AtRkFXelpLaDBYejd0emlMam9sc2FBZWhoTHpHdV90TjNpYTFHc3d4WXo5UmhzUHpKMUpBTFNZMkU0SlRiZWpjSktfZlROVWN2SkI5QXhkbjZCN0ZlYXB6UkptOXoxOElncHZrVmxodEo0SGlSUnVzZmNkcTd5WXpLLVVKSFlVMWpJaWFzVTVxTHhDZzQwRHFOLVJiYUxoTXRkS28?oc=5`
+  6. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxPQWQtQ2pacWxfQlZ6TG1sMnNsY29yWXI0R19LaGs5eDJmWTNRRTBqOENDT3NhTGFlVEF5QVkxUmlWM2RXTVV4RXRFTzBlSnpic29iMHd6TVg3R1lWeFVleERlNUVtLUJadmFTWDZPTXlUUmt6eXZheEdReWJzTVZNcGpPdmxKdkdJQWxORDVBOTVVYW5uU3VsSmVia3l1WEs1bkZSVUxPQ0tza0ZmS2hFbEdKSmlEdkk?oc=5`
+  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPcWNKUTJpWmprTU9IZU1yaVRYVDRRTjBodXBHbktZZ01LcXVLRmdZaWV0TkFlNGlKV1NlVk5iM1lJRzFJX2dSZ1RCRVRueG5kQVgyTWhzaEptSUxKTWpTSlVPTkx6a1ZvajEzdVBza3BzbW9OQmxHMDAyUU9GUmJ0Vy12MWU?oc=5`
+  8. `link:https://news.google.com/rss/articles/CBMib0FVX3lxTE1SNWY2Z2ZLU0tkQlJ4MlpOb0FrMVpmVUFDeVNHN3dBeUNEZHdod3E1NzkyOVpOS3NiMThYd1pNQmpBLTU2a3MzMUdzUEF4MnJtS09pdTJ0WXlueHdKRTc5bUFsSFNsQTUzb1d3TVFKVQ?oc=5`
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T095316Z-c8a7cb0a8bdb`
+- Current package: `worker-b-20260914T101013Z-c8a7cb0a8bdb`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.cose.2026.105102`
   2. `link:https://doi.org/10.1016/j.technovation.2026.103603`
@@ -60,6 +60,7 @@ It exists so a new chat or operator can see what has already been verified and w
 - `link:https://doi.org/10.1007/s11192-026-05619-9` — Identity fully confirmed, but the article is closed access and the only repository record is a JavaScript-gated discovery page with no retrievable file, leaving abstract-level evidence only.
 - `link:https://doi.org/10.1111/jcms.70116` — Identity fully confirmed and a repository deposit exists, but the accepted manuscript is under embargo until April 2027 and was not accessed; only abstracts are available.
 - `link:https://doi.org/10.1016/j.jtrangeo.2026.104813` — Identity confirmed via Crossref, but Elsevier blocked every route to this open-licensed article and no repository copy exists, leaving no substantive text at all.
+- `link:https://doi.org/10.1080/10301763.2026.2726657` — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand A judgement would require substantive text.
 - `link:https://www.cifs.dk/read-listen/reports-knowledge/the-role-of-foresight-in-organisations` — Identity verified against the official CIFS publication page, but the whitepaper text is gated behind a download step and no copy exists elsewhere; the landing description alone cannot support a responsible strand B judgement.
 - `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQR1JiOFNtQlZBYUJUUThOYXVYSjFad2h0TG5OSm9ZdDBaY0NrbVk3UkkxUlZJMWFPczJySWd5RmwtYmZsdFE2bS1iOGJnMHFacHBtWE5GUWpqRTN3QXR4SHVtdE1ZRktGY3V6SUc0OWtIQVhSMUp5QVk2ZjE0N29TdFp6ZzgwTmx0aXpkMFpsM2lfb2xrWUtyWXJLY1hlYnRqNEhQWHNZLUhZZThpeklQU3NHWXQ2SGZhNkpmTllLU1JCN1NMU2Jv?oc=5` — Identity is confirmed against the publisher's own article page, but the reporting itself is subscriber-gated; making a strand C admission judgement would require substituting Commission background pages for the claimed work, which is not permitted.
 - `link:https://doi.org/10.1111/1758-5899.70201` — Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made.
@@ -68,5 +69,4 @@ It exists so a new chat or operator can see what has already been verified and w
 - `link:https://doi.org/10.1093/etojnl/vgag243` — Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made.
 - `link:https://doi.org/10.1016/j.futures.2026.103897` — Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made.
 - `link:https://doi.org/10.1016/j.techfore.2013.07.012` — Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made.
-- `link:https://doi.org/10.1002/ffo2.99` — Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made.
-- … plus 10 more
+- … plus 17 more
