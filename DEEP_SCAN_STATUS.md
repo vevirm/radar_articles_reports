@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **545** (Main **545** + Historical **0**)
 - Automatic queue still needing V2 verification: **726** (Main **77** + Historical **649**)
-- Currently assigned to workers: **82** (Main **51** + Historical **31**)
-- Bounded access-recovery retries still eligible: **26**
+- Currently assigned to workers: **96** (Main **52** + Historical **44**)
+- Bounded access-recovery retries still eligible: **25**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **644**
+- Automatic queue pending and not yet assigned: **630**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T121254Z-bc820b643778`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260914T121453Z-1a1bc3463fbc`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.abmr.2026.100004` — Technology foresight: A taxonomy
   2. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNYUpLd1I4Qk5tN3lrREZxemNJbjVxRmR1bG5Ta2hReWtIVXIweHdGREstZjNWUjMyLXYtSFQ0QnJQM0tERGFnSThzVW1YRm1BREtld2tSekNNTGI1WjVwSnR1ZmxUU0ZTZ0U3S3dXWkpQb3Z2Qld4bGRreE16dnAydDlTcEVuNmtHaU9WdlFYSFZMell2dFhmNjVrblZaa01vZnljMXdTYkh4M2dpVzlsTkktUHQ?oc=5` — Europe built its medical science around male bodies – and women are paying the price
   3. `link:http://arxiv.org/abs/2603.22912` — From the AI Act to a European AI Agency: Completing the Union's Regulatory Architecture
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:211f6661f63d7277` — “Get a PhD and Get Out”: is this really the silver bullet? Insights on postdoctoral academic careers from East Central Europe
   7. `historical:id:f5168176f416900e` — Research security monitor 2025 - Publications Office of the EU
   8. `historical:id:0b499eadbff962c8` — Copyright, AI, and the CJEU – A Binary Choice That Will Shape Europe’s Role in Global AI – ECIPE
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T121308Z-fb1fe01c1fb2`
-- Assigned unresolved records: **46**
+- Current package: `worker-b-20260914T121509Z-0e4acd783ae4`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
   3. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNcDBEMmRZeW16bDFuMlZWUWxOVmV3NUllTlMwMEx5Y0ZWR1hNMkZ3NTM4WGp0YjFrcVJUdVNCR05pZTdKV0pIN1ZqS1pJdHR0MXRGMlVScGg3Z2tveUxTazJEenlhWlZ2S2dLQkY3QWVaalJHdHoyNVZWTzk4WDFyQkNNTlVINzJ0RWtjSnp0cUtyVTlVeU5Da3RCXzBVQjV3Q1BnRzlB?oc=5` — German military evaluating 30 AI tools for introduction from 2027
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRGJCR3lRVHk0SHVwZnVFYUdjOUV4VXoyaVFsR2RRS1FINkdIUUFDUEtFQy1DcjlvNFRYUm5sUGwxN194VEFMVDBUTVVnTlBXcmJDenFFV0xraGQ1S0lZT2txMXEwcV8zUFBORUs3QndlbWpzSXYtZm5MWDgzZ3FMNFFQU2JVVm1MVTNKTHpPc3pfbGFSYzVWb2FzVDlRWElwd1lHMGJONXBYRzZlZGVobmdEYTV5QWdXQ0lXOFBpQm1Db0NVZWd6S1ZaaGF0UWNYWHI3QVYtSzhXN0JQVndabTZUSQ?oc=5` — New rules for bringing innovations to the EU market could generate up to EUR 452 billion
   7. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxPelZfVE82a3ZvaVdGbHFjQXQ4RlNNTUhucGJTSzMxeFVXbHZNSDJuN3Q4akpVVVBvSkNjenBzS3dRRkdzUThnZUVtNmhuaFo5eFJ3eERmM1ZGZGJualZVNXZlZ3lZR3VOT0sxNWEwV0hKb3BMd05TZjdGbl80a3RCQXlUOWM0aWt0MDR2QXNtZUdWRUs4MHc?oc=5` — Europe’s space chief wants decision this year on launching without NASA
   8. `link:https://news.google.com/rss/articles/CBMifEFVX3lxTFBMdlpkQThhcEIxMHVXa2xWQk1Ed0NyLTNicFhzOGFFd0doTjFQZm9md3NuTzlkY0pUQzUtU0FLTm5pRy0wMVZJcUxNNjEzSm5UdGlHNG5XdlNVZXB4cElUQUlka1FpbV9rNXEtREoydWxVV3pWbGdsUUlvd1Q?oc=5` — EU pursues closer Israel ties on air defense and space
-  - … plus 38 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Hands-on verification needed
 
