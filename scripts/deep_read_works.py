@@ -50,6 +50,11 @@ def clean(v: Any) -> str:
 
 
 def record_key(r: dict[str, Any]) -> str:
+    # Historical Deep Scan rows carry an explicit namespaced identity so they can
+    # never collide with a Main Radar record that happens to use the same URL/DOI.
+    explicit = clean(r.get("_deep_scan_record_key"))
+    if explicit:
+        return explicit
     link = clean(r.get("link") or r.get("url"))
     if link:
         return f"link:{link}"
@@ -59,6 +64,69 @@ def record_key(r: dict[str, Any]) -> str:
         return f"doi:{doi}"
     rid = clean(r.get("id") or r.get("record_id") or r.get("fingerprint"))
     return f"id:{rid}" if rid else ""
+
+
+def historical_record_key(r: dict[str, Any]) -> str:
+    """Stable, collision-proof Deep Scan identity for a Historical Radar row.
+
+    Historical rows already have durable archive ids, so prefer those over URLs.
+    Fallbacks exist for older/manual archive rows that may not have an id.
+    """
+    rid = clean(r.get("id") or r.get("record_id") or r.get("fingerprint"))
+    if rid:
+        return f"historical:id:{rid}"
+    doi = clean(r.get("doi")).lower()
+    if doi:
+        doi = re.sub(r"^https?://(?:dx\.)?doi\.org/", "", doi)
+        return f"historical:doi:{doi}"
+    link = clean(r.get("link") or r.get("url"))
+    return f"historical:link:{link}" if link else ""
+
+
+def iter_historical_records(doc: dict[str, Any]):
+    """Yield Historical Radar rows as non-mutating, namespaced Deep Scan rows."""
+    rows = doc.get("items", []) if isinstance(doc, dict) else []
+    for raw in rows if isinstance(rows, list) else []:
+        if not isinstance(raw, dict):
+            continue
+        key = historical_record_key(raw)
+        if not key:
+            continue
+        row = dict(raw)
+        row["_deep_scan_record_key"] = key
+        row["_deep_scan_scope"] = "historical"
+        strand = clean(raw.get("strand")).upper()
+        label = f"historical_{strand.lower()}" if strand in {"A", "B", "C"} else "historical_unclassified"
+        yield label, row
+
+
+def historical_pending(
+    doc: dict[str, Any],
+    sidecar: dict[str, Any],
+) -> list[tuple[str, str, str, dict[str, Any], str]]:
+    """Return Historical Radar works still needing authoritative Deep Scan V2.
+
+    Historical work uses a separate key namespace and remains behind Main Radar in
+    scheduling; the latter policy is enforced by ``deep_scan_work_state``.
+    """
+    out: list[tuple[str, str, str, dict[str, Any], str]] = []
+    table = sidecar.get("records", {}) if isinstance(sidecar, dict) else {}
+    seen_keys: set[str] = set()
+    for strand, row in iter_historical_records(doc):
+        key = record_key(row)
+        if not key or key in seen_keys:
+            continue
+        seen_keys.add(key)
+        old = table.get(key) if isinstance(table, dict) else None
+        if isinstance(old, dict) and old.get("profile") in ACTIVE_DEEP_PROFILES:
+            continue
+        reason = (
+            "upgrade_legacy_deep_scan_to_v2"
+            if isinstance(old, dict) and old.get("profile") in LEGACY_DEEP_PROFILES
+            else "never_deep_read"
+        )
+        out.append((strand, key, source_hash(row), row, reason))
+    return out
 
 
 def identity_hash(r: dict[str, Any]) -> str:
