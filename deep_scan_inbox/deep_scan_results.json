@@ -1,0 +1,2890 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-a-20260913T233750Z-f157cdaba50f",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1093/scipol/scag041",
+      "source_hash": "1146bf80",
+      "identity_hash": "f3a07653c2c34a1a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened supplied OUP article URL https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag041/8677365; access was blocked/403 in the package retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved DOI 10.1093/scipol/scag041; OUP metadata confirmed title, Yi Ji and Xueyan Zhu, 13 May 2026, but exposed only abstract-level content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title \"The new frontier of research competition: perspectives on national AI4S strategies\"; authoritative OUP identity page was found, without accessible substantive full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with Yi Ji, Xueyan Zhu and 2026; matching publisher and bibliographic records confirmed identity but did not provide a legitimate manuscript."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Checked OUP plus legitimate repository/author-copy routes for DOI 10.1093/scipol/scag041; no accessible full article or substantive accepted manuscript was recovered."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Bounded searches using DOI fragments, title fragments and author names found citations/request-only pages but no legitimate substantive copy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_page",
+            "url": "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag041/8677365",
+            "title": "The new frontier of research competition: perspectives on national AI4S strategies",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Canonical OUP identity is confirmed, but only abstract-level evidence was accessible; no legitimate substantive manuscript was recovered after all six steps."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible after all six required recovery steps, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028/",
+      "source_hash": "40d0152e",
+      "identity_hash": "b6259baa4df5d63a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028/",
+            "title": "Stakeholders react to EP's draft reports on Horizon Europe 2028+",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "University groups respond to Parliament’s draft Horizon Europe 2028–2034 plans",
+      "reader_what": "European university associations back programme autonomy, expert governance and larger budgets while flagging unresolved design issues.",
+      "reader_why": "Their responses expose live disputes over defence research, association, simplification and links to the Competitiveness Fund.",
+      "reader_more": "The page summarises reactions from EUA, The Guild, LERU and CESAER to two European Parliament draft reports presented on 13 March 2026. Support centres on an autonomous Horizon Europe, stronger expert governance, ERC independence and higher budgets. Stakeholders also flag unresolved questions around defence R&I, association arrangements, funding design and programme implementation.",
+      "deep_analysis": {
+        "work_kind": "official policy-news synthesis",
+        "research_question": "",
+        "main_finding": "Major European university associations broadly welcome Parliament's draft direction for Horizon Europe 2028–2034 while identifying unresolved governance, funding and defence-research questions.",
+        "method_or_basis": "ERA Portal Austria synthesis of named stakeholder reactions and their published positions.",
+        "qualification": "This is a policy-news synthesis of stakeholder positions, not an evaluation of the future framework programme.",
+        "radar_relevance": "Direct evidence of current European research-policy preferences and contested design choices for the next Framework Programme.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ecas.org/cdn-cgi/l/email-protection#80e9eee6efc0e5e3e1f3aeeff2e7",
+      "source_hash": "cb75a680",
+      "identity_hash": "28bb0986343957a4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The supplied ECAS record key is a Cloudflare email-protection fragment and is not the report landing page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or identified for the ECAS short report."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery found the official ECAS publication and full PDF at https://ecas.org/wp-content/uploads/2026/06/The-Fifth-Freedom-in-the-European-Research-Area-Short-Report.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://ecas.org/wp-content/uploads/2026/06/The-Fifth-Freedom-in-the-European-Research-Area-Short-Report.pdf",
+            "title": "The Fifth Freedom in the European Research Area",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "The Fifth Freedom in the European Research Area",
+          "authors": "Giulia Sandri; Thomas Sturm",
+          "type": "policy report"
+        },
+        "unset": [],
+        "reason": "Official ECAS publication and recovered report establish the canonical report title, named authors and report type."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Survey finds researchers back a fifth freedom for knowledge in the EU",
+      "reader_what": "Survey respondents strongly support freer movement of researchers, knowledge and funding across the European Research Area.",
+      "reader_why": "Reported administrative, recognition and recruitment barriers show where national systems still fragment cross-border research careers.",
+      "reader_more": "ECAS surveyed 62 respondents between December 2025 and April 2026, drawing participation from 11 EU member states plus two non-EU institutions. The report records strong support for formal recognition of a fifth freedom and describes mobility, recognition and recruitment barriers. The authors explicitly treat the exercise as a self-selected pilot rather than a representative survey, so percentages should not be generalised to all European researchers.",
+      "deep_analysis": {
+        "work_kind": "survey-based advocacy report",
+        "research_question": "What barriers do researchers report in cross-border European careers, and do they support a fifth freedom for research?",
+        "main_finding": "Respondents strongly support formalising free movement of researchers, knowledge and funding and report administrative, recognition and recruitment barriers.",
+        "method_or_basis": "Official ECAS short report: 62 survey responses collected December 2025–April 2026, including open-text material; full report recovered.",
+        "qualification": "Self-selected pilot with limited country coverage; it is not representative of the European researcher population.",
+        "radar_relevance": "Direct evidence for the European Research Area debate over a proposed fifth freedom for research and knowledge.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/innovation-beyond-europes-borders/",
+      "source_hash": "bd61a205",
+      "identity_hash": "dafd44b632cf7d2d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/innovation-beyond-europes-borders/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/innovation-beyond-europes-borders/",
+            "title": "Innovation beyond Europe’s borders • Innovation beyond borders",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Eureka argues selective global expansion can reinforce European innovation resilience",
+      "reader_what": "Network history describes Eureka’s expansion beyond Europe while retaining industry-led, bottom-up cross-border R&D cooperation.",
+      "reader_why": "Eureka presents trusted international partnerships as strengthening competitiveness without abandoning strategic autonomy.",
+      "reader_more": "Eureka traces its evolution from a 1985 European technology-sovereignty initiative into a network spanning more than 47 countries. It highlights Globalstars, Innowwide and expanded membership as mechanisms for selective international collaboration. The piece is an institutional narrative, so claims about competitiveness and resilience are the network’s own assessment rather than independent evaluation.",
+      "deep_analysis": {
+        "work_kind": "institutional strategy/history article",
+        "research_question": "",
+        "main_finding": "Eureka presents its global expansion as a deliberate extension of a European industry-led cooperation model rather than a retreat from strategic autonomy.",
+        "method_or_basis": "Institutional history and programme examples published by Eureka.",
+        "qualification": "Self-published strategic narrative; it does not independently measure the effects of Eureka participation.",
+        "radar_relevance": "Shows how a long-running European R&I cooperation instrument is adapting global partnerships to strategic-autonomy concerns.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/open-access-publishing-platform-open-research-europe-is-entering-a-new-phase-of-operation/",
+      "source_hash": "8bc5f8d8",
+      "identity_hash": "7319244026755b70",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://era.gv.at/news-items/open-access-publishing-platform-open-research-europe-is-entering-a-new-phase-of-operation/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/news-items/open-access-publishing-platform-open-research-europe-is-entering-a-new-phase-of-operation/",
+            "title": "Open access publishing platform Open Research Europe is entering a new phase of operation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The primary source reports a concrete current European R&I policy, programme or funding development with substantive Radar relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Open Research Europe moves into a collectively funded operating model",
+      "reader_what": "Open Research Europe will expand eligibility and shift to collective support, with CERN operating the platform from autumn 2026.",
+      "reader_why": "The model embeds no-fee open publishing more broadly across European research institutions and EU-funded research.",
+      "reader_more": "The platform reports a nearly €17 million budget for 2026–2031, with European Commission co-funding of up to €10 million. National research organisations from 11 countries will support the service, and CERN will operate it from autumn 2026. The page also reports more than 1,200 articles and 6,300 authors since launch; those are platform-reported figures, not an external impact assessment.",
+      "deep_analysis": {
+        "work_kind": "current programme development",
+        "research_question": "",
+        "main_finding": "Open Research Europe is moving from its initial Commission-backed model to a collectively supported service with broader author eligibility and CERN as operator.",
+        "method_or_basis": "Official ERA policy-news page describing the announced operating and funding model.",
+        "qualification": "The future operating model and budget are announced plans; the page does not evaluate publishing quality or causal impact.",
+        "radar_relevance": "A substantive change to European open-science infrastructure and the circulation of publicly funded research.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/a-40-year-old-framework-for-global-innovation-cooperation-has-never-been-more-relevant/",
+      "source_hash": "c70a7c9a",
+      "identity_hash": "d333e52ec1d39a8e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/a-40-year-old-framework-for-global-innovation-cooperation-has-never-been-more-relevant/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/a-40-year-old-framework-for-global-innovation-cooperation-has-never-been-more-relevant/",
+            "title": "A 40-year-old framework for global innovation cooperation has never been more relevant • Innovation beyond borders",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Eureka's founder reflects on forty years of industry-led innovation cooperation",
+      "reader_what": "Interview with Eureka's originator arguing its 1985 model remains suited to current technological rivalry.",
+      "reader_why": "Claims Eureka helped preserve European chip-manufacturing capacity now central to trade and geopolitics.",
+      "reader_more": "This interview features Jacques Attali, the former adviser to President Mitterrand who with Chancellor Kohl launched Eureka in 1985 as a response to the technological challenges of that era. It notes that two predictions he made a decade ago have materialised: Eureka has expanded beyond Europe's geographic borders, and its industry-led clusters focused on information technology and decarbonisation, areas he identified as central to European strategic autonomy, have been renewed with reinforced governance and funding. The piece also claims Eureka may have played a crucial role in preserving European chip-manufacturing capacity. This is a commemorative interview published by the organisation itself, so its assessments of Eureka's historical importance are self-attributed rather than independently established.",
+      "deep_analysis": {
+        "work_kind": "commemorative interview published by the network itself",
+        "research_question": "",
+        "main_finding": "The founder argues Eureka's industry-led cooperation model has proved durable, with predicted global expansion and cluster renewal both realised, and claims a role in preserving European semiconductor manufacturing capacity.",
+        "method_or_basis": "Retrospective interview; recollection and personal assessment rather than evidence.",
+        "qualification": "Self-published by the organisation being praised; the claim about preserving chip-manufacturing capacity is asserted without supporting evidence and should not be treated as established.",
+        "radar_relevance": "Documents how an established European cooperation instrument positions itself against current strategic autonomy concerns.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/trends-in-collaborative-innovation-over-four-decades/",
+      "source_hash": "bb4ae059",
+      "identity_hash": "89a8d456f642e55b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/trends-in-collaborative-innovation-over-four-decades/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/trends-in-collaborative-innovation-over-four-decades/",
+            "title": "Trends in collaborative innovation over four decades • Innovation beyond borders",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How Eureka grew from a Western European initiative into a global network",
+      "reader_what": "Traces the network's expansion, noting Central and Eastern European participation preceded EU accession.",
+      "reader_why": "The network served as a route into international research cooperation before formal EU membership.",
+      "reader_more": "This retrospective traces four decades of the Eureka network since its 1985 founding as a flexible, industry-driven framework for international research collaboration. Its notable historical point is that Central and Eastern European countries participated in the Eureka project community well before acceding to the European Union, using the network as a bridge into international research and development cooperation. The account describes subsequent expansion from a primarily Western European initiative into a network extending across Asia, Africa and the Americas. It is published by the network itself and presents a narrative of deliberate growth rather than an evaluation of what that growth achieved.",
+      "deep_analysis": {
+        "work_kind": "organisational retrospective article",
+        "research_question": "",
+        "main_finding": "Eureka expanded from a Western European initiative to a global network, and served as a pre-accession channel through which Central and Eastern European countries joined international research cooperation.",
+        "method_or_basis": "Narrative history published by the network, illustrated with a development timeline.",
+        "qualification": "Self-published institutional history with no independent assessment; describes expansion without evidence on resulting research or economic outcomes.",
+        "radar_relevance": "Shows a non-EU cooperation channel functioning as a precursor and complement to formal EU research integration.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://merics.org/sites/default/files/2026-04/MER-RZ-Report-Embodied-AI-260422-Web.pdf",
+      "source_hash": "a273159f",
+      "identity_hash": "57dc4e42585db721",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://merics.org/sites/default/files/2026-04/MER-RZ-Report-Embodied-AI-260422-Web.pdf; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://merics.org/sites/default/files/2026-04/MER-RZ-Report-Embodied-AI-260422-Web.pdf",
+            "title": "Embodied AI: China’s ambitious path to transform its robotics industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "China’s embodied-AI push is closing hardware gaps that matter for European robotics firms",
+      "reader_what": "MERICS maps China’s humanoid-robotics policies, supply chain strengths, remaining dependencies and commercial bottlenecks.",
+      "reader_why": "It warns European suppliers could lose ground as Chinese firms localise components and combine state support with manufacturing scale.",
+      "reader_more": "The report finds China strong in industrial robotics and increasingly active in humanoids, while still dependent on Nvidia and some higher-end components. It documents state policies, firms and component markets across the embodied-AI stack. MERICS explicitly frames the trajectory as a competitive risk for European firms, but the report is strategic analysis rather than a forecast with validated outcome probabilities.",
+      "deep_analysis": {
+        "work_kind": "technology and industrial-policy report",
+        "research_question": "How far has China progressed in embodied AI and what does its emerging robotics supply chain mean for competitors?",
+        "main_finding": "China is rapidly localising humanoid-robotics hardware and leveraging manufacturing scale and policy support, although important software and high-end component dependencies remain.",
+        "method_or_basis": "MERICS China Tech Observatory desk research combining policy, company and market evidence in an official report excerpt.",
+        "qualification": "Forward-looking competitive implications for Europe are analytical judgements; humanoids remain costly and technically limited.",
+        "radar_relevance": "Directly assesses a strategic technology race in which European component suppliers and industrial capability are exposed to Chinese competition.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/esfri-sets-out-new-strategic-vision-and-priorities-for-europes-research-infrastructures/",
+      "source_hash": "cffd95b4",
+      "identity_hash": "01a1a60a204e60fd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied ERA Portal Austria page; it was a secondary, thin news item about the ESFRI paper."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied in the scanner record; the underlying official repository record later yielded DOI 10.5281/zenodo.19004501."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the official ESFRI publication page for “ESFRI Strategic Role and Future Directions”."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searching the title with ESFRI and 2026 confirmed the 13 March 2026 official record and matching Zenodo deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered official ESFRI page and Zenodo record https://zenodo.org/records/19004501 with substantive description and listed report file."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Bounded ESFRI/Zenodo searches confirmed the same strategic priorities; no richer reliably parsed full text was recovered, so the decision uses substantive official primary descriptions."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_repository_record",
+            "url": "https://zenodo.org/records/19004501",
+            "title": "ESFRI Strategic Role and Future Directions",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://www.esfri.eu/esfri-strategic-role-and-future-directions",
+            "title": "ESFRI Strategic Role and Future Directions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Secondary ERA page was reconciled to the official ESFRI/Zenodo paper. The full PDF was not reliably parsed, but substantive official primary descriptions support the policy-scope judgement after all six steps."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "ESFRI Strategic Role and Future Directions",
+          "authors": "European Strategy Forum on Research Infrastructures (ESFRI)",
+          "source": "European Strategy Forum on Research Infrastructures (ESFRI)",
+          "date": "2026-03-13",
+          "type": "policy brief"
+        },
+        "unset": [],
+        "reason": "The supplied ERA Portal item is a secondary news page; official ESFRI and Zenodo records establish the underlying paper metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ESFRI sets priorities for Europe’s next research-infrastructure governance phase",
+      "reader_what": "ESFRI prioritises foresight, ecosystem consolidation, governance and wider use of its methods across European research infrastructures.",
+      "reader_why": "The agenda is intended to shape coordination as research, technology, data and digital infrastructures converge.",
+      "reader_more": "The recovered ESFRI and Zenodo records describe a strategic paper drawing on more than two decades of infrastructure coordination. It calls for a comprehensive view linking research, technology, data and digital infrastructures and for ESFRI methods to inform future governance. The full PDF could not be reliably recovered in this run, so the decision rests on substantive official descriptions after the complete recovery ladder.",
+      "deep_analysis": {
+        "work_kind": "strategic policy brief",
+        "research_question": "",
+        "main_finding": "ESFRI proposes a broader strategic role centred on foresight, ecosystem consolidation, governance and coordination across converging European infrastructure categories.",
+        "method_or_basis": "Substantive official ESFRI publication page and Zenodo record after the full recovery ladder.",
+        "qualification": "The underlying PDF was not reliably retrievable; interpretation is limited to the substantive official descriptions rather than detailed paragraph-level analysis.",
+        "radar_relevance": "Directly concerns governance and prioritisation of Europe’s shared research-infrastructure system.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-applicant-guidelines.pdf",
+      "source_hash": "b2172926",
+      "identity_hash": "dd53c4a91d751f67",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-applicant-guidelines.pdf; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-applicant-guidelines.pdf",
+            "title": "Fast Track to the EIC Accelerator applicant guidelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-29",
+          "type": "applicant guidelines"
+        },
+        "unset": [],
+        "reason": "The official PDF version history identifies version 1.6 as published on 29 July 2026; the scanner used the later web-upload date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Applicant guidelines for the Eureka fast track into the EIC Accelerator",
+      "reader_what": "Guidelines set out how Eurostars project participants can route into EIC Accelerator funding.",
+      "reader_why": "A July 2026 amendment extends EIC Accelerator support to companies developing dual-use technologies.",
+      "reader_more": "These are applicant-facing guidelines for the Eureka Fast Track to the EIC Accelerator, the blended grant and equity instrument run under Horizon Europe by the European Innovation Council and the SMEs Executive Agency for single companies from member states and associated countries. The document covers eligibility, the assessment sequence of eligibility checks, evaluation by three independent experts and an online pitch to a three-expert panel, plus application structure, confidentiality, information security and data protection. It also gives guidance on using generative AI tools when preparing an application. The version history records that following an amendment to the 2026 EIC Work Programme dated 29 July 2026, the EIC Accelerator will support companies developing dual-use technologies.",
+      "deep_analysis": {
+        "work_kind": "official applicant guidance document",
+        "research_question": "",
+        "main_finding": "The guidelines document the fast track route and assessment process, and record a 2026 Work Programme amendment extending EIC Accelerator support to dual-use technology companies.",
+        "method_or_basis": "Procedural rules issued by the network administering the fast track.",
+        "qualification": "States process as written and gives no data on application volumes or success rates; the dual-use extension is recorded in a change log, so its detailed scope should be checked against the Work Programme itself.",
+        "radar_relevance": "Marks a defence-relevant widening of the EU's flagship innovation funding instrument.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
+      "source_hash": "8a0e027f",
+      "identity_hash": "28e9288098c8b516",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/wp-content/uploads/2026/08/fast-track-eic-accelerator-expert-guidelines.pdf",
+            "title": "Fast Track to the EIC Accelerator expert guidelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-29",
+          "type": "expert/evaluator guidelines"
+        },
+        "unset": [],
+        "reason": "The official PDF version history identifies version 1.5 as published on 29 July 2026; the scanner used the later web-upload date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Evaluator guidelines for the Eureka fast track into the EIC Accelerator",
+      "reader_what": "Companion document telling expert evaluators and panel members how to score fast track applications.",
+      "reader_why": "Shows the assessment criteria applications are actually judged against, including AI use rules.",
+      "reader_more": "This is the evaluator-facing counterpart to the applicant guidelines for the Eureka Fast Track to the EIC Accelerator. It covers how experts are selected, what they should do once selected, how to assess and score applications, and how the assessment platform works, alongside separate guidance for members of the pitching panel on session structure and assessment. It also sets out confidentiality obligations, rules on the use of generative AI by evaluators, information security and data protection. Like the applicant version it records the July 2026 amendment extending EIC Accelerator support to dual-use technologies. Earlier change log entries note revisions to funding ceilings, which should be verified against the current Work Programme rather than read from the history.",
+      "deep_analysis": {
+        "work_kind": "official evaluator guidance document",
+        "research_question": "",
+        "main_finding": "The document specifies evaluator selection, scoring procedure, panel pitching structure and conduct rules including generative AI use, and records the same 2026 dual-use extension.",
+        "method_or_basis": "Procedural rules issued by the network administering the fast track.",
+        "qualification": "Procedural content only; funding figures appear in a version change log covering multiple years and should not be read as current values without checking the Work Programme.",
+        "radar_relevance": "Reveals the criteria by which EU innovation funding decisions are actually made.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/als.2026.10055",
+      "source_hash": "0c390ae3",
+      "identity_hash": "e23583064bf6e6ec",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.cambridge.org/core/journals/asian-journal-of-law-and-society/article/regulatory-autonomy-and-ai-sovereignty-turkiye-at-a-crossroad/3F92A97C5FC7586E29A7EB4E367FF864; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.cambridge.org/core/journals/asian-journal-of-law-and-society/article/regulatory-autonomy-and-ai-sovereignty-turkiye-at-a-crossroad/3F92A97C5FC7586E29A7EB4E367FF864",
+            "title": "Regulatory Autonomy and AI Sovereignty: Türkiye at a Crossroad",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_INSUFFICIENT",
+        "reason": "The work is a Türkiye-focused legal/policy case study; the EU AI Act is a comparator/benchmark rather than the substantive European R&I object."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How a middle power balances AI innovation against regulatory control: the case of Türkiye",
+      "reader_what": "A legal case study argues AI sovereignty spans technical capacity, regulation and strategic positioning together.",
+      "reader_why": "Treats the EU AI Act as the benchmark against which Türkiye's regulatory choices are assessed.",
+      "reader_more": "The authors use Türkiye as a case for how states outside the large AI powers try to keep meaningful control over infrastructure, data, rules and technical capability at once. They set the country's approach against a comparison of global regulatory models, taking the EU AI Act as the first comprehensive benchmark and contrasting precautionary and self-regulatory styles. Their argument is that sovereignty in this field cannot be reduced to one dimension, so governance has to stay adaptable. This is legal and policy analysis rather than measurement: it offers an interpretation of strategy documents and regulation, not evidence about outcomes.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed legal/policy case study",
+        "research_question": "How does a middle power such as Türkiye reconcile AI innovation with regulatory control while maintaining strategic autonomy?",
+        "main_finding": "AI sovereignty is multi-dimensional, covering technical capability, regulatory frameworks and strategic positioning, and therefore requires adaptable rather than single-track governance approaches.",
+        "method_or_basis": "Single-country case study with comparative review of global AI regulatory frameworks; publisher abstract and full text supplied in package.",
+        "qualification": "Interpretive analysis of strategy and regulation; no empirical measurement of effects, and conclusions are specific to one country's position.",
+        "radar_relevance": "Shows how Europe's AI rulebook functions as an external benchmark for neighbouring states positioning between European and other regulatory models.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china",
+      "source_hash": "06a63a4e",
+      "identity_hash": "930ca7a446a91008",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china",
+            "title": "Europe’s research dilemma – balancing security and scientific cooperation with China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European research partnerships with China face a harder dual-use security trade-off",
+      "reader_what": "MERICS examines how China’s military-civil fusion complicates European scientific cooperation, using earth-observation research as a case.",
+      "reader_why": "Dual-use risks make blanket openness or blanket restriction costly, pushing institutions toward more discriminating research-security controls.",
+      "reader_more": "The commentary uses earth-observation satellites to illustrate how civilian scientific collaboration can generate military-relevant capabilities. It argues that European organisations need workable safeguards without abandoning beneficial cooperation. This is expert policy analysis rather than systematic measurement of incidents or policy effectiveness.",
+      "deep_analysis": {
+        "work_kind": "expert policy commentary",
+        "research_question": "How can European research organisations balance scientific cooperation with China against dual-use and security risks?",
+        "main_finding": "European research organisations face growing difficulty separating beneficial cooperation from dual-use security risks, especially in technologically sensitive fields.",
+        "method_or_basis": "MERICS expert analysis using policy context and the earth-observation satellite domain as an illustrative case.",
+        "qualification": "Analytical commentary, not a representative empirical study of European collaborations or security incidents.",
+        "radar_relevance": "Directly addresses European research security and management of scientific cooperation with China.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://merics.org/sites/default/files/2026-04/2604_MERICS%20Europe-China%20360%C2%B0_0.pdf",
+      "source_hash": "a5df9c46",
+      "identity_hash": "05c656a5e4908253",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://merics.org/sites/default/files/2026-04/2604_MERICS%20Europe-China%20360%C2%B0_0.pdf; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://merics.org/sites/default/files/2026-04/2604_MERICS%20Europe-China%20360%C2%B0_0.pdf",
+            "title": "EU Industrial Accelerator Act + Critical materials + Platform exports",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "MERICS Europe China 360°",
+          "type": "policy briefing"
+        },
+        "unset": [],
+        "reason": "The official PDF is a multi-item MERICS Europe China 360° issue; the scanner title concatenated several section topics."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "MERICS briefing tracks EU industrial conditions and critical-material dependence on China",
+      "reader_what": "A Europe China 360° issue analyses EU investment conditions and Europe’s exposure to Chinese critical-material supply.",
+      "reader_why": "Both topics link industrial competitiveness to technology transfer, local capacity and resilience of strategic supply chains.",
+      "reader_more": "One analysis examines proposed EU value-added conditions for large foreign investments under the Industrial Accelerator Act. Another warns that Europe needs faster domestic and diversified critical-mineral capacity for defence, clean energy and competitiveness. This is a multi-item policy briefing, so its sections should not be treated as one empirical study.",
+      "deep_analysis": {
+        "work_kind": "multi-item policy briefing",
+        "research_question": "",
+        "main_finding": "The issue argues that Europe is tightening conditions around strategic investment while remaining vulnerable to Chinese critical-material dependencies.",
+        "method_or_basis": "MERICS Europe China 360° briefing combining policy analysis and strategic supply-chain commentary.",
+        "qualification": "The issue contains separate analyses and updates; policy effects and future supply outcomes are not empirically established.",
+        "radar_relevance": "Direct coverage of EU industrial policy, technology transfer and critical-material resilience in competition with China.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/european-stakeholders-discuss-european-strategy-on-research-and-technology-infrastructures/",
+      "source_hash": "1e878cd5",
+      "identity_hash": "4ecf1dfe0f22aafb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://era.gv.at/news-items/european-stakeholders-discuss-european-strategy-on-research-and-technology-infrastructures/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/news-items/european-stakeholders-discuss-european-strategy-on-research-and-technology-infrastructures/",
+            "title": "European stakeholders discuss European strategy on research and technology infrastructures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European stakeholders call for a more coordinated research and technology infrastructure landscape",
+      "reader_what": "Commission, regional and research stakeholders discuss how Europe should coordinate and widen access to research and technology infrastructures.",
+      "reader_why": "Shared infrastructure governance can connect research capacity, innovation services and regional ecosystems across Europe.",
+      "reader_more": "The ERA Portal reports a 5 May 2026 Brussels seminar organised by the Commission and Committee of the Regions. Speakers stressed coordination, accessibility and links between research and technology infrastructures, with regional authorities positioned as active ecosystem actors. The page records stakeholder discussion and policy direction, not an adopted strategy or measured infrastructure outcomes.",
+      "deep_analysis": {
+        "work_kind": "official policy-event report",
+        "research_question": "",
+        "main_finding": "European stakeholders emphasised a more coordinated and accessible infrastructure landscape linking research, technology and regional innovation capacity.",
+        "method_or_basis": "Official ERA Portal report of a Commission and Committee of the Regions policy seminar.",
+        "qualification": "Discussion-stage evidence: it reports positions and priorities rather than an adopted instrument or evaluation.",
+        "radar_relevance": "Substantive European research-infrastructure governance discussion tied to access, coordination and regional innovation capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://s3.us-east-1.amazonaws.com/files.cnas.org/documents/Quantum-Industrial-Moment-03192026.pdf",
+      "source_hash": "74557566",
+      "identity_hash": "0e23a70e489c9b81",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://s3.us-east-1.amazonaws.com/files.cnas.org/documents/Quantum-Industrial-Moment-03192026.pdf; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://s3.us-east-1.amazonaws.com/files.cnas.org/documents/Quantum-Industrial-Moment-03192026.pdf",
+            "title": "Quantum's Industrial Moment",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_INSUFFICIENT",
+        "reason": "The report is centred on United States quantum industrial strategy; Europe appears mainly as an external policy constraint/comparator, not as a substantive European R&I case."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "US quantum-industrial report treats Europe mainly as an external policy constraint",
+      "reader_what": "CNAS argues the United States should accelerate quantum commercialisation, supply chains, capital formation and national-security adoption.",
+      "reader_why": "",
+      "reader_more": "The report forecasts a transition from laboratory quantum technologies toward deployable systems over the next several years and centres recommendations on US economic and security advantage. Europe appears mainly through technological-sovereignty policies and international market constraints that could affect US firms. Because the substantive policy object is the United States rather than European R&I, the work does not meet Strand A.",
+      "deep_analysis": {
+        "work_kind": "US technology and industrial-policy report",
+        "research_question": "How should the United States capture economic and national-security benefits as quantum technologies move toward commercial deployment?",
+        "main_finding": "CNAS calls for faster US commercialisation, capital formation, supply-chain development and government adoption of quantum technologies.",
+        "method_or_basis": "Policy analysis and industry assessment in a CNAS report excerpt, including market, supply-chain and geopolitical considerations.",
+        "qualification": "Forward-looking US policy report; timelines and industrial outcomes are projections rather than observed results.",
+        "radar_relevance": "Fails Strand A: Europe is treated mainly as an external policy environment and comparator within a US-centred quantum strategy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/jcms.70140",
+      "source_hash": "ff6834f3",
+      "identity_hash": "3a0dadd04d595915",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package had stored-only material for DOI 10.1111/jcms.70140 and no substantive source text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolving DOI 10.1111/jcms.70140 recovered the matching Wiley publisher article with substantive full text and canonical authorship."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1111/jcms.70140",
+            "title": "China and Limits to the European Union's Geoeconomic Turn",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How far can the EU act as a geoeconomic power against China?",
+      "reader_what": "Tests EU economic security capacity through semiconductor export controls and 5G restrictions, both national competences.",
+      "reader_why": "Shows EU geoeconomic power is constrained where security decisions remain with member states.",
+      "reader_more": "The article examines the shift from efficiency to security in EU external economic policy, often called the geoeconomic turn, using China as the test case. It concentrates on two policies at the heart of that rivalry: export controls on advanced semiconductors and restrictions on Chinese fifth-generation telecommunications equipment. Export controls are framed as offensive, aimed at constraining Chinese military and technological capability, while 5G limits are defensive, aimed at protecting critical infrastructure from information extraction or disruption. Both fall under national security and therefore under member state responsibility, which the authors describe as hard cases for EU action. The authors also observe that the EU frames the China challenge around direct risks rather than broad strategic rivalry.",
+      "deep_analysis": {
+        "work_kind": "comparative case-study analysis (peer-reviewed article)",
+        "research_question": "What capacity the EU actually has to pursue economic security and economic statecraft towards China.",
+        "main_finding": "Because export controls and 5G security remain member state competences, they are hard tests of EU geoeconomic power, and the EU frames China primarily as a source of direct risks rather than a broad strategic rival.",
+        "method_or_basis": "Full Wiley publisher article recovered through the DOI and checked against title, authors and publication date.",
+        "qualification": "Full conclusions were only partly recoverable; the balance the authors strike between economic security and economic statecraft is not fully verified.",
+        "radar_relevance": "Central to European technology security, export controls and telecommunications infrastructure policy towards China.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/20004508.2026.2648883",
+      "source_hash": "691b1356",
+      "identity_hash": "a04285f84b172bd2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package had stored-only material for DOI 10.1080/20004508.2026.2648883 and no substantive source text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolving DOI 10.1080/20004508.2026.2648883 recovered the open Taylor & Francis full article published online 28 March 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/20004508.2026.2648883",
+            "title": "Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Scandinavian research de-risking depends on policy mixes, not guidelines alone",
+      "reader_what": "Comparative analysis finds Denmark, Norway and Sweden create different conditions for university research collaboration with China.",
+      "reader_why": "Guidelines become actionable only when organisational structures, funding and coordination reinforce them.",
+      "reader_more": "The article compares de-risking instruments affecting Sino-research collaboration in Danish, Norwegian and Swedish higher education. Denmark has a more reinforced security-oriented mix, Norway a layered mix, and Sweden a less coordinated arrangement with greater institutional discretion. The authors’ main point is that implementation depends on interactions among instruments and actor locations rather than any single guideline.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed comparative policy study",
+        "research_question": "How do interactions among national de-risking instruments shape university collaboration with China in Denmark, Norway and Sweden?",
+        "main_finding": "Different combinations of nodal and organisational instruments produce distinct implementation conditions; guidelines alone do not determine university practice.",
+        "method_or_basis": "Comparative policy analysis coding instruments by type, function and actor locus across Denmark, Norway and Sweden; full publisher article recovered.",
+        "qualification": "Comparative governance analysis of three Scandinavian systems; it does not directly measure security outcomes from the policies.",
+        "radar_relevance": "Direct empirical analysis of European research-security governance for collaboration with China.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/14650045.2026.2661676",
+      "source_hash": "4df199b5",
+      "identity_hash": "492853df073d42f7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package had stored-only material for DOI 10.1080/14650045.2026.2661676 and no substantive source text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolving DOI 10.1080/14650045.2026.2661676 recovered the open Taylor & Francis full article and matching institutional repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/14650045.2026.2661676",
+            "title": "The European Union’s Approach to Strategic Technology Governance: The Case of AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU AI regulation shows a strategic turn in technology governance",
+      "reader_what": "The article maps EU AI governance across cooperation, legal force, stakeholder roles and domestic-versus-international drivers.",
+      "reader_why": "It shows security and geopolitical rivalry increasingly shaping a regulatory model once focused mainly on economic and societal effects.",
+      "reader_more": "The authors analyse the EU’s AI regulatory approach through four dimensions and trace a shift toward strategic and security concerns. They characterise the emerging model as largely unilateral and legally binding, with extensive consultation and stronger geopolitical drivers. The paper is a governance analysis of the regulatory process and outcome so far, not an evaluation of the AI Act’s effects.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed governance analysis",
+        "research_question": "How has the EU positioned itself in AI governance as strategic technologies become embedded in geopolitical competition?",
+        "main_finding": "EU AI governance has shifted toward a binding, strategically conscious regulatory approach shaped increasingly by geopolitical and security concerns.",
+        "method_or_basis": "Conceptual four-dimension framework applied systematically to the EU AI regulatory process; full publisher article recovered.",
+        "qualification": "Analyses regulatory design and actorness, not implementation outcomes or compliance effects.",
+        "radar_relevance": "Direct analysis of EU strategic-technology governance and the geopoliticisation of AI regulation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s12961-026-01514-0",
+      "source_hash": "5ab2d2f8",
+      "identity_hash": "9952d838f41ac673",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://link.springer.com/article/10.1186/s12961-026-01514-0; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1186/s12961-026-01514-0",
+            "title": "3Rs principles for biomedical research in Africa: Evidence, challenges, early career researchers’ perspectives, and pathways for One Health research governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_INSUFFICIENT",
+        "reason": "The empirical study concerns biomedical research practice in Africa; European collaborators are incidental and do not make Europe the substantive research or policy setting."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Awareness and use of the 3Rs animal research principles in African biomedical research",
+      "reader_what": "A review found seven African studies reporting the 3Rs, and most surveyed early-career researchers were unfamiliar with them.",
+      "reader_why": "",
+      "reader_more": "The 3Rs are replacement, reduction and refinement, the standard framework for ethical animal research. A structured search of PubMed Central and EBSCOhost covering 2001 to 2022 found only seven studies from six African countries explicitly reporting them, mostly rodent work on drug and nutrient efficacy, toxicity mitigation, behaviour, antivenom and environmental health. A survey of 80 purposively selected early-career researchers and professionals, focused on The Gambia, found 86 percent unfamiliar with the 3Rs and over 65 percent lacking relevant training. Education level was associated with prior training in animal sample collection. The survey is small and purposive, so it indicates the scale of the gap rather than measuring it representatively.",
+      "deep_analysis": {
+        "work_kind": "empirical study combining literature review and survey",
+        "research_question": "How far are the 3Rs principles reported and understood in African biomedical research?",
+        "main_finding": "Explicit reporting of the 3Rs is rare in the published African literature, and awareness among surveyed early-career researchers is low.",
+        "method_or_basis": "Structured literature search (2001-2022) plus a cross-sectional survey of 80 early-career researchers, analysed with Fisher's exact test",
+        "qualification": "Only seven eligible studies were found and the survey was small, purposive and concentrated in The Gambia.",
+        "radar_relevance": "Fails Strand A: the empirical study concerns African biomedical research; European collaborators are incidental rather than a substantive European R&I focus.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s40821-026-00362-w",
+      "source_hash": "cb30ed55",
+      "identity_hash": "dd7b300b4f308e21",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://link.springer.com/article/10.1007/s40821-026-00362-w; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s40821-026-00362-w",
+            "title": "Green patenting within R&D host regions: technology sourcing and reverse spillover effects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Eurasian Economic Review"
+        },
+        "unset": [],
+        "reason": "The publisher page gives the journal name as Eurasian Economic Review; the scanner source contains a formatting artefact."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Corporate research units patent more green technology when the surrounding region already does",
+      "reader_what": "Across 118 European regions, host-region green innovation intensity predicts more green patents by resident corporate research units.",
+      "reader_why": "Policy implication: attracting R&D investment strengthens regional green knowledge bases and cumulative technological capabilities.",
+      "reader_more": "The sample covers 231 leading corporate research spenders with inventive activity spread across 118 European regions between 2000 and 2018. Using fixed-effects logistic and Poisson models, with a control function approach to address reverse causation, the authors find that higher green innovation intensity in a host region is associated with both whether and how many green patents the local research unit files. The association holds only under specific conditions: the host region is foreign to the firm, lies in Europe's core, is environmentally polluting, and regulates more strictly than the firm's home country. Knowledge in the region itself, rather than activity in neighbouring regions, drives the pattern. Patents measure inventive output imperfectly and the data end in 2018.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical study",
+        "research_question": "Does green knowledge embedded in a host region shape the green innovation of multinational R&D units located there?",
+        "main_finding": "Host-region green innovation intensity is significantly associated with both the occurrence and the count of green patents from resident corporate R&D units, indicating reverse technological spillovers from local context into corporate research, but only where the region is foreign, core, environmentally brown and more strictly regulated than the firm's home country.",
+        "method_or_basis": "Two-step econometric strategy with conditional fixed-effects logistic and Poisson models plus a control function approach and robustness checks, on 231 top R&D firms across 118 European regions, 2000-2018; publisher full text supplied.",
+        "qualification": "Results are conditional on specific host-region characteristics, rest on patents as an imperfect proxy for innovation, and remain observational despite endogeneity corrections; data end in 2018.",
+        "radar_relevance": "Bears on whether attracting corporate R&D into European regions builds local green technological capability, a live question for regional and industrial policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1038/s41467-026-73294-8",
+      "source_hash": "b6ce6bc4",
+      "identity_hash": "4db18413908d4718",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.nature.com/articles/s41467-026-73294-8; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.nature.com/articles/s41467-026-73294-8",
+            "title": "A self-reliance framework for identifying strategic advanced materials",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A self-reliance index maps European material dependencies against technology performance",
+      "reader_what": "Researchers combine import dependence, recycling and supplier concentration to score European autonomy across advanced-material technologies.",
+      "reader_why": "The framework identifies comparable-performing substitutes that could reduce reliance on heavily imported elements.",
+      "reader_more": "The study links a European self-reliance index for elements, compounds and devices to performance data across conductors, semiconductors, dielectrics, batteries and photovoltaics. It reports that high-performing materials using heavily imported elements often have European-sourced alternatives with comparable performance. The framework is a prioritisation tool; substitution feasibility still depends on scale, cost and application-specific engineering beyond the index.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed methods and materials study",
+        "research_question": "Which advanced materials combine high technological performance with greater European supply self-reliance?",
+        "main_finding": "A multi-factor self-reliance index reveals potential European-sourced substitutes for many high-performing materials dependent on imported elements.",
+        "method_or_basis": "Index construction using import dependence, recycling rates and supplier concentration, linked to state-of-the-art performance data across advanced-material classes.",
+        "qualification": "The index is a screening framework rather than proof that identified substitutes can be deployed economically or at scale.",
+        "radar_relevance": "Provides an evidence-based tool for European technological sovereignty and strategic-material supply-chain decisions.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://arxiv.org/abs/2606.07536",
+      "source_hash": "efffa20e",
+      "identity_hash": "11e227fd02610a69",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied arXiv record https://arxiv.org/abs/2606.07536; it confirmed identity and abstract but the admission decision required the substantive report."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved arXiv DOI 10.48550/arXiv.2606.07536 to the same repository record and author metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery confirmed the matching Future Society report and arXiv deposit."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus author/year checks matched the April 2026 report and its arXiv submission history."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the complete 105-page repository PDF at https://arxiv.org/pdf/2606.07536 and used it as substantive evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://arxiv.org/pdf/2606.07536",
+            "title": "Beware of GeeksBearing Gifts: Building True EU Frontier AI Sovereignty",
+            "evidence_used": true
+          },
+          {
+            "kind": "author_organisation_page",
+            "url": "https://thefuturesociety.org/eu-frontier-ai-sovereignty-report",
+            "title": "EU Frontier AI Sovereignty Report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Nick Moës, Toni Lorente, Amin Oueslati, Jonathan Smith, Robin Staes-Polet, Radina Kraeva"
+        },
+        "unset": [],
+        "reason": "The official arXiv record gives Jonathan Smith without the scanner-added middle initial."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Framework maps EU frontier-AI sovereignty across the full technology stack",
+      "reader_what": "The report maps 92 EU initiatives against sovereignty pillars, stack layers and components of frontier AI capability.",
+      "reader_why": "It exposes dependencies that single interventions can miss when compute, models, infrastructure, capital and governance are assessed separately.",
+      "reader_more": "The authors propose a matrix spanning five sovereignty pillars and five technology-stack layers, broken into components and subcomponents. They use it to classify 92 initiatives from four major Commission communications and illustrate the framework with the AI Gigafactory. The report argues that EU frontier AI remains structurally dependent on US and Chinese capabilities. It is a policy framework and inventory, not a causal evaluation of the initiatives.",
+      "deep_analysis": {
+        "work_kind": "policy framework and initiative mapping report",
+        "research_question": "How can policymakers assess EU frontier-AI sovereignty across the whole value chain rather than through isolated interventions?",
+        "main_finding": "Mapping 92 initiatives across a multi-layer sovereignty framework reveals fragmented coverage and persistent dependence across key frontier-AI capabilities.",
+        "method_or_basis": "Author-developed 5-by-5 sovereignty/technology-stack framework applied to 92 initiatives, with an AI Gigafactory case illustration.",
+        "qualification": "Framework classifications and dependence estimates support prioritisation but do not measure the causal effect of individual EU initiatives.",
+        "radar_relevance": "Directly addresses EU frontier-AI strategic autonomy and offers a structured policy-assessment framework.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1057/s41307-026-00465-z",
+      "source_hash": "9cb3c7e9",
+      "identity_hash": "fe9a9185f9b0bf02",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://link.springer.com/article/10.1057/s41307-026-00465-z; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1057/s41307-026-00465-z",
+            "title": "The Neo-Academic Cold War: Political Traumas and Transnational Paranoia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Argues a new academic cold war is fragmenting global science into semi-autonomous blocs",
+      "reader_what": "Argues multipolar rivalry has replaced bipolar competition, splitting science cooperation into semi-autonomous silos.",
+      "reader_why": "Claims Europe and China gain from declining US scientific capability and protectionist policy.",
+      "reader_more": "This paper argues that an emerging new cold war has produced a neo-academic cold war, structurally different from the last one. Where the previous era featured bipolar US-Soviet competition with separate scientific ecosystems, the author describes today's as multipolar, with semi-autonomous silos of transnational science cooperation and science diplomacy. He traces this to a sequence of global shocks: the September 2001 attacks, war and economic displacement, the rise of neonationalism and illiberal democracies, Russia and China re-emerging as adversaries to the US and EU, Brexit, the pandemic, and the second Trump presidency. He identifies China and Europe as beneficiaries of declining American scientific capability and protectionism, and open science and global problem-solving capacity as the losers.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed interpretive essay",
+        "research_question": "How geopolitical rivalry is reshaping transnational science cooperation, and who gains and loses.",
+        "main_finding": "Global science is fragmenting into semi-autonomous cooperation silos under multipolar rivalry, with China and Europe positioned as relative beneficiaries of US decline and open science and collective problem-solving as the principal casualties.",
+        "method_or_basis": "Historical and interpretive analysis linking a sequence of geopolitical events to changes in academic cooperation; no systematic data.",
+        "qualification": "An argued thesis rather than measured evidence; the winners-and-losers claim is the author's judgement and is not tested against collaboration or output data.",
+        "radar_relevance": "Directly examines fragmentation of global science and argues Europe may gain relative room as US scientific openness and capability weaken.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s44443-026-01108-4",
+      "source_hash": "9dfc90fe",
+      "identity_hash": "be3aa6cf4863d7aa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://link.springer.com/article/10.1007/s44443-026-01108-4; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s44443-026-01108-4",
+            "title": "When less data is better: Exploratory privacy-by-design in AI-based human resource analytics based on synthetic data",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Removing personal identifiers made AI staff evaluations more consistent in a synthetic test",
+      "reader_what": "Stripping identifying attributes kept scores consistent while reducing variation linked to candidate identity.",
+      "reader_why": "Gives technical support to the data minimisation principle already required under EU law.",
+      "reader_more": "This proof-of-concept study tests whether removing personal identifiers from human resources data changes how large language models evaluate employees, using self-hosted open models as a security layer and a synthetic dataset. Two experiments covered automated redaction of identifying information and the effect of pseudonymisation on model-generated promotion suitability scores. Removing protected attributes preserved overall consistency of scores while reducing identity-linked variation. Most evaluations, 88 percent, were unaffected by identifier visibility, but 12 percent shifted, and Bayesian modelling identified geographic region as the strongest factor linked to that variation, with some non-European profiles scoring lower in certain conditions. The authors stress these are exploratory results needing validation on real data.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed proof-of-concept computational study",
+        "research_question": "Whether removing personal identifiers, done for regulatory compliance, affects the utility and fairness of AI-generated human resources evaluations.",
+        "main_finding": "Identifier removal maintained overall scoring consistency while reducing identity-conditioned variation; 12 percent of evaluations still shifted with identifier visibility, and geographic region was the strongest associated factor, with some non-European profiles scoring lower under certain conditions.",
+        "method_or_basis": "Two experiments on a synthetic multinational corporation dataset using self-hosted open large language models, with predictive modelling and Bayesian dependency analysis.",
+        "qualification": "The authors state clearly that this is exploratory evidence on synthetic data requiring validation on real enterprise datasets, not a definitive empirical conclusion; the on-premise architecture recommendation follows from their setup rather than a comparison of alternatives.",
+        "radar_relevance": "Tests whether GDPR data minimisation requirements are compatible with useful AI systems in employment decisions.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:http://45.135.59.116/impact/slovenia-advancing-3d-stem-cell-research/",
+      "source_hash": "28093727",
+      "identity_hash": "67cb7f6cf39765b7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied IP-address mirror contained matching Eureka story text but was not the canonical host."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this Eureka impact story."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the canonical Eureka page https://www.eurekanetwork.org/impact/slovenia-advancing-3d-stem-cell-research/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_page",
+            "url": "https://www.eurekanetwork.org/impact/slovenia-advancing-3d-stem-cell-research/",
+            "title": "Slovenia: Advancing 3D stem cell research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Eureka project automated 3D stem-cell production for more reproducible scale-up",
+      "reader_what": "A Slovenian-Austrian project developed automation for 3D mesenchymal stem-cell culture to reduce manual variability and scale production.",
+      "reader_why": "The project links cross-border R&D funding with commercialisation and regional biotech capability.",
+      "reader_more": "Eureka’s impact story describes Auto3DMSC, a collaboration that automated labour-intensive 3D stem-cell workflows. The project ran from 2020 to 2023 with a reported cost of about €1.4 million and combined Slovenian and Austrian partners. Commercialisation and job claims come from the funder’s own impact story and should not be read as independently evaluated effects.",
+      "deep_analysis": {
+        "work_kind": "funder-published project impact story",
+        "research_question": "",
+        "main_finding": "The project developed an automated platform intended to make 3D mesenchymal stem-cell culture more reproducible and scalable.",
+        "method_or_basis": "Official Eureka project impact narrative recovered from the canonical Eureka page.",
+        "qualification": "Technical and commercial outcomes are reported by the funder and project participants rather than independently evaluated.",
+        "radar_relevance": "Concrete example of cross-border European R&D and regional innovation funding applied to biotechnology scale-up.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/impact/malta-microbiome-insights-to-boost-healthy-ageing/",
+      "source_hash": "a0ac5b23",
+      "identity_hash": "2059c92ff40b4049",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/impact/malta-microbiome-insights-to-boost-healthy-ageing/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/impact/malta-microbiome-insights-to-boost-healthy-ageing/",
+            "title": "Malta: Microbiome insights to boost healthy ageing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Maltese and UK companies build a gut microbiome diagnostic for dementia",
+      "reader_what": "Cross-border project developed a microbiome sequencing platform to identify dementia and bowel disease biomarkers.",
+      "reader_why": "Illustrates a small member state using international funding to enter a specialised biotech niche.",
+      "reader_more": "This is a funder case study of DPHAGE, a Eureka project between the Maltese company The BioArte and United Kingdom-based TopMD. The project built a diagnostic platform using full-length 16S ribosomal RNA microbiome sequencing to identify biomarkers linked to dementia and irritable bowel syndrome, with the aim of supporting individually tailored treatment plans. A later phase validated the platform and its sequencing workflows in clinical testing, recruiting over 160 participants including patients with Alzheimer's, Parkinson's and dementia with Lewy bodies. The account is written by the funding network and reports project milestones rather than independently assessed clinical performance.",
+      "deep_analysis": {
+        "work_kind": "funder-published project case study",
+        "research_question": "",
+        "main_finding": "A bilateral Eureka project produced a microbiome sequencing diagnostic platform for dementia and irritable bowel syndrome, which progressed to clinical validation with over 160 recruited participants.",
+        "method_or_basis": "Promotional case study by the funding network, drawing on project reporting and a participant quotation.",
+        "qualification": "Written by the funder to demonstrate programme impact, so it reports progress without independent evaluation of diagnostic accuracy or clinical adoption.",
+        "radar_relevance": "Shows how intergovernmental innovation funding supports biotech capability in a small member state.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:http://45.135.59.116/blueprint-for-a-better-tomorrow/innovation-by-design-how-eureka-clusters-strengthen-global-value-chains/",
+      "source_hash": "5b330e62",
+      "identity_hash": "9ad9496f90124a1f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied IP-address mirror contained matching Eureka text but was not the canonical host."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this Eureka institutional article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the canonical Eureka page https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/innovation-by-design-how-eureka-clusters-strengthen-global-value-chains/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_page",
+            "url": "https://www.eurekanetwork.org/blueprint-for-a-better-tomorrow/innovation-by-design-how-eureka-clusters-strengthen-global-value-chains/",
+            "title": "Innovation by design: how Eureka Clusters strengthen global value chains",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How industry-led clusters support pre-competitive research among commercial rivals",
+      "reader_what": "Describes clusters letting competing firms collaborate on pre-competitive research while competing downstream.",
+      "reader_why": "Presents trusted cluster communities as a way to share risk across fragmented supply chains.",
+      "reader_more": "This article argues that fragmented supply chains, geopolitical tension and industrial competition have pushed governments to reconsider how research translates into economic value, and presents the Eureka Clusters model as an answer: structured international collaboration that is industry-led and aligned with market realities and national priorities. The mechanism described is that companies, research institutes and smaller firms work together on pre-competitive research while continuing to compete for market share downstream, producing faster innovation and shared risk within trusted cluster communities. Note that this record's stored address is a bare IP rather than the network's domain, which suggests the scanner captured a mirror or staging host; the content matches the network's published material.",
+      "deep_analysis": {
+        "work_kind": "organisational thought-leadership article",
+        "research_question": "",
+        "main_finding": "The cluster model is presented as enabling pre-competitive collaboration between firms that remain downstream competitors, sharing risk and speeding innovation across value chains.",
+        "method_or_basis": "Descriptive argument published by the network, supported by quotations from partner agency representatives.",
+        "qualification": "Self-published advocacy without evaluation evidence; the record's URL is an unresolved IP address rather than the canonical domain, so the capture provenance is uncertain.",
+        "radar_relevance": "Describes a governance model for collaborative research across borders relevant to European value chain resilience.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurekanetwork.org/impact/ukraine-within-eurekas-innovation-landscape/",
+      "source_hash": "a9ae1f6a",
+      "identity_hash": "d53f805e5682f756",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eurekanetwork.org/impact/ukraine-within-eurekas-innovation-landscape/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eurekanetwork.org/impact/ukraine-within-eurekas-innovation-landscape/",
+            "title": "Ukraine within Eureka’s innovation landscape",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Ukraine's participation in Eureka as a route into European innovation networks",
+      "reader_what": "Describes Ukraine's membership since 2006 as a channel for internationalising its research system during war.",
+      "reader_why": "Offers access to partners and markets that fragmented national funding could not provide alone.",
+      "reader_more": "This funder article describes Ukraine's involvement in the Eureka network, which it joined in 2006 to overcome barriers to international research cooperation and connect its researchers with European partners. It states that Ukrainian organisations had faced limited access to global markets, fragmented funding for applied research and insufficient international visibility, which slowed commercialisation. Membership is presented as boosting integration into the European research and innovation ecosystem, strengthening research capacity and raising Ukraine's visibility as an innovation hub, with a Ukrainian ministry official quoted describing it as a resource for internationalisation and post-war recovery. The piece is promotional and offers no participation figures or outcome data.",
+      "deep_analysis": {
+        "work_kind": "funder-published country profile article",
+        "research_question": "",
+        "main_finding": "Ukraine has used Eureka membership since 2006 as a mechanism for internationalising its research system, framed as supporting capacity, visibility and post-war recovery.",
+        "method_or_basis": "Promotional article by the network incorporating a statement from a Ukrainian ministry official.",
+        "qualification": "Self-published advocacy with no project counts, funding figures or measured outcomes; the barriers described and benefits claimed are asserted rather than evidenced.",
+        "radar_relevance": "Concerns integration of a candidate country's research system into European networks during wartime.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09654313.2026.2693155",
+      "source_hash": "2bdb7514",
+      "identity_hash": "3ce17cebcc1bbac7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package could not retrieve the supplied Taylor & Francis article URL for DOI 10.1080/09654313.2026.2693155."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved DOI 10.1080/09654313.2026.2693155; publisher metadata confirmed the article identity but did not expose accessible substantive full text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title \"Characterizing collaboration dynamics in a social innovation ecosystem: exploring horizon Europe as a regional booster\"; official Taylor & Francis listing confirmed the work but no open full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus author/year searches confirmed the 2026 European Planning Studies article and its Horizon Europe network-analysis scope."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Checked Taylor & Francis, University of Zaragoza repository routes and legitimate manuscript sources; the repository record did not yield an accessible substantive manuscript and ResearchGate was request-only."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Bounded searches using DOI, distinctive title fragments and author names found author/index descriptions but no legitimate substantive results text sufficient for admission."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_page",
+            "url": "https://doi.org/10.1080/09654313.2026.2693155",
+            "title": "Characterizing collaboration dynamics in a social innovation ecosystem: exploring Horizon Europe as a regional booster",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Canonical European Planning Studies identity and network-analysis scope are confirmed, but substantive results text remained inaccessible after the full recovery ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible after all six required recovery steps, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/input-note-research-security-as-a-collective-responsibility-empowering-universities-enabling-europe/",
+      "source_hash": "aacf48df",
+      "identity_hash": "416ad61bdbd7e9fa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied CESAER publication page was a thin landing page for the input note."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to the CESAER input note."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery found the official CESAER full PDF https://www.cesaer.org/content/5-operations/2025/20251027-cesaer-input-note-research-security.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2025/20251027-cesaer-input-note-research-security.pdf",
+            "title": "Research security as a collective responsibility: empowering universities, enabling Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Research security as a collective responsibility: empowering universities, enabling Europe",
+          "date": "2025-10-27",
+          "type": "policy input note"
+        },
+        "unset": [],
+        "reason": "CESAER’s official publication and PDF show the input note was published on 27 October 2025; the scanner used a later page/ingestion date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CESAER frames research security as a shared responsibility across universities and governments",
+      "reader_what": "The input note combines university practices with requests for proportionate European and national research-security support.",
+      "reader_why": "It argues safeguards work best when researchers and institutions receive capacity, guidance and consistent rules rather than blanket restrictions.",
+      "reader_more": "CESAER’s recovered input note sets out five areas for strengthening university research security, including institutional foundations, researcher empowerment, responsible collaboration and a European level playing field. It treats openness and security as mutually reinforcing rather than opposing goals. This is a university-network position and practice note, not an evaluation of which safeguards reduce risk most effectively.",
+      "deep_analysis": {
+        "work_kind": "university-network policy input note",
+        "research_question": "",
+        "main_finding": "CESAER calls for proportionate, coordinated research-security safeguards that empower universities and researchers while preserving openness and responsible collaboration.",
+        "method_or_basis": "Official CESAER full input note recovered from the publisher PDF.",
+        "qualification": "Stakeholder position and best-practice guidance rather than comparative evaluation of security interventions.",
+        "radar_relevance": "Direct contribution to European research-security policy and university implementation practice.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/australia/eu-australia-agreement/factsheet-eu-australia-free-trade-agreement-enhancing-trade-and-investment-critical-raw-materials_en",
+      "source_hash": "1d6fe292",
+      "identity_hash": "b5f37cddd000f912",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/australia/eu-australia-agreement/factsheet-eu-australia-free-trade-agreement-enhancing-trade-and-investment-critical-raw-materials_en; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/australia/eu-australia-agreement/factsheet-eu-australia-free-trade-agreement-enhancing-trade-and-investment-critical-raw-materials_en",
+            "title": "Factsheet - EU-Australia Free Trade Agreement: Enhancing trade and investment in critical raw materials",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU-Australia trade deal links critical-material supply to European green, digital and defence capacity",
+      "reader_what": "The factsheet describes trade, investment and sustainability provisions intended to deepen EU-Australia critical-raw-material value chains.",
+      "reader_why": "Diversified Australian supply and joint investment are presented as reducing strategic exposure in technologies dependent on critical materials.",
+      "reader_more": "The Commission factsheet says the agreement improves establishment and non-discrimination for EU investors and enables closer cooperation on critical-material projects. It also highlights environmental assessment, responsible mining and indigenous rights commitments. This is an official agreement factsheet describing negotiated provisions and intended benefits, not evidence that supply security has already improved.",
+      "deep_analysis": {
+        "work_kind": "official trade-agreement factsheet",
+        "research_question": "",
+        "main_finding": "The EU-Australia agreement creates trade, investment and cooperation provisions aimed at integrating critical-material value chains while attaching sustainability conditions.",
+        "method_or_basis": "Primary European Commission factsheet on the negotiated free-trade agreement.",
+        "qualification": "Describes legal provisions and intended benefits; effects on supply diversification, prices or resilience remain prospective.",
+        "radar_relevance": "Direct connection between EU trade policy and strategic material inputs for green, digital and defence technologies.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/research-infrastructures/finlands-memberships-in-international-research-infrastructures/",
+      "source_hash": "be84ac9d",
+      "identity_hash": "48f3caa56a10d8bc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/research-infrastructures/finlands-memberships-in-international-research-infrastructures/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/research-infrastructures/finlands-memberships-in-international-research-infrastructures/",
+            "title": "Finland’s memberships in international research infrastructures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland maps its memberships across shared European and international research infrastructures",
+      "reader_what": "The inventory lists Finland’s treaty and agreement-based memberships across major scientific, data, computing and facility infrastructures.",
+      "reader_why": "Membership gives Finnish research organisations routes into shared capabilities that no single national system could easily replicate.",
+      "reader_more": "The Research Council of Finland page lists memberships including CERN, multiple ERICs, EuroHPC-related infrastructure, EMBL, ESO and other international facilities. Most memberships sit within the education and science administration, with some supervised by other ministries. It is an authoritative inventory, not an assessment of utilisation, costs or scientific returns from each membership.",
+      "deep_analysis": {
+        "work_kind": "official research-infrastructure membership inventory",
+        "research_question": "",
+        "main_finding": "Finland participates in a broad portfolio of European and international research infrastructures through treaties and other formal agreements.",
+        "method_or_basis": "Official Research Council of Finland inventory of named infrastructure memberships and national links.",
+        "qualification": "Administrative inventory only; it does not compare usage, value for money or research outcomes across infrastructures.",
+        "radar_relevance": "Direct evidence of how one EU member state accesses and finances shared European research infrastructure capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security/",
+      "source_hash": "2a6de592",
+      "identity_hash": "725d3494535354ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.aka.fi/en/from-research-to-society/responsible-science/research-security/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.aka.fi/en/from-research-to-society/responsible-science/research-security/",
+            "title": "Research security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finnish research funder's policy on security risks in international collaboration",
+      "reader_what": "Finnish law obliges the funder to address research security while preserving researchers' freedom to choose topics.",
+      "reader_why": "Shows how a funder reconciles security screening with academic freedom in statute.",
+      "reader_more": "This page sets out the Research Council of Finland's overall position on research security, distinct from its detailed application guidance. The council states it is obliged by law to ensure research security risks are addressed in funded projects, collaborations and the use of results, while the same law specifies that security considerations must not restrict a researcher's choice of topic or methods. It defines research security as anticipating and managing risks in international collaboration, and identifies three categories: transfer of critical knowledge and technology enabling military or intelligence use, harmful interference such as disinformation or induced self-censorship, and uses undermining fundamental rights or European values. Responsibility for the assessment rests with the applicant.",
+      "deep_analysis": {
+        "work_kind": "funding agency policy statement",
+        "research_question": "",
+        "main_finding": "Finnish law requires the national research funder to address research security across funded projects and its own international cooperation, while explicitly barring security considerations from restricting researchers' choice of topic or method.",
+        "method_or_basis": "Statement of statutory obligation and funder policy.",
+        "qualification": "A policy description rather than evidence about implementation; how the balance between security screening and academic freedom works in practice is not addressed.",
+        "radar_relevance": "Documents how research security obligations are being written into national funding law in an EU member state.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.interface-eu.org/publications/download/germany-case-study",
+      "source_hash": "cdd90158",
+      "identity_hash": "d7a8d16459728106",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.interface-eu.org/publications/download/germany-case-study; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.interface-eu.org/publications/download/germany-case-study",
+            "title": "Germany’s AI Divide",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Germany has Europe's largest AI workforce but distributes it unevenly",
+      "reader_what": "Analysis of 117,000 profiles finds AI talent split between southern industry and startup-heavy Berlin and Hamburg.",
+      "reader_why": "Attracting, retaining and directing AI talent are three separate problems needing different policies.",
+      "reader_more": "This data brief maps Germany's AI workforce of roughly 117,000 people, about double Italy's, across sixteen states and many industries. It finds a tension between scale and concentration: Berlin has the densest AI workforce relative to population, while Bavaria and Baden-Wurttemberg hold the largest absolute numbers. Internationally trained professionals tend to enter through startups in cities like Berlin and Hamburg rather than the southern industrial firms, so policies to attract foreign researchers are distinct from building pipelines into legacy industry. Talent broadly tracks the federal AI strategy's priority sectors, with strong representation in manufacturing and robotics, but healthcare is a marked exception at roughly 3,500 professionals, about three percent of the total.",
+      "deep_analysis": {
+        "work_kind": "think tank data brief",
+        "research_question": "Whether Germany's AI talent base is located in the sectors and regions where the country could realistically compete.",
+        "main_finding": "Germany's AI workforce is large but unevenly organised, with retention of domestic graduates, recruitment from abroad and distribution across priority sectors constituting three distinct problems; healthcare in particular is badly under-supplied despite being a stated national priority.",
+        "method_or_basis": "Analysis of approximately 117,000 talent profiles, classified by sector and state, with estimated talent origins.",
+        "qualification": "Based on online professional profiles, which approximate rather than measure the workforce; the estimation of where people were trained is inferred, and the brief is descriptive rather than causal.",
+        "radar_relevance": "Maps the human capital base underlying European AI capability in the EU's largest economy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/marie-sklodowska-curie-actions-research-talent-is-europes-strategic-advantage/",
+      "source_hash": "5c535f22",
+      "identity_hash": "d69ef8ee4c77df4a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied CESAER page was a thin publication landing page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this joint statement."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery found the official full joint-statement PDF https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf",
+            "title": "Marie Skłodowska-Curie Actions: Research talent is Europe’s strategic advantage",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "joint statement"
+        },
+        "unset": [],
+        "reason": "The recovered CESAER PDF is explicitly a joint stakeholder statement rather than a research paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "University network asks leaders to protect and scale the Marie Curie programme",
+      "reader_what": "CESAER calls for MSCA to stay bottom-up and research-driven, with greater impact in the next Horizon Europe.",
+      "reader_why": "Adds university-sector weight to keeping researcher funding open rather than thematically steered.",
+      "reader_more": "The recovered full joint statement asks EU leaders to preserve MSCA as a research programme, retain bottom-up and field-open design, and scale investment in research careers. It frames researcher mobility and talent development as part of Europe’s strategic capacity. The document is a stakeholder position signed by university and research organisations, not evidence that any proposed funding change will improve outcomes.",
+      "deep_analysis": {
+        "work_kind": "stakeholder position statement",
+        "research_question": "",
+        "main_finding": "CESAER calls for the Marie Sklodowska-Curie Actions to be preserved as a bottom-up, research-driven careers programme and given greater scale in the next Framework Programme.",
+        "method_or_basis": "Official CESAER full joint-statement PDF recovered from the publication page.",
+        "qualification": "Stakeholder advocacy statement rather than programme evaluation; it argues for policy choices and funding priorities.",
+        "radar_relevance": "Feeds the FP10 debate on how researcher funding should be designed.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/era/era-in-austria/national-era-action-plan-2026-2028/field-of-action-3/initiative-32-strengthen-research-security/",
+      "source_hash": "1f9409bf",
+      "identity_hash": "8175fea7be062c0f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://era.gv.at/era/era-in-austria/national-era-action-plan-2026-2028/field-of-action-3/initiative-32-strengthen-research-security/; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/era/era-in-austria/national-era-action-plan-2026-2028/field-of-action-3/initiative-32-strengthen-research-security/",
+            "title": "Initiative 3.2. Strengthen Research Security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The primary source reports a concrete current European R&I policy, programme or funding development with substantive Radar relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Austria launches a national ERA initiative to strengthen research security",
+      "reader_what": "Austria’s 2026–2028 ERA plan creates coordination, awareness and risk-management actions for international scientific cooperation.",
+      "reader_why": "The initiative connects EU recommendations with practical risk assessment and capacity building in Austrian research organisations.",
+      "reader_more": "The initiative is part of Austria’s National ERA Action Plan 2026–2028. It aims to increase risk awareness, participate actively in EU fora, adapt EU recommendations nationally and support risk-management measures in universities, research organisations and research-performing companies. Expected outcomes are stated objectives, not demonstrated effects.",
+      "deep_analysis": {
+        "work_kind": "current national policy initiative",
+        "research_question": "",
+        "main_finding": "Austria has established an ERA-linked research-security initiative focused on coordination, EU-national exchange, awareness and institutional risk-management capacity.",
+        "method_or_basis": "Official Austrian ERA Action Plan initiative page.",
+        "qualification": "Programme design and expected outcomes only; implementation effectiveness has not yet been demonstrated.",
+        "radar_relevance": "A concrete member-state implementation mechanism connecting national research security to European-level policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.interface-eu.org/focus-area/semiconductors-geopolitics-europe",
+      "source_hash": "328e188d",
+      "identity_hash": "98e78bb248918444",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.interface-eu.org/focus-area/semiconductors-geopolitics-europe; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.interface-eu.org/focus-area/semiconductors-geopolitics-europe",
+            "title": "Semiconductors, Geopolitics and Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_WORK",
+        "reason": "The supplied Interface Europe URL is a thematic workstream hub that links to separate analyses and does not itself present a discrete substantive work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Interface Europe page is a semiconductor workstream hub, not a discrete research output",
+      "reader_what": "The page describes a workstream on Europe’s chip competitiveness and US-China technology rivalry, then links to separate analyses.",
+      "reader_why": "",
+      "reader_more": "The supplied object is a focus-area landing page for Interface Europe’s semiconductor work. It sets the thematic scope and points readers to distinct publications and projects but does not itself present a standalone study, method, dataset or current policy development. The linked analyses may be eligible records separately; this hub is not.",
+      "deep_analysis": {
+        "work_kind": "thematic workstream landing page",
+        "research_question": "",
+        "main_finding": "The page defines Interface Europe’s semiconductor and geopolitics research area and routes to separate outputs rather than presenting a discrete substantive work.",
+        "method_or_basis": "Direct inspection of the supplied Interface Europe focus-area page.",
+        "qualification": "Navigation and portfolio description, not a standalone research or policy output.",
+        "radar_relevance": "Fails admission because the linked object is a workstream hub, even though its subject matter is European strategic technology policy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.interface-eu.org/publications/download/public-compute-applied-ai-startups",
+      "source_hash": "68b70e7c",
+      "identity_hash": "cb899cb913cb86cd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.interface-eu.org/publications/download/public-compute-applied-ai-startups; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.interface-eu.org/publications/download/public-compute-applied-ai-startups",
+            "title": "Making Public Compute Work for Applied AI Startups",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "What applied AI startups actually need from Europe's publicly funded computing capacity",
+      "reader_what": "Interviews in Poland find real but sector-specific demand; startups want unbureaucratic access, data protection and easy portability.",
+      "reader_why": "Argues public AI compute should be designed for applied startups, not only frontier model training.",
+      "reader_more": "The evidence is ten semi-structured interviews in Poland, the fourth-largest national recipient of EU AI factory funding: one AI factory host, four industry and research intermediaries, and five startups in regulated or strategic sectors such as health, life sciences, space and defence. The authors reframe the usual argument about whether public compute is justified, asking instead for whom and on what terms it works. Free access to high-performance computing is welcomed provided it is quick to obtain, protects data and intellectual property, comes with local human support, and allows switching between public facilities and commercial cloud. Gigafactories are seen as extra capacity rather than a different offer. Ten interviews in one country is a narrow base, so these are indicative requirements.",
+      "deep_analysis": {
+        "work_kind": "policy brief based on qualitative interviews",
+        "research_question": "For whom, in what form and under what conditions can publicly funded AI compute support European AI development?",
+        "main_finding": "Demand from applied AI startups in regulated and strategic sectors is genuine but sector-specific, and public compute converts into value mainly when access is fast and unbureaucratic, protects data and intellectual property, provides local support and data, and permits movement between public and commercial providers.",
+        "method_or_basis": "Ten semi-structured interviews with an AI factory host, four ecosystem intermediaries and five startups in Poland's AI factory ecosystem; report PDF supplied in package.",
+        "qualification": "Small single-country interview sample capturing stated requirements, not measured demand or realised outcomes; remaining obstacles such as national co-funding and sovereignty guarantees are unresolved.",
+        "radar_relevance": "Speaks directly to the design of EU AI factory and gigafactory investment and to the technology sovereignty case made for public compute.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.vinnova.se/en/calls-for-proposals/utlysning-2026-00442/planning-grant-for-international-proposal-2026/",
+      "source_hash": "920b9b0e",
+      "identity_hash": "e8ac70ff61bc5ee4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied Vinnova URL; the page is the substantive “Planning grant for international proposal 2026” call, proving the scanner had attached a different project title/date."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.vinnova.se/en/calls-for-proposals/utlysning-2026-00442/planning-grant-for-international-proposal-2026/",
+            "title": "Future Innovations Europe Africa Doctoral Network | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The primary source reports a concrete current European R&I policy, programme or funding development with substantive Radar relevance."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Planning grant for international proposal 2026",
+          "date": "2026-03-10",
+          "type": "funding call"
+        },
+        "unset": [],
+        "reason": "The supplied Vinnova URL is the planning-grant call, opened 10 March 2026; the scanner title/date belong to a separate funded project."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Vinnova funds preparation of proposals for international research and innovation calls",
+      "reader_what": "Swedish applicants can receive planning grants to build competitive proposals for international R&I calls.",
+      "reader_why": "The instrument lowers proposal-development costs for Swedish organisations joining cross-border research and innovation funding competitions.",
+      "reader_more": "The linked Vinnova object is the 2026 planning-grant call, not the doctoral-network project named by the scanner. It opened 10 March 2026 and supports Swedish companies, academia, public bodies and civil society preparing international R&I proposals. The page sets grant levels and eligibility rules; it does not provide evidence on whether the planning support raises proposal success rates.",
+      "deep_analysis": {
+        "work_kind": "current funding call",
+        "research_question": "",
+        "main_finding": "Vinnova is co-funding proposal preparation so Swedish organisations can assemble and submit stronger applications to international R&I calls.",
+        "method_or_basis": "Official Vinnova call page; the supplied URL itself establishes the call identity, eligibility and funding conditions.",
+        "qualification": "Funding offer and design, not evidence of applicant success or downstream research outcomes.",
+        "radar_relevance": "Concrete national co-investment intended to increase Swedish participation in international and European R&I programmes.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en",
+      "source_hash": "b2beee58",
+      "identity_hash": "3ebca2e0672e2120",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en",
+            "title": "Commission welcomes political agreement on the Programme for agile and rapid defence innovation (AGILE)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The primary source reports a concrete current European R&I policy, programme or funding development with substantive Radar relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU agrees a €115 million programme to speed disruptive defence technology to the field",
+      "reader_what": "Parliament and Council reached political agreement on AGILE, aimed at smaller firms and operational from January 2027.",
+      "reader_why": "Delivers disruptive defence products to member states and associated countries, including Ukraine.",
+      "reader_more": "This is a political agreement between the European Parliament and the Council, reached on 15 July 2026, and not yet final adopted legislation. The Commission proposed AGILE in March 2026 with a budget of €115 million, directed at small and medium-sized enterprises, start-ups and scale-ups rather than established defence primes. Work is to be organised around mission-driven challenges defined with member states, with the stated ambition of developing, testing and deploying products in weeks or months instead of years. The instrument is expected to be operational from 1 January 2027, with continuity intended through the proposed European Competitiveness Fund. The delivery timescales described are programme objectives, not demonstrated performance.",
+      "deep_analysis": {
+        "work_kind": "official announcement / current development",
+        "research_question": "",
+        "main_finding": "The European Parliament and Council reached political agreement on 15 July 2026 on AGILE, a €115 million programme to accelerate development, testing and uptake of disruptive defence technologies from smaller and newer suppliers, enabling launch in early 2027.",
+        "method_or_basis": "Primary source: European Commission Directorate-General for Defence Industry and Space announcement; page text supplied in package.",
+        "qualification": "Political agreement stage rather than adopted law; budget, start date and the weeks-to-months delivery ambition are commitments and objectives, not observed results.",
+        "radar_relevance": "A new EU instrument channelling defence innovation funding to SMEs and start-ups, linked to European Defence Readiness 2030 and technological sovereignty aims.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.gmfus.org/focus-areas/technology-and-innovation",
+      "source_hash": "942f74d6",
+      "identity_hash": "7366e26204f6454a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.gmfus.org/focus-areas/technology-and-innovation; it is a generic GMF focus-area hub with linked projects and articles."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to the GMF institutional focus-area page."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for \"Technology and Innovation\" returned the same GMF focus-area page rather than a discrete authored work."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "The object has no discrete author/year identity; it is an evergreen programme hub."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "GMF’s official technology programme material confirms the URL is a programme/focus-area landing page with separate underlying outputs."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Bounded GMF searches found distinct technology articles and projects, confirming they are separate works rather than substantive content of this hub."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.gmfus.org/focus-areas/technology-and-innovation",
+            "title": "Technology and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_WORK",
+        "reason": "The supplied GMF URL is a generic technology programme/focus-area hub that aggregates separate outputs rather than presenting a discrete substantive work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "GMF Technology and Innovation page is a programme hub rather than a specific work",
+      "reader_what": "The page aggregates GMF technology projects, staff and featured content rather than presenting one substantive analysis or development.",
+      "reader_why": "",
+      "reader_more": "The supplied URL is a generic focus-area page with programme information and links to separate publications. Exact-title and publisher checks confirm it is an institutional hub, not a discrete authored work with its own evidence or finding. Individual linked articles may qualify separately, but this landing page does not.",
+      "deep_analysis": {
+        "work_kind": "programme/focus-area landing page",
+        "research_question": "",
+        "main_finding": "The page functions as a navigation and programme hub for GMF technology work, not as a standalone research or policy output.",
+        "method_or_basis": "Direct inspection plus exact-title and official-publisher recovery checks.",
+        "qualification": "Generic institutional hub; no discrete study, instrument or current development is contained in the record itself.",
+        "radar_relevance": "Fails admission because the linked object is not a substantive work under Strand A or C.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1371/journal.pone.0344374",
+      "source_hash": "3d5e7dcd",
+      "identity_hash": "948277c024d1da6c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0344374; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0344374",
+            "title": "A pathway study of university embeddedness in provincial innovation systems based on field theory: Empirical evidence from China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_INSUFFICIENT",
+        "reason": "The study analyses university embeddedness and provincial innovation across China; it has no substantive European R&I focus."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "China study maps multiple pathways to stronger provincial innovation systems",
+      "reader_what": "A 31-province fsQCA study identifies market-driven and government-led configurations associated with stronger Chinese provincial innovation.",
+      "reader_why": "",
+      "reader_more": "The article applies Bourdieu’s field theory and fuzzy-set qualitative comparative analysis to 31 Chinese provincial-level regions. It finds two high-performing configurations and four pathways associated with weaker innovation capacity. The study is entirely about China; international scientific exchange is one condition, but Europe is not a substantive research object or policy setting.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical study",
+        "research_question": "How do university talent-cultivation and institutional conditions combine to shape provincial innovation capacity in China?",
+        "main_finding": "Different combinations of human capital, institutional resources, market mechanisms, policy support and international exchange are associated with high or low provincial innovation capacity.",
+        "method_or_basis": "Fuzzy-set qualitative comparative analysis of 31 Chinese provincial-level regions using a field-theory framing.",
+        "qualification": "Configurational associations do not establish causal effects, and the empirical scope is China rather than Europe.",
+        "radar_relevance": "Fails Strand A: the work is a China-only provincial innovation study with no substantive European R&I focus.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://eda.europa.eu/docs/default-source/eda-magazine/edm-31.pdf",
+      "source_hash": "50600810",
+      "identity_hash": "86f9d64d1157d64a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://eda.europa.eu/docs/default-source/eda-magazine/edm-31.pdf; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://eda.europa.eu/docs/default-source/eda-magazine/edm-31.pdf",
+            "title": "European Defence Matters: Countdown to 2030",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "institutional magazine issue"
+        },
+        "unset": [],
+        "reason": "The official PDF identifies European Defence Matters 2026 Issue #31, a magazine issue rather than a standalone report."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European Defence Agency magazine on delivering defence readiness by 2030",
+      "reader_what": "Agency magazine sets out nine EU priority capability areas and argues readiness depends on practical cooperation.",
+      "reader_why": "Shows EU defence bodies linking home-grown defence technology to reduced external dependence.",
+      "reader_more": "This is the July 2026 issue of the European Defence Agency magazine, built around the countdown to 2030. It presents the EU nine priority capability areas, defence spending figures, and interviews with the High Representative, the Agency chief executive, the Irish defence minister and the chair of the European Parliament security and defence committee. Project features cover a European drone pilot training network, additive manufacturing, maritime surveillance, a government-to-government procurement platform and the BraveTech EU initiative. The editorial argues that readiness comes from practical collaboration rather than declarations, citing the collapse of the joint French, German and Spanish next-generation fighter project as evidence that delivery is hard. A recurring claim is that home-grown defence technology reduces dependence on external supply.",
+      "deep_analysis": {
+        "work_kind": "institutional magazine issue",
+        "research_question": "",
+        "main_finding": "The Agency presents an agenda of nine priority capability areas and argues that European defence readiness by 2030 depends on collaborative procurement, shared training and defence innovation rather than declarations.",
+        "method_or_basis": "Packaged PDF excerpt of the official magazine",
+        "qualification": "A magazine of institutional messaging and interviews, not an evaluation; claims are advocacy rather than assessed outcomes.",
+        "radar_relevance": "Documents how EU defence institutions frame defence research, innovation and industrial dependence.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://www.cost.eu/publication/cost-annual-report-2025/",
+      "source_hash": "cd8aa7b7",
+      "identity_hash": "cda1b1824515de69",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied COST page was a short landing page for the 2025 annual report."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was identified for the COST annual report."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/publisher recovery found the official full PDF https://www.cost.eu/uploads/2026/03/COST-Annual-Report-2025.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cost.eu/uploads/2026/03/COST-Annual-Report-2025.pdf",
+            "title": "COST Annual Report 2025",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against authoritative primary evidence; scanner metadata was corrected only where the primary source demonstrated a conflict."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "annual report"
+        },
+        "unset": [],
+        "reason": "The official COST publication and recovered PDF identify the work as the COST Annual Report 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "COST’s 2025 report documents growth in cross-border European research networks",
+      "reader_what": "The annual report combines activity figures and cases showing how COST Actions connect researchers, data and emerging collaborations.",
+      "reader_why": "COST argues its networking model turns dispersed expertise into durable European communities and pipelines for later funding or uptake.",
+      "reader_more": "The recovered annual report covers COST’s 2025 activities, figures and examples and notes 70 newly approved Actions. It describes cross-border networking, data sharing, methodological development and links to European priorities. The evidence is institutional self-reporting of activity and selected outcomes, not an independent causal evaluation of COST’s added value.",
+      "deep_analysis": {
+        "work_kind": "institutional annual report",
+        "research_question": "",
+        "main_finding": "COST reports continued expansion of cross-border research networking and presents Actions as platforms for collaboration, knowledge sharing and follow-on activity.",
+        "method_or_basis": "Official COST Annual Report 2025 recovered as a full institutional document.",
+        "qualification": "Activity metrics and success stories are self-reported and do not by themselves establish causal research or innovation impact.",
+        "radar_relevance": "Direct evidence on a major European mechanism for transnational research-network formation and capacity building.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s43253-026-00186-4",
+      "source_hash": "b585e7b1",
+      "identity_hash": "16208714aae08950",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://link.springer.com/article/10.1007/s43253-026-00186-4; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s43253-026-00186-4",
+            "title": "Rethinking technological complexity and investment: a sectoral analysis in the EU 1995–2020",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Why Europe's weaker economies have not moved into more technologically complex industries",
+      "reader_what": "Sectoral analysis finds peripheral EU economies' industrial mix did not shift toward complex activities, 1995-2020.",
+      "reader_why": "Supports the case that industrial policy must target weaker economies' sectoral composition directly.",
+      "reader_more": "The authors build an index of technological complexity for each economic sector, then use econometric methods to relate sectoral investment to complexity, consumption, interest rates and foreign direct investment across EU countries from 1995 to 2020. Their reading is that divergence inside the Union is structural: an export-led growth model in the north and a credit-supported consumption model in the south left peripheral economies investing in less complex activities, which the authors connect to the break-up of industrial sectors in weaker member states. The complexity index is their own construction, so the results depend on how it is built. The analysis establishes patterns and associations across countries and sectors rather than proving a single cause of divergence.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical study",
+        "research_question": "Why have technological and productive disparities widened between EU member states, and what role did sectoral investment play?",
+        "main_finding": "The sectoral composition of peripheral EU economies did not shift toward more technologically complex activities over 1995-2020, which the authors link to industrial disintegration in weaker economies and to the need for a redesigned industrial policy.",
+        "method_or_basis": "Author-constructed sectoral technological complexity index combined with econometric analysis of investment, consumption, interest rates and FDI, EU sectors 1995-2020; publisher full text supplied.",
+        "qualification": "Findings depend on the construction of the complexity index; the econometrics establish associations across sectors and countries rather than demonstrating causation, and the policy conclusion is the authors' argument.",
+        "radar_relevance": "Provides long-run evidence on intra-EU technological divergence directly relevant to European industrial and cohesion policy design.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-reforming-and-enhancing-european-ri-system/reforming-and-enhancing-eu-research-and-innovation-system_en",
+      "source_hash": "b5e3026d",
+      "identity_hash": "25838967cdffb7d3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://rea.ec.europa.eu/funding-and-grants/horizon-europe-reforming-and-enhancing-european-ri-system/reforming-and-enhancing-eu-research-and-innovation-system_en; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-reforming-and-enhancing-european-ri-system/reforming-and-enhancing-eu-research-and-innovation-system_en",
+            "title": "Reforming and enhancing the EU research and innovation system",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The primary source reports a concrete current European R&I policy, programme or funding development with substantive Radar relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe funding stream for reforming the EU research and innovation system",
+      "reader_what": "Funds structural reform of the European Research Area, including open access and research assessment changes.",
+      "reader_why": "This is the instrument that pays for the practical implementation of European Research Area reform.",
+      "reader_more": "This European Research Executive Agency page covers the Horizon Europe funding stream supporting structural reform of the EU research and innovation system, improved access to excellence, and deepening of the European Research Area. The 2026 call had eight topics, including accelerating open access and research assessment reform and citizen engagement, with an indicative budget of 52 million euro. It closed in March 2026 having attracted 144 proposals, with selection results due in July 2026 and grant signature in November. For comparison, the preceding 2025 call drew 113 proposals and funded 21 projects sharing 44 million euro. The page is an administrative call record rather than an analysis or result.",
+      "deep_analysis": {
+        "work_kind": "funding call and programme page",
+        "research_question": "",
+        "main_finding": "The 2026 European Research Area call closed with 144 proposals across eight topics against an indicative budget of 52 million euro, with awards due in late 2026.",
+        "method_or_basis": "Administrative record published by the managing agency.",
+        "qualification": "Procedural information only; it reports application volumes and timelines, not outcomes or any assessment of whether the reforms work.",
+        "radar_relevance": "Identifies the concrete Horizon Europe instrument financing European Research Area reform.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
+      "source_hash": "ac9e3fe6",
+      "identity_hash": "ce82f92126d3b71c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en; it matched the claimed work and provided substantive primary/official text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
+            "title": "EU research funding for security practitioners",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content match the supplied or recovered primary source; decision is based on that evidence rather than scanner wording."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The verified work has a substantive European research, innovation, technology, industrial-capability, research-policy or research-security connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe guidance puts security practitioners inside research design and testing",
+      "reader_what": "Cluster 3 guidance asks police, responders, infrastructure operators and agencies to co-design, pilot and validate security technologies.",
+      "reader_why": "Early end-user involvement is intended to align research tools with operational requirements before deployment.",
+      "reader_more": "The Research Executive Agency page explains that security practitioners can shape project goals, contribute during development and participate in real-world testing. It identifies eligible end-users including law enforcement, civil protection, health services, infrastructure operators and EU agencies. This is programme guidance describing the intended co-design mechanism, not evidence that funded technologies achieve better operational outcomes.",
+      "deep_analysis": {
+        "work_kind": "official Horizon Europe practitioner guidance",
+        "research_question": "",
+        "main_finding": "Cluster 3 explicitly positions security practitioners as partners throughout research design, development, piloting and validation rather than only final-stage users.",
+        "method_or_basis": "Official European Research Executive Agency programme guidance.",
+        "qualification": "Procedural guidance and intended mechanism; it does not evaluate the performance of practitioner-led projects.",
+        "radar_relevance": "Directly concerns how EU security R&I funding structures end-user participation and technology validation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    }
+  ]
+}
