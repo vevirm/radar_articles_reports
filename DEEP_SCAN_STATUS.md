@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T121453Z-1a1bc3463fbc`
+- Current package: `worker-a-20260914T123326Z-1a1bc3463fbc`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.abmr.2026.100004` — Technology foresight: A taxonomy
   2. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNYUpLd1I4Qk5tN3lrREZxemNJbjVxRmR1bG5Ta2hReWtIVXIweHdGREstZjNWUjMyLXYtSFQ0QnJQM0tERGFnSThzVW1YRm1BREtld2tSekNNTGI1WjVwSnR1ZmxUU0ZTZ0U3S3dXWkpQb3Z2Qld4bGRreE16dnAydDlTcEVuNmtHaU9WdlFYSFZMell2dFhmNjVrblZaa01vZnljMXdTYkh4M2dpVzlsTkktUHQ?oc=5` — Europe built its medical science around male bodies – and women are paying the price
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T121509Z-0e4acd783ae4`
+- Current package: `worker-b-20260914T123343Z-0e4acd783ae4`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
