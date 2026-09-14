@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **427** (Main **427** + Historical **0**)
-- Automatic queue still needing V2 verification: **844** (Main **195** + Historical **649**)
-- Currently assigned to workers: **96** (Main **96** + Historical **0**)
-- Bounded access-recovery retries still eligible: **0**
+- Authoritative V2 verified: **471** (Main **471** + Historical **0**)
+- Automatic queue still needing V2 verification: **800** (Main **151** + Historical **649**)
+- Currently assigned to workers: **84** (Main **84** + Historical **0**)
+- Bounded access-recovery retries still eligible: **4**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **748**
+- Automatic queue pending and not yet assigned: **716**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T110926Z-7d1142197a5a`
-- Assigned unresolved records: **48**
-  1. `link:https://www.euronews.com/next/2026/09/09/sweden-is-preparing-for-ai-powered-election-interference-what-does-that-defence-actually-l` — How Sweden is fighting AI bots and Russian influence at the polls
-  2. `link:https://policy.trade.ec.europa.eu/consultations/public-consultation-first-review-functioning-international-procurement-instrument_en` — Public consultation on the first review of the functioning of the International Procurement Instrument
-  3. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxQNmNwVDBfLU5VWDJLeVU1T2NjU1Q1WmNlaVVHdEJJbWRmVXZLNGh0Q1BXN2U1YnZlbzdvUUt0bEtlb2hwdm5ERnh3QXBKTWcwSExYV2YxVUhSWEMtS2ZrSVpGQV9YcXl5bWYxNkJiR0dRSXNDbG4tOHotR3lreGtrc1A5MDlEYlNNbmFJbDZTa2VfWXZjalhHNEZWZHpGMkF4Ry1kVGpqXzlkaFc1M1NXT2pKYzc?oc=5` — Horizon Europe needs tailored biotech funding, report says
-  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxObmNUMkNpaHRGSU5YVjBwaUs2elJrS0YyY2xNT1BpV2lha2JNSVdmZUNoUzRmUmQ1UVFGTjQ2UnZVWlUtcjkxV1B3YzZtWUJyNTExemVaTHdCVUhPVWVCSFItX2NCQUtnYmFwUlZ5ektQcDhQT0lteHN5WEd0ZG5rYXFpQVBSNmVNbFNCRS1YT2ZTeGVSbmVtYlJWYTQtQVE4QTBUSUlZZ3hWdHVlNnc?oc=5` — Belgium detains Chinese man on suspicion of semiconductor espionage
-  5. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRVhFMmIxN3AtRkFXelpLaDBYejd0emlMam9sc2FBZWhoTHpHdV90TjNpYTFHc3d4WXo5UmhzUHpKMUpBTFNZMkU0SlRiZWpjSktfZlROVWN2SkI5QXhkbjZCN0ZlYXB6UkptOXoxOElncHZrVmxodEo0SGlSUnVzZmNkcTd5WXpLLVVKSFlVMWpJaWFzVTVxTHhDZzQwRHFOLVJiYUxoTXRkS28?oc=5` — Data Corner: Indian participation in Horizon Europe
-  6. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxPQWQtQ2pacWxfQlZ6TG1sMnNsY29yWXI0R19LaGs5eDJmWTNRRTBqOENDT3NhTGFlVEF5QVkxUmlWM2RXTVV4RXRFTzBlSnpic29iMHd6TVg3R1lWeFVleERlNUVtLUJadmFTWDZPTXlUUmt6eXZheEdReWJzTVZNcGpPdmxKdkdJQWxORDVBOTVVYW5uU3VsSmVia3l1WEs1bkZSVUxPQ0tza0ZmS2hFbEdKSmlEdkk?oc=5` — Hungarian universities ready to rejoin Horizon Europe, Erasmus+
-  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPcWNKUTJpWmprTU9IZU1yaVRYVDRRTjBodXBHbktZZ01LcXVLRmdZaWV0TkFlNGlKV1NlVk5iM1lJRzFJX2dSZ1RCRVRueG5kQVgyTWhzaEptSUxKTWpTSlVPTkx6a1ZvajEzdVBza3BzbW9OQmxHMDAyUU9GUmJ0Vy12MWU?oc=5` — Zaharieva hopes for a Horizon Europe deal in 2026
-  8. `link:https://news.google.com/rss/articles/CBMib0FVX3lxTE1SNWY2Z2ZLU0tkQlJ4MlpOb0FrMVpmVUFDeVNHN3dBeUNEZHdod3E1NzkyOVpOS3NiMThYd1pNQmpBLTU2a3MzMUdzUEF4MnJtS09pdTJ0WXlueHdKRTc5bUFsSFNsQTUzb1d3TVFKVQ?oc=5` — AI Factories - Shaping Europe’s digital future
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260914T113042Z-756cae99874f`
+- Assigned unresolved records: **36**
+  1. `link:https://news.google.com/rss/articles/CBMidkFVX3lxTE14MWhyc19nX010OTJ5clBuQW1PYmcxY2lDZF9vNjhGMEpzSVI5bW1iYW8yaHM3OG5rWnFfcjJWT3E2QVp6WFd4WlRzVDBoTk90U1RpVUE4dzNmRlB3Q2ZPLU9hS0dUaVhtWmFlRDRhSUhZakpfbVE?oc=5` — Funding for Digital in the 2021-2027 Multiannual Financial Framework - Shaping Europe’s digital future
+  2. `link:https://doi.org/10.1007/s11365-026-01188-8` — Innovation ecosystems and entrepreneurial venture capital: evidence from European countries
+  3. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxNWm83WUQ3eGZDU1ZRNURpUGdpN25ZWGxIT2NpMFJhajhaZjB4QjFqcVNSOUxpTndjN2JnLVZRYXItQlg2V1dzQkRQUmR2UUE3ZUVaWU9PLXB2d0lzZThCZW40bkNleHBsOGR0R2dqTGE0Y1Q0MXlhS01TRFBuT05CNVRGRmFUUGw2bXYtLUkzbzJjcHhIdExfQ1FNNVVzc1hQbFMxbnVKQjRwRGtreEJydk4zdENSTUl4dXRZSjhhWG5BeHdRUHZxVg?oc=5` — [Interview] ‘Not everyone wants to come to Europe’, says IOM researcher warning against migration panic
+  4. `link:https://news.google.com/rss/articles/CBMijwFBVV95cUxNaHFqcGNkY19YdjBCbWhTNVNnclFIbDRBZWhNckN6WVF3eHduNUVEZHdYekF3UW5WTV9aVWkzN1JVaDJ0SmhCOG1wcE1uUUNvaFY5Rmk0RGVnVWgtMHQwel9wNFdMVVc2U3Q0MTB3VzdvcHp6d2tYQ2ZMRkdodGFMX05TekFyenBGd3pTRHZ3TQ?oc=5` — EU tech chief backs global AI rules in wake of extinction warning
+  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNRTNiRXp1VEEyUEhXbTFSSnBmMTlzWngxUDVRTk1wc1lvdmZ6R0hOVnotUGRaRVU4MlhPaXVoaFhrLUladmUtWFYzeGtWV3RfMkVVVEQ3aFNvOS0yeGlwRHY0bWFTMjR4cnJkNl9RdExRSWtJVUItdVdLOXZRQnV1ODlIUFdxZlhsM0lETDdQZEJUV3VBb3JGWjRRRVJ3eEI1U1lIMFpEZXFrMFdJZUE?oc=5` — EU own resources ‘essential’ for future research budget, says leading MEP
+  6. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxNd2E4SWZSeGcyWTNRYzltQ1Y0V0luSE9ja1RTUUhGMDdLUFlIeHQtRlpQYVhLVFdsaXVMUTVvUzYtX3NSbDMyV3ZwWnRKR1MxOVpHclNvRmxBekJoaWN3TjNKbjEtTEZOWS1jal9LQjNXcFVINVFGOEJxcUpUajdNa0JJbkdnZWlUZE1jRFY5RlB6VnhoM05n?oc=5` — Hungary expels 10 Russian diplomats amid espionage concerns
+  7. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxQZjFheXlLYmlkeFFsVUp3Nnlab01sUVRIWkx6WGw4MVpzREo2OFhCS1pEV1BSZjdQTjlWT0VXTWNSdkhic2RvYWdvZEpTMFNTQVRjcnVVOUZKMnRIS1Q3Ny1VOTZqX1dSSDRIZU5HMmNmc0J3MFc4SmdVQnh6aTl1MW9laXBVQW9ydzI0M0ZmMVBQbUtSVXhmNzlVa1J2ZndzZzVUR3RwZGp2OGd1ci04enpiUldJaWIxZDRXek52X04weXJjR0ZrWUpuX0Q5QQ?oc=5` — Investigation alleges widespread misuse of EIT funds
+  8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE4xZGNpNE1kY2J5Ui1EdWYzQ0g0S190bGpIYVBLS1hlS0MwUXN3UGdLdzBpYmZPWWY2bTVoRlJFQzF1NHI0Tnl3eVVtYVE5VTFUZE1SMi1pNGxSaHJ2cEQyRk85VkhkZFlrYXZrdW5tTGp0enduaTVncHpnQllMUQ?oc=5` — European integrated framework for climate resilience | Think Tank | Parlement européen
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T110937Z-c8a7cb0a8bdb`
+- Current package: `worker-b-20260914T113052Z-c8a7cb0a8bdb`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.cose.2026.105102` — Cybersecurity resilience in logistics enterprises: an empirical socio-technical analysis
   2. `link:https://doi.org/10.1016/j.technovation.2026.103603` — Multinational enterprises and strategic foresight: The path to eco-innovation
