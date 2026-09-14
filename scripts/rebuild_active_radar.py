@@ -22,9 +22,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.active_corpus import (
-    RAW_COLLECTIONS, build_active_document, load_admission, load_corrections,
-    load_reader, record_key, validate_sidecars,
+    RAW_COLLECTIONS, apply_correction, apply_deep_semantics, build_active_document,
+    decision_for, is_active_decision, load_admission, load_corrections, load_reader,
+    record_key, validate_sidecars,
 )
+from scripts.deep_read_works import historical_record_key
 from scripts import downstream_retrace
 
 DERIVED_KEYS = (
@@ -42,17 +44,55 @@ def _counts(doc: dict[str, Any]) -> dict[str, int]:
     return {k: len(doc.get(k, [])) if isinstance(doc.get(k), list) else 0 for k in RAW_COLLECTIONS}
 
 
-def _add_historical_context(doc: dict[str, Any]) -> None:
-    path = ROOT / "historical" / "historical.json"
+def _add_historical_context(
+    doc: dict[str, Any], *, admission: dict[str, Any], corrections: dict[str, Any], reader: dict[str, Any],
+    historical_path: Path | None = None,
+) -> dict[str, int]:
+    """Add the historical A context after applying any authoritative V2 decisions.
+
+    historical/historical.json remains the immutable scanner archive. Deep Scan uses
+    namespaced sidecar keys, so a historical drop/reclassification changes only the
+    active context that may feed inference, never the raw archive itself.
+    """
+    path = historical_path or (ROOT / "historical" / "historical.json")
     try:
         hist = json.loads(path.read_text(encoding="utf-8"))
     except Exception:
-        return
+        doc["historical_context"] = []
+        return {"total_records": 0, "v2_verified": 0, "v2_pending": 0, "active_a_context": 0}
     rows = hist.get("items", []) if isinstance(hist, dict) else []
-    doc["historical_context"] = [
-        copy.deepcopy(x) for x in rows
-        if isinstance(x, dict) and str(x.get("strand") or "").strip().upper() == "A"
-    ]
+    table = reader.get("records", {}) if isinstance(reader.get("records"), dict) else {}
+    eligible = [x for x in rows if isinstance(x, dict) and historical_record_key(x)]
+    verified = 0
+    active_a: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for raw in eligible:
+        key = historical_record_key(raw)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        state = decision_for(key, admission)
+        entry = table.get(key) if isinstance(table.get(key), dict) else None
+        if isinstance(entry, dict) and entry.get("profile") == "deep-reader-v2-authoritative":
+            verified += 1
+        if not is_active_decision(state.get("decision", "")):
+            continue
+        row = apply_correction(raw, corrections.get("records", {}).get(key))
+        row = apply_deep_semantics(row, entry)
+        target = str(state.get("target_strand") or raw.get("strand") or "").strip().upper()
+        if target != "A":
+            continue
+        row["historical_deep_scan_key"] = key
+        row["historical_admission_status"] = state.get("decision", "provisional")
+        active_a.append(row)
+    doc["historical_context"] = active_a
+    total = len(seen)
+    return {
+        "total_records": total,
+        "v2_verified": verified,
+        "v2_pending": max(0, total - verified),
+        "active_a_context": len(active_a),
+    }
 
 
 def _v2_coverage(raw: dict[str, Any], reader: dict[str, Any]) -> dict[str, int]:
@@ -72,7 +112,9 @@ def rebuild(raw: dict[str, Any], *, admission: dict[str, Any], corrections: dict
         raise RuntimeError("Active-corpus sidecar validation failed: " + " | ".join(problems[:10]))
 
     active = build_active_document(raw, admission=admission, corrections=corrections, reader=reader)
-    _add_historical_context(active)
+    historical_coverage = _add_historical_context(
+        active, admission=admission, corrections=corrections, reader=reader
+    )
     raw_counts = _counts(raw)
     active_counts = _counts(active)
     raw_total = sum(raw_counts[k] for k in ("strand_a", "strand_b", "strand_c"))
@@ -109,6 +151,7 @@ def rebuild(raw: dict[str, Any], *, admission: dict[str, Any], corrections: dict
         "review_is_active": True,
         "missing_state_is": "provisional_active",
         "deep_scan_v2": coverage,
+        "historical_deep_scan_v2": historical_coverage,
         "derived_reasoning_uses_active_corpus": True,
         "metadata_corrections_applied_to_active_view": True,
         "deep_scan_v2_semantics_feed_reasoning": True,
@@ -121,8 +164,12 @@ def rebuild(raw: dict[str, Any], *, admission: dict[str, Any], corrections: dict
         "active_strand_c": active_counts.get("strand_c", 0),
         "deep_scan_v2_verified": coverage["v2_verified"],
         "deep_scan_v2_pending": coverage["v2_pending"],
+        "historical_deep_scan_v2_verified": historical_coverage["v2_verified"],
+        "historical_deep_scan_v2_pending": historical_coverage["v2_pending"],
+        "historical_active_a_context": historical_coverage["active_a_context"],
         "inactive_drop": int(state_counts.get("drop", 0) or 0),
         "inactive_unverifiable": int(state_counts.get("drop_unverifiable", 0) or 0),
+        "inactive_manual_verification": int(state_counts.get("needs_manual_verification", 0) or 0),
         "inactive_duplicates": int(state_counts.get("duplicate", 0) or 0),
         "active_review": int(state_counts.get("review", 0) or 0),
     })
@@ -130,8 +177,9 @@ def rebuild(raw: dict[str, Any], *, admission: dict[str, Any], corrections: dict
 
     rebuilt_active["active_corpus"]["rebuilt_at"] = now
     rebuilt_active["active_corpus"]["deep_scan_v2"] = coverage
+    rebuilt_active["active_corpus"]["historical_deep_scan_v2"] = historical_coverage
     rebuilt_active["active_corpus_snapshot"] = True
-    rebuilt_active["active_corpus_source"] = "radar.json + admission_state.json + record_corrections.json + reader_text.json"
+    rebuilt_active["active_corpus_source"] = "radar.json + historical/historical.json + admission_state.json + record_corrections.json + reader_text.json"
 
     report = {
         "profile": "radar-active-corpus-rebuild-v1",
@@ -140,6 +188,7 @@ def rebuild(raw: dict[str, Any], *, admission: dict[str, Any], corrections: dict
         "active_counts": active_counts,
         "decision_counts": state_counts,
         "deep_scan_v2": coverage,
+        "historical_deep_scan_v2": historical_coverage,
         "downstream_diagnostics": retrace_report.get("diagnostics", {}),
         "integrity_check": retrace_report.get("integrity_check", {}),
     }

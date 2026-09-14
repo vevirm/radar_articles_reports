@@ -17,20 +17,22 @@ from typing import Any
 try:
     from scripts.deep_read_works import (
         CORPUS, SIDECAR, SourceRead, clean, fetch_source, iter_records, load_sidecar,
-        pending, record_key, identity_hash, scanner_fields,
+        pending, historical_pending, record_key, identity_hash, scanner_fields,
     )
     from scripts.deep_scan_work_state import (
-        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, register_package,
-        save_state, sync_verified, write_status_markdown,
+        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, manual_verification_keys,
+        prioritize_pending_keys, register_package, save_state, sync_verified, update_record_metadata,
+        write_status_markdown,
     )
 except ModuleNotFoundError:
     from deep_read_works import (  # type: ignore
         CORPUS, SIDECAR, SourceRead, clean, fetch_source, iter_records, load_sidecar,
-        pending, record_key, identity_hash, scanner_fields,
+        pending, historical_pending, record_key, identity_hash, scanner_fields,
     )
     from deep_scan_work_state import (  # type: ignore
-        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, register_package,
-        save_state, sync_verified, write_status_markdown,
+        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, manual_verification_keys,
+        prioritize_pending_keys, register_package, save_state, sync_verified, update_record_metadata,
+        write_status_markdown,
     )
 
 FORMAT = "radar-deep-scan-package-v2"
@@ -98,7 +100,7 @@ Return exactly one decision:
 - `review` — the work exists and has real evidence, but admission genuinely requires human judgement.
   REVIEW is not a refuge for laziness or failed retrieval.
 - `drop_unverifiable` — after the complete retrieval ladder, the claimed work itself cannot be substantiated.
-- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all six recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. GitHub logs the audited deferral, removes it from the normal worker lane, and leaves the Radar record provisional for a later retry/human check.
+- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all six recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. Each validated defer counts as one genuine recovery pass. GitHub permits at most three such passes, throttles retries so they cannot dominate worker capacity, and after the third failed pass moves the work to the persistent **Hands-on verification needed** list.
 
 ### Strand A — substantive European R&I work
 
@@ -122,6 +124,19 @@ programme, navigation, promotional, vacancy/recruitment, seminar/event or listin
 because vocabulary matches. An otherwise generic page may qualify only when the page itself reports a real
 new policy decision, funding instrument, programme change, legislative development, evidence release or
 comparable substantive event.
+
+## Historical archive jobs
+
+Jobs with `corpus_scope = "historical"` come from the separate Historical Radar archive. They are reviewed
+only after Main Radar work has priority for worker capacity. For these jobs:
+
+- Treat the work as historical structural/context evidence, not as a current Strand C signal.
+- A historical row may arrive as A, B, or legacy/unclassified. `keep` / `review` may target only **A** or **B**. Do not target C.
+- Apply the same substantive A and reusable-method B standards as above; age is not a reason to keep weak evidence.
+- Reader relevance should explain what the work established at the time and why it is useful historical context now,
+  without pretending the historical finding is a fresh current development.
+- A historical `drop` removes the work from the historical context used by downstream inference, while preserving the
+  raw historical archive as an audit record.
 
 ## Metadata/provenance correction
 
@@ -349,12 +364,18 @@ def same_key_variants(doc: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
 def build_job(row, ordinal: int, sidecar: dict[str, Any], dupes: dict[str, list[dict[str, str]]], variants: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     strand, key, h, r, reason, src = row
     existing = sidecar.get("records", {}).get(key)
+    scope = "historical" if clean(r.get("_deep_scan_scope")).lower() == "historical" else "main"
+    if strand.startswith("historical_"):
+        strand_label = strand.rsplit("_", 1)[-1].upper()
+    else:
+        strand_label = "A" if strand == "frontier_evidence" else strand.replace("strand_", "").upper()
     return {
         "job_number": ordinal,
         "record_key": key,
         "source_hash": h,
         "identity_hash": identity_hash(r),
-        "strand": ("A" if strand == "frontier_evidence" else strand.replace("strand_", "").upper()),
+        "corpus_scope": scope,
+        "strand": strand_label,
         "queue_reason": reason,
         "automatic_scanner": scanner_fields(r),
         "same_record_key_variants": variants.get(key, []),
@@ -392,6 +413,7 @@ def build_job(row, ordinal: int, sidecar: dict[str, Any], dupes: dict[str, list[
 def main() -> None:
     ap = argparse.ArgumentParser(description="Create an authoritative offline Deep Scan V2 ZIP")
     ap.add_argument("--corpus", type=Path, default=CORPUS)
+    ap.add_argument("--historical", type=Path, default=None, help="Historical archive used to fill spare worker capacity after Main Radar priority")
     ap.add_argument("--sidecar", type=Path, default=SIDECAR)
     ap.add_argument("--output-dir", type=Path, default=Path("deep_scan_out"))
     ap.add_argument("--batch-size", type=int, default=DEFAULT_BATCH_SIZE)
@@ -404,30 +426,63 @@ def main() -> None:
     ap.add_argument("--status-file", type=Path, default=Path("DEEP_SCAN_STATUS.md"))
     ap.add_argument("--write-work-state", action="store_true", help="Persist lane assignments and package history in the repository")
     args = ap.parse_args()
+    if args.historical is None:
+        args.historical = args.corpus.parent / "historical" / "historical.json"
 
     doc = json.loads(args.corpus.read_text(encoding="utf-8"))
     sidecar = load_sidecar(args.sidecar)
-    todo_all = pending(doc, sidecar)
-    pending_total = len(todo_all)
+    historical_doc: dict[str, Any] = {}
+    if args.historical.exists():
+        try:
+            loaded_historical = json.loads(args.historical.read_text(encoding="utf-8"))
+            historical_doc = loaded_historical if isinstance(loaded_historical, dict) else {}
+        except Exception as exc:
+            raise SystemExit(f"Unreadable historical archive {args.historical}: {exc}") from exc
+    main_todo = pending(doc, sidecar)
+    historical_todo = historical_pending(historical_doc, sidecar)
+    todo_all = main_todo + historical_todo
     total = sum(1 for _ in iter_records(doc))
+    historical_total = len([x for x in historical_doc.get("items", []) if isinstance(x, dict)]) if isinstance(historical_doc, dict) else 0
     lane = args.lane.upper()
-    state = None
+
+    # Work-state is consulted even for a legacy one-off package so terminal hands-on
+    # items can never be silently resurrected. Metadata is mirrored into the ledger
+    # so DEEP_SCAN_STATUS.md becomes a usable manual-verification work list.
+    state = load_state(args.work_state)
+    sync_verified(state, sidecar)
+    for _strand, key, _h, row, _reason in todo_all:
+        update_record_metadata(state, key, row)
+    terminal = manual_verification_keys(state)
+    queue_items = [item for item in todo_all if item[1] not in terminal]
+    queue_by_key = {item[1]: item for item in queue_items}
+    prioritized_keys = prioritize_pending_keys(state, [item[1] for item in queue_items])
+    prioritized_items = [queue_by_key[key] for key in prioritized_keys if key in queue_by_key]
+    pending_total = len(prioritized_items)
+    main_pending_total = len([x for x in prioritized_items if not x[1].startswith("historical:")])
+    historical_pending_total = pending_total - main_pending_total
 
     if lane:
-        state = load_state(args.work_state)
-        sync_verified(state, sidecar)
-        pending_keys = [item[1] for item in todo_all]
-        assigned = fill_lane(state, lane, pending_keys, target_size=max(1, int(args.lane_size)))
-        by_key = {item[1]: item for item in todo_all}
-        todo = [by_key[key] for key in assigned if key in by_key]
+        assigned = fill_lane(state, lane, [item[1] for item in queue_items], target_size=max(1, int(args.lane_size)))
+        todo = [queue_by_key[key] for key in assigned if key in queue_by_key]
+        assigned_main = len([x for x in todo if not x[1].startswith("historical:")])
+        assigned_historical = len(todo) - assigned_main
         print(
-            f"Radar records: {total}; needing authoritative Deep Scan V2: {pending_total}; "
-            f"worker {lane} assigned now: {len(todo)}"
+            f"Main Radar: {total} records / {main_pending_total} automatic pending; "
+            f"Historical: {historical_total} records / {historical_pending_total} automatic pending; "
+            f"hands-on terminal: {len(terminal)}; worker {lane} assigned now: {len(todo)} "
+            f"({assigned_main} main + {assigned_historical} historical)"
         )
     else:
         limit = max(0, int(args.max_records or 0))
-        todo = todo_all[:limit] if limit else todo_all
-        print(f"Radar records: {total}; needing authoritative Deep Scan V2: {pending_total}; packaged now: {len(todo)}")
+        todo = prioritized_items[:limit] if limit else prioritized_items
+        packaged_main = len([x for x in todo if not x[1].startswith("historical:")])
+        packaged_historical = len(todo) - packaged_main
+        print(
+            f"Main Radar: {total} records / {main_pending_total} automatic pending; "
+            f"Historical: {historical_total} records / {historical_pending_total} automatic pending; "
+            f"hands-on terminal: {len(terminal)}; packaged now: {len(todo)} "
+            f"({packaged_main} main + {packaged_historical} historical)"
+        )
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     if not todo:
@@ -435,7 +490,7 @@ def main() -> None:
         if lane and pending_total:
             summary.write_text(f"Worker {lane} currently has no assignable Deep Scan work.\n", encoding="utf-8")
         else:
-            summary.write_text("All current Radar records already have authoritative Deep Scan V2 verification.\n", encoding="utf-8")
+            summary.write_text("All current Main Radar and Historical Radar records already have authoritative Deep Scan V2 verification.\n", encoding="utf-8")
         if lane and state is not None and args.write_work_state:
             save_state(state, args.work_state)
             write_status_markdown(state, sidecar, [item[1] for item in todo_all], args.status_file)
@@ -506,9 +561,15 @@ def main() -> None:
             counts[job["queue_reason"]] = counts.get(job["queue_reason"], 0) + 1
             mode = job["source_material"]["read_mode"]
             source_modes[mode] = source_modes.get(mode, 0) + 1
+        scope_counts = {"main": 0, "historical": 0}
+        for job in jobs:
+            scope = clean(job.get("corpus_scope")).lower() or "main"
+            scope_counts[scope] = scope_counts.get(scope, 0) + 1
         manifest = {
             "format": FORMAT, "result_format": RESULT_FORMAT, "package_id": pkg_id, "worker_lane": lane or None,
-            "created_at": utc_now(), "current_radar_records": total, "works_in_package": len(jobs), "queue_reasons": counts,
+            "created_at": utc_now(), "current_radar_records": total, "historical_radar_records": historical_total,
+            "main_pending_total": main_pending_total, "historical_pending_total": historical_pending_total,
+            "works_in_package": len(jobs), "scope_counts": scope_counts, "queue_reasons": counts,
             "source_modes": source_modes, "possible_duplicate_records": len(dupes), "same_record_key_variant_groups": len(variants), "batch_size": batch_size,
             "batches": batch_files, "instructions": "INSTRUCTIONS.md", "expected_result_filename": "deep_scan_results.json",
         }
@@ -521,8 +582,13 @@ def main() -> None:
                 if p.is_file():
                     zf.write(p, p.relative_to(root.parent))
         shutil.copy2(zip_path, args.output_dir / "deep_scan_package.zip")
+        pkg_main = sum(1 for job in jobs if job.get("corpus_scope") == "main")
+        pkg_hist = len(jobs) - pkg_main
         (args.output_dir / "PACKAGE_SUMMARY.txt").write_text(
-            f"Deep Scan V2 package: {pkg_id}\nWorker lane: {lane or 'legacy single queue'}\nWorks needing authoritative verification: {len(jobs)}\nInternal batches: {len(batch_files)}\n\n"
+            f"Deep Scan V2 package: {pkg_id}\nWorker lane: {lane or 'legacy single queue'}\n"
+            f"Works needing authoritative verification: {len(jobs)} ({pkg_main} main + {pkg_hist} historical)\n"
+            f"Internal batches: {len(batch_files)}\n\n"
+            "Scheduling policy: preserve existing reservations; fill newly free slots with Main Radar first, then Historical Radar.\n"
             "Give deep_scan_package.zip to a browsing-capable LLM and ask it to follow INSTRUCTIONS.md strictly.\n",
             encoding="utf-8",
         )

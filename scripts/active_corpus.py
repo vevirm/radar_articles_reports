@@ -28,7 +28,7 @@ DEFAULT_READER = ROOT / "reader_text.json"
 RAW_COLLECTIONS = ("strand_a", "strand_b", "strand_c", "frontier_evidence")
 STRAND_KEYS = {"A": "strand_a", "B": "strand_b", "C": "strand_c"}
 ACTIVE_DECISIONS = {"provisional", "keep", "review"}
-INACTIVE_DECISIONS = {"drop", "drop_unverifiable", "duplicate"}
+INACTIVE_DECISIONS = {"drop", "drop_unverifiable", "duplicate", "needs_manual_verification"}
 AUTHORITATIVE_DEEP_PROFILES = {"deep-reader-v2-authoritative"}
 SAFE_CORRECTION_FIELDS = {
     "title", "authors", "source", "date", "type",
@@ -200,7 +200,7 @@ def build_active_document(
         out[key] = []
 
     seen_target: set[tuple[str, str]] = set()
-    counts = {"provisional": 0, "keep": 0, "review": 0, "drop": 0, "drop_unverifiable": 0, "duplicate": 0}
+    counts = {"provisional": 0, "keep": 0, "review": 0, "drop": 0, "drop_unverifiable": 0, "duplicate": 0, "needs_manual_verification": 0}
     raw_counts: dict[str, int] = {}
     active_counts: dict[str, int] = {}
     current_keys = {

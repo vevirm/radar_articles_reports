@@ -22,11 +22,13 @@ try:
         load_admission, load_corrections, validate_sidecars,
     )
     from scripts.deep_read_works import (
-        CORPUS, SIDECAR, clean, identity_hash, iter_records, load_sidecar, pending, record_key, source_hash, validate,
+        CORPUS, SIDECAR, clean, identity_hash, iter_records, iter_historical_records,
+        historical_pending, load_sidecar, pending, record_key, source_hash, validate,
     )
     from scripts.deep_scan_work_state import (
-        DEFAULT_WORK_STATE, expected_remaining_for_package, load_state, mark_deferred,
-        mark_verified, save_state, sync_verified,
+        DEFAULT_WORK_STATE, expected_remaining_for_package, load_state, manual_verification_keys,
+        mark_recovery_failure, mark_verified, prioritize_pending_keys, save_state, sync_verified,
+        update_record_metadata,
     )
 except ModuleNotFoundError:
     from active_corpus import (  # type: ignore
@@ -34,11 +36,13 @@ except ModuleNotFoundError:
         load_admission, load_corrections, validate_sidecars,
     )
     from deep_read_works import (  # type: ignore
-        CORPUS, SIDECAR, clean, identity_hash, iter_records, load_sidecar, pending, record_key, source_hash, validate,
+        CORPUS, SIDECAR, clean, identity_hash, iter_records, iter_historical_records,
+        historical_pending, load_sidecar, pending, record_key, source_hash, validate,
     )
     from deep_scan_work_state import (  # type: ignore
-        DEFAULT_WORK_STATE, expected_remaining_for_package, load_state, mark_deferred,
-        mark_verified, save_state, sync_verified,
+        DEFAULT_WORK_STATE, expected_remaining_for_package, load_state, manual_verification_keys,
+        mark_recovery_failure, mark_verified, prioritize_pending_keys, save_state, sync_verified,
+        update_record_metadata,
     )
 
 V1_FORMAT = "radar-deep-scan-results-v1"
@@ -143,7 +147,9 @@ def _usable_sources(verification: dict[str, Any]) -> list[dict[str, Any]]:
     return out
 
 
-def validate_v2_result(raw: dict[str, Any], *, key: str, current_keys: set[str]) -> list[str]:
+def validate_v2_result(
+    raw: dict[str, Any], *, key: str, current_keys: set[str], allowed_target_strands: set[str] | None = None
+) -> list[str]:
     problems: list[str] = []
     verification = raw.get("verification") if isinstance(raw.get("verification"), dict) else {}
     admission = raw.get("admission") if isinstance(raw.get("admission"), dict) else {}
@@ -152,10 +158,11 @@ def validate_v2_result(raw: dict[str, Any], *, key: str, current_keys: set[str])
 
     decision = clean(admission.get("decision")).lower()
     target = clean(admission.get("target_strand")).upper()
+    allowed_targets = allowed_target_strands or TARGET_STRANDS
     if decision not in DECISIONS:
         problems.append("invalid admission decision")
-    if decision in {"keep", "review"} and target not in TARGET_STRANDS:
-        problems.append("KEEP/REVIEW requires target_strand A/B/C")
+    if decision in {"keep", "review"} and target not in allowed_targets:
+        problems.append("KEEP/REVIEW requires target_strand " + "/".join(sorted(allowed_targets)))
     if not re.fullmatch(r"[A-Z0-9_\-]{3,80}", clean(admission.get("reason_code")).upper()):
         problems.append("missing/invalid admission reason_code")
     if len(clean(admission.get("reason"))) < 12:
@@ -291,6 +298,7 @@ def _legacy_snapshot(entry: dict[str, Any]) -> dict[str, Any]:
 def main() -> None:
     ap = argparse.ArgumentParser(description="Import returned offline Deep Scan results")
     ap.add_argument("--corpus", type=Path, default=CORPUS)
+    ap.add_argument("--historical", type=Path, default=None, help="Historical archive whose namespaced records may be returned by Deep Scan")
     ap.add_argument("--sidecar", type=Path, default=SIDECAR)
     ap.add_argument("--admission", type=Path, default=None)
     ap.add_argument("--corrections", type=Path, default=None)
@@ -298,12 +306,21 @@ def main() -> None:
     ap.add_argument("--files", nargs="*", type=Path, default=None)
     ap.add_argument("--work-state", type=Path, default=DEFAULT_WORK_STATE)
     args = ap.parse_args()
+    if args.historical is None:
+        args.historical = args.corpus.parent / "historical" / "historical.json"
 
     if args.admission is None:
         args.admission = args.corpus.parent / "admission_state.json"
     if args.corrections is None:
         args.corrections = args.corpus.parent / "record_corrections.json"
     doc = json.loads(args.corpus.read_text(encoding="utf-8"))
+    historical_doc: dict[str, Any] = {}
+    if args.historical.exists():
+        try:
+            loaded_historical = json.loads(args.historical.read_text(encoding="utf-8"))
+            historical_doc = loaded_historical if isinstance(loaded_historical, dict) else {}
+        except Exception as exc:
+            raise SystemExit(f"Unreadable historical archive {args.historical}: {exc}") from exc
     sidecar = load_sidecar(args.sidecar)
     admission_state = load_admission(args.admission)
     corrections = load_corrections(args.corrections)
@@ -314,7 +331,13 @@ def main() -> None:
         key = record_key(row)
         if key:
             current[key] = (strand, row, source_hash(row), identity_hash(row))
+    for strand, row in iter_historical_records(historical_doc):
+        key = record_key(row)
+        if key:
+            current[key] = (strand, row, source_hash(row), identity_hash(row))
     current_keys = set(current)
+    for key, (_strand, row, _source_hash, _identity_hash) in current.items():
+        update_record_metadata(work_state, key, row)
 
     files = [p for p in args.files if p.exists()] if args.files else sorted(
         p for p in args.inbox.glob("*") if p.is_file() and p.name != ".gitkeep" and p.suffix.lower() in {".json", ".zip"}
@@ -328,13 +351,18 @@ def main() -> None:
     # this same queue; enforce a consecutive prefix at import time so an LLM cannot
     # skip a difficult earlier record and return only easier later records. Partial
     # completion remains safe: a result file may stop after any valid prefix.
-    expected_v2_queue = [item[1] for item in pending(doc, sidecar)]
+    expected_v2_queue = prioritize_pending_keys(
+        work_state,
+        [item[1] for item in pending(doc, sidecar)] + [item[1] for item in historical_pending(historical_doc, sidecar)],
+    )
     expected_v2_pos = 0
     admit_table = admission_state.setdefault("records", {})
     corr_table = corrections.setdefault("records", {})
     avoid_whys = [clean(v.get("reader_why")) for v in table.values() if isinstance(v, dict) and clean(v.get("reader_why"))]
     accepted_v1 = accepted_v2 = rejected_count = duplicate_count = stale_count = deferred_count = 0
+    retry_count = manual_count = 0
     work_state_changed = False
+    admission_changed = False
     seen_pairs: set[tuple[str, str, str]] = set()
     imported_files: list[Path] = []
     file_failures: list[str] = []
@@ -430,7 +458,11 @@ def main() -> None:
                     print(f"STALE {label} result {idx}: record identity no longer matches exported V2 job")
                     stale_count += 1
                     continue
-                v2_problems = validate_v2_result(raw, key=key, current_keys=current_keys)
+                is_historical = strand.startswith("historical_")
+                v2_problems = validate_v2_result(
+                    raw, key=key, current_keys=current_keys,
+                    allowed_target_strands={"A", "B"} if is_historical else TARGET_STRANDS,
+                )
                 dup = raw.get("duplicate") if isinstance(raw.get("duplicate"), dict) else {}
                 dup_of = clean(dup.get("duplicate_of"))
                 if clean(dup.get("status")).lower() == "duplicate" and dup_of in current:
@@ -444,19 +476,54 @@ def main() -> None:
                 decision = clean((raw.get("admission") or {}).get("decision")).lower()
                 if decision == "defer":
                     now = utc_now()
-                    mark_deferred(
+                    reason = clean((raw.get("admission") or {}).get("reason"))
+                    new_status = mark_recovery_failure(
                         work_state, key, package_id,
-                        reason=clean((raw.get("admission") or {}).get("reason")),
+                        reason=reason,
                         verification=copy.deepcopy(raw.get("verification") or {}),
                         when=now,
                     )
                     deferred_count += 1
                     work_state_changed = True
+                    if new_status == "needs_manual_verification":
+                        # After the third genuine recovery pass, stop treating this as
+                        # active evidence.  Raw corpus data remains preserved, while the
+                        # coordination/status ledger keeps it visible for human follow-up.
+                        rec = work_state.get("records", {}).get(key, {})
+                        admit_table[key] = {
+                            "decision": "needs_manual_verification",
+                            "target_strand": "",
+                            "reason_code": "NEEDS_MANUAL_VERIFICATION",
+                            "reason": (
+                                "Identity is credible, but substantive evidence remained inaccessible "
+                                "after three validated Deep Scan recovery passes; excluded from active "
+                                "reasoning until hands-on verification supplies materially new access."
+                            ),
+                            "source": "deep_scan_v2",
+                            "corpus_scope": "historical" if is_historical else "main",
+                            "updated_at": now,
+                            "deep_scan_package_id": package_id,
+                            "verification_note": clean((raw.get("verification") or {}).get("verification_note")),
+                            "recovery_attempts": int(rec.get("recovery_attempts") or 3),
+                        }
+                        admission_changed = True
+                        manual_count += 1
+                        print(
+                            f"HANDS-ON {label} result {idx}: third recovery pass failed; "
+                            "removed from automatic queue and active reasoning"
+                        )
+                    else:
+                        retry_count += 1
+                        rec = work_state.get("records", {}).get(key, {})
+                        print(
+                            f"RETRY {label} result {idx}: recovery pass "
+                            f"{int(rec.get('recovery_attempts') or 1)}/3 failed; item remains eligible "
+                            "but retries are throttled behind fresh work"
+                        )
                     if package_expected is not None:
                         package_pos += 1
                     else:
                         expected_v2_pos += 1
-                    print(f"DEFER {label} result {idx}: identity verified but substantive evidence remains access-limited after full recovery ladder")
                     continue
 
                 normalized = {
@@ -485,8 +552,11 @@ def main() -> None:
                     legacy_versions = list(previous.get("legacy_versions", [])) if isinstance(previous.get("legacy_versions"), list) else []
                     legacy_versions.append(_legacy_snapshot(previous))
                     legacy_versions = legacy_versions[-3:]
+                stored_strand = strand.rsplit("_", 1)[-1].upper() if strand.startswith("historical_") else strand
                 entry = {
-                    "profile": V2_PROFILE, "strand": strand, "source_hash": h, "identity_hash": ih,
+                    "profile": V2_PROFILE, "strand": stored_strand,
+                    "corpus_scope": "historical" if is_historical else "main",
+                    "source_hash": h, "identity_hash": ih,
                     **accepted, "verification": copy.deepcopy(raw.get("verification")),
                     "admission": copy.deepcopy(raw.get("admission")), "duplicate": copy.deepcopy(raw.get("duplicate")),
                     "deep_read_mode": "offline_llm_package_v2", "reader_text_model": clean(raw.get("processor")) or "user-provided-llm-subscription",
@@ -507,6 +577,7 @@ def main() -> None:
                     "reason_code": clean(adm.get("reason_code")).upper(),
                     "reason": clean(adm.get("reason")),
                     "source": "deep_scan_v2",
+                    "corpus_scope": "historical" if is_historical else "main",
                     "updated_at": now,
                     "deep_scan_package_id": package_id,
                     "verification_note": clean((raw.get("verification") or {}).get("verification_note")),
@@ -520,6 +591,7 @@ def main() -> None:
                         "fields": copy.deepcopy(fields), "unset": list(unset),
                         "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
                         "reason": clean(correction.get("reason")), "source": "deep_scan_v2",
+                        "corpus_scope": "historical" if is_historical else "main",
                         "evidence": [clean(x.get("url")) for x in _usable_sources(raw.get("verification") or {}) if clean(x.get("url"))],
                         "updated_at": now, "deep_scan_package_id": package_id,
                     }
@@ -542,7 +614,7 @@ def main() -> None:
         raise SystemExit(2)
 
     total_accepted = accepted_v1 + accepted_v2
-    if total_accepted:
+    if total_accepted or admission_changed:
         now = utc_now()
         sidecar["version"] = 3
         sidecar["profile"] = V2_PROFILE if accepted_v2 else sidecar.get("profile", V1_PROFILE)
@@ -571,9 +643,10 @@ def main() -> None:
 
     print(
         f"Deep Scan import: V2 accepted {accepted_v2}; legacy V1 accepted {accepted_v1}; "
-        f"deferred {deferred_count}; stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
+        f"access-limited passes {deferred_count} (retry {retry_count}, hands-on {manual_count}); "
+        f"stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
     )
-    print("Raw radar.json evidence was not deleted. V2 admission/corrections are stored in sidecars for active-corpus rebuild.")
+    print("Raw radar.json and historical/historical.json evidence were not deleted. V2 admission/corrections are stored in sidecars for active-corpus rebuild.")
 
 
 if __name__ == "__main__":
