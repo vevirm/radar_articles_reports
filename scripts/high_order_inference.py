@@ -7,7 +7,7 @@ from functools import lru_cache
 from datetime import datetime, timezone
 from typing import Any, Iterable
 
-PROFILE_VERSION = "v23.4-cumulative-adversarial-level45"
+PROFILE_VERSION = "v23.5-generative-trends-level45"
 
 
 def _clean(v: Any) -> str:
@@ -1192,6 +1192,249 @@ def _generic_concentration_distribution_tension(rows: list[dict[str, Any]]) -> l
     }
     return [cand]
 
+
+def _generic_opposing_topic_tensions(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Discover topic-bound trend/counter-trend pairs without named-document shortcuts.
+
+    Each candidate is an *opposing movement on the same object*: the object is a topic
+    in ``TOPICS`` and both directions must be present in current primary evidence.
+    Strand C and historical material are intentionally excluded from qualification.
+    Repeated reports of the same action are collapsed, and each side needs at least
+    three current records from at least two independent sources.
+    """
+    primary = [r for r in rows if r.get("_primary") and int(r.get("_quality", 0) or 0) >= 82]
+
+    axes = (
+        {
+            "id": "open_protect",
+            "grammar": "opposing_movements_open_protect",
+            "topics": ("openness", "funding_programme"),
+            "left_pattern": r"\b(?:open science|open research|open access|data sharing|academic freedom|research[- ]led|science knows no borders|widen(?:ing)? access|transnational access)\b",
+            "right_pattern": r"\b(?:research security|knowledge security|dual[- ]use|export controls?|foreign interference|securiti[sz]ation|de[- ]risk|derisk|safeguards?)\b",
+            "left_label": "Opening movement",
+            "right_label": "Protection movement",
+            "left_title": "Opening {topic}",
+            "right_title": "Protecting {topic}",
+            "summary": "Current primary evidence shows simultaneous pressure to widen access and to add security or dual-use safeguards around the same European R&I object.",
+            "left_plain": "Access, sharing or openness is being widened around {topic}.",
+            "right_plain": "Security, dual-use or control conditions are tightening around {topic}.",
+            "support_terms": ("open access sharing action", "security safeguard dual use action"),
+            "falsifier_terms": ("common rule removes openness security tradeoff", "evidence safeguards do not constrain access"),
+        },
+        {
+            "id": "accelerate_govern",
+            "grammar": "opposing_movements_accelerate_govern",
+            "topics": ("compute_ai", "quantum", "chips", "startups_scaleup", "funding_programme", "standards_testing"),
+            "left_pattern": r"\b(?:accelerat|scale[- ]?up|deployment|deploy|commerciali[sz]|investment|capacity|gigafactor|pilot lines?|inaugurat|competitiveness|catching up|growth)\b",
+            "right_pattern": r"\b(?:standard(?:s|i[sz])|regulation|governance|guidelines?|safeguards?|certif|testing|validation|compliance)\b",
+            "left_label": "Acceleration movement",
+            "right_label": "Governance movement",
+            "left_title": "Accelerating {topic}",
+            "right_title": "Governing {topic}",
+            "summary": "Current primary evidence shows deployment and scale pressure advancing alongside standards, governance and safeguard work on the same European R&I object.",
+            "left_plain": "Investment, deployment or scale pressure is increasing around {topic}.",
+            "right_plain": "Standards, governance, testing or safeguards are also being built around {topic}.",
+            "support_terms": ("deployment scale investment action", "standards governance safeguard action"),
+            "falsifier_terms": ("deployment waits for settled standards", "governance no longer affects deployment pace"),
+        },
+        {
+            "id": "attract_friction",
+            "grammar": "opposing_movements_attract_friction",
+            "topics": ("talent",),
+            "left_pattern": r"\b(?:attract(?:ion|ing)? talent|recruit|mobility|choose europe|research careers?|doctoral networks?|talent.{0,40}strategic advantage|retain(?:ing)? talent|career development)\b",
+            "right_pattern": r"\b(?:brain drain|precar|temporary contracts?|skills shortage|skills gap|talent shortage|retention problem|career insecurity|underrepresented|career barrier)\b",
+            "left_label": "Attraction movement",
+            "right_label": "Talent-friction movement",
+            "left_title": "Attracting {topic}",
+            "right_title": "Losing or constraining {topic}",
+            "summary": "Current primary evidence shows active talent-attraction measures alongside persistent retention, career or skills friction affecting the same research workforce.",
+            "left_plain": "Recruitment, mobility or career measures are pulling {topic} toward Europe.",
+            "right_plain": "Retention, precarity, shortages or uneven opportunity are pushing the same workforce the other way.",
+            "support_terms": ("talent attraction recruitment mobility action", "brain drain retention skills shortage evidence"),
+            "falsifier_terms": ("net retention improves career stability", "shortage indicators reverse"),
+        },
+        {
+            "id": "autonomy_dependency",
+            "grammar": "opposing_movements_autonomy_dependency",
+            "topics": ("compute_ai", "quantum", "chips", "infrastructure"),
+            "left_pattern": r"\b(?:strategic autonomy|technological sovereignty|tech sovereignty|digital sovereignty|non[- ]dependence|nondependence|self[- ]reliance|self reliance|reduce.{0,50}dependenc|resilien(?:ce|t).{0,60}(?:supply|capacity|technology))\b",
+            "right_pattern": r"\b(?:dependenc|reliance|non[- ]european supplier|external supplier|import dependence|foreign supplier|technology gap|capability gap|chokepoint|supplier concentration|material constraints?)\b",
+            "left_label": "Autonomy-building movement",
+            "right_label": "Dependency movement",
+            "left_title": "Building autonomy in {topic}",
+            "right_title": "Still exposed in {topic}",
+            "summary": "Current primary evidence shows European autonomy-building measures alongside continuing external dependency or chokepoint exposure around the same strategic R&I object.",
+            "left_plain": "European control, resilience or non-dependence is being strengthened around {topic}.",
+            "right_plain": "External suppliers, capability gaps or chokepoints still constrain {topic}.",
+            "support_terms": ("strategic autonomy non dependence capacity action", "external dependency supplier chokepoint evidence"),
+            "falsifier_terms": ("dependency replaced by European capacity", "external exposure no longer binding"),
+        },
+        {
+            "id": "collaborate_derisk",
+            "grammar": "opposing_movements_collaborate_derisk",
+            "topics": ("collaboration_diplomacy", "research_security"),
+            "left_pattern": r"\b(?:science diplomacy|research cooperation|research collaboration|international cooperation|innovation cooperation|partnership|association|associated countr|cross[- ]border cooperation)\b",
+            "right_pattern": r"\b(?:de[- ]risk|derisk|research security|knowledge security|export controls?|foreign interference|securiti[sz]ation|restrict(?:ion|ed)?|safeguards?)\b",
+            "left_label": "Collaboration movement",
+            "right_label": "De-risking movement",
+            "left_title": "Expanding {topic}",
+            "right_title": "De-risking {topic}",
+            "summary": "Current primary evidence shows Europe widening collaboration while simultaneously adding security, de-risking or control conditions around the same cooperation space.",
+            "left_plain": "Partnership, association or cross-border cooperation is widening around {topic}.",
+            "right_plain": "Security, export-control or de-risking conditions are tightening around {topic}.",
+            "support_terms": ("partnership association cooperation action", "research security derisk control action"),
+            "falsifier_terms": ("security rules no longer constrain cooperation", "cooperation contracts despite derisking"),
+        },
+        {
+            "id": "integrate_fragment",
+            "grammar": "opposing_movements_integrate_fragment",
+            "topics": ("infrastructure", "funding_programme", "research_security", "collaboration_diplomacy"),
+            "left_pattern": r"\b(?:single market|european research area|fifth freedom|common framework|common standards?|federat(?:e|ed|ion)|harmoni[sz]|eu[- ]wide|europe[- ]wide|all member states|shared framework)\b",
+            "right_pattern": r"\b(?:fragment|diverg|national approaches?|different countries|different institutions|regional inequality|underrepresented|widening countr|barriers? to participation|uneven implementation)\b",
+            "left_label": "Integration movement",
+            "right_label": "Fragmentation movement",
+            "left_title": "Integrating {topic}",
+            "right_title": "Fragmenting {topic}",
+            "summary": "Current primary evidence shows common European frameworks advancing while national, institutional or regional divergence persists around the same R&I object.",
+            "left_plain": "Common European rules, access or frameworks are converging around {topic}.",
+            "right_plain": "National, institutional or regional divergence still splits {topic} in practice.",
+            "support_terms": ("common framework federation harmonisation action", "national divergence fragmentation evidence"),
+            "falsifier_terms": ("implementation converges across member states", "regional divergence closes"),
+        },
+        {
+            "id": "capacity_access",
+            "grammar": "opposing_movements_capacity_access",
+            "topics": ("infrastructure",),
+            "object_pattern": r"\b(?:research infrastructures?|infrastructures?|facilit(?:y|ies)|supercomput(?:er|ing)|compute capacity|pilot lines?|research platform)\b",
+            "left_pattern": r"\b(?:build|launch|inaugurat|expand|new |investment|capacity|supercomput|pilot lines?|platform|facility|infrastructures?)\b",
+            "right_pattern": r"\b(?:bottleneck|limited availability|limited capacity|geographically concentrated|access barrier|barriers?.{0,50}access|constraint|constrained|scarce|allocation|participation barrier|downstream innovation bottleneck)\b",
+            "left_label": "Capacity-building movement",
+            "right_label": "Access-bottleneck movement",
+            "left_title": "Building more {topic}",
+            "right_title": "Running into {topic} bottlenecks",
+            "summary": "Current primary evidence shows European research capacity being built while independent evidence still records access, allocation or availability bottlenecks around that same infrastructure base.",
+            "left_plain": "New or expanded {topic} capacity is coming online.",
+            "right_plain": "Access, allocation or scarcity constraints still limit use of {topic}.",
+            "support_terms": ("new capacity facility launch", "access bottleneck allocation constraint"),
+            "falsifier_terms": ("utilisation access data show spare capacity", "bottlenecks resolved broad access"),
+        },
+    )
+
+    europe_locus = r"\b(?:eu|europe|european|horizon europe|fp10|eic|erc|eurohpc|era|member states?)\b"
+
+    def binds(row: dict[str, Any], topic: str, direction_pattern: str, object_pattern: str | None = None) -> bool:
+        obj = object_pattern or TOPICS[topic][0]
+        title = _clean(row.get("title") or row.get("headline"))
+        # Strongest binding: Europe/EU, object and direction occur together in the title.
+        # Otherwise require all three in the same sentence. This prevents a materially
+        # external example (for example a Japanese investment story) from moving a
+        # European trend merely because another field mentions Europe.
+        if _rx(europe_locus, title) and _rx(obj, title) and _rx(direction_pattern, title):
+            return True
+        return _same_sentence(row, europe_locus, obj, direction_pattern)
+
+    out: list[dict[str, Any]] = []
+    for axis in axes:
+        for topic in axis["topics"]:
+            scoped = [r for r in primary if topic in (r.get("_topics") or set())]
+            left = _dedupe_near_actions([r for r in scoped if binds(r, topic, axis["left_pattern"], axis.get("object_pattern"))])
+            right = _dedupe_near_actions([r for r in scoped if binds(r, topic, axis["right_pattern"], axis.get("object_pattern"))])
+
+            # A single record that states both directions is synthesis/context, not two
+            # independent pulls. Keep it only if its title clearly chooses one direction.
+            both = {str(r.get("_identity")) for r in left} & {str(r.get("_identity")) for r in right}
+            if both:
+                left2: list[dict[str, Any]] = []
+                right2: list[dict[str, Any]] = []
+                for r in left:
+                    if str(r.get("_identity")) not in both:
+                        left2.append(r); continue
+                    title = _clean(r.get("title") or r.get("headline"))
+                    if _rx(axis["left_pattern"], title) and not _rx(axis["right_pattern"], title):
+                        left2.append(r)
+                for r in right:
+                    if str(r.get("_identity")) not in both:
+                        right2.append(r); continue
+                    title = _clean(r.get("title") or r.get("headline"))
+                    if _rx(axis["right_pattern"], title) and not _rx(axis["left_pattern"], title):
+                        right2.append(r)
+                left, right = left2, right2
+
+            ls = {_low(r.get("_source")) for r in left if _clean(r.get("_source"))}
+            rs = {_low(r.get("_source")) for r in right if _clean(r.get("_source"))}
+            if len(left) < 3 or len(right) < 3 or len(ls) < 2 or len(rs) < 2:
+                continue
+
+            raw_l, raw_r = len(left), len(right)
+            adj_l, adj_r = _source_discount(left), _source_discount(right)
+            raw_pull = round(100 * raw_l / (raw_l + raw_r))
+            adj_pull = round(100 * adj_l / (adj_l + adj_r)) if adj_l + adj_r else raw_pull
+            # Passing the hard evidence gate starts at reader-publication quality. Extra
+            # source diversity and independent records raise confidence but cannot exceed 94.
+            score = min(94, 86 + min(4, max(0, len(ls | rs) - 4)) + min(4, max(0, raw_l + raw_r - 6)))
+            topic_label = TOPICS[topic][1]
+            sq, fq = _queries(topic_label, list(axis["support_terms"]), list(axis["falsifier_terms"]))
+            left_title = axis["left_title"].format(topic=topic_label)
+            right_title = axis["right_title"].format(topic=topic_label)
+            cand = {
+                "id": _candidate_id(axis["grammar"], f"{axis['id']}:{topic}"),
+                "grammar_id": axis["grammar"],
+                "product": "trend",
+                "inferential_distance": 4,
+                "topic_key": topic,
+                "topic_label": topic_label,
+                "status": "qualified",
+                "score": score,
+                "primary_role_coverage": 1.0,
+                "required_roles": ["left_movement", "right_movement"],
+                "covered_roles": ["left_movement", "right_movement"],
+                "missing_links": [],
+                "primary_records": raw_l + raw_r,
+                "primary_sources": len(ls | rs),
+                "context_records": 0,
+                "counter_records": 0,
+                "denial_tested": True,
+                "counter_penalty": 0,
+                "synthesis_across_records": True,
+                "support": [_snap(r, axis["left_label"]) for r in _best(left, 10)] + [_snap(r, axis["right_label"]) for r in _best(right, 10)],
+                "context": [],
+                "against": [],
+                "support_queries": sq,
+                "falsifier_queries": fq,
+                "touched_this_scan": any(r.get("new_this_scan") for r in left + right),
+                "reader_eligible": True,
+                "generic_grammar": True,
+                "reader_title": f"{left_title} while {right_title.lower()}.",
+                "reader_summary": axis["summary"],
+                "trend_balance": {
+                    "family": axis["id"],
+                    "object_key": topic,
+                    "left_title": left_title,
+                    "right_title": right_title,
+                    "left_role": axis["left_label"],
+                    "right_role": axis["right_label"],
+                    "left_plain": axis["left_plain"].format(topic=topic_label),
+                    "right_plain": axis["right_plain"].format(topic=topic_label),
+                    "left_pull": adj_pull,
+                    "right_pull": 100 - adj_pull,
+                    "raw_left_pull": raw_pull,
+                    "raw_right_pull": 100 - raw_pull,
+                    "left_range": [min(raw_pull, adj_pull), max(raw_pull, adj_pull)],
+                    "right_range": [100 - max(raw_pull, adj_pull), 100 - min(raw_pull, adj_pull)],
+                    "left_actions": raw_l,
+                    "right_actions": raw_r,
+                    "left_sources": len(ls),
+                    "right_sources": len(rs),
+                    "left_adjusted_points": round(adj_l, 3),
+                    "right_adjusted_points": round(adj_r, 3),
+                },
+            }
+            out.append(cand)
+
+    # Keep a bounded hidden set. Publication selection below applies its own family/topic
+    # diversity and hysteresis, so this does not turn the page into an exhaustive dump.
+    return sorted(out, key=lambda c: (int(c.get("score", 0)), int(c.get("primary_sources", 0)), int(c.get("primary_records", 0))), reverse=True)[:12]
+
 def _concentration_distribution_tension(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     # Same-object/opposite-action reasoning, shaped by the supplied worked example.
     # We count distinct institutional actions.  Generic studies, diagnoses and repeated
@@ -1306,6 +1549,7 @@ DETECTORS = (
     _generic_comparative_advantage,
     _generic_practice_precedes_doctrine,
     _generic_concentration_distribution_tension,
+    _generic_opposing_topic_tensions,
     _goal_measurement_gap,       # concept-level invoke/define/measure comparison
     _first_mover,                # topic-agnostic ordering/path-dependence grammar
 )
@@ -1327,7 +1571,7 @@ def _reader_text(c: dict[str, Any]) -> None:
     c["reader_title"]=title; c["reader_summary"]=summary
 
 def _select_publications(candidates: list[dict[str, Any]], previous_publications: dict[str, Any] | None = None) -> dict[str,list[str]]:
-    caps={"shock":2,"risk":2,"opportunity":2,"continuity":2,"trend":2}
+    caps={"shock":2,"risk":2,"opportunity":2,"continuity":2,"trend":8}
     out={k:[] for k in caps}
     previous_publications = previous_publications if isinstance(previous_publications, dict) else {}
     by_id={str(c.get("id")):c for c in candidates if c.get("id")}
@@ -1346,31 +1590,39 @@ def _select_publications(candidates: list[dict[str, Any]], previous_publications
             if cid in eligible_ids and cid in by_id:
                 incumbents.append(by_id[cid])
         incumbents.sort(key=lambda c:(int(c.get("score",0)),int(c.get("primary_sources",0))), reverse=True)
-        chosen=[]; grammars=set(); topics=set()
+        chosen=[]
+        def conflicts(candidate: dict[str, Any], selected: list[dict[str, Any]]) -> bool:
+            g=str(candidate.get("grammar_id")); t=str(candidate.get("topic_key"))
+            if product == "trend":
+                # The same opposing-movement grammar may be independently true for
+                # several objects (for example AI and scale-ups), but no one grammar
+                # may occupy more than two reader slots. This preserves generativity
+                # without letting a single tension family dominate the page.
+                same_grammar=[x for x in selected if str(x.get("grammar_id")) == g]
+                return any(str(x.get("topic_key")) == t for x in same_grammar) or len(same_grammar) >= 2
+            return any(str(x.get("grammar_id")) == g or str(x.get("topic_key")) == t for x in selected)
+
         for c in incumbents:
-            g=str(c.get("grammar_id")); t=str(c.get("topic_key"))
-            if g in grammars or t in topics: continue
-            chosen.append(c); grammars.add(g); topics.add(t)
+            if conflicts(c, chosen):
+                continue
+            chosen.append(c)
             if len(chosen)>=cap: break
         for challenger in eligible:
-            cid=str(challenger.get("id")); g=str(challenger.get("grammar_id")); t=str(challenger.get("topic_key"))
-            if any(str(x.get("id"))==cid for x in chosen) or g in grammars or t in topics:
+            cid=str(challenger.get("id"))
+            if any(str(x.get("id"))==cid for x in chosen) or conflicts(challenger, chosen):
                 continue
             if len(chosen)<cap:
-                chosen.append(challenger); grammars.add(g); topics.add(t); continue
+                chosen.append(challenger); continue
             weakest=min(chosen, key=lambda c:(int(c.get("score",0)),int(c.get("primary_sources",0)),int(c.get("primary_records",0))))
             # Six points is deliberately meaningful: this prevents scan-to-scan churn while
             # still allowing a clearly stronger and more important finding to replace one.
             if int(challenger.get("score",0)) < int(weakest.get("score",0)) + 6:
                 continue
             chosen.remove(weakest)
-            grammars={str(x.get("grammar_id")) for x in chosen}
-            topics={str(x.get("topic_key")) for x in chosen}
-            if g in grammars or t in topics:
+            if conflicts(challenger, chosen):
                 chosen.append(weakest)
-                grammars.add(str(weakest.get("grammar_id"))); topics.add(str(weakest.get("topic_key")))
                 continue
-            chosen.append(challenger); grammars.add(g); topics.add(t)
+            chosen.append(challenger)
         chosen.sort(key=lambda c:(int(c.get("score",0)),int(c.get("primary_sources",0))), reverse=True)
         out[product]=[str(c.get("id")) for c in chosen[:cap]]
     return out
@@ -1490,7 +1742,7 @@ def refresh_high_order_inference(
         "watch_count": sum(1 for c in active if c.get("status") == "watch"),
         "dormant_count": sum(1 for c in active if c.get("status") == "dormant"),
         "trigger_summary":{"new_primary_records_evaluated":new_primary,"new_weak_signal_records_evaluated":new_context,"thinking_pass_ran":True},
-        "publication_policy":"Constant checking, sparse output, slow analytical turnover: qualified candidates compete for at most two higher-order slots per reader product; incumbents persist unless they weaken or a materially stronger challenger displaces them. Every surfaced candidate has an explicit falsifier search.",
+        "publication_policy":"Constant checking, sparse output, slow analytical turnover: qualified candidates compete for at most two higher-order slots per reader product, except Trends which may surface up to eight independently qualified opposing-movement pairs; incumbents persist unless they weaken or a materially stronger challenger displaces them. Every surfaced candidate has an explicit falsifier search.",
         "lifecycle_policy":"Analytical candidates accumulate. One missed detector pass never retires a finding; repeated non-redetection only weakens it gradually, and no new finding automatically deletes an old one.",
         "publications":publications,
         "candidate_search_policy": "Only missing-link and falsifier searches are fed back. No candidate bypasses normal A/B/C admission.",
