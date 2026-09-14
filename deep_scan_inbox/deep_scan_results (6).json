@@ -1,0 +1,1363 @@
+{
+ "format": "radar-deep-scan-results-v2",
+ "package_id": "worker-b-20260914T121509Z-0e4acd783ae4",
+ "results": [
+  {
+   "record_key": "link:https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRGJCR3lRVHk0SHVwZnVFYUdjOUV4VXoyaVFsR2RRS1FINkdIUUFDUEtFQy1DcjlvNFRYUm5sUGwxN194VEFMVDBUTVVnTlBXcmJDenFFV0xraGQ1S0lZT2txMXEwcV8zUFBORUs3QndlbWpzSXYtZm5MWDgzZ3FMNFFQU2JVVm1MVTNKTHpPc3pfbGFSYzVWb2FzVDlRWElwd1lHMGJONXBYRzZlZGVobmdEYTV5QWdXQ0lXOFBpQm1Db0NVZWd6S1ZaaGF0UWNYWHI3QVYtSzhXN0JQVndabTZUSQ?oc=5",
+   "source_hash": "5630125e",
+   "identity_hash": "700786fd4150d491",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "news.google.com/rss/articles/CBMi4wFBVV95cUxNRGJCR3lR... is an opaque Google News redirect token; it returns only the generic Google News boilerplate 'Comprehensive up-to-date news coverage, aggregated from sources all over the world', no article body and no headline."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "Record is a news/institutional item with no DOI in the job or in the recovered JRC page."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Searched the scanner core_message as an exact phrase together with 'EUR 452 billion'; matched the JRC item 'New rules for bringing innovations to the EU market could generate up to EUR 452 billion', dated 9 September 2026, which is the date in the job record."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Confirmed issuing body and date against the Commission's Joint Research Centre department page, which lists the same item as a JRC 'General publications' entry of 9 September 2026."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Recovered the canonical JRC page joint-research-centre.ec.europa.eu/jrc-news-and-updates/new-rules-bringing-innovations-eu-market-could-generate-eur-452-billion-2026-09-09_en, including the substantive body describing the three European Innovation Act reforms and the underlying JRC Working Paper on Territorial Modelling and Analysis."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Not needed: the official JRC publisher page was recovered at step 5 and matches date, issuing body and headline exactly."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_publisher_page",
+      "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/new-rules-bringing-innovations-eu-market-could-generate-eur-452-billion-2026-09-09_en",
+      "title": "New rules for bringing innovations to the EU market could generate up to EUR 452 billion",
+      "evidence_used": true
+     },
+     {
+      "kind": "official_publisher_page",
+      "url": "https://commission.europa.eu/about/departments-and-executive-agencies/joint-research-centre_en",
+      "title": "Joint Research Centre — European Commission (item listing, 9 September 2026)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Supplied Google News token carries no content. Work recovered at ladder step 5 on the JRC's own site. Substantive body text was recovered through the search index rather than a direct page fetch, which was not available in this session; depth is therefore recorded as substantive_primary_after_recovery rather than official_full_document."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "C",
+    "reason_code": "C_SUBSTANTIVE_EVIDENCE_RELEASE",
+    "reason": "Not a generic institutional page: the JRC page releases new modelled evidence that fed the official impact assessment of the European Innovation Act, quantifying GDP and employment effects of three named R&I policy reforms."
+   },
+   "metadata_correction": {
+    "fields": {
+     "title": "New rules for bringing innovations to the EU market could generate up to EUR 452 billion",
+     "source": "Joint Research Centre, European Commission",
+     "type": "institutional evidence release"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "Scanner left title and type empty because the supplied Google News token exposes no metadata. Title, issuing body and item type taken from the recovered JRC page and the Commission's JRC department listing. Stored tier cannot be supported from a Google News token, so it is unset for recomputation from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "JRC models a 452 billion euro gain from the European Innovation Act",
+   "reader_what": "Three proposed Innovation Act reforms could add up to EUR 452 billion in EU GDP.",
+   "reader_why": "Modelled evidence fed directly into the official impact assessment behind the legislative proposal.",
+   "reader_more": "The JRC used RHOMOLO, its regional economic model, to estimate what three reforms in the European Innovation Act would mean for the EU economy over ten years. The headline estimate is up to EUR 452 billion in cumulative GDP and around half a million jobs. The first reform would give the EU Intellectual Property Office a mandate to build a standardised valuation framework for patents, a secondary marketplace and an advisory centre, so that small firms can borrow against intellectual property. The other two would make innovation-friendly public procurement mandatory and strengthen pre-commercial R&D procurement. These are ex-ante model projections under stated assumptions, not observed outcomes.",
+   "deep_analysis": {
+    "work_kind": "institutional evidence release reporting an ex-ante macroeconomic assessment",
+    "research_question": "What would the European Innovation Act's proposed reforms be worth to the EU economy over ten years?",
+    "main_finding": "Three EIA reforms could generate up to EUR 452 billion in cumulative EU GDP and about half a million jobs over a ten-year horizon.",
+    "method_or_basis": "RHOMOLO regional computable general equilibrium modelling by the JRC, published as a JRC Working Paper on Territorial Modelling and Analysis and used in the Act's impact assessment.",
+    "qualification": "Figures are ex-ante modelled projections conditional on the reforms being adopted and implemented as proposed; the Act is a legislative proposal, not law.",
+    "radar_relevance": "Directly concerns EU research and innovation policy design: IP valuation, R&D procurement and the legislative instrument intended to improve EU innovation commercialisation.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNTHFaM2NCSDA1eTFvbTlXamJjM0dEVWJ3bG9yVTJobERVbFR1ZV9aZFdsUkRFSDdnUHRBVk0xX25TRklJa1lvdmlySkE3Zzh6cmpCc25uRWJFMWpucUxwcWZBNXBUNVViVUtGVXhsdloyMGV5VEQ4X1NGV1JIYndSdzJfZ2RsQzNUSE5QV1lXSGQ2Z1FVR3FsZjFzdklKaTBLTWk3Rkc1OHlIbVM0WlplcEo0UndjM3BXbFNv?oc=5",
+   "source_hash": "cafd0357",
+   "identity_hash": "123cef9f5199188a",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "Opaque Google News RSS token CBMiuwFBVV95cUxNTHFaM2NCSDA1...; resolves only to Google News aggregator boilerplate, no headline or body."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "Reuters wire story; no DOI exists for this item."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Searched the scanner core_message headline 'Macron summit to seek boost for European space despite no-shows'; multiple licensed carriers returned the Reuters wire under that exact headline."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Matched byline and dateline: 'By Tim Hepher, PARIS, Sept 8 (Reuters)', consistent with the job's 2026-09-08T14:06Z timestamp and Reuters attribution."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "partial",
+      "note": "reuters.com itself was not retrievable in this session; substantive wire text recovered instead from licensed syndication carriers usnews.com and globalbankingandfinance.com, both carrying the Reuters copyright line."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "success",
+      "note": "Cross-checked the underlying event against France 24's 9 September 2026 report on the same Paris summit, confirming the event and the US withdrawals rather than the wording of the Reuters piece."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "licensed_wire_syndication",
+      "url": "https://www.usnews.com/news/world/articles/2026-09-08/macron-summit-to-seek-boost-for-european-space-despite-no-shows",
+      "title": "Macron Summit to Seek Boost for European Space Despite No-Shows (Reuters)",
+      "evidence_used": true
+     },
+     {
+      "kind": "licensed_wire_syndication",
+      "url": "https://www.globalbankingandfinance.com/macron-summit-seek-boost-european-space-despite-no-shows/",
+      "title": "Macron summit to seek boost for European space despite no-shows (Reuters)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity of the Reuters wire story confirmed by headline, byline, dateline and copyright line across two licensed carriers. Depth recorded as substantive_primary_after_recovery because the Reuters original page itself was not accessible."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "C",
+    "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+    "reason": "Reports a concrete event with policy content: the Paris International Space Summit, the withdrawal of four US space firms after White House pressure, and ESA proposals to end European reliance on US rockets for crewed launch."
+   },
+   "metadata_correction": {
+    "fields": {
+     "title": "Macron summit to seek boost for European space despite no-shows",
+     "source": "Reuters",
+     "type": "news report"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "Title and type were empty in the scanner record because the Google News token exposes no metadata; both are taken from the recovered Reuters wire copy. Tier unset so ranking is recomputed from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "US firms pull out of Paris space summit as France pushes European autonomy",
+   "reader_what": "Four US space firms withdrew from the Paris summit; ESA drafts plans to launch astronauts independently.",
+   "reader_why": "Loss of US participation sharpens Europe's case for sovereign crewed launch capability.",
+   "reader_more": "The International Space Summit in Paris on 9 and 10 September 2026 was billed as a forum for decision-makers from 120 nations, including the United States and China. White House concerns about what it saw as a pro-European agenda prompted four US firms, among them SpaceX and Blue Origin, to pull out, and turnout from European leaders was lower than expected. ESA Director General Josef Aschbacher said the agency is drawing up proposals for Europe to end its reliance on US rockets for launching astronauts. France's higher education minister flagged space security as a further agenda item. Outcomes of the summit itself are not reported in this pre-event piece.",
+   "deep_analysis": {
+    "work_kind": "news report on a current development",
+    "research_question": "",
+    "main_finding": "France proceeded with a major space summit despite US corporate withdrawals and weak European leader attendance, with European launch autonomy as the central theme.",
+    "method_or_basis": "Reuters reporting from Paris ahead of the summit, including on-record comments from ESA's Director General and the French higher education minister.",
+    "qualification": "Written before the summit; describes intentions and draft proposals, not adopted decisions or outcomes.",
+    "radar_relevance": "Bears on European space industrial capability, strategic autonomy in launch, and the geopolitics of research and technology cooperation with the United States.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNSzZndFBZYk1SQ19xOVJYSXR1ZHdKa2p2a0RSYTVfeWVicHRLZ2JOdG5zc3hibHhJYWh1V3pIVEhDaV9Wc2xQV2RlYkNkTEZJSDV2V1V6aGloYXVPcFNtMHlCU1ZsTnR5UEZTNTI5WTExa1A4Vy0xZjN4ZFE3TVUzN2tUWFNnc3V2aXNBRldFWXlGYnFwcGtGVkFtRE9HTDktVUhJR09HVUwtdHZmNHdjWGZCTkw?oc=5",
+   "source_hash": "e9cc9c3b",
+   "identity_hash": "aa38e1fab18d295c",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "Opaque Google News RSS token CBMitAFBVV95cUxNSzZndFBZYk1S...; yields only Google News aggregator boilerplate."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "Reuters wire journalism carries no DOI; none is present in the job record and none appeared on any of the licensed carrier copies recovered, so this step is not applicable."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Searched 'French AI company Mistral hits $24 billion valuation in funding round'; exact-headline Reuters copies returned from TradingView, Yahoo Finance and other licensed carriers."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Byline 'Inti Landauro and Elizabeth Howcroft', dateline 'PARIS, Sept 8 (Reuters)', matching the job's Reuters attribution and 2026-09-08T05:02Z timestamp."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "partial",
+      "note": "reuters.com not retrievable in session; full wire text obtained from licensed carriers finance.yahoo.com and tradingview.com."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "success",
+      "note": "Independently corroborated the underlying transaction via CNBC and TechCrunch reports of 8 September 2026 giving the same figures (EUR 3bn raised, EUR 21bn post-money, Samsung / Scaleup Europe Fund / PSG Equity)."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "licensed_wire_syndication",
+      "url": "https://finance.yahoo.com/technology/ai/articles/french-ai-company-mistral-hits-050155785.html",
+      "title": "French AI company Mistral hits $24 billion valuation in funding round (Reuters)",
+      "evidence_used": true
+     },
+     {
+      "kind": "independent_corroboration",
+      "url": "https://www.cnbc.com/2026/09/08/mistral-ai-funding-valuation-samsung.html",
+      "title": "Mistral bags $24 billion valuation as Samsung leads funding for Europe's AI champion",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Reuters wire identified by exact headline, byline and dateline on licensed carriers, with figures independently corroborated by CNBC and TechCrunch."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "C",
+    "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+    "reason": "A concrete, dated financing event of European industrial significance: the largest equity round ever raised by a privately held European technology company, with EU-backed capital participating."
+   },
+   "metadata_correction": {
+    "fields": {
+     "title": "French AI company Mistral hits $24 billion valuation in funding round",
+     "source": "Reuters",
+     "type": "news report"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "Scanner title and type were empty because the Google News token carries no metadata; supplied from the recovered Reuters copy. Tier unset for recomputation."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Mistral raises three billion euros in Europe's largest private technology funding round",
+   "reader_what": "Mistral raised EUR 3 billion at a post-money valuation above EUR 21 billion, roughly 24 billion dollars.",
+   "reader_why": "EU-backed capital and sovereignty concerns shaped Europe's biggest private tech round to date.",
+   "reader_more": "The three-year-old French AI developer Mistral announced on 8 September 2026 that it had raised EUR 3 billion, valuing it at more than EUR 21 billion after the round. The company described it as the largest equity fundraising ever completed by a privately owned European technology firm, up from EUR 11.7 billion a year earlier. The round was co-led by existing investor PSG Equity, South Korea's Samsung Electronics and the EU-backed Scaleup Europe Fund managed by EQT, the latter two investing for the first time. Mistral's chief financial officer said the money would go to models, frontier research and its own data centre capacity. Revenue and valuation figures are company statements reported by Reuters, not audited disclosures.",
+   "deep_analysis": {
+    "work_kind": "news report on a current development",
+    "research_question": "",
+    "main_finding": "Mistral closed a EUR 3 billion round at a EUR 21 billion post-money valuation, the largest private equity financing by a European technology company.",
+    "method_or_basis": "Reuters reporting based on the company's announcement and an interview with its chief financial officer, corroborated by CNBC and TechCrunch.",
+    "qualification": "Valuation and revenue trajectory are company-provided; an IPO was described only as an option with no timetable.",
+    "radar_relevance": "Directly concerns European technological sovereignty in AI, the scaling of an EU frontier-model developer, and the deployment of EU-backed investment instruments.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://doi.org/10.48550/arxiv.2608.12835",
+   "source_hash": "ec6e2726",
+   "identity_hash": "120437236ae5dac2",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "doi.org/10.48550/arxiv.2608.12835 resolves to arxiv.org/abs/2608.12835; the package's stored capture of that page carries the full arXiv abstract, title and listing under Computer Science, matching the scanner title exactly."
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "DataCite DOI 10.48550/arxiv.2608.12835 is the standard arXiv-minted DOI and its identifier tail 2608.12835 matches the arXiv ID on the captured abstract page."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: canonical repository record already matched at steps 1 and 2 with identical title and identifier."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "not_applicable",
+      "note": "Not required; authors Liu, Li, Xu and Wu and the August 2026 arXiv ID are consistent on the canonical abstract page."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "arXiv is itself the official repository of record for this preprint; no journal version is claimed by the record."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Identity was never in doubt; the open question was admission, not identification."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "repository_record",
+      "url": "https://arxiv.org/abs/2608.12835",
+      "title": "AirForesight: Current-to-Future Spatial Map Imagination with Cross-Space Planning Consistency for UAV-VLN",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity certain. Package source_material is a stored capture of the supplied URL itself (not scanner prose); it was read in full and used as the substantive evidence. Direct re-fetching of arbitrary URLs was not available in this session. The captured page is the authors' own canonical abstract, which fully establishes subject matter and contribution; the PDF full text was not retrieved, so depth is not claimed as full_text_repository_copy."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "B",
+    "reason_code": "B_NO_REUSABLE_RI_METHOD",
+    "reason": "A domain-specific deep learning architecture for drone vision-language navigation. Its contribution is a model and a training loss for UAV waypoint prediction, not a transferable analytical, measurement, evaluation or foresight method in the Strand B sense, and it has no European connection. The scanner match appears to rest on the token 'Foresight' in the system name 'AirForesight'."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Drone navigation model wrongly matched on the word Foresight",
+   "reader_what": "A deep learning framework predicts drone waypoints by imagining current and future spatial maps.",
+   "reader_why": "",
+   "reader_more": "AirForesight is a neural architecture for Unmanned Aerial Vehicle Vision-Language Navigation, the task of making a drone follow spoken or written instructions through an outdoor environment. It learns a structured representation of the current scene from multiple camera views, propagates that to a predicted future map, and combines both to choose the next three-dimensional waypoint. A cross-space planning consistency loss pushes the predicted map-space trajectory to agree with the expert action direction. It is evaluated on the OpenUAV and AerialVLN-S benchmarks. The work is a robotics and machine learning contribution with no research-policy method and no European subject matter.",
+   "deep_analysis": {
+    "work_kind": "machine learning methods preprint",
+    "research_question": "Can explicit current-to-future spatial map imagination improve instruction-following navigation for drones?",
+    "main_finding": "The proposed framework reports strong performance on the OpenUAV and AerialVLN-S benchmarks relative to methods that map vision-language inputs directly to actions.",
+    "method_or_basis": "Neural architecture with structured causal attention, joint supervision from map reconstruction and future-trajectory prediction, a cross-space planning consistency loss, and benchmark experiments with ablations.",
+    "qualification": "Unrefereed preprint; results are benchmark scores reported by the authors and the abstract gives no numerical margins.",
+    "radar_relevance": "Fails both strands: no European research, innovation or industrial connection, and no reusable analytical or evaluative method transferable beyond drone navigation.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPRTRreHIxb01uLS1XNGZzdHI1dFQ0Tk5RbWlJLWdqUmpiRkREUVdOeFlNQy1VQmtEdjFKLTIwbFhXTDU1ZmJvTDNYN1ZPcDE0cFRpdHc0RmRaNUxqZzloUEhreGlJYjFrT0JBQl96SlY2NlVXNHZOemMwQVlyaWhjbk9wWUFZaWJBbmpLekFhNnh4c3NWZmhSU1ktUnZ1LWpjV3gzY1hwYjR6VlZybFZfZFpxdTE0OHVJXzh4eA?oc=5",
+   "source_hash": "5a5aa2c3",
+   "identity_hash": "c64c447e8fe8fe00",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "Opaque Google News token CBMivAFBVV95cUxPRTRreHIxb01uLS1XNGZzdHI1...; returns only Google News aggregator boilerplate with no headline or body."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "A Joint Research Centre projects-and-activities web page; no DOI is present in the job record or on the recovered JRC page, so this step is not applicable."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Searched the scanner core_message 'IRIS2 - Europe's space-based secure connectivity system'; matched the JRC page of that exact title."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Issuing body confirmed as Joint Research Centre from the page's own European Commission / Joint Research Centre header, consistent with the job's stated source."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Recovered joint-research-centre.ec.europa.eu/projects-and-activities/iris2-europes-space-based-secure-connectivity-system_en with substantive body text describing the constellation and the JRC's own contribution to mission requirements."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "success",
+      "note": "Cross-checked programme facts against DG DEFIS pages, including the 7 August 2026 implementation agreement expanding IRIS2 to 348 satellites, to confirm the JRC page describes a standing programme rather than announcing a decision."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_publisher_page",
+      "url": "https://joint-research-centre.ec.europa.eu/projects-and-activities/iris2-europes-space-based-secure-connectivity-system_en",
+      "title": "IRIS2 - Europe's space-based secure connectivity system",
+      "evidence_used": true
+     },
+     {
+      "kind": "official_publisher_page",
+      "url": "https://defence-industry-space.ec.europa.eu/european-union-accelerating-and-reinforcing-iris2-2026-08-07_en",
+      "title": "The European Union is accelerating and reinforcing IRIS2",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Work identified at ladder step 3 and recovered at step 5. The recovered page sits under the JRC's 'projects-and-activities' section, not its news section, which is decisive for the admission call."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "C",
+    "reason_code": "C_GENERIC_PROGRAMME_PAGE",
+    "reason": "A standing programme description page explaining what IRIS2 is and what the JRC contributed to it. It reports no new policy decision, funding instrument, programme change or evidence release of its own, which Strand C explicitly requires of otherwise generic institutional pages. The substantive IRIS2 development of this period, the 7 August 2026 implementation agreement, is a separate DG DEFIS publication, not this page."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Standing JRC programme page describing the IRIS2 satellite constellation",
+   "reader_what": "A descriptive page explaining IRIS2 and the JRC's role in defining its mission requirements.",
+   "reader_why": "",
+   "reader_more": "IRIS2, the Infrastructure for Resilience, Interconnectivity and Security by Satellite, is the EU's flagship secure satellite communications programme, intended to serve both government users such as defence, border control and crisis management and commercial users in aviation, maritime and IoT. The recovered page sets out the JRC's contribution: helping define the mission requirements and supporting the Commission and ESA in the technical negotiations that led to the concession agreement with the SpaceRISE consortium. The page is descriptive rather than announcing anything new. It is genuine, useful institutional context, but it is not a dated development.",
+   "deep_analysis": {
+    "work_kind": "institutional programme description page",
+    "research_question": "",
+    "main_finding": "The JRC describes IRIS2 and records its own role in defining mission requirements and supporting technical negotiations with SpaceRISE.",
+    "method_or_basis": "Institutional self-description; no data, analysis or announcement is presented on the page.",
+    "qualification": "Undated standing page; the scanner's 2026-08-28 stamp reflects when it was picked up, not a publication event.",
+    "radar_relevance": "Subject matter is squarely relevant to EU space capability, but the page itself carries no development, so it fails the Strand C threshold.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://arxiv.org/abs/2606.06330",
+   "source_hash": "11091f78",
+   "identity_hash": "ba8f850901dc4182",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "arxiv.org/abs/2606.06330 is the canonical abstract page; the stored capture matches the scanner title exactly and lists the paper under Computer Science > Digital Libraries."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "No DOI is recorded in the job; the record key is the arXiv abstract URL, and arXiv IDs serve as the identifier here."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the canonical repository page was already matched at step 1 with an identical title."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Sole author Myroslava Hladchenko and the 2606 arXiv ID are consistent with the job's 2026-06-04 date."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "arXiv is the repository of record; no journal version is claimed by the record and none was identified."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Identity unambiguous; no competing or superseding version found in the package."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "repository_record",
+      "url": "https://arxiv.org/abs/2606.06330",
+      "title": "Evolution of bilateral and multilateral collaboration of EU-14 countries across disciplines, 2010-2024",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity certain. Evidence is the authors' canonical arXiv abstract, which reports the study's design and its substantive results in detail; the PDF was not retrieved, so full_text_repository_copy is not claimed and confidence is held at medium."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "A bibliometric study whose direct subject is the structure of European research collaboration: EU-14 co-authorship patterns, the effect of Brexit, and the effect of Russia's suspension from Horizon Europe. European R&I is the object of study, not a comparator or a mention."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EU-14 research collaboration became more multilateral, and Brexit left no visible mark",
+   "reader_what": "Multilateral co-authorship rose sharply across disciplines while bilateral collaboration stayed stable and EU-concentrated.",
+   "reader_why": "Collaboration patterns track policy shocks such as Russia's Horizon Europe suspension, but not Brexit.",
+   "reader_more": "Using OpenAlex data, the study traces bilateral and multilateral research collaboration for nine EU-14 member states across six disciplines from 2010 to 2024. Bilateral collaboration rates were broadly stable and concentrated among EU-14 partners, followed by the United States, the United Kingdom and China, while multilateral collaboration rose significantly in every discipline, most steeply in medicine and highest overall in physics and astronomy. Relative Intensity of Collaboration, a measure of whether partners collaborate more or less than expected, rose for both types and fell below expectation most often with South Korea, India and China. Notably, no substantial change was observed with the UK after Brexit. Multilateral physics and astronomy collaboration with Russia declined after its 2022 Horizon Europe suspension, while medicine collaboration rose.",
+   "deep_analysis": {
+    "work_kind": "bibliometric empirical study (preprint)",
+    "research_question": "How did bilateral and multilateral research collaboration of EU-14 countries evolve across disciplines between 2010 and 2024?",
+    "main_finding": "Multilateral collaboration grew strongly across all six disciplines while bilateral collaboration stayed stable; no Brexit effect was detected, but multilateral physics and astronomy collaboration with Russia fell after its Horizon Europe suspension.",
+    "method_or_basis": "Descriptive bibliometric analysis of OpenAlex co-authorship data for nine EU-14 states over six disciplines, 2010-2024, using collaboration rates and the Relative Intensity of Collaboration index.",
+    "qualification": "Unrefereed preprint; the Russia and Brexit findings are temporal coincidences in descriptive data, not identified causal effects, and OpenAlex coverage varies by discipline.",
+    "radar_relevance": "Provides direct empirical evidence on the structure of European research collaboration and on how framework-programme and geopolitical shocks do or do not show up in co-authorship.",
+    "why_supported": true,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "link:https://doi.org/10.1007/s40888-026-00401-9",
+   "source_hash": "fc832236",
+   "identity_hash": "d5abb0ebda7ad1e8",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_or_substantive_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "doi.org/10.1007/s40888-026-00401-9 resolves to link.springer.com/article/10.1007/s40888-026-00401-9; the stored capture is the open-access article page and carries abstract, introduction, method and findings (about 20,600 characters)."
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Springer DOI 10.1007/s40888-026-00401-9 matches the captured article's title, the three authors Celi, D'Atteo and Sica, and the journal Economia Politica."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the DOI resolved directly to a matching open-access full article."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "not_applicable",
+      "note": "Not required; author list and 2026 publication year were confirmed on the resolved publisher page."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Springer Nature is the publisher of record and the article is marked open access ('You have full access to this open access article'), so no repository copy was needed."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Identity unambiguous from the resolved DOI."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://link.springer.com/article/10.1007/s40888-026-00401-9",
+      "title": "Black and green: How electoral outcomes influence provincial circular economy performance in Italy",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Open-access publisher full text confirms title, authors, journal and substantive content. Evidence is the package's stored capture of the supplied URL itself, a verbatim capture of the document rather than scanner prose; it was read in full. Direct re-fetching of arbitrary URLs was unavailable in this session, so depth is recorded conservatively."
+   },
+   "admission": {
+    "decision": "review",
+    "target_strand": "A",
+    "reason_code": "A_SCOPE_JUDGEMENT_NEEDED",
+    "reason": "Identity and evidence are solid and the European subject matter is genuine, but admission turns on a scope question a human should settle: whether provincial uptake of the EU circular economy agenda, analysed through electoral politics, counts as research, innovation or industrial-capability evidence for the Radar, or as green-transition political economy that sits outside the strand. This is not a retrieval failure."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Italian provincial politics shapes how far the EU circular economy agenda is implemented",
+   "reader_what": "Moderate, especially centre-left, electoral outcomes favour circular economy uptake; extreme positions hinder it.",
+   "reader_why": "Political orientation, not just infrastructure, conditions where EU transition policy actually lands.",
+   "reader_more": "The study asks how electoral preferences across Italian provinces influence circular economy implementation, using NUTS-3 data from 2008 to 2020 and a Three-Stage Least Squares estimation that allows the variables to be mutually determined. The authors read Italy's north-south divide as a smaller version of a European problem: reconciling environmental sustainability with economic cohesion when politics is volatile. They find a complex relationship, in which moderate positions, particularly centre-left, are associated with greater circularity while ideological extremes generally hinder it and centre-right economic positions often carry a negative association. Northern provinces appear readier to adopt, whereas southern provinces face infrastructural deficits and populist resistance. These are conditional associations in observational data, not demonstrated causal effects.",
+   "deep_analysis": {
+    "work_kind": "empirical political-economy study",
+    "research_question": "How do electoral preferences in Italian provinces influence the implementation of circular economy practices?",
+    "main_finding": "Moderate, especially centre-left, electoral orientations are associated with stronger provincial circular economy performance, while ideological extremes and centre-right economic positions are associated with weaker performance.",
+    "method_or_basis": "Three-Stage Least Squares estimation on NUTS-3 Italian provincial panel data, 2008-2020, combining ecological transition indicators, economic performance measures and electoral results.",
+    "qualification": "Associations from observational regional data; 3SLS handles interdependence between equations but does not establish causal direction between voting and circular economy uptake.",
+    "radar_relevance": "Relevant to how EU transition policy is absorbed unevenly across regions, but the core object is electoral behaviour and circular economy performance rather than research or innovation activity, which is why the strand call needs a human.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "link:https://ufm.dk/english/key-areas/research-and-innovation/research-and-innovation-system/",
+   "source_hash": "651cb78b",
+   "identity_hash": "b6e96eae8db6162d",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "ufm.dk/english/key-areas/research-and-innovation/research-and-innovation-system/ is a standing English-language section page of the Danish ministry's site; the stored capture is the whole page (about 3,800 characters) and contains its complete text."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "A standing section page on the Danish ministry website; no DOI is recorded in the job and none appears on the page, so this step is not applicable."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the supplied URL opened as the claimed page with the matching heading 'Research and Innovation system'."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "not_applicable",
+      "note": "Not required; the issuing body is the site owner and no author or publication date is asserted on the page."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "ufm.dk is itself the official ministry domain, so the supplied URL is already the authoritative publisher location."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Identity was never in question; the admission issue is the page's nature, not its provenance."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_institutional_page",
+      "url": "https://ufm.dk/english/key-areas/research-and-innovation/research-and-innovation-system/",
+      "title": "Research and Innovation system - Danish Ministry of Science, Higher Education and Digital Affairs",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Full page text available and read. It is an evergreen orientation page: it names the categories of research-performing and research-funding bodies in Denmark and links onward to the Agency for Higher Education and Science. Evidence is the package's stored capture of the supplied URL itself, a verbatim capture of the document rather than scanner prose; it was read in full. Direct re-fetching of arbitrary URLs was unavailable in this session, so depth is recorded conservatively."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "A",
+    "reason_code": "A_GENERIC_INSTITUTIONAL_PAGE",
+    "reason": "A standing ministry orientation page that lists the types of bodies performing and funding Danish research. It presents no finding, analysis, decision or dated development, so there is no substantive work for the Radar to hold, even though the topic is squarely European R&I."
+   },
+   "metadata_correction": {
+    "fields": {
+     "type": "institutional web page",
+     "date": ""
+    },
+    "unset": [
+     "source_tier",
+     "date"
+    ],
+    "reason": "The captured page is a standing ministry section page with no publication date and no author, so the scanner's type 'research/policy paper' is unsupported and the 2026-08-06 date is a capture timestamp rather than a publication date. Tier unset so ranking is recomputed from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Evergreen Danish ministry page describing who performs and funds national research",
+   "reader_what": "A standing orientation page listing Danish research-performing and research-funding bodies with onward links.",
+   "reader_why": "",
+   "reader_more": "The page divides the Danish public research and innovation system into bodies that carry out research and bodies that fund it. Performers listed include universities, university colleges and business academies, government-approved research and technology organisations, university hospitals, national research institutions, and museums and libraries. Funders include the Finance Act and its research reserve, the Basic Research Fund, Denmark's Free Research Fund, Innovation Fund Denmark, development and demonstration programmes, EU framework programmes, the Danish regions, and private companies and foundations. It is accurate and useful as background, but it is a navigational description of a system rather than a work with a claim.",
+   "deep_analysis": {
+    "work_kind": "standing institutional web page",
+    "research_question": "",
+    "main_finding": "The page describes the composition of the Danish public research and innovation system, separating research performers from research funders.",
+    "method_or_basis": "Institutional self-description; no data, analysis or evidence is presented.",
+    "qualification": "Undated evergreen page; the scanner's 2026-08-06 date is a capture timestamp, not a publication date, and the scanner's 'research/policy paper' type is wrong.",
+    "radar_relevance": "Topically on-target for European R&I but carries no substantive content, so it fails Strand A's requirement for a substantive work.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://www.vttresearch.com/en/ourservices/fusion-energy-research-and-services",
+   "source_hash": "9573b1df",
+   "identity_hash": "533da4122ed8e041",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "vttresearch.com/en/ourservices/fusion-energy-research-and-services opened as the claimed page; the stored capture runs to about 11,000 characters and includes the full service description and client-benefit sections."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "A service-offering page on VTT's corporate website; no DOI is recorded in the job and none appears on the page, so this step is not applicable."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the supplied URL is the canonical page and its heading matches the scanner title."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "not_applicable",
+      "note": "Not required; VTT is both site owner and stated author, and no publication date is asserted."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "vttresearch.com is VTT's own domain and the URL sits under /ourservices/, which is decisive for classifying the page."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Not applicable: the supplied URL opened as the claimed page on VTT's own domain with a matching heading, so no distinctive-fragment or identifier search was needed to establish which work this is."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_institutional_page",
+      "url": "https://www.vttresearch.com/en/ourservices/fusion-energy-research-and-services",
+      "title": "Fusion energy research and services for the whole value chain - VTT",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Full page read. The URL path and the page's framing ('we help clients', 'our clients benefit from') establish it as a commercial service-offering page rather than a research output or announcement. Evidence is the package's stored capture of the supplied URL itself, a verbatim capture of the document rather than scanner prose; it was read in full. Direct re-fetching of arbitrary URLs was unavailable in this session, so depth is recorded conservatively."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "A",
+    "reason_code": "A_PROMOTIONAL_SERVICE_PAGE",
+    "reason": "A service-marketing page describing what VTT sells to fusion clients. It reports no research result, no new capability decision and no dated development. Real European fusion substance is referenced (ITER, EUROfusion, over 100 experts) but only as credentials for the offer, which is not a substantive work."
+   },
+   "metadata_correction": {
+    "fields": {
+     "type": "institutional service web page",
+     "text_mode": "full_text"
+    },
+    "unset": [
+     "source_tier",
+     "date"
+    ],
+    "reason": "The captured page is an undated commercial service page under vttresearch.com/en/ourservices/, so the scanner's 'research/policy paper' type is unsupported and its 2026-09-01 date is a capture timestamp rather than a publication date. Tier unset for recomputation from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "VTT service page marketing its fusion research offering to clients",
+   "reader_what": "A commercial page offering reactor modelling, materials, remote operations and validation services to fusion clients.",
+   "reader_why": "",
+   "reader_more": "The page sets out VTT's fusion energy service offering across the value chain, from reactor modelling and materials development to remote operations and early commercial applications. It is addressed to reactor developers, component suppliers, investors and policymakers, promising independent science-based assessments, technical validation of designs and materials, and faster entry into the fusion supply chain. VTT states it has more than 100 experts contributing to programmes including ITER and EUROfusion. That is a genuine European research credential, but the page's function is to market services rather than to report findings or announce a development, and it carries no date.",
+   "deep_analysis": {
+    "work_kind": "institutional service-offering web page",
+    "research_question": "",
+    "main_finding": "VTT offers fusion-related research services spanning modelling, materials, remote operations and validation, citing over 100 fusion experts and involvement in ITER and EUROfusion.",
+    "method_or_basis": "Institutional marketing copy; no data, results or analysis are presented.",
+    "qualification": "Undated evergreen page under the site's /ourservices/ path; the scanner's 2026-09-01 date is a capture timestamp and its 'research/policy paper' type is unsupported.",
+    "radar_relevance": "European fusion capability is genuinely Radar-relevant, but this page carries no substantive work, so it fails Strand A.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://defence-industry-space.ec.europa.eu/eu115-million-programme-agile-and-rapid-defence-innovation-agile-2026-03-26_en",
+   "source_hash": "af067e17",
+   "identity_hash": "b3ba61e1ef35f652",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "defence-industry-space.ec.europa.eu/eu115-million-programme-agile-and-rapid-defence-innovation-agile-2026-03-26_en opened as the claimed Commission page; the stored capture carries the complete announcement text (about 2,900 characters)."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "A European Commission DG DEFIS announcement page; no DOI is recorded in the job and none appears on the page, so this step is not applicable."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the supplied URL is the canonical DG DEFIS page and its heading matches the scanner title, including the EUR 115 million figure."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Issuing body confirmed on the page as the Directorate-General for Defence Industry and Space; the announcement text dates the presentation to 25 March 2026 while the URL slug carries 2026-03-26."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "ec.europa.eu is the authoritative publisher domain; the page also links the draft Regulation establishing AGILE and the EU Defence Industry Transformation Roadmap."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Not applicable: the supplied URL opened as the claimed Commission page with matching heading, budget figure and issuing directorate-general, so no further identity search was needed."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_publisher_page",
+      "url": "https://defence-industry-space.ec.europa.eu/eu115-million-programme-agile-and-rapid-defence-innovation-agile-2026-03-26_en",
+      "title": "EUR 115 million Programme for agile and rapid defence innovation (AGILE)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Official Commission announcement recovered in full at ladder step 1. Evidence is the package's stored verbatim capture of the supplied URL, read in full; direct re-fetching of arbitrary URLs was unavailable in this session."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "An official Commission announcement of a new EU funding instrument for defence innovation, with a stated budget, design parameters and a legislative route. This is substantive European research and innovation policy, not a programme navigation page."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Commission proposes AGILE, a 115 million euro fast-track defence innovation instrument",
+   "reader_what": "A pilot instrument would fund 20 to 30 disruptive defence projects with four-month time-to-grant.",
+   "reader_why": "Short innovation cycles proved decisive in Ukraine, driving a faster EU funding design.",
+   "reader_more": "On 25 March 2026 the Commission presented AGILE, a EUR 115 million pilot funding tool intended to move disruptive defence technology from laboratory to field quickly, with artificial intelligence, quantum and drones named as target areas and small and medium-sized enterprises, start-ups and scale-ups as the intended beneficiaries. It would support between 20 and 30 projects at up to 100 percent of eligible costs, aim for a time-to-grant of four months, and allow retroactive claims for costs incurred up to three months before a call closes. Two activity strands are planned: mission-driven development, and market delivery. AGILE requires a new Regulation to be adopted by Parliament and Council; the Commission expects it to be operational from early 2027, so this is a proposal, not an operating programme.",
+   "deep_analysis": {
+    "work_kind": "official policy announcement of a proposed funding instrument",
+    "research_question": "",
+    "main_finding": "The Commission proposed AGILE, a EUR 115 million pilot instrument designed to fund and field disruptive defence innovation on drastically compressed timelines.",
+    "method_or_basis": "Primary Commission announcement setting out budget, eligibility, funding rate, project numbers and procedural design, with links to the draft Regulation and the EU Defence Industry Transformation Roadmap.",
+    "qualification": "A proposal under the ordinary legislative procedure, not adopted law; the four-month time-to-grant and 2027 start are intentions, and no projects have been funded.",
+    "radar_relevance": "Direct evidence on EU innovation-policy instrument design, dual-use and defence research funding, and the Commission's attempt to shorten public R&I funding cycles.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://era.gv.at/public/documents/5533/2026_09_September_RTD.E.1_VN.pdf",
+   "source_hash": "fd0ea0fe",
+   "identity_hash": "f66d72ec4936c8a6",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "era.gv.at/public/documents/5533/2026_09_September_RTD.E.1_VN.pdf opened as a PDF; the stored excerpt (24,000 characters) shows it is a European Commission DG Human Resources and Security vacancy notice, reference HR.B.1.003, Brussels 11/06/2026, for a Seconded National Expert in unit RTD.E1, Sysper post 423390, deadline 25/09/2026."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "An internal Commission administrative vacancy notice circulated as a PDF; no DOI is recorded in the job and none appears on the document, so this step is not applicable."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the supplied PDF is the document itself and its header matches the scanner title reference RTD.E.1."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "The PDF's own letterhead identifies the author as the European Commission, Directorate-General Human Resources and Security, Competitions, Selections and Secondments, dated 11/06/2026, not ERA Portal Austria, which is only the host."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "ERA Portal Austria is a national mirror for EU vacancy notices; the document is the Commission's own trilingual notice, so the hosted PDF is the authoritative text."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "No identity question arises; the document is self-identifying."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document_pdf",
+      "url": "https://era.gv.at/public/documents/5533/2026_09_September_RTD.E.1_VN.pdf",
+      "title": "Vacancy notice for a post of Seconded National Expert, DG RTD.E.1 (Industrial Research, Strategy and Coordination)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Document read in full from the package's PDF capture and is self-identifying as a recruitment notice. Evidence is the package's stored verbatim capture of the supplied URL, read in full; direct re-fetching of arbitrary URLs was unavailable in this session."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "A",
+    "reason_code": "A_RECRUITMENT_NOTICE",
+    "reason": "A staff vacancy notice for a Seconded National Expert post. Recruitment documents are not substantive works, and the R&I vocabulary it contains is a description of the hiring unit's remit rather than any finding, decision or development."
+   },
+   "metadata_correction": {
+    "fields": {
+     "source": "European Commission, Directorate-General for Human Resources and Security",
+     "type": "vacancy notice",
+     "date": "2026-06-11"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "The PDF letterhead shows the issuing body is the European Commission, DG Human Resources and Security, dated 11/06/2026; ERA Portal Austria is only the hosting national portal, and the scanner's 'institutional report' type and 2026-06-30 date are unsupported by the document itself. Tier unset so ranking is recomputed from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Commission vacancy notice for a seconded national expert in DG RTD",
+   "reader_what": "A recruitment notice for a 24-month Seconded National Expert post in unit RTD.E1, Brussels.",
+   "reader_why": "",
+   "reader_more": "The document is a European Commission vacancy notice, issued by DG Human Resources and Security on 11 June 2026, for a Seconded National Expert in DG Research and Innovation, unit RTD.E1 (Industrial Research, Strategy and Coordination). The post is in Brussels for an initial 24 months with allowances, provisionally starting in the fourth quarter of 2026, with applications closing on 25 September 2026. Its entity description is informative about the unit's remit, which covers Horizon Europe Cluster 4, the 2028-34 framework programme negotiations, the European Competitiveness Fund, the European Partnership on Metrology, the Industrial R&D Investment Scoreboard and dual-use research. That context is background, not a development.",
+   "deep_analysis": {
+    "work_kind": "administrative recruitment notice",
+    "research_question": "",
+    "main_finding": "The Commission advertised a Seconded National Expert post in the DG RTD unit responsible for industrial research strategy and coordination.",
+    "method_or_basis": "Primary administrative document: a trilingual vacancy notice with post number, duration, eligibility criteria and deadline.",
+    "qualification": "The application deadline of 25 September 2026 means the notice is transient; nothing in it reports a policy or research outcome.",
+    "radar_relevance": "None as a work. The unit description mentions genuinely relevant instruments, but a staffing advertisement is explicitly outside scope.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://www.euronews.com/next/2026/09/10/3d-printing-to-colonise-mars-after-the-moon-the-biomaterials-tested-by-scientists",
+   "source_hash": "91d9342b",
+   "identity_hash": "d0af9dc9bb2314b2",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_or_substantive_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "euronews.com/next/2026/09/10/3d-printing-to-colonise-mars-after-the-moon-the-biomaterials-tested-by-scientists is a direct article URL, not a redirect token; the stored capture holds the complete article body (about 4,000 characters)."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "News article; no DOI. The underlying study it reports is attributed to the journal Chem Circularity but the record's claimed work is the Euronews article."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the supplied URL opened as the claimed work and the slug matches the article's subject."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Publication date 10 September 2026 is embedded in the URL path and matches the job's timestamp; outlet is Euronews Next as claimed."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "euronews.com is the publisher of record and the supplied URL is the canonical article location."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Not applicable: the supplied URL is a canonical dated Euronews article path that opened as the claimed work, so no distinctive-phrase or identifier search was needed to fix identity."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://www.euronews.com/next/2026/09/10/3d-printing-to-colonise-mars-after-the-moon-the-biomaterials-tested-by-scientists",
+      "title": "3D printing to colonise Mars after the Moon: the biomaterials tested by scientists",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Full article text available and read. It is a science feature aggregating three secondary reports (Interesting Engineering, MaterialDistrict, Rinnovabili.it), several of them explicitly flagged as Italian-language sources. Evidence is the package's stored verbatim capture of the supplied URL, read in full; direct re-fetching of arbitrary URLs was unavailable in this session."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "C",
+    "reason_code": "C_SECONDARY_FEATURE_NO_EU_DEVELOPMENT",
+    "reason": "A derivative science feature, not a development. It summarises a Hong Kong university study via other outlets' coverage; the European elements, an Italian lunar habitat module and a Chalmers hydrogel, are passing mentions rather than the subject. No new policy decision, funding instrument, programme change or European evidence release is reported."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Euronews feature on Mars 3D-printing biomaterials, drawn from other outlets",
+   "reader_what": "Hong Kong researchers combined regolith, gelatine and engineered yeast into a 3D-printable Martian building material.",
+   "reader_why": "",
+   "reader_more": "The article describes work led by civil engineer Jishen Qiu at the Hong Kong University of Science and Technology, published in Chem Circularity, on a compound for 3D printing structures on Mars. It combines Martian regolith as bulk material with gelatine as binder and nutrient and a yeast engineered with mussel-inspired adhesive proteins. Low temperature and reduced pressure during printing sublimate ice to produce a lightweight solid foam, which in simulation resisted compression comparably to lightweight concrete. The piece then surveys a Chalmers yeast-and-cellulose hydrogel and NASA's Olympus Project and Mars Dune Alpha habitat. Euronews itself cites Interesting Engineering, MaterialDistrict and Rinnovabili.it rather than the primary paper.",
+   "deep_analysis": {
+    "work_kind": "secondary science news feature",
+    "research_question": "",
+    "main_finding": "A regolith, gelatine and engineered-yeast composite printed under low temperature and pressure achieved compressive strength comparable to lightweight concrete in simulated Martian conditions.",
+    "method_or_basis": "Journalistic summary of a third-party study reported by other outlets; Euronews conducted no independent reporting or analysis.",
+    "qualification": "Findings are from simulated environments, and the article itself notes unresolved questions about microbial survival on Mars and continued dependence on Earth-supplied resources.",
+    "radar_relevance": "Fails Strand C: the research is non-European, the European references are incidental, and the article reports no development in European research or innovation.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "link:https://merics.org/sites/default/files/2026-08/vives-discussion-paper-107-schindowski-zenglein-groenewegen-lau-dp-industrial-policy-and-technology-linkages-conceptualizing-chinas-approach-004.pdf",
+   "source_hash": "c94aa42a",
+   "identity_hash": "216994c336d60230",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_or_substantive_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "The merics.org PDF opened and its own cover page identifies it as VIVES Discussion Paper No. 107, April 2026, by Robin Schindowski (KU Leuven, VIVES), Jeroen Groenewegen-Lau (MERICS) and Max Zenglein (The Conference Board). The stored capture is a 24,000-character excerpt covering cover, abstract and introduction."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "Working/discussion paper; no DOI is printed on the document."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the supplied PDF is the document itself and its title page matches the record title exactly."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Authors, institutional affiliations, series number and April 2026 date all read directly off the paper's cover and title pages, correcting the scanner's attribution of authorship to 'MERICS'."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "The paper self-identifies as a VIVES (KU Leuven) discussion paper; merics.org hosts a copy because a co-author is at MERICS. The hosted PDF is the authoritative full text."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "No identity ambiguity; the document names its own series, number and funding acknowledgement (Horizon Europe grant 101061700, DWARC project)."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "working_paper_full_text",
+      "url": "https://merics.org/sites/default/files/2026-08/vives-discussion-paper-107-schindowski-zenglein-groenewegen-lau-dp-industrial-policy-and-technology-linkages-conceptualizing-chinas-approach-004.pdf",
+      "title": "Industrial Policy and Technology Linkages: Conceptualizing China's Approach (VIVES Discussion Paper No. 107)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Document read from cover through abstract and introduction. The decisive finding is that the paper's stated contribution is a schematic analytical framework, applied to three case studies, which moves the admission from Strand A to Strand B. Evidence is the package's stored verbatim capture of the supplied URL, read in full; direct re-fetching of arbitrary URLs was unavailable in this session."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "B",
+    "reason_code": "B_REUSABLE_ANALYTICAL_FRAMEWORK",
+    "reason": "The paper's explicit contribution is a transferable conceptual framework for analysing industrial policy through technology linkages between future, emerging and traditional industries, demonstrated on three sector case studies. Strand A would not hold: the subject is China, and the EU appears only as a Horizon Europe funding acknowledgement, which the rules exclude as a basis for European relevance."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Robin Schindowski, Jeroen Groenewegen-Lau, Max J. Zenglein",
+     "source": "VIVES, KU Leuven (VIVES Discussion Paper No. 107)",
+     "type": "discussion paper"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "The PDF cover and title page name three individual authors with affiliations and identify the work as VIVES Discussion Paper No. 107 of April 2026. The scanner recorded 'MERICS' as both author and source; merics.org only hosts the file because one co-author is based there. Tier unset so ranking is recomputed from the verified issuing series rather than a guessed organisation."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "A framework for reading industrial policy through linkages between industry types",
+   "reader_what": "China's industrial policy targets linkages between future, emerging and traditional industries rather than single sectors.",
+   "reader_why": "The framework is transferable: it can be applied to other countries' industrial policy designs.",
+   "reader_more": "Based on a systematic review of Chinese-language sources, the authors propose a schematic framework for analysing industrial policy. It distinguishes future industries, meaning strategically important high-technology fields with immature markets, from emerging industries, which future industries become once scientific advances yield commercially viable products, and from the large base of traditional industries. Traditional firms adopt emerging technology to upgrade and in turn provide emerging firms with an initial market, shaping the technology's trajectory, while state support concentrates on these linkages by granting favoured firms preferential access to production factors and matching suppliers with buyers and firms with research institutes. Case studies on electric vehicles, textiles and apparel, and advanced semiconductors show the framework in use. It is conceptual and unrefereed, not an effectiveness evaluation.",
+   "deep_analysis": {
+    "work_kind": "conceptual and case-study discussion paper",
+    "research_question": "How can China's industrial policy be conceptualised in a way that makes its design legible to analysts?",
+    "main_finding": "Chinese industrial policy is best understood as concentrating state support on technology linkages between future, emerging and traditional industries, in order to accelerate cycles of innovation, commercialisation and diffusion.",
+    "method_or_basis": "Systematic review of Chinese-language policy sources, construction of a schematic analytical framework, and three illustrative sector case studies.",
+    "qualification": "Unrefereed discussion paper. It conceptualises policy design and does not measure whether the policies work; the authors note China also faces depressed demand, destructive subnational competition and trading-partner pushback.",
+    "radar_relevance": "Qualifies under Strand B as a reusable analytical framework for industrial and innovation policy, applicable beyond the Chinese case that motivates it.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://doi.org/10.3389/ti.2026.16976",
+   "source_hash": "bf8f22bd",
+   "identity_hash": "c6491052925012e0",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "doi.org/10.3389/ti.2026.16976 resolves to frontierspartnerships.org/journals/transplant-international/articles/10.3389/ti.2026.16976/full; the stored capture is the open-access full text (about 22,900 characters)."
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "DOI 10.3389/ti.2026.16976 matches the Transplant International article, its title and the author list including Thaunat, Dor, Cillo, Oniscu and Berishvili."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the DOI resolved directly to the matching full-text article."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "not_applicable",
+      "note": "Not required; journal, authors and 2026 date were confirmed on the resolved article page."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Frontiers Partnerships hosts Transplant International, the journal of the European Society for Organ Transplantation, and the article is open access, so no repository copy was needed."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Identity unambiguous from the resolved DOI."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://www.frontierspartnerships.org/journals/transplant-international/articles/10.3389/ti.2026.16976/full",
+      "title": "Can european law keep pace with biomedical innovation? The reinvention of transplantation regulation",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Open-access full text read. Substance is a reasoned argument about EU regulatory reform rather than an empirical study, which is reflected in the analysis below. Evidence is the package's stored verbatim capture of the supplied URL, read in full; direct re-fetching of arbitrary URLs was unavailable in this session."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "The work's subject is European regulatory architecture itself: Directive 2001/18/EC, Directive 2010/53/EU and the proposed reform of transplantation and GMO governance, and what that architecture means for where biomedical innovation can be developed in Europe. This is research-policy and regulatory capability, not an incidental EU mention."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Can EU law keep pace as transplantation becomes continuous biological intervention?",
+   "reader_what": "EU transplant and GMO rules are shifting from process-based oversight toward risk-adapted, product-oriented governance.",
+   "reader_why": "Classification rules determine whether emerging therapies are feasible to develop in Europe.",
+   "reader_more": "The authors argue that Directive 2001/18/EC on genetically modified organisms and Directive 2010/53/EU on human organs were written for a biomedical world in which genetic modification and ex situ organ engineering were largely theoretical. Machine perfusion and ex situ repair now turn a graft into a dynamic system that can be stabilised, assessed and modified outside the body, blurring the donation, allocation, retrieval and implantation stages around which governance was built. They welcome the move toward differentiated risk categories and authorisation pathways for organ processing, as an alternative to treating processed organs as advanced therapy medicinal products. They warn that terms such as low-risk GMMs create interpretative space that may fragment implementation across member states. This is argument, not measured outcome.",
+   "deep_analysis": {
+    "work_kind": "peer-reviewed perspective and policy analysis",
+    "research_question": "Can European regulatory instruments be reformed fast enough to keep pace with transplantation and biotechnology innovation?",
+    "main_finding": "EU reform is shifting from process-based to risk-adapted, product-oriented governance, which better fits ex situ organ medicine but risks divergent national interpretation of categories such as low-risk genetically modified micro-organisms.",
+    "method_or_basis": "Legal and regulatory analysis of EU directives and the current reform trajectory, set against clinical developments in machine perfusion, ex situ repair and xenotransplantation, with citation to transplantation evidence.",
+    "qualification": "An argued perspective by clinicians, not an empirical study; the reform it discusses is in progress, so its effects on divergence or access are anticipated rather than observed.",
+    "radar_relevance": "Directly addresses whether Europe's regulatory architecture enables or obstructs biomedical innovation, and where that innovation will consequently be developed.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:b50f8bbce0a8e063",
+   "source_hash": "10a1b641",
+   "identity_hash": "dfee20e398b18ae3",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_or_substantive_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "The historical record carries no link field; only a resolved final_url, iva.se/en/published/global-outlook-asia-4/, is stored. That capture (about 13,500 characters) is the essay's full text and internally self-identifies, referring to the interviewee 'Rebellions explained to Global Outlook'."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "Essay in an institutional outlook series; no DOI is present in the record or the captured text."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "The exact record title 'All In: South Korea's Flexible Foray into AI' appears as the article heading within the captured page, immediately below the standfirst, matching the job record."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "partial",
+      "note": "Issuing body matches the job's stated source, the Royal Swedish Academy of Engineering Sciences (IVA), via the iva.se domain and the Global Outlook series name; no individual author byline and no precise publication date appear in the capture, and the record's 2026-01-01 date is a historical-archive placeholder."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "iva.se is IVA's own domain and the /en/published/global-outlook-asia-4/ path places the essay as instalment four of the Global Outlook Asia series, so the captured page is the authoritative location."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Identity of the work is established; the open question is admission scope, not identification."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_institutional_page",
+      "url": "https://www.iva.se/en/published/global-outlook-asia-4/",
+      "title": "All In: South Korea's Flexible Foray into AI (IVA Global Outlook Asia)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Historical-archive record. Full essay text read from the package's stored capture of the IVA page; direct re-fetching was unavailable in this session. Author and exact date could not be established, which is noted rather than guessed."
+   },
+   "admission": {
+    "decision": "review",
+    "target_strand": "A",
+    "reason_code": "A_SCOPE_JUDGEMENT_NEEDED",
+    "reason": "Substantial analytical essay with real reporting, published by a European national academy of engineering sciences and explicitly framed as illuminating European technology-policy options. But its subject matter is wholly South Korean. Whether a European institution writing lesson-drawing analysis about a non-European system counts as substantive European relevance, or falls under the rule excluding imagined or asserted European implications, is a genuine judgement call for a human rather than a retrieval failure."
+   },
+   "metadata_correction": {
+    "fields": {
+     "type": "analytical essay in institutional outlook series",
+     "source": "Royal Swedish Academy of Engineering Sciences (IVA), Global Outlook Asia series"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "The captured page places the work as instalment four of IVA's Global Outlook Asia series and reads as a reported analytical essay; the record carried no type at all. The 2026-01-01 date is an archive placeholder and no true publication date is visible in the capture, so date is left uncorrected rather than guessed. Tier unset so ranking is recomputed from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "South Korea pursues AI dependence and AI independence at the same time",
+   "reader_what": "Seoul embraces US AI firms while funding domestic chip and model independence simultaneously.",
+   "reader_why": "Inference-focused chips offer a route up the value chain without matching NVIDIA's scale.",
+   "reader_more": "The essay documents South Korea's two-track AI strategy. On one side, deep accommodation of the global industry: a 260,000 GPU purchase from NVIDIA confirmed by President Lee Jae-myung, OpenAI chip orders from Samsung and SK Hynix with planned data centres, and approval of Google's use of detailed map data in early 2026. On the other, a state-backed push for sovereign AI. The author argues the usual Korean strategy of mimicking then outperforming incumbents fails here because of scale: rivalling NVIDIA in GPUs or joining the foundation-model race is financially implausible. Startups FuriosaAI and Rebellions instead design neural processing units specialised for inference rather than training, claiming better energy and cost efficiency, and draw on engineering talent created by Samsung and SK Hynix.",
+   "deep_analysis": {
+    "work_kind": "reported analytical essay on technology policy",
+    "research_question": "How is South Korea simultaneously accommodating the global AI industry and pursuing national AI independence, and what does that imply for other countries?",
+    "main_finding": "South Korea is deliberately running two opposing strategies at once, and its domestic chip firms target inference-specialised NPUs as a way into the AI value chain that sidesteps the scale required to compete in GPUs or foundation models.",
+    "method_or_basis": "Qualitative policy analysis drawing on documented deals and events plus direct comment from a Korean chip startup to the Global Outlook series.",
+    "qualification": "An interpretive essay, not a measured evaluation; the author explicitly leaves open whether the approach has flaws, and the commercial success of the NPU strategy is unproven.",
+    "radar_relevance": "Offers historical context on how a mid-sized economy negotiates with dominant AI firms while building domestic capability, expressly offered as a reference point for European technology policy. Whether that framing meets the European-relevance bar is the open question.",
+    "why_supported": true,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:ebe02f08f915843c",
+   "source_hash": "43c0eee4",
+   "identity_hash": "2320712f2c66f111",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "cor.europa.eu/sites/default/files/2026-05/call_for_expression_of_interest_cor-ca-ad5-15_26_0.pdf opened as the document itself; the stored capture (6,712 characters) is the complete call, reference COR/CA/FGIV/15/26, published 08/05/2026, deadline 27/05/2026."
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "Administrative recruitment document; no DOI."
+     },
+     {
+      "step": "exact_title",
+      "outcome": "not_applicable",
+      "note": "Not required: the PDF's own first line is 'CALL FOR EXPRESSION OF INTEREST / Administrator in the Commission for Economic Policy', matching the record title exactly."
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "success",
+      "note": "Issuing body self-identified as the European Committee of the Regions, ECON commission secretariat, Directorate Legislative Work 2; matches the job's stated source."
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "cor.europa.eu is the Committee's own domain, so the supplied PDF is already the authoritative copy."
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "not_applicable",
+      "note": "Document is self-identifying; no ambiguity."
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document_pdf",
+      "url": "https://www.cor.europa.eu/sites/default/files/2026-05/call_for_expression_of_interest_cor-ca-ad5-15_26_0.pdf",
+      "title": "Call for expression of interest: Administrator in the Commission for Economic Policy (COR/CA/FGIV/15/26)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Historical-archive record. Full document read; it is unambiguously a contract-staff recruitment call, not a research or policy output. Evidence is the package's stored verbatim capture of the supplied URL, read in full; direct re-fetching of arbitrary URLs was unavailable in this session."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "A",
+    "reason_code": "A_RECRUITMENT_NOTICE",
+    "reason": "A call for expression of interest for a contract-staff administrator post. It is a recruitment document, so it cannot serve as historical structural evidence of European research or innovation, and it offers no reusable method for Strand B either."
+   },
+   "metadata_correction": {
+    "fields": {
+     "source": "European Committee of the Regions",
+     "type": "recruitment call for expression of interest",
+     "date": "2026-05-08"
+    },
+    "unset": [
+     "source_tier"
+    ],
+    "reason": "The PDF states its publication date as 08/05/2026, replacing the archive placeholder 2026-01-01, and identifies itself as a call for expression of interest rather than an untyped record. Tier unset so ranking is recomputed from verified provenance."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Committee of the Regions recruitment call for an economic policy administrator",
+   "reader_what": "A four-year contract-staff post in the Committee of the Regions ECON commission secretariat.",
+   "reader_why": "",
+   "reader_more": "The document is a call for expression of interest published by the European Committee of the Regions on 8 May 2026, reference COR/CA/FGIV/15/26, for a contract staff administrator at grade FGIV in the Commission for Economic Policy, for four years from 1 July 2026, with a deadline of 27 May 2026. The successful candidate would coordinate the Network of Regional Hubs for EU Policy Implementation Review and manage its relations with other EU institutions. The ECON commission's remit covers economic, industrial, SME, competition, single market and digital and AI policy. That remit description is the only Radar-adjacent content, and it is boilerplate rather than evidence.",
+   "deep_analysis": {
+    "work_kind": "administrative recruitment call",
+    "research_question": "",
+    "main_finding": "The Committee of the Regions sought a contract-staff administrator to run its RegHub network within the ECON commission secretariat.",
+    "method_or_basis": "Primary administrative document listing reference number, grade, duration, tasks, eligibility and deadline.",
+    "qualification": "The 27 May 2026 deadline has passed; the scanner's 2026-01-01 date is a historical-archive placeholder, not the document's 08/05/2026 publication date.",
+    "radar_relevance": "None. Historical archive rules permit keep or review only for substantive A or B evidence, and a staffing call is neither.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  }
+ ]
+}
