@@ -3,29 +3,29 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **384**
-- Still needing V2 verification: **285**
-- Currently assigned to workers: **96**
+- Authoritative V2 verified: **385**
+- Still needing V2 verification: **284**
+- Currently assigned to workers: **95**
 - Deferred after exhaustive recovery: **40**
 - Pending and not yet assigned: **149**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T084920Z-588e5480cbde`
-- Assigned unresolved records: **48**
-  1. `link:https://doi.org/10.1016/j.technovation.2026.103600`
-  2. `link:https://doi.org/10.1080/10301763.2026.2726657`
-  3. `link:https://doi.org/10.1007/s13132-026-03451-3`
-  4. `link:https://doi.org/10.1016/j.sftr.2026.102116`
-  5. `link:https://doi.org/10.2478/eoik-2026-0051`
-  6. `link:https://doi.org/10.1016/j.eist.2026.101171`
-  7. `link:https://doi.org/10.1007/s43253-026-00180-w`
-  8. `link:https://doi.org/10.1002/aiv2.70011`
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260914T091636Z-ea86a3af2661`
+- Assigned unresolved records: **47**
+  1. `link:https://doi.org/10.1080/10301763.2026.2726657`
+  2. `link:https://doi.org/10.1007/s13132-026-03451-3`
+  3. `link:https://doi.org/10.1016/j.sftr.2026.102116`
+  4. `link:https://doi.org/10.2478/eoik-2026-0051`
+  5. `link:https://doi.org/10.1016/j.eist.2026.101171`
+  6. `link:https://doi.org/10.1007/s43253-026-00180-w`
+  7. `link:https://doi.org/10.1002/aiv2.70011`
+  8. `link:https://doi.org/10.1007/s43681-026-01260-7`
+  - … plus 39 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T084930Z-0707abeb3ecd`
+- Current package: `worker-b-20260914T091648Z-0707abeb3ecd`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.33663/0869-2491-2026-37-804-814`
   2. `link:https://doi.org/10.1016/j.cose.2026.105102`

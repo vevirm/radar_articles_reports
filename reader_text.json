@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T08:42:09Z",
+  "generated_at": "2026-09-14T09:15:57Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -6294,26 +6294,88 @@
       ]
     },
     "link:https://doi.org/10.1016/j.technovation.2026.103600": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "fc051d32",
-      "reader_title": "Article on auditing AI systems against environmental, social and governance principles in the EU",
-      "reader_what": "Addresses how AI system auditing could incorporate environmental, social and governance principles under EU rules.",
-      "reader_more": "This peer-reviewed article concerns the auditing of AI systems and the integration of environmental, social and governance principles into how AI is deployed in the European Union. No source material beyond the title could be obtained: the package stored no text, and neither Crossref nor OpenAlex holds a deposited abstract for this record. The argument, method and conclusions therefore cannot be reported here. Given the topic sits at the intersection of the AI Act's conformity assessment requirements and sustainability reporting obligations, this record is likely to repay a retry once the publisher deposits an abstract.",
+      "identity_hash": "79c637ac0de5c11e",
+      "reader_title": "Auditing AI systems: Integrating ESG principles for sustainable and ethical AI deployment in the EU",
+      "reader_what": "An ESG-based audit framework prioritizes transparency, fairness and environmental trade-offs in AI governance.",
+      "reader_why": "It links operational AI auditing to EU regulatory and sustainability expectations.",
+      "reader_more": "An ESG-based audit framework prioritizes transparency, fairness and environmental trade-offs in AI governance. It links operational AI auditing to EU regulatory and sustainability expectations. Framework contribution; practical performance depends on implementation and data quality.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed article, topic known but form unverified",
-        "research_question": "How environmental, social and governance principles can be integrated into the auditing of AI systems deployed in the EU.",
-        "main_finding": "No finding could be established; only the title was available from any source.",
-        "method_or_basis": "",
-        "qualification": "No abstract exists in Crossref or OpenAlex and the package stored no text, so nothing beyond the stated topic is known.",
-        "radar_relevance": "Concerns how EU AI governance might be operationalised through auditing, but the specific contribution is unverified.",
-        "confidence": "low",
-        "why_supported": false
+        "work_kind": "methodological/conceptual article",
+        "research_question": "",
+        "main_finding": "An ESG-based audit framework prioritizes transparency, fairness and environmental trade-offs in AI governance.",
+        "method_or_basis": "Fuzzy AHP and multicriteria optimization integrated into an ESG audit framework.",
+        "qualification": "Framework contribution; practical performance depends on implementation and data quality.",
+        "radar_relevance": "Directly concerns EU AI governance and sustainable innovation.",
+        "confidence": "high",
+        "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied/canonical source was inspected and matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.technovation.2026.103600 matched the title and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_repository_source",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0166497226001355",
+            "title": "Auditing AI systems: Integrating ESG principles for sustainable and ethical AI deployment in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity and substantive evidence were checked against the recovered source; scanner/legacy text was treated only as provisional context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Develops an AI audit framework explicitly for sustainable and ethical AI deployment in the EU."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T09:15:57Z",
+      "deep_scan_package_id": "worker-a-20260914T084920Z-588e5480cbde",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "fc051d32",
+          "reader_title": "Article on auditing AI systems against environmental, social and governance principles in the EU",
+          "reader_what": "Addresses how AI system auditing could incorporate environmental, social and governance principles under EU rules.",
+          "reader_more": "This peer-reviewed article concerns the auditing of AI systems and the integration of environmental, social and governance principles into how AI is deployed in the European Union. No source material beyond the title could be obtained: the package stored no text, and neither Crossref nor OpenAlex holds a deposited abstract for this record. The argument, method and conclusions therefore cannot be reported here. Given the topic sits at the intersection of the AI Act's conformity assessment requirements and sustainability reporting obligations, this record is likely to repay a retry once the publisher deposits an abstract.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed article, topic known but form unverified",
+            "research_question": "How environmental, social and governance principles can be integrated into the auditing of AI systems deployed in the EU.",
+            "main_finding": "No finding could be established; only the title was available from any source.",
+            "method_or_basis": "",
+            "qualification": "No abstract exists in Crossref or OpenAlex and the package stored no text, so nothing beyond the stated topic is known.",
+            "radar_relevance": "Concerns how EU AI governance might be operationalised through auditing, but the specific contribution is unverified.",
+            "confidence": "low",
+            "why_supported": false
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s43615-026-01115-7": {
       "profile": "deep-reader-v2-authoritative",
