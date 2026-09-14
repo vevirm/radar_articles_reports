@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T11:40:01Z",
+  "generated_at": "2026-09-14T12:09:57Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -267,27 +267,90 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "31353693",
-      "reader_title": "EU study on how regional policy can build dual-use and defence industrial capacity",
-      "reader_what": "Study of three European regions sets out nineteen recommendations for regional dual-use and defence innovation policy.",
-      "reader_why": "Shows how regional development funds and EU defence instruments can be combined as defence demand grows.",
-      "reader_more": "The Commission's Joint Research Centre has published a policy brief from the REGDUALOSA study, which asks how regional innovation policy can strengthen dual-use and defence capacity across the EU. It examines three contrasting cases: Andalusia in Spain, Podkarpackie in Poland, and Estonia. The study looks at regional policies and financing mechanisms and weighs factors such as each region's development level, how far it aligns with EU policy, and the role of instruments including the European Defence Fund. It concludes with identified gaps, success factors and nineteen concrete recommendations regions can act on. This summary is based on the announcement page; the brief itself was not read.",
+      "identity_hash": "96d17f10b64cb266",
+      "reader_title": "Commission publishes JRC policy brief on regional dual-use and defence innovation",
+      "reader_what": "EU regions can build dual-use and defence industrial capacity through targeted regional innovation policy and funding.",
+      "reader_why": "Regional innovation instruments are being redirected toward defence capability, changing where EU R&I money goes.",
+      "reader_more": "REGDUALOSA stands for Regions Dual-use Open Strategic Autonomy. The study was prepared by the Commission's Joint Research Centre with input from the European Network of Defence-related Regions. It examines three cases - Andalusia in Spain, Podkarpackie in Poland and Estonia - and looks at the regional policies and financial mechanisms that support dual-use and defence industry, including the European Defence Fund. The brief identifies gaps and success factors and sets out 19 recommendations regions can apply. The notice describes recommendations rather than measured outcomes, so it evidences policy intent and analysis, not demonstrated effects.",
       "deep_analysis": {
-        "work_kind": "policy brief based on a Joint Research Centre study",
-        "research_question": "How regional innovation policies and financing instruments can strengthen dual-use and defence industrial capacity in EU regions.",
-        "main_finding": "The study identifies gaps and success factors across three regional cases and issues nineteen recommendations for regional dual-use and defence ecosystems.",
-        "method_or_basis": "Three regional case studies plus contributions from the European Network of Defence-related Regions.",
-        "qualification": "Read only via the announcement page, so the recommendations themselves were not verified; three cases may not generalise across the EU's varied regions.",
-        "radar_relevance": "Links regional innovation policy directly to European defence-industrial capacity and strategic autonomy.",
-        "confidence": "medium",
+        "work_kind": "official publication notice for a JRC policy brief",
+        "research_question": "How can EU regional innovation policies strengthen dual-use and defence industrial capacity?",
+        "main_finding": "Regional policies and EU funding instruments can be aligned to build dual-use and defence ecosystems; the brief sets out 19 recommendations drawn from three regional case studies.",
+        "method_or_basis": "Comparative regional case studies (Andalusia, Podkarpackie, Estonia) of regional policy and financial mechanisms, including European Defence Fund use, with ENDR contributions.",
+        "qualification": "The notice announces recommendations and analysis; no evaluation of implemented effects is reported.",
+        "radar_relevance": "Directly on Strand A: EU research, innovation and industrial-capability policy at regional level, tied to defence and open strategic autonomy.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en (HTTP 200); page is the DG DEFIS/ENDR publication notice, author 'Directorate-General for Defence Industry and Space', publication date 8 September 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission publication notices carry no DOI; none claimed in the scanner record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_commission_page",
+            "url": "https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en",
+            "title": "Publication of the REGDUALOSA Policy Brief - European Commission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL is the claimed official notice and was read in full. It names the issuing bodies (DG DEFIS/ENDR, study by the JRC), the three case-study regions, the funding instruments examined and the 19 recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official European Commission (DG DEFIS/ENDR) publication notice reporting the release of the JRC REGDUALOSA policy brief on how EU regional innovation policy can build dual-use and defence capacity, with three regional case studies and 19 policy recommendations."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T12:09:57Z",
+      "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "31353693",
+          "reader_title": "EU study on how regional policy can build dual-use and defence industrial capacity",
+          "reader_what": "Study of three European regions sets out nineteen recommendations for regional dual-use and defence innovation policy.",
+          "reader_why": "Shows how regional development funds and EU defence instruments can be combined as defence demand grows.",
+          "reader_more": "The Commission's Joint Research Centre has published a policy brief from the REGDUALOSA study, which asks how regional innovation policy can strengthen dual-use and defence capacity across the EU. It examines three contrasting cases: Andalusia in Spain, Podkarpackie in Poland, and Estonia. The study looks at regional policies and financing mechanisms and weighs factors such as each region's development level, how far it aligns with EU policy, and the role of instruments including the European Defence Fund. It concludes with identified gaps, success factors and nineteen concrete recommendations regions can act on. This summary is based on the announcement page; the brief itself was not read.",
+          "deep_analysis": {
+            "work_kind": "policy brief based on a Joint Research Centre study",
+            "research_question": "How regional innovation policies and financing instruments can strengthen dual-use and defence industrial capacity in EU regions.",
+            "main_finding": "The study identifies gaps and success factors across three regional cases and issues nineteen recommendations for regional dual-use and defence ecosystems.",
+            "method_or_basis": "Three regional case studies plus contributions from the European Network of Defence-related Regions.",
+            "qualification": "Read only via the announcement page, so the recommendations themselves were not verified; three cases may not generalise across the EU's varied regions.",
+            "radar_relevance": "Links regional innovation policy directly to European defence-industrial capacity and strategic autonomy.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/european-research-innovation-days-2026-will-take-place-on-10-11-november/": {
       "profile": "deep-reader-v2-authoritative",
@@ -732,27 +795,89 @@
       ]
     },
     "link:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
+      "corpus_scope": "main",
       "source_hash": "db45deeb",
-      "reader_title": "Swedish agency funding to help companies use large neutron and synchrotron research facilities",
-      "reader_what": "Vinnova programme funds projects building industrial skills in using facilities such as MAX IV and ESS.",
-      "reader_why": "Aims to turn large public facility investment into usable industrial capability and trained people.",
-      "reader_more": "This is a programme page from Vinnova, Sweden's innovation agency, covering funding for research infrastructure utilisation and collaboration. The programme supports collaboration on skills development and industrial use of advanced neutron and photon-based techniques at large-scale facilities, specifically those being built at MAX IV and the European Spallation Source in Lund. Supported activities include pilot projects testing whether these techniques suit a company's development needs, projects making facilities accessible to smaller life science companies, and funding for doctoral students to build expertise in neutron and synchrotron methods. The retrieved page is largely site navigation and lists calls that appear to have closed, so current availability is unclear.",
+      "identity_hash": "14da6bed8c071c1c",
+      "reader_title": "Swedish agency page listing closed calls on industrial use of large research facilities",
+      "reader_what": "Vinnova programme index describing closed calls for industrial use of MAX IV and ESS facilities.",
+      "reader_more": "The page belongs to Vinnova, Sweden's innovation agency. It groups several funding offers aimed at building company competence in neutron and synchrotron techniques at MAX IV and the European Spallation Source in Lund. Every offer shown is flagged as closed for application, and the page reference number dates the underlying instrument to 2017. The 2026 date attached by the scanner is the page's last-updated stamp, not a publication date. Because the page reports no results, evaluation or new decision, it is a programme listing rather than a substantive research or policy work.",
       "deep_analysis": {
-        "work_kind": "national funding programme page",
+        "work_kind": "national funding-call listing page",
         "research_question": "",
-        "main_finding": "Vinnova operates a programme funding industrial use of, and skills development around, large-scale neutron and photon research facilities in Sweden.",
-        "method_or_basis": "Agency programme description; no evaluation or outcome evidence is presented.",
-        "qualification": "The retrieved text is mostly navigation material and the individual calls shown appear closed, so this describes programme intent rather than an open opportunity or a measured result.",
-        "radar_relevance": "Shows a national mechanism for converting shared European research infrastructure into industrial capability.",
-        "confidence": "low",
-        "why_supported": true
+        "main_finding": "Vinnova has run a set of now-closed calls funding industrial use of and skills development around large neutron and photon facilities in Sweden.",
+        "method_or_basis": "Agency programme description only; no data, evaluation or outcome evidence is presented.",
+        "qualification": "The 2026 date is a site 'last updated' stamp; the underlying call reference is 2017-04491 and the calls are closed.",
+        "radar_relevance": "Fails Strand A: real European R&I subject matter but no substantive work - the page is a call index with no findings.",
+        "confidence": "high",
+        "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration (HTTP 200, 127 kB); page is a call index with 'Closed for application' banners, footer 'Last updated 7 September 2026' and 'Reference number 2017-04491'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is present on the page and none is claimed by the scanner record; Vinnova call pages are not DOI-registered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_agency_page",
+            "url": "https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration",
+            "title": "Research infrastructure - utilisation and collaboration | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL resolved to the claimed Vinnova page. Content is an index of closed calls supporting industrial use of MAX IV and ESS; no analytical or evaluative content exists on the page."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_WORK",
+        "reason": "Page is Vinnova's programme index for 'Research infrastructure - utilisation and collaboration'; every listed call is marked closed and the page carries no study, evaluation or finding. It is a national funding-call listing, not a substantive R&I work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T12:09:56Z",
+      "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "db45deeb",
+          "reader_title": "Swedish agency funding to help companies use large neutron and synchrotron research facilities",
+          "reader_what": "Vinnova programme funds projects building industrial skills in using facilities such as MAX IV and ESS.",
+          "reader_why": "Aims to turn large public facility investment into usable industrial capability and trained people.",
+          "reader_more": "This is a programme page from Vinnova, Sweden's innovation agency, covering funding for research infrastructure utilisation and collaboration. The programme supports collaboration on skills development and industrial use of advanced neutron and photon-based techniques at large-scale facilities, specifically those being built at MAX IV and the European Spallation Source in Lund. Supported activities include pilot projects testing whether these techniques suit a company's development needs, projects making facilities accessible to smaller life science companies, and funding for doctoral students to build expertise in neutron and synchrotron methods. The retrieved page is largely site navigation and lists calls that appear to have closed, so current availability is unclear.",
+          "deep_analysis": {
+            "work_kind": "national funding programme page",
+            "research_question": "",
+            "main_finding": "Vinnova operates a programme funding industrial use of, and skills development around, large-scale neutron and photon research facilities in Sweden.",
+            "method_or_basis": "Agency programme description; no evaluation or outcome evidence is presented.",
+            "qualification": "The retrieved text is mostly navigation material and the individual calls shown appear closed, so this describes programme intent rather than an open opportunity or a measured result.",
+            "radar_relevance": "Shows a national mechanism for converting shared European research infrastructure into industrial capability.",
+            "confidence": "low",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.1002/psp.70369": {
       "profile": "deep-reader-offline-v1",

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-14T11:40:01Z",
+  "updated_at": "2026-09-14T12:09:57Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -5526,6 +5526,30 @@
       "updated_at": "2026-09-14T11:40:01Z",
       "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb",
       "verification_note": "Scanner attributed this to the Financial Times. The supplied link resolves to an FT market-announcement wire slot, and the underlying work is a CSC press release of 10 September 2026, republished by Science|Business as a Network Update. Source and title corrected accordingly; stored source_tier unset because the FT attribution that supported it is unsupported.",
+      "duplicate_of": ""
+    },
+    "link:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "A_NO_SUBSTANTIVE_WORK",
+      "reason": "Page is Vinnova's programme index for 'Research infrastructure - utilisation and collaboration'; every listed call is marked closed and the page carries no study, evaluation or finding. It is a national funding-call listing, not a substantive R&I work.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-14T12:09:56Z",
+      "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34",
+      "verification_note": "Supplied URL resolved to the claimed Vinnova page. Content is an index of closed calls supporting industrial use of MAX IV and ESS; no analytical or evaluative content exists on the page.",
+      "duplicate_of": ""
+    },
+    "link:https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Official European Commission (DG DEFIS/ENDR) publication notice reporting the release of the JRC REGDUALOSA policy brief on how EU regional innovation policy can build dual-use and defence capacity, with three regional case studies and 19 policy recommendations.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-14T12:09:57Z",
+      "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34",
+      "verification_note": "Supplied URL is the claimed official notice and was read in full. It names the issuing bodies (DG DEFIS/ENDR, study by the JRC), the three case-study regions, the funding instruments examined and the 19 recommendations.",
       "duplicate_of": ""
     }
   }

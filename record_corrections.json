@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-14T11:40:01Z",
+  "updated_at": "2026-09-14T12:09:57Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -2239,6 +2239,39 @@
       ],
       "updated_at": "2026-09-14T11:40:01Z",
       "deep_scan_package_id": "worker-b-20260914T110937Z-c8a7cb0a8bdb"
+    },
+    "link:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration": {
+      "fields": {
+        "type": "funding call listing page"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page is an index of closed Vinnova calls, not a 'research/policy paper' as the scanner recorded; stored tier is unsupported by this provenance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration"
+      ],
+      "updated_at": "2026-09-14T12:09:56Z",
+      "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34"
+    },
+    "link:https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en": {
+      "fields": {
+        "type": "publication notice for a policy brief",
+        "source": "European Commission - Directorate-General for Defence Industry and Space"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The supplied URL is the Commission's publication notice, not the study itself; the scanner's type 'formal study / report' overstates what this record is.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en"
+      ],
+      "updated_at": "2026-09-14T12:09:57Z",
+      "deep_scan_package_id": "worker-b-20260914T114234Z-b121fc7cad34"
     }
   }
 }

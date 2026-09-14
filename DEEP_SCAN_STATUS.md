@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **496** (Main **496** + Historical **0**)
-- Automatic queue still needing V2 verification: **775** (Main **126** + Historical **649**)
-- Currently assigned to workers: **96** (Main **96** + Historical **0**)
+- Authoritative V2 verified: **498** (Main **498** + Historical **0**)
+- Automatic queue still needing V2 verification: **773** (Main **124** + Historical **649**)
+- Currently assigned to workers: **94** (Main **94** + Historical **0**)
 - Bounded access-recovery retries still eligible: **27**
 - Hands-on verification needed: **47**
 - Automatic queue pending and not yet assigned: **679**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T114223Z-87c1046709d1`
+- Current package: `worker-a-20260914T121039Z-87c1046709d1`
 - Assigned unresolved records: **48**
   1. `link:https://news.google.com/rss/articles/CBMidkFVX3lxTE14MWhyc19nX010OTJ5clBuQW1PYmcxY2lDZF9vNjhGMEpzSVI5bW1iYW8yaHM3OG5rWnFfcjJWT3E2QVp6WFd4WlRzVDBoTk90U1RpVUE4dzNmRlB3Q2ZPLU9hS0dUaVhtWmFlRDRhSUhZakpfbVE?oc=5` — Funding for Digital in the 2021-2027 Multiannual Financial Framework - Shaping Europe’s digital future
   2. `link:https://doi.org/10.1007/s11365-026-01188-8` — Innovation ecosystems and entrepreneurial venture capital: evidence from European countries
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T114234Z-b121fc7cad34`
-- Assigned unresolved records: **48**
-  1. `link:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration` — Funding within large-scale research infrastructure | Vinnova
-  2. `link:https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en` — Publication of the REGDUALOSA Policy Brief
-  3. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
-  4. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
-  5. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNcDBEMmRZeW16bDFuMlZWUWxOVmV3NUllTlMwMEx5Y0ZWR1hNMkZ3NTM4WGp0YjFrcVJUdVNCR05pZTdKV0pIN1ZqS1pJdHR0MXRGMlVScGg3Z2tveUxTazJEenlhWlZ2S2dLQkY3QWVaalJHdHoyNVZWTzk4WDFyQkNNTlVINzJ0RWtjSnp0cUtyVTlVeU5Da3RCXzBVQjV3Q1BnRzlB?oc=5` — German military evaluating 30 AI tools for introduction from 2027
-  6. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNbHVyY1EyVkN0ejVTZnJMXzVmVGNCQTJzUmNmWTJkVi1ZWnRfRTJSd3NTT3V3ZmdUc2xXdGZhOHVpUnNtRVZNT1B4VkV3dWJhWFVZamJjT0FzdElsbGRvSk90UE1iSjFoR0txNmttdXFsUDNfcVVIWWlZeDhaMnFHYktsb2FuYm9qZGpUQXdCOERJcE5aWmQzWm9aS0JKMUM0YmxlY3NnSEEzUWFicThkU3VuNA?oc=5` — UAE and Germany look to build ties with investment, energy and AI deals
-  7. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxOX2Jwc1pGbXgta0R0VDFUZFBmNXpNMEVseDRzb3prZU94TFNNN05JTnRTWHRKVHUtemo1TVFRdEU2WGE4ZnRxLXJfQ2xkZm9Ea19RTEk5WDJ1a3l5QzNPWlRsX1NDVDJkM0RjMzNXS3U5ZjVGc1lwQ0R4NDRlU3pfSWRXRDRTcm05a1dsalJndlVGTmw1ZEhISTRja3FGeUgzNEE5c29MN2JrOU1OTk5GUk5mNDdPRHZpQ251VzdaenhYM0Q0OVF0S1N0QQ?oc=5` — France-Germany space summit hit by US withdrawals and Merz absence
-  8. `link:https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRGJCR3lRVHk0SHVwZnVFYUdjOUV4VXoyaVFsR2RRS1FINkdIUUFDUEtFQy1DcjlvNFRYUm5sUGwxN194VEFMVDBUTVVnTlBXcmJDenFFV0xraGQ1S0lZT2txMXEwcV8zUFBORUs3QndlbWpzSXYtZm5MWDgzZ3FMNFFQU2JVVm1MVTNKTHpPc3pfbGFSYzVWb2FzVDlRWElwd1lHMGJONXBYRzZlZGVobmdEYTV5QWdXQ0lXOFBpQm1Db0NVZWd6S1ZaaGF0UWNYWHI3QVYtSzhXN0JQVndabTZUSQ?oc=5` — New rules for bringing innovations to the EU market could generate up to EUR 452 billion
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260914T121050Z-fb1fe01c1fb2`
+- Assigned unresolved records: **46**
+  1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
+  2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
+  3. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNcDBEMmRZeW16bDFuMlZWUWxOVmV3NUllTlMwMEx5Y0ZWR1hNMkZ3NTM4WGp0YjFrcVJUdVNCR05pZTdKV0pIN1ZqS1pJdHR0MXRGMlVScGg3Z2tveUxTazJEenlhWlZ2S2dLQkY3QWVaalJHdHoyNVZWTzk4WDFyQkNNTlVINzJ0RWtjSnp0cUtyVTlVeU5Da3RCXzBVQjV3Q1BnRzlB?oc=5` — German military evaluating 30 AI tools for introduction from 2027
+  4. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNbHVyY1EyVkN0ejVTZnJMXzVmVGNCQTJzUmNmWTJkVi1ZWnRfRTJSd3NTT3V3ZmdUc2xXdGZhOHVpUnNtRVZNT1B4VkV3dWJhWFVZamJjT0FzdElsbGRvSk90UE1iSjFoR0txNmttdXFsUDNfcVVIWWlZeDhaMnFHYktsb2FuYm9qZGpUQXdCOERJcE5aWmQzWm9aS0JKMUM0YmxlY3NnSEEzUWFicThkU3VuNA?oc=5` — UAE and Germany look to build ties with investment, energy and AI deals
+  5. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxOX2Jwc1pGbXgta0R0VDFUZFBmNXpNMEVseDRzb3prZU94TFNNN05JTnRTWHRKVHUtemo1TVFRdEU2WGE4ZnRxLXJfQ2xkZm9Ea19RTEk5WDJ1a3l5QzNPWlRsX1NDVDJkM0RjMzNXS3U5ZjVGc1lwQ0R4NDRlU3pfSWRXRDRTcm05a1dsalJndlVGTmw1ZEhISTRja3FGeUgzNEE5c29MN2JrOU1OTk5GUk5mNDdPRHZpQ251VzdaenhYM0Q0OVF0S1N0QQ?oc=5` — France-Germany space summit hit by US withdrawals and Merz absence
+  6. `link:https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRGJCR3lRVHk0SHVwZnVFYUdjOUV4VXoyaVFsR2RRS1FINkdIUUFDUEtFQy1DcjlvNFRYUm5sUGwxN194VEFMVDBUTVVnTlBXcmJDenFFV0xraGQ1S0lZT2txMXEwcV8zUFBORUs3QndlbWpzSXYtZm5MWDgzZ3FMNFFQU2JVVm1MVTNKTHpPc3pfbGFSYzVWb2FzVDlRWElwd1lHMGJONXBYRzZlZGVobmdEYTV5QWdXQ0lXOFBpQm1Db0NVZWd6S1ZaaGF0UWNYWHI3QVYtSzhXN0JQVndabTZUSQ?oc=5` — New rules for bringing innovations to the EU market could generate up to EUR 452 billion
+  7. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxPelZfVE82a3ZvaVdGbHFjQXQ4RlNNTUhucGJTSzMxeFVXbHZNSDJuN3Q4akpVVVBvSkNjenBzS3dRRkdzUThnZUVtNmhuaFo5eFJ3eERmM1ZGZGJualZVNXZlZ3lZR3VOT0sxNWEwV0hKb3BMd05TZjdGbl80a3RCQXlUOWM0aWt0MDR2QXNtZUdWRUs4MHc?oc=5` — Europe’s space chief wants decision this year on launching without NASA
+  8. `link:https://news.google.com/rss/articles/CBMifEFVX3lxTFBMdlpkQThhcEIxMHVXa2xWQk1Ed0NyLTNicFhzOGFFd0doTjFQZm9md3NuTzlkY0pUQzUtU0FLTm5pRy0wMVZJcUxNNjEzSm5UdGlHNG5XdlNVZXB4cElUQUlka1FpbV9rNXEtREoydWxVV3pWbGdsUUlvd1Q?oc=5` — EU pursues closer Israel ties on air defense and space
+  - … plus 38 more in the package manifest
 
 ## Hands-on verification needed
 
