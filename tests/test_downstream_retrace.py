@@ -40,15 +40,13 @@ class DownstreamRetraceTests(unittest.TestCase):
             x['id'] for x in self.report['object_audit']
             if x.get('retrace_status') == 'retired' and x.get('kind') in {'shock', 'high_order'}
         }
-        if not retired and self.original.get('downstream_retrace'):
-            retired = {
-                x.get('id') for x in self.original.get('downstream_archive', {}).get('objects', [])
-                if x.get('retrace_status') == 'retired' and x.get('kind') in {'shock', 'high_order'}
-            }
         active = {oid for kind, oid, _ in dr.active_objects(self.rebuilt) if kind in {'shock', 'high_order'}}
         # A fully cleaned/revalidated corpus can legitimately have no objects to
-        # retire.  What matters is that anything the retrace *does* retire is
-        # never left active and is preserved in the archive.
+        # retire. What matters is that anything retired by *this retrace* is
+        # never left active and is preserved in the archive. Older archive entries
+        # are an audit history, not a permanent blacklist: after Deep Scan changes
+        # the authoritative active corpus, the same inference ID may legitimately
+        # become supported again and be re-inferred.
         archived = {
             x.get('id') for x in self.rebuilt.get('downstream_archive', {}).get('objects', [])
             if x.get('retrace_status') == 'retired'
