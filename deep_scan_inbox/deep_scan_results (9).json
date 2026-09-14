@@ -1,0 +1,3288 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-b-20260914T080755Z-00501c41f66a",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1111/1758-5899.70201",
+      "source_hash": "6367fcaf",
+      "identity_hash": "99547df43c73df2f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1111/1758-5899.70201 redirects to onlinelibrary.wiley.com/doi/10.1111/1758-5899.70201, which returned HTTP 403 to automated access; no article text was served."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1111/1758-5899.70201 returned the exact title, all five authors (Lucenti, Bonnamy, Christiansen, Sinkkonen, Vanhoonacker), Global Policy and 15 July 2026 — identity confirmed, no full text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Having Your (Digital) Cake and Eating It\" surfaced the Wiley landing page and the Maastricht CRIS entry only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Lucenti/Vanhoonacker/2026 located the Maastricht University CRIS record at cris.maastrichtuniversity.nl/en/publications/7e84afa4-257b-4425-a55d-8f1..., which carries the full abstract but lists no downloadable file."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Unpaywall/OpenAlex report the work as open access but give only the Wiley DOI as the OA location; no repository or accepted-manuscript deposit exists. A guessed Maastricht CRIS file path returned 403."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1111/1758-5899.70201) lists no openAccessPdf other than the blocked Wiley DOI; OpenAIRE returned no alternative full-text location."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity fully confirmed (Crossref plus the Maastricht CRIS record). Only the abstract is legitimately reachable; the Wiley full text is blocked and no repository copy exists, so the discourse-analysis content cannot be assessed at the depth Strand A requires."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.ijmedinf.2026.106685",
+      "source_hash": "03ac2d82",
+      "identity_hash": "cf0e504d1a5bdca1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.ijmedinf.2026.106685 redirects through linkinghub.elsevier.com to ScienceDirect article S1386505626004259; ScienceDirect served a bot-challenge/captcha interstitial instead of the article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.ijmedinf.2026.106685 returned the exact title, Maher/Khan/ElFouly, International Journal of Medical Informatics and a December 2026 issue — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"From prediction to reality: Five years of AI in healthcare\" returned only ScienceDirect and indexing mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Maher/Khan/ElFouly/2026 located the PubMed record 42697156; PubMed served a cookie-gate page and in any case carries only the abstract."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists the work as open access with the ScienceDirect PDF as the sole location; OpenAIRE returned no repository deposit and no PubMed Central identifier exists."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.ijmedinf.2026.106685) gives the same blocked ScienceDirect PDF; a reader-proxy attempt on the article page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref and PubMed indexing. Although the article is gold open access, every route to its text terminates at ScienceDirect, which blocks automated access; no repository copy exists. Whether a five-year AI-in-healthcare review has substantive European relevance cannot be judged from the abstract alone."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s10796-026-10801-8",
+      "source_hash": "4444b09c",
+      "identity_hash": "891ac324a01e71cc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s10796-026-10801-8 resolved to link.springer.com/article/10.1007/s10796-026-10801-8, the matching Information Systems Frontiers article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s10796-026-10801-8 confirms title, the four authors, Information Systems Frontiers and 8 August 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10796-026-10801-8.pdf",
+            "title": "Cybersecurity Strategies in European SMEs (Springer open-access PDF, full text)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer open-access PDF retrieved and read in full; abstract, introduction, data and results all match the scanner record."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical study of cybercrime experience and cybersecurity strategy in European SMEs using a 2021 EU-wide survey of over 12,000 respondents; directly about European digital/industrial resilience."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European SME survey links cyber-risk awareness to fewer incidents but training to more reported ones",
+      "reader_what": "Higher cyber-risk awareness correlates with fewer cybercrime incidents among European SMEs; more training raises reported incidents.",
+      "reader_why": "SMEs are Europe's weakest cybersecurity link, so detection and culture shape industrial digital resilience.",
+      "reader_more": "The study draws on a 2021 survey of more than 12,000 representative respondents from small and medium-sized enterprises across Europe. Firms reporting greater awareness of cyber risk recorded fewer cybercrime incidents, while firms that had done more cybersecurity training reported more. The authors read this as better detection, or as responses that are reactive rather than preventive, and they also find greater digitalisation associated with more incidents. They recommend continuous training and a proactive security culture rather than one-off measures. The evidence is correlational survey data, so it does not establish that training causes incidents.",
+      "deep_analysis": {
+        "work_kind": "empirical survey study",
+        "research_question": "How do cybercrime experience, risk awareness and training relate in European SMEs?",
+        "main_finding": "Cyber-risk awareness is associated with fewer cybercrime incidents, while more training is associated with more reported incidents, suggesting improved detection.",
+        "method_or_basis": "Regression analysis of a 2021 Europe-wide survey of over 12,000 representative SME respondents.",
+        "qualification": "Cross-sectional correlational evidence; direction of causation between training and reported incidents is not established.",
+        "radar_relevance": "Directly addresses European SME cyber resilience, a core European digital and industrial-capability concern.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.exis.2026.102034",
+      "source_hash": "95850587",
+      "identity_hash": "67650f7db8c1d4c9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.exis.2026.102034 redirects to ScienceDirect article S2214790X26001838, which returned a bot-challenge page rather than the article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.exis.2026.102034 returned the exact title, the five Luleå-based authors and The Extractive Industries and Society (December 2026 issue) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Institutional capacity and sustainable critical raw material supply chains\" returned the ScienceDirect page and aggregator mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Title plus Engman/Pettersson/Poelzer/2026 pointed to the Luleå University of Technology DiVA deposit diva2:2096283."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Recovery step attempted: the DiVA full-text file ltu.diva-portal.org/smash/get/diva2:2096283/FULLTEXT01 returned HTTP 503 (upstream connection timeout) on repeated attempts within this session."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "OpenAIRE and Semantic Scholar (DOI:10.1016/j.exis.2026.102034) list no further location beyond the blocked ScienceDirect PDF and the unavailable DiVA file."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. A legitimate Luleå DiVA full-text deposit exists and was located, but the file server returned 503 throughout this session; ScienceDirect blocks the publisher copy. This is a transient access failure rather than a missing work, and a retry is likely to succeed."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology",
+      "source_hash": "b775b2b6",
+      "identity_hash": "6b43661ed872394c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology retrieved in full (the package's own 403 was not reproduced); it is a programme landing page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is present or expected for a think-tank programme page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_programme_page",
+            "url": "https://dgap.org/en/research/programs/center-geopolitics-geoeconomics-and-technology",
+            "title": "Center for Geopolitics, Geoeconomics, and Technology | DGAP",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page retrieved and read in full. It is a permanent centre description with topic questions and navigation, not a research output or a dated development."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERIC_INSTITUTIONAL_PAGE",
+        "reason": "The URL is DGAP's standing programme page for a research centre: it describes the centre's themes, staff and applications, and reports no specific research finding, publication or development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "institutional programme page",
+        "research_question": "",
+        "main_finding": "The page describes DGAP's Center for Geopolitics, Geoeconomics and Technology, its themes and its research applications.",
+        "method_or_basis": "Standing institutional description; no data, analysis or dated event is reported.",
+        "qualification": "Content is evergreen navigation text; the scanner's 2026-09-08 date reflects crawling, not publication of a development.",
+        "radar_relevance": "Fails Strand A: vocabulary matches European technological sovereignty debates but the page itself is not a substantive research or innovation work.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+      "source_hash": "747df6b3",
+      "identity_hash": "9fe3c34f60d18f82",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en opened as the matching official EuroHPC JU news item."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "EU agency news items of this kind carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_agency_announcement",
+            "url": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+            "title": "The EuroHPC Joint Undertaking launches the AI Gigafactories Call",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official EuroHPC JU page read in full; it states the call structure, eligible consortia/SPVs, joint procurement of compute access time and the 12 November 2026 submission deadline."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Official EuroHPC JU announcement of a live call for tenders to build and operate up to seven AI Gigafactories, with a stated submission deadline: a concrete new EU funding instrument, not a generic programme page."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EuroHPC opens tender for up to seven industry-led AI Gigafactories in the EU",
+      "reader_what": "EuroHPC launched a competitive call for consortia to build and run up to seven large EU AI computing facilities.",
+      "reader_why": "It converts EU sovereign-compute ambitions into a procurement with deadlines, thresholds and public co-funding.",
+      "reader_more": "The EuroHPC Joint Undertaking has opened a call for tenders inviting consortia or special purpose vehicles to build and operate AI Gigafactories in EU member states, with EuroHPC and participating states jointly procuring compute access time from the selected facilities. That joint procurement gives operators an anchor customer. The facilities are to combine large-scale AI processors, software and cloud stacks, high-bandwidth connectivity and energy-efficient data centres, complementing the existing AI Factories. Proposals may be single-site, multi-site or cross-border, and the submission deadline is 12 November 2026, after which bids are competitively evaluated. Selection outcomes and actual construction are still ahead.",
+      "deep_analysis": {
+        "work_kind": "official call for tenders / funding instrument launch",
+        "research_question": "",
+        "main_finding": "EuroHPC opened a competitive call for consortia to build and operate up to seven AI Gigafactories, with joint public procurement of compute access time and a 12 November 2026 deadline.",
+        "method_or_basis": "Primary EuroHPC Joint Undertaking announcement setting out the call's scope, eligibility and timetable.",
+        "qualification": "This is the launch of a procurement, not an award; no facility has been selected or built.",
+        "radar_relevance": "A concrete new EU research-infrastructure funding instrument bearing directly on European compute capacity and technological sovereignty.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme",
+      "source_hash": "8264b632",
+      "identity_hash": "c7ab4241dddc5e40",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme opened as the matching Commission library item dated 31 July 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission library items of this type carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_commission_publication",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme",
+            "title": "Commission publishes study supporting the Review of the Digital Decade Policy Programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Commission library page read in full, including the summary of study findings and the list of downloadable report, executive summaries and annexes A-F."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Official Commission publication of the study supporting the Digital Decade Policy Programme review, with reported findings on targets, indicators and governance: a substantive evidence release, not a navigation page."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission publishes the evidence study underpinning its Digital Decade programme review",
+      "reader_what": "The study finds Digital Decade governance still relevant but targets and indicators needing update for new priorities.",
+      "reader_why": "It sets the evidence base for revising the EU's binding digital targets and 2028-2034 funding alignment.",
+      "reader_more": "The European Commission released the external study supporting its review of the Digital Decade Policy Programme, covering priorities, targets and indicators on one side and governance and stakeholder engagement on the other. It concluded that the governance framework still works for cooperation between the EU and member states but needs updating against geopolitical, technological and economic change. Current targets were found not to reflect emerging priorities such as cybersecurity, technological sovereignty and resilience, and some indicators need revision. The study also considered investment needs and alignment with the 2028-2034 Multiannual Financial Framework. Its recommendations inform, but do not constitute, the Commission's forthcoming review.",
+      "deep_analysis": {
+        "work_kind": "official evidence release / supporting study publication",
+        "research_question": "",
+        "main_finding": "The supporting study found Digital Decade governance broadly fit for purpose but its targets and indicators insufficiently aligned with cybersecurity, technological sovereignty and resilience priorities.",
+        "method_or_basis": "Commission-commissioned study drawing on literature review, stakeholder consultations, targeted surveys, a call for evidence and case studies, as listed in annexes A-F.",
+        "qualification": "The study is advisory input; the Commission's actual review and any target changes are still forthcoming.",
+        "radar_relevance": "Directly concerns the evidence base and indicator framework for EU digital and technological-sovereignty policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/etojnl/vgag243",
+      "source_hash": "baf287af",
+      "identity_hash": "3a45a7fd10e3f564",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1093/etojnl/vgag243 redirects to academic.oup.com/etc/advance-article/doi/10.1093/etojnl/vgag243/878586, which returned HTTP 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1093/etojnl/vgag243 returned the exact title, the seven NIEHS-affiliated authors and Environmental Toxicology and Chemistry, 4 September 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Horizon Scanning to Identify Emerging Environmental Health Concerns\" returned the OUP advance-article page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Overdahl/Messier/2026 located PubMed record 42696410; PubMed served a cookie-gate page and carries only the abstract."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex and Unpaywall report the article as closed access with no open location; no PubMed Central deposit and no NIEHS repository copy were found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1093/etojnl/vgag243) confirms isOpenAccess false with no openAccessPdf; OpenAIRE returned no repository record."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref and PubMed. The article is genuinely closed access with no legitimate repository or author copy; paywall circumvention was not attempted. Whether the community-based horizon-scanning approach is a new method or an application of existing practice cannot be settled from the abstract."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/pds.2026.10595",
+      "source_hash": "7815af65",
+      "identity_hash": "15410162982ccd2b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1017/pds.2026.10595 resolved to the matching Cambridge Core article in Proceedings of the Design Society; the package's stored capture of that page contains the abstract and body sections."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/pds.2026.10595 confirms title, the five authors, Proceedings of the Design Society and 2 July 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Fraunhofer publica handle 523785 (publica.fraunhofer.de/handle/publica/523785) was opened as an alternate deposit but returned only a bot-challenge/landing shell; the Cambridge text was sufficient."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/proceedings-of-the-design-society/article/aibased-scenario-management-for-smes-the-need-for-modular-explainable-and-reusable-foresight-pipelines/3A9CE65A8E4304E4B163842DCBAEE3E9",
+            "title": "AI-based scenario management for SMEs: the need for modular, explainable and reusable foresight pipelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Cambridge Core article text read beyond the abstract into the introduction and argument; the proposed architecture and its rationale are explicit in the source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper proposes a modular, provenance-aware AI-enabled scenario-management architecture with a guided wizard and expert environment on a shared knowledge backbone: a transferable foresight pipeline design, not an application of an existing tool."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A modular, explainable AI scenario-management architecture aimed at small and medium-sized firms",
+      "reader_what": "Proposes a modular AI foresight pipeline combining a guided wizard and expert environment on a shared knowledge backbone.",
+      "reader_why": "It targets the cost and expertise barriers that keep scenario planning out of smaller firms.",
+      "reader_more": "Scenario work in small and medium-sized enterprises is typically workshop-based, slide-driven and offline, and full scenario processes are often judged too costly, while compact shortcut methods tend to omit key drivers and interdependencies. The authors propose an architecture that separates a guided wizard for non-specialists from an expert environment, both drawing on one shared knowledge base. The design is provenance-aware and keeps a human in the loop, so structural quality, explainability and traceability survive the use of generative AI. The stated aim is to turn one-off scenario projects into reusable organisational knowledge. The paper presents a design pattern and its rationale rather than an evaluated implementation.",
+      "deep_analysis": {
+        "work_kind": "conference paper proposing a method/architecture",
+        "research_question": "How can scenario management be made affordable, explainable and reusable for SMEs using AI?",
+        "main_finding": "A modular, provenance-aware AI scenario architecture with wizard and expert layers on a shared knowledge backbone can reduce effort and fragmentation while preserving human judgement.",
+        "method_or_basis": "Design-research argument built on the scenario-planning and generative-AI literature; an architectural pattern rather than an empirical trial.",
+        "qualification": "The pipeline is proposed, not evaluated; no empirical evidence of effort reduction or scenario quality is reported.",
+        "radar_relevance": "A transferable foresight pipeline design directly usable in Radar-style anticipatory work.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103897",
+      "source_hash": "c35d88da",
+      "identity_hash": "f78a934321581e80",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.futures.2026.103897 redirects to ScienceDirect article S0016328726001394, which returned a captcha interstitial instead of the article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.futures.2026.103897 returned the exact title, Iosif Gidiotis and Futures (October 2026 issue) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"What we cannot surrender: Bounded anticipation in education fiction on AI futures\" returned only the ScienceDirect page and indexing mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Title plus Gidiotis/Futures/2026 returned no author repository, university deposit or project page holding the text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists the article as open access with the ScienceDirect PDF as its only location; OpenAIRE returned no repository deposit for this DOI."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.futures.2026.103897) resolves only back to the DOI; a reader-proxy attempt on the ScienceDirect page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Despite gold open-access status, every route terminates at ScienceDirect's bot block and no repository copy exists. Strand B turns on whether the paper contributes a reusable anticipation method or reads fiction as data, which the abstract does not settle."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://arxiv.org/abs/2606.12788",
+      "source_hash": "e159365e",
+      "identity_hash": "2370d01b025c139d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2606.12788 opened as the matching arXiv abstract page for the claimed title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The record is an arXiv preprint with no registered DOI in the supplied link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved the full preprint PDF from https://arxiv.org/pdf/2606.12788 and read the architecture and methodology sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2606.12788",
+            "title": "To Share or Not to Share: Orchestrating Trustworthy Data in Global Value Chains (arXiv full text)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv PDF read; the reference architecture, the CBAM/SBTi/SSbD distinction and the prospective roadmapping method are all present in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The preprint introduces a RegTech reference architecture built on the International Data Spaces framework plus a prospective roadmapping methodology for regulated value-chain data sharing; both are transferable beyond the semiconductor case used to illustrate them."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A data-sovereignty architecture for proving embedded emissions across regulated global value chains",
+      "reader_what": "Proposes an International Data Spaces-based RegTech architecture for verifiable emissions data under the EU carbon border mechanism.",
+      "reader_why": "It shows how EU regulatory reporting can work without forcing firms to surrender commercially sensitive data.",
+      "reader_more": "The EU Carbon Border Adjustment Mechanism requires product-level, facility-specific emissions data, which collides with suppliers' unwillingness to expose production detail. The authors propose a reference architecture using the International Data Spaces framework so that environmental telemetry can be exchanged verifiably without ceding control of the underlying data. They separate mandatory CBAM obligations from voluntary Science Based Targets commitments and from Safe-and-Sustainable-by-Design requirements. A prospective roadmapping method is introduced to turn upstream physical dependencies into feedback loops, illustrated on the Taipei-Penang semiconductor corridor. The work is a design proposal and roadmap; it reports no deployment or evaluation.",
+      "deep_analysis": {
+        "work_kind": "preprint proposing a reference architecture and roadmapping method",
+        "research_question": "How can trustworthy emissions data be orchestrated across value chains under EU regulation without breaching data sovereignty?",
+        "main_finding": "A data-spaces reference architecture plus prospective roadmapping can reconcile CBAM transparency demands with supplier data sovereignty.",
+        "method_or_basis": "Conceptual architecture design with a semiconductor/petrochemical corridor case illustration; no implementation results.",
+        "qualification": "Not peer reviewed and not implemented; the claimed benefits are argued rather than measured.",
+        "radar_relevance": "Offers a reusable architecture and method for EU regulatory data flows, with direct bearing on European compliance infrastructure.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s10961-026-10327-w",
+      "source_hash": "6045eefb",
+      "identity_hash": "5a6cde26c4edc26d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s10961-026-10327-w resolved to the matching open-access Journal of Technology Transfer article on link.springer.com; full text captured in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s10961-026-10327-w confirms title, the three authors, The Journal of Technology Transfer and 9 April 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Utrecht University DSpace handle 1874/488693 was opened as an alternate deposit but served only a shell page; Springer's own open-access text was used instead."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s10961-026-10327-w",
+            "title": "Building deep-tech entrepreneurial ecosystems: factors that promote the presence of deep-tech startups in European regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer open-access article text read through abstract, introduction, research question and results; volume 51, pages 2886-2915."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Quantitative study of the regional conditions behind deep-tech startup presence across 272 NUTS-2 regions in 27 EU countries and the UK, framed against European strategic-autonomy and Draghi-report concerns."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Specialist knowledge and talent, not generic ecosystem quality, drive deep-tech startups in European regions",
+      "reader_what": "Across 272 European regions, deep-tech-enabling knowledge and talent predict deep-tech startup presence better than generic ecosystem quality.",
+      "reader_why": "It tells European public administrations which regional levers actually raise deep-tech startup formation.",
+      "reader_more": "The authors combine the general entrepreneurial-ecosystem framework with elements specific to deep tech, then build a keyword thesaurus to identify deep-tech startups founded between 2019 and 2021. They test their hypotheses quantitatively across 272 NUTS-2 regions in 27 EU member states and the UK. The presence of specialised deep-tech knowledge and talent emerges as the strongest regional predictor, while generic ecosystem quality and specific formal institutions matter less. The authors draw the policy implication that regional support should target knowledge and skills rather than broad startup infrastructure. Findings are cross-sectional associations at regional level, not causal estimates.",
+      "deep_analysis": {
+        "work_kind": "quantitative regional empirical study",
+        "research_question": "Which generic and deep-tech-specific ecosystem elements influence the presence of deep-tech startups in a region?",
+        "main_finding": "Deep-tech-enabling knowledge and talent are more important for deep-tech startup presence than generic entrepreneurial-ecosystem quality or formal institutions.",
+        "method_or_basis": "Regression analysis across 272 European NUTS-2 regions using a purpose-built thesaurus to identify deep-tech startups (2019-2021).",
+        "qualification": "Cross-sectional regional associations; the thesaurus-based identification of deep-tech startups is an operational proxy.",
+        "radar_relevance": "Directly about European regional innovation capacity and the conditions for strategic-autonomy-relevant technologies.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/dap.2024.56",
+      "source_hash": "6c33bf9b",
+      "identity_hash": "df4d25725d8856da",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1017/dap.2024.56 resolved to the matching Cambridge Data & Policy article page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1017/dap.2024.56 confirms title, the three authors and Data & Policy (2025), 7:e24."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the Cambridge open-access PDF (S2632324924000567a.pdf) and read the taxonomy sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/493E652497F13C2653BC9323F4DE9D60/S2632324924000567a.pdf/div-class-title-when-forecasting-and-foresight-meet-data-and-innovation-toward-a-taxonomy-of-anticipatory-methods-for-migration-policy-div.pdf",
+            "title": "When forecasting and foresight meet data and innovation: toward a taxonomy of anticipatory methods for migration policy (full PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Cambridge PDF read, including the policy significance statement and the construction of the three-category taxonomy."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper introduces a new three-category taxonomy (experience-, exploration- and expertise-based) for organising anticipatory methods, explicitly designed to help decision-makers select methods: a transferable classification framework rather than a single application."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A three-way taxonomy to help policymakers choose anticipatory methods for migration",
+      "reader_what": "Introduces a taxonomy sorting anticipatory methods into experience-based, exploration-based and expertise-based categories to guide method selection.",
+      "reader_why": "A shared classification lets policymakers match forecasting or foresight methods to the question at hand.",
+      "reader_more": "The authors map the fast-growing field of anticipatory methods used in migration policy, spanning predictive models at one end and qualitative foresight at the other, and note the trend toward mixing quantitative and qualitative approaches and non-traditional data. Their contribution is a taxonomy with three core categories: experience-based, exploration-based and expertise-based methods. Each category is characterised by time horizon and maturity so a decision-maker can see which methods fit which context. The stated purpose is to help migration policy move from reactive to proactive. The paper is a conceptual and review contribution and does not test predictive accuracy.",
+      "deep_analysis": {
+        "work_kind": "conceptual/review paper proposing a taxonomy",
+        "research_question": "How can the range of anticipatory methods available to migration policymakers be systematically organised?",
+        "main_finding": "Anticipatory methods can be usefully organised into experience-based, exploration-based and expertise-based families, each with a characteristic time horizon and maturity.",
+        "method_or_basis": "Structured review and synthesis of forecasting and foresight methods, developed into a classification framework.",
+        "qualification": "The taxonomy is proposed and illustrated rather than empirically validated against method performance.",
+        "radar_relevance": "A geography-independent, reusable classification framework for anticipatory and foresight method selection.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckaf161.353",
+      "source_hash": "c642009f",
+      "identity_hash": "1c1d258017b9d1c5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1093/eurpub/ckaf161.353 redirects to academic.oup.com/eurpub/article/doi/10.1093/eurpub/ckaf161.353/8302365, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1093/eurpub/ckaf161.353 confirms the session title, European Journal of Public Health and 2025-10-01."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the open-access deposit at PubMed Central, PMC12555468, served the complete published item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12555468/",
+            "title": "6.O. Scientific session: The future of foresight: how to apply innovative methods to strategic foresight (Eur J Public Health 35(Suppl 4))",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; the complete published item was recovered from PubMed Central. The item is a session description with organisers, chair and key messages, which is the whole published record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_METHOD_CONTRIBUTION",
+        "reason": "The record is a conference session abstract from the European Public Health Conference that showcases existing foresight approaches (AI, citizen science, group model building); it presents no new or materially improved method of its own."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "conference session abstract",
+        "research_question": "",
+        "main_finding": "The session showcases AI-supported horizon scanning, citizen science and group model building as foresight approaches for public health, illustrated by case studies.",
+        "method_or_basis": "Session description published as a conference supplement abstract; organised by the EUPHA Foresight section, RIVM and Instituto Superior Tecnico.",
+        "qualification": "A programme abstract, not a study: no method is developed, tested or compared, and the key messages are exhortations to innovate further.",
+        "radar_relevance": "Fails Strand B: the item describes and promotes existing foresight methods rather than contributing a new or materially improved one.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.techfore.2013.07.012",
+      "source_hash": "9837025e",
+      "identity_hash": "00e4adc8aa463c5a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.techfore.2013.07.012 redirects to ScienceDirect article S0040162513001649, which returned a captcha interstitial."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.techfore.2013.07.012 returned the exact title, Förster and von der Gracht, Technological Forecasting and Social Change, May 2014 issue — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Assessing Delphi panel composition for strategic foresight\" returned the ScienceDirect page and citation mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Förster/von der Gracht/2014 located no EBS or institutional repository deposit of the full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex and Unpaywall both report this 2014 Elsevier article as closed with no open location, and OpenAIRE holds no Technological Forecasting and Social Change repository record for it."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.techfore.2013.07.012) confirms isOpenAccess false with no openAccessPdf; Crossref supplies no abstract for this record either."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. This 2014 article is closed access with no legitimate open copy, and Crossref carries no abstract, so almost no substantive content is available. The Strand B question — whether the panel-composition comparison constitutes a reusable methodological contribution — cannot responsibly be answered."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.99",
+      "source_hash": "e547d1ba",
+      "identity_hash": "c97d4db909775943",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1002/ffo2.99 redirects to onlinelibrary.wiley.com/doi/10.1002/ffo2.99, which returned HTTP 403; the Wiley pdfdirect route also returned 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.99 returned the exact title, all seven authors (Geurts, Gutknecht, Warnke, Goetheer, Schirrmeister, Bakker, Meissner) and Futures & Foresight Science, 21 July 2021 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"New perspectives for data-supported foresight: The hybrid AI-expert approach\" surfaced the Wiley page and aggregator entries."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Geurts/Rathenau Instituut/2021 located the KNAW research portal record pure.knaw.nl/portal/en/publications/41d72900-9423-4f6b-8d78-58fc22897c40."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Recovery step attempted: the KNAW portal record was opened in full but lists no attached file and no repository full text; a guessed TNO repository path for the same paper did not resolve to the article."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1002/ffo2.99) gives only the blocked Wiley pdfdirect link; OpenAIRE returned no alternative deposit."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref and the KNAW research portal (authors, journal, 2021, 40 Scopus citations). Only bibliographic metadata is reachable; the Wiley text is blocked and the Dutch portal record carries no file. The hybrid AI-expert approach is likely a genuine method contribution, but that must be verified in the text, not assumed."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-02-2025-0027",
+      "source_hash": "ea145c7d",
+      "identity_hash": "56239351d7893262",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1108/fs-02-2025-0027 redirects to emerald.com/fs/article/28/1/66/1342859/, which returned a JavaScript bot-challenge page ('Just a moment...') rather than the article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1108/fs-02-2025-0027 returned the exact title, Andrew McIntosh and the journal foresight, 24 February 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Linking generative AI and morphological analysis to conduct foresight evaluation\" returned the Emerald page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus McIntosh/foresight/2026 located no institutional or author deposit of the manuscript."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists an Emerald open-access PDF (emerald.com/fs/article-pdf/doi/10.1108/FS-02-2025-0027/11247780/fs-02-2025-0027en.pdf); that URL also returned HTTP 403 on direct request."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1108/fs-02-2025-0027) points to the same blocked Emerald PDF; OpenAIRE returned no repository copy."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. The article is flagged open access but Emerald's bot protection blocked both the article page and the PDF, and no repository copy exists. Strand B hinges on whether combining generative AI with morphological analysis is a genuinely new evaluation method, which requires the text."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.procs.2026.02.071",
+      "source_hash": "28e4ad29",
+      "identity_hash": "e3dabaf02ddfa56d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.procs.2026.02.071 redirects to ScienceDirect article S1877050926001870, which returned a bot-challenge page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.procs.2026.02.071 returned the exact title, Coppoletta, Bechthold and Filice, and Procedia Computer Science (2026) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"The Use of Generative AI in Foresight: A Model Comparison for Scenario Development\" returned the ScienceDirect page and conference listings."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Coppoletta/Bechthold/Filice located the DBLP conference record dblp.org/rec/conf/ism2/CoppolettaBF25.html, which is a bibliographic stub with no text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex reports the article as open access but lists no resolvable location other than the DOI; no university deposit (Calabria or otherwise) was found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.procs.2026.02.071) resolves only back to the DOI; OpenAIRE returned only the DBLP stub."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref and DBLP. Procedia is gold open access, yet the only route is ScienceDirect, which blocks automated access, and no repository copy exists. A model comparison for scenario development could be a real methodological contribution or a straightforward benchmarking exercise; the abstract does not decide it."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2025.103703",
+      "source_hash": "40a2bd86",
+      "identity_hash": "f5f2a20be7104ab2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.futures.2025.103703 redirects to ScienceDirect article S0016328725001661, which returned a bot-challenge page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.futures.2025.103703 returned the exact title, Yuri Calleo and Francesco Pilla, Futures, December 2025 issue — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Real-Time AI Delphi: A novel method for decision-making and foresight contexts\" returned the ScienceDirect page and citation mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Title plus Calleo/Pilla/University College Dublin/2025 found no UCD Research Repository deposit of the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex reports open access but lists no location other than the DOI itself; OpenAIRE returned no repository record for this DOI."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.futures.2025.103703) resolves only to the DOI with no openAccessPdf beyond it."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. The title advertises a novel method, which would likely satisfy Strand B, but the instructions forbid deciding on title wording: the Real-Time AI Delphi procedure must be inspected. ScienceDirect blocked every route and no repository copy exists."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/dpr.12789",
+      "source_hash": "a58db086",
+      "identity_hash": "209c4d4010389aea",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1111/dpr.12789 redirects to onlinelibrary.wiley.com/doi/10.1111/dpr.12789, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1111/dpr.12789 confirms title, the three authors, Development Policy Review and June 2024."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the University of Pretoria institutional repository copy at repository.up.ac.za/bitstream/2263/98565/1/ served the full accepted article PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://repository.up.ac.za/bitstream/2263/98565/1/OumaMugabe_Institutionalizing_2024.pdf",
+            "title": "Institutionalizing foresight in science, technology, and innovation in sub-Saharan Africa (University of Pretoria repository copy)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; full text recovered from the University of Pretoria repository and read through motivation, methods, findings and policy implications."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_METHOD_CONTRIBUTION",
+        "reason": "An exploratory regional policy study of whether and how foresight is institutionalised in sub-Saharan African science and technology policy; it uses standard review, bibliometric, interview and survey techniques and contributes no new or materially improved method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "exploratory policy study",
+        "research_question": "What are the challenges and opportunities of institutionalising science, technology and innovation foresight in sub-Saharan Africa?",
+        "main_finding": "Foresight is barely practised in sub-Saharan African STI policy processes, mainly because of low awareness, weak technical capacity and the absence of a foresight culture.",
+        "method_or_basis": "Literature review, bibliometric analysis, interviews, an online survey and focus groups with regional stakeholders and science granting councils.",
+        "qualification": "Exploratory and descriptive; the methods used are conventional and are applied to describe a region rather than to develop a technique.",
+        "radar_relevance": "Fails Strand B: a regional diagnosis of foresight uptake, not a reusable methodological contribution. Its subject is sub-Saharan Africa, so it also has no substantive European R&I connection.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s12874-016-0186-3",
+      "source_hash": "63157dbe",
+      "identity_hash": "0f39d4e28995665c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1186/s12874-016-0186-3 resolved to the matching open-access BMC Medical Research Methodology article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s12874-016-0186-3 confirms title, the four authors, BMC Medical Research Methodology and 26 July 2016."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://bmcmedresmethodol.biomedcentral.com/track/pdf/10.1186/s12874-016-0186-3",
+            "title": "A comparison of two methods for expert elicitation in health technology assessments (full PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full BMC open-access PDF read, including the elicitation protocol, aggregation approach, EVPI results and expert preference scores."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A head-to-head elicitation experiment comparing the histogram and hybrid methods for eliciting expert probability distributions, including their effect on decision uncertainty: a methodological comparison and evaluation design that transfers to any model-based assessment."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Comparing two ways of turning expert judgement into probability distributions for decision models",
+      "reader_what": "Histogram and hybrid elicitation gave similar decision conclusions; expert input cut decision uncertainty substantially.",
+      "reader_why": "It shows elicitation method choice matters less than doing elicitation at all when model parameters are missing.",
+      "reader_more": "When data needed for decision-model parameters are missing, formal elicitation of expert judgement can characterise the uncertainty. The authors asked clinical experts to express judgements as probability distributions using two methods, the histogram and the hybrid approach, presented in random order, within a prostate cancer cost-effectiveness model. Distributions were aggregated with and without weighting and fed into probabilistic analysis, and using expert opinion cut the expected value of perfect information at the thirty thousand pound per QALY threshold by 74 to 86 percent. Experts found the histogram method easier but felt the hybrid method captured their views more accurately. Only six of twenty-seven invited experts completed the task, which limits the comparison.",
+      "deep_analysis": {
+        "work_kind": "methodological comparison study",
+        "research_question": "Does the choice of expert elicitation method change the conclusions of a health technology assessment model?",
+        "main_finding": "The two elicitation methods produced broadly similar decision conclusions, while including expert opinion markedly reduced decision uncertainty.",
+        "method_or_basis": "Within-subject elicitation exercise with clinical experts, mathematical aggregation, and probabilistic cost-effectiveness and EVPI analysis.",
+        "qualification": "Only six experts completed the exercise, so the comparison between methods rests on a very small sample.",
+        "radar_relevance": "A transferable evaluation design for expert elicitation, relevant wherever expert judgement feeds quantitative assessment.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/idpl/ipag009",
+      "source_hash": "eb99bd6b",
+      "identity_hash": "f887b5948517803b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1093/idpl/ipag009 redirects to academic.oup.com/idpl/article/doi/10.1093/idpl/ipag009/8706447, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1093/idpl/ipag009 confirms title, Kositwatanarerk and Heine, International Data Privacy Law and 20 May 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the Erasmus University Rotterdam research portal copy at pure.eur.nl/ws/files/248513217/Path_dependence_GDPR.pdf served the CC-BY version of record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.eur.nl/ws/files/248513217/Path_dependence_GDPR.pdf",
+            "title": "Path dependence and network effects of the GDPR (EUR research portal, version of record, Int Data Privacy Law 16(2) ipag009)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; the CC-BY version of record was recovered from the Erasmus University research portal and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A theoretical analysis of how the EU's data protection regime acquired and sustains global influence, using path dependence and network effects, and connecting this to the Commission's proposed Digital Omnibus: substantive European technology-governance work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Why the EU's data protection rules keep spreading: path dependence and network effects",
+      "reader_what": "Argues GDPR's global reach is self-reinforcing: past choices locked in a regime whose value grows as members join.",
+      "reader_why": "Network effects explain why third countries adopt EU-style rules without the EU needing to compel them.",
+      "reader_more": "The article explains the global influence of the General Data Protection Regulation through two mechanisms. Path dependence accounts for how earlier European data-protection choices shaped the present regime and constrain its future. Network effects account for why the regime keeps growing: the more jurisdictions and firms operate inside it, the more valuable membership becomes, which holds existing members in and attracts newcomers. Together these make the EU's leading position self-reinforcing rather than merely coercive, and the authors read the Commission's proposed Digital Omnibus as pointing the same way. The analysis is theoretical and interpretive, and does not quantify adoption or the strength of the claimed effects.",
+      "deep_analysis": {
+        "work_kind": "theoretical legal/economic analysis",
+        "research_question": "What explains the global diffusion and persistence of the EU's data protection regime?",
+        "main_finding": "GDPR's global position is sustained by path dependence in its origins and by network effects that make continued membership of the regime increasingly attractive.",
+        "method_or_basis": "Application of path-dependence and network-effects theory to the history and current trajectory of EU data protection law.",
+        "qualification": "Theoretical argument rather than empirical measurement; the strength of the postulated network effects is not quantified.",
+        "radar_relevance": "Directly concerns the EU's regulatory power over data and digital technology, a core European technology-governance issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1371/journal.pone.0271678",
+      "source_hash": "a901f882",
+      "identity_hash": "04ff03850655936e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1371/journal.pone.0271678 resolved to the matching PLOS ONE article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1371/journal.pone.0271678 confirms title, Shin, Kim and Kogler, PLOS ONE and 25 July 2022."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0271678&type=printable",
+            "title": "Scientific collaboration, research funding, and novelty in scientific knowledge (PLOS ONE full PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full PLOS ONE PDF read; the five collaboration levels, keyword-based novelty measure and funding moderation analysis are all in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Bibliometric study of how collaboration and research funding relate to the novelty of scientific output, using Web of Science publications from European regions over 2008-2017: substantive European research-policy evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "In European regions, more collaboration and more funding came with less novel research",
+      "reader_what": "Collaboration correlates negatively with research novelty, and funded papers were less novel than unfunded ones.",
+      "reader_why": "It questions the assumption that collaboration and funding automatically produce more original science in Europe.",
+      "reader_more": "The authors use Web of Science publications from European regions between 2008 and 2017, measuring collaboration at five levels from country down to institution and measuring novelty from keyword combinations. They find a significant negative relationship between scientific collaboration and novelty. Funded papers also show lower novelty than unfunded ones, though funding significantly moderates the collaboration-novelty relationship. The authors frame this as extending bibliometric work by linking collaboration levels and funding sources to article novelty. The results are associations in bibliometric data, and the keyword-based novelty indicator is one operationalisation among several possible ones.",
+      "deep_analysis": {
+        "work_kind": "bibliometric empirical study",
+        "research_question": "How do scientific collaboration and research funding relate to the novelty of research output?",
+        "main_finding": "Collaboration is negatively associated with novelty and funded papers are less novel than unfunded ones, though funding moderates the collaboration-novelty link.",
+        "method_or_basis": "Bibliometric analysis of Web of Science articles from European regions, 2008-2017, with a keyword-based novelty measure across five collaboration levels.",
+        "qualification": "Correlational bibliometric evidence; novelty is proxied by keyword combinations, so the finding depends on that operationalisation.",
+        "radar_relevance": "Evidence on how European research funding and collaboration structures shape the originality of science.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.joitmc.2026.100865",
+      "source_hash": "433f2783",
+      "identity_hash": "9f0152f47a53d5d2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.joitmc.2026.100865 redirects to ScienceDirect article S2199853126001514, which returned a captcha interstitial."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.joitmc.2026.100865 returned the exact title, Gregán, Kovács and Gabnai, and the Journal of Open Innovation: Technology, Market, and Complexity, September 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"The anchor trap and the absorptive capacity\" returned the ScienceDirect page and aggregator mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Gregán/Kovács/Gabnai/Debrecen/2026 located no Hungarian institutional repository deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex flags the article open access but names the blocked ScienceDirect PDF as its only location, and OpenAIRE holds no Journal of Open Innovation deposit for this DOI."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.joitmc.2026.100865) gives the same blocked ScienceDirect PDF; a reader-proxy attempt on the article page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Gold open access in principle, but every route terminates at ScienceDirect's block and no repository copy exists. The record needs the text to determine whether PLS-SEM on core and peripheral European regions is a new analytical contribution or an application of an existing model."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/14702436.2026.2664455",
+      "source_hash": "e3e01859",
+      "identity_hash": "c8f924d06625d453",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1080/14702436.2026.2664455 redirects to tandfonline.com/doi/full/10.1080/14702436.2026.2664455, which returned HTTP 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1080/14702436.2026.2664455 returned the exact title, Kondrāts, Kits, Pundure and Jēkabsone, and Defence Studies, 27 April 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Butter through guns? Mobilizing innovation for defence in the Euro-Atlantic area\" returned the Taylor & Francis page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Kondrāts/Jēkabsone/University of Latvia/2026 located no Latvian institutional repository deposit of the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists an open-access Taylor & Francis PDF (tandfonline.com/doi/pdf/10.1080/14702436.2026.2664455?needAccess=true); that URL also returned 403. Semantic Scholar separately reports isOpenAccess false, so the OA status is itself unreliable."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "OpenAIRE returned no repository record for this DOI; a reader-proxy attempt on the article page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Taylor & Francis blocked both the article page and the PDF route, OA status is inconsistent between sources, and no repository copy exists. This is a strong Strand A candidate on subject matter, but the European defence-innovation argument must be read before admission."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.2196/70323",
+      "source_hash": "efbbc8ea",
+      "identity_hash": "ad8f9d2a7d6364e5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.2196/70323 resolved to the matching Interactive Journal of Medical Research article at i-jmr.org/2025/1/e70323."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.2196/70323 confirms title, the six NIHR Innovation Observatory authors and 11 September 2025."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The full open-access text was read from the PubMed Central deposit PMC12425427."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12425427/",
+            "title": "Horizon Scanning Methods for Health Care Technology Innovation Identification: Rapid Scoping Review of Patent Research Studies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read from PMC, including aims, the count of 47 patent databases, the automation and visualisation findings and the standardisation conclusion."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A rapid scoping review that maps patent databases, retrieval and analysis methods and their purposes in health technology horizon scanning, explicitly to support standardisation of weak-signal detection: an evidence-synthesis contribution to method practice."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Mapping how patent analysis is actually used in health technology horizon scanning",
+      "reader_what": "Reviews patent-based horizon scanning studies, mapping databases, retrieval methods and purposes to support standardised weak-signal detection.",
+      "reader_why": "Inconsistent deduplication across patent studies inflates counts, so shared practice standards change what scanning detects.",
+      "reader_more": "The review comes from the NIHR Innovation Observatory, the UK national horizon-scanning body, and surveys studies that use patent data to identify emerging health technologies. It asks which intellectual-property sources are used, by what retrieval and analysis methods, and for what purpose, identifying up to 47 patent databases with just over a quarter of studies using more than one. Most studies relied on patent databases alone, trend analysis was the most common objective, and a third used automated approaches, often with network visualisation tools. The authors warn that inconsistent deduplication risks inflating results and call for greater transparency and rigour. The review maps practice rather than testing which method detects innovation earliest.",
+      "deep_analysis": {
+        "work_kind": "rapid scoping review of methods",
+        "research_question": "How is patent analysis used within horizon scanning for health care technology, and how could it be standardised?",
+        "main_finding": "Patent analysis is widely used for trend detection in health technology horizon scanning, but inconsistent deduplication and reporting undermine comparability and risk data inflation.",
+        "method_or_basis": "Rapid scoping review of patent research studies, coding sources, retrieval methods, analysis tools and stated objectives.",
+        "qualification": "A rapid rather than full systematic review, and it maps reported practice rather than evaluating method performance.",
+        "radar_relevance": "Supports standardisation of weak-signal detection, a method directly reusable in horizon-scanning and radar work.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.201",
+      "source_hash": "886771f2",
+      "identity_hash": "13a09eb5e0b05b25",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1002/ffo2.201 redirects to onlinelibrary.wiley.com/doi/10.1002/ffo2.201, which returned 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1002/ffo2.201 confirms title, Garnett, Wilson and Wilkinson, Futures & Foresight Science and 11 November 2024."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: Cranfield CERES item 1826/23195, whose ORIGINAL bundle bitstream Using_Horizon_Scanning-2024.pdf was downloaded via the repository API."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://dspace.lib.cranfield.ac.uk/handle/1826/23195",
+            "title": "Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime (Cranfield CERES full-text deposit)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; the open-access version was recovered from Cranfield's repository via its DSpace API and read in full, including the toolkit design principles and funding acknowledgement (LIFE SMART Waste, LIFE13 ENV-UK-000549)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper builds a horizon-scanning toolkit and design principles for environmental regulators, grounded in a literature review and a stakeholder workshop: an explicit, transferable method and guidance product rather than a one-off application."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A horizon-scanning toolkit for environmental regulators facing waste crime",
+      "reader_what": "Builds a horizon-scanning toolkit and design principles helping regulators spot weak signals and act on emerging waste-crime threats.",
+      "reader_why": "Regulators need structured foresight because waste-crime patterns shift faster than historical-trend assumptions allow.",
+      "reader_more": "Waste crime damages the environment and undermines investment in the waste and resources industry, yet its scale and forms are poorly understood. The authors ask how environmental regulators can use horizon scanning to shape decisions and build resilience, reviewing academic and grey literature to identify organisational approaches and design principles for public-sector scanning. They then tested the outputs in a workshop with regulators, criminal intelligence staff and industry professionals. The resulting toolkit and guidance help users spot weak signals early, examine evidence on threats and opportunities, and act on strategically important issues. The work was funded through the EU LIFE SMART Waste project, and the authors note that integration with predictive and hotspot analytics remains future work.",
+      "deep_analysis": {
+        "work_kind": "method development and guidance paper",
+        "research_question": "How can horizon scanning be adopted by environmental regulators to shape decisions and build resilience to waste crime?",
+        "main_finding": "A structured horizon-scanning toolkit with agreed design principles enables regulators to detect weak signals, assess future threats and act on strategic issues.",
+        "method_or_basis": "Review of academic and grey literature on public-sector horizon scanning, followed by a stakeholder workshop with regulators, intelligence and industry participants.",
+        "qualification": "The toolkit is developed and workshopped but not yet evaluated in operational use, and integration with data analytics is flagged as outstanding.",
+        "radar_relevance": "A transferable public-sector horizon-scanning method and toolkit, directly applicable to Radar-style scanning work.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/1946756717739627",
+      "source_hash": "31f56bfc",
+      "identity_hash": "90cb55607b15845f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1177/1946756717739627 redirects to journals.sagepub.com/doi/10.1177/1946756717739627, which returned HTTP 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1177/1946756717739627 returned the exact title, Guillermina Benavides Rincón and World Futures Review, 9 November 2017 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Strategic Foresight and Futures Studies in Mexico\" returned the Sage page and citation mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Benavides Rincón/Tecnológico de Monterrey/2017 located no institutional repository deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex and Unpaywall show the Sage article as closed with no open location; OpenAIRE holds no Tecnologico de Monterrey or World Futures Review deposit for it."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1177/1946756717739627) confirms isOpenAccess false with no openAccessPdf; the Crossref abstract is only a few hundred characters."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Closed access with no legitimate open copy. On the little that is visible this looks like a descriptive account of a Mexican master's programme rather than a method contribution, but Strand B must not be decided on a fragment, so the record is deferred rather than dropped."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s13011-024-00617-7",
+      "source_hash": "f42b9a0d",
+      "identity_hash": "7569b83939e1a18f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1186/s13011-024-00617-7 resolved to the matching open-access article in Substance Abuse Treatment, Prevention, and Policy."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1186/s13011-024-00617-7 confirms title, the five Finnish authors and 27 July 2024."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://substanceabusepolicy.biomedcentral.com/counter/pdf/10.1186/s13011-024-00617-7",
+            "title": "Delphi method applicability in drug foresight (full open-access PDF, SATPP 2024 19:35)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full BMC open-access PDF read; the prediction set, the 2020 verification sources and the topic-by-topic accuracy assessment are all present."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The study evaluates the accuracy of a 2009-2011 Delphi panel against a decade of registry, survey, wastewater and official data: a reusable ex-post validation design for testing whether foresight methods actually predict well."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Testing whether a Delphi panel's ten-year drug forecasts actually came true",
+      "reader_what": "Experts predicted continuing trends well but missed discontinuities, such as new synthetic drug uptake and stable prices.",
+      "reader_why": "Ex-post checks show where Delphi forecasts are trustworthy and where they systematically fail.",
+      "reader_more": "A Delphi panel conducted in Finland between 2009 and 2011 made predictions about drug use, markets, legislation and care. The authors test those predictions against what actually happened by 2020, using published statistics, survey results, official registers, wastewater analyses and official documents, cross-checking sources where possible. Experts correctly foresaw rising drug use, rising approval of drug use and the absence of legislative change, and correctly anticipated more lenient enforcement toward users and the merging of mental health and addiction care. They were wrong about a surge in new synthetic drugs and did not anticipate stable unit prices or rising buprenorphine misuse. The authors conclude that continuation of existing trends is easier to foresee than discontinuity.",
+      "deep_analysis": {
+        "work_kind": "ex-post validation study of a foresight method",
+        "research_question": "How accurate were expert Delphi predictions about drug-related developments over a ten-year horizon?",
+        "main_finding": "Delphi experts predicted the continuation of existing trends accurately but failed to anticipate discontinuities in drug markets and substance popularity.",
+        "method_or_basis": "Comparison of 2009-2011 Delphi panel predictions against 2020 register, survey, wastewater and official-document evidence, triangulated across sources.",
+        "qualification": "A single national Delphi exercise on one policy domain; the accuracy verdict may not generalise to other topics or panel designs.",
+        "radar_relevance": "Provides a reusable design for retrospectively validating Delphi and other expert-foresight methods.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/13501763.2026.2701223",
+      "source_hash": "6e95c874",
+      "identity_hash": "2fb00e43618a99db",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1080/13501763.2026.2701223 redirects to tandfonline.com/doi/full/10.1080/13501763.2026.2701223, which returned HTTP 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1080/13501763.2026.2701223 returned the exact title, Jakub Eberle and the Journal of European Public Policy, 14 July 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"The inequality of EU digital sovereignty: core, periphery, and digital divides in EU politics\" returned the Taylor & Francis page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Eberle/Institute of International Relations Prague/2026 located no ASEP or institute repository deposit of the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex reports the article as open access but lists no location other than the DOI; OpenAIRE returned no repository record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1080/13501763.2026.2701223) resolves only to the blocked DOI; a reader-proxy attempt on the article page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Taylor & Francis blocked all routes and no repository copy is deposited, despite the OA flag. The subject is squarely European digital sovereignty, so Strand A admission is plausible, but the argument about core-periphery digital divides must be read before it is admitted."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf",
+      "source_hash": "5031f639",
+      "identity_hash": "81acfd372c9bfe36",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf downloaded and read; it is headed 'Press release' and announces the policy brief."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "CER press releases and policy briefs carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_press_release",
+            "url": "https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf",
+            "title": "Press release: European governments need to be ready to fight tonight to deter Russia (announcing 'Rearming Europe for deterrence')",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The PDF at the supplied URL is a CER press release, authored on behalf of the Centre for European Reform and describing a policy brief by Armida van Rij supported by the Hanns Seidel Foundation. The brief's own full text was not at this URL."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_PROVENANCE_JUDGEMENT",
+        "reason": "The linked object is the Centre for European Reform's press release announcing Armida van Rij's policy brief, not the brief itself. It summarises real recommendations on European rearmament, but whether a press release should stand in the Radar as the work needs human judgement."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "press release",
+          "authors": "Centre for European Reform (announcing a policy brief by Armida van Rij)"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The PDF at the supplied URL is headed 'Press release' and announces a policy brief by Armida van Rij; the scanner recorded it as a formal study/report authored by CER. Stored source_tier is unsupported for a press release and should be recomputed."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CER press release: Europe must be able to fight tonight to deter Russia",
+      "reader_what": "Announces a CER brief urging European governments to prioritise readiness, munitions stockpiles and defence personnel within one to two years.",
+      "reader_why": "It argues growing budgets remove the trade-off between buying European and buying quickly.",
+      "reader_more": "The press release presents Armida van Rij's Centre for European Reform policy brief on short-term European rearmament. It frames the problem as the United States stepping back from European security while Russia intensifies hostile activity. The brief's recommendations fall into three areas: winning public support for rearmament, ensuring equipment and capabilities are actually operational, and building a pipeline of trained personnel. It argues European NATO allies need a realistic assessment of what can fight tonight, and should default to European production where capacity exists, such as ammunition, drones and some air defence, while buying from non-European allies where shortfalls are too large. It also criticises physical entry requirements that screen out people suited to cyber and drone roles.",
+      "deep_analysis": {
+        "work_kind": "press release announcing a policy brief",
+        "research_question": "",
+        "main_finding": "The announced brief argues European governments can accelerate deterrence within one to two years by prioritising readiness, stockpiles, European production where capacity exists, and a broader personnel pipeline.",
+        "method_or_basis": "Press release summarising a CER policy brief by Armida van Rij, produced with support from the Hanns Seidel Foundation.",
+        "qualification": "This is promotional summary text, not the analysis itself; the brief's evidence base cannot be assessed from this document.",
+        "radar_relevance": "Substantively about European defence-industrial capability and production, but the indexed object is a press release rather than the underlying study.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s12027-026-00888-6",
+      "source_hash": "e4f89445",
+      "identity_hash": "8a41c07f0bb6b8a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s12027-026-00888-6 resolved to the matching open-access ERA Forum article on link.springer.com."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s12027-026-00888-6 confirms title, Buttigieg and Gentilini, ERA Forum and 7 July 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s12027-026-00888-6.pdf",
+            "title": "Expanding the scope and scale of the EU's DLT market infrastructures (Springer open-access PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer open-access PDF read; the DLT Pilot Regime critique, the MISP proposal analysis and the technological-sovereignty conclusion are all in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Legal-institutional analysis of the EU's DLT Pilot Regime and the proposed Market Integration and Supervision Package, arguing that the framework's success depends on European technological sovereignty: substantive EU technology-governance work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Why the EU's blockchain market infrastructure rules hit a ceiling, and what replaces them",
+      "reader_what": "Argues the DLT Pilot Regime's low thresholds and missing cash leg capped adoption; the proposed MISP raises limits substantially.",
+      "reader_why": "Whether EU tokenised market infrastructure scales depends on keeping supervision agile and the technology European.",
+      "reader_more": "The article traces EU regulation of distributed ledger technology in financial markets from Regulation (EU) 2022/858 to the proposed Market Integration and Supervision Package. It sets out the value proposition of tokenisation, namely atomic settlement and fractionalisation, and contrasts successes such as Project Guardian with failures such as the Australian exchange's CHESS replacement. The authors identify a ceiling on success built into the pilot regime: restrictive capitalisation thresholds and no native cash leg. They assess ESMA's 2025 recommendations and the Commission's response, which would unbundle central securities depository services into DLT notaries and account keepers and raise aggregate thresholds to one hundred billion euros. They conclude that success depends on European technological sovereignty and agile national supervision rather than premature centralisation.",
+      "deep_analysis": {
+        "work_kind": "legal and regulatory analysis",
+        "research_question": "Can the EU's DLT market infrastructure framework be scaled beyond the limits of the pilot regime?",
+        "main_finding": "The DLT Pilot Regime's restrictive thresholds and missing cash leg capped adoption; the proposed MISP would create a permanent, far larger architecture whose success hinges on European technological sovereignty.",
+        "method_or_basis": "Doctrinal and policy analysis of EU legislation, ESMA recommendations and Commission proposals, with comparative infrastructure cases.",
+        "qualification": "The MISP is a proposal under negotiation, so the article assesses intended architecture rather than observed outcomes.",
+        "radar_relevance": "Concerns EU technological sovereignty in financial market infrastructure and the regulatory conditions for deploying a strategic technology.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.techfore.2026.124833",
+      "source_hash": "c3809aa8",
+      "identity_hash": "f2ff12b9ba4f5189",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.techfore.2026.124833 redirects to ScienceDirect article S0040162526003100, which returned a bot-challenge page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.techfore.2026.124833 returned the exact title, Nordling and Schmutzler, and Technological Forecasting and Social Change (November 2026 issue) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Governing the knowledge filter\" together with the full title returned the ScienceDirect page and the Tampere deposit stub."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Nordling/Schmutzler/Tampere University/2026 located the Trepo deposit trepo.tuni.fi/handle/10024/239792."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Recovery step attempted: both the Trepo handle page and the Trepo DSpace discovery API returned the Anubis proof-of-work anti-scraping challenge rather than item metadata or a bitstream, so the deposited file could not be reached."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.techfore.2026.124833) resolves only to the DOI; OpenAIRE returned no further location beyond the blocked Trepo record."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. A legitimate Tampere University repository deposit was located but its server requires an interactive proof-of-work challenge; ScienceDirect blocks the publisher copy. A retry against Trepo is likely to recover the full text."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://arxiv.org/abs/2606.31590",
+      "source_hash": "99aae5f7",
+      "identity_hash": "9313257a7242a61b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2606.31590 opened as the matching arXiv listing for the claimed title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The record is an arXiv preprint; no DOI is registered in the supplied link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full preprint PDF retrieved from https://arxiv.org/pdf/2606.31590 and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2606.31590",
+            "title": "Digital Sovereignty as a Quality Attribute for Software Architectures (arXiv full text)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv PDF read; author affiliations (University of Southern Denmark; UTS/Accenture), the quality-attribute argument and the EU policy framing are explicit."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analysis of digital sovereignty as a software-architecture quality attribute set explicitly in the context of EU cloud policy frameworks, sharpening a vague EU policy concept into something measurable and testable."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Turning EU digital sovereignty from a slogan into a testable software-architecture property",
+      "reader_what": "Argues digital sovereignty behaves like a classical software quality attribute: measurable, validatable and subject to trade-offs.",
+      "reader_why": "Framing sovereignty as a quality attribute makes EU cloud requirements something architects can actually design against.",
+      "reader_more": "Digital sovereignty is a prominent but famously vague political concept, usually framed through dependencies and the vulnerabilities they create. The authors analyse it instead as a quality attribute for software architectures in cloud computing, within the EU's policy frameworks. They show it satisfies many classical properties of quality attributes: it can be measured and validated, it involves trade-offs against other attributes, and it fits the scenario-based methods architects already use to analyse such attributes. The contribution is conceptual and analytical rather than an implementation or case evaluation. The paper is a preprint and has not been peer reviewed.",
+      "deep_analysis": {
+        "work_kind": "conceptual analysis preprint",
+        "research_question": "Can digital sovereignty be sharpened analytically by treating it as a software architecture quality attribute?",
+        "main_finding": "Digital sovereignty satisfies the classical properties of a software architecture quality attribute, including measurability, validation, trade-offs and scenario-based analysis.",
+        "method_or_basis": "Conceptual analysis linking digital sovereignty literature and EU cloud policy frameworks to software architecture quality-attribute theory.",
+        "qualification": "Preprint, not peer reviewed; the argument is conceptual with no implementation or empirical validation.",
+        "radar_relevance": "Directly addresses the EU digital sovereignty agenda and how it translates into technology design requirements.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://arxiv.org/abs/2607.28290",
+      "source_hash": "04692bfd",
+      "identity_hash": "80a2bc4080eb3be9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://arxiv.org/abs/2607.28290 opened as the matching arXiv listing."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The record is an arXiv deposit of a project report; no DOI is registered in the supplied link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full report PDF retrieved from https://arxiv.org/pdf/2607.28290 and read, including the contents, methodology and recommendations sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2607.28290",
+            "title": "FAIR-Compute: A Roadmap for Fair and Efficient Allocation of Federated Digital Research Infrastructure — Final Report to the NFCS Flexible Fund",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full arXiv PDF read. The title page names Professor Konstantinos (Kostas) E. Zachariadis of Queen Mary University of London as principal investigator, with co-lead Ahmed Sayed (QMUL), advisor Dimitris Fotakis (NTUA) and researchers Angeliki Mathioudaki and Wan Shuen Siaw; the scanner had truncated the first author to a given name."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Final project report developing a model of HPC allocation with strategic reporting mechanisms, welfare evaluation metrics and a simulation study, plus a roadmap: a transferable allocation and evaluation methodology for federated research computing."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Konstantinos E. Zachariadis, Ahmed Sayed, Dimitris Fotakis, Angeliki Mathioudaki, Wan Shuen Siaw",
+          "type": "project final report (arXiv deposit)",
+          "source": "arXiv (final report to the National Federated Compute Services Flexible Fund)"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The report's title page gives the principal investigator as Professor Konstantinos (Kostas) E. Zachariadis, QMUL; the scanner recorded only the given name 'Konstantinos'. The document is a commissioned NFCS final project report deposited on arXiv, not a standalone preprint article."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A mechanism-design roadmap for allocating shared research computing fairly and efficiently",
+      "reader_what": "Develops an allocation model with strategic reporting mechanisms and welfare metrics, tested by simulation, for federated research computing.",
+      "reader_why": "Allocation, not raw capacity, is where shared research-compute systems lose usable time.",
+      "reader_more": "The report was produced for the UK National Federated Compute Services Flexible Fund, combining stakeholder interviews, a demand-side survey, a literature review and a simulation study to examine how federated research computing is actually allocated. It maps infrastructure tiers and federation models, then examines occupancy, utilisation and the economic case to identify where allocation breaks down. The analytical core is a model of HPC allocation covering jobs, a descriptive scheduler, strategic reporting by users and offline welfare comparisons, with allocation treated as routing under congestion. Recommendations for the NFCS roadmap follow. The mechanisms are modelled and simulated rather than deployed, and the empirical base centres on the UK system with international comparison.",
+      "deep_analysis": {
+        "work_kind": "commissioned final project report with modelling and simulation",
+        "research_question": "How should federated digital research infrastructure be allocated fairly and efficiently across competing users?",
+        "main_finding": "Allocation failures, not just capacity limits, drive poor utilisation of federated research computing; a mechanism-design model with strategic reporting and welfare metrics offers a systematic alternative.",
+        "method_or_basis": "Stakeholder interviews, demand-side survey, literature review and a simulation study built on a formal model of HPC allocation and scheduling.",
+        "qualification": "Mechanisms are evaluated in simulation rather than in production, and the empirical base is centred on the UK system with international comparison.",
+        "radar_relevance": "A geography-independent, reusable allocation and evaluation methodology for shared research infrastructure.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s11192-026-05693-z",
+      "source_hash": "2902b75d",
+      "identity_hash": "97c0d3efbee609e2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1007/s11192-026-05693-z resolved to the matching open-access Scientometrics article on link.springer.com."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1007/s11192-026-05693-z confirms title, Tan and Zhao, Scientometrics and July 2026 (131:4823-4845)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s11192-026-05693-z.pdf",
+            "title": "Country-level innovation performance: introducing sustainable innovation efficiency (Springer open-access PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer open-access PDF read; the new construct, the DEA specification, the 30-country 2009-2018 sample and the regional results are in the text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper introduces and operationalises 'sustainable innovation efficiency' as a new country-level measurement construct alongside conventional innovation efficiency, and validates it with DEA across 30 countries: a new indicator/measurement approach."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A new indicator for how stably countries turn R&D inputs into innovation",
+      "reader_what": "Introduces sustainable innovation efficiency, measuring how well countries convert R&D inputs into stable outputs despite volatile inputs.",
+      "reader_why": "Conventional efficiency scores miss whether a national innovation system holds up under input volatility.",
+      "reader_more": "The authors argue that measuring innovation efficiency alone gives an incomplete picture of national innovation performance, and introduce sustainable innovation efficiency to capture how well a country converts research and development inputs into stable outputs when those inputs fluctuate. Using Data Envelopment Analysis on thirty countries from 2009 to 2018, they find overall innovation efficiency is low, with scores consistently below 0.25. High-income countries score better on sustainable innovation efficiency, while lower-middle-income countries score highest on plain innovation efficiency. East Asia and the Pacific outperform Europe, Central Asia and the Middle East and North Africa on innovation efficiency, with variation on the sustainable measure. The construct is new, so its external validity is not yet established.",
+      "deep_analysis": {
+        "work_kind": "measurement/indicator development with empirical validation",
+        "research_question": "How can country-level innovation performance be measured to reflect stability of output under volatile inputs?",
+        "main_finding": "A new sustainable innovation efficiency measure, estimated by DEA across 30 countries, separates stable conversion of R&D inputs from raw efficiency and reorders country rankings accordingly.",
+        "method_or_basis": "Data Envelopment Analysis of 30 countries, 2009-2018, computing both conventional and newly defined sustainable innovation efficiency.",
+        "qualification": "First conceptualisation of the construct; results depend on the DEA input-output specification and the 2009-2018 window, and the measure is not yet externally validated.",
+        "radar_relevance": "A reusable country-level measurement approach for innovation performance, with direct comparative results for Europe.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.array.2026.101126",
+      "source_hash": "9b73bd5d",
+      "identity_hash": "e20221d5d64c4bdd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.array.2026.101126 redirects to ScienceDirect article S2590005626004492, which returned a captcha interstitial."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.array.2026.101126 returned the exact title, Menning, Farkas, Vribék and van der Velden, and Array (September 2026 issue) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Enhancing regulatory foresight through weak signal mining\" returned the ScienceDirect page and indexing mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Menning/Farkas/van der Velden/2026 located no institutional or author deposit of the manuscript."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists the article as open access with the ScienceDirect PDF as its only location; OpenAIRE returned no repository deposit."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.array.2026.101126) gives the same blocked ScienceDirect PDF; a reader-proxy attempt on the article page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Array is gold open access but every route terminates at ScienceDirect's block and no repository copy exists. This is a high-value Strand B candidate — an AI micro-topic emergence scoring approach for weak-signal detection — and precisely the kind of claim that must be verified in the method section rather than inferred from the title."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf",
+      "source_hash": "5d516ce8",
+      "identity_hash": "a5eb074a6f9a706c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf is the matching FIIA Briefing Paper 441, September 2026; the package captured its text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "FIIA briefing papers carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf",
+            "title": "FIIA Briefing Paper 441: Japan's security policy under Prime Minister Takaichi — Pushing a realist agenda into higher gear",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full briefing paper read. The byline is Bart Gaens, Senior Research Fellow, Global Security and Governance, FIIA — the scanner had recorded Maiju Kivinen as author. The paper's own title carries no '| FIIA' suffix."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_JUDGEMENT",
+        "reason": "A substantive FIIA briefing on Japanese security policy that includes a dedicated closing analysis of resulting defence-technology and industrial-cooperation opportunities for Finland, Europe and NATO. Whether that section makes the work substantively European rather than a non-European study with a European implication needs human judgement."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Bart Gaens",
+          "title": "Japan's security policy under Prime Minister Takaichi"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The briefing paper's own byline and author box name Bart Gaens, Senior Research Fellow at FIIA; the scanner recorded Maiju Kivinen. The scanner title also carried a '| FIIA' site suffix that is not part of the document title."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Japan's security shift under Takaichi and what it opens up for European defence industry",
+      "reader_what": "Takaichi is expanding defence exports and dual-use R&D, turning Japan from arms importer into co-producer.",
+      "reader_why": "Japan's move to co-production creates concrete openings for European defence-technology and industrial partnerships.",
+      "reader_more": "Sanae Takaichi became Japan's first female prime minister in October 2025 and won a large Diet majority in February 2026. This FIIA briefing argues she is advancing a realism-based security agenda rooted in Shinzo Abe's legacy, now with stronger political backing. Her recorded achievements include expanded defence exports, more dual-use research and development, strengthened intelligence structures and economic-security measures aimed at China. Constitutional revision to recognise Japan's military forces remains her most ambitious and least certain goal. The paper notes heightened tension with China alongside deeper ties with the United States, Australia, the Philippines and Indonesia, and closes by identifying cooperation opportunities for Finland, Europe and NATO as Japan shifts to co-production.",
+      "deep_analysis": {
+        "work_kind": "think-tank briefing paper",
+        "research_question": "How is Japanese security and defence policy developing under Prime Minister Takaichi, and what follows for Europe?",
+        "main_finding": "Takaichi is consolidating a realist security agenda through expanded defence exports, dual-use R&D and economic-security measures, shifting Japan from arms importer toward co-producer.",
+        "method_or_basis": "Policy analysis by a FIIA senior research fellow drawing on Japanese policy documents, campaign pledges and regional developments.",
+        "qualification": "The author flags major uncertainties: whether constitutional reform succeeds, how China relations evolve, and whether new export frameworks deliver concrete results.",
+        "radar_relevance": "European defence-technology and industrial cooperation is analysed in a dedicated section, but the work's primary subject is Japanese domestic and regional security policy.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/17816858261477419",
+      "source_hash": "8d51e3d6",
+      "identity_hash": "c36ccda0b031f56b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1177/17816858261477419 redirects to journals.sagepub.com/doi/10.1177/17816858261477419, which returned HTTP 403; the Sage PDF route also returned 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1177/17816858261477419 returned the exact title, Burkard Schmitt and European View, 4 September 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Defence readiness 2030: The industrial dimension\" returned the Sage page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Schmitt/European View/Martens Centre/2026 located no Martens Centre or author deposit of the article text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex reports European View as open access but lists no location other than the DOI; OpenAIRE returned no repository record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1177/17816858261477419) resolves only to the blocked DOI with no openAccessPdf."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. European View is an open-access journal, but Sage blocked both the HTML and PDF routes and no repository or publisher-side copy is reachable. European defence-industrial readiness is core Strand A subject matter, so this record should be retried rather than judged from the abstract."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf",
+      "source_hash": "82e339cf",
+      "identity_hash": "df49f5861ace0a4e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf downloaded directly (the package's own retrieval had failed on a PDF encryption library) and read in full."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "DIIS policy briefs carry no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://pure.diis.dk/ws/files/31883751/DIIS_PB_strategic-autonomy-and-europe_s-new-logic-of-intervention.pdf",
+            "title": "DIIS Policy Brief, June 2026: Strategic autonomy and Europe's new logic of intervention",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full policy brief PDF read. The DIIS Pure cover page gives the authors as Maria-Louise Clausen and Peter Albrecht; the scanner had recorded the institute itself as author."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "DIIS policy brief analysing how European strategic autonomy is materialising as defence-industrial coordination, direct financing of arms production and large-scale military training: substantive European industrial-capability analysis."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Maria-Louise Clausen, Peter Albrecht"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The DIIS Pure cover page and citation give the authors as Clausen, Maria-Louise and Albrecht, Peter; the scanner recorded the issuing institute as the author."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European strategic autonomy is becoming arms financing and training rather than crisis management",
+      "reader_what": "Argues EU intervention has shifted from crisis management and statebuilding toward financing arms production and military training.",
+      "reader_why": "Defence-industrial coordination is becoming the concrete form European strategic autonomy takes.",
+      "reader_more": "The brief argues that the war in Ukraine and renewed transatlantic uncertainty are changing what European intervention means. Where the EU once exported crisis management and statebuilding, it now increasingly finances arms production and embeds itself in a wartime economy. The authors observe that combined EU defence budgets have risen by more than half in real terms, and that strategic autonomy is materialising concretely as defence-industrial coordination, direct financing of arms production and military training at unprecedented scale. They also argue that EU engagement with Ukraine blurs the established distinction between donor and recipient, embedding European defence production in a new way. This is an interpretive policy analysis rather than a quantitative evaluation of outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy brief",
+        "research_question": "How is European strategic autonomy changing the EU's logic of external intervention?",
+        "main_finding": "European strategic autonomy is materialising as defence-industrial coordination, direct financing of arms production and large-scale training, displacing the older crisis-management and statebuilding model.",
+        "method_or_basis": "Policy analysis by two DIIS researchers drawing on EU defence budget trends and EU engagement with Ukraine.",
+        "qualification": "An interpretive brief; the shift is argued from budget trends and policy direction rather than measured against intervention outcomes.",
+        "radar_relevance": "Directly concerns European defence-industrial capability and the institutional form strategic autonomy is taking.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.33663/0869-2491-2026-37-804-814",
+      "source_hash": "096a6190",
+      "identity_hash": "109b559e56b45d10",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.33663/0869-2491-2026-37-804-814 resolved to the journal's own article page at pravova-derzhava.org/en/rule-of-law-issue-37-2026-804, which carries the structured Introduction, aim, Results and Conclusions text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.33663/0869-2491-2026-37-804-814 confirms the title, Yevhen Zaiets, the Pravova derzhava yearly journal and 24 March 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "No separate repository deposit or PDF was reachable; the journal's own structured article page was the fullest legitimate text available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://pravova-derzhava.org/en/rule-of-law-issue-37-2026-804",
+            "title": "Foreign experience of digital transformation of parliament (journal article page with structured summary, Pravova derzhava issue 37 (2026), pp. 804-814)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The journal's own article page provides a structured account of the aim, results and conclusions well beyond a bare abstract; no full PDF was legitimately reachable. Decision rests on the clearly stated subject matter."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_OUT_OF_SCOPE",
+        "reason": "The article surveys foreign experience of parliamentary digitalisation and digital constitutionalism to draw lessons for Ukraine's parliament. It is public-sector e-governance and constitutional law, not research, innovation, science, technology capability or research policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "legal/comparative policy article",
+        "research_question": "What can Ukraine learn from foreign experience of digitally transforming parliaments?",
+        "main_finding": "National parliaments, the European Parliament and interparliamentary bodies have made substantial digital-governance progress, and Ukraine's parliament ranks in the global top fifteen on digital governance and strategy.",
+        "method_or_basis": "Comparative review of foreign parliamentary practice, the World e-Parliament Report 2024, EU digital instruments (Digital Decade, DSA, DMA, AI Act) and Inter-Parliamentary Union material.",
+        "qualification": "A comparative legal survey aimed at Ukrainian legislative reform; it presents no primary data or evaluation.",
+        "radar_relevance": "Fails Strand A: EU digital instruments appear as reference points for parliamentary e-governance, not as a research, innovation, science, technology or research-policy subject.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.cose.2026.105102",
+      "source_hash": "5920ba30",
+      "identity_hash": "a060b5974dcf0a12",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.cose.2026.105102 redirects to ScienceDirect article S0167404826002786, which returned a captcha interstitial."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.cose.2026.105102 returned the exact title, Żywiołek and Bottani, and Computers & Security (December 2026 issue) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Cybersecurity resilience in logistics enterprises: an empirical socio-technical analysis\" returned the ScienceDirect page and mirrors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Żywiołek/Bottani/Częstochowa/Parma/2026 located no Polish or Italian institutional repository deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex flags the article open access while naming the blocked ScienceDirect PDF as its only location; OpenAIRE holds no Computers & Security deposit under this DOI."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.cose.2026.105102) gives the same blocked ScienceDirect PDF; a reader-proxy attempt on the article page returned 403."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Gold open access in principle but unreachable in practice through ScienceDirect's block, with no repository copy. The abstract does not establish where the empirical sample sits, which determines whether the European relevance required by Strand A is substantive."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.technovation.2026.103603",
+      "source_hash": "b95ca4bd",
+      "identity_hash": "36762c9ae6560e27",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.technovation.2026.103603 redirects to ScienceDirect (Technovation vol. 156, article 103603), which returned a bot-challenge page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.technovation.2026.103603 returned the exact title, all six authors (Gagné, Veilleux, Armellini, Maine, Lalonde, Beaudry) and Technovation, August 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"Multinational enterprises and strategic foresight: The path to eco-innovation\" returned the ScienceDirect page and the PolyPublie entry."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Gagné/Veilleux/Beaudry/Polytechnique Montréal located the PolyPublie record publications.polymtl.ca/77040/, which confirms Technovation vol. 156, 15 pages, deposit date 5 August 2026 and SSHRC grant 752-2024-1867."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Recovery step attempted: the PolyPublie record states the document is open access at the official publisher and provides only an external link to the blocked Elsevier DOI; it hosts no file of its own, and a guessed PolyPublie file path returned 503."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.technovation.2026.103603) resolves only to the DOI; OpenAIRE returned no further full-text location."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity fully confirmed through Crossref and the PolyPublie deposit record, including volume, page count and funder. PolyPublie deliberately holds no file because the publisher copy is open access, but ScienceDirect blocks it. The Strand B question of whether strategic foresight is theorised as a method or used as a variable needs the text."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103876",
+      "source_hash": "366e8bf9",
+      "identity_hash": "8752615dafa9a384",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.futures.2026.103876 redirects to ScienceDirect article S0016328726001187, which returned a bot-challenge page; a direct fetch of the article page returned HTTP 400."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.futures.2026.103876 returned the exact title, Heinonen, Virmajoki and Viitamäki, and Futures (September 2026 issue) — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Quoted search on \"The next episode for narrative foresight\" confirmed the article via the ScienceDirect section outline (theoretical framework of radical narratives, cluster analysis of episodic themes, branching narratives) and author profiles, but returned no accessible full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Heinonen/Virmajoki/Finland Futures Research Centre/2026 located no Trepo or UTUPub deposit of the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex reports open access but lists no location other than the DOI; OpenAIRE returned no repository record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1016/j.futures.2026.103876) resolves only to the DOI with no openAccessPdf beyond it."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref and the publisher's own section outline. Only navigational fragments are reachable, and search-result text is explicitly not substantive evidence. The narrative-branching technique may be a genuine method contribution, but the method sections must be read before Strand B admission."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMikwFBVV95cUxNWkp0QW1uUGZSMnRjOTk2aXZ6ZEItZk5kd2NEQThKVXduSnlYaHV4cXNSRGdqbjZpS25MaXhvNlIzR3pwWUttXzZ1OHVQRjJwendDN1g2YzZUU3ZJek9JUGFhc3o3MWMtTm8tdkloODlBMWtaallhaEpGVzkyTnBZcDlaeFdGWnE2SERPUnZia2ZCbE0?oc=5",
+      "source_hash": "1bdac7a0",
+      "identity_hash": "17956e25445906a5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "The supplied Google News RSS link is an opaque redirect wrapper that renders no article content; resolving its article identifier through Google News returned the underlying article https://www.politico.eu/article/eu-big-tech-data-center-clean-power-supply-teresa-ribera/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "not_applicable: the claimed work is a POLITICO news article reached through a Google News RSS wrapper, and neither the wrapper nor the resolved politico.eu article carries a registered DOI, so there is no identifier to resolve at this step."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "A search on the resolved slug (EU, Big Tech, data centre clean power supply, Teresa Ribera) confirmed a POLITICO interview with Commissioner Teresa Ribera on data-centre power and clean-electricity requirements, reported and quoted by third parties in September 2026."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searching Ribera plus data centres plus POLITICO plus September 2026 returned only secondary commentary quoting the interview, not the article itself."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Direct retrieval of politico.eu was refused by this environment's egress policy, and POLITICO operates a subscriber wall; no syndicated POLITICO-owned copy of this particular piece (equivalent to the E&E News carriage used for another record in this package) was found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "No POLITICO Pro, E&E News or other POLITICO-property republication of this specific article was located, and secondary summaries are explicitly not acceptable as substitutes for the claimed work."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity established: the wrapper resolves to a real POLITICO article on EU data centres and clean power supply featuring Commissioner Teresa Ribera, corroborated by third-party coverage quoting the interview. The article's own text is not legitimately reachable, and the instructions forbid substituting secondary reporting for the claimed work, so no Strand C admission judgement can be made."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQY0VoUUV2WXpJWV8ybVAxejNfblM5dHEyREE4YWQ1akRjRl9YUzEtRzdiWUZtNHFoODNRcTdhbVZEYlBUeldMc3FLVnpYRU9SLVhYQkpabEVRQU1Ed01uX05jZWVWSjBYSzBCNjc2anhNVTZkYzdmek9HMW1kMEtJRFBxemFtRUlTYjBWMjNWZUdTLU1r?oc=5",
+      "source_hash": "c827a738",
+      "identity_hash": "8ab9e0b7b14d97b3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied Google News RSS link is an opaque redirect wrapper; resolving its article identifier through Google News returned the underlying article https://www.politico.eu/article/eu-launches-e30-billion-push-build-7-giga-ai-compute-hubs/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News articles of this kind carry no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searching the resolved headline located the same POLITICO report carried on E&E News by POLITICO under the headline 'EU launches €30B push to build 7 massive AI data centers'."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovery step that found the work: the POLITICO-owned E&E News page was opened in full, giving byline Pieter Haeck, publication 31 July 2026, and the complete report text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_full_text",
+            "url": "https://www.eenews.net/articles/eu-launches-e30b-push-to-build-7-massive-ai-data-centers/",
+            "title": "EU launches €30B push to build 7 massive AI data centers, by Pieter Haeck (POLITICO / E&E News by POLITICO)",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_agency_announcement",
+            "url": "https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
+            "title": "EuroHPC Joint Undertaking launches the AI Gigafactories Call (corroborating official source)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL was a Google News wrapper with no article text. The underlying POLITICO article was resolved and its full text recovered from POLITICO's E&E News property, then cross-checked against the EuroHPC call announcement."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "POLITICO news report of a concrete EU action: the launch of the official tender process for seven AI gigafactories, with chip-count tiers, funding ceilings and a selection timetable. This is a real funding-instrument development, not a listing page."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "EU launches €30B push to build 7 massive AI data centers",
+          "authors": "Pieter Haeck",
+          "source": "POLITICO",
+          "type": "news article"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The supplied Google News wrapper carried no title or byline. Resolving it gives a POLITICO article by Pieter Haeck published 31 July 2026; the scanner had no title and recorded only the aggregator's outlet field."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "POLITICO: EU opens bidding for seven AI gigafactories backed by up to €2bn each",
+      "reader_what": "The EU opened the tender for seven AI gigafactories, four smaller and three larger, with winners chosen early next year.",
+      "reader_why": "It turns von der Leyen's AI summit pledge into a funded procurement with chip targets and deadlines.",
+      "reader_more": "POLITICO reports that the EU has started the official process for seven industry consortia to build AI gigafactories, fulfilling a pledge made by Commission President Ursula von der Leyen at an AI summit the previous year. The plan is for four smaller sites, each underpinned by 25,000 to 75,000 specialised AI chips, and three larger ones with 40,000 to 100,000 chips each. Smaller projects could receive up to one billion euros in public funding and larger ones up to two billion. The Commission is to pick winning bids by early next year, after which companies have eighteen months to build, and Germany, Greece, Portugal, Italy and Spain are backing the largest hubs. Selection and construction remain ahead.",
+      "deep_analysis": {
+        "work_kind": "news report of a policy/funding development",
+        "research_question": "",
+        "main_finding": "The EU launched the official tender for seven AI gigafactories, with four smaller and three larger sites, public funding ceilings of one and two billion euros, and winners to be selected by early the following year.",
+        "method_or_basis": "POLITICO reporting by Pieter Haeck on the launch of the EU tender process, corroborated by the EuroHPC Joint Undertaking's own call announcement.",
+        "qualification": "Reports the opening of a competitive process; no consortium has been selected and no facility has been built.",
+        "radar_relevance": "A concrete EU funding instrument for AI compute infrastructure, central to European technological sovereignty and research-infrastructure capacity.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1163/15691497-20263013",
+      "source_hash": "2ee1aeef",
+      "identity_hash": "7c7a081dd90f182f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1163/15691497-20263013 redirects to brill.com/view/journals/pgdt/25/3-4/article-p261_005.xml, which returned HTTP 405 to the package's retrieval and a bot-challenge page to this session's attempt."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1163/15691497-20263013 returned the exact title, Georgina Németh Lesznova, and Perspectives on Global Development and Technology, 1 July 2026, starting at page 261 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"EU–LAC Relations in the Context of NATO Geopolitics\" returned the Brill page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Németh Lesznova/Brill/2026 located no institutional repository deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex and Unpaywall show the Brill article as closed with no open location, and OpenAIRE holds no deposit under this Perspectives on Global Development and Technology DOI."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Semantic Scholar (DOI:10.1163/15691497-20263013) confirms isOpenAccess false with no openAccessPdf."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity confirmed via Crossref. Genuinely closed access with no legitimate open copy; paywall circumvention was not attempted. EU–Latin America relations framed through NATO geopolitics may or may not carry a substantive European research, innovation or technology connection, and that cannot be judged from the abstract."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09535314.2026.2656903",
+      "source_hash": "90227980",
+      "identity_hash": "9b38a67f713077b2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1080/09535314.2026.2656903 redirects to tandfonline.com/doi/full/10.1080/09535314.2026.2656903, which returned HTTP 403 to automated access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1080/09535314.2026.2656903 returned the exact title, Ferreira, Pedro Ferreira, Guarascio and Zezza, and Economic Systems Research, 2 June 2026 — identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Quoted search on \"how sectoral price shocks ripple domestically and across borders\" returned the Taylor & Francis page and the Sapienza catalogue entry."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title plus Guarascio/Zezza/Sapienza/2026 located the IRIS Sapienza record hdl.handle.net/11573/1771087, which confirms Economic Systems Research, 2026, pp. 1-22 and carries the full abstract."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Recovery step attempted: the IRIS bitstream Ferreira_Inflation_2026.pdf (retrieve/7f5ab9be-042c-4d09-8966-610dcee58cac) is access-restricted and returned the repository's request-a-copy page instead of the file; no copy was requested from the authors."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "OpenAlex and Semantic Scholar both report the article as closed access with no openAccessPdf; OpenAIRE returned no further location."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity fully confirmed via Crossref and the IRIS Sapienza catalogue record. The Sapienza deposit exists but is embargoed behind request-a-copy, and Taylor & Francis blocks the publisher copy. Strand B admission would turn on whether the Leontief-based vulnerability measure is a genuinely new method, which the abstract asserts but does not demonstrate."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bibliographic identity is verified, but after all six mandatory recovery steps no substantive full text or matching primary source is legitimately accessible, so no admission judgement can be made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    }
+  ]
+}
