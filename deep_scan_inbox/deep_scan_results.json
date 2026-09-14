@@ -1,0 +1,3148 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-a-20260914T062847Z-a7bd70a57ce2",
+  "results": [
+    {
+      "record_key": "link:https://www.gmfus.org/innovation-competitiveness/gmf-competitiveness",
+      "source_hash": "d7c01434",
+      "identity_hash": "aba53310c9f1d86b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied complete page https://www.gmfus.org/innovation-competitiveness/gmf-competitiveness; its object type and substantive page content were verified."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page",
+            "url": "https://www.gmfus.org/innovation-competitiveness/gmf-competitiveness",
+            "title": "GMF Competitiveness",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.gmfus.org/innovation-competitiveness/gmf-competitiveness."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERIC_LANDING_PAGE",
+        "reason": "Fails Strand A because the linked object is a generic initiative landing page rather than substantive European R&I work."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "programme landing page"
+        },
+        "unset": [],
+        "reason": "The linked GMF object is the landing page for an ongoing initiative, not a research/policy paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "GMF competitiveness initiative page",
+      "reader_what": "GMF describes an ongoing transatlantic competitiveness initiative, not a discrete research output or current policy development.",
+      "reader_why": "",
+      "reader_more": "The page frames technology and economic competitiveness challenges across the United States and Europe. It mainly introduces GMF's continuing initiative and links other analyses rather than reporting a single qualifying work.",
+      "deep_analysis": {
+        "work_kind": "programme landing page",
+        "research_question": "",
+        "main_finding": "GMF describes an ongoing transatlantic competitiveness initiative, not a discrete research output or current policy development.",
+        "method_or_basis": "Institutional programme description and linked topic list.",
+        "qualification": "It contains no discrete study, evidence release, legislative act, or programme change to admit as a standalone Radar item.",
+        "radar_relevance": "Fails Strand A because the linked object is a generic initiative landing page rather than substantive European R&I work.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.70031",
+      "source_hash": "73646c2f",
+      "identity_hash": "3725ae4bb062b9bd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1002/ffo2.70031; source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70031"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1002/ffo2.70031; title/authors matched and substantive evidence was recovered at https://onlinelibrary.wiley.com/doi/epdf/10.1002/ffo2.70031."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://onlinelibrary.wiley.com/doi/epdf/10.1002/ffo2.70031."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/epdf/10.1002/ffo2.70031",
+            "title": "Strategic Foresight as Policy Infrastructure for Financial Governance: A Multi‐Layered Framework for Anticipatory Policymaking in Emerging Economies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://onlinelibrary.wiley.com/doi/epdf/10.1002/ffo2.70031."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a transferable analytical framework for institutionalising foresight."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight as financial policy infrastructure",
+      "reader_what": "The article develops a multi-layered framework for embedding strategic foresight into financial governance in emerging economies.",
+      "reader_why": "",
+      "reader_more": "It reconceptualises foresight as durable policy infrastructure rather than a one-off tool. The framework links institutional capacity, anticipatory practice, and translation of foresight into regulatory action.",
+      "deep_analysis": {
+        "work_kind": "conceptual methods article",
+        "research_question": "",
+        "main_finding": "The article develops a multi-layered framework for embedding strategic foresight into financial governance in emerging economies.",
+        "method_or_basis": "Conceptual synthesis of anticipatory-governance, regulatory, institutional, and futures literature.",
+        "qualification": "The framework is conceptual and interpretive rather than empirically validated.",
+        "radar_relevance": "Qualifies for Strand B as a transferable analytical framework for institutionalising foresight.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-09-2014-0058",
+      "source_hash": "f875d079",
+      "identity_hash": "8c8a902081bf5933",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Opened https://doi.org/10.1108/FS-09-2014-0058; it resolves to the matching Emerald article but exposes only structured abstract/metadata without accessible article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "identity_only",
+            "note": "DOI 10.1108/FS-09-2014-0058 matches Battistella and Pillon, Foresight 18(2), 93-116 (2016); full text remained restricted."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "insufficient",
+            "note": "Searched exact title \"Foresight for regional policy: technological and regional fit\"; Emerald, ScienceDirect indexing, and repository records reproduced abstract-level content only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "insufficient",
+            "note": "Searched title + Battistella + Pillon + 2016; University of Siena and regional research repositories confirmed identity but not public full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "insufficient",
+            "note": "Checked Emerald and https://usiena-air.unisi.it/handle/11365/999920; the repository lists the publisher PDF as private/restricted."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched distinctive title fragments plus PDF/repository/author terms; no legitimate accessible full or accepted manuscript of the claimed article was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_metadata",
+            "url": "https://doi.org/10.1108/FS-09-2014-0058",
+            "title": "Foresight for regional policy: technological and regional fit",
+            "evidence_used": false
+          },
+          {
+            "kind": "institutional_repository_metadata",
+            "url": "https://usiena-air.unisi.it/handle/11365/999920",
+            "title": "Foresight for regional policy: technological and regional fit",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Bibliographic identity is verified, but no legitimately accessible substantive copy of the claimed work was recovered after the complete mandatory ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible or too thin after all six mandatory recovery steps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/",
+      "source_hash": "8a2fb6ec",
+      "identity_hash": "0e227c6fbda67f99",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied complete page https://era.gv.at/news-items/commission-proposes-new-european-innovation-act-to-speed-up-the-path-from-research-to-market/; its object type and substantive page content were verified."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_policy_page",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/support-policy-making/shaping-eu-research-and-innovation-policy/european-innovation-act_en",
+            "title": "European Innovation Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://research-and-innovation.ec.europa.eu/strategy/support-policy-making/shaping-eu-research-and-innovation-policy/european-innovation-act_en."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as a substantive current EU research and innovation policy development."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "policy news"
+        },
+        "unset": [],
+        "reason": "The supplied ERA Portal object is a dated policy news item reporting the Commission proposal."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European Innovation Act proposal",
+      "reader_what": "The Commission proposed an Innovation Act intended to accelerate research-to-market pathways and simplify innovation conditions across the EU.",
+      "reader_why": "",
+      "reader_more": "The proposal includes measures affecting innovative companies, research and development procurement, and market uptake of new technologies. It is a current EU innovation-policy development rather than a generic programme page.",
+      "deep_analysis": {
+        "work_kind": "current policy development",
+        "research_question": "",
+        "main_finding": "The Commission proposed an Innovation Act intended to accelerate research-to-market pathways and simplify innovation conditions across the EU.",
+        "method_or_basis": "Official European Commission policy proposal and explanatory material.",
+        "qualification": "The source reports proposed measures; implementation and effects remain prospective.",
+        "radar_relevance": "Qualifies for Strand A as a substantive current EU research and innovation policy development.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe/",
+      "source_hash": "664bcf92",
+      "identity_hash": "21bc35dc363ea1ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied complete page https://era.gv.at/news-items/european-university-and-research-organisations-call-for-stronger-investment-in-horizon-europe/; its object type and substantive page content were verified."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "issuing_organisation_statement",
+            "url": "https://eu-life.eu/newsroom/news/joint-statement-investing-FP10",
+            "title": "Joint statement: Investing in what makes Europe strong",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://eu-life.eu/newsroom/news/joint-statement-investing-FP10."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A because it directly concerns future EU research and innovation funding policy."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "policy news"
+        },
+        "unset": [],
+        "reason": "The supplied ERA Portal object is a dated news item reporting a joint research-organisation statement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Research organisations seek stronger Horizon Europe funding",
+      "reader_what": "Seven European university and research organisations jointly called for at least €200 billion for the next Horizon Europe programme.",
+      "reader_why": "",
+      "reader_more": "The statement argues that stronger Framework Programme investment is needed to protect Europe's research and innovation capacity. It is a concrete intervention in current EU research-funding negotiations.",
+      "deep_analysis": {
+        "work_kind": "joint research-policy statement",
+        "research_question": "",
+        "main_finding": "Seven European university and research organisations jointly called for at least €200 billion for the next Horizon Europe programme.",
+        "method_or_basis": "Joint statement issued by European university and research organisations.",
+        "qualification": "This is an advocacy position, not an adopted EU budget decision.",
+        "radar_relevance": "Qualifies for Strand A because it directly concerns future EU research and innovation funding policy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/forestry/cpag066",
+      "source_hash": "62a10dd6",
+      "identity_hash": "87c1cbefb10f983b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1093/forestry/cpag066; source retrieval failed: 403 Client Error: Forbidden for url: https://academic.oup.com/forestry/article/doi/10.1093/forestry/cpag066/8771346"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1093/forestry/cpag066; title/authors matched and substantive evidence was recovered at https://academic.oup.com/forestry/article-pdf/99/4/cpag066/70808753/cpag066.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://academic.oup.com/forestry/article-pdf/99/4/cpag066/70808753/cpag066.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/forestry/article-pdf/99/4/cpag066/70808753/cpag066.pdf",
+            "title": "Hybrid foresight: integrating artificial intelligence and expert judgement to address strategic challenges in UK Forest resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://academic.oup.com/forestry/article-pdf/99/4/cpag066/70808753/cpag066.pdf."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a reusable hybrid foresight method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Hybrid AI-expert horizon scanning",
+      "reader_what": "The paper proposes a six-stage horizon-scanning framework combining AI signal detection with iterative expert interpretation and judgement.",
+      "reader_why": "",
+      "reader_more": "The framework moves through framing, signal discovery, expert engagement, synthesis, simulation, and reflexive learning. A UK forest-resilience application demonstrates how automated scanning and human deliberation can be combined.",
+      "deep_analysis": {
+        "work_kind": "methodological research article",
+        "research_question": "",
+        "main_finding": "The paper proposes a six-stage horizon-scanning framework combining AI signal detection with iterative expert interpretation and judgement.",
+        "method_or_basis": "Framework development with AI-assisted scanning and expert-based application to forest resilience.",
+        "qualification": "The application is sector-specific, so transfer to other domains still requires adaptation and testing.",
+        "radar_relevance": "Qualifies for Strand B as a reusable hybrid foresight method.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxOYjVKaVdVX2cwZHBpWE5KQlVpRnFFeVFvT2JwTWVuWTlfQ0lUeGpaZWkzaUxDMTZKUHZRU2d6OVVMYWUwSEk4VGN0N0pNWUYyXzZfNDFOTWxqenFwakNMbmpZd2h1ZDFrT2VfVlpwNjJVaDl1elZ2YXBSYWU0TG9JSkstVjdPMW03LUI4X1VWdU1nYzV4WmcxUkg3WE16WUlIb0RzNHU5N3lTX19COWRCdE1DaWhmOHBHekpua0RMVEh2WGFDcl9HSGVIWk90N3ZU?oc=5",
+      "source_hash": "1eef7b68",
+      "identity_hash": "099f61bcaea5c92c",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened/followed the supplied Google News RSS URL https://news.google.com/rss/articles/CBMi0AFBVV95cUxOYjVKaVdVX2cwZHBpWE5KQlVpRnFFeVFvT2JwTWVuWTlfQ0lUeGpaZWkzaUxDMTZKUHZRU2d6OVVMYWUwSEk4VGN0N0pNWUYyXzZfNDFOTWxqenFwakNMbmpZd2h1ZDFrT2VfVlpwNjJVaDl1elZ2YXBSYWU0TG9JSkstVjdPMW03LUI4X1VWdU1nYzV4WmcxUkg3WE16WUlIb0RzNHU5N3lTX19COWRCdE1DaWhmOHBHekpua0RMVEh2WGFDcl9HSGVIWk90N3ZU?oc=5; the opaque redirect did not yield a stable underlying Research Professional News article identity."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied in the package and none could be derived because the underlying article title and authors are absent."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "No exact title exists in the supplied record; searched the opaque Google News token together with \"Research Professional News\" and the record date without identifying a unique work."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "No author or title is supplied; searched Research Professional News + 9 September 2026 and nearby publication metadata, yielding multiple unrelated candidate stories."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Checked Research Professional News discovery/index routes and outlet listings for the supplied date; no candidate could be tied uniquely to the opaque Google News record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Ran bounded searches using the source name, timestamp/date, Google News token fragments, and likely R&I terms; multiple possible articles surfaced but none could be matched responsibly to this record."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "The opaque aggregator record could not be mapped uniquely to an underlying Research Professional News work after the complete recovery ladder."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "WORK_UNVERIFIABLE",
+        "reason": "The supplied record lacks a title, authors, or stable underlying article URL, and the claimed work could not be uniquely substantiated after all six recovery steps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1057/s41599-026-08819-z",
+      "source_hash": "74db9b41",
+      "identity_hash": "b2c763b75dc41472",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://www.nature.com/articles/s41599-026-08819-z."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1057/s41599-026-08819-z; title/authors matched and substantive evidence was recovered at https://www.nature.com/articles/s41599-026-08819-z."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nature.com/articles/s41599-026-08819-z",
+            "title": "Data scraping for AI model training and data privacy: a comparative analysis of United States and European Union Data Privacy Laws",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.nature.com/articles/s41599-026-08819-z."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A because EU data and AI regulation is substantively analysed as technology-policy infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI training data scraping under US and EU privacy law",
+      "reader_what": "The study compares how United States and European Union privacy law governs data scraping for AI model training.",
+      "reader_why": "",
+      "reader_more": "Using doctrinal legal analysis, the article examines scraping, lawful processing, and privacy constraints around AI training data. EU data-protection rules are a central object of analysis, not an incidental reference.",
+      "deep_analysis": {
+        "work_kind": "comparative legal research article",
+        "research_question": "",
+        "main_finding": "The study compares how United States and European Union privacy law governs data scraping for AI model training.",
+        "method_or_basis": "Doctrinal comparison of US and EU privacy law applied to AI training data scraping.",
+        "qualification": "Legal analysis does not establish how organisations comply in practice or how courts will resolve every contested issue.",
+        "radar_relevance": "Qualifies for Strand A because EU data and AI regulation is substantively analysed as technology-policy infrastructure.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.23",
+      "source_hash": "ba793f4c",
+      "identity_hash": "97063c7692dc4b5c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1002/ffo2.23; source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1002/ffo2.23"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1002/ffo2.23; title/authors matched and substantive evidence was recovered at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.23."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.23."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.23",
+            "title": "Horizon Scanning in Foresight – Why Horizon Scanning is only a part of the game",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.23."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a reusable framework connecting horizon scanning to broader foresight."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon scanning within the foresight cycle",
+      "reader_what": "The article distinguishes horizon scanning from broader foresight and develops an integrated model linking scanning to sense-making and strategy.",
+      "reader_why": "",
+      "reader_more": "Drawing on a European Commission study of scanning practice, it specifies where horizon scanning sits within a fuller foresight process. The model provides reusable guidance on objectives, methods, and transitions from signals to strategic interpretation.",
+      "deep_analysis": {
+        "work_kind": "foresight methods article",
+        "research_question": "",
+        "main_finding": "The article distinguishes horizon scanning from broader foresight and develops an integrated model linking scanning to sense-making and strategy.",
+        "method_or_basis": "Comparative study of horizon-scanning practice and synthesis into an integrated foresight model.",
+        "qualification": "The framework is primarily methodological and practice-oriented rather than a controlled validation study.",
+        "radar_relevance": "Qualifies for Strand B as a reusable framework connecting horizon scanning to broader foresight.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/err.2023.77",
+      "source_hash": "4e340a48",
+      "identity_hash": "d752dbd96b74fceb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://www.cambridge.org/core/journals/european-journal-of-risk-regulation/article/strategic-foresight-and-policy-evaluation-insights-for-an-integrated-approach/0BF6ED8783A91FE6BD6BEC5481ABE16A."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1017/err.2023.77; title/authors matched and substantive evidence was recovered at https://www.cambridge.org/core/journals/european-journal-of-risk-regulation/article/strategic-foresight-and-policy-evaluation-insights-for-an-integrated-approach/0BF6ED8783A91FE6BD6BEC5481ABE16A."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/european-journal-of-risk-regulation/article/strategic-foresight-and-policy-evaluation-insights-for-an-integrated-approach/0BF6ED8783A91FE6BD6BEC5481ABE16A",
+            "title": "Strategic Foresight and Policy Evaluation: Insights for an Integrated Approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.cambridge.org/core/journals/european-journal-of-risk-regulation/article/strategic-foresight-and-policy-evaluation-insights-for-an-integrated-approach/0BF6ED8783A91FE6BD6BEC5481ABE16A."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a reusable policy-analysis framework."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Integrating strategic foresight and policy evaluation",
+      "reader_what": "The article develops an integrated approach linking strategic foresight with policy evaluation across the policy cycle.",
+      "reader_why": "",
+      "reader_more": "It explains how forward-looking analysis and evaluation can inform each other before, during, and after policy interventions. The contribution is a transferable approach for combining anticipatory and evaluative policy practice.",
+      "deep_analysis": {
+        "work_kind": "conceptual methods article",
+        "research_question": "",
+        "main_finding": "The article develops an integrated approach linking strategic foresight with policy evaluation across the policy cycle.",
+        "method_or_basis": "Conceptual integration of strategic-foresight and policy-evaluation literatures and practices.",
+        "qualification": "The proposed integration is mainly conceptual and requires context-specific operationalisation.",
+        "radar_relevance": "Qualifies for Strand B as a reusable policy-analysis framework.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.118",
+      "source_hash": "cb3e8917",
+      "identity_hash": "514cb0c3175db37c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1002/ffo2.118; source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1002/ffo2.118"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1002/ffo2.118; title/authors matched and substantive evidence was recovered at https://pureportal.strath.ac.uk/files/131673827/Belton_etal_FFS_2021_A_critical_evaluation_of_forty_two_large_scale_science_and_technology_foresight_Delphi_surveys.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://pureportal.strath.ac.uk/files/131673827/Belton_etal_FFS_2021_A_critical_evaluation_of_forty_two_large_scale_science_and_technology_foresight_Delphi_surveys.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://pureportal.strath.ac.uk/files/131673827/Belton_etal_FFS_2021_A_critical_evaluation_of_forty_two_large_scale_science_and_technology_foresight_Delphi_surveys.pdf",
+            "title": "A critical evaluation of 42, large‐scale, science and technology foresight Delphi surveys",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://pureportal.strath.ac.uk/files/131673827/Belton_etal_FFS_2021_A_critical_evaluation_of_forty_two_large_scale_science_and_technology_foresight_Delphi_surveys.pdf."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a transferable evaluation design for Delphi-based foresight."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Evaluating large Delphi foresight surveys",
+      "reader_what": "The study applies a six-step quality framework to evaluate 42 large science and technology foresight Delphi surveys.",
+      "reader_why": "",
+      "reader_more": "It uses a predefined six-step process to examine design quality across a large set of Delphi exercises. The work therefore provides a reusable evaluation design for assessing whether major foresight surveys are methodologically defensible.",
+      "deep_analysis": {
+        "work_kind": "method evaluation study",
+        "research_question": "",
+        "main_finding": "The study applies a six-step quality framework to evaluate 42 large science and technology foresight Delphi surveys.",
+        "method_or_basis": "Systematic evaluation of 42 large Delphi surveys against a six-step quality framework.",
+        "qualification": "The framework assesses process quality; it does not prove that every well-designed Delphi exercise will forecast accurately.",
+        "radar_relevance": "Qualifies for Strand B as a transferable evaluation design for Delphi-based foresight.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s40804-025-00348-7",
+      "source_hash": "968fc5ef",
+      "identity_hash": "630ca6675d58c5ac",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s40804-025-00348-7."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s40804-025-00348-7; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s40804-025-00348-7."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s40804-025-00348-7",
+            "title": "The New Anticipatory Governance Culture for Innovation: Regulatory Foresight, Regulatory Experimentation and Regulatory Learning",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s40804-025-00348-7."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a transferable anticipatory-governance framework."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Anticipatory governance for innovation regulation",
+      "reader_what": "The article links regulatory foresight, experimentation, and learning into an anticipatory-governance framework for innovation regulation.",
+      "reader_why": "",
+      "reader_more": "It treats foresight, iterative experimentation, and regulatory learning as complementary capabilities for governing innovation under uncertainty. The framework is designed to support adaptive policy development rather than one-off prediction.",
+      "deep_analysis": {
+        "work_kind": "conceptual governance framework",
+        "research_question": "",
+        "main_finding": "The article links regulatory foresight, experimentation, and learning into an anticipatory-governance framework for innovation regulation.",
+        "method_or_basis": "Legal and governance analysis synthesising regulatory foresight, experimentation, and learning.",
+        "qualification": "The contribution is normative and conceptual; outcomes depend on institutional implementation.",
+        "radar_relevance": "Qualifies for Strand B as a transferable anticipatory-governance framework.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.70001",
+      "source_hash": "819baad4",
+      "identity_hash": "6f7389c2e743f9b7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1002/ffo2.70001; source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70001"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1002/ffo2.70001; title/authors matched and substantive evidence was recovered at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.70001."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.70001."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.70001",
+            "title": "Integrating Anticipatory Governance and Causal Layered Analysis: A Novel Theoretical Framework for Long‐Term Socioeconomic Development Forecasting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.70001."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a new reusable futures-analysis framework."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Combining anticipatory governance with causal layered analysis",
+      "reader_what": "The paper develops an integrated AG-CLA framework for long-term socioeconomic forecasting and scenario development.",
+      "reader_why": "",
+      "reader_more": "It combines governance mechanisms with causal layered analysis to examine both immediate policy needs and deeper social structures. The resulting framework is intended for repeated scenario and strategic-planning use.",
+      "deep_analysis": {
+        "work_kind": "methodological framework article",
+        "research_question": "",
+        "main_finding": "The paper develops an integrated AG-CLA framework for long-term socioeconomic forecasting and scenario development.",
+        "method_or_basis": "Systematic theoretical integration of anticipatory governance and causal layered analysis, illustrated through mixed-method scenario development.",
+        "qualification": "The framework's broad applicability still requires validation across additional settings.",
+        "radar_relevance": "Qualifies for Strand B as a new reusable futures-analysis framework.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/s0266462325101153",
+      "source_hash": "06d29306",
+      "identity_hash": "5acf5bd925b57cdd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://www.cambridge.org/core/journals/international-journal-of-technology-assessment-in-health-care/article/op57-introducing-the-new-medtech-innovation-scanning-techniques-framework-a-tool-for-guiding-horizon-scanning-of-medtech-innovations/87AC22FB3EE4C698C26C2B2F807AAEA7."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1017/s0266462325101153; title/authors matched and substantive evidence was recovered at https://www.cambridge.org/core/journals/international-journal-of-technology-assessment-in-health-care/article/op57-introducing-the-new-medtech-innovation-scanning-techniques-framework-a-tool-for-guiding-horizon-scanning-of-medtech-innovations/87AC22FB3EE4C698C26C2B2F807AAEA7."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/international-journal-of-technology-assessment-in-health-care/article/op57-introducing-the-new-medtech-innovation-scanning-techniques-framework-a-tool-for-guiding-horizon-scanning-of-medtech-innovations/87AC22FB3EE4C698C26C2B2F807AAEA7",
+            "title": "OP57 Introducing The New MedTech Innovation Scanning Techniques Framework: A Tool For Guiding Horizon Scanning Of MedTech Innovations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.cambridge.org/core/journals/international-journal-of-technology-assessment-in-health-care/article/op57-introducing-the-new-medtech-innovation-scanning-techniques-framework-a-tool-for-guiding-horizon-scanning-of-medtech-innovations/87AC22FB3EE4C698C26C2B2F807AAEA7."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B because it presents a reusable horizon-scanning framework and reporting approach."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "conference proceedings abstract"
+        },
+        "unset": [],
+        "reason": "Cambridge and Newcastle metadata identify the item as an HTAi oral-presentation proceedings abstract."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "MIST framework for MedTech horizon scanning",
+      "reader_what": "The MIST framework maps horizon-scanning methods and information sources to MedTech development stages and time horizons.",
+      "reader_why": "",
+      "reader_more": "The complete conference paper describes iterative framework development, three horizons, method selection, and a reporting checklist. It is explicitly intended to standardise and improve MedTech horizon-scanning practice across agencies.",
+      "deep_analysis": {
+        "work_kind": "conference proceedings abstract",
+        "research_question": "",
+        "main_finding": "The MIST framework maps horizon-scanning methods and information sources to MedTech development stages and time horizons.",
+        "method_or_basis": "Iterative framework development combining horizon-scanning expertise, evidence synthesis, foresight methods, and medical-device regulatory knowledge.",
+        "qualification": "This is a concise conference-proceedings contribution; a later full framework-development paper provides deeper validation.",
+        "radar_relevance": "Qualifies for Strand B because it presents a reusable horizon-scanning framework and reporting approach.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/cep4.70033",
+      "source_hash": "4d1ff1e5",
+      "identity_hash": "290546d7e0143328",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1002/cep4.70033; source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1002/cep4.70033"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1002/cep4.70033; title/authors matched and substantive evidence was recovered at https://onlinelibrary.wiley.com/doi/full/10.1002/cep4.70033."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://onlinelibrary.wiley.com/doi/full/10.1002/cep4.70033."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/cep4.70033",
+            "title": "Norm Transformation in EU Research Security: A Pragmatist Approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://onlinelibrary.wiley.com/doi/full/10.1002/cep4.70033."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive work on EU research-security policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Changing norms in EU research security",
+      "reader_what": "The article analyses how EU research-security norms are changing and how pragmatic governance shapes those changes.",
+      "reader_why": "",
+      "reader_more": "It examines research security as an evolving European policy field and traces how norms are negotiated around openness, security, and institutional practice. The subject is directly tied to EU research governance.",
+      "deep_analysis": {
+        "work_kind": "European research-policy article",
+        "research_question": "",
+        "main_finding": "The article analyses how EU research-security norms are changing and how pragmatic governance shapes those changes.",
+        "method_or_basis": "Policy and governance analysis of EU research-security norm development.",
+        "qualification": "Norm change is interpreted through a particular analytical lens rather than measured as a single causal effect.",
+        "radar_relevance": "Qualifies for Strand A as substantive work on EU research-security policy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.telpol.2026.103222",
+      "source_hash": "dbc44790",
+      "identity_hash": "9927d21f83f1638f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "identity_only",
+            "note": "Package supplied https://doi.org/10.1016/j.telpol.2026.103222; identity metadata was available but substantive text was recovered elsewhere."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1016/j.telpol.2026.103222; title/authors matched and substantive evidence was recovered at https://papers.ssrn.com/sol3/Delivery.cfm/24d78b63-a5d2-445d-86a0-014dce72c805-MECA.pdf?abstractid=5382408&mirid=1&type=2."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://papers.ssrn.com/sol3/Delivery.cfm/24d78b63-a5d2-445d-86a0-014dce72c805-MECA.pdf?abstractid=5382408&mirid=1&type=2."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "legitimate_preprint_full_text",
+            "url": "https://papers.ssrn.com/sol3/Delivery.cfm/24d78b63-a5d2-445d-86a0-014dce72c805-MECA.pdf?abstractid=5382408&mirid=1&type=2",
+            "title": "Enabling the EU's digital Sovereignty: A Europe-level quantum internet as the key infrastructure for a European digital polity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://papers.ssrn.com/sol3/Delivery.cfm/24d78b63-a5d2-445d-86a0-014dce72c805-MECA.pdf?abstractid=5382408&mirid=1&type=2."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A because it directly addresses EU strategic digital and quantum infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Quantum internet for EU digital sovereignty",
+      "reader_what": "The article proposes a Europe-level quantum internet as strategic infrastructure for EU digital sovereignty and cross-border data governance.",
+      "reader_why": "",
+      "reader_more": "It links open-data ecosystems, quantum-secure networking, and geopolitical data-sharing asymmetries. A full preprint supports the published argument that governance and cross-sector coordination are as important as the technology itself.",
+      "deep_analysis": {
+        "work_kind": "conceptual technology-policy article",
+        "research_question": "",
+        "main_finding": "The article proposes a Europe-level quantum internet as strategic infrastructure for EU digital sovereignty and cross-border data governance.",
+        "method_or_basis": "Critical literature review and conceptual analysis of open data, digital sovereignty, quantum networks, and governance.",
+        "qualification": "The proposed Europe-level quantum internet is a policy and infrastructure concept, not a demonstrated deployed system.",
+        "radar_relevance": "Qualifies for Strand A because it directly addresses EU strategic digital and quantum infrastructure.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/icc/dtag016",
+      "source_hash": "f3d46d24",
+      "identity_hash": "41b89c2bab7f4c93",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1093/icc/dtag016; source retrieval failed: 403 Client Error: Forbidden for url: https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag016/8661769"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1093/icc/dtag016; title/authors matched and substantive evidence was recovered at https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag016/8661769."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag016/8661769."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag016/8661769",
+            "title": "Uncovering collaborative patterns and transition dynamics in R&D projects: a longitudinal analysis of EU Framework Programmes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag016/8661769."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive analysis of EU research-programme collaboration."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Collaboration dynamics in EU Framework Programmes",
+      "reader_what": "The study maps how organisations enter, persist, and shift positions across successive EU collaborative R&D programmes.",
+      "reader_why": "",
+      "reader_more": "It combines longitudinal network analysis with statistical methods to study participation across EU Framework Programmes. The findings connect funding policy and network structure to changes in collaborative R&D participation.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "",
+        "main_finding": "The study maps how organisations enter, persist, and shift positions across successive EU collaborative R&D programmes.",
+        "method_or_basis": "Longitudinal social-network and statistical analysis of EU Framework Programme project participation.",
+        "qualification": "Observed network patterns identify associations and transitions, not simple causal effects of funding policy.",
+        "radar_relevance": "Qualifies for Strand A as substantive analysis of EU research-programme collaboration.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/icc/dtag042",
+      "source_hash": "4072ce0d",
+      "identity_hash": "69c485863069afec",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1093/icc/dtag042; source retrieval failed: 403 Client Error: Forbidden for url: https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag042/8740021"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1093/icc/dtag042; title/authors matched and substantive evidence was recovered at https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag042/8740021."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag042/8740021."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag042/8740021",
+            "title": "Business models for digital innovation intermediaries: evidence from the digital innovation hubs initiative",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://academic.oup.com/icc/advance-article/doi/10.1093/icc/dtag042/8740021."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive research on EU digital-innovation policy intermediaries."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Business models of European digital innovation hubs",
+      "reader_what": "The study identifies four recurring business-model configurations among digital innovation intermediaries operating in European policy programmes.",
+      "reader_why": "",
+      "reader_more": "Interviews with Digital Innovation Hubs across five European countries are analysed through a business-model framework. The resulting typology links organisational type, territorial or sectoral focus, and centralised or decentralised governance.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation-policy article",
+        "research_question": "",
+        "main_finding": "The study identifies four recurring business-model configurations among digital innovation intermediaries operating in European policy programmes.",
+        "method_or_basis": "Qualitative interviews with 20 European Digital Innovation Hubs and flexible pattern-matching analysis.",
+        "qualification": "The sample is qualitative and does not establish population-wide prevalence or performance effects.",
+        "radar_relevance": "Qualifies for Strand A as substantive research on EU digital-innovation policy intermediaries.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s40309-022-00206-6",
+      "source_hash": "b9a593dc",
+      "identity_hash": "9d173a8f03c7066d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1186/s40309-022-00206-6."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1186/s40309-022-00206-6; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1186/s40309-022-00206-6."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1186/s40309-022-00206-6",
+            "title": "Radical Technology Inquirer: a methodology for holistic, transparent and participatory technology foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1186/s40309-022-00206-6."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a reusable technology-foresight methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Radical Technology Inquirer methodology",
+      "reader_what": "The Radical Technology Inquirer provides a transparent participatory process for identifying and assessing potentially transformative technologies.",
+      "reader_why": "",
+      "reader_more": "The method combines structured technology collection, evaluation, and stakeholder participation to broaden technology foresight beyond expert-only selection. Its steps are documented for reuse in other technology-scanning exercises.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The Radical Technology Inquirer provides a transparent participatory process for identifying and assessing potentially transformative technologies.",
+        "method_or_basis": "Development and application of a participatory, transparent technology-foresight process.",
+        "qualification": "Results depend on participant composition and the evidence available for candidate technologies.",
+        "radar_relevance": "Qualifies for Strand B as a reusable technology-foresight methodology.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.71458/721nkq04",
+      "source_hash": "ad72a6cb",
+      "identity_hash": "6047414b51848c31",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://journals.zegu.ac.zw/index.php/futures/article/view/368."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.71458/721nkq04; title/authors matched and substantive evidence was recovered at https://journals.zegu.ac.zw/index.php/futures/article/view/368."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_substantive_source",
+            "url": "https://journals.zegu.ac.zw/index.php/futures/article/view/368",
+            "title": "Futures Focus-A Systematic Review of Scenario Planning, Strategic Foresight and Dynamic Capabilities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://journals.zegu.ac.zw/index.php/futures/article/view/368."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "Fails Strand B because it reviews and relates existing methods rather than contributing a reusable methodological innovation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Review of scenario planning and strategic foresight",
+      "reader_what": "The paper synthesises existing scenario-planning, foresight, and dynamic-capabilities literature without introducing a distinct new reusable method.",
+      "reader_why": "",
+      "reader_more": "It uses a PRISMA-grounded systematic literature review to describe relationships among established concepts and practices. The contribution is synthesis and managerial interpretation rather than a new or materially improved analytical procedure.",
+      "deep_analysis": {
+        "work_kind": "systematic literature review",
+        "research_question": "",
+        "main_finding": "The paper synthesises existing scenario-planning, foresight, and dynamic-capabilities literature without introducing a distinct new reusable method.",
+        "method_or_basis": "PRISMA-grounded review and synthesis of existing scenario-planning, strategic-foresight, and dynamic-capabilities literature.",
+        "qualification": "The review is useful background but does not itself specify or validate a novel method meeting Strand B's threshold.",
+        "radar_relevance": "Fails Strand B because it reviews and relates existing methods rather than contributing a reusable methodological innovation.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.15407/scine22.03.045",
+      "source_hash": "e0c5cf54",
+      "identity_hash": "7b027f65e2df1c59",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.15407/scine22.03.045; source retrieval failed: 403 Client Error: Forbidden for url: https://scinn-eng.org.ua/ojs/index.php/ni/article/view/1081"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.15407/scine22.03.045; title/authors matched and substantive evidence was recovered at https://scinn-eng.org.ua/ojs/index.php/ni/article/view/1081."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://scinn-eng.org.ua/ojs/index.php/ni/article/view/1081."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://scinn-eng.org.ua/ojs/index.php/ni/article/view/1081",
+            "title": "MODEL OF EUROPEAN INTEGRATION OF R&D INSTITUTIONS OF THE NAS OF UKRAINE IN THE CONTEXT OF UKRAINE’S INTEGRATION INTO THE EUROPEAN UNION",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://scinn-eng.org.ua/ojs/index.php/ni/article/view/1081."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive work on integration with the European Research Area."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Integrating Ukrainian R&D institutions with the European Research Area",
+      "reader_what": "The article proposes a model for integrating Ukrainian Academy of Sciences R&D institutions into the European Research Area.",
+      "reader_why": "",
+      "reader_more": "It frames European integration as an innovation-ecosystem challenge involving research institutions, universities, government, business, and society. The model directly addresses alignment of Ukrainian R&D organisations with EU research and innovation structures.",
+      "deep_analysis": {
+        "work_kind": "research-policy article",
+        "research_question": "",
+        "main_finding": "The article proposes a model for integrating Ukrainian Academy of Sciences R&D institutions into the European Research Area.",
+        "method_or_basis": "Conceptual and policy analysis focused on European integration of Ukrainian R&D institutions.",
+        "qualification": "The proposed model is forward-looking and its effectiveness depends on implementation.",
+        "radar_relevance": "Qualifies for Strand A as substantive work on integration with the European Research Area.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/13501763.2026.2710717",
+      "source_hash": "12ddf9f4",
+      "identity_hash": "9b22e568c4c4b98e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1080/13501763.2026.2710717; source retrieval failed: 403 Client Error: Forbidden for url: https://www.tandfonline.com/doi/full/10.1080/13501763.2026.2710717"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1080/13501763.2026.2710717; title/authors matched and substantive evidence was recovered at https://eprints.ncl.ac.uk/313249."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://eprints.ncl.ac.uk/313249."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://eprints.ncl.ac.uk/313249",
+            "title": "Promising security, delivering dependency: the material constraints of EU semiconductor collective securitisation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://eprints.ncl.ac.uk/313249."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive analysis of EU semiconductor capability and industrial security."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU semiconductor security and dependency",
+      "reader_what": "The article examines how EU semiconductor securitisation ambitions are constrained by material dependencies in global production networks.",
+      "reader_why": "",
+      "reader_more": "It analyses the gap between European security commitments and the industrial dependencies shaping semiconductor capability. The work directly concerns EU technological capacity, resilience, and strategic industrial policy.",
+      "deep_analysis": {
+        "work_kind": "European technology-policy article",
+        "research_question": "",
+        "main_finding": "The article examines how EU semiconductor securitisation ambitions are constrained by material dependencies in global production networks.",
+        "method_or_basis": "Political-economy analysis of EU semiconductor securitisation and supply-chain dependencies.",
+        "qualification": "The analysis diagnoses structural constraints; it does not show that specific EU interventions have already eliminated them.",
+        "radar_relevance": "Qualifies for Strand A as substantive analysis of EU semiconductor capability and industrial security.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.techfore.2025.124496",
+      "source_hash": "1d18bb50",
+      "identity_hash": "02cca4633196ef0c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "identity_only",
+            "note": "Package supplied https://doi.org/10.1016/j.techfore.2025.124496; identity metadata was available but substantive text was recovered elsewhere."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1016/j.techfore.2025.124496; title/authors matched and substantive evidence was recovered at https://www.sciencedirect.com/science/article/pii/S004016252500527X."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.sciencedirect.com/science/article/pii/S004016252500527X."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S004016252500527X",
+            "title": "Evaluating Delphi survey accuracy in transportation: Evidence from Japanese technology foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.sciencedirect.com/science/article/pii/S004016252500527X."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a transferable evaluation design for foresight accuracy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Testing Delphi forecast accuracy",
+      "reader_what": "The study develops an ex-post design for testing Delphi forecasts against realised transportation technology outcomes.",
+      "reader_why": "",
+      "reader_more": "It assesses 167 Japanese foresight topics using realised-status coding, expert verification, and statistical comparisons across forecast characteristics. The design can be reused to evaluate historical Delphi forecast performance in other domains.",
+      "deep_analysis": {
+        "work_kind": "method evaluation study",
+        "research_question": "",
+        "main_finding": "The study develops an ex-post design for testing Delphi forecasts against realised transportation technology outcomes.",
+        "method_or_basis": "Ex-post comparison of historical Delphi forecasts with realised outcomes, including expert verification and statistical testing.",
+        "qualification": "The empirical results are transportation-specific and do not by themselves establish accuracy levels for all Delphi applications.",
+        "radar_relevance": "Qualifies for Strand B as a transferable evaluation design for foresight accuracy.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/10438599.2026.2647975",
+      "source_hash": "6149dc59",
+      "identity_hash": "5b618363ea67d4a3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1080/10438599.2026.2647975; source retrieval failed: 403 Client Error: Forbidden for url: https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2647975"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1080/10438599.2026.2647975; title/authors matched and substantive evidence was recovered at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2647975."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2647975."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2647975",
+            "title": "Financing instruments for innovation in the EU: panel evidence from the SAFE survey",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2647975."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive evidence on EU innovation financing."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Innovation financing instruments in the EU",
+      "reader_what": "The study uses SAFE survey panel evidence to analyse how financing instruments relate to innovation among EU firms.",
+      "reader_why": "",
+      "reader_more": "It examines firm financing and innovation using repeated European survey data. The evidence directly concerns the financing conditions supporting business innovation within the EU.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation-economics article",
+        "research_question": "",
+        "main_finding": "The study uses SAFE survey panel evidence to analyse how financing instruments relate to innovation among EU firms.",
+        "method_or_basis": "Panel-data analysis using the European Commission and ECB Survey on the Access to Finance of Enterprises.",
+        "qualification": "Survey-based associations require care when interpreting causal effects of particular financing instruments.",
+        "radar_relevance": "Qualifies for Strand A as substantive evidence on EU innovation financing.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/10438599.2026.2661731",
+      "source_hash": "03f4dc53",
+      "identity_hash": "1a0ed2f246be9b06",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1080/10438599.2026.2661731; source retrieval failed: 403 Client Error: Forbidden for url: https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2661731"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1080/10438599.2026.2661731; title/authors matched and substantive evidence was recovered at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2661731."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2661731."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2661731",
+            "title": "Spatiotemporal dynamics of creative performance and innovation capacity in Europe: a multidimensional perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2661731."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive evidence on innovation capacity across Europe."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Creative performance and innovation capacity across Europe",
+      "reader_what": "The study maps how creative performance and innovation capacity vary across European places and over time.",
+      "reader_why": "",
+      "reader_more": "It uses a multidimensional empirical approach to compare spatial and temporal patterns of creativity and innovation in Europe. The results address regional innovation capability rather than treating Europe as a passing reference.",
+      "deep_analysis": {
+        "work_kind": "empirical regional-innovation article",
+        "research_question": "",
+        "main_finding": "The study maps how creative performance and innovation capacity vary across European places and over time.",
+        "method_or_basis": "Multidimensional spatiotemporal analysis of European creative-performance and innovation indicators.",
+        "qualification": "Composite and spatial indicators describe patterns but do not reduce innovation capacity to a single causal mechanism.",
+        "radar_relevance": "Qualifies for Strand A as substantive evidence on innovation capacity across Europe.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/00343404.2026.2681659",
+      "source_hash": "3f9c41b8",
+      "identity_hash": "a251bb5b1ee81831",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1080/00343404.2026.2681659; source retrieval failed: 403 Client Error: Forbidden for url: https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2681659"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1080/00343404.2026.2681659; title/authors matched and substantive evidence was recovered at https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2681659."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2681659."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2681659",
+            "title": "The geography of artificial intelligence in European regions: innovation, exposure and use",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2681659."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive research on European AI capability and diffusion."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The geography of AI in European regions",
+      "reader_what": "The study maps regional AI innovation, exposure, and use across Europe to show how capabilities and impacts differ geographically.",
+      "reader_why": "",
+      "reader_more": "It assembles regional evidence on where AI-related innovation and adoption concentrate and where economic exposure differs. The analysis directly concerns Europe's technological geography and regional innovation systems.",
+      "deep_analysis": {
+        "work_kind": "empirical regional-technology article",
+        "research_question": "",
+        "main_finding": "The study maps regional AI innovation, exposure, and use across Europe to show how capabilities and impacts differ geographically.",
+        "method_or_basis": "Regional quantitative analysis of AI innovation, exposure, and use across Europe.",
+        "qualification": "Regional indicators capture uneven patterns but cannot fully represent firm-level adoption or all local spillovers.",
+        "radar_relevance": "Qualifies for Strand A as substantive research on European AI capability and diffusion.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s11192-026-05653-7",
+      "source_hash": "629ab521",
+      "identity_hash": "005417ba52c55865",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s11192-026-05653-7."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s11192-026-05653-7; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s11192-026-05653-7."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-026-05653-7",
+            "title": "Co-funding networks as a new tool in research evaluation: a linked open data-based study of the Seventh Framework Programme projects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s11192-026-05653-7."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive evaluation research on an EU Framework Programme."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Co-funding networks for FP7 research evaluation",
+      "reader_what": "The study introduces co-funding networks as a research-evaluation lens and applies it to Seventh Framework Programme projects.",
+      "reader_why": "",
+      "reader_more": "Using linked open data, it reconstructs relationships among funding sources around FP7 research. The work provides substantive evidence about European research funding while demonstrating a network-based evaluation approach.",
+      "deep_analysis": {
+        "work_kind": "research-evaluation article",
+        "research_question": "",
+        "main_finding": "The study introduces co-funding networks as a research-evaluation lens and applies it to Seventh Framework Programme projects.",
+        "method_or_basis": "Linked-open-data construction and network analysis of co-funding relationships in EU FP7 projects.",
+        "qualification": "Network structure reveals funding relationships but does not alone measure scientific or societal impact.",
+        "radar_relevance": "Qualifies for Strand A as substantive evaluation research on an EU Framework Programme.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s10734-026-01687-1",
+      "source_hash": "41a20601",
+      "identity_hash": "5dadfa9a12640fc4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s10734-026-01687-1."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s10734-026-01687-1; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s10734-026-01687-1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s10734-026-01687-1",
+            "title": "Funding sources and university patenting: an analysis of European higher education institutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s10734-026-01687-1."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive European research and innovation evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Funding sources and European university patenting",
+      "reader_what": "The study analyses how different funding sources relate to patenting across European higher education institutions.",
+      "reader_why": "",
+      "reader_more": "It links university-level funding information with patenting outcomes across European institutions. The evidence addresses how research financing structures relate to university innovation activity in Europe.",
+      "deep_analysis": {
+        "work_kind": "empirical higher-education innovation article",
+        "research_question": "",
+        "main_finding": "The study analyses how different funding sources relate to patenting across European higher education institutions.",
+        "method_or_basis": "Quantitative analysis of funding sources and patenting across European higher education institutions.",
+        "qualification": "Observed relationships between funding and patenting should not automatically be read as causal effects.",
+        "radar_relevance": "Qualifies for Strand A as substantive European research and innovation evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/scipol/scag021",
+      "source_hash": "53b20aec",
+      "identity_hash": "b61544776417b0d8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1093/scipol/scag021; source retrieval failed: 403 Client Error: Forbidden for url: https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag021/8541723"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1093/scipol/scag021; title/authors matched and substantive evidence was recovered at https://trepo.tuni.fi/bitstream/handle/10024/235691/Structured_content_analysis_of_open_access_book_policies.pdf?isAllowed=y&sequence=-1."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://trepo.tuni.fi/bitstream/handle/10024/235691/Structured_content_analysis_of_open_access_book_policies.pdf?isAllowed=y&sequence=-1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://trepo.tuni.fi/bitstream/handle/10024/235691/Structured_content_analysis_of_open_access_book_policies.pdf?isAllowed=y&sequence=-1",
+            "title": "Structured content analysis of open access book policies: European university and research funder approaches",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://trepo.tuni.fi/bitstream/handle/10024/235691/Structured_content_analysis_of_open_access_book_policies.pdf?isAllowed=y&sequence=-1."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive analysis of European open-science policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Open-access book policies in Europe",
+      "reader_what": "The study systematically compares open-access book policies across European universities and research funders.",
+      "reader_why": "",
+      "reader_more": "It uses structured content analysis to identify how institutions and funders define and implement open-access requirements for books. The evidence directly concerns European research-policy and scholarly-communication infrastructure.",
+      "deep_analysis": {
+        "work_kind": "research-policy content analysis",
+        "research_question": "",
+        "main_finding": "The study systematically compares open-access book policies across European universities and research funders.",
+        "method_or_basis": "Structured content analysis of open-access book policies from European universities and research funders.",
+        "qualification": "Policy documents reveal formal requirements, not necessarily implementation quality or researcher behaviour.",
+        "radar_relevance": "Qualifies for Strand A as substantive analysis of European open-science policy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/scipol/scag032",
+      "source_hash": "41615293",
+      "identity_hash": "03ad9d9d7ac4bdc7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1093/scipol/scag032; source retrieval failed: 403 Client Error: Forbidden for url: https://academic.oup.com/spp/article/53/3/436/8709607"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1093/scipol/scag032; title/authors matched and substantive evidence was recovered at https://academic.oup.com/spp/article/53/3/436/8709607."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://academic.oup.com/spp/article/53/3/436/8709607."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/spp/article/53/3/436/8709607",
+            "title": "The European Union’s use of scientific knowledge in SDG policymaking: a topic model approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://academic.oup.com/spp/article/53/3/436/8709607."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive research on EU science-policy processes."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-06-17"
+        },
+        "unset": [],
+        "reason": "Oxford Academic identifies 17 June 2026 as the publication date for the DOI-linked article."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Scientific knowledge in EU SDG policymaking",
+      "reader_what": "The study uses topic modelling to examine how scientific knowledge is incorporated into European Union SDG policymaking.",
+      "reader_why": "",
+      "reader_more": "It analyses EU policy material to trace patterns in the use of scientific knowledge across Sustainable Development Goal topics. The work directly investigates science-policy interaction inside EU policymaking.",
+      "deep_analysis": {
+        "work_kind": "science-policy empirical article",
+        "research_question": "",
+        "main_finding": "The study uses topic modelling to examine how scientific knowledge is incorporated into European Union SDG policymaking.",
+        "method_or_basis": "Topic-model analysis of EU policymaking material concerning scientific knowledge and the SDGs.",
+        "qualification": "Topic models reveal patterns in text and knowledge use but require interpretation and do not directly measure policy impact.",
+        "radar_relevance": "Qualifies for Strand A as substantive research on EU science-policy processes.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s40309-016-0093-1",
+      "source_hash": "7893747d",
+      "identity_hash": "736c2fac83431213",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s40309-016-0093-1."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s40309-016-0093-1; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s40309-016-0093-1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s40309-016-0093-1",
+            "title": "Functional technology foresight. A novel methodology to identify emerging technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s40309-016-0093-1."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a novel reusable technology-foresight methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Functional technology foresight",
+      "reader_what": "The method combines functional reasoning, text mining, bibliometrics, and expert knowledge to identify emerging technologies.",
+      "reader_why": "",
+      "reader_more": "It reframes technologies by the functions they serve, helping connect user needs with technical trajectories and weak signals. The workflow integrates functional analysis with patent-text mining and expert interpretation for repeated foresight use.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The method combines functional reasoning, text mining, bibliometrics, and expert knowledge to identify emerging technologies.",
+        "method_or_basis": "Development and demonstration of a functional technology-foresight workflow combining text mining, bibliometrics, and expert knowledge.",
+        "qualification": "Method performance depends on document coverage, functional coding, and expert interpretation in the target domain.",
+        "radar_relevance": "Qualifies for Strand B as a novel reusable technology-foresight methodology.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.procs.2022.01.104",
+      "source_hash": "e534b600",
+      "identity_hash": "d64a3fede7a6ff81",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "identity_only",
+            "note": "Package supplied https://doi.org/10.1016/j.procs.2022.01.104; identity metadata was available but substantive text was recovered elsewhere."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1016/j.procs.2022.01.104; title/authors matched and substantive evidence was recovered at https://www.sciencedirect.com/science/article/pii/S1877050922001053."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.sciencedirect.com/science/article/pii/S1877050922001053."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S1877050922001053",
+            "title": "Literature Review and Practice Comparison of Technology Foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.sciencedirect.com/science/article/pii/S1877050922001053."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "Fails Strand B because it reviews and compares existing practice rather than introducing a qualifying method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Technology foresight literature and practice comparison",
+      "reader_what": "The paper reviews technology-foresight literature and compares existing practices without contributing a distinct new reusable method.",
+      "reader_why": "",
+      "reader_more": "It surveys established technology-foresight approaches and contrasts their practical use. The contribution is descriptive comparison and review, not a novel or materially improved methodological procedure.",
+      "deep_analysis": {
+        "work_kind": "literature review and practice comparison",
+        "research_question": "",
+        "main_finding": "The paper reviews technology-foresight literature and compares existing practices without contributing a distinct new reusable method.",
+        "method_or_basis": "Review and comparison of existing technology-foresight methods and practice.",
+        "qualification": "The paper may inform method choice, but it does not cross Strand B's threshold for a new reusable contribution.",
+        "radar_relevance": "Fails Strand B because it reviews and compares existing practice rather than introducing a qualifying method.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/14636681111126265",
+      "source_hash": "4c94e588",
+      "identity_hash": "9d4964f508d6bcad",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1108/14636681111126265; source retrieval failed: 403 Client Error: Forbidden for url: https://www.emerald.com/fs/article/13/2/79-96/101867"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1108/14636681111126265; title/authors matched and substantive evidence was recovered at https://www.researchgate.net/publication/235296576_Science_and_technology_foresight_baker%27s_dozen_a_pocket_primer_of_comparative_and_combined_foresight_methods."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.researchgate.net/publication/235296576_Science_and_technology_foresight_baker%27s_dozen_a_pocket_primer_of_comparative_and_combined_foresight_methods."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository_full_text",
+            "url": "https://www.researchgate.net/publication/235296576_Science_and_technology_foresight_baker%27s_dozen_a_pocket_primer_of_comparative_and_combined_foresight_methods",
+            "title": "Science and technology foresight baker's dozen: a pocket primer of comparative and combined foresight methods",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.researchgate.net/publication/235296576_Science_and_technology_foresight_baker%27s_dozen_a_pocket_primer_of_comparative_and_combined_foresight_methods."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a transferable method-selection and combination framework."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A pocket primer for combining foresight methods",
+      "reader_what": "The paper organises 13 foresight methods into a practical matrix and gives guidance on selecting and combining them.",
+      "reader_why": "",
+      "reader_more": "It creates a compact method-selection aid for designing foresight processes, rather than merely listing techniques. The matrix and combination guidance are intended to be reusable by practitioners across projects.",
+      "deep_analysis": {
+        "work_kind": "methods primer and selection framework",
+        "research_question": "",
+        "main_finding": "The paper organises 13 foresight methods into a practical matrix and gives guidance on selecting and combining them.",
+        "method_or_basis": "Comparative synthesis of 13 foresight methods into a matrix with selection and combination guidance.",
+        "qualification": "The framework is a practitioner-oriented synthesis rather than an empirical test of method effectiveness.",
+        "radar_relevance": "Qualifies for Strand B as a transferable method-selection and combination framework.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1021/acs.chas.6c00074",
+      "source_hash": "56db83ad",
+      "identity_hash": "b893d976911e9075",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1021/acs.chas.6c00074; source retrieval failed: 403 Client Error: Forbidden for url: https://pubs.acs.org/achsc5/article/doi/10.1021/acs.chas.6c00074/5422090/Science-Diplomacy-in-2026-Why-the-EU-s-New"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1021/acs.chas.6c00074; title/authors matched and substantive evidence was recovered at https://pubs.acs.org/doi/10.1021/acs.chas.6c00074."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://pubs.acs.org/doi/10.1021/acs.chas.6c00074."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://pubs.acs.org/doi/10.1021/acs.chas.6c00074",
+            "title": "Science Diplomacy in 2026: Why the EU’s New Framework Matters for Chemical Safety",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://pubs.acs.org/doi/10.1021/acs.chas.6c00074."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive commentary on a current EU science-policy framework."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "commentary"
+        },
+        "unset": [],
+        "reason": "ACS identifies the publication as a Commentary."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU science diplomacy and chemical safety",
+      "reader_what": "The commentary explains why the EU's new science-diplomacy framework matters for chemical safety and international scientific cooperation.",
+      "reader_why": "",
+      "reader_more": "It connects a current EU policy framework to chemical-safety governance and the role of scientific collaboration. The piece is commentary, but its subject is directly European science policy.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "The commentary explains why the EU's new science-diplomacy framework matters for chemical safety and international scientific cooperation.",
+        "method_or_basis": "Expert commentary interpreting the EU science-diplomacy framework for chemical safety.",
+        "qualification": "The article is interpretive commentary rather than an empirical evaluation of the framework's effects.",
+        "radar_relevance": "Qualifies for Strand A as substantive commentary on a current EU science-policy framework.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s44464-026-00022-y",
+      "source_hash": "32f41cac",
+      "identity_hash": "1f96a4ae68dec0ac",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s44464-026-00022-y."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s44464-026-00022-y; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s44464-026-00022-y."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s44464-026-00022-y",
+            "title": "Implications of EU 2025 dual use regulation for quantum technology innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s44464-026-00022-y."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive EU technology-regulation and innovation analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU dual-use rules and quantum innovation",
+      "reader_what": "The article analyses how the EU's 2025 dual-use regulatory changes affect quantum-technology innovation and governance.",
+      "reader_why": "",
+      "reader_more": "It links export-control and dual-use rules to research, commercialisation, and innovation choices in quantum technologies. The analysis is directly about EU regulation of an emerging strategic technology.",
+      "deep_analysis": {
+        "work_kind": "technology-law and policy article",
+        "research_question": "",
+        "main_finding": "The article analyses how the EU's 2025 dual-use regulatory changes affect quantum-technology innovation and governance.",
+        "method_or_basis": "Legal and policy analysis of EU dual-use regulation as applied to quantum technology innovation.",
+        "qualification": "Regulatory implications are analysed prospectively; realised innovation effects will depend on implementation and market responses.",
+        "radar_relevance": "Qualifies for Strand A as substantive EU technology-regulation and innovation analysis.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s10734-026-01739-6",
+      "source_hash": "9243aad5",
+      "identity_hash": "201763d1e3b6f594",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s10734-026-01739-6."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s10734-026-01739-6; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s10734-026-01739-6."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s10734-026-01739-6",
+            "title": "Similar outputs, different positions: convergence and divergence in research activity of public and private universities in EU candidate countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s10734-026-01739-6."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive evidence on research systems in EU candidate countries."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "University research in EU candidate countries",
+      "reader_what": "The study compares research activity at public and private universities in EU candidate countries and tests convergence patterns.",
+      "reader_why": "",
+      "reader_more": "It uses institutional and publication evidence to examine whether public and private universities are becoming more similar in research activity. The geographic and policy setting is explicitly tied to EU accession and higher-education research systems.",
+      "deep_analysis": {
+        "work_kind": "empirical higher-education research article",
+        "research_question": "",
+        "main_finding": "The study compares research activity at public and private universities in EU candidate countries and tests convergence patterns.",
+        "method_or_basis": "Comparative quantitative analysis of public and private university research activity in EU candidate countries.",
+        "qualification": "Results concern the sampled candidate-country institutions and should not be generalised automatically to all European universities.",
+        "radar_relevance": "Qualifies for Strand A as substantive evidence on research systems in EU candidate countries.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s11187-025-01169-1",
+      "source_hash": "b086ad72",
+      "identity_hash": "3e71a3f9a48267e0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s11187-025-01169-1."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s11187-025-01169-1; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s11187-025-01169-1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11187-025-01169-1",
+            "title": "One more KIS? A new approach to mapping university-KIS interactions in EU regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s11187-025-01169-1."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Qualifies for Strand A as substantive research on EU regional innovation systems."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Mapping university-KIS links across EU regions",
+      "reader_what": "The study develops a new approach to map interactions between universities and knowledge-intensive services across 24 EU countries.",
+      "reader_why": "",
+      "reader_more": "It combines Eurostat, ETER, InCites, and PATSTAT data to examine university-KIS relationships across European regions. The work directly addresses regional knowledge and innovation systems within the EU.",
+      "deep_analysis": {
+        "work_kind": "empirical regional-innovation article",
+        "research_question": "",
+        "main_finding": "The study develops a new approach to map interactions between universities and knowledge-intensive services across 24 EU countries.",
+        "method_or_basis": "Multi-source quantitative mapping of university and knowledge-intensive-service interactions across 24 EU countries.",
+        "qualification": "The mapping captures measurable institutional and innovation links but not every informal knowledge flow.",
+        "radar_relevance": "Qualifies for Strand A as substantive research on EU regional innovation systems.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s40309-026-00284-w",
+      "source_hash": "7b8e6e22",
+      "identity_hash": "4c4de6c5059943d2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1186/s40309-026-00284-w."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1186/s40309-026-00284-w; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1186/s40309-026-00284-w."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1186/s40309-026-00284-w",
+            "title": "Bridging foresight and transition theory: policy mixes for transforming Europe’s food systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1186/s40309-026-00284-w."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a reusable integrated foresight and transition-policy method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight framework for European food-system transitions",
+      "reader_what": "The framework combines participatory foresight, the X-curve, morphological analysis, and consistency assessment to design transition policy mixes.",
+      "reader_why": "",
+      "reader_more": "Starting from European sustainability imaginaries, it integrates futures and transition-theory tools into a replicable sequence for policy-mix development. The method explicitly links alternative futures with transition pathways and policy choices.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The framework combines participatory foresight, the X-curve, morphological analysis, and consistency assessment to design transition policy mixes.",
+        "method_or_basis": "Integrated participatory foresight and transition-analysis framework using X-curves, morphology, and cross-consistency assessment.",
+        "qualification": "The demonstrated domain is European food systems; transfer to other systems requires contextual adaptation.",
+        "radar_relevance": "Qualifies for Strand B as a reusable integrated foresight and transition-policy method.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.70026",
+      "source_hash": "b64a9d35",
+      "identity_hash": "4724e3444a9a6691",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1002/ffo2.70026; source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70026"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1002/ffo2.70026; title/authors matched and substantive evidence was recovered at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70026",
+            "title": "Automated Technology Foresight for Urban Innovation Ecosystems: A Machine Learning Approach to Real‐Time Startup Detection and Technology Trend Mapping in a Mid‐Sized City",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70026."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a novel reusable automated foresight methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Automated foresight for urban innovation ecosystems",
+      "reader_what": "The paper introduces an automated method combining NLP, machine learning, and geographic visualisation for startup detection and technology trend mapping.",
+      "reader_why": "",
+      "reader_more": "It turns business-text and location data into continuously updateable signals about technology enterprises and trends. The Adelaide application demonstrates a workflow designed for real-time regional technology foresight.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The paper introduces an automated method combining NLP, machine learning, and geographic visualisation for startup detection and technology trend mapping.",
+        "method_or_basis": "Automated NLP and machine-learning pipeline combined with geospatial analysis for technology-ecosystem monitoring.",
+        "qualification": "Performance depends on data availability, classification quality, and how well local business records capture innovation activity.",
+        "radar_relevance": "Qualifies for Strand B as a novel reusable automated foresight methodology.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s40636-026-00372-3",
+      "source_hash": "df8e9e04",
+      "identity_hash": "e86e5998eda11931",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s40636-026-00372-3."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s40636-026-00372-3; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s40636-026-00372-3."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s40636-026-00372-3",
+            "title": "Reconstructing cognitive infrastructure in platform media under the generative AI wave: attention politics, cognitive externalities, and governance paradigm transformation: a comparative institutional analysis of the United States, the European Union, and China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s40636-026-00372-3."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_COMPARATOR_ONLY",
+        "reason": "Fails Strand A because comparative EU regulatory coverage alone does not establish substantive European R&I focus."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Comparative GenAI platform governance",
+      "reader_what": "The article compares United States, EU, and Chinese platform-governance regimes under generative AI, with the EU as one jurisdictional comparator.",
+      "reader_why": "",
+      "reader_more": "It uses a ten-dimension qualitative codebook to compare three institutional logics for platform and generative-AI governance. Although EU rules are discussed substantively, the work's core object is cross-jurisdiction platform media governance rather than European R&I.",
+      "deep_analysis": {
+        "work_kind": "comparative institutional analysis",
+        "research_question": "",
+        "main_finding": "The article compares United States, EU, and Chinese platform-governance regimes under generative AI, with the EU as one jurisdictional comparator.",
+        "method_or_basis": "Qualitative comparison of US, EU, and Chinese laws, policy documents, standards, and platform statements.",
+        "qualification": "The study is not centred on European research or innovation activity and the EU is one of three comparator regimes.",
+        "radar_relevance": "Fails Strand A because comparative EU regulatory coverage alone does not establish substantive European R&I focus.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1163/1573384x-03003004",
+      "source_hash": "635bfec6",
+      "identity_hash": "116b9865a33f2236",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened the supplied Brill article URL for DOI 10.1163/1573384X-03003004; automated retrieval returned access/405 limitations and no full article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "identity_only",
+            "note": "Resolved/searched DOI 10.1163/1573384X-03003004; title, author, journal, volume and pages were confirmed, but substantive text was not accessible."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "insufficient",
+            "note": "Searched exact title \"Impacts of International Sanctions on Research, Publication, and Academic Exchanges\"; results exposed the journal abstract but no full manuscript."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "insufficient",
+            "note": "Searched title + Elaheh Koolaee + 2026; ResearchGate and conference materials confirmed the same topic and author but supplied abstract-level material only."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "insufficient",
+            "note": "Checked Brill and institutional/conference sources, including the Doha Institute conference booklet; only identity and an extended abstract were available."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched title/DOI fragments with PDF, manuscript, repository, and author terms; no legitimate full or accepted manuscript of the journal article was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_metadata",
+            "url": "https://doi.org/10.1163/1573384X-03003004",
+            "title": "Impacts of International Sanctions on Research, Publication, and Academic Exchanges",
+            "evidence_used": false
+          },
+          {
+            "kind": "conference_abstract",
+            "url": "https://www.dohainstitute.org/en/Lists/ACRPS-PDFDocumentLibrary/isu-annual-conference-the-social-sciences-and-humanities-in-iran-possibilities-and-constraints-booklet-en.pdf",
+            "title": "Impacts of International Sanctions on Research, Publication, and Academic Exchanges",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Bibliographic identity is verified, but no legitimately accessible substantive copy of the claimed work was recovered after the complete mandatory ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible or too thin after all six mandatory recovery steps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1109/tem.2020.3032603",
+      "source_hash": "1816efb7",
+      "identity_hash": "4595b029907e94b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Opened https://ieeexplore.ieee.org/document/9277873/; the matching IEEE record was identifiable but full article text was not accessible in this environment."
+          },
+          {
+            "step": "doi",
+            "outcome": "identity_only",
+            "note": "Resolved/searched DOI 10.1109/TEM.2020.3032603; bibliographic identity and article title/authors were confirmed without substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "insufficient",
+            "note": "Searched exact title \"Research on the TRM Kaizen Method for Governmental Organizations to Apply Technology Roadmapping as a Methodology to Achieve the Goals of Industrial Technology Policy\"; only abstract/metadata copies surfaced."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "insufficient",
+            "note": "Searched title + Watanabe + 2020/2022; author and index records confirmed identity but did not expose the article body."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "insufficient",
+            "note": "Checked IEEE and relevant author/organisation records; no legitimate open institutional or accepted-manuscript copy of the claimed article was located."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched DOI/title fragments with PDF, repository, manuscript, and author terms; available copies remained abstract-only or request-only."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_metadata",
+            "url": "https://ieeexplore.ieee.org/document/9277873/",
+            "title": "Research on the TRM Kaizen Method for Governmental Organizations to Apply Technology Roadmapping as a Methodology to Achieve the Goals of Industrial Technology Policy",
+            "evidence_used": false
+          },
+          {
+            "kind": "bibliographic_record",
+            "url": "https://www.researchgate.net/publication/347315353_Research_on_the_TRM_Kaizen_Method_for_Governmental_Organizations_to_Apply_Technology_Roadmapping_as_a_Methodology_to_Achieve_the_Goals_of_Industrial_Technology_Policy",
+            "title": "Research on the TRM Kaizen Method for Governmental Organizations to Apply Technology Roadmapping as a Methodology to Achieve the Goals of Industrial Technology Policy",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Bibliographic identity is verified, but no legitimately accessible substantive copy of the claimed work was recovered after the complete mandatory ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible or too thin after all six mandatory recovery steps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.2196/93166",
+      "source_hash": "fefa278d",
+      "identity_hash": "7325b2457e17fef6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "identity_only",
+            "note": "Package supplied https://doi.org/10.2196/93166; identity metadata was available but substantive text was recovered elsewhere."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.2196/93166; title/authors matched and substantive evidence was recovered at https://www.jmir.org/2026/1/e93166."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.jmir.org/2026/1/e93166."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.jmir.org/2026/1/e93166",
+            "title": "Horizon Scanning for Medical Technologies: Methodological Framework Development Study of the Medical Innovation Scanning Techniques (MIST) Framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.jmir.org/2026/1/e93166."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a reusable, systematically developed horizon-scanning framework."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-05-21"
+        },
+        "unset": [],
+        "reason": "JMIR and PubMed identify 21 May 2026 as the publication date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "MIST framework for medical-technology horizon scanning",
+      "reader_what": "The study develops the MIST framework to standardise horizon scanning for medical technologies across development stages and time horizons.",
+      "reader_why": "",
+      "reader_more": "It builds the framework from evidence mapping, stakeholder mapping, horizon-scanning initiatives, and iterative methodological development. MIST links horizons, technology readiness, regulatory milestones, search methods, and weak-signal sources into a reusable process.",
+      "deep_analysis": {
+        "work_kind": "methodological framework-development study",
+        "research_question": "",
+        "main_finding": "The study develops the MIST framework to standardise horizon scanning for medical technologies across development stages and time horizons.",
+        "method_or_basis": "Mapping review, stakeholder and system mapping, international horizon-scanning input, and iterative framework development.",
+        "qualification": "The framework improves methodological structure, but wider performance evidence will accumulate through future adoption and comparison.",
+        "radar_relevance": "Qualifies for Strand B as a reusable, systematically developed horizon-scanning framework.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-07-2023-0134",
+      "source_hash": "8ba5839b",
+      "identity_hash": "bc75d4dee0e88f63",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Opened the supplied Emerald article for DOI 10.1108/FS-07-2023-0134; the matching page exposes a structured abstract but states that article content is not accessible."
+          },
+          {
+            "step": "doi",
+            "outcome": "identity_only",
+            "note": "Resolved/searched DOI 10.1108/FS-07-2023-0134; identity is confirmed, but the publisher full text remains restricted."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "insufficient",
+            "note": "Searched exact title \"Foresight and the scamper technique: a combination of collective intelligence strategies for building innovation capacity\"; abstract/request pages were found, not full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "insufficient",
+            "note": "Searched title + Juan Ernesto Perez Perez + 2024; records confirmed the article and case study but did not provide the full manuscript."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "insufficient",
+            "note": "Checked Emerald and author/institutional discovery paths; no legitimate public accepted manuscript or repository full text was located."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched DOI/title fragments with PDF, manuscript, repository, and author terms; no accessible substantive copy beyond abstract-level primary material was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_metadata",
+            "url": "https://www.emerald.com/fs/article/27/2/341/1241626/Foresight-and-the-scamper-technique-a-combination",
+            "title": "Foresight and the scamper technique: a combination of collective intelligence strategies for building innovation capacity",
+            "evidence_used": false
+          },
+          {
+            "kind": "bibliographic_record",
+            "url": "https://www.researchgate.net/publication/382106507_Foresight_and_the_scamper_technique_a_combination_of_collective_intelligence_strategies_for_building_innovation_capacity",
+            "title": "Foresight and the scamper technique: a combination of collective intelligence strategies for building innovation capacity",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Bibliographic identity is verified, but no legitimately accessible substantive copy of the claimed work was recovered after the complete mandatory ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible or too thin after all six mandatory recovery steps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-12-2023-0252",
+      "source_hash": "e85fc698",
+      "identity_hash": "e57cb558587b00ec",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Opened the supplied Emerald article for DOI 10.1108/FS-12-2023-0252; the page provides the structured abstract but reports no access to article content."
+          },
+          {
+            "step": "doi",
+            "outcome": "identity_only",
+            "note": "Resolved/searched DOI 10.1108/FS-12-2023-0252; Jan Kleňha, Foresight 27(5), 956-969 was confirmed, but the article body remained unavailable."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "insufficient",
+            "note": "Searched exact title \"Participation in strategic foresight: feasibility of using nonexpert methods for megatrend assessment\"; Emerald/ScienceDirect indexing exposed abstract-level material only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "insufficient",
+            "note": "Searched title + Jan Kleňha + 2025; ResearchGate confirms the paper but explicitly offers request-only rather than public full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "insufficient",
+            "note": "Checked Emerald and Charles University. The university dissertation contains related underlying research/data, but it is not a matching full-text copy of the claimed journal article and was not substituted."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched DOI/title fragments with PDF, accepted manuscript, repository, and author terms; no legitimate full or accepted manuscript of the article was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_metadata",
+            "url": "https://www.emerald.com/fs/article-abstract/27/5/956/1249711/Participation-in-strategic-foresight-feasibility",
+            "title": "Participation in strategic foresight: feasibility of using nonexpert methods for megatrend assessment",
+            "evidence_used": false
+          },
+          {
+            "kind": "institutional_related_research",
+            "url": "https://dspace.cuni.cz/bitstream/handle/20.500.11956/200980/140131791.pdf?isAllowed=y&sequence=1",
+            "title": "Jan Kleňha dissertation containing related underlying research",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Bibliographic identity is verified, but no legitimately accessible substantive copy of the claimed work was recovered after the complete mandatory ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible or too thin after all six mandatory recovery steps."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-11-2016-0054",
+      "source_hash": "c063af1b",
+      "identity_hash": "5c8b0a63dd866a75",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1108/fs-11-2016-0054; source retrieval failed: 403 Client Error: Forbidden for url: https://www.emerald.com/fs/article/19/5/473-490/89205"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1108/fs-11-2016-0054; title/authors matched and substantive evidence was recovered at https://www.hse.ru/data/2024/02/21/2080795671/%D0%94%D1%80%D0%B0%D0%BD%D0%B5%D0%B2_%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F%209.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://www.hse.ru/data/2024/02/21/2080795671/%D0%94%D1%80%D0%B0%D0%BD%D0%B5%D0%B2_%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F%209.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://www.hse.ru/data/2024/02/21/2080795671/%D0%94%D1%80%D0%B0%D0%BD%D0%B5%D0%B2_%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F%209.pdf",
+            "title": "A dynamic and adaptive scenario approach for formulating science & technology policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://www.hse.ru/data/2024/02/21/2080795671/%D0%94%D1%80%D0%B0%D0%BD%D0%B5%D0%B2_%D1%81%D1%82%D0%B0%D1%82%D1%8C%D1%8F%209.pdf."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a novel reusable scenario method for science and technology policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Dynamic adaptive scenarios for science and technology policy",
+      "reader_what": "The paper presents a dynamic scenario method designed to update science and technology policy as conditions change.",
+      "reader_why": "",
+      "reader_more": "The approach links scenario construction to adaptive policy formulation and demonstrates it through an illustrative case. The authors explicitly position the method for reuse across multiple levels of governance.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The paper presents a dynamic scenario method designed to update science and technology policy as conditions change.",
+        "method_or_basis": "Development of a dynamic and adaptive scenario approach with an illustrative science-and-technology policy case.",
+        "qualification": "The method's value depends on disciplined updating and stakeholder use; one case does not establish performance everywhere.",
+        "radar_relevance": "Qualifies for Strand B as a novel reusable scenario method for science and technology policy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-06-2023-0119",
+      "source_hash": "47e1e415",
+      "identity_hash": "c4d48e3d36e57da0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Package supplied https://doi.org/10.1108/fs-06-2023-0119; source retrieval failed: 403 Client Error: Forbidden for url: https://www.emerald.com/fs/article/26/2/351-364/1227015"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1108/fs-06-2023-0119; title/authors matched and substantive evidence was recovered at https://unige.iris.cineca.it/retrieve/248d6427-c0a3-4ba9-a5dd-46b9ff75032a/10-1108_FS-06-2023-0119.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered a legitimate matching substantive copy at https://unige.iris.cineca.it/retrieve/248d6427-c0a3-4ba9-a5dd-46b9ff75032a/10-1108_FS-06-2023-0119.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://unige.iris.cineca.it/retrieve/248d6427-c0a3-4ba9-a5dd-46b9ff75032a/10-1108_FS-06-2023-0119.pdf",
+            "title": "Mission-oriented scenarios: a new method for urban foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://unige.iris.cineca.it/retrieve/248d6427-c0a3-4ba9-a5dd-46b9ff75032a/10-1108_FS-06-2023-0119.pdf."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a new reusable urban-foresight method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Mission-oriented scenarios for urban foresight",
+      "reader_what": "The paper introduces mission-oriented scenarios to connect long-term urban futures with near-term strategic action.",
+      "reader_why": "",
+      "reader_more": "The method addresses a common gap between scenario narratives and actionable missions. A university repository copy of the published paper documents the design and its urban-foresight application.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The paper introduces mission-oriented scenarios to connect long-term urban futures with near-term strategic action.",
+        "method_or_basis": "Method development through an academic-led urban foresight project, linking scenario building with mission-oriented action.",
+        "qualification": "The method is demonstrated in an urban setting and needs additional applications to establish broader robustness.",
+        "radar_relevance": "Qualifies for Strand B as a new reusable urban-foresight method.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s11192-019-03126-8",
+      "source_hash": "1d51d46e",
+      "identity_hash": "9e9674b54eb9f940",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package captured substantive matching primary text from https://link.springer.com/article/10.1007/s11192-019-03126-8."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched https://doi.org/10.1007/s11192-019-03126-8; title/authors matched and substantive evidence was recovered at https://link.springer.com/article/10.1007/s11192-019-03126-8."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-019-03126-8",
+            "title": "A novel method to identify emerging technologies using a semi-supervised topic clustering model: a case of 3D printing industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content verified against the matching source at https://link.springer.com/article/10.1007/s11192-019-03126-8."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Qualifies for Strand B as a novel reusable emerging-technology identification method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Semi-supervised clustering for emerging-technology detection",
+      "reader_what": "The paper develops a semi-supervised topic-clustering method to improve identification of emerging technologies from technical text.",
+      "reader_why": "",
+      "reader_more": "The approach adds expert-informed supervision to topic clustering so emerging technology signals are not determined only by unsupervised structure. A 3D-printing case demonstrates the workflow and its technology-intelligence use.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The paper develops a semi-supervised topic-clustering method to improve identification of emerging technologies from technical text.",
+        "method_or_basis": "Semi-supervised topic clustering applied to technology documents, with a 3D-printing industry case.",
+        "qualification": "Results depend on corpus quality, supervision choices, and the transferability of clustering parameters across domains.",
+        "radar_relevance": "Qualifies for Strand B as a novel reusable emerging-technology identification method.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    }
+  ]
+}
