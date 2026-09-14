@@ -5,14 +5,14 @@ It exists so a new chat or operator can see what has already been verified and w
 
 - Authoritative V2 verified: **336**
 - Still needing V2 verification: **333**
-- Currently assigned to workers: **84**
+- Currently assigned to workers: **96**
 - Deferred after exhaustive recovery: **23**
-- Pending and not yet assigned: **226**
+- Pending and not yet assigned: **214**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T080544Z-a02443386555`
+- Current package: `worker-a-20260914T080738Z-a02443386555`
 - Assigned unresolved records: **48**
   1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/`
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145459`
@@ -25,8 +25,8 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T080558Z-7108561a7941`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260914T080755Z-00501c41f66a`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1111/1758-5899.70201`
   2. `link:https://doi.org/10.1016/j.ijmedinf.2026.106685`
   3. `link:https://doi.org/10.1007/s10796-026-10801-8`
@@ -35,7 +35,7 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en`
   7. `link:https://digital-strategy.ec.europa.eu/en/library/commission-publishes-study-supporting-review-digital-decade-policy-programme`
   8. `link:https://doi.org/10.1093/etojnl/vgag243`
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Deferred recovery queue
 
