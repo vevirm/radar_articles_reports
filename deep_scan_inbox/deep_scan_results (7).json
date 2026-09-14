@@ -1,0 +1,3112 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-b-20260914T062900Z-b105dc9c7d1b",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1002/psp.70369",
+      "source_hash": "37826238",
+      "identity_hash": "eca191c193b6bd6e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1002/psp.70369 redirected to onlinelibrary.wiley.com/doi/10.1002/psp.70369; HTTP 403 Forbidden on the article page and on the pdfdirect endpoint."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "api.crossref.org/works/10.1002/psp.70369 returned matching title, Population, Space and Place, Wiley, issued 2026-09-07, licence CC-BY; bibliographic identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'Career Pathways in the Global Labour Market: Non-European Master's Graduates in Germany, Italy, and the United Kingdom' returned only the Wiley landing page and indexing stubs."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searched title with Zeltner and Van Mol 2026 and queried research.tilburguniversity.edu (Van Mol's institution) publication portal, which returned HTTP 403; no author copy located."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex work record lists exactly one location (Wiley publishedVersion pdfdirect, any_repository_has_fulltext false); OpenAIRE DOI lookup returned no repository record; api.fatcat.wiki lookup returned HTTP 503."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Crossref-declared TDM links (onlinelibrary.wiley.com/doi/pdf/... and /doi/full-xml/...) both returned HTTP 403; no legitimate preprint or accepted manuscript found."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified through Crossref; all six recovery steps attempted; full text legitimately inaccessible."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref, but Wiley returned HTTP 403 on every full-text endpoint and no repository or manuscript copy exists; substantive evidence unavailable."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/european-union-and-australia-successfully-conclude-horizon-europe-negotiations/",
+      "source_hash": "35da590c",
+      "identity_hash": "a6c9b05d85e1395e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200); complete item text recovered, dated 09 Jun 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/european-union-and-australia-successfully-conclude-horizon-europe-negotiations/",
+            "title": "European Union and Australia successfully conclude Horizon Europe negotiations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered from the supplied URL; content matches the scanner's claim."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Page reports a concrete policy outcome: conclusion of EU-Australia Horizon Europe association negotiations, with participation statistics and the transitional arrangement from January 2027."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU and Australia conclude Horizon Europe association negotiations",
+      "reader_what": "Australian entities gain associated-country status under Pillar II from January 2027 under a transitional arrangement.",
+      "reader_why": "Widens the pool of partners able to lead Horizon Europe consortia.",
+      "reader_more": "On 9 June 2026 the European Commission and Australia concluded negotiations on Australia's association to Horizon Europe. The item records that Australian organisations have taken part in 239 Horizon Europe projects so far, with roughly one in four individual applications selected, a 24.39% success rate. From January 2027 a transitional arrangement moves Australian entities from third-country rules, under which they generally self-funded or relied on narrow exceptions, to treatment as eligible entities from an associated country. That gives them routine access to EU funding under Pillar II on the same terms as Member States, including the ability to lead consortia. Negotiations concluded is not the same as an agreement in force.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Negotiations on Australia's association to Horizon Europe concluded, with associated-country treatment under Pillar II from January 2027.",
+        "method_or_basis": "Official ERA Portal Austria news item reporting the Commission announcement, including participation and success-rate figures.",
+        "qualification": "Concluded negotiations are a stage before signature and entry into force; the arrangement is described as transitional.",
+        "radar_relevance": "Direct evidence of a change in Horizon Europe's association perimeter and third-country funding rules.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027/",
+      "source_hash": "58553eaa",
+      "identity_hash": "3770a0e5b0c0424c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 11 Jun 2026, with budget figures and context."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027/",
+            "title": "Commission proposes EUR 12,8 billion for Horizon Europe in 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Complete item text recovered from the supplied URL; figures verified against the page itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports the Commission's 2027 draft budget proposal with a specific Horizon Europe allocation of EUR 12.8 billion and an explanation of the year-on-year decrease."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission proposes 12.8 billion euro for Horizon Europe in the 2027 annual budget",
+      "reader_what": "Research and innovation receives 13.8 billion euro, of which 12.8 billion goes to Horizon Europe.",
+      "reader_why": "Sets the funding envelope researchers and institutions can compete for in 2027.",
+      "reader_more": "The European Commission presented a proposed 2027 annual budget of EUR 200 billion. Within it, EUR 13.8 billion is earmarked for research and innovation, of which EUR 12.8 billion is for Horizon Europe. The Commission attributes the slight fall relative to 2026 to a cut in the ITER budget rather than to a reduction in the programme's own ambition. The draft also incorporates the outcome of the mid-term review of 2021-2027 Cohesion policy and encourages Member States to redirect funding towards competitiveness, defence, affordable housing, water resilience and the energy transition, supported by one-off pre-financing and higher co-financing rates. This is a Commission proposal, not an adopted budget.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The Commission's 2027 draft budget allocates EUR 12.8 billion to Horizon Europe within EUR 13.8 billion for research and innovation.",
+        "method_or_basis": "Official ERA Portal Austria news item reporting the Commission's draft budget presentation.",
+        "qualification": "A proposal only; the annual budget must still pass Council and Parliament, so figures may change.",
+        "radar_relevance": "Directly quantifies the proposed European R&I funding envelope for 2027.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/commission-proposes-tech-sovereignty-package-to-strengthen-europes-digital-autonomy-and-resilience/",
+      "source_hash": "dfa3308a",
+      "identity_hash": "34ecfbb9d67b4212",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 03 Jun 2026, describing each component of the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/commission-proposes-tech-sovereignty-package-to-strengthen-europes-digital-autonomy-and-resilience/",
+            "title": "Commission proposes tech sovereignty package to strengthen Europe's digital autonomy and resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered; the two legislative proposals it describes were independently verified as COM(2026) 502 and COM(2026) 504 in records 8 and 11."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a real legislative package: the European Technological Sovereignty Package containing the Chips Act 2.0 and Cloud and AI Development Act proposals plus an Open Source Strategy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission proposes technological sovereignty package covering chips, cloud, AI and open source",
+      "reader_what": "Two legislative proposals, Chips Act 2.0 and the Cloud and AI Development Act, plus an Open Source Strategy.",
+      "reader_why": "Aims to reduce EU reliance on non-EU suppliers of critical digital technologies.",
+      "reader_more": "On 3 June 2026 the Commission presented a European Technological Sovereignty Package covering semiconductors, artificial intelligence, cloud computing and open source, containing two legislative proposals. The Chips Act 2.0 would expand European semiconductor capacity, especially for advanced AI chips, by speeding up permitting, supporting strategic investments, deepening cooperation with trusted partners and creating an excellence label for semiconductor regions. The Cloud and AI Development Act aims to triple Europe's data-centre capacity within five to seven years and to introduce an EU-wide framework for assessing cloud and AI sovereignty. The package also includes an Open Source Strategy and a roadmap for digitalisation and AI in energy. These are proposals at the start of the legislative process.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The Commission tabled a technological sovereignty package with two legislative proposals and accompanying strategies.",
+        "method_or_basis": "Official ERA Portal Austria news item summarising the Commission's 3 June 2026 announcement.",
+        "qualification": "Legislative proposals only; the data-centre tripling target is an ambition, not an observed outcome.",
+        "radar_relevance": "Core European industrial and technological capability policy affecting semiconductors, cloud and AI.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/23779497.2026.2645265",
+      "source_hash": "7836f3d8",
+      "identity_hash": "bca90063f1171192",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1080/23779497.2026.2645265 redirected to tandfonline.com, which returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed Global Security: Health, Science and Policy, Informa UK, issued 2026-03-17, seven authors; OpenAlex reported gold open access with a TNO repository copy."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full 24-page published version from the TNO institutional repository at publications.tno.nl/publication/34645863/8WIJHmu8/Laffourcade-2026-Technological.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://publications.tno.nl/publication/34645863/8WIJHmu8/Laffourcade-2026-Technological.pdf",
+            "title": "Technological sovereignty in healthcare innovation and production for defence: proposal for an evaluation index to guide European policies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; full published version recovered from the TNO repository at ladder step 5 and used as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Peer-reviewed article proposing an evaluation index for technological sovereignty in defence-relevant healthcare innovation and production, explicitly framed to guide European policy; full text recovered."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Global Security: Health, Science and Policy"
+        },
+        "unset": [],
+        "reason": "The scanner recorded the source as TNO, the employer of one author group. Crossref and the recovered full text show the work is a journal article in Global Security: Health, Science and Policy (Informa UK/Taylor & Francis)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "An index for measuring European technological sovereignty in defence-related health innovation",
+      "reader_what": "The authors propose an evaluation index to assess sovereignty across healthcare innovation and production for defence.",
+      "reader_why": "Gives European policymakers a structured way to judge dependency in a security-critical sector.",
+      "reader_more": "This peer-reviewed article addresses technological sovereignty in healthcare innovation and production for defence purposes. Rather than reporting an empirical measurement exercise, it proposes an evaluation index intended to guide European policy decisions in this area. The paper sets out the dimensions the index covers and argues for its use in assessing where European capability and dependency lie across the innovation and production chain. The work is explicitly European in orientation and sits at the intersection of health research, defence capability and industrial policy. It is a proposal for an instrument; the index is not yet validated through large-scale application, so its results should be read as a framework rather than as measured sovereignty levels.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed article proposing an evaluation instrument",
+        "research_question": "How can technological sovereignty in healthcare innovation and production for defence be evaluated to guide European policy?",
+        "main_finding": "The authors propose an evaluation index covering technological sovereignty across healthcare innovation and production for defence.",
+        "method_or_basis": "Conceptual development of an index informed by the defence and health innovation literature and European policy context.",
+        "qualification": "The index is proposed rather than empirically validated at scale; outputs are a guidance framework, not measured sovereignty.",
+        "radar_relevance": "Directly addresses European technological sovereignty and industrial capability in a security-critical research domain.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1186/s13705-026-00595-7",
+      "source_hash": "d550ca39",
+      "identity_hash": "1c90c1a516609f92",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1186/s13705-026-00595-7 resolved to link.springer.com and the article is gold open access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed Energy, Sustainability and Society, Springer, issued 2026-08-05; downloaded the full 19-page published PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1186/s13705-026-00595-7.pdf",
+            "title": "Are we ready to handle PV waste? A review of PV recycling regulations in Europe, the United States, China, and India",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full published PDF recovered and read; the European material is real but is one of four parallel jurisdictional treatments."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_BORDERLINE",
+        "reason": "Full text confirms a genuine four-jurisdiction regulatory review in which Europe is one of four comparators; the European component is substantive but the work is waste-regulation analysis rather than European R&I, so admission needs human judgement."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Review of photovoltaic waste recycling rules in Europe, the US, China and India",
+      "reader_what": "The four jurisdictions differ sharply in regulatory readiness for the coming wave of photovoltaic waste.",
+      "reader_why": "",
+      "reader_more": "This open-access review analyses photovoltaic recycling regulation across Europe, the United States, China and India. It sets out the economic, social and environmental challenges of handling the waste stream that rapid photovoltaic deployment will generate, and assesses how prepared each regulatory framework is for large-scale recycling. Europe is treated substantively, including its dedicated waste-electronics rules, but it appears as one of four parallel cases rather than as the subject of the study. The contribution is a synthesis of existing regulation rather than new measurement or a new method. Whether this counts as substantive European research and innovation evidence, or as comparative environmental regulation with a European chapter, is the judgement this record needs.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed review article",
+        "research_question": "How prepared are the regulatory frameworks of Europe, the US, China and India to handle photovoltaic waste?",
+        "main_finding": "Regulatory readiness for photovoltaic waste differs markedly across the four jurisdictions, with significant gaps remaining.",
+        "method_or_basis": "Narrative review and comparison of published recycling regulations and waste-projection literature for four jurisdictions.",
+        "qualification": "A review rather than new empirical work; Europe is one of four comparators, not the study's subject.",
+        "radar_relevance": "Touches European technology and industrial capability through recycling regulation, but is not primarily European R&I evidence.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/cep4.70037",
+      "source_hash": "e450fb0a",
+      "identity_hash": "64ba7a769f80473a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1002/cep4.70037 redirected to onlinelibrary.wiley.com/doi/10.1002/cep4.70037; HTTP 403 Forbidden."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref returned matching title, Contemporary European Politics, Wiley, issued 2026-04-15, licence CC-BY-NC-ND; abstract on European University Alliances retrieved."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'The Interplay of Policy and Practice on Europeanisation in the Context of the European University Alliances' returned only the Wiley landing page and a DOAJ stub."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Searched Curylo, Frame, Hirvonen and Geisler 2026; OpenAIRE returned only author institution pages (uni.opole.pl, ube.fr, main.inop.edu.pl) and the Wiley URL, no deposited text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "DOAJ API record doaj.org/article/be9b0a7e92ad4bc79c63803cc43dbae1 lists the DOI as its only full-text link; OpenAlex shows no repository with full text."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Wiley full-xml and pdf TDM endpoints both returned HTTP 403; api.fatcat.wiki returned HTTP 503; no preprint or accepted manuscript located."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Gold open access on paper, but every legitimate retrieval route was blocked; identity verified, content not assessable."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref and DOAJ, but Wiley blocks every full-text route for this gold open-access article and no repository copy exists."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://ec.europa.eu/newsroom/dae/redirection/document/129111",
+      "source_hash": "982f370f",
+      "identity_hash": "784eca0b548a5bd9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ec.europa.eu/newsroom/dae/redirection/document/129111 returned a 965 KB PDF; text extraction confirms COM(2026) 502 final, 2026/0138 (COD), Brussels 3.6.2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "EU legislative documents of this type carry a COM number, not a DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://ec.europa.eu/newsroom/dae/redirection/document/129111",
+            "title": "COM(2026) 502 final - Proposal for a Regulation establishing a framework of measures for strengthening Europe's cloud and AI ecosystem (Cloud and AI Development Act)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official PDF retrieved and read directly from the Commission newsroom; document number and date verified inside the file."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The supplied URL delivers the official legislative proposal COM(2026) 502 final establishing the Cloud and AI Development Act; a concrete EU legislative development."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "COM(2026) 502 final - Proposal for a Regulation of the European Parliament and of the Council establishing a framework of measures for strengthening Europe's cloud and AI ecosystem (Cloud and AI Development Act)",
+          "source": "European Commission",
+          "type": "EU legislative proposal"
+        },
+        "unset": [],
+        "reason": "The scanner title retained page furniture ('Download 1. ... Download') from the newsroom listing. The document itself is headed COM(2026) 502 final, 2026/0138 (COD), issued by the European Commission on 3 June 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU legislative proposal for a Cloud and AI Development Act",
+      "reader_what": "A proposed regulation establishing a framework of measures to strengthen Europe's cloud and AI ecosystem.",
+      "reader_why": "Would create EU-level instruments governing computing capacity that research and industry depend on.",
+      "reader_more": "This is the Commission's formal legislative proposal, COM(2026) 502 final, adopted on 3 June 2026 under procedure 2026/0138 (COD). It proposes a regulation establishing a framework of measures to strengthen Europe's cloud and artificial intelligence ecosystem. The explanatory memorandum sets out the context and objectives, and the proposal is accompanied by impact assessment documents including SWD(2026) 502 and SWD(2026) 503. As an ordinary legislative procedure file it must still pass the European Parliament and Council, so its provisions are proposed rather than enacted. It is one of the two legislative components of the technological sovereignty package announced the same day.",
+      "deep_analysis": {
+        "work_kind": "EU legislative proposal",
+        "research_question": "",
+        "main_finding": "The Commission proposes a regulation creating a framework of measures to strengthen Europe's cloud and AI ecosystem.",
+        "method_or_basis": "Primary reading of the official COM document and its explanatory memorandum.",
+        "qualification": "A proposal at first reading; nothing in it is yet law, and the accompanying impact assessment is Commission staff analysis.",
+        "radar_relevance": "Central EU instrument for computing and AI capacity underpinning European research and innovation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ec.europa.eu/newsroom/dae/redirection/document/129115",
+      "source_hash": "ffa6515a",
+      "identity_hash": "61cfd7cad8baa6ed",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ec.europa.eu/newsroom/dae/redirection/document/129115 returned a 145 KB PDF; extraction shows SWD(2026) 503 final, Executive Summary of the Impact Assessment Report, Brussels 3.6.2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission staff working documents carry an SWD number, not a DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://ec.europa.eu/newsroom/dae/redirection/document/129115",
+            "title": "SWD(2026) 503 final - Executive Summary of the Impact Assessment Report accompanying the Cloud and AI Development Act proposal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official PDF retrieved and read; the document number in the scanner metadata was corrected against the document itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The document is the official executive summary of the impact assessment accompanying the Cloud and AI Development Act, containing the Commission's problem definition and option assessment."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "SWD(2026) 503 final - Commission Staff Working Document: Executive Summary of the Impact Assessment Report accompanying the proposal for a Cloud and AI Development Act",
+          "source": "European Commission",
+          "type": "EU impact assessment summary"
+        },
+        "unset": [],
+        "reason": "The scanner title was scraped listing text naming SWD(2026) 502. The retrieved document is in fact SWD(2026) 503 final, the executive summary accompanying COM(2026) 502; the document number in the scanner title was wrong."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Impact assessment executive summary for the Cloud and AI Development Act",
+      "reader_what": "Summarises the problem definition, options and expected effects behind the proposed cloud and AI regulation.",
+      "reader_why": "Shows the evidence base the Commission used to justify intervening in cloud and AI capacity.",
+      "reader_more": "This Commission staff working document, SWD(2026) 503 final of 3 June 2026, is the executive summary of the impact assessment report accompanying the Cloud and AI Development Act proposal. It condenses the Commission's analysis of the problem it seeks to address, the policy options considered and their expected effects. It is explicitly staff analysis supporting a legislative proposal rather than an independent study, and the full impact assessment is a separate and longer document. Read alongside COM(2026) 502, it shows the reasoning behind the proposed intervention in European cloud and AI capacity.",
+      "deep_analysis": {
+        "work_kind": "EU impact assessment executive summary",
+        "research_question": "",
+        "main_finding": "Sets out the Commission's problem definition, policy options and expected effects for the Cloud and AI Development Act.",
+        "method_or_basis": "Primary reading of the official SWD executive summary document.",
+        "qualification": "Commission staff analysis accompanying a proposal; a summary of a longer impact assessment, and its effects are modelled expectations.",
+        "radar_relevance": "Documents the evidence base for a major EU digital capacity instrument.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eurohpc-ju.europa.eu/eurohpc-ju-inaugurates-arrhenius-new-mid-range-supercomputer-together-naiss-sweden-2026-09-08_en",
+      "source_hash": "5cc28ae4",
+      "identity_hash": "40c8dd351314d278",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "eurohpc-ju.europa.eu page retrieved in full (HTTP 200); complete announcement text including performance figures recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a EuroHPC JU announcement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://www.eurohpc-ju.europa.eu/eurohpc-ju-inaugurates-arrhenius-new-mid-range-supercomputer-together-naiss-sweden-2026-09-08_en",
+            "title": "EuroHPC JU Inaugurates Arrhenius, a New Mid-range Supercomputer Together With NAISS in Sweden",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full announcement recovered from the issuing body's own site and used as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports the actual inauguration of the Arrhenius supercomputer at Linkoping University, with verified performance and TOP500 placement; a concrete addition to European HPC capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EuroHPC inaugurates the Arrhenius supercomputer in Sweden",
+      "reader_what": "Arrhenius exceeds 60 petaflops and ranked 42nd on the June 2026 TOP500 list.",
+      "reader_why": "Adds mid-range European computing capacity for AI and simulation workloads.",
+      "reader_more": "The EuroHPC Joint Undertaking inaugurated Arrhenius at Linkoping University, with EuroHPC Executive Director Anders Dam Jensen and Swedish State Secretary Maria Nilsson attending the ceremony. The machine is a mid-range system capable of more than 60 petaflops, and it ranked 42nd in the TOP500 list published in June 2026. It is designed for complex simulation and compute-intensive AI work, with intended applications in climate modelling, materials science, life sciences and engineering. The announcement frames the system as a step towards European technological sovereignty. This is an operational deployment rather than a plan, though claims about future scientific breakthroughs are aspirational.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "A new mid-range EuroHPC supercomputer, Arrhenius, was inaugurated in Sweden with over 60 petaflops of performance.",
+        "method_or_basis": "Official EuroHPC Joint Undertaking announcement including performance figures and TOP500 ranking.",
+        "qualification": "Performance and ranking are verifiable; the described scientific impacts are expected uses, not results.",
+        "radar_relevance": "Direct evidence of European high-performance computing capacity being expanded through an EU joint undertaking.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ec.europa.eu/newsroom/dae/redirection/document/129104",
+      "source_hash": "ae2012db",
+      "identity_hash": "9b5882115fb8ad3c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ec.europa.eu/newsroom/dae/redirection/document/129104 returned a 1.06 MB PDF; extraction confirms COM(2026) 504 final, 2026/0139 (COD), Brussels 3.6.2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "EU legislative documents of this type carry a COM number, not a DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://ec.europa.eu/newsroom/dae/redirection/document/129104",
+            "title": "COM(2026) 504 final - Proposal for a Regulation on a framework of measures for strengthening the Union's semiconductor ecosystem, repealing Regulation (EU) 2023/1781 (Chips Act 2.0)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official PDF retrieved and read directly from the Commission newsroom; document number, procedure and repeal clause verified inside the file."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The supplied URL delivers COM(2026) 504 final, the official Chips Act 2.0 legislative proposal repealing Regulation (EU) 2023/1781."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "COM(2026) 504 final - Proposal for a Regulation of the European Parliament and of the Council on a framework of measures for strengthening the Union's semiconductor ecosystem, repealing Regulation (EU) 2023/1781 (Chips Act 2.0)",
+          "source": "European Commission",
+          "type": "EU legislative proposal"
+        },
+        "unset": [],
+        "reason": "The scanner recorded a short descriptive title and a generic source. The document itself is COM(2026) 504 final, procedure 2026/0139 (COD), issued by the European Commission on 3 June 2026 and repealing Regulation (EU) 2023/1781."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU legislative proposal for a Chips Act 2.0",
+      "reader_what": "A proposed regulation strengthening the Union's semiconductor ecosystem and repealing the 2023 Chips Act.",
+      "reader_why": "Would reset the EU's legal framework for semiconductor capacity and investment.",
+      "reader_more": "This is COM(2026) 504 final, adopted on 3 June 2026 under procedure 2026/0139 (COD). It proposes a regulation on a framework of measures for strengthening the Union's semiconductor ecosystem and would repeal Regulation (EU) 2023/1781, the original Chips Act. The explanatory memorandum sets out the context and objectives, and the file is accompanied by impact assessment documents SWD(2026) 504 and SWD(2026) 505. Repealing and replacing the existing regulation is a substantial legal step rather than an amendment. As an ordinary legislative procedure proposal it still requires agreement by the European Parliament and Council before anything takes effect.",
+      "deep_analysis": {
+        "work_kind": "EU legislative proposal",
+        "research_question": "",
+        "main_finding": "The Commission proposes a new semiconductor regulation that would repeal and replace the 2023 Chips Act.",
+        "method_or_basis": "Primary reading of the official COM document and its explanatory memorandum.",
+        "qualification": "A proposal at first reading; the repeal of Regulation (EU) 2023/1781 takes effect only if adopted.",
+        "radar_relevance": "Core European industrial capability instrument for semiconductors, central to technological sovereignty.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ec.europa.eu/newsroom/dae/redirection/document/129109",
+      "source_hash": "f27f120e",
+      "identity_hash": "fa3bacf02cf529c7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ec.europa.eu/newsroom/dae/redirection/document/129109 returned a 166 KB PDF; extraction shows SWD(2026) 505 final, Executive Summary of the Impact Assessment Report, Brussels 3.6.2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Commission staff working documents carry an SWD number, not a DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://ec.europa.eu/newsroom/dae/redirection/document/129109",
+            "title": "SWD(2026) 505 final - Executive Summary of the Impact Assessment Report accompanying the Chips Act 2.0 proposal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official PDF retrieved and read; document identity established from the document header itself, not the newsroom listing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The document is the official executive summary of the impact assessment accompanying the Chips Act 2.0 proposal, giving the Commission's problem definition and options."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "SWD(2026) 505 final - Commission Staff Working Document: Executive Summary of the Impact Assessment Report accompanying the proposal for a Chips Act 2.0",
+          "source": "European Commission",
+          "type": "EU impact assessment summary"
+        },
+        "unset": [],
+        "reason": "The scanner title was scraped listing furniture ('Download 6 - Summary of the Impact Assessment Download'). The retrieved document is SWD(2026) 505 final, the executive summary accompanying COM(2026) 504."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Impact assessment executive summary for the Chips Act 2.0 proposal",
+      "reader_what": "Summarises the problem definition, options and expected effects behind the proposed semiconductor regulation.",
+      "reader_why": "Shows the evidence the Commission used to justify replacing the 2023 Chips Act.",
+      "reader_more": "This Commission staff working document, SWD(2026) 505 final of 3 June 2026, is the executive summary of the impact assessment accompanying the Chips Act 2.0 proposal. It condenses the Commission's assessment of the problems with the current semiconductor framework, the policy options considered and their expected effects. It is staff analysis supporting a legislative proposal, not an independent evaluation, and summarises a much longer impact assessment report. Read with COM(2026) 504, it documents the reasoning for repealing and replacing Regulation (EU) 2023/1781.",
+      "deep_analysis": {
+        "work_kind": "EU impact assessment executive summary",
+        "research_question": "",
+        "main_finding": "Sets out the Commission's problem definition, options and expected effects for the Chips Act 2.0.",
+        "method_or_basis": "Primary reading of the official SWD executive summary document.",
+        "qualification": "Commission staff analysis accompanying a proposal; effects described are modelled expectations, not observed outcomes.",
+        "radar_relevance": "Documents the evidence base for the EU's main semiconductor capability instrument.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1515/bfp-2026-0030",
+      "source_hash": "2846f8f9",
+      "identity_hash": "72301c572d4d792d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "degruyterbrill.com/document/doi/10.1515/bfp-2026-0030/html returned a 2 KB JavaScript bot-verification interstitial with no article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref returned matching title, BIBLIOTHEK Forschung und Praxis, Walter de Gruyter, issued 2026-09-08, licence CC-BY, with an abstract on DARIAH-DE and European research infrastructures."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'Lost in Research Infrastructures' surfaced only BFuP volume 50 issue 2 listing pages, which show the issue contents but not this article's text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Searched Rissler-Pipka and Kurzawe with DARIAH; results returned other publications by the same authors and DARIAH-DE working paper lists, not this article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists GoeScholar (resolver.sub.uni-goettingen.de/purl?gro-2/180011) as a second location; that resolver returned HTTP 403. The publisher's own /pdf and /xml endpoints and www.degruyter.com returned zero-length bodies."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "api.fatcat.wiki returned HTTP 503; no other legitimate copy of this CC-BY article's full text was located."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Diamond open access on paper, but all retrieval routes blocked by bot protection; identity verified, content not assessable."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref, but De Gruyter serves a bot-verification interstitial on every endpoint and the Gottingen repository copy is inaccessible; substantive text unavailable."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/european-research-innovation-days-2026-will-take-place-on-10-11-november/",
+      "source_hash": "9594d6cc",
+      "identity_hash": "572f68e1779689b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 08 Sep 2026; complete text is an event announcement with a themes list and format description."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/european-research-innovation-days-2026-will-take-place-on-10-11-november/",
+            "title": "European Research & Innovation Days 2026 will take place on 10-11 November",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered; content confirmed to be an event announcement rather than a substantive development."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_EVENT_ANNOUNCEMENT",
+        "reason": "The page is an advance announcement of the European Research and Innovation Days conference with dates and a themes list; it reports no policy decision, funding instrument or evidence release."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Announcement of the European Research and Innovation Days 2026",
+      "reader_what": "The seventh edition will be held on 10 and 11 November 2026 in Brussels and online.",
+      "reader_why": "",
+      "reader_more": "This ERA Portal Austria item announces that the European Commission's flagship research and innovation event will take place on 10 and 11 November 2026 in Brussels and online. It lists the themes the edition will explore, including freedom of scientific research, research talent, R&D investment, technological leadership, research infrastructures and international cooperation, and describes the format of policy discussions, breakout sessions, award ceremonies and exchanges with EU Science Counsellors. Everything reported is forward-looking scheduling and agenda framing. No decision, instrument, programme change or evidence release is reported, which is why it does not meet the criteria despite matching Radar vocabulary closely.",
+      "deep_analysis": {
+        "work_kind": "event announcement",
+        "research_question": "",
+        "main_finding": "The 2026 edition of the European Research and Innovation Days is scheduled for 10-11 November in Brussels and online.",
+        "method_or_basis": "Full text of the official announcement page.",
+        "qualification": "Purely an advance event notice; the listed themes are agenda items, not findings or decisions.",
+        "radar_relevance": "Fails the criteria: an event announcement, not a substantive current development.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/",
+      "source_hash": "3da98fda",
+      "identity_hash": "c9cdfe1784ec1dde",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 27 May 2026, including the signing context and Horizon Europe participation figures."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/",
+            "title": "EU and Vietnam deepen cooperation in science, technology and innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered from the supplied URL and used as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a signed letter of intent between the Commission and Vietnam's Ministry of Science and Technology, with participation figures; a concrete step in EU international R&I cooperation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU and Vietnam sign a letter of intent on science, technology and innovation cooperation",
+      "reader_what": "Signed in Hanoi, it builds on the EU-Vietnam Comprehensive Strategic Partnership and targets researcher mobility and innovation partnerships.",
+      "reader_why": "Extends EU research cooperation into a fast-growing Southeast Asian partner.",
+      "reader_more": "The European Commission and Vietnam's Ministry of Science and Technology signed a letter of intent to strengthen cooperation in science, technology and innovation. It was signed in Hanoi during Commissioner Ekaterina Zaharieva's visit and builds on the newly established EU-Vietnam Comprehensive Strategic Partnership. The stated aims are to expand researcher mobility, encourage knowledge exchange, promote innovation partnerships and strengthen research-industry links between universities, startups, industry and public institutions. Vietnam already participates in Horizon Europe, with 32 recorded participations and 29 signed grants across digital, health and green innovation projects. A letter of intent signals commitment rather than binding obligations, so the cooperation described is intended rather than delivered.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The EU and Vietnam signed a letter of intent to deepen science, technology and innovation cooperation.",
+        "method_or_basis": "Official ERA Portal Austria news item reporting the signing and existing Horizon Europe participation figures.",
+        "qualification": "A letter of intent is not a binding agreement; the expanded cooperation is an intention, not an outcome.",
+        "radar_relevance": "Concrete development in the EU's international research and innovation cooperation architecture.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/experts-call-for-a-new-approach-to-neuro-ai-governance/",
+      "source_hash": "5ab20e49",
+      "identity_hash": "f3f01e592937819d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 08 Sep 2026, including the statement title and the EGE's recommendations."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/experts-call-for-a-new-approach-to-neuro-ai-governance/",
+            "title": "Experts call for a new approach to Neuro-AI governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered; the underlying EGE statement is identified by name and date within it."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports the release of a formal EGE Statement on governing neuro-AI, with its specific recommendations; an evidence and advice release by an official EU advisory body."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU ethics advisers call for infrastructure-based governance of neuro-AI",
+      "reader_what": "The EGE statement shifts focus from individual devices and neurodata privacy to the infrastructures processing neurodata.",
+      "reader_why": "Reframes what EU regulation of brain data would need to cover.",
+      "reader_more": "On 8 September 2026 the European Group on Ethics in Science and New Technologies released a statement titled 'Governing Neuro-AI: Towards an Infrastructure Approach'. It responds to the convergence of neurotechnology and artificial intelligence, where neurodata can be collected, combined and reused to build AI models across contexts. The EGE argues for a systemic and anticipatory approach, moving the regulatory focus from individual devices and neurodata privacy to the wider infrastructures through which neurodata are collected, processed and reused. Its recommendations include reinforcing protection for neurodata and neurodata-derived inferences under EU data protection law, governing the development of brain foundation models, and addressing European technological sovereignty and public-interest infrastructure. This is expert advice, not binding regulation.",
+      "deep_analysis": {
+        "work_kind": "official advisory statement",
+        "research_question": "",
+        "main_finding": "The EGE recommends governing neuro-AI at the level of infrastructures rather than individual devices or datasets.",
+        "method_or_basis": "Official ERA Portal item reporting the EGE statement, its framing and its named recommendations.",
+        "qualification": "Advisory opinion from an expert group; recommendations carry no legal force unless taken up by the Commission.",
+        "radar_relevance": "Direct European science and technology governance development concerning AI and neurotechnology.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/19475535261432944",
+      "source_hash": "1d1e4ce1",
+      "identity_hash": "35b917ed2ffd515b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1177/19475535261432944 redirected to journals.sagepub.com; HTTP 403 Forbidden."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref returned matching title, Biopreservation and Biobanking, SAGE, issued 2026-05-01, authors Viberg Johansson and Fredriksson; abstract retrieved."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'Implementing Sweden's Biobank Act (2023:38)' returned the SAGE landing page and PubMed record only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Europe PMC REST search on the DOI returned one record (PMID 42065331) confirming title, journal and 2026, with isOpenAccess set to N."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Europe PMC fullTextUrlList shows only a DOI link with availability 'Subscription required'; OpenAlex lists only SAGE and PubMed locations, both closed; OpenAIRE returned only uu.se and the SAGE TDM policy URL; a DiVA portal query returned HTTP 503."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "PubMed 42065331 provides the abstract only; no Uppsala or Karolinska repository deposit of the full text was located."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Closed access with no green route; identity fully verified but substantive content not legitimately obtainable."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref, PubMed and Europe PMC, but the article is closed access with no repository copy, so only the abstract is available."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://www.cea.fr:443/cea-tech/leti/english/Documents/Press/WOOP-Wooptix-NR-CEA-Leti-Installation.pdf",
+      "source_hash": "4d9fa689",
+      "identity_hash": "e84bfa605bec71a0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "cea.fr PDF retrieved (226 KB) and text extracted; dated Grenoble and Tenerife, June 29 2026, announcing the installation."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a corporate and institute press release."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cea.fr:443/cea-tech/leti/english/Documents/Press/WOOP-Wooptix-NR-CEA-Leti-Installation.pdf",
+            "title": "Wooptix Installs First Phemet Metrology System at CEA-Leti",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full press release PDF retrieved from CEA's own server and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Full press release confirms a first production deployment of Wooptix's Phemet metrology system at CEA-Leti in Grenoble, a concrete European semiconductor R&D capability development."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Wooptix / CEA-Leti joint press release"
+        },
+        "unset": [],
+        "reason": "The scanner attributed the work to CEA alone. The document is a jointly issued press release from Wooptix and CEA-Leti, datelined Grenoble and Tenerife, announcing a Wooptix product installation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Wooptix installs its first production Phemet metrology system at CEA-Leti",
+      "reader_what": "A Spanish company's wavefront phase imaging metrology tool enters production use at a French semiconductor research institute.",
+      "reader_why": "Links European metrology innovation to a leading EU semiconductor R&D ecosystem.",
+      "reader_more": "Wooptix announced on 29 June 2026 the installation of its Phemet wavefront phase imaging metrology system at CEA-Leti's Grenoble technology research site. The release describes this as Wooptix's first production deployment of the system and as the start of a long-term collaboration with one of the world's leading semiconductor research and development ecosystems. The technology concerns wavefront phase imaging metrology used in semiconductor manufacturing and characterisation. As a joint company and institute press release it is promotional in tone, and claims about future collaboration outcomes are forward-looking. The installation itself is a reported fact and represents European semiconductor equipment innovation being taken up within an EU research infrastructure.",
+      "deep_analysis": {
+        "work_kind": "industry and research institute press release",
+        "research_question": "",
+        "main_finding": "Wooptix deployed its first production Phemet metrology system at CEA-Leti in Grenoble.",
+        "method_or_basis": "Primary reading of the joint press release issued via CEA's own document server.",
+        "qualification": "A press release, so promotional framing and forward-looking collaboration claims should be discounted.",
+        "radar_relevance": "Concrete instance of European semiconductor metrology innovation entering a major EU R&D infrastructure.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/leru-publishes-proposal-for-a-framework-to-help-universities-navigate-defence-research/",
+      "source_hash": "8c3a7a31",
+      "identity_hash": "157f0fd155b5933d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 26 May 2026, naming the paper and describing its content."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/leru-publishes-proposal-for-a-framework-to-help-universities-navigate-defence-research/",
+            "title": "LERU publishes proposal for a framework to help universities navigate defence research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered; the underlying LERU paper is identified by title within it."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports LERU's publication of a conceptual framework on defence research in European universities, summarising its structure, its six tensions and its EU dimension; a real evidence release."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "LERU publishes a framework for universities navigating defence research",
+      "reader_what": "It identifies six structural tensions and maps five European traditions rather than prescribing a single position.",
+      "reader_why": "Gives universities shared vocabulary for decisions on defence and security research.",
+      "reader_more": "On 26 May 2026 the League of European Research Universities published 'Defence Research in European Universities: A Conceptual Framework'. The paper identifies six structural tensions where legitimate institutional values genuinely conflict and argues that existing governance frameworks, designed for an earlier era, are increasingly inadequate. It maps five distinctive European traditions, French, German, British and Dutch, Nordic, and neutral state, to explain why institutions in different legal and historical contexts will reasonably reach different conclusions. Rather than seeking agreement on outcomes, it offers shared vocabulary and analytical tools so each institution can articulate its own position. It also examines the EU dimension, including strategic autonomy frameworks, the European Defence Fund and the blurring of civilian and security research objectives.",
+      "deep_analysis": {
+        "work_kind": "policy framework publication reported by an official portal",
+        "research_question": "",
+        "main_finding": "LERU published a conceptual framework mapping six tensions and five national traditions in university defence research.",
+        "method_or_basis": "Full text of the ERA Portal item reporting the LERU publication and summarising its structure and claims.",
+        "qualification": "This record is the portal's report of the paper; the LERU paper itself was not retrieved, and the framework is deliberately non-prescriptive.",
+        "radar_relevance": "Directly addresses European research security, dual-use research governance and university research policy.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/00343404.2026.2688966",
+      "source_hash": "f07c08f2",
+      "identity_hash": "1e86727612ba7bfd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "tandfonline.com/doi/full/10.1080/00343404.2026.2688966 loaded, but the rendered page exposes only the abstract, acknowledgements and disclosure statement; the article body is behind the paywall."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref returned matching title, Regional Studies, Informa UK Limited, issued 2026-07-08, sole author David A. Wolfe; no abstract deposited in Crossref."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'Transformative innovation policy and collaborative governance in regions and cities' returned the Taylor and Francis landing page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searched Wolfe 2026 with the title and with 'Smart Specialisation' and 'civic capital'; no accessible author manuscript or working paper version was found."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex reports oa_status closed with a single Taylor and Francis location and any_repository_has_fulltext false; OpenAIRE DOI lookup returned no repository record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "The Crossref-declared TDM pdf endpoint was not accessible; api.fatcat.wiki returned HTTP 503; no legitimate alternate version located."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Closed access; abstract establishes topic but is explicitly insufficient evidence under the package rules."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref and the publisher landing page, but the article is closed access, the body is paywalled and no repository or manuscript copy exists."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://arxiv.org/abs/2606.03362",
+      "source_hash": "76860b8c",
+      "identity_hash": "5f239ae421a34c79",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "arxiv.org/abs/2606.03362 retrieved; listing confirms submission 2 Jun 2026, Computer Science - Digital Libraries, author Myroslava Hladchenko."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The arXiv listing carries no journal DOI; the arXiv identifier 2606.03362 serves as the persistent identifier."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full 20-page PDF from arxiv.org/pdf/2606.03362; author affiliation is the Centre for R&D Monitoring (ECOOM), University of Antwerp."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2606.03362",
+            "title": "Emerging and established topics in drone research: Citation impact and knowledge flows across China, the United States, the EU, Ukraine, and Russia (2020-2025)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full preprint text recovered from arXiv and read; identity and affiliation verified from the document itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full 20-page preprint recovered; a bibliometric study of drone research treating the EU, Ukraine and Russia substantively as part of a geopolitical analysis of scientific production and knowledge flows."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Myroslava Hladchenko (Centre for R&D Monitoring (ECOOM), University of Antwerp)"
+        },
+        "unset": [],
+        "reason": "The recovered full text gives the corresponding author's affiliation as the Centre for R&D Monitoring (ECOOM), University of Antwerp, which the scanner record omitted."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Geopolitical asymmetries in drone research output and citation flows, 2020 to 2025",
+      "reader_what": "China increasingly dominates production and domestic citation circulation while the US and EU keep more internationally distributed citation structures.",
+      "reader_why": "Shows where Europe stands in a research field with direct security relevance.",
+      "reader_more": "This preprint analyses emerging and established topics in drone research across China, the United States, the EU, Ukraine and Russia between 2020 and 2025, using OpenAlex bibliographic data. It finds growing geopolitical asymmetries in scientific production, citation concentration and international knowledge exchange, with China increasingly dominating output, fractional authorship contribution and domestic citation circulation while United States and EU publications retain more internationally distributed citation structures. At the same time, China-affiliated publications became more integrated into global citation networks, particularly through exchange with the US and European countries. The author notes that a high proportion of publications with unidentified affiliations complicates interpretation of authorship and citation patterns. This is a preprint and has not been through journal peer review.",
+      "deep_analysis": {
+        "work_kind": "bibliometric empirical study (preprint)",
+        "research_question": "How do citation impact and knowledge flows in drone research differ across China, the US, the EU, Ukraine and Russia from 2020 to 2025?",
+        "main_finding": "Drone research shows growing geopolitical asymmetry, with Chinese dominance in output and domestic citation circulation alongside deepening integration into global citation networks.",
+        "method_or_basis": "Bibliometric analysis of OpenAlex records for 2020-2025, covering production, fractional authorship, citation concentration and cross-country citation exchange.",
+        "qualification": "A non-peer-reviewed preprint; the author flags that many publications with unidentified affiliations complicate interpretation.",
+        "radar_relevance": "Measures European standing and knowledge flows in a strategically sensitive technology field, including Ukraine and Russia.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s13222-026-00543-x",
+      "source_hash": "8322f4e9",
+      "identity_hash": "fecc9da53e366cf2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s13222-026-00543-x resolved to link.springer.com; hybrid open access confirmed."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed Datenbank-Spektrum 26:113-128, Springer, published online 2026-07-22; downloaded the full 16-page published PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s13222-026-00543-x.pdf",
+            "title": "Bringing Clarity to the Smart City Definition Jungle: Toward an Integrative and a Data-Centric Conceptualization of Urban Systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full published PDF recovered and read; dates and pagination taken from the document itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Full text confirms a transferable conceptual contribution: an integrative definition and data-centric conceptualization of smart cities derived from synthesising 69 definitions and contrasting them with observed architectural patterns."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-22"
+        },
+        "unset": [],
+        "reason": "The recovered PDF states 'Received 17 February 2026 / Accepted 15 June 2026 / Published online 22 July 2026' and the article appears at 26:113-128. The scanner date of 2026-07-01 is not the publication date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "An integrative, data-centric way to define and model smart cities",
+      "reader_what": "Synthesising 69 definitions yields one integrative concept of the smart city as a learning cyber-socio-technical urban system.",
+      "reader_why": "Gives researchers a common conceptual basis instead of fragmented definitions.",
+      "reader_more": "The paper addresses two kinds of fragmentation in smart city research: conceptual disagreement about what a smart city is, and heterogeneity in how smart city architectures are actually built. It systematically synthesises 69 academic definitions and contrasts them with empirical architectural patterns observed in leading European and North American cities. From this it derives an integrative definition conceptualising the smart city as a learning, cyber-socio-technical urban system integrating digital infrastructures and data resources. The contribution is conceptual and architectural rather than empirical: it offers a transferable framework others can apply, not new measurements of any particular city. Its European content is incidental, since the cities studied are used as architectural evidence rather than as a policy subject.",
+      "deep_analysis": {
+        "work_kind": "conceptual synthesis and framework paper",
+        "research_question": "How can fragmented smart city definitions and heterogeneous architectures be reconciled into a coherent conceptualization?",
+        "main_finding": "A systematic synthesis of 69 definitions yields an integrative, data-centric conceptualization of the smart city as a learning cyber-socio-technical urban system.",
+        "method_or_basis": "Systematic synthesis of 69 published academic definitions contrasted against empirical architectural patterns in leading European and North American cities.",
+        "qualification": "The framework is derived and argued rather than empirically validated; the city sample is illustrative.",
+        "radar_relevance": "Qualifies under reusable methods as a transferable analytical framework; its European element is illustrative rather than substantive.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/clarifying-and-optimising-civil-dual-use-and-defence-research-and-innovation-in-future-eu-funding-programmes/",
+      "source_hash": "d333fdf7",
+      "identity_hash": "1ec8bd0d4565276c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "cesaer.org publication page returned only a cookie-consent shell (JavaScript-rendered); title and description confirmed from the page's own title and og:description metadata, but no document text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The Zenodo deposit carries DOI 10.5281/zenodo.19236400, matching the title exactly."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Located CESAER's Zenodo deposit 19236400 via the Zenodo API and downloaded '20260326_CESAER input note dual-use.pdf' (7 pages, 21,025 characters of text)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://zenodo.org/records/19236400",
+            "title": "Clarifying and optimising civil, dual-use and defence research and innovation in future EU funding programmes (CESAER input note)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page was JavaScript-only; the authoritative document was recovered from CESAER's own Zenodo deposit at ladder step 5."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full seven-page input note recovered from CESAER's Zenodo deposit; it makes concrete proposals on positioning civil, dual-use and defence R&I in future EU funding programmes."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-03-26"
+        },
+        "unset": [],
+        "reason": "The Zenodo deposit records a publication date of 2026-03-26 and the PDF filename is dated 20260326; CESAER's own page describes it as published on 26 March. The scanner date of 2026-06-10 is a crawl artefact."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CESAER proposals on civil, dual-use and defence research in future EU funding",
+      "reader_what": "The note sets out concrete proposals for clarifying how civil, dual-use and defence R&I are positioned in EU programmes.",
+      "reader_why": "Shapes how universities can participate in EU defence-adjacent research funding.",
+      "reader_more": "CESAER, the association of European universities of science and technology, published this input note on 26 March 2026 as a contribution to the design of the EU's next generation of research and innovation funding programmes. It addresses the increasingly blurred boundary between civil, dual-use and defence research and puts forward concrete proposals for clarifying and optimising how each is positioned within future EU funding instruments. The note reflects the institutional position of its member universities rather than independent empirical research, and its proposals are advocacy directed at EU programme design. It is a short document, seven pages, and should be read as a stakeholder input to a live policy process.",
+      "deep_analysis": {
+        "work_kind": "stakeholder position and input note",
+        "research_question": "",
+        "main_finding": "CESAER proposes clarifying how civil, dual-use and defence research and innovation are positioned in future EU funding programmes.",
+        "method_or_basis": "Primary reading of the full seven-page input note from CESAER's own Zenodo deposit.",
+        "qualification": "An advocacy position from a university association, not independent analysis; proposals are inputs to a programme still being designed.",
+        "radar_relevance": "Directly addresses European research policy, dual-use research governance and EU funding programme design.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security/",
+      "source_hash": "52a247fc",
+      "identity_hash": "09386991ff2d0f60",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "aka.fi guidance page retrieved in full (HTTP 200); complete text of the research security appendix requirement recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a funder's application guidance page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_guidance_page",
+            "url": "https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security/",
+            "title": "Self-assessment of research security - Research Council of Finland application guidelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full guidance text recovered from the funder's own site and used as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full guidance page recovered; it sets out a binding research security requirement in a European national funder's application process, with admissibility consequences."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland requires a research security self-assessment in every research funding application",
+      "reader_what": "Applications must include a research security appendix; inadequate risk assessment can make an application inadmissible or rejected.",
+      "reader_why": "Turns research security from guidance into a funding eligibility condition.",
+      "reader_more": "The Research Council of Finland requires every application to include a research security appendix containing a self-assessment, a description of risk factors and, where necessary, a risk management plan, prepared on a set template. Identifying and assessing research security risks and presenting an adequate management plan at application stage are prerequisites for funding, and insufficient identification or assessment may render an application inadmissible or lead to rejection. The appendix is not peer reviewed but is available to reviewers as part of the application, and for consortia it is submitted by the consortium principal investigator. It can be completed in Finnish, Swedish or English. This is operational funder policy rather than a study or a new announcement.",
+      "deep_analysis": {
+        "work_kind": "national research funder policy instrument",
+        "research_question": "",
+        "main_finding": "A research security self-assessment appendix is a mandatory, admissibility-relevant part of every Research Council of Finland application.",
+        "method_or_basis": "Primary reading of the funder's own application guidance page in full.",
+        "qualification": "Standing operational guidance rather than a newly announced decision; no evidence here on how the requirement performs in practice.",
+        "radar_relevance": "Concrete implementation of research security policy by a European national research funder.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/report-research-careers-a-critical-choice-for-europe/",
+      "source_hash": "ba2f7614",
+      "identity_hash": "97a0996ceb15c021",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "cesaer.org publication page returned only a cookie-consent shell; title and description confirmed from page title and og:description, but no report text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "CESAER's Zenodo deposit for this report carries DOI 10.5281/zenodo.14357267, matching the title."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full report PDF from CESAER's own content server at cesaer.org/content/5-operations/2024/20241211-research-careers-report/20241211-cesaer-research-careers-report.pdf (102 pages, 232,144 characters)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cesaer.org/content/5-operations/2024/20241211-research-careers-report/20241211-cesaer-research-careers-report.pdf",
+            "title": "Research careers: A critical choice for Europe - Results, insights and recommendations from CESAER Research Careers Survey 2024",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page was JavaScript-only; the full report was recovered from CESAER's own content server at ladder step 5 and read directly."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full 102-page report recovered; it presents survey evidence from 24 European universities with analysis and recommendations on research careers and brain circulation in Europe."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-12-11",
+          "authors": "Manuel Heitor, Sophie Ratcliff, Mattias Bjoernmalm, Tanya Bondarouk, Vincent Klein Ikkink (CESAER)"
+        },
+        "unset": [],
+        "reason": "The report's own cover states 11 December 2024 and CESAER, the Horizon Europe portal and the University of Twente research portal all record that release date and this author list. The scanner date of 2026-03-17 is a crawl artefact, not a publication date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CESAER survey report on research careers and brain drain in Europe",
+      "reader_what": "Survey evidence from 24 universities underpins a call for EU action on research career stability and a Choose Europe pilot.",
+      "reader_why": "Frames research career conditions as the lever for reversing net talent outflow from Europe.",
+      "reader_more": "This CESAER report, released on 11 December 2024, presents results, insights and recommendations from its 2024 research careers survey. It combines data from 24 universities of science and technology with expert assessment, landscape analysis and detailed case studies. The report finds growth across researcher categories between 2019 and 2024 but stresses that institutional data do not capture the researcher's own perspective, citing evidence that postdoctoral researchers face short-term contracts, job insecurity and mental health strain. It argues the European Commission must lead in creating conditions for research excellence, and it proposes a Choose Europe initiative, calling for it to be launched as a pilot under the Marie Sklodowska-Curie Actions. The survey reflects institutional responses from a self-selected association membership.",
+      "deep_analysis": {
+        "work_kind": "survey-based association report with recommendations",
+        "research_question": "What do European universities of science and technology report about research career structures, and what should the EU do?",
+        "main_finding": "Research careers in Europe remain unstable enough to drive net talent outflow, and the report proposes a Choose Europe pilot under MSCA as a response.",
+        "method_or_basis": "Survey of 24 CESAER member universities for 2024, combined with expert assessment, landscape analysis and institutional case studies.",
+        "qualification": "Institutional rather than researcher-level responses, from a self-selected association membership; recommendations are advocacy, not evaluated policy.",
+        "radar_relevance": "Central European research-policy evidence on research careers, talent retention and brain circulation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://fiia.fi/en/tapahtumat/strategic-thinking-under-stress-devising-strategy-in-the-evolving-security-landscape",
+      "source_hash": "960fef31",
+      "identity_hash": "3aed840e10ccd8a8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "fiia.fi event page retrieved in full (HTTP 200); the complete text is a seminar framing and panel description under the site's events (tapahtumat) section."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an institute event page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_event_page",
+            "url": "https://fiia.fi/en/tapahtumat/strategic-thinking-under-stress-devising-strategy-in-the-evolving-security-landscape",
+            "title": "Strategic thinking under stress: Devising strategy in the evolving security landscape",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full page text recovered and read; confirmed to be an event announcement, not a publication."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_EVENT_PAGE",
+        "reason": "The page is a seminar listing for a FIIA panel discussion; it announces an event rather than reporting a decision, instrument or evidence release, and its subject is security strategy rather than research and innovation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "FIIA seminar on European strategy revision in a changed security landscape",
+      "reader_what": "A panel discussion on how the EU and national governments are revising security and defence strategies.",
+      "reader_why": "",
+      "reader_more": "This is an event page from the Finnish Institute of International Affairs for a seminar on strategic thinking under stress. The framing text notes that Russia's war against Ukraine, uncertainty in transatlantic relations and intensifying strategic competition have disrupted the European security order, and that the EU is revising its security strategy while national governments reconsider theirs. The seminar asks how strategy documents can be renewed under uncertainty and what role such processes play in shaping strategic cultures. It is held alongside the final conference of the STRAX project funded by the Research Council of Finland. The page announces a panel discussion; it contains no findings, decision or evidence release, and its subject is security strategy rather than research and innovation.",
+      "deep_analysis": {
+        "work_kind": "seminar announcement",
+        "research_question": "",
+        "main_finding": "A panel discussion was convened on European security strategy revision processes.",
+        "method_or_basis": "Full text of the institute's own event page.",
+        "qualification": "An event listing only, with no reported outcomes; the associated STRAX project findings are not presented here.",
+        "radar_relevance": "Fails the criteria on two counts: an event page, and a security-strategy topic without a substantive research and innovation connection.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://commission.europa.eu/topics/research-and-innovation/choose-europe_en",
+      "source_hash": "74a7aaf7",
+      "identity_hash": "670b1fd2334720d3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "commission.europa.eu Choose Europe page retrieved in full (HTTP 200); the text is promotional copy plus a list of open funding calls and recruitment routes."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a Commission topic landing page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_landing_page",
+            "url": "https://commission.europa.eu/topics/research-and-innovation/choose-europe_en",
+            "title": "Choose Europe: advance your research career in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full page text recovered and read; content confirmed to be navigational and promotional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_PROMOTIONAL_LANDING_PAGE",
+        "reason": "The page is a promotional recruitment landing page for the Choose Europe initiative, listing open calls and job routes; it reports no new decision, instrument or evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission landing page promoting research careers in the EU",
+      "reader_what": "Promotional copy with links to MSCA, ERC and Doctoral Network calls and open positions.",
+      "reader_why": "",
+      "reader_more": "This European Commission topic page promotes the EU as a destination for researchers under the Choose Europe banner. It describes the EU as offering stable and predictable funding, cutting-edge facilities and freedom of science, and then lists funding opportunities with their windows, including MSCA Postdoctoral Fellowships, the ERC Advanced Grant and ERC Plus Grants, alongside routes into EU-funded projects and Doctoral Networks. The page is a navigation and recruitment hub that aggregates existing instruments. It does not announce a new policy decision, a new funding instrument, a programme change or an evidence release, which is what the criteria require of an otherwise generic institutional page. Choose Europe as an initiative is real, but this particular page does not report a development.",
+      "deep_analysis": {
+        "work_kind": "institutional promotional landing page",
+        "research_question": "",
+        "main_finding": "The page aggregates existing EU research funding calls and recruitment routes under a promotional banner.",
+        "method_or_basis": "Full text of the Commission's own topic page.",
+        "qualification": "Navigational and promotional content; the calls listed are pre-existing instruments, not new announcements.",
+        "radar_relevance": "Fails the criteria as a generic promotional and navigation page despite dense research-policy vocabulary.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/international-coalition-science-research-and-innovation-ukraine/highlights/ukraine-bets-research-talent-and-thriving-startup-sector_en",
+      "source_hash": "b3c7e465",
+      "identity_hash": "abaff4e1e3f0fcef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "research-and-innovation.ec.europa.eu highlight page retrieved in full (HTTP 200); complete text including the researcher-emigration figure and the new national scheme recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a Commission highlight article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/association-horizon-europe/international-coalition-science-research-and-innovation-ukraine/highlights/ukraine-bets-research-talent-and-thriving-startup-sector_en",
+            "title": "Ukraine bets on research talent and a thriving startup sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article text recovered from the Commission's own site and used as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports concrete Ukrainian measures, including the National System of Researchers with transparent rankings and monthly scholarships, within the Horizon Europe association and international coalition context."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Ukraine launches a national researcher ranking and scholarship system to retain scientific talent",
+      "reader_what": "A National System of Researchers awards monthly scholarships based on transparent assessment of research quality and impact.",
+      "reader_why": "Targets wartime talent loss in a country associated to Horizon Europe.",
+      "reader_more": "This Commission highlight reports how Ukraine is trying to retain researchers and build a startup ecosystem while at war. It notes that Ukraine has long ranked among Europe's lowest for researchers per thousand employed, a gap worsened by the war, which forced roughly 12 percent of scientists to emigrate or relocate internally. In response the Ministry of Education and Science, a member of the International Coalition for Science, Research and Innovation in Ukraine, launched a National System of Researchers introducing transparent rankings and monthly scholarships for the most productive scientists. Assessment covers research quality and impact, international collaboration, mentoring, science communication and expert contributions. The article is an official communication about a partner country's measures; no independent evaluation of their effect is presented.",
+      "deep_analysis": {
+        "work_kind": "current development reported by an official source",
+        "research_question": "",
+        "main_finding": "Ukraine introduced a National System of Researchers with transparent rankings and monthly scholarships to retain scientific talent.",
+        "method_or_basis": "Full text of the European Commission's own highlight article within the Horizon Europe association pages.",
+        "qualification": "Official communication rather than independent evaluation; the retention effect of the scheme is not yet evidenced.",
+        "radar_relevance": "Concerns research talent policy in a Horizon Europe associated country and the EU-backed international coalition supporting it.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o",
+      "source_hash": "0c3d173c",
+      "identity_hash": "1ba556fc69e6a639",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o rendered; it gives the title, authors Vera Demberg and Frank Keller, type 'Conference', year 2007 and a Semantic Scholar paper id, but carries no abstract or full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is present on the ELLIS record and none was found in any index consulted."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search returned citation stubs only; the closely related and widely cited work is Demberg and Keller (2008), 'Data from eye-tracking corpora as evidence for theories of syntactic processing complexity', Cognition 109(2):193-210, which is a different title."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searches for Demberg and Keller 2007 return 'Eye-tracking Evidence for Integration Cost Effects in Corpus Data' (Proceedings of the 29th Annual Conference of the Cognitive Science Society, 947-952), not the claimed title."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Frank Keller's complete Edinburgh publication list at homepages.inf.ed.ac.uk/keller/papers/ was retrieved and searched; it contains no entry under this exact title and no matching 2007 proceedings paper."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "The Semantic Scholar graph API for paper a109eb61dcf482ce119b1794c56aea6ae1d4d32b returned HTTP 429 on six attempts across two sessions; venue and full text remain unresolved."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity partially anchored by the ELLIS record and a Semantic Scholar identifier, but no retrievable publication or text; a human check should confirm the venue."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The ELLIS listing confirms a work by Demberg and Keller under this exact title, but no venue, proceedings entry or full text could be located after the complete ladder."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2022-experimental-standards-for-deep-learning-research-a-natural-language-p",
+      "source_hash": "04da53de",
+      "identity_hash": "91d21d7f481b9d33",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "ellis.eu publication page rendered, giving title, the seven-author list and year 2022, but no abstract or full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Semantic Scholar resolved the ELLIS paper id to arXiv:2204.06251 (DOI 10.48550/arXiv.2204.06251); OpenAlex additionally links the published version, DOI 10.18653/v1/2022.findings-emnlp.196."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full published version from the ACL Anthology at aclanthology.org/2022.findings-emnlp.196.pdf (20 pages, 85,485 characters)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://aclanthology.org/2022.findings-emnlp.196.pdf",
+            "title": "Experimental Standards for Deep Learning in Natural Language Processing Research (Findings of the Association for Computational Linguistics: EMNLP 2022)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "ELLIS page is a bibliographic stub; the work itself was recovered in full from the ACL Anthology at ladder step 5 and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Full 20-page paper recovered; it distils experimental standards for deep learning research into a single widely applicable methodology, a genuine reusable methodological contribution."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Dennis Ulmer, Elisa Bassignana, Max Mueller-Eberstein, Daniel Varab, Mike Zhang, Rob van der Goot, Christian Hardmeier, Barbara Plank",
+          "source": "Findings of the Association for Computational Linguistics: EMNLP 2022 (preprint arXiv:2204.06251)",
+          "date": "2022-12-01",
+          "type": "peer-reviewed conference paper"
+        },
+        "unset": [],
+        "reason": "The scanner recorded the authors as 'ELLIS Network', the source as 'ELLIS Network' and the date as 2026-05-19, which is the crawl date of the ELLIS listing page. The recovered paper is by Ulmer and seven co-authors at the IT University of Copenhagen and LMU Munich, published in Findings of EMNLP 2022 (arXiv preprint April 2022)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A single methodology for experimental standards in deep learning and NLP research",
+      "reader_what": "The authors distil scattered debates on experimental practice into one widely applicable methodology covering data, models and analysis.",
+      "reader_why": "Better experimental standards strengthen evidence and reproducibility across the field.",
+      "reader_more": "This paper responds to the absence of common experimental standards in deep learning, particularly in natural language processing, compared with more established disciplines. Starting from fundamental scientific principles, the authors distil ongoing community discussions into a single, widely applicable methodology spanning hypothesis, data, model, analysis, evidence and publication. They argue that following these practices is necessary to strengthen experimental evidence, improve reproducibility and support scientific progress. The standards are additionally maintained in a public repository so they can be adapted transparently as the field changes. The contribution is normative and methodological rather than empirical: the paper does not measure whether adoption improves outcomes, and adherence depends entirely on community uptake.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed methodological standards paper",
+        "research_question": "What common experimental standards should deep learning and NLP research follow?",
+        "main_finding": "The authors consolidate fragmented practice into one applicable methodology for experimental design, analysis and reporting in deep learning research.",
+        "method_or_basis": "Derivation from fundamental scientific principles combined with synthesis of existing community discussions on experimental practice, maintained in a public repository.",
+        "qualification": "Normative guidance rather than empirical validation; its effect depends on voluntary adoption.",
+        "radar_relevance": "Qualifies as a reusable method: a transferable evaluation and experimental-design framework, geography-independent by design.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://cset.georgetown.edu/wp-content/uploads/CSET-Strengthening-the-U.S.-Semiconductor-Manufacturing-Workforce.pdf",
+      "source_hash": "53a0834e",
+      "identity_hash": "0ee116810262703e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "cset.georgetown.edu PDF retrieved (1.3 MB) and text extracted; confirmed as a CSET Issue Brief by Jack Karsten and Luke Koslosky, September 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "CSET issue briefs do not carry DOIs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://cset.georgetown.edu/wp-content/uploads/CSET-Strengthening-the-U.S.-Semiconductor-Manufacturing-Workforce.pdf",
+            "title": "Strengthening the U.S. Semiconductor Manufacturing Workforce (CSET Issue Brief)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full report text recovered and read; the executive summary and scope confirm an exclusively US domestic focus."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_EU_RELEVANCE",
+        "reason": "Full report recovered; it is a United States domestic workforce policy analysis for US semiconductor manufacturing with no substantive European research, innovation or industrial-capability content."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "US think tank report on strengthening the American semiconductor manufacturing workforce",
+      "reader_what": "It examines workforce constraints on the US effort to rebuild domestic leading-edge semiconductor production.",
+      "reader_why": "",
+      "reader_more": "This CSET issue brief, published in September 2026 by Jack Karsten and Luke Koslosky, examines the workforce dimension of the United States' attempt to rebuild a larger share of domestic leading-edge semiconductor production. The stated purpose is to address geographic concentration risk and improve supply chain resilience, and the analysis concerns American training pipelines, labour supply and manufacturing capacity. The subject matter overlaps with European semiconductor policy themes, and semiconductors are a Radar-relevant technology, but the report itself is about US domestic policy. Europe is not a subject of analysis, and the criteria explicitly exclude works that qualify only because a topic resembles a European concern or because the EU appears as passing context.",
+      "deep_analysis": {
+        "work_kind": "think tank policy report",
+        "research_question": "How can the United States strengthen the workforce needed for domestic semiconductor manufacturing?",
+        "main_finding": "US efforts to rebuild leading-edge domestic semiconductor production face workforce constraints that require targeted policy responses.",
+        "method_or_basis": "Policy analysis of US semiconductor manufacturing capacity and labour supply, drawing on domestic programme and industry evidence.",
+        "qualification": "Entirely US-focused; findings are not transferable claims about European capability.",
+        "radar_relevance": "Fails the European relevance requirement: no substantive European research, innovation or industrial-capability connection.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ecfr.eu/publication/the-future-is-fermented-how-europe-can-succeed-in-the-next-industrial-race/",
+      "source_hash": "2672255c",
+      "identity_hash": "7b5fbccf908c5fb7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ecfr.eu publication page retrieved in full (HTTP 200); approximately 44,000 characters of report text recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "ECFR publications do not carry DOIs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/publication/the-future-is-fermented-how-europe-can-succeed-in-the-next-industrial-race/",
+            "title": "The future is fermented: How Europe can succeed in the next industrial race",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full publication text recovered from ECFR's own site and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full report recovered; a substantive European industrial and technology policy analysis arguing how Europe should compete in biomanufacturing against China."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How Europe can compete in biomanufacturing, the next industrial race",
+      "reader_what": "Europe retains the science to compete in biomanufacturing but must act quickly as China moves ahead.",
+      "reader_why": "Biomanufacturing could displace fossil-based production across food, fuels, chemicals and materials.",
+      "reader_more": "This ECFR report argues that the next industrial transition will be built with microbes as much as machines. Biomanufacturing uses biological processes to produce food, fuels, chemicals and materials that currently depend on fossil resources. The underlying science is long established, but the report contends that advances in artificial intelligence and falling renewable energy costs are turning biomanufacturing from a niche climate technology into a serious industrial proposition. It argues China has grasped this and is moving decisively, while Europe still holds the scientific base to compete but risks losing the window through slow action. The analysis is a strategic argument by a think tank rather than empirical measurement, and its claims about competitive outcomes are projections.",
+      "deep_analysis": {
+        "work_kind": "think tank strategic policy report",
+        "research_question": "How can Europe secure a competitive position in biomanufacturing?",
+        "main_finding": "Europe retains the scientific base to compete in biomanufacturing but is losing ground to China and must act quickly.",
+        "method_or_basis": "Policy analysis drawing on the state of biomanufacturing science, AI and energy cost trends, and comparative assessment of Chinese and European positioning.",
+        "qualification": "Advocacy analysis rather than empirical study; competitive projections are argued, not measured.",
+        "radar_relevance": "Directly concerns European industrial capability, technology strategy and the translation of European science into industry.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eit.europa.eu/sites/default/files/2025-10/EIT%20RIS%20Report%202024_kor2C_FINAL.pdf",
+      "source_hash": "1a53597e",
+      "identity_hash": "a174998163fcd836",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "eit.europa.eu PDF retrieved (8.4 MB) and text extracted; the document's own cover and contents identify it as the EIT Regional Innovation Scheme Activity Report 2024."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "EIT activity reports do not carry DOIs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.eit.europa.eu/sites/default/files/2025-10/EIT%20RIS%20Report%202024_kor2C_FINAL.pdf",
+            "title": "EIT Regional Innovation Scheme Activity Report 2024",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official PDF retrieved from the EIT's own server and read; title and reporting year taken from the document itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full report recovered; it documents the activity, results and decade-long impact of the EIT Regional Innovation Scheme, an EU instrument for closing the European innovation divide."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "EIT Regional Innovation Scheme Activity Report 2024",
+          "date": "2025-10"
+        },
+        "unset": [],
+        "reason": "The PDF's own cover and running headers read 'EIT Regional Innovation Scheme Activity Report 2024'; the scanner used a chapter heading as the title. The file is published under the EIT's own /sites/default/files/2025-10/ path, so October 2025 is the publication month, not the scanner's 2026-05-26 crawl date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EIT Regional Innovation Scheme activity report for 2024",
+      "reader_what": "It reports EIT RIS results and impact in 2024 and across the decade from 2014 to 2024.",
+      "reader_why": "Tracks whether an EU instrument is narrowing the innovation gap between regions.",
+      "reader_more": "This is the European Institute of Innovation and Technology's activity report for its Regional Innovation Scheme covering 2024. The Regional Innovation Scheme is the EIT's instrument for extending innovation support into countries and regions that perform less strongly on European innovation measures, described in the report as closing the innovation divide in Europe. The report sets out 2024 results and impact in the RIS area and places them against a decade of activity from 2014 to 2024. As an institutional activity report it presents the programme's own performance account, so figures are self-reported programme outputs rather than independent evaluation, and attribution of regional innovation change to the scheme is not established here.",
+      "deep_analysis": {
+        "work_kind": "EU agency activity report",
+        "research_question": "",
+        "main_finding": "The report documents EIT Regional Innovation Scheme activity, results and impact for 2024 and over the 2014-2024 decade.",
+        "method_or_basis": "Primary reading of the official EIT activity report PDF.",
+        "qualification": "Self-reported programme performance; outputs are not independently evaluated and causal attribution is not demonstrated.",
+        "radar_relevance": "Documents an EU innovation instrument aimed explicitly at the European innovation divide.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/shaping-science-diplomacy-perspectives-of-universities-of-science-and-technology/",
+      "source_hash": "60e87ae3",
+      "identity_hash": "75c8d1ab8bb16eaf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "cesaer.org publication page returned only a cookie-consent shell; title and description confirmed from page metadata but no document text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "CESAER's own hosted position PDF carries no DOI; the parallel Zenodo deposit is record 11914253."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full position from cesaer.org/content/5-operations/2024/20240618-science-diplomacy/20240618-cesaer-position-on-science-diplomacy.pdf (4 pages); its first line reads 'Position dated 18 June 2024'."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cesaer.org/content/5-operations/2024/20240618-science-diplomacy/20240618-cesaer-position-on-science-diplomacy.pdf",
+            "title": "Shaping science diplomacy: Perspectives of universities of science & technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page was JavaScript-only; the position paper was recovered from CESAER's own content server at ladder step 5 and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full position paper recovered; it sets out university recommendations across three areas of science diplomacy as input to the Commission's European framework."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-06-18"
+        },
+        "unset": [],
+        "reason": "The recovered PDF states 'Position dated 18 June 2024' on its first page, and the CESAER Zenodo deposit 11914253 records the same publication date. The scanner date of 2026-03-17 is a crawl artefact."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CESAER position on a European framework for science diplomacy",
+      "reader_what": "It recommends action in three areas: science in diplomacy, science for diplomacy, and diplomacy for science.",
+      "reader_why": "Shapes how universities feed scientific expertise into EU foreign policy.",
+      "reader_more": "CESAER published this position on 18 June 2024 as the European Commission was drafting a European framework for science diplomacy. The paper welcomes the coordination effort and argues that science diplomacy means both mobilising state-of-the-art scientific knowledge to inform policymaking, including foreign policy, and fostering transnational collaboration on global challenges. It identifies three areas needing attention: integrating scientific and technological knowledge for evidence-based policy, safeguarding science as an independent bridge-builder for global collaboration, and boosting international scientific cooperation. It links these to research security and institutional autonomy under geopolitical pressure. The document is a four-page association position representing member universities, so its recommendations are advocacy rather than independent analysis.",
+      "deep_analysis": {
+        "work_kind": "stakeholder position paper",
+        "research_question": "",
+        "main_finding": "CESAER recommends EU action across science in diplomacy, science for diplomacy and diplomacy for science.",
+        "method_or_basis": "Primary reading of the full four-page position paper from CESAER's own content server.",
+        "qualification": "An association advocacy position, not independent research; it responds to a framework that was still being drafted.",
+        "radar_relevance": "Directly addresses European science diplomacy, international research cooperation and research security policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/joint-statement-call-for-widely-spread-horizon-europe-call-deadlines-respecting-era-engagements-towards-research-managers/",
+      "source_hash": "0a75cfe2",
+      "identity_hash": "bd9013e0726296d8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "cesaer.org publication page returned only a cookie-consent shell with no statement text and no og:description."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The joint statement carries no DOI on either co-publisher's site."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search located the co-publisher's page for the same joint statement at the-guild.eu."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved the full statement text from co-publisher The Guild at the-guild.eu/news-and-blog/news/2025/call-for-widely-spread-horizon-europe-call-deadlin.html, which dates the joint release to 10 June 2025."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "copublisher_full_text",
+            "url": "https://www.the-guild.eu/news-and-blog/news/2025/call-for-widely-spread-horizon-europe-call-deadlin.html",
+            "title": "Call for widely spread Horizon Europe call deadlines respecting ERA engagements towards research managers (CESAER and The Guild joint statement)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "CESAER's own page was JavaScript-only; the identical joint statement was recovered in full from co-publisher The Guild at ladder step 5."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full joint statement text recovered from co-publisher The Guild; it makes a specific request to the Commission and Member States on Horizon Europe call deadline scheduling and its effect on research management capacity."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-06-10",
+          "source": "CESAER and The Guild (joint statement)"
+        },
+        "unset": [],
+        "reason": "The statement was jointly released by CESAER and The Guild, and the co-publisher's page dates it to 10 June 2025 and refers to the 2025 Horizon Europe call deadlines. The scanner date of 2026-03-17 is a crawl artefact and the single-organisation attribution is incomplete."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Universities ask the EU to spread Horizon Europe call deadlines more evenly",
+      "reader_what": "Deadlines clustered in September strain research support offices and risk favouring institutions with large teams.",
+      "reader_why": "Compressed deadlines can undercut the programme's own excellence principle.",
+      "reader_more": "CESAER and The Guild member universities jointly called on the European Commission and Member States to ensure widely spread and predictable call deadlines under the research and innovation framework programmes. The statement notes that 2025 Horizon Europe deadlines clustered in September because the work programme was finalised late and policy priorities shifted, placing undue strain on research managers. It argues that good proposals depend on sustained collaboration between researchers and skilled research managers, which requires a manageable workload across the year, and that compressed timelines force research support offices to scale back services. It warns that a single deadline for most proposals risks privileging institutions with large support offices over smaller ones, cutting against the excellence principle. It asks for piloted adjustments to deadline timing.",
+      "deep_analysis": {
+        "work_kind": "joint stakeholder statement",
+        "research_question": "",
+        "main_finding": "Clustered Horizon Europe call deadlines strain research management capacity and risk disadvantaging smaller institutions.",
+        "method_or_basis": "Primary reading of the full joint statement as published by co-signatory The Guild.",
+        "qualification": "An advocacy statement; the claimed effects on proposal quality and institutional equity are argued from practitioner experience, not measured.",
+        "radar_relevance": "Concerns European research programme administration, research management as a profession and ERA commitments.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://international-partnerships.ec.europa.eu/policies/programming/programmes/acp-eu-research-and-innovation-programme_en",
+      "source_hash": "f397c3a6",
+      "identity_hash": "ea2e9580550dd7ff",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "international-partnerships.ec.europa.eu programme page retrieved in full (HTTP 200); text is an overview with key information, budget and objectives."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a Commission programme page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_programme_page",
+            "url": "https://international-partnerships.ec.europa.eu/policies/programming/programmes/acp-eu-research-and-innovation-programme_en",
+            "title": "ACP-EU Research and Innovation Programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full page text recovered and read; content confirmed as a standing programme description."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_GENERIC_PROGRAMME_PAGE",
+        "reason": "The page is a standing programme description for the ACP-EU R&I capacity programme; it reports no new decision or development, and the programme's substantive focus is capacity building in ACP countries."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commission page describing the ACP-EU research and innovation capacity programme",
+      "reader_what": "A 60 million euro programme led by OACPS and funded by the 11th European Development Fund, running 2020 to 2026.",
+      "reader_why": "",
+      "reader_more": "This Commission page describes the ACP-EU Programme to Strengthen Research and Innovation Capacity in ACP Countries, a EUR 60 million initiative led by the Organisation of African, Caribbean and Pacific States and funded by the 11th European Development Fund. It runs from 2020 to 2026 across West, Central, East and Southern Africa, the Caribbean and the Pacific, and supports public and private actors in strengthening research and innovation ecosystems in support of the 2030 Agenda. The page is a standing programme description rather than a report of a new decision, instrument or evidence release. Its substantive object is research capacity in ACP countries, with the EU acting as funder, which is not itself substantive European research and innovation evidence.",
+      "deep_analysis": {
+        "work_kind": "institutional programme description page",
+        "research_question": "",
+        "main_finding": "The page describes an EU-funded 60 million euro programme strengthening research and innovation capacity in ACP countries.",
+        "method_or_basis": "Full text of the Commission's own programme page.",
+        "qualification": "A standing descriptive page with no new development reported; no results or evaluation of the programme are presented.",
+        "radar_relevance": "Fails the criteria as a generic programme page, and its substantive focus is ACP rather than European research capacity.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.eit.europa.eu/sites/default/files/2025-03/EIT%20Future%20Vision%20Paper%202025-2.pdf",
+      "source_hash": "e30f2e09",
+      "identity_hash": "fe4a420dc6111305",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "eit.europa.eu PDF retrieved (1.5 MB) and text extracted; the document opens 'EIT GOVERNING BOARD VISION FOR A COMPETITIVE EUROPE: LEVERAGING EUROPE'S LARGEST INNOVATION ECOSYSTEM'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "EIT vision papers do not carry DOIs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.eit.europa.eu/sites/default/files/2025-03/EIT%20Future%20Vision%20Paper%202025-2.pdf",
+            "title": "EIT Governing Board Vision for a Competitive Europe: Leveraging Europe's Largest Innovation Ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official PDF retrieved from the EIT's own server and read; the scanner's title was demonstrably the wrong document label."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full document recovered; it is the EIT Governing Board's vision paper arguing how Europe's largest innovation ecosystem should be leveraged for competitiveness."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "EIT Governing Board Vision for a Competitive Europe: Leveraging Europe's Largest Innovation Ecosystem",
+          "date": "2025-03"
+        },
+        "unset": [],
+        "reason": "The scanner title 'EIT at a glance' is a section label from elsewhere on the EIT site and does not match this document, whose own opening heading is the Governing Board vision title. The file is published under the EIT's own /sites/default/files/2025-03/ path and is named EIT Future Vision Paper 2025, so March 2025 is the publication month rather than the scanner's 2026-08-25 crawl date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EIT Governing Board vision for leveraging Europe's largest innovation ecosystem",
+      "reader_what": "It argues the EIT's innovation communities should be used more deliberately to lift European competitiveness.",
+      "reader_why": "Sets out how an existing EU innovation body positions itself for the next programme period.",
+      "reader_more": "This vision paper from the Governing Board of the European Institute of Innovation and Technology argues that Europe must become more competitive to meet the global challenges facing the EU and its citizens across all Member States. It presents the EIT, an independent EU body created in 2008, as strengthening Europe's capacity to innovate and as empowering the next generation, and it positions the EIT's network as Europe's largest innovation ecosystem. The paper sets out the Board's view of how that ecosystem should be leveraged in future. It is an institutional vision statement and therefore advocacy for the organisation's own role and future funding, not an independent assessment of the EIT's performance or of European innovation capacity.",
+      "deep_analysis": {
+        "work_kind": "EU agency governing board vision paper",
+        "research_question": "",
+        "main_finding": "The EIT Governing Board argues Europe's competitiveness should be advanced by leveraging the EIT's innovation ecosystem.",
+        "method_or_basis": "Primary reading of the official EIT vision paper PDF.",
+        "qualification": "An institutional vision and advocacy document; claims about the EIT's contribution are not independently evaluated here.",
+        "radar_relevance": "Concerns the strategic direction of a major EU innovation instrument and European competitiveness policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/advancing-research-careers-across-europe/",
+      "source_hash": "6b8c8ada",
+      "identity_hash": "25987e34b41b86ad",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "cesaer.org publication page returned only a cookie-consent shell; title and description confirmed from page metadata but no report text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The Zenodo deposit carries DOI 10.5281/zenodo.19330799, matching the title exactly."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Located CESAER's Zenodo deposit 19330799 via the Zenodo API and downloaded '20260330_CESAER report - Advancing research careers across Europe.pdf' (78 pages, 191,538 characters); the report's own cover reads 'Report dated 30 March 2026'."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://zenodo.org/records/19330799",
+            "title": "Advancing research careers across Europe (CESAER case study report)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page was JavaScript-only; the full report was recovered from CESAER's own Zenodo deposit at ladder step 5 and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full 78-page case study report recovered from CESAER's Zenodo deposit; it documents institutional good practice on research careers across named European universities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-03-30"
+        },
+        "unset": [],
+        "reason": "The Zenodo deposit and the report's own cover both date it to 30 March 2026; the scanner date of 2026-06-10 is a crawl artefact."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Case studies on how European universities are strengthening research careers",
+      "reader_what": "Institutional case studies from universities including Aalborg, Brno, QuTech and ETH Zurich set out practices and remaining challenges.",
+      "reader_why": "Shows concrete institutional mechanisms behind Europe-wide research career ambitions.",
+      "reader_more": "This CESAER report, dated 30 March 2026, collects case studies of good practice and remaining challenges in advancing research careers across Europe. Each chapter describes what a particular institution does, including the Aalborg University PhD Career Hub and its recruitment of early-career researchers, career structures and entrepreneurship ecosystem tools at Brno University of Technology, the people strategy at QuTech, and gender balance and inclusive career work at ETH Zurich. The report focuses on support for early-career researchers and on recruitment practices. Because the material is self-described institutional practice contributed by member universities, it documents what institutions report doing rather than evaluating whether these measures improve career outcomes.",
+      "deep_analysis": {
+        "work_kind": "association case study report",
+        "research_question": "How are European universities of science and technology strengthening research careers in practice?",
+        "main_finding": "The report documents institutional practices for supporting early-career researchers and improving recruitment, alongside persisting challenges.",
+        "method_or_basis": "Collected institutional case studies contributed by CESAER member universities, including Aalborg, Brno, QuTech and ETH Zurich.",
+        "qualification": "Self-reported institutional practice from a self-selected membership; no comparative evaluation of effectiveness.",
+        "radar_relevance": "Directly concerns European research careers, talent development and institutional research policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/1523908x.2026.2707129",
+      "source_hash": "107ca89d",
+      "identity_hash": "cccb6f0b6c49c148",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1080/1523908x.2026.2707129 redirected to tandfonline.com, which returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed Journal of Environmental Policy & Planning, Informa UK, issued 2026-08-05; OpenAlex reported hybrid open access with a repository copy."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full 24-page published version (CC licensed, Taylor & Francis typeset) from the Wageningen repository at edepot.wur.nl/721747."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://edepot.wur.nl/721747",
+            "title": "The European Green Deal as transformative innovation policy: principles for transition governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; the published version was recovered from the Wageningen institutional repository at ladder step 5 and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full 24-page published article recovered from a repository copy; an empirical study applying governance principles across six European Green Deal policy domains with over 150 workshop participants."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Applying transition governance principles across six European Green Deal policy domains",
+      "reader_what": "Future imaginaries helped over 150 participants identify obstacles, preconditions and pathways for transformative EU policy.",
+      "reader_why": "Offers a route from Green Deal targets to actionable regional innovation pathways.",
+      "reader_more": "The authors treat the European Green Deal, the EU's programme towards climate neutrality by 2050, as transformative innovation policy, noting that its translation into practice has struggled on stakeholder involvement, dominant discourses and policy coordination. Within the SHARED GREEN DEAL project they applied four governance principles across six Green Deal policy domains in workshops involving more than 150 participants, to identify transformative policy pathways towards Green Deal targets. They report that using future imaginaries helped participants understand both the obstacles to and the preconditions for transformation-oriented EU policy, and that identifying pathways together with their trade-offs and co-benefits supports translating EU targets into action. The authors present insights for shaping regional innovation policies across the EU. Findings come from participatory workshops, so they are deliberative outputs rather than measured policy effects.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical study",
+        "research_question": "How can governance principles help translate European Green Deal targets into transformative policy pathways?",
+        "main_finding": "Applying four governance principles with future imaginaries surfaced obstacles, preconditions and trade-offs for transformation-oriented EU policy across six Green Deal domains.",
+        "method_or_basis": "Empirical participatory study within the SHARED GREEN DEAL project: workshops across six EGD policy domains with more than 150 participants applying four governance principles.",
+        "qualification": "Workshop-derived pathways are deliberative outputs, not observed policy outcomes; the authors note doubts about whether the EGD can meet its goals.",
+        "radar_relevance": "Directly concerns EU transformative innovation policy and implications for regional innovation policy across the Union.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://ecipe.org/publications/collective-actions-in-portugal/#_ftnref5",
+      "source_hash": "e08eb5f7",
+      "identity_hash": "d204603b971d132a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ecipe.org publication page retrieved in full (HTTP 200); approximately 68,000 characters of report text recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "ECIPE publications do not carry DOIs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecipe.org/publications/collective-actions-in-portugal/",
+            "title": "The Rise of Collective Actions and the Risk to Portugal's Economy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full report text recovered and read; the analysis is about litigation regime risk to investment, with technology sector references only as context."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_RI_CONNECTION",
+        "reason": "Full report recovered; the subject is the growth of collective redress litigation in Portugal and its effect on foreign direct investment, not European research, innovation or science policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ECIPE report on collective redress litigation and investment risk in Portugal",
+      "reader_what": "The rapid rise of collective actions is argued to threaten the regulatory predictability Portugal relies on to attract investment.",
+      "reader_why": "",
+      "reader_more": "This ECIPE report describes how Portugal has spent the past decade moving away from traditional sectors towards a technology-intensive knowledge economy, a strategy the authors say depends on regulatory stability and predictability to attract high-value foreign direct investment. It then argues that the rapid growth of collective actions, or class-action style litigation, creates a tension that threatens this progress. The analysis is about the litigation regime, legal certainty and investment climate. References to the knowledge economy and technology sectors provide framing for the investment argument rather than constituting research or innovation evidence. There is no substantive treatment of research, science, innovation policy, research security or industrial research capability, which is what the criteria require.",
+      "deep_analysis": {
+        "work_kind": "think tank policy report",
+        "research_question": "Does the growth of collective redress litigation in Portugal threaten its investment-led economic strategy?",
+        "main_finding": "The authors argue that expanding collective actions undermines the regulatory predictability underpinning high-value foreign direct investment in Portugal.",
+        "method_or_basis": "Legal and economic policy analysis of Portugal's collective redress regime and its investment implications.",
+        "qualification": "An advocacy argument from a trade policy think tank; the claimed investment effects are projected rather than measured.",
+        "radar_relevance": "Fails the criteria: the knowledge-economy framing is contextual and the work has no substantive research or innovation content.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s11192-026-05619-9",
+      "source_hash": "166a9310",
+      "identity_hash": "23bcf70e7f806d74",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "link.springer.com/article/10.1007/s11192-026-05619-9 loaded but redirected to a cookie-notice variant exposing the abstract, section headings and back matter only; the article body is paywalled."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed Scientometrics, Springer, issued 2026-04-18, authors Glanzel, Gorraiz, Daraio and Debackere; the publisher page gives the citation as Scientometrics 131, 3079-3103 (2026)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'Operationalising responsible use of bibliometrics in research evaluation' returned the Springer landing page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Author and year searches identified the FRAME framework referenced in the article and its ISSI 2025 predecessor paper (10.51408/issi2025_151), but not this article's text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists lirias.kuleuven.be/handle/20.500.12942/787115 as a submitted version; that handle redirects to kuleuven.limo.libis.be, a JavaScript-only discovery interface returning 'JavaScript must be enabled to use the system' with no retrievable file."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "OpenAIRE DOI lookup returned no repository copy; api.fatcat.wiki returned HTTP 503; OpenAlex reports oa_status closed."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity and citation details fully verified; the substantive content of the three university case applications remains inaccessible."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity fully confirmed, but the article is closed access and the only repository record is a JavaScript-gated discovery page with no retrievable file, leaving abstract-level evidence only."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/jcms.70116",
+      "source_hash": "b245433a",
+      "identity_hash": "3995772b4f7e1a06",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1111/jcms.70116 redirected to onlinelibrary.wiley.com/doi/10.1111/jcms.70116; HTTP 403 Forbidden."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed JCMS: Journal of Common Market Studies, Wiley, issued 2026-04-10, authors De La Cruz, De Ville, Rogissart and Van de Graaf; full abstract retrieved."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search located the Ghent University Academic Bibliography record for the same article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Author and year search confirmed the UGent record 01KP87AE9F6Q8CP6SDA8Q6MX5M, which reproduces the full abstract and lists publication_status 'inpress'."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "The UGent record's JSON shows one file, 'AAM_Political Economy of EU Green Industrial Policy.pdf', kind fullText, version acceptedVersion, access 'restricted', with change/to 'open' scheduled for 2027-04-10. The deposit is embargoed and was not accessed."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "No preprint, working paper or other repository copy was located; api.fatcat.wiki returned HTTP 503."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Green deposit exists but is embargoed until 2027-04-10; access controls were respected, so substantive evidence is unavailable until then."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity fully confirmed and a repository deposit exists, but the accepted manuscript is under embargo until April 2027 and was not accessed; only abstracts are available."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/advancing-global-research-security-insights-from-the-multilateral-dialogue-on-principles-and-values-in-international-research-and-innovation-cooperation/",
+      "source_hash": "0887c682",
+      "identity_hash": "63de94b245c0a89a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied /publications/ URL returned only a cookie-consent shell; its page title and og:description confirmed the item's identity."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for a CESAER news item."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the full item body from CESAER's own news URL for the same item (news/...-1602/), which carries an on-page date of 2024-10-09 and describes a workshop held on 7 December 2023."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://www.cesaer.org/news/advancing-global-research-security-insights-from-the-multilateral-dialogue-on-principles-and-values-in-international-research-and-innovation-cooperation-1602/",
+            "title": "Advancing global research security: insights from the multilateral dialogue on principles and values in international research and innovation cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered the full news-item body after the supplied publications URL rendered only a consent shell; content assessed against the criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_EVENT_PAGE",
+        "reason": "Full page text recovered; it is a CESAER news item recording its participation in an invitation-only workshop held under Chatham House rule, not a substantive development or an evidence release by CESAER."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CESAER news item on a research security workshop in the EU multilateral dialogue",
+      "reader_what": "CESAER co-organised the seventh workshop of the multilateral dialogue, held on 7 December 2023 and focused on research security.",
+      "reader_why": "",
+      "reader_more": "This CESAER news item records that the association joined the governments of the United States, Finland, Belgium and the Netherlands, together with the International Science Council and the European Commission, to organise a workshop on research security under geopolitical pressure. It explains that the Commission launched the multilateral dialogue on values and principles for research and innovation in July 2022 to build shared understanding among EU Member States, more than thirty partner countries and stakeholder organisations, and that this was the seventh workshop in the series, held on 7 December 2023. The item notes the workshop was invitation-only and under Chatham House rule, with a public report to appear on the DG RTD website. The page itself reports participation in an event and points elsewhere for substance.",
+      "deep_analysis": {
+        "work_kind": "organisational news item about an event",
+        "research_question": "",
+        "main_finding": "CESAER reports co-organising the seventh multilateral dialogue workshop, on research security, held in December 2023.",
+        "method_or_basis": "Full text of the CESAER news item recovered from the association's own news URL.",
+        "qualification": "An event-participation notice held under Chatham House rule; the substantive workshop report sits on the DG RTD site, not here.",
+        "radar_relevance": "Fails the criteria as an event report page: the topic is Radar-relevant but the page reports no decision, instrument or evidence release of its own.",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://allea.org/event-report-shared-principles-regional-realities-advancing-research-assessment-reform-in-the-asia-pacific/",
+      "source_hash": "53a81104",
+      "identity_hash": "bad836a398bfa5c3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "allea.org report page retrieved in full (HTTP 200); complete report text recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ALLEA event report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://allea.org/event-report-shared-principles-regional-realities-advancing-research-assessment-reform-in-the-asia-pacific/",
+            "title": "Event Report: Shared Principles, Regional Realities - Advancing Research Assessment Reform in the Asia-Pacific",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full report text recovered from ALLEA's own site; the scanner's author field was a CMS artefact and was corrected."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full event report recovered; it documents a CoARA, DORA and FORCE11 workshop convened by ALLEA on extending research assessment reform, a substantive European research-policy activity."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "ALLEA"
+        },
+        "unset": [],
+        "reason": "The scanner recorded the author as 'maria ronald', which is a content management system user account rather than an author. The report is issued by ALLEA on behalf of CoARA, as stated in the report itself."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ALLEA and CoARA workshop report on research assessment reform in the Asia-Pacific",
+      "reader_what": "Over 30 researchers, publishers and stakeholders met in Singapore to discuss adapting shared assessment principles to regional realities.",
+      "reader_why": "Tests whether European research assessment reform principles travel to other regions.",
+      "reader_more": "On 2 June, ALLEA, acting on behalf of the Coalition for Advancing Research Assessment, together with DORA and FORCE11, organised a joint workshop in Singapore co-located with the FORCE2026 conference and hosted by Singapore Management University. The full-day, invite-only workshop, titled Shared Principles, Regional Realities, brought together more than 30 researchers, publishers and other stakeholders to discuss advancing research assessment reform in the Asia-Pacific. The report situates this within the conference theme of partnership across disciplines, technologies and geopolitical boundaries, against a backdrop of technological disruption and political shifts affecting knowledge exchange. It is an event report by one of the organisers, so it records discussion rather than presenting new evidence or agreed commitments.",
+      "deep_analysis": {
+        "work_kind": "event report by a convening organisation",
+        "research_question": "",
+        "main_finding": "A CoARA, DORA and FORCE11 workshop examined how shared research assessment reform principles apply to Asia-Pacific contexts.",
+        "method_or_basis": "Full text of the event report published by ALLEA, one of the convening organisations.",
+        "qualification": "A report of discussion at an invite-only workshop; no binding outcomes, commitments or new evidence are presented.",
+        "radar_relevance": "Concerns the international extension of European-led research assessment reform through CoARA, in which ALLEA plays a central role.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.jtrangeo.2026.104813",
+      "source_hash": "f8e6bb2c",
+      "identity_hash": "fd2991b442b97c17",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1016/j.jtrangeo.2026.104813 redirected to linkinghub.elsevier.com/retrieve/pii/S096669232600267X, which returned only a 15-character redirect stub; sciencedirect.com article and /pdf endpoints both returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed Journal of Transport Geography, Elsevier, volume 136 article 104813, issue date 2026-10, licence CC-BY, six authors led by Sarah Hampel; no abstract is deposited in Crossref."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search for 'Integrating perspectives of citizens into the scenario technique' returned the ScienceDirect landing page only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searched Hampel, Mello Rose and Blanchet 2026 with Berlin; queried the TU Berlin DepositOnce discovery API, which returned HTTP 404 with no matching deposit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "OpenAlex lists a single location (ScienceDirect publishedVersion) with any_repository_has_fulltext false; OpenAIRE DOI lookup returned no repository record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "The Crossref-declared Elsevier TDM endpoints (api.elsevier.com content/article/PII:...) require an institutional key; api.fatcat.wiki returned HTTP 503; no accessible copy of this CC-BY article was located."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified but not a single line of substantive text was legitimately obtainable; this Strand B candidate needs a retry once a repository copy appears."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref, but Elsevier blocked every route to this open-licensed article and no repository copy exists, leaving no substantive text at all."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/pan3.70388",
+      "source_hash": "fa6698b6",
+      "identity_hash": "ddd4692d01ecf857",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "https://doi.org/10.1002/pan3.70388 redirected to besjournals.onlinelibrary.wiley.com, which returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirmed People and Nature, Wiley, issued 2026-07-11, eight authors led by Anita Lazurko; OpenAlex reported gold open access with repository copies."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the full 22-page article from the NERC Open Research Archive at nora.nerc.ac.uk (eprint 542009); a further copy exists at the Cambridge Apollo repository."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://nora.nerc.ac.uk/id/eprint/542009/",
+            "title": "Which biodiversity futures? Towards coherent design choices for scenarios exploring policy-relevant questions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher blocked; the published version was recovered from the NERC Open Research Archive at ladder step 5 and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Full 22-page article recovered; the authors develop and validate a framework guiding scenario design choices, an explicitly transferable foresight and scenario methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A framework for making coherent design choices when building biodiversity scenarios",
+      "reader_what": "The authors develop and validate a framework aligning scenario design choices with the question a scenario is meant to answer.",
+      "reader_why": "Incoherent scenario design risks missing important policy-relevant risks and opportunities.",
+      "reader_more": "Decision-makers face pressure to act transformatively on biodiversity loss, and scenarios are used to explore alternative futures and the outcomes of possible actions. The authors argue that amid considerable methodological diversity there is little guidance on the range of scenario design choices available or their suitability for particular applications. That gap produces a fragmented and opaque scenario landscape, hinders interoperability between scenarios, and risks projections or decisions that miss important risks or opportunities for transformative change. In response they develop and validate a framework to support coherent design choices, meaning choices that are intentional, transparent and aligned with the question being asked. The contribution is methodological guidance for scenario builders; it is demonstrated on biodiversity applications, and its wider transferability is argued rather than tested across domains.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed review and synthesis developing a method",
+        "research_question": "How should scenario design choices be made coherently for scenarios exploring policy-relevant biodiversity questions?",
+        "main_finding": "The authors develop and validate a framework for intentional, transparent scenario design choices aligned with the question a scenario addresses.",
+        "method_or_basis": "Review and synthesis of methodological diversity in existing biodiversity scenarios, followed by development and validation of a design-choice framework.",
+        "qualification": "Validated within biodiversity scenario practice; transfer to other domains is plausible but not demonstrated here.",
+        "radar_relevance": "Qualifies as a reusable method: a transferable foresight and scenario design framework, geography-independent as Strand B allows.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://institutmontaigne.org/ressources/pdfs/publications/semiconductors-in-eu-taiwan-relations-bridging-gaps-building-trust-policy-paper.pdf",
+      "source_hash": "4e7a1aca",
+      "identity_hash": "498f287ba409c127",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "institutmontaigne.org PDF retrieved (1.4 MB) and text extracted; cover confirms 'Semiconductors in EU-Taiwan Relations: Bridging Gaps, Building Trust, POLICY PAPER, APRIL 2026' by Mathieu Duchatel."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Institut Montaigne policy papers do not carry DOIs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://institutmontaigne.org/ressources/pdfs/publications/semiconductors-in-eu-taiwan-relations-bridging-gaps-building-trust-policy-paper.pdf",
+            "title": "Semiconductors in EU-Taiwan Relations: Bridging Gaps, Building Trust",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher PDF retrieved directly and read; authorship, date and project affiliation verified from the document itself."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Policy paper recovered from the publisher's own PDF; it analyses EU-Taiwan semiconductor relations as part of a dedicated EU chip diplomacy project."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Policy paper on semiconductors in EU-Taiwan relations",
+      "reader_what": "It analyses gaps in EU-Taiwan semiconductor cooperation and how trust between the two could be built.",
+      "reader_why": "Taiwan holds capability the EU's semiconductor ambitions depend on.",
+      "reader_more": "This April 2026 policy paper by Mathieu Duchatel examines the semiconductor dimension of EU-Taiwan relations, focusing on where cooperation falls short and how trust could be strengthened. It is a publication of the Chips Diplomacy Support Initiative, an eighteen-month project addressing what it describes as the EU's urgent need for chip diplomacy, executed by Institut Montaigne in Paris with the Central European Institute for Asian Studies in Bratislava and partners. The paper sits directly within European semiconductor industrial strategy and technology diplomacy. As a think tank policy paper produced under a project with an explicit advocacy purpose, its recommendations reflect a policy position rather than neutral assessment, and its claims about cooperation prospects are analytical judgements.",
+      "deep_analysis": {
+        "work_kind": "think tank policy paper",
+        "research_question": "How can the EU close gaps and build trust with Taiwan in semiconductor cooperation?",
+        "main_finding": "The paper identifies gaps in EU-Taiwan semiconductor relations and argues for trust-building measures as the basis for deeper cooperation.",
+        "method_or_basis": "Policy analysis conducted within the CHIPDIPLO project, drawing on EU and Taiwanese semiconductor policy and industry positioning.",
+        "qualification": "Produced under a project with an explicit chip diplomacy advocacy purpose; recommendations are positions, not evaluated outcomes.",
+        "radar_relevance": "Directly concerns European semiconductor industrial capability, technology diplomacy and supply chain strategy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/science-europe-calls-for-stronger-minimum-standards-to-improve-research-careers-across-europe/",
+      "source_hash": "7123ba7d",
+      "identity_hash": "e24805d86490de1b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "era.gv.at news item retrieved in full (HTTP 200), dated 11 May 2026, including the three areas the recommendations are structured around."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI exists for an ERA Portal Austria news item."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_news_page",
+            "url": "https://era.gv.at/news-items/science-europe-calls-for-stronger-minimum-standards-to-improve-research-careers-across-europe/",
+            "title": "Science Europe calls for stronger minimum standards to improve research careers across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full item text recovered from the supplied URL and used as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports Science Europe's release of a structured set of minimum-standard recommendations for research careers, an evidence and position release by a major European organisation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Science Europe sets out minimum standards for research careers across Europe",
+      "reader_what": "Recommendations cover working conditions and employment, research environment, and professional development and wellbeing.",
+      "reader_why": "Shared minimum standards give member organisations a common basis for advocacy.",
+      "reader_more": "Science Europe published a set of recommendations intended to make the European research ecosystem more attractive, supportive and responsive to research talent. They are structured around three interconnected areas: working conditions and employment; research environment; and professional development, wellbeing and supporting infrastructure. The organisation states that the recommendations reflect a common understanding among its member organisations that a shared approach to minimum standards is necessary for continued progress and effective advocacy. Specific elements include fair salaries, robust social security, transparent career pathways and conditions supporting work-life balance. These are recommendations to member organisations rather than binding requirements, so the improvements described are intended rather than achieved.",
+      "deep_analysis": {
+        "work_kind": "policy recommendations release reported by an official portal",
+        "research_question": "",
+        "main_finding": "Science Europe recommends shared minimum standards across working conditions, research environment and professional development.",
+        "method_or_basis": "Full text of the ERA Portal item reporting the Science Europe recommendations and their structure.",
+        "qualification": "Non-binding recommendations to member organisations; adoption and effect are not evidenced here.",
+        "radar_relevance": "Concerns European research careers policy and the conditions for attracting and retaining research talent.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    }
+  ]
+}
