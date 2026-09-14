@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T08:39:46Z",
+  "generated_at": "2026-09-14T08:42:09Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -1703,12 +1703,12 @@
       ]
     },
     "link:https://doi.org/10.1016/j.eiar.2026.108574": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "25e8f4a5",
+      "identity_hash": "314343386a476b06",
       "reader_title": "EU battery projects converge on some environmental assessment choices but not the decisive ones",
       "reader_what": "Five Horizon Europe projects agree on functional units and databases but diverge on system boundaries.",
-      "reader_why": "Divergent recycling and electricity assumptions make project results incomparable for benchmarking and policy.",
       "reader_more": "Life cycle assessment estimates a product's environmental burden across its whole life and is widely used in EU-funded battery research. This paper, from the Battery Heroes sustainability working group, reviews how five Horizon Europe battery projects actually apply it. It finds emerging convergence on several choices: capacity-based functional units of one kilowatt-hour, reliance on ecoinvent databases, and growing adoption of the Environmental Footprint 3.1 method. Substantial variability persists in system boundary definitions, end-of-life and recycling modelling, electricity assumptions and reporting practice, all of which can materially change results. The authors propose a minimum harmonised reporting set to improve comparability and support alignment with the Product Environmental Footprint method and the EU Battery Regulation.",
       "deep_analysis": {
         "work_kind": "peer-reviewed methodological review",
@@ -1720,10 +1720,76 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://linkinghub.elsevier.com/retrieve/pii/S0195925526002489 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1016/j.eiar.2026.108574 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://www.sciencedirect.com/science/article/pii/S0195925526002489."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0195925526002489",
+            "title": "Harmonisation of life cycle assessment practices in Horizon Europe battery technology projects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article compares LCA practice across Horizon Europe battery projects and proposes harmonised assessment choices for European battery R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "25e8f4a5",
+          "reader_title": "EU battery projects converge on some environmental assessment choices but not the decisive ones",
+          "reader_what": "Five Horizon Europe projects agree on functional units and databases but diverge on system boundaries.",
+          "reader_why": "Divergent recycling and electricity assumptions make project results incomparable for benchmarking and policy.",
+          "reader_more": "Life cycle assessment estimates a product's environmental burden across its whole life and is widely used in EU-funded battery research. This paper, from the Battery Heroes sustainability working group, reviews how five Horizon Europe battery projects actually apply it. It finds emerging convergence on several choices: capacity-based functional units of one kilowatt-hour, reliance on ecoinvent databases, and growing adoption of the Environmental Footprint 3.1 method. Substantial variability persists in system boundary definitions, end-of-life and recycling modelling, electricity assumptions and reporting practice, all of which can materially change results. The authors propose a minimum harmonised reporting set to improve comparability and support alignment with the Product Environmental Footprint method and the EU Battery Regulation.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed methodological review",
+            "research_question": "How life cycle assessment practice varies across Horizon Europe battery projects and how it could be harmonised.",
+            "main_finding": "There is emerging convergence on functional units, background databases and impact assessment method, but persistent divergence in system boundaries, recycling modelling, electricity assumptions and reporting, which limits cross-project comparability.",
+            "method_or_basis": "Review of LCA practice across five Horizon Europe battery projects, conducted within the Battery Heroes sustainability working group.",
+            "qualification": "Five projects reviewed by participants in the same research community, so a practitioner stocktake rather than an independent audit; the reporting set is a recommendation, not an adopted standard.",
+            "radar_relevance": "Concerns whether environmental evidence generated by EU-funded research is comparable enough to inform EU regulation.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/10301763.2026.2726657": {
       "profile": "deep-reader-offline-v1",
@@ -2423,12 +2489,12 @@
       "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
     },
     "link:https://doi.org/10.1140/epjqt/s40507-026-00560-5": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "f5ff3d39",
+      "identity_hash": "10fb4b144017a908",
       "reader_title": "Editorial arguing quantum technology was military-linked from the start, especially outside Europe",
       "reader_what": "Argues quantum research was defence-funded from its origins, a history that is largely Anglo-American.",
-      "reader_why": "Explains why continental Europe accepts quantum defence links more recently and more uneasily.",
       "reader_more": "This editorial introduces a ten-paper collection on dual-use quantum technologies. Its central historical claim is that quantum technology was dual-use from the beginning: defence and intelligence agencies funded, shaped and sometimes directly performed the foundational experiments, from the 1954 maser under US naval research support through ion-trapping work at NIST to the 1994 demonstration of entanglement distribution at the UK Defence Research Agency. The authors observe that this history is overwhelmingly American and British, which they offer as part of the explanation for why the link between quantum research and defence is received differently and more recently in continental Europe. They also argue dual-use describes a status rather than settling a moral question.",
       "deep_analysis": {
         "work_kind": "peer-reviewed editorial introducing a topical collection",
@@ -2440,10 +2506,66 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://link.springer.com/article/10.1140/epjqt/s40507-026-00560-5 contained substantive matching text for “Rethinking dual-use in quantum technology”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1140/epjqt/s40507-026-00560-5",
+            "title": "Rethinking dual-use in quantum technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article substantively analyses dual-use dynamics in quantum technology, with direct implications for European quantum R&I and governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "f5ff3d39",
+          "reader_title": "Editorial arguing quantum technology was military-linked from the start, especially outside Europe",
+          "reader_what": "Argues quantum research was defence-funded from its origins, a history that is largely Anglo-American.",
+          "reader_why": "Explains why continental Europe accepts quantum defence links more recently and more uneasily.",
+          "reader_more": "This editorial introduces a ten-paper collection on dual-use quantum technologies. Its central historical claim is that quantum technology was dual-use from the beginning: defence and intelligence agencies funded, shaped and sometimes directly performed the foundational experiments, from the 1954 maser under US naval research support through ion-trapping work at NIST to the 1994 demonstration of entanglement distribution at the UK Defence Research Agency. The authors observe that this history is overwhelmingly American and British, which they offer as part of the explanation for why the link between quantum research and defence is received differently and more recently in continental Europe. They also argue dual-use describes a status rather than settling a moral question.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed editorial introducing a topical collection",
+            "research_question": "How the term dual-use should be understood and applied as a quantum economy emerges.",
+            "main_finding": "The authors argue quantum technology has been dual-use since its foundational experiments, that this origin story is predominantly Anglo-American, and that dual-use denotes a status rather than resolving normative questions.",
+            "method_or_basis": "Historical review of documented defence funding for precursor and foundational quantum research, plus synthesis of ten collected contributions.",
+            "qualification": "An editorial framing a collection rather than original research; the link between Anglo-American origins and differing continental European attitudes is offered as partial explanation, not demonstrated.",
+            "radar_relevance": "Directly addresses how European research communities and policymakers should handle dual-use framing in a strategic technology.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T09:48:21Z",
+          "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+        }
+      ]
     },
     "link:https://doi.org/10.12688/openreseurope.23459.2": {
       "profile": "deep-reader-v2-authoritative",
@@ -5210,12 +5332,12 @@
       ]
     },
     "link:https://doi.org/10.1080/17579961.2026.2705118": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "e1a104b2",
+      "identity_hash": "406acfaa6fecf20c",
       "reader_title": "Argues EU digital sovereignty mainly legitimises control rather than delivering independence",
       "reader_what": "Argues digital sovereignty operates performatively, constructing European identity and directing funds to selected actors.",
-      "reader_why": "Claims the effect is money allocated towards uncertain technological goals and particular European firms.",
       "reader_more": "This article examines digital sovereignty as an EU policy objective and argues it is less about what the term suggests than about legitimising points of control. The authors first trace how sovereignty and associated regulation evolved in relation to digital infrastructures, then focus on quantum technologies, which they describe as a recent and comparatively understudied anchor for EU digital sovereignty policy. Their argument is that beneath efforts to assert control and attain independence, digital sovereignty works performatively to construct a European identity, while producing concrete effects: the allocation of funding towards technological goals whose outcomes remain uncertain, and towards a selected set of European actors. The piece is a critical reading of the concept rather than an assessment of whether specific quantum investments succeed.",
       "deep_analysis": {
         "work_kind": "peer-reviewed critical legal and policy analysis",
@@ -5227,10 +5349,76 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://doi.org/10.1080/17579961.2026.2705118 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1080/17579961.2026.2705118 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5461374."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5461374",
+            "title": "The EU’s digital sovereignty and quantum technologies: to what end?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly analyses the ends and instruments of EU digital sovereignty in quantum technologies."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T10:40:36Z",
-      "deep_scan_package_id": "20260913T100015Z-06e641702250"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "e1a104b2",
+          "reader_title": "Argues EU digital sovereignty mainly legitimises control rather than delivering independence",
+          "reader_what": "Argues digital sovereignty operates performatively, constructing European identity and directing funds to selected actors.",
+          "reader_why": "Claims the effect is money allocated towards uncertain technological goals and particular European firms.",
+          "reader_more": "This article examines digital sovereignty as an EU policy objective and argues it is less about what the term suggests than about legitimising points of control. The authors first trace how sovereignty and associated regulation evolved in relation to digital infrastructures, then focus on quantum technologies, which they describe as a recent and comparatively understudied anchor for EU digital sovereignty policy. Their argument is that beneath efforts to assert control and attain independence, digital sovereignty works performatively to construct a European identity, while producing concrete effects: the allocation of funding towards technological goals whose outcomes remain uncertain, and towards a selected set of European actors. The piece is a critical reading of the concept rather than an assessment of whether specific quantum investments succeed.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed critical legal and policy analysis",
+            "research_question": "What the EU's digital sovereignty objective actually does, examined through the case of quantum technologies.",
+            "main_finding": "Digital sovereignty functions primarily to legitimise points of control and to construct European identity performatively, with tangible consequences in directing funds towards uncertain technological goals and select European actors.",
+            "method_or_basis": "Conceptual and doctrinal analysis of the evolution of sovereignty claims and regulation, applied to EU quantum technology policy.",
+            "qualification": "An interpretive critique; the claim that funding flows to select actors is argued from policy analysis rather than demonstrated with funding allocation data.",
+            "radar_relevance": "Offers a sceptical counterweight to the EU's own framing of technological sovereignty, in a technology the EU is actively funding.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T10:40:36Z",
+          "deep_scan_package_id": "20260913T100015Z-06e641702250"
+        }
+      ]
     },
     "link:https://doi.org/10.1093/ckj/sfag257": {
       "profile": "deep-reader-v2-authoritative",
@@ -8844,12 +9032,12 @@
       ]
     },
     "link:https://doi.org/10.1515/ijdlg-2026-0010": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "31689c33",
+      "identity_hash": "8b7e1dc2553b13ea",
       "reader_title": "Comparing Chinese and EU rules for labelling AI-generated content",
       "reader_what": "The article compares how China and the EU turn AI transparency duties into technical marking and platform verification.",
-      "reader_why": "Labelling duties under Article 50 of the EU AI Act require workable technical infrastructure, not just disclosure rules.",
       "reader_more": "The comparison covers China's 2025 Labelling Measures and the mandatory national standard GB 45438-2025 against Article 50 of the EU AI Act. The question is how transparency obligations become concrete: technical marking, metadata, platform verification, and the allocation of responsibility between providers, platforms and users. The method is comparative legal-policy analysis with structured document analysis of primary legal, regulatory, policy and technical-standard materials. The framing treats labelling as legal-technical infrastructure rather than a simple disclosure requirement. The publisher record was blocked in the package and only part of the abstract could be recovered online, so the article's specific conclusions are not established here.",
       "deep_analysis": {
         "work_kind": "peer-reviewed comparative legal analysis",
@@ -8861,10 +9049,76 @@
         "confidence": "low",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://www.degruyterbrill.com/document/doi/10.1515/ijdlg-2026-0010/html did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1515/ijdlg-2026-0010 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://www.researchgate.net/publication/410790941_Governing_AI-Generated_Content_Labelling_Traceability_and_Transparency_Infrastructure_in_China_and_the_EU_AI_Act."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_manuscript",
+            "url": "https://www.researchgate.net/publication/410790941_Governing_AI-Generated_Content_Labelling_Traceability_and_Transparency_Infrastructure_in_China_and_the_EU_AI_Act",
+            "title": "Governing AI-Generated Content: Labelling, Traceability and Transparency Infrastructure in China and the EU AI Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article compares China and the EU AI Act on AI-generated-content labelling, traceability and transparency infrastructure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:21Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "31689c33",
+          "reader_title": "Comparing Chinese and EU rules for labelling AI-generated content",
+          "reader_what": "The article compares how China and the EU turn AI transparency duties into technical marking and platform verification.",
+          "reader_why": "Labelling duties under Article 50 of the EU AI Act require workable technical infrastructure, not just disclosure rules.",
+          "reader_more": "The comparison covers China's 2025 Labelling Measures and the mandatory national standard GB 45438-2025 against Article 50 of the EU AI Act. The question is how transparency obligations become concrete: technical marking, metadata, platform verification, and the allocation of responsibility between providers, platforms and users. The method is comparative legal-policy analysis with structured document analysis of primary legal, regulatory, policy and technical-standard materials. The framing treats labelling as legal-technical infrastructure rather than a simple disclosure requirement. The publisher record was blocked in the package and only part of the abstract could be recovered online, so the article's specific conclusions are not established here.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed comparative legal analysis",
+            "research_question": "How are AI content transparency obligations translated into technical marking, metadata, verification and responsibility allocation in China and the EU?",
+            "main_finding": "Treats AI content labelling as a legal-technical infrastructure; the article's detailed conclusions could not be recovered.",
+            "method_or_basis": "Comparative legal-policy and structured document analysis; partial publisher abstract recovered online after a blocked retrieval",
+            "qualification": "Only part of the abstract was recoverable, so no strong claim about the article's conclusions should be made.",
+            "radar_relevance": "Concerns implementation of EU AI Act transparency duties alongside a competing regulatory model.",
+            "confidence": "low",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:21Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://arxiv.org/abs/2607.22049": {
       "profile": "deep-reader-offline-v1",
@@ -10009,12 +10263,12 @@
       "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
     },
     "link:https://doi.org/10.1007/s11135-026-02982-w": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "9d7b3939",
+      "identity_hash": "57708e725625bf3a",
       "reader_title": "Bibliometric map of generative AI research in higher education",
       "reader_what": "Nearly 3,900 publications show explosive growth concentrated on ChatGPT, with output led by the United States and China.",
-      "reader_why": "European work clusters regionally rather than globally, while output leadership sits with the United States and China.",
       "reader_more": "The analysis covers 3,888 publications from Web of Science and Scopus. Annual growth is reported at 273.81 percent, with life-cycle modelling suggesting the field entered a late-growth phase in 2025 and would reach early maturity by 2026. Output concentrates in educational technology journals, with open-access venues showing strong activity and citation visibility, while many countries in Africa, the Caribbean and Central Asia are barely represented. Keyword analysis identifies ChatGPT as the dominant organising concept, with clusters around academic integrity and assessment, governance, AI literacy and ethics, critical thinking and feedback, adoption, and personalised learning. The authors note the ChatGPT focus may limit generalisability and that learner-centred concerns remain less integrated.",
       "deep_analysis": {
         "work_kind": "bibliometric review",
@@ -10026,18 +10280,74 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://link.springer.com/article/10.1007/s11135-026-02982-w contained substantive matching text for “A field in fast-forward: thematic evolution of generative AI research in higher education through bibliometric analysis”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11135-026-02982-w",
+            "title": "A field in fast-forward: thematic evolution of generative AI research in higher education through bibliometric analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_INSUFFICIENT",
+        "reason": "The verified bibliometric study is global; Europe appears as one regional collaboration cluster rather than the substantive European R&I object of study, and it does not add a reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:22Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "9d7b3939",
+          "reader_title": "Bibliometric map of generative AI research in higher education",
+          "reader_what": "Nearly 3,900 publications show explosive growth concentrated on ChatGPT, with output led by the United States and China.",
+          "reader_why": "European work clusters regionally rather than globally, while output leadership sits with the United States and China.",
+          "reader_more": "The analysis covers 3,888 publications from Web of Science and Scopus. Annual growth is reported at 273.81 percent, with life-cycle modelling suggesting the field entered a late-growth phase in 2025 and would reach early maturity by 2026. Output concentrates in educational technology journals, with open-access venues showing strong activity and citation visibility, while many countries in Africa, the Caribbean and Central Asia are barely represented. Keyword analysis identifies ChatGPT as the dominant organising concept, with clusters around academic integrity and assessment, governance, AI literacy and ethics, critical thinking and feedback, adoption, and personalised learning. The authors note the ChatGPT focus may limit generalisability and that learner-centred concerns remain less integrated.",
+          "deep_analysis": {
+            "work_kind": "bibliometric review",
+            "research_question": "How has generative AI research in higher education developed thematically, geographically and collaboratively?",
+            "main_finding": "The field grew explosively around ChatGPT, led by the United States and China, with limited and regionally clustered international collaboration.",
+            "method_or_basis": "Bibliometric analysis of 3,888 Web of Science and Scopus publications, with life-cycle modelling and keyword co-occurrence",
+            "qualification": "Two databases and a heavy ChatGPT focus limit generalisability across the wider generative AI landscape.",
+            "radar_relevance": "Partial fit: shows Europe as one regionally clustered research community rather than a leader in this area.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:22Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://aaltodoc.aalto.fi/handle/123456789/147487": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "4980f47a",
+      "identity_hash": "ed677778453a5f76",
       "reader_title": "Finnish parliamentarians' views on AI sovereignty and foreign technology dependence",
       "reader_what": "Surveyed Finnish MPs judged AI dependencies severe and responses effective, but were less confident Finland could act alone.",
-      "reader_why": "Frames AI sovereignty across models, data and infrastructure, where limited national compute capacity is binding.",
       "reader_more": "The thesis asks whether Finland should pursue AI sovereignty initiatives and how policymakers perceive dependence on foreign AI technology. It uses Protection Motivation Theory, which separates perceived severity and vulnerability from beliefs about whether a response would work and whether the actor can carry it out. AI sovereignty is conceptualised across three layers, models, data and infrastructure, and situated within EU regulation and Finland's own constraints: limited domestic compute, competition for specialist talent, and dependence on global supply chains. A structured survey went to all 200 members of the Finnish Parliament and 25 responded. Perceived severity, vulnerability and response efficacy were high while self-efficacy was lower, indicating doubt about independent implementation capacity.",
       "deep_analysis": {
         "work_kind": "master's thesis, survey-based empirical study",
@@ -10049,10 +10359,66 @@
         "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://aaltodoc.aalto.fi/items/8a37866b-84c6-4942-8f44-2882456802ba contained substantive matching text for “Necessity of AI Sovereignty Initiatives in Finland: A PMT-Based Study of Policy-makers’ Perceptions”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository",
+            "url": "https://aaltodoc.aalto.fi/items/8a37866b-84c6-4942-8f44-2882456802ba",
+            "title": "Necessity of AI Sovereignty Initiatives in Finland: A PMT-Based Study of Policy-makers’ Perceptions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The thesis directly studies Finnish AI-sovereignty policy perceptions and European dependencies across models, data, compute and talent."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:05:22Z",
-      "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "4980f47a",
+          "reader_title": "Finnish parliamentarians' views on AI sovereignty and foreign technology dependence",
+          "reader_what": "Surveyed Finnish MPs judged AI dependencies severe and responses effective, but were less confident Finland could act alone.",
+          "reader_why": "Frames AI sovereignty across models, data and infrastructure, where limited national compute capacity is binding.",
+          "reader_more": "The thesis asks whether Finland should pursue AI sovereignty initiatives and how policymakers perceive dependence on foreign AI technology. It uses Protection Motivation Theory, which separates perceived severity and vulnerability from beliefs about whether a response would work and whether the actor can carry it out. AI sovereignty is conceptualised across three layers, models, data and infrastructure, and situated within EU regulation and Finland's own constraints: limited domestic compute, competition for specialist talent, and dependence on global supply chains. A structured survey went to all 200 members of the Finnish Parliament and 25 responded. Perceived severity, vulnerability and response efficacy were high while self-efficacy was lower, indicating doubt about independent implementation capacity.",
+          "deep_analysis": {
+            "work_kind": "master's thesis, survey-based empirical study",
+            "research_question": "How do Finnish policymakers perceive foreign AI dependencies, and are sovereignty measures seen as justified and feasible?",
+            "main_finding": "Respondents rated the threat high and responses effective, but expressed lower confidence in Finland's capacity to implement measures independently.",
+            "method_or_basis": "Structured Likert-scale survey of members of the Finnish Parliament, analysed through Protection Motivation Theory",
+            "qualification": "25 responses from 200 MPs: a low response rate and likely self-selection, measuring perceptions rather than capability.",
+            "radar_relevance": "Concerns national AI sovereignty within the EU regulatory environment, including compute capacity and talent constraints.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:05:22Z",
+          "deep_scan_package_id": "20260913T104222Z-bcbc8070f468"
+        }
+      ]
     },
     "link:https://doi.org/10.1007/s11123-026-00819-0": {
       "profile": "deep-reader-v2-authoritative",
@@ -10145,12 +10511,12 @@
       ]
     },
     "link:https://doi.org/10.1140/epjs/s11734-026-02451-3": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "a6b96a8e",
+      "identity_hash": "98ba310b9c4ef6e3",
       "reader_title": "A proposed German fibre backbone for sharing quantum and precision-timing signals nationwide",
       "reader_what": "Researchers propose a ten-year, four-phase national dark-fibre backbone distributing quantum and precise time signals.",
-      "reader_why": "Such capability currently reaches only a few institutions, limiting European research access and industrial deployment.",
       "reader_more": "This is a white paper setting out a design, not a funded or built system. The authors, from German metrology and research-networking institutions, propose dedicated unlit optical fibre carrying quantum signals and reference time and frequency signals between laboratories and companies. They argue the underlying links are already demonstrated at high technical maturity, citing existing German connections, the REFIMEVE network in France and Italy's LIFT network. The rollout is planned in four phases over ten years to widen access beyond today's isolated testbeds. Whether it is built depends on national funding decisions the paper itself cannot settle.",
       "deep_analysis": {
         "work_kind": "proposal / white paper",
@@ -10162,10 +10528,66 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://link.springer.com/article/10.1140/epjs/s11734-026-02451-3 contained substantive matching text for “The QTF Backbone: proposal for a nationwide optical fibre backbone in Germany for quantum technology and time and frequency metrology”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1140/epjs/s11734-026-02451-3",
+            "title": "The QTF Backbone: proposal for a nationwide optical fibre backbone in Germany for quantum technology and time and frequency metrology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article proposes a German quantum/time-frequency fibre backbone positioned as national and European R&I infrastructure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "a6b96a8e",
+          "reader_title": "A proposed German fibre backbone for sharing quantum and precision-timing signals nationwide",
+          "reader_what": "Researchers propose a ten-year, four-phase national dark-fibre backbone distributing quantum and precise time signals.",
+          "reader_why": "Such capability currently reaches only a few institutions, limiting European research access and industrial deployment.",
+          "reader_more": "This is a white paper setting out a design, not a funded or built system. The authors, from German metrology and research-networking institutions, propose dedicated unlit optical fibre carrying quantum signals and reference time and frequency signals between laboratories and companies. They argue the underlying links are already demonstrated at high technical maturity, citing existing German connections, the REFIMEVE network in France and Italy's LIFT network. The rollout is planned in four phases over ten years to widen access beyond today's isolated testbeds. Whether it is built depends on national funding decisions the paper itself cannot settle.",
+          "deep_analysis": {
+            "work_kind": "proposal / white paper",
+            "research_question": "How could Germany move quantum and time-and-frequency signal distribution beyond isolated testbeds into shared national infrastructure?",
+            "main_finding": "The authors propose a dedicated national dark-fibre backbone, deployed in four phases over ten years, arguing the component links are already proven at high technology readiness elsewhere in Europe.",
+            "method_or_basis": "Design proposal by a multi-institution author group, building on demonstrated fibre links (PTB-MPQ, REFIMEVE, LIFT); publisher open-access full text supplied in package.",
+            "qualification": "A proposal only: no deployment, funding commitment or independent evaluation is reported, and the ten-year phasing is intended rather than agreed.",
+            "radar_relevance": "Concerns European research infrastructure for quantum technology and for resilient timing, including reducing dependence on satellite navigation signals.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://defence-industry-space.ec.europa.eu/commission-welcomes-political-agreement-programme-agile-and-rapid-defence-innovation-agile-2026-07-16_en": {
       "profile": "deep-reader-v2-authoritative",
@@ -12209,12 +12631,12 @@
       "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
     },
     "link:https://doi.org/10.1186/s40309-026-00282-y": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_b",
       "source_hash": "51e497aa",
+      "identity_hash": "3afe1e61bc31c76c",
       "reader_title": "Experts map what would have to change for a post-growth Europe to be feasible",
       "reader_what": "Participants judge most current trends to block strong sustainability while identifying specific openings for intervention.",
-      "reader_why": "Produces scenarios and futures statements for Europe under post-growth rather than growth assumptions.",
       "reader_more": "Post-growth covers economic models such as degrowth, doughnut economics and wellbeing economics that aim for development within planetary limits rather than expanding output. The method the authors call integral foresight combines a review of literature on possible futures with horizon scanning and scenario building, run as multiple online rounds among researchers, subject experts and futurists. The output is a filtered, refined and categorised set of futures statements spanning social, technological, economic, environmental, political, legal, ethical and demographic dimensions, plus scenarios built on differing assumptions. The conclusions are expert expectations elicited through a structured process, not forecasts or evidence about what will occur. Participants were recruited for their engagement with post-growth and sustainability, which shapes the range of views represented.",
       "deep_analysis": {
         "work_kind": "peer-reviewed foresight study",
@@ -12226,10 +12648,66 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://link.springer.com/article/10.1186/s40309-026-00282-y contained substantive matching text for “The enrichment of post-growth future alternatives for Europe using an online integral foresight methodology”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1186/s40309-026-00282-y",
+            "title": "The enrichment of post-growth future alternatives for Europe using an online integral foresight methodology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The study develops and applies an integral online foresight methodology that can be reused to enrich post-growth future alternatives."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:48Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_b",
+          "source_hash": "51e497aa",
+          "reader_title": "Experts map what would have to change for a post-growth Europe to be feasible",
+          "reader_what": "Participants judge most current trends to block strong sustainability while identifying specific openings for intervention.",
+          "reader_why": "Produces scenarios and futures statements for Europe under post-growth rather than growth assumptions.",
+          "reader_more": "Post-growth covers economic models such as degrowth, doughnut economics and wellbeing economics that aim for development within planetary limits rather than expanding output. The method the authors call integral foresight combines a review of literature on possible futures with horizon scanning and scenario building, run as multiple online rounds among researchers, subject experts and futurists. The output is a filtered, refined and categorised set of futures statements spanning social, technological, economic, environmental, political, legal, ethical and demographic dimensions, plus scenarios built on differing assumptions. The conclusions are expert expectations elicited through a structured process, not forecasts or evidence about what will occur. Participants were recruited for their engagement with post-growth and sustainability, which shapes the range of views represented.",
+          "deep_analysis": {
+            "work_kind": "peer-reviewed foresight study",
+            "research_question": "What trends, weak signals and pathways bear on the feasibility of post-growth futures for Europe?",
+            "main_finding": "Experts expect many current trends to obstruct strong sustainability in Europe, while judging that intervention points exist and that desirable post-growth alternatives remain reachable, notably through democratic stewardship of nature.",
+            "method_or_basis": "Integral foresight process combining post-growth and sustainable development literature with horizon scanning and scenario building across multiple online interactive rounds with researchers, experts and futurists; publisher full text supplied.",
+            "qualification": "Findings are structured expert expectations rather than forecasts or empirical results, and participants were selected for existing engagement with post-growth and sustainability topics.",
+            "radar_relevance": "Develops explicitly European future alternatives under post-growth assumptions, offering scenario material for European sustainability and economic policy debate.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:48Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://doi.org/10.1186/s40309-026-00278-8": {
       "profile": "deep-reader-v2-authoritative",
@@ -13700,12 +14178,12 @@
       ]
     },
     "link:https://doi.org/10.1177/2336825x261468733": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "320b6ed4",
+      "identity_hash": "3cb2c2a8822fdda3",
       "reader_title": "European defence autonomy limited by industrial capacity, not ambition",
       "reader_what": "Argues European strategic autonomy is constrained by weak defence production networks and uneven national industrial capability.",
-      "reader_why": "Reframes strategic autonomy as a question of sustained production capacity rather than policy declarations.",
       "reader_more": "The article takes a political economy approach to European defence and defines strategic autonomy in industrial terms. The test it proposes is the ability to sustain procurement, maintenance and replenishment during prolonged high-intensity conflict. On this definition, the constraint is not the level of stated ambition but entrenched structural weaknesses in defence supply chains and uneven industrial capability across European states. The title signals particular attention to central and eastern European countries as a constraint on military-industrial cooperation. The packaged record preserves only the abstract, so the underlying evidence and the specific regional argument could not be checked.",
       "deep_analysis": {
         "work_kind": "analytical article (political economy)",
@@ -13717,10 +14195,76 @@
         "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://doi.org/10.1177/2336825x261468733 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1177/2336825x261468733 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://journals.sagepub.com/doi/10.1177/2336825X261468733."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.sagepub.com/doi/10.1177/2336825X261468733",
+            "title": "Strategic autonomy without strategic depth? European defence supply chains, military-industrial cooperation, and the central and eastern European constraint",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly analyses European defence supply-chain depth, military-industrial cooperation and the Central/Eastern European constraint."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "320b6ed4",
+          "reader_title": "European defence autonomy limited by industrial capacity, not ambition",
+          "reader_what": "Argues European strategic autonomy is constrained by weak defence production networks and uneven national industrial capability.",
+          "reader_why": "Reframes strategic autonomy as a question of sustained production capacity rather than policy declarations.",
+          "reader_more": "The article takes a political economy approach to European defence and defines strategic autonomy in industrial terms. The test it proposes is the ability to sustain procurement, maintenance and replenishment during prolonged high-intensity conflict. On this definition, the constraint is not the level of stated ambition but entrenched structural weaknesses in defence supply chains and uneven industrial capability across European states. The title signals particular attention to central and eastern European countries as a constraint on military-industrial cooperation. The packaged record preserves only the abstract, so the underlying evidence and the specific regional argument could not be checked.",
+          "deep_analysis": {
+            "work_kind": "analytical article (political economy)",
+            "research_question": "What actually limits European strategic autonomy in defence, given stated ambitions and existing industrial structures.",
+            "main_finding": "European strategic autonomy is limited chiefly by structural deficiencies in defence production networks and uneven industrial capabilities rather than by insufficient political ambition.",
+            "method_or_basis": "Stored publisher abstract in the package; publisher page returned 403",
+            "qualification": "Abstract only; the evidence base and the central and eastern European element of the argument are unverified.",
+            "radar_relevance": "Connects defence industrial capacity and supply chains to European strategic autonomy and technology policy.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.1080/00343404.2026.2688966": {
       "profile": "deep-reader-offline-v1",
@@ -18090,12 +18634,12 @@
       ]
     },
     "link:https://www.cesaer.org/publications/input-note-european-research-area-act/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "5a84bdd0",
+      "identity_hash": "ab37faf9e480873e",
       "reader_title": "University network wants binding research investment targets in the ERA Act",
       "reader_what": "CESAER recommends firm research and development investment targets, national roadmaps and coordinated EU action in the ERA Act.",
-      "reader_why": "Pushes for enforceable investment commitments rather than voluntary coordination.",
       "reader_more": "CESAER has submitted an input note with recommendations for the European Research Area Act. Its central asks are firm research and development investment targets, national roadmaps setting out how countries will reach them, and coordinated action across the EU to strengthen the European Research Area. The supplied page carries only this summary, so the detailed reasoning, any proposed target levels and the suggested compliance mechanisms are not available. The position is notable because the long-standing European target for research investment has been indicative rather than binding, and the association is arguing for a firmer approach in the forthcoming legislation.",
       "deep_analysis": {
         "work_kind": "stakeholder input note",
@@ -18107,18 +18651,84 @@
         "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "Supplied source https://www.cesaer.org/publications/input-note-european-research-area-act/ did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/underlying-document search recovered the matching official work at https://www.cesaer.org/content/5-operations/2026/20260122-cesaer-input-note-era-act-public-consultation.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/20260122-cesaer-input-note-era-act-public-consultation.pdf",
+            "title": "European Research Area Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The CESAER input note contains concrete proposals for the European Research Area Act, including R&D investment targets, roadmaps and coordination."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "5a84bdd0",
+          "reader_title": "University network wants binding research investment targets in the ERA Act",
+          "reader_what": "CESAER recommends firm research and development investment targets, national roadmaps and coordinated EU action in the ERA Act.",
+          "reader_why": "Pushes for enforceable investment commitments rather than voluntary coordination.",
+          "reader_more": "CESAER has submitted an input note with recommendations for the European Research Area Act. Its central asks are firm research and development investment targets, national roadmaps setting out how countries will reach them, and coordinated action across the EU to strengthen the European Research Area. The supplied page carries only this summary, so the detailed reasoning, any proposed target levels and the suggested compliance mechanisms are not available. The position is notable because the long-standing European target for research investment has been indicative rather than binding, and the association is arguing for a firmer approach in the forthcoming legislation.",
+          "deep_analysis": {
+            "work_kind": "stakeholder input note",
+            "research_question": "",
+            "main_finding": "CESAER calls for the European Research Area Act to contain firm research and development investment targets backed by national roadmaps and coordinated EU action.",
+            "method_or_basis": "Packaged publisher landing page, which contained only a summary sentence",
+            "qualification": "Advocacy input during legislative preparation; target levels and enforcement detail were not available.",
+            "radar_relevance": "Directly addresses what the forthcoming ERA Act should require of member states on research investment.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://www.cesaer.org/publications/universities-and-research-institutes-call-on-council-to-build-on-parliaments-momentum-on-fp10-and-the-ecf/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "c88ac1ca",
+      "identity_hash": "6cfdc8c9e3460987",
       "reader_title": "Universities and institutes urge Council to protect research funding in FP10 talks",
       "reader_what": "Joint statement asks the Council to build on Parliament positions on FP10 and the European Competitiveness Fund.",
-      "reader_why": "Targets the Council stage where the next funding architecture will be settled.",
       "reader_more": "CESAER has joined partner organisations in a statement addressed to the Council of the European Union on the next Framework Programme and the proposed European Competitiveness Fund. The signatories ask the Council to build on positions already taken by the European Parliament, and to ensure that the future funding architecture supports excellent research, advanced technologies, talent and the uptake of innovation. The supplied source is a publication landing page carrying only this summary, so the specific demands, the list of co-signatories and any proposed budget figures could not be established. The record is best read as evidence that the research-performing sector is lobbying jointly at the Council stage of negotiations.",
       "deep_analysis": {
         "work_kind": "joint stakeholder statement",
@@ -18130,10 +18740,76 @@
         "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "Supplied source https://www.cesaer.org/publications/universities-and-research-institutes-call-on-council-to-build-on-parliaments-momentum-on-fp10-and-the-ecf/ did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/underlying-document search recovered the matching official work at https://www.cesaer.org/content/5-operations/2026/20260527-universities-and-research-institutes-call-on-council-to-build-on-parliaments-momentum-on-fp10-and-the-ecf.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/20260527-universities-and-research-institutes-call-on-council-to-build-on-parliaments-momentum-on-fp10-and-the-ecf.pdf",
+            "title": "Universities and research institutes call on Council to build on Parliament’s momentum on FP10 and the ECF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The joint statement makes substantive recommendations on FP10 and the European Competitiveness Fund funding architecture for European research and innovation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "c88ac1ca",
+          "reader_title": "Universities and institutes urge Council to protect research funding in FP10 talks",
+          "reader_what": "Joint statement asks the Council to build on Parliament positions on FP10 and the European Competitiveness Fund.",
+          "reader_why": "Targets the Council stage where the next funding architecture will be settled.",
+          "reader_more": "CESAER has joined partner organisations in a statement addressed to the Council of the European Union on the next Framework Programme and the proposed European Competitiveness Fund. The signatories ask the Council to build on positions already taken by the European Parliament, and to ensure that the future funding architecture supports excellent research, advanced technologies, talent and the uptake of innovation. The supplied source is a publication landing page carrying only this summary, so the specific demands, the list of co-signatories and any proposed budget figures could not be established. The record is best read as evidence that the research-performing sector is lobbying jointly at the Council stage of negotiations.",
+          "deep_analysis": {
+            "work_kind": "joint stakeholder statement",
+            "research_question": "",
+            "main_finding": "Research-performing organisations are jointly pressing the Council to preserve support for excellent research, talent and innovation uptake in the FP10 and European Competitiveness Fund architecture.",
+            "method_or_basis": "Packaged publisher landing page, which contained only a summary sentence",
+            "qualification": "Only the summary was available; the detailed asks and signatory list were not recoverable from the package.",
+            "radar_relevance": "Concerns the design of the next EU research funding architecture during legislative negotiation.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://ecas.org/cdn-cgi/l/email-protection#80e9eee6efc0e5e3e1f3aeeff2e7": {
       "profile": "deep-reader-v2-authoritative",
@@ -18786,12 +19462,12 @@
       ]
     },
     "link:https://www.cnrs.fr/sites/default/files/press_info/2026-05/CP-VivaTech-2026_VEN_0.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "f7048472",
+      "identity_hash": "9f8301db5fb07c99",
       "reader_title": "French national research agency presents basic research as the base of technological sovereignty",
       "reader_what": "CNRS used a major technology fair to argue basic research underpins French deeptech and sovereignty in three strategic fields.",
-      "reader_why": "Illustrates national framing of curiosity-driven research as a sovereignty instrument.",
       "reader_more": "This CNRS press release sets out its programme for the tenth VivaTech technology fair, held from 17 to 20 June 2026, built around technological sovereignty. The agency argues that basic research is the source of deeptech innovation and a key lever for French sovereignty in three fields: ecological transition, cybersecurity and artificial intelligence, and industrial competitiveness. These align with national priorities including the France 2030 plan, the priority research programmes and equipment scheme of which CNRS leads 44, and the French national cybersecurity strategy for 2026 to 2030. The programme includes an industrial competitiveness day covering artificial intelligence, electronics and European cooperation to support innovative start-ups. This is promotional communication, not an evaluation.",
       "deep_analysis": {
         "work_kind": "institutional press release",
@@ -18803,10 +19479,66 @@
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://www.cnrs.fr/sites/default/files/press_info/2026-05/CP-VivaTech-2026_VEN_0.pdf contained substantive matching text for “The CNRS at VivaTech 2026: basic research central to technological sovereignty”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.cnrs.fr/sites/default/files/press_info/2026-05/CP-VivaTech-2026_VEN_0.pdf",
+            "title": "The CNRS at VivaTech 2026: basic research central to technological sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROMOTIONAL_NOT_SUBSTANTIVE",
+        "reason": "The verified CNRS item is a promotional press release for VivaTech participation; it does not itself provide a substantive R&I study, policy decision or evidence release."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:52Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "f7048472",
+          "reader_title": "French national research agency presents basic research as the base of technological sovereignty",
+          "reader_what": "CNRS used a major technology fair to argue basic research underpins French deeptech and sovereignty in three strategic fields.",
+          "reader_why": "Illustrates national framing of curiosity-driven research as a sovereignty instrument.",
+          "reader_more": "This CNRS press release sets out its programme for the tenth VivaTech technology fair, held from 17 to 20 June 2026, built around technological sovereignty. The agency argues that basic research is the source of deeptech innovation and a key lever for French sovereignty in three fields: ecological transition, cybersecurity and artificial intelligence, and industrial competitiveness. These align with national priorities including the France 2030 plan, the priority research programmes and equipment scheme of which CNRS leads 44, and the French national cybersecurity strategy for 2026 to 2030. The programme includes an industrial competitiveness day covering artificial intelligence, electronics and European cooperation to support innovative start-ups. This is promotional communication, not an evaluation.",
+          "deep_analysis": {
+            "work_kind": "institutional press release",
+            "research_question": "",
+            "main_finding": "CNRS publicly frames fundamental research as the foundation of deeptech and national technological sovereignty, tying its programme to France 2030 and the national cybersecurity strategy.",
+            "method_or_basis": "Packaged PDF excerpt of the official press release",
+            "qualification": "Communication material about an event; it presents institutional positioning rather than evidence.",
+            "radar_relevance": "Shows how a major national research organisation links basic research to sovereignty and European cooperation.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:52Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://allea.org/event-report-supporting-the-ukrainian-research-ecosystem-through-international-exchange-and-collaboration/": {
       "profile": "deep-reader-v2-authoritative",
@@ -19621,12 +20353,12 @@
       ]
     },
     "link:https://era.gv.at/news-items/new-report-urges-stronger-eu-rules-to-boost-innovation-procurement/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "497dd231",
+      "identity_hash": "e28f59f484f0b51d",
       "reader_title": "Expert report says weak EU rules leave innovation procurement underused",
       "reader_what": "Report finds European innovation procurement lags other major economies and blames weak incentives in EU law.",
-      "reader_why": "Identifies public purchasing law as an unused lever for European innovation uptake.",
       "reader_more": "A new expert report finds that innovation procurement, meaning public purchasing used deliberately to create demand for new solutions, remains significantly underused in Europe compared with other major economies. It attributes this largely to weak incentives in the EU legal framework and examines the legal barriers limiting wider adoption across Member States. The report compares European practice with approaches in the United States, the United Kingdom, Canada, China, Japan and South Korea, arguing that other jurisdictions have handled similar problems more effectively. On that basis the experts propose concrete legal measures to close gaps in the European framework, and argue that a more ambitious legal and policy approach is needed to strengthen competitiveness and speed up adoption of innovative solutions.",
       "deep_analysis": {
         "work_kind": "expert report reported in a news item",
@@ -19638,10 +20370,76 @@
         "confidence": "medium",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "Supplied source https://era.gv.at/news-items/new-report-urges-stronger-eu-rules-to-boost-innovation-procurement/ did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/underlying-document search recovered the matching official work at https://op.europa.eu/en/publication-detail/-/publication/055d1a01-5971-11f1-b3e2-01aa75ed71a1/language-en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_record",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/055d1a01-5971-11f1-b3e2-01aa75ed71a1/language-en",
+            "title": "Overcoming legal barriers for the uptake of innovation procurement in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The European Commission report directly analyses legal barriers to innovation procurement in the EU and recommends changes to strengthen uptake."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:52Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T08:42:07Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "497dd231",
+          "reader_title": "Expert report says weak EU rules leave innovation procurement underused",
+          "reader_what": "Report finds European innovation procurement lags other major economies and blames weak incentives in EU law.",
+          "reader_why": "Identifies public purchasing law as an unused lever for European innovation uptake.",
+          "reader_more": "A new expert report finds that innovation procurement, meaning public purchasing used deliberately to create demand for new solutions, remains significantly underused in Europe compared with other major economies. It attributes this largely to weak incentives in the EU legal framework and examines the legal barriers limiting wider adoption across Member States. The report compares European practice with approaches in the United States, the United Kingdom, Canada, China, Japan and South Korea, arguing that other jurisdictions have handled similar problems more effectively. On that basis the experts propose concrete legal measures to close gaps in the European framework, and argue that a more ambitious legal and policy approach is needed to strengthen competitiveness and speed up adoption of innovative solutions.",
+          "deep_analysis": {
+            "work_kind": "expert report reported in a news item",
+            "research_question": "Why innovation procurement is underused in the EU and what legal changes would increase it.",
+            "main_finding": "European innovation procurement lags comparable economies mainly because the EU legal framework provides weak incentives, and the experts propose targeted legal changes to close that gap.",
+            "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the expert report",
+            "qualification": "Summary of an expert report; the underlying comparative data and the specific legal proposals were not available.",
+            "radar_relevance": "Public procurement is a major potential demand-side instrument for European innovation policy.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:52Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://era.gv.at/news-items/commission-proposes-tech-sovereignty-package-to-strengthen-europes-digital-autonomy-and-resilience/": {
       "profile": "deep-reader-v2-authoritative",
@@ -29692,6 +30490,746 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-14T08:39:45Z",
       "deep_scan_package_id": "worker-b-20260914T080755Z-00501c41f66a"
+    },
+    "link:https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "62ae2be6",
+      "identity_hash": "d1584fa0e2b10905",
+      "reader_title": "How European technical universities are strengthening research careers",
+      "reader_what": "Case studies show practical ways universities improve career stability, recruitment and early-career support.",
+      "reader_why": "Operational examples can inform research-career policy across the European Research Area.",
+      "reader_more": "The CESAER report assembles good-practice cases from universities of science and technology across Europe. It focuses on recruitment, career development, early-career support and institutional conditions for research careers. The cases are examples of practice rather than an impact evaluation. They extend CESAER’s earlier work on improving the attractiveness and sustainability of research careers.",
+      "deep_analysis": {
+        "work_kind": "European higher-education policy report and case-study collection",
+        "research_question": "How universities of science and technology can strengthen research careers across Europe.",
+        "main_finding": "The report identifies concrete institutional practices for more stable, attractive and supportive research careers.",
+        "method_or_basis": "Good-practice case studies contributed by CESAER member universities and policy synthesis.",
+        "qualification": "The report showcases practices; it does not establish comparative causal effects.",
+        "radar_relevance": "Directly concerns European research workforce capacity and institutional R&I policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "Supplied source https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/ did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/underlying-document search recovered the matching official work at https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf",
+            "title": "Advancing research careers across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The underlying CESAER report contains substantive European case evidence on research careers and university R&I workforce policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:07Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145459": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "caa82689",
+      "identity_hash": "f909bc430130cb4c",
+      "reader_title": "EU status report tracks progress in non-animal methods",
+      "reader_what": "JRC reviews scientific, validation and regulatory advances in non-animal testing, including organ-on-chip, AI and multi-omics.",
+      "reader_why": "Links research innovation to EU regulatory uptake, standardisation and Horizon Europe activity.",
+      "reader_more": "The JRC/EURL ECVAM status report reviews the state of non-animal approaches in science and regulation. It covers technical advances, validation, standardisation and policy uptake, including newer computational and human-relevant methods. The document links scientific capability with EU regulatory practice and research programmes. It is a broad status synthesis rather than a single experimental study.",
+      "deep_analysis": {
+        "work_kind": "official EU scientific and regulatory status report",
+        "research_question": "What progress has been made in non-animal methods and their scientific and regulatory uptake.",
+        "main_finding": "Non-animal methods are advancing across experimental, computational and regulatory domains, but validation and uptake remain uneven.",
+        "method_or_basis": "JRC/EURL ECVAM synthesis of scientific developments, validation activity, regulatory practice and EU initiatives.",
+        "qualification": "A status review; evidence strength varies across the methods covered.",
+        "radar_relevance": "Tracks European research capability, regulatory science and translation of emerging methods into practice.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "Supplied source https://publications.jrc.ec.europa.eu/repository/handle/JRC145459 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://publications.jrc.ec.europa.eu/repository/handle/JRC145459."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_repository_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC145459",
+            "title": "Non-Animal Methods in Science and Regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The JRC status report substantively reviews scientific, validation and regulatory progress in non-animal methods within the EU research and regulatory ecosystem."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:07Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://ecipe.org/publications/copyright-trap/#_ftnref9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "7a1cd07e",
+      "identity_hash": "feae54182751fb20",
+      "reader_title": "ECIPE warns tighter copyright rules could constrain Europe’s AI economy",
+      "reader_what": "Policy brief argues restricting text-and-data-mining access would raise data scarcity and weaken European AI competitiveness.",
+      "reader_why": "Connects copyright design directly to AI inputs, startup capability and EU strategic autonomy.",
+      "reader_more": "ECIPE examines copyright and text-and-data-mining rules as an input constraint on European AI development. It argues that more restrictive access to training data would raise costs and reinforce existing scale disadvantages. The analysis connects copyright design to competition, innovation and technological sovereignty. It is a policy argument, so its projected effects are not a causal evaluation of a policy change.",
+      "deep_analysis": {
+        "work_kind": "economic policy brief",
+        "research_question": "How copyright and text-and-data-mining rules affect Europe’s AI development and competitiveness.",
+        "main_finding": "The brief argues that tighter data-access restrictions would increase scarcity and weaken European AI firms relative to larger incumbents.",
+        "method_or_basis": "Policy and economic analysis of copyright rules, data access and AI market structure.",
+        "qualification": "Advocacy-oriented policy analysis rather than a quasi-experimental impact study.",
+        "radar_relevance": "Directly addresses EU AI innovation capacity and regulatory conditions affecting technology development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://ecipe.org/publications/copyright-trap/#_ftnref9 contained substantive matching text for “The Copyright Trap”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecipe.org/publications/copyright-trap/#_ftnref9",
+            "title": "The Copyright Trap",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "ECIPE provides a substantive EU-focused analysis of copyright, text-and-data mining and implications for European AI innovation capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:07Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.1007/s13132-026-03245-7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "085498fa",
+      "identity_hash": "557320de21f823ec",
+      "reader_title": "University knowledge transfer boosts firm innovation, especially with internal R&D",
+      "reader_what": "Across 14 countries, university knowledge transfer is associated with more product and process innovation.",
+      "reader_why": "Internal R&D strengthens firms’ ability to absorb transferred knowledge.",
+      "reader_more": "The study uses Community Innovation Survey data covering 12,884 observations across 14 countries. It tests how domestic and international university knowledge transfer relates to product and process innovation, and how internal R&D changes that relationship. Knowledge transfer is positively associated with innovation outcomes, with absorptive capacity conditioning the effect. The design is observational, so the results should not be read as clean causal estimates.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed cross-country empirical study",
+        "research_question": "How university-industry knowledge transfer affects firm innovation and how internal R&D conditions that relationship.",
+        "main_finding": "Domestic and international university knowledge transfer are positively associated with product and process innovation, especially where firms maintain internal R&D capability.",
+        "method_or_basis": "Community Innovation Survey data, 12,884 observations across 14 countries, analysed with multivariate models.",
+        "qualification": "Observational associations remain vulnerable to selection and unobserved firm differences.",
+        "radar_relevance": "Direct evidence on European innovation diffusion, university-industry links and absorptive capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://link.springer.com/article/10.1007/s13132-026-03245-7 contained substantive matching text for “Knowledge Transfer and Firm Innovation: The Conditioning Role of Absorptive Capacity in University–Industry Collaboration”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s13132-026-03245-7",
+            "title": "Knowledge Transfer and Firm Innovation: The Conditioning Role of Absorptive Capacity in University–Industry Collaboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The peer-reviewed study analyses university-industry knowledge transfer and firm innovation across 14 countries, directly addressing European innovation performance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "4a426e6c",
+      "identity_hash": "2bc3c654198a198f",
+      "reader_title": "CESAER proposes clearer rules for civil, dual-use and defence R&I funding",
+      "reader_what": "Input note separates dual-use as legal compliance category and strategic pathway across future EU funding programmes.",
+      "reader_why": "Clearer programme architecture could reduce ambiguity across FP10, ECF and defence funding.",
+      "reader_more": "CESAER argues that future EU funding should distinguish civil, dual-use and defence research more clearly. It proposes treating dual-use both as a legal export-control category and as a strategic pathway for research that may acquire defence relevance. The note links this architecture to FP10, the European Competitiveness Fund and defence instruments. It is a stakeholder policy position, not an evaluation of enacted funding rules.",
+      "deep_analysis": {
+        "work_kind": "stakeholder policy input note",
+        "research_question": "How future EU programmes should structure civil, dual-use and defence R&I funding.",
+        "main_finding": "CESAER proposes a clearer two-part treatment of dual-use to reduce legal and strategic ambiguity across funding programmes.",
+        "method_or_basis": "Policy analysis building on CESAER’s prior position and member experience.",
+        "qualification": "Represents a university-network position and proposed design, not adopted EU policy.",
+        "radar_relevance": "Directly concerns EU research funding, research security and dual-use innovation governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf contained substantive matching text for “Clarifying and optimising civil, dual-use and defence research and innovation in future EU funding programmes”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf",
+            "title": "Clarifying and optimising civil, dual-use and defence research and innovation in future EU funding programmes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The CESAER input note makes detailed proposals for structuring civil, dual-use and defence R&I across future EU funding programmes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://ecipe.org/wp-content/uploads/2026/04/ECI_OccasionalPaper_04-2026_LY02.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "e74c433c",
+      "identity_hash": "e527148e15fa3cc1",
+      "reader_title": "Europe’s space strategy faces financing, market-structure and innovation gaps",
+      "reader_what": "ECIPE identifies scale-up finance, incumbent market structure and falling patent share as core European space weaknesses.",
+      "reader_why": "These constraints limit new-space firm growth and Europe’s technological competitiveness.",
+      "reader_more": "ECIPE assesses Europe’s position in the changing global space economy. The report highlights scale-up financing constraints, market concentration around legacy actors and weaker innovation indicators relative to competitors. It argues that Europe needs policy and market changes that better support new-space firms and commercialization. Patent and market indicators are informative but cannot by themselves measure the full quality of technological capability.",
+      "deep_analysis": {
+        "work_kind": "European space-economy policy report",
+        "research_question": "Why Europe is underperforming in the new space economy and which structural constraints matter most.",
+        "main_finding": "Financing gaps, incumbent-heavy market structure and weaker innovation indicators constrain European new-space scaling and competitiveness.",
+        "method_or_basis": "ECIPE space-economy data, patent indicators, market analysis and policy review.",
+        "qualification": "Patent counts and market shares are imperfect proxies for technological capability.",
+        "radar_relevance": "Directly examines European strategic technology, industrial capability and innovation policy in space.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source https://ecipe.org/wp-content/uploads/2026/04/ECI_OccasionalPaper_04-2026_LY02.pdf contained substantive matching text for “Rethinking Europe’s Space Strategy for the 21st Century: From Legacy Champions to the New Space Economy”."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecipe.org/wp-content/uploads/2026/04/ECI_OccasionalPaper_04-2026_LY02.pdf",
+            "title": "Rethinking Europe’s Space Strategy for the 21st Century: From Legacy Champions to the New Space Economy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The report analyses structural weaknesses and policy options for Europe’s space innovation and industrial capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.1177/10245294261450371": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "06311eb4",
+      "identity_hash": "07bb7735f4f16aad",
+      "reader_title": "The EIC Fund is reshaping EU venture-capital governance",
+      "reader_what": "Study examines how the European Innovation Council Fund changes public involvement in high-risk innovation financing.",
+      "reader_why": "Public equity introduces governance tools that can discipline and steer venture investment.",
+      "reader_more": "The article studies the EIC Fund as a new form of EU intervention in venture capital for high-risk innovation. It examines how public equity changes relationships among the Commission, fund managers, firms and private investors. The contribution is about the governance of innovation finance rather than only the amount of money deployed. Its conclusions are tied to the institutional design of the EIC Fund.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed institutional study of innovation finance",
+        "research_question": "How the EIC Fund remakes governance and discipline in European venture-capital financing.",
+        "main_finding": "Direct public equity creates new governance relationships and steering mechanisms in EU innovation finance.",
+        "method_or_basis": "Institutional and qualitative analysis of the EIC Fund and its governance arrangements.",
+        "qualification": "Findings are specific to a young EU financing instrument whose practices may continue to evolve.",
+        "radar_relevance": "Directly addresses EU innovation finance, scale-up support and public venture-capital governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://doi.org/10.1177/10245294261450371 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1177/10245294261450371 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://journals.sagepub.com/doi/10.1177/10245294261450371."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.sagepub.com/doi/10.1177/10245294261450371",
+            "title": "Disciplining venture capital? The remaking of innovation financing in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article examines how the EIC Fund changes governance of high-risk innovation financing in the European Union."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://arxiv.org/abs/2605.13634": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "00117405",
+      "identity_hash": "ae44287bdb5d9c0f",
+      "reader_title": "Europe needs an AGI preparedness plan before capability shocks arrive",
+      "reader_what": "Report flags gaps in compute, talent, industrial AI uptake and policy coordination under uncertain AGI timelines.",
+      "reader_why": "Preparedness could improve EU situational awareness, value-chain position and geopolitical resilience.",
+      "reader_more": "The report assesses possible AGI timelines, geopolitical consequences and Europe’s current readiness. It identifies weaknesses in frontier-AI awareness, compute, talent retention, industrial adoption and coordination across EU and member-state policy. It proposes preparedness measures focused on institutional capacity, the AI value chain and international stability. AGI timing remains deeply uncertain, so the scenarios are strategic planning inputs rather than forecasts of an observed outcome.",
+      "deep_analysis": {
+        "work_kind": "strategic policy report",
+        "research_question": "How soon AGI might emerge, how it could change geopolitics and whether Europe is prepared.",
+        "main_finding": "Europe has material preparedness gaps in compute, talent, industrial AI adoption and policy coordination under plausible rapid-capability scenarios.",
+        "method_or_basis": "Synthesis of AI capability trends, expert forecasts and policy analysis.",
+        "qualification": "AGI definitions and timelines are uncertain; scenario-based implications are not predictions.",
+        "radar_relevance": "Directly addresses European frontier-AI capability, strategic autonomy and preparedness.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "Supplied source https://arxiv.org/abs/2605.13634 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the underlying full report at https://cfg.eu/the-geopolitics-of-agi/, matching the arXiv version."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://cfg.eu/the-geopolitics-of-agi/",
+            "title": "Europe and the Geopolitics of AGI: The Need for a Preparedness Plan",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The full report assesses Europe’s frontier-AI preparedness and proposes policy options on compute, talent, industrial uptake and coordination."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.1016/j.techsoc.2026.103453": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "source_hash": "48eda281",
+      "identity_hash": "9a30d78fa5ad9b03",
+      "reader_title": "Regional foresight works best when embedded across the policy cycle",
+      "reader_what": "Three European regional cases integrate place understanding, anticipatory capacity and reflexive monitoring into challenge-oriented policy.",
+      "reader_why": "Embedding foresight throughout the cycle strengthens anticipatory capacity and transformative resilience.",
+      "reader_more": "The JRC paper compares foresight use in Helsinki-Uusimaa, Scotland and the Basque Country. It integrates shared place-based understanding, anticipatory capacity, and reflexive monitoring across the policy cycle. The methodological contribution is the operational combination of these elements for challenge-oriented regional policy, rather than invention of each component separately. Evidence comes from a small set of European regional cases.",
+      "deep_analysis": {
+        "work_kind": "comparative methodological framework and regional policy study",
+        "research_question": "How strategic foresight can be operationalised across regional policy cycles to build transformative resilience.",
+        "main_finding": "Foresight is more useful when place understanding, anticipation and reflexive monitoring are integrated across the policy cycle.",
+        "method_or_basis": "Abductive qualitative comparison of Helsinki-Uusimaa, Scotland and Basque Country cases.",
+        "qualification": "The framework is grounded in three cases and needs wider testing across institutions and regions.",
+        "radar_relevance": "Provides a reusable foresight-policy framework for regional transformation and resilience.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://linkinghub.elsevier.com/retrieve/pii/S0160791X26002423 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1016/j.techsoc.2026.103453 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://publications.jrc.ec.europa.eu/repository/handle/JRC140771."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_repository_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC140771",
+            "title": "Building anticipatory capacity for transformative resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The JRC study integrates foresight functions across the regional policy cycle into a transferable framework for anticipatory capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:08Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.1093/jeg/lbag022": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "b1c59f0b",
+      "identity_hash": "1ecc47955c5b17a6",
+      "reader_title": "EU subsidies helped offset Germany’s semiconductor cost disadvantage",
+      "reader_what": "Firm interviews link German semiconductor investment to supply-chain risk, geopolitics, market demand and EU subsidies.",
+      "reader_why": "Subsidies changed the cost-capability trade-off facing semiconductor location decisions.",
+      "reader_more": "The case study investigates why semiconductor firms chose or considered German investment after 2020. Interviews point to supply-chain resilience, geopolitics, customer proximity and public subsidies alongside Germany’s higher operating costs. EU and national support altered the location calculus for strategically important capacity. The evidence is sector- and country-specific, so it should not be generalized mechanically to other technologies.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed qualitative industry case study",
+        "research_question": "Which post-2020 factors shaped semiconductor firms’ location and investment strategies in Germany.",
+        "main_finding": "Geopolitical and supply-chain concerns increased the value of European capacity, while subsidies helped compensate for Germany’s cost disadvantages.",
+        "method_or_basis": "Firm interviews and case-study analysis of the German semiconductor industry.",
+        "qualification": "A Germany-specific qualitative case cannot establish average subsidy effects across industries.",
+        "radar_relevance": "Direct evidence on EU semiconductor policy, strategic capability and supply-chain resilience.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://doi.org/10.1093/jeg/lbag022 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1093/jeg/lbag022 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://academic.oup.com/joeg/advance-article/doi/10.1093/jeg/lbag022/8658747."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/joeg/advance-article/doi/10.1093/jeg/lbag022/8658747",
+            "title": "State subsidies, supply chain resilience, and geopolitics influencing firm strategies in a post-2020 context",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article provides direct evidence on semiconductor location strategies, EU subsidies, geopolitics and supply-chain resilience in Germany."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:09Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.1080/09662839.2026.2627905": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "937ef4dc",
+      "identity_hash": "b90ce6a1d865dd71",
+      "reader_title": "EU digital-sovereignty goals span security, control and technological capacity",
+      "reader_what": "Legal-text analysis identifies how EU digital-security objectives are framed through sovereignty-related goals and instruments.",
+      "reader_why": "Clarifying goals separates strategic-autonomy rhetoric from concrete security objectives.",
+      "reader_more": "The article analyses EU legal and policy texts to identify the goals associated with digital sovereignty. It distinguishes several objectives that combine security, control over digital dependencies and technological capacity. The work helps make an ambiguous policy concept more operational by tying it to specific legal aims. It maps official texts rather than measuring whether sovereignty policies have achieved their intended effects.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed legal and policy document analysis",
+        "research_question": "Which concrete digital-security goals are associated with digital sovereignty in EU legal texts.",
+        "main_finding": "EU digital-sovereignty language bundles multiple security, control and capability objectives that can be distinguished analytically.",
+        "method_or_basis": "Structured qualitative analysis of European Union legal and policy texts.",
+        "qualification": "The study identifies policy goals; it does not evaluate implementation outcomes.",
+        "radar_relevance": "Directly clarifies EU digital-sovereignty and security policy objectives affecting strategic technology.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://doi.org/10.1080/09662839.2026.2627905 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1080/09662839.2026.2627905 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://www.tandfonline.com/doi/full/10.1080/09662839.2026.2627905."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2026.2627905",
+            "title": "Digital sovereignty and the means to European digital security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article systematically identifies digital-sovereignty goals from European Union legal texts and links them to digital security."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:09Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.1163/29505720-bja00013": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "ec62ab3b",
+      "identity_hash": "8a8a0c9a2c61fc9d",
+      "reader_title": "Brexit weakened the UK’s bargaining position in cloud infrastructure",
+      "reader_what": "UK public cloud dependence on US providers reflects smaller market leverage and weak post-Brexit investment.",
+      "reader_why": "Market size and domestic investment shape bargaining power over critical digital infrastructure.",
+      "reader_more": "The paper studies the UK’s dependence on US hyperscale cloud providers and the political economy behind that dependence. It links Brexit-related market separation, domestic investment weakness and procurement choices to reduced bargaining leverage. The analysis treats cloud infrastructure as a strategic dependency rather than a routine IT procurement issue. Because it is a UK case study, the mechanism should be tested before generalizing to other European markets.",
+      "deep_analysis": {
+        "work_kind": "legal-political economy case study",
+        "research_question": "Why the UK has accepted deep cloud dependence and how Brexit changed its leverage over providers.",
+        "main_finding": "Reduced market scale and weak domestic investment reinforced UK dependence on US cloud providers and constrained bargaining power.",
+        "method_or_basis": "Legal, policy and market analysis supported by a full working-paper/manuscript version.",
+        "qualification": "A single-country institutional study; causal attribution among Brexit, investment and procurement is not experimentally identified.",
+        "radar_relevance": "Addresses European digital infrastructure dependence, strategic autonomy and cloud capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed_or_empty",
+            "note": "Supplied source https://doi.org/10.1163/29505720-bja00013 did not provide sufficient substantive matching text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI search/resolution for 10.1163/29505720-bja00013 confirmed the work identity and led to a matching publisher/repository source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching primary text at https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5229150."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5229150",
+            "title": "Embraced Dependence: a Study on the UK Approach to Cloud Computing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity was reconciled against the cited primary/official source; the admission decision uses substantive evidence rather than scanner or search-snippet prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The study analyses UK cloud dependence, post-Brexit bargaining leverage and strategic digital-infrastructure capability in a European context."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate candidate was a high-confidence match to this underlying work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T08:42:09Z",
+      "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
     }
   }
 }

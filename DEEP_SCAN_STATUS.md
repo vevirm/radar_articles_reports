@@ -3,29 +3,29 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **359**
-- Still needing V2 verification: **310**
-- Currently assigned to workers: **84**
+- Authoritative V2 verified: **384**
+- Still needing V2 verification: **285**
+- Currently assigned to workers: **72**
 - Deferred after exhaustive recovery: **40**
-- Pending and not yet assigned: **186**
+- Pending and not yet assigned: **173**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T084024Z-a02443386555`
-- Assigned unresolved records: **48**
-  1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-good-practice-for-advancing-research-careers-in-europe/`
-  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145459`
-  3. `link:https://ecipe.org/publications/copyright-trap/#_ftnref9`
-  4. `link:https://era.gv.at/news-items/new-report-urges-stronger-eu-rules-to-boost-innovation-procurement/`
-  5. `link:https://doi.org/10.1007/s13132-026-03245-7`
-  6. `link:https://doi.org/10.1016/j.eiar.2026.108574`
-  7. `link:https://www.cnrs.fr/sites/default/files/press_info/2026-05/CP-VivaTech-2026_VEN_0.pdf`
-  8. `link:https://www.cesaer.org/content/5-operations/2026/20260326-cesaer-input-note-dual-use.pdf`
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260914T084246Z-0157c8ab2566`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1016/j.technovation.2026.103600`
+  2. `link:https://doi.org/10.1080/10301763.2026.2726657`
+  3. `link:https://doi.org/10.1007/s13132-026-03451-3`
+  4. `link:https://doi.org/10.1016/j.sftr.2026.102116`
+  5. `link:https://doi.org/10.2478/eoik-2026-0051`
+  6. `link:https://doi.org/10.1016/j.eist.2026.101171`
+  7. `link:https://doi.org/10.1007/s43253-026-00180-w`
+  8. `link:https://doi.org/10.1002/aiv2.70011`
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T084038Z-8cea0b7ba14f`
+- Current package: `worker-b-20260914T084258Z-8cea0b7ba14f`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.33663/0869-2491-2026-37-804-814`
   2. `link:https://doi.org/10.1016/j.cose.2026.105102`
