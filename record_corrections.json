@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-13T23:35:57Z",
+  "updated_at": "2026-09-14T00:01:40Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -1092,6 +1092,68 @@
       ],
       "updated_at": "2026-09-13T23:35:57Z",
       "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/": {
+      "fields": {
+        "authors": "ALLEA"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page is an institutional ALLEA news item; 'maria ronald' is a site account name, not an author of the work.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/"
+      ],
+      "updated_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf": {
+      "fields": {
+        "title": "EU-ANSA Statement on Research Engagement",
+        "authors": "EU Agencies Network for Scientific Advice (EU-ANSA)",
+        "source": "EU Agencies Network for Scientific Advice (EU-ANSA)"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The PDF is the EU-ANSA statement; ECDC hosts the file but is not the issuing body, and the scanner headline was a paraphrase rather than the document title.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf"
+      ],
+      "updated_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf": {
+      "fields": {
+        "title": "Appeal of the ALLEA General Assembly in Support of Ukrainian Science",
+        "authors": "ALLEA",
+        "date": "2026-05-28"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The PDF states it was adopted in Warsaw on 28 May 2026 and carries this title; 'maria ronald' is a site account name and the 5 June date is the web posting date.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf"
+      ],
+      "updated_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://www.sitra.fi/wp-content/uploads/2026/06/Sitra-Building-One-Europe-One-Market.pdf": {
+      "fields": {
+        "title": "Building One Europe, One Market - Four strategic priorities for the digital single market",
+        "authors": "Reijo Aarnio, Artur Bogucki, Raquel Jorge Ricart, Paul Timmers, Tiina Vainio",
+        "type": "institutional report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report's own title page gives the full subtitle and names five authors from Sitra and CEPS; the scanner recorded a truncated web title and the publisher as author.",
+      "source": "deep_scan_v2",
+      "evidence": [
+        "https://www.sitra.fi/wp-content/uploads/2026/06/Sitra-Building-One-Europe-One-Market.pdf"
+      ],
+      "updated_at": "2026-09-14T00:01:40Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
     }
   }
 }

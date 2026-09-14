@@ -3,16 +3,16 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **186**
-- Still needing V2 verification: **482**
-- Currently assigned to workers: **96**
+- Authoritative V2 verified: **197**
+- Still needing V2 verification: **471**
+- Currently assigned to workers: **85**
 - Deferred after exhaustive recovery: **3**
 - Pending and not yet assigned: **383**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260913T233750Z-f157cdaba50f`
+- Current package: `worker-a-20260914T000213Z-f157cdaba50f`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1093/scipol/scag041`
   2. `link:https://era.gv.at/news-items/stakeholders-react-to-eps-draft-reports-on-horizon-europe-2028/`
@@ -25,17 +25,17 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260913T233803Z-29c94389b6cc`
-- Assigned unresolved records: **48**
-  1. `link:https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/`
-  2. `link:https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/`
-  3. `link:https://era.gv.at/news-items/itre-committee-presents-draft-reports-on-fp10-proposal/`
-  4. `link:https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf`
-  5. `link:https://era.gv.at/news-items/european-innovation-act-should-put-universities-at-the-heart-of-innovation-eua-says/`
-  6. `link:https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf`
-  7. `link:https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf`
-  8. `link:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/`
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260914T000229Z-de04044f9be2`
+- Assigned unresolved records: **37**
+  1. `link:https://doi.org/10.1002/psp.70369`
+  2. `link:https://era.gv.at/news-items/european-union-and-australia-successfully-conclude-horizon-europe-negotiations/`
+  3. `link:https://era.gv.at/news-items/commission-proposes-128-billion-for-horizon-europe-in-2027/`
+  4. `link:https://era.gv.at/news-items/commission-proposes-tech-sovereignty-package-to-strengthen-europes-digital-autonomy-and-resilience/`
+  5. `link:https://doi.org/10.1080/23779497.2026.2645265`
+  6. `link:https://doi.org/10.1186/s13705-026-00595-7`
+  7. `link:https://doi.org/10.1002/cep4.70037`
+  8. `link:https://ec.europa.eu/newsroom/dae/redirection/document/129111`
+  - … plus 29 more in the package manifest
 
 ## Deferred recovery queue
 

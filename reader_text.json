@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-13T23:35:57Z",
+  "generated_at": "2026-09-14T00:01:40Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-offline-v1",
@@ -8650,27 +8650,89 @@
       ]
     },
     "link:https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "f545f133",
-      "reader_title": "Council sets its partial negotiating position on the EU's next research framework programme",
-      "reader_what": "Position gives member states a stronger priority-setting role and strengthens research security and dual-use provisions.",
-      "reader_why": "Sets the Council's mandate for negotiations with Parliament on the 2028-2034 framework programme.",
-      "reader_more": "The position is explicitly partial: financial and broader horizontal questions remain tied to the wider 2028-2034 budget negotiation, and elements concerning the European Institute of Innovation and Technology are excluded pending separate proposals. It covers the regulation establishing the programme together with its participation and dissemination rules, and the Council decision on the specific programme that implements it. Substantively the Council proposes a four-pillar structure, closer links to the proposed European Competitiveness Fund, stronger provisions on European Partnerships, research security and dual-use or limited defence-related applications, simpler cost and reporting arrangements, and continued support for widening participation. None of this is settled, since the text now serves as a mandate for talks with the European Parliament.",
+      "identity_hash": "6dd76b5b1cb55ec9",
+      "reader_title": "Council agrees a partial negotiating position on Horizon Europe 2028-2034",
+      "reader_what": "The Council agreed a partial negotiating position on the next framework programme regulation and specific programme.",
+      "reader_why": "The Council position sets one side of the trilogue on EU research funding.",
+      "reader_more": "The Council agreed a partial negotiating position covering the Horizon Europe regulation and its specific programme, which together form the EU's tenth framework programme for research and innovation. As a core part of the next Multiannual Financial Framework, the programme is intended to strengthen scientific excellence, improve competitiveness and address societal challenges. Beyond the Commission's proposal for a significantly larger budget, the Council supports close links with the future European Competitiveness Fund for more coherent investment support. The position is explicitly partial, so budgetary elements remain open.",
       "deep_analysis": {
-        "work_kind": "current development / institutional news report",
+        "work_kind": "legislative current development",
         "research_question": "",
-        "main_finding": "The Council agreed a partial negotiating position on the next framework programme, giving member states a greater role in strategic priority-setting, reorganising the programme into four pillars, tightening research security provisions and opening space for dual-use and limited defence-related applications.",
-        "method_or_basis": "Institutional news summary by the ERA Portal Austria of the Council's partial general approach; page text supplied in package.",
-        "qualification": "A negotiating mandate rather than a final decision: budget and horizontal issues remain open, EIT elements are excluded, and this is a secondary summary rather than the Council text itself.",
-        "radar_relevance": "Concerns the design, governance and security rules of the EU's next research and innovation framework programme for 2028-2034.",
+        "main_finding": "The Council adopted a partial position supporting tighter links between Horizon Europe and the European Competitiveness Fund.",
+        "method_or_basis": "Report of Council decision within the MFF negotiation.",
+        "qualification": "Partial position only; budget figures depend on the wider MFF outcome.",
+        "radar_relevance": "Central EU research-funding decision for the next programme period.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034/ ; 200, full item dated 29 Jun 2026 describing the partial negotiating position."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034/",
+            "title": "Council agrees its position on Horizon Europe 2028-2034",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full news item recovered; confirms the position is partial and linked to the MFF and the European Competitiveness Fund."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports a formal Council negotiating position on the next EU framework programme, a major research-policy decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T11:47:47Z",
-      "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+      "reader_text_written_at": "2026-09-14T00:01:40Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "f545f133",
+          "reader_title": "Council sets its partial negotiating position on the EU's next research framework programme",
+          "reader_what": "Position gives member states a stronger priority-setting role and strengthens research security and dual-use provisions.",
+          "reader_why": "Sets the Council's mandate for negotiations with Parliament on the 2028-2034 framework programme.",
+          "reader_more": "The position is explicitly partial: financial and broader horizontal questions remain tied to the wider 2028-2034 budget negotiation, and elements concerning the European Institute of Innovation and Technology are excluded pending separate proposals. It covers the regulation establishing the programme together with its participation and dissemination rules, and the Council decision on the specific programme that implements it. Substantively the Council proposes a four-pillar structure, closer links to the proposed European Competitiveness Fund, stronger provisions on European Partnerships, research security and dual-use or limited defence-related applications, simpler cost and reporting arrangements, and continued support for widening participation. None of this is settled, since the text now serves as a mandate for talks with the European Parliament.",
+          "deep_analysis": {
+            "work_kind": "current development / institutional news report",
+            "research_question": "",
+            "main_finding": "The Council agreed a partial negotiating position on the next framework programme, giving member states a greater role in strategic priority-setting, reorganising the programme into four pillars, tightening research security provisions and opening space for dual-use and limited defence-related applications.",
+            "method_or_basis": "Institutional news summary by the ERA Portal Austria of the Council's partial general approach; page text supplied in package.",
+            "qualification": "A negotiating mandate rather than a final decision: budget and horizontal issues remain open, EIT elements are excluded, and this is a secondary summary rather than the Council text itself.",
+            "radar_relevance": "Concerns the design, governance and security rules of the EU's next research and innovation framework programme for 2028-2034.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T11:47:47Z",
+          "deep_scan_package_id": "20260913T110817Z-06be954e7d12"
+        }
+      ]
     },
     "link:https://fiia.fi/wp-content/uploads/2026/06/RP6_The-EUs-need-for-a-new-growth-model.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -10680,27 +10742,89 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://era.gv.at/news-items/european-innovation-act-should-put-universities-at-the-heart-of-innovation-eua-says/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "1ff6b435",
-      "reader_title": "University association asks for universities to be central in the European Innovation Act",
-      "reader_what": "EUA sets five priorities for the European Innovation Act and rejects measuring innovation only by patents.",
-      "reader_why": "Shapes the first EU law devoted to innovation while its scope is still open.",
-      "reader_more": "The European University Association has urged the EU to use the forthcoming European Innovation Act to build a shared European innovation culture with universities at its centre. It argues universities matter because they combine curiosity-driven research with attention to societal impact, and that the Act should address university needs as well as those of industry and smaller firms. Five priorities are proposed: a shared innovation culture, clearer intellectual property guidance, better use of results from EU-funded research, stronger entrepreneurial and professional skills, and easier local and international collaboration. The association also argues that patents, licences and spin-offs are too narrow a measure of innovation, and calls for proof-of-concept funding, technology transfer expertise and cross-sector mobility.",
+      "identity_hash": "e8c55847f9aab5b8",
+      "reader_title": "University association urges the European Innovation Act to centre universities",
+      "reader_what": "EUA argues the Act should build a shared European innovation culture with universities at its core.",
+      "reader_why": "The Act would be the first EU law focused solely on innovation.",
+      "reader_more": "The European University Association has urged the EU to use the upcoming European Innovation Act to build a genuinely shared European innovation culture. As the first major EU law dedicated solely to innovation, the Act is presented as an opportunity to address university challenges alongside those of industry and SMEs. EUA argues universities are essential because they combine curiosity-driven research with a focus on societal impact, and it sets out five priorities including fostering a shared innovation culture. This is a stakeholder position on a proposal still in preparation.",
       "deep_analysis": {
-        "work_kind": "stakeholder position reported in a news item",
+        "work_kind": "stakeholder policy position reported as news",
         "research_question": "",
-        "main_finding": "The European University Association is calling for the European Innovation Act to place universities at the centre and to broaden how innovation is measured beyond patents and spin-offs.",
-        "method_or_basis": "Packaged text of the ERA Portal Austria news item summarising the EUA position",
-        "qualification": "An advocacy position on draft legislation, not evidence about what the Act will contain or achieve.",
-        "radar_relevance": "Direct input into the first EU legislative act dedicated to innovation and to university knowledge transfer.",
+        "main_finding": "EUA sets five priorities for the European Innovation Act, centred on universities' role in innovation.",
+        "method_or_basis": "Association position statement reported by the ERA Portal.",
+        "qualification": "The Act was not yet adopted; this is input to the legislative process.",
+        "radar_relevance": "Concerns EU innovation legislation and the role of universities in it.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/news-items/european-innovation-act-should-put-universities-at-the-heart-of-innovation-eua-says/ ; 200, full item dated 06 Jul 2026 setting out the EUA's five priorities."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://era.gv.at/news-items/european-innovation-act-should-put-universities-at-the-heart-of-innovation-eua-says/",
+            "title": "European Innovation Act should put universities at the heart of innovation, EUA says",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full news item recovered; reports EUA's position on the forthcoming European Innovation Act."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports the European University Association's substantive position on a named forthcoming EU innovation law."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "1ff6b435",
+          "reader_title": "University association asks for universities to be central in the European Innovation Act",
+          "reader_what": "EUA sets five priorities for the European Innovation Act and rejects measuring innovation only by patents.",
+          "reader_why": "Shapes the first EU law devoted to innovation while its scope is still open.",
+          "reader_more": "The European University Association has urged the EU to use the forthcoming European Innovation Act to build a shared European innovation culture with universities at its centre. It argues universities matter because they combine curiosity-driven research with attention to societal impact, and that the Act should address university needs as well as those of industry and smaller firms. Five priorities are proposed: a shared innovation culture, clearer intellectual property guidance, better use of results from EU-funded research, stronger entrepreneurial and professional skills, and easier local and international collaboration. The association also argues that patents, licences and spin-offs are too narrow a measure of innovation, and calls for proof-of-concept funding, technology transfer expertise and cross-sector mobility.",
+          "deep_analysis": {
+            "work_kind": "stakeholder position reported in a news item",
+            "research_question": "",
+            "main_finding": "The European University Association is calling for the European Innovation Act to place universities at the centre and to broaden how innovation is measured beyond patents and spin-offs.",
+            "method_or_basis": "Packaged text of the ERA Portal Austria news item summarising the EUA position",
+            "qualification": "An advocacy position on draft legislation, not evidence about what the Act will contain or achieve.",
+            "radar_relevance": "Direct input into the first EU legislative act dedicated to innovation and to university knowledge transfer.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://doi.org/10.2478/kbo-2026-0026": {
       "profile": "deep-reader-v2-authoritative",
@@ -11992,27 +12116,89 @@
       ]
     },
     "link:https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "2a1de5f5",
-      "reader_title": "Research organisations argue the Marie Curie programme must stay bottom-up in FP10",
-      "reader_what": "Joint statement argues MSCA should remain an open, researcher-driven research programme, not a skills-shortage instrument.",
-      "reader_why": "Defends bottom-up funding as negotiations on the next Framework Programme and budget advance.",
-      "reader_more": "The statement marks thirty years of the Marie Sklodowska-Curie Actions and argues the programme is central to Europe research talent base. Its central claim is that MSCA works because it is a research programme that is bottom-up and open to all fields, supporting early and mid-career researchers rather than serving labour market shortages in strategic sectors. The signatories warn that introducing top-down thematic priorities would reduce unexpected breakthroughs and interdisciplinary work, weakening long-term resilience and competitiveness. They point to persistent oversubscription, with many excellent proposals unfunded, and argue the priority is to increase the programme impact rather than change its model. The statement cites Commission evaluations of Horizon 2020 and Horizon Europe in support.",
+      "identity_hash": "b16eaad648b81571",
+      "reader_title": "Research organisations call MSCA a strategic advantage for European research talent",
+      "reader_what": "The statement argues Europe's innovation capacity depends on generating knowledge and cultivating research talent.",
+      "reader_why": "MSCA funding decisions shape Europe's researcher pipeline for the next programme period.",
+      "reader_more": "Issued in Brussels on 29 June 2026, this joint statement frames research talent as central to Europe's competitiveness, technological leadership and strategic autonomy. It notes that attention often focuses on technologies, industries and investment, while long-term innovation capacity rests on generating new knowledge and the researchers behind it. Marking thirty years since its launch, the signatories position the Marie Sklodowska-Curie Actions as one of Europe's most important instruments for that purpose. The document is an advocacy statement tied to framework-programme negotiations.",
       "deep_analysis": {
-        "work_kind": "joint stakeholder position statement",
+        "work_kind": "joint policy statement",
         "research_question": "",
-        "main_finding": "European research organisations call for the Marie Sklodowska-Curie Actions to be reinforced in FP10 while keeping their bottom-up, field-agnostic design and resisting thematic steering.",
-        "method_or_basis": "Packaged PDF excerpt of the joint statement",
-        "qualification": "Advocacy during budget negotiations; supporting claims rest on cited Commission evaluations rather than new analysis.",
-        "radar_relevance": "Directly addresses the design of EU researcher funding and talent policy in the next Framework Programme.",
+        "main_finding": "Signatories argue MSCA should be reinforced because research talent underpins European strategic autonomy.",
+        "method_or_basis": "Collective position statement signed by European research organisations.",
+        "qualification": "Advocacy position ahead of budget decisions; not an evaluation of MSCA outcomes.",
+        "radar_relevance": "Directly addresses EU research-funding policy and research careers.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf ; 200, the signed joint statement PDF dated 29 June 2026, Brussels."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this joint statement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf",
+            "title": "Joint Statement: MSCA: Research Talent is Europe's Strategic Advantage",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full PDF of the joint statement recovered and read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A joint statement by European research organisations arguing for MSCA in the next framework programme, squarely within EU research-policy scope."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "2a1de5f5",
+          "reader_title": "Research organisations argue the Marie Curie programme must stay bottom-up in FP10",
+          "reader_what": "Joint statement argues MSCA should remain an open, researcher-driven research programme, not a skills-shortage instrument.",
+          "reader_why": "Defends bottom-up funding as negotiations on the next Framework Programme and budget advance.",
+          "reader_more": "The statement marks thirty years of the Marie Sklodowska-Curie Actions and argues the programme is central to Europe research talent base. Its central claim is that MSCA works because it is a research programme that is bottom-up and open to all fields, supporting early and mid-career researchers rather than serving labour market shortages in strategic sectors. The signatories warn that introducing top-down thematic priorities would reduce unexpected breakthroughs and interdisciplinary work, weakening long-term resilience and competitiveness. They point to persistent oversubscription, with many excellent proposals unfunded, and argue the priority is to increase the programme impact rather than change its model. The statement cites Commission evaluations of Horizon 2020 and Horizon Europe in support.",
+          "deep_analysis": {
+            "work_kind": "joint stakeholder position statement",
+            "research_question": "",
+            "main_finding": "European research organisations call for the Marie Sklodowska-Curie Actions to be reinforced in FP10 while keeping their bottom-up, field-agnostic design and resisting thematic steering.",
+            "method_or_basis": "Packaged PDF excerpt of the joint statement",
+            "qualification": "Advocacy during budget negotiations; supporting claims rest on cited Commission evaluations rather than new analysis.",
+            "radar_relevance": "Directly addresses the design of EU researcher funding and talent policy in the next Framework Programme.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://www.cesaer.org/publications/marie-sklodowska-curie-actions-research-talent-is-europes-strategic-advantage/": {
       "profile": "deep-reader-offline-v1",
@@ -12843,27 +13029,89 @@
       ]
     },
     "link:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "b725d2fa",
-      "reader_title": "Research funders ask for a new bottom-up collaborative instrument in FP10",
-      "reader_what": "Science Europe argues current Horizon Europe schemes leave early-stage researcher-driven collaboration underserved and proposes a dedicated instrument.",
-      "reader_why": "Targets a specific gap between individual grants and large top-down consortium calls.",
-      "reader_more": "Science Europe has renewed its call for stronger support of bottom-up, curiosity-driven research, arguing that long-term competitiveness and breakthrough innovation rest on fundamental, open-ended science. In the discussion of Horizon Europe for 2028 to 2034, it welcomes plans to support such research and argues for a new dedicated instrument for bottom-up collaborative research and innovation. Its diagnosis is that existing schemes mainly fund single beneficiaries or allow only limited collaboration, leaving early-stage researcher-driven cooperation underused. The proposed component would sit alongside current instruments, supporting open-ended interdisciplinary collaboration, strengthening cross-border research networks and reinforcing the European Research Area.",
+      "identity_hash": "96d89f5ade5b117c",
+      "reader_title": "Science Europe backs a dedicated bottom-up collaborative research instrument in FP10",
+      "reader_what": "Science Europe calls for a new instrument funding bottom-up collaborative research in the next framework programme.",
+      "reader_why": "Existing Horizon Europe schemes leave collaborative curiosity-driven research underserved.",
+      "reader_more": "Science Europe renewed its call for stronger support for bottom-up, curiosity-driven research, arguing that long-term competitiveness and breakthrough innovation depend on fundamental, open-ended science. In the context of Horizon Europe 2028-2034 discussions, it welcomes plans to support this type of research and presses for a dedicated instrument for bottom-up collaborative research and innovation. It argues that existing schemes mainly support single beneficiaries or only limited collaboration. This is an association position feeding into framework-programme design.",
       "deep_analysis": {
-        "work_kind": "stakeholder position reported in a news item",
+        "work_kind": "stakeholder policy position reported as news",
         "research_question": "",
-        "main_finding": "Science Europe proposes a new FP10 instrument dedicated to bottom-up collaborative research, on the grounds that present schemes support individuals or only limited collaboration.",
-        "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the Science Europe position",
-        "qualification": "An advocacy proposal; the claimed gap in current instruments is asserted rather than demonstrated with data here.",
-        "radar_relevance": "Directly concerns the instrument architecture of the next Framework Programme.",
+        "main_finding": "Science Europe identifies a gap in Horizon Europe's support for collaborative bottom-up research and proposes a new instrument.",
+        "method_or_basis": "Association position on framework-programme architecture.",
+        "qualification": "A proposal for programme design; no decision has been taken.",
+        "radar_relevance": "Directly concerns the design of the next EU framework programme.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/ ; 200, full item dated 25 Jun 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10/",
+            "title": "Science Europe supports new instrument for collaborative bottom-up research in FP10",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full news item recovered, including the specific gap Science Europe identifies in current Horizon Europe schemes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports a concrete Science Europe proposal for a new funding instrument in the next EU framework programme."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:50Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T00:01:40Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "b725d2fa",
+          "reader_title": "Research funders ask for a new bottom-up collaborative instrument in FP10",
+          "reader_what": "Science Europe argues current Horizon Europe schemes leave early-stage researcher-driven collaboration underserved and proposes a dedicated instrument.",
+          "reader_why": "Targets a specific gap between individual grants and large top-down consortium calls.",
+          "reader_more": "Science Europe has renewed its call for stronger support of bottom-up, curiosity-driven research, arguing that long-term competitiveness and breakthrough innovation rest on fundamental, open-ended science. In the discussion of Horizon Europe for 2028 to 2034, it welcomes plans to support such research and argues for a new dedicated instrument for bottom-up collaborative research and innovation. Its diagnosis is that existing schemes mainly fund single beneficiaries or allow only limited collaboration, leaving early-stage researcher-driven cooperation underused. The proposed component would sit alongside current instruments, supporting open-ended interdisciplinary collaboration, strengthening cross-border research networks and reinforcing the European Research Area.",
+          "deep_analysis": {
+            "work_kind": "stakeholder position reported in a news item",
+            "research_question": "",
+            "main_finding": "Science Europe proposes a new FP10 instrument dedicated to bottom-up collaborative research, on the grounds that present schemes support individuals or only limited collaboration.",
+            "method_or_basis": "Packaged text of the ERA Portal Austria item summarising the Science Europe position",
+            "qualification": "An advocacy proposal; the claimed gap in current instruments is asserted rather than demonstrated with data here.",
+            "radar_relevance": "Directly concerns the instrument architecture of the next Framework Programme.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:50Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-and-egypt-strengthen-research-and-innovation-partnership-following-horizon-europe-association-2026-06-25_en": {
       "profile": "deep-reader-v2-authoritative",
@@ -14013,27 +14261,89 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://www.sitra.fi/wp-content/uploads/2026/06/Sitra-Building-One-Europe-One-Market.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
       "source_hash": "9f71613b",
-      "reader_title": "Study maps ten bottlenecks holding back Europe digital single market",
-      "reader_what": "Report identifies ten cross-border bottlenecks clustering into four structural dysfunctions and proposes four strategic priorities.",
-      "reader_why": "Frames digital market fragmentation as a direct constraint on European strategic autonomy.",
-      "reader_more": "This Sitra study, prepared with the Centre for European Policy Studies and Professor Paul Timmers, examines structural obstacles to the digital single market. It reviews Commission, business and think tank work from 2023 to 2026, identifies ten bottlenecks that consistently limit companies ability to operate and scale across borders, and uses systems mapping to show how they reinforce one another. The bottlenecks cluster into four dysfunctions: fragmented and unevenly implemented regulation, digital infrastructure confined within national silos, skills and labour mobility lagging behind digital transformation, and a financing and innovation ecosystem that does not support European digital companies scaling globally. From these the authors derive four strategic priorities: use digital, control digital, policy leadership, and simplify digital.",
+      "identity_hash": "a84c2deb13846f02",
+      "reader_title": "Sitra study sets four strategic priorities for Europe's digital single market",
+      "reader_what": "The study proposes four strategic priorities for completing and strengthening Europe's digital single market.",
+      "reader_why": "Digital single market design shapes European technological capability and scale.",
+      "reader_more": "Published as Sitra studies 258 in June 2026, the report was written by authors from Sitra and the Centre for European Policy Studies. It frames the digital single market as unfinished and sets out four strategic priorities for strengthening it. The analysis links market integration to Europe's wider capacity to compete in digital technologies. As a think-tank study it advances a policy argument rather than reporting new empirical measurement, and the priorities are recommendations rather than adopted commitments.",
       "deep_analysis": {
-        "work_kind": "think tank policy study",
-        "research_question": "Which structural bottlenecks hold back the EU digital single market and what priorities would unlock it.",
-        "main_finding": "Ten reinforcing bottlenecks cluster into four structural dysfunctions, and the authors argue fragmentation now limits not just the economy but Europe ability to shape global digital rules.",
-        "method_or_basis": "Packaged PDF excerpt including foreword and summary of the official study",
-        "qualification": "Synthesis of existing studies and expert input rather than new empirical measurement; priorities are proposals.",
-        "radar_relevance": "Connects single market fragmentation to European competitiveness, digital infrastructure and strategic autonomy.",
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "The report argues Europe needs four strategic priorities to build a genuine digital single market.",
+        "method_or_basis": "Policy analysis by a Sitra-CEPS author team.",
+        "qualification": "Think-tank recommendations, not adopted EU policy.",
+        "radar_relevance": "Concerns European digital market integration and technological capability.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.sitra.fi/wp-content/uploads/2026/06/Sitra-Building-One-Europe-One-Market.pdf ; 200, full report PDF; front matter reads 'Sitra studies 258, June 2026'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this Sitra study."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.sitra.fi/wp-content/uploads/2026/06/Sitra-Building-One-Europe-One-Market.pdf",
+            "title": "Building One Europe, One Market - Four strategic priorities for the digital single market (Sitra studies 258)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full report text recovered, giving the series number, date and the named author team."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A substantive published study on European digital single market policy, with direct bearing on Europe's technological and industrial capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:51Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T00:01:40Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "9f71613b",
+          "reader_title": "Study maps ten bottlenecks holding back Europe digital single market",
+          "reader_what": "Report identifies ten cross-border bottlenecks clustering into four structural dysfunctions and proposes four strategic priorities.",
+          "reader_why": "Frames digital market fragmentation as a direct constraint on European strategic autonomy.",
+          "reader_more": "This Sitra study, prepared with the Centre for European Policy Studies and Professor Paul Timmers, examines structural obstacles to the digital single market. It reviews Commission, business and think tank work from 2023 to 2026, identifies ten bottlenecks that consistently limit companies ability to operate and scale across borders, and uses systems mapping to show how they reinforce one another. The bottlenecks cluster into four dysfunctions: fragmented and unevenly implemented regulation, digital infrastructure confined within national silos, skills and labour mobility lagging behind digital transformation, and a financing and innovation ecosystem that does not support European digital companies scaling globally. From these the authors derive four strategic priorities: use digital, control digital, policy leadership, and simplify digital.",
+          "deep_analysis": {
+            "work_kind": "think tank policy study",
+            "research_question": "Which structural bottlenecks hold back the EU digital single market and what priorities would unlock it.",
+            "main_finding": "Ten reinforcing bottlenecks cluster into four structural dysfunctions, and the authors argue fragmentation now limits not just the economy but Europe ability to shape global digital rules.",
+            "method_or_basis": "Packaged PDF excerpt including foreword and summary of the official study",
+            "qualification": "Synthesis of existing studies and expert input rather than new empirical measurement; priorities are proposals.",
+            "radar_relevance": "Connects single market fragmentation to European competitiveness, digital infrastructure and strategic autonomy.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:51Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://allea.org/wp-content/uploads/2026/06/ALLEA-Activities-Report-Jan-Dec-2025_May-2026.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -14413,27 +14723,89 @@
       "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
     },
     "link:https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_a",
-      "source_hash": "11254079",
-      "reader_title": "Adopted text of the academies appeal on Ukrainian science",
-      "reader_what": "Assembly-adopted appeal restating 2022 commitments and asking funders to prioritise Ukraine research system rebuilding.",
-      "reader_why": "Keeps research capacity on the agenda of Ukraine recovery financing four years into the war.",
-      "reader_more": "This record points to the same appeal document as another entry in this package, captured under its formal title. Adopted by delegates at the ALLEA General Assembly in Warsaw on 28 May 2026, it reaffirms the ten-point action plan agreed by seven academies and ALLEA in June 2022 and states that those commitments remain urgent four years on. It records that Ukrainian science continues to develop despite extreme pressure, and that the war endangers researchers, institutions and scientific infrastructure. The operative request is that leaders and funding bodies designing recovery and assistance programmes treat the rebuilding of a modern, resilient and globally integrated research system as a cornerstone of Ukraine recovery.",
+      "source_hash": "d08d6a0b",
+      "identity_hash": "27b8f992a37bedc7",
+      "reader_title": "European academies appeal for rebuilding Ukraine's research system as recovery cornerstone",
+      "reader_what": "ALLEA urges leaders and funders to prioritise rebuilding Ukraine's research system in recovery programmes.",
+      "reader_why": "Recovery funding design determines whether Ukrainian research capacity is restored.",
+      "reader_more": "Adopted by delegates at the 2026 ALLEA General Assembly in Warsaw on 28 May 2026, the appeal reaffirms a ten-point action plan agreed in Warsaw in June 2022 by the Polish Academy of Sciences, the National Academy of Sciences of Ukraine, the US National Academy of Sciences, the Leopoldina, the Royal Danish Academy, the Royal Society and ALLEA. It warns that the aggression poses serious risks to researchers, research institutions and scientific infrastructure. It asks that recovery and financial assistance programmes treat a modern, resilient and globally integrated Ukrainian research system as a cornerstone of national recovery.",
       "deep_analysis": {
-        "work_kind": "adopted appeal / advocacy statement",
+        "work_kind": "adopted institutional appeal",
         "research_question": "",
-        "main_finding": "The appeal formally restates academy commitments to Ukrainian science and asks recovery funders to prioritise rebuilding the research system.",
-        "method_or_basis": "Packaged PDF excerpt of the adopted appeal",
-        "qualification": "Duplicate scanner record of a document already in this package; advocacy text without binding effect.",
-        "radar_relevance": "Concerns reconstruction of a national research system and its integration with European science.",
+        "main_finding": "ALLEA calls for research-system reconstruction to be prioritised within Ukraine recovery and assistance programmes.",
+        "method_or_basis": "Statement adopted by the ALLEA General Assembly, building on a 2022 seven-academy action plan.",
+        "qualification": "An appeal to funders and leaders; it carries no binding commitment.",
+        "radar_relevance": "Concerns European research cooperation, research security and Ukraine's association with EU research.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf ; 200, full appeal adopted at the 2026 ALLEA General Assembly in Warsaw on 28 May 2026."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this appeal."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://allea.org/wp-content/uploads/2026/06/ALLEA-GA26_APPEAL_UKRAINE.pdf",
+            "title": "Appeal of the ALLEA General Assembly in Support of Ukrainian Science",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full PDF recovered. The document's own title is the Appeal of the ALLEA General Assembly; the package's variant records describe the same single adopted appeal."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "An adopted statement by the European academies federation on rebuilding Ukraine's research system, with direct European research-policy relevance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:52Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_a",
+          "source_hash": "11254079",
+          "reader_title": "Adopted text of the academies appeal on Ukrainian science",
+          "reader_what": "Assembly-adopted appeal restating 2022 commitments and asking funders to prioritise Ukraine research system rebuilding.",
+          "reader_why": "Keeps research capacity on the agenda of Ukraine recovery financing four years into the war.",
+          "reader_more": "This record points to the same appeal document as another entry in this package, captured under its formal title. Adopted by delegates at the ALLEA General Assembly in Warsaw on 28 May 2026, it reaffirms the ten-point action plan agreed by seven academies and ALLEA in June 2022 and states that those commitments remain urgent four years on. It records that Ukrainian science continues to develop despite extreme pressure, and that the war endangers researchers, institutions and scientific infrastructure. The operative request is that leaders and funding bodies designing recovery and assistance programmes treat the rebuilding of a modern, resilient and globally integrated research system as a cornerstone of Ukraine recovery.",
+          "deep_analysis": {
+            "work_kind": "adopted appeal / advocacy statement",
+            "research_question": "",
+            "main_finding": "The appeal formally restates academy commitments to Ukrainian science and asks recovery funders to prioritise rebuilding the research system.",
+            "method_or_basis": "Packaged PDF excerpt of the adopted appeal",
+            "qualification": "Duplicate scanner record of a document already in this package; advocacy text without binding effect.",
+            "radar_relevance": "Concerns reconstruction of a national research system and its integration with European science.",
+            "confidence": "high",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:52Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://arxiv.org/abs/2606.06336": {
       "profile": "deep-reader-v2-authoritative",
@@ -19047,6 +19419,306 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-13T23:35:57Z",
       "deep_scan_package_id": "worker-a-20260913T224815Z-8fd374ecdc27"
+    },
+    "link:https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "4e523e2a",
+      "identity_hash": "01ec5f8d088492da",
+      "reader_title": "CESAER report urges scaling industrial doctorates to link European universities and industry",
+      "reader_what": "Industrial doctorates can strengthen university-industry collaboration and Europe's high-skilled research talent pipelines.",
+      "reader_why": "Doctoral training design shapes Europe's supply of researchers for industry.",
+      "reader_more": "CESAER, the association of European universities of science and technology, published a report on industrial doctorates on 31 March 2026. It sets out four strategic priorities and directs recommendations at EU institutions, Member States, regional authorities, universities and non-academic partners. Proposals include scaling funding through a reinforced MSCA in the next framework programme, simplifying regulatory and administrative barriers for SMEs and cross-border work, and embedding industrial doctorates in doctoral governance and research-career frameworks. The item is an association position, not an evaluation of outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy report reported via a national ERA portal news item",
+        "research_question": "",
+        "main_finding": "Industrial doctorates are presented as a way to reinforce research-industry talent pipelines when supported by robust co-supervision.",
+        "method_or_basis": "CESAER association position with four strategic priorities and targeted recommendations.",
+        "qualification": "Advocacy document; the claimed benefits are recommendations rather than measured effects.",
+        "radar_relevance": "Directly concerns European research careers, MSCA and the next EU framework programme.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/ ; resolved 200 to the full ERA Portal Austria news item dated 31 Mar 2026, reporting the CESAER industrial-doctorates report."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/",
+            "title": "CESAER presents report on how industrial doctorates strengthen research-industry pipelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Live re-fetch returned the complete news item, including the four strategic priorities and the addressees of the recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports a named CESAER report on industrial doctorates with concrete recommendations to EU institutions, Member States and universities on MSCA and the next Framework Programme."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "8ce25e45",
+      "identity_hash": "6d0a184142bee76c",
+      "reader_title": "European academies federation sets science-policy priorities at Brussels standing committee meeting",
+      "reader_what": "ALLEA's committee agreed priorities on horizon scanning, task-force coordination and emerging science-policy challenges.",
+      "reader_why": "ALLEA advice feeds European science-policy debate through its member academies.",
+      "reader_more": "On 7 May the ALLEA Science Policy Standing Committee met in Brussels, hosted by the Royal Flemish Academy of Belgium for Science and the Arts. Experts from across Europe reviewed science-policy developments and set future priorities for the research landscape. Discussion covered interconnected themes shaping European science, including public trust in science. The item records the committee's internal priority-setting rather than a formal published opinion, so it signals direction of work rather than adopted positions.",
+      "deep_analysis": {
+        "work_kind": "institutional governance/current development",
+        "research_question": "",
+        "main_finding": "The committee set working priorities spanning horizon scanning, coordination of task forces and emerging policy challenges.",
+        "method_or_basis": "ALLEA's own report of its standing committee meeting.",
+        "qualification": "A meeting report; no formal ALLEA statement or evidence output is published here.",
+        "radar_relevance": "Concerns the agenda-setting of a pan-European academies federation on research policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/ ; 200, full ALLEA news article describing the 7 May meeting in Brussels."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://allea.org/allea-science-policy-standing-committee-sets-priorities-for-horizon-scanning-task-force-coordination-and-emerging-policy-challenges/",
+            "title": "ALLEA Science Policy Standing Committee Sets Priorities for Horizon Scanning, Task Force Coordination, and Emerging Policy Challenges",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article recovered; confirms venue (KVAB, Brussels), chair and the substantive agenda."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports the priority-setting of ALLEA's Science Policy Standing Committee for European science policy, including horizon scanning and task-force coordination."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://era.gv.at/news-items/itre-committee-presents-draft-reports-on-fp10-proposal/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "9783cfb0",
+      "identity_hash": "34528f034648bc2c",
+      "reader_title": "Parliament rapporteurs table draft reports on the next EU research framework programme",
+      "reader_what": "ITRE rapporteurs presented draft reports on the future Horizon Europe regulation and its specific programme.",
+      "reader_why": "Parliament's draft reports set the terms for trilogue negotiation on FP10.",
+      "reader_more": "On 13 March 2026 rapporteur MEP Christian Ehler presented his draft report on the future Horizon Europe Regulation, and rapporteur MEP Rene Repasi tabled a draft report on the Specific Programme. The drafts were scheduled for discussion at the ITRE Committee on 23-24 March 2026, with amendments possible until 9 April 2026. Votes in ITRE and then plenary were expected in September or October, opening trilogue negotiations with the Council and Commission. These are draft positions, not adopted law.",
+      "deep_analysis": {
+        "work_kind": "legislative current development",
+        "research_question": "",
+        "main_finding": "Both ITRE rapporteurs formally tabled their draft reports, starting the Parliament's amendment process on FP10.",
+        "method_or_basis": "Report of European Parliament committee procedure with dated milestones.",
+        "qualification": "Draft reports only; content can change substantially through amendments and trilogue.",
+        "radar_relevance": "Core EU research-policy legislative process for the next framework programme.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/news-items/itre-committee-presents-draft-reports-on-fp10-proposal/ ; 200, full item dated 16 Mar 2026 with rapporteur names and the procedural timetable."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://era.gv.at/news-items/itre-committee-presents-draft-reports-on-fp10-proposal/",
+            "title": "ITRE Committee presents draft reports on FP10 proposal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text recovered; names rapporteurs Christian Ehler and Rene Repasi and the amendment/vote timetable."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports a concrete legislative step: European Parliament ITRE rapporteurs tabling draft reports on the next Framework Programme regulation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "c0e8a924",
+      "identity_hash": "9d918eb50203bea3",
+      "reader_title": "EU agencies network sets out how its research engagement supports European policy",
+      "reader_what": "EU agencies argue their research engagement strengthens evidence for policy and the European Research Area.",
+      "reader_why": "Agency research capacity feeds directly into EU regulatory and policy decisions.",
+      "reader_more": "The statement, issued by the EU Agencies Network for Scientific Advice, argues that challenges such as the geopolitical situation and climate change require system-based, transdisciplinary approaches. It calls for future research to support interdisciplinary collaboration, to develop evaluation mechanisms and to promote cross-sectoral collaboration, so integrated approaches become more effective and sustainable. It also positions EU agencies as actors that uphold citizens' trust in policymaking and can contribute to the European Research Area. The document sets out a collective position rather than reporting new empirical findings.",
+      "deep_analysis": {
+        "work_kind": "inter-agency policy statement",
+        "research_question": "",
+        "main_finding": "EU agencies set out their research role and call for transdisciplinary, cross-sectoral research approaches.",
+        "method_or_basis": "Collective statement agreed across the EU agencies scientific advice network.",
+        "qualification": "A position statement; it does not evaluate the agencies' research output.",
+        "radar_relevance": "Concerns research engagement by EU bodies and the European Research Area.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf ; 200, the EU-ANSA Statement on Research Engagement PDF hosted by ECDC."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this inter-agency statement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.ecdc.europa.eu/sites/default/files/documents/EU-ANSA-statement.pdf",
+            "title": "EU-ANSA Statement on Research Engagement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full statement PDF recovered; it is the EU Agencies Network for Scientific Advice statement, hosted on the ECDC site."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "An inter-agency statement on the research role of EU agencies and their contribution to the European Research Area."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T00:01:39Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
+    },
+    "link:https://allea.org/the-european-union-cannot-afford-fragmented-approach-to-advanced-materials/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "8c42bfe9",
+      "identity_hash": "a9404ce6ae9ff38b",
+      "reader_title": "Academies advise the Commission against a fragmented European approach to advanced materials",
+      "reader_what": "Scientific advisers urge a less fragmented EU approach to developing and deploying advanced materials.",
+      "reader_why": "Advanced materials underpin industrial and technological capability across sectors.",
+      "reader_more": "The Scientific Advice Mechanism advised the European Commission on strengthening Europe's position in the development and deployment of advanced materials. Science Advice for Policy by European Academies coordinated a working group of scientists nominated by European academies to prepare the underlying evidence review. The central message reported here is that a fragmented approach across the Union is not affordable. The item summarises formal advice; the operational response rests with the Commission and Member States.",
+      "deep_analysis": {
+        "work_kind": "scientific advice to policy",
+        "research_question": "",
+        "main_finding": "The academies advise that Europe's advanced-materials effort must be less fragmented to be effective.",
+        "method_or_basis": "Evidence review by a SAPEA working group feeding the EU Scientific Advice Mechanism.",
+        "qualification": "Advice to the Commission; adoption of the recommendations is not reported.",
+        "radar_relevance": "Concerns EU research and industrial capability in a critical technology area.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://allea.org/the-european-union-cannot-afford-fragmented-approach-to-advanced-materials/ ; 200, full ALLEA article on the SAPEA/Scientific Advice Mechanism output."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this item; identity rests on the issuing body's own page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://allea.org/the-european-union-cannot-afford-fragmented-approach-to-advanced-materials/",
+            "title": "The EU Cannot Afford Fragmented Approach to Advanced Materials, Academies Advise European Commission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article recovered; identifies SAM/SAPEA as the advice channel and the working group basis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reports formal scientific advice to the European Commission on strengthening Europe's advanced-materials position."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T00:01:40Z",
+      "deep_scan_package_id": "worker-b-20260913T233803Z-29c94389b6cc"
     }
   }
 }
