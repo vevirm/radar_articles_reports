@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **496** (Main **496** + Historical **0**)
 - Automatic queue still needing V2 verification: **775** (Main **126** + Historical **649**)
-- Currently assigned to workers: **72** (Main **72** + Historical **0**)
+- Currently assigned to workers: **96** (Main **96** + Historical **0**)
 - Bounded access-recovery retries still eligible: **27**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **703**
+- Automatic queue pending and not yet assigned: **679**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T114034Z-756cae99874f`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260914T114223Z-87c1046709d1`
+- Assigned unresolved records: **48**
   1. `link:https://news.google.com/rss/articles/CBMidkFVX3lxTE14MWhyc19nX010OTJ5clBuQW1PYmcxY2lDZF9vNjhGMEpzSVI5bW1iYW8yaHM3OG5rWnFfcjJWT3E2QVp6WFd4WlRzVDBoTk90U1RpVUE4dzNmRlB3Q2ZPLU9hS0dUaVhtWmFlRDRhSUhZakpfbVE?oc=5` — Funding for Digital in the 2021-2027 Multiannual Financial Framework - Shaping Europe’s digital future
   2. `link:https://doi.org/10.1007/s11365-026-01188-8` — Innovation ecosystems and entrepreneurial venture capital: evidence from European countries
   3. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxNWm83WUQ3eGZDU1ZRNURpUGdpN25ZWGxIT2NpMFJhajhaZjB4QjFqcVNSOUxpTndjN2JnLVZRYXItQlg2V1dzQkRQUmR2UUE3ZUVaWU9PLXB2d0lzZThCZW40bkNleHBsOGR0R2dqTGE0Y1Q0MXlhS01TRFBuT05CNVRGRmFUUGw2bXYtLUkzbzJjcHhIdExfQ1FNNVVzc1hQbFMxbnVKQjRwRGtreEJydk4zdENSTUl4dXRZSjhhWG5BeHdRUHZxVg?oc=5` — [Interview] ‘Not everyone wants to come to Europe’, says IOM researcher warning against migration panic
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxNd2E4SWZSeGcyWTNRYzltQ1Y0V0luSE9ja1RTUUhGMDdLUFlIeHQtRlpQYVhLVFdsaXVMUTVvUzYtX3NSbDMyV3ZwWnRKR1MxOVpHclNvRmxBekJoaWN3TjNKbjEtTEZOWS1jal9LQjNXcFVINVFGOEJxcUpUajdNa0JJbkdnZWlUZE1jRFY5RlB6VnhoM05n?oc=5` — Hungary expels 10 Russian diplomats amid espionage concerns
   7. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxQZjFheXlLYmlkeFFsVUp3Nnlab01sUVRIWkx6WGw4MVpzREo2OFhCS1pEV1BSZjdQTjlWT0VXTWNSdkhic2RvYWdvZEpTMFNTQVRjcnVVOUZKMnRIS1Q3Ny1VOTZqX1dSSDRIZU5HMmNmc0J3MFc4SmdVQnh6aTl1MW9laXBVQW9ydzI0M0ZmMVBQbUtSVXhmNzlVa1J2ZndzZzVUR3RwZGp2OGd1ci04enpiUldJaWIxZDRXek52X04weXJjR0ZrWUpuX0Q5QQ?oc=5` — Investigation alleges widespread misuse of EIT funds
   8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE4xZGNpNE1kY2J5Ui1EdWYzQ0g0S190bGpIYVBLS1hlS0MwUXN3UGdLdzBpYmZPWWY2bTVoRlJFQzF1NHI0Tnl3eVVtYVE5VTFUZE1SMi1pNGxSaHJ2cEQyRk85VkhkZFlrYXZrdW5tTGp0enduaTVncHpnQllMUQ?oc=5` — European integrated framework for climate resilience | Think Tank | Parlement européen
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T114043Z-a8666476203b`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260914T114234Z-b121fc7cad34`
+- Assigned unresolved records: **48**
   1. `link:https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration` — Funding within large-scale research infrastructure | Vinnova
   2. `link:https://defence-industry-space.ec.europa.eu/publication-regdualosa-policy-brief-2026-09-08_en` — Publication of the REGDUALOSA Policy Brief
   3. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNbHVyY1EyVkN0ejVTZnJMXzVmVGNCQTJzUmNmWTJkVi1ZWnRfRTJSd3NTT3V3ZmdUc2xXdGZhOHVpUnNtRVZNT1B4VkV3dWJhWFVZamJjT0FzdElsbGRvSk90UE1iSjFoR0txNmttdXFsUDNfcVVIWWlZeDhaMnFHYktsb2FuYm9qZGpUQXdCOERJcE5aWmQzWm9aS0JKMUM0YmxlY3NnSEEzUWFicThkU3VuNA?oc=5` — UAE and Germany look to build ties with investment, energy and AI deals
   7. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxOX2Jwc1pGbXgta0R0VDFUZFBmNXpNMEVseDRzb3prZU94TFNNN05JTnRTWHRKVHUtemo1TVFRdEU2WGE4ZnRxLXJfQ2xkZm9Ea19RTEk5WDJ1a3l5QzNPWlRsX1NDVDJkM0RjMzNXS3U5ZjVGc1lwQ0R4NDRlU3pfSWRXRDRTcm05a1dsalJndlVGTmw1ZEhISTRja3FGeUgzNEE5c29MN2JrOU1OTk5GUk5mNDdPRHZpQ251VzdaenhYM0Q0OVF0S1N0QQ?oc=5` — France-Germany space summit hit by US withdrawals and Merz absence
   8. `link:https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRGJCR3lRVHk0SHVwZnVFYUdjOUV4VXoyaVFsR2RRS1FINkdIUUFDUEtFQy1DcjlvNFRYUm5sUGwxN194VEFMVDBUTVVnTlBXcmJDenFFV0xraGQ1S0lZT2txMXEwcV8zUFBORUs3QndlbWpzSXYtZm5MWDgzZ3FMNFFQU2JVVm1MVTNKTHpPc3pfbGFSYzVWb2FzVDlRWElwd1lHMGJONXBYRzZlZGVobmdEYTV5QWdXQ0lXOFBpQm1Db0NVZWd6S1ZaaGF0UWNYWHI3QVYtSzhXN0JQVndabTZUSQ?oc=5` — New rules for bringing innovations to the EU market could generate up to EUR 452 billion
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Hands-on verification needed
 
