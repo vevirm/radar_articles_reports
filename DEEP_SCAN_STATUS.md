@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **545** (Main **545** + Historical **0**)
-- Automatic queue still needing V2 verification: **726** (Main **77** + Historical **649**)
-- Currently assigned to workers: **96** (Main **52** + Historical **44**)
-- Bounded access-recovery retries still eligible: **25**
+- Authoritative V2 verified: **593** (Main **551** + Historical **42**)
+- Automatic queue still needing V2 verification: **678** (Main **71** + Historical **607**)
+- Currently assigned to workers: **84** (Main **49** + Historical **35**)
+- Bounded access-recovery retries still eligible: **22**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **630**
+- Automatic queue pending and not yet assigned: **594**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T123326Z-1a1bc3463fbc`
-- Assigned unresolved records: **48**
-  1. `link:https://doi.org/10.1016/j.abmr.2026.100004` — Technology foresight: A taxonomy
-  2. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNYUpLd1I4Qk5tN3lrREZxemNJbjVxRmR1bG5Ta2hReWtIVXIweHdGREstZjNWUjMyLXYtSFQ0QnJQM0tERGFnSThzVW1YRm1BREtld2tSekNNTGI1WjVwSnR1ZmxUU0ZTZ0U3S3dXWkpQb3Z2Qld4bGRreE16dnAydDlTcEVuNmtHaU9WdlFYSFZMell2dFhmNjVrblZaa01vZnljMXdTYkh4M2dpVzlsTkktUHQ?oc=5` — Europe built its medical science around male bodies – and women are paying the price
-  3. `link:http://arxiv.org/abs/2603.22912` — From the AI Act to a European AI Agency: Completing the Union's Regulatory Architecture
-  4. `historical:id:5358adbff7e986d2` — Digital sovereignty and the means to European digital security: identification of the goals related to digital sovereignty from legal texts published by the European Union
-  5. `historical:id:ea0e35c3450d52cb` — The Economics of Copyright and Data Access in European AI Development – ECIPE
-  6. `historical:id:211f6661f63d7277` — “Get a PhD and Get Out”: is this really the silver bullet? Insights on postdoctoral academic careers from East Central Europe
-  7. `historical:id:f5168176f416900e` — Research security monitor 2025 - Publications Office of the EU
-  8. `historical:id:0b499eadbff962c8` — Copyright, AI, and the CJEU – A Binary Choice That Will Shape Europe’s Role in Global AI – ECIPE
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260914T124246Z-b6b92e3b7d86`
+- Assigned unresolved records: **36**
+  1. `historical:id:4e14023de0ebff88` — ALLEA Calls for Global Defence of International Research Collaboration and Academic Freedom - ALLEA
+  2. `historical:id:a160fb878146aa7a` — AI supported research using UKRI social science data (invite only)
+  3. `historical:id:575b7f9cacd393fb` — A renewed foundation for a long-term UK-EU partnership in education, research and innovation | Coimbra
+  4. `historical:id:e0421acdd7a70ead` — A Hundred and Fifty Shades of Green: A Foresight-Driven Playbook for Sustainable Innovation Governance
+  5. `historical:id:9cf1b0662691399c` — War economy vs European Silicon Valley? The EU's competing sociotechnical imaginaries of defence innovation and industry
+  6. `historical:id:02bbba7239f18a9e` — A comparative analysis of artificial intelligence regulation in ASEAN and the European Union
+  7. `historical:id:573837b47ba87045` — Digital Sovereignty and the EU's Identity Between Technological Innovation and European Values
+  8. `historical:id:9e8d80840981296b` — Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T123343Z-0e4acd783ae4`
+- Current package: `worker-b-20260914T124303Z-0e4acd783ae4`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
