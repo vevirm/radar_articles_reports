@@ -3,16 +3,16 @@
 This file is generated from the authoritative Deep Scan sidecar plus the persistent worker-assignment ledger.
 It exists so a new chat or operator can see what has already been verified and what each worker currently owns.
 
-- Authoritative V2 verified: **385**
-- Still needing V2 verification: **284**
-- Currently assigned to workers: **95**
+- Authoritative V2 verified: **386**
+- Still needing V2 verification: **283**
+- Currently assigned to workers: **94**
 - Deferred after exhaustive recovery: **40**
 - Pending and not yet assigned: **149**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T091636Z-ea86a3af2661`
+- Current package: `worker-a-20260914T092743Z-ea86a3af2661`
 - Assigned unresolved records: **47**
   1. `link:https://doi.org/10.1080/10301763.2026.2726657`
   2. `link:https://doi.org/10.1007/s13132-026-03451-3`
@@ -25,17 +25,17 @@ It exists so a new chat or operator can see what has already been verified and w
   - … plus 39 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T091648Z-0707abeb3ecd`
-- Assigned unresolved records: **48**
-  1. `link:https://doi.org/10.33663/0869-2491-2026-37-804-814`
-  2. `link:https://doi.org/10.1016/j.cose.2026.105102`
-  3. `link:https://doi.org/10.1016/j.technovation.2026.103603`
-  4. `link:https://doi.org/10.1016/j.futures.2026.103876`
-  5. `link:https://news.google.com/rss/articles/CBMikwFBVV95cUxNWkp0QW1uUGZSMnRjOTk2aXZ6ZEItZk5kd2NEQThKVXduSnlYaHV4cXNSRGdqbjZpS25MaXhvNlIzR3pwWUttXzZ1OHVQRjJwendDN1g2YzZUU3ZJek9JUGFhc3o3MWMtTm8tdkloODlBMWtaallhaEpGVzkyTnBZcDlaeFdGWnE2SERPUnZia2ZCbE0?oc=5`
-  6. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQY0VoUUV2WXpJWV8ybVAxejNfblM5dHEyREE4YWQ1akRjRl9YUzEtRzdiWUZtNHFoODNRcTdhbVZEYlBUeldMc3FLVnpYRU9SLVhYQkpabEVRQU1Ed01uX05jZWVWSjBYSzBCNjc2anhNVTZkYzdmek9HMW1kMEtJRFBxemFtRUlTYjBWMjNWZUdTLU1r?oc=5`
-  7. `link:https://doi.org/10.1163/15691497-20263013`
-  8. `link:https://doi.org/10.1080/09535314.2026.2656903`
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260914T092752Z-6dc31c7dd500`
+- Assigned unresolved records: **47**
+  1. `link:https://doi.org/10.1016/j.cose.2026.105102`
+  2. `link:https://doi.org/10.1016/j.technovation.2026.103603`
+  3. `link:https://doi.org/10.1016/j.futures.2026.103876`
+  4. `link:https://news.google.com/rss/articles/CBMikwFBVV95cUxNWkp0QW1uUGZSMnRjOTk2aXZ6ZEItZk5kd2NEQThKVXduSnlYaHV4cXNSRGdqbjZpS25MaXhvNlIzR3pwWUttXzZ1OHVQRjJwendDN1g2YzZUU3ZJek9JUGFhc3o3MWMtTm8tdkloODlBMWtaallhaEpGVzkyTnBZcDlaeFdGWnE2SERPUnZia2ZCbE0?oc=5`
+  5. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQY0VoUUV2WXpJWV8ybVAxejNfblM5dHEyREE4YWQ1akRjRl9YUzEtRzdiWUZtNHFoODNRcTdhbVZEYlBUeldMc3FLVnpYRU9SLVhYQkpabEVRQU1Ed01uX05jZWVWSjBYSzBCNjc2anhNVTZkYzdmek9HMW1kMEtJRFBxemFtRUlTYjBWMjNWZUdTLU1r?oc=5`
+  6. `link:https://doi.org/10.1163/15691497-20263013`
+  7. `link:https://doi.org/10.1080/09535314.2026.2656903`
+  8. `link:https://doi.org/10.1007/s44163-026-02019-z`
+  - … plus 39 more in the package manifest
 
 ## Deferred recovery queue
 

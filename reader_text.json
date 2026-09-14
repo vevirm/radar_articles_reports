@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-14T09:15:57Z",
+  "generated_at": "2026-09-14T09:27:13Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -31292,6 +31292,65 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-14T08:42:09Z",
       "deep_scan_package_id": "worker-a-20260914T080738Z-a02443386555"
+    },
+    "link:https://doi.org/10.33663/0869-2491-2026-37-804-814": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "source_hash": "096a6190",
+      "identity_hash": "109b559e56b45d10",
+      "reader_title": "Comparative study of parliamentary digitalisation, drawing foreign lessons for Ukraine's legislature",
+      "reader_what": "National parliaments are adopting digital strategies; Ukraine ranks in the global top fifteen",
+      "reader_more": "The author reviews how parliaments abroad have digitalised their organisation and procedures. Evidence comes from the Inter-Parliamentary Union's World e-Parliament Report 2024, national digital strategies and EU digital law. Ukraine's parliament is placed among the world's top fifteen legislatures for digital governance. The article concludes with proposals to amend the constitutional and legal basis of the Verkhovna Rada under martial law and hybrid security pressure. The treatment of EU instruments is illustrative rather than analytical.",
+      "deep_analysis": {
+        "work_kind": "legal-comparative review article",
+        "research_question": "What foreign experience of parliamentary digital transformation is relevant to Ukraine?",
+        "main_finding": "Parliaments increasingly run multi-year digital strategies, and Ukraine's legal framework needs amendment to keep pace.",
+        "method_or_basis": "Narrative comparative review of parliamentary digital strategies, IPU reporting and EU digital legislation.",
+        "qualification": "No original data; EU material is used as a benchmark, and conclusions are normative legal proposals rather than findings.",
+        "radar_relevance": "Fails Strand A: European instruments serve as a reference frame for a Ukrainian constitutional-law argument, not as substantive European R&I content.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI link resolved to the journal's own article page at pravova-derzhava.org/en/rule-of-law-issue-37-2026-804, carrying the structured Introduction/Results/Conclusions text and reference list."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.33663/0869-2491-2026-37-804-814 resolved in Crossref to the same title, author Yevhen Zaiets, issue 37 (2026), pp. 804-814, publisher Koretsky Institute of State and Law, NAS of Ukraine."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://pravova-derzhava.org/en/rule-of-law-issue-37-2026-804",
+            "title": "Foreign experience of digital transformation of parliament",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher page supplied the full structured abstract, conclusions, keywords and 23 references; Crossref confirmed author, pagination and issue."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_NOT_SUBSTANTIVE",
+        "reason": "Comparative constitutional-law study of parliamentary digitalisation aimed at reforming Ukraine's Verkhovna Rada. The EU Digital Decade, Digital Compass, DSA/AIA/DMA and the European Parliament appear as reference framework and benchmark, not as the subject of research, innovation or science policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-14T09:27:13Z",
+      "deep_scan_package_id": "worker-b-20260914T084930Z-0707abeb3ecd"
     }
   }
 }
