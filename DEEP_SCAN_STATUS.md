@@ -5,15 +5,15 @@ It exists so a new chat or operator can see what has already been verified and w
 
 - Authoritative V2 verified: **386**
 - Still needing V2 verification: **283**
-- Currently assigned to workers: **94**
+- Currently assigned to workers: **96**
 - Deferred after exhaustive recovery: **40**
-- Pending and not yet assigned: **149**
+- Pending and not yet assigned: **147**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T092743Z-ea86a3af2661`
-- Assigned unresolved records: **47**
+- Current package: `worker-a-20260914T093008Z-ebc57049412e`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1080/10301763.2026.2726657`
   2. `link:https://doi.org/10.1007/s13132-026-03451-3`
   3. `link:https://doi.org/10.1016/j.sftr.2026.102116`
@@ -22,11 +22,11 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://doi.org/10.1007/s43253-026-00180-w`
   7. `link:https://doi.org/10.1002/aiv2.70011`
   8. `link:https://doi.org/10.1007/s43681-026-01260-7`
-  - … plus 39 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T092752Z-6dc31c7dd500`
-- Assigned unresolved records: **47**
+- Current package: `worker-b-20260914T093021Z-c8a7cb0a8bdb`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.cose.2026.105102`
   2. `link:https://doi.org/10.1016/j.technovation.2026.103603`
   3. `link:https://doi.org/10.1016/j.futures.2026.103876`
@@ -35,7 +35,7 @@ It exists so a new chat or operator can see what has already been verified and w
   6. `link:https://doi.org/10.1163/15691497-20263013`
   7. `link:https://doi.org/10.1080/09535314.2026.2656903`
   8. `link:https://doi.org/10.1007/s44163-026-02019-z`
-  - … plus 39 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Deferred recovery queue
 
