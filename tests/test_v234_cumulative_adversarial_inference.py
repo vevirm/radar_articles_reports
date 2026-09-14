@@ -43,7 +43,7 @@ def test_every_publication_is_sparse_and_adversarially_tested():
     state = _real_state()
     by_id = {c['id']: c for c in state['candidates']}
     for product, ids in state['publications'].items():
-        assert len(ids) <= 2
+        assert len(ids) <= (8 if product == 'trend' else 2)
         for cid in ids:
             c = by_id[cid]
             assert c['status'] == 'qualified'
@@ -251,3 +251,80 @@ def test_generic_dependency_grammar_can_reconstruct_qualified_shape_without_spec
     assert c['synthesis_across_records'] is True
     assert c['primary_sources'] >= 4
     assert not c['missing_links']
+
+
+
+def test_generic_trends_require_current_primary_evidence_on_both_sides_of_same_object():
+    # Three independent AI acceleration records + three AI governance records qualify.
+    data = {
+        'strand_a': [
+            {'title':'Europe launches AI compute capacity investment', 'source':'A1', 'date':'2026-09-01', 'source_tier':'Tier 1'},
+            {'title':'European AI deployment programme accelerates compute scale-up', 'source':'A2', 'date':'2026-09-02', 'source_tier':'Tier 1'},
+            {'title':'New AI gigafactory capacity expands in Europe', 'source':'A3', 'date':'2026-09-03', 'source_tier':'Tier 1'},
+            {'title':'Europe adopts AI governance standards', 'source':'G1', 'date':'2026-09-04', 'source_tier':'Tier 1'},
+            {'title':'European AI regulation adds compliance rules', 'source':'G2', 'date':'2026-09-05', 'source_tier':'Tier 1'},
+            {'title':'AI testing and certification framework launches in Europe', 'source':'G3', 'date':'2026-09-06', 'source_tier':'Tier 1'},
+        ],
+        'strand_b': [], 'strand_c': [], 'frontier_evidence': [], 'historical_context': [],
+    }
+    state = refresh_high_order_inference(data, {}, '2026-09-07T00:00:00Z')
+    cands = [c for c in state['candidates'] if c.get('grammar_id') == 'opposing_movements_accelerate_govern' and c.get('topic_key') == 'compute_ai']
+    assert len(cands) == 1
+    c = cands[0]
+    assert c['status'] == 'qualified' and c['reader_eligible'] is True
+    b = c['trend_balance']
+    assert b['left_actions'] >= 3 and b['right_actions'] >= 3
+    assert b['left_sources'] >= 2 and b['right_sources'] >= 2
+    assert b['left_pull'] + b['right_pull'] == 100
+    assert b['left_role'] and b['right_role']
+
+    # Move the governance side into C: it may add context elsewhere but cannot create
+    # or close a current trend/counter-trend pair.
+    data_c = dict(data)
+    data_c['strand_a'] = data['strand_a'][:3]
+    data_c['strand_c'] = [dict(x, headline=x['title']) for x in data['strand_a'][3:]]
+    state_c = refresh_high_order_inference(data_c, {}, '2026-09-07T00:00:00Z')
+    assert not any(c.get('grammar_id') == 'opposing_movements_accelerate_govern' and c.get('topic_key') == 'compute_ai' for c in state_c['candidates'])
+
+
+def test_generic_trend_does_not_cross_pair_different_objects():
+    data = {
+        'strand_a': [
+            {'title':'Europe launches AI compute capacity investment', 'source':'A1', 'date':'2026-09-01', 'source_tier':'Tier 1'},
+            {'title':'European AI deployment programme accelerates compute scale-up', 'source':'A2', 'date':'2026-09-02', 'source_tier':'Tier 1'},
+            {'title':'New AI gigafactory capacity expands in Europe', 'source':'A3', 'date':'2026-09-03', 'source_tier':'Tier 1'},
+            {'title':'Europe adopts quantum governance standards', 'source':'Q1', 'date':'2026-09-04', 'source_tier':'Tier 1'},
+            {'title':'Quantum regulation adds certification requirements', 'source':'Q2', 'date':'2026-09-05', 'source_tier':'Tier 1'},
+            {'title':'Quantum testing framework launches in Europe', 'source':'Q3', 'date':'2026-09-06', 'source_tier':'Tier 1'},
+        ],
+        'strand_b': [], 'strand_c': [], 'frontier_evidence': [], 'historical_context': [],
+    }
+    state = refresh_high_order_inference(data, {}, '2026-09-07T00:00:00Z')
+    assert not any(c.get('grammar_id') == 'opposing_movements_accelerate_govern' and c.get('topic_key') == 'compute_ai' for c in state['candidates'])
+    assert not any(c.get('grammar_id') == 'opposing_movements_accelerate_govern' and c.get('topic_key') == 'quantum' for c in state['candidates'])
+
+
+def test_trend_publisher_can_surface_same_grammar_for_different_objects_up_to_eight():
+    from high_order_inference import _select_publications
+    base = {
+        'product':'trend','inferential_distance':4,'status':'qualified','reader_eligible':True,
+        'denial_tested':True,'falsifier_queries':['deny'],'synthesis_across_records':True,
+        'primary_sources':4,'primary_records':8,'reader_title':'x','reader_summary':'x',
+        'grammar_id':'opposing_movements_accelerate_govern','score':92,
+    }
+    candidates = [dict(base, id=f'l45:trend:{i}', grammar_id=f'trend-grammar-{i}', topic_key=f'topic-{i}', topic_label=f'topic {i}') for i in range(10)]
+    pubs = _select_publications(candidates, {})
+    assert len(pubs['trend']) == 8
+    assert len(set(pubs['trend'])) == 8
+
+    same_family = [dict(base, id=f'l45:same:{i}', topic_key=f'object-{i}', topic_label=f'object {i}') for i in range(4)]
+    pubs2 = _select_publications(same_family, {})
+    assert len(pubs2['trend']) == 2
+
+
+def test_trend_reader_accepts_generic_role_labels_and_semantic_deduping():
+    trends = (ROOT / 'trends' / 'trends.js').read_text(encoding='utf-8')
+    assert "b.left_role||'Concentrating action'" in trends
+    assert "b.right_role||'Spreading action'" in trends
+    assert "x.family==='open_protect'" in trends
+    assert 'leftEvidence.length<3' in trends and 'rightEvidence.length<3' in trends
