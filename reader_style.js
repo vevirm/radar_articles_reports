@@ -4,6 +4,14 @@
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const words=v=>clean(v).split(/\s+/).filter(Boolean);
 
+// Reader-facing strings should never begin with an accidental lowercase letter.
+// This is deliberately presentation-only: it does not alter stored source text,
+// Deep Scan semantics, evidence, or inference objects.
+function capitaliseStart(v){
+  const s=clean(v);
+  return s.replace(/^([^A-Za-z]*)([a-z])/,(_,prefix,letter)=>prefix+letter.toUpperCase());
+}
+
 // Surface pages use plain language. Specialist terms remain available in Glossary/Stuff,
 // but common opaque abbreviations are expanded before a sentence is shown to readers.
 function expandSurfaceTerms(v){
@@ -98,7 +106,7 @@ function removeEllipsis(v){
 
 const TRAILING=/^(?:and|or|but|because|while|which|that|to|for|of|with|in|on|at|from|across|through|by|as|the|a|an)$/i;
 function limit(v,n){
-  const s=removeEllipsis(expandSurfaceTerms(v));
+  const s=capitaliseStart(removeEllipsis(expandSurfaceTerms(v)));
   const a=words(s);
   if(a.length<=n)return a.join(' ');
 
@@ -118,13 +126,13 @@ function limit(v,n){
 
 
 function surfaceText(v){
-  return removeEllipsis(expandSurfaceTerms(v))
+  return capitaliseStart(removeEllipsis(expandSurfaceTerms(v))
     .replace(/\bservi\s+ces\b/gi,'services')
     .replace(/\bnon\s*-\s*European\b/gi,'non-European')
     .replace(/\s+([,.;:!?])/g,'$1')
     .replace(/\s+-\s+/g,'-')
     .replace(/\s+/g,' ')
-    .trim();
+    .trim());
 }
 
 
