@@ -29,7 +29,7 @@ console.log(JSON.stringify({
 }));
 '''
         out = self.run_node(js)
-        self.assertEqual(out["titles"], ["Europe's chip supply could be disrupted by outside controls or concentrated suppliers."])
+        self.assertEqual(out["titles"], ["Export controls could cut European access to advanced chips before alternatives are ready."])
         self.assertEqual(len(out["related"][0]), 2)
         self.assertEqual(out["stats"]["risks"], 1)
         self.assertEqual(out["stats"]["rawRisks"], 3)
@@ -50,6 +50,34 @@ console.log(JSON.stringify({titles:view.risks.map(P.plainPriorityTitle),stats:vi
         self.assertEqual(len(out["titles"]), 2)
         self.assertEqual(out["stats"]["risks"], 2)
         self.assertEqual(out["stats"]["mergedRiskRecords"], 0)
+
+    def test_reader_wording_uses_lens_components_not_unrelated_source_words(self):
+        js = r'''
+const P=require('./priorities/priorities.js');
+const data={strand_a:[
+  {title:'Collaboration inequalities and material conditions',source:'Alpha',date:'2026-09-03',link:'https://alpha.example/collab',source_tier:'Tier 1',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',passage:'The study describes barriers to research collaboration and mentions material conditions elsewhere.',components:{mechanism:'barriers to',carrier:'unequal authority',asset:'research collaboration',loss:'barriers to'}}]}},
+  {title:'Investment debate around breakthrough research',source:'Beta',date:'2026-09-02',link:'https://beta.example/research',source_tier:'Tier 1',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',passage:'Investment is discussed, but the identified pathway is constrained European competitiveness.',components:{mechanism:'constrained by',carrier:'incremental research system',asset:'competitiveness',loss:'limits'}}]}}
+]};
+const view=P.buildPriorityView(data,{limit:20});
+console.log(JSON.stringify(view.risks.map(P.plainPriorityTitle)));
+'''
+        out = self.run_node(js)
+        self.assertIn('Unequal or restrictive collaboration conditions could narrow who can participate in and benefit from European research partnerships.', out)
+        self.assertNotIn('Critical-material shortages or export controls could slow European research and industry.', out)
+        self.assertNotIn('Heavy reliance on foreign investment could shift control of strategic technology away from Europe.', out)
+
+    def test_same_visible_title_is_never_repeated_even_when_one_lens_is_less_structured(self):
+        js = r'''
+const P=require('./priorities/priorities.js');
+const data={strand_a:[
+  {title:'AI compute programme',source:'Alpha',date:'2026-09-03',link:'https://alpha.example/a',source_tier:'Tier 1',strategic_classification_source:'source_text',strategic_classification:{primary:'opportunity',lenses:[{type:'opportunity',passage:'A live call will boost European computing capacity.',components:{mechanism:'call',actor:'EU',instrument:'call',gain:'computing capacity',window:'live'}}]}},
+  {title:'Computing capacity call',source:'Beta',date:'2026-09-02',link:'https://beta.example/b',source_tier:'Tier 1',strategic_classification_source:'source_text',strategic_classification:{primary:'opportunity',lenses:[{type:'opportunity',passage:'A live call will boost European computing capacity.'}]}}
+]};
+const view=P.buildPriorityView(data,{limit:20});
+console.log(JSON.stringify({titles:view.opportunities.map(P.plainPriorityTitle),merged:view.stats.mergedOpportunityRecords}));
+'''
+        out = self.run_node(js)
+        self.assertEqual(len(out['titles']), len(set(out['titles'])))
 
 
 if __name__ == '__main__':

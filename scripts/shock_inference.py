@@ -793,6 +793,43 @@ def refresh_shock_inference(
     }
 
 
+def feedback_queries(state: dict[str, Any] | None, limit: int = 6) -> list[str]:
+    """Turn live shock hypotheses into bounded support *and* challenge searches.
+
+    This is discovery feedback only.  It does not change shock qualification, evidence
+    weights or admission.  Each hypothesis contributes a query for the exposed asset /
+    pressure connection and a counter-query for substitution, resilience or absorption,
+    so an existing shock cannot turn the scanner into a confirmation-only loop.
+    """
+    if not isinstance(state, dict):
+        return []
+    shocks = [x for x in state.get("dynamic_shocks", []) if isinstance(x, dict)]
+    shocks.sort(
+        key=lambda x: (int(x.get("inference_score", 0) or 0), _clean(x.get("last_updated_at"))),
+        reverse=True,
+    )
+    support: list[str] = []
+    challenge: list[str] = []
+    for item in shocks[:8]:
+        asset_id = _clean(item.get("asset_id"))
+        pressure_id = _clean(item.get("pressure_id"))
+        asset = ASSETS.get(asset_id, ("", asset_id.replace("_", " ")))[1]
+        pressure = PRESSURES.get(pressure_id, ("", pressure_id.replace("_", " "), ""))[1]
+        if not asset or not pressure:
+            continue
+        support.append(f"Europe research innovation {asset} {pressure} disruption access dependency")
+        challenge.append(f"Europe research innovation {asset} substitution resilience alternative capacity mitigation")
+    out: list[str] = []
+    for i in range(max(len(support), len(challenge))):
+        if i < len(support) and support[i] not in out:
+            out.append(support[i])
+        if i < len(challenge) and challenge[i] not in out:
+            out.append(challenge[i])
+        if len(out) >= max(0, int(limit or 0)):
+            break
+    return out[:max(0, int(limit or 0))]
+
+
 if __name__ == "__main__":
     import argparse
     from pathlib import Path

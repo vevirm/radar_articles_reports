@@ -301,14 +301,19 @@
 
   function scannerLenses(raw){
     const c=raw?.strategic_classification;
-    if(!c||typeof c!=='object'||clean(raw?.strategic_classification_source)!=='source_text') return [];
+    const classificationSource=clean(raw?.strategic_classification_source);
+    if(!c||typeof c!=='object'||!['source_text','deep_scan_v2_semantics'].includes(classificationSource)) return [];
     let lenses=Array.isArray(c.lenses)?c.lenses.filter(x=>x&&typeof x==='object'&&['risk','opportunity','external_shock'].includes(clean(x.type))):[];
     if(!lenses.length&&['risk','opportunity','external_shock'].includes(clean(c.primary))) lenses=[{type:clean(c.primary),passage:''}];
     // Protect the reader from legacy/source-filed polarity errors: a source passage that
     // describes a mitigation/response is not presented as a risk unless it explicitly says
-    // the response is failing or the risk remains.
+    // the response is failing or the risk remains.  V2-derived classifications receive the
+    // same polarity guard; "authoritative" describes the source semantics, not an exemption
+    // from the reader-product pathway rules.
     lenses=lenses.filter(l=>clean(l.type)!=='risk'||!remedialOnlyRiskText(clean(l.passage)||evidenceText(raw)));
-    return lenses.map(l=>{const kind=clean(l.type),family=kind==='external_shock'?primaryShockFamily(`${clean(l.passage)} ${evidenceText(raw)}`):null;return {...l,shock_family:clean(l.shock_family||family?.label||''),shock_family_id:clean(l.shock_family_id||family?.id||''),analysis_basis:'scanner_source_classification',analysis_score:110}});
+    const analysisBasis=classificationSource==='deep_scan_v2_semantics'?'deep_scan_v2_semantic_classification':'scanner_source_classification';
+    const analysisScore=classificationSource==='deep_scan_v2_semantics'?115:110;
+    return lenses.map(l=>{const kind=clean(l.type),family=kind==='external_shock'?primaryShockFamily(`${clean(l.passage)} ${evidenceText(raw)}`):null;return {...l,shock_family:clean(l.shock_family||family?.label||''),shock_family_id:clean(l.shock_family_id||family?.id||''),analysis_basis:analysisBasis,analysis_score:analysisScore}});
   }
 
   function interpretLenses(raw){
@@ -348,7 +353,8 @@
 
   function pathwayScore(x){
     const components=x?.lens?.components&&typeof x.lens.components==='object'?Object.values(x.lens.components).filter(Boolean).length:0;
-    const basis=clean(x?.lens?.analysis_basis)==='scanner_source_classification'?2:1;
+    const analysisBasis=clean(x?.lens?.analysis_basis);
+    const basis=analysisBasis==='deep_scan_v2_semantic_classification'?3:analysisBasis==='scanner_source_classification'?2:1;
     const quality=Number(x?.qualityScore)||qualityScore(x?.raw||x);
     // Weak-signal context is a bounded tie-breaker only.  It can reinforce an already
     // supported primary pathway, but it cannot compensate for weaker primary evidence.
@@ -386,27 +392,33 @@
     return out;
   }
 
-  // Several independent records can support the same reader-facing pathway.  The page
-  // should show that as stronger support for one risk/opportunity, not as repeated cards
-  // with the same plain-language headline.  Keep the highest-ranked record as the lead
-  // and retain the others for the Evidence panel.
+  // Several independent records can support the same analytical pathway.  Consolidate
+  // by the interpreted mechanism + exposed asset when both are clear, rather than by
+  // surface wording alone.  A broad/uncertain pathway keeps its own card; we never hide
+  // distinct reasoning merely because two sentences happen to sound alike.
   function consolidateReaderDuplicates(items){
-    const out=[],byKey=new Map();
+    const out=[],bySemantic=new Map(),byTitle=new Map();
     for(const x of items){
-      const title=clean(plainPriorityTitle(x));
-      const key=`${clean(x?.kind)}|${norm(title)}`;
-      if(!key||key.endsWith('|')){out.push(x);continue}
-      const lead=byKey.get(key);
+      const title=clean(plainPriorityTitle(x)),titleKey=`${clean(x?.kind)}|reader:${norm(title)}`;
+      const semantic=semanticPathwayKey(x);
+      // Identical reader wording must never appear as separate cards.  Where the wording
+      // differs, a clear mechanism+asset key can still consolidate semantically equivalent
+      // records.  Distinct mechanisms are preserved by plainPriorityTitle() before this step.
+      const lead=byTitle.get(titleKey)||(semantic?bySemantic.get(semantic):null);
       if(!lead){
         const copy={...x,relatedPrimaryEvidence:[]};
-        byKey.set(key,copy);
+        if(titleKey&&!titleKey.endsWith('reader:'))byTitle.set(titleKey,copy);
+        if(semantic)bySemantic.set(semantic,copy);
         out.push(copy);
         continue;
       }
       lead.relatedPrimaryEvidence.push({
         title:clean(x?.title||x?.coreMessage||title),source:clean(x?.source),date:clean(x?.date),link:clean(x?.link),
         evidence:clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||''),qualityScore:Number(x?.qualityScore)||0,
+        semanticSource:clean(x?.semanticSource||''),deepScanAuthoritative:!!x?.deepScanAuthoritative,
       });
+      if(titleKey&&!titleKey.endsWith('reader:'))byTitle.set(titleKey,lead);
+      if(semantic)bySemantic.set(semantic,lead);
     }
     return out;
   }
@@ -447,6 +459,9 @@
           raw,kind,lens,lensPassage:clean(lens.passage),strategicClassification:raw.strategic_classification||{},
           title:titleFor(raw),coreMessage:coreFor(raw),source:sourceFor(raw),date:clean(raw.date||raw.first_seen||''),
           link:linkFor(raw),abstract:clean(raw.summary||raw.signal_note||raw.why_it_matters||''),newThisScan:!!raw.new_this_scan,
+          readerWhat:clean(raw.reader_what||''),readerWhy:clean(raw.reader_why||''),readerMore:clean(raw.reader_more||''),
+          why_it_matters:clean(raw.reader_why||raw.why_it_matters||''),relevance_note:clean(raw.relevance_note||''),
+          semanticSource:clean(raw.semantic_source||''),deepScanAuthoritative:!!raw.deep_scan_authoritative,
           interpretationBasis,qualityScore:quality,analyticalWeight:analyticalWeight(raw),contextOnly:contextOnly(raw),
         });
       }
@@ -477,14 +492,20 @@
     const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
     const ids=Array.isArray(state?.publications?.[kind])?state.publications[kind]:[];
     const byId=new Map((Array.isArray(state?.candidates)?state.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
+    const evidenceRow=x=>({title:clean(x?.title||''),source:clean(x?.source||''),date:clean(x?.date||''),link:clean(x?.link||''),role:clean(x?.role||''),quality:Number(x?.quality)||0,analyticalWeight:Number(x?.analytical_weight)||0});
     return ids.map(id=>byId.get(clean(id))).filter(Boolean).map(c=>{
-      const support=Array.isArray(c.support)?c.support:[],ctx=Array.isArray(c.context)?c.context:[];
+      const support=Array.isArray(c.support)?c.support:[],against=Array.isArray(c.against)?c.against:[],ctx=Array.isArray(c.context)?c.context:[];
       return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Cross-evidence finding'),coreMessage:clean(c.reader_summary||''),
         source:'Cross-evidence pattern',date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
         qualityScore:Number(c.score)||0,analyticalWeight:1,contextOnly:false,lens:{type:kind,passage:clean(c.reader_summary||'')},
         lensPassage:clean(c.reader_summary||''),interpretationBasis:'cross_evidence_inference',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
+        candidateId:clean(c.id),inferentialDistance:Number(c.inferential_distance)||4,denialTested:!!c.denial_tested,
+        requiredRoles:Array.isArray(c.required_roles)?c.required_roles.map(clean).filter(Boolean):[],coveredRoles:Array.isArray(c.covered_roles)?c.covered_roles.map(clean).filter(Boolean):[],
+        missingRoles:Array.isArray(c.missing_roles)?c.missing_roles.map(clean).filter(Boolean):[],missingLinks:Array.isArray(c.missing_links)?c.missing_links.map(clean).filter(Boolean):[],
+        supportQueries:Array.isArray(c.support_queries)?c.support_queries.map(clean).filter(Boolean):[],falsifierQueries:Array.isArray(c.falsifier_queries)?c.falsifier_queries.map(clean).filter(Boolean):[],
+        supportEvidence:support.map(evidenceRow),counterEvidence:against.map(evidenceRow),
         primaryRecords:Number(c.primary_records)||0,primarySources:Number(c.primary_sources)||0,counterRecords:Number(c.counter_records)||0,
-        weakSignalContext:ctx.map(x=>({title:x.title||'',source:x.source||'',date:x.date||'',link:x.link||''})),contextWeightTotal:Math.min(.60,ctx.reduce((n,x)=>n+(Number(x.analytical_weight)||.30),0)),
+        weakSignalContext:ctx.map(evidenceRow),contextWeightTotal:Math.min(.60,ctx.reduce((n,x)=>n+(Number(x.analytical_weight)||.30),0)),
         evidenceSummary:support.slice(0,5).map(x=>x.title).filter(Boolean).join('; ')};
     });
   }
@@ -528,32 +549,93 @@
   }
 
   function pathwayText(x){return norm(`${x?.title||''} ${x?.coreMessage||''} ${x?.lensPassage||''} ${x?.abstract||''}`)}
+  function componentText(x){const c=x?.lens?.components&&typeof x.lens.components==='object'?Object.values(x.lens.components).filter(Boolean).join(' '):'';return norm(c)}
+
+  // Reader grouping is based first on the pathway components produced by the analytical
+  // layer.  The broad source text is only a fallback.  This prevents words such as
+  // "materials" or "investment" elsewhere in an article from silently redefining the
+  // risk that the lens actually identified.
+  function semanticAssetFamily(x){
+    const c=componentText(x),p=norm(x?.lensPassage||''),t=c||p;
+    if(/semiconductor|microelectronic|chips?/.test(t))return 'chips';
+    if(/computing capacity|compute capacity|cloud|ai infrastructure|supercomput/.test(t))return 'compute';
+    if(/brain drain|research talent|researcher|research careers?|talent/.test(t))return 'talent';
+    if(/research collaboration|research cooperation|international collaboration/.test(t))return 'collaboration';
+    if(/research infrastructure|research facilit|shared facilit|laborator/.test(t))return 'research-infrastructure';
+    if(/critical raw|critical mineral|rare earth|gallium|germanium|lithium|cobalt/.test(t))return 'critical-materials';
+    if(/research security|sensitive research knowledge|knowledge security|foreign interference/.test(t))return 'research-security';
+    if(/research data|open science|data infrastructure/.test(t))return 'research-data';
+    if(/intellectual property|deep tech firms?|scale.?ups?|ownership/.test(t))return 'firms-ip';
+    if(/strategic depend|external technology|technology dependence|technological dependence|technology access/.test(t))return 'technology-dependence';
+    if(/competitiveness/.test(t))return 'competitiveness';
+    return 'other';
+  }
+
+  function semanticMechanismFamily(x){
+    const c=componentText(x),p=norm(x?.lensPassage||''),t=c||p;
+    if(/export control|export restriction|licen[cs]ing/.test(t))return 'export-control';
+    if(/extraterritorial|foreign legal|third country law/.test(t))return 'foreign-law';
+    if(/sanction/.test(t))return 'sanctions';
+    if(/market concentration|supplier concentration|concentrated/.test(t))return 'concentration';
+    if(/dependence|dependency|depend on|reliance/.test(t))return 'dependency';
+    if(/brain drain|precarity|talent flow|recruit|retain/.test(t))return 'talent-flow';
+    if(/foreign interference|espionage|knowledge leakage/.test(t))return 'interference';
+    if(/barriers? to|access denial|limited access|restrict|constrained by/.test(t))return 'access-barrier';
+    if(/fragmentation/.test(t))return 'fragmentation';
+    if(/acquisition|ownership transfer|foreign investment/.test(t))return 'ownership-transfer';
+    if(/shortage|supply interruption|cutoff|scarcity/.test(t))return 'supply-interruption';
+    if(/call|programme|pilot action|work programme|funding|procurement/.test(t))return 'programme-route';
+    if(/open access|opening/.test(t))return 'open-access';
+    if(/standard/.test(t))return 'standards';
+    if(/partnership|association|cooperation/.test(t))return 'partnership';
+    return 'other';
+  }
+
+  function semanticPathwayKey(x){
+    if(x?.highOrder)return '';
+    const kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
+    // "competitiveness" and "other" are too broad to merge safely: two very different
+    // mechanisms can affect competitiveness.  Keep those findings separate unless their
+    // final reader wording is literally the same.
+    if(!kind||asset==='other'||asset==='competitiveness'||mechanism==='other')return '';
+    return `${kind}|semantic:${asset}|${mechanism}`;
+  }
 
   function plainPriorityTitle(x){
     if(x?.highOrder)return clean(x.title)||'Cross-evidence finding';
-    const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind);
+    const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
     if(kind==='risk'){
-      if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Europe could lose researchers if research careers remain too precarious.';
+      if(asset==='talent') return 'Precarious career paths can make Europe lose research talent it has trained or attracted.';
+      if(asset==='research-security'||mechanism==='interference') return 'Foreign interference could pull sensitive research knowledge out of Europe.';
+      if(asset==='chips'&&mechanism==='export-control') return 'Export controls could cut European access to advanced chips before alternatives are ready.';
+      if(asset==='chips'&&['dependency','concentration','supply-interruption'].includes(mechanism)) return 'Concentrated external chip supply could leave European research and industry without fast substitutes.';
+      if(asset==='critical-materials') return 'Critical-material shortages or export controls could slow European research and industry.';
+      if(asset==='compute'&&['dependency','foreign-law','concentration','access-barrier'].includes(mechanism)) return "Dependence on outside cloud and compute providers could narrow Europe's control over strategic computing.";
+      if(asset==='collaboration'&&['access-barrier','sanctions','fragmentation'].includes(mechanism)) return 'Unequal or restrictive collaboration conditions could narrow who can participate in and benefit from European research partnerships.';
+      if(asset==='research-infrastructure'&&['access-barrier','concentration','dependency'].includes(mechanism)) return 'Limited access to key research infrastructure could slow European research.';
+      if(asset==='technology-dependence') return "Dependence on outside technology could limit Europe's freedom to act.";
+      if(asset==='research-data'&&mechanism==='fragmentation') return 'Fragmented research systems could make data, collaboration and open science harder to sustain.';
+      if(asset==='firms-ip'&&mechanism==='ownership-transfer') return 'Foreign acquisition could move strategic technology, intellectual property and decision-making out of Europe.';
+      if(asset==='competitiveness'&&mechanism==='export-control') return "Export-control uncertainty could constrain Europe's technology competitiveness and international cooperation.";
+      if(asset==='competitiveness'&&mechanism==='concentration') return 'Concentrated markets could make it harder for European research-led firms to scale into globally competitive capability.';
+      if(asset==='competitiveness'&&mechanism==='access-barrier') return 'Structural barriers could keep European research from translating into stronger competitiveness.';
+      // Conservative fallbacks for records whose lens predates component extraction.
+      if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Precarious career paths can make Europe lose research talent it has trained or attracted.';
       if(/foreign interference|espionage|knowledge leakage/.test(t)) return 'Foreign interference could pull sensitive research knowledge out of Europe.';
-      if(/semiconductor|chip|microelectronics/.test(t)&&/china|taiwan|export control|supply/.test(t)) return "Europe's chip supply could be disrupted by outside controls or concentrated suppliers.";
-      if(/critical raw|critical mineral|rare earth|materials?/.test(t)) return 'Critical-material shortages or export controls could slow European research and industry.';
-      if(/cloud|compute|ai infrastructure|computing capacity/.test(t)&&/depend|extraterritorial|non-european|supplier/.test(t)) return 'Europe could lose control over computing capacity it depends on from outside suppliers.';
-      if(/international research collaboration|research cooperation/.test(t)&&/restrict|white house|government|export|sanction/.test(t)) return 'Foreign rules could narrow European access to international research collaboration.';
+      if(/critical raw|critical mineral|rare earth|gallium|germanium|lithium|cobalt/.test(t)) return 'Critical-material shortages or export controls could slow European research and industry.';
       if(/research infrastructure|facility|bottleneck|limited access/.test(t)) return 'Limited access to key research infrastructure could slow European research.';
       if(/technology transfer|technological dependence|technology dependence|strategic depend/.test(t)) return "Dependence on outside technology could limit Europe's freedom to act.";
-      if(/fragmentation/.test(t)&&/open science|research data|research system/.test(t)) return 'Fragmented research systems could make data, collaboration and open science harder to sustain.';
-      if(/investment/.test(t)&&/depend|foreign|asymmetry/.test(t)) return 'Heavy reliance on foreign investment could shift control of strategic technology away from Europe.';
       return simplePriorityText(x);
     }
     if(kind==='opportunity'){
+      if(asset==='talent'||/choose europe for science/.test(title)) return 'Better research careers could help Europe keep and attract researchers.';
       if(/ocean research|ocean.*innovation strategy/.test(title)) return 'Europe has a chance to improve how ocean research and innovation are coordinated.';
       if(/eit|innovation agenda|call for evidence/.test(title)) return 'Europe has a chance to reshape innovation policy around future strategic needs.';
-      if(/choose europe for science/.test(title)||(/brain gain|brain drain|precarity/.test(t)&&/research careers?|attract|retain|recruit/.test(t))) return 'Better research careers could help Europe keep and attract researchers.';
       if(/quantum/.test(title)&&/standards?/.test(title)) return 'European work on quantum standards could help shape the rules of an emerging technology.';
       if(/quantum/.test(title)&&/pilot line|testing infrastructure|experimental/.test(title)) return 'European quantum testing and pilot facilities could build more capability at home.';
       if(/quantum/.test(title)&&/open|access/.test(title)) return 'Opening European quantum computers could give researchers more strategic compute access.';
       if(/quantum/.test(title)) return 'New European quantum calls and facilities could strengthen capability in a strategic technology.';
-      if(/ai gigafactor|computing capacity/.test(title)||(/compute|cloud/.test(t)&&!/quantum/.test(title))) return 'More European computing capacity could reduce dependence and give researchers more room to scale.';
+      if(asset==='compute'||/ai gigafactor|computing capacity/.test(title)) return 'More European computing capacity could reduce dependence and give researchers more room to scale.';
       if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening European research facilities could give researchers better access to strategic infrastructure.';
       if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'Deeper research partnerships could widen European networks, talent and access.';
       return simplePriorityText(x);
@@ -563,28 +645,33 @@
 
   function plainPriorityExplanation(x){
     if(x?.highOrder)return clean(x.coreMessage||x.abstract)||'Several independent evidence streams support this higher-order finding.';
-    const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind);
+    const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
     if(kind==='risk'){
-      if(/brain drain|precarity|research careers?|research talent|researcher mobility/.test(t)) return 'Short-term or insecure research careers can make Europe less attractive. If researchers leave faster than Europe can recruit and retain them, laboratories, new infrastructure and strategic technology programmes can end up short of people.';
-      if(/foreign interference|espionage|knowledge leakage/.test(t)) return 'The risk is that outside actors obtain sensitive research knowledge, know-how or access through interference, pressure or covert activity. The loss is not only information: it can weaken future European capability and bargaining power.';
-      if(/semiconductor|chip|microelectronics/.test(t)) return 'European research and high-tech production rely on chips made through concentrated global supply chains. Export controls, conflict or supplier decisions can therefore interrupt access faster than Europe can replace it.';
-      if(/critical raw|critical mineral|rare earth|materials?/.test(t)) return 'Many research and industrial technologies depend on materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
-      if(/cloud|compute|ai infrastructure|computing capacity/.test(t)) return 'The risk is that European researchers and firms depend on computing infrastructure controlled by non-European suppliers or foreign legal regimes. Access, price or permitted use can then change for reasons Europe does not control.';
-      if(/international research collaboration|research cooperation/.test(t)) return 'International collaboration can be restricted by a partner government, security rule or sanctions regime. European teams can then lose partners, data or access even when Europe itself has not chosen to close cooperation.';
-      if(/research infrastructure|facility|bottleneck|limited access/.test(t)) return 'Some research depends on scarce facilities that cannot be substituted quickly. When access is limited, the bottleneck can slow experiments, training and innovation even if funding is available.';
-      if(/technology transfer|technological dependence|technology dependence|strategic depend/.test(t)) return 'The risk is not simply importing technology. It is relying on outside actors for capabilities that Europe would struggle to replace quickly, which can narrow policy choices when political or commercial conditions change.';
-      if(/fragmentation/.test(t)) return 'Separate systems, rules or infrastructures can make collaboration and data movement harder. Over time that can reduce the effective scale of European research even when each part still functions on its own.';
-      return 'The evidence points to a plausible pathway in which an external dependency, bottleneck or rule reduces European research capacity, access or freedom to act.';
+      if(asset==='talent') return 'Short-term or insecure research careers can make Europe less attractive. If researchers leave faster than Europe can recruit and retain them, laboratories, new infrastructure and strategic technology programmes can end up short of people.';
+      if(asset==='research-security'||mechanism==='interference') return 'The risk is that outside actors obtain sensitive research knowledge, know-how or access through interference, pressure or covert activity. The loss is not only information: it can weaken future European capability and bargaining power.';
+      if(asset==='chips') return mechanism==='export-control'?'European research and high-tech production rely on advanced chips made through globally concentrated supply chains. Export controls can remove access faster than European substitutes can be qualified.':'European research and high-tech production rely on chips made through concentrated global supply chains. Supplier concentration or outside dependency can therefore interrupt access faster than Europe can replace it.';
+      if(asset==='critical-materials') return 'Many research and industrial technologies depend on critical materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
+      if(asset==='compute') return 'European researchers and firms can depend on computing infrastructure controlled by outside suppliers or foreign legal regimes. Access, price or permitted use can then change for reasons Europe does not control.';
+      if(asset==='collaboration') return 'Research collaboration depends on workable access, participation and governance conditions. Unequal authority, partner-country rules or other barriers can narrow the people, knowledge and networks European teams can use.';
+      if(asset==='research-infrastructure') return 'Some research depends on scarce facilities that cannot be substituted quickly. When access is limited, the bottleneck can slow experiments, training and innovation even if funding is available.';
+      if(asset==='technology-dependence') return 'The risk is not simply importing technology. It is relying on outside actors for capabilities that Europe would struggle to replace quickly, which can narrow policy choices when political or commercial conditions change.';
+      if(asset==='research-data'&&mechanism==='fragmentation') return 'Separate systems, rules or infrastructures can make collaboration and data movement harder. Over time that can reduce the effective scale of European research even when each part still functions on its own.';
+      if(asset==='firms-ip'&&mechanism==='ownership-transfer') return 'A European technology firm can remain commercially successful while control of intellectual property, product decisions and high-value research moves elsewhere after an acquisition.';
+      if(asset==='competitiveness'&&mechanism==='export-control') return 'Export-control uncertainty can affect access to advanced technology and make international alignment harder. That can constrain European firms and research programmes even when the controls are not aimed at Europe itself.';
+      if(asset==='competitiveness'&&mechanism==='concentration') return 'Concentrated markets and weak scale-up conditions can leave European research strengths without firms large enough to retain production, investment and strategic capability in Europe.';
+      if(asset==='competitiveness'&&mechanism==='access-barrier') return 'The source points to a structural barrier between European research strength and the ability to turn it into broader capability or competitiveness. The risk is persistence of that bottleneck rather than a single external shock.';
+      if(/critical raw|critical mineral|rare earth|gallium|germanium|lithium|cobalt/.test(t)) return 'Many research and industrial technologies depend on critical materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
+      return 'The evidence points to a plausible pathway in which a dependency, bottleneck, rule or structural constraint reduces European research capacity, access or freedom to act.';
     }
     if(kind==='opportunity'){
+      if(asset==='talent'||/choose europe for science/.test(title)) return 'The opportunity is to make European research careers stable and attractive enough to keep researchers and bring more of them to Europe. In this case the programme is a response to brain drain, not the risk itself.';
       if(/ocean research|ocean.*innovation strategy/.test(title)) return 'The opportunity is to improve coordination, priorities and governance before the future European ocean R&I strategy is fixed.';
       if(/eit|innovation agenda|call for evidence/.test(title)) return 'A live policy-design process creates a chance to change priorities and instruments before they are fixed. The gain comes only if the final design addresses a real strategic R&I need.';
-      if(/choose europe for science/.test(title)||(/brain gain|brain drain|precarity/.test(t)&&/research careers?|attract|retain|recruit/.test(t))) return 'The opportunity is to make European research careers stable and attractive enough to keep researchers and bring more of them to Europe. In this case the programme is a response to brain drain, not the risk itself.';
       if(/quantum/.test(title)&&/standards?/.test(title)) return 'Standards shape interoperability, markets and who gets to set technical rules. Acting early gives Europe a chance to make its research strengths matter in the rules that later govern deployment.';
       if(/quantum/.test(title)&&/pilot line|testing infrastructure|experimental/.test(title)) return 'Shared testing and pilot facilities can move European quantum work from research toward usable technology without every organisation having to build the same expensive infrastructure itself.';
       if(/quantum/.test(title)&&/open|access/.test(title)) return 'The opportunity is to let researchers use European quantum computers directly, turning public infrastructure into usable scientific and technological capability.';
       if(/quantum/.test(title)) return 'The opportunity is to use current calls and facilities to build European quantum capability while the technology and market structure are still developing.';
-      if(/ai gigafactor|computing capacity/.test(title)||(/compute|cloud/.test(t)&&!/quantum/.test(title))) return 'The opportunity is to add European-controlled compute that researchers and firms can actually use. More capacity at home can support AI work while reducing exposure to outside suppliers.';
+      if(asset==='compute'||/ai gigafactor|computing capacity/.test(title)) return 'The opportunity is to add European-controlled compute that researchers and firms can actually use. More capacity at home can support AI work while reducing exposure to outside suppliers.';
       if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening existing facilities lets more researchers use expensive European infrastructure. That can turn sunk public investment into wider capability, collaboration and faster experimentation.';
       if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'A well-chosen partnership can widen access to researchers, infrastructure, data and complementary expertise while strengthening Europe’s international research position.';
       return 'The evidence points to a concrete route Europe can use now or soon to strengthen research, innovation, access, resilience or control.';
@@ -603,5 +690,5 @@
 
   function simpleEvidenceText(x){return clean(x?.title||'')}
 
-  return {buildPriorityView,pathwayScore,diversifiedTop,consolidateReaderDuplicates,simplePriorityText,plainPriorityTitle,plainPriorityExplanation,supportingEvidenceText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily,remedialOnlyRiskText};
+  return {buildPriorityView,pathwayScore,diversifiedTop,consolidateReaderDuplicates,semanticPathwayKey,semanticAssetFamily,semanticMechanismFamily,simplePriorityText,plainPriorityTitle,plainPriorityExplanation,supportingEvidenceText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily,remedialOnlyRiskText};
 });

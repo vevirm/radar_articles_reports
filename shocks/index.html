@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>External Shock · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28.2">
+<link rel="stylesheet" href="../radar.css?v=28.3">
 <script src="../radar_data.js?v=28.1"></script>
 
 
@@ -62,11 +62,12 @@ function evidenceStats(s){
   const sources=new Set(rows.map(r=>clean(r?.source)).filter(Boolean));
   return {records:rows.length,sources:sources.size};
 }
+function evidenceRow(e){const r=e?.row||e||{};return {role:clean(e?.role||r?.role||''),title:clean(r?.title||'Evidence'),source:clean(r?.source||''),date:clean(r?.date||''),link:clean(r?.link||''),quality:Number(e?.quality??r?.quality)||0}}
 function collect(data){
   const out=[],seen=new Map();
-  const add=(text,distance=2,stats={},score=0,explanation='')=>{
+  const add=(text,distance=2,stats={},score=0,explanation='',detail={})=>{
     text=clean(text);const k=norm(text);if(!text||!k)return;
-    const item={text,distance:Number(distance)||2,records:Number(stats.records)||0,sources:Number(stats.sources)||0,score:Number(score)||0,explanation:clean(explanation)};
+    const item={text,distance:Number(distance)||2,records:Number(stats.records)||0,sources:Number(stats.sources)||0,score:Number(score)||0,explanation:clean(explanation),detail:detail&&typeof detail==='object'?detail:{}};
     const old=seen.get(k);
     if(old){if(item.score>old.score||(item.score===old.score&&item.sources>old.sources))Object.assign(old,item);return}
     seen.set(k,item);out.push(item)
@@ -74,22 +75,53 @@ function collect(data){
   const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
   const hids=Array.isArray(hi?.publications?.shock)?hi.publications.shock:[];
   const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-  for(const id of hids){const c=hmap.get(clean(id));if(c)add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources},Number(c.score)||0,c.reader_summary||'')}
-  for(const s of RadarShockScenarios.buildDynamic?.(data)||[])add(s.title,3,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'');
-  for(const s of RadarShockScenarios.buildDirect?.(data)||[])add(SIMPLE[s.id]||s.title,1,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'');
+  for(const id of hids){
+    const c=hmap.get(clean(id));if(!c)continue;
+    add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources},Number(c.score)||0,c.reader_summary||'',{
+      type:'higher-order',reasoning:[clean(c.reader_summary||'')].filter(Boolean),hidden:clean(c.why_easy_to_miss||''),
+      requiredRoles:Array.isArray(c.required_roles)?c.required_roles:[],coveredRoles:Array.isArray(c.covered_roles)?c.covered_roles:[],missingRoles:Array.isArray(c.missing_roles)?c.missing_roles:[],missingLinks:Array.isArray(c.missing_links)?c.missing_links:[],
+      denialTested:!!c.denial_tested,falsifierQueries:Array.isArray(c.falsifier_queries)?c.falsifier_queries:[],support:(Array.isArray(c.support)?c.support:[]).map(evidenceRow),against:(Array.isArray(c.against)?c.against:[]).map(evidenceRow)
+    })
+  }
+  const scenarioDetail=s=>({
+    type:s.dynamic?'dynamic':'scenario',reasoning:Array.isArray(s.reasoning)?s.reasoning:[],hidden:clean(s.hidden||''),secondOrder:clean(s.secondOrder||''),conditions:Array.isArray(s.conditions)?s.conditions:[],caseAgainst:Array.isArray(s.caseAgainst)?s.caseAgainst:[],watchFor:Array.isArray(s.watchFor)?s.watchFor:[],netAssessment:clean(s.netAssessment||''),support:(Array.isArray(s.evidence)?s.evidence:[]).map(evidenceRow),against:(Array.isArray(s.againstEvidence)?s.againstEvidence:[]).map(evidenceRow)
+  });
+  for(const s of RadarShockScenarios.buildDynamic?.(data)||[])add(s.title,3,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'',scenarioDetail(s));
+  for(const s of RadarShockScenarios.buildDirect?.(data)||[])add(SIMPLE[s.id]||s.title,1,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'',scenarioDetail(s));
   for(const s of RadarShockScenarios.build?.(data)||[]){
     if(['pilot_lines_materials','open_science_security_collision','measurement_mid_river'].includes(s.id))continue;
-    add(SIMPLE[s.id]||s.title,2,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'');
+    add(SIMPLE[s.id]||s.title,2,evidenceStats(s),Number(s.inferenceScore)||0,s.plainly||'',scenarioDetail(s));
   }
   return out.sort((a,b)=>b.score-a.score||b.sources-a.sources||b.records-a.records||a.distance-b.distance||a.text.localeCompare(b.text));
 }
+function fmtDate(v){const d=new Date(v);return Number.isNaN(d.getTime())?clean(v):`${d.getUTCDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getUTCMonth()]} ${d.getUTCFullYear()}`}
+function evidenceRowsHtml(rows){return (Array.isArray(rows)?rows:[]).map(e=>{const meta=[e.source,e.date?fmtDate(e.date):''].filter(Boolean).join(' — ');const label=e.title||'Evidence';const linked=e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(label)}</a>`:esc(label);return `<li>${e.role?`<strong>${esc(e.role)}:</strong> `:''}${linked}${meta?` <span class="shock-evidence-meta">— ${esc(meta)}</span>`:''}</li>`}).join('')}
+function shockDetailHtml(x,i){
+  const d=x?.detail||{},id=`shock-evidence-${i}`;let body='';
+  const roles=Array.isArray(d.requiredRoles)?d.requiredRoles:[],covered=Array.isArray(d.coveredRoles)?d.coveredRoles:[],missing=[...(Array.isArray(d.missingRoles)?d.missingRoles:[]),...(Array.isArray(d.missingLinks)?d.missingLinks:[])];
+  if(d.type==='higher-order')body+=`<p><strong>How this was inferred:</strong> This is a cross-evidence inference, not a claim copied from one source. ${covered.length} of ${roles.length||covered.length} required reasoning roles are evidenced${d.denialTested?'; it also passed the inference engine’s denial/falsifier check':''}.</p>`;
+  if(d.hidden)body+=`<p><strong>Why it is easy to miss:</strong> ${esc(d.hidden)}</p>`;
+  if(d.secondOrder)body+=`<p><strong>Second-order effect:</strong> ${esc(d.secondOrder)}</p>`;
+  if(Array.isArray(d.reasoning)&&d.reasoning.filter(Boolean).length)body+=`<p><strong>Reasoning chain:</strong></p><ol>${d.reasoning.filter(Boolean).map(v=>`<li>${esc(v)}</li>`).join('')}</ol>`;
+  if(missing.length)body+=`<p><strong>Still unresolved:</strong> ${esc(missing.join('; '))}</p>`;
+  if(Array.isArray(d.conditions)&&d.conditions.length)body+=`<p><strong>Conditions for the shock:</strong></p><ul>${d.conditions.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
+  if(Array.isArray(d.support)&&d.support.length)body+=`<p><strong>Evidence:</strong></p><ul>${evidenceRowsHtml(d.support)}</ul>`;
+  if(Array.isArray(d.against)&&d.against.length)body+=`<p><strong>Counter-evidence:</strong></p><ul>${evidenceRowsHtml(d.against)}</ul>`;
+  else if(Array.isArray(d.falsifierQueries)&&d.falsifierQueries.length)body+=`<p><strong>Counter-evidence search:</strong> The inference engine actively searches for evidence that could weaken or resolve this shock pathway.</p>`;
+  if(Array.isArray(d.caseAgainst)&&d.caseAgainst.length)body+=`<p><strong>What could stop or weaken it:</strong></p><ul>${d.caseAgainst.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
+  if(Array.isArray(d.watchFor)&&d.watchFor.length)body+=`<p><strong>Watch for:</strong></p><ul>${d.watchFor.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
+  if(d.netAssessment)body+=`<p><strong>Net assessment:</strong> ${esc(d.netAssessment)}</p>`;
+  if(!body)return '';
+  return `<div class="shock-actions"><button class="info-button" type="button" data-shock-detail="${id}" aria-expanded="false">Evidence & reasoning</button></div><div id="${id}" class="shock-detail" hidden>${body}</div>`;
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Evidence & reasoning'});
 (async()=>{
   const el=document.getElementById('shockList');
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
     const all=collect(data),items=all.slice(0,SHOCK_DISPLAY_LIMIT);
     document.getElementById('shockSummary').textContent=`Showing ${items.length} highest-ranked possible shock${items.length===1?'':'s'}${all.length>items.length?` of ${all.length} supported`:' supported'}.`;
-    el.innerHTML=items.length?items.map(x=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
+    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

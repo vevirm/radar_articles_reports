@@ -5809,6 +5809,8 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
     title = clean_text(item.get('title') or item.get('headline'))
     if not title:
         return None
+    semantic_source = clean_text(item.get('semantic_source'))
+    deep_scan_authoritative = bool(item.get('deep_scan_authoritative')) or normalized(semantic_source) == 'deep_scan_v2'
     source_text = clean_text(item.get('_strategic_source_text'))
     if not source_text:
         if clean_text(item.get('strategic_classification_source')) == 'source_text' and isinstance(item.get('strategic_classification'), dict):
@@ -5817,7 +5819,18 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
                 ' '.join(clean_text(x.get('passage')) for x in classification.get('lenses', []) if isinstance(x, dict))
             ) or clean_text(f"{title}. {item.get('summary') or item.get('signal_note') or item.get('what') or ''}")
         else:
-            source_text = clean_text(f"{title}. {item.get('_desc') or item.get('summary') or item.get('signal_note') or item.get('what') or ''}")
+            # For an active V2 record, these fields are already the authoritative
+            # interpretation written by Deep Scan.  Feed that verified semantic bundle
+            # into the pathway classifier rather than falling back to scanner-era
+            # evidence arrays or an old embedded classification.
+            semantic_bundle = ' '.join(
+                clean_text(item.get(k)) for k in (
+                    'reader_title', 'reader_what', 'reader_why', 'reader_more',
+                    'core_message', 'summary', 'why_it_matters', 'relevance_note',
+                    '_desc', 'signal_note', 'what',
+                ) if clean_text(item.get(k))
+            )
+            source_text = clean_text(f"{title}. {semantic_bundle}")
             classification = classify_strategic_source_text(source_text)
     else:
         classification = classify_strategic_source_text(source_text)
@@ -5844,6 +5857,7 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
         or (quality_basis == 'configured_current_event_source' and current_event_discovery)
     )
     analytical_weight = WEAK_SIGNAL_CONTEXT_WEIGHT if weak_context else 1.0
+    classification_source = 'deep_scan_v2_semantics' if deep_scan_authoritative else 'source_text'
     return {
         'title': title,
         'source': clean_text(item.get('source')),
@@ -5853,7 +5867,14 @@ def strategic_pathway_record(item: dict[str, Any], a_corpus: list[dict[str, Any]
         'type': clean_text(item.get('type') or item.get('signal_kind') or 'strategic pathway evidence'),
         'discovery_provenance': clean_text(item.get('discovery_provenance') or item.get('_discovery_provenance') or 'scanner'),
         'strategic_classification': classification,
-        'strategic_classification_source': 'source_text',
+        'strategic_classification_source': classification_source,
+        'semantic_source': semantic_source,
+        'deep_scan_authoritative': deep_scan_authoritative,
+        'admission_status': clean_text(item.get('admission_status')),
+        'reader_title': clean_text(item.get('reader_title')),
+        'reader_what': clean_text(item.get('reader_what')),
+        'reader_why': clean_text(item.get('reader_why')),
+        'reader_more': clean_text(item.get('reader_more')),
         'source_quality_gate': {'admissible': True, 'basis': quality_basis},
         'eu_relevance': eu_rel or ('material_external' if scope_basis == 'material_external_europe_effect' else None),
         'eu_evidence': eu_hits[:4],
@@ -7283,6 +7304,80 @@ def curator_seed_query_bank(limit: int = 16) -> list[str]:
     return list(dict.fromkeys(q for q in queries if clean_text(q)))[:max(0, int(limit or 0))]
 
 
+def strategic_pathway_feedback_queries(previous: dict[str, Any], limit: int = 6) -> list[str]:
+    """Generate balanced evidence-gap searches from current risks/opportunities.
+
+    The reader product is allowed to notice a pathway that no single scanner rule names
+    perfectly.  This function turns that *analytical hypothesis* back into discovery
+    questions without treating it as truth: every support query is paired with a query
+    for mitigation, implementation failure, substitution or other evidence that could
+    weaken the current interpretation.  Returned material still faces all normal
+    scanner/admission/Deep Scan rules.
+    """
+    rows = previous.get('strategic_pathways', []) if isinstance(previous.get('strategic_pathways'), list) else []
+    ranked = sorted(
+        (x for x in rows if isinstance(x, dict) and not strategic_pathway_context_only(x)),
+        key=lambda x: (clean_text(x.get('date')), clean_text(x.get('title'))),
+        reverse=True,
+    )
+    support: list[str] = []
+    challenge: list[str] = []
+    asset_labels = {
+        'talent': 'research talent careers mobility',
+        'compute_chips': 'semiconductor compute technology',
+        'research_data': 'research data infrastructure',
+        'research_infrastructure': 'research infrastructure facilities',
+        'materials_supply': 'critical materials supply',
+        'collaboration_access': 'international research collaboration access',
+        'firms_ip': 'deep tech firms intellectual property',
+        'funding_market': 'research funding procurement market access',
+        'technology_access': 'critical technology access capability',
+    }
+    mechanism_labels = {
+        'export_licensing': 'export controls licensing restrictions',
+        'access_denial': 'access denial restriction',
+        'sanctions': 'sanctions restrictions',
+        'supply_interruption': 'supply shortage interruption',
+        'lock_in': 'supplier lock-in switching costs',
+        'ownership_transfer': 'foreign acquisition ownership transfer',
+        'talent_flow': 'brain drain talent recruitment',
+        'funding_procurement': 'funding procurement programme',
+    }
+    for row in ranked[:10]:
+        classification = row.get('strategic_classification') if isinstance(row.get('strategic_classification'), dict) else {}
+        for lens in classification.get('lenses', []) if isinstance(classification.get('lenses'), list) else []:
+            if not isinstance(lens, dict):
+                continue
+            kind = clean_text(lens.get('type'))
+            if kind not in {'risk', 'opportunity', 'external_shock'}:
+                continue
+            passage = clean_text(lens.get('passage')) or clean_text(row.get('reader_more') or row.get('summary') or row.get('title'))
+            asset_key = _strategic_asset_key(passage)
+            mechanism_key = _strategic_mechanism_key(passage)
+            asset = asset_labels.get(asset_key) or clean_text(row.get('reader_title') or row.get('title'))
+            mechanism = mechanism_labels.get(mechanism_key) or ('strategic pathway' if kind != 'opportunity' else 'policy instrument')
+            # Keep searches short enough for OpenAlex/Crossref while still encoding the
+            # live finding's mechanism rather than merely repeating its title.
+            if kind == 'opportunity':
+                support.append(f"Europe research innovation {asset} {mechanism} capacity outcomes uptake")
+                challenge.append(f"Europe research innovation {asset} {mechanism} implementation barriers limited uptake constraints")
+            elif kind == 'external_shock':
+                support.append(f"Europe research innovation {asset} {mechanism} sudden disruption impact")
+                challenge.append(f"Europe research innovation {asset} substitution resilience continuity alternative capacity")
+            else:
+                support.append(f"Europe research innovation {asset} {mechanism} dependency loss disruption")
+                challenge.append(f"Europe research innovation {asset} substitution diversification resilience mitigation")
+    out: list[str] = []
+    for i in range(max(len(support), len(challenge))):
+        if i < len(support) and support[i] not in out:
+            out.append(support[i])
+        if i < len(challenge) and challenge[i] not in out:
+            out.append(challenge[i])
+        if len(out) >= max(0, int(limit or 0)):
+            break
+    return out[:max(0, int(limit or 0))]
+
+
 def finding_context_query_bank(previous: dict[str, Any], limit: int = 12) -> list[str]:
     """Turn recurring live findings and unfinished L4/L5 candidates into discovery.
 
@@ -7320,14 +7415,28 @@ def finding_context_query_bank(previous: dict[str, Any], limit: int = 12) -> lis
     except Exception:
         candidate_queries = []
 
-    # Do not increase this lane's total query budget. Alternate unfinished-thought probes
-    # with ordinary live-theme probes so Level-4/5 investigation cannot crowd out A.
+    pathway_queries = strategic_pathway_feedback_queries(previous, max(0, min(6, limit)))
+    shock_queries: list[str] = []
+    try:
+        from shock_inference import feedback_queries as shock_feedback_queries
+        shock_queries = shock_feedback_queries(
+            previous.get('shock_inference') if isinstance(previous.get('shock_inference'), dict) else {},
+            max(0, min(6, limit)),
+        )
+    except Exception:
+        shock_queries = []
+
+    # Do not increase this lane's total query budget.  Round-robin higher-order missing
+    # links, live risk/opportunity challenges, shock support/falsifiers and ordinary
+    # live-theme probes.  No analytical product is allowed to crowd out normal discovery.
     queries: list[str] = []
-    for i in range(max(len(candidate_queries), len(ordinary))):
-        if i < len(candidate_queries) and candidate_queries[i] not in queries:
-            queries.append(candidate_queries[i])
-        if i < len(ordinary) and ordinary[i] not in queries:
-            queries.append(ordinary[i])
+    banks = (candidate_queries, pathway_queries, shock_queries, ordinary)
+    for i in range(max((len(b) for b in banks), default=0)):
+        for bank in banks:
+            if i < len(bank) and bank[i] not in queries:
+                queries.append(bank[i])
+            if len(queries) >= limit:
+                break
         if len(queries) >= limit:
             break
     return queries[:limit]

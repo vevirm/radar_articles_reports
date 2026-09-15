@@ -445,6 +445,14 @@ p,li,dd,.plain,.why,.point,.priority-what,.priority-why,.node-what,.node-why{fon
 .page-phenomena .pattern-simple-list p,.page-shocks .external-shock-list p{
   max-width:var(--measure);margin:var(--s-8) 0 0;font-size:16px;line-height:1.45;color:var(--quiet);
 }
+.page-shocks .shock-actions{margin-top:var(--s-12)}
+.page-shocks .shock-actions .info-button{border:0;background:transparent;padding:0;min-height:0;color:var(--quiet);text-decoration:underline;text-underline-offset:3px}
+.page-shocks .shock-actions .info-button:hover{background:transparent;color:var(--red)}
+.page-shocks .shock-detail{max-width:var(--measure);margin:var(--s-12) 0 0;padding:var(--s-16);background:var(--inset);border-left:var(--w-struct) solid var(--ink);font-size:var(--t-meta)}
+.page-shocks .shock-detail p{font-size:var(--t-meta);color:var(--ink)}
+.page-shocks .shock-detail ul,.page-shocks .shock-detail ol{margin:var(--s-8) 0 var(--s-12);padding-left:22px}
+.page-shocks .shock-detail li{padding:0;border:0;margin:var(--s-4) 0}
+.page-shocks .shock-evidence-meta{color:var(--quiet)}
 .page-phenomena .pattern-simple-main{display:block}
 
 /* Risks & opportunities */

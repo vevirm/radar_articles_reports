@@ -305,6 +305,11 @@ def object_title(kind: str, obj: dict[str, Any]) -> str:
 def rebuild_strategic(data: dict[str, Any], previous: dict[str, Any], now: str) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     candidates = rows(data, STRATEGIC_SOURCE_KEYS)
     old_paths = previous.get("strategic_pathways", []) if isinstance(previous.get("strategic_pathways"), list) else []
+    # A retrace is a fresh semantic replay from the current active evidence.  Keep the
+    # old pathway identities only for first-seen/newness continuity; never seed the new
+    # corpus with the old derived objects themselves.  This matters after Deep Scan V2:
+    # an older scanner-derived lens must not survive merely because it once had a richer
+    # passage than the newly authoritative interpretation of the same source record.
     paths = scanner.build_strategic_pathway_corpus(
         [], candidates, old_paths, now, data.get("strand_a", []) if isinstance(data.get("strand_a"), list) else []
     )

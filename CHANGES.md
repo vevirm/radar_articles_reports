@@ -1,3 +1,22 @@
+# v25.1 evidence-linked reader and discovery feedback
+
+Conservative analytical/readability upgrade on top of the Deep Scan authoritative repository.
+
+## What changed
+
+- Preserved the manual Deep Scan worker-package → external LLM → manual `deep_scan_inbox/` → import workflow unchanged.
+- Passed Deep Scan V2 semantics can now be the explicit provenance of regenerated strategic-pathway classifications instead of being relabelled as scanner source text.
+- Risks and opportunities use pathway components before broad article text when choosing reader wording, preventing unrelated words such as “materials” or “investment” elsewhere in a source from selecting the wrong canned risk.
+- Reader deduplication now consolidates a clear shared mechanism + exposed asset, while preserving distinct mechanisms and retaining every supporting source under Evidence. Identical visible wording is never repeated as separate cards.
+- Higher-order Risks/Opportunities expose their reasoning roles, source links and counter-evidence/falsifier status under the existing Evidence disclosure.
+- External Shocks keep the same compact list but now expose the reasoning chain, why the shock is easy to miss, source links, conditions, counter-evidence/absorbers and watch points under an optional Evidence & reasoning disclosure.
+- Current risks/opportunities and dynamic shocks contribute bounded support-and-challenge searches to the existing finding-context discovery lane. The total query budget is unchanged and normal admission/Deep Scan rules still apply.
+- Added regression tests for semantic reader consolidation, Deep Scan semantic provenance, and balanced support/falsifier discovery feedback.
+
+## Protected behavior
+
+No inference grammar, qualification threshold, evidence weight, denial test, Deep Scan queue/inbox workflow, scanner schedule or core visual system was simplified or replaced. Radar/record-level evidence remains uncollapsed.
+
 # Professional visual system v27
 
 Presentation-only rebuild based on the supplied professional-page manual.
