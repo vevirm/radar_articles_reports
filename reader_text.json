@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-15T08:11:51Z",
+  "generated_at": "2026-09-15T11:21:23Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -53043,6 +53043,343 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-15T08:11:51Z",
       "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:ba7ba1569b43cc11": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7c128ec2",
+      "identity_hash": "d829fdbb76edf257",
+      "reader_title": "Moldovan dual-use clusters seek European value chains through internationalisation",
+      "reader_what": "Argues dual-use clusters can internationalise Moldovan SMEs and narrow the EU-Moldova innovation gap",
+      "reader_why": "Cluster internationalisation is presented as a route into European value chains and resilience",
+      "reader_more": "The authors examine how cluster organisations in the Republic of Moldova might help member SMEs reach international markets. They treat the COVID-19 pandemic and the war in Ukraine as shocks that disrupted supply to European and Moldovan firms. The approach is a literature and experience review rather than new empirical measurement, drawing on European and international cooperation practice. The paper proposes adapting digital-skills modules in business and informatics curricula and identifies priority geographic directions for cluster initiatives. Its European relevance rests on smart specialisation, Interreg programmes and the innovation gap between EU regions and Moldova.",
+      "deep_analysis": {
+        "work_kind": "conceptual/policy article",
+        "research_question": "How can dual-use cluster organisations in Moldova internationalise and join global value chains?",
+        "main_finding": "Clusters are positioned as vehicles for SME internationalisation and for closing the EU-Moldova digital and innovation gap.",
+        "method_or_basis": "Literature review and analysis of European and international cooperation experience; no original dataset.",
+        "qualification": "Largely programmatic and prescriptive; claims are not tested empirically and the evidence base is thin.",
+        "radar_relevance": "Substantive European connection through smart specialisation, Interreg, EU regional innovation policy and an associated-country innovation system.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.25019/0hbtp367 redirected to the SCRD journal article page scrd.eu/index.php/scrd/article/view/632, matching title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.25019/0hbtp367 returned container 'Smart Cities and Regional Development (SCRD) Journal', vol 9 issue 3 pp.99-120, issued 2025-05-19, contradicting the stored source."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded the diamond open-access publisher PDF at scrd.eu/index.php/scrd/article/download/632/584 (849 KB) and read the full article including author affiliations in Moldova and Ukraine."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://scrd.eu/index.php/scrd/article/download/632/584",
+            "title": "Perspectives of sustainable development of cluster organizations through internationalization and dual use",
+            "evidence_used": true
+          },
+          {
+            "kind": "crossref_metadata",
+            "url": "https://doi.org/10.25019/0hbtp367",
+            "title": "Crossref record for 10.25019/0hbtp367",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DOI resolved to the SCRD journal; full publisher PDF read. Crossref confirms the journal, volume and pagination, correcting the stored source field."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Peer-reviewed article on internationalisation of dual-use cluster organisations, explicitly framed around EU regional innovation gaps, smart specialisation and Interreg cooperation with Moldova."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
+    },
+    "historical:id:11336e60bf244ee8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "393252e0",
+      "identity_hash": "c86cd05ea09fc767",
+      "reader_title": "EU opens second phase of its European Research Area partnership for health research",
+      "reader_what": "A Horizon Europe call funds ERA4Health Phase 2 to coordinate national health research funders across Europe",
+      "reader_why": "Pooling funders is intended to enable multi-country clinical studies that single states cannot run alone",
+      "reader_more": "HaDEA published call topic HORIZON-HLTH-2025-02-DISEASE-02 under Horizon Europe. It continues the ERA4Health partnership, which brings research funders, health policymakers and researchers together to agree shared priorities. Expected outcomes include support for large-scale, multi-country investigator-initiated clinical studies that are independent of private interest, building on the funding scheme developed in Phase 1. Named priority areas include cardiovascular disease, prevention and public health, diet-related disease and nano-medical technologies. This is a call for proposals, so the outcomes described are intentions rather than results.",
+      "deep_analysis": {
+        "work_kind": "EU funding call / programme instrument",
+        "research_question": "",
+        "main_finding": "The EU is funding a second phase of the ERA4Health partnership to align national health research funders within the European Research Area.",
+        "method_or_basis": "Official call topic text published by the European Health and Digital Executive Agency.",
+        "qualification": "A call document: expected outcomes are programme intentions, not demonstrated effects.",
+        "radar_relevance": "Directly documents an EU research-policy instrument shaping the European Research Area for health research.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the HaDEA call page for HORIZON-HLTH-2025-02-DISEASE-02 and re-verified live in session: HTTP 200, page title 'European partnership fostering a European Research Area (ERA) for health research (Phase 2)'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to a Horizon Europe call topic page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "HaDEA is itself the issuing EU executive agency, so the supplied URL is the authoritative primary source; full call text including expected outcomes was read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/european-partnership-fostering-european-research-area-era-health-research-phase-2_en",
+            "title": "HORIZON-HLTH-2025-02-DISEASE-02 - European partnership fostering a European Research Area (ERA) for health research (Phase 2)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL is the official HaDEA call page and was confirmed live. Full topic text read, including the ERA4Health Phase 2 outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official HaDEA call page for HORIZON-HLTH-2025-02-DISEASE-02 setting out Phase 2 of the ERA4Health European Partnership, a concrete EU research funding instrument with defined expected outcomes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
+    },
+    "historical:id:239d06722b9a7640": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "97c3df73",
+      "identity_hash": "3eb6d5124ffeedad",
+      "reader_title": "ECDC uses strategic foresight to map future infectious disease threats in Europe",
+      "reader_what": "An EU agency identifies key drivers of change shaping future European infectious disease prevention and control",
+      "reader_why": "Naming drivers early is meant to let European public health systems prepare before threats materialise",
+      "reader_more": "The European Centre for Disease Prevention and Control published this assessment in Stockholm in April 2025. It applies strategic foresight, a structured way of exploring plausible futures rather than predicting one, to infectious disease prevention and control. The report sets out key drivers of change including inequalities in access to healthcare, international migration and travel, and climate change. It is framed as an input to European preparedness and resilience planning. The drivers are analytical judgements about the future, not observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "official foresight assessment",
+        "research_question": "What future developments could reshape infectious disease prevention and control in Europe?",
+        "main_finding": "The report identifies a set of key drivers of change, including healthcare inequality, migration and travel, and climate change, as shaping future European disease control.",
+        "method_or_basis": "Strategic foresight process coordinated by ECDC with a collaborative expert contributor group, documented in a methods section.",
+        "qualification": "Foresight output: drivers and challenges are structured expert judgement about plausible futures, not measured effects.",
+        "radar_relevance": "An EU agency's own foresight work steering European public health science and preparedness capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied ecdc.europa.eu PDF URL was re-fetched live (HTTP 200, ~2 MB) and its title page reads 'Future challenges for infectious disease prevention and control: A strategic foresight approach to enhance European public health preparedness and resilience'."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The document's own imprint carries doi 10.2900/4488147, ISBN 978-92-9498-795-2 and catalogue number TQ-01-25-025-EN-N."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ECDC is the issuing EU agency and the supplied URL is its own document server; read front matter, contents, methods and drivers-of-change sections from the PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.ecdc.europa.eu/sites/default/files/documents/future-challenges-infectious-disease-prevention-control.pdf",
+            "title": "Future challenges for infectious disease prevention and control (ECDC assessment, Stockholm, April 2025)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official ECDC PDF read directly. The document's title page and suggested citation correct both the stored headline-style title and the stored date."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official ECDC assessment applying strategic foresight to infectious disease prevention in Europe; substantive EU agency science-for-policy work. Does not contribute a new transferable method, so Strand B is not met."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
+    },
+    "historical:id:3359c91b80e85844": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "02b171fb",
+      "identity_hash": "129e11e0850520c3",
+      "reader_title": "Matching-plus-synthetic-control design for estimating how mobility affects research careers",
+      "reader_what": "Adds a matching pre-selection step to synthetic control, then estimates mobility effects on Brazilian researchers",
+      "reader_why": "The matching step strengthens the assumptions synthetic control needs before causal estimates are credible",
+      "reader_more": "The authors study health and life sciences researchers from Brazil who moved internationally. Their methodological contribution is to pair control individuals with treated individuals on pre-intervention observable variables before building the synthetic control, which improves the plausibility of the design. They then apply generalized synthetic control to estimate effects on citations, SJR and international collaboration after the first year of mobility. Results suggest mobility changes these outcomes, particularly for emigrating researchers. The empirical case is Brazilian, so the European relevance is weak; the value here is the transferable design.",
+      "deep_analysis": {
+        "work_kind": "empirical study with methodological contribution",
+        "research_question": "How can synthetic control be adapted to estimate causal effects of international mobility on scientific careers?",
+        "main_finding": "A matching pre-selection step improves synthetic control estimation, and mobility is associated with gains in citation and collaboration measures, mainly for emigrants.",
+        "method_or_basis": "Matching on pre-intervention observables followed by generalized synthetic control on bibliometric indicators.",
+        "qualification": "Causal claims rest on synthetic control assumptions; the sample is Brazilian health and life sciences researchers only.",
+        "radar_relevance": "Strand B is geography-independent; the transferable contribution is the matching-plus-synthetic-control design for mobility and bibliometric evaluation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "link.springer.com/article/10.1007/s11192-025-05327-w re-verified live (HTTP 200) with matching title; full article text was available and read."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1007/s11192-025-05327-w confirms Scientometrics, issued 2025-04-25, and the five-author list matching the record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-025-05327-w",
+            "title": "International mobility boosts scientific careers: a synthetic control analysis of Brazilian researchers",
+            "evidence_used": true
+          },
+          {
+            "kind": "crossref_metadata",
+            "url": "https://doi.org/10.1007/s11192-025-05327-w",
+            "title": "Crossref record for 10.1007/s11192-025-05327-w",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer article text read, establishing that the paper introduces a matching pre-selection step before generalized synthetic control and presents itself as guidance for bibliometric use."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Introduces a matching technique as a pre-selection step before generalized synthetic control for bibliometric data and offers explicit guidance on transferring the design to other mobility studies; a materially improved method rather than a plain application."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
+    },
+    "historical:id:195b1f4f3088486d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "3cfb4b33",
+      "identity_hash": "37cf9f103d3ce255",
+      "reader_title": "MSCA commits EUR 1.25 billion and pilots longer employment horizons to retain researchers",
+      "reader_what": "A new Choose Europe for Science pilot selects host organisations partly on offers of longer-term employment",
+      "reader_why": "Selecting hosts on career security targets precarity, the stated driver of research brain drain",
+      "reader_more": "The European Commission announced 2025 Marie Sklodowska-Curie Actions calls worth over EUR 1.25 billion, expected to support around 10,000 researchers. The calls sit within the revised 2023-2025 Horizon Europe Work Programme. The novel element is the Choose Europe for Science pilot, which funds organisations recruiting postdoctoral researchers with a view to employment beyond the project period. Host organisations are selected in part on the longer-term professional perspectives they offer, which is unusual in fellowship design. The call opened on 1 October 2025 and closed on 3 December 2025; retention effects are an aim, not a measured result.",
+      "deep_analysis": {
+        "work_kind": "EU funding announcement / policy instrument",
+        "research_question": "",
+        "main_finding": "MSCA introduced a pilot that makes offers of employment beyond the funded project a selection criterion for host organisations.",
+        "method_or_basis": "Official European Commission MSCA announcement page.",
+        "qualification": "Announcement of an instrument; no evidence yet on whether longer horizons change retention.",
+        "radar_relevance": "Directly concerns European research careers, mobility and the EU's attractiveness to researchers.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The node/1414 URL redirects to the MSCA news item; re-verified live (HTTP 200) with page title 'Marie Sklodowska-Curie Actions announce EUR 1.25 billion to support cutting-edge research and new pilot initiative Choose Europe for Science'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to a European Commission MSCA news announcement."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "marie-sklodowska-curie-actions.ec.europa.eu is the official Commission MSCA site; full announcement text read including the pilot's selection criterion and call dates."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://marie-sklodowska-curie-actions.ec.europa.eu/whats-new/news/marie-sklodowska-curie-actions-announce-eu125-billion-to-support-cutting-edge-research-and-new-pilot-initiative-choose-europe-for-science",
+            "title": "MSCA announce EUR 1.25 billion and the Choose Europe for Science pilot",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied node URL resolved to the official MSCA announcement, confirmed live. The page headline supplies the true title in place of the stored claim sentence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official MSCA announcement of over EUR 1.25 billion in 2025 calls and the new Choose Europe for Science pilot, a concrete European research-career funding instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
     }
   }
 }

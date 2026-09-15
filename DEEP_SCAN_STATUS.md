@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **710** (Main **602** + Historical **108**)
-- Automatic queue still needing V2 verification: **624** (Main **28** + Historical **596**)
-- Currently assigned to workers: **96** (Main **8** + Historical **88**)
-- Bounded access-recovery retries still eligible: **21**
+- Authoritative V2 verified: **715** (Main **602** + Historical **113**)
+- Automatic queue still needing V2 verification: **619** (Main **28** + Historical **591**)
+- Currently assigned to workers: **90** (Main **8** + Historical **82**)
+- Bounded access-recovery retries still eligible: **22**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **528**
+- Automatic queue pending and not yet assigned: **529**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T081510Z-c19ab9b1c63a`
+- Current package: `worker-a-20260915T112214Z-c19ab9b1c63a`
 - Assigned unresolved records: **48**
   1. `historical:id:243bf801c8e55486` — Finland, what is our promise for future generations? | Demos Helsinki
   2. `historical:id:eb494ea5df2c2054` — Making Public Compute Work for Applied AI Startups
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T081524Z-0fb08e4ed02a`
-- Assigned unresolved records: **48**
-  1. `historical:id:ba7ba1569b43cc11` — Perspectives of sustainable development of cluster organizations through internationalization and dual use
-  2. `historical:id:5f02392522b6f284` — US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent.
-  3. `historical:id:11336e60bf244ee8` — European partnership fostering a European Research Area (ERA) for health research (Phase 2)
-  4. `historical:id:239d06722b9a7640` — ECDC charts future path for public health resilience through strategic foresight
-  5. `historical:id:3359c91b80e85844` — International mobility boosts scientific careers: a synthetic control analysis of Brazilian researchers
-  6. `historical:id:195b1f4f3088486d` — Choose Europe for Science explicitly links brain drain to career precarity and tests longer employment horizons as a talent-retention instrument.
-  7. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
-  8. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260915T112231Z-25d8c3e70561`
+- Assigned unresolved records: **42**
+  1. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
+  2. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
+  3. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
+  4. `historical:id:54443cacb8afbf99` — Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime
+  5. `link:https://doi.org/10.1177/19467567261450218` — Change Progression Scenario Method: A Systematic Literature Review of Applications — recovery attempt 2/3
+  6. `historical:id:ed3f534de03d821a` — Determinants of the career pathways of doctorate holders: Evidence from eight European universities
+  7. `historical:id:429ce155fd37117b` — Synthesising knowledge on forest resilience with CLEANFOREST
+  8. `historical:id:679ed030cf8b33ea` — Horizon Europe’s work programme for research infrastructure
+  - … plus 34 more in the package manifest
 
 ## Hands-on verification needed
 

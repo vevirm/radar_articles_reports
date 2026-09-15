@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-15T08:11:51Z",
+  "updated_at": "2026-09-15T11:21:23Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -3614,6 +3614,55 @@
       ],
       "updated_at": "2026-09-15T08:11:51Z",
       "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:ba7ba1569b43cc11": {
+      "fields": {
+        "source": "Smart Cities and Regional Development (SCRD) Journal"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Publisher PDF and Crossref both show the article appeared in Smart Cities and Regional Development (SCRD) Journal 9(3), 99-120; the scanner's 'Public Administration' is not the journal.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://scrd.eu/index.php/scrd/article/download/632/584",
+        "https://doi.org/10.25019/0hbtp367"
+      ],
+      "updated_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
+    },
+    "historical:id:239d06722b9a7640": {
+      "fields": {
+        "title": "Future challenges for infectious disease prevention and control: a strategic foresight approach to enhance European public health preparedness and resilience",
+        "date": "2025-04"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report's own title page and suggested citation give this title and 'Stockholm: ECDC; 2025', with the imprint dated April 2025; the stored title was a news-style headline and the stored date did not match the document.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.ecdc.europa.eu/sites/default/files/documents/future-challenges-infectious-disease-prevention-control.pdf"
+      ],
+      "updated_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
+    },
+    "historical:id:195b1f4f3088486d": {
+      "fields": {
+        "title": "Marie Sklodowska-Curie Actions announce EUR 1.25 billion to support cutting-edge research and new pilot initiative 'Choose Europe for Science'"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The stored title was a scanner-written claim sentence, not a title; the official MSCA news page carries this headline.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://marie-sklodowska-curie-actions.ec.europa.eu/whats-new/news/marie-sklodowska-curie-actions-announce-eu125-billion-to-support-cutting-edge-research-and-new-pilot-initiative-choose-europe-for-science"
+      ],
+      "updated_at": "2026-09-15T11:21:23Z",
+      "deep_scan_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a"
     }
   }
 }
